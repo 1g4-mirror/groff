@@ -677,6 +677,7 @@ include $(top_srcdir)/src/utils/lookbib/lookbib.am
 include $(top_srcdir)/src/utils/pfbtops/pfbtops.am
 include $(top_srcdir)/src/utils/tfmtodit/tfmtodit.am
 include $(top_srcdir)/src/utils/xtotroff/xtotroff.am
+include $(top_srcdir)/test/test.am
 include $(top_srcdir)/tmac/tmac.am
 
 # Adding defs.h to BUILT_SOURCES will ensure that it will be built on
