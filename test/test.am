@@ -23,3 +23,12 @@ utest_list_SOURCES = test/utest_list.cpp
 utest_list_CXXFLAGS = $(CPPUNIT_CFLAGS) -I$(top_srcdir)/src/roff/troff
 utest_list_LDFLAGS = $(CPPUNIT_LIBS)
 endif
+
+TESTS += test_paragraph
+check_PROGRAMS += test_paragraph
+test_paragraph_SOURCES = \
+  src/roff/troff/paragraph.cpp \
+  test/test_paragraph.cpp
+
+test_paragraph_CXXFLAGS = -I$(top_srcdir)/src/roff/troff
+
