@@ -1,3 +1,9 @@
+2024-08-08  Bjarni Ingi Gislason <bjarniig@simnet.is>
+
+	* tmac/doc-old.tmac: Drop spurious dot in control line.
+
+	Fixes <https://savannah.gnu.org/bugs/?57622>.
+
 2024-08-08  Dave Kemper <saint.snit@gmail.com>
 
 	* tmac/tty.tmac: Revise fallback character for • (bullet) to
