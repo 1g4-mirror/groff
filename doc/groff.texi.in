@@ -9303,11 +9303,12 @@ following the convention of
 @command{troff},
 and increasing the representable range of register values
 to Arabic ±39,999.
-The correct glyphs for Roman numerals five thousand
-(@code{U+2181})
-and ten thousand
-(@code{U+2182})
-are not used.}
+Following Unicode's recommendation,
+@c TODO: Find a source for that.
+GNU
+@command{troff} outputs Roman numerals
+using only alphabetic characters,
+not Roman numeral characters from Unicode's Number Forms block.}
 
 @cindex read-only register, changing format
 @cindex changing format, and read-only registers
