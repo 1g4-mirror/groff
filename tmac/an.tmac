@@ -203,9 +203,25 @@
 .  ds an*section9 Kernel Developer's Manual\"
 ..
 .
+.de an*cln
+.  ds \\$1
+.  als an*cln:res \\$1
+.  shift
+.  ds an*cln:res \\$*\"
+.  ds an*cln:chr \\$*
+.  substring an*cln:chr 0 0
+.  if '\\*[an*cln:chr]'\%' \{\
+.    substring an*cln:res 1
+.  \}
+..
+.
 .\" Write a bookmark/anchor/link target $2 at hierarchical depth $1.
 .de an*bookmark
-.  if \\n[an*is-output-pdf] .pdfbookmark \\$1 \\$2
+.  if \\n[an*is-output-pdf] \{\
+.    if (\\n[.$]>2) .an*cln an*page-ref-nm \\$3\"
+.    ie (\\$1=1) .pdfbookmark -T "\\*[an*page-ref-nm]" \\$1 \\$2
+.    el .pdfbookmark \\$1 \\$2
+.  \}
 ..
 .
 .\" Begin man page.
@@ -420,7 +436,7 @@
 .  ie \\n[cR] .pl +1v
 .  el         .sp .5i
 .  if !\\n[an*was-TH-bookmark-emitted] \{\
-.    an*bookmark 1 \E*[an*page-ref-string]
+.    an*bookmark 1 \\*[an*page-ref-string] \\*[an*topic]_\\*[an*section]
 .    nr an*was-TH-bookmark-emitted 1
 .  \}
 .  tl '\\*[an-pageref]'\\*[an-extra3]'\\*[an-pageref]'
@@ -1171,28 +1187,39 @@ contains unsupported escape sequence
 .de1 MR
 .  if ((\\n[.$] < 2) : (\\n[.$] > 3)) \
 .    an-style-warn .\\$0 expects 2 or 3 arguments, got \\n[.$]
-.  ds an*url man:\\$1(\\$2)\" used everywhere but macOS
-.  if (\\n[an*MR-URL-format] = 2) \
-.    ds an*url x-man-page://\\$2/\\$1\" macOS/Mac OS X since 10.3
-.  if (\\n[an*MR-URL-format] = 3) \
-.    ds an*url man:\\$1.\\$2\" Bwana (Mac OS X)
-.  if (\\n[an*MR-URL-format] = 4) \
-.    ds an*url x-man-doc://\\$2/\\$1\" ManOpen (Mac OS X pre-2005)
-.  nh
-.  if \\n[an*do-hyperlink] \{\
-.    if \\n[an*is-output-html] \
-.      nop \X^html:<a href="\\*[an*url]">^\c
-.    if \\n[an*is-output-terminal] \
-.      nop \X^tty: link \\*[an*url]^\c
+.  ie \\n[an*is-output-pdf] \{\
+.    ie \\n(.$=1 \
+.      I \\$1
+.    el \{\
+.      an*cln an*page-ref-nm \\$1_\\$2
+.      ie d pdf:look(\\*[an*page-ref-nm]) .pdfhref L -D \\*[an*page-ref-nm] -A "\\$3" -- \fI\\$1\fP(\\$2)
+.      el .IR \\$1 (\\$2)\\$3
+.    \}
 .  \}
-.      nop \&\\*[an-lic]\f[\\*[MF]]\\$1\\*[an-ic]\f[R](\\$2)\c
-.  if \\n[an*do-hyperlink] \{\
-.    if \\n[an*is-output-html] \
-.      nop \X^html:</a>^\c
-.    if \\n[an*is-output-terminal] \
-.      nop \X^tty: link^\c
+.  el \{\
+.    ds an*url man:\\$1(\\$2)\" used everywhere but macOS
+.    if (\\n[an*MR-URL-format] = 2) \
+.      ds an*url x-man-page://\\$2/\\$1\" macOS/Mac OS X since 10.3
+.    if (\\n[an*MR-URL-format] = 3) \
+.      ds an*url man:\\$1.\\$2\" Bwana (Mac OS X)
+.    if (\\n[an*MR-URL-format] = 4) \
+.      ds an*url x-man-doc://\\$2/\\$1\" ManOpen (Mac OS X pre-2005)
+.    nh
+.    if \\n[an*do-hyperlink] \{\
+.      if \\n[an*is-output-html] \
+.        nop \X^html:<a href="\\*[an*url]">^\c
+.      if \\n[an*is-output-terminal] \
+.        nop \X^tty: link \\*[an*url]^\c
+.    \}
+.        nop \&\\*[an-lic]\f[\\*[MF]]\\$1\\*[an-ic]\f[R](\\$2)\c
+.    if \\n[an*do-hyperlink] \{\
+.      if \\n[an*is-output-html] \
+.        nop \X^html:</a>^\c
+.      if \\n[an*is-output-terminal] \
+.        nop \X^tty: link^\c
+.    \}
+.    nop \&\\$3
 .  \}
-.  nop \&\\$3
 .  hy \\n[an*hyphenation-mode]
 ..
 .
