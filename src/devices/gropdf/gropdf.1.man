@@ -352,9 +352,7 @@ in the PostScript font.
 .LP
 Note that
 .I gropdf
-is currently only able to display the first 256 glyphs in any font.
-This restriction will be lifted in a later version.
-.
+Can now access all the glyphs available in a font.
 .
 .\" .LP
 .\" Note that
@@ -1337,6 +1335,64 @@ An
 macro file is also available;
 see
 .MR groff_tmac @MAN5EXT@ .
+.RE
+.
+.TP
+.BI "\[rs]X\[aq]pdf: pagenumbering\~" "type prefix start" \[aq]
+This is used to control the page numbering shown in the pdf reader\[aq]s
+outline pane which contains your bookmarks. Normally the page numbers
+shown against the bookmark is the physical page number in the file, But
+this may not match the different page number styles within the document.
+.RS
+.LP
+In a single document there may be a cover sheet (which has no page
+number), a TOC (which uses lower case roman numbers), and the main body
+of the document (which has decimal page numbers). Use this command
+somewhere on the page where the numbering system changes, once changed
+the numbers will automatically increment until the number system changes
+again, so don\[aq]t call for every page, just when you want to change
+the numbering.
+.LP
+The parameters are:-
+.TP
+.I type
+This specifies the type of numbering to use for this page onward. It
+should be one of
+.RB \[lq] "Decimal | Roman | roman | Alpha | alpha" \[rq].
+Only the initial letter is relevant. The alphabetic number systems use
+A-Z (then AA-AZ ... ZA-ZZ).
+The
+.I type
+may also be
+.RB \[lq] . \[rq]
+which means no numbering system is chosen, but you may still provide a
+.I prefix
+to have a custom name (such as "Cover");
+.TP
+.I prefix
+Provides a string to insert before the number.
+If the document has an Appendix with page numbers in the form
+.RI A- n ,
+the
+.I prefix
+would be set to \[lq]A-\[rq] and the
+.I type
+would be
+.BR Decimal .
+.
+.
+.TP
+.I start
+Gives the start number for the incrementing page numbers in the outline
+pane. If no value is given for
+.I start
+it will default to 1, which is usually correct.
+.LP
+The convenience macro for this command is \[lq]
+.BI ".pdfpagenumbering " "type prefix start"
+\[rq] using '.' for preceding missing values, or just \[lq]
+.BR .pdfpagenumbering \[rq]
+on its own to have no page numbers shown in the outline pane.
 .RE
 .
 .
