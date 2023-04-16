@@ -81,12 +81,12 @@ Including
 .Qq fill
 in the command will paint the rectangle with the current fill colour (as
 with
-.Lt \[rs]M[] )
+.Lt \[rs]M[\|] )
 and including
 .Qq box
 will give the rectangle a border in the current stroke colour
 (as with
-.Lt \[rs]m[] ).
+.Lt \[rs]m[\|] ).
 .sp \n[PD]u
 .I cmd
 may also be
