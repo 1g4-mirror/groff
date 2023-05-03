@@ -38,6 +38,11 @@ DOC_GROFF = \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
   $(GROFFBIN) -M $(doc_srcdir) $(MFLAG) $(FFLAG) -ww -b
 
+DOC_PDFMOM = \
+  GROFF_COMMAND_PREFIX= \
+  GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
+  $(GROFF_BIN_PATH)/pdfmom -M $(doc_srcdir) $(MFLAG) $(FFLAG) -ww -b --roff
+
 # This image file is used by several documents in the groff source tree.
 DOC_GNU_EPS = doc/gnu.eps
 
@@ -256,8 +261,9 @@ man-clean:
 # feature of gropdf.
 doc/groff-man-pages.pdf: $(GROFF_MAN_PAGES_ALL) eqn pic tbl \
   $(TMAC_PACKAGE_MAN) $(TMAC_PACKAGE_MDOC) font/devps/freeeuro.pfa
-	$(GROFF_V)$(DOC_GROFF) -pet -mandoc -dHF=HB -rC1 \
+	$(GROFF_V)$(DOC_PDFMOM) -pet -mandoc -manmark -dHF=HB -rC1 \
 	  -rCHECKSTYLE=3 -Tpdf -P-e \
+	  $(top_srcdir)/doc/GMPfront.t \
 	  $(GROFF_MAN_PAGES1) \
 	  $(tmac_srcdir)/sv.tmac $(GROFF_MAN_PAGES2) \
 	  $(tmac_srcdir)/en.tmac $(GROFF_MAN_PAGES3) > $@
