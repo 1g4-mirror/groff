@@ -123,14 +123,28 @@
 .  nr paper-w 0
 .
 .  ie d paper-\*[paper-p]-length \{\
+.\" .    if '\*[.T]'dvi' \{\
+.\" .       ds paper-last \*[paper-\*[paper-p]-width]
+.\" .       substring paper-last -1
+.\" .       ie '\*[paper-last]'c' \{\
+.\" .          as paper-\*[paper-p]-width m
+.\" .          as paper-\*[paper-p]-length m
+.\" .       \}
+.\" .       el \{\
+.\" .          as paper-\*[paper-p]-width n
+.\" .          as paper-\*[paper-p]-length n
+.\" .       \}
+.\" .    \}
 .    ie '\*[paper-l]'l' \{\
 .      pl \*[paper-\*[paper-p]-width]
 .      ll (\*[paper-\*[paper-p]-length] - 2i)
+.      if '\*[.T]'pdf' .device papersize=\*[paper-\*[paper-p]-length],\*[paper-\*[paper-p]-width] tmac
 .    \}
 .    el \{\
 .      ie '\*[paper-l]'' \{\
 .        pl \*[paper-\*[paper-p]-length]
 .        ll (\*[paper-\*[paper-p]-width] - 2i)
+.        if '\*[.T]'pdf' .device papersize=\*[paper-\*[paper-p]-width],\*[paper-\*[paper-p]-length]
 .      \}
 .      el \
 .        nr paper-w 1
