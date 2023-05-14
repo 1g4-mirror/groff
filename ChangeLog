@@ -1,3 +1,9 @@
+2024-05-14  Dave Kemper <saint.snit@gmail.com>
+
+	* tmac/e.tmac: Add debugging advice for developers.
+
+	Fixes <https://savannah.gnu.org/bugs/?64189>.
+
 2024-07-09  Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
 
 	[docs]: Fix doubled word typos.
