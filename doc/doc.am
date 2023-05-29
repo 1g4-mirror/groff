@@ -262,7 +262,7 @@ man-clean:
 doc/groff-man-pages.pdf: $(GROFF_MAN_PAGES_ALL) eqn pic tbl \
   $(TMAC_PACKAGE_MAN) $(TMAC_PACKAGE_MDOC) font/devps/freeeuro.pfa
 	$(GROFF_V)$(DOC_PDFMOM) -pet -mandoc -manmark -dHF=HB -rC1 \
-	  -rCHECKSTYLE=3 -Tpdf -P-e \
+	  -rCHECKSTYLE=3 -rIN=7.2n -Tpdf -P-e \
 	  $(top_srcdir)/doc/GMPfront.t \
 	  $(GROFF_MAN_PAGES1) \
 	  $(tmac_srcdir)/sv.tmac $(GROFF_MAN_PAGES2) \

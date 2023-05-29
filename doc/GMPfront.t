@@ -20,5 +20,6 @@
 \f[BMB]THE MAN PAGES BOOK\fP
 .sp .2i
 .Hl
+.pn 1
 .bp
-.pdfpagenumbering D . 2
+.pdfpagenumbering D . 1
