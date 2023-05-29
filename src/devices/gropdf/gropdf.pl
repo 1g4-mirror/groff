@@ -452,7 +452,7 @@ my $version=0;
 my $stats=0;
 my $unicodemap;
 my $options=7;
-my $PDFver=1.5;
+my $PDFver=1.7;
 my @idirs;
 
 my $alloc=-1;
@@ -507,10 +507,10 @@ if (defined($unicodemap))
     }
 }
 
-if ($PDFver != 1.4 and $PDFver != 1.5)
+if ($PDFver != 1.4 and $PDFver != 1.7)
 {
-    Warn("Only pdf versions 1.4 or 1.5 are supported, not '$PDFver'");
-    $PDFver=1.5;
+    Warn("Only pdf versions 1.4 or 1.7 are supported, not '$PDFver'");
+    $PDFver=1.7;
 }
 
 $PDFver=int($PDFver*10)-10;
@@ -881,7 +881,7 @@ foreach my $o (3..$objct)
 {
     if (!exists($obj[$o]->{XREF}))
     {
-	if ($PDFver==5 and !exists($obj[$o]->{STREAM}) and ref($obj[$o]->{DATA}) eq 'HASH')
+	if ($PDFver!=4 and !exists($obj[$o]->{STREAM}) and ref($obj[$o]->{DATA}) eq 'HASH')
 	{
 	    # This can be put into an ObjStm
 	    my $maj=int(++$objidx/128);
