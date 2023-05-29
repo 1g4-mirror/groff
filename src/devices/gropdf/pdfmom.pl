@@ -30,6 +30,7 @@ my $dev='pdf';
 my $preconv='';
 my $readstdin=1;
 my $mom='-mom';
+my $zflg='';
 if ($0=~m/pdf(\w+)$/)
 {
     my $m=$1;
@@ -81,7 +82,12 @@ while (my $c=shift)
 	$preconv=$c;
 	next;
     }
-    elsif ($c eq '-z' or $c eq '-Z')
+    elsif ($c eq '-Z')
+    {
+	$zflg=$c;
+	next;
+    }
+    elsif ($c eq '-z')
     {
 	$dev=$c;
 	next;
@@ -150,11 +156,11 @@ if ($dev eq 'pdf')
 {
     if ($mom)
     {
-        system("groff -Tpdf -dLABEL.REFS=1 $mom -z $cmdstring 2>&1 | LC_ALL=C grep '^\\. *ds' | groff -Tpdf -dPDF.EXPORT=1 -dLABEL.REFS=1 $mom -z - $cmdstring 2>&1 | LC_ALL=C grep '^\\. *ds' | groff -Tpdf $mom $preconv - $cmdstring");
+        system("groff -Tpdf -dLABEL.REFS=1 $mom -z $cmdstring 2>&1 | LC_ALL=C grep '^\\. *ds' | groff -Tpdf -dPDF.EXPORT=1 -dLABEL.REFS=1 $mom -z - $cmdstring 2>&1 | LC_ALL=C grep '^\\. *ds' | groff -Tpdf $mom $preconv - $cmdstring $zflg");
     }
     else
     {
-        system("groff -Tpdf -dPDF.EXPORT=1 -z $cmdstring 2>&1 | LC_ALL=C grep '^\\. *ds' | groff -Tpdf $preconv - $cmdstring");
+        system("groff -Tpdf -dPDF.EXPORT=1 -z $cmdstring 2>&1 | LC_ALL=C grep '^\\. *ds' | groff -Tpdf $preconv - $cmdstring $zflg");
     }
 }
 elsif ($dev eq 'ps')
@@ -164,10 +170,6 @@ elsif ($dev eq 'ps')
 elsif ($dev eq '-z') # pseudo dev - just compile for warnings
 {
     system("groff -Tpdf $mom -z $cmdstring");
-}
-elsif ($dev eq '-Z') # pseudo dev - produce troff output
-{
-    system("groff -Tpdf $mom -Z $cmdstring");
 }
 else
 {
