@@ -153,7 +153,7 @@ ascii_paragraph_word::set_width(unsigned int width)
 {
   width_ = width;
 }
-  
+
 unsigned int
 ascii_paragraph_word::get_width()
 {
@@ -167,7 +167,7 @@ ascii_paragraph_word::get_next_glue_values(unsigned int *width,
 {
   size_t len;
   char last_character;
-  
+
   if (sz_word_) {
     len = strlen(sz_word_);
     last_character = sz_word_[len - 1];
@@ -196,6 +196,8 @@ ascii_paragraph_word::get_next_glue_values(unsigned int *width,
     *shrinkability = 2;
     break;
   }
+
+  return 0;
 }
 
 int
@@ -239,7 +241,7 @@ text_loader::text_loader(char *text, const char *path)
     char *c;
     size_t text_size;
     struct stat buf;
-    
+
     fp = fopen (path, "r");
     if (fp == NULL) {
       printf("Error:%s\n", strerror(errno));
@@ -267,16 +269,16 @@ hyphen_type_t
 text_loader::simulate_hyphenate (const char *word, unsigned int *first_part_len)
 {
   hyphen_type_t ret = OPTIONAL_HYPHEN;
-  
+
   if (word == NULL || first_part_len == NULL)
     goto end;
-  
+
   if (strncmp(word, "lime-tree", 9) == 0) {
     *first_part_len = 5;
     ret = EXPLICIT_HYPHEN;
     goto end;
   }
-  
+
   if (strncmp(word, "wishing", 7) == 0)
     *first_part_len = 4;
   else if (strncmp(word, "daughters", 9) == 0)
@@ -330,7 +332,7 @@ text_loader::process_text(paragraph *par, bool with_indentation)
     indentation->set_width(18);
     par->add_box(indentation);
   }
-  
+
   /* Build the paragraph: for each word of 'text' we check if there is an
    * explicit hyphen (here only the word "lime-tree"), otherwise we add an
    * optional hyphen, and add the corresponding items. For example 'whenever'
@@ -389,7 +391,7 @@ struct expected_break_info {
   } while(0)
 
 class test_paragraph {
-  
+
 private:
   text_loader *text_loader_;
   int check_all_breakpoint(struct expected_break_info tab_expected[],
@@ -404,7 +406,7 @@ public:
   int test11_original_example();
   int test12_example_with_default_demerits_formula();
   int test13_example_with_larger_tolerance();
-  
+
   void suite2_init();
   int test21_hyphen_flagged_penalty();
 
@@ -515,7 +517,7 @@ test_paragraph::check_best_breakpoint(const char*tab_expected[], paragraph *par)
     }
   }
 
-  return res; 
+  return res;
 }
 
 test_paragraph::~test_paragraph()
@@ -534,7 +536,7 @@ test_paragraph::~test_paragraph()
  */
 void
 test_paragraph::suite1_init()
-{  
+{
   text_loader *tl;
   char text[] =
     "In olden times when wishing still helped one, there lived a "
@@ -561,7 +563,7 @@ test_paragraph::test11_original_example()
   int res = 0;
   float expected_line_ratio[10] = {0.774, 0.179, 0.629, 0.545, 0.000,
                                    0.079, 0.282, 0.294, 0.575, 0.000};
-  
+
   int n_lines;
   int k;
   float ratio;
@@ -650,7 +652,7 @@ test_paragraph::test11_original_example()
 
   printf("   Checking all breakpoints demerits\n");
   res += check_all_breakpoint(all_expected, par);
-  
+
   printf("   Checking the best breakpoints array\n");
   res += check_best_breakpoint(best_expected, par);
   printer = new paragraph_printer(par);
@@ -658,7 +660,7 @@ test_paragraph::test11_original_example()
   delete printer;
   PRINT_RESULT(res);
   delete par;
-  
+
   return res;
 }
 
@@ -692,16 +694,16 @@ test_paragraph::test12_example_with_default_demerits_formula()
     FITNESS_CLASS_LOOSE,
     FITNESS_CLASS_NORMAL
   };
-    
+
   int k = 0;
-  
+
   printf("-- Test12...\n");
   text_loader_->process_text(par, true);
   par->format_knuth_plass();
-  
+
   printf("   Checking the best breakpoints array\n");
   res += check_best_breakpoint(best_expected, par);
-  
+
   printf("   Checking the lines fitness class\n");
   for (k = 0; k < 10; k++) {
     fitness_class = par->get_fitness_class(k + 1);
@@ -737,14 +739,14 @@ test_paragraph::test13_example_with_larger_tolerance()
     { "her", 400, 3605 },
     { "thing.", 1, 3606 }
   };
-  
+
   printf("-- Test13...\n");
   text_loader_->process_text(par, true);
   par->format_knuth_plass(10);
-  
+
   printf("   Checking the best breakpoints array\n");
   res += check_best_breakpoint(best_expected, par);
-  
+
   PRINT_RESULT(res);
   delete par;
 
@@ -764,7 +766,7 @@ test_paragraph::test13_example_with_larger_tolerance()
  */
 void
 test_paragraph::suite2_init()
-{  
+{
   text_loader *tl;
   char text[] =
     "AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAAAA hyphenationtest "
@@ -787,7 +789,7 @@ test_paragraph::test21_hyphen_flagged_penalty()
     "test", //FIXME actually is should be hyphenationtest
     "DDDDDDDDDD"
   };
-  
+
   printf("-- Test21...\n");
   text_loader_->process_text(par, false);
   par->format_knuth_plass(2);
@@ -810,7 +812,7 @@ class 2; the class 2 is better but the class 1 should be chosen because of the
 first line. */
 void
 test_paragraph::suite3_init()
-{  
+{
   text_loader *tl;
   char text[] =
     "The first line's best break makes it very veryyyyyy tiiiiiiiiiiiiiight, "
@@ -837,7 +839,7 @@ test_paragraph::test31_fitness_class()
     "0."
   };
   char word[256];
-  
+
   printf("-- Test31...\n");
   text_loader_->process_text(par, false);
   par->format_knuth_plass(2);

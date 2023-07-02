@@ -56,7 +56,7 @@ class paragraph {
   breakpoint **array_best_breaks_;
   int number_lines_;
   item *error_item_; // last item before exiting in error
-  
+
 public:
   paragraph();
   ~paragraph();
@@ -64,7 +64,7 @@ public:
   void config_use_old_demerits_formula();
   void config_no_fitness_class();
   void config_hyphenation_penalty(unsigned int value);
-  
+
   // To build the paragraph
   // TODO: enable to add a custom item
   void add_box(paragraph_word *word);
@@ -96,7 +96,7 @@ class paragraph_printer : public paragraph_writer_interface {
   int current_index_;
   breakpoint *next_feasible_breakpoint_;
   void new_line(void);
-  
+
 public:
   paragraph_printer(paragraph *par);
   ~paragraph_printer();

@@ -139,7 +139,7 @@ box_item::box_item(paragraph_word *word)
   : item()
 {
   char sz[STRING_MAX_SIZE] = "";
-  
+
   word_ = word;
   stretchability_ = 0;
   shrinkability_ = 0;
@@ -257,19 +257,19 @@ int
 glue_item::sprint_info(char *str)
 {
   char tmp[32];
-  
+
   if (stretchability_ >= PLUS_INFINITY)
     sprintf(tmp, "infinity");
   else
     sprintf(tmp, "%u", stretchability_);
-  
+
   return sprintf(str, "glue width:%u strecth:%s shrink:%u",
                  width_, tmp, shrinkability_);
 }
 
 /**
  * Class penalty
- * 
+ *
  */
 penalty_item::penalty_item(int penalty,
                            bool flag,
@@ -345,7 +345,7 @@ penalty_item::sprint_info(char *str)
     sprintf(tmp, "-infinity");
   else
     sprintf(tmp, "%d", penalty_);
-  
+
   return sprintf(str,
                  "penalty width:%u value:%s flag:%d",
                  width_,
@@ -408,7 +408,7 @@ breakpoint::get_total_width_after()
    * incorrect. */
   if (break_item_ != NULL && break_item_->get_penalty() == 0)
     total_width_after += break_item_->get_width();
-  
+
   return total_width_after;
 }
 
@@ -419,7 +419,7 @@ breakpoint::get_total_stretch_after()
 
   if (break_item_ != NULL)
     total_stretch_after += break_item_->get_stretchability();
-  
+
   return total_stretch_after;
 }
 
@@ -430,7 +430,7 @@ breakpoint::get_total_shrink_after()
 
   if (break_item_ != NULL)
     total_shrink_after += break_item_->get_shrinkability();
-  
+
   return total_shrink_after;
 }
 
@@ -444,7 +444,7 @@ item *
 breakpoint::get_previous_box()
 {
   item *i = break_item_;
-  
+
   while (i != NULL) {
     if (i->is_box())
       break;
@@ -531,7 +531,7 @@ breakpoint::compute_adjust_ratio(int desired_line_length,
     breakpoint_error("candidate item null");
     return -1;
   }
-    
+
   line_length = total_width - get_total_width_after();
 #if TRACE_BREAKPOINT >= LEVEL_DEBUG
   char tmp[256];
@@ -552,7 +552,7 @@ breakpoint::compute_adjust_ratio(int desired_line_length,
   if (candidate->get_penalty() > 0) {
     line_length += candidate->get_width();
   }
-  
+
   if (line_length < desired_line_length) {
     line_stretch = total_stretch - get_total_stretch_after();
     breakpoint_debug("  line_stretch %u", line_stretch);
@@ -570,7 +570,7 @@ breakpoint::compute_adjust_ratio(int desired_line_length,
     else
       ratio = FLT_MIN;
   }
-  
+
   if (ratio >= PLUS_INFINITY)
     breakpoint_debug("  ratio: infinity");
   else
@@ -643,7 +643,7 @@ unsigned int
 breakpoint::compute_adj_extra_demerits(fitness_class_t candidate_fitness)
 {
   unsigned int extra_demerits = 0;
-  
+
   switch (candidate_fitness) {
   case FITNESS_CLASS_TIGHT:
     if (fitness_class_ >= FITNESS_CLASS_LOOSE)
@@ -661,7 +661,7 @@ breakpoint::compute_adj_extra_demerits(fitness_class_t candidate_fitness)
     if (fitness_class_ <= FITNESS_CLASS_NORMAL)
       extra_demerits = PARAGRAPH_DEFAULT_NON_ADJACENT_FITNESS_DEMERITS;
   default:
-    break; //NOTE: intial breakpoint has a FITNESS_CLASS of MAX, 
+    break; //NOTE: intial breakpoint has a FITNESS_CLASS of MAX,
   }
 
   return extra_demerits;
@@ -672,7 +672,7 @@ fitness_class_t
 breakpoint::compute_fitness_class(float adjust_ratio)
 {
   fitness_class_t fitness_class;
-  
+
   if (adjust_ratio < (float) -0.5)
     fitness_class = FITNESS_CLASS_TIGHT;
   else if (adjust_ratio <= (float) 0.5)
@@ -699,7 +699,7 @@ breakpoint::sprint(char *str)
       char tmp[32];
       sprintf(tmp, " (penalty: %d)", break_item_->get_penalty());
       strcat(str, tmp);
-    } 
+    }
   }  else {
     res = sprintf(str, "initial breakpoint");
   }
@@ -718,7 +718,7 @@ breakpoint::print_breakpoint_info()
 
   if (sz_print_ == NULL) {
     sz_print_ = (char *)calloc(512, sizeof(char));
-  
+
     if (break_item_ != NULL)
     {
       box = get_previous_box();
@@ -726,7 +726,7 @@ breakpoint::print_breakpoint_info()
     }  else {
       sprintf(tmp, "initial breakpoint");
     }
-    
+
     if (previous_best_ != NULL) {
       previous_breakpoint_box = previous_best_->get_previous_box();
       if (previous_breakpoint_box != NULL)
@@ -747,7 +747,7 @@ breakpoint::print_breakpoint_info()
       sprintf(sz_print_, "Initial breakpoint\n");
     }
   }
-  
+
   return sz_print_;
 }
 
@@ -764,7 +764,7 @@ paragraph::paragraph()
   use_old_demerits_formula_ = false;
   use_fitness_class_ = true;
   hyphenation_penalty_ = PARAGRAPH_DEFAULT_HYPHENATION_PENALTY;
-  INIT_LIST_HEAD(&item_list_head_, NULL);                                                                       
+  INIT_LIST_HEAD(&item_list_head_, NULL);
   INIT_LIST_HEAD(&active_breaks_list_head_, NULL);
   INIT_LIST_HEAD(&passive_breaks_list_head_, NULL);
   array_best_breaks_ = NULL;
@@ -875,7 +875,7 @@ paragraph::finish()
   penalty_item *disallowed_break_penalty = new penalty_item(PLUS_INFINITY, false);
   glue_item *finishing_glue = new glue_item(0, PLUS_INFINITY, 0);
   penalty_item *forced_break_penalty = new penalty_item(MINUS_INFINITY, false);
-  
+
   /* FIXME we assume here that we always finish with glue so we always remove
    * it.  This should be more robust. */
   last_glue = list_entry(item_list_head_.prev, glue_item);
@@ -898,7 +898,7 @@ paragraph::deactivate_breakpoint(breakpoint *active)
   active->sprint(str);
   paragraph_debug("  deactivating '%s'", str);
 #endif
-  
+
   list_del_init(&active->list_);
   list_add_tail(&active->list_, &passive_breaks_list_head_);
 }
@@ -912,13 +912,13 @@ paragraph::record_feasible_break(breakpoint *active,
   active->sprint(str);
   paragraph_debug("   record feasible break '%s'", str);
 #endif
-  
+
   candidate->set_previous_best(active);
   if (list_empty(&candidate->list_))
     list_add_tail(&candidate->list_, &active_breaks_list_head_);
 }
 
-/* 
+/*
  * Format the paragraph with Knuth-Plass algorithm. Algorithm general outline:
 
    for (all items 'b' of the paragraph) {
@@ -991,7 +991,7 @@ paragraph::format_knuth_plass(float tolerance,
         tab_total_best_demerits[k] = PLUS_INFINITY;
         tab_ajust_ratio[k] = PLUS_INFINITY;
       }
-      
+
       /* Check the candidate breakpoint against each active breakpoint */
       list_for_each_entry_safe(
         active, n, &active_breaks_list_head_, list_, breakpoint) {
@@ -1016,7 +1016,7 @@ paragraph::format_knuth_plass(float tolerance,
             demerits +=
               active->compute_adj_extra_demerits(fitness_class);
           }
-          
+
 #if TRACE_PARAGRAPH >= LEVEL_INFO
           paragraph_info("  From %s to %s:", tmp1, tmp);
           paragraph_info("    ratio          : %.3f", adjust_ratio);
@@ -1041,7 +1041,7 @@ paragraph::format_knuth_plass(float tolerance,
                           tab_best_previous[fitness_class]);
         }
       }
-      
+
       if (min_total_best_demerits < PLUS_INFINITY) {
         for (k = 0;
              k < n_fitness_class;
@@ -1069,7 +1069,7 @@ paragraph::format_knuth_plass(float tolerance,
 
       /* No more active breakpoint, leave with error */
       if (list_empty(&active_breaks_list_head_)) {
-        paragraph_error("Could nor format paragraph");
+        paragraph_error("Could not format paragraph");
         error_item_ = k_item;
         break;
       }
@@ -1087,12 +1087,16 @@ paragraph::format_knuth_plass(float tolerance,
     active, n, &active_breaks_list_head_, list_, breakpoint) {
     deactivate_breakpoint(active);
   }
-  
+
   /* Create the list of best breakpoints by starting by the end of the passive
    * list */
   initial_breakpoint = list_entry(passive_breaks_list_head_.next, breakpoint);
   n = list_entry(passive_breaks_list_head_.prev, breakpoint);
   number_lines_ = n->get_line_number();
+  if (number_lines_ == 0) {
+     paragraph_error("Could not format paragraph");
+     return -1;
+  }
   array_best_breaks_ = (breakpoint **)calloc(number_lines_,
                                              sizeof(breakpoint *));
   k = 0;
@@ -1127,7 +1131,7 @@ paragraph::write_text(paragraph_writer_interface *pwi, int *number_lines)
   float ratio;
   float space_width;
   paragraph_word *word;
-  
+
   if (pwi == NULL) {
     paragraph_error("Incorrect input");
     res = -1;
@@ -1135,7 +1139,10 @@ paragraph::write_text(paragraph_writer_interface *pwi, int *number_lines)
       *number_lines = 0;
     goto end;
   }
-
+  if (array_best_breaks_ == NULL) {
+     res = -1;
+     goto end;
+  }
   k = 0;
   j_current_line = 1;
   next_best_breakpoint = array_best_breaks_[k];
@@ -1147,7 +1154,7 @@ paragraph::write_text(paragraph_writer_interface *pwi, int *number_lines)
     if (next_best_breakpoint && pos == next_best_breakpoint->get_item()) {
       word = pos->get_word();
       if (word != NULL) // case of a hyphen
-        pwi->write_word_cbk(word); 
+        pwi->write_word_cbk(word);
       pwi->break_here_cbk(j_current_line);
       j_current_line++;
       if (k < number_lines_ - 1) {
@@ -1236,7 +1243,7 @@ paragraph::get_total_demerits(int line_number)
 void paragraph::print_breakpoints()
 {
   breakpoint *pos;
-  
+
   list_for_each_entry(pos, &passive_breaks_list_head_, list_, breakpoint) {
     printf("%s", pos->print_breakpoint_info());
   }
@@ -1317,7 +1324,7 @@ paragraph_printer::write_space_cbk(float space_width)
   strcat(tab_lines_[current_index_], " ");
   tab_marks_[current_index_][size_to_print_] = ' ';
   size_to_print_++;
-  
+
   return 0;
 }
 
@@ -1327,7 +1334,7 @@ paragraph_printer::break_here_cbk(int line_number)
   if (size_to_print_ > max_line_length_)
     max_line_length_ = size_to_print_;
   new_line();
-  
+
   return 0;
 }
 
@@ -1339,8 +1346,10 @@ paragraph_printer::print()
   int k, res;
   int column1, column2, column3;
   int number_lines = 0;
-  
+
   res = par_->write_text(this, &number_lines);
+  if (res != 0)
+     return res;
   first_column_width = printf("Number of lines: %d",
                               par_->get_number_of_lines());
   first_column_width += printf("%*s",
@@ -1368,7 +1377,8 @@ paragraph_printer::print()
    * the lines of formatted the paragraph */
   if (res != 0) {
     printf("\nCould not finish the formatting after line:\n\n");
-    printf("%s\n", tab_lines_[number_lines]);
+    if (tab_lines_[number_lines] != NULL)
+       printf("%s\n", tab_lines_[number_lines]);
   }
   return 0;
 }

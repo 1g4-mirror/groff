@@ -80,9 +80,6 @@ GROFF_PROG_XPMTOPPM
 PKG_PROG_PKG_CONFIG
 GROFF_UCHARDET
 
-# check for pkgconfig
-PKG_PROG_PKG_CONFIG
-
 # use a dummy substitution if no csh hack is necessary to avoid errors
 # with non-GNU sed programs
 GROFF_CSH_HACK([SH_SCRIPT_SED_CMD='1s/.*/:/'],
@@ -181,10 +178,6 @@ GROFF_GHOSTSCRIPT_VERSION_CHECK
 gl_GLIBC21
 gl_LOCALCHARSET
 
-# checks for presence of URW fonts (requires ghostscript, which is
-# checked in GROFF_HTML_PROGRAMS
-GROFF_URW_FONTS
-
 # Check for cppunit, unit test framework
 PKG_CHECK_MODULES([CPPUNIT], [cppunit >= 1.9.6], have_cppunit=yes, have_cppunit=no)
 AM_CONDITIONAL([BUILD_UNIT_TESTS], [test "$have_cppunit" = "yes" ])
@@ -237,9 +230,20 @@ then
   fi
 fi
 echo "\
- URW fonts for pdf               : $groff_have_urw_fonts
- Use uchardet library for preconv: $groff_have_uchardet
+ C++ compiler and options         : $CXX $CXXFLAGS $CPPFLAGS
+ use libgroff's memory allocator  : $groff_use_own_allocator
+ C compiler and options           : $CC $CFLAGS $CPPFLAGS
+ Perl interpreter version         : $perl_version
  Unit tests build  : $have_cppunit"
+if test "$groff_no_x" = yes
+then
+  echo "\
+ X11 support                      : disabled"
+else
+  echo "\
+ X11 support                      : enabled
+ X11 app defaults directory       : $appdefdir"
+fi
 echo "\
  'groff -l' uses print spooler    : $groff_have_spooler
  use URW fonts for PDF output     : $groff_have_urw_fonts"

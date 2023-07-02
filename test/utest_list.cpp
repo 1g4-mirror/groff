@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>. */
 class dummy {
 public:
   int data;
-  struct list_head lh;  
+  struct list_head lh;
   dummy (int x)
   {
     data = x;
@@ -42,9 +42,9 @@ public:
     return data;
   }
 };
-  
+
 class ListTest : public CppUnit::TestFixture {
-  
+
   CPPUNIT_TEST_SUITE(ListTest);
   CPPUNIT_TEST(testAdd);
   CPPUNIT_TEST(testAddTail);
@@ -53,7 +53,7 @@ class ListTest : public CppUnit::TestFixture {
   CPPUNIT_TEST(testForEachEntrySafe);
   CPPUNIT_TEST(testForEachEntrySafe2);
   CPPUNIT_TEST_SUITE_END();
-  
+
 private:
   // Head of the list: we will add class dummy object to this list.
   struct list_head head;
@@ -77,7 +77,7 @@ public:
     a = new dummy(10);
     b = new dummy(20);
     c = new dummy(30);
-    
+
     list_add(&a->lh, &head);
     CPPUNIT_ASSERT(head.next == &a->lh);
     CPPUNIT_ASSERT(head.prev == &a->lh);
@@ -92,7 +92,7 @@ public:
     list_del_init(&b->lh);
     list_del_init(&c->lh);
     CPPUNIT_ASSERT(list_empty(&head));
-                   
+
     // Local teardown
     INIT_LIST_HEAD(&head, NULL);
     delete a;
@@ -106,7 +106,7 @@ public:
     a = new dummy(10);
     b = new dummy(20);
     c = new dummy(30);
-    
+
     list_add_tail(&a->lh, &head);
     CPPUNIT_ASSERT(head.next == &a->lh);
     CPPUNIT_ASSERT(head.prev == &a->lh);
@@ -134,11 +134,11 @@ public:
   {
     dummy *pos;
     int k = 10;
-    
+
     a = new dummy(10);
     b = new dummy(20);
     c = new dummy(30);
-    
+
     list_add_tail(&a->lh, &head);
     list_add_tail(&b->lh, &head);
     list_add_tail(&c->lh, &head);
@@ -146,9 +146,9 @@ public:
       CPPUNIT_ASSERT(pos->data == k);
       k+=10;
     }
-    
+
     CPPUNIT_ASSERT(k == 40);
-    
+
     // Local teardown
     INIT_LIST_HEAD(&head, NULL);
     delete a;
@@ -161,24 +161,24 @@ public:
   {
     dummy *pos;
     a = new dummy(10);
-    
+
     list_add_tail(&a->lh, &head);
     list_for_each_entry(pos, &head, lh, dummy) {
       CPPUNIT_ASSERT(pos->data == 10);
     }
     list_del_init(&a->lh);
-    
+
     list_for_each_entry(pos, &head, lh, dummy) {
       // We should not enter this loop
       CPPUNIT_ASSERT(false);
     }
     CPPUNIT_ASSERT(true);
-    
+
     // Local teardown
     INIT_LIST_HEAD(&head, NULL);
     delete a;
   }
-  
+
   // Walk into the list, but this time we delete the dummy objects one by one,
   // so we use list_for_each_entry_safe rather than list_for_each_entry
   void testForEachEntrySafe()
@@ -199,7 +199,7 @@ public:
       k+=10;
       delete pos;
     }
-    
+
     CPPUNIT_ASSERT(true);
     // Local teardown
     INIT_LIST_HEAD(&head, NULL);
@@ -238,9 +238,9 @@ int main(int argc, char **argv)
   bool wasSuccessful;
   CppUnit::TestFactoryRegistry &registry =
     CppUnit::TestFactoryRegistry::getRegistry();
-  
+
   runner.addTest(registry.makeTest());
   wasSuccessful = runner.run("", false);
-  
+
   return !wasSuccessful;
 }

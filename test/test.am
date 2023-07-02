@@ -20,7 +20,9 @@ if BUILD_UNIT_TESTS
 TESTS += utest_list
 check_PROGRAMS += utest_list
 utest_list_SOURCES = test/utest_list.cpp
-utest_list_CXXFLAGS = $(CPPUNIT_CFLAGS) -I$(top_srcdir)/src/roff/troff
+# We leave the debugging flag and disable optimization as the code is
+# a bit experimental
+utest_list_CXXFLAGS = $(CPPUNIT_CFLAGS) -I$(top_srcdir)/src/roff/troff -ggdb -O0
 utest_list_LDFLAGS = $(CPPUNIT_LIBS)
 endif
 
@@ -31,4 +33,3 @@ test_paragraph_SOURCES = \
   test/test_paragraph.cpp
 
 test_paragraph_CXXFLAGS = -I$(top_srcdir)/src/roff/troff
-

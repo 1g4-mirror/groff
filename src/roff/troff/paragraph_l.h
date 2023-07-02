@@ -39,7 +39,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>. */
  *    the paragraph).
  */
 class item {
-  
+
 protected:
   paragraph_word *word_;
   unsigned int width_;
@@ -48,7 +48,7 @@ protected:
   int penalty_;
   bool flagged_penalty_;
   bool is_breakpoint_;
-   
+
 public:
   struct list_head list_;
   item();
@@ -74,7 +74,7 @@ public:
  * A box contains a word and is not a legal breakpoint.
  */
 class box_item : public item {
-  
+
 public:
   box_item(paragraph_word *word);
   ~box_item();
@@ -130,7 +130,7 @@ public:
 
 /**
   * Class breakpoint
-  * 
+  *
   * A breakpoint:
   *  - points to an item (the place where to break)
   *  - points to the previous best breakpoint.
@@ -159,7 +159,7 @@ class breakpoint {
   item *break_item_;
   breakpoint *previous_best_;
   char *sz_print_;
-  
+
 protected:
   /* simple getters */
   unsigned int get_total_width();
@@ -189,7 +189,7 @@ public:
   void            set_fitness_class(fitness_class_t fitness_class);
   breakpoint     *get_previous_best();
   void            set_previous_best(breakpoint *previous);
-  
+
   /* compute various values */
   float           compute_adjust_ratio(int desired_line_length,
                                        unsigned int total_width,
