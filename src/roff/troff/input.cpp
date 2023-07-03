@@ -4752,8 +4752,46 @@ void chop_macro()
 }
 
 enum case_xform_mode { STRING_UPCASE, STRING_DOWNCASE };
+const char * hex = "0123456789ABCDEF";
 
 // Case-transform each byte of the string argument's contents.
+void stringhex_request()
+{
+  symbol s = get_name(true /* required */);
+  if (s.is_null()) {
+    skip_line();
+    return;
+  }
+  request_or_macro *p = lookup_request(s);
+  macro *m = p->to_macro();
+  if (!m) {
+    error("cannot apply stringhex to a request ('%1')",
+	  s.contents());
+    skip_line();
+    return;
+  }
+  string_iterator iter1(*m);
+  macro *mac = new macro;
+  int len = m->macro::length();
+  for (int l = 0; l < len; l++) {
+    int nc, c = iter1.get(0);
+    if (c == PUSH_GROFF_MODE
+	|| c == PUSH_COMP_MODE
+	|| c == POP_GROFFCOMP_MODE)
+      mac->append(c);
+    else if (c == EOF)
+      break;
+    else {
+      nc = (int)hex[(c >> 4) & 0x0f];
+      mac->append(nc);
+      nc = (int)hex[c & 0x0f];
+      mac->append(nc);
+    }
+  }
+  request_dictionary.define(s, mac);
+  tok.next();
+}
+
 void do_string_case_transform(case_xform_mode mode)
 {
   assert((mode == STRING_DOWNCASE) || (mode == STRING_UPCASE));
@@ -8435,6 +8473,7 @@ void init_input_requests()
   init_request("soquiet", source_quietly);
   init_request("spreadwarn", spreadwarn_request);
   init_request("stringdown", stringdown_request);
+  init_request("stringhex", stringhex_request);
   init_request("stringup", stringup_request);
   init_request("substring", substring_request);
   init_request("sy", system_request);
