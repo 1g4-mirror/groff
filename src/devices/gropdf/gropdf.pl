@@ -238,12 +238,12 @@ else
     . " this PDF");
 }
 
-# mkdir $ENV{HOME}."/_Inline" if exists($ENV{HOME}) and !-e $ENV{HOME}."/_Inline";
+mkdir $ENV{HOME}.'/_Inline' if !-e $ENV{HOME}.'/_Inline' and !exists($ENV{PERL_INLINE_DIRECTORY}) and exists($ENV{HOME});
 
 $rc = eval
 {
     require Inline;
-    Inline->import (C => Config => DIRECTORY => $ENV{HOME}.'/_Inline');
+    Inline->import (C => Config => DIRECTORY => $ENV{HOME}.'/_Inline') if !exists($ENV{PERL_INLINE_DIRECTORY}) and exists($ENV{HOME});
     Inline->import (C =><<'EOC');
 
     static const uint32_t MAGIC1 = 52845;
@@ -1433,7 +1433,7 @@ sub do_x
             {
                 my $pdfmark=$1;
                 $pdfmark=~s((\d{4,6}) u)(sprintf("%.1f",$1/$desc{sizescale}))eg;
-#               $pdfmark=~s(\\\[u00(..)\])(chr(hex($1)))eg;
+                $pdfmark=~s(\\\[u00(..)\])(chr(hex($1)))eg;
                 $pdfmark=~s/\\n/\n/g;
 
                 if ($pdfmark=~m/(.+) \/DOCINFO\s*$/s)
@@ -1460,6 +1460,7 @@ sub do_x
                 {
                     my @xwds=split(' ',"<< $1 >>");
                     my $dest=ParsePDFValue(\@xwds);
+		    $dest->{Dest}=UTFName($dest->{Dest});
                     $dest->{View}->[1]=GraphY($dest->{View}->[1]*-1);
                     unshift(@{$dest->{View}},"$cpageno 0 R");
 
@@ -1485,6 +1486,7 @@ sub do_x
                     $annot->{DATA}->{Type}='/Annot';
                     FixRect($annot->{DATA}->{Rect}); # Y origin to ll
                     FixPDFColour($annot->{DATA});
+		    $annot->{DATA}->{Dest}=UTFName($annot->{DATA}->{Dest}) if exists($annot->{DATA}->{Dest});
                     push(@PageAnnots,$annotno);
                 }
                 elsif ($pdfmark=~m/(.+) \/OUT\s*$/)
@@ -1498,6 +1500,7 @@ sub do_x
 
                     my @xwds=split(' ',"<< $pre$title$post >>");
                     my $out=ParsePDFValue(\@xwds);
+		    $out->{Dest}=UTFName($out->{Dest});
 
                     my $this=[$out,[]];
 
@@ -1979,7 +1982,7 @@ sub utf16
     if ($p =~ /[^[:ascii:]]/)
     {
         $p = join '', map sprintf("\\%o", $_),
-            unpack "C*", encode("utf16", $p);
+            unpack "C*", encode('utf16', $p);
     }
 
     $p=~s/(?<!\\)\(/\\\(/g;
@@ -2019,6 +2022,23 @@ sub FindChr
     Warn("Can't convert '$ch' to unicode");
 
     return('');
+}
+
+sub UTFName
+{
+    my $s=shift;
+    my $r='';
+
+    $s=substr($s,1);
+    return '/'.join '', map { MakeLabel($_) } unpack('C*',$s);
+
+}
+
+sub MakeLabel
+{
+    my $c=chr(shift);
+    return($c) if $c=~m/[\w:]/;
+    return(sprintf("#%02x",ord($c)));
 }
 
 sub FixPDFColour
@@ -2078,6 +2098,7 @@ sub PutHotSpot
     $annot->{DATA}->{Rect}=[$mark->{xpos},$mark->{ypos}-$mark->{rsb},$endx+$mark->{lead},$mark->{ypos}-$mark->{rst}];
     FixPDFColour($annot->{DATA});
     FixRect($annot->{DATA}->{Rect}); # Y origin to ll
+    $annot->{DATA}->{Dest}=UTFName($annot->{DATA}->{Dest}) if exists($annot->{DATA}->{Dest});
     push(@PageAnnots,$annotno);
 }
 
@@ -2737,7 +2758,7 @@ sub ParsePDFHash
             $wd=$w[0];
             unshift(@{$pdfwds},"<$w[1]") if defined($w[1]);
 
-            $rtn->{$wd}=ParsePDFValue($pdfwds);
+            $rtn->{$wd}=(substr($pdfwds->[0],0,1) eq '/')?nextwd($pdfwds,1):ParsePDFValue($pdfwds);
         }
     }
 
@@ -4522,6 +4543,7 @@ sub map_subrs
             {
                 $sec{'#CharStrings'}=$j;
                 $stage=2;
+		$i=0;
             }
             elsif ($lin=~m/^\s*dup\s+(\d+)\s+(\d+)\s+RD (.*)/s)
             {
@@ -4571,7 +4593,7 @@ sub map_subrs
                 my $l=$2;
                 my $s=$3;
 
-                $sec{"/$n"}=[$j,{}],$i=$j if !exists($sec{"/$n"});
+                $sec{"/$n"}=[$j,{}] if !exists($sec{"/$n"});
 
                 if (length($s) > $l)
                 {
@@ -4581,10 +4603,23 @@ sub map_subrs
                 {
                     $lin.=$term.$lines->[++$j];
                     $lines->[$j]=undef;
+		    $i--;
                     redo;
                 }
 
-                $lines->[$i]=["/$n",$l,$s,'ND'];
+                $i+=$j;
+
+                if ($sec{"/$n"}->[0] != $i)
+		{
+		    # duplicate glyph name !!! discard ???
+		    $lines->[$i]=undef;
+		}
+		else
+		{
+		    $lines->[$i]=["/$n",$l,$s,'ND'];
+		}
+
+		$i=0;
             }
             #       else
             #       {
