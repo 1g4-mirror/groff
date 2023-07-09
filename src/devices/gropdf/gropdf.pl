@@ -25,6 +25,7 @@ use warnings;
 require 5.8.0;
 use Getopt::Long qw(:config bundling);
 use Encode qw(encode);
+use POSIX qw(mktime);
 
 use constant
 {
@@ -586,7 +587,12 @@ for $papersz ( split(" ", lc($possiblesizes).' #duff#') )
     # If we get here, $papersz was invalid, so try the next one.
 }
 
-my (@dt)=localtime($ENV{SOURCE_DATE_EPOCH} || time);
+my @dt;
+if ($ENV{SOURCE_DATE_EPOCH}) {
+    @dt=gmtime($ENV{SOURCE_DATE_EPOCH});
+} else {
+    @dt=localtime;
+}
 my $dt=PDFDate(\@dt);
 
 my %info=('Creator' => "(groff version $cfg{GROFF_VERSION})",
@@ -1100,7 +1106,13 @@ sub GetObj
 sub PDFDate
 {
     my $dt=shift;
-    return(sprintf("D:%04d%02d%02d%02d%02d%02d%+03d'00'",$dt->[5]+1900,$dt->[4]+1,$dt->[3],$dt->[2],$dt->[1],$dt->[0],( localtime time() + 3600*( 12 - (gmtime)[2] ) )[2] - 12));
+    my $offset;
+    if ($ENV{SOURCE_DATE_EPOCH}) {
+	$offset=0;
+    } else {
+	$offset=mktime((localtime $dt)[0..5]) - mktime((gmtime $dt)[0..5]);
+    }
+    return(sprintf("D:%04d%02d%02d%02d%02d%02d%+03d'%+03d'",$dt->[5]+1900,$dt->[4]+1,$dt->[3],$dt->[2],$dt->[1],$dt->[0],int($offset/3600),int(($offset%3600)/60)));
 }
 
 sub ToPoints

@@ -7,6 +7,23 @@
 This file describes recent user-visible changes in groff.  Bug fixes are
 not described.  There are more details in the man and info pages.
 
+VERSION 1.23.1
+==============
+
+Miscellaneous
+-------------
+
+o If groff programs have their current time overridden by the SOURCE_DATE_EPOCH
+  environment variable, then that time is always displayed in UTC.  That
+  environment variable is normally only set when specifically requesting build
+  systems to produce reproducible output, and it is useful for reproducibility
+  test harnesses to vary the TZ environment variable and ensure that it does
+  not affect the output of the build; those harnesses have no way to set TZ=UTC
+  only for groff programs.  People setting SOURCE_DATE_EPOCH are likely to be
+  more in the "system programmer" camp as described in the release notes for
+  1.23.0, so it is easier to defend time-zone-invariant output to them.  In all
+  other cases, the current time remains displayed in local time.
+
 VERSION 1.23.0
 ==============
 

@@ -8335,21 +8335,15 @@ void warn_request()
 
 static void init_registers()
 {
-#ifdef LONG_FOR_TIME_T
-  long
-#else /* not LONG_FOR_TIME_T */
-  time_t
-#endif /* not LONG_FOR_TIME_T */
-    t = current_time();
-  struct tm *tt = localtime(&t);
-  set_number_reg("seconds", int(tt->tm_sec));
-  set_number_reg("minutes", int(tt->tm_min));
-  set_number_reg("hours", int(tt->tm_hour));
-  set_number_reg("dw", int(tt->tm_wday + 1));
-  set_number_reg("dy", int(tt->tm_mday));
-  set_number_reg("mo", int(tt->tm_mon + 1));
-  set_number_reg("year", int(1900 + tt->tm_year));
-  set_number_reg("yr", int(tt->tm_year));
+  struct tm *t = current_time();
+  set_number_reg("seconds", int(t->tm_sec));
+  set_number_reg("minutes", int(t->tm_min));
+  set_number_reg("hours", int(t->tm_hour));
+  set_number_reg("dw", int(t->tm_wday + 1));
+  set_number_reg("dy", int(t->tm_mday));
+  set_number_reg("mo", int(t->tm_mon + 1));
+  set_number_reg("year", int(1900 + t->tm_year));
+  set_number_reg("yr", int(t->tm_year));
   set_number_reg("$$", getpid());
   register_dictionary.define(".A",
 			       new readonly_text_register(ascii_output_flag

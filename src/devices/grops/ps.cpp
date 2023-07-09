@@ -1390,13 +1390,8 @@ ps_printer::~ps_printer()
      .end_comment();
   {
     fputs("%%CreationDate: ", out.get_file());
-#ifdef LONG_FOR_TIME_T
-    long
-#else
-    time_t
-#endif
-    t = current_time();
-    fputs(ctime(&t), out.get_file());
+    struct tm *t = current_time();
+    fputs(asctime(t), out.get_file());
   }
   for (font_pointer_list *f = font_list; f; f = f->next) {
     ps_font *psf = (ps_font *)(f->p);
