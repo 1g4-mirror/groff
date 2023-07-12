@@ -102,6 +102,8 @@ while (my $c=shift)
 	print "usage: pdfmom [--roff] -Tps [pdfroff-option ...] [groff-option ...] [file ...]\n";
 	print "usage: pdfmom {-v | --version}\n";
 	print "usage: pdfmom --help\n";
+	print "\nHandle forward references in PDF documents.\n" .
+	      "See the pdfmom(1) manual page.\n";
 	exit;
     }
     elsif ($c eq '-v' or $c eq '--version')
