@@ -748,7 +748,7 @@ foreach my $fontno (sort keys %fontlst)
         ), $fobj=$objct if !($options & NOFILE);
 
         ($head,$body,$tail)=GetType1($fnt->{fontfile});
-        $head=~s/\/Encoding .*?readonly def\b/\/Encoding StandardEncoding def/s;
+        $head=~s/\/Encoding \d.*?readonly def\b/\/Encoding StandardEncoding def/s;
 
         if ($options & SUBSET)
         {
@@ -2770,7 +2770,7 @@ sub ParsePDFHash
             $wd=$w[0];
             unshift(@{$pdfwds},"<$w[1]") if defined($w[1]);
 
-            $rtn->{$wd}=(substr($pdfwds->[0],0,1) eq '/')?nextwd($pdfwds,1):ParsePDFValue($pdfwds);
+            $rtn->{$wd}=ParsePDFValue($pdfwds);
         }
     }
 
@@ -4599,7 +4599,7 @@ sub map_subrs
                 $sec{'#Pad'}=$j;
                 $stage=3;
             }
-            elsif ($lin=~m/^\s*\/([.\w]*)\s+(\d+)\s+RD (.*)/s)
+            elsif ($lin=~m/^\s*\/([-.\w]*)\s+(\d+)\s+RD (.*)/s)
             {
                 my $n=$1;
                 my $l=$2;
