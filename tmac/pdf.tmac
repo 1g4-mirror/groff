@@ -37,6 +37,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .
 .char \[lh] \X'pdf: xrev'\[rh]\X'pdf: xrev'
 .nr pdf:bm.nl 1
+.gcolor black     \" Until bug #64592 is addressed
 .de pdfmark
 . nop \!x X ps:exec [\\$* pdfmark
 ..
@@ -182,6 +183,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \" then parse any specified options, to set a "tag", if required
 .   \"
 .      ds pdf:href-T
+.      ds pdf:hrefhex-T
 .      while dpdf:href.opt\\$1 \{\
 .         pdf:href.opt\\$1 \\$@
 .         shift \\n[pdf:href.argc]
@@ -214,28 +216,35 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \" ( which we return in the string "PDFBOOKMARK.NAME" ),
 .   \"
 .      nr pdf:bm.nr +1
-.      ie '\\*[pdf:href-T]'' .ds PDFBOOKMARK.NAME pdf:bm\\n[pdf:bm.nr]
-.      el .ds PDFBOOKMARK.NAME \\*[pdf:href-T]
+.      ie '\\*[pdf:hrefhex-T]'' \{\
+.         ds PDFBOOKMARK.NAME pdf:bm\\n[pdf:bm.nr]
+.         ds PDFBOOKMARK.NAME.HEX \\*[PDFBOOKMARK.NAME]
+.         stringhex PDFBOOKMARK.NAME.HEX
+.      \}
+.      el \{\
+.         ds PDFBOOKMARK.NAME \\*[pdf:href-T]
+.         ds PDFBOOKMARK.NAME.HEX \\*[pdf:hrefhex-T]
+.      \}
 .      pdf:href.sety
-.         ds pdf:cleaned \\$*
-.         ev pdfcln
-.         tr \[em]-
-.         nf
-.         box pdf:clean
-.         nop \\$*
-.         fl
-.         box
-.         chop pdf:clean
-.         asciify pdf:clean
-.         length pdf:clean:len \\*[pdf:clean]
-.         ds pdf:cleaned \\*[pdf:clean]
-.         rm pdf:clean
-.         ev
-.         tr \[em]\[em]
-.      ds pdf:look(\\*[PDFBOOKMARK.NAME]) \\*[pdf:cleaned]
-.      if dPDF.EXPORT .tm .ds pdf:look(\\*[PDFBOOKMARK.NAME]) \\*[pdf:cleaned]
-.      pdfmark /Dest /\\*[PDFBOOKMARK.NAME] /View [\\*[PDFBOOKMARK.VIEW]] /DEST
-.      nop \!x X ps:exec [/Dest /\\*[PDFBOOKMARK.NAME] /Title (\\$*) /Level \\n[pdf:bm.lev] /OUT pdfmark
+.\" .         ds pdf:cleaned \\$*
+.\" .         ev pdfcln
+.\" .         tr \[em]-
+.\" .         nf
+.\" .         box pdf:clean
+.\" .         nop \\$*
+.\" .         fl
+.\" .         box
+.\" .         chop pdf:clean
+.\" .         asciify pdf:clean
+.\" .         length pdf:clean:len \\*[pdf:clean]
+.\" .         ds pdf:cleaned \\*[pdf:clean]
+.\" .         rm pdf:clean
+.\" .         ev
+.\" .         tr \[em]\[em]
+.      ds pdf:look(\\*[PDFBOOKMARK.NAME.HEX]) \\$*
+.      if dPDF.EXPORT .tm .ds pdf:look(\\*[PDFBOOKMARK.NAME.HEX]) \\$*
+.      pdfmark /Dest /\\*[PDFBOOKMARK.NAME.HEX] /View [\\*[PDFBOOKMARK.VIEW]] /DEST
+.      nop \!x X ps:exec [/Dest /\\*[PDFBOOKMARK.NAME.HEX] /Title (\\$*) /Level \\n[pdf:bm.lev] /OUT pdfmark
 .\".      pdfmark /Dest /\\*[PDFBOOKMARK.NAME] /Title "(\\*[pdf:cleaned])" /Level \\n[pdf:bm.lev] /OUT
 .      pdf:href.options.clear
 .      rr PDFPAGE.Y
@@ -352,7 +361,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" blue components of the colour specification in the RGB colour
 .\" domain, which is shared by "groff" and the PDF readers.
 .\"
-.ds PDFHREF.COLOUR   0.35 0.00 0.60
+.ds PDFHREF.COLOUR   0.00 0.35 0.60
 .defcolor pdf:href.colour rgb \*[PDFHREF.COLOUR]
 .\"
 .\" "PDFHREF.TEXT.COLOUR", on the other hand, is simply defined
@@ -461,18 +470,27 @@ am solely responsible for any bugs I may have introduced into this file.
 .ds pdf:href\\$1 \\$2
 .nr pdf:href.argc 2
 ..
+.de pdf:href.option-hex
+.\" ----------------------------------------------------------------------
+.\" ----------------------------------------------------------------------
+.ds pdf:hex \\$2
+.stringhex pdf:hex
+.ds pdf:href\\$1 \\$2
+.ds pdf:hrefhex\\$1 \\*[pdf:hex]
+.nr pdf:href.argc 2
+..
 .\"
 .\" Valid PDFHREF options are simply declared
 .\" by aliasing option handlers to "pdf:href.option",
 .\" or to "pdf:href.flag", as appropriate
 .\"
 .als pdf:href.opt-A pdf:href.option   \" affixed text
-.als pdf:href.opt-D pdf:href.option   \" destination name
+.als pdf:href.opt-D pdf:href.option-hex   \" destination name
 .als pdf:href.opt-E pdf:href.flag     \" echo link descriptor
 .als pdf:href.opt-F pdf:href.option   \" remote file specifier
-.als pdf:href.opt-N pdf:href.option   \" reference name
+.als pdf:href.opt-N pdf:href.option-hex   \" reference name
 .als pdf:href.opt-P pdf:href.option   \" prefixed text
-.als pdf:href.opt-T pdf:href.option   \" bookmark "tag"
+.als pdf:href.opt-T pdf:href.option-hex   \" bookmark "tag"
 .als pdf:href.opt-X pdf:href.flag     \" cross reference
 .\"
 .\" For references to another document file
@@ -502,6 +520,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \"
 .   while \\n(.$ \{\
 .      if dpdf:href-\\$1 .rm pdf:href-\\$1
+.      if dpdf:hrefhex-\\$1 .rm pdf:hrefhex-\\$1
 .      shift
 .      \}
 .   \}
@@ -529,6 +548,8 @@ am solely responsible for any bugs I may have introduced into this file.
 .\"
 .ds pdf:href-D
 .ds pdf:href-N
+.ds pdf:hrefhex-D
+.ds pdf:hrefhex-N
 .\"
 .\" Parse, interpret, and strip any specified options from the
 .\" argument list.  (Note that only options with a declared handler
@@ -536,10 +557,16 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" options -- anything which is not recognised is assumed to start
 .\" the "descriptive text" component of the argument list).
 .\"
-.while dpdf:href.opt\\$1 \{\
-.   pdf:href.opt\\$1 \\$@
-.   shift \\n[pdf:href.argc]
+.length pdf:l \\$1
+.while (\\n[pdf:l]<4) \{\
+.   ie dpdf:href.opt\\$1 \{\
+.      pdf:href.opt\\$1 \\$@
+.      shift \\n[pdf:href.argc]
+.      length pdf:l \\$1
+.      if '\\$1'--' .break
 .   \}
+.   el .break
+.\}
 .\"
 .\" If we found "--", to mark the end of the options,
 .\" then we should discard it.
@@ -553,14 +580,24 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" for the destination, then this marker will not be created.
 .\"
 .ds PDFBOOKMARK.NAME "\\*[pdf:href-N]\\*[pdf:href-D]
-.pdf*href.set \\*[PDFBOOKMARK.NAME] \\$1
-.ds pdf:look(\\*[PDFBOOKMARK.NAME]) \\$*
-.if dPDF.EXPORT .tm .ds pdf:look(\\*[PDFBOOKMARK.NAME]) \\$*
+.ds PDFBOOKMARK.NAME.HEX "\\*[pdf:hrefhex-N]\\*[pdf:hrefhex-D]
+.if '\\*[PDFBOOKMARK.NAME.HEX]'' \{\
+.  pdf:href.option-hex -D \\$1
+.  if '\\*[pdf:hrefhex-D]'' \{\
+.    pdf:error pdfhref has no destination
+.    nr pdf:href.ok 0
+.  \}
+.  ds PDFBOOKMARK.NAME \\*[pdf:href-D]
+.  ds PDFBOOKMARK.NAME.HEX \\*[pdf:hrefhex-D]
+.\}
+.pdf*href.set \\*[PDFBOOKMARK.NAME.HEX] \\$1
+.ds pdf:look(\\*[PDFBOOKMARK.NAME.HEX]) \\$*
+.if dPDF.EXPORT .tm .ds pdf:look(\\*[PDFBOOKMARK.NAME.HEX]) \\$*
 .\"
 .\"
 .\" Irrespective of whether this marker is created, or not,
 .\" the descriptive text will be copied to the groff output stream,
-.\" provided the "-E" option was specified
+.\" provided the "-E" option was sp0ecified
 .\"
 .if \\n[pdf:href-E] \&\\$*
 ..
@@ -619,10 +656,13 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" options -- anything which is not recognised is assumed to start
 .\" the "link text" component of the argument list).
 .\"
+.length l \\$1
+.if \\n[l]<3 \{\
 .while dpdf:href.opt\\$1 \{\
 .   pdf:href.opt\\$1 \\$@
 .   shift \\n[pdf:href.argc]
 .   \}
+\}
 .\"
 .\" If we found "--", to mark the end of the options, then we should
 .\" discard it.
@@ -635,8 +675,8 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" can't identify the destination, then set "pdf:href.ok" to zero,
 .\" so this link will not be created.
 .\"
-.if !dpdf:href-D .pdf:href.option -D \\$1
-.if '\\*[pdf:href-D]'' \{\
+.if !dpdf:href-D .pdf:href.option-hex -D \\$1
+.if '\\*[pdf:hrefhex-D]'' \{\
 .   pdf:error pdfhref has no destination
 .   nr pdf:href.ok 0
 .   \}
@@ -668,7 +708,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .      ds PDFHREF.DESC \\\\$*
 .      \}
 .   el \{\
-.      ie dpdf:look(\\*[pdf:href-D]) .ds PDFHREF.DESC \\*[pdf:look(\\*[pdf:href-D])]
+.      ie dpdf:look(\\*[pdf:hrefhex-D]) .ds PDFHREF.DESC \\*[pdf:look(\\*[pdf:hrefhex-D])]
 .      el .ds PDFHREF.DESC Unknown
 .      \}
 .   \" Apply border and colour specifications to the PDFMARK string
@@ -682,10 +722,11 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \" text positions.
 .   \"
 \#.   if dPDFHREF.COLOUR .defcolor pdf:href.colour rgb \\*[PDFHREF.COLOUR]
+.   ds pdf:curcol \\n[.m]
 .   nr pdf:bm.width \\w'\\*[PDFHREF.DESC]'
 .   nop \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
 .   device pdf: markstart \\n[rst] \\n[rsb] \\n[PDFHREF.LEADING] \\*[pdf:href.link]
-.   nop \&\\*[PDFHREF.DESC]\X'pdf: markend'\m[]\c
+.   nop \&\\*[PDFHREF.DESC]\X'pdf: markend'\m[\\*[pdf:curcol]]\c
 .   \"
 .   \" Clean up the temporary registers and strings, used to
 .   \" compute the "hot-spot" bounds, and format the reference,
@@ -742,7 +783,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" in any other PDF document, through "pdf*href-L.file".
 .\"
 .als pdf*href-L      pdf*href
-.ds  pdf*href-L.link /Dest /\\\\*[pdf:href-D]
+.ds  pdf*href-L.link /Dest /\\\\*[pdf:hrefhex-D]
 .ds  pdf*href-L.file /Action /GoToR \\\\*[pdf:href.files] \\*[pdf*href-L.link]
 .\"
 .\" "pdf*href-O" is the "official" handler for creating PDF

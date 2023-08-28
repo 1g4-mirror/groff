@@ -4918,7 +4918,7 @@ y\R'#DESCENDER \\n[.cdp]'
 .    ds $AUTHOR \\*[$AUTHOR_1]
 .    substring $AUTHORS 0 -2
 .    ds PDF_AUTHORS \\*[$AUTHORS]
-.    pdfmomclean PDF_AUTHORS
+.    if '\\*[.T]'ps' .pdfmomclean PDF_AUTHORS
 .    nop \!x X ps:exec [/Author (\\*[PDF_AUTHORS]) /DOCINFO pdfmark
 .END
 .
@@ -23452,13 +23452,13 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .          el .nr LEVEL_REQ \\n[CURRENT_LEVEL]
 .       \}
 .       ds PDF_TX \\$*
-.       pdfmomclean PDF_TX
 .       nr PDF_LEV (\\n[LEVEL_REQ]*\\n[#PDF_BOOKMARKS_OPEN])
 .       ie '\\*[.T]'ps' \{\
 .           if !'\\*[PDF_NM]'' \{\
 .              pdfhref M -N \\*[PDF_NM2] -- \\*[PDF_TX]
 .              if !dpdf:href.map .tm gropdf-info:href \\*[PDF_NM2] \\*[PDF_TX]
 .           \}
+.           pdfmomclean PDF_TX
 .           pdfbookmark \\n[PDF_LEV] \\*[PDF_TX]
 .       \}
 .       el .pdfbookmark \\*[PDF_NM] \\n[PDF_LEV] \\$*
@@ -23479,7 +23479,7 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 \#
 .MAC PDF_TITLE END
 .    ds pdftitle \\$*
-.    pdfmomclean pdftitle
+.    if '\\*[.T]'ps' .pdfmomclean pdftitle
 .    nop \!x X ps:exec [/Title (\\*[pdftitle]) /DOCINFO pdfmark
 .END
 \#
@@ -23552,8 +23552,10 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .    if '\\*[PDF_AST]'*' \{\
 .        chop PDF_TXT
 .        ie '\\*[.T]'pdf' \{\
-.           ie d pdf:look(\\*[PDF_NM]) \
-.               as PDF_TXT \&\\*[PDF_AST_Q]\\*[pdf:look(\\*[PDF_NM])]\\*[PDF_AST_Q]
+.           ds PDF_NM_HEX \\*[PDF_NM]
+.           stringhex PDF_NM_HEX
+.           ie d pdf:look(\\*[PDF_NM_HEX]) \
+.               as PDF_TXT \&\\*[PDF_AST_Q]\\*[pdf:look(\\*[PDF_NM_HEX])]\\*[PDF_AST_Q]
 .           el \{\
 .               as PDF_TXT Unknown
 .               if !rPDF_UNKNOWN .tm \
