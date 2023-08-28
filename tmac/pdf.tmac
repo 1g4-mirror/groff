@@ -184,10 +184,22 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \"
 .      ds pdf:href-T
 .      ds pdf:hrefhex-T
-.      while dpdf:href.opt\\$1 \{\
-.         pdf:href.opt\\$1 \\$@
-.         shift \\n[pdf:href.argc]
+.      length pdf:l \\$1
+.      ds pdf:char1 \\$1
+.      substring pdf:char1 0 0
+.      if !'\\*[pdf:char1]'-' .nr pdf:l 99
+.      while (\\n[pdf:l]<4) \{\
+.         ie dpdf:href.opt\\$1 \{\
+.            pdf:href.opt\\$1 \\$@
+.            shift \\n[pdf:href.argc]
+.            length pdf:l \\$1
+.            if '\\$1'--' .break
+.            ds pdf:char1 \\$1
+.            substring pdf:char1 0 0
+.            if !'\\*[pdf:char1]'-' .nr pdf:l 99
 .         \}
+.         el .break
+.      \}
 .      rr pdf:href.argc
 .   \"
 .   \" If we found "--" to mark the end of the options, discard it
@@ -558,12 +570,18 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" the "descriptive text" component of the argument list).
 .\"
 .length pdf:l \\$1
+.ds pdf:char1 \\$1
+.substring pdf:char1 0 0
+.if !'\\*[pdf:char1]'-' .nr pdf:l 99
 .while (\\n[pdf:l]<4) \{\
 .   ie dpdf:href.opt\\$1 \{\
 .      pdf:href.opt\\$1 \\$@
 .      shift \\n[pdf:href.argc]
 .      length pdf:l \\$1
 .      if '\\$1'--' .break
+.      ds pdf:char1 \\$1
+.      substring pdf:char1 0 0
+.      if !'\\*[pdf:char1]'-' .nr pdf:l 99
 .   \}
 .   el .break
 .\}
@@ -656,13 +674,22 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" options -- anything which is not recognised is assumed to start
 .\" the "link text" component of the argument list).
 .\"
-.length l \\$1
-.if \\n[l]<3 \{\
-.while dpdf:href.opt\\$1 \{\
-.   pdf:href.opt\\$1 \\$@
-.   shift \\n[pdf:href.argc]
+.length pdf:l \\$1
+.ds pdf:char1 \\$1
+.substring pdf:char1 0 0
+.if !'\\*[pdf:char1]'-' .nr pdf:l 99
+.while (\\n[pdf:l]<4) \{\
+.   ie dpdf:href.opt\\$1 \{\
+.      pdf:href.opt\\$1 \\$@
+.      shift \\n[pdf:href.argc]
+.      length pdf:l \\$1
+.      if '\\.$1'--' .break
+.      ds pdf:char1 \\$1
+.      substring pdf:char1 0 0
+.      if !'\\*[pdf:char1]'-' .nr pdf:l 99
 .   \}
-\}
+.   el .break
+.\}
 .\"
 .\" If we found "--", to mark the end of the options, then we should
 .\" discard it.

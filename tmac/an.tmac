@@ -1192,7 +1192,9 @@ contains unsupported escape sequence
 .      I \\$1
 .    el \{\
 .      an*cln an*page-ref-nm \\$1_\\$2
-.      ie d pdf:look(\\*[an*page-ref-nm]) .pdfhref L -D \\*[an*page-ref-nm] -A "\\$3" -- \fI\\$1\fP(\\$2)
+.      ds an*page-ref-nm-hex \\*[an*page-ref-nm]
+.      stringhex an*page-ref-nm-hex
+.      ie d pdf:look(\\*[an*page-ref-nm-hex]) .pdfhref L -D \\*[an*page-ref-nm] -A "\\$3" -- \fI\\$1\fP(\\$2)
 .      el .IR \\$1 (\\$2)\\$3
 .    \}
 .  \}
