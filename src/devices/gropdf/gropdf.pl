@@ -1499,6 +1499,7 @@ sub do_x
                     FixRect($annot->{DATA}->{Rect}); # Y origin to ll
                     FixPDFColour($annot->{DATA});
 		    $annot->{DATA}->{Dest}=UTFName($annot->{DATA}->{Dest}) if exists($annot->{DATA}->{Dest});
+		    $annot->{DATA}->{A}->{URI}=URIName($annot->{DATA}->{A}->{URI}) if exists($annot->{DATA}->{A}->{URI});
                     push(@PageAnnots,$annotno);
                 }
                 elsif ($pdfmark=~m/(.+) \/OUT\s*$/)
@@ -1966,7 +1967,20 @@ sub do_x
     }
 }
 
-sub utf16
+sub URIName
+{
+    my $s=shift;
+
+    $s=Clean($s);
+    $s=~s/\\\[u((?i)D[89AB]\p{AHex}{2})\] # High surrogate in range 0xD800–0xDBFF
+              \\\[u((?i)D[CDEF]\p{AHex}{2})\] #  Low surrogate in range 0xDC00–0xDFFF
+             /chr( ((hex($1) - 0xD800) * 0x400) + (hex($2) - 0xDC00) + 0x10000 )/xge;
+    $s=~s/\\\[u(\p{AHex}{4})]/chr hex $1/ge;
+
+    return(join '', map {(m/[-\w.~_]/)?chr($_):'%'.sprintf("%02X", $_)} unpack "C*", encode('utf8',$s));
+}
+
+sub Clean
 {
     my $p=shift;
 
@@ -1985,6 +1999,13 @@ sub utf16
     $p=~s/\\[FfgkMmnVY]$parclntyp//g;
 
     $p=~s/\\\((\w\w)/\\\[$1\]/g;        # convert \(xx to \[xx]
+
+    return $p;
+}
+
+sub utf16
+{
+    my $p=Clean(shift);
 
     $p=~s/\\\[(.*?)\]/FindChr($1,0)/eg;
     $p=~s/\\C($parcln)/FindChr($1,1)/eg;
@@ -2111,6 +2132,7 @@ sub PutHotSpot
     FixPDFColour($annot->{DATA});
     FixRect($annot->{DATA}->{Rect}); # Y origin to ll
     $annot->{DATA}->{Dest}=UTFName($annot->{DATA}->{Dest}) if exists($annot->{DATA}->{Dest});
+    $annot->{DATA}->{A}->{URI}=URIName($annot->{DATA}->{A}->{URI}) if exists($annot->{DATA}->{A});
     push(@PageAnnots,$annotno);
 }
 
@@ -2696,16 +2718,21 @@ sub nextwd
 
     if ($wd=~m/^(.*?)(<<|>>|(?:(?<!\\)\[|\]))(.*)/)
     {
-        if (defined($1) and length($1))
+        my ($p1,$p2,$p3)=($1,$2,$3);
+
+        if (defined($p1) and length($p1))
         {
-            unshift(@{$pdfwds},$3) if defined($3) and length($3);
-            unshift(@{$pdfwds},$2);
-            $wd=$1;
+            if (!($p2 eq ']' and $p1=~m/\[/))
+            {
+                unshift(@{$pdfwds},$p3) if defined($p3) and length($p3);
+                unshift(@{$pdfwds},$p2);
+                $wd=$p1;
+            }
         }
         else
         {
-            unshift(@{$pdfwds},$3) if defined($3) and length($3);
-            $wd=$2;
+            unshift(@{$pdfwds},$p3) if defined($p3) and length($p3);
+            $wd=$p2;
         }
     }
 
