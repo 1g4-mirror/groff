@@ -89,7 +89,7 @@ while (my $c=shift)
     }
     elsif ($c eq '-z')
     {
-	$dev=$c;
+	$zflg="$c -dPDF.EXPORT=1";
 	next;
     }
     elsif ($c eq '--roff')
