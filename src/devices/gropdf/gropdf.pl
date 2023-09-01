@@ -348,7 +348,7 @@ my $mark=undef;
 my $suspendmark=undef;
 my $boxmax=0;
 my %missing;    # fonts in download files which are not found/readable
-
+my @PageLabel;  # PageLabels
 
 
 my $n_flg=1;
@@ -862,11 +862,9 @@ foreach my $j (0..$#{$pages->{Kids}})
 {
     my $pg=GetObj($pages->{Kids}->[$j]);
 
-    if (exists($pg->{PageLabel}))
+    if (defined($PageLabel[$j]))
     {
-
-        push(@{$cat->{PageLabels}->{Nums}},$j,$pg->{PageLabel});
-        delete($pg->{PageLabel});
+        push(@{$cat->{PageLabels}->{Nums}},$j,$PageLabel[$j]);
     }
 }
 
@@ -1808,6 +1806,7 @@ sub do_x
                     else
                     {
                         ($curoutlev,$curoutlevno,$thislev)=(@{$outlines[$pginsert]});
+                        $curoutlevno--;
                     }
                 }
             }
@@ -1925,14 +1924,14 @@ sub do_x
                 {
                     $S=substr($xprm[2],0,1) if $xprm[2];
                     $P=$xprm[3];
-                    $St=$xprm[4] if $xprm[4];
+                    $St=$xprm[4] if length($xprm[4]);
 
-                    if (!defined($S) and !defined($P))
+                    if (!defined($S) and !length($P))
                     {
                         $P=' ';
                     }
 
-                    if ($St and $St!~m/^\d+$/)
+                    if ($St and $St!~m/^-?\d+$/)
                     {
                         Warn("Page numbering start '$St' must be numeric");
                         return;
@@ -1942,10 +1941,11 @@ sub do_x
 
                     my $label={};
                     $label->{S} = "/$S" if $S;
-                    $label->{P} = "($P)" if $P;
-                    $label->{St} = $St if $St;
+                    $label->{P} = "($P)" if length($P);
+                    $label->{St} = $St if length($St);
 
-                    $cpage->{PageLabel}=$label;
+                    $#PageLabel=$pginsert if $pginsert > $#PageLabel;
+                    splice(@PageLabel,$pginsert,0,$label);
                 }
             }
 
@@ -3413,11 +3413,11 @@ sub do_p
 {
     my $trans='BLOCK';
 
-            $trans='PAGE' if $firstpause;
-            NewPage($trans);
-            @XOstream=();
-            @PageAnnots=();
-            $firstpause=1;
+    $trans='PAGE' if $firstpause;
+    NewPage($trans);
+    @XOstream=();
+    @PageAnnots=();
+    $firstpause=1;
 }
 
 sub FixTrans
