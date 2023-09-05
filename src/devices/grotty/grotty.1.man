@@ -135,10 +135,9 @@ It writes to the standard output stream.
 .P
 By default,
 .I grotty
-emits SGR escape sequences
-(from ISO\~6429,
-popularly called \[lq]ANSI escapes\[rq])
-to change text attributes
+uses
+.MR terminfo 3
+capabilities to change text attributes
 (bold,
 italic,
 underline,
@@ -168,6 +167,11 @@ which is dependent on the settings of the terminal.
 .
 OSC\~8 hyperlinks are produced for these devices.
 .
+If the terminal description provides no way of changing the text
+attributes but does declare that overstriking characters is possible,
+.I grotty
+will use the legacy output format.
+.
 .
 .P
 In keeping with long-standing practice and the rarity of terminals
@@ -180,17 +184,19 @@ option below.
 .
 .
 .\" ====================================================================
-.SS "SGR and OSC support in pagers"
+.SS "Control character support in pagers"
 .\" ====================================================================
 .
 When paging
 .IR grotty 's
 output with
 .MR less 1 ,
-the latter program must be instructed to pass SGR and OSC sequences
+the latter program must be instructed to pass control characters
 through to the device;
 its
-.B \-R
+.\" TODO: using less -r means putting untrusted input on the terminal;
+.\" ponder this
+.B \-r
 option is one way to achieve this
 .RI ( less
 version 566 or later is required for OSC\~8 support).
@@ -220,7 +226,7 @@ and
 .I nroff
 were first developed but which are no longer in wide use.
 .
-SGR escape sequences are not emitted;
+Terminfo capability strings are not emitted;
 bold,
 italic,
 and underlining character attributes are thus not manipulated.
@@ -428,7 +434,7 @@ Use
 legacy output format
 (see subsection \[lq]Legacy output format\[rq] above).
 .
-SGR and OSC escape sequences are not emitted.
+Terminfo capability strings and OSC escape sequences are not emitted.
 .
 .
 .TP
@@ -487,7 +493,8 @@ or
 .B \-h
 Use literal horizontal tab characters in the output.
 .
-Tabs are assumed to be set every 8 columns.
+Unless the terminal description says otherwise,
+tabs are assumed to be set every 8 columns.
 .
 .
 .TP
@@ -496,7 +503,7 @@ Render oblique-styled fonts
 .RB ( I
 and
 .BR BI )
-with the SGR attribute for italic text
+with the terminfo capability for italic text
 rather than underlined text.
 .
 Many terminals don't support this attribute;
@@ -508,6 +515,8 @@ does.
 Ignored if
 .B \-c
 is also specified.
+.
+Disables the overstriking fallback for hardcopy terminals.
 .
 .
 .TP
@@ -523,7 +532,7 @@ Render oblique-styled fonts
 .RB ( I
 and
 .BR BI )
-with the SGR attribute for reverse video text
+with the terminfo capability for reverse video text
 rather than underlined text.
 .
 Ignored if
@@ -567,6 +576,13 @@ legacy output format is used just as if the
 .B \-c
 option were specified;
 see subsection \[lq]Legacy output format\[rq] above.
+.
+.
+.TP
+.I TERM
+The terminal type interpreted by the
+.MR terminfo 3
+library.
 .
 .
 .br

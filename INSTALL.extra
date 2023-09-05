@@ -128,6 +128,9 @@ requires the 'pkg-config' program to be installed on your system, as
 well as the library's C header files--on a package-based host system,
 this can mean installing uchardet's '-dev' or '-devel' package.
 
+The 'grotty' program depends on a Curses library, which is specified
+by X/Open Curses.
+
 URW fonts
 ---------
 

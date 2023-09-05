@@ -110,6 +110,16 @@ o The s (ms) macro package now sets the vertical spacing register
   size of 20 points, the vertical spacing now defaults to 24 points
   rather than 22.
 
+Output drivers
+--------------
+
+grotty
+------
+
+o The terminfo library is now used for applying text attributes (like
+  italic, bold, and colors).  You now need Curses to run grotty.  The
+  legacy overstriking output format remains.
+
 Miscellaneous
 -------------
 
