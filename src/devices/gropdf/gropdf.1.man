@@ -9,7 +9,7 @@ output driver for Portable Document Format
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 2011-2022 Free Software Foundation, Inc.
+.\" Copyright (C) 2011-2023 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -388,8 +388,11 @@ is the foundry name or blank for the default foundry.
 is the PostScript name of the font,
 and
 .I filename
-is the name of the file containing the font;
-lines beginning with
+is the name of the file containing the font.
+.
+It can also contain a pathname to the font.
+.
+Any lines beginning with
 .B #
 and blank lines are ignored;
 fields must be separated by tabs
@@ -400,7 +403,8 @@ allowed);
 is searched for using the same mechanism that is used
 for
 .I groff
-font metric files.
+font metric files,
+unless a path is also present.
 .
 The
 .I download
