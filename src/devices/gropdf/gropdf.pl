@@ -35,6 +35,8 @@ use constant
     MINOR               => 3,
     MAJOR               => 4,
     UNICODE             => 5,
+    RST                 => 6,
+    RSB                 => 7,
 
     CHR                 => 0,
     XPOS                => 1,
@@ -3204,7 +3206,7 @@ sub LoadFont
             $r[0]='u0020' if $r[3] == 32;
             $r[0]="u00".hex($r[3]) if $r[0] eq '---';
             $r[4]=$r[0] if !defined($r[4]);
-            $fnt{NAM}->{$r[0]}=[$p[0],$r[3],'/'.$r[4],undef,undef,$r[5]];
+            $fnt{NAM}->{$r[0]}=[$p[0],$r[3],'/'.$r[4],undef,undef,$r[5],$p[1]||0,$p[2]||0];
             $fnt{NO}->[$r[3]]=$r[0];
             $lastnm=$r[0];
             $lastchr=$r[3] if $r[3] > $lastchr;
@@ -3232,7 +3234,7 @@ sub LoadFont
     $fnt{ascent}=$ascent;
     $fnt{capheight}=$capheight;
     $fnt{lastchr}=$lastchr;
-    $fnt{NAM}->{''}=[0,-1,'/.notdef',-1,0];
+    $fnt{NAM}->{''}=[0,-1,'/.notdef',-1,0,0,0];
     $slant=-$fnt{'slant'} if exists($fnt{'slant'});
     $fnt{slant}=$slant;
     $fnt{nospace}=(!defined($fnt{NAM}->{u0020}->[PSNAME]) or $fnt{NAM}->{u0020}->[PSNAME] ne '/space' or !exists($fnt{'spacewidth'}))?1:0;

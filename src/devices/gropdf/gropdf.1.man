@@ -393,8 +393,9 @@ is the foundry name or blank for the default foundry.
 is the PostScript name of the font,
 and
 .I filename
-is the name of the file containing the font;
-lines beginning with
+is the name of the file containing the font.
+It can also contain a pathname to the font.
+Any lines beginning with
 .B #
 and blank lines are ignored;
 fields must be separated by tabs
@@ -405,7 +406,7 @@ allowed);
 is searched for using the same mechanism that is used
 for
 .I groff
-font metric files.
+font metric files, unless a path is also present.
 .
 The
 .I download
