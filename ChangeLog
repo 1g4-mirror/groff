@@ -1,3 +1,33 @@
+2024-01-03  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Add font subsetting and Type 1 font parser.
+
+	* src/devices/gropdf/gropdf.pl: There are two main areas of
+	change.  The first is rectifying my design mistake in the
+	original gropdf. It used the "t" command from groff as the
+	primary command as a series of input characters which would be
+	converted to postscript glyphs, all other text commands (for
+	example "c") were converted back to their input character and
+	treated as a single character "t" command.  I was focussed on
+	the groff font rather than the postscript font.
+
+	While thinking about font subsetting it became clear it made
+	more sense to convert all input to postscript glyph names
+	immediately, and use them as the "common currency" rather than
+	focus on words.  This particularly makes sense when dealing with
+	non-latin input which has been processed with preconv.  It is
+	also makes it much more natural when dealing with font
+	subsetting.  Previously this was not necessary because the whole
+	font was embedded by gropdf.
+
+	The second major change is the addition of a type 1 font parser
+	and code to generate a font which only contains the glyphs
+	required by the document being processed.  This is the area
+	which needs the most testing.  I have tested with dozens of
+	fonts that this parser is robust enough, but there are thousands
+	of fonts out there.  It seems to be happy with fonts produced by
+	fontforge, which is promising.
+
 2024-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/tbl.1.man (roff interface): Fix incorrect
