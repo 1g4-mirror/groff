@@ -1,3 +1,10 @@
+2024-01-03  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Add `pdfpagenumbering` macro.
+
+	* tmac/pdf.tmac: Do it.
+	* src/devices/gropdf/gropdf.1.man: Document it.
+
 2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Increment Perl dependency from 5.6.1.  gropdf requires 5.8.
