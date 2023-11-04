@@ -1386,62 +1386,86 @@ see
 .MR groff_tmac @MAN5EXT@ .
 .RE
 .
+.
 .TP
 .BI "\[rs]X\[aq]pdf: pagenumbering\~" "type prefix start" \[aq]
-This is used to control the page numbering shown in the pdf reader\[aq]s
-outline pane which contains your bookmarks. Normally the page numbers
-shown against the bookmark is the physical page number in the file, But
-this may not match the different page number styles within the document.
 .RS
-.LP
-In a single document there may be a cover sheet (which has no page
-number), a TOC (which uses lower case roman numbers), and the main body
-of the document (which has decimal page numbers). Use this command
-somewhere on the page where the numbering system changes, once changed
-the numbers will automatically increment until the number system changes
-again, so don\[aq]t call for every page, just when you want to change
-the numbering.
-.LP
-The parameters are:-
-.TP
+Control the page numbering shown in a PDF reader's outline
+(which also contains bookmarks).
+.
+Normally,
+the page number associated with each bookmark is its sequence number in
+the file,
+but this might not match the desired numbering scheme.
+.
+A document may bear a cover sheet
+(which has no page number),
+front matter
+(possibly including a table of contents)
+that uses lowercase roman numerals,
+the main matter,
+which uses arabic numerals.
+.
+Place this command where the numbering system is to change.
+.
+It then applies until changed again.
+.
+.
+.P
+.TP 8n \" "prefix" + 2n
 .I type
-This specifies the type of numbering to use for this page onward. It
+specifies the numbering system to use. It
 should be one of
-.RB \[lq] "Decimal | Roman | roman | Alpha | alpha" \[rq].
-Only the initial letter is relevant. The alphabetic number systems use
-A-Z (then AA-AZ ... ZA-ZZ).
-The
+.RB \[lq] Decimal \[rq],
+.RB \[lq] Roman \[rq],
+.RB \[lq] roman \[rq],
+.RB \[lq] Alpha \[rq],
+or
+.RB \[lq] alpha \[rq].
+.
+This parameter may be abbreviated to the first letter,
+whose lettercase determines that used for the numbers where applicable.
+.
+The ordering used by the alphabetic numbering systems is
+A-Z \&.\|.\|.\& AA-AZ \&.\|.\|.\& ZA-ZZ.
+.
 .I type
-may also be
-.RB \[lq] . \[rq]
-which means no numbering system is chosen, but you may still provide a
-.I prefix
-to have a custom name (such as "Cover");
+can also be
+.RB \[lq] .\& \[rq],
+which selects no numbering system;
+you may still provide a
+.I prefix.
+.
+.
 .TP
 .I prefix
-Provides a string to insert before the number.
-If the document has an Appendix with page numbers in the form
-.RI A- n ,
-the
+specifies text to precede the page number.
+.
+For example,
+to number the pages of an appendix
+\[lq]A-1\[rq],
+\[lq]A-2\[rq],
+and so forth,
+use a
 .I prefix
-would be set to \[lq]A-\[rq] and the
+of
+.RB \[lq] A- \[rq]
+and a
 .I type
-would be
-.BR Decimal .
+of
+.RB \[lq] Decimal \[rq].
 .
 .
 .TP
 .I start
-Gives the start number for the incrementing page numbers in the outline
-pane. If no value is given for
-.I start
-it will default to 1, which is usually correct.
-.LP
-The convenience macro for this command is \[lq]
-.BI ".pdfpagenumbering " "type prefix start"
-\[rq] using '.' for preceding missing values, or just \[lq]
-.BR .pdfpagenumbering \[rq]
-on its own to have no page numbers shown in the outline pane.
+determines the page number.
+.
+It defaults to 1.
+.
+.
+.P
+The convenience macro for this escape sequence is
+.BR \%.pdfpagenumbering .
 .RE
 .
 .
