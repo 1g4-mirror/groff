@@ -602,7 +602,7 @@ contains unsupported escape sequence
 .  PT
 .  ev
 .  ns
-.  pdfmarkrestart
+.  if '\\*[.T]'pdf' .pdfmarkrestart
 ..
 .
 .\" Schedule a page break when the next output line is written (not
@@ -614,7 +614,7 @@ contains unsupported escape sequence
 .\" Prepare the footer for a page of the document.
 .de1 an-footer
 .  if \\n[an-suppress-header-and-footer] .return
-.  pdfmarksuspend
+.  if '\\*[.T]'pdf' .pdfmarksuspend
 .  ev an*env-header-and-footer
 .  ie \\n[cR] \
 .    ds an*ofoot "\\*[an-pageref]\"
