@@ -3140,7 +3140,7 @@ sub LoadFont
     my $fontnm=shift;
     my $ofontnm=$fontnm;
 
-    return $fontlst{$fontno}->{OBJ} if (exists($fontlst{$fontno}));
+    return $fontlst{$fontno}->{OBJ} if (exists($fontlst{$fontno}) and $fontnm eq $fontlst{$fontno}->{FNT}->{name}) ;
 
     my $f;
     OpenFile(\$f,$fontdir,"$fontnm");
