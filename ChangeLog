@@ -1,3 +1,19 @@
+2023-11-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Fix processing of catenated dit files (-Z).
+
+	Normally it is safe to pass concatenated dit files to gropdf,
+	typically this would be a separate source file which produces a
+	custom cover and a different source for the body (different
+	macro set?). Problem occurs if one of the dits uses the same
+	fontno for a different font. Normally troff allocates TR to #5,
+	but if one of the dits has been run with the flag "U-T" then
+	U-TR is allocated to #5.
+
+	* src/devices/gropdf/gropdf.pl (LoadFont): Check if "x font #
+	name" has the same number AND name as a previously registered
+	font, otherwise reload the font.
+
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grotty/tty.cpp (tty_printer::end_page): Add
