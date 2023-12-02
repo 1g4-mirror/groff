@@ -6364,12 +6364,6 @@ static void set_font_specific_special_fonts()
 
 static void set_special_fonts()
 {
-  if (!has_arg()) {
-    warning(WARN_MISSING, "global special font configuration request"
-	    " expects one or more arguments");
-    skip_line();
-    return;
-  }
   read_special_fonts(&global_special_fonts);
   skip_line();
 }

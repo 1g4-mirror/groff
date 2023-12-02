@@ -1,3 +1,12 @@
+2023-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (set_special_fonts): Revert part of
+	commit 44db6efc01, 3 November.  Stop throwing diagnostic and
+	ignoring request if given no arguments; that's how you clear the
+	global list of fonts designated as special by request (contrast
+	with those that declare themselves as special in their
+	description files).
+
 2023-12-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #64957 (`device`, `output` broken).
