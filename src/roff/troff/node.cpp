@@ -6248,8 +6248,8 @@ static int underline_fontno = 2;
 static void select_underline_font()
 {
   if (!has_arg()) {
-    warning(WARN_MISSING, "underline font selection request expects"
-	    " arguments");
+    warning(WARN_MISSING, "underline font selection request expects an"
+	    " argument");
     skip_line();
     return;
   }
@@ -6349,7 +6349,7 @@ static void set_font_specific_special_fonts()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font-specific special font configuration"
-	    " request expects one or more arguments");
+	    " request expects at least one argument");
     skip_line();
     return;
   }

@@ -1,5 +1,10 @@
 2023-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (select_underline_font)
+	(set_font_specific_special_fonts): Tweak diagnostic messages.
+
+2023-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (set_special_fonts): Revert part of
 	commit 44db6efc01, 3 November.  Stop throwing diagnostic and
 	ignoring request if given no arguments; that's how you clear the
