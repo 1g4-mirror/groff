@@ -14442,7 +14442,7 @@ As @samp{\D'P @r{@dots{}}'}, but the polygon is filled.
 
 The following macro is like the @samp{\D'l'} example, but shades the
 box.  We draw the box before writing the text because colors in GNU
-@code{troff} have no transparency; in other opposite order, the filled
+@code{troff} have no transparency; in the opposite order, the filled
 polygon would occlude the text.
 
 @Example
