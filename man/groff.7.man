@@ -8024,6 +8024,8 @@ defined names\[em]macros,
 strings,
 and
 .RB diversions\[em]( .pm );
+hyphenation exceptions
+.RB ( .phw ),
 environments
 .RB ( .pev ),
 registers
