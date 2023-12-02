@@ -1,5 +1,14 @@
 2023-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Drop unused function parameter.
+
+	* src/include/lib.h: Drop `want_unlink` parameter from
+	`xtmpfile` declaration.
+	* src/libs/libgroff/tmpfile.cpp (xtmpfile): Drop same from
+	definition, along with useless (always true) conditional test.
+
+2023-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (select_underline_font)
 	(set_font_specific_special_fonts): Tweak diagnostic messages.
 
