@@ -12,8 +12,8 @@
 	* src/roff/troff/input.cpp (device_request, output_request):
 	Drop call of `has_arg()` in favor of `input_stack::peek()`.
 	Manually discard space characters until reaching something else;
-	if that is a newline or EOF, bail out of request processing.
-	Otherwise, proceed with warning diagnostic as before.
+	if that is a newline or EOF, throw warning diagnostic as before.
+	Otherwise, proceed with request processing.
 
 2023-12-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -29,7 +29,7 @@
 	* src/roff/troff/node.cpp (mount_font_at_position)
 	(associate_style_with_font_position, select_underline_font)
 	(define_font_specific_character, remove_font_specific_character)
-	(configure_track_kerning, (constantly_space_font): Throw warning
+	(configure_track_kerning, constantly_space_font): Throw warning
 	in category `missing` if given no arguments.
 
 	(set_font_specific_special_fonts, set_special_fonts): Demote
