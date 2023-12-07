@@ -6071,7 +6071,6 @@ static void mount_font_at_position()
     if (n < 0)
       error("font mounting position %1 is negative", n);
     else {
-      // TODO: Make argument optional to clear the mounting position?
       symbol internal_name = get_name(true /* required */);
       if (!internal_name.is_null()) {
 	symbol external_name = get_long_name();
@@ -6190,7 +6189,6 @@ static void associate_style_with_font_position()
     if (n < 0)
       error("font mounting position %1 is negative", n);
     else {
-      // TODO: Make argument optional to clear the mounting position?
       if (!has_arg())
 	warning(WARN_MISSING, "abstract style configuration request"
 		" expects a second argument");
