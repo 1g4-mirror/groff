@@ -1,5 +1,13 @@
 2023-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (nop_request, do_if_request)
+	(if_else_request, if_request, else_request, while_request)
+	(while_break_request, while_continue_request): Define functions
+	as `static`; they require no visibility outside this translation
+	unit.
+
+2023-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (if_else_request, if_request): Throw
 	warning in category `missing` if given no arguments.
 

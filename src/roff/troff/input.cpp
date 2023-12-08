@@ -5898,7 +5898,7 @@ static void begin_alternative()
     tok.next();
 }
 
-void nop_request()
+static void nop_request()
 {
   while (tok.is_space())
     tok.next();
@@ -5906,7 +5906,7 @@ void nop_request()
 
 static int_stack if_else_stack;
 
-int do_if_request()
+static int do_if_request()
 {
   int invert = 0;
   while (tok.is_space())
@@ -6057,7 +6057,7 @@ int do_if_request()
   return result;
 }
 
-void if_else_request()
+static void if_else_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "if-else request expects arguments");
@@ -6067,7 +6067,7 @@ void if_else_request()
   if_else_stack.push(do_if_request());
 }
 
-void if_request()
+static void if_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "if-then request expects arguments");
@@ -6077,7 +6077,7 @@ void if_request()
   do_if_request();
 }
 
-void else_request()
+static void else_request()
 {
   if (if_else_stack.is_empty()) {
     warning(WARN_EL, "unbalanced 'el' request");
@@ -6094,7 +6094,7 @@ void else_request()
 static int while_depth = 0;
 static int while_break_flag = 0;
 
-void while_request()
+static void while_request()
 {
   // We can't use `has_arg()` here.  XXX: Figure out why.
   macro mac;
@@ -6155,7 +6155,7 @@ void while_request()
   tok.next();
 }
 
-void while_break_request()
+static void while_break_request()
 {
   if (!while_depth) {
     error("cannot 'break' when not in a 'while' loop");
@@ -6169,7 +6169,7 @@ void while_break_request()
   }
 }
 
-void while_continue_request()
+static void while_continue_request()
 {
   if (!while_depth) {
     error("cannot 'continue' when not in a 'while' loop");
