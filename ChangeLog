@@ -1,5 +1,18 @@
 2023-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (do_hyphenation_patterns_file):
+	Rename...
+	(read_hyphenation_patterns_from_file): ...to this.
+	(hyphenation_patterns_file, hyphenation_patterns_file_append):
+	Update call sites.
+	(hyphenation_patterns_file): Rename...
+	(load_hyphenation_patterns_from_file): ...to this.
+	(hyphenation_patterns_file_append): ...and this...
+	(append_hyphenation_patterns_from_file): ... to this.
+	(init_hyphen_requests): Update call sites.
+
+2023-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (select_hyphenation_language): Demote
 	missing argument diagnostic from error to warning.
 	(add_hyphenation_exceptions, hyphenation_patterns_file)
