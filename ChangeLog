@@ -1,3 +1,41 @@
+2023-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Manage config.h more consistently.
+
+	* src/roff/troff/env.cpp: Ensure that we include config.h (if
+	necessary) _before_ C standard library header math.h.
+
+	* src/devices/xditview/Dvi.c:
+	* src/devices/xditview/draw.c:
+	* src/devices/xditview/font.c:
+	* src/devices/xditview/lex.c:
+	* src/devices/xditview/page.c:
+	* src/devices/xditview/parse.c:
+	* src/libs/libbib/map.c:
+	* src/libs/libgroff/change_lf.cpp:
+	* src/libs/libgroff/cmap.cpp:
+	* src/libs/libgroff/cset.cpp:
+	* src/libs/libgroff/fmod.c:
+	* src/libs/libgroff/geometry.cpp:
+	* src/libs/libgroff/getcwd.c:
+	* src/libs/libgroff/localcharset.c:
+	* src/libs/libgroff/prime.cpp:
+	* src/libs/libgroff/ptable.cpp:
+	* src/libs/libgroff/quotearg.c:
+	* src/libs/libgroff/spawnvp.c:
+	* src/libs/libxutil/DviChar.c:
+	* src/libs/libxutil/XFontName.c:
+	* src/libs/libxutil/xmalloc.c:
+	* src/preproc/eqn/eqn.ypp:
+	* src/preproc/grn/hdb.cpp:
+	* src/preproc/grn/hpoint.cpp:
+	* src/roff/troff/env.cpp:
+	* src/utils/indxbib/signal.c: Bracket inclusion of config.h with
+	preprocessor test of `HAVE_CONFIG_H` where absent.  Use
+	angle bracket rather than double-quote notation for the
+	preprocessor file inclusion.  See
+	<https://savannah.gnu.org/bugs/?60035>.
+
 2023-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (do_hyphenation_patterns_file):

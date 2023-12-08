@@ -31,7 +31,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "charinfo.h"
 #include "macropath.h"
 #include "input.h"
-#include <math.h>
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <math.h> // ceil()
 
 symbol default_family("T");
 
