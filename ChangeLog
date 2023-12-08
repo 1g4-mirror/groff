@@ -1,3 +1,11 @@
+2023-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (select_hyphenation_language): Demote
+	missing argument diagnostic from error to warning.
+	(add_hyphenation_exceptions, hyphenation_patterns_file)
+	(hyphenation_patterns_file_append): Throw warning in category
+	`missing` if given no arguments.
+
 2023-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Drop unused function parameter.

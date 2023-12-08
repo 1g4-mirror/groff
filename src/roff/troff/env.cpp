@@ -3599,7 +3599,8 @@ hyphenation_language *current_language = 0;
 static void select_hyphenation_language()
 {
   if (!has_arg()) {
-    error("hyphenation language selection request requires argument");
+    warning(WARN_MISSING, "hyphenation language selection request"
+	    " expects argument");
     skip_line();
     return;
   }
@@ -3619,6 +3620,12 @@ const int WORD_MAX = 256;	// we use unsigned char for offsets in
 
 static void add_hyphenation_exceptions()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "hyphenation exception request expects one or"
+	    " more arguments");
+    skip_line();
+    return;
+  }
   if (!current_language) {
     error("cannot add hyphenation exceptions when no hyphenation"
 	  " language is set");
@@ -4160,6 +4167,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
 
 static void do_hyphenation_patterns_file(bool append)
 {
+  // TODO: Read a file name, not a groff identifier.
   symbol name = get_long_name(true /* required */);
   if (!name.is_null()) {
     if (!current_language)
@@ -4174,11 +4182,23 @@ static void do_hyphenation_patterns_file(bool append)
 
 static void hyphenation_patterns_file()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "hyphenation pattern load request expects"
+	    " argument");
+    skip_line();
+    return;
+  }
   do_hyphenation_patterns_file(false /* append */);
 }
 
 static void hyphenation_patterns_file_append()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "hyphenation pattern appendment request"
+	    " expects argument");
+    skip_line();
+    return;
+  }
   do_hyphenation_patterns_file(true /* append */);
 }
 
