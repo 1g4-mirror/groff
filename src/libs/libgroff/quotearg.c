@@ -212,4 +212,8 @@ purge_quoted_args(char **argv)
     }
 }
 
-/* quotearg.c: end of file */
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

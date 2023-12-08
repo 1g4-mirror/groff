@@ -579,3 +579,9 @@ locale_charset (void)
 
   return codeset;
 }
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

@@ -117,4 +117,8 @@ spawnvp_wrapper(int mode, char *path, char **argv)
 
 #endif  /* __MSDOS__ || _WIN32 */
 
-/* spawnvp.c: end of file */
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

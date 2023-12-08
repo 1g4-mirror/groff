@@ -28,3 +28,9 @@ double fmod(x, y)
   double quot = x/y;
   return x - (quot < 0.0 ? ceil(quot) : floor(quot)) * y;
 }
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

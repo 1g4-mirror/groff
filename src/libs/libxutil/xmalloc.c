@@ -26,5 +26,5 @@ char *xmalloc(int n);
 
 char *xmalloc(int n)
 {
-    return XtMalloc(n);
+	return XtMalloc(n);
 }

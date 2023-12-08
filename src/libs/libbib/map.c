@@ -1,4 +1,4 @@
-/* Copyright (C) 1989- 2014  Free Software Foundation, Inc.
+/* Copyright (C) 1989-2014  Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -86,3 +86,9 @@ int unmap(char *p, int len)
 #endif
 
 #endif /* not HAVE_MMAP */
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:
