@@ -6059,11 +6059,21 @@ int do_if_request()
 
 void if_else_request()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "if-else request expects arguments");
+    skip_line();
+    return;
+  }
   if_else_stack.push(do_if_request());
 }
 
 void if_request()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "if-then request expects arguments");
+    skip_line();
+    return;
+  }
   do_if_request();
 }
 
@@ -6086,6 +6096,7 @@ static int while_break_flag = 0;
 
 void while_request()
 {
+  // We can't use `has_arg()` here.  XXX: Figure out why.
   macro mac;
   int escaped = 0;
   int level = 0;

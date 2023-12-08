@@ -1,5 +1,10 @@
 2023-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (if_else_request, if_request): Throw
+	warning in category `missing` if given no arguments.
+
+2023-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Manage config.h more consistently.
 
 	* src/roff/troff/env.cpp: Ensure that we include config.h (if
