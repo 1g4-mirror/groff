@@ -3980,7 +3980,14 @@ sub PlotArcSegment
     my @mat=($cos,$sin,-$sin,$cos,0,0);
     my $lw=$lwidth/$r;
 
-    $stream.="q $r 0 0 $r $transx $transy cm ".join(' ',@mat)." cm $lw w $x0 $y0 m $x1 $y1 $x2 $y2 $x3 $y3 c S Q\n";
+    if ($frot)
+    {
+	$stream.="q $r 0 0 $r $transy $transx cm ".join(' ',@mat)." cm $lw w $y0 $x0 m $y1 $x1 $y2 $x2 $y3 $x3 c S Q\n";
+    }
+    else
+    {
+	$stream.="q $r 0 0 $r $transx $transy cm ".join(' ',@mat)." cm $lw w $x0 $y0 m $x1 $y1 $x2 $y2 $x3 $y3 c S Q\n";
+    }
 }
 
 sub DrawCircle
