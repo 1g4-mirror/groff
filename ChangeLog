@@ -1,3 +1,10 @@
+2023-12-10  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Fix arc drawing when `-l` option used.
+
+	* src/devices/gropdf/gropdf.pl (PlotArcSegement): When landscape
+	flag `-l` is given, coordinates for arcs need rotation.
+
 2023-11-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Fix processing of catenated dit files (-Z).
