@@ -1,3 +1,23 @@
+2023-12-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/env.cpp (environment::do_break)
+	(do_break_request): Boolify parameter and rename it to
+	`want_adjustment`.  In the future, adjustment might not only
+	"spread", but "squeeze" as well.
+	(break_request): Rename this...
+	(break_without_adjustment): ...to this, and declare it `static`.
+	Pass Boolean literal to `do_break_request`.
+	(break_spread_request): Rename this...
+	(break_with_adjustment): ...to this, and declare it `static`.
+	Pass Boolean literal to `do_break_request`.
+	(init_env_requests): Update "call" sites of renamed functions.
+	* src/roff/troff/env.cpp (class environment): Demote
+	`do_break`'s parameter from `int` to `bool`, and drop parameter
+	names from prototype, in keeping with the Stroustrup-style C++
+	used in most of groff.
+
 2023-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (nop_request, do_if_request)
