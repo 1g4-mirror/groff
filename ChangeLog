@@ -130,6 +130,8 @@
 	if that is a newline or EOF, throw warning diagnostic as before.
 	Otherwise, proceed with request processing.
 
+	Fixes <https://savannah.gnu.org/bugs/?64957>.
+
 2023-12-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/groff.texi: Fix typos.
