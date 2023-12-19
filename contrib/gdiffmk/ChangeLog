@@ -1,3 +1,10 @@
+2023-12-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* gdiffmk.sh: Use only one space after {command name, colon}
+	sequence in diagnostic messages, not two.  This aligns better
+	with the GNU Coding Standards.
+	* tests/baseline.7: Update test expectations.
+
 2023-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tests/runtests.sh: Stop endorsing shebang line space myth.

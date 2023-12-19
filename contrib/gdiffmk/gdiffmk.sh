@@ -25,11 +25,11 @@ CMD=`basename $0`
 Usage () {
 	if test $# -gt 0
 	then
-		echo >&2 "${CMD}:  $@"
+		echo >&2 "${CMD}: $@"
 	fi
 	echo >&2 "\
 
-Usage:  ${CMD} [ OPTIONS ] FILE1 FILE2 [ OUTPUT ]
+usage: ${CMD} [ OPTIONS ] FILE1 FILE2 [ OUTPUT ]
 Place difference marks into the new version of a groff/nroff/troff document.
 FILE1 and FILE2 are compared, using 'diff', and FILE2 is output with
 groff '.mc' requests added to indicate how it is different from FILE1.
@@ -70,7 +70,7 @@ Exit () {
 	shift
 	for arg
 	do
-		echo >&2 "${CMD}:  $1"
+		echo >&2 "${CMD}: $1"
 		shift
 	done
 	exit ${exitcode}
@@ -232,7 +232,7 @@ do
 		break
 		;;
 	-*)
-		BADOPTION="${CMD}:  invalid option '$1'"
+		BADOPTION="${CMD}: invalid option '$1'"
 		;;
 	*)
 		break
