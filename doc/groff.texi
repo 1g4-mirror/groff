@@ -16113,16 +16113,16 @@ suffix or @file{tmac.} prefix to locate @var{file}.
 @cindex copy mode, and @code{trf} request
 @cindex mode, copy, and @code{trf} request
 Transparently output the contents of @var{file}.  Each line is output as
-if it were preceded by @code{\!}; however, the lines are @emph{not}
-subject to copy mode interpretation.  If the file does not end with a
-newline, @code{trf} adds one.  Both requests cause a break.
+if preceded by @code{\!}, but is not read in copy mode.  If @var{file}
+does not end with a newline, @code{trf} appends one.  Both requests
+break the line before reading @var{file}, unless invoked with the
+no-break control character.
 
 When used in a diversion, these requests embed a node (@pxref{Gtroff
 Internals}) in it that, when interpolated, causes the contents of
-@var{file} to be transparently copied to the output.  In @acronym{AT&T}
-@code{troff}, the contents of @var{file} are immediately copied to the
-output regardless of whether there is a current diversion; this
-behaviour is so anomalous that it must be considered a bug.
+@var{file} to be copied to the output.  In @acronym{AT&T} @code{troff},
+@code{cf} does so even if a diversion is in use; this behavior is so
+anomalous that it must be considered a bug.
 
 @cindex @code{trf} request, and invalid characters
 @cindex characters, invalid for @code{trf} request
