@@ -37,10 +37,6 @@ General Problems
 
 Some portability issues are known to affect groff's gdiffmk utility.
 
-- A defect in GNU diffutils 3.9 (January 2023) causes gdiffmk to
-  malfunction and its automated test to fail.  See
-  <https://debbugs.gnu.org/db/61/61193.html>.
-
 - gdiffmk does not work with BusyBox diff (which does not implement GNU
   diff's "-D" option).
 
