@@ -119,7 +119,8 @@ WouldClobber () {
 	esac
 
 	# BASH_PROG is set to /bin/sh if bash was not found
-	if test "$HAVE_TEST_EF_OPTION" = "no" -a "$BASH_PROG" = "/bin/sh"
+	if test "$HAVE_TEST_EF_OPTION" = "no" \
+		&& test "$BASH_PROG" = "/bin/sh"
 	then
 		Exit 3 \
 		"Your shell does support test -ef, [OUTPUT] can only be the" \
@@ -246,12 +247,12 @@ then
 	Usage "${BADOPTION}"
 fi
 
-if test $# -lt 2  -o  $# -gt 3
+if test $# -lt 2 || test $# -gt 3
 then
 	Usage "Incorrect number of arguments."
 fi
 
-if test "1$1" = "1-"  -a  "2$2" = "2-"
+if test "1$1" = "1-" && test "2$2" = "2-"
 then
 	Usage "Both FILE1 and FILE2 are '-'."
 fi

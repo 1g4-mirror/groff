@@ -1,5 +1,11 @@
 2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* gdiffmk.sh (WouldClobber, main): Drop obsolescent (per POSIX)
+	use of test(1)'s `-a` and `-o` operators.  See <https://pubs.\
+	opengroup.org/onlinepubs/9699919799/utilities/test.html>.
+
+2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* gdiffmk.sh: Tweak output in error scenarios.  Add `want_help`
 	variable to track whether `--help` option was specified.
 	(Usage): Stop writing a blank line after a usage error; omitting
