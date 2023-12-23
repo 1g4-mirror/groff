@@ -141,23 +141,27 @@ DELETEMARK='*'
 MARK1='[['
 MARK2=']]'
 
+# Given an option with an expected argument, echo the option argument.
+# Return 0 if caller should further shift its argument list; 1 if not.
 RequiresArgument () {
-	#	Process flags that take either concatenated or
-	#	separated values.
 	case "$1" in
 	-??*)
-		expr "$1" : '-.\(.*\)'
+		optarg=${1#-?}
+		option=${option%${optarg}}
+
+		if test -z "${optarg}"
+		then
+			Exit 2 "option '${option}' requires an argument"
+		fi
+
+		echo "${optarg}"
 		return 1
 		;;
+	*)
+		echo "$2"
+		return 0
+		;;
 	esac
-
-	if test $# -lt 2
-	then
-		Exit 2 "option '$1' requires an argument"
-	fi
-
-	echo "$2"
-	return 0
 }
 
 HAVE_TEST_EF_OPTION=@HAVE_TEST_EF_OPTION@

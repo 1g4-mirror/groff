@@ -1,5 +1,11 @@
 2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* gdiffmk.sh (RequiresArgument): Refactor to use shell parameter
+	expansion instead of expr(1), to avoid potential use of external
+	command and quirk in FreeBSD's implementation.
+
+2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* gdiffmk.sh (FileRead, main): Revise wording of diagnostic
 	messages.
 
