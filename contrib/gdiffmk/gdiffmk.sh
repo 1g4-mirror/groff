@@ -36,37 +36,16 @@ Usage () {
 		status=2
 	fi
 	cat >&2 <<EOF
-usage: ${CMD} [ OPTIONS ] FILE1 FILE2 [ OUTPUT ]
-Place difference marks into the new version of a groff/nroff/troff document.
-FILE1 and FILE2 are compared, using 'diff', and FILE2 is output with
-groff '.mc' requests added to indicate how it is different from FILE1.
+usage: ${CMD} [-a add-mark] [-c change-mark] [-d delete-mark] \
+[-x diff-command] [-D [-B] [-M mark1 mark2]] [--] file1 file2 \
+[output-file]
+usage: ${CMD} --version
+usage: ${CMD} --help
 
-  FILE1   Previous version of the groff file.  '-' means standard input.
-  FILE2   Current version of the groff file.   '-' means standard input.
-          Either FILE1 or FILE2 can be standard input, but not both.
-  OUTPUT  Copy of FILE2 with '.mc' commands added.
-          '-' means standard output (the default).
-          If the shell's 'test' does not support option -ef, OUTPUT
-          can only be the standard output.
-
-OPTIONS:
-  -a ADDMARK     Mark for added groff source lines.    Default: '+'.
-  -c CHANGEMARK  Mark for changed groff source lines.  Default: '|'.
-  -d DELETEMARK  Mark for deleted groff source lines.  Default: '*'.
-
-  -D             Show the deleted portions from changed and deleted text.
-                  Default delimiting marks:  '[[' .... ']]'.
-  -B             By default, the deleted texts marked by the '-D' option end
-                  with an added troff '.br' command.  This option prevents
-                  the added '.br'.
-  -M MARK1 MARK2 Change the delimiting marks for the '-D' option.
-
-  -x DIFFCMD     Use a different diff(1) command;
-                  one that accepts the '-Dname' option, such as GNU diff.
-  -s SEDCMD      Use a different sed(1) command;
-                  such as GNU sed.
-  --version      Print version information on the standard output and exit.
-  --help         Print this message on the standard error.
+Compare roff(7) documents file1 and file2, and write a roff document
+to the standard output stream (or output-file) consisting of file2 with
+added margin character ('mc') requests indicating output lines that
+differ from file1.  See the gdiffmk(1) manual page.
 EOF
 	exit $status
 }
