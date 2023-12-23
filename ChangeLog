@@ -1,3 +1,11 @@
+2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac (EE): Fix latent logic error; use `if` for
+	conditional without an "else".  Since there was no subsequent
+	`el` request, but the formatter was "primed" to expect one,
+	this could conceal an `el` usage error in a man page document or
+	otherwise behave strangely.
+
 2023-12-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor.

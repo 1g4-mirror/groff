@@ -1039,6 +1039,8 @@ contains unsupported escape sequence
 .  \" If using the DVI output device, we have no constant-width fonts of
 .  \" bold weight and, relatedly, no constant-width family (because that
 .  \" requires all four styles).  Remap the bold styles to normal ones.
+.  \"
+.  \" Use the "switch/case" style of nested `ie`/`el` requests.
 .        ie '\*[.T]'dvi' \{\
 .    ftr R CW
 .    ftr B CW
@@ -1068,7 +1070,7 @@ contains unsupported escape sequence
 .    return
 .  \}
 .  \" Undo the remappings from `EX`.
-.  ie \\n[an*unmap-fonts] \{\
+.  if \\n[an*unmap-fonts] \{\
 .    ftr R
 .    ftr B
 .    ftr I
