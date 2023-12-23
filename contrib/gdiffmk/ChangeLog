@@ -1,5 +1,13 @@
 2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* gdiffmk.sh: Tweak output in error scenarios.  Add `want_help`
+	variable to track whether `--help` option was specified.
+	(Usage): Stop writing a blank line after a usage error; omitting
+	it is more consistent with other groff programs.  Omit the
+	descriptive paragraph unless help is requested.
+
+2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* gdiffmk.sh (Usage): Abbreviate usage message to just a
 	synopsis, a brief (recast) description, and a cross reference to
 	the man page, like groff(1) and grops(1).

@@ -32,7 +32,6 @@ Usage () {
 	then
 		Diagnose "usage error: $@"
 		exec 2>&1
-		echo
 		status=2
 	fi
 	cat >&2 <<EOF
@@ -41,12 +40,17 @@ usage: ${CMD} [-a add-mark] [-c change-mark] [-d delete-mark] \
 [output-file]
 usage: ${CMD} --version
 usage: ${CMD} --help
+EOF
+	if [ -n "$want_help" ]
+	then
+		cat >&2 <<EOF
 
 Compare roff(7) documents file1 and file2, and write a roff document
 to the standard output stream (or output-file) consisting of file2 with
 added margin character ('mc') requests indicating output lines that
 differ from file1.  See the gdiffmk(1) manual page.
 EOF
+	fi
 	exit $status
 }
 
@@ -162,6 +166,7 @@ DIFFCMD=@DIFF_PROG@
 SEDCMD=sed
 D_option=
 br=.br
+want_help=
 while [ $# -gt 0 ]
 do
 	OPTION="$1"
@@ -207,6 +212,7 @@ do
 		exit 0
 		;;
 	--help)
+		want_help=yes
 		Usage
 		;;
 	--)
