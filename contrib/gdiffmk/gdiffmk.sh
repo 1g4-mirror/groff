@@ -79,11 +79,11 @@ FileRead () {
 
 	if test ! -f "$2"
 	then
-		Exit $1 "File '$2' not found."
+		Exit $1 "input file \"$2\" does not exist or is not a file"
 	fi
 	if test ! -r "$2"
 	then
-		Exit $1 "File '$2' not readable."
+		Exit $1 "input file \"$2\" is not readable"
 	fi
 }
 
@@ -153,7 +153,7 @@ RequiresArgument () {
 
 	if test $# -lt 2
 	then
-		Exit 2 "Option '$1' requires a value."
+		Exit 2 "option '$1' requires an argument"
 	fi
 
 	echo "$2"
@@ -249,12 +249,12 @@ fi
 
 if test $# -lt 2 || test $# -gt 3
 then
-	Usage "Incorrect number of arguments."
+	Usage "expected 2 or 3 operands, got $#"
 fi
 
 if test "1$1" = "1-" && test "2$2" = "2-"
 then
-	Usage "Both FILE1 and FILE2 are '-'."
+	Usage "attempting to compare standard input to itself"
 fi
 
 FILE1="$1"

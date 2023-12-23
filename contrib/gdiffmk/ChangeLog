@@ -1,5 +1,10 @@
 2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* gdiffmk.sh (FileRead, main): Revise wording of diagnostic
+	messages.
+
+2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* gdiffmk.sh (WouldClobber, main): Drop obsolescent (per POSIX)
 	use of test(1)'s `-a` and `-o` operators.  See <https://pubs.\
 	opengroup.org/onlinepubs/9699919799/utilities/test.html>.
