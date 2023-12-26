@@ -1,3 +1,8 @@
+2023-12-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tests/runtests.sh: Test for "diff -D" support as gdiffmk
+	itself does, and skip test if such support is lacking.
+
 2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* gdiffmk.sh (RequiresArgument): Refactor to use shell parameter

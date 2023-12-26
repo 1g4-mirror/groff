@@ -31,17 +31,6 @@ General Problems
 ================
 
 
-[groff 1.23.0]
-
-* gdiffmk doesn't work / its automated test fails.
-
-Some portability issues are known to affect groff's gdiffmk utility.
-
-- gdiffmk does not work with BusyBox diff (which does not implement GNU
-  diff's "-D" option).
-
-----------------------------------------------------------------------
-
 [groff 1.19.2]
 
 * When viewing man pages, some characters on my UTF-8 terminal emulator
