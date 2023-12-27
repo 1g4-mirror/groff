@@ -5357,9 +5357,10 @@ Macros}.}
 
 What if the file ends before enough words have been collected to fill an
 output line?  Or the output line is exactly full but not yet broken, and
-there is no more input?  GNU @code{troff} interprets the end of input as
-a break.  Certain requests also cause breaks, implicitly or explicitly.
-This is discussed in @ref{Manipulating Filling and Adjustment}.
+there is no more input?  GNU @code{troff} flushes the pending output
+line upon encountering the end of input.  Certain requests cause breaks,
+implicitly or explicitly.  This is discussed in @ref{Manipulating
+Filling and Adjustment}.
 
 @c ---------------------------------------------------------------------
 
