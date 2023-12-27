@@ -3586,7 +3586,7 @@ The @file{ms} macros provide a variety of ways to style text.
 Attend closely to the ordering of arguments labeled @var{pre} and
 @var{post}, which is not intuitive.  Support for @var{pre}
 arguments is a GNU extension.@footnote{This idiosyncrasy arose through
-feature accretion; for example, the @code{B} macro in Version@tie{}6
+feature accretion; for example, the @code{B} macro in Sixth Edition
 Unix @file{ms} (1975) accepted only one argument, the text to be set in
 boldface.  By Version@tie{}7 (1979) it recognized a second argument; in
 1990, @code{groff} @file{ms} added a ``pre'' argument, placing it third
