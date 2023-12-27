@@ -1,3 +1,16 @@
+2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Support pic(1) pictures when formatting HTML and using
+	"fallback" pic macros.
+
+	* tmac/pic.tmac (PS): Call `HTML-IMAGE` at end of macro
+	definition.
+	* tmac/pic.tmac (PF): Call `HTML-IMAGE-END` at end of macro
+	definition.  (`PE` and `PY` call `PF`, and so are also handled.)
+
+	Fixes https://savannah.gnu.org/bugs/?65047> (2/2).  Thanks to
+	Hans Bezemer and Dave Kemper for the report.
+
 2023-12-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (EE): Fix latent logic error; use `if` for
