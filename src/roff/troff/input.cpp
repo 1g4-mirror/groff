@@ -6960,7 +6960,7 @@ void do_open(int append)
       errno = 0;
       FILE *fp = fopen(filename.contents(), append ? "a" : "w");
       if (!fp) {
-	error("can't open '%1' for %2: %3",
+	error("unable to open file '%1' for %2: %3",
 	      filename.contents(),
 	      append ? "appending" : "writing",
 	      strerror(errno));
@@ -7001,9 +7001,13 @@ void close_request()
   if (!stream.is_null()) {
     FILE *fp = (FILE *)stream_dictionary.remove(stream);
     if (!fp)
-      error("no stream named '%1'", stream.contents());
-    else
-      fclose(fp);
+      error("cannot close nonexistent stream '%1'", stream.contents());
+    else {
+      int status = fclose(fp);
+	if (status != 0)
+	  error("unable to close stream '%1': %2", stream.contents(),
+		strerror(errno));
+    }
   }
   skip_line();
 }

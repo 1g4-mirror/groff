@@ -1,5 +1,13 @@
 2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Revise diagnostics when opening and closing streams.
+
+	* src/roff/troff/input.cpp (do_open, close_request): Do it.
+	Recast.  Check `fclose()` for failure and report the system's
+	error description upon failure.
+
+2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Support pic(1) pictures when formatting HTML and using
 	"fallback" pic macros.
 
