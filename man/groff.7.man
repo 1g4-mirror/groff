@@ -3175,7 +3175,7 @@ Sets
 .
 .TPx
 .REQ .fl
-Flush output buffer.
+Flush any pending output line.
 .
 .TPx
 .REQ .fp "pos id"
