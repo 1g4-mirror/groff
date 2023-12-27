@@ -1,5 +1,14 @@
 2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/input.cpp (do_open, open_request)
+	(opena_request, close_request): Demote `int` arguments to
+	`bool`.  Declare functions `static` since they do not require
+	external linkage.
+
+2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Revise diagnostics when opening and closing streams.
 
 	* src/roff/troff/input.cpp (do_open, close_request): Do it.

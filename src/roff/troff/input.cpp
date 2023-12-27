@@ -6951,7 +6951,7 @@ void terminal_continue()
 
 dictionary stream_dictionary(20);
 
-void do_open(int append)
+static void do_open(bool append)
 {
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
@@ -6975,27 +6975,27 @@ void do_open(int append)
   skip_line();
 }
 
-void open_request()
+static void open_request()
 {
   if (!want_unsafe_requests) {
     error("'open' request is not allowed in safer mode");
     skip_line();
   }
   else
-    do_open(0);
+    do_open(false /* don't append */);
 }
 
-void opena_request()
+static void opena_request()
 {
   if (!want_unsafe_requests) {
     error("'opena' request is not allowed in safer mode");
     skip_line();
   }
   else
-    do_open(1);
+    do_open(true /* append */);
 }
 
-void close_request()
+static void close_request()
 {
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
