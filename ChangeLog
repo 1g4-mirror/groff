@@ -1,5 +1,12 @@
 2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/dot-trap_register_works.sh: Fix thinko.
+	The test was spuriously always passing.  Fortunately, the test
+	continues to pass when corrected.  Problem introduced by me with
+	new `.trap` register feature in commit 4c2cd5e076, 26 July.
+
+2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/input.cpp (do_open, open_request)
