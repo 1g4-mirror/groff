@@ -451,9 +451,7 @@ make separation necessary.
 .
 .
 .P
-Each column descriptor begins with a mandatory
-.I classifier,
-a character that selects from one of several arrangements.
+The classifier selects from one of several arrangements.
 .
 Some determine the positioning of table entries within a rectangular
 cell:
