@@ -242,6 +242,67 @@ registers exercise color support.
 .
 .
 .\" ====================================================================
+.SS Hyphenation
+.\" ====================================================================
+.
+.\" BEGIN Keep (roughly) parallel with relevant material from groff.texi
+.\" nodes "Hyphenation" and "Manipulating Hyphenation".
+GNU
+.I troff \" GNU
+uses a hyphenation algorithm and language-specific pattern files
+(based on those used in \*[tx])
+to decide which words can be hyphenated and where.
+.
+AT&T
+.IR troff 's \" AT&T
+hyphenation system (\[lq]suftab\[rq]) was specific to English.
+.
+.
+.P
+New requests permit finer control over hyphenation breaking;
+hyphenation of a word might be suppressed due to a limit on consecutive
+hyphenated lines
+.RB ( hlm ),
+a minimum line length threshold
+.RB ( hym ),
+or because the line can instead be adjusted with additional inter-word
+space
+.RB ( hys ).
+.
+A hyphenation language is selected with the
+.B hla
+request and hyphenation patterns loaded
+(or appended)
+with
+.B hpf
+(or
+.BR hpfa ).
+.
+If no hyphenation language is set or no patterns are loaded,
+GNU
+.I troff \" GNU
+will not perform automatic hyphenation.
+.
+The
+.B hcode
+request assigns values to character codes such that they can be handled
+consistently by the hyphenation patterns,
+for instance by treating accented letters the same as their unaccented
+counterparts.
+.
+.
+.P
+GNU
+.IR troff 's \" GNU
+.B \[rs]:
+escape sequence is analogous to the
+.B \[rs]%
+sequence but produces no hyphen if the word breaks at that location.
+.\" END Keep (roughly) parallel with relevant material from groff.texi
+.\" nodes "Hyphenation" and "Manipulating Hyphenation".
+.
+.
+.\" ====================================================================
 .SS "Fractional type sizes and new scaling units"
 .\" ====================================================================
 .
