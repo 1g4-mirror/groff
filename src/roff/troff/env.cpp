@@ -3599,13 +3599,12 @@ struct hyphenation_language {
 };
 
 dictionary language_dictionary(5);
-hyphenation_language *current_language = 0;
+hyphenation_language *current_language = 0 /* nullptr */;
 
 static void select_hyphenation_language()
 {
   if (!has_arg()) {
-    warning(WARN_MISSING, "hyphenation language selection request"
-	    " expects argument");
+    current_language = 0 /* nullptr */;
     skip_line();
     return;
   }

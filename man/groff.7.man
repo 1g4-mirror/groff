@@ -3308,6 +3308,11 @@ to
 and so on.
 .
 .TPx
+.REQ .hla
+Clear the hyphenation language
+(disabling automatic hyphenation).
+.
+.TPx
 .REQ .hla ident
 Set the hyphenation language to
 .IR ident .

@@ -8950,24 +8950,26 @@ the hyphenation `kin-der'.  The other two hyphenation points
 (`kin-der-gär-ten') are missed.
 @endDefreq
 
-@DefreqList {hla, lang}
+@DefreqList {hla, [@Var{lang}]}
 @DefregListEndx {.hla}
 @cindex @code{hpf} request, and hyphenation language
 @cindex @code{hw} request, and hyphenation language
 @pindex troffrc
 @pindex troffrc-end
-Set the hyphenation language to @var{lang}.  Hyphenation exceptions
-specified with the @code{hw} request and hyphenation patterns and
-exceptions specified with the @code{hpf} and @code{hpfa} requests are
-associated with the hyphenation language.  The @code{hla} request is
-usually invoked by a localization file, which is turn loaded by the
-@file{troffrc} or @file{troffrc-end} file; see the @code{hpf} request
-above.
+Set the hyphenation language to @var{lang}, or clear it if there is no
+argument.  Hyphenation exceptions specified with the @code{hw} request
+and hyphenation patterns and exceptions specified with the @code{hpf}
+and @code{hpfa} requests are associated with the hyphenation language.
+The @code{hla} request is usually invoked by a localization file, which
+is turn loaded by the @file{troffrc} or @file{troffrc-end} file; see the
+@code{hpf} request above.
 
 @cindex hyphenation language register (@code{.hla})
 The hyphenation language is available in the read-only string-valued
 register @samp{.hla}; it is associated with the environment
 (@pxref{Environments}).
+
+If no hyphenation language is set, automatic hyphenation will not occur.
 @endDefreq
 
 @DefreqList {hlm, [@Var{n}]}

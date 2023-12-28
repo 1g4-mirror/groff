@@ -1,5 +1,23 @@
 2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add another explicit mechanism for disabling
+	hyphenation; accept an `hla` request without arguments for this
+	purpose.
+
+	* src/roff/troff/env.cpp (select_hyphenation_language): Do it.
+
+	* doc/groff.texi (Manipulating Hyphenation):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Document it.
+
+	* src/roff/groff/tests/hla-request-works.sh: Test it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	Fixes https://savannah.gnu.org/bugs/?64958>.
+
+2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/dot-trap_register_works.sh: Fix thinko.
 	The test was spuriously always passing.  Fortunately, the test
 	continues to pass when corrected.  Problem introduced by me with
