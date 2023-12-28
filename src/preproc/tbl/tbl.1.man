@@ -333,7 +333,7 @@ its entries and its column separations
 (whether specified or default).
 .
 When
-.B expand
+.B \%expand
 applies to a table that exceeds the available horizontal space,
 column separation is reduced as far as necessary
 (even to zero).
