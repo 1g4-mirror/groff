@@ -3309,7 +3309,7 @@ and so on.
 .
 .TPx
 .REQ .hla
-Clear the hyphenation language
+Clear hyphenation language
 (disabling automatic hyphenation).
 .
 .TPx
