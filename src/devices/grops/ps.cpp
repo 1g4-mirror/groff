@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "ps.h"
 
 #include <errno.h> // errno
+#include <stdint.h> // uint16_t
 #include <time.h>
 
 #ifdef NEED_DECLARATION_PUTENV
@@ -202,13 +203,16 @@ ps_output &ps_output::put_delimiter(char c)
   return *this;
 }
 
-ps_output &ps_output::put_string(const char *s, size_t n)
+ps_output &ps_output::put_string(const uint16_t *s, size_t n,
+				 bool is_utf16le)
 {
   size_t len = 0;
   size_t i;
   for (i = 0; i < n; i++) {
-    char c = s[i];
-    if (is_ascii(c) && csprint(c)) {
+    uint16_t c = s[i];
+    if (is_utf16le) {
+      len = (i + 1) * 4;
+    } else if (is_ascii(c) && csprint(c)) {
       if (c == '(' || c == ')' || c == '\\')
 	len += 2;
       else
@@ -217,7 +221,7 @@ ps_output &ps_output::put_string(const char *s, size_t n)
     else
       len += 4;
   }
-  if (len > (n * 2)) {
+  if ((len > (n * 2)) || is_utf16le) {
     if (((col + (n * 2) + 2) > max_line_length)
 	&& (((n * 2) + 2) <= max_line_length)) {
       putc('\n', fp);
@@ -234,8 +238,13 @@ ps_output &ps_output::put_string(const char *s, size_t n)
 	putc('\n', fp);
 	col = 0;
       }
-      fprintf(fp, "%02x", s[i] & 0377);
-      col += 2;
+      if (is_utf16le) {
+        fprintf(fp, "%04X", s[i] & 0xFFFF);
+        col += 4;
+      } else {
+        fprintf(fp, "%02x", s[i] & 0377);
+        col += 2;
+      }
     }
     putc('>', fp);
     col++;
@@ -531,7 +540,7 @@ class ps_printer : public printer {
   int paper_length;
   int equalise_spaces;
   enum { SBUF_SIZE = 256 };
-  char sbuf[SBUF_SIZE];
+  uint16_t sbuf[SBUF_SIZE];
   int sbuf_len;
   int sbuf_start_hpos;
   int sbuf_vpos;
@@ -565,7 +574,7 @@ class ps_printer : public printer {
   void set_style(const style &);
   void set_space_code(unsigned char);
   int set_encoding_index(ps_font *);
-  subencoding *set_subencoding(font *, glyph *, unsigned char *);
+  subencoding *set_subencoding(font *, glyph *, uint16_t *);
   char *get_subfont(subencoding *, const char *);
   void do_exec(char *, const environment *);
   void do_import(char *, const environment *);
@@ -663,10 +672,26 @@ int ps_printer::set_encoding_index(ps_font *f)
 }
 
 subencoding *ps_printer::set_subencoding(font *f, glyph *g,
-					 unsigned char *codep)
+					 uint16_t *code)
 {
   unsigned int idx = f->get_code(g);
-  *codep = idx % 256;
+  const char *psname = f->get_internal_name();
+
+  if (psname && strstr(psname, "-UTF16-")) {
+    /* Unicode, convert to UTF-16LE */
+    if (idx < 0x10000) {
+      code[0] = idx;
+      code[1] = 0;
+    } else {
+      // Encode surrogate pairs.
+      code[0] = (idx - 0x10000) / 0x400 + 0xD800;
+      code[1] = (idx - 0x10000) % 0x400 + 0xDC00;
+    }
+    return 0 /* nullptr */;
+  }
+
+  code[0] = idx % 256;
+  code[1] = 0;
   unsigned int num = idx >> 8;
   if (num == 0)
     return 0 /* nullptr */;
@@ -677,7 +702,7 @@ subencoding *ps_printer::set_subencoding(font *f, glyph *g,
   if (0 /* nullptr */ == p)
     p = subencodings = new subencoding(f, num, next_subencoding_index++,
 				       subencodings);
-  p->glyphs[*codep] = f->get_special_device_encoding(g);
+  p->glyphs[*code] = f->get_special_device_encoding(g);
   return p;
 }
 
@@ -697,8 +722,8 @@ void ps_printer::set_char(glyph *g, font *f, const environment *env, int w,
 {
   if (g == space_glyph || invis_count > 0)
     return;
-  unsigned char code;
-  subencoding *sub = set_subencoding(f, g, &code);
+  uint16_t code[2];
+  subencoding *sub = set_subencoding(f, g, code);
   style sty(f, sub, env->size, env->height, env->slant);
   if (sty.slant != 0) {
     if (sty.slant > 80 || sty.slant < -80) {
@@ -712,14 +737,18 @@ void ps_printer::set_char(glyph *g, font *f, const environment *env, int w,
 	&& sbuf_vpos == env->vpos
 	&& sbuf_color == *env->col) {
       if (sbuf_end_hpos == env->hpos) {
-	sbuf[sbuf_len++] = code;
+	sbuf[sbuf_len++] = code[0];
+	if (code[1] > 0)
+	  sbuf[sbuf_len++] = code[1];
 	sbuf_end_hpos += w + sbuf_kern;
 	return;
       }
-      if (sbuf_len == 1 && sbuf_kern == 0) {
+      if ((sbuf_len == 1) && (sbuf_kern == 0)) {
 	sbuf_kern = env->hpos - sbuf_end_hpos;
 	sbuf_end_hpos = env->hpos + sbuf_kern + w;
-	sbuf[sbuf_len++] = code;
+	sbuf[sbuf_len++] = code[0];
+	if (code[1] > 0)
+	  sbuf[sbuf_len++] = code[1];
 	return;
       }
       /* If sbuf_end_hpos - sbuf_kern == env->hpos, we are better off
@@ -732,7 +761,9 @@ void ps_printer::set_char(glyph *g, font *f, const environment *env, int w,
 	    sbuf_space_width = env->hpos - sbuf_end_hpos;
 	    sbuf_end_hpos = env->hpos + w + sbuf_kern;
 	    sbuf[sbuf_len++] = sbuf_space_code;
-	    sbuf[sbuf_len++] = code;
+	    sbuf[sbuf_len++] = code[0];
+	    if (code[1] > 0)
+	      sbuf[sbuf_len++] = code[1];
 	    sbuf_space_count++;
 	    return;
 	  }
@@ -742,7 +773,9 @@ void ps_printer::set_char(glyph *g, font *f, const environment *env, int w,
 	  if (diff == 0 || (equalise_spaces && (diff == 1 || diff == -1))) {
 	    sbuf_end_hpos = env->hpos + w + sbuf_kern;
 	    sbuf[sbuf_len++] = sbuf_space_code;
-	    sbuf[sbuf_len++] = code;
+	    sbuf[sbuf_len++] = code[0];
+	    if (code[1] > 0)
+	      sbuf[sbuf_len++] = code[1];
 	    sbuf_space_count++;
 	    if (diff == 1)
 	      sbuf_space_diff_count++;
@@ -756,7 +789,9 @@ void ps_printer::set_char(glyph *g, font *f, const environment *env, int w,
     flush_sbuf();
   }
   sbuf_len = 1;
-  sbuf[0] = code;
+  sbuf[0] = code[0];
+  if (code[1] > 0)
+    sbuf[sbuf_len++] = code[1];
   sbuf_end_hpos = env->hpos + w;
   sbuf_start_hpos = env->hpos;
   sbuf_vpos = env->vpos;
@@ -1028,7 +1063,11 @@ void ps_printer::flush_sbuf()
     out.put_fix_number(extra_space);
   if (sbuf_kern != 0)
     out.put_fix_number(sbuf_kern);
-  out.put_string(sbuf, sbuf_len);
+  const char *psname = sbuf_style.f->get_internal_name();
+  bool is_utf16le = false;
+  if ((psname != 0 /* nullptr */) && strstr(psname, "-UTF16-"))
+    is_utf16le = true;
+  out.put_string(sbuf, sbuf_len, is_utf16le);
   char command_array[] = {'A', 'B', 'C', 'D',
 			  'E', 'F', 'G', 'H',
 			  'I', 'J', 'K', 'L',

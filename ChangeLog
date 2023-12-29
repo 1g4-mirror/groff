@@ -1,5 +1,36 @@
 2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
 
+	Support CJK fonts encoded in UTF-16 (4/6).
+
+	* src/devices/grops/ps.h:
+	* src/devices/grops/ps.cpp: Include C99 "stdint.h" header for
+	desired `unit16_t` data type.
+	(class ps_output): Change type of `put_string` member function's
+	first argument from `const char *` to `const uint16_t *`.  Add
+	third argument of Boolean type, `is_utf16le`.
+	* src/devices/grops/ps.cpp (ps_output::put_string): Adjust
+	computations of `len` and `col` locals if the font in use is
+	UTF-16LE-encoding, and write out 4-digit instead of 2-digit
+	hexadecimal numeric literals when that is the case.
+	(class ps_printer): Change type of `sbuf` member variable from
+	`char` to `uint16_t`.  Change type of third argument to
+	`set_subencoding` member function from `unsigned char *` to
+	`uint16_t *`.
+	(ps_printer::set_subencoding): Rename third argument from
+	`codep` to `code`--it's no longer an indirect reference to a
+	single `char`, but a 2-element `uint16_t` array.  If the font's
+	"internalname" directive contains the substring "-UTF16-",
+	populate `code` argument with little-endian 16-bit value.
+	(ps_printer::set_char): Declare `code` as above: a 2-element
+	`uint16_t` array instead of an unsigned char.  Handle case of
+	`code` using surrogate pairs (`code[1] > 0`).
+	(ps_printer::flush_sbuf): Conditionalize form of output on font
+	encoding.  Set the Boolean argument to `ps::put_string()` per
+	the font's "internalname" directive matching the substring
+	"-UTF16-".
+
+2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
+
 	Support CJK fonts encoded in UTF-16 (3/6).
 
 	* src/preproc/html/pre-html.cpp (scanArguments): Recognize but
