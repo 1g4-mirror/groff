@@ -1382,13 +1382,13 @@ sub do_x
                 $stream.="Q\n";
                 $InPicRotate=0;
             }
-            elsif ($par=~m/exec (\d) setlinejoin/)
+            elsif ($par=~m/exec.*? (\d) setlinejoin/)
             {
                 IsGraphic();
                 $linejoin=$1;
                 $stream.="$linejoin j\n";
             }
-            elsif ($par=~m/exec (\d) setlinecap/)
+            if ($par=~m/exec.*? (\d) setlinecap/)
             {
                 IsGraphic();
                 $linecap=$1;
