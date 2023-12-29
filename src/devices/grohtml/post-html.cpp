@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "html-text.h"
 #include "html-table.h"
 #include "curtime.h"
+#include "unicode.h"
 
 #include <time.h>
 
@@ -94,6 +95,12 @@ static int valid_flag = FALSE;              /* has user requested a valid flag a
                                             /* end of each page?                        */
 static int groff_sig = FALSE;               /* "This document was produced using"       */
 html_dialect dialect = html4;               /* which html dialect should grohtml output */
+static const int CHARSET_ASCII = 0;
+static const int CHARSET_MIXED = 1;
+static const int CHARSET_UTF8  = 2;
+static int charset_encoding = CHARSET_MIXED;/* The character set may be plain ASCII,    */
+                                            /* pure UTF-8, or a mixture of character    */
+                                            /* entity references.                       */
 
 
 /*
@@ -1399,14 +1406,16 @@ void page::add_line (style *s,
 }
 
 /*
- *  to_unicode - returns a unicode translation of int, ch.
+ *  to_numerical_char_ref - returns a numerical character reference of
+ *                          unicode character code `ch`.
  */
 
-static char *to_unicode (unsigned int ch)
+static char *to_numerical_char_ref (unsigned int ch)
 {
-  static char buf[30];
-
-  sprintf(buf, "&#%u;", ch);
+  // Make static buffer large enough for a 64-bit `int` type in
+  // hexadecimal (8 bytes) plus '&#x;' plus null terminator.
+  static char buf[8 + 4 + 1];
+  sprintf(buf, "&#x%X;", ch);
   return buf;
 }
 
@@ -4416,7 +4425,9 @@ void html_printer::add_to_sbuf (glyph *g, const string &s)
       html_glyph = 0;
 
     if ((0 /* nullptr */ == html_glyph) && (code >= UNICODE_DESC_START))
-      html_glyph = to_unicode(code);
+      html_glyph = static_cast<bool>(charset_encoding)
+		     ? to_utf8_string(code)
+		     : to_numerical_char_ref(code);
   } else
     html_glyph = get_html_translation(sbuf_style.f, s);
 
@@ -4497,6 +4508,8 @@ static const char *get_html_entity (unsigned int code)
       case 0x003E: return "&gt;";
       default: return 0;
     }
+  } else if (CHARSET_UTF8 == charset_encoding) {
+      return to_utf8_string(code);
   } else {
     switch (code) {
       case 0x00A0: return "&nbsp;";
@@ -4736,7 +4749,9 @@ static const char *get_html_entity (unsigned int code)
       case 0x2666: return "&diams;";
       case 0x27E8: return "&lang;";
       case 0x27E9: return "&rang;";
-      default: return to_unicode(code);
+      default: return (static_cast<bool>(charset_encoding)
+			 ? to_utf8_string(code)
+			 : to_numerical_char_ref(code));
     }
   }
 }
@@ -5170,13 +5185,19 @@ void html_printer::writeHeadMetaStyle (void)
     fputs("<meta name=\"generator\" "
 	  "content=\"groff -Thtml, see www.gnu.org\">\n", stdout);
     fputs("<meta http-equiv=\"Content-Type\" "
-	  "content=\"text/html; charset=US-ASCII\">\n", stdout);
+	  "content=\"text/html; charset=", stdout);
+    fputs(static_cast<bool>(charset_encoding)
+	    ? "UTF-8" : "US-ASCII", stdout);
+    fputs("\">\n", stdout);
     fputs("<meta name=\"Content-Style\" content=\"text/css\">\n",
 	  stdout);
     fputs("<style type=\"text/css\">\n", stdout);
   }
   else {
-    fputs("<?xml version=\"1.0\" encoding=\"us-ascii\"?>\n", stdout);
+    fputs("<?xml version=\"1.0\" encoding=\"", stdout);
+    fputs(static_cast<bool>(charset_encoding)
+	    ? "UTF-8" : "us-ascii", stdout);
+    fputs("\"?>\n", stdout);
     fputs("<!DOCTYPE html PUBLIC \"-//W3C//"
 	  "DTD XHTML 1.1 plus MathML 2.0//EN\"\n", stdout);
     fputs(" \"http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd\"\n",
@@ -5190,7 +5211,10 @@ void html_printer::writeHeadMetaStyle (void)
     fputs("<meta name=\"generator\" "
 	  "content=\"groff -Txhtml, see www.gnu.org\"/>\n", stdout);
     fputs("<meta http-equiv=\"Content-Type\" "
-	  "content=\"text/html; charset=US-ASCII\"/>\n", stdout);
+	  "content=\"text/html; charset=", stdout);
+    fputs(static_cast<bool>(charset_encoding)
+	    ? "UTF-8" : "US-ASCII", stdout);
+    fputs("\"/>\n", stdout);
     fputs("<meta name=\"Content-Style\" content=\"text/css\"/>\n",
 	  stdout);
     fputs("<style type=\"text/css\">\n", stdout);
@@ -5551,8 +5575,10 @@ int main(int argc, char **argv)
     { NULL, 0, 0, 0 }
   };
   opterr = 0;
+  // TODO: Rename `U` option, which generally means "unsafe mode" in
+  // groff, to `u`.
   while ((c = getopt_long(argc, argv,
-	  "a:bCdD:eF:g:Ghi:I:j:lno:prs:S:vVx:y", long_options, NULL))
+	  "a:bCdD:eF:g:Ghi:I:j:lno:prs:S:U::vVx:y", long_options, NULL))
 	 != EOF)
     switch(c) {
     case 'a':
@@ -5621,6 +5647,22 @@ int main(int argc, char **argv)
     case 'S':
       split_level = atoi(optarg) + 1;
       break;
+    case 'U':
+      if (optarg) {
+	// TODO: This argument semantic scheme seems unergonomic to GBR;
+	// come up with an alternative.
+        if ((strcmp(optarg, "0") == 0 || strcmp(optarg, "-") == 0))
+          charset_encoding = CHARSET_ASCII;
+        else if ((strcmp(optarg, "1") == 0))
+          charset_encoding = CHARSET_MIXED;
+        else if (optarg && ((strcmp(optarg, "2") == 0)
+			     || strcmp(optarg, "+") == 0))
+          charset_encoding = CHARSET_UTF8;
+        else
+          charset_encoding = CHARSET_UTF8;
+      } else
+        charset_encoding = CHARSET_UTF8;
+      break;
     case 'v':
       printf("GNU post-grohtml (groff) version %s\n", Version_string);
       exit(0);
@@ -5664,7 +5706,7 @@ int main(int argc, char **argv)
 static void usage(FILE *stream)
 {
   fprintf(stream,
-"usage: %s [-bCGhlnrVy] [-F font-directory] [-j output-stem]"
+"usage: %s [-bCGhlnrUVy] [-F font-directory] [-j output-stem]"
 " [-s base-type-size] [-S heading-level] [-x html-dialect] [file ...]\n"
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",

@@ -1,5 +1,34 @@
 2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
 
+	Support CJK fonts encoded in UTF-16 (3/6).
+
+	* src/preproc/html/pre-html.cpp (scanArguments): Recognize but
+	ignore new option `-U`, used by `grohtml` postprocessor.
+
+	* src/devices/grohtml/post-html.cpp: Declare new constant
+	integer objects `CHARSET_ASCII`, `CHARSET_MIXED`, and
+	`CHARSET_UTF8` to configure representation of character entities
+	in output.
+	(main): New option `-U` takes argument configuring the means of
+	encoding character entities.  If the argument is `0` or `-`,
+	select `CHARSET_ASCII`; if `1`, select `CHARSET_MIXED`, and if
+	`2` or `+`, select `CHARSET_UTF8`, which is also the default.
+	(to_unicode): Replace this function with...
+	(to_numerical_char_ref): ...this, which generates a hexadecimal
+	HTML character entity.
+	(html_printer::add_to_sbuf): Write out UTF-8 sequence if
+	`charset_encoding` is not `CHARSET_ASCII`, otherwise a numerical
+	character reference.
+	(get_html_entity): Return UTF-8 sequence if `charset_encoding`
+	is `CHARSET_UTF8`.  Otherise, Return UTF-8 sequence if
+	`charset_encoding` is not `CHARSET_ASCII`, otherwise a numerical
+	character reference.
+	(html_printer::writeHeadMetaStyle): Describe document {XHTML:
+	encoding and} content as UTF-8 if `charset_encoding` is not
+	`CHARSET_ASCII`, otherwise as US-ASCII.
+
+2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
+
 	Support CJK fonts encoded in UTF-16 (2/6).
 
 	* src/include/font.h (class font): Declare private member
