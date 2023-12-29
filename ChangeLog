@@ -1,5 +1,13 @@
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::contains): Add
+	sure-to-fail `assert()` to member function taking a `charinfo`
+	pointer and a `bool`.  It has been marked "TODO" and
+	unconditionally returning false for 13 years.  We should find
+	out if it blows up in real-world use.
+
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::add_entry): Recast
 	diagnostic when user attempts to put a text block in a table
 	cell classified as numeric, and demote it from error to warning

@@ -9341,7 +9341,8 @@ bool charinfo::contains(symbol s, bool already_called)
 
 bool charinfo::contains(charinfo *, bool)
 {
-  // TODO
+  // Werner Lemberg marked this as "TODO" in 2010.
+  assert(0 == "unimplemented member function");
   return false;
 }
 
