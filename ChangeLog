@@ -1,3 +1,10 @@
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::add_entry): Recast
+	diagnostic when user attempts to put a text block in a table
+	cell classified as numeric, and demote it from error to warning
+	since the program falls back to left alignment.
+
 2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add another explicit mechanism for disabling
