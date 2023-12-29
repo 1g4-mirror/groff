@@ -52,7 +52,15 @@ DEVDVIFONTFILES = \
   font/devdvi/EX \
   font/devdvi/SA \
   font/devdvi/SB \
-  font/devdvi/SC
+  font/devdvi/SC \
+  font/devdvi/CSH \
+  font/devdvi/CSS \
+  font/devdvi/CTH \
+  font/devdvi/CTS \
+  font/devdvi/JPG \
+  font/devdvi/JPM \
+  font/devdvi/KOG \
+  font/devdvi/KOM
 devdvifontdir = $(fontdir)/devdvi
 devdvifont_DATA = $(DEVDVIFONTFILES) font/devdvi/DESC
 

@@ -16,9 +16,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 devutf8_srcdir = $(top_srcdir)/font/devutf8
-DEVUTF8FONTS = R I B BI
+DEVUTF8FONTS = R I B BI CSH CSS CTS CTH JPG JPM KOG KOM
 DEVUTF8FONTSFILES = \
-  font/devutf8/R font/devutf8/I font/devutf8/B font/devutf8/BI
+  font/devutf8/R \
+  font/devutf8/I \
+  font/devutf8/B \
+  font/devutf8/BI \
+  font/devutf8/CSH \
+  font/devutf8/CSS \
+  font/devutf8/CTH \
+  font/devutf8/CTS \
+  font/devutf8/JPG \
+  font/devutf8/JPM \
+  font/devutf8/KOG \
+  font/devutf8/KOM
 
 DEVUTF8RES = 240
 DEVUTF8CPI = 10

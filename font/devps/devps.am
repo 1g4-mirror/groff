@@ -56,6 +56,14 @@ DEVPSFONTFILES = \
   font/devps/TI \
   font/devps/TR \
   font/devps/EURO \
+  font/devps/CSH \
+  font/devps/CSS \
+  font/devps/CTH \
+  font/devps/CTS \
+  font/devps/JPG \
+  font/devps/JPM \
+  font/devps/KOG \
+  font/devps/KOM \
   font/devps/freeeuro.afm \
   font/devps/symbolsl.afm \
   font/devps/text.enc \

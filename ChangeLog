@@ -1,5 +1,63 @@
 2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
 
+	Support CJK fonts encoded in UTF-16 (5/6).  Ship font
+	description files.  These are intended as abstractions of faces
+	to permit consistent naming while permitting customization, just
+	as with the 12 text typefaces supported across output devices
+	for Latin scripts in groff (three families of four styles each).
+	These CJK font descriptions are not organized into groff font
+	families, but are similar.
+
+		CSH: Simplified Chinese, Hei style
+		CSS: Simplified Chinese, Song style
+		CTH: Traditional Chinese, Hei style
+		CTS: Traditional Chinese, Song style
+		JPG: Japanese, Gothic style
+		JPM: Japanese, Mincho style
+		KOG: Korean, Gothic style
+		KOM: Korean, Mincho style
+
+	* font/devdvi/CSH:
+	* font/devdvi/CSS:
+	* font/devdvi/CTH:
+	* font/devdvi/CTS:
+	* font/devdvi/JPG:
+	* font/devdvi/JPM:
+	* font/devdvi/KOG:
+	* font/devdvi/KOM:
+	* font/devhtml/CSH:
+	* font/devhtml/CSS:
+	* font/devhtml/CTH:
+	* font/devhtml/CTS:
+	* font/devhtml/JPG:
+	* font/devhtml/JPM:
+	* font/devhtml/KOG:
+	* font/devhtml/KOM:
+	* font/devps/CSH:
+	* font/devps/CSS:
+	* font/devps/CTH:
+	* font/devps/CTS:
+	* font/devps/JPG:
+	* font/devps/JPM:
+	* font/devps/KOG:
+	* font/devps/KOM:
+	* font/devutf8/CSH:
+	* font/devutf8/CSS:
+	* font/devutf8/CTH:
+	* font/devutf8/CTS:
+	* font/devutf8/JPG:
+	* font/devutf8/JPM:
+	* font/devutf8/KOG:
+	* font/devutf8/KOM: Ship font descriptions.
+
+	* font/devdvi/devdvi.am (DEVDVIFONTFILES):
+	* font/devhtml/devhtml.am (DEVHTMLFONTS, DEVHTMLFONTFILES):
+	* font/devdvi/devps.am (DEVPSFONTFILES):
+	* font/devutf8/devutf8.am (DEVUTF8FONTS, DEVUTF8FONTFILES): Add
+	them.
+
+2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
+
 	Support CJK fonts encoded in UTF-16 (4/6).
 
 	* src/devices/grops/ps.h:

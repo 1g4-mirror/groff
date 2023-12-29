@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 devhtml_srcdir = $(top_srcdir)/font/devhtml
-DEVHTMLFONTS = R I B BI CR CI CB CBI S
+DEVHTMLFONTS = R I B BI CR CI CB CBI S CSH CSS CTH CTS JPG JPM KOG KOM
 DEVHTMLFONTSFILES = \
   font/devhtml/R \
   font/devhtml/I \
@@ -26,7 +26,15 @@ DEVHTMLFONTSFILES = \
   font/devhtml/CI \
   font/devhtml/CB \
   font/devhtml/CBI \
-  font/devhtml/S
+  font/devhtml/S \
+  font/devhtml/CSH \
+  font/devhtml/CSS \
+  font/devhtml/CTH \
+  font/devhtml/CTS \
+  font/devhtml/JPG \
+  font/devhtml/JPM \
+  font/devhtml/KOG \
+  font/devhtml/KOM
 
 DEVHTMLRES = 240
 DEVHTMLCPI = 10
