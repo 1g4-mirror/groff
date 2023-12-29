@@ -1,3 +1,12 @@
+2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
+
+	Support CJK fonts encoded in UTF-16 (1/6).
+
+	* src/include/unicode.h (to_utf8_string): Declare new function.
+	* src/libs/libgroff/unicode.cpp (to_utf8_string): New function
+	converts input integer into UTF-8 sequence (or an HTML character
+	entity in hexadecimal if the integer is out of range).
+
 2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grops/ps.cpp: Fix code style nits.  Parenthesize

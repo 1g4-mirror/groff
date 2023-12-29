@@ -98,6 +98,33 @@ const char *valid_unicode_code_sequence(const char *u, char *errbuf)
   return u;
 }
 
+// TODO: Does gnulib have a function that does this?
+char *to_utf8_string(unsigned int ch)
+{
+  static char buf[16];
+
+  if (ch < 0x80)
+    sprintf(buf, "%c", (ch & 0xff));
+  else if (ch < 0x800)
+    sprintf(buf, "%c%c",
+      0xc0 + ((ch >>  6) & 0x1f),
+      0x80 + ((ch      ) & 0x3f));
+  else if ((ch < 0xD800) || ((ch > 0xDFFF) && (ch < 0x10000)))
+    sprintf(buf, "%c%c%c",
+      0xe0 + ((ch >> 12) & 0x0f),
+      0x80 + ((ch >>  6) & 0x3f),
+      0x80 + ((ch      ) & 0x3f));
+  else if ((ch > 0xFFFF) && (ch < 0x120000))
+    sprintf(buf, "%c%c%c%c",
+      0xf0 + ((ch >> 18) & 0x07),
+      0x80 + ((ch >> 12) & 0x3f),
+      0x80 + ((ch >>  6) & 0x3f),
+      0x80 + ((ch      ) & 0x3f));
+  else
+    sprintf(buf, "&#x%X;", ch);
+  return buf;
+}
+
 // Local Variables:
 // fill-column: 72
 // mode: C++
