@@ -1,5 +1,16 @@
 2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
 
+	Support CJK fonts encoded in UTF-16 (6/6).
+
+	* src/roff/groff/tests/dvi-device-smoke-test.sh:
+	* src/roff/groff/tests/ps-device-smoke-test.sh: New tests
+	exercise output drivers and their encodings of CJK characters.
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
+	Fixes <https://savannah.gnu.org/bugs/?62830>.
+
+2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
+
 	Support CJK fonts encoded in UTF-16 (5/6).  Ship font
 	description files.  These are intended as abstractions of faces
 	to permit consistent naming while permitting customization, just
