@@ -42,6 +42,17 @@
 
 2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[docs]: Revise explanation of `fl` request.
+
+	This has been an annoying lacuna of groff documentation forever.
+
+	* doc/groff.texi (Debugging):
+	* man/groff.7.man (Request short reference): Do it.
+
+	Fixes <https://savannah.gnu.org/bugs/?64602>.
+
+2023-12-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Support pic(1) pictures when formatting HTML and using
 	"fallback" pic macros.
 
