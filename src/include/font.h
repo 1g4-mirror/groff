@@ -295,6 +295,7 @@ private:
 			// font (if !is_unicode) or for just some characters
 			// (if is_unicode).  The indices of this array are
 			// font-specific, found as values in ch_index[].
+  font_char_metric *wch;// Metrics for wide characters.
   int ch_used;
   int ch_size;
   font_widths_cache *widths_cache;	// A cache of scaled character
@@ -333,6 +334,9 @@ private:
 					   const char *,	// arg
 					   const char *,	// file
 					   int);		// lineno
+
+  // Get font metric for wide characters indexed by Unicode code point.
+  font_char_metric *get_font_wchar_metric(int);
 
 protected:
   font(const char *);	// Initialize a font with the given name.

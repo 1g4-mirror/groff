@@ -1,5 +1,50 @@
 2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
 
+	Support CJK fonts encoded in UTF-16 (2/6).
+
+	* src/include/font.h (class font): Declare private member
+	variable `wch`, a pointer to an existing list type
+	`font_char_metric`.  Declare private member function
+	`get_font_wchar_metric()` to access it.
+	* src/libs/libgroff/font.cpp (struct font_char_metric): Add
+	members `next` (a pointer to the struct's own type) and
+	`end_code` of type `int`.
+	(glyph_to_ucs_codepoint): New function returns UCS code point
+	from a (non-composite) `glyph` object, or -1 if invalid.
+	(font::font): Constructor initializes `wch` member variable to
+	null pointer.
+	(font::~font): Destructor frees storage allocated in
+	`font::load()` for `special_device_coding` member of `wcp`
+	struct, and that of `wcp` itself.
+	(font::contains): If `glyph_to_ucs_codepoint()` returns a valid
+	value for the glyph, populate its wide character metrics and
+	return true.
+	(font::get_font_wchar_metric): New function obtains font metrics
+	of input character by Unicode code point.
+	(font::get_width, font::get_height, font::get_depth)
+	(font::get_italic_correction, font::get_left_italic_correction)
+	(font::get_subscript_correction, font::get_character_type)
+	(font::get_code, font::get_special_device_encoding): If
+	`glyph_to_ucs_codepoint()` returns a valid value for the glyph,
+	populate its wide character metrics and return the appropriate
+	parameter based on them.
+	(font::get_width): Add conditional guard when computing width
+	for a glyph from a "Unicode font"; use the computation only if
+	the device description file ("DESC") didn't declare
+	"unscaled_charwidths".
+	(font::load): Recognize new directive in font description files:
+	"charset-range", which works like the existing "charset"
+	directive except that the glyph descriptions use a `name` of the
+	form "uFFFF..uFFFF" (where "FFFF" is a hexadecimal digit
+	sequence), and apply the metrics identically to all glyphs in
+	the designated range.
+	(font::load): When processing glyph descriptions in "charset"
+	section and the device has declared the "unicode" directive,
+	stop scaling the width of the glyph by what `wcwidth()` returns
+	for it.  (Does this fix Savannah #44018?)
+
+2024-11-20  TANAKA Takuji <ttk@t-lab.opal.ne.jp>
+
 	Support CJK fonts encoded in UTF-16 (1/6).
 
 	* src/include/unicode.h (to_utf8_string): Declare new function.
