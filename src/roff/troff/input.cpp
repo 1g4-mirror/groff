@@ -9293,9 +9293,8 @@ int charinfo::get_number()
 bool charinfo::contains(int c, bool already_called)
 {
   if (already_called) {
-    warning(WARN_SYNTAX,
-	    "cyclic nested class detected while processing character code %1",
-	    c);
+    warning(WARN_SYNTAX, "cyclic nested class detected while processing"
+	    " character code %1", c);
     return false;
   }
   std::vector<std::pair<int, int> >::const_iterator ranges_iter;
