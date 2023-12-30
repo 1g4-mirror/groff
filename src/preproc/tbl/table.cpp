@@ -2205,9 +2205,11 @@ void table::compute_overall_width()
   prints(".\\\" compute overall width\n");
   if (!(flags & GAP_EXPAND)) {
     if (left_separation)
-      printfs(".if n .ll -%1n\n", as_string(left_separation));
+      printfs(".if n .ll -%1n \\\" left separation\n",
+	      as_string(left_separation));
     if (right_separation)
-      printfs(".if n .ll -%1n\n", as_string(right_separation));
+      printfs(".if n .ll -%1n \\\" right separation\n",
+	      as_string(right_separation));
   }
   // Compute the amount of horizontal space available for expansion,
   // measuring every column _including_ those eligible for expansion.

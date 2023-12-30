@@ -1,5 +1,11 @@
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::compute_overall_width):
+	Document the nroff-mode workarounds we do in *roff comments in
+	the generated output.
+
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an-end): Horizontal rules in nroff mode _always_
 	overdraw by one character cell; this is how grotty detects
 	intersections with vertical rules at boundaries (see Savannah
