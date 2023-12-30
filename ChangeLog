@@ -1,3 +1,14 @@
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac (an-end): Horizontal rules in nroff mode _always_
+	overdraw by one character cell; this is how grotty detects
+	intersections with vertical rules at boundaries (see Savannah
+	#62471).  Unfortunately it has unhappy consequences when drawing
+	a rule that extends to the right margin.  Compensate by drawing
+	the rule between consecutively rendered man pages nominally one
+	en shorter than the line length, which turns out to be exactly
+	the line length.
+
 2023-12-29  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Fix Savannah #65092 (rounded corners in hdtbl's
