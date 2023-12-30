@@ -1,5 +1,13 @@
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Regression-test Savannah #62471.
+
+	* src/preproc/tbl/tests/horizontal-rules-not-drawn-too-long.sh:
+	Do it.
+	* src/preproc/tbl/tbl.am (tbl_TESTS): Run test.
+
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::compute_overall_width):
 	Document the nroff-mode workarounds we do in *roff comments in
 	the generated output.
