@@ -1,5 +1,22 @@
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Fix Savannah #62471 (hrules in nroff mode).
+
+	This fixes the last problem I know of that keeps man pages from
+	freely using the full width of the terminal.  (You can still
+	cause lines to overrun manually, of course.)
+
+	* src/preproc/tbl/table.h (class table): Define new enumeration
+	constant, `HAS_DATA_HRULE`, to keep track of whether a table
+	uses a horizontal rule as a data row.
+	* src/preproc/tbl/main.cpp (process_data): Set it when
+	encountering appropriate input.
+	* src/preproc/tbl/table.cpp (table::compute_overall_width):
+	Check for it if the table is not already boxed, and emit output
+	to reduce the line length by one in nroff mode.
+
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Regression-test Savannah #62471.
 
 	* src/preproc/tbl/tests/horizontal-rules-not-drawn-too-long.sh:

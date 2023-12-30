@@ -2211,6 +2211,8 @@ void table::compute_overall_width()
       printfs(".if n .ll -%1n \\\" right separation\n",
 	      as_string(right_separation));
   }
+  if (!(flags & (ALLBOX | BOX | DOUBLEBOX)) && (flags & HAS_DATA_HRULE))
+    prints(".if n .ll -1n \\\" horizontal rule compensation\n");
   // Compute the amount of horizontal space available for expansion,
   // measuring every column _including_ those eligible for expansion.
   // This is the minimum required to set the table without compression.
