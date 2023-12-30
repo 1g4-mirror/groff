@@ -1,5 +1,10 @@
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grotty/tty.cpp (tty_printer::end_page): Add
+	`assert()` to check invariant.
+
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/tests/check-horizontal-line-length.sh: Tweak
 	shell style and have test issue groff output to the standard
 	output stream.
