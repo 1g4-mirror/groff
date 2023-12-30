@@ -1,5 +1,11 @@
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/tests/check-horizontal-line-length.sh: Tweak
+	shell style and have test issue groff output to the standard
+	output stream.
+
+2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::contains): Add
 	sure-to-fail `assert()` to member function taking a `charinfo`
 	pointer and a `bool`.  It has been marked "TODO" and
