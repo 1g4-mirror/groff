@@ -628,6 +628,8 @@ a translator that would convert the C/A/T output from early-vintage AT&T
 to a form suitable for Versatec and Benson-Varian plotters.)
 .
 .
+.br
+.ne 6v
 .\" ====================================================================
 .SS "Drawing commands"
 .\" ====================================================================
@@ -1100,6 +1102,8 @@ character translations and definitions are ignored.
 Other escape sequences are not supported.
 .
 .
+.br
+.ne 3v
 .TP
 .BI \[rs]Y m
 .TQ
