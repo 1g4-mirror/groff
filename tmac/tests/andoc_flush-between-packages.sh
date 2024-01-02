@@ -71,7 +71,7 @@ test -z "$(echo "$output" \
 echo "checking mdoc to man transition" >&2
 test -z "$(echo "$output" \
     | sed '/^$/d' \
-    | sed -n '/partially-collected/{N;/test page 2/p;}')" \
+    | sed -n '/tially-collected/{N;/test page 2/p;}')" \
     && wail
 
 test -z "$fail"

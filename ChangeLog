@@ -1,5 +1,39 @@
 2024-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man,mdoc]: Increase default line length to 80n on terminals.
+	The resolution of tbl(1) bugs such as Savannah #63749, #63640,
+	and #62471 enables us to discard a decades-old convention of
+	using 78n for the default line length when formatting for
+	terminals; this was because tbl(1) would sometimes overset
+	lines, with ugly consequences.  (I _assume_ this was the reason;
+	no one ever seems to have gone on record about it--it was
+	seemingly yet another case of Unix folklore that "everybody
+	knew".)  Overset lines are still possible; tbl(1) will warn if
+	so.  They can also overset if the document disables filling; the
+	author is expected to know what they are doing in that case.
+
+	* tmac/an.tmac:
+	* tmac/doc-old.tmac:
+	* tmac/mdoc/doc-nroff: Do it.
+
+	* tmac/groff_man.7.man.in:
+	* tmac/groff_mdoc.7.man: Update documentation and annotations.
+
+	* tmac/tests/an-ext_SY-and-YS-work.sh:
+	* tmac/tests/an_HY-register-works.sh:
+	* tmac/tests/an_LL-init-sanely.sh:
+	* tmac/tests/an_UE-breaks-before-long-URIs.sh:
+	* tmac/tests/an_adjust-link-text-correctly.sh:
+	* tmac/tests/an_do-not-abbreviate-escape-using-TH-arguments.sh:
+	* tmac/tests/an_title-abbreviation-works.sh:
+	* tmac/tests/andoc_flush-between-packages.sh:
+	* tmac/tests/doc_indents-correctly.sh:
+	* tmac/tests/doc_smoke-test.sh: Update test output expectations.
+
+	* NEWS: Document it.
+
+2024-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-nroff (doc-setup-page-layout): Port nroff-mode
 	horizontal rule width compensation from "an.tmac" (29 December)
 	to mdoc.

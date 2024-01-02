@@ -51,7 +51,7 @@ echo "checking default 'Sh' indentation on 1st line" >&2
 echo "$output" | grep -Eq '^A +long +section +heading' || wail
 
 echo "cehcking default 'Sh' indentation on 2nd line" >&2
-echo "$output" | grep -Eq '^of said title is consistent' || wail
+echo "$output" | grep -Eq '^said title is consistent' || wail
 
 # Verify that paragraph indentation after section heading is correct.
 echo "checking 'Pp' indentation after 'Sh'" >&2

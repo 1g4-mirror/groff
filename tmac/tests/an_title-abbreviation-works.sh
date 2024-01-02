@@ -53,7 +53,8 @@ echo "$output"
 
 echo "checking that ultra-long man page title is abbreviated" >&2
 title_abbv="CosNotif...hSupplier(3erl)"
-pattern="$title_abbv Erlang Module Definition $title_abbv"
+# 2 spaces each before "Erlang" and after "Definition"
+pattern="$title_abbv  Erlang Module Definition  $title_abbv"
 echo "$output" | grep -Fq "$pattern" || wail
 
 test -z "$fail"

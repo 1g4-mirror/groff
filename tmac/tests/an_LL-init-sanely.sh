@@ -45,6 +45,6 @@ LL=\n[LL]u, .H=\n[.H]u, length=\n[cells]n
 
 output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man)
 echo "$output"
-echo "$output" | grep -q 'LL=1872u'
+echo "$output" | grep -q 'LL=1920u'
 
 # vim:set ai et sw=4 ts=4 tw=72:

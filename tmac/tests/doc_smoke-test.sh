@@ -54,7 +54,7 @@ echo "checking for section heading \"Description\"" >&2
 echo "$output" | grep -qE '^Description$' || wail
 
 echo "checking paragraph body for correct content" >&2
-echo "$output" | grep -qE 'you can read this' || wail
+echo "$output" | grep -qE 'you +can +read +this' || wail
 
 echo "checking footer for correct content" >&2
 echo "$output" | grep -qE '^GNU +August 25, 2020 +mdoc-test\(7\)' \
