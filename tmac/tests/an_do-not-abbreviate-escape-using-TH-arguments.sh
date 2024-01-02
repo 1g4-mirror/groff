@@ -37,6 +37,7 @@ input='.TH f\-b 1 2022-04-08 "Bletcherous Glorfinking Dungr'\
 
 # The u with dieresis will not be output on the 'ascii' device.
 output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man)
+echo "$output"
 
 echo "checking that title with escaped hyphen-minus is preserved" >&2
 echo "$output" | grep -q '^f-b(1)' || wail

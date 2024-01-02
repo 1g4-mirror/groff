@@ -43,7 +43,6 @@ things are probably working.'
 
 output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc)
 echo "$output"
-fail=
 
 echo "checking header for correct content" >&2
 echo "$output" | grep -qE '^mdoc-test\(7\) +Miscellaneous' || wail

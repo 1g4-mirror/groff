@@ -1,3 +1,34 @@
+2024-01-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[tmac]: Update tests to more recent script conventions, and to
+	share more information.
+
+	* tmac/tests/an_LL-init-sanely.sh: Rename variable from
+	`EXAMPLE` to `input`.  Write the test output to the standard
+	output stream.  Report the horizontal motion quantum (`.H`
+	register) and the line length in ens (character cells) as well
+	for comprehensibility by *roff non-experts.
+
+	* tmac/tests/an_do-not-abbreviate-escape-using-TH-arguments.sh:
+	Write the test output to the standard output stream.
+
+	* tmac/tests/an_title-abbreviation-works.sh: Rename variables to
+	use lowercase instead of uppercase.  Define and use `wail()`
+	function instead of repeating logic in failure cases.  Write the
+	test output to the standard output stream.  Report test progress
+	and outcomes to standard error stream.
+
+	* tmac/tests/andoc_flush-between-packages.sh: Rename variable
+	from `FAIL` to `fail`.  Define and use `wail()` function instead
+	of repeating logic in failure cases.
+
+	* tmac/tests/doc_indents-correctly.sh: Define and use `wail()`
+	function instead of repeating logic in failure cases.  Report
+	test progress to standard error stream.  Drop redundant `exit`.
+
+	* tmac/tests/doc_smoke-test.sh: Drop redundant variable
+	initialization.
+
 2023-12-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tbl]: Fix Savannah #62471 (hrules in nroff mode).
@@ -2985,7 +3016,7 @@ ________________________________________________________________________
 
 ##### License
 
-Copyright 2023 Free Software Foundation, Inc.
+Copyright 2023-2024 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
