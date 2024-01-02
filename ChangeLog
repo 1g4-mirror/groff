@@ -1,3 +1,9 @@
+2024-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/mdoc/doc-nroff (doc-setup-page-layout): Port nroff-mode
+	horizontal rule width compensation from "an.tmac" (29 December)
+	to mdoc.
+
 2024-01-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tmac]: Update tests to more recent script conventions, and to

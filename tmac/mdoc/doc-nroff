@@ -112,7 +112,7 @@
 .    lt \n[.l]u
 .
 .  nr doc-display-vertical 1v
-.  nr doc-line-length \n[.l]
+.  nr doc-line-length (\n[.l] - 1n)
 ..
 .ec
 .
