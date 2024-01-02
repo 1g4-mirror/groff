@@ -1,5 +1,10 @@
 2024-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/tbl.1.man (roff interface): Fix incorrect
+	claim regarding `#T` register.
+
+2024-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man,mdoc]: Increase default line length to 80n on terminals.
 	The resolution of tbl(1) bugs such as Savannah #63749, #63640,
 	and #62471 enables us to discard a decades-old convention of
