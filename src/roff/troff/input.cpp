@@ -2405,8 +2405,8 @@ void token::next()
 	    nm = composite_glyph_name(s);
 	  }
 	  else {
-	    const char *gn = check_unicode_name(s.contents());
-	    if (gn) {
+	    const char *gn = valid_unicode_code_sequence(s.contents());
+	    if (gn != 0 /* nullptr */) {
 	      const char *gn_decomposed = decompose_unicode(gn);
 	      if (gn_decomposed)
 		gn = &gn_decomposed[1];
@@ -4122,8 +4122,8 @@ static void map_composite_character()
   }
   const char *from_gn = glyph_name_to_unicode(from.contents());
   if (!from_gn) {
-    from_gn = check_unicode_name(from.contents());
-    if (!from_gn) {
+    from_gn = valid_unicode_code_sequence(from.contents());
+    if (0 /* nullptr */ == from_gn) {
       error("invalid composite glyph name '%1'", from.contents());
       skip_line();
       return;
@@ -4142,8 +4142,8 @@ static void map_composite_character()
   }
   const char *to_gn = glyph_name_to_unicode(to.contents());
   if (!to_gn) {
-    to_gn = check_unicode_name(to.contents());
-    if (!to_gn) {
+    to_gn = valid_unicode_code_sequence(to.contents());
+    if (0 /* nullptr */ == to_gn) {
       error("invalid composite glyph name '%1'", to.contents());
       skip_line();
       return;
@@ -4166,8 +4166,8 @@ static symbol composite_glyph_name(symbol nm)
   input_stack::push(mi);
   const char *gn = glyph_name_to_unicode(nm.contents());
   if (!gn) {
-    gn = check_unicode_name(nm.contents());
-    if (!gn) {
+    gn = valid_unicode_code_sequence(nm.contents());
+    if (0 /* nullptr */ == gn) {
       error("invalid base glyph '%1' in composite glyph name", nm.contents());
       return EMPTY_SYMBOL;
     }
@@ -4187,8 +4187,8 @@ static symbol composite_glyph_name(symbol nm)
     gl += '\0';
     const char *u = glyph_name_to_unicode(gl.contents());
     if (!u) {
-      u = check_unicode_name(gl.contents());
-      if (!u) {
+      u = valid_unicode_code_sequence(gl.contents());
+      if (0 /* nullptr */ == u) {
 	error("invalid component '%1' in composite glyph name",
 	      gl.contents());
 	return EMPTY_SYMBOL;

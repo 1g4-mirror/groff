@@ -4,6 +4,23 @@
 
 2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff, troff]: Refactor.
+
+	* src/include/unicode.h: Rename function `check_unicode_name` to
+	`valid_unicode_code_sequence` and update comments to better
+	explain what it actually does.  The validity of "u1234_5678" in
+	addition to "u1234" was undocumented and not even implied.
+	* src/libs/libgroff/unicode.cpp (check_unicode_name): Rename
+	this...
+	(valid_unicode_code_sequence): ...to this.
+
+	* src/libs/libgroff/font.cpp (glyph_to_unicode)
+	* src/roff/troff/input.cpp (token::next)
+	(map_composite_character, composite_glyph_name): Update call
+	sites.  Make comparisons to null pointers explicit.
+
+2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[gropdf]: Add "notice" diagnostic level for debugging.
 
 	* src/devices/gropdf/gropdf.pl (Notice): Add new subroutine.  It
