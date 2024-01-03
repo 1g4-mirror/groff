@@ -9733,9 +9733,9 @@ file @file{tty.tmac}, which is loaded by the startup file
 
 @cindex dimensions, line
 @cindex line dimensions
-The following drawing shows the dimensions that @command{gtroff} uses
-for placing a line of output onto the page.  They are labeled with the
-request that manipulates each dimension.
+The following drawing shows the dimensions that GNU @command{troff} uses
+to arrange a line of output on the page.  Each dimension is labeled with
+the name of the request that configures it.
 
 @Example
      -->| in |<--
@@ -9748,36 +9748,36 @@ request that manipulates each dimension.
 @endExample
 
 @noindent
-These dimensions are:
+The dimensions are defined as follows.
 
-@ftable @code
-@item po
-@cindex left margin (@code{po})
-@cindex margin, left (@code{po})
+@multitable @columnfractions 0.05 0.95
+@item @code{po}
 @cindex page offset (@code{po})
 @cindex offset, page (@code{po})
-@dfn{Page offset}---this is the leftmost position of text on the final
-output, defining the @dfn{left margin}.
+@tab
+The @dfn{page offset} is the leftmost position of running text.
 
-@item in
+@item @code{in}
 @cindex indentation (@code{in})
 @cindex line indentation (@code{in})
-@dfn{Indentation}---this is the distance from the left margin where
-text is printed.
+@tab
+@dfn{Indentation} is the distance from the page offset at which text is
+set.
 
-@item ll
+@item @code{ll}
 @cindex line length (@code{ll})
 @cindex length of line (@code{ll})
-@dfn{Line length}---this is the distance from the left margin to right
-margin.
-@end ftable
+@tab
+@dfn{Line length} is the maximum extent of unindented running text.
+@end multitable
 
+@cindex left margin (@code{po})
+@cindex margin, left (@code{po})
 @cindex margin, right
 @cindex right margin
-The right margin is not explicitly configured; the combination of page
-offset and line length provides the information necessary to derive it.
-
-A simple demonstration:
+The page offset can be thought of as the ``left margin''.  The right
+margin is not explicitly configured; the combination of page offset and
+line length provides the information necessary to derive it.
 
 @Example
 .ll 3i
@@ -9804,20 +9804,22 @@ the previous values.
     @result{} ous values.
 @endExample
 
+Requests exist to place line numbers and margin characters beyond the
+page margins; @ref{Miscellaneous}.
+
 @DefreqList {po, [@Var{offset}]}
 @DefreqItem {po, @t{+}@Var{offset}}
 @DefreqItem {po, @t{-}@Var{offset}}
 @DefregListEndx {.o}
 @pindex tty.tmac
-Set page offset to @var{offset} (or increment or decrement its current
-value by @var{offset}).  If invoked without an argument, the page offset
-is restored to the value before the previous @code{po} request.
-This request does not cause a break; the page offset in effect when an
-output line is broken prevails (@pxref{Manipulating Filling and
-Adjustment}).  The initial value is 1@dmn{i} and the default scaling
-unit is @samp{m}.  On terminal devices, the page offset is set to zero
-by a driver-specific macro file, @file{tty.tmac}.  The current page
-offset can be found in the read-only register @samp{.o}.
+Set page offset to @var{offset}; if @var{offset} is signed, adjust the
+page offset by its value.  The default scaling unit is @samp{m}.
+The default offset is 1@dmn{i} on typesetters and zero on terminals.
+
+If @var{offset} is omitted, the page offset is reset to that before the
+previous invocation of @code{po}.
+
+The page offset can be found in the read-only register @samp{.o}.
 @cindex CSTR@tie{}#54 errata
 @cindex CSTR@tie{}#54 erratum, @code{po} request
 This request is incorrectly documented in the @acronym{AT&T}
@@ -9840,54 +9842,43 @@ This request is incorrectly documented in the @acronym{AT&T}
 @DefreqItem {in, @t{+}@Var{indent}}
 @DefreqItem {in, @t{-}@Var{indent}}
 @DefregListEndx {.i}
-Set indentation to @var{indent} (or increment or decrement the current
-value by @var{indent}).  This request causes a break.  Initially, there
-is no indentation.
+Set indentation to @var{indent}; if @var{indent} is signed, adjust the
+indentation by its value.  The default scaling unit is @samp{m}.
+Initially, there is no indentation.  This request causes a break.
 
-If @code{in} is called without an argument, the indentation is reset to
-the previous value before the last call to @code{in}.  The default
-scaling unit is @samp{m}.
-
-If a negative indentation value is specified (which is not allowed),
-@command{gtroff} emits a warning in category @samp{range} and sets the
-indentation to zero.
+If @var{indent} is omitted, the indentation is reset to that before the
+previous invocation of @code{in}, and zero if there is none.  If
+@var{indent} is negative, GNU @command{troff} emits a warning in
+category @samp{range} and sets the indentation to zero; a temporary
+indentation (see below) is reset to zero as well.
 
 The effect of @code{in} is delayed until a partially collected line (if
-it exists) is output.  A temporary indentation value is reset to zero
-also.
+it exists) is output.  In other words, it does not change a pending
+output line's indentation.
 
-The current indentation (as set by @code{in}) can be found in the
-read-only register @samp{.i}.  The indentation is associated with the
-environment (@pxref{Environments}).
+The indentation (as set by @code{in}) can be found in the read-only
+register @samp{.i}; it ignores temporary indentation (see below).  The
+indentation is associated with the environment (@pxref{Environments}).
 @endDefreq
 
 @DefreqList {ti, offset}
 @DefreqItem {ti, @t{+}@Var{offset}}
 @DefreqItem {ti, @t{-}@Var{offset}}
 @DefregListEndx {.in}
-Temporarily indent the next output line by @var{offset}.  If an
-increment or decrement value is specified, adjust the temporary
-indentation relative to the value set by the @code{in} request.
+Temporarily indent the next output line by @var{offset}; if @var{offset}
+is signed, adjust the temporary indentation relative to the value set by
+the @code{in} request.  The default scaling unit is @samp{m}.  This
+request causes a break.
 
-This request causes a break; its value is associated with the
-environment (@pxref{Environments}).  The default scaling unit is
-@samp{m}.  A call of @code{ti} without an argument is ignored.
-
-If the total indentation value is negative (which is not allowed),
-@command{gtroff} emits a warning in category @samp{range} and sets the
-temporary indentation to zero.  `Total indentation' is either
-@var{offset} if specified as an absolute value, or the temporary plus
-normal indentation, if @var{offset} is given as a relative value.
+Omitting @var{offset} causes a warning in category @samp{missing}.
 
 The effect of @code{ti} is delayed until a partially collected line (if
-it exists) is output.
+it exists) is output.  In other words, it does not change a pending
+output line's indentation.
 
-The read-only register @code{.in} is the indentation that applies to the
-current output line.
-
-The difference between @code{.i} and @code{.in} is that the latter takes
-into account whether a partially collected line still uses the old
-indentation value or a temporary indentation value is active.
+The read-only register @code{.in} reports the indentation that applies
+to the pending output line.  The temporary indentation is associated
+with the environment (@pxref{Environments}).
 @endDefreq
 
 @DefreqList {ll, [@Var{length}]}
@@ -9895,27 +9886,32 @@ indentation value or a temporary indentation value is active.
 @DefreqItem {ll, @t{-}@Var{length}}
 @DefregItemx {.l}
 @DefregListEndx {.ll}
-Set the line length to @var{length} (or increment or decrement the
-current value by @var{length}).  Initially, the line length is set to
-6.5@dmn{i}.  The effect of @code{ll} is delayed until a partially
-collected line (if it exists) is output.  The default scaling unit is
-@samp{m}.
+Set the line length to @var{length}; if @var{length} is signed, adjust
+the line length by its value.  The default scaling unit is @samp{m}.  If
+not otherwise configured (see @pxref{Paper Format}), the default line
+length is 6.5@dmn{i}.
 
-If @code{ll} is called without an argument, the line length is reset to
-the previous value before the last call to @code{ll}.  If a negative
-line length is specified (which is not allowed), @command{gtroff} emits
-a warning in category @samp{range} and sets the line length to zero.
-The line length is associated with the environment
-(@pxref{Environments}).
+If @var{length} is omitted, the line length is reset to that before the
+previous invocation of @code{ll}.  If @var{length} is negative, GNU
+@command{troff} emits a warning in category @samp{range} and sets the
+line length to the device's horizontal motion quantum; recall
+@ref{Motion Quanta}.
+
+The effect of @code{ll} is delayed until a partially collected line (if
+it exists) is output.  In other words, it does not change a pending
+output line's length.
 
 @cindex line length register (@code{.l})
-The current line length (as set by @code{ll}) can be found in the
+The line length as set by @code{ll} can be found in the
 read-only register @samp{.l}.  The read-only register @code{.ll} is the
-line length that applies to the current output line.
+line length that applies to the pending output line.
 
-Similar to @code{.i} and @code{.in}, the difference between @code{.l}
+Similarly to @code{.i} and @code{.in}, the difference between @code{.l}
 and @code{.ll} is that the latter takes into account whether a partially
-collected line still uses the old line length value.
+collected line still uses the previous length.
+
+The line length is associated with the environment
+(@pxref{Environments}).
 @endDefreq
 
 
