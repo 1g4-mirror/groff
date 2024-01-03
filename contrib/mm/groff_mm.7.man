@@ -9,7 +9,7 @@ groff_mm \- memorandum macros for GNU
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2023 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -5184,6 +5184,8 @@ A scaling unit should be appended;
 is typical.
 .
 The default vertical spacing is 120% of the type size.
+.
+This register is a GNU extension.
 .
 .
 .TP
