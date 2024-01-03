@@ -4,6 +4,19 @@
 
 2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gropdf]: Add "notice" diagnostic level for debugging.
+
+	* src/devices/gropdf/gropdf.pl (Notice): Add new subroutine.  It
+	emits a diagnostic message only if debugging ("gropdf -d").
+	(Warn): Prefix diagnostic with severity level here...
+	(Msg): ...instead of here.
+	(LoadFont): Demote diagnostic about fonts lacking space glyphs
+	from warning to ntoice.
+
+	Fixes <https://savannah.gnu.org/bugs/?65111>.
+
+2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl: Report only "basename" of
 	program name in diagnostic messages.
 
