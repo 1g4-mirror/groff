@@ -406,9 +406,9 @@ o The an (man) macro package supports a new macro, `MR`, intended for
   optional).  Because the macro semantically identifies a man page, it
   can create a clickable hyperlink ("man:ls(1)" for the above example)
   on supporting devices.  Furthermore, a new string, `MF`, defines the
-  font to be used for setting the man page topic (the first argument to
-  `MR` and `TH`), permitting configuration by distributions, sites, and
-  users.
+  font to be used for setting the man page identifier (the first
+  argument to the `MR` and `TH` macros), permitting configuration by
+  distributions, sites, and users.
 
   Inclusion of the `MR` macro was prompted by its introduction to
   Plan 9 from User Space's troff in August 2020.  Its purpose is to
