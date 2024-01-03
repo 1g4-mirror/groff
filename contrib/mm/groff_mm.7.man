@@ -648,13 +648,17 @@ See
 .\" In DWB mm, the mnemonic for `AF` was "alternate first-page format",
 .\" and was described in the context of the `A` and `E` registers and
 .\" `}Z` and `]S` strings, none of which we support.
+.\"
+.\" The "mm Reference" in _XENIX 286 Text Formatting Guide_ (1984) used
+.\" "affiliation", which makes sense to GBR.
 .TP
 .BR AF \~[\c
-.IR firm-name ]
-Specify firm associated with the document.
+.IR org-name ]
+Specify a memorandum's organizational affiliation.
 .
 At most one can be declared;
-the firm name is used by memorandum types and available to cover sheets.
+.I org-name
+is used by memorandum types and available to cover sheets.
 .
 .B AF
 terminates a document title started with
