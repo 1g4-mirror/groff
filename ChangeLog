@@ -1,3 +1,11 @@
+2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/gropdf/gropdf.pl: Report only "basename" of
+	program name in diagnostic messages.
+
+	Fixes <https://savannah.gnu.org/bugs/?65110>.  Thanks to Dave
+	Kemper for the code review.
+
 2024-01-03  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Add `pdfpagenumbering` macro.

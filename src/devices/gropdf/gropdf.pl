@@ -26,6 +26,7 @@ require 5.8.0;
 use Getopt::Long qw(:config bundling);
 use Encode qw(encode);
 use POSIX qw(mktime);
+use File::Spec qw(splitpath);
 
 use constant
 {
@@ -216,7 +217,8 @@ my %StdEnc=(
     251 => 'ss',
 );
 
-my $prog=$0;
+(undef,undef,my $prog)=File::Spec->splitpath($0);
+
 unshift(@ARGV,split(' ',$ENV{GROPDF_OPTIONS})) if exists($ENV{GROPDF_OPTIONS});
 
 my $gotzlib=0;
