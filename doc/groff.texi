@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle Edition 1.23.0+Git
-@subtitle December 2023
+@subtitle January 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -1655,7 +1655,7 @@ with a @command{groff} command.
 $ groff -t -m an -T utf8 /usr/share/man/man1/groff.1
 @endExample
 
-The librarian will also pipe the output through a pager, which might not
+The librarian may also pipe the output through a pager, which might not
 interpret terminal escape sequences @command{groff} emits for boldface,
 underlining, italics, or hyperlinking; see the @cite{grotty@r{(1)}} man
 page for a discussion.
@@ -2154,11 +2154,12 @@ in multiple passes is inescapable, and tools like the
 @subsection Document Formats
 @cindex document formats
 
-Some macro packages supply stock configurations of certain documents,
-like business letters and memoranda.  These often also have provision
-for a @slanted{cover sheet}, which may be rigid in its format.  With
-these features, it is even more important to use the package's macros in
-preference to the formatter requests presented earlier, where possible.
+Some macro packages supply stock configurations of certain types of
+documents, like business letters and memoranda.  These often also have
+provision for a @slanted{cover sheet}, which may be rigid in its format.
+With these features, it is even more important to use the package's
+macros in preference to the formatter requests presented earlier, where
+possible.
 
 @c ---------------------------------------------------------------------
 
@@ -8008,8 +8009,8 @@ operating environment.
 
 Date- and time-related registers are set per the local time as
 determined by @cite{localtime@r{(3)}} when the formatter launches.  This
-initialization can be overridden by @env{SOURCE_DATE_EPOCH} and
-@env{TZ}; see @ref{Environment}.
+initialization can be influenced by the environment variable @env{TZ} or
+overridden by @env{SOURCE_DATE_EPOCH}; see @ref{Environment}.
 
 @table @code
 @item \n[seconds]
@@ -9696,7 +9697,9 @@ Nevertheless, it is sometimes necessary to make a distinction between
 terminal and non-terminal devices: GNU @code{troff} provides two
 built-in conditions @samp{n} and @samp{t} for the @code{if}, @code{ie},
 and @code{while} requests to decide whether GNU @code{troff} shall
-behave like @code{nroff} or like @code{troff}.
+behave like @code{nroff} or like
+@code{troff}.@footnote{@xref{Conditionals and Loops}, for more on
+built-in conditions.}
 
 @Defreq {troff, }
 @pindex troffrc
@@ -9719,8 +9722,6 @@ output device; the code for switching to @code{nroff} mode is in the
 file @file{tty.tmac}, which is loaded by the startup file
 @code{troffrc}.
 @endDefreq
-
-@xref{Conditionals and Loops}, for more details on built-in conditions.
 
 
 @c =====================================================================
@@ -11301,13 +11302,14 @@ character is set to@tie{}@code{\} while @var{contents} is processed.
 Any emboldening, constant spacing, or track kerning is applied to this
 object rather than to individual glyphs in @var{contents}.
 
-An object defined by these requests can be used just like a normal glyph
+An object defined by these requests can be used just like a glyph
 provided by the output device.  In particular, other characters can be
 translated to it with the @code{tr} or @code{trin} requests; it can be
-made the leader character with the @code{lc} request; repeated patterns
-can be drawn with it using the @code{\l} and @code{\L} escape sequences;
-and words containing@tie{}@var{c} can be hyphenated correctly if the
-@code{hcode} request is used to give the object a hyphenation code.
+made the tab or leader fill character with the @code{tc} and @code{lc}
+requests, respectively; repeated patterns can be drawn with it using the
+@code{\l} and @code{\L} escape sequences; and words
+containing@tie{}@var{c} can be hyphenated correctly if the @code{hcode}
+request is used to give the object a hyphenation code.
 
 There is a special anti-recursion feature: use of the object within its
 own definition is handled like a normal character (not
@@ -14131,6 +14133,7 @@ over that glyph.
 @end table
 @endDefesc
 
+@need 500
 @DefescList {\\k, , p, }
 @DefescItem {\\k, (, ps, }
 @DefescListEnd {\\k, [, position, ]}
@@ -14139,10 +14142,11 @@ over that glyph.
 @cindex input line position, horizontal, saving (@code{\k})
 @cindex position, horizontal input line, saving (@code{\k})
 @cindex line, input, horizontal position, saving (@code{\k})
-Store the current horizontal position in the @emph{input} line in a
-register with the name @var{position} (one-character name@tie{}@var{p},
-two-character name @var{ps}).  Use this, for example, to return to the
-beginning of a string for highlighting or other decoration.
+Store the horizontal drawing position relative to that corresponding to
+the beginning of the input line in a register with the name
+@var{position} (one-character name@tie{}@var{p}, two-character name
+@var{ps}).  Use this, for example, to move to the beginning of a word
+for highlighting or other decoration.
 @endDefesc
 
 @Defreg {hp}
@@ -15681,8 +15685,8 @@ is
 The latter calling syntax doesn't change the value of @code{\$0}, which
 is then inherited from the calling macro (@pxref{Parameters}).
 
-Diversions can be also called with string syntax.  It is sometimes
-convenient to copy one-line diversions to a string.
+It is sometimes convenient to copy a single-line diversion to a string,
+which can then be interpolated with @code{\*}.
 
 @Example
 .di xx
@@ -15698,10 +15702,9 @@ interpolation system
 @endExample
 
 @noindent
-As the previous example shows, it is possible to store formatted output
-in strings.  The @code{\c} escape sequence prevents the subsequent
-newline from being interpreted as a break (again,
-@pxref{Line Continuation}).
+In the foreoging, we say that formatted output can thus be stored in a
+string.  The @code{\c} escape sequence prevents the subsequent newline
+from being interpreted as a break (again, @pxref{Line Continuation}).
 
 Copying multi-output line diversions produces unexpected results.
 
@@ -16062,21 +16065,22 @@ with @code{so} are not preprocessed; to overcome this limitation, see
 the @cite{gsoelim@r{(1)}} man page.
 
 Since GNU @code{troff} replaces the entire control line with the
-contents of a file, it matters whether @code{file} is terminated with a
-newline or not.  Assume that file @file{xxx} contains only the word
+contents of a file, it matters whether @var{file} is terminated with a
+newline or not.  Consider a file @file{xxx} containing only the word
 @samp{foo} without a trailing newline.
 
 @Example
 $ printf 'foo' > xxx
-
+$ groff <<EOF
 The situation is
 .so xxx
 bar.
+EOF
     @result{} The situation is foobar.
 @endExample
 
-@code{soquiet} works the same way, except that no warning diagnostic is
-issued if @var{file} does not exist.
+@code{soquiet} works the same way, except that GNU @command{troff}
+issues no warning diagnostic if @var{file} does not exist.
 @endDefreq
 
 @Defreq {pso, command}
@@ -16610,7 +16614,7 @@ both the @code{.nm} and @code{.nn} registers.
     @result{} This line ISN@quoteright{}T numbered.
 @endExample
 
-@Defreq {mc, [@Var{margin-character} [@Var{distance}]}
+@Defreq {mc, [@Var{margin-character} [@Var{distance}]]}
 @cindex margin character (@code{mc})
 @cindex character, margins (@code{mc})
 Begin (or, with no arguments, cease) writing a @dfn{margin-character} to
