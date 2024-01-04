@@ -4,6 +4,16 @@
 
 2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/glyphuni.cpp: Trivially refactor.
+	(struct glyph_to_unicode): Rename this...
+	(struct glyph_to_unicode_map): ...to this.  We already have a
+	_function_ called `glyph_to_unicode` in the code base and
+	apparently it's not a name space conflict (despite groff making
+	little use of any but the default name space), but it's
+	definitely confusing when searching the code.
+
+2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff, troff]: Refactor.
 
 	* src/include/unicode.h: Rename function `check_unicode_name` to
