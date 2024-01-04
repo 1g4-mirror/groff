@@ -506,9 +506,7 @@ static struct glyph_to_unicode_init {
 
 glyph_to_unicode_init::glyph_to_unicode_init()
 {
-  for (unsigned int i = 0;
-       i < sizeof(glyph_to_unicode_list)/sizeof(glyph_to_unicode_list[0]);
-       i++) {
+  for (size_t i = 0; i < array_length(glyph_to_unicode_list); i++) {
     glyph_to_unicode_map *gtu = new glyph_to_unicode_map[1];
     gtu->value = (char *)glyph_to_unicode_list[i].value;
     glyph_to_unicode_table.define(glyph_to_unicode_list[i].key, gtu);
@@ -518,7 +516,7 @@ glyph_to_unicode_init::glyph_to_unicode_init()
 const char *glyph_name_to_unicode(const char *s)
 {
   glyph_to_unicode_map *result = glyph_to_unicode_table.lookup(s);
-  return result ? result->value : 0;
+  return result ? result->value : 0 /* nullptr */;
 }
 
 // Local Variables:

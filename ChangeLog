@@ -4,6 +4,13 @@
 
 2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/glyphuni.cpp: Slightly refactor.
+	(glyph_to_unicode_init::glyph_to_unicode_init): Use
+	`array_length()` (our std::size for C++98) and `size_t` as type
+	for loop index.
+
+2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/glyphuni.cpp: Trivially refactor.
 	(struct glyph_to_unicode): Rename this...
 	(struct glyph_to_unicode_map): ...to this.  We already have a
