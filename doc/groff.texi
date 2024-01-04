@@ -15698,7 +15698,7 @@ interpolation system
 @endExample
 
 @noindent
-In the foreoging, we say that formatted output can thus be stored in a
+In the foregoing, we see that formatted output can thus be stored in a
 string.  The @code{\c} escape sequence prevents the subsequent newline
 from being interpreted as a break (again, @pxref{Line Continuation}).
 
