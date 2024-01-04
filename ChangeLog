@@ -1,3 +1,8 @@
+2024-01-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (make_glyph_node): Trivially refactor;
+	Boolify local variable.
+
 2024-01-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	font/devpdf/Foundry.in: Fix Savannah #65115.

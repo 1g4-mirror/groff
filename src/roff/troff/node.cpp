@@ -4911,7 +4911,7 @@ static node *make_glyph_node(charinfo *s, environment *env,
   }
   assert(fontno < font_table_size && font_table[fontno] != 0);
   int fn = fontno;
-  int found = font_table[fontno]->contains(s);
+  bool found = font_table[fontno]->contains(s);
   if (!found) {
     macro *mac = s->get_macro();
     if (mac && s->is_fallback())
