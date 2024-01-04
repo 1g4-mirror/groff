@@ -4732,7 +4732,11 @@ sub subs_call
 	    my $n2=$charstr->[++$j];
 	    push(@c,[$n2,0]);
 
-	    if ($n2==6)	 # seac
+	    if ($n2==16)	 # callothersub
+	    {
+		$c[$#c-4]->[0]=MarkSub("#$c[$#c-4]->[0]") if ($c[$#c-4]->[1]);
+	    }
+	    elsif ($n2==16)	 # seac
 	    {
 		my $ch=$StdEnc{$c[$#c-2]->[0]};
 		my $chf;
