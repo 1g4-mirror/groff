@@ -1,5 +1,222 @@
 2024-01-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/input.cpp
+	(class non_interpreted_char_node)
+	(class token_node)
+	(class non_interpreted_node):
+	Rename `same()` member function to `is_same_as()`.  Demote
+	`is_same_as()` and `is_tag()` member function from `int` to
+	`bool`.
+
+	(non_interpreted_char_node::same):
+	(token_node::same):
+	(non_interpreted_node::same): Rename these...
+	(non_interpreted_char_node::is_same_as):
+	(token_node::is_same_as):
+	(non_interpreted_node::is_same_as): ...to these.  Demote return
+	type from `int` to `bool`.
+
+	(non_interpreted_char_node::is_tag):
+	(operator==):
+	Demote return type from `int` to `bool`.
+
+	(operator==):
+	Return Boolean instead of integer literal.  Rename local
+	variable `are_same` to `same` for brevity and demote it from
+	`int` to `bool`.
+
+	* src/roff/troff/node.cpp
+	(class glyph_node)
+	(class ligature_node)
+	(class kern_pair_node)
+	(class dbreak_node)
+	(class hyphen_inhibitor_node):
+	(class italic_corrected_node):
+	(class break_char_node):
+	(class composite_node):
+	Rename `same()` member function to `is_same_as()`.  Demote
+	`is_same_as()` and `is_tag()` member function from `int` to
+	`bool`.
+
+	(hyphen_inhibitor_node::same):
+	(special_node::same):
+	(suppress_node::same):
+	(tag_node::same):
+	(draw_node::same):
+	(extra_size_node::same):
+	(vertical_size_node::same):
+	(hmotion_node::same):
+	(space_char_hmotion_node::same):
+	(vmotion_node::same):
+	(hline_node::same):
+	(vline_node::same):
+	(dummy_node::same):
+	(transparent_dummy_node::same):
+	(zero_width_node::same):
+	(italic_corrected_node::same):
+	(left_italic_corrected_node::same):
+	(overstrike_node::same):
+	(bracket_node::same):
+	(composite_node::same):
+	(glyph_node::same):
+	(ligature_node::same):
+	(kern_pair_node::same):
+	(dbreak_node::same):
+	(break_char_node::same):
+	(line_start_node::same):
+	(space_node::same):
+	(word_space_node::same):
+	(unbreakable_space_node::same):
+	(diverted_space_node::same):
+	(diverted_copy_file_node::same):
+	Rename these...
+	(hyphen_inhibitor_node::is_same_as):
+	(special_node::is_same_as):
+	(suppress_node::is_same_as):
+	(tag_node::is_same_as):
+	(draw_node::is_same_as):
+	(extra_size_node::is_same_as):
+	(vertical_size_node::is_same_as):
+	(hmotion_node::is_same_as):
+	(space_char_hmotion_node::is_same_as):
+	(vmotion_node::is_same_as):
+	(hline_node::is_same_as):
+	(vline_node::is_same_as):
+	(dummy_node::is_same_as):
+	(transparent_dummy_node::is_same_as):
+	(zero_width_node::is_same_as):
+	(italic_corrected_node::is_same_as):
+	(left_italic_corrected_node::is_same_as):
+	(overstrike_node::is_same_as):
+	(bracket_node::is_same_as):
+	(composite_node::is_same_as):
+	(glyph_node::is_same_as):
+	(ligature_node::is_same_as):
+	(kern_pair_node::is_same_as):
+	(dbreak_node::is_same_as):
+	(break_char_node::is_same_as):
+	(line_start_node::is_same_as):
+	(space_node::is_same_as):
+	(word_space_node::is_same_as):
+	(unbreakable_space_node::is_same_as):
+	(diverted_space_node::is_same_as):
+	(diverted_copy_file_node::is_same_as):
+	...to these.  Demote return type from `int` to `bool`.
+
+	(hyphen_inhibitor_node::is_tag):
+	(node::is_tag):
+	(space_node::is_tag):
+	(special_node::is_tag):
+	(tag_node::is_tag):
+	(suppress_node::is_tag):
+	(unbreakable_space_node::is_tag):
+	(draw_node::is_tag):
+	(extra_size_node::is_tag):
+	(hmotion_node::is_tag):
+	(space_char_hmotion_node::is_tag):
+	(vmotion_node::is_tag):
+	(hline_node::is_tag):
+	(vline_node::is_tag):
+	(dummy_node::is_tag):
+	(transparent_dummy_node::is_tag):
+	(zero_width_node::is_tag):
+	(italic_corrected_node::is_tag):
+	(left_italic_corrected_node::is_tag):
+	(overstrike_node::is_tag):
+	(bracket_node::is_tag):
+	(glyph_node::is_tag):
+	(ligature_node::is_tag):
+	(kern_pair_node::is_tag):
+	(dbreak_node::is_tag):
+	(break_char_node::is_tag):
+	(line_start_node::is_tag):
+	(word_space_node::is_tag):
+	(diverted_space_node::is_tag):
+	(diverted_copy_file_node::is_tag):
+	Demote return type from `int` to `bool`.
+
+	(hyphen_inhibitor_node::is_tag):
+	(node::is_tag):
+	(space_node::is_tag):
+	(special_node::is_tag):
+	(tag_node::is_tag):
+	(unbreakable_space_node::is_tag):
+	(draw_node::is_tag):
+	(vertical_size_node::is_tag):
+	(hmotion_node::is_tag):
+	(space_char_hmotion_node::is_tag):
+	(vmotion_node::is_tag):
+	(hline_node::is_tag):
+	(vline_node::is_tag):
+	(dummy_node::is_same_as):
+	(dummy_node::is_tag):
+	(transparent_dummy_node::is_same_as):
+	(zero_width_node::is_tag):
+	(italic_corrected_node::is_tag):
+	(left_italic_corrected_node::is_tag):
+	(overstrike_node::is_tag):
+	(bracket_node::is_tag):
+	(glyph_node::is_tag):
+	(ligature_node::is_tag):
+	(kern_pair_node::is_tag):
+	(dbreak_node::is_tag):
+	(break_char_node::is_tag):
+	(line_start_node::is_same_as):
+	(line_start_node::is_tag):
+	(word_space_node::is_tag):
+	(diverted_space_node::is_tag):
+	(diverted_copy_file_node::is_tag):
+	(same_node, same_node_list):
+	Return Boolean instead of integer literal.
+
+	(make_glyph_node, same_node): Make explicit comparisons of
+	pointer types to null pointer literals.
+
+	* src/roff/troff/node.h (struct node): Demote member variable
+	`is_special` from `int` to `bool`.  Demote pure virtual member
+	function `is_tag`'s return type from `int` to `bool`.  Rename
+	pure virtual member function from `same` to `is_same_as` and
+	demote its return type from `int` to `bool`.
+	(node::node): Use Boolean instead of integer literal in
+	overloaded `is_special` initializers.
+	(class line_start_node):
+	(class space_node):
+	(class word_space_node):
+	(class unbreakable_space_node):
+	(class diverted_space_node):
+	(class diverted_copy_file_node):
+	(class extra_size_node):
+	(class vertical_size_node):
+	(class hmotion_node):
+	(class space_char_hmotion_node):
+	(class vmotion_node):
+	(class hline_node):
+	(class vline_node):
+	(class dummy_node):
+	(class transparent_dummy_node):
+	(class zero_width_node):
+	(class left_italic_corrected_node):
+	(class overstrike_node):
+	(class bracket_node):
+	(class special_node):
+	(class suppress_node):
+	(class tag_node):
+	(class draw_node):
+	Rename member function `same` to
+	`is_same_as`.  Demote member functions `is_same_as` and `is_tag`
+	from `int` to `bool`.
+
+	* src/roff/troff/request.h (class macro): Demote friend function
+	`operator==` from `int` to `bool`.
+
+Annotate nullptr.  Wrap long input lines.  Drop annotations of names of
+unused single parameters to member functions in definitions.  Emacs
+file-local variable thing.
+
+2024-01-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (make_glyph_node): Trivially refactor;
 	Boolify local variable.
 
