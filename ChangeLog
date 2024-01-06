@@ -1,3 +1,9 @@
+2024-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/devpdf/Foundry.in: More BMI, BMR mapping swap; swap the
+	file name pairs "URWBookmanL-LighItal" and "URWBookmanL-Ligh";
+	and "b018032l.pfb" and "018012l.pfb" as well.
+
 2024-01-07  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	* src/devices/gropdf/gropdf.pl: Comment out line causing
