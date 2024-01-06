@@ -5784,10 +5784,9 @@ will not.
 .\" ====================================================================
 .
 Its extensions notwithstanding,
-the
-.I groff
-intermediate output format has some incompatibilities
-with that of AT&T
+GNU
+.IR troff 's \" GNU
+output format has some incompatibilities with that of AT&T
 .IR troff , \" AT&T
 but better compatibility is sought;
 problem reports and patches are welcome.
