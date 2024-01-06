@@ -3224,7 +3224,7 @@ arguments.
 .
 .
 .TP
-.BR .return\~ [
+.BR .return\~ [\c
 .IR anything ]
 .\" XXX: useless request warning?
 Stop interpreting a macro,
