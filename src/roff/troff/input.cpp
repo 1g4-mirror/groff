@@ -1539,6 +1539,22 @@ static void define_color()
   skip_line();
 }
 
+static void report_color()
+{
+  // TODO: Accept an argument to look up a color by name and dump its
+  // info (name, color space, channel values).
+  dictionary_iterator iter(color_dictionary);
+  symbol entry;
+  color *color_entry;
+  while(iter.get(&entry, reinterpret_cast<void **>(&color_entry))) {
+    assert(!entry.is_null());
+    assert(color_entry != 0 /* nullptr */);
+    const char *color_name = entry.contents();
+    errprint("%1\n", color_name);
+  }
+  skip_line();
+}
+
 node *do_overstrike()
 {
   overstrike_node *on = new overstrike_node;
@@ -8607,6 +8623,7 @@ void init_input_requests()
   init_request("opena", opena_request);
   init_request("output", output_request);
   init_request("pc", set_page_character);
+  init_request("pcolor", report_color);
   init_request("pi", pipe_output);
   init_request("pm", print_macros);
   init_request("psbb", ps_bbox_request);

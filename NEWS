@@ -26,6 +26,11 @@ o The device-independent output now reports unbreakable spaces (those
 o A new read-only, string-valued register, `.trap`, interpolates the
   name of the next vertical position trap that will be sprung.
 
+o A new request, `pcolor`, reports to the standard error stream the
+  current list of defined colors.  (A device's default stroke and/or
+  fill colors, "default", are not listed since they are immutable and
+  their details unknown to the formatter.)
+
 o A new request, `phw`, reports to the standard error stream the current
   list of hyphenation exceptions.
 

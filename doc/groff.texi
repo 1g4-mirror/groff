@@ -12337,6 +12337,9 @@ clamps it at 65,535).
 .defcolor gray50 rgb 0.5 0.5 0.5
 .defcolor darkgreen rgb 0.1f 0.5f 0.2f
 @endExample
+
+You can obtain a report of colors defined by @code{defcolor} on the
+standard error stream with the @code{pcolor} request.  @xref{Debugging}.
 @endDefreq
 
 @cindex default color
@@ -16868,8 +16871,8 @@ or for instrumentation while troubleshooting.  The @code{ex} and
 exit codes respectively, to halt further processing when continuing
 would be fruitless.  Examine the state of the formatter with requests
 that write lists of defined names (macros, strings, and diversions),
-environments, hyphenation exceptions, registers, and page location traps
-to the standard error stream.
+defined colors, environments, hyphenation exceptions, registers, and
+page location traps to the standard error stream.
 @c END Keep parallel with section "Debugging" of groff(7).
 
 @Defreq {lf, line [@Var{file}]}
@@ -16944,6 +16947,16 @@ groff -rDB=1 @slanted{file}
 If you know in advance that there are many errors and no useful output,
 or are interested @emph{only} in diagnostic output, you can suppress GNU
 @code{troff}'s formatted output with its @option{-z} option.
+
+@Defreq {pcolor, }
+@cindex dumping defined colors (@code{pcolor})
+@cindex defined colors, dumping (@code{pcolor})
+@cindex colors, defined, dumping (@code{pcolor})
+Report, to the standard error stream, the list of defined color names.
+A device's default stroke and/or fill colors, ``default'', are not
+listed since they are immutable and their details unknown to the
+formatter.
+@endDefreq
 
 @Defreq {pev, }
 @cindex dumping environments (@code{pev})

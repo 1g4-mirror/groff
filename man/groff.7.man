@@ -10,7 +10,7 @@ language reference
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 2000-2023 Free Software Foundation, Inc.
+.\" Copyright (C) 2000-2024 Free Software Foundation, Inc.
 .\"
 .\" This file is part of groff, the GNU roff type-setting system.
 .\"
@@ -3837,6 +3837,17 @@ Reset page number character to\~\c
 .REQ .pc c
 Change the page number character used in titles
 .RI to\~ c .
+.
+.TPx
+.REQ .pcolor
+Report,
+to the standard error stream,
+the list of defined color names.
+.
+A device's default stroke and/or fill colors,
+\[lq]default\[rq],
+are not listed since they are immutable and their details unknown to the
+formatter.
 .
 .TPx
 .REQ .pev
@@ -8037,12 +8048,14 @@ defined names\[em]macros,
 strings,
 and
 .RB diversions\[em]( .pm );
+defined colors
+.RB ( .pcolor );
 hyphenation exceptions
-.RB ( .phw ),
+.RB ( .phw );
 environments
-.RB ( .pev ),
+.RB ( .pev );
 registers
-.RB ( .pnr ),
+.RB ( .pnr );
 and page location traps
 .RB ( .ptr )
 to the standard error stream.

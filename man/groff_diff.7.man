@@ -11,7 +11,7 @@ and AT&T
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2023 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
 .\"
 .\" This file is part of groff, the GNU roff type-setting system.
 .\"
@@ -3092,6 +3092,18 @@ other environments to the standard error stream.
 .
 .
 .TP
+.B .pcolor
+Report,
+to the standard error stream,
+the list of defined color names.
+.
+A device's default stroke and/or fill colors,
+\[lq]default\[rq],
+are not listed since they are immutable and their details unknown to the
+formatter.
+.
+.
+.TP
 .B .phw
 Report,
 to the standard error stream,
@@ -5203,6 +5215,8 @@ and
 .
 More aspects of formatter state can be examined with requests that write
 lists of
+defined colors
+.RB ( pcolor ),
 environments
 .RB ( pev ),
 hyphenation exceptions
