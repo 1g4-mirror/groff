@@ -695,7 +695,7 @@ which can be used to paint the interior of a closed geometric figure.
 .
 The
 .BR color ,
-.BR defcolor ,
+.BR \%defcolor ,
 .BR gcolor ,
 and
 .B fcolor
