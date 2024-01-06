@@ -37,6 +37,10 @@ o A new request, `phw`, reports to the standard error stream the current
 o The `hla` request, when invoked with no arguments, now clears the
   hyphenation language, disabling automatic hyphenation.
 
+o The read-only registers `.m` and `.M` now interpolate "default" when
+  the default color is selected as the stroke or fill color,
+  respectively, rather than interpolating nothing.
+
 eqn
 ---
 

@@ -6179,7 +6179,8 @@ see
 and
 .esc m .
 .
-Empty if the stroke color is the default.
+The default stroke color is named
+.RB \[lq] default \[rq].
 .
 .TP
 .REG .M
@@ -6189,7 +6190,8 @@ see
 and
 .esc M .
 .
-Empty if the fill color is the default.
+The default fill color is named
+.RB \[lq] default \[rq].
 .
 .TP
 .REG .n

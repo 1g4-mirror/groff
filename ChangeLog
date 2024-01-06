@@ -1,5 +1,19 @@
 2024-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #64592 (default color name).
+
+	* src/libs/libgroff/color.cpp: Explicitly name the default color
+	"default", instead of permitting it to have a null name.
+
+	* doc/groff.texi (Colors):
+	* man/groff.7.man (Read-only regsiters):
+	* NEWS: Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?64592>.  Thanks to Deri
+	James, Dave Kemper, and Peter Schaffter for the discussion.
+
+2024-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Implement new `pcolor` request.
 
 	* src/roff/troff/input.cpp (report_color): Add.

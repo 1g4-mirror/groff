@@ -12377,8 +12377,8 @@ does a @code{gcolor} request without an argument.
 @cindex color name, stroke, register (@code{.m})
 The name of the current stroke color is available in the read-only
 string-valued register @samp{.m}; it is associated with the environment
-(@pxref{Environments}).  It interpolates nothing when the stroke color
-is the default.
+(@pxref{Environments}).  The default stroke color is named
+@samp{default}.
 
 @code{\m} doesn't produce an input token in GNU @code{troff}
 (@pxref{Gtroff Internals}).  It therefore can be used in requests like
@@ -12407,9 +12407,8 @@ color, as does an @code{fcolor} request without an argument.
 @cindex color name, fill, register (@code{.M})
 The name of the current fill color is available in the read-only
 string-valued register @samp{.M}; it is associated with the environment
-(@pxref{Environments}).  It interpolates nothing when the fill color
-is the default.  @code{\M} doesn't produce an input token in GNU
-@code{troff}.
+(@pxref{Environments}).  The default fill color is named @samp{default}.
+@code{\M} doesn't produce an input token in GNU @code{troff}.
 
 Create an ellipse with a red interior as follows.
 
