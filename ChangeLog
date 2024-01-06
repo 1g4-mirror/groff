@@ -238,10 +238,6 @@
 	* src/roff/troff/request.h (class macro): Demote friend function
 	`operator==` from `int` to `bool`.
 
-Annotate nullptr.  Wrap long input lines.  Drop annotations of names of
-unused single parameters to member functions in definitions.  Emacs
-file-local variable thing.
-
 2024-01-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (make_glyph_node): Trivially refactor;
@@ -309,14 +305,15 @@ file-local variable thing.
 
 2024-01-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[gropdf]: Add "notice" diagnostic level for debugging.
+	[gropdf]: Fix Savannah #65111.  Add "notice" diagnostic level
+	for debugging.
 
 	* src/devices/gropdf/gropdf.pl (Notice): Add new subroutine.  It
 	emits a diagnostic message only if debugging ("gropdf -d").
 	(Warn): Prefix diagnostic with severity level here...
 	(Msg): ...instead of here.
 	(LoadFont): Demote diagnostic about fonts lacking space glyphs
-	from warning to ntoice.
+	from warning to notice.
 
 	Fixes <https://savannah.gnu.org/bugs/?65111>.
 
