@@ -2413,6 +2413,7 @@ sub LoadPDF
     my (@pdfwds)=split(' ',$pdftxt);
     my $wd;
     my $root;
+    my @ObjStm;
 
     while ($wd=nextwd(\@pdfwds),length($wd))
     {
@@ -2424,24 +2425,7 @@ sub LoadPDF
 	    $pdf->[$curobj]->{OBJ}=ParsePDFObj(\@pdfwds);
 	    my $o=$pdf->[$curobj];
 
-	    if (ref($o->{OBJ}) eq 'HASH' and exists($o->{OBJ}->{Type}) and $o->{OBJ}->{Type} eq '/ObjStm')
-	    {
-		LoadStream($o,$pdf);
-		my $pos=$o->{OBJ}->{First};
-		my $s=$o->{STREAM};
-		my @o=split(' ',substr($s,0,$pos));
-		substr($s,0,$pos)='';
-		push(@o,-1,length($s));
-
-		for (my $j=0; $j<=$#o-2; $j+=2)
-		{
-		    my @w=split(' ',substr($s,$o[$j+1],$o[$j+3]-$o[$j+1]));
-		    $pdf->[$o[$j]]->{OBJ}=ParsePDFObj(\@w);
-		}
-
-		$pdf->[$curobj]=undef;
-	    }
-
+            push(@ObjStm,$curobj) if (ref($o->{OBJ}) eq 'HASH' and exists($o->{OBJ}->{Type}) and $o->{OBJ}->{Type} eq '/ObjStm');
 	    $root=$curobj if ref($pdf->[$curobj]->{OBJ}) eq 'HASH' and exists($pdf->[$curobj]->{OBJ}->{Type}) and $pdf->[$curobj]->{OBJ}->{Type} eq '/XRef';
 	}
 	elsif ($wd eq 'trailer' and !exists($pdf->[0]->{OBJ}))
@@ -2452,6 +2436,25 @@ sub LoadPDF
 	{
 #		   print "Skip '$wd'\n";
 	}
+    }
+
+    foreach my $ObjStm (@ObjStm)
+    {
+        LoadStream($pdf->[$ObjStm],$pdf);
+        my $pos=$pdf->[$ObjStm]->{OBJ}->{First};
+        my $s=$pdf->[$ObjStm]->{STREAM};
+        $s=~s/\%.*?$//m;
+        my @o=split(' ',substr($s,0,$pos));
+        substr($s,0,$pos)='';
+        push(@o,-1,length($s));
+
+        for (my $j=0; $j<=$#o-2; $j+=2)
+        {
+            my @w=split(' ',substr($s,$o[$j+1],$o[$j+3]-$o[$j+1]));
+            $pdf->[$o[$j]]->{OBJ}=ObjMerge($pdf->[$o[$j]]->{OBJ},ParsePDFObj(\@w));
+        }
+
+        $pdf->[$ObjStm]=undef;
     }
 
     $pdf->[0]=$pdf->[$root] if !defined($pdf->[0]);
@@ -2528,6 +2531,22 @@ sub LoadPDF
 
     $/=$keepsep;
     return([$xonm,$BBox] );
+}
+
+sub ObjMerge
+{
+    my $o1=shift;
+    my $o2=shift;
+
+    return $o1 if !defined($o2);
+    return $o2 if !defined($o1);
+
+    foreach my $k (keys %{$o2})
+    {
+        $o1->{$k}=$o2->{$k};
+    }
+
+    return $o1;
 }
 
 sub LoadStream
@@ -4736,7 +4755,7 @@ sub subs_call
 	    {
 		$c[$#c-4]->[0]=MarkSub("#$c[$#c-4]->[0]") if ($c[$#c-4]->[1]);
 	    }
-	    elsif ($n2==16)	 # seac
+	    elsif ($n2==6)	 # seac
 	    {
 		my $ch=$StdEnc{$c[$#c-2]->[0]};
 		my $chf;
