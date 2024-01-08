@@ -1,5 +1,19 @@
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add tests of early usage of formatter features that
+	throw fatal errors when called "too early", but for which this
+	error handling appears to be dead code.  Further test the
+	`output` request in furtherance of Savannah #64959.
+
+	* src/roff/groff/tests/\
+	backslash-exclamation-early-does-not-fail.sh:
+	* src/roff/groff/tests/cf-request-early-does-not-fail.sh:
+	* src/roff/groff/tests/output-request-works.sh: Add tests.
+
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
+2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Revise diagnostics.
 
 	* src/roff/troff/div.cpp (top_level_diversion::output)
