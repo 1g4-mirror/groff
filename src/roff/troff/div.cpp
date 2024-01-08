@@ -398,7 +398,8 @@ void top_level_diversion::output(node *nd, int retain_size,
   vunits next_trap_pos;
   trap *next_trap = find_next_trap(&next_trap_pos);
   if (before_first_page && begin_page())
-    fatal("sorry, I didn't manage to begin the first page in time: use an explicit .br request");
+    fatal("attempting output of top-level diversion before first page"
+	  " has started; invoke break or flush request earlier");
   vertical_size v(vs, post_vs);
   for (node *tem = nd; tem != 0; tem = tem->next)
     tem->set_vertical_size(&v);
@@ -444,7 +445,9 @@ void top_level_diversion::transparent_output(unsigned char c)
 {
   if (before_first_page && begin_page())
     // This can only happen with the .output request.
-    fatal("sorry, I didn't manage to begin the first page in time: use an explicit .br request");
+    fatal("attempting transparent output of top-level diversion before"
+	  " first page has started; invoke break or flush request"
+	  " earlier");
   const char *s = asciify(c);
   while (*s)
     the_output->transparent_char(*s++);
@@ -452,6 +455,8 @@ void top_level_diversion::transparent_output(unsigned char c)
 
 void top_level_diversion::transparent_output(node * /*n*/)
 {
+  // TODO: Restore this diagnostic when Savannah #65371 is fixed;
+  // perhaps suggest use of \[uXXXX] notation.
   if (getenv("GROFF_ENABLE_TRANSPARENCY_WARNINGS") != 0 /* nullptr */)
     error("can't transparently output node at top level");
 }
@@ -459,7 +464,9 @@ void top_level_diversion::transparent_output(node * /*n*/)
 void top_level_diversion::copy_file(const char *filename)
 {
   if (before_first_page && begin_page())
-    fatal("sorry, I didn't manage to begin the first page in time: use an explicit .br request");
+    fatal("attempting transparent copy of file to top-level diversion"
+	  " before first page has started; invoke break or flush"
+	  " request earlier");
   the_output->copy_file(page_offset, vertical_position, filename);
 }
 

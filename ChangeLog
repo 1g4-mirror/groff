@@ -1,5 +1,16 @@
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Revise diagnostics.
+
+	* src/roff/troff/div.cpp (top_level_diversion::output)
+	(top_level_diversion::transparent_output)
+	(top_level_diversion::copy_file): Recast diagnostic messages to
+	be distinguishable and provide more information about what the
+	problem is.  Make the proffered advice agnostic with respect to
+	choice of control character and request renaming.
+
+2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/input.cpp (encode_char): Rename this...
