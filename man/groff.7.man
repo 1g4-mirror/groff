@@ -4757,6 +4757,8 @@ read in copy mode,
 in a diversion,
 or unformatted as an output comparand in a conditional expression.
 .
+Ignored in the top-level diversion.
+.
 .
 .\" ========= spaces and fixed-width horizontal motions =========
 .
