@@ -1,5 +1,16 @@
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/div.cpp (top_level_diversion::begin_page):
+	Demote return type from `int` to `bool`.  Return Boolean instead
+	of integer literals.
+
+	* src/roff/troff/div.h (class top_level_diversion): Update
+	declaration.
+
+2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Enhance new tests.
 
 	* src/roff/groff/tests/\
