@@ -33,6 +33,10 @@ do
   echo "checking early backslash-? escape on $device device" >&2
   output=$(printf '\\!cA\n' "$input" | "$groff" -T $device -Z) || wail
   echo "$output"
+  echo "checking that leader starts on line 1 for $device device" >&2
+  echo "$output" | sed -n '1p' | grep -Eq '^x *T' || wail
+  echo "checking that expected output is present for $device device" >&2
+  echo "$output" | grep -Eq 'c *A' || wail
 done
 
 test -z "$fail"

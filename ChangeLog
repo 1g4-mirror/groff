@@ -1,5 +1,15 @@
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Enhance new tests.
+
+	* src/roff/groff/tests/\
+	backslash-exclamation-early-does-not-fail.sh:
+	* src/roff/groff/tests/output-request-early-does-not-fail.sh:
+	Check that escape/request parameters don't get emitted before
+	the output leader, and that they do show up in the output.
+
+2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add tests of early usage of formatter features that
 	throw fatal errors when called "too early", but for which this
 	error handling appears to be dead code.  Further test the

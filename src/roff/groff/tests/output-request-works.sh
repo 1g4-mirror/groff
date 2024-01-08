@@ -43,6 +43,9 @@ do
     || wail
   echo "$output"
 
+  echo "checking that leader starts on line 1 for $device device" >&2
+  echo "$output" | sed -n '1p' | grep -Eq '^x *T' || wail
+
   echo "checking simple 'output' request on $device device" >&2
   output=$(printf "%s\n" "$input_simple" | "$groff" -T $device -Z) \
     || wail
