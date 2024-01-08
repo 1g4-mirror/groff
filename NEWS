@@ -172,6 +172,9 @@ o grog(1) no longer supports the `--ligatures` and `--run` options.
   command substitution feature of your shell; see section "Examples" of
   groff(1).
 
+o The minimum version of Perl required to build groff is now 5.8 (18
+  July 2002), incremented from 5.6.1.
+
 o The groff_diff(7) man page no longer contains examples.  They remain
   in groff's Texinfo manual.
 
