@@ -9,7 +9,7 @@ output driver for Portable Document Format
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 2011-2023 Free Software Foundation, Inc.
+.\" Copyright (C) 2011-2024 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -1399,16 +1399,20 @@ the file,
 but this might not match the desired numbering scheme.
 .
 A document may bear a cover sheet
-(which has no page number),
+(which has no page number);
 front matter
 (possibly including a table of contents)
-that uses lowercase roman numerals,
+that uses lowercase roman numerals;
 the main matter,
-which uses arabic numerals.
+which uses arabic numerals;
+and back matter,
+which may include appendices that are each prefixed with a letter and
+independently numbered.
 .
-Place this command where the numbering system is to change.
+Place this command prior to breaking the page to which the new numbering
+scheme is to apply.
 .
-It then applies until changed again.
+It then persists until changed again.
 .
 .
 .P
