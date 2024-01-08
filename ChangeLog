@@ -1,3 +1,37 @@
+2024-01-07  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* src/devices/gropdf/gropdf.pl: Comment out line causing
+	incorrect table of contents relocation.
+
+	Thanks to Peter Schaffter for the report.
+
+2024-01-07  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Fix inclusion of PDF v1.7 files.
+
+	PDF 1.5 introduced the object type ObjStm, which can contain a
+	bunch of objects in its own compressed stream, but there is a
+	restriction that an object with its own stream cannot be
+	included into the ObjStm (i.e., no streams within streams).
+	Gropdf has supported this for some years, but it has come to
+	light that some PDFs have a "skeleton" object that contains the
+	stream, while the rest of the object is held in an ObjStm.
+
+	* src/devices/gropdf/gropdf.pl: If a skeleton object exists at
+	the top level and in an ObjStm stream, merge the two objects.
+
+2024-01-07  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* src/devices/gropdf/gropdf.pl (subs_call): Fix bad fix for
+	Savannah #65112.
+
+	{Problem introduced by me in commit 6e45bb0bc6, 4 January, when
+	I manually merged Deri's patch that wouldn't merge
+	automatically, and I misread the magic constant "16" as "6".  My
+	fault, but this is also one reason symbolic constants with
+	human-readable names are usually preferred to numeric literals.
+	-- GBR}
+
 2024-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #64592 (default color name).
