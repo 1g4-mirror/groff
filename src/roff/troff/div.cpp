@@ -391,15 +391,17 @@ const char *top_level_diversion::get_next_trap_name()
     return next_trap->nm.contents();
 }
 
+// This is used by more than just top-level diversions.
 void top_level_diversion::output(node *nd, int retain_size,
-				 vunits vs, vunits post_vs, hunits width)
+				 vunits vs, vunits post_vs,
+				 hunits width)
 {
   no_space_mode = 0;
   vunits next_trap_pos;
   trap *next_trap = find_next_trap(&next_trap_pos);
   if (before_first_page && begin_page())
-    fatal("attempting output of top-level diversion before first page"
-	  " has started; invoke break or flush request earlier");
+    fatal("attempting diversion output before first page has started;"
+	  " invoke break or flush request earlier");
   vertical_size v(vs, post_vs);
   for (node *tem = nd; tem != 0; tem = tem->next)
     tem->set_vertical_size(&v);
@@ -441,10 +443,12 @@ void top_level_diversion::output(node *nd, int retain_size,
     nl_reg_contents = vertical_position.to_units();
 }
 
+// The next two member functions implement the internals of `.output`
+// and `\!`.
+
 void top_level_diversion::transparent_output(unsigned char c)
 {
   if (before_first_page && begin_page())
-    // This can only happen with the .output request.
     fatal("attempting transparent output of top-level diversion before"
 	  " first page has started; invoke break or flush request"
 	  " earlier");
@@ -461,6 +465,7 @@ void top_level_diversion::transparent_output(node * /*n*/)
     error("can't transparently output node at top level");
 }
 
+// Implement the internals of `.cf`.
 void top_level_diversion::copy_file(const char *filename)
 {
   if (before_first_page && begin_page())
