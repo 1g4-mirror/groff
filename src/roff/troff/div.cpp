@@ -400,8 +400,9 @@ void top_level_diversion::output(node *nd, int retain_size,
   vunits next_trap_pos;
   trap *next_trap = find_next_trap(&next_trap_pos);
   if (before_first_page && begin_page())
-    fatal("attempting diversion output before first page has started;"
-	  " invoke break or flush request earlier");
+    fatal("attempting diversion output before first page has started,"
+	  " when a top-of-page trap is defined; invoke break or flush"
+	  " request beforehand");
   vertical_size v(vs, post_vs);
   for (node *tem = nd; tem != 0; tem = tem->next)
     tem->set_vertical_size(&v);
@@ -449,9 +450,9 @@ void top_level_diversion::output(node *nd, int retain_size,
 void top_level_diversion::transparent_output(unsigned char c)
 {
   if (before_first_page && begin_page())
-    fatal("attempting transparent output of top-level diversion before"
-	  " first page has started; invoke break or flush request"
-	  " earlier");
+    fatal("attempting transparent output from top-level diversion"
+	  " before first page has started, when a top-of-page trap is"
+	  " defined; invoke break or flush request beforehand");
   const char *s = asciify(c);
   while (*s)
     the_output->transparent_char(*s++);
@@ -470,8 +471,8 @@ void top_level_diversion::copy_file(const char *filename)
 {
   if (before_first_page && begin_page())
     fatal("attempting transparent copy of file to top-level diversion"
-	  " before first page has started; invoke break or flush"
-	  " request earlier");
+	  " before first page has started, when a top-of-page trap is"
+	  " defined; invoke break or flush request beforehand");
   the_output->copy_file(page_offset, vertical_position, filename);
 }
 

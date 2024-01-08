@@ -1,5 +1,11 @@
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (top_level_diversion::output)
+	(top_level_diversion::transparent_output)
+	(top_level_diversion::copy_file): Clarify diagnostic messages.
+
+2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/div.cpp (top_level_diversion::begin_page):
