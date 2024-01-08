@@ -1802,7 +1802,7 @@ sub do_x
 		    else
 		    {
 			($curoutlev,$curoutlevno,$thislev)=(@{$outlines[$pginsert]});
-# 			$curoutlevno--;
+#			$curoutlevno--;
 		    }
 		}
 	    }
