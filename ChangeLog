@@ -6,7 +6,7 @@
 
 2024-01-07  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	* src/devices/gropdf/gropdf.pl: Comment out line causing
+	* src/devices/gropdf/gropdf.pl (do_x): Comment out line causing
 	incorrect table of contents relocation.
 
 	Thanks to Peter Schaffter for the report.
@@ -23,8 +23,9 @@
 	light that some PDFs have a "skeleton" object that contains the
 	stream, while the rest of the object is held in an ObjStm.
 
-	* src/devices/gropdf/gropdf.pl: If a skeleton object exists at
-	the top level and in an ObjStm stream, merge the two objects.
+	* src/devices/gropdf/gropdf.pl (LoadPDF, ObjMerge): If a
+	skeleton object exists at the top level and in an ObjStm stream,
+	merge the two objects.
 
 2024-01-07  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
