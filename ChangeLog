@@ -1,3 +1,17 @@
+2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Restore diagnostic from groff 1.22.4.
+
+	* src/roff/troff/input.cpp (encode_char): Add `else` to `if`
+	statement checking the output device for the
+	"use_charnames_in_special" directive (used only by grohtml(1)).
+	This way we once again throw a diagnostic upon the following
+	input, invalid with any other output device.
+
+		printf '\\X@pdf: \\[u1234]@\n' | groff
+
+	Problem introduced by me in commit eb695ab2b5, 30 October 2021.
+
 2024-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devpdf/Foundry.in: More BMI, BMR mapping swap; swap the

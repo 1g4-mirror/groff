@@ -5612,9 +5612,12 @@ static void encode_char(macro *mac, char c)
 	    mac->append(']');
 	  }
 	  else
-	      error("special character '%1' cannot be used within"
-		    " device control escape sequence", sc);
+	    error("special character '%1' cannot be used within a"
+	          " device control escape sequence", sc);
 	}
+	else
+	  error("special character '%1' cannot be used within a device"
+		" control escape sequence", sc);
       }
     }
     else if (!(tok.is_hyphen_indicator()
