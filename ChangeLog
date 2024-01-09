@@ -1,5 +1,14 @@
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add unit test for `device` request.
+
+	* src/roff/groff/tests/device-request-works.sh: Add test.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	Fixes <https://savannah.gnu.org/bugs/?64959>.
+
+2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi (Postprocessor Access):
 	* man/groff_diff.7.man (New requests): Clarify a point of
 	`device` request behavior; a partially collected line in the
