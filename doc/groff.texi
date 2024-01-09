@@ -9,7 +9,7 @@
 
 @c %**start of header (This is for running Texinfo on a region.)
 @setfilename groff.info
-@settitle The GNU Troff Manual
+@settitle The GNU troff Manual
 @setchapternewpage odd
 @footnotestyle separate
 @c %**end of header (This is for running Texinfo on a region.)
@@ -24,9 +24,9 @@
 
 
 @copying
-This manual documents GNU @code{troff} version 1.23.0+Git.
+This manual documents GNU @command{troff} version 1.23.0+Git.
 
-Copyright @copyright{} 1994--2023 Free Software Foundation, Inc.
+Copyright @copyright{} 1994--2024 Free Software Foundation, Inc.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -16410,6 +16410,7 @@ returned by the function @cite{getenv@r{(3)}}.
 
 @c =====================================================================
 
+@c TODO: Add a corresponding section to groff(7).
 @node Postprocessor Access, Miscellaneous, I/O, GNU troff Reference
 @section Postprocessor Access
 @cindex postprocessor access
@@ -16425,8 +16426,8 @@ each output driver's man page, such as @cite{gropdf@r{(1)}},
 
 @DefreqList {device, xxx @r{@dots{}}}
 @DefescListEndx {\\X, @code{'}, xxx @r{@dots{}}, @code{'}}
-Embed all @var{xxx} arguments into GNU @code{troff} output as parameters
-to a device control command @w{@samp{x X}}.  The meaning and
+Embed all @var{xxx} arguments into GNU @command{troff} output as
+parameters to a device control command @w{@samp{x X}}.  The meaning and
 interpretation of such parameters is determined by the output driver or
 other postprocessor.
 
@@ -16488,7 +16489,7 @@ However, the contents of the string or macro @var{name} are not
 interpreted; also it is permitted for @var{name} to have been defined as
 a macro and thus contain newlines (it is not permitted for the argument
 to @code{\X} to contain newlines).  The inclusion of newlines requires
-an extension to the @acronym{AT&T} @code{troff} output format, and
+an extension to the @acronym{AT&T} @command{troff} output format, and
 confuses drivers that do not know about this extension (@pxref{Device
 Control Commands}).
 @endDefesc
