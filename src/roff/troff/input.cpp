@@ -5571,7 +5571,7 @@ static node *do_non_interpreted()
   return new non_interpreted_node(mac);
 }
 
-static void encode_char(macro *mac, char c)
+static void encode_char_for_troff_output(macro *mac, char c)
 {
   if (c == '\0') {
     if (tok.is_stretchable_space()
@@ -5671,7 +5671,7 @@ static node *do_special()
       c = '\b';
     else
       c = tok.ch();
-    encode_char(&mac, c);
+    encode_char_for_troff_output(&mac, c);
   }
   return new special_node(mac);
 }
