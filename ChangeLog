@@ -1,3 +1,11 @@
+2024-01-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Add unit test for `\X` (device control) escape
+	sequence.
+
+	* src/roff/groff/tests/backslash-X-works.sh: Add test.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add unit test for `device` request.
