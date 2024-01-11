@@ -30,7 +30,7 @@
 	`device` request behavior; a partially collected line in the
 	top-level diversion must exist at least once.
 
-	Fixes <https://savannah.gnu.org/bugs/?65118>.
+	Fixes <https://savannah.gnu.org/bugs/?65138>.
 
 2024-01-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
