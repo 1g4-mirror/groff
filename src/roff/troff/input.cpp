@@ -5676,7 +5676,7 @@ static node *do_special()
   return new special_node(mac);
 }
 
-void device_request()
+static void device_request()
 {
   // We can't use `has_arg()` here because we want to read in copy mode.
   int c;
@@ -5708,7 +5708,7 @@ void device_request()
   tok.next();
 }
 
-void device_macro_request()
+static void device_macro_request()
 {
   symbol s = get_name(true /* required */);
   if (!(s.is_null() || s.is_empty())) {
@@ -5723,7 +5723,7 @@ void device_macro_request()
   skip_line();
 }
 
-void output_request()
+static void output_request()
 {
   // We can't use `has_arg()` here because we want to read in copy mode.
   int c;

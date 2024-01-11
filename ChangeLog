@@ -1,3 +1,11 @@
+2024-01-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/input.cpp (device_request)
+	(device_macro_request, output_request): Declare functions
+	`static` since they do not require external linkage.
+
 2024-01-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add unit test for `\X` (device control) escape
