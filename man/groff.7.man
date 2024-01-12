@@ -7158,15 +7158,10 @@ Applying string interpolation to a macro does not change this name.
 .SS "Copy mode"
 .\" ====================================================================
 .
-When
 .I @g@troff
-processes certain requests,
-most importantly those which define or append to a macro or string,
-it does so in
-.IR "copy mode" :
-it copies the characters of the definition into a dedicated storage
-region,
-interpolating the escape sequences
+processes certain requests in
+.I "copy mode:"
+it interpolates the escape sequences
 .BR \[rs]n ,
 .BR \[rs]g ,
 .BR \[rs]$ ,
@@ -7175,14 +7170,14 @@ interpolating the escape sequences
 and
 .B \[rs]?\&
 normally;
-interpreting
+interprets
 .BI \[rs] newline
 immediately;
-discarding comments
+discards comments
 .B \[rs]"
 and
 .BR \[rs]# ;
-interpolating the current leader,
+interpolates the current leader,
 escape,
 or tab character with
 .BR \[rs]a ,
@@ -7190,7 +7185,17 @@ or tab character with
 and
 .BR \[rs]t ,
 respectively;
-and storing all other escape sequences in an encoded form.
+and represents all other escape sequences in an encoded form.
+The term \[lq]copy mode\[rq] reflects its most visible application in
+requests that populate macros and strings,
+but other requests also use it when interpreting arguments that can't
+meaningfully represent typesetting operations.
+For example,
+a font selection escape sequence has no meaning in a hyphenation pattern
+file name
+.RB ( hpf )
+or a diagnostic message written to the terminal
+.RB ( tm ).
 .
 The complement of copy mode\[em]a
 .I roff

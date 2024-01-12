@@ -13661,15 +13661,19 @@ Applying string interpolation to a macro does not change this name.
 @cindex mode, copy
 @cindex mode, copy
 
-When GNU @code{troff} processes certain requests, most importantly those
-which define or append to a macro or string, it does so in @dfn{copy
-mode}: it copies the characters of the definition into a dedicated
-storage region, interpolating the escape sequences @code{\n}, @code{\g},
-@code{\$}, @code{\*}, @code{\V}, and @code{\?} normally; interpreting
-@code{\@key{RET}} immediately; discarding comments @code{\"} and
-@code{\#}; interpolating the current leader, escape, or tab character
-with @code{\a}, @code{\e}, and @code{\t}, respectively; and storing all
-other escape sequences in an encoded form.
+GNU @code{troff} processes certain requests in @dfn{copy mode}: it
+interpolates the escape sequences @code{\n}, @code{\g}, @code{\$},
+@code{\*}, @code{\V}, and @code{\?} normally; interprets
+@code{\@key{RET}} immediately; discards comments @code{\"} and
+@code{\#}; interpolates the current leader, escape, or tab character
+with @code{\a}, @code{\e}, and @code{\t}, respectively; and represents
+all other escape sequences in an encoded form.  The term ``copy mode''
+reflects its most visible application in requests that populate macros
+and strings, but other requests also use it when interpreting arguments
+that can't meaningfully represent typesetting operations.  For example,
+a font selection escape sequence has no meaning in a hyphenation pattern
+file name (@code{hpf}) or a diagnostic message written to the terminal
+(@code{tm}).
 
 @cindex interpretation mode
 @cindex mode, interpretation
