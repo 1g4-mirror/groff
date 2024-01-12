@@ -17505,7 +17505,8 @@ implementations will likely be ignored by them; escape sequences that
 are @code{groff} extensions are liable to be interpreted as if the
 escape character were not present.
 @cindex @code{\~}, incompatibilities with @acronym{AT&T} @code{troff}
-For example, the adjustable, non-breaking escape sequence @code{\~}
+For example, the adjustable, non-breaking space escape sequence
+@code{\~}
 @c BEGIN Keep in sync with groff_diff(7) and groff_man_style(7).
 is also supported by Heirloom Doctools @code{troff} 050915 (September
 2005), @code{mandoc} 1.9.5 (2009-09-21), @code{neatroff} (commit
