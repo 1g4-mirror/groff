@@ -2983,8 +2983,7 @@ with compatibility mode disabled when the macro is interpreted.
 .TPx
 .REQ .device anything
 Write
-.IR anything ,
-read in copy mode,
+.I anything
 to
 .I @g@troff
 output as a device control command.
