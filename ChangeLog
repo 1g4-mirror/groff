@@ -1,5 +1,15 @@
 2024-01-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/\
+	device-control-special-character-handling.sh: Add unit test for
+	this feature.  We want to be able to consistently pass (some)
+	special character escape sequences to device control commands,
+	and we want the `device` request and `\X` escape sequences to
+	behave consistently with each other.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2024-01-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (encode_char_for_troff_output):
 	Qualify `c` argument as `const`.  Reorder comparisons to avoid
 	inadvertent lvalue assignment.  (Yes--suspenders _and_ a belt.)
