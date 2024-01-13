@@ -16414,7 +16414,8 @@ returned by the function @cite{getenv@r{(3)}}.
 
 @c =====================================================================
 
-@c TODO: Add a corresponding section to groff(7).
+@c BEGIN Keep (roughly) parallel with section "Postprocessor access" of
+@c groff(7).
 @node Postprocessor Access, Miscellaneous, I/O, GNU troff Reference
 @section Postprocessor Access
 @cindex postprocessor access
@@ -16505,6 +16506,8 @@ output format; their presence confuses drivers that do not know about it
 @DefreqListEndx {taga, name}
 Reserved for internal use.
 @endDefreq
+@c END Keep (roughly) parallel with section "Postprocessor access" of
+@c groff(7).
 
 
 @c =====================================================================
