@@ -1,3 +1,9 @@
+2024-01-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (encode_char_for_troff_output):
+	Qualify `c` argument as `const`.  Reorder comparisons to avoid
+	inadvertent lvalue assignment.  (Yes--suspenders _and_ a belt.)
+
 2024-01-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix code style nits.
