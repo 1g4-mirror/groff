@@ -3246,7 +3246,7 @@ cannot be
 .
 .TPx
 .REQ .ftr f
-Remove transalation of font named
+Remove translation of font named
 .IR f .
 .
 .TPx
