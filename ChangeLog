@@ -1,3 +1,16 @@
+2024-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[tbl]: Add another test case.
+
+	* src/preproc/tbl/tests/\
+	do-not-overdraw-page-top-in-nroff-mode.sh: Add an eleventh test
+	case, prompted by ascii(7) from Linux man-pages, where a table
+	with a vertical rule got coincidentally rendered at the very top
+	of a page (which can only happen in continuous rendering mode,
+	where the page boundaries are invisible) while no-space mode was
+	on (due to the table immediately following a paragraphing
+	macro).
+
 2024-01-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Retain plain ASCII labels when possible.
