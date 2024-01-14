@@ -1,5 +1,20 @@
 2024-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Re-fix Savannah #62471 (vrules in nroff and no-space
+	modes).
+
+	* src/preproc/tbl/table.cpp (do_top): Compensate harder for
+	non-intersected vertical rules occurring at the top of a table
+	in nroff mode.  The previous strategy would fail if no-space
+	mode was on and the drawing position was at the top of a page,
+	provoking an error from grotty ("output above first line
+	discarded").  Restore spacing before issuing `sp` request.
+
+	Continues fixing Savannah #62471, and commit 6ccdab9d64, 29
+	December.
+
+2024-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Add another test case.
 
 	* src/preproc/tbl/tests/\
