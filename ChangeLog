@@ -1,3 +1,11 @@
+2024-01-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Retain plain ASCII labels when possible.
+
+	* src/devices/gropdf/gropdf.pl: Do not use hexed label unless
+	necessary.  Restores the ability for some PDF viewers to accept
+	"#label" as suffix to the file name.
+
 2024-01-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #64484.
