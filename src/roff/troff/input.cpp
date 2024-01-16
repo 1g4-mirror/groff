@@ -5623,10 +5623,12 @@ static void encode_char_for_troff_output(macro *mac, const char c)
 	  is_char_valid = false;
       }
     }
-    else if (!(tok.is_hyphen_indicator()
+    else if (tok.is_hyphen_indicator()
 	       || tok.is_dummy()
 	       || tok.is_transparent_dummy()
-	       || tok.is_zero_width_break()))
+	       || tok.is_zero_width_break())
+      /* silently ignore */;
+    else
       is_char_valid = false;
     if (!is_char_valid) {
       if (sc != 0 /* nullptr */)

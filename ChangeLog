@@ -1,3 +1,9 @@
+2024-01-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (encode_char_for_troff_output):
+	Trivially refactor to make clearer what gets silently discarded
+	from (and not encoded for) device control commands.
+
 2024-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tbl]: Re-fix Savannah #62471 (vrules in nroff and no-space
