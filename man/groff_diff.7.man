@@ -5796,7 +5796,11 @@ partially collected line and a partially collected line at the top-level
 diversion has never existed,
 AT&T
 .I troff
-will output the partially collected line at the end of input;
+will output a partially collected but otherwise empty line
+(as if
+.RB \[lq] \[rs]c \[rq]
+were in the top-level diversion)
+at the end of input;
 GNU
 .I troff \" GNU
 will not.

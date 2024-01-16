@@ -17725,8 +17725,9 @@ Internals}.
 
 In the somewhat pathological case where a diversion exists containing a
 partially collected line and a partially collected line at the top-level
-diversion has never existed, @acronym{AT&T} @code{troff} will output the
-partially collected line at the end of input; GNU @code{troff} will not.
+diversion has never existed, @acronym{AT&T} @code{troff} will output a
+partially collected but otherwise empty line (as if @samp{\c} were in
+the top-level diversion) at the end of input; GNU @code{troff} will not.
 
 @codequotebacktick off
 @codequoteundirected off
