@@ -16429,13 +16429,15 @@ the embedding of hyperlinks and image files.  Device-specific functions
 are documented in each output driver's man page, such as
 @cite{gropdf@r{(1)}}, @cite{grops@r{(1)}}, or @cite{grotty@r{(1)}}.
 
-@DefreqList {device, xxx @r{@dots{}}}
-@DefescListEndx {\\X, @code{'}, xxx @r{@dots{}}, @code{'}}
-Embed all @var{xxx} arguments into GNU @command{troff} output as
-parameters to an @w{@samp{x X}} device control
-command.@footnote{@xref{gtroff Output}.}  The meaning and interpretation
-of such parameters is determined by the output driver or other
-postprocessor.
+@DefreqList {device, [@code{"}]@Var{contents}}
+@c XXX: Can't mark the parameters with @Var because @Var gets called
+@c recursively if we do.
+@c @DefescListEndx {\\X, @code{'}, @Var{contents}, @code{'}}
+@DefescListEndx {\\X, @code{'}, contents, @code{'}}
+Embed @var{contents} into GNU @command{troff} output as parameters to an
+@w{@samp{x X}} device control command.@footnote{@xref{gtroff Output}.}
+The interpretation of such parameters is determined by the output driver
+or other postprocessor.
 
 The @code{device} request strips an initial neutral double quote from
 @var{contents} to allow embedding of leading spaces.
@@ -16451,16 +16453,16 @@ The @code{device} request strips an initial neutral double quote from
 @end ifinfo
 Within a device control command, the escape sequences @code{\&},
 @code{\)}, @code{\%}, and @code{\:} are ignored; @code{\@key{SPC}} and
-@code{\~} are converted to single space characters; and @code{\\} has
-its escape character stripped.  So that the basic Latin subset of the
-Unicode character set@footnote{that is, ISO@tie{}646:1991-IRV or,
-popularly, ``US-ASCII''} can be reliably encoded in device control
-commands, seven special character escape sequences (@samp{\-},
-@samp{\[aq]}, @samp{\[dq]}, @samp{\[ga]}, @samp{\[ha]}, @samp{\[rs]},
-and @samp{\[ti]}) are mapped to basic Latin characters; see the
-@cite{groff_char@r{(7)}} man page.  For this transformation, character
-translations and special character definitions are
-ignored.@footnote{They are bypassed because these parameters are not
+@code{\~} are converted to single space characters; and a self-escaped
+escape character is output as a backslash @code{\}.  So that the basic
+Latin subset of the Unicode character set@footnote{that is,
+ISO@tie{}646:1991-IRV or, popularly, ``US-ASCII''} can be reliably
+encoded in device control commands, seven special character escape
+sequences (@samp{\-}, @samp{\[aq]}, @samp{\[dq]}, @samp{\[ga]},
+@samp{\[ha]}, @samp{\[rs]}, and @samp{\[ti]}) are mapped to basic Latin
+characters; see the @cite{groff_char@r{(7)}} man page.  For this
+transformation, character translations and special character definitions
+are ignored.@footnote{They are bypassed because these parameters are not
 rendered as glyphs in the output; instead, they remain abstract
 characters---in a PDF bookmark or a URL, for example.}
 
@@ -16491,15 +16493,16 @@ as a device control command.
 @DefescItemx {\\Y, , n, }
 @DefescItem {\\Y, (, nm, }
 @DefescListEnd {\\Y, [, name, ]}
-This is approximately equivalent to @samp{\X'\*[@var{name}]'}
-(one-character name@tie{}@var{n}, two-character name @var{nm}).
-However, the contents of the string or macro @var{name} are not
-interpreted; it is also permitted for @var{name} to have been defined as
-a macro and thus contain newlines.  (There is no way to embed a newline
-in the arguments to @code{device} or @code{\X}.)  The inclusion of
-newlines requires an extension to the @acronym{AT&T} @command{troff}
-output format; their presence confuses drivers that do not know about it
-(@pxref{Device Control Commands}).
+The @code{devicem} request and @code{\Y} escape sequence are each
+approximately equivalent to @samp{\X'\*[@var{name}]'} (one-character
+name@tie{}@var{n}, two-character name @var{nm}).  They differ from that
+construction in that the contents of the string or macro @var{name} are
+not interpreted; further, @var{name} may be a macro and thus contain
+newlines.  (There is no way to embed a newline in the arguments to
+@code{device} or @code{\X}.)  The inclusion of newlines requires an
+extension to the @acronym{AT&T} @command{troff} output format; their
+presence confuses drivers that do not know about it (@pxref{Device
+Control Commands}).
 @endDefesc
 
 @DefreqList {tag, name}

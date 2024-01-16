@@ -1056,10 +1056,9 @@ is interpreted even in copy mode.
 .
 .
 .TP
-.BI \[rs]X\[aq] anything \[aq]
+.BI \[rs]X\[aq] contents \[aq]
 Within
-.B \[rs]X
-arguments,
+.I contents,
 the escape sequences
 .BR \[rs]& ,
 .BR \[rs]) ,
@@ -1071,9 +1070,7 @@ are ignored;
 and
 .B \[rs]\[ti]
 are converted to single space characters;
-and
-.B \[rs]\[rs]
-is reduced to
+and a self-escaped escape character is output as a backslash
 .BR \[rs] .
 .
 So that the basic Latin subset of the Unicode character set
@@ -1082,7 +1079,7 @@ ISO\~646:1991-IRV or,
 popularly,
 \[lq]US-ASCII\[rq])
 can be reliably encoded in
-.I anything,
+.I contents,
 the special character escape sequences
 .BR \[rs]\- ,
 .BR \[rs][aq] ,
@@ -2218,9 +2215,9 @@ is interpreted.
 .
 .
 .TP
-.BI .device\~ anything
+.BI .device\~ contents
 Write
-.IR anything ,
+.IR contents ,
 read in copy mode,
 to
 .I @g@troff

@@ -2981,9 +2981,9 @@ As
 with compatibility mode disabled when the macro is interpreted.
 .
 .TPx
-.REQ .device anything
+.REQ .device contents
 Write
-.I anything
+.I contents
 to
 .I @g@troff
 output as a device control command.
@@ -5375,9 +5375,9 @@ negative before,
 positive after).
 .
 .TP
-.ESCq X anything
+.ESCq X contents
 Write
-.I anything
+.I contents
 to
 .I @g@troff
 output as a device control command.
@@ -5621,32 +5621,6 @@ this is the default.
 .LE
 .\" END Keep (roughly) parallel with groff.texi node "Drawing
 .\" commands".
-.
-.
-.\" ====================================================================
-.SS "Device control commands"
-.\" ====================================================================
-.
-The
-.B .device
-and
-.B .devicem
-requests,
-and
-.B \[rs]X
-and
-.B \[rs]Y
-escape sequences,
-enable documents to pass information directly to a postprocessor.
-.
-These are useful for
-exercising device-specific capabilities that the
-.I groff
-language does not abstract or generalize;
-such functions include the embedding of hyperlinks and image files.
-.
-Device-specific functions are documented in
-each output driver's man page.
 .
 .
 .\" ====================================================================
@@ -7824,8 +7798,8 @@ device control command
 (see
 .MR groff_out @MAN5EXT@ ).
 .
-The meaning and interpretation of such parameters is determined by the
-output driver or other postprocessor.
+The interpretation of such parameters is determined by the output driver
+or other postprocessor.
 .
 .
 .P
@@ -7841,9 +7815,8 @@ are ignored;
 and
 .B \[rs]\[ti]
 are converted to single space characters;
-and @code{\\} has
-.B \[rs]\[rs]
-its escape character stripped.
+and a self-escaped escape character is output as a backslash
+.BR \[rs] .
 .
 So that the basic Latin subset of the Unicode character set
 (that is,
@@ -7925,18 +7898,18 @@ The
 request
 and
 .B \[rs]Y
-escape sequence are approximately equivalent to
+escape sequence are each approximately equivalent to
 .RB \[lq] \[rs]X\[aq]\c
 .IB name \[aq]\c
 \[rq].
 .
-However,
-the contents of the string or macro
+They differ from that construction in that the contents of the string or
+macro
 .I name
 are not interpreted;
-it is also permitted for
+futher,
 .I name
-to have been defined as a macro and thus contain newlines.
+may be a macro and thus contain newlines.
 .
 (There is no way to embed a newline
 in the arguments to
