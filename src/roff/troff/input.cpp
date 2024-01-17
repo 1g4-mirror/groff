@@ -1544,14 +1544,14 @@ static void report_color()
   // TODO: Accept an argument to look up a color by name and dump its
   // info (name, color space, channel values).
   dictionary_iterator iter(color_dictionary);
-  symbol entry;
-  color *color_entry;
-  while(iter.get(&entry, reinterpret_cast<void **>(&color_entry))) {
-    assert(!entry.is_null());
-    assert(color_entry != 0 /* nullptr */);
-    const char *color_name = entry.contents();
-    errprint("%1\n", color_name);
+  symbol key;
+  color *value;
+  while(iter.get(&key, reinterpret_cast<void **>(&value))) {
+    assert(!key.is_null());
+    assert(value != 0 /* nullptr */);
+    errprint("%1\n", key.contents());
   }
+  fflush(stderr);
   skip_line();
 }
 
