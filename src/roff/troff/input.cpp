@@ -4150,8 +4150,6 @@ static void map_composite_character()
   symbol to = get_name();
   if (to.is_null()) {
     composite_dictionary.remove(symbol(from_gn));
-    warning(WARN_MISSING, "composite character request expects two"
-	    " arguments");
     skip_line();
     return;
   }

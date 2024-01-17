@@ -1,5 +1,15 @@
 2024-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (map_composite_character): Stop
+	throwing diagnostic message when `composite` request invoked
+	with only one argument.  This has long worked just fine to
+	delete a composite character mapping.  That is something a
+	{rare} user might conceivably want to do.
+
+	Fixes <https://savannah.gnu.org/bugs/?64937>.
+
+2024-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Implement new `pcomposite` request.
 
 	* src/roff/troff/input.cpp (report_composite_characters): Add.
