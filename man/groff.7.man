@@ -3849,6 +3849,15 @@ are not listed since they are immutable and their details unknown to the
 formatter.
 .
 .TPx
+.REQ .pcomposite
+Report,
+to the standard error stream,
+the list of defined composite characters.
+.
+The \[lq]from\[rq] code point is listed first,
+followed by its \[lq]to\[rq] mapping.
+.
+.TPx
 .REQ .pev
 Report the state of the current environment followed by that of all
 other environments to the standard error stream.
@@ -8205,6 +8214,8 @@ and
 .RB diversions\[em]( .pm );
 defined colors
 .RB ( .pcolor );
+composite characters
+.RB ( .pcomposite );
 environments
 .RB ( .pev );
 hyphenation exceptions

@@ -1,5 +1,18 @@
 2024-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Implement new `pcomposite` request.
+
+	* src/roff/troff/input.cpp (report_composite_characters): Add.
+	(init_input_requests): Wire up `pcomposite` request name to
+	`report_composite_characters()`.
+
+	* doc/groff.texi (Colors, Debugging):
+	* man/groff.7.man (Request short reference, Debugging):
+	* man/groff_diff.7.man (New requests, Debugging):
+	* NEWS: Document it.
+
+2024-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (report_color): Flush standard error
 	stream after dumping defined colors.  Trivially refactor to
 	generalize and eliminate use of pointless temporary.  Continues

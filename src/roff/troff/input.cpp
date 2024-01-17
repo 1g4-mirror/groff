@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2023 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -4225,6 +4225,21 @@ static symbol composite_glyph_name(symbol nm)
   gl += 'u';
   gl += glyph_name;
   return symbol(gl.contents());
+}
+
+static void report_composite_characters()
+{
+  dictionary_iterator iter(composite_dictionary);
+  symbol key;
+  char *value;
+  while(iter.get(&key, reinterpret_cast<void **>(&value))) {
+    assert(!key.is_null());
+    assert(value != 0 /* nullptr */);
+    const char *k = key.contents();
+    errprint("%1\t%2\n", k, value);
+  }
+  fflush(stderr);
+  skip_line();
 }
 
 int trap_sprung_flag = 0;
@@ -8631,6 +8646,7 @@ void init_input_requests()
   init_request("output", output_request);
   init_request("pc", set_page_character);
   init_request("pcolor", report_color);
+  init_request("pcomposite", report_composite_characters);
   init_request("pi", pipe_output);
   init_request("pm", print_macros);
   init_request("psbb", ps_bbox_request);

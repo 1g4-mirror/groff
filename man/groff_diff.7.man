@@ -3113,6 +3113,16 @@ formatter.
 .
 .
 .TP
+.B .pcomposite
+Report,
+to the standard error stream,
+the list of defined composite characters.
+.
+The \[lq]from\[rq] code point is listed first,
+followed by its \[lq]to\[rq] mapping.
+.
+.
+.TP
 .B .phw
 Report,
 to the standard error stream,
@@ -5226,6 +5236,8 @@ More aspects of formatter state can be examined with requests that write
 lists of
 defined colors
 .RB ( pcolor ),
+composite characters
+.RB ( pcomposite ),
 environments
 .RB ( pev ),
 hyphenation exceptions
