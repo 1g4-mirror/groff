@@ -8205,10 +8205,10 @@ and
 .RB diversions\[em]( .pm );
 defined colors
 .RB ( .pcolor );
-hyphenation exceptions
-.RB ( .phw );
 environments
 .RB ( .pev );
+hyphenation exceptions
+.RB ( .phw );
 registers
 .RB ( .pnr );
 and page location traps
