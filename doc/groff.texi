@@ -11265,10 +11265,10 @@ after the character can't be suppressed since the neighboring character
 on the right doesn't get examined.
 @endDefreq
 
-@DefreqList {char, c [@Var{contents}]}
-@DefreqItemx {fchar, c [@Var{contents}]}
-@DefreqItemx {fschar, f c [@Var{contents}]}
-@DefreqListEndx {schar, c [@Var{contents}]}
+@DefreqList {char, c [@code{"}][@Var{contents}]}
+@DefreqItemx {fchar, c [@code{"}][@Var{contents}]}
+@DefreqItemx {fschar, f c [@code{"}][@Var{contents}]}
+@DefreqListEndx {schar, c [@code{"}][@Var{contents}]}
 @cindex defining character (@code{char})
 @cindex defining fallback character (@code{fchar}, @code{fschar},@
 @code{schar})
@@ -12470,8 +12470,8 @@ sequence does not exist, it is defined as empty, nothing is
 interpolated, and a warning in category @samp{mac} is emitted.
 @xref{Warnings}, regarding the enablement and suppression of warnings.
 
-@DefreqList {ds, name [@Var{contents}]}
-@DefreqItemx {ds1, name [@Var{contents}]}
+@DefreqList {ds, name [@code{"}][@Var{contents}]}
+@DefreqItemx {ds1, name [@code{"}][@Var{contents}]}
 @DefescItemx {\\*, , n, }
 @DefescItem {\\*, (, nm, }
 @c XXX: Can't mark the parameters with @Var because @Var gets called
@@ -12615,8 +12615,8 @@ save} token is inserted at the beginning of @var{contents}, and a
 @endExample
 @endDefreq
 
-@DefreqList {as, name [@Var{contents}]}
-@DefreqListEndx {as1, name [@Var{contents}]}
+@DefreqList {as, name [@code{"}][@Var{contents}]}
+@DefreqListEndx {as1, name [@code{"}][@Var{contents}]}
 @cindex appending to a string (@code{as})
 @cindex string, appending (@code{as})
 The @code{as} request is similar to @code{ds} but appends @var{contents}
@@ -16374,8 +16374,8 @@ Give GNU @code{troff} or a front end program the @option{-U} option to
 enable unsafe mode.
 @endDefreq
 
-@DefreqList {write, stream data}
-@DefreqListEndx {writec, stream data}
+@DefreqList {write, stream [@code{"}]@Var{contents}}
+@DefreqListEndx {writec, stream [@code{"}]@Var{contents}}
 @cindex copy mode, and @code{write} request
 @cindex @code{write} request, and copy mode
 @cindex mode, copy, and @code{write} request
@@ -16948,8 +16948,8 @@ document.
 @endDefreq
 
 @DefreqList {tm, message}
-@DefreqItemx {tm1, message}
-@DefreqListEndx {tmc, message}
+@DefreqItemx {tm1, [@code{"}]message}
+@DefreqListEndx {tmc, [@code{"}]message}
 @cindex print to the standard error stream (@code{tm}, @code{tm1},@
 @code{tmc})
 @cindex standard error stream, write to (@code{tm}, @code{tm1},@

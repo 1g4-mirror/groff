@@ -1865,7 +1865,8 @@ character on the right doesn't get examined.
 .
 .TP
 .BI .char\~ c\~\c
-.RI [ contents ]
+.RB [[ \[dq] ]\c
+.IR contents ]
 Define an ordinary or special
 .RI character\~ c
 as
@@ -2310,7 +2311,9 @@ requests.
 .
 .
 .TP
-.BI .ds1\~ "name contents"
+.BI .ds1\~ name\~\c
+.RB [[ \[dq] ]\c
+.IR contents ]
 As
 .BR ds ,
 but compatibility mode is disabled while
@@ -2409,7 +2412,8 @@ See
 .
 .TP
 .BI .fchar\~ c\~\c
-.RI [ contents ]
+.RB [[ \[dq] ]\c
+.IR contents ]
 Define fallback
 .RI character\~ c
 as
@@ -2440,7 +2444,8 @@ or the default if there is none.
 .
 .TP
 .BI .fschar\~ f\~c\~\c
-.RI [ contents ]
+.RB [[ \[dq] ]\c
+.IR contents ]
 Define fallback special
 .RI character\~ c
 for font\~\c
@@ -3358,7 +3363,8 @@ the request is ignored.
 .
 .TP
 .BI .schar\~ c\~\c
-.RI [ contents ]
+.RB [[ \[dq] ]\c
+.IR contents ]
 Define global fallback character
 .I c
 as
@@ -3586,7 +3592,9 @@ the increase in width is a linear function of the type size.
 .
 .
 .TP
-.BI .tm1\~ message
+.BR .tm1\~ [\c
+.RI [ \[dq] ]\c
+.IR contents ]
 As
 .BR tm ,
 but recognizes and strips a leading neutral double quote,
@@ -3829,7 +3837,9 @@ loop's flow of control.
 .
 .
 .TP
-.BI .write\~ stream\~contents
+.BI .write\~ stream\~\c
+.RB [[ \[dq] ]\c
+.IR contents ]
 Write
 .I contents
 to
@@ -3839,14 +3849,16 @@ which must previously have been the subject of an
 request,
 followed by a newline.
 .
-An initial neutral double quote in the second argument is stripped,
+A leading neutral double quote in the second argument is stripped,
 allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode until the end of the line.
 .
 .
 .TP
-.BI .writec\~ stream\~contents
+.BI .writec\~ stream\~\c
+.RB [[ \[dq] ]\c
+.IR contents ]
 As
 .BR write ,
 but does not append a newline to
@@ -3902,10 +3914,12 @@ this behavior is so anomalous that it must be considered a bug.
 .RI [ end-name ]
 .TQ
 .BI .ds\~ name\~\c
-.RI [ contents ]
+.RB [[ \[dq] ]\c
+.IR contents ]
 .TQ
 .BI .as\~ name\~\c
-.RI [ contents ]
+.RB [[ \[dq] ]\c
+.IR contents ]
 In compatibility mode,
 these requests behave similarly to
 .BR de1 ,
