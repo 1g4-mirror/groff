@@ -7523,7 +7523,7 @@ the @code{\R} escape sequence.
 Set register @var{ident} to @var{value}.  If @var{ident} doesn't exist,
 GNU @code{troff} creates it.  In the @code{\R} escape sequence, the
 delimiter need not be a neutral apostrophe; see @ref{Delimiters}.  It
-also does not produce an input token in GNU @code{troff}.  @xref{Gtroff
+also does not produce a token in GNU @code{troff}.  @xref{Gtroff
 Internals}.
 
 @Example
@@ -9531,8 +9531,8 @@ environment (@pxref{Environments}).
 A @dfn{translation} is a mapping of an input character to an output
 glyph.  The mapping occurs at output time, i.e., the input character
 gets assigned the metric information of the mapped output character
-right before input tokens are converted to nodes (@pxref{Gtroff
-Internals}, for more on this process).
+right before tokens are converted to nodes (@pxref{Gtroff Internals},
+for more on this process).
 
 @DefreqList {tr, @Var{a}@Var{b}@Var{c}@Var{d}@dots{}}
 @DefreqListEndx {trin, @Var{a}@Var{b}@Var{c}@Var{d}@dots{}}
@@ -10508,9 +10508,10 @@ for later use.
 .ft \*[saved-font]
 @endExample
 
-@code{\f} doesn't produce an input token in GNU @code{troff}; it thus
-can be used in requests that expect a single-character argument.  We can
-assign a font to a margin character as follows (@pxref{Miscellaneous}).
+@code{\f} is not tokenized when GNU @code{troff} reads its input; it
+instead updates the environment.  It thus can be used in requests that
+expect a single-character argument.  We can assign a font to a margin
+character as follows (@pxref{Miscellaneous}).
 
 @Example
 .mc \f[I]x\f[]
@@ -10646,9 +10647,10 @@ baked beans,
 and spam.
 @endExample
 
-@code{\F} doesn't produce an input token in GNU @code{troff}.  As a
-consequence, it can be used in requests like @code{mc} (which expects
-a single character as an argument) to change the font family on the fly.
+@code{\F} is not tokenized when GNU @code{troff} reads its input; it
+instead updates the environment.  It thus can be used in requests that
+expect a single-character argument.  We can thus alter the font family
+when writing a margin character as follows (@pxref{Miscellaneous}).
 
 @Example
 .mc \F[P]x\F[]
@@ -11510,9 +11512,10 @@ The read-only register @code{.height} contains the font height as set by
 Currently, only the @option{-T ps} and @option{-T pdf} devices support
 this feature.
 
-@code{\H} doesn't produce an input token in GNU @code{troff}.  As a
-consequence, it can be used in requests like @code{mc} (which expects
-a single character as an argument) to change the font on the fly:
+@code{\H} is not tokenized when GNU @code{troff} reads its input; it
+instead updates the environment.  It thus can be used in requests that
+expect a single-character argument.  We can thus alter the font height
+when writing a margin character as follows (@pxref{Miscellaneous}).
 
 @Example
 .mc \H'+5z'x\H'0'
@@ -11547,9 +11550,10 @@ The read-only register @code{.slant} contains the font slant as set by
 Currently, only the @option{-T ps} and @option{-T pdf} devices support
 this feature.
 
-@code{\S} doesn't produce an input token in GNU @code{troff}.  As a
-consequence, it can be used in requests like @code{mc} (which expects
-a single character as an argument) to change the font on the fly:
+@code{\S} is not tokenized when GNU @code{troff} reads its input; it
+instead updates the environment.  It thus can be used in requests that
+expect a single-character argument.  We can thus alter the font slant
+when writing a margin character as follows (@pxref{Miscellaneous}).
 
 @Example
 .mc \S'20'x\S'0'
@@ -12061,10 +12065,10 @@ wink, wink, \s+2nudge, nudge,\s+8 say no more!
 @endExample
 @endDefreq
 
-The @code{\s} escape sequence affects the environment immediately and
-doesn't produce an input token.  Consequently, it can be used in
-requests like @code{mc}, which expects a single character as an
-argument, to change the type size on the fly.
+@code{\s} is not tokenized when GNU @code{troff} reads its input; it
+instead updates the environment.  It thus can be used in requests that
+expect a single-character argument.  We can thus alter the type size
+when writing a margin character as follows (@pxref{Miscellaneous}).
 
 @Example
 .mc \s[20]x\s[0]
@@ -12305,7 +12309,7 @@ of a closed geometric figure.
 If @var{n} is missing or non-zero, enable the output of color-related
 device-independent output commands (this is the default); otherwise,
 disable them.  This request sets a global flag; it does not produce an
-input token (@pxref{Gtroff Internals}).
+token (@pxref{Gtroff Internals}).
 
 The read-only register @code{.color} is@tie{}1 if colors are enabled,
 0@tie{}otherwise.
@@ -12384,10 +12388,10 @@ string-valued register @samp{.m}; it is associated with the environment
 (@pxref{Environments}).  The default stroke color is named
 @samp{default}.
 
-@code{\m} doesn't produce an input token in GNU @code{troff}
-(@pxref{Gtroff Internals}).  It therefore can be used in requests like
-@code{mc} (which expects a single character as an argument) to change
-the color on the fly:
+@code{\m} is not tokenized when GNU @code{troff} reads its input; it
+instead updates the environment.  It thus can be used in requests that
+expect a single-character argument.  We can thus alter the stroke color
+when writing a margin character as follows (@pxref{Miscellaneous}).
 
 @Example
 .mc \m[red]x\m[]
@@ -12403,6 +12407,17 @@ Set the fill color for objects drawn with @code{\D'@dots{}'} escape
 sequences.  The escape sequence @code{\M[]} restores the previous fill
 color, as does an @code{fcolor} request without an argument.
 
+@code{\M} is not tokenized when GNU @code{troff} reads its input; it
+instead updates the environment.  It thus can be used in requests that
+expect a single-character argument.  We can thus alter the fill color
+when writing a margin character as follows (@pxref{Miscellaneous});
+@command{grotty} interprets the fill color as a character cell
+background color.
+
+@Example
+.mc \m[black]\M[green]x\M[]\m[]
+@endExample
+
 @cindex background color name register (@code{.M})
 @cindex name, background color, register (@code{.M})
 @cindex color name, background, register (@code{.M})
@@ -12412,7 +12427,6 @@ color, as does an @code{fcolor} request without an argument.
 The name of the current fill color is available in the read-only
 string-valued register @samp{.M}; it is associated with the environment
 (@pxref{Environments}).  The default fill color is named @samp{default}.
-@code{\M} doesn't produce an input token in GNU @code{troff}.
 
 Create an ellipse with a red interior as follows.
 
@@ -12577,8 +12591,8 @@ suppress AT&T @code{troff} compatibility mode when used; see
 @ref{Writing Macros} and @ref{Compatibility Mode}.  The @code{ds1}
 request defines a string such that compatibility mode is off when the
 string is later interpolated.  To be more precise, a @dfn{compatibility
-save} input token is inserted at the beginning of @var{contents}, and a
-@dfn{compatibility restore} input token at the end.
+save} token is inserted at the beginning of @var{contents}, and a
+@dfn{compatibility restore} token at the end.
 
 @Example
 .nr xxx 12345
@@ -12924,7 +12938,7 @@ to the output.@footnote{Because formatting of the comparands takes place
 in a dummy environment, vertical motions within them cannot spring
 traps.}  On the other hand, @samp{.if "\d"\v'0.5m'"} is true, because
 @code{\d} is defined as a downward motion of one-half em.@footnote{All
-of this is to say that the lists of output nodes created by formatting
+of this is to say that the lists of nodes created by formatting
 @var{xxx} and @var{yyy} must be identical.  @xref{Gtroff Internals}.}
 
 @cindex string comparison
@@ -15154,7 +15168,7 @@ set.  When it is, the leading spaces are removed from the input line,
 and no motion is produced before calling @var{name}.
 
 @c XXX The following discussion does not seem to be correct; leading
-@c space traps don't "see" _any_ input tokens.  Nothing on the line is
+@c space traps don't "see" _any_ tokens.  Nothing on the line is
 @c passed to it as arguments, and tokens after leading spaces are
 @c processed normally after the designated macro is interpolated. XXX
 @c
@@ -15614,9 +15628,9 @@ and size are not preserved; use @code{unformat} to achieve that.
 Like @code{asciify}, unformat the diversion @var{div}.  However,
 @code{unformat} handles only tabs and spaces between words, the latter
 usually arising from spaces or newlines in the input.  Tabs are treated
-as input tokens, and spaces become adjustable again.  The vertical sizes
-of lines are not preserved, but glyph information (font, type size,
-space width, and so on) is retained.
+as tokens, and spaces become adjustable again.  The vertical sizes of
+lines are not preserved, but glyph information (font, type size, space
+width, and so on) is retained.
 @endDefreq
 
 
@@ -16735,17 +16749,19 @@ command-line option.
 @section @command{gtroff} Internals
 
 @cindex input token
-@cindex token, input
+@cindex token
 @cindex output node
-@cindex node, output
+@cindex node
 GNU @command{troff} processes input in three steps.  One or more input
-characters are converted to an @dfn{input token}.@footnote{Except the
+characters are gathered into a @dfn{token},@footnote{Except the
 escape sequences @code{\f}, @code{\F}, @code{\H}, @code{\m}, @code{\M},
 @code{\R}, @code{\s}, and @code{\S}, which are processed immediately,
-updating the environment, if not in copy mode.}  Then, one or more input
-tokens are converted to an @dfn{output node}.  Finally, output nodes are
-converted to the device-independent output language understood by all
-output drivers.
+updating the environment, if not in copy mode.} the smallest meaningful
+unit of @command{troff} input.  Then, one or more tokens are converted
+to a @dfn{node}, a data structure representing any object that may
+ultimately appear in the output, like a glyph or motion on the page.
+Finally, nodes are converted to the device-independent output language
+understood by all output drivers.
 
 Actually, before step one happens, @command{gtroff} converts certain
 escape sequences into reserved input characters (not accessible by the
@@ -16756,17 +16772,17 @@ also -- this is the very reason why not all characters are valid input.
 For example, the input string @samp{fi\[:u]} is converted into a
 character token @samp{f}, a character token @samp{i}, and a special
 token @samp{:u} (representing u@tie{}umlaut).  Later on, the character
-tokens @samp{f} and @samp{i} are merged to a single output node
-representing the ligature glyph @samp{fi} (provided the current font has
-a glyph for this ligature); the same happens with @samp{:u}.  All output
-glyph nodes are `processed', which means that they are invariably
-associated with a given font, font size, advance width, etc.  During the
-formatting process, @command{gtroff} itself adds various nodes to
-control the data flow.
+tokens @samp{f} and @samp{i} are merged into a single node representing
+the ligature glyph @samp{fi} (provided the current font has a glyph for
+this ligature); the same happens with @samp{:u}.  All output glyph nodes
+are `processed', which means that they are invariably associated with a
+given font, font size, advance width, etc.  During the formatting
+process, @command{gtroff} itself adds various nodes to control the data
+flow.
 
 Macros, diversions, and strings collect elements in two chained lists: a
-list of input tokens that have been passed unprocessed, and a list of
-output nodes.  Consider the following diversion.
+list of tokens that have been passed unprocessed, and a list of nodes.
+Consider the following diversion.
 
 @Example
 .di xxx
@@ -16799,10 +16815,10 @@ It contains these elements.
 Elements 1, 7, and@tie{}8 are inserted by @command{gtroff}; the latter
 two (which are always present) specify the vertical extent of the last
 line, possibly modified by @code{\x}.  The @code{br} request finishes
-the pending output line, inserting a newline input token, which is
+the pending output line, inserting a newline token, which is
 subsequently converted to a space when the diversion is interpolated.
 Note that the word space node has a fixed width that isn't adjustable
-anymore.  To convert horizontal space nodes back to input tokens, use
+anymore.  To convert horizontal space nodes back into tokens, use
 the @code{unformat} request.
 
 Macros only contain elements in the token list (and the node list is
@@ -16810,8 +16826,8 @@ empty); diversions and strings can contain elements in both lists.
 
 The @code{chop} request simply reduces the number of elements in a
 macro, string, or diversion by one.  Exceptions are @dfn{compatibility
-save} and @dfn{compatibility ignore} input tokens, which are ignored.
-The @code{substring} request also ignores those input tokens.
+save} and @dfn{compatibility ignore} tokens, which are ignored.  The
+@code{substring} request also ignores those tokens.
 
 Some requests like @code{tr} or @code{cflags} work on glyph identifiers
 only; this means that the associated glyph can be changed without
@@ -19200,7 +19216,7 @@ no-break control character.  @xref{Invoking Requests}.
 
 The escape character, @code{\} by default, is always followed by at
 least one more input character, making an escape @emph{sequence}.  Any
-input token @code{\@var{X}} with @var{X} not in the list below emits a
+token @code{\@var{X}} with @var{X} not in the list below emits a
 warning and interpolates character @var{X}.  Note the entries for
 @code{\.}, which may be obscured by the leader dots, and for
 @code{\@key{RET}} and @code{\@key{SPC}}, which are sorted
