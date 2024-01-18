@@ -2763,6 +2763,11 @@ by moving its location to
 .scaleindicator v ).
 .
 .TPx
+.REQ .char c
+Remove definition of ordinary or special
+.RI character\~ c.
+.
+.TPx
 .REQ .char "c anything"
 Define ordinary or special character
 .I c
@@ -3147,6 +3152,11 @@ and pad glyph to\~\c
 .IR c2 .
 .
 .TPx
+.REQ .fchar c
+Remove definition of fallback
+.RI character\~ c.
+.
+.TPx
 .REQ .fchar "c anything"
 Define fallback character
 (or glyph)
@@ -3191,6 +3201,13 @@ as name
 .I id
 at non-negative position
 .IR pos .
+.
+.TPx
+.REQ .fschar "f c"
+Remove definition of fallback
+.RI character\~ c
+specific to
+.RI font\~ f.
 .
 .TPx
 .REQ .fschar "f c anything"
@@ -4105,6 +4122,11 @@ to vertical position
 unit\~\c
 .scaleindicator v ).
 .\" XXX: negative values accepted; check AT&T troff
+.
+.TPx
+.REQ .schar c
+Remove definition of global fallback
+.RI character\~ c.
 .
 .TPx
 .REQ .schar "c anything"
