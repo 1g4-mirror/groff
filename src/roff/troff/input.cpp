@@ -4225,6 +4225,38 @@ static symbol composite_glyph_name(symbol nm)
   return symbol(gl.contents());
 }
 
+// Does the hexadecimal four-character sequence `n` represent a code
+// point with a composite mapping?  Either the key or value component
+// of an entry in the composite dictionary qualifies.
+//
+// This is an O(n) search, but by default groff only defines 22
+// composite character mappings ("tmac/composite.tmac").  If this
+// becomes a performance problem, we will need another dictionary
+// mapping the unique values of `composite_dictionary` (which is not
+// one-to-one) to a Boolean.
+bool is_codepoint_composite(const char *n)
+{
+  bool result = false;
+  dictionary_iterator iter(composite_dictionary);
+  symbol key;
+  char *value;
+  while(iter.get(&key, reinterpret_cast<void **>(&value))) {
+    assert(!key.is_null());
+    assert(value != 0 /* nullptr */);
+    const char *k = key.contents();
+    if (strcmp(k, n) == 0) {
+      result = true;
+      break;
+    }
+    const char *v = reinterpret_cast<char *>(value);
+    if (strcmp(v, n) == 0) {
+      result = true;
+      break;
+    }
+  }
+  return result;
+}
+
 static void report_composite_characters()
 {
   dictionary_iterator iter(composite_dictionary);
