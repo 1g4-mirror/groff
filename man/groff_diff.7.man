@@ -1864,27 +1864,51 @@ character on the right doesn't get examined.
 .
 .
 .TP
-.BI .char\~ "c contents"
-Define the ordinary or special
+.BI .char\~ c\~\c
+.RI [ contents ]
+Define an ordinary or special
 .RI character\~ c
 as
-.IR contents ,
-which can be empty.
+.I contents.
 .
-More precisely,
-.B char
-defines a
-.I groff
-object
-(or redefines an existing one)
-that is accessed with the
-.RI name\~ c
-on input,
+If
+.I contents
+is absent,
+an existing character definition made with the same request is deleted.
+.
+.
+.IP
+Defining
+(or redefining)
+a
+.RI character\~ c
+creates an object in the formatter that is recognized like any other
+ordinary special character on input,
 and produces
 .I contents
 on output.
 .
-Compatibility mode is disabled and the escape character set
+Every time
+.I c
+is to be output,
+.I contents
+is processed in a temporary environment and the result encapsulated in a
+node.
+.
+(See section \[lq]Gtroff Internals\[rq] in
+.IR "Groff: The GNU Implementation of troff" ,
+the
+.I groff
+Texinfo manual.)
+.
+An initial neutral double quote in the final argument is stripped from
+it,
+allowing embedded leading spaces in
+.I contents,
+which is read in copy mode and continues to the end of the input line.
+.
+Further,
+compatibility mode is disabled and the escape character set
 .RB to\~ \[rs]
 while
 .I contents
@@ -1898,7 +1922,7 @@ not to each character in
 .
 .
 .IP
-An object defined by this request can be used just like a glyph
+A character defined by this request can be used just like a glyph
 provided by the output device.
 .
 In particular,
@@ -2384,15 +2408,17 @@ See
 .
 .
 .TP
-.BI .fchar\~ c\~contents
+.BI .fchar\~ c\~\c
+.RI [ contents ]
 Define fallback
 .RI character\~ c
 as
 .IR contents .
 .
-While
-.B char
-hides a glyph with the same name in the selected font,
+As
+.BR char ,
+but while that request hides a glyph with the same name in the selected
+font,
 .B fchar
 definitions are used only if the font
 lacks a glyph for
@@ -2413,7 +2439,8 @@ or the default if there is none.
 .
 .
 .TP
-.BI .fschar\~ f\~c\~contents
+.BI .fschar\~ f\~c\~\c
+.RI [ contents ]
 Define fallback special
 .RI character\~ c
 for font\~\c
@@ -2421,11 +2448,13 @@ for font\~\c
 as
 .IR contents .
 .
-A character defined by
+As
+.BR char ,
+but a character defined by
 .B fschar
 is located after the list of fonts declared with
 .B \%fspecial
-is searched but before those declared with the
+is searched and before those declared with the
 .RB \%\[lq] special \[rq]
 request.
 .
@@ -3328,19 +3357,20 @@ the request is ignored.
 .
 .
 .TP
-.BI .schar\~ c\~contents
+.BI .schar\~ c\~\c
+.RI [ contents ]
 Define global fallback character
 .I c
 as
 .IR contents .
 .
-See
-.BR char ;
-the distinction is that a character defined with
+As
+.BR char ,
+but a character defined with
 .B schar
 is located after the list of fonts declared with the
 .B \%special
-request but before any mounted special fonts.
+request and before any mounted special fonts.
 .
 .
 .TP

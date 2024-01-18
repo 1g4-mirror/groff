@@ -2768,7 +2768,7 @@ Remove definition of ordinary or special
 .RI character\~ c.
 .
 .TPx
-.REQ .char "c anything"
+.REQ .char "c contents"
 Define ordinary or special character
 .I c
 as
@@ -3157,12 +3157,20 @@ Remove definition of fallback
 .RI character\~ c.
 .
 .TPx
-.REQ .fchar "c anything"
-Define fallback character
-(or glyph)
-.I c
+.REQ .fchar "c contents"
+Define fallback
+.RI character\~ c
 as
-.IR anything .
+.IR contents .
+.
+As
+.request .char ,
+but while that request hides a glyph with the same name in the selected
+font,
+.B fchar
+definitions are used only if the font
+lacks a glyph for
+.IR c .
 .
 .TPx
 .REQ .fcolor
@@ -3210,13 +3218,23 @@ specific to
 .RI font\~ f.
 .
 .TPx
-.REQ .fschar "f c anything"
-Define fallback character (or glyph)
-.I c
-for font
-.I f
-as string
-.IR anything .
+.REQ .fschar "f c contents"
+Define fallback
+.RI character\~ c
+specific to
+.RI font\~ f
+as
+.IR contents .
+.
+As
+.request char ,
+but a character defined by
+.B fschar
+is located after the list of fonts declared with
+.B \%fspecial
+is searched and before those declared with the
+.RB \%\[lq] special \[rq]
+request.
 .
 .TPx
 .REQ .fspecial font
@@ -4129,11 +4147,19 @@ Remove definition of global fallback
 .RI character\~ c.
 .
 .TPx
-.REQ .schar "c anything"
-Define global fallback character (or glyph)\~\c
+.REQ .schar "c contents"
+Define global fallback character
 .I c
 as
-.IR anything .
+.IR contents .
+.
+As
+.request char ,
+but a character defined with
+.B schar
+is located after the list of fonts declared with the
+.request \%.special
+request and before any mounted special fonts.
 .
 .TPx
 .REQ .shc
