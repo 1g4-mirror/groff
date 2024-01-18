@@ -1957,7 +1957,7 @@ is to be interpolated as a string.
 .
 This request can be used repeatedly on the same
 .IR name ;
-see section \[lq]gtroff Internals\[rq] in
+see section \[lq]Gtroff Internals\[rq] in
 .IR "Groff: The GNU Implementation of troff" ,
 the
 .I groff
@@ -5808,7 +5808,7 @@ the new
 escape sequence.
 .
 See subsection \[lq]Escape sequences\[rq] above and sections
-\[lq]Diversions\[rq] and \[lq]gtroff Internals\[rq] in
+\[lq]Diversions\[rq] and \[lq]Gtroff Internals\[rq] in
 .IR "Groff: The GNU Implementation of troff" ,
 the
 .I groff
