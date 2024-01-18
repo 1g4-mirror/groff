@@ -442,7 +442,7 @@ In the
 and
 .request .as1
 requests,
-an initial neutral double quote in the second argument is stripped off
+a leading neutral double quote in the second argument is stripped off
 to allow embedding of leading spaces.
 .
 To include a double quote inside a quoted argument,
@@ -2774,6 +2774,12 @@ Define ordinary or special character
 as
 .I anything.
 .
+A leading neutral double quote in the second argument is stripped from
+it,
+allowing embedded leading spaces in
+.I contents,
+which is read in copy mode and continues to the end of the input line.
+.
 .TPx
 .REQ .chop name
 Remove the last character from the macro,
@@ -2993,7 +2999,7 @@ to
 .I @g@troff
 output as a device control command.
 .
-An initial neutral double quote is stripped to allow embedding of
+A leading neutral double quote is stripped to allow embedding of
 leading spaces.
 .
 .TPx
@@ -3037,16 +3043,22 @@ Create empty string named
 .IR ident .
 .
 .TPx
-.REQ .ds "ident anything"
+.REQ .ds "ident contents"
 Create a string named
 .I ident
 containing
-.IR anything .
+.I contents.
+.
+A leading neutral double quote in the second argument is stripped from
+it,
+allowing embedded leading spaces in
+.I contents,
+which is read in copy mode and continues to the end of the input line.
 .
 .TPx
 .REQ .ds1 ident
 .TQ
-.REQ .ds1 "ident anything"
+.REQ .ds1 "ident contents"
 As
 .request .ds ,
 with compatibility mode disabled when the string is interpreted.
@@ -3859,7 +3871,7 @@ directly to
 .IR @g@troff 's
 output.
 .
-An initial neutral double quote in the argument is stripped,
+A leading neutral double quote in the argument is stripped,
 allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode and continues to the end of the input line.
@@ -4629,7 +4641,7 @@ which must previously have been the subject of an
 request,
 followed by a newline.
 .
-An initial neutral double quote in the second argument is stripped,
+A leading neutral double quote in the second argument is stripped,
 allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode until the end of the line.
@@ -5771,7 +5783,7 @@ see section \[lq]Parameters\[rq] below.
 .
 .
 .P
-The formatter removes an initial neutral double quote
+The formatter removes a leading neutral double quote
 .B \[dq]
 in the string contents to permit the embedding of leading spaces.
 .

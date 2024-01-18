@@ -12557,7 +12557,7 @@ document maintenance.
 @cindex leading spaces with @code{ds}
 @cindex spaces with @code{ds}
 @cindex @code{ds} request, and leading spaces
-The formatter removes an initial neutral double quote @code{"} in
+The formatter removes a leading neutral double quote @code{"} in
 @var{contents} to permit the embedding of leading spaces.  Any other
 @code{"} is interpreted literally, but it is wise to use the special
 character escape sequence @code{\[dq]} instead if the string might be
@@ -16469,7 +16469,7 @@ Embed @var{contents} into GNU @command{troff} output as parameters to an
 The interpretation of such parameters is determined by the output driver
 or other postprocessor.
 
-The @code{device} request strips an initial neutral double quote from
+The @code{device} request strips a leading neutral double quote from
 @var{contents} to allow embedding of leading spaces.
 
 @cindex @code{\&}, in device control commands

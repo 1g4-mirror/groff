@@ -1901,7 +1901,7 @@ the
 .I groff
 Texinfo manual.)
 .
-An initial neutral double quote in the final argument is stripped from
+A leading neutral double quote in the second argument is stripped from
 it,
 allowing embedded leading spaces in
 .I contents,
@@ -2247,7 +2247,7 @@ to
 .I @g@troff
 output as a device control command.
 .
-An initial neutral double quote in
+A leading neutral double quote in
 .I anything
 is stripped to allow the embedding of
 leading spaces.
@@ -3119,7 +3119,7 @@ this usage is similar to that of
 .B \[rs]!\&
 in the top-level diversion.
 .
-An initial neutral double quote in the argument is stripped,
+A leading neutral double quote in the argument is stripped,
 allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode and continues to the end of the input line.
