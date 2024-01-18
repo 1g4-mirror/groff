@@ -15579,14 +15579,15 @@ at all; its argument is simply ignored.
 @cindex @code{output} request, and copy mode
 @cindex copy mode, and @code{output} request
 @cindex mode, copy, and @code{output} request
-@Defreq {output, contents}
-Emit @var{contents} directly to GNU @code{troff}'s intermediate output
-(subject to copy mode interpretation); this is similar to @code{\!} used
-at the top level.  An initial neutral double quote in @var{contents} is
-stripped to allow embedding of leading spaces.
-
-This request can't be used before the first page has started---if you
-get an error, simply insert @code{.br} before the @code{output} request.
+@Defreq {output, [@code{"}]@Var{contents}}
+Emit @var{contents} directly to GNU @code{troff}'s output; this usage is
+similar to that of @code{\!} in the top-level diversion.  An initial
+neutral double quote in the argument is stripped, allowing embedded
+leading spaces in @var{contents}, which is read in copy mode and
+continues to the end of the input line.  This request can't be used
+before the first page has started---if an error is reported, or
+@var{contents} fails to appear in GNU @command{troff}'s output, simply
+insert a @code{.br} line before the @code{output} request.
 
 Use with caution!  It is normally only needed for mark-up used by a
 postprocessor that does something with the output before sending it to
@@ -16377,15 +16378,13 @@ enable unsafe mode.
 @cindex mode, copy, and @code{writec} request
 @cindex write to file stream (@code{write}, @code{writec})
 @cindex file stream, write to (@code{write}, @code{writec})
-Write to the file associated with the specified @var{stream}.  The
-stream must previously have been the subject of an open request.  The
-remainder of the line is interpreted as the @code{ds} request reads its
-second argument: an initial neutral double quote in @var{contents} is
-stripped to allow embedding of leading spaces, and it is read in copy
-mode.
+Write @var{contents} to @var{stream}, which must previously have been
+the subject of an @code{open} request.  A leading neutral double quote
+in the second argument is stripped, allowing embedded leading spaces in
+@var{contents}, which is read in copy mode until the end of the line.
 
 The @code{writec} request is like @code{write}, but only @code{write}
-appends a newline to the data.
+appends a newline to @var{contents}.
 @endDefreq
 
 @Defreq {writem, stream xx}
@@ -16956,8 +16955,7 @@ cannot contain special characters, to the standard error stream,
 followed by a newline.  Leading spaces in @var{message} are ignored.
 
 @code{tm1} is similar, but recognizes and strips a leading neutral
-double quote from @var{message} to allow the embedding of leading
-spaces.
+double quote, allowing embedded spaces in @var{message}.
 
 @code{tmc} works as @code{tm1}, but does not append a newline.
 @endDefreq
@@ -17853,20 +17851,22 @@ used any longer by @command{gtroff}.
 @node Language Concepts, Command Reference, gtroff Output, gtroff Output
 @subsection Language Concepts
 
+@c BEGIN Keep parallel with introductory paragraph of groff_out(5).
 The fundamental operation of the GNU @code{troff} formatter is the
 translation of the @code{groff} input language into a device-independent
 form primarily concerned with what has to be written or drawn at
 specific positions on the output device.  This language is simple and
 imperative.  In the following discussion, the term @dfn{command} always
-refers to this intermediate output language, and never to the
+refers to this device-independent output language, and never to the
 @code{groff} language intended for direct use by document authors.
-Intermediate output commands comprise several categories: glyph output;
-font, color, and text size selection; motion of the printing position;
-page advancement; drawing of geometric objects; and device control
-commands, a catch-all for operations not easily classified as any of the
-foregoing, such as directives to start and stop output, identify the
-intended output device, or place URL hyperlinks in supported output
-formats.
+Device-independent output commands comprise several categories: glyph
+output; font, color, and text size selection; motion of the printing
+position; page advancement; drawing of geometric objects; and device
+control commands, a catch-all for operations not easily classified as
+any of the foregoing, such as directives to start and stop output,
+identify the intended output device, or place URL hyperlinks in
+supported output formats.
+@c END Keep parallel with introductory paragraph of groff_out(5).
 
 @menu
 * Separation::

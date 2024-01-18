@@ -3082,16 +3082,31 @@ append to it instead of truncating it.
 .TP
 .BI .output\~ contents
 Emit
-.IR contents ,
-which are read in copy mode,
-to the formatter output;
-this is similar to
-.B \[rs]!\&
-used in the top-level diversion.
-.
-An initial neutral double quote in
 .I contents
-is stripped to allow the embedding of leading spaces.
+directly to
+.IR @g@troff 's
+output;
+this usage is similar to that of
+.B \[rs]!\&
+in the top-level diversion.
+.
+An initial neutral double quote in the argument is stripped,
+allowing embedded leading spaces in
+.IR contents ,
+which is read in copy mode and continues to the end of the input line.
+.
+This request can't be used before the first page has started\[em]if an
+error is reported,
+or
+.I contents
+fails to appear in
+.IR @g@troff 's
+output,
+simply insert a
+.B .br
+line before the
+.B output
+request.
 .
 .
 .TP
@@ -3543,11 +3558,10 @@ the increase in width is a linear function of the type size.
 .TP
 .BI .tm1\~ message
 As
-.B tm
-request,
-but strips a leading neutral double quote from
-.I message
-to allow the embedding of leading spaces.
+.BR tm ,
+but recognizes and strips a leading neutral double quote,
+allowing embedded spaces in
+.IR message .
 .
 .
 .TP
@@ -3785,9 +3799,9 @@ loop's flow of control.
 .
 .
 .TP
-.BI .write\~ stream\~anything
+.BI .write\~ stream\~contents
 Write
-.I anything
+.I contents
 to
 .IR stream ,
 which must previously have been the subject of an
@@ -3795,19 +3809,18 @@ which must previously have been the subject of an
 request,
 followed by a newline.
 .
-.I anything
-is read in copy mode.
-.
-An initial neutral double quote in
-.I anything
-is stripped to allow the embedding of leading spaces.
+An initial neutral double quote in the second argument is stripped,
+allowing embedded leading spaces in
+.IR contents ,
+which is read in copy mode until the end of the line.
 .
 .
 .TP
-.BI .writec\~ stream\~anything
+.BI .writec\~ stream\~contents
 As
 .BR write ,
-but without a trailing newline.
+but does not append a newline to
+.IR contents .
 .
 .
 .TP

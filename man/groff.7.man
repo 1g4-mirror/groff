@@ -3817,15 +3817,17 @@ Output vertical distance that was saved by the
 request.
 .
 .TPx
-.REQ .output anything
+.REQ .output contents
 Emit
-.I anything
-directly to intermediate output,
-allowing leading whitespace if
-.I string
-starts with
-\&\f[CB]\[dq]\f[]
-(which is stripped off).
+.I contents
+directly to
+.IR @g@troff 's
+output.
+.
+An initial neutral double quote in the argument is stripped,
+allowing embedded leading spaces in
+.IR contents ,
+which is read in copy mode and continues to the end of the input line.
 .
 .TPx
 .REQ .pc
@@ -4400,10 +4402,9 @@ to the standard error stream.
 .REQ .tm1 message
 As
 .request .tm ,
-but an initial neutral double quote in
-.I message
-is removed,
-allowing it to contain leading spaces.
+but recognizes and strips a leading neutral double quote,
+allowing embedded spaces in
+.IR message .
 .
 .TPx
 .REQ .tmc message
@@ -4570,17 +4571,27 @@ unless and until
 evaluates false.
 .
 .TPx
-.REQ .write "stream anything"
+.REQ .write "stream contents"
 Write
-.I anything
+.I contents
 to
-.IR stream .
+.IR stream ,
+which must previously have been the subject of an
+.request .open
+request,
+followed by a newline.
+.
+An initial neutral double quote in the second argument is stripped,
+allowing embedded leading spaces in
+.IR contents ,
+which is read in copy mode until the end of the line.
 .
 .TPx
-.REQ .writec "stream anything"
-Similar to
-.request .write
-without emitting a final newline.
+.REQ .writec "stream contents"
+As
+.request .write ,
+but does not append a newline to
+.IR contents .
 .
 .TPx
 .REQ .writem "stream name"
