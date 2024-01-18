@@ -15549,9 +15549,9 @@ Both escape sequences read the data in copy mode.
 @cindex top-level diversion, and @code{\!}
 @cindex diversion, top-level, and @code{\!}
 If @code{\!} is used in the top-level diversion, its argument is
-directly embedded into GNU @code{troff}'s intermediate output.  This can
-be used, for example, to control a postprocessor that processes the data
-before it is sent to an output driver.
+embedded into GNU @code{troff}'s device-independent output.  This can be
+used, for example, to control a postprocessor that transforms the data
+that are subsequently read by an output driver.
 
 @cindex @code{\?}, in top-level diversion
 @cindex top-level diversion, and @code{\?}
@@ -16243,17 +16243,30 @@ Dear Mr. Adollar,
 @endExample
 
 @Defreq {pi, pipe}
-Pipe the output of @command{gtroff} to the shell command(s) specified by
-@var{pipe}.  This request must occur before @command{gtroff} has a
-chance to print anything.
+Use GNU @command{troff}'s device-independent output as the input to the
+commands specified in @var{pipe} and emit their output to the standard
+output stream instead of GNU @command{troff}'s usual output.
+@cindex @code{groff}, and @code{pi} request
+@cindex @code{pi} request, and @code{groff}
+Since that output is in a page description
+language,@footnote{@xref{gtroff Output}.} using this request without
+specifying the @option{-Z} option to @command{groff} is likely to
+provoke fatal errors from an output driver.
+
+@code{pi} must be invoked before GNU @command{troff} writes any nodes
+to its output.@footnote{@xref{Gtroff Internals}.}  The formatter reports
+an error and ignores the request if @code{pi} is invoked ``too late''.
+Roughly, this means you should set up your @code{pi} pipeline early in a
+document, before anything but register, string, and macro definitions
+(and/or sourcing of files that comprise these exclusively).
 
 @cindex safer mode
 @cindex mode, safer
 @cindex unsafe mode
 @cindex mode, unsafe
-It is an error to use this request in safer mode, which is the
-default.  Invoke GNU @code{troff} or a front end with the @option{-U}
-option to enable unsafe mode.
+Use of this request in safer mode (GNU @command{troff}'s default) is
+erroneous.  Invoke GNU @command{troff} or a front end with the
+@option{-U} option to enable unsafe mode.
 
 Multiple calls to @code{pi} are allowed, acting as a chain.  For
 example,
@@ -16261,16 +16274,10 @@ example,
 @Example
 .pi foo
 .pi bar
-...
+@r{@dots{}}
 @endExample
 
 is the same as @w{@samp{.pi foo | bar}}.
-
-@cindex @code{groff}, and @code{pi} request
-@cindex @code{pi} request, and @code{groff}
-The intermediate output format of GNU @code{troff} is piped to the
-specified commands.  Consequently, calling @code{groff} without the
-@option{-Z} option normally causes a fatal error.
 @endDefreq
 
 @cindex system commands, running
@@ -16731,13 +16738,14 @@ command-line option.
 @cindex token, input
 @cindex output node
 @cindex node, output
-@command{gtroff} processes input in three steps.  One or more input
+GNU @command{troff} processes input in three steps.  One or more input
 characters are converted to an @dfn{input token}.@footnote{Except the
 escape sequences @code{\f}, @code{\F}, @code{\H}, @code{\m}, @code{\M},
-@code{\R}, @code{\s}, and @code{\S}, which are processed immediately if
-not in copy mode.}  Then, one or more input tokens are converted to
-an @dfn{output node}.  Finally, output nodes are converted to the
-intermediate output language understood by all output devices.
+@code{\R}, @code{\s}, and @code{\S}, which are processed immediately,
+updating the environment, if not in copy mode.}  Then, one or more input
+tokens are converted to an @dfn{output node}.  Finally, output nodes are
+converted to the device-independent output language understood by all
+output drivers.
 
 Actually, before step one happens, @command{gtroff} converts certain
 escape sequences into reserved input characters (not accessible by the
