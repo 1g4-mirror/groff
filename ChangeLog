@@ -1,3 +1,8 @@
+2024-01-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (doc/webpage.ms): Register dependency on
+	"tmac/pspic.tmac".
+
 2024-01-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Diagnose bogus composite character escape sequences.

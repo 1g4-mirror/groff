@@ -359,7 +359,7 @@ doc/pic.ps: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS) eqn pic tbl
 # groff(1)'s `-I` implies `-g` and `-s`, so we must depend on grn and
 # soelim even though the document doesn't require them.
 doc/webpage.ps: grn soelim
-doc/webpage.ps: $(DOC_GNU_EPS) tmac/www.tmac tbl
+doc/webpage.ps: $(DOC_GNU_EPS) tmac/pspic.tmac tmac/www.tmac tbl
 doc/webpage.ps: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_GROFF) -I $(doc_srcdir) -I $(doc_builddir) -t -Tps \
