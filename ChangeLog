@@ -1,5 +1,9 @@
 2024-01-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/groff.texi: Resolve warnings thrown by Texinfo 7.1.
+
+2024-01-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Fix underspecified `getenv()` prototype.
 
 	* src/libs/libgroff/getopt.c: Do it.  Seen when building groff

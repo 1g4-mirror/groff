@@ -2509,18 +2509,15 @@ The main documentation files for the @file{mom} macros are in
 @itemize @bullet
 @item
 @file{toc.html}
-@noindent
 Entry point to the full mom manual.
 
 @item
 @file{macrolist.html}
-@noindent
 Hyperlinked index of macros with brief descriptions, arranged by
 category.
 
 @item
 @file{mom-pdf.pdf}
-@noindent
 @acronym{PDF} features and usage.
 @end itemize
 
@@ -4848,7 +4845,7 @@ Apply tilde accent to subsequent glyph.
 Apply caron to subsequent glyph.
 @endDefmpstr
 
-@Defmpstr {\,, ms}
+@Defmpstr {@comma{}, ms}
 Apply cedilla to subsequent glyph.
 @endDefmpstr
 
@@ -4883,7 +4880,7 @@ Apply circumflex accent to preceding glyph.
 Apply tilde accent to preceding glyph.
 @endDefmpstr
 
-@Defmpstr {\,, ms}
+@Defmpstr {@comma{}, ms}
 Apply cedilla to preceding glyph.
 @endDefmpstr
 
@@ -5256,9 +5253,8 @@ characters shown here are ``dagger'', ``double dagger'', ``right
 been shocking to the rich.\[rq]
 (Bertrand Russell, 1935)
 @c XXX: @iftex puts a blank line on the output.  This seems like a bug.
-@c @newline works around it.  But we need a weird inverse indent.
-@iftex @
-  @result{} @quotedblleft{}The idea that the poor should have
+@iftex
+    @result{} @quotedblleft{}The idea that the poor should have
     @result{} leisure has always been shocking to
     @result{} the rich.@quotedblright{}  (Bertrand Russell, 1935)
 @end iftex
@@ -11792,7 +11788,7 @@ is ugly.  Use this escape sequence whenever an oblique glyph is
 immediately followed by an upright glyph without any intervening space.
 @endDefesc
 
-@Defesc {\\\,, , , }
+@Defesc {\\@comma{}, , , }
 @cindex left italic correction (@code{\,})
 @cindex correction, left italic (@code{\,})
 @cindex correction between upright and oblique glyph (@code{\/}, @code{\,})
