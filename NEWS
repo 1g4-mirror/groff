@@ -624,7 +624,10 @@ o The s (ms) macro package now enables the formatter's "no-space mode"
   of the package more predictable; you can fine-tune such spacing by
   setting the `DD` register in desired places.  It has also helped us to
   improve groff ms's rendering of historical ms(7) documents such as
-  Kernighan & Cherry's "Typesetting Mathematics".
+  Kernighan & Cherry's "Typesetting Mathematics".  This change also
+  suppresses the `bp` page break request; you may wish to define a macro
+  (the name `BP` is not in use by the package) to restore spacing with
+  the `rs` request and break the page with `bp`.
 
 o The s (ms) macro package supports a new string, `FR`, which defines
   the ratio of the footnote line length to the current line length.  The
