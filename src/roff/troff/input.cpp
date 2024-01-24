@@ -4229,7 +4229,7 @@ static symbol composite_glyph_name(symbol nm)
 // point with a composite mapping?  Either the key or value component
 // of an entry in the composite dictionary qualifies.
 //
-// This is an O(n) search, but by default groff only defines 22
+// This is an O(n) search, but by default groff defines only 22
 // composite character mappings ("tmac/composite.tmac").  If this
 // becomes a performance problem, we will need another dictionary
 // mapping the unique values of `composite_dictionary` (which is not
