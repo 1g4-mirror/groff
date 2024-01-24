@@ -1,3 +1,10 @@
+2024-01-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Fix underspecified `getenv()` prototype.
+
+	* src/libs/libgroff/getopt.c: Do it.  Seen when building groff
+	  on a non-glibc-based system (clang 17 complains).
+
 2024-01-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am (doc/webpage.ms): Register dependency on
