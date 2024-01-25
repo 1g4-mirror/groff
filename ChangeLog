@@ -1,3 +1,26 @@
+2024-01-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor (trap Booleans).
+
+	* src/roff/troff/div.h:
+	* src/roff/troff/input.cpp: Rename trap-related flags and
+	boolify them.  Assign to them using Boolean literals.
+	- `trap_sprung_flag` -> `was_trap_sprung`
+	- `postpone_traps_flag` -> `are_traps_postponed`
+
+	* src/roff/troff/div.cpp (space_request):
+	* src/roff/troff/env.cpp (pending_output_line::output)
+	(environment::output)
+	(environment::output_title)
+	* src/roff/troff/input.cpp (process_input_stack, spring_trap)
+	(postpone_traps, unpostpone_traps):
+	Update variable access sites.
+
+	* src/roff/troff/div.h:
+	* src/roff/troff/input.cpp: Demote return type of
+	`unpostpone_traps()` from `int` to `bool`.
+	(unpostpone_traps): Return Boolean, not integer, literals.
+
 2024-01-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/groff.texi: Resolve warnings thrown by Texinfo 7.1.
