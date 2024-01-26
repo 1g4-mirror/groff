@@ -1,3 +1,26 @@
+2024-01-26  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Our documentation groff_man.7 documents that these requests are
+	for hyperlinks. The .pdfhref W command expects the hotspot text
+	to be passed as a parameter, but these pairs of requests enclose
+	the required text. To solve this conundrum if the given
+	hyperlink text to the .pdfhref request is the single pipe
+	character "|" then mark all following text sent for output as
+	the hotspot, terminate the hotspot on receipt of \X'pdf:
+	markend' escape. This new facility is only available using -T
+	pdf, not using -T ps and the pdfmark macros. Note the advice in
+	the gropdf man page to use \X'pdf: marksuspend' and \X'pdf:
+	markrestart' to protect any headers and footers becoming part of
+	the hotspot in case the hyperlinked text crosses a page
+	boundary.
+
+	* tmac/an.tmac: add code to use .pdfhref W for these hyperlinks
+	and protect against crossing page boundaries.
+
+	* tmac/pdf.tmac: if the given text for a hyperlink consists of
+	a single pipe character "|", start the hotspot and only
+	terminate when \X'pdf: markend' is received.
+
 2024-01-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor (trap Booleans).
