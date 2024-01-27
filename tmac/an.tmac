@@ -207,8 +207,23 @@
 .
 .\" Write a bookmark/anchor/link target $2 at hierarchical depth $1.
 .de an*bookmark
-.  if '\*[.T]'pdf' .pdfbookmark \\$1 \\$2
+.  an*bookmark*\*[.T] \\$@
 ..
+.
+.ds an*bookmark*ascii \" empty
+.ds an*bookmark*cp1047 \" empty
+.ds an*bookmark*dvi \" empty
+.ds an*bookmark*html \" empty
+.ds an*bookmark*latin1 \" empty
+.ds an*bookmark*lbp \" empty
+.ds an*bookmark*lj4 \" empty
+.ds an*bookmark*ps \" empty
+.ds an*bookmark*utf8 \" empty
+.
+.de an*bookmark*pdf
+.  pdfbookmark \\$1 \\$2
+..
+.
 .
 .\" Begin man page.
 .\" .TH topic section[ extra1[ extra2[ extra3]]]

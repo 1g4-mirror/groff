@@ -1,5 +1,18 @@
 2024-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Specialize `an*bookmark` macro by output device.
+	(an*bookmark): Move former operation, conditional on 'pdf'
+	output device, from here...
+	(an*bookmark*pdf): ...to here.
+	(an*bookmark): Make into a wrapper calling the device-specific
+	macro.
+	(an*bookmark*ascii, an*bookmark*cp1047, an*bookmark*dvi)
+	(an*bookmark*html, an*bookmark*latin1, an*bookmark*lbp)
+	(an*bookmark*lj4, an*bookmark*ps, an*bookmark*utf8): Define as
+	empty strings.
+
+2024-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Trivially refactor.
 	(an*bookmark, an*header, an*footer, an*begin-hyperlink)
 	(an*end-hyperlink, (initialization)): Retire `an*is-output-pdf`
