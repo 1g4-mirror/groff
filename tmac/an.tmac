@@ -207,7 +207,7 @@
 .
 .\" Write a bookmark/anchor/link target $2 at hierarchical depth $1.
 .de an*bookmark
-.  if \\n[an*is-output-pdf] .pdfbookmark \\$1 \\$2
+.  if '\*[.T]'pdf' .pdfbookmark \\$1 \\$2
 ..
 .
 .\" Begin man page.
@@ -587,7 +587,7 @@ contains unsupported escape sequence
 .  PT
 .  ev
 .  ns
-.  if '\\*[.T]'pdf' .pdfmarkrestart
+.  if '\*[.T]'pdf' .pdfmarkrestart
 ..
 .
 .\" Schedule a page break when the next output line is written (not
@@ -599,7 +599,7 @@ contains unsupported escape sequence
 .\" Prepare the footer for a page of the document.
 .de1 an-footer
 .  if \\n[an-suppress-header-and-footer] .return
-.  if '\\*[.T]'pdf' .pdfmarksuspend
+.  if '\*[.T]'pdf' .pdfmarksuspend
 .  ev an*env-header-and-footer
 .  ie \\n[cR] \
 .    ds an*ofoot "\\*[an-pageref]\"
@@ -1108,7 +1108,7 @@ contains unsupported escape sequence
 .  if (\\n[an*is-in-link-text-diversion] & \\n[an*do-hyperlink]) \{\
 .    \" Start diversion in a new environment.
 .    ev an*link-text-env
-.    if \\n[an*is-output-pdf] \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
+.    if '\*[.T]'pdf' [\\*[PDFHREF.TEXT.COLOUR]]\c
 .    di an*link-text-div
 .    ll (\\n[an*saved-line-length]u - \\n[an*saved-indentation]u)
 .  \}
@@ -1132,7 +1132,7 @@ contains unsupported escape sequence
 .    ie \\n[dn] \{\
 .      if \\n[an*is-output-html] \
 .        nop \X^html:<a href="\\*[an*prefix]\\*[an*hyperlink]">^\c
-.      if \\n[an*is-output-pdf] \{\
+.      if '\*[.T]'pdf' \{\
 .        pdfhref W -D \\*[an*prefix]\\*[an*hyperlink] -- "|"
 .      \}
 .      if \\n[an*is-output-terminal] \
@@ -1145,7 +1145,7 @@ contains unsupported escape sequence
 .        nop \X^html:</a>^\c
 .      if \\n[an*is-output-terminal] \
 .        nop \X^tty: link^\c
-.      if \\n[an*is-output-pdf] \
+.      if '\*[.T]'pdf' \
 .        nop \X'pdf: markend'\m[\\*[pdf:curcol]]\c
 .    \}
 .    \" If there was no link text, format URI as its own link text.  We
@@ -1154,7 +1154,7 @@ contains unsupported escape sequence
 .      if \\n[an*is-output-html] \
 .        nop \X^html:<a href="\\*[an*prefix]\\*[an*hyperlink]">\
 \\*[an*hyperlink]</a>^\c
-.      if \\n[an*is-output-pdf] \
+.      if '\*[.T]'pdf' \
 .        pdfhref W -D \\*[an*prefix]\\*[an*hyperlink] -- \
 \\*[an*hyperlink]\c
 .      if \\n[an*is-output-terminal] \
@@ -1331,8 +1331,6 @@ contains unsupported escape sequence
 .
 .nr an*is-output-html 0
 .if '\*[.T]'html' .nr an*is-output-html 1
-.nr an*is-output-pdf 0
-.if '\*[.T]'pdf' .nr an*is-output-pdf 1
 .nr an*is-output-terminal 0
 .if '\*(.T'ascii'  .nr an*is-output-terminal 1
 .if '\*(.T'cp1047' .nr an*is-output-terminal 1
@@ -1341,8 +1339,10 @@ contains unsupported escape sequence
 .
 .nr an*can-hyperlink 0
 .if (  \n[an*is-output-html] \
-     : \n[an*is-output-pdf] \
      : \n[an*is-output-terminal]) \
+.  nr an*can-hyperlink 1
+.
+.if '\*[.T]'pdf' \
 .  nr an*can-hyperlink 1
 .
 .ds an*body-family \n[.fam]
@@ -1369,7 +1369,7 @@ contains unsupported escape sequence
 .\" Set each rendering parameter only if its -[dr] option or man.local
 .\" did not.
 .
-.if \n[an*is-output-pdf] \{\
+.if '\*[.T]'pdf' \{\
 .  \" FIXME: The following registers are documented only in pdf.tmac.
 .  if !r PDFOUTLINE.FOLDLEVEL .nr PDFOUTLINE.FOLDLEVEL 1
 .  if !r PDFHREF.VIEW.LEADING .nr PDFHREF.VIEW.LEADING 10p

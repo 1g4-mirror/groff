@@ -1,3 +1,12 @@
+2024-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Trivially refactor.
+	(an*bookmark, an*header, an*footer, an*begin-hyperlink)
+	(an*end-hyperlink, (initialization)): Retire `an*is-output-pdf`
+	register (and interpolation-time checks of its value) in favor
+	of (load-time) use of output comparison operator to check
+	built-in `.T` string against value "pdf".
+
 2024-01-26  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Our documentation groff_man.7 documents that these requests are
