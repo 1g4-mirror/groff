@@ -19,7 +19,9 @@
 
 	* tmac/pdf.tmac: if the given text for a hyperlink consists of
 	a single pipe character "|", start the hotspot and only
-	terminate when \X'pdf: markend' is received.
+	terminate when \X'pdf: markend' is received.  Update hyperlink
+	text color from RGB 0.35/0/0.6 to 0/0.35/0.6 (magenta-ish to
+	cyan-ish).
 
 2024-01-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
