@@ -1,3 +1,11 @@
+2024-08-08  Dave Kemper <saint.snit@gmail.com>
+
+	* tmac/tty.tmac: Revise fallback character for • (bullet) to
+	asterisk, affecting "ascii" and "latin1" output devices.
+
+	Fixes <https://savannah.gnu.org/bugs/?56015>.  Thanks to Jeff
+	Conrad for the report.
+
 2024-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tty.tmac: Revise fallback characters for ± and ∓ to
