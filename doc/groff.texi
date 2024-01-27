@@ -14935,7 +14935,7 @@ commit atrocities. \[em] Voltaire
 
 @cindex diversions, and traps
 @cindex traps, and diversions
-When designing macros, keep in mind that diversions and traps do
+When designing macros, keep in mind that diversions and traps do not
 normally interact.  For example, if a trap calls a header macro (while
 outputting a diversion) that tries to change the font on the current
 page, the effect is not visible before the diversion has completely been
@@ -15682,11 +15682,10 @@ Truly.
 @endExample
 
 @noindent
-By ending each text line of the macros with an escaped
-@code{\@key{RET}}, we get the desired effect (@pxref{Line
-Continuation}).@footnote{The backslash is doubled.  @xref{Copy Mode}.}
-What would have happened if we had used only one backslash at a time
-instead?
+By ending each text line of the macros with an escaped @key{RET}, we get
+the desired effect (recall @pxref{Line Continuation}).@footnote{We must
+double the backslash.  @xref{Copy Mode}.}  What would have happened if
+we had used only one backslash in each case?
 
 Interpolating a string does not hide existing macro arguments.  We can
 also place the escaped newline outside the string interpolation instead
@@ -17174,7 +17173,7 @@ codes of enabled warning categories.
 
 @c BEGIN Keep parallel with section "Warnings" of troff(1).
 @c Caveat: the man page sorts them by name, not number.
-@node Warnings,  , Debugging, Debugging
+@node Warnings, Implementation Differences, Debugging, Debugging
 @subsection Warnings
 @cindex warnings
 
@@ -17386,7 +17385,7 @@ extension requests, @code{open}, @code{opena}, and @code{pso}.
 
 @c ---------------------------------------------------------------------
 
-@node Compatibility Mode, Safer Mode, Other Differences, Implementation Differences
+@node Compatibility Mode, Other Differences, Safer Mode, Implementation Differences
 @subsection Compatibility Mode
 @cindex compatibility mode
 @cindex mode, compatibility
@@ -17743,8 +17742,8 @@ use the @code{\e} escape sequence; this always prints a single instance
 of the current escape character,@footnote{Naturally, if you've changed
 the escape character, you need to prefix the @code{e} with whatever it
 is---and you'll likely get something other than a backslash in the
-output.} regardless of whether or not it is used in a diversion; it
-also works in both GNU @code{troff} and @acronym{AT&T} @code{troff}.
+output.} regardless of whether it is used in a diversion; it also works
+in both GNU @code{troff} and @acronym{AT&T} @code{troff}.
 
 The other correct way, appropriate in contexts independent of the
 backslash's common use as a @code{troff} escape character---perhaps in
@@ -17758,8 +17757,9 @@ the latter's 060716 release (July 2006).}
 
 To store an escape sequence in a diversion that is interpreted when the
 diversion is interpolated, either use the traditional @code{\!}
-transparent output facility, or, if this is unsuitable, the new
-@code{\?} escape sequence.  @xref{Diversions} and @ref{Gtroff
+transparent output facility, or, if this is unsuitable,
+@c XXX: Why would it be unsuitable?  Line breaking behavior?
+the new @code{\?} escape sequence.  @xref{Diversions} and @ref{Gtroff
 Internals}.
 
 In the somewhat pathological case where a diversion exists containing a
@@ -17767,9 +17767,6 @@ partially collected line and a partially collected line at the top-level
 diversion has never existed, @acronym{AT&T} @code{troff} will output a
 partially collected but otherwise empty line (as if @samp{\c} were in
 the top-level diversion) at the end of input; GNU @code{troff} will not.
-
-@codequotebacktick off
-@codequoteundirected off
 
 
 
@@ -17792,9 +17789,6 @@ following two sections describe their format.
 
 
 @c =====================================================================
-
-@codequotebacktick on
-@codequoteundirected on
 
 @c BEGIN TODO: Make parallel with groff_out(5).
 @node gtroff Output, Device and Font Description Files, File Formats, File Formats
