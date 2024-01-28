@@ -1,5 +1,19 @@
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac:
+	* tmac/doc.tmac: Slightly refactor.  Make the
+	`an*is-output-html` and `doc-is-output-html` registers the
+	{nearly} sole determinant (within each package) of behavior
+	tailed for HTML output.  Annotate why we use each instead of
+	testing `.T` string.
+
+	* tmac/an.tmac (an*end-hyperlink, MR): Apply exceptions to the
+	above rule when explicitly issuing device control escape
+	sequences to embed HTML elements; only grohtml(1) can interpret
+	these, not grops(1) when executed by pre-grohtml(1).
+
+2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/doc_Lk-works.sh: Add unit test.
 	* tmac/tmac.am (tmac_TESTS): Run test.
 

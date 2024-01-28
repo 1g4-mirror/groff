@@ -63,8 +63,13 @@
 .
 .\" Handle most rendering options.
 .
+.\" We don't have to worry about "xhtml" (it's mapped to "html"), but we
+.\" do need to account for pre-grohtml(1)'s use of "groff -Tps".
 .nr doc-is-output-html 0
-.if '\*[.T]'html' .nr doc-is-output-html 1
+.if '\*[.T]'html' \
+.  nr doc-is-output-html 1
+.if r ps4html \
+.  nr doc-is-output-html 1
 .
 .\" Use -dAD to set the adjustment mode for ordinary body text.
 .if !d AD \
@@ -74,8 +79,7 @@
 .\"
 .\" We must use consecutive page numbers when using PostScript to
 .\" generate HTML images; we must not reset the page number at the
-.\" beginning of each document (the 'ps4html' register is automatically
-.\" added to the command line by the pre-HTML preprocessor).
+.\" beginning of each document.
 .ie !r C \
 .  nr C 0
 .el \
@@ -85,8 +89,6 @@
 .       nr C 1
 .    \}
 .if \n[doc-is-output-html] \
-.  nr C 1
-.if r ps4html \
 .  nr C 1
 .
 .\" Use -rCS=1 to force capitalization of section headings.
@@ -217,7 +219,7 @@
 .\" and whose state is shared with man (and andoc.tmac, if necessary).
 .\"
 .\" Also, we can't use the `P` register with grohtml at all.
-.ie r ps4html \{\
+.ie \n[doc-is-output-html] \{\
 .  if r P \{\
 .     tm mdoc: ignoring starting page number in HTML output
 .     rr P

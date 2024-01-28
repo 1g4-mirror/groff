@@ -1145,7 +1145,7 @@ contains unsupported escape sequence
 .
 .    \" Was any link text present?
 .    ie \\n[dn] \{\
-.      if \\n[an*is-output-html] \
+.      if '\*[.T]'html' \
 .        nop \X^html:<a href="\\*[an*prefix]\\*[an*hyperlink]">^\c
 .      if '\*[.T]'pdf' \{\
 .        pdfhref W -D \\*[an*prefix]\\*[an*hyperlink] -- "|"
@@ -1156,7 +1156,7 @@ contains unsupported escape sequence
 .      chop an*link-text-div
 .      an*link-text-div
 \c\" XXX: If we .nop this, HTML output is corrupted (Savannah #63470).
-.      if \\n[an*is-output-html] \
+.      if '\*[.T]'html' \
 .        nop \X^html:</a>^\c
 .      if \\n[an*is-output-terminal] \
 .        nop \X^tty: link^\c
@@ -1166,7 +1166,7 @@ contains unsupported escape sequence
 .    \" If there was no link text, format URI as its own link text.  We
 .    \" don't add angle brackets here.
 .    el \{\
-.      if \\n[an*is-output-html] \
+.      if '\*[.T]'html' \
 .        nop \X^html:<a href="\\*[an*prefix]\\*[an*hyperlink]">\
 \\*[an*hyperlink]</a>^\c
 .      if '\*[.T]'pdf' \
@@ -1244,14 +1244,14 @@ contains unsupported escape sequence
 .    ds an*url x-man-doc://\\$2/\\$1\" ManOpen (Mac OS X pre-2005)
 .  nh
 .  if \\n[an*do-hyperlink] \{\
-.    if \\n[an*is-output-html] \
+.    if '\*[.T]'html' \
 .      nop \X^html:<a href="\\*[an*url]">^\c
 .    if \\n[an*is-output-terminal] \
 .      nop \X^tty: link \\*[an*url]^\c
 .  \}
 .      nop \&\\*[an-lic]\f[\\*[MF]]\\$1\\*[an-ic]\f[R](\\$2)\c
 .  if \\n[an*do-hyperlink] \{\
-.    if \\n[an*is-output-html] \
+.    if '\*[.T]'html' \
 .      nop \X^html:</a>^\c
 .    if \\n[an*is-output-terminal] \
 .      nop \X^tty: link^\c
@@ -1344,8 +1344,13 @@ contains unsupported escape sequence
 .\" page.
 .nr an*need-titles-reset 0
 .
+.\" We don't have to worry about "xhtml" (it's mapped to "html"), but we
+.\" do need to account for pre-grohtml(1)'s use of "groff -Tps".
 .nr an*is-output-html 0
 .if '\*[.T]'html' .nr an*is-output-html 1
+.if r ps4html     .nr an*is-output-html 1
+.
+.\" For most purposes, we treat the nroff devices equivalently.
 .nr an*is-output-terminal 0
 .if '\*(.T'ascii'  .nr an*is-output-terminal 1
 .if '\*(.T'cp1047' .nr an*is-output-terminal 1
@@ -1404,8 +1409,7 @@ contains unsupported escape sequence
 .\"
 .\" We must use consecutive page numbers when using PostScript to
 .\" generate HTML images; we must not reset the page number at the
-.\" beginning of each document (the 'ps4html' register is automatically
-.\" added to the command line by the pre-HTML preprocessor).
+.\" beginning of each document.
 .ie !r C \
 .  nr C 0
 .el \
@@ -1415,8 +1419,6 @@ contains unsupported escape sequence
 .       nr C 1
 .    \}
 .if \n[an*is-output-html] \
-.  nr C 1
-.if r ps4html \
 .  nr C 1
 .
 .\" diagnostics desired for man page style problems
@@ -1536,7 +1538,7 @@ contains unsupported escape sequence
 .\" and whose state is shared with mdoc (and andoc.tmac, if necessary).
 .\"
 .\" Also, we can't use the `P` register with grohtml at all.
-.ie r ps4html \{\
+.ie \n[an*is-output-html] \{\
 .  if r P \{\
 .     tm \*[an]: ignoring starting page number in HTML output
 .     rr P
@@ -1640,7 +1642,6 @@ contains unsupported escape sequence
 .\" If rendering HTML, suppress headers and footers.
 .nr an-suppress-header-and-footer 0
 .if \n[an*is-output-html] .nr an-suppress-header-and-footer 1
-.if r ps4html             .nr an-suppress-header-and-footer 1
 .
 .cp \n[*groff_an_tmac_C]
 .do rr *groff_an_tmac_C
