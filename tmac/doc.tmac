@@ -6809,7 +6809,24 @@
 .
 .eo
 .de Mt
-.  \" XXX: error handling missing
+.  if !\n[doc-arg-count] \{\
+.    ie \n[.$] \{\
+.      ds doc-macro-name Mt
+.      doc-parse-args \$@
+.    \}
+.    el \
+.      tm Usage: .Mt email_address ... (#\n[.c])
+.  \}
+.
+.  if !\n[doc-arg-count] \
+.    return
+.
+.  if (\n[doc-arg-count] <= \n[doc-arg-ptr]) \{\
+.    tm Usage: .Mt email_address ... (#\n[.c])
+.    doc-reset-args
+.    return
+.  \}
+.
 .  Pa \$@
 ..
 .ec
@@ -6830,12 +6847,22 @@
 .eo
 .de Lk
 .  if !\n[doc-arg-count] \{\
-.    ds doc-macro-name Lk
-.    doc-parse-args \$@
+.    ie \n[.$] \{\
+.      ds doc-macro-name Lk
+.      doc-parse-args \$@
+.    \}
+.    el \
+.      tm Usage: .Lk uri [link_text ...] (#\n[.c])
 .  \}
 .
 .  if !\n[doc-arg-count] \
 .    return
+.
+.  if (\n[doc-arg-count] <= \n[doc-arg-ptr]) \{\
+.    tm Usage: .Lk uri [link_text ...] (#\n[.c])
+.    doc-reset-args
+.    return
+.  \}
 .
 .  \" The first argument is the target URI.
 .  nr doc-arg-ptr +1
