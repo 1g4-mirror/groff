@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2021 Free Software Foundation, Inc.
+# Copyright (C) 2021-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -19,7 +19,12 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
-set -e
+fail=
+
+wail() {
+    echo ...FAILED >&2
+    fail=yes
+}
 
 # Regression-test Savannah #60025.
 #
@@ -38,15 +43,22 @@ The
 utility was written by
 .An Kristaps Dzonsons Aq Mt kristaps@bsd.lv
 and is maintained by
-.An Ingo Schwarze Aq Mt schwarze@openbsd.org .'
+.An Ingo Schwarze Aq Mt schwarze@openbsd.org .
+Certainly
+.Mt bogus@example.com
+had nothing to do with it.'
 
 output=$(echo "$input" | "$groff" -Tascii -P-cbou -mdoc)
 echo "$output"
 
+echo "checking that conventional Mt macro call works" >&2
 echo "$output" \
-    | grep -Fq 'written by Kristaps Dzonsons <kristaps@bsd.lv>'
+    | grep -Eq '^ +bogus@example\.com' || wail
 
+echo "checking that inline Mt macro call works" >&2
 echo "$output" \
-    | grep -Fq 'is maintained by Ingo Schwarze <schwarze@openbsd.org>.'
+    | grep -Fq 'written by Kristaps Dzonsons <kristaps@bsd.lv>' || wail
+
+test -z "$fail"
 
 # vim:set ai et sw=4 ts=4 tw=72:

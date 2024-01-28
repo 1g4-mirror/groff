@@ -1,3 +1,7 @@
+2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tests/doc_Mt-works.sh: Test "direct" `Mt` call.
+
 2024-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Specialize `an*bookmark` macro by output device.
