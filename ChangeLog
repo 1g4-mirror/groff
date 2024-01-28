@@ -1,5 +1,18 @@
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac (Mt): Give macro a real implementation instead
+	of wrapping `Pa`.  Among other benefits, this means that it
+	recognizes a `doc-Mt-font` string for styling of the argument,
+	instead of using the styling applied to `Pa`.
+
+	* tmac/mdoc/doc-ditroff (doc-Mt-font):
+	* tmac/mdoc/doc-nroff (doc-Mt-font): Define new strings.  Set
+	email addresses in italics by default.
+
+	* NEWS: Report change in font styling.
+
+2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac:
 	* tmac/doc.tmac: Slightly refactor.  Make the
 	`an*is-output-html` and `doc-is-output-html` registers the

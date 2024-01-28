@@ -6808,6 +6808,15 @@
 .
 .\" NS Mt user macro
 .\" NS   mailto (for conversion to HTML)
+.\" NS
+.\" NS modifies:
+.\" NS   doc-arg-ptr
+.\" NS   doc-curr-font
+.\" NS   doc-macro-name
+.\" NS
+.\" NS local variables:
+.\" NS   doc-lasttext-Mt
+.\" NS   doc-target-Mt
 .
 .eo
 .de Mt
@@ -6829,7 +6838,23 @@
 .    return
 .  \}
 .
-.  Pa \$@
+.  \" The argument is the email address.
+.  nr doc-arg-ptr +1
+.  ds doc-target-Mt "\*[doc-arg\n[doc-arg-ptr]]
+.  nr doc-arg-ptr +1
+.
+.  \" Format the link target.
+.  nr doc-curr-font \n[.f]
+.  nop \*[doc-Mt-font]\*[doc-target-Mt]\c
+.  nop \f[\n[doc-curr-font]]\c
+.
+.  \" Format trailing arguments, like punctuation, if any.
+.  ie (\n[doc-arg-ptr] <= \n[doc-arg-count]) \
+.    doc-print-recursive
+.  el \{\
+.    nop \&
+.    doc-reset-args
+.  \}
 ..
 .ec
 .

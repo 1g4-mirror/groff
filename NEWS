@@ -143,6 +143,11 @@ o The an (man) and doc (mdoc) macro packages now use slightly different
   rendering disabled (by default, it is enabled), the page footer now
   sets 1 line higher than before.
 
+o The doc (mdoc) macro package's `Mt` macro now sets its argument in
+  roman, not italics (or whatever the string `doc-Pa-font` was
+  configured to use).  A new string, `doc-Mt-font`, for use in
+  "mdoc.local" files and similar, supports configuration of this face.
+
 o The new macro file "koi8-r.tmac" supports the KOI8-R character
   encoding, which supports the new Russian locale for groff.
 
