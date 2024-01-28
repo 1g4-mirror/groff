@@ -1,5 +1,10 @@
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/doc_Lk-works.sh: Add unit test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac (Mt, Lk): Validate arguments.
 
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
