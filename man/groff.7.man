@@ -8146,7 +8146,7 @@ after
 .
 .
 .\" ====================================================================
-.SS "Underlining by overstriking with \e(ul"
+.SS "Underlining by overstriking with \[rs](ul"
 .\" ====================================================================
 .
 The
