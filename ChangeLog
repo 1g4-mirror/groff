@@ -1,5 +1,10 @@
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*begin-hyperlink): Repair damage I introduced
+	in commit 6f12a82806, 27 January.
+
+2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac (Mt): Give macro a real implementation instead
 	of wrapping `Pa`.  Among other benefits, this means that it
 	recognizes a `doc-Mt-font` string for styling of the argument,

@@ -1123,7 +1123,7 @@ contains unsupported escape sequence
 .  if (\\n[an*is-in-link-text-diversion] & \\n[an*do-hyperlink]) \{\
 .    \" Start diversion in a new environment.
 .    ev an*link-text-env
-.    if '\*[.T]'pdf' [\\*[PDFHREF.TEXT.COLOUR]]\c
+.    if '\*[.T]'pdf' \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
 .    di an*link-text-div
 .    ll (\\n[an*saved-line-length]u - \\n[an*saved-indentation]u)
 .  \}
