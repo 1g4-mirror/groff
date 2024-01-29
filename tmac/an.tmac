@@ -1124,7 +1124,7 @@ contains unsupported escape sequence
 .    \" Start diversion in a new environment.
 .    ev an*link-text-env
 .    if '\*[.T]'pdf' \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
-.    di an*link-text-div
+.    di an*link-text
 .    ll (\\n[an*saved-line-length]u - \\n[an*saved-indentation]u)
 .  \}
 .  rr an*saved-indentation
@@ -1153,8 +1153,8 @@ contains unsupported escape sequence
 .      if \\n[an*is-output-terminal] \
 .        nop \X^tty: link \\*[an*prefix]\\*[an*hyperlink]^\c
 .      \" Strip off the final newline of the diversion and emit it.
-.      chop an*link-text-div
-.      an*link-text-div
+.      chop an*link-text
+.      an*link-text
 \c\" XXX: If we .nop this, HTML output is corrupted (Savannah #63470).
 .      if '\*[.T]'html' \
 .        nop \X^html:</a>^\c

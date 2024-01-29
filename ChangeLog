@@ -7,6 +7,8 @@
 	`an*is-in-paragraph-tag-diversion`.
 	(an-write-paragraph-tag, TP): Rename `an-div` diversion to
 	`an*paragraph-tag`.
+	(an*begin-hyperlink, an*end-hyperlink): Rename
+	`an*link-text-div` to `an*link-text`.
 
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
