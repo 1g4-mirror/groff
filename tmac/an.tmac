@@ -1153,10 +1153,11 @@ contains unsupported escape sequence
 .      \}
 .      if \\n[an*is-output-terminal] \
 .        nop \X^tty: link \\*[an*prefix]\\*[an*hyperlink]^\c
-.      \" Strip off the final newline of the diversion and emit it.
+.      \" Replace the final newline of the diversion.
 .      chop an*link-text
+.      as an*link-text \&\c
 .      an*link-text
-\c\" XXX: If we .nop this, HTML output is corrupted (Savannah #63470).
+.      nop \"
 .      if '\*[.T]'html' \
 .        nop \X^html:</a>^\c
 .      if \\n[an*is-output-terminal] \

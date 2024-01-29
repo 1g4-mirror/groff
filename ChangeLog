@@ -11,6 +11,7 @@
 	`an*link-text-div` to `an*link-text`.
 	(an-write-paragraph-tag, an*end-hyperlink): Delete diversions
 	after using them.
+	(an*end-hyperlink): Revise emission of link text diversion.
 
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
