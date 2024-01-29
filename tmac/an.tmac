@@ -813,13 +813,15 @@ contains unsupported escape sequence
 .  an-break-paragraph
 .  if \\n[.$] .nr an-prevailing-indent (n;\\$1)
 .  itc 1 an-input-trap
-.  in 0
-.  if !\\n[an*is-in-paragraph-tag-diversion] \{\
-.    ll -\\n[an-margin]u
-.    di an*paragraph-tag
-.    na
+.  if \\n[an*is-in-paragraph-tag-diversion] \{\
+.    an-warn cannot nest .\\$0 or .TQ inside .\\$0; supply a tag
+.    return
 .  \}
+.  in 0
+.  ll -\\n[an-margin]u
 .  nr an*is-in-paragraph-tag-diversion 1
+.  di an*paragraph-tag
+.  na
 ..
 .
 .\" Set an indented paragraph.
@@ -1120,7 +1122,10 @@ contains unsupported escape sequence
 .  \" XXX: There's no fundamental reason for that, just a simple matter
 .  \" of macro programming.
 .  nr an*is-in-link-text-diversion 0
-.  if '\\n(.z'' .nr an*is-in-link-text-diversion 1
+.  if !'\\n[.z]'' \{\
+.    an-warn cannot nest .MT or .UR inside .TP; ending paragraph tag
+.    nr an*is-in-link-text-diversion 1
+.  \}
 .  if (\\n[an*is-in-link-text-diversion] & \\n[an*do-hyperlink]) \{\
 .    \" Start diversion in a new environment.
 .    ev an*link-text-env
