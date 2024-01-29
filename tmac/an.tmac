@@ -1193,8 +1193,12 @@ contains unsupported escape sequence
 .\" a diversion; it becomes the link text for the hyperlinked address.
 .\" .MT nobody@example.com
 .de1 MT
+.  if d an*prefix \{\
+.    an-warn cannot nest .\\$0 inside .MT or .UR
+.    return
+.  \}
 .  if !(\\n[.$] = 1) \
-.    an-style-warn .\\$0 expects 1 argument, got \\n[.$]
+.    an-warn .\\$0 expects 1 argument, got \\n[.$]
 .  ds an*prefix mailto:
 .  an*begin-hyperlink \\$1
 ..
@@ -1203,6 +1207,10 @@ contains unsupported escape sequence
 .\" punctuation (or, rarely, other text) after link text.
 .\" .ME [trailing-text]
 .de1 ME
+.  if !d an*prefix \{\
+.    an-warn .\\$0 requires a preceding .MT
+.    return
+.  \}
 .  an*end-hyperlink \\$1
 .  rm an*prefix
 ..
@@ -1211,8 +1219,12 @@ contains unsupported escape sequence
 .\" a diversion; it becomes the link text for the hyperlinked address.
 .\" .UR nobody@example.com
 .de1 UR
+.  if d an*prefix \{\
+.    an-warn cannot nest .\\$0 inside .MT or .UR
+.    return
+.  \}
 .  if !(\\n[.$] = 1) \
-.    an-style-warn .\\$0 expects 1 argument, got \\n[.$]
+.    an-warn .\\$0 expects 1 argument, got \\n[.$]
 .  ds an*prefix \" empty
 .  an*begin-hyperlink \\$1
 ..
@@ -1221,6 +1233,10 @@ contains unsupported escape sequence
 .\" punctuation (or, rarely, other text) after link text.
 .\" .UE [trailing-text]
 .de1 UE
+.  if !d an*prefix \{\
+.    an-warn .\\$0 requires a preceding .UR
+.    return
+.  \}
 .  an*end-hyperlink \\$1
 .  rm an*prefix
 ..

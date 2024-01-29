@@ -1,5 +1,9 @@
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (MT, ME, UR, UE): Throw warnings on bad nesting.
+
+2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an*begin-hyperlink): Repair damage I introduced
 	in commit 6f12a82806, 27 January.
 
