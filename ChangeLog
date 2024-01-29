@@ -1,3 +1,11 @@
+2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Refactor diversion management.
+
+	* tmac/an.tmac (TH, an-write-paragraph-tag, an-input-trap, TP):
+	Rename `an-is-in-diversion` register to
+	`an*is-in-paragraph-tag-diversion`.
+
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (MT, ME, UR, UE): Throw warnings on bad nesting.

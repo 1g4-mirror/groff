@@ -298,7 +298,7 @@
 .
 .  nr an-need-no-space-mode 0
 .  nr an-need-break 0
-.  nr an-is-in-diversion 0
+.  nr an*is-in-paragraph-tag-diversion 0
 .  nr an*is-in-example 0
 .
 .  ds an*topic "\\$1\"
@@ -638,7 +638,7 @@ contains unsupported escape sequence
 .  br
 .  di
 .  ad \\*[AD]
-.  nr an-is-in-diversion 0
+.  nr an*is-in-paragraph-tag-diversion 0
 .  ll
 .  \" We must emit the diversion in a separate environment to ensure
 .  \" that a possible margin character is printed correctly.
@@ -681,7 +681,7 @@ contains unsupported escape sequence
 .    ns
 .    nr an-need-no-space-mode 0
 .  \}
-.  if \\n[an-is-in-diversion] .an-write-paragraph-tag
+.  if \\n[an*is-in-paragraph-tag-diversion] .an-write-paragraph-tag
 ..
 .
 .\" Break a paragraph.  Restore defaults, except for indentation.
@@ -813,12 +813,12 @@ contains unsupported escape sequence
 .  if \\n[.$] .nr an-prevailing-indent (n;\\$1)
 .  itc 1 an-input-trap
 .  in 0
-.  if !\\n[an-is-in-diversion] \{\
+.  if !\\n[an*is-in-paragraph-tag-diversion] \{\
 .    ll -\\n[an-margin]u
 .    di an-div
 .    na
 .  \}
-.  nr an-is-in-diversion 1
+.  nr an*is-in-paragraph-tag-diversion 1
 ..
 .
 .\" Set an indented paragraph.
