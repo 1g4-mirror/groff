@@ -7,7 +7,7 @@
 
 	* tmac/mdoc/doc-ditroff (doc-Mt-font):
 	* tmac/mdoc/doc-nroff (doc-Mt-font): Define new strings.  Set
-	email addresses in italics by default.
+	email addresses in roman by default.
 
 	* NEWS: Report change in font styling.
 
