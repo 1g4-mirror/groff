@@ -15,6 +15,12 @@
 	(TP): Throw warning if macro is nested with itself or `TQ`.
 	(an*begin-hyperlink): Throw warning if hyperlink already inside
 	diversion.
+	(TH): Initialize `an*is-in-link-text-diversion` register.
+	(an*begin-hyperlink): Set `an*is-in-link-text-diversion`
+	register.  Use the register for its intended purpose.  If a
+	nested diversion is attempted, clear `an*do-hyperlink` register.
+	(an*end-hyperlink): Clear `an*is-in-link-text-diversion`
+	register rather than deleting it.
 
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 

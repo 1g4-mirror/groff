@@ -300,6 +300,7 @@
 .  nr an-need-break 0
 .  nr an*is-in-paragraph-tag-diversion 0
 .  nr an*is-in-example 0
+.  nr an*is-in-link-text-diversion 0
 .
 .  ds an*topic "\\$1\"
 .  if \\n[CT] .stringup an*topic
@@ -1121,13 +1122,14 @@ contains unsupported escape sequence
 .  \" We can only hyperlink if we're not in a diversion.
 .  \" XXX: There's no fundamental reason for that, just a simple matter
 .  \" of macro programming.
-.  nr an*is-in-link-text-diversion 0
 .  if !'\\n[.z]'' \{\
 .    an-warn cannot nest .MT or .UR inside .TP; ending paragraph tag
-.    nr an*is-in-link-text-diversion 1
+.    nr an*do-hyperlink 0
 .  \}
-.  if (\\n[an*is-in-link-text-diversion] & \\n[an*do-hyperlink]) \{\
+.  if \\n[an*do-hyperlink] \{\
+.    nr an*is-in-link-text-diversion 1
 .    \" Start diversion in a new environment.
+.    nr an*is-in-link-text-diversion 1
 .    ev an*link-text-env
 .    if '\*[.T]'pdf' \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
 .    di an*link-text
@@ -1148,7 +1150,7 @@ contains unsupported escape sequence
 .    br
 .    di
 .    ev
-.
+.    nr an*is-in-link-text-diversion 0
 .    \" Was any link text present?
 .    ie \\n[dn] \{\
 .      if '\*[.T]'html' \
@@ -1193,7 +1195,6 @@ contains unsupported escape sequence
 .    hy \\n[an*hyphenation-mode]
 .  \}
 .  rm an*link-text
-.  rr an*is-in-link-text-diversion
 ..
 .
 .\" Begin email hyperlink.  Input until the next `ME` call is stored in
