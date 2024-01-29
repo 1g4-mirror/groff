@@ -3373,7 +3373,10 @@ Deri James
 .ME
 added PDF support.
 .
-Bernd Warken contributed this man page.
+.MT groff\-bernd\:.warken\-72@\:web\:.de
+Bernd Warken
+.ME
+contributed this man page.
 .
 .
 .\" ====================================================================

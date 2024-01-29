@@ -8305,7 +8305,9 @@ to the standard error stream.
 .
 This document was written by
 by Trent A.\& Fisher,
-Werner Lemberg,
+.MT wl@\:gnu\:.org
+Werner Lemberg
+.ME ,
 and
 .MT g.branden\:.robinson@\:gmail\:.com
 G.\& Branden Robinson

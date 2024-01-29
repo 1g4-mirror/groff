@@ -1446,7 +1446,10 @@ which interprets 0 as black and 1 as white.
 .TP
 .I @DOCDIR@/\:pic\:.ps
 \[lq]Making Pictures with GNU pic\[rq],
-by Eric S.\& Raymond.
+by
+.MT esr@\:thyrsus\:.com
+Eric S.\& Raymond
+.ME .
 .
 This file,
 together with its source,
