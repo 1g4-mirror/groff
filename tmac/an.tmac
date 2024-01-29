@@ -654,7 +654,7 @@ contains unsupported escape sequence
      (\\n[dl] + (\\n[TS]*\\n[an*enforce-tag-separation]) \
         <= \\n[an-prevailing-indent])
 .  if \\n[an-tag-fits] .DEVTAG-COL 1
-.  an-div
+.  an*paragraph-tag
 .  if \\n[an-tag-fits] .sp -1v
 .  ev
 .  in (\\n[an-margin]u + \\n[an-prevailing-indent]u)
@@ -815,7 +815,7 @@ contains unsupported escape sequence
 .  in 0
 .  if !\\n[an*is-in-paragraph-tag-diversion] \{\
 .    ll -\\n[an-margin]u
-.    di an-div
+.    di an*paragraph-tag
 .    na
 .  \}
 .  nr an*is-in-paragraph-tag-diversion 1

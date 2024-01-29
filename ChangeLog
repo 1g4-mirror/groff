@@ -5,6 +5,8 @@
 	* tmac/an.tmac (TH, an-write-paragraph-tag, an-input-trap, TP):
 	Rename `an-is-in-diversion` register to
 	`an*is-in-paragraph-tag-diversion`.
+	(an-write-paragraph-tag, TP): Rename `an-div` diversion to
+	`an*paragraph-tag`.
 
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
