@@ -1,3 +1,40 @@
+2024-01-26  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+    Changes to satisfy Savannah #65231.
+
+    Alter build of groff-man-pages.pdf to use the new pdfmom,
+    so that all forward references (i.e. reference to groff_font(5)
+    in addftinfo(1) page) are handled properly. Also pass bookmark
+    names as text strings.
+
+    * doc/doc.am: Use pdfmom.
+    * tmac/an.tmac: Pass parameters to .pdfbookmark as a string.
+
+    New pdfmom, can now be used with all macros.
+
+    Previously only useful for producing documents with
+    mom.
+
+    * src/devices/gropdf/pdfmom.pl: New --roff flag allows
+    other macros (e.g. -ms) to be given on the command line.
+
+    * src/devices/gropdf/pdfmom.1.man: Document the new facility.
+
+    Front Cover for groff-man-pages.pdf
+
+    Feel free to alter "artwork" at will (perhaps add maintainer
+    information.
+
+    * doc/GMPfront.t: Only used during build, not required as part
+    of installation.
+
+    Remove artifacts from using stringhex.
+
+    Introduced in commit #e62b188aacb, betraying its origin
+    from my deri-gropdf-ng branch which uses .stringhex.
+
+    * src/devices/gropdf/gropdf.pl: minor fixes
+
 2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tbl]: Fix Savannah #65225.
