@@ -1,5 +1,22 @@
 2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Fix Savannah #65225.
+
+	* src/preproc/tbl/table.cpp (table::add_entry): Fix regression
+	in repeated glyph tbl(1) feature (`\R`), rendering it
+	inoperative.  Problem introduced by me in commit 4f4b79b8aa, 26
+	April 2022.  Restore logic to handle this table entry type.
+	Also throw new error diagnostic if the repeated glyph token
+	appears with no argument.  Also improve code style by reusing
+	variable with already-computed entry string length instead of
+	calculating it again.
+
+	Fixes <https://savannah.gnu.org/bugs/?65225>.  Thanks to the
+	anonymous submitter for a reproducing case and a correct
+	suggestion of the offending commit.
+
+2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Regression-test Savannah #65225.
 
 	* src/preproc/tbl/tests/repeated-character-entry-works.sh: Do
