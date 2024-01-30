@@ -136,6 +136,12 @@ o The an (man) macro package now supports a `TS` register to configure
   exceeds the paragraph indentation, the line is broken after the tag.)
   This parameter, formerly hard-coded as `1n`, now defaults to `2n`.
 
+o The an (man) macro package's `IP` macro no longer honors the formerly
+  hard-coded 1n tag separation noted in the previous item.  This means
+  that the first argument to the `IP` macro can abut the text of the
+  paragraph with no intervening space.  If you use a word instead of
+  punctuation for `IP`'s first argument, consider migrating to `TP`.
+
 o The an (man) and doc (mdoc) macro packages now use slightly different
   vertical margins when formatting for typesetters, to align more
   closely with the traditional implementations of these packages.  Per
