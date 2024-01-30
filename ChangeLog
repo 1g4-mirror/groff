@@ -37,6 +37,16 @@
 
 2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grog]: Fix Savannah #65227.
+
+	* src/utils/grog/grog.pl (process_arguments): Match a 'C' only
+	in a groff option cluster when deciding to enable compatibility
+	mode, not any 'C' anywhere in any option.
+
+	Fixes <https://savannah.gnu.org/bugs/?65227>.
+
+2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Fix Savannah #65225.
 
 	* src/preproc/tbl/table.cpp (table::add_entry): Fix regression
