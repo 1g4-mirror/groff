@@ -437,7 +437,7 @@
 .  ie \\n[cR] .pl +1v
 .  el         .sp (.5i - .5m)
 .  if !\\n[an*was-TH-bookmark-emitted] \{\
-.    an*bookmark 1 \E*[an*page-ref-string]
+.    an*bookmark 1 "\\*[an*page-ref-string]"
 .    nr an*was-TH-bookmark-emitted 1
 .  \}
 .  tl '\\*[an-pageref]'\\*[an-extra3]'\\*[an-pageref]'
@@ -716,7 +716,7 @@ contains unsupported escape sequence
 .  if \\n[.$] \{\
 .    ds an-section-heading \\$*\"
 .    if \\n[CS] .stringup an-section-heading
-.    an*bookmark 2 \E*[an-section-heading]
+.    an*bookmark 2 "\\*[an-section-heading]"
 .    nop \&\\*[an-section-heading]
 .  \}
 .  if \\n[an-remap-I-style-in-headings] .ftr I I
@@ -742,7 +742,7 @@ contains unsupported escape sequence
 .  if \\n[an-remap-I-style-in-headings] .ftr I \\*[an-heading-family]BI
 .  if \\n[.$] \{\
 .    ds an*subsection-heading \\$*\"
-.    an*bookmark 3 \E*[an*subsection-heading]
+.    an*bookmark 3 "\\*[an*subsection-heading]"
 .    nop \&\\$*
 .  \}
 .  if \\n[an-remap-I-style-in-headings] .ftr I I
