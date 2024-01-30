@@ -1,5 +1,13 @@
 2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Regression-test Savannah #65225.
+
+	* src/preproc/tbl/tests/repeated-character-entry-works.sh: Do
+	it.
+	* src/preproc/tbl/tbl.am (tbl_TESTS): Run test.
+
+2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Refactor diversion management.
 
 	* tmac/an.tmac (TH, an-write-paragraph-tag, an-input-trap, TP):
