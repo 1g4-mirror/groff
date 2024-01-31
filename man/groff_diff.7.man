@@ -1884,7 +1884,7 @@ Defining
 a
 .RI character\~ c
 creates an object in the formatter that is recognized like any other
-ordinary special character on input,
+ordinary or special character on input,
 and produces
 .I contents
 on output.

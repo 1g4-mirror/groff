@@ -11294,17 +11294,17 @@ If @var{contents} is absent, an existing character definition made with
 the same request is deleted.
 
 Defining (or redefining) a character@var{c} creates an object in the
-formatter that is recognized like any other ordinary special character
-on input, and produces @var{contents} on output.  Every time @var{c} is
-to be output, @var{contents} is processed in a temporary environment and
-the result encapsulated in a node.@footnote{@xref{Gtroff Internals}.}
-A leading neutral double quote in the final argument is stripped from
-it, allowing embedded leading spaces in @var{contents}, which is read in
-copy mode and continues to the end of the input line.  Further,
-compatibility mode is disabled and the escape character set to @code{\}
-while @var{contents} is interpreted.  Any emboldening, constant spacing,
-or track kerning is applied to this object rather than to individual
-glyphs in @var{contents}.
+formatter that is recognized like any other ordinary or special
+character on input, and produces @var{contents} on output.  Every time
+@var{c} is to be output, @var{contents} is processed in a temporary
+environment and the result encapsulated in a node.@footnote{@xref{Gtroff
+Internals}.} A leading neutral double quote in the final argument is
+stripped from it, allowing embedded leading spaces in @var{contents},
+which is read in copy mode and continues to the end of the input line.
+Further, compatibility mode is disabled and the escape character set to
+@code{\} while @var{contents} is interpreted.  Any emboldening, constant
+spacing, or track kerning is applied to this object rather than to
+individual glyphs in @var{contents}.
 
 A character defined by these requests can be used just like a glyph
 provided by the output device.  In particular, other characters can be
