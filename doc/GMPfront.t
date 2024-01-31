@@ -77,6 +77,7 @@
 .Hl
 .sp .6i
 .ad r
+.nr GMP*saved-type-size \n[.ps]
 .ps 52
 .gcolor maroon
 groff
@@ -86,6 +87,7 @@ groff
 .ft BMB
 Collected Reference Pages
 .ft
+.ps \n[GMP*saved-type-size]u
 .sp .2i
 .Hl
 .bp 1

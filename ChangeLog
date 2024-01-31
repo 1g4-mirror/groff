@@ -1,5 +1,13 @@
 2024-01-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/GMPfront.t: Save and restore the type size.  The effective
+	base paragraph indentation was too large.  Since it is in ens,
+	it turns out it was being calculated (as of the first man page
+	rendered) based on the type size this cover sheet left it at,
+	which was 16 points--a bit too big.
+
+2024-01-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am ($(DOC_GNU_EPS)): Create "doc" destination
 	directory before trying to create a file in it.  This bug has
 	been latent (for out-of-tree builds) for ages, but has seemingly
