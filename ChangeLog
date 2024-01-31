@@ -180,6 +180,8 @@
 	text color from RGB 0.35/0/0.6 to 0/0.35/0.6 (magenta-ish to
 	cyan-ish).
 
+	Fixes <https://savannah.gnu.org/bugs/?65215>.
+
 2024-01-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor (trap Booleans).
