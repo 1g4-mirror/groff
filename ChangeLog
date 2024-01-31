@@ -112,7 +112,7 @@
 	* tmac/doc.tmac: Slightly refactor.  Make the
 	`an*is-output-html` and `doc-is-output-html` registers the
 	{nearly} sole determinant (within each package) of behavior
-	tailed for HTML output.  Annotate why we use each instead of
+	tailored for HTML output.  Annotate why we use each instead of
 	testing `.T` string.
 
 	* tmac/an.tmac (an*end-hyperlink, MR): Apply exceptions to the
