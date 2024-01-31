@@ -1,5 +1,10 @@
 2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am (doc/groff-man-pages.pdf): Register dependency on
+	"doc/GMPfront.t".
+
+2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (MR): Support hyperlinked man page cross
 	references in PDF.
 

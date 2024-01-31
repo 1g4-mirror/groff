@@ -266,7 +266,9 @@ man-clean:
 # We embed the fonts (-P-e) to (1) honor the current PDF standard, (2)
 # ensure consistent rendering of the document, and (3) exercise this
 # feature of gropdf.
-doc/groff-man-pages.pdf: $(GROFF_MAN_PAGES_ALL) eqn pic tbl \
+doc/groff-man-pages.pdf: $(GROFF_MAN_PAGES_ALL) \
+  $(top_srcdir)/doc/GMPfront.t \
+  eqn pic tbl \
   $(TMAC_PACKAGE_MAN) $(TMAC_PACKAGE_MDOC) font/devps/freeeuro.pfa
 	$(GROFF_V)$(DOC_PDFMOM) -pet -mandoc -dHF=HB -rC1 \
 	  -rCHECKSTYLE=3 -Tpdf -P-e \
