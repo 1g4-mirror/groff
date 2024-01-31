@@ -1122,11 +1122,9 @@ contains unsupported escape sequence
 .  \" We can only hyperlink if we're not in a diversion.
 .  \" XXX: There's no fundamental reason for that, just a simple matter
 .  \" of macro programming.
-.  if !'\\n[.z]'' \{\
+.  ie !'\\n[.z]'' \
 .    an-warn cannot nest .MT or .UR inside .TP; ending paragraph tag
-.    nr an*do-hyperlink 0
-.  \}
-.  if \\n[an*do-hyperlink] \{\
+.  el .if \\n[an*do-hyperlink] \{\
 .    nr an*is-in-link-text-diversion 1
 .    \" Start diversion in a new environment.
 .    nr an*is-in-link-text-diversion 1
