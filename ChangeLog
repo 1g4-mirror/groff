@@ -1,5 +1,12 @@
 2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/GMPfront.t: Bikeshed the collected man pages.  Retitle to
+	"groff Collected Reference Pages".  Spell "groff" in full
+	lowercase.  Favor requests over escape sequences.  Simplify
+	means of setting page number.
+
+2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (doc/groff-man-pages.pdf): Register dependency on
 	"doc/GMPfront.t".
 

@@ -3,7 +3,7 @@
 ..
 .nr PDFOUTLINE.FOLDLEVEL 1
 .defcolor pdf:href.colour rgb 0.00 0.25 0.75
-.pdfinfo /Title "The Groff Manpage Book"
+.pdfinfo /Title "groff Collected Reference Pages"
 .de an*cln
 .  ds \\$1
 .  als an*cln:res \\$1
@@ -59,12 +59,15 @@
 .sp .6i
 .ad r
 .ps 52
-\m[maroon]Groff\m[]
+.gcolor maroon
+groff
+.gcolor
 .sp 18p
 .ps 16
-\f[BMB]THE MAN PAGES BOOK\fP
+.ft BMB
+Collected Reference Pages
+.ft
 .sp .2i
 .Hl
-.pn 1
-.bp
+.bp 1
 .pdfpagenumbering D . 1
