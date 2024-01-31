@@ -1,3 +1,8 @@
+2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::add_entry): Recast recently
+	added diagnostic message.
+
 2024-01-26  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Changes to satisfy Savannah #65231.
