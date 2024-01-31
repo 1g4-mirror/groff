@@ -736,7 +736,8 @@ uninstall-txt:
 # available if xpmtoppm is (see macro "GROFF_PROG_XPMTOPPM").
 EXTRA_DIST += $(DOC_GNU_EPS) doc/gnu.xpm
 $(DOC_GNU_EPS): doc/gnu.xpm
-	$(AM_V_GEN)if test "$(XPMTOPPM)" != found; then \
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& if test "$(XPMTOPPM)" != found; then \
 	  echo "program 'xpmtoppm' is missing; can't generate $@" >&2; \
 	  exit 1; \
 	fi; \

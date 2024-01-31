@@ -1,5 +1,18 @@
 2024-01-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am ($(DOC_GNU_EPS)): Create "doc" destination
+	directory before trying to create a file in it.  This bug has
+	been latent (for out-of-tree builds) for ages, but has seemingly
+	seldom or never arisen.  It seems that even in parallel builds,
+	one of the many other "doc" targets that _did_ use the `MKDIR_P`
+	make(1) macro nearly always won the race.  (In my experience, in
+	builds from Git, the generated forms of our Texinfo manual could
+	be relied upon to do this because they were near the root of the
+	dependency tree; other groff targets tend not to depend on
+	them.)  Anyway, fixed now.
+
+2024-01-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (DOCFILES_INST): Ship "GMPfront.t" in the
 	distribution archive.
 
