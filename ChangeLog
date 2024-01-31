@@ -1,5 +1,17 @@
 2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/GMPfront.t: Support non-internal man page cross
+	references.  Port over contemporary implementation of `MR` from
+	"an.tmac" to its local replacement in this file.  Also remove
+	conditionals on the `.T` string matching "pdf".  Instead test
+	this register once at the beginning of the file and skip it with
+	the `nx` request if it doesn't match.  This lowers the
+	complexity and average indentation level of the file.
+
+	Fixes <https://savannah.gnu.org/bugs/?65231>.
+
+2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/GMPfront.t: Bikeshed the collected man pages.  Retitle to
 	"groff Collected Reference Pages".  Spell "groff" in full
 	lowercase.  Favor requests over escape sequences.  Simplify

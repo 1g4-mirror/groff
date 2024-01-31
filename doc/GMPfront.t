@@ -1,6 +1,9 @@
 .ig
 	front.t
 ..
+.
+.if !'\*[.T]'pdf' .nx
+.
 .nr PDFOUTLINE.FOLDLEVEL 1
 .defcolor pdf:href.colour rgb 0.00 0.25 0.75
 .pdfinfo /Title "groff Collected Reference Pages"
@@ -21,25 +24,41 @@
 .
 .am reload-man END
 .de an*bookmark
-.  if '\\\\*[.T]'pdf' \{\
-.    ie (\\\\$1=1) \{\
-.       an*cln an*page-ref-nm \\\\$2\"
-.       pdfbookmark -T "\\\\*[an*page-ref-nm]" \\\\$1 \\\\$2
-.    \}
-.    el .pdfbookmark \\\\$1 \\\\$2
+.  ie (\\\\$1=1) \{\
+.     an*cln an*page-ref-nm \\\\$2\"
+.     pdfbookmark -T "\\\\*[an*page-ref-nm]" \\\\$1 \\\\$2
 .  \}
+.  el .pdfbookmark \\\\$1 \\\\$2
 ..
 .
 .de1 MR
 .  if ((\\\\n[.$] < 2) : (\\\\n[.$] > 3)) \
 .    an-style-warn .\\\\$0 expects 2 or 3 arguments, got \\\\n[.$]
-.  if '\\\\*[.T]'pdf' \{\
-.    ie \\\\n(.$=1 \
-.      I \\\\$1
+.  ds an*url man:\\\\$1(\\\\$2)\" used everywhere but macOS
+.  if (\\\\n[an*MR-URL-format] = 2) \
+.    ds an*url x-man-page://\\\\$2/\\\\$1\" macOS/Mac OS X since 10.3
+.  if (\\\\n[an*MR-URL-format] = 3) \
+.    ds an*url man:\\\\$1.\\\\$2\" Bwana (Mac OS X)
+.  if (\\\\n[an*MR-URL-format] = 4) \
+.    ds an*url x-man-doc://\\\\$2/\\\\$1\" ManOpen (Mac OS X pre-2005)
+.  nh
+.  ie \\\\n(.$=1 \{\
+.    ft \\\\*[MF]
+.    nop \\\\$1
+.    ft
+.  \}
+.  el \{\
+.    an*cln an*page-ref-nm \\\\$1(\\\\$2)
+.    ie d pdf:look(\\\\*[an*page-ref-nm]) \
+.      pdfhref L -D \\\\*[an*page-ref-nm] -A "\\\\$3" -- \f[\\\\*[MF]]\\\\$1\f[](\\\\$2)
 .    el \{\
-.      an*cln an*page-ref-nm \\\\$1(\\\\$2)
-.      ie d pdf:look(\\\\*[an*page-ref-nm]) .pdfhref L -D \\\\*[an*page-ref-nm] -A "\\\\$3" -- \fI\\\\$1\fP(\\\\$2)
-.      el .IR \\\\$1 (\\\\$2)\\\\$3
+.      ds an*saved-stroke-color \\\\n[.m]\"
+.      nop \&\m[\\\\*[PDFHREF.TEXT.COLOUR]]\c
+.      pdfhref W -D \\\\*[an*url] -- "|"
+.      nop \&\\\\*[an-lic]\f[\\\\*[MF]]\\\\$1\\\\*[an-ic]\f[R](\\\\$2)\c
+.      nop \X'pdf: markend'\m[\\\\*[an*saved-stroke-color]]\c
+.      rm an*saved-stroke-color
+.      nop \&\\\\$3
 .    \}
 .  \}
 .  hy \\\\n[an*hyphenation-mode]
