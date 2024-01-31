@@ -7518,9 +7518,7 @@ the @code{\R} escape sequence.
 @DefescListEndx {\\R, @code{'}, ident value, @code{'}}
 Set register @var{ident} to @var{value}.  If @var{ident} doesn't exist,
 GNU @code{troff} creates it.  In the @code{\R} escape sequence, the
-delimiter need not be a neutral apostrophe; see @ref{Delimiters}.  It
-also does not produce a token in GNU @code{troff}.  @xref{Gtroff
-Internals}.
+delimiter need not be a neutral apostrophe; see @ref{Delimiters}.
 
 @Example
 .nr a (((17 + (3 * 4))) % 4)
@@ -7534,9 +7532,15 @@ Internals}.
 can change a register's value after it is dereferenced but before it is
 interpolated.  @xref{Auto-increment}.)
 
-The complete transparency of @code{\R} can cause surprising effects if
-you use registers like @code{.k}, which get evaluated at the time they
-are accessed.
+@cindex @code{\R} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\R}
+@code{\R} is not tokenized when GNU @code{troff} reads its input; it
+updates only the formatter's internal state and does not contribute
+(directly) to output.  @xref{Gtroff Internals}.
+
+Further surprise can occur if you use registers like
+@code{.k},@footnote{@xref{Page Motions}.}  whose values are not
+determined until they are interpolated.
 
 @Example
 .ll 1.6i
@@ -10504,6 +10508,8 @@ for later use.
 .ft \*[saved-font]
 @endExample
 
+@cindex @code{\f} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\f}
 @code{\f} is not tokenized when GNU @code{troff} reads its input; it
 instead updates the environment.  It thus can be used in requests that
 expect a single-character argument.  We can assign a font to a margin
@@ -10643,6 +10649,8 @@ baked beans,
 and spam.
 @endExample
 
+@cindex @code{\F} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\F}
 @code{\F} is not tokenized when GNU @code{troff} reads its input; it
 instead updates the environment.  It thus can be used in requests that
 expect a single-character argument.  We can thus alter the font family
@@ -11514,6 +11522,8 @@ The read-only register @code{.height} contains the font height as set by
 Currently, only the @option{-T ps} and @option{-T pdf} devices support
 this feature.
 
+@cindex @code{\H} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\H}
 @code{\H} is not tokenized when GNU @code{troff} reads its input; it
 instead updates the environment.  It thus can be used in requests that
 expect a single-character argument.  We can thus alter the font height
@@ -11552,6 +11562,8 @@ The read-only register @code{.slant} contains the font slant as set by
 Currently, only the @option{-T ps} and @option{-T pdf} devices support
 this feature.
 
+@cindex @code{\S} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\S}
 @code{\S} is not tokenized when GNU @code{troff} reads its input; it
 instead updates the environment.  It thus can be used in requests that
 expect a single-character argument.  We can thus alter the font slant
@@ -12067,6 +12079,8 @@ wink, wink, \s+2nudge, nudge,\s+8 say no more!
 @endExample
 @endDefreq
 
+@cindex @code{\s} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\s}
 @code{\s} is not tokenized when GNU @code{troff} reads its input; it
 instead updates the environment.  It thus can be used in requests that
 expect a single-character argument.  We can thus alter the type size
@@ -12390,6 +12404,8 @@ string-valued register @samp{.m}; it is associated with the environment
 (@pxref{Environments}).  The default stroke color is named
 @samp{default}.
 
+@cindex @code{\m} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\m}
 @code{\m} is not tokenized when GNU @code{troff} reads its input; it
 instead updates the environment.  It thus can be used in requests that
 expect a single-character argument.  We can thus alter the stroke color
@@ -12409,6 +12425,8 @@ Set the fill color for objects drawn with @code{\D'@dots{}'} escape
 sequences.  The escape sequence @code{\M[]} restores the previous fill
 color, as does an @code{fcolor} request without an argument.
 
+@cindex @code{\M} escape sequence, untokenized on input
+@cindex untokenized escape sequence, @code{\M}
 @code{\M} is not tokenized when GNU @code{troff} reads its input; it
 instead updates the environment.  It thus can be used in requests that
 expect a single-character argument.  We can thus alter the fill color

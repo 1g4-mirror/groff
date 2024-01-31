@@ -4685,6 +4685,30 @@ are interpreted even in copy mode.
 .
 .
 .P
+The escape sequences
+.esc f ,
+.esc F ,
+.esc H ,
+.esc m ,
+.esc M ,
+.esc R ,
+.esc S ,
+and
+.esc s
+are not tokenized when
+.I groff
+reads its input;
+.esc R
+updates only the formatter's internal state,
+and the rest only the environment.
+.
+They do not contribute (directly) to output;
+see the \[lq]Gtroff Internals\[rq] section of the
+.I groff
+Texinfo manual.
+.
+.
+.P
 .LS
 .
 .\" ========= comments =========
