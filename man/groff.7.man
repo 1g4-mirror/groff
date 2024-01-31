@@ -4693,9 +4693,9 @@ The escape sequences
 .esc m ,
 .esc M ,
 .esc R ,
-.esc S ,
+.esc s ,
 and
-.esc s
+.esc S
 are not tokenized when
 .I groff
 reads its input;
