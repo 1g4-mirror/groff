@@ -1,5 +1,10 @@
 2024-01-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am (DOCFILES_INST): Ship "GMPfront.t" in the
+	distribution archive.
+
+2024-01-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an*begin-hyperlink): Stop shutting off hyperlink
 	support permanently if we hit one unsupported instance of `MT`
 	or `UR` nested inside `TP`.

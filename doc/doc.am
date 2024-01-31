@@ -53,6 +53,7 @@ DOCFILES_INST = \
   doc/ms.ms \
   doc/pic.ms
 DOCFILES_NOINST = \
+  doc/GMPfront.t \
   doc/meintro.me.in \
   doc/meintro_fr.me.in \
   doc/meref.me.in
