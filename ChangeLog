@@ -1,5 +1,12 @@
 2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (MR): Support hyperlinked man page cross
+	references in PDF.
+
+	Fixes <https://savannah.gnu.org/bugs/?62933>.
+
+2024-01-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::add_entry): Recast recently
 	added diagnostic message.
 

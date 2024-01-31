@@ -1270,6 +1270,11 @@ contains unsupported escape sequence
 .  if \\n[an*do-hyperlink] \{\
 .    if '\*[.T]'html' \
 .      nop \X^html:<a href="\\*[an*url]">^\c
+.    if '\*[.T]'pdf' \{\
+.      ds an*saved-stroke-color \\n[.m]\"
+.      nop \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
+.      pdfhref W -D \\*[an*url] -- "|"
+.    \}
 .    if \\n[an*is-output-terminal] \
 .      nop \X^tty: link \\*[an*url]^\c
 .  \}
@@ -1277,6 +1282,10 @@ contains unsupported escape sequence
 .  if \\n[an*do-hyperlink] \{\
 .    if '\*[.T]'html' \
 .      nop \X^html:</a>^\c
+.    if '\*[.T]'pdf' \{\
+.      nop \X'pdf: markend'\m[\\*[an*saved-stroke-color]]\c
+.      rm an*saved-stroke-color
+.    \}
 .    if \\n[an*is-output-terminal] \
 .      nop \X^tty: link^\c
 .  \}
