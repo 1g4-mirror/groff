@@ -2533,7 +2533,7 @@ bool token::is_usable_as_delimiter(bool report_error)
 
 const char *token::description()
 {
-  const size_t bufsz = strlen("character 'x'") + 1;
+  const size_t bufsz = sizeof "character 'x'" + 1;
   static char buf[bufsz];
   (void) memset(buf, 0, bufsz);
   switch (type) {

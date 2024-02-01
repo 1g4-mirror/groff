@@ -1,5 +1,12 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::description): Fix code style
+	nit.  Use `sizeof` operator instead of `strlen()` to compute
+	length of string literal at compile time.  Prompted by warning
+	from Clang 17.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an-end): Call `an-input-trap`.  If a document
 	ends with an input trap pending, this ensures that any text on
 	the applicable input line will be emitted, better accommodating
