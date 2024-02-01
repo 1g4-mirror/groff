@@ -1,5 +1,21 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Refactor to distinguish visible hyperlinks from
+	those that are sent only to device control commands.
+	(an*begin-hyperlink): Rename existing string `an*hyperlink` to
+	`an*visible-hyperlink`, which is the argument passed in via `UR`
+	and `MT` calls.  Redefine `an*hyperlink` as the same argument,
+	but with the `an*prefix` that its caller may specify.  (This
+	feature is used to get the "mailto:" URI scheme into links but
+	not clutter the page text with them.)
+	(an*end-hyperlink): Use `an*hyperlink` in device control
+	commands instead of the catenation of `an*prefix` and
+	`an*hyperlink`.  When there is no link text, use
+	`an*visible-hyperlink` for it.  Remove both of these strings
+	when done with them.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::description): Fix code style
 	nit.  Use `sizeof` operator instead of `strlen()` to compute
 	length of string literal at compile time.  Prompted by warning

@@ -1113,7 +1113,8 @@ contains unsupported escape sequence
 .
 .\" Store the argument and begin a diversion for link text.
 .de an*begin-hyperlink
-.  ds an*hyperlink \\$1\"
+.  ds an*hyperlink \\*[an*prefix]\\$1\"
+.  ds an*visible-hyperlink \\$1\" in case there is no link text
 .  \" We want the diversion to format as if it has an indentation of
 .  \" zero (that comes for free when we switch environments), and we
 .  \" want the line length reduced by the amount of indentation that
@@ -1156,12 +1157,12 @@ contains unsupported escape sequence
 .    \" Was any link text present?
 .    ie \\n[dn] \{\
 .      if '\*[.T]'html' \
-.        nop \X'html:<a href="\\*[an*prefix]\\*[an*hyperlink]">'\c
+.        nop \X'html:<a href="\\*[an*hyperlink]">'\c
 .      if '\*[.T]'pdf' \{\
-.        pdfhref W -D \\*[an*prefix]\\*[an*hyperlink] -- "|"
+.        pdfhref W -D \\*[an*hyperlink] -- "|"
 .      \}
 .      if \\n[an*is-output-terminal] \
-.        nop \X'tty: link \\*[an*prefix]\\*[an*hyperlink]'\c
+.        nop \X'tty: link \\*[an*hyperlink]'\c
 .      \" Replace the final newline of the diversion.
 .      chop an*link-text
 .      as an*link-text \&\c
@@ -1180,14 +1181,13 @@ contains unsupported escape sequence
 .    \" don't add angle brackets here.
 .    el \{\
 .      if '\*[.T]'html' \
-.        nop \X'html:<a href="\\*[an*prefix]\\*[an*hyperlink]">\
-\\*[an*hyperlink]</a>'\c
+.        nop \X'html:<a href="\\*[an*hyperlink]">\
+\\*[an*visible-hyperlink]</a>'\c
 .      if '\*[.T]'pdf' \
-.        pdfhref W -D \\*[an*prefix]\\*[an*hyperlink] -- \
-\\*[an*hyperlink]\c
+.        pdfhref W -D \\*[an*hyperlink] -- \\*[an*visible-hyperlink]\c
 .      if \\n[an*is-output-terminal] \
-.        nop \X'tty: link \\*[an*prefix]\\*[an*hyperlink]'\
-\\*[an*hyperlink]\X'tty: link'\c
+.        nop \X'tty: link \\*[an*hyperlink]'\
+\\*[an*visible-hyperlink]\X'tty: link'\c
 .    \}
 .    nop \&\\$1\"
 .  \}
@@ -1195,10 +1195,12 @@ contains unsupported escape sequence
 .  \" diversion, so the link text has already been formatted normally.
 .  el \{\
 .    nh
-.    nop \\[la]\\*[an*hyperlink]\\[ra]\\$1
+.    nop \\[la]\\*[an*visible-hyperlink]\\[ra]\\$1
 .    hy \\n[an*hyphenation-mode]
 .  \}
 .  rm an*link-text
+.  rm an*hyperlink
+.  rm an*visible-hyperlink
 ..
 .
 .\" Begin email hyperlink.  Input until the next `ME` call is stored in
