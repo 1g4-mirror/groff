@@ -1,3 +1,29 @@
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor; rename and boolify.
+
+	* src/roff/troff/env.h (class environment): Demote member
+	function `do_input_trap`'s parameter type from `int` to `bool`.
+
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (class environment): Demote member
+	variable `continued_input_trap` from `int` to `bool`.  Update
+
+	* src/roff/troff/env.cpp (class environment): Initialize member
+	variable `continued_input_trap` with Boolean, not integer,
+	literals.
+
+	* src/roff/troff/env.cpp (do_input_trap): Demote argument from
+	`int` to `bool` in definition...
+	* src/roff/troff/env.h (class environment): ...and friend
+	function declaration.
+
+	* src/roff/troff/env.cpp (do_input_trap): ...and rename it from
+	`continued` to `respect_continuation`.  Assign to
+	`continued_input_trap` using Boolean literals.
+	(input_trap, input_trap_continued): Call `do_input_trap` with
+	Boolean literals.
+
 2024-01-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/GMPfront.t: Save and restore the type size.  The effective

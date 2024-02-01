@@ -692,7 +692,7 @@ environment::environment(symbol nm)
   underline_lines(0),
   underline_spaces(0),
   input_trap_count(0),
-  continued_input_trap(0),
+  continued_input_trap(false),
   line(0),
   prev_text_length(0),
   width_total(0),
@@ -785,7 +785,7 @@ environment::environment(const environment *e)
   underline_lines(0),
   underline_spaces(0),
   input_trap_count(0),
-  continued_input_trap(0),
+  continued_input_trap(false),
   line(0),
   prev_text_length(e->prev_text_length),
   width_total(0),
@@ -866,7 +866,7 @@ void environment::copy(const environment *e)
   underline_lines = 0;
   underline_spaces = 0;
   input_trap_count = 0;
-  continued_input_trap = 0;
+  continued_input_trap = false;
   prev_text_length = e->prev_text_length;
   width_total = 0;
   space_total = 0;
@@ -2587,13 +2587,13 @@ void no_adjust()
   skip_line();
 }
 
-void do_input_trap(int continued)
+void do_input_trap(bool respect_continuation)
 {
   curenv->input_trap_count = 0;
-  if (continued)
-    curenv->continued_input_trap = 1;
+  if (respect_continuation)
+    curenv->continued_input_trap = true;
   else
-    curenv->continued_input_trap = 0;
+    curenv->continued_input_trap = false;
   int n;
   if (has_arg() && get_integer(&n)) {
     if (n <= 0)
@@ -2612,12 +2612,12 @@ void do_input_trap(int continued)
 
 void input_trap()
 {
-  do_input_trap(0);
+  do_input_trap(false);
 }
 
 void input_trap_continued()
 {
-  do_input_trap(1);
+  do_input_trap(true);
 }
 
 /* tabs */
