@@ -1,5 +1,10 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an_TP-works.sh: Add unit test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grotty/tty.cpp (tty_printer::special): Improve
 	diagnostic message when handling unsupported device control
 	command: report name of unrecognized tag.
