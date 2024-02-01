@@ -53,7 +53,8 @@ echo "$output" \
     || wail # 12 spaces
 
 output=$(printf "%s" "$input" \
-    | "$groff" -bww -Tascii -P-cbou -rU0 -rLL=130n -man)
+    | "$groff" -bww -Tascii -P-cbou $uflag -rLL=130n -man)
+echo "$output"
 
 # Sloppy handling of UE, ME macro arguments can cause unwanted space.
 echo "checking for normative (no extra) spacing after URI ($uflag)" >&2
@@ -64,6 +65,7 @@ uflag=-rU1
 
 output=$(printf "%s" "$input" \
     | "$groff" -bww -Tutf8 -P-cbou $uflag -man)
+echo "$output"
 
 echo "checking for paragraph tag on line by itself ($uflag)" >&2
 echo "$output" | grep -qx '     Roff\.js' || wail # 5 spaces
@@ -75,6 +77,7 @@ echo "$output" | grep -qx '     Roff\.js' || wail # 5 spaces
 
 output=$(printf "%s" "$input" \
     | "$groff" -bww -Tascii -P-cbou $uflag -rLL=130n -man)
+echo "$output"
 
 echo "checking for normative (no extra) spacing after URI ($uflag)" >&2
 # This is what we expect when linking the tag works.
