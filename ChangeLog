@@ -1,5 +1,14 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an_MT-works.sh:
+	* tmac/tests/an_adjust-link-text-correctly.sh: Add more checks
+	to test cases.
+
+	* tmac/tests/an_MT-works.sh: Also stop worrying about the exact
+	placement of adjustment spaces in this test.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Refactor.
 	(an*begin-hyperlink): Before changing the stroke color to
 	typeset the link text, save it in new string
