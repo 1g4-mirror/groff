@@ -1,5 +1,12 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an-end): Call `an-input-trap`.  If a document
+	ends with an input trap pending, this ensures that any text on
+	the applicable input line will be emitted, better accommodating
+	ill-formed documents.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an_TP-works.sh: Add unit test.
 	* tmac/tmac.am (tmac_TESTS): Run test.
 

@@ -110,6 +110,7 @@
 .\" continuous rendering mode.
 .de1 an-end
 .  if !r an-TH-was-called .return
+.  an-input-trap
 .  if \\n[cR] \{\
 .    \" We might have a pending output line that is not yet broken, and
 .    \" also be 1v from the bottom of the page.  If we break (or flush)
