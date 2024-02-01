@@ -643,7 +643,7 @@ contains unsupported escape sequence
 .  ll
 .  \" We must emit the diversion in a separate environment to ensure
 .  \" that a possible margin character is printed correctly.
-.  ev an-env-paragraph-tag
+.  ev an*temporary-env
 .  evc 0
 .  mc
 .  nf
@@ -1152,21 +1152,21 @@ contains unsupported escape sequence
 .    \" Was any link text present?
 .    ie \\n[dn] \{\
 .      if '\*[.T]'html' \
-.        nop \X^html:<a href="\\*[an*prefix]\\*[an*hyperlink]">^\c
+.        nop \X'html:<a href="\\*[an*prefix]\\*[an*hyperlink]">'\c
 .      if '\*[.T]'pdf' \{\
 .        pdfhref W -D \\*[an*prefix]\\*[an*hyperlink] -- "|"
 .      \}
 .      if \\n[an*is-output-terminal] \
-.        nop \X^tty: link \\*[an*prefix]\\*[an*hyperlink]^\c
+.        nop \X'tty: link \\*[an*prefix]\\*[an*hyperlink]'\c
 .      \" Replace the final newline of the diversion.
 .      chop an*link-text
 .      as an*link-text \&\c
 .      an*link-text
 .      nop \"
 .      if '\*[.T]'html' \
-.        nop \X^html:</a>^\c
+.        nop \X'html:</a>'\c
 .      if \\n[an*is-output-terminal] \
-.        nop \X^tty: link^\c
+.        nop \X'tty: link'\c
 .      if '\*[.T]'pdf' \
 .        nop \X'pdf: markend'\m[\\*[pdf:curcol]]\c
 .    \}
@@ -1174,14 +1174,14 @@ contains unsupported escape sequence
 .    \" don't add angle brackets here.
 .    el \{\
 .      if '\*[.T]'html' \
-.        nop \X^html:<a href="\\*[an*prefix]\\*[an*hyperlink]">\
-\\*[an*hyperlink]</a>^\c
+.        nop \X'html:<a href="\\*[an*prefix]\\*[an*hyperlink]">\
+\\*[an*hyperlink]</a>'\c
 .      if '\*[.T]'pdf' \
 .        pdfhref W -D \\*[an*prefix]\\*[an*hyperlink] -- \
 \\*[an*hyperlink]\c
 .      if \\n[an*is-output-terminal] \
-.        nop \X^tty: link \\*[an*prefix]\\*[an*hyperlink]^\
-\\*[an*hyperlink]\X^tty: link^\c
+.        nop \X'tty: link \\*[an*prefix]\\*[an*hyperlink]'\
+\\*[an*hyperlink]\X'tty: link'\c
 .    \}
 .    nop \&\\$1\"
 .  \}
@@ -1267,25 +1267,25 @@ contains unsupported escape sequence
 .  nh
 .  if \\n[an*do-hyperlink] \{\
 .    if '\*[.T]'html' \
-.      nop \X^html:<a href="\\*[an*url]">^\c
+.      nop \X'html:<a href="\\*[an*url]">'\c
 .    if '\*[.T]'pdf' \{\
 .      ds an*saved-stroke-color \\n[.m]\"
 .      nop \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
 .      pdfhref W -D \\*[an*url] -- "|"
 .    \}
 .    if \\n[an*is-output-terminal] \
-.      nop \X^tty: link \\*[an*url]^\c
+.      nop \X'tty: link \\*[an*url]'\c
 .  \}
 .  nop \&\\*[an-lic]\f[\\*[MF]]\\$1\\*[an-ic]\f[R](\\$2)\c
 .  if \\n[an*do-hyperlink] \{\
 .    if '\*[.T]'html' \
-.      nop \X^html:</a>^\c
+.      nop \X'html:</a>'\c
 .    if '\*[.T]'pdf' \{\
 .      nop \X'pdf: markend'\m[\\*[an*saved-stroke-color]]\c
 .      rm an*saved-stroke-color
 .    \}
 .    if \\n[an*is-output-terminal] \
-.      nop \X^tty: link^\c
+.      nop \X'tty: link'\c
 .  \}
 .  nop \&\\$3
 .  hy \\n[an*hyphenation-mode]

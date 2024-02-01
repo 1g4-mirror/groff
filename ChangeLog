@@ -1,5 +1,12 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Trivially refactor (an-write-paragraph-tag):
+	Rename `an-env-paragraph-tag` to `an*temporary-env`.
+	(an*end-hyperlink, MR): Use idiomatic delimiter in device
+	control escape sequences.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor; rename and boolify.
 
 	* src/roff/troff/env.h (class environment): Demote member
