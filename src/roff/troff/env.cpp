@@ -3710,6 +3710,7 @@ static void print_hyphenation_exceptions()
       errprint("\t*");
     errprint("\n");
   }
+  fflush(stderr);
   skip_line();
 }
 

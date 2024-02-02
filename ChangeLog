@@ -1,5 +1,10 @@
 2024-02-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (print_hyphenation_exceptions): Flush
+	the standard error stream once the list is written.
+
+2024-02-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Back away from color management concerns.
 
 	Hyperlink colors in PDF were showing a tendency to get "stuck
