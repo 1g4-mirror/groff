@@ -6,7 +6,7 @@
 	on" when they shouldn't, and the extra difficulty of managing
 	nested traps (`TP` followed by `UR`, for example) is proving
 	tricky to sort out.  On top of that, the man(7) package
-	historically has no cognizance of color issues and it's doesn't
+	historically has no cognizance of color issues and it doesn't
 	seem like a good time to start, particularly if we only do it
 	for the 'pdf' output device.  Unfortunately, "pdf.tmac" doesn't
 	expose a clean abstraction for "link starts here" and "link
