@@ -1,5 +1,34 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Fix Savannah #61434.
+
+	* tmac/an.tmac: Support `UR`/`UE` and `MT`/`ME` hyperlinks as
+	paragraph tags.
+	(an*begin-hyperlink): Kick away the guard that prevented
+	attempts to do so, now that support has been refactored in
+	underneath it.
+
+	* tmac/groff_man.7.man.in (Hyperlink macros): De-document lack
+	of support for this.  Retain caveat that if the output device
+	lacks hyperlink support, the hyperlink is typeset as part of the
+	paragraph body rather than the tag.  I could not see any way to
+	achieve the alternative given the way this package uses traps
+	and diversions.  We might make a virtue of necessity by noting
+	that paragraph tags could be lengthy, and URLs often will be,
+	and it will be hella ugly to have the tag break.  Furthermore,
+	if we implement automated generation of link anchors based on
+	`TP` paragraph tags, not having their destination URLs in the
+	tag text means we don't have to scrape them out later.
+
+	* tmac/tests/an_link-macros-work-in-paragraph-tags.sh: Update
+	test expectations.
+
+	* NEWS: Add item.
+
+	Fixes <https://savannah.gnu.org/bugs/?61434>.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Refactor.  Give `TP` its own trap.
 	(an*TP-trap): New macro takes over some of the former functions
 	of `an-input-trap` and `an-write-paragraph-tag`, ending the

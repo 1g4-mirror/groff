@@ -1,6 +1,6 @@
 .\" groff implementation of man(7) package
 .\"
-.\" Copyright (C) 1989-2023 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
 .\"      Written by James Clark (jjc@jclark.com)
 .\" Enhanced by: Werner Lemberg <wl@gnu.org>
 .\"              Larry Kollar <kollar@alltel.net>
@@ -1131,13 +1131,7 @@ contains unsupported escape sequence
 .  \" obtains when we output it.
 .  nr an*saved-line-length \\n[.l]
 .  nr an*saved-indentation \\n[.i]
-.  \" We can only hyperlink if we're not in a diversion.
-.  \" XXX: There's no fundamental reason for that, just a simple matter
-.  \" of macro programming.
-.  ie !'\\n[.z]'' \
-.    an-warn cannot nest .MT or .UR inside .TP; ending paragraph tag
-.  el .if \\n[an*do-hyperlink] \{\
-.    nr an*is-in-link-text-diversion 1
+.  if \\n[an*do-hyperlink] \{\
 .    \" Start diversion in a new environment.
 .    nr an*is-in-link-text-diversion 1
 .    ev an*link-text-env
