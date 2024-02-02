@@ -1129,7 +1129,10 @@ contains unsupported escape sequence
 .    \" Start diversion in a new environment.
 .    nr an*is-in-link-text-diversion 1
 .    ev an*link-text-env
-.    if '\*[.T]'pdf' \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
+.    if '\*[.T]'pdf' \{\
+.      ds an*saved-stroke-color \\n[.m]\"
+.      nop \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
+.    \}
 .    di an*link-text
 .    ll (\\n[an*saved-line-length]u - \\n[an*saved-indentation]u)
 .  \}
@@ -1167,8 +1170,10 @@ contains unsupported escape sequence
 .        nop \X'html:</a>'\c
 .      if \\n[an*is-output-terminal] \
 .        nop \X'tty: link'\c
-.      if '\*[.T]'pdf' \
-.        nop \X'pdf: markend'\m[\\*[pdf:curcol]]\c
+.      if '\*[.T]'pdf' \{\
+.        nop \X'pdf: markend'\m[\\*[an*saved-stroke-color]]\c
+.        rm an*saved-stroke-color
+.      \}
 .    \}
 .    \" If there was no link text, format URI as its own link text.  We
 .    \" don't add angle brackets here.

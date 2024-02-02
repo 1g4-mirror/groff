@@ -1,5 +1,16 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Refactor.
+	(an*begin-hyperlink): Before changing the stroke color to
+	typeset the link text, save it in new string
+	`an*saved-stroke-color` (as `MR` already does).
+	(an*end-hyperlink): After setting hyperlinked text, restore the
+	stroke color using the string we created for the purpose, not
+	the mysterious internal "pdf.tmac" string `pdf:curcol`.  Delete
+	string afterward.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Trivially refactor (an-write-paragraph-tag):
 	Rename `an-env-paragraph-tag` to `an*temporary-env`.
 	(an*end-hyperlink, MR): Use idiomatic delimiter in device
