@@ -1,5 +1,14 @@
 2024-02-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (TH): Set up end macro unconditionally here...
+	(an-set-up-continuous-rendering): ...instead of here.
+
+	* tmac/tests/an_TP-works.sh: Add test case for the specimen of
+	ill-formed input that the foregoing remedies (ending input with
+	a pending input line trap and continuous rendering disabled).
+
+2024-02-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (print_hyphenation_exceptions): Flush
 	the standard error stream once the list is written.
 

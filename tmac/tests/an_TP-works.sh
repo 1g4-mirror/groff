@@ -51,7 +51,14 @@ echo "$output" | grep -Eq 'tag +ordinary tagged paragraph' || wail
 echo "checking ill-formed tagged paragraph" >&2
 echo "$output" | grep -q 'ill-formed but still renderable' || wail
 
-echo "checking paragraph tag dangling at end of document" >&2
+echo "checking paragraph tag dangling at end of document (-rcR=1)" >&2
+echo "$output" | grep -q 'foobar' || wail
+
+output=$(printf "%s" "$input" \
+    | "$groff" -ww -Tascii -P-cbou -rcR=0 -man)
+echo "$output"
+
+echo "checking paragraph tag dangling at end of document (-rcR=0)" >&2
 echo "$output" | grep -q 'foobar' || wail
 
 test -z "$fail"
