@@ -111,6 +111,7 @@
 .de1 an-end
 .  if !r an-TH-was-called .return
 .  an-input-trap
+.  if '\\n[.z]'an*paragraph-tag' .an*TP-trap
 .  if \\n[cR] \{\
 .    \" We might have a pending output line that is not yet broken, and
 .    \" also be 1v from the bottom of the page.  If we break (or flush)
@@ -637,10 +638,6 @@ contains unsupported escape sequence
 .\" Output the tag of a tagged paragraph, or of an indented paragraph
 .\" (IP) that has a tag.  Whether we break depends on the tag width.
 .de an-write-paragraph-tag
-.  br
-.  di
-.  ad \\*[AD]
-.  ll
 .  \" We must emit the diversion in a separate environment to ensure
 .  \" that a possible margin character is printed correctly.
 .  ev an*temporary-env
@@ -666,8 +663,8 @@ contains unsupported escape sequence
 ..
 .
 .\" Handle macros that may take an "argument" on the next input line
-.\" producing written or drawn output: .SH, .SS, .B, .I, .SM, .SB--and
-.\" .TP, which does so mandatorily.
+.\" producing written or drawn output: .SH, .SS, .B, .I, .SM, .SB.
+.\" For .TP, see below.
 .de1 an-input-trap
 .  if \\n[an-devtag-needs-end-of-heading] .DEVTAG-EO-H
 .  nr an-devtag-needs-end-of-heading 0
@@ -684,6 +681,19 @@ contains unsupported escape sequence
 .    ns
 .    nr an-need-no-space-mode 0
 .  \}
+.  \" Handle nested traps, as with
+.  \"   .TP
+.  \"   .B foo
+.  \" for instance.
+.  if '\\n[.z]'an*paragraph-tag' .an*TP-trap
+..
+.
+.\" The TP macro _requires_ a one-line input trap.
+.de1 an*TP-trap
+.  br
+.  di
+.  ad \\*[AD]
+.  ll
 .  if \\n[an*have-paragraph-tag] .an-write-paragraph-tag
 ..
 .

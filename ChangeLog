@@ -1,5 +1,19 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Refactor.  Give `TP` its own trap.
+	(an*TP-trap): New macro takes over some of the former functions
+	of `an-input-trap` and `an-write-paragraph-tag`, ending the
+	paragraph tag diversion, restoring the adjustment mode and line
+	length, and calling `an-write-paragraph-tag`...
+	(an-write-paragraph-tag): ...which now deals only with
+	formatting the tag.
+	(an-input-trap): Ensure that `an*TP-trap` is sprung when input
+	line traps overlap...
+	(an-end): ...and when an ill-formed document ends with an input
+	trap pending.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Refactor.
 	(TH, an-write-paragraph-tag, an-input-trap, TP): Replace
 	register `an*is-in-paragraph-tag-diversion` with
