@@ -1,5 +1,10 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (TP): Don't set up an input trap if we're bailing
+	out of the macro due to invalid nesting.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Refactor to distinguish visible hyperlinks from
 	those that are sent only to device control commands.
 	(an*begin-hyperlink): Rename existing string `an*hyperlink` to

@@ -814,11 +814,11 @@ contains unsupported escape sequence
 .de1 TP
 .  an-break-paragraph
 .  if \\n[.$] .nr an-prevailing-indent (n;\\$1)
-.  itc 1 an-input-trap
 .  if \\n[an*is-in-paragraph-tag-diversion] \{\
 .    an-warn cannot nest .\\$0 or .TQ inside .\\$0; supply a tag
 .    return
 .  \}
+.  itc 1 an-input-trap
 .  in 0
 .  ll -\\n[an-margin]u
 .  nr an*is-in-paragraph-tag-diversion 1
