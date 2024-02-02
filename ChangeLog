@@ -1,5 +1,17 @@
 2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Refactor.
+	(TH, an-write-paragraph-tag, an-input-trap, TP): Replace
+	register `an*is-in-paragraph-tag-diversion` with
+	`an*have-paragraph-tag` changing its meaning to indicate whether
+	we have collected a paragraph tag in a diversion that we need to
+	output.
+	(TP): Detect nesting of `TP` or `TQ` by testing name of current
+	diversion instead of `an*is-in-paragraph-tag-diversion`
+	register.
+
+2024-02-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (TP): Don't set up an input trap if we're bailing
 	out of the macro due to invalid nesting.
 
