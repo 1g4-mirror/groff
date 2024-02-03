@@ -16240,9 +16240,8 @@ from becoming part of the diversion (@pxref{Diversions}).
 @cindex read next file (@code{nx})
 @cindex file, next, read (@code{nx})
 @cindex next file, read (@code{nx})
-Force @command{gtroff} to continue processing of the file specified as
-an argument.  If no argument is given, immediately jump to the end of
-file.
+Stop processing the input file.  If @var{file} is specified, read it;
+otherwise, read the next pending input file, if any.
 @endDefreq
 
 @Defreq {rd, [@Var{prompt} [@Var{arg1} @Var{arg2} @dots{}]]}

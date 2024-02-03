@@ -3827,12 +3827,13 @@ See
 .
 .TPx
 .REQ .nx
-Immediately jump to end of current file.
+Stop processing the input file and read the next,
+if any.
 .
 .TPx
 .REQ .nx file
-Stop formatting current file and begin reading
-.I file.
+Stop processing the input file and read
+.IR file .
 .
 .TPx
 .REQ .open "ident file"
