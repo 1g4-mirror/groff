@@ -15357,9 +15357,10 @@ from occurring at an inconvenient place by forcing a set of output lines
 to be set as a group), footnotes, tables of contents, and indices.
 @cindex top-level diversion
 @cindex diversion, top-level
-For orthogonality it is said that GNU @code{troff} is in the
+For orthogonality it is said that GNU @command{troff} is in the
 @dfn{top-level diversion} if no diversion is active (that is, formatted
-output is being ``diverted'' immediately to the output device).
+output is being ``diverted'' immediately to the output device).  The
+top-level diversion has no name.
 
 Dereferencing an undefined diversion will create an empty one of that
 name and cause a warning in category @samp{mac} to be emitted.
@@ -15368,7 +15369,6 @@ A diversion does not exist for the purpose of testing with the @code{d}
 conditional operator until its initial definition ends (@pxref{Operators
 in Conditionals}).  The following requests are used to create and alter
 diversions.
-@c END Keep (roughly) parallel with subsection "Diversions" of groff(7).
 
 @DefreqList {di, [@Var{name}]}
 @DefreqListEndx {da, [@Var{name}]}
@@ -15394,21 +15394,25 @@ current diversion, a warning in category @samp{di} is produced.
 @xref{Warnings}, regarding the enablement and suppression of warnings.
 
 @Example
-Before the diversion.
-.di yyy
-In the diversion.
+.ll 56n
+Ahoy, me hearties,
+I traveled unto a distant isle,
+.br
+.di HT
+and thereupon I lay a vast treasure,
 .br
 .di
-After the diversion.
+.HT
 .br
-    @result{} After the diversion.
-.yyy
-    @result{} Before the diversion.  In the diversion.
+which none o' ye shall ever see.
+    @result{} Ahoy, mateys, I traveled unto a distant isle,
+    @result{} and thereupon I lay a vast treasure,
+    @result{} which none o@quoteright{} ye shall ever see.
 @endExample
 @endDefreq
 
 @cindex box (diversion operation)
-GNU @code{troff} supports @dfn{box} requests to exclude a partially
+GNU @command{troff} supports @dfn{box} requests to exclude a partially
 collected line from a diversion, as this is often desirable.
 
 @DefreqList {box, [@Var{name}]}
@@ -15419,17 +15423,21 @@ included in the diversion.  Without an argument, stop diverting output;
 any pending output line inside the diversion is discarded.
 
 @Example
-Before the box.
-.box xxx
-In the box.
+.ll 56n
+Ahoy, mateys,
+I traveled unto a distant isle,
 .br
-Hidden treasure.
+.box SECRET
+and thereupon I lay a vast treasure,
+.br
+accurst wi' neutron activation,
 .box
-After the box.
+.SECRET
 .br
-    @result{} Before the box.  After the box.
-.xxx
-    @result{} In the box.
+which none o' ye shall ever see.
+    @result{} Ahoy, mateys, I traveled unto a distant isle,
+    @result{} and thereupon I lay a vast treasure,
+    @result{} which none o@quoteright{} ye shall ever see.
 @endExample
 @endDefreq
 
@@ -15447,11 +15455,33 @@ interchangeably.
 @cindex vertical position in diversion register (@code{.d})
 @cindex position, vertical, in diversion, register (@code{.d})
 @cindex diversion, vertical position in, register (@code{.d})
-Diversions may be nested.  The read-only string-valued register
+Diversion requests may be nested.  The read-only string-valued register
 @code{.z} contains the name of the current diversion.  The read-only
-register @code{.d} contains the current vertical place in the diversion.
-If the input text is not being diverted, @code{.d} reports the same
-location as the register @code{nl}.
+register @code{.d} contains the vertical drawing position in the
+diversion.  If the input text is not being diverted, @code{.d} reports
+the same location as the register @code{nl}.
+
+@Example
+.nf
+.di A
+alpha
+.di B
+beta
+.di
+gamma
+\*B
+.di
+delta
+\*A
+epsilon
+    @result{} delta
+    @result{} alpha
+    @result{} gamma
+    @result{} beta
+    @result{}
+    @result{}
+    @result{} epsilon
+@endExample
 @endDefreg
 
 @Defreg {.h}
@@ -15489,11 +15519,20 @@ baselines and thus does not increase the value interpolated by
 @cindex @code{da} request, and @code{dn} (@code{dl})
 @cindex @code{boxa} request, and @code{dn} (@code{dl})
 After completing a diversion, the writable registers @code{dn} and
-@code{dl} contain its vertical and horizontal sizes.  Only the lines
-just processed are counted: for the computation of @code{dn} and
-@code{dl}, the requests @code{da} and @code{boxa} are handled as if
-@code{di} and @code{box} had been used, respectively---lines that have
-been already stored in the diversion (box) are not taken into account.
+@code{dl} contain its vertical and horizontal sizes, respectively.
+@c XXX Do these measure:
+@c  net motion of the drawing position,
+@c  maximal motion of the drawing position relative to that where the
+@c  diversion started,
+@c or
+@c  the maximal bounds of spilled ink relative to the drawing position
+@c  where the diversion started?
+@c Savannah #64728.
+Only the lines just processed are counted: for the computation of
+@code{dn} and @code{dl}, the requests @code{da} and @code{boxa} are
+handled as if @code{di} and @code{box} had been used,
+respectively---lines that have been already stored in the diversion
+(box) are not taken into account.
 
 @Example
 .\" Center text both horizontally and vertically.
@@ -15541,11 +15580,8 @@ interpreted when read into a diversion.  This is useful for preventing
 them from taking effect until the diverted text is actually output.  The
 @code{\!} escape sequence transparently embeds input up to and including
 the end of the line.  The @code{\?} escape sequence transparently embeds
-input until its own next occurrence.
-@cindex @code{\?}, interpretation in copy mode
-Unlike @code{\!}, @code{\?} is interpreted even in copy mode
-(@pxref{Copy Mode}).
-
+input, read in copy mode, until its own next occurrence on the input
+line.
 @cindex @code{\?}, and copy mode
 @cindex copy mode, and @code{\?}
 @cindex mode, copy, and @code{\?}
@@ -15553,11 +15589,10 @@ Unlike @code{\!}, @code{\?} is interpreted even in copy mode
 @cindex copy mode, and @code{\!}
 @cindex mode, copy, and @code{\!}
 @noindent
-@var{anything} may not contain newlines; use @code{\!} by itself to
-embed newlines in a diversion.  The escape sequence @code{\?} is also
-recognized in copy mode and turned into a single internal code; it is
-this code that terminates @var{anything}.  Thus the following example
-prints@tie{}4.
+Use @code{\!} by itself to embed newlines in a diversion.
+@cindex @code{\?}, interpretation in copy mode
+Unlike @code{\!}, @code{\?} is interpreted even in copy mode
+(@pxref{Copy Mode}).
 
 @Example
 .nr x 1
@@ -15575,6 +15610,7 @@ prints@tie{}4.
 .di
 .nr x 4
 .f
+    @result{} 4
 @endExample
 
 Both escape sequences read the data in copy mode.
@@ -15583,15 +15619,15 @@ Both escape sequences read the data in copy mode.
 @cindex top-level diversion, and @code{\!}
 @cindex diversion, top-level, and @code{\!}
 If @code{\!} is used in the top-level diversion, its argument is
-embedded into GNU @code{troff}'s device-independent output.  This can be
-used, for example, to control a postprocessor that transforms the data
+embedded into GNU @command{troff}'s device-independent output.  One of
+its applications is control of a postprocessor that transforms the data
 that are subsequently read by an output driver.
 
 @cindex @code{\?}, in top-level diversion
 @cindex top-level diversion, and @code{\?}
 @cindex diversion, top-level, and @code{\?}
-The @code{\?} escape used in the top-level diversion produces no output
-at all; its argument is simply ignored.
+Using the @code{\?} escape sequence in the top-level diversion produces
+no output at all; its argument is simply ignored.
 @endDefesc
 
 @cindex @code{\!}, and @code{output} request
@@ -15600,8 +15636,8 @@ at all; its argument is simply ignored.
 @cindex copy mode, and @code{output} request
 @cindex mode, copy, and @code{output} request
 @Defreq {output, [@code{"}]@Var{contents}}
-Emit @var{contents} directly to GNU @code{troff}'s output; this usage is
-similar to that of @code{\!} in the top-level diversion.  An initial
+Emit @var{contents} directly to GNU @command{troff}'s output; this usage
+is similar to that of @code{\!} in the top-level diversion.  An initial
 neutral double quote in the argument is stripped, allowing embedded
 leading spaces in @var{contents}, which is read in copy mode and
 continues to the end of the input line.  This request can't be used
@@ -15653,6 +15689,7 @@ as tokens, and spaces become adjustable again.  The vertical sizes of
 lines are not preserved, but glyph information (font, type size, space
 width, and so on) is retained.
 @endDefreq
+@c END Keep (roughly) parallel with subsection "Diversions" of groff(7).
 
 
 @c =====================================================================

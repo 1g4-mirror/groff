@@ -1316,27 +1316,18 @@ so the remainder of the word is subject to hyphenation as normal.
 .TP
 .BI \[rs]? anything \[rs]?
 When used in a diversion,
-transparently embed
-.I anything
-in it.
+this escape sequence transparently embeds input,
+read in copy mode,
+until its own next occurrence on the input line.
 .
-.I anything
-is read in copy mode.
-.
-When the diversion is interpolated,
-.I anything
-is interpreted.
-.I anything
-may not contain newlines;
-use
+Use
 .B \[rs]!\&
 if you want to embed newlines in a diversion.
 .
-The escape sequence
+Unlike
+.BR \[rs]! ,
 .B \[rs]?\&
-is also recognized in copy mode and becomes an internal code;
-it is this code that terminates
-.IR anything .
+is interpreted even in copy mode.
 .
 .
 .TP
