@@ -17129,6 +17129,19 @@ Break the line and flush any pending output line immediately.  The
 effect is the same as the @code{br} request unless the no-break control
 character is used; @samp{'br} does nothing, whereas @samp{'fl} writes
 the pending output line without further updating the drawing position.
+However, the @emph{reported} horizontal drawing position is still
+reckoned from the start of the input line.
+
+@Example
+foo bar \n(hp
+foo bar \c
+'fl
+\n(hp
+    @result{} foo bar 192 foo bar 0
+@endExample
+
+The timing of a flush is most easily perceived in GNU @command{troff}'s
+device-independent output.
 
 Historically, @code{fl} was used with @code{rd} to produce interactive
 @command{nroff} documents.  GNU @command{troff} does not easily support
