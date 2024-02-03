@@ -5323,6 +5323,22 @@ are supported by other implementations.
 .
 .
 .P
+AT&T
+.I troff \" AT&T
+discards trailing spaces from input lines,
+like GNU
+.IR troff , \" GNU
+but if it does so,
+AT&T
+.I troff \" AT&T
+also cancels end-of-sentence detection.
+.
+Use of the dummy character escape sequence
+.B \[rs]&
+is more portable.
+.
+.
+.P
 When adjusting to both margins,
 AT&T
 .I troff \" AT&T

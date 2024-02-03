@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle Edition 1.23.0+Git
-@subtitle January 2024
+@subtitle February 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -17606,6 +17606,15 @@ GNU @code{troff} does not allow the use of the escape sequences
 @code{\%}, and @code{\c} in identifiers; @acronym{AT&T} @code{troff}
 does.  The @code{\A} escape sequence (@pxref{Identifiers}) may be
 helpful in avoiding use of these escape sequences in names.
+
+@cindex trailing space, on input lines, difference from @acronym{AT&T} @code{troff}
+@cindex space, trailing, on input lines, difference from @acronym{AT&T} @code{troff}
+@cindex end-of-sentence detection, cancellation, on @acronym{AT&T} @code{troff}
+@cindex sentence, cancelling detection of end of, on @acronym{AT&T} @code{troff}
+@acronym{AT&T} @command{troff} discards trailing spaces from input
+lines, like GNU @command{troff}, but if it does so, @acronym{AT&T}
+@command{troff} also cancels end-of-sentence detection.  Use of the
+dummy character escape sequence @code{\&} is more portable.
 
 @cindex adjustment to both margins, difference from @acronym{AT&T} @code{troff}
 @cindex rivers
