@@ -16566,7 +16566,7 @@ discussed above).  @code{use_charnames_in_special} is currently employed
 only by @code{grohtml}.
 @endDefesc
 
-GNU @command{troff} also permits the interpolatation of macro contents
+GNU @command{troff} also permits the interpolation of macro contents
 as a device control command.
 
 @DefreqList {devicem, name}
@@ -16973,9 +16973,8 @@ or for instrumentation while troubleshooting.  The @code{ex} and
 exit codes respectively, to halt further processing when continuing
 would be fruitless.  Examine the state of the formatter with requests
 that write lists of defined names (macros, strings, and diversions),
-defined colors, composite characters, environments, hyphenation
-exceptions, registers, and page location traps to the standard error
-stream.
+colors, composite characters, environments, hyphenation exceptions,
+registers, and page location traps to the standard error stream.
 @c END Keep parallel with section "Debugging" of groff(7).
 
 @Defreq {lf, line [@Var{file}]}
@@ -17099,8 +17098,8 @@ strings, and diversions with their sizes in bytes.
 @Defreq {pnr, }
 @cindex dumping registers (@code{pnr})
 @cindex registers, dumping (@code{pnr})
-Report the names and contents of all currently defined registers to the
-standard error stream.
+Report the names and contents of all defined registers to the standard
+error stream.
 @endDefreq
 
 @Defreq {ptr, }
@@ -17161,7 +17160,7 @@ Consider the following in a file @file{test}.
 
 The @option{-b} option of GNU @code{troff} causes a backtrace to be
 generated on each error or warning.  Some warnings have to be enabled;
-@xref{Warnings}.
+see @ref{Warnings}.
 @endDefreq
 
 @Defreg {slimit}
@@ -17571,11 +17570,10 @@ delimited arguments, but not in compatibility mode.
 @cindex @code{\H}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\s}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\S}, incompatibilities with @acronym{AT&T} @code{troff}
-Furthermore, the escape sequences @code{\f}, @code{\H}, @code{\m},
-@code{\M}, @code{\R}, @code{\s}, and @code{\S} are transparent for the
-purpose of recognizing a control character at the beginning of a line
-only in compatibility mode.  For example, this code produces bold output
-in both cases, but the text differs.
+Further, the escape sequences @code{\f}, @code{\H}, @code{\m},
+@code{\M}, @code{\R}, @code{\s}, and @code{\S} are transparent at the
+beginning of a line only in compatibility mode.  For example, this code
+produces bold output in both cases, but the text differs.
 
 @Example
 .de xx

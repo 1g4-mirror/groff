@@ -8033,7 +8033,7 @@ is currently employed only by
 .P
 GNU
 .I troff \" GNU
-also permits the interpolatation of macro contents as a device control
+also permits the interpolation of macro contents as a device control
 command.
 .
 The
@@ -8346,7 +8346,7 @@ defined names\[em]macros,
 strings,
 and
 .RB diversions\[em]( .pm );
-defined colors
+colors
 .RB ( .pcolor );
 composite characters
 .RB ( .pcomposite );

@@ -5290,7 +5290,7 @@ environments
 .RB ( pev ),
 hyphenation exceptions
 .RB ( phw ),
-defined registers
+registers
 .RB ( pnr ),
 and page location traps
 .RB ( ptr )
