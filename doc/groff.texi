@@ -17457,20 +17457,25 @@ extension requests, @code{open}, @code{opena}, and @code{pso}.
 @cindex compatibility mode
 @cindex mode, compatibility
 
+Some implementation differences between GNU and @acronym{AT&T}
+@command{troff}s are thought too important to neglect; @code{groff}
+therefore makes available a @dfn{compatibility mode} in an effort to
+keep documents prepared for AT&T @command{troff} rendering well.
+
 @cindex long names
 @cindex names, long
 @cindex @code{\*}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\n}, incompatibilities with @acronym{AT&T} @code{troff}
-Long identifier names may be GNU @code{troff}'s most obvious innovation.
-@acronym{AT&T} @code{troff} interprets @samp{.dsabcd} as defining a
-string @samp{ab} with contents @samp{cd}.  Normally, GNU @code{troff}
-interprets this as a call of a macro named @code{dsabcd}.
-@acronym{AT&T} @code{troff} also interprets @samp{\*[} and @samp{\n[} as
-an interpolation of a string or register, respectively, named @samp{[}.
-In GNU @code{troff}, however, the @samp{[} is normally interpreted as
-delimiting a long name.  In compatibility mode, GNU @code{troff}
-interprets names in the traditional way; they thus can be two characters
-long at most.
+Identifier names of arbitrary length may be GNU @code{troff}'s most
+obvious innovation.  @acronym{AT&T} @code{troff} interprets
+@samp{.dsabcd} as defining a string @samp{ab} with contents @samp{cd}.
+Normally, GNU @code{troff} interprets this as a call of a macro named
+@code{dsabcd}.  @acronym{AT&T} @code{troff} also interprets @samp{\*[}
+and @samp{\n[} as an interpolation of a string or register,
+respectively, named @samp{[}.  In GNU @code{troff}, however, the
+@samp{[} is normally interpreted as delimiting a long name.  In
+compatibility mode, GNU @code{troff} interprets names in the traditional
+way; they thus can be two characters long at most.
 
 @DefreqList {cp, [@Var{n}]}
 @DefregListEndx {.C}

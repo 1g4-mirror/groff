@@ -5298,7 +5298,7 @@ to the standard error stream.
 .
 .
 .\" ====================================================================
-.SH "Implementation differences"
+.SH "Other differences"
 .\" ====================================================================
 .
 .\" TODO: Resync with the node of this name in our Texinfo manual.
@@ -5366,8 +5366,23 @@ GNU
 has no such restriction.
 .
 .
+.\" ====================================================================
+.SH "Compatibility mode"
+.\" ====================================================================
+.
+Some implementation differences between GNU and AT&T
+.IR troff s \" generic
+are thought too important to neglect;
+.I groff
+therefore makes available a
+.I "compatibility mode"
+in an effort to keep documents prepared for AT&T
+.I troff \" AT&T
+rendering well.
+.
+.
 .P
-Long names may be GNU
+Identifier names of arbitrary length may be GNU
 .IR troff 's \" GNU
 most obvious innovation.
 .
@@ -5556,7 +5571,7 @@ See section \[lq]Miscellaneous\[rq] above.
 .
 .
 .P
-In compatibility mode,
+Further,
 the escape sequences
 .BR \[rs]f ,
 .BR \[rs]H ,
@@ -5566,13 +5581,8 @@ the escape sequences
 .BR \[rs]s ,
 and
 .B \[rs]S
-are transparent at the beginning of an input line for the purpose of
-recognizing a control character,
-because they modify formatter state
-.RB ( \[rs]R )
-or properties of the environment
-(the rest)
-and therefore do not create output nodes.
+are transparent at the beginning of an input line only in compatibility
+mode.
 .
 .
 .P
