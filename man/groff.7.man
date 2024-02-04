@@ -4304,7 +4304,8 @@ is inactive and
 .I N
 is
 .scalednumber "3 m" .
-.\" XXX: negative values accepted; retain for future space-squeezing
+.\" XXX: Negative values are accepted to make future implementation of
+.\" "squeezable" adjustable spaces smoother; see Savannah #40963.
 .
 .TPx
 .REQ .ss n
