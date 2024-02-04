@@ -13,6 +13,8 @@
 	directory).
 	(maintainer-clean-local): Delete "doc/groff.texi".
 
+	* doc/groff.texi.in: Replace "1.23.0+Git" with "@VERSION@".
+
 2024-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Put version number on cover page of collected man pages.

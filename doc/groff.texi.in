@@ -24,7 +24,7 @@
 
 
 @copying
-This manual documents GNU @command{troff} version 1.23.0+Git.
+This manual documents GNU @command{troff} version @VERSION@.
 
 Copyright @copyright{} 1994--2024 Free Software Foundation, Inc.
 
@@ -463,7 +463,7 @@ Documentation License''.
 @titlepage
 @title groff
 @subtitle The GNU implementation of @code{troff}
-@subtitle Edition 1.23.0+Git
+@subtitle version @VERSION@
 @subtitle February 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
