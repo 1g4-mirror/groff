@@ -1523,7 +1523,8 @@ appendment.
 .
 .TP
 .BI .as1\~ name\~\c
-.RI [ contents ]
+.RB [[ \[dq] ]\c
+.IR contents ]
 As
 .RB \[lq] as \[rq],
 but compatibility mode is disabled while the appendment to
