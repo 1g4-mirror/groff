@@ -1847,7 +1847,7 @@ void environment::output_line(node *n, hunits width, int was_centered)
     width += tem->width();
   }
   node *nn = 0;
-  while (n != 0) {
+  while (n != 0 /* nullptr */) {
     node *tem = n->next;
     n->next = nn;
     nn = n;
@@ -1947,7 +1947,7 @@ breakpoint *environment::choose_breakpoint()
   node *n = line;
   breakpoint *best_bp = 0;	// the best breakpoint so far
   int best_bp_fits = 0;
-  while (n != 0) {
+  while (n != 0 /* nullptr */) {
     x -= n->width();
     s -= n->nspaces();
     breakpoint *bp = n->get_breakpoints(x, s);
@@ -2365,7 +2365,7 @@ void environment::construct_format_state(node *n, int was_centered,
 {
   if (is_html) {
     // find first glyph node which has a state.
-    while (n != 0 && n->state == 0)
+    while (n != 0 /* nullptr */ && n->state == 0)
       n = n->next;
     if (n == 0 || (n->state == 0))
       return;
@@ -2381,7 +2381,7 @@ void environment::construct_format_state(node *n, int was_centered,
       n->state->add_tag_if_unknown(MTSM_CE, 0);
     n->state->add_tag_if_unknown(MTSM_FI, filling);
     n = n->next;
-    while (n != 0) {
+    while (n != 0 /* nullptr */) {
       if (n->state != 0) {
 	n->state->sub_tag_ce();
 	n->state->add_tag_if_unknown(MTSM_FI, filling);
@@ -2395,7 +2395,7 @@ void environment::construct_new_line_state(node *n)
 {
   if (is_html) {
     // find first glyph node which has a state.
-    while (n != 0 && n->state == 0)
+    while (n != 0 /* nullptr */ && n->state == 0)
       n = n->next;
     if (n == 0 || n->state == 0)
       return;
