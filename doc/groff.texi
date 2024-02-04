@@ -15589,7 +15589,6 @@ line.
 @cindex @code{\!}, and copy mode
 @cindex copy mode, and @code{\!}
 @cindex mode, copy, and @code{\!}
-@noindent
 Use @code{\!} by itself to embed newlines in a diversion.
 @cindex @code{\?}, interpretation in copy mode
 Unlike @code{\!}, @code{\?} is interpreted even in copy mode
