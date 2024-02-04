@@ -9377,16 +9377,16 @@ character is associated with the environment (@pxref{Environments}).
 Only a single character of @var{c} is recognized; any excess is ignored.
 @endDefreq
 
-@DefreqList {linetabs, n}
+@DefreqList {linetabs, [@Var{b}]}
 @DefregListEndx {.linetabs}
 @cindex tab, line-tabs mode
 @cindex line-tabs mode
 @cindex mode, line-tabs
-If @var{n} is missing or non-zero, activate @dfn{line-tabs}; deactivate
-it otherwise (the default).  Active line-tabs cause GNU @code{troff}
-to compute tab distances relative to the start of the output line
-rather than relative to the horizontal drawing position corresponding to
-the start of the input line.
+Activate line-tabs in the environment if the expression @var{b} is
+non-zero; deactivate them otherwise.  They are inactive by default, and
+activated if @var{b} is omitted.  When line-tabs are active, tab stops
+are computed relative to the start of the pending output line instead of
+the drawing position corresponding to the start of the input line.
 
 @Example
 .ta 1i 3i
@@ -9403,9 +9403,8 @@ c
     @result{} a         b                   c
 @endExample
 
-Line-tabs activation is associated with the environment
-(@pxref{Environments}).  The read-only register @code{.linetabs}
-interpolates@tie{}1 if line-tabs are active, and 0 otherwise.
+The read-only register @code{.linetabs} interpolates@tie{}1 if line-tabs
+are active, and 0 otherwise.
 @endDefreq
 
 @menu
@@ -12322,15 +12321,16 @@ rules (lines), and geometric objects like circles and polygons are
 drawn, and the @dfn{fill color}, which can be used to paint the interior
 of a closed geometric figure.
 
-@DefreqList {color, [@Var{n}]}
+@DefreqList {color, [@Var{b}]}
 @DefregListEndx {.color}
-If @var{n} is missing or non-zero, enable the output of color-related
-device-independent output commands (this is the default); otherwise,
-disable them.  This request sets a global flag; it does not produce an
+Enable output of color-related device-independent output commands if the
+expression @var{b} is non-zero; disable it otherwise.  It is enabled by
+default, and if @var{b} is omitted.  This request modifies the
+formatter's internal state; it does not produce a
 token (@pxref{Gtroff Internals}).
 
-The read-only register @code{.color} is@tie{}1 if colors are enabled,
-0@tie{}otherwise.
+The read-only register @code{.color} interpolates@tie{}1 if color
+support is enabled, 0@tie{}otherwise.
 
 Color can also be disabled with the @option{-c} command-line option.
 @endDefreq
@@ -14662,17 +14662,16 @@ a certain location on the output page or in a diversion.  Its
 applications include setting page headers and footers, body text in
 multiple columns, and footnotes.
 
-@DefreqList {vpt, [@Var{flag}]}
+@DefreqList {vpt, [@Var{b}]}
 @DefregListEndx {.vpt}
 @cindex enabling vertical position traps (@code{vpt})
 @cindex vertical position traps, enabling (@code{vpt})
 @cindex vertical position trap enable register (@code{.vpt})
-Enable vertical position traps if @var{flag} is non-zero or absent;
-disable them otherwise.  Vertical position traps are those set by the
-@code{wh} request or by @code{dt} within a diversion.  The parameter
-that controls whether vertical position traps are enabled is global.
-Initially, vertical position traps are enabled.  The current value is
-stored in the @code{.vpt} read-only register.
+Enable vertical position traps if the expression @var{b} is non-zero;
+disable them otherwise.  They are enabled by default, and if @var{b} is
+omitted.  Vertical position traps are those set by the @code{wh} request
+or by @code{dt} within a diversion.  Vertical position trap enablement
+is global.  Its status is stored in the @code{.vpt} read-only register.
 
 @cindex page break, prevented by @code{vpt}
 @cindex break, page, prevented by @code{vpt}
@@ -17479,16 +17478,18 @@ respectively, named @samp{[}.  In GNU @code{troff}, however, the
 compatibility mode, GNU @code{troff} interprets names in the traditional
 way; they thus can be two characters long at most.
 
-@DefreqList {cp, [@Var{n}]}
+@DefreqList {cp, [@Var{b}]}
 @DefregListEndx {.C}
-If @var{n} is missing or non-zero, turn on compatibility mode;
-otherwise, turn it off.
+Enable AT&T @command{troff} compatibility mode if the expression
+@var{b} is non-zero; disable it otherwise.  It is disabled by default,
+and enabled if @var{b} is omitted.  In compatibility mode, long names
+are not recognized, and the incompatibilities they cause do not arise.
 
-The read-only register @code{.C} is@tie{}1 if compatibility mode is on,
-0@tie{}otherwise.
+The read-only register @code{.C} interpolates@tie{}1 if compatibility
+mode is enabled, 0@tie{}otherwise.
 
-Compatibility mode can be also turned on with the @option{-C}
-command-line option.
+Compatibility mode is also enabled by the @option{-C} command-line
+option.
 @endDefreq
 
 @DefreqList {do, name}

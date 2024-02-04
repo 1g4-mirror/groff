@@ -2122,23 +2122,28 @@ See
 .
 .TP
 .BR .color\~ [\c
-.IR n ]
+.IR b ]
 If
-.I n
+.I b
 is non-zero or missing,
-enable colors
-(the default),
+enable output of color-related device-independent output commands,
 otherwise disable them.
+.
+It is enabled by default.
 .
 .
 .TP
 .BR .cp\~ [\c
-.IR n ]
+.IR b ]
 If
-.I n
+.I b
 is non-zero or missing,
-enable compatibility mode,
+enable AT&T
+.I troff \" AT&T
+compatibility mode,
 otherwise disable it.
+.
+It is disabled by default.
 .
 In compatibility mode,
 long names are not recognized,
@@ -2964,20 +2969,20 @@ is read in copy mode.
 .
 .
 .TP
-.BI .linetabs\~ n
+.BR .linetabs\~ [\c
+.IR b ]
 If
-.I n
+.I b
 is non-zero or missing,
-enable line-tabs mode,
-otherwise disable it
-(the default).
+activate line-tabs in the environment,
+otherwise disable it.
 .
-In this mode,
-tab stops are computed relative to the start of the pending output line,
+They are inactive by default.
+.
+When line-tabs are active,
+tab stops are computed relative to the start of the pending output line
 instead of the drawing position corresponding to the start of the input
 line.
-.
-Line-tabs mode is a property of the environment.
 .
 .
 .TP
@@ -3689,20 +3694,26 @@ is retained.
 .
 .
 .TP
-.BI .vpt\~ n
+.BR .vpt\~ [\c
+.IR b ]
 If
-.I n
+.I b
 is non-zero or missing,
-enable vertical position traps
-(the default),
+enable vertical position traps,
 otherwise disable them.
 .
+They are enabled by default.
+.
+.
+.IP
 Vertical position traps are those set by the
 .BR ch ,
 .BR wh ,
 and
 .B dt
 requests.
+.
+Vertical position trap enablement is global.
 .
 .
 .TP

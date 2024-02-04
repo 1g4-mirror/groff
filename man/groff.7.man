@@ -2809,15 +2809,16 @@ requests.
 .REQ .color
 Enable output of color-related device-independent output commands.
 .
+It is enabled by default.
+.
 .TPx
-.REQ .color n
+.REQ .color b
 If
-.I n
+.I b
 is zero,
 disable output of color-related device-independent output commands;
 otherwise,
 enable them.
-.\" XXX: Should probably interpret negative values as false.
 .
 .TPx
 .REQ .composite "c1 c2"
@@ -2837,14 +2838,20 @@ loop.
 .
 .TPx
 .REQ .cp
-Enable compatibility mode.
+Enable AT&T
+.I troff \" AT&T
+compatibility mode.
+.
+It is disabled by default.
 .
 .TPx
-.REQ .cp n
+.REQ .cp b
 If
-.I n
+.I b
 is zero,
-disable compatibility mode,
+disable AT&T
+.I troff \" AT&T
+compatibility mode,
 otherwise enable it.
 .
 .TPx
@@ -3573,12 +3580,17 @@ in the register
 .
 .TPx
 .REQ .linetabs
-Enable line-tabs mode
-(calculate tab positions relative to beginning of output line).
+Activate line-tabs in the environment.
+.
+It is disabled by default.
 .
 .TPx
-.REQ .linetabs\~0
-Disable line-tabs mode.
+.REQ .linetabs b
+If
+.I b
+is zero,
+deactivate line-tabs in the environment,
+otherwise enable them.
 .
 .TPx
 .REQ .lf n
@@ -4561,9 +4573,15 @@ preserving font information.
 .REQ .vpt
 Enable vertical position traps.
 .
+They are enabled by default.
+.
 .TPx
-.REQ .vpt\~0
-Disable vertical position traps.
+.REQ .vpt b
+If
+.I b
+is zero,
+disable vertical position traps,
+otherwise enable them.
 .
 .TPx
 .REQ .vs
