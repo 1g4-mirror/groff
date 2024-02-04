@@ -2093,9 +2093,9 @@ See
 .
 .TP
 .BI .composite\~ c1\~c2
-Map character name
+Map ordinary or special character
 .I c1
-to character name
+to
 .I c2
 when
 .I c1

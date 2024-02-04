@@ -11071,16 +11071,18 @@ characters with @samp{]} in their names.  The delimiter need not be
 a neutral apostrophe; see @ref{Delimiters}.
 @endDefesc
 
-@Defreq {composite, id1 id2}
+@Defreq {composite, c1 c2}
 @pindex composite.tmac
-Map special character name @var{id1} to @var{id2} if @var{id1} is used
-in @code{\[...]} with more than one component.  See above for examples.
-This is a strict rewriting of the special character name; no check is
-performed for the existence of a glyph for either.  A set of default
-mappings for many accents can be found in the file
-@file{composite.tmac}, loaded by the default @file{troffrc} at startup.
+Map ordinary or special character name @var{c1} to @var{c2} when
+@var{c1} is a combining component in a composite character.  See above
+for examples.  This is a strict rewriting of the special character name;
+no check is performed for the existence of a glyph for either.
+Typically, @code{composite} is used to map a spacing character to a
+combining one.  A set of default mappings for many accents can be found
+in the file @file{composite.tmac}, loaded by the default @file{troffrc}
+at startup.
 
-You can obtain a report of colors defined by @code{composite} on the
+You can obtain a report of mappings defined by @code{composite} on the
 standard error stream with the @code{pcomposite} request.
 @xref{Debugging}.
 @endDefreq

@@ -2820,12 +2820,14 @@ enable them.
 .\" XXX: Should probably interpret negative values as false.
 .
 .TPx
-.REQ .composite "from to"
-Map glyph name
-.I from
-to glyph name
-.I to
-while constructing a composite glyph name.
+.REQ .composite "c1 c2"
+Map ordinary or special character
+.I c1
+to
+.I c2
+when
+.I c1
+is a combining component in a composite character.
 .
 .TPx
 .REQ .continue
