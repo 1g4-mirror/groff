@@ -1,3 +1,8 @@
+2024-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (doc/groff-man-pages.pdf): Add dependency on
+	"pdfmom".
+
 2024-02-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp
