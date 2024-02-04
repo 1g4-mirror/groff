@@ -32,11 +32,7 @@
 	tricky to sort out.  On top of that, the man(7) package
 	historically has no cognizance of color issues and it doesn't
 	seem like a good time to start, particularly if we only do it
-	for the 'pdf' output device.  Unfortunately, "pdf.tmac" doesn't
-	expose a clean abstraction for "link starts here" and "link
-	stops here", instead implementing a hugely featured `pdfhref`
-	macro that attempts to do everything--except support bracketing
-	the link text in a diversion, which our man(7) design requires.
+	for the 'pdf' output device.
 
 	* tmac/an.tmac (an-input-trap): Set stroke color to default
 	after springing `TP`'s supporting trap.
