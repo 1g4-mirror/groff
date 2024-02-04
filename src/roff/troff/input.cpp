@@ -1279,9 +1279,9 @@ bool non_interpreted_char_node::is_tag()
   return false;
 }
 
-non_interpreted_char_node::non_interpreted_char_node(unsigned char n) : c(n)
+non_interpreted_char_node::non_interpreted_char_node(unsigned char cc) : c(cc)
 {
-  assert(n != 0);
+  assert(cc != 0);
 }
 
 node *non_interpreted_char_node::copy()

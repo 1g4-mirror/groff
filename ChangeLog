@@ -1,3 +1,13 @@
+2024-02-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp
+	(non_interpreted_char_node::non_interpreted_char_node): Rename
+	parameter from `n` to `cc`; it is of `unsigned char` type, and
+	GNU troff's code uses `n` as a pointer to `node` type
+	ubiquitously.  It also uses `c` for an `unsigned char` type
+	pretty reliably, but that is already a private member variable
+	for this class.
+
 2024-02-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (TH): Set up end macro unconditionally here...
