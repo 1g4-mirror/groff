@@ -1,5 +1,20 @@
 2024-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Put version number on cover page of collected man pages.
+
+	* doc/GMPfront.t: Rename this...
+	* doc/GMPfront.t.in: ...to this.
+	* doc/doc.am (DOCFILES_NOINST): Update to reflect rename.
+	(DOC_GMP_COVER_PAGE): Add new macro to house the generated
+	file's name, "doc/GMPfront.t".
+	($(DOC_GMP_COVER_PAGE)): New target creates this file from its
+	*.in.
+	(doc/groff-man-pages.pdf): Migrate dependency and construction
+	to now-generated `$(DOC_GMP_COVER_PAGE)` file.
+	(MOSTLYCLEANFILES): Add `$(DOC_GMP_COVER_PAGE)`.
+
+2024-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (doc/groff-man-pages.pdf): Add dependency on
 	"pdfmom".
 
