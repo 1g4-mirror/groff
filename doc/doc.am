@@ -548,20 +548,25 @@ GROFF_DVI = doc/groff.dvi
 GROFF_PDF = doc/groff.pdf
 endif
 
-all: doc/groff.info doc/groff.txt doc/groff.html $(GROFF_DVI) \
-  $(GROFF_PDF)
+all: doc/groff.info doc/groff.txt doc/groff.html \
+	$(GROFF_DVI) $(GROFF_PDF)
 
 # Distribute the manual in source form as well.
-EXTRA_DIST += doc/groff.texi doc/fdl.texi
+EXTRA_DIST += doc/groff.texi.in doc/groff.texi doc/fdl.texi
+MAINTAINERCLEANFILES += doc/groff.texi
+
+doc/groff.texi: $(top_srcdir)/doc/groff.texi.in
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& $(DOC_SED) $(top_srcdir)/doc/groff.texi.in >$@
 
 EXTRA_DIST += doc/groff.info
 MAINTAINERCLEANFILES += doc/groff.info
-doc/groff.info: $(doc_srcdir)/groff.texi
+doc/groff.info: doc/groff.texi
 	$(AM_V_at)$(MKDIR_P) $(doc_builddir)
 	$(AM_V_GEN)LANG=C \
 	LC_ALL=C \
 	$(MAKEINFO) -o doc/groff.info --enable-encoding \
-	  -I $(doc_srcdir) $(doc_srcdir)/groff.texi
+	  -I $(doc_srcdir) $(doc_builddir)/groff.texi
 
 # Distribute the Info files.
 dist-hook: dist-info-bits
@@ -654,6 +659,7 @@ maintainer-clean-local:
 	$(RM) $(doc_builddir)/groff.txt
 	$(RM) -r $(doc_builddir)/groff.html.*
 	$(RM) -r $(doc_builddir)/*.t2d $(doc_builddir)/*.t2p
+	$(RM) $(doc_builddir)/groff.texi
 
 # Generated forms of the groff Texinfo manual might be in the source
 # directory (distribution archive build) or in the build directory (Git

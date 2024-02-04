@@ -1,5 +1,20 @@
 2024-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Put version number on cover page of our Texinfo manual.
+
+	* doc/groff.texi: Rename this...
+	* doc/groff.texi.in: ...to this.
+	* doc/doc.am (EXTRA_DIST): Add "doc/groff.texi.in".
+	(MAINTAINERCLEANFILES): Add "doc/groff.texi".
+	(doc/groff.texi): Add rule for constructing "groff.texi" from
+	"groff.texi.in", using `DOC_SED` macro of course.
+	(doc/groff.info): Update dependency and construction to use the
+	now-generated "groff.texi" (so look for it in the build
+	directory).
+	(maintainer-clean-local): Delete "doc/groff.texi".
+
+2024-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Put version number on cover page of collected man pages.
 
 	* doc/GMPfront.t: Rename this...
