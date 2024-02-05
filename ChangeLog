@@ -218,7 +218,7 @@
 
 	* src/roff/troff/env.h (class environment):
 	* src/roff/troff/env.cpp (class environment): Demote member
-	variable `continued_input_trap` from `int` to `bool`.  Update
+	variable `continued_input_trap` from `int` to `bool`.
 
 	* src/roff/troff/env.cpp (class environment): Initialize member
 	variable `continued_input_trap` with Boolean, not integer,
