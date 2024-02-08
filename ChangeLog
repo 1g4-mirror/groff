@@ -1,3 +1,14 @@
+2024-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Update default search path for URW fonts; Fedora 39 has come up
+	with a new place for them.
+
+	* font/devpdf/Foundry.in: Do it (at run time).
+	* m4/groff.m4 (GROFF_URW_FONTS_CHECK): Do it (at build time).
+
+	Thanks to T. Kurt Bond for the report to the groff mailing list.
+	<https://lists.gnu.org/archive/html/groff/2024-02/msg00018.html>
+
 2024-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Put version number on cover page of our Texinfo manual.
