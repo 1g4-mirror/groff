@@ -5279,12 +5279,12 @@ Adjustment}.
 
 When an output line is nearly full, it is uncommon for the next word
 collected from the input to exactly fill it---typically, there is room
-left over only for part of the next word.  The process of splitting a
-word so that it appears partially on one line (with a hyphen to indicate
-to the reader that the word has been broken) with its remainder on the
-next is @dfn{hyphenation}.  Hyphenation points can be manually
-specified; GNU @code{troff} also uses a hyphenation algorithm and
-language-specific pattern files (based on those used in @TeX{}) to
+left over only for part of the next word.  @dfn{Hyphenation} is the
+process of splitting a word so that it appears partially on one line,
+followed by a hyphen to indicate to the reader that the word has been
+broken, and its remainder on the next.  Hyphenation break points can be
+manually specified; GNU @code{troff} also uses a hyphenation algorithm
+and language-specific pattern files (based on those used in @TeX{}) to
 decide which words can be hyphenated and where.
 
 Hyphenation does not always occur even when the hyphenation rules for a
@@ -5320,7 +5320,7 @@ prompt to contrive an example of failure to break the line.  We also
 employ the @option{-z} option to suppress normal output.
 
 @Example
-$ perl -e 'print "#" x 80, "\n";' | nroff -z
+$ perl -e 'print "#" x 80, "\n";' | gnroff -z
     @error{} warning: cannot break line
 @endExample
 
@@ -5405,11 +5405,11 @@ leaders, respectively.
 
 Tabs and leaders lend themselves to table construction.@footnote{``Tab''
 abbreviates ``tabulation'', suggesting a table arrangement mechanism.}
-The tab and leader glyphs can be configured, and further facilities for
-sophisticated table composition are available; see @ref{Tabs and
-Fields}.  There are many details to track when using such low-level
-features, so most users turn to the @cite{tbl@r{(1)}} preprocessor to
-lay out tables.
+The tab and leader fill characters can be configured, and further
+facilities for sophisticated table composition are available; see
+@ref{Tabs and Fields}.  There are many details to track when using such
+low-level features, so most users turn to the @cite{tbl@r{(1)}}
+preprocessor to lay out tables.
 
 @c ---------------------------------------------------------------------
 
@@ -5704,7 +5704,7 @@ supply @samp{-m latin5} as a command-line argument to @code{groff}.
 @cindex input encoding, @w{Latin-9} (ISO @w{8859-15})
 @pindex latin9.tmac
 ISO @w{Latin-9} succeeds @w{Latin-1}; it includes a Euro sign and better
-glyph coverage for French.  To use this encoding, invoke @w{@samp{.mso
+coverage for French.  To use this encoding, invoke @w{@samp{.mso
 latin9.tmac}} at the beginning of your document or supply
 @samp{-m latin9} as a command-line argument to @code{groff}.
 @end table
@@ -5728,10 +5728,10 @@ devices as @code{groff} ships, while @w{Latin-2} is not.
 Unicode supports characters from all other input encodings; the
 @option{utf8} output driver for terminals therefore does as well.  The
 DVI output driver supports the @w{Latin-2} and @w{Latin-9} encodings if
-the command-line option @option{-m ec} is used as well.  @footnote{The
-DVI output device defaults to using the Computer Modern (CM) fonts;
-@file{ec.tmac} loads the EC fonts instead, which provide Euro
-@samp{\[Eu]} and per mille @samp{\[%0]} glyphs.}
+the command-line option @samp{@option{-m ec}} is used as well.
+@footnote{The DVI output device defaults to using the Computer Modern
+(CM) fonts; @file{ec.tmac} loads the EC fonts instead, which provide
+Euro @samp{\[Eu]} and per mille @samp{\[%0]} glyphs.}
 
 @c ---------------------------------------------------------------------
 
@@ -6191,10 +6191,11 @@ GNU @code{troff} provides a set of mathematical and logical operators
 familiar to programmers---as well as some unusual ones---but supports
 only integer arithmetic.@footnote{Provision is made for interpreting and
 reporting decimal fractions in certain cases.}  The internal data type
-used for computing results is usually a 32-bit signed integer, which
-suffices to represent magnitudes within a range of ±2
-billion.@footnote{If that's not enough, see the @cite{groff_tmac@r{(5)}}
-man page for the @file{62bit.tmac} macro package.}
+used for computing results depends on the host machine but is usually a
+32-bit signed integer, which suffices to represent magnitudes within a
+range of ±2 billion.@footnote{If that's not enough, see the
+@cite{groff_tmac@r{(5)}} man page for the @file{62bit.tmac} macro
+package.}
 
 @cindex arithmetic operators
 @cindex operators, arithmetic
@@ -11302,7 +11303,7 @@ Define an ordinary or special character@tie{}@var{c} as @var{contents}.
 If @var{contents} is absent, an existing character definition made with
 the same request is deleted.
 
-Defining (or redefining) a character@var{c} creates an object in the
+Defining (or redefining) a character @var{c} creates an object in the
 formatter that is recognized like any other ordinary or special
 character on input, and produces @var{contents} on output.  Every time
 @var{c} is to be output, @var{contents} is processed in a temporary
@@ -11464,12 +11465,13 @@ See the @code{cflags} request in @ref{Using Symbols}, for more details.
 @cindex special fonts
 @cindex fonts, special
 
-Special fonts are those that GNU @command{troff} searches when it cannot
-find a requested glyph in the selected font.  Typically, special fonts
-contain unstyled glyphs and are declared as such in their description
-files; see @ref{Font Description File Format}.  The ``Symbol'' and
-``Zapf Dingbats'' fonts of the PostScript and PDF standards are
-examples.  Ordinarily, only typesetters have special fonts.
+Special fonts are those that GNU @command{troff} searches, in mounting
+position order, when it cannot find a requested glyph in the selected
+font.  Typically, special fonts contain unstyled glyphs and are declared
+as such in their description files; see @ref{Font Description File
+Format}.  The ``Symbol'' and ``Zapf Dingbats'' fonts of the PostScript
+and PDF standards are examples.  Ordinarily, only typesetters have
+special fonts.
 
 GNU @command{troff}'s @code{special} and @code{fspecial} requests permit
 a document to supplement the set of fonts searched for glyphs.
@@ -11698,8 +11700,7 @@ nevertheless seldom used to set text.}
 
 Most typesetters support ligatures for the sequences `fi', `fl', `ff',
 `ffi', and `ffl', and @code{troff} does likewise.  Some fonts may
-include `ft' and `ct' ligatures; they are archaic and GNU @code{troff}
-does not (yet) support them.
+include others, but GNU @code{troff} does not (yet) support them.
 
 The formatter checks only the current font for ligatures and kerning
 adjustments; neither glyphs from special fonts nor special characters

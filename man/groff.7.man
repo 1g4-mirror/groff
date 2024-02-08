@@ -965,8 +965,8 @@ integer arithmetic.
 (Provision is made for interpreting and
 reporting decimal fractions in certain cases.)
 .
-The internal data type used for computing results is usually a 32-bit
-signed integer,
+The internal data type used for computing results depends on the host
+machine but is usually a 32-bit signed integer,
 which suffices to represent magnitudes within a range of \[+-]2
 billion.
 .
