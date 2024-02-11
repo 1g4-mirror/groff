@@ -2,7 +2,7 @@
 .SH Name
 groff_out \- GNU
 .I roff
-intermediate output format
+device-independent output format
 .
 .
 .\" XXX: This page needs review and editing.
@@ -1849,13 +1849,17 @@ describes the output device
 James Clark wrote an early version of this document,
 which described only the differences between AT&T
 device-independent
-.IR troff 's
+.IR troff 's \" AT&T
 output format and that of GNU
-.IR roff .
+.IR troff . \" GNU
 .
-The present version was completely rewritten in 2001 by
+It has since been expanded and revised by
 .MT groff\-bernd\:.warken\-72@\:web\:.de
 Bernd Warken
+.ME
+and
+.MT g.branden\:.robinson@\:gmail\:.com
+G. Branden Robinson
 .ME .
 .
 .
@@ -1897,6 +1901,7 @@ documentation as
 by Brian W.\& Kernighan,
 1982,
 AT&T Bell Laboratories Computing Science Technical Report No.\& 97,
+(CSTR\~#97),
 provides additional insights into the
 device and font description file formats
 and device-independent output format.
@@ -1928,7 +1933,7 @@ files.
 .
 .TP
 .MR @g@troff @MAN1EXT@
-generates the device-independent intermediate output documented here.
+generates the language documented here.
 .
 .
 .TP
@@ -1940,22 +1945,26 @@ systems.
 .
 .TP
 .MR groff_diff @MAN7EXT@
-enumerates differences between the intermediate output produced by AT&T
+enumerates differences between the output of AT&T
 .I troff \" AT&T
-and that of
-.IR groff .
+and that of GNU
+.IR troff . \" GNU
 .
 .
 .TP
 .MR gxditview @MAN1EXT@
-is a viewer for intermediate output.
+is a viewer for device-independent
+.I troff \" generic
+output.
 .
 .
 .TP
 .UR https://\:github.com/\:Alhadis/\:Roff\:.js/
 .I Roff.js
 .UE
-is a viewer for intermediate output written in JavaScript.
+is a viewer for device-independent
+.I troff \" generic
+output written in JavaScript.
 .
 .
 .P
