@@ -4182,6 +4182,27 @@ Interpolate\~1 if the most recently formatted text was interrupted
 .
 .
 .TP
+.B \[rs]n[.it]
+Interpolate the count of lines remaining in any pending input trap.
+.
+.
+.TP
+.B \[rs]n[.itc]
+Interpolate\~1 if the pending input trap honors the output line
+continuation escape sequence
+.RB ( \[rs]c ),
+0\~otherwise.
+.
+.
+.TP
+.B \[rs]n[.itm]
+Interpolate the name of the macro associated with the pending input
+trap.
+.
+This is a string-valued register.
+.
+.
+.TP
 .B \[rs]n[.kern]
 Interpolate\~1 if pairwise kerning is enabled,
 0\~otherwise.

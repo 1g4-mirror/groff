@@ -15027,7 +15027,10 @@ error to invoke @code{dt} in the top-level diversion.
 @cindex traps, input line
 
 @DefreqList {it, [@Var{n} @Var{name}]}
-@DefreqListEndx {itc, [@Var{n} @Var{name}]}
+@DefreqItem {itc, [@Var{n} @Var{name}]}
+@DefregItem {.it}
+@DefregItem {.itc}
+@DefregListEndx {.itm}
 @cindex setting input line trap (@code{it}, @code{itc})
 @cindex input line trap, setting (@code{it}, @code{itc})
 @cindex trap, input line, setting (@code{it}, @code{itc})
@@ -15094,6 +15097,12 @@ the trap is sprung.
 .  @slanted{internal: enable centering-without-filling}
 ..
 @endExample
+
+The @code{.it}, @code{.itc}, and @code{.itm} registers report the number
+of lines remaining in a pending input trap, a Boolean indication of
+whether that pending input trap honors output line continuation, and the
+name of the macro associated with the pending input trap, respectively.
+All are read-only; @code{.itm} is string-valued as well.
 
 @need 500
 Let us consider in more detail the sorts of input lines that are or are

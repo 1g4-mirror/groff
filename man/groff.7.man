@@ -6223,6 +6223,21 @@ Previous output line was \[lq]interrupted\[rq] or continued with
 (Boolean-valued).
 .
 .TP
+.REG .it
+The count of lines remaining in the pending input trap.
+.
+.TP
+.REG .itc
+The pending input trap honors output line continuation
+.esc c
+(Boolean-valued).
+.
+.TP
+.REG .itm
+Name of the macro associated with the pending input trap
+(string-valued).
+.
+.TP
 .REG .j
 Adjustment mode encoded as an integer;
 see

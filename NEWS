@@ -33,6 +33,14 @@ o The device-independent output now reports unbreakable spaces (those
 o A new read-only, string-valued register, `.trap`, interpolates the
   name of the next vertical position trap that will be sprung.
 
+o New registers `.it`, `.itc`, and `.itm` registers are available.
+  These read-only (and, in the case of `.itm`, string-valued as well)
+  registers report the number of lines remaining in a pending input
+  trap, a Boolean indication of whether that pending input trap honors
+  output line continuation (cf. the `it` and `itc` requests), and the
+  name of the macro associated with the pending input trap,
+  respectively.
+
 o A new request, `pcolor`, reports to the standard error stream the
   current list of defined colors.  (A device's default stroke and/or
   fill colors, "default", are not listed since they are immutable and
