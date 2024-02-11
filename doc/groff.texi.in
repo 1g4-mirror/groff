@@ -1214,7 +1214,7 @@ Run @command{gtbl} preprocessor.
 @item -T @var{dev}
 Prepare output for device @var{dev}.  @command{groff} passes the
 @option{-T} option and its argument to @command{gtroff}, then (unless
-the @option{-Z} option is used) calls an output driver to convert
+the @option{-Z} option is used) runs an output driver to convert
 @command{gtroff}'s output to a form appropriate for @var{dev}.  The
 following output devices are available.
 
@@ -1396,7 +1396,7 @@ Specify the assumed character encoding of input files.  @command{groff}
 passes its value as an argument to the @command{preconv} preprocessor's
 @option{-e} option.  This variable's existence implies the
 @command{groff} option @option{-k}.  If set but empty, @command{groff}
-calls @code{preconv} without an @option{-e} option.  @command{groff}'s
+runs @code{preconv} without an @option{-e} option.  @command{groff}'s
 @option{-K} option overrides @env{GROFF_ENCODING}.  See
 @cite{preconv@r{(7)}}.
 
