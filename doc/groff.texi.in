@@ -17879,44 +17879,48 @@ following two sections describe their format.
 @cindex @command{gtroff}, output
 @cindex output, @command{gtroff}
 
-This section describes the @code{groff} intermediate output format
-produced by GNU @code{troff}.
+We now describe the @code{groff} device-independent output format
+produced by GNU @command{troff}.
 
-As @code{groff} is a wrapper program around GNU @code{troff} and
-automatically calls an output driver (or ``postprocessor''), this output
-does not show up normally.  This is why it is called
-@emph{intermediate}.  @code{groff} provides the option @option{-Z} to
-inhibit postprocessing such that the produced intermediate output is
-sent to standard output just as it is when calling GNU @code{troff}
-directly.
+@c BEGIN Keep parallel with subsection "Background" of groff_out(5).
+As @command{groff} is a wrapper program around GNU @command{troff} and
+automatically runs an output driver, users seldom encounter this format
+under normal circumstances.  @command{groff} offers the option
+@option{-Z} to inhibit postprocessing such that GNU @command{troff}'s
+output is sent to the standard output stream just as it is when running
+GNU @command{troff} directly.
 
-@cindex @code{troff} output format
-@cindex output format, @code{troff}
-@cindex format, @code{troff} output
+The purpose of device-independent output is to facilitate the
+development of postprocessors by providing a common programming
+interface for all devices.  It is a distinct, and much simpler, language
+from that of the formatter, @command{troff}.  The device-independent
+output can be thought of as a ``page description language''.
+
+@cindex @command{troff} output format
+@cindex output format, @command{troff}
+@cindex format, @command{troff} output
 @cindex intermediate output
 @cindex output, intermediate
-Here, the term @dfn{troff output} describes what is output by
-GNU @code{troff}, while @dfn{intermediate output} refers to the language
-that is accepted by the parser that prepares this output for the output
-drivers.  This parser handles whitespace more flexibly than
-@acronym{AT&T}'s implementation and implements obsolete elements for
+In the following discussion, the term @dfn{troff output} describes what
+is output by GNU @command{troff}, while @dfn{device-independent output}
+denotes the language accepted by the parser that interprets this output
+for the output drivers.  This parser handles whitespace more flexibly
+than @acronym{AT&T} @command{troff}'s implementation, recognizes a GNU
+extension to the language, and supports an obsolete construct for
 compatibility; otherwise, both formats are the same.@footnote{The parser
-and postprocessor for intermediate output can be found in the file@*
-@file{@var{groff-source-dir}/src/libs/libdriver/input.cpp}.}
+for device-independent output can be found in the file
+@file{@var{groff-source-dir}/@/src/@/libs/@/libdriver/@/input.cpp}.}
 
-The main purpose of the intermediate output concept is to facilitate the
-development of postprocessors by providing a common programming
-interface for all devices.  It has a language of its own that is
-completely different from the @command{gtroff} language.  While the
-@command{gtroff} language is a high-level programming language for text
-processing, the intermediate output language is a kind of low-level
-assembler language by specifying all positions on the page for writing
-and drawing.
-
-The intermediate output produced by @command{gtroff} is fairly readable,
-while output from @acronym{AT&T} @code{troff} is rather hard to
-understand because of strange habits that are still supported, but not
-used any longer by @command{gtroff}.
+When Brian Kernighan designed @acronym{AT&T} @code{troff}'s
+device-independent output format circa 1980, he had to balance
+readability and maintainability against severe constraints on file size
+and transmission speed to the output device.@footnote{See ``A
+Typesetter-independent TROFF'', Bell Labs CSTR@tie{}#97, 1982.}  A
+decade later, when James Clark wrote @code{groff}, these constraints
+were no longer as tight.  GNU @command{troff} therefore emits
+device-independent output that is more easily interpreted by humans than
+did @acronym{AT&T} @code{troff}.
+@c END Keep parallel with subsection "Background" of groff_out(5).
 
 @menu
 * Language Concepts::
