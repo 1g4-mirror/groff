@@ -9383,11 +9383,11 @@ Only a single character of @var{c} is recognized; any excess is ignored.
 @cindex tab, line-tabs mode
 @cindex line-tabs mode
 @cindex mode, line-tabs
-Activate line-tabs in the environment if the expression @var{b} is
-non-zero; deactivate them otherwise.  They are inactive by default, and
-activated if @var{b} is omitted.  When line-tabs are active, tab stops
-are computed relative to the start of the pending output line instead of
-the drawing position corresponding to the start of the input line.
+Activate or deactivate line-tabs in the environment per Boolean
+expression @var{b}.  They are inactive by default, and activated if
+@var{b} is omitted.  When line-tabs are active, tab stops are computed
+relative to the start of the pending output line instead of the drawing
+position corresponding to the start of the input line.
 
 @Example
 .ta 1i 3i
@@ -12324,11 +12324,10 @@ of a closed geometric figure.
 
 @DefreqList {color, [@Var{b}]}
 @DefregListEndx {.color}
-Enable output of color-related device-independent output commands if the
-expression @var{b} is non-zero; disable it otherwise.  It is enabled by
-default, and if @var{b} is omitted.  This request modifies the
-formatter's internal state; it does not produce a
-token (@pxref{Gtroff Internals}).
+Enable or disable output of color-related device-independent output
+commands per Boolean expression @var{b}.  It is enabled by default, and
+if @var{b} is omitted.  This request modifies the formatter's internal
+state; it does not produce a token (@pxref{Gtroff Internals}).
 
 The read-only register @code{.color} interpolates@tie{}1 if color
 support is enabled, 0@tie{}otherwise.
@@ -14668,11 +14667,11 @@ multiple columns, and footnotes.
 @cindex enabling vertical position traps (@code{vpt})
 @cindex vertical position traps, enabling (@code{vpt})
 @cindex vertical position trap enable register (@code{.vpt})
-Enable vertical position traps if the expression @var{b} is non-zero;
-disable them otherwise.  They are enabled by default, and if @var{b} is
-omitted.  Vertical position traps are those set by the @code{wh} request
-or by @code{dt} within a diversion.  Vertical position trap enablement
-is global.  Its status is stored in the @code{.vpt} read-only register.
+Enable or disable vertical position traps per Boolean expression
+@var{b}.  They are enabled by default, and if @var{b} is omitted.
+Vertical position traps are those set by the @code{wh} request or by
+@code{dt} within a diversion.  Vertical position trap enablement is
+global.  Its status is stored in the @code{.vpt} read-only register.
 
 @cindex page break, prevented by @code{vpt}
 @cindex break, page, prevented by @code{vpt}
@@ -17480,10 +17479,10 @@ way; they thus can be two characters long at most.
 
 @DefreqList {cp, [@Var{b}]}
 @DefregListEndx {.C}
-Enable AT&T @command{troff} compatibility mode if the expression
-@var{b} is non-zero; disable it otherwise.  It is disabled by default,
-and enabled if @var{b} is omitted.  In compatibility mode, long names
-are not recognized, and the incompatibilities they cause do not arise.
+Enable or disable AT&T @command{troff} compatibility mode per Boolean
+expression @var{b}.  It is disabled by default, and enabled if @var{b}
+is omitted.  In compatibility mode, long names are not recognized, and
+the incompatibilities they cause do not arise.
 
 The read-only register @code{.C} interpolates@tie{}1 if compatibility
 mode is enabled, 0@tie{}otherwise.

@@ -13,6 +13,13 @@ VERSION next
 troff
 -----
 
+o The `color`, `cp`, `linetabs`, and `vpt` requests now interpret
+  arguments with negative values as instructions to disable the
+  corresponding feature, using the *roff integer-to-Boolean conversion
+  idiom instead of the C/C++ one.  Thus, if you invoke these requests
+  with a register interpolation, the outcome agrees with an `if` test of
+  the register's value.
+
 o In nroff mode (in other words, when producing output for devices that
   claim to be terminals), the formatter now reports warning diagnostics
   regarding certain output problems using units of lines instead of

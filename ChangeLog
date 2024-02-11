@@ -1,3 +1,26 @@
+2024-02-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: The `color`, `cp`, `linetabs`, and `vpt` requests now
+	interpret arguments with negative values as instructions to
+	disable the corresponding feature, using the *roff
+	integer-to-Boolean conversion idiom instead of the C/C++ one.
+	Thus, if you invoke these requests with a register
+	interpolation, the outcome agrees with an `if` test of the
+	register's value.
+
+	* src/roff/troff/div.cpp (vertical_position_traps):
+	* src/roff/troff/env.cpp (widow_control_request) [WIDOW_CONTROL]
+	(line_tabs_request):
+	* src/roff/troff/input.cpp (activate_color, compatible): Do it.
+
+	* doc/groff.texi.in (Tabs and Fields, Colors)
+	(Vertical Position Traps, Compatibility Mode):
+	* man/groff.7.man (Syntax reference conventions)
+	(Request short reference):
+	* man/groff_diff.7.man (New requests): Document it.
+
+	* NEWS: Add item.
+
 2024-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Update default search path for URW fonts; Fedora 39 has come up

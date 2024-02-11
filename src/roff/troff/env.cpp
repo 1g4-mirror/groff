@@ -208,7 +208,7 @@ void widow_control_request()
 {
   int n;
   if (has_arg() && get_integer(&n))
-    curenv->widow_control = n != 0;
+    curenv->widow_control = (n > 0);
   else
     curenv->widow_control = 1;
   skip_line();
@@ -2891,7 +2891,7 @@ void line_tabs_request()
 {
   int n;
   if (has_arg() && get_integer(&n))
-    curenv->line_tabs = n != 0;
+    curenv->line_tabs = (n > 0);
   else
     curenv->line_tabs = 1;
   skip_line();
