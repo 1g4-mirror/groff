@@ -178,6 +178,17 @@ o The doc (mdoc) macro package's `Mt` macro now sets its argument in
 o The new macro file "koi8-r.tmac" supports the KOI8-R character
   encoding, which supports the new Russian locale for groff.
 
+o The m (mm) macro package's `EPIC` macro (a GNU extension) now
+  interprets its "width" argument in ens by default, and its "height"
+  argument in vees, instead of basic units, for consistency with the
+  rest of the package.
+
+o The m (mm) macro package's `DS` macro now interprets its third
+  argument (a right-hand indentation) in ens by default, for consistency
+  with the rest of the package.  This is a difference from DWB mm (which
+  passed the value unprocessed to the `ll` request, which itself uses
+  ems), and groff mm's own historical behavior, which used basic units.
+
 o The m (mm) macro package's `HU` macro now supports a second argument
   as a GNU extension.  It corresponds to the optional third argument of
   the `H` macro.
