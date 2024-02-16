@@ -1,3 +1,13 @@
+2024-02-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[pdf]: Regression-test Savannah #65320.
+
+	* tmac/tests/pdf_bookmark-starting-with-control-char-works.sh:
+	Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+	(tmac_XFAIL_TESTS): Mark as an expected failure since resolution
+	of this bug is blocked by resolution of Savannah #65322.
+
 2024-02-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Implement `.it`, `.itc`, and `.itm` registers.  These

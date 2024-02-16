@@ -228,6 +228,7 @@ tmac_TESTS = \
   tmac/tests/latin5_works.sh \
   tmac/tests/latin9_works.sh \
   tmac/tests/localization-works.sh \
+  tmac/tests/pdf_bookmark-starting-with-control-char-works.sh \
   tmac/tests/pdfpic_does-not-choke-on-bad-pdfinfo-output.sh \
   tmac/tests/pdfpic_falls-back-to-PSPIC.sh \
   tmac/tests/s_EQ-handles-empty-first-arg.sh \
@@ -250,7 +251,8 @@ tmac_XFAIL_TESTS = \
   tmac/tests/an-ext_ME-punct-hyphenates.sh \
   tmac/tests/an-ext_UE-punct-hyphenates.sh \
   tmac/tests/an-ext_UE-breaks-before-long-URIs.sh \
-  tmac/tests/e_footnotes-work-with-columns.sh
+  tmac/tests/e_footnotes-work-with-columns.sh \
+  tmac/tests/pdf_bookmark-starting-with-control-char-works.sh
 XFAIL_TESTS += $(tmac_XFAIL_TESTS)
 
 tmac/www.tmac: tmac/www.tmac.in
