@@ -1,5 +1,15 @@
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
+	Report underlying system error when `putenv()` fails.
+
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
+	(resource_manager::supply_resource)
+	(resource_manager::read_download_file): Parallelize wording of
+	diagnostic messages.
+
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/ps.cpp: Promote type definition to global
 	scope and deanonymize it as `proc_table_t` so we can use it with
 	`array_length` template.
