@@ -84,7 +84,7 @@ const char *extension_table[] = {
   "FileSystem",
 };
 
-const int NEXTENSIONS = sizeof(extension_table)/sizeof(extension_table[0]);
+const size_t NEXTENSIONS = array_length(extension_table);
 
 // this must stay in sync with 'resource_type' in 'ps.h'
 const char *resource_table[] = {
@@ -97,7 +97,7 @@ const char *resource_table[] = {
   "pattern",
 };
 
-const int NRESOURCES = sizeof(resource_table)/sizeof(resource_table[0]);
+const size_t NRESOURCES = array_length(resource_table);
 
 static int read_uint_arg(const char **pp, unsigned *res)
 {
@@ -576,7 +576,7 @@ resource *resource_manager::read_resource_arg(const char **ptr)
     error("missing resource type");
     return 0;
   }
-  int ri;
+  size_t ri;
   for (ri = 0; ri < NRESOURCES; ri++)
     if (strlen(resource_table[ri]) == size_t(*ptr - name)
 	&& strncasecmp(resource_table[ri], name, *ptr - name) == 0)
@@ -932,7 +932,7 @@ static unsigned parse_extensions(const char *ptr)
     do {
       ++ptr;
     } while (*ptr != '\0' && !white_space(*ptr));
-    int i;
+    size_t i;
     for (i = 0; i < NEXTENSIONS; i++)
       if (strlen(extension_table[i]) == size_t(ptr - name)
 	  && memcmp(extension_table[i], name, ptr - name) == 0) {
@@ -955,6 +955,11 @@ static unsigned parse_extensions(const char *ptr)
 // BeginResource: file should be postponed till we have seen
 // the first line of the file.
 
+struct comment_info {
+  const char *name;
+  int (resource_manager::*proc)(const char *, int, FILE *, FILE *);
+};
+
 void resource_manager::process_file(int rank, FILE *fp,
 				    const char *filename, FILE *outfp)
 {
@@ -972,12 +977,7 @@ void resource_manager::process_file(int rank, FILE *fp,
     "DocumentSuppliedFiles:",
   };
 
-  const int NHEADER_COMMENTS = sizeof(header_comment_table)
-			       / sizeof(header_comment_table[0]);
-  struct comment_info {
-    const char *name;
-    int (resource_manager::*proc)(const char *, int, FILE *, FILE *);
-  };
+  const size_t NHEADER_COMMENTS = array_length(header_comment_table);
 
   static const comment_info comment_table[] = {
     { "BeginResource:", &resource_manager::do_begin_resource },
@@ -997,8 +997,8 @@ void resource_manager::process_file(int rank, FILE *fp,
     { "BeginData:", &resource_manager::do_begin_data },
     { "BeginBinary:", &resource_manager::do_begin_binary },
   };
-  
-  const int NCOMMENTS = sizeof(comment_table)/sizeof(comment_table[0]);
+
+  const size_t NCOMMENTS = array_length(comment_table);
   string buf;
   int saved_lineno = current_lineno;
   const char *saved_filename = current_filename;
@@ -1009,8 +1009,8 @@ void resource_manager::process_file(int rank, FILE *fp,
     current_lineno = saved_lineno;
     return;
   }
-  if ((size_t)buf.length() < sizeof(PS_MAGIC)
-      || memcmp(buf.contents(), PS_MAGIC, sizeof(PS_MAGIC) - 1) != 0) {
+  if ((size_t)buf.length() < sizeof PS_MAGIC
+      || memcmp(buf.contents(), PS_MAGIC, (sizeof PS_MAGIC) - 1) != 0) {
     if (outfp) {
       do {
 	if (!(broken_flags & STRIP_PERCENT_BANG)
@@ -1033,7 +1033,7 @@ void resource_manager::process_file(int rank, FILE *fp,
       if (buf[0] == '%') {
 	if (buf[1] == '%') {
 	  const char *ptr;
-	  int i;
+	  size_t i;
 	  for (i = 0; i < NCOMMENTS; i++)
 	    if ((ptr = matches_comment(buf, comment_table[i].name))) {
 	      copy_this_line
@@ -1095,7 +1095,7 @@ void resource_manager::read_download_file()
     fatal("failed to open 'download' file: %1", strerror(errno));
   char buf[512];
   int lineno = 0;
-  while (fgets(buf, sizeof(buf), fp)) {
+  while (fgets(buf, sizeof buf, fp)) {
     lineno++;
     char *p = strtok(buf, " \t\r\n");
     if (p == 0 /* nullptr */ || *p == '#')
@@ -1178,7 +1178,7 @@ void resource_manager::print_extensions_comment(FILE *outfp)
 {
   if (extensions) {
     fputs("%%Extensions:", outfp);
-    for (int i = 0; i < NEXTENSIONS; i++)
+    for (size_t i = 0; i < NEXTENSIONS; i++)
       if (extensions & (1 << i)) {
 	putc(' ', outfp);
 	fputs(extension_table[i], outfp);

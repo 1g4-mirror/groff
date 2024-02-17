@@ -1,5 +1,30 @@
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp: Promote type definition to global
+	scope and deanonymize it as `proc_table_t` so we can use it with
+	`array_length` template.
+
+	* src/devices/grops/psrm.cpp: Promote `comment_info` type
+	definition to global scope so we can use it with `array_length`
+	template.
+
+	* src/devices/grops/ps.cpp (ps_printer::special):
+	* src/devices/grops/psrm.cpp: Slightly refactor; migrate from
+	`sizeof` and division operators to groff's `array_length`
+	template function.
+	(resource_manager::read_resource_arg, parse_extensions)
+	(resource_manager::process_file)
+	(resource_manager::print_extensions_comment): Switch types of
+	loop indices iterating over these objects from `int`s of various
+	signedness to `size_t`.
+	(resource_manager::process_file)
+	(resource_manager::read_download_file): Use `sizeof` operator
+	idiomatically; it is an operator, not a function, and should be
+	followed by parentheses only when making it operate on a type
+	cast to get the size of a non-lvalue.
+
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdfbookmark): Drop unused register storing
 	computed length of `pdf:clean` string, `pdf:clean:len`.
 
