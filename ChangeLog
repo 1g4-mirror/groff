@@ -1,5 +1,10 @@
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac (pdfbookmark): Drop unused register storing
+	computed length of `pdf:clean` string, `pdf:clean:len`.
+
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_define_string, length_request):
 	Drop redundant diagnostic message on invalid string identifiers.
 
