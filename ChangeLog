@@ -1,3 +1,8 @@
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (do_define_string, length_request):
+	Drop redundant diagnostic message on invalid string identifiers.
+
 2024-02-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[pdf]: Regression-test Savannah #65320.
