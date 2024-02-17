@@ -494,6 +494,8 @@
 
 	* NEWS: Report change in font styling.
 
+	Fixes <https://savannah.gnu.org/bugs/?60034>.
+
 2024-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac:
