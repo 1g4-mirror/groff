@@ -1099,10 +1099,10 @@ void resource_manager::read_download_file()
   int lineno = 0;
   while (fgets(buf, sizeof buf, fp)) {
     lineno++;
-    char *p = strtok(buf, " \t\r\n");
+    char *p = strtok(buf, "\t\r\n");
     if (p == 0 /* nullptr */ || *p == '#')
       continue;
-    char *q = strtok(0 /* nullptr */, " \t\r\n");
+    char *q = strtok(0 /* nullptr */, "\t\r\n");
     if (!q)
       fatal_with_file_and_line(path, lineno, "file name missing for"
 			       " font '%1'", p);

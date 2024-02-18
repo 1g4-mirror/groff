@@ -205,6 +205,15 @@ o The s (ms) macro package now sets the vertical spacing register
   size of 20 points, the vertical spacing now defaults to 24 points
   rather than 22.
 
+Output drivers
+--------------
+
+o The PostScript output driver grops no longer accepts spaces as field
+  separators in its "download" file; this is so that spaces can appear
+  in font file names, and to better align the syntax of this file with
+  that used by gropdf.  The download file for grops shipped by groff has
+  long used tabs rather than spaces for field separation.
+
 Miscellaneous
 -------------
 

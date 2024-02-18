@@ -1,5 +1,19 @@
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/psrm.cpp
+	(resource_manager::read_download_file): Stop interpreting spaces
+	as token delimiters, so that PostScript font files with spaces
+	in their names can be handled (read and embedded in the
+	generated PostScript).
+	* src/devices/grops/grops.1.man (Usage): Update documentation.
+
+	* NEWS: Add item reporting this user-visible change.
+
+	Fixes <https://savannah.gnu.org/bugs/?65246>.  Thanks to Deri
+	James for the report.
+
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[output drivers]: Reset line number at end of input.
 
 	* src/devices/grodvi/dvi.cpp (dvi_printer::~dvi_printer):
