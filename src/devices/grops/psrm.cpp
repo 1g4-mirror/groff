@@ -145,7 +145,7 @@ resource::resource(resource_type t, string &n, string &v, unsigned r)
   version.move(v);
   if (type == RESOURCE_FILE) {
     if (name.search('\0') >= 0)
-      error("filename contains a character with code 0");
+      error("file name contains character code 0");
     filename = name.extract();
   }
 }

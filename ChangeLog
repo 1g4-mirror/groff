@@ -1,5 +1,10 @@
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/psrm.cpp (resource::resource): Spell "file
+	name" thus in diagnostic message.  It's English, not C.
+
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
 	Report underlying system error when `putenv()` fails.
 
