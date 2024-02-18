@@ -138,7 +138,8 @@ struct resource {
 };
 
 resource::resource(resource_type t, string &n, string &v, unsigned r)
-: next(0), type(t), flags(0), revision(r), filename(0), rank(-1)
+: next(0 /* nullptr */), type(t), flags(0), revision(r),
+  filename(0 /* nullptr */), rank(-1)
 {
   name.move(n);
   version.move(v);
