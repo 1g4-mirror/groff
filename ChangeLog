@@ -1,5 +1,24 @@
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[output drivers]: Reset line number at end of input.
+
+	* src/devices/grodvi/dvi.cpp (dvi_printer::~dvi_printer):
+	* src/devices/grohtml/post-html.cpp
+	(html_printer::~html_printer):
+	* src/devices/grolbp/lbp.cpp (lbp_printer::~lbp_printer):
+	* src/devices/grolj4/lj4.cpp (lj4_printer::~lj4_printer):
+	* src/devices/grops/ps.cpp (ps_printer::~ps_printer):
+	* src/devices/grotty/tty.cpp (tty_printer::~tty_printer): Clear
+	line number when tearing down output writer so that diagnostic
+	messages aren't emitted with a misleading (and nonexistent) line
+	number (the number of lines in the device-independent output
+	file plus one).  The PostScript driver in particular does large
+	amounts of processing at this point (like resolving PostScript
+	resources).  The problem is more theoretical for other output
+	drivers, but done for consistency.
+
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (string::string): When
 	constructing a new string from a pointer to char, if the
 	pointed-to-string doesn't exactly fit the storage reserved for

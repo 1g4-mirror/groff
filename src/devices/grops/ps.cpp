@@ -1377,6 +1377,7 @@ font *ps_printer::make_font(const char *nm)
 
 ps_printer::~ps_printer()
 {
+  current_lineno = 0; // At this point, we've read all the input.
   out.simple_comment("Trailer")
      .put_symbol("end")
      .simple_comment("EOF");
