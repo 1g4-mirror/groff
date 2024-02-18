@@ -1,5 +1,13 @@
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp (string::string): When
+	constructing a new string from a pointer to char, if the
+	pointed-to-string doesn't exactly fit the storage reserved for
+	it, populate the storage with nulls bytes before copying, to
+	avoid reads of garbage heap memory.
+
+2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/psrm.cpp (resource::resource): Spell "file
 	name" thus in diagnostic message.  It's English, not C.
 

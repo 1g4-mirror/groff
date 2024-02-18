@@ -103,6 +103,8 @@ string::string(const char *p)
   else {
     len = strlen(p);
     ptr = salloc(len, &sz);
+    if (len < sz)
+      memset(ptr, 0, sz);
     if (len != 0)
       memcpy(ptr, p, len);
   }
