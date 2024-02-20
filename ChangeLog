@@ -159,6 +159,8 @@
 
 	* NEWS: Add item.
 
+	Fixes <https://savannah.gnu.org/bugs/?64233>.
+
 2024-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Update default search path for URW fonts; Fedora 39 has come up
