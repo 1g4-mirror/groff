@@ -1,3 +1,13 @@
+2024-02-20  Lennart Jablonka <humm@ljabl.com>
+
+	* src/preproc/eqn/main.cpp: This file includes header
+	<stdlib.h>.  As part of the C++ standard library, <stdlib.h>
+	provides a bunch of stuff, including `atexit()`, in the global
+	name space; it need not provide that stuff in the `std` name
+	space.
+
+	See <https://eel.is/c++draft/support.c.headers.other>.
+
 2024-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grops/psrm.cpp
