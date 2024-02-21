@@ -137,6 +137,7 @@
 .    \}
 .  \}
 .  rr an-TH-was-called
+.  ds an*previous-page-ref-string \" empty
 .  ch an-header
 .  an*break-page-with-new-number
 ..
@@ -365,9 +366,6 @@
 .    DEVTAG-EO-TL
 .  \}
 .
-.  \" A bookmark is attached to the page header, but only on the first
-.  \" page of the document.
-.  nr an*was-TH-bookmark-emitted 0
 .  an-header
 .
 .  if !\\n[cR] \{\
@@ -438,9 +436,11 @@
 .de1 PT
 .  ie \\n[cR] .pl +1v
 .  el         .sp (.5i - .5m)
-.  if !\\n[an*was-TH-bookmark-emitted] \{\
+.  \" Attach a bookmark to the page header on the first page of a new
+.  \" man(7) document; a changed identifier and section indicates this.
+.  if !'\\*[an*page-ref-string]'\\*[an*previous-page-ref-string]' \{\
 .    an*bookmark 1 "\\*[an*page-ref-string]"
-.    nr an*was-TH-bookmark-emitted 1
+.    ds an*previous-page-ref-string \\*[an*page-ref-string]
 .  \}
 .  tl '\\*[an-pageref]'\\*[an-extra3]'\\*[an-pageref]'
 .  ie \\n[cR] \{\
@@ -1374,6 +1374,8 @@ contains unsupported escape sequence
 .mso devtag.tmac
 .nr an-devtag-needs-end-of-heading 0
 .nr an-devtag-needs-second-column 0
+.
+.ds an*previous-page-ref-string \" empty
 .
 .nr an*enforce-tag-separation 1
 .

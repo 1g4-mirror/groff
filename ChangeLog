@@ -1,5 +1,17 @@
 2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Trivially refactor.
+
+	* tmac/an.tmac: Revise mechanism for detecting new page headings
+	that should get a top-level bookmark.
+	(an-end, (initialization)): Make new string
+	`an*previous-page-ref-string` empty.
+	(TH, PT): Drop `an*was-TH-bookmark-emitted` register.
+	(PT): Compare `an*page-ref-string` to
+	`an*previous-page-ref-string`; emit a bookmark if they differ.
+
+2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Trivially refactor (DRY).
 
 	* tmac/mdoc/doc-ditroff:
