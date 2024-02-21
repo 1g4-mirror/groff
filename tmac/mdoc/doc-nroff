@@ -120,7 +120,7 @@
 .ds doc-left-singlequote \[oq]
 .ds doc-right-singlequote \[cq]
 .
-.\" the following strings are 'official'
+.\" The following strings are part of mdoc(7)'s documented interface.
 .ds <= \[<=]
 .ds >= \[>=]
 .ds aa \[aa]
