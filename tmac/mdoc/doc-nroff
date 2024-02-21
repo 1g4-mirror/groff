@@ -147,7 +147,7 @@
 .  ds If \[if]
 .\}
 .el \{\
-.  ds ua ^
+.  ds ua \[ha]
 .  ds Pi pi
 .  ds If infinity
 .\}

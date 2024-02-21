@@ -1,3 +1,12 @@
+2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/mdoc/doc-nroff (ua): Define string as `ha` special
+	character, not "^".  This is (probably) a matter only of
+	pedantic correctness, as this definition takes place only in the
+	"else" block of a conditional testing for the "utf8" output
+	device, and no other supported nroff-mode device renders "^"
+	surprisingly to ASCII nostalgics.
+
 2024-02-20  Lennart Jablonka <humm@ljabl.com>
 
 	* src/preproc/eqn/main.cpp: This file includes header
