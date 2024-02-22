@@ -1130,8 +1130,8 @@ contains unsupported escape sequence
 .  ds an*visible-hyperlink \\$1\" in case there is no link text
 .  \" We want the diversion to format as if it has an indentation of
 .  \" zero (that comes for free when we switch environments), and we
-.  \" want the line length reduced by the amount of indentation that
-.  \" obtains when we output it.
+.  \" want the line length reduced by the amount of indentation in
+.  \" effect at the start of the link text.
 .  nr an*saved-line-length \\n[.l]
 .  nr an*saved-indentation \\n[.i]
 .  if \\n[an*do-hyperlink] \{\
@@ -1163,9 +1163,8 @@ contains unsupported escape sequence
 .    ie \\n[dl] \{\
 .      if '\*[.T]'html' \
 .        nop \X'html:<a href="\\*[an*hyperlink]">'\c
-.      if '\*[.T]'pdf' \{\
-.        pdfhref W -D \\*[an*hyperlink] -- "|"
-.      \}
+.      if '\*[.T]'pdf' \
+.        pdfhref W -D \\*[an*hyperlink] -- |
 .      if \\n[an*is-output-terminal] \
 .        nop \X'tty: link \\*[an*hyperlink]'\c
 .      \" Replace the final newline of the diversion.
@@ -1181,7 +1180,8 @@ contains unsupported escape sequence
 .      nop \&\\*[an*trailing-text]\"
 .    \}
 .    \" If there was no link text, format URI as its own link text.  We
-.    \" don't add angle brackets here.
+.    \" don't add angle brackets here; we assume that the application
+.    \" uses some means of indicating the hyperlinked text.
 .    el \{\
 .      if '\*[.T]'html' \
 .        nop \X'html:<a href="\\*[an*hyperlink]">\
