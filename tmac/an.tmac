@@ -1153,6 +1153,7 @@ contains unsupported escape sequence
 .\" "mailto:", but this need not be visible when rendering an email
 .\" address on a device incapable of hyperlinking.
 .de an*end-hyperlink
+.  ds an*trailing-text \\$1\"
 .  ie (\\n[an*is-in-link-text-diversion] & \\n[an*do-hyperlink]) \{\
 .    br
 .    di
@@ -1190,18 +1191,19 @@ contains unsupported escape sequence
 .        nop \X'tty: link \\*[an*hyperlink]'\
 \\*[an*visible-hyperlink]\X'tty: link'\c
 .    \}
-.    nop \&\\$1\"
+.    nop \&\\*[an*trailing-text]\"
 .  \}
 .  \" If not hyperlinking, format URI in angle brackets.  There was no
 .  \" diversion, so the link text has already been formatted normally.
 .  el \{\
 .    nh
-.    nop \\[la]\\*[an*visible-hyperlink]\\[ra]\\$1
+.    nop \\[la]\\*[an*visible-hyperlink]\\[ra]\\*[an*trailing-text]
 .    hy \\n[an*hyphenation-mode]
 .  \}
 .  rm an*link-text
 .  rm an*hyperlink
 .  rm an*visible-hyperlink
+.  rm an*trailing-text
 ..
 .
 .\" Begin email hyperlink.  Input until the next `ME` call is stored in

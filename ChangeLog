@@ -1,5 +1,11 @@
 2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*end-hyperlink): Trivially refactor.  Store
+	the first argument in a string named `an*trailing-text` (and use
+	it) to clarify later logic.  Delete the string when done.
+
+2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Trivially refactor.
 
 	* tmac/an.tmac: Revise mechanism for detecting new page headings
