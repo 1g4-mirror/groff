@@ -1,5 +1,10 @@
 2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an_UR-works.sh: Add tests of PDF output, using
+	pdftotext(1) (from poppler-utils) to scrape the text from PDF.
+
+2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdfbookmark): Validate bookmark level argument;
 	complain if it is not a numeric expression and treat it as "1".
 
