@@ -1,5 +1,10 @@
 2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac (pdfbookmark): Validate bookmark level argument;
+	complain if it is not a numeric expression and treat it as "1".
+
+2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an*end-hyperlink): Trivially refactor.  Store
 	the first argument in a string named `an*trailing-text` (and use
 	it) to clarify later logic.  Delete the string when done.
