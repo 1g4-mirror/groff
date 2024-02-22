@@ -1159,8 +1159,8 @@ contains unsupported escape sequence
 .    di
 .    ev
 .    nr an*is-in-link-text-diversion 0
-.    \" Was any link text present?
-.    ie \\n[dn] \{\
+.    \" If the diversion width is zero, assume there was link text.
+.    ie \\n[dl] \{\
 .      if '\*[.T]'html' \
 .        nop \X'html:<a href="\\*[an*hyperlink]">'\c
 .      if '\*[.T]'pdf' \{\
@@ -1178,6 +1178,7 @@ contains unsupported escape sequence
 .      if \\n[an*is-output-terminal] \
 .        nop \X'tty: link'\c
 .      if '\*[.T]'pdf' \X'pdf: markend'\m[default]\c
+.      nop \&\\*[an*trailing-text]\"
 .    \}
 .    \" If there was no link text, format URI as its own link text.  We
 .    \" don't add angle brackets here.
@@ -1186,12 +1187,14 @@ contains unsupported escape sequence
 .        nop \X'html:<a href="\\*[an*hyperlink]">\
 \\*[an*visible-hyperlink]</a>'\c
 .      if '\*[.T]'pdf' \
-.        pdfhref W -D \\*[an*hyperlink] -- \\*[an*visible-hyperlink]\c
+.        pdfhref W -D \\*[an*hyperlink] -A "\\*[an*trailing-text]" \
+-- \\*[an*visible-hyperlink]\c
 .      if \\n[an*is-output-terminal] \
 .        nop \X'tty: link \\*[an*hyperlink]'\
 \\*[an*visible-hyperlink]\X'tty: link'\c
+.      if !'\*[.T]'pdf' \
+.        nop \&\\*[an*trailing-text]\"
 .    \}
-.    nop \&\\*[an*trailing-text]\"
 .  \}
 .  \" If not hyperlinking, format URI in angle brackets.  There was no
 .  \" diversion, so the link text has already been formatted normally.

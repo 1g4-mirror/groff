@@ -1,5 +1,19 @@
 2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*end-hyperlink): Fix bug: when no link text
+	was supplied, the fallback link text (the hyperlink itself) was
+	not appearing in PDF output.  This bug was masked by another:
+	the "no link text supplied" branch was never being taken because
+	the wrong diversion dimension register was being tested.  Test
+	register `dl` instead of `dn` and annotate the reasoning.  Emit
+	the trailing text in two places in the logic, since the
+	`pdfhref` macro takes over this function with its `-A` parameter
+	{which we now use}, but wasn't designed to accommodate the use
+	case where we start the mark with one call and close it with
+	another, which we use for the "no link text supplied" case.
+
+2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an_UR-works.sh: Add tests of PDF output, using
 	pdftotext(1) (from poppler-utils) to scrape the text from PDF.
 
