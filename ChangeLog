@@ -1,5 +1,15 @@
 2024-02-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Rename a test.
+
+	* tmac/tests/doc_Lk-respect-sentence-ending-punctuation.sh:
+	Rename this...
+	* tmac/tests/doc_Lk-respects-sentence-ending-punctuation.sh:
+	...to this.
+	* tmac/tmac.am (tmac_TESTS): Update.
+
+2024-02-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/doc_Xr-works.sh: Unit-test `Xr` macro.
 	* tmac/tmac.am (tmac_TESTS): Run test.
 
