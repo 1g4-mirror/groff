@@ -1,3 +1,8 @@
+2024-02-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tests/doc_Xr-works.sh: Unit-test `Xr` macro.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2024-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (an*end-hyperlink): Fix bug: when no link text
