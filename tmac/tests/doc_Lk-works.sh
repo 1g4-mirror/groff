@@ -28,7 +28,7 @@ wail() {
 
 # Ensure .Lk renders correctly.
 
-input='.Dd 2024-01-28
+input='.Dd 2024-02-22
 .Dt foo 1
 .Os groff test suite
 .Sh Name
@@ -38,14 +38,19 @@ input='.Dd 2024-01-28
 Sometimes you
 .Em click Lk http://example.com one link
 and you get
-.Lk http://another.example.com .'
+.Lk http://another.example.com .
+.Pp
+Follow instructions
+.Pf ( Lk http://\:hidden\:.example\:.com elsewhere ) .'
+
+output=$(echo "$input" | "$groff" -mdoc -Tascii -P-cbou)
+echo "$output"
 
 # Expected:
 #     Sometimes   you   click   one   link:   http://example.com   and   you  get
 #     http://another.example.com.
-
-output=$(echo "$input" | "$groff" -Tascii -P-cbou -mdoc)
-echo "$output"
+#
+#     Follow instructions (elsewhere: http://hidden.example.com).
 
 echo "checking that conventional Lk macro call works" >&2
 echo "$output" \
@@ -54,6 +59,11 @@ echo "$output" \
 echo "checking that inline Lk macro call works" >&2
 echo "$output" \
     | grep -Eq 'one +link: +http://example\.com' || wail
+
+echo "checking that prefixed Lk macro call works" >&2
+echo "$output" \
+    | grep -Fq 'instructions (elsewhere: http://hidden.example.com).' \
+    || wail
 
 test -z "$fail"
 

@@ -46,6 +46,8 @@ Read the man page
 .Xr groff 1 ,
 reflect,
 and find enlightenment.
+.Pf ( Xr groff_font 5
+is also worth a look.)
 .Pp
 The
 .Xr groff ,
@@ -54,8 +56,8 @@ and
 .Xr roff
 pages in section 7 are also illuminating.'
 
-output=$(echo "$input" | "$groff" -Tascii -P-cbou -mdoc 2>/dev/null)
-error=$(echo "$input" | "$groff" -Tascii -P-cbou -mdoc 2>&1 >/dev/null)
+output=$(echo "$input" | "$groff" -mdoc -Tascii -P-cbou 2>/dev/null)
+error=$(echo "$input" | "$groff" -mdoc -Tascii -P-cbou 2>&1 >/dev/null)
 echo "$output"
 echo "$error"
 
@@ -67,13 +69,17 @@ echo "$output" \
     | grep -Fq 'Read the groff(1) man page.' || wail
 
 echo "checking two-argument Xr call with partial reference and" \
-   "trailing punctuation" >&2
+    "trailing punctuation" >&2
 echo "$output" \
-    | grep -Fq 'Read the man page groff(1), reflect,' || wail
+    | grep -Eq 'Read +the +man +page +groff\(1\), +reflect,' || wail
 
 echo "checking a series of partial references, some punctuated" >&2
 echo "$output" \
     | grep -Fq 'The groff, groff_diff, and roff pages' || wail
+
+echo "checking that prefixed Xr macro call works" >&2
+echo "$output" \
+    | grep -Fq '(groff_font(5) is also worth a look.)' || wail
 
 test -z "$fail"
 
