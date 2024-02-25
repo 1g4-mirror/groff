@@ -1,3 +1,9 @@
+2024-02-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tests/doc_heading-font-remapping-works.sh: Dump output of
+	test case in plain text in addition to device-independent *roff
+	format.
+
 2024-02-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Rename a test.

@@ -39,6 +39,9 @@ input='.Dd 2022-12-26
 .Sh Hacking Xr groff
 Have fun!'
 
+output=$(printf "%s\n" "$input" | "$groff" -mdoc -Tascii)
+echo "$output"
+
 output=$(printf "%s\n" "$input" | "$groff" -mdoc -Tascii -Z)
 echo "$output"
 
