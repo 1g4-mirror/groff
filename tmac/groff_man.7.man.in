@@ -395,7 +395,7 @@ Section headings
 .RB ( .SH ),
 one of which is mandatory and many of which are conventionally expected,
 facilitate location of material by the reader and aid the man page
-writer to discuss all essential aspects of the topic.
+writer to discuss all essential aspects of the subject.
 .
 Subsection headings
 .RB ( .SS )
@@ -418,7 +418,7 @@ to inset a region within a (sub)section.
 .
 .
 .TP
-.BI .TH " topic section"\~\c
+.BI .TH " identifier section"\~\c
 .RI [ footer-middle \~\c
 .RI [ footer-inside \~\c
 .RI [ header-middle ]]]
@@ -429,10 +429,14 @@ _ifstyle()dnl
 systems refer to these collectively as \(lqtitles\(rq.
 _endif()dnl
 .
-The subject of the man page is
-.I topic
-and the section of the manual to which it belongs is
-.I section.
+Together,
+.I identifier
+and the
+.I section
+of the manual to which it belongs
+can uniquely identify a
+.I man
+document on the system.
 _ifstyle()dnl
 .
 This use of \(lqsection\(rq has nothing to do with the section headings
@@ -447,14 +451,12 @@ or
 .MR intro 1
 for the manual sectioning applicable to your system.
 .
-.I topic
+.I identifier
 and
 .I section
-are positioned together at the left and right in the header
-(with
-.I section
-in parentheses immediately appended to
-.IR topic ).
+are positioned at the left and right in the header;
+the latter is set after the former,
+in parentheses and without space.
 .
 .I footer-middle
 is centered in the footer.
@@ -476,7 +478,7 @@ The outside footer is the page number,
 except in the continuous-rendering mode enabled by the option
 .BR \-rcR=1 ,
 in which case it is the
-.I topic
+.I identifier
 and
 .I section,
 as in the header.
@@ -493,7 +495,7 @@ there is no need to specify
 will supply text for it.
 .
 The macro package may also abbreviate
-.I topic
+.I identifier
 and
 .I footer-inside
 with ellipses
@@ -3550,7 +3552,7 @@ distinction information.
 .
 .TP
 .B \-rCT=1
-Set the man page topic
+Set the man page identifier
 (the first argument to
 .BR .TH )
 in full capitals in headers and footers.
@@ -3654,9 +3656,9 @@ above).
 .
 .TP
 .BI \-dMF= man-page-topic-font
-Select the font used for man page topics named in
+Select the font used for man page identifiers in
 .B .TH
-and
+calls and topics named in
 .B .MR
 calls;
 the default is
@@ -3936,7 +3938,45 @@ program may lack permission to open such files.
 .SH Notes
 .\" ====================================================================
 .
-Some tips on troubleshooting your man pages follow.
+Some tips on composing and troubleshooting your man pages follow.
+.
+.
+.IP \(bu 2n
+What's the difference between a man page topic and identifier?
+.
+.
+.IP
+A single man page may document several related but distinct topics.
+For example,
+.MR printf 3
+and
+.MR fprintf 3
+are often presented together.
+.
+Further,
+multiple programming languages have functions named \(lqprintf\(rq,
+and wish to document these in a man page.
+.
+The identifier is intended to
+(with the section)
+uniquely identify a page on the system;
+it may furthermore correspond closely to the file name of the document.
+.
+.
+.IP
+The
+.MR man 1
+librarian is designed to permit convenient access to man pages,
+resolving topics to man page identifiers and sections.
+.
+Thus,
+you can type
+.RB \(lq "man fprintf" \(rq
+without having to know whether the installed document uses
+\(lqprintf\(rq,
+\(lqfprintf\(rq,
+or even \(lqc_printf\(rq
+as an identifier.
 .
 .
 .IP \(bu 2n
