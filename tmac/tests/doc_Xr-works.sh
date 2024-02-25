@@ -34,7 +34,7 @@ input='.Dd 2024-02-22
 .Sh Name
 .Nm foo
 .Nd frobnicate a bar
-.Sh Description.
+.Sh Description
 Degenerate macro call here.
 .Xr
 .Pp
@@ -54,7 +54,16 @@ The
 .Xr groff_diff ,
 and
 .Xr roff
-pages in section 7 are also illuminating.'
+pages in section 7 are also illuminating.
+.Pp
+You could also read about
+.Xr groff Xr mdoc .
+.Pp
+Or
+about
+.Xr groff Pf - Xr man
+and
+.Xr groff Ns - Ns Xr ms .'
 
 output=$(echo "$input" | "$groff" -mdoc -Tascii -P-cbou 2>/dev/null)
 error=$(echo "$input" | "$groff" -mdoc -Tascii -P-cbou 2>&1 >/dev/null)
@@ -80,6 +89,14 @@ echo "$output" \
 echo "checking that prefixed Xr macro call works" >&2
 echo "$output" \
     | grep -Fq '(groff_font(5) is also worth a look.)' || wail
+
+# We don't expect an inline Pf call to prevent a word break before it.
+echo "checking that inline Pf after Xr macro call works" >&2
+echo "$output" | grep -Fq 'read about groff mdoc' || wail
+
+# But we do expect Ns to do so.
+echo "checking that inline Ns after Xr macro call works" >&2
+echo "$output" | grep -Fq 'Or about groff -man and groff-ms.' || wail
 
 test -z "$fail"
 
