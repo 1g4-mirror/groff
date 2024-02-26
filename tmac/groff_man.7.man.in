@@ -422,7 +422,7 @@ to inset a region within a (sub)section.
 .RI [ footer-middle \~\c
 .RI [ footer-inside \~\c
 .RI [ header-middle ]]]
-Determine the contents of the page header and footer.
+Populate the page header and footer.
 _ifstyle()dnl
 .
 .I roff
@@ -494,7 +494,7 @@ there is no need to specify
 .I an.tmac
 will supply text for it.
 .
-The macro package may also abbreviate
+This package may abbreviate
 .I identifier
 and
 .I footer-inside
@@ -505,7 +505,7 @@ _endif()dnl
 if they would overrun the space available in the header and footer,
 respectively.
 .
-For HTML output,
+In HTML output,
 headers and footers are suppressed.
 .
 .
@@ -2170,7 +2170,7 @@ Several macros insert vertical space:
 and the deprecated
 .BR .HP .
 .
-The default inter-section and inter-paragraph spacing is
+The default inter-section and inter-paragraph spacing
 is 1v for terminals and 0.4v for typesetters.
 _ifstyle()dnl
 \(lqv\(rq is a unit of vertical distance,
@@ -3967,12 +3967,13 @@ it may furthermore correspond closely to the file name of the document.
 The
 .MR man 1
 librarian is designed to permit convenient access to man pages,
-resolving topics to man page identifiers and sections.
+resolving topics to man page identifiers.
 .
 Thus,
 you can type
-.RB \(lq "man fprintf" \(rq
-without having to know whether the installed document uses
+.RB \(lq "man fprintf" \(rq,
+and other pages can refer to it,
+without knowing whether the installed document uses
 \(lqprintf\(rq,
 \(lqfprintf\(rq,
 or even \(lqc_printf\(rq
@@ -4251,6 +4252,8 @@ _
 .TE
 .
 .
+.br
+.ne 4v
 .IP \(bu
 Why doesn't the package provide a string to insert an ellipsis?
 .
