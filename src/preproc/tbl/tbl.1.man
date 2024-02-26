@@ -1781,7 +1781,7 @@ Dexterity#dodges a thrown tomato
 Constitution#eats a month-old tomato without becoming ill
 Intelligence#knows that a tomato is a fruit
 Wisdom#chooses \[rs]f[I]not\[rs]f[] to put tomato in a fruit salad
-Charisma#sells obligate carnivores tomato-based fruit salads
+Charisma#sells tomato-based fruit salads to hypercarnivores
 \&.TE
 .EE
 .RE
@@ -1798,7 +1798,7 @@ Dexterity#dodges a thrown tomato
 Constitution#eats a month-old tomato without becoming ill
 Intelligence#knows that a tomato is a fruit
 Wisdom#chooses \f[I]not\f[] to put tomato in a fruit salad
-Charisma#sells obligate carnivores tomato-based fruit salads
+Charisma#sells tomato-based fruit salads to hypercarnivores
 .TE
 .
 .
