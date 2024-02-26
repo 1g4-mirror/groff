@@ -6471,7 +6471,7 @@ underlines the period.
 
 For vertical motions, the @code{|} operator specifies a distance from
 the first text baseline on the page or in the current
-diversion,@footnote{@xref{Diversions}.}  using the current vertical
+diversion,@footnote{@xref{Diversions}.} using the current vertical
 spacing.
 
 @Example
@@ -7541,7 +7541,7 @@ updates only the formatter's internal state and does not contribute
 (directly) to output.  @xref{Gtroff Internals}.
 
 Further surprise can occur if you use registers like
-@code{.k},@footnote{@xref{Page Motions}.}  whose values are not
+@code{.k},@footnote{@xref{Page Motions}.} whose values are not
 determined until they are interpolated.
 
 @Example
@@ -14978,7 +14978,7 @@ not the expected behaviour.
 @cindex ejection, page
 If, after starting GNU @code{troff} without loading a macro package, you
 use the @code{ptr} request to dump a list of the active traps to the
-standard error stream,@footnote{@xref{Debugging}.}  nothing is reported.
+standard error stream,@footnote{@xref{Debugging}.} nothing is reported.
 Yet the @code{.t} register will report a steadily decreasing value with
 every output line your document produces, and once the value of
 @code{.t} gets to within @code{.V} of zero, you will notice that
