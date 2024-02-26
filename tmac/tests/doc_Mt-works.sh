@@ -50,18 +50,33 @@ Certainly that scoundrel Bob Bogus
 .Pf ( Mt bogus@example.com )
 played no role.'
 
-output=$(echo "$input" | "$groff" -mdoc -Tascii -P-cbou)
+output=$(echo "$input" | "$groff" -rU0 -mdoc -Tascii -P-cbou)
 echo "$output"
 
-echo "checking that conventional Mt macro call works" >&2
+echo "checking that conventional Mt macro call works (-rU0)" >&2
 echo "$output" \
     | grep -Eq '^ +kristaps@bsd\.lv,' || wail
 
-echo "checking that inline Mt macro call works" >&2
+echo "checking that inline Mt macro call works (-rU0)" >&2
 echo "$output" \
     | grep -Eq 'Schwarze +<schwarze@openbsd\.org>' || wail
 
-echo "checking that prefixed Mt macro call works" >&2
+echo "checking that prefixed Mt macro call works (-rU0)" >&2
+echo "$output" \
+    | grep -Fq 'Bogus (bogus@example.com) played' || wail
+
+output=$(echo "$input" | "$groff" -rU1 -mdoc -Tascii -P-cbou)
+echo "$output"
+
+echo "checking that conventional Mt macro call works (-rU1)" >&2
+echo "$output" \
+    | grep -Eq '^ +kristaps@bsd\.lv,' || wail
+
+echo "checking that inline Mt macro call works (-rU1)" >&2
+echo "$output" \
+    | grep -Eq 'Schwarze +<schwarze@openbsd\.org>' || wail
+
+echo "checking that prefixed Mt macro call works (-rU1)" >&2
 echo "$output" \
     | grep -Fq 'Bogus (bogus@example.com) played' || wail
 

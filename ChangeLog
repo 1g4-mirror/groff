@@ -1,5 +1,63 @@
 2024-02-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Implement hyperlink support.
+
+	* tmac/doc.tmac: Recognize `U` register as man(7) does to enable
+	hyperlinking, defaulting on.
+	(doc-begin-hyperlink-ascii):
+	(doc-begin-hyperlink-cp1047):
+	(doc-begin-hyperlink-latin1):
+	(doc-begin-hyperlink-utf8):
+	(doc-begin-hyperlink-html):
+	(doc-begin-hyperlink-pdf):
+	(doc-end-hyperlink-ascii):
+	(doc-end-hyperlink-cp1047):
+	(doc-end-hyperlink-latin1):
+	(doc-end-hyperlink-utf8):
+	(doc-end-hyperlink-html):
+	(doc-end-hyperlink-pdf): New macros produce appropriate device
+	control commands to start and stop hyperlinking of formatted
+	text.
+	(doc-begin-hyperlink-nop):
+	(doc-end-hyperlink-nop): New do-nothing macros handle
+	user-driven hyperlink disablement and devices lacking hyperlink
+	support.  Create aliases for the "X100", "X100-12", "X75",
+	"X75-12", "dvi", "lbp", "lj4", and "ps" devices corresponding to
+	these.
+	(doc-Xr-usage, doc-Mt-usage, doc-Lk-usage): New macros eliminate
+	repeated logic to emit usage messages.
+	(Xr): Heavily rewrite to support production of hyperlinked
+	argument text.  In mdoc, there appears to be no mechanism to
+	inject macro calls later in the argument stream.  To correctly
+	place a `doc*end-hyperlink` call, we must parse (optional)
+	arguments ourselves until we have seen enough to know we've
+	reached the end of the link text (an inline macro call,
+	punctuation, or the end of the input line).  Throw usage
+	diagnostic in more cases of bad input.
+	(Mt): Include "mailto:" schema in generated hyperlink but not in
+	visible link text.
+	(Mt, Lk): Call device-appropriate `doc-{begin,end}-hyperlink`
+	macros.
+	(Lk): Hyperlink argument only if it is a "string" (mdoc parlance
+	for formattable text as opposed to a macro name or punctuation).
+	Format link text as groff man(7) does, not like mandoc(1) does,
+	with its "link-text: <url>" presentation.
+	* tmac/mdoc.local: Add commented code illustrating how to
+	disable hyperlinking.
+
+	* tmac/tests/doc_Lk-respects-sentence-ending-punctuation.sh:
+	* tmac/tests/doc_Lk-works.sh:
+	* tmac/tests/doc_Mt-works.sh:
+	* tmac/tests/doc_Xr-works.sh:
+	* tmac/tests/doc_heading-font-remapping-works.sh: Update test
+	expectations and check output when hyperlink output enabled and
+	disabled.
+
+	* NEWS:
+	* tmac/groff_mdoc.7.man (Options): Document it.
+
+2024-02-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/doc_Xr-works.sh: Add checks of inline `Pf` and `Ns`
 	call behavior after `Xr`.
 

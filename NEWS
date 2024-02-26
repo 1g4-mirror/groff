@@ -118,9 +118,9 @@ o The device-specific macro files loaded by "troffrc" automatically on
   grolbp(1).
 
 o Hyperlink support is now enabled by default on non-HTML devices that
-  support it (PDF and terminal devices) for an (man) documents.
-  Instructions and commented code for disabling it remain in the
-  "man.local" file.
+  support it (PDF and terminal devices) for an (man) and doc (mdoc)
+  documents.  Instructions and commented code for disabling it are in
+  the "man.local" and "mdoc.local" files.
 
 o The an (man) package now supports use of its hyperlink macros (`UR`,
   `UE`, `MT`, and `ME`) as paragraph tags (that is, on the next line
@@ -175,6 +175,10 @@ o The doc (mdoc) macro package's `Mt` macro now sets its argument in
   roman, not italics (or whatever the string `doc-Pa-font` was
   configured to use).  A new string, `doc-Mt-font`, for use in
   "mdoc.local" files and similar, supports configuration of this face.
+
+o The doc (mdoc) macro package's `Lk`, `Mt`, and `Xr` macros now produce
+  hyperlinks on HTML, PDF, and terminal devices.  See above regarding
+  hyperlink support being enabled by default.
 
 o The new macro file "koi8-r.tmac" supports the KOI8-R character
   encoding, which supports the new Russian locale for groff.

@@ -43,27 +43,47 @@ and you get
 Follow instructions
 .Pf ( Lk http://\:hidden\:.example\:.com elsewhere ) .'
 
-output=$(echo "$input" | "$groff" -mdoc -Tascii -P-cbou)
+output=$(echo "$input" | "$groff" -rU0 -mdoc -Tascii -P-cbou)
 echo "$output"
 
 # Expected:
-#     Sometimes   you   click   one   link:   http://example.com   and   you  get
+#     Sometimes   you   click   one   link   <http://example.com>   and  you  get
 #     http://another.example.com.
 #
-#     Follow instructions (elsewhere: http://hidden.example.com).
+#     Follow instructions (elsewhere <http://hidden.example.com>).
 
-echo "checking that conventional Lk macro call works" >&2
+echo "checking that conventional Lk macro call works (-rU0)" >&2
 echo "$output" \
     | grep -Eq '^ +http://another\.example\.com' || wail
 
-echo "checking that inline Lk macro call works" >&2
+echo "checking that inline Lk macro call works (-rU0)" >&2
 echo "$output" \
-    | grep -Eq 'one +link: +http://example\.com' || wail
+    | grep -Eq 'one +link +<http://example\.com>' || wail
 
-echo "checking that prefixed Lk macro call works" >&2
+echo "checking that prefixed Lk macro call works (-rU0)" >&2
 echo "$output" \
-    | grep -Fq 'instructions (elsewhere: http://hidden.example.com).' \
+    | grep -Fq 'instructions (elsewhere <http://hidden.example.com>).' \
     || wail
+
+output=$(echo "$input" | "$groff" -rU1 -mdoc -Tascii -P-cbou)
+echo "$output"
+
+# Expected:
+#     Sometimes you click one link and you get http://another.example.com.
+#
+#     Follow instructions (elsewhere).
+
+echo "checking that conventional Lk macro call works (-rU1)" >&2
+echo "$output" \
+    | grep -q 'Sometimes you click one link and' || wail
+
+echo "checking that inline Lk macro call works (-rU1)" >&2
+echo "$output" \
+    | grep -Fq 'you get http://another.example.com.' || wail
+
+echo "checking that prefixed Lk macro call works (-rU1)" >&2
+echo "$output" \
+    | grep -Fq 'Follow instructions (elsewhere).' || wail
 
 test -z "$fail"
 
