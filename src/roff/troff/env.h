@@ -285,7 +285,7 @@ public:
   int get_numbering_nodes();		// .nm
   font_family *get_family() { return family; }
   int get_bold();			// .b
-  int get_adjust_mode();		// .j
+  unsigned get_adjust_mode();		// .j
   int get_fill();			// .u
   hunits get_indent();			// .i
   hunits get_temporary_indent();
@@ -308,7 +308,7 @@ public:
   hunits get_input_line_position();
   const char *get_tabs();
   int get_line_tabs();
-  int get_hyphenation_mode();
+  unsigned get_hyphenation_mode();
   int get_hyphen_line_max();
   int get_hyphen_line_count();
   hunits get_hyphenation_space();

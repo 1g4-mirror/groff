@@ -1,5 +1,17 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp:
+	* src/roff/troff/env.h:
+	(environment::get_adjust_mode):
+	(environment::get_hyphenation_mode): Migrate report of these
+	quantities to use "unsigned int" type instead of a signed type;
+	this is more consistent with their internal storage, more
+	appropriate given their use as bit vectors, and more
+	future-proof in the event their meaningful values ever carry
+	them close to the sign bit (let's hope not).
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Add support for read-only numeric
 	registers backed by unsigned integer values.  Define new type
 	alias `UNSIGNED_FUNCP`.  Define new C++ prepreprocessor macro

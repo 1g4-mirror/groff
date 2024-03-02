@@ -397,7 +397,7 @@ void environment::add_hyphen_indicator()
   line = line->add_discretionary_hyphen();
 }
 
-int environment::get_hyphenation_mode()
+unsigned environment::get_hyphenation_mode()
 {
   return hyphenation_mode;
 }
@@ -1027,7 +1027,7 @@ hunits environment::get_digit_width()
   return env_digit_width(this);
 }
 
-int environment::get_adjust_mode()
+unsigned environment::get_adjust_mode()
 {
   return adjust_mode;
 }
@@ -3558,7 +3558,7 @@ void init_env_requests()
   init_int_env_reg(".height", get_char_height);
   init_int_env_reg(".hlc", get_hyphen_line_count);
   init_int_env_reg(".hlm", get_hyphen_line_max);
-  init_int_env_reg(".hy", get_hyphenation_mode);
+  init_unsigned_env_reg(".hy", get_hyphenation_mode);
   init_hunits_env_reg(".hym", get_hyphenation_margin);
   init_hunits_env_reg(".hys", get_hyphenation_space);
   init_hunits_env_reg(".i", get_indent);
@@ -3569,7 +3569,7 @@ void init_env_requests()
   init_string_env_reg(".itm", get_input_trap_macro);
   init_int_env_reg(".linetabs", get_line_tabs);
   init_hunits_env_reg(".lt", get_title_length);
-  init_int_env_reg(".j", get_adjust_mode);
+  init_unsigned_env_reg(".j", get_adjust_mode);
   init_hunits_env_reg(".k", get_text_length);
   init_int_env_reg(".L", get_line_spacing);
   init_hunits_env_reg(".l", get_line_length);
