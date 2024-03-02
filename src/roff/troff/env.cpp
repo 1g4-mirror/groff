@@ -1739,7 +1739,7 @@ void hyphenate_request()
       curenv->hyphenation_mode = n;
   }
   else
-    curenv->hyphenation_mode = 1;
+    curenv->hyphenation_mode = curenv->hyphenation_mode_default;
   skip_line();
 }
 

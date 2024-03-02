@@ -1,5 +1,10 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (hyphenate_request): If given no
+	argument, set hyphenation mode to the configured default.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add new `hydefault` request.
 
 	* src/roff/troff/env.cpp (set_hyphenation_mode_default): New
