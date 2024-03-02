@@ -4147,7 +4147,7 @@ the environment.
 .
 .TP
 .B \[rs]n[.hy]
-Interpolate hyphenation mode of the environment.
+Interpolate automatic hyphenation mode of the environment.
 .
 .
 .TP
