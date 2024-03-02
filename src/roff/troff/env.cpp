@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2023 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -402,6 +402,11 @@ unsigned environment::get_hyphenation_mode()
   return hyphenation_mode;
 }
 
+unsigned environment::get_hyphenation_mode_default()
+{
+  return hyphenation_mode_default;
+}
+
 int environment::get_hyphen_line_max()
 {
   return hyphen_line_max;
@@ -730,6 +735,7 @@ environment::environment(symbol nm)
   line_number_multiple(1),
   no_number_count(0),
   hyphenation_mode(1),
+  hyphenation_mode_default(1),
   hyphen_line_count(0),
   hyphen_line_max(-1),
   hyphenation_space(H0),
@@ -823,6 +829,7 @@ environment::environment(const environment *e)
   line_number_multiple(e->line_number_multiple),
   no_number_count(e->no_number_count),
   hyphenation_mode(e->hyphenation_mode),
+  hyphenation_mode_default(e->hyphenation_mode_default),
   hyphen_line_count(0),
   hyphen_line_max(e->hyphen_line_max),
   hyphenation_space(e->hyphenation_space),
@@ -909,6 +916,7 @@ void environment::copy(const environment *e)
   tab_char = e->tab_char;
   leader_char = e->leader_char;
   hyphenation_mode = e->hyphenation_mode;
+  hyphenation_mode_default = e->hyphenation_mode_default;
   fontno = e->fontno;
   prev_fontno = e->prev_fontno;
   dummy = e->dummy;
@@ -3126,7 +3134,6 @@ class vunits_env_reg : public reg {
   bool get_value(units *val);
 };
 
-
 class hunits_env_reg : public reg {
   HUNITS_FUNCP func;
  public:
@@ -3452,6 +3459,8 @@ void environment::print_env()
   hf += '\0';
   errprint("  hyphenation mode: %1 (%2)\n", hyphenation_mode,
 	   hf.contents());
+  errprint("  hyphenation mode default: %1\n",
+	   hyphenation_mode_default);
   errprint("  number of consecutive hyphenated lines: %1\n",
 	   hyphen_line_count);
   errprint("  maximum number of consecutive hyphenated lines: %1\n",
@@ -3559,6 +3568,7 @@ void init_env_requests()
   init_int_env_reg(".hlc", get_hyphen_line_count);
   init_int_env_reg(".hlm", get_hyphen_line_max);
   init_unsigned_env_reg(".hy", get_hyphenation_mode);
+  init_unsigned_env_reg(".hydefault", get_hyphenation_mode_default);
   init_hunits_env_reg(".hym", get_hyphenation_margin);
   init_hunits_env_reg(".hys", get_hyphenation_space);
   init_hunits_env_reg(".i", get_indent);
@@ -4262,6 +4272,16 @@ public:
 const char *hyphenation_language_reg::get_string()
 {
   return current_language ? current_language->name.contents() : "";
+}
+
+class hyphenation_default_mode_reg : public reg {
+public:
+  const char *get_string();
+};
+
+const char *hyphenation_default_mode_reg::get_string()
+{
+  return i_to_a(curenv->get_hyphenation_mode_default());
 }
 
 void init_hyphen_requests()

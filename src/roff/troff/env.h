@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2023 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -212,6 +212,7 @@ class environment {
   int line_number_multiple;
   int no_number_count;
   unsigned hyphenation_mode;
+  unsigned hyphenation_mode_default;
   int hyphen_line_count;
   int hyphen_line_max;
   hunits hyphenation_space;
@@ -309,6 +310,7 @@ public:
   const char *get_tabs();
   int get_line_tabs();
   unsigned get_hyphenation_mode();
+  unsigned get_hyphenation_mode_default();
   int get_hyphen_line_max();
   int get_hyphen_line_count();
   hunits get_hyphenation_space();

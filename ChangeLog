@@ -1,5 +1,25 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add `.hydefault` read-only register storing the
+	environment's default hyphenation mode.
+
+	* src/roff/troff/env.h (class environment): Add private member
+	variable `hyphenation_mode_default` and declare public member
+	function (accessor) `get_hyphenation_mode_default`.
+	* src/roff/troff/env.cpp (environment::get_hyphenation_mode):
+	Implement.
+	(environment::environment): Initialize new member variable in
+	ordinary and copy constructors.
+	(environment::copy): Copy new member variable.
+	(environment::print_env): Report environment's hyphenation mode
+	default.
+	(init_env_requests): Wire up hyphenation mode default value to
+	`.hydefault` troff register.
+	(class hyphenation_default_mode_reg): Add class.
+	(hyphenation_default_mode_reg::get_string): Implement.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp:
 	* src/roff/troff/env.h:
 	(environment::get_adjust_mode):
