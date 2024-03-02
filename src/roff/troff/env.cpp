@@ -1743,6 +1743,29 @@ void hyphenate_request()
   skip_line();
 }
 
+void set_hyphenation_mode_default()
+{
+  if (!has_arg()) {
+    warning(WARN_MISSING, "hyphenation mode default setting request"
+	    " expects an argument");
+    skip_line();
+    return;
+  }
+  int n;
+  if (!get_integer(&n)) {
+    // get_integer() will throw a diagnostic if necessary.
+    skip_line();
+    return;
+  }
+  if (n < 0) {
+    warning(WARN_RANGE, "hyphenation mode default cannot be negative");
+    skip_line();
+    return;
+  }
+  curenv->hyphenation_mode_default = n;
+  skip_line();
+}
+
 void hyphen_char()
 {
   curenv->hyphen_indicator_char = get_optional_char();
@@ -4065,6 +4088,7 @@ void init_env_requests()
   init_request("hla", select_hyphenation_language);
   init_request("hlm", hyphen_line_max_request);
   init_request("hy", hyphenate_request);
+  init_request("hydefault", set_hyphenation_mode_default);
   init_request("hym", hyphenation_margin_request);
   init_request("hys", hyphenation_space_request);
   init_request("in", indent);

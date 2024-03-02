@@ -1,5 +1,15 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add new `hydefault` request.
+
+	* src/roff/troff/env.cpp (set_hyphenation_mode_default): New
+	function sets the environment's default hyphenation mode.
+	(init_env_requests): Wire up `hydefault` to foregoing function.
+	* src/roff/troff/env.h (class environment): Declare foregoing
+	function as a friend, permitting mutator access.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (init_env_requests): Set up `hla`
 	request and `.hla` register here, since they're
 	environment-specific...

@@ -390,6 +390,7 @@ public:
   friend void leader_character();
   friend void tab_character();
   friend void hyphenate_request();
+  friend void set_hyphenation_mode_default();
   friend void no_hyphenate();
   friend void hyphen_line_max_request();
   friend void hyphenation_space_request();
