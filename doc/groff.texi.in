@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle February 2024
+@subtitle March 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -16192,9 +16192,7 @@ for @code{pso} also.
 Identical to the @code{so} and @code{soquiet} requests, respectively,
 except that @command{gtroff} searches for the specified @var{file} in
 the same directories as macro files for the @option{-m} command-line
-option.  Unlike that option, @var{file} must be the file name as it
-appears in the file system; these requests do not add a @file{.tmac}
-suffix or @file{tmac.} prefix to locate @var{file}.
+option.
 @endDefreq
 
 @DefreqList {trf, file}

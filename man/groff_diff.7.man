@@ -3029,14 +3029,6 @@ and
 command-line option are
 (the \[lq]tmac path\[rq]).
 .
-If the file name to be interpolated has the form
-.IB name .tmac
-and it isn't found,
-.B mso
-tries to include
-.BI tmac. name
-instead and vice versa.
-.
 If
 .I file
 does not exist,

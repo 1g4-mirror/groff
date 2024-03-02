@@ -1,3 +1,20 @@
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: `mso` request no longer rewrites its argument to search
+	for a file other than that named in the argument.
+
+	* src/roff/troff/input.cpp (do_macro_source): Drop logic that
+	attempts to open a macro file named "tmac.s" if "s.tmac" was
+	specified in the argument and not found, or vice versa.
+
+	* NEWS:
+	* doc/groff.texi.in (I/O):
+	* man/groff_diff.7.man (New requests): Document it.
+
+	See
+	<https://lists.gnu.org/archive/html/groff/2024-02/msg00086.html>
+	and follow-ups.
+
 2024-02-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Implement hyperlink support.
@@ -2488,13 +2505,6 @@
 
 	Fixes <https://savannah.gnu.org/bugs/?64695>.  Thanks to
 	Alexander Kanavin for the report.
-
-2023-09-16  G. Branden Robinson <g.branden.robinson@gmail.com>
-
-	* doc/groff.texi (I/O) <mso, msoquiet>: Fix error.  These
-	requests do _not_ alter the argument in an attempt to locate
-	a file corresponding to it.  (That is, one says "groff -m trace"
-	but ".mso trace.tmac".)
 
 2023-09-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 

@@ -8133,31 +8133,6 @@ void do_macro_source(bool quietly)
       tok.next();
     char *path;
     FILE *fp = mac_path->open_file(nm.contents(), &path);
-    // .mso cannot go through open_mac_file, which handles the -m option
-    // and expects only an identifier like "s" or "an", not a file name.
-    // We need to do it here manually: If we have tmac.FOOBAR, try
-    // FOOBAR.tmac and vice versa.
-    if (!fp) {
-      const char *fn = nm.contents();
-      size_t fnlen = strlen(fn);
-      if (strncasecmp(fn, MACRO_PREFIX, sizeof(MACRO_PREFIX) - 1) == 0) {
-	char *s = new char[fnlen + sizeof(MACRO_POSTFIX)];
-	strcpy(s, fn + sizeof(MACRO_PREFIX) - 1);
-	strcat(s, MACRO_POSTFIX);
-	fp = mac_path->open_file(s, &path);
-	delete[] s;
-      }
-      if (!fp) {
-	if (strncasecmp(fn + fnlen - sizeof(MACRO_POSTFIX) + 1,
-			MACRO_POSTFIX, sizeof(MACRO_POSTFIX) - 1) == 0) {
-	  char *s = new char[fnlen + sizeof(MACRO_PREFIX)];
-	  strcpy(s, MACRO_PREFIX);
-	  strncat(s, fn, fnlen - sizeof(MACRO_POSTFIX) + 1);
-	  fp = mac_path->open_file(s, &path);
-	  delete[] s;
-	}
-      }
-    }
     if (fp) {
       input_stack::push(new file_iterator(fp, symbol(path).contents()));
       free(path);
