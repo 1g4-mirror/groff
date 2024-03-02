@@ -4238,11 +4238,11 @@ const char *hyphenation_language_reg::get_string()
 
 void init_hyphen_requests()
 {
-  init_request("hw", add_hyphenation_exceptions);
-  init_request("phw", print_hyphenation_exceptions);
   init_request("hla", select_hyphenation_language);
   init_request("hpf", load_hyphenation_patterns_from_file);
   init_request("hpfa", append_hyphenation_patterns_from_file);
+  init_request("hw", add_hyphenation_exceptions);
+  init_request("phw", print_hyphenation_exceptions);
   register_dictionary.define(".hla", new hyphenation_language_reg);
 }
 
