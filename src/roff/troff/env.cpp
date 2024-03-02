@@ -4062,6 +4062,7 @@ void init_env_requests()
   init_request("ft", select_font);
   init_request("gcolor", glyph_color_change);
   init_request("hc", hyphen_char);
+  init_request("hla", select_hyphenation_language);
   init_request("hlm", hyphen_line_max_request);
   init_request("hy", hyphenate_request);
   init_request("hym", hyphenation_margin_request);
@@ -4105,6 +4106,7 @@ void init_env_requests()
   init_string_env_reg(".fam", get_font_family_string);
   init_string_env_reg(".fn", get_font_name_string);
   init_int_env_reg(".height", get_char_height);
+  register_dictionary.define(".hla", new hyphenation_language_reg);
   init_int_env_reg(".hlc", get_hyphen_line_count);
   init_int_env_reg(".hlm", get_hyphen_line_max);
   init_unsigned_env_reg(".hy", get_hyphenation_mode);
@@ -4290,12 +4292,10 @@ static void append_hyphenation_patterns_from_file()
 // init_env_requests() above.
 void init_hyphenation_pattern_requests()
 {
-  init_request("hla", select_hyphenation_language);
   init_request("hpf", load_hyphenation_patterns_from_file);
   init_request("hpfa", append_hyphenation_patterns_from_file);
   init_request("hw", add_hyphenation_exceptions);
   init_request("phw", print_hyphenation_exceptions);
-  register_dictionary.define(".hla", new hyphenation_language_reg);
 }
 
 // Local Variables:

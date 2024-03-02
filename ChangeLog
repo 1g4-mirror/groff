@@ -1,5 +1,12 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (init_env_requests): Set up `hla`
+	request and `.hla` register here, since they're
+	environment-specific...
+	(init_hyphenation_pattern_requests): ...instead of here.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (init_hyphen_requests): Rename this...
 	(init_hyphenation_pattern_requests): ...to this.
 	* src/roff/troff/input.cpp (main): Update call site.
