@@ -1,5 +1,23 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tmac]: Migrate localization packages to `hydefault` request.
+
+	* tmac/cs.tmac:
+	* tmac/de.tmac:
+	* tmac/en.tmac:
+	* tmac/es.tmac:
+	* tmac/fr.tmac:
+	* tmac/it.tmac:
+	* tmac/ru.tmac:
+	* tmac/sv.tmac: Set the hyphenation mode default appropriately
+	per the hyphenation patterns and the value of the trap-awareness
+	bit.
+
+	* tmac/ja.tmac:
+	* tmac/zh.tmac: Set the hyphenation mode default to zero.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (hyphenate_request): If given no
 	argument, set hyphenation mode to the configured default.
 
