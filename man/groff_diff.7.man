@@ -3951,6 +3951,11 @@ New values 16 and\~32 are available;
 the former enables hyphenation before the last character in a word,
 and the latter enables hyphenation after the first character in a word.
 .
+If invoked without an argument,
+the mode configured by the
+.B hydefault
+request is selected.
+.
 .
 .TP
 .BI .ss\~ word-space-size\~\c
