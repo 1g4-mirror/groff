@@ -1,5 +1,27 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor (hyphenation flags->mode).
+
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (class environment):
+	- Rename `hyphenation_flags` to `hyphenation_mode`.
+	- Rename `get_hyphenation_flags` to `get_hyphenation_mode`.
+
+	* src/roff/troff/env.cpp (environment::get_hyphenation_flags):
+	Rename this...
+	(environment::get_hyphenation_mode): ...to this.
+
+	(environment::get_hyphenation_mode):
+	(environment::environment):
+	(environment::copy):
+	(no_hyphenate):
+	(environment::hyphenate_line):
+	(environment::print_env):
+	(init_env_requests): Update member function and variable
+	references.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: `mso` request no longer rewrites its argument to search
 	for a file other than that named in the argument.
 

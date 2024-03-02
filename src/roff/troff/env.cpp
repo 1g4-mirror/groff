@@ -397,9 +397,9 @@ void environment::add_hyphen_indicator()
   line = line->add_discretionary_hyphen();
 }
 
-int environment::get_hyphenation_flags()
+int environment::get_hyphenation_mode()
 {
-  return hyphenation_flags;
+  return hyphenation_mode;
 }
 
 int environment::get_hyphen_line_max()
@@ -729,7 +729,7 @@ environment::environment(symbol nm)
   line_number_indent(0),
   line_number_multiple(1),
   no_number_count(0),
-  hyphenation_flags(1),
+  hyphenation_mode(1),
   hyphen_line_count(0),
   hyphen_line_max(-1),
   hyphenation_space(H0),
@@ -822,7 +822,7 @@ environment::environment(const environment *e)
   line_number_indent(e->line_number_indent),
   line_number_multiple(e->line_number_multiple),
   no_number_count(e->no_number_count),
-  hyphenation_flags(e->hyphenation_flags),
+  hyphenation_mode(e->hyphenation_mode),
   hyphen_line_count(0),
   hyphen_line_max(e->hyphen_line_max),
   hyphenation_space(e->hyphenation_space),
@@ -908,7 +908,7 @@ void environment::copy(const environment *e)
   no_number_count = e->no_number_count;
   tab_char = e->tab_char;
   leader_char = e->leader_char;
-  hyphenation_flags = e->hyphenation_flags;
+  hyphenation_mode = e->hyphenation_mode;
   fontno = e->fontno;
   prev_fontno = e->prev_fontno;
   dummy = e->dummy;
@@ -1709,7 +1709,7 @@ void no_number()
 
 void no_hyphenate()
 {
-  curenv->hyphenation_flags = 0;
+  curenv->hyphenation_mode = 0;
   skip_line();
 }
 
@@ -1728,10 +1728,10 @@ void hyphenate_request()
       warning(WARN_SYNTAX, "contradictory hyphenation flags ignored: "
 	"%1", n);
     else
-      curenv->hyphenation_flags = n;
+      curenv->hyphenation_mode = n;
   }
   else
-    curenv->hyphenation_flags = 1;
+    curenv->hyphenation_mode = 1;
   skip_line();
 }
 
@@ -2094,18 +2094,18 @@ void environment::hyphenate_line(int start_here)
       prev_code = h->hyphenation_code;
     }
   }
-  if (hyphenation_flags != 0
+  if (hyphenation_mode != 0
       && !inhibit
       // this may not be right if we have extra space on this line
-      && !((hyphenation_flags & HYPHEN_NOT_LAST_LINE)
+      && !((hyphenation_mode & HYPHEN_NOT_LAST_LINE)
 	   && (curdiv->distance_to_next_trap()
 	       <= vertical_spacing + total_post_vertical_spacing()))
       && i >= (4
-	       - (hyphenation_flags & HYPHEN_FIRST_CHAR ? 1 : 0)
-	       - (hyphenation_flags & HYPHEN_LAST_CHAR ? 1 : 0)
-	       + (hyphenation_flags & HYPHEN_NOT_FIRST_CHARS ? 1 : 0)
-	       + (hyphenation_flags & HYPHEN_NOT_LAST_CHARS ? 1 : 0)))
-    hyphenate(sl, hyphenation_flags);
+	       - (hyphenation_mode & HYPHEN_FIRST_CHAR ? 1 : 0)
+	       - (hyphenation_mode & HYPHEN_LAST_CHAR ? 1 : 0)
+	       + (hyphenation_mode & HYPHEN_NOT_FIRST_CHARS ? 1 : 0)
+	       + (hyphenation_mode & HYPHEN_NOT_LAST_CHARS ? 1 : 0)))
+    hyphenate(sl, hyphenation_mode);
   while (forward != 0) {
     node *tem1 = forward;
     forward = forward->next;
@@ -3414,19 +3414,19 @@ void environment::print_env()
 	     line_number_multiple > 1 ? "s" : "");
     errprint("  lines not to enumerate: %1\n", no_number_count);
   }
-  string hf = hyphenation_flags ? "on" : "off";
-  if (hyphenation_flags & HYPHEN_NOT_LAST_LINE)
+  string hf = hyphenation_mode ? "on" : "off";
+  if (hyphenation_mode & HYPHEN_NOT_LAST_LINE)
     hf += ", not last line";
-  if (hyphenation_flags & HYPHEN_LAST_CHAR)
+  if (hyphenation_mode & HYPHEN_LAST_CHAR)
     hf += ", last char";
-  if (hyphenation_flags & HYPHEN_NOT_LAST_CHARS)
+  if (hyphenation_mode & HYPHEN_NOT_LAST_CHARS)
     hf += ", not last two chars";
-  if (hyphenation_flags & HYPHEN_FIRST_CHAR)
+  if (hyphenation_mode & HYPHEN_FIRST_CHAR)
     hf += ", first char";
-  if (hyphenation_flags & HYPHEN_NOT_FIRST_CHARS)
+  if (hyphenation_mode & HYPHEN_NOT_FIRST_CHARS)
     hf += ", not first two chars";
   hf += '\0';
-  errprint("  hyphenation_flags: %1\n", hf.contents());
+  errprint("  hyphenation_mode: %1\n", hf.contents());
   errprint("  number of consecutive hyphenated lines: %1\n",
 	   hyphen_line_count);
   errprint("  maximum number of consecutive hyphenated lines: %1\n",
@@ -3530,7 +3530,7 @@ void init_env_requests()
   init_int_env_reg(".height", get_char_height);
   init_int_env_reg(".hlc", get_hyphen_line_count);
   init_int_env_reg(".hlm", get_hyphen_line_max);
-  init_int_env_reg(".hy", get_hyphenation_flags);
+  init_int_env_reg(".hy", get_hyphenation_mode);
   init_hunits_env_reg(".hym", get_hyphenation_margin);
   init_hunits_env_reg(".hys", get_hyphenation_space);
   init_hunits_env_reg(".i", get_indent);
