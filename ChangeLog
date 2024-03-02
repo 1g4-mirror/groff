@@ -670,6 +670,9 @@
 
 	* src/devices/gropdf/gropdf.pl: minor fixes
 
+	Fixes <https://savannah.gnu.org/bugs/?64060> (pdfmom needs
+	`--help` option).
+
 2024-01-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[grog]: Fix Savannah #65227.
