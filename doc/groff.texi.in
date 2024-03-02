@@ -8694,11 +8694,12 @@ additional inter-word space (@code{hys}).
 @DefreqList {hy, [@Var{mode}]}
 @DefregListEndx {.hy}
 Set automatic hyphenation mode to @var{mode}, an integer encoding
-conditions for hyphenation; if omitted, @samp{1} is implied.  The
-hyphenation mode is available in the read-only register @samp{.hy}; it
-is associated with the environment (@pxref{Environments}).  The default
-hyphenation mode depends on the localization file loaded when GNU
-@code{troff} starts up; see the @code{hpf} request below.
+conditions for hyphenation; if omitted, the configured hyphenation mode
+default (see below) is implied.  The hyphenation mode is available in
+the read-only register @samp{.hy}; it is associated with the environment
+(@pxref{Environments}).  The default hyphenation mode depends on the
+localization file loaded when GNU @code{troff} starts up; see the
+@code{hpf} request below.
 
 Typesetting practice generally does not avail itself of every
 opportunity for hyphenation, but the details differ by language and site
@@ -8823,7 +8824,19 @@ given by @code{hy}.
 @Defreq {nh, }
 Disable automatic hyphenation; i.e., set the hyphenation mode to@tie{}0
 (see above).  The hyphenation mode of the last call to @code{hy} is not
-remembered.
+remembered, but invoking @code{hy} without an argument restores the
+default hyphenation mode if it is configured; @code{groff}'s
+localization macro files do so for the languages listed above.
+@endDefreq
+
+@cindex hyphenation mode default register (@code{.hydefault})
+@DefreqList {hydefault, [@Var{mode}]}
+@DefregListEndx {.hydefault}
+Set hyphenation mode default to @var{mode}, configuring the value the
+automatic hyphenation mode takes if @code{hy} is invoked without an
+argument.  The hyphenation mode default is available in the read-only
+register @samp{.hydefault}; it is associated with the environment
+(@pxref{Environments}).
 @endDefreq
 
 @need 200
@@ -17694,7 +17707,11 @@ hard-coded rules specific to English, while GNU @code{troff} uses
 language-specific hyphenation pattern files derived from @TeX{}.
 Furthermore, in old versions of @code{troff} there was a limited amount
 of space to store hyphenation exceptions (arguments to the @code{hw}
-request); GNU @code{troff} has no such restriction.
+request); GNU @code{troff} has no such restriction.  When the @code{hy}
+request is invoked without an argument, GNU @code{troff} sets the
+automatic hyphenation mode to the value of the @code{.hydefault}
+register; the @acronym{AT&T} implementation sets it to @samp{1}, which
+is not suitable for some languages, including English.
 
 @cindex output device name string (@code{.T}), in other implementations
 GNU @code{troff} predefines a string @code{.T} containing the argument

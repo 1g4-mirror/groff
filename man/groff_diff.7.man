@@ -2881,6 +2881,17 @@ which map to those for \[lq]a\[rq] to \[lq]z\[rq].
 .
 .
 .TP
+.BI .hydefault\~ mode
+Set hyphenation mode default to
+.I mode.
+.
+When the
+.B hy
+request is invoked without an argument,
+this mode is selected.
+.
+.
+.TP
 .BR .hym\~ [\c
 .IR length ]
 Set the (right) hyphenation margin
@@ -4148,6 +4159,11 @@ the environment.
 .TP
 .B \[rs]n[.hy]
 Interpolate automatic hyphenation mode of the environment.
+.
+.
+.TP
+.B \[rs]n[.hydefault]
+Interpolate hyphenation mode default of the environment.
 .
 .
 .TP

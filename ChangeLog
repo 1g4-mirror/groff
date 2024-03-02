@@ -1,5 +1,14 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* NEWS:
+	* doc/groff.texi.in:
+	* man/groff.7.man:
+	* man/groff_diff.7.man: Document new `hydefault` feature.
+
+	Fixes <https://savannah.gnu.org/bugs/?63635>.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tmac]: Migrate localization packages to `hydefault` request.
 
 	* tmac/cs.tmac:

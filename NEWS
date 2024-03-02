@@ -39,6 +39,23 @@ o The device-independent output now reports unbreakable spaces (those
   produced with the `\~` escape sequence) as word breaks with the
   documentary 'w' command, just as it does for regular breakable spaces.
 
+o A new request, `hydefault`, and read-only register, `.hydefault`,
+  manage the default automatic hyphenation mode of an environment.  This
+  resolves a long-standing problem of *roff formatting.
+
+    When processing input like this,
+    .nh
+    and we temporarily shut off automatic hyphenation,
+    .hy
+    the foregoing request does not do exactly what we expect.
+
+  AT&T and other troffs would set the hyphenation mode to 1 instead of
+  the previous value, nor, for GNU troff, was this an appropriate value
+  for the English hyphenation patterns.  (For example, "alibi" would
+  break as "ali-bi" instead of "al-ibi" after this argumentless `hy`
+  invocation.)  With updates to groff's localization files, the
+  foregoing input now works as desired.
+
 o A new read-only, string-valued register, `.trap`, interpolates the
   name of the next vertical position trap that will be sprung.
 
@@ -239,6 +256,9 @@ o Russian language input documents using the KOI8-R encoding are now
 o Spanish language input documents are now supported, including
   hyphenation patterns from the hyph-utf8 project and localized strings
   for the man, ms, me, mm, and mom packages.  Thanks to Eloi Montañés.
+
+o The localization macro files now set up an appropriate hyphenation
+  mode default.  For Chinese and Japanese, this is zero.
 
 o If groff programs have their current time overridden by the
   SOURCE_DATE_EPOCH environment variable, then that time is always
