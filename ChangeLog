@@ -1,5 +1,12 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (init_hyphen_requests): Rename this...
+	(init_hyphenation_pattern_requests): ...to this.
+	* src/roff/troff/input.cpp (main): Update call site.
+	* src/roff/troff/request.h: Update declaration.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add `.hydefault` read-only register storing the
 	environment's default hyphenation mode.
 

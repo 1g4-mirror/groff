@@ -4044,6 +4044,8 @@ const char *hyphenation_default_mode_reg::get_string()
 #define init_string_env_reg(name, func) \
   register_dictionary.define(name, new string_env_reg(&environment::func))
 
+// Most hyphenation functionality is environment-specific; see
+// init_hyphenation_pattern_requests() below for globally managed state.
 void init_env_requests()
 {
   init_request("ad", adjust);
@@ -4284,7 +4286,9 @@ static void append_hyphenation_patterns_from_file()
   read_hyphenation_patterns_from_file(true /* append */);
 }
 
-void init_hyphen_requests()
+// Most hyphenation functionality is environment-specific; see
+// init_env_requests() above.
+void init_hyphenation_pattern_requests()
 {
   init_request("hla", select_hyphenation_language);
   init_request("hpf", load_hyphenation_patterns_from_file);

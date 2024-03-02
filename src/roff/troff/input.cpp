@@ -8486,7 +8486,7 @@ int main(int argc, char **argv)
   register_dictionary.define(".T", new readonly_text_register(tflag ? "1" : "0"));
   init_registers();
   init_reg_requests();
-  init_hyphen_requests();
+  init_hyphenation_pattern_requests();
   init_environments();
   while (string_assignments) {
     do_string_assignment(string_assignments->s);
