@@ -79,19 +79,19 @@ language reference
 .\" synopsis of a request
 .de REQ
 .  ie \\n[.$]=1 \{\
-.    Text \f[CB]\\$1\f[]
+.    Text \%\f[CB]\\$1\f[]
 .  \}
 .  el \{\
-.    Text \f[CB]\\$1\~\f[]\f[I]\\$2\f[]
+.    Text \%\f[CB]\\$1\~\f[]\f[I]\\$2\f[]
 .  \}
 ..
 .
 .\" reference of a request
 .de request
 .  ie (\\n[.$] < 2) \
-.    B \\$*
+.    B \%\\$*
 .  el \
-.    BR \\$*
+.    BR \%\\$*
 ..
 .
 .\" ========= numeric elements =========
@@ -221,7 +221,7 @@ language reference
 .
 .\" synopsis for registers, with \n[]
 .de REG
-.  Text \[rs]n[\f[CB]\\$1\f[]]
+.  Text \%\[rs]n[\f[CB]\\$1\f[]]
 ..
 .\" reference of a register, without decoration
 .de register
