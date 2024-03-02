@@ -569,7 +569,7 @@ create @code{nroff} and @code{troff}.  Document preparation became a
 widespread use of Unix, but no stand-alone word-processing system was
 ever undertaken.
 @end quotation
-@c https://minnie.tuhs.org/pipermail/tuhs/2022-March/025535.html
+@c https://www.tuhs.org/pipermail/tuhs/2022-March/025535.html
 
 A history relating @code{groff} to its forerunners @code{roff},
 @code{nroff}, and @code{troff} is available in @cite{roff@r{(7)}}.
@@ -812,7 +812,7 @@ output stream and does not necessarily mean that an error has
 occurred.@footnote{Unix and related operating systems distinguish
 standard output and standard error streams @emph{because} of
 @code{troff}:@:
-@uref{https://minnie.tuhs.org/pipermail/tuhs/2013-December/006113.html}.}
+@uref{https://www.tuhs.org/pipermail/tuhs/2013-December/006113.html}.}
 
 @Example
 $ echo "Twelve o'clock and" | groff -T ascii | sed '/^$/d'
@@ -16962,7 +16962,7 @@ restore tokens are removed.
 @slanted{Standard troff voodoo, just put a power of two backslashes in
 front of it until it works and if you still have problems add a \c.}
 --- Ron Natalie
-@c https://minnie.tuhs.org/pipermail/tuhs/2021-February/023137.html
+@c https://www.tuhs.org/pipermail/tuhs/2021-February/023137.html
 @end flushright
 
 GNU @code{troff} is not the easiest language to debug, in part thanks to
