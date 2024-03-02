@@ -3426,7 +3426,8 @@ void environment::print_env()
   if (hyphenation_mode & HYPHEN_NOT_FIRST_CHARS)
     hf += ", not first two chars";
   hf += '\0';
-  errprint("  hyphenation_mode: %1\n", hf.contents());
+  errprint("  hyphenation mode: %1 (%2)\n", hyphenation_mode,
+	   hf.contents());
   errprint("  number of consecutive hyphenated lines: %1\n",
 	   hyphen_line_count);
   errprint("  maximum number of consecutive hyphenated lines: %1\n",

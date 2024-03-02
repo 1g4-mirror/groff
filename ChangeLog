@@ -1,5 +1,10 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::print_env): Report
+	environment's numeric hyphenation mode, not just its meaning.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor (hyphenation flags->mode).
 
 	* src/roff/troff/env.h (class environment):
