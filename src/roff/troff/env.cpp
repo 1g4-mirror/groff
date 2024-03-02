@@ -3097,6 +3097,7 @@ void environment::add_padding()
 }
 
 typedef int (environment::*INT_FUNCP)();
+typedef unsigned (environment::*UNSIGNED_FUNCP)();
 typedef vunits (environment::*VUNITS_FUNCP)();
 typedef hunits (environment::*HUNITS_FUNCP)();
 typedef const char *(environment::*STRING_FUNCP)();
@@ -3107,6 +3108,14 @@ class int_env_reg : public reg {
   int_env_reg(INT_FUNCP);
   const char *get_string();
   bool get_value(units *val);
+};
+
+class unsigned_env_reg : public reg {
+  UNSIGNED_FUNCP func;
+ public:
+  unsigned_env_reg(UNSIGNED_FUNCP);
+  const char *get_string();
+  bool get_value(unsigned *val);
 };
 
 class vunits_env_reg : public reg {
@@ -3146,6 +3155,21 @@ bool int_env_reg::get_value(units *val)
 const char *int_env_reg::get_string()
 {
   return i_to_a((curenv->*func)());
+}
+
+unsigned_env_reg::unsigned_env_reg(UNSIGNED_FUNCP f) : func(f)
+{
+}
+
+bool unsigned_env_reg::get_value(unsigned *val)
+{
+  *val = (curenv->*func)();
+  return true;
+}
+
+const char *unsigned_env_reg::get_string()
+{
+  return ui_to_a((curenv->*func)());
 }
 
 vunits_env_reg::vunits_env_reg(VUNITS_FUNCP f) : func(f)
@@ -3460,6 +3484,9 @@ void print_env()
 
 #define init_int_env_reg(name, func) \
   register_dictionary.define(name, new int_env_reg(&environment::func))
+
+#define init_unsigned_env_reg(name, func) \
+  register_dictionary.define(name, new unsigned_env_reg(&environment::func))
 
 #define init_vunits_env_reg(name, func) \
   register_dictionary.define(name, new vunits_env_reg(&environment::func))

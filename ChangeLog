@@ -1,5 +1,17 @@
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Add support for read-only numeric
+	registers backed by unsigned integer values.  Define new type
+	alias `UNSIGNED_FUNCP`.  Define new C++ prepreprocessor macro
+	`init_unsigned_env_reg`, paralleling `init_int_env_reg`.
+	(class unsigned_env_reg): Add new class; just like `int_env_reg`
+	except it's for use with "unsigned int" member variables.
+	(unsigned_env_reg::unsigned_env_reg)
+	(unsigned_env_reg::get_value)
+	(unsigned_env_reg::get_string): Implement.
+
+2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::print_env): Report
 	environment's numeric hyphenation mode, not just its meaning.
 
