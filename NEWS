@@ -47,10 +47,10 @@ o A new request, `hydefault`, and read-only register, `.hydefault`,
     .nh
     and we temporarily shut off automatic hyphenation,
     .hy
-    the foregoing request does not do exactly what we expect.
+    the foregoing request would not do exactly what we expect.
 
   AT&T and other troffs would set the hyphenation mode to 1 instead of
-  the previous value, nor, for GNU troff, was this an appropriate value
+  the previous value; for GNU troff this was not an appropriate value
   for the English hyphenation patterns.  (For example, "alibi" would
   break as "ali-bi" instead of "al-ibi" after this argumentless `hy`
   invocation.)  With updates to groff's localization files, the
