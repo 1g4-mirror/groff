@@ -253,20 +253,20 @@ am solely responsible for any bugs I may have introduced into this file.
 .      ie '\\*[pdf:href-T]'' .ds PDFBOOKMARK.NAME pdf:bm\\n[pdf:bm.nr]
 .      el .ds PDFBOOKMARK.NAME \\*[pdf:href-T]
 .      pdf:href.sety
-.         ds pdf:cleaned \\$*
-.         ev pdfcln
-.         tr \[em]-
-.         nf
-.         box pdf:clean
-.         nop \\$*
-.         fl
-.         box
-.         chop pdf:clean
-.         asciify pdf:clean
-.         ds pdf:cleaned \\*[pdf:clean]
-.         rm pdf:clean
-.         ev
-.         tr \[em]\[em]
+.      ds pdf:cleaned \\$*
+.      ev pdfcln
+.      tr \[em]-
+.      nf
+.      box pdf:clean
+.      nop \\$*
+.      fl
+.      box
+.      chop pdf:clean
+.      asciify pdf:clean
+.      ds pdf:cleaned \\*[pdf:clean]
+.      rm pdf:clean
+.      ev
+.      tr \[em]\[em]
 .      ds pdf:look(\\*[PDFBOOKMARK.NAME]) \\*[pdf:cleaned]
 .      if dPDF.EXPORT .tm .ds pdf:look(\\*[PDFBOOKMARK.NAME]) \\*[pdf:cleaned]
 .      pdfmark /Dest /\\*[PDFBOOKMARK.NAME] /View [\\*[PDFBOOKMARK.VIEW]] /DEST
@@ -288,21 +288,21 @@ am solely responsible for any bugs I may have introduced into this file.
 ..
 .
 .de pdfclean
-.  ie '\\n(.z'' \{\
-.         ds pdfcleaned \\$*
-.         ev pdfcln
-.         tr \[em]-
-.         nf
-.         box pdf:clean
-.         nop \\*[\\*[pdfcleaned]]
-.         fl
-.         box
-.         chop pdf:clean
-.         asciify pdf:clean
-.         ev
-.         ds \\*[pdfcleaned] "\\*[pdf:clean]
-.         rm pdf:clean
-.         tr \[em]\[em]
+.   ie '\\n(.z'' \{\
+.      ds pdfcleaned \\$*
+.      ev pdfcln
+.      tr \[em]-
+.      nf
+.      box pdf:clean
+.      nop \\*[\\*[pdfcleaned]]
+.      fl
+.      box
+.      chop pdf:clean
+.      asciify pdf:clean
+.      ev
+.      ds \\*[pdfcleaned] "\\*[pdf:clean]
+.      rm pdf:clean
+.      tr \[em]\[em]
 .  el .nop \!.pdfclean \\$@
 ..
 .\"
