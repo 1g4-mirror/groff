@@ -1,3 +1,19 @@
+2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Improve encoding of *roff string contents when
+	interpolated into device control escape sequences.
+
+	* src/roff/troff/input.cpp (encode_char_for_troff_output):
+	Discard several escape sequences from `\X` contents when
+	interpolated: `\%`, `\:`, `\&`, `\)`.  Interpolate the escape
+	character into device-independent output as `\` no matter what
+	the *roff escape character is defined to be.
+
+	* src/roff/groff/tests/\
+	device-control-special-character-handling.sh: Update test
+	expectations.  Comment out some tests that depended on a
+	reverted commit of a half-baked idea.  (See Savannah #64484.)
+
 2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Add experimental feature to support increasing

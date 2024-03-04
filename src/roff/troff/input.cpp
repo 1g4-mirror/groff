@@ -5616,12 +5616,20 @@ static node *do_non_interpreted()
   return new non_interpreted_node(mac);
 }
 
+// In troff output, we translate the escape character to '\', but it is
+// up to the postprocessor to interpret it as such.  (This mostly
+// matters for device control commands.)
 static void encode_char_for_troff_output(macro *mac, const char c)
 {
   if ('\0' == c) {
     if (tok.is_stretchable_space()
 	     || tok.is_unstretchable_space())
       mac->append(' ');
+    else if ((tok.is_hyphen_indicator())
+	     || tok.is_zero_width_break()
+	     || tok.is_dummy()
+	     || tok.is_transparent_dummy())
+      /* do nothing */;
     else if (tok.is_special()) {
       const char *sc;
       if (font::use_charnames_in_special) {
@@ -5665,21 +5673,15 @@ static void encode_char_for_troff_output(macro *mac, const char c)
 		" control escape sequence", sc);
       }
     }
-    else if (tok.is_hyphen_indicator()
-	       || tok.is_dummy()
-	       || tok.is_transparent_dummy()
-	       || tok.is_zero_width_break())
+    else
       error("%1 is invalid within device control escape sequence",
 	    tok.description());
   }
   else {
-    if ((font::use_charnames_in_special) && ('\\' == c)) {
-      /*
-       * add escape escape sequence
-       */
+    if (c == escape_char)
+      mac->append('\\');
+    else
       mac->append(c);
-    }
-    mac->append(c);
   }
 }
 
