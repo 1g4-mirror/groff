@@ -84,23 +84,6 @@ o The read-only registers `.m` and `.M` now interpolate "default" when
   the default color is selected as the stroke or fill color,
   respectively, rather than interpolating nothing.
 
-o The `device` request no longer reads its arguments in copy mode; this
-  change makes it more consistent with the `\X` device control command
-  escape sequence.
-
-o The `device` request and `\X` escape sequence no longer emit a
-  self-quoted *roff escape character as itself, but instead as a
-  backslash, because troff's input and output languges are not the same
-  thing, and to avoid the need to extend the *roff output language to
-  support a configurable escape character.
-
-  This and the previous change are to enable postprocessors to reliably
-  interpret device control commands that wish to express arbitrary
-  character sequences (using whatever escaping convention they prefer)
-  without requiring different syntax for the arguments to the `device`
-  request and `\X` escape sequences.  For example, PDF bookmarks need to
-  be expressed in UTF-16LE.
-
 eqn
 ---
 

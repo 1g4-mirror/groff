@@ -1172,32 +1172,6 @@
 
 2024-01-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Fix Savannah #64484.
-
-	* src/roff/troff/input.cpp (encode_char_for_troff_output):
-	Annotate the function's purpose.  Initially assume the character
-	to be encoded as valid.  If the current token is a plain space,
-	write a space (U+0020) to the output.  (This is necessary
-	because the `device` request no longer reads its arguments in
-	copy mode; see below.)  Move the `sc` local variable to a higher
-	scope.  Update the new `is_char_valid` Boolean instead of
-	issuing an error diagnostic at each point of validation failure.
-	When done processing the character, test `is_char_valid` and
-	emit different diagnostics depending on whether the input was a
-	special character escape sequence we can't handle, or something
-	else.  Emit a self-quoted escape character _as a backslash_, not
-	as the current *roff escape character.
-	(device_request): Rewrite to operate in interpretation mode, not
-	copy mode.
-
-	* doc/groff.texi (Postprocessor Access):
-	* man/groff.7.man (Request short reference):
-	* NEWS: Document it.
-
-	Fixes <https://savannah.gnu.org/bugs/?64484>.
-
-2024-01-13  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/roff/groff/tests/\
 	device-control-special-character-handling.sh: Add unit test for
 	this feature.  We want to be able to consistently pass (some)

@@ -5616,19 +5616,14 @@ static node *do_non_interpreted()
   return new non_interpreted_node(mac);
 }
 
-// In troff output, we translate the escape character to '\', but it is
-// up to the postprocessor to interpret it as such.  (This mostly
-// matters for device control commands.)
 static void encode_char_for_troff_output(macro *mac, const char c)
 {
-  bool is_char_valid = true;
-  const char *sc = 0 /* nullptr */;
   if ('\0' == c) {
-    if (tok.is_space()
-	|| tok.is_stretchable_space()
-	|| tok.is_unstretchable_space())
+    if (tok.is_stretchable_space()
+	     || tok.is_unstretchable_space())
       mac->append(' ');
     else if (tok.is_special()) {
+      const char *sc;
       if (font::use_charnames_in_special) {
 	charinfo *ci = tok.get_char(true /* required */);
 	sc = ci->get_symbol()->contents();
@@ -5662,34 +5657,29 @@ static void encode_char_for_troff_output(macro *mac, const char c)
 	    mac->append(']');
 	  }
 	  else
-	    is_char_valid = false;
+	    error("special character '%1' cannot be used within a"
+	          " device control escape sequence", sc);
 	}
 	else
-	  is_char_valid = false;
+	  error("special character '%1' cannot be used within a device"
+		" control escape sequence", sc);
       }
     }
     else if (tok.is_hyphen_indicator()
 	       || tok.is_dummy()
 	       || tok.is_transparent_dummy()
 	       || tok.is_zero_width_break())
-      /* silently ignore */;
-    else
-      is_char_valid = false;
-    if (!is_char_valid) {
-      if (sc != 0 /* nullptr */)
-	error("special character '%1' is invalid within a device"
-	      " control command", sc);
-      else
-	error("%1 is invalid within a device control command",
-	      tok.description());
-    }
+      error("%1 is invalid within device control escape sequence",
+	    tok.description());
   }
   else {
-    if (c == escape_char) {
-      mac->append('\\');
-    }
-    else
+    if ((font::use_charnames_in_special) && ('\\' == c)) {
+      /*
+       * add escape escape sequence
+       */
       mac->append(c);
+    }
+    mac->append(c);
   }
 }
 
@@ -5733,28 +5723,34 @@ static node *do_special()
 
 static void device_request()
 {
-  if (!has_arg()) {
-    warning(WARN_MISSING, "device request expects arguments");
+  // We can't use `has_arg()` here because we want to read in copy mode.
+  int c;
+  for (;;) {
+    c = input_stack::peek();
+    if (' ' == c)
+      (void) get_copy(0 /* nullptr */);
+    else
+      break;
+  }
+  if (('\n' == c) || (EOF == c)) {
+    warning(WARN_MISSING, "device control request expects arguments");
     skip_line();
     return;
-  }
-  if (tok.is_newline() || tok.is_eof()) {
-    warning(WARN_MISSING, "device request expects arguments");
-    skip_line();
-    return;
-  }
-  if ('"' == tok.ch()) {
-    tok.next();
   }
   macro mac;
   for (;;) {
-    if (tok.is_newline() || tok.is_eof())
+    c = get_copy(0 /* nullptr */);
+    if ('"' == c) {
+      c = get_copy(0 /* nullptr */);
       break;
-    encode_char_for_troff_output(&mac, tok.ch());
-    tok.next();
+    }
+    if (c != ' ' && c != '\t')
+      break;
   }
+  for (; c != '\n' && c != EOF; c = get_copy(0 /* nullptr */))
+    mac.append(c);
   curenv->add_node(new special_node(mac));
-  skip_line();
+  tok.next();
 }
 
 static void device_macro_request()
