@@ -1,5 +1,9 @@
 2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac (pdf*href): Fix (harmless?) `ie`/`if` thinko.
+
+2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pdf]: Implement linear bookmark tag search.
 
 	* tmac/pdf.tmac (pdf:lookup): Given an argument, search defined
