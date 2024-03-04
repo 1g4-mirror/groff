@@ -8764,19 +8764,37 @@ together because they contradict; for instance, values 4 and@tie{}16,
 and values 8 and@tie{}32.  As noted, it is superfluous to add 1 to any
 non-zero even mode.
 
-@c TODO: Add @pindex for hyphenation pattern and exception files.
+@pindex hyphen.cs
+@pindex hyphen.den
+@pindex hyphen.det
+@pindex hyphen.en
+@pindex hyphen.es
+@pindex hyphen.fr
+@pindex hyphen.it
+@pindex hyphen.ru
+@pindex hyphen.sv
+@pindex hyphenex.cs
+@pindex hyphenex.en
+@pindex hyphenex.pl
 @cindex hyphenation pattern files
 @cindex pattern files, for hyphenation
 The automatic placement of hyphens in words is determined by
 @dfn{pattern files}, which are derived from @TeX{} and available for
-several languages.  The number of characters at the beginning of a word
-after which the first hyphenation point should be inserted is determined
-by the patterns themselves; it can't be reduced further without
-introducing additional, invalid hyphenation points (unfortunately, this
-information is not part of a pattern file---you have to know it in
-advance).  The same is true for the number of characters at the end of
-a word before the last hyphenation point should be inserted.  For
-example, you can supply the following input to @samp{echo $(nroff)}.
+several languages.  These files are named @file{hyphen.@var{xx}} (for
+the patterns) and @file{hyphenex.@var{xx}} (for a list of exceptions in
+languages that require them) where @var{xx} is an ISO@tie{}639 language
+code; see the table below.
+@c XXX: "den" and "det" aren't ISO 639 codes.  Is there a POSIX locale
+@c modifier for these variations, like de@alt and de@recht or similar?
+
+The number of characters at the beginning of a word after which the
+first hyphenation point should be inserted is determined by the patterns
+themselves; it can't be reduced further without introducing additional,
+invalid hyphenation points (unfortunately, this information is not part
+of a pattern file---you have to know it in advance).  The same is true
+for the number of characters at the end of a word before the last
+hyphenation point should be inserted.  For example, you can supply the
+following input to @samp{echo $(nroff)}.
 
 @Example
 .ll 1
