@@ -1,3 +1,7 @@
+2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/doc.tmac (Xr): Fix dead store to string.
+
 2024-03-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* NEWS:

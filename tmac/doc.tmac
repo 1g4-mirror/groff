@@ -4642,7 +4642,7 @@
 .  \" The first argument is a man page identifier.
 .  nr doc-arg-ptr +1
 .  ie (\n[doc-type\n[doc-arg-ptr]] == 2) \
-.    ds doc-target-Xr "\*[doc-arg\n[doc-arg-ptr]]
+.    ds doc-target-Xr \*[doc-Xr-font]\*[doc-arg\n[doc-arg-ptr]]\f[]
 .  el \{\
 .    doc-Xr-usage
 .    return
@@ -4667,8 +4667,6 @@
 .    if (\n[doc-type\n[doc-next-arg-ptr-Xr]] == 2) \
 .      nr doc-has-section-Xr 1
 .  \}
-.
-.  ds doc-target-Xr \*[doc-Xr-font]\*[doc-arg\n[doc-arg-ptr]]\f[]
 .
 .  ie \n[doc-has-section-Xr] \{\
 .    nr doc-section-arg-ptr-Xr (\n[doc-arg-ptr] + 1)
