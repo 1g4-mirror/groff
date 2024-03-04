@@ -2890,6 +2890,8 @@ When the
 request is invoked without an argument,
 this mode is selected.
 .
+The hyphenation mode default is associated with the environment.
+.
 .
 .TP
 .BR .hym\~ [\c

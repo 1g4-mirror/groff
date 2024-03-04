@@ -8697,9 +8697,10 @@ Set automatic hyphenation mode to @var{mode}, an integer encoding
 conditions for hyphenation; if omitted, the configured hyphenation mode
 default (see below) is implied.  The hyphenation mode is available in
 the read-only register @samp{.hy}; it is associated with the environment
-(@pxref{Environments}).  The default hyphenation mode depends on the
+(@pxref{Environments}).  The hyphenation mode default depends on the
 localization file loaded when GNU @code{troff} starts up; see the
-@code{hpf} request below.
+@code{hpf} request below.  If no localization file is loaded, the
+default is @samp{1}.
 
 Typesetting practice generally does not avail itself of every
 opportunity for hyphenation, but the details differ by language and site
@@ -8825,8 +8826,8 @@ given by @code{hy}.
 Disable automatic hyphenation; i.e., set the hyphenation mode to@tie{}0
 (see above).  The hyphenation mode of the last call to @code{hy} is not
 remembered, but invoking @code{hy} without an argument restores the
-default hyphenation mode if it is configured; @code{groff}'s
-localization macro files do so for the languages listed above.
+hyphenation mode default; @code{groff}'s localization macro files do so
+for the languages listed above.
 @endDefreq
 
 @cindex hyphenation mode default register (@code{.hydefault})
