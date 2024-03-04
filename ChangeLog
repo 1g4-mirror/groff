@@ -1,5 +1,37 @@
 2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pdf]: Implement linear bookmark tag search.
+
+	* tmac/pdf.tmac (pdf:lookup): Given an argument, search defined
+	bookmark tags for a match and return one (if found) in the
+	string `pdf:lookup-result`, which is defined but empty if there
+	is no match.  Previously (and, actually, still--see below),
+	lookups were O(1) because strings named `pdf:look($TAG_NAME)`
+	were defined.  The speed was great but unfortunately, in
+	practical use, tags often got *roff escape sequences stuck into
+	them, which drew diagnostic messages from the formatter and
+	could defeat the matches.
+	(pdfbookmark, pdf*href-M): Use the new mechanism to record a
+	bookmark tag if `PRINTSTYLE` (a mom(7) macro) is _not_ defined,
+	so as to not regress documents using that package.  Store the
+	tag text in the string `pdf:bm\\n[pdf:bm.nr].tag`; every PDF
+	bookmark in a groff document gets a serial number already.
+	(pdf*href): Use the new mechanism to call `pdf:lookup` and
+	locate a match for the desired tag.
+
+	* doc/GMPfront.t.in (an*cln): Delete this macro.  It iterated
+	through a string, scrubbing it of `\%` escape sequences.  Much
+	more exotic things could be placed in bookmark tags; we were
+	fortunate that man page cross references tend to stick to ASCII,
+	plus `\%` to suppress hyphenation.  But that's only suitable for
+	man page references; if we want taggable (sub)section headings,
+	like groff_mmse(7)'s "Se också", we need strings, not just valid
+	groff identifiers.
+	(an*bookmark): Populate `an*page-ref-nm` without cleaning it
+	first.
+
+2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/GMPfront.t.in: Resync `MR` replacement with its
 	counterpart in "an.tmac".
 
