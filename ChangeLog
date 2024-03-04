@@ -5,7 +5,7 @@
 	* tmac/pdf.tmac (pdf:lookup): Given an argument, search defined
 	bookmark tags for a match and return one (if found) in the
 	string `pdf:lookup-result`, which is defined but empty if there
-	is no match.  Previously (and, actually, still--see below),
+	is no match.  Previously (and, for mom(7), still--see below),
 	lookups were O(1) because strings named `pdf:look($TAG_NAME)`
 	were defined.  The speed was great but unfortunately, in
 	practical use, tags often got *roff escape sequences stuck into
@@ -23,7 +23,7 @@
 	through a string, scrubbing it of `\%` escape sequences.  Much
 	more exotic things could be placed in bookmark tags; we were
 	fortunate that man page cross references tend to stick to ASCII,
-	plus `\%` to suppress hyphenation.  But that's only suitable for
+	plus `\%` to suppress hyphenation.  But that's suitable only for
 	man page references; if we want taggable (sub)section headings,
 	like groff_mmse(7)'s "Se också", we need strings, not just valid
 	groff identifiers.
