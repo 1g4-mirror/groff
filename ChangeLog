@@ -1,5 +1,12 @@
 2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac (pdfclean): Fix missing closing brace escape
+	sequence.  Appears to have done no damage; possibly the end of
+	the macro definition reset the formatter's state.  Or maybe we
+	simply got lucky with diversions with the documents in our tree.
+
+2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Improve encoding of *roff string contents when
 	interpolated into device control escape sequences.
 
