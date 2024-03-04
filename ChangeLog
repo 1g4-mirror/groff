@@ -1,5 +1,12 @@
 2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (PT): Be consistently paranoid.  The idea of a
+	"page ref string" (like "ls(1)") with leading space in it
+	strikes me as dubious, but for the time being we accept it; do
+	so consistently.
+
+2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (SH): Fix code style nit.
 
 2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
