@@ -1,5 +1,17 @@
 2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Accept `MR` calls with only one argument.
+
+	* tmac/an.tmac (MR): If only one argument is present, do not
+	hyperlink it, but do set it with italic corrections.  Prompted
+	by a similar change Deri James applied in doc/GMPfront.t.in, and
+	for consistency with the way we've long handled the analogous
+	`Xr` macro in mdoc(7).
+	* tmac/groff_man.7.man.in (Hyperlink macros) <MR>: Update macro
+	synopsis and description.
+
+2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac: Add internal flag register
 	`pdf*is-mark-suspended`.
 	(pdfmarksuspend, pdfmarkrestart): Use it to avoid sending

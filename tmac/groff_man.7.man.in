@@ -1400,8 +1400,8 @@ to output drivers.
 .
 .
 .TP
-.BI .MR "\~topic manual-section"\c
-.RI \~[ trailing-text ]
+.BI .MR \~topic\c
+.RI \~[ manual-section \~[ trailing-text ]]
 .IR (since\~ groff \~1.23) \" TODO: remove note once novelty dies down
 Set a man page cross reference as
 \[lq]\c
@@ -1421,7 +1421,10 @@ is set in the font specified by the
 .B MF
 string.
 .
-The cross reference hyperlinks to a URI of the form
+If
+.I manual-section
+is present,
+the cross reference hyperlinks to a URI of the form
 .RB \[lq] man:\c
 .IR topic ( manual-section )\[rq].
 _ifstyle()dnl
