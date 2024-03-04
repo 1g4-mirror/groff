@@ -1,5 +1,10 @@
 2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac (Xr): Support the crazy old menagerie of Mac OS
+	X/macOS man page URL formats as groff man(7) does.
+
+2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (MR): Fix "format 4" URLs to include the section
 	number again in parentheses after the identifier.
 
