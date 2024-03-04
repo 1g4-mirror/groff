@@ -803,11 +803,15 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" "pdfmarksuspend" and "pdfmarkrestart" should be used in any page trap
 .\" macros to prevent output from the page trap macro being considered part
 .\" of a 'hot spot' when it crosses a page boundary.
+.nr pdf*is-mark-suspended 0
+.
 .de pdfmarksuspend
 .nop \!x X pdf: marksuspend
+.nr pdf*is-mark-suspended 1
 ..
 .de pdfmarkrestart
-.nop \!x X pdf: markrestart
+.if \\n[pdf*is-mark-suspended] .nop \!x X pdf: markrestart
+.nr pdf*is-mark-suspended 0
 ..
 .de pdfpagename
 .nop \!x X pdf: pagename \\$1

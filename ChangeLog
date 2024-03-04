@@ -1,5 +1,12 @@
 2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac: Add internal flag register
+	`pdf*is-mark-suspended`.
+	(pdfmarksuspend, pdfmarkrestart): Use it to avoid sending
+	PDFMark restart commands when they haven't been suspended.
+
+2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (PT): Be consistently paranoid.  The idea of a
 	"page ref string" (like "ls(1)") with leading space in it
 	strikes me as dubious, but for the time being we accept it; do
