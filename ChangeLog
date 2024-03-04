@@ -1,5 +1,9 @@
 2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac (pdf*href): Fix excess escaping.
+
+2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdfclean): Fix missing closing brace escape
 	sequence.  Appears to have done no damage; possibly the end of
 	the macro definition reset the formatter's state.  Or maybe we
