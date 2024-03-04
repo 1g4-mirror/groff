@@ -729,10 +729,10 @@ contains unsupported escape sequence
 .  if \\n[an-remap-I-style-in-headings] .ftr I \\*[an-heading-family]BI
 .  if \\n[.$] \{\
 .    ds an-section-heading \\$*\"
-.    if \\n[CS] .stringup an-section-heading
+.    if \\n[CS] \
+.      stringup an-section-heading
 .    an*bookmark 2 "\\*[an-section-heading]"
 .    nop \&\\*[an-section-heading]
-.  \}
 .  if \\n[an-remap-I-style-in-headings] .ftr I I
 ..
 .
