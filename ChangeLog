@@ -1,5 +1,14 @@
 2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Add experimental feature to support increasing
+	the base level of PDF bookmarks.  Define register
+	`an*bookmark-base-level`, initialized to zero.
+	(PT): Add 1 to it when producing document bookmark.
+	(SH): Add 2 to it when producing section heading bookmark.
+	(SS): Add 3 to it when producing subsection heading bookmark.
+
+2024-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Accept `MR` calls with only one argument.
 
 	* tmac/an.tmac (MR): If only one argument is present, do not

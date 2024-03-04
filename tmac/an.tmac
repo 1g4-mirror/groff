@@ -207,6 +207,10 @@
 .  ds an*section9 Kernel Developer's Manual\"
 ..
 .
+.\" Customize this at the command line to, for example, group multiple
+.\" man pages within a collection or containing document.
+.nr an*bookmark-base-level 0
+.
 .\" Write a bookmark/anchor/link target $2 at hierarchical depth $1.
 .de an*bookmark
 .  an*bookmark*\*[.T] \\$@
@@ -439,7 +443,8 @@
 .  \" Attach a bookmark to the page header on the first page of a new
 .  \" man(7) document; a changed identifier and section indicates this.
 .  if !'\\*[an*page-ref-string]'\\*[an*previous-page-ref-string]' \{\
-.    an*bookmark 1 "\\*[an*page-ref-string]"
+.    nr an*bookmark-level (\\n[an*bookmark-base-level] + 1)
+.    an*bookmark \\n[an*bookmark-level]  "\\*[an*page-ref-string]"
 .    ds an*previous-page-ref-string "\\*[an*page-ref-string]
 .  \}
 .  tl '\\*[an-pageref]'\\*[an-extra3]'\\*[an-pageref]'
@@ -731,7 +736,8 @@ contains unsupported escape sequence
 .    ds an-section-heading \\$*\"
 .    if \\n[CS] \
 .      stringup an-section-heading
-.    an*bookmark 2 "\\*[an-section-heading]"
+.    nr an*bookmark-level (\\n[an*bookmark-base-level] + 2)
+.    an*bookmark \\n[an*bookmark-level] "\\*[an-section-heading]"
 .    nop \&\\*[an-section-heading]
 .  if \\n[an-remap-I-style-in-headings] .ftr I I
 ..
@@ -756,7 +762,8 @@ contains unsupported escape sequence
 .  if \\n[an-remap-I-style-in-headings] .ftr I \\*[an-heading-family]BI
 .  if \\n[.$] \{\
 .    ds an*subsection-heading \\$*\"
-.    an*bookmark 3 "\\*[an*subsection-heading]"
+.    nr an*bookmark-level (\\n[an*bookmark-base-level] + 3)
+.    an*bookmark \\n[an*bookmark-level] "\\*[an*subsection-heading]"
 .    nop \&\\$*
 .  \}
 .  if \\n[an-remap-I-style-in-headings] .ftr I I
