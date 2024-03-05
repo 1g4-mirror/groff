@@ -3149,7 +3149,9 @@ is handled as with
 .IP
 Use of this presentation-oriented macro is deprecated.
 .
-A hanging indentation cannot be expressed naturally under HTML,
+A hanging indentation cannot be expressed naturally in HTML,
+a hanging paragraph is not distinguishable from an ordinary one if it is
+shorter than one output line,
 and
 .RI non- roff -based
 man page interpreters may treat
