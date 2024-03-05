@@ -3827,6 +3827,22 @@ can be handled;
 .I \%andoc
 reloads each macro package as necessary.
 .
+Page-local redefinitions of names used by the
+.I man
+or
+.I mdoc
+packages prior to
+.B .TH
+or
+.B .Dd
+calls will be \(lqclobbered\(rq by the reloading process.
+.
+If you want to provide your own definition of an extension macro to
+ensure its availability,
+the
+.I \%an\-ext\:.tmac
+entry below offers advice.
+.
 .
 .TP
 .I @MACRODIR@/\:\%an\-ext\:.tmac
@@ -3855,26 +3871,21 @@ and maintainers of
 implementations or work-alike systems that format man pages
 to re-use them.
 .
+To ensure reliable rendering,
+`define' them after your page calls
+.BR .TH ;
+see the discussion of
+.I \%andoc\:.tmac
+above.
 .
-.IP
-The definitions for these macros are read after a page calls
-.BR .TH ,
-so they will replace any macros of the same names preceding it in your
-file.
-.
-If you use your own implementations of these macros,
-they must be defined after
-.B .TH
-is called to have effect.
-.
-Furthermore,
+Further,
 it is wise to `define' such page-local macros
 (if at all)
 after the \(lqName\(rq section to accommodate timid
 .MR makewhatis 8
 or
 .MR mandb 8
-implementations that give up scans for indexing material early.
+implementations that easily give up scanning for indexing material.
 .
 .
 .TP
