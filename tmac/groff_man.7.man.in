@@ -3676,7 +3676,8 @@ If the
 .B MF
 string ends in \[lq]I\[rq],
 it is assumed to be an oblique typeface,
-and italic corrections are applied before and after man page topics.
+and italic corrections are applied before and after man page topics and
+identifiers.
 .
 .
 .TP
