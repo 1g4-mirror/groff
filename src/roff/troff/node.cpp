@@ -1666,16 +1666,16 @@ real_output_file::~real_output_file()
   is_dying = true;
   // To avoid looping, set fp to 0 before calling fatal().
   if (ferror(fp)) {
-    fp = 0;
+    fp = 0 /* nullptr */;
     fatal("error on output file stream");
   }
   else if (fflush(fp) < 0) {
-    fp = 0;
+    fp = 0 /* nullptr */;
     fatal("unable to flush output file: %1", strerror(errno));
   }
   if (piped) {
     int result = pclose(fp);
-    fp = 0;
+    fp = 0 /* nullptr */;
     if (result < 0)
       fatal("unable to close pipe: %1", strerror(errno));
     if (!WIFEXITED(result))
@@ -1691,7 +1691,7 @@ real_output_file::~real_output_file()
   }
   else
   if (fclose(fp) < 0) {
-    fp = 0;
+    fp = 0 /* nullptr */;
     fatal("unable to close output file: %1", strerror(errno));
   }
 }
@@ -1700,7 +1700,7 @@ void real_output_file::flush()
 {
   // To avoid looping, set fp to 0 before calling fatal().
   if (fflush(fp) < 0) {
-    fp = 0;
+    fp = 0 /* nullptr */;
     fatal("unable to flush output file: %1", strerror(errno));
   }
 }
