@@ -2475,6 +2475,7 @@ int token::operator!=(const token &t)
 
 // is token a suitable delimiter (like ')?
 
+// Is the current token a suitable delimiter (like `'`)?
 bool token::is_usable_as_delimiter(bool report_error)
 {
   switch(type) {
@@ -2505,7 +2506,7 @@ bool token::is_usable_as_delimiter(bool report_error)
     case '.':
       if (report_error)
         error("character '%1' is not allowed as a starting delimiter",
-	      char(c));
+	      static_cast<char>(c));
       return false;
     default:
       return true;
