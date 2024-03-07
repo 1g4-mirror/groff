@@ -1,5 +1,14 @@
 2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pspic.tmac (PSPIC): Prepare for alteration of `\X` device
+	control escape sequence to read its argument in copy mode; use
+	nested backslashes instead of `\E`, which cannot meaningfully
+	persist into the device-independent output.  (The *roff escape
+	character is not only undefined but meaningless in that file
+	format.)
+
+2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (ascii_output_file::outc)
 	(ascii_output_file::outs, put_string, troff_output_file::put)
 	(ascii_output_file::really_transparent_char)
