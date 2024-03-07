@@ -5628,7 +5628,7 @@ static node *do_non_interpreted()
 // In troff output, we translate the escape character to '\', but it is
 // up to the postprocessor to interpret it as such.  (This mostly
 // matters for device control commands.)
-static void encode_char_for_troff_output(macro *mac, const char c)
+static void encode_char_for_device_output(macro *mac, const char c)
 {
   if ('\0' == c) {
     if (tok.is_stretchable_space()
@@ -5727,7 +5727,7 @@ static node *do_device_control() // \X
       c = '\b';
     else
       c = tok.ch();
-    encode_char_for_troff_output(&mac, c);
+    encode_char_for_device_output(&mac, c);
   }
   return new special_node(mac);
 }

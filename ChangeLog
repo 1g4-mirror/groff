@@ -1,5 +1,12 @@
 2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(encode_char_for_troff_output): Rename this...
+	(encode_char_for_device_output): ...to this.
+	(do_device_control): Update call site.
+
+2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Refactor.  Pull delimiter character
 	validator into its own function operating on a character, rather
 	than on an object of the token class.
