@@ -919,8 +919,10 @@ void shift()
 
 static char get_char_for_escape_parameter(bool allow_space = false)
 {
-  int c = get_copy(0 /* nullptr */, false /* is defining */,
+  int c = get_copy(0 /* nullptr */,
+		   false /* is defining */,
 		   true /* handle \E */);
+  assert(c != '\n');
   switch (c) {
   case EOF:
     copy_mode_error("end of input in escape sequence");
@@ -928,13 +930,9 @@ static char get_char_for_escape_parameter(bool allow_space = false)
   default:
     if (!is_invalid_input_char(c))
       break;
-    // fall through
-  case '\n':
-    if (c == '\n')
-      input_stack::push(make_temp_iterator("\n"));
-    // fall through
+      // fall through
   case ' ':
-    if (c == ' ' && allow_space)
+    if (allow_space)
       break;
     // fall through
   case '\t':
