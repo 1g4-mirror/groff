@@ -1,3 +1,19 @@
+2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (ascii_output_file::outc)
+	(ascii_output_file::outs, put_string, troff_output_file::put)
+	(ascii_output_file::really_transparent_char)
+	(ascii_output_file::really_print_line): Guard uses of standard C
+	library `putc()` and `fputc()` functions with a null pointer
+	check.  They could fail if the output stream has been
+	invalidated.  Problem present from groff's birth and apparently
+	exposed by man-db man's use of AppArmor.  See
+	<https://bugs.launchpad.net/ubuntu/+source/lintian/+bug/2055402>
+	and follow-up discussion there.
+
+	Fixes <https://savannah.gnu.org/bugs/?65427>.  Thanks to an
+	anonymous submitter for the report.
+
 2024-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/pdf.tmac (pdf*href): Fix (harmless?) `ie`/`if` thinko.

@@ -766,15 +766,18 @@ public:
 
 void ascii_output_file::outc(unsigned char c)
 {
-  fputc(c, fp);
+  if (fp != 0 /* nullptr */)
+    fputc(c, fp);
 }
 
 void ascii_output_file::outs(const char *s)
 {
-  fputc('<', fp);
-  if (s)
-    fputs(s, fp);
-  fputc('>', fp);
+  if (fp != 0 /* nullptr */) {
+    fputc('<', fp);
+    if (s)
+      fputs(s, fp);
+    fputc('>', fp);
+  }
 }
 
 struct hvpair;
@@ -844,18 +847,22 @@ public:
 
 static void put_string(const char *s, FILE *fp)
 {
-  for (; *s != '\0'; ++s)
-    putc(*s, fp);
+  if (fp != 0 /* nullptr */) {
+    for (; *s != '\0'; ++s)
+      putc(*s, fp);
+  }
 }
 
 inline void troff_output_file::put(char c)
 {
-  putc(c, fp);
+  if (fp != 0 /* nullptr */)
+    putc(c, fp);
 }
 
 inline void troff_output_file::put(unsigned char c)
 {
-  putc(c, fp);
+  if (fp != 0 /* nullptr */)
+    putc(c, fp);
 }
 
 inline void troff_output_file::put(const char *s)
@@ -1782,7 +1789,8 @@ void real_output_file::really_off()
 
 void ascii_output_file::really_transparent_char(unsigned char c)
 {
-  putc(c, fp);
+  if (fp != 0 /* nullptr */)
+    putc(c, fp);
 }
 
 void ascii_output_file::really_print_line(hunits, vunits, node *n,
@@ -1792,7 +1800,8 @@ void ascii_output_file::really_print_line(hunits, vunits, node *n,
     n->ascii_print(this);
     n = n->next;
   }
-  fputc('\n', fp);
+  if (fp != 0 /* nullptr */)
+    fputc('\n', fp);
 }
 
 void ascii_output_file::really_begin_page(int /*pageno*/, vunits /*page_length*/)
