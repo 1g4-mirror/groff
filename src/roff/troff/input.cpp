@@ -2473,44 +2473,54 @@ int token::operator!=(const token &t)
   return !(*this == t);
 }
 
-// is token a suitable delimiter (like ')?
+// Is the character usable as a delimiter?
+//
+// This is used directly only by `do_device_control()`, because it is
+// the only escape sequence that reads its argument in copy mode (so it
+// doesn't tokenize it) and accepts a user-specified delimiter.
+static bool is_char_usable_as_delimiter(int c)
+{
+  switch(c) {
+  case '0':
+  case '1':
+  case '2':
+  case '3':
+  case '4':
+  case '5':
+  case '6':
+  case '7':
+  case '8':
+  case '9':
+  case '+':
+  case '-':
+  case '/':
+  case '*':
+  case '%':
+  case '<':
+  case '>':
+  case '=':
+  case '&':
+  case ':':
+  case '(':
+  case ')':
+  case '.':
+    return false;
+  default:
+    return true;
+  }
+}
 
 // Is the current token a suitable delimiter (like `'`)?
 bool token::is_usable_as_delimiter(bool report_error)
 {
+  bool is_valid = false;
   switch(type) {
   case TOKEN_CHAR:
-    switch(c) {
-    case '0':
-    case '1':
-    case '2':
-    case '3':
-    case '4':
-    case '5':
-    case '6':
-    case '7':
-    case '8':
-    case '9':
-    case '+':
-    case '-':
-    case '/':
-    case '*':
-    case '%':
-    case '<':
-    case '>':
-    case '=':
-    case '&':
-    case ':':
-    case '(':
-    case ')':
-    case '.':
-      if (report_error)
-        error("character '%1' is not allowed as a starting delimiter",
-	      static_cast<char>(c));
-      return false;
-    default:
-      return true;
-    }
+    is_valid = is_char_usable_as_delimiter(c);
+    if (!is_valid && report_error)
+      error("character '%1' is not allowed as a starting delimiter",
+	    static_cast<char>(c));
+    return is_valid;
   case TOKEN_NODE:
     // the user doesn't know what a node is
     if (report_error)

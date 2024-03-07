@@ -1,5 +1,14 @@
 2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Refactor.  Pull delimiter character
+	validator into its own function operating on a character, rather
+	than on an object of the token class.
+	(is_char_usable_as_delimiter): New function compares `char`
+	parameter to list of valid delimiters.
+	(token::is_usable_as_delimiter): Refactor to call the foregoing.
+
+2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (is_usable_as_delimiter): Fix code
 	style nit, using C++-style type cast instead of C-style cast.
 
