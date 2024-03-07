@@ -1297,7 +1297,7 @@ int non_interpreted_char_node::interpret(macro *mac)
 
 static void do_width();
 static node *do_non_interpreted();
-static node *do_special();
+static node *do_device_control();
 static node *do_suppress(symbol nm);
 static void do_register();
 
@@ -2360,7 +2360,7 @@ void token::next()
 	nd = new extra_size_node(x);
 	return;
       case 'X':
-	nd = do_special();
+	nd = do_device_control();
 	if (!nd)
 	  break;
 	type = TOKEN_NODE;
@@ -5685,7 +5685,7 @@ static void encode_char_for_troff_output(macro *mac, const char c)
   }
 }
 
-static node *do_special()
+static node *do_device_control() // \X
 {
   int start_level = input_stack::get_level();
   token start_token;
