@@ -4171,7 +4171,7 @@ for @command{geqn}, @option{-p} for @command{gpic}, @option{-R} for
 
 @c ---------------------------------------------------------------------
 
-@node ms Footnotes, , ms Insertions, ms Body Text
+@node ms Footnotes, ms language and localization, ms Insertions, ms Body Text
 @subsubsection Footnotes
 @cindex @file{ms} macros, footnotes
 @cindex footnotes [@file{ms}]
@@ -4757,7 +4757,7 @@ register.
 
 @c ---------------------------------------------------------------------
 
-@node Missing Unix Version 7 ms Macros, , Differences from AT&T ms, Differences from AT&T ms
+@node Missing Unix Version 7 ms Macros, ms Legacy Features, Differences from AT&T ms, Differences from AT&T ms
 @subsubsection Unix Version 7 @file{ms} macros not implemented by @code{groff} @file{ms}
 
 Several macros described in the Unix Version@tie{}7 @file{ms}
