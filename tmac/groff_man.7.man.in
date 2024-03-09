@@ -3972,7 +3972,7 @@ are often presented together.
 .
 Further,
 multiple programming languages have functions named \(lqprintf\(rq,
-and wish to document these in a man page.
+and may document these in a man page.
 .
 The identifier is intended to
 (with the section)
@@ -3983,8 +3983,8 @@ it may furthermore correspond closely to the file name of the document.
 .IP
 The
 .MR man 1
-librarian is designed to permit convenient access to man pages,
-resolving topics to man page identifiers.
+librarian makes access to man pages convenient by resolving topics to
+man page identifiers.
 .
 Thus,
 you can type
