@@ -1678,6 +1678,8 @@ or support an additional modifier character
 again,
 and
 .BR \|\[rs]n ).
+.
+In no case can an escape sequence parameter contain a newline.
 .\" As with requests, use of some escape sequences in source documents
 .\" may interact poorly with a macro package you use; consult its
 .\" documentation to learn of ``safe'' sequences or alternative
