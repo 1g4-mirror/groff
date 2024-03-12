@@ -64,6 +64,10 @@
 .  ab \*[doc-msg]
 .\}
 .
+.de doc-err
+.  tm \*[doc]:\\n[.F]:\\n[.c]: error: \\$*
+..
+.
 .\" Handle most rendering options.
 .
 .\" We don't have to worry about "xhtml" (it's mapped to "html"), but we
@@ -4024,12 +4028,10 @@
 .  ds doc-str-It \*[doc-list-type-stack\n[doc-list-depth]]
 .
 .  if "\*[doc-str-It]"" \
-.    tm mdoc error: .It without preceding .Bl (#\n[.c])
+.    doc-err .It without preceding .Bl
 .
-.  if \n[doc-nesting-level] \{\
-.    tmc "mdoc error: .It found in enclosing (e.g. .Ac ... .It ... .Ao)
-.    tm1 " (#\n[.c])
-.  \}
+.  if \n[doc-nesting-level] \
+.    doc-err .It found in enclosing (e.g. .Ac ... .It ... .Ao)
 .
 .  br
 .  if !\n[cR] \
@@ -5428,7 +5430,7 @@
 .eo
 .de Fo
 .  if (\n[doc-in-func-enclosure]) \{\
-.    tm mdoc error: .Fo/.Fc can't be nested (#\n[.c])
+.    doc-err .Fo/.Fc can't be nested
 .    return
 .  \}
 .
@@ -5513,7 +5515,7 @@
 .eo
 .de Fc
 .  if !\n[doc-in-func-enclosure] \{\
-.    tm mdoc warning: Extraneous .Fc (#\n[.c])
+.    doc-err extraneous .Fc
 .    return
 .  \}
 .
@@ -5524,7 +5526,7 @@
 .  \}
 .
 .  if !(\n[doc-saved-nesting-level] == \n[doc-nesting-level]) \
-.    tm mdoc warning: Unbalanced enclosure commands within .Fo/.Fc
+.    doc-err unbalanced enclosure commands within .Fo/.Fc
 .
 .  nr doc-func-arg-count 0
 .  nr doc-in-func-enclosure 0
@@ -6720,7 +6722,7 @@
 .eo
 .de doc-do-references
 .  if !\n[doc-is-reference] \
-.    tm mdoc error: .\*[doc-macro-name] found outside of .Rs ... .Re (#\n[.c])
+.    doc-err .\*[doc-macro-name] found outside of .Rs ... .Re
 .
 .  nr doc-reg-ddr1 \n[doc-type\n[doc-arg-ptr]]
 .
@@ -7148,7 +7150,7 @@
 .
 .eo
 .de doc-defunct-macro
-.  tmc mdoc error: .\$0 defunct
+.  doc-err .\$0 defunct
 .  if d doc-\$0-usage \
 .    tmc , \*[doc-\$0-usage]
 .  tm1 " (#\n[.c])
@@ -7173,8 +7175,8 @@
 .
 .eo
 .de em
-.  tm1 "mdoc error: end-macro (.em) respecification is not allowed. (#\n[.c])
-.  tm1 "            Should this have been '.Em ...'?
+.  doc-err end-macro (.em) respecification is not allowed; \
+should this have been '.Em ...'?
 .  ab
 ..
 .ec

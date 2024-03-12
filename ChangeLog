@@ -1,5 +1,15 @@
 2024-03-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Improve diagnostic message format (2/4).
+
+	* tmac/doc.tmac (doc-err): Add internal macro for reporting
+	error diagnostics.  Arrange message per GNU Coding Standards,
+	including report of input filename.
+	(It, doc-fo-func-args, Fo, Fc, %V, Lk, doc-defunct-macro): Use
+	it.
+
+2024-03-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Improve diagnostic message format (1/4).
 
 	* tmac/doc.tmac: Add new `doc` string recording the name the
