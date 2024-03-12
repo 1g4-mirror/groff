@@ -1,5 +1,18 @@
 2024-03-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Improve diagnostic message format (3/4).
+
+	* tmac/doc.tmac (doc-warn): Add internal macro for reporting
+	warning diagnostics.  Arrange message per GNU Coding Standards,
+	including report of input filename.
+
+	* tmac/doc.tmac (doc-generic-macro, Pf, Bf, Ef, Bk, Ek, Bd)
+	(doc-do-Bd-args, Ed, Bl, doc-do-Bl-args, It, doc-end-list, Re)
+	(doc-print-reference, em):
+	* tmac/mdoc/doc-common (Dd, Dt, Os, doc-check-depth): Use it.
+
+2024-03-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Improve diagnostic message format (2/4).
 
 	* tmac/doc.tmac (doc-err): Add internal macro for reporting

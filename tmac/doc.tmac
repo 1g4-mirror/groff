@@ -68,6 +68,10 @@
 .  tm \*[doc]:\\n[.F]:\\n[.c]: error: \\$*
 ..
 .
+.de doc-warn
+.  tm \*[doc]:\\n[.F]:\\n[.c]: warning: \\$*
+..
+.
 .\" Handle most rendering options.
 .
 .\" We don't have to worry about "xhtml" (it's mapped to "html"), but we
@@ -762,8 +766,7 @@
 .  nr doc-arg-ptr +1
 .  ie (\n[doc-arg-count] >= \n[doc-arg-ptr]) \{\
 .    if (\n[doc-type\n[doc-arg-ptr]] == 1) \{\
-.      tmc mdoc warning: Using a macro as first argument
-.      tm1 " cancels effect of .\$0 (#\n[.c])
+.      doc-warn using a macro as first argument cancels effect of .\$0
 .
 .      \" the right action here would be to reset the argument counters
 .      \" and bail out -- unfortunately, a small number of manual pages
@@ -2313,7 +2316,7 @@
 .      nop \)\*[doc-arg\n[doc-arg-ptr]]\c
 .    \}
 .    el \
-.      tm mdoc warning: .Pf: trailing prefix (#\n[.c])
+.      doc-warn .Pf: trailing prefix
 .  \}
 .  el \{\
 .    nop \)\$1\)\c
@@ -2321,7 +2324,7 @@
 .    ie \n[.$] \
 .      doc-parse-args \$@
 .    el \{\
-.      tm mdoc warning: .Pf: missing arguments (#\n[.c])
+.      doc-warn .Pf: missing arguments
 .      nop \)
 .  \}\}
 .
@@ -2812,8 +2815,7 @@
 .    el \{ .ie "\$1"-symbolic" \
 .      nop \*[doc-Sy-font]\c
 .    el \{\
-.      tmc mdoc warning: Unknown keyword '\$1' in .Bf macro
-.      tm1 " (#\n[.c])
+.      doc-warn unknown keyword '\$1' in .Bf macro
 .  \}\}\}\}\}\}\}
 .  el \
 .    tm Usage: .Bf [Em | -emphasis | Li | -literal | Sy | -symbolic] (#\n[.c])
@@ -2844,7 +2846,7 @@
 .    nr doc-fontmode-depth -1
 .  \}
 .  el \
-.    tm mdoc warning: Extraneous .Ef (#\n[.c])
+.    doc-warn extraneous .Ef
 ..
 .ec
 .
@@ -2885,7 +2887,7 @@
 .    doc-set-hard-space
 .  \}
 .  el \{\
-.    tm mdoc warning: Unknown keyword '\$1' in .Bk macro (#\n[.c])
+.    doc-warn unknown keyword '\$1' in .Bk macro
 .    nr doc-keep-type 3
 .  \}\}\}
 .
@@ -2913,12 +2915,12 @@
 .    tm Usage: .Ek (does not take arguments) (#\n[.c])
 .  el \{\
 .    if !\n[doc-keep-type] \
-.      tm mdoc warning: .Ek found without .Bk before (#\n[.c])
+.      doc-warn .Ek found without .Bk before
 .
 .    ie        (\n[doc-keep-type] == 1) \
 .      doc-set-soft-space
 .    el \{ .if (\n[doc-keep-type] == 2) \
-.      tm .Bk -lines: Not implemented yet. (#\n[.c])
+.      doc-warn .Bk -lines: Not implemented yet.
 .  \}\}
 .
 .  nr doc-keep-type 0
@@ -3066,8 +3068,8 @@
 .    nf
 .  \}
 .  el \{\
-.    tm1 "mdoc warning: Unknown keyword '\$1' (or missing display type)
-.    tm1 "              in .Bd macro (#\n[.c])
+.    doc-warn unknown keyword '\$1' (or missing display type) in .Bd \
+macro
 .    nr doc-reg-Bd 0
 .  \}\}\}\}\}
 .
@@ -3194,10 +3196,10 @@
 .      nr doc-reg-ddBa 2
 .    \}
 .    el \
-.      tm mdoc warning: .Bd '-file' keyword requires argument (#\n[.c])
+.      doc-warn .Bd '-file' keyword requires argument
 .  \}
 .  el \
-.      tm mdoc warning: Unknown keyword '\$1' in .Bd macro (#\n[.c])
+.    doc-warn unknown keyword '\$1' in .Bd macro
 .  \}\}
 .
 .  if (\n[doc-reg-ddBa] < \n[.$]) \{\
@@ -3226,7 +3228,7 @@
 .  br
 .
 .  if !\n[doc-display-depth] \{\
-.    tm mdoc warning: Extraneous .Ed (#\n[.c])
+.    doc-warn extraneous .Ed
 .    nr doc-display-depth 1
 .  \}
 .
@@ -3358,8 +3360,8 @@
 .    linetabs 1
 .  \}
 .  el \{\
-.    tm1 "mdoc warning: Unknown list type '\$1' (or missing list type)
-.    tm1 "              in .Bl macro
+.    doc-warn unknown list type '\$1' (or missing list type) in .Bl \
+macro
 .    tm
 .    nr doc-arg-ptr 0
 .  \}\}\}\}\}\}\}\}\}\}\}
@@ -3472,7 +3474,7 @@
 .      nr doc-list-indent-stack\n[doc-list-depth] +\n[doc-reg-dBla1]n
 .    \}
 .    el \
-.      tm mdoc warning: '-nested' allowed with nested .Bl macros only (#\n[.c])
+.      doc-warn '-nested' allowed with nested .Bl macros only
 .  \}
 .
 .  el \{ .ie "\*[doc-arg\n[doc-arg-ptr]]"-width" \{\
@@ -3641,8 +3643,8 @@
 .        ds doc-arg\n[doc-num-columns] "\*[doc-arg\n[doc-arg-ptr]]
 .    \}
 .    el \{\
-.      tmc mdoc warning: Unknown keyword '\*[doc-arg\n[doc-arg-ptr]]'
-.      tm1 " in .Bl macro (#\n[.c])
+.      doc-warn unknown keyword '\*[doc-arg\n[doc-arg-ptr]]' in .Bl \
+macro
 .  \}\}
 .
 .  if (\n[doc-arg-count] > \n[doc-arg-ptr]) \
@@ -4064,8 +4066,8 @@
 .
 .  ie (\n[doc-reg-It] == 1) \{\
 .    if \n[.$] \{\
-.      tm1 "mdoc warning: .It macros in lists of type '\*[doc-str-It]'
-.      tm1 "              don't take arguments (#\n[.c])
+.      doc-warn .It macros in lists of type '\*[doc-str-It]' don't \
+take arguments
 .  \}\}
 .  el \{\
 .    ie \n[.$] \{\
@@ -4085,8 +4087,8 @@
 .          doc-print-recursive
 .    \}\}\}
 .    el \{\
-.      tm1 "mdoc warning: .It macros in lists of type '\*[doc-str-It]'
-.      tm1 "              require arguments (#\n[.c])
+.      doc-warn .It macros in lists of type '\*[doc-str-It]' require \
+arguments
 .    \}
 .  \}
 .
@@ -4447,7 +4449,7 @@
 '  in -\n[doc-list-offset-stack\n[doc-list-depth]]u
 .
 .  if (\n[doc-list-depth] <= 0) \
-.    tm mdoc warning: extraneous .El call (#\n[.c])
+.    doc-warn extraneous .El call
 .
 .  doc-decrement-list-stack
 .  nr doc-list-depth -1
@@ -5654,7 +5656,7 @@
 .    tm Usage: .Re (does not take arguments) (#\n[.c])
 .  el \{\
 .    if !\n[doc-is-reference] \{\
-.      tm mdoc warning: Extraneous .Re (#\n[.c])
+.      doc-warn extraneous .Re
 .      return
 .    \}
 .    doc-print-reference
@@ -5871,7 +5873,7 @@
 .  \}
 .
 .  if \n[doc-reference-count] \
-.    tm mdoc warning: unresolved reference problem
+.    doc-warn unresolved reference problem
 .
 .  hy \n[doc-hyphen-flags]
 ..
@@ -7188,7 +7190,7 @@ should this have been '.Em ...'?
 .eo
 .de doc-empty-line
 .  if !\n[doc-display-depth] \
-.    tm mdoc warning: Empty input line #\n[.c]
+.    doc-warn empty input line
 .  sp
 ..
 .ec
