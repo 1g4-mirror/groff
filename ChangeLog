@@ -1,5 +1,24 @@
 2024-03-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Improve diagnostic message format (4/4).
+
+	* tmac/doc.tmac (doc-report-usage): Add internal macro for
+	reporting usage error diagnostics.  Arrange message per GNU
+	Coding Standards, including report of input filename.
+
+	* tmac/doc.tmac (doc-generic-macro, Cd, Fd, In, Nm, Tn, Ns, Ap)
+	(Bf, Ek, El, doc-Xr-usage, doc-column-list, Dl, D1, Vt, Ft, Fa)
+	(Fn, Fo, Rs, Re, %A, %B, %C, %D, %I, %J, %N, %O, %P, %Q, %R, %T)
+	(%U, %V, An, Rv, Ex, doc-Mt-usage, doc-Lk-usage):
+	* tmac/mdoc/doc-common (Sh, Ss):
+	* tmac/mdoc/doc-ditroff (Ql):
+	* tmac/mdoc/doc-nroff (Ql):
+	* tmac/mdoc/doc-syms (Lb): Use it.
+
+	Fixes <https://savannah.gnu.org/bugs/?52463> (at long last).
+
+2024-03-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Improve diagnostic message format (3/4).
 
 	* tmac/doc.tmac (doc-warn): Add internal macro for reporting

@@ -72,6 +72,12 @@
 .  tm \*[doc]:\\n[.F]:\\n[.c]: warning: \\$*
 ..
 .
+.\" XXX: Report "commands" with leading dot before macro name?
+.\" XXX: Omit ellipsis from usage of macros that aren't "parsed"?
+.de doc-report-usage
+.  tm \*[doc]:\\n[.F]:\\n[.c]: usage: \\$* ...
+..
+.
 .\" Handle most rendering options.
 .
 .\" We don't have to worry about "xhtml" (it's mapped to "html"), but we
@@ -757,7 +763,7 @@
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .\$0 \*[doc-\$0-usage] ... (#\n[.c])
+.      doc-report-usage .\$0 \*[doc-\$0-usage] ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -783,7 +789,7 @@
 .\"  \}
 .  \}
 .  el \{\
-.    tm Usage: .\$0 \*[doc-\$0-usage] ... (#\n[.c])
+.    doc-report-usage .\$0 \*[doc-\$0-usage] ...
 .    doc-reset-args
 .  \}
 ..
@@ -889,7 +895,7 @@
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Cd configuration_file_declaration ... (#\n[.c])
+.      doc-report-usage .Cd configuration_file_declaration ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -921,7 +927,7 @@
 .      doc-print-recursive
 .  \}\}
 .  el \{\
-.    tm Usage: .Cd configuration_file_declaration ... (#\n[.c])
+.    doc-report-usage .Cd configuration_file_declaration ...
 .    doc-reset-args
 .  \}
 ..
@@ -1035,7 +1041,7 @@
 .    ft \n[doc-curr-font]
 .  \}
 .  el \{\
-.    tm Usage: .Fd function_declaration -- Fd is not callable (#\n[.c])
+.    doc-report-usage .Fd function_declaration -- Fd is not callable
 .    doc-reset-args
 .  \}
 ..
@@ -1064,7 +1070,7 @@
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .In include_file ... (#\n[.c])
+.      doc-report-usage .In include_file ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -1098,7 +1104,7 @@
 .      doc-print-recursive
 .  \}\}
 .  el \{\
-.    tm Usage: .In include_file ... (#\n[.c])
+.    doc-report-usage .In include_file ...
 .    doc-reset-args
 .  \}
 ..
@@ -1182,7 +1188,7 @@
 .    \}
 .    el \{\
 .      ie "\*[doc-topic-name]"" \
-.        tm Usage: .Nm name ... (#\n[.c])
+.        doc-report-usage .Nm name ...
 .      el \
 .        doc-parse-args \*[doc-topic-name]
 .  \}\}
@@ -1195,7 +1201,7 @@
 .  ie (\n[doc-arg-count] < \n[doc-arg-ptr]) \{\
 .    \" last argument
 .    ie "\*[doc-topic-name]"" \{\
-.      tm Usage: .Nm name ... (#\n[.c])
+.      doc-report-usage .Nm name ...
 .      doc-reset-args
 .    \}
 .    el \{\
@@ -1207,7 +1213,7 @@
 .
 .    ie !(\n[doc-type\n[doc-arg-ptr]] == 2) \{\
 .      ie "\*[doc-topic-name]"" \
-.        tm Usage: .Nm name ... (#\n[.c])
+.        doc-report-usage .Nm name ...
 .      el \{\
 .        \" replace previous argument (Nm) with default value
 .        nr doc-arg-ptr -1
@@ -1331,7 +1337,7 @@
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Tn trade_name ... (#\n[.c])
+.      doc-report-usage .Tn trade_name ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -1349,7 +1355,7 @@
 .      doc-do-references
 .  \}
 .  el \{\
-.    tm Usage: .Tn trade_name ... (#\n[.c])
+.    doc-report-usage .Tn trade_name ...
 .    doc-reset-args
 .  \}
 ..
@@ -2356,7 +2362,7 @@
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Ns must be called with arguments (#\n[.c])
+.      doc-report-usage .Ns must be called with arguments
 .  \}
 .
 .  if \n[doc-arg-count] \{\
@@ -2378,7 +2384,7 @@
 .eo
 .de Ap
 .  ie !\n[doc-arg-count] \
-.    tm Usage: 'Ap' cannot be first macro on a line (no '.Ap') (#\n[.c])
+.    doc-report-usage 'Ap' cannot be first macro on a line (no '.Ap')
 .  el \{\
 .    nop \)'\)\c
 .    nr doc-arg-ptr +1
@@ -2818,7 +2824,7 @@
 .      doc-warn unknown keyword '\$1' in .Bf macro
 .  \}\}\}\}\}\}\}
 .  el \
-.    tm Usage: .Bf [Em | -emphasis | Li | -literal | Sy | -symbolic] (#\n[.c])
+.    doc-report-usage .Bf [Em | -emphasis | Li | -literal | Sy | -symbolic]
 ..
 .ec
 .
@@ -2912,7 +2918,7 @@
 \#.  nr doc-nesting-level -1
 .
 .  ie \n[.$] \
-.    tm Usage: .Ek (does not take arguments) (#\n[.c])
+.    doc-report-usage .Ek (does not take arguments)
 .  el \{\
 .    if !\n[doc-keep-type] \
 .      doc-warn .Ek found without .Bk before
@@ -3950,7 +3956,7 @@ macro
 .eo
 .de El
 .  if \n[.$] \{\
-.    tm Usage: .El (does not take arguments) (#\n[.c])
+.    doc-report-usage .El (does not take arguments)
 .    return
 .  \}
 .
@@ -4617,7 +4623,7 @@ arguments
 .
 .eo
 .de doc-Xr-usage
-.  tm Usage: .Xr manpage_name [section#] ... (#\n[.c])
+.  doc-report-usage .Xr manpage_name [section#] ...
 .  doc-reset-args
 ..
 .ec
@@ -4845,7 +4851,7 @@ arguments
 .  nr doc-arg-ptr +1
 .
 .  if (\n[doc-arg-count] < \n[doc-arg-ptr]) \{\
-.    tm Usage: .It column_string [Ta [column_string ...] ] (#\n[.c])
+.    doc-report-usage .It column_string [Ta [column_string ...] ]
 .    return
 .  \}
 .
@@ -4911,7 +4917,7 @@ arguments
 .  in +\n[doc-display-indent]u
 .
 .  ie \n[doc-arg-count] \{\
-.    tm Usage: .Dl not callable by other macros (#\n[.c])
+.    doc-report-usage .Dl not callable by other macros
 .    doc-reset-args
 .  \}
 .  el \{\
@@ -4924,7 +4930,7 @@ arguments
 .      doc-print-recursive
 .    \}
 .    el \
-.      tm Usage: .Dl argument ... (#\n[.c])
+.      doc-report-usage .Dl argument ...
 .  \}
 .
 .  in -\n[doc-display-indent]u
@@ -4947,7 +4953,7 @@ arguments
 .  in +\n[doc-display-indent]u
 .
 .  ie \n[doc-arg-count] \{\
-.    tm Usage: .D1 not callable by other macros (#\n[.c])
+.    doc-report-usage .D1 not callable by other macros
 .    doc-reset-args
 .  \}
 .  el \{\
@@ -4958,7 +4964,7 @@ arguments
 .      doc-print-recursive
 .    \}
 .    el \
-.      tm Usage: .D1 argument ... (#\n[.c])
+.      doc-report-usage .D1 argument ...
 .  \}
 .
 .  in -\n[doc-display-indent]u
@@ -4987,7 +4993,7 @@ arguments
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Vt variable_type ... (#\n[.c])
+.      doc-report-usage .Vt variable_type ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -4995,7 +5001,7 @@ arguments
 .
 .  nr doc-arg-ptr +1
 .  if (\n[doc-arg-count] < \n[doc-arg-ptr]) \{\
-.    tm Usage: .Vt variable_type ... (#\n[.c])
+.    doc-report-usage .Vt variable_type ...
 .    doc-reset-args
 .    return
 .  \}
@@ -5059,7 +5065,7 @@ arguments
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Ft function_type ... (#\n[.c])
+.      doc-report-usage .Ft function_type ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -5067,7 +5073,7 @@ arguments
 .
 .  nr doc-arg-ptr +1
 .  if (\n[doc-arg-count] < \n[doc-arg-ptr]) \{\
-.    tm Usage: .Ft function_type ... (#\n[.c])
+.    doc-report-usage .Ft function_type ...
 .    doc-reset-args
 .    return
 .  \}
@@ -5155,7 +5161,7 @@ arguments
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Fa function_arguments ... (#\n[.c])
+.      doc-report-usage .Fa function_arguments ...
 .  \}
 .
 .  ie \n[doc-func-arg-count] \
@@ -5275,7 +5281,7 @@ arguments
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Fn function_name [function_arg] ... (#\n[.c])
+.      doc-report-usage .Fn function_name [function_arg] ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -5320,7 +5326,7 @@ arguments
 .  nr doc-arg-ptr +1
 .  doc-print-prefixes
 .  if (\n[doc-arg-count] < \n[doc-arg-ptr]) \{\
-.    tm Usage: .Fn function_name [function_arg] ... (#\n[.c])
+.    doc-report-usage .Fn function_name [function_arg] ...
 .    doc-reset-args
 .    return
 .  \}
@@ -5445,7 +5451,7 @@ arguments
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Fo function_name (#\n[.c])
+.      doc-report-usage .Fo function_name
 .  \}
 .
 .  if \n[doc-in-synopsis-section] \{\
@@ -5630,7 +5636,7 @@ arguments
 .eo
 .de Rs
 .  ie \n[.$] \
-.    tm Usage: .Rs (does not take arguments) (#\n[.c])
+.    doc-report-usage .Rs (does not take arguments)
 .  el \{\
 .    nr doc-is-reference 1
 .    doc-reset-reference
@@ -5653,7 +5659,7 @@ arguments
 .eo
 .de Re
 .  ie \n[.$] \
-.    tm Usage: .Re (does not take arguments) (#\n[.c])
+.    doc-report-usage .Re (does not take arguments)
 .  el \{\
 .    if !\n[doc-is-reference] \{\
 .      doc-warn extraneous .Re
@@ -5945,7 +5951,7 @@ arguments
 .eo
 .de %A
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%A author_name ... (#\n[.c])
+.    doc-report-usage .%A author_name ...
 .    return
 .  \}
 .
@@ -5999,7 +6005,7 @@ arguments
 .eo
 .de %B
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%B book_name ... (#\n[.c])
+.    doc-report-usage .%B book_name ...
 .    return
 .  \}
 .
@@ -6062,7 +6068,7 @@ arguments
 .eo
 .de %C
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%C city_name ... (#\n[.c])
+.    doc-report-usage .%C city_name ...
 .    return
 .  \}
 .
@@ -6116,7 +6122,7 @@ arguments
 .eo
 .de %D
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%D date ... (#\n[.c])
+.    doc-report-usage .%D date ...
 .    return
 .  \}
 .
@@ -6170,7 +6176,7 @@ arguments
 .eo
 .de %I
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%I issuer/publisher_name ... (#\n[.c])
+.    doc-report-usage .%I issuer/publisher_name ...
 .    return
 .  \}
 .
@@ -6225,7 +6231,7 @@ arguments
 .eo
 .de %J
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%J journal_name ... (#\n[.c])
+.    doc-report-usage .%J journal_name ...
 .    return
 .  \}
 .
@@ -6280,7 +6286,7 @@ arguments
 .eo
 .de %N
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%N issue_number ... (#\n[.c])
+.    doc-report-usage .%N issue_number ...
 .    return
 .  \}
 .
@@ -6334,7 +6340,7 @@ arguments
 .eo
 .de %O
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%O optional_information ... (#\n[.c])
+.    doc-report-usage .%O optional_information ...
 .    return
 .  \}
 .
@@ -6388,7 +6394,7 @@ arguments
 .eo
 .de %P
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%P page_number ... (#\n[.c])
+.    doc-report-usage .%P page_number ...
 .    return
 .  \}
 .
@@ -6442,7 +6448,7 @@ arguments
 .eo
 .de %Q
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%Q corporate_or_foreign_author ... (#\n[.c])
+.    doc-report-usage .%Q corporate_or_foreign_author ...
 .    return
 .  \}
 .
@@ -6496,7 +6502,7 @@ arguments
 .eo
 .de %R
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%R reference_report ... (#\n[.c])
+.    doc-report-usage .%R reference_report ...
 .    return
 .  \}
 .
@@ -6557,7 +6563,7 @@ arguments
 .eo
 .de %T
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%T reference_title ... (#\n[.c])
+.    doc-report-usage .%T reference_title ...
 .    return
 .  \}
 .
@@ -6645,7 +6651,7 @@ arguments
 .eo
 .de %U
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%U URL ... (#\n[.c])
+.    doc-report-usage .%U URL ...
 .    return
 .  \}
 .
@@ -6687,7 +6693,7 @@ arguments
 .eo
 .de %V
 .  if (\n[doc-arg-count] : (\n[.$] == 0)) \{\
-.    tm Usage: .%V volume ... (#\n[.c])
+.    doc-report-usage .%V volume ...
 .    return
 .  \}
 .
@@ -6829,7 +6835,7 @@ arguments
 .      doc-print-recursive
 .    \}
 .    el \{\
-.      tm Usage: .An author_name ... (#\n[.c])
+.      doc-report-usage .An author_name ...
 .      doc-reset-args
 .  \}\}
 ..
@@ -6875,20 +6881,20 @@ arguments
 .\" XXX: what does this function without '-std'?
 .
 .  if \n[doc-arg-count] \{\
-.    tm Usage: .Rv not callable by other macros (#\n[.c])
+.    doc-report-usage .Rv not callable by other macros
 .    doc-reset-args
 .    return
 .  \}
 .
 .  if !\n[.$] \{\
-.    tm Usage: .Rv [-std] [<function> ...] (#\n[.c])
+.    doc-report-usage .Rv [-std] [<function> ...]
 .    return
 .  \}
 .
 .  if "\$1"-std" \{\
 .    nr doc-reg-Rv \*[doc-section]
 .    if ((\n[doc-reg-Rv] < 2) : (\n[doc-reg-Rv] > 3)) \
-.      tm Usage: .Rv -std in sections 2 and 3 only (#\n[.c])
+.      doc-report-usage .Rv -std in sections 2 and 3 only
 .    br
 .    shift
 .    ie (\n[.$] > 1) \{\
@@ -6941,20 +6947,20 @@ arguments
 .\" XXX: what does this function without '-std'?
 .
 .  if \n[doc-arg-count] \{\
-.    tm Usage: .Ex not callable by other macros (#\n[.c])
+.    doc-report-usage .Ex not callable by other macros
 .    doc-reset-args
 .    return
 .  \}
 .
 .  if !\n[.$] \{\
-.    tm Usage: .Ex [-std] [<utility> ...] (#\n[.c])
+.    doc-report-usage .Ex [-std] [<utility> ...]
 .    return
 .  \}
 .
 .  if "\$1"-std" \{\
 .    nr doc-reg-Ex \*[doc-section]
 .    if !((\n[doc-reg-Ex] == 1) : (\n[doc-reg-Ex] == 6) : (\n[doc-reg-Ex] == 8)) \
-.      tm Usage: .Ex -std in sections 1, 6 and 8 only (#\n[.c])
+.      doc-report-usage .Ex -std in sections 1, 6 and 8 only
 .    br
 .    shift
 .    ie (\n[.$] > 1) \{\
@@ -6984,7 +6990,7 @@ arguments
 .
 .eo
 .de doc-Mt-usage
-.  tm Usage: .Mt email_address ... (#\n[.c])
+.  doc-report-usage .Mt email_address ...
 .  doc-reset-args
 ..
 .ec
@@ -7053,7 +7059,7 @@ arguments
 .
 .eo
 .de doc-Lk-usage
-.  tm Usage: .Lk uri [link_text ...] (#\n[.c])
+.  doc-report-usage .Lk uri [link_text ...]
 .  doc-reset-args
 ..
 .ec

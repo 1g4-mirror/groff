@@ -865,7 +865,7 @@
 .      doc-parse-args \$@
 .    \}
 .    el \
-.      tm Usage: .Lb library_name ... (#\n[.c])
+.      doc-report-usage .Lb library_name ...
 .  \}
 .
 .  if !\n[doc-arg-count] \
@@ -894,7 +894,7 @@
 .      br
 .  \}
 .  el \{\
-.    tm Usage: .Lb library_name ... (#\n[.c])
+.    doc-report-usage .Lb library_name ...
 .    doc-reset-args
 .  \}
 ..

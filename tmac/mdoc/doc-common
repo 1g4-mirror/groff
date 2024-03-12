@@ -1411,16 +1411,16 @@
 .        doc-print-recursive
 .      \}
 .      el \{\
-.        tm Usage: .Sh section_name ... (#\n[.c])
+.        doc-report-usage .Sh section_name ...
 .        doc-reset-args
 .    \}\}
 .    el \{\
-.      tm Usage: .Sh not callable by other macros (#\n[.c])
+.      doc-report-usage .Sh not callable by other macros
 .      doc-reset-args
 .  \}\}
 .  el \{\
 .    if !\n[.$] \{\
-.      tm Usage: .Sh section_name ... (#\n[.c])
+.      doc-report-usage .Sh section_name ...
 .      return
 .    \}
 .
@@ -1541,16 +1541,16 @@
 .        doc-print-recursive
 .      \}
 .      el \{\
-.        tm Usage: .Ss subsection_name ... (#\n[.c])
+.        doc-report-usage .Ss subsection_name ...
 .        doc-reset-args
 .    \}\}
 .    el \{\
-.      tm Usage: .Ss not callable by other macros (#\n[.c])
+.      doc-report-usage .Ss not callable by other macros
 .      doc-reset-args
 .  \}\}
 .  el \{\
 .    if !\n[.$] \{\
-.      tm Usage: .Ss subsection_name ... (#\n[.c])
+.      doc-report-usage .Ss subsection_name ...
 .      return
 .    \}
 .
