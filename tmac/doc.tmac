@@ -55,8 +55,11 @@
 .cp 0
 .
 .
+.\" Define a string for use in diagnostic messages.
+.ds doc doc.tmac\"
+.
 .if (\n[.x]\n[.y] < 118) \{\
-.  ds doc-msg doc.tmac: groff mdoc macros require groff 1.18 or later,
+.  ds doc-msg \*[doc]: groff mdoc macros require groff 1.18 or later,
 .  as doc-msg " but found groff \n[.x].\n[.y]; aborting
 .  ab \*[doc-msg]
 .\}
@@ -85,7 +88,7 @@
 .el \
 .  if !\n[C] \
 .    if \n[doc-is-output-html] \{\
-.       tm mdoc: consecutive page numbering required for HTML output
+.       tm \*[doc]: consecutive page numbering required for HTML output
 .       nr C 1
 .    \}
 .if \n[doc-is-output-html] \
@@ -115,7 +118,7 @@
 .el \
 .  if \n[D] \
 .    if \n[doc-is-output-html] \{\
-.       tm mdoc: ignoring double-sided layout in HTML output
+.       tm \*[doc]: ignoring double-sided layout in HTML output
 .       nr D 0
 .    \}
 .
@@ -151,7 +154,7 @@
 .    \}
 .  \}
 .  if d doc-msg \{\
-.    tm mdoc: ignoring \*[doc-msg]
+.    tm \*[doc]: ignoring \*[doc-msg]
 .    rr FT
 .    rm doc-msg
 .  \}
@@ -202,7 +205,7 @@
 .    ds doc-msg when continuously rendering
 .\}
 .if d doc-msg \{\
-.  tm mdoc: ignoring starting page number \*[doc-msg]
+.  tm \*[doc]: ignoring starting page number \*[doc-msg]
 .  rr P
 .  rm doc-msg
 .\}
@@ -221,7 +224,7 @@
 .\" Also, we can't use the `P` register with grohtml at all.
 .ie \n[doc-is-output-html] \{\
 .  if r P \{\
-.     tm mdoc: ignoring starting page number in HTML output
+.     tm \*[doc]: ignoring starting page number in HTML output
 .     rr P
 .  \}
 .\}
@@ -252,7 +255,7 @@
 .    ds doc-msg when continuously rendering
 .\}
 .if d doc-msg \{\
-.  tm mdoc: ignoring page number suffix \*[doc-msg]
+.  tm \*[doc]: ignoring page number suffix \*[doc-msg]
 .  rr X
 .  rm doc-msg
 .\}
