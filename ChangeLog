@@ -6,13 +6,11 @@
 	table of size 1 is pointless.
 	(check_integer_arg): Try to be more robust in the fact of
 	C/C++'s notorious lax integer sizing practices.  We might
-	consider gnulib's "xstrtol" module.  Check `errno` for `ERANGE`
-	after calling `strtoll()` and add range-oriented fatal
-	diagnostic.  Promote other `-h` argument validation errors to
-	`fatal()`.  Only perform a comparison against INT_MAX if
-	LONG_MAX is larger than INT_MAX in the first place.  Report the
-	supported range in range diagnostics.  Use C++- instead of
-	C-style type cast of result.
+	consider gnulib's "xstrtol" module.  Promote `-h` argument
+	validation errors to `fatal()`.  Only perform a comparison
+	against INT_MAX if LONG_MAX is larger than INT_MAX in the first
+	place.  Report the supported range in range diagnostics.  Use
+	C++- instead of C-style type cast of result.
 
 	Mitigates, but arguably does not fix,
 	https://savannah.gnu.org/bugs/?65452>.  Thanks to Alex Colomar
