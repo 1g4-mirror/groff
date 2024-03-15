@@ -1,3 +1,11 @@
+2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Regression-test Savannah #65462.
+
+	* tmac/tests/\
+	an_adjustment-mode-preserved-after-paragraph-tag.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2024-03-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/indxbib/indxbib.cpp: Validate `-h` option arguments
