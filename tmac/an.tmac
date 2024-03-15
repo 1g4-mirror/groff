@@ -700,7 +700,8 @@ contains unsupported escape sequence
 .de1 an*TP-trap
 .  br
 .  di
-.  ad \\*[AD]
+.  ad \\n[an*saved-adjustment-mode]
+.  rr an*saved-adjustment-mode
 .  ll
 .  if \\n[an*have-paragraph-tag] .an-write-paragraph-tag
 ..
@@ -842,6 +843,7 @@ contains unsupported escape sequence
 .  itc 1 an-input-trap
 .  in 0
 .  ll -\\n[an-margin]u
+.  nr an*saved-adjustment-mode \\n[.j]
 .  di an*paragraph-tag
 .  na
 ..

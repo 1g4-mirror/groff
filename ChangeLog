@@ -1,5 +1,19 @@
 2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Fix Savannah #65462.
+
+	* tmac/an.tmac (TP): Save the existing adjustment mode before
+	disabling adjustment in the diversion used to format the
+	paragraph tag.
+	(an*TP-trap): Restore the saved adjustment mode after closing
+	the diversion, instead of using the configured default
+	adjustment mode.
+
+	Fixes <https://savannah.gnu.org/bugs/?65462>.  Thanks to Russ
+	Allbery for the report.
+
+2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Regression-test Savannah #65462.
 
 	* tmac/tests/\
