@@ -1179,7 +1179,7 @@ contains unsupported escape sequence
 .      if '\*[.T]'html' \
 .        nop \X'html:<a href="\\*[an*hyperlink]">'\c
 .      if '\*[.T]'pdf' \
-.        pdfhref W -D \\*[an*hyperlink] -- |
+.        pdfhref W -S -D \\*[an*hyperlink]
 .      if \\n[an*is-output-terminal] \
 .        nop \X'tty: link \\*[an*hyperlink]'\c
 .      unformat an*link-text \" ...so it adjusts in its new context.
@@ -1316,10 +1316,10 @@ contains unsupported escape sequence
 .        ds an*destination-bookmark-tag \\$1(\\$2)\"
 .        pdf:lookup \\*[an*destination-bookmark-tag]
 .        ie !'\\*[pdf:lookup-result]'' \
-.          pdfhref L -D \\*[an*destination-bookmark-tag] -- "|"
+.          pdfhref L -S -D \\*[an*destination-bookmark-tag]
 .        el \{\
 .          nop \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
-.          pdfhref W -D \\*[an*url] -- "|"
+.          pdfhref W -S -D \\*[an*url]
 .        \}
 .      \}
 .      if \\n[an*is-output-terminal] \

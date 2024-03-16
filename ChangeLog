@@ -1,5 +1,36 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pdf,man,mdoc]: Refactor a recent feature.
+
+	The "pdfhref pipe" feature recently added used in-band signaling
+	to indicate that a PDF mark hotspot should be left open by the
+	`pdhref` hyperlink management macro.  I'm uneasy with this
+	because it forecloses the possibility of using the chosen
+	in-band signal content as link text.  (Compounding the risk of
+	user frustration is that there's no documentation of any of
+	this.)  Replace it by adding a new `-S` flag to the `pdfhref`
+	macro, indicating the caller's desire to manage closing of the
+	hotspot themselves, as "tmac/an.tmac" does already.
+
+	See <https://savannah.gnu.org/bugs/?61434#comment5>.
+
+	* tmac/pdf.tmac (pdfhref): Initialize `pdf:href-S` register to
+	zero (false).
+	(pdf:href.opt-S): Define new alias for `pdf:href.flag`, so the
+	{complex, Unix command-emulating} `pdfhref` argument management
+	system treats it as a Boolean parameter.
+	(pdf*href): Rename `pdf:href.pipe` register to
+	`pdf:href.leave-mark-open`.  Throw error and don't honor "-S"
+	parameter if the user has also specified a link text appendment
+	with the "-A" option.  (If we're not closing the hotspot, we
+	don't know where the appendment will go.)  Stop treating link
+	text (the `PDFHREF.DESC` string) specially if it is "|".
+
+	* tmac/an.tmac (an*end-hyperlink, MR):
+	* tmac/doc.tmac (doc-begin-hyperlink-pdf): Migrate to new API.
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdf*href): Fix derpy syntax error, introduced
 	by me in commit cd9fde325f, 4 March.  Exposed by a pending
 	change.
