@@ -1,5 +1,10 @@
 2024-03-16  Alejandro Colomar <alx@kernel.org>
 
+	* src/utils/indxbib/indxbib.cpp (check_integer_arg): Don't
+	`else` after [[noreturn]].
+
+2024-03-16  Alejandro Colomar <alx@kernel.org>
+
 	[libgroff,libbib,indxbib]: Add, use `ceil_prime()`.
 
 	* src/include/lib.h:
