@@ -1232,28 +1232,28 @@
 .
 .eo
 .de LP
-.  tm Not a \-mdoc command: .LP (#\n[.c])
+.  doc-warn \$0 is not an mdoc macro name
 ..
 .ec
 .
 .
 .eo
 .de PP
-.  tm Not a \-mdoc command: .PP (#\n[.c])
+.  doc-warn \$0 is not an mdoc macro name
 ..
 .ec
 .
 .
 .eo
 .de pp
-.  tm Not a \-mdoc command: .pp (#\n[.c])
+.  doc-warn \$0 is not an mdoc macro name
 ..
 .ec
 .
 .
 .eo
 .de SH
-.  tm Not a \-mdoc command: .SH (#\n[.c])
+.  doc-warn \$0 is not an mdoc macro name
 ..
 .ec
 .

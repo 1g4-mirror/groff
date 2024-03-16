@@ -1,5 +1,15 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common (LP, PP, pp, SH): Use new `doc-warn`
+	macro instead of hand-crafting diagnostic message with `tm`
+	request.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?52463>, which I
+	should have known would not stay dead for long.  (And which I
+	won't be surprised to see scrabble forth from the grave again.)
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac (Xr): When formatting PDF, automatically attempt
 	lookups of `Xr` destinations as internal bookmark tags.  If
 	lookup succeeds, link to the within-document destination rather

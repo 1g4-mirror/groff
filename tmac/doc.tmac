@@ -2877,11 +2877,10 @@
 .  ds doc-macro-name Bk
 .
 .  if \n[doc-keep-type] \
-.    tm .Bk: nesting keeps not implemented yet. (#\n[.c])
-.
+.    doc-warn .Bk: nesting keeps not implemented yet
 .  ie        "\$1"-lines" \{\
 .    nr doc-keep-type 2
-.    tm .Bk -lines: Not implemented yet. (#\n[.c])
+.    doc-warn .Bk -lines: not implemented yet
 .  \}
 .  el \{ .ie "\$1"-words" \{\
 .    nr doc-keep-type 1
@@ -3029,8 +3028,8 @@
 .  ds doc-macro-name Bd
 .
 .  if !\n[.$] \{\
-.    tm1 "Usage: .Bd {-literal | -filled | -ragged | -centered | -unfilled}
-.    tm1 "           [-offset [string]] [-compact] [-file name] (#\n[.c])
+.    doc-report-usage .Bd {-literal | -filled | -ragged | -centered | \
+-unfilled} [-offset [string]] [-compact] [-file name]
 .    return
 .  \}
 .
@@ -3368,7 +3367,6 @@ macro
 .  el \{\
 .    doc-warn unknown list type '\$1' (or missing list type) in .Bl \
 macro
-.    tm
 .    nr doc-arg-ptr 0
 .  \}\}\}\}\}\}\}\}\}\}\}
 .
@@ -3421,12 +3419,12 @@ macro
 .
 .eo
 .de doc-Bl-usage
-.  tm1 "Usage: .Bl {-hang | -ohang | -tag | -diag | -inset}
-.  tm1 "             [-width <string>]
-.  tm1 "             [-offset <string>] [-compact]
-.  tm1 "       .Bl -column [-offset <string>] <string1> <string2> ...
-.  tm1 "       .Bl {-item | -enum [-nested] | -bullet | -hyphen | -dash}
-.  tm1 "             [-offset <string>] [-compact] (#\n[.c])
+.  doc-report-usage .Bl {-hang | -ohang | -tag | -diag | -inset} \
+[-width <string>] [-offset <string>] [-compact]
+.  doc-report-usage .Bl -column [-offset <string>] <string1> <string2> \
+...
+.  doc-report-usage .Bl {-item | -enum [-nested] | -bullet | -hyphen | \
+-dash} [-offset <string>] [-compact]
 ..
 .ec
 .
@@ -4903,8 +4901,8 @@ arguments
 .      doc-reset-args
 .  \}
 .  el \{\
-.    tm1 "Usage: Ta must follow column entry: e.g.
-.    tm1 "         .It column_string [Ta [column_string ...]] (#\n[.c])
+.    doc-report-usage Ta must follow column entry: e.g., \
+\&.It column_string [Ta [column_string ...]]
 .  \}
 ..
 .ec
@@ -6828,8 +6826,7 @@ arguments
 .        doc-parse-args \$@
 .    \}\}\}
 .    el \{\
-.      tm1 "Usage: .An {-nosplit | -split}
-.      tm1 "       .An author_name ... (#\n[.c])
+.      doc-report-usage .An {-nosplit | -split} .An author_name ...
 .  \}\}
 .
 .  if \n[doc-in-authors-section] \{\
@@ -7169,10 +7166,10 @@ arguments
 .
 .eo
 .de doc-defunct-macro
-.  doc-err .\$0 defunct
+.  tmc \*[doc]:\n[.F]:\n[.c]: error: '\$0' macro is defunct
 .  if d doc-\$0-usage \
-.    tmc , \*[doc-\$0-usage]
-.  tm1 " (#\n[.c])
+.    tmc ; \*[doc-\$0-usage]
+.  tm
 ..
 .ec
 .
