@@ -1,5 +1,14 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common (Os): When formatting PDF, automatically
+	give each `Os` call a named PDF bookmark tag that can be used in
+	links (inside the guts of the `Xr` macro).
+
+	For example, this enables "inbound" links to the groff_mdoc(7)
+	page in "groff-man-pages.pdf".
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pdf,man,mdoc]: Refactor a recent feature.
 
 	The "pdfhref pipe" feature recently added used in-band signaling

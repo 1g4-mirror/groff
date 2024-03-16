@@ -991,8 +991,11 @@
 .
 .  doc-set-up-titles
 .
-.  if '\*[.T]'pdf' \
-.    pdfbookmark 1 "\*[doc-page-topic](\*[doc-section])"
+.  if '\*[.T]'pdf' \{\
+.    ds doc-page-tag "\*[doc-page-topic](\*[doc-section])\"
+.    pdfbookmark -T "\*[doc-page-tag]" 1 "\*[doc-page-tag]"
+.    rm doc-page-tag
+.  \}
 .
 .  doc-header
 .  nr doc-need-titles-reset 1
