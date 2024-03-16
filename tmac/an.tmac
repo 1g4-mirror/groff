@@ -1176,6 +1176,7 @@ contains unsupported escape sequence
 .        pdfhref W -D \\*[an*hyperlink] -- |
 .      if \\n[an*is-output-terminal] \
 .        nop \X'tty: link \\*[an*hyperlink]'\c
+.      unformat an*link-text \" ...so it adjusts in its new context.
 .      \" Replace the final newline of the diversion.
 .      chop an*link-text
 .      as an*link-text \&\c

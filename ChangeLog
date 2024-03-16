@@ -1,5 +1,19 @@
 2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Fix Savannah #65464.
+
+	* tmac/an.tmac (an*end-hyperlink): Unformat the diversion before
+	emitting it.  This way adjustment of spaces will take place in
+	the context where it's actually formatted, and be more
+	appropriate to the line.
+
+	* tmac/tests/an_adjust-link-text-correctly.sh: Update test
+	expectations.  The only change here was to adjustment parity.
+
+	Fixes <https://savannah.gnu.org/bugs/?65464>.
+
+2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Fix Savannah #65462.
 
 	* tmac/an.tmac (TP): Save the existing adjustment mode before
