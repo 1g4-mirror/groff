@@ -1,5 +1,20 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: When formatting PDF, attempt lookups of `MR` destinations
+	as internal bookmark tags.  If lookup succeeds, link to the
+	within-document destination rather than an "external" URL like
+	"man:foobar(1)".
+
+	* doc/GMPfront.t.in: Drop `END` dummy macro and redefinition of
+	`MR` macro, moving the logic from here...
+	* tmac/an.tmac (MR): ...to here, and trivially refactoring to
+	rename variables for intelligibility.  Also simplify, using the
+	"dangling open mark" incantation of the `pdfhref` macro that
+	Deri innovated, since the existing logic unconditionally writes
+	the link text subsequently.
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: When formatting PDF, automatically give each `TH` call a
 	named PDF bookmark tag that can be used in links (inside the
 	guts of the `MR` macro).
