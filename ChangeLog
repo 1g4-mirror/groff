@@ -1,5 +1,12 @@
 2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Regression-test Savannah #64267.
+
+	* tmac/tests/tmac/tests/an_PD-restores-spacing.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Fix Savannah #65464.
 
 	* tmac/an.tmac (an*end-hyperlink): Unformat the diversion before
