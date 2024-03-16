@@ -6194,7 +6194,7 @@ GNU @code{troff} provides a set of mathematical and logical operators
 familiar to programmers---as well as some unusual ones---but supports
 only integer arithmetic.@footnote{Provision is made for interpreting and
 reporting decimal fractions in certain cases.}  The internal data type
-used for computing results depends on the host machine but is usually a
+used for computing results depends on the host machine but is at least a
 32-bit signed integer, which suffices to represent magnitudes within a
 range of ±2 billion.@footnote{If that's not enough, see the
 @cite{groff_tmac@r{(5)}} man page for the @file{62bit.tmac} macro
