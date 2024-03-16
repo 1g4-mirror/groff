@@ -12,14 +12,6 @@
 ..
 .
 .am reload-man END
-.de an*bookmark
-.  ie (\\\\$1=1) \{\
-.     ds an*page-ref-nm \\\\$2\"
-.     pdfbookmark -T "\\\\*[an*page-ref-nm]" \\\\$1 \\\\$2
-.  \}
-.  el .pdfbookmark \\\\$1 \\\\$2
-..
-.
 .de1 MR
 .  if ((\\\\n[.$] < 2) : (\\\\n[.$] > 3)) \
 .    an-style-warn .\\\\$0 expects 2 or 3 arguments, got \\\\n[.$]

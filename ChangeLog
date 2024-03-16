@@ -1,5 +1,15 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: When formatting PDF, automatically give each `TH` call a
+	named PDF bookmark tag that can be used in links (inside the
+	guts of the `MR` macro).
+
+	* doc/GMPfront.t.in (reload-man [appendment]): Move logic for
+	declaring a named ("tagged") bookmark from here...
+	* tmac/an.tmac (an*bookmark*pdf): ...to here.
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdf*href): Fix problem with hotspot placement
 	when there is no link text (illustrated by the "See also"
 	section of pic(1) when rendered to PDF).  It is apparently

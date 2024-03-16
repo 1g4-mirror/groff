@@ -230,7 +230,10 @@
 .ds an*bookmark*utf8 \" empty
 .
 .de an*bookmark*pdf
-.  pdfbookmark \\$1 \\$2
+.  ie (\\$1 = 1) \
+.    pdfbookmark -T "\\$2" \\$1 \\$2
+.  el \
+.    pdfbookmark \\$1 \\$2
 ..
 .
 .
