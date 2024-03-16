@@ -708,7 +708,7 @@ int main(int argc, char **argv)
       {
 	char *ptr;
 	long n = strtol(optarg, &ptr, 10);
-	if (n == 0 && ptr == optarg)
+	if (ptr == optarg)
 	  error("argument for -w must be a non-negative integer");
 	else if (n < 0 || n > INT_MAX)
 	  error("out of range argument for -w");

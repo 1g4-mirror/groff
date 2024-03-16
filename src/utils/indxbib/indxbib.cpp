@@ -346,7 +346,7 @@ static void check_integer_arg(char opt, const char *arg, int min, int *res)
   if (ERANGE == errno)
     fatal("argument to -%1 must be between %2 and %3", arg, min,
 	  INT_MAX);
-  else if (n == 0 && ptr == arg)
+  else if (ptr == arg)
     fatal("argument to -%1 not an integer", opt);
   else if (n < min)
     fatal("argument to -%1 must not be less than %2", opt, min);

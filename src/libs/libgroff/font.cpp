@@ -988,7 +988,7 @@ bool font::load(bool load_header_only)
 	  }
 	  char *ptr;
 	  metric.code = (int)strtol(p, &ptr, 0);
-	  if (metric.code == 0 && ptr == p) {
+	  if (ptr == p) {
 	    t.error("invalid code '%1' for character '%2'", p, nm);
 	    return false;
 	  }
