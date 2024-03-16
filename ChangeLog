@@ -1,3 +1,16 @@
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/pdf.tmac (pdf*href): Fix problem with hotspot placement
+	when there is no link text (illustrated by the "See also"
+	section of pic(1) when rendered to PDF).  It is apparently
+	necessary to flush the output buffer immediately after
+	constructing certain device control nodes ("pdf: markstart" and
+	"pdf: markend" in this case).  Deri understands this stuff
+	better than I do; the misapprehensions I exhibited in Savannah
+	#65052 might be related.  If that's the case, then the issue is
+	maintaining synchrony between the formatter's idea of the
+	drawing position and the output driver's.
+
 2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man]: Fix Savannah #64267.
