@@ -1,5 +1,11 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac (pdf*href): Fix derpy syntax error, introduced
+	by me in commit cd9fde325f, 4 March.  Exposed by a pending
+	change.
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: When formatting PDF, attempt lookups of `MR` destinations
 	as internal bookmark tags.  If lookup succeeds, link to the
 	within-document destination rather than an "external" URL like
