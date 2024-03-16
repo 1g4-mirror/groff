@@ -4637,6 +4637,7 @@ arguments
 .\" NS   doc-macro-name
 .\" NS
 .\" NS local variables:
+.\" NS   doc-destination-bookmark-tag-Xr
 .\" NS   doc-has-section-Xr
 .\" NS   doc-lasttext-Xr
 .\" NS   doc-next-arg-ptr-Xr
@@ -4724,7 +4725,17 @@ arguments
 .    if (\n[doc*Xr-URL-format] = 4) \
 .      ds doc-target-uri-Xr \
          x-man-doc://\*[doc-target-section-Xr]/\*[doc-target-identifier-Xr]\"
-.    doc-begin-hyperlink-\*[.T] \*[doc-target-uri-Xr]
+.    ie '\*[.T]'pdf' \{\
+.      ds doc-destination-bookmark-tag-Xr \
+"\*[doc-target-identifier-Xr](\*[doc-target-section-Xr])
+.      pdf:lookup \*[doc-destination-bookmark-tag-Xr]
+.      ie !'\\*[pdf:lookup-result]'' \
+.        pdfhref L -S -D \*[doc-destination-bookmark-tag-Xr]
+.      el \
+.        doc-begin-hyperlink-\*[.T] \*[doc-target-uri-Xr]
+.    \}
+.    el \
+.      doc-begin-hyperlink-\*[.T] \*[doc-target-uri-Xr]
 .  \}
 .
 .  nr doc-curr-font \n[.f]

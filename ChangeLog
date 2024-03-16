@@ -1,5 +1,16 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac (Xr): When formatting PDF, automatically attempt
+	lookups of `Xr` destinations as internal bookmark tags.  If
+	lookup succeeds, link to the within-document destination rather
+	than an "external" URL like "man:foobar(1)".
+
+	For example, this enables "outbound" links from the
+	groff_mdoc(7) page to the other ~60 documents collected in
+	"groff-man-pages.pdf".
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-common (Os): When formatting PDF, automatically
 	give each `Os` call a named PDF bookmark tag that can be used in
 	links (inside the guts of the `Xr` macro).
