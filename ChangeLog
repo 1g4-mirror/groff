@@ -1,5 +1,26 @@
 2024-03-16  Alejandro Colomar <alx@kernel.org>
 
+	[libgroff,libbib,indxbib]: Add, use `ceil_prime()`.
+
+	* src/include/lib.h:
+	* src/libs/libgroff/prime.cpp (ceil_prime): Add function to get
+	the lowest prime not less than n.  While at it, fix the logic,
+	which was incorrect in the open-coded call sites, since for an
+	input of 1, it produced 3, but the first prime is 2.  A recent
+	commit started rejecting 1 earlier, so this bug was now
+	impossible to trigger, but remained there.
+
+	Also, since this is a library function, let's behave well for an
+	input of 0, which is mathematically fine, and return also the
+	first prime, 2.
+
+	* src/libs/libbib/index.cpp
+	(index_search_item::read_common_words_file):
+	* src/utils/indxbib/indxbib.cpp (main): And use it where the
+	same logic was being open-coded.
+
+2024-03-16  Alejandro Colomar <alx@kernel.org>
+
 	* src/devices/grolbp/lbp.cpp (main): Remove bogus (and
 	redundant) check.  `str == end` can only happen if strtol(3)
 	returns 0.

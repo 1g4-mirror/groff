@@ -148,11 +148,7 @@ int main(int argc, char **argv)
       {
 	int requested_hash_table_size;
 	check_integer_arg('h', optarg, 2, &requested_hash_table_size);
-	hash_table_size = requested_hash_table_size;
-	if ((hash_table_size > 2) && (hash_table_size % 2) == 0)
-		hash_table_size++;
-	while (!is_prime(hash_table_size))
-	  hash_table_size += 2;
+	hash_table_size = ceil_prime(requested_hash_table_size);
 	if (hash_table_size != requested_hash_table_size)
 	  warning("requested hash table size %1 is not prime: using %2"
 		  " instead", optarg, hash_table_size);
