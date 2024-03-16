@@ -346,7 +346,7 @@ static void check_integer_arg(char opt, const char *arg, int min, int *res)
     fatal("argument to -%1 not an integer", opt);
   if (n < min)
     fatal("argument to -%1 must not be less than %2", opt, min);
-  if ((LONG_MAX > INT_MAX) && (n > INT_MAX))
+  if (n > INT_MAX)
     fatal("argument to -%1 must be between %2 and %3", arg, min, INT_MAX);
   if (*ptr != '\0')
     fatal("junk after integer argument to -%1", opt);

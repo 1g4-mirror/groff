@@ -1,5 +1,11 @@
 2024-03-16  Alejandro Colomar <alx@kernel.org>
 
+	* src/utils/indxbib/indxbib.cpp (check_integer_arg): Remove dead
+	code.  The tests (LONG_MAX > INT_MAX && n > INT_MAX) and (n >
+	INT_MAX) are equivalent.
+
+2024-03-16  Alejandro Colomar <alx@kernel.org>
+
 	* src/utils/indxbib/indxbib.cpp (check_integer_arg): Clear
 	`errno` before calling `strtol()`.  Otherwise, `errno` may hold
 	`ERANGE` from before.  See strtol(3).
