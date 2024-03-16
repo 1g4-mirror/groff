@@ -1171,7 +1171,7 @@ contains unsupported escape sequence
 .    di
 .    ev
 .    nr an*is-in-link-text-diversion 0
-.    \" If the diversion width is zero, assume there was no link text.
+.    \" If the diversion width is nonzero, assume there was link text.
 .    ie \\n[dl] \{\
 .      if '\*[.T]'html' \
 .        nop \X'html:<a href="\\*[an*hyperlink]">'\c
