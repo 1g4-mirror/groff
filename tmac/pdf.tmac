@@ -814,6 +814,9 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" macro, (invoked by ".pdfhref I -PT <macro-name>"), to implement a
 .\" suitable initialisation action.
 .\"
+.\" XXX: pdf.tmac does _not_ provide pdf*href-PT.init; does it need to?
+.\" It seems not, at least in some cases; see Savannah #65354.
+.\"
 .\"
 .\" "pdf*href-L" is the generic handler for creating references to
 .\" named destinations in PDF documents.  It supports both local
