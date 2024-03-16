@@ -1203,8 +1203,8 @@ Several features of the above example are of note.
 .IP \(bu 3n
 The empty request (.),
 which does nothing,
-is used to vertically space the input file for readability by the
-document maintainer.
+vertically spaces the input file for readability by the document
+maintainer.
 .
 Do not put blank (empty) lines in a man page source document.
 .
@@ -1245,8 +1245,7 @@ a space precedes the ellipsis.
 .IP \(bu
 The non-breaking adjustable space escape sequence
 .B \e\(ti
-is used to prevent the output line from breaking within the option
-brackets;
+prevents the output line from breaking within the option brackets;
 see subsection \(lqPortability\(rq below.
 .
 .
@@ -2854,8 +2853,10 @@ Heirloom Doctools
 .IR troff , \" Heirloom Doctools
 and
 .IR neatroff ,
-but not Plan\~9 or Solaris
-.I troff. \" Plan 9, Solaris
+but not Documenter's Workbench,
+Plan\~9,
+or Solaris
+.I troff. \" DWB, Plan 9, Solaris
 .
 .
 .TP
@@ -4229,14 +4230,13 @@ that precedes it.
 .
 .
 .IP
-After calls to the
+Calling the
 .B .SH
-and
+or
 .B .SS
-sectioning macros,
-all relative insets are cleared and calls to
+sectioning macros clears all relative insets and
 .B .RE
-have no effect until
+calls have no effect until
 .B .RS
 is used again.
 .
