@@ -1,5 +1,12 @@
 2024-03-16  Alejandro Colomar <alx@kernel.org>
 
+	* src/devices/grolbp/lbp.cpp (main): Fix range check after
+	`strtol()`.  In case INT_MAX==LONG_MAX, we need to check for
+	ERANGE to reject high values.  The test 'n > INT_MAX' would
+	never be true.
+
+2024-03-16  Alejandro Colomar <alx@kernel.org>
+
 	* src/utils/indxbib/indxbib.cpp (check_integer_arg): Collapse
 	related tests.
 
