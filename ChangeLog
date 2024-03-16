@@ -1,5 +1,11 @@
 2024-03-16  Alejandro Colomar <alx@kernel.org>
 
+	* src/devices/grolbp/lbp.cpp (main): Remove bogus (and
+	redundant) check.  `str == end` can only happen if strtol(3)
+	returns 0.
+
+2024-03-16  Alejandro Colomar <alx@kernel.org>
+
 	* src/devices/grodvi/dvi.cpp
 	(dvi_font::handle_unknown_font_command):
 	* src/devices/grolbp/lbp.cpp (main):

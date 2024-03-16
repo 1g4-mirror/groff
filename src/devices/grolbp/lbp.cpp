@@ -696,7 +696,7 @@ int main(int argc, char **argv)
       {
 	char *ptr;
 	long n = strtol(optarg, &ptr, 10);
-	if ((n <= 0) && (ptr == optarg))
+	if (ptr == optarg)
 	  error("argument for -c must be a positive integer");
 	else if (n <= 0 || n > 32767)
 	  error("out of range argument for -c");
