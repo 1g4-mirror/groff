@@ -338,6 +338,7 @@ static void usage(FILE *stream)
 static void check_integer_arg(char opt, const char *arg, int min, int *res)
 {
   char *ptr;
+  errno = 0;
   long n = strtol(arg, &ptr, 10);
   if (ERANGE == errno)
     fatal("argument to -%1 must be between %2 and %3", arg, min, INT_MAX);
