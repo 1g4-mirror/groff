@@ -303,11 +303,12 @@ These include the \%Netpbm tools
 .IR \%pnmcrop ,
 .IR \%pnmcut ,
 and
-.IR \%pnmtopng ;
-\%Ghostscript
-.RI ( gs );
-and the \%PSUtils tool
-.IR \%psselect .
+.IR \%pnmtopng
+as well as
+\%Ghostscript's
+.IR \%gs
+and
+.IR \%ps2ps .
 .
 .
 .\" ====================================================================
