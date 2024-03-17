@@ -552,7 +552,7 @@ Set
 as a section heading.
 .
 If no argument is given,
-a one-line input trap is planted;
+the macro plants a one-line input trap;
 text on the next line
 .\", which can be formatted with a macro, \" true but discouraged
 becomes
@@ -614,7 +614,7 @@ ordinary paragraph
 .RB ( .P ).
 .
 If no argument is given,
-a one-line input trap is planted;
+the macro plants a one-line input trap;
 text on the next line
 .\", which can be formatted with a macro, \" true but discouraged
 becomes
@@ -844,9 +844,9 @@ is not.
 Set a paragraph with a leading tag,
 and the remainder of the paragraph indented.
 .
-A one-line input trap that honors the
+The macro plants a one-line input trap that honors the
 .B \(rsc
-escape sequence is planted;
+escape sequence;
 text on the next line becomes the tag,
 set without indentation.
 .
@@ -886,7 +886,7 @@ _endif()dnl
 Set an additional tag for a paragraph tagged with
 .BR .TP .
 .
-An input trap is planted as with
+The macro plants a one-line input trap as with
 .BR .TP .
 .
 .
@@ -1643,7 +1643,7 @@ Set
 in bold.
 .
 If no argument is given,
-a one-line input trap is planted;
+the macro plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set in bold.
@@ -1677,7 +1677,7 @@ Set
 in an italic or oblique face.
 .
 If no argument is given,
-a one-line input trap is planted;
+the macro plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set in an italic or oblique face.
@@ -1721,7 +1721,7 @@ Set
 one point smaller than the default type size on typesetters.
 .
 If no argument is given,
-a one-line input trap is planted;
+the macro plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set smaller.
@@ -3241,7 +3241,7 @@ in bold and
 one point smaller than the default type size.
 .
 If no argument is given,
-a one-line input trap is planted;
+the macro plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set smaller and in bold.
