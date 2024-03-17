@@ -1,5 +1,14 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*scan-string-for-backslash): Choose an escape
+	character that is much less likely than the at sign to be
+	specified in a man(7) document's page footer.
+
+	Fixes <https://savannah.gnu.org/bugs/?65469>.  Thanks to Thomas
+	Dickey for the report.
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an_inner-footer-abbreviation-works.sh: Add
 	regression test case for Savannah #65469.
 

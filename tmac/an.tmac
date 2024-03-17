@@ -537,9 +537,9 @@
 .  while (\\n[an*index] < \\n[an*max-index]) \{\
 .    ds an*char \\$*
 .    substring an*char \\n[an*index] \\n[an*index]
-.    ec @
+.    ec 
 .    \" Use a weird delimiter to reduce lexical colorizer confusion.
-.    if _@*[an*char]_\\_ .nr an*string-contains-backslash 1
+.    if _*[an*char]_\\_ .nr an*string-contains-backslash 1
 .    ec
 .    if \\n[an*string-contains-backslash] .break
 .    nr an*index +1
