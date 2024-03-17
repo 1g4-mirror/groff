@@ -16,7 +16,7 @@
 	[man]: Fix Savannah #64267.
 
 	* tmac/an.tmac (an-reset-paragraph-spacing): Restore spacing
-	{that is, cancel no-space mode} to handle a "belated" call
+	{that is, cancel no-space mode} to handle a "belated" `PD` call
 	immediately after a paragraphing macro (`P`, `HP`, or `IP` with
 	no marker argument).
 
