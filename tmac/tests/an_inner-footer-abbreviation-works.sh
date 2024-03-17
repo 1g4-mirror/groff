@@ -58,6 +58,15 @@ error=$(echo "$input" | "$groff" -Tascii -P-cbou -man -ww -z 2>&1)
 echo "$error"
 test -z "$error" || wail
 
+# Regression-test Savannah #65469.
+#
+# Don't spew diagnostics if the argument being abbreviated contains '@'.
+echo 'testing for graceful treatment of argument containing "@"' >&2
+input='.TH tic 1M 2023-12-30 "ncurses @NCURSES_MAJOR@.@NCURSES_MINOR@"'
+error=$(echo "$input" | "$groff" -Tascii -P-cbou -man -ww -z 2>&1)
+echo "$error"
+test -z "$error" || wail
+
 test -z "$fail"
 
 # vim:set ai et sw=4 ts=4 tw=72:

@@ -1,5 +1,10 @@
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an_inner-footer-abbreviation-works.sh: Add
+	regression test case for Savannah #65469.
+
+2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-common (LP, PP, pp, SH): Use new `doc-warn`
 	macro instead of hand-crafting diagnostic message with `tm`
 	request.
