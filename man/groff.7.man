@@ -3422,7 +3422,7 @@ indicates a hyphenation point.
 .TPx
 .REQ .hy
 Set automatic hyphenation mode to the value of the
-.REG .hydefault
+.B \%.hydefault
 register.
 .
 .TPx
@@ -7167,6 +7167,9 @@ file.
 provides localization files for several languages;
 see
 .MR groff_tmac @MAN5EXT@ .
+.
+These also set the default automatic hyphenation mode with
+.BR \%.hydefault .
 .
 .
 .\" ====================================================================
