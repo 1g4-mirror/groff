@@ -1,3 +1,10 @@
+2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[mdoc]: Regression-test Savannah #65480.
+
+	* tmac/tests/doc_reset-data-between-documents.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2024-03-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc.tmac (Xr): Fix copy-and-paste error that made all man
