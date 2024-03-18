@@ -1,5 +1,19 @@
 2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac (Ar): Don't reset the selected font to its
+	previous value when formatting `doc-str-Ar-default`; the latter
+	string already takes care of this.
+
+	* tmac/groff_mdoc.7.man (Arguments) <Ar>: Add a case of an
+	interstitial ellipsis in an argument list, to demonstrate that
+	the typeface gets reset correctly after the ellipsis.
+
+	Fixes a post-1.23.0 regression.  Thanks to Lennart Jablonka for
+	the report.  Problem introduced by me in commit df1fc139af, 3
+	September.
+
+2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-common: Trivially refactor.  Rename
 	`doc-need-titles-reset` register to `doc-end-previous-document`,
 	reflecting its newly narrowed purpose.

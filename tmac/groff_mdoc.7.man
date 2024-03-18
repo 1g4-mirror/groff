@@ -1578,7 +1578,7 @@ is output.
 .
 .
 .Pp
-.Bl -tag -width ".Li .Ar\ file1\ file2" -compact -offset 15n
+.Bl -tag -width ".Li .Ar\ file\ ...\ dest-dir" -compact -offset 15n
 .It Li .Ar
 .Ar
 .It Li ".Ar file1"
@@ -1587,6 +1587,8 @@ is output.
 .Ar file1 .
 .It Li ".Ar file1 file2"
 .Ar file1 file2
+.It Li ".Ar file ... dest-dir"
+.Ar file ... dest-dir
 .It Li ".Ar f1 f2 f3 :"
 .Ar f1 f2 f3 :
 .It Li ".Ar file ) ) ,"
