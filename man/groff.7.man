@@ -4492,7 +4492,7 @@ to the standard error stream.
 As
 .request .tm ,
 but recognizes and strips a leading neutral double quote,
-allowing embedded spaces in
+allowing embedded leading spaces in
 .IR message .
 .
 .TPx
