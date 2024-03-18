@@ -325,6 +325,8 @@
 .  \}
 .  if \n[C] .rr P
 .
+.  doc-reset-titles
+.
 .  if !\n[.$] \
 .    doc-warn .Dd directive expects an argument
 .  if \n[.$] \{\
@@ -1134,6 +1136,22 @@
 .ec
 .
 .
+.\" NS doc-reset-titles macro
+.\" NS   prepare for a new mdoc(7) document
+.
+.eo
+.de doc-reset-titles
+.  \" Reset strings to reduce info leaks from one man page to the next.
+.  ds doc-date-string UNDATED\"
+.  ds doc-page-topic UNTITLED\"
+.  ds doc-volume LOCAL\"
+.  ds doc-section \" empty
+.  ds doc-operating-system \" empty
+.  ds doc-topic-name \" empty
+..
+.ec
+.
+.
 .\" NS doc-end-macro macro
 .\" NS   finish output
 .\" NS
@@ -1170,14 +1188,6 @@
 .  \}
 .  ch doc-header
 .  doc-break-page-with-new-number
-.
-.  \" Reset strings to reduce info leaks from one man page to the next.
-.  ds doc-date-string UNDATED\"
-.  ds doc-page-topic UNTITLED\"
-.  ds doc-volume LOCAL\"
-.  ds doc-section \" empty
-.  ds doc-operating-system \" empty
-.  ds doc-topic-name \" empty
 ..
 .ec
 .

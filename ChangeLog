@@ -1,5 +1,20 @@
 2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common (doc-reset-titles): New macro pulls
+	several string assignment operations to here...
+	(doc-end-macro): ...from here, because they're needed more
+	generally.
+	(Dd): Call the new macro unconditionally.
+
+	Fixes <https://savannah.gnu.org/bugs/?65480>.  Problem
+	introduced by me in the 1.23.0 development cycle; I didn't
+	bother to bisect it down to an individual commit because I know
+	I churned parts of the macro package pretty vigorously to get
+	batch rendering of mixed man(7) and mdoc(7) documents working
+	correctly.  (And as we can see, I didn't _quite_ succeed.)
+
+2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Regression-test Savannah #65480.
 
 	* tmac/tests/doc_reset-data-between-documents.sh: Do it.
