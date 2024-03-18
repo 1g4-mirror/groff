@@ -1,5 +1,11 @@
 2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common: Trivially refactor.  Rename
+	`doc-need-titles-reset` register to `doc-end-previous-document`,
+	reflecting its newly narrowed purpose.
+
+2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-common (doc-reset-titles): New macro pulls
 	several string assignment operations to here...
 	(doc-end-macro): ...from here, because they're needed more

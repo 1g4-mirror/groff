@@ -315,7 +315,7 @@
 .  \"
 .  \" If also continuously rendering, cause a page transition to a new
 .  \" mdoc(7) document.
-.  if \n[doc-need-titles-reset] \{\
+.  if \n[doc-end-previous-document] \{\
 .    if \n[cR] .doc-end-macro
 .
 .    \" Clear the page header trap so it is not sprung with stale
@@ -1001,7 +1001,7 @@
 .  \}
 .
 .  doc-header
-.  nr doc-need-titles-reset 1
+.  nr doc-end-previous-document 1
 ..
 .ec
 .
@@ -1156,7 +1156,7 @@
 .\" NS   finish output
 .\" NS
 .\" NS modifies:
-.\" NS   doc-need-titles-reset
+.\" NS   doc-end-previous-document
 .
 .eo
 .de doc-end-macro
@@ -1317,13 +1317,13 @@
 .nr doc-in-authors-section 0
 .
 .
-.\" NS doc-need-titles-reset global register (bool)
+.\" NS doc-end-previous-document global register (bool)
 .\" NS   whether the strings that set header and footer text need to be
 .\" NS   reconfigured
 .\" NS
-.\" NS This happens when batch-rendering and starting a new page.
+.\" NS This happens when batch-rendering and starting a new document.
 .
-.nr doc-need-titles-reset 0
+.nr doc-end-previous-document 0
 .
 .
 .\" NS doc-first-parameter macro
