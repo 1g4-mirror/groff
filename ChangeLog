@@ -14,9 +14,25 @@
 
 2024-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* tmac/mdoc/doc-common (LP, PP, pp, SH): Use new `doc-warn`
+	[mdoc]: Improve diagnostic message format (5/4).
+
+	* tmac/doc.tmac (Bd, Ta, An):
+	* tmac/mdoc/doc-syms (doc-St-usage): Use new `doc-report-usage`
 	macro instead of hand-crafting diagnostic message with `tm`
 	request.
+
+	* tmac/doc.tmac (Bl): Drop unneccessary argumentless `tm` request.
+	(doc-Bl-usage): Use three single-line `doc-report-usage`
+	requests instead of writing a six-line diagnostic.  Both are
+	regrettable--`Bl` is just crazily complex.
+	(doc-defunct-macro): Use new `doc` string to construct bespoke
+	diagnostic complaining of defunct macro usage.
+
+	* tmac/doc.tmac (Bk):
+	* tmac/mdoc/doc-common (LP, PP, pp, SH):
+	* tmac/mdoc/doc-syms (At, Dx, Fx, Nx, St, Lb): Use new
+	`doc-warn` macro instead of hand-crafting diagnostic message
+	with `tm` request.
 
 	Continues fixing <https://savannah.gnu.org/bugs/?52463>, which I
 	should have known would not stay dead for long.  (And which I
