@@ -263,6 +263,11 @@ o grog(1) no longer supports the `--ligatures` and `--run` options.
 o The minimum version of Perl required to build groff is now 5.8 (18
   July 2002), incremented from 5.6.1.
 
+o groff no longer requires the PSUtils package to build; the
+  pre-grohtml(1) preprocessor that used the `psselect` command now uses
+  Ghostscript's ps2ps(1) instead.  PSUtils might continue to be useful
+  to a groff user at run time, of course.
+
 o The groff_diff(7) man page no longer contains examples.  They remain
   in groff's Texinfo manual.
 
