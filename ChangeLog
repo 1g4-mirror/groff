@@ -21,6 +21,18 @@
 
 2024-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac: Add new string "array",
+	`doc-display-fam-stack`, to maintain a stack of font family
+	changes.
+	(Bd): If the `-literal` argument is given, push the current font
+	family onto the stack and select family `C`.
+	(Ed): If we're ending a display of type "literal", pop the
+	saved font family from its stack.
+	(doc-save-global-vars, doc-restore-global-vars): Add this new
+	string.
+
+2024-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Change default font used for many macros when formatting
 	for typesetters (cf. terminals).
 

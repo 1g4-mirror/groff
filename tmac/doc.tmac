@@ -2956,7 +2956,7 @@
 .\" NS limit:
 .\" NS   doc-display-depth
 .
-.ds doc-display-type-stack0
+.ds doc-display-type-stack0 \" empty
 .
 .
 .\" NS doc-display-indent-stackXXX global register
@@ -3004,6 +3004,15 @@
 .nr doc-display-ps-stack0 0
 .
 .
+.\" NS doc-display-fam-stackXXX global string
+.\" NS   stack of saved font families
+.\" NS
+.\" NS limit:
+.\" NS   doc-display-depth
+.
+.ds doc-display-fam-stack0 \" empty
+.
+.
 .\" NS Bd user macro
 .\" NS   begin display
 .\" NS
@@ -3014,6 +3023,7 @@
 .\" NS   doc-display-depth
 .\" NS   doc-display-ad-stackXXX
 .\" NS   doc-display-fi-stackXXX
+.\" NS   doc-display-fam-stackXXX
 .\" NS   doc-display-ft-stackXXX
 .\" NS   doc-display-ps-stackXXX
 .\" NS   doc-display-file
@@ -3048,6 +3058,8 @@
 .    ds doc-display-type-stack\n[doc-display-depth] literal
 .    nr doc-display-ft-stack\n[doc-display-depth] \n[.f]
 .    nr doc-display-ps-stack\n[doc-display-depth] \n[.ps]
+.    ds doc-display-fam-stack\n[doc-display-depth] \n[.fam]
+.    fam C
 .
 .    ie t \
 .      ta T 9n
@@ -3098,9 +3110,17 @@ macro
 .  if !\n[doc-is-compact] \
 .    sp \n[doc-display-vertical]u
 .
-.  if "\*[doc-display-type-stack\n[doc-display-depth]]"literal" \
-.    if t \
-.      nop \*[doc-Li-font]\c
+.\" TODO: Structurally, the following logic is a relic of the status quo
+.\" ante the "Kill Inline Courier" revision.  However, it might prove
+.\" useful, conditioned on `n` instead of `t`, to set the display in
+.\" bold (by default) as inline literals are.  On the other hand,
+.\" displays _already_ stand out, and bold will become tiresome if used
+.\" at length (witness groff_mdoc(7)).  Gather user feedback and
+.\" consider a knob register.
+.\"
+.\"  if "\*[doc-display-type-stack\n[doc-display-depth]]"literal" \
+.\"    if t \
+.\"      nop \*[doc-Li-font]\c
 .
 .  if !\n[cR] \
 .    ne 2v
@@ -3240,6 +3260,7 @@ macro
 .  \}
 .
 .  if "\*[doc-display-type-stack\n[doc-display-depth]]"literal" \{\
+.    fam \*[doc-display-fam-stack\n[doc-display-depth]]
 .    ft \n[doc-display-ft-stack\n[doc-display-depth]]
 .    ps \n[doc-display-ps-stack\n[doc-display-depth]]u
 .  \}
@@ -3708,6 +3729,7 @@ macro
 .    nr doc-display-indent-stack\n[doc-reg-dsgv]-saved \n[doc-display-indent-stack\n[doc-reg-dsgv]]
 .    nr doc-display-ad-stack\n[doc-reg-dsgv]-saved \n[doc-display-ad-stack\n[doc-reg-dsgv]]
 .    nr doc-display-fi-stack\n[doc-reg-dsgv]-saved \n[doc-display-fi-stack\n[doc-reg-dsgv]]
+.    ds doc-display-fam-stack\n[doc-reg-dsgv]-saved "\*[doc-display-fam-stack\n[doc-reg-dsgv]]
 .    nr doc-display-ft-stack\n[doc-reg-dsgv]-saved \n[doc-display-ft-stack\n[doc-reg-dsgv]]
 .    nr doc-display-ps-stack\n[doc-reg-dsgv]-saved \n[doc-display-ps-stack\n[doc-reg-dsgv]]
 .    nr doc-reg-dsgv +1
@@ -3849,6 +3871,7 @@ macro
 .    nr doc-display-indent-stack\n[doc-reg-drgv] \n[doc-display-indent-stack\n[doc-reg-drgv]-saved]
 .    nr doc-display-ad-stack\n[doc-reg-drgv] \n[doc-display-ad-stack\n[doc-reg-drgv]-saved]
 .    nr doc-display-fi-stack\n[doc-reg-drgv] \n[doc-display-fi-stack\n[doc-reg-drgv]-saved]
+.    ds doc-display-fam-stack\n[doc-reg-drgv] "\*[doc-display-fam-stack\n[doc-reg-drgv]-saved]
 .    nr doc-display-ft-stack\n[doc-reg-drgv] \n[doc-display-ft-stack\n[doc-reg-drgv]-saved]
 .    nr doc-display-ps-stack\n[doc-reg-drgv] \n[doc-display-ps-stack\n[doc-reg-drgv]-saved]
 .    nr doc-reg-drgv +1
