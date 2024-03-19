@@ -601,12 +601,11 @@
 	(doc-end-hyperlink-pdf): New macros produce appropriate device
 	control commands to start and stop hyperlinking of formatted
 	text.
-	(doc-begin-hyperlink-nop):
-	(doc-end-hyperlink-nop): New do-nothing macros handle
-	user-driven hyperlink disablement and devices lacking hyperlink
-	support.  Create aliases for the "X100", "X100-12", "X75",
-	"X75-12", "dvi", "lbp", "lj4", and "ps" devices corresponding to
-	these.
+	(doc-begin-hyperlink-nop, doc-end-hyperlink-nop): New do-nothing
+	macros handle user-driven hyperlink disablement for devices
+	lacking hyperlink support.  Create aliases for the "X100",
+	"X100-12", "X75", "X75-12", "dvi", "lbp", "lj4", and "ps"
+	devices corresponding to these.
 	(doc-Xr-usage, doc-Mt-usage, doc-Lk-usage): New macros eliminate
 	repeated logic to emit usage messages.
 	(Xr): Heavily rewrite to support production of hyperlinked
