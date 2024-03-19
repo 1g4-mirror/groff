@@ -303,10 +303,10 @@ These include the \%Netpbm tools
 .IR \%pnmcrop ,
 .IR \%pnmcut ,
 and
-.IR \%pnmtopng
+.IR \%pnmtopng ;
 as well as
 \%Ghostscript's
-.IR \%gs
+.I \%gs
 and
 .IR \%ps2ps .
 .
