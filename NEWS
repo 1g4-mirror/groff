@@ -184,6 +184,16 @@ o The doc (mdoc) macro package's `Mt` macro now sets its argument in
   configured to use).  A new string, `doc-Mt-font`, for use in
   "mdoc.local" files and similar, supports configuration of this face.
 
+o The doc (mdoc) macro package now performs font family switches
+  inline (that is, on the same output line) to Courier much less
+  frequently when formatting for typesetters, affecting the `Ar`, `Cm`,
+  `Er`, `Fa`, `Fd`, `Fl`, `Fn`, `Ft`, `Ic`, `Li`, and `Nm` macros.  This
+  change was made to reduce the ambiguity of space widths when
+  typesetting the monospaced Courier and proportional Times fonts
+  adjacently.  Bear in mind that you can use the mdoc.local file to
+  customize the font used to render nearly any mdoc(7) macro; this
+  mechanism has been in place since 1992.
+
 o The doc (mdoc) macro package's `Lk`, `Mt`, and `Xr` macros now produce
   hyperlinks on HTML, PDF, and terminal devices.  See above regarding
   hyperlink support being enabled by default.

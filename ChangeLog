@@ -1,5 +1,20 @@
 2024-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Change default font used for many macros when formatting
+	for typesetters (cf. terminals).
+
+	* tmac/mdoc/doc-ditroff: Stop switching to Courier family when
+	setting arguments to the macros `Ar`, `Cm`, `Er`, `Fa`, `Fd`,
+	`Fl`, `Fn`, `Ft`, `Ic`, `Li`, and `Nm`.
+
+	Only you can prevent aneurysms; see discussion starting at
+	<https://lists.gnu.org/archive/html/groff/2024-03/msg00152.html>
+	and bear in mind that you can use the mdoc.local file to
+	customize the font used to render nearly any mdoc(7) macro.
+	This mechanism has been in place since 1992.
+
+2024-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Add support for `MF` rendering option.  in parallel with
 	groff man(7), and working much like the `HF` string.
 
