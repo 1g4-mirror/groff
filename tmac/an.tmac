@@ -178,9 +178,9 @@
 .de an-reset-margin-and-inset-level
 .  nr an-inset-level 1
 .  nr an-margin \\n[BP]
-.  nr an-saved-margin1 \\n[BP]
+.  nr an-saved-margin!1 \\n[BP]
 .  nr an-prevailing-indent \\n[IN]
-.  nr an-saved-prevailing-indent1 \\n[IN]
+.  nr an-saved-prevailing-indent!1 \\n[IN]
 ..
 .
 .\" Break the page and update its number depending on the C (consecutive
@@ -1019,8 +1019,8 @@ contains unsupported escape sequence
 .\" Start a relative inset level (by the amount given in the argument).
 .\" .RS [inset-amount]
 .de1 RS
-.  nr an-saved-margin\\n[an-inset-level] \\n[an-margin]
-.  nr an-saved-prevailing-indent\\n[an-inset-level] \
+.  nr an-saved-margin!\\n[an-inset-level] \\n[an-margin]
+.  nr an-saved-prevailing-indent!\\n[an-inset-level] \
      \\n[an-prevailing-indent]
 .  ie \\n[.$] .nr an-margin +(n;\\$1)
 .  el         .nr an-margin +\\n[an-prevailing-indent]
@@ -1051,9 +1051,9 @@ contains unsupported escape sequence
 .  ie \\n[.$] .nr an-inset-level ((;\\$1) <? \\n[an-inset-level])
 .  el         .nr an-inset-level -1
 .  nr an-inset-level (1 >? \\n[an-inset-level])
-.  nr an-margin \\n[an-saved-margin\\n[an-inset-level]]
+.  nr an-margin \\n[an-saved-margin!\\n[an-inset-level]]
 .  nr an-prevailing-indent \
-     \\n[an-saved-prevailing-indent\\n[an-inset-level]]
+     \\n[an-saved-prevailing-indent!\\n[an-inset-level]]
 .  in \\n[an-margin]u
 ..
 .

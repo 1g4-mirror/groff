@@ -1,5 +1,16 @@
 2024-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an-reset-paragraph-spacing, RS, RE): Trivially
+	refactor.  Rename structurally named sets of registers emulating
+	arrays (more precisely in this instance, stacks) to separate the
+	index from the rest of the name with a `!` character, as is done
+	in groff ms(7) and some other packages.  This makes the names
+	more readable and less resembling of typos in the unfortunate
+	event a troff(1) diagnostic message discloses their names to a
+	hapless human reader.
+
+2024-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an-reset-paragraph-spacing): Assign
 	`an-saved-margin1` the value of the `BP`, not the `IN` register.
 	It makes no practical difference (because this is the
