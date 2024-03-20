@@ -170,8 +170,8 @@
 .de an-reset-paragraph-spacing
 .  ie \\n[.$] .nr PD (v;\\$1)
 .  el         .nr PD (.4v >? \n[.V])
-.  \" Restore spacing to handle a "belated" call immediately after a
-.  \" paragraphing macro (`P`, `HP`, or `IP` with no marker argument).
+.  \" Restore spacing to handle a "belated" `PD` call immediately after
+.  \" a paragraphing macro (`P`, `HP`, or `IP` with no marker argument).
 .  rs
 ..
 .
