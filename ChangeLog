@@ -1,3 +1,12 @@
+2024-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac (an-reset-paragraph-spacing): Assign
+	`an-saved-margin1` the value of the `BP`, not the `IN` register.
+	It makes no practical difference (because this is the
+	"outermost" inset level), but the status quo ante made the
+	inset register pushing and popping logic harder to reason about.
+	Continues commit 5d2e49f818, 9 August.
+
 2024-03-19  Alexis <flexibeast@gmail.com>
 
 	[grohtml]: Migrate from psselect(1) to ps2ps(1).
