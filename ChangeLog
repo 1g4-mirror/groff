@@ -1,5 +1,28 @@
 2024-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/{ja,ru,zh}.tmac: Add heuristic checks for glyph coverage
+	of characteristic code points for these languages' scripts.
+	Throw the warning only once for each language.  The formatter
+	will merrily spew "special character ... not defined" error
+	diagnostics for each non-covered glyph encountered; this leads
+	people to complain that "groff doesn't support Unicode".  (This
+	additional warning diagnostic might not help much; the error
+	diagnostics already refer to characters in these scripts _by
+	their Unicode code points_, which should be a clue, but too
+	often isn't.)  And this one will slip through even if someone
+	runs groff (or troff) with the `-E` option.  If you want to
+	typeset Unicode, you have to use a font that covers Unicode.
+	groff can't force one onto your system.  (We could do more to
+	help the user configure one for use with groff, though; see
+	Savannah #60930.)
+	* src/roff/groff/tests/initialization_is_quiet.sh: Update test;
+	check the "utf8" output device, not the "ps" default (which
+	might not have been the configured default anyway), and which
+	will lack glyph coverage for Chinese and Japanese (as the base
+	14 fonts of Adobe PostScript lacked it).
+
+2024-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an-reset-paragraph-spacing, RS, RE): Trivially
 	refactor.  Rename structurally named sets of registers emulating
 	arrays (more precisely in this instance, stacks) to separate the
