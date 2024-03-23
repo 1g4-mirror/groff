@@ -664,7 +664,7 @@ to construct a man page from the following template.
 .Bd -literal -offset indent
 \&.\e" The following three macro calls are required.
 \&.Dd date
-\&.Dt topic [section-identifier [section-keyword-or-title]]
+\&.Dt identifier [section-id [section-keyword-or-title]]
 \&.Os [package-or-operating system [version-or-release]]
 \&.Sh Name
 \&.Nm topic
@@ -853,7 +853,7 @@ belong to the page structure domain macros.
 .\" that kind of reader last _week_.
 .
 They designate the
-topic,
+page identifier and section of the manual,
 date of last revision,
 and the operating system or software project associated with the page.
 .
@@ -917,14 +917,16 @@ This macro is neither callable nor parsed.
 .
 .br
 .ne 5v
-.It Li .Dt Ar topic Op Ar section-identifier \
+.It Li .Dt Ar identifier Op Ar section-id \
 Op Ar section-keyword-or-title
 .
-.Ar topic
-is the subject of the man page.
+.Ar identifier
+and
+.Ar section-id
+together should uniquely indicate the man page on the system.
 .
 A
-.Ar section-identifier
+.Ar section-id
 that begins with an integer in the range 1\[en]9
 or is one of the words
 .Ql unass ,
@@ -2284,16 +2286,15 @@ The default width is 16n.
 .
 The
 .Ql \&Nm
-macro is used for the document title or page topic.
+macro identifies the document's central topic.
 .
 Upon its first call,
-it has the peculiarity of remembering its argument,
-which should always be the topic of the man page.
+it has the peculiarity of remembering its argument.
 .
 When subsequently called without arguments,
 .Ql \&Nm
 regurgitates this initial name for the sole purpose of making less work
-for the author.
+for the document's author.
 .
 Use of
 .Ql \&Nm
