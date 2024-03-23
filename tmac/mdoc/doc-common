@@ -252,10 +252,10 @@
 .
 .\" header assembly macros
 .
-.\" NS doc-page-topic global string
+.\" NS doc-page-identifier global string
 .\" NS   the title of the manual page
 .
-.ds doc-page-topic UNTITLED\"
+.ds doc-page-identifier UNTITLED\"
 .
 .
 .\" NS doc-volume global string
@@ -341,7 +341,7 @@
 .\" NS   document title
 .\" NS
 .\" NS modifies:
-.\" NS   doc-page-topic
+.\" NS   doc-page-identifier
 .\" NS   doc-section
 .\" NS   doc-volume
 .\" NS
@@ -466,10 +466,10 @@
 .  if !\n[.$] \
 .    doc-warn .Dt directive expects one or more arguments
 .  if !"\$1"" \
-.    ds doc-page-topic "\$1
+.    ds doc-page-identifier "\$1
 .
 .  if \n[CT] \
-.    stringup doc-page-topic
+.    stringup doc-page-identifier
 .
 .  if !"\$2"" \{\
 .    ds doc-section \$2
@@ -995,7 +995,7 @@
 .  doc-set-up-titles
 .
 .  if '\*[.T]'pdf' \{\
-.    ds doc-page-tag "\*[doc-page-topic](\*[doc-section])\"
+.    ds doc-page-tag "\*[doc-page-identifier](\*[doc-section])\"
 .    pdfbookmark -T "\*[doc-page-tag]" 1 "\*[doc-page-tag]"
 .    rm doc-page-tag
 .  \}
@@ -1028,23 +1028,23 @@
 .
 .eo
 .de doc-header
-.  ds doc-xref \*[doc-page-topic-font]\*[doc-page-topic]\f[]\"
+.  ds doc-xref \*[doc-page-identifier-font]\*[doc-page-identifier]\f[]\"
 .  as doc-xref \*[doc-page-section-font](\*[doc-section])\f[]\"
-.  ds doc-abbv \*[doc-page-topic]\"
+.  ds doc-abbv \*[doc-page-identifier]\"
 .  ev doc-env-dh
 .  doc-setup-page-layout
 .  ie \n[cR] .pl +1v
 .  el        .sp |(.5i - .5m)
-.  nr doc-reg-dh \w'\*[doc-page-topic-font]\*[doc-xref]\f[]'
+.  nr doc-reg-dh \w'\*[doc-page-identifier-font]\*[doc-xref]\f[]'
 .  nr doc-reg-dh1 \w'\*[doc-volume]'
 .  if (\n[doc-reg-dh] + \n[doc-reg-dh1] + \n[doc-reg-dh] >= \n[.lt]) \{\
 .    while (\n[doc-reg-dh] + \n[doc-reg-dh1] + \n[doc-reg-dh] >= \n[.lt]) \{\
-.      ds doc-xref \*[doc-page-topic-font]\*[doc-abbv]\f[]\"
+.      ds doc-xref \*[doc-page-identifier-font]\*[doc-abbv]\f[]\"
 .      as doc-xref \*[doc-page-section-font](\*[doc-section])\f[]\"
 .      length doc-abbv-len-prev \*[doc-abbv]
 .      substring doc-abbv 0 -2
 .      length doc-abbv-len \*[doc-abbv]
-.      nr doc-reg-dh \w'\*[doc-page-topic-font]\*[doc-abbv]\|.\|.\|.\f[]'
+.      nr doc-reg-dh \w'\*[doc-page-identifier-font]\*[doc-abbv]\|.\|.\|.\f[]'
 .      \" If header string didn't actually get shorter, stop trying.
 .      if (\n[doc-abbv-len-prev] <= \n[doc-abbv-len]) \
 .        break
@@ -1084,7 +1084,7 @@
 .
 .eo
 .de doc-footer
-.  ds doc-xref \*[doc-page-topic-font]\*[doc-page-topic]\f[]\"
+.  ds doc-xref \*[doc-page-identifier-font]\*[doc-page-identifier]\f[]\"
 .  as doc-xref \*[doc-page-section-font](\*[doc-section])\f[]\"
 .  ds doc-page-id \n[%]
 .  if r X \{\
@@ -1143,7 +1143,7 @@
 .de doc-reset-titles
 .  \" Reset strings to reduce info leaks from one man page to the next.
 .  ds doc-date-string UNDATED\"
-.  ds doc-page-topic UNTITLED\"
+.  ds doc-page-identifier UNTITLED\"
 .  ds doc-volume LOCAL\"
 .  ds doc-section \" empty
 .  ds doc-operating-system \" empty
@@ -1737,7 +1737,7 @@
 .  tm doc-volume-name == '\*[doc-volume-name]'
 .  tm doc-have-author == \n[doc-have-author]
 .
-.  tm doc-page-topic == '\*[doc-page-topic]'
+.  tm doc-page-identifier == '\*[doc-page-identifier]'
 .  tm doc-volume == '\*[doc-volume]'
 .  tm doc-section == '\*[doc-section]'
 .  tm doc-operating-system == '\*[doc-operating-system]'

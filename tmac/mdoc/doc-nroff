@@ -43,7 +43,7 @@
 .
 .\" the 'doc-xx-font' strings must not be empty!
 .
-.ds doc-page-topic-font \f[I]
+.ds doc-page-identifier-font \f[I]
 .ds doc-page-section-font \f[R]
 .ds doc-Ad-font \f[I]
 .ds doc-Ar-font \f[I]

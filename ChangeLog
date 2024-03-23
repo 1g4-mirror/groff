@@ -1,5 +1,15 @@
 2024-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common ([initialization], Dt, Os, doc-header,
+	doc-footer, doc-reset-titles, Rd):
+	* tmac/mdoc/doc-ditroff:
+	* tmac/mdoc/doc-nroff: Rename string `doc-page-topic` to
+	`doc-page-identifier` and `doc-page-topic-font` to
+	`doc-topic-identifier-font`, following terminological reform in
+	groff_mdoc(7) (and groff_man(7)).
+
+2024-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/main.cpp (main): Fix missing space in
 	diagnostic message.
 
