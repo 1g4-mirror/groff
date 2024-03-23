@@ -1,3 +1,8 @@
+2024-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/eqn/main.cpp (main): Fix missing space in
+	diagnostic message.
+
 2024-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/{ja,ru,zh}.tmac: Add heuristic checks for glyph coverage
