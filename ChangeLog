@@ -1,3 +1,19 @@
+2024-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[mdoc]: Add support for `MF` rendering option.  in parallel with
+	groff man(7), and working much like the `HF` string.
+
+	* tmac/doc.tmac (initialization): If the user specifies no `MF`
+	string definition, define it as `I`.
+	* tmac/mdoc/doc-ditroff:
+	* tmac/mdoc/doc-nroff: Default `doc-page-identifier-font` and
+	`doc-Xr-font` to use the value of the `MF` string.
+
+	* NEWS:
+	* tmac/groff_mdoc.7.man (Options): Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?65484>.
+
 2024-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/mdoc/doc-common ([initialization], Dt, Os, doc-header,

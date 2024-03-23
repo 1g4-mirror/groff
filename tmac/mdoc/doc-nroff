@@ -43,7 +43,7 @@
 .
 .\" the 'doc-xx-font' strings must not be empty!
 .
-.ds doc-page-identifier-font \f[I]
+.ds doc-page-identifier-font \f[\*[MF]]
 .ds doc-page-section-font \f[R]
 .ds doc-Ad-font \f[I]
 .ds doc-Ar-font \f[I]
@@ -68,7 +68,7 @@
 .ds doc-Sy-font \f[B]
 .ds doc-Tn-font \f[R]
 .ds doc-Va-font \f[I]
-.ds doc-Xr-font \f[I]
+.ds doc-Xr-font \f[\*[MF]]
 .
 .ds doc-left-parenthesis \f[R](\f[]
 .ds doc-right-parenthesis \f[R])\f[]

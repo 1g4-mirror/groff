@@ -188,8 +188,8 @@ o The doc (mdoc) macro package's `Lk`, `Mt`, and `Xr` macros now produce
   hyperlinks on HTML, PDF, and terminal devices.  See above regarding
   hyperlink support being enabled by default.
 
-o The doc (mdoc) macro package now honors the `U` register as the an
-  (man) package does.
+o The doc (mdoc) macro package now honors the `U` register and `MF`
+  string as the an (man) package does.
 
 o The new macro file "koi8-r.tmac" supports the KOI8-R character
   encoding, which supports the new Russian locale for groff.

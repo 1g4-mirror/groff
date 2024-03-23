@@ -5124,6 +5124,25 @@ both registers default to 80n for terminal devices and 6.5i otherwise.
 .
 .
 .Pp
+The
+.Ql MF
+string sets
+the font used for man page identifiers in document headers and footers
+and in the formatted output of the
+.Ql \&Xr
+macro.
+.
+The default is
+.Ql I
+(italic style of the default family).
+.
+Any valid argument to
+.Xr groff Ns 's
+.Ql ft
+request may be used.
+.
+.
+.Pp
 Setting the
 .Ql P
 register starts enumeration of pages at its value.

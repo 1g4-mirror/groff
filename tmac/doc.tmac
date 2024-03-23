@@ -202,7 +202,9 @@
 .
 .\" LL and LT registers are handled by the doc-setup-page-layout macro.
 .
-.\" TODO: Implement MF string.
+.\" man page identifier font
+.if !d MF \
+.  ds MF I\"
 .
 .\" starting page number
 .\"
