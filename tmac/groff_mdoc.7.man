@@ -882,8 +882,7 @@ Historically,
 .Ar date
 was written in U.S.\& traditional format,
 .Do
-.\" XXX: Em -> Ar when we de-Courierize .Ar.
-.Em Month day Li , Em year
+.Ar Month day Li , Ar year
 .Dc
 where
 .Em Month
