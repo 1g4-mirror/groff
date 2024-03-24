@@ -189,6 +189,45 @@
 .ec
 .
 .
+.\" NS Dl user macro
+.\" NS   display (one line) literal
+.\" NS
+.\" NS   this function uses the 'Li' font
+.\" NS
+.\" NS modifies:
+.\" NS   doc-arg-ptr
+.\" NS   doc-curr-font
+.\" NS   doc-macro-name
+.\" NS
+.\" NS width register 'Dl' set in doc-common
+.
+.eo
+.de Dl
+.  ta T .5i
+.  in +\n[doc-display-indent]u
+.
+.  ie \n[doc-arg-count] \{\
+.    doc-report-usage .Dl not callable by other macros
+.    doc-reset-args
+.  \}
+.  el \{\
+.    ie \n[.$] \{\
+.      ds doc-macro-name Dl
+.      doc-parse-args \$@
+.      nr doc-arg-ptr 1
+.      nr doc-curr-font \n[.f]
+.      nop \*[doc-Li-font]\c
+.      doc-print-recursive
+.    \}
+.    el \
+.      doc-report-usage .Dl argument ...
+.  \}
+.
+.  in -\n[doc-display-indent]u
+..
+.ec
+.
+.
 .\" NS Ql user macro
 .\" NS   quoted literal define
 .\" NS
