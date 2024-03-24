@@ -860,10 +860,10 @@ and the operating system or software project associated with the page.
 Call each once at the beginning of the document.
 .
 They populate the page headers and footers,
-which are in
+.Dq titles
+in
 .Xr roff
-parlance termed
-.Dq titles .
+parlance.
 .
 .
 .Bl -tag -width 6n
