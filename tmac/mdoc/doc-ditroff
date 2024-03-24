@@ -199,6 +199,9 @@
 .\" NS   doc-curr-font
 .\" NS   doc-macro-name
 .\" NS
+.\" NS local variables:
+.\" NS   doc-saved-family-Dl
+.\" NS
 .\" NS width register 'Dl' set in doc-common
 .
 .eo
@@ -216,8 +219,10 @@
 .      doc-parse-args \$@
 .      nr doc-arg-ptr 1
 .      nr doc-curr-font \n[.f]
-.      nop \*[doc-Li-font]\c
+.      ds doc-saved-family-Dl \n[.fam]
+.      fam C
 .      doc-print-recursive
+.      fam \*[doc-saved-family-Dl]
 .    \}
 .    el \
 .      doc-report-usage .Dl argument ...

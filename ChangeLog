@@ -1,5 +1,11 @@
 2024-03-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-ditroff (Dl): Refactor.  Instead of using the
+	"literal" (`Li` macro) font, save the family, switch to Courier,
+	emit the arguments, then restore the family.
+
+2024-03-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Refactor.
 
 	* tmac/doc.tmac: Move `Dl` macro definition from here...
