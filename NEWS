@@ -194,6 +194,12 @@ o The doc (mdoc) macro package now performs font family switches
   customize the font used to render nearly any mdoc(7) macro; this
   mechanism has been in place since 1992.
 
+o The doc (mdoc) macro package's `Ql` macro now operates more simply; it
+  no longer (ever) quotes its arguments when formatting for typesetters.
+  In practice, it does not seem difficult to distinguish even single
+  characters in Courier from those in Times.  (If it is, an _explicit_
+  quoting macro like `Sq` or `Dq` should be used.)
+
 o The doc (mdoc) macro package's `Lk`, `Mt`, and `Xr` macros now produce
   hyperlinks on HTML, PDF, and terminal devices.  See above regarding
   hyperlink support being enabled by default.

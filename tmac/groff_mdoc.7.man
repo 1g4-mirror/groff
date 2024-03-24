@@ -2878,7 +2878,8 @@ Quote	Open	Close	Function	Result
 \&.Dq	.Do	.Dc	Double Quote	\[lq]string\[rq]
 \&.Eq	.Eo	.Ec	Enclose String (in XY)	XstringY
 \&.Pq	.Po	.Pc	Parenthesis Enclosure	(string)
-\&.Ql			Quoted Literal	\[lq]string\[rq] or string
+\&.Ql			Quoted or Literal	\[lq]string\[rq] or \
+\f[CR]string\f[]
 \&.Qq	.Qo	.Qc	Straight Double Quote	"string"
 \&.Sq	.So	.Sc	Single Quote	\[oq]string\[cq]
 .TE
@@ -2912,24 +2913,23 @@ The default width value is 12n for both macros.
 .It Li .Eq
 The first and second arguments of this macro are the opening and
 closing strings respectively, followed by the arguments to be enclosed.
+.
 .It Li .Ql
-The quoted literal macro behaves differently in
+The quoted-or-literal macro behaves differently in
 .Xr troff \" mode
 and
 .Xr nroff \" mode
 modes.
 .
-If formatted with
+When formatting with
 .Xr @g@nroff @MAN1EXT@ ,
-a quoted literal is always quoted.
+.Xr mdoc
+quotes the arguments.
 .
-If formatted with
+With
 .Xr @g@troff ,
-an item is only quoted if the width of the item is less than three
-constant-width characters.
-.
-This is to make short strings more visible where the font change to
-literal (constant-width) is less noticeable.
+.Xr mdoc
+sets them in a constant-width font.
 .
 .
 .Pp

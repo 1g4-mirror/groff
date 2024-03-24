@@ -1,5 +1,23 @@
 2024-03-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Simplify `Ql` macro behavior.
+
+	* tmac/mdoc/doc-ditroff (Ql): Rip out most of the logic
+	{counting and measuring arguments}, replacing it with a save and
+	restore of the font family to temporarily use the Courier
+	family.  The new behavior is: when formatting for terminals,
+	`Ql`'s arguments are quoted; when formatting for typesetters,
+	its arguments are set in Courier.  In practice, it does not seem
+	difficult to distinguish even single characters in Courier from
+	those in Times.  (If it is, an _explicit_ quoting macro like
+	`Sq` or `Dq` should be used.)
+	* tmac/groff_mdoc.7.man (Enclosure and Quoting Macros) <Ql>:
+	* NEWS: Document this.
+
+	See, e.g., <https://savannah.gnu.org/bugs/index.php?61276>.
+
+2024-03-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-ditroff (Dl): Refactor.  Instead of using the
 	"literal" (`Li` macro) font, save the family, switch to Courier,
 	emit the arguments, then restore the family.
