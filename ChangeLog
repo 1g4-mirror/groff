@@ -138,7 +138,7 @@
 	inset register pushing and popping logic harder to reason about.
 	Continues commit 5d2e49f818, 9 August.
 
-2024-03-19  Alexis <flexibeast@gmail.com>
+2024-03-19  Alexis <surryhill@gmail.com>
 
 	[grohtml]: Migrate from psselect(1) to ps2ps(1).
 
