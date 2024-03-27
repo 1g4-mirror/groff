@@ -40,7 +40,6 @@ This file describes how to prepare 'groff' for a new release.
   + NEWS
   + BUG-REPORT
   + arch/mingw/grap2graph.cmd
-  + doc/groff.texi (multiple occurrences)
   + doc/webpage.ms
 
 * If the major or minor version number is being incremented, split off
