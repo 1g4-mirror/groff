@@ -339,6 +339,7 @@ sub do_line {
   # Ignore all other requests.  Again, macro names can contain Perl
   # regex metacharacters, so be careful.
   return if (grep(/^\Q$command\E$/, @request));
+  return if ($command eq '\}'); # *roff closing brace escape sequence
   # What remains must be a macro name.
   my $macro = $command;
 
@@ -389,8 +390,14 @@ sub do_line {
   #############
   # mm and mmse
 
+  # `LI` is unique to mm among full-service macro packages, but www.tmac
+  # muddies the waters, so omit it.
   if ($macro =~ /^(
+		   AL|BL|BVL|DL|ML|RL|VL|
+		   EPIC|
 		   H|
+		   HU|
+		   LB|LE
 		   MULB|
 		   LO|
 		   LT|
@@ -506,7 +513,7 @@ sub infer_man_or_ms_package {
 		   'SB',
 		   'EE', 'EX',
 		   'OP',
-		   'MT', 'ME', 'SY', 'YS', 'TQ', 'UR', 'UE');
+		   'ME', 'SY', 'YS', 'TQ', 'UR', 'UE', 'MR');
 
   my @macro_man_or_ms = ('B', 'I', 'BI',
 			 'DT',

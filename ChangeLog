@@ -1,7 +1,12 @@
 2024-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/grog/grog.pl (do_line): Recognize new requests in
-	forthcoming groff 1.24 release.
+	forthcoming groff 1.24 release.  Update lists of characteristic
+	package macros: for mm, add list management macros (except for
+	`LI`, made ambiguous by groff_www(7)), unnumbered header macro,
+	and `EPIC`; for man(7), drop `MT` (it is also an mm macro) and
+	add `MR`, from groff 1.23.0 and plan9port.  Also discard closing
+	brace escape sequence as not a legitimate macro name.
 
 2024-03-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
