@@ -9,6 +9,10 @@ This file describes how to prepare 'groff' for a new release.
 
 ########################################################################
 
+* Update 'grog' to include the names of new GNU troff requests and macro
+  names unique to packages (and sufficiently heavily used in typical
+  documents).
+
 * Update font description files that we generate from external data and
   provide with our source distribution.
 
