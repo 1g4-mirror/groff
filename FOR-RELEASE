@@ -47,9 +47,7 @@ This file describes how to prepare 'groff' for a new release.
   a historical ChangeLog file and add it to `EXTRA_DIST` in Makefile.am.
 
 * Update in 'src/roff/groff/groff.cpp' the 'printf' that displays the
-  copyright.
-
-* Update the copyright year with 'update-copyright.sh'.
+  copyright to include the current year if it is not present.
 
 * Increment the version number by tagging the release, beta, or release
   candidate.  groff requires an explicit three-part version,
