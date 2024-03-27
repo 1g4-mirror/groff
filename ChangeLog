@@ -14,7 +14,7 @@
 	* tmac/groff_mdoc.7.man (Enclosure and Quoting Macros) <Ql>:
 	* NEWS: Document this.
 
-	See, e.g., <https://savannah.gnu.org/bugs/index.php?61276>.
+	See, e.g., <https://savannah.gnu.org/bugs/?61276>.
 
 2024-03-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -342,8 +342,8 @@
 	immediately after a paragraphing macro (`P`, `HP`, or `IP` with
 	no marker argument).
 
-	Fixes <https://savannah.gnu.org/bugs/index.php?64267>.  Thanks
-	to Alex Colomar for the report.
+	Fixes <https://savannah.gnu.org/bugs/?64267>.  Thanks to Alex
+	Colomar for the report.
 
 2024-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
