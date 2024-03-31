@@ -17737,6 +17737,23 @@ automatic hyphenation mode to the value of the @code{.hydefault}
 register; the @acronym{AT&T} implementation sets it to @samp{1}, which
 is not suitable for some languages, including English.
 
+GNU @command{troff} handles the dummy character @code{\&} differently
+from @acronym{AT&T} @command{troff} when it is followed by the
+hyphenation control escape sequence @code{\%} at the beginning of a
+word.  GNU @command{troff} does not regard the dummy character as
+``starting'' the word;@acronym{AT&T} @command{troff}
+does.  Further, Heirloom Doctools @command{troff} does not honor an
+explicit hyphenation point marked with @code{\%} after a word-initial
+one.@footnote{Thus,
+@Example
+.ll 10n
+\%antidisestablishmen\%tarianism
+.br
+\&\%antidisestablishmen\%tarianism
+.pl \n(nlu
+@endExample
+produces different results with each of the three formatters.}
+
 @cindex output device name string (@code{.T}), in other implementations
 GNU @code{troff} predefines a string @code{.T} containing the argument
 given to the @option{-T} command-line option, namely the current output
