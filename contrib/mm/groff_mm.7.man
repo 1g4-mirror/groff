@@ -1419,7 +1419,7 @@ defines the string
 .
 .TP
 .B EN
-End equation input preprocessed by
+End mathematical expression input preprocessed by
 .MR @g@eqn @MAN1EXT@ ;
 see
 .BR EQ .
@@ -1480,7 +1480,7 @@ See
 .TP
 .BR EQ \~[\c
 .IR label ]
-Start equation input preprocessed by
+Start mathematical expression input preprocessed by
 .MR @g@eqn @MAN1EXT@ .
 .
 .B EQ
@@ -2953,9 +2953,10 @@ determines the amount of vertical space between paragraphs.
 .
 .TP
 .B PE
-Picture end;
+End picture input preprocessed by
+.MR @g@pic @MAN1EXT@ ;
 see
-.MR @g@pic @MAN1EXT@ .
+.BR PS .
 .
 .
 .TP
@@ -3106,17 +3107,15 @@ and
 .
 .TP
 .B PS
-Picture start; see
+Start picture input preprocessed by
 .MR @g@pic @MAN1EXT@ .
 .
 .
 .TP
 .B PY
-Picture end with flyback.
-.
-Ends a
-.MR @g@pic @MAN1EXT@
-picture,
+As
+.B PE ,
+but with \[lq]flyback\[rq],
 returning the vertical position to where it was prior to the picture.
 .
 This is a GNU extension.
