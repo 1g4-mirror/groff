@@ -17128,7 +17128,7 @@ other environments to the standard error stream.
 Report, to the standard error stream, the list of hyphenation
 exceptions.  Each hyphenation point is marked with @samp{-}.  Words that
 will not be hyphenated at all are prefixed with @samp{-}.  Those to
-which the hyphenation mode applies (meaning those defined in a
+which the automatic hyphenation mode applies (meaning those defined in a
 hyphenation pattern file rather than with the @code{hw} request) are
 suffixed with a tab and asterisk (@code{*}).
 @endDefreq

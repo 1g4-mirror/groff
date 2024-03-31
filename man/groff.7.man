@@ -3951,7 +3951,7 @@ Each hyphenation point is marked with
 Words that will not be hyphenated at all are prefixed with
 .RB \[lq] \- \[rq].
 .
-Those to which the hyphenation mode applies
+Those to which the automatic hyphenation mode applies
 (meaning those defined in a hyphenation pattern file rather than with
 the
 .B hw
