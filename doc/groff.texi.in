@@ -6544,9 +6544,9 @@ not qualify, so our first attempt got a warning.
 @cindex identifiers
 
 An @dfn{identifier} labels a GNU @code{troff} datum such as a register,
-name (macro, string, or diversion), typeface, color, special character,
-character class, environment, or stream.  Valid identifiers consist of
-one or more ordinary characters.
+name (macro, string, or diversion), typeface, color, special character
+or character class, environment, or stream.  Valid identifiers consist
+of one or more ordinary characters.
 @cindex ordinary character
 @cindex character, ordinary
 An @slanted{ordinary character} is an input character that is not the
@@ -6674,7 +6674,7 @@ empty, and interpolates nothing.  If the identifier is interpreted as a
 register, GNU @code{troff} emits a warning in category @samp{reg},
 initializes it to zero, and interpolates that value.  @xref{Warnings},
 @ref{Interpolating Registers}, and @ref{Strings}.  Attempting to use an
-undefined typeface, special character, color, character class,
+undefined typeface, special character or character class, color,
 environment, or stream generally provokes an error diagnostic.
 
 @need 1000
@@ -6763,7 +6763,7 @@ available via both requests and escape sequences.
 The mechanism of using @code{roff}'s control characters to invoke
 requests and call macros was introduced in @ref{Requests and Macros}.
 Control characters are recognized only at the beginning of an input
-line, or at the beginning of the branch of a control structure request;
+line, or at the beginning of a branch of a control structure request;
 see @ref{Conditionals and Loops}.
 
 A few requests cause a break implicitly; use the no-break control
@@ -6830,7 +6830,8 @@ sense.
 
 @c ---------------------------------------------------------------------
 
-@c BEGIN Keep (roughly) parallel with section "Requests" of groff(7).
+@c BEGIN Keep (roughly) parallel with section "Invoking requests" of
+@c groff(7).
 @node Invoking Requests, Calling Macros, Control Characters, Formatter Instructions
 @subsection Invoking Requests
 @cindex invoking requests
@@ -6875,8 +6876,8 @@ argument.  @xref{Strings}.
 @cindex package, package, structuring the source of
 @cindex indentation, of @code{roff} source code
 Spaces and tabs immediately after a control character are ignored.
-Commonly, authors structure the source of documents or macro files with
-them.
+Commonly, authors use them to indent the source of documents or macro
+files.
 
 @Example
 .de center
@@ -6920,7 +6921,8 @@ definitions (or any input lines) with blank lines.
 @endExample
 
 @xref{Blank Line Traps}.
-@c END Keep (roughly) parallel with section "Requests" of groff(7).
+@c END Keep (roughly) parallel with section "Invoking requests" of
+@c groff(7).
 
 @c ---------------------------------------------------------------------
 
@@ -12631,14 +12633,21 @@ interpolated as part of a macro argument; see @ref{Calling Macros}.
 @cindex escaping newline characters, in strings
 Strings are not limited to a single input line of text.
 @code{\@key{RET}} works just as it does elsewhere.  The resulting string
-is stored @emph{without} the newlines.  Care is therefore required when
-interpolating strings while filling is disabled.
+is stored @emph{without} the newlines.  When filling is disabled, care
+is required to avoid overrunning the line length when interpolating
+strings.
 
 @Example
 .ds foo This string contains \
 text on multiple lines \
 of input.
 @endExample
+
+Conversely, when filling is enabled, it is not necessary to append
+@code{\c} to a string interpolation to prevent a break afterward, as
+might be required in a macro argument.  Nor does a string require use of
+the GNU @command{troff} @code{chop} request to excise a trailing newline
+as is often done with diversions.
 
 It is not possible to embed a newline in a string that will be
 interpreted as such when the string is interpolated.  To achieve that
