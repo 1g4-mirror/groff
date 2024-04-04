@@ -2187,7 +2187,7 @@ italic corrections automatically.  @xref{Italic Corrections}.
 @anchor{Predefined Strings} @c 1.22.4
 @subsection Predefined Text
 
-Most macro packages supply predefined strings to set prepared text like
+Most macro packages supply predefined strings to set computed text like
 the date, or to perform operations like super- and subscripting.
 
 @c ---------------------------------------------------------------------
