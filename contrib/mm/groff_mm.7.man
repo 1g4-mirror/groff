@@ -849,7 +849,8 @@ and reduces the line length by twice this amount.
 .
 A scaling unit of ens is assumed.
 .
-The default is\~0.
+The default
+.RB is\~ 0 .
 .
 .
 .\" XXX: Do we need a macro for this?  Why is it not a string like App
@@ -1135,7 +1136,7 @@ is
 .BR ms ;
 the
 .I ms.cov
-file prepares a cover page resembling those of the
+file prepares a cover page resembling that of the
 .I ms
 package.
 .
@@ -1259,7 +1260,7 @@ Indent text by
 T}
 C@Center each line.
 CB@Center the whole display as a block.
-R@Right-align the lines.
+R@Right-align each line.
 RB@Right-align the whole display as a block.
 .TE
 .
@@ -1580,7 +1581,7 @@ Configure display of footnotes.
 .
 The first argument encodes enablement of
 automatic hyphenation,
-adjustment to the right margin,
+adjustment to both margins,
 indentation of footnote text,
 and left- vs.\& right-alignment of the footnote label within the space
 allocated for it.
