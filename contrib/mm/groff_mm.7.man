@@ -724,18 +724,20 @@ to end the list.
 .
 .TP
 .BR APP \~\c
-.RI [ id\~ [ title ]]
+.RI [ sequence-number\~ [ title ]]
 Begin an appendix.
 .
-If the identifier
-.I id
+If
+.I sequence-number
 is omitted,
 it is incremented
-(or initialized,
+(or initialized
+.RB to\~ 1 ,
+.\" ...technically, initialized to zero but autoincremented.
 if necessary).
 .
 The register format used for
-.I id
+.I sequence-number
 is \[lq]A\[rq].
 .
 The page is broken.
