@@ -2824,12 +2824,27 @@ End notation begun with
 filling is enabled.
 .
 .
+.\" XXX: Could we use a more general mechanism?  Call it `NP`?
 .TP
-.BI nP\  \fR[\fPtype\fR]\fP
-Begin a numbered paragraph at heading level two.
+.BR nP\~ [
+.IR type ]
+As
+.BR P ,
+but set a paragraph number in the form
+.IR x . yy ,
+where
+.I x
+is the number of the second heading level,
+and
+.I yy
+increments with each
+.B nP
+call;
+its value is not reset when the second-level heading number changes.
 .
-See
-.BR P .
+.I mm
+uses a register format of \[lq]00\[rq] for
+.I yy.
 .
 .
 .br
