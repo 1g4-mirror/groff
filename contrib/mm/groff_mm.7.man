@@ -955,7 +955,7 @@ Above these rules,
 the text in the string
 .B Letapp
 is formatted;
-a second argument replaces this text with a blank line.
+a second argument replaces this text with one vee of vertical space.
 .
 See
 .BR LT .
@@ -1308,11 +1308,11 @@ reduces the line length by
 .IP
 .I mm
 normally
-places blank lines before and after the display.
+places vertical space before and after the display.
 .
 Set register
 .B Ds
-to \[lq]0\[rq] to suppress these.
+to \[lq]0\[rq] to suppress it.
 .
 .
 .TP
