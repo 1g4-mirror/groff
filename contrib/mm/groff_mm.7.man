@@ -1965,8 +1965,8 @@ and the value of
 .RB register\~ Hu
 for unnumbered headings.
 .
-.I title
-is the corresponding argument to
+.I title-suffix
+is the catenation of the corresponding arguments to
 .B H
 or
 .BR HU .
@@ -1974,7 +1974,7 @@ or
 .
 .RS
 .TP
-.BI HX\~ "declared-level actual-level title"
+.BI HX\~ "declared-level actual-level title-suffix"
 .I mm
 calls
 .B HX
@@ -2030,7 +2030,7 @@ The default is
 .
 .
 .TP
-.BI HY\~ "declared-level actual-level title"
+.BI HY\~ "declared-level actual-level title-suffix"
 .I mm
 calls
 .B HY
@@ -2040,7 +2040,7 @@ It could be used to change indentation.
 .
 .
 .TP
-.BI HZ\~ "declared-level actual-level title"
+.BI HZ\~ "declared-level actual-level title-suffix"
 .I mm
 calls
 .B HZ
