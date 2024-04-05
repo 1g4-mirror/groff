@@ -5880,6 +5880,10 @@ static void troff_request()
 
 static void skip_branch()
 {
+  if (tok.is_newline()) {
+    tok.next();
+    return;
+  }
   int level = 0;
   // ensure that ".if 0\{" works as expected
   if (tok.is_left_brace())

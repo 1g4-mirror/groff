@@ -1,3 +1,21 @@
+2024-04-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (skip_branch): Handle control flow
+	branches consisting only of a newline correctly when skipping
+	them--actually skip them, as AT&T troff does.  A newline after
+	the `el` request, or after the conditional expression of an
+	`if`, `ie`, or `while` request, is not "nothing"; if the branch
+	is taken, it puts a newline on the output, and if it is not
+	taken, it should neither affect output nor be _syntactically_
+	ignored on the pretense that the next input line was actually
+	part of the branch.
+
+	Fixes <https://savannah.gnu.org/bugs/?45502>.  Problem likely
+	goes back to groff's origin.  (You could always avoid it with
+	brace escape sequences, which might explain why it seemed to
+	cause little consternation.)  Thanks to Carsten Kunze for the
+	report and to Dave Kemper for the code review.
+
 2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Regression-test Savannah #45502.
