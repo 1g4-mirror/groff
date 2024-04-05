@@ -1,5 +1,16 @@
 2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Refactor.  Replace bespoke class
+	`bool_stack` with STL `stack<bool>`.  Migrate global
+	`if_else_stack` to use it.
+	(process_input_stack): Migrate `trap_bol_stack` to use it.
+	(process_input_stack, else_request): Migrate member function
+	calls.
+	- `is_empty()` -> `empty()`
+	- `pop()` -> `top()`, `pop()`
+
+2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Slightly refactor.  Reconstruct
 	class `int_stack` as `bool_stack` since all we require are
 	Boolean values.

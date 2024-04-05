@@ -35,6 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "unicode.h"
 #include "curtime.h"
 
+#include <stack>
+
 // Needed for getpid() and isatty()
 #include "posix.h"
 
@@ -2874,56 +2876,6 @@ static int transparent_translate(int cc)
   return cc;
 }
 
-class bool_stack {
-  struct bool_stack_element {
-    int n;
-    bool_stack_element *next;
-  } *top;
-public:
-  bool_stack();
-  ~bool_stack();
-  void push(int);
-  int is_empty();
-  int pop();
-};
-
-bool_stack::bool_stack()
-{
-  top = 0;
-}
-
-bool_stack::~bool_stack()
-{
-  while (top != 0) {
-    bool_stack_element *temp = top;
-    top = top->next;
-    delete temp;
-  }
-}
-
-int bool_stack::is_empty()
-{
-  return top == 0;
-}
-
-void bool_stack::push(int n)
-{
-  bool_stack_element *p = new bool_stack_element;
-  p->next = top;
-  p->n = n;
-  top = p;
-}
-
-int bool_stack::pop()
-{
-  assert(top != 0);
-  bool_stack_element *p = top;
-  top = top->next;
-  int n = p->n;
-  delete p;
-  return n;
-}
-
 int node::reread(int *)
 {
   return 0;
@@ -2981,7 +2933,7 @@ static int leading_spaces_space = 0;
 
 void process_input_stack()
 {
-  bool_stack trap_bol_stack;
+  std::stack<int> trap_bol_stack;
   int bol = 1;
   for (;;) {
     int suppress_next = 0;
@@ -3179,10 +3131,12 @@ void process_input_stack()
       }
     case token::TOKEN_END_TRAP:
       {
-	if (trap_bol_stack.is_empty())
+	if (trap_bol_stack.empty())
 	  error("spurious end trap token detected!");
-	else
-	  bol = trap_bol_stack.pop();
+	else {
+	  bol = trap_bol_stack.top();
+	  trap_bol_stack.pop();
+	}
 	have_formattable_input = false;
 
 	/* I'm not totally happy about this.  But I can't think of any other
@@ -3205,7 +3159,7 @@ void process_input_stack()
 	  will print all but the first lines from the word immediately
 	  after the footer, rather than on the next page. */
 
-	if (trap_bol_stack.is_empty())
+	if (trap_bol_stack.empty())
 	  curenv->output_pending_lines();
 	break;
       }
@@ -5978,7 +5932,7 @@ static void nop_request()
     tok.next();
 }
 
-static bool_stack if_else_stack;
+static std::stack<bool> if_else_stack;
 
 static bool do_if_request()
 {
@@ -6153,12 +6107,14 @@ static void if_request()
 
 static void else_request()
 {
-  if (if_else_stack.is_empty()) {
+  if (if_else_stack.empty()) {
     warning(WARN_EL, "unbalanced 'el' request");
     skip_alternative();
   }
   else {
-    if (if_else_stack.pop())
+    bool predicate = if_else_stack.top();
+    if_else_stack.pop();
+    if (predicate)
       skip_alternative();
     else
       begin_alternative();
