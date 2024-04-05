@@ -1,3 +1,10 @@
+2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Regression-test Savannah #45502.
+
+	* src/roff/groff/tests/degenerate-control-flow-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2024-04-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Trivially refactor.  Rename
