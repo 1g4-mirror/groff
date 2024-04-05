@@ -148,18 +148,6 @@
 	inset register pushing and popping logic harder to reason about.
 	Continues commit 5d2e49f818, 9 August.
 
-2024-03-19  Alexis <surryhill@gmail.com>
-
-	[grohtml]: Migrate from psselect(1) to ps2ps(1).
-
-	* src/preproc/html/pre-html.cpp (imageList::createPage): Do it.
-	* src/devices/grohtml/grohtml.1.man (Dependencies): Document
-	the changed runtime requirement.
-	* m4/groff.m4 (GROFF_CHECK_GROHTML_PROGRAMS):
-	* src/roff/groff/tests/html_works_with_grn_and_eqn.sh:
-	* src/roff/groff/tests/smoke-test_html_device.sh: Check for
-	existence of `ps2ps` command instead of `psselect`.
-
 2024-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc.tmac (Ar): Don't reset the selected font to its
