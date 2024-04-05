@@ -5878,7 +5878,7 @@ static void troff_request()
   skip_line();
 }
 
-static void skip_alternative()
+static void skip_branch()
 {
   int level = 0;
   // ensure that ".if 0\{" works as expected
@@ -5920,7 +5920,7 @@ static void skip_alternative()
   tok.next();
 }
 
-static void begin_alternative()
+static void take_branch()
 {
   while (tok.is_space() || tok.is_left_brace())
     tok.next();
@@ -5984,7 +5984,7 @@ static bool do_if_request()
     tok.next();
     symbol nm = get_name(true /* required */);
     if (nm.is_null()) {
-      skip_alternative();
+      skip_branch();
       return 0;
     }
     result = (c == 'd'
@@ -5995,7 +5995,7 @@ static bool do_if_request()
     tok.next();
     symbol nm = get_long_name(true /* required */);
     if (nm.is_null()) {
-      skip_alternative();
+      skip_branch();
       return 0;
     }
     result = (nm == default_symbol
@@ -6006,7 +6006,7 @@ static bool do_if_request()
     tok.skip();
     charinfo *ci = tok.get_char(true /* required */);
     if (ci == 0) {
-      skip_alternative();
+      skip_branch();
       return 0;
     }
     result = character_exists(ci, curenv);
@@ -6016,7 +6016,7 @@ static bool do_if_request()
     tok.next();
     symbol nm = get_long_name(true /* required */);
     if (nm.is_null()) {
-      skip_alternative();
+      skip_branch();
       return 0;
     }
     result = is_font_name(curenv->get_family()->nm, nm);
@@ -6025,7 +6025,7 @@ static bool do_if_request()
     tok.next();
     symbol nm = get_long_name(true /* required */);
     if (nm.is_null()) {
-      skip_alternative();
+      skip_branch();
       return 0;
     }
     result = is_abstract_style(nm);
@@ -6070,7 +6070,7 @@ static bool do_if_request()
   else {
     units n;
     if (!get_number(&n, 'u')) {
-      skip_alternative();
+      skip_branch();
       return 0;
     }
     else
@@ -6079,9 +6079,9 @@ static bool do_if_request()
   if (want_test_sense_inverted)
     result = !result;
   if (result)
-    begin_alternative();
+    take_branch();
   else
-    skip_alternative();
+    skip_branch();
   return result;
 }
 
@@ -6109,15 +6109,15 @@ static void else_request()
 {
   if (if_else_stack.empty()) {
     warning(WARN_EL, "unbalanced 'el' request");
-    skip_alternative();
+    skip_branch();
   }
   else {
     bool predicate = if_else_stack.top();
     if_else_stack.pop();
     if (predicate)
-      skip_alternative();
+      skip_branch();
     else
-      begin_alternative();
+      take_branch();
   }
 }
 

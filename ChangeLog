@@ -1,3 +1,13 @@
+2024-04-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Trivially refactor.  Rename
+	functions to use more idiomatic computer science terminology.
+	(begin_alternative): Rename this...
+	(take_branch): ...to this.
+	(skip_alternative): Rename this...
+	(skip_branch): ...to this.
+	(do_if_request, else_request): Update call sites.
+
 2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Refactor.  Replace bespoke class
