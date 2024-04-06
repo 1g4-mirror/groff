@@ -6111,10 +6111,8 @@ static void if_request()
 
 static void else_request()
 {
-  if (if_else_stack.empty()) {
-    warning(WARN_EL, "unbalanced 'el' request");
+  if (if_else_stack.empty())
     skip_branch();
-  }
   else {
     bool predicate = if_else_stack.top();
     if_else_stack.pop();
@@ -8927,7 +8925,6 @@ static struct {
   { "range", WARN_RANGE },
   { "break", WARN_BREAK },
   { "delim", WARN_DELIM },
-  { "el", WARN_EL },
   { "scale", WARN_SCALE },
   { "number", WARN_NUMBER },
   { "syntax", WARN_SYNTAX },

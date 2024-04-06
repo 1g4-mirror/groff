@@ -29,6 +29,14 @@ o The `color`, `cp`, `linetabs`, and `vpt` requests now interpret
   with a register interpolation as an argument, the outcome agrees with
   an `if` test of the register's value.
 
+o The formatter no longer reports warnings in the "el" category.  There
+  was only one; it threw a warning diagnostic if enabled (which it was
+  not by default) if it inferred an imbalance between `ie` and `el`
+  requests.  Unfortunately it wasn't reliable and sometimes spuriously
+  issued these warnings, and making it perfectly reliable did not look
+  tractable.  We recommend using brace escape sequences `\{` and `\}` to
+  ensure that your control flow structures remain maintainable.
+
 o In nroff mode (in other words, when producing output for devices that
   claim to be terminals), the formatter now reports warning diagnostics
   regarding certain output problems using units of lines instead of

@@ -1,5 +1,38 @@
 2024-04-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Retire "el" warning category.
+
+	It's much too hard to perform this analysis without the risk of
+	throwing this warning spuriously.  Paul Eggert reported a
+	real-world use of `ie`/`el` requests nested without the use of
+	brace escape sequences in his zic(8) man page that is
+	structurally equivalent to the following (with indentation added
+	for clarity).
+
+	.ie \nA .tm register A is truthy
+	.el .ie t .tm in typesetter mode
+	.    el   .tm in terminal mode
+
+	Without brace escape sequences, the `skip_branch()` function
+	that discards input corresponding to control flow branches not
+	taken does not reliably keep track of the nesting level.  So why
+	not just make `skip_branch()` more sophisticated to handle this
+	case?  Because it doesn't generalize.  What if the input changes
+	the control character, or uses the no-break control character?
+	What if the input has renamed the `ie` request or invokes it
+	through a macro?
+
+	* src/roff/troff/input.cpp: Drop this warning category from the
+	`warning_table` global.
+	(else_request): Stop throwing it.
+	* src/roff/troff/troff.h: Comment out its value in the
+	`warning_type` enum.
+
+	Fixes <https://savannah.gnu.org/bugs/?65474>.  Thanks to Paul
+	Eggert for the report.
+
+2024-04-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (skip_branch): Handle control flow
 	branches consisting only of a newline correctly when skipping
 	them--actually skip them, as AT&T troff does.  A newline after
