@@ -3,31 +3,70 @@
 	Correct and improve linear search introduced in commit
 	cd9fde325f, 4th March.
 
-	* tmac/pdf.tmac: Various problems have been rectified, speed
-	improvements to the linear search, Keith protection against
-	illegal characters being used in string identifiers.
+	* tmac/pdf.tmac: Add mark counter, `pdf:bm.nk`.
+	(pdfbookmark, pdf*href-M): ...and use it.
+	(pdf:lookup): Add string `pdf:lookup-value` to record the `.val`
+	attribute of a PDF bookmark, distinctly from its `.tag`.
+	(pdfnote, pdfbookmark, pdf*href-M, pdf*href): Use `\A` escape
+	sequence to validate *roff strings as (parts of) identifiers
+	{seen in Keith Marshall's "pdfmark.tmac"}.
+	(pdf*href-M, pdf*href, pdfbookmark): Stop using old `pdf:look`
+	method of bookmark tag lookup.  Drop conditionals on presence of
+	mom(7) `PRINTSTYLE` macro to select its use.
+	(pdfbookmark): Drop logic for cleaning bookmark tag of material
+	invalid in *roff identifiers, since the foregoing ensure that
+	we no longer use such in their construction.
+	(pdfmarksuspend, pdfmarkrestart): Drop management of mark
+	suspension state; "pdf.tmac" now subsumes this function.
 
-	* contrib/mom/om.tmac: Switch to using Branden's linear search
-	so that we don't have to maintain two different methods.
-
-	Fixes <https://savannah.gnu.org/bugs/?65585>
+	Fixes <https://savannah.gnu.org/bugs/?65585>.
 
 2024-04-12  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	Support UTF-16 Bookmarks.
+	Support UTF-16-encoded PDF bookmarks.
 
-	* src/devices/grops: Add comment field to the font files
-	which specifies the UTF-16 code for the character.
+	* utils/afmtodit/afmtodit.pl: Generate comment field holding the
+	UTF-16 code for each groff character.
 
-	* utils/afmtodit/afmtodit.pl: Add comment field holding the
-	UTF-16 code.
+	* font/devps/AB:
+	* font/devps/ABI:
+	* font/devps/AI:
+	* font/devps/AR:
+	* font/devps/BMB:
+	* font/devps/BMBI:
+	* font/devps/BMI:
+	* font/devps/BMR:
+	* font/devps/HB:
+	* font/devps/HBI:
+	* font/devps/HI:
+	* font/devps/HNB:
+	* font/devps/HNBI:
+	* font/devps/HNI:
+	* font/devps/HNR:
+	* font/devps/HR:
+	* font/devps/NB:
+	* font/devps/NBI:
+	* font/devps/NI:
+	* font/devps/NR:
+	* font/devps/PB:
+	* font/devps/PBI:
+	* font/devps/PI:
+	* font/devps/PR:
+	* font/devps/TB:
+	* font/devps/TBI:
+	* font/devps/TI:
+	* font/devps/TR:
+	* font/devps/ZCMI: Regenerate with updated aftmtodit.pl.
 
 	* man/groff_font.5.man: Document use of comment field to hold
 	UTF-16 code.
 
-	* src/devices/gropdf/gropdf.pl: Extract UTF-16 code from font
-	comment field (rather than a new field). And tweak to pdf
-	parser.
+	* src/devices/gropdf/gropdf.pl (LoadFont): Extract UTF-16 code
+	from font comment field (rather than a new field).
+	(ParsePDFValue): Validate input more strictly.
+	(do_x): Manage state more strictly; don't suspend a mark
+	{hotspot} when one is not active, and don't restart it when one
+	is not suspended.
 
 2024-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
