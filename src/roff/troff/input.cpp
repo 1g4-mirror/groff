@@ -5980,14 +5980,14 @@ static void nop_request()
 
 static int_stack if_else_stack;
 
-static int do_if_request()
+static bool do_if_request()
 {
-  int invert = 0;
+  bool want_test_sense_inverted = false;
   while (tok.is_space())
     tok.next();
   while (tok.ch() == '!') {
     tok.next();
-    invert = !invert;
+    want_test_sense_inverted = !want_test_sense_inverted;
   }
   int result;
   unsigned char c = tok.ch();
@@ -6122,7 +6122,7 @@ static int do_if_request()
     else
       result = n > 0;
   }
-  if (invert)
+  if (want_test_sense_inverted)
     result = !result;
   if (result)
     begin_alternative();
@@ -6166,13 +6166,13 @@ static void else_request()
 }
 
 static int while_depth = 0;
-static int while_break_flag = 0;
+static bool want_loop_break = false;
 
 static void while_request()
 {
   // We can't use `has_arg()` here.  XXX: Figure out why.
   macro mac;
-  int escaped = 0;
+  bool is_char_escaped = false;
   int level = 0;
   mac.append(new token_node(tok));
   for (;;) {
@@ -6181,15 +6181,15 @@ static void while_request()
     if (c == EOF)
       break;
     if (c == 0) {
-      escaped = 0;
+      is_char_escaped = false;
       mac.append(n);
     }
-    else if (escaped) {
+    else if (is_char_escaped) {
       if (c == '{')
 	level += 1;
       else if (c == '}')
 	level -= 1;
-      escaped = 0;
+      is_char_escaped = false;
       mac.append(c);
     }
     else {
@@ -6198,7 +6198,7 @@ static void while_request()
       else if (c == ESCAPE_RIGHT_BRACE)
 	level -= 1;
       else if (c == escape_char)
-	escaped = 1;
+	is_char_escaped = true;
       mac.append(c);
       if (c == '\n' && level <= 0)
 	break;
@@ -6218,8 +6218,8 @@ static void while_request()
 	break;
       }
       process_input_stack();
-      if (while_break_flag || input_stack::is_return_boundary()) {
-	while_break_flag = 0;
+      if (want_loop_break || input_stack::is_return_boundary()) {
+	want_loop_break = false;
 	break;
       }
     }
@@ -6236,7 +6236,7 @@ static void while_break_request()
     skip_line();
   }
   else {
-    while_break_flag = 1;
+    want_loop_break = true;
     while (input_stack::get(0) != EOF)
       ;
     tok.next();
@@ -7525,7 +7525,7 @@ charinfo *token::get_char(bool required)
       // character is null.  If not, this should be an assert().  Also
       // see escape_off().
       error("escaped 'e' used while escape sequences disabled");
-      return 0;
+      return 0 /* nullptr */;
     }
   }
   if (required) {
@@ -7535,7 +7535,7 @@ charinfo *token::get_char(bool required)
       error("expected ordinary or special character, got %1",
 	    description());
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 charinfo *get_optional_char()

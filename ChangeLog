@@ -1,3 +1,12 @@
+2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Slightly refactor.  Boolify.  Demote
+	and rename global `while_break_flag` to `want_loop_break`.
+	(do_if_request): Demote return type from `int` to `bool`.
+	Demote and rename local `invert` to `want_test_sense_inverted`.
+	(while_request): Demote and rename local `escaped` to
+	`is_char_escaped`.
+
 2024-04-12  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Correct and improve linear search introduced in commit
