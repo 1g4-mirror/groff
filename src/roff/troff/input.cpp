@@ -2874,50 +2874,50 @@ static int transparent_translate(int cc)
   return cc;
 }
 
-class int_stack {
-  struct int_stack_element {
+class bool_stack {
+  struct bool_stack_element {
     int n;
-    int_stack_element *next;
+    bool_stack_element *next;
   } *top;
 public:
-  int_stack();
-  ~int_stack();
+  bool_stack();
+  ~bool_stack();
   void push(int);
   int is_empty();
   int pop();
 };
 
-int_stack::int_stack()
+bool_stack::bool_stack()
 {
   top = 0;
 }
 
-int_stack::~int_stack()
+bool_stack::~bool_stack()
 {
   while (top != 0) {
-    int_stack_element *temp = top;
+    bool_stack_element *temp = top;
     top = top->next;
     delete temp;
   }
 }
 
-int int_stack::is_empty()
+int bool_stack::is_empty()
 {
   return top == 0;
 }
 
-void int_stack::push(int n)
+void bool_stack::push(int n)
 {
-  int_stack_element *p = new int_stack_element;
+  bool_stack_element *p = new bool_stack_element;
   p->next = top;
   p->n = n;
   top = p;
 }
 
-int int_stack::pop()
+int bool_stack::pop()
 {
   assert(top != 0);
-  int_stack_element *p = top;
+  bool_stack_element *p = top;
   top = top->next;
   int n = p->n;
   delete p;
@@ -2981,7 +2981,7 @@ static int leading_spaces_space = 0;
 
 void process_input_stack()
 {
-  int_stack trap_bol_stack;
+  bool_stack trap_bol_stack;
   int bol = 1;
   for (;;) {
     int suppress_next = 0;
@@ -5978,7 +5978,7 @@ static void nop_request()
     tok.next();
 }
 
-static int_stack if_else_stack;
+static bool_stack if_else_stack;
 
 static bool do_if_request()
 {

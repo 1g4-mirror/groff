@@ -1,5 +1,11 @@
 2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.  Reconstruct
+	class `int_stack` as `bool_stack` since all we require are
+	Boolean values.
+
+2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Slightly refactor.  Boolify.  Demote
 	and rename global `while_break_flag` to `want_loop_break`.
 	(do_if_request): Demote return type from `int` to `bool`.
