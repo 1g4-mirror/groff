@@ -1981,7 +1981,6 @@ sub Clean
     my $p=shift;
 
     $p=~s/\\c?$//g;
-    $p=~s/\\[eE]/\\/g;
     $p=~s/\\[ 0~t]/ /g;
     $p=~s/\\[,!"#\$%&’.0:?{}ˆ_‘|^prud]//g;
     $p=~s/\\'/\\[aa]/g;
@@ -2004,6 +2003,7 @@ sub utf16
     my $p=Clean(shift);
     my $label=shift;
 
+    $p=~s/\\\(rs|\\\[rs\]/\\E/g;
     $p=~s/\\\[(.*?)\]/FindChr($1,0)/eg;
     $p=~s/\\C($parcln)/FindChr($1,1)/eg;
 #    $p=~s/\\\((..)/FindChr($1)/eg;
@@ -2019,6 +2019,7 @@ sub utf16
 
     $p=~s/(?<!\\)\(/\\\(/g;
     $p=~s/(?<!\\)\)/\\\)/g;
+    $p=~s/\\[eE]/\\\\/g;
 
     return($p);
 }
