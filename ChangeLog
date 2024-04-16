@@ -2,7 +2,7 @@
 
 	[gropdf] Problem with '(' and '\' (\[rs])
 
-	Bpth these tokens have meaning for roff AND pdf strings. In
+	Both these tokens have meaning for roff AND pdf strings. In
 	pdfs unbalanced parentheses have to be escaped (with '\') and
 	a single '\' has to be similarly escaped, '\\'. It is gropdf's
 	responsibility to ensure pdf strings are valid, no matter what
@@ -12,8 +12,8 @@
 	If '\[rs](ul' is passed (i.e. '\(ul' is intended to become the
 	UTF-16 string) \[rs] becomes '\' leaving '\(ul', which
 	becomes '_', not what is intended. If the unbalanced '(' is
-	eascaped first, '\[rs]\(ul' which could become '\\_' when the
-	'\' is escaped, yielding '\_'. The code which escapes parenthesis
+	escaped first, '\[rs]\(ul' which could become '\\_' when the '\'
+	is escaped, yielding '\_'. The code which escapes parenthesis
 	checks it is not already preceded by '\' since adding another
 	would give you '\\(' which is not what you want. The correct
 	output should be '\\\(ul' to achieve the correct pdf string.
@@ -167,6 +167,10 @@
 	* font/devps/BMBI:
 	* font/devps/BMI:
 	* font/devps/BMR:
+	* font/devps/CB:
+	* font/devps/CBI:
+	* font/devps/CI:
+	* font/devps/CR:
 	* font/devps/HB:
 	* font/devps/HBI:
 	* font/devps/HI:
@@ -183,6 +187,7 @@
 	* font/devps/PBI:
 	* font/devps/PI:
 	* font/devps/PR:
+	* font/devps/S:
 	* font/devps/TB:
 	* font/devps/TBI:
 	* font/devps/TI:
@@ -277,7 +282,7 @@
 
 2024-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[mdoc]: Add support for `MF` rendering option.  in parallel with
+	[mdoc]: Add support for `MF` rendering option in parallel with
 	groff man(7), and working much like the `HF` string.
 
 	* tmac/doc.tmac (initialization): If the user specifies no `MF`
@@ -593,8 +598,8 @@
 	more carefully.
 	(main): Insist on an argument value of at least 2, since a hash
 	table of size 1 is pointless.
-	(check_integer_arg): Try to be more robust in the fact of
-	C/C++'s notorious lax integer sizing practices.  We might
+	(check_integer_arg): Try to be more robust in the face of
+	C/C++'s notoriously lax integer sizing practices.  We might
 	consider gnulib's "xstrtol" module.  Promote `-h` argument
 	validation errors to `fatal()`.  Only perform a comparison
 	against INT_MAX if LONG_MAX is larger than INT_MAX in the first
