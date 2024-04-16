@@ -1,3 +1,27 @@
+2024-04-16  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] Problem with '(' and '\' (\[rs])
+
+	Bpth these tokens have meaning for roff AND pdf strings. In
+	pdfs unbalanced parentheses have to be escaped (with '\') and
+	a single '\' has to be similarly escaped, '\\'. It is gropdf's
+	responsibility to ensure pdf strings are valid, no matter what
+	the input.
+
+	If '\(ul' is passed then the UTF-16 character becomes '_'.
+	If '\[rs](ul' is passed (i.e. '\(ul' is intended to become the
+	UTF-16 string) \[rs] becomes '\' leaving '\(ul', which
+	becomes '_', not what is intended. If the unbalanced '(' is
+	eascaped first, '\[rs]\(ul' which could become '\\_' when the
+	'\' is escaped, yielding '\_'. The code which escapes parenthesis
+	checks it is not already preceded by '\' since adding another
+	would give you '\\(' which is not what you want. The correct
+	output should be '\\\(ul' to achieve the correct pdf string.
+
+	This fixes the above issue (I hope).
+
+	* src/devices/gropdf/gropdf.pl: Change pattern matches
+
 2024-04-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an-ext.tmac <mV, mQ>: Trivially refactor.  Rename string
