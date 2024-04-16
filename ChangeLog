@@ -1,3 +1,11 @@
+2024-04-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Fix computation of bookmark level.  If this
+	register's value is specified on the command line, don't clobber
+	it.  Adjust logic for assigning tag to the bookmark to the
+	{possibly adjusted} base level accordingly.  Based on a patch by
+	Deri James.
+
 2024-04-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Retire "el" warning category.
