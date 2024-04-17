@@ -361,6 +361,9 @@ my $textenccmap=''; # CMap for groff text.enc encoding
 my @XOstream=();
 my @PageAnnots={};
 my $noslide=0;
+my $ND='ND';
+my $NP='NP';
+my $RD='RD';
 my $transition={PAGE => {Type => '/Trans', S => '', D => 1, Dm => '/H', M => '/I', Di => 0, SS => 1.0, B => 0},
 		BLOCK => {Type => '/Trans', S => '', D => 1, Dm => '/H', M => '/I', Di => 0, SS => 1.0, B => 0}};
 my $firstpause=0;
@@ -4577,7 +4580,7 @@ sub encrypt_exec
 sub encrypt_char
 {
     my $la=shift;
-    unshift(@{$la},0x44,0x65,0x72,0x69);
+    unshift(@{$la},0x44,0x65,0x72,0x69) if $lenIV;
     my $res;
     my $cypher;
     my $cr=C_DEF;
@@ -4610,6 +4613,22 @@ sub map_subrs
 		$sec{'#Subrs'}=$j;
 		$stage=1;
 	    }
+	    elsif ($lin=~m/^\/(.+?)\s+\{string currentfile exch readstring pop\}\s*executeonly def/)
+	    {
+		$RD=$1;
+	    }
+	    elsif ($lin=~m/^\/(.+?)\s+\{noaccess def\}\s*executeonly def/)
+	    {
+		$ND=$1;
+	    }
+	    elsif ($lin=~m/^\/(.+?)\s+\{noaccess put\}\s*executeonly def/)
+	    {
+		$NP=$1;
+	    }
+	    elsif ($lin=~m'^/lenIV\s+(\d+)')
+	    {
+		$lenIV=$1;
+	    }
 	}
 	elsif ($stage == 1)
 	{
@@ -4619,7 +4638,7 @@ sub map_subrs
 		$stage=2;
 		$i=0;
 	    }
-	    elsif ($lin=~m/^\s*dup\s+(\d+)\s+(\d+)\s+RD (.*)/s)
+	    elsif ($lin=~m/^\s*dup\s+(\d+)\s+(\d+)\s+\Q$RD\E (.*)/os)
 	    {
 		my $n=$1;
 		my $l=$2;
@@ -4645,9 +4664,9 @@ sub map_subrs
 
 #		$s=decrypt_char($s);
 #		subs_call($s,"#$n");
-		$lines->[$i]=["#$n",$l,$s,'NP'];
+		$lines->[$i]=["#$n",$l,$s,$NP];
 	    }
-	    elsif ($lin=~m/^ND/)
+	    elsif ($lin=~m/^\Q$ND\E/o)
 	    {}
 	    else
 	    {
@@ -4661,7 +4680,7 @@ sub map_subrs
 		$sec{'#Pad'}=$j;
 		$stage=3;
 	    }
-	    elsif ($lin=~m/^\s*\/([-.\w]*)\s+(\d+)\s+RD (.*)/s)
+	    elsif ($lin=~m/^\s*\/([-.\w]*)\s+(\d+)\s+\Q$RD\E (.*)/os)
 	    {
 		my $n=$1;
 		my $l=$2;
@@ -4690,7 +4709,7 @@ sub map_subrs
 		}
 		else
 		{
-		    $lines->[$i]=["/$n",$l,$s,'ND'];
+		    $lines->[$i]=["/$n",$l,$s,$ND];
 		}
 
 		$i=0;
@@ -4886,7 +4905,7 @@ sub encrypt
 
 	next if !defined($lin);
 
-	if (ref($lin) eq 'ARRAY' and $lin->[TYPE] eq 'NP')
+	if (ref($lin) eq 'ARRAY' and $lin->[TYPE] eq $NP)
 	{
 	    foreach my $sub (@subrused)
 	    {
@@ -4894,7 +4913,7 @@ sub encrypt
 		{
 		    subs_call($sec{$sub}->[CHARCHAR]=decrypt_char($lines->[$sec{$sub}->[LINE]]->[STR]),$sub,$lines) if (!defined($sec{$sub}->[CHARCHAR]));
 		    my $cs=encode_charstr($sec{$sub}->[CHARCHAR],$sub);
-		    $bdy.="dup ".$sec{$sub}->[NEWNO].' '.length($cs)." RD $cs NP\n";
+		    $bdy.="dup ".$sec{$sub}->[NEWNO].' '.length($cs)." $RD $cs $NP\n";
 		}
 		else
 		{
@@ -4904,14 +4923,14 @@ sub encrypt
 
 	    while (!defined($lines->[$j+1]) or ref($lines->[$j+1]) eq 'ARRAY') {$j++;};
 	}
-	elsif (ref($lin) eq 'ARRAY' and $lin->[TYPE] eq 'ND')
+	elsif (ref($lin) eq 'ARRAY' and $lin->[TYPE] eq $ND)
 	{
 	    foreach my $chr (@glyphused)
 	    {
 		if (exists($sec{$chr}))
 		{
 		    my $cs=encode_charstr($sec{$chr}->[CHARCHAR],$chr);
-		    $bdy.="$chr ".length($cs)." RD $cs ND\n";
+		    $bdy.="$chr ".length($cs)." $RD $cs $ND\n";
 		}
 		else
 		{

@@ -1,3 +1,21 @@
+2024-04-17  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] Improve font parsing.
+
+	The usual (for fontforge converted ttf fonts) is to use the RD, ND
+	and NP operators within charstring definitions, however these are
+	just named in the private subrs dictionary so could be assigned
+	any name.
+
+	A debian .pfb version of a google .ttf font (which has not passed
+	through fontforge) used -| |- and | as the 3 equivalent. In
+	addition it used a different lenIV value for the eexec encryption (4)
+	and the charstring encryption (0) (didn't know you could do that).
+
+	* src/devices/gropdf/gropdf.pl: Make RD, ND and NP variables set
+	from parsing the private subrs. Honour lenIV=0 when encrypting
+	charstrings.
+
 2024-04-16  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf] Problem with '(' and '\' (\[rs])
