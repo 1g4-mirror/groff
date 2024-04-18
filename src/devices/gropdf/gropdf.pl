@@ -4601,6 +4601,7 @@ sub map_subrs
     my $stage=0;
     my $lin=$lines->[0];
     my $i=0;
+    my ($RDre,$NDre);
 
     for (my $j=0; $j<=$#{$lines}; $lin=$lines->[++$j] )
     {
@@ -4612,6 +4613,8 @@ sub map_subrs
 	    {
 		$sec{'#Subrs'}=$j;
 		$stage=1;
+		$RDre=qr/\Q$RD\E/;
+		$NDre=qr/\Q$ND\E/;
 	    }
 	    elsif ($lin=~m/^\/(.+?)\s+\{string currentfile exch readstring pop\}\s*executeonly def/)
 	    {
@@ -4638,7 +4641,7 @@ sub map_subrs
 		$stage=2;
 		$i=0;
 	    }
-	    elsif ($lin=~m/^\s*dup\s+(\d+)\s+(\d+)\s+\Q$RD\E (.*)/os)
+	    elsif ($lin=~m/^\s*dup\s+(\d+)\s+(\d+)\s+$RDre (.*)/s)
 	    {
 		my $n=$1;
 		my $l=$2;
@@ -4666,7 +4669,7 @@ sub map_subrs
 #		subs_call($s,"#$n");
 		$lines->[$i]=["#$n",$l,$s,$NP];
 	    }
-	    elsif ($lin=~m/^\Q$ND\E/o)
+	    elsif ($lin=~m/^$NDre/)
 	    {}
 	    else
 	    {
@@ -4680,7 +4683,7 @@ sub map_subrs
 		$sec{'#Pad'}=$j;
 		$stage=3;
 	    }
-	    elsif ($lin=~m/^\s*\/([-.\w]*)\s+(\d+)\s+\Q$RD\E (.*)/os)
+	    elsif ($lin=~m/^\s*\/([-.\w]*)\s+(\d+)\s+$RDre (.*)/s)
 	    {
 		my $n=$1;
 		my $l=$2;

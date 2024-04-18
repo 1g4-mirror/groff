@@ -1,5 +1,19 @@
 2024-04-17  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf] Handle both types in one document.
+
+	The different format of font described in previous commit fails if
+	document contains fonts of both formats. The reason is because the
+	regexes included the /o flag (compile once) for speed, but if the
+	format changed (from RD to -|) in a different font, parsing failed.
+
+	Now the regexes are compiled once for each font.
+
+	* src/devices/gropdf/gropdf.pl: Use qr// to compile regexes once
+	per font.
+
+2024-04-17  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	[gropdf] Improve font parsing.
 
 	The usual (for fontforge converted ttf fonts) is to use the RD, ND
