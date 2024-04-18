@@ -97,6 +97,10 @@
 	* src/roff/troff/troff.h: Comment out its value in the
 	`warning_type` enum.
 
+	* doc/groff.texi.in (if-else, Warnings):
+	* src/roff/troff/troff.1.man (Warnings): De-document "el" troff
+	warning category.
+
 	Fixes <https://savannah.gnu.org/bugs/?65474>.  Thanks to Paul
 	Eggert for the report.
 

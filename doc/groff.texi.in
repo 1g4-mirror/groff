@@ -13159,7 +13159,6 @@ does to any other request.  This fact can surprise C programmers.
 .  ie \na a is true
 .  el     a is false
 .el z is false
-    @error{} warning: unbalanced 'el' request
     @result{} a is false
 @endExample
 
@@ -17333,12 +17332,12 @@ default.
 @itemx 8
 The closing delimiter in an escape sequence was missing or mismatched.
 
-@item el
-@itemx 16
-@cindex @code{ie} request, and warnings
-@cindex @code{el} request, and warnings
-The @code{el} request was encountered with no prior corresponding
-@code{ie} request.  @xref{if-else}.
+@c @item el
+@c @itemx 16
+@c @cindex @code{ie} request, and warnings
+@c @cindex @code{el} request, and warnings
+@c The @code{el} request was encountered with no prior corresponding
+@c @code{ie} request.  @xref{if-else}.
 
 @item scale
 @itemx 32
