@@ -10542,7 +10542,7 @@ font name of the selected font.  Copy its value to a string to save it
 for later use.
 
 @Example
-.nr saved-font \n[.fn]
+.ds saved-font \n[.fn]
 @r{@dots{} @i{text involving many font changes} @dots{}}
 .ft \*[saved-font]
 @endExample
@@ -17734,23 +17734,24 @@ alternating output lines in this adjustment mode to prevent ``rivers''
 in the text.
 
 @cindex hyphenation, incompatibilities with @acronym{AT&T} @code{troff}
-GNU @code{troff} does not always hyphenate words as @acronym{AT&T}
-@code{troff} does.  The @acronym{AT&T} implementation uses a set of
-hard-coded rules specific to English, while GNU @code{troff} uses
+GNU @command{troff} does not always hyphenate words as @acronym{AT&T}
+@command{troff} does.  The @acronym{AT&T} implementation uses a set of
+hard-coded rules specific to English, while GNU @command{troff} uses
 language-specific hyphenation pattern files derived from @TeX{}.
-Furthermore, in old versions of @code{troff} there was a limited amount
-of space to store hyphenation exceptions (arguments to the @code{hw}
-request); GNU @code{troff} has no such restriction.  When the @code{hy}
-request is invoked without an argument, GNU @code{troff} sets the
-automatic hyphenation mode to the value of the @code{.hydefault}
-register; the @acronym{AT&T} implementation sets it to @samp{1}, which
-is not suitable for some languages, including English.
+Furthermore, in old versions of @command{troff} there was a limited
+amount of space to store hyphenation exceptions (arguments to the
+@code{hw} request); GNU @command{troff} has no such restriction.  When
+the @code{hy} request is invoked without an argument, GNU
+@command{troff} sets the automatic hyphenation mode to the value of the
+@code{.hydefault} register; the @acronym{AT&T} implementation sets it to
+@samp{1}, which is not suitable in GNU @command{troff} for some
+languages, including English.
 
 GNU @command{troff} handles the dummy character @code{\&} differently
 from @acronym{AT&T} @command{troff} when it is followed by the
 hyphenation control escape sequence @code{\%} at the beginning of a
 word.  GNU @command{troff} does not regard the dummy character as
-``starting'' the word;@acronym{AT&T} @command{troff}
+``starting'' the word; @acronym{AT&T} @command{troff}
 does.  Further, Heirloom Doctools @command{troff} does not honor an
 explicit hyphenation point marked with @code{\%} after a word-initial
 one.@footnote{Thus,
