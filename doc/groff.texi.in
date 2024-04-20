@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle March 2024
+@subtitle April 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -12870,10 +12870,9 @@ an error.  @xref{Writing Macros}.
 To remove an alias, call @code{rm} on its name.  The object itself is
 not destroyed until it has no more names.
 
-When a request, macro, string, or diversion is aliased, redefinitions
-and appendments ``write through'' alias names.  To replace an alias with
-a separately defined object, you must use the @code{rm} request on its
-name first.
+Redefinitions and appendments ``write through'' request, macro, string,
+and diversion names.  To replace an aliased object with a separately
+defined one, you must use the @code{rm} request on its name first.
 @endDefreq
 @c END Keep (roughly) parallel with section "Strings" of groff(7).
 
