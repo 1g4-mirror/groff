@@ -1,3 +1,8 @@
+2024-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tmac.am ($(M4CHECK)): Ensure directory exists to house
+	the stamp file before attempting to create the latter.
+
 2024-04-17  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf] Handle both types in one document.
