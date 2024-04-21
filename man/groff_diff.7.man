@@ -455,7 +455,7 @@ The
 .B .s
 and
 .B .ps
-registers represent the type size selected by the output driver as it
+registers represent the type size selected by the formatter as it
 understands a device's capability.
 .
 The last
