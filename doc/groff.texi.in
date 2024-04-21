@@ -8636,8 +8636,8 @@ just prior to it; most likely this isn't what you want.
 @cindex breaking URLs (@code{\:})
 @code{\:} inserts a non-printing break point; that is, a word can break
 there, but the soft hyphen glyph (see below) is not written to the
-output if it does.  This escape sequence is an input word boundary, so
-the remainder of the word is subject to hyphenation as normal.
+output if it does.  The remainder of the word is subject to hyphenation
+as normal.
 
 You can combine @code{\:} and @code{\%} to control breaking of a file
 name or URL, or to permit hyphenation only after certain explicit

@@ -1311,8 +1311,7 @@ but the soft hyphen character does not mark the break point if it does
 (in contrast to
 .RB \[lq]\^ \[rs]% \[rq]).
 .
-This escape sequence is an input word boundary,
-so the remainder of the word is subject to hyphenation as normal.
+The remainder of the word is subject to hyphenation as normal.
 .
 .
 .TP
