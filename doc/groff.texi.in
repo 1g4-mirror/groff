@@ -16012,9 +16012,8 @@ We can familiarize ourselves with stack behavior by wrapping the
 @Defreq {evc, environment}
 @cindex copying environment (@code{evc})
 @cindex environment, copying (@code{evc})
-Copy the contents of @var{environment} to the current environment.
-
-The following environment data are not copied.
+Copy the properties of @var{environment} to the current environment,
+except for:
 
 @itemize @bullet
 @item

@@ -2342,7 +2342,7 @@ Save the current escape character.
 Copy the properties of environment
 .I env
 to the current environment,
-except for the following data.
+except for:
 .
 .
 .RS
