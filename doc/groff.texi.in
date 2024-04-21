@@ -12928,8 +12928,9 @@ True if the current page is even-numbered.
 
 @item F @var{font}
 True if @var{font} exists.  @var{font} is handled as if it were an
-argument to the @code{ft} request (that is, font translation and styles
-are applied), but it is not mounted.
+argument to the @code{ft} request (that is, the default family is
+combined with an abstract style and font translation is applied), but
+@var{font} cannot be a mounting position, and no font is mounted.
 
 @item m @var{color}
 True if @var{color} is defined.

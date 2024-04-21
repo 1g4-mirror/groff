@@ -578,12 +578,12 @@ can be an abstract style
 or a font name.
 .
 .I fnt
-is handled as if it
-were accessed with the
+is handled as if it were an argument to the
 .B ft
 request
 (that is,
-abstract styles are resolved and font translations applied),
+the default family is combined with an abstract style and font
+translation is applied),
 but
 .I fnt
 cannot be a mounting position,
