@@ -1242,7 +1242,7 @@ as arguments.
 .
 .\" Keep \/ before \, in spite of collation.
 .TP
-.B \[rs]/
+.B \[rs]\|/
 Apply an
 .IR "italic correction" :
 modify the spacing of the preceding glyph so that the distance between
