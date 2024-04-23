@@ -1,3 +1,7 @@
+2024-04-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an-ext.tmac (mQ): Remove `mU` string once unneeded.
+
 2024-04-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf] ignore 'Cspace' as input
