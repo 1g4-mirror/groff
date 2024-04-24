@@ -172,7 +172,7 @@ class environment {
   hunits prev_indent;
   hunits indent;
   hunits temporary_indent;
-  int have_temporary_indent;
+  bool have_temporary_indent;
   hunits saved_indent;
   hunits target_text_length;
   int pre_underline_fontno;
@@ -200,7 +200,7 @@ class environment {
   int field_spaces;
   int tab_field_spaces;
   int tab_precedes_field;
-  int discarding;
+  bool discarding;
   int spread_flag;		// set by \p
   unsigned margin_character_flags;
   node *margin_character_node;

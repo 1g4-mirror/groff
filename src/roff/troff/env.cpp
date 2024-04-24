@@ -708,7 +708,7 @@ environment::environment(symbol nm)
   prev_indent(0),
   indent(0),
   temporary_indent(0),
-  have_temporary_indent(0),
+  have_temporary_indent(false),
   underline_lines(0),
   underline_spaces(0),
   input_trap_count(-1),
@@ -724,7 +724,7 @@ environment::environment(symbol nm)
   tab_char(0),
   leader_char(charset_table['.']),
   current_field(0),
-  discarding(0),
+  discarding(false),
   spread_flag(0),
   margin_character_flags(0),
   margin_character_node(0),
@@ -802,7 +802,7 @@ environment::environment(const environment *e)
   prev_indent(e->prev_indent),
   indent(e->indent),
   temporary_indent(0),
-  have_temporary_indent(0),
+  have_temporary_indent(false),
   underline_lines(0),
   underline_spaces(0),
   input_trap_count(-1),
@@ -818,7 +818,7 @@ environment::environment(const environment *e)
   tab_char(e->tab_char),
   leader_char(e->leader_char),
   current_field(0),
-  discarding(0),
+  discarding(false),
   spread_flag(0),
   margin_character_flags(e->margin_character_flags),
   margin_character_node(e->margin_character_node),
@@ -883,7 +883,7 @@ void environment::copy(const environment *e)
   line_spacing = e->line_spacing;
   prev_indent = e->prev_indent;
   indent = e->indent;
-  have_temporary_indent = 0;
+  have_temporary_indent = false;
   temporary_indent = 0;
   underline_lines = 0;
   underline_spaces = 0;
@@ -899,7 +899,7 @@ void environment::copy(const environment *e)
   spread_flag = 0;
   line = 0;
   pending_lines = 0;
-  discarding = 0;
+  discarding = false;
   tabs = e->tabs;
   line_tabs = e->line_tabs;
   current_tab = TAB_NONE;
@@ -1547,7 +1547,7 @@ void indent()
     tok.next();
   if (want_break)
     curenv->do_break();
-  curenv->have_temporary_indent = 0;
+  curenv->have_temporary_indent = false;
   curenv->prev_indent = curenv->indent;
   curenv->indent = temp;
   curdiv->modified_tag.incl(MTSM_IN);
@@ -1570,7 +1570,7 @@ void temporary_indent()
   }
   if (!err) {
     curenv->temporary_indent = temp;
-    curenv->have_temporary_indent = 1;
+    curenv->have_temporary_indent = true;
     curdiv->modified_tag.incl(MTSM_TI);
   }
   tok.next();
@@ -1937,11 +1937,11 @@ void environment::output_line(node *n, hunits width, int was_centered)
 void environment::start_line()
 {
   assert(line == 0);
-  discarding = 0;
+  discarding = false;
   line = new line_start_node;
   if (have_temporary_indent) {
     saved_indent = temporary_indent;
-    have_temporary_indent = 0;
+    have_temporary_indent = false;
   }
   else
     saved_indent = indent;
@@ -2263,10 +2263,10 @@ void environment::possibly_break_line(int start_here, int forced)
 	width_total += tem->width();
 	space_total += tem->nspaces();
       }
-      discarding = 0;
+      discarding = false;
     }
     else {
-      discarding = 1;
+      discarding = true;
       to_be_discarded = line;
       line = 0;
     }
@@ -2282,7 +2282,7 @@ void environment::possibly_break_line(int start_here, int forced)
     if (line != 0) {
       if (have_temporary_indent) {
 	saved_indent = temporary_indent;
-	have_temporary_indent = 0;
+	have_temporary_indent = false;
       }
       else
 	saved_indent = indent;
@@ -2480,7 +2480,7 @@ void environment::do_break(bool want_adjustment)
     line = line->next;
     delete tem;
   }
-  discarding = 0;
+  discarding = false;
   input_line_start = H0;
   if (line != 0) {
     if (fill) {

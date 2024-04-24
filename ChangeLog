@@ -1,3 +1,16 @@
+2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Boolify some `environment` class member variables.
+
+	* src/roff/troff/env.h (class environment): Demote type of
+	member variables `have_temporary_indent` and `discarding` from
+	`int` to `bool`.
+	* src/roff/troff/env.cpp (environment::environment)
+	(environment::copy, indent, temporary_indent)
+	(environment::start_line, environment:possibly_break_line)
+	(environment::do_break): Use Boolean instead of integer literals
+	to initialize or update aforementioned member variables.
+
 2024-04-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an-ext.tmac (mQ): Remove `mU` string once unneeded.
