@@ -2216,7 +2216,7 @@ void environment::possibly_break_line(int start_here, int forced)
     bp->nd->split(bp->index, &pre, &post);
     *ndp = post;
     hunits extra_space_width = H0;
-    switch(adjust_mode) {
+    switch (adjust_mode) {
     case ADJUST_BOTH:
       if (bp->nspaces != 0)
 	extra_space_width = target_text_length - bp->width;
@@ -2770,7 +2770,7 @@ const char *tab_stops::to_string()
       break;
     case TAB_NONE:
     default:
-      assert(0);
+      assert(0 == "unhandled case of `p->type` (tab_type)");
     }
   }
   if (repeated_list)
@@ -2791,7 +2791,7 @@ const char *tab_stops::to_string()
       break;
     case TAB_NONE:
     default:
-      assert(0);
+      assert(0 == "unhandled case of `p->type` (tab_type)");
     }
   }
   *ptr++ = '\0';
@@ -2968,7 +2968,7 @@ void environment::wrap_up_tab()
   case TAB_NONE:
   case TAB_LEFT:
   default:
-    assert(0);
+    assert(0 == "unhandled case of `current_tab` (tab_type)");
   }
   width_total += tab_amount;
   width_total += tab_width;
@@ -3032,7 +3032,7 @@ void environment::handle_tab(int is_leader)
     add_node(make_tag("tab C", absolute.to_units()));
     break;
   default:
-    assert(0);
+    assert(0 == "unhandled case of `t` (tab_type)");
   }
   tab_width = 0;
   tab_distance = d;
@@ -3644,7 +3644,7 @@ static void print_hyphenation_exceptions()
   // space; see `hyphen_trie::read_patterns_file()`.
   const size_t bufsz = WORD_MAX * 2;
   char wordbuf[bufsz];
-  while(iter.get(&entry, reinterpret_cast<void **>(&hypoint))) {
+  while (iter.get(&entry, reinterpret_cast<void **>(&hypoint))) {
     assert(!entry.is_null());
     assert(hypoint != 0 /* nullptr */);
     string word = entry.contents();

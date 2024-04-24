@@ -323,7 +323,7 @@ tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
 		    36*72*sizescale);
 	  break;
 	default:
-	  assert(0);
+	  assert(0 == "unhandled case of constant spacing mode");
 	}
 	if (fontno != number)
 	  return make_tfont(spec);
@@ -3324,7 +3324,7 @@ int kern_pair_node::ends_sentence()
   case 2:
     break;
   default:
-    assert(0);
+    assert(0 == "unhandled case of sentence ending status");
   }
   return n1->ends_sentence();
 }
@@ -3340,7 +3340,7 @@ int node_list_ends_sentence(node *n)
     case 2:
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled case of sentence ending status");
     }
   return 2;
 }
@@ -3735,7 +3735,7 @@ int dbreak_node::nbreaks()
 
 void node::split(int /*where*/, node ** /*prep*/, node ** /*postp*/)
 {
-  assert(0);
+  assert(0 == "node::split() unimplemented");
 }
 
 void space_node::split(int where, node **pre, node **post)
@@ -4489,7 +4489,7 @@ int unbreakable_space_node::nbreaks()
 
 void unbreakable_space_node::split(int, node **, node **)
 {
-  assert(0);
+  assert(0 == "unbreakable_space_node::split() unimplemented");
 }
 
 int unbreakable_space_node::merge_space(hunits, hunits, hunits)

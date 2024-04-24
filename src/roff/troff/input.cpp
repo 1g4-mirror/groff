@@ -1102,7 +1102,7 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
       return c;
   again:
     c = input_stack::peek();
-    switch(c) {
+    switch (c) {
     case 0:
       return escape_char;
     case '"':
@@ -1546,7 +1546,7 @@ static void report_color()
   dictionary_iterator iter(color_dictionary);
   symbol key;
   color *value;
-  while(iter.get(&key, reinterpret_cast<void **>(&value))) {
+  while (iter.get(&key, reinterpret_cast<void **>(&value))) {
     assert(!key.is_null());
     assert(value != 0 /* nullptr */);
     errprint("%1\n", key.contents());
@@ -1883,7 +1883,7 @@ void token::next()
     int cc = input_stack::get(&n);
     if (cc != escape_char || escape_char == 0) {
     handle_ordinary_char:
-      switch(cc) {
+      switch (cc) {
       case INPUT_NO_BREAK_SPACE:
 	  type = TOKEN_STRETCHABLE_SPACE;
 	  return;
@@ -2060,7 +2060,7 @@ void token::next()
     else {
     handle_escape_char:
       cc = input_stack::get(&n);
-      switch(cc) {
+      switch (cc) {
       case '(':
 	nm = read_two_char_escape_parameter();
 	type = TOKEN_SPECIAL;
@@ -2458,7 +2458,7 @@ int token::operator==(const token &t)
 {
   if (type != t.type)
     return 0;
-  switch(type) {
+  switch (type) {
   case TOKEN_CHAR:
     return c == t.c;
   case TOKEN_SPECIAL:
@@ -2482,7 +2482,7 @@ int token::operator!=(const token &t)
 // doesn't tokenize it) and accepts a user-specified delimiter.
 static bool is_char_usable_as_delimiter(int c)
 {
-  switch(c) {
+  switch (c) {
   case '0':
   case '1':
   case '2':
@@ -2516,7 +2516,7 @@ static bool is_char_usable_as_delimiter(int c)
 bool token::is_usable_as_delimiter(bool report_error)
 {
   bool is_valid = false;
-  switch(type) {
+  switch (type) {
   case TOKEN_CHAR:
     is_valid = is_char_usable_as_delimiter(c);
     if (!is_valid && report_error)
@@ -3055,7 +3055,7 @@ void process_input_stack()
 	  break;
 #endif /* COLUMN */
 	default:
-	  assert(0);
+	  assert(0 == "unhandled case of `request_code` (int)");
 	  break;
 	}
 	suppress_next = 1;
@@ -4203,7 +4203,7 @@ bool is_codepoint_composite(const char *n)
   dictionary_iterator iter(composite_dictionary);
   symbol key;
   char *value;
-  while(iter.get(&key, reinterpret_cast<void **>(&value))) {
+  while (iter.get(&key, reinterpret_cast<void **>(&value))) {
     assert(!key.is_null());
     assert(value != 0 /* nullptr */);
     const char *k = key.contents();
@@ -4225,7 +4225,7 @@ static void report_composite_characters()
   dictionary_iterator iter(composite_dictionary);
   symbol key;
   char *value;
-  while(iter.get(&key, reinterpret_cast<void **>(&value))) {
+  while (iter.get(&key, reinterpret_cast<void **>(&value))) {
     assert(!key.is_null());
     assert(value != 0 /* nullptr */);
     const char *k = key.contents();
@@ -5325,7 +5325,7 @@ static bool read_size(int *x)
       *x = curenv->get_requested_point_size() - val;
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled case of type size increment operator");
     }
     if (*x <= 0) {
       warning(WARN_RANGE,
@@ -5898,7 +5898,7 @@ static void skip_branch()
     else if (c == ESCAPE_RIGHT_BRACE)
       --level;
     else if (c == escape_char && escape_char > 0)
-      switch(input_stack::get(0)) {
+      switch (input_stack::get(0)) {
       case '{':
 	++level;
 	break;
@@ -7604,10 +7604,10 @@ void token::process()
     curenv->add_node(new dummy_node);
     break;
   case TOKEN_EMPTY:
-    assert(0);
+    assert(0 == "unhandled empty token");
     break;
   case TOKEN_EOF:
-    assert(0);
+    assert(0 == "unhandled end-of-file token");
     break;
   case TOKEN_ESCAPE:
     if (escape_char != 0)
@@ -7685,7 +7685,7 @@ void token::process()
       break;
     }
   default:
-    assert(0);
+    assert(0 == "unhandled token type");
   }
 }
 
@@ -8285,7 +8285,7 @@ int main(int argc, char **argv)
 			  "abciI:vw:W:zCEf:m:n:o:r:d:F:M:T:tqs:RU"
 			  DEBUG_OPTION, long_options, 0))
 	 != EOF)
-    switch(c) {
+    switch (c) {
     case 'v':
       {
 	printf("GNU troff (groff) version %s\n", Version_string);
@@ -8396,7 +8396,7 @@ int main(int argc, char **argv)
       exit(1);
       break;		// never reached
     default:
-      assert(0);
+      assert(0 == "unhandled case of command-line option");
     }
   if (want_unsafe_requests)
     mac_path = &macro_path;

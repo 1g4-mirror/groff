@@ -1,5 +1,21 @@
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (tab_stops::to_string)
+	(environment::wrap_up_tab, environment::handle_tab):
+	* src/roff/troff/input.cpp (process_input_stack, read_size)
+	(token::process, main)
+	* src/roff/troff/node.cpp (font_info::get_tfont)
+	(kern_pair_node::ends_sentence, node_list_ends_sentence)
+	(node::split, unbreakable_space_node::nbreaks):
+	* src/roff/troff/reg.cpp (number_value_to_ascii):
+	Replace `assert(0)` calls with communicative predicates.
+
+	* src/roff/troff/number.cpp (get_vunits, get_hunits, get_number)
+	(get_integer, is_valid_expression, is_valid_term): Align
+	language of assertion failures with others in use.
+
+2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::print_env): Fix glitch in
 	report of line number multiple when line numbering enabled.
 
