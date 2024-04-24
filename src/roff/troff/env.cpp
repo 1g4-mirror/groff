@@ -3463,8 +3463,9 @@ void environment::print_env()
 	     number_text_separation);
     errprint("  line number indentation: %1 digit spaces\n",
 	     line_number_indent);
-    errprint("  print line numbers every %1line%1\n",
-	     line_number_multiple > 1 ? i_to_a(line_number_multiple) : "",
+    errprint("  print line numbers every %1 line%2\n",
+	     line_number_multiple > 1
+	       ? i_to_a(line_number_multiple) : "",
 	     line_number_multiple > 1 ? "s" : "");
     errprint("  lines not to enumerate: %1\n", no_number_count);
   }

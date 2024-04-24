@@ -1,5 +1,10 @@
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::print_env): Fix glitch in
+	report of line number multiple when line numbering enabled.
+
+2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::dump_troff_state): Tweak
 	debugging function's output to report Boolean value more
 	idiomatically.
