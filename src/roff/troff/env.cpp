@@ -2367,7 +2367,7 @@ void environment::dump_troff_state()
   fprintf(stderr, SPACES "centered lines 'ce' = %d\n", curenv->center_lines);
   fprintf(stderr, SPACES "register 'll' = %d\n",
 	  curenv->line_length.to_units());
-  fprintf(stderr, SPACES "fill 'fi=1/nf=0' = %d\n", curenv->fill);
+  fprintf(stderr, SPACES "%sfilling\n", curenv->fill ? "" : "not ");
   fprintf(stderr, SPACES "page offset 'po' = %d\n",
 	  topdiv->get_page_offset().to_units());
   fprintf(stderr, SPACES "seen_break = %d\n", curenv->seen_break);
