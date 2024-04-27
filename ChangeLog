@@ -153,6 +153,10 @@
 	* src/roff/troff/env.h (environment::is_composite): Return a
 	`bool`, not an `int`.
 
+	* src/roff/troff/env.cpp (temporary_indent): Rename local
+	variable `err` to `is_valid`, invert its sense, and demote it
+	from `int` to `bool`.  Assign Boolean literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

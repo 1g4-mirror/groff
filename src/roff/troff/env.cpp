@@ -1560,10 +1560,10 @@ void indent()
 
 void temporary_indent()
 {
-  int err = 0;
+  bool is_valid = true;
   hunits temp;
   if (!get_hunits(&temp, 'm', curenv->get_indent()))
-    err = 1;
+    is_valid = false;
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();
   if (want_break)
@@ -1572,7 +1572,7 @@ void temporary_indent()
     warning(WARN_RANGE, "total indent cannot be negative");
     temp = H0;
   }
-  if (!err) {
+  if (is_valid) {
     curenv->temporary_indent = temp;
     curenv->have_temporary_indent = true;
     curdiv->modified_tag.incl(MTSM_TI);
