@@ -233,10 +233,10 @@ class environment {
   tab_type distance_to_next_tab(hunits *distance, hunits *leftpos);
   void start_line();
   void output_line(node *, hunits, int);
-  void output(node *nd, int retain_size, vunits vs, vunits post_vs,
-	      hunits width, int was_centered);
-  void output_title(node *nd, int retain_size, vunits vs, vunits post_vs,
-		    hunits width);
+  void output(node *nd, bool suppress_filling, vunits vs,
+	      vunits post_vs, hunits width, int was_centered);
+  void output_title(node *nd, bool suppress_filling, vunits vs,
+		    vunits post_vs, hunits width);
 #ifdef WIDOW_CONTROL
   void mark_last_line();
 #endif /* WIDOW_CONTROL */

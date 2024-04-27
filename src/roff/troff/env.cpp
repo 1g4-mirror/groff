@@ -79,7 +79,7 @@ int translate_space_to_dummy = 0;
 
 class pending_output_line {
   node *nd;
-  int no_fill;
+  bool suppress_filling;
   int was_centered;
   vunits vs;
   vunits post_vs;
@@ -90,21 +90,23 @@ class pending_output_line {
 public:
   pending_output_line *next;
 
-  pending_output_line(node *, int, vunits, vunits, hunits, int,
+  pending_output_line(node *, bool, vunits, vunits, hunits, int,
 		      pending_output_line * = 0);
   ~pending_output_line();
   int output();
 
 #ifdef WIDOW_CONTROL
   friend void environment::mark_last_line();
-  friend void environment::output(node *, int, vunits, vunits, hunits, int);
+  friend void environment::output(node *, bool, vunits, vunits, hunits,
+				  int);
 #endif /* WIDOW_CONTROL */
 };
 
-pending_output_line::pending_output_line(node *n, int nf, vunits v, vunits pv,
-					 hunits w, int ce,
+pending_output_line::pending_output_line(node *n, bool nf, vunits v,
+					 vunits pv, hunits w, int ce,
 					 pending_output_line *p)
-: nd(n), no_fill(nf), was_centered(ce), vs(v), post_vs(pv), width(w),
+: nd(n), suppress_filling(nf), was_centered(ce), vs(v), post_vs(pv),
+  width(w),
 #ifdef WIDOW_CONTROL
   last_line(0),
 #endif /* WIDOW_CONTROL */
@@ -122,7 +124,7 @@ int pending_output_line::output()
   if (was_trap_sprung)
     return 0;
 #ifdef WIDOW_CONTROL
-  if (next && next->last_line && !no_fill) {
+  if (next && next->last_line && !suppress_filling) {
     curdiv->need(vs + post_vs + vunits(vresolution));
     if (was_trap_sprung) {
       next->last_line = 0;	// Try to avoid infinite loops.
@@ -130,19 +132,20 @@ int pending_output_line::output()
     }
   }
 #endif
-  curenv->construct_format_state(nd, was_centered, !no_fill);
-  curdiv->output(nd, no_fill, vs, post_vs, width);
+  curenv->construct_format_state(nd, was_centered, !suppress_filling);
+  curdiv->output(nd, suppress_filling, vs, post_vs, width);
   nd = 0;
   return 1;
 }
 
-void environment::output(node *nd, int no_fill_flag,
+void environment::output(node *nd, bool suppress_filling,
 			 vunits vs, vunits post_vs,
 			 hunits width, int was_centered)
 {
 #ifdef WIDOW_CONTROL
   while (pending_lines) {
-    if (widow_control && !pending_lines->no_fill && !pending_lines->next)
+    if (widow_control && !pending_lines->suppress_filling
+	&& !pending_lines->next)
       break;
     if (!pending_lines->output())
       break;
@@ -155,31 +158,32 @@ void environment::output(node *nd, int no_fill_flag,
 #endif /* WIDOW_CONTROL */
   if (!was_trap_sprung && !pending_lines
 #ifdef WIDOW_CONTROL
-      && (!widow_control || no_fill_flag)
+      && (!widow_control || suppress_filling)
 #endif /* WIDOW_CONTROL */
       ) {
-    curenv->construct_format_state(nd, was_centered, !no_fill_flag);
-    curdiv->output(nd, no_fill_flag, vs, post_vs, width);
+    curenv->construct_format_state(nd, was_centered, !suppress_filling);
+    curdiv->output(nd, suppress_filling, vs, post_vs, width);
   } else {
     pending_output_line **p;
     for (p = &pending_lines; *p; p = &(*p)->next)
       ;
-    *p = new pending_output_line(nd, no_fill_flag, vs, post_vs, width,
-				 was_centered);
+    *p = new pending_output_line(nd, suppress_filling, vs, post_vs,
+				 width, was_centered);
   }
 }
 
 // a line from .tl goes at the head of the queue
 
-void environment::output_title(node *nd, int no_fill_flag,
+void environment::output_title(node *nd, bool suppress_filling,
 			       vunits vs, vunits post_vs,
 			       hunits width)
 {
   if (!was_trap_sprung)
-    curdiv->output(nd, no_fill_flag, vs, post_vs, width);
+    curdiv->output(nd, suppress_filling, vs, post_vs, width);
   else
-    pending_lines = new pending_output_line(nd, no_fill_flag, vs, post_vs,
-					    width, 0, pending_lines);
+    pending_lines = new pending_output_line(nd, suppress_filling, vs,
+					    post_vs, width, 0,
+					    pending_lines);
 }
 
 void environment::output_pending_lines()
@@ -200,7 +204,7 @@ void environment::mark_last_line()
   pending_output_line *p;
   for (p = pending_lines; p->next; p = p->next)
     ;
-  if (!p->no_fill)
+  if (!p->suppress_filling)
     p->last_line = 1;
 }
 
