@@ -144,6 +144,15 @@
 	* src/roff/troff/input.cpp (input_stack::push): Assign Boolean
 	literals to it.
 
+	* src/roff/troff/env.h (class environment): Demote member
+	variable `composite` from `int` to `bool`.
+	* src/roff/troff/env.cpp (environment::environment)
+	(environment::copy):
+	* src/roff/troff/env.h (environment::set_composite): Assign
+	Boolean literals to it.
+	* src/roff/troff/env.h (environment::is_composite): Return a
+	`bool`, not an `int`.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

@@ -217,7 +217,7 @@ class environment {
   int hyphen_line_max;
   hunits hyphenation_space;
   hunits hyphenation_margin;
-  int composite;		// used for construction of composite char?
+  bool composite;	// used for construction of composite character
   pending_output_line *pending_lines;
 #ifdef WIDOW_CONTROL
   bool want_widow_control;
@@ -270,8 +270,8 @@ public:
   void copy(const environment *);
   int is_dummy() { return dummy; }
   int is_empty();
-  int is_composite() { return composite; }
-  void set_composite() { composite = 1; }
+  bool is_composite() { return composite; }
+  void set_composite() { composite = true; }
   vunits get_vertical_spacing();	// .v
   vunits get_post_vertical_spacing();	// .pvs
   int get_line_spacing();		// .L

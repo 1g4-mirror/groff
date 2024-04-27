@@ -744,7 +744,7 @@ environment::environment(symbol nm)
   hyphen_line_max(-1),
   hyphenation_space(H0),
   hyphenation_margin(H0),
-  composite(0),
+  composite(false),
   pending_lines(0),
 #ifdef WIDOW_CONTROL
   want_widow_control(false),
@@ -838,7 +838,7 @@ environment::environment(const environment *e)
   hyphen_line_max(e->hyphen_line_max),
   hyphenation_space(e->hyphenation_space),
   hyphenation_margin(e->hyphenation_margin),
-  composite(0),
+  composite(false),
   pending_lines(0),
 #ifdef WIDOW_CONTROL
   want_widow_control(e->want_widow_control),
@@ -934,7 +934,7 @@ void environment::copy(const environment *e)
   hyphen_line_count = 0;
   hyphenation_space = e->hyphenation_space;
   hyphenation_margin = e->hyphenation_margin;
-  composite = 0;
+  composite = false;
   glyph_color= e->glyph_color;
   prev_glyph_color = e->prev_glyph_color;
   fill_color = e->fill_color;
