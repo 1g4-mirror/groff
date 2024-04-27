@@ -1,5 +1,20 @@
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Demote parameter of global `do_underline` function from
+	`int` to `bool`.
+
+	* src/roff/troff/env.h: Do it.
+	* src/roff/troff/env.cpp (do_underline): Do it.  Rename paramter
+	from `underline_spaces` to `want_spaces_underlined`.
+
+	* src/roff/troff/env.h (class environment): Update friend
+	access.
+
+	* src/roff/troff/env.cpp (continuous_underline, underline): Call
+	it with Boolean, not integer, literals.
+
+2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify `suppress_push` global variable, and declare it
 	in a header file.
 

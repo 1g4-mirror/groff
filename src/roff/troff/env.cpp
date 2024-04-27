@@ -1579,7 +1579,7 @@ void temporary_indent()
   tok.next();
 }
 
-void do_underline(int underline_spaces)
+void do_underline(bool want_spaces_underlined)
 {
   int n;
   if (!has_arg() || !get_integer(&n))
@@ -1588,7 +1588,7 @@ void do_underline(int underline_spaces)
     if (curenv->underline_lines > 0) {
       curenv->prev_fontno = curenv->fontno;
       curenv->fontno = curenv->pre_underline_fontno;
-      if (underline_spaces) {
+      if (want_spaces_underlined) {
 	curenv->underline_spaces = false;
 	curenv->add_node(do_underline_special(false));
       }
@@ -1599,7 +1599,7 @@ void do_underline(int underline_spaces)
     curenv->underline_lines = n;
     curenv->pre_underline_fontno = curenv->fontno;
     curenv->fontno = get_underline_fontno();
-    if (underline_spaces) {
+    if (want_spaces_underlined) {
       curenv->underline_spaces = true;
       curenv->add_node(do_underline_special(true));
     }
@@ -1609,12 +1609,12 @@ void do_underline(int underline_spaces)
 
 void continuous_underline()
 {
-  do_underline(1);
+  do_underline(true /* want spaces underlined */);
 }
 
 void underline()
 {
-  do_underline(0);
+  do_underline(false /* want spaces underlined */);
 }
 
 void margin_character()
