@@ -52,6 +52,14 @@
 	- Rename `widow_control` to `want_widow_control` and demote it
 	  from `int` to `bool`.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::space_newline)
+	(environment::space, environment::environment)
+	(environment::copy, environment::print_env):
+	- Rename member variable `spread_flag` to `spreading` and demote
+	  it from `int` to `bool`.
+	- Assign Boolean literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

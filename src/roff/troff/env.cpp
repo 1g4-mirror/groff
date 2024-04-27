@@ -482,8 +482,8 @@ void environment::space_newline()
     return;
   }
   add_node(new word_space_node(x, get_fill_color(), w));
-  possibly_break_line(0, spread_flag);
-  spread_flag = 0;
+  possibly_break_line(0, spreading);
+  spreading = false;
 }
 
 void environment::space()
@@ -518,8 +518,8 @@ void environment::space(hunits space_width, hunits sentence_space_width)
 			       get_fill_color(),
 			       new width_list(space_width,
 					      sentence_space_width)));
-  possibly_break_line(0, spread_flag);
-  spread_flag = 0;
+  possibly_break_line(0, spreading);
+  spreading = false;
 }
 
 static node *do_underline_special(bool do_underline_spaces)
@@ -729,7 +729,7 @@ environment::environment(symbol nm)
   leader_char(charset_table['.']),
   current_field(0),
   discarding(false),
-  spread_flag(0),
+  spreading(false),
   margin_character_flags(0),
   margin_character_node(0),
   margin_character_distance(points_to_units(10)),
@@ -823,7 +823,7 @@ environment::environment(const environment *e)
   leader_char(e->leader_char),
   current_field(0),
   discarding(false),
-  spread_flag(0),
+  spreading(false),
   margin_character_flags(e->margin_character_flags),
   margin_character_node(e->margin_character_node),
   margin_character_distance(e->margin_character_distance),
@@ -900,7 +900,7 @@ void environment::copy(const environment *e)
   control_character = e->control_character;
   no_break_control_character = e->no_break_control_character;
   hyphen_indicator_char = e->hyphen_indicator_char;
-  spread_flag = 0;
+  spreading = false;
   line = 0;
   pending_lines = 0;
   discarding = false;
@@ -3446,7 +3446,7 @@ void environment::print_env()
   errprint("  input line start: %1u\n", input_line_start.to_units());
   errprint("  line tabs: %1\n", line_tabs ? "yes" : "no");
   errprint("  discarding: %1\n", discarding ? "yes" : "no");
-  errprint("  spread flag set: %1\n", spread_flag ? "yes" : "no");	// \p
+  errprint("  spread flag set: %1\n", spreading ? "yes" : "no");	// \p
   if (margin_character_node) {
     errprint("  margin character flags: %1\n",
 	     margin_character_flags == MARGIN_CHARACTER_ON

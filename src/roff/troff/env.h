@@ -201,7 +201,7 @@ class environment {
   int tab_field_spaces;
   int tab_precedes_field;
   bool discarding;
-  int spread_flag;		// set by \p
+  bool spreading;		// set by \p
   unsigned margin_character_flags;
   node *margin_character_node;
   hunits margin_character_distance;
@@ -342,7 +342,7 @@ public:
   void set_char_slant(int);
   void set_input_line_position(hunits);	// used by \n(hp
   void interrupt();
-  void spread() { spread_flag = 1; }
+  void spread() { spreading = true; }
   void possibly_break_line(int start_here = 0, int forced = 0);
   void do_break(bool /* want_adjustment */ = false);	// .br, .brp
   void final_break();
