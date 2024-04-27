@@ -112,6 +112,17 @@
 	* src/roff/troff/input.cpp (input_stack::push): Assign Boolean
 	literals to it.
 
+	* src/roff/troff/env.h (class environment): Demote member
+	variables `seen_space`, `seen_eol`, `suppress_next_eol`, and
+	`seen_break` from `int` to `bool`.
+	* src/roff/troff/env.cpp (environment::environment)
+	(environment_switch, no_fill, environment::newline)
+	(environment::construct_state)
+	(environment::construct_format_state)
+	(environment::construct_new_line_state,  environment::do_break):
+	Assign Boolean literals to them.  Simplify conditional
+	expressions.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

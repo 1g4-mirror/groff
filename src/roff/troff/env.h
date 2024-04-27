@@ -250,10 +250,10 @@ class environment {
   node *make_tab_node(hunits d, node *next = 0);
   node *get_prev_char();
 public:
-  int seen_space;
-  int seen_eol;
-  int suppress_next_eol;
-  int seen_break;
+  bool seen_space;
+  bool seen_eol;
+  bool suppress_next_eol;
+  bool seen_break;
   tab_stops tabs;
   const symbol name;
   charinfo *hyphen_indicator_char;

@@ -755,10 +755,10 @@ environment::environment(symbol nm)
   prev_fill_color(&default_color),
   control_character('.'),
   no_break_control_character('\''),
-  seen_space(0),
-  seen_eol(0),
-  suppress_next_eol(0),
-  seen_break(0),
+  seen_space(false),
+  seen_eol(false),
+  suppress_next_eol(false),
+  seen_break(false),
   tabs(units_per_inch/2, TAB_LEFT),
   name(nm),
   hyphen_indicator_char(0)
@@ -1197,9 +1197,9 @@ void environment_switch()
       if (env_stack == 0)
 	error("environment stack underflow");
       else {
-	int seen_space = curenv->seen_space;
-	int seen_eol   = curenv->seen_eol;
-	int suppress_next_eol = curenv->suppress_next_eol;
+	bool seen_space = curenv->seen_space;
+	bool seen_eol   = curenv->seen_eol;
+	bool suppress_next_eol = curenv->suppress_next_eol;
 	curenv = env_stack->env;
 	curenv->seen_space = seen_space;
 	curenv->seen_eol   = seen_eol;
@@ -1412,7 +1412,7 @@ void no_fill()
   if (want_break)
     curenv->do_break();
   curenv->fill = false;
-  curenv->suppress_next_eol = 1;
+  curenv->suppress_next_eol = true;
   tok.next();
 }
 
@@ -1860,9 +1860,9 @@ void environment::newline()
     if (is_html && !fill) {
       curdiv->modified_tag.incl(MTSM_EOL);
       if (suppress_next_eol)
-	suppress_next_eol = 0;
+	suppress_next_eol = false;
       else
-	seen_eol = 1;
+	seen_eol = true;
     }
 
     output_line(to_be_output, to_be_output_width, was_centered);
@@ -2395,16 +2395,16 @@ statem *environment::construct_state(bool has_only_eol)
       s->add_tag_ta();
       if (seen_break)
 	s->add_tag(MTSM_BR);
-      if (seen_space != 0)
+      if (seen_space)
 	s->add_tag(MTSM_SP, seen_space);
-      seen_break = 0;
-      seen_space = 0;
+      seen_break = false;
+      seen_space = false;
     }
     if (seen_eol) {
       s->add_tag(MTSM_EOL);
       s->add_tag(MTSM_CE, center_lines);
     }
-    seen_eol = 0;
+    seen_eol = false;
     return s;
   }
   else
@@ -2420,12 +2420,12 @@ void environment::construct_format_state(node *n, bool was_centered,
       n = n->next;
     if (n == 0 || (n->state == 0))
       return;
-    if (seen_space != 0)
+    if (seen_space)
       n->state->add_tag(MTSM_SP, seen_space);
     if (seen_eol && topdiv == curdiv)
       n->state->add_tag(MTSM_EOL);
-    seen_space = 0;
-    seen_eol = 0;
+    seen_space = false;
+    seen_eol = false;
     if (was_centered)
       n->state->add_tag(MTSM_CE, center_lines+1);
     else
@@ -2450,12 +2450,12 @@ void environment::construct_new_line_state(node *n)
       n = n->next;
     if (n == 0 || n->state == 0)
       return;
-    if (seen_space != 0)
+    if (seen_space)
       n->state->add_tag(MTSM_SP, seen_space);
     if (seen_eol && topdiv == curdiv)
       n->state->add_tag(MTSM_EOL);
-    seen_space = 0;
-    seen_eol = 0;
+    seen_space = false;
+    seen_eol = false;
   }
 }
 
@@ -2511,7 +2511,7 @@ void environment::do_break(bool want_adjustment)
 #endif /* WIDOW_CONTROL */
   if (!global_diverted_space) {
     curdiv->modified_tag.incl(MTSM_BR);
-    seen_break = 1;
+    seen_break = true;
   }
 }
 
