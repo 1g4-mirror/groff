@@ -712,7 +712,7 @@ environment::environment(symbol nm)
   indent(0),
   temporary_indent(0),
   have_temporary_indent(false),
-  underline_lines(0),
+  underlined_line_count(0),
   underline_spaces(false),
   input_trap_count(-1),
   continued_input_trap(false),
@@ -806,7 +806,7 @@ environment::environment(const environment *e)
   indent(e->indent),
   temporary_indent(0),
   have_temporary_indent(false),
-  underline_lines(0),
+  underlined_line_count(0),
   underline_spaces(false),
   input_trap_count(-1),
   continued_input_trap(false),
@@ -888,7 +888,7 @@ void environment::copy(const environment *e)
   indent = e->indent;
   have_temporary_indent = false;
   temporary_indent = 0;
-  underline_lines = 0;
+  underlined_line_count = 0;
   underline_spaces = false;
   input_trap_count = -1;
   continued_input_trap = false;
@@ -1585,7 +1585,7 @@ void do_underline(bool want_spaces_underlined)
   if (!has_arg() || !get_integer(&n))
     n = 1;
   if (n <= 0) {
-    if (curenv->underline_lines > 0) {
+    if (curenv->underlined_line_count > 0) {
       curenv->prev_fontno = curenv->fontno;
       curenv->fontno = curenv->pre_underline_fontno;
       if (want_spaces_underlined) {
@@ -1593,10 +1593,10 @@ void do_underline(bool want_spaces_underlined)
 	curenv->add_node(do_underline_special(false));
       }
     }
-    curenv->underline_lines = 0;
+    curenv->underlined_line_count = 0;
   }
   else {
-    curenv->underline_lines = n;
+    curenv->underlined_line_count = n;
     curenv->pre_underline_fontno = curenv->fontno;
     curenv->fontno = get_underline_fontno();
     if (want_spaces_underlined) {
@@ -1796,8 +1796,8 @@ void environment::interrupt()
 void environment::newline()
 {
   bool was_centered = false;
-  if (underline_lines > 0) {
-    if (--underline_lines == 0) {
+  if (underlined_line_count > 0) {
+    if (--underlined_line_count == 0) {
       prev_fontno = fontno;
       fontno = pre_underline_fontno;
       if (underline_spaces) {
@@ -3432,8 +3432,8 @@ void environment::print_env()
 	   have_temporary_indent ? "yes" : "no");
   errprint("  currently used indentation: %1u\n", saved_indent.to_units());
   errprint("  target text length: %1u\n", target_text_length.to_units());
-  if (underline_lines) {
-    errprint("  lines to underline: %1\n", underline_lines);
+  if (underlined_line_count > 0) {
+    errprint("  lines to underline: %1\n", underlined_line_count);
     errprint("  font number before underlining: %1\n", pre_underline_fontno);
     errprint("  underline spaces: %1\n", underline_spaces ? "yes" : "no");
   }

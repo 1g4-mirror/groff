@@ -33,6 +33,15 @@
 	integer comparison, not Boolean, test, for clarity and to ensure
 	consistency with *roff integer-to-Boolean conversion idiom.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::environment)
+	(environment::copy, do_underline) (environment::newline)
+	(environment::print_env): Rename `underline_lines` to
+	`underlined_line_count`.
+	* src/roff/troff/env.cpp (environment::print_env): Perform
+	integer comparison, not Boolean, test, for clarity and to ensure
+	consistency with *roff integer-to-Boolean conversion idiom.
+
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Demote parameter of global `do_underline` function from

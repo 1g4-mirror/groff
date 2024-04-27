@@ -176,7 +176,7 @@ class environment {
   hunits saved_indent;
   hunits target_text_length;
   int pre_underline_fontno;
-  int underline_lines;
+  int underlined_line_count;
   bool underline_spaces;
   symbol input_trap;
   int input_trap_count;
