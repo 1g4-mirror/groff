@@ -1,5 +1,12 @@
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::output) [WIDOW_CONTROL]:
+	Fix code style nit (in de-configured code); explicitly compare
+	variable of pointer type to null pointer constant instead of
+	letting it pun down to a Boolean.
+
+2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename member functions and
 	variables such that it is easier to tell Boolean objects (or
 	even an imperative verb/noun action) from a countable quantity.

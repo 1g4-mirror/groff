@@ -142,7 +142,7 @@ void environment::output(node *nd, bool suppress_filling,
 			 hunits width, bool was_centered)
 {
 #ifdef WIDOW_CONTROL
-  while (pending_lines) {
+  while (pending_lines != 0 /* nullptr */) {
     if (want_widow_control && !pending_lines->suppress_filling
 	&& !pending_lines->next)
       break;
@@ -453,7 +453,7 @@ const char *environment::get_input_trap_macro()
 void environment::add_italic_correction()
 {
   if (current_tab) {
-    if (tab_contents)
+    if (tab_contents != 0 /* nullptr */)
       tab_contents = tab_contents->add_italic_correction(&tab_width);
   }
   else if (line)
