@@ -75,6 +75,20 @@
 	* src/roff/troff/env.cpp (environment::environment, fill)
 	(no_fill): Assign Boolean literals to it.
 
+	* src/roff/troff/env.h (class environment): Rename member
+	variable `interrupted` to `line_interrupted` and demote it from
+	`int` to `bool`.
+	* src/roff/troff/env.cpp (environment::add_char)
+	(environment::add_node, environment::add_italic_correction)
+	(environment::space, environment::set_font):
+	(environment::set_family, environment::set_size):
+	(environment::set_char_height, environment::set_char_slant):
+	(environment::set_glyph_color, environment::set_fill_color):
+	(environment::set_glyph_color, environment::set_fill_color):
+	(environment::environment, environment::copy):
+	(environment::interrupt, environment::newline): Assign Boolean
+	literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

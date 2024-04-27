@@ -298,7 +298,7 @@ void environment::add_char(charinfo *ci)
 {
   int s;
   node *gc_np = 0;
-  if (interrupted)
+  if (line_interrupted)
     ;
   // don't allow fields in dummy environments
   else if (ci == field_delimiter_char && !dummy) {
@@ -366,7 +366,7 @@ void environment::add_node(node *n)
 
   if (current_tab || current_field)
     n->freeze_space();
-  if (interrupted) {
+  if (line_interrupted) {
     delete n;
   }
   else if (current_tab) {
@@ -393,7 +393,7 @@ void environment::add_node(node *n)
 
 void environment::add_hyphen_indicator()
 {
-  if (current_tab || interrupted || current_field
+  if (current_tab || line_interrupted || current_field
       || hyphen_indicator_char != 0)
     return;
   if (line == 0)
@@ -464,7 +464,7 @@ void environment::add_italic_correction()
 void environment::space_newline()
 {
   assert(!current_tab && !current_field);
-  if (interrupted)
+  if (line_interrupted)
     return;
   hunits x = H0;
   hunits sw = env_space_width(this);
@@ -493,7 +493,7 @@ void environment::space()
 
 void environment::space(hunits space_width, hunits sentence_space_width)
 {
-  if (interrupted)
+  if (line_interrupted)
     return;
   if (current_field && padding_indicator_char == 0) {
     add_padding();
@@ -532,7 +532,7 @@ static node *do_underline_special(bool do_underline_spaces)
 
 bool environment::set_font(symbol nm)
 {
-  if (interrupted) {
+  if (line_interrupted) {
     warning(WARN_FONT, "ignoring font selection on interrupted line");
     return true; // "no operation" is successful
   }
@@ -566,7 +566,7 @@ bool environment::set_font(symbol nm)
 
 bool environment::set_font(int n)
 {
-  if (interrupted)
+  if (line_interrupted)
     return false;
   if (is_good_fontno(n)) {
     prev_fontno = fontno;
@@ -581,7 +581,7 @@ bool environment::set_font(int n)
 
 void environment::set_family(symbol fam)
 {
-  if (interrupted)
+  if (line_interrupted)
     return;
   if (fam.is_null() || fam.is_empty()) {
     int previous_mounting_position = prev_family->make_definite(fontno);
@@ -612,7 +612,7 @@ void environment::set_family(symbol fam)
 
 void environment::set_size(int n)
 {
-  if (interrupted)
+  if (line_interrupted)
     return;
   if (n == 0) {
     font_size temp = prev_size;
@@ -632,7 +632,7 @@ void environment::set_size(int n)
 
 void environment::set_char_height(int n)
 {
-  if (interrupted)
+  if (line_interrupted)
     return;
   if (n == requested_size || n <= 0)
     char_height = 0;
@@ -642,7 +642,7 @@ void environment::set_char_height(int n)
 
 void environment::set_char_slant(int n)
 {
-  if (interrupted)
+  if (line_interrupted)
     return;
   char_slant = n;
 }
@@ -669,7 +669,7 @@ color *environment::get_fill_color()
 
 void environment::set_glyph_color(color *c)
 {
-  if (interrupted)
+  if (line_interrupted)
     return;
   curenv->prev_glyph_color = curenv->glyph_color;
   curenv->glyph_color = c;
@@ -677,7 +677,7 @@ void environment::set_glyph_color(color *c)
 
 void environment::set_fill_color(color *c)
 {
-  if (interrupted)
+  if (line_interrupted)
     return;
   curenv->prev_fill_color = curenv->fill_color;
   curenv->fill_color = c;
@@ -699,7 +699,7 @@ environment::environment(symbol nm)
   sentence_space_size(12),
   adjust_mode(ADJUST_BOTH),
   fill(true),
-  interrupted(0),
+  line_interrupted(false),
   prev_line_interrupted(0),
   center_lines(0),
   right_justify_lines(0),
@@ -793,7 +793,7 @@ environment::environment(const environment *e)
   sentence_space_size(e->sentence_space_size),
   adjust_mode(e->adjust_mode),
   fill(e->fill),
-  interrupted(0),
+  line_interrupted(false),
   prev_line_interrupted(0),
   center_lines(0),
   right_justify_lines(0),
@@ -875,7 +875,7 @@ void environment::copy(const environment *e)
   sentence_space_size = e->sentence_space_size;
   adjust_mode = e->adjust_mode;
   fill = e->fill;
-  interrupted = 0;
+  line_interrupted = false;
   prev_line_interrupted = 0;
   center_lines = 0;
   right_justify_lines = 0;
@@ -1790,7 +1790,7 @@ void environment::interrupt()
 {
   if (!dummy) {
     add_node(new transparent_dummy_node);
-    interrupted = 1;
+    line_interrupted = true;
   }
 }
 
@@ -1824,8 +1824,8 @@ void environment::newline()
   prev_line_interrupted = 0;
   if (dummy)
     space_newline();
-  else if (interrupted) {
-    interrupted = 0;
+  else if (line_interrupted) {
+    line_interrupted = false;
     // see environment::final_break
     prev_line_interrupted = is_exit_underway ? 2 : 1;
   }
@@ -3375,7 +3375,7 @@ void environment::print_env()
   // meaningless:
   //
   //   char_height, char_slant,
-  //   interrupted
+  //   line_interrupted
   //   current_tab, tab_width, tab_distance
   //   current_field, field_distance, pre_field_width, field_spaces,
   //     tab_field_spaces, tab_precedes_field

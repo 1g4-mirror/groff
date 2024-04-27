@@ -159,8 +159,8 @@ class environment {
   int sentence_space_size;	// same but for spaces at the end of sentences
   int adjust_mode;
   bool fill;
-  int interrupted;
-  int prev_line_interrupted;
+  bool line_interrupted;
+  int prev_line_interrupted;	// three-valued Boolean :-|
   int center_lines;
   int right_justify_lines;
   vunits prev_vertical_spacing;
