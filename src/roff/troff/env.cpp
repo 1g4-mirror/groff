@@ -714,7 +714,7 @@ environment::environment(symbol nm)
   temporary_indent(0),
   have_temporary_indent(false),
   underline_lines(0),
-  underline_spaces(0),
+  underline_spaces(false),
   input_trap_count(-1),
   continued_input_trap(false),
   line(0),
@@ -808,7 +808,7 @@ environment::environment(const environment *e)
   temporary_indent(0),
   have_temporary_indent(false),
   underline_lines(0),
-  underline_spaces(0),
+  underline_spaces(false),
   input_trap_count(-1),
   continued_input_trap(false),
   line(0),
@@ -890,7 +890,7 @@ void environment::copy(const environment *e)
   have_temporary_indent = false;
   temporary_indent = 0;
   underline_lines = 0;
-  underline_spaces = 0;
+  underline_spaces = false;
   input_trap_count = -1;
   continued_input_trap = false;
   prev_text_length = e->prev_text_length;
@@ -1590,7 +1590,7 @@ void do_underline(int underline_spaces)
       curenv->prev_fontno = curenv->fontno;
       curenv->fontno = curenv->pre_underline_fontno;
       if (underline_spaces) {
-	curenv->underline_spaces = 0;
+	curenv->underline_spaces = false;
 	curenv->add_node(do_underline_special(false));
       }
     }
@@ -1601,7 +1601,7 @@ void do_underline(int underline_spaces)
     curenv->pre_underline_fontno = curenv->fontno;
     curenv->fontno = get_underline_fontno();
     if (underline_spaces) {
-      curenv->underline_spaces = 1;
+      curenv->underline_spaces = true;
       curenv->add_node(do_underline_special(true));
     }
   }
@@ -1802,7 +1802,7 @@ void environment::newline()
       prev_fontno = fontno;
       fontno = pre_underline_fontno;
       if (underline_spaces) {
-	underline_spaces = 0;
+	underline_spaces = false;
 	add_node(do_underline_special(false));
       }
     }

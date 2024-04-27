@@ -123,6 +123,12 @@
 	Assign Boolean literals to them.  Simplify conditional
 	expressions.
 
+	* src/roff/troff/env.h (class environment): Demote member
+	variable `underline_spaces` from `int` to `bool`.
+	* src/roff/troff/env.cpp (environment::environment)
+	(environment::copy, do_underline, environment::newline): Assign
+	Boolean literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)
