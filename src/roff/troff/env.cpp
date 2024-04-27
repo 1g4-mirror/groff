@@ -425,9 +425,9 @@ int environment::get_centered_line_count()
   return centered_line_count;
 }
 
-int environment::get_right_justify_lines()
+int environment::get_right_aligned_line_count()
 {
-  return right_justify_lines;
+  return right_aligned_line_count;
 }
 
 int environment::get_no_number_count()
@@ -701,7 +701,7 @@ environment::environment(symbol nm)
   line_interrupted(false),
   prev_line_interrupted(0),
   centered_line_count(0),
-  right_justify_lines(0),
+  right_aligned_line_count(0),
   prev_vertical_spacing(points_to_units(12)),
   vertical_spacing(points_to_units(12)),
   prev_post_vertical_spacing(0),
@@ -795,7 +795,7 @@ environment::environment(const environment *e)
   line_interrupted(false),
   prev_line_interrupted(0),
   centered_line_count(0),
-  right_justify_lines(0),
+  right_aligned_line_count(0),
   prev_vertical_spacing(e->prev_vertical_spacing),
   vertical_spacing(e->vertical_spacing),
   prev_post_vertical_spacing(e->prev_post_vertical_spacing),
@@ -877,7 +877,7 @@ void environment::copy(const environment *e)
   line_interrupted = false;
   prev_line_interrupted = 0;
   centered_line_count = 0;
-  right_justify_lines = 0;
+  right_aligned_line_count = 0;
   prev_vertical_spacing = e->prev_vertical_spacing;
   vertical_spacing = e->vertical_spacing;
   prev_post_vertical_spacing = e->prev_post_vertical_spacing,
@@ -1426,7 +1426,7 @@ void center()
     tok.next();
   if (want_break)
     curenv->do_break();
-  curenv->right_justify_lines = 0;
+  curenv->right_aligned_line_count = 0;
   curenv->centered_line_count = n;
   curdiv->modified_tag.incl(MTSM_CE);
   tok.next();
@@ -1444,7 +1444,7 @@ void right_justify()
   if (want_break)
     curenv->do_break();
   curenv->centered_line_count = 0;
-  curenv->right_justify_lines = n;
+  curenv->right_aligned_line_count = n;
   curdiv->modified_tag.incl(MTSM_RJ);
   tok.next();
 }
@@ -1838,8 +1838,8 @@ void environment::newline()
     to_be_output_width = width_total;
     line = 0;
   }
-  else if (right_justify_lines > 0) {
-    --right_justify_lines;
+  else if (right_aligned_line_count > 0) {
+    --right_aligned_line_count;
     hunits x = target_text_length - width_total;
     if (x > H0)
       saved_indent += x;
@@ -2390,7 +2390,7 @@ statem *environment::construct_state(bool has_only_eol)
       s->add_tag(MTSM_IN, indent);
       s->add_tag(MTSM_LL, line_length);
       s->add_tag(MTSM_PO, topdiv->get_page_offset().to_units());
-      s->add_tag(MTSM_RJ, right_justify_lines);
+      s->add_tag(MTSM_RJ, right_aligned_line_count);
       if (have_temporary_indent)
 	s->add_tag(MTSM_TI, temporary_indent);
       s->add_tag_ta();
@@ -3414,8 +3414,8 @@ void environment::print_env()
 		     : "right");
   if (centered_line_count > 0)
     errprint("  lines to center: %1\n", centered_line_count);
-  if (right_justify_lines)
-    errprint("  lines to right justify: %1\n", right_justify_lines);
+  if (right_aligned_line_count > 0)
+    errprint("  lines to right justify: %1\n", right_aligned_line_count);
   errprint("  previous vertical spacing: %1u\n",
 	   prev_vertical_spacing.to_units());
   errprint("  vertical spacing: %1u\n", vertical_spacing.to_units());
@@ -4166,7 +4166,7 @@ void init_env_requests()
   init_int_env_reg(".ps", get_point_size);
   init_int_env_reg(".psr", get_requested_point_size);
   init_vunits_env_reg(".pvs", get_post_vertical_spacing);
-  init_int_env_reg(".rj", get_right_justify_lines);
+  init_int_env_reg(".rj", get_right_aligned_line_count);
   init_string_env_reg(".s", get_point_size_string);
   init_int_env_reg(".slant", get_char_slant);
   init_int_env_reg(".ss", get_space_size);

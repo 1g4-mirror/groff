@@ -162,7 +162,7 @@ class environment {
   bool line_interrupted;
   int prev_line_interrupted;	// three-valued Boolean :-|
   int centered_line_count;
-  int right_justify_lines;
+  int right_aligned_line_count;
   vunits prev_vertical_spacing;
   vunits vertical_spacing;
   vunits prev_post_vertical_spacing;
@@ -321,7 +321,7 @@ public:
   int get_input_trap_line_count();
   int get_input_trap_respects_continuation();
   const char *get_input_trap_macro();
-  int get_right_justify_lines();
+  int get_right_aligned_line_count();
   int get_no_number_count();
   int get_prev_line_interrupted() { return prev_line_interrupted; }
   color *get_fill_color();
