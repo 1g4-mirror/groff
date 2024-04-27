@@ -335,11 +335,11 @@ void environment::add_char(charinfo *ci)
 #endif
   if ((!suppress_push) && gc_np) {
     if (gc_np && (gc_np->state == 0)) {
-      gc_np->state = construct_state(0);
+      gc_np->state = construct_state(false);
       gc_np->push_state = get_diversion_state();
     }
     else if (line && (line->state == 0)) {
-      line->state = construct_state(0);
+      line->state = construct_state(false);
       line->push_state = get_diversion_state();
     }
   }
@@ -360,7 +360,7 @@ void environment::add_node(node *n)
     return;
   if (!suppress_push) {
     if (n->is_special && n->state == NULL)
-      n->state = construct_state(0);
+      n->state = construct_state(false);
     n->push_state = get_diversion_state();
   }
 
@@ -2381,11 +2381,11 @@ void environment::dump_troff_state()
 #undef SPACES
 }
 
-statem *environment::construct_state(int only_eol)
+statem *environment::construct_state(bool has_only_eol)
 {
   if (is_html) {
     statem *s = new statem();
-    if (!only_eol) {
+    if (!has_only_eol) {
       s->add_tag(MTSM_IN, indent);
       s->add_tag(MTSM_LL, line_length);
       s->add_tag(MTSM_PO, topdiv->get_page_offset().to_units());

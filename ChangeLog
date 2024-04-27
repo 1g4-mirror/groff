@@ -103,6 +103,15 @@
 	parameter `is_leader` from `int` to `bool`.  Assign Boolean
 	literal to it.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp
+	(environment::construct_state): Rename parameter `only_eol` to
+	`has_only_eol` and demote it from `int` to `bool`.
+	* src/roff/troff/env.cpp (environment::add_char):
+	(environment::add_node):
+	* src/roff/troff/input.cpp (input_stack::push): Assign Boolean
+	literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

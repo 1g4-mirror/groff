@@ -265,7 +265,7 @@ public:
   bool set_control_character(unsigned char);
   unsigned char get_no_break_control_character();
   bool set_no_break_control_character(unsigned char);
-  statem *construct_state(int only_eol);
+  statem *construct_state(bool has_only_eol);
   void print_env();
   void copy(const environment *);
   int is_dummy() { return dummy; }

@@ -701,7 +701,7 @@ void input_stack::push(input_iterator *in)
   if (top->is_diversion) {
     div_level++;
     in->diversion_state = diversion_state;
-    diversion_state = curenv->construct_state(0);
+    diversion_state = curenv->construct_state(false);
 #if defined(DEBUGGING)
     if (want_html_debugging) {
       curenv->dump_troff_state();
