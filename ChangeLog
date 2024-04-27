@@ -1,5 +1,11 @@
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (select_font): Fix code style nit.
+	Compare constant character to null character literal, not an
+	integral zero.
+
+2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::add_char)
 	(environment::add_node, environment::add_hyphen_indicator)
 	(environment::add_italic_correction, environment::space_newline)

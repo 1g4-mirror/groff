@@ -1272,7 +1272,9 @@ static void select_font()
   if (s == P_symbol)
     is_number = false;
   else {
-    for (const char *p = s.contents(); p != 0 && *p != 0; p++)
+    for (const char *p = s.contents();
+	 p != 0 && *p != '\0';
+	 p++)
       if (!csdigit(*p)) {
 	is_number = false;
 	break;
