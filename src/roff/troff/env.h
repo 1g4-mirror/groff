@@ -243,7 +243,7 @@ class environment {
   void mark_last_line();
 #endif /* WIDOW_CONTROL */
   breakpoint *choose_breakpoint();
-  void hyphenate_line(int start_here = 0);
+  void hyphenate_line(bool /* must_break_here */ = false);
   void start_field();
   void wrap_up_field();
   void add_padding();
@@ -343,7 +343,8 @@ public:
   void set_input_line_position(hunits);	// used by \n(hp
   void interrupt();
   void spread() { spreading = true; }
-  void possibly_break_line(int start_here = 0, int forced = 0);
+  void possibly_break_line(bool /* must_break_here */ = false,
+			   int forced = 0);
   void do_break(bool /* want_adjustment */ = false);	// .br, .brp
   void final_break();
   node *make_tag(const char *name, int i);

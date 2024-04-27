@@ -482,7 +482,7 @@ void environment::space_newline()
     return;
   }
   add_node(new word_space_node(x, get_fill_color(), w));
-  possibly_break_line(0, spreading);
+  possibly_break_line(false, spreading);
   spreading = false;
 }
 
@@ -518,7 +518,7 @@ void environment::space(hunits space_width, hunits sentence_space_width)
 			       get_fill_color(),
 			       new width_list(space_width,
 					      sentence_space_width)));
-  possibly_break_line(0, spreading);
+  possibly_break_line(false, spreading);
   spreading = false;
 }
 
@@ -2086,12 +2086,12 @@ breakpoint *environment::choose_breakpoint()
   return 0;
 }
 
-void environment::hyphenate_line(int start_here)
+void environment::hyphenate_line(bool must_break_here)
 {
   assert(line != 0);
   hyphenation_type prev_type = line->get_hyphenation_type();
   node **startp;
-  if (start_here)
+  if (must_break_here)
     startp = &line;
   else
     for (startp = &line->next; *startp != 0; startp = &(*startp)->next) {
@@ -2198,7 +2198,7 @@ static void distribute_space(node *n, int nspaces, hunits desired_space,
     do_reverse_node_list = !do_reverse_node_list;
 }
 
-void environment::possibly_break_line(int start_here, int forced)
+void environment::possibly_break_line(bool must_break_here, int forced)
 {
   bool was_centered = center_lines > 0;
   if (!fill || current_tab || current_field || dummy)
@@ -2208,7 +2208,7 @@ void environment::possibly_break_line(int start_here, int forced)
 	     // When a macro follows a paragraph in fill mode, the
 	     // current line should not be empty.
 	     || (width_total - line->width()) > target_text_length)) {
-    hyphenate_line(start_here);
+    hyphenate_line(must_break_here);
     breakpoint *bp = choose_breakpoint();
     if (bp == 0)
       // we'll find one eventually
@@ -2475,7 +2475,7 @@ void environment::do_break(bool want_adjustment)
       line = new space_node(H0, get_fill_color(), line);
       space_total++;
     }
-    possibly_break_line(0, want_adjustment);
+    possibly_break_line(false, want_adjustment);
   }
   while (line != 0 && line->discardable()) {
     width_total -= line->width();

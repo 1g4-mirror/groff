@@ -60,6 +60,16 @@
 	  it from `int` to `bool`.
 	- Assign Boolean literals to it.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::hyphenate_line)
+	(environment::possibly_break_line):
+	- Rename parameter `start_here` to `must_break_here` and demote
+	  it from `int` to `bool`.
+
+	* src/roff/troff/env.cpp (environment::possibly_break_line):
+	* src/roff/troff/input.cpp (process_input_stack):
+	- Pass Boolean, not integer, literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

@@ -3111,7 +3111,7 @@ void process_input_stack()
 	  curenv->add_node(tok.nd);
 	  tok.nd = 0;
 	  bol = 0;
-	  curenv->possibly_break_line(1);
+	  curenv->possibly_break_line(true /* must break here */);
 	}
 	break;
       }
