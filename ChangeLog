@@ -18,6 +18,17 @@
 	(pending_output_line::pending_output_line): Demote parameter
 	`nf` from `int` to `bool`.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (class pending_output_line)
+	(environment::output, environment::newline)
+	(environment::output_line, environment::possibly_break_line):
+	(environment::construct_format_state, environment::do_break):
+	Demote `was_centered` from `int` to `bool`.
+	(environment::newline): Assign Boolean literals to variables of
+	type `bool`.
+	(class pending_output_line) [WIDOW_CONTROL]: Update prototype of
+	`environment::output` friend declaration.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

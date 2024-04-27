@@ -80,7 +80,7 @@ int translate_space_to_dummy = 0;
 class pending_output_line {
   node *nd;
   bool suppress_filling;
-  int was_centered;
+  bool was_centered;
   vunits vs;
   vunits post_vs;
   hunits width;
@@ -98,7 +98,7 @@ public:
 #ifdef WIDOW_CONTROL
   friend void environment::mark_last_line();
   friend void environment::output(node *, bool, vunits, vunits, hunits,
-				  int);
+				  bool);
 #endif /* WIDOW_CONTROL */
 };
 
@@ -140,7 +140,7 @@ int pending_output_line::output()
 
 void environment::output(node *nd, bool suppress_filling,
 			 vunits vs, vunits post_vs,
-			 hunits width, int was_centered)
+			 hunits width, bool was_centered)
 {
 #ifdef WIDOW_CONTROL
   while (pending_lines) {
@@ -1796,7 +1796,7 @@ void environment::interrupt()
 
 void environment::newline()
 {
-  int was_centered = 0;
+  bool was_centered = false;
   if (underline_lines > 0) {
     if (--underline_lines == 0) {
       prev_fontno = fontno;
@@ -1835,7 +1835,7 @@ void environment::newline()
     if (x > H0)
       saved_indent += x/2;
     to_be_output = line;
-    was_centered = 1;
+    was_centered = true;
     to_be_output_width = width_total;
     line = 0;
   }
@@ -1875,7 +1875,7 @@ void environment::newline()
   }
 }
 
-void environment::output_line(node *n, hunits width, int was_centered)
+void environment::output_line(node *n, hunits width, bool was_centered)
 {
   prev_text_length = width;
   if (margin_character_flags) {
@@ -2200,7 +2200,7 @@ static void distribute_space(node *n, int nspaces, hunits desired_space,
 
 void environment::possibly_break_line(int start_here, int forced)
 {
-  int was_centered = center_lines > 0;
+  bool was_centered = center_lines > 0;
   if (!fill || current_tab || current_field || dummy)
     return;
   while (line != 0
@@ -2230,7 +2230,7 @@ void environment::possibly_break_line(int start_here, int forced)
       break;
     case ADJUST_CENTER:
       saved_indent += (target_text_length - bp->width)/2;
-      was_centered = 1;
+      was_centered = true;
       break;
     case ADJUST_RIGHT:
       saved_indent += target_text_length - bp->width;
@@ -2410,7 +2410,7 @@ statem *environment::construct_state(int only_eol)
     return NULL;
 }
 
-void environment::construct_format_state(node *n, int was_centered,
+void environment::construct_format_state(node *n, bool was_centered,
 					 int filling)
 {
   if (is_html) {
@@ -2462,7 +2462,7 @@ extern int global_diverted_space;
 
 void environment::do_break(bool want_adjustment)
 {
-  int was_centered = 0;
+  bool was_centered = false;
   if (curdiv == topdiv && topdiv->before_first_page) {
     topdiv->begin_page();
     return;
@@ -2491,7 +2491,7 @@ void environment::do_break(bool want_adjustment)
       switch (adjust_mode) {
       case ADJUST_CENTER:
 	saved_indent += (target_text_length - width_total)/2;
-	was_centered = 1;
+	was_centered = true;
 	break;
       case ADJUST_RIGHT:
 	saved_indent += target_text_length - width_total;

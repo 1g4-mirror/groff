@@ -232,9 +232,11 @@ class environment {
   tab_type distance_to_next_tab(hunits *);
   tab_type distance_to_next_tab(hunits *distance, hunits *leftpos);
   void start_line();
-  void output_line(node *, hunits, int);
-  void output(node *nd, bool suppress_filling, vunits vs,
-	      vunits post_vs, hunits width, int was_centered);
+  void output_line(node * /* nd */, hunits /* width */,
+		   bool /* was_centered */);
+  void output(node * /* nd */, bool /* suppress_filling */,
+	      vunits /* vs */, vunits /* post_vs */, hunits /* width */,
+	      bool /* was_centered */);
   void output_title(node *nd, bool suppress_filling, vunits vs,
 		    vunits post_vs, hunits width);
 #ifdef WIDOW_CONTROL
@@ -363,10 +365,11 @@ public:
   const char *get_point_size_string();
   const char *get_requested_point_size_string();
   void output_pending_lines();
-  void construct_format_state(node *n, int was_centered, int fill);
+  void construct_format_state(node * /* nd */, bool /* was_centered */,
+			      int /* fill */);
   void construct_new_line_state(node *n);
   void dump_troff_state();
-  
+
   friend void title_length();
   friend void space_size();
   friend void fill();
