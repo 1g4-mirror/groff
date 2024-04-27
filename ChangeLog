@@ -182,6 +182,11 @@
 	* src/roff/troff/env.cpp (environment::wrap_up_tab): Assign
 	Boolean literal to it.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::add_tab): Rename
+	parameter `repeated` to `is_repeated` and demote it from `int`
+	to `bool`.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

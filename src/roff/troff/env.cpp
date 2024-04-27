@@ -2840,10 +2840,11 @@ void tab_stops::clear()
   }
 }
 
-void tab_stops::add_tab(hunits pos, tab_type type, int repeated)
+void tab_stops::add_tab(hunits pos, tab_type type, bool is_repeated)
 {
   tab **p;
-  for (p = repeated ? &repeated_list : &initial_list; *p; p = &(*p)->next)
+  for (p = is_repeated ? &repeated_list : &initial_list; *p;
+       p = &(*p)->next)
     ;
   *p = new tab(pos, type);
 }

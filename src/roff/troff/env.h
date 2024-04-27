@@ -87,7 +87,7 @@ public:
   tab_type distance_to_next_tab(hunits pos, hunits *distance);
   tab_type distance_to_next_tab(hunits curpos, hunits *distance, hunits *leftpos);
   void clear();
-  void add_tab(hunits pos, tab_type type, int repeated);
+  void add_tab(hunits pos, tab_type type, bool is_repeated);
   const char *to_string();
 };
 
