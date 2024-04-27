@@ -164,6 +164,10 @@
 	* src/roff/troff/env.h (environment::is_dummy): Return a
 	`bool`, not an `int`.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::is_empty): Return a
+	`bool`, not an `int`.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

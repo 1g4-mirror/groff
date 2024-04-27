@@ -2515,7 +2515,7 @@ void environment::do_break(bool want_adjustment)
   }
 }
 
-int environment::is_empty()
+bool environment::is_empty()
 {
   return !current_tab && line == 0 && pending_lines == 0;
 }

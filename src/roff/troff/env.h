@@ -269,7 +269,7 @@ public:
   void print_env();
   void copy(const environment *);
   bool is_dummy() { return dummy; }
-  int is_empty();
+  bool is_empty();
   bool is_composite() { return composite; }
   void set_composite() { composite = true; }
   vunits get_vertical_spacing();	// .v
