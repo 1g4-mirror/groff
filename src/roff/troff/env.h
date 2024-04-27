@@ -158,7 +158,7 @@ class environment {
   int space_size;		// in 36ths of an em
   int sentence_space_size;	// same but for spaces at the end of sentences
   int adjust_mode;
-  int fill;
+  bool fill;
   int interrupted;
   int prev_line_interrupted;
   int center_lines;

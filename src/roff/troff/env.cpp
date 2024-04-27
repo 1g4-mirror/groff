@@ -698,7 +698,7 @@ environment::environment(symbol nm)
   space_size(12),
   sentence_space_size(12),
   adjust_mode(ADJUST_BOTH),
-  fill(1),
+  fill(true),
   interrupted(0),
   prev_line_interrupted(0),
   center_lines(0),
@@ -1401,7 +1401,7 @@ void fill()
     tok.next();
   if (want_break)
     curenv->do_break();
-  curenv->fill = 1;
+  curenv->fill = true;
   tok.next();
 }
 
@@ -1411,7 +1411,7 @@ void no_fill()
     tok.next();
   if (want_break)
     curenv->do_break();
-  curenv->fill = 0;
+  curenv->fill = false;
   curenv->suppress_next_eol = 1;
   tok.next();
 }
