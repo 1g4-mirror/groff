@@ -187,6 +187,9 @@
 	parameter `repeated` to `is_repeated` and demote it from `int`
 	to `bool`.
 
+	* src/roff/troff/env.cpp (environment::hyphenate_line): Demote
+	local variable `inhibit` from `int` to `bool`.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

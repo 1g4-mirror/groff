@@ -2106,7 +2106,8 @@ void environment::hyphenate_line(bool must_break_here)
   do {
     tem = tem->next;
   } while (tem != 0 && tem->get_hyphenation_type() == HYPHEN_MIDDLE);
-  int inhibit = (tem != 0 && tem->get_hyphenation_type() == HYPHEN_INHIBIT);
+  bool inhibit = (tem != 0 /* nullptr */
+		  && tem->get_hyphenation_type() == HYPHEN_INHIBIT);
   node *end = tem;
   hyphen_list *sl = 0;
   tem = *startp;
