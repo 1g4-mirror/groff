@@ -177,6 +177,11 @@
 	`have_keyword` from `int` to `bool`.  Assign Boolean literals to
 	them.
 
+	* src/roff/troff/env.h (class environment): Demote member
+	variable `tab_precedes_field` from `int` to `bool`.
+	* src/roff/troff/env.cpp (environment::wrap_up_tab): Assign
+	Boolean literal to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

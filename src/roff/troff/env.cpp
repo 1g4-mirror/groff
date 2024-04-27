@@ -2980,7 +2980,7 @@ void environment::wrap_up_tab()
   if (has_current_field) {
     if (tab_precedes_field) {
       pre_field_width += tab_amount;
-      tab_precedes_field = 0;
+      tab_precedes_field = false;
     }
     field_distance -= tab_amount;
     field_spaces += tab_field_spaces;

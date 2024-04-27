@@ -199,7 +199,7 @@ class environment {
   hunits pre_field_width;
   int field_spaces;
   int tab_field_spaces;
-  int tab_precedes_field;
+  bool tab_precedes_field;
   bool discarding;
   bool spreading;		// set by \p
   unsigned margin_character_flags;
