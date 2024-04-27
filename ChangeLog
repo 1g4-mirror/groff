@@ -89,6 +89,10 @@
 	(environment::interrupt, environment::newline): Assign Boolean
 	literals to it.
 
+	* src/roff/troff/env.cpp (environment::choose_breakpoint):
+	Demote local variable `best_bp_fits` from `int` to `bool`.
+	Assign Boolean literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

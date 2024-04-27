@@ -1996,7 +1996,7 @@ breakpoint *environment::choose_breakpoint()
   int s = space_total;
   node *n = line;
   breakpoint *best_bp = 0;	// the best breakpoint so far
-  int best_bp_fits = 0;
+  bool best_bp_fits = false;
   while (n != 0 /* nullptr */) {
     x -= n->width();
     s -= n->nspaces();
@@ -2060,7 +2060,7 @@ breakpoint *environment::choose_breakpoint()
 	      delete best_bp;
 	    best_bp = bp;
 	    bp = bp->next;
-	    best_bp_fits = 1;
+	    best_bp_fits = true;
 	  }
 	  else {
 	    breakpoint *tem = bp;
