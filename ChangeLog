@@ -35,6 +35,11 @@
 	[WIDOW_CONTROL]: Rename `last_line` to `is_last_line` and demote
 	it from `int` to `bool`.
 
+	* src/roff/troff/env.cpp (class pending_output_line)
+	(pending_output_line::output): Demote member function's return
+	type from `int` to `bool`.  Return Boolean, not integer,
+	literals from functions returning `bool`.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

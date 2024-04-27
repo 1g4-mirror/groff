@@ -93,7 +93,7 @@ public:
   pending_output_line(node *, bool, vunits, vunits, hunits, int,
 		      pending_output_line * = 0);
   ~pending_output_line();
-  int output();
+  bool output();
 
 #ifdef WIDOW_CONTROL
   friend void environment::mark_last_line();
@@ -119,23 +119,23 @@ pending_output_line::~pending_output_line()
   delete_node_list(nd);
 }
 
-int pending_output_line::output()
+bool pending_output_line::output()
 {
   if (was_trap_sprung)
-    return 0;
+    return false;
 #ifdef WIDOW_CONTROL
   if (next && next->is_last_line && !suppress_filling) {
     curdiv->need(vs + post_vs + vunits(vresolution));
     if (was_trap_sprung) {
       next->is_last_line = false;	// Try to avoid infinite loops.
-      return 0;
+      return false;
     }
   }
 #endif
   curenv->construct_format_state(nd, was_centered, !suppress_filling);
   curdiv->output(nd, suppress_filling, vs, post_vs, width);
   nd = 0;
-  return 1;
+  return true;
 }
 
 void environment::output(node *nd, bool suppress_filling,
