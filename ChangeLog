@@ -1,3 +1,10 @@
+2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Boolify `translate_space_to_dummy` global variable.
+
+	* src/roff/troff/env.h:
+	* src/roff/troff/env.cpp: Do it.
+
 2024-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Boolify more `environment` class member variables,

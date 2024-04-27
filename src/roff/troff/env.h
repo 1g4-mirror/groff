@@ -424,7 +424,7 @@ extern double spread_limit;
 
 extern bool want_break;
 extern symbol default_family;
-extern int translate_space_to_dummy;
+extern bool translate_space_to_dummy;
 
 extern unsigned char hpf_code_table[];
 

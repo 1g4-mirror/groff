@@ -75,7 +75,7 @@ extern statem *get_diversion_state();
 charinfo *field_delimiter_char;
 charinfo *padding_indicator_char;
 
-int translate_space_to_dummy = 0;
+bool translate_space_to_dummy = false;
 
 class pending_output_line {
   node *nd;
