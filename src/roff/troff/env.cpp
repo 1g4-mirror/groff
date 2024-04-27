@@ -90,7 +90,7 @@ class pending_output_line {
 public:
   pending_output_line *next;
 
-  pending_output_line(node *, bool, vunits, vunits, hunits, int,
+  pending_output_line(node *, bool, vunits, vunits, hunits, bool,
 		      pending_output_line * = 0);
   ~pending_output_line();
   bool output();
@@ -103,7 +103,7 @@ public:
 };
 
 pending_output_line::pending_output_line(node *n, bool nf, vunits v,
-					 vunits pv, hunits w, int ce,
+					 vunits pv, hunits w, bool ce,
 					 pending_output_line *p)
 : nd(n), suppress_filling(nf), was_centered(ce), vs(v), post_vs(pv),
   width(w),
