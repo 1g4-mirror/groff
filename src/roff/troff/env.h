@@ -189,7 +189,7 @@ class environment {
   node *tab_contents;
   hunits tab_width;
   hunits tab_distance;
-  int line_tabs;
+  bool using_line_tabs;
   tab_type current_tab;
   node *leader_node;
   charinfo *tab_char;
@@ -310,7 +310,7 @@ public:
     { return env_half_narrow_space_width(this); }
   hunits get_input_line_position();
   const char *get_tabs();
-  int get_line_tabs();
+  int get_using_line_tabs();
   unsigned get_hyphenation_mode();
   unsigned get_hyphenation_mode_default();
   int get_hyphen_line_max();

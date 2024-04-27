@@ -721,7 +721,7 @@ environment::environment(symbol nm)
   width_total(0),
   space_total(0),
   input_line_start(0),
-  line_tabs(0),
+  using_line_tabs(false),
   current_tab(TAB_NONE),
   leader_node(0),
   tab_char(0),
@@ -815,7 +815,7 @@ environment::environment(const environment *e)
   width_total(0),
   space_total(0),
   input_line_start(0),
-  line_tabs(e->line_tabs),
+  using_line_tabs(e->using_line_tabs),
   current_tab(TAB_NONE),
   leader_node(0),
   tab_char(e->tab_char),
@@ -904,7 +904,7 @@ void environment::copy(const environment *e)
   pending_lines = 0;
   discarding = false;
   tabs = e->tabs;
-  line_tabs = e->line_tabs;
+  using_line_tabs = e->using_line_tabs;
   current_tab = TAB_NONE;
   has_current_field = false;
   margin_character_flags = e->margin_character_flags;
@@ -2918,14 +2918,14 @@ const char *environment::get_tabs()
 
 tab_type environment::distance_to_next_tab(hunits *distance)
 {
-  return line_tabs
+  return using_line_tabs
     ? curenv->tabs.distance_to_next_tab(get_text_length(), distance)
     : curenv->tabs.distance_to_next_tab(get_input_line_position(), distance);
 }
 
 tab_type environment::distance_to_next_tab(hunits *distance, hunits *leftpos)
 {
-  return line_tabs
+  return using_line_tabs
     ? curenv->tabs.distance_to_next_tab(get_text_length(), distance, leftpos)
     : curenv->tabs.distance_to_next_tab(get_input_line_position(), distance,
 					leftpos);
@@ -2945,15 +2945,15 @@ void line_tabs_request()
 {
   int n;
   if (has_arg() && get_integer(&n))
-    curenv->line_tabs = (n > 0);
+    curenv->using_line_tabs = (n > 0);
   else
-    curenv->line_tabs = 1;
+    curenv->using_line_tabs = true;
   skip_line();
 }
 
-int environment::get_line_tabs()
+int environment::get_using_line_tabs()
 {
-  return line_tabs;
+  return using_line_tabs;
 }
 
 void environment::wrap_up_tab()
@@ -3447,7 +3447,7 @@ void environment::print_env()
   errprint("  total width: %1u\n", width_total.to_units());
   errprint("  total number of spaces: %1\n", space_total);
   errprint("  input line start: %1u\n", input_line_start.to_units());
-  errprint("  line tabs: %1\n", line_tabs ? "yes" : "no");
+  errprint("  line tabs: %1\n", using_line_tabs ? "yes" : "no");
   errprint("  discarding: %1\n", discarding ? "yes" : "no");
   errprint("  spread flag set: %1\n", spreading ? "yes" : "no");	// \p
   if (margin_character_node) {
@@ -4151,7 +4151,7 @@ void init_env_requests()
   init_int_env_reg(".it", get_input_trap_line_count);
   init_int_env_reg(".itc", get_input_trap_respects_continuation);
   init_string_env_reg(".itm", get_input_trap_macro);
-  init_int_env_reg(".linetabs", get_line_tabs);
+  init_int_env_reg(".linetabs", get_using_line_tabs);
   init_hunits_env_reg(".lt", get_title_length);
   init_unsigned_env_reg(".j", get_adjust_mode);
   init_hunits_env_reg(".k", get_text_length);

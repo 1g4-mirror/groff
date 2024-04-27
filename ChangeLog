@@ -42,6 +42,16 @@
 	integer comparison, not Boolean, test, for clarity and to ensure
 	consistency with *roff integer-to-Boolean conversion idiom.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::environment)
+	(environment::copy, environment::distance_to_next_tab)
+	(line_tabs_request, environment::print_env, init_env_requests):
+	Rename `line_tabs` to `using_line_tabs`.
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::get_line_tabs): Rename
+	this...
+	(environment::get_using_line_tabs): ...to this.
+
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Demote parameter of global `do_underline` function from
