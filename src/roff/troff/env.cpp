@@ -308,7 +308,7 @@ void environment::add_char(charinfo *ci)
   }
   else if (has_current_field && ci == padding_indicator_char)
     add_padding();
-  else if (current_tab) {
+  else if (current_tab != TAB_NONE) {
     if (tab_contents == 0)
       tab_contents = new line_start_node;
     if (ci != hyphen_indicator_char)
@@ -363,12 +363,12 @@ void environment::add_node(node *n)
     n->push_state = get_diversion_state();
   }
 
-  if (current_tab || has_current_field)
+  if ((current_tab != TAB_NONE) || has_current_field)
     n->freeze_space();
   if (line_interrupted) {
     delete n;
   }
-  else if (current_tab) {
+  else if (current_tab != TAB_NONE) {
     n->next = tab_contents;
     tab_contents = n;
     tab_width += n->width();
@@ -392,7 +392,7 @@ void environment::add_node(node *n)
 
 void environment::add_hyphen_indicator()
 {
-  if (current_tab || line_interrupted || has_current_field
+  if ((current_tab != TAB_NONE) || line_interrupted || has_current_field
       || hyphen_indicator_char != 0)
     return;
   if (line == 0)
@@ -452,7 +452,7 @@ const char *environment::get_input_trap_macro()
 
 void environment::add_italic_correction()
 {
-  if (current_tab) {
+  if (current_tab != TAB_NONE) {
     if (tab_contents != 0 /* nullptr */)
       tab_contents = tab_contents->add_italic_correction(&tab_width);
   }
@@ -462,7 +462,7 @@ void environment::add_italic_correction()
 
 void environment::space_newline()
 {
-  assert(!current_tab && !has_current_field);
+  assert((current_tab == TAB_NONE) && !has_current_field);
   if (line_interrupted)
     return;
   hunits x = H0;
@@ -499,8 +499,8 @@ void environment::space(hunits space_width, hunits sentence_space_width)
     return;
   }
   hunits x = translate_space_to_dummy ? H0 : space_width;
-  node *p = current_tab ? tab_contents : line;
-  hunits *tp = current_tab ? &tab_width : &width_total;
+  node *p = (current_tab != TAB_NONE) ? tab_contents : line;
+  hunits *tp = (current_tab != TAB_NONE) ? &tab_width : &width_total;
   if (p && p->nspaces() == 1 && p->width() == x
       && node_list_ends_sentence(p->next) == 1) {
     hunits xx = translate_space_to_dummy ? H0 : sentence_space_width;
@@ -980,7 +980,7 @@ hunits environment::get_input_line_position()
     n = -input_line_start;
   else
     n = width_total - input_line_start;
-  if (current_tab)
+  if (current_tab != TAB_NONE)
     n += tab_width;
   return n;
 }
@@ -988,7 +988,7 @@ hunits environment::get_input_line_position()
 void environment::set_input_line_position(hunits n)
 {
   input_line_start = line == 0 ? -n : width_total - n;
-  if (current_tab)
+  if (current_tab != TAB_NONE)
     input_line_start += tab_width;
 }
 
@@ -1075,7 +1075,8 @@ hunits environment::get_title_length()
 
 node *environment::get_prev_char()
 {
-  for (node *n = current_tab ? tab_contents : line; n; n = n->next) {
+  for (node *n = (current_tab != TAB_NONE) ? tab_contents : line; n;
+       n = n->next) {
     node *last = n->last_char_node();
     if (last)
       return last;
@@ -1122,7 +1123,7 @@ vunits environment::get_prev_char_depth()
 hunits environment::get_text_length()
 {
   hunits n = line == 0 ? H0 : width_total;
-  if (current_tab)
+  if (current_tab != TAB_NONE)
     n += tab_width;
   return n;
 }
@@ -1176,7 +1177,7 @@ void environment::width_registers()
 
 node *environment::extract_output_line()
 {
-  if (current_tab)
+  if (current_tab != TAB_NONE)
     wrap_up_tab();
   node *n = line;
   line = 0;
@@ -1808,7 +1809,7 @@ void environment::newline()
   }
   if (has_current_field)
     wrap_up_field();
-  if (current_tab)
+  if (current_tab != TAB_NONE)
     wrap_up_tab();
   // strip trailing spaces
   while (line != 0 && line->discardable()) {
@@ -2202,7 +2203,7 @@ void environment::possibly_break_line(bool must_break_here,
 				      bool must_adjust)
 {
   bool was_centered = centered_line_count > 0;
-  if (!fill || current_tab || has_current_field || dummy)
+  if (!fill || (current_tab != TAB_NONE) || has_current_field || dummy)
     return;
   while (line != 0
 	 && (must_adjust
@@ -2469,7 +2470,7 @@ void environment::do_break(bool want_adjustment)
     topdiv->begin_page();
     return;
   }
-  if (current_tab)
+  if (current_tab != TAB_NONE)
     wrap_up_tab();
   if (line) {
     // this is so that hyphenation works
@@ -2518,7 +2519,7 @@ void environment::do_break(bool want_adjustment)
 
 bool environment::is_empty()
 {
-  return !current_tab && line == 0 && pending_lines == 0;
+  return (current_tab == TAB_NONE) && line == 0 && pending_lines == 0;
 }
 
 void do_break_request(bool want_adjustment)
@@ -2958,7 +2959,7 @@ int environment::get_using_line_tabs()
 
 void environment::wrap_up_tab()
 {
-  if (!current_tab)
+  if (current_tab == TAB_NONE)
     return;
   if (line == 0)
     start_line();
@@ -3019,7 +3020,7 @@ void environment::handle_tab(bool is_leader)
 {
   hunits d;
   hunits absolute;
-  if (current_tab)
+  if (current_tab != TAB_NONE)
     wrap_up_tab();
   charinfo *ci = is_leader ? leader_char : tab_char;
   delete leader_node;
@@ -3071,10 +3072,10 @@ void environment::start_field()
 
 void environment::wrap_up_field()
 {
-  if (!current_tab && field_spaces == 0)
+  if ((current_tab == TAB_NONE) && field_spaces == 0)
     add_padding();
   hunits padding = field_distance - (get_text_length() - pre_field_width);
-  if (current_tab && tab_field_spaces != 0) {
+  if ((current_tab != TAB_NONE) && tab_field_spaces != 0) {
     hunits tab_padding = scale(padding,
 			       tab_field_spaces,
 			       field_spaces + tab_field_spaces);
@@ -3088,7 +3089,7 @@ void environment::wrap_up_field()
     distribute_space(line, field_spaces, padding,
 		     true /* force reversal of node list */);
     width_total += padding;
-    if (current_tab) {
+    if (current_tab != TAB_NONE) {
       // the start of the tab has been moved to the right by padding, so
       tab_distance -= padding;
       if (tab_distance <= H0) {
@@ -3122,7 +3123,7 @@ void environment::wrap_up_field()
 
 void environment::add_padding()
 {
-  if (current_tab) {
+  if (current_tab != TAB_NONE) {
     tab_contents = new space_node(H0, get_fill_color(), tab_contents);
     tab_field_spaces++;
   }

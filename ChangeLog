@@ -1,5 +1,22 @@
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::add_char)
+	(environment::add_node, environment::add_hyphen_indicator)
+	(environment::add_italic_correction, environment::space_newline)
+	(environment::space, environment::get_input_line_position)
+	(environment::set_input_line_position)
+	(environment::get_prev_char, environment::get_text_length)
+	(environment::extract_output_line, environment::newline)
+	(environment::possibly_break_line, environment::do_break)
+	(environment::is_empty, environment::wrap_up_tab)
+	(environment::handle_tab, environment::wrap_up_field)
+	(environment::handle_tab, environment::wrap_up_field): Fix code
+	style nit.  Perform explicit comparisons of `current_tab` (an
+	enumerated type) against `TAB_NONE` instead of punning down to a
+	Boolean.
+
+2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::output) [WIDOW_CONTROL]:
 	Fix code style nit (in de-configured code); explicitly compare
 	variable of pointer type to null pointer constant instead of
