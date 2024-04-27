@@ -3914,12 +3914,12 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
     return;
   }
   int c = hpf_getc(fp);
-  int have_patterns = 0;	// we've seen \patterns
-  int final_pattern = 0;	// 1 if we have a trailing closing brace
-  int have_hyphenation = 0;	// we've seen \hyphenation
-  int final_hyphenation = 0;	// 1 if we have a trailing closing brace
-  int have_keyword = 0;		// we've seen either \patterns or \hyphenation
-  int traditional = 0;		// don't handle \patterns
+  bool have_patterns = false;		// seen \patterns
+  bool is_final_pattern = false;	// have a trailing closing brace
+  bool have_hyphenation = false;	// seen \hyphenation
+  bool is_final_hyphenation = false;	// have a trailing closing brace
+  bool have_keyword = false;		// seen \patterns or \hyphenation
+  bool is_traditional = false;		// don't handle \patterns
   for (;;) {
     for (;;) {
       if (c == '%') {		// skip comments
@@ -3932,11 +3932,11 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
       c = hpf_getc(fp);
     }
     if (c == EOF) {
-      if (have_keyword || traditional)	// we are done
+      if (have_keyword || is_traditional)	// we are done
 	break;
-      else {				// rescan file in 'traditional' mode
+      else {			// rescan file in 'is_traditional' mode
 	rewind(fp);
-	traditional = 1;
+	is_traditional = true;
 	c = hpf_getc(fp);
 	continue;
       }
@@ -3955,7 +3955,7 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
       } while (i < WORD_MAX && c != EOF && !csspace(c)
 	       && c != '%' && c != '{' && c != '}');
     }
-    if (!traditional) {
+    if (!is_traditional) {
       if (i >= 9 && !strncmp(buf + i - 9, "\\patterns", 9)) {
 	while (csspace(c))
 	  c = hpf_getc(fp);
@@ -3964,8 +3964,8 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
 	    error("\\patterns is not allowed inside of %1 group",
 		  have_patterns ? "\\patterns" : "\\hyphenation");
 	  else {
-	    have_patterns = 1;
-	    have_keyword = 1;
+	    have_patterns = true;
+	    have_keyword = true;
 	  }
 	  c = hpf_getc(fp);
 	  continue;
@@ -3979,8 +3979,8 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
 	    error("\\hyphenation is not allowed inside of %1 group",
 		  have_patterns ? "\\patterns" : "\\hyphenation");
 	  else {
-	    have_hyphenation = 1;
-	    have_keyword = 1;
+	    have_hyphenation = true;
+	    have_keyword = true;
 	  }
 	  c = hpf_getc(fp);
 	  continue;
@@ -3994,14 +3994,14 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
       }
       else if (c == '}') {
 	if (have_patterns) {
-	  have_patterns = 0;
+	  have_patterns = false;
 	  if (i > 0)
-	    final_pattern = 1;
+	    is_final_pattern = true;
 	}
 	else if (have_hyphenation) {
-	  have_hyphenation = 0;
+	  have_hyphenation = false;
 	  if (i > 0)
-	    final_hyphenation = 1;
+	    is_final_hyphenation = true;
 	}
 	c = hpf_getc(fp);
       }
@@ -4018,18 +4018,18 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
 	c = hpf_getc(fp);
     }
     if (i > 0) {
-      if (have_patterns || final_pattern || traditional) {
+      if (have_patterns || is_final_pattern || is_traditional) {
 	for (int j = 0; j < i; j++)
 	  buf[j] = hpf_code_table[(unsigned char)buf[j]];
 	insert_pattern(buf, i, num);
-	final_pattern = 0;
+	is_final_pattern = false;
       }
-      else if (have_hyphenation || final_hyphenation) {
+      else if (have_hyphenation || is_final_hyphenation) {
 	// hyphenation exceptions in a pattern file are subject to `.hy'
 	// restrictions; we mark such entries with a trailing space
 	buf[i++] = ' ';
 	insert_hyphenation(ex, buf, i);
-	final_hyphenation = 0;
+	is_final_hyphenation = false;
       }
     }
   }

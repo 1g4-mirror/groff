@@ -168,6 +168,15 @@
 	* src/roff/troff/env.cpp (environment::is_empty): Return a
 	`bool`, not an `int`.
 
+	* src/roff/troff/env.cpp (hyphen_trie::read_patterns_file):
+	Rename local variables.
+	- final_pattern     -> is_final_pattern
+	- final_hyphenation -> is_final_hyphenation
+	- traditional       -> is_traditional
+	Demote these and `have_patterns`, `have_hyphenation`, and
+	`have_keyword` from `int` to `bool`.  Assign Boolean literals to
+	them.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)
