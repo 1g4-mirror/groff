@@ -140,7 +140,7 @@ void widow_control_request();
 #endif /* WIDOW_CONTROL */
 
 class environment {
-  int dummy;			// dummy environment used for \w
+  bool dummy;			// dummy environment used for \w
   hunits prev_line_length;
   hunits line_length;
   hunits prev_title_length;
@@ -268,7 +268,7 @@ public:
   statem *construct_state(bool has_only_eol);
   void print_env();
   void copy(const environment *);
-  int is_dummy() { return dummy; }
+  bool is_dummy() { return dummy; }
   int is_empty();
   bool is_composite() { return composite; }
   void set_composite() { composite = true; }

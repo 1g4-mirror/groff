@@ -157,6 +157,13 @@
 	variable `err` to `is_valid`, invert its sense, and demote it
 	from `int` to `bool`.  Assign Boolean literals to it.
 
+	* src/roff/troff/env.h (class environment): Demote member
+	variable `dummy` from `int` to `bool`.
+	* src/roff/troff/env.cpp (environment::environment): Assign
+	Boolean literals to it.
+	* src/roff/troff/env.h (environment::is_dummy): Return a
+	`bool`, not an `int`.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

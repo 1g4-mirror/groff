@@ -684,7 +684,7 @@ void environment::set_fill_color(color *c)
 }
 
 environment::environment(symbol nm)
-: dummy(0),
+: dummy(false),
   prev_line_length((units_per_inch*13)/2),
   line_length((units_per_inch*13)/2),
   prev_title_length((units_per_inch*13)/2),
@@ -774,7 +774,7 @@ environment::environment(symbol nm)
 }
 
 environment::environment(const environment *e)
-: dummy(1),
+: dummy(true),
   prev_line_length(e->prev_line_length),
   line_length(e->line_length),
   prev_title_length(e->prev_title_length),
