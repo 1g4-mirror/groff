@@ -3013,7 +3013,7 @@ node *environment::make_tab_node(hunits d, node *next)
   return n;
 }
 
-void environment::handle_tab(int is_leader)
+void environment::handle_tab(bool is_leader)
 {
   hunits d;
   hunits absolute;

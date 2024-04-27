@@ -349,7 +349,7 @@ public:
   void final_break();
   node *make_tag(const char *name, int i);
   void newline();
-  void handle_tab(int is_leader = 0);	// do a tab or leader
+  void handle_tab(bool /* is_leader */ = false); // do a tab or leader
   void add_node(node *);
   void add_char(charinfo *);
   void add_hyphen_indicator();

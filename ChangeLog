@@ -98,6 +98,11 @@
 	Rename parameter `forced` to `must_adjust` and demote it from
 	`int` to `bool`.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::handle_tab): Demote
+	parameter `is_leader` from `int` to `bool`.  Assign Boolean
+	literal to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)
