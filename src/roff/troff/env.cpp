@@ -144,7 +144,7 @@ void environment::output(node *nd, bool suppress_filling,
 {
 #ifdef WIDOW_CONTROL
   while (pending_lines) {
-    if (widow_control && !pending_lines->suppress_filling
+    if (want_widow_control && !pending_lines->suppress_filling
 	&& !pending_lines->next)
       break;
     if (!pending_lines->output())
@@ -158,7 +158,7 @@ void environment::output(node *nd, bool suppress_filling,
 #endif /* WIDOW_CONTROL */
   if (!was_trap_sprung && !pending_lines
 #ifdef WIDOW_CONTROL
-      && (!widow_control || suppress_filling)
+      && (!want_widow_control || suppress_filling)
 #endif /* WIDOW_CONTROL */
       ) {
     curenv->construct_format_state(nd, was_centered, !suppress_filling);
@@ -199,7 +199,7 @@ void environment::output_pending_lines()
 
 void environment::mark_last_line()
 {
-  if (!widow_control || !pending_lines)
+  if (!want_widow_control || !pending_lines)
     return;
   pending_output_line *p;
   for (p = pending_lines; p->next; p = p->next)
@@ -212,9 +212,9 @@ void widow_control_request()
 {
   int n;
   if (has_arg() && get_integer(&n))
-    curenv->widow_control = (n > 0);
+    curenv->want_widow_control = (n > 0);
   else
-    curenv->widow_control = 1;
+    curenv->want_widow_control = true;
   skip_line();
 }
 
@@ -747,7 +747,7 @@ environment::environment(symbol nm)
   composite(0),
   pending_lines(0),
 #ifdef WIDOW_CONTROL
-  widow_control(0),
+  want_widow_control(false),
 #endif /* WIDOW_CONTROL */
   glyph_color(&default_color),
   prev_glyph_color(&default_color),
@@ -841,7 +841,7 @@ environment::environment(const environment *e)
   composite(0),
   pending_lines(0),
 #ifdef WIDOW_CONTROL
-  widow_control(e->widow_control),
+  want_widow_control(e->want_widow_control),
 #endif /* WIDOW_CONTROL */
   glyph_color(e->glyph_color),
   prev_glyph_color(e->prev_glyph_color),
@@ -928,7 +928,7 @@ void environment::copy(const environment *e)
   prev_family = e->prev_family;
   leader_node = 0;
 #ifdef WIDOW_CONTROL
-  widow_control = e->widow_control;
+  want_widow_control = e->want_widow_control;
 #endif /* WIDOW_CONTROL */
   hyphen_line_max = e->hyphen_line_max;
   hyphen_line_count = 0;
@@ -3496,7 +3496,7 @@ void environment::print_env()
   errprint("  hyphenation space: %1u\n", hyphenation_space.to_units());
   errprint("  hyphenation margin: %1u\n", hyphenation_margin.to_units());
 #ifdef WIDOW_CONTROL
-  errprint("  widow control: %1\n", widow_control ? "yes" : "no");
+  errprint("  widow control: %1\n", want_widow_control ? "yes" : "no");
 #endif /* WIDOW_CONTROL */
 }
 

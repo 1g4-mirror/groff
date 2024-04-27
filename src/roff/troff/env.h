@@ -220,7 +220,7 @@ class environment {
   int composite;		// used for construction of composite char?
   pending_output_line *pending_lines;
 #ifdef WIDOW_CONTROL
-  int widow_control;
+  bool want_widow_control;
 #endif /* WIDOW_CONTROL */
   color *glyph_color;
   color *prev_glyph_color;
