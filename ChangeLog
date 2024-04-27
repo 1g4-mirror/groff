@@ -1,5 +1,16 @@
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify `suppress_push` global variable, and declare it
+	in a header file.
+
+	* src/roff/troff/env.cpp: Move `extern` declaration from here...
+	* src/roff/troff/input.h: ...to here.
+
+	* src/roff/troff/input.cpp: Demote it from `int` to `bool` and
+	assign Boolean, not integer, literals to it.
+
+2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify `translate_space_to_dummy` global variable.
 
 	* src/roff/troff/env.h:

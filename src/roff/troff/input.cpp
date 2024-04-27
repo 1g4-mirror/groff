@@ -570,7 +570,7 @@ int input_stack::level = 0;
 int input_stack::limit = DEFAULT_INPUT_STACK_LIMIT;
 int input_stack::div_level = 0;
 statem *input_stack::diversion_state = 0 /* nullptr */;
-int suppress_push=0;
+bool suppress_push = false;
 
 
 inline int input_stack::get_level()
@@ -6043,7 +6043,7 @@ static bool do_if_request()
     environment env2(curenv);
     environment *oldenv = curenv;
     curenv = &env1;
-    suppress_push = 1;
+    suppress_push = true;
     for (int i = 0; i < 2; i++) {
       for (;;) {
 	tok.next();
@@ -6068,7 +6068,7 @@ static bool do_if_request()
     delete_node_list(n2);
     curenv = oldenv;
     have_formattable_input = false;
-    suppress_push = 0;
+    suppress_push = false;
     tok.next();
   }
   else {
