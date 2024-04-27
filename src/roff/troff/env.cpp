@@ -2198,13 +2198,14 @@ static void distribute_space(node *n, int nspaces, hunits desired_space,
     do_reverse_node_list = !do_reverse_node_list;
 }
 
-void environment::possibly_break_line(bool must_break_here, int forced)
+void environment::possibly_break_line(bool must_break_here,
+				      bool must_adjust)
 {
   bool was_centered = center_lines > 0;
   if (!fill || current_tab || current_field || dummy)
     return;
   while (line != 0
-	 && (forced
+	 && (must_adjust
 	     // When a macro follows a paragraph in fill mode, the
 	     // current line should not be empty.
 	     || (width_total - line->width()) > target_text_length)) {
