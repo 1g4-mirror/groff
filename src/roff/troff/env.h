@@ -194,7 +194,7 @@ class environment {
   node *leader_node;
   charinfo *tab_char;
   charinfo *leader_char;
-  int current_field;		// is there a current field?
+  bool has_current_field;
   hunits field_distance;
   hunits pre_field_width;
   int field_spaces;

@@ -129,6 +129,21 @@
 	(environment::copy, do_underline, environment::newline): Assign
 	Boolean literals to it.
 
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp
+	(environment::add_char, environment::add_node)
+	(environment::space_newline, environment::space)
+	(environment::environment, environment::copy)
+	(environment::newline, environment::possibly_break_line)
+	(environment::wrap_up_tab, environment::start_field)
+	(environment::wrap_up_field, environment::print_env): Rename
+	parameter `current_field` to `has_current_field` and demote it
+	from `int` to `bool`.
+	* src/roff/troff/env.cpp (environment::add_char):
+	(environment::add_node):
+	* src/roff/troff/input.cpp (input_stack::push): Assign Boolean
+	literals to it.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

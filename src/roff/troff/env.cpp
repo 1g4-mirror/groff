@@ -302,12 +302,12 @@ void environment::add_char(charinfo *ci)
     ;
   // don't allow fields in dummy environments
   else if (ci == field_delimiter_char && !dummy) {
-    if (current_field)
+    if (has_current_field)
       wrap_up_field();
     else
       start_field();
   }
-  else if (current_field && ci == padding_indicator_char)
+  else if (has_current_field && ci == padding_indicator_char)
     add_padding();
   else if (current_tab) {
     if (tab_contents == 0)
@@ -364,7 +364,7 @@ void environment::add_node(node *n)
     n->push_state = get_diversion_state();
   }
 
-  if (current_tab || current_field)
+  if (current_tab || has_current_field)
     n->freeze_space();
   if (line_interrupted) {
     delete n;
@@ -393,7 +393,7 @@ void environment::add_node(node *n)
 
 void environment::add_hyphen_indicator()
 {
-  if (current_tab || line_interrupted || current_field
+  if (current_tab || line_interrupted || has_current_field
       || hyphen_indicator_char != 0)
     return;
   if (line == 0)
@@ -463,7 +463,7 @@ void environment::add_italic_correction()
 
 void environment::space_newline()
 {
-  assert(!current_tab && !current_field);
+  assert(!current_tab && !has_current_field);
   if (line_interrupted)
     return;
   hunits x = H0;
@@ -495,7 +495,7 @@ void environment::space(hunits space_width, hunits sentence_space_width)
 {
   if (line_interrupted)
     return;
-  if (current_field && padding_indicator_char == 0) {
+  if (has_current_field && padding_indicator_char == 0) {
     add_padding();
     return;
   }
@@ -727,7 +727,7 @@ environment::environment(symbol nm)
   leader_node(0),
   tab_char(0),
   leader_char(charset_table['.']),
-  current_field(0),
+  has_current_field(false),
   discarding(false),
   spreading(false),
   margin_character_flags(0),
@@ -821,7 +821,7 @@ environment::environment(const environment *e)
   leader_node(0),
   tab_char(e->tab_char),
   leader_char(e->leader_char),
-  current_field(0),
+  has_current_field(false),
   discarding(false),
   spreading(false),
   margin_character_flags(e->margin_character_flags),
@@ -907,7 +907,7 @@ void environment::copy(const environment *e)
   tabs = e->tabs;
   line_tabs = e->line_tabs;
   current_tab = TAB_NONE;
-  current_field = 0;
+  has_current_field = false;
   margin_character_flags = e->margin_character_flags;
   if (e->margin_character_node)
     margin_character_node = e->margin_character_node->copy();
@@ -1807,7 +1807,7 @@ void environment::newline()
       }
     }
   }
-  if (current_field)
+  if (has_current_field)
     wrap_up_field();
   if (current_tab)
     wrap_up_tab();
@@ -2202,7 +2202,7 @@ void environment::possibly_break_line(bool must_break_here,
 				      bool must_adjust)
 {
   bool was_centered = center_lines > 0;
-  if (!fill || current_tab || current_field || dummy)
+  if (!fill || current_tab || has_current_field || dummy)
     return;
   while (line != 0
 	 && (must_adjust
@@ -2977,7 +2977,7 @@ void environment::wrap_up_tab()
   }
   width_total += tab_amount;
   width_total += tab_width;
-  if (current_field) {
+  if (has_current_field) {
     if (tab_precedes_field) {
       pre_field_width += tab_amount;
       tab_precedes_field = 0;
@@ -3048,12 +3048,12 @@ void environment::handle_tab(bool is_leader)
 
 void environment::start_field()
 {
-  assert(!current_field);
+  assert(!has_current_field);
   hunits d;
   if (distance_to_next_tab(&d) != TAB_NONE) {
     pre_field_width = get_text_length();
     field_distance = d;
-    current_field = 1;
+    has_current_field = true;
     field_spaces = 0;
     tab_field_spaces = 0;
     for (node *p = line; p; p = p->next)
@@ -3115,7 +3115,7 @@ void environment::wrap_up_field()
       }
     }
   }
-  current_field = 0;
+  has_current_field = false;
 }
 
 void environment::add_padding()
@@ -3378,7 +3378,7 @@ void environment::print_env()
   //   char_height, char_slant,
   //   line_interrupted
   //   current_tab, tab_width, tab_distance
-  //   current_field, field_distance, pre_field_width, field_spaces,
+  //   has_current_field, field_distance, pre_field_width, field_spaces,
   //     tab_field_spaces, tab_precedes_field
   //   composite
   //
