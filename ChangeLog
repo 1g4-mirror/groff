@@ -29,6 +29,12 @@
 	(class pending_output_line) [WIDOW_CONTROL]: Update prototype of
 	`environment::output` friend declaration.
 
+	* src/roff/troff/env.cpp (class pending_output_line)
+	(pending_output_line::pending_output_line)
+	(pending_output_line::output, environment::mark_last_line)
+	[WIDOW_CONTROL]: Rename `last_line` to `is_last_line` and demote
+	it from `int` to `bool`.
+
 2024-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (tab_stops::to_string)

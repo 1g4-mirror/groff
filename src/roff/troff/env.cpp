@@ -85,7 +85,7 @@ class pending_output_line {
   vunits post_vs;
   hunits width;
 #ifdef WIDOW_CONTROL
-  int last_line;		// Is it the last line of the paragraph?
+  bool is_last_line;		// Is it the last line of the paragraph?
 #endif /* WIDOW_CONTROL */
 public:
   pending_output_line *next;
@@ -108,7 +108,7 @@ pending_output_line::pending_output_line(node *n, bool nf, vunits v,
 : nd(n), suppress_filling(nf), was_centered(ce), vs(v), post_vs(pv),
   width(w),
 #ifdef WIDOW_CONTROL
-  last_line(0),
+  is_last_line(false),
 #endif /* WIDOW_CONTROL */
   next(p)
 {
@@ -124,10 +124,10 @@ int pending_output_line::output()
   if (was_trap_sprung)
     return 0;
 #ifdef WIDOW_CONTROL
-  if (next && next->last_line && !suppress_filling) {
+  if (next && next->is_last_line && !suppress_filling) {
     curdiv->need(vs + post_vs + vunits(vresolution));
     if (was_trap_sprung) {
-      next->last_line = 0;	// Try to avoid infinite loops.
+      next->is_last_line = false;	// Try to avoid infinite loops.
       return 0;
     }
   }
@@ -205,7 +205,7 @@ void environment::mark_last_line()
   for (p = pending_lines; p->next; p = p->next)
     ;
   if (!p->suppress_filling)
-    p->last_line = 1;
+    p->is_last_line = true;
 }
 
 void widow_control_request()
