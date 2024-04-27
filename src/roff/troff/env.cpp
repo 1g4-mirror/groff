@@ -420,9 +420,9 @@ int environment::get_hyphen_line_count()
   return hyphen_line_count;
 }
 
-int environment::get_center_lines()
+int environment::get_centered_line_count()
 {
-  return center_lines;
+  return centered_line_count;
 }
 
 int environment::get_right_justify_lines()
@@ -700,7 +700,7 @@ environment::environment(symbol nm)
   fill(true),
   line_interrupted(false),
   prev_line_interrupted(0),
-  center_lines(0),
+  centered_line_count(0),
   right_justify_lines(0),
   prev_vertical_spacing(points_to_units(12)),
   vertical_spacing(points_to_units(12)),
@@ -794,7 +794,7 @@ environment::environment(const environment *e)
   fill(e->fill),
   line_interrupted(false),
   prev_line_interrupted(0),
-  center_lines(0),
+  centered_line_count(0),
   right_justify_lines(0),
   prev_vertical_spacing(e->prev_vertical_spacing),
   vertical_spacing(e->vertical_spacing),
@@ -876,7 +876,7 @@ void environment::copy(const environment *e)
   fill = e->fill;
   line_interrupted = false;
   prev_line_interrupted = 0;
-  center_lines = 0;
+  centered_line_count = 0;
   right_justify_lines = 0;
   prev_vertical_spacing = e->prev_vertical_spacing;
   vertical_spacing = e->vertical_spacing;
@@ -1427,7 +1427,7 @@ void center()
   if (want_break)
     curenv->do_break();
   curenv->right_justify_lines = 0;
-  curenv->center_lines = n;
+  curenv->centered_line_count = n;
   curdiv->modified_tag.incl(MTSM_CE);
   tok.next();
 }
@@ -1443,7 +1443,7 @@ void right_justify()
     tok.next();
   if (want_break)
     curenv->do_break();
-  curenv->center_lines = 0;
+  curenv->centered_line_count = 0;
   curenv->right_justify_lines = n;
   curdiv->modified_tag.incl(MTSM_RJ);
   tok.next();
@@ -1828,8 +1828,8 @@ void environment::newline()
     // see environment::final_break
     prev_line_interrupted = is_exit_underway ? 2 : 1;
   }
-  else if (center_lines > 0) {
-    --center_lines;
+  else if (centered_line_count > 0) {
+    --centered_line_count;
     hunits x = target_text_length - width_total;
     if (x > H0)
       saved_indent += x/2;
@@ -2201,7 +2201,7 @@ static void distribute_space(node *n, int nspaces, hunits desired_space,
 void environment::possibly_break_line(bool must_break_here,
 				      bool must_adjust)
 {
-  bool was_centered = center_lines > 0;
+  bool was_centered = centered_line_count > 0;
   if (!fill || current_tab || has_current_field || dummy)
     return;
   while (line != 0
@@ -2369,7 +2369,8 @@ void environment::dump_troff_state()
   if (curenv->have_temporary_indent)
     fprintf(stderr, SPACES "register 'ti' = %d\n",
 	    curenv->temporary_indent.to_units());
-  fprintf(stderr, SPACES "centered lines 'ce' = %d\n", curenv->center_lines);
+  fprintf(stderr, SPACES "centered lines 'ce' = %d\n",
+	  curenv->centered_line_count);
   fprintf(stderr, SPACES "register 'll' = %d\n",
 	  curenv->line_length.to_units());
   fprintf(stderr, SPACES "%sfilling\n", curenv->fill ? "" : "not ");
@@ -2402,7 +2403,7 @@ statem *environment::construct_state(bool has_only_eol)
     }
     if (seen_eol) {
       s->add_tag(MTSM_EOL);
-      s->add_tag(MTSM_CE, center_lines);
+      s->add_tag(MTSM_CE, centered_line_count);
     }
     seen_eol = false;
     return s;
@@ -2427,7 +2428,7 @@ void environment::construct_format_state(node *n, bool was_centered,
     seen_space = false;
     seen_eol = false;
     if (was_centered)
-      n->state->add_tag(MTSM_CE, center_lines+1);
+      n->state->add_tag(MTSM_CE, centered_line_count + 1);
     else
       n->state->add_tag_if_unknown(MTSM_CE, 0);
     n->state->add_tag_if_unknown(MTSM_FI, filling);
@@ -3411,8 +3412,8 @@ void environment::print_env()
 		 : adjust_mode == ADJUST_CENTER
 		     ? "center"
 		     : "right");
-  if (center_lines)
-    errprint("  lines to center: %1\n", center_lines);
+  if (centered_line_count > 0)
+    errprint("  lines to center: %1\n", centered_line_count);
   if (right_justify_lines)
     errprint("  lines to right justify: %1\n", right_justify_lines);
   errprint("  previous vertical spacing: %1u\n",
@@ -4129,7 +4130,7 @@ void init_env_requests()
 #endif /* WIDOW_CONTROL */
   init_int_env_reg(".b", get_bold);
   init_vunits_env_reg(".cdp", get_prev_char_depth);
-  init_int_env_reg(".ce", get_center_lines);
+  init_int_env_reg(".ce", get_centered_line_count);
   init_vunits_env_reg(".cht", get_prev_char_height);
   init_hunits_env_reg(".csk", get_prev_char_skew);
   init_string_env_reg(".ev", get_name_string);

@@ -1,5 +1,25 @@
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename member functions and
+	variables such that it is easier to tell Boolean objects (or
+	even an imperative verb/noun action) from a countable quantity.
+
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::get_centered_line_count)
+	(environment::environment, environment::copy, center)
+	(right_justify, environment::newline)
+	(environment::possibly_break_line)
+	(environment::dump_troff_state, environment::construct_state)
+	(environment::construct_format_state, environment::print_env)
+	(init_env_requests): Rename `center_lines` to
+	`centered_line_count`.  Rename `get_center_lines()` to
+	`get_centered_line_count()`.
+	* src/roff/troff/env.cpp (environment::print_env): Perform
+	integer comparison, not Boolean, test, for clarity and to ensure
+	consistency with *roff integer-to-Boolean conversion idiom.
+
+2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Demote parameter of global `do_underline` function from
 	`int` to `bool`.
 

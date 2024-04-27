@@ -161,7 +161,7 @@ class environment {
   bool fill;
   bool line_interrupted;
   int prev_line_interrupted;	// three-valued Boolean :-|
-  int center_lines;
+  int centered_line_count;
   int right_justify_lines;
   vunits prev_vertical_spacing;
   vunits vertical_spacing;
@@ -317,7 +317,7 @@ public:
   int get_hyphen_line_count();
   hunits get_hyphenation_space();
   hunits get_hyphenation_margin();
-  int get_center_lines();
+  int get_centered_line_count();
   int get_input_trap_line_count();
   int get_input_trap_respects_continuation();
   const char *get_input_trap_macro();
