@@ -1,5 +1,20 @@
 2024-04-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf] use nospace mode if font does not contain
+	/space glyph.
+
+	Gropdf always had two modes, depending on whether the font
+	defined /space or not (using space could make the pdf
+	slightly more compact). Some fonts which don't have /space
+	do have a glyph named /u0020 and the code used that as a
+	space, however I'm not convinced of the robustness of this
+	so, now, if a font has no /space then nospace mode is used.
+
+	* src/devices/gropdf/gropdf.pl: Always use nospace mode if
+	font has no /space glyph.
+
+2024-04-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	[gropdf] Can't handle DecodeParams in Deflate filter.
 
 	If gropdf called with -d (debug) the pdf is produced with

@@ -729,7 +729,7 @@ foreach my $fontno (sort keys %fontlst)
     my @fontdesc=();
     my $chars=$fnt->{TRFCHAR};
     my $glyphs='/.notdef';
-    $glyphs.='/space' if defined($fnt->{NO}->[32]) and $fnt->{NO}->[32] eq 'u0020';
+    $glyphs.='/space' if defined($fnt->{NO}->[32]) and $fnt->{NO}->[32] eq 'space';
     my $fobj;
     @glyphused=@subrused=%seac=();
     push(@subrused,'#0','#1','#2','#3','#4');
@@ -783,7 +783,7 @@ foreach my $fontno (sort keys %fontlst)
 	my @widths;
 	my $miss=-1;
 	my $CharSet=join('',@{$fnt->{CHARSET}->[$j]});
-	push(@{$chars->[$j]},'u0020') if $j==0 and $fnt->{NAM}->{u0020}->[PSNAME];
+	push(@{$chars->[$j]},'space') if $j==0 and $fnt->{NAM}->{space}->[PSNAME];
 
 	foreach my $og (sort { $nam->{$a}->[MINOR] <=> $nam->{$b}->[MINOR] } (@{$chars->[$j]}))
 	{
@@ -3232,8 +3232,6 @@ sub LoadFont
 	    }
 
 	    $r[3]=oct($r[3]) if substr($r[3],0,1) eq '0';
-	    $r[0]='u0020' if $r[3] == 32;
-	    $r[0]="u00".hex($r[3]) if $r[0] eq '---';
 	    $r[4]=$r[0] if !defined($r[4]);
 	    $fnt{NAM}->{$r[0]}=[$p[0],$r[3],'/'.$r[4],undef,undef,$r[6]];
 	    $fnt{NO}->[$r[3]]=$r[0];
@@ -3253,8 +3251,8 @@ sub LoadFont
 
     close($f);
 
-    $fnt{NAM}->{u0020}->[MINOR]=32;
-    $fnt{NAM}->{u0020}->[MAJOR]=0;
+    $fnt{NAM}->{space}->[MINOR]=32;
+    $fnt{NAM}->{space}->[MAJOR]=0;
     my $fno=0;
     my $slant=0;
     $fnt{DIFF}=[];
@@ -3266,7 +3264,7 @@ sub LoadFont
     $fnt{NAM}->{''}=[0,-1,'/.notdef',-1,0];
     $slant=-$fnt{'slant'} if exists($fnt{'slant'});
     $fnt{slant}=$slant;
-    $fnt{nospace}=(!defined($fnt{NAM}->{u0020}->[PSNAME]) or $fnt{NAM}->{u0020}->[PSNAME] ne '/space' or !exists($fnt{'spacewidth'}))?1:0;
+    $fnt{nospace}=(!defined($fnt{NAM}->{space}->[PSNAME]) or $fnt{NAM}->{space}->[PSNAME] ne '/space' or !exists($fnt{'spacewidth'}))?1:0;
     $fnt{'spacewidth'}=270 if !exists($fnt{'spacewidth'});
     Notice("Using nospace mode for font '$ofontnm'") if $fnt{nospace} == 1 and $options & USESPACE;
 
