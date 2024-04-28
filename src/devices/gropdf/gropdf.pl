@@ -4455,7 +4455,7 @@ sub do_C
     my $par=shift;
     my $fnt=$fontlst{$cft}->{FNT};
 
-    PutGlyph($fnt,$par,1);
+    PutGlyph($fnt,$par,1) if $par ne 'space';
 }
 
 sub do_c
@@ -4479,7 +4479,7 @@ sub do_N
     }
 
     my $chnm=$fnt->{NO}->[$par];
-    PutGlyph($fnt,$chnm,1);
+    PutGlyph($fnt,$chnm,1) if $chnm ne 'space';
 }
 
 sub do_n

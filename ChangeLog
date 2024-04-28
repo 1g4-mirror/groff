@@ -1,5 +1,11 @@
 2024-04-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf] ignore 'Cspace' as input
+
+	* src/devices/gropdf/gropdf.pl: As grops does.
+
+2024-04-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	[gropdf] use nospace mode if font does not contain
 	/space glyph.
 
