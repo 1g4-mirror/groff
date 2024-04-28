@@ -90,7 +90,7 @@ public:
   pending_output_line *next;
 
   pending_output_line(node *, bool, vunits, vunits, hunits, bool,
-		      pending_output_line * = 0);
+		      pending_output_line * = 0 /* nullptr */);
   ~pending_output_line();
   bool output();
 
@@ -133,7 +133,7 @@ bool pending_output_line::output()
 #endif
   curenv->construct_format_state(nd, was_centered, !suppress_filling);
   curdiv->output(nd, suppress_filling, vs, post_vs, width);
-  nd = 0;
+  nd = 0 /* nullptr */;
   return true;
 }
 
@@ -221,7 +221,7 @@ void widow_control_request()
 
 /* font_size functions */
 
-size_range *font_size::size_table = 0;
+size_range *font_size::size_table = 0 /* nullptr */;
 int font_size::nranges = 0;
 
 extern "C" {
@@ -296,7 +296,7 @@ void leader_character()
 void environment::add_char(charinfo *ci)
 {
   int s;
-  node *gc_np = 0;
+  node *gc_np = 0 /* nullptr */;
   if (line_interrupted)
     ;
   // don't allow fields in dummy environments
@@ -309,7 +309,7 @@ void environment::add_char(charinfo *ci)
   else if (has_current_field && ci == padding_indicator_char)
     add_padding();
   else if (current_tab != TAB_NONE) {
-    if (tab_contents == 0)
+    if (tab_contents == 0 /* nullptr */)
       tab_contents = new line_start_node;
     if (ci != hyphen_indicator_char)
       tab_contents = tab_contents->add_char(ci, this, &tab_width, &s, &gc_np);
@@ -317,7 +317,7 @@ void environment::add_char(charinfo *ci)
       tab_contents = tab_contents->add_discretionary_hyphen();
   }
   else {
-    if (line == 0)
+    if (line == 0 /* nullptr */)
       start_line();
 #if 0
     fprintf(stderr, "current line is\n");
@@ -333,11 +333,11 @@ void environment::add_char(charinfo *ci)
   line->debug_node_list();
 #endif
   if ((!suppress_push) && gc_np) {
-    if (gc_np && (gc_np->state == 0)) {
+    if (gc_np && (gc_np->state == 0 /* nullptr */)) {
       gc_np->state = construct_state(false);
       gc_np->push_state = get_diversion_state();
     }
-    else if (line && (line->state == 0)) {
+    else if (line && (line->state == 0 /* nullptr */)) {
       line->state = construct_state(false);
       line->push_state = get_diversion_state();
     }
@@ -355,7 +355,7 @@ node *environment::make_char_node(charinfo *ci)
 
 void environment::add_node(node *nd)
 {
-  if (nd == 0)
+  if (nd == 0 /* nullptr */)
     return;
   if (!suppress_push) {
     if (nd->is_special && nd->state == NULL)
@@ -374,7 +374,7 @@ void environment::add_node(node *nd)
     tab_width += nd->width();
   }
   else {
-    if (line == 0) {
+    if (line == 0 /* nullptr */) {
       if (discarding && nd->discardable()) {
 	// XXX possibly: input_line_start -= nd->width();
 	delete nd;
@@ -393,9 +393,9 @@ void environment::add_node(node *nd)
 void environment::add_hyphen_indicator()
 {
   if ((current_tab != TAB_NONE) || line_interrupted || has_current_field
-      || hyphen_indicator_char != 0)
+      || hyphen_indicator_char != 0 /* nullptr */)
     return;
-  if (line == 0)
+  if (line == 0 /* nullptr */)
     start_line();
   line = line->add_discretionary_hyphen();
 }
@@ -476,7 +476,7 @@ void environment::space_newline()
   width_list *w = new width_list(sw, ssw);
   if (node_list_ends_sentence(line) == 1)
     w->next = new width_list(sw, ssw);
-  if (line != 0 && line->merge_space(x, sw, ssw)) {
+  if (line != 0 /* nullptr */ && line->merge_space(x, sw, ssw)) {
     width_total += x;
     return;
   }
@@ -494,7 +494,7 @@ void environment::space(hunits space_width, hunits sentence_space_width)
 {
   if (line_interrupted)
     return;
-  if (has_current_field && padding_indicator_char == 0) {
+  if (has_current_field && padding_indicator_char == 0 /* nullptr */) {
     add_padding();
     return;
   }
@@ -900,8 +900,8 @@ void environment::copy(const environment *e)
   no_break_control_character = e->no_break_control_character;
   hyphen_indicator_char = e->hyphen_indicator_char;
   spreading = false;
-  line = 0;
-  pending_lines = 0;
+  line = 0 /* nullptr */;
+  pending_lines = 0 /* nullptr */;
   discarding = false;
   tabs = e->tabs;
   using_line_tabs = e->using_line_tabs;
@@ -911,7 +911,7 @@ void environment::copy(const environment *e)
   if (e->margin_character_node)
     margin_character_node = e->margin_character_node->copy();
   margin_character_distance = e->margin_character_distance;
-  numbering_nodes = 0;
+  numbering_nodes = 0 /* nullptr */;
   number_text_separation = e->number_text_separation;
   line_number_multiple = e->line_number_multiple;
   line_number_indent = e->line_number_indent;
@@ -925,7 +925,7 @@ void environment::copy(const environment *e)
   dummy = e->dummy;
   family = e->family;
   prev_family = e->prev_family;
-  leader_node = 0;
+  leader_node = 0 /* nullptr */;
 #ifdef WIDOW_CONTROL
   want_widow_control = e->want_widow_control;
 #endif /* WIDOW_CONTROL */
@@ -976,7 +976,7 @@ bool environment::set_no_break_control_character(unsigned char c)
 hunits environment::get_input_line_position()
 {
   hunits n;
-  if (line == 0)
+  if (line == 0 /* nullptr */)
     n = -input_line_start;
   else
     n = width_total - input_line_start;
@@ -987,7 +987,7 @@ hunits environment::get_input_line_position()
 
 void environment::set_input_line_position(hunits n)
 {
-  input_line_start = line == 0 ? -n : width_total - n;
+  input_line_start = line == 0 /* nullptr */ ? -n : width_total - n;
   if (current_tab != TAB_NONE)
     input_line_start += tab_width;
 }
@@ -1122,7 +1122,7 @@ vunits environment::get_prev_char_depth()
 
 hunits environment::get_text_length()
 {
-  hunits n = line == 0 ? H0 : width_total;
+  hunits n = line == 0 /* nullptr */ ? H0 : width_total;
   if (current_tab != TAB_NONE)
     n += tab_width;
   return n;
@@ -1180,7 +1180,7 @@ node *environment::extract_output_line()
   if (current_tab != TAB_NONE)
     wrap_up_tab();
   node *nd = line;
-  line = 0;
+  line = 0 /* nullptr */;
   return nd;
 }
 
@@ -1194,7 +1194,7 @@ void environment_switch()
   else {
     symbol nm = get_long_name();
     if (nm.is_null()) {
-      if (env_stack == 0)
+      if (env_stack == 0 /* nullptr */)
 	error("environment stack underflow");
       else {
 	bool seen_space = curenv->seen_space;
@@ -1224,7 +1224,7 @@ void environment_switch()
 
 void environment_copy()
 {
-  environment *e=0;
+  environment *e = 0 /* nullptr */;
   tok.skip();
   symbol nm = get_long_name();
   if (nm.is_null()) {
@@ -1273,7 +1273,7 @@ static void select_font()
     is_number = false;
   else {
     for (const char *p = s.contents();
-	 p != 0 && *p != '\0';
+	 p != 0 /* nullptr */ && *p != '\0';
 	 p++)
       if (!csdigit(*p)) {
 	is_number = false;
@@ -1645,7 +1645,7 @@ void margin_character()
     curenv->margin_character_flags &= ~MARGIN_CHARACTER_ON;
     if (curenv->margin_character_flags == 0) {
       delete curenv->margin_character_node;
-      curenv->margin_character_node = 0;
+      curenv->margin_character_node = 0 /* nullptr */;
     }
   }
   skip_line();
@@ -1654,9 +1654,9 @@ void margin_character()
 void number_lines()
 {
   delete_node_list(curenv->numbering_nodes);
-  curenv->numbering_nodes = 0;
+  curenv->numbering_nodes = 0 /* nullptr */;
   if (has_arg()) {
-    node *nd = 0;
+    node *nd = 0 /* nullptr */;
     for (int i = '9'; i >= '0'; i--) {
       node *tem = make_node(charset_table[i], curenv);
       if (!tem) {
@@ -1814,14 +1814,14 @@ void environment::newline()
   if (current_tab != TAB_NONE)
     wrap_up_tab();
   // strip trailing spaces
-  while (line != 0 && line->discardable()) {
+  while (line != 0 /* nullptr */ && line->discardable()) {
     width_total -= line->width();
     space_total -= line->nspaces();
     node *tem = line;
     line = line->next;
     delete tem;
   }
-  node *to_be_output = 0;
+  node *to_be_output = 0 /* nullptr */;
   hunits to_be_output_width;
   prev_line_interrupted = 0;
   if (dummy)
@@ -1839,7 +1839,7 @@ void environment::newline()
     to_be_output = line;
     was_centered = true;
     to_be_output_width = width_total;
-    line = 0;
+    line = 0; /* nullptr */
   }
   else if (right_aligned_line_count > 0) {
     --right_aligned_line_count;
@@ -1848,16 +1848,16 @@ void environment::newline()
       saved_indent += x;
     to_be_output = line;
     to_be_output_width = width_total;
-    line = 0;
+    line = 0 /* nullptr */;
   }
   else if (fill)
     space_newline();
   else {
     to_be_output = line;
     to_be_output_width = width_total;
-    line = 0;
+    line = 0 /* nullptr */;
   }
-  input_line_start = line == 0 ? H0 : width_total;
+  input_line_start = line == 0 /* nullptr */ ? H0 : width_total;
   if (to_be_output) {
     if (is_html && !fill) {
       curdiv->modified_tag.incl(MTSM_EOL);
@@ -1890,7 +1890,7 @@ void environment::output_line(node *nd, hunits width, bool was_centered)
     node *tem;
     if (!margin_character_flags) {
       tem = margin_character_node;
-      margin_character_node = 0;
+      margin_character_node = 0 /* nullptr */;
     }
     else
       tem = margin_character_node->copy();
@@ -1898,7 +1898,7 @@ void environment::output_line(node *nd, hunits width, bool was_centered)
     nd = tem;
     width += tem->width();
   }
-  node *nn = 0;
+  node *nn = 0 /* nullptr */;
   while (nd != 0 /* nullptr */) {
     node *tem = nd->next;
     nd->next = nn;
@@ -1942,7 +1942,7 @@ void environment::output_line(node *nd, hunits width, bool was_centered)
 
 void environment::start_line()
 {
-  assert(line == 0);
+  assert(line == 0 /* nullptr */);
   discarding = false;
   line = new line_start_node;
   if (have_temporary_indent) {
@@ -1997,18 +1997,18 @@ breakpoint *environment::choose_breakpoint()
   hunits x = width_total;
   int s = space_total;
   node *nd = line;
-  breakpoint *best_bp = 0;	// the best breakpoint so far
+  breakpoint *best_bp = 0 /* nullptr */; // the best breakpoint so far
   bool best_bp_fits = false;
   while (nd != 0 /* nullptr */) {
     x -= nd->width();
     s -= nd->nspaces();
     breakpoint *bp = nd->get_breakpoints(x, s);
-    while (bp != 0) {
+    while (bp != 0 /* nullptr */) {
       if (bp->width <= target_text_length) {
 	if (!bp->hyphenated) {
 	  breakpoint *tem = bp->next;
-	  bp->next = 0;
-	  while (tem != 0) {
+	  bp->next = 0 /* nullptr */;
+	  while (tem != 0 /* nullptr */) {
 	    breakpoint *tem1 = tem;
 	    tem = tem->next;
 	    delete tem1;
@@ -2048,8 +2048,8 @@ breakpoint *environment::choose_breakpoint()
 	    if (best_bp)
 	      delete best_bp;
 	    breakpoint *tem = bp->next;
-	    bp->next = 0;
-	    while (tem != 0) {
+	    bp->next = 0 /* nullptr */;
+	    while (tem != 0 /* nullptr */) {
 	      breakpoint *tem1 = tem;
 	      tem = tem->next;
 	      delete tem1;
@@ -2090,30 +2090,32 @@ breakpoint *environment::choose_breakpoint()
 
 void environment::hyphenate_line(bool must_break_here)
 {
-  assert(line != 0);
+  assert(line != 0 /* nullptr */);
   hyphenation_type prev_type = line->get_hyphenation_type();
   node **startp;
   if (must_break_here)
     startp = &line;
   else
-    for (startp = &line->next; *startp != 0; startp = &(*startp)->next) {
+    for (startp = &line->next; *startp != 0 /* nullptr */;
+	 startp = &(*startp)->next) {
       hyphenation_type this_type = (*startp)->get_hyphenation_type();
       if (prev_type == HYPHEN_BOUNDARY && this_type == HYPHEN_MIDDLE)
 	break;
       prev_type = this_type;
     }
-  if (*startp == 0)
+  if (*startp == 0 /* nullptr */)
     return;
   node *tem = *startp;
   do {
     tem = tem->next;
-  } while (tem != 0 && tem->get_hyphenation_type() == HYPHEN_MIDDLE);
+  } while (tem != 0 /* nullptr */
+	   && tem->get_hyphenation_type() == HYPHEN_MIDDLE);
   bool inhibit = (tem != 0 /* nullptr */
-		  && tem->get_hyphenation_type() == HYPHEN_INHIBIT);
+		 && tem->get_hyphenation_type() == HYPHEN_INHIBIT);
   node *end = tem;
-  hyphen_list *sl = 0;
+  hyphen_list *sl = 0 /* nullptr */;
   tem = *startp;
-  node *forward = 0;
+  node *forward = 0 /* nullptr */;
   int i = 0;
   while (tem != end) {
     sl = tem->get_hyphen_list(sl, &i);
@@ -2127,7 +2129,7 @@ void environment::hyphenate_line(bool must_break_here)
     int prev_code = 0;
     for (hyphen_list *h = sl; h; h = h->next) {
       h->breakable = (prev_code != 0
-		      && h->next != 0
+		      && h->next != 0 /* nullptr */
 		      && h->next->hyphenation_code != 0);
       prev_code = h->hyphenation_code;
     }
@@ -2144,10 +2146,10 @@ void environment::hyphenate_line(bool must_break_here)
 	       + (hyphenation_mode & HYPHEN_NOT_FIRST_CHARS ? 1 : 0)
 	       + (hyphenation_mode & HYPHEN_NOT_LAST_CHARS ? 1 : 0)))
     hyphenate(sl, hyphenation_mode);
-  while (forward != 0) {
+  while (forward != 0 /* nullptr */) {
     node *tem1 = forward;
     forward = forward->next;
-    tem1->next = 0;
+    tem1->next = 0 /* nullptr */;
     tem = tem1->add_self(tem, &sl);
   }
   *startp = tem;
@@ -2155,7 +2157,7 @@ void environment::hyphenate_line(bool must_break_here)
 
 static node *node_list_reverse(node *nd)
 {
-  node *res = 0;
+  node *res = 0 /* nullptr */;
   while (nd) {
     node *tem = nd;
     nd = nd->next;
@@ -2208,14 +2210,14 @@ void environment::possibly_break_line(bool must_break_here,
   bool was_centered = centered_line_count > 0;
   if (!fill || (current_tab != TAB_NONE) || has_current_field || dummy)
     return;
-  while (line != 0
+  while (line != 0 /* nullptr */
 	 && (must_adjust
 	     // When a macro follows a paragraph in fill mode, the
 	     // current line should not be empty.
 	     || (width_total - line->width()) > target_text_length)) {
     hyphenate_line(must_break_here);
     breakpoint *bp = choose_breakpoint();
-    if (bp == 0)
+    if (bp == 0 /* nullptr */)
       // we'll find one eventually
       return;
     node *pre, *post;
@@ -2259,16 +2261,16 @@ void environment::possibly_break_line(bool must_break_here,
     delete bp;
     space_total = 0;
     width_total = 0;
-    node *first_non_discardable = 0;
+    node *first_non_discardable = 0 /* nullptr */;
     node *tem;
-    for (tem = line; tem != 0; tem = tem->next)
+    for (tem = line; tem != 0 /* nullptr */; tem = tem->next)
       if (!tem->discardable())
 	first_non_discardable = tem;
     node *to_be_discarded;
     if (first_non_discardable) {
       to_be_discarded = first_non_discardable->next;
-      first_non_discardable->next = 0;
-      for (tem = line; tem != 0; tem = tem->next) {
+      first_non_discardable->next = 0 /* nullptr */;
+      for (tem = line; tem != 0 /* nullptr */; tem = tem->next) {
 	width_total += tem->width();
 	space_total += tem->nspaces();
       }
@@ -2277,18 +2279,18 @@ void environment::possibly_break_line(bool must_break_here,
     else {
       discarding = true;
       to_be_discarded = line;
-      line = 0;
+      line = 0 /* nullptr */;
     }
     // Do output_line() here so that line will be 0 iff the
     // the environment will be empty.
     output_line(pre, output_width, was_centered);
-    while (to_be_discarded != 0) {
+    while (to_be_discarded != 0 /* nullptr */) {
       tem = to_be_discarded;
       to_be_discarded = to_be_discarded->next;
       input_line_start -= tem->width();
       delete tem;
     }
-    if (line != 0) {
+    if (line != 0 /* nullptr */) {
       if (have_temporary_indent) {
 	saved_indent = temporary_indent;
 	have_temporary_indent = false;
@@ -2421,9 +2423,9 @@ void environment::construct_format_state(node *nd, bool was_centered,
 {
   if (is_html) {
     // find first glyph node which has a state.
-    while (nd != 0 /* nullptr */ && nd->state == 0)
+    while (nd != 0 /* nullptr */ && nd->state == 0 /* nullptr */)
       nd = nd->next;
-    if (nd == 0 || (nd->state == 0))
+    if (nd == 0 /* nullptr */ || (nd->state == 0 /* nullptr */))
       return;
     if (seen_space)
       nd->state->add_tag(MTSM_SP, seen_space);
@@ -2438,7 +2440,7 @@ void environment::construct_format_state(node *nd, bool was_centered,
     nd->state->add_tag_if_unknown(MTSM_FI, filling);
     nd = nd->next;
     while (nd != 0 /* nullptr */) {
-      if (nd->state != 0) {
+      if (nd->state != 0 /* nullptr */) {
 	nd->state->sub_tag_ce();
 	nd->state->add_tag_if_unknown(MTSM_FI, filling);
       }
@@ -2451,9 +2453,9 @@ void environment::construct_new_line_state(node *nd)
 {
   if (is_html) {
     // find first glyph node which has a state.
-    while (nd != 0 /* nullptr */ && nd->state == 0)
+    while (nd != 0 /* nullptr */ && nd->state == 0 /* nullptr */)
       nd = nd->next;
-    if (nd == 0 || nd->state == 0)
+    if (nd == 0 /* nullptr */ || nd->state == 0 /* nullptr */)
       return;
     if (seen_space)
       nd->state->add_tag(MTSM_SP, seen_space);
@@ -2483,7 +2485,7 @@ void environment::do_break(bool want_adjustment)
     }
     possibly_break_line(false, want_adjustment);
   }
-  while (line != 0 && line->discardable()) {
+  while (line != 0 /* nullptr */ && line->discardable()) {
     width_total -= line->width();
     space_total -= line->nspaces();
     node *tem = line;
@@ -2492,7 +2494,7 @@ void environment::do_break(bool want_adjustment)
   }
   discarding = false;
   input_line_start = H0;
-  if (line != 0) {
+  if (line != 0 /* nullptr */) {
     if (fill) {
       switch (adjust_mode) {
       case ADJUST_CENTER:
@@ -2505,7 +2507,7 @@ void environment::do_break(bool want_adjustment)
       }
     }
     node *tem = line;
-    line = 0;
+    line = 0 /* nullptr */;
     output_line(tem, width_total, was_centered);
     hyphen_line_count = 0;
   }
@@ -2522,7 +2524,8 @@ void environment::do_break(bool want_adjustment)
 
 bool environment::is_empty()
 {
-  return (current_tab == TAB_NONE) && line == 0 && pending_lines == 0;
+  return (current_tab == TAB_NONE) && line == 0 /* nullptr */
+	  && pending_lines == 0 /* nullptr */;
 }
 
 void do_break_request(bool want_adjustment)
@@ -2570,9 +2573,9 @@ void title()
   curenv->prev_glyph_color = env.prev_glyph_color;
   curenv->fill_color = env.fill_color;
   curenv->prev_fill_color = env.prev_fill_color;
-  node *nd = 0;
+  node *nd = 0 /* nullptr */;
   node *p = part[2];
-  while (p != 0) {
+  while (p != 0 /* nullptr */) {
     node *tem = p;
     p = p->next;
     tem->next = nd;
@@ -2727,7 +2730,7 @@ tab_type tab_stops::distance_to_next_tab(hunits curpos,
     *nextpos  = tem->pos;
     return tem->type;
   }
-  if (repeated_list == 0)
+  if (repeated_list == 0 /* nullptr */)
     return TAB_NONE;
   hunits base = lastpos;
   for (;;) {
@@ -2748,7 +2751,7 @@ tab_type tab_stops::distance_to_next_tab(hunits curpos,
 
 const char *tab_stops::to_string()
 {
-  static char *buf = 0;
+  static char *buf = 0 /* nullptr */;
   static int buf_size = 0;
   // figure out a maximum on the amount of space we can need
   int count = 0;
@@ -2943,7 +2946,7 @@ void field_characters()
   if (field_delimiter_char)
     padding_indicator_char = get_optional_char();
   else
-    padding_indicator_char = 0;
+    padding_indicator_char = 0 /* nullptr */;
   skip_line();
 }
 
@@ -2993,15 +2996,16 @@ void environment::wrap_up_tab()
     field_distance -= tab_amount;
     field_spaces += tab_field_spaces;
   }
-  if (tab_contents != 0) {
+  if (tab_contents != 0 /* nullptr */) {
     node *tem;
-    for (tem = tab_contents; tem->next != 0; tem = tem->next)
+    for (tem = tab_contents; tem->next != 0 /* nullptr */;
+	 tem = tem->next)
       ;
     tem->next = line;
     line = tab_contents;
   }
   tab_field_spaces = 0;
-  tab_contents = 0;
+  tab_contents = 0 /* nullptr */;
   tab_width = H0;
   tab_distance = H0;
   current_tab = TAB_NONE;
@@ -3049,7 +3053,7 @@ void environment::handle_tab(bool is_leader)
   }
   tab_width = 0;
   tab_distance = d;
-  tab_contents = 0;
+  tab_contents = 0 /* nullptr */;
   current_tab = t;
   tab_field_spaces = 0;
 }
@@ -3109,13 +3113,14 @@ void environment::wrap_up_field()
 	    width_total += tab_distance;
 	    current_tab = TAB_NONE;
 	  }
-	  if (tab_contents != 0) {
+	  if (tab_contents != 0 /* nullptr */) {
 	    node *tem;
-	    for (tem = tab_contents; tem->next != 0; tem = tem->next)
+	    for (tem = tab_contents; tem->next != 0 /* nullptr */;
+		 tem = tem->next)
 	      ;
 	    tem->next = line;
 	    line = tab_contents;
-	    tab_contents = 0;
+	    tab_contents = 0 /* nullptr */;
 	  }
 	  tab_width = H0;
 	  tab_distance = H0;
@@ -3133,7 +3138,7 @@ void environment::add_padding()
     tab_field_spaces++;
   }
   else {
-    if (line == 0)
+    if (line == 0 /* nullptr */)
       start_line();
     line = new space_node(H0, get_fill_color(), line);
     field_spaces++;
@@ -3917,7 +3922,7 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
   errno = 0;
   char *path = 0;
   FILE *fp = mac_path->open_file(name, &path);
-  if (fp == 0) {
+  if (fp == 0 /* nullptr */) {
     error("can't find hyphenation patterns file '%1'", name);
     return;
   }
@@ -4221,7 +4226,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
       if (pos != 0) {
 	int j = 0;
 	int i = 1;
-	for (tem = h; tem != 0; tem = tem->next, i++)
+	for (tem = h; tem != 0 /* nullptr */; tem = tem->next, i++)
 	  if (pos[j] == i) {
 	    tem->hyphen = 1;
 	    j++;
