@@ -1,3 +1,18 @@
+2024-04-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
+	(pending_output_line::pending_output_line)
+	(environment::add_node, environment::get_prev_char)
+	(environment::extract_output_line, environment::output_line)
+	(environment::choose_breakpoint, node_list_reverse)
+	(distribute_space, environment::construct_state)
+	(environment::construct_format_state)
+	(environment::construct_new_line_state)
+	(environment::make_tab_node): Rename function parameters and
+	local variables from `n` to `nd` (or `nod` in one case when `nd`
+	was already in use) when they are of `node *` type; the file
+	also uses `n` for integers, which is confusing.
+
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (select_font): Fix code style nit.

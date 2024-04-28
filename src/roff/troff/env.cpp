@@ -101,10 +101,10 @@ public:
 #endif /* WIDOW_CONTROL */
 };
 
-pending_output_line::pending_output_line(node *n, bool nf, vunits v,
+pending_output_line::pending_output_line(node *nod, bool nf, vunits v,
 					 vunits pv, hunits w, bool ce,
 					 pending_output_line *p)
-: nd(n), suppress_filling(nf), was_centered(ce), vs(v), post_vs(pv),
+: nd(nod), suppress_filling(nf), was_centered(ce), vs(v), post_vs(pv),
   width(w),
 #ifdef WIDOW_CONTROL
   is_last_line(false),
@@ -353,39 +353,39 @@ node *environment::make_char_node(charinfo *ci)
   return make_node(ci, this);
 }
 
-void environment::add_node(node *n)
+void environment::add_node(node *nd)
 {
-  if (n == 0)
+  if (nd == 0)
     return;
   if (!suppress_push) {
-    if (n->is_special && n->state == NULL)
-      n->state = construct_state(false);
-    n->push_state = get_diversion_state();
+    if (nd->is_special && nd->state == NULL)
+      nd->state = construct_state(false);
+    nd->push_state = get_diversion_state();
   }
 
   if ((current_tab != TAB_NONE) || has_current_field)
-    n->freeze_space();
+    nd->freeze_space();
   if (line_interrupted) {
-    delete n;
+    delete nd;
   }
   else if (current_tab != TAB_NONE) {
-    n->next = tab_contents;
-    tab_contents = n;
-    tab_width += n->width();
+    nd->next = tab_contents;
+    tab_contents = nd;
+    tab_width += nd->width();
   }
   else {
     if (line == 0) {
-      if (discarding && n->discardable()) {
-	// XXX possibly: input_line_start -= n->width();
-	delete n;
+      if (discarding && nd->discardable()) {
+	// XXX possibly: input_line_start -= nd->width();
+	delete nd;
 	return;
       }
       start_line();
     }
-    width_total += n->width();
-    space_total += n->nspaces();
-    n->next = line;
-    line = n;
+    width_total += nd->width();
+    space_total += nd->nspaces();
+    nd->next = line;
+    line = nd;
     construct_new_line_state(line);
   }
 }
@@ -1075,9 +1075,9 @@ hunits environment::get_title_length()
 
 node *environment::get_prev_char()
 {
-  for (node *n = (current_tab != TAB_NONE) ? tab_contents : line; n;
-       n = n->next) {
-    node *last = n->last_char_node();
+  for (node *nd = (current_tab != TAB_NONE) ? tab_contents : line; nd;
+       nd = nd->next) {
+    node *last = nd->last_char_node();
     if (last)
       return last;
   }
@@ -1179,9 +1179,9 @@ node *environment::extract_output_line()
 {
   if (current_tab != TAB_NONE)
     wrap_up_tab();
-  node *n = line;
+  node *nd = line;
   line = 0;
-  return n;
+  return nd;
 }
 
 /* environment related requests */
@@ -1877,13 +1877,13 @@ void environment::newline()
   }
 }
 
-void environment::output_line(node *n, hunits width, bool was_centered)
+void environment::output_line(node *nd, hunits width, bool was_centered)
 {
   prev_text_length = width;
   if (margin_character_flags) {
     hunits d = line_length + margin_character_distance - saved_indent - width;
     if (d > 0) {
-      n = new hmotion_node(d, get_fill_color(), n);
+      nd = new hmotion_node(d, get_fill_color(), nd);
       width += d;
     }
     margin_character_flags &= ~MARGIN_CHARACTER_NEXT;
@@ -1894,16 +1894,16 @@ void environment::output_line(node *n, hunits width, bool was_centered)
     }
     else
       tem = margin_character_node->copy();
-    tem->next = n;
-    n = tem;
+    tem->next = nd;
+    nd = tem;
     width += tem->width();
   }
   node *nn = 0;
-  while (n != 0 /* nullptr */) {
-    node *tem = n->next;
-    n->next = nn;
-    nn = n;
-    n = tem;
+  while (nd != 0 /* nullptr */) {
+    node *tem = nd->next;
+    nd->next = nn;
+    nn = nd;
+    nd = tem;
   }
   if (!saved_indent.is_zero())
     nn = new hmotion_node(saved_indent, get_fill_color(), nn);
@@ -1996,13 +1996,13 @@ breakpoint *environment::choose_breakpoint()
 {
   hunits x = width_total;
   int s = space_total;
-  node *n = line;
+  node *nd = line;
   breakpoint *best_bp = 0;	// the best breakpoint so far
   bool best_bp_fits = false;
-  while (n != 0 /* nullptr */) {
-    x -= n->width();
-    s -= n->nspaces();
-    breakpoint *bp = n->get_breakpoints(x, s);
+  while (nd != 0 /* nullptr */) {
+    x -= nd->width();
+    s -= nd->nspaces();
+    breakpoint *bp = nd->get_breakpoints(x, s);
     while (bp != 0) {
       if (bp->width <= target_text_length) {
 	if (!bp->hyphenated) {
@@ -2078,7 +2078,7 @@ breakpoint *environment::choose_breakpoint()
 	bp = bp->next;
       }
     }
-    n = n->next;
+    nd = nd->next;
   }
   if (best_bp) {
     if (!best_bp_fits)
@@ -2153,19 +2153,20 @@ void environment::hyphenate_line(bool must_break_here)
   *startp = tem;
 }
 
-static node *node_list_reverse(node *n)
+static node *node_list_reverse(node *nd)
 {
   node *res = 0;
-  while (n) {
-    node *tem = n;
-    n = n->next;
+  while (nd) {
+    node *tem = nd;
+    nd = nd->next;
     tem->next = res;
     res = tem;
   }
   return res;
 }
 
-static void distribute_space(node *n, int nspaces, hunits desired_space,
+static void distribute_space(node *nd, int nspaces,
+			     hunits desired_space,
 			     bool force_reverse_node_list = false)
 {
   if (desired_space.is_zero() || nspaces == 0)
@@ -2184,7 +2185,7 @@ static void distribute_space(node *n, int nspaces, hunits desired_space,
   // we distribute space initially from the left, unlike AT&T troff.
   static bool do_reverse_node_list = false;
   if (force_reverse_node_list || do_reverse_node_list)
-    n = node_list_reverse(n);
+    nd = node_list_reverse(nd);
   if (!force_reverse_node_list && spread_limit >= 0
       && desired_space.to_units() > 0) {
     hunits em = curenv->get_size();
@@ -2193,10 +2194,10 @@ static void distribute_space(node *n, int nspaces, hunits desired_space,
     if (Ems > spread_limit)
       output_warning(WARN_BREAK, "spreading %1m per space", Ems);
   }
-  for (node *tem = n; tem; tem = tem->next)
+  for (node *tem = nd; tem; tem = tem->next)
     tem->spread_space(&nspaces, &desired_space);
   if (force_reverse_node_list || do_reverse_node_list)
-    (void)node_list_reverse(n);
+    (void)node_list_reverse(nd);
   if (!force_reverse_node_list)
     do_reverse_node_list = !do_reverse_node_list;
 }
@@ -2415,49 +2416,49 @@ statem *environment::construct_state(bool has_only_eol)
     return NULL;
 }
 
-void environment::construct_format_state(node *n, bool was_centered,
+void environment::construct_format_state(node *nd, bool was_centered,
 					 int filling)
 {
   if (is_html) {
     // find first glyph node which has a state.
-    while (n != 0 /* nullptr */ && n->state == 0)
-      n = n->next;
-    if (n == 0 || (n->state == 0))
+    while (nd != 0 /* nullptr */ && nd->state == 0)
+      nd = nd->next;
+    if (nd == 0 || (nd->state == 0))
       return;
     if (seen_space)
-      n->state->add_tag(MTSM_SP, seen_space);
+      nd->state->add_tag(MTSM_SP, seen_space);
     if (seen_eol && topdiv == curdiv)
-      n->state->add_tag(MTSM_EOL);
+      nd->state->add_tag(MTSM_EOL);
     seen_space = false;
     seen_eol = false;
     if (was_centered)
-      n->state->add_tag(MTSM_CE, centered_line_count + 1);
+      nd->state->add_tag(MTSM_CE, centered_line_count + 1);
     else
-      n->state->add_tag_if_unknown(MTSM_CE, 0);
-    n->state->add_tag_if_unknown(MTSM_FI, filling);
-    n = n->next;
-    while (n != 0 /* nullptr */) {
-      if (n->state != 0) {
-	n->state->sub_tag_ce();
-	n->state->add_tag_if_unknown(MTSM_FI, filling);
+      nd->state->add_tag_if_unknown(MTSM_CE, 0);
+    nd->state->add_tag_if_unknown(MTSM_FI, filling);
+    nd = nd->next;
+    while (nd != 0 /* nullptr */) {
+      if (nd->state != 0) {
+	nd->state->sub_tag_ce();
+	nd->state->add_tag_if_unknown(MTSM_FI, filling);
       }
-      n = n->next;
+      nd = nd->next;
     }
   }
 }
 
-void environment::construct_new_line_state(node *n)
+void environment::construct_new_line_state(node *nd)
 {
   if (is_html) {
     // find first glyph node which has a state.
-    while (n != 0 /* nullptr */ && n->state == 0)
-      n = n->next;
-    if (n == 0 || n->state == 0)
+    while (nd != 0 /* nullptr */ && nd->state == 0)
+      nd = nd->next;
+    if (nd == 0 || nd->state == 0)
       return;
     if (seen_space)
-      n->state->add_tag(MTSM_SP, seen_space);
+      nd->state->add_tag(MTSM_SP, seen_space);
     if (seen_eol && topdiv == curdiv)
-      n->state->add_tag(MTSM_EOL);
+      nd->state->add_tag(MTSM_EOL);
     seen_space = false;
     seen_eol = false;
   }
@@ -2569,34 +2570,36 @@ void title()
   curenv->prev_glyph_color = env.prev_glyph_color;
   curenv->fill_color = env.fill_color;
   curenv->prev_fill_color = env.prev_fill_color;
-  node *n = 0;
+  node *nd = 0;
   node *p = part[2];
   while (p != 0) {
     node *tem = p;
     p = p->next;
-    tem->next = n;
-    n = tem;
+    tem->next = nd;
+    nd = tem;
   }
   hunits length_title(curenv->title_length);
   hunits f = length_title - part_width[1];
   hunits f2 = f/2;
-  n = new hmotion_node(f2 - part_width[2], curenv->get_fill_color(), n);
+  nd = new hmotion_node(f2 - part_width[2], curenv->get_fill_color(),
+			nd);
   p = part[1];
   while (p != 0) {
     node *tem = p;
     p = p->next;
-    tem->next = n;
-    n = tem;
+    tem->next = nd;
+    nd = tem;
   }
-  n = new hmotion_node(f - f2 - part_width[0], curenv->get_fill_color(), n);
+  nd = new hmotion_node(f - f2 - part_width[0],
+			curenv->get_fill_color(), nd);
   p = part[0];
   while (p != 0) {
     node *tem = p;
     p = p->next;
-    tem->next = n;
-    n = tem;
+    tem->next = nd;
+    nd = tem;
   }
-  curenv->output_title(n, !curenv->fill, curenv->vertical_spacing,
+  curenv->output_title(nd, !curenv->fill, curenv->vertical_spacing,
 		       curenv->total_post_vertical_spacing(), length_title);
   curenv->hyphen_line_count = 0;
   tok.next();
@@ -3013,9 +3016,9 @@ node *environment::make_tab_node(hunits d, node *next)
   }
   if (!leader_node)
     return new hmotion_node(d, 1, 0, get_fill_color(), next);
-  node *n = new hline_node(d, leader_node, next);
+  node *nd = new hline_node(d, leader_node, next);
   leader_node = 0;
-  return n;
+  return nd;
 }
 
 void environment::handle_tab(bool is_leader)
