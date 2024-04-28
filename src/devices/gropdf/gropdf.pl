@@ -2577,7 +2577,7 @@ sub LoadStream
     Warn("failed to read all of the stream")
     if $l != sysread(PD,$o->{STREAM},$l);
 
-    if ($gotzlib and exists($o->{OBJ}->{'Filter'}) and $o->{OBJ}->{'Filter'} eq '/FlateDecode')
+    if ($gotzlib and exists($o->{OBJ}->{'Filter'}) and $o->{OBJ}->{'Filter'} eq '/FlateDecode' and !exists($o->{OBJ}->{'DecodeParms'}))
     {
 	$o->{STREAM}=Compress::Zlib::uncompress($o->{STREAM});
 	delete($o->{OBJ }->{'Filter'});

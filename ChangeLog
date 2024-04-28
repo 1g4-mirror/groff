@@ -1,3 +1,20 @@
+2024-04-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] Can't handle DecodeParams in Deflate filter.
+
+	If gropdf called with -d (debug) the pdf is produced with
+	objects uncompressed, if object does not use default deflate
+	parameters Zlib does not decompress properly, so the
+	decompressed object is invalid. This affects when using a
+	pdf imported with 'pdfpic' which contains a png image.
+
+	This only affects imported pdfs when using the -d flag,
+	because otherwise it is just passed through with no
+	decompress.
+
+	* src/devices/gropdf/gropdf.pl: Don't decompress if object has
+	a DecodeParams dictionary.
+
 2024-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tmac.am ($(M4CHECK)): Ensure directory exists to house
