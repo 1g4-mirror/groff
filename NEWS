@@ -86,8 +86,8 @@ o A new request, `phw`, reports to the standard error stream the current
   list of hyphenation exceptions.
 
 o A new request, `pline`, reports to the standard error stream the list
-  of nodes (an internal data structure) corresponding to the most
-  recently seen input line.  The list is empty if there was no previous
+  of pending output nodes (an internal data structure) corresponding to
+  the previous input line.  The list is empty if there was no previous
   input line or if it was not productive.
 
 o The `hla` request, when invoked with no arguments, now clears the
