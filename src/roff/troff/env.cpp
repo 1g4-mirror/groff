@@ -2267,7 +2267,7 @@ void environment::possibly_break_line(bool must_break_here,
       if (!tem->discardable())
 	first_non_discardable = tem;
     node *to_be_discarded;
-    if (first_non_discardable) {
+    if (first_non_discardable != 0 /* nullptr */) {
       to_be_discarded = first_non_discardable->next;
       first_non_discardable->next = 0 /* nullptr */;
       for (tem = line; tem != 0 /* nullptr */; tem = tem->next) {
@@ -3448,7 +3448,7 @@ void environment::print_env()
     errprint("  font number before underlining: %1\n", pre_underline_fontno);
     errprint("  underline spaces: %1\n", underline_spaces ? "yes" : "no");
   }
-  if (input_trap.contents()) {
+  if (input_trap.contents() != 0 /* nullptr */) {
     errprint("  input trap macro: '%1'\n", input_trap.contents());
     errprint("  input trap line counter: %1\n", input_trap_count);
     errprint("  continued input trap: %1\n",
@@ -3460,8 +3460,8 @@ void environment::print_env()
   errprint("  input line start: %1u\n", input_line_start.to_units());
   errprint("  line tabs: %1\n", using_line_tabs ? "yes" : "no");
   errprint("  discarding: %1\n", discarding ? "yes" : "no");
-  errprint("  spread flag set: %1\n", spreading ? "yes" : "no");	// \p
-  if (margin_character_node) {
+  errprint("  spread flag set: %1\n", spreading ? "yes" : "no"); // \p
+  if (margin_character_node != 0 /* nullptr */) {
     errprint("  margin character flags: %1\n",
 	     margin_character_flags == MARGIN_CHARACTER_ON
 	       ? "on"
@@ -3474,7 +3474,7 @@ void environment::print_env()
     errprint("  margin character distance: %1u\n",
 	     margin_character_distance.to_units());
   }
-  if (numbering_nodes) {
+  if (numbering_nodes != 0 /* nullptr */) {
     errprint("  line number digit width: %1u\n",
 	     line_number_digit_width.to_units());
     errprint("  separation between number and text: %1 digit spaces\n",

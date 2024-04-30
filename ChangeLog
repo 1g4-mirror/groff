@@ -1,3 +1,12 @@
+2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::possibly_break_line):
+	(environment::print_env): Explicitly compare variable of pointer
+	type to null pointer constant instead of letting it pun down to
+	a Boolean.
+	(environment::print_env): Similarly for testing value of
+	function returning pointer.
+
 2024-04-30  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf] Re-arrange pattern matches.
