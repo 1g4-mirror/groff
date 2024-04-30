@@ -1,3 +1,15 @@
+2024-04-30  Christof Meerwald <cmeerw@cmeerw.org>
+
+	* src/devices/gropdf/gropdf.pl: Call PDFDate with the output of
+	`time` rather than one of the processed versions.
+	(PDFDate): Accept an epoch-seconds argument rather than a
+	reference to a list as returned by `gmtime` or `localtime`.
+	Calculate the relationship between local time and UT more
+	carefully.  Remove incorrect sign character before minutes
+	field.
+
+	Problem introduced in commit d7bbfb04ea, 9 July.
+
 2024-04-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp
