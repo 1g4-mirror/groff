@@ -59,10 +59,12 @@
 
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/env.cpp (environment::output) [WIDOW_CONTROL]:
-	Fix code style nit (in de-configured code); explicitly compare
-	variable of pointer type to null pointer constant instead of
-	letting it pun down to a Boolean.
+	* src/roff/troff/env.cpp (environment::add_italic_correction):
+	Fix code style nit; explicitly compare variable of pointer type
+	to null pointer constant instead of letting it pun down to a
+	Boolean.
+	(environment::output) [WIDOW_CONTROL]: Same, in de-configured
+	code.
 
 2024-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -4490,12 +4492,12 @@
 
 	* src/preproc/tbl/table.cpp: Add C preprocessor macro storing a
 	"text block staggering macro" name.
-	(block_entry::position_vertically): Call it in generated output
-	with a negative half-vee motion.
+	(block_entry::position_vertically): If staggering, call it in
+	generated output with a negative half-vee motion.
 	(block_entry::position_vertically, left_block_entry::print)
 	(right_block_entry::print, center_block_entry::print)
-	(alphabetic_block_entry::print): Call it in generated output
-	with a positive half-vee motion.
+	(alphabetic_block_entry::print): If staggering, call it in
+	generated output with a positive half-vee motion.
 	(table::init_output): Write out its definition in generated
 	output.  It wraps the `sp` request.  If we're in a diversion,
 	use the `\!` technique to recursively call ourselves and bubble
