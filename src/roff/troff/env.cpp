@@ -2259,6 +2259,9 @@ void environment::possibly_break_line(bool must_break_here,
     else
       hyphen_line_count = 0;
     delete bp;
+    // Normally, the do_break() member function discards trailing spaces
+    // (cf. horizontal motions) from input lines.  But when `\p` is
+    // used, that mechanism is bypassed, so we do the equivalent here.
     space_total = 0;
     width_total = 0;
     node *first_non_discardable = 0 /* nullptr */;
@@ -2371,7 +2374,8 @@ node *environment::make_tag(const char *nm, int i)
 void environment::dump_troff_state()
 {
 #define SPACES "                                            "
-  fprintf(stderr, SPACES "register 'in' = %d\n", curenv->indent.to_units());
+  fprintf(stderr, SPACES "register 'in' = %d\n",
+	  curenv->indent.to_units());
   if (curenv->have_temporary_indent)
     fprintf(stderr, SPACES "register 'ti' = %d\n",
 	    curenv->temporary_indent.to_units());
@@ -2384,6 +2388,7 @@ void environment::dump_troff_state()
 	  topdiv->get_page_offset().to_units());
   fprintf(stderr, SPACES "seen_break = %d\n", curenv->seen_break);
   fprintf(stderr, SPACES "seen_space = %d\n", curenv->seen_space);
+  fprintf(stderr, SPACES "discarding = %d\n", curenv->discarding);
   fflush(stderr);
 #undef SPACES
 }
@@ -3459,7 +3464,6 @@ void environment::print_env()
   errprint("  total number of spaces: %1\n", space_total);
   errprint("  input line start: %1u\n", input_line_start.to_units());
   errprint("  line tabs: %1\n", using_line_tabs ? "yes" : "no");
-  errprint("  discarding: %1\n", discarding ? "yes" : "no");
   errprint("  spread flag set: %1\n", spreading ? "yes" : "no"); // \p
   if (margin_character_node != 0 /* nullptr */) {
     errprint("  margin character flags: %1\n",

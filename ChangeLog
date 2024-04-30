@@ -1,5 +1,20 @@
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::print_env): Stop
+	reporting the value of the "discarding" flag as a property of
+	the *roff environment.  There's no corresponding concept in CSTR
+	#54 or groff's documentation.  It is an internal
+	implementation detail having to do with the disposal of trailing
+	spaces on input lines (and not even in general at that; as far
+	as I can tell it applies only when the `\p` escape sequence is
+	also used).  Move the report of its value from here...
+	(environment::dump_troff_state): ...to here, a member function
+	that is only reachable if the `DEBUGGING` preprocessor symbol is
+	defined or if one is using a debugger on an unstripped troff
+	executable.
+
+2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::possibly_break_line):
 	(environment::print_env): Explicitly compare variable of pointer
 	type to null pointer constant instead of letting it pun down to
