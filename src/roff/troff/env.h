@@ -370,6 +370,7 @@ public:
 			      int /* fill */);
   void construct_new_line_state(node *n);
   void dump_troff_state();
+  void dump_node_list();
 
   friend void title_length();
   friend void space_size();

@@ -2393,6 +2393,12 @@ void environment::dump_troff_state()
 #undef SPACES
 }
 
+void environment::dump_node_list()
+{
+  if (line != 0 /* nullptr */)
+    line->debug_node_list();
+}
+
 statem *environment::construct_state(bool has_only_eol)
 {
   if (is_html) {
@@ -3559,6 +3565,11 @@ void print_env()
   skip_line();
 }
 
+static void print_nodes_from_input_line()
+{
+  curenv->dump_node_list();
+}
+
 // Hyphenation - TeX's hyphenation algorithm with a less fancy implementation.
 
 struct trie_node;
@@ -4151,6 +4162,7 @@ void init_env_requests()
   init_request("nm", number_lines);
   init_request("nn", no_number);
   init_request("pev", print_env);
+  init_request("pline", print_nodes_from_input_line);
   init_request("ps", point_size);
   init_request("pvs", post_vertical_spacing);
   init_request("rj", right_justify);
