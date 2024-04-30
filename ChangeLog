@@ -1,5 +1,13 @@
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (node::debug_node): Report list of
+	nodes produced by most recent input line in forward order,
+	likely corresponding to user intuition.  (Internally, the
+	formatter stores the nodes in LIFO order, for the convenience of
+	traversing a singly-list list.)
+
+2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add new request `pline` to dump list of nodes
 	corresponding to most recently seen input line.
 

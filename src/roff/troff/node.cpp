@@ -57,6 +57,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #endif /* not _POSIX_VERSION */
 
+#include <stack>
+
 // declarations to avoid friend name injections
 class tfont;
 class tfont_spec;
@@ -2562,12 +2564,18 @@ void node::debug_node()
 
 void node::debug_node_list()
 {
+  // It's stored in reverse order already; this puts it forward again.
+  std::stack<node *> reversed_node_list;
   node *n = next;
 
-  debug_node();
-  while (n != 0 /* nullptr */) {
-    n->debug_node();
+  assert(next != 0 /* nullptr */);
+  do {
+    reversed_node_list.push(n);
     n = n->next;
+  } while (n != 0 /* nullptr */);
+  while (!reversed_node_list.empty()) {
+    reversed_node_list.top()->debug_node();
+    reversed_node_list.pop();
   }
 }
 
