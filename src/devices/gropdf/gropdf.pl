@@ -1983,6 +1983,7 @@ sub Clean
     my $p=shift;
 
     $p=~s/\\c?$//g;
+    $p=~s/\\[eE]/\\/g;
     $p=~s/\\[ 0~t]/ /g;
     $p=~s/\\[,!"#\$%&’.0:?{}ˆ_‘|^prud]//g;
     $p=~s/\\'/\\[aa]/g;
@@ -1992,8 +1993,8 @@ sub Clean
 
     $p=~s/\\[Oz].//g;
     $p=~s/\\[ABbDHlLoRSvwXZ]$parcln//g;
-    $p=~s/\\[hs][-+]?$parclntyp//g;
     $p=~s/\\[FfgkMmnVY]$parclntyp//g;
+    $p=~s/\\[hs][-+]?$parclntyp//g;
 
     $p=~s/\\\((\w\w)/\\\[$1\]/g;	# convert \(xx to \[xx]
 
