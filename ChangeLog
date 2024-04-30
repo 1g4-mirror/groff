@@ -1,5 +1,15 @@
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::print_env): Revise
+	report.  Recast for comprehensibility and to use terminology
+	from our man pages and our Texinfo manual.  In nroff mode, stop
+	reporting type size and font family parameters; the formatter
+	ignores the relevant requests and escape sequences in that mode.
+	Report the previous and current resolved font names alongside
+	the existing mounting position selections.
+
+2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::print_env): Stop
 	reporting the value of the "discarding" flag as a property of
 	the *roff environment.  There's no corresponding concept in CSTR

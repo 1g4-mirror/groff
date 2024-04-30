@@ -3400,27 +3400,37 @@ void environment::print_env()
   //     tab_field_spaces, tab_precedes_field
   //   composite
   //
-  errprint("  previous line length: %1u\n", prev_line_length.to_units());
+  errprint("  previous line length: %1u\n",
+	   prev_line_length.to_units());
   errprint("  line length: %1u\n", line_length.to_units());
-  errprint("  previous title length: %1u\n", prev_title_length.to_units());
-  errprint("  title length: %1u\n", title_length.to_units());
-  errprint("  previous size: %1p (%2s)\n",
-	   prev_size.to_points(), prev_size.to_scaled_points());
-  errprint("  size: %1p (%2s)\n",
-	   size.to_points(), size.to_scaled_points());
-  errprint("  previous requested size: %1s\n", prev_requested_size);
-  errprint("  requested size: %1s\n", requested_size);
-  errprint("  previous font number: %1\n", prev_fontno);
-  errprint("  font number: %1\n", fontno);
-  errprint("  previous family: '%1'\n", prev_family->nm.contents());
-  errprint("  family: '%1'\n", family->nm.contents());
-  errprint("  space size: %1/12 of font spacewidth\n", space_size);
-  errprint("  sentence space size: %1/12 of font spacewidth\n",
+  errprint("  previous title line length: %1u\n",
+	   prev_title_length.to_units());
+  errprint("  title line length: %1u\n", title_length.to_units());
+  if (!in_nroff_mode) {
+    errprint("  previous type size: %1p (%2s)\n",
+	     prev_size.to_points(), prev_size.to_scaled_points());
+    errprint("  type size: %1p (%2s)\n",
+	     size.to_points(), size.to_scaled_points());
+    errprint("  previous requested type size: %1s\n",
+	     prev_requested_size);
+    errprint("  requested type size: %1s\n", requested_size);
+  }
+  errprint("  previous font selection: %1 ('%2')\n", prev_fontno,
+	   get_font_name(prev_fontno, this).contents());
+  errprint("  font selection: %1 ('%2')\n", fontno,
+	   get_font_name(fontno, this).contents());
+  if (!in_nroff_mode) {
+    errprint("  previous default family: '%1'\n",
+	     prev_family->nm.contents());
+    errprint("  default family: '%1'\n", family->nm.contents());
+  }
+  errprint("  space size: %1/12 of font space width\n", space_size);
+  errprint("  sentence space size: %1/12 of font space width\n",
 	   sentence_space_size);
-  errprint("  previous line interrupted: %1\n",
+  errprint("  previous line interrupted/continued: %1\n",
 	   prev_line_interrupted ? "yes" : "no");
-  errprint("  fill mode: %1\n", fill ? "on" : "off");
-  errprint("  adjust mode: %1\n",
+  errprint("  filling: %1\n", fill ? "on" : "off");
+  errprint("  alignment/adjustment: %1\n",
 	   adjust_mode == ADJUST_LEFT
 	     ? "left"
 	     : adjust_mode == ADJUST_BOTH
@@ -3429,9 +3439,10 @@ void environment::print_env()
 		     ? "center"
 		     : "right");
   if (centered_line_count > 0)
-    errprint("  lines to center: %1\n", centered_line_count);
+    errprint("  lines remaining to center: %1\n", centered_line_count);
   if (right_aligned_line_count > 0)
-    errprint("  lines to right justify: %1\n", right_aligned_line_count);
+    errprint("  lines remaining to right-align: %1\n",
+	     right_aligned_line_count);
   errprint("  previous vertical spacing: %1u\n",
 	   prev_vertical_spacing.to_units());
   errprint("  vertical spacing: %1u\n", vertical_spacing.to_units());
@@ -3443,28 +3454,37 @@ void environment::print_env()
   errprint("  line spacing: %1\n", line_spacing);
   errprint("  previous indentation: %1u\n", prev_indent.to_units());
   errprint("  indentation: %1u\n", indent.to_units());
-  errprint("  temporary indentation: %1u\n", temporary_indent.to_units());
-  errprint("  have temporary indentation: %1\n",
+  errprint("  temporary indentation: %1u\n",
+	   temporary_indent.to_units());
+  errprint("  temporary indentation pending: %1\n",
 	   have_temporary_indent ? "yes" : "no");
-  errprint("  currently used indentation: %1u\n", saved_indent.to_units());
-  errprint("  target text length: %1u\n", target_text_length.to_units());
+  errprint("  total indentation: %1u\n", saved_indent.to_units());
+  errprint("  target text length: %1u\n",
+	   target_text_length.to_units());
   if (underlined_line_count > 0) {
-    errprint("  lines to underline: %1\n", underlined_line_count);
-    errprint("  font number before underlining: %1\n", pre_underline_fontno);
-    errprint("  underline spaces: %1\n", underline_spaces ? "yes" : "no");
+    errprint("  lines remaining to underline: %1\n",
+	     underlined_line_count);
+    errprint("  font number before underlining: %1\n",
+	     pre_underline_fontno);
+    errprint("  underlining spaces: %1\n",
+	     underline_spaces ? "yes" : "no");
   }
   if (input_trap.contents() != 0 /* nullptr */) {
     errprint("  input trap macro: '%1'\n", input_trap.contents());
-    errprint("  input trap line counter: %1\n", input_trap_count);
-    errprint("  continued input trap: %1\n",
+    errprint("  lines remaining until input trap springs: %1\n",
+	     input_trap_count);
+    errprint("  input trap respects output line continuation: %1\n",
 	     continued_input_trap ? "yes" : "no");
   }
-  errprint("  previous text length: %1u\n", prev_text_length.to_units());
+  errprint("  previous text length: %1u\n",
+	   prev_text_length.to_units());
   errprint("  total width: %1u\n", width_total.to_units());
   errprint("  total number of spaces: %1\n", space_total);
   errprint("  input line start: %1u\n", input_line_start.to_units());
-  errprint("  line tabs: %1\n", using_line_tabs ? "yes" : "no");
-  errprint("  spread flag set: %1\n", spreading ? "yes" : "no"); // \p
+  errprint("  computing tab stops from: %1\n",
+	   using_line_tabs ? "output line start (\"line tabs\")"
+	     : "input line start");
+  errprint("  forcing adjustment: %1\n", spreading ? "yes" : "no");
   if (margin_character_node != 0 /* nullptr */) {
     errprint("  margin character flags: %1\n",
 	     margin_character_flags == MARGIN_CHARACTER_ON
@@ -3485,11 +3505,12 @@ void environment::print_env()
 	     number_text_separation);
     errprint("  line number indentation: %1 digit spaces\n",
 	     line_number_indent);
-    errprint("  print line numbers every %1 line%2\n",
+    errprint("  numbering every %1 line%2\n",
 	     line_number_multiple > 1
 	       ? i_to_a(line_number_multiple) : "",
 	     line_number_multiple > 1 ? "s" : "");
-    errprint("  lines not to enumerate: %1\n", no_number_count);
+    errprint("  lines remaining for which to supress numbering: %1\n",
+	     no_number_count);
   }
   string hf = hyphenation_mode ? "on" : "off";
   if (hyphenation_mode & HYPHEN_NOT_LAST_LINE)
@@ -3507,12 +3528,13 @@ void environment::print_env()
 	   hf.contents());
   errprint("  hyphenation mode default: %1\n",
 	   hyphenation_mode_default);
-  errprint("  number of consecutive hyphenated lines: %1\n",
+  errprint("  count of consecutive hyphenated lines: %1\n",
 	   hyphen_line_count);
-  errprint("  maximum number of consecutive hyphenated lines: %1\n",
-	   hyphen_line_max);
+  errprint("  consecutive hyphenated line count limit: %1%2\n",
+	   hyphen_line_max, hyphen_line_max < 0 ? " (unlimited)" : "");
   errprint("  hyphenation space: %1u\n", hyphenation_space.to_units());
-  errprint("  hyphenation margin: %1u\n", hyphenation_margin.to_units());
+  errprint("  hyphenation margin: %1u\n",
+	   hyphenation_margin.to_units());
 #ifdef WIDOW_CONTROL
   errprint("  widow control: %1\n", want_widow_control ? "yes" : "no");
 #endif /* WIDOW_CONTROL */
