@@ -592,13 +592,7 @@ for $papersz ( split(" ", lc($possiblesizes).' #duff#') )
     # If we get here, $papersz was invalid, so try the next one.
 }
 
-my @dt;
-if ($ENV{SOURCE_DATE_EPOCH}) {
-    @dt=gmtime($ENV{SOURCE_DATE_EPOCH});
-} else {
-    @dt=localtime;
-}
-my $dt=PDFDate(\@dt);
+my $dt=PDFDate(time);
 
 my %info=('Creator' => "(groff version $cfg{GROFF_VERSION})",
 	  'Producer' => "(gropdf version $cfg{GROFF_VERSION})",
@@ -1102,14 +1096,19 @@ sub GetObj
 
 sub PDFDate
 {
-    my $dt=shift;
+    my $ts=shift;
+    my @dt;
     my $offset;
+    my $rel;
     if ($ENV{SOURCE_DATE_EPOCH}) {
 	$offset=0;
+	@dt=gmtime($ENV{SOURCE_DATE_EPOCH});
     } else {
-	$offset=mktime((localtime $dt)[0..5]) - mktime((gmtime $dt)[0..5]);
+	@dt=localtime($ts);
+	$offset=mktime(@dt[0..5]) - mktime((gmtime $ts)[0..5]);
     }
-    return(sprintf("D:%04d%02d%02d%02d%02d%02d%+03d'%+03d'",$dt->[5]+1900,$dt->[4]+1,$dt->[3],$dt->[2],$dt->[1],$dt->[0],int($offset/3600),int(($offset%3600)/60)));
+    $rel=($offset==0)?'Z':($offset>0)?'+':'-';
+    return(sprintf("D:%04d%02d%02d%02d%02d%02d%s%02d'%02d'",$dt[5]+1900,$dt[4]+1,$dt[3],$dt[2],$dt[1],$dt[0],$rel,int(abs($offset)/3600),int((abs($offset)%3600)/60)));
 }
 
 sub ToPoints
