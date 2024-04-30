@@ -1,5 +1,16 @@
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (page_number):
+	* src/roff/troff/env.cpp (environment::add_node)
+	(environment::construct_state):
+	* src/roff/troff/input.cpp (psbb_locator::psbb_locator)
+	(psbb_locator::parse_bounding_box, psbb_locator::get_line)
+	(psbb_locator::context_args, psbb_locator::get_header_comment)
+	(psbb_locator::skip_to_trailer): Use idiomatic C++98 null
+	pointer constant literal.
+
+2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::print_env): Revise
 	report.  Recast for comprehensibility and to use terminology
 	from our man pages and our Texinfo manual.  In nroff mode, stop

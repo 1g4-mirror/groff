@@ -6405,9 +6405,9 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
       // specify a %%BoundingBox comment; locate it, initially
       // expecting to find it in the comments header...
       //
-      const char *context = NULL;
-      while ((context == NULL) && get_header_comment()) {
-	if ((context = bounding_box_args()) != NULL) {
+      const char *context = 0 /* nullptr */;
+      while ((context == 0 /* nullptr */) && get_header_comment()) {
+	if ((context = bounding_box_args()) != 0 /* nullptr */) {
 
 	  // When the "%%BoundingBox" comment is found, it may simply
 	  // specify the bounding box property values, or it may defer
@@ -6420,10 +6420,10 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
 	    // for the appropriate specification within it.
 	    //
 	    if (skip_to_trailer() > 0) {
-	      while ((context = bounding_box_args()) == NULL
+	      while ((context = bounding_box_args()) == 0 /* nullptr */
 		     && get_line(DSC_LINE_MAX_ENFORCE) > 0)
 		;
-	      if (context != NULL) {
+	      if (context != 0 /* nullptr */) {
 		//
 		// When we find a bounding box specification here...
 		//
@@ -6440,7 +6440,7 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
 	      // The trailer could not be found, so there is no context in
 	      // which a trailing %%BoundingBox comment might be located.
 	      //
-	      context = NULL;
+	      context = 0 /* nullptr */;
 	  }
 	  if (status == PSBB_RANGE_IS_BAD) {
 	    //
@@ -6453,7 +6453,7 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
 	  }
 	}
       }
-      if (context == NULL)
+      if (context == 0 /* nullptr */)
 	//
 	// Conversely, this arises when no value specifying %%BoundingBox
 	// comment has been found, in any appropriate location...
@@ -6518,7 +6518,7 @@ int psbb_locator::parse_bounding_box(const char *context)
       // ...before checking for "(atend)", and setting the
       // appropriate exit status accordingly.
       //
-      status = (context_args("(atend)", context) == NULL)
+      status = (context_args("(atend)", context) == 0 /* nullptr */)
 		 ? llx = lly = urx = ury = PSBB_RANGE_IS_BAD
 		 : PSBB_RANGE_AT_END;
     }
@@ -6612,7 +6612,7 @@ int psbb_locator::get_line(int dscopt)
 //
 // Returns a pointer to the trailing substring of the current
 // input line, following an initial substring matching the "tag"
-// argument, or NULL if "tag" is not matched.
+// argument, or 0 if "tag" is not matched.
 //
 inline const char *psbb_locator::context_args(const char *tag)
 {
@@ -6631,19 +6631,19 @@ inline const char *psbb_locator::context_args(const char *tag)
 //
 // Returns a pointer to the trailing substring of the specified
 // text buffer, following an initial substring matching the "tag"
-// argument, or NULL if "tag" is not matched.
+// argument, or 0 if "tag" is not matched.
 //
 inline const char *psbb_locator::context_args(const char *tag, const char *p)
 {
   size_t len = strlen(tag);
-  return (strncmp(tag, p, len) == 0) ? p + len : NULL;
+  return (strncmp(tag, p, len) == 0) ? p + len : 0 /* nullptr */;
 }
 
 // psbb_locator::bounding_box_args()
 //
 // Returns a pointer to the arguments string, within the current
 // input line, when this represents a PostScript "%%BoundingBox:"
-// comment, or NULL otherwise.
+// comment, or 0 otherwise.
 //
 inline const char *psbb_locator::bounding_box_args(void)
 {
@@ -6684,7 +6684,7 @@ inline bool psbb_locator::get_header_comment(void)
 
     // Finally, the input line must not say "%%EndComments".
     //
-    && context_args("%%EndComments") == NULL;
+    && context_args("%%EndComments") == 0 /* nullptr */;
 }
 
 // psbb_locator::skip_to_trailer()
@@ -6723,7 +6723,8 @@ inline int psbb_locator::skip_to_trailer(void)
 	   // ...until we either exhaust the available stream data, or
 	   // we have located a "%%Trailer" comment line.
 	   //
-	 } while ((status != 0) && (context_args("%%Trailer") == NULL));
+	 } while ((status != 0)
+	          && (context_args("%%Trailer") == 0 /* nullptr */));
       if (status > 0)
 	//
 	// We found the "%%Trailer" comment, so we may immediately

@@ -358,7 +358,7 @@ void environment::add_node(node *nd)
   if (nd == 0 /* nullptr */)
     return;
   if (!suppress_push) {
-    if (nd->is_special && nd->state == NULL)
+    if (nd->is_special && nd->state == 0 /* nullptr */)
       nd->state = construct_state(false);
     nd->push_state = get_diversion_state();
   }
@@ -2420,7 +2420,7 @@ statem *environment::construct_state(bool has_only_eol)
     return s;
   }
   else
-    return NULL;
+    return 0 /* nullptr */;
 }
 
 void environment::construct_format_state(node *nd, bool was_centered,
