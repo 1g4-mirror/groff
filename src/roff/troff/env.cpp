@@ -321,7 +321,7 @@ void environment::add_char(charinfo *ci)
       start_line();
 #if 0
     fprintf(stderr, "current line is\n");
-    line->debug_node_list();
+    line->dump_node_list();
 #endif
     if (ci != hyphen_indicator_char)
       line = line->add_char(ci, this, &width_total, &space_total, &gc_np);
@@ -330,7 +330,7 @@ void environment::add_char(charinfo *ci)
   }
 #if 0
   fprintf(stderr, "now after we have added character the line is\n");
-  line->debug_node_list();
+  line->dump_node_list();
 #endif
   if ((!suppress_push) && gc_np) {
     if (gc_np && (gc_np->state == 0 /* nullptr */)) {
@@ -344,7 +344,7 @@ void environment::add_char(charinfo *ci)
   }
 #if 0
   fprintf(stderr, "now we have possibly added the state the line is\n");
-  line->debug_node_list();
+  line->dump_node_list();
 #endif
 }
 
@@ -2396,7 +2396,7 @@ void environment::dump_troff_state()
 void environment::dump_node_list()
 {
   if (line != 0 /* nullptr */)
-    line->debug_node_list();
+    line->dump_node_list();
 }
 
 statem *environment::construct_state(bool has_only_eol)

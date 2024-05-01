@@ -1,5 +1,26 @@
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename node and node list dumping
+	member function prefixes from "debug_" to "dump_", to reflect
+	the fact that they're not just for (source-level) debugging
+	anymore.
+
+	* src/roff/troff/node.h (struct node): Rename.
+	- `debug_node` -> `dump_node`
+	- `debug_node_list` -> `dump_node_list`
+	* src/roff/troff/node.cpp (glyph_node::debug_node)
+	(node::debug_node)
+	(node::debug_node_list): Rename these...
+	(glyph_node::dump_node, node::debug_node)
+	(node::dump_node):
+	(node::dump_node_list): ...to these.
+	* src/roff/troff/env.cpp (environment::add_char)
+	(environment::dump_node_list):
+	* src/roff/troff/node.cpp (node::dump_node_list): Update call
+	sites.
+
+2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (node::debug_node): Report list of
 	pending output nodes produced by the previous input line in
 	forward order, likely corresponding to user intuition.

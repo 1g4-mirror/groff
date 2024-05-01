@@ -1910,7 +1910,7 @@ public:
   const char *type();
   int force_tprint();
   bool is_tag();
-  void debug_node();
+  void dump_node();
 };
 
 class ligature_node : public glyph_node {
@@ -2182,7 +2182,7 @@ void glyph_node::ascii_print(ascii_output_file *ascii)
     ascii->outs(ci->nm.contents());
 }
 
-void glyph_node::debug_node()
+void glyph_node::dump_node()
 {
   unsigned char c = ci->get_ascii_code();
   fprintf(stderr, "{ %s [", type());
@@ -2550,7 +2550,7 @@ units node::size()
   return points_to_units(10);
 }
 
-void node::debug_node()
+void node::dump_node()
 {
   fprintf(stderr, "{ %s ", type());
   if (push_state)
@@ -2562,7 +2562,7 @@ void node::debug_node()
   fflush(stderr);
 }
 
-void node::debug_node_list()
+void node::dump_node_list()
 {
   // It's stored in reverse order already; this puts it forward again.
   std::stack<node *> reversed_node_list;
@@ -2574,7 +2574,7 @@ void node::debug_node_list()
     n = n->next;
   } while (n != 0 /* nullptr */);
   while (!reversed_node_list.empty()) {
-    reversed_node_list.top()->debug_node();
+    reversed_node_list.top()->dump_node();
     reversed_node_list.pop();
   }
 }
