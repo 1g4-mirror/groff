@@ -1293,32 +1293,9 @@ static void select_font()
   skip_line();
 }
 
-bool is_family_valid(const char *fam)
-{
-#if 0 // C++11, some day
-  std::vector<const char *> styles{"R", "I", "B", "BI"}; // C++11
-  for (auto style : styles) // C++11
-#else
-  const size_t nstyles = 4;
-  const char *st[nstyles] = { "R", "I", "B", "BI" };
-  std::vector<const char *> styles(st, (st + nstyles));
-  std::vector<const char *>::iterator style;
-  for (style = styles.begin(); style != styles.end(); style++)
-#endif
-    if (!is_font_name(fam, *style))
-      return false;
-  return true;
-}
-
 void family_change()
 {
   symbol s = get_name();
-  if (s != 0 /* nullptr */)
-    if (!is_family_valid(s.contents())) {
-      error("'%1' is not a valid font family", s.contents());
-      skip_line();
-      return;
-    }
   curenv->set_family(s);
   skip_line();
 }

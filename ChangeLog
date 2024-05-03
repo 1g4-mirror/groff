@@ -5083,22 +5083,6 @@
 
 2023-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Validate a font family before trying to use it.
-
-	* src/roff/troff/env.cpp (is_family_valid): New function checks
-	for all text styles (R, I, B, BI) and returns true only if the
-	given family supports them all.
-	(family_change): Call `is_family_valid()` on given argument.
-	If invalid, throw diagnostic and ignore `fam` request.
-	* src/roff/troff/env.h (is_family_valid): Declare; make visible.
-	* src/roff/troff/input.cpp (main): Call `is_family_valid()` on
-	`-f` option argument.  Its invalidity is a fatal error.
-
-	Fixes <https://savannah.gnu.org/bugs/?64155>.  Thanks to Dave
-	Kemper for the report.
-
-2023-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/roff/troff/env.h (read_hyphen_file): Drop relic prototype
 	for undeclared function.  Should have been disposed of on
 	1992-09-21, per ChangeLog.old (né ChangeLog.115).

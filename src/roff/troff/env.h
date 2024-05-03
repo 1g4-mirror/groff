@@ -419,7 +419,6 @@ extern void pop_env();
 extern void push_env(int);
 
 void init_environments();
-bool is_family_valid(const char *);
 
 extern double spread_limit;
 

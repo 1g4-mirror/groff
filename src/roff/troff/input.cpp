@@ -8404,9 +8404,6 @@ int main(int argc, char **argv)
 	warning(WARN_FONT, "cannot mount font '%1' directed by 'DESC'"
 		" file for device '%2'", font::font_name_table[i],
 		device);
-  if (fflag && !(is_family_valid(default_family.contents())))
-      fatal("'%1' is not a valid font family",
-	    default_family.contents());
   curdiv = topdiv = new top_level_diversion;
   if (nflag)
     topdiv->set_next_page_number(next_page_number);
