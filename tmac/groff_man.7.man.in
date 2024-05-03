@@ -894,9 +894,8 @@ _endif()dnl
 .TP
 .B .TQ
 Set an additional tag for a paragraph tagged with
-.BR .TP .
-.
-The macro plants a one-line input trap as with
+.BR .TP ,
+planting a one-line input trap as with
 .BR .TP .
 .
 .
@@ -1052,7 +1051,7 @@ and
 are set in bold.
 .
 If a break is required in subsequent text
-(up to another paragraphing
+(up to another paragraphing,
 sectioning,
 or synopsis macro call),
 lines after the first are indented.
