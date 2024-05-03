@@ -37,14 +37,20 @@ foo \\- a command with a very short name
 This pre-synopsis text is not often used in practice.
 .
 .
+.P
 .SY foo
 .I "operand1 operand2 operand3 operand4 operand5 operand6 operand6"
 .I "operand7 operand8 operand9"
 .YS
 .
 .
-.SY "foo \\-h"
-.SY "foo \\-\\-help"
+.P
+.SY foo
+.B \\-h
+.YS
+.
+.SY foo
+.B \\-\\-help
 .YS
 .
 This post-synopsis text is not often used in practice.

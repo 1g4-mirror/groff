@@ -1,3 +1,86 @@
+2024-05-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Revise and expand `SY` and `YS` macro behavior, largely
+	to accommodate C library function synopses.  `SY` no longer puts
+	vertical space on the output, and initially breaks the output
+	line _only_ if it is encountered repeatedly without a preceding
+	`YS` call.  The computed indentation of synopsis lines after the
+	first now also includes the width of anything on the line
+	_before_ the synopsis, so that you can precede the `SY` call
+	with, for instance, the C language data type used for the return
+	value in a function prototype.  The `SY` macro now accepts an
+	optional second argument.  This second argument is typeset in
+	bold, replaces the fixed-width space that is appended to the
+	synopsis keyword in `SY`'s single-argument form, and is used in
+	computation of the indentation of non-initial synopsis lines.
+
+	...unless overridden.  You can now reuse the indentation amount
+	computed in a previous synopsis.  To do this, give any argument
+	to the `YS` macro call "closing" the synopsis whose indentation
+	you want to reuse.  When you're done with such a grouped
+	synopsis, simply leave the argument off the final `YS` call.
+
+	Finally, the `SY` macro is now effectively a no-op if it is
+	called with no arguments; no text is discarded.
+
+	* tmac/an-ext.tmac (SY, YS): Do it.
+
+	* NEWS:
+	* tmac/groff_man.7.man.in: Document it.
+
+	* tmac/tests/an-ext_SY-and-YS-work.sh: Update test expectations.
+
+	* contrib/chem/chem.1.man:
+	* contrib/eqn2graph/eqn2graph.1.man:
+	* contrib/gdiffmk/gdiffmk.1.man:
+	* contrib/glilypond/glilypond.1.man:
+	* contrib/gperl/gperl.1.man:
+	* contrib/gpinyin/gpinyin.1.man:
+	* contrib/grap2graph/grap2graph.1.man:
+	* contrib/mm/groff_mm.7.man:
+	* contrib/mm/groff_mmse.7.man:
+	* contrib/mm/mmroff.1.man:
+	* contrib/mom/groff_mom.7.man:
+	* contrib/pdfmark/pdfroff.1.man:
+	* contrib/pic2graph/pic2graph.1.man:
+	* src/devices/grodvi/grodvi.1.man:
+	* src/devices/grohtml/grohtml.1.man:
+	* src/devices/grolbp/grolbp.1.man:
+	* src/devices/grolj4/grolj4.1.man:
+	* src/devices/gropdf/gropdf.1.man:
+	* src/devices/gropdf/pdfmom.1.man:
+	* src/devices/grops/grops.1.man:
+	* src/devices/grotty/grotty.1.man:
+	* src/devices/xditview/gxditview.1.man:
+	* src/preproc/eqn/eqn.1.man:
+	* src/preproc/grn/grn.1.man:
+	* src/preproc/pic/pic.1.man:
+	* src/preproc/preconv/preconv.1.man:
+	* src/preproc/refer/refer.1.man:
+	* src/preproc/soelim/soelim.1.man:
+	* src/preproc/tbl/tbl.1.man:
+	* src/roff/groff/groff.1.man:
+	* src/roff/nroff/nroff.1.man:
+	* src/roff/troff/troff.1.man:
+	* src/utils/addftinfo/addftinfo.1.man:
+	* src/utils/afmtodit/afmtodit.1.man:
+	* src/utils/grog/grog.1.man:
+	* src/utils/hpftodit/hpftodit.1.man:
+	* src/utils/indxbib/indxbib.1.man:
+	* src/utils/lkbib/lkbib.1.man:
+	* src/utils/lookbib/lookbib.1.man:
+	* src/utils/pfbtops/pfbtops.1.man:
+	* src/utils/tfmtodit/tfmtodit.1.man:
+	* src/utils/xtotroff/xtotroff.1.man:
+	* tmac/groff_man.7.man.in:
+	* tmac/groff_me.7.man:
+	* tmac/groff_ms.7.man: Migrate synopses to new idiom, using `YS`
+	to terminate each synopsized item, and `P` to vertically
+	separate item(s) where appropriate.
+
+	Thanks to Alex Colomar and Lennart Jablonka for feedback and to
+	Peter Chubb for his suggestion of `bsearch()` as an exemplar.
+
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor.  Rename node and node list dumping
