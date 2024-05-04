@@ -1,5 +1,10 @@
 2024-05-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_if_request): Boolify.  Demote
+	`result` from `int` to `bool`.  Assign Boolean literals to it.
+
+2024-05-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (TH): Reset `mE` and `mS` registers from
 	"an-ext.tmac" to zero upon beginning a new document.
 
