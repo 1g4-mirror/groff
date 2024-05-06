@@ -3492,7 +3492,7 @@ void environment::print_env()
 	     line_number_multiple > 1
 	       ? i_to_a(line_number_multiple) : "",
 	     line_number_multiple > 1 ? "s" : "");
-    errprint("  lines remaining for which to supress numbering: %1\n",
+    errprint("  lines remaining for which to suppress numbering: %1\n",
 	     no_number_count);
   }
   string hf = hyphenation_mode ? "on" : "off";

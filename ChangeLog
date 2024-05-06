@@ -1,3 +1,8 @@
+2024-05-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::print_env): Fix typo in
+	environment report.
+
 2024-05-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_if_request): Boolify.  Demote
