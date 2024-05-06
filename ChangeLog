@@ -1,5 +1,11 @@
 2024-05-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an-ext_SY-and-YS-work.sh: Add test case exercising
+	correct suspension of automatic hyphenation.  Thanks to Alex
+	Colomar for the report and a reproducer.
+
+2024-05-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.h (class environment): Rename member
 	function.
 	* src/roff/troff/env.cpp (environment::get_using_line_tabs):
