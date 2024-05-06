@@ -2948,7 +2948,7 @@ void line_tabs_request()
   skip_line();
 }
 
-int environment::get_using_line_tabs()
+int environment::is_using_line_tabs()
 {
   return using_line_tabs;
 }
@@ -4177,7 +4177,7 @@ void init_env_requests()
   init_int_env_reg(".it", get_input_trap_line_count);
   init_int_env_reg(".itc", get_input_trap_respects_continuation);
   init_string_env_reg(".itm", get_input_trap_macro);
-  init_int_env_reg(".linetabs", get_using_line_tabs);
+  init_int_env_reg(".linetabs", is_using_line_tabs);
   init_hunits_env_reg(".lt", get_title_length);
   init_unsigned_env_reg(".j", get_adjust_mode);
   init_hunits_env_reg(".k", get_text_length);

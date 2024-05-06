@@ -310,7 +310,7 @@ public:
     { return env_half_narrow_space_width(this); }
   hunits get_input_line_position();
   const char *get_tabs();
-  int get_using_line_tabs();
+  int is_using_line_tabs();
   unsigned get_hyphenation_mode();
   unsigned get_hyphenation_mode_default();
   int get_hyphen_line_max();

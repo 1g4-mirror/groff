@@ -1,5 +1,14 @@
 2024-05-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.h (class environment): Rename member
+	function.
+	* src/roff/troff/env.cpp (environment::get_using_line_tabs):
+	Rename this...
+	(environment::is_using_line_tabs): ...to this.
+	(init_env_requests): Update reference.
+
+2024-05-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::print_env): Fix typo in
 	environment report.
 
