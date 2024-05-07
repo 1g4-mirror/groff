@@ -3545,6 +3545,7 @@ void print_env()
 static void print_nodes_from_input_line()
 {
   curenv->dump_node_list();
+  skip_line();
 }
 
 // Hyphenation - TeX's hyphenation algorithm with a less fancy implementation.

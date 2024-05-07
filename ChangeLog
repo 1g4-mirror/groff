@@ -1,3 +1,12 @@
+2024-05-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (print_nodes_from_input_line): Fix
+	elementary mistake in request implementation.  It is essential
+	that requests call `skip_line()` when they are done interpreting
+	arguments--even if there are none, to prevent the newline at the
+	end of the input line from being interpreted as text (and
+	causing a line or word break, depending on filling enablement).
+
 2024-05-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an-ext.tmac (YS): Clear `mS` register unconditionally.
