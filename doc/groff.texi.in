@@ -17821,8 +17821,8 @@ may exist, using any valid identifiers for their names
 @cindex sizes, fractional
 @cindex @code{ps} request, incompatibilities with @acronym{AT&T}@
 @code{troff}
-Fractional type sizes cause one noteworthy incompatibility.  In
-@acronym{AT&T} @code{troff} the @code{ps} request ignores scaling units
+Fractional type size support causes an incompatibility.  In
+@acronym{AT&T} @code{troff}, the @code{ps} request ignores scaling units
 and thus @samp{.ps 10u} sets the type size to 10@tie{}points, whereas in
 GNU @code{troff} it sets the type size to 10@tie{}@emph{scaled} points.
 @xref{Using Fractional Type Sizes}.

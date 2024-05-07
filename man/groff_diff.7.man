@@ -5787,10 +5787,10 @@ McIlroy referred to it as a \[lq]living fossil\[rq].]
 .
 .
 .P
-Fractional type sizes cause one noteworthy incompatibility.
+Fractional type size support causes an incompatibility.
 .
 In AT&T
-.I troff \" AT&T
+.IR troff , \" AT&T
 the
 .B ps
 request ignores scaling units and thus
