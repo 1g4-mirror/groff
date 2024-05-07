@@ -3986,11 +3986,9 @@ Change page length to
 .REQ .pline
 Report,
 to the standard error stream,
-the list of pending output nodes corresponding to the previous input
-line.
+the list of output nodes corresponding to the pending output line.
 .
-The list is empty if there was no previous input line or if it was not
-productive.
+The list is empty if there are none.
 .
 .TPx
 .REQ .pm

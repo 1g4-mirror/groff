@@ -148,24 +148,22 @@
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (node::debug_node): Report list of
-	pending output nodes produced by the previous input line in
-	forward order, likely corresponding to user intuition.
-	{Internally, the formatter stores the nodes in LIFO order, for
-	the convenience of appending to a singly-linked list.}
+	pending output nodes in forward order, likely corresponding to
+	user intuition.  (Internally, the formatter stores the nodes in
+	LIFO order, for the convenience of appending to a singly-linked
+	list.)
 
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Add new request `pline` to dump list of nodes
-	corresponding to the previous input line.
+	[troff]: Add new request `pline` to dump list of nodes in the
+	pending output line.
 
 	* src/roff/troff/env.h (class environment): Declare new
 	`dump_node_list` member function.
 	* src/roff/troff/env.cpp (environment::dump_node_list): New
-	function calls `debug_node_list()` if the previous input line
-	was productive of output.
+	function calls `debug_node_list()`.
 	(print_node_list): New function dumps list of nodes
-	pending in the environment and produced by the previous input
-	line.
+	in the environment's pending output line.
 	(init_env_requests): Wire up `pline` request to
 	`print_node_list()`.
 
