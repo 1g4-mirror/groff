@@ -17152,7 +17152,7 @@ suffixed with a tab and asterisk (@code{*}).
 Report, to the standard error stream, the list of pending output nodes
 corresponding to the previous input line.  The list is empty if there
 was no previous input line or if it was not productive; recall
-@xref{Manipulating Filling and Adjustment}.
+@ref{Manipulating Filling and Adjustment}.
 @endDefreq
 
 @Defreq {pm, }
