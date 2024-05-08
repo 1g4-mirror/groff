@@ -1,5 +1,13 @@
 2024-05-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::get_prev_char)
+	(environment::width_registers, distribute_space)
+	(environment::start_field): Slightly refactor.  Explicitly
+	compare variable of pointer type to null pointer constant
+	instead of letting it pun down to a Boolean.
+
+2024-05-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor.  Rename member
 	function argument indicating the diversion level to be used when
 	constructing a `node` struct from "pop" (a word that suggests

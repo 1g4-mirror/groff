@@ -1075,13 +1075,14 @@ hunits environment::get_title_length()
 
 node *environment::get_prev_char()
 {
-  for (node *nd = (current_tab != TAB_NONE) ? tab_contents : line; nd;
+  for (node *nd = (current_tab != TAB_NONE) ? tab_contents : line;
+       nd != 0 /* nullptr */;
        nd = nd->next) {
     node *last = nd->last_char_node();
     if (last)
       return last;
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 hunits environment::get_prev_char_width()
@@ -1153,7 +1154,7 @@ void environment::width_registers()
   vunits real_min = V0;
   vunits real_max = V0;
   vunits v1, v2;
-  for (node *tem = line; tem; tem = tem->next) {
+  for (node *tem = line; tem != 0 /* nullptr */; tem = tem->next) {
     tem->vertical_extent(&v1, &v2);
     v1 += cur;
     if (v1 < real_min)
@@ -2062,7 +2063,7 @@ breakpoint *environment::choose_breakpoint()
       output_warning(WARN_BREAK, "cannot break line");
     return best_bp;
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 void environment::hyphenate_line(bool must_break_here)
@@ -2173,7 +2174,7 @@ static void distribute_space(node *nd, int nspaces,
     if (Ems > spread_limit)
       output_warning(WARN_BREAK, "spreading %1m per space", Ems);
   }
-  for (node *tem = nd; tem; tem = tem->next)
+  for (node *tem = nd; tem != 0 /* nullptr */; tem = tem->next)
     tem->spread_space(&nspaces, &desired_space);
   if (force_reverse_node_list || do_reverse_node_list)
     (void)node_list_reverse(nd);
@@ -2345,7 +2346,7 @@ node *environment::make_tag(const char *nm, int i)
     m.append_int(i);
     return new special_node(m);
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 void environment::dump_troff_state()
@@ -3056,7 +3057,7 @@ void environment::start_field()
     has_current_field = true;
     field_spaces = 0;
     tab_field_spaces = 0;
-    for (node *p = line; p; p = p->next)
+    for (node *p = line; p != 0 /* nullptr */; p = p->next)
       if (p->nspaces()) {
 	p->freeze_space();
 	space_total--;
