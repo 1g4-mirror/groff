@@ -148,7 +148,9 @@ o The an (man) package now supports use of its hyperlink macros (`UR`,
   macro as a tag was already supported in groff 1.23.0.
 
 o The behavior of the an (man) package's `SY` and `YS` macros has been
-  expanded.  `SY` no longer puts vertical space on the output, and
+  expanded to enable greater user control over vertical spacing and to
+  make them convenient for synopsizing C language functions, not just
+  commands.  `SY` no longer puts vertical space on the output, and
   initially breaks the output line _only_ if it is encountered
   repeatedly without a preceding `YS` call.  The computed indentation of
   synopsis lines after the first now also includes the width of anything
