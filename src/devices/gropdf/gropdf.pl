@@ -1507,6 +1507,7 @@ sub do_x
 		    my ($pre,$title,$post)=($1,$2,$3);
 		    $title=utf16($title);
 
+		    $title="\\134" if $title eq "\\";
 		    my @xwds=split(' ',"<< $pre$title$post >>");
 		    my $out=ParsePDFValue(\@xwds);
 		    $out->{Dest}=UTFName($out->{Dest});
