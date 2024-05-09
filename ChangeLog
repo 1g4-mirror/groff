@@ -1,3 +1,14 @@
+2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/doc.tmac (doc-empty-line):
+	* tmac/mdoc/doc-common (doc-header, doc-break-body-text)
+	(doc-footer, doc-end-macro): Define macros with `de1` instead of
+	`de` so the macro package doesn't throw warnings when used in
+	compatibility mode.
+
+	Fixes <https://savannah.gnu.org/bugs/?65717>.  Thanks to Bjarni
+	Ingi Gislason for the report.
+
 2024-05-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::get_prev_char)
