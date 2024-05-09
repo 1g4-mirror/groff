@@ -1,5 +1,10 @@
 2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (glyph_node::dump_node)
+	(node::dump_node, node::dump_node_list): Tweak output format.
+
+2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac (doc-empty-line):
 	* tmac/mdoc/doc-common (doc-header, doc-break-body-text)
 	(doc-footer, doc-end-macro): Define macros with `de1` instead of

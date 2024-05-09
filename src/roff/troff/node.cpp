@@ -2185,17 +2185,18 @@ void glyph_node::ascii_print(ascii_output_file *ascii)
 void glyph_node::dump_node()
 {
   unsigned char c = ci->get_ascii_code();
-  fprintf(stderr, "{ %s [", type());
+  fprintf(stderr, "{type: %s, character: ", type());
   if (c)
-    fprintf(stderr, "%c", c);
+    fprintf(stderr, "\"%c\"", c);
   else
-    fprintf(stderr, "%s", ci->nm.contents());
+    fprintf(stderr, "\"\\%s\"", ci->nm.contents());
+  fputs(", ", stderr);
   if (push_state)
-    fprintf(stderr, " <push_state>");
+    fprintf(stderr, "push_state, ");
   if (state)
     state->display_state();
-  fprintf(stderr, " nest level %d", div_nest_level);
-  fprintf(stderr, "]}\n");
+  fprintf(stderr, "diversion level: %d", div_nest_level);
+  fprintf(stderr, "}");
   fflush(stderr);
 }
 
@@ -2553,13 +2554,13 @@ units node::size()
 
 void node::dump_node()
 {
-  fprintf(stderr, "{ %s ", type());
+  fprintf(stderr, "{type: %s, ", type());
   if (push_state)
-    fprintf(stderr, " <push_state>");
+    fprintf(stderr, "<push_state>, ");
   if (state)
-    fprintf(stderr, " <state>");
-  fprintf(stderr, " nest level %d", div_nest_level);
-  fprintf(stderr, " }\n");
+    fprintf(stderr, "<state>, ");
+  fprintf(stderr, "diversion level: %d", div_nest_level);
+  fprintf(stderr, "}");
   fflush(stderr);
 }
 
@@ -2568,6 +2569,7 @@ void node::dump_node_list()
   // It's stored in reverse order already; this puts it forward again.
   std::stack<node *> reversed_node_list;
   node *n = next;
+  bool need_comma = false;
 
   assert(next != 0 /* nullptr */);
   do {
@@ -2575,9 +2577,14 @@ void node::dump_node_list()
     n = n->next;
   } while (n != 0 /* nullptr */);
   while (!reversed_node_list.empty()) {
+    if (need_comma)
+      fputs(",\n", stderr);
     reversed_node_list.top()->dump_node();
     reversed_node_list.pop();
+    need_comma = true;
   }
+  fputc('\n', stderr);
+  fflush(stderr);
 }
 
 hunits kern_pair_node::width()
