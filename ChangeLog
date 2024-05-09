@@ -137,7 +137,7 @@
 	* src/roff/troff/node.cpp (glyph_node::debug_node)
 	(node::debug_node)
 	(node::debug_node_list): Rename these...
-	(glyph_node::dump_node, node::debug_node)
+	(glyph_node::dump_node)
 	(node::dump_node):
 	(node::dump_node_list): ...to these.
 	* src/roff/troff/env.cpp (environment::add_char)
@@ -151,7 +151,7 @@
 	pending output nodes produced by the previous input line in
 	forward order, likely corresponding to user intuition.
 	{Internally, the formatter stores the nodes in LIFO order, for
-	the convenience of traversing a singly-linked list.}
+	the convenience of appending to a singly-linked list.}
 
 2024-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
