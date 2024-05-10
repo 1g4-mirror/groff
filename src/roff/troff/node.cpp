@@ -1992,6 +1992,7 @@ public:
   const char *type();
   int force_tprint();
   bool is_tag();
+  void dump_node();
 };
 
 void *ligature_node::operator new(size_t n)
@@ -5782,6 +5783,30 @@ int dbreak_node::force_tprint()
 bool dbreak_node::is_tag()
 {
   return false;
+}
+
+void dbreak_node::dump_node()
+{
+  fprintf(stderr, "{type: %s, ", type());
+  if (push_state)
+    fprintf(stderr, "<push_state>, ");
+  if (state)
+    fprintf(stderr, "<state>, ");
+  fprintf(stderr, " diversion level: %d", div_nest_level);
+  if (none != 0 /* nullptr */) {
+    fputs(", none: ", stderr);
+    none->dump_node();
+  }
+  if (pre != 0 /* nullptr */) {
+    fputs(", pre: ", stderr);
+    pre->dump_node();
+  }
+  if (post != 0 /* nullptr */) {
+    fputs(", post: ", stderr);
+    post->dump_node();
+  }
+  fprintf(stderr, "}");
+  fflush(stderr);
 }
 
 bool break_char_node::is_same_as(node *nd)

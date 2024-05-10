@@ -1,5 +1,13 @@
 2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class dbreak_node): Add `dump_node`
+	member function, overriding virtual function in `node` base
+	class.
+	(dbreak_node::dump_node): Disclose more information, namely the
+	contents of any defined glyph nodes within.
+
+2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (glyph_node::dump_node)
 	(node::dump_node, node::dump_node_list): Tweak output format.
 
