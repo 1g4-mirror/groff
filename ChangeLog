@@ -1,3 +1,17 @@
+2024-05-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Begin withdrawing support for CCSID (code page) 1047 (EBCDIC).
+
+	* tmac/X.tmac:
+	* tmac/Xps.tmac:
+	* tmac/dvi.tmac:
+	* tmac/html.tmac:
+	* tmac/ps.tmac: Stop loading "latin1.tmac" or "cp1047.tmac"
+	depending on the special character `\[char97]` matching "a".
+
+	* tmac/troffrc: Simplify logic; map special character
+	`\[char160` to `\~` unconditionally.
+
 2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (class dbreak_node): Add `dump_node`
