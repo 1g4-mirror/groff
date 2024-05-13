@@ -1,3 +1,11 @@
+2024-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac (EE): Define macro with `de1` request, not `de`.
+
+	Fixes <https://savannah.gnu.org/bugs/?65729>.  Thanks to Bjarni
+	Ingi Gislason for the report.  Problem introduced by me in
+	commit 15f8188656, 21 February 2022.
+
 2024-05-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tmac]: Perform actual string comparisons.
