@@ -1,3 +1,22 @@
+2024-05-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] \X'pdf: xrev' has issues.
+
+	* src/devices/gropdf/gropdf: Fails if point size not = 10, in
+	a number of ways.
+
+	* src/devices/gropdf/gropdf.1.man: Clarify exact operation of
+	'xrev'.
+
+2024-05-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] Passing just "\" as a bookmark problem.
+
+	* src/devices/gropdf/gropdf: it ends up as a pdf string "(\)",
+	which is treated as an escaped bracket and the string is not
+	terminated! Solution is to embed the "\" in octal notation,
+	i.e. (\134).
+
 2024-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (EE): Define macro with `de1` request, not `de`.
