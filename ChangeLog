@@ -1,5 +1,13 @@
 2024-05-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf] Problem if mixed fonts have different lenIV.
+
+	* src/devices/gropdf/gropdf: Restore default value (4) for
+	each font in case custom value used by previous font. Slight
+	change to pattern matches.
+
+2024-05-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	[gropdf] \X'pdf: xrev' has issues.
 
 	* src/devices/gropdf/gropdf: Fails if point size not = 10, in

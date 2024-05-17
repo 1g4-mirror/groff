@@ -747,6 +747,7 @@ foreach my $fontno (sort keys %fontlst)
 
 	($head,$body,$tail)=GetType1($fnt->{fontfile});
 	$head=~s/\/Encoding \d.*?readonly def\b/\/Encoding StandardEncoding def/s;
+	$lenIV=4;
 
 	if ($options & SUBSET)
 	{
@@ -4617,15 +4618,15 @@ sub map_subrs
 		$RDre=qr/\Q$RD\E/;
 		$NDre=qr/\Q$ND\E/;
 	    }
-	    elsif ($lin=~m/^\/(.+?)\s+\{string currentfile exch readstring pop\}\s*executeonly def/)
+	    elsif ($lin=~m/^\/(.+?)\s*\{string currentfile exch readstring pop\}\s*executeonly def/)
 	    {
 		$RD=$1;
 	    }
-	    elsif ($lin=~m/^\/(.+?)\s+\{noaccess def\}\s*executeonly def/)
+	    elsif ($lin=~m/^\/(.+?)\s*\{noaccess def\}\s*executeonly def/)
 	    {
 		$ND=$1;
 	    }
-	    elsif ($lin=~m/^\/(.+?)\s+\{noaccess put\}\s*executeonly def/)
+	    elsif ($lin=~m/^\/(.+?)\s*\{noaccess put\}\s*executeonly def/)
 	    {
 		$NP=$1;
 	    }
@@ -4873,7 +4874,7 @@ sub MarkSub
     }
     else
     {
-	Log(1,"Missing Subrs '$k'");
+	Warn("Missing Subrs '$k'");
     }
 }
 
