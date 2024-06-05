@@ -1,3 +1,8 @@
+2024-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (dbreak_node::dump_node): Drop
+	extraneous space from output.
+
 2024-05-25  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf] Deal better with invalid destination names.

@@ -5792,7 +5792,7 @@ void dbreak_node::dump_node()
     fprintf(stderr, "<push_state>, ");
   if (state)
     fprintf(stderr, "<state>, ");
-  fprintf(stderr, " diversion level: %d", div_nest_level);
+  fprintf(stderr, "diversion level: %d", div_nest_level);
   if (none != 0 /* nullptr */) {
     fputs(", none: ", stderr);
     none->dump_node();
