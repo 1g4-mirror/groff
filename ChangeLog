@@ -1,3 +1,13 @@
+2024-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (interpolate_arg): Stop embedding
+	unprintable input characters in messages diagnosing invalid
+	syntax.
+
+	See
+	<https://lists.gnu.org/archive/html/groff/2024-05/msg00057.html>
+	and follow-ups.
+
 2024-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (glyph_node::dump_node):
