@@ -1,5 +1,12 @@
 2024-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac: Drop nilpotent junk from end of file.
+
+	Fixes <https://savannah.gnu.org/bugs/?65701>.  Thanks to Bjarni
+	Ingi Gislason for the report.
+
+2024-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_WCOREFLAG): Use `AC_LANG_PROGRAM` more
 	idiomatically; stop explicitly defining `main()`.  Reportedly
 	resolves implicit function declaration warnings from Clang.
