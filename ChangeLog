@@ -1,3 +1,10 @@
+2024-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[ms]: Further regression-test Savannah #64005.
+
+	* tmac/tests/s_honor-page-break-in-text.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2024-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc.tmac: Drop nilpotent junk from end of file.
