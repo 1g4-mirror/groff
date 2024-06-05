@@ -2197,7 +2197,7 @@ void glyph_node::dump_node()
   if (state)
     state->display_state();
   fprintf(stderr, "diversion level: %d", div_nest_level);
-  fprintf(stderr, "}");
+  fputs("}", stderr);
   fflush(stderr);
 }
 
@@ -2557,11 +2557,11 @@ void node::dump_node()
 {
   fprintf(stderr, "{type: %s, ", type());
   if (push_state)
-    fprintf(stderr, "<push_state>, ");
+    fputs("<push_state>, ", stderr);
   if (state)
-    fprintf(stderr, "<state>, ");
+    fputs("<state>, ", stderr);
   fprintf(stderr, "diversion level: %d", div_nest_level);
-  fprintf(stderr, "}");
+  fputs("}", stderr);
   fflush(stderr);
 }
 
