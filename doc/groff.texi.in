@@ -5421,7 +5421,9 @@ preprocessor to lay out tables.
 @subsection Requests and Macros
 
 We have now encountered almost all of the syntax there is in the
-@code{roff} language, with an exception already noted in passing.
+@code{roff} language, with an exception already noted in
+passing.@footnote{The backspace character is another; see
+@ref{Page Motions}.}
 @cindex request
 @cindex control character (@code{.})
 @cindex character, control (@code{.})
@@ -6564,7 +6566,7 @@ during interpretation: an identifier @samp{foo}, followed by an invalid
 character and then @samp{bar}, is processed as @samp{foobar}.
 
 On a machine using the ISO 646, 8859, or 10646 character encodings,
-invalid input characters are @code{0x00}, @code{0x08}, @code{0x0B},
+invalid input characters are @code{0x00}, @code{0x0B},
 @code{0x0D}--@code{0x1F}, and @code{0x80}--@code{0x9F}.  On an
 @acronym{EBCDIC} host, they are @code{0x00}--@code{0x01}, @code{0x08},
 @code{0x09}, @code{0x0B}, @code{0x0D}--@code{0x14},
@@ -8454,6 +8456,8 @@ doomed to success. \[em] C. A. R. Hoare
 @DefreqList {ss, word-space-size [@Var{additional-sentence-space-size}]}
 @DefregItemx {.ss}
 @DefregListEndx {.sss}
+@cindex word space
+@cindex space, word
 @cindex word space size register (@code{.ss})
 @cindex size of word space register (@code{.ss})
 @cindex space between words register (@code{.ss})
@@ -8468,7 +8472,7 @@ Set the sizes of spaces between words and sentences@footnote{Recall
 sentence boundaries, respectively.} in twelfths of the space width of
 the currently selected font.@footnote{@xref {Font Description File
 Format}.  This request is incorrectly documented in the @acronym{AT&T}
-@code{troff} manual as using units of 1/36 em.}  (An inter-word space is
+@code{troff} manual as using units of 1/36 em.}  (A @dfn{word space} is
 typically one-fourth to one-third em for Western scripts.)  The default
 for both parameters is@tie{}12.  Negative values are erroneous.
 @cindex inter-word spacing, minimal
@@ -14110,8 +14114,17 @@ logo.@footnote{@xref{Strings}, for an explanation of the trailing
 .ds TeX T\h'-.1667m'\v'.224m'E\v'-.224m'\h'-.125m'X\"
 @endExample
 
-There are a number of special-case escape sequences for horizontal
-motion.
+@cindex backspace character
+@cindex character, backspace
+An input backspace becomes a negative horizontal motion of one word
+space (recall @ref{Manipulating Filling and Adjustment}).  This feature
+persists for backward compatibiity with early formatters that predate
+@command{nroff} and even Unix itself, and which used it to facilitate
+user-directed overstriking for character composition, boldfacing, and
+underlining.  GNU @command{troff} has explicit features to support each
+of these; use them instead.
+
+Several escape sequences support special cases of horizontal motion.
 
 @Defesc {\\@key{SPC}, , , }
 @cindex space, unbreakable and unadjustable (@code{\@key{SPC}})

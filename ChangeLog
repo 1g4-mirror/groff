@@ -1,5 +1,24 @@
 2024-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[docs]: Fix Savannah #65837.
+
+	* doc/groff.texi: Fix erroneous documentation of input backspace
+	handling.
+	(Requests and Macros): Add footnote directing reader to "Page
+	Motions" node for discussion of backspace.
+	(Identifiers): Drop 0x08 from list of invalid input characters.
+	(Manipulating Filling and Adjustment): Add concept index entry
+	for "word space".  Define "word space" as terminology.
+	(Page Motions): Describe semantics of input backspace character,
+	motivate its existence, and discourage its use.
+
+	* man/groff.7.man (Identifiers):
+	* man/roff.7.man (Requests and macros): Sync.
+
+	Fixes <https://savannah.gnu.org/bugs/?65837>.
+
+2024-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[ms]: Fix Savannah #64005 (again).
 
 	* tmac/s.tmac (@break-page, bp): Fix thinko swapping the normal
