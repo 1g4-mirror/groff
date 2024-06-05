@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle May 2024
+@subtitle June 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -10223,13 +10223,25 @@ This request is incorrectly documented in the @acronym{AT&T}
 
 @cindex page number register (@code{%})
 @cindex current page number (@code{%})
-The register @code{%} interpolates the current page number.
+The register @code{%} interpolates the page number.
 
 @Example
 .de BP
 '  bp \" schedule page break once current line is output
 ..
 @endExample
+
+@strong{Caution:@:} Interpolations occur before formatting operations.
+The act of filling, breaking, and adjusting a line can change the page
+number.  @code{%} is a register like any other, not a placeholder that
+is populated after the line it appears on is formatted.  Consider, for
+example, an extremely long page number at the end of the last line on
+the page; numbers aren't hyphenated, so the word containing the page
+number might break the line and the page, causing the reported page
+number to lag by one.  This sequencing also means that interpolating the
+@code{%} register inside a diversion (such as a footnote) records the
+page number at the time the diversion is populated, not when it is
+output.
 @endDefreq
 
 @Defreq {ne, [@Var{space}]}
