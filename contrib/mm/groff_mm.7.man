@@ -3790,9 +3790,9 @@ End verbatim display.
 .
 .
 .TP
-.BR VL \~[\c
-.IR text-indent \~[ mark-indent \~[\c
-.BR 1 ]]]
+.BI VL\~ text-indent\c
+.RI \~[ mark-indent \~[\c
+.BR 1 ]]
 Begin variable-item
 (or \[lq]tagged\[rq])
 list.
