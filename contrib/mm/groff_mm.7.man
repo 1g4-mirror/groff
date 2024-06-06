@@ -3009,6 +3009,16 @@ The register
 determines the amount of vertical space between paragraphs.
 .
 .
+.IP
+To set a paragraph with a hanging indent,
+use
+.B VL
+with the desired indentation as the argument
+and
+.B LI
+(with no argument).
+.
+.
 .TP
 .B PE
 End picture input preprocessed by
