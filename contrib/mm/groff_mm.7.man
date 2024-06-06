@@ -2684,7 +2684,9 @@ for an alternative.
 .
 .
 .TP
-.BI ML\~ "mark \fR[\fPtext-indent\~" \fR[\fP1\fR]]\fP
+.BI ML\~ mark\c
+.RI \~[ text-indent \~[\c
+.BR 1 ]]
 Start a
 .I "marked list;"
 the
@@ -3234,17 +3236,17 @@ compare
 .I text-indent
 changes the default indentation.
 .
+A second argument suppresses the vertical space that normally precedes
+each list item;
+see register
+.BR Lsp .
+.
 Use
 .B LI
 to declare list items,
 and
 .B LE
 to end the list.
-.
-A second argument suppresses the vertical space that normally precedes
-each list item;
-see register
-.BR Lsp .
 .
 .
 .TP
