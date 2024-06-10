@@ -3518,6 +3518,9 @@ has no effect when the drawing position is at the top of the page.
 .
 Put the dummy character escape sequence
 .B \[rs]&
+(followed by
+.B \[rs]c
+if desired to prevent a break)
 on a text line to
 .B SP
 to overcome this restriction.
