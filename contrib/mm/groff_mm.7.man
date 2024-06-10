@@ -3350,7 +3350,7 @@ on an input line after the reference mark.
 If
 .I reference-string
 is specified,
-.I "groff ms"
+.I mm
 also stores the reference mark in a string of that name.
 .
 .
