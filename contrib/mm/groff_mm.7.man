@@ -1861,7 +1861,7 @@ way,
 and those above it another.
 .
 For example,
-a heading level within the threshold of register
+the title of a heading level within the threshold of register
 .B Cl
 is included in the table of contents
 (see
@@ -1876,7 +1876,7 @@ Register
 sets a threshold for page breaking (ejection) prior to a heading.
 .
 If not preceded by a page break,
-a heading level below the threshold in register
+a heading level within the threshold in register
 .B Hps
 is preceded by the amount of vertical space in register
 .BR Hps1 ,
@@ -1905,7 +1905,7 @@ configures the indentation of text after headings.
 Threshold register
 .B Hc
 enables the centering of headings;
-a heading level below both of the
+a heading level within both of the
 .B Hb
 and
 .B Hc
