@@ -1,5 +1,10 @@
 2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (AF): Drop unnecessary macro call.  `AU` performs the
+	requisite cleanup.
+
+2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/0.MT: Move `cov@print-firm` call to where it works.
 	Annotate the fairly subtle point revealed.
 
