@@ -1,3 +1,10 @@
+2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Regression-test Savannah #65865.
+
+	* tests/cover-page-info-is-present.sh: Do it.
+	* mm.am (mm_TESTS): Run test.
+
 2024-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (ML): Throw error if mandatory first argument missing.
