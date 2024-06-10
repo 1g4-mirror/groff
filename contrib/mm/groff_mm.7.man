@@ -997,21 +997,25 @@ switch font to bold style.
 .
 .TP
 .B B1
-Begin boxed,
-kept display.
+Begin boxed static display.
 .
 The text is indented by
 .BR 1n ,
 and the line length reduced by
 .BR 2n .
 .
+See
+.BR DS .
+.
 This is a GNU extension.
 .
 .
 .TP
 .B B2
-End boxed,
-kept display.
+End boxed static display.
+.
+See
+.BR DS .
 .
 This is a GNU extension.
 .
