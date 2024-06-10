@@ -1,5 +1,12 @@
 2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/0.MT: Align memorandum captions with DWB 3.3 mm.
+	* groff_mm.7.man <MT>: Document this.  Also fix error; omitting
+	the argument implies memorandum type 1, not 0.
+	* tests/cover-page-info-is-present.sh: Update test expectations.
+
+2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (AF): Drop unnecessary macro call.  `AU` performs the
 	requisite cleanup.
 

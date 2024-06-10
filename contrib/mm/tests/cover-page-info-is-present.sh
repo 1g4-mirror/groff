@@ -77,7 +77,7 @@ echo "checking for abstract content" >&2
 echo "$output" | grep -q leverage || wail
 
 echo "checking for memorandum type notation" >&2
-echo "$output" | grep -iq 'memorandum for file' || wail
+echo "$output" | grep -iq 'technical memorandum' || wail
 
 test -z "$fail"
 

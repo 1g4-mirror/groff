@@ -141,10 +141,11 @@ TM
 .\}
 ..
 .\"-----------------
-.ds cov*mt0-txt!1 MEMORANDUM FOR FILE
-.ds cov*mt0-txt!2 PROGRAMMER'S NOTES
-.ds cov*mt0-txt!3 ENGINEER'S NOTES
-.if d cov*default-firm .if !d cov*firm .ds cov*firm \\*[cov*default-firm]
+.ds cov*mt0-txt!1 TECHNICAL MEMORANDUM\"
+.ds cov*mt0-txt!2 INTERNAL MEMORANDUM\"
+.ds cov*mt0-txt!3 ADMINISTRATIVE MEMORANDUM\"
+.if d cov*default-firm \
+.	if !d cov*firm .ds cov*firm \\*[cov*default-firm]\"
 .\"
 .\" Note: The firm name (if any) is formatted _above_ the title and
 .\" other data, but the `AF` macro call defining it might be stuffed
