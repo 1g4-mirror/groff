@@ -1,5 +1,15 @@
 2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac:
+	* mm/0.MT:
+	* mm/4.MT:
+	* mm/ms.cov: Rename `cov*abs-arg` to `cov*abstract-placement`.
+	Rename `cov*abs-ind` to `cov*abstract-indent`.
+
+	* NOTES: Update (internal) documentation.
+
+2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/0.MT: Align memorandum captions with DWB 3.3 mm.
 	* groff_mm.7.man <MT>: Document this.  Also fix error; omitting
 	the argument implies memorandum type 1, not 0.

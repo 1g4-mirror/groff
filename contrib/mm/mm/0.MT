@@ -127,9 +127,9 @@ TM
 .SP 3
 .if d cov*abstract \{\
 .	misc@ev-keep cov*ev
-.	if \\n[cov*abs-ind]>0 \{\
-.		in +\\n[cov*abs-ind]u
-.		ll -\\n[cov*abs-ind]u
+.	if \\n[cov*abstract-indent]>0 \{\
+.		in +\\n[cov*abstract-indent]u
+.		ll -\\n[cov*abstract-indent]u
 .	\}
 .	ce
 \fI\\$1\fP

@@ -3100,8 +3100,8 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\"########################### module cov ############################
 .\" title stored in diversion cov*title
 .\" abstract stored in diversion cov*abstract
-.\"	arg to abstract stored in cov*abs-arg
-.\"	indent stored in cov*abs-ind
+.\"	placement value to `AS` stored in cov*abstract-placement
+.\"	indentation argument to `AS` stored in cov*abstract-indent
 .\" number of authors stored in cov*au
 .\" author(s) stored in cov*au!x!y
 .\" number of authors' titles stored in cov*at!x
@@ -3172,8 +3172,8 @@ exceeds depth of nested lists (\\n[li*lvl])
 .pg@disable-top-trap
 .if d cov*abstract .@error \\$0: only one abstract allowed
 .if !''\\n[.z]' .@error \\$0: no diversion allowed (previous .AS?)
-.nr cov*abs-arg 0\\$1
-.nr cov*abs-ind (n;0\\$2)
+.nr cov*abstract-placement 0\\$1
+.nr cov*abstract-indent (n;0\\$2)
 .de cov*abstract AE
 ..
 .de AE
