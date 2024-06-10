@@ -32,8 +32,8 @@ wail () {
 input='.TL C123 F456
 A World-Shaking Breakthrough
 .AF "Yoyodyne Systems, Inc."
-.AU "Art Vandelay"
-.AU "H.\& E.\& Pennypacker"
+.AU "Art Vandelay" axv RDU cube2 Foo x99 Lab baz
+.AU "H.\& E.\& Pennypacker" hep SFO cube3 Bar x77 Lab qux
 .TM 78-9-ABC 98-7-DEF
 .ND "June 10, 2024"
 .AS
