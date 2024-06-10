@@ -1,5 +1,10 @@
 2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/grog/grog.pl (do_line): Recognize new `pline`
+	request forthcoming in groff 1.24 release.
+
+2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/trans.tmac: For mm package, alias new string name
 	`Abstract` instead of old (and internal!) one, `cov*abs-name`.
 
