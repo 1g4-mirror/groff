@@ -43,6 +43,7 @@ Index		array!index
 .
 .mso devtag.tmac
 .\" ######## init #######
+.ds Abstract ABSTRACT\"
 .\"	create table of contents entry for headings of level <= Cl
 .nr Cl 2
 .\"	Eject page between LIST OF XXXX if Cp == 0
@@ -3111,8 +3112,6 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\" new date (if .ND exists) is stored in cov*new-date
 .\"
 .\"
-.ds cov*abs-name ABSTRACT
-.\"
 .nr cov*au 0
 .de TL
 .ds @cover \\$0
@@ -3165,8 +3164,10 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de AF
 .if !''\\$1' .ds cov*firm \\$1
 ..
+.\" Kill this macro off in groff 1.25.
 .de AST
-.ds cov*abs-name "\\$1\"
+.@warning \\$0: macro is deprecated; define string 'Abstract' instead
+.ds Abstract "\\$1\"
 ..
 .de AS
 .pg@disable-top-trap

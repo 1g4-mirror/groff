@@ -1,5 +1,10 @@
 2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/trans.tmac: For mm package, alias new string name
+	`Abstract` instead of old (and internal!) one, `cov*abs-name`.
+
+2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next, interpolate_arg):
 	Tighten up null-terminated string traversal.
 

@@ -160,7 +160,7 @@ TM
 .	cov@print-firm
 .	cov@print-date date
 .	cov@print-authors from
-.	cov@print-abstract \\*[cov*abs-name]
+.	cov@print-abstract \\*[Abstract]
 .	SP 3
 .	if (\*[cov*mt-type]>=1)&(\*[cov*mt-type]<=3) \{\
 .		ce

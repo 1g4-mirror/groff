@@ -1,5 +1,23 @@
 2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Replace `AST` macro and `cov*abs-name` string with `Abstract`
+	string.
+
+	* m.tmac: Define `Abstract` instead of `cov*abs-name` string at
+	initialization.
+	(AST): Throw warning if called, but honor the instruction (using
+	new string name).
+	* mm/0.MT:
+	* mm/4.MT (cov*print-abstract):
+	* mm/ms.cov (COVEND): Use new string name.
+
+	* groff_mm.7.man (Macros) <AST>: De-document.
+	(Strings) <Abstract>: Document.
+
+	* NOTES: De-document `cov*abs-name`.
+
+2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac:
 	* mm/0.MT:
 	* mm/4.MT:

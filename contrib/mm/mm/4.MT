@@ -71,7 +71,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .		ll -\\n[cov*abstract-indent]u
 .	\}
 .	ce
-\fI\\*[cov*abs-name]\fP
+\fI\\*[Abstract]\fP
 .	SP 2
 .	fi
 .	cov*abstract

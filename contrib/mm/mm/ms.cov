@@ -102,13 +102,13 @@ http://savannah.gnu.org/bugs/?group=groff.
 .cov@print-title
 .cov@print-authors
 .cov@print-firm
-.cov@print-abstract "\\*[cov*abs-name]"
+.cov@print-abstract "\\*[Abstract]"
 .cov@print-date
 .pg@enable-top-trap
 .bp 1
 .pg@enable-trap
 .if r cov*abstract-placement .if \\n[cov*abstract-placement] \{\
-.	cov@print-abstract ABSTRACT
+.	cov@print-abstract "\\*[Abstract]"
 .	SP 2
 .\}
 ..

@@ -859,18 +859,6 @@ The default
 .RB is\~ 0 .
 .
 .
-.\" XXX: Do we need a macro for this?  Why is it not a string like App
-.\" or Licon?  It is usefully localizable.
-.TP
-.BR AST \~\c
-.RI [ caption ]
-Set the caption above the abstract to
-.IR caption ,
-or clear it if there is no argument.
-.
-The default is \[lq]ABSTRACT\[rq].
-.
-.
 .TP
 .BI AT\~ title\c
 \~.\|.\|.
@@ -4014,7 +4002,12 @@ localizable text.
 These are presented in quotation marks.
 .
 .
-.TP 9.5n \" "Letnsdef" + 2n + hand-tuned for PDF
+.TP 10n \" "Abstract" + 2n
+.B Abstract
+\[lq]ABSTRACT\[rq]
+.
+.
+.TP
 .B App
 \[lq]APPENDIX\[rq]
 .
