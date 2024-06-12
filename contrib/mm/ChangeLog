@@ -1,5 +1,11 @@
 2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/4.MT (cov*print-title):
+	* mm/5.MT (cov*print-title): Apply metadata font as DWB mm does
+	in memorandum types 4 and 5.
+
+2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Rename internal register `@sdf_font` to `@metadata-font` for
 	greater clarity and (forthcoming) accuracy.  In DWB mm, the font
 	style configured by the `E` register applies not just to the

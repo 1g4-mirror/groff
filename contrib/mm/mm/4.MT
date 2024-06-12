@@ -29,12 +29,12 @@ http://savannah.gnu.org/bugs/?group=groff.
 .S +2
 .ad c
 .fi
-.B
+.ft \\*[@metadata-font]
 .cov*title
 .br
 .S
-.R
 .ad b
+.ft
 ..
 .\"------------
 .de cov@print-authors
