@@ -1,5 +1,18 @@
 2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/0.MT:
+	* mm/4.MT (cov@print-authors, cov@print-firm)
+	(cov@print-abstract):
+	* mm/5.MT (cov@print-date): Fix code style nits.  Favor font
+	selection requests over escape sequences.  Employ `nop` request
+	to clarify control and macro structures.
+
+	* mm/0.MT (cov*print-authors): Drop unnecessary `br` request
+	adjacently to invoking (with the normal control character) a
+	request that implies a break.
+
+2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Define `Litb` string using mixed case instead of full
 	caps.  This is more consistent with (1) `Liec`, `Liex`, and
 	`Lifg`; and (2) DWB 3.3 mm rendering.

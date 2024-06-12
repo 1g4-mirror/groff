@@ -39,15 +39,17 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"------------
 .de cov@print-date
 .rj 1
-\f[\\*[@sdf_font]]\\*[cov*new-date]\fP
+.ft \\*[@sdf_font]
+.nop \\*[cov*new-date]
+.ft
 .br
 ..
 .\"------------
 .if !d cov*mt-printed \{\
 .	SP 1.9c
-.	cov@print-title 
+.	cov@print-title
 .	SP 1.2c
-.	cov@print-date 
+.	cov@print-date
 .	SP 3
 .	pg@enable-top-trap
 .	pg@enable-trap

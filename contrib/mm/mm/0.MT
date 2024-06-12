@@ -39,8 +39,16 @@ subject:
 .ft
 .ll
 .nf
-.if d cov*title-charge-case \fBCharge Case \\*[cov*title-charge-case]\fP
-.if d cov*title-file-case \fBFile Case \\*[cov*title-file-case]\fP
+.if d cov*title-charge-case \{\
+.	ft B
+.	nop Work Project No.\& \\*[cov*title-charge-case]
+.	ft
+.\}
+.if d cov*title-file-case \{\
+.	ft B
+.	nop File Case \\*[cov*title-file-case]
+.	ft
+.\}
 .fi
 ..
 .\"------------
@@ -106,8 +114,9 @@ TM
 .S
 .sp -1
 .in 0.8c
-\f[\\*[@sdf_font]]\\*[cov*new-date]\fP
-.br
+.ft \\*[@sdf_font]
+.nop \\*[cov*new-date]
+.ft
 .fi
 .PGFORM
 ..
@@ -132,7 +141,9 @@ TM
 .		ll -\\n[cov*abstract-indent]u
 .	\}
 .	ce
-\fI\\$1\fP
+.	ft I
+.	nop \\$1
+.	ft
 .	SP 1.5
 .	fi
 .	cov*abstract
@@ -164,13 +175,17 @@ TM
 .	SP 3
 .	if (\*[cov*mt-type]>=1)&(\*[cov*mt-type]<=3) \{\
 .		ce
-\fI\*[cov*mt0-txt!\*[cov*mt-type]]\fP
 .		SP 1.5
+.		ft I
+.		nop \*[cov*mt0-txt!\*[cov*mt-type]]
+.		ft
 .	\}
 .	if \*[cov*mt-type]=6 \{\
 .		ce
-\fI\*[cov*mt-type-text]\fP
 .		SP 1.5
+.		ft I
+.		nop \*[cov*mt-type-text]
+.		ft
 .	\}
 .	pg@enable-top-trap
 .	pg@enable-trap

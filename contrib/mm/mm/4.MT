@@ -45,9 +45,9 @@ http://savannah.gnu.org/bugs/?group=groff.
 .S +1
 .nr cov*i 0 1
 .while \\n+[cov*i]<=\\n[cov*au] \{\
-.ce
-\\*[cov*au!\\n[cov*i]!1]
-.br
+.	ce
+.	nop \\*[cov*au!\\n[cov*i]!1]
+.	br
 .\}
 .S
 .R
@@ -57,7 +57,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if d cov*firm \{\
 .	SP 0.5
 .	ce
-\\*[cov*firm]
+.	nop \\*[cov*firm]
 .\}
 ..
 .\"------------
@@ -71,7 +71,8 @@ http://savannah.gnu.org/bugs/?group=groff.
 .		ll -\\n[cov*abstract-indent]u
 .	\}
 .	ce
-\fI\\*[Abstract]\fP
+.	ft I
+.	nop \\*[Abstract]
 .	SP 2
 .	fi
 .	cov*abstract
