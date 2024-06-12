@@ -174,19 +174,15 @@ Index		array!index
 .\"
 .nr @copy_type 0
 .if r C .nr @copy_type \n[C]
-.\" >0 if Subject/Date/From should be bold, roman otherwise
-.ie n .ds @sdf_font R
-.el .ds @sdf_font B
+.\"
+.if !r E .nr E 1
+.ie \n[E] .ds @sdf_font B\"
+.el       .ds @sdf_font R\"
+.\"
 .if \n[@copy_type]=4 \{\
 .	ls 2
 .	nr Pi 10
 .	nr Pt 1
-.\}
-.\"
-.\"
-.if r E \{\
-.	ie \n[E] .ds @sdf_font B
-.	el .ds @sdf_font R
 .\}
 .\"
 .\"	Set the type size and vertical spacing.  If given on the command

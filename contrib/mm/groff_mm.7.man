@@ -195,7 +195,6 @@ are defined.
 The registers
 .BR A ,
 .BR C ,
-.BR E ,
 .BR T ,
 and
 .BR U ,
@@ -673,8 +672,8 @@ See
 .
 .
 .\" In DWB mm, the mnemonic for `AF` was "alternate first-page format",
-.\" and was described in the context of the `A` and `E` registers and
-.\" `}Z` and `]S` strings, none of which we support.
+.\" and was described in the context of the `A` register and `}Z` and
+.\" `]S` strings, none of which we support.
 .\"
 .\" The "mm Reference" in _XENIX 286 Text Formatting Guide_ (1984) used
 .\" "affiliation", which makes sense to GBR.
@@ -4629,6 +4628,25 @@ and register
 is an auto-incrementing equation counter;
 see
 .BR EC .
+.
+.
+.TP
+.B E
+determines the font style used by
+.B MT
+memoranda,
+.B LT
+letters,
+and the
+.I ms.cov
+cover page style to set the date and certain other document data;
+.B 0
+selects roman,
+and
+.B 1
+bold
+(Boolean-valued;
+.BR 1 ).
 .
 .
 .TP

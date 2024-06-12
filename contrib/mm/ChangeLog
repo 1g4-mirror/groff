@@ -1,5 +1,11 @@
 2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Complete (mostly already existing) support for DWB mm
+	`E` register.
+	* groff_mm.7.man (Description, Registers): Document it.
+
+2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/0.MT:
 	* mm/4.MT (cov@print-authors, cov@print-firm)
 	(cov@print-abstract):
