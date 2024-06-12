@@ -4289,7 +4289,7 @@ The default is
 .
 .TP
 .B Litb
-\[lq]TABLE\[rq]
+\[lq]Table\[rq]
 .
 .
 .TP

@@ -1,3 +1,10 @@
+2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Define `Litb` string using mixed case instead of full
+	caps.  This is more consistent with (1) `Liec`, `Liex`, and
+	`Lifg`; and (2) DWB 3.3 mm rendering.
+	* groff_mm.7.man (Strings) <Litb>: Document this.
+
 2024-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Replace `AST` macro and `cov*abs-name` string with `Abstract`
