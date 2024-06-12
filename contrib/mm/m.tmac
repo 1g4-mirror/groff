@@ -176,8 +176,8 @@ Index		array!index
 .if r C .nr @copy_type \n[C]
 .\"
 .if !r E .nr E 1
-.ie \n[E] .ds @sdf_font B\"
-.el       .ds @sdf_font R\"
+.ie \n[E] .ds @metadata-font B\"
+.el       .ds @metadata-font R\"
 .\"
 .if \n[@copy_type]=4 \{\
 .	ls 2
@@ -3539,7 +3539,7 @@ undefined
 .sp 2
 .ie n ______________________________      ______________
 .el \D'l 25m 0'\h'4m'\D'l 12m 0'
-\Z'\\$1'\h'29m'\f[\\*[@sdf_font]]\\*[Letdate]\fP
+\Z'\\$1'\h'29m'\f[\\*[@metadata-font]]\\*[Letdate]\fP
 .fi
 ..
 .\"------------------------
@@ -3702,7 +3702,7 @@ undefined
 .	el \{\
 .		sp
 .		if '\\*[let*type]'SB' .ti +5m
-\\*[LetSJ] \f[\\*[@sdf_font]]\\*[let*lo-SJ]\fP
+\\*[LetSJ] \f[\\*[@metadata-font]]\\*[let*lo-SJ]\fP
 .	\}
 .	sp
 .\}

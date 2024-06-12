@@ -39,7 +39,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"------------
 .de cov@print-date
 .rj 1
-.ft \\*[@sdf_font]
+.ft \\*[@metadata-font]
 .nop \\*[cov*new-date]
 .ft
 .br

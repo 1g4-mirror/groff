@@ -32,7 +32,7 @@ subject:
 .sp -1.1
 .S
 .PGFORM
-.ft \\*[@sdf_font]
+.ft \\*[@metadata-font]
 .ll 9c
 .fi
 .cov*title
@@ -63,7 +63,7 @@ subject:
 .S
 .sp -1
 .in 0.8c
-.ft \\*[@sdf_font]
+.ft \\*[@metadata-font]
 .nr cov*i 0 1
 .while \\n+[cov*i]<=\\n[cov*au] \{\
 .	cov@print-au1 \\n[cov*i] 1
@@ -80,7 +80,7 @@ subject:
 .if r cov*mt-tm-max \{\
 .	SP 1
 .	nr cov*i 0 1
-.	ft \\*[@sdf_font]
+.	ft \\*[@metadata-font]
 TM
 .	in 1.5c
 .	sp -1
@@ -114,7 +114,7 @@ TM
 .S
 .sp -1
 .in 0.8c
-.ft \\*[@sdf_font]
+.ft \\*[@metadata-font]
 .nop \\*[cov*new-date]
 .ft
 .fi
