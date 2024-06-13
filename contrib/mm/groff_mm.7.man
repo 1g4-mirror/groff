@@ -3452,6 +3452,10 @@ see
 (one author only)
 and
 .BR MT .
+An author's title,
+if defined,
+is set on the next line,
+indented to align with the name.
 .
 For memoranda,
 reference data
