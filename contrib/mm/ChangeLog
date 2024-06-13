@@ -1,5 +1,23 @@
 2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/4.MT: Revise to more closely approximate DWB 3.3 troff
+	output.  Initialize `let*sg-suppress-all` and `let*ns-suppress`
+	true.
+	(cov@print-title): Set document title closer to where DWB 3.3
+	puts it.  Stop turning on fill mode unnecessarily.  It should
+	already be on at the start of a document.  Save and restore
+	adjustment mode instead of clobbering it.
+	(cov@print-authors): Space by a full vee mode, before
+	and after setting authors in nroff mode, since most nroff
+	devices are incapable of the half-line motions used in troff
+	mode.
+	(cov@print-firm): Space by two vees before setting the
+	document's affiliated firm name.
+	(cov@print-abstract): Use mm macros instead of formatter
+	requests to change fonts.
+
+2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Support suppression of `SG`, `NS` features.  In DWB 3.3 mm,
 	signatures (`SG`) and notations (`NS`/`NE`) are suppressed from
 	output in memorandum type 4 (".MT 4").
