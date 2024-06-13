@@ -3473,9 +3473,12 @@ exceeds depth of nested lists (\\n[li*lvl])
 ..
 .\"------------------------
 .\" Signature line
+.nr let*sg-suppress-all 0
+.nr let*sg-suppress-annotation 0
 .de SG
+.if \\n[let*sg-suppress-all] .return
 .ie d let*type .let*lt-sign \\$@
-.el .let*mt-sign \\$@
+.el            .let*mt-sign \\$@
 ..
 .\"------------------------
 .de let*lt-sign
@@ -3519,8 +3522,10 @@ undefined
 .	ne 3v+\\n[cov*at!\\n[let*i]]v
 .	SP 3v
 .	if \\n[let*i]=\\n[let*k] \{\
-.	\" Set annotation at left margin of last author's name.
-.		nop \Z'\h'-(u;\\n[.l]/2)'\\*[let*anno]'\c
+.		if !\\n[let*sg-suppress-annotation] \{\
+.			\" Set annotation to left of last author's name.
+.			nop \Z'\h'-(u;\\n[.l]/2)'\\*[let*anno]'\c
+.		\}
 .	\}
 .	nop \\*[cov*au!\\n[let*i]!1]
 .	\" Set author's title(s).
@@ -3757,8 +3762,13 @@ undefined
 .if d let@wa-junk .rm let@wa-junk
 ..
 .\"-------------------
-.\" Copy to
+.\" Notations ("Copy to", etc.)
+.nr let*ns-suppress 0
 .de NS
+.if \\n[let*ns-suppress] \{\
+.	ie \\n[.$] .return
+.	el         .box let*ns-discard
+.\}
 .sp
 .ie !''\\$2' .ds let*str \\$1
 .el \{\
@@ -3776,6 +3786,10 @@ undefined
 \\*[let*str]
 ..
 .de NE
+.if \\n[let*ns-suppress] \{\
+.	box
+.	return
+.\}
 .fi
 ..
 .\"-------------------

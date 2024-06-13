@@ -1,5 +1,23 @@
 2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Support suppression of `SG`, `NS` features.  In DWB 3.3 mm,
+	signatures (`SG`) and notations (`NS`/`NE`) are suppressed from
+	output in memorandum type 4 (".MT 4").
+
+	* m.tmac: Add new registers `let*sg-suppress-all`,
+	`let*sg-suppress-annotation`, and `let*ns-suppress`.  Initialize
+	them false.
+	(SG): Return immediately if `let*sg-suppress-all` is true.
+	Otherwise, check value of `let*sg-suppress-annotation` before
+	emitting the secretarial annotation.  (I don't have a better
+	term for this.)
+	(NS): If given arguments, return immediately if
+	`let*ns-suppress`.  Otherwise, begin box diversion
+	`let*ns-discard`.
+	(NE): If `let*ns-suppress`, end box diversion and return.
+
+2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Trivially refactor.
 	(let*mt-sign): Rename string `let*tmp` to `let*anno`, reflecting
 	its purpose as collector of the "secretarial annotation" used by
