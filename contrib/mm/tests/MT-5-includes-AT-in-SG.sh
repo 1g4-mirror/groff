@@ -26,7 +26,7 @@ groff="${abs_top_builddir:-.}/test-groff"
 #
 # Thanks to Ken Mandelberg for the reproducer.
 
-EXAMPLE='.TL
+input='.TL
 Inquiry
 .AU "John SMITH"
 .AT "Director"
@@ -36,8 +36,9 @@ sentence
 .FC Sincerely,
 .SG'
 
-echo "$EXAMPLE" \
-    | "$groff" -Tascii -P-cbou -mm \
-    | grep -Eqx '[[:space:]]+Director[[:space:]]*'
+output=$(echo "$input" | "$groff" -mm -Tascii -P-cbou)
+echo "$output"
+
+echo "$output" | grep -Eqx '[[:space:]]+Director[[:space:]]*'
 
 # vim:set ai et sw=4 ts=4 tw=72:
