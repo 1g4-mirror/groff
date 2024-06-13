@@ -1,3 +1,12 @@
+2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Trivially refactor.
+	(let*mt-sign): Rename string `let*tmp` to `let*anno`, reflecting
+	its purpose as collector of the "secretarial annotation" used by
+	some letter and memorandum types.  Use `nop` to maintain logical
+	indentation when formatting output.  Break long lines for
+	clarity.  Add comments to illuminate material laden with syntax.
+
 2024-06-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mm/4.MT (cov*print-title):

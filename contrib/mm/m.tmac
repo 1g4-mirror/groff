@@ -3498,18 +3498,20 @@ undefined
 .ne \\n[cov*au]u*4v
 .ie \\n[.$]>1 .nr let*k 1
 .el .nr let*k \\n[cov*au]
-.ds let*tmp \" empty
+.ds let*anno \" secretarial annotation
 .if d cov*au!\\n[let*k]!3 \{\
-.	as let*tmp \\*[cov*au!\\n[let*k]!3]\"
+.	as let*anno \\*[cov*au!\\n[let*k]!3]\"
 .	if d cov*au!\\n[let*k]!4 \
-.		as let*tmp -\\*[cov*au!\\n[let*k]!4]-\"
+.		as let*anno -\\*[cov*au!\\n[let*k]!4]-\"
 .\}
 .nr let*i 0 1
 .while \\n+[let*i]<=\\n[cov*au] \{\
-.	if \\n[let*i]>1 .as let*tmp /\"
-.	if d cov*au!\\n[let*i]!2 .as let*tmp \\*[cov*au!\\n[let*i]!2]\"
+.	if \\n[let*i]>1 .as let*anno /\"
+.	if d cov*au!\\n[let*i]!2 \{\
+.		as let*anno \\*[cov*au!\\n[let*i]!2]\"
+.	\}
 .\}
-.if !''\\$1' .as let*tmp -\\$1
+.if !''\\$1' .as let*anno -\\$1
 .in (u;\\n[.l]/2)
 .nf
 .nr let*i 0 1
@@ -3517,12 +3519,14 @@ undefined
 .	ne 3v+\\n[cov*at!\\n[let*i]]v
 .	SP 3v
 .	if \\n[let*i]=\\n[let*k] \{\
-\Z'\h'-(u;\\n[.l]/2)'\\*[let*tmp]'\c
+.	\" Set annotation at left margin of last author's name.
+.		nop \Z'\h'-(u;\\n[.l]/2)'\\*[let*anno]'\c
 .	\}
-\\*[cov*au!\\n[let*i]!1]
+.	nop \\*[cov*au!\\n[let*i]!1]
+.	\" Set author's title(s).
 .	nr let*j 0 1
 .	while \\n+[let*j]<=\\n[cov*at!\\n[let*i]] \{\
-\\*[cov*at!\\n[let*i]!\\n[let*j]]
+.		nop \\*[cov*at!\\n[let*i]!\\n[let*j]]
 .	\}
 .\}
 .fi
