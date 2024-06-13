@@ -1,5 +1,21 @@
 2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/5.MT: Revise to more closely approximate DWB 3.3 troff
+	output.  Initialize `let*sg-suppress-annotation` true.  Set
+	document title (and charging and filing case numbers, if any)
+	closer to where DWB 3.3 puts it.  Put the date where DWB 3.3
+	does, but let it shift down if the title et al. are too
+	garrulous, as DWB 3.3 does.  Put less space between the date and
+	the document body.
+	(cov@print-title): Adjust line length.  Stop turning on fill
+	mode unnecessarily.  It should already be on at the start of a
+	document.  Save and restore adjustment mode instead of
+	clobbering it.  Use the "metadata font" for the charging and
+	filing case numbers, not necessarily bold.
+	(cov@print-date): Drop unnecessary break request.
+
+2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/4.MT: Revise to more closely approximate DWB 3.3 troff
 	output.  Initialize `let*sg-suppress-all` and `let*ns-suppress`
 	true.
