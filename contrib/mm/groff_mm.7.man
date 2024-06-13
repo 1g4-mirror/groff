@@ -229,6 +229,20 @@ does not.
 .
 .
 .IP \[bu]
+For
+.B MT
+memoranda and
+.B LT
+letters,
+.I "groff mm"
+uses the same adjustment and font defaults in
+.I nroff
+and
+.I troff
+modes.
+.
+.
+.IP \[bu]
 Cut marks are not supported.
 .
 .
