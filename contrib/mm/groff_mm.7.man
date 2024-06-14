@@ -5516,6 +5516,13 @@ illustrates features of the
 letter formats.
 .
 .
+.TP
+.I @DOCDIR@/examples/memorandum.mm
+illustrates features of the
+.B MT
+memorandum formats.
+.
+.
 .br
 .ne 5v \" 4v plus bigger type size for heading
 .\" ====================================================================
