@@ -1,5 +1,18 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Test letter output more rigorously.
+
+	* tests/artifacts/letter.BL:
+	* tests/artifacts/letter.SB:
+	* tests/artifacts/letter.FB:
+	* tests/artifacts/letter.SP: Add expected renderings.
+	* mm.am (EXTRA_DIST): Ship them.
+
+	* tests/letters-format-correctly.sh: Add test.
+	* mm.am (mm_TESTS): Run test.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Test memorandum output more rigorously.
 
 	* tests/artifacts/memorandum.0:
