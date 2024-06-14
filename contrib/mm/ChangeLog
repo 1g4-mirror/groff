@@ -1,5 +1,12 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Fix code style nits.  Rename `li*in` to
+	`li*mark-begin`, to parallel existing `li*text-begin`.  Use
+	`nop` for clarity.  Remove registers and strings that are no
+	longer needed at the end of the macro definition.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Fix Savannah #65843.  Introduce list-item-local
 	register `li*c-pad`, for use in overriding a single item's
 	padding amount.  Initialize it to the list's padding amount

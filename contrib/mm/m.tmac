@@ -2311,7 +2311,7 @@ ML, RL, VL, or LB first
 .	SP (u;\\n[li*li-spc]*\\n[Lsp])
 .ne 2v
 .\"
-.ds li*c-mark \\*[li*mark]
+.ds li*c-mark \\*[li*mark] \" mark specific to this item's context
 .nr li*cnt!\\n[li*lvl] +1
 .if \\n[li*type]=1 .ds li*c-mark \\n[li*cnt!\\n[li*lvl]].
 .if \\n[li*type]=2 .ds li*c-mark \\n[li*cnt!\\n[li*lvl]])
@@ -2335,15 +2335,18 @@ ML, RL, VL, or LB first
 .\"
 .\" determine where the mark begin
 .ie !\\n[li*c-pad] .nr li*mark-begin \\n[li*mind]
-.el .nr li*in \\n[li*text-begin]-\\n[li*c-pad]-\w@\\*[li*c-mark]@
-.if !\\n[li*in] .nr li*in 0
+.el .nr li*mark-begin \\n[li*text-begin]-\\n[li*c-pad]-\w@\\*[li*c-mark]@
+.if !\\n[li*mark-begin] .nr li*mark-begin 0
 .\"
 .ti -\\n[li*tind]u
 .\" no indentation if hanging indent
 .if (\w@\\*[li*c-mark]@=0)&((\\n[.$]=0):(\w@\\$1@=0)) .nr li*text-begin 0
-\Z'\&\h'\\n[li*in]u'\\*[li*c-mark]'\h'\\n[li*text-begin]u'\&\c
+.nop \Z@\&\h'\\n[li*mark-begin]u'\\*[li*c-mark]@\h'\\n[li*text-begin]u'\&\c
 .if \\n[li*type]=-1 .br
 .rr li*c-pad
+.rr li*mark-begin
+.rr li*text-begin
+.rm li*c-mark
 ..
 .\"
 .\"-------------
