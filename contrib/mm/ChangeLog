@@ -1,5 +1,10 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Improve diagnostic message; name _all_ of the
+	macros that begin lists.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Test letter output more rigorously.
 
 	* tests/artifacts/letter.BL:

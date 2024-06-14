@@ -2305,8 +2305,8 @@ within DF/DE
 ..
 .\"---------------
 .de LI
-.if \\n[li*lvl]<1 .@error \\$0: no list active; call AL, BL, BVL, ... \
-first
+.if \\n[li*lvl]<1 .@error \\$0: no list active; call AL, BL, BVL, DL, \
+ML, RL, VL, or LB first
 .if \\n[li*li-spc]&(\\n[li*lvl]<=\\n[Ls]) \
 .	SP (u;\\n[li*li-spc]*\\n[Lsp])
 .ne 2v
