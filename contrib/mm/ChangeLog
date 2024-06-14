@@ -1,5 +1,17 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Fix Savannah #65843.  Introduce list-item-local
+	register `li*c-pad`, for use in overriding a single item's
+	padding amount.  Initialize it to the list's padding amount
+	{`li*pad`}.  Calculate whether the mark is overlong using the
+	padding amount rather than an unadjustable space escape sequence
+	embedded in a `\w` width computation.  If the mark is overlong,
+	override that, setting it to 2n.  Use `li*c-pad` instead of
+	`li*pad` for further computations.  Remove the new register at
+	the end of the macro definition.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #65843.
 
 	* tests/VL-accommodates-overlong-mark.sh: Do it.

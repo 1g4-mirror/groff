@@ -2324,15 +2324,18 @@ ML, RL, VL, or LB first
 .	ie (\\$2=2):(\\n[Limsp]=0) .ds li*c-mark \\$1\\*[li*c-mark]
 .	el .ds li*c-mark \\$1\ \\*[li*c-mark]
 .\}
+.nr li*c-pad \\n[li*pad]
 .\"
 .\" determine where the text begins
-.if \w'\\*[li*c-mark]'>\\n[li*tind] .@warning \\$0: overlong mark \
-'\\*[li*c-mark]'
-.nr li*text-begin \\n[li*tind]>?\w@\\*[li*c-mark]\ @
+.if \w'\\*[li*c-mark]'>\\n[li*tind] \{\
+.	@warning \\$0: overlong mark '\\*[li*c-mark]'
+.	nr li*c-pad 2n \" force item/mark separation
+.\}
+.nr li*text-begin \\n[li*tind]>?\w@\\*[li*c-mark]@+\\n[li*c-pad]
 .\"
 .\" determine where the mark begin
-.ie !\\n[li*pad] .nr li*in \\n[li*mind]
-.el .nr li*in \\n[li*text-begin]-\\n[li*pad]-\w@\\*[li*c-mark]@
+.ie !\\n[li*c-pad] .nr li*mark-begin \\n[li*mind]
+.el .nr li*in \\n[li*text-begin]-\\n[li*c-pad]-\w@\\*[li*c-mark]@
 .if !\\n[li*in] .nr li*in 0
 .\"
 .ti -\\n[li*tind]u
@@ -2340,6 +2343,7 @@ ML, RL, VL, or LB first
 .if (\w@\\*[li*c-mark]@=0)&((\\n[.$]=0):(\w@\\$1@=0)) .nr li*text-begin 0
 \Z'\&\h'\\n[li*in]u'\\*[li*c-mark]'\h'\\n[li*text-begin]u'\&\c
 .if \\n[li*type]=-1 .br
+.rr li*c-pad
 ..
 .\"
 .\"-------------
