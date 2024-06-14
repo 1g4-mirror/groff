@@ -1,5 +1,22 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Test memorandum output more rigorously.
+
+	* tests/artifacts/memorandum.0:
+	* tests/artifacts/memorandum.1:
+	* tests/artifacts/memorandum.2:
+	* tests/artifacts/memorandum.3:
+	* tests/artifacts/memorandum.4:
+	* tests/artifacts/memorandum.5:
+	* tests/artifacts/memorandum.custom: Add expected renderings.
+	* mm.am (EXTRA_DIST): Ship them.
+
+	* tests/cover-page-info-is-present.sh: Replace this test...
+	* tests/memoranda-format-correctly.sh: ...with this one.
+	* mm.am (mm_TESTS): Run the new test instead of the old one.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/0.MT: Revise to more closely approximate DWB 3.3 troff
 	output.
 	(cov@print-title): Use `SP` macro instead of `MOVE`.  Honor
