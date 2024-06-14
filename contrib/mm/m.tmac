@@ -756,8 +756,8 @@ in=\\n[.i] fi=\\n[.u] .d=\\n[.d] nl=\\n[nl] pg=\\n[%]
 .misc@ev-keep misc*verb-ev
 .nf
 .if (0\\n[misc*verb]%16)/8 .nm \\*[Verbnm]
-.ie !'\\$3'' .ft \\$3
-.el .ft CR
+.ie !'\\$3'' .if F \\$3 .ft \\$3
+.el .if F CR .ft CR
 .ie 0\\$2 \{\
 .	ss \\$2
 .	ps \\$2

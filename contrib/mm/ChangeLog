@@ -1,5 +1,9 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (VERBON): Check for font availability before switching.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* examples/memorandum.mm: New file illustrates `MT` documents.
 	* groff_mm.7.man (Files): Document it.
 
