@@ -5509,6 +5509,13 @@ implements memorandum type 5.
 performs any (further) desired necessary localization if present.
 .
 .
+.TP
+.I @DOCDIR@/examples/letter.mm
+illustrates features of the
+.B LT
+letter formats.
+.
+.
 .br
 .ne 5v \" 4v plus bigger type size for heading
 .\" ====================================================================
