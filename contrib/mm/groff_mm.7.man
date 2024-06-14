@@ -3389,7 +3389,8 @@ and
 .B D
 requests the default.
 .
-An empty or omitted argument is treated as
+.I mm
+treats an empty or omitted argument as
 .BR P .
 .
 .
@@ -3405,9 +3406,10 @@ or
 as
 .I mode
 to set a document's default explicitly;
-.B 1
-is assumed by
-.IR mm .
+.I "groff mm"
+assumes
+.BR 1 .
+.\" DWB 3.3 mm assumed 1 for troff mode, 0 for nroff mode.
 .
 Adjustment can be temporarily suspended with the
 .B na
@@ -3423,7 +3425,8 @@ or when
 is called without a
 .I mode
 argument,
-the default adjustment is restored.
+.I mm
+restores the default adjustment.
 .
 .
 .TP
