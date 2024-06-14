@@ -3715,19 +3715,18 @@ See
 .
 .TP
 .B TH
-End table heading.
+Mark the end of a
+.BR TS / TE
+table heading.
 .
-It is repeated after page breaks within a table.
+When a table spans multiple pages,
+the heading repeats at the top of each page.
 .
-See
-.BR TS .
-.
-The
+.I "groff mm"
+does not implement the
 .B N
 argument supported by DWB
-.I mm
-is not implemented by
-.I "groff mm."
+.IR mm .
 .
 .
 .TP
