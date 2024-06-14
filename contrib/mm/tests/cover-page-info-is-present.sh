@@ -62,7 +62,7 @@ echo "checking for first author" >&2
 echo "$output" | grep -q 'Art Vandelay' || wail
 
 echo "checking for second author" >&2
-echo "$output" | grep -Fq 'H. E. Pennypacker' || wail
+echo "$output" | grep -Fq 'Pennypacker' || wail
 
 echo "checking for first technical memorandum number" >&2
 echo "$output" | grep -q '78-9-ABC' || wail

@@ -3521,6 +3521,7 @@ undefined
 .if !''\\$1' .as let*anno -\\$1
 .in (u;\\n[.l]/2)
 .nf
+.ft \*[@metadata-font]
 .nr let*i 0 1
 .while \\n+[let*i]<=\\n[cov*au] \{\
 .	ne 3v+\\n[cov*at!\\n[let*i]]v
@@ -3528,7 +3529,8 @@ undefined
 .	if \\n[let*i]=\\n[let*k] \{\
 .		if !\\n[let*sg-suppress-annotation] \{\
 .			\" Set annotation to left of last author's name.
-.			nop \Z'\h'-(u;\\n[.l]/2)'\\*[let*anno]'\c
+.			\" It does _not_ get the metadata font.
+.			nop \Z'\h'-(u;\\n[.l]/2)'\f[R]\\*[let*anno]\f[]'\c
 .		\}
 .	\}
 .	nop \\*[cov*au!\\n[let*i]!1]
@@ -3538,6 +3540,7 @@ undefined
 .		nop \\*[cov*at!\\n[let*i]!\\n[let*j]]
 .	\}
 .\}
+.ft
 .fi
 .in
 ..

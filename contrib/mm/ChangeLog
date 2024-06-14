@@ -1,5 +1,56 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/0.MT: Revise to more closely approximate DWB 3.3 troff
+	output.
+	(cov@print-title): Use `SP` macro instead of `MOVE`.  Honor
+	argument instead of ignoring it.  Save and restore the
+	adjustment mode, and left-align text instead of turning off
+	filling.  The latter (1) lost track of whether filling was
+	enabled in the document already (though it _probably_ was) and
+	more importantly (2) permitted lengthy charging or filing case
+	numbers to overprint author information.  Use `nop` to maintain
+	logical indentation when formatting output.  Use `br` requests
+	to separate title/subject and the charging and filing case
+	numbers.  Favor font selection requests over escape sequences.
+	(cov@print-authors): Use `rt` request instead of `MOVE` macro,
+	to return to the vertical position marked at the end of the
+	`cov@print-date` macro (which could format more than one line of
+	output).  Suspend and restore hyphenation since the context is
+	crowded, not all names follow English hyphenation patterns, and
+	arguments after the first to `AU` are often codes or
+	abbreviations.  Avoid disabling filling using same technique as
+	above.  Arrange `AU` arguments 3-6 as DWB 3.3 does.  Stop
+	formatting a literal `TM` in the output; DWB 3.3 didn't do this.
+	{Worse, we were putting it there even if no technical memorandum
+	numbers were defined.}  Drop unnecessary `PGFORM` call.
+	(cov@print-au1, cov@print-au2): Internally document what these
+	macros are for (formatting `AU` arguments, some of which get
+	special treatment), and align with DWB 3.3 output.
+	(cov@print-date): Use `sp` request instead of `MOVE` macro; we
+	can't call `SP` because this motion is negative (upward).  Avoid
+	disabling filling using same technique as above.  Drop
+	unnecessary `PGFORM` call.  Use `mk` to mark the bottom of the
+	date output.
+	(cov@print-firm): Return early if no firm name defined.  Use
+	`sp` request instead of `MOVE` macro; we can't call `SP` because
+	this motion is negative (upward).  Align firm name left instead
+	of right.  Set firm name in Helvetica roman if Helvetica family
+	is available; in nroff mode, use bold.  Use `nop` to maintain
+	logical indentation when formatting output.
+	(cov@print-abstract):  Favor font selection requests over escape
+	sequences.
+	(initialization): Define several registers to vertically and
+	horizontally arrange the document metadata.  Adjust vertical
+	spacing around abstract and its caption.  Favor font selection
+	requests over escape sequences.
+
+	* m.tmac (let*mt-sign): Set signatures, except for the
+	secretarial annotation, using the metadata font.
+
+	* tests/cover-page-info-is-present.sh: Update test expectations.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (SP): Validate argument.  It must be numeric and can't
 	be negative.
 	* groff_mm.7.man (Macros) <SP>: Document restrictions.
