@@ -1,3 +1,9 @@
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* examples/letter.mm: Parameterize the letter in its `LT` type,
+	making it easy to render in any of the four supported styles by
+	defining a *roff string on the command line.
+
 2024-06-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mm/5.MT: Revise to more closely approximate DWB 3.3 troff
