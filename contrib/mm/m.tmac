@@ -2377,12 +2377,12 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de AL
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[D]>2 .tm AL $*
-.ie \\n[.$]<=1 .LB \\n[Li] 0 2 1 "\\$1"
+.ie \\n[.$]<=1 .LB              \\n[Li] 0 2 1 "\\$1"
 .el \{\
-.	ie \\n[.$]=2 .LB 0\\$2 0 2 1 "\\$1"
+.	ie \\n[.$]=2 .LB        0\\$2   0 2 1 "\\$1"
 .	el \{\
-.		ie !'\\$2'' .LB \\$2 0 2 1 "\\$1" 0 1
-.		el .LB \\n[Li] 0 2 1 "\\$1" 0 1
+.		ie !'\\$2'' .LB \\$2    0 2 1 "\\$1" 0 1
+.		el          .LB \\n[Li] 0 2 1 "\\$1" 0 1
 .	\}
 .\}
 ..
@@ -2391,11 +2391,11 @@ exceeds depth of nested lists (\\n[li*lvl])
 .if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
 .if \\n[D]>2 .tm ML $*
 .nr li*ml-width \w@\\$1@u+1n
-.if \\n[.$]<2 .LB \\n[li*ml-width]u 0 1 0 "\\$1"
-.if \\n[.$]=2 .LB 0\\$2 0 1 0 "\\$1"
+.if \\n[.$]<2 .LB      \\n[li*ml-width]u 0 1 0 "\\$1"
+.if \\n[.$]=2 .LB      0\\$2             0 1 0 "\\$1"
 .if \\n[.$]=3 \{\
 .	ie '\\$2'' .LB \\n[li*ml-width]u 0 1 0 "\\$1" 0 1
-.	el .LB \\n[Li] 0 1 0 "\\$1" 0 1
+.	el         .LB \\n[Li]           0 1 0 "\\$1" 0 1
 .\}
 ..
 .de VL
@@ -2403,7 +2403,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
 .ie \\n[.$]<3 .LB 0\\$1 0\\$2 0 0
-.el .LB 0\\$1 0\\$2 0 0 \& 0 1
+.el           .LB 0\\$1 0\\$2 0 0 \& 0 1
 ..
 .de BL
 .if \\n[D]>2 .tm BL $*
@@ -2412,27 +2412,27 @@ exceeds depth of nested lists (\\n[li*lvl])
 .if \\n[.$]=1 .LB 0\\$1 0 1 0 \\*[BU]
 .if \\n[.$]=2 \{\
 .	ie '\\$1'' .LB \\n[Pi] 0 1 0 \\*[BU] 0 1
-.	el .LB 0\\$1 0 1 0 \\*[BU] 0 1
+.	el         .LB 0\\$1   0 1 0 \\*[BU] 0 1
 .\}
 ..
 .de DL
 .if \\n[D]>2 .tm DL $*
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .LB \\n[Pi] 0 1 0 \[em]
-.if \\n[.$]=1 .LB 0\\$1 0 1 0 \[em]
+.if \\n[.$]=1 .LB 0\\$1   0 1 0 \[em]
 .if \\n[.$]=2 \{\
 .	ie '\\$1'' .LB \\n[Pi] 0 1 0 \[em] 0 1
-.	el .LB 0\\$1 0 1 0 \[em] 0 1
+.	el         .LB 0\\$1   0 1 0 \[em] 0 1
 .\}
 ..
 .de RL
 .if \\n[D]>2 .tm RL $*
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .LB 6 0 2 4
-.if \\n[.$]=1 .LB 0\\$1 0 2 4
+.if \\n[.$]<1 .LB      6     0 2 4
+.if \\n[.$]=1 .LB      0\\$1 0 2 4
 .if \\n[.$]=2 \{\
-.	ie '\\$1'' .LB 6 0 2 4 1 0 1
-.	el .LB 0\\$1 0 2 4 1 0 1
+.	ie '\\$1'' .LB 6     0 2 4 1 0 1
+.	el         .LB 0\\$1 0 2 4 1 0 1
 .\}
 ..
 .\" Broken Variable List. As .VL but text begin on the next line
@@ -2441,7 +2441,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
 .ie \\n[.$]<3 .LB 0\\$1 0\\$2 0 -1
-.el .LB 0\\$1 0\\$2 0 -1 \& 0 1
+.el           .LB 0\\$1 0\\$2 0 -1 \& 0 1
 ..
 .\" ####### module tbl #######################################
 .\" This module is copied from groff_ms and modified for mm.
