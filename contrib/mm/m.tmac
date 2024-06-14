@@ -2326,6 +2326,8 @@ ML, RL, VL, or LB first
 .\}
 .\"
 .\" determine where the text begins
+.if \w'\\*[li*c-mark]'>\\n[li*tind] .@warning \\$0: overlong mark \
+'\\*[li*c-mark]'
 .nr li*text-begin \\n[li*tind]>?\w@\\*[li*c-mark]\ @
 .\"
 .\" determine where the mark begin

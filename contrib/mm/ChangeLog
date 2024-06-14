@@ -1,5 +1,9 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Throw warning if a list item mark is overlong.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Improve diagnostic message; name _all_ of the
 	macros that begin lists.
 
