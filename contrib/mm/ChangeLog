@@ -1,5 +1,12 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Regression-test Savannah #65843.
+
+	* tests/VL-accommodates-overlong-mark.sh: Do it.
+	* mm.am (mm_TESTS): Run test.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Throw warning if a list item mark is overlong.
 
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
