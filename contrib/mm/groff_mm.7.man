@@ -607,6 +607,14 @@ you could input the following.
 .
 .
 .P
+Some macros are documented as causing a page break;
+this does not occur if such a macro is called when the drawing position
+is already at the top of a page
+(after a page heading,
+if any).
+.
+.
+.P
 Macro names longer than two characters are GNU extensions;
 some shorter names were not part of DWB
 .IR mm 's
