@@ -1180,8 +1180,8 @@ are required.
 .IP
 .EX
 \&.COVER
-\&.TL
 \&.AF
+\&.TL
 \&.AU
 \&.AT
 \&.AS
