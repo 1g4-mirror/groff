@@ -3802,8 +3802,7 @@ and
 .TP
 .BR VERBON \~\c \" space in roman; we must use 2-font macro with \c
 .RI [ format \~[ type-size \~[ font ]]]
-Begin verbatim display,
-where characters have equal width.
+Begin display of verbatim content.
 .
 .I format
 controls several parameters.
@@ -3820,7 +3819,9 @@ and the face
 .RI ( font );
 the default is
 .B CR
-(Courier roman).
+(Courier roman),
+a monospaced font
+(all glyphs are equally wide).
 .
 .
 .IP
