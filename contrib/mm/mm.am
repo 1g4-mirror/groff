@@ -43,7 +43,8 @@ tmacmmdir = $(tmacdir)
 dist_tmacmm_DATA = contrib/mm/refer-mm.tmac
 
 MMEXAMPLEFILES=\
-  contrib/mm/examples/letter.mm
+  contrib/mm/examples/letter.mm \
+  contrib/mm/examples/memorandum.mm
 
 mmexampledir=$(exampledir)/mm
 dist_mmexample_DATA = $(MMEXAMPLEFILES)

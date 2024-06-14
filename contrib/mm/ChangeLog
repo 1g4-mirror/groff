@@ -1,5 +1,10 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm.am (MMEXAMPLEFILES): Ship new "memorandum.mm" example in
+	distribution archive.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Fix code style nits.  Rename `li*in` to
 	`li*mark-begin`, to parallel existing `li*text-begin`.  Use
 	`nop` for clarity.  Remove registers and strings that are no
