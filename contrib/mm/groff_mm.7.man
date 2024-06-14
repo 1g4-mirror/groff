@@ -3520,13 +3520,18 @@ at normal size.
 .TP
 .BR SP \~\c
 .RI [ distance ]
-Space vertically by
+Space downward by
 .I distance.
 .
 Multiple
 .B SP
 calls in sequence produces only the largest of the specified
 .I distances.
+.
+Absolute motions with a prefixed
+.B |
+operator are accepted;
+negative ones are not.
 .
 .
 .IP

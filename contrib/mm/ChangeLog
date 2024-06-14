@@ -1,5 +1,11 @@
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (SP): Validate argument.  It must be numeric and can't
+	be negative.
+	* groff_mm.7.man (Macros) <SP>: Document restrictions.
+
+2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (VERBON): Check for font availability before switching.
 
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>

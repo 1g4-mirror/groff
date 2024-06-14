@@ -497,7 +497,11 @@ in=\\n[.i] fi=\\n[.u] .d=\\n[.d] nl=\\n[nl] pg=\\n[%]
 .br
 .if !r line*lp\\n[.z] .nr line*lp\\n[.z] 0
 .if !r line*ac\\n[.z] .nr line*ac\\n[.z] 0
-.ie \\n[.$] .nr line*temp (v;\\$1)
+.ie \\n[.$] \{\
+.	if !\B'\\$1' .@error \\$0: parameter is not numeric; got '\\$1'
+.	if (\\$1 < 0) .@error \\$0: negative motion '\\$1' not supported
+.	nr line*temp (v;\\$1)
+.\}
 .el .nr line*temp 1v
 .\"
 .ie \\n[line*lp\\n[.z]]=\\n[.d] \{\
