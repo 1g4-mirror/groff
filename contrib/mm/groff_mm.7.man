@@ -694,11 +694,6 @@ At most one can be declared;
 .I org-name
 is used by memorandum types and available to cover sheets.
 .
-.B AF
-terminates a document title started with
-.BR TL ,
-and can be called without an argument for that purpose.
-.
 See
 .B MT
 and
