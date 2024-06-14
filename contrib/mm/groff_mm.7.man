@@ -3736,20 +3736,20 @@ is not implemented by
 .IR filing-case-number ]]
 Begin document title.
 .
-Input is collected into the title until
-.B AF
-or
+.I mm
+collects
+input into the title until a subsequent
 .B AU
-is called,
-and output as directed by the cover page.
+call and formats it as directed by the
+.B MT
+memorandum type or cover sheet macros.
 .
+.I mm
+saves
 .I charging-case-number
 and
 .I filing-case-number
-are saved for use in memorandum types 0 and 5.
-.
-See
-.BR MT .
+for use in all memorandum types except 4.
 .
 .
 .TP
