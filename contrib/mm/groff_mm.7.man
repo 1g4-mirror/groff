@@ -2821,11 +2821,15 @@ without arguments to return to normal.
 .
 .TP
 .BR MULB \~\c \" space in roman; we must use 2-font macro with \c
-.IR "cw1 space1\~" [ "cw2 space2" "] .\|.\|.\~" cwn
+.IR "cw1 sp1\~" [ "cw2 sp2" "] .\|.\|.\~" cwn
 Begin alternative multi-column mode.
 .
-All column widths must be specified,
-as must the amount of space between each column pair.
+All column widths
+.IR cw i
+must be specified,
+as must the amount of space
+.IR sp i
+between each column pair.
 .
 The arguments' default scaling unit is
 .BR n .
