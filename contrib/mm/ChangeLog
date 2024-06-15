@@ -1,3 +1,9 @@
+2024-06-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Regression-test Savannah #65884.
+
+	* tests/P-indentation-works.sh: Do it.
+
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mm.am (MMEXAMPLEFILES): Ship new "memorandum.mm" example in
