@@ -786,7 +786,7 @@ and made empty otherwise.
 .
 .
 .TP
-.BI APPSK\~ "id n" \~\c
+.BI APPSK\~ "sequence-number n" \~\c
 .RI [ title ]
 As
 .BR APP ,
@@ -899,7 +899,7 @@ memoranda.
 .
 The
 .B ms
-cover sheet style also uses it.
+cover sheet style also formats these data.
 .
 .
 .br
@@ -963,9 +963,9 @@ respectively,
 beneath them.
 .
 Above these rules,
-the text in the string
-.B Letapp
-is formatted;
+.I mm
+formats the text in the string
+.BR Letapp ;
 a second argument replaces this text with one vee of vertical space.
 .
 See
@@ -978,11 +978,10 @@ See
 .IR name ]
 As
 .BR AV ,
-but the date,
+but omitting the date,
 date rule,
 and approval notation
-.B Letapp
-are omitted.
+.BR Letapp .
 .
 .
 .TP
@@ -1020,7 +1019,7 @@ This is a GNU extension.
 End boxed static display.
 .
 See
-.BR DS .
+.BR B1 .
 .
 This is a GNU extension.
 .
@@ -1049,7 +1048,8 @@ without space between the arguments.
 .BR 1 ]]
 Begin bulleted list.
 .
-Items are prefixed with a bullet and a space.
+.I mm
+prefixes each item with a bullet and a space.
 .
 A
 .I text-indent
@@ -1423,9 +1423,9 @@ if the Boolean register
 .B Le
 is true.
 .
-Such a list uses the string
+The string
 .B Le
-as a heading.
+captions this list.
 .
 .
 .TP
@@ -1583,9 +1583,9 @@ if the Boolean register
 .B Lx
 is true.
 .
-Such a list uses the string
+The string
 .B Lx
-as a heading.
+captions this list.
 .
 .
 .TP
@@ -1696,9 +1696,9 @@ if the Boolean register
 .B Lf
 is true.
 .
-Such a list uses the string
+The string
 .B Lf
-as a heading.
+captions this list.
 .
 .
 .TP
@@ -1861,20 +1861,22 @@ See
 .
 .
 .IP
-Heading behavior is highly configurable.
+Heading behavior is configurable.
 .
-Several registers set a
-.I threshold,
-where heading levels at or below the threshold value are handled in one
+Several registers set
+.I thresholds,
+where heading levels at or below a threshold value are handled in one
 way,
 and those above it another.
 .
 For example,
-the title of a heading level within the threshold of register
-.B Cl
-is included in the table of contents
+.I mm
+populates a table of contents
 (see
-.BR TC ).
+.BR TC )
+with the title of a heading if its level is within the
+.B Cl
+register threshold.
 .
 .
 .IP
@@ -2526,7 +2528,7 @@ while
 a value of\~2 does not
 (rendering the two adjacent).
 .
-Also see register
+See register
 .BR Limsp .
 .
 .
@@ -3387,7 +3389,7 @@ An argument of
 .B P
 restores the previous value,
 .B C
-indicates the current value,
+retains the current value,
 and
 .B D
 requests the default.
@@ -3454,33 +3456,53 @@ See
 .BR SG\~ [\c
 .IR arg \~[\c
 .BR 1 ]]
-Write a signature line.
-.
-Authors' names are placed after the formal closing;
-see
+Output author signature block(s) in
 .B LT
-(one author only)
-and
-.BR MT .
-An author's title,
-if defined,
-is set on the next line,
-indented to align with the name.
+letters and
+.B MT
+memoranda.
 .
-For memoranda,
-reference data
-(the location,
-department,
-and initials specified in an
-.B AU
-call),
-followed by any
-.IR arg ,
-are written at the left margin preceding the last author's name,
-or preceding the first if a second argument is present and the
-memorandum type supports it.
+The format of a signature block depends on the letter or memorandum
+type.
 .
 See section \[lq]Internals\[rq] below.
+.
+.
+.IP
+.B LT
+letters emit a signature for one author at most
+(see
+.BR WA ).
+.
+The author's title,
+if any,
+is set on the next line,
+indented to align with the name,
+except in letter type \[lq]SP\[rq],
+where it is set in full capitals
+(like the name)
+after a comma and space.
+.
+.
+.IP
+Memorandum type\~4 uses no signature block.
+.
+In other memoranda,
+each of an author's titles is set on a subsequent line,
+indented to align with the name.
+.
+They furthermore encode a secretarial annotation
+including the location,
+department,
+and initials specified in each author's
+.B AU
+call,
+followed by any
+.IR arg ,
+writing it at the left margin preceding the last author's name,
+or preceding the first if a second
+.B SG
+argument is present.
 .
 .
 .TP
@@ -3517,7 +3539,8 @@ joined with any specified
 .I pre
 and
 .I post
-at normal size.
+at normal size,
+without space between the arguments.
 .
 .
 .TP
@@ -3587,9 +3610,9 @@ if the Boolean register
 .B Lt
 is true.
 .
-Such a list uses the string
+The string
 .B Lt
-as a heading.
+captions this list.
 .
 .
 .TP
@@ -3688,10 +3711,15 @@ of formatting the contents caption.
 .
 .
 .IP
-Analogous handling of lists of figures,
+.I mm
+then presents lists of
+figures,
 tables,
 equations,
-and exhibits is achieved by defining
+and exhibits,
+in that order.
+A list appears only if at least one such captioned item is present.
+.
 .BI TX xx
 and
 .BI TY xx
@@ -3702,16 +3730,13 @@ is \[lq]FG\[rq],
 \[lq]TB\[rq],
 \[lq]EC\[rq],
 or \[lq]EX\[rq],
-respectively.
-.
-Similarly,
-the strings
+and strings
 .BR Lifg ,
 .BR Litb ,
-.BR Liex ,
+.BR Liec ,
 and
-.B Liec
-determine captions for their respective lists.
+.B Liex
+analogously configure the output of each captioned list.
 .
 .
 .TP
@@ -4970,10 +4995,11 @@ see
 .
 .TP
 .B Limsp
-inserts a space between the prefix and the mark
-in automatically numbered lists;
+inserts a space between the prefix and the mark in lists;
 see
-.B AL
+.B LB
+and
+.B LI
 (Boolean-valued;
 .BR 1 ).
 .
@@ -5189,7 +5215,7 @@ calls affect headers and footers only when followed by
 .BR EH ,
 .BR OF ,
 or
-.B OE
+.B EF
 calls
 (Boolean-valued;
 .BR 1 ).
@@ -5225,6 +5251,7 @@ Value@Effect
 always,
 except immediately after
 .BR H ,
+.BR HU ,
 .BR DE ,
 or
 .B LE
@@ -5369,8 +5396,11 @@ see
 .SH Internals
 .\" ====================================================================
 .
-The letter macros call further macros depending on the letter type,
-with which they are suffixed.
+.BR LT 's
+behavior depends on the
+.I style
+argument given to it;
+it calls macros with names suffixed accordingly.
 .
 It is therefore possible to define additional letter types,
 either in the territory-specific macro file,
@@ -5461,6 +5491,19 @@ then assigns its second argument
 to the string
 .BI let*lo\- type\c
 \&.
+.
+.
+.P
+The argument
+(if any)
+to a
+.B COVER
+or
+.B MT
+call determines the file that
+.I "groff mm"
+loads to configure the document's layout;
+see section \[lq]Files\[rq] below.
 .
 .
 .\" ====================================================================
