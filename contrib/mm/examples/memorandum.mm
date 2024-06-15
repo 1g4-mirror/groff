@@ -4,7 +4,7 @@
 .\"
 .\" For example...
 .\"   $ groff -mm -dmT=2 memorandum.mm > memorandum.ps
-.\"   $ groff -mm -dmT=SB memorandum.mm > memorandum.ps
+.\"   $ groff -mm -dmT=ATTENTION memorandum.mm > memorandum.ps
 .do if !d mT .ds mT \" empty
 .if n .SA 1
 .AF "Yoyodyne, Inc."
