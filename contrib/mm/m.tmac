@@ -1037,6 +1037,10 @@ numeric; got '\\$1'
 .H 0 \\$@
 ..
 .\"-------------
+.de hd*trap
+.nr par@suppress-indentation 0
+..
+.\"-------------
 .de H
 .if !r hd*cur-bline .nr hd*cur-bline \\n[nl]
 .br
@@ -1177,10 +1181,7 @@ numeric; got '\\$1'
 .	if (\\n[Hi]=1)&(\\n[Pt]=1) .ti +\\n[Pi]n
 .	\"	indent size of mark if Hi=2
 .	if \\n[hd*htype]&(\\n[Hi]>1) .ti +\\n[hd*mark-size]u
-.	nr par@suppress-indentation 1
 .\}
-.\" We're setting a run-in heading; the next paragraph is normal.
-.el .nr par@suppress-indentation 0
 .\"
 .\"	check if it is time to reset footnotes
 .if (\\n[hd*level]=1)&\\n[ft*clear-at-header] .nr ft*nr 0 1
@@ -1198,6 +1199,8 @@ numeric; got '\\$1'
 .nr hd*last-hsize \\n[.k]
 .\" HTML: end of heading
 .misc@tag EO-H
+.\" _Any_ output after this heading resets suppression of indentation.
+.itc 1 hd*trap
 ..
 .\"--------
 .de HM

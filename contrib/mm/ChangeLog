@@ -1,5 +1,19 @@
 2024-06-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (hd*trap): New macro shuts off suppression of paragraph
+	indentation.
+	(H): Stop trying to figure out whether we should suppress
+	indentation based on whether the heading is run-in or not; that
+	is not the relevant criterion.  What matters is whether
+	formatted output (such as implied paragraph text) follows the
+	heading call.  To that end, set a 1-line input trap calling the
+	new macro `hd*trap`.
+
+	Fixes <https://savannah.gnu.org/bugs/?65865>.  Problem
+	introduced by me in commit 814e204d16, 24 January 2023.
+
+2024-06-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #65884.
 
 	* tests/P-indentation-works.sh: Do it.
