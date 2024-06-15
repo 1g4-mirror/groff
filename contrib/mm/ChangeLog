@@ -16,7 +16,7 @@
 	heading call.  To that end, set a 1-line input trap calling the
 	new macro `hd*trap`.
 
-	Fixes <https://savannah.gnu.org/bugs/?65865>.  Problem
+	Fixes <https://savannah.gnu.org/bugs/?65884>.  Problem
 	introduced by me in commit 814e204d16, 24 January 2023.
 
 2024-06-15  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -48,6 +48,10 @@
 	override that, setting it to 2n.  Use `li*c-pad` instead of
 	`li*pad` for further computations.  Remove the new register at
 	the end of the macro definition.
+
+	Fixes <https://savannah.gnu.org/bugs/?65843>.  Problem may date
+	back to commit af2d6f8e58, 26 December 1999 (groff 1.14), which
+	introduced the `Limsp` register.
 
 2024-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
