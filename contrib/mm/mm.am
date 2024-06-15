@@ -44,7 +44,8 @@ dist_tmacmm_DATA = contrib/mm/refer-mm.tmac
 
 MMEXAMPLEFILES=\
   contrib/mm/examples/letter.mm \
-  contrib/mm/examples/memorandum.mm
+  contrib/mm/examples/memorandum.mm \
+  contrib/mm/examples/story.mm
 
 mmexampledir=$(exampledir)/mm
 dist_mmexample_DATA = $(MMEXAMPLEFILES)

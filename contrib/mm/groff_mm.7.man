@@ -5577,6 +5577,13 @@ illustrates features of the
 memorandum formats.
 .
 .
+.TP
+.I @DOCDIR@/examples/story.mm
+illustrates use of
+.I mm
+for literary purposes.
+.
+.
 .br
 .ne 5v \" 4v plus bigger type size for heading
 .\" ====================================================================

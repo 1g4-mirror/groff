@@ -1,5 +1,12 @@
 2024-06-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* examples/story.mm: New file illustrates a "normal" document,
+	neither a letter nor memorandum.
+	* groff_mm.7.man (Files): Document it.
+	* mm.am (MMEXAMPLEFILES): Ship it.
+
+2024-06-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (hd*trap): New macro shuts off suppression of paragraph
 	indentation.
 	(H): Stop trying to figure out whether we should suppress
@@ -2207,7 +2214,7 @@ Sun Jan 1 00:00:00 1991 Joergen Haegg (jh at efd.lth.se)
 
 ________________________________________________________________________
 
-Copyright 1991-2023 Free Software Foundation, Inc.
+Copyright 1991-2024 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
