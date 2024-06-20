@@ -1,5 +1,9 @@
 2024-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/mtsm.cpp (mtsm::inherit): Fix failing test.
+
+2024-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Fix Savannah #65894.  Refactor troff's "mini-troff state
 	machine" to use STL stack implementation instead of a bespoke
 	one, fixing a double-free error.

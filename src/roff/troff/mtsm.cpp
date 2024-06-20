@@ -413,9 +413,7 @@ void mtsm::inherit(statem *s, int reset_bool)
 		top.issue_no);
 #endif
     }
-    else if (s->bool_values[MTSM_BR].is_known
-	     && s->bool_values[MTSM_BR].value)
-      if (! s->int_values[MTSM_CE].is_known)
+    if (! s->int_values[MTSM_CE].is_known)
 	s->bool_values[MTSM_BR].unset();
     if (top.bool_values[MTSM_EOL].is_known
 	&& top.bool_values[MTSM_EOL].value) {
