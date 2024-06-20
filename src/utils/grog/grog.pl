@@ -38,6 +38,7 @@ my @inferred_main_package = ();	# full-service package(s) detected
 my $main_package;		# full-service package we go with
 my $use_compatibility_mode = 0;	# is -C being passed to groff?
 
+# See subroutine do_line below for chem(1) handling.
 my %preprocessor_for_macro = (
   'EQ', 'eqn',
   'G1', 'grap',
@@ -46,10 +47,6 @@ my %preprocessor_for_macro = (
   '[',  'refer',
   #'so', 'soelim', # Can't be inferred this way; see grog man page.
   'TS', 'tbl',
-  'cstart',   'chem',
-  'lilypond', 'glilypond',
-  'Perl',     'gperl',
-  'pinyin',   'gpinyin',
 );
 
 (undef, undef, my $program_name) = File::Spec->splitpath($0);
@@ -244,6 +241,15 @@ sub do_line {
       if (!grep(/$preproc/, @inferred_preprocessor)) {
 	push @inferred_preprocessor, $preproc;
       }
+    }
+  }
+
+  # Handle "chem" as a special case, since its start/end tokens collide
+  # with AT&T troff request names in their first two characters.
+  if ($line =~ /^\.(cstart|cend)\b/) {
+    my $preproc = 'chem';
+    if (!grep(/$preproc/, @inferred_preprocessor)) {
+      push @inferred_preprocessor, $preproc;
     }
   }
 

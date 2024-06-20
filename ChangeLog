@@ -1,5 +1,23 @@
 2024-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grog]: Fix Savannah #65902 (detect use of chem(1)).
+
+	* src/utils/grog/grog.pl: Take `cstart` and `cend` tokens out of
+	`preprocessor_for_macro` hash.  They don't work with the
+	existing logic.  Also drop tokens used by preprocessors that
+	don't have corresponding groff(1) options and therefore don't
+	influence the output grog(1) can emit.
+	(do_line): Add bespoke handling for `cstart` and `cend`.  Not
+	only are they the only AT&T troff preprocessor tokens that are
+	longer than two characters, but their names collide in those
+	first two characters with the names of troff requests.
+
+	Fixes Savannah #65902.  Thanks to Morten Bo Johansen for the
+	report.  Problem introduced by me in commit 53a9964497, 31 July
+	2021.
+
+2024-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #65902.
 
 	* src/utils/grog/tests/detect-chem.sh: Do it.
