@@ -193,7 +193,7 @@
 	output.  Initialize `let*sg-suppress-all` and `let*ns-suppress`
 	true.
 	(cov@print-title): Set document title closer to where DWB 3.3
-	puts it.  Stop turning on fill mode unnecessarily.  It should
+	puts it.  Stop enabling filling unnecessarily.  It should
 	already be on at the start of a document.  Save and restore
 	adjustment mode instead of clobbering it.
 	(cov@print-authors): In nroff mode, space by a full vee before
