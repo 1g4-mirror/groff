@@ -36,6 +36,9 @@ foo bar\p
 foo bar\p
 .na
 foo bar\p
+.ad
+foo bar\p
+.ad l
 .ad b
 foo bar\p
 .na
@@ -43,6 +46,8 @@ foo bar\p
 .ad c
 foo bar\p
 .na
+foo bar\p
+.ad
 foo bar\p
 .ad r
 foo bar\p
@@ -54,7 +59,7 @@ foo bar\p
 .ad 100
 foo bar\p'
 
-output=$(echo "$input" | "$groff" -Tascii)
+output=$(echo "$input" | "$groff" -T ascii)
 echo "$output"
 
 # Expected output:
@@ -89,29 +94,35 @@ echo "$output" | sed -n '3p' | grep -Fqx "$L" || wail
 echo "verifying that '.na' turns off adjustment and aligns left" >&2
 echo "$output" | sed -n '4p' | grep -Fqx "$L" || wail
 
-echo "verifying that '.ad b' enables adjustment" >&2
+echo "verifying that '.ad' restores adjustment" >&2
 echo "$output" | sed -n '5p' | grep -Fqx "$B" || wail
 
+echo "verifying that '.ad b' enables adjustment" >&2
+echo "$output" | sed -n '6p' | grep -Fqx "$B" || wail
+
 echo "verifying that '.na' turns off adjustment and aligns left" >&2
-echo "$output" | sed -n '6p' | grep -Fqx "$L" || wail
+echo "$output" | sed -n '7p' | grep -Fqx "$L" || wail
 
 echo "verifying that '.ad c' aligns to the center" >&2
-echo "$output" | sed -n '7p' | grep -Fqx "$C" || wail
+echo "$output" | sed -n '8p' | grep -Fqx "$C" || wail
 
 echo "verifying that '.na' turns off adjustment and aligns left" >&2
-echo "$output" | sed -n '8p' | grep -Fqx "$L" || wail
+echo "$output" | sed -n '9p' | grep -Fqx "$L" || wail
+
+echo "verifying that '.ad' restores previous alignment (center)" >&2
+echo "$output" | sed -n '10p' | grep -Fqx "$C" || wail
 
 echo "verifying that '.ad r' aligns right" >&2
-echo "$output" | sed -n '9p' | grep -Fqx "$R" || wail
-
-echo "verifying that '.na' turns off adjustment and aligns left" >&2
-echo "$output" | sed -n '10p' | grep -Fqx "$L" || wail
-
-echo "verifying that '.ad' restores previous alignment (right)" >&2
 echo "$output" | sed -n '11p' | grep -Fqx "$R" || wail
 
+echo "verifying that '.na' turns off adjustment and aligns left" >&2
+echo "$output" | sed -n '12p' | grep -Fqx "$L" || wail
+
+echo "verifying that '.ad' restores previous alignment (right)" >&2
+echo "$output" | sed -n '13p' | grep -Fqx "$R" || wail
+
 echo "verifying that out-of-range mode works like '.ad b'" >&2
-echo "$output" | sed -n '12p' | grep -Fqx "$B" || wail
+echo "$output" | sed -n '14p' | grep -Fqx "$B" || wail
 
 test -z "$fail"
 
