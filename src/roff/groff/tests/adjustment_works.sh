@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2021 Free Software Foundation, Inc.
+# Copyright (C) 2021-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -20,9 +20,14 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
-set -e
+fail=
 
-DOC='.pl 1v
+wail () {
+  echo "...FAILED" >&2
+  fail=yes
+}
+
+input='.pl 1v
 .ll 9n
 foo bar\p
 .na
@@ -49,44 +54,65 @@ foo bar\p
 .ad 100
 foo bar\p'
 
-OUTPUT=$(echo "$DOC" | "$groff" -Tascii)
+output=$(echo "$input" | "$groff" -Tascii)
+echo "$output"
+
+# Expected output:
+#
+#   foo   bar
+#   foo bar
+#   foo bar
+#   foo bar
+#   foo   bar
+#   foo bar
+#    foo bar
+#   foo bar
+#     foo bar
+#   foo bar
+#     foo bar
+#     foo bar
+
 B='foo   bar' # 3 spaces
 L='foo bar' # left or off
 C=' foo bar' # trailing space truncated
 R='  foo bar' # 2 leading spaces
 
 echo "verifying default adjustment mode 'b'" >&2
-echo "$OUTPUT" | sed -n '1p' | grep -Fqx "$B"
+echo "$output" | sed -n '1p' | grep -Fqx "$B" || wail
 
 echo "verifying that .na works" >&2
-echo "$OUTPUT" | sed -n '2p' | grep -Fqx "$L"
+echo "$output" | sed -n '2p' | grep -Fqx "$L" || wail
 
 echo "verifying adjustment mode 'l'" >&2
-echo "$OUTPUT" | sed -n '3p' | grep -Fqx "$L"
+echo "$output" | sed -n '3p' | grep -Fqx "$L" || wail
 
 echo "verifying that .na works after '.ad l'" >&2
-echo "$OUTPUT" | sed -n '4p' | grep -Fqx "$L"
+echo "$output" | sed -n '4p' | grep -Fqx "$L" || wail
 
 echo "verifying adjustment mode 'b'" >&2
-echo "$OUTPUT" | sed -n '5p' | grep -Fqx "$B"
+echo "$output" | sed -n '5p' | grep -Fqx "$B" || wail
 
 echo "verifying that .na works after '.ad b'" >&2
-echo "$OUTPUT" | sed -n '6p' | grep -Fqx "$L"
+echo "$output" | sed -n '6p' | grep -Fqx "$L" || wail
 
 echo "verifying adjustment mode 'c'" >&2
-echo "$OUTPUT" | sed -n '7p' | grep -Fqx "$C"
+echo "$output" | sed -n '7p' | grep -Fqx "$C" || wail
 
 echo "verifying that .na works after '.ad c'" >&2
-echo "$OUTPUT" | sed -n '8p' | grep -Fqx "$L"
+echo "$output" | sed -n '8p' | grep -Fqx "$L" || wail
 
 echo "verifying adjustment mode 'r'" >&2
-echo "$OUTPUT" | sed -n '9p' | grep -Fqx "$R"
+echo "$output" | sed -n '9p' | grep -Fqx "$R" || wail
 
 echo "verifying that .na works after '.ad r'" >&2
-echo "$OUTPUT" | sed -n '10p' | grep -Fqx "$L"
+echo "$output" | sed -n '10p' | grep -Fqx "$L" || wail
 
 echo "verifying that '.ad' restores previous adjustment mode" >&2
-echo "$OUTPUT" | sed -n '11p' | grep -Fqx "$R"
+echo "$output" | sed -n '11p' | grep -Fqx "$R" || wail
 
 echo "verifying that out-of-range adjustment mode 100 is ignored" >&2
-echo "$OUTPUT" | sed -n '12p' | grep -Fqx "$B"
+echo "$output" | sed -n '12p' | grep -Fqx "$B" || wail
+
+test -z "$fail"
+
+# vim:set ai et sw=4 ts=4 tw=72:
