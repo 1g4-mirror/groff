@@ -1,5 +1,12 @@
 2024-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::possibly_break_line):
+	Trivially refactor.  Explicitly handle adjustment modes that had
+	been handled by falling completely through a `switch` statement.
+	Throw assertion if an unhandled case is encountered.
+
+2024-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Recognize new POSIX.1-2024 standard.
 
 	* tmac/mdoc/doc-syms: Do it.
