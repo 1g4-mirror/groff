@@ -1,3 +1,11 @@
+2024-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac (NCOL): Validate package state, throwing warning if
+	called when not in multi-column mode.
+	(MULN): Validate package state, aborting with error if not in
+	multi-column mode, rather than accessing undefined registers and
+	spewing much noise about internal parameters if `-wreg` enabled.
+
 2024-06-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* examples/story.mm: New file illustrates a "normal" document,

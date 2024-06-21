@@ -1672,8 +1672,10 @@ page
 .ll \\n[pg*column-size]u
 .\" .lt \\n[pg*column-size]u
 ..
-.\" begin a new column
+.\" begin a new column if using `2C` or `MC`
 .de NCOL
+.if \\n[pg*cols-per-page]<2 .@warning \\$0: not in multi-column mode; \
+breaking page
 .br
 .if \\n[nl]>\\n[pg*last-ncol] .nr pg*last-ncol \\n[nl]
 .pg@footer
@@ -1717,6 +1719,7 @@ page
 ..
 .\"-----------
 .de MULN
+.if \\n[pg*cols-per-page]<2 .@error \\$0: not in multi-column mode
 .if \\n[pg*mul-x]>=\\n[pg*mul-max-col] .@abort undefined column width \
 (pg*mul-x=\\n[pg*mul-x >= pg*mul-max-col=\\n[pg*mul-max])
 .br
