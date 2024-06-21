@@ -2522,10 +2522,14 @@ prefixes
 to the configured mark;
 an
 .I item-mark-mode
-value of\~1 places an unbreakable space after
+value
+.RB of\~ 1
+places an unbreakable space after
 .I mark,
 while
-a value of\~2 does not
+a value
+.RB of \~2
+does not
 (rendering the two adjacent).
 .
 See register
@@ -3006,13 +3010,14 @@ Begin new paragraph.
 .
 If
 .I type
-is missing or\~ 0,
+is missing
+.RB or\~ 0 ,
 .BR P \~sets
 the paragraph fully left\-aligned.
 .
 A
 .I type
-of\~1
+.RB of\~ 1
 idents the first line by
 .B \[rs][Pi]
 ens.
@@ -3514,7 +3519,8 @@ pages.
 .
 If
 .I n
-is\~0 or omitted,
+.RB is\~ 0
+or omitted,
 the page is broken unless the drawing position is already at the top of
 a page.
 .
@@ -4450,7 +4456,8 @@ request employed by the
 .B VERBON
 macro.
 .
-The default is\~\[lq]1\[rq].
+The default
+.RB is\~ 1 .
 .
 .
 .br
