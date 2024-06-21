@@ -1900,7 +1900,7 @@ The
 register sets a threshold at which a break occurs after the heading,
 and register
 .B Hs
-sets a threshold below which vertical space follows it.
+sets a threshold within which vertical space follows it.
 .
 If the heading level is above both of these,
 a
@@ -2707,11 +2707,19 @@ is the interior spacing between columns.
 It defaults to
 .IR column-width /15.
 .
+The arguments' default scaling unit is
+.BR n .
+.
+.B NCOL
+moves to the next column,
+and
 .B 1C
 returns to single-column layout.
 .
 .B MC
-is a GNU extension.
+is a GNU extension,
+generalizing
+.BR 2C .
 .
 See
 .B MULB
@@ -2890,7 +2898,7 @@ filling is enabled.
 .
 .\" XXX: Could we use a more general mechanism?  Call it `NP`?
 .TP
-.BR nP\~ [
+.BR nP\~ [\c
 .IR type ]
 As
 .BR P ,
@@ -3097,8 +3105,11 @@ line length, page length, and page offset instead.)
 .B PGNH
 Suppress header on the next page.
 .
-This macro must be called before any macros that produce output to
-affect the layout of the first page.
+To suppress a header on the first page,
+call this macro prior to formatting any text in the document.
+.
+Also see
+.RB register\~ N .
 .
 .
 .TP
@@ -3156,10 +3167,10 @@ and
 .TP
 .BR PIC \~\c
 .RB [ \-B ]\~\c
-.RB [ \-C |\c
+.RB [ \-C \||\|\c
 .BI \-I\~ n\c
-.RB | \-L \c
-.RB | \-R ]\~\c
+.RB \||\| \-L \c
+.RB \||\| \-R ]\~\c
 .IR file \~[ width \~[ height ]]
 Include PostScript document
 .IR file .
@@ -3204,7 +3215,7 @@ Start picture input preprocessed by
 .TP
 .B PY
 As
-.B PE ,
+.BR PE ,
 but with \[lq]flyback\[rq],
 returning the drawing position to where it was prior to the picture.
 .
@@ -3348,7 +3359,7 @@ suppresses this spacing.
 .
 The string
 .B Rp
-contains the reference page caption.
+contains the reference list caption.
 .
 .
 .br
@@ -3557,7 +3568,7 @@ Space downward by
 .
 Multiple
 .B SP
-calls in sequence produces only the largest of the specified
+calls in sequence produce only the largest of the specified
 .I distances.
 .
 Absolute motions with a prefixed
@@ -3575,9 +3586,9 @@ Put the dummy character escape sequence
 (followed by
 .B \[rs]c
 if desired to prevent a break)
-on a text line to
+on a text line prior to an
 .B SP
-to overcome this restriction.
+call to overcome this restriction.
 .
 .
 .TP
@@ -4266,6 +4277,8 @@ and suffixed with
 Observe the spaces after \[lq]Copy\[rq] and before \[lq]to\[rq].
 .
 .
+.br
+.ne 3v
 .RS
 .P
 .TS
