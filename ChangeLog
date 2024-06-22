@@ -1,3 +1,19 @@
+2024-06-22  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] Fix invalid pdf when using certain sizes of
+	dashed ellipse in pic.
+
+	* src/devices/gropdf/gropdf.pl: For short dashes on flat part
+	of ellipse some v. small numbers written in form n.nnnE-n which
+	is invalid for pdfs. Also rather than split each arc always into
+	4 pieces, split into number of quadrants described between start
+	and end angle. If arc describes a straight line, use line segment
+	rather than bezier curve. (grops does this as well)
+
+	Fixes https://savannah.gnu.org/bugs/index.php?65901
+
+	Thanks to Morten Bo Johansen for reporting this issue.
+
 2024-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::possibly_break_line):
