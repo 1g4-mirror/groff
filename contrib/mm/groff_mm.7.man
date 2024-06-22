@@ -5414,11 +5414,23 @@ see
 .MR groff_tmac @MAN5EXT@ .
 .
 .
-.
 .\" ====================================================================
 .SH Internals
 .\" ====================================================================
 .
+The argument
+(if any)
+to a
+.B COVER
+or
+.B MT
+call determines the file that
+.I "groff mm"
+loads to configure the document's layout;
+see section \[lq]Files\[rq] below.
+.
+.
+.P
 .BR LT 's
 behavior depends on the
 .I style
@@ -5514,19 +5526,6 @@ then assigns its second argument
 to the string
 .BI let*lo\- type\c
 \&.
-.
-.
-.P
-The argument
-(if any)
-to a
-.B COVER
-or
-.B MT
-call determines the file that
-.I "groff mm"
-loads to configure the document's layout;
-see section \[lq]Files\[rq] below.
 .
 .
 .\" ====================================================================
