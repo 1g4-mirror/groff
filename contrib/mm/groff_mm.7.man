@@ -3862,17 +3862,19 @@ Add up the values of desired features;
 the default
 .RB is\~ 0 .
 .
-On typesetting devices,
-further arguments configure the
+Further arguments configure the
 .I type-size
-in scaled points,
+in scaled points
+(on typesetting devices),
 and the face
-.RI ( font );
-the default is
+.RI ( font ).
+.
+On typesetting devices,
+the default face is
 .B CR
 (Courier roman),
-a monospaced font
-(all glyphs are equally wide).
+a monospaced font:
+all glyphs are equally wide.
 .
 .
 .IP
