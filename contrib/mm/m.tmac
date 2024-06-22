@@ -355,10 +355,9 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ie d @country .msoquiet mm/\*[@country]_locale
 .el            .msoquiet mm/locale
 .\"---------------------------------------------
-.\" ####### module init ######
-.\"	reset all things
+.\"	reset all the things
 .\" XXX: Resets .cu and .ul but _not_ .ce or .rj.
-.de init@reset
+.de @reset
 .ie \\n[misc@adjust] .ad
 .el                  .na
 .ie \\n[Hy] .hy 14
@@ -1023,7 +1022,7 @@ numeric; got '\\$1'
 .df@print-float 2\"	$$$ could be wrong...
 .\" terminate all lists
 .LC
-.init@reset
+.@reset
 .nr hd*level 0\\$1
 .nr hd*arg1 0\\$1
 .if !\\n[hd*level] .nr hd*level \\n[Hu]
@@ -1511,7 +1510,7 @@ numeric; got '\\$1'
 .\" define bottom block
 .de BS
 .misc@ev-keep pg*block-ev
-.init@reset
+.@reset
 .br
 .di pg*block-div
 ..
@@ -1943,7 +1942,7 @@ breaking page
 .misc@ev-keep df*ev
 .ft \\n[ds*ftmp]
 .\"
-.init@reset
+.@reset
 .di df*div
 'in 0
 .\"
@@ -1980,7 +1979,7 @@ breaking page
 .	if \\n[D]>2 .tm Print remaining displays.
 .\" still some floats left, make non-empty environment
 .	misc@ev-keep ne
-.	init@reset
+.	@reset
 \c
 .	df@print-float 3
 .	ev
@@ -2185,7 +2184,7 @@ breaking page
 .misc@ev-keep ds*ev!\\n+[ds*snr]
 .ft \\n[ds*ftmp]
 .\"
-.init@reset
+.@reset
 .\" indent in a diversion doesn't seem like a good idea.
 'in 0
 .di ds*div!\\n[ds*snr]
@@ -2511,7 +2510,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .HTML-IMAGE
 ..
 .de PY
-.init@reset
+.@reset
 .HTML-IMAGE-END
 ..
 .de PE
@@ -2748,7 +2747,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .el            .ds lix*pgnr \\n[%]
 .SP \\n[Lsp]u
 .misc@ev-keep lix
-.init@reset
+.@reset
 .br
 .ie (\w@\\$1\\$2@)>(\\n[.l]-\\n[.i]) \{\
 .	in +\w@\\$1@u
@@ -2773,7 +2772,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 \!.SP \\\\n[Lsp]u
 \!.misc@ev-keep lix
 \!.ll \\n[.l]u
-\!.init@reset
+\!.@reset
 \!.fi
 \!.ie (\w@\\$1\\$2@)>(\\\\n[.l]-\\\\n[.i]) \{\
 .	in +\w@\\$1@u
@@ -3001,7 +3000,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .	nr ref*flag 0
 .	br
 .	misc@ev-keep ne
-.	init@reset
+.	@reset
 \c
 '	bp
 .	ev
@@ -3728,7 +3727,7 @@ undefined
 .if \\n[.$] .ds let*ia-name!\\n+[let*ia-n] \\$1
 .if \\n[.$]>1 .ds let*ia-title!\\n[let*ia-n] \\$2
 .ev let@ev
-.init@reset
+.@reset
 'nf
 .di let@ia-div
 .eo
@@ -3745,7 +3744,7 @@ undefined
 .if \\n[.$] .ds let*wa-name!\\n+[let*wa-n] \\$1
 .if \\n[.$]>1 .ds let*wa-title!\\n[let*wa-n] \\$2
 .ev let@ev
-.init@reset
+.@reset
 'nf
 .di let@wa-div
 .it \\n[Letwam] let@wa-drain
@@ -3811,7 +3810,7 @@ undefined
 ..
 .\"--------------------
 .\" Start with a clean slate
-.init@reset
+.@reset
 .
 .\" Local Variables:
 .\" mode: nroff

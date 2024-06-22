@@ -1,5 +1,13 @@
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (init@reset): Rename this macro...
+	(@reset): ...to this.  The init "module" had no other contents.
+	(H, BS, DF, df@eot-print, DS, PY, lix@print-text)
+	(lix@embedded-text, ref@eot-print, IA, WA, [initialization]):
+	Update call sites.
+
+2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (init@reset, debug, debug-all, SA, pg@header)
 	(pg@set-env, ft@init): Fix code style nit.  Invoke requests that
 	don't break with the normal control character.
