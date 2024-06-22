@@ -359,10 +359,10 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"	reset all things
 .\" XXX: Resets .cu and .ul but _not_ .ce or .rj.
 .de init@reset
-.ie \\n[misc@adjust] 'ad
-.el 'na
-.ie \\n[Hy] 'hy 14
-.el 'nh
+.ie \\n[misc@adjust] .ad
+.el                  .na
+.ie \\n[Hy] .hy 14
+.el         .nh
 'in 0
 'ti 0
 .ps \\n[@ps]u
@@ -393,15 +393,15 @@ http://savannah.gnu.org/bugs/?group=groff.
 ..
 .\" ####### module debug #################################
 .de debug
-'tm \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s],\\n[.ps] \
+.tm \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s],\\n[.ps] \
 in=\\n[.i] fi=\\n[.u] .d=\\n[.d] nl=\\n[nl] pg=\\n[%]
 ..
 .de debug-all
 .nr debug*n 1n
 .nr debug*m 1m
-'tm \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s] in=\\n[.i]\
+.tm \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s] in=\\n[.i]\
  ad=\\n[.j] fi=\\n[.u] pl=\\n[.p] page=\\n[%] .o=\\n[.o]
-'tm _______ .d=\\n[.d] .f=\\n[.f] .h=\\n[.h] .k=\\n[.k] .n=\\n[.n]\
+.tm _______ .d=\\n[.d] .f=\\n[.f] .h=\\n[.h] .k=\\n[.k] .n=\\n[.n]\
  .p=\\n[.p] .t=\\n[.t] .z=\\n[.z] nl=\\n[nl] dn=\\n[dn] n=\\n[debug*n]
 ..
 .\" ####### module par #################################
@@ -512,8 +512,8 @@ in=\\n[.i] fi=\\n[.u] .d=\\n[.d] nl=\\n[nl] pg=\\n[%]
 .\}
 .\" XXX: ...and finally an unconditional.
 .\"   .ad \\n[.j]
-.ie \\n[misc@adjust] 'ad
-.el 'na
+.ie \\n[misc@adjust] .ad
+.el                  .na
 ..
 .\"-------------
 .\" switch environment, keep all important settings.
@@ -1310,8 +1310,8 @@ numeric; got '\\$1'
 .	\}
 .\}
 .\" check if Hy has been changed
-.ie \\n[Hy] 'hy 14
-.el 'nh
+.ie \\n[Hy] .hy 14
+.el         .nh
 .if \\n[Idxf] \{\
 .tl '<pagenr\ \\n[%]>'''
 .\}
@@ -1434,8 +1434,8 @@ numeric; got '\\$1'
 .\"
 .\" Initialize the title environment
 .de pg@set-env
-'na
-'nh
+.na
+.nh
 'in 0
 'ti 0
 .ie \\n[Pgps] \{\
@@ -1755,10 +1755,10 @@ breaking page
 .\" label justification not implemented $$$
 'in 0
 'fi
-.ie \\n[ft*adjust] 'ad
-.el 'na
-.ie \\n[ft*hyphen] 'hy 6
-.el 'hy 0
+.ie \\n[ft*adjust] .ad
+.el                .na
+.ie \\n[ft*hyphen] .hy 6
+.el                .hy 0
 .ll \\n[@cur-ll]u
 .lt \\n[@cur-ll]u
 .ps (p;\\n[@ps]u-2)

@@ -1,5 +1,11 @@
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (init@reset, debug, debug-all, SA, pg@header)
+	(pg@set-env, ft@init): Fix code style nit.  Invoke requests that
+	don't break with the normal control character.
+
+2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Trivially refactor.  Reorganize initialization logic
 	and update its internal documentation.
 
