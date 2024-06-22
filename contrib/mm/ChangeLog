@@ -1,5 +1,12 @@
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (PIC): Reckon optional indentation argument in ens by
+	default.
+
+	* groff_mm.7.man (Macros) <PIC>: Document this.
+
+2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Rename macros to get out of user name space.
 
 	* m.tmac (debug): Rename this macro...

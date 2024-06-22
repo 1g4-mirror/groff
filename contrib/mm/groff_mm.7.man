@@ -3186,9 +3186,7 @@ The optional
 and
 .BI \-I\~ n
 arguments align the picture or indent it by
-.I n
-(assuming a scaling unit of
-.BR m ).
+.IR n .
 .
 By default,
 the picture is left-aligned.
