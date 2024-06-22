@@ -5582,7 +5582,7 @@ implements memorandum type 5.
 .
 .TP
 .I @TMAC_MDIR@/locale
-performs any (further) desired necessary localization if present.
+performs any (further) desired localization if present.
 .
 .
 .TP
