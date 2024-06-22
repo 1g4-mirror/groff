@@ -1,5 +1,10 @@
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Trivially refactor.  Reorganize initialization logic
+	and update its internal documentation.
+
+2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (MULN, DF): Fix code style nit, favoring assembly of
 	long strings with both `ds` and `as` instead of using input line
 	continuation.  Refer to displays as such in comments and

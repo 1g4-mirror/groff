@@ -1,7 +1,10 @@
 .ig
 
 Copyright (C) 1991-2024 Free Software Foundation, Inc.
-mm is written by Jörgen Hägg <jh@axis.com>
+groff mm is written by Jörgen Hägg <jh@axis.com>
+based on groff ms by James Clark <jjc@jclark.com>
+and further developed by Werner Lemberg <wl@gnu.org>
+and G. Branden Robinson <g.branden.robinson@gmail.com>.
 
 mm is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free
@@ -18,13 +21,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Please submit bug reports using groff's 'BUG-REPORT' file to
 http://savannah.gnu.org/bugs/?group=groff.
-
-Naming convention adapted from groff ms.
-Local names	module*name
-Extern names	module@name
-Env.var		environ:name
-Index		array!index
 ..
+.\" Package identifier naming convention
+.\"   name		API, user-visible, global
+.\"   @name		global
+.\"   module@name	module-specific, public
+.\"   module*name	module-specific, private to module
+.\"
+.\" The latter three may be combined with the following notations.
+.\"   env:id		property of *roff environment named "env" (.ev)
+.\"   id!index		array element numbered "index"
+.
 .if !\n(.g \
 .  ab groff mm macros require groff extensions; aborting
 .
@@ -42,33 +49,172 @@ Index		array!index
 .if d PH .nx
 .
 .mso devtag.tmac
-.\" ######## init #######
-.ds Abstract ABSTRACT\"
-.\"	create table of contents entry for headings of level <= Cl
+.\" ######## initialize package #######
+.\"	create table of contents entry for heading of level <= Cl
 .nr Cl 2
-.\"	Eject page between LIST OF XXXX if Cp == 0
+.\"	suppress page break after TOC lists of figures, tables, ...?
 .nr Cp 0
-.\"	Debugflag
+.\"	report debugging messages?
 .if !r D .nr D 0
-.\"	Eject after floating display is output [0:1]
+.\"	eject page after floating display?
 .nr De 0
-.\"	Floating keep output [0;5]
+.\"	floating display output policy [0:5]
 .nr Df 5
-.\"	space before and after display if == 1 [0:1]
+.\"	vertically space before and after display?
 .nr Ds 1
-.\"	eject page before headings of level <= Ej
+.\"	eject page before headings of level <= Ej?
 .nr Ej 0
-.\"	Equation label adjust 0=left, 1=right
+.\"	align equation labels to the left instead of the right?
 .nr Eq 0
-.\"	Bullet string (for .BL)
+.\"	bullet string (for .BL)
 .ie n .ds BU \[bu]
-.el .ds BU \s-2\[bu]\s0
-.\"	Em dash string
+.el   .ds BU \s-2\[bu]\s0
+.\"	em dash string
 .ie n .ds EM " --
-.el .ds EM \[em]
-.\"	Footnote spacing
+.el   .ds EM \[em]
+.\"	multiple of Lsp to put between items of footnote text
 .nr Fs 1
-.\"	H1-H7	heading counters
+.\"	break after headings of level <= Hb
+.nr Hb 2
+.\"	center headings of level <= Hc
+.nr Hc 0
+.\"	heading font, per level
+.ds HF 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+.\"	indentation policy of text after headings
+.\"	0 -> no indentation
+.\"	1 -> first-line indentation, like ".P 1"
+.\"	2 -> indent to line up with text part of preceding heading
+.nr Hi 1
+.\"	header point (type) size, per level
+.ds HP 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+.\"	put vertical space of \n[Hss] after headings of level <= Hs
+.nr Hs 2
+.\"	heading numbering type
+.\"	0 -> multiple (1.1.1 ...)
+.\"	1 -> single
+.nr Ht 0
+.\"	unnumbered headings format like numbered headings of this level
+.nr Hu 2
+.\"	automatic hyphenation enabled?
+.nr Hy 0
+.\"	captions of lists potentially appearing in table of contents
+.ds Lf LIST OF FIGURES
+.nr Lf 1
+.ds Lt LIST OF TABLES
+.nr Lt 1
+.ds Lx LIST OF EXHIBITS
+.nr Lx 1
+.ds Le LIST OF EQUATIONS
+.nr Le 0
+.\"	list indentation in ens
+.nr Li 6
+.\"	put vertical space before list items of nesting level <= Ls
+.nr Ls 99 \" TODO: use \n[.R]; see Savannah #63587
+.\"	page numbering style [0:5]
+.if !r N .nr N 0
+.\"	number paragraphs under first-level headings?
+.nr Np 0
+.\"	format of figure,table,exhibit,equation titles
+.\"	0= ". ", 1=" - "
+.nr Of 0
+.\"	table of contents page numbering style
+.nr Oc 0
+.\"	page number, normally same as \n[%]
+.nr P 0
+.\"	paragraph indentation in ens
+.nr Pi 5
+.\"	multiple of Lsp to put between paragraphs
+.nr Ps 1
+.\"	paragraph indentation policy (for .P)
+.\"	0 == no indentation
+.\"	1 == indented by \n[Pi]
+.\"	2 == indented by \n[Pi] except after .H, .DE, or .LE
+.nr Pt 0
+.\"	reference list caption
+.ds Rp REFERENCES\"
+.\"	display indentation in ens
+.nr Si 5
+.\" service mark string
+.ie t .ds Sm \v'-.4m'\s-3SM\s0\v'.4m'\"
+.el \{\
+.	ie c \[u2120] .ds Sm \[u2120]\"
+.	el            .ds Sm (SM)\"
+.\}
+.\" trade mark string
+.ie t .ds Tm \v'-.4m'\s-3TM\s0\v'.4m'\"
+.el \{\
+.	ie c \[tm] .ds Tm \[tm]\"
+.	el         .ds Tm (TM)\"
+.\}
+.\"---------------------------------------------
+.\"	documented but command-line-only registers
+.\"
+.\" S and V are handled specially later.
+.
+.\" XXX: The man page says C isn't supported.  Unfinished?  Check it
+.\" against DWB.
+.if r C .nr @copy_type \n[C]
+.
+.if !r E .nr E 1
+.ie \n[E] .ds @metadata-font B\"
+.el       .ds @metadata-font R\"
+.
+.if r L .pl \n[L]u
+.
+.ie r O .po \n[O]u
+.el     \{\
+.	ie n .po .75i
+.	el   .po .963i
+.\}
+.
+.ie r W .ll \n[W]u
+.el     .ll 6i
+.\"---------------------------------------------
+.nr @copy_type 0
+.if \n[@copy_type]=4 \{\
+.	ls 2
+.	nr Pi 10
+.	nr Pt 1
+.\}
+.\"	Configure type size and vertical spacing.  If given on the
+.\"	command line, these have already been converted to basic units.
+.if !r S .nr S 10
+.ie (\n[S] >= 1000) .ps \n[S]z/1000u
+.el                 .ps \n[S]
+.nr *vs-default \n[.ps]*120/100
+.if !r V .nr V \n[*vs-default]
+.ie (\n[V] >= 1000) .vs \n[V]p/1000u
+.el                 .vs \n[V]
+.rr *vs-default
+.
+.nr @ps \n[.ps]
+.nr @vs \n[.v]
+.if \n[D]>1 .tm @ps=\n[@ps], @vs=\n[@vs]
+.if \n[D]>3 .tm INIT: l:\n[.l] p:\n[.p] o:\n[.o]
+.nr @pl \n[.p]
+.nr @ll \n[.l]
+.nr @cur-ll \n[@ll]
+.lt \n[@ll]u
+.nr @po \n[.o]
+.
+.\" non-zero if escape mechanism is turned off. Used by VERBON/OFF
+.nr @verbose-flag 0
+.\"---------------------------------------------
+.\"	public groff mm extension registers and strings
+.
+.\" Indicate groff mm macro package; documents may test this.
+.nr .mgm 1
+.\" Abstract caption
+.ds Abstract ABSTRACT\"
+.\" Appendix caption
+.ds App APPENDIX
+.\" format appendix caption?
+.nr Aph 1
+.\" appendix text possibly set by APP or APPSK
+.ds Apptext \" empty
+.\" spacing before and after static displays (if undefined, Lsp is used)
+.\" .nr Dsp 1v
+.\" heading level counters
 .nr H1 0 1
 .nr H2 0 1
 .nr H3 0 1
@@ -83,205 +229,42 @@ Index		array!index
 .nr H12 0 1
 .nr H13 0 1
 .nr H14 0 1
-.\"	break after headings of level <= Hb
-.nr Hb 2
-.\"	center headings of level <= Hc
-.nr Hc 0
-.\"	header format
-.ds HF 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-.\"	heading temp. indent [0:2]
-.\"	0 -> 0 indent, left margin
-.\"	1 -> indent to right , like .P 1
-.\"	2 -> indent to line up with text part of preceding heading
-.nr Hi 1
-.\"	header pointsize
-.ds HP 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-.\"	put vertical space of \n[Hss] after headings of level <= Hs
-.nr Hs 2
-.\"	heading numbering type
-.\"	0 -> multiple (1.1.1 ...)
-.\"	1 -> single
-.nr Ht 0
-.\"	Unnumbered heading level
-.nr Hu 2
-.\"	hyphenation in body
-.\"	0 -> no hyphenation
-.\"	1 -> hyphenation 14 on
-.nr Hy 0
-.\"	text for toc, selfexplanatory. Look in the new variable section
-.ds Lf LIST OF FIGURES
-.nr Lf 1
-.ds Lt LIST OF TABLES
-.nr Lt 1
-.ds Lx LIST OF EXHIBITS
-.nr Lx 1
-.ds Le LIST OF EQUATIONS
-.nr Le 0
-.\"	List indentation in ens, used by .AL
-.nr Li 6
-.\"	put vertical space before list items of nesting level <= Ls
-.nr Ls 99 \" TODO: use \n[.R]; see Savannah #63587
-.\"	Numbering style [0:5]
-.if !r N .nr N 0
-.\"	numbered paragraphs
-.\"	0 == not numbered
-.\"	1 == numbered in first level headings.
-.nr Np 0
-.\"	Format of figure,table,exhibit,equation titles.
-.\"	0= ". ", 1=" - "
-.nr Of 0
-.\"	Table of contents page numbering style
-.nr Oc 0
-.\"	Page-number, normally same as %.
-.nr P 0
-.\"	paragraph indentation in ens
-.nr Pi 5
-.\"	paragraph spacing
-.nr Ps 1
-.\"	paragraph type
-.\"	0 == left-justified
-.\"	1 == indented .P
-.\"	2 == indented .P except after .H, .DE or .LE.
-.nr Pt 0
-.\"	Reference title
-.ds Rp REFERENCES
-.\"	Reference page eject status
-.nr Rpe 0
-.\"	display indentation in ens
-.nr Si 5
-.\"
-.\" Current state of TOC, empty outside TC, inside
-.\" it will be set to co,fg,tb,ec,ex or ap.
-.ds Tcst
-.\"
-.ie t .ds Sm \v'-.4m'\s-3SM\s0\v'.4m'\"
-.el \{\
-.	ie c \[u2120] .ds Sm \[u2120]\"
-.	el            .ds Sm (SM)\"
-.\}
-.
-.ie t .ds Tm \v'-.4m'\s-3TM\s0\v'.4m'\"
-.el \{\
-.	ie c \[tm] .ds Tm \[tm]\"
-.	el         .ds Tm (TM)\"
-.\}
-.\"
-.\"---------------------------------------------
-.\"	Internal global variables
-.\"
-.\" This is for cover macro .MT
-.\" .ds @country
-.\"
-.nr @copy_type 0
-.if r C .nr @copy_type \n[C]
-.\"
-.if !r E .nr E 1
-.ie \n[E] .ds @metadata-font B\"
-.el       .ds @metadata-font R\"
-.\"
-.if \n[@copy_type]=4 \{\
-.	ls 2
-.	nr Pi 10
-.	nr Pt 1
-.\}
-.\"
-.\"	Set the type size and vertical spacing.  If given on the command
-.\"	line, these have already been converted to basic units.
-.if !r S .nr S 10
-.ie (\n[S] >= 1000) .ps \n[S]z/1000u
-.el                 .ps \n[S]
-.nr *vs-default \n[.ps]*120/100
-.if !r V .nr V \n[*vs-default]
-.ie (\n[V] >= 1000) .vs \n[V]p/1000u
-.el                 .vs \n[V]
-.rr *vs-default
-.
-.nr @ps \n[.ps]
-.nr @vs \n[.v]
-.if \n[D]>1 .tm @ps=\n[@ps], @vs=\n[@vs]
-.if \n[D]>3 .tm INIT: l:\n[.l] p:\n[.p] o:\n[.o]
-.\"
-.\"	page length
-.if r L \{\
-.	pl \n[L]u
-.\}
-.nr @pl \n[.p]
-.\"
-.\"	line length
-.ie r W \{\
-.	ll \n[W]u
-.\}
-.el .ll 6i
-.nr @ll \n[.l]
-.nr @cur-ll \n[@ll]
-.lt \n[@ll]u
-.\"
-.\"	page offset
-.ie r O .po \n[O]u
-.el \{\
-.	ie n .po .75i
-.	el .po .963i
-.\}
-.\"
-.nr @po \n[.o]
-.\"
-.\" non-zero if escape mechanism is turned off. Used by VERBON/OFF
-.nr @verbose-flag 0
-.\"---------------------------------------------
-.\"	New variables
-.\"
-.\" Appendix name
-.ds App APPENDIX
-.\" print appendixheader, 0 == don't
-.nr Aph 1
-.\"
-.\" Current appendix text
-.ds Apptext
-.\" Controls the space before and after static displays if defined.
-.\" Lsp is used otherwise
-.\" .nr Dsp 1v
-.\"
-.\" Add a dot after level one heading number if >0
+.\" add a dot after level one heading number?
 .nr H1dot 1
-.\"
 .\" put vertical space of \n[Hps2] before headings of level <= Hps
 .nr Hps 1
-.\"
 .\" amount of vertical space before headings when level > Hps
-.nr Hps1 0.5v
-.if n .nr Hps1 1v
-.\"
+.ie t .nr Hps1 0.5v
+.el   .nr Hps1 1v
 .\" amount of vertical space before headings when level <= Hps
-.nr Hps2 1v
-.if n .nr Hps2 2v
-.\"
-.\" Hss is the number of lines (Lsp) after the header.
+.ie t .nr Hps2 1v
+.el   .nr Hps2 2v
+.\" multiple of Lsp to put after a heading
 .nr Hss 1
-.\"
-.\" H1txt will be updated by .H and .HU, containing the heading text.
-.\" Will also be updated in table of contents & friends
-.\"
-.ds H1txt
-.\"
-.\" header text for the index
+.\" H1txt is updated by .H and .HU, containing the heading text.
+.\" .TC and lix@print-ds also update it.
+.ds H1txt \" empty
+.\" caption for the index
 .ds Index INDEX
-.\"
-.\" flag for mkindex
+.\" flag for mkindex (XXX: undocumented: do we need this?)
 .if !r Idxf .nr Idxf 0
-.\"	Change these in the national configuration file
+.\" captions for displays
 .ds Lifg Figure
 .ds Litb Table
 .ds Liex Exhibit
 .ds Liec Equation
+.\" caption for the table of contents
 .ds Licon CONTENTS
+.\" Put space between a list item's mark and prefix?
 .\" Flag for space between mark and prefix 1==space, 0==no space
 .\" Can also be controlled by using '.LI mark 2'
 .nr Limsp 1
 .\"
 .\" Lsp controls the height of an empty line. Normally 0.5v
 .\" Normally used for nroff compatibility.
-.nr Lsp 0.5v
-.if n .nr Lsp 1v
+.ie t .nr Lsp 0.5v
+.el   .nr Lsp 1v
+.
 .ds MO1 January
 .ds MO2 February
 .ds MO3 March
@@ -294,28 +277,42 @@ Index		array!index
 .ds MO10 October
 .ds MO11 November
 .ds MO12 December
+.
+.\" use body text size and vertical spacing for titles?
+.nr Pgps 1
+.
+.\" Text printed below the footer. Controlled by @copy_type (C).
+.\" (XXX: undocumented)
+.ds Pg_type!0
+.ds Pg_type!1 OFFICIAL FILE COPY
+.ds Pg_type!2 DATE FILE COPY
+.ds Pg_type!3 D\ R\ A\ F\ T
+.ds Pg_type!4 D\ R\ A\ F\ T
+.
 .\" for GETR
 .ds Qrf See chapter \E*[Qrfh], page \E*[Qrfp].
-.\"
-.\" header- and footer-size will only change to the current
-.\" if Pgps is > 0.
-.nr Pgps 1
-.\"
-.\" section-page if Sectp > 0
+.\" output reference marks to standard error?
+.if !r Ref .nr Ref 0
+.\" reference list page ejection policy
+.nr Rpe 0
+.\" use section-page page numbering?
 .nr Sectp 0
 .if (\n[N]=3):(\n[N]=5) \{\
 .	nr Sectp 1
 .	nr Ej 1
 .\}
-.\" section-figure if Sectf > 0
-.nr Sectf 0
-.if \n[N]=5 .nr Sectf 1
-.\"
-.\" argument to .nm in .VERBON.
+.\" use section-figure page numbering?
+.ie \n[N]=5 .nr Sectf 1
+.el         .nr Sectf 0
+.\" state of TOC formatting
+.\" This is empty outside the table of contents; inside it is set to co,
+.\" fg, tb, ec, ex, or ap.
+.ds Tcst \" empty
+.\" argument(s) for VERBON to give to `nm` request
 .ds Verbnm 1\"
-.\" indent for VERBON
+.\" indentation of verbatim regions (VERBON)
 .nr Verbin 5n
-.\"
+.
 .\" Letter section
 .\" Formal closing (.FC)
 .ds Letfc Yours very truly,
@@ -350,29 +347,8 @@ Index		array!index
 .ds Letns!12 Abstract Only to
 .ds Letns!13 Complete Memorandum to
 .ds Letns!14 CC:
-.\"
-.\" Text printed below the footer. Controlled by @copy_type (C).
-.ds Pg_type!0
-.ds Pg_type!1 OFFICIAL FILE COPY
-.ds Pg_type!2 DATE FILE COPY
-.ds Pg_type!3 D\ R\ A\ F\ T
-.ds Pg_type!4 D\ R\ A\ F\ T
 .\" Max lines in return address
 .nr Letwam 14
-.\"--------------------------
-.\"	test for mgm macro. This can be used if the text must test
-.\"	what macros is used.
-.nr .mgm 1
-.\"
-.\" Due to security problems with groff I had to rewrite
-.\" the reference system. It's not as elegant as before, you
-.\" have to run groff with '-z -rRef=1' and put stderr into the filename
-.\" for .INITR
-.\"
-.\" Output references to stderr if non-zero
-.if !r Ref \{\
-.	nr Ref 0
-.\}
 .\"
 .\"---------------------------------------------
 .\" set local variables.
