@@ -400,6 +400,7 @@ recognized where the control character is.
 .
 It suppresses the (first) break implied by the
 .request .bp ,
+.request .ce ,
 .request .cf ,
 .request .fi ,
 .request .fl ,
