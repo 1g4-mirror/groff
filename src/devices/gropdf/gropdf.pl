@@ -3958,7 +3958,6 @@ sub do_D
 	    $endang+=$rad360 if $endang < $startang;
 	    my $pieces=int(($endang-$startang) / $rad90)+1;
 	    my $totang=($endang-$startang)/$pieces;       # do it in pieces
-	    print STDERR "Pieces=$pieces, P=",join(',',@p),"\n";
 
 	    # Now 1 piece
 
