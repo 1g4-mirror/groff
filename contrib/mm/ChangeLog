@@ -1,5 +1,16 @@
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Rename macros to get out of user name space.
+
+	* m.tmac (debug): Rename this macro...
+	(debug@little-dump): ...to this.
+	(debug-all): ...and this one...
+	(debug@big-dump): ...to this.
+	(pg@next-page, pg@disable-trap, pg@footnotes): Update
+	{commented-out} call sites.
+
+2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (init@reset): Rename this macro...
 	(@reset): ...to this.  The init "module" had no other contents.
 	(H, BS, DF, df@eot-print, DS, PY, lix@print-text)

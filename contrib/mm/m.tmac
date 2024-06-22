@@ -391,17 +391,18 @@ http://savannah.gnu.org/bugs/?group=groff.
 .br
 ..
 .\" ####### module debug #################################
-.de debug
-.tm \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s],\\n[.ps] \
-in=\\n[.i] fi=\\n[.u] .d=\\n[.d] nl=\\n[nl] pg=\\n[%]
+.de debug@little-dump
+.tmc \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s],\\n[.ps]
+.tm1 " in=\\n[.i] fi=\\n[.u] .d=\\n[.d] nl=\\n[nl] pg=\\n[%]
 ..
-.de debug-all
+.de debug@big-dump
 .nr debug*n 1n
 .nr debug*m 1m
-.tm \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s] in=\\n[.i]\
- ad=\\n[.j] fi=\\n[.u] pl=\\n[.p] page=\\n[%] .o=\\n[.o]
-.tm _______ .d=\\n[.d] .f=\\n[.f] .h=\\n[.h] .k=\\n[.k] .n=\\n[.n]\
- .p=\\n[.p] .t=\\n[.t] .z=\\n[.z] nl=\\n[nl] dn=\\n[dn] n=\\n[debug*n]
+.tmc \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s] in=\\n[.i]
+.tm1 " ad=\\n[.j] fi=\\n[.u] pl=\\n[.p] page=\\n[%] .o=\\n[.o]
+.tmc _______ .d=\\n[.d] .f=\\n[.f] .h=\\n[.h] .k=\\n[.k] .n=\\n[.n]
+.tmc " .p=\\n[.p] .t=\\n[.t] .z=\\n[.z] nl=\\n[nl] dn=\\n[dn]
+.tm1 " n=\\n[debug*n]
 ..
 .\" ####### module par #################################
 .nr par*indentation-eligible 1		\" indent following P if Pt=2
@@ -1274,10 +1275,10 @@ numeric; got '\\$1'
 .\"-------------------------
 .\" stop output and begin on next page. Fix footnotes and all that.
 .de pg@next-page
-.\".debug next-page
+.\".debug@little-dump next-page
 .br
 .if \\n[pg*at-end-of-input] \c
-.ne 999i		\" activate trap
+.ne 999i	\" activate trap; TODO: use \n[.R]; see Savannah #63587
 .\" .pg@footer
 ..
 .\"-------------------------
@@ -1377,7 +1378,7 @@ numeric; got '\\$1'
 .ec
 .if \\n[D]>2 .tm Footer# \\n[%] (\\n[.F]:\\n[c.]) nl=\\n[nl]
 .pg@disable-trap
-.\".debug footer
+.\".debug@little-dump footer
 .tbl@bottom-hook
 .\" increment pageoffset for MC
 .\" move to the exact start of footer.
@@ -1491,7 +1492,7 @@ numeric; got '\\$1'
 .\"-------------------------
 .\" end of page processing
 .de pg@footnotes
-.\".debug footnotes
+.\".debug@little-dump footnotes
 .\" output footnotes. set trap for block
 .\"
 ..
