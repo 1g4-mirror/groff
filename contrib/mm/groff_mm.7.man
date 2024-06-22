@@ -278,6 +278,17 @@ macro names are usually in full capitals;
 registers and strings tend to have mixed-case names.
 .
 .
+.P
+Except where noted,
+.I mm
+assumes that horizontal measurements are reckoned in ens
+(scaling unit
+.BR n )
+and vertical ones in vees
+(scaling unit
+.BR v ).
+.
+.
 .\" ====================================================================
 .SS "Document styles"
 .\" ====================================================================
@@ -868,8 +879,6 @@ but is not by
 A second argument increases the indentation by
 .I indentation
 and reduces the line length by twice this amount.
-.
-A scaling unit of ens is assumed.
 .
 The default
 .RB is\~ 0 .
@@ -2707,9 +2716,6 @@ is the interior spacing between columns.
 It defaults to
 .IR column-width /15.
 .
-The arguments' default scaling unit is
-.BR n .
-.
 .B NCOL
 moves to the next column,
 and
@@ -2847,9 +2853,6 @@ must be specified,
 as must the amount of space
 .IR sp i
 between each column pair.
-.
-The arguments' default scaling unit is
-.BR n .
 .
 .B MULB
 uses a diversion and operates in a separate environment.
