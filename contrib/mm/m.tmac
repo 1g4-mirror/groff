@@ -1720,8 +1720,11 @@ breaking page
 .\"-----------
 .de MULN
 .if \\n[pg*cols-per-page]<2 .@error \\$0: not in multi-column mode
-.if \\n[pg*mul-x]>=\\n[pg*mul-max-col] .@abort undefined column width \
-(pg*mul-x=\\n[pg*mul-x >= pg*mul-max-col=\\n[pg*mul-max])
+.if \\n[pg*mul-x]>=\\n[pg*mul-max-col] \{\
+.	ds pg*msg .@abort undefined column width \"
+.	as (pg*mul-x=\\n[pg*mul-x] >= pg*mul-max-col=\\n[pg*mul-max])\"
+.	@abort \\*[pg*msg]
+.\}
 .br
 .if \\n[.d]>\\n[pg*mul-last] .nr pg*mul-last \\n[.d]
 .rt +0
@@ -1951,8 +1954,11 @@ breaking page
 .\" floating display start
 .\" nested DF/DE is not allowed.
 .de DF
-.if \\n[df*float] .@error \\$0: cannot nest floating keeps; use DS \
-within DF/DE
+.if \\n[df*float] \{\
+.	ds df*msg \\$0: cannot nest floating displays; \"
+.	as df@msg use DS within DF/DE\"
+.	@error \\*[df*msg]
+.\}
 .ds ds@macro \\$0
 .ds@set-format \\$@
 .\"
@@ -2216,8 +2222,8 @@ within DF/DE
 .\"--------------------------------------------
 .de ds@end
 .\" We hard-code the DE macro name here since this macro is internal but
-.\" only DE calls it.  We also know we're closing a static keep because
-.\" df@end is called otherwise.  See `DE`.
+.\" only DE calls it.  We also know we're closing a static display
+.\" because df@end is called otherwise.  See `DE`.
 .if \\n-[ds*lvl]<0 .@error DE: no corresponding DS
 .br
 .di

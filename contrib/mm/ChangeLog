@@ -1,5 +1,13 @@
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (MULN, DF): Fix code style nit, favoring assembly of
+	long strings with both `ds` and `as` instead of using input line
+	continuation.  Refer to displays as such in comments and
+	diagnostic messages, not as "keep"; mm tradition seems not to
+	use the latter term.
+
+2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Actually remove temporary register `*vs-default`.
 
 2024-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
