@@ -1,5 +1,10 @@
 2024-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/grog/grog.pl: Trivially refactor.  Relocate
+	declaration of huge list `request` closer to its point of use.
+
+2024-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/grog/grog.pl: Trivially refactor.  Rename scalar
 	`have_any_valid_arguments` to `have_any_valid_operands`,
 	reflecting its more specific purpose.  Rename subroutine

@@ -285,6 +285,31 @@ sub interpret_line {
   # If the line calls a user-defined macro, skip it.
   return if (exists $user_macro{$command});
 
+  # Add user-defined macro names to %user_macro.
+  #
+  # Macros can also be defined with .dei{,1}, ami{,1}, but supporting
+  # that would be a heavy lift for the benefit of users that probably
+  # don't require grog's help.  --GBR
+  if ($command =~ /^(de|am)1?$/) {
+    my $name = $args;
+    # Strip off any end macro.
+    $name =~ s/\s+.*$//;
+    # Handle special cases of macros starting with '[' or ']'.
+    if ($name =~ /^[][]/) {
+      delete $preprocessor_for_macro{'['};
+    }
+    # XXX: If the macro name shadows a standard macro name, maybe we
+    # should delete the latter from our lists and hashes.  This might
+    # depend on whether the document is trying to remain compatible
+    # with an existing interface, or simply colliding with names they
+    # don't care about (consider a raw roff document that defines 'PP').
+    # --GBR
+    $user_macro{$name} = 0 unless (exists $user_macro{$name});
+    return;
+  }
+
+  # XXX: Handle .rm as well?
+
   # These are all requests supported by groff 1.24.0.
   my @request = ('ab', 'ad', 'af', 'aln', 'als', 'am', 'am1', 'ami',
 		 'ami1', 'as', 'as1', 'asciify', 'backtrace', 'bd',
@@ -313,31 +338,6 @@ sub interpret_line {
 		 'tmc', 'tr', 'trf', 'trin', 'trnt', 'troff', 'uf',
 		 'ul', 'unformat', 'vpt', 'vs', 'warn', 'warnscale',
 		 'wh', 'while', 'write', 'writec', 'writem');
-
-  # Add user-defined macro names to %user_macro.
-  #
-  # Macros can also be defined with .dei{,1}, ami{,1}, but supporting
-  # that would be a heavy lift for the benefit of users that probably
-  # don't require grog's help.  --GBR
-  if ($command =~ /^(de|am)1?$/) {
-    my $name = $args;
-    # Strip off any end macro.
-    $name =~ s/\s+.*$//;
-    # Handle special cases of macros starting with '[' or ']'.
-    if ($name =~ /^[][]/) {
-      delete $preprocessor_for_macro{'['};
-    }
-    # XXX: If the macro name shadows a standard macro name, maybe we
-    # should delete the latter from our lists and hashes.  This might
-    # depend on whether the document is trying to remain compatible
-    # with an existing interface, or simply colliding with names they
-    # don't care about (consider a raw roff document that defines 'PP').
-    # --GBR
-    $user_macro{$name} = 0 unless (exists $user_macro{$name});
-    return;
-  }
-
-  # XXX: Handle .rm as well?
 
   # Ignore all other requests.  Again, macro names can contain Perl
   # regex metacharacters, so be careful.
