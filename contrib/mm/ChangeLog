@@ -1,3 +1,10 @@
+2024-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac ([initialization], VERBON, VERBOFF, pg@footer):
+	Trivially refactor.  Rename internal register `@verbose-flag` to
+	`@in-verbatim-region`, fixing linguistic solecism and clarifying
+	the register's purpose.  Update comments accordingly.
+
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Manipulate automatic hyphenation using

@@ -197,8 +197,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .lt \n[@ll]u
 .nr @po \n[.o]
 .
-.\" non-zero if escape mechanism is turned off. Used by VERBON/OFF
-.nr @verbose-flag 0
+.nr @in-verbatim-region 0
 .\"---------------------------------------------
 .\"	public groff mm extension registers and strings
 .
@@ -729,8 +728,8 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"	flag
 .\"	bit	function
 .\"	0	escape character disablement
-.\"	1	add an empty line before verbose text
-.\"	2	add an empty line after verbose text
+.\"	1	add an empty line before verbatim text
+.\"	2	add an empty line after verbatim text
 .\"	3	number output lines using Verbnm string for .nm args
 .\"	4	indent text by amount in register Verbin
 .de VERBON
@@ -752,7 +751,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if (0\\n[misc*verb]%32)/16 .in +\\n[Verbin]u
 .if 0\\n[misc*verb]%2 \{\
 .	eo
-.	nr @verbose-flag 1		\" tell pageheader to set ec/eo
+.	nr @in-verbatim-region 1
 .\}
 ..
 .de VERBOFF
@@ -762,7 +761,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if (0\\n[misc*verb]%16)/8 .nm
 .if (0\\n[misc*verb]%32)/16 .in
 .ev
-.nr @verbose-flag 0
+.nr @in-verbatim-region 0
 ..
 .\" Wrapper to cancel the side effect of .tag + .br generating
 .\" unwanted vertical space.
@@ -1396,7 +1395,7 @@ numeric; got '\\$1'
 .\" next column
 .pg@set-po
 .pg@enable-trap
-.if \\n[@verbose-flag] .eo		\" to help VERBON/VERBOFF
+.if \\n[@in-verbatim-region] .eo
 ..
 .\"-------------------------
 .de pg@print-footer
