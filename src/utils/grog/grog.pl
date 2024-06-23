@@ -282,9 +282,6 @@ sub interpret_line {
   $command = '' unless ($command);
   $args = '' unless ($args);
 
-  ######################################################################
-  # user-defined macros
-
   # If the line calls a user-defined macro, skip it.
   return if (exists $user_macro{$command});
 
@@ -382,7 +379,6 @@ sub interpret_line {
 
   ##########
   # me
-
   if ($macro =~ /^(
 		   [ilnp]p|
 		   n[12]|
@@ -392,12 +388,8 @@ sub interpret_line {
     return;
   }
 
-
   #############
   # mm and mmse
-
-  # `LI` is unique to mm among full-service macro packages, but www.tmac
-  # muddies the waters, so omit it.
   if ($macro =~ /^(
 		   AL|BL|BVL|DL|ML|RL|VL|
 		   EPIC|
@@ -411,6 +403,8 @@ sub interpret_line {
 		   PH|
 		   SA
 		  )$/x) {
+    # `LI` is unique to mm among full-service macro packages, but
+    # www.tmac muddies the waters, so omit it.  `MT` also used by man.
     if ($macro =~ /^LO$/) {
       if ( $args =~ /^(DNAMN|MDAT|BIL|KOMP|DBET|BET|SIDOR)/ ) {
 	&push_main_package('mse');
@@ -428,7 +422,6 @@ sub interpret_line {
 
   ##########
   # mom
-
   if ($macro =~ /^(
 		   ALD|
 		   AUTHOR|
@@ -520,6 +513,7 @@ sub infer_man_or_ms_package {
 		   'EE', 'EX',
 		   'OP',
 		   'ME', 'SY', 'YS', 'TQ', 'UR', 'UE', 'MR');
+  # MT is also used by mm.
 
   my @macro_man_or_ms = ('B', 'I', 'BI',
 			 'DT',
@@ -574,6 +568,7 @@ sub construct_command {
   my @main_package = ('an', 'doc', 'doc-old', 'e', 'm', 'om', 's');
   my $file_args_included;	# file args now only at 1st preproc
   unshift @command, 'groff';
+
   if (@preprocessor) {
     my @progs;
     $progs[0] = shift @preprocessor;
