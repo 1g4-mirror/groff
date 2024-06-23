@@ -1,3 +1,15 @@
+2024-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/grog/grog.pl: Trivially refactor.  Rename scalar
+	`have_any_valid_arguments` to `have_any_valid_operands`,
+	reflecting its more specific purpose.  Rename subroutine
+	`process_input` to `read_input`; it transforms its input only
+	for internal purposes (to draw inferences), without output.
+	Rename subroutine `do_line` to `interpret_line`.  "Do" is an
+	overused term in software development, too often meaning
+	"whatever the programmer had in mind at the time but failed to
+	document anywhere".
+
 2024-06-22  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf] Fix invalid pdf when using certain sizes of

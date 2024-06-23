@@ -38,7 +38,7 @@ my @inferred_main_package = ();	# full-service package(s) detected
 my $main_package;		# full-service package we go with
 my $use_compatibility_mode = 0;	# is -C being passed to groff?
 
-# See subroutine do_line below for chem(1) handling.
+# See subroutine interpret_line below for chem(1) handling.
 my %preprocessor_for_macro = (
   'EQ', 'eqn',
   'G1', 'grap',
@@ -66,7 +66,7 @@ my $ms_score = 0;
 
 my $had_inference_problem = 0;
 my $had_processing_problem = 0;
-my $have_any_valid_arguments = 0;
+my $have_any_valid_operands = 0;
 
 
 sub fail {
@@ -163,7 +163,7 @@ sub process_arguments {
     # take no arguments.
     my $cluster = '[abcCeEgGijklNpRsStUVXzZ]*';
 
-    # Our do_line() needs to know if it should do compatibility parsing.
+    # Our interpret_line() must know if compatibility parsing is needed.
     $use_compatibility_mode = 1 if ($arg =~ /^-${cluster}C${cluster}/);
 
     push @command, $arg;
@@ -173,23 +173,23 @@ sub process_arguments {
 } # process_arguments()
 
 
-sub process_input {
+sub read_input {
   foreach my $file (@input_file) {
     unless ( open(FILE, $file eq "-" ? $file : "< $file") ) {
       &fail("cannot open '$file': $!");
       next;
     }
 
-    $have_any_valid_arguments = 1;
+    $have_any_valid_operands = 1;
 
     while (my $line = <FILE>) {
       chomp $line;
-      &do_line($line);
+      &interpret_line($line);
     }
 
     close(FILE);
   } # end foreach
-} # process_input()
+} # read_input()
 
 
 # Push item onto inferred full-service list only if not already present.
@@ -201,7 +201,7 @@ sub push_main_package {
 } # push_main_package()
 
 
-sub do_line {
+sub interpret_line {
   my $command;			# request or macro name
   my $args;			# request or macro arguments
 
@@ -462,7 +462,7 @@ sub do_line {
     &push_main_package('om');
     return;
   }
-} # do_line()
+} # interpret_line()
 
 my @preprocessor = ();
 
@@ -691,9 +691,9 @@ my $in_unbuilt_source_tree = 0;
 $groff_version = '@VERSION@' unless ($in_unbuilt_source_tree);
 
 &process_arguments();
-&process_input();
+&read_input();
 
-if ($have_any_valid_arguments) {
+if ($have_any_valid_operands) {
   &infer_preprocessors();
   &infer_man_or_ms_package() if (scalar @inferred_main_package != 1);
   &construct_command();
