@@ -1,5 +1,18 @@
 2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Manipulate automatic hyphenation using
+	locale-appropriate modes, not those particular to English.
+	(@enable-hyphenation): New macro restores hyphenation using
+	groff 1.24 `hy` behavior if available, and registers defined by
+	locale tmac files otherwise (see groff_tmac(5)).
+	(@reset, pg@header): Replace explicit setting of hyphenation
+	mode 14 with call of `@enable-hyphenation`.
+	(MULB, ft@init): Replace explicit setting of hyphenation mode 6
+	with call of `@enable-hyphenation`.
+	(B1): Replace no-op request with call of `@enable-hyphenation`.
+
+2024-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (PIC): Reckon optional indentation argument in ens by
 	default.
 

@@ -355,12 +355,16 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ie d @country .msoquiet mm/\*[@country]_locale
 .el            .msoquiet mm/locale
 .\"---------------------------------------------
+.de @enable-hyphenation
+.ie r .hydefault .hy \" Use groff 1.24 feature.
+.el              .hy \\n[\\*[locale]*hyphenation-mode-trap]
+..
 .\"	reset all the things
 .\" XXX: Resets .cu and .ul but _not_ .ce or .rj.
 .de @reset
 .ie \\n[misc@adjust] .ad
 .el                  .na
-.ie \\n[Hy] .hy 14
+.ie \\n[Hy] .@enable-hyphenation
 .el         .nh
 'in 0
 'ti 0
@@ -1309,8 +1313,7 @@ numeric; got '\\$1'
 .		@error insufficient page length; aborting
 .	\}
 .\}
-.\" check if Hy has been changed
-.ie \\n[Hy] .hy 14
+.ie \\n[Hy] .@enable-hyphenation
 .el         .nh
 .if \\n[Idxf] \{\
 .tl '<pagenr\ \\n[%]>'''
@@ -1689,7 +1692,7 @@ breaking page
 .fam \\*[pg*mul-fam]
 .ft \\n[pg*mul-font]
 .fi
-.hy 6
+.@enable-hyphenation
 .di pg*mul-div
 .MULN
 ..
@@ -1757,7 +1760,7 @@ breaking page
 'fi
 .ie \\n[ft*adjust] .ad
 .el                .na
-.ie \\n[ft*hyphen] .hy 6
+.ie \\n[ft*hyphen] .@enable-hyphenation
 .el                .hy 0
 .ll \\n[@cur-ll]u
 .lt \\n[@cur-ll]u
@@ -2905,7 +2908,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .vs \\n[@vs]u
 .in 1n
 .ll (u;\\n[box*wid]-1n)
-.hy \\n[.hy]
+.@enable-hyphenation
 ..
 .de B2
 .if !\\n[box*ll] .@error \\$0: no corresponding B1
