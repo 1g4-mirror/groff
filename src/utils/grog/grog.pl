@@ -89,7 +89,7 @@ sub process_arguments {
   my $optarg = 0;
 
   foreach my $arg (@ARGV) {
-    if ( $optarg ) {
+    if ($optarg) {
       push @command, $arg;
       $optarg = 0;
       next;
@@ -113,7 +113,7 @@ sub process_arguments {
       next;
     }
 
-    unless ( $arg =~ /^-/ ) { # file name, no opt, no optarg
+    unless ($arg =~ /^-/) { # file name, no opt, no optarg
       push @input_file, $arg;
       next;
     }
@@ -175,7 +175,7 @@ sub process_arguments {
 
 sub read_input {
   foreach my $file (@input_file) {
-    unless ( open(FILE, $file eq "-" ? $file : "< $file") ) {
+    unless (open(FILE, $file eq "-" ? $file : "< $file")) {
       &fail("cannot open '$file': $!");
       next;
     }
@@ -406,12 +406,12 @@ sub interpret_line {
     # `LI` is unique to mm among full-service macro packages, but
     # www.tmac muddies the waters, so omit it.  `MT` also used by man.
     if ($macro =~ /^LO$/) {
-      if ( $args =~ /^(DNAMN|MDAT|BIL|KOMP|DBET|BET|SIDOR)/ ) {
+      if ($args =~ /^(DNAMN|MDAT|BIL|KOMP|DBET|BET|SIDOR)/) {
 	&push_main_package('mse');
 	return;
       }
     } elsif ($macro =~ /^LT$/) {
-      if ( $args =~ /^(SVV|SVH)/ ) {
+      if ($args =~ /^(SVV|SVH)/) {
 	&push_main_package('mse');
 	return;
       }
