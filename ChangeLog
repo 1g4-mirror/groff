@@ -317,7 +317,7 @@
 	depending on the special character `\[char97]` matching "a".
 
 	* tmac/troffrc: Simplify logic; map special character
-	`\[char160` to `\~` unconditionally.
+	`\[char160]` to `\~` unconditionally.
 
 2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
