@@ -788,8 +788,15 @@ and ``@key{SPC}'' is the space bar.
 
 The @code{roff} language features several major syntactical categories
 within which many items are predefined.  Presentations of these items
-feature the form in which the item is most commonly used on the left,
-and, aligned to the right margin, the name of the category in brackets.
+comprise
+@iftex
+the form in which the item is most commonly used on the left, and,
+aligned to the right margin, the name of the category in brackets.
+@end iftex
+@ifnottex
+the name of the category followed by a colon and the form in which the
+item is most commonly used.
+@end ifnottex
 
 @deffn Register \n[example]
 The register @samp{example} is one that that @code{groff} @emph{doesn't}
