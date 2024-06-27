@@ -1787,7 +1787,16 @@ See
 .TP
 .BI GETR\~ ref-name
 Retrieve location data for reference
-.I ref-name
+.IR ref-name ,
+call
+.B GETHN
+and
+.B GETPN
+to populate strings
+.B Qrfh
+and
+.BR Qrfn ,
+respectively,
 and interpolate string
 .B Qrf
 as a cross reference to it.
@@ -4394,6 +4403,24 @@ The default is
 .B Qrf
 \[lq]See chapter \[rs]E*[Qrfh],
 page \[rs]En[Qrfp].\[rq]
+.
+If your document uses multiple heading levels,
+you might redefine this string to use the word \[lq]section\[rq]
+instead of \[lq]chapter\[rq].
+.
+.
+.TP
+.B Qrfh
+stores the heading number corresponding to the most recent
+.B \%GETR
+call.
+.
+.
+.TP
+.B Qrfp
+stores the page number corresponding to the most recent
+.B \%GETR
+call.
 .
 .
 .TP
