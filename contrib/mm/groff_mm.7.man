@@ -3442,22 +3442,21 @@ assumes
 .BR 1 .
 .\" DWB 3.3 mm assumed 1 for troff mode, 0 for nroff mode.
 .
-Adjustment can be temporarily suspended with the
+Invoke the
 .B na
-request.
+request as desired to temporarily suspend adjustment.
 .
-When the
 .B H
-or
+and
 .B HU
-macros are used to format a heading,
-or when
+are called,
+and
 .B SA
-is called without a
+when called without a
 .I mode
 argument,
 .I mm
-restores the default adjustment.
+restore the default adjustment.
 .
 .
 .TP
@@ -3604,6 +3603,10 @@ call to overcome this restriction.
 .TP
 .B TAB
 Reset tab stops to every 5\~ens.
+.
+The
+.B ta
+request customizes them.
 .
 .
 .br
@@ -4102,7 +4105,7 @@ These are presented in quotation marks.
 .B Apptxt
 stores the
 .I title
-argument to the last
+argument to the most recent
 .B APP
 call.
 .
@@ -4116,16 +4119,15 @@ interpolates a bullet
 .
 .TP
 .B Ci
-is a list of indentation amounts to use for table of contents heading
-levels,
-overriding their automatic computation.
+assigns indentation amounts used by each heading level listed
+in a table of contents,
+in one-to-one correspondence,
+overriding those computed by
+.BR TC .
 .
 Each word must be a horizontal measurement
 (like
-.RB \[lq] 1i \[rq])
-and is mapped one-to-one to heading levels 1,
-2,
-and so on.
+.RB \[lq] 1i \[rq]).
 .
 .
 .TP
@@ -4325,8 +4327,8 @@ selects the notation format when
 .B NS
 is given no argument.
 .
-The default is
-.RB \[lq] 0 \[rq].
+The default
+.RB is\~ 0 .
 .
 .
 .TP
@@ -4580,8 +4582,7 @@ Headings at levels above this value are excluded;
 see
 .B H
 and
-.B TC
-.RB ( 2 ).
+.BR TC .
 .
 The
 .B Cl
@@ -4596,7 +4597,8 @@ if you change
 .BR Cl 's
 value immediately prior to calling
 .BR TC ,
-you are unlikely to get the result you want.
+you are unlikely to get the result you want
+.RB ( 2 ).
 .
 .
 .TP
@@ -4826,7 +4828,7 @@ and
 .B Hb
 sets the threshold for breaking the line after formatting a heading.
 .
-Text after headings at levels above this value are set on the same
+Text after headings at levels above this value is set on the same
 output line if possible;
 see
 .B H
@@ -4911,8 +4913,7 @@ devices:
 .
 .TP
 .B Hps2
-configures the amount of vertical space preceding a heading at or below
-the
+configures the amount of vertical space preceding a heading within the
 .B Hps
 threshold;
 see
