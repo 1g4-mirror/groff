@@ -9673,9 +9673,9 @@ character/glyph pair as an argument of @code{tr}.  Additionally, it is
 not possible to map the space character to any other glyph; requests
 like @w{@samp{.tr aa x}} undo @w{@samp{.tr aa \&}} instead.
 
-If justification is active, lines are justified in spite of the `empty'
-space character (but there is no minimal distance, i.e., the space
-character, between words).
+If adjustment is enabled, it occurs in spite of the `empty' space
+character; but no minimum distance---no minimal inter-word
+space---separates words).
 
 @item
 After an output glyph has been constructed (this happens at the moment
