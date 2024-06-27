@@ -198,7 +198,7 @@
 	arguments after the first to `AU` are often codes or
 	abbreviations.  Avoid disabling filling using same technique as
 	above.  Arrange `AU` arguments 3-6 as DWB 3.3 does.  Stop
-	formatting a literal `TM` in the output; DWB 3.3 didn't do this.
+	formatting a literal "TM" in the output; DWB 3.3 didn't do this.
 	{Worse, we were putting it there even if no technical memorandum
 	numbers were defined.}  Drop unnecessary `PGFORM` call.
 	(cov@print-au1, cov@print-au2): Internally document what these
