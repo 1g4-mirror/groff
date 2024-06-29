@@ -58,11 +58,17 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if !r D .nr D 0
 .\"	eject page after floating display?
 .nr De 0
-.\"	floating display output policy [0:5]
+.\"	floating display output policy [0..5]
+.\"	0 -> at end of section (if N=3 or N=5) or end of document
+.\"	1 -> on same page if possible, otherwise end of section/document
+.\"	2 -> one float at top of next page/column
+.\"	3 -> on same page if possible, otherwise as 2
+.\"	4 -> as many floats as fit, starting at top of next page/column
+.\"	5 -> on same page if possible, otherwise as 4
 .nr Df 5
 .\"	vertically space before and after display?
 .nr Ds 1
-.\"	eject page before headings of level <= Ej?
+.\"	eject page before headings of level <= Ej
 .nr Ej 0
 .\"	align equation labels to the left instead of the right?
 .nr Eq 0
@@ -74,6 +80,14 @@ http://savannah.gnu.org/bugs/?group=groff.
 .el   .ds EM \[em]
 .\"	multiple of Lsp to put between items of footnote text
 .nr Fs 1
+.\" heading level counters
+.nr H1 0 1
+.nr H2 0 1
+.nr H3 0 1
+.nr H4 0 1
+.nr H5 0 1
+.nr H6 0 1
+.nr H7 0 1
 .\"	break after headings of level <= Hb
 .nr Hb 2
 .\"	center headings of level <= Hc
@@ -110,7 +124,13 @@ http://savannah.gnu.org/bugs/?group=groff.
 .nr Li 6
 .\"	put vertical space before list items of nesting level <= Ls
 .nr Ls 99 \" TODO: use \n[.R]; see Savannah #63587
-.\"	page numbering style [0:5]
+.\"	page numbering style [0..5]
+.\"	0 -> p. 1: header;                pp. 2 on: header
+.\"	1 -> p. 1: move header to footer; pp. 2 on: header
+.\"	2 -> p. 1: no header;             pp. 2 on: header
+.\"	3 -> p. 1: section-page;          pp. 2 on: as p. 1
+.\"	4 -> p. 1: no header;             pp. 2 on: none (unless .PH)
+.\"	5 -> p. 1: section-figure;        pp. 2 on: as p. 1
 .if !r N .nr N 0
 .\"	number paragraphs under first-level headings?
 .nr Np 0
@@ -126,9 +146,9 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"	multiple of Lsp to put between paragraphs
 .nr Ps 1
 .\"	paragraph indentation policy (for .P)
-.\"	0 == no indentation
-.\"	1 == indented by \n[Pi]
-.\"	2 == indented by \n[Pi] except after .H, .DE, or .LE
+.\"	0 -> no indentation
+.\"	1 -> indented by \n[Pi]
+.\"	2 -> indented by \n[Pi] except after .H, .HU, .DE, or .LE
 .nr Pt 0
 .\"	reference list caption
 .ds Rp REFERENCES\"
@@ -213,14 +233,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds Apptext \" empty
 .\" spacing before and after static displays (if undefined, Lsp is used)
 .\" .nr Dsp 1v
-.\" heading level counters
-.nr H1 0 1
-.nr H2 0 1
-.nr H3 0 1
-.nr H4 0 1
-.nr H5 0 1
-.nr H6 0 1
-.nr H7 0 1
+.\" more heading level counters
 .nr H8 0 1
 .nr H9 0 1
 .nr H10 0 1
