@@ -1430,7 +1430,7 @@ numeric; got '\\$1'
 .	ds hd*format \\g[P]
 .	af P 0
 .	ie (\\n[P]=1)&(\\n[N]=1) .tl \\*[pg*header]
-.	el .tl \\*[pg*footer]
+.	el                       .tl \\*[pg*footer]
 .	af P \\*[hd*format]
 .	tl ''\\*[Pg_type!\\n[@copy_type]]''
 .\}
