@@ -1,5 +1,10 @@
 2024-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Handle command-line (or pre-`mso` request) register
+	settings earlier when initializing, and validate their values.
+
+2024-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Move definitions of diagnostic macros earlier.  Also
 	test for existence of `D` register before testing its value to
 	determine emission of backtrace (this way `-wreg` doesn't want

@@ -68,12 +68,101 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ab
 ..
 .\" ######## initialize package #######
+.\"---------------------------------------------
+.\"	documented but command-line-only registers
+.\"
+.\" S and V are handled specially later.
+.
+.\" XXX: The man page says C isn't supported.  Unfinished?  Check it
+.\" against DWB.
+.nr @copy_type 0
+.if r C .nr @copy_type \n[C]
+.
+.if r D \{\
+.	if (\n[D]<0) \{\
+.		@warning ignoring out-of-range D register value: \n[D]u
+.		rr D
+.	\}
+.\}
+.if !r D .nr D 0
+.
+.if r E \{\
+.	if (\n[E]<0):(\n[E]>1) \{\
+.		@warning ignoring out-of-range E register value: \n[E]
+.		rr E
+.	\}
+.\}
+.if !r E .nr E 1
+.ie \n[E] .ds @metadata-font B\"
+.el       .ds @metadata-font R\"
+.
+.if r L \{\
+.	if (\n[L]<=0) \{\
+.		@warning ignoring out-of-range L register value: \n[L]u
+.		rr L
+.	\}
+.\}
+.if r L .pl \n[L]u
+.
+.if r O \{\
+.	if (\n[O]<0) \{\
+.		@warning ignoring out-of-range O register value: \n[O]u
+.		rr O
+.	\}
+.\}
+.ie r O .po \n[O]u
+.el \{\
+.	ie n .po .75i
+.	el   .po .963i
+.\}
+.
+.if r W \{\
+.	if (\n[W]<=0) \{\
+.		@warning ignoring out-of-range W register value: \n[W]u
+.		rr W
+.	\}
+.\}
+.ie r W .ll \n[W]u
+.el     .ll 6i
+.\"---------------------------------------------
+.\"	Configure type size and vertical spacing.  If given on the
+.\"	command line, these have already been converted to basic units.
+.if r S \{\
+.	if (\n[S]<=0) \{\
+.		@warning ignoring out-of-range S register value: \n[S]z
+.		rr S
+.	\}
+.\}
+.if !r S .nr S 10
+.ie (\n[S] >= 1000) .ps \n[S]z/1000u
+.el                 .ps \n[S]
+.nr *vs-default \n[.ps]*120/100
+.
+.if r V \{\
+.	if (\n[V]<=0) \{\
+.		@warning ignoring out-of-range V register value: \n[V]u
+.		rr V
+.	\}
+.\}
+.if !r V .nr V \n[*vs-default]
+.ie (\n[V] >= 1000) .vs \n[V]p/1000u
+.el                 .vs \n[V]
+.rr *vs-default
+.
+.nr @ps \n[.ps]
+.nr @vs \n[.v]
+.if \n[D]>1 .tm @ps=\n[@ps], @vs=\n[@vs]
+.if \n[D]>3 .tm INIT: l:\n[.l] p:\n[.p] o:\n[.o]
+.nr @pl \n[.p]
+.nr @ll \n[.l]
+.nr @cur-ll \n[@ll]
+.lt \n[@ll]u
+.nr @po \n[.o]
+.\"---------------------------------------------
 .\"	create table of contents entry for heading of level <= Cl
 .nr Cl 2
 .\"	suppress page break after TOC lists of figures, tables, ...?
 .nr Cp 0
-.\"	report debugging messages?
-.if !r D .nr D 0
 .\"	eject page after floating display?
 .nr De 0
 .\"	floating display output policy [0..5]
@@ -184,56 +273,6 @@ http://savannah.gnu.org/bugs/?group=groff.
 .	ie c \[tm] .ds Tm \[tm]\"
 .	el         .ds Tm (TM)\"
 .\}
-.\"---------------------------------------------
-.\"	documented but command-line-only registers
-.\"
-.\" S and V are handled specially later.
-.
-.\" XXX: The man page says C isn't supported.  Unfinished?  Check it
-.\" against DWB.
-.nr @copy_type 0
-.if r C .nr @copy_type \n[C]
-.
-.if !r E .nr E 1
-.ie \n[E] .ds @metadata-font B\"
-.el       .ds @metadata-font R\"
-.
-.if r L .pl \n[L]u
-.
-.ie r O .po \n[O]u
-.el \{\
-.	ie n .po .75i
-.	el   .po .963i
-.\}
-.
-.ie r W .ll \n[W]u
-.el     .ll 6i
-.\"---------------------------------------------
-.if \n[@copy_type]=4 \{\
-.	ls 2
-.	nr Pi 10
-.	nr Pt 1
-.\}
-.\"	Configure type size and vertical spacing.  If given on the
-.\"	command line, these have already been converted to basic units.
-.if !r S .nr S 10
-.ie (\n[S] >= 1000) .ps \n[S]z/1000u
-.el                 .ps \n[S]
-.nr *vs-default \n[.ps]*120/100
-.if !r V .nr V \n[*vs-default]
-.ie (\n[V] >= 1000) .vs \n[V]p/1000u
-.el                 .vs \n[V]
-.rr *vs-default
-.
-.nr @ps \n[.ps]
-.nr @vs \n[.v]
-.if \n[D]>1 .tm @ps=\n[@ps], @vs=\n[@vs]
-.if \n[D]>3 .tm INIT: l:\n[.l] p:\n[.p] o:\n[.o]
-.nr @pl \n[.p]
-.nr @ll \n[.l]
-.nr @cur-ll \n[@ll]
-.lt \n[@ll]u
-.nr @po \n[.o]
 .
 .nr @in-verbatim-region 0
 .\"---------------------------------------------
