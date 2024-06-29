@@ -49,6 +49,24 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if d PH .nx
 .
 .mso devtag.tmac
+.
+.de @warning
+.tm \\*[@mm]:\\n[.F]:\\n[.c]: warning: \\$*
+.if r D .if \\n[D] .backtrace
+..
+.
+.\" All errors are fatal.
+.de @error
+.tm \\*[@mm]:\\n[.F]:\\n[.c]: error: \\$*
+.if r D .if \\n[D] .backtrace
+.ab
+..
+.
+.de @abort
+.tm \\*[@mm]:\\n[.F]:\\n[.c]: internal error: \\$*
+.backtrace
+.ab
+..
 .\" ######## initialize package #######
 .\"	create table of contents entry for heading of level <= Cl
 .nr Cl 2
@@ -382,22 +400,6 @@ http://savannah.gnu.org/bugs/?group=groff.
 'ti 0
 .ps \\n[@ps]u
 .vs \\n[@vs]u
-..
-.de @warning
-.tm \\*[@mm]:\\n[.F]:\\n[.c]: warning: \\$*
-.if \\n[D] .backtrace
-..
-.\" All errors are fatal.
-.de @error
-.tm \\*[@mm]:\\n[.F]:\\n[.c]: error: \\$*
-.if \\n[D] .backtrace
-.ab
-..
-.
-.de @abort
-.tm \\*[@mm]:\\n[.F]:\\n[.c]: internal error: \\$*
-.backtrace
-.ab
 ..
 .de misc@toupper
 .tr aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
