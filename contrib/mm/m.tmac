@@ -1947,7 +1947,7 @@ breaking page
 .de DF
 .if \\n[df*float] \{\
 .	ds df*msg \\$0: cannot nest floating displays; \"
-.	as df@msg use DS within DF/DE\"
+.	as df*msg use DS within DF/DE\"
 .	@error \\*[df*msg]
 .\}
 .ds ds@macro \\$0
