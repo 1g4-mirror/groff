@@ -265,13 +265,13 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ie t .ds Sm \v'-.4m'\s-3SM\s0\v'.4m'\"
 .el \{\
 .	ie c \[u2120] .ds Sm \[u2120]\"
-.	el            .ds Sm (SM)\"
+.	el            .ds Sm \u(SM)\d\"
 .\}
 .\" trade mark string
 .ie t .ds Tm \v'-.4m'\s-3TM\s0\v'.4m'\"
 .el \{\
 .	ie c \[tm] .ds Tm \[tm]\"
-.	el         .ds Tm (TM)\"
+.	el         .ds Tm \u(TM)\d\"
 .\}
 .
 .nr @in-verbatim-region 0

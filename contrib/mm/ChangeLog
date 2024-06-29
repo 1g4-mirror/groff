@@ -1,5 +1,13 @@
 2024-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (Sm, Tm): Tweak string definitions to use half-line
+	motions in nroff mode when the font lacks a dedicated glyph.
+	At present no nroff device supports half-line motions, but this
+	prepares us if we ever do, and DWB 3.3 mm does specify this
+	behavior on page A-2 of its manual.
+
+2024-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Handle command-line (or pre-`mso` request) register
 	settings earlier when initializing, and validate their values.
 
