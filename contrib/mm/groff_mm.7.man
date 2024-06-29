@@ -3448,14 +3448,12 @@ request as desired to temporarily suspend adjustment.
 .
 .B H
 and
-.B HU
-are called,
+.BR HU ,
 and
 .B SA
 when called without a
 .I mode
 argument,
-.I mm
 restore the default adjustment.
 .
 .
