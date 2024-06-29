@@ -9448,7 +9448,6 @@ c
 a@arrow{}\c
 b@arrow{}\c
 c
-.Tabs
     @result{} a         b         c
     @result{} a         b                   c
 @endExample
