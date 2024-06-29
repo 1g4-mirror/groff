@@ -153,6 +153,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .\" XXX: The man page says C isn't supported.  Unfinished?  Check it
 .\" against DWB.
+.nr @copy_type 0
 .if r C .nr @copy_type \n[C]
 .
 .if !r E .nr E 1
@@ -170,7 +171,6 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ie r W .ll \n[W]u
 .el     .ll 6i
 .\"---------------------------------------------
-.nr @copy_type 0
 .if \n[@copy_type]=4 \{\
 .	ls 2
 .	nr Pi 10

@@ -1,3 +1,9 @@
+2024-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac ([initialization]): Fix regression in initialization of
+	undocumented `C`/`@copy_type` register.  Problem
+	introduced by me in commit 4b2f6de31e, 22 June.
+
 2024-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac ([initialization], VERBON, VERBOFF, pg@footer):
