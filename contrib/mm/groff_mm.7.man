@@ -4445,6 +4445,10 @@ it is surrounded by square brackets.
 \[lq]REFERENCES\[rq]
 .
 .
+.TP
+.B Rg
+interpolates the registered (trade) mark sign.
+.
 .
 .TP
 .B Sm

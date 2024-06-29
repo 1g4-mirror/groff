@@ -261,6 +261,13 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds Rp REFERENCES\"
 .\"	display indentation in ens
 .nr Si 5
+.\" registered (trade mark) string
+.\" This overstriken glyph looks okay with Times roman.
+.ie t .ds Rg \Z'\s-4\h@.35m@\v@-.2m@R\s0'\s+4\[ci]\s0\"
+.el \{\
+.	ie c \[u00AE] .ds Rg \[u00AE]\"
+.	el            .ds Rg \u(R)\d\"
+.\}
 .\" service mark string
 .ie t .ds Sm \v'-.4m'\s-3SM\s0\v'.4m'\"
 .el \{\

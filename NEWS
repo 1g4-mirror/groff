@@ -339,6 +339,8 @@ o The m (mm) macro package's `IND` macro (a GNU extension), now calls
 
 o The m (mm) macro package now supports the `E` register as DWB mm did.
 
+o The m (mm) macro package now supports AT&T/DWB mm's `Rg` string.
+
 o The s (ms) macro package now sets the vertical spacing register
   defaults for normal (`VS`) and footnote (`FVS`) text to 120% of the
   type size configured in the `PS` and `FPS` registers, respectively,
