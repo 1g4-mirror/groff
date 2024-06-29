@@ -1,6 +1,6 @@
 2024-06-28  Dave Kemper <saint.snit@gmail.com>
 
-	* doc/groff.texi.in: Drop relict macro call.
+	* doc/groff.texi.in: Drop relict macro call in example.
 
 	Fixes <https://savannah.gnu.org/bugs/?65929>.
 
