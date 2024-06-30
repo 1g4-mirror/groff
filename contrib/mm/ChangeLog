@@ -1,5 +1,11 @@
 2024-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (Rg, Sm, Tm): Favor registered sign, service
+	mark sign, and trade mark sign font glyphs on typesetters when
+	present.  Annotate a limitation of this approach.
+
+2024-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (Sm, Tm): Tweak string definitions to use half-line
 	motions in nroff mode when the font lacks a dedicated glyph.
 	At present no nroff device supports half-line motions, but this

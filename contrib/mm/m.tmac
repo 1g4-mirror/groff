@@ -262,23 +262,28 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"	display indentation in ens
 .nr Si 5
 .\" registered (trade mark) string
-.\" This overstriken glyph looks okay with Times roman.
-.ie t .ds Rg \Z'\s-4\h@.35m@\v@-.2m@R\s0'\s+4\[ci]\s0\"
+.\" TODO: Query only the selected font (\n[.fn]) for the applicable
+.\" glyphs; because these symbols are "letter-like", falling back to a
+.\" special font might result in serifed trademark signs with a sans
+.\" serif text font.  We need a new GNU troff feature for that.  See
+.\" Savannah #64004.
+.ie c \[u00AE] .ds Rg \[u00AE]\"
 .el \{\
-.	ie c \[u00AE] .ds Rg \[u00AE]\"
-.	el            .ds Rg \u(R)\d\"
+.	\" This overstriken glyph looks okay with Times roman.
+.	ie t .ds Rg \Z'\s-4\h@.35m@\v@-.2m@R\s0'\s+4\[ci]\s0\"
+.	el   .ds Rg \u(R)\d\"
 .\}
 .\" service mark string
-.ie t .ds Sm \v'-.4m'\s-3SM\s0\v'.4m'\"
+.ie c \[u2120] .ds Sm \[u2120]\"
 .el \{\
-.	ie c \[u2120] .ds Sm \[u2120]\"
-.	el            .ds Sm \u(SM)\d\"
+.	ie t .ds Sm \v'-.4m'\s-3SM\s0\v'.4m'\"
+.	el   .ds Sm \u(SM)\d\"
 .\}
 .\" trade mark string
-.ie t .ds Tm \v'-.4m'\s-3TM\s0\v'.4m'\"
+.ie c \[tm] .ds Tm \[tm]\"
 .el \{\
-.	ie c \[tm] .ds Tm \[tm]\"
-.	el         .ds Tm \u(TM)\d\"
+.	ie t .ds Tm \v'-.4m'\s-3TM\s0\v'.4m'\"
+.	el   .ds Tm \u(TM)\d\"
 .\}
 .
 .nr @in-verbatim-region 0
