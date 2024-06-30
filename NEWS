@@ -323,6 +323,10 @@ o Similarly, the m (mm) macro package's `PIC` macro (a GNU extension)
   now interprets an argument to its `-I` option in ens instead of ems
   by default.
 
+o The m (mm) macro package's `BVL` macro's first argument is now
+  optional.  If omitted, the paragraph indentation amount (register
+  `Pi`) is used for the list item's text indentation.
+
 o The m (mm) macro package's `DS` macro now interprets its third
   argument (a right-hand indentation) in ens by default, for consistency
   with the rest of the package.  This is a difference from DWB mm (which

@@ -2500,13 +2500,15 @@ exceeds depth of nested lists (\\n[li*lvl])
 .	el         .LB 0\\$1 0 2 4 1 0 1
 .\}
 ..
-.\" Broken Variable List. As .VL but text begin on the next line
+.\" Broken Variable List: as .VL, but always break after the mark.
 .de BVL
 .if \\n[D]>2 .tm BVL $*
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
-.ie \\n[.$]<3 .LB 0\\$1 0\\$2 0 -1
-.el           .LB 0\\$1 0\\$2 0 -1 \& 0 1
+.ie \\n[.$]=0 .ds list*ti \\n[Pi]
+.el           .ds list*ti \\$1
+.ie \\n[.$]<3 .LB 0\\*[list*ti] 0\\$2 0 -1
+.el           .LB 0\\*[list*ti] 0\\$2 0 -1 \& 0 1
+.rm list*ti
 ..
 .\" ####### module tbl #######################################
 .\" This module is copied from groff_ms and modified for mm.
