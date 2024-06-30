@@ -1,5 +1,10 @@
 2024-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* groff_mm.7.man (Macros) <LB>: Document behavior when fourth
+	argument ("type") is -1.  The groff mm `BVL` macro relies on it.
+
+2024-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (BVL): Make first argument optional.  If omitted, use
 	the paragraph indentation amount (register `Pi`) for the list
 	item's text indentation.

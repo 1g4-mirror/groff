@@ -2452,6 +2452,13 @@ items are automatically numbered and
 .I mark
 is interpreted as a register format.
 .
+A
+.I type
+of\~\-1 breaks the line after the mark
+even if it fits within
+.I text-indent;
+this is a GNU extension.
+.
 The default
 .I type
 .RB is\~ 0 .
