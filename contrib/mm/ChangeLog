@@ -1,5 +1,10 @@
 2024-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LB): Don't throw an overlong mark warning when the
+	line is to be broken after the mark, as in `BVL` lists.
+
+2024-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* groff_mm.7.man (Macros) <LB>: Document behavior when fourth
 	argument ("type") is -1.  The groff mm `BVL` macro relies on it.
 
