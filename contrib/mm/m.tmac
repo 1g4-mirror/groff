@@ -2387,7 +2387,7 @@ ML, RL, VL, or LB first
 .	@warning \\$0: overlong mark '\\*[li*c-mark]'
 .	nr li*c-pad 1n \" force item/mark separation
 .\}
-.nr li*text-begin \\n[li*tind]>?\w@\\*[li*c-mark]@+\\n[li*c-pad]
+.nr li*text-begin \\n[li*tind]>?(\w@\\*[li*c-mark]@+\\n[li*c-pad])
 .\"
 .\" determine where the mark begin
 .ie !\\n[li*c-pad] .nr li*mark-begin \\n[li*mind]

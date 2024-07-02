@@ -1,5 +1,11 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Fix computation of item's text indentation when
+	the mark (plus any padding) exceeds that of the list.  Problem
+	introduced by me in commit e0332c122e, 14 June.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Reduce padding after overlong mark from 2n to 1n.
 	This is more consistent with DWB mm behavior, though unspecified
 	in the 3.3 manual.
