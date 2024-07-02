@@ -638,7 +638,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" Break here to avoid problems with new linesetting of the previous line.
 .\" Hope this doesn't break anything else :-)
 .\" Don't break if arg_4 is a '1'.
-.if \\n[D]>2 .tm PGFORM: \\$*
+.if \\n[D]>2 .tm PGFORM: \\$@
 .if ''\\$4' .br
 .if \\n[D]>3 .tm PGFORM: IN l:\\n[.l] p:\\n[.p] o:\\n[.o]
 .ie !''\\$1' \{\
@@ -2331,6 +2331,7 @@ breaking page
 .\"	the major list-begin macro.
 .\"	If type is -1, a break occurs.
 .de LB
+.if \\n[D]>2 .tm LB \\$@
 .if \\n[.$]<4 .@error \\$0: expected at least 4 arguments, got \\n[.$]
 .misc@push cind \\n[.i]
 .misc@push tind \\n[li*tind]
@@ -2441,7 +2442,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\"-------------
 .de AL
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
-.if \\n[D]>2 .tm AL $*
+.if \\n[D]>2 .tm AL \\$@
 .ie \\n[.$]<=1 .LB              \\n[Li] 0 2 1 "\\$1"
 .el \{\
 .	ie \\n[.$]=2 .LB        0\\$2   0 2 1 "\\$1"
@@ -2454,7 +2455,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de ML
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
-.if \\n[D]>2 .tm ML $*
+.if \\n[D]>2 .tm ML \\$@
 .nr li*ml-width \w@\\$1@u+1n
 .if \\n[.$]<2 .LB      \\n[li*ml-width]u 0 1 0 "\\$1"
 .if \\n[.$]=2 .LB      0\\$2             0 1 0 "\\$1"
@@ -2464,14 +2465,14 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\}
 ..
 .de VL
-.if \\n[D]>2 .tm VL $*
+.if \\n[D]>2 .tm VL \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
 .ie \\n[.$]<3 .LB 0\\$1 0\\$2 0 0
 .el           .LB 0\\$1 0\\$2 0 0 \& 0 1
 ..
 .de BL
-.if \\n[D]>2 .tm BL $*
+.if \\n[D]>2 .tm BL \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .LB \\n[Pi] 0 1 0 \\*[BU]
 .if \\n[.$]=1 .LB 0\\$1 0 1 0 \\*[BU]
@@ -2481,7 +2482,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\}
 ..
 .de DL
-.if \\n[D]>2 .tm DL $*
+.if \\n[D]>2 .tm DL \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .LB \\n[Pi] 0 1 0 \[em]
 .if \\n[.$]=1 .LB 0\\$1   0 1 0 \[em]
@@ -2491,7 +2492,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\}
 ..
 .de RL
-.if \\n[D]>2 .tm RL $*
+.if \\n[D]>2 .tm RL \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .LB      6     0 2 4
 .if \\n[.$]=1 .LB      0\\$1 0 2 4
@@ -2502,7 +2503,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 ..
 .\" Broken Variable List: as .VL, but always break after the mark.
 .de BVL
-.if \\n[D]>2 .tm BVL $*
+.if \\n[D]>2 .tm BVL \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .ie \\n[.$]<1 .nr li*text-indent \\n[Pi]
 .el           .nr li*text-indent \\$1

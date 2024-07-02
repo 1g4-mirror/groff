@@ -1,5 +1,15 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Revise debugging output.
+	(AL, ML, VL, BL, DL, RL, BVL): Add escape characters so that
+	actual arguments are reported, not just a literal "$*".  Problem
+	dates back to groff 1.06, September 1992.
+	(PGFORM, AL, ML, VL, BL, DL, RL, BVL): Report arguments using
+	`$@` instead of `$*` for clarity when they contain whitespace.
+	(LB): Report arguments passed to macro using `$@`.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Fix computation of item's text indentation when
 	the mark (plus any padding) exceeds that of the list.  Problem
 	introduced by me in commit e0332c122e, 14 June.
