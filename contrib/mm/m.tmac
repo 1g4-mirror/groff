@@ -2385,7 +2385,7 @@ ML, RL, VL, or LB first
 .\" determine where the text begins
 .if (\\n[li*type]>=0)&(\w'\\*[li*c-mark]'>\\n[li*tind]) \{\
 .	@warning \\$0: overlong mark '\\*[li*c-mark]'
-.	nr li*c-pad 2n \" force item/mark separation
+.	nr li*c-pad 1n \" force item/mark separation
 .\}
 .nr li*text-begin \\n[li*tind]>?\w@\\*[li*c-mark]@+\\n[li*c-pad]
 .\"

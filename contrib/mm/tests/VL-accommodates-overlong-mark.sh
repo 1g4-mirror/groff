@@ -22,7 +22,8 @@ groff="${abs_top_builddir:-.}/test-groff"
 
 # Regression-test Savannah #65843.
 
-input='.P
+input='.SA 0
+.P
 This is an
 .I mm
 document.
@@ -31,7 +32,7 @@ document.
 Item text.
 .LI foo
 Bar.
-.LI "oversized\ bazqux"
+.LI "oversized\ mark"
 This mark is oversized.
 But it should not overprint.
 .LE'
@@ -39,6 +40,6 @@ But it should not overprint.
 output=$(echo "$input" | "$groff" -mm -Tascii -P -cbou)
 echo "$output"
 echo "$output" \
-    | grep -q '^ *oversized bazqux  This mark is oversized\.'
+    | grep -q '^ *oversized mark This mark is oversized\.'
 
 # vim:set ai et sw=4 ts=4 tw=72:

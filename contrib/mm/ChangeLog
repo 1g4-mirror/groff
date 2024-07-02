@@ -1,5 +1,13 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Reduce padding after overlong mark from 2n to 1n.
+	This is more consistent with DWB mm behavior, though unspecified
+	in the 3.3 manual.
+	* tests/VL-accommodates-overlong-mark.sh: Update test
+	expectations.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* groff_mm.7.man (Macros) <ML>: Fix error; the default
 	text indentation is computed from the width of the specified
 	mark, and uses neither register `Li` nor `Pi` as other list
