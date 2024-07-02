@@ -1,3 +1,9 @@
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac (BVL): Trivially refactor.  Rename and retype `list*ti`
+	string to `li*text-indent` register.  Fix internal
+	documentation; the name of the "module" is "li", not "list".
+
 2024-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (LB): Don't throw an overlong mark warning when the

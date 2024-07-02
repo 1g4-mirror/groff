@@ -2315,7 +2315,7 @@ breaking page
 .nr par@suppress-indentation 1	\" no indentation after displays
 .ev
 ..
-.\"########### module list ###################
+.\"########### module li ###################
 .\" .LI text-indent mark-indent pad type [mark [LI-space [LB-space] ] ]
 .\"
 .nr li*tind 0
@@ -2504,11 +2504,11 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de BVL
 .if \\n[D]>2 .tm BVL $*
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
-.ie \\n[.$]=0 .ds list*ti \\n[Pi]
-.el           .ds list*ti \\$1
-.ie \\n[.$]<3 .LB 0\\*[list*ti] 0\\$2 0 -1
-.el           .LB 0\\*[list*ti] 0\\$2 0 -1 \& 0 1
-.rm list*ti
+.ie \\n[.$]<1 .nr li*text-indent \\n[Pi]
+.el           .nr li*text-indent \\$1
+.ie \\n[.$]<3 .LB 0\\n[li*text-indent] 0\\$2 0 -1
+.el           .LB 0\\n[li*text-indent] 0\\$2 0 -1 \& 0 1
+.rr li*text-indent
 ..
 .\" ####### module tbl #######################################
 .\" This module is copied from groff_ms and modified for mm.
