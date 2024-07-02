@@ -1,5 +1,13 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (ML): Fix bug in text indentation computation; it was
+	1n too short when no explicit indentation (a second argument)
+	was given.  Yet another problem introduced by me in commit
+	e0332c122e, 14 June.  (Oddly, DWB 3.3 mm misbehaves the same way
+	in nroff mode.)
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Revise debugging output.
 	(AL, ML, VL, BL, DL, RL, BVL): Add escape characters so that
 	actual arguments are reported, not just a literal "$*".  Problem
