@@ -1,5 +1,13 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* groff_mm.7.man (Macros) <ML>: Fix error; the default
+	text indentation is computed from the width of the specified
+	mark, and uses neither register `Li` nor `Pi` as other list
+	types do.  Incorrect claim appears to date back to groff 1.10,
+	26 November 1995.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (BVL): Trivially refactor.  Rename and retype `list*ti`
 	string to `li*text-indent` register.  Fix internal
 	documentation; the name of the "module" is "li", not "list".

@@ -2754,8 +2754,10 @@ the
 argument precedes each item.
 .
 .I text-indent
-overrides the default indentation of the list items set by register
-.BR Li .
+overrides the default indentation of the list items,
+which is the width of
+.I mark
+plus one word space.
 .
 A third argument suppresses the vertical space that normally precedes
 each list item;
