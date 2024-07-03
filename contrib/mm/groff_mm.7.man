@@ -2534,7 +2534,8 @@ to follow the list.
 .IR mark \~[ item-mark-mode ]]
 Begin a list item.
 .
-Input is collected into a list item until the current list is terminated
+.I mm
+collects input into a list item until the current list terminates
 or
 .B LI
 is called again.
