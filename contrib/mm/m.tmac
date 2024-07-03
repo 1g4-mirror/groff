@@ -2315,8 +2315,6 @@ breaking page
 .ev
 ..
 .\"########### module li ###################
-.\" .LI text-indent mark-indent pad type [mark [LI-space [LB-space] ] ]
-.\"
 .nr li*tind 0
 .nr li*mind 0
 .nr li*pad 0
@@ -2327,6 +2325,7 @@ breaking page
 .aln :g li*lvl
 .nr li*cur-vpos 0
 .\"--------------------------
+.\" .LB text-indent mark-indent pad type [mark [LI-space [LB-space] ] ]
 .\"	the major list-begin macro.
 .\"	If type is -1, a break occurs.
 .de LB
