@@ -2422,6 +2422,8 @@ such that
 .I pad
 ens of space follow the mark.
 .
+.
+.IP
 .I type
 determines the mark's format.
 .
@@ -2544,6 +2546,14 @@ If only
 .I mark
 is specified,
 it replaces the configured mark.
+.
+If the width of the mark plus any padding
+(specified in the list's
+.B LB
+call)
+exceeds the text indentation,
+.I "groff mm"
+warns and uses one en of padding.
 .
 A second argument
 prefixes
@@ -3937,12 +3947,6 @@ list.
 .
 Each item should supply its own mark,
 or tag.
-.
-If the mark is wider than
-.I mark-indent,
-one space separates it from subsequent text;
-contrast
-.BR BVL .
 .
 .I text-indent
 sets the indentation of the text,
