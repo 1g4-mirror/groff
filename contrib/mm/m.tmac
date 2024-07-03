@@ -2382,11 +2382,15 @@ ML, RL, VL, or LB first
 .	el .ds li*c-mark \\$1\ \\*[li*c-mark]
 .\}
 .nr li*c-pad \\n[li*pad]
-.\"
-.\" determine where the text begins
-.if (\\n[li*type]>=0)&(\w'\\*[li*c-mark]'>\\n[li*tind]) \{\
-.	@warning \\$0: overlong mark '\\*[li*c-mark]'
-.	nr li*c-pad 1n \" force item/mark separation
+.\" Compute width of the mark plus the padding after it.
+.if \\n[li*type]>=0 \{\
+.	nr li*markpad \w'\\*[li*c-mark]'+\\n[li*c-pad]
+.	if \\n[li*markpad]>\\n[li*tind] \{\
+.		@warning \\$0: overlong mark '\\*[li*c-mark]'
+.		\" Force (minimal) item/mark separation.
+.		nr li*c-pad 1n
+.	rr li*markpad
+.	\}
 .\}
 .nr li*text-begin \\n[li*tind]>?(\w@\\*[li*c-mark]@+\\n[li*c-pad])
 .\"

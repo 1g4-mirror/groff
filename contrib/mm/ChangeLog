@@ -1,5 +1,10 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Improve overlong mark detection: count the
+	padding since it can throw off the alignment of indented text.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (AL, RL): Reduce "pad" argument to `LB` call from 2
 	to 1.  This keeps marks in `AL` list items from oversetting even
 	when prefixed (with intra-mark padding), if the enumerator and
