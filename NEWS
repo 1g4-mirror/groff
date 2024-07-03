@@ -326,6 +326,10 @@ o Similarly, the m (mm) macro package's `PIC` macro (a GNU extension)
 o The m (mm) macro package's `Li` register now defaults to 5 ens (not 6)
   to align with the `Pi` register default and with DWB 3.3 mm behavior.
 
+o The m (mm) macro package's `Li` register now configures the text
+  indentation of items in `RL` lists (as it long has for `AL` lists)
+  instead of hard-coding a value of 6 ens as DWB 3.3 mm does.
+
 o The m (mm) macro package's `BVL` macro's first argument is now
   optional.  If omitted, the paragraph indentation amount (register
   `Pi`) is used for the list item's text indentation.

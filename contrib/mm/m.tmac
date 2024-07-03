@@ -2495,11 +2495,11 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de RL
 .if \\n[D]>2 .tm RL \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .LB      6     0 2 4
-.if \\n[.$]=1 .LB      0\\$1 0 2 4
+.if \\n[.$]<1 .LB      \\n[Li] 0 2 4
+.if \\n[.$]=1 .LB      0\\$1   0 2 4
 .if \\n[.$]=2 \{\
-.	ie '\\$1'' .LB 6     0 2 4 1 0 1
-.	el         .LB 0\\$1 0 2 4 1 0 1
+.	ie '\\$1'' .LB \\n[Li] 0 2 4 1 0 1
+.	el         .LB 0\\$1   0 2 4 1 0 1
 .\}
 ..
 .\" Broken Variable List: as .VL, but always break after the mark.

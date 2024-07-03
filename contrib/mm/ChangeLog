@@ -1,5 +1,12 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (RL): Honor `RL` setting for list items' text
+	indentation as `AL` does instead of using a hard-coded value of
+	6 ens.
+	* groff_mm.7.man (Description): Document this difference.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Initialize register `Li` to 5, not 6, for better
 	alignment with (1) the default value of `Pi` and (2) DWB 3.3 mm
 	behavior.

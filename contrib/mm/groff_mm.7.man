@@ -145,7 +145,7 @@ either is terminated with
 is intended to be compatible with the
 .I mm
 implementation found in the AT&T Documenter's Workbench (DWB),
-with the following limitations.
+with the following limitations and changes.
 .
 .
 .IP \[bu] 3n
@@ -214,6 +214,15 @@ or
 .B W
 from the command line,
 use an explicit scaling unit to avoid surprises.
+.
+.
+.IP \[bu]
+The
+.B Li
+register configures the text indentation of
+.B RL
+list items;
+DWB used a hard-coded value of 6\~ens.
 .
 .
 .IP \[bu]
