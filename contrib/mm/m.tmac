@@ -2392,9 +2392,10 @@ ML, RL, VL, or LB first
 .	rr li*markpad
 .	\}
 .\}
+.\" determine where the text begins
 .nr li*text-begin \\n[li*tind]>?(\w@\\*[li*c-mark]@+\\n[li*c-pad])
 .\"
-.\" determine where the mark begin
+.\" determine where the mark begins
 .ie !\\n[li*c-pad] .nr li*mark-begin \\n[li*mind]
 .el                .nr li*mark-begin \\n[li*text-begin]-\\n[li*c-pad]-\w@\\*[li*c-mark]@
 .if !\\n[li*mark-begin] .nr li*mark-begin 0
@@ -2444,6 +2445,8 @@ exceeds depth of nested lists (\\n[li*lvl])
 .nr par@suppress-indentation 1	\" no indentation after lists
 ..
 .\"-------------
+.\" List types `AL` and `RL` combine enumerators with punctuation, and
+.\" use register `Li` to determine text indentation.
 .de AL
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[D]>2 .tm AL \\$@
@@ -2456,19 +2459,18 @@ exceeds depth of nested lists (\\n[li*lvl])
 .	\}
 .\}
 ..
-.de ML
-.if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
-.if \\n[D]>2 .tm ML \\$@
-.nr li*text-indent \w@\\$1@u+1n
-.ie \\n[.$]<2 .LB        \\n[li*text-indent]u 0 0 0 "\\$1"
-.el \{\
-.	if !\B'\\$2' .@error \\$0: second argument not numeric: '\\$2'
-.	ie \\n[.$]=2 .LB \\$2                 0 0 0 "\\$1"
-.	el           .LB \\n[li*text-indent]u 0 0 0 "\\$1"
-.	\}
+.de RL
+.if \\n[D]>2 .tm RL \\$@
+.if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
+.if \\n[.$]<1 .LB      \\n[Li] 0 1 4
+.if \\n[.$]=1 .LB      0\\$1   0 1 4
+.if \\n[.$]=2 \{\
+.	ie '\\$1'' .LB \\n[Li] 0 1 4 1 0 1
+.	el         .LB 0\\$1   0 1 4 1 0 1
 .\}
 ..
+.\" List types `VL` and `BVL` set a user-specified tag (idiomatically a
+.\" word or phrase) and use register `Pi` to determine text indentation.
 .de VL
 .if \\n[D]>2 .tm VL \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
@@ -2476,6 +2478,18 @@ exceeds depth of nested lists (\\n[li*lvl])
 .ie \\n[.$]<3 .LB 0\\$1 0\\$2 0 0
 .el           .LB 0\\$1 0\\$2 0 0 \& 0 1
 ..
+.\" `BVL` always breaks after the tag, so the mark cannot overset.
+.de BVL
+.if \\n[D]>2 .tm BVL \\$@
+.if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
+.ie \\n[.$]<1 .nr li*text-indent \\n[Pi]
+.el           .nr li*text-indent \\$1
+.ie \\n[.$]<3 .LB 0\\n[li*text-indent] 0\\$2 0 -1
+.el           .LB 0\\n[li*text-indent] 0\\$2 0 -1 \& 0 1
+.rr li*text-indent
+..
+.\" List types `BL` and `DL` use bullets and em dashes, respectively, as
+.\" the item marks, and use register `Pi` to determine text indentation.
 .de BL
 .if \\n[D]>2 .tm BL \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
@@ -2496,25 +2510,20 @@ exceeds depth of nested lists (\\n[li*lvl])
 .	el         .LB 0\\$1   0 1 0 \[em] 0 1
 .\}
 ..
-.de RL
-.if \\n[D]>2 .tm RL \\$@
-.if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .LB      \\n[Li] 0 1 4
-.if \\n[.$]=1 .LB      0\\$1   0 1 4
-.if \\n[.$]=2 \{\
-.	ie '\\$1'' .LB \\n[Li] 0 1 4 1 0 1
-.	el         .LB 0\\$1   0 1 4 1 0 1
-.\}
-..
-.\" Broken Variable List: as .VL, but always break after the mark.
-.de BVL
-.if \\n[D]>2 .tm BVL \\$@
+.\" List type `ML` uses an argument for the mark measures it to
+.\" determine text indentation, ignoring both `Li` and `Pi`.
+.de ML
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
-.ie \\n[.$]<1 .nr li*text-indent \\n[Pi]
-.el           .nr li*text-indent \\$1
-.ie \\n[.$]<3 .LB 0\\n[li*text-indent] 0\\$2 0 -1
-.el           .LB 0\\n[li*text-indent] 0\\$2 0 -1 \& 0 1
-.rr li*text-indent
+.if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
+.if \\n[D]>2 .tm ML \\$@
+.nr li*text-indent \w@\\$1@u+1n
+.ie \\n[.$]<2 .LB        \\n[li*text-indent]u 0 0 0 "\\$1"
+.el \{\
+.	if !\B'\\$2' .@error \\$0: second argument not numeric: '\\$2'
+.	ie \\n[.$]=2 .LB \\$2                 0 0 0 "\\$1"
+.	el           .LB \\n[li*text-indent]u 0 0 0 "\\$1"
+.	\}
+.\}
 ..
 .\" ####### module tbl #######################################
 .\" This module is copied from groff_ms and modified for mm.
