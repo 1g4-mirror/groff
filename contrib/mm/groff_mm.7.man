@@ -5053,10 +5053,19 @@ and
 .
 .TP
 .B Li
-configures the amount of indentation in ens applied to list items;
-see
-.B LI
-.RB ( 6 ).
+configures the text indentation applied to enumerated list types;
+that is,
+to items in
+.B AL
+and
+.B RL
+lists,
+and in
+.B LB
+lists whose
+.I type
+argument is greater than zero
+.RB ( 5 ).
 .
 .
 .TP
@@ -5256,10 +5265,26 @@ except when
 .
 .TP
 .B Pi
-configures the amount of indentation in ens applied to the first line of
-a paragraph;
-see
-.B P
+configures the amount of indentation applied
+to the first line of a paragraph
+(see
+.BR P )
+and the text indentation of non-enumerated list items;
+that is,
+to items in
+.BR BL ,
+.BR BVL ,
+.BR DL ,
+and
+.B VL
+lists
+(but not
+.BR ML ),
+and in
+.B LB
+lists whose
+.I type
+argument is zero or less
 .RB ( 5 ).
 .
 .
