@@ -336,9 +336,8 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds Liec Equation
 .\" caption for the table of contents
 .ds Licon CONTENTS
-.\" Put space between a list item's mark and prefix?
-.\" Flag for space between mark and prefix 1==space, 0==no space
-.\" Can also be controlled by using '.LI mark 2'
+.\" Put space between a list item's prefix and its mark?
+.\" `LI`'s second argument overrides.
 .nr Limsp 1
 .\"
 .\" Lsp controls the height of an empty line. Normally 0.5v
@@ -2368,19 +2367,56 @@ ML, RL, VL, or LB first
 .	SP (u;\\n[li*li-spc]*\\n[Lsp])
 .ne 2v
 .\"
-.ds li*c-mark \\*[li*mark] \" mark specific to this item's context
 .nr li*cnt!\\n[li*lvl] +1
-.if \\n[li*type]=1 .ds li*c-mark \\n[li*cnt!\\n[li*lvl]].
-.if \\n[li*type]=2 .ds li*c-mark \\n[li*cnt!\\n[li*lvl]])
-.if \\n[li*type]=3 .ds li*c-mark (\\n[li*cnt!\\n[li*lvl]])
-.if \\n[li*type]=4 .ds li*c-mark [\\n[li*cnt!\\n[li*lvl]]]
-.if \\n[li*type]=5 .ds li*c-mark <\\n[li*cnt!\\n[li*lvl]]>
-.if \\n[li*type]=6 .ds li*c-mark {\\n[li*cnt!\\n[li*lvl]]}
-.if \\n[.$]=1 .ds li*c-mark \\$1
-.if \\n[.$]=2 \{\
-.	ie (\\$2=2):(\\n[Limsp]=0) .ds li*c-mark \\$1\\*[li*c-mark]
-.	el .ds li*c-mark \\$1\ \\*[li*c-mark]
+.if \\n[li*type]=1 .ds li*enumerator \\n[li*cnt!\\n[li*lvl]].
+.if \\n[li*type]=2 .ds li*enumerator \\n[li*cnt!\\n[li*lvl]])
+.if \\n[li*type]=3 .ds li*enumerator (\\n[li*cnt!\\n[li*lvl]])
+.if \\n[li*type]=4 .ds li*enumerator [\\n[li*cnt!\\n[li*lvl]]]
+.if \\n[li*type]=5 .ds li*enumerator <\\n[li*cnt!\\n[li*lvl]]>
+.if \\n[li*type]=6 .ds li*enumerator {\\n[li*cnt!\\n[li*lvl]]}
+.\" Assemble (prefix, prefix padding, and) mark for this item.
+.ds li*c-mark \" empty
+.nr li*apply-prefix 0
+.nr li*pad-prefix \\n[Limsp]
+.if \\n[.$]>1 \{\
+.	ie (\\n[li*type]=0) \{\
+.		\" VL and BVL use a dummy character `\&` as the "mark"
+.		\" argument to LB, which _formats_ identically to an
+.		\" empty string.  We want a comparison of string
+.		\" contents instead (otherwise the tag disappears from
+.		\" the output), hence `\?`.
+.		if !'\?\\*[li*mark]\?'' .nr li*apply-prefix 1
+.	\}
+.	el .nr li*apply-prefix 1
+.	ie \B'\\$2' .nr li*pad-prefix \\$2
+.	el \{\
+.		ds li*msg \\$0: pad-prefix argument is not numeric:\"
+.		as li*msg " '\\$2'\"
+.		@error \\*[li*msg]
+.	\}
+.	\" TODO: Ditch the following in groff 1.25.
+.	if \\$2=2 \{\
+.		ds li*msg \\$0: second argument is a Boolean;\"
+.		as li*msg " treating '2' as '0'\"
+.		@warning \\*[li*msg]
+.		rm li*msg
+.		nr li*pad-prefix 0
+.	\}
 .\}
+.if \\n[li*apply-prefix] \{\
+.	as li*c-mark \\$1\"
+.	if \\n[li*pad-prefix] .as li*c-mark \ \"
+.\}
+.rr li*pad-prefix
+.rr li*apply-prefix
+.\" If only one argument, it replaces the mark (no prefixing).
+.ie \\n[.$]=1 .ds li*c-mark \\$1\"
+.el \{\
+.	ie d li*enumerator    .as li*c-mark \\*[li*enumerator]\"
+.	el                    .as li*c-mark \\*[li*mark]\"
+.\}
+.rm li*enumerator
+.\" Determine amount of padding after the mark.
 .nr li*c-pad \\n[li*pad]
 .\" Compute width of the mark plus the padding after it.
 .if \\n[li*type]>=0 \{\

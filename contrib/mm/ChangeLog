@@ -1,3 +1,8 @@
+2024-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac (LI): Refactor logic that constructs the item mark, its
+	prefix (if any), and the padding space between the two (if any).
+
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (VL): Make first argument optional.  If omitted, use
