@@ -921,7 +921,8 @@ void shift()
 
 static char get_char_for_escape_parameter(bool allow_space = false)
 {
-  int c = get_copy(0 /* nullptr */, false /* is defining */,
+  int c = get_copy(0 /* nullptr */,
+		   false /* is defining */,
 		   true /* handle \E */);
   switch (c) {
   case EOF:
