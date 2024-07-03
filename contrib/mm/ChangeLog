@@ -1,5 +1,11 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (VL): Make first argument optional.  If omitted, use
+	the paragraph indentation amount (register `Pi`) for the list
+	item's text indentation.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Improve overlong mark detection: count the
 	padding since it can throw off the alignment of indented text.
 

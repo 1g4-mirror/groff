@@ -3938,9 +3938,9 @@ End verbatim display.
 .
 .
 .TP
-.BI VL\~ text-indent\c
-.RI \~[ mark-indent \~[\c
-.BR 1 ]]
+.BR VL \~[\c
+.IR text-indent \~[ mark-indent \~[\c
+.BR 1 ]]]
 Begin variable-item
 (or \[lq]tagged\[rq])
 list.
@@ -3948,11 +3948,12 @@ list.
 Each item should supply its own mark,
 or tag.
 .
+A
 .I text-indent
-sets the indentation of the text,
-and
+argument overrides register
+.BR Pi ;
 .I mark-indent
-the distance from the current list indentation to the mark.
+sets the distance from the indentation of the current list to the mark.
 .
 A third argument suppresses the vertical space that normally precedes
 each list item;

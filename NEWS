@@ -330,9 +330,9 @@ o The m (mm) macro package's `Li` register now configures the text
   indentation of items in `RL` lists (as it long has for `AL` lists)
   instead of hard-coding a value of 6 ens as DWB 3.3 mm does.
 
-o The m (mm) macro package's `BVL` macro's first argument is now
-  optional.  If omitted, the paragraph indentation amount (register
-  `Pi`) is used for the list item's text indentation.
+o The m (mm) macro package's `BVL` and `VL` macros' first arguments are
+  now optional.  If omitted, the paragraph indentation amount (register
+  `Pi`) is used for list items' text indentations.
 
 o The m (mm) macro package's `DS` macro now interprets its third
   argument (a right-hand indentation) in ens by default, for consistency

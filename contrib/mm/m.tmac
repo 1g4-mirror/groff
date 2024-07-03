@@ -2474,9 +2474,10 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de VL
 .if \\n[D]>2 .tm VL \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
-.ie \\n[.$]<3 .LB 0\\$1 0\\$2 0 0
-.el           .LB 0\\$1 0\\$2 0 0 \& 0 1
+.ie \\n[.$]<1 .nr li*text-indent \\n[Pi]
+.el           .nr li*text-indent \\$1
+.ie \\n[.$]<3 .LB 0\\n[li*text-indent] 0\\$2 0 0
+.el           .LB 0\\n[li*text-indent] 0\\$2 0 0 \& 0 1
 ..
 .\" `BVL` always breaks after the tag, so the mark cannot overset.
 .de BVL
