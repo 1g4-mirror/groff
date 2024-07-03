@@ -1,5 +1,18 @@
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (AL, RL): Reduce "pad" argument to `LB` call from 2
+	to 1.  This keeps marks in `AL` list items from oversetting even
+	when prefixed (with intra-mark padding), if the enumerator and
+	prefix are only one character in nroff mode (and similarly thin
+	in troff mode).  `RL` oversets under the same circumstances
+	{because two brackets "[" and "]" are wider than a dot "."}
+	This change however makes the macros more consistent with each
+	other, and `RL` more consistent with DWB 3.3 mm, whose manual
+	doesn't document the macros' behavior in this much detail; I
+	thus regard the alteration as cosmetic.
+
+2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (RL): Honor `RL` setting for list items' text
 	indentation as `AL` does instead of using a hard-coded value of
 	6 ens.

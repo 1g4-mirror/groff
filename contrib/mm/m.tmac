@@ -2443,12 +2443,12 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de AL
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[D]>2 .tm AL \\$@
-.ie \\n[.$]<=1 .LB              \\n[Li] 0 2 1 "\\$1"
+.ie \\n[.$]<=1 .LB              \\n[Li] 0 1 1 "\\$1"
 .el \{\
-.	ie \\n[.$]=2 .LB        0\\$2   0 2 1 "\\$1"
+.	ie \\n[.$]=2 .LB        0\\$2   0 1 1 "\\$1"
 .	el \{\
-.		ie !'\\$2'' .LB \\$2    0 2 1 "\\$1" 0 1
-.		el          .LB \\n[Li] 0 2 1 "\\$1" 0 1
+.		ie !'\\$2'' .LB \\$2    0 1 1 "\\$1" 0 1
+.		el          .LB \\n[Li] 0 1 1 "\\$1" 0 1
 .	\}
 .\}
 ..
@@ -2495,11 +2495,11 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de RL
 .if \\n[D]>2 .tm RL \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .LB      \\n[Li] 0 2 4
-.if \\n[.$]=1 .LB      0\\$1   0 2 4
+.if \\n[.$]<1 .LB      \\n[Li] 0 1 4
+.if \\n[.$]=1 .LB      0\\$1   0 1 4
 .if \\n[.$]=2 \{\
-.	ie '\\$1'' .LB \\n[Li] 0 2 4 1 0 1
-.	el         .LB 0\\$1   0 2 4 1 0 1
+.	ie '\\$1'' .LB \\n[Li] 0 1 4 1 0 1
+.	el         .LB 0\\$1   0 1 4 1 0 1
 .\}
 ..
 .\" Broken Variable List: as .VL, but always break after the mark.
