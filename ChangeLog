@@ -1766,13 +1766,6 @@
 
 2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/input.cpp (get_char_for_escape_parameter):
-	Slightly refactor.  Assert that the character handed to us by
-	our caller is not a newline.  Consequently, drop newline
-	handler.  Drop `if` test that is redundant with a `switch` case.
-
-2024-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(do_special): Rename this...
 	(do_device_control): ...to this.
