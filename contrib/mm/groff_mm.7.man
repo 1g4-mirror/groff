@@ -5375,10 +5375,18 @@ tab(@);
 Lb Lb
 L Lx.
 Value@Effect
-0@Break the page before and after the list of references.
-1@Suppress page break after the list.
-2@Suppress page break before the list.
-3@Suppress page breaks before and after the list.
+0@T{
+Break the page before and after the reference list.
+T}
+1@T{
+Suppress page break after the list.
+T}
+2@T{
+Suppress page break before the list.
+T}
+3@T{
+Suppress page breaks before and after the list.
+T}
 .TE
 .
 .
