@@ -348,6 +348,15 @@ o The m (mm) macro package's `IND` macro (a GNU extension), now calls
   `SK` only if no `TXIND` macro is defined, instead of performing this
   action as part of the fallback when no `TYIND` macro is defined.
 
+o The m (mm) macro package's `LI` macro now interprets its second
+  argument (a GNU extension) as a Boolean indicating whether a space
+  should separate the list item mark from its prefix (the first
+  argument).  Thus, where you formerly specified "2" to indicate no
+  such separation, you would now use "0", matching the semantics of the
+  `Limsp` register (which configures a default prefix/mark separation
+  policy).  "2" continues to be recognized and handled as before, but
+  prompts a warning; migrate your documents.
+
 o The m (mm) macro package now supports the `E` register as DWB mm did.
 
 o The m (mm) macro package now supports AT&T/DWB mm's `Rg` string.

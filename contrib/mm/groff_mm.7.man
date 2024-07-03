@@ -2531,7 +2531,7 @@ to follow the list.
 .
 .TP
 .BR LI \~[\c
-.IR mark \~[ item-mark-mode ]]
+.IR mark \~[ pad-prefix ]]
 Begin a list item.
 .
 .I mm
@@ -2559,18 +2559,9 @@ warns and uses one en of padding.
 A second argument
 prefixes
 .I mark
-to the configured mark;
-an
-.I item-mark-mode
-value
-.RB of\~ 1
-places an unbreakable space after
-.I mark,
-while
-a value
-.RB of \~2
-does not
-(rendering the two adjacent).
+to the configured mark
+and conditionally puts an unbreakable space between the prefix and mark
+per the argument's Boolean value.
 .
 See register
 .BR Limsp .

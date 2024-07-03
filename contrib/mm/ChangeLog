@@ -1,5 +1,15 @@
 2024-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LI): Interpret a second argument not just as
+	indicating that the specified mark should be applied as a
+	prefix, but as a Boolean indicating whether to put space between
+	the prefix and the mark.  Thus, where formerly one would use "2"
+	as the second argument to eliminate the space, one would now use
+	"0".  We continue to recognize "2" specially, but throw a
+	warning in anticipation of future removal of this handling.
+
+2024-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Refactor logic that constructs the item mark, its
 	prefix (if any), and the padding space between the two (if any).
 
