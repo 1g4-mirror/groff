@@ -41,9 +41,9 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds @mm m.tmac\"
 .
 .if (\n[.x]\n[.y] < 123) \{\
-.  ds mm-msg \*[@mm]: groff mm macros require groff 1.23 or later,\"
-.  as mm-msg " but found groff \n[.x].\n[.y]; aborting\"
-.  ab \*[mm-msg]
+.  ds @msg \*[@mm]: groff mm macros require groff 1.23 or later,\"
+.  as @msg " but found groff \n[.x].\n[.y]; aborting\"
+.  ab \*[@msg]
 .\}
 .
 .if d PH .nx
@@ -493,10 +493,10 @@ http://savannah.gnu.org/bugs/?group=groff.
 .de P
 .if \\n[.$] \{\
 .	ie !\B'\\$1' \{\
-.		@warning \\$0: expected numeric argument, got '\\$1'
+.		@warning \\$0: ignoring non-numeric argument: '\\$1'
 .		shift
 .	\}
-.	el .if (\\$1 > 1) \
+.	el .if \\$1>1 \
 .		@warning \\$0: ignoring unsupported paragraph type \
 '\\$1'
 .\}
@@ -542,7 +542,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if !r line*lp\\n[.z] .nr line*lp\\n[.z] 0
 .if !r line*ac\\n[.z] .nr line*ac\\n[.z] 0
 .ie \\n[.$] \{\
-.	if !\B'\\$1' .@error \\$0: parameter is not numeric; got '\\$1'
+.	if !\B'\\$1' .@error \\$0: argument is not numeric: '\\$1'
 .	if (\\$1 < 0) .@error \\$0: negative motion '\\$1' not supported
 .	nr line*temp (v;\\$1)
 .\}
@@ -571,8 +571,8 @@ http://savannah.gnu.org/bugs/?group=groff.
 .nr misc@adjust 14
 .de SA
 .if \\n[.$] \{\
-.	if ((\\$1 < 0) : (\\$1 > 1)) .@error \\$0: invalid argument \
-'\\$1'
+.	if !\B'\\$1' .@error \\$0: argument is not numeric: '\\$1'
+.	if ((\\$1<0):(\\$1>1)) .@error \\$0: invalid argument: '\\$1'
 .\" XXX: ...then...
 .\"   .ad l
 .\"   .nr misc@adjust \\n[.j]
@@ -992,9 +992,9 @@ numeric; got '\\$1'
 .\" Permit a document to start with EPIC.
 .if \\n[nl]<0 \&
 .ie \B'\\$1' .nr pict*w (n;\\$1)
-.el          .@error \\$0: width parameter is not numeric; got '\\$1'
+.el          .@error \\$0: width argument is not numeric: '\\$1'
 .ie \B'\\$2' .nr pict*h (v;\\$2)
-.el          .@error \\$0: height parameter is not numeric; got '\\$2'
+.el          .@error \\$0: height argument is not numeric: '\\$2'
 .\" XXX: This is kind of lame.  It's also not localized.
 .ds pict*name External picture\"
 .if !''\\$3' .ds pict*name " \\$3\"
@@ -1998,8 +1998,8 @@ breaking page
 .\" nested DF/DE is not allowed.
 .de DF
 .if \\n[df*float] \{\
-.	ds df*msg \\$0: cannot nest floating displays; \"
-.	as df*msg use DS within DF/DE\"
+.	ds df*msg \\$0: cannot nest floating displays;\"
+.	as df*msg " use DS within DF/DE\"
 .	@error \\*[df*msg]
 .\}
 .ds ds@macro \\$0
@@ -2472,7 +2472,7 @@ and LI first
 .nr li*i 0
 .if \\n[.$] \{\
 .	ie \B'\\$1' .nr li*i \\$1
-.	el          .@error \\$0: argument not numeric: '\\n[li*i]'
+.	el          .@error \\$0: argument is not numeric: '\\$1'
 .\}
 .if \\n[li*i]>\\n[li*lvl] .@error \\$0 invalid argument: \\n[li*i] \
 exceeds depth of nested lists (\\n[li*lvl])
@@ -2483,8 +2483,8 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\" List types `AL` and `RL` combine enumerators with punctuation, and
 .\" use register `Li` to determine text indentation.
 .de AL
+.if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
-.if \\n[D]>2 .tm AL \\$@
 .ie \\n[.$]<=1 .LB              \\n[Li] 0 1 1 "\\$1"
 .el \{\
 .	ie \\n[.$]=2 .LB        0\\$2   0 1 1 "\\$1"
@@ -2495,7 +2495,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\}
 ..
 .de RL
-.if \\n[D]>2 .tm RL \\$@
+.if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .LB      \\n[Li] 0 1 4
 .if \\n[.$]=1 .LB      0\\$1   0 1 4
@@ -2507,16 +2507,17 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\" List types `VL` and `BVL` set a user-specified tag (idiomatically a
 .\" word or phrase) and use register `Pi` to determine text indentation.
 .de VL
-.if \\n[D]>2 .tm VL \\$@
+.if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .ie \\n[.$]<1 .nr li*text-indent \\n[Pi]
 .el           .nr li*text-indent \\$1
 .ie \\n[.$]<3 .LB 0\\n[li*text-indent] 0\\$2 0 0
 .el           .LB 0\\n[li*text-indent] 0\\$2 0 0 \& 0 1
+.rr li*text-indent
 ..
 .\" `BVL` always breaks after the tag, so the mark cannot overset.
 .de BVL
-.if \\n[D]>2 .tm BVL \\$@
+.if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .ie \\n[.$]<1 .nr li*text-indent \\n[Pi]
 .el           .nr li*text-indent \\$1
@@ -2527,7 +2528,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\" List types `BL` and `DL` use bullets and em dashes, respectively, as
 .\" the item marks, and use register `Pi` to determine text indentation.
 .de BL
-.if \\n[D]>2 .tm BL \\$@
+.if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .LB \\n[Pi] 0 1 0 \\*[BU]
 .if \\n[.$]=1 .LB 0\\$1 0 1 0 \\*[BU]
@@ -2537,7 +2538,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\}
 ..
 .de DL
-.if \\n[D]>2 .tm DL \\$@
+.if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .LB \\n[Pi] 0 1 0 \[em]
 .if \\n[.$]=1 .LB 0\\$1   0 1 0 \[em]
@@ -2549,17 +2550,22 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\" List type `ML` uses an argument for the mark measures it to
 .\" determine text indentation, ignoring both `Li` and `Pi`.
 .de ML
+.if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
 .if \\n[.$]<1 .@error \\$0: expected 1 to 3 arguments, got \\n[.$]
-.if \\n[D]>2 .tm ML \\$@
 .nr li*text-indent \w@\\$1@u+1n
 .ie \\n[.$]<2 .LB        \\n[li*text-indent]u 0 0 0 "\\$1"
 .el \{\
-.	if !\B'\\$2' .@error \\$0: second argument not numeric: '\\$2'
+.	if !\B'\\$2' \{\
+.		ds li*msg \\$0: text-indent argument is not numeric:\"
+.		as " '\\$2'\"
+.		@error \\*[li*msg]
+.	\}
 .	ie \\n[.$]=2 .LB \\$2                 0 0 0 "\\$1"
 .	el           .LB \\n[li*text-indent]u 0 0 0 "\\$1"
 .	\}
 .\}
+.rr li*text-indent
 ..
 .\" ####### module tbl #######################################
 .\" This module is copied from groff_ms and modified for mm.
@@ -3385,8 +3391,8 @@ exceeds depth of nested lists (\\n[li*lvl])
 .if !\\n[.$]=1 .@abort expected an argument, got \\n[.$]
 .if '\\*[qrf*caller]'' .@abort qrf*caller string not initialized
 .if !\A'\\$1' \{
-.	ds qref*msg \\*[qrf*caller]: '\\$1' is not a valid roff string\"
-.	as qref*msg " name\"
+.	ds qref*msg \\*[qrf*caller]: '\\$1' is not a valid string\"
+.	as qref*msg " identifier\"
 .	@error \\*[qref*msg]
 .\}
 .ds qrf*caller \" empty
@@ -3534,7 +3540,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\" IND term ...
 .de IND
 .if !d ind*file .@error \\$0: no active index; call INITI first
-.if \\n[.$]<1 .@error \\$0: expected at least 1 argument, got \\n[.$]
+.if \\n[.$]<1 .@error \\$0: expected an argument
 .if '\\$1'' .@error \\$0: cannot record empty index entry
 .if \\n[nl]<0 .@error \\$0: cannot record index entry when not on a page
 .ds ind*line \\$1

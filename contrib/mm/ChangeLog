@@ -1,5 +1,30 @@
 2024-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Tweak diagnostic message wording.
+	(P, SP, EPIC, LC, ML): Parallelize wording of diagnostics about
+	macro arguments that are invalid numeric expressions.  Where a
+	macro takes multiple arguments, identify the one we're
+	complaining about by its purpose.
+	(qrf*validate-identifier): Say "string identifier" rather than
+	"roff string name".
+	(INITI): Parallelize wording with `INITR`, `GETR`, and `IND`.
+
+	* m.tmac: Fix code style nits.  Rename `mm-msg` string in
+	initialization to `@msg`, for consistency with package naming
+	scheme.
+	(P, SA): Format complex numeric expressions in the dense and
+	AT&T-compatible manner most of the rest of the package uses,
+	omitting parentheses where possible and eschewing space.
+	(DF): Construct lengthy diagnostic strings in a consistent
+	manner.
+	(AL, RL, VL, BVL, BL, DL, ML): Use `\$0` for macro
+	self-reference instead of a literal in debugging diagnostics.
+	(AL, ML): Emit debugging report of argument list before other
+	diagnostics, as the other list macros do.
+	(VL, BVL, ML): Remove `li*text-indent` register when finished.
+
+2024-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LI): Interpret a second argument not just as
 	indicating that the specified mark should be applied as a
 	prefix, but as a Boolean indicating whether to put space between
