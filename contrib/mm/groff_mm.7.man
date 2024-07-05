@@ -1245,7 +1245,9 @@ and
 .BR 1 ]]
 Begin dashed list.
 .
-Items are prefixed with an em dash and a space.
+.I mm
+marks each item with the em-dash string
+.BR EM .
 .
 A
 .I text-indent
@@ -4160,8 +4162,9 @@ and register
 .
 .TP
 .B EM
-interpolates \(em,
-an em dash.
+interpolates an em dash mark in
+.B DL
+lists.
 .
 .
 .TP

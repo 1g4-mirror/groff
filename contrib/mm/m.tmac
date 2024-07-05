@@ -2540,11 +2540,11 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de DL
 .if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>2 .@warning \\$0: ignoring excess arguments
-.if \\n[.$]<1 .LB \\n[Pi] 0 1 0 \[em]
-.if \\n[.$]=1 .LB 0\\$1   0 1 0 \[em]
+.if \\n[.$]<1 .LB \\n[Pi] 0 1 0 \*[EM]
+.if \\n[.$]=1 .LB 0\\$1   0 1 0 \*[EM]
 .if \\n[.$]=2 \{\
-.	ie '\\$1'' .LB \\n[Pi] 0 1 0 \[em] 0 1
-.	el         .LB 0\\$1   0 1 0 \[em] 0 1
+.	ie '\\$1'' .LB \\n[Pi] 0 1 0 \*[EM] 0 1
+.	el         .LB 0\\$1   0 1 0 \*[EM] 0 1
 .\}
 ..
 .\" List type `ML` uses an argument for the mark measures it to

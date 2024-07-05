@@ -334,6 +334,10 @@ o The m (mm) macro package's `BVL` and `VL` macros' first arguments are
   now optional.  If omitted, the paragraph indentation amount (register
   `Pi`) is used for list items' text indentations.
 
+o The m (mm) macro package's `DL` macro now uses the `EM` string as the
+  mark instead of an em dash special character literal.  (The latter
+  remains the the default definition of the `EM` string.)
+
 o The m (mm) macro package's `DS` macro now interprets its third
   argument (a right-hand indentation) in ens by default, for consistency
   with the rest of the package.  This is a difference from DWB mm (which

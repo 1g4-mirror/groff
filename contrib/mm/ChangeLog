@@ -1,5 +1,13 @@
 2024-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (DL): Use the `EM` string as the mark instead of an em
+	dash special character literal.
+
+	* groff_mm.7.man (Macros) <DL>:
+	(Strings) <EM>: Document this.
+
+2024-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tests/lists-indent-correctly.sh: Add unit test.
 	* mm.am (mm_TESTS): Run test.
 
