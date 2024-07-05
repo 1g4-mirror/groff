@@ -1122,7 +1122,7 @@ Begin broken variable-item
 (or \[lq]tagged\[rq])
 list.
 .
-Each item is expected to supply its own mark.
+Each item should supply its own mark.
 .
 The line is always broken after the mark;
 contrast
