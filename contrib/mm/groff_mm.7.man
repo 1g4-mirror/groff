@@ -717,17 +717,17 @@ and
 .
 .TP
 .BR AL \~[\c
-.IR type \~[ text-indent \~[\c
+.IR number-format \~[ text-indent \~[\c
 .BR 1 ]]]
 Begin an auto-incrementing numbered list.
 .
 Item numbers start at one.
 .
-The
-.I type
-argument assigns the register format
+.I number-format
+assigns the register format
 (see above)
-of the list item enumerators.
+.I mm
+uses for the list item enumerators.
 .
 The default
 .RB is\~ 1 .
