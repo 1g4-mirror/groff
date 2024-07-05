@@ -749,7 +749,8 @@ see register
 Vertical space in the amount of
 .B Lsp
 precedes the list itself,
-but does not accumulate with any pre-item space.
+but does not accumulate with pre-item space
+when this list is nested in another.
 .
 Use
 .B LI
@@ -1078,7 +1079,8 @@ see register
 Vertical space in the amount of
 .B Lsp
 precedes the list itself,
-but does not accumulate with any pre-item space.
+but does not accumulate with pre-item space
+when this list is nested in another.
 .
 Use
 .B LI
@@ -1141,7 +1143,8 @@ see register
 Vertical space in the amount of
 .B Lsp
 precedes the list itself,
-but does not accumulate with any pre-item space.
+but does not accumulate with pre-item space
+when this list is nested in another.
 .
 Use
 .B LI
@@ -1262,7 +1265,8 @@ see register
 Vertical space in the amount of
 .B Lsp
 precedes the list itself,
-but does not accumulate with any pre-item space.
+but does not accumulate with pre-item space
+when this list is nested in another.
 .
 Use
 .B LI
@@ -2781,7 +2785,8 @@ see register
 Vertical space in the amount of
 .B Lsp
 precedes the list itself,
-but does not accumulate with any pre-item space.
+but does not accumulate with pre-item space
+when this list is nested in another.
 .
 Use
 .B LI
@@ -3340,7 +3345,8 @@ see register
 Vertical space in the amount of
 .B Lsp
 precedes the list itself,
-but does not accumulate with any pre-item space.
+but does not accumulate with pre-item space
+when this list is nested in another.
 .
 Use
 .B LI
@@ -3958,7 +3964,8 @@ see register
 Vertical space in the amount of
 .B Lsp
 precedes the list itself,
-but does not accumulate with any pre-item space.
+but does not accumulate with pre-item space
+when this list is nested in another.
 .
 Use
 .B LI
