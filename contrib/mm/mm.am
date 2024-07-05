@@ -50,6 +50,9 @@ MMEXAMPLEFILES=\
 mmexampledir=$(exampledir)/mm
 dist_mmexample_DATA = $(MMEXAMPLEFILES)
 
+# If we created rendered versions of these, we'd need this dependency.
+# $(MMEXAMPLEFILES): $(TMAC_PACKAGE_MM)
+
 EXTRA_DIST += \
   contrib/mm/ChangeLog \
   contrib/mm/examples \
