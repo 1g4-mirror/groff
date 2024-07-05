@@ -1,3 +1,8 @@
+2024-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tests/ML-marks-work.sh: Add unit test.
+	* mm.am (mm_TESTS): Run test.
+
 2024-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Tweak diagnostic message wording.
