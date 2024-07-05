@@ -1062,7 +1062,8 @@ without space between the arguments.
 Begin bulleted list.
 .
 .I mm
-prefixes each item with a bullet and a space.
+marks each item with the bullet string
+.BR BU .
 .
 A
 .I text-indent
@@ -4120,9 +4121,9 @@ call.
 .
 .TP
 .B BU
-interpolates a bullet
-(see
-.BR BL ).
+interpolates a bullet mark in
+.B BL
+lists.
 .
 .
 .TP
