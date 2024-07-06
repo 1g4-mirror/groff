@@ -178,7 +178,7 @@
 
 	* m.tmac: Move definitions of diagnostic macros earlier.  Also
 	test for existence of `D` register before testing its value to
-	determine emission of backtrace (this way `-wreg` doesn't want
+	determine emission of backtrace (this way `-wreg` doesn't warn
 	about it).  This enables the `@warning` macro to be used in
 	validation of command-line registers (C, D, E, L, W, and so on).
 
