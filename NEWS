@@ -245,6 +245,19 @@ o The an (man), doc (mdoc), and doc-old (mdoc-old) macro packages have
   can still instruct groff to format for any desired line length by
   setting the `LL` register on {g,n,t}roff's command line.
 
+o The an (man) and doc (mdoc) macro packages now use slightly different
+  vertical margins to align more closely with the traditional
+  implementations of these packages.  Per man(7) in the AT&T Unix System
+  III manual (June 1980), the text area was 6.5 by 10 inches (on
+  typesetters).  When formatting for terminals with continuous rendering
+  disabled (by default, it is enabled), the page footer now sets 1 line
+  higher than before.
+
+o The an (man) and doc (mdoc) macro packages have added additional
+  registers `BP`, `PO`, and `TS` for user configuration of man page
+  rendering at formatting time.  As noted in groff_man(7) and
+  groff_mdoc(7), documents should never manipulate these.
+
 o The an (man) and doc (mdoc) macro packages now support a `BP` register
   to configure the ("base") paragraph inset amount; that is the amount
   used by man(7) for paragraphs not within an `RS`/`RE` relative inset,
@@ -270,14 +283,6 @@ o The an (man) macro package's `IP` macro no longer honors the formerly
   paragraph with no intervening space.  If you use a word instead of
   punctuation or a list enumerator for `IP`'s first argument, consider
   migrating to `TP`.
-
-o The an (man) and doc (mdoc) macro packages now use slightly different
-  vertical margins to align more closely with the traditional
-  implementations of these packages.  Per man(7) in the AT&T Unix System
-  III manual (June 1980), the text area was 6.5 by 10 inches (on
-  typesetters).  When formatting for terminals with continuous rendering
-  disabled (by default, it is enabled), the page footer now sets 1 line
-  higher than before.
 
 o The doc (mdoc) macro package's `Mt` macro now sets its argument in
   roman, not italics (or whatever the string `doc-Pa-font` was
