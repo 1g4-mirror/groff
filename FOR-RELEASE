@@ -37,8 +37,7 @@ This file describes how to prepare 'groff' for a new release.
      (<https://raw.githubusercontent.com/adobe-type-tools/agl-aglfn/\
      master/glyphlist.txt> may be more convenient.)
 
-* Update the 'gnulib' sub-module to the latest version and the
-  corresponding required commit hash identifier in 'INSTALL.REPO'.
+* Update the 'gnulib' sub-module to the latest stable version.
 
 * Update the release version number where it is hard-coded.
   + NEWS
