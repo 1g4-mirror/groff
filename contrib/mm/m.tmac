@@ -40,7 +40,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .ds @mm m.tmac\"
 .
-.if (\n[.x]\n[.y] < 123) \{\
+.if \n[.x]\n[.y]<123 \{\
 .  ds @msg \*[@mm]: groff mm macros require groff 1.23 or later,\"
 .  as @msg " but found groff \n[.x].\n[.y]; aborting\"
 .  ab \*[@msg]
@@ -79,7 +79,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if r C .nr @copy_type \n[C]
 .
 .if r D \{\
-.	if (\n[D]<0) \{\
+.	if \n[D]<0 \{\
 .		@warning ignoring out-of-range D register value: \n[D]u
 .		rr D
 .	\}
@@ -97,7 +97,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .el       .ds @metadata-font R\"
 .
 .if r L \{\
-.	if (\n[L]<=0) \{\
+.	if \n[L]<=0 \{\
 .		@warning ignoring out-of-range L register value: \n[L]u
 .		rr L
 .	\}
@@ -105,7 +105,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if r L .pl \n[L]u
 .
 .if r O \{\
-.	if (\n[O]<0) \{\
+.	if \n[O]<0 \{\
 .		@warning ignoring out-of-range O register value: \n[O]u
 .		rr O
 .	\}
@@ -117,7 +117,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\}
 .
 .if r W \{\
-.	if (\n[W]<=0) \{\
+.	if \n[W]<=0 \{\
 .		@warning ignoring out-of-range W register value: \n[W]u
 .		rr W
 .	\}
@@ -128,25 +128,25 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"	Configure type size and vertical spacing.  If given on the
 .\"	command line, these have already been converted to basic units.
 .if r S \{\
-.	if (\n[S]<=0) \{\
+.	if \n[S]<=0 \{\
 .		@warning ignoring out-of-range S register value: \n[S]z
 .		rr S
 .	\}
 .\}
 .if !r S .nr S 10
-.ie (\n[S] >= 1000) .ps \n[S]z/1000u
-.el                 .ps \n[S]
+.ie \n[S]>=1000 .ps \n[S]z/1000u
+.el             .ps \n[S]
 .nr *vs-default \n[.ps]*120/100
 .
 .if r V \{\
-.	if (\n[V]<=0) \{\
+.	if \n[V]<=0 \{\
 .		@warning ignoring out-of-range V register value: \n[V]u
 .		rr V
 .	\}
 .\}
 .if !r V .nr V \n[*vs-default]
-.ie (\n[V] >= 1000) .vs \n[V]p/1000u
-.el                 .vs \n[V]
+.ie \n[V]>=1000 .vs \n[V]p/1000u
+.el             .vs \n[V]
 .rr *vs-default
 .
 .nr @ps \n[.ps]
@@ -543,7 +543,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if !r line*ac\\n[.z] .nr line*ac\\n[.z] 0
 .ie \\n[.$] \{\
 .	if !\B'\\$1' .@error \\$0: argument is not numeric: '\\$1'
-.	if (\\$1 < 0) .@error \\$0: negative motion '\\$1' not supported
+.	if \\$1<0) .@error \\$0: negative motion '\\$1' not supported
 .	nr line*temp (v;\\$1)
 .\}
 .el .nr line*temp 1v
@@ -572,7 +572,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .de SA
 .if \\n[.$] \{\
 .	if !\B'\\$1' .@error \\$0: argument is not numeric: '\\$1'
-.	if ((\\$1<0):(\\$1>1)) .@error \\$0: invalid argument: '\\$1'
+.	if (\\$1<0):(\\$1>1) .@error \\$0: invalid argument: '\\$1'
 .\" XXX: ...then...
 .\"   .ad l
 .\"   .nr misc@adjust \\n[.j]
@@ -1115,7 +1115,7 @@ numeric; got '\\$1'
 .if \\n[hd*level]=1 .nr H1h +1
 .\"
 .\" Break page before headings of level <= Ej.
-.if ((\\n[hd*level]<=\\n[Ej])&(\\n[nl]>\\n[hd*cur-bline])) .pg@next-page
+.if (\\n[hd*level]<=\\n[Ej])&(\\n[nl]>\\n[hd*cur-bline]) .pg@next-page
 .\"
 .\" increment current counter
 .nr H\\n[hd*level] +1
@@ -1403,7 +1403,7 @@ numeric; got '\\$1'
 '			sp 3
 .			ds hd*format \\g[P]
 .			af P 0
-.			ie ((\\n[P]=1)&((\\n[N]=1):(\\n[N]=2))) .sp
+.			ie (\\n[P]=1)&((\\n[N]=1):(\\n[N]=2)) .sp
 .			el .tl \\*[pg*header]
 .			af P \\*[hd*format]
 .			ie o .tl \\*[pg*odd-header]
@@ -2036,7 +2036,7 @@ breaking page
 .nr par@suppress-indentation 1	\" no indentation after displays
 .\" print float if queue is empty and the display fits into
 .\" the current page
-.if ((\\n[df*fnr]>=\\n[df*o-fnr])&(\\n[dn]<\\n[.t])) .df@print-float 1
+.if (\\n[df*fnr]>=\\n[df*o-fnr])&(\\n[dn]<\\n[.t]) .df@print-float 1
 .nr df*float 0
 ..
 .\"-------------
@@ -2378,7 +2378,7 @@ ML, RL, VL, or LB first
 .nr li*apply-prefix 0
 .nr li*pad-prefix \\n[Limsp]
 .if \\n[.$]>1 \{\
-.	ie (\\n[li*type]=0) \{\
+.	ie \\n[li*type]=0 \{\
 .		\" VL and BVL use a dummy character `\&` as the "mark"
 .		\" argument to LB, which _formats_ identically to an
 .		\" empty string.  We want a comparison of string
@@ -2657,7 +2657,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .	mk
 .	\" space down to middle of equation
 '	sp (u;(\\$1-1v)/2)
-.	ie (\\n[Eq]%2) \{\
+.	ie \\n[Eq]%2 \{\
 .		\"	label to the left
 \h'|0'\\*[eq*label]
 .	\}
@@ -3117,7 +3117,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .SP 2
 .ref@print-refs
 .if 0\\$1<1 .nr ref*nr 0 1
-.if ((\\n[ref*i]=0):(\\n[ref*i]=2)) .SK
+.if (\\n[ref*i]=0):(\\n[ref*i]=2) .SK
 ..
 .\"-----------
 .\" called by end-of-text!

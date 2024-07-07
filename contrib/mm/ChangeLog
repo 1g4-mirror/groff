@@ -1,3 +1,9 @@
+2024-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Format complex numeric expressions in conditionals
+	using the dense and AT&T-compatible manner of the rest of the
+	package, omitting parentheses and spaces where possible.
+
 2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (ML): Right-align mark within text indentation when the
