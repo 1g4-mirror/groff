@@ -1,3 +1,7 @@
+2024-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an-ext.tmac (SY): Drop unnecessary `do` request.
+
 2024-06-28  Dave Kemper <saint.snit@gmail.com>
 
 	* doc/groff.texi.in: Drop relict macro call in example.
