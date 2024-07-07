@@ -159,6 +159,10 @@ http://savannah.gnu.org/bugs/?group=groff.
 .lt \n[@ll]u
 .nr @po \n[.o]
 .\"---------------------------------------------
+.\"	AT&T/DWB public registers and strings
+.\"	bullet string
+.ie n .ds BU \[bu]
+.el   .ds BU \s-2\[bu]\s0
 .\"	create table of contents entry for heading of level <= Cl
 .nr Cl 2
 .\"	suppress page break after TOC lists of figures, tables, ...?
@@ -177,17 +181,14 @@ http://savannah.gnu.org/bugs/?group=groff.
 .nr Ds 1
 .\"	eject page before headings of level <= Ej
 .nr Ej 0
-.\"	align equation labels to the left instead of the right?
-.nr Eq 0
-.\"	bullet string (for .BL)
-.ie n .ds BU \[bu]
-.el   .ds BU \s-2\[bu]\s0
 .\"	em dash string
 .ie n .ds EM " --
 .el   .ds EM \[em]
+.\"	align equation labels to the left instead of the right?
+.nr Eq 0
 .\"	multiple of Lsp to put between items of footnote text
 .nr Fs 1
-.\" heading level counters
+.\"	heading level counters
 .nr H1 0 1
 .nr H2 0 1
 .nr H3 0 1
@@ -261,25 +262,26 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds Rp REFERENCES\"
 .\"	display indentation in ens
 .nr Si 5
-.\" registered (trade mark) string
+.\"---------------------------------------------
+.\"	AT&T/DWB strings that interpolate letter-like symbols
 .\" TODO: Query only the selected font (\n[.fn]) for the applicable
-.\" glyphs; because these symbols are "letter-like", falling back to a
-.\" special font might result in serifed trademark signs with a sans
-.\" serif text font.  We need a new GNU troff feature for that.  See
-.\" Savannah #64004.
+.\" glyphs; falling back to a special font might result in serifed
+.\" trademark signs with a sans serif text font, for example.  We need a
+.\" new GNU troff feature for that.  See Savannah #64004.
+.\"	registered (trade mark) string
 .ie c \[u00AE] .ds Rg \[u00AE]\"
 .el \{\
 .	\" This overstricken glyph looks okay with Times roman.
 .	ie t .ds Rg \Z'\s-4\h@.35m@\v@-.2m@R\s0'\s+4\[ci]\s0\"
 .	el   .ds Rg \u(R)\d\"
 .\}
-.\" service mark string
+.\"	service mark string
 .ie c \[u2120] .ds Sm \[u2120]\"
 .el \{\
 .	ie t .ds Sm \v'-.4m'\s-3SM\s0\v'.4m'\"
 .	el   .ds Sm \u(SM)\d\"
 .\}
-.\" trade mark string
+.\"	trade mark string
 .ie c \[tm] .ds Tm \[tm]\"
 .el \{\
 .	ie t .ds Tm \v'-.4m'\s-3TM\s0\v'.4m'\"

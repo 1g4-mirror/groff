@@ -1,5 +1,10 @@
 2024-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Sort `BU` and `EM` string definitions in lexicographic
+	order.  Add annotations.
+
+2024-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Format complex numeric expressions in conditionals
 	using the dense and AT&T-compatible manner of the rest of the
 	package, omitting parentheses and spaces where possible.
