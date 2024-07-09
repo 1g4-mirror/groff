@@ -1,3 +1,9 @@
+2024-07-09  Bjarni Ingi Gislason <bjarniig@rhi.hi.is>
+
+	[docs]: Fix doubled word typos.
+
+	Fixes <https://savannah.gnu.org/bugs/?65886>.
+
 2024-07-09  Dave Kemper <saint.snit@gmail.com>
 
 	[docs]: Revise "input file" usage.

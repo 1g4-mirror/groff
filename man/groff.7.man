@@ -8443,7 +8443,7 @@ to the standard error stream.
 .\" ====================================================================
 .
 This document was written by
-by Trent A.\& Fisher,
+Trent A.\& Fisher,
 .MT wl@\:gnu\:.org
 Werner Lemberg
 .ME ,

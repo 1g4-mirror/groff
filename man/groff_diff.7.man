@@ -1018,7 +1018,7 @@ and inline alignments within the document,
 respectively.
 .
 .I file
-is is a name associated with the production of the next image.
+is a name associated with the production of the next image.
 .RE
 .
 .
