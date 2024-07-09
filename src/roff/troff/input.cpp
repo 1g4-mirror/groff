@@ -7846,10 +7846,11 @@ void pipe_output()
       skip_line();
     }
     else {
-      char *pc;
-      if ((pc = read_string()) == 0)
+      char *pc = read_string();
+      if (0 /* nullptr */ == pc)
 	error("can't pipe to empty command");
-      if (pipe_command) {
+      // Are we adding to an existing pipeline?
+      if (pipe_command != 0 /* nullptr */) {
 	char *s = new char[strlen(pipe_command) + strlen(pc) + 1 + 1];
 	strcpy(s, pipe_command);
 	strcat(s, "|");
@@ -7874,7 +7875,7 @@ void system_request()
   }
   else {
     char *command = read_string();
-    if (!command)
+    if (0 /* nullptr */ == command)
       error("empty command");
     else {
       system_status = system(command);

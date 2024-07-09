@@ -1,5 +1,16 @@
 2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.
+	(pipe_output): Reduce cleverness of assignment nested inside
+	conditional--a favorite of C obscurantists and an especially
+	gratuitous case since it was immediately preceded by a
+	declarator without an initializer.  This aligns the logic with
+	`system_request`.
+	(pipe_output, system_request): Reorder comparisons to avoid
+	inadvertent lvalue assignment.
+
+2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi.in (while):
 	* man/groff_diff.7.man (New requests) <while>: Point out that
 	the `slimit` register can be used to _lower_ the formatter's
