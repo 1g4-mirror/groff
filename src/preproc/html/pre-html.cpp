@@ -1006,7 +1006,7 @@ void imageList::createImage(imageItem *i)
 	     + max(i->Y1, i->Y2) * image_res / postscriptRes
 	     + 1 + IMAGE_BORDER_PIXELS;
     if (createPage(i->pageNo) == 0) {
-      s = make_string("pnmcut%s %d %d %d %d < %s "
+      s = make_string("pamcut%s %d %d %d %d < %s "
 		      "| pnmcrop%s -quiet | pnmtopng%s -quiet %s"
 		      "> %s\n",
 		      EXE_EXT,

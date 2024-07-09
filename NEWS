@@ -423,6 +423,10 @@ o grog(1) no longer supports the `--ligatures` and `--run` options.
 o The minimum version of Perl required to build groff is now 5.8 (18
   July 2002), incremented from 5.6.1.
 
+o groff now looks for the Netpbm program pamcut(1) rather than
+  pnmcut(1).  Per upstream, the former was introduced 23 years ago and
+  the latter withdrawn 15 years ago.
+
 o The groff_diff(7) man page no longer contains examples.  They remain
   in groff's Texinfo manual.
 
