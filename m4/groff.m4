@@ -447,16 +447,19 @@ AC_DEFUN([GROFF_URW_FONTS_NOTICE], [
 ])
 
 
-# Check whether the pnm tools accept the -quiet option.
+# See how to make Netpbm commands quiet where we need them to be.
 
-dnl Any macro that tests $pnmtools_quiet should AC_REQUIRE this.
+dnl Any macro that tests $pnmtools_quiet or $pnmcrop_pass should
+dnl AC_REQUIRE this.
 
 AC_DEFUN([GROFF_PNMTOOLS_CAN_BE_QUIET], [
   AC_REQUIRE([GROFF_CHECK_GROHTML_PROGRAMS])
 
   AH_TEMPLATE([PNMTOOLS_QUIET], [Command-line option to quiet Netpnm.])
+  AH_TEMPLATE([PNMCROP_PASS], [Command-line option to quiet pnmcrop.])
 
   pnmtools_quiet=
+  pnmcrop_pass=
 
   if test "$use_grohtml" = yes
   then
@@ -465,15 +468,22 @@ AC_DEFUN([GROFF_PNMTOOLS_CAN_BE_QUIET], [
     then
       pnmtools_quiet=-quiet
     fi
-    if test -n "$pnmtools_quiet"
+    if echo P2 2 2 255 0 1 2 0 | pnmcrop "$pnmtools_quiet" \
+      -blank-image=pass > /dev/null 2>&1
     then
-      AC_MSG_RESULT([$pnmtools_quiet])
+      pnmcrop_pass=-blank-image=pass
+    fi
+    if test -n "$pnmtools_quiet$pnmcrop_pass"
+    then
+      AC_MSG_RESULT([$pnmtools_quiet $pnmcrop_pass])
     else
       AC_MSG_RESULT([(none)])
     fi
   fi
   AC_SUBST([pnmtools_quiet])
+  AC_SUBST([pnmcrop_pass])
   AC_DEFINE_UNQUOTED([PNMTOOLS_QUIET], ["$pnmtools_quiet"])
+  AC_DEFINE_UNQUOTED([PNMCROP_PASS], ["$pnmcrop_pass"])
 ])
 
 
