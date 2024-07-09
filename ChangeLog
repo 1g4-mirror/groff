@@ -1,3 +1,13 @@
+2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (while):
+	* man/groff_diff.7.man (New requests) <while>: Point out that
+	the `slimit` register can be used to _lower_ the formatter's
+	internal stack size limit as well.
+
+	Fixes <https://savannah.gnu.org/bugs/?65962>.  Thanks to Bjarni
+	Ingi Gislason for the report and Dave Kemper for the suggestion.
+
 2024-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an-ext.tmac (SY): Drop unnecessary `do` request.

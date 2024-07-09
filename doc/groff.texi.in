@@ -13370,7 +13370,7 @@ once.@footnote{unless you redefine it}
 To prevent infinite loops, the default number of available recursion
 levels is 1,000 or somewhat less.@footnote{``somewhat less'' because
 things other than macro calls can be on the input stack}  You can
-disable this protective measure, or raise the limit, by setting the
+disable this protective measure, or alter the limit, by setting the
 @code{slimit} register.  @xref{Debugging}.
 
 As noted above, if a @code{while} body begins with a conditional block,

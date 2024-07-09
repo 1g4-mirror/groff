@@ -3873,7 +3873,7 @@ the default number of available recursion levels is 1,000 or somewhat
 less (because things other than macro calls can be on the input stack).
 .
 You can disable this protective measure,
-or raise the limit,
+or alter the limit,
 by setting the
 .B slimit
 register.
