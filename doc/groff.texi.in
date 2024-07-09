@@ -587,7 +587,7 @@ A history relating @code{groff} to its forerunners @code{roff},
 @c This language is slightly expanded from that in the "ANNOUNCE" file
 @c and on the groff home page.
 @code{groff} (GNU @code{roff}) is a typesetting system that reads plain
-text input files that include formatting commands to produce output in
+text input that includes formatting commands to produce output in
 PostScript, PDF, HTML, or other formats, or for display to a terminal.
 Formatting commands can be low-level typesetting primitives, macros from
 a supplied package, or user-defined macros.  All three approaches can be
@@ -1144,7 +1144,7 @@ spooler.
 
 @item -m @var{mac}
 Search for the macro package @file{@var{mac}.tmac} and read it prior to
-any input files.  If not found, @file{tmac.@var{mac}} is attempted.
+any input.  If not found, @file{tmac.@var{mac}} is attempted.
 @xref{Macro Directories}.  @command{groff} passes @option{-m} options
 and their arguments to to @command{geqn}, @command{grap}, and
 @command{ggrn}.
@@ -1399,8 +1399,8 @@ the utilities @command{indxbib} and @command{lookbib}.
 
 @item GROFF_ENCODING
 @tindex GROFF_ENCODING@r{, environment variable}
-Specify the assumed character encoding of input files.  @command{groff}
-passes its value as an argument to the @command{preconv} preprocessor's
+Specify the assumed character encoding of input.  @command{groff} passes
+its value as an argument to the @command{preconv} preprocessor's
 @option{-e} option.  This variable's existence implies the
 @command{groff} option @option{-k}.  If set but empty, @command{groff}
 runs @code{preconv} without an @option{-e} option.  @command{groff}'s
@@ -1759,8 +1759,8 @@ fruitfully.@footnote{The remainder of this chapter is based on
 which is distributed with @code{groff} as @file{meintro.me}.}
 References are made throughout to more detailed information.
 
-GNU @command{troff} reads an input file prepared by the user and outputs
-a formatted document suitable for publication or framing.  The input
+GNU @command{troff} reads input prepared by the user and outputs a
+formatted document suitable for publication or framing.  The input
 consists of text, or words to be printed, and embedded commands
 (@slanted{requests} and @slanted{escape sequences}), which tell GNU
 @code{troff} how to format the output.  @xref{Formatter Instructions}.
@@ -5086,7 +5086,7 @@ both.  GNU @code{troff} continues this tradition of permitting an author
 to compose a single master version of a document which can then be
 rendered for a variety of output formats or devices.
 
-@code{roff} input files contain text interspersed with instructions to
+@code{roff} input contains text interspersed with instructions to
 control the formatter.  Even in the absence of such instructions, GNU
 @code{troff} still processes its input in several ways, by filling,
 hyphenating, breaking, and adjusting it, and supplementing it with
@@ -15239,10 +15239,10 @@ of qualifying lines enumerated in that environment.
 @Defreq {blm, [@Var{name}]}
 @cindex blank line macro (@code{blm})
 Set a blank line trap, calling the macro @var{name} when GNU
-@code{troff} encounters a blank line in an input file, instead of the
-usual behavior (@pxref{Breaking}).  A line consisting only of spaces is
-also treated as blank and subject to this trap.  If no argument is
-supplied, the default blank line behavior is (re-)established.
+@code{troff} encounters a blank line in input, instead of the usual
+behavior (@pxref{Breaking}).  A line consisting only of spaces is also
+treated as blank and subject to this trap.  If no argument is supplied,
+the default blank line behavior is (re-)established.
 @endDefreq
 
 @c ---------------------------------------------------------------------

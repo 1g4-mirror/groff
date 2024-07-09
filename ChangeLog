@@ -1,3 +1,12 @@
+2024-07-09  Dave Kemper <saint.snit@gmail.com>
+
+	[docs]: Revise "input file" usage.
+
+	Change the term "input file" to "input" in groff documentation
+	in cases where the referenced input need not come from a file.
+
+	Fixes <https://savannah.gnu.org/bugs/?65967>.
+
 2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[grohtml]: Pass `-blank-image=pass` to pnmcrop(1) if supported

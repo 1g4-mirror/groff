@@ -1650,7 +1650,7 @@ If a blank line macro is thus defined,
 .I groff
 executes
 .I name
-when a blank line is encountered in the input file,
+when a blank line is encountered in the input,
 instead of the usual behavior.
 .
 A line consisting only of spaces is also treated as blank and subject to

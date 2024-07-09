@@ -316,7 +316,7 @@ a program that reads device and font descriptions
 .MR groff_font @MAN5EXT@ ),
 interprets the
 .I groff
-language expressed in text input files,
+language expressed in text input,
 and translates that input into a device-independent output format
 (\c
 .MR groff_out @MAN5EXT@ )
