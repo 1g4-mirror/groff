@@ -116,8 +116,7 @@ This file summarizes the structure of the groff source distribution.
   troff         Formatter.
 
 ./src/utils     Utility programs relevant to groff.
-  addftinfo     Supplement AT&T troff font descriptions with metrics
-                groff requires.
+  addftinfo     Enhance AT&T troff font descriptions for use with groff.
   afmtodit      Create font description files for the PostScript device.
   grog          Guess groff command-line options required by a document.
   hpftodit      Create font description files for the 'lj4' device.
