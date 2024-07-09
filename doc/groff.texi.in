@@ -5962,7 +5962,7 @@ one vee.
 @c interpolation at the scope of input lines to interpolations _within_
 @c lines.  It is also a good time to introduce the \n and \* escape
 @c sequences to avoid painful, "WTF"-producing forward references later.
-@c Some materal from groff_mm(7) might be adaptable to this purpose.
+@c Some material from groff_mm(7) might be adaptable to this purpose.
 @c
 @c Earlier material from @Defesc{\\n}:
 @c "This means that the value of the register is expanded in place while
@@ -18788,7 +18788,7 @@ Due to the obsolete jump-and-write command, the text clusters in the
 The intermediate output language of @acronym{AT&T} @code{troff} was
 first documented in @cite{A Typesetter-independent TROFF}, by Brian
 Kernighan, and by 1992 the @acronym{AT&T} @code{troff} manual was
-updated to incoroprate a description of it.
+updated to incorporate a description of it.
 
 The GNU @code{troff} intermediate output format is compatible with this
 specification except for the following features.
@@ -19444,7 +19444,7 @@ character (normally @samp{.}).  @xref{Calling Macros}.
 @appendix String Index
 
 The macro package or program with which a string is associated appears
-in brackets after the strings's name.  The formatter itself defines only
+in brackets after the string's name.  The formatter itself defines only
 one string, @code{.T}.
 
 Interpolate a string name of exactly one character@tie{}@code{x} with

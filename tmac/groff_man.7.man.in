@@ -1810,7 +1810,7 @@ Do not rely upon
 .B .SM
 to communicate semantic information distinct from using roman style at
 normal size;
-it is be hidden from readers using such devices.
+it is hidden from readers using such devices.
 .
 .
 .P
