@@ -3613,11 +3613,11 @@ Set number of next input line to
 .\" XXX: negative values accepted; check AT&T troff
 .
 .TPx
-.REQ .lf "n file"
+.REQ .lf "n file-name"
 Set number of next input line to
 .I n
-and input file name to
-.IR file .
+and report input file name as
+.IR file-name .
 .
 .TPx
 .REQ .lg m
