@@ -454,20 +454,26 @@ dnl Any macro that tests $pnmtools_quiet should AC_REQUIRE this.
 AC_DEFUN([GROFF_PNMTOOLS_CAN_BE_QUIET], [
   AC_REQUIRE([GROFF_CHECK_GROHTML_PROGRAMS])
 
+  AH_TEMPLATE([PNMTOOLS_QUIET], [Command-line option to quiet Netpnm.])
+
   pnmtools_quiet=
 
   if test "$use_grohtml" = yes
   then
-    AC_MSG_CHECKING([whether PNM tools accept the '-quiet' option])
+    AC_MSG_CHECKING([for options to make PNM tools quiet])
     if echo P2 2 2 255 0 1 2 0 | pnmtops -quiet > /dev/null 2>&1
     then
-      AC_MSG_RESULT([yes])
       pnmtools_quiet=-quiet
+    fi
+    if test -n "$pnmtools_quiet"
+    then
+      AC_MSG_RESULT([$pnmtools_quiet])
     else
-      AC_MSG_RESULT([no])
+      AC_MSG_RESULT([(none)])
     fi
   fi
   AC_SUBST([pnmtools_quiet])
+  AC_DEFINE_UNQUOTED([PNMTOOLS_QUIET], ["$pnmtools_quiet"])
 ])
 
 

@@ -1,5 +1,18 @@
 2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Actually use the detected Netpbm option for quieting output in
+	the pre-grohtml(1) preprocessor.
+
+	* m4/groff.m4 (GROFF_PNMTOOLS_CAN_BE_QUIET): Set up an
+	Autoheader template for the C/C++ preprocessor symbol
+	`PNMTOOLS_QUIET`.  Report the detected option (if any) as the
+	result of this configuration test.  Get the expansion into the
+	"config.h" file with `AC_DEFINE_UNQUOTED`.
+	* src/preproc/html/pre-html.cpp (imageList::createImage): Use
+	the preprocessor symbol instead of a "-quiet" string literal.
+
+2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Search for and use pamcut(1), not pnmcut(1).  Per upstream, the
 	former was introduced 23 years ago and the latter withdrawn 15
 	years ago.  And we just got the memo!
