@@ -5396,9 +5396,9 @@ registers
 .RB ( pnr ),
 page location traps
 .RB ( ptr ),
-and a list of pending output nodes corresponding to the previous input
+and a list of output nodes corresponding to the pending input
 line
-.RB ( .pline )
+.RB ( pline )
 to the standard error stream.
 .
 .
