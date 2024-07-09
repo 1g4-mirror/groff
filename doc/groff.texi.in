@@ -13043,10 +13043,10 @@ comparisons in other programming languages.
 @cindex copy mode, and @code{\?}
 @cindex mode, copy, and @code{\?}
 @noindent
-Since comparands protected with @code{\?} are read in copy mode
-(@pxref{Copy Mode}), they need not even be valid @code{groff} syntax.
-The escape character is still lexically recognized, however, and
-consumes the next character.
+Since GNU @code{troff} reads comparands protected with @code{\?} in copy
+mode (@pxref{Copy Mode}), they need not even be valid @code{groff}
+syntax.  The escape character is still lexically recognized, however,
+and consumes the next character.
 
 @Example
 .ds a \[
