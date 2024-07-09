@@ -1426,6 +1426,20 @@ and
 .SS "New requests"
 .\" ====================================================================
 .
+Several GNU
+.I troff \" GNU
+requests work like AT&T
+.IR troff 's \" AT&T
+.RB \[lq] as \[rq]
+and
+.B ds
+requests,
+accepting an optional leading neutral double-quote
+.B \[dq]
+in an argument that extends to the end of the input line,
+permitting inclusion of leading spaces.
+.
+.
 .TP 8n \" ".break" + 2n
 .BI .aln\~ "new old"
 Create alias
