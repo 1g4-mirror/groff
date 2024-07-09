@@ -2561,7 +2561,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .		as " '\\$2'\"
 .		@error \\*[li*msg]
 .	\}
-.	ie \\n[.$]=2 .LB \\$2                 0 0 0 "\\$1"
+.	ie \\n[.$]=2 .LB \\$2                 0 1 0 "\\$1"
 .	el           .LB \\n[li*text-indent]u 0 0 0 "\\$1"
 .	\}
 .\}

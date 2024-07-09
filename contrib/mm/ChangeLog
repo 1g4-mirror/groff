@@ -1,3 +1,11 @@
+2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac (ML): Right-align mark within text indentation when the
+	latter is specified.  Problem introduced by me in commit
+	512b749f4e, 2 July.
+
+	* tests/lists-indent-correctly.sh: Update test expectations.
+
 2024-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (DL): Use the `EM` string as the mark instead of an em

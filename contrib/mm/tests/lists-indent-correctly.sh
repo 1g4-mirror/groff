@@ -169,7 +169,7 @@ o21 o22 o23 o24 o25 o26 o27 o28 o29 o30
 #       ! d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 d16 d17
 #         d18 d19 d20 d21 d22 d23 d24 d25 d26 d27 d28 d29 d30
 #
-#       @    e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15 e16
+#          @ e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13 e14 e15 e16
 #            e17 e18 e19 e20 e21 e22 e23 e24 e25 e26 e27 e28 e29 e30
 #
 #        [1] f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 f13 f14 f15 f16
@@ -252,7 +252,7 @@ echo "checking indentation of ML list, second line" >&2
 echo "$output" | grep -Eq "^ {9}d18" || wail
 
 echo "checking indentation of ML list with text indent, first line" >&2
-echo "$output" | grep -Eq "^ {7}@ {4}e1" || wail
+echo "$output" | grep -Eq "^ {10}@ {1}e1" || wail
 
 echo "checking indentation of ML list with text indent, second line" >&2
 echo "$output" | grep -Eq "^ {12}e17" || wail
