@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020, 2022 Free Software Foundation, Inc.
+# Copyright (C) 2020-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -67,11 +67,32 @@ echo "$output" | grep -q '<img src="grohtml-[0-9]\+-2.png"' || wail
 
 cleanup
 
-# We can't run remaining tests if the environment doesn't support UTF-8.
-if [ "$(locale charmap)" != UTF-8 ]
+give_up=
+message=
+
+# We can't run remaining tests if we can't inquire what the locale's
+# character set is.
+if ! command -v locale
 then
-    echo "environment does not support UTF-8; skipping test" >&2
-    exit 77 # skip
+    message="no 'locale' command available"
+    give_up=yes
+# ...or if the environment doesn't support UTF-8.
+elif [ "$(locale charmap)" != UTF-8 ]
+then
+    message="environment does not support UTF-8"
+    give_up=yes
+fi
+
+if [ -n "$give_up" ]
+then
+    # If we've already seen a failure case, report it.
+    if [ -n "$fail" ]
+    then
+        exit 1 # fail
+    else
+        echo "$message; skipping test" >&2
+        exit 77 # skip
+    fi
 fi
 
 # Check two forms of character transformation.

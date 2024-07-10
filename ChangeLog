@@ -1,3 +1,13 @@
+2024-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grotty/tests/basic_latin_glyphs_map_correctly.sh:
+	* src/roff/groff/tests/smoke-test_html_device.sh: Revise tests
+	to better handle non-glibc environments.  For example, Bionic
+	libc offers no "locale" command to query the locale's character
+	set from the shell.  When that is the case, skip the test and
+	describe the failure more accurately.  Fixes test failures on
+	Termux.
+
 2024-05-14  Dave Kemper <saint.snit@gmail.com>
 
 	* tmac/e.tmac: Add debugging advice for developers.
