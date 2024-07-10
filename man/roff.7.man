@@ -2167,7 +2167,7 @@ to ignore the remainder of the input line.
 .
 .IP \[bu]
 Use the empty request\[em]a control character followed immediately by a
-newline\[em]to visually manage separation of material in input.
+newline\[em]to visually manage separation of material in the input.
 .
 Many of the
 .I groff

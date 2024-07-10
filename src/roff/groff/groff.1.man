@@ -1819,7 +1819,7 @@ and
 .
 .TP
 .I GROFF_ENCODING
-Specify the assumed character encoding of input.
+Specify the assumed character encoding of the input.
 .
 .I groff
 passes its value as an argument to
