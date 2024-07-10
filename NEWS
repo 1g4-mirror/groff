@@ -329,7 +329,7 @@ o Similarly, the m (mm) macro package's `PIC` macro (a GNU extension)
   by default.
 
 o The m (mm) macro package's `Li` register now defaults to 5 ens (not 6)
-  to align with the `Pi` register default and with DWB 3.3 mm behavior.
+  to align with the `Pi` register default.
 
 o The m (mm) macro package's `Li` register now configures the text
   indentation of items in `RL` lists (as it long has for `AL` lists)
@@ -341,7 +341,7 @@ o The m (mm) macro package's `BVL` and `VL` macros' first arguments are
 
 o The m (mm) macro package's `DL` macro now uses the `EM` string as the
   mark instead of an em dash special character literal.  (The latter
-  remains the the default definition of the `EM` string.)
+  remains the default definition of the `EM` string.)
 
 o The m (mm) macro package's `DS` macro now interprets its third
   argument (a right-hand indentation) in ens by default, for consistency
@@ -358,13 +358,13 @@ o The m (mm) macro package's `IND` macro (a GNU extension), now calls
   action as part of the fallback when no `TYIND` macro is defined.
 
 o The m (mm) macro package's `LI` macro now interprets its second
-  argument (a GNU extension) as a Boolean indicating whether a space
-  should separate the list item mark from its prefix (the first
-  argument).  Thus, where you formerly specified "2" to indicate no
-  such separation, you would now use "0", matching the semantics of the
-  `Limsp` register (which configures a default prefix/mark separation
-  policy).  "2" continues to be recognized and handled as before, but
-  prompts a warning; migrate your documents.
+  argument as a Boolean indicating whether a space should separate the
+  list item mark from its prefix (the first argument).  Thus, where you
+  formerly specified "2" to indicate no such separation, you would now
+  use "0", matching the semantics of the `Limsp` register (which
+  configures a default prefix/mark separation policy).  "2" continues to
+  be recognized and handled as before, but prompts a warning; migrate
+  your documents.
 
 o The m (mm) macro package now supports the `E` register as DWB mm did.
 
