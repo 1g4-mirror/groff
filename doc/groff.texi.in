@@ -15721,10 +15721,7 @@ Emit @var{contents} directly to GNU @command{troff}'s output; this usage
 is similar to that of @code{\!} in the top-level diversion.  An initial
 neutral double quote in the argument is stripped, allowing embedded
 leading spaces in @var{contents}, which is read in copy mode and
-continues to the end of the input line.  This request can't be used
-before the first page has started---if an error is reported, or
-@var{contents} fails to appear in GNU @command{troff}'s output, simply
-insert a @code{.br} line before the @code{output} request.
+continues to the end of the input line.
 
 Use with caution!  It is normally only needed for mark-up used by a
 postprocessor that does something with the output before sending it to

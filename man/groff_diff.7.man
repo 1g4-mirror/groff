@@ -3177,20 +3177,6 @@ allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode and continues to the end of the input line.
 .
-This request can't be used before the first page has started\[em]if an
-error is reported,
-or
-.I contents
-fails to appear in
-.IR @g@troff 's
-output,
-simply insert a
-.B .br
-line before the
-.B output
-request.
-.
-.
 .TP
 .B .pev
 Report the state of the current environment followed by that of all
