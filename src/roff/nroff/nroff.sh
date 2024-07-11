@@ -37,6 +37,10 @@ usage="usage: $prog [-bcCEhikpRStUVz] [-d ctext] [-d string=text] \
 usage: $prog {-v | --version}
 usage: $prog --help"
 
+summary="
+Format documents with groff(1) for TTY (terminal) devices.
+See the nroff(1) manual page."
+
 for arg
 do
   if [ -n "$is_option_argument_pending" ]
@@ -77,6 +81,7 @@ do
       opts="$opts $arg" ;;
     --help)
       echo "$usage"
+      echo "$summary"
       exit 0 ;;
     --)
       shift

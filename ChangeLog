@@ -1,5 +1,10 @@
 2024-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/nroff/nroff.sh: Describe program briefly when invoked
+	with `--help` option.
+
+2024-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/nroff/nroff.sh: Define `prog` variable as only the
 	"basename" of argv[0], making diagnostic and usage messages less
 	garrulous.  See Savannah #65110.
