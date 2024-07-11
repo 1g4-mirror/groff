@@ -11,9 +11,9 @@
 
 2024-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* m.tmac (ML): Right-align mark within text indentation when the
-	latter is specified.  Problem introduced by me in commit
-	512b749f4e, 2 July.
+	* m.tmac (ML): Right-align mark within its indentation when a
+	text indentation is specified.  Problem introduced by me in
+	commit 512b749f4e, 2 July.
 
 	* tests/lists-indent-correctly.sh: Update test expectations.
 
@@ -93,7 +93,7 @@
 	when prefixed (with intra-mark padding), if the enumerator and
 	prefix are only one character in nroff mode (and similarly thin
 	in troff mode).  `RL` oversets under the same circumstances
-	{because two brackets "[" and "]" are wider than a dot "."}
+	{because two brackets "[" and "]" are wider than a dot "."}.
 	This change however makes the macros more consistent with each
 	other, and `RL` more consistent with DWB 3.3 mm, whose manual
 	doesn't document the macros' behavior in this much detail; I
