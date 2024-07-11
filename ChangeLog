@@ -1,3 +1,11 @@
+2024-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (Groff Options):
+	* man/groff.7.man (Syntax reference conventions):
+	* src/roff/troff/troff.1.man (Options): Document restriction on
+	file names used as request arguments: no spaces, tabs, or line
+	feeds.
+
 2024-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grotty/tests/basic_latin_glyphs_map_correctly.sh:

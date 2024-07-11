@@ -2286,6 +2286,13 @@ is an ordinary character sequence representing a file name on the
 system.
 .\" ...limiting the file names you can express; see Savannah #64071.
 .
+GNU
+.I troff \" GNU
+does not accept tabs,
+newlines
+(line feeds),
+or spaces in file names supplied as arguments to requests.
+.
 .TPx
 .I font
 is a typeface specified as a font name,
