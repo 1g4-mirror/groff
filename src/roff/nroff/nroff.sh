@@ -1,7 +1,7 @@
 #!/bin/sh
 # Emulate nroff with groff.
 #
-# Copyright (C) 1992-2021 Free Software Foundation, Inc.
+# Copyright (C) 1992-2024 Free Software Foundation, Inc.
 #
 # Written by James Clark, Werner Lemberg, and G. Branden Robinson.
 #
@@ -51,6 +51,20 @@ do
     continue
   fi
 
+  # groff(1) options we don't support:
+  #
+  # -e
+  # -s because of historical clash in meaning.
+  # -f because terminal devices don't support font families.
+  # -g
+  # -G
+  # -j
+  # -p because terminals don't do graphics.  (Some do, but grotty(1)
+  #    does not produce ReGIS or Sixel output.)
+  # -l
+  # -L because terminal output is not suitable for a print spooler.
+  # -N because we don't support -e.
+  # -X because gxditview(1) doesn't support terminal documents (why?).
   case $arg in
     -c)
       opts="$opts $arg -P-c" ;;
@@ -59,10 +73,10 @@ do
     -[eq] | -s*)
       # ignore these options
       ;;
-    -[dKmMnoPrTwW])
+    -[dDIKmMnoPrTwW])
       is_option_argument_pending=yes
       opts="$opts $arg" ;;
-    -[bCEikpRStUz] | -[dKMmrnoPwW]*)
+    -[abCEikpRStUzZ] | -[dDIKMmrnoPwW]*)
       opts="$opts $arg" ;;
     -T*)
       Topt=$arg ;;

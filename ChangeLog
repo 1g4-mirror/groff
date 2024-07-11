@@ -1,5 +1,13 @@
 2024-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/nroff/nroff.sh: Support groff `-a`, `-D`, `-I`, and
+	`-Z` options.
+
+	* src/roff/nroff/nroff.1.man:
+	* NEWS: Document it.
+
+2024-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/nroff/nroff.sh: Describe program briefly when invoked
 	with `--help` option.
 

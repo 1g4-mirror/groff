@@ -113,6 +113,12 @@ o New parameters tunable with the GNU eqn "set" primitive, "half_space"
 
 o The new "reset" primitive restores a named parameter to its default.
 
+nroff
+-----
+
+o nroff now recognizes the -a, -D, -I, and -Z options and passes them
+  through to groff.
+
 Macro packages
 --------------
 
