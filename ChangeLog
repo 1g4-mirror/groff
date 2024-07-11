@@ -1,5 +1,11 @@
 2024-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class composite_node): Declare
+	`dump_node()` member function.
+	(composite_node::dump_node): Implement.
+
+2024-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi.in (Groff Options):
 	* man/groff.7.man (Syntax reference conventions):
 	* src/roff/troff/troff.1.man (Options): Document restriction on
