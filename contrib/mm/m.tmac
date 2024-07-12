@@ -2548,8 +2548,9 @@ exceeds depth of nested lists (\\n[li*lvl])
 .	el         .LB 0\\$1   0 1 0 \*[EM] 0 1
 .\}
 ..
-.\" List type `ML` uses an argument for the mark measures it to
-.\" determine text indentation, ignoring both `Li` and `Pi`.
+.\" List type `ML` is unlike the other canned list types, which default
+.\" their text indentations to either \n[Li] or \n[Pi]; `ML` instead
+.\" measures its mark argument to determine text indentation.
 .de ML
 .if \\n[D]>2 .tm \\$0: \\$@
 .if \\n[.$]>3 .@warning \\$0: ignoring excess arguments
