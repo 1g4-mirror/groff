@@ -1,5 +1,10 @@
 2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Drop scaling unit from diagnostic message reporting
+	dimensionless quantity.
+
+2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Simplify `BU` string definition by eliminating branch;
 	`\s` escape sequences are ignored in nroff mode anyway.
 
