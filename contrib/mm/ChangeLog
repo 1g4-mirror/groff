@@ -1,5 +1,11 @@
 2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tests/lists-indent-correctly.sh: Test `.mgm` register to gate
+	groffisms; the extensions we're exercising are in mm itself, not
+	the formatter.
+
+2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Drop scaling unit from diagnostic message reporting
 	dimensionless quantity.
 
