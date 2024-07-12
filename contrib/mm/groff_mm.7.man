@@ -2561,7 +2561,7 @@ If the width of the mark plus any padding
 call)
 exceeds the text indentation,
 .I "groff mm"
-warns and uses one en of padding.
+warns and uses one en of padding between the mark and the text.
 .
 A second argument
 prefixes
