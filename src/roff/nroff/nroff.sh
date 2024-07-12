@@ -41,6 +41,34 @@ summary="
 Format documents with groff(1) for TTY (terminal) devices.
 See the nroff(1) manual page."
 
+# Break up option clusters into separate arguments.
+newargs=
+for arg
+do
+  thisarg=$arg
+  while :
+  do
+    case $thisarg in
+      -[abCEikpRStUzZ])
+        newargs="$newargs $thisarg"
+        break
+        ;;
+      -[abCEikpRStUzZ]*)
+        remainder=${thisarg#??}
+        thisarg=${thisarg%%$remainder}
+        newargs="$newargs $thisarg"
+        thisarg=-$remainder
+        ;;
+      *)
+        newargs="$newargs $thisarg"
+        break
+        ;;
+    esac
+  done
+done
+
+set -- $newargs
+
 for arg
 do
   if [ -n "$is_option_argument_pending" ]

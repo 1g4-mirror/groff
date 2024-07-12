@@ -84,6 +84,16 @@ nroff -V -d FOO=BAR 1 | sed "$sedexpr"
 nroff -V -d FOO=BAR 1 | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char -d FOO=BAR 1" || wail
 
+echo "checking argument declustering: 'nroff -V -tz'" >&2
+nroff -V -tz | sed "$sedexpr"
+nroff -V -tz | sed "$sedexpr" \
+    | grep -qx "test-groff -Tascii -mtty-char -t -z" || wail
+
+echo "checking argument declustering: 'nroff -V -tzms'" >&2
+nroff -V -tzms | sed "$sedexpr"
+nroff -V -tzms | sed "$sedexpr" \
+    | grep -qx "test-groff -Tascii -mtty-char -t -z -ms" || wail
+
 test -z "$fail"
 
 # vim:set ai et sw=4 ts=4 tw=72:

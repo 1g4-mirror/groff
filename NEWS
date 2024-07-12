@@ -119,6 +119,9 @@ nroff
 o nroff now recognizes the -a, -D, -I, and -Z options and passes them
   through to groff.
 
+o nroff now supports clustered options ("-tzms", for example) as groff,
+  troff, and other GNU getopt-using programs do.
+
 Macro packages
 --------------
 
