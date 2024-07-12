@@ -1,3 +1,8 @@
+2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Simplify `BU` string definition by eliminating branch;
+	`\s` escape sequences are ignored in nroff mode anyway.
+
 2024-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Sort `BU` and `EM` string definitions in lexicographic
