@@ -1,3 +1,9 @@
+2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Update gnulib to stable/2024-07.
+
+	Point to 0ba13435a9362bec0ff5fd0830907b9fac723e41.
+
 2024-03-16  Alejandro Colomar <alx@kernel.org>
 
 	* src/devices/grolbp/lbp.cpp (main): Fix range check after
