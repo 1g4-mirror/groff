@@ -1007,7 +1007,7 @@ void imageList::createImage(imageItem *i)
 	     + 1 + IMAGE_BORDER_PIXELS;
     if (createPage(i->pageNo) == 0) {
       s = make_string("pamcut%s %d %d %d %d < %s "
-		      "| pnmcrop%s " PNMTOOLS_QUIET " " PNMCROP_PASS
+		      "| pnmcrop%s " PNMTOOLS_QUIET
 		      "| pnmtopng%s " PNMTOOLS_QUIET " %s"
 		      "> %s\n",
 		      EXE_EXT,
