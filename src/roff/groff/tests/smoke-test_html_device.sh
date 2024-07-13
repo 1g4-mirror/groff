@@ -34,17 +34,17 @@ done
 fail=
 
 wail () {
-  echo ...FAILED >&2
-  fail=yes
+    echo ...FAILED >&2
+    fail=yes
 }
 
 cleanup () {
-  rm -f grohtml-[0-9]*-[12].png
-  trap - HUP INT QUIT TERM
+    rm -f grohtml-[0-9]*-[12].png
+    trap - HUP INT QUIT TERM
 }
 
 trap 'trap "" HUP INT QUIT TERM; cleanup; kill -s INT $$' \
-  HUP INT QUIT TERM
+    HUP INT QUIT TERM
 
 input='.TS
 L.
@@ -98,14 +98,14 @@ fi
 # $PATH seems optimistic.  So use UTF-8 octal bytes directly.
 echo "checking -k -Thtml" >&2
 printf '\303\241' | "$groff" -k -Thtml | grep -qx '<p>&aacute;</p>' \
-  || wail
+    || wail
 
 # We test compatibility-mode HTML output somewhat differently since
 # preconv only emits groffish \[uXXXX] escapes for non-ASCII codepoints.
 echo "checking -C -k -Thtml" >&2
 printf "\('a" | "$groff" -C -k -Thtml | grep -qx '<p>&aacute;</p>' \
-  || wail
+    || wail
 
 test -z "$fail"
 
-# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
+# vim:set ai et sw=4 ts=4 tw=72:
