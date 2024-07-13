@@ -8069,6 +8069,9 @@ static void process_startup_file(const char *filename)
     tok.next();
     process_input_stack();
   }
+  else if (errno != ENOENT)
+    error("cannot open startup file '%1': %2", filename,
+	  strerror(errno));
   mac_path = orig_mac_path;
 }
 

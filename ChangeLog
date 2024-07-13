@@ -1,5 +1,12 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/main.cpp (main):
+	* src/roff/troff/input.cpp (process_startup_file): Throw error
+	diagnostic when a startup file cannot be opened for some reason
+	other than its nonexistence.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/grn/main.cpp (conv):
 	* src/preproc/html/pre-html.cpp (get_resolution)
 	(get_image_generator):

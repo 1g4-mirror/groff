@@ -453,6 +453,9 @@ int main(int argc, char **argv)
 	fatal("cannot close '%1': %2", STARTUP_FILE, strerror(errno));
       free(path);
     }
+    else
+      error("cannot open startup file '%1': %2", STARTUP_FILE,
+	    strerror(errno));
   }
   if (optind >= argc)
     do_file(stdin, "-");
