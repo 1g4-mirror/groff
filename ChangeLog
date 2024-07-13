@@ -1,5 +1,11 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/soelim/soelim.cpp (do_file): Stop "normalizing"
+	an input file name of "-" to "stdin".  The other preprocessors
+	don't do that.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/nroff/nroff.sh: Tweak shell pattern for clarity.
 
 2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
