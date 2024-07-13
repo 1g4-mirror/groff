@@ -2570,9 +2570,6 @@ to the configured mark
 and conditionally puts an unbreakable space between the prefix and mark
 per the argument's Boolean value.
 .
-See register
-.BR Limsp .
-.
 .
 .TP
 .BI LO\~ option\~\c
@@ -5074,17 +5071,6 @@ lists whose
 .I type
 argument is greater than zero
 .RB ( 5 ).
-.
-.
-.TP
-.B Limsp
-inserts a space between the prefix and the mark in lists;
-see
-.B LB
-and
-.B LI
-(Boolean-valued;
-.BR 1 ).
 .
 .
 .TP

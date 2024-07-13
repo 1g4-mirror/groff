@@ -1,3 +1,9 @@
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac ([initialization], LI): Unsupport `Limsp` register.
+	* groff_mm.7.man (Macros) <LI>
+	(Registers) <Limsp>: De-document it.
+
 2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tests/lists-indent-correctly.sh: Test `.mgm` register to gate

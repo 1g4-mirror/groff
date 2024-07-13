@@ -324,6 +324,9 @@ o The doc (mdoc) macro package now honors the `U` register and `MF`
 o The new macro file "koi8-r.tmac" supports the KOI8-R character
   encoding, which supports the new Russian locale for groff.
 
+o The m (mm) macro package's `Limsp` register has been removed; see the
+  item about the `LI` macro below.
+
 o The m (mm) macro package's `AST` macro is deprecated, warns upon
   usage, and is slated for withdrawal in the next release.  Assign to
   the new string `Abstract` instead.
@@ -370,10 +373,9 @@ o The m (mm) macro package's `LI` macro now interprets its second
   argument as a Boolean indicating whether a space should separate the
   list item mark from its prefix (the first argument).  Thus, where you
   formerly specified "2" to indicate no such separation, you would now
-  use "0", matching the semantics of the `Limsp` register (which
-  configures a default prefix/mark separation policy).  "2" continues to
-  be recognized and handled as before, but prompts a warning; migrate
-  your documents.
+  use "0", matching the semantics of the former `Limsp` register.  "2"
+  continues to be recognized and handled as before, but prompts a
+  warning; migrate your documents.
 
 o The m (mm) macro package now supports the `E` register as DWB mm did.
 

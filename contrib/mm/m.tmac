@@ -337,10 +337,6 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds Liec Equation
 .\" caption for the table of contents
 .ds Licon CONTENTS
-.\" Put space between a list item's prefix and its mark?
-.\" `LI`'s second argument overrides.
-.nr Limsp 1
-.\"
 .\" Lsp controls the height of an empty line. Normally 0.5v
 .\" Normally used for nroff compatibility.
 .ie t .nr Lsp 0.5v
@@ -2377,7 +2373,6 @@ ML, RL, VL, or LB first
 .\" Assemble (prefix, prefix padding, and) mark for this item.
 .ds li*c-mark \" empty
 .nr li*apply-prefix 0
-.nr li*pad-prefix \\n[Limsp]
 .if \\n[.$]>1 \{\
 .	ie \\n[li*type]=0 \{\
 .		\" VL and BVL use a dummy character `\&` as the "mark"
