@@ -782,9 +782,9 @@ again:
 
 bool font::load(bool load_header_only)
 {
-  FILE *fp;
   char *path;
-  if ((fp = open_file(name, &path)) == 0)
+  FILE *fp = open_file(name, &path);
+  if (fp == 0)
     return false;
   text_file t(fp, path);
   t.silent = load_header_only;
@@ -1071,9 +1071,9 @@ static struct {
 const char *font::load_desc()
 {
   int nfonts = 0;
-  FILE *fp;
   char *path;
-  if ((fp = open_file("DESC", &path)) == 0)
+  FILE *fp = open_file("DESC", &path);
+  if (fp == 0)
     return 0 /* nullptr */;
   text_file t(fp, path);
   while (t.next_line()) {
