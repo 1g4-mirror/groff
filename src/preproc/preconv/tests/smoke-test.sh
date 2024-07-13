@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020 Free Software Foundation, Inc.
+# Copyright (C) 2020-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -66,9 +66,14 @@ printf '.\\" -*- coding: euc-kr; -*-\\n' \
     | "$preconv" -d 2>&1 >/dev/null \
     | grep -q "no coding tag" || wail
 
+test -z "$fail" || exit
+
 # We need uchardet to work to get past this point.
-echo "testing uchardet detection of encoding" >&2
-"$preconv" -v | grep -q 'with uchardet support' || exit 77
+if ! "$preconv" -v | grep -q 'with uchardet support'
+then
+    echo "preconv lacks uchardet support; skipping test" >&2
+    exit 77 # skip
+fi
 
 # Instead of using temporary files, which in all fastidiousness means
 # cleaning them up even if we're interrupted, which in turn means
@@ -85,12 +90,33 @@ printf 'Eat at the caf\351.\n' \
     | "$preconv" -d -D euc-kr 2>&1 > /dev/null \
     | grep -q "encoding used: 'EUC-KR'" || wail
 
-# Fall back to the locale.  preconv assumes Latin-1 for C instead of
-# US-ASCII.
+test -z "$fail" || exit
+
+has_glibc=
+
+if command -v locale > /dev/null
+then
+    has_glibc=yes
+fi
+
+# Fall back to the locale.
+#
+# On glibc systems, the 'C' locale uses "ANSI_X3.4-1968" for the
+# character set, but preconv assumes Latin-1 instead of US-ASCII.
+#
+# On non-glibc systems, who knows?  But at least some use UTF-8.
+
+if [ -n "$has_glibc" ]
+then
+    charset=ISO-8859-1
+else
+    charset=UTF-8
+fi
+
 echo "testing fallback to locale setting in environment" >&2
 printf 'Eat at the caf\351.\n' \
     | "$preconv" -d 2>&1 > /dev/null \
-    | grep -q "encoding used: 'ISO-8859-1'" || wail
+    | grep -q "encoding used: '$charset'" || wail
 
 test -z "$fail"
 
