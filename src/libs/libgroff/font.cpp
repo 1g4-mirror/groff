@@ -195,7 +195,7 @@ int glyph_to_unicode(glyph *g)
     }
     // groff glyphs that map to Unicode?
     const char *unicode = glyph_name_to_unicode(nm);
-    if (unicode != 0 && strchr(unicode, '_') == 0) {
+    if ((unicode != 0) && (strchr(unicode, '_') == 0)) {
       char *ignore;
       return (int)strtol(unicode, &ignore, 16);
     }

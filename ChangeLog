@@ -12,6 +12,9 @@
 	(font::get_width, font::alloc_ch_index, font::load_desc): Do the
 	same for comparisons to integral zeroes.
 
+	* src/libs/libgroff/font.cpp (glyph_to_unicode): Add parentheses
+	to complex expression.
+
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/font.cpp (font::load, font::load_desc):

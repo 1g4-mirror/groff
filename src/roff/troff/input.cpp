@@ -8028,7 +8028,7 @@ static FILE *open_macro_package(const char *mac, char **path)
   strcpy(s1, mac);
   strcat(s1, MACRO_POSTFIX);
   FILE *fp = mac_path->open_file(s1, path);
-  if (!fp && ENOENT != errno)
+  if ((!fp) && (ENOENT != errno))
     error("unable to open macro file '%1': %2", s1, strerror(errno));
   delete[] s1;
   if (!fp) {
@@ -8036,7 +8036,7 @@ static FILE *open_macro_package(const char *mac, char **path)
     strcpy(s2, MACRO_PREFIX);
     strcat(s2, mac);
     fp = mac_path->open_file(s2, path);
-    if (!fp && ENOENT != errno)
+    if ((!fp) && (ENOENT != errno))
       error("unable to open macro file '%1': %2", s2, strerror(errno));
     delete[] s2;
   }
