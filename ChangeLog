@@ -1,5 +1,26 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/searchpath.cpp (is_directory): New function
+	uses stat(2) to check file name argument to see if it's a
+	directory, and returns a Boolean.
+	(search_path::open_file):
+	(search_path::open_file_cautious): Use `is_directory()` before
+	attempting to `fopen()` a file specification; fail and set
+	`errno` to `EISDIR` if it's a directory so that the caller
+	reports a useful diagnostic.
+
+	* bootstrap.conf: Add gnulib `stat` module, because the story of
+	POSIX and non-POSIX systems alike trying and failing to sensibly
+	implement the fundamental Unix file system model is a sorry tale
+	of indifference and self-owns by rock star programmers.
+	{Seriously, read the "sys/stat.h" and "stat" sections of the
+	gnulib manual.}
+
+	Fixes <https://savannah.gnu.org/bugs/?65980>.  Thanks to Dave
+	Kemper for the report.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an-ext.tmac: Fix incomplete changes to support `YS` with
 	an argument to reuse indentation of previous synopsis.  (An
 	insufficiently aggressive test case is a dangerous thing.)

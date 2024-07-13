@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -26,6 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h>
 #include <stdlib.h>
 
+// for stat(2)
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #include "searchpath.h"
 #include "nonposix.h"
 
@@ -34,6 +39,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #else
 # define relocate(path) strsave(path)
 #endif
+
+static bool is_directory(const char *name)
+{
+  struct stat statbuf;
+  // If stat() fails, a later fopen() will fail anyway (he said
+  // TOCTTOUishly).
+  if ((stat(name, &statbuf) == 0)
+      && ((statbuf.st_mode & S_IFMT) == S_IFDIR))
+    return true;
+  return false;
+}
 
 search_path::search_path(const char *envvar, const char *standard,
 			 int add_home, int add_current)
@@ -99,6 +115,10 @@ FILE *search_path::open_file(const char *name, char **pathp)
 {
   assert(name != 0 /* nullptr */);
   if (IS_ABSOLUTE(name) || *dirs == '\0') {
+    if (is_directory(name)) {
+      errno = EISDIR;
+      return 0 /* nullptr */;
+    }
     FILE *fp = fopen(name, "r");
     if (fp != 0 /* nullptr */) {
       if (pathp != 0 /* nullptr */)
@@ -128,6 +148,10 @@ FILE *search_path::open_file(const char *name, char **pathp)
 #if 0
     fprintf(stderr, "trying '%s'\n", path);
 #endif
+    if (is_directory(name)) {
+      errno = EISDIR;
+      return 0 /* nullptr */;
+    }
     FILE *fp = fopen(path, "r");
     int err = errno;
     if (fp != 0 /* nullptr */) {
@@ -160,6 +184,10 @@ FILE *search_path::open_file_cautious(const char *name, char **pathp,
     return (reading ? stdin : stdout);
   }
   if (!reading || IS_ABSOLUTE(name) || *dirs == '\0') {
+    if (is_directory(name)) {
+      errno = EISDIR;
+      return 0 /* nullptr */;
+    }
     FILE *fp = fopen(name, mode);
     if (fp != 0 /* nullptr */) {
       if (pathp != 0 /* nullptr */)
@@ -190,6 +218,10 @@ FILE *search_path::open_file_cautious(const char *name, char **pathp,
 #if 0
     fprintf(stderr, "trying '%s'\n", path);
 #endif
+    if (is_directory(name)) {
+      errno = EISDIR;
+      return 0 /* nullptr */;
+    }
     FILE *fp = fopen(path, mode);
     int err = errno;
     if (fp != 0 /* nullptr */) {
