@@ -105,9 +105,9 @@ text_file::~text_file()
 
 bool text_file::next_line()
 {
-  if (fp == 0)
+  if (0 == fp)
     return false;
-  if (buf == 0)
+  if (0 == buf)
     buf = new char[linebufsize];
   for (;;) {
     lineno++;
@@ -644,7 +644,7 @@ void font::alloc_ch_index(int idx)
 
 void font::extend_ch()
 {
-  if (ch == 0)
+  if (0 == ch)
     ch = new font_char_metric[ch_size = 16];
   else {
     int old_ch_size = ch_size;
@@ -784,7 +784,7 @@ bool font::load(bool load_header_only)
 {
   char *path;
   FILE *fp = open_file(name, &path);
-  if (fp == 0)
+  if (0 == fp)
     return false;
   text_file t(fp, path);
   t.silent = load_header_only;
@@ -936,7 +936,7 @@ bool font::load(bool load_header_only)
 	  break;
 	}
 	if (p[0] == '"') {
-	  if (last_glyph == 0) {
+	  if (0 == last_glyph) {
 	    t.error("the first entry ('%1') in 'charset' subsection"
 		    " cannot be an alias", nm);
 	    return false;
@@ -1073,7 +1073,7 @@ const char *font::load_desc()
   int nfonts = 0;
   char *path;
   FILE *fp = open_file("DESC", &path);
-  if (fp == 0)
+  if (0 == fp)
     return 0 /* nullptr */;
   text_file t(fp, path);
   while (t.next_line()) {
@@ -1286,7 +1286,7 @@ const char *font::load_desc()
     }
   }
   t.lineno = 0;
-  if (res == 0) {
+  if (0 == res) {
     t.error("device description file missing 'res' directive");
     return 0 /* nullptr */;
   }
@@ -1294,11 +1294,11 @@ const char *font::load_desc()
     t.error("device description file missing 'unitwidth' directive");
     return 0 /* nullptr */;
   }
-  if (font_name_table == 0) {
+  if (0 == font_name_table) {
     t.error("device description file missing 'fonts' directive");
     return 0 /* nullptr */;
   }
-  if (sizes == 0) {
+  if (0 == sizes) {
     t.error("device description file missing 'sizes' directive");
     return 0 /* nullptr */;
   }

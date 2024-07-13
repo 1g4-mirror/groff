@@ -154,7 +154,7 @@ FILE *search_path::open_file_cautious(const char *name, char **pathp,
   if (!mode)
     mode = "r";
   bool reading = (strchr(mode, 'r') != 0);
-  if (name == 0 || strcmp(name, "-") == 0) {
+  if (0 == name || strcmp(name, "-") == 0) {
     if (pathp)
       *pathp = strsave(reading ? "stdin" : "stdout");
     return (reading ? stdin : stdout);
