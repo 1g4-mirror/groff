@@ -512,12 +512,8 @@ void file_iterator::backtrace()
 
 bool file_iterator::set_location(const char *f, int ln)
 {
-  if (f) {
+  if (f)
     filename = f;
-    if (!the_output)
-      init_output();
-    the_output->put_filename(f, 0);
-  }
   lineno = ln;
   return true;
 }

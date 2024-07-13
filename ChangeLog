@@ -1,5 +1,24 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (file_iterator::set_location): Stop
+	initializing the output.  Preprocessing empty documents could
+	lead to baffling results.  In groff 1.22.4 and before, you'd get
+	a blank document from some output drivers despite no evident
+	reason from the preprocessed input that this should be the case.
+	In groff 1.23.0, this happened for fewer output drivers but
+	still generated a mysterious diagnostic.
+
+	  fatal error: 'V' command invalid before first 'p' command
+
+	It turns out to be unnecessary to initialize `the_output` upon
+	encountering an `lf` request.  The spurious output aspect of the
+	problem dates back to commit e092fba4517, 6 February 2000
+	{"groff pre-1.16"}.
+
+	Fixes <https://savannah.gnu.org/bugs/?65983>.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (number_lines): Clarify diagnostics;
 	output line numbers cannot be negative, but input line numbers
 	can, in both AT&T/DWB troff and GNU troff.
