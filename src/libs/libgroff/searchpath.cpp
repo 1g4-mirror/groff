@@ -38,11 +38,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 search_path::search_path(const char *envvar, const char *standard,
 			 int add_home, int add_current)
 {
-  char *home = 0;
+  char *home = 0 /* nullptr */;
   if (add_home)
     home = getenv("HOME");
-  char *e = 0;
-  if (envvar != 0)
+  char *e = 0 /* nullptr */;
+  if (envvar != 0 /* nullptr */)
     e = getenv(envvar);
   dirs = new char[((e && *e) ? strlen(e) + 1 : 0)
 		  + (add_current ? 1 + 1 : 0)
@@ -97,22 +97,22 @@ void search_path::command_line_dir(const char *s)
 
 FILE *search_path::open_file(const char *name, char **pathp)
 {
-  assert(name != 0);
+  assert(name != 0 /* nullptr */);
   if (IS_ABSOLUTE(name) || *dirs == '\0') {
     FILE *fp = fopen(name, "r");
-    if (fp != 0) {
-      if (pathp != 0)
+    if (fp != 0 /* nullptr */) {
+      if (pathp != 0 /* nullptr */)
 	*pathp = strsave(name);
       return fp;
     }
     else
-      return 0;
+      return 0 /* nullptr */;
   }
   unsigned namelen = strlen(name);
   char *p = dirs;
   for (;;) {
     char *end = strchr(p, PATH_SEP_CHAR);
-    if (0 == end)
+    if (0 /* nullptr */ == end)
       end = strchr(p, '\0');
     int need_slash = end > p && strchr(DIR_SEPS, end[-1]) == 0;
     char *origpath = new char[(end - p) + need_slash + namelen + 1];
@@ -130,8 +130,8 @@ FILE *search_path::open_file(const char *name, char **pathp)
 #endif
     FILE *fp = fopen(path, "r");
     int err = errno;
-    if (fp != 0) {
-      if (pathp != 0)
+    if (fp != 0 /* nullptr */) {
+      if (pathp != 0 /* nullptr */)
 	*pathp = path;
       else {
 	free(path);
@@ -145,37 +145,38 @@ FILE *search_path::open_file(const char *name, char **pathp)
       break;
     p = end + 1;
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 FILE *search_path::open_file_cautious(const char *name, char **pathp,
 				      const char *mode)
 {
-  if (0 == mode)
+  if (0 /* nullptr */ == mode)
     mode = "r";
-  bool reading = (strchr(mode, 'r') != 0);
-  if (0 == name || strcmp(name, "-") == 0) {
+  bool reading = (strchr(mode, 'r') != 0 /* nullptr */);
+  if (0 /* nullptr */ == name || strcmp(name, "-") == 0) {
     if (pathp != 0)
       *pathp = strsave(reading ? "stdin" : "stdout");
     return (reading ? stdin : stdout);
   }
   if (!reading || IS_ABSOLUTE(name) || *dirs == '\0') {
     FILE *fp = fopen(name, mode);
-    if (fp != 0) {
-      if (pathp != 0)
+    if (fp != 0 /* nullptr */) {
+      if (pathp != 0 /* nullptr */)
 	*pathp = strsave(name);
       return fp;
     }
     else
-      return 0;
+      return 0 /* nullptr */;
   }
   unsigned namelen = strlen(name);
   char *p = dirs;
   for (;;) {
     char *end = strchr(p, PATH_SEP_CHAR);
-    if (0 == end)
+    if (0 /* nullptr */ == end)
       end = strchr(p, '\0');
-    int need_slash = end > p && strchr(DIR_SEPS, end[-1]) == 0;
+    int need_slash = (end > p
+		      && strchr(DIR_SEPS, end[-1]) == 0 /* nullptr */);
     char *origpath = new char[(end - p) + need_slash + namelen + 1];
     memcpy(origpath, p, end - p);
     if (need_slash)
@@ -191,8 +192,8 @@ FILE *search_path::open_file_cautious(const char *name, char **pathp,
 #endif
     FILE *fp = fopen(path, mode);
     int err = errno;
-    if (fp != 0) {
-      if (pathp != 0)
+    if (fp != 0 /* nullptr */) {
+      if (pathp != 0 /* nullptr */)
 	*pathp = path;
       else {
 	free(path);
@@ -203,13 +204,13 @@ FILE *search_path::open_file_cautious(const char *name, char **pathp,
     free(path);
     errno = err;
     if (err != ENOENT)
-      return 0;
+      return 0 /* nullptr */;
     if (*end == '\0')
       break;
     p = end + 1;
   }
   errno = ENOENT;
-  return 0;
+  return 0 /* nullptr */;
 }
 
 // Local Variables:

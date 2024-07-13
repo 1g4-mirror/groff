@@ -512,7 +512,7 @@ void file_iterator::backtrace()
 
 bool file_iterator::set_location(const char *f, int ln)
 {
-  if (f != 0)
+  if (f != 0 /* nullptr */)
     filename = f;
   lineno = ln;
   return true;
@@ -898,7 +898,7 @@ void next_file()
   else {
     errno = 0;
     FILE *fp = include_search_path.open_file_cautious(nm.contents());
-    if (0 == fp)
+    if (0 /* nullptr */ == fp)
       error("can't open '%1': %2", nm.contents(), strerror(errno));
     else
       input_stack::next_file(fp, nm.contents());
@@ -6973,7 +6973,7 @@ static void do_open(bool append)
     if (!filename.is_null()) {
       errno = 0;
       FILE *fp = fopen(filename.contents(), append ? "a" : "w");
-      if (0 == fp) {
+      if (0 /* nullptr */ == fp) {
 	error("unable to open file '%1' for %2: %3",
 	      filename.contents(),
 	      append ? "appending" : "writing",
@@ -7014,7 +7014,7 @@ static void close_request()
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
     FILE *fp = (FILE *)stream_dictionary.remove(stream);
-    if (0 == fp)
+    if (0 /* nullptr */ == fp)
       error("cannot close nonexistent stream '%1'", stream.contents());
     else {
       int status = fclose(fp);
@@ -7036,7 +7036,7 @@ void do_write_request(int newline)
     return;
   }
   FILE *fp = (FILE *)stream_dictionary.lookup(stream);
-  if (0 == fp) {
+  if (0 /* nullptr */ == fp) {
     error("no stream named '%1'", stream.contents());
     skip_line();
     return;
@@ -7072,7 +7072,7 @@ void write_macro_request()
     return;
   }
   FILE *fp = (FILE *)stream_dictionary.lookup(stream);
-  if (0 == fp) {
+  if (0 /* nullptr */ == fp) {
     error("no stream named '%1'", stream.contents());
     skip_line();
     return;
@@ -7926,7 +7926,7 @@ void transparent_file()
   if (!filename.is_null()) {
     errno = 0;
     FILE *fp = include_search_path.open_file_cautious(filename.contents());
-    if (0 == fp)
+    if (0 /* nullptr */ == fp)
       error("can't open '%1': %2", filename.contents(), strerror(errno));
     else {
       int bol = 1;
@@ -8028,15 +8028,15 @@ static FILE *open_macro_package(const char *mac, char **path)
   strcpy(s1, mac);
   strcat(s1, MACRO_POSTFIX);
   FILE *fp = mac_path->open_file(s1, path);
-  if ((0 == fp) && (ENOENT != errno))
+  if ((0 /* nullptr */ == fp) && (ENOENT != errno))
     error("unable to open macro file '%1': %2", s1, strerror(errno));
   delete[] s1;
-  if (0 == fp) {
+  if (0 /* nullptr */ == fp) {
     char *s2 = new char[strlen(mac) + strlen(MACRO_PREFIX) + 1];
     strcpy(s2, MACRO_PREFIX);
     strcat(s2, mac);
     fp = mac_path->open_file(s2, path);
-    if ((0 == fp) && (ENOENT != errno))
+    if ((0 /* nullptr */ == fp) && (ENOENT != errno))
       error("unable to open macro file '%1': %2", s2, strerror(errno));
     delete[] s2;
   }
@@ -8047,7 +8047,7 @@ static void process_macro_package_argument(const char *mac)
 {
   char *path;
   FILE *fp = open_macro_package(mac, &path);
-  if (0 == fp)
+  if (0 /* nullptr */ == fp)
     fatal("unable to open macro file for -m argument '%1'", mac);
   const char *s = symbol(path).contents();
   free(path);
@@ -8062,7 +8062,7 @@ static void process_startup_file(const char *filename)
   search_path *orig_mac_path = mac_path;
   mac_path = &config_macro_path;
   FILE *fp = mac_path->open_file(filename, &path);
-  if (fp != 0) {
+  if (fp != 0 /* nullptr */) {
     input_stack::push(new file_iterator(fp, symbol(path).contents()));
     free(path);
     tok.next();
@@ -8081,7 +8081,7 @@ void do_macro_source(bool quietly)
       tok.next();
     char *path;
     FILE *fp = mac_path->open_file(nm.contents(), &path);
-    if (fp != 0) {
+    if (fp != 0 /* nullptr */) {
       input_stack::push(new file_iterator(fp, symbol(path).contents()));
       free(path);
     }
@@ -8120,7 +8120,7 @@ static void process_input_file(const char *name)
   else {
     errno = 0;
     fp = include_search_path.open_file_cautious(name);
-    if (0 == fp)
+    if (0 /* nullptr */ == fp)
       fatal("can't open '%1': %2", name, strerror(errno));
   }
   input_stack::push(new file_iterator(fp, name));

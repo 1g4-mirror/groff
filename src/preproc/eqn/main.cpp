@@ -447,7 +447,7 @@ int main(int argc, char **argv)
   if (want_startup_file) {
     char *path;
     FILE *fp = config_macro_path.open_file(STARTUP_FILE, &path);
-    if (fp != 0) {
+    if (fp != 0 /* nullptr */) {
       do_file(fp, path);
       if (fclose(fp) < 0)
 	fatal("unable to close '%1': %2", STARTUP_FILE,

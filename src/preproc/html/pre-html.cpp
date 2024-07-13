@@ -310,7 +310,7 @@ static unsigned int get_resolution(void)
   FILE *f;
   unsigned int res = 0;
   f = font_path.open_file(devps_desc, &pathp);
-  if (0 == f)
+  if (0 /* nullptr */ == f)
     fatal("cannot open file '%1'", devps_desc);
   free(pathp);
   // XXX: We should break out of this loop if we hit a "charset" line.
@@ -336,7 +336,7 @@ static char *get_image_generator(void)
   const char keyword[] = "image_generator";
   const size_t keyword_len = strlen(keyword);
   f = font_path.open_file(devhtml_desc, &pathp);
-  if (0 == f)
+  if (0 /* nullptr */ == f)
     fatal("cannot open file '%1'", devhtml_desc);
   free(pathp);
   // XXX: We should break out of this loop if we hit a "charset" line.
