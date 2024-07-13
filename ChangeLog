@@ -1,5 +1,21 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an-ext.tmac: Fix incomplete changes to support `YS` with
+	an argument to reuse indentation of previous synopsis.  (An
+	insufficiently aggressive test case is a dangerous thing.)
+	Revise meaning of `mS` register from "are we in a synopsis?" to
+	"are we reusing the previous synopsis's indentation?"
+	(SY): Save hyphenation and adjustment modes and disable
+	automatic hyphenation if we have any arguments.
+	(YS): Set `mS` register if we have any arguments, otherwise
+	clear it.
+
+	* tmac/tests/an_HY-register-works.sh: Drop test cases on
+	"nested" synopses.  These are now ill-formed and no longer
+	supported.  See "NEWS" file.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an-ext_SY-and-YS-work.sh: Test new behavior of `YS`
 	when given an argument.
 

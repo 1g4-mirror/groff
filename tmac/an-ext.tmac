@@ -49,7 +49,7 @@
 .    do nr mH \\n[.hy] \" groff extension register
 ..
 .
-.nr mS 0 \" in a synopsis (SY/YS)?
+.nr mS 0 \" reuse indentation of previous synopsis?
 .nr mE 0 \" in an example (EX/EE)?
 .
 .
@@ -57,10 +57,6 @@
 .de SY
 .  ie \\n(.$ \{\
 .    if !\\n(mS \{\
-.      mY
-.      nh
-.      nr mS 1
-.      nr mA \\n(.j
 .      nr mI \\n(.i
 .      nr mT \\n(.k+\w'\fB\\$1\fP'
 .      if \\n(.$=1 \
@@ -69,6 +65,9 @@
 .        nr mT +\w'\fB\\$2\fP'
 .    \}
 .
+.    mY
+.    nh
+.    nr mA \\n(.j
 .    ad l
 .    \" Ensure that a partially collected line exists so that the `in`
 .    \" request affects only _subsequent_ output lines.  (CSTR #54 §6)
@@ -101,9 +100,10 @@
 .  in \\n(mIu
 .  ad \\n(mA
 .  hy \\n(mH
-.  nr mS 0
 .
-.  if !\\n(.$ \{\
+.  ie \\n(.$ .nr mS 1
+.  el \{\
+.    nr mS 0
 .    rr mA
 .    rr mI
 .    rr mT
