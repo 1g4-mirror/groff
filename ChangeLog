@@ -1,5 +1,10 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an-ext_SY-and-YS-work.sh: Test new behavior of `YS`
+	when given an argument.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/main.cpp (main):
 	* src/roff/troff/input.cpp (process_startup_file): Throw error
 	diagnostic when a startup file cannot be opened for some reason
