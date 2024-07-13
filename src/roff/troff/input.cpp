@@ -1105,19 +1105,19 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
     case 0:
       return escape_char;
     case '"':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       while ((c = input_stack::get(0)) != '\n' && c != EOF)
 	;
       return c;
     case '#':			// Like \" but newline is ignored.
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       while ((c = input_stack::get(0)) != '\n')
 	if (c == EOF)
 	  return EOF;
       break;
     case '$':
       {
-	(void)input_stack::get(0);
+	(void) input_stack::get(0);
 	symbol s = read_escape_parameter();
 	if (!(s.is_null() || s.is_empty()))
 	  interpolate_arg(s);
@@ -1125,7 +1125,7 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
       }
     case '*':
       {
-	(void)input_stack::get(0);
+	(void) input_stack::get(0);
 	symbol s = read_escape_parameter(WITH_ARGS);
 	if (!(s.is_null() || s.is_empty())) {
 	  if (have_multiple_params) {
@@ -1138,19 +1138,19 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
 	break;
       }
     case 'a':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return '\001';
     case 'e':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_e;
     case 'E':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       if (handle_escape_E)
 	goto again;
       return ESCAPE_E;
     case 'n':
       {
-	(void)input_stack::get(0);
+	(void) input_stack::get(0);
 	int inc;
 	symbol s = read_increment_and_escape_parameter(&inc);
 	if (!(s.is_null() || s.is_empty()))
@@ -1159,85 +1159,85 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
       }
     case 'g':
       {
-	(void)input_stack::get(0);
+	(void) input_stack::get(0);
 	symbol s = read_escape_parameter();
 	if (!(s.is_null() || s.is_empty()))
 	  interpolate_number_format(s);
 	break;
       }
     case 't':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return '\t';
     case 'V':
       {
-	(void)input_stack::get(0);
+	(void) input_stack::get(0);
 	symbol s = read_escape_parameter();
 	if (!(s.is_null() || s.is_empty()))
 	  interpolate_environment_variable(s);
 	break;
       }
     case '\n':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       if (is_defining)
 	return ESCAPE_NEWLINE;
       break;
     case ' ':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_SPACE;
     case '~':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_TILDE;
     case ':':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_COLON;
     case '|':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_BAR;
     case '^':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_CIRCUMFLEX;
     case '{':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_LEFT_BRACE;
     case '}':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_RIGHT_BRACE;
     case '`':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_LEFT_QUOTE;
     case '\'':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_RIGHT_QUOTE;
     case '-':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_HYPHEN;
     case '_':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_UNDERSCORE;
     case 'c':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_c;
     case '!':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_BANG;
     case '?':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_QUESTION;
     case '&':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_AMPERSAND;
     case ')':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_RIGHT_PARENTHESIS;
     case '.':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return c;
     case '%':
-      (void)input_stack::get(0);
+      (void) input_stack::get(0);
       return ESCAPE_PERCENT;
     default:
       if (c == escape_char) {
-	(void)input_stack::get(0);
+	(void) input_stack::get(0);
 	return c;
       }
       else
@@ -1324,7 +1324,7 @@ void do_glyph_color(symbol nm)
     if (tem)
       curenv->set_glyph_color(tem);
     else
-      (void)color_dictionary.lookup(nm, new color(nm));
+      (void) color_dictionary.lookup(nm, new color(nm));
   }
 }
 
@@ -1339,7 +1339,7 @@ void do_fill_color(symbol nm)
     if (tem)
       curenv->set_fill_color(tem);
     else
-      (void)color_dictionary.lookup(nm, new color(nm));
+      (void) color_dictionary.lookup(nm, new color(nm));
   }
 }
 
@@ -1360,7 +1360,7 @@ static unsigned int get_color_element(const char *scheme, const char *col)
     // we change 0x10000 to 0xffff
     return color::MAX_COLOR_VAL;
   }
-  return (unsigned int)val;
+  return (unsigned int) val;
 }
 
 static color *read_rgb(char end = 0)
@@ -1533,7 +1533,7 @@ static void define_color()
   }
   if (col) {
     col->nm = color_name;
-    (void)color_dictionary.lookup(color_name, col);
+    (void) color_dictionary.lookup(color_name, col);
   }
   skip_line();
 }
@@ -3520,7 +3520,7 @@ void macro::append_int(int i)
     append('-');
     i = -i;
   }
-  append_unsigned((unsigned int)i);
+  append_unsigned((unsigned int) i);
 }
 
 void macro::print_size()
@@ -4132,7 +4132,7 @@ static void map_composite_character()
   if (strcmp(from_gn, to_gn) == 0)
     composite_dictionary.remove(symbol(from_gn));
   else
-    (void)composite_dictionary.lookup(symbol(from_gn), (void *)to_gn);
+    (void) composite_dictionary.lookup(symbol(from_gn), (void *)to_gn);
   skip_line();
 }
 
@@ -4341,7 +4341,7 @@ void do_define_string(define_mode mode, comp_mode comp)
     if (c == 0)
       mac.append(n);
     else
-      mac.append((unsigned char)c);
+      mac.append((unsigned char) c);
     c = get_copy(&n);
   }
   if (comp == COMP_DISABLE || comp == COMP_ENABLE)
@@ -4414,7 +4414,7 @@ void do_define_character(char_mode mode, const char *font_name)
     if (c == 0)
       m->append(n);
     else
-      m->append((unsigned char)c);
+      m->append((unsigned char) c);
     c = get_copy(&n);
   }
   m = ci->setx_macro(m, mode);
@@ -4686,10 +4686,10 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
       if (s[0] != 0) {
 	while ((d = get_copy(&n)) == ' ' || d == '\t')
 	  ;
-	if ((unsigned char)s[0] == d) {
+	if ((unsigned char) s[0] == d) {
 	  for (i = 1; s[i] != 0; i++) {
 	    d = get_copy(&n);
-	    if ((unsigned char)s[i] != d)
+	    if ((unsigned char) s[i] != d)
 	      break;
 	  }
 	}
@@ -5013,7 +5013,7 @@ void substring_request()
 	  if (c == 0)
 	    mac.append(nd);
 	  else
-	    mac.append((unsigned char)c);
+	    mac.append((unsigned char) c);
 	}
 	*m = mac;
       }
@@ -5841,7 +5841,7 @@ void line_file()
       symbol s = get_long_name();
       filename = s.contents();
     }
-    (void)input_stack::set_location(filename, n-1);
+    (void) input_stack::set_location(filename, (n - 1));
   }
   skip_line();
 }
@@ -6484,10 +6484,10 @@ int psbb_locator::parse_bounding_box(const char *context)
     //
     double x1, x2, x3, x4;
     if (sscanf(context, "%lf %lf %lf %lf", &x1, &x2, &x3, &x4) == 4) {
-      llx = (int)x1;
-      lly = (int)x2;
-      urx = (int)x3;
-      ury = (int)x4;
+      llx = (int) x1;
+      lly = (int) x2;
+      urx = (int) x3;
+      ury = (int) x4;
     }
     else {
       // ...but if we can't parse four numbers, skip over any
@@ -6894,7 +6894,7 @@ void tag()
     }
     s = "x X ";
     for (; c != '\n' && c != EOF; c = get_copy(0))
-      s += (char)c;
+      s += (char) c;
     s += '\n';
     curenv->add_node(new tag_node(s, 0));
   }
@@ -6917,7 +6917,7 @@ void taga()
     }
     s = "x X ";
     for (; c != '\n' && c != EOF; c = get_copy(0))
-      s += (char)c;
+      s += (char) c;
     s += '\n';
     curenv->add_node(new tag_node(s, 1));
   }
@@ -7106,13 +7106,13 @@ void warnscale_request()
     if (c == 'u')
       warn_scale = 1.0;
     else if (c == 'i')
-      warn_scale = (double)units_per_inch;
+      warn_scale = (double) units_per_inch;
     else if (c == 'c')
-      warn_scale = (double)units_per_inch / 2.54;
+      warn_scale = (double) units_per_inch / 2.54;
     else if (c == 'p')
-      warn_scale = (double)units_per_inch / 72.0;
+      warn_scale = (double) units_per_inch / 72.0;
     else if (c == 'P')
-      warn_scale = (double)units_per_inch / 6.0;
+      warn_scale = (double) units_per_inch / 6.0;
     else {
       warning(WARN_SCALE,
 	      "scaling unit '%1' invalid; using 'i' instead", c);
@@ -7130,7 +7130,7 @@ void spreadwarn_request()
     if (n < 0)
       n = 0;
     hunits em = curenv->get_size();
-    spread_limit = (double)n.to_units()
+    spread_limit = (double) n.to_units()
 		   / (em.is_zero() ? hresolution : em.to_units());
   }
   else
@@ -7444,7 +7444,7 @@ void define_class()
     skip_line();
     return;
   }
-  (void)char_class_dictionary.lookup(nm, ci);
+  (void) char_class_dictionary.lookup(nm, ci);
   skip_line();
 }
 
@@ -8394,7 +8394,7 @@ int main(int argc, char **argv)
   vresolution = font::vert;
   sizescale = font::sizescale;
   device_has_tcommand = font::has_tcommand;
-  warn_scale = (double)units_per_inch;
+  warn_scale = (double) units_per_inch;
   warn_scaling_unit = 'i';
   if (!fflag && font::family != 0 && *font::family != '\0')
     default_family = symbol(font::family);
@@ -9157,7 +9157,7 @@ charinfo *get_charinfo(symbol nm)
   if (p != 0)
     return (charinfo *)p;
   charinfo *cp = new charinfo(nm);
-  (void)charinfo_dictionary.lookup(nm, cp);
+  (void) charinfo_dictionary.lookup(nm, cp);
   return cp;
 }
 
@@ -9320,7 +9320,7 @@ bool charinfo::contains(symbol s, bool already_called)
   const char *unicode = glyph_name_to_unicode(s.contents());
   if (unicode != 0 && strchr(unicode, '_') == 0) {
     char *ignore;
-    int c = (int)strtol(unicode, &ignore, 16);
+    int c = (int) strtol(unicode, &ignore, 16);
     return contains(c, true);
   }
   else
@@ -9360,7 +9360,7 @@ charinfo *get_charinfo_by_number(int n)
     if (!ci) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
-      (void)numbered_charinfo_dictionary.lookup(ns, ci);
+      (void) numbered_charinfo_dictionary.lookup(ns, ci);
     }
     return ci;
   }
