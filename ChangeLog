@@ -1,3 +1,7 @@
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/nroff/nroff.sh: Tweak shell pattern for clarity.
+
 2024-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Update gnulib to stable/2024-07.

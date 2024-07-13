@@ -54,7 +54,7 @@ do
         break
         ;;
       -[abCEikpRStUzZ]*)
-        remainder=${thisarg#??}
+        remainder=${thisarg#-?}
         thisarg=${thisarg%%$remainder}
         newargs="$newargs $thisarg"
         thisarg=-$remainder
