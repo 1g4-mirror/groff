@@ -401,6 +401,8 @@ o The PostScript output driver grops no longer accepts spaces as field
 Miscellaneous
 -------------
 
+o Building groff no longer requires the PSUtils package.
+
 o Russian language input documents using the KOI8-R encoding are now
   supported, including hyphenation patterns from the ruhyphen project
   and localized strings for the man, ms, me, mm, and mom packages.

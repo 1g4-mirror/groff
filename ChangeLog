@@ -1,3 +1,22 @@
+2024-03-19  Alexis <surryhill@gmail.com>
+
+	[grohtml]: Migrate from psselect(1) to ps2ps(1).
+
+	* src/preproc/html/pre-html.cpp (imageList::createPage): Do it.
+	* src/devices/grohtml/grohtml.1.man (Dependencies): Document
+	the changed runtime requirement.
+	* m4/groff.m4 (GROFF_CHECK_GROHTML_PROGRAMS):
+	* src/roff/groff/tests/html_works_with_grn_and_eqn.sh:
+	* src/roff/groff/tests/smoke-test_html_device.sh: Check for
+	existence of `ps2ps` command instead of `psselect`.
+
+	* ANNOUNCE:
+	* NEWS:
+	* README:
+	* README.MinGW: Document change in dependencies.
+
+	Fixes <https://savannah.gnu.org/bugs/?65987>.
+
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/searchpath.cpp (is_directory): New function
