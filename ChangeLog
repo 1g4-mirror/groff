@@ -15,6 +15,17 @@
 	* src/libs/libgroff/font.cpp (glyph_to_unicode): Add parentheses
 	to complex expression.
 
+	* src/libs/libgroff/searchpath.cpp (search_path::search_path)
+	(search_path::open_file, search_path::open_file_cautious)
+	* src/preproc/eqn/main.cpp (main):
+	* src/roff/troff/input.cpp (file_iterator::set_location)
+	(next_file, do_open, close_request, do_write_request)
+	(write_macro_request, transparent_file, open_macro_package)
+	(process_macro_package_argument, process_startup_file)
+	(do_macro_source, process_input_file): Explicitly compare
+	variable of pointer type to null pointer constant instead of
+	letting it pun down to a Boolean.
+
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/font.cpp (font::load, font::load_desc):

@@ -42,7 +42,7 @@ search_path::search_path(const char *envvar, const char *standard,
   if (add_home)
     home = getenv("HOME");
   char *e = 0;
-  if (envvar)
+  if (envvar != 0)
     e = getenv(envvar);
   dirs = new char[((e && *e) ? strlen(e) + 1 : 0)
 		  + (add_current ? 1 + 1 : 0)
@@ -100,8 +100,8 @@ FILE *search_path::open_file(const char *name, char **pathp)
   assert(name != 0);
   if (IS_ABSOLUTE(name) || *dirs == '\0') {
     FILE *fp = fopen(name, "r");
-    if (fp) {
-      if (pathp)
+    if (fp != 0) {
+      if (pathp != 0)
 	*pathp = strsave(name);
       return fp;
     }
@@ -112,7 +112,7 @@ FILE *search_path::open_file(const char *name, char **pathp)
   char *p = dirs;
   for (;;) {
     char *end = strchr(p, PATH_SEP_CHAR);
-    if (!end)
+    if (0 == end)
       end = strchr(p, '\0');
     int need_slash = end > p && strchr(DIR_SEPS, end[-1]) == 0;
     char *origpath = new char[(end - p) + need_slash + namelen + 1];
@@ -130,8 +130,8 @@ FILE *search_path::open_file(const char *name, char **pathp)
 #endif
     FILE *fp = fopen(path, "r");
     int err = errno;
-    if (fp) {
-      if (pathp)
+    if (fp != 0) {
+      if (pathp != 0)
 	*pathp = path;
       else {
 	free(path);
@@ -151,18 +151,18 @@ FILE *search_path::open_file(const char *name, char **pathp)
 FILE *search_path::open_file_cautious(const char *name, char **pathp,
 				      const char *mode)
 {
-  if (!mode)
+  if (0 == mode)
     mode = "r";
   bool reading = (strchr(mode, 'r') != 0);
   if (0 == name || strcmp(name, "-") == 0) {
-    if (pathp)
+    if (pathp != 0)
       *pathp = strsave(reading ? "stdin" : "stdout");
     return (reading ? stdin : stdout);
   }
   if (!reading || IS_ABSOLUTE(name) || *dirs == '\0') {
     FILE *fp = fopen(name, mode);
-    if (fp) {
-      if (pathp)
+    if (fp != 0) {
+      if (pathp != 0)
 	*pathp = strsave(name);
       return fp;
     }
@@ -173,7 +173,7 @@ FILE *search_path::open_file_cautious(const char *name, char **pathp,
   char *p = dirs;
   for (;;) {
     char *end = strchr(p, PATH_SEP_CHAR);
-    if (!end)
+    if (0 == end)
       end = strchr(p, '\0');
     int need_slash = end > p && strchr(DIR_SEPS, end[-1]) == 0;
     char *origpath = new char[(end - p) + need_slash + namelen + 1];
@@ -191,8 +191,8 @@ FILE *search_path::open_file_cautious(const char *name, char **pathp,
 #endif
     FILE *fp = fopen(path, mode);
     int err = errno;
-    if (fp) {
-      if (pathp)
+    if (fp != 0) {
+      if (pathp != 0)
 	*pathp = path;
       else {
 	free(path);
