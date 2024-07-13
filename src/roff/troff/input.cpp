@@ -899,7 +899,7 @@ void next_file()
     errno = 0;
     FILE *fp = include_search_path.open_file_cautious(nm.contents());
     if (0 /* nullptr */ == fp)
-      error("can't open '%1': %2", nm.contents(), strerror(errno));
+      error("cannot open '%1': %2", nm.contents(), strerror(errno));
     else
       input_stack::next_file(fp, nm.contents());
   }
@@ -6974,7 +6974,7 @@ static void do_open(bool append)
       errno = 0;
       FILE *fp = fopen(filename.contents(), append ? "a" : "w");
       if (0 /* nullptr */ == fp) {
-	error("unable to open file '%1' for %2: %3",
+	error("cannot open file '%1' for %2: %3",
 	      filename.contents(),
 	      append ? "appending" : "writing",
 	      strerror(errno));
@@ -7019,7 +7019,7 @@ static void close_request()
     else {
       int status = fclose(fp);
 	if (status != 0)
-	  error("unable to close stream '%1': %2", stream.contents(),
+	  error("cannot close stream '%1': %2", stream.contents(),
 		strerror(errno));
     }
   }
@@ -8029,7 +8029,7 @@ static FILE *open_macro_package(const char *mac, char **path)
   strcat(s1, MACRO_POSTFIX);
   FILE *fp = mac_path->open_file(s1, path);
   if ((0 /* nullptr */ == fp) && (ENOENT != errno))
-    error("unable to open macro file '%1': %2", s1, strerror(errno));
+    error("cannot open macro file '%1': %2", s1, strerror(errno));
   delete[] s1;
   if (0 /* nullptr */ == fp) {
     char *s2 = new char[strlen(mac) + strlen(MACRO_PREFIX) + 1];
@@ -8037,7 +8037,7 @@ static FILE *open_macro_package(const char *mac, char **path)
     strcat(s2, mac);
     fp = mac_path->open_file(s2, path);
     if ((0 /* nullptr */ == fp) && (ENOENT != errno))
-      error("unable to open macro file '%1': %2", s2, strerror(errno));
+      error("cannot open macro file '%1': %2", s2, strerror(errno));
     delete[] s2;
   }
   return fp;
@@ -8048,7 +8048,7 @@ static void process_macro_package_argument(const char *mac)
   char *path;
   FILE *fp = open_macro_package(mac, &path);
   if (0 /* nullptr */ == fp)
-    fatal("unable to open macro file for -m argument '%1'", mac);
+    fatal("cannot open macro file for -m argument '%1'", mac);
   const char *s = symbol(path).contents();
   free(path);
   input_stack::push(new file_iterator(fp, s));
@@ -8089,7 +8089,7 @@ void do_macro_source(bool quietly)
       // Suppress diagnostic only if we're operating quietly and it's an
       // expected problem.
       if (!quietly && (ENOENT == errno))
-	warning(WARN_FILE, "can't open macro file '%1': %2",
+	warning(WARN_FILE, "cannot open macro file '%1': %2",
 		nm.contents(), strerror(errno));
     tok.next();
   }
@@ -8121,7 +8121,7 @@ static void process_input_file(const char *name)
     errno = 0;
     fp = include_search_path.open_file_cautious(name);
     if (0 /* nullptr */ == fp)
-      fatal("can't open '%1': %2", name, strerror(errno));
+      fatal("cannot open '%1': %2", name, strerror(errno));
   }
   input_stack::push(new file_iterator(fp, name));
   tok.next();

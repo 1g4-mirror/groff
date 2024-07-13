@@ -1,5 +1,14 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/main.cpp (main):
+	* src/roff/troff/env.cpp (hyphen_trie::read_patterns_file):
+	* src/roff/troff/input.cpp (next_file, do_open, close_request)
+	(open_macro_package, process_macro_package_argument)
+	(do_macro_source, process_input_file): Parallelize (and shorten)
+	wording of diagnostic messages.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/font.cpp (text_file::~text_file)
 	(font::extend_ch, font::load, font::load_desc):
 	* src/libs/libgroff/searchpath.cpp

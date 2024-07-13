@@ -3946,7 +3946,7 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
   char *path = 0;
   FILE *fp = mac_path->open_file(name, &path);
   if (0 /* nullptr */ == fp) {
-    error("can't find hyphenation patterns file '%1'", name);
+    error("cannot open hyphenation pattern file '%1'", name);
     return;
   }
   int c = hpf_getc(fp);
