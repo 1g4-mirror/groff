@@ -135,16 +135,12 @@ do
             give_up=yes
         fi
 
+        test -z "$fail" || exit
+
         if [ -n "$give_up" ]
         then
-            # If we've already seen a failure case, report it.
-            if [ -n "$fail" ]
-            then
-                exit 1 # fail
-            else
-                echo "$message; skipping test" >&2
-                exit 77 # skip
-            fi
+            echo "$message; skipping test" >&2
+            exit 77 # skip
         fi
     fi
 

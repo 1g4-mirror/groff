@@ -67,6 +67,8 @@ echo "$output" | grep -q '<img src="grohtml-[0-9]\+-2.png"' || wail
 
 cleanup
 
+test -z "$fail" || exit
+
 give_up=
 message=
 
@@ -85,14 +87,8 @@ fi
 
 if [ -n "$give_up" ]
 then
-    # If we've already seen a failure case, report it.
-    if [ -n "$fail" ]
-    then
-        exit 1 # fail
-    else
-        echo "$message; skipping test" >&2
-        exit 77 # skip
-    fi
+    echo "$message; skipping test" >&2
+    exit 77 # skip
 fi
 
 # Check two forms of character transformation.
