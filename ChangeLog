@@ -26,6 +26,9 @@
 	variable of pointer type to null pointer constant instead of
 	letting it pun down to a Boolean.
 
+	* src/roff/troff/input.cpp (writable_lineno_reg::set_value): Use
+	explicit void cast when ignoring function's return value.
+
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/font.cpp (font::load, font::load_desc):

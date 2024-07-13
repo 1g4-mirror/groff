@@ -7718,7 +7718,7 @@ bool writable_lineno_reg::get_value(units *res)
 
 void writable_lineno_reg::set_value(units n)
 {
-  input_stack::set_location(0, n);
+  (void) input_stack::set_location(0, n);
 }
 
 class filename_reg : public reg {
