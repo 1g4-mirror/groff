@@ -1,5 +1,11 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (number_lines): Clarify diagnostics;
+	output line numbers cannot be negative, but input line numbers
+	can, in both AT&T/DWB troff and GNU troff.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify `set_location()` member function and those of
 	its derived classes.
 
