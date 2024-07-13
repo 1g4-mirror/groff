@@ -8,6 +8,10 @@
 	Reorder comparisons with null pointers to avoid inadvertent
 	lvalue assignment.
 
+	* src/libs/libgroff/font.cpp (text_file::next_line, scale_round)
+	(font::get_width, font::alloc_ch_index, font::load_desc): Do the
+	same for comparisons to integral zeroes.
+
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/font.cpp (font::load, font::load_desc):

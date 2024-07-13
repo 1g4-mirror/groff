@@ -131,7 +131,7 @@ bool text_file::next_line()
 	  break;
       }
     }
-    if (length == 0)
+    if (0 == length)
       break;
     buf[length] = '\0';
     char *ptr = buf;
@@ -245,7 +245,7 @@ static int scale_round(int n, int x, int y)
 {
   assert(x >= 0 && y > 0);
   int y2 = y/2;
-  if (x == 0)
+  if (0 == x)
     return 0;
   if (n >= 0) {
     if (n <= (INT_MAX - y2) / x)
@@ -262,7 +262,7 @@ static int scale_round(int n, int x, int y)
 static int scale_round(int n, int x, int y, int z)
 {
   assert(x >= 0 && y > 0 && z > 0);
-  if (x == 0)
+  if (0 == x)
     return 0;
   if (n >= 0)
     return int((n * double(x) / double(y)) * (double(z) / 1000.0) + .5);
@@ -357,7 +357,7 @@ int font::get_width(glyph *g, int point_size)
   int idx = glyph_to_index(g);
   assert(idx >= 0);
   int real_size;
-  if (zoom == 0) // 0 means "don't zoom"
+  if (0 == zoom) // 0 means "don't zoom"
     real_size = point_size;
   else
   {
@@ -620,7 +620,7 @@ const char *font::get_image_generator()
 
 void font::alloc_ch_index(int idx)
 {
-  if (nindices == 0) {
+  if (0 == nindices) {
     nindices = 128;
     if (idx >= nindices)
       nindices = idx + 10;
@@ -1226,7 +1226,7 @@ const char *font::load_desc()
 	  delete[] old_sizes;
 	}
 	sizes[i++] = lower;
-	if (lower == 0)
+	if (0 == lower)
 	  break;
 	sizes[i++] = upper;
       }
@@ -1290,7 +1290,7 @@ const char *font::load_desc()
     t.error("device description file missing 'res' directive");
     return 0 /* nullptr */;
   }
-  if (unitwidth == 0) {
+  if (0 == unitwidth) {
     t.error("device description file missing 'unitwidth' directive");
     return 0 /* nullptr */;
   }
