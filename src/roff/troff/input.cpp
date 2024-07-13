@@ -330,7 +330,7 @@ private:
   virtual int get_break_flag() { return 0; }
   virtual int get_location(int, const char **, int *) { return 0; }
   virtual void backtrace() {}
-  virtual int set_location(const char *, int) { return 0; }
+  virtual bool set_location(const char *, int) { return 0; }
   virtual int next_file(FILE *, const char *) { return 0; }
   virtual void shift(int) {}
   virtual int is_boundary() {return 0; }
@@ -392,7 +392,7 @@ public:
   int peek();
   int get_location(int, const char **, int *);
   void backtrace();
-  int set_location(const char *, int);
+  bool set_location(const char *, int);
   int next_file(FILE *, const char *);
   int is_file();
 };
@@ -510,7 +510,7 @@ void file_iterator::backtrace()
   errprint("backtrace: %3 '%1':%2\n", f, n, popened ? "pipe" : "file");
 }
 
-int file_iterator::set_location(const char *f, int ln)
+bool file_iterator::set_location(const char *f, int ln)
 {
   if (f) {
     filename = f;
@@ -519,7 +519,7 @@ int file_iterator::set_location(const char *f, int ln)
     the_output->put_filename(f, 0);
   }
   lineno = ln;
-  return 1;
+  return true;
 }
 
 input_iterator nil_iterator;
@@ -536,7 +536,7 @@ public:
   static int get_break_flag();
   static int nargs();
   static int get_location(int, const char **, int *);
-  static int set_location(const char *, int);
+  static bool set_location(const char *, int);
   static void backtrace();
   static void next_file(FILE *, const char *);
   static void end_file();
@@ -804,12 +804,12 @@ void input_stack::backtrace()
     p->backtrace();
 }
 
-int input_stack::set_location(const char *filename, int lineno)
+bool input_stack::set_location(const char *filename, int lineno)
 {
   for (input_iterator *p = top; p; p = p->next)
     if (p->set_location(filename, lineno))
-      return 1;
-  return 0;
+      return true;
+  return false;
 }
 
 void input_stack::next_file(FILE *fp, const char *s)

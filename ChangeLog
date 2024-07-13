@@ -1,5 +1,18 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify `set_location()` member function and those of
+	its derived classes.
+
+	* src/roff/troff/input.cpp (class input_iterator)
+	(class file_iterator, class input_stack)
+	(file_iterator::set_location):
+	(input_stack::set_location): Demote return type from `int` to
+	`bool`.
+	(file_iterator::set_location, input_stack::set_location): Return
+	Boolean instead of integer literals.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.cpp (do_file): Stop "normalizing"
 	an input file name of "-" to "stdin".  The other preprocessors
 	don't do that.
