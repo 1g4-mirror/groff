@@ -8048,7 +8048,8 @@ static void process_macro_package_argument(const char *mac)
   char *path;
   FILE *fp = open_macro_package(mac, &path);
   if (0 /* nullptr */ == fp)
-    fatal("cannot open macro file for -m argument '%1'", mac);
+    fatal("cannot open macro file for -m argument '%1': %2", mac,
+	  strerror(errno));
   const char *s = symbol(path).contents();
   free(path);
   input_stack::push(new file_iterator(fp, s));

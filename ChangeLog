@@ -1,5 +1,14 @@
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/grn/main.cpp (conv):
+	* src/preproc/html/pre-html.cpp (get_resolution)
+	(get_image_generator):
+	* src/roff/troff/env.cpp (hyphen_trie::read_patterns_file):
+	* src/roff/troff/input.cpp (process_macro_package_argument):
+	When failing to open a file, say why in error diagnostic.
+
+2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/main.cpp (main):
 	* src/roff/troff/env.cpp (hyphen_trie::read_patterns_file):
 	* src/roff/troff/input.cpp (next_file, do_open, close_request)
