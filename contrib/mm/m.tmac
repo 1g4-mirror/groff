@@ -540,7 +540,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if !r line*ac\\n[.z] .nr line*ac\\n[.z] 0
 .ie \\n[.$] \{\
 .	if !\B'\\$1' .@error \\$0: argument is not numeric: '\\$1'
-.	if \\$1<0) .@error \\$0: negative motion '\\$1' not supported
+.	if \\$1<0 .@error \\$0: negative motion '\\$1' not supported
 .	nr line*temp (v;\\$1)
 .\}
 .el .nr line*temp 1v
