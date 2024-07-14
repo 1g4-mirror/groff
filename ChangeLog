@@ -1,5 +1,10 @@
 2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/groff_mdoc.7.man: Manipulate type size and vertical
+	spacing only in nroff mode.
+
+2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_term): Boolify.  Rename
 	`negative` to `is_negative` and demote it and `do_next` from
 	`int` to `bool`.  Assign to them with Boolean, not integer,
