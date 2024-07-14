@@ -1361,7 +1361,7 @@ Text may be hyperlinked to email addresses with
 or other URIs with
 .BR .UR / .UE .
 .
-Not all output devices support hyperlinking of text;
+To hyperlink text,
 terminals and pager programs must support ECMA-48 OSC\~8 escape
 sequences
 (see
