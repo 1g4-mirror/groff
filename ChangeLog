@@ -1,5 +1,12 @@
 2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_term): Boolify.  Rename
+	`negative` to `is_negative` and demote it and `do_next` from
+	`int` to `bool`.  Assign to them with Boolean, not integer,
+	literals.
+
+2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_expression, get_hunits)
 	(get_number, get_integer, is_valid_term): Trivially refactor.
 	Replace `v` as the general name for any numeric quantity

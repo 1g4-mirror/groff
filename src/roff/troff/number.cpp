@@ -404,7 +404,7 @@ static bool is_valid_expression(units *u, int scaling_unit,
 static bool is_valid_term(units *u, int scaling_unit,
 			  bool is_parenthesized, bool is_mandatory)
 {
-  int negative = 0;
+  bool is_negative = false;
   for (;;)
     if (is_parenthesized && tok.is_space())
       tok.next();
@@ -412,7 +412,7 @@ static bool is_valid_term(units *u, int scaling_unit,
       tok.next();
     else if (tok.ch() == '-') {
       tok.next();
-      negative = !negative;
+      is_negative = !is_negative;
     }
     else
       break;
@@ -441,7 +441,7 @@ static bool is_valid_term(units *u, int scaling_unit,
       }
     }
     *u -= tem;
-    if (negative) {
+    if (is_negative) {
       if (*u == INT_MIN) {
 	error("numeric overflow");
 	return false;
@@ -487,7 +487,7 @@ static bool is_valid_term(units *u, int scaling_unit,
     }
     else
       tok.next();
-    if (negative) {
+    if (is_negative) {
       if (*u == INT_MIN) {
 	error("numeric overflow");
 	return false;
@@ -557,7 +557,7 @@ static bool is_valid_term(units *u, int scaling_unit,
     }
   }
   int si = scaling_unit;
-  int do_next = 0;
+  bool do_next = false;
   if ((c = tok.ch()) != 0 && strchr(SCALING_UNITS, c) != 0) {
     switch (scaling_unit) {
     case 0:
@@ -584,7 +584,7 @@ static bool is_valid_term(units *u, int scaling_unit,
     }
     // Don't do tok.next() here because the next token might be \s,
     // which would affect the interpretation of m.
-    do_next = 1;
+    do_next = true;
   }
   switch (si) {
   case 'i':
@@ -648,7 +648,7 @@ static bool is_valid_term(units *u, int scaling_unit,
   }
   if (do_next)
     tok.next();
-  if (negative) {
+  if (is_negative) {
     if (*u == INT_MIN) {
       error("numeric overflow");
       return false;
