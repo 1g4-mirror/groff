@@ -1,5 +1,14 @@
 2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/pic.ms: Reduce vertical spacing in displays only on
+	typesetters.  To that end:
+	(SS): Define new macro for starting a "small display".
+	(SE): ...and a macro for ending one.
+	Migrate use of `DS`/`DE` macros with `ps` and `vs` requests to
+	the new macros.
+
+2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/groff_mdoc.7.man: Manipulate type size and vertical
 	spacing only in nroff mode.
 
