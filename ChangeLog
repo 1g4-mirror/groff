@@ -1,3 +1,13 @@
+2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/number.cpp (is_valid_expression, get_hunits)
+	(get_number, get_integer, is_valid_term): Trivially refactor.
+	Replace `v` as the general name for any numeric quantity
+	{possibly arising from copy-and-paste operations from a
+	`vunits`-handling original} with one more suggestive of its
+	type: `h`, `u`, or `i` for horizontal, general, or integral
+	units respectively.
+
 2024-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/hvunits.h: Boolify.
