@@ -223,7 +223,8 @@ inline hunits operator +(const hunits & x, const hunits & y)
 {
   hunits r;
   r = x;
-  r.n += y.n;
+  if (ckd_add(&r.n, r.n, y.n))
+    error("integer addition wrapped");
   return r;
 }
 
