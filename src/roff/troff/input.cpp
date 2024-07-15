@@ -2545,7 +2545,7 @@ bool token::is_usable_as_delimiter(bool report_error)
 
 const char *token::description()
 {
-  const size_t bufsz = sizeof "character 'x'" + 1;
+  const size_t bufsz = sizeof "character code XXX (U+XXXX)" + 1;
   static char buf[bufsz];
   (void) memset(buf, 0, bufsz);
   switch (type) {
@@ -2558,8 +2558,12 @@ const char *token::description()
       (void) snprintf(buf, bufsz, "character \"%c\"", c);
       return buf;
     }
-    else {
+    else if (c < 128) {
       (void) snprintf(buf, bufsz, "character '%c'", c);
+      return buf;
+    }
+    else {
+      (void) snprintf(buf, bufsz, "character code %d (U+%04X)", c, c);
       return buf;
     }
   case TOKEN_DUMMY:

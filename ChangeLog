@@ -1,3 +1,12 @@
+2024-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::description): Revise
+	diagnostic when reporting unexpected character code > 128 in
+	input.  Report only its code in decimal and Unicode-style
+	hexadecimal instead of trying to write it literally.
+
+	Continues <https://savannah.gnu.org/bugs/?65724>.
+
 2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/pic.ms: Reduce vertical spacing in displays only on
