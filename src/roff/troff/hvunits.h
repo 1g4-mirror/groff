@@ -231,7 +231,8 @@ inline hunits operator -(const hunits & x, const hunits & y)
 {
   hunits r;
   r = x;
-  r.n -= y.n;
+  if (ckd_sub(&r.n, r.n, y.n))
+    error("integer subtraction wrapped");
   return r;
 }
 
@@ -239,7 +240,9 @@ inline hunits operator -(const hunits & x)
 {
   hunits r;
   r = x;
-  r.n = -x.n;
+  // Why?  Consider -(INT_MIN) in two's complement.
+  if (ckd_mul(&r.n, x.n, -1))
+    error("integer subtraction wrapped");
   return r;
 }
 

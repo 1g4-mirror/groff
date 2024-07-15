@@ -15,8 +15,9 @@
 
 	* src/roff/troff/hvunits.h: Include `config.h` and `stdckdint.h`
 	headers.
-	(vunits operator -): Use `ckd_sub()` instead of primitive
-	operation, and throw error diagnostic if arithmetic wraps.
+	(vunits operator -, hunits operator -): Use `ckd_sub()` instead
+	of primitive operation, and throw error diagnostic if arithmetic
+	wraps.
 	(vunits::to_units, hunits::to_units): Use `ckd_mul()` instead of
 	primitive operation, and throw error diagnostic if arithmetic
 	wraps.
