@@ -208,7 +208,10 @@ inline hunits:: hunits() : n(0)
 
 inline units hunits::to_units()
 {
-  return n * hresolution;
+  units r;
+  if (ckd_mul(&r, n, hresolution))
+    error("integer multiplication wrapped");
+  return r;
 }
 
 inline bool hunits::is_zero()
