@@ -1,3 +1,9 @@
+2024-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Prevent traps on overflowing integer arithmetic.
+
+	* bootstrap.conf: Add "stdckdint" to `gnulib_modules`.
+
 2024-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/number.cpp (is_valid_term): Trivially refactor
