@@ -16,6 +16,11 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <stdckdint.h>
 
 #include "troff.h"
 #include "hvunits.h"
@@ -162,10 +167,12 @@ bool get_number(units *res, unsigned char si, units prev_value)
     *res = u;
     break;
   case INCREMENT:
-    *res = prev_value + u;
+    if (ckd_add(res, prev_value, u))
+      error("integer addition wrapped");
     break;
   case DECREMENT:
-    *res = prev_value - u;
+    if (ckd_sub(res, prev_value, u))
+      error("integer subtraction wrapped");
     break;
   default:
     assert(0 == "unhandled case returned by get_incr_number()");
@@ -183,10 +190,12 @@ bool get_integer(int *res, int prev_value)
     *res = i;
     break;
   case INCREMENT:
-    *res = prev_value + int(i);
+    if (ckd_add(res, prev_value, i))
+      error("integer addition wrapped");
     break;
   case DECREMENT:
-    *res = prev_value - int(i);
+    if (ckd_sub(res, prev_value, i))
+      error("integer subtraction wrapped");
     break;
   default:
     assert(0 == "unhandled case returned by get_incr_number()");
@@ -296,7 +305,6 @@ static bool is_valid_expression(units *u, int scaling_unit,
     if (!is_valid_term(&u2, scaling_unit, is_parenthesized,
 		       is_mandatory))
       return false;
-    bool had_overflow = false;
     switch (op) {
     case '<':
       *u = *u < u2;
@@ -328,57 +336,22 @@ static bool is_valid_expression(units *u, int scaling_unit,
       *u = *u > 0 || u2 > 0;
       break;
     case '+':
-      if (u2 < 0) {
-	if (*u < INT_MIN - u2)
-	  had_overflow = true;
-      }
-      else if (u2 > 0) {
-	if (*u > INT_MAX - u2)
-	  had_overflow = true;
-      }
-      if (had_overflow) {
-	error("addition overflow");
+      if (ckd_add(u, *u, u2)) {
+	error("integer addition wrapped");
 	return false;
       }
-      *u += u2;
       break;
     case '-':
-      if (u2 < 0) {
-	if (*u > INT_MAX + u2)
-	  had_overflow = true;
-      }
-      else if (u2 > 0) {
-	if (*u < INT_MIN + u2)
-	  had_overflow = true;
-      }
-      if (had_overflow) {
-	error("subtraction overflow");
+      if (ckd_sub(u, *u, u2)) {
+	error("integer subtraction wrapped");
 	return false;
       }
-      *u -= u2;
       break;
     case '*':
-      if (u2 < 0) {
-	if (*u > 0) {
-	  if ((unsigned)*u > -(unsigned)INT_MIN / -(unsigned)u2)
-	    had_overflow = true;
-	}
-	else if (-(unsigned)*u > INT_MAX / -(unsigned)u2)
-	  had_overflow = true;
-      }
-      else if (u2 > 0) {
-	if (*u > 0) {
-	  if (*u > INT_MAX / u2)
-	    had_overflow = true;
-	}
-	else if (-(unsigned)*u > -(unsigned)INT_MIN / u2)
-	  had_overflow = true;
-      }
-      if (had_overflow) {
-	error("multiplication overflow");
+      if (ckd_mul(u, *u, u2)) {
+	error("integer multiplication wrapped");
 	return false;
       }
-      *u *= u2;
       break;
     case '/':
       if (u2 == 0) {

@@ -3,6 +3,12 @@
 	[troff]: Prevent traps on overflowing integer arithmetic.
 
 	* bootstrap.conf: Add "stdckdint" to `gnulib_modules`.
+	* src/roff/troff/number.cpp: Include `config.h` and
+	`stdckdint.h` headers.
+	(get_number, get_integer, is_valid_expression): Use `ckd_add()`,
+	`ckd_sub()`, and `ckd_mul()` instead of primitive operations,
+	and throw error diagnostic if arithmetic wraps.
+	(is_valid_expression): Remove manual detection of overflow.
 
 2024-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
