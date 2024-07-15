@@ -16,6 +16,12 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <stdckdint.h>
+
 class vunits {
   int n;
 public:
@@ -105,14 +111,17 @@ inline vunits operator -(const vunits & x, const vunits & y)
 {
   vunits r;
   r = x;
-  r.n -= y.n;
+  if (ckd_sub(&r.n, r.n, y.n))
+    error("integer subtraction wrapped");
   return r;
 }
 
 inline vunits operator -(const vunits & x)
 {
   vunits r;
-  r.n = -x.n;
+  // Why?  Consider -(INT_MIN) in two's complement.
+  if (ckd_mul(&r.n, x.n, -1))
+    error("integer multiplication wrapped");
   return r;
 }
 

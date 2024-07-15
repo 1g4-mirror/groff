@@ -10,6 +10,11 @@
 	and throw error diagnostic if arithmetic wraps.
 	(is_valid_expression): Remove manual detection of overflow.
 
+	* src/roff/troff/hvunits.h: Include `config.h` and `stdckdint.h`
+	headers.
+	(vunits operator -): Use `ckd_sub()` instead of primitive
+	operation, and throw error diagnostic if arithmetic wraps.
+
 2024-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/number.cpp (is_valid_term): Trivially refactor
