@@ -106,7 +106,8 @@ inline vunits operator +(const vunits & x, const vunits & y)
 {
   vunits r;
   r = x;
-  r.n += y.n;
+  if (ckd_add(&r.n, r.n, y.n))
+    error("integer addition wrapped");
   return r;
 }
 
