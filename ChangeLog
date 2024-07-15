@@ -18,6 +18,8 @@
 	operation, and throw error diagnostic if arithmetic wraps.
 	(vunits operator +): Use `ckd_add()` instead of primitive
 	operation, and throw error diagnostic if arithmetic wraps.
+	(vunits operator *): Use `ckd_mul()` instead of primitive
+	operation, and throw error diagnostic if arithmetic wraps.
 
 2024-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 

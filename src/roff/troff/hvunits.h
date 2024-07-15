@@ -146,7 +146,8 @@ inline vunits operator *(const vunits & x, int n)
 {
   vunits r;
   r = x;
-  r.n *= n;
+  if (ckd_mul(&r.n, x.n, n))
+    error("integer multiplication wrapped");
   return r;
 }
 
@@ -154,7 +155,8 @@ inline vunits operator *(int n, const vunits & x)
 {
   vunits r;
   r = x;
-  r.n *= n;
+  if (ckd_mul(&r.n, n, x.n))
+    error("integer multiplication wrapped");
   return r;
 }
 
