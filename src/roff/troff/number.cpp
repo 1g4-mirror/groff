@@ -392,6 +392,7 @@ static bool is_valid_term(units *u, int scaling_unit,
 			  bool is_parenthesized, bool is_mandatory)
 {
   bool is_negative = false;
+  bool is_overflowing = false;
   for (;;)
     if (is_parenthesized && tok.is_space())
       tok.next();
@@ -498,19 +499,18 @@ static bool is_valid_term(units *u, int scaling_unit,
   case '9':
     *u = 0;
     do {
-      if (*u > INT_MAX / 10) {
-	error("numeric overflow");
-	return false;
-      }
-      *u *= 10;
-      if (*u > INT_MAX - (int(c) - '0')) {
-	error("numeric overflow");
-	return false;
-      }
-      *u += c - '0';
+      // If wrapping, don't `break`; eat and discard further digits.
+      if (!is_overflowing) {
+	  if (ckd_mul(u, *u, 10))
+	    is_overflowing = true;
+	  if (ckd_add(u, *u, c - '0'))
+	    is_overflowing = true;
+	}
       tok.next();
       c = tok.ch();
     } while (csdigit(c));
+    if (is_overflowing)
+      error("integer value wrapped");
     break;
   case '/':
   case '*':
@@ -637,11 +637,8 @@ static bool is_valid_term(units *u, int scaling_unit,
   if (do_next)
     tok.next();
   if (is_negative) {
-    if (*u == INT_MIN) {
-      error("numeric overflow");
-      return false;
-    }
-    *u = -*u;
+    if (ckd_mul(u, *u, -1))
+      error("integer multiplication wrapped");
   }
   return true;
 }
