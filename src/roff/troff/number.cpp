@@ -118,6 +118,9 @@ static incr_number_result get_incr_number(units *res, unsigned char);
 bool get_vunits(vunits *res, unsigned char si, vunits prev_value)
 {
   units v;
+  // Use a primitive temporary because having the ckd macros store to
+  // &(res->n) requires `friend` access and produces wrong results.
+  int i;
   switch (get_incr_number(&v, si)) {
   case INVALID:
     return false;
@@ -125,10 +128,14 @@ bool get_vunits(vunits *res, unsigned char si, vunits prev_value)
     *res = v;
     break;
   case INCREMENT:
-    *res = prev_value + v;
+    if (ckd_add(&i, prev_value.to_units(), v))
+      error("integer addition wrapped");
+    *res = i;
     break;
   case DECREMENT:
-    *res = prev_value - v;
+    if (ckd_sub(&i, prev_value.to_units(), v))
+      error("integer subtraction wrapped");
+    *res = i;
     break;
   default:
     assert(0 == "unhandled case returned by get_incr_number()");

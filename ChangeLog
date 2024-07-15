@@ -9,6 +9,9 @@
 	`ckd_sub()`, and `ckd_mul()` instead of primitive operations,
 	and throw error diagnostic if arithmetic wraps.
 	(is_valid_expression): Remove manual detection of overflow.
+	(get_vunits): Use `ckd_add()` (with temporary variable,
+	annotating why) instead of primitive operation, and throw error
+	diagnostic if arithmetic wraps.
 
 	* src/roff/troff/hvunits.h: Include `config.h` and `stdckdint.h`
 	headers.
