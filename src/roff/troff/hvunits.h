@@ -260,7 +260,8 @@ inline hunits operator *(const hunits & x, int n)
 {
   hunits r;
   r = x;
-  r.n *= n;
+  if (ckd_mul(&r.n, x.n, n))
+    error("integer multiplication wrapped");
   return r;
 }
 
@@ -268,7 +269,8 @@ inline hunits operator *(int n, const hunits & x)
 {
   hunits r;
   r = x;
-  r.n *= n;
+  if (ckd_mul(&r.n, x.n, n))
+    error("integer multiplication wrapped");
   return r;
 }
 
