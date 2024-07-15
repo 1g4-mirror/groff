@@ -91,7 +91,10 @@ inline vunits:: vunits() : n(0)
 
 inline units vunits::to_units()
 {
-  return n * vresolution;
+  units r;
+  if (ckd_mul(&r, n, vresolution))
+    error("integer multiplication wrapped");
+  return r;
 }
 
 inline bool vunits::is_zero()

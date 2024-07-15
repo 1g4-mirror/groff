@@ -14,6 +14,8 @@
 	headers.
 	(vunits operator -): Use `ckd_sub()` instead of primitive
 	operation, and throw error diagnostic if arithmetic wraps.
+	(vunits::to_units): Use `ckd_mul()` instead of primitive
+	operation, and throw error diagnostic if arithmetic wraps.
 
 2024-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
