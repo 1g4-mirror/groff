@@ -1,5 +1,12 @@
 2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (get_long_name): Call
+	`do_get_long_name()` with null character literal for parameter
+	of `char` type, rather than punning an integral zero.
+	(do_get_long_name): Rename parameter from `end` to `end_char`.
+
+2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* bootstrap: Resync with gnulib upstream.  Thanks to Collin Funk
 	for the suggestion.
 

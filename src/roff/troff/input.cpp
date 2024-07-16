@@ -2696,10 +2696,10 @@ symbol get_name(bool required)
 
 symbol get_long_name(bool required)
 {
-  return do_get_long_name(required, 0);
+  return do_get_long_name(required, '\0');
 }
 
-static symbol do_get_long_name(bool required, char end)
+static symbol do_get_long_name(bool required, char end_char)
 {
   while (tok.is_space())
     tok.next();
@@ -2708,7 +2708,7 @@ static symbol do_get_long_name(bool required, char end)
   int buf_size = ABUF_SIZE;
   int i = 0;
   for (;;) {
-    // If end != 0 we normally have to append a null byte
+    // If `end_char` != `\0` we normally have to append a null byte.
     if (i + 2 > buf_size) {
       if (buf == abuf) {
 	buf = new char[ABUF_SIZE*2];
@@ -2723,7 +2723,7 @@ static symbol do_get_long_name(bool required, char end)
 	delete[] old_buf;
       }
     }
-    if ((buf[i] = tok.ch()) == 0 || buf[i] == end)
+    if ((buf[i] = tok.ch()) == 0 || buf[i] == end_char)
       break;
     i++;
     tok.next();
@@ -2732,7 +2732,7 @@ static symbol do_get_long_name(bool required, char end)
     diagnose_missing_identifier(required);
     return NULL_SYMBOL;
   }
-  if (end && buf[i] == end)
+  if (end_char && buf[i] == end_char)
     buf[i+1] = '\0';
   else
     diagnose_invalid_identifier();
