@@ -1,5 +1,10 @@
 2024-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_term): Trivially refactor;
+	simplify tautologus Boolean expression.
+
+2024-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::description): Revise
 	diagnostic when reporting unexpected character code > 128 in
 	input.  Report only its code in decimal and Unicode-style

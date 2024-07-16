@@ -534,7 +534,7 @@ static bool is_valid_term(units *u, int scaling_unit,
   case '=':
     warning(WARN_SYNTAX, "empty left operand to '%1' operator", c);
     *u = 0;
-    return is_mandatory ? false : true;
+    return !is_mandatory;
   default:
     warning(WARN_NUMBER, "expected numeric expression, got %1",
 	    tok.description());
