@@ -5696,6 +5696,8 @@ static void device_request()
     if (c != ' ' && c != '\t')
       break;
   }
+  if (curdiv == topdiv && topdiv->before_first_page)
+    topdiv->begin_page();
   for (; c != '\n' && c != EOF; c = get_copy(0 /* nullptr */))
     mac.append(c);
   curenv->add_node(new special_node(mac));

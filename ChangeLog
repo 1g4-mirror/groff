@@ -1,5 +1,13 @@
 2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (device_request): Honor a `device`
+	request even if it precedes any formatted output, as we do the
+	`\X` escape sequence.
+
+	Fixes <https://savannah.gnu.org/bugs/?65977>.
+
+2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (get_long_name): Call
 	`do_get_long_name()` with null character literal for parameter
 	of `char` type, rather than punning an integral zero.
