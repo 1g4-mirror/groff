@@ -1,5 +1,18 @@
 2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor `has_arg()` to optionally work in copy mode.
+
+	* src/roff/troff/token.h (has_arg): Add Boolean parameter,
+	defaulting to `false`, indicating that "peeking" ahead in the
+	input stream is desired.  This is for use by requests that need
+	to read their argument(s) in copy mode.
+	* src/roff/troff/input.cpp (has_arg): Implement, moving code
+	duplicated in `device_request` and `output_request`.
+	(device_request, output_request): Drop duplicated code in favor
+	of calling `has_arg()` with `true` argument.
+
+2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (device_request): Honor a `device`
 	request even if it precedes any formatted output, as we do the
 	`\X` escape sequence.

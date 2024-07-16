@@ -1853,11 +1853,25 @@ void token::skip()
     next();
 }
 
-bool has_arg()
+// Specify `want_peek` if request reads the next argument in copy mode.
+bool has_arg(bool want_peek)
 {
-  while (tok.is_space())
-    tok.next();
-  return !tok.is_newline();
+  if (want_peek) {
+    int c;
+    for (;;) {
+      c = input_stack::peek();
+      if (' ' == c)
+	(void) get_copy(0 /* nullptr */);
+      else
+	break;
+    }
+    return !(('\n' == c) || (EOF == c));
+  }
+  else {
+    while (tok.is_space())
+      tok.next();
+    return !tok.is_newline();
+  }
 }
 
 void token::make_space()
@@ -5672,21 +5686,13 @@ static node *do_device_control() // \X
 
 static void device_request()
 {
-  // We can't use `has_arg()` here because we want to read in copy mode.
-  int c;
-  for (;;) {
-    c = input_stack::peek();
-    if (' ' == c)
-      (void) get_copy(0 /* nullptr */);
-    else
-      break;
-  }
-  if (('\n' == c) || (EOF == c)) {
+  if (!has_arg(true /* peek; we want to read in copy mode */)) {
     warning(WARN_MISSING, "device control request expects arguments");
     skip_line();
     return;
   }
   macro mac;
+  int c;
   for (;;) {
     c = get_copy(0 /* nullptr */);
     if ('"' == c) {
@@ -5721,20 +5727,12 @@ static void device_macro_request()
 
 static void output_request()
 {
-  // We can't use `has_arg()` here because we want to read in copy mode.
-  int c;
-  for (;;) {
-    c = input_stack::peek();
-    if (' ' == c)
-      (void) get_copy(0 /* nullptr */);
-    else
-      break;
-  }
-  if (('\n' == c) || (EOF == c)) {
+  if (!has_arg(true /* peek; we want to read in copy mode */)) {
     warning(WARN_MISSING, "output request expects arguments");
     skip_line();
     return;
   }
+  int c;
   for (;;) {
     c = get_copy(0 /* nullptr */);
     if ('"' == c) {
