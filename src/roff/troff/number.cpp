@@ -511,7 +511,7 @@ static bool is_valid_term(units *u, int scaling_unit,
   case '9':
     *u = 0;
     do {
-      if (*u > INT_MAX/10) {
+      if (*u > INT_MAX / 10) {
 	error("numeric overflow");
 	return false;
       }
@@ -549,7 +549,7 @@ static bool is_valid_term(units *u, int scaling_unit,
       if (!csdigit(c))
 	break;
       // we may multiply the divisor by 254 later on
-      if (divisor <= INT_MAX/2540 && *u <= (INT_MAX - 9)/10) {
+      if (divisor <= INT_MAX / 2540 && *u <= (INT_MAX - 9) / 10) {
 	*u *= 10;
 	*u += c - '0';
 	divisor *= 10;
@@ -592,7 +592,7 @@ static bool is_valid_term(units *u, int scaling_unit,
     *u = scale(*u, units_per_inch, divisor);
     break;
   case 'c':
-    *u = scale(*u, units_per_inch*100, divisor*254);
+    *u = scale(*u, units_per_inch * 100, divisor * 254);
     break;
   case 0:
   case 'u':
@@ -603,10 +603,10 @@ static bool is_valid_term(units *u, int scaling_unit,
     *u = scale(*u, 65536, divisor);
     break;
   case 'p':
-    *u = scale(*u, units_per_inch, divisor*72);
+    *u = scale(*u, units_per_inch, divisor * 72);
     break;
   case 'P':
-    *u = scale(*u, units_per_inch, divisor*6);
+    *u = scale(*u, units_per_inch, divisor * 6);
     break;
   case 'm':
     {
@@ -635,11 +635,11 @@ static bool is_valid_term(units *u, int scaling_unit,
     *u = scale(*u, curenv->get_vertical_spacing().to_units(), divisor);
     break;
   case 's':
-    while (divisor > INT_MAX/(sizescale*72)) {
+    while (divisor > INT_MAX / (sizescale * 72)) {
       divisor /= 10;
       *u /= 10;
     }
-    *u = scale(*u, units_per_inch, divisor*sizescale*72);
+    *u = scale(*u, units_per_inch, divisor * sizescale * 72);
     break;
   case 'z':
     *u = scale(*u, sizescale, divisor);
@@ -665,14 +665,14 @@ units scale(units n, units x, units y)
   if (x == 0)
     return 0;
   if (n >= 0) {
-    if (n <= INT_MAX/x)
-      return (n*x)/y;
+    if (n <= INT_MAX / x)
+      return (n * x) / y;
   }
   else {
-    if (-(unsigned)n <= -(unsigned)INT_MIN/x)
-      return (n*x)/y;
+    if (-(unsigned)n <= -(unsigned)INT_MIN / x)
+      return (n * x) / y;
   }
-  double res = n*double(x)/double(y);
+  double res = n * double(x) / double(y);
   // We don't implement integer wraparound when scaling.
   if (res > INT_MAX) {
     error("numeric overflow");
