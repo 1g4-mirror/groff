@@ -293,8 +293,8 @@ o The an (man) macro package's `IP` macro no longer honors the formerly
   punctuation or a list enumerator for `IP`'s first argument, consider
   migrating to `TP`.
 
-o The an-ext.tmac macro file no longer defines `DS` and `DE` macros.  It
-  had defined them as empty (undocumently) since 2009.
+o The "an-ext.tmac" macro file no longer defines `DS` and `DE` macros.
+  It had defined them as empty (undocumently) since 2009.
 
 o The doc (mdoc) macro package's `Mt` macro now sets its argument in
   roman, not italics (or whatever the string `doc-Pa-font` was
