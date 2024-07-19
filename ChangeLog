@@ -1,5 +1,12 @@
 2024-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Add test of *roff arithmetic.
+
+	* src/roff/groff/tests/arithmetic-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2024-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Prevent traps on overflowing integer arithmetic.
 
 	* bootstrap.conf: Add "stdckdint" to `gnulib_modules`.
