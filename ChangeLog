@@ -17,7 +17,11 @@
 	indicate it.  When an overflowing literal is encountered, skip
 	excess digits.  This is a behavior change, albeit an esoteric
 	one; evaluation of a numeric term no longer aborts in this
-	scenario.
+	scenario.  When applying the *roff `|` boundary-relative motion
+	operator, remove manual detection of overflow, relying on
+	`ckd_sub()` to indicate it, and store result to temporary
+	variable in case it overflows and must be discarded.  Otherwise,
+	copy temporary to the storage for the term being interpreted.
 
 	* src/roff/troff/hvunits.h: Include `config.h` and `stdckdint.h`
 	headers.

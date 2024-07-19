@@ -412,31 +412,18 @@ static bool is_valid_term(units *u, int scaling_unit,
     tok.next();
     if (!is_valid_term(u, scaling_unit, is_parenthesized, is_mandatory))
       return false;
-    int position;
+    int tmp, position;
     position = (scaling_unit == 'v'
 		? curdiv->get_vertical_position().to_units()
 		: curenv->get_input_line_position().to_units());
     // We don't permit integer wraparound with this operator.
-    if (position >= 0) {
-      if (*u < (INT_MIN + position)) {
+    if (ckd_sub(&tmp, *u, position)) {
 	error("numeric overflow");
 	return false;
-      }
     }
-    else {
-      if (*u > (INT_MAX + position)) {
-	error("numeric overflow");
-	return false;
-      }
-    }
-    *u -= position;
-    if (is_negative) {
-      if (*u == INT_MIN) {
-	error("numeric overflow");
-	return false;
-      }
+    *u = tmp;
+    if (is_negative)
       *u = -*u;
-    }
     return true;
   case '(':
     tok.next();
