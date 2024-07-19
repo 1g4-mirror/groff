@@ -464,11 +464,9 @@ static bool is_valid_term(units *u, int scaling_unit,
     else
       tok.next();
     if (is_negative) {
-      if (*u == INT_MIN) {
-	error("numeric overflow");
-	return false;
-      }
-      *u = -*u;
+      // Why?  Consider -(INT_MIN) in two's complement.
+      if (ckd_mul(u, *u, -1))
+	error("integer multiplication wrapped");
     }
     return true;
   case '.':

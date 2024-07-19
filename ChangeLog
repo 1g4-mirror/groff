@@ -22,6 +22,9 @@
 	`ckd_sub()` to indicate it, and store result to temporary
 	variable in case it overflows and must be discarded.  Otherwise,
 	copy temporary to the storage for the term being interpreted.
+	When negating a term, remove manual detection of negation of
+	`INT_MIN` (guaranteed to overflow in a two's complement
+	representation), relying on `ckd_mul()` to indicate it.
 
 	* src/roff/troff/hvunits.h: Include `config.h` and `stdckdint.h`
 	headers.
@@ -37,6 +40,10 @@
 	(vunits operator *, hunits operator *): Use `ckd_mul()` instead
 	of primitive operation, and throw error diagnostic if arithmetic
 	wraps.
+
+	Fixes <https://savannah.gnu.org/bugs/?64301>.  You have to
+	compile GNU troff with the (GCC) compiler option `-ftrapv` for
+	arithmetic to trap and cause a core dump.
 
 2024-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
