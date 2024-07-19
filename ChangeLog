@@ -1,3 +1,11 @@
+2024-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/number.cpp (is_valid_term): Trivially refactor
+	implementation of boundary-relative ("absolute" [sic]) motion
+	operator.  Rename `tem` to `position`, since it is the
+	horizontal or vertical drawing location to be altered.
+	Parenthesize expressions for clarity.
+
 2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Refactor `has_arg()` to optionally work in copy mode.
