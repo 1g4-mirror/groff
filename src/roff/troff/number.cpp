@@ -673,6 +673,7 @@ units scale(units n, units x, units y)
       return (n*x)/y;
   }
   double res = n*double(x)/double(y);
+  // We don't implement integer wraparound when scaling.
   if (res > INT_MAX) {
     error("numeric overflow");
     return INT_MAX;
