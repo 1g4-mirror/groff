@@ -1,5 +1,12 @@
 2024-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Regression-test Savannah #66006.
+
+	* src/utils/grog/tests/avoid-man-fakeout.sh: Do it.
+	* src/utils/grog/grog.am (grog_TESTS): Run test.
+
+2024-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (is_char_usable_as_delimiter): Reject
 	`|`.
 
