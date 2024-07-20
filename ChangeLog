@@ -48,7 +48,7 @@
 	of primitive operation, and throw error diagnostic if arithmetic
 	wraps.
 
-	Fixes <https://savannah.gnu.org/bugs/?64301>.  You have to
+	Fixes <https://savannah.gnu.org/bugs/?64301>.  You had to
 	compile GNU troff with the (GCC) compiler option `-ftrapv` for
 	arithmetic to trap and cause a core dump.
 
@@ -119,7 +119,7 @@
 2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/groff_mdoc.7.man: Manipulate type size and vertical
-	spacing only in nroff mode.
+	spacing only in troff mode.
 
 2024-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -279,7 +279,7 @@
 	Reduce cleverness of assignment nested inside conditional--a
 	favorite of C obscurantists and an especially gratuitous case
 	since it was preceded by a declarator without an initializer.
-	This aligns the function with another overloaded version of
+	This aligns `font::load()` with another overloaded version of
 	itself and with `font::scan_papersize()`.
 
 2024-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -655,7 +655,7 @@
 
 2024-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	Regression-test Savannah #65902.
+	[grog]: Regression-test Savannah #65902.
 
 	* src/utils/grog/tests/detect-chem.sh: Do it.
 	* src/utils/grog/grog.am (grog_TESTS): Run test.
