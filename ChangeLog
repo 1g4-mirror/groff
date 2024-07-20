@@ -1,5 +1,19 @@
 2024-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/grog/grog.pl (interpret_line): Fix logic error; set
+	Boolean scalar `have_seen_first_macro_call` _after_ testing it,
+	not before, avoiding its tautological truth.
+	(infer_man_or_ms_package): Drop `TH` from list of "unique"
+	man(7) macro names.  It isn't; most full-service macro packages
+	use it to manage tbl(1) headings, and we already have special
+	logic for handling it as the first call in a page anyway (where
+	it is overwhelmingly idiomatic of a man(7) document).
+
+	Fixes <https://savannah.gnu.org/bugs/?66006>.  Thanks to Morten
+	Bo Johansen for the report.
+
+2024-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #66006.
 
 	* src/utils/grog/tests/avoid-man-fakeout.sh: Do it.
