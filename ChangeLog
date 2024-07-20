@@ -1,3 +1,10 @@
+2024-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (is_char_usable_as_delimiter): Reject
+	`|`.
+
+	Fixes <https://savannah.gnu.org/bugs/?66009>.
+
 2024-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Add test of *roff arithmetic.

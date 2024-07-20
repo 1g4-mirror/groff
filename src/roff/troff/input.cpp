@@ -2521,6 +2521,7 @@ static bool is_char_usable_as_delimiter(int c)
   case '(':
   case ')':
   case '.':
+  case '|':
     return false;
   default:
     return true;
