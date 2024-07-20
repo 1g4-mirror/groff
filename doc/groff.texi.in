@@ -7223,8 +7223,8 @@ Some escape sequences that require parameters use delimiters.  The
 neutral apostrophe @code{'} is a popular choice and shown in this
 document.  The neutral double quote @code{"} is also commonly seen.
 Letters, numerals, and leaders can be used.  Punctuation characters
-are likely better choices, except for those defined as infix operators
-in numeric expressions; see below.
+are likely better choices, except for those defined as operators in
+numeric expressions; see below.
 
 @Example
 \l'1.5i\[bu]' \" draw 1.5 inches of bullet glyphs
@@ -7335,9 +7335,10 @@ the numerals @code{0}-@code{9} and the decimal point @code{.}
 @ifinfo
 @cindex <colon>, as delimiter
 @end ifinfo
+@cindex @code{|}, as delimiter
 @cindex @code{(}, as delimiter
 @cindex @code{)}, as delimiter
-the (single-character) operators @samp{+-/*%<>=&:()}
+the (single-character) operators @samp{+-/*%<>=&:()|}
 
 @item
 @cindex space character, as delimiter
