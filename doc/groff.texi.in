@@ -16625,12 +16625,6 @@ rendered as glyphs in the output; instead, they remain abstract
 characters---in a PDF bookmark or a URL, for example.}  The use of any
 other escape sequence in @code{\X} parameters is normally an error.
 
-A device control command issued with the @code{device} request will not
-be reflected in the output unless a partially collected line exists at
-least once in the top-level diversion (recall @ref{Diversions}).  When
-experimenting with such device controls in minimal documents, a
-@code{br} request will ensure this to be the case.
-
 @kindex use_charnames_in_special
 @cindex @file{DESC} file, and @code{use_charnames_in_special} keyword
 @cindex @code{\X}, and special characters
