@@ -14802,20 +14802,22 @@ there.
 A macro package might set headers and footers as follows; this example
 configures vertical margins of one inch to the body text, and one
 half-inch to the titles.  Observe the use of the no-break control
-character with @code{sp} request to position our text baselines,
-and the page number character @samp{%} used with the @code{tl} request.
+character with the @code{sp} and @code{br} requests to position our text
+baselines and prevent a partially collected line from being written
+outside the body text, and the page number character @samp{%} used with
+the @code{tl} request.
 
 @Example
 .\" hdfo.roff
 .de hd                  \" page header
 '  sp .5i
-'  tl '\\*(Ti''\\*(Da'  \" title and date strings
-'  sp .5i
+.  tl '\\*(Ti''\\*(Da'  \" title and date strings
+'  sp |1i
 ..
 .de fo                  \" page footer
-'  sp .5i
+'  sp .5i-1v
 .  tl ''%''
-.  bp
+'  bp
 ..
 .wh 0   hd              \" trap at top of the page
 .wh -1i fo              \" trap 1 inch from bottom
