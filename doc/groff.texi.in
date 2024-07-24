@@ -14817,8 +14817,8 @@ and the page number character @samp{%} used with the @code{tl} request.
 .  tl ''%''
 .  bp
 ..
-.wh 0   hd             \" trap at top of the page
-.wh -1i fo             \" trap 1 inch from bottom
+.wh 0   hd              \" trap at top of the page
+.wh -1i fo              \" trap 1 inch from bottom
 @endExample
 
 To use these traps, copy the above (or load it from a file with the
