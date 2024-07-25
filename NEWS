@@ -22,6 +22,11 @@ o The `mso` request no longer attempts to open a macro file named, say,
   simply processes the macro search path for a file name matching the
   request argument, and succeeds or fails depending on an exact match.
 
+o GNU troff no longer accepts nonpositive page lengths.  Attempting to
+  set one with the `pl` request clamps the page length to the vertical
+  motion quantum as `ll` does with the horizontal motion quantum in AT&T
+  and GNU troffs.
+
 o The `color`, `cp`, `linetabs`, and `vpt` requests now interpret
   arguments with negative values as instructions to disable the
   corresponding feature, using the *roff integer-to-Boolean conversion

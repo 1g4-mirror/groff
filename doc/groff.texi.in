@@ -10096,12 +10096,12 @@ The formatter permits configuration of the page length and page number.
 @cindex configuring the page length (@code{pl})
 @cindex setting the page length (@code{pl})
 Change (increase or decrease) the page length per the numeric expression
-@var{length}.  The default scaling unit is @samp{v}.  A negative
-@var{length} is valid, but an uncommon application:@: it prevents page
-location traps from being sprung,@footnote{@xref{Traps}.} and each
-output line is placed on a new page.  If @var{length} is invalid, GNU
-@code{troff} emits a warning in category @samp{number}.  If @var{length}
-is absent or invalid, @samp{11i} is assumed.
+@var{length}.  The default scaling unit is @samp{v}.  If @var{length} is
+invalid, GNU @code{troff} emits a warning in category @samp{number}.  If
+@var{length} is absent or invalid, @samp{11i} is assumed.  If
+@var{length} is nonpositive, GNU @command{troff} emits a warning in
+category @samp{range} and sets the page length to the device's vertical
+motion quantum; recall @ref{Motion Quanta}.
 
 @cindex page length register (@code{.p})
 The read-only register @samp{.p} interpolates the current page length.
