@@ -1,5 +1,10 @@
 2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_expression_start): Fix
+	missing space in diagnostic message.
+
+2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (vunits::vunits, hunits::hunits):
 	Migrate to C23 checked arithmetic macros.  Throw error if
 	addition overflows.

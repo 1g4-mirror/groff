@@ -252,7 +252,7 @@ static bool is_valid_expression_start()
   }
   if (tok.is_right_brace()) {
     warning(WARN_RIGHT_BRACE, "expected numeric expression, got right"
-	    "brace escape sequence");
+	    " brace escape sequence");
     return false;
   }
   return true;
