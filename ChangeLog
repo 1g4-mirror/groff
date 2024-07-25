@@ -1,3 +1,11 @@
+2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (line_length, title_length): Drop use
+	of needless temporary variable `minimum_length`.  Use global
+	variable `hresolution` instead of static class member variable
+	`font::hor`.  Clarify wording of warning diagnostic message when
+	{title} line length invalid.
+
 2024-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/grog/grog.pl (interpret_line): Fix logic error; set
