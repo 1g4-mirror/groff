@@ -1,5 +1,14 @@
 2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (vunits::vunits, hunits::hunits):
+	Migrate to C23 checked arithmetic macros.  Throw error if
+	addition overflows.
+
+	Fixes <https://savannah.gnu.org/bugs/?64301>.  (For real this
+	time, fingers crossed.)
+
+2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/arithmetic-works.sh: Add more tests.
 
 2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>

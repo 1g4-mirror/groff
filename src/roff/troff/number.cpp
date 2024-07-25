@@ -661,9 +661,19 @@ vunits::vunits(units x)
   else {
     // Don't depend on rounding direction when dividing neg integers.
     int vcrement = (vresolution / 2) - 1;
-    n = (x < 0
-	 ? -((-x + vcrement) / vresolution)
-	 : (x + vcrement) / vresolution);
+    bool is_overflowing = false;
+    if (x < 0) {
+      if (ckd_add(&n, -x, vcrement))
+	is_overflowing = true;
+      n = -n;
+    }
+    else {
+      if (ckd_add(&n, x, vcrement))
+	is_overflowing = true;
+    }
+    n /= vresolution;
+    if (is_overflowing)
+      error("integer addition wrapped");
   }
 }
 
@@ -674,9 +684,19 @@ hunits::hunits(units x)
   else {
     // Don't depend on rounding direction when dividing neg integers.
     int hcrement = (hresolution / 2) - 1;
-    n = (x < 0
-	 ? -((-x + hcrement) / hresolution)
-	 : (x + hcrement) / hresolution);
+    bool is_overflowing = false;
+    if (x < 0) {
+      if (ckd_add(&n, -x, hcrement))
+	is_overflowing = true;
+      n = -n;
+    }
+    else {
+      if (ckd_add(&n, x, hcrement))
+	is_overflowing = true;
+    }
+    n /= hresolution;
+    if (is_overflowing)
+      error("integer addition wrapped");
   }
 }
 
