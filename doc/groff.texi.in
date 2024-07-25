@@ -9937,16 +9937,17 @@ with the environment (@pxref{Environments}).
 @DefreqItem {ll, @t{-}@Var{length}}
 @DefregItemx {.l}
 @DefregListEndx {.ll}
-Set the line length to @var{length}; if @var{length} is signed, adjust
-the line length by its value.  The default scaling unit is @samp{m}.  If
-not otherwise configured (see @pxref{Paper Format}), the default line
-length is 6.5@dmn{i}.
-
-If @var{length} is omitted, the line length is reset to that before the
-previous invocation of @code{ll}.  If @var{length} is negative, GNU
-@command{troff} emits a warning in category @samp{range} and sets the
-line length to the device's horizontal motion quantum; recall
-@ref{Motion Quanta}.
+Change (increase or decrease) the line length per the numeric expression
+@var{length}.  The default scaling unit is @samp{m}.  If not otherwise
+configured (see @pxref{Paper Format}), the default line length is
+6.5@dmn{i}.  If @var{length} is invalid, GNU @code{troff} emits a
+warning in category @samp{number} and ignores the request.  If
+@var{length} is nonpositive, GNU @command{troff} emits a warning in
+category @samp{range} and sets the line length to the device's
+horizontal motion quantum; recall @ref{Motion Quanta}.  The line length
+is associated with the environment (@pxref{Environments}).  If
+@var{length} is omitted, GNU @command{troff} restores the environment's
+previous line length.
 
 The effect of @code{ll} is delayed until a partially collected line (if
 it exists) is output.  In other words, it does not change a pending
@@ -9960,9 +9961,6 @@ line length that applies to the pending output line.
 Similarly to @code{.i} and @code{.in}, the difference between @code{.l}
 and @code{.ll} is that the latter takes into account whether a partially
 collected line still uses the previous length.
-
-The line length is associated with the environment
-(@pxref{Environments}).
 @endDefreq
 
 
@@ -10162,13 +10160,14 @@ sets a title line comprising only the left-aligned word @samp{Thesis}.
 @cindex title length, configuring (@code{lt})
 Change (increase or decrease) the line length used by titles per the
 numeric expression @var{length}.  The default scaling unit is @samp{m}.
-If @var{length} is negative, GNU emits a warning in category
-@samp{range} and treats @var{length} as @samp{0}.  If @var{length} is
+The formatter's default title length is @samp{6.5i}.  If @var{length} is
 invalid, GNU @code{troff} emits a warning in category @samp{number} and
-ignores the request.  The formatter's default title length is
-@samp{6.5i}.  With no argument, the title length is restored to the
-previous value.  The title length is is associated with the environment
-(@pxref{Environments}).
+ignores the request.  If @var{length} is nonpositive, GNU
+@command{troff} emits a warning in category @samp{range} and sets the
+title line length to the device's horizontal motion quantum; recall
+@ref{Motion Quanta}.  The title length is is associated with the
+environment (@pxref{Environments}).  If @var{length} is omitted, GNU
+@command{troff} restores the environment's previous title length.
 
 @cindex title line length register (@code{.lt})
 The read-only register @samp{.lt} interpolates the title line length.
