@@ -138,7 +138,7 @@ bool get_vunits(vunits *res, unsigned char si, vunits prev_value)
     *res = i;
     break;
   default:
-    assert(0 == "unhandled case returned by get_incr_number()");
+    assert(0 == "unhandled case in get_vunits()");
   }
   return true;
 }
@@ -166,7 +166,7 @@ bool get_hunits(hunits *res, unsigned char si, hunits prev_value)
     *res = i;
     break;
   default:
-    assert(0 == "unhandled case returned by get_incr_number()");
+    assert(0 == "unhandled case in get_hunits()");
   }
   return true;
 }
@@ -189,7 +189,7 @@ bool get_number(units *res, unsigned char si, units prev_value)
       error("integer subtraction wrapped");
     break;
   default:
-    assert(0 == "unhandled case returned by get_incr_number()");
+    assert(0 == "unhandled case in get_number()");
   }
   return true;
 }
@@ -212,7 +212,7 @@ bool get_integer(int *res, int prev_value)
       error("integer subtraction wrapped");
     break;
   default:
-    assert(0 == "unhandled case returned by get_incr_number()");
+    assert(0 == "unhandled case in get_integer()");
   }
   return true;
 }

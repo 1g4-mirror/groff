@@ -1,5 +1,11 @@
 2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (get_vunits, get_hunits, get_number)
+	(get_integer): Align assertion error messages with function
+	names.
+
+2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_expression_start): Fix
 	missing space in diagnostic message.
 
