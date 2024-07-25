@@ -39,25 +39,44 @@ wail () {
 input='.
 .ec @
 .nf
-.vs +2
-@&.v=@n(.v
+.vs +40u
+1: @&.v=@n(.v
 .ll -2
-@&.l=@n(.l
+2: @&.l=@n(.l
+.ll 2147483647u
+3: @&.l=@n(.l, .H=@n(.H
+.ll
+.pl 2147483647u
+4: @&.p=@n(.p, .V=@n(.V
+.pl
 .'
 
 # Expected:
 #
-# .v=40
-# .l=1512
+# 1: .v=80
+#
+# 2: .l=1512
+#
+# 3: .l=24, .H=24
+#
+# 4: .p=40, .V=40
+#
+# The blank lines are due to the `vs` increase.
 
 output=$(echo "$input" | "$groff" -T ascii)
 echo "$output"
 
 echo "checking that vertical spacing is correctly incremented" >&2
-echo "$output" | grep -Fqx '.l=1512' || wail
+echo "$output" | grep -Fqx '1: .v=80' || wail
 
 echo "checking that line length is correctly incremented" >&2
-echo "$output" | grep -Fqx '.l=1512' || wail
+echo "$output" | grep -Fqx '2: .l=1512' || wail
+
+echo "checking that setting huge line length does not overflow" >&2
+echo "$output" | grep -Fqx '3: .l=24, .H=24' || wail
+
+echo "checking that setting huge page length does not overflow" >&2
+echo "$output" | grep -Fqx '4: .p=40, .V=40' || wail
 
 # Exercise boundary values.
 

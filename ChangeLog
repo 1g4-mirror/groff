@@ -1,5 +1,9 @@
 2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/arithmetic-works.sh: Add more tests.
+
+2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (vunits::vunits, hunits::hunits):
 	Move common subexpression to a temporary variable to prepare for
 	reuse in C23 checked artihmetic macros.
