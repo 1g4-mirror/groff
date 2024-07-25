@@ -1,5 +1,11 @@
 2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (vunits::vunits, hunits::hunits):
+	Move common subexpression to a temporary variable to prepare for
+	reuse in C23 checked artihmetic macros.
+
+2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Enforce minimum page length.
 
 	* src/roff/troff/div.cpp (page_length): Clamp `pl` request

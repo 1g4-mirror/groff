@@ -656,24 +656,28 @@ units scale(units n, units x, units y)
 
 vunits::vunits(units x)
 {
-  // Don't depend on rounding direction when dividing negative integers.
   if (vresolution == 1)
     n = x;
-  else
+  else {
+    // Don't depend on rounding direction when dividing neg integers.
+    int vcrement = (vresolution / 2) - 1;
     n = (x < 0
-	 ? -((-x + (vresolution / 2) - 1) / vresolution)
-	 : (x + (vresolution / 2) - 1) / vresolution);
+	 ? -((-x + vcrement) / vresolution)
+	 : (x + vcrement) / vresolution);
+  }
 }
 
 hunits::hunits(units x)
 {
-  // Don't depend on rounding direction when dividing negative integers.
   if (hresolution == 1)
     n = x;
-  else
+  else {
+    // Don't depend on rounding direction when dividing neg integers.
+    int hcrement = (hresolution / 2) - 1;
     n = (x < 0
-	 ? -((-x + (hresolution / 2) - 1) / hresolution)
-	 : (x + (hresolution / 2) - 1) / hresolution);
+	 ? -((-x + hcrement) / hresolution)
+	 : (x + hcrement) / hresolution);
+  }
 }
 
 // Local Variables:
