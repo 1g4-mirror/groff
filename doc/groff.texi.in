@@ -7441,7 +7441,7 @@ Test
     @result{} Test
 @endExample
 
-To avoid this, it is common to combine the empty request with the
+To compensate, it is common to combine the empty request with the
 comment escape sequence as @samp{.\"}, causing the input line to be
 ignored.
 
@@ -7754,8 +7754,8 @@ To apply auto-incrementation to a register, interpolate it with
 Increment or decrement @var{ident} (one-character
 name@tie{}@var{i}, two-character name @var{id}) by the register's
 auto-incrementation value and then interpolate the new register value.
-If @var{ident} has no auto-incrementation value, interpolate as with
-@code{\n}.
+If @var{ident} has no auto-incrementation value, GNU @code{troff}
+interpolates its value without alteration.
 @endDefesc
 
 @need 1000
