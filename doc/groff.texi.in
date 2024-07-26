@@ -7396,8 +7396,7 @@ We see here that in compatibility mode, the part of the argument after
 the @code{'} delimiter escapes from its context and, if nefariously
 crafted, influences the computation of the @var{wd} register's value in
 a surprising way.
-@c END Keep (roughly) parallel with subsection " Delimiters" of
-@c groff(7).
+@c END Keep (roughly) parallel with subsection "Delimiters" of groff(7).
 
 @node Comments, Registers, Formatter Instructions, GNU troff Reference
 @section Comments
