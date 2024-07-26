@@ -1357,8 +1357,8 @@ or diversion name with either of the characters \[lq][\[rq] or
 you foreclose use of the
 .MR @g@refer @MAN1EXT@
 preprocessor,
-which recognizes \[lq].[\[rq] and \[lq].]\[rq] as bibliographic
-reference delimiters.
+which recognizes input lines starting with \[lq].[\[rq] and \[lq].]\[rq]
+as bibliographic reference delimiters.
 .
 .
 .P
