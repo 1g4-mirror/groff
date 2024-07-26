@@ -17058,8 +17058,8 @@ exit codes respectively, to halt further processing when continuing
 would be fruitless.  Examine the state of the formatter with requests
 that write lists of defined names (macros, strings, and diversions),
 colors, composite characters, environments, hyphenation exceptions,
-registers, page location traps, and a list of pending output nodes
-corresponding to the previous input line to the standard error stream.
+registers, page location traps, and a list of output nodes corresponding
+to the pending input line to the standard error stream.
 @c END Keep parallel with section "Debugging" of groff(7).
 
 @Defreq {lf, line [@Var{file}]}
