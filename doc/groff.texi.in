@@ -7429,8 +7429,8 @@ nor between arguments.
 
 @cindex undefined request
 @cindex request, undefined
-A comment on a line by itself is treated as a blank line, because after
-eliminating the comment, that is all that remains.
+A @code{\"} comment on a line by itself is treated as a blank line,
+because after eliminating the comment, that is all that remains.
 
 @Example
 Test
