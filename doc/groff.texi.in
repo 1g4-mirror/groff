@@ -7088,10 +7088,10 @@ package you use; consult its documentation to learn of ``safe''
 sequences or alternative facilities it provides to achieve the desired
 result.
 
-If an escape character is followed by a character that does not
-identify a defined operation, the escape character is ignored (producing
-a diagnostic of the @samp{escape} warning category, which is not enabled
-by default) and the following character is processed normally.
+If an escape character is followed by a character that does not identify
+a defined operation, GNU @code{troff} ignores the escape character
+(producing a warning in category @samp{escape} if enabled), processing
+the next character as if it were not preceded by an escape character.
 
 @Example
 $ groff -T ps -ww

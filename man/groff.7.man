@@ -1686,15 +1686,16 @@ In no case can an escape sequence parameter contain a newline.
 .
 .
 .P
-If an escape character is followed by a character that does not
-identify a defined operation,
-the escape character is ignored
-(producing
-a diagnostic of the
+If an escape character is followed by a character
+that does not identify a defined operation,
+GNU
+.I troff \" GNU
+ignores the escape character
+(producing a warning in category
 .RB \[lq] escape \[rq]
-warning category,
-which is not enabled by default)
-and the following character is processed normally.
+if enabled),
+processing the next character
+as if it were not preceded by an escape character.
 .
 .
 .P
