@@ -1,3 +1,14 @@
+2024-07-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (set_hyphenation_code): Restore
+	diagnostic message when attempting to assigning the hyphenation
+	code of a special character to another character (special or
+	ordinary).  Also initialize local variable much closer to where
+	we test its value, for readability.
+
+	Fixes <https://savannah.gnu.org/bugs/?66040>.  Thanks to Dave
+	Kemper for the report.
+
 2024-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/number.cpp (get_vunits, get_hunits, get_number)
