@@ -26,8 +26,8 @@
 	through the alimentary canal of GNU troff's arithmetic
 	evaluator, and bear little resemblance to what the user typed in
 	a source document.  Among other things, we no longer have any
-	idea what scaling units were supplied, but can report them only
-	in basic units.
+	idea what scaling units were supplied, but can report
+	measurements only in basic units.
 
 	Fixes <https://savannah.gnu.org/bugs/?66038>.  Thanks to Dave
 	Kemper for the report.
@@ -1042,6 +1042,8 @@
 
 	* tmac/troffrc: Simplify logic; map special character
 	`\[char160]` to `\~` unconditionally.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?65724>.
 
 2024-05-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
