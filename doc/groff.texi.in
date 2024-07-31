@@ -14801,7 +14801,7 @@ there.
 A macro package might set headers and footers as follows; this example
 configures vertical margins of one inch to the body text, and one
 half-inch to the titles.  Observe the use of the no-break control
-character with the @code{sp} and @code{br} requests to position our text
+character with the @code{sp} and @code{bp} requests to position our text
 baselines and prevent a partially collected line from being written
 outside the body text, and the page number character @samp{%} used with
 the @code{tl} request.
