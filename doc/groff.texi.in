@@ -14822,6 +14822,19 @@ the @code{tl} request.
 .wh -1i fo              \" trap 1 inch from bottom
 @endExample
 
+@strong{Caution:@:} A word about measurements is in order.  Recall that
+the @code{sp} request vertically spaces such that the next text baseline
+(of one vee in height by definition) sets with the amount of space given
+to @code{sp}'s argument @emph{above} it.  Thus in the example above,
+when the @samp{hd} trap springs at vertical position @samp{0},
+invoking @samp{sp .5i}, we get the desired half-inch of top margin.
+With the @samp{ft} trap, we space after the body text by one half-inch
+@emph{minus one vee} to leave a half-inch bottom margin.  The footer
+title, if anything taller than a baseline rule, thus ``encroaches'' into
+the half-inch margin between the body text and the bottom margin, just
+as the header title symmetrically intruded into the half-inch of space
+between its own cap-height and that of the top of the body text.
+
 To use these traps, copy the above (or load it from a file with the
 @code{so} or @code{mso} requests), then set up the strings it uses.
 
