@@ -1,5 +1,21 @@
 2024-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (page_length):
+	* src/roff/troff/env.cpp (line_length, title_length): Tweak
+	diagnostic to say "computed" rather than "invalid", because
+	while the value we're complaining about _is_ invalid, it is also
+	a numeric expression that may have traveled a great distance
+	through the alimentary canal of GNU troff's arithmetic
+	evaluator, and bear little resemblance to what the user typed in
+	a source document.  Among other things, we no longer have any
+	idea what scaling units were supplied, but can report them only
+	in basic units.
+
+	Fixes <https://savannah.gnu.org/bugs/?66038>.  Thanks to Dave
+	Kemper for the report.
+
+2024-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi.in (Manipulating Hyphenation): Fix incorrect
 	claim and expand discussion.  A special character _can_ be an
 	argument to the `hcode` request, and this has been true for over
