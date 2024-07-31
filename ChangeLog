@@ -1,3 +1,15 @@
+2024-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (Manipulating Hyphenation): Fix incorrect
+	claim and expand discussion.  A special character _can_ be an
+	argument to the `hcode` request, and this has been true for over
+	20 years (for example, in "tmac/ps.tmac").  Problem dates back
+	to commit bd66717ef7, 16 April 2001.
+
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests): Sync language with our
+	Texinfo manual, and clarify.
+
 2024-07-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (set_hyphenation_code): Restore

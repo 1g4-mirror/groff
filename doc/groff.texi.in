@@ -8964,25 +8964,32 @@ loaded at startup, or in a macro package), GNU @code{troff} won't
 automatically hyphenate at all.
 @endDefreq
 
-@Defreq {hcode, c1 code1 [c2 code2] @dots{}}
+For automatic hyphenation to work, the formatter must know which letters
+are equivalent; for example, the letter @samp{E} behaves like @samp{e};
+only the latter typically appears in hyphenation pattern files.  GNU
+@code{troff} expects characters that participate in automatic
+hyphenation to be assigned @dfn{hyphenation codes} that define these
+equivalence classes.  At startup, GNU @code{troff} assigns hyphenation
+codes to the letters @samp{a}--@samp{z}, applies the same codes to
+@samp{A}--@samp{Z} in one-to-one correspondence, and assigns a code of
+zero to all other characters.
+
+The @code{hcode} request extends this principle to letters outside the
+Unicode basic Latin alphabet; without it, words containing such letters
+won't be hyphenated properly even if the corresponding hyphenation
+patterns contain them.
+
+@Defreq {hcode, dst1 src1 [dst2 src2] @dots{}}
 @cindex hyphenation code (@code{hcode})
 @cindex code, hyphenation (@code{hcode})
-Set the hyphenation code of character @var{c1} to @var{code1}, that of
-@var{c2} to @var{code2}, and so on.  A hyphenation code must be an
-ordinary character (not a special character escape sequence) other than
-a digit or a space.  The request is ignored if given no arguments.
-
-For automatic hyphenation to work, hyphenation codes must be set up.  At
-startup, GNU @code{troff} assigns hyphenation codes to the letters
-@samp{a}--@samp{z} (mapped to themselves), to the letters
-@samp{A}--@samp{Z} (mapped to @samp{a}--@samp{z}), and zero to all other
-characters.  Normally, hyphenation patterns contain only lowercase
-letters which should be applied regardless of case.  In other words,
-they assume that the words `FOO' and `Foo' should be hyphenated exactly
-as `foo' is.  The @code{hcode} request extends this principle to letters
-outside the Unicode basic Latin alphabet; without it, words containing
-such letters won't be hyphenated properly even if the corresponding
-hyphenation patterns contain them.
+Set the hyphenation code of ordinary or special character @var{dst1} to
+that of @var{src1}, and so on.  @var{dst1} must be an ordinary character
+(other than a numeral) or a special character, and @var{src1} must be an
+ordinary character (other than a numeral) or a special character to
+which a hyphenation code has already been applied.  Assigning the code
+of an ordinary character code to itself effectively creates a unique
+hyphenation code (which can then be copied to others).  @code{hcode}
+ignores spaces between arguments.
 
 For example, the following @code{hcode} requests are necessary to assign
 hyphenation codes to the letters @samp{ÄäÖöÜüß}, needed for German.
@@ -9001,6 +9008,11 @@ umlaut@tie{}a is zero by default, just like a space.  There is a German
 hyphenation pattern that covers @w{`kinder'}, so GNU @code{troff} finds
 the hyphenation `kin-der'.  The other two hyphenation points
 (`kin-der-gär-ten') are missed.
+
+If for some reason you desire to remove a character's hyphenation code,
+use @code{hcode} to copy the code of a punctuation character to it; for
+example, @samp{.hcode ß $} assigns a hyphenation code of zero to
+@samp{ß} (unless @samp{$} has already been assigned a different one).
 @endDefreq
 
 @DefreqList {hla, [@Var{lang}]}

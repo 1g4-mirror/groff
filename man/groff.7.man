@@ -3369,15 +3369,11 @@ Change the hyphenation character
 .RI to\~ c .
 .
 .TPx
-.REQ .hcode "c1 code1 \fR[\fPc2 code2\fR] .\|.\|.\fP"
+.REQ .hcode "dst1 src1 \fR[\fPdst2 src2\fR] .\|.\|.\fP"
 Set the hyphenation code of character
-.I c1
-to
-.IR code1 ,
-that of
-.I c2
-to
-.IR code2 ,
+.I dst1
+to that of
+.IR src1 ,
 and so on.
 .
 .TPx
