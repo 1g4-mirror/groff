@@ -2619,7 +2619,9 @@ or a special character,
 and
 .I src1
 must be an ordinary character
-(other than a numeral).
+(other than a numeral)
+or a special character
+to which a hyphenation code has already been applied.
 .
 Assigning the code of an ordinary character to itself
 effectively creates a unique hyphenation code

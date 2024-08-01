@@ -7319,9 +7319,12 @@ static void set_hyphenation_codes()
 	break;
       }
       // source character is special
-      error("second member of hyphenation code pair must be an"
-	    " ordinary character");
-      break;
+      if (0 == cisrc->get_hyphenation_code()) {
+	error("second member of hyphenation code pair must be an"
+	      " ordinary character, or a special character already"
+	      " assigned a hyphenation code");
+	break;
+      }
       new_code = cisrc->get_hyphenation_code();
     }
     cidst->set_hyphenation_code(new_code);

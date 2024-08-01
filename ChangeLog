@@ -1,5 +1,18 @@
 2024-07-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (set_hyphenation_codes): Accept a
+	special character as a source for hyphenation code assignment.
+
+	* doc/groff.texi.in (Manipulating Hyphenation) <hcode>:
+	* man/groff_diff.7.man (New requests) <hcode>: Document loosened
+	restriction.
+
+	Fixes <https://savannah.gnu.org/bugs/?66054>.  Thanks to Carsten
+	Kunze for the report and Dave Kemper for a test case that
+	clarified matters.
+
+2024-07-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #66054.
 
 	* src/roff/groff/tests/hcode-request-copies-spec-char-code.sh:
