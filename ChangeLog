@@ -1,3 +1,11 @@
+2024-08-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (Manipulating Hyphenation) <hcode>:
+	* man/groff_diff.7.man (New requests) <hcode>: Remove claim that
+	ran out ahead of ongoing code changes.  A special character that
+	has already been assigned a hyphenation code is not _yet_ a
+	valid source for another character's hyphenation code.
+
 2024-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (HP): The `mS` extension register has changed its
