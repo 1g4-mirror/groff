@@ -8988,7 +8988,8 @@ that of @var{src1}, and so on.  @var{dst1} must be an ordinary character
 ordinary character (other than a numeral).  Assigning the code of an
 ordinary character code to itself effectively creates a unique
 hyphenation code (which can then be copied to others).  @code{hcode}
-ignores spaces between arguments.
+ignores spaces between arguments.  If any argument is invalid,
+@code{hcode} reports an error and stops reading them.
 
 For example, the following @code{hcode} requests are necessary to assign
 hyphenation codes to the letters @samp{ƒд÷ц№ья}, needed for German.

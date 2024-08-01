@@ -7284,37 +7284,50 @@ static void set_hyphenation_codes()
     return;
   }
   while (!tok.is_newline() && !tok.is_eof()) {
-    charinfo *ci = tok.get_char(true /* required */);
-    // If we got back some nonsense like a non-character escape
-    // sequence, get_char() will have diagnosed it.
-    if (0 /* nullptr */ == ci)
+    unsigned char cdst = tok.ch();
+    if (csdigit(cdst)) {
+      error("cannot apply a hyphenation code to a numeral");
       break;
+    }
+    charinfo *cidst = tok.get_char();
+    if (0 == cdst) { // destination character is special
+      if (0 /* nullptr */ == cidst) {
+	error("expected ordinary or special character, got %1",
+	      tok.description());
+	break;
+      }
+    }
     tok.next();
     tok.skip();
     if (tok.is_newline() || tok.is_eof()) {
       error("hyphenation codes must be specified in pairs");
       break;
     }
-    charinfo *ci2 = tok.get_char(true /* required */);
-    unsigned char c = tok.ch();
-    if (0 == c) {
-      if (0 /* nullptr */ == ci2)
-	break;
-      if (0 == ci2->get_hyphenation_code()) {
-	error("second member of hyphenation code pair must be an"
-	      " ordinary character");
-	break;
-      }
-    }
-    // TODO: What if you want to unset a hyphenation code?  Accept 0?
-    if (csdigit(c)) {
-      error("hyphenation code cannot be digit");
+    unsigned char csrc = tok.ch();
+    if (csdigit(csrc)) {
+      error("cannot use the hyphenation code of a numeral");
       break;
     }
-    ci->set_hyphenation_code(c);
-    if (ci->get_translation()
-	&& ci->get_translation()->get_translation_input())
-      ci->get_translation()->set_hyphenation_code(c);
+    unsigned char new_code = 0; // TODO: int
+    charinfo *cisrc = tok.get_char();
+    if (csrc != 0)
+      new_code = csrc;
+    else {
+      if (0 /* nullptr */ == cisrc) {
+	error("expected ordinary or special character, got %1",
+	      tok.description());
+	break;
+      }
+      // source character is special
+      error("second member of hyphenation code pair must be an"
+	    " ordinary character");
+      break;
+      new_code = cisrc->get_hyphenation_code();
+    }
+    cidst->set_hyphenation_code(new_code);
+    if (cidst->get_translation()
+	&& cidst->get_translation()->get_translation_input())
+      cidst->get_translation()->set_hyphenation_code(new_code);
     tok.next();
     tok.skip();
   }

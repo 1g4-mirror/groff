@@ -2628,6 +2628,10 @@ effectively creates a unique hyphenation code
 .B hcode
 ignores spaces between arguments.
 .
+If any argument is invalid,
+.B hcode
+reports an error and stops reading them.
+.
 .
 .IP
 For automatic hyphenation to work,

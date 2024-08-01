@@ -1,5 +1,25 @@
 2024-08-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (set_hyphenation_code): Do more input
+	validation of `hcode` request arguments.  Handle case where an
+	argument is an escape sequence (but not a special character)
+	ourselves instead of delegating it to `token::get_char()`.
+	Throw errors (and stop processing arguments) when {1} the
+	destination character is a numeral; {2} the destination
+	character is a (non-special-character) escape sequence; {3} the
+	source character is a numeral; or {4} the source character is a
+	{non-special-character} escape sequence.
+
+	* doc/groff.texi.in (Manipulating Hyphenation) <hcode>:
+	* man/groff_diff.7.man (New requests) <hcode>: Document that the
+	request aborts processing its arguments upon encountering an
+	invalid one.
+
+	Continues <https://savannah.gnu.org/bugs/?66040>.  Thanks to
+	Dave Kemper for further discussion.
+
+2024-08-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi.in (Manipulating Hyphenation) <hcode>:
 	* man/groff_diff.7.man (New requests) <hcode>: Remove claim that
 	ran out ahead of ongoing code changes.  A special character that
