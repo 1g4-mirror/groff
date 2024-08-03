@@ -406,6 +406,19 @@ o The PostScript output driver grops no longer accepts spaces as field
   that used by gropdf.  The download file for grops shipped by groff has
   long used tabs rather than spaces for field separation.
 
+o The PostScript output driver's macro file "ps.tmac" no longer defines
+  fallback special characters `\[S ,]` and `\[S ,]` to simulate support
+  for what Unicode calls LATIN {CAPITAL,SMALL} LETTER S WITH COMMA
+  BELOW.  The file's definition constructed these glyphs by overstriking
+  the Basic Latin "S" (or "s") with a cedilla accent, which is regarded
+  as less orthographically acceptable than in the past.  A user's
+  document or macro file can still do exactly what "ps.tmac" used to.
+
+   .fchar \[S ,] \o'S\[ac]'
+   .hcode \[S ,]s
+   .fchar \[s ,] \o's\[ac]'
+   .hcode \[s ,]s
+
 Miscellaneous
 -------------
 

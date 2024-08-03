@@ -1,5 +1,15 @@
 2024-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/ps.tmac: Drop `\[S ,]` and `\[s, ]` fallback character
+	definitions and hyphenation code assignments.
+
+	* NEWS: Document this.
+
+	Thanks to Werner Lemberg for noting the issue in <https://lists.
+	gnu.org/archive/html/groff/2024-08/msg00001.html>.
+
+2024-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	tmac/*: Refactor hyphenation code declarations.
 
 	Move `hcode` invocations from language-specific macro files
