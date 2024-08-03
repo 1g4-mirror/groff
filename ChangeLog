@@ -1,3 +1,38 @@
+2024-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	tmac/*: Refactor hyphenation code declarations.
+
+	Move `hcode` invocations from language-specific macro files
+	{those that define a "groff locale", such as "english" or
+	"german"} to the macro files that support 8-bit character
+	encodings, because in the formatter, hyphenation codes are
+	global, not environment-specific like other hyphenation data.
+	{That design decision is worth reconsidering in the future,
+	but feels less urgent than adding UTF-8 input support to the
+	formatter, which may obviate some encoding-related issues.}
+
+	* tmac/LOCALIZATION: Relieve groff locale contributor of
+	hyphenation code definition duty.
+	* tmac/de.tmac: Move Latin-1 hyphenation code definitions from
+	here...
+	* tmac/latin1.tmac: ...to here.  Reorganize and cover _every_
+	letter glyph in ISO 8859-1, including Icelandic letters that
+	German hyphenation patterns don't require.
+	* tmac/ru.tmac: Move KOI8-R hyphenation code definitions from
+	here...
+	* tmac/koi8-r.tmac: ...to here.
+	* tmac/latin2.tmac: Define Latin-2 hyphenation codes.
+	* tmac/latin5.tmac: Define Latin-5 hyphenation codes.  Include
+	the notorious special case for the Turkish capital dotted I, and
+	annotate it for migration in the event we ever get a "tr.tmac"
+	file, because this is a language-specific case mapping, not one
+	strictly implied by the character encoding.
+	* tmac/latin9.tmac: Define Latin-9 (ISO 8859-15) hyphenation
+	codes.
+
+	Thanks to Werner Lemberg for the discussion in <https://
+	lists.gnu.org/archive/html/groff/2024-08/msg00001.html>.
+
 2024-07-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (set_hyphenation_codes): Accept a
