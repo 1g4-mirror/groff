@@ -2621,7 +2621,7 @@ and
 must be an ordinary character
 (other than a numeral).
 .
-Assigning the code of an ordinary character code to itself
+Assigning the code of an ordinary character to itself
 effectively creates a unique hyphenation code
 (which can then be copied to others).
 .
