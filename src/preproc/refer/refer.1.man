@@ -585,9 +585,9 @@ command.
 Leading and trailing spaces are significant.
 .
 If either of these is non-empty,
-the corresponding arguments to the
+the corresponding argument to the
 .B \%bracket\-label
-command are not used;
+command is not used;
 alter this behavior with the
 .B [
 and
