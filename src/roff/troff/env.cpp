@@ -3888,7 +3888,7 @@ void hyphen_trie::do_delete(void *v)
 
    . '\endinput' is recognized also.
 
-   . For backwards compatibility, if '\patterns' is missing, the
+   . For backward compatibility, if '\patterns' is missing, the
      whole file is treated as a list of hyphenation patterns (only
      recognizing '%' as the start of a comment.
 

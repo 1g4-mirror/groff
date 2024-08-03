@@ -1478,7 +1478,7 @@ special characters
 .BR \e(\[aq]a )
 count as a single letter.
 .
-Accent strings are retained but do not count towards the total.
+Accent strings are retained but do not count toward the total.
 .
 .
 .TP

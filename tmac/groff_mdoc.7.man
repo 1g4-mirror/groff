@@ -4538,7 +4538,7 @@ flag works in combination with a tag list.
 is saved before
 .Aq Ar string
 is interpreted;
-afterwards,
+afterward,
 all variables are restored again.
 .
 However,

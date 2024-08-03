@@ -2708,7 +2708,7 @@ implies a limit of
 .
 This value is associated with the environment.
 .
-Only lines output from a given environment count towards the maximum
+Only lines output from a given environment count toward the maximum
 associated with that environment.
 .
 Hyphens resulting from
@@ -2799,7 +2799,7 @@ is recognized also.
 .
 .
 .IP \[bu]
-For backwards compatibility,
+For backward compatibility,
 if
 .B \[rs]patterns
 is missing,
@@ -3613,7 +3613,7 @@ is omitted,
 it is implicitly set to the largest valid value
 (the string length minus one).
 .
-Negative indices count backwards from the end of the string:
+Negative indices count backward from the end of the string:
 the last character has index\~\-1,
 the character before the last has index\~\-2,
 and so on.

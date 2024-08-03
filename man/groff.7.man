@@ -4385,7 +4385,7 @@ and
 .IR end ,
 inclusive.
 .
-Negative indices count backwards from the end of the string.
+Negative indices count backward from the end of the string.
 .
 .TPx
 .REQ .sv
