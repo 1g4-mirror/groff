@@ -4872,7 +4872,9 @@ the underrule special character.
 .
 .TP
 .ESC %
-Control hyphenation.
+Mark a hyphenation point within a word.
+At the beginning of a word,
+prevent it from being otherwise hyphenated.
 .
 .
 .TP
@@ -5213,12 +5215,11 @@ Mark horizontal position in register with arbitrarily long
 Draw horizontal line of length
 .I N
 with character
-.B c
+.I c
 (default:
 .BR \[rs][ru] ;
 default scaling unit\~\c
 .scaleindicator m ).
-.
 .
 .
 .TP
@@ -5226,7 +5227,7 @@ default scaling unit\~\c
 Draw vertical line of length
 .I N
 with character
-.B c
+.I c
 (default:
 .BR \[rs][br] ;
 default scaling unit\~\c
@@ -6914,8 +6915,8 @@ Thus the default family can be combined with a style dynamically,
 producing a
 .I "resolved font name."
 .
-A user-specified font name that combines family and style
-(or refers to a font that is not a member of a family)
+A user-specified font name that combines family and style,
+or refers to a font that is not a member of a family,
 is already \[lq]resolved\[rq].
 .
 .

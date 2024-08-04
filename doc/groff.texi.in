@@ -10417,8 +10417,8 @@ So that a document need not be strongly coupled to a specific font
 family, in GNU @code{troff} an output device can associate a style in
 the abstract sense with a mounting position.  Thus the default family
 can be combined with a style dynamically, producing a @dfn{resolved font
-name}.  A user-specified font name that combines family and style (or
-refers to a font that is not a member of a family) is already
+name}.  A user-specified font name that combines family and style, or
+refers to a font that is not a member of a family, is already
 ``resolved''.
 
 Fonts often have trademarked names, and even Free Software fonts can
@@ -10513,8 +10513,8 @@ is looked up; if not mounted, @var{font} is sought on the file system as
 a font description file and, if located, automatically mounted at the
 next available position (see register @code{.fp} below).  If the font
 was mounted using an identifier different from its font description file
-name (see request @code{fp} below), that file name is then looked up.
-If a font description file for the resolved font name is not found, GNU
+name (see request @code{fp} below), that file name is then sought.  If a
+font description file for the resolved font name is not found, GNU
 @code{troff} emits a warning in category @samp{font} and ignores the
 request.
 
@@ -11874,15 +11874,16 @@ without actually rendering a glyph to the output.
 @cindex dummy character (@code{\&})
 @cindex character, dummy (@code{\&})
 Interpolate a dummy character, which is constitutive of output but
-invisible.@footnote{Opinions of this escape sequence's name abound.
+invisible.@footnote{Opinions of this escape sequence's best name abound.
 ``Zero-width space'' is a popular misnomer:@: @code{roff} formatters do
-not treat it like a space.  Ossanna called it a ``non-printing,
-zero-width character'', but the character causes @emph{output} even
-though it does not ``print''.  If no output line is pending, the dummy
-character starts one.  Contrast an empty input document with one
-containing only @code{\&}.  The former produces no output; the latter, a
-blank page.}  Its presence alters the interpretation context of a
-subsequent input character, and enjoys several applications.
+not treat it like a space; when filling, they do not break a line where
+@code{\&} appears.  Ossanna called it a ``non-printing, zero-width
+character'', but the character causes @emph{output} even though it does
+not ``print''.  If no output line is pending, the dummy character starts
+one.  Contrast an empty input document with one containing only
+@code{\&}.  The former produces no output; the latter, a blank page.}
+Its presence alters the interpretation context of a subsequent input
+character, and enjoys several applications.
 
 @itemize @bullet
 @item
@@ -12089,23 +12090,25 @@ The @code{\s} escape sequence supports a variety of syntax forms.
 
 @table @code
 @item \s@var{n}
-Set the type size to @var{n}@tie{}points.  @var{n}@tie{}must be a single
-digit.  If @var{n}@tie{}is 0, restore the previous size.
+Set the type size to @var{n}@tie{}scaled points.  @var{n}@tie{}must be a
+single digit.@footnote{In compatibility mode only, a non-zero @var{n}
+must be in the range 4--39.  @xref{Compatibility Mode}.}  If
+@var{n}@tie{}is 0, restore the previous size.
 
 @item \s+@var{n}
 @itemx \s-@var{n}
-Increase or decrease the type size by @var{n}@tie{}points.
+Increase or decrease the type size by @var{n}@tie{}scaled points.
 @var{n}@tie{}must be exactly one digit.
 
 @item \s(@var{nn}
-Set the type size to @var{nn}@tie{}points.  @var{nn} must be exactly two
-digits.
+Set the type size to @var{nn}@tie{}scaled points.  @var{nn} must be
+exactly two digits.
 
 @item \s+(@var{nn}
 @itemx \s-(@var{nn}
 @itemx \s(+@var{nn}
 @itemx \s(-@var{nn}
-Alter the type size in points by the two-digit value @var{nn}.
+Alter the type size in scaled points by the two-digit value @var{nn}.
 @end table
 
 @xref{Using Fractional Type Sizes}, for further syntactical forms of the
@@ -12366,8 +12369,7 @@ of a closed geometric figure.
 @DefregListEndx {.color}
 Enable or disable output of color-related device-independent output
 commands per Boolean expression @var{b}.  It is enabled by default, and
-if @var{b} is omitted.  This request modifies the formatter's internal
-state; it does not produce a token (@pxref{Gtroff Internals}).
+if @var{b} is omitted.
 
 The read-only register @code{.color} interpolates@tie{}1 if color
 support is enabled, 0@tie{}otherwise.
@@ -12763,7 +12765,7 @@ the expected way due to the regular naming convention for accented
 characters.  When they do not, use substrings and/or catenation.
 
 @Example
-.ds resume R\['e]sum\['e]
+.ds resume R\['e]sum\['e]\"
 \*[resume]
 .stringdown resume
 \*[resume]
@@ -12772,10 +12774,6 @@ characters.  When they do not, use substrings and/or catenation.
     @result{} Résumé résumé RÉSUMÉ
 @endExample
 @endDefreq
-
-(In practice, we would end the @code{ds} request with a comment escape
-@code{\"} to prevent space from creeping into the definition during
-source document maintenance.)
 
 @Defreq {rn, old new}
 @cindex renaming request (@code{rn})
@@ -13408,7 +13406,7 @@ definition ends with the control line @samp{..} (two dots).
 Alternatively, @var{end} identifies a macro whose call syntax at the
 start of a control line ends the definition of @var{name}; @var{end} is
 then called normally.  A macro definition must end in the same
-conditional block (if any) in which it began (@pxref{Conditional
+conditional block (if any) in which it began (recall @pxref{Conditional
 Blocks}).  Spaces or tabs are permitted after the control character in
 the line containing this ending token (either @samp{.} or
 @samp{@var{end}}), but a tab immediately after the token prevents its
@@ -14315,30 +14313,26 @@ complex drawings, these operations can be cumbersome; the preprocessors
 @code{gpic} or @code{ggrn} are typically used instead.
 
 The @code{\l} and @code{\L} escape sequences draw horizontal and
-vertical sequences of glyphs, respectively.  Even the simplest of
-output devices supports them.
+vertical sequences of glyphs, respectively.  Even the simplest of output
+devices supports them.  They require an argument specifying the length
+of the rule (line) to be drawn, optionally followed by a single ordinary
+or special character with which to draw the rule if the default is not
+desired.
+@cindex dummy character (@code{\&}), effect on @code{\l} escape sequence
+@cindex character, dummy (@code{\&}), effect on @code{\l} escape sequence
+If the character is valid in a numerical expression, put @code{\&} after
+@var{l} to disambiguate the input.
 
 @DefescList {\\l, @code{'}, l, @code{'}}
 @DefescListEnd {\\l, @code{'}, lc, @code{'}}
 @cindex drawing horizontal lines (@code{\l})
 @cindex horizontal line, drawing (@code{\l})
 @cindex line, horizontal, drawing (@code{\l})
+@cindex baseline rule special character(@code{\[ru]})
 Draw a horizontal line of length @var{l} from the drawing position.
 Rightward motion is positive.  Afterward, the drawing position is at the
-right end of the line.  The default scaling unit is @samp{m}.
-
-@cindex baseline rule special character(@code{\[ru]})
-@cindex glyph, underscore (@code{\[ru]})
-@cindex line drawing glyph
-@cindex glyph, for line drawing
-The optional second parameter@tie{}@var{c} is a character with which to
-draw the line.  The default is the baseline rule special character,
-@code{\[ru]}.
-
-@cindex dummy character (@code{\&}), effect on @code{\l} escape sequence
-@cindex character, dummy (@code{\&}), effect on @code{\l} escape sequence
-If @var{c} is a numerical expression operator or valid scaling unit, put
-@code{\&} after @var{l} to disambiguate the input.
+right end of the line.  The default scaling unit is @samp{m}.  The
+default glyph is the baseline rule special character, @code{\[ru]}.
 
 @Example
 \l'4i\&-'
@@ -14369,15 +14363,11 @@ above.
 @cindex drawing vertical lines (@code{\L})
 @cindex vertical line drawing (@code{\L})
 @cindex line, vertical, drawing (@code{\L})
-@cindex line drawing glyph
-@cindex glyph for line drawing
-@cindex box rule glyph (@code{\[br]})
-@cindex glyph, box rule (@code{\[br]})
+@cindex box rule rule special character(@code{\[br]})
 Draw a vertical line of length @var{l} from the drawing position.
 Downward motion is positive.  The default scaling unit is @samp{v}.  The
-default character is the box rule, @code{\[br]}.  As with vertical
-motion escape sequences, text processing continues where the line ends.
-@code{\L} is otherwise similar to @code{\l}.
+default glyph is the box rule, @code{\[br]}.  As with vertical motion
+escape sequences, text processing continues where the line ends.
 
 @Example
 $ nroff <<EOF
