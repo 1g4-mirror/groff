@@ -336,9 +336,8 @@ Input to GNU
 .I troff \" GNU
 is organized into lines separated by the Unix newline character
 (U+000A),
-and must be in one of two character encodings it can recognize:
-IBM code page 1047 on EBCDIC systems,
-and ISO\~Latin-1 (8859-1) otherwise.
+and must be in the character encoding it recognizes:
+ISO\~Latin-1 (8859-1).
 .
 Use of ISO\~646-1991:IRV (\[lq]US-ASCII\[rq]) or (equivalently) the
 \[lq]Basic Latin\[rq]
@@ -1309,26 +1308,12 @@ is processed as \[lq]foobar\[rq].
 .
 .
 .P
-On a machine using the ISO 646,
-8859,
-or 10646 character encodings,
-invalid input characters are
+Invalid input characters are
 .BR 0x00 ,
 .BR 0x0B ,
 .BR 0x0D \[en] 0x1F ,
 and
 .BR 0x80 \[en] 0x9F .
-.
-On an EBCDIC host,
-they are
-.BR 0x00 \[en] 0x01 ,
-.BR 0x08 ,
-.BR 0x09 ,
-.BR 0x0B ,
-.BR 0x0D \[en] 0x14 ,
-.BR 0x17 \[en] 0x1F ,
-and
-.BR 0x30 \[en] 0x3F .
 .
 Some of these code points are used by
 .I @g@troff

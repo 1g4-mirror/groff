@@ -191,9 +191,10 @@ compatibility mode and
 .B \-T
 to select a non-default output device.
 .
-If the input is not encoded in US-ASCII,
+If the input is not encoded in
+US-ASCII
+or
 ISO 8859-1,
-or IBM code page 1047,
 specification of a
 .I groff
 option to run the

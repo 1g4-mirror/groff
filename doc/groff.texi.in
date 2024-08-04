@@ -1274,18 +1274,6 @@ For typewriter-like devices that support the @w{Latin-1}
 For typewriter-like devices that use the Unicode (ISO@tie{}10646)
 character set with @w{UTF-8} encoding.
 
-@item cp1047
-@cindex encoding, output, @acronym{EBCDIC}
-@cindex @acronym{EBCDIC} output encoding
-@cindex output encoding, @acronym{EBCDIC}
-@cindex encoding, output, code page 1047
-@cindex code page 1047 output encoding
-@cindex output encoding, code page 1047
-@cindex IBM code page 1047 output encoding
-@cindex CCSID 1047 output encoding (EBCDIC)
-For typewriter-like devices that use the @acronym{EBCDIC} encoding IBM
-code page 1047.
-
 @item lj4
 For HP LaserJet4-compatible (or other PCL5-compatible) printers.
 
@@ -5636,19 +5624,6 @@ conversions.  Input to the GNU @code{troff} formatter itself, on the
 other hand, must be in one of two encodings it can recognize.
 
 @table @code
-@item cp1047
-@cindex encoding, input, @acronym{EBCDIC}
-@cindex @acronym{EBCDIC}, input encoding
-@cindex input encoding, @acronym{EBCDIC}
-@cindex encoding, input, code page 1047
-@cindex code page 1047, input encoding
-@cindex input encoding, code page 1047
-@cindex IBM code page 1047 input encoding
-@pindex cp1047.tmac
-The code page 1047 input encoding works only on @acronym{EBCDIC}
-platforms (and conversely, the other input encodings don't work on
-@acronym{EBCDIC} platforms).
-
 @item latin1
 @cindex encoding, input, @w{Latin-1} (ISO @w{8859-1})
 @cindex @w{Latin-1} (ISO @w{8859-1}), input encoding
@@ -6574,13 +6549,9 @@ warning in category @samp{input} (@pxref{Warnings}).  They are removed
 during interpretation: an identifier @samp{foo}, followed by an invalid
 character and then @samp{bar}, is processed as @samp{foobar}.
 
-On a machine using the ISO 646, 8859, or 10646 character encodings,
-invalid input characters are @code{0x00}, @code{0x0B},
-@code{0x0D}--@code{0x1F}, and @code{0x80}--@code{0x9F}.  On an
-@acronym{EBCDIC} host, they are @code{0x00}--@code{0x01}, @code{0x08},
-@code{0x09}, @code{0x0B}, @code{0x0D}--@code{0x14},
-@code{0x17}--@code{0x1F}, and
-@code{0x30}--@code{0x3F}.@footnote{Historically, control characters like
+Invalid input characters are @code{0x00}, @code{0x0B},
+@code{0x0D}--@code{0x1F}, and
+@code{0x80}--@code{0x9F}.@footnote{Historically, control characters like
 ASCII STX, ETX, and BEL (@key{Control+B}, @key{Control+C}, and
 @key{Control+G}) have been observed in @code{roff} documents,
 particularly in macro packages employing them as delimiters with the
@@ -9281,9 +9252,8 @@ this spacing for the first paragraph in a section.
 @cindex fields, and tabs
 
 @cindex tab character encoding
-A tab character (@acronym{ISO} code point@tie{}9, @acronym{EBCDIC}
-code point@tie{}5) causes a horizontal movement to the next tab stop, if
-any.
+A tab character (code point@tie{}9) causes a horizontal movement to the
+next tab stop, if any.
 
 @Defesc {\\t, , , }
 @cindex tab character, non-interpreted (@code{\t})
@@ -9492,11 +9462,10 @@ refers to how the glyphs ``lead'' the eye across the page to the
 corresponding page number or other datum.}
 
 @cindex leader character
-A leader character (@acronym{ISO} and @acronym{EBCDIC} code
-point@tie{}1, also known as @acronym{SOH} or ``start of heading''),
-behaves similarly to a tab character:@: it moves to the next tab stop.
-The difference is that for this movement, the default fill character is
-a period @samp{.}.
+A leader character (@w{code point 1}, also known as @acronym{SOH} or
+``start of heading''), behaves similarly to a tab character:@: it moves
+to the next tab stop.  The difference is that for this movement, the
+default fill character is a period @samp{.}.
 
 @Defesc {\\a, , , }
 @cindex leader character, non-interpreted (@code{\a})

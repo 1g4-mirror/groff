@@ -124,13 +124,14 @@ It can even be empty.
 .
 .
 .P
-Encode macro files in ISO 646 (\[lq]ASCII\[rq]) or either of
-CCSID
-(\[lq]code page\[rq])
-1047
-(on EBCDIC systems)
-or
-ISO Latin-1 (8859-1) (otherwise).
+Encode macro files in ISO 646 (\[lq]ASCII\[rq])
+or ISO Latin-1 (8859-1).
+.
+To prepare for a future
+.I groff
+release supporting UTF-8 input,
+restrict files to ISO 646 codes.
+.
 .
 .MR @g@soelim 1
 by design does not interpret
@@ -468,11 +469,6 @@ Latin-9 encodings
 .
 .
 .TP
-.I cp1047
-supports EBCDIC-based systems using CCSID\~1047.
-.
-.
-.TP
 .I koi8\-r
 supports the KOI8-R encoding.
 .
@@ -487,20 +483,6 @@ but box-drawing symbols and characters that are better obtained via
 special character escape sequences;
 see
 .MR groff_char @MAN7EXT@ .
-.
-.
-.P
-Because different input character codes constitute valid GNU
-.I troff \" GNU
-input on ISO and EBCDIC systems,
-the
-.I latin
-and
-.I koi8\-r
-macro files cannot be used on EBCDIC systems,
-and
-.I cp1047
-cannot be used on ISO systems.
 .
 .
 .\" ====================================================================

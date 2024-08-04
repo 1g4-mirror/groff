@@ -408,10 +408,8 @@ is ignored during comparison with the above tags.
 While
 .I \%preconv
 recognizes all of the coding tags listed above,
-it is capable on its own of interpreting only three encodings:
-Latin-1,
-code page 1047,
-and UTF-8.
+it is capable on its own of interpreting only two encodings:
+Latin-1 and and UTF-8.
 .
 If
 .I iconv
