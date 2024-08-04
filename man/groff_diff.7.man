@@ -1086,11 +1086,9 @@ are converted to single space characters;
 and a self-escaped escape character is output as a backslash
 .BR \[rs] .
 .
-So that the basic Latin subset of the Unicode character set
-(that is,
-ISO\~646:1991-IRV or,
-popularly,
-\[lq]US-ASCII\[rq])
+So that the basic Latin subset of the Unicode character set\[em]\c
+that is,
+ISO\~646:1991\~IRV (US-ASCII)\[em]\c
 can be reliably encoded in
 .I contents,
 the special character escape sequences
@@ -1606,7 +1604,7 @@ and
 .I Unformat
 the diversion
 .I div
-in a way such that Unicode basic Latin (ASCII) characters,
+in a way such that Unicode basic Latin (US-ASCII) characters,
 characters translated with the
 .B trin
 request,
@@ -4801,7 +4799,7 @@ works fine.
 .
 Use visible characters as delimiters in GNU
 .IR troff , \" GNU
-not \[lq]ASCII\[rq] controls like BEL (Control+G).
+not US-ASCII controls like BEL (Control+G).
 .
 The implementation of
 .B \[rs]$@

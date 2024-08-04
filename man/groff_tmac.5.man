@@ -124,8 +124,9 @@ It can even be empty.
 .
 .
 .P
-Encode macro files in ISO 646 (\[lq]ASCII\[rq])
-or ISO Latin-1 (8859-1).
+Encode macro files in
+ISO\~646:1991\~IRV (US-ASCII)
+or ISO\~Latin-1 (8859-1).
 .
 To prepare for a future
 .I groff
@@ -461,11 +462,17 @@ corresponding macro file.
 .I latin5
 .TQ
 .I latin9
-support the ISO\~8859 Latin-1,
+support the ISO\~Latin-1,
 Latin-2,
 Latin-5,
 and
 Latin-9 encodings
+(8859-1,
+8859-2,
+8859-9,
+and
+8859-15,
+respectively).
 .
 .
 .TP

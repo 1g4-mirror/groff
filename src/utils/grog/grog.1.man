@@ -192,14 +192,13 @@ compatibility mode and
 to select a non-default output device.
 .
 If the input is not encoded in
-US-ASCII
+ISO\~646:1991\~IRV (US-ASCII)
 or
-ISO 8859-1,
-specification of a
+ISO\~Latin-1 (8859-1),
+we advise specifying a
 .I groff
 option to run the
-.MR preconv @MAN1EXT@
-preprocessor is advised;
+.MR preconv @MAN1EXT@;
 see the
 .BR \-D ,
 .BR \-k ,

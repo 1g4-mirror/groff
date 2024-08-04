@@ -1400,8 +1400,8 @@ respectively.
 .
 .TP
 .B latin1
-for terminals using the ISO Latin-1
-(ISO 8859-1)
+for terminals using the ISO\~Latin-1
+(8859-1)
 character set and encoding.
 .
 .

@@ -1786,7 +1786,7 @@ It is automatically loaded by
 .TP
 .I @MACRODIR@/psold.tmac
 provides replacement glyphs for text fonts that lack complete coverage
-of the ISO Latin-1 character set;
+of the ISO\~Latin-1 character set;
 using it,
 .I groff
 can produce glyphs like eth (\[Sd]) and thorn (\[Tp]) that older

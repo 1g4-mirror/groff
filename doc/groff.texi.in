@@ -1256,22 +1256,22 @@ document.
 @cindex ISO@tie{}646 output encoding
 @cindex output encoding, @acronym{ASCII}
 @cindex output encoding, ISO@tie{}646
-For typewriter-like devices using the (7-bit) @acronym{ASCII}
-(ISO@tie{}646) character set.
+For typewriter-like devices using the (7-bit) @w{ISO 646:1991 IRV}
+(US-@acronym{ASCII}) character set.
 
 @item latin1
-@cindex encoding, output, @w{Latin-1} (ISO @w{8859-1})
-@cindex @w{Latin-1} (ISO @w{8859-1}) output encoding
-@cindex ISO @w{8859-1} (@w{Latin-1}) output encoding
-@cindex output encoding, @w{Latin-1} (ISO @w{8859-1})
-For typewriter-like devices that support the @w{Latin-1}
-(ISO@tie{}@w{8859-1}) character set.
+@cindex encoding, output, @w{ISO Latin-1} (@w{8859-1})
+@cindex @w{Latin-1} (@w{ISO 8859-1}) output encoding
+@cindex @w{ISO Latin-1} (@w{8859-1}) output encoding
+@cindex output encoding, @w{ISO Latin-1} (@w{8859-1})
+For typewriter-like devices that support the @w{ISO Latin-1} (8859-1)
+character set.
 
 @item utf8
 @cindex encoding, output, @w{UTF-8}
 @cindex @w{UTF-8} output encoding
 @cindex output encoding, @w{UTF-8}
-For typewriter-like devices that use the Unicode (ISO@tie{}10646)
+For typewriter-like devices that use the @w{ISO 10646} (Unicode)
 character set with @w{UTF-8} encoding.
 
 @item lj4
@@ -5625,20 +5625,20 @@ other hand, must be in one of two encodings it can recognize.
 
 @table @code
 @item latin1
-@cindex encoding, input, @w{Latin-1} (ISO @w{8859-1})
-@cindex @w{Latin-1} (ISO @w{8859-1}), input encoding
-@cindex ISO @w{8859-1} (@w{Latin-1}), input encoding
-@cindex input encoding, @w{Latin-1} (ISO @w{8859-1})
+@cindex encoding, input, @w{ISO Latin-1} (@w{8859-1})
+@cindex @w{Latin-1} (@w{ISO 8859-1}) input encoding
+@cindex @w{ISO Latin-1} (@w{8859-1}) input encoding
+@cindex input encoding, @w{ISO Latin-1} (@w{8859-1})
 @pindex latin1.tmac
 ISO @w{Latin-1} is an encoding for Western European languages.
 @end table
 
 @noindent
-Any document that is encoded in ISO 646:1991 (a descendant of USAS
-@w{X3.4-1968} or ``US-ASCII''), or, equivalently, uses only code points
-from the ``C0 Controls'' and ``Basic Latin'' parts of the Unicode
-character set is also a valid ISO @w{Latin-1} document; the standards
-are interchangeable in their first 128 code points.@footnote{The
+Any document that is encoded in @w{ISO 646:1991 IRV}
+(US-@acronym{ASCII}), or, equivalently, uses only code points from the
+``C0 Controls'' and ``Basic Latin'' parts of the Unicode character set
+is also a valid ISO @w{Latin-1} document; the standards are
+interchangeable in their first 128 code points.@footnote{The
 @emph{semantics} of certain punctuation code points have gotten stricter
 with the successive standards, a cause of some frustration among man
 page writers; see @cite{groff_char@r{(7)}}.}
@@ -5662,10 +5662,10 @@ obtained via special character escape sequences; see
 @cite{groff_char@r{(7)}}.}
 
 @item latin2
-@cindex encoding, input, @w{Latin-2} (ISO @w{8859-2})
-@cindex @w{Latin-2} (ISO @w{8859-2}), input encoding
-@cindex ISO @w{8859-2} (@w{Latin-2}), input encoding
-@cindex input encoding, @w{Latin-2} (ISO @w{8859-2})
+@cindex encoding, input, @w{ISO Latin-2} (@w{8859-2})
+@cindex @w{Latin-2} (@w{ISO 8859-2}) input encoding
+@cindex @w{ISO Latin-2} (@w{8859-2}) input encoding
+@cindex input encoding, @w{ISO Latin-2} (@w{8859-2})
 @pindex latin2.tmac
 To use ISO @w{Latin-2}, an encoding for Central and Eastern European
 languages, invoke @w{@samp{.mso latin2.tmac}} at the beginning of your
@@ -5673,20 +5673,20 @@ document or supply @samp{-m latin2} as a command-line argument to
 @code{groff}.
 
 @item latin5
-@cindex encoding, input, @w{Latin-5} (ISO @w{8859-9})
-@cindex @w{Latin-5} (ISO @w{8859-9}), input encoding
-@cindex ISO @w{8859-9} (@w{Latin-5}), input encoding
-@cindex input encoding, @w{Latin-5} (ISO @w{8859-9})
+@cindex encoding, input, @w{ISO Latin-5} (@w{8859-9})
+@cindex @w{Latin-5} (@w{ISO 8859-9}) input encoding
+@cindex @w{ISO Latin-5} (@w{8859-9}) input encoding
+@cindex input encoding, @w{ISO Latin-5} (@w{8859-9})
 @pindex latin5.tmac
 To use ISO @w{Latin-5}, an encoding for the Turkish language, invoke
 @w{@samp{.mso latin5.tmac}} at the beginning of your document or
 supply @samp{-m latin5} as a command-line argument to @code{groff}.
 
 @item latin9
-@cindex encoding, input, @w{Latin-9} (ISO @w{8859-15})
-@cindex @w{Latin-9} (ISO @w{8859-15}), input encoding
-@cindex ISO @w{8859-15} (@w{Latin-9}), input encoding
-@cindex input encoding, @w{Latin-9} (ISO @w{8859-15})
+@cindex encoding, input, @w{ISO Latin-9} (@w{8859-15})
+@cindex @w{Latin-9} (@w{ISO 8859-15}) input encoding
+@cindex @w{ISO Latin-9} (@w{8859-15}) input encoding
+@cindex input encoding, @w{ISO Latin-9} (@w{8859-15})
 @pindex latin9.tmac
 ISO @w{Latin-9} succeeds @w{Latin-1}; it includes a Euro sign and better
 coverage for French.  To use this encoding, invoke @w{@samp{.mso
@@ -8771,7 +8771,7 @@ The automatic placement of hyphens in words is determined by
 @dfn{pattern files}, which are derived from @TeX{} and available for
 several languages.  These files are named @file{hyphen.@var{xx}} (for
 the patterns) and @file{hyphenex.@var{xx}} (for a list of exceptions in
-languages that require them) where @var{xx} is an ISO@tie{}639 language
+languages that require them) where @var{xx} is an @w{ISO 639} language
 code; see the table below.
 @c XXX: "den" and "det" aren't ISO 639 codes.  Is there a POSIX locale
 @c modifier for these variations, like de@alt and de@recht or similar?
@@ -10444,7 +10444,7 @@ document writes its first glyph.
 @cindex cell, character, attributes
 Terminals cannot change font families and lack special fonts.  They
 support style changes by overstriking, or by altering
-ISO@tie{}6429/ECMA-48 @dfn{graphic renditions} (character cell
+@w{ISO 6429}/ECMA-48 @dfn{graphic renditions} (character cell
 attributes).
 @c END Keep (roughly) parallel with section "Using fonts" of groff(7).
 
@@ -12416,7 +12416,7 @@ necessarily the same.  For the @code{dvi}, @code{html}, @code{pdf},
 @code{ps}, and @code{xhtml} output devices, GNU @code{troff}
 automatically loads a macro file defining many color names at startup.
 By the same mechanism, the devices supported by @code{grotty} recognize
-the eight standard ISO@tie{}6429/EMCA-48 color names.@footnote{These
+the eight standard @w{ISO 6429}/ECMA-48 color names.@footnote{These
 are known vulgarly as ``ANSI'' colors, after its X3.64 standard, now
 withdrawn.}
 
@@ -16608,14 +16608,14 @@ By contrast, within @code{\X} arguments, the escape sequences @code{\&},
 @code{\)}, @code{\%}, and @code{\:} are ignored; @code{\@key{SPC}} and
 @code{\~} are converted to single space characters; and a self-escaped
 escape character is output as a backslash @code{\}.  So that the basic
-Latin subset of the Unicode character set@footnote{that is,
-ISO@tie{}646:1991-IRV or, popularly, ``US-ASCII''} can be reliably
-encoded in device control commands, seven special character escape
-sequences (@samp{\-}, @samp{\[aq]}, @samp{\[dq]}, @samp{\[ga]},
-@samp{\[ha]}, @samp{\[rs]}, and @samp{\[ti]}) are mapped to basic Latin
-characters; see the @cite{groff_char@r{(7)}} man page.  For this
-transformation, character translations and special character definitions
-are ignored.@footnote{They are bypassed because these parameters are not
+Latin subset of the Unicode character set@footnote{that is, @w{ISO
+646:1991 IRV} (US-@acronym{ASCII})} can be reliably encoded in device
+control commands, seven special character escape sequences (@samp{\-},
+@samp{\[aq]}, @samp{\[dq]}, @samp{\[ga]}, @samp{\[ha]}, @samp{\[rs]},
+and @samp{\[ti]}) are mapped to basic Latin characters; see the
+@cite{groff_char@r{(7)}} man page.  For this transformation, character
+translations and special character definitions are
+ignored.@footnote{They are bypassed because these parameters are not
 rendered as glyphs in the output; instead, they remain abstract
 characters---in a PDF bookmark or a URL, for example.}  The use of any
 other escape sequence in @code{\X} parameters is normally an error.
@@ -17910,8 +17910,8 @@ The other correct way, appropriate in contexts independent of the
 backslash's common use as a @code{troff} escape character---perhaps in
 discussion of character sets or other programming languages---is
 the character escape @code{\(rs} or @code{\[rs]}, for ``reverse
-solidus'', from its name in the @acronym{ECMA-6} (@acronym{ISO/IEC} 646)
-standard.@footnote{The @code{rs} special character identifier was not
+solidus'', from its name in the @acronym{ECMA}-6 and @w{ISO 10646}
+standards.@footnote{The @code{rs} special character identifier was not
 defined in @acronym{AT&T} @code{troff}'s font description files, but is
 in those of its lineal descendant, Heirloom Doctools @code{troff}, as of
 the latter's 060716 release (July 2006).}

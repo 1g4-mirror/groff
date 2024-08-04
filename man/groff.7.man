@@ -339,9 +339,9 @@ is organized into lines separated by the Unix newline character
 and must be in the character encoding it recognizes:
 ISO\~Latin-1 (8859-1).
 .
-Use of ISO\~646-1991:IRV (\[lq]US-ASCII\[rq]) or (equivalently) the
-\[lq]Basic Latin\[rq]
-subset of ISO\~10646 (\[lq]Unicode\[rq]) is recommended;
+We recommend use of ISO\~646:1991\~IRV (US-ASCII)
+or (equivalently) the Basic Latin subset
+of ISO\~10646 (Unicode);
 see
 .MR groff_char @MAN7EXT@ .
 .
@@ -8033,11 +8033,8 @@ are converted to single space characters;
 and a self-escaped escape character is output as a backslash
 .BR \[rs] .
 .
-So that the basic Latin subset of the Unicode character set
-(that is,
-ISO\~646:1991-IRV or,
-popularly,
-\[lq]US-ASCII\[rq])
+So that the basic Latin subset of the Unicode character set,
+ISO\~646:1991\~IRV (US-ASCII),
 can be reliably encoded in device control commands,
 seven special character escape sequences
 .RB (\[lq] \[rs]\- \[rq],
