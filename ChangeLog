@@ -1,5 +1,18 @@
 2024-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Drop tests of "cp1047" output device.
+
+	* src/roff/groff/tests/ab_works.sh:
+	* src/roff/groff/tests/backslash-X-works.sh:
+	* src/roff/groff/tests/backslash-exclamation-early-does-not-fail.sh:
+	* src/roff/groff/tests/cf-request-early-does-not-fail.sh:
+	* src/roff/groff/tests/device-request-works.sh:
+	* src/roff/groff/tests/output-request-works.sh: Do it.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?65724>.
+
+2024-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/ps.tmac: Drop `\[S ,]` and `\[s, ]` fallback character
 	definitions and hyphenation code assignments.
 
