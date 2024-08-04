@@ -4,7 +4,8 @@
 
 	* src/roff/groff/tests/ab_works.sh:
 	* src/roff/groff/tests/backslash-X-works.sh:
-	* src/roff/groff/tests/backslash-exclamation-early-does-not-fail.sh:
+	* src/roff/groff/tests/\
+	  backslash-exclamation-early-does-not-fail.sh:
 	* src/roff/groff/tests/cf-request-early-does-not-fail.sh:
 	* src/roff/groff/tests/device-request-works.sh:
 	* src/roff/groff/tests/output-request-works.sh: Do it.
@@ -53,8 +54,9 @@
 	* tmac/latin9.tmac: Define Latin-9 (ISO 8859-15) hyphenation
 	codes.
 
-	Thanks to Werner Lemberg for the discussion in <https://
-	lists.gnu.org/archive/html/groff/2024-08/msg00001.html>.
+	Fixes <https://savannah.gnu.org/bugs/?59397>.  Thanks to Werner
+	Lemberg for the discussion in <https://lists.gnu.org/archive/
+	html/groff/2024-08/msg00001.html>.
 
 2024-07-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
