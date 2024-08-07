@@ -1003,8 +1003,8 @@ Vertical motion, apart from that implied by a break, is not represented.
 
 @item
 A horizontal motion of any size is represented as one space.  Adjacent
-horizontal motions are not combined.  Inter-sentence space nodes (those
-arising from the second argument to the @code{ss} request) are not
+horizontal motions are not combined.  Supplemental inter-sentence space
+(configured by the second argument to the @code{ss} request) is not
 represented.
 
 @item
