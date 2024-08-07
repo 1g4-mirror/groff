@@ -3751,7 +3751,7 @@ temp_iterator::temp_iterator(const char *s, int len)
 {
   if (len > 0) {
     base = new unsigned char[len + 1];
-    memcpy(base, s, len);
+    (void) memcpy(base, s, len);
     base[len] = '\0';
     ptr = base;
     eptr = base + len;
@@ -3766,7 +3766,7 @@ temp_iterator::~temp_iterator()
 
 input_iterator *make_temp_iterator(const char *s)
 {
-  if (s == 0)
+  if (0 /* nullptr */ == s)
     return new temp_iterator(s, 0);
   else {
     size_t n = strlen(s);

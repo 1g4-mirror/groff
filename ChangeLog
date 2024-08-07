@@ -1,5 +1,14 @@
 2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/input.cpp (temp_iterator::temp_iterator):
+	Explicitly cast return value of `memcpy()` to `void`.
+	(make_temp_iterator): Reorder comparison with null pointer to
+	avoid inadvertent lvalue assignment.
+
+2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #66052 (2/2).
 
 	* src/roff/troff/input.cpp (temp_iterator::temp_iterator):
