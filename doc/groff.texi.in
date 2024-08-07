@@ -8985,6 +8985,9 @@ If for some reason you desire to remove a character's hyphenation code,
 use @code{hcode} to copy the code of a punctuation character to it; for
 example, @samp{.hcode ß $} assigns a hyphenation code of zero to
 @samp{ß} (unless @samp{$} has already been assigned a different one).
+
+The @code{phcode} request may be helpful to troubleshoot hyphenation
+code assignments.  @xref{Debugging}.
 @endDefreq
 
 @DefreqList {hla, [@Var{lang}]}
@@ -17127,6 +17130,12 @@ characters.  The ``from'' code point is listed first, followed by its
 @cindex environments, dumping (@code{pev})
 Report the state of the current environment followed by that of all
 other environments to the standard error stream.
+@endDefreq
+
+@Defreq {phcode, c @r{@dots{}}}
+Report, to the standard error stream, the hyphenation code of each
+ordinary or special character@tie{}@var{c}.  Special characters are
+listed in bracketed syntax using the default escape character.
 @endDefreq
 
 @Defreq {phw, }

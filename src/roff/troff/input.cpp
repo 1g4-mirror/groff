@@ -7339,6 +7339,44 @@ static void set_hyphenation_codes()
   skip_line();
 }
 
+static void report_hyphenation_codes()
+{
+  tok.skip();
+  if (tok.is_newline() || tok.is_eof()) {
+    warning(WARN_MISSING, "hyphenation code report request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
+  while (!tok.is_newline() && !tok.is_eof()) {
+    unsigned char ch = tok.ch();
+    if (csdigit(ch)) {
+      error("a numeral cannot have a hyphenation code");
+      break;
+    }
+    charinfo *ci = tok.get_char();
+    if (0 == ch) {
+      // Is the argument a non-special-character escape sequence?
+      if (0 /* nullptr */ == ci) {
+	error("%1 cannot have a hyphenation code", tok.description());
+	break;
+      }
+    }
+    unsigned char code = ci->get_hyphenation_code();
+    if (ci->get_translation()
+	&& ci->get_translation()->get_translation_input())
+      code = ci->get_translation()->get_hyphenation_code();
+    if (0 == ch)
+      errprint("\\[%1]\t%2\n", ci->nm.contents(), int(code));
+    else
+      errprint("%1\t%2\n", ch, int(code));
+    tok.next();
+    tok.skip();
+  }
+  fflush(stderr);
+  skip_line();
+}
+
 void hyphenation_patterns_file_code()
 {
   tok.skip();
@@ -8630,6 +8668,7 @@ void init_input_requests()
   init_request("pc", set_page_character);
   init_request("pcolor", report_color);
   init_request("pcomposite", report_composite_characters);
+  init_request("phcode", report_hyphenation_codes);
   init_request("pi", pipe_output);
   init_request("pm", print_macros);
   init_request("psbb", ps_bbox_request);

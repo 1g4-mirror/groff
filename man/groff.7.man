@@ -3931,6 +3931,13 @@ Report the state of the current environment followed by that of all
 other environments to the standard error stream.
 .
 .TPx
+.REQ .phcode "c \fR\&.\|.\|.\&\fP"
+Report,
+to the standard error stream,
+the hyphenation code of each ordinary or special
+.RI character\~ c .
+.
+.TPx
 .REQ .phw
 Report,
 to the standard error stream,
@@ -8422,6 +8429,8 @@ composite characters
 .RB ( .pcomposite );
 environments
 .RB ( .pev );
+hyphenation codes
+.RB ( .phcode );
 hyphenation exceptions
 .RB ( .phw );
 registers

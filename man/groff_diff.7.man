@@ -3216,6 +3216,18 @@ other environments to the standard error stream.
 .
 .
 .TP
+.BI .phcode\~ c\~\c
+\&.\|.\|.
+Report,
+to the standard error stream,
+the hyphenation code of each ordinary or special
+.RI character\~ c .
+.
+Special characters are listed in bracketed syntax using the default
+escape character.
+.
+.
+.TP
 .B .phw
 Report,
 to the standard error stream,
@@ -5388,6 +5400,8 @@ composite characters
 .RB ( pcomposite ),
 environments
 .RB ( pev ),
+hyphenation codes
+.RB ( .phcode ),
 hyphenation exceptions
 .RB ( phw ),
 registers
