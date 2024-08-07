@@ -1296,7 +1296,7 @@ This driver consists of two parts, a preprocessor
 The predefined GNU @command{troff} string @code{.T} contains the name of
 the output device; the read-only register @code{.T} is set to@tie{}1 if
 this option is used (which is always true if @command{groff} is used to
-call GNU @command{troff}).  @xref{Built-in Registers}.
+run GNU @command{troff}).  @xref{Built-in Registers}.
 
 The postprocessor to be used for a device is specified by the
 @code{postpro} command in the device description file.  (@xref{Device
