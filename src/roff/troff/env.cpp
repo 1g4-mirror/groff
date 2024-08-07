@@ -4233,7 +4233,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
     while (h && h->hyphenation_code == 0)
       h = h->next;
     int len = 0;
-    char hbuf[WORD_MAX + 2];
+    char hbuf[WORD_MAX + 2 + 1];
     char *buf = hbuf + 1;
     hyphen_list *tem;
     for (tem = h; tem && len < WORD_MAX; tem = tem->next) {
@@ -4293,7 +4293,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
 	}
 	else {
 	  hbuf[0] = hbuf[len + 1] = '.';
-	  int num[WORD_MAX + 3];
+	  int num[WORD_MAX + 2 + 1];
 	  current_language->patterns.hyphenate(hbuf, len + 2, num);
 	  // The position of a hyphenation point gets marked with an odd
 	  // number.  Example:

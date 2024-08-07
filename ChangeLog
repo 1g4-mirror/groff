@@ -1,5 +1,25 @@
 2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #66052 (1/2).
+
+	* src/roff/troff/env.cpp (hyphenate): Fix potential one-byte
+	stack overwrite if attempting to hyphenate a 256-letter sequence
+	within a word.  Reserve space for null terminator in `hbuf`
+	character array.  Initially, this isn't necessary because the
+	array is simply walked to normalize hyphenation codes by their
+	equivalence classes.  However, when we subsequently look up the
+	{possibly partial} word in the exception dictionaries, `hbuf`
+	{or a pointer into it} needs to be treatable as a C string, thus
+	null-terminated.  Respell already correct expression later in
+	the code to reinforce similarity.
+
+	Fixes <https://savannah.gnu.org/bugs/?66052> (1/2).  Thanks to
+	Lukas Javorsky for identifying the problem using "SAST analyzers
+	{combination of coverity, snyk, cppcheck, gcc, clang,
+	shellcheck, unicontrol}".
+
+2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (set_font_specific_special_fonts):
 	Adjust diagnostic message for clarity (and relative brevity).
 
