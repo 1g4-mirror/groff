@@ -1,5 +1,18 @@
 2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #66052 (2/2).
+
+	* src/roff/troff/input.cpp (temp_iterator::temp_iterator):
+	Prevent potential heap overreads.  Ensure that temporary
+	iterators are null-terminated when constructing them.
+
+	Fixes <https://savannah.gnu.org/bugs/?66052> (2/2).  Thanks to
+	Lukas Javorsky for identifying the problem using "SAST analyzers
+	{combination of coverity, snyk, cppcheck, gcc, clang,
+	shellcheck, unicontrol}".
+
+2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #66052 (1/2).
 
 	* src/roff/troff/env.cpp (hyphenate): Fix potential one-byte

@@ -3750,8 +3750,9 @@ temp_iterator::temp_iterator(const char *s, int len)
 : base(0 /* nullptr */)
 {
   if (len > 0) {
-    base = new unsigned char[len];
+    base = new unsigned char[len + 1];
     memcpy(base, s, len);
+    base[len] = '\0';
     ptr = base;
     eptr = base + len;
   }
