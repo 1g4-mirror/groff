@@ -1,5 +1,6 @@
 2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/{en,it}.tmac: Load "latin1.tmac".
 	* tmac/latin5.tmac: Add case mapping for dotless I.
 
 	Continues commit 0629380a9d, 3 August.  Thanks to Dave Kemper
