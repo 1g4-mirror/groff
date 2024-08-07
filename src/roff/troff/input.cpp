@@ -7291,7 +7291,7 @@ static void set_hyphenation_codes()
       break;
     }
     charinfo *cidst = tok.get_char();
-    if (0 == cdst) { // destination character is special
+    if (0 == cdst) {
       if (0 /* nullptr */ == cidst) {
 	error("expected ordinary or special character, got %1",
 	      tok.description());
