@@ -1,5 +1,19 @@
 2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (hyphenate): Slightly refactor.
+	Reorder equality comparison to avoid inadvertent lvalue
+	assignment.  `memset()` the stack-allocated character array
+	`hbuf` with null terminators as a paranoid hedge.  Rename `buf`
+	to `bufp`, since it is a pointer and moreover used as a cursor
+	into the word that is a candidate for hyphenation.  Pointers and
+	arrays are _not_ synonymous in C/C++; see Chapter 4, _Expert C
+	Programming: Deep C Secrets_, by van der Linden (1994).  Add
+	assertions for further paranoia.  Use `static_cast` instead of
+	C-style cast on dictionary values.  `memset()` the
+	stack-allocated integer array `word` with zeroes.
+
+2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/input.cpp (temp_iterator::temp_iterator):
