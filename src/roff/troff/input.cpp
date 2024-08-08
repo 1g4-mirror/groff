@@ -7279,8 +7279,8 @@ static void set_hyphenation_codes()
 {
   tok.skip();
   if (tok.is_newline() || tok.is_eof()) {
-    warning(WARN_MISSING, "hyphenation code configuration request"
-	    " expects arguments");
+    warning(WARN_MISSING, "hyphenation code assignment request expects"
+	    " arguments");
     skip_line();
     return;
   }
