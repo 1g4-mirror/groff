@@ -7309,24 +7309,25 @@ static void set_hyphenation_codes()
       error("cannot use the hyphenation code of a numeral");
       break;
     }
-    unsigned char new_code = 0; // TODO: int
+    unsigned char new_code = 0;
     charinfo *cisrc = tok.get_char();
-    if (csrc != 0)
-      new_code = csrc;
-    else {
+    if (cisrc != 0 /* nullptr */)
+      // Common case: assign destination character the hyphenation code
+      // of the source character.
+      new_code = cisrc->get_hyphenation_code();
+    if (0 == csrc) {
       if (0 /* nullptr */ == cisrc) {
 	error("expected ordinary or special character, got %1",
 	      tok.description());
 	break;
       }
-      // source character is special
-      if (0 == cisrc->get_hyphenation_code()) {
-	error("second member of hyphenation code pair must be an"
-	      " ordinary character, or a special character already"
-	      " assigned a hyphenation code");
-	break;
-      }
       new_code = cisrc->get_hyphenation_code();
+    }
+    else {
+      // If assigning a ordinary character's hyphenation code to itself,
+      // use its character code point as the value.
+      if (csrc == cdst)
+	new_code = tok.ch();
     }
     cidst->set_hyphenation_code(new_code);
     if (cidst->get_translation()

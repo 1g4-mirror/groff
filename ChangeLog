@@ -1,3 +1,13 @@
+2024-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (set_hyphenation_codes): Handle the
+	common case (copying the existing hyphenation code of one
+	character to another) first.  Support clearing a character's
+	hyphenation code by copying that of a character that lacks one.
+	Reorganize for clarity, and add comments.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?66054>.
+
 2024-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (hyphenate): Slightly refactor.
