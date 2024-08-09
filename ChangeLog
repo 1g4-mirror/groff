@@ -1,3 +1,12 @@
+2024-08-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (input_stack::get)
+	(process_input_stack): Trivially refactor.  Rename global
+	`old_have_formattable_input` to
+	`have_formattable_input_on_interrupted_line`.  Yes, this
+	identifier is as long as your arm, but it has a highly
+	specialized purpose and needs to be intelligible in context.
+
 2024-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc-old.tmac: Migrate from font name "C" to "CR", fixing

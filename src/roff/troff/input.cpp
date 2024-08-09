@@ -117,7 +117,7 @@ static bool have_formattable_input = false;
 // Consider:
 //   \f[TB]\m[red]hello\c
 //   \f[]\m[]
-static bool old_have_formattable_input = false;
+static bool have_formattable_input_on_interrupted_line = false;
 
 bool device_has_tcommand = false;	// 't' output command supported
 static bool want_unsafe_requests = false;	// be safer by default
@@ -593,7 +593,7 @@ inline int input_stack::get(node **np)
 {
   int res = (top->ptr < top->eptr) ? *top->ptr++ : finish_get(np);
   if (res == '\n') {
-    old_have_formattable_input = have_formattable_input;
+    have_formattable_input_on_interrupted_line = have_formattable_input;
     have_formattable_input = false;
   }
   return res;
@@ -3046,7 +3046,7 @@ void process_input_stack()
       }
     case token::TOKEN_NEWLINE:
       {
-	if (bol && !old_have_formattable_input
+	if (bol && !have_formattable_input_on_interrupted_line
 	    && !curenv->get_prev_line_interrupted())
 	  trapping_blank_line();
 	else {
