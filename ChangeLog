@@ -1,5 +1,18 @@
 2024-08-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/troffrc: Define macro `troffrc*trap` to throw a
+	diagnostic message complaining of a text line in a startup file.
+	Make it the blank line and leading space macro.
+	* tmac/troffrc-end: Clear blank line and leading space macros.
+	Delete `troffrc*trap`.
+
+	Inspired by an Arch Linux blunder <https://gitlab.archlinux.org/
+	archlinux/packaging/packages/groff/-/commit/
+	db8623565d8e14d4c9c5c3a67e1c8647c34e3d48>.  I've made similar
+	ones myself.
+
+2024-08-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (input_stack::get)
 	(process_input_stack): Trivially refactor.  Rename global
 	`old_have_formattable_input` to
