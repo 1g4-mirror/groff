@@ -1,5 +1,15 @@
 2024-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tty.tmac: Revise fallback characters for ± and ∓ to
+	separate plus and minus signs with a slash, and to use actual
+	minus sign glyphs(!).
+
+	Prompted by discussion with Alex Colomar, Vincent Lefevre, and
+	Dave Kemper; see <https://lists.gnu.org/archive/html/groff/
+	2024-08/msg00016.html>.
+
+2024-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Implement new `phcode` request.
 
 	* src/roff/troff/input.cpp (report_hyphenation_codes): Add.
