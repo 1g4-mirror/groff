@@ -3186,11 +3186,6 @@ allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode and continues to the end of the input line.
 .
-.TP
-.B .pev
-Report the state of the current environment followed by that of all
-other environments to the standard error stream.
-.
 .
 .TP
 .B .pcolor
@@ -3212,6 +3207,12 @@ the list of defined composite characters.
 .
 The \[lq]from\[rq] code point is listed first,
 followed by its \[lq]to\[rq] mapping.
+.
+.
+.TP
+.B .pev
+Report the state of the current environment followed by that of all
+other environments to the standard error stream.
 .
 .
 .TP
