@@ -1,3 +1,9 @@
+2024-08-09  Dave Kemper <saint.snit@gmail.com>
+
+	* tmac/andoc.tmac: Annotate "unnecessary" control lines.
+
+	Fixes <https://savannah.gnu.org/bugs/?62826>.
+
 2024-08-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/troffrc: Define macro `troffrc*trap` to throw a
