@@ -42,6 +42,8 @@
 	* man/groff_diff.7.man (New requests, Debugging):
 	* NEWS: Document it.
 
+	Fixes <https://savannah.gnu.org/bugs/?66069>.
+
 2024-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (set_hyphenation_codes): Handle the
