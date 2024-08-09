@@ -1,3 +1,10 @@
+2024-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/doc-old.tmac: Migrate from font name "C" to "CR", fixing
+	warnings.
+
+	  troff:.../doc-old.tmac:...: warning: cannot select font 'C'
+
 2024-08-08  Bjarni Ingi Gislason <bjarniig@simnet.is>
 
 	* tmac/doc-old.tmac: Drop spurious dot in control line.
