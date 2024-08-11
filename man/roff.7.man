@@ -109,7 +109,7 @@ and recommend further reading materials.
 .\" ====================================================================
 .
 .\" BEGIN Keep roughly parallel with groff.texi nodes "Text" through
-.\" "Tab Stops".
+.\" "Tabs and Leaders".
 .I roff
 input contains text interspersed with instructions to control the
 formatter.
@@ -380,8 +380,8 @@ when using the \[lq]tab\[rq] and \[lq]field\[rq] low-level features,
 so most users turn to the
 .MR @g@tbl @MAN1EXT@
 preprocessor to lay out tables.
-.\" END Keep roughly parallel with groff.texi nodes "Text" through "Tab
-.\" Stops".
+.\" END Keep roughly parallel with groff.texi nodes "Text" through "Tabs
+.\" and Leaders".
 .
 .
 .\" ====================================================================
@@ -2131,7 +2131,7 @@ before
 and
 .RB \[lq] \[aq] \[rq]
 if they are preceded by space,
-so that reflowing the input doesn't turn them into control lines.
+so that revisions to the input don't turn them into control lines.
 .
 .
 .IP \[bu]
