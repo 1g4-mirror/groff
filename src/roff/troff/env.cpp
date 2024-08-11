@@ -3684,7 +3684,7 @@ static void print_hyphenation_exceptions()
   // character in a word except the last.  The word may have a trailing
   // space; see `hyphen_trie::read_patterns_file()`.
   const size_t bufsz = WORD_MAX * 2;
-  char wordbuf[bufsz];
+  char wordbuf[bufsz]; // need to `errprint()` it, so not `unsigned`
   while (iter.get(&entry, reinterpret_cast<void **>(&hypoint))) {
     assert(!entry.is_null());
     assert(hypoint != 0 /* nullptr */);
