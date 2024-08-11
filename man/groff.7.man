@@ -3404,11 +3404,14 @@ and
 .
 .TPx
 .REQ .hw "word \fR.\|.\|.\fP"
-Define hyphenation overrides for each
-.I word;
-a hyphen
+Define each
+.I "hyphenation exception"
+.I word
+comprising ordinary or special characters with each hyphen-minus
 .RB \[lq] \- \[rq]
-indicates a hyphenation point.
+in
+.I word
+indicating a hyphenation point.
 .
 .TPx
 .REQ .hy

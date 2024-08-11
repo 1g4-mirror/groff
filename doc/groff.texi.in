@@ -8556,8 +8556,9 @@ unusual words found in technical literature.  We can instruct GNU
 @c TODO: Add request `rhw`?
 @cindex hyphenation exceptions
 @Defreq {hw, word @dots{}}
-Define each @dfn{hyphenation exception} @var{word} with each hyphen `-'
-in the word indicating a hyphenation point.  For example, the request
+Define each @dfn{hyphenation exception} @var{word} comprising ordinary
+or special characters with each hyphen-minus `-' in @var{word}
+indicating a hyphenation point.  For example, the request
 
 @Example
 .hw in-sa-lub-rious alpha
@@ -8569,9 +8570,8 @@ marks potential hyphenation points in ``insalubrious'', and prevents
 ``alpha'' from being hyphenated at all.
 
 Besides the space character, any character whose hyphenation code is
-zero can be used to separate the arguments of @code{hw} (see the
-@code{hcode} request below).  In addition, this request can be used more
-than once.
+zero can be used to separate the arguments (see the @code{hcode} request
+below).
 
 @cindex @code{hw} request, and @code{hy} restrictions
 Hyphenation points specified with @code{hw} are not subject to the
