@@ -13,6 +13,11 @@ VERSION next
 troff
 -----
 
+o The `hpfcode` request now emits an error when used, advising of its
+  planned withdrawal, but then proceeds with normal behavior.  The
+  replacement mechanism, the `hcode` request, has existed since groff
+  1.02 (June 1991) at the latest.
+
 o The `mso` request no longer attempts to open a macro file named, say,
   "tmac.s" if "s.tmac" was specified in the argument and not found, or
   vice versa.  This feature was a convenience for some old AT&T troff

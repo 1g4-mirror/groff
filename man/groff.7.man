@@ -3396,11 +3396,18 @@ Append hyphenation patterns from
 .
 .TPx
 .REQ .hpfcode "a b \fR[\fPc d\fR] .\|.\|.\fP"
-Define mappings for character codes in hyphenation pattern files read
-with
-.request .hpf
-and
-.request .hpfa .
+.B Caution:
+This request will be withdrawn in a future
+.I groff
+release.
+.
+Use
+.B hcode
+instead.
+.
+.
+.IP
+Define mappings for character codes in hyphenation pattern files.
 .
 .TPx
 .REQ .hw "word \fR.\|.\|.\fP"

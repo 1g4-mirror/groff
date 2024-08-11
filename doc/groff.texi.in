@@ -8861,8 +8861,7 @@ register @samp{.hydefault}; it is associated with the environment
 
 @need 200
 @DefreqList {hpf, pattern-file}
-@DefreqItemx {hpfa, pattern-file}
-@DefreqListEndx {hpfcode, a b [c d] @dots{}}
+@DefreqListEndx {hpfa, pattern-file}
 @cindex hyphenation patterns (@code{hpf})
 @cindex patterns for hyphenation (@code{hpf})
 Read hyphenation patterns from @var{pattern-file}, which is sought
@@ -8908,17 +8907,6 @@ file is treated as a list of hyphenation patterns (except that the
 @end itemize
 
 The @code{hpfa} request appends a file of patterns to the current list.
-
-The @code{hpfcode} request defines mapping values for character codes in
-pattern files.  It is an older mechanism no longer used by GNU
-@code{troff}'s own macro files; for its successor, see @code{hcode}
-below.  @code{hpf} or @code{hpfa} apply the mapping after reading the
-patterns but before replacing or appending to the active list of
-patterns.  Its arguments are pairs of character codes---integers from 0
-to@tie{}255.  The request maps character code@tie{}@var{a} to
-code@tie{}@var{b}, code@tie{}@var{c} to code@tie{}@var{d}, and so on.
-Character codes that would otherwise be invalid in GNU @code{troff} can
-be used.
 
 @cindex localization
 @pindex troffrc
@@ -8999,6 +8987,21 @@ already been assigned a different one).
 
 The @code{phcode} request may be helpful to troubleshoot hyphenation
 code assignments.  @xref{Debugging}.
+@endDefreq
+
+@Defreq {hpfcode, a b [c d] @dots{}}
+@strong{Caution:@:} This request will be withdrawn in a future
+@code{groff} release.  Use @code{hcode} instead.
+
+The @code{hpfcode} request defines mapping values for character codes in
+pattern files.  It is an older mechanism no longer used by GNU
+@command{troff}'s own macro files.  @code{hpf} or @code{hpfa} apply the
+mapping after reading the patterns but before replacing or appending to
+the active list of patterns.  Its arguments are pairs of character
+codes---integers from 0 to@tie{}255.  The request maps character
+code@tie{}@var{a} to code@tie{}@var{b}, code@tie{}@var{c} to
+code@tie{}@var{d}, and so on.  Character codes that would otherwise be
+invalid in GNU @command{troff} can be used.
 @endDefreq
 
 @DefreqList {hla, [@Var{lang}]}

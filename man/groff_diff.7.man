@@ -2837,7 +2837,7 @@ character is still recognized as the start of a comment).
 .
 .IP
 Use the
-.B hpfcode
+.B hcode
 request
 (see below)
 to map the encoding used in hyphenation pattern files to
@@ -2923,15 +2923,18 @@ of the environment.
 .TP
 .BI .hpfcode\~ "a b"\c
 .RI \~[ "c d" "] .\|.\|."
-Define mapping values for character codes in pattern files.
+.B Caution:
+This request will be withdrawn in a future
+.I groff
+release.
 .
-This is an older mechanism no longer used by
-.IR groff 's
-own macro files;
-for its successor,
-see
+Use
 .B hcode
-above.
+instead.
+.
+.
+.IP
+Define mapping values for character codes in pattern files.
 .
 .B hpf
 or

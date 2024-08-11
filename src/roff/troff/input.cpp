@@ -7379,6 +7379,8 @@ static void report_hyphenation_codes()
 
 void hyphenation_patterns_file_code()
 {
+  error("'hpfcode' request will be withdrawn in a future groff release;"
+        " migrate to 'hcode'");
   tok.skip();
   while (!tok.is_newline() && !tok.is_eof()) {
     int n1, n2;

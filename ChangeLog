@@ -1,3 +1,13 @@
+2024-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (hyphenation_patterns_file_code):
+	Throw error warning of future withdrawal.
+
+	* doc/groff.texi.in (Manipulating Hyphenation):
+	* man/groff_diff.7.man (New requests):
+	* man/groff.7.man (Request short reference):
+	* NEWS: Document deprecation.
+
 2024-08-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tty.tmac: Revise fallback character for `\[em]` on UTF-8
