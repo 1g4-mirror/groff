@@ -1,3 +1,9 @@
+2024-08-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tty.tmac: Revise fallback character for `\[em]` on UTF-8
+	device to make it more like a true em dash, taking up two
+	character cells.
+
 2024-08-09  Dave Kemper <saint.snit@gmail.com>
 
 	* tmac/andoc.tmac: Annotate "unnecessary" control lines.
