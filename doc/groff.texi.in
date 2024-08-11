@@ -5853,6 +5853,7 @@ later.
 .\" Albert Einstein, _The Meaning of Relativity_, 1922
 @endCartoucheExample
 
+@c BEGIN Keep parallel with subsection "Page geometry" of roff(7).
 @node Page Geometry, Measurements, Text, GNU troff Reference
 @section Page Geometry
 @cindex page, geometry of
@@ -5879,11 +5880,24 @@ its resolution and page dimensions (@pxref{DESC File Format}).
 
 @cindex page
 A @dfn{page} is a two-dimensional structure upon which a @code{roff}
-system imposes a rectangular coordinate system with its upper left
-corner as the origin.  Coordinate values are in basic units and increase
+system imposes a rectangular coordinate system with its origin near the
+upper left corner.  Coordinate values are in basic units and increase
 down and to the right.  Useful ones are typically positive and within
 numeric ranges corresponding to the page boundaries.
 @c You could draw an arc of a circle whose center is off the page.
+
+Text is arranged on a one-dimensional lattice of text baselines from the
+top to the bottom of the page.
+@cindex text baseline
+@cindex baseline, text
+A @dfn{text baseline} is a (usually invisible) line upon which the
+glyphs of a typeface are aligned.
+@cindex vertical spacing
+@cindex spacing, vertical
+@cindex vee
+@dfn{Vertical spacing} is the distance between adjacent text baselines.
+Typographic tradition sets this quantity to 120% of the type size.
+Typographers term this unit a @slanted{vee}.
 
 @cindex drawing position
 @cindex position, drawing
@@ -5891,36 +5905,18 @@ While the formatter (and, later, output driver) is processing a page, it
 keeps track of its @dfn{drawing position}, which is the location at
 which the next glyph will be written, from which the next motion will be
 measured, or where a geometric object will commence rendering.
-@cindex text baseline
-@cindex baseline, text
 Notionally, glyphs are drawn from the text baseline upward and to the
 right.@footnote{@code{groff} does not yet support right-to-left
-scripts.}  The @dfn{text baseline} is a (usually invisible) line upon
-which the glyphs of a typeface are aligned.  A glyph therefore
-``starts'' at its bottom-left corner.  If drawn at the origin, a typical
-letter glyph would lie partially or wholly off the page, depending on
-whether, like ``g'', it features a descender below the baseline.
+scripts.}  A glyph therefore ``starts'' at its bottom-left corner.  The
+formatter's origin is thus one vee below the page top, preventing a
+glyph from lying partially or wholly off the page.
 
 @cindex page offset
 @cindex offset, page
-Such a situation is nearly always undesirable.  It is furthermore
-conventional not to write or draw at the extreme edges of the page.
-Therefore the initial drawing position of a @code{roff} formatter is not
-at the origin, but below and to the right of it.  This rightward shift
-from the left edge is known as the @dfn{page
-offset}.@footnote{@code{groff}'s terminal output devices have page
-offsets of zero.}  The downward shift leaves room for a text output
-line.
-
-Text is arranged on a one-dimensional lattice of text baselines from the
-top to the bottom of the page.
-@cindex vertical spacing
-@cindex spacing, vertical
-@cindex vee
-@dfn{Vertical spacing} is the distance between adjacent text baselines.
-Typographic tradition sets this quantity to 120% of the type size.  The
-initial drawing position is one unit of vertical spacing below the page
-top.  Typographers term this unit a @slanted{vee}.
+Further, it is conventional not to write or draw at the extreme edges of
+the page.  Typesetters configure a @dfn{page offset}, a rightward shift
+from the left edge.@footnote{@code{groff}'s terminal output devices have
+page offsets of zero.}
 
 @cindex page break
 @cindex break, page
@@ -5942,6 +5938,7 @@ users from having to confront this difficulty by setting ``traps''
 (@pxref{Traps}); moreover, all but the simplest page layouts tend to
 have headers and footers, or at least bear vertical margins larger than
 one vee.
+@c END Keep parallel with subsection "Page geometry" of roff(7).
 
 
 @c =====================================================================
