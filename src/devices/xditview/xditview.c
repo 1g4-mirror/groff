@@ -367,7 +367,8 @@ NewFile (const char *name)
     }
     hadFile = 1;
     SelectPageNumber ("1");
-    strcpy (current_file_name, name);
+    strncpy(current_file_name, name, sizeof(current_file_name) - 1);
+    current_file_name[sizeof(current_file_name) - 1] = '\0';  // Ensure null-termination
     current_file = new_file;
 }
 
