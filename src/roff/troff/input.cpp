@@ -7578,7 +7578,7 @@ void check_missing_character()
 bool token::add_to_zero_width_node_list(node **pp)
 {
   hunits w;
-  int s;
+  int s = 0; /* space count, possibly populated by `nspaces()` */
   node *n = 0 /* nullptr */;
   switch (type) {
   case TOKEN_CHAR:

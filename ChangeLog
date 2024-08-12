@@ -1,3 +1,11 @@
+2024-08-14  Lukas Javorsky <ljavorsk@redhat.com>
+
+	* src/roff/troff/input.cpp (token::add_to_zero_width_node_list):
+	Initialize stack-allocated variable that is not populated by all
+	paths through this function.
+
+	Fixes <https://savannah.gnu.org/bugs/?66079>.
+
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Slightly refactor: boolify.
