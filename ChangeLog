@@ -1,3 +1,12 @@
+2024-08-14  Lukas Javorsky <ljavorsk@redhat.com>
+
+	* src/preproc/pic/object.cpp (object_spec::position_rectangle)
+	(object_spec::make_line): Initialize "x" and "y" elements of the
+	`here` structure.  Using uninitialized variables in
+	`path::follow()` could cause undefined behavior.
+
+	Fixes <https://savannah.gnu.org/bugs/?66080>.
+
 2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/pic.ms: Fix omission of `linethick` variable from
