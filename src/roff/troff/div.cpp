@@ -462,7 +462,7 @@ void top_level_diversion::transparent_output(node * /*n*/)
 {
   // TODO: When Savannah #63074 is fixed, the user will have a way to
   // avoid this error.
-  error("can't transparently output node at top level");
+  error("cannot write a node to device-independent output");
 }
 
 // Implement the internals of `.cf`.
@@ -654,9 +654,10 @@ void continue_page_eject()
 {
   if (topdiv->get_ejecting()) {
     if (curdiv != topdiv)
-      error("can't continue page ejection because of current diversion");
+      error("cannot continue page ejection while diverting output");
     else if (!vertical_position_traps_flag)
-      error("can't continue page ejection because vertical position traps disabled");
+      error("cannot continue page ejection while vertical position"
+	    " traps disabled");
     else {
       push_page_ejector();
       topdiv->space(topdiv->get_page_length(), 1);
@@ -910,12 +911,12 @@ void macro_diversion::clear_diversion_trap()
 
 void top_level_diversion::set_diversion_trap(symbol, vunits)
 {
-  error("can't set diversion trap when no current diversion");
+  error("cannot set diversion trap when not diverting output");
 }
 
 void top_level_diversion::clear_diversion_trap()
 {
-  error("can't clear diversion trap when no current diversion");
+  error("cannot clear diversion trap when not diverting output");
 }
 
 void diversion_trap()

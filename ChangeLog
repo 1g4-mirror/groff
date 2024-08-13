@@ -1,6 +1,20 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/div.cpp
+	(top_level_diversion::transparent_output, continue_page_eject)
+	(top_level_diversion::set_diversion_trap)
+	(top_level_diversion::clear_diversion_trap):
+	* src/roff/troff/input.cpp (transparent_translate)
+	(get_delimited_name, do_source, pipe_source, pipe_output,
+	transparent_file, charinfo_to_node_list):
+	* src/roff/troff/node.cpp (troff_output_file::really_copy_file):
+	* src/roff/troff/reg.cpp (reg::increment, reg::decrement)
+	(reg::set_increment, reg::alter_format, reg::set_value): Clarify
+	error diagnostics, and stop using contractions in wording.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.cpp
 	(top_level_diversion::transparent_output):
 	* src/roff/troff/input.cpp (transparent_translate): Drop
 	`GROFF_ENABLE_TRANSPARENCY_WARNINGS` environment variable

@@ -2893,10 +2893,9 @@ static int transparent_translate(int cc)
 	return c;
       // TODO: When Savannah #63074 is fixed, the user will have a way
       // to avoid this error.
-      error("can't translate %1 to special character '%2'"
-            " in transparent throughput",
-            input_char_description(cc),
-            ci->nm.contents());
+      error("cannot translate %1 to special character '%2' in"
+	    " device-independent output", input_char_description(cc),
+	    ci->nm.contents());
     }
   }
   return cc;
@@ -5352,7 +5351,7 @@ static symbol get_delimited_name()
     return NULL_SYMBOL;
   }
   if (start_token.is_newline()) {
-    error("can't delimit name with a newline");
+    error("a newline is not allowed to delimit a name");
     return NULL_SYMBOL;
   }
   int start_level = input_stack::get_level();
@@ -6223,7 +6222,7 @@ void do_source(bool quietly)
       // Suppress diagnostic only if we're operating quietly and it's an
       // expected problem.
       if (!(quietly && (ENOENT == errno)))
-	error("can't open '%1': %2", nm.contents(), strerror(errno));
+	error("cannot open '%1': %2", nm.contents(), strerror(errno));
     tok.next();
   }
 }
@@ -6281,7 +6280,8 @@ void pipe_source()
       if (fp)
 	input_stack::push(new file_iterator(fp, symbol(buf).contents(), 1));
       else
-	error("can't open pipe to process '%1': %2", buf, strerror(errno));
+	error("cannot open pipe to process '%1': %2", buf,
+	      strerror(errno));
       delete[] buf;
     }
     tok.next();
@@ -6468,7 +6468,7 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
   else
     // ...but in this case, we did not successfully open any input file.
     //
-    error("can't open '%1': %2", filename, strerror(errno));
+    error("cannot open '%1': %2", filename, strerror(errno));
 
   // Irrespective of whether or not we were able to successfully acquire the
   // bounding box properties, we ALWAYS update the associated gtroff registers.
@@ -7913,13 +7913,13 @@ void pipe_output()
   }
   else {
     if (the_output) {
-      error("can't pipe: output already started");
+      error("cannot honor pipe request: output already started");
       skip_line();
     }
     else {
       char *pc = read_string();
       if (0 /* nullptr */ == pc)
-	error("can't pipe to empty command");
+	error("cannot apply pipe request to empty command");
       // Are we adding to an existing pipeline?
       if (pipe_command != 0 /* nullptr */) {
 	char *s = new char[strlen(pipe_command) + strlen(pc) + 1 + 1];
@@ -8002,7 +8002,8 @@ void transparent_file()
     errno = 0;
     FILE *fp = include_search_path.open_file_cautious(filename.contents());
     if (0 /* nullptr */ == fp)
-      error("can't open '%1': %2", filename.contents(), strerror(errno));
+      error("cannot open '%1': %2", filename.contents(),
+	    strerror(errno));
     else {
       int bol = 1;
       for (;;) {
@@ -8799,7 +8800,8 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
     if (tok.is_eof())
       break;
     if (tok.is_newline()) {
-      error("composite character mustn't contain newline");
+      error("a newline is not allowed in a composite character"
+	    " escape sequence");
       while (!tok.is_eof())
 	tok.next();
       break;

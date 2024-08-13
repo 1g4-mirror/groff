@@ -37,22 +37,22 @@ bool reg::get_value(units * /*d*/)
 
 void reg::increment()
 {
-  error("can't increment read-only register");
+  error("cannot increment read-only register");
 }
 
 void reg::decrement()
 {
-  error("can't decrement read-only register");
+  error("cannot decrement read-only register");
 }
 
 void reg::set_increment(units /*n*/)
 {
-  error("can't automatically increment read-only register");
+  error("cannot automatically increment read-only register");
 }
 
 void reg::alter_format(char /*f*/, int /*w*/)
 {
-  error("can't assign format of read-only register");
+  error("cannot assign format of read-only register");
 }
 
 const char *reg::get_format()
@@ -62,7 +62,7 @@ const char *reg::get_format()
 
 void reg::set_value(units /*n*/)
 {
-  error("can't write read-only register");
+  error("cannot write read-only register");
 }
 
 general_reg::general_reg() : format('1'), width(0), inc(0)
@@ -83,7 +83,8 @@ static char lowercase_array[] = {
   'y', 'z',
 };
 
-static const char *number_value_to_ascii(int value, char format, int width)
+static const char *number_value_to_ascii(int value, char format,
+					 int width)
 {
   static char buf[128];		// must be at least 21
   switch (format) {

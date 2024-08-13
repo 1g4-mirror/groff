@@ -1569,7 +1569,7 @@ void troff_output_file::really_copy_file(hunits x, vunits y,
   errno = 0;
   FILE *ifp = include_search_path.open_file_cautious(filename);
   if (ifp == 0)
-    error("can't open '%1': %2", filename, strerror(errno));
+    error("cannot open '%1': %2", filename, strerror(errno));
   else {
     int c;
     while ((c = getc(ifp)) != EOF)
