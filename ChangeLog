@@ -1,5 +1,14 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp
+	(top_level_diversion::transparent_output):
+	* src/roff/troff/input.cpp (transparent_translate): Drop
+	`GROFF_ENABLE_TRANSPARENCY_WARNINGS` environment variable
+	kludge.  The underlying problems are better understood now and
+	giving the user tools to fix them is on the horizon.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Drop Autoconf-guarded inclusion of
 	<unistd.h>.  Jugding by the groff 1.16 change log this appears
 	to have to do with the use of wait(2)-related macros, but

@@ -460,10 +460,9 @@ void top_level_diversion::transparent_output(unsigned char c)
 
 void top_level_diversion::transparent_output(node * /*n*/)
 {
-  // TODO: Restore this diagnostic when Savannah #65371 is fixed;
-  // perhaps suggest use of \[uXXXX] notation.
-  if (getenv("GROFF_ENABLE_TRANSPARENCY_WARNINGS") != 0 /* nullptr */)
-    error("can't transparently output node at top level");
+  // TODO: When Savannah #63074 is fixed, the user will have a way to
+  // avoid this error.
+  error("can't transparently output node at top level");
 }
 
 // Implement the internals of `.cf`.
