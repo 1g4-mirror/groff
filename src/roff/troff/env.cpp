@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <errno.h> // errno
 #include <math.h> // ceil()
 
 symbol default_family("T");

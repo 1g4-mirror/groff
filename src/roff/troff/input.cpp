@@ -37,6 +37,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stack>
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <errno.h> // errno
+
 // Needed for getpid() and isatty()
 #include "posix.h"
 

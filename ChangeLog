@@ -1,5 +1,27 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Replace club with scalpel when including standard C
+	library header files.
+
+	* src/roff/troff/troff.h: Drop standard C library header file
+	inclusions altogether.  This exhibited an old style of writing C
+	{and C++?} where your multi-translation unit program would have
+	an overarching header file, included by all your *.c files, and
+	into which you stuffed all of your libc header file dependencies
+	without documenting which symbols you actually needed or where.
+	This tended to lead to excessive inclusion, and that tendency
+	bore out here.  On a glibc-based system, GNU troff doesn't need
+	4 of the 6 headers formerly #included here at all.  And we now
+	use gnulib to help us with portability, which was not the case
+	in 1989.
+
+	* src/roff/troff/env.cpp:
+	* src/roff/troff/input.cpp:
+	* src/roff/troff/node.cpp: Include <errno.h> and annotate why.
+	* src/roff/troff/reg.cpp: Include <assert.h> and annotate why.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_string_case_transform): Use
 	libgroff's `cmupper()` and `cmlower()` functions instead of
 	going directly to the standard C library's `to{upp,low}er()`.
