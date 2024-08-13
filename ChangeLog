@@ -1,5 +1,9 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/arithmetic-works.sh: Add more test cases.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (troff_output_file::flush_tbuf): Add
 	assertion: the type size should never be negative.
 

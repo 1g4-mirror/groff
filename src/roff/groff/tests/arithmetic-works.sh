@@ -78,6 +78,38 @@ echo "$output" | grep -Fqx '3: .l=24, .H=24' || wail
 echo "checking that setting huge page length does not overflow" >&2
 echo "$output" | grep -Fqx '4: .p=40, .V=40' || wail
 
+input='.
+.ec @
+.nf
+.nr a 99999999999999999999n
+.nr b (-99999999999999999999n)
+.nr c 99999999999999999999v
+.nr d (-99999999999999999999v)
+a: @na
+b: @nb
+c: @nc
+d: @nd
+.'
+
+output=$(echo "$input" | "$groff" -T ascii)
+echo "$output"
+
+# The vunits and hunits constructors in src/roff/troff/number.cpp don't
+# permit INT_MIN to be assigned, as a side effect of making rounding
+# behavior sign-independent.
+
+echo "checking assignment of large positive horizontal measurement" >&2
+echo "$output" | grep -Fqx 'a: 2147483647' || wail
+
+echo "checking assignment of large negative horizontal measurement" >&2
+echo "$output" | grep -Fqx 'b: -2147483647' || wail
+
+echo "checking assignment of large positive vertical measurement" >&2
+echo "$output" | grep -Fqx 'c: 2147483647' || wail
+
+echo "checking assignment of large negative vertical measurement" >&2
+echo "$output" | grep -Fqx 'd: -2147483647' || wail
+
 # Exercise boundary values.
 
 input='.
