@@ -163,23 +163,6 @@ close to the source code it describes.
   subdirectory of "contrib".
 
 
-4) groff language parser
-
-The "troff" program in "src/roff/troff" parses the groff input language.
-There, "input.cpp" implements the main loop and tokenizes input.  Input
-tokens are transformed into nodes (a GNU troff internal data structure)
-by "env.cpp" and "node.cpp".  Routines in the latter file generate the
-page description language from lists of nodes.
-
-
-5) page description language parser
-
-The parser for the page description language produced by troff is
-implemented in "src/libs/libdriver/input.cpp".  This is used by all
-groff output drivers written in C++.  ("gropdf", written in Perl,
-performs its own parsing.)
-
-
 ##### Editor settings
 Local Variables:
 fill-column: 72
