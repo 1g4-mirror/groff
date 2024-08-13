@@ -1,5 +1,16 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Drop Autoconf-guarded inclusion of
+	<unistd.h>.  Jugding by the groff 1.16 change log this appears
+	to have to do with the use of wait(2)-related macros, but
+	dropping it doesn't break a glibc-based build, and our
+	"src/include/nonposix.h" header has the same guarded inclusion,
+	so we should still get it on unusual systems.  If a build breaks
+	due to this change, we should document the specific symbol(s) we
+	need and/or rely on gnulib for them.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Replace club with scalpel when including standard C
 	library header files.
 
