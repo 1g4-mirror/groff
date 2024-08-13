@@ -1,3 +1,31 @@
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/troff.h: Slightly refactor; boolify and rename
+	some global `int`s.
+	- `suppress_output_flag` -> `want_output_suppressed`
+	- `color_flag` -> `want_color_output`
+	- `is_html` -> `is_writing_html`
+	* src/roff/troff/env.cpp (environment::newline)
+	(environment::make_tag, environment::construct_state)
+	(environment::construct_format_state)
+	(environment::construct_new_line_state):
+	* src/roff/troff/input.cpp ([top level], main):
+	* src/roff/troff/mtsm.cpp (statem:add_tag_ta, mtsm::push_state)
+	(mtsm::pop_state, mtsm::flush, mtsm:changed):
+	* src/roff/troff/node.cpp (suppress_node::tprint)
+	(space_char_hmotion_node::tprint)
+	(unbreakable_space_node::tprint): Migrate `is_html`.
+	* src/roff/troff/input.cpp ([top level], activate_color, main):
+	(init_input_requests):
+	* src/roff/troff/node.cpp (troff_output_file::fill_color)
+	(troff_output_file::glyph_color): Migrate `color_flag`.
+	* src/roff/troff/input.cpp (init_input_requests): Use
+	`readonly_boolean_register` class to expose `want_color_output`
+	to documents, not `readonly_register`.
+	* src/roff/troff/input.cpp ([top level], main):
+	* src/roff/troff/node.cpp (init_output): Migrate
+	`suppress_output_flag`.
+
 2024-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (hyphenation_patterns_file_code):

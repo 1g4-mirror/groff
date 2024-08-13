@@ -1838,7 +1838,7 @@ void environment::newline()
   }
   input_line_start = line == 0 /* nullptr */ ? H0 : width_total;
   if (to_be_output) {
-    if (is_html && !fill) {
+    if (is_writing_html && !fill) {
       curdiv->modified_tag.incl(MTSM_EOL);
       if (suppress_next_eol)
 	suppress_next_eol = false;
@@ -2336,7 +2336,7 @@ void environment::final_break()
 
 node *environment::make_tag(const char *nm, int i)
 {
-  if (is_html) {
+  if (is_writing_html) {
     /*
      * need to emit tag for post-grohtml
      * but we check to see whether we can emit specials
@@ -2386,7 +2386,7 @@ void environment::dump_node_list()
 
 statem *environment::construct_state(bool has_only_eol)
 {
-  if (is_html) {
+  if (is_writing_html) {
     statem *s = new statem();
     if (!has_only_eol) {
       s->add_tag(MTSM_IN, indent);
@@ -2417,7 +2417,7 @@ statem *environment::construct_state(bool has_only_eol)
 void environment::construct_format_state(node *nd, bool was_centered,
 					 int filling)
 {
-  if (is_html) {
+  if (is_writing_html) {
     // find first glyph node which has a state.
     while (nd != 0 /* nullptr */ && nd->state == 0 /* nullptr */)
       nd = nd->next;
@@ -2447,7 +2447,7 @@ void environment::construct_format_state(node *nd, bool was_centered,
 
 void environment::construct_new_line_state(node *nd)
 {
-  if (is_html) {
+  if (is_writing_html) {
     // find first glyph node which has a state.
     while (nd != 0 /* nullptr */ && nd->state == 0 /* nullptr */)
       nd = nd->next;

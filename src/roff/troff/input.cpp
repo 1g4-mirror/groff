@@ -82,7 +82,7 @@ void transparent_file();
 token tok;
 bool want_break = false;
 int class_flag = 0;
-int color_flag = 1;		// colors are on by default
+bool want_color_output = true;
 static int backtrace_flag = 0;
 char *pipe_command = 0 /* nullptr */;
 charinfo *charset_table[256];
@@ -102,8 +102,8 @@ static symbol leading_spaces_macro_name;
 static int compatible_flag = 0;
 static int do_old_compatible_flag = -1;	// for .do request
 bool want_abstract_output = false;
-int suppress_output_flag = 0;
-int is_html = 0;
+bool want_output_suppressed = false;
+bool is_writing_html = false;
 static int suppression_level = 0;	// depth of nested \O escapes
 
 bool in_nroff_mode = false;
@@ -1486,9 +1486,9 @@ static void activate_color()
 {
   int n;
   if (has_arg() && get_integer(&n))
-    color_flag = (n > 0);
+    want_color_output = (n > 0);
   else
-    color_flag = 1;
+    want_color_output = true;
   skip_line();
 }
 
@@ -8356,13 +8356,13 @@ int main(int argc, char **argv)
     case 'T':
       device = optarg;
       tflag = 1;
-      is_html = (strcmp(device, "html") == 0);
+      is_writing_html = (strcmp(device, "html") == 0);
       break;
     case 'C':
       compatible_flag = 1;
       // fall through
     case 'c':
-      color_flag = 0;
+      want_color_output = false;
       break;
     case 'M':
       macro_path.command_line_dir(optarg);
@@ -8397,7 +8397,7 @@ int main(int argc, char **argv)
       want_abstract_output = true;
       break;
     case 'z':
-      suppress_output_flag = 1;
+      want_output_suppressed = true;
       break;
     case 'n':
       if (sscanf(optarg, "%d", &next_page_number) == 1)
@@ -8715,7 +8715,7 @@ void init_input_requests()
   register_dictionary.define(".cp", new readonly_register(&do_old_compatible_flag));
   register_dictionary.define(".O", new variable_reg(&suppression_level));
   register_dictionary.define(".c", new lineno_reg);
-  register_dictionary.define(".color", new readonly_register(&color_flag));
+  register_dictionary.define(".color", new readonly_boolean_register(&want_color_output));
   register_dictionary.define(".F", new filename_reg);
   register_dictionary.define(".g", new readonly_text_register("1"));
   register_dictionary.define(".H", new readonly_register(&hresolution));

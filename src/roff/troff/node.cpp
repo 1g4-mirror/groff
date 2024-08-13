@@ -1263,7 +1263,7 @@ void troff_output_file::fill_color(color *col)
   if (!col || current_fill_color == col)
     return;
   current_fill_color = col;
-  if (!color_flag)
+  if (!want_color_output)
     return;
   flush_tbuf();
   do_motion();
@@ -1316,7 +1316,7 @@ void troff_output_file::glyph_color(color *col)
   if (!col || current_glyph_color == col)
     return;
   current_glyph_color = col;
-  if (!color_flag)
+  if (!want_color_output)
     return;
   flush_tbuf();
   // grotty doesn't like a color command if the vertical position is zero.
@@ -4178,7 +4178,7 @@ void suppress_node::tprint(troff_output_file *out)
 	else
 	  strcpy(name, image_filename);
       }
-      if (is_html) {
+      if (is_writing_html) {
 	switch (last_position) {
 	case 'c':
 	  out->start_special();
@@ -4852,7 +4852,7 @@ void hmotion_node::tprint(troff_output_file *out)
 void space_char_hmotion_node::tprint(troff_output_file *out)
 {
   out->fill_color(col);
-  if (is_html) {
+  if (is_writing_html) {
     // we emit the space width as a negative glyph index
     out->flush_tbuf();
     out->do_motion();
@@ -5917,7 +5917,7 @@ void unbreakable_space_node::tprint(troff_output_file *out)
 {
   out->fill_color(col);
   out->word_marker();
-  if (is_html) {
+  if (is_writing_html) {
     // we emit the space width as a negative glyph index
     out->flush_tbuf();
     out->do_motion();
@@ -6786,7 +6786,7 @@ static void set_soft_hyphen_character()
 
 void init_output()
 {
-  if (suppress_output_flag)
+  if (want_output_suppressed)
     the_output = new suppress_output_file;
   else if (want_abstract_output)
     the_output = new ascii_output_file;
