@@ -1,5 +1,10 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/symbol.h (class symbol): Boolify `is_null()` and
+	`is_empty()` member functions.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Rename `WARN_TOTAL` symbol to `WARN_MAX` for
 	consistency with other GNU troff enumerated types.
 
