@@ -8547,14 +8547,15 @@ void warn_request()
 {
   int n;
   if (has_arg() && get_integer(&n)) {
-    if (n & ~WARN_TOTAL) {
-      warning(WARN_RANGE, "warning mask must be between 0 and %1", WARN_TOTAL);
-      n &= WARN_TOTAL;
+    if (n & ~WARN_MAX) {
+      warning(WARN_RANGE, "warning mask must be in range 0..%1",
+	      WARN_MAX);
+      n &= WARN_MAX;
     }
     warning_mask = n;
   }
   else
-    warning_mask = WARN_TOTAL;
+    warning_mask = WARN_MAX;
   skip_line();
 }
 
@@ -9003,8 +9004,8 @@ static struct {
   { "ig", WARN_IG },
   { "color", WARN_COLOR },
   { "file", WARN_FILE },
-  { "all", WARN_TOTAL & ~(WARN_DI | WARN_MAC | WARN_REG) },
-  { "w", WARN_TOTAL },
+  { "all", WARN_MAX & ~(WARN_DI | WARN_MAC | WARN_REG) },
+  { "w", WARN_MAX },
   { "default", DEFAULT_WARNING_MASK },
 };
 

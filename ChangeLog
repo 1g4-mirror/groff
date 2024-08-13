@@ -1,5 +1,16 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Rename `WARN_TOTAL` symbol to `WARN_MAX` for
+	consistency with other GNU troff enumerated types.
+
+	* src/roff/troff/troff.h:
+	* src/roff/troff/input.cpp: Do it.
+
+	* src/roff/troff/input.cpp (warn_request): Clarify warning
+	diagnostic.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp
 	(top_level_diversion::transparent_output, continue_page_eject)
 	(top_level_diversion::set_diversion_trap)

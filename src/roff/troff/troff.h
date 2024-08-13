@@ -68,10 +68,10 @@ enum warning_type {
   WARN_IG =  01000000,
   WARN_COLOR = 02000000,
   WARN_FILE = 04000000
-  // change WARN_TOTAL if you add more warning types
+  // change WARN_MAX if you add more warning types
 };
 
-const int WARN_TOTAL = 07777777;
+const int WARN_MAX = 07777777;
 
 int warning(warning_type, const char *,
 	    const errarg & = empty_errarg,
