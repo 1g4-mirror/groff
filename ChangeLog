@@ -1,5 +1,11 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_string_case_transform): Use
+	libgroff's `cmupper()` and `cmlower()` functions instead of
+	going directly to the standard C library's `to{upp,low}er()`.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/troff.h: Slightly refactor; boolify and rename
 	some global `int`s.
 	- `suppress_output_flag` -> `want_output_suppressed`

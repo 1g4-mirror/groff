@@ -4934,9 +4934,9 @@ void do_string_case_transform(case_xform_mode mode)
       break;
     else
       if (mode == STRING_DOWNCASE)
-	nc = tolower(c);
+	nc = cmlower(c);
       else
-	nc = toupper(c);
+	nc = cmupper(c);
     mac->append(nc);
   }
   request_dictionary.define(s, mac);
