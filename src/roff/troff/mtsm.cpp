@@ -426,7 +426,7 @@ void mtsm::inherit(statem *s, int reset_bool)
 
 void mtsm::flush(FILE *fp, statem *s, string tag_list)
 {
-  if (is_writing_html && s) {
+  if (is_writing_html && (s != 0 /* nullptr */)) {
     inherit(s, 1);
     driver->flush(fp, s);
     // Set rj, ce, ti to unknown if they were known and
@@ -510,8 +510,8 @@ int mtsm::has_changed(string_value_state t, statem *s)
 
 int mtsm::changed(statem *s)
 {
-  if (s == 0 || !is_writing_html)
-    return 0;
+  if ((s == 0 /* nullptr */) || !is_writing_html)
+    return 0 /* nullptr */;
   s = new statem(s);
   inherit(s, 0);
   int result = has_changed(MTSM_EOL, s)
