@@ -243,11 +243,16 @@ macro_diversion::~macro_diversion()
 
 vunits macro_diversion::distance_to_next_trap()
 {
-  if (!diversion_trap.is_null() && diversion_trap_pos > vertical_position)
-    return diversion_trap_pos - vertical_position;
+  vunits distance = 0;
+  if (!diversion_trap.is_null()
+      && (diversion_trap_pos > vertical_position))
+    distance = diversion_trap_pos - vertical_position;
   else
-    // Subtract vresolution so that vunits::vunits does not overflow.
-    return vunits(INT_MAX - vresolution);
+    // Do the (saturating) arithmetic ourselves to avoid an error
+    // diagnostic from constructor in number.cpp.
+    distance = units(INT_MAX / vresolution);
+  assert(distance >= 0);
+  return distance;
 }
 
 const char *macro_diversion::get_next_trap_name()

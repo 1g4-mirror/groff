@@ -1,5 +1,13 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp
+	(macro_diversion::distance_to_next_trap): Return a value
+	quantized to the vertical resolution of the output device.  Add
+	an `assert()` for a paranoia's sake, since there is an integer
+	arithmetic land mine here.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/arithmetic-works.sh: Add more test cases.
 
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
