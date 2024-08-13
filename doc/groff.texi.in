@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle July 2024
+@subtitle August 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -5615,13 +5615,24 @@ package can load it with the @code{mso} (``macro source'') request.
 @c (e.g., what character encodings _they_ support for output and their
 @c responsibility for converting to them) as well.
 
+@c BEGIN Keep roughly parallel with groff_tmac(5) section "Input
+@c Encodings".
 @node Input Encodings, Input Conventions, Macro Packages, Text
 @subsection Input Encodings
 
 The @command{groff} command's @option{-k} option calls the
 @command{preconv} preprocessor to perform input character encoding
 conversions.  Input to the GNU @code{troff} formatter itself, on the
-other hand, must be in one of two encodings it can recognize.
+other hand, must be in a single-byte encoding compatible with @w{ISO
+646:1991 IRV} (US-@acronym{ASCII}).
+
+Certain macro files are responsible for translating input character
+codes above 127 decimal to appropriate GNU @code{troff} escape
+sequences, and setting up hyphenation codes for letters their encodings
+define; typically, they also invoke @code{hcode} requests to case-fold
+such letters where necessary so that they match hyphenation patterns.
+As a rule, a localization file (recall @pxref{Manipulating Hyphenation})
+loads one of these files; a document need not do so directly.
 
 @table @code
 @item latin1
@@ -5654,12 +5665,11 @@ To use @w{KOI8-R}, an encoding for the Russian language, either place
 supply @samp{-m koi8-r} as a command-line argument to @code{groff}.  The
 localization file @file{ru.tmac} takes care of this automatically; see
 @ref{Manipulating Hyphenation}.@footnote{KOI8-R code points in the range
-@code{0x80}--@code{0x9F} are not valid input on systems using ISO
-character codings natively; see @ref{Identifiers}.  This should be no
-impediment to practical documents, as these KOI8-R code points do not
-encode letters, but box-drawing symbols and characters that are better
-obtained via special character escape sequences; see
-@cite{groff_char@r{(7)}}.}
+@code{0x80}--@code{0x9F} are not valid input to GNU @command{troff}; see
+@ref{Identifiers}.  This should be no impediment to practical documents,
+as these KOI8-R code points do not encode letters, but box-drawing
+symbols and characters that are better obtained via special character
+escape sequences; see @cite{groff_char@r{(7)}}.}
 
 @item latin2
 @cindex encoding, input, @w{ISO Latin-2} (@w{8859-2})
@@ -5693,6 +5703,8 @@ coverage for French.  To use this encoding, invoke @w{@samp{.mso
 latin9.tmac}} at the beginning of your document or supply
 @samp{-m latin9} as a command-line argument to @code{groff}.
 @end table
+@c END Keep roughly parallel with groff_tmac(5) section "Input
+@c Encodings".
 
 Some characters from an input encoding may not be available with a
 particular output driver, or their glyphs may not have representation in
@@ -8906,8 +8918,7 @@ patterns.  Its arguments are pairs of character codes---integers from 0
 to@tie{}255.  The request maps character code@tie{}@var{a} to
 code@tie{}@var{b}, code@tie{}@var{c} to code@tie{}@var{d}, and so on.
 Character codes that would otherwise be invalid in GNU @code{troff} can
-be used.  By default, every code maps to itself except those for letters
-`A' to `Z', which map to those for `a' to `z'.
+be used.
 
 @cindex localization
 @pindex troffrc
