@@ -1,5 +1,12 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/e.tmac (n1, n2): Invoke the renamed `po` request
+	directly, not our wrapper for it.
+
+	Fixes a latent issue with saturating arithmetic.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp
 	(macro_diversion::distance_to_next_trap): Return a value
 	quantized to the vertical resolution of the output device.  Add
