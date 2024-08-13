@@ -8949,12 +8949,12 @@ automatically hyphenate at all.
 For automatic hyphenation to work, the formatter must know which letters
 are equivalent; for example, the letter @samp{E} behaves like @samp{e};
 only the latter typically appears in hyphenation pattern files.  GNU
-@code{troff} expects characters that participate in automatic
+@command{troff} expects characters that participate in automatic
 hyphenation to be assigned @dfn{hyphenation codes} that define these
-equivalence classes.  At startup, GNU @code{troff} assigns hyphenation
-codes to the letters @samp{a}--@samp{z}, applies the same codes to
-@samp{A}--@samp{Z} in one-to-one correspondence, and assigns a code of
-zero to all other characters.
+equivalence classes.  At startup, GNU @command{troff} assigns
+hyphenation codes to the letters @samp{a}--@samp{z}, applies the same
+codes to @samp{A}--@samp{Z} in one-to-one correspondence, and assigns a
+code of zero to all other characters.
 
 The @code{hcode} request extends this principle to letters outside the
 Unicode basic Latin alphabet; without it, words containing such letters
@@ -8984,18 +8984,18 @@ hyphenation codes to the letters @samp{ÄäÖöÜüß}, needed for German.
 .hcode ß ß
 @endExample
 
-Without these assignments, GNU @code{troff} treats the German word
+Without these assignments, GNU @command{troff} treats the German word
 @w{`Kindergärten'} (the plural form of `kindergarten') as two words
 @w{`kinderg'} and @w{`rten'} because the hyphenation code of the
 umlaut@tie{}a is zero by default, just like a space.  There is a German
-hyphenation pattern that covers @w{`kinder'}, so GNU @code{troff} finds
-the hyphenation `kin-der'.  The other two hyphenation points
+hyphenation pattern that covers @w{`kinder'}, so GNU @command{troff}
+finds the hyphenation `kin-der'.  The other two hyphenation points
 (`kin-der-gär-ten') are missed.
 
-If for some reason you desire to remove a character's hyphenation code,
-use @code{hcode} to copy the code of a punctuation character to it; for
-example, @samp{.hcode ß $} assigns a hyphenation code of zero to
-@samp{ß} (unless @samp{$} has already been assigned a different one).
+To remove a character's hyphenation code, copy the code of a character
+with a hyphenation code value of zero to it.  For example, @samp{.hcode
+ß $} removes the hyphenation code from @samp{ß} (unless @samp{$} has
+already been assigned a different one).
 
 The @code{phcode} request may be helpful to troubleshoot hyphenation
 code assignments.  @xref{Debugging}.
@@ -17042,9 +17042,9 @@ or for instrumentation while troubleshooting.  The @code{ex} and
 exit codes respectively, to halt further processing when continuing
 would be fruitless.  Examine the state of the formatter with requests
 that write lists of defined names (macros, strings, and diversions),
-colors, composite characters, environments, hyphenation exceptions,
-registers, page location traps, and a list of output nodes corresponding
-to the pending input line to the standard error stream.
+colors, composite characters, environments, hyphenation codes and
+exceptions, registers, page location traps, and a list of output nodes
+corresponding to the pending input line to the standard error stream.
 @c END Keep parallel with section "Debugging" of groff(7).
 
 @Defreq {lf, line [@Var{file}]}

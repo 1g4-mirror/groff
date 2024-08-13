@@ -285,12 +285,39 @@ GNU
 .I troff \" GNU
 will not perform automatic hyphenation.
 .
+.
+.P
+For automatic hyphenation to work,
+the formatter must know which letters are equivalent;
+for example,
+the letter \[lq]E\[rq] behaves like \[lq]e\[rq];
+only the latter typically appears in hyphenation pattern files.
+.
+GNU
+.I troff \" GNU
+expects characters that participate in automatic hyphenation to be
+assigned
+.I "hyphenation codes"
+that define these equivalence classes.
+.
+At startup,
+GNU
+.I troff \" GNU
+assigns hyphenation codes to the letters \[lq]a\[rq]\[en]\[lq]z\[rq],
+applies the same codes to \[lq]A\[rq]\[en]\[lq]Z\[rq]
+in one-to-one correspondence,
+and assigns a code of zero to all other characters.
+.
+.
+.P
 The
 .B hcode
-request assigns values to character codes such that they can be handled
-consistently by the hyphenation patterns,
-for instance by treating accented letters the same as their unaccented
-counterparts.
+request extends this principle to letters
+outside the Unicode basic Latin alphabet;
+without it,
+words containing such letters
+won't be hyphenated properly
+even if the corresponding hyphenation patterns contain them.
 .
 .
 .P
@@ -2923,8 +2950,8 @@ to
 .RI code\~ d ,
 and so on.
 .
-Character codes that would otherwise be invalid in
-.I groff
+Character codes that would otherwise be invalid in GNU
+.I troff \" GNU
 can be used.
 .
 By default,
