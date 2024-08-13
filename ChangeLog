@@ -1,5 +1,10 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (troff_output_file::flush_tbuf): Add
+	assertion: the type size should never be negative.
+
+2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/symbol.h (class symbol): Boolify `is_null()` and
 	`is_empty()` member functions.
 

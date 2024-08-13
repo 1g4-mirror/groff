@@ -1039,6 +1039,7 @@ void troff_output_file::flush_tbuf()
     put(' ');
   }
   check_output_limits(hpos, vpos);
+  assert(current_size > 0);
   check_output_limits(hpos, vpos - current_size);
 
   for (int i = 0; i < tbuf_len; i++)
