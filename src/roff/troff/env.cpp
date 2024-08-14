@@ -2108,9 +2108,9 @@ void environment::hyphenate_line(bool must_break_here)
     // this is for characters like hyphen and emdash
     int prev_code = 0;
     for (hyphen_list *h = sl; h; h = h->next) {
-      h->breakable = (prev_code != 0
-		      && h->next != 0 /* nullptr */
-		      && h->next->hyphenation_code != 0);
+      h->is_breakable = (prev_code != 0
+			 && h->next != 0 /* nullptr */
+			 && h->next->hyphenation_code != 0);
       prev_code = h->hyphenation_code;
     }
   }

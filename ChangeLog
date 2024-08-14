@@ -12,6 +12,15 @@
 	* src/roff/troff/node.cpp (glyph_node::add_self)
 	(composite_node::add_self): Update comparisons to use new name.
 
+	* src/roff/troff/node.h (struct hyphen_list): Boolify. Demote
+	`breakable` member from `unsigned char` to `bool` and rename it
+	to `is_breakable'.
+	(hyphen_list::hyphen_list): Migrate struct initializer list to
+	new name and Boolean literal.
+	* src/roff/troff/env.cpp (environment::hyphenate_line):
+	* src/roff/troff/node.cpp (break_char_node::add_self): Update
+	comparisons.
+
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/token.h (token:ch()): Return character instead

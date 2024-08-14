@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 struct hyphen_list {
   bool is_hyphen;
-  unsigned char breakable;
+  bool is_breakable;
   unsigned char hyphenation_code;
   hyphen_list *next;
   hyphen_list(unsigned char code,
@@ -638,7 +638,7 @@ node *copy_node_list(node *);
 int get_bold_fontno(int);
 
 inline hyphen_list::hyphen_list(unsigned char code, hyphen_list *p)
-: is_hyphen(false), breakable(0), hyphenation_code(code), next(p)
+: is_hyphen(false), is_breakable(false), hyphenation_code(code), next(p)
 {
 }
 
