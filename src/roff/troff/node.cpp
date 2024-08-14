@@ -1973,7 +1973,7 @@ class dbreak_node : public node {
   node *pre;
   node *post;
 public:
-  dbreak_node(node *, node *, statem *, int, node * = 0);
+  dbreak_node(node *, node *, statem *, int, node * = 0 /* nullptr */);
   ~dbreak_node();
   node *copy();
   node *merge_glyph_node(glyph_node *);
@@ -1983,8 +1983,9 @@ public:
   hunits italic_correction();
   hunits subscript_correction();
   void tprint(troff_output_file *);
-  breakpoint *get_breakpoints(hunits width, int ns, breakpoint *rest = 0,
-			      bool is_inner = false);
+  breakpoint *get_breakpoints(hunits /* width */, int /* ns */,
+			      breakpoint * /* rest */ = 0 /* nullptr */,
+			      bool /* is_inner */ = false);
   int nbreaks();
   int ends_sentence();
   void split(int, node **, node **);

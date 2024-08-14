@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -222,8 +222,10 @@ class word_space_node : public space_node {
 protected:
   width_list *orig_width;
   bool unformat;
-  word_space_node(hunits, int, color *, width_list *, bool, statem *,
-		  int, node * /* x */ = 0 /* nullptr */);
+  word_space_node(hunits /* d */, int /* s */, color * /* c */,
+		  width_list * /* w */, bool /* flag */,
+		  statem * /* st */, int /* divlevel */,
+		  node * /* x */ = 0 /* nullptr */);
 public:
   word_space_node(hunits, color *, width_list *,
 		  node * /* x */ = 0 /* nullptr */);
