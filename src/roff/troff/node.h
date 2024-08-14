@@ -325,21 +325,21 @@ public:
 class hmotion_node : public node {
 protected:
   hunits n;
-  unsigned char was_tab;
+  bool was_tab;
   bool unformat;
   color *col;			/* for grotty */
 public:
   hmotion_node(hunits i, color *c, node *nxt = 0 /* nullptr */)
-    : node(nxt), n(i), was_tab(0), unformat(false), col(c) {}
+    : node(nxt), n(i), was_tab(false), unformat(false), col(c) {}
   hmotion_node(hunits i, color *c, statem *s, int divlevel,
 	       node *nxt = 0 /* nullptr */)
-    : node(nxt, s, divlevel), n(i), was_tab(0), unformat(false),
+    : node(nxt, s, divlevel), n(i), was_tab(false), unformat(false),
       col(c) {}
-  hmotion_node(hunits i, int flag1, bool flag2, color *c, statem *s,
+  hmotion_node(hunits i, bool flag1, bool flag2, color *c, statem *s,
 	       int divlevel, node *nxt = 0 /* nullptr */)
     : node(nxt, s, divlevel), n(i), was_tab(flag1), unformat(flag2),
       col(c) {}
-  hmotion_node(hunits i, int flag1, bool flag2, color *c,
+  hmotion_node(hunits i, bool flag1, bool flag2, color *c,
 	       node *nxt = 0 /* nullptr */)
     : node(nxt), n(i), was_tab(flag1), unformat(flag2), col(c) {}
   node *copy();

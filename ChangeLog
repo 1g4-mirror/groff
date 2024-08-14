@@ -39,6 +39,10 @@
 	(word_space_node::word_space_node): Update data type in
 	constructor's argument list.
 
+	* src/roff/troff/node.h (class hmotion_node): Demote `was_tab`
+	member from `unsigned char` to `bool`.  Use Boolean literals for
+	it in constructors' initializer lists.
+
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/token.h (token:ch()): Return character instead
