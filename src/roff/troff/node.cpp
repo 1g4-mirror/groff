@@ -2867,13 +2867,13 @@ enum break_char_type {
 
 node *break_char_node::add_self(node *n, hyphen_list **p)
 {
-  int have_space_node = 0;
+  bool have_space_node = false;
   assert((*p)->hyphenation_code == 0);
   if (break_code & CAN_BREAK_BEFORE) {
     if ((*p)->is_breakable || break_code & IGNORE_HCODES) {
       n = new space_node(H0, col, n);
       n->freeze_space();
-      have_space_node = 1;
+      have_space_node = true;
     }
   }
   if (!have_space_node) {

@@ -21,6 +21,9 @@
 	* src/roff/troff/node.cpp (break_char_node::add_self): Update
 	comparisons.
 
+	* src/roff/troff/node.cpp (break_char_node::add_self): Demote
+	`have_space_node` local variable from `int` to `bool`.
+
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/token.h (token:ch()): Return character instead
