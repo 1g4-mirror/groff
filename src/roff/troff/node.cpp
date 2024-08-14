@@ -3719,7 +3719,7 @@ int space_node::nbreaks()
 static breakpoint *node_list_get_breakpoints(node *p, hunits *widthp,
 					     int ns, breakpoint *rest)
 {
-  if (p != 0) {
+  if (p != 0 /* nullptr */) {
     rest = p->get_breakpoints(*widthp,
 			      ns,
 			      node_list_get_breakpoints(p->next, widthp, ns,

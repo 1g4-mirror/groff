@@ -21,7 +21,8 @@ struct hyphen_list {
   unsigned char breakable;
   unsigned char hyphenation_code;
   hyphen_list *next;
-  hyphen_list(unsigned char code, hyphen_list * /* p */ = 0);
+  hyphen_list(unsigned char code,
+	      hyphen_list * /* p */ = 0 /* nullptr */);
 };
 
 void hyphenate(hyphen_list *, unsigned);
@@ -119,32 +120,35 @@ struct node {
 };
 
 inline node::node()
-: next(0), last(0), state(0), push_state(0), div_nest_level(0),
-  is_special(false)
+: next(0 /* nullptr */), last(0 /* nullptr */),
+  state(0 /* nullptr */), push_state(0 /* nullptr */),
+  div_nest_level(0), is_special(false)
 {
 }
 
 inline node::node(node *n)
-: next(n), last(0), state(0), push_state(0), div_nest_level(0),
-  is_special(false)
+: next(n), last(0 /* nullptr */),
+  state(0 /* nullptr */), push_state(0 /* nullptr */),
+  div_nest_level(0), is_special(false)
 {
 }
 
 inline node::node(node *n, statem *s, int divlevel)
-: next(n), last(0), push_state(0), div_nest_level(divlevel),
-  is_special(false)
+: next(n), last(0 /* nullptr */),
+  push_state(0 /* nullptr */),
+  div_nest_level(divlevel), is_special(false)
 {
   if (s)
     state = new statem(s);
   else
-    state = 0;
+    state = 0 /* nullptr */;
 }
 
 inline node::~node()
 {
-  if (state != 0)
+  if (state != 0 /* nullptr */)
     delete state;
-  if (push_state != 0)
+  if (push_state != 0 /* nullptr */)
     delete push_state;
 }
 
@@ -325,7 +329,7 @@ protected:
   unsigned char unformat;
   color *col;			/* for grotty */
 public:
-  hmotion_node(hunits i, color *c, node *nxt = 0)
+  hmotion_node(hunits i, color *c, node *nxt = 0 /* nullptr */)
     : node(nxt), n(i), was_tab(0), unformat(0), col(c) {}
   hmotion_node(hunits i, color *c, statem *s, int divlevel,
 	       node *nxt = 0 /* nullptr */)
@@ -425,7 +429,7 @@ public:
 
 class dummy_node : public node {
 public:
-  dummy_node(node * nd = 0) : node(nd) {}
+  dummy_node(node * nd = 0 /* nullptr */) : node(nd) {}
   node *copy();
   bool is_same_as(node *);
   const char *type();
@@ -436,7 +440,7 @@ public:
 
 class transparent_dummy_node : public node {
 public:
-  transparent_dummy_node(node * nd = 0) : node(nd) {}
+  transparent_dummy_node(node * nd = 0 /* nullptr */) : node(nd) {}
   node *copy();
   bool is_same_as(node *);
   const char *type();
