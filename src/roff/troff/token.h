@@ -88,11 +88,11 @@ public:
   bool is_page_ejector();
   bool is_hyphen_indicator();
   bool is_zero_width_break();
-  int operator==(const token &); // need this for delimiters, and for conditions
-  int operator!=(const token &); // ditto
+  bool operator==(const token &); // need this for delimiters, and for conditions
+  bool operator!=(const token &); // ditto
   unsigned char ch();
   charinfo *get_char(bool = false);
-  int add_to_zero_width_node_list(node **);
+  bool add_to_zero_width_node_list(node **);
   void make_space();
   void make_newline();
   const char *description();

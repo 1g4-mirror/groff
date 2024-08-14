@@ -1,5 +1,15 @@
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify remaining `token` class member functions that
+	need it.
+
+	* src/roff/troff/token.h (class token): Demote declarations of
+	`operator==`, `operator!=`, `add_to_zero_width_node_list`.
+	* src/roff/troff/input.cpp (token::operator==)
+	(token::operator!=, token::add_to_zero_width_node_list): Do it.
+
+2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Throw diagnostic in event of a diversion's contents
 	overflowing its vertical position.  We can't do anything
 	sensible in this case, so make it a fatal error.  (It's also

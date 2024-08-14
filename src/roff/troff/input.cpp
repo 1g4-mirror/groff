@@ -2475,10 +2475,10 @@ void token::next()
   }
 }
 
-int token::operator==(const token &t)
+bool token::operator==(const token &t)
 {
   if (type != t.type)
-    return 0;
+    return false;
   switch (type) {
   case TOKEN_CHAR:
     return c == t.c;
@@ -2487,11 +2487,11 @@ int token::operator==(const token &t)
   case TOKEN_NUMBERED_CHAR:
     return val == t.val;
   default:
-    return 1;
+    return true;
   }
 }
 
-int token::operator!=(const token &t)
+bool token::operator!=(const token &t)
 {
   return !(*this == t);
 }
@@ -7575,7 +7575,7 @@ void check_missing_character()
 
 // this is for \Z
 
-int token::add_to_zero_width_node_list(node **pp)
+bool token::add_to_zero_width_node_list(node **pp)
 {
   hunits w;
   int s;
@@ -7636,13 +7636,13 @@ int token::add_to_zero_width_node_list(node **pp)
     n->is_escape_colon();
     break;
   default:
-    return 0;
+    return false;
   }
   if (n) {
     n->next = *pp;
     *pp = n;
   }
-  return 1;
+  return true;
 }
 
 void token::process()
