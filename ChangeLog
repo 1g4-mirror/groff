@@ -1,3 +1,20 @@
+2024-08-14  Lukas Javorsky <ljavorsk@redhat.com>
+
+	* src/roff/troff/env.cpp (override_sizes): Zero out
+	heap-allocated memory prior to use.  If `strtok()` returns a
+	null pointer, we break early from the `for` loop before
+	populating it.  The only other case where we break out of the
+	loop is when `lower` is 0, and we do only after adding this 0 to
+	`sizes`.  Since this memory is then passed to
+	`font_size::init_size_table()`, which uses a zero integer to
+	detect the end of the list, we could then access uninitialized
+	memory.  [The user is not required to supply a zero argument to
+	the `sizes` request.  I also revised the patch to use memset(3)
+	instead of (an empty) value initializer, which is a C++03
+	feature.  --GBR]
+
+	Fixes <https://savannah.gnu.org/bugs/?66081>.
+
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (override_sizes): Refer to size range

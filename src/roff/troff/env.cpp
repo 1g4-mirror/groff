@@ -1318,7 +1318,8 @@ void point_size()
 void override_sizes()
 {
   int n = 16;
-  int *sizes = new int[n];
+  int *sizes = new int[n]; // C++03: new int[n]();
+  (void) memset(sizes, 0, (n * sizeof(int)));
   int i = 0;
   char *buf = read_string();
   if (!buf)
