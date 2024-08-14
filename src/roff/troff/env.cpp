@@ -237,13 +237,13 @@ int compare_ranges(const void *p1, const void *p2)
 void font_size::init_size_table(int *sizes)
 {
   nranges = 0;
-  while (sizes[nranges*2] != 0)
+  while (sizes[nranges * 2] != 0)
     nranges++;
   assert(nranges > 0);
   size_table = new size_range[nranges];
   for (int i = 0; i < nranges; i++) {
-    size_table[i].min = sizes[i*2];
-    size_table[i].max = sizes[i*2 + 1];
+    size_table[i].min = sizes[i * 2];
+    size_table[i].max = sizes[i * 2 + 1];
   }
   qsort(size_table, nranges, sizeof(size_range), compare_ranges);
 }
@@ -1342,8 +1342,8 @@ void override_sizes()
     }
     if (i + 2 > n) {
       int *old_sizes = sizes;
-      sizes = new int[n*2];
-      memcpy(sizes, old_sizes, n*sizeof(int));
+      sizes = new int[n * 2];
+      memcpy(sizes, old_sizes, n * sizeof(int));
       n *= 2;
       delete[] old_sizes;
     }
