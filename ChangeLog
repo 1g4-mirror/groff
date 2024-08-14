@@ -1,3 +1,26 @@
+2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Throw diagnostic in event of a diversion's contents
+	overflowing its vertical position.  We can't do anything
+	sensible in this case, so make it a fatal error.  (It's also
+	more likely that your host environment will exhaust memory
+	available to the `troff` process before encountering this
+	problem.)
+
+	* src/roff/troff/div.cpp: New constant symbol
+	`DIVERSION_LENGTH_MAX` defines the maximum permissible vertical
+	size of a diversion in basic units.  Presently, it is `INT_MAX`.
+	(macro_diversion::distance_to_next_trap): When there is no
+	diversion trap, or it has already been passed, report the
+	distance to `DIVERSION_LENGTH_MAX` (rather than `INT_MAX`)
+	divided by the vertical resolution.
+	(macro_diversion::output): Check for overflow when incrementing
+	vertical position upon writing out a line, and emit fatal error
+	diagnostic if it occurs.
+
+	Fixes <https://savannah.gnu.org/bugs/?64229>.  Thanks to Dave
+	Kemper for the discussion.
+
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/e.tmac (n1, n2): Invoke the renamed `po` request

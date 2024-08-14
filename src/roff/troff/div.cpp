@@ -241,6 +241,8 @@ macro_diversion::~macro_diversion()
   dn_reg_contents = vertical_position.to_units();
 }
 
+static int DIVERSION_LENGTH_MAX = INT_MAX;
+
 vunits macro_diversion::distance_to_next_trap()
 {
   vunits distance = 0;
@@ -250,7 +252,7 @@ vunits macro_diversion::distance_to_next_trap()
   else
     // Do the (saturating) arithmetic ourselves to avoid an error
     // diagnostic from constructor in number.cpp.
-    distance = units(INT_MAX / vresolution);
+    distance = units(DIVERSION_LENGTH_MAX / vresolution);
   assert(distance >= 0);
   return distance;
 }
@@ -300,6 +302,17 @@ void macro_diversion::output(node *nd, int retain_size,
   if (width > max_width)
     max_width = width;
   vunits x = v.pre + v.pre_extra + v.post + v.post_extra;
+  int new_vpos = 0;
+  int vpos = vertical_position.to_units();
+  int lineht = x.to_units();
+  bool overflow = false;
+  if (ckd_add(&new_vpos, vpos, lineht))
+    overflow = true;
+  else if (new_vpos > DIVERSION_LENGTH_MAX)
+    overflow = true;
+  if (overflow)
+    fatal("diversion overflow (vertical position: %1u,"
+	  " next line height: %2u)", vpos, lineht);
   if (vertical_position_traps_flag
       && !diversion_trap.is_null() && diversion_trap_pos > vertical_position
       && diversion_trap_pos <= vertical_position + x) {
