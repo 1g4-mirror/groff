@@ -1337,7 +1337,7 @@ void override_sizes()
 	break;
       // fall through
     default:
-      warning(WARN_RANGE, "bad size range '%1'", p);
+      warning(WARN_RANGE, "invalid size range '%1'", p);
       return;
     }
     if (i + 2 > n) {
