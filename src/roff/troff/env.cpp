@@ -4274,7 +4274,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
 	int i = 1;
 	for (tem = h; tem != 0 /* nullptr */; tem = tem->next, i++)
 	  if (pos[j] == i) {
-	    tem->hyphen = 1;
+	    tem->is_hyphen = true;
 	    j++;
 	  }
       }
@@ -4292,14 +4292,14 @@ void hyphenate(hyphen_list *h, unsigned flags)
 	  tem = h;
 	  if (pos[j] == i) {
 	    if (flags & HYPHEN_FIRST_CHAR)
-	      tem->hyphen = 1;
+	      tem->is_hyphen = true;
 	    j++;
 	  }
 	  tem = tem->next;
 	  i++;
 	  if (pos[j] == i) {
 	    if (!(flags & HYPHEN_NOT_FIRST_CHARS))
-	      tem->hyphen = 1;
+	      tem->is_hyphen = true;
 	    j++;
 	  }
 	  tem = tem->next;
@@ -4310,7 +4310,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
 	    --len;
 	  for (; i < len && tem; tem = tem->next, i++)
 	    if (pos[j] == i) {
-	      tem->hyphen = 1;
+	      tem->is_hyphen = true;
 	      j++;
 	    }
 	}
@@ -4335,7 +4335,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
 	  int i;
 	  for (i = 2, tem = h; i < len && tem; tem = tem->next, i++)
 	    if (num[i] & 1)
-	      tem->hyphen = 1;
+	      tem->is_hyphen = true;
 	}
       }
     }

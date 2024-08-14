@@ -2054,7 +2054,7 @@ node *glyph_node::add_self(node *n, hyphen_list **p)
     next = n;
     nn = this;
   }
-  if ((*p)->hyphen)
+  if ((*p)->is_hyphen)
     nn = nn->add_discretionary_hyphen();
   hyphen_list *pp = *p;
   *p = (*p)->next;
@@ -4375,7 +4375,7 @@ node *composite_node::add_self(node *nn, hyphen_list **p)
   assert(ci->get_hyphenation_code() == (*p)->hyphenation_code);
   next = nn;
   nn = this;
-  if ((*p)->hyphen)
+  if ((*p)->is_hyphen)
     nn = nn->add_discretionary_hyphen();
   hyphen_list *pp = *p;
   *p = (*p)->next;
