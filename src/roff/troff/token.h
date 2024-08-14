@@ -187,7 +187,7 @@ inline bool token::is_page_ejector()
 
 inline unsigned char token::ch()
 {
-  return type == TOKEN_CHAR ? c : 0;
+  return type == TOKEN_CHAR ? c : '\0';
 }
 
 inline bool token::is_eof()

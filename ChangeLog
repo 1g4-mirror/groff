@@ -1,5 +1,11 @@
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/token.h (token:ch()): Return character instead
+	of integer literal for this inline function of `(unsigned) char`
+	type.
+
+2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify remaining `token` class member functions that
 	need it.
 
