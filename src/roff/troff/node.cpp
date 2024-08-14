@@ -1984,7 +1984,7 @@ public:
   hunits subscript_correction();
   void tprint(troff_output_file *);
   breakpoint *get_breakpoints(hunits width, int ns, breakpoint *rest = 0,
-			      int is_inner = 0);
+			      bool is_inner = false);
   int nbreaks();
   int ends_sentence();
   void split(int, node **, node **);
@@ -3675,8 +3675,8 @@ void vertical_size_node::asciify(macro *)
   delete this;
 }
 
-breakpoint *node::get_breakpoints(hunits /*width*/, int /*nspaces*/,
-				  breakpoint *rest, int /*is_inner*/)
+breakpoint *node::get_breakpoints(hunits /* width */, int /* nspaces */,
+				  breakpoint *rest, bool /* is_inner */)
 {
   return rest;
 }
@@ -3687,7 +3687,7 @@ int node::nbreaks()
 }
 
 breakpoint *space_node::get_breakpoints(hunits wd, int ns,
-					breakpoint *rest, int is_inner)
+					breakpoint *rest, bool is_inner)
 {
   if (next && next->discardable())
     return rest;
@@ -3722,16 +3722,17 @@ static breakpoint *node_list_get_breakpoints(node *p, hunits *widthp,
   if (p != 0 /* nullptr */) {
     rest = p->get_breakpoints(*widthp,
 			      ns,
-			      node_list_get_breakpoints(p->next, widthp, ns,
-							rest),
-			      1);
+			      node_list_get_breakpoints(p->next, widthp,
+							ns, rest),
+			      true);
     *widthp += p->width();
   }
   return rest;
 }
 
 breakpoint *dbreak_node::get_breakpoints(hunits wd, int ns,
-					 breakpoint *rest, int is_inner)
+					 breakpoint *rest,
+					 bool is_inner)
 {
   breakpoint *bp = new breakpoint;
   bp->next = rest;
@@ -4508,7 +4509,8 @@ bool unbreakable_space_node::is_tag()
 }
 
 breakpoint *unbreakable_space_node::get_breakpoints(hunits, int,
-						    breakpoint *rest, int)
+						    breakpoint *rest,
+						    bool /* is_inner */)
 {
   return rest;
 }

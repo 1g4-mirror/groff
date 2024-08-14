@@ -93,7 +93,7 @@ struct node {
   virtual void is_escape_colon();
   virtual breakpoint *get_breakpoints(hunits, int,
 			      breakpoint * /* rest */ = 0 /* nullptr */,
-			      int /* is_inner */ = 0);
+			      bool /* is_inner */ = false);
   virtual int nbreaks();
   virtual void split(int, node **, node **);
   virtual hyphenation_type get_hyphenation_type();
@@ -198,7 +198,7 @@ public:
   void tprint(troff_output_file *);
   breakpoint *get_breakpoints(hunits, int,
 			      breakpoint * /* rest */ = 0 /* nullptr */,
-			      int /* is_inner */ = 0);
+			      bool /* is_inner */ = false);
   int nbreaks();
   void split(int, node **, node **);
   void ascii_print(ascii_output_file *);
@@ -256,7 +256,7 @@ public:
   bool is_tag();
   breakpoint *get_breakpoints(hunits, int,
 			      breakpoint * /* rest */ = 0 /* nullptr */,
-			      int /* is_inner */ = 0);
+			      bool /* is_inner */ = false);
   int nbreaks();
   void split(int, node **, node **);
   int merge_space(hunits, hunits, hunits);

@@ -43,6 +43,10 @@
 	member from `unsigned char` to `bool`.  Use Boolean literals for
 	it in constructors' initializer lists.
 
+	* src/roff/troff/node.h (struct node): Demote `is_inner`
+	argument from `int` to `bool` and assign to it using Boolean,
+	not integer, literals.
+
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/token.h (token:ch()): Return character instead
