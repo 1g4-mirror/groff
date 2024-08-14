@@ -21,7 +21,7 @@ struct hyphen_list {
   unsigned char breakable;
   unsigned char hyphenation_code;
   hyphen_list *next;
-  hyphen_list(unsigned char code, hyphen_list *p = 0);
+  hyphen_list(unsigned char code, hyphen_list * /* p */ = 0);
 };
 
 void hyphenate(hyphen_list *, unsigned);
@@ -59,7 +59,7 @@ struct node {
   node(node *);
   node(node *, statem *, int);
   node *add_char(charinfo *, environment *, hunits *, int *,
-		 node ** = 0 /* nullptr */);
+		 node ** /* glyph_comp_np */ = 0 /* nullptr */);
 
   virtual ~node();
   virtual node *copy() = 0;
@@ -91,8 +91,8 @@ struct node {
   virtual void freeze_space();
   virtual void is_escape_colon();
   virtual breakpoint *get_breakpoints(hunits, int,
-				      breakpoint * = 0 /* nullptr */,
-				      int = 0);
+			      breakpoint * /* rest */ = 0 /* nullptr */,
+			      int /* is_inner */ = 0);
   virtual int nbreaks();
   virtual void split(int, node **, node **);
   virtual hyphenation_type get_hyphenation_type();
@@ -193,8 +193,8 @@ public:
   void spread_space(int *, hunits *);
   void tprint(troff_output_file *);
   breakpoint *get_breakpoints(hunits, int,
-			      breakpoint * = 0 /* nullptr */,
-			      int = 0);
+			      breakpoint * /* rest */ = 0 /* nullptr */,
+			      int /* is_inner */ = 0);
   int nbreaks();
   void split(int, node **, node **);
   void ascii_print(ascii_output_file *);
@@ -219,10 +219,10 @@ protected:
   width_list *orig_width;
   unsigned char unformat;
   word_space_node(hunits, int, color *, width_list *, int, statem *,
-		  int, node * = 0 /* nullptr */);
+		  int, node * /* x */ = 0 /* nullptr */);
 public:
   word_space_node(hunits, color *, width_list *,
-		  node * = 0 /* nullptr */);
+		  node * /* x */ = 0 /* nullptr */);
   ~word_space_node();
   node *copy();
   int reread(int *);
@@ -238,9 +238,10 @@ public:
 
 class unbreakable_space_node : public word_space_node {
   unbreakable_space_node(hunits, int, color *, statem *, int,
-			 node * = 0 /* nullptr */);
+			 node * /* x */ = 0 /* nullptr */);
 public:
-  unbreakable_space_node(hunits, color *, node * = 0 /* nullptr */);
+  unbreakable_space_node(hunits, color *,
+			 node * /* x */ = 0 /* nullptr */);
   node *copy();
   int reread(int *);
   void tprint(troff_output_file *);
@@ -250,8 +251,8 @@ public:
   int force_tprint();
   bool is_tag();
   breakpoint *get_breakpoints(hunits, int,
-			      breakpoint * = 0 /* nullptr */,
-			      int = 0);
+			      breakpoint * /* rest */ = 0 /* nullptr */,
+			      int /* is_inner */ = 0);
   int nbreaks();
   void split(int, node **, node **);
   int merge_space(hunits, hunits, hunits);
@@ -263,8 +264,9 @@ public:
 class diverted_space_node : public node {
 public:
   vunits n;
-  diverted_space_node(vunits, node * = 0 /* nullptr */);
-  diverted_space_node(vunits, statem *, int, node * = 0 /* nullptr */);
+  diverted_space_node(vunits, node * /* p */ = 0 /* nullptr */);
+  diverted_space_node(vunits, statem *, int,
+		      node * /* p */ = 0 /* nullptr */);
   node *copy();
   int reread(int *);
   bool is_same_as(node *);
@@ -277,9 +279,9 @@ class diverted_copy_file_node : public node {
   symbol filename;
 public:
   vunits n;
-  diverted_copy_file_node(symbol, node * = 0 /* nullptr */);
+  diverted_copy_file_node(symbol, node * /* p */ = 0 /* nullptr */);
   diverted_copy_file_node(symbol, statem *, int,
-			  node * = 0 /* nullptr */);
+			  node * /* p */ = 0 /* nullptr */);
   node *copy();
   int reread(int *);
   bool is_same_as(node *);
@@ -353,9 +355,10 @@ public:
 
 class space_char_hmotion_node : public hmotion_node {
 public:
-  space_char_hmotion_node(hunits, color *, node * = 0 /* nullptr */);
+  space_char_hmotion_node(hunits, color *,
+			  node * /* nxt */ = 0 /* nullptr */);
   space_char_hmotion_node(hunits, color *, statem *, int,
-			  node * = 0 /* nullptr */);
+			  node * /* nxt */ = 0 /* nullptr */);
   node *copy();
   void ascii_print(ascii_output_file *);
   void asciify(macro *);
@@ -388,8 +391,9 @@ class hline_node : public node {
   hunits x;
   node *n;
 public:
-  hline_node(hunits, node *, node * = 0 /* nullptr */);
-  hline_node(hunits, node *, statem *, int, node * = 0 /* nullptr */);
+  hline_node(hunits, node *, node * /* nxt */ = 0 /* nullptr */);
+  hline_node(hunits, node *, statem *, int,
+	     node * /* nxt */ = 0 /* nullptr */);
   ~hline_node();
   node *copy();
   hunits width();
@@ -404,8 +408,9 @@ class vline_node : public node {
   vunits x;
   node *n;
 public:
-  vline_node(vunits, node *, node * = 0 /* nullptr */);
-  vline_node(vunits, node *, statem *, int, node * = 0 /* nullptr */);
+  vline_node(vunits, node *, node * /* nxt */ = 0 /* nullptr */);
+  vline_node(vunits, node *, statem *, int,
+	     node * /* nxt */ = 0 /* nullptr */);
   ~vline_node();
   node *copy();
   void tprint(troff_output_file *);
@@ -420,7 +425,7 @@ public:
 
 class dummy_node : public node {
 public:
-  dummy_node(node *nd = 0) : node(nd) {}
+  dummy_node(node * nd = 0) : node(nd) {}
   node *copy();
   bool is_same_as(node *);
   const char *type();
@@ -431,7 +436,7 @@ public:
 
 class transparent_dummy_node : public node {
 public:
-  transparent_dummy_node(node *nd = 0) : node(nd) {}
+  transparent_dummy_node(node * nd = 0) : node(nd) {}
   node *copy();
   bool is_same_as(node *);
   const char *type();
@@ -462,8 +467,9 @@ class left_italic_corrected_node : public node {
   node *n;
   hunits x;
 public:
-  left_italic_corrected_node(node * = 0 /* nullptr */);
-  left_italic_corrected_node(statem *, int, node * = 0 /* nullptr */);
+  left_italic_corrected_node(node * /* xx */ = 0 /* nullptr */);
+  left_italic_corrected_node(statem *, int,
+			     node * /* xx */ = 0 /* nullptr */);
   ~left_italic_corrected_node();
   void tprint(troff_output_file *);
   void ascii_print(ascii_output_file *);
@@ -537,9 +543,9 @@ class special_node : public node {
   void tprint_char(troff_output_file *, unsigned char);
   void tprint_end(troff_output_file *);
 public:
-  special_node(const macro &, int = 0);
+  special_node(const macro &, int /* n */ = 0);
   special_node(const macro &, tfont *, color *, color *, statem *, int,
-	       int = 0);
+	       int /* n */ = 0);
   node *copy();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
@@ -633,7 +639,8 @@ inline hyphen_list::hyphen_list(unsigned char code, hyphen_list *p)
 }
 
 extern void read_desc();
-extern bool mount_font(int, symbol, symbol = NULL_SYMBOL);
+extern bool mount_font(int, symbol,
+		       symbol /* external_name */ = NULL_SYMBOL);
 extern bool is_font_name(symbol, symbol);
 extern bool is_abstract_style(symbol);
 extern bool mount_style(int, symbol);
