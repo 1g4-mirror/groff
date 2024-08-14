@@ -3411,9 +3411,9 @@ vunits vmotion_node::vertical_width()
   return n;
 }
 
-int node::set_unformat_flag()
+bool node::set_unformat_flag()
 {
-  return 1;
+  return true;
 }
 
 int node::character_type()
@@ -4418,12 +4418,12 @@ width_list::width_list(width_list *w)
 }
 
 word_space_node::word_space_node(hunits d, color *c, width_list *w, node *x)
-: space_node(d, c, x), orig_width(w), unformat(0)
+: space_node(d, c, x), orig_width(w), unformat(false)
 {
 }
 
 word_space_node::word_space_node(hunits d, int s, color *c,
-				 width_list *w, int flag, statem *st,
+				 width_list *w, bool flag, statem *st,
 				 int divlevel, node *x)
 : space_node(d, s, 0, c, st, divlevel, x), orig_width(w), unformat(flag)
 {
@@ -4455,10 +4455,10 @@ node *word_space_node::copy()
 			     div_nest_level);
 }
 
-int word_space_node::set_unformat_flag()
+bool word_space_node::set_unformat_flag()
 {
-  unformat = 1;
-  return 1;
+  unformat = true;
+  return true;
 }
 
 void word_space_node::tprint(troff_output_file *out)
@@ -5234,9 +5234,9 @@ const char *vertical_size_node::type()
   return "vertical_size_node";
 }
 
-int vertical_size_node::set_unformat_flag()
+bool vertical_size_node::set_unformat_flag()
 {
-  return 0;
+  return false;
 }
 
 int vertical_size_node::force_tprint()
@@ -5260,10 +5260,10 @@ const char *hmotion_node::type()
   return "hmotion_node";
 }
 
-int hmotion_node::set_unformat_flag()
+bool hmotion_node::set_unformat_flag()
 {
-  unformat = 1;
-  return 1;
+  unformat = true;
+  return true;
 }
 
 int hmotion_node::force_tprint()

@@ -24,6 +24,21 @@
 	* src/roff/troff/node.cpp (break_char_node::add_self): Demote
 	`have_space_node` local variable from `int` to `bool`.
 
+	* src/roff/troff/node.h (struct node, class hmotion_node):
+	Boolify.  Demote member function `set_unformat_flag()` and
+	member variable `unformat` from `int` to `bool`.  These could
+	use renaming, but `make_unformattable() and `is_unformattable`
+	would be terribly misleading.
+	* src/roff/troff/node.cpp (node::set_unformat_flag)
+	(word_space_node::set_unformat_flag)
+	(vertical_size_node::set_unformat_flag)
+	(hmotion_node::set_unformat_flag): Demote return type and use
+	Boolean literals for assignments and return values.
+	(word_space_node::word_space_node): Use Boolean literal in
+	constructor's initializer list.
+	(word_space_node::word_space_node): Update data type in
+	constructor's argument list.
+
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/token.h (token:ch()): Return character instead

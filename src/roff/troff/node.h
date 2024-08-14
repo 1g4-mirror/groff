@@ -64,7 +64,7 @@ struct node {
 
   virtual ~node();
   virtual node *copy() = 0;
-  virtual int set_unformat_flag();
+  virtual bool set_unformat_flag();
   virtual int force_tprint() = 0;
   virtual bool is_tag() = 0;
   virtual int get_break_code();
@@ -221,8 +221,8 @@ struct width_list {
 class word_space_node : public space_node {
 protected:
   width_list *orig_width;
-  unsigned char unformat;
-  word_space_node(hunits, int, color *, width_list *, int, statem *,
+  bool unformat;
+  word_space_node(hunits, int, color *, width_list *, bool, statem *,
 		  int, node * /* x */ = 0 /* nullptr */);
 public:
   word_space_node(hunits, color *, width_list *,
@@ -230,7 +230,7 @@ public:
   ~word_space_node();
   node *copy();
   int reread(int *);
-  int set_unformat_flag();
+  bool set_unformat_flag();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
   void asciify(macro *);
@@ -315,7 +315,7 @@ public:
   void set_vertical_size(vertical_size *);
   void asciify(macro *);
   node *copy();
-  int set_unformat_flag();
+  bool set_unformat_flag();
   bool is_same_as(node *);
   const char *type();
   int force_tprint();
@@ -326,24 +326,25 @@ class hmotion_node : public node {
 protected:
   hunits n;
   unsigned char was_tab;
-  unsigned char unformat;
+  bool unformat;
   color *col;			/* for grotty */
 public:
   hmotion_node(hunits i, color *c, node *nxt = 0 /* nullptr */)
-    : node(nxt), n(i), was_tab(0), unformat(0), col(c) {}
+    : node(nxt), n(i), was_tab(0), unformat(false), col(c) {}
   hmotion_node(hunits i, color *c, statem *s, int divlevel,
 	       node *nxt = 0 /* nullptr */)
-    : node(nxt, s, divlevel), n(i), was_tab(0), unformat(0), col(c) {}
-  hmotion_node(hunits i, int flag1, int flag2, color *c, statem *s,
+    : node(nxt, s, divlevel), n(i), was_tab(0), unformat(false),
+      col(c) {}
+  hmotion_node(hunits i, int flag1, bool flag2, color *c, statem *s,
 	       int divlevel, node *nxt = 0 /* nullptr */)
     : node(nxt, s, divlevel), n(i), was_tab(flag1), unformat(flag2),
       col(c) {}
-  hmotion_node(hunits i, int flag1, int flag2, color *c,
+  hmotion_node(hunits i, int flag1, bool flag2, color *c,
 	       node *nxt = 0 /* nullptr */)
     : node(nxt), n(i), was_tab(flag1), unformat(flag2), col(c) {}
   node *copy();
   int reread(int *);
-  int set_unformat_flag();
+  bool set_unformat_flag();
   void asciify(macro *);
   void tprint(troff_output_file *);
   hunits width();
