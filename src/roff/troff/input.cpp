@@ -959,9 +959,9 @@ static symbol read_two_char_escape_parameter()
   if (buf[0] != '\0') {
     buf[1] = get_char_for_escape_parameter();
     if (buf[1] == '\0')
-      buf[0] = 0;
+      buf[0] = '\0';
     else
-      buf[2] = 0;
+      buf[2] = '\0';
   }
   return symbol(buf);
 }
@@ -974,7 +974,7 @@ static symbol read_long_escape_parameters(read_mode mode)
   int buf_size = ABUF_SIZE;
   int i = 0;
   char c;
-  int have_char = 0;
+  bool have_char = false;
   for (;;) {
     c = get_char_for_escape_parameter(have_char && mode == WITH_ARGS);
     if (c == 0) {
@@ -982,18 +982,18 @@ static symbol read_long_escape_parameters(read_mode mode)
 	delete[] buf;
       return NULL_SYMBOL;
     }
-    have_char = 1;
+    have_char = true;
     if (mode == WITH_ARGS && c == ' ')
       break;
     if (i + 2 > buf_size) {
       if (buf == abuf) {
-	buf = new char[ABUF_SIZE*2];
+	buf = new char[ABUF_SIZE * 2];
 	memcpy(buf, abuf, buf_size);
-	buf_size = ABUF_SIZE*2;
+	buf_size = ABUF_SIZE * 2;
       }
       else {
 	char *old_buf = buf;
-	buf = new char[buf_size*2];
+	buf = new char[buf_size * 2];
 	memcpy(buf, old_buf, buf_size);
 	buf_size *= 2;
 	delete[] old_buf;
@@ -2732,19 +2732,19 @@ static symbol do_get_long_name(bool required, char end_char)
     // If `end_char` != `\0` we normally have to append a null byte.
     if (i + 2 > buf_size) {
       if (buf == abuf) {
-	buf = new char[ABUF_SIZE*2];
-	memcpy(buf, abuf, buf_size);
-	buf_size = ABUF_SIZE*2;
+	buf = new char[ABUF_SIZE * 2];
+	memcpy(buf, abuf, (buf_size * sizeof(char)));
+	buf_size = ABUF_SIZE * 2;
       }
       else {
 	char *old_buf = buf;
-	buf = new char[buf_size*2];
-	memcpy(buf, old_buf, buf_size);
+	buf = new char[buf_size * 2];
+	memcpy(buf, old_buf, (buf_size * sizeof(char)));
 	buf_size *= 2;
 	delete[] old_buf;
       }
     }
-    if ((buf[i] = tok.ch()) == 0 || buf[i] == end_char)
+    if ((buf[i] = tok.ch()) == '\0' || buf[i] == end_char)
       break;
     i++;
     tok.next();
@@ -5362,13 +5362,13 @@ static symbol get_delimited_name()
   for (;;) {
     if (i + 1 > buf_size) {
       if (buf == abuf) {
-	buf = new char[ABUF_SIZE*2];
+	buf = new char[ABUF_SIZE * 2];
 	memcpy(buf, abuf, buf_size);
-	buf_size = ABUF_SIZE*2;
+	buf_size = ABUF_SIZE * 2;
       }
       else {
 	char *old_buf = buf;
-	buf = new char[buf_size*2];
+	buf = new char[buf_size * 2];
 	memcpy(buf, old_buf, buf_size);
 	buf_size *= 2;
 	delete[] old_buf;
@@ -6263,7 +6263,7 @@ void pipe_source()
       for (; c != '\n' && c != EOF; c = get_copy(0)) {
 	const char *s = asciify(c);
 	size_t slen = strlen(s);
-	if (buf_used + slen + 1> buf_size) {
+	if ((buf_used + slen + 1) > buf_size) {
 	  char *old_buf = buf;
 	  size_t old_buf_size = buf_size;
 	  buf_size *= 2;
@@ -7887,7 +7887,7 @@ char *read_string()
     if (!is_invalid_input_char(c)) {
       if (i + 2 > len) {
 	char *tem = s;
-	s = new char[len*2];
+	s = new char[len * 2];
 	memcpy(s, tem, len);
 	len *= 2;
 	delete[] tem;
@@ -7900,7 +7900,7 @@ char *read_string()
   tok.next();
   if (i == 0) {
     delete[] s;
-    return 0;
+    return 0 /* nullptr */;
   }
   return s;
 }

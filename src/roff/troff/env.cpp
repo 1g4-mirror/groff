@@ -1344,7 +1344,7 @@ void override_sizes()
     if (i + 2 > n) {
       int *old_sizes = sizes;
       sizes = new int[n * 2];
-      memcpy(sizes, old_sizes, n * sizeof(int));
+      memcpy(sizes, old_sizes, (n * sizeof(int)));
       n *= 2;
       delete[] old_sizes;
     }
@@ -3647,7 +3647,7 @@ static void add_hyphenation_exceptions()
     while (i < WORD_MAX && !tok.is_space() && !tok.is_newline()
 	   && !tok.is_eof()) {
       charinfo *ci = tok.get_char(true /* required */);
-      if (ci == 0) {
+      if (0 /* nullptr */ == ci) {
 	skip_line();
 	return;
       }
@@ -3658,18 +3658,18 @@ static void add_hyphenation_exceptions()
       }
       else {
 	unsigned char c = ci->get_hyphenation_code();
-	if (c == 0)
+	if (0 == c)
 	  break;
 	buf[i++] = c;
       }
     }
     if (i > 0) {
       pos[npos] = 0;
-      buf[i] = 0;
+      buf[i] = '\0';
       unsigned char *tem = new unsigned char[npos + 1];
       memcpy(tem, pos, npos + 1);
-      tem = (unsigned char *)current_language->exceptions.lookup(symbol(buf),
-								 tem);
+      tem = static_cast<unsigned char *>
+	    (current_language->exceptions.lookup(symbol(buf), tem));
       if (tem)
 	delete[] tem;
     }
@@ -3825,11 +3825,11 @@ void hyphen_trie::insert_hyphenation(dictionary *ex, const char *pat,
   }
   if (i > 0) {
     pos[npos] = 0;
-    buf[i] = 0;
+    buf[i] = '\0';
     unsigned char *tem = new unsigned char[npos + 1];
     memcpy(tem, pos, npos + 1);
-    tem = (unsigned char *)ex->lookup(symbol(buf), tem);
-    if (tem)
+    tem = static_cast<unsigned char *>(ex->lookup(symbol(buf), tem));
+    if (0 /* nullptr */ == tem)
       delete[] tem;
   }
 }

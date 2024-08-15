@@ -1,3 +1,27 @@
+2024-08-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/env.cpp (override_sizes): Add parentheses to
+	complex expressions.
+	(add_hyphenation_exceptions): Reorder equality comparisons to
+	avoid inadvertent lvalue assignment.
+	(add_hyphenation_exceptions, hyphen_trie::insert_hyphenation):
+	Use `static_cast` instead of C-style cast on dictionary values.
+
+	* src/roff/troff/env.cpp (add_hyphenation_exceptions)
+	(hyphen_trie::insert_hyphenation):
+	* src/roff/troff/input.cpp (read_two_char_escape_parameter)
+	(do_get_long_name): Assign character, not integer, literal to
+	element of array of `char` type.
+
+	* src/roff/troff/input.cpp (read_long_escape_parameters): Demote
+	local variable `have_char` from `int` to `bool` and assign to it
+	with Boolean, not integer, literals.
+
+	* src/roff/troff/input.cpp (do_get_long_name): Explcitly
+	express size of array element type in argument to `memcpy()`.
+
 2024-08-14  Lukas Javorsky <ljavorsk@redhat.com>
 
 	* src/roff/troff/env.cpp (override_sizes): Zero out
