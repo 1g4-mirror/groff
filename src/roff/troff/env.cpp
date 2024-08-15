@@ -1343,7 +1343,8 @@ void override_sizes()
     }
     if (i + 2 > n) {
       int *old_sizes = sizes;
-      sizes = new int[n * 2];
+      sizes = new int[n * 2]; // C++03: new int[n * 2]();
+      (void) memset(sizes, 0, (n * 2 * sizeof(int)));
       memcpy(sizes, old_sizes, (n * sizeof(int)));
       n *= 2;
       delete[] old_sizes;
@@ -2764,7 +2765,8 @@ const char *tab_stops::to_string()
     if (buf)
       delete[] buf;
     buf_size = need;
-    buf = new char[buf_size];
+    buf = new char[buf_size]; // C++03: new char[buf_size]();
+    (void) memset(buf, 0, buf_size * sizeof(char));
   }
   char *ptr = buf;
   for (p = initial_list; p; p = p->next) {
@@ -3666,7 +3668,9 @@ static void add_hyphenation_exceptions()
     if (i > 0) {
       pos[npos] = 0;
       buf[i] = '\0';
+      // C++03: new unsigned char[npos + 1]();
       unsigned char *tem = new unsigned char[npos + 1];
+      (void) memset(tem, 0, ((npos + 1) * sizeof(unsigned char)));
       memcpy(tem, pos, npos + 1);
       tem = static_cast<unsigned char *>
 	    (current_language->exceptions.lookup(symbol(buf), tem));
@@ -3826,7 +3830,9 @@ void hyphen_trie::insert_hyphenation(dictionary *ex, const char *pat,
   if (i > 0) {
     pos[npos] = 0;
     buf[i] = '\0';
+    // C++03: new unsigned char[npos + 1]();
     unsigned char *tem = new unsigned char[npos + 1];
+    (void) memset(tem, 0, ((npos + 1) * sizeof(unsigned char)));
     memcpy(tem, pos, npos + 1);
     tem = static_cast<unsigned char *>(ex->lookup(symbol(buf), tem));
     if (0 /* nullptr */ == tem)

@@ -987,13 +987,17 @@ static symbol read_long_escape_parameters(read_mode mode)
       break;
     if (i + 2 > buf_size) {
       if (buf == abuf) {
+	// C++03: new char[ABUF_SIZE * 2]();
 	buf = new char[ABUF_SIZE * 2];
+	(void) memset(buf, 0, (ABUF_SIZE * 2 * sizeof(char)));
 	memcpy(buf, abuf, buf_size);
 	buf_size = ABUF_SIZE * 2;
       }
       else {
 	char *old_buf = buf;
+	// C++03: new char[buf_size * 2]();
 	buf = new char[buf_size * 2];
+	(void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
 	memcpy(buf, old_buf, buf_size);
 	buf_size *= 2;
 	delete[] old_buf;
@@ -2451,7 +2455,10 @@ void token::next()
 	      if (groff_gn)
 		nm = symbol(groff_gn);
 	      else {
+		// C++03: new char[strlen(gn) + 1 + 1]();
 		char *buf = new char[strlen(gn) + 1 + 1];
+		(void) memset(buf, 0,
+			      (strlen(gn) + 1 + 1) * sizeof(char));
 		strcpy(buf, "u");
 		strcat(buf, gn);
 		nm = symbol(buf);
@@ -2732,13 +2739,17 @@ static symbol do_get_long_name(bool required, char end_char)
     // If `end_char` != `\0` we normally have to append a null byte.
     if (i + 2 > buf_size) {
       if (buf == abuf) {
+	// C++03: new char[ABUF_SIZE * 2]();
 	buf = new char[ABUF_SIZE * 2];
+	(void) memset(buf, 0, (ABUF_SIZE * 2 * sizeof(char)));
 	memcpy(buf, abuf, (buf_size * sizeof(char)));
 	buf_size = ABUF_SIZE * 2;
       }
       else {
 	char *old_buf = buf;
+	// C++03: new char[buf_size * 2]();
 	buf = new char[buf_size * 2];
+	(void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
 	memcpy(buf, old_buf, (buf_size * sizeof(char)));
 	buf_size *= 2;
 	delete[] old_buf;
@@ -5362,13 +5373,17 @@ static symbol get_delimited_name()
   for (;;) {
     if (i + 1 > buf_size) {
       if (buf == abuf) {
+	// C++03: new char[ABUF_SIZE * 2]();
 	buf = new char[ABUF_SIZE * 2];
+	(void) memset(buf, 0, (ABUF_SIZE * 2 * sizeof(char)));
 	memcpy(buf, abuf, buf_size);
 	buf_size = ABUF_SIZE * 2;
       }
       else {
 	char *old_buf = buf;
+	// C++03: new char[buf_size * 2]();
 	buf = new char[buf_size * 2];
+	(void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
 	memcpy(buf, old_buf, buf_size);
 	buf_size *= 2;
 	delete[] old_buf;
@@ -6258,7 +6273,8 @@ void pipe_source()
       while ((c = get_copy(0)) == ' ' || c == '\t')
 	;
       size_t buf_size = 24;
-      char *buf = new char[buf_size];
+      char *buf = new char[buf_size]; // C++03: new char[buf_size]();
+      (void) memset(buf, 0, (buf_size * sizeof(char)));
       size_t buf_used = 0;
       for (; c != '\n' && c != EOF; c = get_copy(0)) {
 	const char *s = asciify(c);
@@ -6267,7 +6283,8 @@ void pipe_source()
 	  char *old_buf = buf;
 	  size_t old_buf_size = buf_size;
 	  buf_size *= 2;
-	  buf = new char[buf_size];
+	  buf = new char[buf_size]; // C++03: new char[buf_size]();
+	  (void) memset(buf, 0, (buf_size * sizeof(char)));
 	  memcpy(buf, old_buf, old_buf_size);
 	  delete[] old_buf;
 	}
@@ -7878,7 +7895,8 @@ void abort_request()
 char *read_string()
 {
   int len = 256;
-  char *s = new char[len];
+  char *s = new char[len]; // C++03: new char[len]();
+  (void) memset(s, 0, (len * sizeof(char)));
   int c;
   while ((c = get_copy(0)) == ' ')
     ;
@@ -7887,7 +7905,8 @@ char *read_string()
     if (!is_invalid_input_char(c)) {
       if (i + 2 > len) {
 	char *tem = s;
-	s = new char[len * 2];
+	s = new char[len * 2]; // C++03: new char[len * 2]();
+	(void) memset(s, 0, (len * 2 * sizeof(char)));
 	memcpy(s, tem, len);
 	len *= 2;
 	delete[] tem;
@@ -7922,7 +7941,10 @@ void pipe_output()
 	error("cannot apply pipe request to empty command");
       // Are we adding to an existing pipeline?
       if (pipe_command != 0 /* nullptr */) {
+	// C++03: new char[strlen(pipe_command) + strlen(pc) + 1 + 1]();
 	char *s = new char[strlen(pipe_command) + strlen(pc) + 1 + 1];
+	(void) memset(s, 0, ((strlen(pipe_command) + strlen(pc) + 1 + 1)
+			     * sizeof(char)));
 	strcpy(s, pipe_command);
 	strcat(s, "|");
 	strcat(s, pc);
@@ -8100,7 +8122,10 @@ static void parse_output_page_list(char *p)
 static FILE *open_macro_package(const char *mac, char **path)
 {
   // Try `mac`.tmac first, then tmac.`mac`.  Expect ENOENT errors.
+  // C++03: new char[strlen(mac) + strlen(MACRO_POSTFIX) + 1]();
   char *s1 = new char[strlen(mac) + strlen(MACRO_POSTFIX) + 1];
+  (void) memset(s1, 0, ((strlen(mac) + strlen(MACRO_POSTFIX) + 1)
+			* sizeof(char)));
   strcpy(s1, mac);
   strcat(s1, MACRO_POSTFIX);
   FILE *fp = mac_path->open_file(s1, path);
@@ -8108,7 +8133,10 @@ static FILE *open_macro_package(const char *mac, char **path)
     error("cannot open macro file '%1': %2", s1, strerror(errno));
   delete[] s1;
   if (0 /* nullptr */ == fp) {
+    // C++03: new char[strlen(mac) + strlen(MACRO_PREFIX) + 1]();
     char *s2 = new char[strlen(mac) + strlen(MACRO_PREFIX) + 1];
+    (void) memset(s2, 0, ((strlen(mac) + strlen(MACRO_PREFIX) + 1)
+			  * sizeof(char)));
     strcpy(s2, MACRO_PREFIX);
     strcat(s2, mac);
     fp = mac_path->open_file(s2, path);
@@ -8232,7 +8260,8 @@ static void do_register_assignment(const char *s)
       set_register(buf, n);
   }
   else {
-    char *buf = new char[p - s + 1];
+    char *buf = new char[p - s + 1]; // C++03: new char[p - s + 1]();
+    (void) memset(buf, 0, ((p - s + 1) * sizeof(char)));
     memcpy(buf, s, p - s);
     buf[p - s] = 0;
     units n;
@@ -8261,7 +8290,8 @@ static void do_string_assignment(const char *s)
     set_string(buf, s + 1);
   }
   else {
-    char *buf = new char[p - s + 1];
+    char *buf = new char[p - s + 1]; // C++03: new char[p - s + 1]();
+    (void) memset(buf, 0, ((p - s + 1) * sizeof(char)));
     memcpy(buf, s, p - s);
     buf[p - s] = 0;
     set_string(buf, p + 1);
@@ -9044,7 +9074,10 @@ static void copy_mode_error(const char *format,
 {
   if (ignoring) {
     static const char prefix[] = "(in ignored input) ";
-    char *s = new char[sizeof(prefix) + strlen(format)];
+    // C++03: new char[sizeof prefix + strlen(format)]();
+    char *s = new char[sizeof prefix + strlen(format)];
+    (void) memset(s, 0, (sizeof prefix + (strlen(format)
+					  * sizeof(char))));
     strcpy(s, prefix);
     strcat(s, format);
     warning(WARN_IG, s, arg1, arg2, arg3);

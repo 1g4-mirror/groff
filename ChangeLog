@@ -1,5 +1,19 @@
 2024-08-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Clear array memory when allocating it from the heap.
+	Prompted by Lukas Javorsky's static-analysis-driven report in
+	Savannah #66081.
+
+	* src/roff/troff/env.cpp (override_sizes, tab_stops::to_string)
+	(add_hyphenation_exceptions, hyphen_trie::insert_hyphenation):
+	* src/roff/troff/input.cpp (read_long_escape_parameters)
+	(token::next, do_get_long_name, get_delimited_name, pipe_source)
+	(read_string, pipe_output, open_macro_package)
+	(do_register_assignment, do_string_assignment, copy_mode_error):
+	Do it.
+
+2024-08-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/env.cpp (override_sizes): Add parentheses to
