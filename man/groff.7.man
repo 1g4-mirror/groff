@@ -6495,6 +6495,17 @@ see
 and
 .request .ch .
 .
+If no such traps exist between the drawing position
+and the bottom of the page,
+.I @g@troff
+interpolates the distance to the page bottom.
+.
+Within a diversion,
+in the absence of a diversion trap,
+this distance is
+the maximum possible vertical position supported by the output device.
+.
+.
 .TP
 .REG .T
 An output device was explicitly selected (Boolean-valued);

@@ -14901,10 +14901,10 @@ caused by the @code{bp} request are not shown in the output.
 @cindex distance to next vertical position trap register (@code{.t})
 @cindex trap, distance to next vertical position, register (@code{.t})
 The read-only register @code{.t} holds the distance to the next vertical
-position trap.  If there are no traps between the current position and
+position trap.  If no such traps exist between the drawing position and
 the bottom of the page, it contains the distance to the page bottom.
 Within a diversion, in the absence of a diversion trap, this distance is
-the largest representable integer in basic units---effectively infinite.
+the maximum possible vertical position supported by the output device.
 @endDefreg
 
 @Defreq {ch, name [@Var{dist}]}

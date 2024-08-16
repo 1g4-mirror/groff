@@ -1,5 +1,16 @@
 2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/groff.texi.in (Page Location Traps): Correct erroneous
+	claim; the `.t` register does not interpolate the maximum
+	representable integer in a diversion when there is no pending
+	diversion trap if the output device does not have a vertical
+	resolution of "1" ("ps" does; "utf8" doesn't).
+
+	Problem introduced by me in commit 18697e757c, 22 November 2020.
+	Thanks to Dave Kemper for the discussion in Savannah #63587.
+
+2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_term): When reading an
 	overlong integer literal, save the value corresponding to the
 	longest valid digit sequence, and use that if overflow occurs.
