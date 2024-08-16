@@ -129,12 +129,12 @@ bool get_vunits(vunits *res, unsigned char si, vunits prev_value)
     break;
   case INCREMENT:
     if (ckd_add(&i, prev_value.to_units(), v))
-      error("integer addition wrapped");
+      error("integer incrementation wrapped");
     *res = i;
     break;
   case DECREMENT:
     if (ckd_sub(&i, prev_value.to_units(), v))
-      error("integer subtraction wrapped");
+      error("integer decrementation wrapped");
     *res = i;
     break;
   default:
@@ -157,12 +157,12 @@ bool get_hunits(hunits *res, unsigned char si, hunits prev_value)
     break;
   case INCREMENT:
     if (ckd_add(&i, prev_value.to_units(), h))
-      error("integer addition wrapped");
+      error("integer incrementation wrapped");
     *res = i;
     break;
   case DECREMENT:
     if (ckd_sub(&i, prev_value.to_units(), h))
-      error("integer subtraction wrapped");
+      error("integer decrementation wrapped");
     *res = i;
     break;
   default:
@@ -182,11 +182,11 @@ bool get_number(units *res, unsigned char si, units prev_value)
     break;
   case INCREMENT:
     if (ckd_add(res, prev_value, u))
-      error("integer addition wrapped");
+      error("integer incrementation wrapped");
     break;
   case DECREMENT:
     if (ckd_sub(res, prev_value, u))
-      error("integer subtraction wrapped");
+      error("integer decrementation wrapped");
     break;
   default:
     assert(0 == "unhandled case in get_number()");
@@ -205,11 +205,11 @@ bool get_integer(int *res, int prev_value)
     break;
   case INCREMENT:
     if (ckd_add(res, prev_value, i))
-      error("integer addition wrapped");
+      error("integer incrementation wrapped");
     break;
   case DECREMENT:
     if (ckd_sub(res, prev_value, i))
-      error("integer subtraction wrapped");
+      error("integer decrementation wrapped");
     break;
   default:
     assert(0 == "unhandled case in get_integer()");

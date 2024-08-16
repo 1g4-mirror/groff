@@ -1,5 +1,10 @@
 2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (get_vunits, get_hunts, get_number)
+	(get_integer): Clarify diagnostic when integer arithmetic wraps.
+
+2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/reg.cpp (number_value_to_ascii): Add
