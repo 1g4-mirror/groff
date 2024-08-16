@@ -42,8 +42,8 @@
 	heap-allocated memory prior to use.  If `strtok()` returns a
 	null pointer, we break early from the `for` loop before
 	populating it.  The only other case where we break out of the
-	loop is when `lower` is 0, and we do only after adding this 0 to
-	`sizes`.  Since this memory is then passed to
+	loop is when `lower` is 0, and we do so only after adding this 0
+	to `sizes`.  Since this memory is then passed to
 	`font_size::init_size_table()`, which uses a zero integer to
 	detect the end of the list, we could then access uninitialized
 	memory.  [The user is not required to supply a zero argument to
@@ -95,7 +95,7 @@
 	* src/roff/troff/node.h (struct node, class hmotion_node):
 	Boolify.  Demote member function `set_unformat_flag()` and
 	member variable `unformat` from `int` to `bool`.  These could
-	use renaming, but `make_unformattable() and `is_unformattable`
+	use renaming, but `make_unformattable()` and `is_unformattable`
 	would be terribly misleading.
 	* src/roff/troff/node.cpp (node::set_unformat_flag)
 	(word_space_node::set_unformat_flag)
@@ -117,7 +117,7 @@
 
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/token.h (token:ch()): Return character instead
+	* src/roff/troff/token.h (token:ch): Return character instead
 	of integer literal for this inline function of `(unsigned) char`
 	type.
 
@@ -134,7 +134,7 @@
 2024-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Throw diagnostic in event of a diversion's contents
-	overflowing its vertical position.  We can't do anything
+	overflowing its maximum vertical position.  We can't do anything
 	sensible in this case, so make it a fatal error.  (It's also
 	more likely that your host environment will exhaust memory
 	available to the `troff` process before encountering this
@@ -144,8 +144,8 @@
 	`DIVERSION_LENGTH_MAX` defines the maximum permissible vertical
 	size of a diversion in basic units.  Presently, it is `INT_MAX`.
 	(macro_diversion::distance_to_next_trap): When there is no
-	diversion trap, or it has already been passed, report the
-	distance to `DIVERSION_LENGTH_MAX` (rather than `INT_MAX`)
+	diversion trap, or its position has already been passed, report
+	the distance to `DIVERSION_LENGTH_MAX` (rather than `INT_MAX`)
 	divided by the vertical resolution.
 	(macro_diversion::output): Check for overflow when incrementing
 	vertical position upon writing out a line, and emit fatal error
@@ -176,7 +176,7 @@
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (troff_output_file::flush_tbuf): Add
-	assertion: the type size should never be negative.
+	assertion: the type size should be positive.
 
 2024-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -469,7 +469,7 @@
 
 2024-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* tmac/ps.tmac: Drop `\[S ,]` and `\[s, ]` fallback character
+	* tmac/ps.tmac: Drop `\[S ,]` and `\[s ,]` fallback character
 	definitions and hyphenation code assignments.
 
 	* NEWS: Document this.
