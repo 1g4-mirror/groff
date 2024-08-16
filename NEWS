@@ -15,8 +15,8 @@ troff
 
 o The `hpfcode` request now emits an error when used, advising of its
   planned withdrawal, but then proceeds with normal behavior.  The
-  replacement mechanism, the `hcode` request, has existed since groff
-  1.02 (June 1991) at the latest.
+  documented replacement mechanism, the `hcode` request, has existed
+  since groff 1.02 (June 1991) at the latest.
 
 o The `mso` request no longer attempts to open a macro file named, say,
   "tmac.s" if "s.tmac" was specified in the argument and not found, or
@@ -340,8 +340,8 @@ o The doc (mdoc) macro package now honors the `U` register and `MF`
 o The new macro file "koi8-r.tmac" supports the KOI8-R character
   encoding, which supports the new Russian locale for groff.
 
-o The m (mm) macro package's `Limsp` register has been removed; see the
-  item about the `LI` macro below.
+o The m (mm) macro package's `Limsp` (a GNU extension) register has been
+  removed; see the item regarding the `LI` macro below.
 
 o The m (mm) macro package's `AST` macro is deprecated, warns upon
   usage, and is slated for withdrawal in the next release.  Assign to
@@ -363,9 +363,10 @@ o The m (mm) macro package's `Li` register now configures the text
   indentation of items in `RL` lists (as it long has for `AL` lists)
   instead of hard-coding a value of 6 ens as DWB 3.3 mm does.
 
-o The m (mm) macro package's `BVL` and `VL` macros' first arguments are
-  now optional.  If omitted, the paragraph indentation amount (register
-  `Pi`) is used for list items' text indentations.
+o The m (mm) macro package's `BVL` (a GNU extension) and `VL` macros'
+  first arguments are now optional.  If omitted, the paragraph
+  indentation amount (register `Pi`) is used for list items' text
+  indentations.
 
 o The m (mm) macro package's `DL` macro now uses the `EM` string as the
   mark instead of an em dash special character literal.  (The latter
@@ -384,6 +385,10 @@ o The m (mm) macro package's `HU` macro now supports a second argument
 o The m (mm) macro package's `IND` macro (a GNU extension), now calls
   `SK` only if no `TXIND` macro is defined, instead of performing this
   action as part of the fallback when no `TYIND` macro is defined.
+
+o The m (mm) macro package now supports a user-definable hook macro
+  `AFX`, which if defined is called by `AF` in lieu of the latter's
+  normal operation.  Applications include customization of letterhead.
 
 o The m (mm) macro package's `LI` macro now interprets its second
   argument as a Boolean indicating whether a space should separate the
