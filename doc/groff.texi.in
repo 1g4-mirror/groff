@@ -6190,6 +6190,9 @@ used for computing results depends on the host machine but is at least a
 range of ±2 billion.@footnote{If that's not enough, see the
 @cite{groff_tmac@r{(5)}} man page for the @file{62bit.tmac} macro
 package.}
+@cindex saturating arithmetic
+Arithmetic saturates rather than wrapping; if overflow would occur, GNU
+@command{troff} emits a warning in category @samp{range}.
 
 @cindex arithmetic operators
 @cindex operators, arithmetic
@@ -6209,8 +6212,12 @@ to their left and right; they are @code{+} (addition), @code{-}
 (subtraction), @code{*} (multiplication), @code{/} (truncating
 division), and @code{%} (modulus).  @dfn{Truncating division} rounds to
 the integer nearer to zero, no matter how large the fractional portion.
-Overflow and division (or modulus) by zero are errors and abort
-evaluation of a numeric expression.
+@cindex division by zero
+@cindex modulus by zero
+@cindex zero, division and modulus by
+Division and modulus by zero are errors and abort evaluation of a
+numeric expression.
+
 @cindex unary arithmetic operators
 @cindex operators, unary arithmetic
 @cindex negation
@@ -6219,7 +6226,6 @@ evaluation of a numeric expression.
 @opindex +
 @cindex @code{if} request, and the @samp{!} operator
 @cindex @code{while} request, and the @samp{!} operator
-
 Arithmetic unary operators operate on the numeric expression to their
 right; they are @code{-} (negation) and @code{+} (assertion---for
 completeness; it does nothing).  The unary minus must often be used

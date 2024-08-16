@@ -1,5 +1,34 @@
 2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_term): When reading an
+	overlong integer literal, save the value corresponding to the
+	longest valid digit sequence, and use that if overflow occurs.
+	(scale): Demote "numeric overflow" errors to "integer value
+	saturated" warnings in category "range".
+
+	* src/roff/troff/hvunits.h (vunits::to_units)
+	(class vunits: operator +, operator -, operator *):
+	(hunits::to_units)
+	(class hunits: operator +, operator -, operator *):
+	* src/roff/troff/number.cpp (vunits::vunits, hunits::hunits):
+	Impose saturating arithmetic on overflowing operations.  Demote
+	overflow from error, throwing warning in "range" category if
+	overflow would occur, and describe integer result as "saturated"
+	rather than "wrapped".
+
+	* src/roff/groff/tests/arithmetic-works.sh: Enable warnings in
+	"range" category.  Update test expectations.  Drop check of
+	operation that is no longer meaningful with refactored
+	arithmetic parsing.
+
+	* doc/groff.texi.in (Numeric Expressions):
+	* man/groff.7.man (Numeric expressions):
+	* NEWS: Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?66001>.
+
+2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (get_vunits, get_hunts, get_number)
 	(get_integer): Clarify diagnostic when integer arithmetic wraps.
 

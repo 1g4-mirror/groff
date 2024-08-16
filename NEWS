@@ -39,6 +39,10 @@ o The `color`, `cp`, `linetabs`, and `vpt` requests now interpret
   with a register interpolation as an argument, the outcome agrees with
   an `if` test of the register's value.
 
+o GNU troff now implements saturating rather than wrapping integer
+  arithmetic.  Where before overflow would cause an error diagnostic,
+  the formatter now emits a warning diagnostic in the "range" category.
+
 o The formatter no longer reports warnings in the "el" category.  There
   was only one; it threw a warning diagnostic if enabled (which it was
   not by default) if it inferred an imbalance between `ie` and `el`
