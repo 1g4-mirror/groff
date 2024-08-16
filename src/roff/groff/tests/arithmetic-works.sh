@@ -98,16 +98,20 @@ echo "$output"
 # permit INT_MIN to be assigned, as a side effect of making rounding
 # behavior sign-independent.
 
-echo "checking assignment of large positive horizontal measurement" >&2
+echo "checking that assignment of large positive horizontal" \
+  "measurement saturates" >&2
 echo "$output" | grep -Fqx 'a: 2147483647' || wail
 
-echo "checking assignment of large negative horizontal measurement" >&2
+echo "checking assignment of large negative horizontal" \
+  "measurement saturates" >&2
 echo "$output" | grep -Fqx 'b: -2147483647' || wail
 
-echo "checking assignment of large positive vertical measurement" >&2
+echo "checking assignment of large positive vertical" \
+  "measurement saturates" >&2
 echo "$output" | grep -Fqx 'c: 2147483647' || wail
 
-echo "checking assignment of large negative vertical measurement" >&2
+echo "checking assignment of large negative vertical" \
+  "measurement saturates" >&2
 echo "$output" | grep -Fqx 'd: -2147483647' || wail
 
 # Exercise boundary values.
