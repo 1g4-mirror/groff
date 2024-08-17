@@ -1,5 +1,12 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor; boolify a static function.
+
+	* src/roff/troff/input.cpp (get_line_arg): Demote return type
+	from `int` to `bool`.  Return Boolean, not integer, literals.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (define_register): Warn when garbage
 	encountered in numeric expression argument to `nr` request.
 

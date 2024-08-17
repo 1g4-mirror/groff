@@ -162,7 +162,7 @@ static request_or_macro *lookup_request(symbol);
 static bool read_delimited_number(units *, unsigned char);
 static bool read_delimited_number(units *, unsigned char, units);
 static symbol do_get_long_name(bool, char);
-static int get_line_arg(units *res, unsigned char si, charinfo **cp);
+static bool get_line_arg(units *res, unsigned char si, charinfo **cp);
 static bool read_size(int *);
 static symbol get_delimited_name();
 static void init_registers();
@@ -5208,13 +5208,13 @@ static bool read_delimited_number(units *n, unsigned char si)
   return false;
 }
 
-static int get_line_arg(units *n, unsigned char si, charinfo **cp)
+static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
 {
   token start_token;
   start_token.next();
   int start_level = input_stack::get_level();
   if (!start_token.is_usable_as_delimiter(true /* report error */))
-    return 0;
+    return false;
   tok.next();
   if (read_measurement(n, si)) {
     if (tok.is_dummy() || tok.is_transparent_dummy())
@@ -5227,9 +5227,9 @@ static int get_line_arg(units *n, unsigned char si, charinfo **cp)
     if (!(start_token == tok
 	  && input_stack::get_level() == start_level))
       warning(WARN_DELIM, "closing delimiter does not match");
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
 
 static bool read_size(int *x)
