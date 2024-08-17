@@ -5182,8 +5182,15 @@ static bool read_delimited_number(units *n,
   if (start_token.is_usable_as_delimiter(true /* report error */)) {
     tok.next();
     if (read_measurement(n, si, prev_value)) {
-      if (start_token != tok)
-	warning(WARN_DELIM, "closing delimiter does not match");
+      if (start_token != tok) {
+	// token::description() writes to static, class-wide storage, so
+	// we must allocate a copy of it before issuing the next
+	// diagnostic.
+	char *delimdesc = strdup(start_token.description());
+	warning(WARN_DELIM, "closing delimiter does not match;"
+		" expected %1, got %2", delimdesc, tok.description());
+	free(delimdesc);
+      }
       return true;
     }
   }
@@ -5197,8 +5204,15 @@ static bool read_delimited_number(units *n, unsigned char si)
   if (start_token.is_usable_as_delimiter(true /* report error */)) {
     tok.next();
     if (read_measurement(n, si)) {
-      if (start_token != tok)
-	warning(WARN_DELIM, "closing delimiter does not match");
+      if (start_token != tok) {
+	// token::description() writes to static, class-wide storage, so
+	// we must allocate a copy of it before issuing the next
+	// diagnostic.
+	char *delimdesc = strdup(start_token.description());
+	warning(WARN_DELIM, "closing delimiter does not match;"
+		" expected %1, got %2", delimdesc, tok.description());
+	free(delimdesc);
+      }
       return true;
     }
   }
@@ -5222,8 +5236,15 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
       tok.next();
     }
     if (!(start_token == tok
-	  && input_stack::get_level() == start_level))
-      warning(WARN_DELIM, "closing delimiter does not match");
+	  && input_stack::get_level() == start_level)) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
+      warning(WARN_DELIM, "closing delimiter does not match; expected"
+	      " %1, got %2", delimdesc, tok.description());
+      free(delimdesc);
+    }
     return true;
   }
   return false;
@@ -5435,8 +5456,13 @@ static void do_register()
   int val;
   if (!read_measurement(&val, 'u', prev_value))
     return;
+  // token::description() writes to static, class-wide storage, so we
+  // must allocate a copy of it before issuing the next diagnostic.
+  char *delimdesc = strdup(start_token.description());
   if (start_token != tok)
-    warning(WARN_DELIM, "closing delimiter does not match");
+    warning(WARN_DELIM, "closing delimiter does not match; expected %1,"
+	    " got %2", delimdesc, tok.description());
+  free(delimdesc);
   if (r != 0 /* nullptr */)
     r->set_value(val);
   else

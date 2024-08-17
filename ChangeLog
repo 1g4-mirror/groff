@@ -1,5 +1,17 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: When throwing a warning diagnostic about a mismatched
+	escape sequence delimiter, say what what we were expecting and
+	what we got instead.
+
+	* src/roff/troff/input.cpp (read_delimited_number, get_line_arg)
+	(do_register):
+	* src/roff/troff/reg.cpp (inline_define_register [0]): Do it.
+
+	Fixes <https://savannah.gnu.org/bugs/?63202>.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_name_test): Fix buglet in
 	handling of newline as delimiter for the `\A`, `\w`, and `\Z`
 	escape sequences.  An invalid C++ conditional resulted

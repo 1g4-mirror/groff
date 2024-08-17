@@ -360,8 +360,15 @@ void inline_define_register()
     if (start_token != tok) {
       if (read_measurement(&v, 'u')) {
 	r->set_increment(v);
-	if (start_token != tok)
-	  warning(WARN_DELIM, "closing delimiter does not match");
+	if (start_token != tok) {
+	  // token::description() writes to static, class-wide storage,
+	  // so we must allocate a copy of it before issuing the next
+	  // diagnostic.
+	  char *delimdesc = strdup(start_token.description());
+	  warning(WARN_DELIM, "closing delimiter does not match;"
+		  " expected %1, got %2", delimdesc, tok.description());
+	  free(delimdesc);
+	}
       }
     }
   }
