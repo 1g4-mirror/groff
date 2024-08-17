@@ -1,3 +1,18 @@
+2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/reg.cpp (number_value_to_ascii): Add
+	parentheses to complex expressions.
+	(number_value_to_ascii): Assign character, not integer, literal
+	to element of array of `char` type.
+	(inline_define_register [0], define_register, set_register)
+	(look_up_register, alter_format): Use `static_cast` instead of
+	C-style cast on dictionary values.
+	(inline_define_register [0], define_register, set_register)
+	(look_up_register, alter_format): Reorder equality comparisons
+	to avoid inadvertent lvalue assignment.
+
 2024-08-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Clear array memory when allocating it from the heap.

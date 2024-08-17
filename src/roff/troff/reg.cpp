@@ -91,8 +91,8 @@ static const char *number_value_to_ascii(int value, char format,
   case '1':
     if (width <= 0)
       return i_to_a(value);
-    else if (width > int(sizeof(buf) - 2))
-      sprintf(buf, "%.*d", int(sizeof(buf) - 2), int(value));
+    else if (width > int((sizeof buf) - 2))
+      sprintf(buf, "%.*d", int((sizeof buf) - 2), int(value));
     else
       sprintf(buf, "%.*d", width, int(value));
     break;
@@ -110,7 +110,7 @@ static const char *number_value_to_ascii(int value, char format,
       }
       if (n == 0) {
 	*p++ = '0';
-	*p = 0;
+	*p = '\0';
 	break;
       }
       if (n < 0) {
@@ -161,7 +161,7 @@ static const char *number_value_to_ascii(int value, char format,
 	  *p++ = s[0];
 	}
       }
-      *p = 0;
+      *p = '\0';
       break;
     }
   case 'a':
@@ -171,7 +171,7 @@ static const char *number_value_to_ascii(int value, char format,
       char *p = buf;
       if (n == 0) {
 	*p++ = '0';
-	*p = 0;
+	*p = '\0';
       }
       else {
 	if (n < 0) {
@@ -188,7 +188,7 @@ static const char *number_value_to_ascii(int value, char format,
 	  *p++ = format == 'a' ? lowercase_array[d - 1] :
 				 uppercase_array[d - 1];
 	}
-	*p-- = 0;
+	*p-- = '\0';
 	char *q = buf[0] == '-' ? buf + 1 : buf;
 	while (q < p) {
 	  char temp = *q;
@@ -247,8 +247,8 @@ static const char *number_format_to_ascii(char format, int width)
   if (format == '1') {
     if (width > 0) {
       int n = width;
-      if (n > int(sizeof(buf)) - 1)
-	n = int(sizeof(buf)) - 1;
+      if (n > int(sizeof buf) - 1)
+	n = int(sizeof buf) - 1;
       sprintf(buf, "%.*d", n, 0);
       return buf;
     }
@@ -312,13 +312,13 @@ void define_register()
     skip_line();
     return;
   }
-  reg *r = (reg *)register_dictionary.lookup(nm);
+  reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
   units v;
   units prev_value;
-  if (!r || !r->get_value(&prev_value))
+  if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
   if (get_number(&v, 'u', prev_value)) {
-    if (r == 0) {
+    if (0 /* nullptr */ == r) {
       r = new number_reg;
       register_dictionary.define(nm, r);
     }
@@ -340,14 +340,14 @@ void inline_define_register()
   symbol nm = get_name(true /* required */);
   if (nm.is_null())
     return;
-  reg *r = (reg *)register_dictionary.lookup(nm);
-  if (r == 0) {
+  reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
+  if (0 /* nullptr */ == r) {
     r = new number_reg;
     register_dictionary.define(nm, r);
   }
   units v;
   units prev_value;
-  if (!r->get_value(&prev_value))
+  if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
   if (get_number(&v, 'u', prev_value)) {
     r->set_value(v);
@@ -364,8 +364,8 @@ void inline_define_register()
 
 void set_register(symbol nm, units n)
 {
-  reg *r = (reg *)register_dictionary.lookup(nm);
-  if (r == 0) {
+  reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
+  if (0 /* nullptr */ == r) {
     r = new number_reg;
     register_dictionary.define(nm, r);
   }
@@ -374,8 +374,8 @@ void set_register(symbol nm, units n)
 
 reg *look_up_register(symbol nm)
 {
-  reg *r = (reg *)register_dictionary.lookup(nm);
-  if (r == 0) {
+  reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
+  if (0 /* nullptr */ == r) {
     warning(WARN_REG, "register '%1' not defined", nm.contents());
     r = new number_reg;
     register_dictionary.define(nm, r);
@@ -390,8 +390,8 @@ void alter_format()
     skip_line();
     return;
   }
-  reg *r = (reg *)register_dictionary.lookup(nm);
-  if (r == 0) {
+  reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
+  if (0 /* nullptr */ == r) {
     r = new number_reg;
     register_dictionary.define(nm, r);
   }
