@@ -1,5 +1,32 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_name_test): Fix buglet in
+	handling of newline as delimiter for the `\A`, `\w`, and `\Z`
+	escape sequences.  An invalid C++ conditional resulted
+	in a newline being interpreted both as the delimiter and as an
+	input token, spuriously putting a space on the output.  Drop
+	subsequent tautologous conditional: `tok != start_token` will
+	always evaluate true because `tok.is_eof()` is true and
+	`start_token` cannot be an EOF.
+
+	Before:
+
+	$ printf 'foo\A\naz\nbar\n' | groff -a
+	<beginning of page>
+	foo1 bar
+
+	After:
+
+	$ printf 'foo\A\naz\nbar\n' | ./build/test-groff -a
+	<beginning of page>
+	foo1bar
+
+	* src/roff/groff/tests/\
+	some_escapes_accept_newline_delimiters.sh: Update test
+	expectations.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (interpolate_register): Add assertion
 	to blow up on null pointer dereference.
 

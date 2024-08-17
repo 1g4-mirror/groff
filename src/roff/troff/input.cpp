@@ -1647,11 +1647,10 @@ static int do_name_test()
   bool got_some_char = false;
   for (;;) {
     tok.next();
-    if (tok.is_newline() || tok.is_eof()) {
-      if (tok != start_token)
-	warning(WARN_DELIM, "missing closing delimiter in identifier"
-		" validation escape sequence (got %1)",
-		tok.description());
+    if (tok.is_eof()) {
+      warning(WARN_DELIM, "missing closing delimiter in identifier"
+	      " validation escape sequence (got %1)",
+	      tok.description());
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
@@ -1746,11 +1745,9 @@ static node *do_zero_width()
   start_token.next();
   for (;;) {
     tok.next();
-    if (tok.is_newline() || tok.is_eof()) {
-      if (tok != start_token)
-	warning(WARN_DELIM, "missing closing delimiter in"
-		" zero-width escape sequence (got %1)",
-		tok.description());
+    if (tok.is_eof()) {
+      warning(WARN_DELIM, "missing closing delimiter in zero-width"
+	      " escape sequence (got %1)", tok.description());
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
@@ -5458,11 +5455,10 @@ static void do_width()
   curenv = &env;
   for (;;) {
     tok.next();
-    if (tok.is_newline() || tok.is_eof()) {
-      if (tok != start_token)
-	warning(WARN_DELIM, "missing closing delimiter in"
-		" width computation escape sequence (got %1)",
-		tok.description());
+    if (tok.is_eof()) {
+      warning(WARN_DELIM, "missing closing delimiter in width"
+	      " computation escape sequence (got %1)",
+	      tok.description());
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
