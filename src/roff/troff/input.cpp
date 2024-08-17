@@ -1896,9 +1896,9 @@ void token::make_newline()
 
 void token::next()
 {
-  if (nd) {
+  if (nd != 0 /* nullptr */) {
     delete nd;
-    nd = 0;
+    nd = 0 /* nullptr */;
   }
   units x;
   for (;;) {
