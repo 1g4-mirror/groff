@@ -1,5 +1,17 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.
+	(do_overstrike): Rename local variable `on` to `osnode`.
+	(do_bracket): Rename local variable `bn` to `bracketnode`.
+	(do_expr_test): Demote return type from `int` to `bool`, and
+	return Boolean, not integer, literals.
+	(do_zero_width): Move declaration and initialization of `n`
+	local unaccountably far from its point of use to prepare for
+	shoveling of most of this function's body into a `for` loop,
+	required by forthcoming fix for Savannah #63142.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: When throwing a warning diagnostic about a mismatched
 	escape sequence delimiter, say what what we were expecting and
 	what we got instead.

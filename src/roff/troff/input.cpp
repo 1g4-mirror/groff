@@ -1564,9 +1564,9 @@ static void report_color()
   skip_line();
 }
 
-node *do_overstrike()
+node *do_overstrike() // \o
 {
-  overstrike_node *on = new overstrike_node;
+  overstrike_node *osnode = new overstrike_node;
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
@@ -1593,27 +1593,27 @@ node *do_overstrike()
 	&& (compatible_flag || input_stack::get_level() == start_level))
       break;
     if (tok.is_horizontal_space())
-      on->overstrike(tok.nd->copy());
+      osnode->overstrike(tok.nd->copy());
     else if (tok.is_unstretchable_space()) {
       node *n = new hmotion_node(curenv->get_space_width(),
 				 curenv->get_fill_color());
-      on->overstrike(n);
+      osnode->overstrike(n);
     }
     else {
       charinfo *ci = tok.get_char(true /* required */);
       if (ci != 0 /* nullptr */) {
 	node *n = curenv->make_char_node(ci);
 	if (n != 0 /* nullptr */)
-	  on->overstrike(n);
+	  osnode->overstrike(n);
       }
     }
   }
-  return on;
+  return osnode;
 }
 
-static node *do_bracket()
+static node *do_bracket() // \b
 {
-  bracket_node *bn = new bracket_node;
+  bracket_node *bracketnode = new bracket_node;
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
@@ -1643,13 +1643,13 @@ static node *do_bracket()
     if (ci != 0 /* nullptr */) {
       node *n = curenv->make_char_node(ci);
       if (n != 0 /* nullptr */)
-	bn->bracket(n);
+	bracketnode->bracket(n);
     }
   }
-  return bn;
+  return bracketnode;
 }
 
-static int do_name_test()
+static bool do_name_test() // \A
 {
   int start_level = input_stack::get_level();
   token start_token;
@@ -1681,13 +1681,13 @@ static int do_name_test()
   return (got_some_char && !got_bad_char);
 }
 
-static int do_expr_test()
+static bool do_expr_test() // \B
 {
   token start_token;
   start_token.next();
   int start_level = input_stack::get_level();
   if (!start_token.is_usable_as_delimiter(true /* report error */))
-    return 0;
+    return false;
   tok.next();
   // disable all warning and error messages temporarily
   int saved_warning_mask = warning_mask;
@@ -1695,7 +1695,7 @@ static int do_expr_test()
   warning_mask = 0;
   inhibit_errors = 1;
   int dummy;
-  int result = get_number_rigidly(&dummy, 'u');
+  bool result = get_number_rigidly(&dummy, 'u');
   warning_mask = saved_warning_mask;
   inhibit_errors = saved_inhibit_errors;
   if (tok == start_token && input_stack::get_level() == start_level)
@@ -1715,7 +1715,7 @@ static int do_expr_test()
     if (tok == start_token && input_stack::get_level() == start_level)
       break;
   }
-  return 0;
+  return false;
 }
 
 #if 0
@@ -1755,9 +1755,10 @@ static node *do_zero_width()
 // It's undesirable for \Z to change environments, because then
 // \n(.w won't work as expected.
 
-static node *do_zero_width()
+static node *do_zero_width() // \Z
 {
   node *rev = new dummy_node;
+  node *n = 0 /* nullptr */;
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
@@ -1782,7 +1783,6 @@ static node *do_zero_width()
     if (!tok.add_to_zero_width_node_list(&rev))
       error("invalid token in argument to escaped 'Z'");
   }
-  node *n = 0;
   while (rev != 0 /* nullptr */) {
     node *tem = rev;
     rev = rev->next;
@@ -5493,9 +5493,7 @@ static void do_register()
     set_register(nm, val);
 }
 
-// this implements the \w escape sequence
-
-static void do_width()
+static void do_width() // \w
 {
   int start_level = input_stack::get_level();
   token start_token;
