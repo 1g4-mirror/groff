@@ -1,3 +1,29 @@
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor.  Rename `get_number()` to
+	`read_measurement()`.  Part of the idea here is to use the verb
+	"read" to suggest that the function advances the token pointer
+	through the input stream (and it does).  Another part is to
+	reduce confusion, since the class `charinfo` has an unrelated
+	member function `get_number()`.
+
+	* src/roff/troff/token.h (get_number):
+	* src/roff/troff/number.cpp (get_number): Rename this...
+	* src/roff/troff/token.h (read_measurement):
+	* src/roff/troff/number.cpp (read_measurement): ...to this.
+
+	* src/roff/troff/number.cpp (read_measurement): Update
+	self-reference in assertion message.
+
+	* src/roff/troff/env.cpp (point_size):
+	* src/roff/troff/input.cpp (get_color_element)
+	(read_delimited_number, get_line_arg, read_size, do_register)
+	(do_if_request, evaluate_expression):
+	* src/roff/troff/node.cpp (embolden_font)
+	(configure_track_kerning, constantly_space_font):
+	* src/roff/troff/reg.cpp (define_register)
+	(inline_define_register [0]): Update call sites.
+
 2024-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/groff.texi.in (Page Location Traps): Correct erroneous

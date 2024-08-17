@@ -1305,7 +1305,9 @@ void family_change()
 void point_size()
 {
   int n;
-  if (has_arg() && get_number(&n, 'z', curenv->get_requested_point_size())) {
+  if (has_arg()
+      && read_measurement(&n, 'z', curenv->get_requested_point_size()))
+  {
     if (n <= 0)
       n = 1;
     curenv->set_size(n);

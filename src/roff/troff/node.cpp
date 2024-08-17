@@ -6633,7 +6633,8 @@ static void embolden_font()
 	else {
 	  int f = finfo2.position;
 	  units offset;
-	  if (has_arg() && get_number(&offset, 'u') && offset >= 1)
+	  if (has_arg()
+	      && read_measurement(&offset, 'u') && offset >= 1)
 	    font_table[f]->set_conditional_bold(n, hunits(offset - 1));
 	  else
 	    font_table[f]->conditional_unbold(n);
@@ -6642,7 +6643,7 @@ static void embolden_font()
       else {
 	// A numeric second argument must be an emboldening amount.
 	units offset;
-	if (get_number(&offset, 'u') && offset >= 1)
+	if (read_measurement(&offset, 'u') && offset >= 1)
 	  font_table[n]->set_bold(hunits(offset - 1));
 	else
 	  font_table[n]->unbold();
@@ -6720,9 +6721,9 @@ static void configure_track_kerning()
     int n = finfo.position, min_s, max_s;
     hunits min_a, max_a;
     if (has_arg()
-	&& get_number(&min_s, 'z')
+	&& read_measurement(&min_s, 'z')
 	&& get_hunits(&min_a, 'p')
-	&& get_number(&max_s, 'z')
+	&& read_measurement(&max_s, 'z')
 	&& get_hunits(&max_a, 'p')) {
       track_kerning_function tk(min_s, min_a, max_s, max_a);
       font_table[n]->set_track_kern(tk);
@@ -6750,7 +6751,7 @@ static void constantly_space_font()
     if (!has_arg() || !get_integer(&x))
       font_table[n]->set_constant_space(CONSTANT_SPACE_NONE);
     else {
-      if (!has_arg() || !get_number(&y, 'z'))
+      if (!has_arg() || !read_measurement(&y, 'z'))
 	font_table[n]->set_constant_space(CONSTANT_SPACE_RELATIVE, x);
       else
 	font_table[n]->set_constant_space(CONSTANT_SPACE_ABSOLUTE,

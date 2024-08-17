@@ -85,7 +85,7 @@ bool get_number_rigidly(units *res, unsigned char si)
     return false;
 }
 
-bool get_number(units *res, unsigned char si)
+bool read_measurement(units *res, unsigned char si)
 {
   if (!is_valid_expression_start())
     return false;
@@ -171,7 +171,7 @@ bool get_hunits(hunits *res, unsigned char si, hunits prev_value)
   return true;
 }
 
-bool get_number(units *res, unsigned char si, units prev_value)
+bool read_measurement(units *res, unsigned char si, units prev_value)
 {
   units u;
   switch (get_incr_number(&u, si)) {
@@ -189,7 +189,7 @@ bool get_number(units *res, unsigned char si, units prev_value)
       warning(WARN_RANGE, "integer decrementation saturated");
     break;
   default:
-    assert(0 == "unhandled case in get_number()");
+    assert(0 == "unhandled case in read_measurement()");
   }
   return true;
 }

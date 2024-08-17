@@ -1356,7 +1356,7 @@ void do_fill_color(symbol nm)
 static unsigned int get_color_element(const char *scheme, const char *col)
 {
   units val;
-  if (!get_number(&val, 'f')) {
+  if (!read_measurement(&val, 'f')) {
     warning(WARN_COLOR, "%1 in %2 definition set to 0", col, scheme);
     tok.next();
     return 0;
@@ -5184,7 +5184,7 @@ static bool read_delimited_number(units *n,
   start_token.next();
   if (start_token.is_usable_as_delimiter(true /* report error */)) {
     tok.next();
-    if (get_number(n, si, prev_value)) {
+    if (read_measurement(n, si, prev_value)) {
       if (start_token != tok)
 	warning(WARN_DELIM, "closing delimiter does not match");
       return true;
@@ -5199,7 +5199,7 @@ static bool read_delimited_number(units *n, unsigned char si)
   start_token.next();
   if (start_token.is_usable_as_delimiter(true /* report error */)) {
     tok.next();
-    if (get_number(n, si)) {
+    if (read_measurement(n, si)) {
       if (start_token != tok)
 	warning(WARN_DELIM, "closing delimiter does not match");
       return true;
@@ -5216,7 +5216,7 @@ static int get_line_arg(units *n, unsigned char si, charinfo **cp)
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0;
   tok.next();
-  if (get_number(n, si)) {
+  if (read_measurement(n, si)) {
     if (tok.is_dummy() || tok.is_transparent_dummy())
       tok.next();
     if (!(start_token == tok
@@ -5306,7 +5306,7 @@ static bool read_size(int *x)
       inc = c == '+' ? 1 : -1;
       tok.next();
     }
-    if (!get_number(&val, 'z'))
+    if (!read_measurement(&val, 'z'))
       return false;
     if (!(start.ch() == '[' && tok.ch() == ']') && start != tok) {
       if (start.ch() == '[')
@@ -5436,7 +5436,7 @@ static void do_register()
   if (!r || !r->get_value(&prev_value))
     prev_value = 0;
   int val;
-  if (!get_number(&val, 'u', prev_value))
+  if (!read_measurement(&val, 'u', prev_value))
     return;
   if (start_token != tok)
     warning(WARN_DELIM, "closing delimiter does not match");
@@ -6080,7 +6080,7 @@ static bool do_if_request()
   }
   else {
     units n;
-    if (!get_number(&n, 'u')) {
+    if (!read_measurement(&n, 'u')) {
       skip_branch();
       return false;
     }
@@ -8242,7 +8242,7 @@ static int evaluate_expression(const char *expr, units *res)
 {
   input_stack::push(make_temp_iterator(expr));
   tok.next();
-  int success = get_number(res, 'u');
+  int success = read_measurement(res, 'u');
   while (input_stack::get(0) != EOF)
     ;
   return success;

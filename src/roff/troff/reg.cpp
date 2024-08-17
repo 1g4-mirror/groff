@@ -317,13 +317,13 @@ void define_register()
   units prev_value;
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
-  if (get_number(&v, 'u', prev_value)) {
+  if (read_measurement(&v, 'u', prev_value)) {
     if (0 /* nullptr */ == r) {
       r = new number_reg;
       register_dictionary.define(nm, r);
     }
     r->set_value(v);
-    if (tok.is_space() && has_arg() && get_number(&v, 'u'))
+    if (tok.is_space() && has_arg() && read_measurement(&v, 'u'))
       r->set_increment(v);
   }
   skip_line();
@@ -349,10 +349,10 @@ void inline_define_register()
   units prev_value;
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
-  if (get_number(&v, 'u', prev_value)) {
+  if (read_measurement(&v, 'u', prev_value)) {
     r->set_value(v);
     if (start_token != tok) {
-      if (get_number(&v, 'u')) {
+      if (read_measurement(&v, 'u')) {
 	r->set_increment(v);
 	if (start_token != tok)
 	  warning(WARN_DELIM, "closing delimiter does not match");
