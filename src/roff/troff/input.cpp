@@ -1588,17 +1588,16 @@ node *do_overstrike()
       break;
     if (tok.is_horizontal_space())
       on->overstrike(tok.nd->copy());
-    else if (tok.is_unstretchable_space())
-    {
+    else if (tok.is_unstretchable_space()) {
       node *n = new hmotion_node(curenv->get_space_width(),
 				 curenv->get_fill_color());
       on->overstrike(n);
     }
     else {
       charinfo *ci = tok.get_char(true /* required */);
-      if (ci) {
+      if (ci != 0 /* nullptr */) {
 	node *n = curenv->make_char_node(ci);
-	if (n)
+	if (n != 0 /* nullptr */)
 	  on->overstrike(n);
       }
     }
@@ -1630,9 +1629,9 @@ static node *do_bracket()
 	&& (compatible_flag || input_stack::get_level() == start_level))
       break;
     charinfo *ci = tok.get_char(true /* required */);
-    if (ci) {
+    if (ci != 0 /* nullptr */) {
       node *n = curenv->make_char_node(ci);
-      if (n)
+      if (n != 0 /* nullptr */)
 	bn->bracket(n);
     }
   }
@@ -1763,7 +1762,7 @@ static node *do_zero_width()
       error("invalid token in argument to escaped 'Z'");
   }
   node *n = 0;
-  while (rev) {
+  while (rev != 0 /* nullptr */) {
     node *tem = rev;
     rev = rev->next;
     tem->next = n;
@@ -1776,7 +1775,7 @@ static node *do_zero_width()
 
 token_node *node::get_token_node()
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 class token_node : public node {
@@ -2198,7 +2197,7 @@ void token::next()
 	return;
       case 'D':
 	nd = read_draw_node();
-	if (!nd)
+	if (0 /* nullptr */ == nd)
 	  break;
 	type = TOKEN_NODE;
 	return;
@@ -2325,7 +2324,7 @@ void token::next()
 	return;
       case 'O':
 	nd = do_suppress(read_escape_parameter());
-	if (!nd)
+	if (0 /* nullptr */ == nd)
 	  break;
 	type = TOKEN_NODE;
 	return;
@@ -2386,7 +2385,7 @@ void token::next()
 	return;
       case 'X':
 	nd = do_device_control();
-	if (!nd)
+	if (0 /* nullptr */ == nd)
 	  break;
 	type = TOKEN_NODE;
 	return;
@@ -2414,10 +2413,10 @@ void token::next()
 	    nd = new zero_width_node(nd);
 	  else {
 	    charinfo *ci = get_char(true /* required */);
-	    if (ci == 0)
+	    if (0 /* nullptr */ == ci)
 	      break;
 	    node *gn = curenv->make_char_node(ci);
-	    if (gn == 0)
+	    if (0 /* nullptr */ == gn)
 	      break;
 	    nd = new zero_width_node(gn);
 	    type = TOKEN_NODE;
@@ -2426,7 +2425,7 @@ void token::next()
 	}
       case 'Z':
 	nd = do_zero_width();
-	if (nd == 0)
+	if (0 /* nullptr */ == nd)
 	  break;
 	type = TOKEN_NODE;
 	return;
@@ -5088,8 +5087,8 @@ void length_request()
     ++len;
     c = get_copy(&n);
   }
-  reg *r = (reg*)register_dictionary.lookup(ret);
-  if (r)
+  reg *r = static_cast<reg *>(register_dictionary.lookup(ret));
+  if (r != 0 /* nullptr */)
     r->set_value(len);
   else
     set_register(ret, len);
@@ -5171,8 +5170,8 @@ void interpolate_register(symbol nm, int inc)
 
 static void interpolate_number_format(symbol nm)
 {
-  reg *r = (reg *)register_dictionary.lookup(nm);
-  if (r)
+  reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
+  if (r != 0 /* nullptr */)
     input_stack::push(make_temp_iterator(r->get_format()));
 }
 
@@ -5431,16 +5430,16 @@ static void do_register()
     return;
   while (tok.is_space())
     tok.next();
-  reg *r = (reg *)register_dictionary.lookup(nm);
+  reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
   int prev_value;
-  if (!r || !r->get_value(&prev_value))
+  if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
   int val;
   if (!read_measurement(&val, 'u', prev_value))
     return;
   if (start_token != tok)
     warning(WARN_DELIM, "closing delimiter does not match");
-  if (r)
+  if (r != 0 /* nullptr */)
     r->set_value(val);
   else
     set_register(nm, val);
@@ -9097,12 +9096,12 @@ static void do_error(error_type type,
 {
   const char *filename;
   int lineno;
-  if (inhibit_errors && type < FATAL)
+  if (inhibit_errors && (type < FATAL))
     return;
   if (backtrace_flag)
     input_stack::backtrace();
   if (!get_file_line(&filename, &lineno))
-    filename = 0;
+    filename = 0 /* nullptr */;
   if (filename) {
     if (program_name)
       errprint("%1:", program_name);

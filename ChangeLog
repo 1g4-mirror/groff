@@ -1,5 +1,20 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/input.cpp (length_request)
+	(interpolate_number_format, do_register): Use `static_cast`
+	instead of C-style cast on dictionary values.
+	(do_overstrike, do_bracket, do_zero_width, token::next)
+	(length_request, interpolate_number_format, do_register):
+	Explicitly compare variable of pointer type to null pointer
+	constant instead of letting it pun down to a Boolean.
+	(do_register, token::next): Reorder equality comparison to avoid
+	inadvertent lvalue assignment.
+	(do_error): Add parentheses to complex expression.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor; boolify a static function.
 
 	* src/roff/troff/input.cpp (get_line_arg): Demote return type
