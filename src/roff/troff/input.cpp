@@ -5161,6 +5161,7 @@ static void interpolate_environment_variable(symbol nm)
 void interpolate_register(symbol nm, int inc)
 {
   reg *r = look_up_register(nm);
+  assert(r != 0 /* nullptr */);
   if (inc < 0)
     r->decrement();
   else if (inc > 0)

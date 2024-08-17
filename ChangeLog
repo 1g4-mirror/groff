@@ -1,5 +1,10 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (interpolate_register): Add assertion
+	to blow up on null pointer dereference.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/input.cpp (length_request)
