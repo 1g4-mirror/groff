@@ -1577,8 +1577,14 @@ node *do_overstrike()
       break;
     }
     if (tok.is_eof()) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in overstrike"
-	     " escape sequence (got %1)", tok.description());
+	      " escape sequence; expected %1, got %2", delimdesc,
+	      tok.description());
+      free(delimdesc);
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
@@ -1618,9 +1624,14 @@ static node *do_bracket()
       break;
     }
     if (tok.is_eof()) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in"
-	      " bracket-building escape sequence (got %1)",
-	      tok.description());
+	      " bracket-building escape sequence; expected %1, got"
+	      " %2", delimdesc, tok.description());
+      free(delimdesc);
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
@@ -1648,9 +1659,14 @@ static int do_name_test()
   for (;;) {
     tok.next();
     if (tok.is_eof()) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in identifier"
-	      " validation escape sequence (got %1)",
-	      tok.description());
+	      " validation escape sequence; expected %1, got %2",
+	      delimdesc, tok.description());
+      free(delimdesc);
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
@@ -1746,8 +1762,14 @@ static node *do_zero_width()
   for (;;) {
     tok.next();
     if (tok.is_eof()) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in zero-width"
-	      " escape sequence (got %1)", tok.description());
+	      " escape sequence; expected %1, got %2", delimdesc,
+	      tok.description());
+      free(delimdesc);
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
@@ -5482,9 +5504,14 @@ static void do_width()
   for (;;) {
     tok.next();
     if (tok.is_eof()) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in width"
-	      " computation escape sequence (got %1)",
-	      tok.description());
+	      "computation escape sequence; expected %1, got %2",
+	      delimdesc, tok.description());
+      free(delimdesc);
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
@@ -5703,8 +5730,14 @@ static node *do_device_control() // \X
       break;
     }
     if (tok.is_eof()) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in device control"
-	      " escape sequence (got %1)", tok.description());
+	      " escape sequence; expected %1, got %2", delimdesc,
+	      tok.description());
+      free(delimdesc);
       // Synthesize an input line ending.
       input_stack::push(make_temp_iterator("\n"));
       break;
