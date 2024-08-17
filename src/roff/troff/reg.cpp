@@ -323,8 +323,14 @@ void define_register()
       register_dictionary.define(nm, r);
     }
     r->set_value(v);
-    if (tok.is_space() && has_arg() && read_measurement(&v, 'u'))
-      r->set_increment(v);
+    if (tok.is_space()) {
+      if (has_arg() && read_measurement(&v, 'u'))
+	r->set_increment(v);
+    }
+    else if (has_arg() && !tok.is_tab())
+      warning(WARN_SYNTAX, "expected end of line or an auto-increment"
+	      " argument in register definition request; got %1",
+	      tok.description());
   }
   skip_line();
 }
