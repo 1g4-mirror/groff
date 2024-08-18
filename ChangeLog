@@ -8,6 +8,9 @@
 	(TS): Similar; set line length to `.R` basic units minus 1n to
 	avoid saturation warnings on output devices with a non-unit
 	horizontal motion quantum.
+	* tmac/html-end.tmac: Set page length to `.R` basic units minus
+	1v to avoid saturation warnings on output devices with a
+	non-unit vertical motion quantum (as the "html" device has).
 	* tmac/man.ultrix (HB): Use value of `.R` register instead of
 	"999" to indicate an arbitrary large integer.
 	* tmac/psfig.tmac (F+):
