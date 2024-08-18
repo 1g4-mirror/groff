@@ -8921,7 +8921,8 @@ static node *read_drawing_command()
   else {
     tok.next();
     if (tok == start_token)
-      error("missing argument");
+      warning(WARN_MISSING, "missing arguments to drawing escape"
+	      " sequence");
     else {
       unsigned char type = tok.ch();
       if (type == 'F') {

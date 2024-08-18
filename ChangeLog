@@ -1,5 +1,13 @@
 2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_drawing_command): Demote
+	diagnostic thrown on empty drawing command escape sequence
+	argument list from error to warning in "missing" category.  I
+	can imagine someone programmatically constructing a string to be
+	passed to a `\D` escape sequence; such a string might be empty.
+
+2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_drawing_command): Handle
 	an invalid delimiter in a drawing command escape sequence `\D`
 	the same as every other escape sequence that recognizes a
