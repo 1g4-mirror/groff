@@ -1,5 +1,17 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Support construction of read-only
+	registers from integers.
+	(class readonly_text_register): Declare constructor taking `int`
+	argument.
+	(readonly_text_register::readonly_text_register): Add it.
+	(main): Use it to initialize `.T` register.
+	(init_registers): Use it to initialize `.A` register.
+	(init_input_requests): Use it to initialize `.g` register and
+	`.R` registers.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Slightly refactor.
 	(do_overstrike): Rename local variable `on` to `osnode`.
 	(do_bracket): Rename local variable `bn` to `bracketnode`.

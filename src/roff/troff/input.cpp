@@ -7897,11 +7897,17 @@ class readonly_text_register : public reg {
   const char *s;
 public:
   readonly_text_register(const char *);
+  readonly_text_register(int);
   const char *get_string();
 };
 
 readonly_text_register::readonly_text_register(const char *p) : s(p)
 {
+}
+
+readonly_text_register::readonly_text_register(int i)
+{
+  s = strdup(i_to_a(i));
 }
 
 const char *readonly_text_register::get_string()
@@ -8593,7 +8599,7 @@ int main(int argc, char **argv)
   init_column_requests();
 #endif /* COLUMN */
   init_node_requests();
-  register_dictionary.define(".T", new readonly_text_register(tflag ? "1" : "0"));
+  register_dictionary.define(".T", new readonly_text_register(tflag));
   init_registers();
   init_reg_requests();
   init_hyphenation_pattern_requests();
@@ -8657,7 +8663,7 @@ static void init_registers()
   set_register("yr", int(t->tm_year));
   set_register("$$", getpid());
   register_dictionary.define(".A",
-      new readonly_text_register(want_abstract_output ? "1" : "0"));
+      new readonly_text_register(want_abstract_output));
 }
 
 /*
@@ -8810,9 +8816,9 @@ void init_input_requests()
   register_dictionary.define(".c", new lineno_reg);
   register_dictionary.define(".color", new readonly_boolean_register(&want_color_output));
   register_dictionary.define(".F", new filename_reg);
-  register_dictionary.define(".g", new readonly_text_register("1"));
+  register_dictionary.define(".g", new readonly_text_register(1));
   register_dictionary.define(".H", new readonly_register(&hresolution));
-  register_dictionary.define(".R", new readonly_text_register("10000"));
+  register_dictionary.define(".R", new readonly_text_register(10000));
   register_dictionary.define(".U", new readonly_boolean_register(&want_unsafe_requests));
   register_dictionary.define(".V", new readonly_register(&vresolution));
   register_dictionary.define(".warn", new readonly_register(&warning_mask));
