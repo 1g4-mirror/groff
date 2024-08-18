@@ -1,5 +1,15 @@
 2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.  Rename
+	confusingly named functions that interpret *roff language input,
+	not "nodes", a family of _groff_ class objects.
+	(read_draw_node): Rename this...
+	(read_drawing_command): ...to this.
+	(read_color_draw_node): Rename this...
+	(read_drawing_command_color_arguments): ...to this.
+
+2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (macro_diversion::macro_diversion):
 	Handle member variables `diversion_trap` and
 	`diversion_trap_post` in constructor's initializer list, for

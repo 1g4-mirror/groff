@@ -76,8 +76,8 @@ extern "C" const char *Version_string;
 void init_column_requests();
 #endif /* COLUMN */
 
-static node *read_draw_node();
-static void read_color_draw_node(token &);
+static node *read_drawing_command();
+static void read_drawing_command_color_arguments(token &);
 static void push_token(const token &);
 void copy_file();
 #ifdef COLUMN
@@ -2217,7 +2217,7 @@ void token::next()
 			      curenv->get_fill_color());
 	return;
       case 'D':
-	nd = read_draw_node();
+	nd = read_drawing_command();
 	if (0 /* nullptr */ == nd)
 	  break;
 	type = TOKEN_NODE;
@@ -8912,7 +8912,7 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
   return n;
 }
 
-static node *read_draw_node()
+static node *read_drawing_command()
 {
   token start_token;
   start_token.next();
@@ -8928,7 +8928,7 @@ static node *read_draw_node()
     else {
       unsigned char type = tok.ch();
       if (type == 'F') {
-	read_color_draw_node(start_token);
+	read_drawing_command_color_arguments(start_token);
 	return 0;
       }
       tok.next();
@@ -9029,7 +9029,7 @@ static node *read_draw_node()
   return 0;
 }
 
-static void read_color_draw_node(token &start)
+static void read_drawing_command_color_arguments(token &start)
 {
   tok.next();
   if (tok == start) {
