@@ -7677,7 +7677,7 @@ bool token::add_to_zero_width_node_list(node **pp)
   case TOKEN_NODE:
   case TOKEN_HORIZONTAL_SPACE:
     n = nd;
-    nd = 0;
+    nd = 0 /* nullptr */;
     break;
   case TOKEN_NUMBERED_CHAR:
     *pp = (*pp)->add_char(get_charinfo_by_number(val), curenv, &w, &s);
@@ -8927,19 +8927,19 @@ static node *read_drawing_command()
       unsigned char type = tok.ch();
       if (type == 'F') {
 	read_drawing_command_color_arguments(start_token);
-	return 0;
+	return 0 /* nullptr */;
       }
       tok.next();
       int maxpoints = 10;
       hvpair *point = new hvpair[maxpoints];
       int npoints = 0;
-      int no_last_v = 0;
-      bool err = false;
+      bool no_last_v = false;
+      bool had_error = false;
       int i;
       for (i = 0; tok != start_token; i++) {
 	if (i == maxpoints) {
 	  hvpair *oldpoint = point;
-	  point = new hvpair[maxpoints*2];
+	  point = new hvpair[maxpoints * 2];
 	  for (int j = 0; j < maxpoints; j++)
 	    point[j] = oldpoint[j];
 	  maxpoints *= 2;
@@ -8948,30 +8948,30 @@ static node *read_drawing_command()
 	if (tok.is_newline() || tok.is_eof()) {
 	  warning(WARN_DELIM, "missing closing delimiter in drawing"
 		  " escape sequence (got %1)", tok.description());
-	  err = true;
+	  had_error = true;
 	  break;
 	}
 	if (!get_hunits(&point[i].h,
 			type == 'f' || type == 't' ? 'u' : 'm')) {
-	  err = true;
+	  had_error = true;
 	  break;
 	}
 	++npoints;
 	tok.skip();
 	point[i].v = V0;
 	if (tok == start_token) {
-	  no_last_v = 1;
+	  no_last_v = true;
 	  break;
 	}
 	if (!get_vunits(&point[i].v, 'v')) {
-	  err = false;
+	  had_error = false;
 	  break;
 	}
 	tok.skip();
       }
       while (tok != start_token && !tok.is_newline() && !tok.is_eof())
 	tok.next();
-      if (!err) {
+      if (!had_error) {
 	switch (type) {
 	case 'l':
 	  if (npoints != 1 || no_last_v) {
@@ -9024,7 +9024,7 @@ static node *read_drawing_command()
       }
     }
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 static void read_drawing_command_color_arguments(token &start)
