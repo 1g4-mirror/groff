@@ -5774,7 +5774,7 @@ basic units.
 .
 A zero
 .I n
-selects the minimal supported thickness.
+selects the minimum supported thickness.
 .
 A negative
 .I n
@@ -5908,7 +5908,8 @@ interpreted as such when the string is interpolated.
 To achieve that effect,
 use
 .B \[rs]*
-to interpolate a macro instead.\" see @ref{Punning Names}.
+to interpolate a macro instead;
+see section \[lq]Punning names\[rq] below.
 .
 .
 .P
@@ -6064,7 +6065,7 @@ macros,
 strings,
 and diversions.
 .
-Bear in mind that the symbols
+The symbols
 .B \[rs]n[]
 are
 .I not
@@ -6285,7 +6286,7 @@ The count of lines remaining in the pending input trap.
 .
 .TP
 .REG .itc
-The pending input trap honors output line continuation
+The pending input trap honors output line continuation with
 .esc c
 (Boolean-valued).
 .
@@ -6349,7 +6350,7 @@ and
 .esc m .
 .
 The default stroke color is named
-.RB \[lq] default \[rq].
+.RB \%\[lq] default \[rq].
 .
 .TP
 .REG .M
@@ -6360,7 +6361,7 @@ and
 .esc M .
 .
 The default fill color is named
-.RB \[lq] default \[rq].
+.RB \&\[lq] default \[rq].
 .
 .TP
 .REG .n
@@ -6470,7 +6471,7 @@ and
 .
 .TP
 .REG .ss
-Size of minimal inter-word space in twelfths of the space width of the
+Size of minimum inter-word space in twelfths of the space width of the
 selected font.
 .
 .TP
@@ -7530,8 +7531,16 @@ at a given location in the current diversion
 .RB ( .dt )\[em]together,
 these are known as
 vertical position traps,
-which can be disabled and re-enabled
+which can be disabled and re\[e ad]nabled
 .RB ( .vpt ).
+.
+Setting a trap is also called
+.I planting
+one.
+.
+It is said that a trap is
+.I sprung
+if its condition is fulfilled.
 .
 .
 .P
@@ -7555,14 +7564,6 @@ or at the end of input
 .RB ( .em ).
 .
 Macros called by traps are passed no arguments.
-.
-Setting a trap is also called
-.I planting
-one.
-.
-It is said that a trap is
-.I sprung
-if its condition is fulfilled.
 .\" END Keep (roughly) parallel with groff.texi node "Traps".
 .
 .
@@ -7746,12 +7747,13 @@ The top-level diversion has no name.
 .
 .
 .P
-Dereferencing an undefined diversion will create an empty one of that
-name and cause a warning in category
-.B mac
-to be emitted.
-(see section \[lq]Warnings\[rq] in
-.MR @g@troff @MAN1EXT@ ).
+Dereferencing an undefined diversion creates an empty one of that name
+and emits a warning in category
+.BR mac .
+.
+See section \[lq]Warnings\[rq] in
+.MR @g@troff @MAN1EXT@
+regarding the enablement and suppression of warnings.
 .
 A diversion does not exist for the purpose of testing with the
 .B d
@@ -7789,8 +7791,9 @@ Call any of these macros again without an argument to end the diversion.
 Diversion requests can be nested.
 .
 The registers
-.BR .d ,
-.BR .z ,
+.B .d
+and
+.B .z
 report information about the current diversion,
 and
 .B dn

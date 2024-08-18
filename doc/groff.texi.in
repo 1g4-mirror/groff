@@ -8474,8 +8474,8 @@ Format}.  This request is incorrectly documented in the @acronym{AT&T}
 @code{troff} manual as using units of 1/36 em.}  (A @dfn{word space} is
 typically one-fourth to one-third em for Western scripts.)  The default
 for both parameters is@tie{}12.  Negative values are erroneous.
-@cindex inter-word spacing, minimal
-@cindex minimal inter-word spacing
+@cindex inter-word spacing, minimum
+@cindex minimum inter-word spacing
 @cindex space, between words
 The first argument is a minimum; if an output line undergoes adjustment,
 such spaces may increase in width.
@@ -8499,7 +8499,7 @@ inter-sentence space is not adjusted, but the inter-word space that
 always precedes it may be.  Further input spaces after the second, if
 present, are adjusted as normal.
 
-The read-only registers @code{.ss} and @code{.sss} hold the minimal
+The read-only registers @code{.ss} and @code{.sss} hold the minimum
 inter-word space and additional inter-sentence space amounts,
 respectively.  These parameters are part of the environment
 (@pxref{Environments}).
@@ -9681,7 +9681,7 @@ not possible to map the space character to any other glyph; requests
 like @w{@samp{.tr aa x}} undo @w{@samp{.tr aa \&}} instead.
 
 If adjustment is enabled, it occurs in spite of the `empty' space
-character; but no minimum distance---no minimal inter-word
+character; but no minimum distance---no minimum inter-word
 space---separates words).
 
 @item
@@ -14584,7 +14584,7 @@ polygon would occlude the text.
 @cindex line thickness (@samp{\D't @dots{}'})
 @cindex thickness of lines (@samp{\D't @dots{}'})
 Set the stroke thickness of geometric objects to @var{n} basic units.  A
-zero @var{n} selects the minimal supported thickness.  A negative
+zero @var{n} selects the minimum supported thickness.  A negative
 @var{n} selects a thickness proportional to the type size; this is the
 default.
 @end table
@@ -15456,8 +15456,8 @@ For orthogonality it is said that GNU @command{troff} is in the
 output is being ``diverted'' immediately to the output device).  The
 top-level diversion has no name.
 
-Dereferencing an undefined diversion will create an empty one of that
-name and cause a warning in category @samp{mac} to be emitted.
+Dereferencing an undefined diversion creates an empty one of that
+name and emits a warning in category @samp{mac}.
 @xref{Warnings}, regarding the enablement and suppression of warnings.
 A diversion does not exist for the purpose of testing with the @code{d}
 conditional operator until its initial definition ends (@pxref{Operators
@@ -17868,7 +17868,7 @@ bytes and ignores an argument to report only the sum of the sizes.
 @cindex @code{ss} request, incompatibilities with @acronym{AT&T} @code{troff}
 Unlike @acronym{AT&T} @code{troff}, GNU @code{troff} does not ignore the
 @code{ss} request if the output is a terminal device; instead, the
-values of minimal inter-word and additional inter-sentence space are
+values of minimum inter-word and additional inter-sentence space are
 each rounded down to the nearest multiple of@tie{}12.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
@@ -18581,8 +18581,8 @@ but GNU @code{troff} output drivers do nothing with this command.
 @item xr @var{n} @var{h} @var{v}@angles{line break}
 The @samp{r} stands for @var{resolution}.
 
-Resolution is@tie{}@var{n}, while @var{h} is the minimal horizontal
-motion, and @var{v} the minimal vertical motion possible with this
+Resolution is@tie{}@var{n}, while @var{h} is the minimum horizontal
+motion, and @var{v} the minimum vertical motion possible with this
 device; all arguments are positive integers in basic units @samp{u} per
 inch.  This is the second command of the prologue.
 

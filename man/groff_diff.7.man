@@ -813,13 +813,13 @@ but the polygon is filled.
 .
 .TP
 .BI \[rs]D\[aq]t\~ "n" \[aq]
-Set line thickness of geometric objects to
+Set line thickness of geometric objects
 .RI to\~ n
 basic units.
 .
 A zero
 .I n
-selects the minimal supported thickness.
+selects the minimum supported thickness.
 .
 A negative
 .I n
@@ -1163,7 +1163,7 @@ cannot.
 This inclusion of newlines requires an extension to the AT&T
 .I troff \" AT&T
 output format,
-and will confuse postprocessors that do not know about it.
+and confuses postprocessors that do not know about it.
 .
 .
 .TP
@@ -4467,7 +4467,7 @@ This is a string-valued register.
 .B \[rs]n[.ss]
 .TQ
 .B \[rs]n[.sss]
-Interpolate values of minimal inter-word space and additional
+Interpolate values of minimum inter-word space and additional
 inter-sentence space,
 respectively,
 in twelfths of the space width of the selected font.
@@ -4744,7 +4744,7 @@ Interpolate Gregorian year.
 .
 AT&T
 .IR troff 's \" AT&T
-.B \[rs][yr]
+.B \[rs]n[yr]
 interpolates the Gregorian year minus 1900.
 .
 .
@@ -5449,7 +5449,7 @@ composite characters
 environments
 .RB ( pev ),
 hyphenation codes
-.RB ( .phcode ),
+.RB ( phcode ),
 hyphenation exceptions
 .RB ( phw ),
 registers
