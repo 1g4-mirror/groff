@@ -38,7 +38,7 @@ usage: $prog {-v | --version}
 usage: $prog --help"
 
 summary="
-Format documents with groff(1) for TTY (terminal) devices.
+Format documents with groff(1) for terminal devices.
 See the nroff(1) manual page."
 
 # Break up option clusters into separate arguments.
