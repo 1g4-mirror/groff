@@ -7958,9 +7958,11 @@ Output page selection status (Boolean-valued); see @command{groff}
 @cindex number of available registers register (@code{.R})
 @cindex registers, available number of, register (@code{.R})
 @vindex .R
-Count of available unused registers; always 10,000 in GNU
-@code{troff}.@footnote{GNU @code{troff} dynamically allocates memory for
-as many registers as required.}
+Count of available unused registers; in GNU @command{troff} this
+register always interprets the maximum representable
+integer.@footnote{GNU @command{troff} dynamically allocates memory for as
+many registers as required.}  Favor its use over numeric literals with
+many zeros or nines to indicate an arbitrary large quantity.
 
 @item \n[.T]
 @vindex .T
@@ -8397,7 +8399,7 @@ This is a small text fragment that shows the differences
 between the `.ce' and the `.ad c' requests.
 ..
 .ll 4i
-.ce 1000
+.ce \n(.R
 .FR
 .ce 0
 
@@ -8415,8 +8417,10 @@ between the `.ce' and the `.ad c' requests.
 @endExample
 
 The previous example illustrates a common idiom of turning centering on
-for a quantity of lines far in excess of what is required, and off again
-after the text to be centered.  This technique relieves humans of
+for a quantity of lines far in excess of what is required,@footnote{The
+@code{.R} register interpolates the largest value that GNU
+@command{troff} can work with.  @xref{Built-in Registers}.} and off
+again after the text to be centered.  This technique relieves humans of
 counting lines for requests that take a count of input lines as an
 argument.
 @endDefreq
@@ -15408,7 +15412,7 @@ text has been output.
 ..
 .
 .de single-page-mode
-.  pl 99999
+.  pl \n[.R]u
 .  em adjust-page-length
 ..
 .

@@ -8818,7 +8818,7 @@ void init_input_requests()
   register_dictionary.define(".F", new filename_reg);
   register_dictionary.define(".g", new readonly_text_register(1));
   register_dictionary.define(".H", new readonly_register(&hresolution));
-  register_dictionary.define(".R", new readonly_text_register(10000));
+  register_dictionary.define(".R", new readonly_text_register(INT_MAX));
   register_dictionary.define(".U", new readonly_boolean_register(&want_unsafe_requests));
   register_dictionary.define(".V", new readonly_register(&vresolution));
   register_dictionary.define(".warn", new readonly_register(&warning_mask));

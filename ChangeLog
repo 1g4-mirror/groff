@@ -1,5 +1,19 @@
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (init_input_requests): Initialize
+	`.R` read-only register to `INT_MAX` instead of 10000.
+
+	* doc/groff.texi.in (Built-in Registers):
+	* man/groff.7.man (Read-only registers):
+	* man/groff_diff.7.man (Altered registers): Document it.
+
+	* doc/groff.texi.in (Manipulating Filling and Adjustment)
+	(End-of-input Traps): Apply it to examples.
+
+	Fixes <https://savannah.gnu.org/bugs/?63587>.
+
+2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Support construction of read-only
 	registers from integers.
 	(class readonly_text_register): Declare constructor taking `int`

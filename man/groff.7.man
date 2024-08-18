@@ -6438,8 +6438,7 @@ Post-vertical line spacing.
 .
 .TP
 .REG .R
-Count of available unused registers;
-always 10,000 in GNU
+Maximum representable integer in GNU
 .IR troff . \" GNU
 .
 .TP
