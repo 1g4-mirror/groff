@@ -1,5 +1,15 @@
 2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_drawing_command): Handle
+	an invalid delimiter in a drawing command escape sequence `\D`
+	the same as every other escape sequence that recognizes a
+	restricted set of delimiters (`\h`, `\H`, `\l`, `\L`, `\N`,
+	`\R`, `\s`, `\S`, `\v`, and `\x`): stop parsing immediately
+	instead of consuming and discarding input until encountering a
+	matching invalid delimiter, newline, or EOF.
+
+2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.  Rename
 	confusingly named functions that interpret *roff language input,
 	not "nodes", a family of _groff_ class objects.

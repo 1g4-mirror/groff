@@ -8916,11 +8916,8 @@ static node *read_drawing_command()
 {
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter(true /* report error */)){
-    do {
-      tok.next();
-    } while (tok != start_token && !tok.is_newline() && !tok.is_eof());
-  }
+  if (!start_token.is_usable_as_delimiter(true /* report error */))
+    return 0 /* nullptr */;
   else {
     tok.next();
     if (tok == start_token)
