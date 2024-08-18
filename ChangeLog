@@ -10,6 +10,8 @@
 	horizontal motion quantum.
 	* tmac/man.ultrix (HB): Use value of `.R` register instead of
 	"999" to indicate an arbitrary large integer.
+	* tmac/psfig.tmac (F+): Use value of `.R` register instead of
+	"9999" to indicate an arbitrary large integer.
 
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
