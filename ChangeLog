@@ -1,3 +1,10 @@
+2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.cpp (macro_diversion::macro_diversion):
+	Handle member variables `diversion_trap` and
+	`diversion_trap_post` in constructor's initializer list, for
+	clarity and to ensure that they don't contain garbage.
+
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/e.tmac (@M, $c): If the formatter is GNU troff,

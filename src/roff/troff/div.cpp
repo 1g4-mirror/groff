@@ -50,9 +50,9 @@ static vunits needed_space;
 
 diversion::diversion(symbol s)
 : prev(0), nm(s), vertical_position(V0), high_water_mark(V0),
-  any_chars_added(0), no_space_mode(0), needs_push(0), saved_seen_break(0),
-  saved_seen_space(0), saved_seen_eol(0), saved_suppress_next_eol(0),
-  marked_place(V0)
+  any_chars_added(0), no_space_mode(0), needs_push(0),
+  saved_seen_break(0), saved_seen_space(0), saved_seen_eol(0),
+  saved_suppress_next_eol(0), marked_place(V0)
 {
 }
 
@@ -173,7 +173,8 @@ void diversion::need(vunits n)
 }
 
 macro_diversion::macro_diversion(symbol s, int append)
-: diversion(s), max_width(H0)
+: diversion(s), max_width(H0), diversion_trap(0 /* nullptr */),
+  diversion_trap_pos(0)
 {
 #if 0
   if (append) {
