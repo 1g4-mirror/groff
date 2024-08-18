@@ -1770,7 +1770,7 @@ static node *do_zero_width() // \Z
       // diagnostic.
       char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in zero-width"
-	      " escape sequence; expected %1, got %2", delimdesc,
+	      " output escape sequence; expected %1, got %2", delimdesc,
 	      tok.description());
       free(delimdesc);
       // Synthesize an input line ending.
@@ -1780,8 +1780,11 @@ static node *do_zero_width() // \Z
     if (tok == start_token
 	&& (compatible_flag || input_stack::get_level() == start_level))
       break;
+    // XXX: does the initial dummy node leak if this fails?
+    // TODO: Say something better than "token" in the diagnostic.
     if (!tok.add_to_zero_width_node_list(&rev))
-      error("invalid token in argument to escaped 'Z'");
+      error("invalid token in argument to zero-width output escape"
+	    " sequence");
   }
   while (rev != 0 /* nullptr */) {
     node *tem = rev;

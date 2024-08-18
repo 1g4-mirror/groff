@@ -1,5 +1,10 @@
 2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_zero_width): Tweak `\Z`
+	diagnostic output.
+
+2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_drawing_command): Trivially
 	refactor.  Boolify local variable `no_last_v`.  Rename local
 	variable `err` to `had_error`.
