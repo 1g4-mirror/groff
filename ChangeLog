@@ -1,5 +1,12 @@
 2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(do_zero_width): Rename this...
+	(do_zero_width_output): ...to this.
+	(token::next): Update call site.
+
+2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_zero_width): Tweak `\Z`
 	diagnostic output.
 

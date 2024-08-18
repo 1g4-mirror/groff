@@ -1719,7 +1719,7 @@ static bool do_expr_test() // \B
 }
 
 #if 0
-static node *do_zero_width()
+static node *do_zero_width_output()
 {
   token start_token;
   start_token.next();
@@ -1755,7 +1755,7 @@ static node *do_zero_width()
 // It's undesirable for \Z to change environments, because then
 // \n(.w won't work as expected.
 
-static node *do_zero_width() // \Z
+static node *do_zero_width_output() // \Z
 {
   node *rev = new dummy_node;
   node *n = 0 /* nullptr */;
@@ -2448,7 +2448,7 @@ void token::next()
 	  return;
 	}
       case 'Z':
-	nd = do_zero_width();
+	nd = do_zero_width_output();
 	if (0 /* nullptr */ == nd)
 	  break;
 	type = TOKEN_NODE;
