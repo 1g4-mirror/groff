@@ -1,5 +1,13 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (make_glyph_node): Don't throw a
+	warning if `get_char_for_escape_parameter()` in "input.cpp"
+	already threw an error for the same input token.  Also compare
+	array elements of `const char` type to character, not integer,
+	literals.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify and rename `compatible_flag`, demoting it from
 	`int` to `bool` and calling it `want_att_compat`.  Initialize
 	and assign to it using Boolean, not integer, literals.
