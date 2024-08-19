@@ -101,18 +101,11 @@ SH_SEP=@PATH_SEPARATOR@
 # `DEVICE' is the default device.
 DEVICE=ps
 
-# XDEVIDIRS
-# `XDEVDIRS' is either `font/devX{75,100}{,-12}' or empty.
-
-# XPROGDIRS
-# `XPROGDIRS' is either `src/devices/xditview src/utils/xtotroff' or empty.
+# XPROGDIRS `XPROGDIRS' is either `src/devices/xditview
+# src/utils/xtotroff' or empty.
 
 # XLIBDIRS
 # `XLIBDIRS' is either `src/libs/libxutil' or empty.
-
-# `TTYDEVDIRS' is either `font/devascii font/devlatin1' (for
-# ASCII) or `font/devcp1047' (for EBCDIC) plus font/devutf8.
-TTYDEVDIRS=@TTYDEVDIRS@ font/devutf8
 
 # OTHERDEVDIRS
 # `OTHERDEVDIRS' is either `font/devlj4 font/devlbp' (for ASCII) or
