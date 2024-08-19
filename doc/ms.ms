@@ -26,8 +26,7 @@
 .\}
 .\" This document doesn't require the minus sign (in Times) but we do
 .\" want a copy- and-pastable hyphen-minus.
-.ie '\*[.T]'cp1047' .char \- \N'96'
-.el                 .char \- \N'45'
+.char \- \N'45'
 .\" A very limited output device might not have a dagger glyph.
 .fchar \[dg] *
 .nr PS 11
