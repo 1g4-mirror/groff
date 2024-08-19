@@ -1576,10 +1576,6 @@ node *do_overstrike() // \o
   }
   for (;;) {
     tok.next();
-    if (tok.is_newline()) {
-      input_stack::push(make_temp_iterator("\n"));
-      break;
-    }
     if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
@@ -1627,10 +1623,6 @@ static node *do_bracket() // \b
   }
   for (;;) {
     tok.next();
-    if (tok.is_newline()) {
-      input_stack::push(make_temp_iterator("\n"));
-      break;
-    }
     if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
@@ -5754,10 +5746,6 @@ static node *do_device_control() // \X
   macro mac;
   for (;;) {
     tok.next();
-    if (tok.is_newline()) {
-      input_stack::push(make_temp_iterator("\n"));
-      break;
-    }
     if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next

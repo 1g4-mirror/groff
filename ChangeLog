@@ -1,5 +1,12 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_overstrike, do_bracket)
+	(do_device_control): Stop pushing a newline onto the input stack
+	when encountering one; this character can no longer serve double
+	duty as a delimiter and a formattable newline.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #66113 (misleading `\B` diagnostic).
 
 	* src/roff/troff/input.cpp (do_expr_test): Advance the input
