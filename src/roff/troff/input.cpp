@@ -89,7 +89,7 @@ token tok;
 bool want_break = false;
 bool using_character_classes = false;
 bool want_color_output = true;
-static int backtrace_flag = 0;
+static bool want_backtraces = false;
 char *pipe_command = 0 /* nullptr */;
 charinfo *charset_table[256];
 unsigned char hpf_code_table[256];
@@ -8492,7 +8492,7 @@ int main(int argc, char **argv)
       iflag = 1;
       break;
     case 'b':
-      backtrace_flag = 1;
+      want_backtraces = true;
       break;
     case 'a':
       want_abstract_output = true;
@@ -9161,7 +9161,7 @@ static void do_error(error_type type,
   int lineno;
   if (inhibit_errors && (type < FATAL))
     return;
-  if (backtrace_flag)
+  if (want_backtraces)
     input_stack::backtrace();
   if (!get_file_line(&filename, &lineno))
     filename = 0 /* nullptr */;

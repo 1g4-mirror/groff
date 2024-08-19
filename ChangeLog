@@ -1,5 +1,13 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify and rename `backtrace_flag`, demoting it from
+	`int` to `bool` and calling it `want_backtraces`.  Initialize
+	and assign to it using Boolean, not integer, literals.
+
+	* src/roff/troff/input.cpp (main, do_error): Do it.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify and rename `class_flag`, demoting it from `int`
 	to `bool` and calling it `using_character_classes`.  Initialize
 	and assign to it using Boolean, not integer, literals.
