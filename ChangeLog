@@ -1,5 +1,23 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grops, grotty, libgroff, pic]: Drop EBCDIC support.
+
+	* src/devices/grops/psrm.cpp:
+	* src/devices/grotty/tty.cpp:
+	* src/libs/libgroff/invalid.cpp:
+	* src/preproc/pic/lex.cpp: Do it.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?65724>.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.h: Drop input character definitions for
+	CCSID (code page) 1047 (EBCDIC).
+
+	Continues fixing <https://savannah.gnu.org/bugs/?65724>.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Revise `\A` and `\B` escape
 	sequences to no longer interpolate anything (not even "0" for
 	"false") if they lexically don't even get as far as an opening
