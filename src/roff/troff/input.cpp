@@ -105,8 +105,8 @@ static int escape_char = '\\';
 static symbol end_of_input_macro_name;
 static symbol blank_line_macro_name;
 static symbol leading_spaces_macro_name;
-static int compatible_flag = 0;
-static int do_old_compatible_flag = -1;	// for .do request
+static bool want_att_compat = false;
+static int do_old_want_att_compat = -1;	// for .do request
 bool want_abstract_output = false;
 bool want_output_suppressed = false;
 bool is_writing_html = false;
@@ -342,8 +342,8 @@ private:
   virtual int is_boundary() {return 0; }
   virtual int is_file() { return 0; }
   virtual int is_macro() { return 0; }
-  virtual void save_compatible_flag(int) {}
-  virtual int get_compatible_flag() { return 0; }
+  virtual void set_att_compat(bool) {}
+  virtual bool get_att_compat() { return false; }
 };
 
 input_iterator::input_iterator()
@@ -553,8 +553,8 @@ public:
   static void decrease_level();
   static void clear();
   static void pop_macro();
-  static void save_compatible_flag(int);
-  static int get_compatible_flag();
+  static void set_att_compat(bool);
+  static bool get_att_compat();
   static statem *get_diversion_state();
   static void check_end_diversion(input_iterator *t);
   static int limit;
@@ -877,14 +877,14 @@ void input_stack::pop_macro()
     add_return_boundary();
 }
 
-inline void input_stack::save_compatible_flag(int f)
+inline void input_stack::set_att_compat(bool b)
 {
-  top->save_compatible_flag(f);
+  top->set_att_compat(b);
 }
 
-inline int input_stack::get_compatible_flag()
+inline bool input_stack::get_att_compat()
 {
-  return top->get_compatible_flag();
+  return top->get_att_compat();
 }
 
 void backtrace_request()
@@ -1032,7 +1032,7 @@ static symbol read_escape_parameter(read_mode mode)
     return NULL_SYMBOL;
   if (c == '(')
     return read_two_char_escape_parameter();
-  if (c == '[' && !compatible_flag)
+  if (c == '[' && !want_att_compat)
     return read_long_escape_parameters(mode);
   char buf[2];
   buf[0] = c;
@@ -1057,7 +1057,7 @@ static symbol read_increment_and_escape_parameter(int *incp)
     *incp = -1;
     return read_escape_parameter();
   case '[':
-    if (!compatible_flag) {
+    if (!want_att_compat) {
       *incp = 0;
       return read_long_escape_parameters();
     }
@@ -1075,17 +1075,17 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
   for (;;) {
     int c = input_stack::get(nd);
     if (c == PUSH_GROFF_MODE) {
-      input_stack::save_compatible_flag(compatible_flag);
-      compatible_flag = 0;
+      input_stack::set_att_compat(want_att_compat);
+      want_att_compat = false;
       continue;
     }
     if (c == PUSH_COMP_MODE) {
-      input_stack::save_compatible_flag(compatible_flag);
-      compatible_flag = 1;
+      input_stack::set_att_compat(want_att_compat);
+      want_att_compat = true;
       continue;
     }
     if (c == POP_GROFFCOMP_MODE) {
-      compatible_flag = input_stack::get_compatible_flag();
+      want_att_compat = input_stack::get_att_compat();
       continue;
     }
     if (c == BEGIN_QUOTE) {
@@ -1590,7 +1590,7 @@ node *do_overstrike() // \o
       break;
     }
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     if (tok.is_horizontal_space())
       osnode->overstrike(tok.nd->copy());
@@ -1637,7 +1637,7 @@ static node *do_bracket() // \b
       break;
     }
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     charinfo *ci = tok.get_char(true /* required */);
     if (ci != 0 /* nullptr */) {
@@ -1672,7 +1672,7 @@ static bool do_name_test() // \A
       break;
     }
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     if (!tok.ch())
       got_bad_char = true;
@@ -1734,7 +1734,7 @@ static node *do_zero_width_output()
       break;
     }
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     tok.process();
   }
@@ -1778,7 +1778,7 @@ static node *do_zero_width_output() // \Z
       break;
     }
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     // XXX: does the initial dummy node leak if this fails?
     // TODO: Say something better than "token" in the diagnostic.
@@ -1937,15 +1937,15 @@ void token::next()
 	  type = TOKEN_HYPHEN_INDICATOR;
 	  return;
       case PUSH_GROFF_MODE:
-	input_stack::save_compatible_flag(compatible_flag);
-	compatible_flag = 0;
+	input_stack::set_att_compat(want_att_compat);
+	want_att_compat = false;
 	continue;
       case PUSH_COMP_MODE:
-	input_stack::save_compatible_flag(compatible_flag);
-	compatible_flag = 1;
+	input_stack::set_att_compat(want_att_compat);
+	want_att_compat = true;
 	continue;
       case POP_GROFFCOMP_MODE:
-	compatible_flag = input_stack::get_compatible_flag();
+	want_att_compat = input_stack::get_att_compat();
 	continue;
       case BEGIN_QUOTE:
 	input_stack::increase_level();
@@ -2252,7 +2252,7 @@ void token::next()
 	  }
 	  else
 	    (void) curenv->set_font(atoi(s.contents()));
-	  if (!compatible_flag)
+	  if (!want_att_compat)
 	    have_formattable_input = true;
 	  break;
 	}
@@ -2281,7 +2281,7 @@ void token::next()
       case 'H':
 	// don't take height increments relative to previous height if
 	// in compatibility mode
-	if (!compatible_flag && curenv->get_char_height()) {
+	if (!want_att_compat && curenv->get_char_height()) {
 	  if (read_delimited_number(&x, 'z', curenv->get_char_height()))
 	    curenv->set_char_height(x);
 	}
@@ -2290,7 +2290,7 @@ void token::next()
 	      curenv->get_requested_point_size()))
 	    curenv->set_char_height(x);
 	}
-	if (!compatible_flag)
+	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 'k':
@@ -2317,12 +2317,12 @@ void token::next()
 	}
       case 'm':
 	do_glyph_color(read_escape_parameter(ALLOW_EMPTY));
-	if (!compatible_flag)
+	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 'M':
 	do_fill_color(read_escape_parameter(ALLOW_EMPTY));
-	if (!compatible_flag)
+	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 'n':
@@ -2361,19 +2361,19 @@ void token::next()
 	return;
       case 'R':
 	do_register();
-	if (!compatible_flag)
+	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 's':
 	if (read_size(&x))
 	  curenv->set_size(x);
-	if (!compatible_flag)
+	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 'S':
 	if (read_delimited_number(&x, 0))
 	  curenv->set_char_slant(x);
-	if (!compatible_flag)
+	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 't':
@@ -2460,7 +2460,7 @@ void token::next()
       case '\n':
 	break;
       case '[':
-	if (!compatible_flag) {
+	if (!want_att_compat) {
 	  symbol s = read_long_escape_parameters(WITH_ARGS);
 	  if (s.is_null() || s.is_empty())
 	    break;
@@ -2683,9 +2683,9 @@ void compatible()
 {
   int n;
   if (has_arg() && get_integer(&n))
-    compatible_flag = (n > 0);
+    want_att_compat = (n > 0);
   else
-    compatible_flag = 1;
+    want_att_compat = true;
   skip_line();
 }
 
@@ -2723,7 +2723,7 @@ static void diagnose_invalid_identifier()
 
 symbol get_name(bool required)
 {
-  if (compatible_flag) {
+  if (want_att_compat) {
     char buf[3];
     tok.skip();
     if ((buf[0] = tok.ch()) != 0) {
@@ -2879,16 +2879,16 @@ static void trapping_blank_line()
 
 void do_request()
 {
-  assert(do_old_compatible_flag == -1);
-  do_old_compatible_flag = compatible_flag;
-  compatible_flag = 0;
+  assert(do_old_want_att_compat == -1);
+  do_old_want_att_compat = want_att_compat;
+  want_att_compat = false;
   symbol nm = get_name();
   if (nm.is_null())
     skip_line();
   else
     interpolate_macro(nm, true /* don't want next token */);
-  compatible_flag = do_old_compatible_flag;
-  do_old_compatible_flag = -1;
+  want_att_compat = do_old_want_att_compat;
+  do_old_want_att_compat = -1;
   request_or_macro *p = lookup_request(nm);
   macro *m = p->to_macro();
   if (m)
@@ -3635,7 +3635,7 @@ class string_iterator : public input_iterator {
   char_block *bp;
   int count;			// of characters remaining
   node *nd;
-  int saved_compatible_flag;
+  bool att_compat;
   int with_break;		// inherited from the caller
 protected:
   symbol nm;
@@ -3648,8 +3648,8 @@ public:
   int get_location(int, const char **, int *);
   void backtrace();
   int get_break_flag() { return with_break; }
-  void save_compatible_flag(int f) { saved_compatible_flag = f; }
-  int get_compatible_flag() { return saved_compatible_flag; }
+  void set_att_compat(bool b) { att_compat = b; }
+  bool get_att_compat() { return att_compat; }
   int is_diversion();
 };
 
@@ -4011,7 +4011,7 @@ static void decode_args(macro_iterator *mi)
       macro arg;
       int quote_input_level = 0;
       int done_tab_warning = 0;
-      arg.append(compatible_flag ? PUSH_COMP_MODE : PUSH_GROFF_MODE);
+      arg.append(want_att_compat ? PUSH_COMP_MODE : PUSH_GROFF_MODE);
       // we store discarded double quotes for \$^
       if (c == '"') {
 	arg.append(DOUBLE_QUOTE);
@@ -4020,7 +4020,7 @@ static void decode_args(macro_iterator *mi)
       }
       while (c != EOF && c != '\n' && !(c == ' ' && quote_input_level == 0)) {
 	if (quote_input_level > 0 && c == '"'
-	    && (compatible_flag
+	    && (want_att_compat
 		|| input_stack::get_level() == quote_input_level)) {
 	  arg.append(DOUBLE_QUOTE);
 	  c = get_copy(&n);
@@ -4106,7 +4106,7 @@ void macro::invoke(symbol nm, bool do_not_want_next_token)
   decode_args(mi);
   input_stack::push(mi);
   // we must delay tok.next() in case the function has been called by
-  // do_request to assure proper handling of compatible_flag
+  // do_request to assure proper handling of want_att_compat
   if (!do_not_want_next_token)
     tok.next();
 }
@@ -4416,7 +4416,7 @@ void do_define_string(define_mode mode, comp_mode comp)
 void define_string()
 {
   do_define_string(DEFINE_NORMAL,
-		   compatible_flag ? COMP_ENABLE: COMP_IGNORE);
+		   want_att_compat ? COMP_ENABLE: COMP_IGNORE);
 }
 
 void define_nocomp_string()
@@ -4427,7 +4427,7 @@ void define_nocomp_string()
 void append_string()
 {
   do_define_string(DEFINE_APPEND,
-		   compatible_flag ? COMP_ENABLE : COMP_IGNORE);
+		   want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
 void append_nocomp_string()
@@ -4754,7 +4754,7 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
 	}
       }
       if (s[i] == 0
-	  && ((i == 2 && compatible_flag)
+	  && ((i == 2 && want_att_compat)
 	      || (d = get_copy(&n)) == ' '
 	      || d == '\n')) {	// we found it
 	if (d == '\n')
@@ -4818,7 +4818,7 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
 void define_macro()
 {
   do_define_macro(DEFINE_NORMAL, CALLING_NORMAL,
-		  compatible_flag ? COMP_ENABLE : COMP_IGNORE);
+		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
 void define_nocomp_macro()
@@ -4829,7 +4829,7 @@ void define_nocomp_macro()
 void define_indirect_macro()
 {
   do_define_macro(DEFINE_NORMAL, CALLING_INDIRECT,
-		  compatible_flag ? COMP_ENABLE : COMP_IGNORE);
+		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
 void define_indirect_nocomp_macro()
@@ -4840,7 +4840,7 @@ void define_indirect_nocomp_macro()
 void append_macro()
 {
   do_define_macro(DEFINE_APPEND, CALLING_NORMAL,
-		  compatible_flag ? COMP_ENABLE : COMP_IGNORE);
+		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
 void append_nocomp_macro()
@@ -4851,7 +4851,7 @@ void append_nocomp_macro()
 void append_indirect_macro()
 {
   do_define_macro(DEFINE_APPEND, CALLING_INDIRECT,
-		  compatible_flag ? COMP_ENABLE : COMP_IGNORE);
+		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
 void append_indirect_nocomp_macro()
@@ -5326,7 +5326,7 @@ static bool read_size(int *x)
   }
   else if (csdigit(c)) {
     val = c - '0';
-    if (compatible_flag && !inc && c != '0' && c < '4') {
+    if (want_att_compat && !inc && c != '0' && c < '4') {
       // Support legacy \sNN syntax.
       tok.next();
       c = tok.ch();
@@ -5436,7 +5436,7 @@ static symbol get_delimited_name()
     }
     tok.next();
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     if ((buf[i] = tok.ch()) == 0) {
       error("missing delimiter (got %1)", tok.description());
@@ -5520,7 +5520,7 @@ static void do_width() // \w
       break;
     }
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     tok.process();
   }
@@ -5553,7 +5553,7 @@ void read_title_parts(node **part, hunits *part_width)
   for (int i = 0; i < 3; i++) {
     while (!tok.is_newline() && !tok.is_eof()) {
       if (tok == start
-	  && (compatible_flag || input_stack::get_level() == start_level)) {
+	  && (want_att_compat || input_stack::get_level() == start_level)) {
 	tok.next();
 	break;
       }
@@ -5746,7 +5746,7 @@ static node *do_device_control() // \X
       break;
     }
     if (tok == start_token
-	&& (compatible_flag || input_stack::get_level() == start_level))
+	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     unsigned char c;
     if (tok.is_space())
@@ -6013,7 +6013,7 @@ static bool do_if_request()
   }
   bool result;
   unsigned char c = tok.ch();
-  if (compatible_flag)
+  if (want_att_compat)
     switch (c) {
     case 'F':
     case 'S':
@@ -6119,7 +6119,7 @@ static bool do_if_request()
 	  return false;
 	}
 	if (tok == delim
-	    && (compatible_flag
+	    && (want_att_compat
 	        || input_stack::get_level() == delim_level))
 	  break;
 	tok.process();
@@ -8460,7 +8460,7 @@ int main(int argc, char **argv)
       is_writing_html = (strcmp(device, "html") == 0);
       break;
     case 'C':
-      compatible_flag = 1;
+      want_att_compat = true;
       // fall through
     case 'c':
       want_color_output = false;
@@ -8813,8 +8813,8 @@ void init_input_requests()
   init_request("writem", write_macro_request);
   register_dictionary.define(".$", new nargs_reg);
   register_dictionary.define(".br", new break_flag_reg);
-  register_dictionary.define(".C", new readonly_register(&compatible_flag));
-  register_dictionary.define(".cp", new readonly_register(&do_old_compatible_flag));
+  register_dictionary.define(".C", new readonly_boolean_register(&want_att_compat));
+  register_dictionary.define(".cp", new readonly_register(&do_old_want_att_compat));
   register_dictionary.define(".O", new variable_reg(&suppression_level));
   register_dictionary.define(".c", new lineno_reg);
   register_dictionary.define(".color", new readonly_boolean_register(&want_color_output));
@@ -8873,8 +8873,8 @@ static request_or_macro *lookup_request(symbol nm)
 node *charinfo_to_node_list(charinfo *ci, const environment *envp)
 {
   // Don't interpret character definitions in compatible mode.
-  int old_compatible_flag = compatible_flag;
-  compatible_flag = 0;
+  int old_want_att_compat = want_att_compat;
+  want_att_compat = false;
   int previous_escape_char = escape_char;
   escape_char = '\\';
   macro *mac = ci->set_macro(0);
@@ -8909,7 +8909,7 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
   ci->set_macro(mac);
   tok = old_tok;
   curenv = oldenv;
-  compatible_flag = old_compatible_flag;
+  want_att_compat = old_want_att_compat;
   escape_char = previous_escape_char;
   have_formattable_input = false;
   return n;

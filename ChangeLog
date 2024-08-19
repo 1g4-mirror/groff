@@ -1,5 +1,38 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify and rename `compatible_flag`, demoting it from
+	`int` to `bool` and calling it `want_att_compat`.  Initialize
+	and assign to it using Boolean, not integer, literals.
+
+	* src/roff/troff/input.cpp (read_escape_parameter)
+	(read_increment_and_escape_parameter, get_copy, do_overstrike)
+	(do_bracket, do_name_test, do_zero_width_output, token::next)
+	(compatible, diagnose_invalid_identifier, do_request)
+	(decode_args, do_define_string, define_nocomp_string)
+	(do_define_macro, define_nocomp_macro, append_nocomp_macro)
+	(read_size, get_delimited_name, read_title_parts)
+	(do_device_control, do_if_request, main, init_input_requests)
+	(lookup_request, charinfo_to_node_list): Do it.
+
+	(class string_iterator): Boolify and rename
+	`saved_compatible_flag` to `att_compat`.  Rename and retype
+	member functions.
+
+	(class input_iterator, class_string_iterator): Rename and retype
+	member functions.
+	`save_compatible_flag()` -> `set_att_compat()`
+	`get_compatible_flag()` -> `get_att_compat()`
+	The former now takes a `bool` argument instead of an `int`, and
+	the latter returns a `bool` instead of an `int`.
+	(input_stack::set_att_compat, input_stack::get_att_compat):
+	Update implementations accordingly.
+	(get_copy, token::next): Update call sites.
+
+	(init_input_requests): Back the `.C` register with object of
+	type `readonly_boolean_register` instead of `readonly_register`.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify and rename `ignoring`, demoting it from
 	`int` to `bool` and calling it `want_input_ignored`.  Initialize
 	and assign to it using Boolean, not integer, literals.
