@@ -1,5 +1,17 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #66113 (misleading `\B` diagnostic).
+
+	* src/roff/troff/input.cpp (do_expr_test): Advance the input
+	token pointer at the end of the endless for loop, not the
+	beginning, since `get_number_rigidly()` already left it at the
+	next input character to be processed.  (Most parameterized
+	escape sequence reading functions don't call an input reading
+	function before entering this sort of loop, so they correctly
+	advance the token pointer _first_.)
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #63142 (newlines as delims).
 
 	Withdraw support for newlines as escape sequence delimiters.

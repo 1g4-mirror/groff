@@ -1708,11 +1708,13 @@ static bool do_expr_test() // \B
   bool result = get_number_rigidly(&dummy, 'u');
   warning_mask = saved_warning_mask;
   want_errors_inhibited = saved_want_errors_inhibited;
+  // get_number_rigidly() has left `token` pointing at the input
+  // character after the end of the expression.
   if (tok == start_token && input_stack::get_level() == start_level)
     return result;
-  // ignore everything up to the delimiter in case we aren't right there
+  // There may be garbage after the expression but before the closing
+  // delimiter.  Eat it.
   for (;;) {
-    tok.next();
     if (tok.is_newline() || tok.is_eof()) {
       char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in numeric"
@@ -1722,6 +1724,7 @@ static bool do_expr_test() // \B
       input_stack::push(make_temp_iterator("\n"));
       break;
     }
+    tok.next();
     if (tok == start_token && input_stack::get_level() == start_level)
       break;
   }
