@@ -1,5 +1,17 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify and rename `inhibit_errors`, demoting it from
+	`int` to `bool` and calling it `want_errors_inhibited`.
+	Initialize and assign to it using Boolean, not integer,
+	literals.
+
+	* src/roff/troff/input.cpp (do_expr_test, main, do_error): Do
+	it.
+	(do_expr_test): Similarly boolify and rename local variable
+	`saved_inhibit_errors` -> `saved_want_errors_inhibited`.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify and rename `backtrace_flag`, demoting it from
 	`int` to `bool` and calling it `want_backtraces`.  Initialize
 	and assign to it using Boolean, not integer, literals.

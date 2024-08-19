@@ -95,7 +95,7 @@ charinfo *charset_table[256];
 unsigned char hpf_code_table[256];
 
 static int warning_mask = DEFAULT_WARNING_MASK;
-static int inhibit_errors = 0;
+static bool want_errors_inhibited = false;
 static int ignoring = 0;
 
 static void enable_warning(const char *);
@@ -1691,13 +1691,13 @@ static bool do_expr_test() // \B
   tok.next();
   // disable all warning and error messages temporarily
   int saved_warning_mask = warning_mask;
-  int saved_inhibit_errors = inhibit_errors;
+  bool saved_want_errors_inhibited = want_errors_inhibited;
   warning_mask = 0;
-  inhibit_errors = 1;
+  want_errors_inhibited = true;
   int dummy;
   bool result = get_number_rigidly(&dummy, 'u');
   warning_mask = saved_warning_mask;
-  inhibit_errors = saved_inhibit_errors;
+  want_errors_inhibited = saved_want_errors_inhibited;
   if (tok == start_token && input_stack::get_level() == start_level)
     return result;
   // ignore everything up to the delimiter in case we aren't right there
@@ -8477,7 +8477,7 @@ int main(int argc, char **argv)
       add_string(optarg, &macros);
       break;
     case 'E':
-      inhibit_errors = 1;
+      want_errors_inhibited = true;
       break;
     case 'R':
       no_rc = 1;
@@ -9159,7 +9159,7 @@ static void do_error(error_type type,
 {
   const char *filename;
   int lineno;
-  if (inhibit_errors && (type < FATAL))
+  if (want_errors_inhibited && (type < FATAL))
     return;
   if (want_backtraces)
     input_stack::backtrace();
