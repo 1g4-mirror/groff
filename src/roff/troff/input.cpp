@@ -1585,8 +1585,6 @@ node *do_overstrike() // \o
 	      " escape sequence; expected %1, got %2", delimdesc,
 	      tok.description());
       free(delimdesc);
-      // Synthesize an input line ending.
-      input_stack::push(make_temp_iterator("\n"));
       break;
     }
     if (tok == start_token
@@ -1632,8 +1630,6 @@ static node *do_bracket() // \b
 	      " bracket-building escape sequence; expected %1, got"
 	      " %2", delimdesc, tok.description());
       free(delimdesc);
-      // Synthesize an input line ending.
-      input_stack::push(make_temp_iterator("\n"));
       break;
     }
     if (tok == start_token
@@ -1669,8 +1665,6 @@ static bool do_name_test() // \A
 	      " validation escape sequence; expected %1, got %2",
 	      delimdesc, tok.description());
       free(delimdesc);
-      // Synthesize an input line ending.
-      input_stack::push(make_temp_iterator("\n"));
       break;
     }
     if (tok == start_token
@@ -1713,7 +1707,6 @@ static bool do_expr_test() // \B
 	      " expression validation escape sequence; expected %1,"
 	      " got %2", delimdesc, tok.description());
       free(delimdesc);
-      input_stack::push(make_temp_iterator("\n"));
       break;
     }
     tok.next();
@@ -1782,8 +1775,6 @@ static node *do_zero_width_output() // \Z
 	      " output escape sequence; expected %1, got %2", delimdesc,
 	      tok.description());
       free(delimdesc);
-      // Synthesize an input line ending.
-      input_stack::push(make_temp_iterator("\n"));
       break;
     }
     if (tok == start_token
@@ -5531,8 +5522,6 @@ static void do_width() // \w
 	      "computation escape sequence; expected %1, got %2",
 	      delimdesc, tok.description());
       free(delimdesc);
-      // Synthesize an input line ending.
-      input_stack::push(make_temp_iterator("\n"));
       break;
     }
     if (tok == start_token
@@ -5755,8 +5744,6 @@ static node *do_device_control() // \X
 	      " escape sequence; expected %1, got %2", delimdesc,
 	      tok.description());
       free(delimdesc);
-      // Synthesize an input line ending.
-      input_stack::push(make_temp_iterator("\n"));
       break;
     }
     if (tok == start_token

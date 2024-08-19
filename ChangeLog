@@ -4,6 +4,10 @@
 	(do_device_control): Stop pushing a newline onto the input stack
 	when encountering one; this character can no longer serve double
 	duty as a delimiter and a formattable newline.
+	(do_overstrike, do_bracket, do_name_test, do_expr_test)
+	(do_zero_width_output, do_width, do_device_control): Similarly
+	when finishing up with a delimited escape sequence with a
+	malformed ending.
 
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
