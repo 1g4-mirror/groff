@@ -1570,13 +1570,17 @@ node *do_overstrike() // \o
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter(true /* report error */)) {
+    delete osnode;
+    return 0 /* nullptr */;
+  }
   for (;;) {
     tok.next();
     if (tok.is_newline()) {
       input_stack::push(make_temp_iterator("\n"));
       break;
     }
-    if (tok.is_eof()) {
+    if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.
@@ -1617,13 +1621,17 @@ static node *do_bracket() // \b
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter(true /* report error */)) {
+    delete bracketnode;
+    return 0 /* nullptr */;
+  }
   for (;;) {
     tok.next();
     if (tok.is_newline()) {
       input_stack::push(make_temp_iterator("\n"));
       break;
     }
-    if (tok.is_eof()) {
+    if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.
@@ -1654,11 +1662,13 @@ static bool do_name_test() // \A
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter(true /* report error */))
+    return false;
   bool got_bad_char = false;
   bool got_some_char = false;
   for (;;) {
     tok.next();
-    if (tok.is_eof()) {
+    if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.
@@ -1762,9 +1772,13 @@ static node *do_zero_width_output() // \Z
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter(true /* report error */)) {
+    delete rev;
+    return 0 /* nullptr */;
+  }
   for (;;) {
     tok.next();
-    if (tok.is_eof()) {
+    if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.
@@ -2200,6 +2214,8 @@ void token::next()
 	return;
       case 'b':
 	nd = do_bracket();
+	if (0 /* nullptr */ == nd)
+	  break;
 	type = TOKEN_NODE;
 	return;
       case 'B':
@@ -2344,6 +2360,8 @@ void token::next()
 	return;
       case 'o':
 	nd = do_overstrike();
+	if (0 /* nullptr */ == nd)
+	  break;
 	type = TOKEN_NODE;
 	return;
       case 'O':
@@ -5502,12 +5520,14 @@ static void do_width() // \w
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter(true /* report error */))
+    return;
   environment env(curenv);
   environment *oldenv = curenv;
   curenv = &env;
   for (;;) {
     tok.next();
-    if (tok.is_eof()) {
+    if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.
@@ -5726,6 +5746,8 @@ static node *do_device_control() // \X
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter(true /* report error */))
+    return 0 /* nullptr */;
   macro mac;
   for (;;) {
     tok.next();
@@ -5733,7 +5755,7 @@ static node *do_device_control() // \X
       input_stack::push(make_temp_iterator("\n"));
       break;
     }
-    if (tok.is_eof()) {
+    if (tok.is_newline() || tok.is_eof()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.

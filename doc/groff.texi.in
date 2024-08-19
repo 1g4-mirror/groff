@@ -7254,32 +7254,6 @@ as delimiters:
 using them this way is discouraged; they can make the input confusing to
 read.
 
-@cindex @code{\A}, delimiters allowed by
-@cindex @code{\b}, delimiters allowed by
-@cindex @code{\o}, delimiters allowed by
-@cindex @code{\w}, delimiters allowed by
-@cindex @code{\X}, delimiters allowed by
-@cindex @code{\Z}, delimiters allowed by
-@cindex newline, as delimiter
-A few escape sequences,
-@code{\A},
-@code{\b},
-@code{\o},
-@code{\w},
-@code{\X},
-and @code{\Z}, accept a newline as a delimiter.  Newlines that serve
-as delimiters continue to be recognized as input line terminators.
-
-@Example
-A caf\o
-e\(aa
-in Paris
-    @result{} A café in Paris
-@endExample
-
-@noindent
-Use of newlines as delimiters in escape sequences is also discouraged.
-
 @cindex @code{\D}, delimiters allowed by
 @cindex @code{\h}, delimiters allowed by
 @cindex @code{\H}, delimiters allowed by

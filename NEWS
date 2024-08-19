@@ -32,6 +32,9 @@ o GNU troff no longer accepts nonpositive page lengths.  Attempting to
   motion quantum as `ll` does with the horizontal motion quantum in AT&T
   and GNU troffs.
 
+o GNU troff no longer accepts a newline as a delimiter for the
+  parameterized escape sequences `\A`, `\b`, `\o`, `\w`, `\X`, and `\Z`.
+
 o The `color`, `cp`, `linetabs`, and `vpt` requests now interpret
   arguments with negative values as instructions to disable the
   corresponding feature, using the *roff integer-to-Boolean conversion
