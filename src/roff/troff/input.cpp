@@ -87,7 +87,7 @@ void transparent_file();
 
 token tok;
 bool want_break = false;
-int class_flag = 0;
+bool using_character_classes = false;
 bool want_color_output = true;
 static int backtrace_flag = 0;
 char *pipe_command = 0 /* nullptr */;
@@ -9392,7 +9392,7 @@ void get_flags()
     assert(!s.is_null());
     ci->get_flags();
   }
-  class_flag = 0;
+  using_character_classes = false;
 }
 
 // Get the union of all flags affecting this charinfo.

@@ -1,3 +1,19 @@
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Boolify and rename `class_flag`, demoting it from `int`
+	to `bool` and calling it `using_character_classes`.  Initialize
+	and assign to it using Boolean, not integer, literals.
+
+	* src/roff/troff/charinfo.h
+	(charinfo::overlaps_horizontally, charinfo::overlaps_vertically)
+	(charinfo::can_break_before, charinfo::can_break_after)
+	(charinfo::ends_sentence, charinfo::transparent)
+	(charinfo::ignore_hcodes)
+	(charinfo::prohibit_break_before)
+	(charinfo::prohibit_break_after)
+	(charinfo::inter_char_space, charinfo::add_to_class):
+	* src/roff/troff/input.cpp (get_flags): Do it.
+
 2024-08-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Trivially refactor.
