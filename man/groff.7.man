@@ -2238,7 +2238,7 @@ includes all characters up to the end of the input line
 (which may be continued with
 .BI \[rs] newline\c
 ),
-to the ending delimiter for the escape sequence,
+to the closing delimiter for the escape sequence,
 or within
 .esc {
 and

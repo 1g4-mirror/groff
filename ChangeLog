@@ -1,6 +1,14 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::is_usable_as_delimiter):
+	Generalize diagnostics.  Anything that's invalid as a "starting"
+	delimiter is invalid as an ending one, too.  Also our
+	terminology has been poorly paired; we say "closing" delimiter
+	but not "opening" for its counterpart.  This fixes that.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::is_usable_as_delimiter):
 	Reject end-of-file as the starting delimiter for an escape
 	sequence.
 

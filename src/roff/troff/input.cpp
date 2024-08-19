@@ -2572,13 +2572,13 @@ bool token::is_usable_as_delimiter(bool report_error)
   case TOKEN_CHAR:
     is_valid = is_char_usable_as_delimiter(c);
     if (!is_valid && report_error)
-      error("character '%1' is not allowed as a starting delimiter",
+      error("character '%1' is not allowed as a delimiter",
 	    static_cast<char>(c));
     return is_valid;
   case TOKEN_NODE:
     // the user doesn't know what a node is
     if (report_error)
-      error("missing argument or invalid starting delimiter");
+      error("missing argument or invalid delimiter");
     return false;
   case TOKEN_SPACE:
   case TOKEN_STRETCHABLE_SPACE:
@@ -2588,7 +2588,7 @@ bool token::is_usable_as_delimiter(bool report_error)
   case TOKEN_NEWLINE:
   case TOKEN_EOF:
     if (report_error)
-      error("%1 is not allowed as a starting delimiter", description());
+      error("%1 is not allowed as a delimiter", description());
     return false;
   default:
     return true;
