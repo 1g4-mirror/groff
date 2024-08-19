@@ -1645,13 +1645,13 @@ static node *do_bracket() // \b
   return bracketnode;
 }
 
-static bool do_name_test() // \A
+static const char *do_name_test() // \A
 {
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
   if (!start_token.is_usable_as_delimiter(true /* report error */))
-    return false;
+    return 0 /* nullptr */;
   bool got_bad_char = false;
   bool got_some_char = false;
   for (;;) {
@@ -1674,16 +1674,16 @@ static bool do_name_test() // \A
       got_bad_char = true;
     got_some_char = true;
   }
-  return (got_some_char && !got_bad_char);
+  return (got_some_char && !got_bad_char) ? "1" : "0";
 }
 
-static bool do_expr_test() // \B
+static const char *do_expr_test() // \B
 {
   token start_token;
   start_token.next();
   int start_level = input_stack::get_level();
   if (!start_token.is_usable_as_delimiter(true /* report error */))
-    return false;
+    return 0 /* nullptr */;
   tok.next();
   // disable all warning and error messages temporarily
   int saved_warning_mask = warning_mask;
@@ -1697,7 +1697,7 @@ static bool do_expr_test() // \B
   // get_number_rigidly() has left `token` pointing at the input
   // character after the end of the expression.
   if (tok == start_token && input_stack::get_level() == start_level)
-    return result;
+    return (result ? "1" : "0");
   // There may be garbage after the expression but before the closing
   // delimiter.  Eat it.
   for (;;) {
@@ -1713,7 +1713,7 @@ static bool do_expr_test() // \B
     if (tok == start_token && input_stack::get_level() == start_level)
       break;
   }
-  return false;
+  return "0";
 }
 
 #if 0
@@ -2195,8 +2195,13 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'A':
-	c = '0' + do_name_test();
-	type = TOKEN_CHAR;
+	{
+	  const char *res = do_name_test();
+	  if (0 /* nullptr */ == res)
+	    break;
+	  c = *res;
+	  type = TOKEN_CHAR;
+	}
 	return;
       case 'b':
 	nd = do_bracket();
@@ -2205,8 +2210,13 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'B':
-	c = '0' + do_expr_test();
-	type = TOKEN_CHAR;
+	{
+	  const char *res = do_expr_test();
+	  if (0 /* nullptr */ == res)
+	    break;
+	  c = *res;
+	  type = TOKEN_CHAR;
+	}
 	return;
       case 'c':
 	goto ESCAPE_c;
