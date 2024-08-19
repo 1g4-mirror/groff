@@ -312,7 +312,6 @@ man7dir=$(manroot)/man$(man7ext)
 # config.h might set the following defines:
 #
 # WORDS_BIGENDIAN		if your target platform is big-endian
-# IS_EBCDIC_HOST		if the host's encoding is EBCDIC
 #
 # HAVE_DIRECT_H		if you have <direct.h>
 # HAVE_DIRENT_H		if you have <dirent.h>

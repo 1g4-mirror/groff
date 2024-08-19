@@ -1,5 +1,12 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m4/groff.m4 (GROFF_EBCDIC, GROFF_OS390): Drop macros.
+	* configure.ac: Stop using them.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?65724>.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grops, grotty, libgroff, pic]: Drop EBCDIC support.
 
 	* src/devices/grops/psrm.cpp:
