@@ -6,7 +6,8 @@
 
 	* src/roff/troff/input.cpp (do_overstrike, do_bracket)
 	(do_name_test, do_zero_width, do_width, do_device_control)
-	(read_delimited_number, get_line_arg, do_register):
+	(read_delimited_number, get_line_arg, do_register)
+	(do_expr_test):
 	* src/roff/troff/reg.cpp (inline_define_register [0]): Do it.
 
 	Fixes <https://savannah.gnu.org/bugs/?63202>.

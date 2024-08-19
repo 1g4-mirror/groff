@@ -1704,9 +1704,11 @@ static int do_expr_test()
   for (;;) {
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
-      warning(WARN_DELIM, "missing closing delimiter in"
-	      " expression test escape sequence (got %1)",
-	      tok.description());
+      char *delimdesc = strdup(start_token.description());
+      warning(WARN_DELIM, "missing closing delimiter in numeric"
+	      " expression validation escape sequence; expected %1,"
+	      " got %2", delimdesc, tok.description());
+      free(delimdesc);
       input_stack::push(make_temp_iterator("\n"));
       break;
     }
