@@ -64,7 +64,6 @@ This file summarizes the structure of the groff source distribution.
   devX75        75dpi X11 device (10 point base type size).
   devX75-12     75dpi X11 device (12 point base type size).
   devascii      Terminal device with ASCII (ISO 646) encoding.
-  devcp1047     Terminal device with EBCDIC (code page 1047) encoding.
   devdvi        TeX DVI device.
   devhtml       HTML device.
   devlatin1     Terminal device with ISO Latin-1 (8859-1) encoding.

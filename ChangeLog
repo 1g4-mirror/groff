@@ -1,5 +1,14 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devcp1047/*: Recursively delete.
+	* Makefile.am: Stop including the Automake file therein.
+	* MANIFEST: De-document.
+	* NEWS: Note withdrawal of "cp1047" device support.
+
+	Fixes <https://savannah.gnu.org/bugs/?65724>.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/cp1047.tmac: Delete.
 
 	* tmac/tmac.am (TMACNORMALFILES): Stop shipping it.

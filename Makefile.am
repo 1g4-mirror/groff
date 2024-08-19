@@ -623,7 +623,6 @@ include $(top_srcdir)/font/devX100-12/devX100-12.am
 include $(top_srcdir)/font/devX75/devX75.am
 include $(top_srcdir)/font/devX75-12/devX75-12.am
 include $(top_srcdir)/font/devascii/devascii.am
-include $(top_srcdir)/font/devcp1047/devcp1047.am
 include $(top_srcdir)/font/devdvi/devdvi.am
 include $(top_srcdir)/font/devhtml/devhtml.am
 include $(top_srcdir)/font/devlatin1/devlatin1.am

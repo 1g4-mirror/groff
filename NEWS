@@ -442,6 +442,9 @@ o The PostScript output driver's macro file "ps.tmac" no longer defines
 Miscellaneous
 -------------
 
+o Support for terminal devices using the CCSID 1047 (EBCDIC) encoding
+  has been withdrawn.
+
 o Building groff no longer requires the PSUtils package.
 
 o Russian language input documents using the KOI8-R encoding are now
@@ -3107,7 +3110,8 @@ A new switch `-G' for calling `grap' is available.
 EBCDIC support for tty devices has been added.  On such hosts, IBM code
 page 1047 is available with -Tcp1047 instead of -Tascii and -Tlatin1
 (and, for the moment, -Tutf8).  Note that non-tty devices are not yet
-supported (but installed).
+supported (but installed).  [2024 update: This support was withdrawn in
+groff 1.24.]
 
 Troff
 -----
