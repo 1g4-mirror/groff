@@ -96,7 +96,7 @@ unsigned char hpf_code_table[256];
 
 static int warning_mask = DEFAULT_WARNING_MASK;
 static bool want_errors_inhibited = false;
-static int ignoring = 0;
+static bool want_input_ignored = false;
 
 static void enable_warning(const char *);
 static void disable_warning(const char *);
@@ -4771,7 +4771,7 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
 	  *mm = mac;
 	}
 	if (term != dot_symbol) {
-	  ignoring = 0;
+	  want_input_ignored = false;
 	  interpolate_macro(term);
 	}
 	else
@@ -4861,9 +4861,9 @@ void append_indirect_nocomp_macro()
 
 void ignore()
 {
-  ignoring = 1;
+  want_input_ignored = true;
   do_define_macro(DEFINE_IGNORE, CALLING_NORMAL, COMP_IGNORE);
-  ignoring = 0;
+  want_input_ignored = false;
 }
 
 void remove_macro()
@@ -9134,7 +9134,7 @@ static void copy_mode_error(const char *format,
 			    const errarg &arg2,
 			    const errarg &arg3)
 {
-  if (ignoring) {
+  if (want_input_ignored) {
     static const char prefix[] = "(in ignored input) ";
     // C++03: new char[sizeof prefix + strlen(format)]();
     char *s = new char[sizeof prefix + strlen(format)];

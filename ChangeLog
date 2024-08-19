@@ -1,5 +1,14 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify and rename `ignoring`, demoting it from
+	`int` to `bool` and calling it `want_input_ignored`.  Initialize
+	and assign to it using Boolean, not integer, literals.
+
+	* src/roff/troff/input.cpp (do_define_macro)
+	(append_indirect_nocomp_macro, copy_mode_error): Do it.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify and rename `inhibit_errors`, demoting it from
 	`int` to `bool` and calling it `want_errors_inhibited`.
 	Initialize and assign to it using Boolean, not integer,
