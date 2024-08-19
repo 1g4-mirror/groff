@@ -1,5 +1,11 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::is_usable_as_delimiter):
+	Reject end-of-file as the starting delimiter for an escape
+	sequence.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (make_glyph_node): Don't throw a
 	warning if `get_char_for_escape_parameter()` in "input.cpp"
 	already threw an error for the same input token.  Also compare

@@ -2586,6 +2586,7 @@ bool token::is_usable_as_delimiter(bool report_error)
   case TOKEN_HORIZONTAL_SPACE:
   case TOKEN_TAB:
   case TOKEN_NEWLINE:
+  case TOKEN_EOF:
     if (report_error)
       error("%1 is not allowed as a starting delimiter", description());
     return false;
