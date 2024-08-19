@@ -7293,7 +7293,9 @@ Use of newlines as delimiters in escape sequences is also discouraged.
 @cindex @code{\x}, delimiters allowed by
 Finally, the escape sequences @code{\D}, @code{\h}, @code{\H},
 @code{\l}, @code{\L}, @code{\N}, @code{\R}, @code{\s}, @code{\S},
-@code{\v}, and @code{\x} prohibit many delimiters.
+@code{\v}, and @code{\x} prohibit delimiters that are meaningful in
+numeric expressions, because they accept such expressions as (or within)
+arguments.
 
 @itemize @bullet
 @item

@@ -1812,7 +1812,10 @@ the escape sequences
 .BR \[rs]v ,
 and
 .B \[rs]x
-prohibit many delimiters.
+prohibit delimiters that are meaningful in numeric expressions,
+because they accept such expressions as
+(or within)
+arguments.
 .
 .
 .RS
