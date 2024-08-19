@@ -1,5 +1,11 @@
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Drop support for "cp1047" output device.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?65724>.
+
+2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac: Drop support for "cp1047" output device.
 
 	Continues fixing <https://savannah.gnu.org/bugs/?65724>.
