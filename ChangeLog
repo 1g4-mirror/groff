@@ -155,12 +155,12 @@
 	(do_device_control): Do it.  As a bonus, check starting
 	delimters for these escape sequences (`\[obAZwX]`) for validity
 	in general.
-	(do_overstrike, do_bracket, do_zero_width_output): When
-	returning early, delete the `new` node we just allocated to
-	avoid leaking memory.
+	(do_overstrike, do_bracket, do_zero_width_output): Avoid leaking
+	memory when returning early; delete the `new` node we just
+	allocated.
 	(token:next): Be prepared for the `\b` and `\o` escape sequences
 	to return a null pointer (if the sequence doesn't even validly
-	get off the ground), as `\Z` and `\X` already do.
+	get off the ground), as handlers for `\Z` and `\X` already are.
 
 	* src/roff/groff/tests/\
 	some_escapes_accept_newline_delimiters.sh: Delete.
@@ -368,8 +368,8 @@
 	(readonly_text_register::readonly_text_register): Add it.
 	(main): Use it to initialize `.T` register.
 	(init_registers): Use it to initialize `.A` register.
-	(init_input_requests): Use it to initialize `.g` register and
-	`.R` registers.
+	(init_input_requests): Use it to initialize `.g` and `.R`
+	registers.
 
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
