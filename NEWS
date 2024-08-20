@@ -171,6 +171,12 @@ o Hyperlink support is now enabled by default on PDF and terminal
   commented code for disabling it are in the "man.local" and
   "mdoc.local" files.
 
+o The `PDFPIC` macro implemented in the "pdfpic.tmac" macro file now
+  uses identify(1) (from ImageMagick/GraphicsMagick) and file(1), if
+  available, to attempt to determine the dimensions of an image to be
+  embedded in a PDF document.  See also the item regarding gropdf(1)
+  below.  Thanks to Deri James.
+
 o The an (man) package now supports use of its hyperlink macros (`UR`,
   `UE`, `MT`, and `ME`) as paragraph tags (that is, on the next line
   after a `TP` macro call).  Use of the `MR` man page cross reference
@@ -438,6 +444,11 @@ o The PostScript output driver's macro file "ps.tmac" no longer defines
    .hcode \[S ,]s
    .fchar \[s ,] \o's\[ac]'
    .hcode \[s ,]s
+
+o gropdf(1), the PDF output driver, now allows embedding of JFIF/JPEG
+  and JPEG 2000 image file formats.  If PerlMagick is installed, many
+  more image file formats, including PNG, PAM, and GIF can be embedded.
+  See also the item regarding `PDFPIC` above.  Thanks to Deri James.
 
 Miscellaneous
 -------------

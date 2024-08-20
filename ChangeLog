@@ -1,3 +1,7 @@
+2024-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* NEWS: Add items for Deri's just-committed new features.
+
 2024-06-22  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Add support for embedding bit-mapped images to a
