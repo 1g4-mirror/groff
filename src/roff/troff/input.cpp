@@ -945,7 +945,7 @@ static char get_char_for_escape_parameter(bool allow_space = false)
   case '\t':
   case '\001':
   case '\b':
-    copy_mode_error("%1 is not allowed in an escape sequence parameter",
+    copy_mode_error("%1 is not allowed in an escape sequence argument",
 		    input_char_description(c));
     return '\0';
   }
@@ -1781,10 +1781,9 @@ static node *do_zero_width_output() // \Z
 	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     // XXX: does the initial dummy node leak if this fails?
-    // TODO: Say something better than "token" in the diagnostic.
     if (!tok.add_to_zero_width_node_list(&rev))
-      error("invalid token in argument to zero-width output escape"
-	    " sequence");
+      error("%1 is not allowed in a zero-width output escape"
+	    " sequence argument", tok.description());
   }
   while (rev != 0 /* nullptr */) {
     node *tem = rev;
@@ -8907,7 +8906,7 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
       break;
     if (tok.is_newline()) {
       error("a newline is not allowed in a composite character"
-	    " escape sequence");
+	    " escape sequence argument");
       while (!tok.is_eof())
 	tok.next();
       break;
