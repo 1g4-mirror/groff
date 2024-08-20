@@ -5453,7 +5453,14 @@ static symbol get_delimited_name()
 	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     if ((buf[i] = tok.ch()) == 0) {
-      error("missing delimiter (got %1)", tok.description());
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
+      if (start_token != tok)
+	error("closing delimiter does not match; expected %1, got %2",
+	      delimdesc, tok.description());
+      free(delimdesc);
       if (buf != abuf)
 	delete[] buf;
       return NULL_SYMBOL;
@@ -6111,6 +6118,7 @@ static bool do_if_request()
   else if (tok.is_space())
     result = false;
   else if (tok.is_usable_as_delimiter()) {
+    // Perform (formatted) output comparison.
     token delim = tok;
     int delim_level = input_stack::get_level();
     environment env1(curenv);
@@ -6122,8 +6130,14 @@ static bool do_if_request()
       for (;;) {
 	tok.next();
 	if (tok.is_newline() || tok.is_eof()) {
+	  // token::description() writes to static, class-wide storage,
+	  // so we must allocate a copy of it before issuing the next
+	  // diagnostic.
+	  char *delimdesc = strdup(delim.description());
 	  warning(WARN_DELIM, "missing closing delimiter in output"
-		  " comparison operator (got %1)", tok.description());
+		  " comparison operator; expected %1, got %2",
+		  delimdesc, tok.description());
+	  free(delimdesc);
 	  tok.next();
 	  curenv = oldenv;
 	  return false;
@@ -8959,8 +8973,14 @@ static node *read_drawing_command()
 	  delete[] oldpoint;
 	}
 	if (tok.is_newline() || tok.is_eof()) {
+	  // token::description() writes to static, class-wide storage,
+	  // so we must allocate a copy of it before issuing the next
+	  // diagnostic.
+	  char *delimdesc = strdup(start_token.description());
 	  warning(WARN_DELIM, "missing closing delimiter in drawing"
-		  " escape sequence (got %1)", tok.description());
+		  " escape sequence; expected %1, got %2", delimdesc,
+		  tok.description());
+	  free(delimdesc);
 	  had_error = true;
 	  break;
 	}
@@ -9072,8 +9092,14 @@ static void read_drawing_command_color_arguments(token &start)
     curenv->set_fill_color(col);
   while (tok != start) {
     if (tok.is_newline() || tok.is_eof()) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start.description());
       warning(WARN_DELIM, "missing closing delimiter in color space"
-	      " drawing escape sequence (got %1)", tok.description());
+	      " drawing escape sequence; expected %1, got %2",
+	      delimdesc, tok.description());
+      free(delimdesc);
       input_stack::push(make_temp_iterator("\n"));
       break;
     }

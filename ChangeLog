@@ -1,5 +1,14 @@
 2024-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (get_delimited_name, do_if_request)
+	(read_drawing_command, read_drawing_command_color_arguments):
+	When complaining of mismatched or missing closing delimeter,
+	report the identity of the delimiter we were expecting.
+	* src/roff/troff/reg.cpp (alter_format): When complaining of
+	invalid register format, list the valid ones.
+
+2024-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/fallbacks.tmac: Define fallback character for U+2717
 	"BALLOT X".
 
