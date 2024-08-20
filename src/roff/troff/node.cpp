@@ -5040,7 +5040,6 @@ static node *make_glyph_node(charinfo *s, environment *env,
 	  const char *nm = s->nm.contents();
 	  // If the contents are empty, get_char_for_escape_parameter()
 	  // should already have thrown an error.
-	  // XXX: Why are we here if the parse failed that early?
 	  if (nm[0] != '\0') {
 	    const char *backslash = (nm[1] == '\0') ? "\\" : "";
 	    warning(WARN_CHAR, "special character '%1%2' not defined",
