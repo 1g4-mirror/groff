@@ -1,30 +1,32 @@
 2024-06-22  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	Currently gropdf supports the inclusion of pdf files as
-	separate images, now many other image formats are supported.
-	The pdf standard requires programs which process pdfs to
-	handle embedded jpegs, and from version 1.5 jpeg2000 images
-	are handled natively as well. (Current gropdf produces pdfs
-	which conform to version 1.7).
+	[gropdf]: Add support for embedding bit-mapped images to a
+	generated pdf.
+
+	Currently gropdf supports the inclusion of pdf files as separate
+	images, now many other image formats are supported. The pdf
+	standard requires programs which process pdfs to handle embedded
+	jpegs, and from version 1.5 jpeg2000 images are handled natively
+	as well. (Current gropdf produces pdfs which conform to version
+	1.7).
 
 	The pdf standard supports a raw format with separate channels
-	(RGB/CMYK/Grey) in 8/16/32 bit formats. This is used for
-	other image formats. If there is a transparency channel it is
+	{RGB/CMYK/Grey} in 8/16/32 bit formats. This is used for other
+	image formats. If there is a transparency channel it is
 	converted to an 8-bit soft mask for the image.
 
-	* src/devices/devpdf/gropdf.pl: add code to \X'pdf: pdfpic’
-	to handle other image types, not just pdfs.
+	* src/devices/devpdf/gropdf.pl: add code to \X'pdf: pdfpic' to
+	handle other image types, not just pdfs.
 
 	* man/groff_tmac.5.man: document changes to PDFPIC macro.
 
-	* src/devices/devpdf/gropdf.1.man: explain use of \X'pdf:
-	pdfpic ...'
+	* src/devices/devpdf/gropdf.1.man: explain use of
+	\X'pdf: pdfpic ...'
 
-	* tmac/pdfpic.tmac: expand the PDFPIC macro to handle
-	multiple image formats, not just embedding pdfs.
+	* tmac/pdfpic.tmac: expand the PDFPIC macro to handle multiple
+	image formats, not just embedding pdfs.
 
-	Feature added by commit #77e43d8c6
-	See https://savannah.gnu.org/bugs/?66114
+	Fixes <https://savannah.gnu.org/bugs/?66114>.
 
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
