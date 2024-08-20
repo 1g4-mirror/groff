@@ -658,7 +658,9 @@ to convert the pdf to an encapsulated postscript file
 and calls the
 .B PSPIC
 macro with which it shares an interface.
-If output is to a pdf it calls \X[rs]'pdf: pdfpic ...' (see
+If output is to a pdf it calls
+.BR "\[rs]X\[aq]pdf: pdfpic" \~.\|.\|. \[aq]
+(see
 .MR gropdf @MAN1EXT@ )
 and the given
 .I file
