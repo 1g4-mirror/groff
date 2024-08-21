@@ -5,7 +5,16 @@
 	less garrulous; see Savannah #65110.  Add new `opt_w` scalar to
 	separate it from existing `space_width` scalar so that we can
 	report the options we were invoked with in a comment in the
-	generated file.
+	generated file.  Reorganize scalar representation of version
+	information: new `groff_version`, which is populated at build
+	time, new `short_version` which is `groff_version` stripped of
+	any Git revision and partial hash information; new
+	`version_stub` which holds the prefixed information identifying
+	the program and project; new `output_version` which holds the
+	stub and the short version; and existing `afmtodit_version`,
+	which holds the stub and the (full) groff version.  Write
+	`output_version` instead of `afmtodit_version` to the generated
+	file.
 
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
