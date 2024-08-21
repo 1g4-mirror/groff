@@ -1,3 +1,10 @@
+2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/devps/ZD: Regenerate using updated dingbats.map.
+
+	Fixes <https://savannah.gnu.org/bugs/?63018>.  Thanks to Deri
+	James and Dave Kemper for (extensive) consultation.
+
 2024-04-29  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	* font/devps/generate/dingbats.map: Update to map many more
