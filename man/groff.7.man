@@ -1756,7 +1756,7 @@ as delimiters:
 .BR \[rs]! ,
 .BR \[rs]? ,
 .BR \[rs]) ,
-.BR \[rs]/ \|,
+.BR \[rs]\|/ ,
 .BR \[rs], \^,
 .BR \[rs]& ,
 .BR \[rs]: ,
