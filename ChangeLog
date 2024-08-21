@@ -1,3 +1,14 @@
+2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::add_char): Declare local
+	variable closer to point of use.  It's also a dead store, but
+	demanded by our internal API.  (See `node::add_char()` in
+	"node.cpp".)  Prompted by a report by Lukas Javorsky involving
+	use of "SAST analyzers {combination of coverity, snyk, cppcheck,
+	gcc, clang, shellcheck, unicontrol}".
+
+	Also see <https://savannah.gnu.org/bugs/?66079>.
+
 2024-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (get_delimited_name, do_if_request)

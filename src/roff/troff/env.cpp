@@ -296,7 +296,6 @@ void leader_character()
 
 void environment::add_char(charinfo *ci)
 {
-  int s;
   node *gc_np = 0 /* nullptr */;
   if (line_interrupted)
     ;
@@ -312,8 +311,11 @@ void environment::add_char(charinfo *ci)
   else if (current_tab != TAB_NONE) {
     if (tab_contents == 0 /* nullptr */)
       tab_contents = new line_start_node;
-    if (ci != hyphen_indicator_char)
-      tab_contents = tab_contents->add_char(ci, this, &tab_width, &s, &gc_np);
+    if (ci != hyphen_indicator_char) {
+      int s;
+      tab_contents = tab_contents->add_char(ci, this, &tab_width, &s,
+					    &gc_np);
+    }
     else
       tab_contents = tab_contents->add_discretionary_hyphen();
   }
