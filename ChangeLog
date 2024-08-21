@@ -1,5 +1,11 @@
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.pl: Define `prog` scalar as only
+	the "basename" of argv[0], making diagnostic and usage messages
+	less garrulous; see Savannah #65110.
+
+2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::add_char): Declare local
 	variable closer to point of use.  It's also a dead store, but
 	demanded by our internal API.  (See `node::add_char()` in

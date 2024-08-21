@@ -22,7 +22,9 @@ use strict;
 
 @afmtodit.tables@
 
-my $prog = $0;
+use File::Spec qw(splitpath);
+(undef,undef,my $prog)=File::Spec->splitpath($0);
+
 my $groff_sys_fontdir = "@FONTDIR@";
 my $want_help;
 my $space_width = 0;
