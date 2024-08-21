@@ -20,11 +20,6 @@
 
 2024-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* tmac/fallbacks.tmac: Define fallback character for U+2717
-	"BALLOT X".
-
-2024-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/roff/troff/input.cpp: Adjust and parallelize diagnostic
 	message language.
 	(get_char_for_escape_parameter): Say "argument", not
