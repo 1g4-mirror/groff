@@ -30,13 +30,16 @@ my $want_help;
 my $space_width = 0;
 
 our ($opt_a, $opt_c, $opt_d, $opt_e, $opt_f, $opt_i, $opt_k,
-     $opt_m, $opt_n, $opt_o, $opt_s, $opt_v, $opt_x);
+     $opt_m, $opt_n, $opt_o, $opt_s, $opt_v, $opt_w, $opt_x);
 
 use Getopt::Long qw(:config gnu_getopt);
 GetOptions( "a=s", "c", "d=s", "e=s", "f=s", "i=s", "k", "m", "n",
-  "o=s", "s", "v", "w=i" => \$space_width, "x", "version" => \$opt_v,
+  "o=s", "s", "v", "w=i", "x", "version" => \$opt_v,
   "help" => \$want_help
 );
+
+# We keep these two scalars separate so we can report out the option.
+$space_width = $opt_w if defined $opt_w;
 
 my $afmtodit_version = "GNU afmtodit (groff) version @VERSION@";
 

@@ -2,7 +2,10 @@
 
 	* src/utils/afmtodit/afmtodit.pl: Define `prog` scalar as only
 	the "basename" of argv[0], making diagnostic and usage messages
-	less garrulous; see Savannah #65110.
+	less garrulous; see Savannah #65110.  Add new `opt_w` scalar to
+	separate it from existing `space_width` scalar so that we can
+	report the options we were invoked with in a comment in the
+	generated file.
 
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
