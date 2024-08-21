@@ -3076,8 +3076,8 @@
 
 	Support UTF-16-encoded PDF bookmarks.
 
-	* utils/afmtodit/afmtodit.pl: Generate comment field holding the
-	UTF-16 code for each groff character.
+	* src/utils/afmtodit/afmtodit.pl: Generate comment field holding
+	the UTF-16 code for each groff character.
 
 	* font/devps/AB:
 	* font/devps/ABI:
