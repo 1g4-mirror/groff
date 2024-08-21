@@ -1,5 +1,9 @@
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devps/ZDR: Regenerate.
+
+2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* font/devps/ZD: Regenerate using updated dingbats.map.
 
 	Fixes <https://savannah.gnu.org/bugs/?63018>.  Thanks to Deri
