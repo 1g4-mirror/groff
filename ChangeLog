@@ -14,7 +14,14 @@
 	stub and the short version; and existing `afmtodit_version`,
 	which holds the stub and the (full) groff version.  Write
 	`output_version` instead of `afmtodit_version` to the generated
-	file.
+	file.  Update call sites of `croak` and new `whine` subroutines
+	to use `&` sigil and omit trailing newline.
+	(croak): Assume responsibility for writing a newline at the end
+	of the message.
+	(whine): New subroutine throws a diagnostic marked "warning".
+	Perl's `warn` output is ugly and not structured like other groff
+	diagnostics.  Give it responsibility for emitting the name of
+	the program.
 
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
