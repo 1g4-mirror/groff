@@ -1,5 +1,22 @@
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.pl: Improve information written to
+	generated font description files in comments.  Name the AFM and
+	map files used.  Report any options specified on the command
+	line.  The idea is to make it easier for future (and current)
+	maintainers to update such files because years pass between
+	occurrences, and institutional memory is, if not lost, laborious
+	to dredge up.  This practice might also assist users in
+	producing groff description files for their own fonts.  Also
+	write out a glyph's corresponding Unicode code point in the
+	comment field only if one is defined.  Otherwise we get a
+	comment marker followed by a tab and a newline, which Git marks
+	in radioactive red.
+
+	Begins addressing <https://savannah.gnu.org/bugs/?65697>.
+
+2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.pl: Define `prog` scalar as only
 	the "basename" of argv[0], making diagnostic and usage messages
 	less garrulous; see Savannah #65110.  Add new `opt_w` scalar to
