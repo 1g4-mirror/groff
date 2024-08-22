@@ -1,3 +1,11 @@
+2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m4/groff.m4 (GROFF_WCOREFLAG): Include <stdlib.h> header file
+	in test program, since it calls exit(3).  Thanks to Eli Schwartz
+	for noting the problem.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?65762>.
+
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am (doc/groff-man-pages.pdf)
