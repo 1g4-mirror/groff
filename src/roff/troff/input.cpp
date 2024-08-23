@@ -5801,7 +5801,11 @@ static void device_request()
   }
   if (curdiv == topdiv && topdiv->before_first_page)
     topdiv->begin_page();
-  for (; c != '\n' && c != EOF; c = get_copy(0 /* nullptr */))
+  // Null characters can correspond to node types like vmotion_node that
+  // are unrepresentable in a device control command, and got scrubbed
+  // by `asciify`.
+  for (; c != '\0' && c != '\n' && c != EOF;
+       c = get_copy(0 /* nullptr */))
     mac.append(c);
   curenv->add_node(new special_node(mac));
   tok.next();

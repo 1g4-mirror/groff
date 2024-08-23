@@ -1,5 +1,12 @@
 2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (device_request): Don't write null
+	characters to device control command commands (`x X` in
+	device-independent output).  These can occur if one interpolates
+	a diversion into the argument of a `device` request.
+
+2024-08-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdfbookmark): Trivially refactor.  Rename
 	`pdf:cleaned` string to `pdf:title` to reflect (1) its use in
 	the emitted PDF device control command and (2) the fact that it
