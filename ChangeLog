@@ -1,5 +1,12 @@
 2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (chop_macro): Clarify diagnostic.
+	Say whether the argument being operated on is a "diversion" or a
+	"macro or string", rather then the vague term "object", which is
+	otherwise little-used in *roff discussions.
+
+2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Boolify `macro` class, renaming
 	member functions and variables and demoting their (return) types
 	from `int` to `bool`.

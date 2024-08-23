@@ -4925,7 +4925,9 @@ void chop_macro()
     if (!m)
       error("cannot chop request '%1'", s.contents());
     else if (m->is_empty())
-      error("cannot chop empty object '%1'", s.contents());
+      error("cannot chop empty %1 '%2'",
+	    (m->is_diversion() ? "diversion" : "macro or string"),
+	    s.contents());
     else {
       int have_restore = 0;
       // We have to check for additional save/restore pairs which could
