@@ -3449,20 +3449,20 @@ macro::~macro()
 }
 
 macro::macro()
-: is_a_diversion(0), is_a_string(1)
+: is_a_diversion(false), is_a_string(true)
 {
   if (!input_stack::get_location(1, &filename, &lineno)) {
     filename = 0 /* nullptr */;
     lineno = 0 /* nullptr */;
   }
   len = 0;
-  empty_macro = 1;
+  is_empty_macro = true;
   p = 0; /* nullptr */
 }
 
 macro::macro(const macro &m)
 : filename(m.filename), lineno(m.lineno), len(m.len),
-  empty_macro(m.empty_macro), is_a_diversion(m.is_a_diversion),
+  is_empty_macro(m.is_empty_macro), is_a_diversion(m.is_a_diversion),
   is_a_string(m.is_a_string), p(m.p)
 {
   if (p != 0 /* nullptr */)
@@ -3477,24 +3477,25 @@ macro::macro(int is_div)
     lineno = 0 /* nullptr */;
   }
   len = 0;
-  empty_macro = 1;
-  is_a_string = 1;
+  is_empty_macro = true;
+  // A macro is a string until it contains a newline.
+  is_a_string = true;
   p = 0 /* nullptr */;
 }
 
-int macro::is_diversion()
+bool macro::is_diversion()
 {
   return is_a_diversion;
 }
 
-int macro::is_string()
+bool macro::is_string()
 {
   return is_a_string;
 }
 
 void macro::clear_string_flag()
 {
-  is_a_string = 0;
+  is_a_string = false;
 }
 
 macro &macro::operator=(const macro &m)
@@ -3508,7 +3509,7 @@ macro &macro::operator=(const macro &m)
   filename = m.filename;
   lineno = m.lineno;
   len = m.len;
-  empty_macro = m.empty_macro;
+  is_empty_macro = m.is_empty_macro;
   is_a_diversion = m.is_a_diversion;
   is_a_string = m.is_a_string;
   return *this;
@@ -3528,7 +3529,7 @@ void macro::append(unsigned char c)
   p->cl.append(c);
   ++len;
   if (c != PUSH_GROFF_MODE && c != PUSH_COMP_MODE && c != POP_GROFFCOMP_MODE)
-    empty_macro = 0;
+    is_empty_macro = false;
 }
 
 void macro::set(unsigned char c, int offset)
@@ -3575,7 +3576,7 @@ void macro::append(node *n)
   p->cl.append(0);
   p->nl.append(n);
   ++len;
-  empty_macro = 0;
+  is_empty_macro = false;
 }
 
 void macro::append_unsigned(unsigned int i)
@@ -3991,7 +3992,7 @@ static void interpolate_macro(symbol nm, bool do_not_want_next_token)
       r = (request_or_macro *)request_dictionary.lookup(symbol(buf));
       if (r) {
 	macro *m = r->to_macro();
-	if (!m || !m->empty())
+	if (!m || !m->is_empty())
 	  warned = warning(WARN_SPACE,
 			   "macro '%1' not defined "
 			   "(possibly missing space after '%2')",
@@ -4130,9 +4131,9 @@ macro *macro::to_macro()
   return this;
 }
 
-int macro::empty()
+bool macro::is_empty()
 {
-  return empty_macro == 1;
+  return (is_empty_macro == true);
 }
 
 macro_iterator::macro_iterator(symbol s, macro &m, const char *how_called,
@@ -4923,7 +4924,7 @@ void chop_macro()
     macro *m = p->to_macro();
     if (!m)
       error("cannot chop request '%1'", s.contents());
-    else if (m->empty())
+    else if (m->is_empty())
       error("cannot chop empty object '%1'", s.contents());
     else {
       int have_restore = 0;

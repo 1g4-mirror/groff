@@ -1,5 +1,24 @@
 2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Boolify `macro` class, renaming
+	member functions and variables and demoting their (return) types
+	from `int` to `bool`.
+
+	* src/roff/troff/request.h:
+	* src/roff/troff/input.cpp: Do it.
+	`empty_macro` -> `is_empty_macro`
+	`is_a_diversion`
+	`is_a_string`
+	`empty()` -> `is_empty()`
+	`is_diversion()`
+	`is_string()`
+
+	* src/roff/troff/input.cpp (macro::macro)
+	(macro::clear_string_flag, macro::append, macro::is_empty): Use
+	Boolean, not integer, literals in initializers and assignments.
+
+2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (device_request): Don't write null
 	characters to device control command commands (`x X` in
 	device-independent output).  These can occur if one interpolates
