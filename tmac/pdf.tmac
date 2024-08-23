@@ -305,25 +305,6 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \}
 ..
 .
-.de pdfclean
-.   ie '\\n(.z'' \{\
-.      ds pdfcleaned \\$*
-.      ev pdfcln
-.      tr \[em]-
-.      nf
-.      box pdf:clean
-.      nop \\*[\\*[pdfcleaned]]
-.      fl
-.      box
-.      chop pdf:clean
-.      asciify pdf:clean
-.      ev
-.      ds \\*[pdfcleaned] "\\*[pdf:clean]
-.      rm pdf:clean
-.      tr \[em]\[em]
-.      \}
-.  el .nop \!.pdfclean \\$@
-..
 .\"
 .\" =============================================================
 .\" Module PDFHREF: Create Hypertext References in a PDF Document

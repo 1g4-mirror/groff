@@ -1,3 +1,7 @@
+2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/pdf.tmac (pdfclean): Drop unused macro.
+
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m4/groff.m4 (GROFF_WCOREFLAG): Include <stdlib.h> header file
