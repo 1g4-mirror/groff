@@ -1,3 +1,13 @@
+2024-08-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Handle preconv better
+
+	If preconv used, it should also be used when generating
+	forward references.
+
+	* src/devices/gropdf/pdfmom.pl: add preconv (if requested)
+	to the pre-run which generates the pdf:bm strings.
+
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devps/ZDR: Regenerate.
