@@ -1,5 +1,13 @@
 2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/pdf.tmac (pdfbookmark): Trivially refactor.  Rename
+	`pdf:cleaned` string to `pdf:title` to reflect (1) its use in
+	the emitted PDF device control command and (2) the fact that it
+	is no longer sanitized by emitting it into a diversion and
+	invoking `asciify` on that diversion.
+
+2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdfclean): Drop unused macro.
 
 2024-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
