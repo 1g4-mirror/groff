@@ -27,12 +27,14 @@ wail () {
   fail=YES
 }
 
-input='.nf
-\X#bogus1: esc \%man-beast\[u1F63C]\\[u1F00] -\[aq]\[dq]\[ga]\[ha]\[rs]\[ti]#
-.device bogus1: req \%man-beast\[u1F63C]\\[u1F00] -\[aq]\[dq]\[ga]\[ha]\[rs]\[ti]
+input='.
+.nf
+\X#bogus1: esc \%to-do\[u1F63C]\\[u1F00] -\[aq]\[dq]\[ga]\[ha]\[rs]\[ti]\[`a]#
+.device bogus1: req \%to-do\[u1F63C]\\[u1F00] -\[aq]\[dq]\[ga]\[ha]\[rs]\[ti]\[`a]
 .ec @
-@X#bogus2: esc @%man-beast@[u1F63C]@@[u1F00] -@[aq]@[dq]@[ga]@[ha]@[rs]@[ti]#
-.device bogus2: req @%man-beast@[u1F63C]@@[u1F00] -@[aq]@[dq]@[ga]@[ha]@[rs]@[ti]'
+@X#bogus2: esc @%to-do@[u1F63C]@@[u1F00] -@[aq]@[dq]@[ga]@[ha]@[rs]@[ti]@[`a]#
+.device bogus2: req @%to-do@[u1F63C]@@[u1F00] -@[aq]@[dq]@[ga]@[ha]@[rs]@[ti]@[`a]
+.'
 
 output=$(printf '%s\n' "$input" | "$groff" -T ps -Z 2> /dev/null \
   | grep '^x X')
@@ -41,37 +43,33 @@ error=$(printf '%s\n' "$input" | "$groff" -T ps -Z 2>&1 > /dev/null)
 echo "$output"
 echo "$error"
 
+# Expected:
+# x X bogus1: esc to-do\[u1F63C]\[u1F00] -'"`^\~\[u00E0]
+# x X bogus1: req @%to-do\[u1F63C]\[u1F00] -\[aq]\[dq]\[ga]\[ha]\[rs]\[ti]\[`a]#
+# x X bogus2: esc to-do\[u1F63C]\[u1F00] -'"`^\~\[u00E0]
+# x X bogus2: req @%to-do@[u1F63C]@[u1F00] -@[aq]@[dq]@[ga]@[ha]@[rs]@[ti]@[`a]#
+
 echo "checking X escape sequence, default escape character" >&2
-# x X bogus1: esc man-beast\[u1F00] -'"`^\~
 echo "$output" \
-  | grep -qx 'x X bogus1: esc man-beast\\\[u1F00\] -'"'"'"`^\\~' \
+  | grep -Fqx \
+  'x X bogus1: esc to-do\[u1F63C]\[u1F00] -'"'"'"`^\~\[u00E0]' \
   || wail
 
 #echo "checking device request, default escape character" >&2
-## x X bogus1: req man-beast\[u1F00] -'"`^\~
 #echo "$output" \
-#  | grep -qx 'x X bogus1: req man-beast\\\[u1F00\] -'"'"'"`^\\~' \
+#  | grep -qx 'x X bogus1: req to-do\\\[u1F00\] -'"'"'"`^\\~' \
 #  || wail
 
 echo "checking X escape sequence, alternate escape character" >&2
-# x X bogus2: esc man-beast\[u1F00] -'"`^\~
 echo "$output" \
-  | grep -qx 'x X bogus2: esc man-beast\\\[u1F00\] -'"'"'"`^\\~' \
+  | grep -Fqx \
+  'x X bogus1: esc to-do\[u1F63C]\[u1F00] -'"'"'"`^\~\[u00E0]' \
   || wail
 
 #echo "checking device request, alternate escape character" >&2
-## x X bogus2: req man-beast\[u1F00] -'"`^\~
 #echo "$output" \
-#  | grep -qx 'x X bogus2: req man-beast\\\[u1F00\] -'"'"'"`^\\~' \
+#  | grep -qx 'x X bogus2: req to-do\\\[u1F00\] -'"'"'"`^\\~' \
 #  || wail
-
-echo "checking for errors on unsupported special character escapes" >&2
-#for lineno in 2 3 5 6
-#do
-#  echo "$error" \
-#    | grep -q 'troff:.*:'$lineno':.* invalid.*device control command' \
-#    || wail
-#done
 
 test -z "$fail"
 

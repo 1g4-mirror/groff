@@ -1,3 +1,26 @@
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Begin fixing Savannah #63074: support construction of
+	arbitrary byte sequences in device control commands using groff
+	special character sequence notation.
+
+	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): Enhance.  When
+	constructing the content of a device control escape sequence
+	{and, in the future, that of a `device` request}, try harder to
+	convert special characters into something meaningful.  Is a
+	special character identifier looks like something other than an
+	attempt at a Unicode special character escape sequence already,
+	try to convert it into one.  Otherwise, write any valid Unicode
+	special character identifier {in groff notation: `\[u123ABC]`}
+	to the macro being assembled {and thence the `special` node, and
+	ultimately the `x X` command this node type produces}.
+	* src/roff/groff/tests/\
+	device-control-special-character-handling.sh: Update test
+	expectations.  "\[u1F6C3]" is now correctly passed through, and
+	"\[`a]" correctly coverted to "\[u00E0]".  Shorten test cases a
+	little.
+
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp
