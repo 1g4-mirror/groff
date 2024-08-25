@@ -1,5 +1,14 @@
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Check for correct and diagnostic-free behavior of
+	`Rs`/`Re`-related macros such as `doc-reference-title-name`,
+	`doc-city-name`, and `doc-date`.
+
+	* tmac/tests/doc_Rs-works.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/fallbacks.tmac: Define fallbacks for all special
 	characters in "Accented characters" section of groff_char(7) for
 	"ascii" output device.
