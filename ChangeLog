@@ -1,5 +1,12 @@
 2024-08-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/unicode.h: Declare new constants `UNIBUFSZ` and
+	`GLYPHBUFSZ` to help callers of `glyph_name_to_unicode()` and
+	`unicode_to_glyph_name()` allocate sufficient memory to hold any
+	returned special character identifiers.
+
+2024-08-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Modify `valid_unicode_code_sequence()` function to
 	take optional second parameter, a pointer to a character buffer
 	in which an error message is stored if the character sequence in
