@@ -65,7 +65,14 @@ const char *decompose_unicode(const char *);
 //
 // Return a pointer to the second character in the string (skipping the
 // leading 'u') if successful, and a null pointer otherwise.
-const char *valid_unicode_code_sequence(const char *);
+//
+// If given a second argument, store a diagnostic message there if the
+// above rules are not satisfied.
+const char *valid_unicode_code_sequence(const char *,
+  char * /* errbuf */ = 0 /* nullptr */);
+
+// valid_unicode_code_sequence() writes to an error message buffer.
+const size_t ERRBUFSZ = 256;
 
 // Local Variables:
 // fill-column: 72

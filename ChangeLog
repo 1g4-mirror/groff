@@ -1,3 +1,18 @@
+2024-08-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Modify `valid_unicode_code_sequence()` function to
+	take optional second parameter, a pointer to a character buffer
+	in which an error message is stored if the character sequence in
+	the first argument is invalid.  Declare new constant `ERRBUFSZ`
+	to help any caller allocate sufficient memory to hold any such
+	generated message.
+
+	* src/include/unicode.h:
+	* src/libs/libgroff/unicode.cpp (valid_unicode_code_sequence):
+	Do it.  Also squawk about use of lowercase hexadecimal digits in
+	Unicode special character identifiers, as these are invalid in
+	groff.
+
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (encode_char_for_device_output)
