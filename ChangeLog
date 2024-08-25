@@ -1,5 +1,23 @@
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.h: Trivially refactor `environment` class.
+	Rename (private) member variables.
+	`dummy` -> `is_dummy_env`
+	`fill` -> `is_filling`
+	`spreading` -> `is_spreading`
+	`discarding` -> `is_discarding`
+	* src/roff/troff/env.cpp (environment::add_char)
+	(environment::add_node, environment::space_newline)
+	(environment::space, environment::environment)
+	(environment::copy, environment::get_fill, fill, no_fill)
+	(environment::interrupt, environment::newline)
+	(environment::output_line, environment::start_line)
+	(environment::possibly_break_line)
+	(environment::dump_troff_state, environment::do_break)
+	(title, environment::print_env): Migrate to new names.
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp
 	(encode_special_character_for_device_output): New helper
 	function takes over much of the tedium of
