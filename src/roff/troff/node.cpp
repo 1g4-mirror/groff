@@ -1859,8 +1859,7 @@ int charinfo_node::ends_sentence()
     return 1;
   else if (ci->transparent())
     return 2;
-  else
-    return 0;
+  return 0;
 }
 
 int charinfo_node::overlaps_horizontally()
