@@ -7935,7 +7935,7 @@ Output page selection status (Boolean-valued); see @command{groff}
 @cindex registers, available number of, register (@code{.R})
 @vindex .R
 Count of available unused registers; in GNU @command{troff} this
-register always interprets the maximum representable
+register always interpolates the maximum representable
 integer.@footnote{GNU @command{troff} dynamically allocates memory for as
 many registers as required.}  Favor its use over numeric literals with
 many zeros or nines to indicate an arbitrary large quantity.
