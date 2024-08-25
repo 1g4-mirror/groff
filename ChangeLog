@@ -1,3 +1,10 @@
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/fallbacks.tmac: Spell fallbacks for Unicode special
+	character escape sequences correctly, using uppercase
+	hexadecimal digits.  Problem dates back to commit 48a13daf13, 24
+	May 2012.
+
 2024-08-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/include/unicode.h: Declare new constants `UNIBUFSZ` and
