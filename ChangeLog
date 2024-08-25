@@ -1,5 +1,13 @@
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/fallbacks.tmac: Define fallbacks for all special
+	characters in "Accented characters" section of groff_char(7) for
+	"ascii" output device.
+	* tmac/tests/an_do-not-abbreviate-escape-using-TH-arguments.sh:
+	Update test expectations.
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* font/devascii/R.proto: Map `ad` (dieresis accent) special
 	charcter as yet another alias of `"` on the ASCII output device.
 
