@@ -1,3 +1,39 @@
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Further refactor `charinfo` class.
+
+	* src/roff/troff/charinfo.h (class charinfo): Rename enumeration
+	constants.
+	`BREAK_BEFORE`      -> `ALLOWS_BREAK_BEFORE`
+	`BREAK_AFTER`       -> `ALLOWS_BREAK_AFTER`
+	`TRANSPARENT`       -> `IS_TRANSPARENT_TO_END_OF_SENTENCE`
+	`IGNORE_HCODES`     -> `IGNORES_SURROUNDING_HYPHENATION_CODES`
+	`DONT_BREAK_BEFORE` -> `PROHIBITS_BREAK_BEFORE`
+	`DONT_BREAK_AFTER`  -> `PROHIBITS_BREAK_AFTER`
+	`INTER_CHAR_SPACE`  -> `IS_INTERWORD_SPACE`
+	Rename member functions.
+	`can_break_before()` -> `allows_break_before()`
+	`can_break_after()` -> `allows_break_after()`
+	`transparent()` -> `is_transparent()`
+	`ignore_hcodes()` -> `ignores_surrounding_hyphenation_codes()`
+	`prohibit_break_before()` -> `prohibits_break_before()`
+	`prohibit_break_after()` -> `prohibits_break_after()`
+	`inter_char_space()` -> `is_interword_space()`
+	`numbered()` -> `is_numbered()`
+	Demote the return types of the foregoing and `ends_sentence()`,
+	`overlaps_vertically()`, `overlaps_horizontally()`,
+	`first_time_not_found()`, `is_normal()`, `is_fallback()`, and
+	`is_special()` from `int` to `bool`.  Update inline definitions.
+	Parenthesize complex `return` expressions.
+	* src/roff/troff/input.cpp (init_charset_table): Migrate to new
+	enumeration constants.
+	* src/roff/troff/node.cpp: Rename constants in `enum`
+	`break_char_type` to match those in "charinfo.h".
+	(troff_output_file::put_char_width, troff_output_file::put_char)
+	(charinfo_node::ends_sentence, break_char_node::add_self)
+	(make_glyph_node, node::add_char): Migrate to new enumeration
+	constant and member function names.
+
 2024-08-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor.  Boolify `charinfo` class, renaming

@@ -41,18 +41,22 @@ class charinfo : glyph {
   std::vector<std::pair<int, int> > ranges;
   std::vector<charinfo *> nested_classes;
 public:
-  enum {		// Values for the flags bitmask.  See groff
-			// manual, description of the '.cflags' request.
+  // Values for the flags bitmask.  See groff manual, description of the
+  // '.cflags' request.
+  //
+  // Keep these symbol names in sync with the subset used in the `enum`
+  // `break_char_type`; see "node.cpp".
+  enum {
     ENDS_SENTENCE = 0x01,
-    BREAK_BEFORE = 0x02,
-    BREAK_AFTER = 0x04,
+    ALLOWS_BREAK_BEFORE = 0x02,
+    ALLOWS_BREAK_AFTER = 0x04,
     OVERLAPS_HORIZONTALLY = 0x08,
     OVERLAPS_VERTICALLY = 0x10,
-    TRANSPARENT = 0x20,
-    IGNORE_HCODES = 0x40,
-    DONT_BREAK_BEFORE = 0x80,
-    DONT_BREAK_AFTER = 0x100,
-    INTER_CHAR_SPACE = 0x200
+    IS_TRANSPARENT_TO_END_OF_SENTENCE = 0x20,
+    IGNORES_SURROUNDING_HYPHENATION_CODES = 0x40,
+    PROHIBITS_BREAK_BEFORE = 0x80,
+    PROHIBITS_BREAK_AFTER = 0x100,
+    IS_INTERWORD_SPACE = 0x200
   };
   enum {
     TRANSLATE_NONE,
@@ -64,16 +68,16 @@ public:
   symbol nm;
   charinfo(symbol);
   glyph *as_glyph();
-  int ends_sentence();
-  int overlaps_vertically();
-  int overlaps_horizontally();
-  int can_break_before();
-  int can_break_after();
-  int transparent();
-  int ignore_hcodes();
-  int prohibit_break_before();
-  int prohibit_break_after();
-  int inter_char_space();
+  bool ends_sentence();
+  bool overlaps_vertically();
+  bool overlaps_horizontally();
+  bool allows_break_before();
+  bool allows_break_after();
+  bool is_transparent_to_end_of_sentence();
+  bool ignores_surrounding_hyphenation_codes();
+  bool prohibits_break_before();
+  bool prohibits_break_after();
+  bool is_interword_space();
   unsigned char get_hyphenation_code();
   unsigned char get_ascii_code();
   unsigned char get_asciify_code();
@@ -92,13 +96,13 @@ public:
   macro *set_macro(macro *);
   macro *setx_macro(macro *, char_mode);
   macro *get_macro();
-  int first_time_not_found();
+  bool first_time_not_found();
   void set_number(int);
   int get_number();
-  int numbered();
-  int is_normal();
-  int is_fallback();
-  int is_special();
+  bool is_numbered();
+  bool is_normal();
+  bool is_fallback();
+  bool is_special();
   symbol *get_symbol();
   void add_to_class(int);
   void add_to_class(int, int);
@@ -113,94 +117,94 @@ charinfo *get_charinfo(symbol);
 extern charinfo *charset_table[];
 charinfo *get_charinfo_by_number(int);
 
-inline int charinfo::overlaps_horizontally()
+inline bool charinfo::overlaps_horizontally()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & OVERLAPS_HORIZONTALLY;
+  return (flags & OVERLAPS_HORIZONTALLY);
 }
 
-inline int charinfo::overlaps_vertically()
+inline bool charinfo::overlaps_vertically()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & OVERLAPS_VERTICALLY;
+  return (flags & OVERLAPS_VERTICALLY);
 }
 
-inline int charinfo::can_break_before()
+inline bool charinfo::allows_break_before()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & BREAK_BEFORE;
+  return (flags & ALLOWS_BREAK_BEFORE);
 }
 
-inline int charinfo::can_break_after()
+inline bool charinfo::allows_break_after()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & BREAK_AFTER;
+  return (flags & ALLOWS_BREAK_AFTER);
 }
 
-inline int charinfo::ends_sentence()
+inline bool charinfo::ends_sentence()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & ENDS_SENTENCE;
+  return (flags & ENDS_SENTENCE);
 }
 
-inline int charinfo::transparent()
+inline bool charinfo::is_transparent_to_end_of_sentence()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & TRANSPARENT;
+  return (flags & IS_TRANSPARENT_TO_END_OF_SENTENCE);
 }
 
-inline int charinfo::ignore_hcodes()
+inline bool charinfo::ignores_surrounding_hyphenation_codes()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & IGNORE_HCODES;
+  return (flags & IGNORES_SURROUNDING_HYPHENATION_CODES);
 }
 
-inline int charinfo::prohibit_break_before()
+inline bool charinfo::prohibits_break_before()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & DONT_BREAK_BEFORE;
+  return (flags & PROHIBITS_BREAK_BEFORE);
 }
 
-inline int charinfo::prohibit_break_after()
+inline bool charinfo::prohibits_break_after()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & DONT_BREAK_AFTER;
+  return (flags & PROHIBITS_BREAK_AFTER);
 }
 
-inline int charinfo::inter_char_space()
+inline bool charinfo::is_interword_space()
 {
   if (using_character_classes)
     ::get_flags();
-  return flags & INTER_CHAR_SPACE;
+  return (flags & IS_INTERWORD_SPACE);
 }
 
-inline int charinfo::numbered()
+inline bool charinfo::is_numbered()
 {
-  return number >= 0;
+  return (number >= 0);
 }
 
-inline int charinfo::is_normal()
+inline bool charinfo::is_normal()
 {
-  return mode == CHAR_NORMAL;
+  return (mode == CHAR_NORMAL);
 }
 
-inline int charinfo::is_fallback()
+inline bool charinfo::is_fallback()
 {
-  return mode == CHAR_FALLBACK;
+  return (mode == CHAR_FALLBACK);
 }
 
-inline int charinfo::is_special()
+inline bool charinfo::is_special()
 {
-  return mode == CHAR_SPECIAL;
+  return (mode == CHAR_SPECIAL);
 }
 
 inline charinfo *charinfo::get_translation(bool for_transparent_throughput)
@@ -257,7 +261,7 @@ inline macro *charinfo::get_macro()
   return mac;
 }
 
-inline int charinfo::first_time_not_found()
+inline bool charinfo::first_time_not_found()
 {
   if (is_not_found)
     return false;
