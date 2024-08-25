@@ -1013,7 +1013,7 @@ static symbol read_long_escape_parameters(read_mode mode)
   if (buf == abuf) {
     if (i == 0) {
       if (mode != ALLOW_EMPTY)
-	copy_mode_error("empty escape name");
+	copy_mode_error("empty escape sequence argument in copy mode");
       return EMPTY_SYMBOL;
     }
     return symbol(abuf);
@@ -4566,7 +4566,7 @@ static void interpolate_arg(symbol nm)
 {
   const char *s = nm.contents();
   if (!s || *s == '\0')
-    copy_mode_error("missing positional argument number");
+    copy_mode_error("missing positional argument number in copy mode");
   else if (s[1] == 0 && csdigit(s[0]))
     input_stack::push(input_stack::get_arg(s[0] - '0'));
   else if (s[0] == '*' && s[1] == '\0') {
@@ -4640,7 +4640,8 @@ static void interpolate_arg(symbol nm)
 	is_printable = false;
     }
     if (!is_valid) {
-      const char msg[] = "invalid positional argument number";
+      const char msg[] = "invalid positional argument number in copy"
+			 " mode";
       if (is_printable)
 	copy_mode_error("%1 '%2'", msg, s);
       else
@@ -5724,8 +5725,8 @@ static void encode_char_for_device_output(macro *mac, const char c)
 	    mac->append(']');
 	  }
 	  else
-	    error("special character '%1' cannot be used within a"
-	          " device control escape sequence", sc);
+	    error("special character '%1' is unusable within a device"
+		  " control escape sequence", sc);
 	}
 	else
 	  error("special character '%1' cannot be used within a device"

@@ -1,5 +1,11 @@
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_long_escape_parameters)
+	(interpolate_arg, encode_char_for_device_output): Clarify error
+	diagnostics.
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/fallbacks.tmac: Spell fallbacks for Unicode special
 	character escape sequences correctly, using four hexadecimal
 	digits at minimum.  Problem introduced by me in commit
