@@ -1,5 +1,20 @@
 2024-08-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Boolify `charinfo` class, renaming
+	member functions and variables and demoting their (return) types
+	from `int` to `bool`.  Use Boolean, not integer, literals in
+	initializers and assignments.
+
+	* src/roff/troff/charinfo.h:
+	* src/roff/troff/input.cpp: Do it.
+	`not_found` -> `is_not_found`
+	`transparent_translate` -> `is_transparently_translatable`
+	`translate_input` -> `translatable_as_input`
+	`set_translation_input()` -> `make_translatable_as_input()`
+	`get_translation_input()` -> `is_translatable_as_input()`
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (charinfo_node::ends_sentence): Fix
 	compiler warning.
 

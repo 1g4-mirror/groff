@@ -7443,7 +7443,7 @@ static void set_hyphenation_codes()
     }
     cidst->set_hyphenation_code(new_code);
     if (cidst->get_translation()
-	&& cidst->get_translation()->get_translation_input())
+	&& cidst->get_translation()->is_translatable_as_input())
       cidst->get_translation()->set_hyphenation_code(new_code);
     tok.next();
     tok.skip();
@@ -7476,7 +7476,7 @@ static void report_hyphenation_codes()
     }
     unsigned char code = ci->get_hyphenation_code();
     if (ci->get_translation()
-	&& ci->get_translation()->get_translation_input())
+	&& ci->get_translation()->is_translatable_as_input())
       code = ci->get_translation()->get_hyphenation_code();
     if (0 == ch)
       errprint("\\[%1]\t%2\n", ci->nm.contents(), int(code));
@@ -9387,10 +9387,11 @@ charinfo *get_charinfo(symbol nm)
 int charinfo::next_index = 0;
 
 charinfo::charinfo(symbol s)
-: translation(0), mac(0), special_translation(TRANSLATE_NONE),
-  hyphenation_code(0), flags(0), ascii_code(0), asciify_code(0),
-  not_found(0), transparent_translate(1), translate_input(0),
-  mode(CHAR_NORMAL), nm(s)
+: translation(0 /* nullptr */), mac(0 /* nullptr */),
+  special_translation(TRANSLATE_NONE), hyphenation_code(0),
+  flags(0), ascii_code(0), asciify_code(0),
+  is_not_found(false), is_transparently_translatable(true),
+  translatable_as_input(false), mode(CHAR_NORMAL), nm(s)
 {
   index = next_index++;
   number = -1;
@@ -9419,10 +9420,10 @@ void charinfo::set_translation(charinfo *ci, int tt, int ti)
       ci->set_asciify_code(asciify_code);
     else if (ascii_code != 0)
       ci->set_asciify_code(ascii_code);
-    ci->set_translation_input();
+    ci->make_translatable_as_input();
   }
   special_translation = TRANSLATE_NONE;
-  transparent_translate = tt;
+  is_transparently_translatable = tt;
 }
 
 // Recompute flags for all entries in the charinfo dictionary.
@@ -9461,7 +9462,7 @@ void charinfo::set_special_translation(int c, int tt)
 {
   special_translation = c;
   translation = 0;
-  transparent_translate = tt;
+  is_transparently_translatable = tt;
 }
 
 void charinfo::set_ascii_code(unsigned char c)

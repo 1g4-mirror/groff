@@ -33,11 +33,9 @@ class charinfo : glyph {
   unsigned int flags;
   unsigned char ascii_code;
   unsigned char asciify_code;
-  char not_found;
-  char transparent_translate;	// non-zero means translation applies
-				// to transparent throughput
-  char translate_input;		// non-zero means that asciify_code is
-				// active for .asciify (set by .trin)
+  bool is_not_found;
+  bool is_transparently_translatable;
+  bool translatable_as_input; // asciify_code is active for .asciify
   char_mode mode;
   // Unicode character classes
   std::vector<std::pair<int, int> > ranges;
@@ -83,14 +81,14 @@ public:
   void set_hyphenation_code(unsigned char);
   void set_ascii_code(unsigned char);
   void set_asciify_code(unsigned char);
-  void set_translation_input();
-  int get_translation_input();
-  charinfo *get_translation(int = 0);
+  void make_translatable_as_input();
+  bool is_translatable_as_input();
+  charinfo *get_translation(bool = false);
   void set_translation(charinfo *, int, int);
   void get_flags();
   void set_flags(unsigned int);
   void set_special_translation(int, int);
-  int get_special_translation(int = 0);
+  int get_special_translation(bool = false);
   macro *set_macro(macro *);
   macro *setx_macro(macro *, char_mode);
   macro *get_macro();
@@ -205,9 +203,9 @@ inline int charinfo::is_special()
   return mode == CHAR_SPECIAL;
 }
 
-inline charinfo *charinfo::get_translation(int transparent_throughput)
+inline charinfo *charinfo::get_translation(bool for_transparent_throughput)
 {
-  return (transparent_throughput && !transparent_translate
+  return ((for_transparent_throughput && !is_transparently_translatable)
 	  ? 0
 	  : translation);
 }
@@ -224,7 +222,7 @@ inline unsigned char charinfo::get_ascii_code()
 
 inline unsigned char charinfo::get_asciify_code()
 {
-  return (translate_input ? asciify_code : 0);
+  return (translatable_as_input ? asciify_code : 0);
 }
 
 inline void charinfo::set_flags(unsigned int c)
@@ -237,19 +235,19 @@ inline glyph *charinfo::as_glyph()
   return this;
 }
 
-inline void charinfo::set_translation_input()
+inline void charinfo::make_translatable_as_input()
 {
-  translate_input = 1;
+  translatable_as_input = true;
 }
 
-inline int charinfo::get_translation_input()
+inline bool charinfo::is_translatable_as_input()
 {
-  return translate_input;
+  return translatable_as_input;
 }
 
-inline int charinfo::get_special_translation(int transparent_throughput)
+inline int charinfo::get_special_translation(bool for_transparent_throughput)
 {
-  return (transparent_throughput && !transparent_translate
+  return (for_transparent_throughput && !is_transparently_translatable
 	  ? int(TRANSLATE_NONE)
 	  : special_translation);
 }
@@ -261,11 +259,11 @@ inline macro *charinfo::get_macro()
 
 inline int charinfo::first_time_not_found()
 {
-  if (not_found)
-    return 0;
+  if (is_not_found)
+    return false;
   else {
-    not_found = 1;
-    return 1;
+    is_not_found = true;
+    return true;
   }
 }
 
