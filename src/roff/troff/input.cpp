@@ -3555,7 +3555,7 @@ void macro::append_str(const char *s)
   int i = 0;
 
   if (s) {
-    while (s[i] != (char)0) {
+    while (s[i] != '\0') {
       append(s[i]);
       i++;
     }
@@ -4155,7 +4155,7 @@ macro_iterator::macro_iterator() : args(0), argc(0), with_break(want_break)
 
 macro_iterator::~macro_iterator()
 {
-  while (args != 0) {
+  while (args != 0 /* nullptr */) {
     arg_list *tem = args;
     args = args->next;
     delete tem;
@@ -4174,7 +4174,7 @@ static void map_composite_character()
     return;
   }
   const char *from_gn = glyph_name_to_unicode(from.contents());
-  if (!from_gn) {
+  if (0 /* nullptr */ == from_gn) {
     from_gn = valid_unicode_code_sequence(from.contents());
     if (0 /* nullptr */ == from_gn) {
       error("invalid composite glyph name '%1'", from.contents());
@@ -4192,7 +4192,7 @@ static void map_composite_character()
     return;
   }
   const char *to_gn = glyph_name_to_unicode(to.contents());
-  if (!to_gn) {
+  if (0 /* nullptr */ == to_gn) {
     to_gn = valid_unicode_code_sequence(to.contents());
     if (0 /* nullptr */ == to_gn) {
       error("invalid composite glyph name '%1'", to.contents());
@@ -4216,7 +4216,7 @@ static symbol composite_glyph_name(symbol nm)
   decode_string_args(mi);
   input_stack::push(mi);
   const char *gn = glyph_name_to_unicode(nm.contents());
-  if (!gn) {
+  if (0 /* nullptr */ == gn) {
     gn = valid_unicode_code_sequence(nm.contents());
     if (0 /* nullptr */ == gn) {
       error("invalid base glyph '%1' in composite glyph name", nm.contents());
@@ -4237,7 +4237,7 @@ static symbol composite_glyph_name(symbol nm)
 	gl += c;
     gl += '\0';
     const char *u = glyph_name_to_unicode(gl.contents());
-    if (!u) {
+    if (0 /* nullptr */ == u) {
       u = valid_unicode_code_sequence(gl.contents());
       if (0 /* nullptr */ == u) {
 	error("invalid component '%1' in composite glyph name",
@@ -5713,11 +5713,11 @@ static void encode_char_for_device_output(macro *mac, const char c)
 	mac->append('~');
       else {
 	if (font::use_charnames_in_special) {
-	  if (sc[0] != (char)0) {
+	  if (sc[0] != '\0') {
 	    mac->append('\\');
 	    mac->append('[');
 	    int i = 0;
-	    while (sc[i] != (char)0) {
+	    while (sc[i] != '\0') {
 	      mac->append(sc[i]);
 	      i++;
 	    }
@@ -5858,7 +5858,7 @@ static node *do_suppress(symbol nm)
 {
   if (nm.is_null() || nm.is_empty()) {
     error("output suppression escape sequence requires an argument");
-    return 0;
+    return 0 /* nullptr */;
   }
   const char *s = nm.contents();
   switch (*s) {
@@ -5888,10 +5888,10 @@ static node *do_suppress(symbol nm)
     {
       s++;			// move over '5'
       char position = *s;
-      if (*s == (char)0) {
-	error("missing position and filename in output suppression"
+      if (*s == '\0') {
+	error("missing position and file name in output suppression"
 	      " escape sequence");
-	return 0;
+	return 0 /* nullptr */;
       }
       if (!(position == 'l'
 	    || position == 'r'
@@ -9542,7 +9542,7 @@ bool charinfo::contains(symbol s, bool already_called)
     return false;
   }
   const char *unicode = glyph_name_to_unicode(s.contents());
-  if (unicode != 0 && strchr(unicode, '_') == 0) {
+  if (unicode != 0 /* nullptr */ && strchr(unicode, '_') == 0) {
     char *ignore;
     int c = (int) strtol(unicode, &ignore, 16);
     return contains(c, true);

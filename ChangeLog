@@ -1,5 +1,17 @@
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (encode_char_for_device_output)
+	(macro::append_str, do_suppress): Trivially refactor.  Compare
+	`char` array elements to character literals rather than an
+	integer literal with a C-style typecast to `char`.
+
+	(macro_iterator::~macro_iterator, map_composite_character)
+	(composite_glyph_name, charinfo::contains): Explicitly compare
+	variable of pointer type to null pointer constant instead of
+	letting it pun down to a Boolean.
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Further refactor `charinfo` class.
 
 	* src/roff/troff/charinfo.h (class charinfo): Rename enumeration

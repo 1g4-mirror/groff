@@ -383,6 +383,8 @@ void environment::add_node(node *nd)
 	delete nd;
 	return;
       }
+      // XXX: Should this really be done for device "special" nodes--"x"
+      // commands?
       start_line();
     }
     width_total += nd->width();
