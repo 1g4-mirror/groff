@@ -1,5 +1,49 @@
 2024-08-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	Make gropdf compatible with IM 6(.9)
+
+	Peter Schaffter discovered some problems with recent
+	changes to gropdf and PDFPIC, they were not fully
+	compatible with ImageMagick 6.9 which is what he was
+	using. See here <https://lists.gnu.org/archive/html/groff/2024-08/msg00044.html>
+
+	* src/devices/gropdf/gropdf.pl: One difference in IM 6 is
+	that an alpha channel of all zeroes meant the image was opaque,
+	but in 7 it is reversed and means the image is wholly
+	transparent.
+
+	This change is documented here:-
+
+	<http://www.imagemagick.org/script/porting.php#alpha>
+
+	"Alpha
+
+	We support alpha now, previously opacity. With alpha, a value
+	of 0 means that the pixel does not have any coverage information
+	and is transparent; i.e. there was no color contribution from any
+	geometry because the geometry did not overlap this pixel. A value
+	of QuantumRange means that the pixel is opaque because the geometry
+	completely overlapped the pixel. As a consequence, in version 7,
+	the PixelInfo structure member alpha has replaced the previous
+	opacity member. Another consequence is the alpha part of an sRGB
+	value in hexadecimal notation is now reversed (e.g. #0000 is fully
+	transparent)."
+
+	This is now handled by gropdf.
+
+	There was an undocumented (I thought it came as part of perlmagick,
+	it doesn't) dependency on the module Image::ExifTool this is no
+	longer used by gropdf - so not required.
+
+	* tmac/pdfpic.tmac: Another issue was that identify sometimes
+	reports sizes for pdfs which do not match the page size, (it seems
+	to be attempting to report the size of the image embedded in the
+	pdf). For this reason pdfinfo is now used first on files, which
+	consistently reports the page size. There is a slight time penalty
+	since non-pdf files are subject to a (failed) pdfinfo run.
+
+2024-08-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	Handle preconv better
 
 	If preconv used, it should also be used when generating

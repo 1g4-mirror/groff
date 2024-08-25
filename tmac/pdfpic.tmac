@@ -74,17 +74,17 @@
 .\" when the string they populate is later interpolated.
 .eo
 .de pdfpic@get-image-dimensions
-.  ds pdfpic*command ( identify \$1 2>/dev/null || file \$1 ) \"
+.  ds pdfpic*command pdfinfo \$1 2>/dev/null \"
 .  eo
-.  as pdfpic*command  | perl -ne 'print qq(. \\\\R\@pdfpic*width $+{w}p@ \\\\R\@pdfpic*height $+{h}p\@),qq(\\n) if m/(?:(?:[,=A-Z]|JP2) (?<w>\d+)\s*x\s*(?<h>\d+))|(?:height=(?<h>\d+).+width=(?<w>\d+))/;'
+.  as pdfpic*command  | perl -ne 'print qq(. \\\\R\@pdfpic*width $+{w}p@ \\\\R\@pdfpic*height $+{h}p\@) if m/Page\s+size:\s+(?<w>[\d.]+)\sx\s(?<h>[\d.]+)/si;'
 .  ec
 .  pso \*[pdfpic*command]
 .  if !r pdfpic*width \{\
-.     ds pdfpic*command pdfinfo \$1 \"
-.     eo
-.     as pdfpic*command  | perl -ne 'print qq(. \\\\R\@pdfpic*width $+{w}p@ \\\\R\@pdfpic*height $+{h}p\@) if m/Page\s+size:\s+(?<w>[\d.]+)\sx\s(?<h>[\d.]+)/si;'
-.     ec
-.     pso \*[pdfpic*command]
+.    ds pdfpic*command ( identify \$1 2>/dev/null || file \$1 ) \"
+.    eo
+.    as pdfpic*command  | perl -ne 'print qq(. \\\\R\@pdfpic*width $+{w}p@ \\\\R\@pdfpic*height $+{h}p\@),qq(\\n) if m/(?:(?:[,=A-Z]|JP2) (?<w>\d+)\s*x\s*(?<h>\d+))|(?:height=(?<h>\d+).+width=(?<w>\d+))/;'
+.    ec
+.    pso \*[pdfpic*command]
 .  \}
 .  rm pdfpic*command
 ..

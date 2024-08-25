@@ -283,8 +283,8 @@ if($rc)
 
 $rc = eval
 {
-    require Image::ExifTool;
-    Image::ExifTool->import();
+#     require Image::ExifTool;
+#     Image::ExifTool->import();
     require Image::Magick;
     Image::Magick->import();
     1;
@@ -1674,6 +1674,7 @@ sub do_x
 		my $mat=[1,0,0,1,0,0];
 		my $imgtype='PDF';
 		my $info;
+		my $image;
 
 		my ($FD,$FDnm)=OpenInc($fil);
 
@@ -1687,10 +1688,16 @@ sub do_x
 		{
 		    if ($gotexif)
 		    {
-			my $exifTool = Image::ExifTool->new;
-			$info = $exifTool->ImageInfo($FD);
+			binmode $FD;
 
-			$imgtype=$info->{FileType}||'' if defined($info);
+			$image = Image::Magick->new;
+			my $x = $image->Read(file => $FD);
+			Warn("Image '$FDnm': $x"), return if "$x";
+			$imgtype=$image->Get('magick');
+			$info->{ImageWidth}=$image->Get('width');
+			$info->{ImageHeight}=$image->Get('height');
+			$info->{ColorComponents}=
+			    ($image->Get('colorspace') eq 'Gray')?1:3;
 		    }
 		    else
 		    {
@@ -1730,7 +1737,7 @@ sub do_x
 		    }
 		    else
 		    {
-			$incfil{$fil}=LoadMagick($FD,$FDnm,$info);
+			$incfil{$fil}=LoadMagick($image,$FDnm,$info);
 		    }
 
 		    return if !defined($incfil{$fil});
@@ -2683,20 +2690,10 @@ sub LoadJP2
 
 sub LoadMagick
 {
-    my $JP=shift;
+    my $image=shift;
     my $JPnm=shift;
     my $info=shift;
 
-    local $/=undef;
-
-    seek($JP,0,0);
-    binmode $JP;
-
-    my ($x, $image);
-
-    $image = Image::Magick->new;
-    $x = $image->Read(file => $JP);
-    Warn("Image '$JPnm': $x"), return if "$x";
 #     my $e=$image->Get('endian');
 #     print STDERR "En: '$JPnm' $e\n";
 #     $image->Set(endian => 'MSB') if $e eq 'Undefined';
@@ -2713,18 +2710,20 @@ sub LoadMagick
     {
 	$alpha=$image->Clone();
 	$alpha->Separate(channel => 'Alpha');
+	my $v=$alpha->Get('version');
+	$v=$1 if $v=~m/^ImageMagick (\d+\.\d+)/;
+	$alpha->Negate(channel => 'All') if $v < 7;
 	$alpha->Set(magick => 'gray');
     }
 
     my $cs=$image->Get('colorspace');
     $cs='RGB' if $cs eq 'sRGB';
-    $x = $image->Set(alpha => 'off', magick => $cs);
+    my $x = $image->Set(alpha => 'off', magick => $cs);
     Warn("Image '$JPnm': $x"), return if "$x";
     my @blobs = $image->ImageToBlob();
     Warn("Image '$JPnm': More than 1 image") if $#blobs > 0;
     $blobs[0]=pack('v*', unpack('n*', $blobs[0])) if $BPC==16;
     $blobs[0]=pack('V*', unpack('N*', $blobs[0])) if $BPC==32;
-    close($JP);
 
     my $xobj=++$objct;
     my $xonm="XO$xobj";
