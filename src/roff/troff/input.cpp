@@ -5676,12 +5676,59 @@ static node *do_non_interpreted()
   return new non_interpreted_node(mac);
 }
 
+// This is a helper function for `encode_character_for_device_output()`.
+static void encode_special_character_for_device_output(macro *mac)
+{
+  const char *sc;
+  if (font::use_charnames_in_special) {
+    charinfo *ci = tok.get_char(true /* required */);
+    sc = ci->get_symbol()->contents();
+  }
+  else
+    sc = tok.get_char()->get_symbol()->contents();
+  if (strcmp("-", sc) == 0)
+    mac->append('-');
+  else if (strcmp("aq", sc) == 0)
+    mac->append('\'');
+  else if (strcmp("dq", sc) == 0)
+    mac->append('"');
+  else if (strcmp("ga", sc) == 0)
+    mac->append('`');
+  else if (strcmp("ha", sc) == 0)
+    mac->append('^');
+  else if (strcmp("rs", sc) == 0)
+    mac->append('\\');
+  else if (strcmp("ti", sc) == 0)
+    mac->append('~');
+  else {
+    if (font::use_charnames_in_special) {
+      if (sc[0] != '\0') {
+	mac->append('\\');
+	mac->append('[');
+	int i = 0;
+	while (sc[i] != '\0') {
+	  mac->append(sc[i]);
+	  i++;
+	}
+	mac->append(']');
+      }
+      else
+	error("special character '%1' is unusable within a device"
+	      " control escape sequence", sc);
+    }
+    else
+      error("special character '%1' cannot be used within a device"
+	    " control escape sequence", sc);
+  }
+}
+
 // In troff output, we translate the escape character to '\', but it is
 // up to the postprocessor to interpret it as such.  (This mostly
 // matters for device control commands.)
-static void encode_char_for_device_output(macro *mac, const char c)
+static void encode_character_for_device_output(macro *mac, const char c)
 {
   if ('\0' == c) {
+    // It's a special token, not a character we can write as-is.
     if (tok.is_stretchable_space()
 	     || tok.is_unstretchable_space())
       mac->append(' ');
@@ -5690,49 +5737,8 @@ static void encode_char_for_device_output(macro *mac, const char c)
 	     || tok.is_dummy()
 	     || tok.is_transparent_dummy())
       /* do nothing */;
-    else if (tok.is_special()) {
-      const char *sc;
-      if (font::use_charnames_in_special) {
-	charinfo *ci = tok.get_char(true /* required */);
-	sc = ci->get_symbol()->contents();
-      }
-      else
-	sc = tok.get_char()->get_symbol()->contents();
-      if (strcmp("-", sc) == 0)
-	mac->append('-');
-      else if (strcmp("aq", sc) == 0)
-	mac->append('\'');
-      else if (strcmp("dq", sc) == 0)
-	mac->append('"');
-      else if (strcmp("ga", sc) == 0)
-	mac->append('`');
-      else if (strcmp("ha", sc) == 0)
-	mac->append('^');
-      else if (strcmp("rs", sc) == 0)
-	mac->append('\\');
-      else if (strcmp("ti", sc) == 0)
-	mac->append('~');
-      else {
-	if (font::use_charnames_in_special) {
-	  if (sc[0] != '\0') {
-	    mac->append('\\');
-	    mac->append('[');
-	    int i = 0;
-	    while (sc[i] != '\0') {
-	      mac->append(sc[i]);
-	      i++;
-	    }
-	    mac->append(']');
-	  }
-	  else
-	    error("special character '%1' is unusable within a device"
-		  " control escape sequence", sc);
-	}
-	else
-	  error("special character '%1' cannot be used within a device"
-		" control escape sequence", sc);
-      }
-    }
+    else if (tok.is_special())
+      encode_special_character_for_device_output(mac);
     else
       error("%1 is invalid within device control escape sequence",
 	    tok.description());
@@ -5780,7 +5786,7 @@ static node *do_device_control() // \X
       c = '\b';
     else
       c = tok.ch();
-    encode_char_for_device_output(&mac, c);
+    encode_character_for_device_output(&mac, c);
   }
   return new special_node(mac);
 }

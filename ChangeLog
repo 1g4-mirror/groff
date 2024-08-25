@@ -1,5 +1,15 @@
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): New helper
+	function takes over much of the tedium of
+	`encode_character_for_device_output()`, for maintainability.
+	(encode_char_for_device_output): Rename this...
+	(encode_character_for_device_output): ...to this.  Use the new
+	helper function when necessary.
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_long_escape_parameters)
 	(interpolate_arg, encode_char_for_device_output): Clarify error
 	diagnostics.
