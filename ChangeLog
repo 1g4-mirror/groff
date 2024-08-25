@@ -1,3 +1,8 @@
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/devascii/R.proto: Map `ad` (dieresis accent) special
+	charcter as yet another alias of `"` on the ASCII output device.
+
 2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (chop_macro): Clarify diagnostic.
