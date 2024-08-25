@@ -1,6 +1,13 @@
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/fallbacks.tmac: Spell fallbacks for Unicode special
+	character escape sequences correctly, using four hexadecimal
+	digits at minimum.  Problem introduced by me in commit
+	81aa7b77c0, 10 October 2022.
+
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/fallbacks.tmac: Spell fallbacks for Unicode special
 	character escape sequences correctly, using uppercase
 	hexadecimal digits.  Problem dates back to commit 48a13daf13, 24
 	May 2012.
