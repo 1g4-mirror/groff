@@ -1,5 +1,19 @@
 2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.  Boolify return
+	value and first argument of `get_location()` member functions.
+	Use Boolean, not integer, literals in initializers and
+	assignments.
+	(class input_iterator, class file_iterator)
+	(file_iterator::get_location, file_iterator::backtrace)
+	(class input_stack, input_stack::get_location, macro::macro)
+	(class string_iterator, string_iterator::get_location)
+	(do_define_macro, get_file_line, lineno_reg::get_string)
+	(writable_lineno_reg::get_value, filename_reg::get_string):
+	Do it.
+
+2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.h:
 	* src/roff/troff/env.cpp (do_underline): Rename this...
 	(configure_underlining): ...to this.

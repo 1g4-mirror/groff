@@ -334,7 +334,9 @@ private:
   virtual symbol get_macro_name() { return NULL_SYMBOL; }
   virtual int space_follows_arg(int) { return 0; }
   virtual int get_break_flag() { return 0; }
-  virtual int get_location(int, const char **, int *) { return 0; }
+  virtual bool get_location(bool /* allow_macro */,
+			    const char ** /* filep */,
+			    int * /* linep */) { return false; }
   virtual void backtrace() {}
   virtual bool set_location(const char *, int) { return 0; }
   virtual int next_file(FILE *, const char *) { return 0; }
@@ -396,7 +398,8 @@ public:
   ~file_iterator();
   int fill(node **);
   int peek();
-  int get_location(int, const char **, int *);
+  bool get_location(bool /* allow_macro */, const char ** /* filep */,
+		    int * /* linep */);
   void backtrace();
   bool set_location(const char *, int);
   int next_file(FILE *, const char *);
@@ -494,8 +497,8 @@ int file_iterator::peek()
   return c;
 }
 
-int file_iterator::get_location(int /*allow_macro*/,
-				const char **filenamep, int *linenop)
+bool file_iterator::get_location(bool /*allow_macro*/,
+				 const char **filenamep, int *linenop)
 {
   *linenop = lineno;
   if (filename != 0 && strcmp(filename, "-") == 0)
@@ -510,7 +513,7 @@ void file_iterator::backtrace()
   const char *f;
   int n;
   // Get side effect of filename rewrite if stdin.
-  (void) get_location(0, &f, &n);
+  (void) get_location(false /* allow macro */, &f, &n);
   if (program_name)
     fprintf(stderr, "%s: ", program_name);
   errprint("backtrace: %3 '%1':%2\n", f, n, popened ? "pipe" : "file");
@@ -537,7 +540,9 @@ public:
   static int space_follows_arg(int);
   static int get_break_flag();
   static int nargs();
-  static int get_location(int, const char **, int *);
+  static bool get_location(bool /* allow_macro */,
+			   const char ** /* filep */,
+			   int * /* linep */);
   static bool set_location(const char *, int);
   static void backtrace();
   static void next_file(FILE *, const char *);
@@ -792,12 +797,13 @@ int input_stack::nargs()
   return 0;
 }
 
-int input_stack::get_location(int allow_macro, const char **filenamep, int *linenop)
+bool input_stack::get_location(bool allow_macro, const char **filenamep,
+			      int *linenop)
 {
   for (input_iterator *p = top; p; p = p->next)
     if (p->get_location(allow_macro, filenamep, linenop))
-      return 1;
-  return 0;
+      return true;
+  return false;
 }
 
 void input_stack::backtrace()
@@ -3451,7 +3457,8 @@ macro::~macro()
 macro::macro()
 : is_a_diversion(false), is_a_string(true)
 {
-  if (!input_stack::get_location(1, &filename, &lineno)) {
+  if (!input_stack::get_location(true /* allow macro */, &filename,
+				 &lineno)) {
     filename = 0 /* nullptr */;
     lineno = 0 /* nullptr */;
   }
@@ -3472,7 +3479,8 @@ macro::macro(const macro &m)
 macro::macro(int is_div)
 : is_a_diversion(is_div)
 {
-  if (!input_stack::get_location(1, &filename, &lineno)) {
+  if (!input_stack::get_location(true /* allow macro */, &filename,
+				 &lineno)) {
     filename = 0 /* nullptr */;
     lineno = 0 /* nullptr */;
   }
@@ -3660,7 +3668,8 @@ public:
 		  symbol = NULL_SYMBOL);
   int fill(node **);
   int peek();
-  int get_location(int, const char **, int *);
+  bool get_location(bool /* allow_macro */, const char ** /* filep */,
+		    int * /* linep */);
   void backtrace();
   int get_break_flag() { return with_break; }
   void set_att_compat(bool b) { att_compat = b; }
@@ -3759,16 +3768,16 @@ int string_iterator::peek()
   return *p;
 }
 
-int string_iterator::get_location(int allow_macro,
-				  const char **filep, int *linep)
+bool string_iterator::get_location(bool allow_macro,
+				   const char **filep, int *linep)
 {
   if (!allow_macro)
-    return 0;
-  if (mac.filename == 0)
-    return 0;
+    return false;
+  if (0 /* nullptr */ == mac.filename)
+    return false;
   *filep = mac.filename;
   *linep = mac.lineno + lineno - 1;
-  return 1;
+  return true;
 }
 
 void string_iterator::backtrace()
@@ -4725,8 +4734,10 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
     tok.next();
   const char *start_filename;
   int start_lineno;
-  int have_start_location = input_stack::get_location(0, &start_filename,
-						      &start_lineno);
+  bool have_start_location
+    = input_stack::get_location(false /* allow_macro */,
+				&start_filename,
+				&start_lineno);
   node *n;
   // doing this here makes the line numbers come out right
   int c = get_copy(&n, true /* is defining*/);
@@ -5944,7 +5955,8 @@ void special_node::tprint(troff_output_file *out)
 
 int get_file_line(const char **filename, int *lineno)
 {
-  return input_stack::get_location(0, filename, lineno);
+  return input_stack::get_location(false /* allow macro */, filename,
+				   lineno);
 }
 
 void line_file()
@@ -7878,7 +7890,7 @@ const char *lineno_reg::get_string()
 {
   int line;
   const char *file;
-  if (!input_stack::get_location(0, &file, &line))
+  if (!input_stack::get_location(false /* allow macro */, &file, &line))
     line = 0;
   return i_to_a(line);
 }
@@ -7898,7 +7910,7 @@ bool writable_lineno_reg::get_value(units *res)
 {
   int line;
   const char *file;
-  if (!input_stack::get_location(0, &file, &line))
+  if (!input_stack::get_location(false /* allow macro */, &file, &line))
     return false;
   *res = line;
   return true;
@@ -7918,10 +7930,10 @@ const char *filename_reg::get_string()
 {
   int line;
   const char *file;
-  if (input_stack::get_location(0, &file, &line))
+  if (input_stack::get_location(false /* allow macro */, &file, &line))
     return file;
   else
-    return 0;
+    return 0 /* nullptr */;
 }
 
 class break_flag_reg : public reg {
