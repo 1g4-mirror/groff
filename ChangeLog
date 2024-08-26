@@ -1,5 +1,11 @@
 2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (main): Migrate `.T` register backing
+	class from `readonly_text_register` to
+	`readonly_boolean_register`.
+
+2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (main): Trivially refactor.  Boolify
 	and rename variables controlled by command-line options.  Use
 	Boolean, not integer, literals in initializers and assignments.

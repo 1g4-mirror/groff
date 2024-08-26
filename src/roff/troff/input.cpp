@@ -8653,7 +8653,7 @@ int main(int argc, char **argv)
 #endif /* COLUMN */
   init_node_requests();
   register_dictionary.define(".T",
-      new readonly_text_register(have_explicit_device_argument));
+      new readonly_boolean_register(&have_explicit_device_argument));
   init_registers();
   init_reg_requests();
   init_hyphenation_pattern_requests();
