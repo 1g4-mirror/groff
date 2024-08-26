@@ -8457,11 +8457,11 @@ int main(int argc, char **argv)
   string_list *macros = 0 /* nullptr */;
   string_list *register_assignments = 0 /* nullptr */;
   string_list *string_assignments = 0 /* nullptr */;
-  int iflag = 0;
-  int tflag = 0;
-  int fflag = 0;
-  int nflag = 0;
-  int no_rc = 0;		// don't process troffrc and troffrc-end
+  bool want_stdin_read_last = false;
+  bool have_explicit_device_argument = false;
+  bool have_explicit_default_family = false;
+  bool have_explicit_first_page_number = false;
+  bool want_startup_macro_files_skipped = false;
   int next_page_number = 0;	// pacify compiler
   opterr = 0;
   hresolution = vresolution = 1;
@@ -8505,7 +8505,7 @@ int main(int argc, char **argv)
       break;
     case 'T':
       device = optarg;
-      tflag = 1;
+      have_explicit_device_argument = true;
       is_writing_html = (strcmp(device, "html") == 0);
       break;
     case 'C':
@@ -8529,7 +8529,7 @@ int main(int argc, char **argv)
       want_errors_inhibited = true;
       break;
     case 'R':
-      no_rc = 1;
+      want_startup_macro_files_skipped = true;
       break;
     case 'w':
       enable_warning(optarg);
@@ -8538,7 +8538,7 @@ int main(int argc, char **argv)
       disable_warning(optarg);
       break;
     case 'i':
-      iflag = 1;
+      want_stdin_read_last = true;
       break;
     case 'b':
       want_backtraces = true;
@@ -8551,7 +8551,7 @@ int main(int argc, char **argv)
       break;
     case 'n':
       if (sscanf(optarg, "%d", &next_page_number) == 1)
-	nflag++;
+	have_explicit_first_page_number = true;
       else
 	error("bad page number");
       break;
@@ -8578,7 +8578,7 @@ int main(int argc, char **argv)
       break;
     case 'f':
       default_family = symbol(optarg);
-      fflag = 1;
+      have_explicit_default_family = true;
       break;
     case 'q':
     case 's':
@@ -8619,7 +8619,8 @@ int main(int argc, char **argv)
   device_has_tcommand = font::has_tcommand;
   warn_scale = (double) units_per_inch;
   warn_scaling_unit = 'i';
-  if (!fflag && font::family != 0 && *font::family != '\0')
+  if (!have_explicit_default_family && (font::family != 0 /* nullptr */)
+      && *font::family != '\0')
     default_family = symbol(font::family);
   font_size::init_size_table(font::sizes);
   int i;
@@ -8642,7 +8643,7 @@ int main(int argc, char **argv)
 		" file for device '%2'", font::font_name_table[i],
 		device);
   curdiv = topdiv = new top_level_diversion;
-  if (nflag)
+  if (have_explicit_first_page_number)
     topdiv->set_next_page_number(next_page_number);
   init_input_requests();
   init_env_requests();
@@ -8651,7 +8652,8 @@ int main(int argc, char **argv)
   init_column_requests();
 #endif /* COLUMN */
   init_node_requests();
-  register_dictionary.define(".T", new readonly_text_register(tflag));
+  register_dictionary.define(".T",
+      new readonly_text_register(have_explicit_device_argument));
   init_registers();
   init_reg_requests();
   init_hyphenation_pattern_requests();
@@ -8668,7 +8670,7 @@ int main(int argc, char **argv)
     register_assignments = register_assignments->next;
     delete tem;
   }
-  if (!no_rc)
+  if (!want_startup_macro_files_skipped)
     process_startup_file(INITIAL_STARTUP_FILE);
   while (macros) {
     process_macro_package_argument(macros->s);
@@ -8676,11 +8678,11 @@ int main(int argc, char **argv)
     macros = macros->next;
     delete tem;
   }
-  if (!no_rc)
+  if (!want_startup_macro_files_skipped)
     process_startup_file(FINAL_STARTUP_FILE);
   for (i = optind; i < argc; i++)
     process_input_file(argv[i]);
-  if (optind >= argc || iflag)
+  if (optind >= argc || want_stdin_read_last)
     process_input_file("-");
   exit_troff();
   return 0;			// not reached

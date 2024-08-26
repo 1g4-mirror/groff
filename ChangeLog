@@ -1,5 +1,16 @@
 2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (main): Trivially refactor.  Boolify
+	and rename variables controlled by command-line options.  Use
+	Boolean, not integer, literals in initializers and assignments.
+	`iflag` -> `want_stdin_read_last`
+	`tflag` -> `have_explicit_device_argument`
+	`fflag` -> `have_explicit_default_family`
+	`nflag` -> `have_explicit_first_page_number`
+	`no_rc` -> `want_startup_macro_files_skipped`
+
+2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (usage): If writing to the standard
 	output stream (the user requested `--help`), include a paragraph
 	descriptive of the program.
