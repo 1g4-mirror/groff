@@ -1,3 +1,17 @@
+2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (doc/groff-man-pages.pdf)
+	(doc/groff-man-pages.utf8.txt): Run groff with "-K latin-1"
+	option to avoid (harmless) error when formatting
+	"groff_mmse.7".  Prompted by discussion with Deri in Savannah
+	#66122.
+
+	Fixes:
+
+	troff:contrib/mm/groff_mmse.7:172: error: cannot translate
+	character code 229 to special character 'oa' in
+	device-independent output
+
 2024-08-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Make compatible with ImageMagick (IM) < 7.0.
