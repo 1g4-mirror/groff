@@ -8435,6 +8435,17 @@ void usage(FILE *stream, const char *prog)
 "usage: %s {-v | --version}\n"
 "usage: %s {-h | --help}\n",
 	  prog, prog, prog);
+  if (stdout == stream) {
+    fputs(
+"\n"
+"GNU troff transforms groff(7) language input into the device‐"
+"independent output format detailed in groff_out(5); it is the heart of"
+"the GNU roff document formatting system.  Many people prefer to use"
+"the groff(1) command, a front end that also runs preprocessors and"
+"output drivers in the appropriate order and with appropriate options."
+"See the troff(1) manual page.\n",
+	  stream);
+  }
 }
 
 int main(int argc, char **argv)

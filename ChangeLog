@@ -1,3 +1,10 @@
+2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (usage): If writing to the standard
+	output stream (the user requested `--help`), include a paragraph
+	descriptive of the program.
+	* src/roff/troff/troff.1.man: Sync language with the foregoing.
+
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/unicode.cpp (valid_unicode_code_sequence):
