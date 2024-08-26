@@ -1,5 +1,17 @@
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp: Trivially refactor.  Rename and
+	boolify file-scoped variable `vertical_position_traps_flag` to
+	`honor_vertical_position_traps`.  Initialize and assign to it
+	using Boolean, not integer, literals.  Also parenthesize complex
+	expressions.
+	(macro_diversion::output, macro_diversion::space)
+	(top_level_diversion::output, top_level_diversion::space)
+	(top_level_diversion::begin_page, continue_page_eject)
+	(vertical_position_traps, init_div_requests): Do it.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify and rename member function of `node` class
 	hierarchy to `did_space_merge()`.  Its former name,
 	`merge_space()`, was ambiguous.  There is a difference between
