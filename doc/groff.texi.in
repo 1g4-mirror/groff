@@ -17395,9 +17395,10 @@ An undefined string, macro, or diversion was used.  When such an object
 is dereferenced, an empty one of that name is automatically created.
 So, unless it is later deleted, at most one warning is given for each.
 
-This warning is also emitted upon an attempt to move an unplanted trap
-macro (@pxref{Page Location Traps}).  In such cases, the unplanted macro
-is @emph{not} dereferenced, so it is not created if it does not exist.
+GNU @command{troff} also uses this category to warn of an attempt to
+move an unplanted trap macro (@pxref{Page Location Traps}).  In such
+cases, the unplanted macro is @emph{not} dereferenced, so it is not
+created if it does not exist.
 
 @item reg
 @itemx 1024

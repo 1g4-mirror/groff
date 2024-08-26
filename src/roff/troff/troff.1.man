@@ -677,7 +677,8 @@ at most one warning is given for each.
 .
 .
 .IP
-This warning is also emitted upon an attempt to move an unplanted trap
+.I @g@troff
+also uses this category to warn of an attempt to move an unplanted trap
 macro.
 .
 In such cases,
