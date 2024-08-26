@@ -383,8 +383,6 @@ void environment::add_node(node *nd)
 	delete nd;
 	return;
       }
-      // XXX: Should this really be done for device "special" nodes--"x"
-      // commands?
       start_line();
     }
     width_total += nd->width();
@@ -526,11 +524,11 @@ void environment::space(hunits space_width, hunits sentence_space_width)
   is_spreading = false;
 }
 
-static node *do_underline_special(bool do_underline_spaces)
+static node *configure_space_underlining(bool b)
 {
   macro m;
   m.append_str("x u ");
-  m.append(do_underline_spaces ? '1' : '0');
+  m.append(b ? '1' : '0');
   return new special_node(m, 1);
 }
 
@@ -561,9 +559,9 @@ bool environment::set_font(symbol nm)
   }
   if (underline_spaces && fontno != prev_fontno) {
     if (fontno == get_underline_fontno())
-      add_node(do_underline_special(true));
+      add_node(configure_space_underlining(true));
     if (prev_fontno == get_underline_fontno())
-      add_node(do_underline_special(false));
+      add_node(configure_space_underlining(false));
   }
   return true;
 }
@@ -1569,7 +1567,7 @@ void temporary_indent()
   tok.next();
 }
 
-void do_underline(bool want_spaces_underlined)
+void configure_underlining(bool want_spaces_underlined)
 {
   int n;
   if (!has_arg() || !get_integer(&n))
@@ -1580,7 +1578,7 @@ void do_underline(bool want_spaces_underlined)
       curenv->fontno = curenv->pre_underline_fontno;
       if (want_spaces_underlined) {
 	curenv->underline_spaces = false;
-	curenv->add_node(do_underline_special(false));
+	curenv->add_node(configure_space_underlining(false));
       }
     }
     curenv->underlined_line_count = 0;
@@ -1591,7 +1589,7 @@ void do_underline(bool want_spaces_underlined)
     curenv->fontno = get_underline_fontno();
     if (want_spaces_underlined) {
       curenv->underline_spaces = true;
-      curenv->add_node(do_underline_special(true));
+      curenv->add_node(configure_space_underlining(true));
     }
   }
   skip_line();
@@ -1599,12 +1597,12 @@ void do_underline(bool want_spaces_underlined)
 
 void continuous_underline()
 {
-  do_underline(true /* want spaces underlined */);
+  configure_underlining(true /* underline spaces */);
 }
 
 void underline()
 {
-  do_underline(false /* want spaces underlined */);
+  configure_underlining(false /* underline spaces */);
 }
 
 void margin_character()
@@ -1793,7 +1791,7 @@ void environment::newline()
       fontno = pre_underline_fontno;
       if (underline_spaces) {
 	underline_spaces = false;
-	add_node(do_underline_special(false));
+	add_node(configure_space_underlining(false));
       }
     }
   }

@@ -1,5 +1,15 @@
 2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.h:
+	* src/roff/troff/env.cpp (do_underline): Rename this...
+	(configure_underlining): ...to this.
+
+	* src/roff/troff/env.cpp (do_underline_special): Rename this...
+	(configure_space_underlining): ...to this.  Now the argument is
+	self-explanatory.
+
+2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (main): Migrate `.T` register backing
 	class from `readonly_text_register` to
 	`readonly_boolean_register`.
