@@ -1,3 +1,12 @@
+2024-08-26
+
+	* om.tmac: Fix first line of columns after first falling one
+	line lower than column top.  Incorporate Deri James' patch to
+	remove 'can't transparently embed...' messages.  Initialize
+	pdfbx-pre-ll register for #IBR in BoxStart.
+
+	Fixes <https://savannah.gnu.org/bugs/?66122>.
+
 2024-08-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mom.am: Add `-b` and `-wall` options to `MOMPDFMOM` macro so
