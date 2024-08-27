@@ -3476,7 +3476,7 @@ macro::macro(const macro &m)
     p->count++;
 }
 
-macro::macro(int is_div)
+macro::macro(bool is_div)
 : is_a_diversion(is_div)
 {
   if (!input_stack::get_location(true /* allow macro */, &filename,

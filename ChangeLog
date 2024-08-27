@@ -1,3 +1,11 @@
+2024-08-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Demote `is_div` argument to `macro` constructor from
+	`int` to `bool`.
+
+	* src/roff/troff/request.h (class macro):
+	* src/roff/troff/input.cpp (macro:macro): Do it.
+
 2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Trivially refactor.  Boolify return
