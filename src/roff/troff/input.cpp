@@ -329,8 +329,8 @@ private:
   virtual int peek();
   virtual int has_args() { return 0; }
   virtual int nargs() { return 0; }
-  virtual input_iterator *get_arg(int) { return 0; }
-  virtual arg_list *get_arg_list() { return 0; }
+  virtual input_iterator *get_arg(int) { return 0 /* nullptr */; }
+  virtual arg_list *get_arg_list() { return 0 /* nullptr */; }
   virtual symbol get_macro_name() { return NULL_SYMBOL; }
   virtual int space_follows_arg(int) { return 0; }
   virtual int get_break_flag() { return 0; }
@@ -446,8 +446,8 @@ int file_iterator::next_file(FILE *f, const char *s)
   newline_flag = 0;
   seen_escape = 0;
   popened = 0;
-  ptr = 0;
-  eptr = 0;
+  ptr = 0 /* nullptr */;
+  eptr = 0 /* nullptr */;
   return 1;
 }
 
@@ -733,8 +733,8 @@ statem *get_diversion_state()
 
 statem *input_stack::get_diversion_state()
 {
-  if (0 == diversion_state)
-    return 0;
+  if (0 /* nullptr */ == diversion_state)
+    return 0 /* nullptr */;
   else
     return new statem(diversion_state);
 }
@@ -742,25 +742,25 @@ statem *input_stack::get_diversion_state()
 input_iterator *input_stack::get_arg(int i)
 {
   input_iterator *p;
-  for (p = top; p != 0; p = p->next)
+  for (p = top; p != 0 /* nullptr */; p = p->next)
     if (p->has_args())
       return p->get_arg(i);
-  return 0;
+  return 0 /* nullptr */;
 }
 
 arg_list *input_stack::get_arg_list()
 {
   input_iterator *p;
-  for (p = top; p != 0; p = p->next)
+  for (p = top; p != 0 /* nullptr */; p = p->next)
     if (p->has_args())
       return p->get_arg_list();
-  return 0;
+  return 0 /* nullptr */;
 }
 
 symbol input_stack::get_macro_name()
 {
   input_iterator *p;
-  for (p = top; p != 0; p = p->next)
+  for (p = top; p != 0 /* nullptr */; p = p->next)
     if (p->has_args())
       return p->get_macro_name();
   return NULL_SYMBOL;
@@ -769,7 +769,7 @@ symbol input_stack::get_macro_name()
 int input_stack::space_follows_arg(int i)
 {
   input_iterator *p;
-  for (p = top; p != 0; p = p->next)
+  for (p = top; p != 0 /* nullptr */; p = p->next)
     if (p->has_args())
       return p->space_follows_arg(i);
   return 0;
@@ -791,7 +791,7 @@ void input_stack::shift(int n)
 
 int input_stack::nargs()
 {
-  for (input_iterator *p =top; p != 0; p = p->next)
+  for (input_iterator *p =top; p != 0 /* nullptr */; p = p->next)
     if (p->has_args())
       return p->nargs();
   return 0;
@@ -3697,11 +3697,11 @@ string_iterator::string_iterator(const macro &m, const char *p, symbol s)
 
 string_iterator::string_iterator()
 {
-  bp = 0;
-  nd = 0;
-  ptr = eptr = 0;
+  bp = 0 /* nullptr */;
+  nd = 0 /* nullptr */;
+  ptr = eptr = 0 /* nullptr */;
   newline_flag = 0;
-  how_invoked = 0;
+  how_invoked = 0 /* nullptr */;
   lineno = 1;
   count = 0;
   with_break = input_stack::get_break_flag();
@@ -3848,12 +3848,13 @@ struct arg_list {
   ~arg_list();
 };
 
-arg_list::arg_list(const macro &m, int s) : mac(m), space_follows(s), next(0)
+arg_list::arg_list(const macro &m, inst s)
+: mac(m), space_follows(s), next(0 /* nullptr */)
 {
 }
 
 arg_list::arg_list(const arg_list *al)
-: next(0)
+: next(0 /* nullptr */)
 {
   mac = al->mac;
   space_follows = al->space_follows;
@@ -3904,7 +3905,7 @@ input_iterator *macro_iterator::get_arg(int i)
     return new string_iterator(p->mac);
   }
   else
-    return 0;
+    return 0 /* nullptr */;
 }
 
 arg_list *macro_iterator::get_arg_list()
@@ -3922,7 +3923,7 @@ int macro_iterator::space_follows_arg(int i)
   if (i > 0 && i <= argc) {
     arg_list *p = args;
     for (int j = 1; j < i; j++) {
-      assert(p != 0);
+      assert(p != 0 /* nullptr */);
       p = p->next;
     }
     return p->space_follows;
@@ -4147,7 +4148,8 @@ bool macro::is_empty()
 
 macro_iterator::macro_iterator(symbol s, macro &m, const char *how_called,
 			       int init_args)
-: string_iterator(m, how_called, s), args(0), argc(0), with_break(want_break)
+: string_iterator(m, how_called, s), args(0 /* nullptr */), argc(0),
+  with_break(want_break)
 {
   if (init_args) {
     arg_list *al = input_stack::get_arg_list();
@@ -4158,7 +4160,8 @@ macro_iterator::macro_iterator(symbol s, macro &m, const char *how_called,
   }
 }
 
-macro_iterator::macro_iterator() : args(0), argc(0), with_break(want_break)
+macro_iterator::macro_iterator()
+: args(0 /* nullptr */), argc(0), with_break(want_break)
 {
 }
 
