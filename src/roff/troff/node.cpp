@@ -1129,9 +1129,9 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
     if (vpos == output_vpos
 	&& (!gcol || gcol == current_glyph_color)
 	&& (!fcol || fcol == current_fill_color)
-	&& n > 0 && n < 100 && !must_update_drawing_position) {
-      put(char(n/10 + '0'));
-      put(char(n%10 + '0'));
+	&& (n > 0) && (n < 100) && !must_update_drawing_position) {
+      put(char(n / 10 + '0'));
+      put(char(n % 10 + '0'));
       put(c);
       output_hpos = hpos;
     }
@@ -3913,12 +3913,12 @@ special_node::special_node(const macro &m, tfont *t,
 
 bool special_node::is_same_as(node *n)
 {
-  return ((mac == ((special_node *)n)->mac)
-	  && (tf == ((special_node *)n)->tf)
-	  && (gcol == ((special_node *)n)->gcol)
-	  && (fcol == ((special_node *)n)->fcol)
+  return ((mac == static_cast<special_node *>(n)->mac)
+	  && (tf == static_cast<special_node *>(n)->tf)
+	  && (gcol == static_cast<special_node *>(n)->gcol)
+	  && (fcol == static_cast<special_node *>(n)->fcol)
 	  && (lacks_command_prefix
-	      == ((special_node *)n)->lacks_command_prefix));
+	      == static_cast<special_node *>(n)->lacks_command_prefix));
 }
 
 const char *special_node::type()

@@ -1,5 +1,15 @@
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Fix code style nits.
+	(troff_output_file::put_char_width): Parenthesize complex
+	expressions.  Memorization of the ~15-17-level C and C++
+	operator precedence tables should be a matter of shame, not
+	pride.
+	(special_node::is_same_as): Use `static_cast` instead of C-style
+	cast.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class troff_output_file): Boolify
 	final argument to `start_special` member function.
 	(troff_output_file::start_special): Rename argument from
