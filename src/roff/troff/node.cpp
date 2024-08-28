@@ -3216,9 +3216,9 @@ int node::nspaces()
   return 0;
 }
 
-int node::merge_space(hunits, hunits, hunits)
+bool node::did_space_merge(hunits, hunits, hunits)
 {
-  return 0;
+  return false;
 }
 
 
@@ -3259,10 +3259,10 @@ int space_node::nspaces()
   return set ? 0 : 1;
 }
 
-int space_node::merge_space(hunits h, hunits, hunits)
+bool space_node::did_space_merge(hunits h, hunits, hunits)
 {
   n += h;
-  return 1;
+  return true;
 }
 
 hunits space_node::width()
@@ -4477,7 +4477,7 @@ void word_space_node::tprint(troff_output_file *out)
   out->right(n);
 }
 
-int word_space_node::merge_space(hunits h, hunits sw, hunits ssw)
+bool word_space_node::did_space_merge(hunits h, hunits sw, hunits ssw)
 {
   n += h;
   assert(orig_width != 0);
@@ -4485,7 +4485,7 @@ int word_space_node::merge_space(hunits h, hunits sw, hunits ssw)
   for (; w->next; w = w->next)
     ;
   w->next = new width_list(sw, ssw);
-  return 1;
+  return true;
 }
 
 unbreakable_space_node::unbreakable_space_node(hunits d, color *c, node *x)
@@ -4533,9 +4533,9 @@ void unbreakable_space_node::split(int, node **, node **)
   assert(0 == "unbreakable_space_node::split() unimplemented");
 }
 
-int unbreakable_space_node::merge_space(hunits, hunits, hunits)
+bool unbreakable_space_node::did_space_merge(hunits, hunits, hunits)
 {
-  return 0;
+  return false;
 }
 
 hvpair::hvpair()

@@ -1,6 +1,37 @@
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Boolify and rename member function of `node` class
+	hierarchy to `did_space_merge()`.  Its former name,
+	`merge_space()`, was ambiguous.  There is a difference between
+	_testing_ a condition's truth value and _assigning_ one to it,
+	and further with performing some sort of side effect.  {Without
+	having read the foregoing, which did `merge_space()` mean?}
+	Functional languages--including any language that distinguishes
+	"pure" functions from those with side effects--are better at
+	getting the programmer to consider these matters.
+
+	* src/roff/troff/node.h
+	(struct node)
+	(class space_node)
+	(class word_space_node)
+	(class unbreakable_space_node):
+	Rename `merge_space()` member function declarations to
+	`did_space_merge()` and demote return type from `int` to `bool`.
+
+	* src/roff/troff/node.cpp
+	(node::did_space_merge)
+	(space_node::did_space_merge)
+	(word_space_node::did_space_merge)
+	(unbreakable_space_node::did_space_merge):
+	Rename `merge_space()` member function definition to
+	`did_space_merge()` and demote return type from `int` to `bool`.
+
+	* src/roff/troff/env.cpp (environment::space_newline)
+	(environment::space): Update call sites.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Boolify and rename member function of `node` class
 	hierarchy to `causes_tprint()`.  This function indicates whether
 	the node requires certain formatter state (roughly, changes to
 	the environment) to be flushed to output before the next node is

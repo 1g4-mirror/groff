@@ -479,7 +479,7 @@ void environment::space_newline()
   width_list *w = new width_list(sw, ssw);
   if (node_list_ends_sentence(line) == 1)
     w->next = new width_list(sw, ssw);
-  if (line != 0 /* nullptr */ && line->merge_space(x, sw, ssw)) {
+  if (line != 0 /* nullptr */ && line->did_space_merge(x, sw, ssw)) {
     width_total += x;
     return;
   }
@@ -507,12 +507,12 @@ void environment::space(hunits space_width, hunits sentence_space_width)
   if (p && p->nspaces() == 1 && p->width() == x
       && node_list_ends_sentence(p->next) == 1) {
     hunits xx = translate_space_to_dummy ? H0 : sentence_space_width;
-    if (p->merge_space(xx, space_width, sentence_space_width)) {
+    if (p->did_space_merge(xx, space_width, sentence_space_width)) {
       *tp += xx;
       return;
     }
   }
-  if (p && p->merge_space(x, space_width, sentence_space_width)) {
+  if (p && p->did_space_merge(x, space_width, sentence_space_width)) {
     *tp += x;
     return;
   }

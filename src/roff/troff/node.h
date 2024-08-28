@@ -74,7 +74,7 @@ struct node {
   virtual hunits left_italic_correction();
   virtual hunits skew();
   virtual int nspaces();
-  virtual int merge_space(hunits, hunits, hunits);
+  virtual bool did_space_merge(hunits, hunits, hunits);
   virtual vunits vertical_width();
   virtual node *last_char_node();
   virtual void vertical_extent(vunits *, vunits *);
@@ -191,7 +191,7 @@ public:
   int nspaces();
   hunits width();
   int discardable();
-  int merge_space(hunits, hunits, hunits);
+  bool did_space_merge(hunits, hunits, hunits);
   void freeze_space();
   void is_escape_colon();
   void spread_space(int *, hunits *);
@@ -237,7 +237,7 @@ public:
   bool is_same_as(node *);
   void asciify(macro *);
   const char *type();
-  int merge_space(hunits, hunits, hunits);
+  bool did_space_merge(hunits, hunits, hunits);
   bool causes_tprint();
   bool is_tag();
 };
@@ -261,7 +261,7 @@ public:
 			      bool /* is_inner */ = false);
   int nbreaks();
   void split(int, node **, node **);
-  int merge_space(hunits, hunits, hunits);
+  bool did_space_merge(hunits, hunits, hunits);
   node *add_self(node *, hyphen_list **);
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
   hyphenation_type get_hyphenation_type();
