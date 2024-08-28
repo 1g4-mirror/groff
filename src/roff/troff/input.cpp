@@ -314,11 +314,11 @@ struct arg_list;
 class input_iterator {
 public:
   input_iterator();
-  input_iterator(int is_div);
+  input_iterator(bool /* is_div */);
   virtual ~input_iterator() {}
   int get(node **);
   friend class input_stack;
-  int is_diversion;
+  bool is_diversion;
   statem *diversion_state;
 protected:
   const unsigned char *ptr;
@@ -327,33 +327,33 @@ protected:
 private:
   virtual int fill(node **);
   virtual int peek();
-  virtual int has_args() { return 0; }
+  virtual bool has_args() { return false; }
   virtual int nargs() { return 0; }
   virtual input_iterator *get_arg(int) { return 0 /* nullptr */; }
   virtual arg_list *get_arg_list() { return 0 /* nullptr */; }
   virtual symbol get_macro_name() { return NULL_SYMBOL; }
-  virtual int space_follows_arg(int) { return 0; }
+  virtual bool space_follows_arg(int) { return false; }
   virtual int get_break_flag() { return 0; }
   virtual bool get_location(bool /* allow_macro */,
 			    const char ** /* filep */,
 			    int * /* linep */) { return false; }
   virtual void backtrace() {}
-  virtual bool set_location(const char *, int) { return 0; }
-  virtual int next_file(FILE *, const char *) { return 0; }
+  virtual bool set_location(const char *, int) { return false; }
+  virtual bool next_file(FILE *, const char *) { return false; }
   virtual void shift(int) {}
-  virtual int is_boundary() {return 0; }
+  virtual int is_boundary() {return 0; } // XXX: tri-valued Boolean
   virtual bool is_file() { return false; }
-  virtual int is_macro() { return 0; }
+  virtual bool is_macro() { return false; }
   virtual void set_att_compat(bool) {}
   virtual bool get_att_compat() { return false; }
 };
 
 input_iterator::input_iterator()
-: is_diversion(0), ptr(0 /* nullptr */), eptr(0 /* nullptr */)
+: is_diversion(false), ptr(0 /* nullptr */), eptr(0 /* nullptr */)
 {
 }
 
-input_iterator::input_iterator(int is_div)
+input_iterator::input_iterator(bool is_div)
 : is_diversion(is_div), ptr(0 /* nullptr */), eptr(0 /* nullptr */)
 {
 }
@@ -387,9 +387,9 @@ class file_iterator : public input_iterator {
   FILE *fp;
   int lineno;
   const char *filename;
-  int popened;
-  int newline_flag;
-  int seen_escape;
+  bool was_popened;
+  bool seen_newline;
+  bool seen_escape;
   enum { BUF_SIZE = 512 };
   unsigned char buf[BUF_SIZE];
   void close();
@@ -402,13 +402,13 @@ public:
 		    int * /* linep */);
   void backtrace();
   bool set_location(const char *, int);
-  int next_file(FILE *, const char *);
+  bool next_file(FILE *, const char *);
   bool is_file() { return true; }
 };
 
 file_iterator::file_iterator(FILE *f, const char *fn, int po)
-: fp(f), lineno(1), filename(fn), popened(po),
-  newline_flag(0), seen_escape(0)
+: fp(f), lineno(1), filename(fn), was_popened(po),
+  seen_newline(false), seen_escape(false)
 {
   if ((font::use_charnames_in_special) && (fn != 0 /* nullptr */)) {
     if (!the_output)
@@ -426,31 +426,31 @@ void file_iterator::close()
 {
   if (fp == stdin)
     clearerr(stdin);
-  else if (popened)
+  else if (was_popened)
     pclose(fp);
   else
     fclose(fp);
 }
 
-int file_iterator::next_file(FILE *f, const char *s)
+bool file_iterator::next_file(FILE *f, const char *s)
 {
   close();
   filename = s;
   fp = f;
   lineno = 1;
-  newline_flag = 0;
-  seen_escape = 0;
-  popened = 0;
+  seen_newline = false;
+  seen_escape = false;
+  was_popened = false;
   ptr = 0 /* nullptr */;
   eptr = 0 /* nullptr */;
-  return 1;
+  return true;
 }
 
 int file_iterator::fill(node **)
 {
-  if (newline_flag)
+  if (seen_newline)
     lineno++;
-  newline_flag = 0;
+  seen_newline = false;
   unsigned char *p = buf;
   ptr = p;
   unsigned char *e = p + BUF_SIZE;
@@ -463,8 +463,8 @@ int file_iterator::fill(node **)
     else {
       *p++ = c;
       if (c == '\n') {
-	seen_escape = 0;
-	newline_flag = 1;
+	seen_escape = false;
+	seen_newline = true;
 	break;
       }
       seen_escape = (c == '\\');
@@ -511,7 +511,8 @@ void file_iterator::backtrace()
   (void) get_location(false /* allow macro */, &f, &n);
   if (program_name)
     fprintf(stderr, "%s: ", program_name);
-  errprint("backtrace: %3 '%1':%2\n", f, n, popened ? "pipe" : "file");
+  errprint("backtrace: %3 '%1':%2\n", f, n,
+	   was_popened ? "pipe" : "file");
 }
 
 bool file_iterator::set_location(const char *f, int ln)
@@ -532,7 +533,7 @@ public:
   static input_iterator *get_arg(int);
   static arg_list *get_arg_list();
   static symbol get_macro_name();
-  static int space_follows_arg(int);
+  static bool space_follows_arg(int);
   static int get_break_flag();
   static int nargs();
   static bool get_location(bool /* allow_macro */,
@@ -761,13 +762,13 @@ symbol input_stack::get_macro_name()
   return NULL_SYMBOL;
 }
 
-int input_stack::space_follows_arg(int i)
+bool input_stack::space_follows_arg(int i)
 {
   input_iterator *p;
   for (p = top; p != 0 /* nullptr */; p = p->next)
     if (p->has_args())
       return p->space_follows_arg(i);
-  return 0;
+  return false;
 }
 
 int input_stack::get_break_flag()
@@ -829,7 +830,9 @@ void input_stack::next_file(FILE *fp, const char *s)
 
 void input_stack::end_file()
 {
-  for (input_iterator **pp = &top; *pp != &nil_iterator; pp = &(*pp)->next)
+  for (input_iterator **pp = &top;
+       *pp != &nil_iterator;
+       pp = &(*pp)->next)
     if ((*pp)->is_file()) {
       input_iterator *tem = *pp;
       check_end_diversion(tem);
@@ -860,7 +863,7 @@ void input_stack::clear()
 void input_stack::pop_macro()
 {
   int nboundaries = 0;
-  int is_macro = 0;
+  bool is_macro = false;
   do {
     if (top->next == &nil_iterator)
       break;
@@ -3648,7 +3651,7 @@ void print_macros()
 class string_iterator : public input_iterator {
   macro mac;
   const char *how_invoked;
-  int newline_flag;
+  bool seen_newline;
   int lineno;
   char_block *bp;
   int count;			// of characters remaining
@@ -3669,12 +3672,13 @@ public:
   int get_break_flag() { return with_break; }
   void set_att_compat(bool b) { att_compat = b; }
   bool get_att_compat() { return att_compat; }
-  int is_diversion();
+  bool is_diversion();
 };
 
-string_iterator::string_iterator(const macro &m, const char *p, symbol s)
-: input_iterator(m.is_a_diversion), mac(m), how_invoked(p), newline_flag(0),
-  lineno(1), nm(s)
+string_iterator::string_iterator(const macro &m, const char *p,
+    symbol s)
+: input_iterator(m.is_a_diversion), mac(m), how_invoked(p),
+  seen_newline(false), lineno(1), nm(s)
 {
   count = mac.len;
   if (count != 0) {
@@ -3695,23 +3699,23 @@ string_iterator::string_iterator()
   bp = 0 /* nullptr */;
   nd = 0 /* nullptr */;
   ptr = eptr = 0 /* nullptr */;
-  newline_flag = 0;
+  seen_newline = false;
   how_invoked = 0 /* nullptr */;
   lineno = 1;
   count = 0;
   with_break = input_stack::get_break_flag();
 }
 
-int string_iterator::is_diversion()
+bool string_iterator::is_diversion()
 {
   return mac.is_diversion();
 }
 
 int string_iterator::fill(node **np)
 {
-  if (newline_flag)
+  if (seen_newline)
     lineno++;
-  newline_flag = 0;
+  seen_newline = false;
   if (count <= 0)
     return EOF;
   const unsigned char *p = eptr;
@@ -3739,7 +3743,7 @@ int string_iterator::fill(node **np)
   while (p < e) {
     unsigned char c = *p;
     if (c == '\n' || c == ESCAPE_NEWLINE) {
-      newline_flag = 1;
+      seen_newline = true;
       p++;
       break;
     }
@@ -3836,15 +3840,15 @@ input_iterator *make_temp_iterator(const char *s)
 
 struct arg_list {
   macro mac;
-  int space_follows;
+  bool space_follows;
   arg_list *next;
-  arg_list(const macro &, int);
+  arg_list(const macro &, bool);
   arg_list(const arg_list *);
   ~arg_list();
 };
 
-arg_list::arg_list(const macro &m, inst s)
-: mac(m), space_follows(s), next(0 /* nullptr */)
+arg_list::arg_list(const macro &m, bool b)
+: mac(m), space_follows(b), next(0 /* nullptr */)
 {
 }
 
@@ -3871,20 +3875,22 @@ class macro_iterator : public string_iterator {
   int argc;
   int with_break;		// whether called as .foo or 'foo
 public:
-  macro_iterator(symbol, macro &, const char * = "macro", int = 0);
+  macro_iterator(symbol, macro &,
+		 const char * /* how_called */ = "macro",
+		 bool /* want_arguments_initialized */ = false);
   macro_iterator();
   ~macro_iterator();
-  int has_args() { return 1; }
+  bool has_args() { return true; }
   input_iterator *get_arg(int);
   arg_list *get_arg_list();
   symbol get_macro_name();
-  int space_follows_arg(int);
+  bool space_follows_arg(int);
   int get_break_flag() { return with_break; }
   int nargs() { return argc; }
   void add_arg(const macro &, int);
   void shift(int);
-  int is_macro() { return 1; }
-  int is_diversion();
+  bool is_macro() { return true; }
+  bool is_diversion();
 };
 
 input_iterator *macro_iterator::get_arg(int i)
@@ -3913,9 +3919,9 @@ symbol macro_iterator::get_macro_name()
   return nm;
 }
 
-int macro_iterator::space_follows_arg(int i)
+bool macro_iterator::space_follows_arg(int i)
 {
-  if (i > 0 && i <= argc) {
+  if ((i > 0) && (i <= argc)) {
     arg_list *p = args;
     for (int j = 1; j < i; j++) {
       assert(p != 0 /* nullptr */);
@@ -3924,7 +3930,7 @@ int macro_iterator::space_follows_arg(int i)
     return p->space_follows;
   }
   else
-    return 0;
+    return false;
 }
 
 void macro_iterator::add_arg(const macro &m, int s)
@@ -4141,12 +4147,13 @@ bool macro::is_empty()
   return (is_empty_macro == true);
 }
 
-macro_iterator::macro_iterator(symbol s, macro &m, const char *how_called,
-			       int init_args)
+macro_iterator::macro_iterator(symbol s, macro &m,
+			       const char *how_called,
+			       bool want_arguments_initialized)
 : string_iterator(m, how_called, s), args(0 /* nullptr */), argc(0),
   with_break(want_break)
 {
-  if (init_args) {
+  if (want_arguments_initialized) {
     arg_list *al = input_stack::get_arg_list();
     if (al) {
       args = new arg_list(al);

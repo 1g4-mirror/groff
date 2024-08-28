@@ -1,5 +1,52 @@
 2024-08-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (class input_iterator)
+	(input_iterator::input_iterator): Boolify.  Demote constructor
+	argument, member variable `is_diversion`, and member functions
+	`has_args`, `space_follows_arg`, `is_macro` `int` arguments or
+	return types from `int` to `bool`.  Return Boolean, not integer,
+	literals from these and from `set_location` and `next_file`
+	member functions, the latter previously (partially) boolified.
+	(class file_iterator): Boolify `seen_escape` member variable.
+	Boolify and rename two others.
+	  `popened` -> `was_popened`
+	  `newline_flag` -> `seen_newline`
+	Demote return type of `next_file` member function from `int` to
+	`bool`.
+	(file_iterator::file_iterator): Update initializer list of
+	constructor accordingly.
+	(file_iterator::close, file_iterator::next_file)
+	(file_iterator::file, file_iterator::backtrace): ...and member
+	function definitions to use new names and type literals.
+	(class input_stack)
+	(input_stack::space_follows_arg):
+	Similarly boolify member function.
+	(input_stack::pop_macro): Boolify local variable `is_macro`.
+	(class string_iterator): Similarly demote type and rename member
+	function.
+	  `newline_flag` -> `seen_newline`
+	(string_iterator::string_iterator): Update initializer list of
+	constructor accordingly.  (And definition of another
+	argumentless constructor.)
+	(string_iterator::fill): ...and member function definition to
+	use new name and type literal.
+	(class string_iterator, string_iterator::is_diversion):
+	Similarly boolify member function.
+	(struct arg_list): Boolfy `space_follows` member variable.
+	(arg_list::arg_list): ...and constructor.  Rename constructor
+	argument from `s` to `b` to reflect its Boolean type.
+	(class macro_iterator)
+	(macro_iterator::space_follows_arg):
+	(macro_iterator::macro_iterator)
+	(macro_iterator::is_diversion): Similarly boolify member
+	functions and use Boolean instead of integer literals.
+	(macro_iterator::macro_iterator): Rename parameter from
+	`init_args` to `want_arguments_initialized`.
+	(macro_iterator::space_follows_arg): Parenthesize complex
+	expression.
+
+2024-08-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (class input_iterator): Boolify
 	`is_file` member function.
 	(class file_iterator): Boolify `is_file` member function and
