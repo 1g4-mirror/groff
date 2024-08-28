@@ -1268,7 +1268,7 @@ public:
   int interpret(macro *);
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
 };
 
@@ -1282,9 +1282,9 @@ const char *non_interpreted_char_node::type()
   return "non_interpreted_char_node";
 }
 
-int non_interpreted_char_node::force_tprint()
+bool non_interpreted_char_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool non_interpreted_char_node::is_tag()
@@ -1813,7 +1813,7 @@ public:
   token_node *get_token_node();
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
 };
 
@@ -1841,9 +1841,9 @@ const char *token_node::type()
   return "token_node";
 }
 
-int token_node::force_tprint()
+bool token_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool token_node::is_tag()
@@ -5621,7 +5621,7 @@ public:
   int ends_sentence();
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
 };
 
@@ -5644,9 +5644,9 @@ const char *non_interpreted_node::type()
   return "non_interpreted_node";
 }
 
-int non_interpreted_node::force_tprint()
+bool non_interpreted_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool non_interpreted_node::is_tag()

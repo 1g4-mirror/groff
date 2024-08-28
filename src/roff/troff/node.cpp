@@ -941,7 +941,7 @@ void troff_output_file::really_print_line(hunits x, vunits y, node *n,
       cur_div_level = n->div_nest_level;
     }
     // Now check whether the state has changed.
-    if ((is_on() || n->force_tprint())
+    if ((is_on() || n->causes_tprint())
 	&& (state.changed(n->state) || n->is_tag() || n->is_special)) {
       flush_tbuf();
       do_motion();
@@ -1913,7 +1913,7 @@ public:
   int character_type();
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
   void dump_node();
 };
@@ -1938,7 +1938,7 @@ public:
   void asciify(macro *);
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
 };
 
@@ -1965,7 +1965,7 @@ public:
   void asciify(macro *);
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
   void vertical_extent(vunits *, vunits *);
 };
@@ -1996,7 +1996,7 @@ public:
   void asciify(macro *);
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
   void dump_node();
 };
@@ -2433,7 +2433,7 @@ public:
   node *copy();
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
   hyphenation_type get_hyphenation_type();
 };
@@ -2457,9 +2457,9 @@ const char *hyphen_inhibitor_node::type()
   return "hyphen_inhibitor_node";
 }
 
-int hyphen_inhibitor_node::force_tprint()
+bool hyphen_inhibitor_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool hyphen_inhibitor_node::is_tag()
@@ -2536,9 +2536,9 @@ node *node::last_char_node()
   return 0;
 }
 
-int node::force_tprint()
+bool node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool node::is_tag()
@@ -2662,7 +2662,7 @@ public:
   hunits skew();
   node *add_self(node *, hyphen_list **);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
 };
 
@@ -2806,7 +2806,7 @@ public:
   tfont *get_tfont();
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
   int get_break_code();
 };
@@ -3244,9 +3244,9 @@ node *space_node::copy()
   return new space_node(n, set, was_escape_colon, col, state, div_nest_level);
 }
 
-int space_node::force_tprint()
+bool space_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool space_node::is_tag()
@@ -3931,9 +3931,9 @@ int special_node::ends_sentence()
   return 2;
 }
 
-int special_node::force_tprint()
+bool special_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool special_node::is_tag()
@@ -4053,7 +4053,7 @@ const char *tag_node::type()
   return "tag_node";
 }
 
-int tag_node::force_tprint()
+bool tag_node::causes_tprint()
 {
   return !delayed;
 }
@@ -4252,7 +4252,7 @@ void suppress_node::tprint(troff_output_file *out)
   } // is_on
 }
 
-int suppress_node::force_tprint()
+bool suppress_node::causes_tprint()
 {
   return is_on;
 }
@@ -4289,7 +4289,7 @@ public:
   tfont *get_tfont();
   bool is_same_as(node *);
   const char *type();
-  int force_tprint();
+  bool causes_tprint();
   bool is_tag();
   void vertical_extent(vunits *, vunits *);
   vunits vertical_width();
@@ -4506,9 +4506,9 @@ node *unbreakable_space_node::copy()
   return new unbreakable_space_node(n, set, col, state, div_nest_level);
 }
 
-int unbreakable_space_node::force_tprint()
+bool unbreakable_space_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool unbreakable_space_node::is_tag()
@@ -4577,9 +4577,9 @@ const char *draw_node::type()
   return "draw_node";
 }
 
-int draw_node::force_tprint()
+bool draw_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool draw_node::is_tag()
@@ -5228,9 +5228,9 @@ const char *extra_size_node::type()
   return "extra_size_node";
 }
 
-int extra_size_node::force_tprint()
+bool extra_size_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool extra_size_node::is_tag()
@@ -5253,9 +5253,9 @@ bool vertical_size_node::set_unformat_flag()
   return false;
 }
 
-int vertical_size_node::force_tprint()
+bool vertical_size_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool vertical_size_node::is_tag()
@@ -5280,9 +5280,9 @@ bool hmotion_node::set_unformat_flag()
   return true;
 }
 
-int hmotion_node::force_tprint()
+bool hmotion_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool hmotion_node::is_tag()
@@ -5315,9 +5315,9 @@ const char *space_char_hmotion_node::type()
   return "space_char_hmotion_node";
 }
 
-int space_char_hmotion_node::force_tprint()
+bool space_char_hmotion_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool space_char_hmotion_node::is_tag()
@@ -5351,9 +5351,9 @@ const char *vmotion_node::type()
   return "vmotion_node";
 }
 
-int vmotion_node::force_tprint()
+bool vmotion_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool vmotion_node::is_tag()
@@ -5372,9 +5372,9 @@ const char *hline_node::type()
   return "hline_node";
 }
 
-int hline_node::force_tprint()
+bool hline_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool hline_node::is_tag()
@@ -5393,9 +5393,9 @@ const char *vline_node::type()
   return "vline_node";
 }
 
-int vline_node::force_tprint()
+bool vline_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool vline_node::is_tag()
@@ -5413,9 +5413,9 @@ const char *dummy_node::type()
   return "dummy_node";
 }
 
-int dummy_node::force_tprint()
+bool dummy_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool dummy_node::is_tag()
@@ -5433,9 +5433,9 @@ const char *transparent_dummy_node::type()
   return "transparent_dummy_node";
 }
 
-int transparent_dummy_node::force_tprint()
+bool transparent_dummy_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool transparent_dummy_node::is_tag()
@@ -5458,9 +5458,9 @@ const char *zero_width_node::type()
   return "zero_width_node";
 }
 
-int zero_width_node::force_tprint()
+bool zero_width_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool zero_width_node::is_tag()
@@ -5479,9 +5479,9 @@ const char *italic_corrected_node::type()
   return "italic_corrected_node";
 }
 
-int italic_corrected_node::force_tprint()
+bool italic_corrected_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool italic_corrected_node::is_tag()
@@ -5551,9 +5551,9 @@ const char *left_italic_corrected_node::type()
   return "left_italic_corrected_node";
 }
 
-int left_italic_corrected_node::force_tprint()
+bool left_italic_corrected_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool left_italic_corrected_node::is_tag()
@@ -5671,9 +5671,9 @@ const char *overstrike_node::type()
   return "overstrike_node";
 }
 
-int overstrike_node::force_tprint()
+bool overstrike_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool overstrike_node::is_tag()
@@ -5705,9 +5705,9 @@ const char *bracket_node::type()
   return "bracket_node";
 }
 
-int bracket_node::force_tprint()
+bool bracket_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool bracket_node::is_tag()
@@ -5726,9 +5726,9 @@ const char *composite_node::type()
   return "composite_node";
 }
 
-int composite_node::force_tprint()
+bool composite_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool composite_node::is_tag()
@@ -5749,9 +5749,9 @@ const char *glyph_node::type()
   return "glyph_node";
 }
 
-int glyph_node::force_tprint()
+bool glyph_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool glyph_node::is_tag()
@@ -5771,9 +5771,9 @@ const char *ligature_node::type()
   return "ligature_node";
 }
 
-int ligature_node::force_tprint()
+bool ligature_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool ligature_node::is_tag()
@@ -5793,9 +5793,9 @@ const char *kern_pair_node::type()
   return "kern_pair_node";
 }
 
-int kern_pair_node::force_tprint()
+bool kern_pair_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool kern_pair_node::is_tag()
@@ -5815,9 +5815,9 @@ const char *dbreak_node::type()
   return "dbreak_node";
 }
 
-int dbreak_node::force_tprint()
+bool dbreak_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool dbreak_node::is_tag()
@@ -5861,9 +5861,9 @@ const char *break_char_node::type()
   return "break_char_node";
 }
 
-int break_char_node::force_tprint()
+bool break_char_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool break_char_node::is_tag()
@@ -5886,9 +5886,9 @@ const char *line_start_node::type()
   return "line_start_node";
 }
 
-int line_start_node::force_tprint()
+bool line_start_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool line_start_node::is_tag()
@@ -5920,9 +5920,9 @@ const char *word_space_node::type()
   return "word_space_node";
 }
 
-int word_space_node::force_tprint()
+bool word_space_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool word_space_node::is_tag()
@@ -5981,9 +5981,9 @@ const char *diverted_space_node::type()
   return "diverted_space_node";
 }
 
-int diverted_space_node::force_tprint()
+bool diverted_space_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool diverted_space_node::is_tag()
@@ -6001,9 +6001,9 @@ const char *diverted_copy_file_node::type()
   return "diverted_copy_file_node";
 }
 
-int diverted_copy_file_node::force_tprint()
+bool diverted_copy_file_node::causes_tprint()
 {
-  return 0;
+  return false;
 }
 
 bool diverted_copy_file_node::is_tag()

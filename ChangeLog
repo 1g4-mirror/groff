@@ -1,5 +1,97 @@
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify and rename member function of `node` class
+	hierarchy to `causes_tprint()`.  This function indicates whether
+	the node requires certain formatter state (roughly, changes to
+	the environment) to be flushed to output before the next node is
+	written ("tprint"ed).
+
+	* src/roff/troff/node.h
+	(struct node)
+	(class line_start_node)
+	(class space_node)
+	(class word_space_node)
+	(class unbreakable_space_node)
+	(class diverted_space_node)
+	(class diverted_copy_file_node)
+	(class extra_size_node)
+	(class vertical_size_node)
+	(class hmotion_node)
+	(class space_char_hmotion_node)
+	(class vmotion_node)
+	(class hline_node)
+	(class vline_node)
+	(class dummy_node)
+	(class transparent_dummy_node)
+	(class zero_width_node)
+	(class left_italic_corrected_node)
+	(class overstrike_node)
+	(class bracket_node)
+	(class special_node)
+	(class suppress_node)
+	(class tag_node)
+	(class draw_node):
+	* src/roff/troff/node.cpp
+	(class glyph_node)
+	(class ligature_node)
+	(class kern_pair_node)
+	(class dbreak_node)
+	(class hyphen_inhibitor_node)
+	(class italic_corrected_node)
+	(class break_char_node)
+	(class composite_node):
+	* src/roff/troff/input.cpp
+	(class non_interpreted_char_node)
+	(class token_node)
+	(class non_interpreted_node):
+	Rename `force_tprint()` member function declarations to
+	`causes_tprint()` and demote return type from `int` to `bool`.
+
+	* src/roff/troff/node.cpp
+	(hyphen_inhibitor_node::causes_tprint)
+	(node::causes_tprint)
+	(space_node::causes_tprint)
+	(special_node::causes_tprint)
+	(tag_node::causes_tprint)
+	(suppress_node::causes_tprint)
+	(unbreakable_space_node::causes_tprint)
+	(draw_node::causes_tprint)
+	(extra_size_node::causes_tprint)
+	(vertical_size_node::causes_tprint)
+	(hmotion_node::causes_tprint)
+	(space_char_hmotion_node::causes_tprint)
+	(vmotion_node::causes_tprint)
+	(hline_node::causes_tprint)
+	(vline_node::causes_tprint)
+	(dummy_node::causes_tprint)
+	(transparent_dummy_node::causes_tprint)
+	(zero_width_node::causes_tprint)
+	(italic_corrected_node::causes_tprint)
+	(left_italic_corrected_node::causes_tprint)
+	(overstrike_node::causes_tprint)
+	(bracket_node::causes_tprint)
+	(composite_node::causes_tprint)
+	(glyph_node::causes_tprint)
+	(ligature_node::causes_tprint)
+	(kern_pair_node::causes_tprint)
+	(dbreak_node::causes_tprint)
+	(break_char_node::causes_tprint)
+	(line_start_node::causes_tprint)
+	(word_space_node::causes_tprint)
+	(diverted_space_node::causes_tprint)
+	(diverted_copy_file_node::causes_tprint):
+	* src/roff/troff/input.cpp
+	(non_interpreted_char_node::causes_tprint)
+	(token_node::causes_tprint)
+	(non_interpreted_node::causes_tprint):
+	Rename `force_tprint()` member function definition to
+	`causes_tprint()` and demote return type from `int` to `bool`.
+
+	* src/roff/troff/node.cpp
+	(troff_output_file::really_print_line): Update call site.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Fix code style nits.
 	(troff_output_file::put_char_width): Parenthesize complex
 	expressions.  Memorization of the ~15-17-level C and C++
