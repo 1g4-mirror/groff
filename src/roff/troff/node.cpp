@@ -790,7 +790,7 @@ class troff_output_file : public real_output_file {
   units vpos;
   units output_vpos;
   units output_hpos;
-  int force_motion;
+  bool must_update_drawing_position;
   int current_size;
   int current_slant;
   int current_height;
@@ -804,7 +804,7 @@ class troff_output_file : public real_output_file {
   char tbuf[TBUF_SIZE];
   int tbuf_len;
   int tbuf_kern;
-  int begun_page;
+  bool has_page_begun;
   int cur_div_level;
   string tag_list;
   void do_motion();
@@ -942,7 +942,7 @@ void troff_output_file::really_print_line(hunits x, vunits y, node *n,
 	&& (state.changed(n->state) || n->is_tag() || n->is_special)) {
       flush_tbuf();
       do_motion();
-      force_motion = 1;
+      must_update_drawing_position = true;
       flush();
       state.flush(fp, n->state, tag_list);
       tag_list = string("");
@@ -952,10 +952,10 @@ void troff_output_file::really_print_line(hunits x, vunits y, node *n,
     n = n->next;
   }
   flush_tbuf();
-  // This ensures that transparent throughput will have a more predictable
-  // position.
+  // Ensure that transparent throughput (.output, \!) has a more
+  // predictable position.
   do_motion();
-  force_motion = 1;
+  must_update_drawing_position = true;
   hpos = 0;
   put('n');
   put(before.to_units());
@@ -983,7 +983,7 @@ inline void troff_output_file::down(vunits n)
 
 void troff_output_file::do_motion()
 {
-  if (force_motion) {
+  if (must_update_drawing_position) {
     put('V');
     put(vpos);
     put('\n');
@@ -1019,7 +1019,7 @@ void troff_output_file::do_motion()
   }
   output_vpos = vpos;
   output_hpos = hpos;
-  force_motion = 0;
+  must_update_drawing_position = false;
 }
 
 void troff_output_file::flush_tbuf()
@@ -1126,7 +1126,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
     if (vpos == output_vpos
 	&& (!gcol || gcol == current_glyph_color)
 	&& (!fcol || fcol == current_fill_color)
-	&& n > 0 && n < 100 && !force_motion) {
+	&& n > 0 && n < 100 && !must_update_drawing_position) {
       put(char(n/10 + '0'));
       put(char(n%10 + '0'));
       put(c);
@@ -1511,7 +1511,7 @@ void troff_output_file::draw(char code, hvpair *point, int npoints,
 void troff_output_file::really_on()
 {
   flush_tbuf();
-  force_motion = 1;
+  must_update_drawing_position = true;
   do_motion();
 }
 
@@ -1535,7 +1535,7 @@ void troff_output_file::really_put_filename(const char *filename, int po)
 void troff_output_file::really_begin_page(int pageno, vunits page_length)
 {
   flush_tbuf();
-  if (begun_page) {
+  if (has_page_begun) {
     if (page_length > V0) {
       put('V');
       put(page_length.to_units());
@@ -1543,7 +1543,7 @@ void troff_output_file::really_begin_page(int pageno, vunits page_length)
     }
   }
   else
-    begun_page = 1;
+    has_page_begun = true;
   current_tfont = 0;
   current_font_number = -1;
   current_size = 0;
@@ -1553,7 +1553,7 @@ void troff_output_file::really_begin_page(int pageno, vunits page_length)
   vpos = 0;
   output_hpos = 0;
   output_vpos = 0;
-  force_motion = 1;
+  must_update_drawing_position = true;
   for (int i = 0; i < nfont_positions; i++)
     font_position[i] = NULL_SYMBOL;
   put('p');
@@ -1577,7 +1577,7 @@ void troff_output_file::really_copy_file(hunits x, vunits y,
       put(char(c));
     fclose(ifp);
   }
-  force_motion = 1;
+  must_update_drawing_position = true;
   current_size = 0;
   current_tfont = 0;
   current_font_number = -1;
@@ -1609,8 +1609,8 @@ void troff_output_file::trailer(vunits page_length)
 
 troff_output_file::troff_output_file()
 : current_slant(0), current_height(0), current_fill_color(0),
-  current_glyph_color(0), nfont_positions(10), tbuf_len(0), begun_page(0),
-  cur_div_level(0)
+  current_glyph_color(0), nfont_positions(10), tbuf_len(0),
+  has_page_begun(false), cur_div_level(0)
 {
   font_position = new symbol[nfont_positions];
   put("x T ");

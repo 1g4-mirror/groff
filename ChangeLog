@@ -1,3 +1,18 @@
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Boolify `troff_output_file` class.
+	Demote member variables from `int` to `bool` and rename them.
+	  `force_motion` -> `must_update_drawing_position`
+	  `begun_page` -> `has_page_begun`
+	(troff_output_file::really_print_line)
+	(troff_output_file::do_motion)
+	(troff_output_file::put_char_width)
+	(troff_output_file::really_on)
+	(troff_output_file::really_begin_page)
+	(troff_output_file::really_copy_file)
+	(troff_output_file::troff_output_file): Update names and assign
+	Boolean, not integer, literals.
+
 2024-08-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (class input_iterator)
