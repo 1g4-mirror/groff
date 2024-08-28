@@ -824,7 +824,9 @@ public:
   void right(hunits);
   void down(vunits);
   void moveto(hunits, vunits);
-  void start_special(tfont *, color *, color *, int = 0);
+  void start_special(tfont * /* tf */,
+		     color * /* gcol */, color * /* fcol */,
+		     bool /* omit_command_prefix */ = false);
   void start_special();
   void special_char(unsigned char c);
   void end_special();
@@ -883,15 +885,16 @@ inline void troff_output_file::put(unsigned int i)
   put_string(ui_to_a(i), fp);
 }
 
-void troff_output_file::start_special(tfont *tf, color *gcol, color *fcol,
-				      int no_init_string)
+void troff_output_file::start_special(tfont *tf, color *gcol,
+				      color *fcol,
+				      bool omit_command_prefix)
 {
   set_font(tf);
   glyph_color(gcol);
   fill_color(fcol);
   flush_tbuf();
   do_motion();
-  if (!no_init_string)
+  if (!omit_command_prefix)
     put("x X ");
 }
 
@@ -3883,8 +3886,8 @@ int node::interpret(macro *)
   return 0;
 }
 
-special_node::special_node(const macro &m, int n)
-: mac(m), no_init_string(n)
+special_node::special_node(const macro &m, bool b)
+: mac(m), lacks_command_prefix(b)
 {
   font_size fs = curenv->get_font_size();
   int char_height = curenv->get_char_height();
@@ -3901,20 +3904,21 @@ special_node::special_node(const macro &m, int n)
 special_node::special_node(const macro &m, tfont *t,
 			   color *gc, color *fc,
 			   statem *s, int divlevel,
-			   int n)
+			   bool b)
 : node(0, s, divlevel), mac(m), tf(t), gcol(gc), fcol(fc),
-  no_init_string(n)
+  lacks_command_prefix(b)
 {
   is_special = 1;
 }
 
 bool special_node::is_same_as(node *n)
 {
-  return mac == ((special_node *)n)->mac
-	 && tf == ((special_node *)n)->tf
-	 && gcol == ((special_node *)n)->gcol
-	 && fcol == ((special_node *)n)->fcol
-	 && no_init_string == ((special_node *)n)->no_init_string;
+  return ((mac == ((special_node *)n)->mac)
+	  && (tf == ((special_node *)n)->tf)
+	  && (gcol == ((special_node *)n)->gcol)
+	  && (fcol == ((special_node *)n)->fcol)
+	  && (lacks_command_prefix
+	      == ((special_node *)n)->lacks_command_prefix));
 }
 
 const char *special_node::type()
@@ -3940,12 +3944,12 @@ bool special_node::is_tag()
 node *special_node::copy()
 {
   return new special_node(mac, tf, gcol, fcol, state, div_nest_level,
-			  no_init_string);
+			  lacks_command_prefix);
 }
 
 void special_node::tprint_start(troff_output_file *out)
 {
-  out->start_special(tf, gcol, fcol, no_init_string);
+  out->start_special(tf, gcol, fcol, lacks_command_prefix);
 }
 
 void special_node::tprint_char(troff_output_file *out, unsigned char c)

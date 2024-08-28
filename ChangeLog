@@ -1,5 +1,27 @@
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class troff_output_file): Boolify
+	final argument to `start_special` member function.
+	(troff_output_file::start_special): Rename argument from
+	`no_init_string` to `omit_command_prefix` and demote it from
+	`int` to `bool`.
+	(special_node::tprint_start): Update call site to use new name.
+
+	* src/roff/troff/node.h (class special_node): Rename member
+	variable from `no_init_string` to `lacks_command_prefix` and
+	demote it from `int` to `bool`.
+	* src/roff/troff/node.cpp (special_node::special_node): Update
+	constructor initialization lists.
+	(special_node::is_same_as): Update to use new name.
+	(special_node::copy): Update constructor call.
+	(special_node::tprint): Rename argument to `start_special` call
+	on `troff_output_file` object: here is where the
+	`lacks_command_prefix` property of the `special_node` becomes an
+	instruction to the `troff_output_file` object to omit that
+	prefix.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Boolify `troff_output_file` class.
 	Demote member variables from `int` to `bool` and rename them.
 	  `force_motion` -> `must_update_drawing_position`

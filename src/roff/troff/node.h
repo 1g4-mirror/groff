@@ -545,14 +545,16 @@ class special_node : public node {
   tfont *tf;
   color *gcol;
   color *fcol;
-  int no_init_string;
+  bool lacks_command_prefix;
   void tprint_start(troff_output_file *);
   void tprint_char(troff_output_file *, unsigned char);
   void tprint_end(troff_output_file *);
 public:
-  special_node(const macro &, int /* n */ = 0);
-  special_node(const macro &, tfont *, color *, color *, statem *, int,
-	       int /* n */ = 0);
+  special_node(const macro & /* m */,
+	       bool /* lacks_command_prefix */ = false);
+  special_node(const macro & /* m */, tfont * /* tf */,
+	       color * /* gcol */, color * /* fcol */, statem * /* s */,
+	       int divlevel, bool /* lacks_command_prefix */ = false);
   node *copy();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
