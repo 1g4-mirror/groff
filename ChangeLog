@@ -1,5 +1,13 @@
 2024-08-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (class input_iterator): Boolify
+	`is_file` member function.
+	(class file_iterator): Boolify `is_file` member function and
+	define in declaration...
+	(file_iterator::is_file): ...instead of separately.
+
+2024-08-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Demote `is_div` argument to `macro` constructor from
 	`int` to `bool`.
 

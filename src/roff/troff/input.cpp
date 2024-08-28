@@ -342,7 +342,7 @@ private:
   virtual int next_file(FILE *, const char *) { return 0; }
   virtual void shift(int) {}
   virtual int is_boundary() {return 0; }
-  virtual int is_file() { return 0; }
+  virtual bool is_file() { return false; }
   virtual int is_macro() { return 0; }
   virtual void set_att_compat(bool) {}
   virtual bool get_att_compat() { return false; }
@@ -403,7 +403,7 @@ public:
   void backtrace();
   bool set_location(const char *, int);
   int next_file(FILE *, const char *);
-  int is_file();
+  bool is_file() { return true; }
 };
 
 file_iterator::file_iterator(FILE *f, const char *fn, int po)
@@ -430,11 +430,6 @@ void file_iterator::close()
     pclose(fp);
   else
     fclose(fp);
-}
-
-int file_iterator::is_file()
-{
-  return 1;
 }
 
 int file_iterator::next_file(FILE *f, const char *s)
