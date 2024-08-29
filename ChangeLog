@@ -82,6 +82,15 @@
 
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Update with respect to Unicode 15.1.0.
+
+	* src/libs/libgroff/uniuni.cpp:
+	* src/utils/afmtodit/afmtodit.tables: Regenerate.
+
+	Fixes <https://savannah.gnu.org/bugs/?64683>.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/make-uniuni: Fix code style nits.  Permit
 	override via environment of `CPP` variable locating C
 	preprocessor program.  Reduce `$0` to its "basename", and
