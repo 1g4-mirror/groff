@@ -82,6 +82,22 @@
 
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/make-uniuni: Fix code style nits.  Permit
+	override via environment of `CPP` variable locating C
+	preprocessor program.  Reduce `$0` to its "basename", and
+	actually use, in the usage message, the variable set aside for
+	that purpose.  Exit with status 2, not 1, on usage error.
+	In generated C++ file:
+	- Drop old-style Emacs file-local variable.
+	- Use variable of type `size_t`, not `unsigned int`, to index
+	  array.
+	- Use libgroff's newfangled `array_length()` template function
+	  to measure arrays.
+	- Annotate why we retain a  C-style type cast.
+	- Add editor aid comments.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/{fallbacks,tty}.tmac: Reorganize.  Move recently added
 	fallbacks for "ascii" device from "fallbacks.tmac" to "tty.tmac"
 	since they are particular to one output device.
