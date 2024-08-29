@@ -96,7 +96,7 @@
 	Rename member functions.
 	`can_break_before()` -> `allows_break_before()`
 	`can_break_after()` -> `allows_break_after()`
-	`transparent()` -> `is_transparent()`
+	`transparent()` -> `is_transparent_to_end_of_sentence()`
 	`ignore_hcodes()` -> `ignores_surrounding_hyphenation_codes()`
 	`prohibit_break_before()` -> `prohibits_break_before()`
 	`prohibit_break_after()` -> `prohibits_break_after()`
@@ -167,7 +167,7 @@
 
 	* src/roff/troff/input.cpp (chop_macro): Clarify diagnostic.
 	Say whether the argument being operated on is a "diversion" or a
-	"macro or string", rather then the vague term "object", which is
+	"macro or string", instead of the vague term "object", which is
 	otherwise little-used in *roff discussions.
 
 2024-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
