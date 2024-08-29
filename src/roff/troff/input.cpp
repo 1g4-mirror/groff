@@ -1017,6 +1017,8 @@ static symbol read_long_escape_parameters(read_mode mode)
   if (buf == abuf) {
     if (i == 0) {
       if (mode != ALLOW_EMPTY)
+	// XXX: `.device \[]` passes through as-is but `\X \[]` doesn't,
+	// landing here.  Implement almost-but-not-quite-copy-mode?
 	copy_mode_error("empty escape sequence argument in copy mode");
       return EMPTY_SYMBOL;
     }
@@ -5701,7 +5703,7 @@ static void encode_special_character_for_device_output(macro *mac)
     sc = ci->get_symbol()->contents();
   }
   else
-    sc = tok.get_char()->get_symbol()->contents();
+    sc = tok.get_char(true /* required */)->get_symbol()->contents();
   if (strcmp("-", sc) == 0)
     mac->append('-');
   else if (strcmp("aq", sc) == 0)

@@ -1,5 +1,12 @@
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): Require a
+	non-empty special character escape sequence argument in _both_
+	paths through the start of the function.
+
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp: Trivially refactor.  Rename and
 	boolify file-scoped variable `vertical_position_traps_flag` to
 	`honor_vertical_position_traps`.  Initialize and assign to it
