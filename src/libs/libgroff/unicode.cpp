@@ -57,6 +57,7 @@ const char *valid_unicode_code_sequence(const char *u, char *errbuf)
       }
       else {
 	assert(0 == "unhandled hexadecimal digit character");
+	return 0 /* nullptr */;
       }
       // biggest Unicode value is U+10FFFF
       if (val > 0x10FFFF) {

@@ -1,3 +1,9 @@
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/unicode.cpp (valid_unicode_code_sequence):
+	Return a null pointer after `assert()` call, in the event
+	someone compiles with `NDEBUG` defined.
+
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.h: Trivially refactor `environment` class.
