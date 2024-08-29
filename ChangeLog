@@ -14,7 +14,7 @@
 	(encode_special_character_for_device_output): Enhance.  When
 	constructing the content of a device control escape sequence
 	{and, in the future, that of a `device` request}, try harder to
-	convert special characters into something meaningful.  Is a
+	convert special characters into something meaningful.  If a
 	special character identifier looks like something other than an
 	attempt at a Unicode special character escape sequence already,
 	try to convert it into one.  Otherwise, write any valid Unicode
@@ -24,7 +24,7 @@
 	* src/roff/groff/tests/\
 	device-control-special-character-handling.sh: Update test
 	expectations.  "\[u1F6C3]" is now correctly passed through, and
-	"\[`a]" correctly coverted to "\[u00E0]".  Shorten test cases a
+	"\[`a]" correctly converted to "\[u00E0]".  Shorten test cases a
 	little.
 
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -277,7 +277,7 @@
 	`int` to `bool`.
 
 	* src/roff/troff/request.h (class macro):
-	* src/roff/troff/input.cpp (macro:macro): Do it.
+	* src/roff/troff/input.cpp (macro::macro): Do it.
 
 2024-08-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
