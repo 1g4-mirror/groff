@@ -1,3 +1,9 @@
+2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/{fallbacks,tty}.tmac: Reorganize.  Move recently added
+	fallbacks for "ascii" device from "fallbacks.tmac" to "tty.tmac"
+	since they are particular to one output device.
+
 2024-08-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Begin fixing Savannah #63074: support construction of
