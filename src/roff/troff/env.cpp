@@ -2001,22 +2001,25 @@ breakpoint *environment::choose_breakpoint()
 	  }
 	  if (best_bp_fits
 	      // Decide whether to use the hyphenated breakpoint.
-	      && (hyphen_line_max < 0
-		  // Only choose the hyphenated breakpoint if it would not
-		  // exceed the maximum number of consecutive hyphenated
-		  // lines.
-		  || hyphen_line_count + 1 <= hyphen_line_max)
-	      && !(adjust_mode == ADJUST_BOTH
+	      && ((hyphen_line_max < 0)
+		  // Only choose the hyphenated breakpoint if it would
+		  // not exceed the maximum number of consecutive
+		  // hyphenated lines.
+		  || (hyphen_line_count + 1 <= hyphen_line_max))
+	      && !((adjust_mode == ADJUST_BOTH)
 		   // Don't choose the hyphenated breakpoint if the line
 		   // can be justified by adding no more than
 		   // hyphenation_space to any word space.
 		   ? (bp->nspaces > 0
-		      && (((target_text_length - bp->width
-			    + (bp->nspaces - 1)*hresolution)/bp->nspaces)
+		      && ((((target_text_length - bp->width)
+			    + ((bp->nspaces - 1) * hresolution)
+			       / bp->nspaces))
 			  <= hyphenation_space))
 		   // Don't choose the hyphenated breakpoint if the line
-		   // is no more than hyphenation_margin short.
-		   : target_text_length - bp->width <= hyphenation_margin)) {
+		   // is no more than hyphenation_margin short of the
+		   // line length.
+		   : ((target_text_length - bp->width)
+		      <= hyphenation_margin))) {
 	    delete bp;
 	    return best_bp;
 	  }

@@ -1,5 +1,10 @@
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::choose_breakpoint): Fix
+	code style nit: parenthesize complex expressions.
+
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (encode_character_for_device_output):
 	In device-independent output, represent ordinary characters that
 	normally map to non-basic Latin code points ('-^`~) in a way
