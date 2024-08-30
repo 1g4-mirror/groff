@@ -5806,7 +5806,22 @@ static void encode_character_for_device_output(macro *mac, const char c)
 	      " output", tok.description());
   }
   else {
-    if (c == escape_char)
+    // We want to represent ordinary characters that normally map to
+    // non-basic Latin code points in a way that is compatible with how
+    // they're typeset, to avoid confusion when these characters are
+    // used in ways that are ultimately visible, as in tag names for PDF
+    // bookmarks, which can appear in a viewer's navigation pane.
+    if ('\'' == c)
+      mac->append_str("\\[u2019]");
+    else if ('-' == c)
+      mac->append_str("\\[u2010]");
+    else if ('^' == c)
+      mac->append_str("\\[u0302]");
+    else if ('`' == c)
+      mac->append_str("\\[u0300]");
+    else if ('~' == c)
+      mac->append_str("\\[u0303]");
+    else if (c == escape_char)
       mac->append('\\');
     else
       mac->append(c);

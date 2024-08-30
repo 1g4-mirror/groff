@@ -1,5 +1,21 @@
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (encode_character_for_device_output):
+	In device-independent output, represent ordinary characters that
+	normally map to non-basic Latin code points ('-^`~) in a way
+	that is compatible with how they're typeset, to avoid confusion
+	when these characters are used in ways that are ultimately
+	visible, as in tag names for PDF bookmarks, which can appear in
+	a viewer's navigation pane.
+
+	* src/roff/groff/tests/\
+	device-control-special-character-handling.sh: Test conversions
+	of basic Latin input characters to Unicode code points.
+
+	Continues fixing Savannah #63074.
+
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/\
 	device-control-special-character-handling.sh:
 	* src/roff/groff/tests/\
