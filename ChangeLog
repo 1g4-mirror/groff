@@ -1,5 +1,17 @@
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Add test of diagnostics for attempts to write invalid
+	things to device-independent output.  We don't generally write
+	tests for invalid or incorrect input, but this particular area
+	has been a sore and poorly understood point for a long time.
+
+	* src/roff/groff/tests/unencodable-things-in-grout.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	Continues fixing Savannah #63074.
+
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp
 	(encode_special_character_for_device_output): Demote diagnostics
 	arising from non-encodable items from errors to warnings in
