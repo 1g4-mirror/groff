@@ -85,8 +85,8 @@ o A new request, `hydefault`, and read-only register, `.hydefault`,
   the previous value; for GNU troff this was not an appropriate value
   for the English hyphenation patterns.  (For example, "alibi" would
   break as "ali-bi" instead of "al-ibi" after this argumentless `hy`
-  invocation.)  With updates to groff's localization files, the
-  foregoing input now works as desired.
+  invocation.)  With updates to groff's localization files accompanying
+  this release, the foregoing input now works as desired.
 
 o A new read-only, string-valued register, `.trap`, interpolates the
   name of the next vertical position trap that will be sprung.
@@ -489,6 +489,7 @@ o If groff programs have their current time overridden by the
   the "system programmer" camp as described in the release notes for
   1.23.0, so it is easier to defend time-zone-invariant output to them.
   In all other cases, the current time remains displayed in local time.
+  Thanks to Colin Watson.
 
 o grog(1) no longer supports the `--ligatures` and `--run` options.
   Simulate the former (which was specific to the "pdf" output device)
