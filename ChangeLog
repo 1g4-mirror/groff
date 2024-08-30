@@ -1,6 +1,17 @@
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): Demote diagnostics
+	arising from non-encodable items from errors to warnings in
+	category "char", since unlike most (all?) errors, GNU troff
+	continues processing the input.  Clarify language to make it
+	clearer what is wrong with the rejected input.
+
+	Continues fixing Savannah #63074.
+
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp
 	(encode_special_character_for_device_output): Improve detection
 	of non-Unicode special character escape sequences.
 

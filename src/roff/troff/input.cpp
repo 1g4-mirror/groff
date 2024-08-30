@@ -5745,16 +5745,16 @@ static void encode_special_character_for_device_output(macro *mac)
 	if (un != 0 /* nullptr */)
 	  strncpy(character, un, UNIBUFSZ);
 	else {
-	  error("special character '%1' is unusable within a device"
-		" control escape sequence", sc);
+	  warning(WARN_CHAR, "special character '%1' is not encodable"
+	       " in device-independent output", sc);
 	  return;
 	}
       }
       else {
 	const char *un = valid_unicode_code_sequence(sc, errbuf);
 	if (0 /* nullptr */ == un) {
-	  error("special character '%1' is unusable within a device"
-		" control escape sequence: %2", sc, errbuf);
+	  warning(WARN_CHAR, "special character '%1' is not encodable"
+	       " in device-independent output: %2", sc, errbuf);
 	  return;
 	}
 	strncpy(character, un, UNIBUFSZ);
@@ -5784,8 +5784,8 @@ static void encode_character_for_device_output(macro *mac, const char c)
     else if (tok.is_special())
       encode_special_character_for_device_output(mac);
     else
-      error("%1 is invalid within device control escape sequence",
-	    tok.description());
+      warning(WARN_CHAR, "%1 is not encodable in device-independent"
+	      " output", tok.description());
   }
   else {
     if (c == escape_char)
