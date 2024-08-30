@@ -1,5 +1,15 @@
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/\
+	device-control-special-character-handling.sh:
+	* src/roff/groff/tests/\
+	device_control_escapes_express_basic_latin.sh: Revise test
+	expectations.
+
+	Continues fixing Savannah #63074.
+
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Add test of diagnostics for attempts to write invalid
 	things to device-independent output.  We don't generally write
 	tests for invalid or incorrect input, but this particular area

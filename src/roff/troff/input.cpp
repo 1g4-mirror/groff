@@ -5706,16 +5706,34 @@ static void encode_special_character_for_device_output(macro *mac)
     sc = tok.get_char(true /* required */)->get_symbol()->contents();
   if (strcmp("-", sc) == 0)
     mac->append('-');
-  else if (strcmp("aq", sc) == 0)
-    mac->append('\'');
   else if (strcmp("dq", sc) == 0)
     mac->append('"');
-  else if (strcmp("ga", sc) == 0)
-    mac->append('`');
-  else if (strcmp("ha", sc) == 0)
-    mac->append('^');
+  else if (strcmp("sh", sc) == 0)
+    mac->append('#');
+  else if (strcmp("Do", sc) == 0)
+    mac->append('$');
+  else if (strcmp("aq", sc) == 0)
+    mac->append('\'');
+  else if (strcmp("sl", sc) == 0)
+    mac->append('/');
+  else if (strcmp("at", sc) == 0)
+    mac->append('@');
+  else if (strcmp("lB", sc) == 0)
+    mac->append('[');
   else if (strcmp("rs", sc) == 0)
     mac->append('\\');
+  else if (strcmp("rB", sc) == 0)
+    mac->append(']');
+  else if (strcmp("ha", sc) == 0)
+    mac->append('^');
+  else if (strcmp("lC", sc) == 0)
+    mac->append('{');
+  else if (strcmp("ba", sc) == 0)
+    mac->append('|');
+  else if (strcmp("or", sc) == 0)
+    mac->append('|');
+  else if (strcmp("rC", sc) == 0)
+    mac->append('}');
   else if (strcmp("ti", sc) == 0)
     mac->append('~');
   else {
