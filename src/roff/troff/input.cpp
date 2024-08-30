@@ -5740,8 +5740,7 @@ static void encode_special_character_for_device_output(macro *mac)
       // special character escape sequence already, try to convert it
       // into one.  Output drivers don't (and shouldn't) know anything
       // about a troff formatter's special character identifiers.
-      if ((strlen(sc) < 3)
-	  || (!csxdigit(sc[1]) && (!csxdigit(sc[2])))) {
+      if ((strlen(sc) < 3) || (sc[0] != 'u')) {
 	const char *un = glyph_name_to_unicode(sc);
 	if (un != 0 /* nullptr */)
 	  strncpy(character, un, UNIBUFSZ);

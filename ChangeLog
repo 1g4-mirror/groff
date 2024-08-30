@@ -1,5 +1,11 @@
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): Improve detection
+	of non-Unicode special character escape sequences.
+
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Reject some nonsense in `\X` arguments.
 
 	* src/roff/troff/input.cpp
