@@ -16594,21 +16594,27 @@ is stripped to allow embedding of leading spaces.
 @ifinfo
 @cindex @code{\@r{<colon>}}, in device control commands
 @end ifinfo
-By contrast, within @code{\X} arguments, the escape sequences @code{\&},
-@code{\)}, @code{\%}, and @code{\:} are ignored; @code{\@key{SPC}} and
-@code{\~} are converted to single space characters; and a self-escaped
-escape character is output as a backslash @code{\}.  So that the basic
-Latin subset of the Unicode character set@footnote{that is, @w{ISO
-646:1991 IRV} (US-@acronym{ASCII})} can be reliably encoded in device
-control commands, seven special character escape sequences (@samp{\-},
-@samp{\[aq]}, @samp{\[dq]}, @samp{\[ga]}, @samp{\[ha]}, @samp{\[rs]},
-and @samp{\[ti]}) are mapped to basic Latin characters; see the
-@cite{groff_char@r{(7)}} man page.  For this transformation, character
-translations and special character definitions are
-ignored.@footnote{They are bypassed because these parameters are not
-rendered as glyphs in the output; instead, they remain abstract
-characters---in a PDF bookmark or a URL, for example.}  The use of any
-other escape sequence in @code{\X} parameters is normally an error.
+By contrast, within @code{\X} arguments, GNU @command{troff} converts
+several ordinary characters that typeset as non-basic Latin code points
+to code points outside that range to avoid confusion when these
+characters are used in ways that are ultimately visible, as in tag names
+for PDF bookmarks, which can appear in a viewer's navigation pane.
+These ordinary characters are @samp{'}, @samp{-}, @samp{^}, @samp{`},
+and @samp{~}; others are written as-is.
+
+Special characters that typeset as Unicode basic Latin characters are
+translated to basic Latin characters accordingly.  For this
+transformation, character translations and definitions are ignored.
+
+So that any Unicode code point can be represented in device extension
+commands, for example in an author's name in document metadata or as a
+usefully named bookmark or hyperlink anchor, GNU @command{troff} maps
+other special characters to Unicode special character notation.
+@xref{Using Symbols}.
+
+Special characters without a Unicode representation, and escape
+sequences that do not interpolate a sequence of ordinary and/or special
+characters, produce warnings in category @samp{char}.
 
 @kindex use_charnames_in_special
 @cindex @file{DESC} file, and @code{use_charnames_in_special} keyword
@@ -17327,8 +17333,9 @@ circumstances.
 @table @samp
 @item char
 @itemx 1
-No mounted font defines a glyph for the requested character.  This
-category is enabled by default.
+No mounted font defines a glyph for the requested character, or input
+could not be encoded for device-independent output.  This category is
+enabled by default.
 
 @item number
 @itemx 2

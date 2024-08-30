@@ -5528,43 +5528,47 @@ Write
 .I contents
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
-Within
-.IR anything ,
-the escape sequences
-.BR \[rs]& ,
-.BR \[rs]) ,
-.BR \[rs]% ,
-and
-.B \[rs]:
-are ignored;
-.BI \[rs] space
-and
-.B \[rs]\[ti]
-are converted to single space characters;
-and
-.B \[rs]\[rs]
-has its escape character stripped.
+GNU
+.I troff \" GNU
+converts several ordinary characters that typeset as non-basic Latin
+code points to code points outside that range
+to avoid confusion when these characters are used in ways that are
+ultimately visible,
+as in tag names for PDF bookmarks,
+which can appear in a viewer's navigation pane.
 .
-So that the basic Latin subset of the Unicode character
-set can be reliably encoded in
-.I anything,
-the special character escape sequences
-.BR \[rs]\- ,
-.BR \[rs][aq] ,
-.BR \[rs][dq] ,
-.BR \[rs][ga] ,
-.BR \[rs][ha] ,
-.BR \[rs][rs] ,
+These ordinary characters are
+.RB \[lq]\| \[aq] \|\[rq],
+.RB \[lq]\| \- \|\[rq],
+.RB \[lq]\| \[ha] \|\[rq],
+.RB \[lq]\| \[ga] \|\[rq],
 and
-.B \[rs][ti]
-are mapped to basic Latin characters;
-see
-.MR groff_char @MAN7EXT@ .
+.RB \[lq]\| \[ti] \|\[rq];
+others are written as-is.
+.
+.
+.IP
+Special characters that typeset as Unicode basic Latin characters
+are translated to basic Latin characters accordingly.
 .
 For this transformation,
-character translations and special character definitions are ignored.
+character translations and definitions are ignored.
+.
+So that any Unicode code point can be represented in device extension
+commands,
+for example in an author's name in document metadata
+or as a usefully named bookmark or hyperlink anchor,
+GNU
+.I troff \" GNU
+maps other special characters to Unicode special character notation.
+.
+Special characters without a Unicode representation,
+and escape sequences that do not interpolate a sequence
+of ordinary and/or special characters,
+produce warnings in category
+.RB \[lq] char \[rq].
 .
 .TP
 .ESC Y n
