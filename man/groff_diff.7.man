@@ -2691,34 +2691,6 @@ If any argument is invalid,
 reports an error and stops reading them.
 .
 .
-.IP
-For automatic hyphenation to work,
-hyphenation codes must be set up.
-.
-At startup,
-.I groff
-assigns hyphenation codes to the letters \[lq]a\[en]z\[rq]
-(mapped to themselves),
-to the letters \[lq]A\[en]Z\[rq]
-(mapped to \[lq]a\[en]z\[rq]),
-and zero to all other characters.
-.
-Normally,
-hyphenation patterns contain only lowercase letters which should be
-applied regardless of case.
-.
-In other words,
-they assume that the words \[lq]ABBOT\[rq] and \[lq]Abbot\[rq] should be
-hyphenated exactly as \[lq]abbot\[rq] is.
-.
-.B hcode
-extends this principle to letters outside the Unicode basic Latin
-alphabet;
-without it,
-words containing such letters won't be hyphenated properly even if the
-corresponding hyphenation patterns contain them.
-.
-.
 .TP
 .BR .hla\~ [\c
 .IR lang ]
