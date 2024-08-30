@@ -5732,37 +5732,37 @@ static void encode_special_character_for_device_output(macro *mac)
       }
     }
     else {
-	char errbuf[ERRBUFSZ];
-	char character[UNIBUFSZ + 1 /* '\0' */];
-	(void) memset(errbuf, '\0', ERRBUFSZ);
-	(void) memset(character, '\0', UNIBUFSZ);
-	// If looks like something other than an attempt at a Unicode
-	// special character escape sequence already, try to convert it
-	// into one.  Output drivers don't (and shouldn't) know anything
-	// about a troff formatter's special character identifiers.
-	if ((strlen(sc) < 3)
-	    || (!csxdigit(sc[1]) && (!csxdigit(sc[2])))) {
-	  const char *un = glyph_name_to_unicode(sc);
-	  if (un != 0 /* nullptr */)
-	    strncpy(character, un, UNIBUFSZ);
-	  else {
-	    error("special character '%1' is unusable within a device"
-		  " control escape sequence", sc);
-	    return;
-	  }
-	}
-	else {
-	  const char *un = valid_unicode_code_sequence(sc, errbuf);
-	  if (0 /* nullptr */ == un) {
-	    error("special character '%1' is unusable within a device"
-		  " control escape sequence: %2", sc, errbuf);
-	    return;
-	  }
+      char errbuf[ERRBUFSZ];
+      char character[UNIBUFSZ + 1 /* '\0' */];
+      (void) memset(errbuf, '\0', ERRBUFSZ);
+      (void) memset(character, '\0', UNIBUFSZ);
+      // If looks like something other than an attempt at a Unicode
+      // special character escape sequence already, try to convert it
+      // into one.  Output drivers don't (and shouldn't) know anything
+      // about a troff formatter's special character identifiers.
+      if ((strlen(sc) < 3)
+	  || (!csxdigit(sc[1]) && (!csxdigit(sc[2])))) {
+	const char *un = glyph_name_to_unicode(sc);
+	if (un != 0 /* nullptr */)
 	  strncpy(character, un, UNIBUFSZ);
+	else {
+	  error("special character '%1' is unusable within a device"
+		" control escape sequence", sc);
+	  return;
 	}
-	mac->append_str("\\[u");
-	mac->append_str(character);
-	mac->append(']');
+      }
+      else {
+	const char *un = valid_unicode_code_sequence(sc, errbuf);
+	if (0 /* nullptr */ == un) {
+	  error("special character '%1' is unusable within a device"
+		" control escape sequence: %2", sc, errbuf);
+	  return;
+	}
+	strncpy(character, un, UNIBUFSZ);
+      }
+      mac->append_str("\\[u");
+      mac->append_str(character);
+      mac->append(']');
     }
   }
 }
