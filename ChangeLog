@@ -1,3 +1,7 @@
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (usage): Sync language with troff(1).
+
 2024-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/{fallbacks,tty}.tmac: Reorganize.  Move recently added
