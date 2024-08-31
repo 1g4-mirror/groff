@@ -5823,12 +5823,15 @@ static node *do_device_control() // \X
     unsigned char c;
     if (tok.is_space())
       c = ' ';
-    else if (tok.is_tab())
-      c = '\t';
-    else if (tok.is_leader())
-      c = '\001';
-    else if (tok.is_backspace())
-      c = '\b';
+    // TODO: Stop silently ignoring these when we have a string
+    // iterator for users and can externalize "sanitization" operations.
+    // See <https://savannah.gnu.org/bugs/?62264>.
+    else if (tok.is_hyphen_indicator())
+      continue;
+    else if (tok.is_dummy())
+      continue;
+    else if (tok.is_zero_width_break())
+      continue;
     else
       c = tok.ch();
     encode_character_for_device_output(&mac, c);

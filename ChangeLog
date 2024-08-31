@@ -1,5 +1,18 @@
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Reject some nonsense in `\X` arguments.
+
+	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): Reject tab,
+	leader, and backspace characters in a `\X` device extension
+	escape sequence argument.  Silently ignore hyphen indicator
+	`\%`, dummy character `\&`, and zero-width break `\:` escape
+	sequences in such arguments.
+
+	Continues fixing Savannah #63074.
+
+2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/unicode.cpp (valid_unicode_code_sequence):
 	Tighten wording of error diagnostic.
 
