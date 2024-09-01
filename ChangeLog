@@ -1,5 +1,12 @@
 2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (family_change): Ignore `fam` request
+	if in nroff mode.
+	* src/roff/troff/node.cpp (embolden_font): Ignore `bd` request
+	if in nroff mode.
+
+2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (asciify_macro, unformat_macro):
 	(warnscale_request, translate, translate_no_transparent)
 	(translate_input): Check for mandatory arguments to each of

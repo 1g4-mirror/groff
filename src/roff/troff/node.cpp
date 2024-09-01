@@ -6624,45 +6624,49 @@ hunits env_narrow_space_width(environment *env)
 
 static void embolden_font()
 {
+  if (!(has_arg())) {
+    warning(WARN_MISSING, "emboldening request expects arguments");
+    skip_line();
+    return;
+  }
   if (in_nroff_mode) {
     skip_line();
     return;
   }
   font_lookup_info finfo;
-  if (!(has_arg()))
-    warning(WARN_MISSING, "font name or position expected in"
-	    " emboldening request");
-  else if (!has_font(&finfo))
+  if (!has_font(&finfo)) {
     font_lookup_error(finfo, "for emboldening");
-  else {
-    int n = finfo.position;
-    if (has_arg()) {
-      if (tok.is_usable_as_delimiter()) {
-	font_lookup_info finfo2;
-	if (!has_font(&finfo2))
-	  font_lookup_error(finfo2, "for conditional emboldening");
-	else {
-	  int f = finfo2.position;
-	  units offset;
-	  if (has_arg()
-	      && read_measurement(&offset, 'u') && offset >= 1)
-	    font_table[f]->set_conditional_bold(n, hunits(offset - 1));
-	  else
-	    font_table[f]->conditional_unbold(n);
-	}
-      }
-      else {
-	// A numeric second argument must be an emboldening amount.
-	units offset;
-	if (read_measurement(&offset, 'u') && offset >= 1)
-	  font_table[n]->set_bold(hunits(offset - 1));
-	else
-	  font_table[n]->unbold();
-      }
-    }
-    else
-      font_table[n]->unbold();
+    skip_line();
+    return;
   }
+  int n = finfo.position;
+  if (has_arg()) {
+    if (tok.is_usable_as_delimiter()) {
+      font_lookup_info finfo2;
+      if (!has_font(&finfo2)) {
+	font_lookup_error(finfo2, "for conditional emboldening");
+	skip_line();
+	return;
+      }
+      int f = finfo2.position;
+      units offset;
+      if (has_arg()
+	  && read_measurement(&offset, 'u') && offset >= 1)
+	font_table[f]->set_conditional_bold(n, hunits(offset - 1));
+      else
+	font_table[f]->conditional_unbold(n);
+    }
+    else {
+      // A numeric second argument must be an emboldening amount.
+      units offset;
+      if (read_measurement(&offset, 'u') && offset >= 1)
+	font_table[n]->set_bold(hunits(offset - 1));
+      else
+	font_table[n]->unbold();
+    }
+  }
+  else
+    font_table[n]->unbold();
   skip_line();
 }
 

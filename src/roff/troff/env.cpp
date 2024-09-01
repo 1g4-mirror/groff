@@ -1299,6 +1299,10 @@ static void select_font()
 
 void family_change()
 {
+  if (in_nroff_mode) {
+    skip_line();
+    return;
+  }
   symbol s = get_name();
   curenv->set_family(s);
   skip_line();
