@@ -5159,11 +5159,17 @@ void length_request()
 
 void asciify_macro()
 {
-  symbol s = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "diversion asciification request expects a"
+	    " diversion identifier as argument");
+    skip_line();
+    return;
+  }
+  symbol s = get_name();
   if (!s.is_null()) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
-    if (!m)
+    if (0 /* nullptr */ == m)
       error("cannot asciify request '%1'", s.contents());
     else {
       macro am;
@@ -5186,7 +5192,13 @@ void asciify_macro()
 
 void unformat_macro()
 {
-  symbol s = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "diversion unformatting request expects a"
+	    " diversion identifier as argument");
+    skip_line();
+    return;
+  }
+  symbol s = get_name();
   if (!s.is_null()) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
@@ -7310,25 +7322,29 @@ void write_macro_request()
 
 void warnscale_request()
 {
-  if (has_arg()) {
-    char c = tok.ch();
-    if (c == 'u')
-      warn_scale = 1.0;
-    else if (c == 'i')
-      warn_scale = (double) units_per_inch;
-    else if (c == 'c')
-      warn_scale = (double) units_per_inch / 2.54;
-    else if (c == 'p')
-      warn_scale = (double) units_per_inch / 72.0;
-    else if (c == 'P')
-      warn_scale = (double) units_per_inch / 6.0;
-    else {
-      warning(WARN_SCALE,
-	      "scaling unit '%1' invalid; using 'i' instead", c);
-      c = 'i';
-    }
-    warn_scaling_unit = c;
+  if (!has_arg()) {
+    warning(WARN_MISSING, "warning scaling unit configuration request"
+	    " expects a scaling unit argument");
+    skip_line();
+    return;
   }
+  char c = tok.ch();
+  if (c == 'u')
+    warn_scale = 1.0;
+  else if (c == 'i')
+    warn_scale = (double) units_per_inch;
+  else if (c == 'c')
+    warn_scale = (double) units_per_inch / 2.54;
+  else if (c == 'p')
+    warn_scale = (double) units_per_inch / 72.0;
+  else if (c == 'P')
+    warn_scale = (double) units_per_inch / 6.0;
+  else {
+    warning(WARN_SCALE,
+	    "scaling unit '%1' invalid; using 'i' instead", c);
+    c = 'i';
+  }
+  warn_scaling_unit = c;
   skip_line();
 }
 
@@ -7441,17 +7457,35 @@ static void do_translate(int translate_transparent, int translate_input)
 
 void translate()
 {
-  do_translate(1, 0);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "character translation request expects"
+	    " sequence of character pairs as argument");
+    skip_line();
+    return;
+  }
+  do_translate(1 /* transparent */, 0 /* input */);
 }
 
 void translate_no_transparent()
 {
-  do_translate(0, 0);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "character non-diversion translation request"
+	    " expects sequence of character pairs as argument");
+    skip_line();
+    return;
+  }
+  do_translate(0 /* transparent */, 0 /* input */);
 }
 
 void translate_input()
 {
-  do_translate(1, 1);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "character non-asciification translation"
+	    " request expects sequence of character pairs as argument");
+    skip_line();
+    return;
+  }
+  do_translate(1 /* transparent */, 1 /* input */);
 }
 
 static void set_character_flags()

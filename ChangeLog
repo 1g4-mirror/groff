@@ -1,5 +1,14 @@
 2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (asciify_macro, unformat_macro):
+	(warnscale_request, translate, translate_no_transparent)
+	(translate_input): Check for mandatory arguments to each of
+	these requests (`asciify`, `unformat`, `warnscale`, `tr`,
+	`trnt`, and `trin`), and throw warning in category "missing" if
+	they are lacking.
+
+2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (title):
 	* src/roff/troff/input.cpp (copy_file, vjustify [0])
 	(transparent_file): Throw warning in category "missing" and
