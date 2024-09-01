@@ -2557,6 +2557,12 @@ static void break_with_adjustment()
 
 void title()
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "title line request expects a delimited"
+	    " argument");
+    skip_line();
+    return;
+  }
   if (curdiv == topdiv && topdiv->before_first_page) {
     handle_initial_title();
     return;

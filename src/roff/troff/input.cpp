@@ -8165,6 +8165,12 @@ void system_request()
 
 void copy_file()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "file throughput request expects a file name"
+	    " as argument");
+    skip_line();
+    return;
+  }
   if (curdiv == topdiv && topdiv->before_first_page) {
     handle_initial_request(COPY_FILE_REQUEST);
     return;
@@ -8183,6 +8189,12 @@ void copy_file()
 
 void vjustify()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "vertical adjustment request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   if (curdiv == topdiv && topdiv->before_first_page) {
     handle_initial_request(VJUSTIFY_REQUEST);
     return;
@@ -8197,6 +8209,12 @@ void vjustify()
 
 void transparent_file()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "transparent file throughput request expects"
+	    " a file name as argument");
+    skip_line();
+    return;
+  }
   if (curdiv == topdiv && topdiv->before_first_page) {
     handle_initial_request(TRANSPARENT_FILE_REQUEST);
     return;

@@ -1,5 +1,13 @@
 2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (title):
+	* src/roff/troff/input.cpp (copy_file, vjustify [0])
+	(transparent_file): Throw warning in category "missing" and
+	ignore the request if given no arguments, instead of starting
+	the document and producing device-independent output.
+
+2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (has_arg): Improve and slightly
 	optimize; return `false` immediately if the current token is a
 	newline.  This is more responsive when running interactively,
