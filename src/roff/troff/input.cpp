@@ -1894,6 +1894,8 @@ void token::skip()
 // Specify `want_peek` if request reads the next argument in copy mode.
 bool has_arg(bool want_peek)
 {
+  if (tok.is_newline())
+    return false;
   if (want_peek) {
     int c;
     for (;;) {
