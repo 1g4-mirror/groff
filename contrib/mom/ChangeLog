@@ -1,3 +1,12 @@
+2024-09-01
+
+	* om.tmac: version 2.6_d; incorporates changes to gropdf/pdfpic
+	that permit inclusion of images in formats other than pdf into
+	PDF documents.
+
+	The tarball on mom's download page will remain pinned at
+	2.6_c pending release of groff 1.24.
+
 2024-08-26
 
 	* om.tmac: Fix first line of columns after first falling one
