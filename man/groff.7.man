@@ -3101,6 +3101,12 @@ Restore escape character saved with
 Save the escape character.
 .
 .TPx
+.REQ .el
+Interpolate a newline if the conditional expression of the corresponding
+.request .ie
+request was false.
+.
+.TPx
 .REQ .el anything
 Interpret
 .I anything
@@ -3469,6 +3475,15 @@ to each inter-word space
 .scaleindicator m ).
 .
 .TPx
+.REQ .ie cond-expr
+Interpolate a newline if
+.I cond-expr
+is true,
+otherwise skip to a corresponding
+.request .el
+request.
+.
+.TPx
 .REQ .ie "cond-expr anything"
 If
 .I cond-expr
@@ -3479,6 +3494,12 @@ as if it were an input line,
 otherwise skip to a corresponding
 .request .el
 request.
+.
+.TPx
+.REQ .if cond-expr
+Interpolate a newline if
+.I cond-expr
+is true.
 .
 .TPx
 .REQ .if "cond-expr anything"
@@ -3805,6 +3826,10 @@ If
 .IR n =0,
 cancel suppression.
 .\" XXX: negative values accepted; check AT&T troff
+.
+.TPx
+.REQ .nop
+Interpolate a newline.
 .
 .TPx
 .REQ .nop anything
@@ -4695,6 +4720,12 @@ as page location trap at
 (default scaling unit\~\c
 .scaleindicator v ),
 removing any visible trap already there.
+.
+.TPx
+.REQ .while cond-expr
+Interpolate newlines unless and until
+.I cond-expr
+evaluates false.
 .
 .TPx
 .REQ .while "cond-expr anything"
