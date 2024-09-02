@@ -6294,7 +6294,7 @@ static void associate_style_with_font_position()
     else {
       if (!has_arg())
 	warning(WARN_MISSING, "abstract style configuration request"
-		" expects a second argument");
+		" expects a style name as second argument");
       else {
 	symbol internal_name = get_name(true /* required */);
 	if (!internal_name.is_null())
