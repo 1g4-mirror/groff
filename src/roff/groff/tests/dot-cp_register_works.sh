@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020 Free Software Foundation, Inc.
+# Copyright (C) 2020-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -20,7 +20,15 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
-DOC='.pl 1v
+fail=
+
+wail () {
+  echo ...FAILED >&2
+  fail=YES
+}
+
+input='.
+.pl 1v
 A
 .do if 1 \n[.cp] \" Get initial compatibility state (depends on -C).
 B
@@ -37,12 +45,27 @@ E
 .cp 0
 F
 .if !\n[.C] \n[.cp] \" Outside of .do context, should return -1.
-'
+.'
 
-set -e
+# Expected:
+#
+# A 0 B 0 C 1 D 0 E 1 F 0
+# A 1 B 1 C 1 D 0 E 1 F 0
 
-printf "%s" "$DOC" | "$groff" -Tascii \
-    | grep -x "A 0 B 0 C 1 D 0 E 1 F -1"
+output=$(printf "%s" "$input" | "$groff" -T ascii)
+echo "$output"
 
-printf "%s" "$DOC" | "$groff" -C -Tascii \
-    | grep -x "A 1 B 1 C 1 D 0 E 1 F -1"
+echo "checking value of '.cp' when not started in compatibility mode" \
+  >&2
+echo "$output" | grep -Fqx "A 0 B 0 C 1 D 0 E 1 F -1" || wail
+
+output=$(printf "%s" "$input" | "$groff" -C -T ascii)
+echo "$output"
+
+echo "checking value of '.cp' when started in compatibility mode" \
+  >&2
+echo "$output" | grep -Fqx "A 1 B 1 C 1 D 0 E 1 F -1" || wail
+
+test -z "$fail"
+
+# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
