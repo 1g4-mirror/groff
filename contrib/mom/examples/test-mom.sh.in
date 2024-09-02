@@ -48,6 +48,15 @@ do
     fi
 done
 
+# At least two different implementations of pdfimages exist, poppler and
+# xpdfreader.com.  The latter uses a slightly different input and output
+# syntax; detect and cope with it.
+image_root=
+if pdfimages -v 2>&1 | grep -q xpdfreader
+then
+  image_root=1
+fi
+
 # $1: PDF file
 # $2: expected number of pages
 check_number_pages()
@@ -62,16 +71,17 @@ check_number_pages()
 }
 
 # $1: PDF file
+# $2: expected number of images
 check_has_images()
 {
     echo "Checking whether $1 has images"
-    image_list=$(pdfimages -list "$1")
+    image_list=$(pdfimages -list "$1" $image_root)
     echo "$image_list"
     # Strip header out of poppler pdfimages output.
     image_count=$(echo "$image_list" | sed -n '1,/^---/d;p' | wc -l)
-    if [ "$image_count" -ne 2 ]
+    if [ "$image_count" -ne "$2" ]
     then
-        echo "...FAILED: expected 2 images, found $image_count"
+        echo "...FAILED: expected $2 images, found $image_count"
         ret=1
     fi
 }
@@ -94,8 +104,8 @@ check_number_pages "$examplesdir/typesetting.pdf" 3
 check_number_pages "$examplesdir/copyright-chapter.pdf" 5
 check_number_pages "$examplesdir/copyright-default.pdf" 5
 
-check_has_images "$examplesdir/typesetting.pdf"
-check_has_images "$examplesdir/slide-demo.pdf"
+check_has_images "$examplesdir/typesetting.pdf" 2
+check_has_images "$examplesdir/slide-demo.pdf" 2
 
 exit $ret
 
