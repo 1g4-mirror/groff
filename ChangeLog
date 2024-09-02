@@ -1,3 +1,11 @@
+2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Regression-test Savannah #61100.
+
+	* src/roff/groff/tests/\
+	double-do-request-does-not-raise-assertion.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Rename test scripts to better fit recent conventions.
