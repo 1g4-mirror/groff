@@ -111,7 +111,7 @@ output=$(printf '%s\n' "$input" | "$groff" -T ps -Z 2> /dev/null \
   | grep '^x X')
 echo "$output"
 
-echo "checking X escape sequence, conversions from basic Latin..." >&2
+echo "checking X escape sequence, conversions from basic Latin" >&2
 echo "$output" \
   | grep -Fqx 'x X bogus6: \[u2019]\[u2010]\[u0302]\[u0300]\[u0303]' \
   || wail
