@@ -3110,6 +3110,10 @@ corresponding
 request was false.
 .
 .TPx
+.REQ .em
+Unset end-of-input macro.
+.
+.TPx
 .REQ .em mac
 Call macro
 .I mac
@@ -3600,7 +3604,6 @@ expression
 .REQ .lf n
 Set number of next input line to
 .IR n .
-.\" XXX: negative values accepted; check AT&T troff
 .
 .TPx
 .REQ .lf "n file-name"
@@ -3608,6 +3611,11 @@ Set number of next input line to
 .I n
 and report input file name as
 .IR file-name .
+.
+.TPx
+.REQ .lg
+Enable ligature mode
+.BR 1 .
 .
 .TPx
 .REQ .lg m
@@ -4090,8 +4098,16 @@ or
 request.
 .
 .TPx
-.REQ .rd prompt
-Read insertion.
+.REQ .rd
+Read insertion from standard input stream,
+ringing terminal bell as prompt.
+.
+.TPx
+.REQ .rd message
+Read insertion from standard input stream,
+writing
+.I message
+to standard error stream as prompt.
 .
 .TPx
 .REQ .return
@@ -4416,6 +4432,10 @@ Unsafe request;
 disabled by default.
 .
 .TPx
+.REQ .ta
+Clear tab stops.
+.
+.TPx
 .REQ .ta "n1 n2 \fR\&.\|.\|.\&\fP n\fRn\fP \f[B]T\f[] r1 r2 \
 \fR\&.\|.\|.\&\fP r\fRn\fP"
 Set tabs at positions
@@ -4492,11 +4512,20 @@ Enable track kerning for
 Format three-part title.
 .
 .TPx
+.REQ .tm
+Write a newline to the standard error stream.
+.
+.TPx
 .REQ .tm message
 Write
 .I message,
 followed by a newline,
 to the standard error stream.
+.
+.TPx
+.REQ .tm1
+As
+.request .tm .
 .
 .TPx
 .REQ .tm1 message
@@ -4505,6 +4534,10 @@ As
 but recognizes and strips a leading neutral double quote,
 allowing embedded leading spaces in
 .IR message .
+.
+.TPx
+.REQ .tmc
+No operation.
 .
 .TPx
 .REQ .tmc message
