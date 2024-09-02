@@ -1,5 +1,20 @@
 2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Update input token pointer appropriately when certain
+	requests requiring arguments are invalidly invoked without them.
+
+	* src/roff/troff/env.cpp (override_sizes):
+	* src/roff/troff/input.cpp (while_request, pipe_output)
+	(system_request): Check for arguments: if none are present,
+	throw warning in category "missing" and skip the remainder of
+	the input line.
+	(pipe_output, system_request): Add some assertions for
+	paranoia's sake.
+
+	Fixes <https://savannah.gnu.org/bugs/?66151>.
+
+2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: The `kern` request now interprets arguments with
 	negative values as instructions to disable the corresponding
 	feature, using the *roff integer-to-Boolean conversion idiom

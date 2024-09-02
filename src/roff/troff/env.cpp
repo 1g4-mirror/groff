@@ -1325,6 +1325,12 @@ void point_size()
 
 void override_sizes()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "available font sizes override request"
+	    " expects at least one argument");
+    skip_line();
+    return;
+  }
   int n = 16;
   int *sizes = new int[n]; // C++03: new int[n]();
   (void) memset(sizes, 0, (n * sizeof(int)));

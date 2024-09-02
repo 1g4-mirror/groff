@@ -1890,7 +1890,10 @@ void token::skip()
     next();
 }
 
-// Specify `want_peek` if request reads the next argument in copy mode.
+// Specify `want_peek` if request reads the next argument in copy mode,
+// or otherwise must interpret it specially, as when reading a
+// conditional expression (`if`, `ie`, `while`), or expecting a
+// delimited argument (`tl`).
 bool has_arg(bool want_peek)
 {
   if (tok.is_newline())
@@ -6334,7 +6337,11 @@ static bool want_loop_break = false;
 
 static void while_request()
 {
-  // We can't use `has_arg()` here.  XXX: Figure out why.
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "while loop request expects arguments");
+    skip_line();
+    return;
+  }
   macro mac;
   bool is_char_escaped = false;
   int level = 0;
@@ -8164,6 +8171,12 @@ char *read_string()
 
 void pipe_output()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "device-independent output piping request"
+	    " expects a system command as argument");
+    skip_line();
+    return;
+  }
   if (!want_unsafe_requests) {
     error("'pi' request is not allowed in safer mode");
     skip_line();
@@ -8175,6 +8188,8 @@ void pipe_output()
     }
     else {
       char *pc = read_string();
+      // This shouldn't happen thanks to `has_arg()` above.
+      assert(pc != 0 /* nullptr */);
       if (0 /* nullptr */ == pc)
 	error("cannot apply pipe request to empty command");
       // Are we adding to an existing pipeline?
@@ -8200,12 +8215,20 @@ static int system_status;
 
 void system_request()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "system command execution request expects a"
+	    " system command as argument");
+    skip_line();
+    return;
+  }
   if (!want_unsafe_requests) {
     error("'sy' request is not allowed in safer mode");
     skip_line();
   }
   else {
     char *command = read_string();
+    // This shouldn't happen thanks to `has_arg()` above.
+    assert(command != 0 /* nullptr */);
     if (0 /* nullptr */ == command)
       error("empty command");
     else {
