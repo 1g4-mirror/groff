@@ -4260,8 +4260,8 @@ void hyphenate(hyphen_list *h, unsigned flags)
 {
   if (!current_language)
     return;
-  while (h) {
-    while (h && (0 == h->hyphenation_code))
+  while (h != 0 /* nullptr */) {
+    while ((h != 0 /* nullptr */) && (0 == h->hyphenation_code))
       h = h->next;
     int len = 0;
     // Locate hyphenable points within a (subset of) an input word.

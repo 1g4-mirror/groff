@@ -1,5 +1,11 @@
 2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (hyphenate): Explicitly compare
+	variable of pointer type to null pointer constant instead of
+	letting it pun down to a Boolean.
+
+2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (family_change): Ignore `fam` request
 	if in nroff mode.
 	* src/roff/troff/node.cpp (embolden_font): Ignore `bd` request
