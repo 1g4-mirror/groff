@@ -1,5 +1,17 @@
 2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_request): Fix assertion failure.
+	Validate presence of arguments before further operating.
+
+	Fixes:
+
+	$ echo '.do' | ./build/test-groff
+	troff: ../src/roff/troff/input.cpp:9050: request_or_macro*
+	lookup_request(symbol): Assertion `!nm.is_null()' failed.
+	.../groff: error: troff: Aborted (core dumped)
+
+2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (hyphenate): Explicitly compare
 	variable of pointer type to null pointer constant instead of
 	letting it pun down to a Boolean.

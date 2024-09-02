@@ -2901,6 +2901,12 @@ static void trapping_blank_line()
 
 void do_request()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "compatibility mode interpretation request"
+	    " expects a request or macro as argument");
+    skip_line();
+    return;
+  }
   assert(do_old_want_att_compat == -1);
   do_old_want_att_compat = want_att_compat;
   want_att_compat = false;
