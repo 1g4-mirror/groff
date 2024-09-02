@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2022 Free Software Foundation, Inc.
+# Copyright (C) 2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -33,8 +33,12 @@ input=$(
   printf 'foo \\- \\[%%0]\\fIgroff\n';
 )
 
-output=$(printf "%s\n" "$input" | "$groff" -man -mec -Tdvi -z 2>&1)
-echo "$output"
+# Verify that this command produced no diagnostics.
+
+output=$(printf "%s\n" "$input" | "$groff" -m an -m ec -T dvi -z 2>&1 \
+    | grep -v ': debug:')
+test -n "$output" && echo "$output"
+
 test -z "$output"
 
 # vim:set ai et sw=4 ts=4 tw=72:
