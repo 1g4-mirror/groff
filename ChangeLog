@@ -1,3 +1,12 @@
+2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): Fix off-by-one
+	error in C-style string handling, which led to truncation of
+	composite Unicode special character sequence in some cases.
+	Fixes problem introduced by me in commit c8332c5c1a, 25 August.
+	Thanks to Deri James for the report.
+
 2024-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::choose_breakpoint): Fix

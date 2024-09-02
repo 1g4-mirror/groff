@@ -5751,7 +5751,8 @@ static void encode_special_character_for_device_output(macro *mac)
     }
     else {
       char errbuf[ERRBUFSZ];
-      char character[UNIBUFSZ + 1 /* '\0' */];
+      const size_t unibufsz = UNIBUFSZ + 1 /* '\0' */;
+      char character[unibufsz];
       (void) memset(errbuf, '\0', ERRBUFSZ);
       (void) memset(character, '\0', UNIBUFSZ);
       // If looks like something other than an attempt at a Unicode
@@ -5761,7 +5762,7 @@ static void encode_special_character_for_device_output(macro *mac)
       if ((strlen(sc) < 3) || (sc[0] != 'u')) {
 	const char *un = glyph_name_to_unicode(sc);
 	if (un != 0 /* nullptr */)
-	  strncpy(character, un, UNIBUFSZ);
+	  strncpy(character, un, unibufsz);
 	else {
 	  warning(WARN_CHAR, "special character '%1' is not encodable"
 	       " in device-independent output", sc);
@@ -5775,7 +5776,7 @@ static void encode_special_character_for_device_output(macro *mac)
 	       " in device-independent output: %2", sc, errbuf);
 	  return;
 	}
-	strncpy(character, un, UNIBUFSZ);
+	strncpy(character, un, unibufsz);
       }
       mac->append_str("\\[u");
       mac->append_str(character);
