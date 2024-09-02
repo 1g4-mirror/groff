@@ -93,8 +93,8 @@ struct special_font_list {
 };
 
 special_font_list *global_special_fonts;
-static int global_ligature_mode = 1;
-static int global_kern_mode = 1;
+static int global_ligature_mode = 1; // three-valued Boolean :-|
+static bool global_kern_mode = true;
 
 class track_kerning_function {
   int non_zero;
@@ -6792,9 +6792,9 @@ static void set_kerning_mode()
 {
   int k;
   if (has_arg() && get_integer(&k))
-    global_kern_mode = k != 0;
+    global_kern_mode = (k > 0);
   else
-    global_kern_mode = 1;
+    global_kern_mode = true;
   skip_line();
 }
 
@@ -6859,9 +6859,9 @@ void init_node_requests()
   register_dictionary.define(".fp",
 			     new next_available_font_position_reg);
   register_dictionary.define(".kern",
-			     new readonly_register(&global_kern_mode));
+      new readonly_boolean_register(&global_kern_mode));
   register_dictionary.define(".lg",
-			     new readonly_register(&global_ligature_mode));
+      new readonly_register(&global_ligature_mode));
   register_dictionary.define(".P", new printing_reg);
   soft_hyphen_char = get_charinfo(HYPHEN_SYMBOL);
 }

@@ -340,7 +340,7 @@ private:
   virtual bool set_location(const char *, int) { return false; }
   virtual bool next_file(FILE *, const char *) { return false; }
   virtual void shift(int) {}
-  virtual int is_boundary() {return 0; } // XXX: tri-valued Boolean
+  virtual int is_boundary() {return 0; } // three-valued Boolean :-|
   virtual bool is_file() { return false; }
   virtual bool is_macro() { return false; }
   virtual void set_att_compat(bool) {}

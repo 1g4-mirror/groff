@@ -1,5 +1,28 @@
 2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: The `kern` request now interprets arguments with
+	negative values as instructions to disable the corresponding
+	feature, using the *roff integer-to-Boolean conversion idiom
+	instead of the C/C++ one.  Thus, if you invoke this request with
+	a register interpolation, the outcome agrees with an `if` test
+	of the register's value.
+
+	* src/roff/troff/node.cpp: Demote type of global
+	`global_kern_mode` from `int` to `bool`.
+	(set_kerning_mode): Assign value to `global_kern_mode` using
+	*roff integer-to-Boolean conversion idiom.  When no argument is
+	present, assign using Boolean, not integer, literal.
+	(init_node_requests): Back `.kern` register with an object of
+	class `readonly_boolean_register` instead of
+	`readonly_register`.
+
+	* doc/groff.texi.in (Ligatures and Kerning):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Document it.
+
+2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Prevent nested use of `do` requests from causing an
 	assertion failure.
 

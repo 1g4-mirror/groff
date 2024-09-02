@@ -11776,10 +11776,11 @@ Monospaced (typewriter-like) fonts and terminals don't use kerning.
 @cindex activating kerning (@code{kern})
 @cindex kerning, activating (@code{kern})
 @cindex kerning enabled register (@code{.kern})
-Switch kerning on or off.  If the parameter is non-zero or missing,
-enable pairwise kerning, otherwise disable it.  The read-only register
-@code{.kern} is set to@tie{}1 if pairwise kerning is enabled,
-0@tie{}otherwise.
+Enable or disable pairwise kerning of glyphs in the environment per
+@var{b}.  It is enabled by default, and if @var{b} is omitted.
+
+The read-only register @code{.kern} interpolates@tie{}1 if pairwise
+kerning is enabled, 0@tie{}otherwise.
 
 @cindex dummy character (@code{\&}), effect on kerning
 @cindex character, dummy (@code{\&}), effect on kerning

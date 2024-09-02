@@ -3581,12 +3581,10 @@ escape sequence are not counted.
 Enable pairwise kerning.
 .
 .TPx
-.REQ .kern n
-If
-.I n
-is zero,
-disable pairwise kerning,
-otherwise enable it.
+.REQ .kern b
+Enable or disable pairwise kerning
+per Boolean expression
+.IR b .
 .
 .TPx
 .REQ .lc

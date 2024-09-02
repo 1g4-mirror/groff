@@ -3043,13 +3043,16 @@ escape sequence are not applied to the line count.
 .
 .
 .TP
-.BI .kern\~ n
-If
-.I n
-is non-zero or missing,
-enable pairwise kerning
-(the default),
-otherwise disable it.
+.BR .kern\~ [\c
+.IR b ]
+Enable or disable pairwise kerning of glyphs in the environment per
+Boolean expression
+.IR b .
+.
+It is enabled by default,
+and if
+.I b
+is omitted.
 .
 .
 .TP

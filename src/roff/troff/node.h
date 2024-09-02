@@ -600,7 +600,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
-  int ends_sentence(); // tri-state
+  int ends_sentence(); // three-valued Boolean :-|
 };
 
 struct hvpair {

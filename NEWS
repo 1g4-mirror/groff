@@ -42,12 +42,12 @@ o GNU troff no longer accepts nonpositive page lengths.  Attempting to
 o GNU troff no longer accepts a newline as a delimiter for the
   parameterized escape sequences `\A`, `\b`, `\o`, `\w`, `\X`, and `\Z`.
 
-o The `color`, `cp`, `linetabs`, and `vpt` requests now interpret
-  arguments with negative values as instructions to disable the
-  corresponding feature, using the *roff integer-to-Boolean conversion
-  idiom instead of the C/C++ one.  Thus, if you invoke these requests
-  with a register interpolation as an argument, the outcome agrees with
-  an `if` test of the register's value.
+o The `color`, `cp`, `kern`, `linetabs`, and `vpt` requests now
+  interpret arguments with negative values as instructions to disable
+  the corresponding feature, using the *roff integer-to-Boolean
+  conversion idiom instead of the C/C++ one.  Thus, if you invoke these
+  requests with a register interpolation as an argument, the outcome
+  agrees with an `if` test of the register's value.
 
 o GNU troff now implements saturating rather than wrapping integer
   arithmetic.  Where before overflow would cause an error diagnostic,
