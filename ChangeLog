@@ -1,3 +1,16 @@
+2024-09-02  Sven Schober <sv3sch@gmail.com>
+
+	[man]: Handle discrepant `pdf{images,totext}`.
+
+	There are at least two different implementation variants for
+	pdfimages and pdftotext out there: poppler's and
+	xpdfreader.com's.
+
+	* tmac/tests/an_UR-works.sh: Cope with minute syntax differences
+	between these implementations in test case.
+
+	Fixes <https://savannah.gnu.org/bugs/?66155> (1/2).
+
 2024-09-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::next)
