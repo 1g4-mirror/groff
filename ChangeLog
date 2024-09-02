@@ -47,8 +47,9 @@
 	(encode_special_character_for_device_output): Demote diagnostics
 	arising from non-encodable items from errors to warnings in
 	category "char", since unlike most (all?) errors, GNU troff
-	continues processing the input.  Clarify language to make it
-	clearer what is wrong with the rejected input.
+	continues processing input on the control line or within the
+	escape sequence argument.  Clarify language to make it clearer
+	what is wrong with the rejected input.
 
 	Continues fixing Savannah #63074.
 
