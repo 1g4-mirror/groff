@@ -106,7 +106,6 @@ static symbol end_of_input_macro_name;
 static symbol blank_line_macro_name;
 static symbol leading_spaces_macro_name;
 static bool want_att_compat = false;
-static int do_old_want_att_compat = -1;	// for .do request
 bool want_abstract_output = false;
 bool want_output_suppressed = false;
 bool is_writing_html = false;
@@ -2899,6 +2898,8 @@ static void trapping_blank_line()
     blank_line();
 }
 
+std::stack<bool> want_att_compat_stack;
+
 void do_request()
 {
   if (!has_arg()) {
@@ -2907,16 +2908,16 @@ void do_request()
     skip_line();
     return;
   }
-  assert(do_old_want_att_compat == -1);
-  do_old_want_att_compat = want_att_compat;
+  want_att_compat_stack.push(want_att_compat);
   want_att_compat = false;
   symbol nm = get_name();
   if (nm.is_null())
     skip_line();
   else
     interpolate_macro(nm, true /* don't want next token */);
-  want_att_compat = do_old_want_att_compat;
-  do_old_want_att_compat = -1;
+  assert(!want_att_compat_stack.empty());
+  want_att_compat = want_att_compat_stack.top();
+  want_att_compat_stack.pop();
   request_or_macro *p = lookup_request(nm);
   macro *m = p->to_macro();
   if (m)
@@ -8058,6 +8059,17 @@ const char *break_flag_reg::get_string()
   return i_to_a(input_stack::get_break_flag());
 }
 
+class enclosing_want_att_compat_reg : public reg {
+public:
+  const char *get_string();
+};
+
+const char *enclosing_want_att_compat_reg::get_string()
+{
+  return i_to_a(want_att_compat_stack.empty() ? 0
+		: want_att_compat_stack.top());
+}
+
 class readonly_text_register : public reg {
   const char *s;
 public:
@@ -9007,7 +9019,7 @@ void init_input_requests()
   register_dictionary.define(".$", new nargs_reg);
   register_dictionary.define(".br", new break_flag_reg);
   register_dictionary.define(".C", new readonly_boolean_register(&want_att_compat));
-  register_dictionary.define(".cp", new readonly_register(&do_old_want_att_compat));
+  register_dictionary.define(".cp", new enclosing_want_att_compat_reg);
   register_dictionary.define(".O", new variable_reg(&suppression_level));
   register_dictionary.define(".c", new lineno_reg);
   register_dictionary.define(".color", new readonly_boolean_register(&want_color_output));

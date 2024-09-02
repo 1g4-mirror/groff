@@ -57,14 +57,14 @@ echo "$output"
 
 echo "checking value of '.cp' when not started in compatibility mode" \
   >&2
-echo "$output" | grep -Fqx "A 0 B 0 C 1 D 0 E 1 F -1" || wail
+echo "$output" | grep -Fqx "A 0 B 0 C 1 D 0 E 1 F 0" || wail
 
 output=$(printf "%s" "$input" | "$groff" -C -T ascii)
 echo "$output"
 
 echo "checking value of '.cp' when started in compatibility mode" \
   >&2
-echo "$output" | grep -Fqx "A 1 B 1 C 1 D 0 E 1 F -1" || wail
+echo "$output" | grep -Fqx "A 1 B 1 C 1 D 0 E 1 F 0" || wail
 
 test -z "$fail"
 

@@ -1,3 +1,33 @@
+2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Prevent nested use of `do` requests from causing an
+	assertion failure.
+
+	* src/roff/troff/input.cpp: Improve handling of nested
+	selections of compatibility mode.  Use a global STL stack of
+	`bool`, `want_att_compat_stack`, to manage them.  Drop global
+	`int` `do_old_want_att_compat` with its less-useful-than-hoped
+	"-1" value to signal an outermost "scope".
+	(do_request): Drop dubious `assert()`ion.  Push the value of
+	`want_att_compat` onto the stack before invoking/calling the
+	named request/macro, and pop it afterwards.
+	(class enclosing_want_att_compat_reg): Add new class to handle
+	dynamic construction of `.cp` register value.  I modeled the
+	approach on an idiom heavily used in "env.cpp", where read-only
+	registers are not modeled as accessors of C++ globals, because
+	they interpolate per-environment state.
+	(enclosing_want_att_compat_reg::get_string): Member function of
+	new class constructs `.cp` register value by peeking at the top
+	of `want_att_compat_stack`.
+	(init_input_requests): Wire up `.cp` register to an object of
+	`enclosing_want_att_compat_reg` class instead of now-dead
+	`do_old_want_att_compat` global.
+
+	Fixes <https://savannah.gnu.org/bugs/?66110>.  Problem
+	introduced by me when introducing `.cp` register in commit
+	6a37bb5f00, 17 April 2020.  Thanks to Bjarni Ingi Gislason for
+	suggesting the direction a minimal reproducer could take.
+
 2024-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Regression-test Savannah #61100.
