@@ -1,5 +1,26 @@
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Didja ever notice that `pnr` produces a lot of output,
+	and it isn't sorted?  The `pnr` request now supports dumping
+	only of registers specified as arguments.
+
+	* src/roff/troff/reg.h (look_up_register): Add second argument,
+	`suppress_creation`, with default `false` value, in declaration.
+	* src/roff/troff/reg.cpp (look_up_register): Skip emission of
+	warning and register definition on lookup of nonexistent
+	register if `suppress_creation` is true.
+	(dump_register): New function takes over the work, formerly in
+	`dump_register_request()`, of writing to stderr.
+	(dump_register_request): Handle arguments, treating each as a
+	register identifier and dumping it.  Otherwise behave as before.
+
+	* doc/groff.texi.in (Debugging):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Document it.
+
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (dump_register_request): Report the
 	interpolation format of each register at a further tab stop.
 

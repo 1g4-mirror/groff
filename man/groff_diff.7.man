@@ -3293,11 +3293,16 @@ The list is empty if there are none.
 .
 .
 .TP
-.B .pnr
-Report the names,
-contents,
-and assigned formats
-of all defined registers to the standard error stream.
+.BR .pnr \~[\c
+.IR reg \~.\|.\|.]
+Report the name,
+value,
+and assigned format of each register
+.IR reg ,
+or,
+without arguments,
+those of all defined registers,
+to the standard error stream.
 .
 .
 .TP

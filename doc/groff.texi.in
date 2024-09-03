@@ -17171,11 +17171,12 @@ Report, to the standard error stream, the names of all defined macros,
 strings, and diversions with their sizes in bytes.
 @endDefreq
 
-@Defreq {pnr, }
+@Defreq {pnr, [@Var{reg} @r{@dots{}}]}
 @cindex dumping registers (@code{pnr})
 @cindex registers, dumping (@code{pnr})
-Report the names, contents, and assigned formats of all defined
-registers to the standard error stream.
+Report the name, value, and assigned format of each register @var{reg},
+or, without arguments, those of all defined registers, to the standard
+error stream.
 @endDefreq
 
 @Defreq {ptr, }

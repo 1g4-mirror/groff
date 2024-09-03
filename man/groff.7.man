@@ -4042,6 +4042,14 @@ and assigned formats
 of all defined registers to the standard error stream.
 .
 .TPx
+.REQ .pnr "reg \fR\&.\|.\|.\&\fP"
+Report the name,
+value,
+and assigned format of each register
+.I reg
+to the standard error stream.
+.
+.TPx
 .REQ .po
 Change to previous page offset.
 .

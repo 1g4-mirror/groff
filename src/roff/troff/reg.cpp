@@ -398,10 +398,10 @@ void set_register(symbol nm, units n)
   r->set_value(n);
 }
 
-reg *look_up_register(symbol nm)
+reg *look_up_register(symbol nm, bool suppress_creation)
 {
   reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
-  if (0 /* nullptr */ == r) {
+  if ((0 /* nullptr */ == r) && !suppress_creation) {
     warning(WARN_REG, "register '%1' not defined", nm.contents());
     r = new number_reg;
     register_dictionary.define(nm, r);
@@ -504,21 +504,36 @@ void rename_register_request()
   skip_line();
 }
 
+static void dump_register(symbol *id, reg *r)
+{
+  errprint("%1\t", id->contents());
+  const char *value = r->get_string();
+  if (value)
+    errprint("%1", value);
+  const char *format = r->get_format();
+  if (format)
+    errprint("\t\%1", format);
+  errprint("\n");
+}
+
 void dump_register_request()
 {
-  object_dictionary_iterator iter(register_dictionary);
   reg *r;
   symbol identifier;
-  while (iter.get(&identifier, reinterpret_cast<object **>(&r))) {
-    assert(!identifier.is_null());
-    errprint("%1\t", identifier.contents());
-    const char *value = r->get_string();
-    if (value)
-      errprint("%1", value);
-    const char *format = r->get_format();
-    if (format)
-      errprint("\t\%1", format);
-    errprint("\n");
+  if (has_arg()) {
+    do {
+      identifier = get_name();
+      r = look_up_register(identifier, true /* suppress creation */);
+      if (r != 0 /* nullptr */)
+	dump_register(&identifier, r);
+    } while (has_arg());
+  }
+  else {
+    object_dictionary_iterator iter(register_dictionary);
+    while (iter.get(&identifier, reinterpret_cast<object **>(&r))) {
+      assert(!identifier.is_null());
+      dump_register(&identifier, r);
+    }
   }
   fflush(stderr);
   skip_line();

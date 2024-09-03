@@ -119,6 +119,10 @@ o A new request, `pline`, reports to the standard error stream the list
   of output nodes (an internal data structure) corresponding to
   the pending output line.  The list is empty if no such nodes exist.
 
+o The `pnr` request now accepts arguments; each is treated as
+  identifying a register, and its properties reported to the standard
+  error stream.
+
 o The `hla` request, when invoked with no arguments, now clears the
   hyphenation language, disabling automatic hyphenation.
 
