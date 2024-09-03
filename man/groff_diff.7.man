@@ -1092,50 +1092,51 @@ is interpreted even in copy mode.
 .\" requests, move this discussion into a dedicated subsection above.
 .TP
 .BI \[rs]X\[aq] contents \[aq]
-GNU
-.I troff \" GNU
-transforms the argument to the device control escape sequence to avoid
-leaking to device-independent output data that are unrepresentable in
-that format,
-and to address the problem of expressing character code points outside
-of the Unicode basic Latin range in an output file format that restricts
-itself to that range.
-.
-(See subsection \[lq]Basic Latin\[rq] of
-.MR groff_char @MAN7EXT@ .)
-.
-The typesetting of such characters is a problem long-solved in
-device-independent
-.I troff \" generic
-by the
-.RB \[lq] C \[rq]
-command;
-see
-.MR groff_out @MAN5EXT@ .
-.
-The expression of such characters in other contexts,
-such as device extension commands,
-was not addressed by the same design.
-.
-Where possible,
-GNU
-.I troff \" GNU
-represents such characters in device-independent
-but non-typesetting contexts using its notation
-for Unicode special character escape sequences;
-see subsection \[lq]Special character escape forms\[rq] of
+The
+.I groff
+special character repertoire is unknown to output drivers outside of
+glyphs named in a device's fonts,
+and even then they may not possess complete coverage of the names
+documented in
 .MR groff_char @MAN7EXT@ .
 .
+Further,
+escape sequences that produce horizontal or vertical motions,
+hyphenation breaks,
+or that are dummy characters may appear in strings
+or be converted to nodes,
+particularly in diversions. \" (@pxref{Gtroff Internals})
 .
-.IP
+These are not representable when interpolated directly into
+device-independent output,
+as might be done when writing out tag names for PDF bookmarks,
+which can appear in a viewer's navigation pane.
+.
+.
+.\" XXX: Force paragraph spacing here.  I know--it's terrible.  And
+.\" unnecessary once we get this giant discussion moved to its own
+.\" (sub)section.
+.sp \n[PD]u
+.\"IP
+So that documents or macro packages do not have to laboriously
+\[lq]sanitize\[rq] strings destined for interpolation
+in device control commands,
+this escape sequence
+.\" XXX: and soon other things
+performs certain transformations on its argument.
+.
+For these transformations,
+character translations and definitions are ignored.
+.
+.
+.sp \n[PD]u
+.\"IP
 GNU
 .I troff \" GNU
 converts several ordinary characters that typeset as non-basic Latin
-code points to code points outside that range
-to avoid confusion when these characters are used in ways that are
-ultimately visible,
-as in tag names for PDF bookmarks,
-which can appear in a viewer's navigation pane.
+code points to code points outside that range so that they are used
+consistently whether they are formatted as glyphs or used in a device
+control command argument.
 .
 These ordinary characters are
 .RB \[lq]\| \[aq] \|\[rq],
@@ -1147,12 +1148,10 @@ and
 others are written as-is.
 .
 .
-.IP
+.sp \n[PD]u
+.\"IP
 Special characters that typeset as Unicode basic Latin characters
 are translated to basic Latin characters accordingly.
-.
-For this transformation,
-character translations and definitions are ignored.
 .
 So that any Unicode code point can be represented in device extension
 commands,

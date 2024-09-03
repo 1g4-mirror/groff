@@ -5601,14 +5601,53 @@ to
 .I @g@troff
 output as a device extension command.
 .
+The
+.I groff
+special character repertoire is unknown to output drivers outside of
+glyphs named in a device's fonts,
+and even then they may not possess complete coverage of the names
+documented in
+.MR groff_char @MAN7EXT@ .
+.
+Further,
+escape sequences that produce horizontal or vertical motions,
+hyphenation breaks,
+or that are dummy characters may appear in strings
+or be converted to nodes,
+particularly in diversions. \" (@pxref{Gtroff Internals})
+.
+These are not representable when interpolated directly into
+device-independent output,
+as might be done when writing out tag names for PDF bookmarks,
+which can appear in a viewer's navigation pane.
+.
+.
+.\" XXX: Force paragraph spacing here.  I know--it's terrible.  And
+.\" unnecessary once we get this giant discussion moved to its own
+.\" (sub)section.
+.if t .sp 0.4v
+.if n .sp 1v
+.\"IP
+So that documents or macro packages do not have to laboriously
+\[lq]sanitize\[rq] strings destined for interpolation
+in device control commands,
+this escape sequence
+.\" XXX: and soon other things
+performs certain transformations on its argument.
+.
+For these transformations,
+character translations and definitions are ignored.
+.
+.
+.if t .sp 0.4v
+.if n .sp 1v
+.\"IP
 GNU
 .I troff \" GNU
 converts several ordinary characters that typeset as non-basic Latin
-code points to code points outside that range
-to avoid confusion when these characters are used in ways that are
-ultimately visible,
-as in tag names for PDF bookmarks,
-which can appear in a viewer's navigation pane.
+code points to code points outside that range so that they are used
+consistently whether they are formatted as glyphs or used in a device
+control command argument.
 .
 These ordinary characters are
 .RB \[lq]\| \[aq] \|\[rq],
@@ -5620,12 +5659,11 @@ and
 others are written as-is.
 .
 .
-.IP
+.if t .sp 0.4v
+.if n .sp 1v
+.\"IP
 Special characters that typeset as Unicode basic Latin characters
 are translated to basic Latin characters accordingly.
-.
-For this transformation,
-character translations and definitions are ignored.
 .
 So that any Unicode code point can be represented in device extension
 commands,
