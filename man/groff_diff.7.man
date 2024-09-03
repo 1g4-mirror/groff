@@ -4174,7 +4174,7 @@ Their names often correspond to the requests that affect them.
 .
 .TP 13n \" "\n[.height]" + 2n
 .B \[rs]n[.br]
-Within a macro call,
+Within a macro definition,
 interpolate\~1
 if the macro is called with the \[lq]normal\[rq] control character
 (\[lq].\[rq] by default),
@@ -4187,7 +4187,9 @@ Using this register outside of a macro definition makes no sense.
 .
 .TP
 .B \[rs]n[.C]
-Interpolate 1\~if compatibility mode is in effect,
+Interpolate 1\~if AT&T
+.I troff \" AT&T
+compatibility mode is in effect,
 0\~otherwise.
 .
 See
@@ -4203,7 +4205,8 @@ It is positive if the glyph extends below the baseline.
 .
 .TP
 .B \[rs]n[.ce]
-Interpolate number of input lines remaining to be centered.
+Interpolate number of input lines remaining to be centered
+in the environment.
 .
 .
 .TP
@@ -4215,7 +4218,7 @@ It is positive if the glyph extends above the baseline.
 .
 .TP
 .B \[rs]n[.color]
-Interpolate 1\~if colors are enabled,
+Interpolate 1\~if color output is enabled,
 0\~otherwise.
 .
 .
@@ -4249,14 +4252,14 @@ This is a string-valued register.
 .
 .TP
 .B \[rs]n[.fam]
-Interpolate name of default font family.
+Interpolate name of the environment's default font family.
 .
 This is a string-valued register.
 .
 .
 .TP
 .B \[rs]n[.fn]
-Interpolate resolved name of the selected font.
+Interpolate resolved name of the font selected in the environment.
 .
 This is a string-valued register.
 .
@@ -4281,7 +4284,7 @@ is the formatter.
 .
 .TP
 .B \[rs]n[.height]
-Interpolate font height.
+Interpolate height of the environment's selected font.
 .
 See
 .BR \[rs]H .
@@ -4328,34 +4331,36 @@ Interpolate hyphenation space adjustment threshold of the environment.
 .
 .TP
 .B \[rs]n[.in]
-Interpolate indentation amount applicable to the pending output line.
+Interpolate indentation amount applicable to the output line pending
+in the environment.
 .
 .
 .TP
 .B \[rs]n[.int]
-Interpolate\~1 if the most recently formatted text was interrupted
-(ended with
+Interpolate\~1 if the text most recently formatted in the environment
+was \[lq]interrupted\[rq] or continued with
 .BR \[rs]c ),
 0\~otherwise.
 .
 .
 .TP
 .B \[rs]n[.it]
-Interpolate the count of lines remaining in any pending input trap.
+Interpolate the count of lines remaining in the environment's
+pending input trap.
 .
 .
 .TP
 .B \[rs]n[.itc]
-Interpolate\~1 if the pending input trap honors the output line
-continuation escape sequence
+Interpolate\~1 if the environment's pending input trap honors
+the output line continuation escape sequence
 .RB ( \[rs]c ),
 0\~otherwise.
 .
 .
 .TP
 .B \[rs]n[.itm]
-Interpolate the name of the macro associated with the pending input
-trap.
+Interpolate the name of the macro associated with the environment's
+pending input trap.
 .
 This is a string-valued register.
 .
@@ -4373,18 +4378,19 @@ Interpolate ligature mode.
 .
 .TP
 .B \[rs]n[.linetabs]
-Interpolate\~1 if line-tabs mode is enabled,
+Interpolate\~1 if line-tabs mode is enabled the environment,
 0\~otherwise.
 .
 .
 .TP
 .B \[rs]n[.ll]
-Interpolate line length applicable to the pending output line.
+Interpolate line length applicable to the environment's
+pending output line.
 .
 .
 .TP
 .B \[rs]n[.lt]
-Interpolate title line length.
+Interpolate the environment's title line length.
 .
 .
 .TP
@@ -4413,15 +4419,15 @@ See
 .
 .TP
 .B \[rs]n[.nm]
-Interpolate\~1 if output line numbering is enabled
+Interpolate\~1 if output line numbering is enabled in the environment
 (even if temporarily suppressed),
 0\~otherwise.
 .
 .
 .TP
 .B \[rs]n[.nn]
-Interpolate count of output lines remaining to have numbering
-suppressed.
+Interpolate count of output lines remaining in the environment
+to have numbering suppressed.
 .
 .
 .TP
@@ -4464,27 +4470,29 @@ or that of the current page plus\~1).
 .
 .TP
 .B \[rs]n[.ps]
-Interpolate type size in scaled points.
+Interpolate the environment's type size in scaled points.
 .
 .
 .TP
 .B \[rs]n[.psr]
-Interpolate most recently requested type size in scaled points.
+Interpolate the environment's most recently requested type size
+in scaled points.
 .
 .
 .TP
 .B \[rs]n[.pvs]
-Interpolate post-vertical line spacing amount.
+Interpolate the environment's post-vertical line spacing amount.
 .
 .
 .TP
 .B \[rs]n[.rj]
-Interpolate number of input lines remaining to be right-aligned.
+Interpolate number of input lines remaining to be right-aligned
+in the environment.
 .
 .
 .TP
 .B \[rs]n[.slant]
-Interpolate font slant.
+Interpolate slant in degrees of the environment's selected font.
 .
 See
 .BR \[rs]S .
@@ -4492,8 +4500,8 @@ See
 .
 .TP
 .B \[rs]n[.sr]
-Interpolate most recently requested type size in points as a decimal
-fraction.
+Interpolate the environment's most recently requested type size
+in points as a decimal fraction.
 .
 This is a string-valued register.
 .
@@ -4502,15 +4510,15 @@ This is a string-valued register.
 .B \[rs]n[.ss]
 .TQ
 .B \[rs]n[.sss]
-Interpolate values of minimum inter-word space and additional
-inter-sentence space,
+Interpolate values of the environment's minimum inter-word space
+and additional inter-sentence space,
 respectively,
 in twelfths of the space width of the selected font.
 .
 .
 .TP
 .B \[rs]n[.sty]
-Interpolate selected abstract font style,
+Interpolate the environment's selected abstract font style,
 if any.
 .
 This is a string-valued register.
@@ -4518,8 +4526,9 @@ This is a string-valued register.
 .
 .TP
 .B \[rs]n[.tabs]
-Interpolate representation of the tab stop settings in a form suitable
-for passage to the
+Interpolate the environment's tab stop settings
+(if any)
+in a form suitable for passage to the
 .B ta
 request.
 .
@@ -4528,8 +4537,8 @@ This is a string-valued register.
 .
 .TP
 .B \[rs]n[.trap]
-Interpolate the name of the next vertical position trap that will be
-sprung.
+Interpolate the name of the next vertical position trap
+after the vertical drawing position.
 .
 This is a string-valued register.
 .
@@ -4624,7 +4633,7 @@ contains\~0.
 .
 .TP
 .B \[rs]n[.zoom]
-Interpolate magnification of font,
+Interpolate magnification of the environment's selected font,
 in thousandths,
 or\~0 if magnification unused.
 .

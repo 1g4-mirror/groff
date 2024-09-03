@@ -6221,8 +6221,8 @@ see
 .
 .TP
 .REG .br
-The normal control character was used to call the currently interpolated
-macro (Boolean-valued).
+The normal control character was used to call the macro being
+interpreted (Boolean-valued).
 .
 .TP
 .REG .c
@@ -6234,7 +6234,9 @@ and
 .
 .TP
 .REG .C
-Compatibility mode is enabled (Boolean-valued);
+AT&T
+.I troff \" AT&T
+compatibility mode is enabled (Boolean-valued);
 see
 .request .cp .
 .
@@ -6251,7 +6253,7 @@ positive if glyph extends below the baseline.
 .
 .TP
 .REG .ce
-Count of output lines remaining to be centered.
+Count of output lines remaining to be centered in the environment.
 .
 .TP
 .REG .cht
@@ -6301,11 +6303,11 @@ see
 .
 .TP
 .REG .fam
-Name of default font family (string-valued).
+Name of the environment's default font family (string-valued).
 .
 .TP
 .REG .fn
-Resolved name of selected font (string-valued);
+Resolved name of font selected in the environment(string-valued);
 see
 .request .ft
 and
@@ -6331,7 +6333,7 @@ Horizontal motion quantum of output device in basic units.
 .
 .TP
 .REG .height
-Font height;
+Height of the environment's selected font;
 see
 .esc H .
 .
@@ -6366,29 +6368,32 @@ Hyphenation space adjustment threshold in environment.
 .
 .TP
 .REG .i
-Indentation amount;
+Environment's indentation amount;
 see
 .request .in .
 .
 .TP
 .REG .in
-Indentation amount applicable to the pending output line;
+Indentation amount applicable to the output line pending
+in the environment;
 see
 .request .ti .
 .
 .TP
 .REG .int
-Previous output line was \[lq]interrupted\[rq] or continued with
+The text most recently formatted in the environment
+was \[lq]interrupted\[rq] or continued with
 .esc c
 (Boolean-valued).
 .
 .TP
 .REG .it
-The count of lines remaining in the pending input trap.
+The count of lines remaining in the environment's pending input trap.
 .
 .TP
 .REG .itc
-The pending input trap honors output line continuation with
+The environment's pending input trap honors output line continuation
+with
 .esc c
 (Boolean-valued).
 .
@@ -6399,7 +6404,7 @@ Name of the macro associated with the pending input trap
 .
 .TP
 .REG .j
-Adjustment mode encoded as an integer;
+The environment's adjustment mode encoded as an integer;
 see
 .request .ad
 and
@@ -6409,7 +6414,7 @@ Do not interpret or perform arithmetic on its value.
 .
 .TP
 .REG .k
-Horizontal drawing position relative to indentation.
+The environment's horizontal drawing position relative to indentation.
 .
 .TP
 .REG .kern
@@ -6433,15 +6438,15 @@ Ligature mode.
 .
 .TP
 .REG .linetabs
-Line-tabs mode is enabled (Boolean-valued).
+Line-tabs mode is enabled in the environment (Boolean-valued).
 .
 .TP
 .REG .ll
-Line length applicable to the pending output line.
+Line length applicable to the environment's pending output line.
 .
 .TP
 .REG .lt
-Title length.
+Environment's title line length.
 .
 .TP
 .REG .m
@@ -6479,11 +6484,12 @@ also see
 .
 .TP
 .REG .nm
-Output line numbering is enabled (Boolean-valued).
+Output line numbering is enabled in the environment (Boolean-valued).
 .
 .TP
 .REG .nn
-Count of output lines remaining to have numbering suppressed.
+Count of output lines remaining in the environment
+to have numbering suppressed.
 .
 .TP
 .REG .ns
@@ -6525,11 +6531,11 @@ Number of the next page.
 .
 .TP
 .REG .ps
-Type size in scaled points.
+The environment's type size in scaled points.
 .
 .TP
 .REG .psr
-Most recently requested type size in scaled points;
+The environment's most recently requested type size in scaled points;
 see
 .request .ps
 and
@@ -6537,7 +6543,7 @@ and
 .
 .TP
 .REG .pvs
-Post-vertical line spacing.
+The environment's post-vertical line spacing.
 .
 .TP
 .REG .R
@@ -6546,11 +6552,12 @@ Maximum representable integer in GNU
 .
 .TP
 .REG .rj
-Count of lines remaining to be right-aligned.
+Count of lines remaining to be right-aligned in the environment.
 .
 .TP
 .REG .s
-Type size in points as a decimal fraction (string-valued);
+The environment's type size in points as a decimal fraction
+(string-valued);
 see
 .request .ps
 and
@@ -6558,13 +6565,14 @@ and
 .
 .TP
 .REG .slant
-Slant of font in degrees;
+Slant in degrees of the environment's selected font;
 see
 .esc S .
 .
 .TP
 .REG .sr
-Most recently requested type size in points as a decimal fraction
+The environment's most recently requested type size
+in points as a decimal fraction
 (string-valued);
 see
 .request .ps
@@ -6573,17 +6581,17 @@ and
 .
 .TP
 .REG .ss
-Size of minimum inter-word space in twelfths of the space width of the
-selected font.
+Size of the environment's minimum inter-word space
+in twelfths of the space width of the selected font.
 .
 .TP
 .REG .sss
-Size of additional inter-sentence space in twelfths of the space width
-of the selected font.
+Size of the environment's additional inter-sentence space
+in twelfths of the space width of the selected font.
 .
 .TP
 .REG .sty
-Selected abstract style (string-valued);
+The environment's selected abstract style (string-valued);
 see
 .request .ft
 and
@@ -6618,13 +6626,16 @@ option.
 .
 .TP
 .REG .tabs
-Representation of tab settings suitable for use as argument to
+The environment's tab stop settings
+(if any)
+suitable for use as argument to
 .request .ta
 (string-valued).
 .
 .TP
 .REG .trap
-Name of the next vertical position trap that will be sprung
+Name of the next vertical position trap
+after the vertical drawing position.
 (string-valued);
 see
 .request .wh ,
@@ -6646,7 +6657,7 @@ also see
 .
 .TP
 .REG .u
-Filling is enabled (Boolean-valued);
+Filling is enabled in the environment (Boolean-valued);
 see
 .request .fi
 and
@@ -6662,7 +6673,7 @@ option.
 .
 .TP
 .REG .v
-Vertical line spacing;
+The environment's vertical line spacing;
 see
 .request .vs .
 .
@@ -6708,7 +6719,7 @@ Empty if output is directed to the top-level diversion.
 .
 .TP
 .REG .zoom
-Zoom multiplier of current font
+Magnification of the environment's selected font
 (in thousandths;
 zero if no magnification);
 see
