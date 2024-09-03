@@ -12715,7 +12715,7 @@ can be manipulated through renaming, removal, and aliasing (@code{rn},
 @cindex mode, copy, and @code{length} request
 Compute the number of characters of @var{anything} and store the count
 in the register @var{reg}.  If @var{reg} doesn't exist, it is created.
-@var{anything} is read in copy mode.
+GNU @command{troff} reads @var{anything} in copy mode.
 
 @Example
 .ds xxx abcd\h'3i'efgh

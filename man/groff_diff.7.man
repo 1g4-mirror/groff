@@ -3058,7 +3058,7 @@ is omitted.
 .BI .length\~ "reg anything"
 Compute the number of characters in
 .I anything
-and return the count in the register
+and store the count in the register
 .IR reg .
 .
 If
@@ -3066,8 +3066,11 @@ If
 doesn't exist,
 it is created.
 .
+GNU
+.I troff \" GNU
+reads
 .I anything
-is read in copy mode.
+in copy mode.
 .
 .
 .TP

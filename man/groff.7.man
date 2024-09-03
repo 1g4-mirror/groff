@@ -3600,7 +3600,7 @@ Set leader repetition character
 .
 .TPx
 .REQ .length "reg anything"
-Compute the number of characters of
+Compute the number of characters in
 .I anything
 and store the count
 in the register
