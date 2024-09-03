@@ -1,5 +1,18 @@
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/reg.cpp: Trivially refactor.  Rename all
+	functions implementing request handlers such that they end with
+	"_request", a practice already fitfully adopted elsewhere in GNU
+	troff.  The idea is to help contributing developers navigate the
+	source code more easily.
+	(define_register, alter_format, remove_reg, alias_reg)
+	(rename_reg, print_registers): Rename these...
+	(define_register_request, assign_register_format_request)
+	(remove_register_request, alias_register_request)
+	(rename_register_request, dump_register_request): ...to these.
+
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (define_register, alter_format)
 	(remove_reg, alias_reg, rename_reg): Give warning category
 	"missing" more exercise.  Handle omitted register arguments

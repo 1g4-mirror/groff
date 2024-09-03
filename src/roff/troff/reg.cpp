@@ -305,7 +305,7 @@ bool variable_reg::get_value(units *res)
   return true;
 }
 
-void define_register()
+void define_register_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register definition request expects"
@@ -409,7 +409,7 @@ reg *look_up_register(symbol nm)
   return r;
 }
 
-void alter_format()
+void assign_register_format_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register interpolation format assignment"
@@ -445,7 +445,7 @@ void alter_format()
   skip_line();
 }
 
-void remove_reg()
+void remove_register_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register removal request expects arguments");
@@ -461,7 +461,7 @@ void remove_reg()
   skip_line();
 }
 
-void alias_reg()
+void alias_register_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register aliasing request expects"
@@ -484,7 +484,7 @@ void alias_reg()
   skip_line();
 }
 
-void rename_reg()
+void rename_register_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register renaming request expects"
@@ -504,7 +504,7 @@ void rename_reg()
   skip_line();
 }
 
-void print_registers()
+void dump_register_request()
 {
   object_dictionary_iterator iter(register_dictionary);
   reg *r;
@@ -523,12 +523,12 @@ void print_registers()
 
 void init_reg_requests()
 {
-  init_request("rr", remove_reg);
-  init_request("nr", define_register);
-  init_request("af", alter_format);
-  init_request("aln", alias_reg);
-  init_request("rnn", rename_reg);
-  init_request("pnr", print_registers);
+  init_request("rr", remove_register_request);
+  init_request("nr", define_register_request);
+  init_request("af", assign_register_format_request);
+  init_request("aln", alias_register_request);
+  init_request("rnn", rename_register_request);
+  init_request("pnr", dump_register_request);
 }
 
 // Local Variables:
