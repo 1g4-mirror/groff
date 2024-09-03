@@ -1200,10 +1200,9 @@ and confuses postprocessors that do not know about it.
 .BI \[rs]Z\[aq] anything \[aq]
 Save the drawing position,
 format
-.IR anything ,
+.I anything
+(except tabs and leaders),
 then restore it.
-.
-Tabs and leaders in the argument are ignored with an error diagnostic.
 .
 .
 .TP
@@ -1354,7 +1353,7 @@ overlaps the bottom of the left parenthesis,
 which is ugly.
 .
 Inserting
-.B \[rs],
+.B \[rs]\^,
 between them
 .if t \{\
 .  nop produces
@@ -1421,7 +1420,11 @@ if you want to embed newlines in a diversion.
 Unlike
 .BR \[rs]! ,
 .B \[rs]?\&
-is interpreted even in copy mode.
+is interpreted even in copy mode,
+and
+.I anything
+in the top-level diversion
+is not sent to device-independent output.
 .
 .
 .TP
@@ -2103,8 +2106,6 @@ Define a character class
 comprising the characters or range expressions
 .I c.
 .
-.
-.IP
 A class thus defined can then be referred to in lieu of listing all the
 characters within it.
 .
@@ -2113,13 +2114,10 @@ only the
 .B cflags
 request can handle references to character classes.
 .
-.
-.IP
 In the request's simplest form,
 each
 .I c
-is a character
-(or special character).
+is an ordinary or special character.
 .
 .
 .IP
@@ -2413,10 +2411,11 @@ requests.
 .IR contents ]
 As
 .BR ds ,
-but compatibility mode is disabled while
-.I name
-is interpreted:
-a \[lq]compatibility save\[rq] token is inserted at the beginning of
+but GNU
+.I troff \" GNU
+disables AT&T compatibility mode while interpreting
+.IR name :
+it inserts a \[lq]compatibility save\[rq] token at the beginning of
 .IR contents ,
 and a \[lq]compatibility restore\[rq] token after it.
 .
@@ -2758,12 +2757,7 @@ Read hyphenation patterns from
 .
 This file is sought in the same way that macro files are with the
 .B mso
-request or the
-.BI \-m name
-command-line option to
-.MR groff @MAN1EXT@
-and
-.MR @g@troff @MAN1EXT@ .
+request.
 .
 .
 .IP
@@ -2984,6 +2978,17 @@ this mode is selected.
 .
 The hyphenation mode default is associated with the environment.
 .
+The formatter's default is
+.B 1
+for AT&T
+.I troff \" AT&T
+compatiblity.
+.
+.I groff
+locale files generally set a more appropriate one;
+see
+.MR groff_tmac @MAN5EXT@ .
+.
 .
 .TP
 .BR .hym\~ [\c
@@ -3031,7 +3036,7 @@ The default scaling unit
 .RB is\~\[lq] m \[rq].
 .
 The hyphenation space adjustment threshold is associated with the
-current environment.
+environment.
 .
 A negative argument resets the hyphenation space adjustment threshold to
 zero,
@@ -3229,7 +3234,9 @@ append to it instead of truncating it.
 .
 .
 .TP
-.BI .output\~ contents
+.BR .output \~[
+.RI [ \[dq] ]\c
+.IR contents ]
 Emit
 .I contents
 directly to
@@ -3537,7 +3544,7 @@ are considered when assigning the soft hyphen character.
 .
 .TP
 .BI .shift\~ n
-In a macro,
+In a macro definition,
 shift the arguments by
 .I n
 positions:
@@ -3599,7 +3606,7 @@ as special,
 searching it for glyphs not found in the selected font.
 .
 Without arguments,
-.RB \[lq] \%special \[dq]
+.RB \[lq] \%special \[rq]
 empties this list of special fonts.
 .
 .
@@ -3607,7 +3614,7 @@ empties this list of special fonts.
 .BR .spreadwarn\~ [\c
 .IR limit ]
 Emit a
-.B break
+.RB \[lq] break \[rq]
 warning if the additional space inserted for each space between words in
 an output line adjusted to both margins with
 .RB \[lq] .ad\~b \[rq]
@@ -3631,11 +3638,9 @@ is 3\~m.
 .IP
 For example,
 .RB \[lq] ".spreadwarn 0.2m" \[rq]
-causes a warning if
-.B break
-warnings are not suppressed and
+warns if
 .I @g@troff
-must add 0.2\~m or more for each inter-word space in a line.
+must add 0.2\~m or more to each inter-word space in a line.
 .
 .
 .TP
@@ -3683,16 +3688,16 @@ inclusively.
 .
 The first character in the string has index\~0.
 .
-If
-.I end
-is omitted,
-it is implicitly set to the largest valid value
-(the string length minus one).
-.
 Negative indices count backward from the end of the string:
 the last character has index\~\-1,
 the character before the last has index\~\-2,
 and so on.
+.
+If
+.I end
+is omitted,
+.B \-1
+is implied.
 .
 .
 .TP
@@ -3700,30 +3705,30 @@ and so on.
 Enable track kerning for font\~\c
 .IR f .
 When the current font is\~\c
-.I f
+.IR f ,
 the width of every glyph is increased by an amount between
 .I n1
 and
 .IR n2 ;
 when the current type size is less than or equal to
-.I s1
+.IR s1 ,
 the width is increased by
 .IR n1 ;
 when it is greater than or equal to
-.I s2
+.IR s2 ,
 the width is increased by
 .IR n2 ;
 when the type size is greater than or equal to
 .I s1
 and less than or equal to
-.I s2
+.IR s2 ,
 the increase in width is a linear function of the type size.
 .
 .
 .TP
 .BR .tm1\~ [\c
 .RI [ \[dq] ]\c
-.IR contents ]
+.IR message ]
 As
 .BR tm ,
 but recognizes and strips a leading neutral double quote,
@@ -3732,7 +3737,9 @@ allowing embedded leading spaces in
 .
 .
 .TP
-.BI .tmc\~ message
+.BR .tmc\~ [\c
+.RI [ \[dq] ]\c
+.IR message ]
 As
 .B tm1
 request,
@@ -3836,8 +3843,6 @@ and if
 .I b
 is omitted.
 .
-.
-.IP
 Vertical position traps are those set by the
 .BR ch ,
 .BR wh ,
@@ -4120,6 +4125,11 @@ tab stop.
 .
 This is the idiomatic way to specify tab stops at equal intervals in
 .IR groff .
+.
+GNU
+.IR troff 's \" GNU
+startup value is
+.RB \[lq] "T 0.5i" \[rq].
 .
 .
 .IP

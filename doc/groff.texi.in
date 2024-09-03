@@ -9268,10 +9268,10 @@ Interpolate a tab in copy mode; see @ref{Copy Mode}.
 @DefreqList {ta, [[@Var{n1} @Var{n2} @dots{} @Var{nn} ]@t{T} @Var{r1}@
  @Var{r2} @dots{} @Var{rn}]}
 @DefregListEndx {.tabs}
-Change tab stop positions.  This request takes a series of tab
-specifiers as arguments (optionally divided into two groups with the
-letter @samp{T}) that indicate where each tab stop is to be, overriding
-any previous settings.  The default scaling unit is @samp{m}.  Invoking
+Set tab stop positions.  This request takes a series of tab specifiers
+as arguments (optionally divided into two groups with the letter
+@samp{T}) that indicate where each tab stop is to be, overriding any
+previous settings.  The default scaling unit is @samp{m}.  Invoking
 @code{ta} without arguments removes all tab stops.
 @cindex default tab stops
 @cindex tab stops, default
