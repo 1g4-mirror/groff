@@ -3199,12 +3199,13 @@ lacks a glyph for
 .
 .TPx
 .REQ .fcolor
-Restore previous fill color.
+Restore previous fill color,
+or the default if there is none.
 .
 .TPx
 .REQ .fcolor color
 Select
-.I color
+.I col
 as the fill color.
 .
 .TPx
@@ -3333,12 +3334,13 @@ a multiplier of the current type size in thousandths
 .
 .TPx
 .REQ .gcolor
-Restore previous stroke color.
+Restore previous stroke color,
+or the default if there is none.
 .
 .TPx
-.REQ .gcolor color
+.REQ .gcolor col
 Select
-.I color
+.I col
 as the stroke color.
 .
 .TPx

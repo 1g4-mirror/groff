@@ -2527,9 +2527,9 @@ This test happens before special fonts are searched.
 .
 .TP
 .BR .fcolor\~ [\c
-.IR color ]
+.IR col ]
 Set the fill color to
-.IR color ,
+.IR col ,
 or,
 without an argument,
 restore the previous stroke color,
@@ -2649,9 +2649,9 @@ not an abstract style or mounting position.
 .
 .TP
 .BR .gcolor\~ [\c
-.IR color ]
+.IR col ]
 Set the stroke color to
-.IR color ,
+.IR col ,
 or,
 without an argument,
 restore the previous stroke color,

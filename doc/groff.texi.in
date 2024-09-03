@@ -12424,12 +12424,14 @@ the eight standard @w{ISO 6429}/ECMA-48 color names.@footnote{These
 are known vulgarly as ``ANSI'' colors, after its X3.64 standard, now
 withdrawn.}
 
-@DefreqList {gcolor, [@Var{color}]}
+@DefreqList {gcolor, [@Var{col}]}
 @DefescItemx {\\m, , c, }
 @DefescItem {\\m, (, co, }
-@DefescItem {\\m, [, color, ]}
+@DefescItem {\\m, [, col, ]}
 @DefregListEndx {.m}
-Set the stroke color to @var{color}.
+Set the stroke color.  The escape sequence @code{\m[]} restores the
+previous stroke color, or the default if there is none, as does a
+@code{gcolor} request without an argument.
 
 @Example
 .gcolor red
@@ -12438,9 +12440,6 @@ The next words
 \m[red]are in red\m[]
 and these words are in the previous color.
 @endExample
-
-The escape sequence @code{\m[]} restores the previous stroke color, as
-does a @code{gcolor} request without an argument.
 
 @cindex stroke color name register (@code{.m})
 @cindex name, stroke color, register (@code{.m})
@@ -12462,14 +12461,15 @@ when writing a margin character as follows (@pxref{Miscellaneous}).
 @endExample
 @endDefesc
 
-@DefreqList {fcolor, [@Var{color}]}
+@DefreqList {fcolor, [@Var{col}]}
 @DefescItemx {\\M, , c, }
 @DefescItem {\\M, (, co, }
-@DefescItem {\\M, [, color, ]}
+@DefescItem {\\M, [, col, ]}
 @DefregListEndx {.M}
 Set the fill color for objects drawn with @code{\D'@dots{}'} escape
 sequences.  The escape sequence @code{\M[]} restores the previous fill
-color, as does an @code{fcolor} request without an argument.
+color, or the default if there is none, as does an @code{fcolor} request
+without an argument.
 
 @cindex @code{\M} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\M}
