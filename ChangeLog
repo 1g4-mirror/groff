@@ -1,3 +1,13 @@
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/reg.cpp (define_register, alter_format)
+	(remove_reg, alias_reg, rename_reg): Give warning category
+	"missing" more exercise.  Handle omitted register arguments
+	where we can communicate more information about where request
+	parsing has gone wrong.
+	* src/roff/troff/reg.cpp (define_register, alter_format)
+	(alias_reg): Add assertions for paranoia's sake.
+
 2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (define_color, device_request):

@@ -307,7 +307,14 @@ bool variable_reg::get_value(units *res)
 
 void define_register()
 {
-  symbol nm = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "register definition request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
+  symbol nm = get_name();
+  assert(nm != 0 /* nullptr */);
   if (nm.is_null()) {
     skip_line();
     return;
@@ -317,6 +324,12 @@ void define_register()
   units prev_value;
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
+  if (!has_arg()) {
+    warning(WARN_MISSING, "register definition request expects"
+	    " a numeric expression as second argument");
+    skip_line();
+    return;
+  }
   if (read_measurement(&v, 'u', prev_value)) {
     if (0 /* nullptr */ == r) {
       r = new number_reg;
@@ -398,11 +411,14 @@ reg *look_up_register(symbol nm)
 
 void alter_format()
 {
-  symbol nm = get_name(true /* required */);
-  if (nm.is_null()) {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "register interpolation format assignment"
+	    " request expects arguments");
     skip_line();
     return;
   }
+  symbol nm = get_name();
+  assert(nm != 0 /* nullptr */);
   reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
   if (0 /* nullptr */ == r) {
     r = new number_reg;
@@ -421,7 +437,8 @@ void alter_format()
   else if (c == 'i' || c == 'I' || c == 'a' || c == 'A')
     r->alter_format(c);
   else if (tok.is_newline() || tok.is_eof())
-    warning(WARN_MISSING, "missing register format");
+    warning(WARN_MISSING, "register interpolation format assignment"
+	    " request register format as second argument");
   else
     error("invalid register format; expected 'i', 'I', 'a', 'A',"
           " or decimal digits, got %1", tok.description());
@@ -430,6 +447,11 @@ void alter_format()
 
 void remove_reg()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "register removal request expects arguments");
+    skip_line();
+    return;
+  }
   for (;;) {
     symbol s = get_name();
     if (s.is_null())
@@ -441,10 +463,20 @@ void remove_reg()
 
 void alias_reg()
 {
-  symbol s1 = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "register aliasing request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
+  symbol s1 = get_name();
+  assert(s1 != 0 /* nullptr */);
   if (!s1.is_null()) {
-    symbol s2 = get_name(true /* required */);
-    if (!s2.is_null()) {
+    symbol s2 = get_name();
+    if (s2.is_null())
+      warning(WARN_MISSING, "register aliasing request expects"
+	      " identifier of existing register as second argument");
+    else {
       if (!register_dictionary.alias(s1, s2))
 	error("cannot alias undefined register '%1'", s2.contents());
     }
@@ -454,10 +486,19 @@ void alias_reg()
 
 void rename_reg()
 {
-  symbol s1 = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "register renaming request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
+  symbol s1 = get_name();
   if (!s1.is_null()) {
-    symbol s2 = get_name(true /* required */);
-    if (!s2.is_null())
+    symbol s2 = get_name();
+    if (s2.is_null())
+      warning(WARN_MISSING, "register renaming request exepects new"
+	      " identifier as second argument");
+    else
       register_dictionary.rename(s1, s2);
   }
   skip_line();
