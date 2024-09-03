@@ -17174,8 +17174,8 @@ strings, and diversions with their sizes in bytes.
 @Defreq {pnr, }
 @cindex dumping registers (@code{pnr})
 @cindex registers, dumping (@code{pnr})
-Report the names and contents of all defined registers to the standard
-error stream.
+Report the names, contents, and assigned formats of all defined
+registers to the standard error stream.
 @endDefreq
 
 @Defreq {ptr, }

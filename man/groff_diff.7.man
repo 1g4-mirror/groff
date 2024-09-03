@@ -3294,8 +3294,10 @@ The list is empty if there are none.
 .
 .TP
 .B .pnr
-Write the names and values of all currently defined registers to the
-standard error stream.
+Report the names,
+contents,
+and assigned formats
+of all defined registers to the standard error stream.
 .
 .
 .TP

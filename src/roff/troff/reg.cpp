@@ -508,13 +508,16 @@ void dump_register_request()
 {
   object_dictionary_iterator iter(register_dictionary);
   reg *r;
-  symbol s;
-  while (iter.get(&s, reinterpret_cast<object **>(&r))) {
-    assert(!s.is_null());
-    errprint("%1\t", s.contents());
-    const char *p = r->get_string();
-    if (p)
-      errprint(p);
+  symbol identifier;
+  while (iter.get(&identifier, reinterpret_cast<object **>(&r))) {
+    assert(!identifier.is_null());
+    errprint("%1\t", identifier.contents());
+    const char *value = r->get_string();
+    if (value)
+      errprint("%1", value);
+    const char *format = r->get_format();
+    if (format)
+      errprint("\t\%1", format);
     errprint("\n");
   }
   fflush(stderr);

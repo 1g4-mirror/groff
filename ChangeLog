@@ -1,5 +1,15 @@
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/reg.cpp (dump_register_request): Report the
+	interpolation format of each register at a further tab stop.
+
+	* doc/groff.texi.in (Debugging):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Document it.
+
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (dump_register_request): Fix code style
 	nit.  Use C++ `reinterpret_cast` operator instead of C-style
 	type cast.  (The use of the "dangerously omnipotent" casting
