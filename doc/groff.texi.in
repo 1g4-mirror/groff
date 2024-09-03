@@ -16616,16 +16616,6 @@ other special characters to Unicode special character notation.
 Special characters without a Unicode representation, and escape
 sequences that do not interpolate a sequence of ordinary and/or special
 characters, produce warnings in category @samp{char}.
-
-@kindex use_charnames_in_special
-@cindex @file{DESC} file, and @code{use_charnames_in_special} keyword
-@cindex @code{\X}, and special characters
-If the @code{use_charnames_in_special} directive appears in the output
-device's @file{DESC} file, the use of special character escape sequences
-is @emph{not} an error; they are simply output verbatim (with the
-exception of the seven mapped to Unicode basic Latin characters,
-discussed above).  @code{use_charnames_in_special} is currently employed
-only by @code{grohtml}.
 @endDefesc
 
 GNU @command{troff} also permits the interpolation of macro contents
@@ -19048,6 +19038,7 @@ whose type size is @var{n}@tie{}scaled points.
 Make the font handling module always return unscaled character widths.
 The @code{grohtml} driver uses this directive.
 
+@c XXX: Savannah #63074 is trying to make this obsolescent.
 @item use_charnames_in_special
 @kindex use_charnames_in_special
 GNU @code{troff} should encode special characters inside device control
