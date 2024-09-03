@@ -318,7 +318,7 @@
 	* src/roff/troff/input.cpp (has_arg): Improve and slightly
 	optimize; return `false` immediately if the current token is a
 	newline.  This is more responsive when running interactively,
-	particuarly with the new support for "peeking" ahead in the
+	particularly with the new support for "peeking" ahead in the
 	input stream by requests that read their arguments in copy mode
 	{and in some other cases}.
 
