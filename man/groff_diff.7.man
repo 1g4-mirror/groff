@@ -1429,6 +1429,9 @@ is interpreted even in copy mode.
 Typeset the special character
 .IR char .
 .
+See
+.MR groff_char @MAN7EXT@ .
+.
 .
 .TP
 .BI \[rs][ "base-char combining-component\~"\c

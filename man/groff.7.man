@@ -5063,15 +5063,15 @@ End conditional input.
 .\" ========= longer escape names =========
 .
 .TP
-.ESC ( gl
-Interpolate glyph with two-character name
-.IR gl .
+.ESC ( sc
+Interpolate glyph of special character with two-character identifier
+.IR sc .
 .
 .
 .TP
-.ESC[] "" glyph
-Interpolate glyph with name
-.I glyph
+.ESC[] "" spchar
+Interpolate glyph of special character with identifier
+.I spchar
 (of arbitrary length).
 .
 .
