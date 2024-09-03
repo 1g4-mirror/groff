@@ -1,5 +1,14 @@
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (pipe_output, system_request): Fix
+	requests I broke in commit 5f2704d64a, yesterday.  Thanks to
+	Deri James for the report.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?66164>.  (We need
+	regression tests.)
+
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Didja ever notice that `pnr` produces a lot of output,
 	and it isn't sorted?  The `pnr` request now supports dumping
 	only of registers specified as arguments.

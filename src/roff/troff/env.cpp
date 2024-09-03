@@ -1323,6 +1323,7 @@ void point_size()
   skip_line();
 }
 
+// TODO: .psizes
 void override_sizes()
 {
   if (!has_arg()) {

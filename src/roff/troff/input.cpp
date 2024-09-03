@@ -8172,7 +8172,7 @@ char *read_string()
 
 void pipe_output()
 {
-  if (!has_arg()) {
+  if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "device-independent output piping request"
 	    " expects a system command as argument");
     skip_line();
@@ -8217,7 +8217,7 @@ static int system_status;
 
 void system_request()
 {
-  if (!has_arg()) {
+  if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "system command execution request expects a"
 	    " system command as argument");
     skip_line();
