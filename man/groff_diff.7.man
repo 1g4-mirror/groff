@@ -2222,7 +2222,7 @@ See
 Skip the remainder of a
 .RB \[lq] while \[rq]
 loop's body,
-immediately starting the next iteration.
+immediately retesting its conditional expression.
 .
 See
 .BR break .

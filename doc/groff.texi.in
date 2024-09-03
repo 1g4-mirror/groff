@@ -13379,8 +13379,8 @@ typographical break or the @code{br} request.
 @endDefreq
 
 @Defreq {continue, }
-Skip the remainder of a @code{while} loop's body, immediately starting
-the next iteration.
+Skip the remainder of a @code{while} loop's body, immediately retesting
+its conditional expression.
 @endDefreq
 
 

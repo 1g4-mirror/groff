@@ -2827,9 +2827,10 @@ is a combining component in a composite character.
 .
 .TPx
 .REQ .continue
-Finish the current iteration of a
-.request .while
-loop.
+Skip the remainder of a
+.RB \[lq] while \[rq]
+loop's body,
+immediately retesting its conditional expression.
 .
 .TPx
 .REQ .cp
