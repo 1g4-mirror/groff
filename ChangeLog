@@ -1,5 +1,13 @@
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/reg.cpp (dump_register_request): Fix code style
+	nit.  Use C++ `reinterpret_cast` operator instead of C-style
+	type cast.  (The use of the "dangerously omnipotent" casting
+	operator is made necessary by groff's pre-template dictionary
+	implementation.)
+
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp: Trivially refactor.  Rename all
 	functions implementing request handlers such that they end with
 	"_request", a practice already fitfully adopted elsewhere in GNU

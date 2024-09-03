@@ -509,7 +509,7 @@ void dump_register_request()
   object_dictionary_iterator iter(register_dictionary);
   reg *r;
   symbol s;
-  while (iter.get(&s, (object **)&r)) {
+  while (iter.get(&s, reinterpret_cast<object **>(&r))) {
     assert(!s.is_null());
     errprint("%1\t", s.contents());
     const char *p = r->get_string();
