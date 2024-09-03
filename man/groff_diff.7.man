@@ -3091,29 +3091,41 @@ line.
 .TP
 .BR .lsm\~ [\c
 .IR name ]
-Set the leading space macro (trap) to
-.IR name .
-.
-If there are leading space characters on an input line,
+Set a leading space trap,
+calling the macro
 .I name
-is invoked in lieu of the usual
-.I roff
-behavior;
-the leading spaces are removed.
+when GNU
+.I troff \" GNU
+encounters leading spaces on a text line;
+the implicit line break that normally happens in this case
+is suppressed.
 .
-The count of leading spaces on an input line is stored in
-.BR \[rs]n[lsn] ,
-and the amount of corresponding horizontal motion in
-.BR \[rs]n[lss] ,
+The formatter stores the count of leading spaces on text line
+in register
+.BR lsn ,
+and the amount of corresponding horizontal motion
+in register
+in register
+.BR lss ,
 irrespective of whether a leading space trap is set.
 .
 When it is,
-the leading spaces are removed from the input line,
-and no motion is produced before calling
+GNU
+.I troff \" GNU
+removes the leading spaces from the input line
+and produces no motion before calling
 .IR name .
 .
+.
+.IP
 If no argument is supplied,
-the default leading space behavior is (re-)established.
+GNU
+.I troff \" GNU
+re\[e ad]stablishes the default handling of leading spaces on text lines
+(breaking the line when filling,
+and formatting a horizontal motion of
+.B \[rs]n[lsn]
+word spaces).
 .
 .
 .TP

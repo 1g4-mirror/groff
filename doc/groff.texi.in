@@ -15249,16 +15249,18 @@ the default blank line behavior is (re-)established.
 @DefregListEndx {lss}
 @cindex leading spaces macro (@code{lsm})
 Set a leading space trap, calling the macro @var{name} when GNU
-@code{troff} encounters leading spaces in an input line; the implicit
-line break that normally happens in this case is suppressed.  If no
-argument is supplied, the default leading space behavior is
-(re-)established (@pxref{Breaking}).
-
-The count of leading spaces on an input line is stored in register
+@command{troff} encounters leading spaces on a text line; the implicit
+line break that normally happens in this case is suppressed.  The
+formatter stores the count of leading spaces on text line in register
 @code{lsn}, and the amount of corresponding horizontal motion in
 register @code{lss}, irrespective of whether a leading space trap is
-set.  When it is, the leading spaces are removed from the input line,
-and no motion is produced before calling @var{name}.
+set.  When it is, GNU @command{troff} removes the leading spaces from
+the input line and produces no motion before calling @var{name}.
+
+If no argument is supplied, GNU @command{troff} reëstablishes the
+default handling of leading spaces on text lines (breaking the line when
+filling, and formatting a horizontal motion of @samp{\n[lsn]} word
+spaces).
 
 @c XXX The following discussion does not seem to be correct; leading
 @c space traps don't "see" _any_ tokens.  Nothing on the line is
