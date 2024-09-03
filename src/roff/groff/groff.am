@@ -78,6 +78,7 @@ groff_TESTS = \
   src/roff/groff/tests/localization-works.sh \
   src/roff/groff/tests/msoquiet-request-works.sh \
   src/roff/groff/tests/output-request-works.sh \
+  src/roff/groff/tests/pi-request-works.sh \
   src/roff/groff/tests/recognize-end-of-sentence.sh \
   src/roff/groff/tests/regression_savannah_56555.sh \
   src/roff/groff/tests/regression_savannah_58153.sh \
@@ -90,6 +91,7 @@ groff_TESTS = \
   src/roff/groff/tests/stringdown-request-rejects-request-names.sh \
   src/roff/groff/tests/stringup-request-transforms-non-basic-latin.sh \
   src/roff/groff/tests/substring-request-works.sh \
+  src/roff/groff/tests/sy-request-works.sh \
   src/roff/groff/tests/unencodable-things-in-grout.sh
 TESTS += $(groff_TESTS)
 EXTRA_DIST += $(groff_TESTS)

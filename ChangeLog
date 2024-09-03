@@ -1,5 +1,19 @@
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Add tests to prevent recurrence of Savannah #66164.
+
+	* src/roff/groff/tests/pi-request-works.sh:
+	* src/roff/groff/tests/sy-request-works.sh: Do it.
+
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?66164>.  (We
+	still need a regression test for the `sizes` request, but there
+	is no straightforward means of introspecting that aspect of
+	environment state at present.)
+
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (pipe_output, system_request): Fix
 	requests I broke in commit 5f2704d64a, yesterday.  Thanks to
 	Deri James for the report.
