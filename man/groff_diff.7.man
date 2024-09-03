@@ -2483,6 +2483,10 @@ the count of consecutive hyphenated lines
 .RE
 .
 .
+.IP
+Copying an environment to itself discards the foregoing data.
+.
+.
 .TP
 .BR .fam\~ [\c
 .IR fml ]
