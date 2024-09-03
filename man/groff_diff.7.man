@@ -3149,7 +3149,8 @@ does not exist.
 .
 .
 .TP
-.BI .nop \~anything
+.BR .nop \~[\c
+.IR anything ]
 Interpret
 .I anything
 as if it were an input line.
@@ -3166,7 +3167,7 @@ Unlike
 it cannot govern conditional blocks.
 .
 Its application is to maintain consistent indentation within macro
-definitions even when producing text lines.
+definitions even when formatting output.
 .
 .
 .TP

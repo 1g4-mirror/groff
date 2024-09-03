@@ -13105,11 +13105,12 @@ tanker
 @endExample
 @endDefreq
 
-@Defreq {nop, anything}
-Interpret @var{anything} as if it were an input line.  This is similar
-to @samp{.if@tie{}1}.  @code{nop} is not really ``no operation''; its
-argument @emph{is} processed---unconditionally.  It can be used to cause
-text lines to share indentation with surrounding control lines.
+@Defreq {nop, [@Var{anything}]}
+Interpret @var{anything} as if it were an input line.  @code{nop}
+resembles @samp{.if 1}; it puts a break on the output if @code{anything}
+is empty.  Unlike @code{if}, it cannot govern conditional blocks.  Its
+application is to maintain consistent indentation within macro
+definitions even when formatting output.
 
 @Example
 .als real-MAC MAC
