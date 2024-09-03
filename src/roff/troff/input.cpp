@@ -1509,13 +1509,14 @@ static void activate_color()
 
 static void define_color()
 {
-  symbol color_name = get_long_name();
-  if (color_name.is_null()) {
-    warning(WARN_MISSING, "missing identifier in color definition"
-	    " request");
+  if (!has_arg()) {
+    warning(WARN_MISSING, "color definition request expects arguments");
     skip_line();
     return;
   }
+  symbol color_name = get_long_name();
+  // Testing has_arg() should have ensured this.
+  assert(color_name != 0 /* nullptr */);
   if (color_name == default_symbol) {
     warning(WARN_COLOR, "default color cannot be redefined");
     skip_line();
@@ -5899,7 +5900,7 @@ static node *do_device_control() // \X
 static void device_request()
 {
   if (!has_arg(true /* peek; we want to read in copy mode */)) {
-    warning(WARN_MISSING, "device control request expects arguments");
+    warning(WARN_MISSING, "device control request expects an argument");
     skip_line();
     return;
   }

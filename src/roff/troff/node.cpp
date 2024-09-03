@@ -6136,8 +6136,8 @@ static bool is_nonnegative_integer(const char *str)
 static void translate_font()
 {
   if (!(has_arg())) {
-    warning(WARN_MISSING, "one or two font names expected in font"
-	    " translation request");
+    warning(WARN_MISSING, "font translation request expects one or two"
+	    " font name arguments");
     skip_line();
     return;
   }
@@ -6472,8 +6472,7 @@ static void set_special_fonts()
 static void zoom_font()
 {
   if (!(has_arg())) {
-    warning(WARN_MISSING, "font name expected in zoom factor setting"
-	    " request");
+    warning(WARN_MISSING, "font zoom factor request expects arguments");
     skip_line();
     return;
   }
@@ -6487,8 +6486,8 @@ static void zoom_font()
     return;
   }
   if (!(has_arg())) {
-    warning(WARN_MISSING, "zoom factor expected in zoom factor setting"
-	    " request");
+    warning(WARN_MISSING, "font zoom factor request expects zoom factor"
+	    " argument");
     skip_line();
     return;
   }

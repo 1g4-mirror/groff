@@ -1,5 +1,14 @@
 2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_color, device_request):
+	* src/roff/troff/node.cpp (translate_font, set_special_fonts)
+	(zoom_font): Align diagnostic wording with similar messages.
+
+	* src/roff/troff/input.cpp (define_color): Add an assertion for
+	paranoia's sake.
+
+2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (pipe_source, open_request)
 	(opena_request, hyphenation_patterns_file_code, pipe_output)
 	(system_request): Migrate wording of error diagnostics to
