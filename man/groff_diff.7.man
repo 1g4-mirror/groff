@@ -1666,7 +1666,7 @@ characters translated with the
 .B trin
 request,
 space characters,
-and some escape sequences,
+and some escape sequences
 that were formatted in the diversion
 .I div
 are treated like ordinary input characters when
