@@ -6468,7 +6468,7 @@ void source_quietly()
 void pipe_source()
 {
   if (!want_unsafe_requests) {
-    error("'pso' request is not allowed in safer mode");
+    error("piped command source request is not allowed in safer mode");
     skip_line();
   }
   else {
@@ -7227,7 +7227,7 @@ static void do_open(bool append)
 static void open_request()
 {
   if (!want_unsafe_requests) {
-    error("'open' request is not allowed in safer mode");
+    error("file opening request is not allowed in safer mode");
     skip_line();
   }
   else
@@ -7237,7 +7237,7 @@ static void open_request()
 static void opena_request()
 {
   if (!want_unsafe_requests) {
-    error("'opena' request is not allowed in safer mode");
+    error("file appending request is not allowed in safer mode");
     skip_line();
   }
   else
@@ -7630,8 +7630,8 @@ static void report_hyphenation_codes()
 
 void hyphenation_patterns_file_code()
 {
-  error("'hpfcode' request will be withdrawn in a future groff release;"
-        " migrate to 'hcode'");
+  error("hyphenation pattern file code assignment request will be"
+	" withdrawn in a future groff release; migrate to 'hcode'");
   tok.skip();
   while (!tok.is_newline() && !tok.is_eof()) {
     int n1, n2;
@@ -8178,7 +8178,8 @@ void pipe_output()
     return;
   }
   if (!want_unsafe_requests) {
-    error("'pi' request is not allowed in safer mode");
+    error("device-independent output piping request is not allowed in"
+	  " safer mode");
     skip_line();
   }
   else {
@@ -8222,7 +8223,8 @@ void system_request()
     return;
   }
   if (!want_unsafe_requests) {
-    error("'sy' request is not allowed in safer mode");
+    error("system command execution request is not allowed in safer"
+	  " mode");
     skip_line();
   }
   else {

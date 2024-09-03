@@ -1,5 +1,15 @@
 2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (pipe_source, open_request)
+	(opena_request, hyphenation_patterns_file_code, pipe_output)
+	(system_request): Migrate wording of error diagnostics to
+	describe, rather than name, the request at issue, because
+	requests can be aliased and moreover the original names can then
+	be removed.  This change might also help GNU troff be more
+	self-documenting, though many requests remain a bit esoteric.
+
+2024-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Update input token pointer appropriately when certain
 	requests requiring arguments are invalidly invoked without them.
 
