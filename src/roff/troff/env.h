@@ -36,6 +36,7 @@ public:
   int operator==(font_size);
   int operator!=(font_size);
   static void init_size_table(int *sizes);
+  static void dump_size_table();
 };
 
 inline font_size::font_size() : p(0)

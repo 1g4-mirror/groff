@@ -1,5 +1,20 @@
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (override_sizes): Fix regression
+	introduced in commit 5f2704d64a, yesterday.  However, it was
+	hard to tell whether the request works.
+	(font_size::dump_size_table): New static member function reports
+	the valid size table of the environment's currently selected
+	font.
+	(environment::print_env): Report the valid size table.
+
+	* src/roff/groff/tests/sizes-request-works.sh: Test it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	Fixes <https://savannah.gnu.org/bugs/?66164>.
+
+2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Add tests to prevent recurrence of Savannah #66164.
 
 	* src/roff/groff/tests/pi-request-works.sh:

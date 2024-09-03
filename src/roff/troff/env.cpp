@@ -248,6 +248,30 @@ void font_size::init_size_table(int *sizes)
   qsort(size_table, nranges, sizeof(size_range), compare_ranges);
 }
 
+void font_size::dump_size_table()
+{
+  int lo, hi;
+  errprint("  valid type size table for selected font: ");
+  if (nranges == 0)
+    errprint(" empty!");
+  else {
+    bool need_comma = false;
+    for (int i = 0; i < nranges; i++) {
+      lo = size_table[i].min;
+      hi = size_table[i].max;
+      if (need_comma)
+	errprint(", ");
+      if (lo == hi)
+	errprint("%1s", lo);
+      else
+	errprint("%1s-%2s", lo, hi);
+      need_comma = true;
+    }
+  }
+  errprint("\n");
+  fflush(stderr);
+}
+
 font_size::font_size(int sp)
 {
   for (int i = 0; i < nranges; i++) {
@@ -1323,10 +1347,9 @@ void point_size()
   skip_line();
 }
 
-// TODO: .psizes
 void override_sizes()
 {
-  if (!has_arg()) {
+  if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "available font sizes override request"
 	    " expects at least one argument");
     skip_line();
@@ -3437,6 +3460,7 @@ void environment::print_env()
     errprint("  previous requested type size: %1s\n",
 	     prev_requested_size);
     errprint("  requested type size: %1s\n", requested_size);
+    font_size::dump_size_table();
   }
   errprint("  previous font selection: %1 ('%2')\n", prev_fontno,
 	   get_font_name(prev_fontno, this).contents());
