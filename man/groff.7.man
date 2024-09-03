@@ -7213,7 +7213,8 @@ and then apply or lift restrictions relative to that basis.
 .
 .TP
 .B 2
-disables hyphenation of the last word on a page.
+disables hyphenation of the last word on a page or column,
+even for explicitly hyphenated words.
 .
 (Hyphenation is prevented if the next page location trap is closer to
 the vertical drawing position than the next text baseline would be.

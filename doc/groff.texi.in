@@ -8718,10 +8718,11 @@ restrictions relative to that basis.
 
 @table @code
 @item 2
-disables hyphenation of the last word on a page,@footnote{Hyphenation is
-prevented if the next page location trap is closer to the vertical
-drawing position than the next text baseline would be.  @xref{Page
-Location Traps}.} even for explicitly hyphenated words.
+disables hyphenation of the last word on a page or
+column,@footnote{Hyphenation is prevented if the next page location trap
+is closer to the vertical drawing position than the next text baseline
+would be.  @xref{Page Location Traps}.} even for explicitly hyphenated
+words.
 
 @item 4
 disables hyphenation before the last two characters of a word.
