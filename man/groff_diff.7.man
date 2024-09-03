@@ -1827,7 +1827,7 @@ or two spaces.
 .
 Initially,
 characters
-.RB \[lq] .?! \[rq]
+.RB \[lq] .?!\& \[rq]
 have this property.
 .
 .
