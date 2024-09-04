@@ -1,5 +1,11 @@
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_open): Fix code style nits.
+	Use C++ `static_cast` operator instead of C-style type casts.
+	Emit error diagnostic if `fclose()` fails.
+
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* Makefile.am: Revise and update internal documentation.
 
 	Fixes <https://savannah.gnu.org/bugs/?64913>.  Thanks to Bjarni

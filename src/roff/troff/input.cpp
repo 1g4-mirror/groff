@@ -7214,12 +7214,13 @@ static void do_open(bool append)
 	      filename.contents(),
 	      append ? "appending" : "writing",
 	      strerror(errno));
-	fp = (FILE *)stream_dictionary.remove(stream);
+	fp = static_cast<FILE *>(stream_dictionary.remove(stream));
       }
       else
-	fp = (FILE *)stream_dictionary.lookup(stream, fp);
-      if (fp)
-	fclose(fp);
+	fp = static_cast<FILE *>(stream_dictionary.lookup(stream, fp));
+      if (fp != 0 /* nullptr */ && (fclose(fp) != 0))
+	error("cannot close file '%1': %2", filename.contents(),
+	      strerror(errno));
     }
   }
   skip_line();
