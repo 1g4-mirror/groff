@@ -8613,7 +8613,7 @@ void usage(FILE *stream, const char *prog)
 " [-T output-device] [-w warning-category] [-W warning-category]"
 " [file ...]\n"
 "usage: %s {-v | --version}\n"
-"usage: %s {-h | --help}\n",
+"usage: %s --help\n",
 	  prog, prog, prog);
   if (stdout == stream) {
     fputs(

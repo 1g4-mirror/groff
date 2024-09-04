@@ -1,5 +1,10 @@
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (usage): De-document `-h` as synonym
+	for `--help`.  That's not true for GNU troff.
+
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor, renaming internal symbols matching
 	`glyph_color` to `stroke_color`; the latter is what our
 	documentation uses, and the glyph color is applied to things
