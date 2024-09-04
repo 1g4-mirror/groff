@@ -1,5 +1,14 @@
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_term): Reject scaling
+	units other than `f` in contexts where `f` is expected
+	{dimensionless values in the unit interval expressing the
+	magnitude of a color channel}.
+
+	Fixes <https://savannah.gnu.org/bugs/?60995>.
+
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_term): Accept `p` and `s`
 	scaling units in expressions where `z` is accepted.  Also fix
 	code style nit: parenthesize complex expressions.

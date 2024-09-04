@@ -540,6 +540,14 @@ static bool is_valid_term(units *u, int scaling_unit,
     case 0:
       warning(WARN_SCALE, "scaling unit invalid in context");
       break;
+    case 'f':
+      if (c != 'f') {
+	warning(WARN_SCALE, "'%1' scaling unit invalid in context;"
+		" use 'f'", c);
+	break;
+      }
+      si = c;
+      break;
     case 'z':
       if (c != 'u' && c != 'z' && c != 'p' && c != 's') {
 	warning(WARN_SCALE, "'%1' scaling unit invalid in context;"
