@@ -12287,17 +12287,36 @@ This read-only register interpolates the type size in scaled points; it
 is associated with the environment (@pxref{Environments}).
 @endDefreg
 
-It makes no sense to use the @samp{z} scaling unit in a numeric
-expression whose default scaling unit is neither @samp{u} nor @samp{z},
-so GNU @code{troff} disallows this.  Similarly, it is nonsensical to use
-a scaling unit other than @samp{z} or @samp{u} in a numeric expression
-whose default scaling unit is @samp{z}, and so GNU @code{troff}
-disallows this as well.
-
 Another GNU @code{troff} scaling unit, @samp{s}, multiplies by the
 number of basic units in a scaled point.  Thus, @samp{\n[.ps]s} is equal
 to @samp{1m} by definition.  Do not confuse the @samp{s} and @samp{z}
 scaling units.
+
+@Example
+.tm device=\*[.T]
+.tm A: .s=\n[.s]z, .ps=\n[.ps]s
+.ps 10.5
+.tm B: .s=\n[.s]z, .ps=\n[.ps]s
+.ps 12.3p
+.tm C: .s=\n[.s]z, .ps=\n[.ps]s
+.ps 8.1z
+.tm D: .s=\n[.s]z, .ps=\n[.ps]s
+.ps 10500s
+.tm E: .s=\n[.s]z, .ps=\n[.ps]s
+    @result{} device=ps
+    @result{} A: .s=10z, .ps=10000s
+    @result{} B: .s=10.5z, .ps=10500s
+    @result{} C: .s=12.3z, .ps=12300s
+    @result{} D: .s=8.1z, .ps=8100s
+    @result{} E: .s=10.5z, .ps=10500s
+@endExample
+
+It makes no sense to use the @samp{z} scaling unit in a numeric
+expression whose default scaling unit is neither @samp{u} nor @samp{z},
+so GNU @code{troff} disallows this.  Similarly, it is nonsensical to use
+scaling units other than @samp{p}, @samp{s}, @samp{z}, or @samp{u} in a
+numeric expression whose default scaling unit is@tie{}@samp{z}, and so
+GNU @code{troff} disallows those as well.
 @c END Keep (roughly) parallel with subsection "Fractional type sizes
 @c and new scaling units" of groff_diff(7).
 

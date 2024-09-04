@@ -430,14 +430,17 @@ so GNU
 disallows this.
 .
 Similarly,
-it is nonsensical to use a scaling unit other
-.RB than\~\[lq] z \[rq]
-.RB or\~\[lq] u \[rq]
+it is nonsensical to use scaling units other than
+.RB \[lq] p \[rq],
+.RB \[lq] s \[rq],
+.RB \[lq] z \[rq],
+or
+.RB \[lq] u \[rq],
 in a numeric expression whose default scaling unit
 .RB is\~\[lq] z \[rq],
-so GNU
-.I troff
-disallows this as well.
+and so GNU
+.I troff \" GNU
+disallows those as well.
 .
 .
 .br

@@ -130,6 +130,10 @@ o The read-only registers `.m` and `.M` now interpolate "default" when
   the default color is selected as the stroke or fill color,
   respectively, rather than interpolating nothing.
 
+o Numerical expression contexts that accept the `z` and `u` scaling
+  units, such as the `ps` request and `\s` escape sequence, now also
+  accept `p` and `s`.
+
 eqn
 ---
 

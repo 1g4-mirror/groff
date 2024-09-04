@@ -1,5 +1,20 @@
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_term): Accept `p` and `s`
+	scaling units in expressions where `z` is accepted.  Also fix
+	code style nit: parenthesize complex expressions.
+
+	* doc/groff.texi.in (Using Fractional Type Sizes):
+	* man/groff_diff.7.man (Fractional type sizes and new scaling
+	units):
+	* NEWS: Document this.
+
+	* doc/groff.texi.in (Using Fractional Type Sizes): Add example.
+
+	Fixes <https://savannah.gnu.org/bugs/?66150>.
+
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (point_size, override_sizes): Ignore
 	request in nroff mode, like `fam`.
 
