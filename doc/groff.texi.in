@@ -17054,14 +17054,14 @@ exceptions, registers, page location traps, and a list of output nodes
 corresponding to the pending input line to the standard error stream.
 @c END Keep parallel with section "Debugging" of groff(7).
 
-@Defreq {lf, line [@Var{file}]}
+@Defreq {lf, line [@Var{name}]}
 @pindex soelim
 @cindex multi-file documents
 @cindex documents, multi-file
 @cindex assign input line number request (@code{lf})
 @cindex input line number, assignment, request (@code{lf})
 @cindex number, input line, assignment request (@code{lf})
-Set the input line number (and, optionally, the file name) GNU
+Set the input line number (and, optionally, the name) GNU
 @code{troff} shall use for error and warning messages.  @var{line} is
 the input line number of the @emph{next} line.  Without an argument, the
 request is ignored.

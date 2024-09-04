@@ -3627,11 +3627,11 @@ Set number of next input line to
 .IR n .
 .
 .TPx
-.REQ .lf "n file-name"
+.REQ .lf "n f"
 Set number of next input line to
 .I n
 and report input file name as
-.IR file-name .
+.IR f .
 .
 .TPx
 .REQ .lg
