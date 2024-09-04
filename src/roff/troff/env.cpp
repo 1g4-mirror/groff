@@ -1334,6 +1334,10 @@ void family_change()
 
 void point_size()
 {
+  if (in_nroff_mode) {
+    skip_line();
+    return;
+  }
   int n;
   if (has_arg()
       && read_measurement(&n, 'z', curenv->get_requested_point_size()))
@@ -1352,6 +1356,10 @@ void override_sizes()
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "available font sizes override request"
 	    " expects at least one argument");
+    skip_line();
+    return;
+  }
+  if (in_nroff_mode) {
     skip_line();
     return;
   }

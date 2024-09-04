@@ -1,3 +1,8 @@
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (point_size, override_sizes): Ignore
+	request in nroff mode, like `fam`.
+
 2024-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (override_sizes): Fix regression
