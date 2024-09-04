@@ -1740,7 +1740,7 @@ do_file(const char *filename)
 	fatal_command(command);
       current_env->hpos = (EnvInt) get_integer_arg();
       break;
-    case 'm':			// m: glyph color
+    case 'm':			// m: stroke color
       parse_color_command(current_env->col);
       pr->change_color(current_env);
       break;

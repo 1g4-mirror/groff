@@ -673,14 +673,14 @@ void environment::set_char_slant(int n)
   char_slant = n;
 }
 
-color *environment::get_prev_glyph_color()
+color *environment::get_prev_stroke_color()
 {
-  return prev_glyph_color;
+  return prev_stroke_color;
 }
 
-color *environment::get_glyph_color()
+color *environment::get_stroke_color()
 {
-  return glyph_color;
+  return stroke_color;
 }
 
 color *environment::get_prev_fill_color()
@@ -693,12 +693,12 @@ color *environment::get_fill_color()
   return fill_color;
 }
 
-void environment::set_glyph_color(color *c)
+void environment::set_stroke_color(color *c)
 {
   if (line_interrupted)
     return;
-  curenv->prev_glyph_color = curenv->glyph_color;
-  curenv->glyph_color = c;
+  curenv->prev_stroke_color = curenv->stroke_color;
+  curenv->stroke_color = c;
 }
 
 void environment::set_fill_color(color *c)
@@ -775,8 +775,8 @@ environment::environment(symbol nm)
 #ifdef WIDOW_CONTROL
   want_widow_control(false),
 #endif /* WIDOW_CONTROL */
-  glyph_color(&default_color),
-  prev_glyph_color(&default_color),
+  stroke_color(&default_color),
+  prev_stroke_color(&default_color),
   fill_color(&default_color),
   prev_fill_color(&default_color),
   control_character('.'),
@@ -869,8 +869,8 @@ environment::environment(const environment *e)
 #ifdef WIDOW_CONTROL
   want_widow_control(e->want_widow_control),
 #endif /* WIDOW_CONTROL */
-  glyph_color(e->glyph_color),
-  prev_glyph_color(e->prev_glyph_color),
+  stroke_color(e->stroke_color),
+  prev_stroke_color(e->prev_stroke_color),
   fill_color(e->fill_color),
   prev_fill_color(e->prev_fill_color),
   control_character(e->control_character),
@@ -961,8 +961,8 @@ void environment::copy(const environment *e)
   hyphenation_space = e->hyphenation_space;
   hyphenation_margin = e->hyphenation_margin;
   composite = false;
-  glyph_color= e->glyph_color;
-  prev_glyph_color = e->prev_glyph_color;
+  stroke_color= e->stroke_color;
+  prev_stroke_color = e->prev_stroke_color;
   fill_color = e->fill_color;
   prev_fill_color = e->prev_fill_color;
 }
@@ -1279,13 +1279,13 @@ void fill_color_change()
   skip_line();
 }
 
-void glyph_color_change()
+void stroke_color_change()
 {
   symbol s = get_name();
   if (s.is_null())
-    curenv->set_glyph_color(curenv->get_prev_glyph_color());
+    curenv->set_stroke_color(curenv->get_prev_stroke_color());
   else
-    do_glyph_color(s);
+    do_stroke_color(s);
   skip_line();
 }
 
@@ -2625,8 +2625,8 @@ void title()
   curenv->char_slant = env.char_slant;
   curenv->fontno = env.fontno;
   curenv->prev_fontno = env.prev_fontno;
-  curenv->glyph_color = env.glyph_color;
-  curenv->prev_glyph_color = env.prev_glyph_color;
+  curenv->stroke_color = env.stroke_color;
+  curenv->prev_stroke_color = env.prev_stroke_color;
   curenv->fill_color = env.fill_color;
   curenv->prev_fill_color = env.prev_fill_color;
   node *nd = 0 /* nullptr */;
@@ -3355,9 +3355,9 @@ const char *environment::get_font_family_string()
   return family->nm.contents();
 }
 
-const char *environment::get_glyph_color_string()
+const char *environment::get_stroke_color_string()
 {
-  return glyph_color->nm.contents();
+  return stroke_color->nm.contents();
 }
 
 const char *environment::get_fill_color_string()
@@ -4194,7 +4194,7 @@ void init_env_requests()
   init_request("fi", fill);
   init_request("fcolor", fill_color_change);
   init_request("ft", select_font);
-  init_request("gcolor", glyph_color_change);
+  init_request("gcolor", stroke_color_change);
   init_request("hc", hyphen_char);
   init_request("hla", select_hyphenation_language);
   init_request("hlm", hyphen_line_max_request);
@@ -4263,7 +4263,7 @@ void init_env_requests()
   init_hunits_env_reg(".l", get_line_length);
   init_hunits_env_reg(".ll", get_saved_line_length);
   init_string_env_reg(".M", get_fill_color_string);
-  init_string_env_reg(".m", get_glyph_color_string);
+  init_string_env_reg(".m", get_stroke_color_string);
   init_hunits_env_reg(".n", get_prev_text_length);
   init_int_env_reg(".nm", get_numbering_nodes);
   init_int_env_reg(".nn", get_no_number_count);

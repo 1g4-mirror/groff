@@ -106,7 +106,7 @@ struct node {
 
   virtual node *merge_glyph_node(glyph_node *);
   virtual tfont *get_tfont();
-  virtual color *get_glyph_color();
+  virtual color *get_stroke_color();
   virtual color *get_fill_color();
   virtual void tprint(troff_output_file *);
   virtual void zero_width_tprint(troff_output_file *);

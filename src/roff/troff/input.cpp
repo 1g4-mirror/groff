@@ -1328,22 +1328,22 @@ static color *lookup_color(symbol nm)
   return c;
 }
 
-void do_glyph_color(symbol nm)
+void do_stroke_color(symbol nm) // \m
 {
   if (nm.is_null())
     return;
   if (nm.is_empty())
-    curenv->set_glyph_color(curenv->get_prev_glyph_color());
+    curenv->set_stroke_color(curenv->get_prev_stroke_color());
   else {
     color *tem = lookup_color(nm);
     if (tem)
-      curenv->set_glyph_color(tem);
+      curenv->set_stroke_color(tem);
     else
       (void) color_dictionary.lookup(nm, new color(nm));
   }
 }
 
-void do_fill_color(symbol nm)
+void do_fill_color(symbol nm) // \M
 {
   if (nm.is_null())
     return;
@@ -2338,7 +2338,7 @@ void token::next()
 	  return;
 	}
       case 'm':
-	do_glyph_color(read_escape_parameter(ALLOW_EMPTY));
+	do_stroke_color(read_escape_parameter(ALLOW_EMPTY));
 	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
@@ -9254,7 +9254,7 @@ static node *read_drawing_command()
 	}
 	draw_node *dn = new draw_node(type, point, npoints,
 				      curenv->get_font_size(),
-				      curenv->get_glyph_color(),
+				      curenv->get_stroke_color(),
 				      curenv->get_fill_color());
 	delete[] point;
 	return dn;

@@ -1,5 +1,45 @@
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor, renaming internal symbols matching
+	`glyph_color` to `stroke_color`; the latter is what our
+	documentation uses, and the glyph color is applied to things
+	other than glyphs--the outlines of geometric figures.
+
+	* src/roff/troff/env.h (class environment): Rename member
+	variables and functions in declarations.
+	  `glyph_color` -> `stroke_color`
+	  `prev_glyph_color` -> `prev_stroke_color`
+	  `get_glyph_color` -> `get_stroke_color`
+	  `get_prev_glyph_color` -> `get_prev_stroke_color`
+	  `set_glyph_color` -> `set_stroke_color`
+
+	* src/roff/troff/env.cpp: Migrate.  Update member function
+	definitions accordingly.
+	(environment::environment): Update constructors.
+	(environment::copy): Update back end of `evc` (_not_ a copy
+	constructor).
+	(glyph_color_change): Rename this...
+	(stroke_color_change): ...to this.
+	(title, environment::get_stroke_color_string): Update accesses
+	to member variables.
+	(init_env_requests): Wire up `gcolor` request to
+	`stroke_color_change()`.  Wire up `.m` register to
+	`get_stroke_color_string()`.
+
+	* src/roff/troff/input.h: Migrate declaration.
+	(do_glyph_color): Rename this...
+	(do_stroke_color): Rename this...
+
+	* src/roff/troff/input.cpp: Migrate.
+	(do_stroke_color): Use new member function name
+	`set_stroke_color()`.
+	(token::next): Wire up `\m` escape sequence to
+	`do_stroke_color()`.
+	(read_drawing_command): Construct node using
+	`get_stroke_color()`.
+
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (assign_register_format_request):
 	Align wording of error diagnostic with warnings thrown by same
 	function.

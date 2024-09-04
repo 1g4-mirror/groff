@@ -796,7 +796,7 @@ class troff_output_file : public real_output_file {
   int current_height;
   tfont *current_tfont;
   color *current_fill_color;
-  color *current_glyph_color;
+  color *current_stroke_color;
   int current_font_number;
   symbol *font_position;
   int nfont_positions;
@@ -841,7 +841,7 @@ public:
   void draw(char, hvpair *, int, font_size, color *, color *);
   void determine_line_limits (char code, hvpair *point, int npoints);
   void check_charinfo(tfont *tf, charinfo *ci);
-  void glyph_color(color *c);
+  void stroke_color(color *c);
   void fill_color(color *c);
   int get_hpos() { return hpos; }
   int get_vpos() { return vpos; }
@@ -890,7 +890,7 @@ void troff_output_file::start_special(tfont *tf, color *gcol,
 				      bool omit_command_prefix)
 {
   set_font(tf);
-  glyph_color(gcol);
+  stroke_color(gcol);
   fill_color(fcol);
   flush_tbuf();
   do_motion();
@@ -1077,7 +1077,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
   set_font(tf);
   unsigned char c = ci->get_ascii_code();
   if (c == '\0') {
-    glyph_color(gcol);
+    stroke_color(gcol);
     fill_color(fcol);
     flush_tbuf();
     do_motion();
@@ -1101,7 +1101,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
   }
   else if (device_has_tcommand) {
     if (tbuf_len > 0 && hpos == output_hpos && vpos == output_vpos
-	&& (!gcol || gcol == current_glyph_color)
+	&& (!gcol || gcol == current_stroke_color)
 	&& (!fcol || fcol == current_fill_color)
 	&& kk == tbuf_kern
 	&& tbuf_len < TBUF_SIZE) {
@@ -1111,7 +1111,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
       hpos = output_hpos;
       return;
     }
-    glyph_color(gcol);
+    stroke_color(gcol);
     fill_color(fcol);
     flush_tbuf();
     do_motion();
@@ -1127,7 +1127,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
     check_charinfo(tf, ci);
     // check_output_limits(output_hpos, output_vpos);
     if (vpos == output_vpos
-	&& (!gcol || gcol == current_glyph_color)
+	&& (!gcol || gcol == current_stroke_color)
 	&& (!fcol || fcol == current_fill_color)
 	&& (n > 0) && (n < 100) && !must_update_drawing_position) {
       put(char(n / 10 + '0'));
@@ -1136,7 +1136,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
       output_hpos = hpos;
     }
     else {
-      glyph_color(gcol);
+      stroke_color(gcol);
       fill_color(fcol);
       do_motion();
       put('c');
@@ -1155,7 +1155,7 @@ void troff_output_file::put_char(charinfo *ci, tfont *tf,
   set_font(tf);
   unsigned char c = ci->get_ascii_code();
   if (c == '\0') {
-    glyph_color(gcol);
+    stroke_color(gcol);
     fill_color(fcol);
     flush_tbuf();
     do_motion();
@@ -1178,7 +1178,7 @@ void troff_output_file::put_char(charinfo *ci, tfont *tf,
   else {
     int n = hpos - output_hpos;
     if (vpos == output_vpos
-	&& (!gcol || gcol == current_glyph_color)
+	&& (!gcol || gcol == current_stroke_color)
 	&& (!fcol || fcol == current_fill_color)
 	&& n > 0 && n < 100) {
       put(char(n/10 + '0'));
@@ -1187,7 +1187,7 @@ void troff_output_file::put_char(charinfo *ci, tfont *tf,
       output_hpos = hpos;
     }
     else {
-      glyph_color(gcol);
+      stroke_color(gcol);
       fill_color(fcol);
       flush_tbuf();
       do_motion();
@@ -1315,13 +1315,13 @@ void troff_output_file::fill_color(color *col)
   put('\n');
 }
 
-// glyph_color calls 'flush_tbuf' and 'do_motion' if necessary.
+// stroke_color calls 'flush_tbuf' and 'do_motion' if necessary.
 
-void troff_output_file::glyph_color(color *col)
+void troff_output_file::stroke_color(color *col)
 {
-  if (!col || current_glyph_color == col)
+  if (!col || current_stroke_color == col)
     return;
-  current_glyph_color = col;
+  current_stroke_color = col;
   if (!want_color_output)
     return;
   flush_tbuf();
@@ -1470,7 +1470,7 @@ void troff_output_file::draw(char code, hvpair *point, int npoints,
 			     font_size fsize, color *gcol, color *fcol)
 {
   int i;
-  glyph_color(gcol);
+  stroke_color(gcol);
   fill_color(fcol);
   flush_tbuf();
   do_motion();
@@ -1612,7 +1612,7 @@ void troff_output_file::trailer(vunits page_length)
 
 troff_output_file::troff_output_file()
 : current_slant(0), current_height(0), current_fill_color(0),
-  current_glyph_color(0), nfont_positions(10), tbuf_len(0),
+  current_stroke_color(0), nfont_positions(10), tbuf_len(0),
   has_page_begun(false), cur_div_level(0)
 {
   font_position = new symbol[nfont_positions];
@@ -1902,7 +1902,7 @@ public:
   hunits skew();
   hyphenation_type get_hyphenation_type();
   tfont *get_tfont();
-  color *get_glyph_color();
+  color *get_stroke_color();
   color *get_fill_color();
   void tprint(troff_output_file *);
   void zero_width_tprint(troff_output_file *);
@@ -2086,12 +2086,12 @@ tfont *glyph_node::get_tfont()
   return tf;
 }
 
-color *node::get_glyph_color()
+color *node::get_stroke_color()
 {
   return 0;
 }
 
-color *glyph_node::get_glyph_color()
+color *glyph_node::get_stroke_color()
 {
   return gcol;
 }
@@ -2342,7 +2342,7 @@ node *kern_pair_node::add_discretionary_hyphen()
   tfont *tf = n1->get_tfont();
   if (tf) {
     if (tf->contains(soft_hyphen_char)) {
-      color *gcol = n2->get_glyph_color();
+      color *gcol = n2->get_stroke_color();
       color *fcol = n2->get_fill_color();
       node *next1 = next;
       next = 0;
@@ -2489,7 +2489,7 @@ node *node::add_discretionary_hyphen()
   if (!tf)
     return new hyphen_inhibitor_node(this);
   if (tf->contains(soft_hyphen_char)) {
-    color *gcol = get_glyph_color();
+    color *gcol = get_stroke_color();
     color *fcol = get_fill_color();
     node *next1 = next;
     next = 0;
@@ -3896,7 +3896,7 @@ special_node::special_node(const macro &m, bool b)
   tf = font_table[fontno]->get_tfont(fs, char_height, char_slant, fontno);
   if (curenv->is_composite())
     tf = tf->get_plain();
-  gcol = curenv->get_glyph_color();
+  gcol = curenv->get_stroke_color();
   fcol = curenv->get_fill_color();
   is_special = 1;
 }
@@ -5063,7 +5063,7 @@ static node *make_glyph_node(charinfo *s, environment *env,
   tfont *tf = font_table[fontno]->get_tfont(fs, char_height, char_slant, fn);
   if (env->is_composite())
     tf = tf->get_plain();
-  color *gcol = env->get_glyph_color();
+  color *gcol = env->get_stroke_color();
   color *fcol = env->get_fill_color();
   return new glyph_node(s, tf, gcol, fcol, 0, 0);
 }
