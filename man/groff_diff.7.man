@@ -3120,7 +3120,6 @@ in register
 .BR lsn ,
 and the amount of corresponding horizontal motion
 in register
-in register
 .BR lss ,
 irrespective of whether a leading space trap is set.
 .
