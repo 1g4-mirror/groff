@@ -1,5 +1,10 @@
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (usage): Break lines in usage
+	message.
+
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (usage): De-document `-h` as synonym
 	for `--help`.  That's not true for GNU troff.
 
