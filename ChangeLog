@@ -1,5 +1,11 @@
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/reg.cpp (assign_register_format_request):
+	Align wording of error diagnostic with warnings thrown by same
+	function.
+
+2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_term): Reject scaling
 	units other than `f` in contexts where `f` is expected
 	{dimensionless values in the unit interval expressing the

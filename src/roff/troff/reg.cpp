@@ -440,8 +440,9 @@ void assign_register_format_request()
     warning(WARN_MISSING, "register interpolation format assignment"
 	    " request register format as second argument");
   else
-    error("invalid register format; expected 'i', 'I', 'a', 'A',"
-          " or decimal digits, got %1", tok.description());
+    error("register interpolation format assignment request expects"
+	  " 'i', 'I', 'a', 'A', or decimal digits, got %1",
+	  tok.description());
   skip_line();
 }
 
