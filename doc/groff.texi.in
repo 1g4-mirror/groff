@@ -17199,8 +17199,9 @@ error stream.
 @cindex traps, page location, dumping (@code{ptr})
 @cindex traps, page location, listing (@code{ptr})
 Report the names and positions of all page location traps to the
-standard error stream.  Empty slots in the list, where a trap has been
-planted but subsequently (re)moved, are printed as well.
+standard error stream.  GNU @command{troff} reports empty slots in the
+list, where a trap had been planted but subsequently (re)moved, because
+they can affect the visibility of subsequently planted traps.
 @c "because they can affect the priority of subsequently planted traps."
 @c XXX Is that right?  It's useful to print the empty slots, I think,
 @c but a trap planted in an "empty" slot with .wh will become active.

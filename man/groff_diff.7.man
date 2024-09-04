@@ -3375,7 +3375,11 @@ except that input comes from the standard output stream of
 Report the names and vertical positions of all page location traps
 to the standard error stream.
 .
-Empty slots in the list are shown as well,
+GNU
+.I troff \" GNU
+reports empty slots in the list,
+where a trap had been planted
+but subsequently (re)moved,
 because they can affect the visibility of subsequently planted traps.
 .
 .
