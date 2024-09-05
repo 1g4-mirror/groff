@@ -1,5 +1,14 @@
 2024-09-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (font_size::dump_size_table): Fix
+	thinko: report scaling unit as 'z', not 's'.
+	* src/roff/groff/tests/sizes-request-works.sh: Update test
+	expectations.
+
+	Continues commit f574a96f58, 3 September.
+
+2024-09-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/nroff/nroff.sh: Update usage message, noting support
 	for options -[aDIZ].
 

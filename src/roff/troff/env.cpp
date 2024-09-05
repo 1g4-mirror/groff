@@ -262,9 +262,9 @@ void font_size::dump_size_table()
       if (need_comma)
 	errprint(", ");
       if (lo == hi)
-	errprint("%1s", lo);
+	errprint("%1z", lo);
       else
-	errprint("%1s-%2s", lo, hi);
+	errprint("%1z-%2z", lo, hi);
       need_comma = true;
     }
   }
