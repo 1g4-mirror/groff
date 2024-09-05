@@ -2493,8 +2493,17 @@ void token::next()
 	    nm = composite_glyph_name(s);
 	  }
 	  else {
+	    char errbuf[ERRBUFSZ];
 	    const char *sc = s.contents();
-	    const char *gn = valid_unicode_code_sequence(sc);
+	    const char *gn = 0 /* nullptr */;
+	    if ((strlen(sc) > 2) && (sc[0] == 'u')) {
+	      gn = valid_unicode_code_sequence(sc, errbuf);
+	      if (0 /* nullptr */ == gn) {
+		error("special character '%1' is invalid: %2", sc,
+		      errbuf);
+		break;
+	      }
+	    }
 	    if (gn != 0 /* nullptr */) {
 	      const char *gn_decomposed = decompose_unicode(gn);
 	      if (gn_decomposed)
@@ -4205,10 +4214,11 @@ static void map_composite_character()
   }
   const char *fc = from.contents();
   const char *from_gn = glyph_name_to_unicode(fc);
+  char errbuf[ERRBUFSZ];
   if (0 /* nullptr */ == from_gn) {
-    from_gn = valid_unicode_code_sequence(fc);
+    from_gn = valid_unicode_code_sequence(fc, errbuf);
     if (0 /* nullptr */ == from_gn) {
-      error("invalid composite glyph name '%1'", fc);
+      error("invalid composite glyph name '%1': %2", fc, errbuf);
       skip_line();
       return;
     }
@@ -4225,9 +4235,9 @@ static void map_composite_character()
   const char *tc = to.contents();
   const char *to_gn = glyph_name_to_unicode(tc);
   if (0 /* nullptr */ == to_gn) {
-    to_gn = valid_unicode_code_sequence(tc);
+    to_gn = valid_unicode_code_sequence(tc, errbuf);
     if (0 /* nullptr */ == to_gn) {
-      error("invalid composite glyph name '%1'", tc);
+      error("invalid composite glyph name '%1': %2", tc, errbuf);
       skip_line();
       return;
     }

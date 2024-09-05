@@ -1,6 +1,14 @@
 2024-09-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::next)
+	(map_composite_character, composite_glyph_name): Use new
+	`errbuf` argument of libgroff's `valid_unicode_code_sequence()`
+	to return information about how the input Unicode special
+	character identifier was defective.
+
+2024-09-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::next)
 	(map_composite_character, composite_glyph_name): Slightly
 	refactor.  Introduce temporaries for brevity.
 
