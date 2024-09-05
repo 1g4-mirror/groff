@@ -3118,7 +3118,7 @@ encounters leading spaces on a text line;
 the implicit line break that normally happens in this case
 is suppressed.
 .
-The formatter stores the count of leading spaces on text line
+The formatter stores the count of leading spaces on the text line
 in register
 .BR lsn ,
 and the amount of corresponding horizontal motion
