@@ -1,3 +1,8 @@
+2024-09-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/nroff/nroff.sh: Update usage message, noting support
+	for options -[aDIZ].
+
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_open): Fix code style nits.
