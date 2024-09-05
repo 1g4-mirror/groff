@@ -2493,7 +2493,8 @@ void token::next()
 	    nm = composite_glyph_name(s);
 	  }
 	  else {
-	    const char *gn = valid_unicode_code_sequence(s.contents());
+	    const char *sc = s.contents();
+	    const char *gn = valid_unicode_code_sequence(sc);
 	    if (gn != 0 /* nullptr */) {
 	      const char *gn_decomposed = decompose_unicode(gn);
 	      if (gn_decomposed)
@@ -2513,7 +2514,7 @@ void token::next()
 	      }
 	    }
 	    else
-	      nm = symbol(s.contents());
+	      nm = symbol(sc);
 	  }
 	  type = TOKEN_SPECIAL;
 	  return;
@@ -4202,11 +4203,12 @@ static void map_composite_character()
     skip_line();
     return;
   }
-  const char *from_gn = glyph_name_to_unicode(from.contents());
+  const char *fc = from.contents();
+  const char *from_gn = glyph_name_to_unicode(fc);
   if (0 /* nullptr */ == from_gn) {
-    from_gn = valid_unicode_code_sequence(from.contents());
+    from_gn = valid_unicode_code_sequence(fc);
     if (0 /* nullptr */ == from_gn) {
-      error("invalid composite glyph name '%1'", from.contents());
+      error("invalid composite glyph name '%1'", fc);
       skip_line();
       return;
     }
@@ -4220,11 +4222,12 @@ static void map_composite_character()
     skip_line();
     return;
   }
-  const char *to_gn = glyph_name_to_unicode(to.contents());
+  const char *tc = to.contents();
+  const char *to_gn = glyph_name_to_unicode(tc);
   if (0 /* nullptr */ == to_gn) {
-    to_gn = valid_unicode_code_sequence(to.contents());
+    to_gn = valid_unicode_code_sequence(tc);
     if (0 /* nullptr */ == to_gn) {
-      error("invalid composite glyph name '%1'", to.contents());
+      error("invalid composite glyph name '%1'", tc);
       skip_line();
       return;
     }
@@ -4235,7 +4238,7 @@ static void map_composite_character()
   if (strcmp(from_gn, to_gn) == 0)
     composite_dictionary.remove(symbol(from_gn));
   else
-    (void) composite_dictionary.lookup(symbol(from_gn), (void *)to_gn);
+    (void) composite_dictionary.lookup(symbol(from_gn), (void *) to_gn);
   skip_line();
 }
 
@@ -4244,11 +4247,12 @@ static symbol composite_glyph_name(symbol nm)
   macro_iterator *mi = new macro_iterator();
   decode_string_args(mi);
   input_stack::push(mi);
-  const char *gn = glyph_name_to_unicode(nm.contents());
+  const char *nc = nm.contents();
+  const char *gn = glyph_name_to_unicode(nc);
   if (0 /* nullptr */ == gn) {
-    gn = valid_unicode_code_sequence(nm.contents());
+    gn = valid_unicode_code_sequence(nc);
     if (0 /* nullptr */ == gn) {
-      error("invalid base glyph '%1' in composite glyph name", nm.contents());
+      error("invalid base glyph '%1' in composite glyph name", nc);
       return EMPTY_SYMBOL;
     }
   }
@@ -4265,12 +4269,12 @@ static symbol composite_glyph_name(symbol nm)
       if (c != DOUBLE_QUOTE)
 	gl += c;
     gl += '\0';
-    const char *u = glyph_name_to_unicode(gl.contents());
+    const char *gc = gl.contents();
+    const char *u = glyph_name_to_unicode(gc);
     if (0 /* nullptr */ == u) {
-      u = valid_unicode_code_sequence(gl.contents());
+      u = valid_unicode_code_sequence(gc);
       if (0 /* nullptr */ == u) {
-	error("invalid component '%1' in composite glyph name",
-	      gl.contents());
+	error("invalid component '%1' in composite glyph name", gc);
 	return EMPTY_SYMBOL;
       }
     }
