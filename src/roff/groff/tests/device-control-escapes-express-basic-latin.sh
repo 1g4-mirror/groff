@@ -44,7 +44,7 @@ check_char () {
   printf '\n' >&2
 }
 
-for device in utf8 html
+for device in pdf utf8 html
 do
   check_char - - "minus sign" $device
   check_char '[aq]' "'" "neutral apostrophe" $device
