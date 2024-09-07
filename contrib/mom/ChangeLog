@@ -1,3 +1,8 @@
+2024-09-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* mom.am: Rename generated test file.  It's pretty confusing to
+	have "test-mom.sh.in" produce "tests-mom.sh" (note the plural).
+
 2024-09-01
 
 	* om.tmac: version 2.6_d; incorporates changes to gropdf/pdfpic
