@@ -8941,7 +8941,7 @@ that of @var{src1}, and so on.  @var{dst1} must be an ordinary character
 (other than a numeral) or a special character, and @var{src1} must be an
 ordinary character (other than a numeral) or a special character to
 which a hyphenation code has already been applied.  Assigning the code
-of an ordinary character code to itself effectively creates a unique
+of an ordinary character to itself effectively creates a unique
 hyphenation code (which can then be copied to others).  @code{hcode}
 ignores spaces between arguments.  If any argument is invalid,
 @code{hcode} reports an error and stops reading them.
