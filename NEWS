@@ -54,7 +54,7 @@ o GNU troff now implements saturating rather than wrapping integer
   the formatter now emits a warning diagnostic in the "range" category.
 
 o The `pnr` request now additionally reports the interpolation format of
-  each register.
+  each register (if it is not string-valued).
 
 o The formatter no longer reports warnings in the "el" category.  There
   was only one; it threw a warning diagnostic if enabled (which it was

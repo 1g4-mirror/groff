@@ -1,3 +1,13 @@
+2024-09-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/reg.cpp (dump_register): Report assigned format
+	of register only if it is not string-valued.
+
+	* doc/groff.texi.in (Debugging):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Update documentation.
+
 2024-09-02  Sven Schober <sv3sch@gmail.com>
 
 	[man]: Handle discrepant `pdf{images,totext}`.

@@ -3326,9 +3326,9 @@ The list is empty if there are none.
 .TP
 .BR .pnr \~[\c
 .IR reg \~.\|.\|.]
-Report the name,
-value,
-and assigned format of each register
+Report the name and value and,
+if the value is numeric,
+the assigned format of each register
 .IR reg ,
 or,
 without arguments,

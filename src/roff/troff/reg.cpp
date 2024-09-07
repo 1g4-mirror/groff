@@ -507,13 +507,19 @@ void rename_register_request()
 
 static void dump_register(symbol *id, reg *r)
 {
+  int n;
   errprint("%1\t", id->contents());
-  const char *value = r->get_string();
-  if (value)
-    errprint("%1", value);
-  const char *format = r->get_format();
-  if (format)
-    errprint("\t\%1", format);
+  if (r->get_value(&n)) {
+    errprint("%1", n);
+    const char *f = r->get_format();
+    assert(f != 0 /* nullptr */);
+    if (f != 0 /* nullptr*/)
+      errprint("\t\%1", f);
+  }
+  else {
+    const char *s = r->get_string();
+    errprint("%1", s);
+  }
   errprint("\n");
 }
 
