@@ -1094,7 +1094,7 @@ requests.
 @item
 Output drivers may search for files; for instance, @command{grops} looks
 for files named in @samp{\X'ps: import @r{@dots{}}'}, @samp{\X'ps: file
-@r{@dots{}}'}, and @samp{\X'pdf: pdfpic @r{@dots{}}'} device control
+@r{@dots{}}'}, and @samp{\X'pdf: pdfpic @r{@dots{}}'} device extension
 escape sequences.
 @end itemize
 
@@ -16599,7 +16599,7 @@ each output driver's man page, such as @cite{gropdf@r{(1)}},
 @DefreqList {device, [@code{"}]@Var{contents}}
 @DefescListEndx {\\X, @code{'}, contents @r{@dots{}}, @code{'}}
 Embed @var{contents} into GNU @command{troff} output as parameters to an
-@w{@samp{x X}} device control command.@footnote{@xref{gtroff Output}.}
+@w{@samp{x X}} device extension command.@footnote{@xref{gtroff Output}.}
 The interpretation of such parameters is determined by the output driver
 or other postprocessor.
 
@@ -16613,16 +16613,16 @@ The @code{device} request processes its arguments in copy mode
 (@pxref{Copy Mode}).  An initial neutral double quote in @var{contents}
 is stripped to allow embedding of leading spaces.
 
-@cindex nodes, in device control commands
-@cindex special characters, in device control commands
-@cindex @code{\&}, in device control commands
-@cindex @code{\)}, in device control commands
-@cindex @code{\%}, in device control commands
+@cindex nodes, in device extension commands
+@cindex special characters, in device extension commands
+@cindex @code{\&}, in device extension commands
+@cindex @code{\)}, in device extension commands
+@cindex @code{\%}, in device extension commands
 @ifnotinfo
-@cindex @code{\:}, in device control commands
+@cindex @code{\:}, in device extension commands
 @end ifnotinfo
 @ifinfo
-@cindex @code{\@r{<colon>}}, in device control commands
+@cindex @code{\@r{<colon>}}, in device extension commands
 @end ifinfo
 The @code{groff} special character repertoire is unknown to output
 drivers outside of glyphs named in a device's fonts, and even then they
@@ -16636,7 +16636,7 @@ as might be done when writing out tag names for PDF bookmarks, which can
 appear in a viewer's navigation pane.
 
 So that documents or macro packages do not have to laboriously
-``sanitize'' strings destined for interpolation in device control
+``sanitize'' strings destined for interpolation in device extension
 commands, the @code{\X} escape sequence
 @c XXX: and soon other things
 performs certain transformations on its argument.  For these
@@ -16645,7 +16645,7 @@ transformations, character translations and definitions are ignored.
 GNU @command{troff} converts several ordinary characters that typeset as
 non-basic Latin code points to code points outside that range so that
 they are used consistently whether they are formatted as glyphs or used
-in a device control command argument.  These ordinary characters are
+in a device extension command argument.  These ordinary characters are
 @samp{'}, @samp{-}, @samp{^}, @samp{`}, and @samp{~}; others are written
 as-is.
 
@@ -16662,7 +16662,7 @@ characters, produce warnings in category @samp{char}.
 @endDefesc
 
 GNU @command{troff} also permits the interpolation of macro contents
-as a device control command.
+as a device extension command.
 
 @DefreqList {devicem, name}
 @DefescItemx {\\Y, , n, }
@@ -18106,14 +18106,14 @@ fortunately, in @command{gtroff}'s intermediate output, every command
 with at least one argument is followed by a line break, thus providing
 excellent readability.
 
-The other commands---those for drawing and device controlling---have a
-more complicated structure; some recognize long command names, and some
-take a variable number of arguments.  So all @samp{D} and @samp{x}
-commands were designed to request a syntactical line break after their
-last argument.  Only one command, @w{@samp{x X}}, has an argument that
-can span several input lines; all other commands must have all of
-their arguments on the same line as the command, i.e., the arguments may
-not be split by a line break.
+The other commands---those for drawing and device control---have a more
+complicated structure; some recognize long command names, and some take
+a variable number of arguments.  So all @samp{D} and @samp{x} commands
+were designed to request a syntactical line break after their last
+argument.  Only one command, @w{@samp{x X}}, has an argument that can
+span several input lines; all other commands must have all of their
+arguments on the same line as the command, i.e., the arguments may not
+be split by a line break.
 
 Empty lines (these are lines containing only space and/or a comment),
 can occur everywhere.  They are just ignored.
@@ -19085,9 +19085,9 @@ The @code{grohtml} driver uses this directive.
 @c XXX: Savannah #63074 is trying to make this obsolescent.
 @item use_charnames_in_special
 @kindex use_charnames_in_special
-GNU @code{troff} should encode special characters inside device control
-commands; see @ref{Postprocessor Access}.  The @code{grohtml} driver
-uses this directive.
+GNU @code{troff} should encode special characters in arguments to device
+extension commands; see @ref{Postprocessor Access}.  The @code{grohtml}
+driver uses this directive.
 
 @item vert @var{n}
 @kindex vert

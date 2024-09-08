@@ -3021,7 +3021,7 @@ Write
 read in copy mode,
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
 A leading neutral double quote is stripped to allow embedding of
 leading spaces.
@@ -3032,7 +3032,7 @@ Write contents of macro or string
 .I name
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
 .TPx
 .REQ .di
@@ -5652,7 +5652,7 @@ which can appear in a viewer's navigation pane.
 .\"IP
 So that documents or macro packages do not have to laboriously
 \[lq]sanitize\[rq] strings destined for interpolation
-in device control commands,
+in device extension commands,
 this escape sequence
 .\" XXX: and soon other things
 performs certain transformations on its argument.
@@ -5707,7 +5707,7 @@ Write contents of macro or string
 .I n
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
 .TP
 .ESC Y( nm
@@ -5715,7 +5715,7 @@ Write contents of macro or string
 .I nm
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
 .TP
 .ESC[] Y name
@@ -5723,7 +5723,7 @@ Write contents of macro or string
 .I name
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
 .TP
 .ESC z c
@@ -8178,7 +8178,7 @@ escape sequence embed their arguments into GNU
 .I troff \" GNU
 output as parameters to an
 .RB \[lq] "x X" \[rq]
-device control command
+device extension command
 (see
 .MR groff_out @MAN5EXT@ ).
 .
@@ -8189,7 +8189,7 @@ or other postprocessor.
 .P
 GNU
 .I troff \" GNU
-also permits the interpolation of macro contents as a device control
+also permits the interpolation of macro contents as a device extension
 command.
 .
 The

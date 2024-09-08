@@ -1123,7 +1123,7 @@ which can appear in a viewer's navigation pane.
 .\"IP
 So that documents or macro packages do not have to laboriously
 \[lq]sanitize\[rq] strings destined for interpolation
-in device control commands,
+in device extension commands,
 this escape sequence
 .\" XXX: and soon other things
 performs certain transformations on its argument.
@@ -1179,7 +1179,7 @@ produce warnings in category
 .BI \[rs]Y( ma
 .TQ
 .BI \[rs]Y[ mac ]
-Interpolate a macro as a device control command.
+Interpolate a macro as a device extension command.
 .
 This is similar to
 .BI \[rs]X\[aq]\[rs]*[ mac ]\[aq]\f[R],
@@ -2356,7 +2356,7 @@ Write
 read in copy mode,
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
 A leading neutral double quote in
 .I anything
@@ -2370,7 +2370,7 @@ Write contents of macro or string
 .I name
 to
 .I @g@troff
-output as a device control command.
+output as a device extension command.
 .
 .
 .TP

@@ -893,6 +893,11 @@ file.
 .
 .I grops
 recognizes device extension commands produced by the
+.I groff
+request
+.B \%device
+or
+.I roff
 .B \[rs]X
 escape sequence,
 but interprets only those that begin with a

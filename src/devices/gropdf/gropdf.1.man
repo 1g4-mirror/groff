@@ -711,7 +711,7 @@ supports many device extensions,
 accessed with the
 .I groff
 request
-.B device
+.B \%device
 or
 .I roff
 .B \[rs]X
