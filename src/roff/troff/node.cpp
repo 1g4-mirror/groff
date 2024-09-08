@@ -825,12 +825,12 @@ public:
   void right(hunits);
   void down(vunits);
   void moveto(hunits, vunits);
-  void start_special(tfont * /* tf */,
-		     color * /* gcol */, color * /* fcol */,
-		     bool /* omit_command_prefix */ = false);
-  void start_special();
-  void special_char(unsigned char c);
-  void end_special();
+  void start_device_extension(tfont * /* tf */,
+			      color * /* gcol */, color * /* fcol */,
+			      bool /* omit_command_prefix */ = false);
+  void start_device_extension();
+  void write_device_extension_char(unsigned char c);
+  void end_device_extension();
   void word_marker();
   void really_transparent_char(unsigned char c);
   void really_print_line(hunits x, vunits y, node *n, vunits before, vunits after, hunits width);
@@ -886,9 +886,9 @@ inline void troff_output_file::put(unsigned int i)
   put_string(ui_to_a(i), fp);
 }
 
-void troff_output_file::start_special(tfont *tf, color *gcol,
-				      color *fcol,
-				      bool omit_command_prefix)
+void troff_output_file::start_device_extension(tfont *tf, color *gcol,
+					       color *fcol,
+					       bool omit_command_prefix)
 {
   set_font(tf);
   stroke_color(gcol);
@@ -899,21 +899,21 @@ void troff_output_file::start_special(tfont *tf, color *gcol,
     put("x X ");
 }
 
-void troff_output_file::start_special()
+void troff_output_file::start_device_extension()
 {
   flush_tbuf();
   do_motion();
   put("x X ");
 }
 
-void troff_output_file::special_char(unsigned char c)
+void troff_output_file::write_device_extension_char(unsigned char c)
 {
   put(c);
   if (c == '\n')
     put('+');
 }
 
-void troff_output_file::end_special()
+void troff_output_file::end_device_extension()
 {
   put('\n');
 }
@@ -3956,17 +3956,17 @@ node *special_node::copy()
 
 void special_node::tprint_start(troff_output_file *out)
 {
-  out->start_special(tf, gcol, fcol, lacks_command_prefix);
+  out->start_device_extension(tf, gcol, fcol, lacks_command_prefix);
 }
 
 void special_node::tprint_char(troff_output_file *out, unsigned char c)
 {
-  out->special_char(c);
+  out->write_device_extension_char(c);
 }
 
 void special_node::tprint_end(troff_output_file *out)
 {
-  out->end_special();
+  out->end_device_extension();
 }
 
 tfont *special_node::get_tfont()
@@ -4101,7 +4101,7 @@ void suppress_node::put(troff_output_file *out, const char *s)
 {
   int i = 0;
   while (s[i] != (char)0) {
-    out->special_char(s[i]);
+    out->write_device_extension_char(s[i]);
     i++;
   }
 }
@@ -4200,15 +4200,15 @@ void suppress_node::tprint(troff_output_file *out)
       if (is_writing_html) {
 	switch (last_position) {
 	case 'c':
-	  out->start_special();
+	  out->start_device_extension();
 	  put(out, "devtag:.centered-image");
 	  break;
 	case 'r':
-	  out->start_special();
+	  out->start_device_extension();
 	  put(out, "devtag:.right-image");
 	  break;
 	case 'l':
-	  out->start_special();
+	  out->start_device_extension();
 	  put(out, "devtag:.left-image");
 	  break;
 	case 'i':
@@ -4216,11 +4216,11 @@ void suppress_node::tprint(troff_output_file *out)
 	default:
 	  ;
 	}
-	out->end_special();
-	out->start_special();
+	out->end_device_extension();
+	out->start_device_extension();
 	put(out, "devtag:.auto-image ");
 	put(out, name);
-	out->end_special();
+	out->end_device_extension();
       }
       else {
 	// postscript (or other device)

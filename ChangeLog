@@ -1,5 +1,22 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class troff_output_file): Trivially
+	refactor.  Rename member functions declarations.
+	  `start_special` -> `start_device_extension`
+	  `special_char` -> `write_device_extension_char`
+	  `end_special` -> `end_device_extension`
+	(troff_output_file::start_special): Rename this...
+	(troff_output_file::start_device_extension): ...to this.
+	(troff_output_file::special_char): Rename this...
+	(troff_output_file::write_device_extension_char): ...to this.
+	(troff_output_file::end_special): Rename this...
+	(troff_output_file::end_device_extension): ...to this.
+	(special_node::tprint_start, special_char::tprint_char)
+	(special_node::tprint_end, suppress_node::put)
+	(suppress_node::tprint): Update call sites.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class troff_output_file): Declare new
 	`flush` member function.
 	(troff_output_file::flush): New member function calls
