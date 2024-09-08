@@ -1,5 +1,24 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor and reform terminology.  Call `\X`
+	escape sequence and `device` request device _extension_
+	instructions.  There is already, in groff, a device command
+	'x u' that configures underlining of spaces (and which is
+	implemented only by grotty(1)).  A dusty corner, to be sure, but
+	we could support others in the future, and further, the new term
+	indicates the fact that `\X` and `device` produce arguments only
+	for 'x X' "sub"-commands--this has always been the case and for
+	`\X` it was true even in Kernighan troff.
+
+	* src/roff/troff/input.cpp (do_device_control): Rename this...
+	(do_device_extension): ...to this.
+	(do_device_extension, device_request): Migrate diagnostic
+	messages.
+
+	* src/roff/troff/troff.1.man (Options): Migrate terminology.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Rename `special_node` class to `device_extension_node`.
 
 	* src/roff/troff/node.h (class special_node): Rename this...

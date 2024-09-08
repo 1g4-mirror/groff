@@ -1309,9 +1309,10 @@ int non_interpreted_char_node::interpret(macro *mac)
   return 1;
 }
 
+// forward declarations
 static void do_width();
 static node *do_non_interpreted();
-static node *do_device_control();
+static node *do_device_extension();
 static node *do_suppress(symbol nm);
 static void do_register();
 
@@ -2432,7 +2433,7 @@ void token::next()
 	nd = new extra_size_node(x);
 	return;
       case 'X':
-	nd = do_device_control();
+	nd = do_device_extension();
 	if (0 /* nullptr */ == nd)
 	  break;
 	type = TOKEN_NODE;
@@ -2562,7 +2563,7 @@ bool token::operator!=(const token &t)
 
 // Is the character usable as a delimiter?
 //
-// This is used directly only by `do_device_control()`, because it is
+// This is used directly only by `do_device_extension()`, because it is
 // the only escape sequence that reads its argument in copy mode (so it
 // doesn't tokenize it) and accepts a user-specified delimiter.
 static bool is_char_usable_as_delimiter(int c)
@@ -5544,9 +5545,7 @@ static symbol get_delimited_name()
   }
 }
 
-// Implement \R
-
-static void do_register()
+static void do_register() // \R
 {
   token start_token;
   start_token.next();
@@ -5716,7 +5715,7 @@ int non_interpreted_node::interpret(macro *m)
   return 1;
 }
 
-static node *do_non_interpreted()
+static node *do_non_interpreted() // \?
 {
   node *n;
   int c;
@@ -5826,7 +5825,7 @@ static void encode_special_character_for_device_output(macro *mac)
 
 // In troff output, we translate the escape character to '\', but it is
 // up to the postprocessor to interpret it as such.  (This mostly
-// matters for device control commands.)
+// matters for device extension commands.)
 static void encode_character_for_device_output(macro *mac, const char c)
 {
   if ('\0' == c) {
@@ -5853,7 +5852,7 @@ static void encode_character_for_device_output(macro *mac, const char c)
   }
 }
 
-static node *do_device_control() // \X
+static node *do_device_extension() // \X
 {
   int start_level = input_stack::get_level();
   token start_token;
@@ -5868,9 +5867,9 @@ static node *do_device_control() // \X
       // we must allocate a copy of it before issuing the next
       // diagnostic.
       char *delimdesc = strdup(start_token.description());
-      warning(WARN_DELIM, "missing closing delimiter in device control"
-	      " escape sequence; expected %1, got %2", delimdesc,
-	      tok.description());
+      warning(WARN_DELIM, "missing closing delimiter in device"
+	      " extension escape sequence; expected %1, got %2",
+	      delimdesc, tok.description());
       free(delimdesc);
       break;
     }
@@ -5899,7 +5898,8 @@ static node *do_device_control() // \X
 static void device_request()
 {
   if (!has_arg(true /* peek; we want to read in copy mode */)) {
-    warning(WARN_MISSING, "device control request expects an argument");
+    warning(WARN_MISSING, "device extension request expects an"
+	    " argument");
     skip_line();
     return;
   }
@@ -5917,7 +5917,7 @@ static void device_request()
   if (curdiv == topdiv && topdiv->before_first_page)
     topdiv->begin_page();
   // Null characters can correspond to node types like vmotion_node that
-  // are unrepresentable in a device control command, and got scrubbed
+  // are unrepresentable in a device extension command, and got scrubbed
   // by `asciify`.
   for (; c != '\0' && c != '\n' && c != EOF;
        c = get_copy(0 /* nullptr */))
@@ -5966,7 +5966,7 @@ static void output_request()
 
 extern int image_no;		// from node.cpp
 
-static node *do_suppress(symbol nm)
+static node *do_suppress(symbol nm) // \O
 {
   if (nm.is_null() || nm.is_empty()) {
     error("output suppression escape sequence requires an argument");
