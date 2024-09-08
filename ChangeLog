@@ -1,3 +1,11 @@
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (class troff_output_file): Declare new
+	`flush` member function.
+	(troff_output_file::flush): New member function calls
+	`flush_tbuf()` and calls `real_output_file`'s own `flush` member
+	function.
+
 2024-09-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/reg.cpp (dump_register): Report assigned format

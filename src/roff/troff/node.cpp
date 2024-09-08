@@ -818,6 +818,7 @@ class troff_output_file : public real_output_file {
 public:
   troff_output_file();
   ~troff_output_file();
+  void flush();
   void trailer(vunits page_length);
   void put_char(charinfo *, tfont *, color *, color *);
   void put_char_width(charinfo *, tfont *, color *, color *, hunits, hunits);
@@ -1627,6 +1628,12 @@ troff_output_file::troff_output_file()
   put(vresolution);
   put('\n');
   put("x init\n");
+}
+
+void troff_output_file::flush()
+{
+  flush_tbuf();
+  real_output_file::flush();
 }
 
 /* output_file */
