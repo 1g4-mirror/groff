@@ -902,7 +902,6 @@ void troff_output_file::start_device_extension(tfont *tf, color *gcol,
 void troff_output_file::start_device_extension()
 {
   flush_tbuf();
-  do_motion();
   put("x X ");
 }
 

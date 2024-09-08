@@ -1,5 +1,17 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp
+	(troff_output_file::start_device_extension): Stop calling
+	`do_motion()` in argumentless version, which is called only when
+	writing HTML (specifically, when inlining images).  It seemed to
+	accomplish nothing.  No tests fail and "pic.html", a document
+	with many images, continues to render fine.  In
+	device-independent output, a pair of absolute positioning
+	commands ('H' and 'V') moves to a redundant place, but the HTML
+	produces is identical (except for a date stamp in a comment).
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/token.h (class token): Rename enumeration
