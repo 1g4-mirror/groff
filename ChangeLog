@@ -102,7 +102,7 @@
 
 	* src/roff/troff/input.h: Migrate declaration.
 	(do_glyph_color): Rename this...
-	(do_stroke_color): Rename this...
+	(do_stroke_color): ...to this.
 
 	* src/roff/troff/input.cpp: Migrate.
 	(do_stroke_color): Use new member function name
@@ -125,7 +125,7 @@
 	{dimensionless values in the unit interval expressing the
 	magnitude of a color channel}.
 
-	Fixes <https://savannah.gnu.org/bugs/?60995>.
+	Fixes <https://savannah.gnu.org/bugs/?60955>.
 
 2024-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
