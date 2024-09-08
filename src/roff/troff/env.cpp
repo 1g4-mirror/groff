@@ -553,7 +553,7 @@ static node *configure_space_underlining(bool b)
   macro m;
   m.append_str("x u ");
   m.append(b ? '1' : '0');
-  return new special_node(m, 1);
+  return new device_extension_node(m, 1);
 }
 
 bool environment::set_font(symbol nm)
@@ -2404,7 +2404,7 @@ node *environment::make_tag(const char *nm, int i)
 	m.append(*p);
     m.append(' ');
     m.append_int(i);
-    return new special_node(m);
+    return new device_extension_node(m);
   }
   return 0 /* nullptr */;
 }

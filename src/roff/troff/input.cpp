@@ -2450,7 +2450,7 @@ void token::next()
 		  s.contents());
 	    break;
 	  }
-	  nd = new special_node(*m);
+	  nd = new device_extension_node(*m);
 	  type = TOKEN_NODE;
 	  return;
 	}
@@ -5893,7 +5893,7 @@ static node *do_device_control() // \X
       c = tok.ch();
     encode_character_for_device_output(&mac, c);
   }
-  return new special_node(mac);
+  return new device_extension_node(mac);
 }
 
 static void device_request()
@@ -5922,7 +5922,7 @@ static void device_request()
   for (; c != '\0' && c != '\n' && c != EOF;
        c = get_copy(0 /* nullptr */))
     mac.append(c);
-  curenv->add_node(new special_node(mac));
+  curenv->add_node(new device_extension_node(mac));
   tok.next();
 }
 
@@ -5933,7 +5933,7 @@ static void device_macro_request()
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
     if (m)
-      curenv->add_node(new special_node(*m));
+      curenv->add_node(new device_extension_node(*m));
     else
       error("cannot interpolate '%1' to device-independent output;"
 	    " it is a request, not a macro", s.contents());
@@ -6033,7 +6033,7 @@ static node *do_suppress(symbol nm)
   return 0;
 }
 
-void special_node::tprint(troff_output_file *out)
+void device_extension_node::tprint(troff_output_file *out)
 {
   tprint_start(out);
   string_iterator iter(mac);

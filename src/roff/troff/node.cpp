@@ -3893,7 +3893,7 @@ int node::interpret(macro *)
   return 0;
 }
 
-special_node::special_node(const macro &m, bool b)
+device_extension_node::device_extension_node(const macro &m, bool b)
 : mac(m), lacks_command_prefix(b)
 {
   font_size fs = curenv->get_font_size();
@@ -3908,7 +3908,7 @@ special_node::special_node(const macro &m, bool b)
   is_special = 1;
 }
 
-special_node::special_node(const macro &m, tfont *t,
+device_extension_node::device_extension_node(const macro &m, tfont *t,
 			   color *gc, color *fc,
 			   statem *s, int divlevel,
 			   bool b)
@@ -3918,58 +3918,61 @@ special_node::special_node(const macro &m, tfont *t,
   is_special = 1;
 }
 
-bool special_node::is_same_as(node *n)
+bool device_extension_node::is_same_as(node *n)
 {
-  return ((mac == static_cast<special_node *>(n)->mac)
-	  && (tf == static_cast<special_node *>(n)->tf)
-	  && (gcol == static_cast<special_node *>(n)->gcol)
-	  && (fcol == static_cast<special_node *>(n)->fcol)
+  return ((mac == static_cast<device_extension_node *>(n)->mac)
+	  && (tf == static_cast<device_extension_node *>(n)->tf)
+	  && (gcol == static_cast<device_extension_node *>(n)->gcol)
+	  && (fcol == static_cast<device_extension_node *>(n)->fcol)
 	  && (lacks_command_prefix
-	      == static_cast<special_node *>(n)->lacks_command_prefix));
+	      == static_cast<device_extension_node *>(n)
+		 ->lacks_command_prefix));
 }
 
-const char *special_node::type()
+const char *device_extension_node::type()
 {
-  return "special_node";
+  return "device_extension_node";
 }
 
-int special_node::ends_sentence()
+int device_extension_node::ends_sentence()
 {
   return 2;
 }
 
-bool special_node::causes_tprint()
+bool device_extension_node::causes_tprint()
 {
   return false;
 }
 
-bool special_node::is_tag()
+bool device_extension_node::is_tag()
 {
   return false;
 }
 
-node *special_node::copy()
+node *device_extension_node::copy()
 {
-  return new special_node(mac, tf, gcol, fcol, state, div_nest_level,
-			  lacks_command_prefix);
+  return new device_extension_node(mac, tf, gcol, fcol, state,
+				   div_nest_level,
+				   lacks_command_prefix);
 }
 
-void special_node::tprint_start(troff_output_file *out)
+void device_extension_node::tprint_start(troff_output_file *out)
 {
   out->start_device_extension(tf, gcol, fcol, lacks_command_prefix);
 }
 
-void special_node::tprint_char(troff_output_file *out, unsigned char c)
+void device_extension_node::tprint_char(troff_output_file *out,
+					unsigned char c)
 {
   out->write_device_extension_char(c);
 }
 
-void special_node::tprint_end(troff_output_file *out)
+void device_extension_node::tprint_end(troff_output_file *out)
 {
   out->end_device_extension();
 }
 
-tfont *special_node::get_tfont()
+tfont *device_extension_node::get_tfont()
 {
   return tf;
 }

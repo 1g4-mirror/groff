@@ -1,5 +1,57 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Rename `special_node` class to `device_extension_node`.
+
+	* src/roff/troff/node.h (class special_node): Rename this...
+	(class device_extension_node): ...to this.  Rename constructors.
+
+	* src/roff/troff/node.cpp
+	(device_extension_node::device_extension_node): Rename
+	constructors.
+
+	(special_node::is_same_as): Rename this...
+	(device_extension_node::is_same_as): ...to this.
+
+	(special_node::type): Rename this...
+	(device_extension_node::type): ...to this.  Update return
+	string.
+
+	(special_node::ends_sentence): Rename this...
+	(device_extension_node::ends_sentence): ...to this.
+
+	(special_node::causes_tprint): Rename this...
+	(device_extension_node::causes_tprint): ...to this.
+
+	(special_node::is_tag): Rename this...
+	(device_extension_node::is_tag): ...to this.
+
+	(special_node::copy): Rename this...
+	(device_extension_node::copy): ...to this.
+
+	(special_node::tprint_start): Rename this...
+	(device_extension_node::tprint_start): ...to this.
+
+	(special_node::tprint_char): Rename this...
+	(device_extension_node::tprint_char): ...to this.
+
+	(special_node::tprint_end): Rename this...
+	(device_extension_node::tprint_end): ...to this.
+
+	(special_node::get_tfont): Rename this...
+	(device_extension_node::get_tfont): ...to this.
+
+	* src/roff/troff/env.cpp (configure_space_underlining)
+	(environment::make_tag):
+	* src/roff/troff/input.cpp (token::next, do_device_control)
+	(device_request, device_macro_request): Update constructor
+	calls.
+
+	* src/roff/troff/input.cpp (special_node::tprint): Rename
+	this...
+	(device_extension_node::tprint): ...to this.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (flush_output): Rename this...
 	(flush_request): ...to this.  Also declare it `static` since it
 	has no callers external to the translation unit.
