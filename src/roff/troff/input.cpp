@@ -2037,22 +2037,22 @@ void token::next()
 	return;
       case ESCAPE_LEFT_QUOTE:
       ESCAPE_LEFT_QUOTE:
-	type = TOKEN_SPECIAL;
+	type = TOKEN_SPECIAL_CHAR;
 	nm = symbol("ga");
 	return;
       case ESCAPE_RIGHT_QUOTE:
       ESCAPE_RIGHT_QUOTE:
-	type = TOKEN_SPECIAL;
+	type = TOKEN_SPECIAL_CHAR;
 	nm = symbol("aa");
 	return;
       case ESCAPE_HYPHEN:
       ESCAPE_HYPHEN:
-	type = TOKEN_SPECIAL;
+	type = TOKEN_SPECIAL_CHAR;
 	nm = symbol("-");
 	return;
       case ESCAPE_UNDERSCORE:
       ESCAPE_UNDERSCORE:
-	type = TOKEN_SPECIAL;
+	type = TOKEN_SPECIAL_CHAR;
 	nm = symbol("ul");
 	return;
       case ESCAPE_c:
@@ -2120,7 +2120,7 @@ void token::next()
       switch (cc) {
       case '(':
 	nm = read_two_char_escape_parameter();
-	type = TOKEN_SPECIAL;
+	type = TOKEN_SPECIAL_CHAR;
 	return;
       case EOF:
 	type = TOKEN_EOF;
@@ -2235,7 +2235,7 @@ void token::next()
 	nm = get_delimited_name();
 	if (nm.is_null())
 	  break;
-	type = TOKEN_SPECIAL;
+	type = TOKEN_SPECIAL_CHAR;
 	return;
       case 'd':
 	type = TOKEN_NODE;
@@ -2526,7 +2526,7 @@ void token::next()
 	    else
 	      nm = symbol(sc);
 	  }
-	  type = TOKEN_SPECIAL;
+	  type = TOKEN_SPECIAL_CHAR;
 	  return;
 	}
 	goto handle_ordinary_char;
@@ -2547,7 +2547,7 @@ bool token::operator==(const token &t)
   switch (type) {
   case TOKEN_CHAR:
     return c == t.c;
-  case TOKEN_SPECIAL:
+  case TOKEN_SPECIAL_CHAR:
     return nm == t.nm;
   case TOKEN_NUMBERED_CHAR:
     return val == t.val;
@@ -2679,7 +2679,7 @@ const char *token::description()
     return "an escaped '}'";
   case TOKEN_SPACE:
     return "a space";
-  case TOKEN_SPECIAL:
+  case TOKEN_SPECIAL_CHAR:
     return "a special character";
   case TOKEN_SPREAD:
     return "an escaped 'p'";
@@ -5838,7 +5838,7 @@ static void encode_character_for_device_output(macro *mac, const char c)
 	     || tok.is_dummy()
 	     || tok.is_transparent_dummy())
       /* do nothing */;
-    else if (tok.is_special())
+    else if (tok.is_special_character())
       encode_special_character_for_device_output(mac);
     else
       warning(WARN_CHAR, "%1 is not encodable in device-independent"
@@ -7773,7 +7773,7 @@ charinfo *token::get_char(bool required)
 {
   if (type == TOKEN_CHAR)
     return charset_table[c];
-  if (type == TOKEN_SPECIAL)
+  if (type == TOKEN_SPECIAL_CHAR)
     return get_charinfo(nm);
   if (type == TOKEN_NUMBERED_CHAR)
     return get_charinfo_by_number(val);
@@ -7862,7 +7862,7 @@ bool token::add_to_zero_width_node_list(node **pp)
     n = new hmotion_node(curenv->get_space_width(),
 			 curenv->get_fill_color());
     break;
-  case TOKEN_SPECIAL:
+  case TOKEN_SPECIAL_CHAR:
     *pp = (*pp)->add_char(get_charinfo(nm), curenv, &w, &s);
     break;
   case TOKEN_STRETCHABLE_SPACE:
@@ -7957,7 +7957,7 @@ void token::process()
   case TOKEN_SPACE:
     curenv->space();
     break;
-  case TOKEN_SPECIAL:
+  case TOKEN_SPECIAL_CHAR:
     curenv->add_char(get_charinfo(nm));
     break;
   case TOKEN_SPREAD:

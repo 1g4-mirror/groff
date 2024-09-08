@@ -1,5 +1,27 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/token.h (class token): Rename enumeration
+	constant from `TOKEN_SPECIAL` to `TOKEN_SPECIAL_CHAR`.  Rename
+	member function declaration from `is_special()` to
+	`is_special_character()`.  Tokens can represent multiple types
+	of formatter objects (at least three of which, "special
+	characters", "special fonts", and "special nodes", have member
+	functions named `is_special()`, and which have little to do with
+	each other).
+	(token::is_special): Rename this...
+	(token::is_special_character): ...to this.
+
+	* src/roff/troff/input.cpp (token::next, token:operator==)
+	(token::description, token::get_char)
+	(token::add_to_zero_width_node_list, token::process): Use new
+	enumeration constant.
+	(encode_character_for_device_output): Update `is_special()`
+	call site.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Migrate to "device extension [command]" terminology.
 
 	* src/devices/grodvi/grodvi.1.man:
