@@ -1,5 +1,16 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Migrate to "device extension [command]" terminology.
+
+	* src/devices/grodvi/grodvi.1.man:
+	* src/devices/gropdf/gropdf.1.man:
+	* src/devices/grops/grops.1.man:
+	* src/devices/grotty/grotty.1.man: Do it.
+
+	* tmac/tests/an_MR-works.sh: Update test output.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor and reform terminology.  Call `\X`
 	escape sequence and `device` request device _extension_
 	instructions.  There is already, in groff, a device command

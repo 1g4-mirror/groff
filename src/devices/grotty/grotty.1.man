@@ -286,11 +286,11 @@ There is therefore no need to filter its output through
 .
 .
 .\" ====================================================================
-.SS "Device control commands"
+.SS "Device extension commands"
 .\" ====================================================================
 .
 .I grotty
-supports a device control command accessed with the
+supports a device extension command accessed with the
 .RB \%\[lq] device \[rq]
 request or
 .B \[rs]X

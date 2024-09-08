@@ -1466,8 +1466,8 @@ and number signs in HTTP(S) URIs.
 _endif()dnl
 The formatter removes
 .B \e:
-escape sequences from hyperlinks when supplying device control commands
-to output drivers.
+escape sequences from hyperlinks when supplying device extension command
+arguments to output drivers.
 .
 .
 .TP

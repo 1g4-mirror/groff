@@ -50,7 +50,7 @@ echo "$output"
 #   97  H912
 #   98  x X tty: link
 
-echo "checking for opening 'link' device control command" >&2
+echo "checking for opening 'link' device extension command" >&2
 echo "$output" | grep -Eq '91[[:space:]]+x X tty: link man:bar\(1\)$' \
     || wail
 
@@ -66,7 +66,7 @@ echo "$output" | grep -Eq '94[[:space:]]+f1' \
 echo "$output" | grep -Eq '95[[:space:]]+t\(1\)' \
     || wail
 
-echo "checking for closing 'link' device control command" >&2
+echo "checking for closing 'link' device extension command" >&2
 echo "$output" | grep -Eq '98[[:space:]]+x X tty: link$' \
     || wail
 

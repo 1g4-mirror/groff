@@ -420,7 +420,7 @@ inline void unget_char(const Char);
 void parse_color_command(color *);
 				// color sub(sub)commands m and DF
 void parse_D_command(void);	// graphical subcommands
-bool parse_x_command(void);	// device controller subcommands
+bool parse_x_command(void);	// device control commands
 
 
 /**********************************************************************
@@ -1812,7 +1812,7 @@ do_file(const char *filename)
       break;
     case 'w':			// w: inform about paddable space
       break;
-    case 'x':			// device controlling commands
+    case 'x':			// device control commands
       stopped = parse_x_command();
       break;
     default:
