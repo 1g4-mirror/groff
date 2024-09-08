@@ -890,10 +890,10 @@ void troff_output_file::start_device_extension(tfont *tf, color *gcol,
 					       color *fcol,
 					       bool omit_command_prefix)
 {
+  flush_tbuf();
   set_font(tf);
   stroke_color(gcol);
   fill_color(fcol);
-  flush_tbuf();
   do_motion();
   if (!omit_command_prefix)
     put("x X ");
