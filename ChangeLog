@@ -1,5 +1,12 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (flush_output): Rename this...
+	(flush_request): ...to this.  Also declare it `static` since it
+	has no callers external to the translation unit.
+	(init_div_requests): Update request initialization.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class troff_output_file): Trivially
 	refactor.  Rename member functions declarations.
 	  `start_special` -> `start_device_extension`

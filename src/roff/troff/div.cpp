@@ -616,7 +616,7 @@ void end_diversions()
 
 void cleanup_and_exit(int exit_code)
 {
-  if (the_output) {
+  if (the_output != 0 /* nullptr */) {
     the_output->trailer(topdiv->get_page_length());
     // If we're already dying, don't call the_output's destructor.  See
     // node.cpp:real_output_file::~real_output_file().
@@ -642,7 +642,7 @@ bool top_level_diversion::begin_page(vunits n)
   }
   if (last_page_number > 0 && page_number == last_page_number)
     cleanup_and_exit(EXIT_SUCCESS);
-  if (!the_output)
+  if (0 /* nullptr */ == the_output)
     init_output();
   ++page_count;
   if (have_next_page_number) {
@@ -913,13 +913,13 @@ void output_saved_vertical_space()
   tok.next();
 }
 
-void flush_output()
+static void flush_request()
 {
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();
   if (want_break)
     curenv->do_break();
-  if (the_output)
+  if (the_output != 0 /* nullptr */)
     the_output->flush();
   tok.next();
 }
@@ -1243,7 +1243,7 @@ void init_div_requests()
   init_request("da", divert_append);
   init_request("di", divert);
   init_request("dt", diversion_trap);
-  init_request("fl", flush_output);
+  init_request("fl", flush_request);
   init_request("mk", mark);
   init_request("ne", need_space);
   init_request("ns", no_space);
