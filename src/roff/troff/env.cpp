@@ -1529,7 +1529,7 @@ void vertical_spacing()
   vunits temp;
   if (has_arg() && get_vunits(&temp, 'p', curenv->vertical_spacing)) {
     if (temp < V0) {
-      warning(WARN_RANGE, "vertical spacing must not be negative");
+      warning(WARN_RANGE, "vertical spacing must be nonnegative");
       temp = vresolution;
     }
   }
@@ -1543,10 +1543,10 @@ void vertical_spacing()
 void post_vertical_spacing()
 {
   vunits temp;
-  if (has_arg() && get_vunits(&temp, 'p', curenv->post_vertical_spacing)) {
+  if (has_arg() && get_vunits(&temp, 'p',
+			      curenv->post_vertical_spacing)) {
     if (temp < V0) {
-      warning(WARN_RANGE,
-	      "post vertical spacing must be greater than or equal to 0");
+      warning(WARN_RANGE, "post-vertical spacing must be nonnegative");
       temp = V0;
     }
   }
