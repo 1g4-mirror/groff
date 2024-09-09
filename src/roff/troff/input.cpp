@@ -4208,7 +4208,7 @@ static void map_composite_character()
 {
   symbol from = get_name();
   if (from.is_null()) {
-    warning(WARN_MISSING, "composite character request expects"
+    warning(WARN_MISSING, "composite character mapping request expects"
 	    " arguments");
     skip_line();
     return;
