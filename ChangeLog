@@ -1,5 +1,17 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (print_env): Improve environment
+	report.  Don't report two items of stale data about a completed
+	line, and describe them more intelligibly.  Say "text length"
+	rather than "total width"; the former is what is compared to the
+	already reported "target text length".  Clarify "total number of
+	spaces" as "number of adjustable spaces"; that's what's really
+	counted.  Relocate report of "target text length" to more
+	follow "text length" and "number of adjustable spaces" to make
+	their relationship more obvious.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment_copy, space_size):
 	Check for arguments: if none are present, throw warning in
 	category "missing" and skip the remainder of the input line.

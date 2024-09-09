@@ -3525,8 +3525,6 @@ void environment::print_env()
   errprint("  temporary indentation pending: %1\n",
 	   have_temporary_indent ? "yes" : "no");
   errprint("  total indentation: %1u\n", saved_indent.to_units());
-  errprint("  target text length: %1u\n",
-	   target_text_length.to_units());
   if (underlined_line_count > 0) {
     errprint("  lines remaining to underline: %1\n",
 	     underlined_line_count);
@@ -3544,8 +3542,12 @@ void environment::print_env()
   }
   errprint("  previous text length: %1u\n",
 	   prev_text_length.to_units());
-  errprint("  total width: %1u\n", width_total.to_units());
-  errprint("  total number of spaces: %1\n", space_total);
+  if (line != 0 /* nullptr */) {
+    errprint("  text length: %1u\n", width_total.to_units());
+    errprint("  number of adjustable spaces: %1\n", space_total);
+  }
+  errprint("  target text length: %1u\n",
+	   target_text_length.to_units());
   errprint("  input line start: %1u\n", input_line_start.to_units());
   errprint("  computing tab stops from: %1\n",
 	   using_line_tabs ? "output line start (\"line tabs\")"
