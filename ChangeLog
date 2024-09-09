@@ -1,5 +1,12 @@
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment_copy): Use C++
+	`static_cast` operator instead of C-style type cast.  Explicitly
+	compare variable of pointer type to null pointer constant
+	instead of letting it pun down to a Boolean.
+
+2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::output_line): Resize
 	stack-allocated character buffer to use constant defined by
 	libgroff for formatting unsigned `int`s as strings.  Use

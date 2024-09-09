@@ -1259,8 +1259,8 @@ void environment_copy()
     error("no environment specified to copy from");
   }
   else {
-    e = (environment *)env_dictionary.lookup(nm);
-  if (e)
+    e = static_cast<environment *>(env_dictionary.lookup(nm));
+  if (e != 0 /* nullptr */)
     curenv->copy(e);
   else
     error("cannot copy from nonexistent environment '%1'",
