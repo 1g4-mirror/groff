@@ -2816,8 +2816,13 @@ commands per Boolean expression
 .IR b .
 .
 .TPx
+.REQ .composite c
+Remove composite character mapping for character
+.I c.
+.
+.TPx
 .REQ .composite "c1 c2"
-Map ordinary or special character
+Map character
 .I c1
 to
 .I c2
