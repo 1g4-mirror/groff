@@ -3992,11 +3992,9 @@ are suffixed with a tab and asterisk
 .RB ( * ).
 .
 .TPx
-.REQ .pi program
+.REQ .pi command
 Pipe output to
-.I program
-.RI ( nroff
-only).
+.IR command .
 .
 Unsafe request;
 disabled by default.
