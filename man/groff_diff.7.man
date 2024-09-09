@@ -3236,8 +3236,7 @@ append to it instead of truncating it.
 .
 .
 .TP
-.BR .output \~[
-.RI [ \[dq] ]\c
+.BR .output \~[[ \[dq] ]\c
 .IR contents ]
 Emit
 .I contents
