@@ -1909,7 +1909,8 @@ void environment::output_line(node *nd, hunits width, bool was_centered)
 {
   prev_text_length = width;
   if (margin_character_flags) {
-    hunits d = line_length + margin_character_distance - saved_indent - width;
+    hunits d = line_length + margin_character_distance - saved_indent
+	       - width;
     if (d > 0) {
       nd = new hmotion_node(d, get_fill_color(), nd);
       width += d;
@@ -1940,17 +1941,19 @@ void environment::output_line(node *nd, hunits width, bool was_centered)
     --no_number_count;
   else if (numbering_nodes) {
     hunits w = (line_number_digit_width
-		*(3+line_number_indent+number_text_separation));
-    if (next_line_number % line_number_multiple != 0)
+		* (3 + line_number_indent + number_text_separation));
+    if ((next_line_number % line_number_multiple) != 0)
       nn = new hmotion_node(w, get_fill_color(), nn);
     else {
       hunits x = w;
-      nn = new hmotion_node(number_text_separation * line_number_digit_width,
+      nn = new hmotion_node(number_text_separation
+			    * line_number_digit_width,
 			    get_fill_color(), nn);
       x -= number_text_separation*line_number_digit_width;
       char buf[30];
       sprintf(buf, "%3d", next_line_number);
-      for (char *p = strchr(buf, '\0') - 1; p >= buf && *p != ' '; --p) {
+      for (char *p = strchr(buf, '\0') - 1; p >= buf && *p != ' '; --p)
+      {
 	node *gn = numbering_nodes;
 	for (int count = *p - '0'; count > 0; count--)
 	  gn = gn->next;
