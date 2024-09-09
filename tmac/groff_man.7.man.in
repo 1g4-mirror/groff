@@ -2701,13 +2701,16 @@ or Documenter's Workbench
 .B \e&
 Dummy character.
 .
-Insert at the beginning of an input line to prevent a dot or apostrophe
+Prefix an input line with it
+to prevent a dot or apostrophe
 from being interpreted as beginning a
 .I roff
 control line.
 .
-Append to an end-of-sentence punctuation sequence to keep it from being
-recognized as such.
+Append
+.B \e&
+to an end-of-sentence punctuation sequence
+to keep it from being recognized as such.
 .
 .
 .TP
