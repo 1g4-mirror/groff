@@ -1268,7 +1268,7 @@ void troff_output_file::set_font(tfont *tf)
 
 void troff_output_file::fill_color(color *col)
 {
-  if (!col || current_fill_color == col)
+  if ((0 /* nullptr */ == col) || current_fill_color == col)
     return;
   current_fill_color = col;
   if (!want_color_output)
@@ -2067,7 +2067,8 @@ node *glyph_node::add_self(node *n, hyphen_list **p)
   assert(ci->get_hyphenation_code() == (*p)->hyphenation_code);
   next = 0 /* nullptr */;
   node *nn;
-  if (n == 0 || (nn = n->merge_glyph_node(this)) == 0) {
+  if ((0 /* nullptr */ == n) ||
+      (0 /* nullptr */ == (nn = n->merge_glyph_node(this)))) {
     next = n;
     nn = this;
   }
@@ -2297,7 +2298,7 @@ node *dbreak_node::merge_glyph_node(glyph_node *gn)
   glyph_node *gn2 = (glyph_node *)gn->copy();
   node *new_none = none ? none->merge_glyph_node(gn) : 0 /* nullptr */;
   node *new_post = post ? post->merge_glyph_node(gn2) : 0 /* nullptr */;
-  if (new_none == 0 && new_post == 0) {
+  if ((0 /* nullptr */ == new_none) && (0 /* nullptr */ == new_post)) {
     delete gn2;
     return 0 /* nullptr */;
   }
@@ -2319,14 +2320,13 @@ node *dbreak_node::merge_glyph_node(glyph_node *gn)
 node *kern_pair_node::merge_glyph_node(glyph_node *gn)
 {
   node *nd = n2->merge_glyph_node(gn);
-  if (nd == 0 /* nullptr */)
+  if (0 /* nullptr */ == nd)
     return 0 /* nullptr */;
   n2 = nd;
   nd = n2->merge_self(n1);
   if (nd) {
     nd->next = next;
-    n1 = 0 /* nullptr */;
-    n2 = 0 /* nullptr */;
+    n1 = n2 = 0 /* nullptr */;
     delete this;
     return nd;
   }
@@ -2367,7 +2367,7 @@ node *kern_pair_node::add_discretionary_hyphen()
       glyph_node *gn = new glyph_node(soft_hyphen_char, tf, gcol, fcol,
 				      state, div_nest_level);
       node *nn = n->merge_glyph_node(gn);
-      if (nn == 0 /* nullptr */) {
+      if (0 /* nullptr */ == nn) {
 	gn->next = n;
 	nn = gn;
       }

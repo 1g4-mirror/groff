@@ -1,3 +1,16 @@
+2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (troff_output_file::fill_color):
+	Explicitly compare variable of pointer type to null pointer
+	literal instead of letting it pun down to a Boolean.
+	(glyph_node::add_self)
+	(dbreak_node::merge_glyph_node):
+	(kern_pair_node::merge_glyph_node):
+	(kern_pair_node::add_discretionary_hyphen): Reorder equality
+	comparisons to avoid inadvertent lvalue assignment.
+	(kern_pair_node::merge_glyph_node): Chain assignments as is done
+	in the rest of this file.
+
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (print_env): Improve environment
