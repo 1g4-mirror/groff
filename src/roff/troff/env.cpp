@@ -1950,8 +1950,8 @@ void environment::output_line(node *nd, hunits width, bool was_centered)
 			    * line_number_digit_width,
 			    get_fill_color(), nn);
       x -= number_text_separation*line_number_digit_width;
-      char buf[30];
-      sprintf(buf, "%3d", next_line_number);
+      char buf[UINT_DIGITS];
+      (void) sprintf(buf, "%3u", next_line_number);
       for (char *p = strchr(buf, '\0') - 1; p >= buf && *p != ' '; --p)
       {
 	node *gn = numbering_nodes;
