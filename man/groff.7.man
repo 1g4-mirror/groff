@@ -2848,14 +2848,29 @@ compatibility mode per Boolean expression
 .IR b .
 .
 .TPx
-.REQ .cs "font n m"
-Set constant character width mode for
-.I font
-to
+.REQ .cs f
+Disable constant-width glyping spacing mode for font
+.I f.
+.
+.TPx
+.REQ .cs "f n"
+Enable constant-width glyping spacing mode for font
+.I f
+at
 .IR n /36
-ems with em
-.IR m .
-.\" XXX: m parameter needs more explanation.
+ems.
+.
+.TPx
+.REQ .cs "f n p"
+Enable constant-width glyping spacing mode for
+.I font
+at
+.IR n /36
+ems,
+as if one em equals
+one em equals
+.I p
+scaled points.
 .
 .TPx
 .REQ .cu
