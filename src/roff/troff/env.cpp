@@ -1252,20 +1252,22 @@ void environment_switch()
 
 void environment_copy()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "environment copy request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   environment *e = 0 /* nullptr */;
   tok.skip();
   symbol nm = get_long_name();
-  if (nm.is_null()) {
-    error("no environment specified to copy from");
-  }
-  else {
-    e = static_cast<environment *>(env_dictionary.lookup(nm));
+  assert(nm != 0 /* nullptr */);
+  e = static_cast<environment *>(env_dictionary.lookup(nm));
   if (e != 0 /* nullptr */)
     curenv->copy(e);
   else
     error("cannot copy from nonexistent environment '%1'",
 	  nm.contents());
-  }
   skip_line();
 }
 
@@ -1406,6 +1408,12 @@ void override_sizes()
 
 void space_size()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "space size configuration request expects"
+	    " at least one argument");
+    skip_line();
+    return;
+  }
   int n;
   if (get_integer(&n)) {
     if (n < 0)
