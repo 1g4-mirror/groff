@@ -2480,7 +2480,8 @@ its contents are lost unless already aliased.
 Append to macro
 .I mac
 until encountering
-.RB \[lq] .\|.\& \[rq].
+.RB \[lq] .\|.\& \[rq]
+at the start of a control line in the current conditional block.
 .
 .TPx
 .REQ .am "mac end-mac"
@@ -3224,7 +3225,7 @@ Restore previous fill color,
 or the default if there is none.
 .
 .TPx
-.REQ .fcolor color
+.REQ .fcolor col
 Select
 .I col
 as the fill color.
@@ -3731,7 +3732,8 @@ Cease writing margin character.
 .REQ .mc c
 Begin writing margin
 .RI character\~ c
-to the right of each output line.
+to the right of each output line at a distance of
+.scalednumber 10 p .
 .
 .TPx
 .REQ .mc "c d"
@@ -3820,7 +3822,8 @@ number the next output line
 .I \[+-]N,
 writing numbers every
 .I m
-lines,
+lines
+(default 1),
 with
 .I s
 numeral widths
