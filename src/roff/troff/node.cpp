@@ -1639,7 +1639,7 @@ void troff_output_file::flush()
 
 /* output_file */
 
-output_file *the_output = 0;
+output_file *the_output = 0 /* nullptr */;
 
 output_file::output_file()
 {
@@ -1670,7 +1670,7 @@ real_output_file::real_output_file()
 : printing(0), output_on(1)
 {
   if (pipe_command) {
-    if ((fp = popen(pipe_command, POPEN_WT)) != 0) {
+    if ((fp = popen(pipe_command, POPEN_WT)) != 0 /* nullptr */) {
       piped = 1;
       return;
     }
@@ -1739,7 +1739,8 @@ void real_output_file::begin_page(int pageno, vunits page_length)
     really_begin_page(pageno, page_length);
 }
 
-void real_output_file::copy_file(hunits x, vunits y, const char *filename)
+void real_output_file::copy_file(hunits x, vunits y,
+				 const char *filename)
 {
   if (printing && output_on)
     really_copy_file(x, y, filename);
@@ -1819,7 +1820,8 @@ void ascii_output_file::really_print_line(hunits, vunits, node *n,
     fputc('\n', fp);
 }
 
-void ascii_output_file::really_begin_page(int /*pageno*/, vunits /*page_length*/)
+void ascii_output_file::really_begin_page(int /* pageno */,
+					  vunits /* page_length */)
 {
   fputs("<beginning of page>\n", fp);
 }
@@ -1834,7 +1836,8 @@ suppress_output_file::suppress_output_file()
 {
 }
 
-void suppress_output_file::really_print_line(hunits, vunits, node *, vunits, vunits, hunits)
+void suppress_output_file::really_print_line(hunits, vunits, node *,
+					     vunits, vunits, hunits)
 {
 }
 
@@ -1852,7 +1855,7 @@ class charinfo_node : public node {
 protected:
   charinfo *ci;
 public:
-  charinfo_node(charinfo *, statem *, int, node * = 0);
+  charinfo_node(charinfo *, statem *, int, node * = 0 /* nullptr */);
   int ends_sentence();
   int overlaps_vertically();
   int overlaps_horizontally();
@@ -1891,11 +1894,11 @@ protected:
 #ifdef STORE_WIDTH
   hunits wid;
   glyph_node(charinfo *, tfont *, color *, color *, hunits,
-	     statem *, int, node * = 0);
+	     statem *, int, node * = 0 /* nullptr */);
 #endif
 public:
   glyph_node(charinfo *, tfont *, color *, color *,
-	     statem *, int, node * = 0);
+	     statem *, int, node * = 0 /* nullptr */);
   ~glyph_node() {}
   node *copy();
   node *merge_glyph_node(glyph_node *);
@@ -1931,13 +1934,15 @@ class ligature_node : public glyph_node {
   node *n2;
 #ifdef STORE_WIDTH
   ligature_node(charinfo *, tfont *, color *, color *, hunits,
-		node *, node *, statem *, int, node * = 0);
+		node *, node *, statem *, int,
+		node * = 0 /* nullptr */);
 #endif
 public:
   void *operator new(size_t);
   void operator delete(void *);
   ligature_node(charinfo *, tfont *, color *, color *,
-		node *, node *, statem *, int, node * = 0);
+		node *, node *, statem *, int,
+		node * = 0 /* nullptr */);
   ~ligature_node();
   node *copy();
   node *add_self(node *, hyphen_list **);
@@ -1955,7 +1960,8 @@ class kern_pair_node : public node {
   node *n1;
   node *n2;
 public:
-  kern_pair_node(hunits, node *, node *, statem *, int, node * = 0);
+  kern_pair_node(hunits, node *, node *, statem *, int,
+		 node * = 0 /* nullptr */);
   ~kern_pair_node();
   node *copy();
   node *merge_glyph_node(glyph_node *);
@@ -2059,7 +2065,7 @@ int glyph_node::character_type()
 node *glyph_node::add_self(node *n, hyphen_list **p)
 {
   assert(ci->get_hyphenation_code() == (*p)->hyphenation_code);
-  next = 0;
+  next = 0 /* nullptr */;
   node *nn;
   if (n == 0 || (nn = n->merge_glyph_node(this)) == 0) {
     next = n;
@@ -2086,7 +2092,7 @@ hyphen_list *glyph_node::get_hyphen_list(hyphen_list *tail, int *count)
 
 tfont *node::get_tfont()
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 tfont *glyph_node::get_tfont()
@@ -2096,7 +2102,7 @@ tfont *glyph_node::get_tfont()
 
 color *node::get_stroke_color()
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 color *glyph_node::get_stroke_color()
@@ -2106,7 +2112,7 @@ color *glyph_node::get_stroke_color()
 
 color *node::get_fill_color()
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 color *glyph_node::get_fill_color()
@@ -2116,23 +2122,23 @@ color *glyph_node::get_fill_color()
 
 node *node::merge_glyph_node(glyph_node *)
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 node *glyph_node::merge_glyph_node(glyph_node *gn)
 {
   if (tf == gn->tf && gcol == gn->gcol && fcol == gn->fcol) {
     charinfo *lig;
-    if ((lig = tf->get_lig(ci, gn->ci)) != 0) {
+    if ((lig = tf->get_lig(ci, gn->ci)) != 0 /* nullptr */) {
       node *next1 = next;
-      next = 0;
+      next = 0 /* nullptr */;
       return new ligature_node(lig, tf, gcol, fcol, this, gn, state,
 			       gn->div_nest_level, next1);
     }
     hunits kern;
     if (tf->get_kern(ci, gn->ci, &kern)) {
       node *next1 = next;
-      next = 0;
+      next = 0 /* nullptr */;
       return new kern_pair_node(kern, this, gn, state,
 				gn->div_nest_level, next1);
     }
@@ -2217,7 +2223,8 @@ void glyph_node::dump_node()
   fflush(stderr);
 }
 
-ligature_node::ligature_node(charinfo *c, tfont *t, color *gc, color *fc,
+ligature_node::ligature_node(charinfo *c, tfont *t,
+			     color *gc, color *fc,
 			     node *gn1, node *gn2, statem *s,
 			     int divlevel, node *x)
 : glyph_node(c, t, gc, fc, s, divlevel, x), n1(gn1), n2(gn2)
@@ -2225,8 +2232,9 @@ ligature_node::ligature_node(charinfo *c, tfont *t, color *gc, color *fc,
 }
 
 #ifdef STORE_WIDTH
-ligature_node::ligature_node(charinfo *c, tfont *t, color *gc, color *fc,
-			     hunits w, node *gn1, node *gn2, statem *s,
+ligature_node::ligature_node(charinfo *c, tfont *t,
+			     color *gc, color *fc, hunits w,
+			     node *gn1, node *gn2, statem *s,
 			     int divlevel, node *x)
 : glyph_node(c, t, gc, fc, w, s, divlevel, x), n1(gn1), n2(gn2)
 {
@@ -2242,8 +2250,8 @@ ligature_node::~ligature_node()
 node *ligature_node::copy()
 {
 #ifdef STORE_WIDTH
-  return new ligature_node(ci, tf, gcol, fcol, wid, n1->copy(), n2->copy(),
-			   state, div_nest_level);
+  return new ligature_node(ci, tf, gcol, fcol, wid, n1->copy(),
+			   n2->copy(), state, div_nest_level);
 #else
   return new ligature_node(ci, tf, gcol, fcol, n1->copy(), n2->copy(),
 			   state, div_nest_level);
@@ -2256,7 +2264,8 @@ void ligature_node::ascii_print(ascii_output_file *ascii)
   n2->ascii_print(ascii);
 }
 
-hyphen_list *ligature_node::get_hyphen_list(hyphen_list *tail, int *count)
+hyphen_list *ligature_node::get_hyphen_list(hyphen_list *tail,
+					    int *count)
 {
   hyphen_list *hl = n2->get_hyphen_list(tail, count);
   return n1->get_hyphen_list(hl, count);
@@ -2266,7 +2275,7 @@ node *ligature_node::add_self(node *n, hyphen_list **p)
 {
   n = n1->add_self(n, p);
   n = n2->add_self(n, p);
-  n1 = n2 = 0;
+  n1 = n2 = 0 /* nullptr */;
   delete this;
   return n;
 }
@@ -2279,26 +2288,26 @@ kern_pair_node::kern_pair_node(hunits n, node *first, node *second,
 
 dbreak_node::dbreak_node(node *n, node *p, statem *s, int divlevel,
 			 node *x)
-: node(x, s, divlevel), none(n), pre(p), post(0)
+: node(x, s, divlevel), none(n), pre(p), post(0 /* nullptr */)
 {
 }
 
 node *dbreak_node::merge_glyph_node(glyph_node *gn)
 {
   glyph_node *gn2 = (glyph_node *)gn->copy();
-  node *new_none = none ? none->merge_glyph_node(gn) : 0;
-  node *new_post = post ? post->merge_glyph_node(gn2) : 0;
+  node *new_none = none ? none->merge_glyph_node(gn) : 0 /* nullptr */;
+  node *new_post = post ? post->merge_glyph_node(gn2) : 0 /* nullptr */;
   if (new_none == 0 && new_post == 0) {
     delete gn2;
-    return 0;
+    return 0 /* nullptr */;
   }
-  if (new_none != 0)
+  if (new_none != 0 /* nullptr */)
     none = new_none;
   else {
     gn->next = none;
     none = gn;
   }
-  if (new_post != 0)
+  if (new_post != 0 /* nullptr */)
     post = new_post;
   else {
     gn2->next = post;
@@ -2310,14 +2319,14 @@ node *dbreak_node::merge_glyph_node(glyph_node *gn)
 node *kern_pair_node::merge_glyph_node(glyph_node *gn)
 {
   node *nd = n2->merge_glyph_node(gn);
-  if (nd == 0)
-    return 0;
+  if (nd == 0 /* nullptr */)
+    return 0 /* nullptr */;
   n2 = nd;
   nd = n2->merge_self(n1);
   if (nd) {
     nd->next = next;
-    n1 = 0;
-    n2 = 0;
+    n1 = 0 /* nullptr */;
+    n2 = 0 /* nullptr */;
     delete this;
     return nd;
   }
@@ -2353,12 +2362,12 @@ node *kern_pair_node::add_discretionary_hyphen()
       color *gcol = n2->get_stroke_color();
       color *fcol = n2->get_fill_color();
       node *next1 = next;
-      next = 0;
+      next = 0 /* nullptr */;
       node *n = copy();
       glyph_node *gn = new glyph_node(soft_hyphen_char, tf, gcol, fcol,
 				      state, div_nest_level);
       node *nn = n->merge_glyph_node(gn);
-      if (nn == 0) {
+      if (nn == 0 /* nullptr */) {
 	gn->next = n;
 	nn = gn;
       }
@@ -2370,9 +2379,9 @@ node *kern_pair_node::add_discretionary_hyphen()
 
 kern_pair_node::~kern_pair_node()
 {
-  if (n1 != 0)
+  if (n1 != 0 /* nullptr */)
     delete n1;
-  if (n2 != 0)
+  if (n2 != 0 /* nullptr */)
     delete n2;
 }
 
@@ -2391,14 +2400,14 @@ node *kern_pair_node::copy()
 
 node *copy_node_list(node *n)
 {
-  node *p = 0;
+  node *p = 0 /* nullptr */;
   while (n != 0 /* nullptr */) {
     node *nn = n->copy();
     nn->next = p;
     p = nn;
     n = n->next;
   }
-  while (p != 0) {
+  while (p != 0 /* nullptr */) {
     node *pp = p->next;
     p->next = n;
     n = p;
@@ -2418,8 +2427,9 @@ void delete_node_list(node *n)
 
 node *dbreak_node::copy()
 {
-  dbreak_node *p = new dbreak_node(copy_node_list(none), copy_node_list(pre),
-				   state, div_nest_level);
+  dbreak_node *p = new dbreak_node(copy_node_list(none),
+				   copy_node_list(pre), state,
+				   div_nest_level);
   p->post = copy_node_list(post);
   return p;
 }
@@ -2429,7 +2439,8 @@ hyphen_list *node::get_hyphen_list(hyphen_list *tail, int *)
   return tail;
 }
 
-hyphen_list *kern_pair_node::get_hyphen_list(hyphen_list *tail, int *count)
+hyphen_list *kern_pair_node::get_hyphen_list(hyphen_list *tail,
+					     int *count)
 {
   hyphen_list *hl = n2->get_hyphen_list(tail, count);
   return n1->get_hyphen_list(hl, count);
@@ -2437,7 +2448,7 @@ hyphen_list *kern_pair_node::get_hyphen_list(hyphen_list *tail, int *count)
 
 class hyphen_inhibitor_node : public node {
 public:
-  hyphen_inhibitor_node(node * = 0);
+  hyphen_inhibitor_node(node * = 0 /* nullptr */);
   node *copy();
   bool is_same_as(node *);
   const char *type();
@@ -2500,12 +2511,12 @@ node *node::add_discretionary_hyphen()
     color *gcol = get_stroke_color();
     color *fcol = get_fill_color();
     node *next1 = next;
-    next = 0;
+    next = 0 /* nullptr */;
     node *n = copy();
     glyph_node *gn = new glyph_node(soft_hyphen_char, tf, gcol, fcol,
 				    state, div_nest_level);
     node *n1 = n->merge_glyph_node(gn);
-    if (n1 == 0) {
+    if (n1 == 0 /* nullptr */) {
       gn->next = n;
       n1 = gn;
     }
@@ -2516,7 +2527,7 @@ node *node::add_discretionary_hyphen()
 
 node *node::merge_self(node *)
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 node *node::add_self(node *n, hyphen_list ** /*p*/)
@@ -2529,7 +2540,7 @@ node *kern_pair_node::add_self(node *n, hyphen_list **p)
 {
   n = n1->add_self(n, p);
   n = n2->add_self(n, p);
-  n1 = n2 = 0;
+  n1 = n2 = 0 /* nullptr */;
   delete this;
   return n;
 }
@@ -2541,7 +2552,7 @@ hunits node::width()
 
 node *node::last_char_node()
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 bool node::causes_tprint()
@@ -6423,7 +6434,7 @@ static void remove_font_specific_character()
 	charinfo *ci = get_charinfo(symbol(gl.contents()));
 	if (!ci)
 	  break;
-	macro *m = ci->set_macro(0);
+	macro *m = ci->set_macro(0 /* nullptr */);
 	if (m)
 	  delete m;
       }
@@ -6436,8 +6447,8 @@ static void remove_font_specific_character()
 static void read_special_fonts(special_font_list **sp)
 {
   special_font_list *s = *sp;
-  *sp = 0;
-  while (s != 0) {
+  *sp = 0 /* nullptr */;
+  while (s != 0 /* nullptr */) {
     special_font_list *tem = s;
     s = s->next;
     delete tem;
