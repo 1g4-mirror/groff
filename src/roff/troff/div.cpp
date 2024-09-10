@@ -217,7 +217,7 @@ macro_diversion::macro_diversion(symbol s, int append)
   // We can now catch the situation described above by comparing
   // the length of the charlist in the macro_header with the length
   // stored in the macro. When we detect this, we copy the contents.
-  mac = new macro(1);
+  mac = new macro(true /* is diversion */);
   if (append) {
     request_or_macro *rm
       = static_cast<request_or_macro *>(request_dictionary.lookup(s));
