@@ -36,10 +36,10 @@ protected:
   vunits high_water_mark;
 public:
   bool is_in_no_space_mode;
-  int saved_seen_break;
-  int saved_seen_space;
-  int saved_seen_eol;
-  int saved_suppress_next_eol;
+  bool saved_seen_break; // XXX: nilpotent?
+  bool saved_seen_space; // XXX: nilpotent?
+  bool saved_seen_eol; // XXX: nilpotent?
+  bool saved_suppress_next_eol; // XXX: nilpotent?
   state_set modified_tag;
   vunits marked_place;
   diversion(symbol s = NULL_SYMBOL);

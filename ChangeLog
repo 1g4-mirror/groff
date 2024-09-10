@@ -1,5 +1,14 @@
 2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.h (class diversion): Boolify member
+	variables that cache values of Boolean member variables of
+	`environment` class.  Mark them as possibly nilpotent; when I
+	experimentally deleted each of them, no automated tests failed,
+	and even Peter's fearfully complex mom(7) documents looked fine.
+	Possibly a task for groff 1.25.
+
+2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.h (class diversion): Boolify and rename
 	member variable `no_space_mode` to `is_in_no_space_mode`.
 	* src/roff/troff/div.cpp (diversion::diversion): Use new name
