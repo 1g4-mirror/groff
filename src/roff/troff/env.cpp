@@ -2224,9 +2224,8 @@ static void distribute_space(node *nd, int nspaces,
   // add space until we run out, which might happen before the end of
   // the line.  To achieve uniform typographical grayness and avoid
   // rivers, we switch the end from which space is initially distributed
-  // with each line requiring it, unless compelled to reverse it.  The
-  // node list's natural ordering is in the direction of text flow, so
-  // we distribute space initially from the left, unlike AT&T troff.
+  // with each line requiring it, unless compelled to reverse it.  We
+  // distribute space initially from the left, unlike AT&T troff.
   static bool do_reverse_node_list = false;
   if (force_reverse_node_list || do_reverse_node_list)
     nd = node_list_reverse(nd);
