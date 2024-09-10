@@ -1,5 +1,14 @@
 2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.h (class top_level_diversion): Boolify
+	member variable `ejecting_page`, migrating trivial accessor and
+	mutator.
+	* src/roff/troff/div.cpp
+	(top_level_diversion::top_level_diversion): Migrate constructor.
+	(top_level_diversion::begin_page): Migrate.
+
+2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.h (class top_level_diversion): Boolify and
 	rename member variable: `have_next_page_number` ->
 	`overriding_next_page_number`.

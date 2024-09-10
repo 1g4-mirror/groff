@@ -111,7 +111,7 @@ class top_level_diversion : public diversion {
   trap *find_next_trap(vunits *);
   bool overriding_next_page_number;
   int next_page_number;
-  int ejecting_page;		// Is the current page being ejected?
+  bool ejecting_page;
 public:
   int before_first_page;
   top_level_diversion();
@@ -140,8 +140,8 @@ public:
   void set_next_page_number(int);
   void set_page_length(vunits);
   void copy_file(const char *filename);
-  int get_ejecting() { return ejecting_page; }
-  void set_ejecting() { ejecting_page = 1; }
+  bool get_ejecting() { return ejecting_page; }
+  void set_ejecting() { ejecting_page = true; }
   friend void page_offset();
   void set_diversion_trap(symbol, vunits);
   void clear_diversion_trap();

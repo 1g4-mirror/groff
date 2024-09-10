@@ -364,7 +364,7 @@ top_level_diversion::top_level_diversion()
   page_length(units_per_inch*11),
   prev_page_offset(units_per_inch), page_offset(units_per_inch),
   page_trap_list(0 /* nullptr */), overriding_next_page_number(false),
-  ejecting_page(0), before_first_page(1)
+  ejecting_page(false), before_first_page(1)
 {
 }
 
@@ -667,7 +667,7 @@ bool top_level_diversion::begin_page(vunits n)
   trap *next_trap = find_next_trap(&next_trap_pos);
   vertical_position = V0;
   high_water_mark = V0;
-  ejecting_page = 0;
+  ejecting_page = false;
   // If before_first_page was 2, then the top of page transition was
   // undone using eg .nr nl 0-1.  See nl_reg::set_value.
   if (before_first_page != 2)
