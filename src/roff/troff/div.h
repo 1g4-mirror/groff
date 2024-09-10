@@ -46,8 +46,8 @@ public:
   vunits marked_place;
   diversion(symbol s = NULL_SYMBOL);
   virtual ~diversion();
-  virtual void output(node *nd, int retain_size, vunits vs, vunits post_vs,
-		      hunits width) = 0;
+  virtual void output(node *nd, int retain_size, vunits vs,
+		      vunits post_vs, hunits width) = 0;
   virtual void transparent_output(unsigned char) = 0;
   virtual void transparent_output(node *) = 0;
   virtual void space(vunits distance, int forced = 0) = 0;
