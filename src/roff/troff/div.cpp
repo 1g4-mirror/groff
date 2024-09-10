@@ -207,8 +207,8 @@ macro_diversion::macro_diversion(symbol s, int append)
        will work and will make 'a' contain two copies of what it
        contained before; in troff, 'a' would contain nothing. */
     request_or_macro *rm
-      = (request_or_macro *)request_dictionary.remove(s);
-    if (!rm || (mac = rm->to_macro()) == 0 /* nullptr */)
+      = static_cast<request_or_macro *>(request_dictionary.remove(s));
+    if (!rm || (0 /* nullptr */ == (mac = rm->to_macro()))
       mac = new macro;
   }
   else
@@ -220,7 +220,7 @@ macro_diversion::macro_diversion(symbol s, int append)
   mac = new macro(1);
   if (append) {
     request_or_macro *rm
-      = (request_or_macro *)request_dictionary.lookup(s);
+      = static_cast<request_or_macro *>(request_dictionary.lookup(s));
     if (rm) {
       macro *m = rm->to_macro();
       if (m)
@@ -232,7 +232,7 @@ macro_diversion::macro_diversion(symbol s, int append)
 macro_diversion::~macro_diversion()
 {
   request_or_macro *rm
-    = (request_or_macro *)request_dictionary.lookup(nm);
+    = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
   macro *m = rm ? rm->to_macro() : 0 /* nullptr */;
   if (m) {
     *m = *mac;
@@ -375,9 +375,9 @@ trap *top_level_diversion::find_next_trap(vunits *next_trap_pos)
   for (trap *pt = page_trap_list; pt != 0 /* nullptr */; pt = pt->next)
     if (!pt->nm.is_null()) {
       if (pt->position >= V0) {
-	if (pt->position > vertical_position
-	    && pt->position < page_length
-	    && (next_trap == 0 /* nullptr */
+	if ((pt->position > vertical_position)
+	    && (pt->position < page_length)
+	    && ((0 /* nullptr */ == next_trap)
 	        || pt->position < *next_trap_pos)) {
 	  next_trap = pt;
 	  *next_trap_pos = pt->position;
@@ -386,9 +386,10 @@ trap *top_level_diversion::find_next_trap(vunits *next_trap_pos)
       else {
 	vunits pos = pt->position;
 	pos += page_length;
-	if (pos > 0
-	    && pos > vertical_position
-	    && (next_trap == 0 /* nullptr*/ || pos < *next_trap_pos)) {
+	if ((pos > 0)
+	    && (pos > vertical_position)
+	    && ((0 /* nullptr */ == next_trap)
+		|| (pos < *next_trap_pos))) {
 	  next_trap = pt;
 	  *next_trap_pos = pos;
 	}
@@ -553,7 +554,7 @@ void top_level_diversion::add_trap(symbol nam, vunits pos)
   trap **p;
   for (p = &page_trap_list; *p; p = &(*p)->next) {
     if ((*p)->nm.is_null()) {
-      if (first_free_slot == 0 /* nullptr*/)
+      if (0 /* nullptr*/ == first_free_slot)
 	first_free_slot = *p;
     }
     else if ((*p)->position == pos) {
@@ -764,7 +765,7 @@ void when_request()
 void begin_page()
 {
   int got_arg = 0;
-  int n = 0;		/* pacify compiler */
+  int n = 0;
   if (has_arg() && get_integer(&n, topdiv->get_page_number()))
     got_arg = 1;
   while (!tok.is_newline() && !tok.is_eof())
@@ -882,14 +883,13 @@ void need_space()
 
 void page_number()
 {
-  int n;
-
+  int n = 0;
   // the ps4html register is set if we are using -Tps
   // to generate images for html
   // XXX: Yuck!  Get rid of this; macro packages already test the
   // register before invoking .pn.
-  reg *r = (reg *)register_dictionary.lookup("ps4html");
-  if (r == 0 /* nullptr */)
+  reg *r = static_cast<reg *>(register_dictionary.lookup("ps4html"));
+  if (0 /* nullptr */ == r)
     if (has_arg() && get_integer(&n, topdiv->get_page_number()))
       topdiv->set_next_page_number(n);
   skip_line();
@@ -1022,7 +1022,7 @@ void return_request()
 
 void vertical_position_traps()
 {
-  int n;
+  int n = 0;
   if (has_arg() && get_integer(&n))
     honor_vertical_position_traps = (n > 0);
   else

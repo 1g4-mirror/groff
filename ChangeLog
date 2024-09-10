@@ -1,5 +1,20 @@
 2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (macro_diversion::macro_diversion)
+	(page_number): Use C++ `static_cast` operator instead of C-style
+	type cast.
+	(top_level_diversion::find_next_trap)
+	(top_level_diversion::add_trap): Parenthesize complex
+	expressions.
+	(page_number, vertical_position_traps): Zero-initialize
+	stack-allocated integer.
+	(macro_diversion::macro_diversion)
+	(top_level_diversion::find_next_trap)
+	(top_level_diversion::add_trap, page_number): Reorder equality
+	comparisons to avoid inadvertent lvalue assignment.
+
+2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (troff_output_file::fill_color):
 	Explicitly compare variable of pointer type to null pointer
 	literal instead of letting it pun down to a Boolean.
