@@ -1,5 +1,21 @@
 2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.h (do_divert): Boolify function arguments.
+	Comment formal argument names as a compromise with the
+	Stroustrup-style C++ used in most of groff.
+	* src/roff/troff/div.h (class diversion):
+	* src/roff/troff/env.h (class environment): Update friend
+	declarations.
+	* src/roff/troff/div.h (class macro_diversion): Similarly
+	boolify and rename constructor argument.
+	* src/roff/troff/div.cpp (do_divert, divert, divert_append, box,
+	box_append): Boolify function arguments.  Rename `append` to
+	`appending`, to match the existing `boxing`.
+	(macro_diversion::macro_diversion): Similarly boolify and rename
+	constructor argument.
+
+2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (begin_page): Boolify local variable
 	`got_arg`.
 

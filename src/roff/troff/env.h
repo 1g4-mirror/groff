@@ -411,8 +411,7 @@ public:
 #ifdef WIDOW_CONTROL
   friend void widow_control_request();
 #endif /* WIDOW_CONTROL */
-
-  friend void do_divert(int append, int boxing);
+  friend void do_divert(bool /* appending */, bool /* boxing */);
 };
 
 extern environment *curenv;

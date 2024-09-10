@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -16,12 +16,12 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-void do_divert(int append, int boxing);
+void do_divert(bool /* appending */, bool /* boxing */);
 void end_diversions();
 void page_offset();
 
 class diversion {
-  friend void do_divert(int append, int boxing);
+  friend void do_divert(bool /* appending */, bool /* boxing */);
   friend void end_diversions();
   diversion *prev;
   node *saved_line;
@@ -72,7 +72,7 @@ class macro_diversion : public diversion {
   symbol diversion_trap;
   vunits diversion_trap_pos;
 public:
-  macro_diversion(symbol, int);
+  macro_diversion(symbol, bool /* appending */);
   ~macro_diversion();
   void output(node *nd, int retain_size, vunits vs, vunits post_vs,
 	      hunits width);

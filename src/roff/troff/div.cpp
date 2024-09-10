@@ -93,7 +93,7 @@ top_level_diversion *topdiv;
 
 diversion *curdiv;
 
-void do_divert(int append, int boxing)
+void do_divert(bool appending, bool boxing)
 {
   tok.skip();
   symbol nm = get_name();
@@ -120,7 +120,7 @@ void do_divert(int append, int boxing)
       warning(WARN_DI, "diversion stack underflow");
   }
   else {
-    macro_diversion *md = new macro_diversion(nm, append);
+    macro_diversion *md = new macro_diversion(nm, appending);
     md->prev = curdiv;
     curdiv = md;
     curdiv->saved_seen_break = curenv->seen_break;
@@ -147,22 +147,22 @@ void do_divert(int append, int boxing)
 
 void divert()
 {
-  do_divert(0, 0);
+  do_divert(false /* appending */, false /* boxing */);
 }
 
 void divert_append()
 {
-  do_divert(1, 0);
+  do_divert(true /* appending */, false /* boxing */);
 }
 
 void box()
 {
-  do_divert(0, 1);
+  do_divert(false /* appending */, true /* boxing */);
 }
 
 void box_append()
 {
-  do_divert(1, 1);
+  do_divert(true /* appending */, true /* appending */);
 }
 
 void diversion::need(vunits n)
@@ -175,7 +175,7 @@ void diversion::need(vunits n)
   }
 }
 
-macro_diversion::macro_diversion(symbol s, int append)
+macro_diversion::macro_diversion(symbol s, bool appending)
 : diversion(s), max_width(H0), diversion_trap(0 /* nullptr */),
   diversion_trap_pos(0)
 {
@@ -219,7 +219,7 @@ macro_diversion::macro_diversion(symbol s, int append)
   // the length of the charlist in the macro_header with the length
   // stored in the macro. When we detect this, we copy the contents.
   mac = new macro(true /* is diversion */);
-  if (append) {
+  if (appending) {
     request_or_macro *rm
       = static_cast<request_or_macro *>(request_dictionary.lookup(s));
     if (rm) {
