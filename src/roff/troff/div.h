@@ -62,7 +62,7 @@ public:
   virtual void set_diversion_trap(symbol, vunits) = 0;
   virtual void clear_diversion_trap() = 0;
   virtual void copy_file(const char *filename) = 0;
-  virtual int is_diversion() = 0;
+  virtual bool is_diversion() = 0;
 };
 
 class macro;
@@ -88,7 +88,7 @@ public:
   void set_diversion_trap(symbol, vunits);
   void clear_diversion_trap();
   void copy_file(const char *filename);
-  int is_diversion() { return 1; }
+  bool is_diversion() { return true; }
 };
 
 struct trap {
@@ -146,7 +146,7 @@ public:
   void set_diversion_trap(symbol, vunits);
   void clear_diversion_trap();
   void set_last_page() { last_page_count = page_count; }
-  int is_diversion() { return 0; }
+  bool is_diversion() { return false; }
 };
 
 extern top_level_diversion *topdiv;
