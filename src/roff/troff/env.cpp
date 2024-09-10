@@ -2404,9 +2404,8 @@ node *environment::make_tag(const char *nm, int i)
      * need to emit tag for post-grohtml
      * but we check to see whether we can emit specials
      */
-    if (curdiv == topdiv && topdiv->before_first_page)
+    if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
       topdiv->begin_page();
-
     macro m;
     m.append_str("devtag:");
     for (const char *p = nm; *p; p++)
@@ -2531,7 +2530,7 @@ extern int global_diverted_space;
 void environment::do_break(bool want_adjustment)
 {
   bool was_centered = false;
-  if (curdiv == topdiv && topdiv->before_first_page) {
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0)) {
     topdiv->begin_page();
     return;
   }
@@ -2615,7 +2614,7 @@ void title()
     skip_line();
     return;
   }
-  if (curdiv == topdiv && topdiv->before_first_page) {
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0)) {
     handle_initial_title();
     return;
   }

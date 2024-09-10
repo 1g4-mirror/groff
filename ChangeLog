@@ -1,5 +1,27 @@
 2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.h (class top_level_diversion): Rename
+	`before_first_page` to `before_first_page_status` to emphasize
+	its non-Boolean nature.
+	* src/roff/troff/div.cpp
+	(top_level_diversion::top_level_diversion): Migrate constructor.
+	* src/roff/troff/div.cpp (top_level_diversion::output)
+	(top_level_diversion::transparent_output)
+	(top_level_diversion::copy_file)
+	(top_level_diversion::space)
+	(top_level_diversion::begin_page)
+	(vertical_position_reg::get_value)
+	(vertical_position_reg::get_string)
+	(nl_reg::get_string):
+	* src/roff/troff/env.cpp (environment::make_tag)
+	(environment::do_break, title):
+	* src/roff/troff/input.cpp
+	(possibly_handle_first_page_transition, device_request)
+	(copy_file, transparent_file): Explicitly compare to integer
+	literal instead of punning to Boolean.
+
+2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.h (class top_level_diversion): Boolify
 	member variable `ejecting_page`, migrating trivial accessor and
 	mutator.

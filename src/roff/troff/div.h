@@ -113,7 +113,7 @@ class top_level_diversion : public diversion {
   int next_page_number;
   bool ejecting_page;
 public:
-  int before_first_page;
+  int before_first_page_status; // three-valued Boolean :-|
   top_level_diversion();
   void output(node * /* nd */, bool /* retain_size */, vunits /* vs */,
 	      vunits /* post_vs */, hunits /* width */);

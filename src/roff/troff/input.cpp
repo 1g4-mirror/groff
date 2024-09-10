@@ -2941,7 +2941,8 @@ void do_request()
 
 inline int possibly_handle_first_page_transition()
 {
-  if (topdiv->before_first_page && curdiv == topdiv && !curenv->is_dummy()) {
+  if ((topdiv->before_first_page_status > 0) && (curdiv == topdiv)
+      && !curenv->is_dummy()) {
     handle_first_page_transition();
     return 1;
   }
@@ -5914,7 +5915,7 @@ static void device_request()
     if (c != ' ' && c != '\t')
       break;
   }
-  if (curdiv == topdiv && topdiv->before_first_page)
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
     topdiv->begin_page();
   // Null characters can correspond to node types like vmotion_node that
   // are unrepresentable in a device extension command, and got scrubbed
@@ -8249,7 +8250,7 @@ void copy_file()
     skip_line();
     return;
   }
-  if (curdiv == topdiv && topdiv->before_first_page) {
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0)) {
     handle_initial_request(COPY_FILE_REQUEST);
     return;
   }
@@ -8293,7 +8294,7 @@ void transparent_file()
     skip_line();
     return;
   }
-  if (curdiv == topdiv && topdiv->before_first_page) {
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0)) {
     handle_initial_request(TRANSPARENT_FILE_REQUEST);
     return;
   }

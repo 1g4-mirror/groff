@@ -364,7 +364,7 @@ top_level_diversion::top_level_diversion()
   page_length(units_per_inch*11),
   prev_page_offset(units_per_inch), page_offset(units_per_inch),
   page_trap_list(0 /* nullptr */), overriding_next_page_number(false),
-  ejecting_page(false), before_first_page(1)
+  ejecting_page(false), before_first_page_status(1)
 {
 }
 
@@ -426,7 +426,7 @@ void top_level_diversion::output(node *nd, bool retain_size,
   is_in_no_space_mode = false;
   vunits next_trap_pos;
   trap *next_trap = find_next_trap(&next_trap_pos);
-  if (before_first_page && begin_page())
+  if ((before_first_page_status > 0) && begin_page())
     fatal("attempting diversion output before first page has started,"
 	  " when a top-of-page trap is defined; invoke break or flush"
 	  " request beforehand");
@@ -479,7 +479,7 @@ void top_level_diversion::output(node *nd, bool retain_size,
 
 void top_level_diversion::transparent_output(unsigned char c)
 {
-  if (before_first_page && begin_page())
+  if ((before_first_page_status > 0) && begin_page())
     fatal("attempting transparent output from top-level diversion"
 	  " before first page has started, when a top-of-page trap is"
 	  " defined; invoke break or flush request beforehand");
@@ -498,7 +498,7 @@ void top_level_diversion::transparent_output(node * /*n*/)
 // Implement the internals of `.cf`.
 void top_level_diversion::copy_file(const char *filename)
 {
-  if (before_first_page && begin_page())
+  if ((before_first_page_status > 0) && begin_page())
     fatal("attempting transparent copy of file to top-level diversion"
 	  " before first page has started, when a top-of-page trap is"
 	  " defined; invoke break or flush request beforehand");
@@ -513,7 +513,7 @@ void top_level_diversion::space(vunits n, bool forcing)
     else
       is_in_no_space_mode = false;
   }
-  if (before_first_page) {
+  if (before_first_page_status > 0) {
     begin_page(n);
     return;
   }
@@ -657,7 +657,7 @@ bool top_level_diversion::begin_page(vunits n)
     page_number = next_page_number;
     overriding_next_page_number = false;
   }
-  else if (before_first_page == 1)
+  else if (before_first_page_status == 1)
     page_number = 1;
   else
     page_number++;
@@ -668,11 +668,11 @@ bool top_level_diversion::begin_page(vunits n)
   vertical_position = V0;
   high_water_mark = V0;
   ejecting_page = false;
-  // If before_first_page was 2, then the top of page transition was
-  // undone using eg .nr nl 0-1.  See nl_reg::set_value.
-  if (before_first_page != 2)
+  // If before_first_page_status was 2, then the top of page transition
+  // was undone using ".nr nl 0-1" or similar.  See nl_reg::set_value.
+  if (before_first_page_status != 2)
     the_output->begin_page(page_number, page_length);
-  before_first_page = 0;
+  before_first_page_status = 0;
   nl_reg_contents = vertical_position.to_units();
   if ((honor_vertical_position_traps && (next_trap != 0 /* nullptr */))
       && (next_trap_pos == V0)) {
@@ -773,7 +773,7 @@ void begin_page()
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();
   if (curdiv == topdiv) {
-    if (topdiv->before_first_page) {
+    if (topdiv->before_first_page_status > 0) {
       if (!want_break) {
 	if (got_arg)
 	  topdiv->set_next_page_number(n);
@@ -1074,7 +1074,7 @@ public:
 
 bool vertical_position_reg::get_value(units *res)
 {
-  if (curdiv == topdiv && topdiv->before_first_page)
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
     *res = -1;
   else
     *res = curdiv->get_vertical_position().to_units();
@@ -1083,7 +1083,7 @@ bool vertical_position_reg::get_value(units *res)
 
 const char *vertical_position_reg::get_string()
 {
-  if (curdiv == topdiv && topdiv->before_first_page)
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
     return "-1";
   else
     return i_to_a(curdiv->get_vertical_position().to_units());
@@ -1218,11 +1218,11 @@ void nl_reg::set_value(units n)
   // the top-level diversion is 0 undoes the top of page transition,
   // so that the header macro will be called as if the top of page
   // transition hasn't happened.  This is used by Larry Wall's
-  // wrapman program.  Setting before_first_page to 2 rather than 1,
-  // tells top_level_diversion::begin_page not to call
+  // wrapman program.  Setting before_first_page_status to 2 rather than
+  // 1, tells top_level_diversion::begin_page not to call
   // output_file::begin_page again.
   if (n < 0 && topdiv->get_vertical_position() == V0)
-    topdiv->before_first_page = 2;
+    topdiv->before_first_page_status = 2;
 }
 
 class no_space_mode_reg : public reg {
