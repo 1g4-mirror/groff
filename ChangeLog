@@ -1,5 +1,10 @@
 2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (class diversion): Drop unused member
+	variables `any_chars_added` and `needs_push`.
+
+2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (macro_diversion::macro_diversion):
 	Boolify argument to `macro` object constructor, using Boolean
 	instead of integer literal.  Continues commit 7c5b8e5d4a, 27

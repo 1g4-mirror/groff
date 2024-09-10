@@ -35,9 +35,7 @@ protected:
   vunits vertical_position;
   vunits high_water_mark;
 public:
-  int any_chars_added;
   int no_space_mode;
-  int needs_push;
   int saved_seen_break;
   int saved_seen_space;
   int saved_seen_eol;

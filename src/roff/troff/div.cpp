@@ -50,8 +50,8 @@ static vunits needed_space;
 
 diversion::diversion(symbol s)
 : prev(0 /* nullptr */), nm(s), vertical_position(V0),
-  high_water_mark(V0), any_chars_added(0), no_space_mode(0),
-  needs_push(0), saved_seen_break(0), saved_seen_space(0),
+  high_water_mark(V0), no_space_mode(0),
+  saved_seen_break(0), saved_seen_space(0),
   saved_seen_eol(0), saved_suppress_next_eol(0), marked_place(V0)
 {
 }
