@@ -5596,7 +5596,7 @@ static void do_width() // \w
       // diagnostic.
       char *delimdesc = strdup(start_token.description());
       warning(WARN_DELIM, "missing closing delimiter in width"
-	      "computation escape sequence; expected %1, got %2",
+	      " computation escape sequence; expected %1, got %2",
 	      delimdesc, tok.description());
       free(delimdesc);
       break;
