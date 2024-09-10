@@ -338,7 +338,7 @@ void macro_diversion::output(node *nd, bool retain_size,
     high_water_mark = vertical_position - v.post;
 }
 
-void macro_diversion::space(vunits n, int)
+void macro_diversion::space(vunits n, bool /* forcing */)
 {
   if (honor_vertical_position_traps
       && !diversion_trap.is_null()
@@ -505,10 +505,10 @@ void top_level_diversion::copy_file(const char *filename)
   the_output->copy_file(page_offset, vertical_position, filename);
 }
 
-void top_level_diversion::space(vunits n, int forced)
+void top_level_diversion::space(vunits n, bool forcing)
 {
   if (is_in_no_space_mode) {
-    if (!forced)
+    if (!forcing)
       return;
     else
       is_in_no_space_mode = false;
@@ -694,7 +694,7 @@ void continue_page_eject()
 	    " traps disabled");
     else {
       push_page_ejector();
-      topdiv->space(topdiv->get_page_length(), 1);
+      topdiv->space(topdiv->get_page_length(), true /* forcing */);
     }
   }
 }
@@ -904,7 +904,7 @@ void save_vertical_space()
   if (!has_arg() || !get_vunits(&x, 'v'))
     x = curenv->get_vertical_spacing();
   if (curdiv->distance_to_next_trap() > x)
-    curdiv->space(x, 1);
+    curdiv->space(x, true /* forcing */);
   else
     saved_space = x;
   skip_line();
@@ -915,7 +915,7 @@ void output_saved_vertical_space()
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();
   if (saved_space > V0)
-    curdiv->space(saved_space, 1);
+    curdiv->space(saved_space, true /* forcing */);
   saved_space = V0;
   tok.next();
 }

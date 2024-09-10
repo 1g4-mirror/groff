@@ -1,6 +1,18 @@
 2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/div.h (class diversion, class macro_diversion)
+	(class top_level_diversion): Boolify and rename `space()` member
+	function argument, demoting `forced` from `int` to `bool`, and
+	renaming it `forcing`, for symmetry with `appending` and
+	`boxing`.
+	* src/roff/troff/div.cpp (macro_diversion::space)
+	(top_level_diversion::space, continue_page_eject)
+	(save_vertical_space, output_saved_vertical_space):
+	* src/roff/troff/input.cpp (exit_troff): Migrate.
+
+2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.h (class diversion, class macro_diversion)
 	(class top_level_diversion): Boolify `output()` member function
 	argument, demoting `retain_size` from `int` to `bool`.
 	* src/roff/troff/div.cpp (macro_diversion::output)

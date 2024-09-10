@@ -49,7 +49,7 @@ public:
 		      hunits /* width */) = 0;
   virtual void transparent_output(unsigned char) = 0;
   virtual void transparent_output(node *) = 0;
-  virtual void space(vunits distance, int forced = 0) = 0;
+  virtual void space(vunits distance, bool /* forcing */ = 0) = 0;
 #ifdef COLUMN
   virtual void vjustify(symbol) = 0;
 #endif /* COLUMN */
@@ -79,7 +79,7 @@ public:
 	      vunits /* post_vs */, hunits /* width */);
   void transparent_output(unsigned char);
   void transparent_output(node *);
-  void space(vunits distance, int forced = 0);
+  void space(vunits distance, bool /* forcing */ = 0);
 #ifdef COLUMN
   void vjustify(symbol);
 #endif /* COLUMN */
@@ -119,7 +119,7 @@ public:
 	      vunits /* post_vs */, hunits /* width */);
   void transparent_output(unsigned char);
   void transparent_output(node *);
-  void space(vunits distance, int forced = 0);
+  void space(vunits distance, bool /* forcing */ = false);
 #ifdef COLUMN
   void vjustify(symbol);
 #endif /* COLUMN */
