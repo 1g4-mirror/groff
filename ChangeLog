@@ -1,3 +1,13 @@
+2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.h (class diversion, class macro_diversion)
+	(class top_level_diversion): Boolify `output()` member function
+	argument, demoting `retain_size` from `int` to `bool`.
+	* src/roff/troff/div.cpp (macro_diversion::output)
+	(top_level_diversion::output): Boolify at definition sites.
+	This variable seems to be coupled to `suppress_filling` in
+	"env.cpp".
+
 2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/div.h (do_divert): Boolify function arguments.

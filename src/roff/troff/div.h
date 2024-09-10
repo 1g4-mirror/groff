@@ -29,7 +29,7 @@ class diversion {
   int saved_space_total;
   hunits saved_saved_indent;
   hunits saved_target_text_length;
-  int saved_prev_line_interrupted;
+  int saved_prev_line_interrupted; // three-valued Boolean :-|
 protected:
   symbol nm;
   vunits vertical_position;
@@ -44,8 +44,9 @@ public:
   vunits marked_place;
   diversion(symbol s = NULL_SYMBOL);
   virtual ~diversion();
-  virtual void output(node *nd, int retain_size, vunits vs,
-		      vunits post_vs, hunits width) = 0;
+  virtual void output(node * /* nd */, bool /* retain_size */,
+		      vunits /* vs */, vunits /* post_vs */,
+		      hunits /* width */) = 0;
   virtual void transparent_output(unsigned char) = 0;
   virtual void transparent_output(node *) = 0;
   virtual void space(vunits distance, int forced = 0) = 0;
@@ -74,8 +75,8 @@ class macro_diversion : public diversion {
 public:
   macro_diversion(symbol, bool /* appending */);
   ~macro_diversion();
-  void output(node *nd, int retain_size, vunits vs, vunits post_vs,
-	      hunits width);
+  void output(node * /* nd */, bool /* retain_size */, vunits /* vs */,
+	      vunits /* post_vs */, hunits /* width */);
   void transparent_output(unsigned char);
   void transparent_output(node *);
   void space(vunits distance, int forced = 0);
@@ -114,8 +115,8 @@ class top_level_diversion : public diversion {
 public:
   int before_first_page;
   top_level_diversion();
-  void output(node *nd, int retain_size, vunits vs, vunits post_vs,
-	      hunits width);
+  void output(node * /* nd */, bool /* retain_size */, vunits /* vs */,
+	      vunits /* post_vs */, hunits /* width */);
   void transparent_output(unsigned char);
   void transparent_output(node *);
   void space(vunits distance, int forced = 0);

@@ -281,7 +281,7 @@ void macro_diversion::transparent_output(node *n)
   mac->append(n);
 }
 
-void macro_diversion::output(node *nd, int retain_size,
+void macro_diversion::output(node *nd, bool retain_size,
 			     vunits vs, vunits post_vs, hunits width)
 {
   is_in_no_space_mode = false;
@@ -419,7 +419,7 @@ const char *top_level_diversion::get_next_trap_name()
 }
 
 // This is used by more than just top-level diversions.
-void top_level_diversion::output(node *nd, int retain_size,
+void top_level_diversion::output(node *nd, bool retain_size,
 				 vunits vs, vunits post_vs,
 				 hunits width)
 {
