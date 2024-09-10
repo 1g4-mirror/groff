@@ -2981,7 +2981,7 @@ static int transparent_translate(int cc)
 
 int node::reread(int *)
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 int global_diverted_space = 0;
@@ -4564,7 +4564,7 @@ static void remove_character()
       charinfo *ci = tok.get_char(true /* required */);
       if (!ci)
 	break;
-      macro *m = ci->set_macro(0);
+      macro *m = ci->set_macro(0 /* nullptr */);
       if (m)
 	delete m;
     }
@@ -9108,8 +9108,8 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
   want_att_compat = false;
   int previous_escape_char = escape_char;
   escape_char = '\\';
-  macro *mac = ci->set_macro(0);
-  assert(mac != 0);
+  macro *mac = ci->set_macro(0 /* nullptr */);
+  assert(mac != 0 /* nullptr */);
   environment *oldenv = curenv;
   environment env(envp);
   curenv = &env;
