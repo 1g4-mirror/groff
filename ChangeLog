@@ -1,5 +1,10 @@
 2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (begin_page): Boolify local variable
+	`got_arg`.
+
+2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.h (class diversion): Boolify member
 	variables that cache values of Boolean member variables of
 	`environment` class.  Mark them as possibly nilpotent; when I

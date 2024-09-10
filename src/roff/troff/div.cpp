@@ -765,10 +765,10 @@ void when_request()
 
 void begin_page()
 {
-  int got_arg = 0;
+  bool got_arg = false;
   int n = 0;
   if (has_arg() && get_integer(&n, topdiv->get_page_number()))
-    got_arg = 1;
+    got_arg = true;
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();
   if (curdiv == topdiv) {
