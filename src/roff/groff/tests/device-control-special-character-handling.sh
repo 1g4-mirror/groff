@@ -97,6 +97,41 @@ echo "$output" | grep -Fqx 'x X bogus4: [\]^' || wail
 echo "checking X escape sequence, conversions to basic Latin (3/3)" >&2
 echo "$output" | grep -Fqx 'x X bogus5: {||}~' || wail
 
+# A more practical case, suggested by Deri James.
+
+input='.
+.ds h Hyphen-Minus and \[rs]\[u2010]
+\X"ps:exec 1:\\X [/Dest /\*[h] /Title \*[h] /Level 1 /OUT pdfmark"
+\!x X ps:exec 2:\! [/Dest /\*[h] /Title \*[h] /Level 1 /OUT pdfmark
+.device ps:exec 3:device [/Dest /\*[h] /Title \*[h] /Level 1 /OUT pdfmark
+.output x X ps:exec 4:output [/Dest /\*[h] /Title \*[h] /Level 1 /OUT pdfmark
+.'
+
+output=$(printf '%s\n' "$input" | "$groff" -T pdf -Z 2> /dev/null \
+  | grep '^x X')
+echo "$output"
+
+# Expected:
+#
+# x X ps:exec 2:\! [/Dest /Hyphen-Minus and \[rs]\[u2010] /Title Hyphen-Minus and \[rs]\[u2010] /Level 1 /OUT pdfmark
+# x X ps:exec 4:output [/Dest /Hyphen-Minus and \[rs]\[u2010] /Title Hyphen-Minus and \[rs]\[u2010] /Level 1 /OUT pdfmark
+# x X ps:exec 1:\X [/Dest /Hyphen-Minus and \[u2010] /Title Hyphen-Minus and \[u2010] /Level 1 /OUT pdfmark
+# x X ps:exec 3:device [/Dest /Hyphen-Minus and \[rs]\[u2010] /Title Hyphen-Minus and \[rs]\[u2010] /Level 1 /OUT pdfmark
+
+echo "checking practical bookmarking with \X escape sequence" >&2
+echo "$output" | grep -q '1:\\X.*Hyphen-Minus and \\\[u2010\]' || wail
+
+echo "checking practical bookmarking with \! escape sequence" >&2
+echo "$output" | grep -q '2:\\!.*Hyphen-Minus and \\\[rs\]\\\[u2010\]' \
+  || wail
+
+# XXX: case 3 isn't ready yet
+
+echo "checking practical bookmarking with output request" >&2
+echo "$output" \
+  | grep -q '4:output.*Hyphen-Minus and \\\[rs\]\\\[u2010\]' \
+  || wail
+
 test -z "$fail"
 
 # vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
