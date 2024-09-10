@@ -1,5 +1,10 @@
 2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(possibly_handle_first_page_transition): Boolify.
+
+2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.h (class top_level_diversion): Rename
 	`before_first_page` to `before_first_page_status` to emphasize
 	its non-Boolean nature.

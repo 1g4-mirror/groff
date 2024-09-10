@@ -2939,15 +2939,15 @@ void do_request()
     tok.next();
 }
 
-inline int possibly_handle_first_page_transition()
+inline bool possibly_handle_first_page_transition()
 {
   if ((topdiv->before_first_page_status > 0) && (curdiv == topdiv)
       && !curenv->is_dummy()) {
     handle_first_page_transition();
-    return 1;
+    return true;
   }
   else
-    return 0;
+    return false;
 }
 
 static int transparent_translate(int cc)
