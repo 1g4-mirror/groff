@@ -109,7 +109,7 @@ class top_level_diversion : public diversion {
   hunits page_offset;
   trap *page_trap_list;
   trap *find_next_trap(vunits *);
-  int have_next_page_number;
+  bool overriding_next_page_number;
   int next_page_number;
   int ejecting_page;		// Is the current page being ejected?
 public:

@@ -363,7 +363,7 @@ top_level_diversion::top_level_diversion()
 : page_number(0), page_count(0), last_page_count(-1),
   page_length(units_per_inch*11),
   prev_page_offset(units_per_inch), page_offset(units_per_inch),
-  page_trap_list(0 /* nullptr */), have_next_page_number(0),
+  page_trap_list(0 /* nullptr */), overriding_next_page_number(false),
   ejecting_page(0), before_first_page(1)
 {
 }
@@ -653,9 +653,9 @@ bool top_level_diversion::begin_page(vunits n)
   if (0 /* nullptr */ == the_output)
     init_output();
   ++page_count;
-  if (have_next_page_number) {
+  if (overriding_next_page_number) {
     page_number = next_page_number;
-    have_next_page_number = 0;
+    overriding_next_page_number = false;
   }
   else if (before_first_page == 1)
     page_number = 1;
@@ -701,13 +701,14 @@ void continue_page_eject()
 
 void top_level_diversion::set_next_page_number(int n)
 {
-  next_page_number= n;
-  have_next_page_number = 1;
+  next_page_number = n;
+  overriding_next_page_number = true;
 }
 
 int top_level_diversion::get_next_page_number()
 {
-  return have_next_page_number ? next_page_number : page_number + 1;
+  return overriding_next_page_number ? next_page_number
+				     : (page_number + 1);
 }
 
 void top_level_diversion::set_page_length(vunits n)
