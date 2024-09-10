@@ -1,5 +1,18 @@
 2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.h (class diversion): Boolify and rename
+	member variable `no_space_mode` to `is_in_no_space_mode`.
+	* src/roff/troff/div.cpp (diversion::diversion): Use new name
+	and construct with Boolean, not integer, literal.
+	(macro_diversion::output, top_level_diversion::output)
+	(top_level_diversion::copy_file, top_level_diversion::space)
+	(begin_page, space_request, blank_line)
+	(no_space_mode_reg::get_value, no_space_mode::get_string):
+	Migrate to new name and assign to with Boolean, not integer,
+	literal.
+
+2024-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (class diversion): Drop unused member
 	variables `any_chars_added` and `needs_push`.
 

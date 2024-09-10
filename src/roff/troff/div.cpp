@@ -50,7 +50,7 @@ static vunits needed_space;
 
 diversion::diversion(symbol s)
 : prev(0 /* nullptr */), nm(s), vertical_position(V0),
-  high_water_mark(V0), no_space_mode(0),
+  high_water_mark(V0), is_in_no_space_mode(false),
   saved_seen_break(0), saved_seen_space(0),
   saved_seen_eol(0), saved_suppress_next_eol(0), marked_place(V0)
 {
@@ -283,7 +283,7 @@ void macro_diversion::transparent_output(node *n)
 void macro_diversion::output(node *nd, int retain_size,
 			     vunits vs, vunits post_vs, hunits width)
 {
-  no_space_mode = 0;
+  is_in_no_space_mode = false;
   vertical_size v(vs, post_vs);
   while (nd != 0 /* nullptr */) {
     nd->set_vertical_size(&v);
@@ -422,7 +422,7 @@ void top_level_diversion::output(node *nd, int retain_size,
 				 vunits vs, vunits post_vs,
 				 hunits width)
 {
-  no_space_mode = 0;
+  is_in_no_space_mode = false;
   vunits next_trap_pos;
   trap *next_trap = find_next_trap(&next_trap_pos);
   if (before_first_page && begin_page())
@@ -506,11 +506,11 @@ void top_level_diversion::copy_file(const char *filename)
 
 void top_level_diversion::space(vunits n, int forced)
 {
-  if (no_space_mode) {
+  if (is_in_no_space_mode) {
     if (!forced)
       return;
     else
-      no_space_mode = 0;
+      is_in_no_space_mode = false;
   }
   if (before_first_page) {
     begin_page(n);
@@ -775,10 +775,10 @@ void begin_page()
       if (!want_break) {
 	if (got_arg)
 	  topdiv->set_next_page_number(n);
-	if (got_arg || !topdiv->no_space_mode)
+	if (got_arg || !topdiv->is_in_no_space_mode)
 	  topdiv->begin_page();
       }
-      else if (topdiv->no_space_mode && !got_arg)
+      else if (topdiv->is_in_no_space_mode && !got_arg)
 	topdiv->begin_page();
       else {
 	/* Given this
@@ -809,7 +809,7 @@ void begin_page()
 	curenv->do_break();
       if (got_arg)
 	topdiv->set_next_page_number(n);
-      if (!(topdiv->no_space_mode && !got_arg))
+      if (!(topdiv->is_in_no_space_mode && !got_arg))
 	topdiv->set_ejecting();
     }
   }
@@ -818,13 +818,13 @@ void begin_page()
 
 void no_space()
 {
-  curdiv->no_space_mode = 1;
+  curdiv->is_in_no_space_mode = true;
   skip_line();
 }
 
 void restore_spacing()
 {
-  curdiv->no_space_mode = 0;
+  curdiv->is_in_no_space_mode = false;
   skip_line();
 }
 
@@ -849,7 +849,7 @@ void space_request()
     n = curenv->get_vertical_spacing();
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();
-  if (!unpostpone_traps() && !curdiv->no_space_mode)
+  if (!unpostpone_traps() && !curdiv->is_in_no_space_mode)
     curdiv->space(n);
   else
     // The line might have had line spacing that was truncated.
@@ -861,7 +861,7 @@ void space_request()
 void blank_line()
 {
   curenv->do_break();
-  if (!was_trap_sprung && !curdiv->no_space_mode)
+  if (!was_trap_sprung && !curdiv->is_in_no_space_mode)
     curdiv->space(curenv->get_vertical_spacing());
   else
     truncated_space += curenv->get_vertical_spacing();
@@ -1231,13 +1231,13 @@ public:
 
 bool no_space_mode_reg::get_value(units *val)
 {
-  *val = curdiv->no_space_mode;
+  *val = curdiv->is_in_no_space_mode;
   return true;
 }
 
 const char *no_space_mode_reg::get_string()
 {
-  return curdiv->no_space_mode ? "1" : "0";
+  return curdiv->is_in_no_space_mode ? "1" : "0";
 }
 
 void init_div_requests()

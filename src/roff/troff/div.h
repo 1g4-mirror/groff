@@ -35,7 +35,7 @@ protected:
   vunits vertical_position;
   vunits high_water_mark;
 public:
-  int no_space_mode;
+  bool is_in_no_space_mode;
   int saved_seen_break;
   int saved_seen_space;
   int saved_seen_eol;
