@@ -12,6 +12,16 @@
 
 2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/soelim/soelim.1.man (Description):
+	* src/roff/groff/groff.1.man (groff-specific options, Usage)
+	(Getting started): Hyperlink man page cross references on first
+	occurrences.
+
+	Fixes <https://savannah.gnu.org/bugs/?66103>.  Thanks to Helge
+	Kreutzmann and the manpage-l10n project for the report.
+
+2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (html_system): Improve report of
 	failing system(3) commands and fix code style nits.  Use
 	standard constant symbol `STDOUT_FILENO` in favor of a "1"
