@@ -1,5 +1,17 @@
 2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (html_system): Improve report of
+	failing system(3) commands and fix code style nits.  Use
+	standard constant symbol `STDOUT_FILENO` in favor of a "1"
+	literal.  Parenthesize complex expressions.  Recast diagnostic
+	message.  Stop misreporting the `int` return value of `system()`
+	as the command's "(exit) status".  The integer _encodes_ the
+	exit status in its lowest seven bits.  Distinguish the cases of
+	the command exiting with a failing status, being signalled, and
+	being stopped, using standard POSIX macros; see wait(2).
+
+2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (imageList::createPage)
 	(imageList::createImage): Drop trailing newline from commands
 	constructed for passage to system(3).  They are (a) unnecessary

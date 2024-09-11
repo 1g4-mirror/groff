@@ -377,19 +377,33 @@ void html_system(const char *s, int redirect_stdout)
   }
 #endif
   {
-    int saved_stdout = dup(1);
+    int saved_stdout = dup(STDOUT_FILENO);
     int fdnull = open(NULL_DEV, O_WRONLY|O_BINARY, 0666);
-    if (redirect_stdout && saved_stdout > 1 && fdnull > 1)
-      dup2(fdnull, 1);
+    if (redirect_stdout && (saved_stdout > STDOUT_FILENO)
+	&& (fdnull > STDOUT_FILENO))
+      dup2(fdnull, STDOUT_FILENO);
     if (fdnull >= 0)
       close(fdnull);
     int status = system(s);
     if (redirect_stdout)
-      dup2(saved_stdout, 1);
-    if (status == -1)
-      fprintf(stderr, "Calling '%s' failed\n", s);
-    else if (status)
-      fprintf(stderr, "Calling '%s' returned status %d\n", s, status);
+      dup2(saved_stdout, STDOUT_FILENO);
+    if (-1 == status)
+      fprintf(stderr, "%s: unable to execute command '%s': %s\n",
+	      program_name, s, strerror(errno));
+    else if (status > 0) {
+      if (WIFEXITED(status))
+	fprintf(stderr, "%s: command '%s' returned status %d\n",
+		program_name, s, WEXITSTATUS(status));
+      else if (WIFSIGNALED(status))
+	fprintf(stderr, "%s: command '%s' exited by signal: %s\n",
+		program_name, s, strsignal(WTERMSIG(status)));
+      else if (WIFSTOPPED(status))
+	fprintf(stderr, "%s: command '%s' stopped: %s\n",
+		program_name, s, strsignal(WSTOPSIG(status)));
+      else
+	fprintf(stderr, "%s: command '%s' exited abnormally\n",
+		program_name, s);
+    }
     close(saved_stdout);
   }
 }
