@@ -1,5 +1,13 @@
 2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Trivially refactor; rename variables
+	to better suggest their data types.
+	  `suppress_start_page` -> `suppression_starting_page_number`
+	(suppress_node::tprint):
+	  `current_page` -> `page_number`
+
+2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (indent, temporary_indent): Report
 	amount of computed indentation when warning of negative value.
 

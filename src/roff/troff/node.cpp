@@ -72,7 +72,7 @@ tfont *make_tfont(tfont_spec &);
  */
 
 int image_no = 0;
-static int suppress_start_page = 0;
+static int suppression_starting_page_number = 0;
 
 #define STORE_WIDTH 1
 
@@ -4151,7 +4151,7 @@ static int subimage_counter = 0;
 
 void suppress_node::tprint(troff_output_file *out)
 {
-  int current_page = topdiv->get_page_number();
+  int page_number = topdiv->get_page_number();
   // Does the node have an associated position and file name?
   if (is_on == 2) {
     // Save them for future bounding box limits.
@@ -4239,15 +4239,16 @@ void suppress_node::tprint(troff_output_file *out)
       }
       else {
 	// postscript (or other device)
-	if (suppress_start_page > 0
-	    && (current_page != suppress_start_page))
+	if ((suppression_starting_page_number > 0)
+	    && (page_number != suppression_starting_page_number))
 	  error("suppression limit registers span more than a page;"
 		" grohtml-info for image %1 will be wrong", image_no);
-	// if (topdiv->get_page_number() != suppress_start_page)
+	//if (topdiv->get_page_number()
+	//    != suppression_starting_page_number)
 	//  fprintf(stderr, "end of image and topdiv page = %d   and"
-	//		      " suppress_start_page = %d\n",
-	//	  topdiv->get_page_number(), suppress_start_page);
-
+	//	  " suppression_starting_page_number = %d\n",
+	//	  topdiv->get_page_number(),
+	//	  suppression_starting_page_number);
 	// `name` will contain a "%d" in which the image_no is placed.
 	fprintf(stderr,
 		"grohtml-info:page %d  %d  %d  %d  %d  %d  %s  %d  %d"
@@ -4269,7 +4270,7 @@ void suppress_node::tprint(troff_output_file *out)
       }
       else
 	out->off();
-      suppress_start_page = current_page;
+      suppression_starting_page_number = page_number;
     }
   } // is_on
 }
