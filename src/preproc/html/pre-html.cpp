@@ -1252,6 +1252,7 @@ char **addRegDef(int argc, char *argv[], const char *numReg)
   return new_argv;
 }
 
+#if 0
 /*
  *  dump_args - Display the argument list.
  */
@@ -1263,6 +1264,7 @@ void dump_args(int argc, char *argv[])
     fprintf(stderr, " %s", argv[i]);
   fprintf(stderr, "\n");
 }
+#endif
 
 /*
  *  print_args - Print arguments as if issued on the command line.
