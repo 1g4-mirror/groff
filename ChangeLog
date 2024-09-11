@@ -1,5 +1,25 @@
 2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp: Improve diagnostic message
+	handling.
+	(html_system)
+	(imageList::createPage)
+	(imageList::createImage)
+	(set_redirection)
+	(save_and_redirect)
+	(print_args [DEBUGGING]): Prefix output to standard error stream
+	with name of program.
+	(html_system [DEBUGGING])
+	(imageList::createPage [DEBUGGING])
+	(imageList::createImage [DEBUGGING])
+	(print_args [DEBUGGING]): Prefix output to standard error stream
+	with "debug:" message severity tag.
+	(main): Assign to `program_name` global variable before emitting
+	first diagnostic ([CAPTURE_MODE]), and convert that diagnostic
+	to use it.
+
+2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (dump_args): "`#if 0` out"
 	function with no call sites.
 

@@ -371,7 +371,7 @@ void html_system(const char *s, int redirect_stdout)
 {
 #if defined(DEBUGGING)
   if (debugging) {
-    fprintf(stderr, "executing: ");
+    fprintf(stderr, "%s: debug: executing: ", program_name);
     fwrite(s, sizeof(char), strlen(s), stderr);
     fflush(stderr);
   }
@@ -915,7 +915,8 @@ int imageList::createPage(int pageno)
 
 #if defined(DEBUGGING)
   if (debugging)
-    fprintf(stderr, "creating page %d\n", pageno);
+    fprintf(stderr, "%s: debug: creating page %d\n", program_name,
+	    pageno);
 #endif
 
   s = make_string("ps2ps -sPageList=%d %s %s\n",
@@ -1021,15 +1022,16 @@ void imageList::createImage(imageItem *i)
       free(s);
     }
     else {
-      fprintf(stderr, "failed to generate image of page %d\n",
-	      i->pageNo);
+      fprintf(stderr, "%s: failed to generate image of page %d\n",
+	      program_name, i->pageNo);
       fflush(stderr);
     }
 #if defined(DEBUGGING)
   }
   else {
     if (debugging) {
-      fprintf(stderr, "ignoring image as x1 coord is -1\n");
+      fprintf(stderr, "%s: debug: ignoring image as x1 coord is -1\n"
+	      program_name);
       fflush(stderr);
     }
 #endif
@@ -1126,10 +1128,12 @@ static void set_redirection(int was, int willbe)
     // Otherwise attempt the specified redirection.
     if (dup2(willbe, was) < 0) {
       // Redirection failed, so issue diagnostic and bail out.
-      fprintf(stderr, "failed to replace fd=%d with %d\n", was, willbe);
+      fprintf(stderr, "%s: unable to replace fd=%d with %d",
+	      program_name, was, willbe);
       if (willbe == STDOUT_FILENO)
 	fprintf(stderr,
-		"likely that stdout should be opened before %d\n", was);
+		"; likely that stdout should be opened before %d", was);
+      fputc('\n', stderr);
       sys_fatal("dup2");
     }
 
@@ -1156,7 +1160,8 @@ static int save_and_redirect(int was, int willbe)
   // handle for 'was'.
   int saved = dup(was);
   if (saved < 0) {
-    fprintf(stderr, "unable to get duplicate handle for %d\n", was);
+    fprintf(stderr, "%s: unable to get duplicate file descriptor for"
+	    " %d\n", program_name, was);
     sys_fatal("dup");
   }
 
@@ -1275,10 +1280,10 @@ void dump_args(int argc, char *argv[])
 void print_args(int argc, char *argv[])
 {
   if (debugging) {
-    fprintf(stderr, "executing: ");
+    fprintf(stderr, "%s: debug: executing: ", program_name);
     for (int i = 0; i < argc; i++)
       fprintf(stderr, "%s ", argv[i]);
-    fprintf(stderr, "\n");
+    fputc('\n', stderr);
   }
 }
 
@@ -1772,8 +1777,10 @@ static void cleanup(void)
 
 int main(int argc, char **argv)
 {
+  program_name = argv[0];
 #ifdef CAPTURE_MODE
-  fprintf(stderr, "%s: invoked with %d arguments ...\n", argv[0], argc);
+  fprintf(stderr, "%s: invoked with %d arguments ...\n", program_name,
+	  argc);
   for (int i = 0; i < argc; i++)
     fprintf(stderr, "%2d: %s\n", i, argv[i]);
   FILE *dump = fopen(DEBUG_FILE("pre-html-data"), "wb");
@@ -1784,7 +1791,6 @@ int main(int argc, char **argv)
   }
   exit(EXIT_FAILURE);
 #endif /* CAPTURE_MODE */
-  program_name = argv[0];
   if (atexit(&cleanup) != 0)
     sys_fatal("atexit");
   int operand_index = scanArguments(argc, argv);
