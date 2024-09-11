@@ -957,7 +957,7 @@ commands is on top of the dictionary stack.
 .
 If your code adds definitions to this dictionary,
 you should allocate space for them using
-.RB \[lq] "\[rs]X\[aq]ps: mdef\~"
+.RB \[lq] "\[rs]X\[aq]ps:\~mdef\~"
 .IB n \[aq]\c
 \[rq].
 .
@@ -1224,9 +1224,9 @@ is previewed with
 If a PostScript procedure
 .B BPhook
 has been defined via a
-.RB \[lq] "ps: def" \[rq]
+.RB \[lq] "ps:\~def" \[rq]
 or
-.RB \[lq] "ps: mdef" \[rq]
+.RB \[lq] "ps:\~mdef" \[rq]
 device extension command,
 it is executed at the beginning of every page
 (before anything is drawn or written by
