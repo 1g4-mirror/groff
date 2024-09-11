@@ -4855,13 +4855,14 @@ Texinfo manual.
 .TP
 .ESC \[dq]
 Comment;
-ignore everything up to the next newline.
+read everything up to the next newline in copy mode and discard it.
 .
 .
 .TP
 .ESC #
-Comment;
-ignore everything up to and including the next newline.
+Whole-line comment;
+read everything up to and including the next newline in copy mode and
+discard it.
 .
 .
 .\" ========= strings =========
@@ -4983,14 +4984,16 @@ prevent it from being otherwise hyphenated.
 .
 .TP
 .ESC !
-Transparent line.
+Transparent throughput.
 .
-The remainder of the input line is interpreted
-(1) when the current diversion is read;
+Read everything up to the next newline in copy mode and ignore it,
+but pass it through to
+(1) an enclosing diversion,
 or
-(2) if in the top-level diversion,
-by the postprocessor
-(if any).
+(2) if appearing in the top-level diversion,
+GNU
+.I troff \" GNU
+output.
 .
 .
 .TP

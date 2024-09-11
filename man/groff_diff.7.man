@@ -1210,9 +1210,8 @@ then restore it.
 .
 .TP
 .B \[rs]#
-Ignore everything up to and including the next newline.
-.
-This escape sequence is interpreted even in copy mode.
+Read everything up to and including the next newline in copy mode and
+discard it.
 .
 .B \[rs]#
 is like

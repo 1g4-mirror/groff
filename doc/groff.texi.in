@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle August 2024
+@subtitle September 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -7368,19 +7368,22 @@ One of the most common forms of escape sequence is the
 comment.@footnote{This claim may be more aspirational than descriptive.}
 
 @Defesc {\\", , , }
-Start a comment.  Everything up to the next newline is ignored.
+Start a comment; read everything up to the next newline in copy mode
+(@pxref{Copy Mode}) and discard it.
 @cindex @code{\"}, interpretation in copy mode
-@code{\"} is interpreted even in copy mode, to discard the comment
-(@pxref{Copy Mode}).
+@code{\"} is interpreted even in copy mode.
 
-This may sound simple, but it can be tricky to keep the comments from
-interfering with the appearance of the output.
+It can be tricky to keep the comments from interfering with the
+appearance of the output.
 @cindex @code{ds}, @code{ds1} requests, and comments
 @cindex @code{as}, @code{as1} requests, and comments
 If the escape sequence is to the right of some text or a request, that
-portion of the line is ignored, but spaces preceding it are processed
-normally by GNU @code{troff}.  This affects only the @code{ds} and
-@code{as} requests and their variants.
+portion of the line is ignored, but GNU @command{troff} processes spaces
+preceding it normally.  This affects requests that read the remainder of
+the control line as a single argument, including @code{ds}, @code{as},
+@code{tm}, and @code{char}; their variants; as well as @code{ab},
+@code{device}, @code{length}, @code{output}, @code{pi}, @code{pso},
+@code{rd}, @code{sy}, @code{write}, and @code{writec}.
 
 @cindex tabs, before comments
 @cindex comments, lining up with tabs
@@ -7415,12 +7418,12 @@ macro (namely @samp{''}).
 @endDefesc
 
 @Defesc {\\#, , , }
-Start a comment; everything up to and including the next newline is
-ignored.  This @code{groff} extension was introduced to avoid the
-problems described above.
+Start a whole-line comment; read everything up to and including the next
+newline in copy mode (@pxref{Copy Mode}) and discard it.  GNU
+@command{troff} introduced this extension to avoid the problems
+described above.
 @cindex @code{\#}, interpretation in copy mode
-@code{\#} is interpreted even in copy mode, to discard the comment
-(@pxref{Copy Mode}).
+@code{\#} is interpreted even in copy mode.
 
 @Example
 Test
