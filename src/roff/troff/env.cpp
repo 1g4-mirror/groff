@@ -1578,7 +1578,8 @@ void indent()
   hunits temp;
   if (has_arg() && get_hunits(&temp, 'm', curenv->indent)) {
     if (temp < H0) {
-      warning(WARN_RANGE, "indent cannot be negative");
+      warning(WARN_RANGE, "treating %1u indentation as zero",
+	      temp.to_units());
       temp = H0;
     }
   }
@@ -1606,7 +1607,8 @@ void temporary_indent()
   if (want_break)
     curenv->do_break();
   if (temp < H0) {
-    warning(WARN_RANGE, "total indent cannot be negative");
+    warning(WARN_RANGE, "treating total indentation %1u as zero",
+	    temp.to_units());
     temp = H0;
   }
   if (is_valid) {

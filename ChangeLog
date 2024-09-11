@@ -1,5 +1,10 @@
 2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (indent, temporary_indent): Report
+	amount of computed indentation when warning of negative value.
+
+2024-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp
 	(possibly_handle_first_page_transition): Boolify.
 
