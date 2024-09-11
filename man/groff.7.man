@@ -4423,15 +4423,15 @@ of the selected font's
 parameter.
 .
 .TPx
-.REQ .stringdown stringvar
+.REQ .stringdown str
 Replace each byte in the string named
-.I stringvar
+.I str
 with its lowercase version.
 .
 .TPx
-.REQ .stringup stringvar
+.REQ .stringup str
 Replace each byte in the string named
-.I stringvar
+.I str
 with its uppercase version.
 .
 .TPx
