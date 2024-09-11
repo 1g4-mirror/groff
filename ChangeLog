@@ -1,5 +1,12 @@
 2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (imageList::createPage)
+	(imageList::createImage): Drop trailing newline from commands
+	constructed for passage to system(3).  They are (a) unnecessary
+	and (b) make diagnostics repellently ugly.
+
+2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp: Improve diagnostic message
 	handling.
 	(html_system)

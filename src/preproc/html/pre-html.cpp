@@ -919,7 +919,7 @@ int imageList::createPage(int pageno)
 	    pageno);
 #endif
 
-  s = make_string("ps2ps -sPageList=%d %s %s\n",
+  s = make_string("ps2ps -sPageList=%d %s %s",
 		   pageno, psFileName, psPageName);
   html_system(s, 1);
   assert(strlen(image_gen) > 0);
@@ -928,7 +928,7 @@ int imageList::createPage(int pageno)
 		  "-dDEVICEHEIGHTPOINTS=792 "
 		  "-dDEVICEWIDTHPOINTS=%d -dFIXEDMEDIA=true "
 		  "-sDEVICE=%s -r%d %s "
-		  "-sOutputFile=%s %s -\n",
+		  "-sOutputFile=%s %s -",
 		  image_gen,
 		  EXE_EXT,
 		  (getMaxX(pageno) * image_res) / postscriptRes,
@@ -1010,7 +1010,7 @@ void imageList::createImage(imageItem *i)
       s = make_string("pamcut%s %d %d %d %d < %s "
 		      "| pnmcrop%s " PNMTOOLS_QUIET
 		      "| pnmtopng%s " PNMTOOLS_QUIET " %s"
-		      "> %s\n",
+		      "> %s",
 		      EXE_EXT,
 		      x1, y1, x2 - x1 + 1, y2 - y1 + 1,
 		      imagePageName,
