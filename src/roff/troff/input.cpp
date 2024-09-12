@@ -7236,7 +7236,6 @@ static void open_file(bool appending)
 	      strerror(errno));
     }
   }
-  skip_line();
 }
 
 static void open_request() // .open
@@ -7252,6 +7251,7 @@ static void open_request() // .open
   }
   else
     open_file(false /* appending */);
+  skip_line();
 }
 
 static void opena_request() // .opena
@@ -7267,6 +7267,7 @@ static void opena_request() // .opena
   }
   else
     open_file(true /* appending */);
+  skip_line();
 }
 
 static void close_request() // .close

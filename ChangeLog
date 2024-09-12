@@ -1,5 +1,13 @@
 2024-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.  Move
+	responsibility for skipping the rest of the input line...
+	(open_file): ...from this internal helper function...
+	(open_request, opena_request): ...to these handler functions,
+	for better symmetry with other request handlers.
+
+2024-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_open): The `write` request, an
 	"unsafe mode" feature has been broken for a week.  (As,
 	possibly, have others that write to streams.)  Revert
