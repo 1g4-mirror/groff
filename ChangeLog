@@ -12,6 +12,18 @@
 
 2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.  Rename
+	request-handling functions to append `_request` to their names.
+	  `source`               -> `source_request`
+	  `source_quietly`       -> `source_quietly_request`
+	  `pipe_source`          -> `pipe_source_request`
+	  `macro_source`         -> `macro_source_request`
+	  `macro_source_quietly` -> `macro_source_quietly_request`
+	(init_input_requests): Migrate to new names.
+	(open_request, opena_request): Clarify error diagnostics.
+
+2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.1.man (Description):
 	* src/roff/groff/groff.1.man (groff-specific options, Usage)
 	(Getting started): Hyperlink man page cross references on first

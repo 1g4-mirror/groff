@@ -6449,24 +6449,19 @@ void do_source(bool quietly)
   }
 }
 
-// .so
-
-void source()
+void source_request() // .so
 {
-  do_source(false /* not quietly*/ );
+  do_source(false /* quietly */ );
 }
 
-// .soquiet: like .so, but silently ignore files that can't be opened
-// due to their nonexistence
-
-void source_quietly()
+// like .so, but silently ignore files that can't be opened due to their
+// nonexistence
+void source_quietly_request() // .soquiet
 {
   do_source(true /* quietly */ );
 }
 
-// like .so but use popen()
-
-void pipe_source()
+void pipe_source_request() // .pso
 {
   if (!want_unsafe_requests) {
     error("piped command source request is not allowed in safer mode");
@@ -7226,17 +7221,17 @@ static void do_open(bool append)
   skip_line();
 }
 
-static void open_request()
+static void open_request() // .open
 {
   if (!want_unsafe_requests) {
-    error("file opening request is not allowed in safer mode");
+    error("file writing request is not allowed in safer mode");
     skip_line();
   }
   else
     do_open(false /* don't append */);
 }
 
-static void opena_request()
+static void opena_request() // .opena
 {
   if (!want_unsafe_requests) {
     error("file appending request is not allowed in safer mode");
@@ -7246,7 +7241,7 @@ static void opena_request()
     do_open(true /* append */);
 }
 
-static void close_request()
+static void close_request() // .close
 {
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
@@ -8486,17 +8481,14 @@ void do_macro_source(bool quietly)
   }
 }
 
-// .mso
-
-void macro_source()
+void macro_source_request() // .mso
 {
-  do_macro_source(false /* not quietly (if WARN_FILE enabled) */ );
+  do_macro_source(false /* quietly */ );
 }
 
-// .msoquiet: like .mso, but silently ignore files that can't be opened
-// due to their nonexistence
-
-void macro_source_quietly()
+// like .mso, but silently ignore files that can't be opened due to
+// their nonexistence
+void macro_source_quietly_request() // .msoquiet
 {
   do_macro_source(true /* quietly */ );
 }
@@ -8993,8 +8985,8 @@ void init_input_requests()
   init_request("length", length_request);
   init_request("lf", line_file);
   init_request("lsm", leading_spaces_macro);
-  init_request("mso", macro_source);
-  init_request("msoquiet", macro_source_quietly);
+  init_request("mso", macro_source_request);
+  init_request("msoquiet", macro_source_quietly_request);
   init_request("nop", nop_request);
   init_request("nroff", nroff_request);
   init_request("nx", next_file);
@@ -9008,7 +9000,7 @@ void init_input_requests()
   init_request("pi", pipe_output);
   init_request("pm", print_macros);
   init_request("psbb", ps_bbox_request);
-  init_request("pso", pipe_source);
+  init_request("pso", pipe_source_request);
   init_request("rchar", remove_character);
   init_request("rd", read_request);
   init_request("return", return_macro_request);
@@ -9016,8 +9008,8 @@ void init_input_requests()
   init_request("rn", rename_macro);
   init_request("schar", define_special_character);
   init_request("shift", shift);
-  init_request("so", source);
-  init_request("soquiet", source_quietly);
+  init_request("so", source_request);
+  init_request("soquiet", source_quietly_request);
   init_request("spreadwarn", spreadwarn_request);
   init_request("stringdown", stringdown_request);
   init_request("stringup", stringup_request);
