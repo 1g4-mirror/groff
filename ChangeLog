@@ -1,3 +1,11 @@
+2024-10-14  Dave Kemper <saint.snit@gmail.com>
+
+	* tmac/en.tmac: Map hcodes of Latin-1 characters with
+	diacritical marks that are used in English words to their
+	unadorned ASCII counterparts.
+
+	Fixes <https://savannah.gnu.org/bugs/?66112>.
+
 2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* man/groff_tmac.5.man:
