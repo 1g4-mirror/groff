@@ -12,6 +12,15 @@
 
 2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (source_request)
+	(source_quietly_request, pipe_source_request, open_request)
+	(opena_request, close_request, macro_source_request)
+	(macro_source_quietly_request, ps_bbox_request): Check for
+	arguments: if none are present, throw warning in category
+	"missing" and skip the remainder of the input line.
+
+2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(do_open): Rename this...
 	(open_file): ...to this.

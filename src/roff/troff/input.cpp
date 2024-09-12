@@ -6451,6 +6451,11 @@ void do_source(bool quietly)
 
 void source_request() // .so
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "file sourcing request expects an argument");
+    skip_line();
+    return;
+  }
   do_source(false /* quietly */ );
 }
 
@@ -6458,11 +6463,22 @@ void source_request() // .so
 // nonexistence
 void source_quietly_request() // .soquiet
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "quiet file sourcing request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   do_source(true /* quietly */ );
 }
 
 void pipe_source_request() // .pso
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "pipe sourcing request expects arguments");
+    skip_line();
+    return;
+  }
   if (!want_unsafe_requests) {
     error("piped command source request is not allowed in safer mode");
     skip_line();
@@ -6950,12 +6966,14 @@ inline int psbb_locator::skip_to_trailer(void)
   return 0;
 }
 
-// ps_bbox_request()
-//
-// Handle the .psbb request.
-//
-void ps_bbox_request()
+void ps_bbox_request() // .psbb
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "PostScript file bounding box extraction"
+	    " request expects an argument");
+    skip_line();
+    return;
+  }
   // Parse input line, to extract file name.
   //
   symbol nm = get_long_name(true /* required */);
@@ -7223,6 +7241,11 @@ static void open_file(bool appending)
 
 static void open_request() // .open
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "file writing request expects arguments");
+    skip_line();
+    return;
+  }
   if (!want_unsafe_requests) {
     error("file writing request is not allowed in safer mode");
     skip_line();
@@ -7233,6 +7256,11 @@ static void open_request() // .open
 
 static void opena_request() // .opena
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "file appending request expects arguments");
+    skip_line();
+    return;
+  }
   if (!want_unsafe_requests) {
     error("file appending request is not allowed in safer mode");
     skip_line();
@@ -7243,6 +7271,11 @@ static void opena_request() // .opena
 
 static void close_request() // .close
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "stream closing request expects an argument");
+    skip_line();
+    return;
+  }
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
     FILE *fp = (FILE *)stream_dictionary.remove(stream);
@@ -8483,6 +8516,12 @@ void do_macro_source(bool quietly)
 
 void macro_source_request() // .mso
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "macro file sourcing request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   do_macro_source(false /* quietly */ );
 }
 
@@ -8490,6 +8529,12 @@ void macro_source_request() // .mso
 // their nonexistence
 void macro_source_quietly_request() // .msoquiet
 {
+  if (!has_arg(true /* peek */)) {
+    warning(WARN_MISSING, "quiet macro file sourcing request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   do_macro_source(true /* quietly */ );
 }
 
