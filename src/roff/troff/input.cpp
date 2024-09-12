@@ -7196,18 +7196,18 @@ void terminal_continue()
 
 dictionary stream_dictionary(20);
 
-static void do_open(bool append)
+static void open_file(bool appending)
 {
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
     symbol filename = get_long_name(true /* required */);
     if (!filename.is_null()) {
       errno = 0;
-      FILE *fp = fopen(filename.contents(), append ? "a" : "w");
+      FILE *fp = fopen(filename.contents(), appending ? "a" : "w");
       if (0 /* nullptr */ == fp) {
 	error("cannot open file '%1' for %2: %3",
 	      filename.contents(),
-	      append ? "appending" : "writing",
+	      appending ? "appending" : "writing",
 	      strerror(errno));
 	fp = (FILE *)stream_dictionary.remove(stream);
       }
@@ -7228,7 +7228,7 @@ static void open_request() // .open
     skip_line();
   }
   else
-    do_open(false /* don't append */);
+    open_file(false /* appending */);
 }
 
 static void opena_request() // .opena
@@ -7238,7 +7238,7 @@ static void opena_request() // .opena
     skip_line();
   }
   else
-    do_open(true /* append */);
+    open_file(true /* appending */);
 }
 
 static void close_request() // .close

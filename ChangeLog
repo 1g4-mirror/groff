@@ -12,6 +12,13 @@
 
 2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(do_open): Rename this...
+	(open_file): ...to this.
+	(open_request, opena_request): Update call sites.
+
+2024-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.  Rename
 	request-handling functions to append `_request` to their names.
 	  `source`               -> `source_request`
