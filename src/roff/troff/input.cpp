@@ -2836,9 +2836,12 @@ static symbol do_get_long_name(bool required, char end_char)
   }
 }
 
+static void close_all_streams();
+
 void exit_troff()
 {
   is_exit_underway = true;
+  close_all_streams();
   topdiv->set_last_page();
   if (!end_of_input_macro_name.is_null()) {
     spring_trap(end_of_input_macro_name);
@@ -7305,6 +7308,23 @@ static void close_stream(symbol &stream)
     }
   }
   stream_dictionary.remove(stream);
+}
+
+// Call this from exit_troff().
+static void close_all_streams()
+{
+  object_dictionary_iterator iter(stream_dictionary);
+  FILE *filestream;
+  symbol stream;
+  while (iter.get(&stream, (object **)&filestream)) {
+    assert(!stream.is_null());
+    if (stream != 0 /* nullptr */) {
+      warning(WARN_FILE, "stream '%1' still open; closing",
+	      stream.contents());
+      close_stream(stream);
+    }
+  }
+  skip_line();
 }
 
 static void close_request() // .close
