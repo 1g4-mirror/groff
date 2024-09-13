@@ -7275,6 +7275,24 @@ static void opena_request() // .opena
   skip_line();
 }
 
+static void close_stream(symbol &stream)
+{
+  assert(!stream.is_null());
+  FILE *fp = (FILE *)stream_dictionary.lookup(stream);
+  if (0 /* nullptr */ == fp) {
+    error("cannot close nonexistent stream '%1'", stream.contents());
+    return;
+  }
+  else {
+    if (fclose(fp) != 0) {
+      error("cannot close stream '%1': %2", stream.contents(),
+	    strerror(errno));
+      return;
+    }
+  }
+  stream_dictionary.remove(stream);
+}
+
 static void close_request() // .close
 {
   if (!has_arg(true /* peek */)) {
@@ -7285,19 +7303,8 @@ static void close_request() // .close
   symbol stream = get_name();
   // Testing has_arg() should have ensured this.
   assert(stream != 0 /* nullptr */);
-  FILE *fp = (FILE *)stream_dictionary.lookup(stream);
-  if (0 /* nullptr */ == fp) {
-    error("cannot close nonexistent stream '%1'", stream.contents());
-    skip_line();
-    return;
-  }
-  if (fclose(fp) != 0) {
-    error("cannot close stream '%1': %2", stream.contents(),
-	  strerror(errno));
-    skip_line();
-    return;
-  }
-  stream_dictionary.remove(stream);
+  if (!stream.is_null())
+    close_stream(stream);
   skip_line();
 }
 

@@ -1,5 +1,11 @@
 2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (close_request): Move stream-closing
+	logic (as opposed to request argument validation) into...
+	(close_stream): ...its own new function.
+
+2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Declare global `stream_dictionary`
 	as type `object_dictionary` instead of `dictionary`, since we
 	want the stored values to be class objects instead of a
