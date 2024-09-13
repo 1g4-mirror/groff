@@ -321,7 +321,7 @@ public:
   statem *diversion_state;
 protected:
   const unsigned char *ptr;
-  const unsigned char *eptr;
+  const unsigned char *endptr;
   input_iterator *next;
 private:
   virtual int fill(node **);
@@ -348,12 +348,12 @@ private:
 };
 
 input_iterator::input_iterator()
-: is_diversion(false), ptr(0 /* nullptr */), eptr(0 /* nullptr */)
+: is_diversion(false), ptr(0 /* nullptr */), endptr(0 /* nullptr */)
 {
 }
 
 input_iterator::input_iterator(bool is_div)
-: is_diversion(is_div), ptr(0 /* nullptr */), eptr(0 /* nullptr */)
+: is_diversion(is_div), ptr(0 /* nullptr */), endptr(0 /* nullptr */)
 {
 }
 
@@ -369,7 +369,7 @@ int input_iterator::peek()
 
 inline int input_iterator::get(node **p)
 {
-  return ptr < eptr ? *ptr++ : fill(p);
+  return ptr < endptr ? *ptr++ : fill(p);
 }
 
 class input_boundary : public input_iterator {
@@ -441,7 +441,7 @@ bool file_iterator::next_file(FILE *f, const char *s)
   seen_escape = false;
   was_popened = false;
   ptr = 0 /* nullptr */;
-  eptr = 0 /* nullptr */;
+  endptr = 0 /* nullptr */;
   return true;
 }
 
@@ -470,11 +470,11 @@ int file_iterator::fill(node **)
     }
   }
   if (p > buf) {
-    eptr = p;
+    endptr = p;
     return *ptr++;
   }
   else {
-    eptr = p;
+    endptr = p;
     return EOF;
   }
 }
@@ -597,7 +597,7 @@ inline int input_stack::get_div_level()
 
 inline int input_stack::get(node **np)
 {
-  int res = (top->ptr < top->eptr) ? *top->ptr++ : finish_get(np);
+  int res = (top->ptr < top->endptr) ? *top->ptr++ : finish_get(np);
   if (res == '\n') {
     have_formattable_input_on_interrupted_line = have_formattable_input;
     have_formattable_input = false;
@@ -624,7 +624,7 @@ int input_stack::finish_get(node **np)
     top = top->next;
     level--;
     delete tem;
-    if (top->ptr < top->eptr)
+    if (top->ptr < top->endptr)
       return *top->ptr++;
   }
   assert(level == 0);
@@ -633,7 +633,7 @@ int input_stack::finish_get(node **np)
 
 inline int input_stack::peek()
 {
-  return (top->ptr < top->eptr) ? *top->ptr : finish_peek();
+  return (top->ptr < top->endptr) ? *top->ptr : finish_peek();
 }
 
 void input_stack::check_end_diversion(input_iterator *t)
@@ -659,7 +659,7 @@ int input_stack::finish_peek()
     top = top->next;
     level--;
     delete tem;
-    if (top->ptr < top->eptr)
+    if (top->ptr < top->endptr)
       return *top->ptr;
   }
   assert(level == 0);
@@ -3711,12 +3711,12 @@ string_iterator::string_iterator(const macro &m, const char *p,
   if (count != 0) {
     bp = mac.p->cl.head;
     nd = mac.p->nl.head;
-    ptr = eptr = bp->s;
+    ptr = endptr = bp->s;
   }
   else {
-    bp = 0;
-    nd = 0;
-    ptr = eptr = 0;
+    bp = 0 /* nullptr */;
+    nd = 0 /* nullptr */;
+    ptr = endptr = 0 /* nullptr */;
   }
   with_break = input_stack::get_break_flag();
 }
@@ -3725,7 +3725,7 @@ string_iterator::string_iterator()
 {
   bp = 0 /* nullptr */;
   nd = 0 /* nullptr */;
-  ptr = eptr = 0 /* nullptr */;
+  ptr = endptr = 0 /* nullptr */;
   seen_newline = false;
   how_invoked = 0 /* nullptr */;
   lineno = 1;
@@ -3745,7 +3745,7 @@ int string_iterator::fill(node **np)
   seen_newline = false;
   if (count <= 0)
     return EOF;
-  const unsigned char *p = eptr;
+  const unsigned char *p = endptr;
   if (p >= bp->s + char_block::SIZE) {
     bp = bp->next;
     p = bp->s;
@@ -3759,7 +3759,7 @@ int string_iterator::fill(node **np)
 	(*np)->div_nest_level = 0;
     }
     nd = nd->next;
-    eptr = ptr = p + 1;
+    endptr = ptr = p + 1;
     count--;
     return 0;
   }
@@ -3778,7 +3778,7 @@ int string_iterator::fill(node **np)
       break;
     p++;
   }
-  eptr = p;
+  endptr = p;
   count -= p - ptr;
   return *ptr++;
 }
@@ -3787,7 +3787,7 @@ int string_iterator::peek()
 {
   if (count <= 0)
     return EOF;
-  const unsigned char *p = eptr;
+  const unsigned char *p = endptr;
   if (p >= bp->s + char_block::SIZE) {
     p = bp->next->s;
   }
@@ -3843,7 +3843,7 @@ temp_iterator::temp_iterator(const char *s, int len)
     (void) memcpy(base, s, len);
     base[len] = '\0';
     ptr = base;
-    eptr = base + len;
+    endptr = base + len;
   }
 }
 

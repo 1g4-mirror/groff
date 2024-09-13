@@ -1,3 +1,11 @@
+2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (class input_iterator): Trivially
+	refactor.  Rename `eptr` member variable to `endptr`.
+	(input_stack::get, input_stack::finish_get, input_stack::peek)
+	(string_iterator::string_iterator, string_iterator::fill)
+	(string_iterator::peek, temp_iterator::temp_iterator): Migrate.
+
 2024-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Slightly refactor.  Move
