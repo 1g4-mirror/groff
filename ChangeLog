@@ -1,5 +1,20 @@
 2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Declare global `stream_dictionary`
+	as type `object_dictionary` instead of `dictionary`, since we
+	want the stored values to be class objects instead of a
+	primitive data type.
+	(open_file, close_request): Update member function calls
+	appropriately; the former class uses return values for
+	`lookup()` and `remove()`, the latter does not.
+	(open_file): Clarify diagnostic when we try to reorient an
+	existing stream name to a new file, but can't close the old file
+	associated with the stream name.
+	(close_request): Remove the stream from the dictionary only if,
+	and after, we have successfully closed the `FILE` stream.
+
+2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (class input_iterator): Trivially
 	refactor.  Rename `eptr` member variable to `endptr`.
 	(input_stack::get, input_stack::finish_get, input_stack::peek)

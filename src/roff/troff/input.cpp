@@ -7212,7 +7212,7 @@ void terminal_continue()
   do_terminal(0, 1);
 }
 
-dictionary stream_dictionary(20);
+object_dictionary stream_dictionary(20);
 
 static void open_file(bool appending)
 {
@@ -7227,13 +7227,18 @@ static void open_file(bool appending)
 	      filename.contents(),
 	      appending ? "appending" : "writing",
 	      strerror(errno));
-	fp = (FILE *)stream_dictionary.remove(stream);
+	// If we already had a key of this name in the dictionary, it's
+	// invalid now.
+	stream_dictionary.remove(stream);
       }
-      else
-	fp = (FILE *)stream_dictionary.lookup(stream, fp);
-      if (fp != 0 /* nullptr */ && (fclose(fp) != 0))
-	error("cannot close file '%1': %2", filename.contents(),
-	      strerror(errno));
+      else {
+	FILE *oldfp = (FILE *)stream_dictionary.lookup(stream);
+	if (oldfp != 0 /* nullptr */ && (fclose(oldfp) != 0))
+	  error("cannot close file '%1' already associated with stream"
+		" '%2': %3", filename.contents(), strerror(errno));
+	else
+	  stream_dictionary.define(stream, (object *)fp);
+      }
     }
   }
 }
@@ -7277,18 +7282,22 @@ static void close_request() // .close
     skip_line();
     return;
   }
-  symbol stream = get_name(true /* required */);
-  if (!stream.is_null()) {
-    FILE *fp = (FILE *)stream_dictionary.remove(stream);
-    if (0 /* nullptr */ == fp)
-      error("cannot close nonexistent stream '%1'", stream.contents());
-    else {
-      int status = fclose(fp);
-	if (status != 0)
-	  error("cannot close stream '%1': %2", stream.contents(),
-		strerror(errno));
-    }
+  symbol stream = get_name();
+  // Testing has_arg() should have ensured this.
+  assert(stream != 0 /* nullptr */);
+  FILE *fp = (FILE *)stream_dictionary.lookup(stream);
+  if (0 /* nullptr */ == fp) {
+    error("cannot close nonexistent stream '%1'", stream.contents());
+    skip_line();
+    return;
   }
+  if (fclose(fp) != 0) {
+    error("cannot close stream '%1': %2", stream.contents(),
+	  strerror(errno));
+    skip_line();
+    return;
+  }
+  stream_dictionary.remove(stream);
   skip_line();
 }
 
