@@ -7303,7 +7303,7 @@ void do_write_request(int newline)
   }
   FILE *fp = (FILE *)stream_dictionary.lookup(stream);
   if (0 /* nullptr */ == fp) {
-    error("no stream named '%1'", stream.contents());
+    error("cannot write to nonexistent stream '%1'", stream.contents());
     skip_line();
     return;
   }
