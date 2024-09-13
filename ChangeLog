@@ -1,5 +1,19 @@
 2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Make groff streams objects of new `grostream` class, so
+	we can conveniently store more state in them.
+
+	* src/roff/troff/input.cpp (class grostream): Declare.
+	(grostream::grostream): Declare constructor.
+	(grostream::~grostream): Declare (trivial) destructor.
+	(print_streams): Report mode in which the stream was opened.
+	(open_file, close_stream, do_write_request)
+	(write_macro_request): Migrate to expect an object of type
+	`grostream` from a `stream_dictionary.lookup()` instead of a
+	pointer to `FILE`.
+
+2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (close_request): Move stream-closing
 	logic (as opposed to request argument validation) into...
 	(close_stream): ...its own new function.

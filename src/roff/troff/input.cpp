@@ -7215,17 +7215,40 @@ void terminal_continue()
   do_terminal(0, 1);
 }
 
+struct grostream {
+  string filename;
+  string mode;
+  FILE *file;
+  grostream(const string &fn, string m, FILE *fp);
+  ~grostream();
+};
+
+grostream::grostream(const string &fn, string m, FILE *fp)
+: filename(fn), mode(m), file(fp)
+{
+  filename += '\0'; // Don't leak garbage in print_streams().
+}
+
+// XXX: Maybe we should try to close the libc FILE stream here.
+// Resource Release Is Destruction?
+grostream::~grostream()
+{
+}
+
 object_dictionary stream_dictionary(20);
 
 void print_streams()
 {
   object_dictionary_iterator iter(stream_dictionary);
-  FILE *filestream;
-  symbol stream;
-  while (iter.get(&stream, (object **)&filestream)) {
-    assert(!stream.is_null());
-    if (stream != 0 /* nullptr */)
-      errprint("%1\n", stream.contents());
+  symbol stream_name;
+  grostream *grost;
+  while (iter.get(&stream_name, (object **)&grost)) {
+    assert(!stream_name.is_null());
+    if (stream_name != 0 /* nullptr */) {
+      errprint("%1\t", stream_name.contents());
+      errprint("%1\t%2\n", grost->filename.contents(),
+	       grost->mode.contents());
+    }
   }
   fflush(stderr);
   skip_line();
@@ -7235,8 +7258,10 @@ static void open_file(bool appending)
 {
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
-    symbol filename = get_long_name(true /* required */);
-    if (!filename.is_null()) {
+    symbol fnarg = get_long_name(true /* required */);
+    if (!fnarg.is_null()) {
+      const string mode = appending ? "appending" : "writing";
+      string filename = fnarg.contents();
       errno = 0;
       FILE *fp = fopen(filename.contents(), appending ? "a" : "w");
       if (0 /* nullptr */ == fp) {
@@ -7249,12 +7274,17 @@ static void open_file(bool appending)
 	stream_dictionary.remove(stream);
       }
       else {
-	FILE *oldfp = (FILE *)stream_dictionary.lookup(stream);
-	if (oldfp != 0 /* nullptr */ && (fclose(oldfp) != 0))
+	grostream *oldgrost
+	  = (grostream *)stream_dictionary.lookup(stream);
+	FILE *oldfp = oldgrost->file;
+	if (oldfp != 0 /* nullptr */ && (fclose(oldfp) != 0)) {
 	  error("cannot close file '%1' already associated with stream"
 		" '%2': %3", filename.contents(), strerror(errno));
-	else
-	  stream_dictionary.define(stream, (object *)fp);
+	  return;
+	}
+	grostream *grost = new grostream(filename.contents(), mode,
+					 &*fp);
+	stream_dictionary.define(stream, (object *)grost);
       }
     }
   }
@@ -7295,7 +7325,8 @@ static void opena_request() // .opena
 static void close_stream(symbol &stream)
 {
   assert(!stream.is_null());
-  FILE *fp = (FILE *)stream_dictionary.lookup(stream);
+  grostream *grost = (grostream *)stream_dictionary.lookup(stream);
+  FILE *fp = grost->file;
   if (0 /* nullptr */ == fp) {
     error("cannot close nonexistent stream '%1'", stream.contents());
     return;
@@ -7351,7 +7382,8 @@ void do_write_request(int newline)
     skip_line();
     return;
   }
-  FILE *fp = (FILE *)stream_dictionary.lookup(stream);
+  grostream *grost = (grostream *)stream_dictionary.lookup(stream);
+  FILE *fp = grost->file;
   if (0 /* nullptr */ == fp) {
     error("cannot write to nonexistent stream '%1'", stream.contents());
     skip_line();
@@ -7387,7 +7419,8 @@ void write_macro_request()
     skip_line();
     return;
   }
-  FILE *fp = (FILE *)stream_dictionary.lookup(stream);
+  grostream *grost = (grostream *)stream_dictionary.lookup(stream);
+  FILE *fp = grost->file;
   if (0 /* nullptr */ == fp) {
     error("no stream named '%1'", stream.contents());
     skip_line();
