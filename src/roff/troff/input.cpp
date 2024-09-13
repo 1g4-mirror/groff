@@ -7214,6 +7214,20 @@ void terminal_continue()
 
 object_dictionary stream_dictionary(20);
 
+void print_streams()
+{
+  object_dictionary_iterator iter(stream_dictionary);
+  FILE *filestream;
+  symbol stream;
+  while (iter.get(&stream, (object **)&filestream)) {
+    assert(!stream.is_null());
+    if (stream != 0 /* nullptr */)
+      errprint("%1\n", stream.contents());
+  }
+  fflush(stderr);
+  skip_line();
+}
+
 static void open_file(bool appending)
 {
   symbol stream = get_name(true /* required */);
@@ -9063,6 +9077,7 @@ void init_input_requests()
   init_request("pm", print_macros);
   init_request("psbb", ps_bbox_request);
   init_request("pso", pipe_source_request);
+  init_request("pstream", print_streams);
   init_request("rchar", remove_character);
   init_request("rd", read_request);
   init_request("return", return_macro_request);
