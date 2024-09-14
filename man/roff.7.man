@@ -1845,13 +1845,13 @@ see
 .
 .
 .P
-Well-known macro packages include
+Well-known packages include
 .I man
 for traditional man pages and
 .I mdoc
 for BSD-style manual pages.
 .
-Macro packages for typesetting books,
+Packages for typesetting books,
 articles,
 and letters include
 .I ms
