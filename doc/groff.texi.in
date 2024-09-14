@@ -16685,9 +16685,9 @@ construction in that the contents of the string or macro @var{name} are
 not interpreted; further, @var{name} may be a macro and thus contain
 newlines.  (There is no way to embed a newline in the arguments to
 @code{device} or @code{\X}.)  The inclusion of newlines requires an
-extension to the @acronym{AT&T} @command{troff} output format; their
-presence confuses drivers that do not know about it (@pxref{Device
-Control Commands}).
+extension to the @acronym{AT&T} @command{troff} device-independen page
+description language; their presence confuses drivers that do not know
+about it (@pxref{Device Control Commands}).
 @endDefesc
 
 @DefreqList {tag, name}
@@ -18007,8 +18007,8 @@ following two sections describe their format.
 @cindex @command{gtroff}, output
 @cindex output, @command{gtroff}
 
-We now describe the @code{groff} device-independent output format
-produced by GNU @command{troff}.
+We now describe the @code{groff} device-independent page description
+language produced by GNU @command{troff}.
 
 @c BEGIN Keep parallel with subsection "Background" of groff_out(5).
 As @command{groff} is a wrapper program around GNU @command{troff} and
@@ -18024,25 +18024,28 @@ interface for all devices.  It is a distinct, and much simpler, language
 from that of the formatter, @command{troff}.  The device-independent
 output can be thought of as a ``page description language''.
 
+@cindex @command{troff} page description language
+@cindex page description language, @command{troff}
+@cindex language, @command{troff} page description
 @cindex @command{troff} output format
 @cindex output format, @command{troff}
 @cindex format, @command{troff} output
 @cindex intermediate output
 @cindex output, intermediate
 In the following discussion, the term @dfn{troff output} describes what
-is output by GNU @command{troff}, while @dfn{device-independent output}
-denotes the language accepted by the parser that interprets this output
-for the output drivers.  This parser handles whitespace more flexibly
-than @acronym{AT&T} @command{troff}'s implementation, recognizes a GNU
+is output by GNU @command{troff}, while @dfn{page description} denotes
+the language accepted by the parser that interprets this output for the
+output drivers.  This parser handles whitespace more flexibly than
+@acronym{AT&T} @command{troff}'s implementation, recognizes a GNU
 extension to the language, and supports an obsolete construct for
 compatibility; otherwise, both formats are the same.@footnote{The parser
 for device-independent output can be found in the file
 @file{@var{groff-source-dir}/@/src/@/libs/@/libdriver/@/input.cpp}.}
 
 When Brian Kernighan designed @acronym{AT&T} @code{troff}'s
-device-independent output format circa 1980, he had to balance
-readability and maintainability against severe constraints on file size
-and transmission speed to the output device.@footnote{See ``A
+device-independent page description language circa 1980, he had to
+balance readability and maintainability against severe constraints on
+file size and transmission speed to the output device.@footnote{See ``A
 Typesetter-independent TROFF'', Bell Labs CSTR@tie{}#97, 1982.}  A
 decade later, when James Clark wrote @code{groff}, these constraints
 were no longer as tight.  GNU @command{troff} therefore emits
@@ -18168,8 +18171,9 @@ x init
 
 @noindent
 with the arguments set as outlined in @ref{Device Control Commands}.
-The parser for the intermediate output format is able to interpret
-additional whitespace and comments as well even in the prologue.
+The parser for the device-independent page description language format
+is able to interpret additional whitespace and comments as well even in
+the prologue.
 
 The body is the main section for processing the document data.
 Syntactically, it is a sequence of any commands different from the ones
@@ -18829,7 +18833,7 @@ first documented in @cite{A Typesetter-independent TROFF}, by Brian
 Kernighan, and by 1992 the @acronym{AT&T} @code{troff} manual was
 updated to incorporate a description of it.
 
-The GNU @code{troff} intermediate output format is compatible with this
+GNU @code{troff}'s page description language  is compatible with this
 specification except for the following features.
 
 @itemize @bullet

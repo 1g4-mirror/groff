@@ -317,7 +317,7 @@ a program that reads device and font descriptions
 interprets the
 .I groff
 language expressed in input text,
-translating it to a device-independent output format
+translating it to a device-independent page description language
 (\c
 .MR groff_out @MAN5EXT@ )
 that is usually then post-processed by an output driver to produce
@@ -8231,7 +8231,7 @@ or
 .
 The inclusion of newlines requires an extension to the AT&T
 .I troff \" AT&T
-output format;
+device-independent page description language;
 their presence confuses drivers that do not know about it
 (see subsection \[lq]Device control commands\[rq] of
 .MR groff_out @MAN5EXT@ ).
@@ -8448,7 +8448,7 @@ and that of AT&T
 .IR troff , \" AT&T
 as well as the device,
 font,
-and device-independent intermediate output formats described by
+and device-independent page description formats described by
 CSTR\~#54 are documented in
 .MR groff_diff @MAN7EXT@ .
 .
@@ -8581,7 +8581,7 @@ AT&T Bell Laboratories Computing Science Technical Report No.\& 54,
 widely called simply \[lq]CSTR\~#54\[rq],
 documents the language,
 device and font description file formats,
-and device-independent output format
+and device-independent page description language
 referred to collectively in
 .I groff
 documentation as
@@ -8598,7 +8598,7 @@ AT&T Bell Laboratories Computing Science Technical Report No.\& 97
 (CSTR\~#97),
 provides additional insights into the
 device and font description file formats
-and device-independent output format.
+and device-independent page description language.
 .
 .
 .TP
@@ -8634,7 +8634,7 @@ GNU
 .I troff \" GNU
 formatter,
 its device and font description file formats,
-its device-independent output format,
+its device-independent page description language,
 and those of AT&T
 .IR troff ,\" AT&T
 whose design it reimplements.
