@@ -803,11 +803,14 @@ another typesetter's unit.
 There are 6\~picas to an inch and 12\~points to a pica.
 .
 .TP
-.BR s ,\~ z
-Scaled points and multiplication by the output device's
-.I sizescale
-parameter,
-respectively.
+.B z
+Scaled points.
+.
+.TP
+.B s
+The device's \[lq]sizescale\[rq] units;
+see
+.MR groff_font @MAN5EXT@ .
 .
 .TP
 .B f
