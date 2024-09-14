@@ -6346,8 +6346,9 @@ it must be the ``outermost'' operator.  Including it elsewhere in the
 expression produces a warning in the @samp{number} category
 (@pxref{Warnings}), and its expression evaluates false.  This
 unfortunate limitation maintains compatibility with @acronym{AT&T}
-@code{troff}.  Test a numeric expression for falsity by
-comparing it to a false value.@footnote{@xref{Conditionals and Loops}.}
+@code{troff}.  Test a numeric expression for falsity within a complex
+expression by comparing it to a false value.@footnote{@xref{Conditionals
+and Loops}.}
 
 @Example
 .nr X 1
