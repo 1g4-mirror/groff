@@ -9977,7 +9977,7 @@ the middle of a request invocation, macro call, or escape sequence.
 Input line continuation is invisible to the formatter, with two
 exceptions: the @code{|} operator recognizes the new input line
 (@pxref{Numeric Expressions}), and the input line counter register
-@code{.c} is incremented.
+@code{.c} increments.
 @cindex @code{\@key{RET}}, interpretation in copy mode
 @code{\RET} is interpreted even in copy mode.@footnote{@xref{Copy
 Mode}.}
@@ -14645,23 +14645,24 @@ documents, but arise as page layouts become more sophisticated and
 demanding.  @dfn{Environments} collect formatting parameters like line
 length and typeface.  A @dfn{diversion} stores formatted output for
 later use.  A @dfn{trap} is a condition on the input or output, tested
-automatically by the formatter, that is associated with a macro, causing
-it to be called when that condition is fulfilled.
+automatically by the formatter, that is associated with a macro:
+fulfilling the condition @dfn{springs} the trap---calls the macro.
 
 Footnote support often exercises all three of the foregoing features.  A
-simple implementation might work as follows.  A pair of macros is
-defined: one starts a footnote and the other ends it.  The author calls
-the first macro where a footnote marker is desired.  The macro
-establishes a diversion so that the footnote text is collected at the
-place in the body text where its corresponding marker appears.  An
-environment is created for the footnote so that it is set at a smaller
-typeface.  The footnote text is formatted in the diversion using that
-environment, but it does not yet appear in the output.  The document
-author calls the footnote end macro, which returns to the previous
-environment and ends the diversion.  Later, after much more body text in
-the document, a trap, set a small distance above the page bottom, is
-sprung.  The macro called by the trap draws a line across the page and
-emits the stored diversion.  Thus, the footnote is rendered.
+simple implementation might work as follows.  The author writes a pair
+of macros: one starts a footnote and the other ends it.  They further
+set a trap a small distance above the page bottom, reserving a footnote
+area.  The author calls the first macro where a footnote marker is
+desired.  The macro establishes a diversion so that the footnote text is
+collected at the place in the body text where its corresponding marker
+appears.  It further creates an environment for the footnote so that it
+sets at a smaller typeface.  The footnote text is formatted in the
+diversion using that environment, but it does not yet appear in the
+output.  The document author calls the footnote end macro, which returns
+to the previous environment and ends the diversion.  Later, after body
+text nearly fills the page, the trap springs.  The macro called by the
+trap draws a line across the page and emits the stored diversion.  Thus,
+the footnote renders.
 
 Diversions and traps make the text formatting process non-linear.  Let
 us imagine a set of text lines or paragraphs labelled @samp{A},

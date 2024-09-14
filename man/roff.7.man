@@ -795,8 +795,10 @@ A
 .I trap
 is a condition on the input or output,
 tested automatically by the formatter,
-that is associated with a macro,
-calling it when that condition is fulfilled.
+that is associated with a macro:
+fulfilling the condition
+.I springs
+the trap\[em]calls the macro.
 .
 .
 .P
@@ -804,16 +806,19 @@ Footnote support often exercises all three of the foregoing features.
 .
 A simple implementation might work as follows.
 .
-A pair of macros is defined:
+The author writes a pair of macros:
 one starts a footnote and the other ends it.
+.
+They further set a trap a small distance above the page bottom,
+reserving a footnote area.
 .
 The author calls the first macro where a footnote marker is desired.
 .
 The macro establishes a diversion so that the footnote text is collected
 at the place in the body text where its corresponding marker appears.
 .
-An environment is created for the footnote so that it is set at a
-smaller typeface.
+It further creates an environment for the footnote so that it sets
+at a smaller typeface.
 .
 The footnote text is formatted in the diversion using that environment,
 but it does not yet appear in the output.
@@ -822,13 +827,11 @@ The document author calls the footnote end macro,
 which returns to the previous environment and ends the diversion.
 .
 Later,
-after much more body text in the document,
-a trap,
-set a small distance above the page bottom,
-is sprung.
+after body text nearly fills the page,
+the trap springs.
 .
-The macro called by the trap draws a line across the page and emits the
-stored diversion.
+The macro called by the trap draws a line across the page
+and emits the stored diversion.
 .
 Thus,
 the footnote is rendered.

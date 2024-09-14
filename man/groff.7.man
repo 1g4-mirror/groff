@@ -635,7 +635,7 @@ the
 operator recognizes the new input line,
 and the input line counter register
 .B .c
-is incremented.
+increments.
 .
 .
 .P
