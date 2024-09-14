@@ -5936,7 +5936,7 @@ that fits on the page, the break caused by the end of input will also
 break the page, producing a useless blank one.  Macro packages keep
 users from having to confront this difficulty by setting ``traps''
 (@pxref{Traps}); moreover, all but the simplest page layouts tend to
-have headers and footers, or at least bear vertical margins larger than
+have headers and footers, or at least bear vertical margins of at least
 one vee.
 @c END Keep parallel with subsection "Page geometry" of roff(7).
 

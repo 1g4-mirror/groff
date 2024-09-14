@@ -631,7 +631,7 @@ to confront this difficulty by setting \[lq]traps\[rq];
 .\" (@pxref{Traps});
 moreover,
 all but the simplest page layouts tend to have headers and footers,
-or at least bear vertical margins larger than one vee.
+or at least bear vertical margins of at least one vee.
 .\" END Keep parallel with groff.texi node "Page Geometry".
 .
 .
