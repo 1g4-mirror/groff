@@ -662,7 +662,9 @@ store character sequences.
 .
 In
 .IR groff ,
-they can be parameterized as macros can.
+they can be parameterized
+(given arguments)
+as macros can.
 .
 .
 .P
