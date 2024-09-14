@@ -9979,9 +9979,9 @@ suppresses the effects of that newline in the input.  The next input
 line thus retains the classification of its predecessor as a control or
 text line.  @code{\@key{RET}} is useful for managing line lengths in the
 input during document maintenance; you can even break an input line in
-the middle of a request invocation, macro call, or escape sequence.
-Input line continuation is invisible to the formatter, with two
-exceptions: the @code{|} operator recognizes the new input line
+the middle of a word, request invocation, macro call, or escape
+sequence.  Input line continuation is invisible to the formatter, with
+two exceptions: the @code{|} operator recognizes the new input line
 (@pxref{Numeric Expressions}), and the input line counter register
 @code{.c} increments.
 @cindex @code{\@key{RET}}, interpretation in copy mode
