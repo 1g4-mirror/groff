@@ -952,7 +952,7 @@ _
 _
 ( )	precedence
 _
-|	boundary-relative motion
+|	boundary-relative measurement
 .TE
 .
 .

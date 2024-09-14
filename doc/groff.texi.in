@@ -6420,13 +6420,13 @@ argument.  @xref{Setting Registers}, for examples.
 @cindex @code{|}, and page motion
 @cindex absolute @slanted{(sic)} position operator (@code{|})
 @cindex position, absolute @slanted{(sic)} operator (@code{|})
-@cindex boundary-relative motion operator (@code{|})
-@c "motion" and "operators" already indexed above
-A leading @code{|} operator indicates a motion relative not to the
+@cindex boundary-relative measurement operator (@code{|})
+@c "operators" already indexed above
+A leading @code{|} operator indicates a measurement relative not to the
 drawing position but to a boundary.  For horizontal motions, the
-measurement specifies a distance relative to a drawing position
-corresponding to the beginning of the @emph{input} line.  By default,
-tab stops reckon movements in this way.  Most escape sequences do not;
+boundary is the drawing position corresponding to the beginning of the
+@emph{input} line.  By default, tab stops reckon movements in this way.
+Most escape sequences do not;
 @c XXX: Which ones do?
 @code{|} tells them to do so.
 
@@ -14064,7 +14064,7 @@ Vertically move the drawing position.  @var{expr} indicates the
 magnitude of motion: positive is downward and and negative upward.  The
 default scaling unit is @samp{v}.  The motion is relative to the current
 drawing position unless @var{expr} begins with the boundary-relative
-motion operator @samp{|}.  @xref{Numeric Expressions}.
+measurement operator @samp{|}.  @xref{Numeric Expressions}.
 
 Text processing continues at the new drawing position; usually, vertical
 motions should be in balanced pairs to avoid a confusing page layout.
@@ -14120,7 +14120,7 @@ Horizontally move the drawing position.  @var{expr} indicates the
 magnitude of motion: positive is rightward and negative leftward.  The
 default scaling unit is @samp{m}.  The motion is relative to the current
 drawing position unless @var{expr} begins with the boundary-relative
-motion operator @samp{|}.  @xref{Numeric Expressions}.
+measurement operator @samp{|}.  @xref{Numeric Expressions}.
 @endDefesc
 
 The following string definition sets the @TeX{}
@@ -14380,10 +14380,10 @@ Let us see how to draw a box around a word using a macro.
 @noindent
 The foregoing outputs a box rule (a vertical line), the text
 argument(s), and another box rule.  We employ the boundary-relative
-motion operator @samp{|}.  Finally, the line-drawing escape sequences
-draw a radical extender (a form of overline) and an underline from the
-drawing position to the position corresponding to beginning of the
-@emph{input} line.  The formatter leaves the drawing position at the
+measurement operator @samp{|}.  Finally, the line-drawing escape
+sequences draw a radical extender (a form of overline) and an underline
+from the drawing position to the position corresponding to beginning of
+the @emph{input} line.  The formatter leaves the drawing position at the
 right-hand box rule even though the line lengths are negative, as noted
 above.
 @endDefesc
