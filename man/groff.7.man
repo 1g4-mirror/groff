@@ -4933,19 +4933,19 @@ Interpolate macro or string parameter
 .
 .TP
 .ESC $*
-Interpolate concatenation of all macro or string parameters,
+Interpolate catenation of all macro or string parameters,
 separated by spaces.
 .
 .
 .TP
 .ESC $@
-Interpolate concatenation of all macro or string parameters,
+Interpolate catenation of all macro or string parameters,
 with each surrounded by double quotes and separated by spaces.
 .
 .
 .TP
 .ESC $\[ha]
-Interpolate concatenation of all macro or string parameters
+Interpolate catenation of all macro or string parameters
 as if they were arguments to the
 .request .ds
 request.

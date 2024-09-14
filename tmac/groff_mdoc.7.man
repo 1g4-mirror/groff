@@ -874,7 +874,7 @@ This first macro of any
 .Xr mdoc
 manual records the last modification date of the document source.
 .
-Arguments are concatenated and separated with space characters.
+Arguments are catenated and separated with space characters.
 .
 .
 .Pp

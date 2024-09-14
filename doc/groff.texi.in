@@ -11078,7 +11078,7 @@ Any component @code{u@var{XXXX}} that is found in the list of
 decomposable glyphs is decomposed.
 
 @item
-The resulting elements are then concatenated with @samp{_} in between,
+The resulting elements are then catenated with @samp{_} in between,
 dropping the leading @samp{u} in all elements but the first.
 @end itemize
 
@@ -13696,12 +13696,12 @@ additional escape character is the price of this power.}
 @DefescListEndx {\\$^, , , }
 In some cases it is convenient to interpolate all of the parameters at
 once (to pass them to a request, for instance).  The @code{\$*} escape
-concatenates the parameters, separating them with spaces.  @code{\$@@}
-is similar, concatenating the parameters, surrounding each with double
-quotes and separating them with spaces.  If not in compatibility mode,
-the interpolation depth of double quotes is preserved (@pxref{Calling
-Macros}).  @code{\$^} interpolates all parameters as if they were
-arguments to the @code{ds} request.
+catenates the parameters, separating them with spaces.  @code{\$@@} is
+similar, surrounding each parameter with double quotes and separating
+them with spaces.  If not in compatibility mode, the interpolation depth
+of double quotes is preserved (@pxref{Calling Macros}).  @code{\$^}
+interpolates all parameters as if they were arguments to the @code{ds}
+request.
 
 @Example
 .de foo
