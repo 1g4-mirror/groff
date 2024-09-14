@@ -675,7 +675,14 @@ The latter are generally in basic units;
 can be appended to numeric expressions to clarify their meaning when
 stored or interpolated.
 .
-Some read-only predefined registers interpolate text.
+Each register can be assigned a
+.I format,
+causing its value to interpolate with leading zeroes,
+in Roman numerals,
+or alphabetically.
+.
+Some read-only registers are string-valued,
+meaning that they interpolate text and lack a format.
 .
 .
 .P
