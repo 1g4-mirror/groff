@@ -687,7 +687,8 @@ meaning that they interpolate text and lack a format.
 .
 .P
 .I Fonts
-are identified either by a name or by a mounting position
+are identified either by a name or by a
+.I "mounting position"
 (a non-negative number).
 .
 Four styles are available on all devices.
