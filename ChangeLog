@@ -1,3 +1,14 @@
+2024-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (do_device_extension): Make `\X`
+	escape sequence begin the first page of the document if it
+	hasn't begun already.  In the "grout" page description language,
+	this puts the leading 'x' initialization commands on the output
+	stream, which we guarantee to come first in any such document.
+	Device extension commands 'x X' before that point are not
+	well-defined, and further this change brings `\X` into parity
+	with its sibling, the `device` request, which does so already.
+
 2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Make groff streams objects of new `grostream` class, so

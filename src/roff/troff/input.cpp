@@ -5864,6 +5864,8 @@ static node *do_device_extension() // \X
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
   macro mac;
+  if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
+    topdiv->begin_page();
   for (;;) {
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
