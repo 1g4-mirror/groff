@@ -4695,8 +4695,9 @@ expression of non-integral type sizes.  For example, @samp{groff
 10.5p} at the beginning of the document.
 
 @item
-@acronym{AT&T} @file{ms}'s @code{AU} macro supported arguments used with
-some document types; @code{groff} @file{ms} does not.
+@acronym{AT&T} @file{ms}'s @code{AU} macro supported arguments whose
+values were used with some non-@code{RP} document types; that of
+@code{groff} @file{ms} does not.
 
 @item
 Right-aligned displays are available.  The @acronym{AT&T} @file{ms}
