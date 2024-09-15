@@ -7400,12 +7400,12 @@ A @code{\"} comment on a line by itself is treated as a blank line,
 because after eliminating the comment, that is all that remains.
 
 @Example
-Test
-\" comment
-Test
-    @result{} Test
+apples bananas
+\" cantaloupes
+durians
+    @result{} apples bananas
     @result{}
-    @result{} Test
+    @result{} durians
 @endExample
 
 To compensate, it is common to combine the empty request with the
@@ -7428,10 +7428,10 @@ described above.
 @code{\#} is interpreted even in copy mode.
 
 @Example
-Test
-\# comment
-Test
-    @result{} Test Test
+apples bananas
+\# cantaloupes
+durians
+    @result{} apples bananas durians
 @endExample
 @endDefesc
 
