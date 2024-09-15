@@ -436,8 +436,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ie r .hydefault .hy \" Use groff 1.24 feature.
 .el              .hy \\n[\\*[locale]*hyphenation-mode-trap]
 ..
-.\"	reset all the things
-.\" XXX: Resets .cu and .ul but _not_ .ce or .rj.
+.\"	reset all the things (except `ce`, `rj`, `ul`, and `cu`)
 .de @reset
 .ie \\n[misc@adjust] .ad
 .el                  .na
