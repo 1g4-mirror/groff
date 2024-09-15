@@ -5736,16 +5736,9 @@ static node *do_non_interpreted() // \?
   return new non_interpreted_node(mac);
 }
 
-// This is a helper function for `encode_character_for_device_output()`.
-static void encode_special_character_for_device_output(macro *mac)
+static void map_special_character_for_device_output(macro *mac,
+						    const char *sc)
 {
-  const char *sc;
-  if (font::use_charnames_in_special) {
-    charinfo *ci = tok.get_char(true /* required */);
-    sc = ci->get_symbol()->contents();
-  }
-  else
-    sc = tok.get_char(true /* required */)->get_symbol()->contents();
   if (strcmp("-", sc) == 0)
     mac->append('-');
   else if (strcmp("dq", sc) == 0)
@@ -5825,6 +5818,18 @@ static void encode_special_character_for_device_output(macro *mac)
       mac->append(']');
     }
   }
+}
+
+static void encode_special_character_for_device_output(macro *mac)
+{
+  const char *sc;
+  if (font::use_charnames_in_special) {
+    charinfo *ci = tok.get_char(true /* required */);
+    sc = ci->get_symbol()->contents();
+  }
+  else
+    sc = tok.get_char(true /* required */)->get_symbol()->contents();
+  map_special_character_for_device_output(mac, sc);
 }
 
 // In troff output, we translate the escape character to '\', but it is

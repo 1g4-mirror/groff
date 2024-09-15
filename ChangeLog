@@ -1,5 +1,28 @@
 2024-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor.  `\X` reads its delimited argument in
+	interpretation mode and the `device` request reads its argument
+	in copy mode.  We want parity in special character handling for
+	these formatter instructions, but one works with tokenized
+	input and the other with tokens that happen to be a sequence of
+	ordinary characters.  (In other words, in `\X'\[em]` and
+	`.device \[em]`, the escape sequence "knows" that it is dealing
+	with a the valid special character named "em", whereas the
+	request merely handles '\', '[', 'e', 'm', and ']' in series.)
+	This change is in service of the grueling march toward
+	resolution of <https://savannah.gnu.org/bugs/?63074>.
+
+	* src/roff/troff/input.cpp
+	(map_special_character_for_device_output): New function handles
+	all of the potential special (including composite) character
+	identifier rewriting formerly in...
+	(encode_special_character_for_device_output): ...this function,
+	which now simply calls the foregoing after extracting the
+	special character identifier from the `charinfo` of the current
+	token.
+
+2024-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_device_extension): Make `\X`
 	escape sequence begin the first page of the document if it
 	hasn't begun already.  In the "grout" page description language,
