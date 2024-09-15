@@ -5794,7 +5794,7 @@ static void encode_special_character_for_device_output(macro *mac)
       char character[unibufsz];
       (void) memset(errbuf, '\0', ERRBUFSZ);
       (void) memset(character, '\0', UNIBUFSZ);
-      // If looks like something other than an attempt at a Unicode
+      // If it looks like something other than an attempt at a Unicode
       // special character escape sequence already, try to convert it
       // into one.  Output drivers don't (and shouldn't) know anything
       // about a troff formatter's special character identifiers.
