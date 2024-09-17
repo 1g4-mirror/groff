@@ -4106,6 +4106,7 @@ static void decode_args(macro_iterator *mi)
   }
 }
 
+// XXX: This is a misnomer.  It's used to read stuff like `\[e aa]` too.
 static void decode_string_args(macro_iterator *mi)
 {
   node *n;
@@ -4114,7 +4115,7 @@ static void decode_string_args(macro_iterator *mi)
     while (c == ' ')
       c = get_copy(&n);
     if (c == '\n' || c == EOF) {
-      error("missing ']'");
+      error("missing ']' in parameterized escape sequence");
       break;
     }
     if (c == ']')
