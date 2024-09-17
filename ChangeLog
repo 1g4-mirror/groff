@@ -1,5 +1,10 @@
 2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/color.h: Fix code style nit: drop unnecessary
+	`#include`.
+
+2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (report_composite_characters): Fix
 	code style nit: eliminate unnecessary temporary variable.
 
