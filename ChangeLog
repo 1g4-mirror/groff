@@ -7,10 +7,10 @@
 	input and the other with tokens that happen to be a sequence of
 	ordinary characters.  (In other words, in `\X'\[em]` and
 	`.device \[em]`, the escape sequence "knows" that it is dealing
-	with a the valid special character named "em", whereas the
-	request merely handles '\', '[', 'e', 'm', and ']' in series.)
-	This change is in service of the grueling march toward
-	resolution of <https://savannah.gnu.org/bugs/?63074>.
+	with a valid special character named "em", whereas the request
+	merely handles '\', '[', 'e', 'm', and ']' in series.) This
+	change is in service of the grueling march toward resolution of
+	<https://savannah.gnu.org/bugs/?63074>.
 
 	* src/roff/troff/input.cpp
 	(map_special_character_for_device_output): New function handles
