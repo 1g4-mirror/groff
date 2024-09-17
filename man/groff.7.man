@@ -4134,6 +4134,15 @@ Unsafe request;
 disabled by default.
 .
 .TPx
+.REQ .pstream
+Report,
+to the standard error stream,
+the name of each opened stream,
+the name of the file backing it,
+and its mode
+(writing or appending).
+.
+.TPx
 .REQ .ptr
 Report names and positions of all page location traps to the standard
 error stream.

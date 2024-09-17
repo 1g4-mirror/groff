@@ -16520,6 +16520,9 @@ append to it instead of truncating it.
 It is an error to use these requests in safer mode; this is the default.
 Give GNU @code{troff} or a front end program the @option{-U} option to
 enable unsafe mode.
+
+The @code{pstream} request dumps the list of open streams to the
+standard error stream; @ref{Debugging}.
 @endDefreq
 
 @DefreqList {write, stream [@code{"}]@Var{contents}}
@@ -17221,6 +17224,14 @@ strings, and diversions with their sizes in bytes.
 Report the name and value and, if the value is numeric, the assigned
 format of each register @var{reg}, or, without arguments, those of all
 defined registers, to the standard error stream.
+@endDefreq
+
+@Defreq {pstream, }
+@cindex dumping open streams (@code{pstream})
+@cindex open streams, dumping (@code{pstream})
+@cindex streams, open, dumping (@code{pstream})
+Report, to the standard error stream, the name of each opened stream,
+the name of the file backing it, and its mode (writing or appending).
 @endDefreq
 
 @Defreq {ptr, }

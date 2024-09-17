@@ -3372,6 +3372,16 @@ except that input comes from the standard output stream of
 .
 .
 .TP
+.B .pstream
+Report,
+to the standard error stream,
+the name of each opened stream,
+the name of the file backing it,
+and its mode
+(writing or appending).
+.
+.
+.TP
 .B .ptr
 Report the names and vertical positions of all page location traps
 to the standard error stream.

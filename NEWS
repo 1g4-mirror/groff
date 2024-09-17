@@ -119,6 +119,10 @@ o A new request, `pline`, reports to the standard error stream the list
   of output nodes (an internal data structure) corresponding to
   the pending output line.  The list is empty if no such nodes exist.
 
+o A new request, `pstream`, reports to the standard error stream the
+  name of each stream opened with the `open` or `opena` requests,
+  the name of the file backing it, and its mode (writing or appending).
+
 o The `pnr` request now accepts arguments.  It treats each as
   identifying a register and reports its properties to the standard
   error stream.

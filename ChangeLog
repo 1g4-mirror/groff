@@ -56,7 +56,8 @@
 	* src/roff/troff/input.cpp (class grostream): Declare.
 	(grostream::grostream): Declare constructor.
 	(grostream::~grostream): Declare (trivial) destructor.
-	(print_streams): Report mode in which the stream was opened.
+	(print_streams): Report mode in which the stream was opened and
+	name of file backing it.
 	(open_file, close_stream, do_write_request)
 	(write_macro_request): Migrate to expect an object of type
 	`grostream` from a `stream_dictionary.lookup()` instead of a
