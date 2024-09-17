@@ -1,3 +1,8 @@
+2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (report_composite_characters): Fix
+	code style nit: eliminate unnecessary temporary variable.
+
 2024-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Refactor.  `\X` reads its delimited argument in

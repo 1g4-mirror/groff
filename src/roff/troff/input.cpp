@@ -4319,8 +4319,7 @@ static void report_composite_characters()
   while (iter.get(&key, reinterpret_cast<void **>(&value))) {
     assert(!key.is_null());
     assert(value != 0 /* nullptr */);
-    const char *k = key.contents();
-    errprint("%1\t%2\n", k, value);
+    errprint("%1\t%2\n", key.contents(), value);
   }
   fflush(stderr);
   skip_line();
