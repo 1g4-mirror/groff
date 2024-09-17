@@ -34,6 +34,22 @@
 
 2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Clean up streams on formatter exit.
+
+	* src/roff/troff/input.cpp (close_all_streams): New function
+	iterates `stream_dictionary` and closes each stream.
+	(exit_troff): Call `close_all_streams()`.
+
+2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Add `pstream` request.
+
+	* src/roff/troff/input.cpp (print_streams): New request handler
+	iterates through `stream_dictionary`, writing each entry.
+	(init_input_requests): Wire up `pstream` request to new handler.
+
+2024-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Make groff streams objects of new `grostream` class, so
 	we can conveniently store more state in them.
 
