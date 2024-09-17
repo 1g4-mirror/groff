@@ -1,5 +1,13 @@
 2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (open_file): Fix unsafe-mode SEGV
+	caused by null pointer dereference.  Problem introduced by me in
+	commit 6d32f2492e, 13 September.  Also add assertion; null
+	`FILE` stream pointers should not be getting stored in GNU
+	troff's `stream_dictionary`.
+
+2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (report_color): Report color space
 	and channel assignments.
 

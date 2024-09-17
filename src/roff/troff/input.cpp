@@ -7282,11 +7282,15 @@ static void open_file(bool appending)
       else {
 	grostream *oldgrost
 	  = (grostream *)stream_dictionary.lookup(stream);
-	FILE *oldfp = oldgrost->file;
-	if (oldfp != 0 /* nullptr */ && (fclose(oldfp) != 0)) {
-	  error("cannot close file '%1' already associated with stream"
-		" '%2': %3", filename.contents(), strerror(errno));
-	  return;
+	if (oldgrost != 0 /* nullptr */) {
+	  FILE *oldfp = oldgrost->file;
+	  assert(oldfp != 0 /* nullptr */);
+	  if (oldfp != 0 /* nullptr */ && (fclose(oldfp) != 0)) {
+	    error("cannot close file '%1' already associated with"
+		  " stream '%2': %3", filename.contents(),
+		  strerror(errno));
+	    return;
+	  }
 	}
 	grostream *grost = new grostream(filename.contents(), mode,
 					 &*fp);
