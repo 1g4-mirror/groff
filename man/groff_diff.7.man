@@ -3254,9 +3254,10 @@ which is read in copy mode and continues to the end of the input line.
 .
 .TP
 .B .pcolor
-Report,
-to the standard error stream,
-the list of defined color names.
+Report, to the standard error stream,
+each defined color name,
+its color space identifier,
+and channel value assignments.
 .
 A device's default stroke and/or fill colors,
 \[lq]default\[rq],

@@ -1,5 +1,15 @@
 2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (report_color): Report color space
+	and channel assignments.
+
+	* doc/groff.texi.in (Debugging):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Update documentation.
+
+2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/color.h: Fix code style nit: drop unnecessary
 	`#include`.
 

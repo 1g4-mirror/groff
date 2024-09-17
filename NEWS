@@ -101,10 +101,11 @@ o New registers `.it`, `.itc`, and `.itm` are available.  These
   continuation (cf. the `it` and `itc` requests), and the name of the
   macro associated with the pending input trap, respectively.
 
-o A new request, `pcolor`, reports to the standard error stream the
-  current list of defined colors.  (A device's default stroke and/or
-  fill colors, "default", are not listed since they are immutable and
-  their details unknown to the formatter.)
+o A new request, `pcolor`, reports to the standard error stream each
+  defined color name, its color space identifier, and channel value
+  assignments.  (A device's default stroke and/or fill colors,
+  "default", are not listed since they are immutable and their details
+  unknown to the formatter.)
 
 o A new request, `pcomposite`, reports to the standard error stream the
   current list of defined composite characters.

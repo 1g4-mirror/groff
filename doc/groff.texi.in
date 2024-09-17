@@ -17160,10 +17160,10 @@ or are interested @emph{only} in diagnostic output, you can suppress GNU
 @cindex dumping defined colors (@code{pcolor})
 @cindex defined colors, dumping (@code{pcolor})
 @cindex colors, defined, dumping (@code{pcolor})
-Report, to the standard error stream, the list of defined color names.
-A device's default stroke and/or fill colors, ``default'', are not
-listed since they are immutable and their details unknown to the
-formatter.
+Report, to the standard error stream, each defined color name, its color
+space identifier, and channel value assignments.  A device's default
+stroke and/or fill colors, ``default'', are not listed since they are
+immutable and their details unknown to the formatter.
 @endDefreq
 
 @Defreq {pcomposite, }
