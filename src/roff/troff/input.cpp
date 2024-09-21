@@ -4934,6 +4934,11 @@ void ignore()
 
 void remove_macro()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "name removal request expects arguments");
+    skip_line();
+    return;
+  }
   for (;;) {
     symbol s = get_name();
     if (s.is_null())
@@ -4945,10 +4950,20 @@ void remove_macro()
 
 void rename_macro()
 {
-  symbol s1 = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "renaming request expects arguments");
+    skip_line();
+    return;
+  }
+  symbol s1 = get_name();
+  assert(s1 != 0 /* nullptr */);
   if (!s1.is_null()) {
-    symbol s2 = get_name(true /* required */);
-    if (!s2.is_null())
+    symbol s2 = get_name();
+    if (s2.is_null())
+      warning(WARN_MISSING, "renaming request expects identifier of"
+	      " existing request, macro, string, or diversion as"
+	      " second argument");
+    else
       request_dictionary.rename(s1, s2);
   }
   skip_line();
@@ -4956,12 +4971,22 @@ void rename_macro()
 
 void alias_macro()
 {
-  symbol s1 = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "name aliasing request expects arguments");
+    skip_line();
+    return;
+  }
+  symbol s1 = get_name();
+  assert(s1 != 0 /* nullptr */);
   if (!s1.is_null()) {
-    symbol s2 = get_name(true /* required */);
-    if (!s2.is_null()) {
+    symbol s2 = get_name();
+    if (s2.is_null())
+      warning(WARN_MISSING, "name aliasing request expects identifier"
+	      " of existing request, macro, string, or diversion as"
+	      " second argument");
+    else {
       if (!request_dictionary.alias(s1, s2))
-	error("cannot alias undefined object '%1'", s2.contents());
+	error("cannot alias undefined name '%1'", s2.contents());
     }
   }
   skip_line();
@@ -4969,7 +4994,13 @@ void alias_macro()
 
 void chop_macro()
 {
-  symbol s = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "chop request expects an argument");
+    skip_line();
+    return;
+  }
+  symbol s = get_name();
+  assert(s != 0 /* nullptr */);
   if (!s.is_null()) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
@@ -5015,7 +5046,8 @@ enum case_xform_mode { STRING_UPCASE, STRING_DOWNCASE };
 void do_string_case_transform(case_xform_mode mode)
 {
   assert((mode == STRING_DOWNCASE) || (mode == STRING_UPCASE));
-  symbol s = get_name(true /* required */);
+  symbol s = get_name();
+  assert(s != 0 /* nullptr */);
   if (s.is_null()) {
     skip_line();
     return;
@@ -5052,18 +5084,36 @@ void do_string_case_transform(case_xform_mode mode)
 
 // Uppercase-transform each byte of the string argument's contents.
 void stringdown_request() {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "string downcasing request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   do_string_case_transform(STRING_DOWNCASE);
 }
 
 // Lowercase-transform each byte of the string argument's contents.
 void stringup_request() {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "string upcasing request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   do_string_case_transform(STRING_UPCASE);
 }
 
 void substring_request()
 {
-  int start;				// 0, 1, ..., n-1  or  -1, -2, ...
-  symbol s = get_name(true /* required */);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "substring request expects arguments");
+    skip_line();
+    return;
+  }
+  int start;			// 0, 1, ..., n-1  or  -1, -2, ...
+  symbol s = get_name();
+  assert(s != 0 /* nullptr */);
   if (!s.is_null() && get_integer(&start)) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
@@ -5151,8 +5201,15 @@ void substring_request()
 
 void length_request()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "length computation request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
   symbol ret;
-  ret = get_name(true /* required */);
+  ret = get_name();
+  assert(ret != 0 /* nullptr */);
   if (ret.is_null()) {
     skip_line();
     return;

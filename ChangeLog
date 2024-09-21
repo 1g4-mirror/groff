@@ -1,3 +1,13 @@
+2024-09-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (remove_macro, rename_macro)
+	(alias_macro, chop_macro, stringdown_request, stringup_request)
+	(substring_request, length_request): Check for arguments: if
+	none are present, throw warning in category "missing" and skip
+	the remainder of the input line.
+	(do_string_case_transform): Add `assert()` since our callers
+	now require that arguments be present.
+
 2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (decode_string_args): Improve
