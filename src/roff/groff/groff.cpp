@@ -263,7 +263,7 @@ int main(int argc, char **argv)
 " warranty;\n"
 "not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
       );
-      puts("\nprograms called:\n");
+      puts("\nprograms in constructed pipeline:\n");
       fflush(stdout);
       // Pass -v to all possible subprograms
       commands[PRECONV_INDEX].append_arg(buf);

@@ -1,5 +1,9 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (main): Clarify verbose output.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp: Boolify variables controlling
 	whether a command pipeline is constructed.
 	(run_commands): Demote `no_pipe` argument from `int` to `bool`.
