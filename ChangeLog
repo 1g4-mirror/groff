@@ -1,5 +1,19 @@
 2024-09-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gxditview]: Accept the `-v` option groff(1) may supply.
+
+	* src/devices/xditview/xditview.c (Syntax): Report `-v` as an
+	accepted synonym of `-version` and `--version` in usage message.
+	(main): Refactor argument processing.  Accept `-v`.  Handle
+	early-exit options {`--help`, `--version` and their synonyms}
+	_before_ checking for an excess argument count, another error
+	condition.
+
+	* src/devices/xditview/gxditview.1.man (Synopsis): Document
+	`-v` option.
+
+2024-09-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (remove_macro, rename_macro)
 	(alias_macro, chop_macro, stringdown_request, stringup_request)
 	(substring_request, length_request): Check for arguments: if
