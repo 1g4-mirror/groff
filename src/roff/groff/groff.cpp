@@ -256,7 +256,7 @@ int main(int argc, char **argv)
       vflag = 1;
       printf("GNU groff version %s\n", Version_string);
       puts(
-"Copyright (C) 2023 Free Software Foundation, Inc.\n"
+"Copyright (C) 1989-2023 Free Software Foundation, Inc.\n"
 "This is free software, distributed under the terms of the GNU General"
 " Public\n"
 "License, version 3, or any later version, at your option.  There is NO"
