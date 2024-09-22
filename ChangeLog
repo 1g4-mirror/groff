@@ -1,5 +1,10 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.tables: Update using the Unicode
+	16.0.0 version of the "UnicodeData.txt" file.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.tables: Update with freshly
 	changed "make-afmtodit-tables" script, adding ~192 mappings.
 
