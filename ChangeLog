@@ -1,5 +1,11 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mdate.pl: Report dates in ISO 8601 format (for man page center
+	footers).  That is what we prescribe in groff_man_style(7), so
+	it's only fair that we dog food our own recommendation.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* Makefile.am (set-man-page-time-stamps): New maintainer-mode
 	rule sets time stamps of man page source documents to match the
 	Git "author date" of their most recent commits.  This is to make
