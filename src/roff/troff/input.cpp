@@ -7335,9 +7335,17 @@ static void opena_request() // .opena
 static void close_stream(symbol &stream)
 {
   assert(!stream.is_null());
+  bool is_valid = false;
+  FILE *fp = 0 /* nullptr */;
   grostream *grost = (grostream *)stream_dictionary.lookup(stream);
-  FILE *fp = grost->file;
-  if (0 /* nullptr */ == fp) {
+  if (grost != 0 /* nullptr */) {
+    fp = grost->file;
+    // We shouldn't have stored a null pointer in the first place.
+    assert(fp != 0 /* nullptr */);
+    if (fp != 0 /* nullptr */)
+      is_valid = true;
+  }
+  if (!is_valid) {
     error("cannot close nonexistent stream '%1'", stream.contents());
     return;
   }

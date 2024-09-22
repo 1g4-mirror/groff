@@ -1,3 +1,9 @@
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (close_stream): Handle being given a
+	nonexistent stream to close.  Prevents null pointer dereference.
+	Continues 6d32f2492e, 13 September.
+
 2024-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (open_file): Fix unsafe-mode SEGV
