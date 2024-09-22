@@ -1,5 +1,16 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/make-afmtodit-tables: Alter maintainer-mode
+	script to stop excluding code points from the Private Use Area
+	in the Unicode Basic Multilingual Plane from glyph mappings for
+	Adobe fonts (and workalikes).  Doing so expands coverage to ~192
+	more glyphs, including groff's "braceex".
+
+	Fixes <https://savannah.gnu.org/bugs/?65716> (1/2).  Thanks to
+	Deri James for the report.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (interpolate_macro): Fix code style
 	nits.  Reorder equality comparisons to avoid inadvertent lvalue
 	assignment.  Rename local variable `warned` to `was_warned` and
