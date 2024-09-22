@@ -1,5 +1,13 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.tables: Update with freshly
+	changed "make-afmtodit-tables" script, adding ~192 mappings.
+
+	Fixes <https://savannah.gnu.org/bugs/?65716> (2/2).  Thanks to
+	Deri James for the report.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/make-afmtodit-tables: Alter maintainer-mode
 	script to stop excluding code points from the Private Use Area
 	in the Unicode Basic Multilingual Plane from glyph mappings for
