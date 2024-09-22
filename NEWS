@@ -474,6 +474,11 @@ o gropdf(1), the PDF output driver, now allows embedding of JFIF/JPEG
   more image file formats, including PNG, PAM, and GIF can be embedded.
   See also the item regarding `PDFPIC` above.  Thanks to Deri James.
 
+o gxditview(1), the X11 output driver and document previewer, now
+  accepts the option `-v` as a synonym of `--version` (and `-version`).
+  This change aligns it with other groff output drivers, and makes it
+  work correctly with "groff -vX".
+
 Miscellaneous
 -------------
 
