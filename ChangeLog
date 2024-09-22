@@ -39,10 +39,10 @@
 	in copy mode.  We want parity in special character handling for
 	these formatter instructions, but one works with tokenized
 	input and the other with tokens that happen to be a sequence of
-	ordinary characters.  (In other words, in `\X'\[em]` and
+	ordinary characters.  (In other words, in `\X'\[em]'` and
 	`.device \[em]`, the escape sequence "knows" that it is dealing
 	with a valid special character named "em", whereas the request
-	merely handles '\', '[', 'e', 'm', and ']' in series.) This
+	merely handles '\', '[', 'e', 'm', and ']' in series.)  This
 	change is in service of the grueling march toward resolution of
 	<https://savannah.gnu.org/bugs/?63074>.
 
@@ -406,8 +406,8 @@
 	already reported "target text length".  Clarify "total number of
 	spaces" as "number of adjustable spaces"; that's what's really
 	counted.  Relocate report of "target text length" to more
-	follow "text length" and "number of adjustable spaces" to make
-	their relationship more obvious.
+	closely follow "text length" and "number of adjustable spaces"
+	to make their relationship more obvious.
 
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -462,7 +462,7 @@
 	with many images, continues to render fine.  In
 	device-independent output, a pair of absolute positioning
 	commands ('H' and 'V') moves to a redundant place, but the HTML
-	produces is identical (except for a date stamp in a comment).
+	produced is identical (except for a date stamp in a comment).
 
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
