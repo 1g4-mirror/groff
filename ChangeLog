@@ -1,5 +1,17 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (interpolate_macro): Fix code style
+	nits.  Reorder equality comparisons to avoid inadvertent lvalue
+	assignment.  Rename local variable `warned` to `was_warned` and
+	demote it from `int` to `bool`.  Assign to it using Boolean, not
+	integer, literals.  Explicitly compare variable of pointer type
+	to null pointer literal instead of letting it pun down to a
+	Boolean.  Stop treating return value of `warning()` as
+	significant.  If ever there was a function that was called only
+	for its side effects, that's it.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (device_request): Add extensive new
 	logic to subvert copy mode so as to interpret special character
 	escape sequences.  We don't yet support _composite_ special

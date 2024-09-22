@@ -4020,9 +4020,10 @@ bool operator==(const macro &m1, const macro &m2)
 
 static void interpolate_macro(symbol nm, bool do_not_want_next_token)
 {
-  request_or_macro *p = (request_or_macro *)request_dictionary.lookup(nm);
-  if (p == 0) {
-    int warned = 0;
+  request_or_macro *p
+    = (request_or_macro *)request_dictionary.lookup(nm);
+  if (0 /* nullptr */ == p) {
+    bool was_warned = false;
     const char *s = nm.contents();
     if (strlen(s) > 2) {
       request_or_macro *r;
@@ -4033,20 +4034,20 @@ static void interpolate_macro(symbol nm, bool do_not_want_next_token)
       r = (request_or_macro *)request_dictionary.lookup(symbol(buf));
       if (r) {
 	macro *m = r->to_macro();
-	if (!m || !m->is_empty())
-	  warned = warning(WARN_SPACE,
-			   "macro '%1' not defined "
-			   "(possibly missing space after '%2')",
-			   nm.contents(), buf);
+	if ((0 /* nullptr */ == m) || !m->is_empty()) {
+	  warning(WARN_SPACE, "macro '%1' not defined (possibly missing"
+		  " space after '%2')", nm.contents(), buf);
+	  was_warned = true;
+	}
       }
     }
-    if (!warned) {
+    if (!was_warned) {
       warning(WARN_MAC, "macro '%1' not defined", nm.contents());
       p = new macro;
       request_dictionary.define(nm, p);
     }
   }
-  if (p)
+  if (p != 0 /* nullptr */)
     p->invoke(nm, do_not_want_next_token);
   else {
     skip_line();
