@@ -5987,9 +5987,53 @@ static void device_request()
   // Null characters can correspond to node types like vmotion_node that
   // are unrepresentable in a device extension command, and got scrubbed
   // by `asciify`.
-  for (; c != '\0' && c != '\n' && c != EOF;
-       c = get_copy(0 /* nullptr */))
-    mac.append(c);
+  for (int prevc = c; (c != '\0') && (c != '\n') && (c != EOF);
+       c = get_copy(0 /* nullptr */)) {
+    if (!('\\' == c) && (prevc != '\\'))
+      mac.append(c);
+    else {
+      int c1 = get_copy(0 /* nullptr */);
+      if (c1 != '[')
+	mac.append(c1);
+      else {
+	// Does the input resemble a valid (bracket-form) special
+	// character escape sequence?
+	bool is_valid = false;
+	string sc = "";
+	string scdup; // for composite character ugliness below
+	int c2 = get_copy(0 /* nullptr */);
+	for (; (c2 != '\0') && (c2 != '\n') && (c2 != EOF);
+	     c2 = get_copy(0 /* nullptr */)) {
+	  // XXX: `map_special_character_for_device_output()` will need
+	  // the closing bracket in the iterator we construct, but a
+	  // composite character mapping mustn't see it.
+	  sc += c2;
+	  if (']' == c2) {
+	    is_valid = true;
+	    break;
+	  }
+	}
+	sc += '\0';
+	if (sc.search(' ') > 0) {
+	  // XXX: TODO
+	  error("composite special character escape sequences not yet"
+	        " supported in device extension command arguments");
+	  is_valid = false;
+	}
+	if (is_valid) {
+	  input_stack::push(make_temp_iterator(sc.contents()));
+	  symbol s = read_long_escape_parameters(WITH_ARGS);
+	  map_special_character_for_device_output(&mac, s.contents());
+	}
+	else {
+	  // We couldn't make sense of it.  Write it out as-is.
+	  mac.append(c);
+	  mac.append(c1);
+	  mac.append_str(sc.contents());
+	}
+      }
+    }
+  }
   curenv->add_node(new device_extension_node(mac));
   tok.next();
 }

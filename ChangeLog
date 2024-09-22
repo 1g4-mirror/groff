@@ -1,5 +1,18 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (device_request): Add extensive new
+	logic to subvert copy mode so as to interpret special character
+	escape sequences.  We don't yet support _composite_ special
+	character escape sequences.
+	* src/roff/groff/tests/
+	device-control-special-character-handling.sh: Update and expand
+	test cases.  Comment out one new case that doesn't yet work.
+
+	This change is in further service of the grueling march toward
+	resolution of <https://savannah.gnu.org/bugs/?63074>.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp (main): Clarify verbose output.
 
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
