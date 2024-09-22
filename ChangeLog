@@ -1,5 +1,13 @@
 2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* Makefile.am (set-man-page-time-stamps): New maintainer-mode
+	rule sets time stamps of man page source documents to match the
+	Git "author date" of their most recent commits.  This is to make
+	the date reported in the center footer of the rendered page tell
+	the truth.
+
+2024-09-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.tables: Update using the Unicode
 	16.0.0 version of the "UnicodeData.txt" file.
 
