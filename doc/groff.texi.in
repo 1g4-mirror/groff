@@ -6627,10 +6627,10 @@ preprocessor, which recognizes input lines starting with @samp{.[} and
 @Defesc {\\A, @code{'}, anything, @code{'}}
 Interpolate@tie{}1 if @var{anything} is a valid identifier, and@tie{}0
 otherwise.  The delimiter need not be a neutral apostrophe; see
-@ref{Delimiters}.  Because invalid input characters are removed (see
-above), invalid identifiers are empty or contain spaces, tabs, newlines,
-or escape sequences that interpolate something other than a sequence of
-ordinary characters.
+@ref{Delimiters}.  Because GNU @command{troff} ignores any input
+character with an invalid code when reading it, invalid identifiers are
+empty or contain spaces, tabs, newlines, or escape sequences that
+interpolate something other than a sequence of ordinary characters.
 
 You can employ @code{\A} to validate a macro argument before using it to
 construct another escape sequence or identifier.
@@ -14568,11 +14568,13 @@ Afterward, the drawing position is left at (@var{hn}, @var{vn}).
 @cindex polygon, solid, drawing (@samp{\D'P @dots{}'})
 @cindex drawing a solid polygon (@samp{\D'P @dots{}'})
 @cindex solid polygon, drawing (@samp{\D'P @dots{}'})
-As @samp{\D'P @r{@dots{}}'}, but the polygon is filled.
+As @samp{\D'P @r{@dots{}}'}, but the polygon is filled.  @code{groff}
+does not specify how the output device must fill concave or
+self-intersecting polygons.
 
 The following macro is like the @samp{\D'l'} example, but shades the
 box.  We draw the box before writing the text because colors in GNU
-@code{troff} have no transparency; in the opposite order, the filled
+@command{troff} have no transparency; in the opposite order, the filled
 polygon would occlude the text.
 
 @Example

@@ -271,19 +271,21 @@ or because the line can instead be adjusted with additional inter-word
 space
 .RB ( hys ).
 .
-A hyphenation language is selected with the
+The
 .B hla
-request and hyphenation patterns loaded
-(or appended)
-with
+request selects a hyphenation language,
+whereas
 .B hpf
-(or
-.BR hpfa ).
+and
+.B hpfa
+load
+(or append to)
+the language's hyphenation patterns.
 .
 If no hyphenation language is set or no patterns are loaded,
 GNU
 .I troff \" GNU
-will not perform automatic hyphenation.
+does not perform automatic hyphenation.
 .
 .
 .P
@@ -419,6 +421,26 @@ both set the type size to 10,500\~scaled points,
 or 10.5\~points.
 .
 .
+.br
+.ne 2v
+.P
+Another new scaling unit,
+.RB \[lq] s \[rq],
+multiplies by the number of basic units in a scaled point.
+.
+Thus,
+.RB \[lq]\^ \[rs]n[.ps]s \[rq]
+is equal to
+.RB \[lq] 1m \[rq]
+by definition.
+.
+Do not confuse the
+.RB \[lq] s \[rq]
+and
+.RB \[lq] z \[rq]
+scaling units.
+.
+.
 .P
 It makes no sense to use the
 .RB \[lq] z \[rq]\~scaling
@@ -441,26 +463,6 @@ in a numeric expression whose default scaling unit
 and so GNU
 .I troff \" GNU
 disallows those as well.
-.
-.
-.br
-.ne 2v
-.P
-Another new scaling unit,
-.RB \[lq] s \[rq],
-multiplies by the number of basic units in a scaled point.
-.
-Thus,
-.RB \[lq]\^ \[rs]n[.ps]s \[rq]
-is equal to
-.RB \[lq] 1m \[rq]
-by definition.
-.
-Do not confuse the
-.RB \[lq] s \[rq]
-and
-.RB \[lq] z \[rq]
-scaling units.
 .
 .
 .br
@@ -738,7 +740,9 @@ Interpolate 1 if
 is a valid identifier,
 and\~0 otherwise.
 .
-Because invalid input characters are removed,
+Because GNU
+.I troff \" GNU
+ignores any input character with an invalid code when reading it,
 invalid identifiers are empty or contain spaces,
 tabs,
 newlines,
@@ -777,7 +781,7 @@ Draw filled ellipse with
 .I h
 and
 .I v
-as the axes and the leftmost point at the drawing position.
+as the axis lengths and its leftmost point at the drawing position.
 .
 .
 .TP
@@ -812,6 +816,10 @@ the drawing position is left at
 As
 .BR \[rs]D\[aq]p\[aq] ,
 but the polygon is filled.
+.
+.I groff
+does not specify how the output device must fill concave or
+self-intersecting polygons.
 .
 .
 .TP
