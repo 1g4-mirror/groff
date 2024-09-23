@@ -1,4 +1,5 @@
 #!/bin/sh
+#
 # Emulate nroff with groff.
 #
 # Copyright (C) 1992-2024 Free Software Foundation, Inc.
@@ -49,11 +50,11 @@ do
   while :
   do
     case $thisarg in
-      -[abCEikpRStUzZ])
+      -[abCEikpRStUvzZ])
         newargs="$newargs $thisarg"
         break
         ;;
-      -[abCEikpRStUzZ]*)
+      -[abCEikpRStUvzZ]*)
         remainder=${thisarg#-?}
         thisarg=${thisarg%%$remainder}
         newargs="$newargs $thisarg"
