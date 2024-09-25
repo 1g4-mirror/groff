@@ -2384,7 +2384,7 @@ and GNU extensions:
 .
 .
 .TP
-Device-independent output language:
+Device-independent page description language:
 .MR groff_out @MAN5EXT@ \" #21
 .
 .
