@@ -2810,17 +2810,18 @@ Constructed names used to implement arrays are of the form
 .PP
 Thus the
 .I groff ms
-macros reserve the following names:
+macros reserve the following identifiers:
 .
 .IP \[bu] 3n
-Names containing the characters
+those containing the characters
 .BR * ,
 .BR @ ,
 and\~\c
-.BR : .
+.BR : ,
+and
 .
 .IP \[bu]
-Names containing only uppercase letters and digits.
+those containing only uppercase letters and digits.
 .
 .
 .\" ====================================================================

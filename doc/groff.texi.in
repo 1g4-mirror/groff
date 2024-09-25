@@ -4991,14 +4991,16 @@ Constructed names used to implement arrays are of the form
 @var{array}@code{!}@var{index}.
 @end itemize
 
-Thus the @code{groff} @file{ms} macros reserve the following names.
+Thus the @code{groff} @file{ms} macros reserve the following
+identifiers:
 
 @itemize @bullet
 @item
-Names containing the characters @code{*}, @code{@@}, and@tie{}@code{:}.
+those containing the characters @code{*}, @code{@@}, and@tie{}@code{:},
+and
 
 @item
-Names containing only uppercase letters and digits.
+those containing only uppercase letters and digits.
 @end itemize
 
 
