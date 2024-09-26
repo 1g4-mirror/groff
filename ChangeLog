@@ -1,3 +1,10 @@
+2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::add_entry): When erroring
+	about a table entry ending with (an incomplete) zero-motion
+	escape sequence, spell out the escape sequence in the diagnostic
+	for the benefit of *roff non-experts.
+
 2024-09-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/nroff/nroff.sh: Support `-v` non-finally in option

@@ -1529,7 +1529,7 @@ void table::add_entry(int r, int c, const string &str,
     string last_two_chars = str.substring((len - 2), 2);
     if ("\\z" == last_two_chars)
       error_with_file_and_line(fn, ln, "table entry ends with"
-			       " zero-motion escape sequence");
+			       " zero-motion escape sequence '\\z'");
   }
   char *s = str.extract();
   if (str.search('\n') >= 0) {
