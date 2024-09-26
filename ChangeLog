@@ -1,5 +1,17 @@
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::add_entry): Throw warnings
+	if comment (`\"`, `\#`) or transparent throughput (`\!`) escape
+	sequences encountered in table entry.  Because these escape
+	sequences cause the formatter to consume the rest of the input
+	line as their argument, they don't play well with tbl, which
+	tries to measure a table entry's width by interpolating it
+	inside the delimited `\w` escape sequence.  You can sometimes
+	get away with this (especially in simple table layouts), hence
+	the mere warning, but it can't be relied upon.
+
+2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::add_entry): When erroring
 	about a table entry ending with (an incomplete) zero-motion
 	escape sequence, spell out the escape sequence in the diagnostic
