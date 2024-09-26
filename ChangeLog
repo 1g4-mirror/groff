@@ -1,5 +1,20 @@
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pdfmom]: Handle errors and abnormal exits.
+
+	* src/devices/gropdf/pdfmom.pl: Handle signaled and error exits
+	from groff pipeline.  Improve diagnostics.  Store "basename" of
+	executing command into `prog` scalar.  Gather the wait status
+	returned by every use of `system()`.
+	(abort): New subroutine writes a fatal diagnostic message and
+	exits with status 1.
+	(autopsy): New subroutine decodes a POSIX wait status to
+	determine the fate of an unlucky process, and returns it as a
+	human-readable string scalar.  (The interesting part is cribbed
+	from Perl documentation.)
+
+2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::add_entry): Throw warnings
 	if comment (`\"`, `\#`) or transparent throughput (`\!`) escape
 	sequences encountered in table entry.  Because these escape
