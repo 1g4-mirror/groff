@@ -1790,7 +1790,7 @@ especially at first.
 \&.TS
 box center tab(#);
 Cb Cb
-L L.
+L  L.
 Ability#Application
 Strength#crushes a tomato
 Dexterity#dodges a thrown tomato
@@ -1807,7 +1807,7 @@ Charisma#sells tomato-based fruit salads to hypercarnivores
 .TS
 box center tab(#);
 Cb Cb
-L L.
+L  L.
 Ability#Application
 Strength#crushes a tomato
 Dexterity#dodges a thrown tomato
