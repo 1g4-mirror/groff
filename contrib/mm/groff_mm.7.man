@@ -943,7 +943,7 @@ and in
 memoranda.
 .
 The
-.B ms
+.I ms
 cover sheet style also formats these data.
 .
 .
@@ -1206,7 +1206,7 @@ request.
 The default
 .I style
 is
-.BR ms ;
+.RB \[lq] ms \[rq];
 the
 .I ms.cov
 file prepares a cover page resembling that of the
