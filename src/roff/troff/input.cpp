@@ -7510,13 +7510,13 @@ void do_write_request(int newline)
     return;
   }
   if (!tok.is_newline() && !tok.is_eof()) {
-  int c;
-  while ((c = get_copy(0)) == ' ')
-    ;
-  if (c == '"')
-    c = get_copy(0);
-  for (; c != '\n' && c != EOF; c = get_copy(0))
-    fputs(asciify(c), fp);
+    int c;
+    while ((c = get_copy(0)) == ' ')
+      ;
+    if (c == '"')
+      c = get_copy(0);
+    for (; c != '\n' && c != EOF; c = get_copy(0))
+      fputs(asciify(c), fp);
   }
   if (newline)
     fputc('\n', fp);
