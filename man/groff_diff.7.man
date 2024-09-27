@@ -1806,9 +1806,9 @@ see
 The first argument is the sum of the desired flags and the remaining
 arguments are the characters to be assigned those properties.
 .
-Spaces between the
+Spaces need not separate the
 .I cn
-arguments are optional.
+arguments.
 .
 Any argument
 .I cn
@@ -1991,7 +1991,7 @@ Defining
 (or redefining)
 a
 .RI character\~ c
-creates an object in the formatter that is recognized like any other
+creates a formatter object that is recognized like any other
 ordinary or special character on input,
 and produces
 .I contents
@@ -2031,8 +2031,9 @@ not to each character in
 .
 .
 .IP
-A character defined by this request can be used just like a glyph
-provided by the output device.
+A character defined by
+.B char
+can be used just like a glyph provided by the output device.
 .
 In particular,
 other characters can be translated to it with the
@@ -3472,7 +3473,7 @@ Remove each fallback special
 for font
 .IR f .
 .
-Spaces and tabs may separate
+Spaces need not separate
 .I c
 arguments.
 .
@@ -3691,10 +3692,10 @@ with non-negative font mounting
 .
 .
 .TP
-.BI .substring\~ "string start\~"\c
+.BI .substring\~ "str start\~"\c
 .RI [ end ]
 Replace the string named
-.I string
+.I str
 with its substring bounded by the indices
 .I start
 and
@@ -4037,10 +4038,9 @@ is read in copy mode.
 .br
 .ne 6v
 .\" ====================================================================
-.SS "Extended requests"
+.SS "Altered requests"
 .\" ====================================================================
 .
-.\" XXX: .cf might better belong in "Implementation differences".
 .TP
 .BI .cf\~ file
 In a diversion,
@@ -4129,7 +4129,8 @@ Negative values are erroneous.
 .IR "n1 n2\~" .\|.\|.\~ nn \~]\c
 .BR T \~\c \" space in roman because we must use 2-font macro with \c
 .IR "r1 r2\~" .\|.\|.\~ rn ]
-.I groff
+GNU
+.I troff \" GNU
 supports an extended syntax to specify repeating tab stops after
 the
 .RB \[lq] T \[rq]
@@ -5483,7 +5484,7 @@ GNU
 emits more error diagnostics when syntactical or semantic nonsense is
 encountered and supports several warning categories;
 the output of these can be selected with
-.BR warn .
+.RB \[lq] warn \[rq].
 .
 Also see the
 .BR \-E ,
@@ -5524,7 +5525,7 @@ hyphenation exceptions
 registers
 .RB ( pnr ),
 open streams
-.RB ( .pstream ),
+.RB ( pstream ),
 page location traps
 .RB ( ptr ),
 and a list of output nodes corresponding to the pending input
@@ -5696,7 +5697,7 @@ AT&T
 discards trailing spaces from input lines,
 like GNU
 .IR troff , \" GNU
-but if it does so,
+but when it does so,
 AT&T
 .I troff \" AT&T
 also cancels end-of-sentence detection.

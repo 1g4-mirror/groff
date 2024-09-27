@@ -11207,9 +11207,9 @@ have different properties.  The only ones known to GNU @code{troff} are
 those in its font's description file.  Recall @ref{Using Fonts}.}  These
 properties can be modified with this request.  The first argument is the
 sum of the desired flags and the remaining arguments are the characters
-to be assigned those properties.  Spaces between the @var{cn} arguments
-are optional.  Any argument @var{cn} can be a character class defined
-with the @code{class} request rather than an individual character.
+to be assigned those properties.  Spaces need not separate the @var{cn}
+arguments.  Any argument @var{cn} can be a character class defined with
+the @code{class} request rather than an individual character.
 @xref{Character Classes}.
 
 The non-negative integer @var{n} is the sum of any of the following.
@@ -11354,18 +11354,18 @@ Define an ordinary or special character@tie{}@var{c} as @var{contents}.
 If @var{contents} is absent, an existing character definition made with
 the same request is deleted.
 
-Defining (or redefining) a character @var{c} creates an object in the
-formatter that is recognized like any other ordinary or special
-character on input, and produces @var{contents} on output.  Every time
-@var{c} is to be output, @var{contents} is processed in a temporary
-environment and the result encapsulated in a node.@footnote{@xref{Gtroff
-Internals}.} A leading neutral double quote in the final argument is
-stripped from it, allowing embedded leading spaces in @var{contents},
-which is read in copy mode and continues to the end of the input line.
-Further, compatibility mode is disabled and the escape character set to
-@code{\} while @var{contents} is interpreted.  Any emboldening, constant
-spacing, or track kerning is applied to this object rather than to
-individual glyphs in @var{contents}.
+Defining (or redefining) a character @var{c} creates a formatter object
+that is recognized like any other ordinary or special character on
+input, and produces @var{contents} on output.  Every time @var{c} is to
+be output, @var{contents} is processed in a temporary environment and
+the result encapsulated in a node.@footnote{@xref{Gtroff Internals}.} A
+leading neutral double quote in the final argument is stripped from it,
+allowing embedded leading spaces in @var{contents}, which is read in
+copy mode and continues to the end of the input line.  Further,
+compatibility mode is disabled and the escape character set to @code{\}
+while @var{contents} is interpreted.  Any emboldening, constant spacing,
+or track kerning is applied to this object rather than to individual
+glyphs in @var{contents}.
 
 A character defined by these requests can be used just like a glyph
 provided by the output device.  In particular, other characters can be
@@ -11422,7 +11422,7 @@ request, but before the already mounted special fonts.
 Remove definition of each ordinary or special character @var{c},
 undoing the effect of a @code{char}, @code{fchar}, or @code{schar}
 request.  Those supplied by font description files cannot be removed.
-Spaces and tabs may separate @var{c}@tie{}arguments.
+Spaces need not separate @var{c}@tie{}arguments.
 
 The request @code{rfschar} removes glyph definitions defined with
 @code{fschar} for font@tie{}@var{f}.
@@ -17803,7 +17803,7 @@ helpful in avoiding use of these escape sequences in names.
 @cindex end-of-sentence detection, cancellation, on @acronym{AT&T} @code{troff}
 @cindex sentence, cancelling detection of end of, on @acronym{AT&T} @code{troff}
 @acronym{AT&T} @command{troff} discards trailing spaces from input
-lines, like GNU @command{troff}, but if it does so, @acronym{AT&T}
+lines, like GNU @command{troff}, but when it does so, @acronym{AT&T}
 @command{troff} also cancels end-of-sentence detection.  Use of the
 dummy character escape sequence @code{\&} is more portable.
 
