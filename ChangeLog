@@ -1,5 +1,12 @@
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_write_request): Fix code style
+	nits.  Restyle loops to more closely resemble similar logic in
+	this file.  Reorder equality comparisons to avoid inadvertent
+	lvalue assignment.
+
+2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_write_request): Check for a
 	second argument before proceeding as if it's there.  This makes
 	`write` and `writec` behave more like other requests that read
