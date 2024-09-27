@@ -1,5 +1,13 @@
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add regression test for Savannah #66255.
+
+	* src/roff/groff/tests/\
+	write-request-handles-empty-second-arg.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (close_all_streams): Drop
 	copy-and-wasted line.  Harmless but pointless (we're no
 	longer reading input when this function is called).
