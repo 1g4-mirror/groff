@@ -7476,7 +7476,6 @@ static void close_all_streams()
       close_stream(stream);
     }
   }
-  skip_line();
 }
 
 static void close_request() // .close
