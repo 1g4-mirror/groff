@@ -34,7 +34,7 @@
 
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[pdfmom]: Handle errors and abnormal exits.
+	[gropdf]: Handle errors and abnormal exits.
 
 	* src/devices/gropdf/pdfmom.pl: Handle signaled and error exits
 	from groff pipeline.  Improve diagnostics.  Store "basename" of
