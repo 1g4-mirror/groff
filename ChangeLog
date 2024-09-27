@@ -1,3 +1,12 @@
+2024-09-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (class input_iterator)
+	(class string_iterator, class macro_iterator):
+	Demote `get_break_flag()` member function from `int` to `bool`.
+	Return Boolean, not integer, literal from it.
+	(class string_iterator, class macro_iterator): Demote member
+	variable `with_break` from `int` to `bool`.
+
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_write_request): Fix code style
