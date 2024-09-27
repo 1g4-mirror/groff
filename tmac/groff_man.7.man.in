@@ -4163,7 +4163,7 @@ often a shorter or clearer alternative is available.
 .if t .ne 10v
 .if n .ne 16v \" account for horizontal rules
 .TS
-C    C
+Cb   Cb
 LfCR LfCR.
 Instead of.\|.\|.	.\|.\|.should be considered.
 _
@@ -4352,7 +4352,7 @@ Review subsection \(lqHorizontal and vertical spacing\(rq above.
 .if t .ne 5v
 .if n .ne 7v \" account for horizontal rules
 .TS
-C    C
+Cb   Cb
 LfCR LfCR.
 Instead of.\|.\|.	.\|.\|.should be considered.
 _
@@ -4411,7 +4411,7 @@ when not ending a sentence.
 .if t .ne 5v
 .if n .ne 7v \" account for horizontal rules
 .TS
-C    C
+Cb   Cb
 LfCR LfCR.
 Instead of.\|.\|.	.\|.\|.do this.
 _
