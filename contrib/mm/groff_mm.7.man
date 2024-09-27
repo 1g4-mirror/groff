@@ -4163,6 +4163,23 @@ call.
 .
 .
 .TP
+.B Aumt
+lists
+space-separated indices of positional arguments to the
+.B AU
+macro that should be suppressed from appearing in the document heading
+on the first page of
+.B MT
+memorandum types 0\[en]3 and 6.
+.
+By default,
+it is undefined;
+all arguments are formatted
+except the second
+(author initials).
+.
+.
+.TP
 .B BU
 interpolates a bullet mark in
 .B BL

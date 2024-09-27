@@ -441,6 +441,13 @@ Macro packages
    former `Limsp` register.  "2" continues to be recognized and handled
    as before, but prompts a warning; migrate your documents.
 
+*  The m (mm) macro package now supports an `Aumt` string to suppress
+   the appearance of positional arguments to the `AU` macro in the
+   document heading used by memorandum types 0-3 and 6.  By default, all
+   such arguments appear, except the second (author initials).  For
+   example, a value of "3 4" more accurately reproduces London &
+   Reiser's 1978 paper describing the porting of Unix to the VAX-11/780.
+
 *  The m (mm) macro package now supports the `E` register as DWB mm did.
 
 *  The m (mm) macro package now supports AT&T/DWB mm's `Rg` string.
