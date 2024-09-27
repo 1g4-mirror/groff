@@ -16539,22 +16539,24 @@ Write @var{contents} to @var{stream}, which must previously have been
 the subject of an @code{open} request.  A leading neutral double quote
 in the second argument is stripped, allowing embedded leading spaces in
 @var{contents}, which is read in copy mode until the end of the line.
+GNU @command{troff} flushes the stream after writing to it.
 
 The @code{writec} request is like @code{write}, but only @code{write}
 appends a newline to @var{contents}.
 @endDefreq
 
-@Defreq {writem, stream xx}
+@Defreq {writem, stream name}
 @cindex @code{asciify} request, and @code{writem}
-Write the contents of the macro or string @var{xx} to the file
-associated with the specified @var{stream}.
-
+Write the contents of the macro or string @var{name} to @var{stream},
+which must previously have been the subject of an @code{open} (or
+@code{opena}) request.
 @cindex @code{writem} request, and copy mode
 @cindex copy mode, and @code{writem} request
 @cindex mode, copy, and @code{writem} request
-@var{xx} is read in copy mode, i.e., already formatted elements are
-ignored.  Consequently, diversions must be unformatted with the
-@code{asciify} request before calling @code{writem}.  Usually, this
+The contents of
+@var{name} are read in copy mode.  That is, already formatted elements
+(nodes) are ignored.  Consequently, diversions must be unformatted with
+the @code{asciify} request before calling @code{writem}.  Usually, this
 means a loss of information.
 @endDefreq
 

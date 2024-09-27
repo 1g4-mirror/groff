@@ -4794,6 +4794,8 @@ to
 .IR stream ,
 which must previously have been the subject of an
 .request .open
+(or
+.request .opena )
 request,
 followed by a newline.
 .
@@ -4801,6 +4803,10 @@ A leading neutral double quote in the second argument is stripped,
 allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode until the end of the line.
+.
+GNU
+.I troff \" GNU
+flushes the stream after writing to it.
 .
 .TPx
 .REQ .writec "stream contents"
@@ -4811,10 +4817,19 @@ but does not append a newline to
 .
 .TPx
 .REQ .writem "stream name"
-Write contents of macro or string
+Write the contents of the macro or string
 .I name
 to
-.IR stream .
+.IR stream ,
+which must previously have been the subject of an
+.request open
+(or
+.request \%opena )
+request.
+.
+The contents of
+.I name
+are read in copy mode.
 .
 .LE
 .

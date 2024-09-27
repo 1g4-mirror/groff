@@ -4010,6 +4010,10 @@ allowing embedded leading spaces in
 .IR contents ,
 which is read in copy mode until the end of the line.
 .
+GNU
+.I troff \" GNU
+flushes the stream after writing to it.
+.
 .
 .TP
 .BI .writec\~ stream\~\c
@@ -4029,10 +4033,13 @@ to
 .IR stream ,
 which must previously have been the subject of an
 .B open
+(or
+.B \%opena )
 request.
 .
+The contents of
 .I name
-is read in copy mode.
+are read in copy mode.
 .
 .
 .br
