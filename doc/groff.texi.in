@@ -11354,15 +11354,16 @@ Define an ordinary or special character@tie{}@var{c} as @var{contents}.
 If @var{contents} is absent, an existing character definition made with
 the same request is deleted.
 
+A leading neutral double quote in the second argument is stripped from
+it, allowing embedded leading spaces in @var{contents}, which is read to
+the end of the input line in copy mode.
+
 Defining (or redefining) a character @var{c} creates a formatter object
 that is recognized like any other ordinary or special character on
 input, and produces @var{contents} on output.  Every time @var{c} is to
 be output, @var{contents} is processed in a temporary environment and
-the result encapsulated in a node.@footnote{@xref{Gtroff Internals}.} A
-leading neutral double quote in the final argument is stripped from it,
-allowing embedded leading spaces in @var{contents}, which is read in
-copy mode and continues to the end of the input line.  Further,
-compatibility mode is disabled and the escape character set to @code{\}
+the result encapsulated in a node.@footnote{@xref{Gtroff Internals}.}
+Compatibility mode is disabled and the escape character set to @code{\}
 while @var{contents} is interpreted.  Any emboldening, constant spacing,
 or track kerning is applied to this object rather than to individual
 glyphs in @var{contents}.
@@ -12744,7 +12745,10 @@ can be manipulated through renaming, removal, and aliasing (@code{rn},
 @cindex mode, copy, and @code{length} request
 Compute the number of characters of @var{anything} and store the count
 in the register @var{reg}.  If @var{reg} doesn't exist, it is created.
-GNU @command{troff} reads @var{anything} in copy mode.
+
+A leading neutral double quote in the argument is stripped from it,
+allowing embedded leading spaces in @var{contents}, which is read to
+the end of the input line in copy mode.
 
 @Example
 .ds xxx abcd\h'3i'efgh
@@ -15741,10 +15745,11 @@ no output at all; its argument is simply ignored.
 @cindex mode, copy, and @code{output} request
 @Defreq {output, [@code{"}]@Var{contents}}
 Emit @var{contents} directly to GNU @command{troff}'s output; this usage
-is similar to that of @code{\!} in the top-level diversion.  An initial
-neutral double quote in the argument is stripped, allowing embedded
-leading spaces in @var{contents}, which is read in copy mode and
-continues to the end of the input line.
+is similar to that of @code{\!} in the top-level diversion.
+
+A leading neutral double quote in the argument to @code{output} is
+stripped from it, allowing embedded leading spaces in @var{contents},
+which is read to the end of the input line in copy mode.
 
 @strong{Caution:@:} Use of these features can put syntactically invalid
 content into GNU @command{troff}'s output, which @code{groff}'s output
@@ -16542,10 +16547,12 @@ standard error stream; @ref{Debugging}.
 @cindex write to file stream (@code{write}, @code{writec})
 @cindex file stream, write to (@code{write}, @code{writec})
 Write @var{contents} to @var{stream}, which must previously have been
-the subject of an @code{open} request.  A leading neutral double quote
-in the second argument is stripped, allowing embedded leading spaces in
-@var{contents}, which is read in copy mode until the end of the line.
-GNU @command{troff} flushes the stream after writing to it.
+the subject of an @code{open} (or @code{opena}) request.  GNU
+@command{troff} flushes the stream after writing to it.
+
+A leading neutral double quote in the second argument is stripped from
+it, allowing embedded leading spaces in @var{contents}, which is read to
+the end of the input line in copy mode.
 
 The @code{writec} request is like @code{write}, but only @code{write}
 appends a newline to @var{contents}.
@@ -16625,8 +16632,9 @@ Embed @var{contents} into GNU @command{troff} output as parameters to an
 The interpretation of such parameters is determined by the output driver
 or other postprocessor.
 
-The @code{device} request strips a leading neutral double quote from
-@var{contents} to allow embedding of leading spaces.
+A leading neutral double quote in the argument to @code{device} is
+stripped from it, allowing embedded leading spaces in @var{contents},
+which is read to the end of the input line in copy mode.
 
 @cindex @code{device} request, and copy mode
 @cindex copy mode, and @code{device} request

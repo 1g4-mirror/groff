@@ -1511,6 +1511,11 @@ accepting an optional leading neutral double-quote
 in an argument that extends to the end of the input line,
 permitting inclusion of leading spaces.
 .
+Such arguments are labeled
+.I contents,
+are read in copy mode,
+and cosume the rest of the input line.
+.
 .
 .TP 8n \" ".break" + 2n
 .BI .aln\~ "new old"
@@ -2010,14 +2015,7 @@ the
 .I groff
 Texinfo manual.)
 .
-A leading neutral double quote in the second argument is stripped from
-it,
-allowing embedded leading spaces in
-.I contents,
-which is read in copy mode and continues to the end of the input line.
-.
-Further,
-compatibility mode is disabled and the escape character set
+Compatibility mode is disabled and the escape character set
 .RB to\~ \[rs]
 while
 .I contents
@@ -2350,18 +2348,15 @@ is interpreted.
 .
 .
 .TP
-.BI .device\~ contents
+.BR .device\~ [\c
+.RB [ \[dq] ]\c
+.IR contents ]
 Write
 .IR contents ,
 read in copy mode,
 to
 .I @g@troff
 output as a device extension command.
-.
-A leading neutral double quote in
-.I anything
-is stripped to allow the embedding of
-leading spaces.
 .
 .
 .TP
@@ -3070,9 +3065,11 @@ is omitted.
 .
 .
 .TP
-.BI .length\~ "reg anything"
+.BI .length\~ reg\~\c
+.RB [[ \[dq]\c
+.IR contents ]
 Compute the number of characters in
-.I anything
+.I contents
 and store the count in the register
 .IR reg .
 .
@@ -3080,12 +3077,6 @@ If
 .I reg
 doesn't exist,
 it is created.
-.
-GNU
-.I troff \" GNU
-reads
-.I anything
-in copy mode.
 .
 .
 .TP
@@ -3240,17 +3231,13 @@ append to it instead of truncating it.
 .IR contents ]
 Emit
 .I contents
-directly to
+\[lq]transparently\[rq]
+(directly) to
 .IR @g@troff 's
 output;
 this usage is similar to that of
 .B \[rs]!\&
 in the top-level diversion.
-.
-A leading neutral double quote in the argument is stripped,
-allowing embedded leading spaces in
-.IR contents ,
-which is read in copy mode and continues to the end of the input line.
 .
 .
 .TP
@@ -3742,8 +3729,7 @@ the increase in width is a linear function of the type size.
 .
 .
 .TP
-.BR .tm1\~ [\c
-.RI [ \[dq] ]\c
+.BR .tm1 \~[[ \[dq] ]\c
 .IR message ]
 As
 .BR tm ,
@@ -3753,8 +3739,7 @@ allowing embedded leading spaces in
 .
 .
 .TP
-.BR .tmc\~ [\c
-.RI [ \[dq] ]\c
+.BR .tmc \~[[ \[dq] ]\c
 .IR message ]
 As
 .B tm1
@@ -4004,11 +3989,6 @@ which must previously have been the subject of an
 .B open
 request,
 followed by a newline.
-.
-A leading neutral double quote in the second argument is stripped,
-allowing embedded leading spaces in
-.IR contents ,
-which is read in copy mode until the end of the line.
 .
 GNU
 .I troff \" GNU
