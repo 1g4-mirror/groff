@@ -1,5 +1,9 @@
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (pipe_output): Shorten diagnostics.
+
+2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pdfmom]: Handle errors and abnormal exits.
 
 	* src/devices/gropdf/pdfmom.pl: Handle signaled and error exits

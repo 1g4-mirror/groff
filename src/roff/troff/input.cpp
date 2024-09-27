@@ -8407,14 +8407,13 @@ char *read_string()
 void pipe_output()
 {
   if (!has_arg(true /* peek */)) {
-    warning(WARN_MISSING, "device-independent output piping request"
-	    " expects a system command as argument");
+    warning(WARN_MISSING, "output piping request expects a system"
+	    " command as argument");
     skip_line();
     return;
   }
   if (!want_unsafe_requests) {
-    error("device-independent output piping request is not allowed in"
-	  " safer mode");
+    error("output piping request is not allowed in safer mode");
     skip_line();
   }
   else {
