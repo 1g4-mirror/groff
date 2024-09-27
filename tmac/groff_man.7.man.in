@@ -3510,18 +3510,28 @@ Ninth Edition Unix (1986) introduced
 .B .EX
 and
 .BR .EE .
+.\" DWB added .EX/.EE support, albeit slightly incompatibly.*  It
+.\" was in 3.3 (1992) but could have appeared as early as 2.0 (1986)
+.\" given its origin in Research Unix.
+.\"
+.\" * See <https://lists.gnu.org/archive/html/bug-ncurses/2024-03/\
+.\" msg00173.html>.
 .
 SunOS\~4.0 (1988) added
 .BR .SB .
 .
 .
 .P
+Except for
+.BR .EX / .EE ,
 James Clark implemented the foregoing features in early versions of
 .I groff.
 .
 Later,
 .I groff
-1.20 (2009) originated
+1.20 (2009) resurrected
+.BR .EX / .EE
+and originated
 .BR .SY / .YS ,
 .BR .TQ ,
 .BR .MT / .ME ,
@@ -4485,7 +4495,24 @@ and the
 .B PT
 and
 .B BT
-macros.
+macros in
+.I groff
+1.19 (2003).
+.
+Lemberg and
+.MT esr@\:thyrsus\:.com
+Eric S.\& Raymond
+.ME
+implemented
+.BR .EX / .EE ,
+.BR .MT / .ME ,
+.BR .UR / .UE ,
+.BR .SY / .YS ,
+and
+.B .TQ
+in
+.I groff
+1.20 (2009).
 .
 .MT g.branden\:.robinson@\:gmail\:.com
 G.\& Branden Robinson
@@ -4506,17 +4533,6 @@ registers;
 and the
 .B MR
 macro. \" all 1.23 except where noted
-.
-.
-Extension macros since
-.I groff
-1.20 were written by
-Lemberg,
-.MT esr@\:thyrsus\:.com
-Eric S.\& Raymond
-.ME ,
-and
-Robinson. \" 1.23: MR
 .
 .
 .br
