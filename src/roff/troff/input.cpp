@@ -7509,6 +7509,7 @@ void do_write_request(int newline)
     skip_line();
     return;
   }
+  if (!tok.is_newline() && !tok.is_eof()) {
   int c;
   while ((c = get_copy(0)) == ' ')
     ;
@@ -7516,6 +7517,7 @@ void do_write_request(int newline)
     c = get_copy(0);
   for (; c != '\n' && c != EOF; c = get_copy(0))
     fputs(asciify(c), fp);
+  }
   if (newline)
     fputc('\n', fp);
   fflush(fp);

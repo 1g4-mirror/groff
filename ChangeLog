@@ -1,5 +1,14 @@
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_write_request): Check for a
+	second argument before proceeding as if it's there.  This makes
+	`write` and `writec` behave more like other requests that read
+	`contents` or `anything` arguments.
+
+	Fixes <https://savannah.gnu.org/bugs/?66255>.
+
+2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add regression test for Savannah #66255.
 
 	* src/roff/groff/tests/\
