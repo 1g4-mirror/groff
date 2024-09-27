@@ -326,7 +326,7 @@ Macro packages
    relative inset, and in mdoc(7) for all paragraphs.  Formerly, the
    `IN` register configured this amount with other indentation and inset
    amount parameters used by man(7).  (In mdoc(7), it had no other
-   purpose.) The base paragraph indentation default is now 5n,
+   purpose.)  The base paragraph indentation default is now 5n,
    corresponding to that used by historical man(7) and mdoc(7)
    implementations going back to Unix Version 7 (1979) and 4.3BSD-Reno
    (1990), respectively.
