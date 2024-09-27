@@ -4113,7 +4113,7 @@ this translation is sometimes not desirable.
 .if t .ne 2v
 .if n .ne 3v \" account for horizontal rule
 .TS
-C    C
+Cb   Cb
 RfCR LfCR.
 To get a \(lqliteral\(rq.\|.\|.	.\|.\|.should be input.
 _
