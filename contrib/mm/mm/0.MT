@@ -105,11 +105,11 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ll \\n[cov*column4-limit]u
 .sp -1
 .ft \\*[@metadata-font]
-.nr cov*i 0 1
 .\" DWB 3.3 mm turned off filling, but that runs a big risk of
 .\" oversetting the line in nroff mode.
 .nr cov*saved-adjustment \\n[.j]
 .ad l
+.nr cov*i 0 1
 .while \\n+[cov*i]<=\\n[cov*au] \{\
 .	cov@print-au1 \\n[cov*i] 1
 .	if \\n[Au] \{\

@@ -1,3 +1,8 @@
+2024-09-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* mm/0.MT (cov*print-authors): Fix code style nit: define
+	register closer to its point of use.
+
 2024-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Use value of GNU troff `.R` register instead of "99"
