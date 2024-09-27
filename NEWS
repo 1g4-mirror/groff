@@ -471,10 +471,10 @@ Output drivers
    past.  A user's document or macro file can still do exactly what
    "ps.tmac" used to.
 
-    .fchar \[S ,] \o'S\[ac]'
-    .hcode \[S ,]s
-    .fchar \[s ,] \o's\[ac]'
-    .hcode \[s ,]s
+     .fchar \[S ,] \o'S\[ac]'
+     .hcode \[S ,]s
+     .fchar \[s ,] \o's\[ac]'
+     .hcode \[s ,]s
 
 *  gropdf(1), the PDF output driver, now allows embedding of JFIF/JPEG
    and JPEG 2000 image file formats.  If PerlMagick is installed, many
