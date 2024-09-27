@@ -5976,7 +5976,7 @@ The formatter sometimes requires the input of numeric parameters to
 specify measurements.  These are specified as integers or decimal
 fractions with an optional @dfn{scaling unit} suffixed.  A scaling unit
 is a letter that immediately follows the last digit of a number.  Digits
-after the decimal point are optional.  Measurement expressions include
+after the decimal point are optional.  Examples of measurements include
 @samp{10.5p}, @samp{11i}, and @samp{3.c}.
 
 @cindex basic units, conversion to
@@ -6109,7 +6109,7 @@ Half-quantum fractions round toward zero.
 @DefregList {.H}
 @DefregListEndx {.V}
 These read-only registers interpolate the horizontal and vertical motion
-quanta, respectively, of the output device in basic units.
+quantum, respectively, of the output device in basic units.
 @endDefreg
 
 For example, we might draw short baseline rules on a terminal device as
@@ -6505,6 +6505,7 @@ invalid macro or string arguments.  @xref{Conditionals and Loops}.
 .\" Indent by amount given in first argument; assume ens.
 .de Indent
 .  if \B'\\$1' .in (n;\\$1)
+.  el          .tm \\$0: invalid number '\\$1'
 ..
 @endExample
 
@@ -7415,10 +7416,10 @@ comment escape sequence as @samp{.\"}, causing the input line to be
 ignored.
 
 @cindex @code{'}, as a comment
-Another commenting scheme sometimes seen is three consecutive single
-quotes (@code{'''}) at the beginning of a line.  This works, but GNU
-@code{troff} emits a warning diagnostic (if enabled) about an undefined
-macro (namely @samp{''}).
+Another commenting scheme sometimes seen is three consecutive neutral
+apostrophes (@code{'''}) at the beginning of an input line.  This works,
+but GNU @command{troff} emits a warning diagnostic (if enabled) about an
+undefined macro (namely @samp{''}).
 @endDefesc
 
 @Defesc {\\#, , , }
