@@ -56,9 +56,6 @@ troff
    and abort evaluation of the expression, the formatter now emits a
    warning diagnostic in the "range" category.
 
-*  The `pnr` request now additionally reports the interpolation format
-   of each register (if it is not string-valued).
-
 *  The formatter no longer reports warnings in the "el" category.  There
    was only one; it threw a warning diagnostic if enabled (which it was
    not by default) if it inferred an imbalance between `ie` and `el`
@@ -73,10 +70,10 @@ troff
    inches (or the unit configured with the `warnscale` request) to
    describe the vertical drawing position where the problem occurred.
 
-*  The device-independent page description now reports unbreakable
-   spaces (those produced with the `\~` escape sequence) as word breaks
-   with the documentary 'w' command, just as it does for regular
-   breakable spaces.
+*  The device-independent page description language produced by GNU
+   troff now reports unbreakable spaces (those produced with the `\~`
+   escape sequence) as word breaks with the documentary 'w' command,
+   just as it does for regular breakable spaces.
 
 *  A new request, `hydefault`, and read-only register, `.hydefault`,
    manage the default automatic hyphenation mode of an environment.
@@ -96,7 +93,7 @@ troff
    this release, the foregoing input now works as desired.
 
 *  A new read-only, string-valued register, `.trap`, interpolates the
-   name of the next vertical position trap after the drawing position.
+   name of the next page location trap after the drawing position.
 
 *  New registers `.it`, `.itc`, and `.itm` are available.  These
    read-only (and, in the case of `.itm`, string-valued) registers
@@ -123,6 +120,9 @@ troff
 *  A new request, `pline`, reports to the standard error stream the list
    of output nodes (an internal data structure) corresponding to the
    pending output line.  The list is empty if no such nodes exist.
+
+*  The `pnr` request now additionally reports the interpolation format
+   of each register (if it is not string-valued).
 
 *  A new request, `pstream`, reports to the standard error stream the
    name of each stream opened with the `open` or `opena` requests, the
@@ -184,14 +184,14 @@ Macro packages
    report problems with attempts to use nonexistent font names.  We
    recommend addressing such portability issues wherever suits you: (1)
    in a document, perhaps by using `ie` and `el` requests and the `.g`
-   register to test for groff extensions, then `ie` and `el` again with
-   the `F` groff conditional expression operator to check for font
-   availability, and performing font remappings with the groff `ftr`
-   request as desired; (2) doing so in your "troffrc" file; or (3) by
-   modifying these macro files similarly.  Users of the "dvi" and "lbp"
-   output devices should be aware that these devices don't supply full
-   families of monospaced fonts (and never have).  See grodvi(1) and
-   grolbp(1).
+   register to test whether the formatter claims support for groff
+   extensions, then `ie` and `el` again with the `F` groff conditional
+   expression operator to check for font availability, and performing
+   font remappings with the groff `ftr` request as desired; (2) doing so
+   in your "troffrc" file; or (3) by modifying these macro files
+   similarly.  Users of the "dvi" and "lbp" output devices should be
+   aware that these devices don't supply full families of monospaced
+   fonts (and never have).  See grodvi(1) and grolbp(1).
 
 *  Hyperlink support is now enabled by default on PDF and terminal
    devices for an (man) and doc (mdoc) documents.  Instructions and
@@ -223,8 +223,8 @@ Macro packages
    replaces the fixed-width space that is appended to the synopsis
    keyword in `SY`'s single-argument form, and is used in computation of
    the indentation of non-initial synopsis lines.  However, this
-   computed indentation can now also be overridden, and the indentation
-   of a previous syopsis item reused.  To do this, give any argument to
+   computed indentation can now also be overridden with that of the
+   previous syopsis item.  To do this, give any argument to
    the `YS` macro call "closing" the synopsis whose indentation you want
    to reuse.  When you're done with such a grouped synopsis, leave the
    argument off the final `YS` call.
