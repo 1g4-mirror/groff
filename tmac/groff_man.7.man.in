@@ -4503,14 +4503,14 @@ Lemberg and
 .MT esr@\:thyrsus\:.com
 Eric S.\& Raymond
 .ME
-implemented
-.BR .EX / .EE ,
-.BR .MT / .ME ,
-.BR .UR / .UE ,
-.BR .SY / .YS ,
+wrote
+.BR EX / EE ,
+.BR MT / ME ,
+.BR UR / UE ,
+.BR SY / YS ,
 and
-.B .TQ
-in
+.B TQ
+macros for
 .I groff
 1.20 (2009).
 .
