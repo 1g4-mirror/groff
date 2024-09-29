@@ -56,13 +56,13 @@ troff
    and abort evaluation of the expression, the formatter now emits a
    warning diagnostic in the "range" category.
 
-*  The formatter no longer reports warnings in the "el" category.  There
-   was only one; it threw a warning diagnostic if enabled (which it was
-   not by default) if it inferred an imbalance between `ie` and `el`
-   requests.  Unfortunately it wasn't reliable and sometimes spuriously
-   issued these warnings, and making it perfectly reliable did not look
-   tractable.  We recommend using brace escape sequences `\{` and `\}`
-   to ensure that your control flow structures remain maintainable.
+*  The "el" warning category has been withdrawn.  If enabled (which it
+   was not by default), the formatter would emit a diagnostic if it
+   inferred an imbalance between `ie` and `el` requests.  Unfortunately
+   its technique wasn't reliable and sometimes spuriously issued these
+   warnings, and making it perfectly reliable did not look tractable.
+   We recommend using brace escape sequences `\{` and `\}` to ensure
+   that your control flow structures remain maintainable.
 
 *  In nroff mode (in other words, when producing output for devices that
    claim to be terminals), the formatter now reports warning diagnostics
@@ -109,13 +109,13 @@ troff
    unknown to the formatter.)
 
 *  A new request, `pcomposite`, reports to the standard error stream the
-   current list of defined composite characters.
+   list of defined composite characters.
 
 *  A new request, `phcode`, reports to the standard error stream the
    hyphenation code of each ordinary or special character argument.
 
 *  A new request, `phw`, reports to the standard error stream the
-   current list of hyphenation exceptions.
+   list of hyphenation exceptions.
 
 *  A new request, `pline`, reports to the standard error stream the list
    of output nodes (an internal data structure) corresponding to the
@@ -124,13 +124,13 @@ troff
 *  The `pnr` request now additionally reports the interpolation format
    of each register (if it is not string-valued).
 
-*  A new request, `pstream`, reports to the standard error stream the
-   name of each stream opened with the `open` or `opena` requests, the
-   name of the file backing it, and its mode (writing or appending).
-
 *  The `pnr` request now accepts arguments.  It treats each as
    identifying a register and reports its properties to the standard
    error stream.
+
+*  A new request, `pstream`, reports to the standard error stream the
+   name of each stream opened with the `open` or `opena` requests, the
+   name of the file backing it, and its mode (writing or appending).
 
 *  The `hla` request, when invoked with no arguments, now clears the
    hyphenation language, disabling automatic hyphenation.
@@ -139,7 +139,7 @@ troff
    the default color is selected as the stroke or fill color,
    respectively, rather than interpolating nothing.
 
-*  Numerical expression contexts that accept the `z` and `u` scaling
+*  Numeric expression contexts that accept the `z` and `u` scaling
    units, such as the `ps` request and `\s` escape sequence, now also
    accept `p` and `s`.
 
@@ -180,18 +180,18 @@ Macro packages
    translations for font names used by varieties of AT&T troff ('C',
    'Hb', 'HX', and many others).  These names are not portable: in AT&T
    troff, the font repertoire, like the special character repertoire,
-   was device-dependent.  Since groff 1.23.0, our diagnostic messages
-   report problems with attempts to use nonexistent font names.  We
-   recommend addressing such portability issues wherever suits you: (1)
-   in a document, perhaps by using `ie` and `el` requests and the `.g`
-   register to test whether the formatter claims support for groff
-   extensions, then `ie` and `el` again with the `F` groff conditional
-   expression operator to check for font availability, and performing
-   font remappings with the groff `ftr` request as desired; (2) doing so
-   in your "troffrc" file; or (3) by modifying these macro files
-   similarly.  Users of the "dvi" and "lbp" output devices should be
-   aware that these devices don't supply full families of monospaced
-   fonts (and never have).  See grodvi(1) and grolbp(1).
+   was device-dependent.  Since groff 1.23.0, GNU troff diagnoses
+   attempts to use nonexistent font names.  We recommend addressing such
+   portability issues wherever suits you: (1) in a document, perhaps by
+   using `ie` and `el` requests and the `.g` register to test whether
+   the formatter claims support for groff extensions, then `ie` and `el`
+   again with the `F` groff conditional expression operator to check for
+   font availability, and performing font remappings with the groff
+   `ftr` request as desired; (2) doing so in your "troffrc" file; or (3)
+   by modifying these macro files similarly.  Users of the "dvi" and
+   "lbp" output devices should be aware that these devices don't supply
+   full families of monospaced fonts (and never have).  See grodvi(1)
+   and grolbp(1).
 
 *  Hyperlink support is now enabled by default on PDF and terminal
    devices for an (man) and doc (mdoc) documents.  Instructions and
@@ -349,7 +349,7 @@ Macro packages
 
 *  The "an-ext.tmac" macro file, loaded automatically by the an (man)
    macro package, no longer defines `DS` and `DE` macros.  It had
-   defined them as empty (undocumentedly) since 2009.
+   defined them as empty (undocumentedly) since groff 1.20 (2009).
 
 *  The doc (mdoc) macro package's `Mt` macro now sets its argument in
    roman, not italics (or whatever the string `doc-Pa-font` was
