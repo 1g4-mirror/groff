@@ -12953,9 +12953,10 @@ termed @dfn{conditional expressions}.
 @table @code
 @item c @var{glyph}
 True if @var{glyph} is available, where @var{glyph} is an ordinary
-character, a special character @samp{\(@var{xx}} or @samp{\[@var{xxx}]},
-@samp{\N'@var{xxx}'}, or has been defined by any of the @code{char},
-@code{fchar}, @code{fschar}, or @code{schar} requests.
+character, a special character @samp{\(@var{xx}} or @samp{\[@var{xxx}]}
+(whether built-in or user-defined), @samp{\N'@var{xxx}'}, or has been
+defined by any of the @code{char}, @code{fchar}, @code{fschar}, or
+@code{schar} requests.
 
 @item d @var{name}
 True if a string, macro, diversion, or request called @var{name} exists.

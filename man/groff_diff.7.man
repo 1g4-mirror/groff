@@ -149,7 +149,7 @@ can group text typefaces into
 .I families.
 For example,
 .I groff
-ships families containing each of the styles
+ships with support for families containing each of the styles
 .RB \[lq] R \[rq],
 .RB \[lq] I \[rq],
 .RB \[lq] B \[rq],
@@ -563,6 +563,12 @@ if
 is empty.
 .
 .
+.P
+Arithmetic in GNU
+.I troff \" troff
+saturates instead of wrapping.
+.
+.
 .\" ====================================================================
 .SS "Conditional expressions"
 .\" ====================================================================
@@ -586,7 +592,8 @@ where
 .I chr
 is an ordinary character
 (Unicode basic Latin excluding control characters and the space),
-a special character,
+a special character
+(whether built-in or user-defined),
 or
 .BI \[rs]N\[aq] index\c
 .BR \[aq] .
