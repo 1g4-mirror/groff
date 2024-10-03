@@ -928,6 +928,12 @@ Macro packages
    otherwise suggest makeindex(1), which supports troff and is available
    with most TeX distributions, for your mm/ms document indexing needs.
 
+   A document can define its own `IX` macro to suit its requirements.
+
+     .de IX
+     .tm \\$1\t\\$2\t\\$3\t\\$4 ... \\n[%]
+     ..
+
 *  The m (mm) macro package now adapts to the paper format selected when
    the macro file "papersize.tmac" is used (by specifying the groff "-d
    paper" command-line option).  A consequence is that "groff -mm" and
