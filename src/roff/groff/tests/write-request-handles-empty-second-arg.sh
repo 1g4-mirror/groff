@@ -35,7 +35,18 @@ cleanup () {
   rm -f $tmpfile
 }
 
-trap 'trap - HUP INT QUIT TERM; cleanup; kill -INT $$' HUP INT QUIT TERM
+# A process handling a fatal signal should:
+#   1.  Mask _all_ fatal signals.
+#   2.  Perform cleanup operations.
+#   3.  Unmask the signal (removing the handler).
+#   4.  Signal its own process group with the signal caught so that the
+#       the children exit and shell accurately reports how the process
+#       died.
+fatals="HUP INT QUIT TERM"
+for s in $fatals
+do
+  trap "trap '' $fatals; cleanup; trap - $fatals; kill -$s -$$" $s
+done
 
 input='.
 .open mystream '$tmpfile'

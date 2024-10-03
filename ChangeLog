@@ -1,3 +1,9 @@
+2024-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/\
+	write-request-handles-empty-second-arg.sh: Revise signal
+	handling.
+
 2024-09-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (class input_iterator)
