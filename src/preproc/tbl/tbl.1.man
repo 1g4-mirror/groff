@@ -1021,7 +1021,7 @@ provokes a diagnostic from
 .SS "Table data"
 .\" ====================================================================
 .
-Place table data after the format specification.
+Place table data on lines after the format specification.
 .
 Each text line corresponds to a table row,
 except that a backslash at the end of a line of table data continues an
