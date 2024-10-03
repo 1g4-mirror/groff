@@ -149,9 +149,9 @@
 	(main): Rename `vflag` to `want_version_info` and demote it from
 	`int` to `bool`.  Assign to it using Boolean, not integer,
 	literals.
-	* src/roff/groff/pipeline.c:
-	* src/roff/groff/pipeline.h:
-	(run_pipeline): Demote `no_pipe` argument from `int` to `bool`.
+	* src/roff/groff/pipeline.c (run_pipeline):
+	* src/roff/groff/pipeline.h (run_pipeline): Demote `no_pipe`
+	argument from `int` to `bool`.
 	* src/roff/groff/pipeline.c: Include "stdbool.h" header file.
 
 2024-09-20  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -392,18 +392,13 @@
 
 	* src/preproc/html/pre-html.cpp: Improve diagnostic message
 	handling.
-	(html_system)
-	(imageList::createPage)
-	(imageList::createImage)
-	(set_redirection)
-	(save_and_redirect)
-	(print_args [DEBUGGING]): Prefix output to standard error stream
-	with name of program.
-	(html_system [DEBUGGING])
-	(imageList::createPage [DEBUGGING])
-	(imageList::createImage [DEBUGGING])
-	(print_args [DEBUGGING]): Prefix output to standard error stream
-	with "debug:" message severity tag.
+	(html_system, imageList::createPage, imageList::createImage)
+	(set_redirection, save_and_redirect, print_args [DEBUGGING]):
+	Prefix output to standard error stream with name of program.
+	(html_system [DEBUGGING], imageList::createPage [DEBUGGING])
+	(imageList::createImage [DEBUGGING], print_args [DEBUGGING]):
+	Prefix output to standard error stream with "debug:" message
+	severity tag.
 	(main): Assign to `program_name` global variable before emitting
 	first diagnostic ([CAPTURE_MODE]), and convert that diagnostic
 	to use it.
