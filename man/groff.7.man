@@ -665,7 +665,8 @@ flushing out the pending output line in the usual way.
 .
 The
 .register .int
-contains a positive value if the last output line was continued with
+interpolates a positive value only if the pending output line has been
+continued with
 .esc c ;
 this datum is associated with the
 environment.

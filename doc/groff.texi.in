@@ -10062,14 +10062,15 @@ flushing out the pending output line in the usual way.
 
 @cindex interrupted line register (@code{.int})
 @cindex continued output line register (@code{.int})
-The @code{.int} register contains a positive value if the most recently
-formatted text was continued with @code{\c}; this datum is associated
-with the environment (@pxref{Environments}).@footnote{Historically, the
-@code{\c} escape sequence has proven challenging to characterize.  Some
-sources say it ``connects the next input text'' (to the input line on
-which it appears); others describe it as ``interrupting'' text, on the
-grounds that a text line is interrupted without breaking, perhaps to
-inject a request invocation or macro call.}
+The @code{.int} register interpolates a positive value only if the
+pending output line has been continued with @code{\c}; this datum is
+associated with the environment
+(@pxref{Environments}).@footnote{Historically, the @code{\c} escape
+sequence has proven challenging to characterize.  Some sources say it
+``connects the next input text'' (to the input line on which it
+appears); others describe it as ``interrupting'' text, on the grounds
+that a text line is interrupted without breaking, perhaps to inject a
+request invocation or macro call.}
 @endDefesc
 
 
