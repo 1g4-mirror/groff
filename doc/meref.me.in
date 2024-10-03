@@ -1397,7 +1397,7 @@ With \(lq\c
 .b ".TS H" \(rq,
 end the
 .i \%@g@tbl
-table header.
+table heading.
 .TL
 .b .TE
 .DE
