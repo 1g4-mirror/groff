@@ -2021,7 +2021,7 @@ void table::init_output()
 	 ".nr ln 0\n"
 	 ".nr " SAVED_NUMBERING_ENABLED " \\n[.nm]\n"
 	 ".nr " SAVED_NUMBERING_SUPPRESSION_COUNT " \\n[.nn]\n"
-	 ".nn 2147483647\n"); // 2^31-1; inelegant but effective
+	 ".nn \\n[.R]\n"); // INT_MAX as of groff 1.24
   prints(".nf\n");
 }
 

@@ -1,5 +1,11 @@
 2024-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::init_output): Migrate to use
+	of `.R` register for a huge value in generated groff language,
+	instead of hard-coding (2^31)-1 as a numeric literal.
+
+2024-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp: Add C preprocessor macro storing
 	the name of a groff register for saving the state of line
 	numering enablement.
