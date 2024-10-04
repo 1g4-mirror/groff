@@ -4058,15 +4058,16 @@ P V = n R T
 @cindex equations [@file{ms}]
 @cindex references [@file{ms}]
 
-The @file{ms} package is often used with the @code{tbl}, @code{pic},
-@code{eqn}, and @code{refer} preprocessors.
+@file{ms} often sees use with the @code{tbl}, @code{pic}, @code{eqn},
+and @code{refer} preprocessors.
 @pindex tbl
 @pindex pic
 @pindex eqn
 @pindex refer
 Mark text meant for preprocessors by enclosing it in pairs of tokens
-as follows, with nothing between the dot and the macro name.  The
-preprocessors match these tokens only at the start of an input line.
+as follows, with nothing between the dot and the macro name.
+Preprocessors match these tokens only at the start of an input line.
+@code{troff} interprets them as macro calls.
 
 @DefmacList {TS, [@code{H}], ms}
 @DefmacListEndx {TE, , ms}
@@ -4742,11 +4743,10 @@ register; Berkeley and @code{groff} @file{ms} do.
 @end itemize
 
 @Defmpreg {GS, ms}
-The register @code{GS} is set to@tie{}1 by the @code{groff} @file{ms}
-macros, but is not used by the @acronym{AT&T} @file{ms} package.
-Documents that need to determine whether they are being formatted with
-@code{groff} @file{ms} or another implementation should test this
-register.
+@code{groff} @file{ms} sets the register @code{GS} to@tie{}1;
+@acronym{AT&T} @file{ms} does not use it.  A document can test its value
+to determine whether it is being formatted with @code{groff} @file{ms}
+or another implementation.
 @endDefmpreg
 
 @menu
