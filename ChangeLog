@@ -1,3 +1,8 @@
+2024-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/tests/save-and-restore-line-numbering.sh: Add
+	regression test for Savannah #66290.
+
 2024-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/\
