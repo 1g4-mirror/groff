@@ -1,5 +1,20 @@
 2024-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp: Add C preprocessor macro storing
+	the name of a groff register for saving the state of line
+	numering enablement.
+	(table::init_output): Save the value of the `.nm` register to
+	this groff register.
+	(table::do_bottom): Test the value of that register (instead of
+	the saved line number itself) when deciding whether to reënable
+	line numbering after leaving the table region.
+
+	Fixes <https://savannah.gnu.org/bugs/?66290>.  Problem
+	introduced by me in commit 950f92e25f, 28 November 2022, when
+	fixing Savannah #61040.  Thanks to Deri James for the report.
+
+2024-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/tests/save-and-restore-line-numbering.sh: Add
 	regression test for Savannah #66290.
 

@@ -68,6 +68,7 @@ const int DEFAULT_COLUMN_SEPARATION = 3;
 #define SAVED_HYPHENATION_MARGIN_REG PREFIX "hyphmargin"
 #define SAVED_HYPHENATION_SPACE_REG PREFIX "hyphspace"
 #define SAVED_NUMBERING_LINENO PREFIX "linenumber"
+#define SAVED_NUMBERING_ENABLED PREFIX "linenumberingenabled"
 #define SAVED_NUMBERING_SUPPRESSION_COUNT PREFIX "linenumbersuppresscnt"
 #define STARTING_PAGE_REG PREFIX "starting-page"
 #define IS_BOXED_REG PREFIX "is-boxed"
@@ -2018,6 +2019,7 @@ void table::init_output()
 	 ".ce 0\n");
   prints(".nr " SAVED_NUMBERING_LINENO " \\n[ln]\n"
 	 ".nr ln 0\n"
+	 ".nr " SAVED_NUMBERING_ENABLED " \\n[.nm]\n"
 	 ".nr " SAVED_NUMBERING_SUPPRESSION_COUNT " \\n[.nn]\n"
 	 ".nn 2147483647\n"); // 2^31-1; inelegant but effective
   prints(".nf\n");
@@ -3157,7 +3159,7 @@ void table::do_bottom()
     prints(".if n .sp\n");
   prints("." RESET_MACRO_NAME "\n"
 	 ".nn \\n[" SAVED_NUMBERING_SUPPRESSION_COUNT "]\n"
-	 ".ie \\n[" SAVED_NUMBERING_LINENO "] "
+	 ".ie \\n[" SAVED_NUMBERING_ENABLED "] "
 	 ".nm \\n[" SAVED_NUMBERING_LINENO "]\n"
 	 ".el .nm\n"
 	 ".fc\n"
