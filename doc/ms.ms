@@ -4117,7 +4117,7 @@ AT&T
 macro supported arguments
 whose values were used with some
 .CW RP "" non-
- document types;
+document types;
 that of
 .I "groff ms"
 does not.
