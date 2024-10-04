@@ -392,13 +392,9 @@ Wallace after the criticality incident.
 .  bp
 .\}
 .NH 1
-General structure of an
-.BI ms
-document
+Document structure
 .XS
-General structure of an
-.I ms
-document
+Document structure
 .XE
 .
 .
@@ -409,7 +405,7 @@ macro package expects a certain amount of structure:
 a well-formed document contains at least one paragraphing or heading
 macro call.
 .
-Longer documents have a structure as follows.
+Organize longer documents as follows.
 .
 .
 .IP "\fBDocument type\fP"
