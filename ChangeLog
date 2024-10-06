@@ -1,5 +1,13 @@
 2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/stringclass.h (class string): Declare new `find`
+	public member function; it works like `search` but takes a
+	pointer to `const char`, making it a substring locator.
+
+	* src/libs/libgroff/string.cpp (string::find): Implement it.
+
+2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* bootstrap.conf: Add "memmem" to `gnulib_modules`.
 
 2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
