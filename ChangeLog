@@ -1,5 +1,19 @@
 2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::add_entry): Refactor to
+	avoid overreading memory allocated to `string` objects, which
+	don't null-terminate their contents.  Use string class's
+	existing `search` and new `find` member functions to perform
+	character and substring matches, respectively, instead of
+	`strchr()` and `strstr()`.  As a side benefit, the code now
+	looks cleaner and reads easier.
+
+	Fixes a SEGV reported by Lennart Jablonka that I can't reproduce
+	but which made sense once he pointed it out.  Problem introduced
+	by me in commit a91cd457d9, 26 September.
+
+2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/stringclass.h (class string): Declare new `find`
 	public member function; it works like `search` but takes a
 	pointer to `const char`, making it a substring locator.

@@ -1528,35 +1528,33 @@ void table::add_entry(int r, int c, const string &str,
   int len = str.length();
   // Diagnose escape sequences that can wreak havoc in generated output.
   if (len > 1) {
-    const char *entryptr = str.contents();
     // A comment on a control line or in a text block is okay.
-    const char *commentptr = strstr(entryptr, "\\\"");
-    if (commentptr != 0 /* nullptr */) {
-      const char *controlptr = strchr(entryptr, '.');
-      if ((controlptr == 0 /* nullptr */)
-	  || (controlptr == entryptr)
-	  || (strstr(entryptr, "\n") == 0 /* nullptr */))
+    int commentpos = str.find("\\\"");
+    if (commentpos != -1) {
+      int controlpos = str.search('.');
+      if ((-1 == controlpos)
+	  || (0 == controlpos)
+	  || (-1 == str.search('\n')))
 	warning_with_file_and_line(fn, ln, "table entry contains"
 				   " comment escape sequence '\\\"'");
     }
-    const char *gcommentptr = strstr(entryptr, "\\#");
+    int gcommentpos = str.find("\\#");
     // If both types of comment are present, the first is what matters.
-    if ((gcommentptr != 0 /* nullptr */)
-	&& (gcommentptr < commentptr))
-      commentptr = gcommentptr;
-    if (commentptr != 0 /* nullptr */) {
-      const char *controlptr = strchr(entryptr, '.');
-      if ((controlptr == 0 /* nullptr */)
-	  || (controlptr == entryptr)
-	  || (strstr(entryptr, "\n") == 0 /* nullptr */))
+    if ((gcommentpos != -1) && (gcommentpos < commentpos))
+      commentpos = gcommentpos;
+    if (commentpos != -1) {
+      int controlpos = str.search('.');
+      if ((-1 == controlpos)
+	  || (0 == controlpos)
+	  || (-1 == str.search('\n')))
 	warning_with_file_and_line(fn, ln, "table entry contains"
 				   " comment escape sequence '\\#'");
     }
     // A \! escape sequence after a comment has started is okay.
-    const char *exclptr = strstr(str.contents(), "\\!");
-    if ((exclptr != 0 /* nullptr */)
-	&& ((0 /* nullptr */ == commentptr)
-	    || (exclptr < commentptr)))
+    int exclpos = str.find("\\!");
+    if ((exclpos != -1)
+	&& ((-1 == commentpos)
+	    || (exclpos < commentpos)))
       warning_with_file_and_line(fn, ln, "table entry contains"
 				 " transparent throughput escape"
 				 " sequence '\\!'");
