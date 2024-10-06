@@ -1,5 +1,9 @@
 2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* bootstrap.conf: Add "memmem" to `gnulib_modules`.
+
+2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/stringclass.h (class string): Fix code style nit:
 	`const`-ify argument to `search` public member function.
 
