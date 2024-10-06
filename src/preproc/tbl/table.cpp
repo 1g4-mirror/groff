@@ -1558,17 +1558,17 @@ void table::add_entry(int r, int c, const string &str,
       warning_with_file_and_line(fn, ln, "table entry contains"
 				 " transparent throughput escape"
 				 " sequence '\\!'");
-    string last_two_chars = str.substring((len - 2), 2);
-    if ("\\z" == last_two_chars)
+    // An incomplete \z sequence at the entry's end causes problems.
+    if (str.find("\\z") == (len - 2)) // max valid index is (len - 1)
       error_with_file_and_line(fn, ln, "table entry ends with"
 			       " zero-motion escape sequence '\\z'");
   }
   char *s = str.extract();
-  if (str.search('\n') >= 0) {
+  if (str.search('\n') != -1) { // if it's a text block
     bool was_changed = false;
-    for (int i = 0; s[i] != '\0'; i++)
-      if ((i > 0) && (s[(i - 1)] == '\\') && (s[i] == 'R')) {
-	s[i] = '&';
+    int repeatpos = str.find("\\R");
+    if (repeatpos != -1) {
+	s[++repeatpos] = '&';
 	was_changed = true;
       }
     if (was_changed)

@@ -1,5 +1,11 @@
 2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::add_entry): Refactor match
+	attempts for `\R` and `\z` in table entries to use new `find()`
+	member function of `string` class.
+
+2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::add_entry): Refactor to
 	avoid overreading memory allocated to `string` objects, which
 	don't null-terminate their contents.  Use string class's
