@@ -1,3 +1,11 @@
+2024-10-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/reg.cpp (dump_register): Remove garbage from
+	`errprint()` format string.
+
+	Fixes <https://savannah.gnu.org/bugs/?66293>.  Thanks to Bjarni
+	Ingi Gislason for the report.
+
 2024-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/table.cpp (table::init_output): Migrate to use
