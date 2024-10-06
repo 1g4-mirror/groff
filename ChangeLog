@@ -1,3 +1,8 @@
+2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/include/stringclass.h (class string): Fix code style nit:
+	`const`-ify argument to `search` public member function.
+
 2024-10-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/reg.cpp (dump_register): Remove garbage from
