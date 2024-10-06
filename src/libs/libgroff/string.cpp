@@ -276,10 +276,12 @@ void string::clear()
   len = 0;
 }
 
-int string::search(char c) const
+int string::search(const char c) const
 {
-  char *p = ptr ? (char *)memchr(ptr, c, len) : 0;
-  return p ? p - ptr : -1;
+  const char *p = ptr
+		  ? static_cast<const char *>(memchr(ptr, c, len))
+		  : 0 /* nullptr */;
+  return (p != 0 /* nullptr */) ? (p - ptr) : -1;
 }
 
 // we silently strip nuls

@@ -3,6 +3,12 @@
 	* src/include/stringclass.h (class string): Fix code style nit:
 	`const`-ify argument to `search` public member function.
 
+	* src/libs/libgroff/string.cpp (string::search): `const`-ify
+	argument and local variable.  Use C++ `static_cast` operator
+	instead of C-style type cast.  Explicitly compare variable of
+	pointer type to null pointer literal instead of letting it pun
+	down to a Boolean.  Parenthesize complex expression.
+
 2024-10-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/reg.cpp (dump_register): Remove garbage from
