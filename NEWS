@@ -928,7 +928,8 @@ Macro packages
    otherwise suggest makeindex(1), which supports troff and is available
    with most TeX distributions, for your mm/ms document indexing needs.
 
-   A document can define its own `IX` macro to suit its requirements.
+   A document can define its own `IX` macro to suit the requirements of
+   the indexing tool.  groff mm and ms formerly used the following.
 
      .de IX
      .tm \\$1\t\\$2\t\\$3\t\\$4 ... \\n[%]
