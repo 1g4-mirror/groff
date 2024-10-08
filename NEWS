@@ -224,9 +224,9 @@ Macro packages
    keyword in `SY`'s single-argument form, and is used in computation of
    the indentation of non-initial synopsis lines.  However, this
    computed indentation can now also be overridden with that of the
-   previous syopsis item.  To do this, give any argument to
-   the `YS` macro call "closing" the synopsis whose indentation you want
-   to reuse.  When you're done with such a grouped synopsis, leave the
+   previous synopsis item.  To do this, give any argument to the `YS`
+   macro call "closing" the synopsis whose indentation you want to
+   reuse.  When you're done with such a grouped synopsis, leave the
    argument off the final `YS` call.
 
    In a "Synopsis" section of a man page, existing synopses consisting
