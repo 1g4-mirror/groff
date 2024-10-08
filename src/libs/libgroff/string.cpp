@@ -284,7 +284,7 @@ int string::search(const char c) const
   return (p != 0 /* nullptr */) ? (p - ptr) : -1;
 }
 
-// Return index of substing `c` in string, -1 if not found.
+// Return index of substring `c` in string, -1 if not found.
 int string::find(const char *c) const
 {
   const char *p = ptr
