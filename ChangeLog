@@ -1,5 +1,11 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::add_entry): Quote the
+	contents of (ordinary) non-text-block table entries when
+	throwing diagnostics about their contents.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::add_entry): Fix logic error
 	in *roff escape sequence detection, exposed by UTP document
 	<https://github.com/larrykollar/Unix-Text-Processing/tree/1.0>.

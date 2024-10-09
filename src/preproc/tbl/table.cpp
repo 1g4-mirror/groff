@@ -1535,8 +1535,9 @@ void table::add_entry(int r, int c, const string &str,
       if ((-1 == str.search('\n')) // not a text block, AND
 	  && ((-1 == controlpos) // (no control character in line OR
 	      || (0 == controlpos))) // control character at line start)
-	warning_with_file_and_line(fn, ln, "table entry contains"
-				   " comment escape sequence '\\\"'");
+	warning_with_file_and_line(fn, ln, "comment escape sequence"
+				   " '\\\"' in entry \"%1\"",
+				   str.extract());
     }
     int gcommentpos = str.find("\\#");
     // If both types of comment are present, the first is what matters.
@@ -1547,21 +1548,34 @@ void table::add_entry(int r, int c, const string &str,
       if ((-1 == str.search('\n')) // not a text block, AND
 	  && ((-1 == controlpos) // (no control character in line OR
 	      || (0 == controlpos))) // control character at line start)
-	warning_with_file_and_line(fn, ln, "table entry contains"
-				   " comment escape sequence '\\#'");
+	warning_with_file_and_line(fn, ln, "comment escape sequence"
+				   " '\\#' in entry \"%1\"",
+				   str.extract());
     }
     // A \! escape sequence after a comment has started is okay.
     int exclpos = str.find("\\!");
     if ((exclpos != -1)
 	&& ((-1 == commentpos)
-	    || (exclpos < commentpos)))
-      warning_with_file_and_line(fn, ln, "table entry contains"
-				 " transparent throughput escape"
-				 " sequence '\\!'");
+	    || (exclpos < commentpos))) {
+      if (-1 == str.search('\n')) // not a text block
+	warning_with_file_and_line(fn, ln, "transparent throughput"
+				   " escape sequence '\\!' in entry"
+				   " \"%1\"", str.extract());
+      else
+	warning_with_file_and_line(fn, ln, "transparent throughput"
+				   " escape sequence '\\!' in text"
+				   " block entry");
+    }
     // An incomplete \z sequence at the entry's end causes problems.
-    if (str.find("\\z") == (len - 2)) // max valid index is (len - 1)
-      error_with_file_and_line(fn, ln, "table entry ends with"
-			       " zero-motion escape sequence '\\z'");
+    if (str.find("\\z") == (len - 2)) { // max valid index is (len - 1)
+      if (-1 == str.search('\n')) // not a text block
+	error_with_file_and_line(fn, ln, "zero-motion escape sequence"
+				 " '\\z' at end of entry \"%1\"",
+				 str.extract());
+      else
+	error_with_file_and_line(fn, ln, "zero-motion escape sequence"
+				 " '\\z' at end of text block entry");
+    }
   }
   char *s = str.extract();
   if (str.search('\n') != -1) { // if it's a text block
