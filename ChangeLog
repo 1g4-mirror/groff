@@ -1,3 +1,9 @@
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::add_entry): Fix logic error
+	in *roff escape sequence detection, exposed by UTP document
+	<https://github.com/larrykollar/Unix-Text-Processing/tree/1.0>.
+
 2024-10-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	* src/devices/gropdf/gropdf.pl: When switching writing

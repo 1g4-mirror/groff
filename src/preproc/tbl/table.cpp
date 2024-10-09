@@ -1532,9 +1532,9 @@ void table::add_entry(int r, int c, const string &str,
     int commentpos = str.find("\\\"");
     if (commentpos != -1) {
       int controlpos = str.search('.');
-      if ((-1 == controlpos)
-	  || (0 == controlpos)
-	  || (-1 == str.search('\n')))
+      if ((-1 == str.search('\n')) // not a text block, AND
+	  && ((-1 == controlpos) // (no control character in line OR
+	      || (0 == controlpos))) // control character at line start)
 	warning_with_file_and_line(fn, ln, "table entry contains"
 				   " comment escape sequence '\\\"'");
     }
@@ -1544,9 +1544,9 @@ void table::add_entry(int r, int c, const string &str,
       commentpos = gcommentpos;
     if (commentpos != -1) {
       int controlpos = str.search('.');
-      if ((-1 == controlpos)
-	  || (0 == controlpos)
-	  || (-1 == str.search('\n')))
+      if ((-1 == str.search('\n')) // not a text block, AND
+	  && ((-1 == controlpos) // (no control character in line OR
+	      || (0 == controlpos))) // control character at line start)
 	warning_with_file_and_line(fn, ln, "table entry contains"
 				   " comment escape sequence '\\#'");
     }
