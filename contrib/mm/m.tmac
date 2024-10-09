@@ -370,6 +370,9 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds Qrf See chapter \E*[Qrfh], page \E*[Qrfp].
 .\" output reference marks to standard error?
 .if !r Ref .nr Ref 0
+.\" reference mark style
+.\" 0 = auto (nroff/troff); 1 = bracket; 2 = superscript; 3 = both
+.nr Rfstyle 0
 .\" reference list page ejection policy
 .nr Rpe 0
 .\" use section-page page numbering?
@@ -3062,13 +3065,40 @@ exceeds depth of nested lists (\\n[li*lvl])
 .aln :R ref*nr
 .nr ref*nr-width 5n
 .nr ref*flag 0		\" for end-of-text
-.ds ref*( \v'-.4m'\s-3[
-.ds ref*) ]\s0\v'.4m'
-.ds Rf \*[ref*(]\\n+[ref*nr]\*[ref*)]
+.ds ref*nroff-( [
+.ds ref*troff-( \v'-.4m'\s-3
+.ds ref*nroff-) ]
+.ds ref*troff-) \s0\v'.4m'
+.
+.de ref*set-mark-style
+.nr ref*mark-style \\n[Rfstyle]
+.if \\n[Rfstyle]=0 \{\
+.	if n .nr ref*mark-style 1
+.	if t .nr ref*mark-style 2
+.\}
+.if \\n[ref*mark-style]=1 \{\
+.	ds ref*( \\*[ref*nroff-(]
+.	ds ref*) \\*[ref*nroff-)]
+.\}
+.if \\n[ref*mark-style]=2 \{\
+.	ds ref*( \\*[ref*troff-(]
+.	ds ref*) \\*[ref*troff-)]
+.\}
+.if \\n[ref*mark-style]=3 \{\
+.	ds ref*( \\*[ref*troff-(]\\*[ref*nroff-(]
+.	ds ref*) \\*[ref*nroff-)]\\*[ref*troff-)]
+.\}
+.rr ref*mark-style
+..
+.
+.ref*set-mark-style
+.ds Rf \\*[ref*(]\\n+[ref*nr]\\*[ref*)]
+.
 .\"
 .\" start reference
 .\"------------
 .de RS
+.ref*set-mark-style \" in case the document changed it
 .if !''\\$1' .ds \\$1 \*[ref*(]\\n[ref*nr]\*[ref*)]
 .nr ref*flag 1
 .am ref*mac

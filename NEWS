@@ -398,6 +398,12 @@ Macro packages
    now interprets an argument to its `-I` option in ens instead of ems
    by default.
 
+*  The m (mm) macro package no longer superscripts _and_ brackets a
+   reference mark (the `Rf` string).  Instead, the new `Rfstyle`
+   register controls its formatting.  The default, 0, selects bracketing
+   in nroff mode and superscripting in troff mode.  Set `Rfstyle` to 3
+   in a document to obtain groff mm's previous mark formatting behavior.
+
 *  The m (mm) macro package's `Li` register now defaults to 5 ens (not
    6) to align with the `Pi` register default.
 

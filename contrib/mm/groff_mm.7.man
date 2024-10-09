@@ -3466,6 +3466,13 @@ where the reference mark should be and write the reference between
 .BR RS / RF
 on an input line after the reference mark.
 .
+The mark may be bracketed,
+superscripted,
+or both;
+see the
+.B \%Rfstyle
+register.
+.
 If
 .I reference-string
 is specified,
@@ -4524,15 +4531,6 @@ the number is used by the next
 .B RS
 call.
 .
-In
-.I troff
-mode,
-the marker is superscripted;
-in
-.I nroff
-mode,
-it is surrounded by square brackets.
-.
 .
 .TP
 .B Rp
@@ -5435,6 +5433,41 @@ and
 .B RS
 (Boolean-valued;
 .BR 0 ).
+.
+.
+.TP
+.B Rfstyle
+determines the format of the reference number in the
+.B Rf
+string.
+.
+.I "groff mm"
+maps
+.B 0
+to
+.B 1
+in
+.I nroff
+mode
+and
+.B 2
+in
+.I troff
+mode
+.RB ( 0 ).
+.
+.
+.IP
+.TS
+tab(@);
+lb lb
+l l.
+Value@Meaning
+0@automatic
+1@bracketed
+2@superscripted
+3@bracketed and superscripted
+.TE
 .
 .
 .\" XXX: Why is this not named `Rpej`?

@@ -1,5 +1,31 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	The package no longer superscripts _and_ brackets a reference
+	mark (the `Rf` string).  Instead, the new `Rfstyle` register
+	controls its formatting.  The default, 0, selects bracketing in
+	nroff mode and superscripting in troff mode.  Set `Rfstyle` to 3
+	in a document to obtain groff mm's previous mark formatting
+	behavior.
+
+	* m.tmac (initialization): Assign zero to `Rfstyle`.  Define new
+	`ref*{n,t}roff-{(,)}` strings.  Define `Rf` in terms of new
+	`ref*(` and `ref*)` strings below.  Call `ref*set-mark-style`.
+	(ref*set-mark-style): New macro maps a `Rfstyle` to 1
+	{nroff-style} or 2 {troff-style} as described above and defines
+	`ref*(` and `ref*)` strings per that value.
+	(RS): Call `ref*set-mark-style`, handling the case where the
+	document changes its reference mark formatting style midstream.
+
+	* refer-mm.tmac ([., .]): Use new `ref*(` and `ref*)` strings.
+
+	* groff_mm.7.man (Macros) <RS>: Cross reference `Rfstyle`
+	register description.
+	(Strings) <Rf>: Drop incorrect (oversimplified) description of
+	how the reference mark is formatted.
+	(Registers) <Rfstyle>: Document it.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Refactor.  Define new internal strings `ref*(` and
 	`ref*)` to bracket reference marks.  Define `Rf` string in terms
 	of these.

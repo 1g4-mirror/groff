@@ -1,6 +1,6 @@
 .\" Refer support for mm macros.
 .\"
-.\" Copyright (C) 2011-2022 Free Software Foundation, Inc.
+.\" Copyright (C) 2011-2024 Free Software Foundation, Inc.
 .\"   Written by Werner Lemberg (wl@gnu.org)
 .\"
 .\" This file is part of groff.
@@ -45,8 +45,8 @@
 .ds ref*refnum-start \" empty
 .ds ref*refnum-end   .\"
 .
-.ds [. \v'-.4m'\s-3[\"
-.ds .] ]\s0\v'.4m'\"
+.ds [. \\*[ref*(]\"
+.ds .] \\*[ref*)]\"
 .
 .ds ref*spec!0  Q A T S V N P I C D O
 .ds ref*spec!1  Q A T J S V N P I C D O
