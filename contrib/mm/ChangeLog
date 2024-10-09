@@ -1,5 +1,14 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Refactor.  Define new internal strings `ref*(` and
+	`ref*)` to bracket reference marks.  Define `Rf` string in terms
+	of these.
+	(RS): If given an argument, use the new strings in the named
+	string's contents instead of repeating the literal content now
+	stored in the new strings.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/0.MT: Stop putting a blank line between author names in the
 	document heading for memorandum types 0-3 and 6 if no
 	supplementary data for each author is being formatted.  This

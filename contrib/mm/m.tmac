@@ -3062,12 +3062,14 @@ exceeds depth of nested lists (\\n[li*lvl])
 .aln :R ref*nr
 .nr ref*nr-width 5n
 .nr ref*flag 0		\" for end-of-text
-.ds Rf \v'-.4m'\s-3[\\n+[ref*nr]]\s0\v'.4m'
+.ds ref*( \v'-.4m'\s-3[
+.ds ref*) ]\s0\v'.4m'
+.ds Rf \*[ref*(]\\n+[ref*nr]\*[ref*)]
 .\"
 .\" start reference
 .\"------------
 .de RS
-.if !''\\$1' .ds \\$1 \v'-.4m'\s-3[\\n[ref*nr]]\s0\v'.4m'
+.if !''\\$1' .ds \\$1 \*[ref*(]\\n[ref*nr]\*[ref*)]
 .nr ref*flag 1
 .am ref*mac
 .ref@start-print \\n[ref*nr].
