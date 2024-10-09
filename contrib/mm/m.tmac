@@ -3107,13 +3107,26 @@ exceeds depth of nested lists (\\n[li*lvl])
 .	@warning \\$0: ignoring; no references defined
 .	return
 .\}
-.ie !''\\$2' .nr ref*i 0\\$2
-.el          .nr ref*i \\n[Rpe]
+.\" Wart: mm treats the first argument as Boolean based on its
+.\" (non-)emptiness, not a numeric value.
+.nr ref*reset-counter 1
+.if !''\\$1' \{\
+.	ie \B'\\$1' .nr ref*reset-counter \\$1
+.	el          .@warning \\$0: treating non-numeric first \
+argument '\\$1' as '1'
+.\}
+.if \\n[ref*reset-counter] .nr ref*nr 0 1
+.nr ref*i \\n[Rpe]
+.if !''\\$2' \{\
+.	ie \B'\\$2' .nr ref*i \\$2
+.	el          .@warning \\$0: ignoring non-numeric second \
+argument: '\\$2'
+.\}
 .if \\n[ref*i]<2 .SK
 .SP 2
 .ref@print-refs
-.if 0\\$1<1 .nr ref*nr 0 1
 .if (\\n[ref*i]=0):(\\n[ref*i]=2) .SK
+.rr ref*reset-counter
 ..
 .\"-----------
 .\" called by end-of-text!
