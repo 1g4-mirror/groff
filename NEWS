@@ -433,6 +433,10 @@ Macro packages
    `AFX`, which if defined is called by `AF` in lieu of the latter's
    normal operation.  Applications include customization of letterhead.
 
+*  The m (mm) macro package now supports a user-definable hook macro
+   `RPX`, which if defined is called by `RP` to format the reference
+   list caption string `Rp` instead of the default formatting.
+
 *  The m (mm) macro package's `LI` macro now interprets its second
    argument as a Boolean value indicating whether a space should
    separate the list item mark from its prefix (the first argument).

@@ -1,5 +1,14 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (RP): Move `SP 2` call (spacing before reference list
+	caption) from here...
+	(ref@print-refs): ...to here.  Bracket the formatting of the
+	caption in a conditional; if an `RPX` macro is defined, call
+	that instead.
+	* groff_mm.7.man (Macros) <RPX>: Document facility.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (RP): Validate macro arguments.
 
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>

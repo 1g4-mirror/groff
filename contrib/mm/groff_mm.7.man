@@ -3433,6 +3433,21 @@ The string
 contains the reference list caption.
 .
 .
+.TP
+.B RPX
+This user-definable hook macro assumes responsibility for formatting
+the heading of the reference page produced when the document calls
+.B RP .
+.
+If not defined
+(the default),
+the reference list caption in the string
+.B Rp
+is set after two vees of space,
+centered in italics,
+and followed by another vee of space.
+.
+.
 .br
 .ne 5v
 .TP

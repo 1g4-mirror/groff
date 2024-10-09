@@ -3123,7 +3123,6 @@ argument '\\$1' as '1'
 argument: '\\$2'
 .\}
 .if \\n[ref*i]<2 .SK
-.SP 2
 .ref@print-refs
 .if (\\n[ref*i]=0):(\\n[ref*i]=2) .SK
 .rr ref*reset-counter
@@ -3148,9 +3147,13 @@ argument: '\\$2'
 .\" prints the references
 .de ref@print-refs
 .toc@save 1 "" "\\*[Rp]" \\n[%]
-.ce
-\f2\\*[Rp]\fP
-.sp
+.ie d RPX .RPX
+.el \{\
+.	SP 2
+.	ce
+.	nop \f2\\*[Rp]\fP
+.	sp
+.\}
 .nr ref*ll \\n[.l]
 .misc@ev-keep ref*ev
 .ll \\n[ref*ll]u
