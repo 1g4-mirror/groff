@@ -1,3 +1,17 @@
+2024-10-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Make new `LB`-based approach to reference page work both with
+	documents that use refer(1) to collect references and those that
+	use only mm(7)'s own facilities.
+
+	* m.tmac (ref@start-print): Change `LB` list "type" argument
+	from 1 (enumerated) to 0 (string-based).  This is because the
+	reference marks are self-enumerating.  However, this loses their
+	trailing dots, so update `LI` call to add them back in.
+	* refer-mm.tmac (ref*biblio-item-sfx): Define as empty,
+	overriding "refer.tmac"'s default.  As shown above, our own
+	infrastructure supplies the dot suffix now.
+
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (ref@start-print): Employ dummy character as "empty"
