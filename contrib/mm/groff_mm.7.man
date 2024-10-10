@@ -2419,7 +2419,7 @@ this is also the default.
 .
 .TP
 .BI LB\~ "text-indent mark-indent pad type"\~\c
-.RI [ mark \~[ pre-item-space \~[ pre-list-space ]]]
+.RI [ mark-or-format \~[ pre-item-space \~[ pre-list-space ]]]
 Begin list.
 .
 The macros
@@ -2486,21 +2486,28 @@ type@Output for a mark \[lq]x\[rq]
 .IP
 If
 .I type
-is\~0 and
-.I mark
+is\~0,
+.I mm
+assumes that the marks are not numeric.
+.
+If
+.I mark-or-format
 is unspecified,
 .I mm
-sets items with a hanging indent.
+sets items with a hanging indent;
+otherwise,
+.I mm
+treats
+.I mark-or-format
+as a string defining the mark.
 .
-Otherwise,
-.I mark
-is interpreted as a string defining the mark.
 .
+.IP
 If
 .I type
 is greater than zero,
 items are automatically numbered and
-.I mark
+.I mark-or-format
 is interpreted as a register format.
 .
 A
