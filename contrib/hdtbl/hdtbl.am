@@ -119,9 +119,8 @@ SUFFIXES += .roff .in .ps
 	&& sed -e "s|[@]fontdir[@]|$(fontdir)|" \
 	       -e "s|[@]EGREP[@]|$(EGREP)|" $< >$@
 
-
 $(HDTBLPROCESSEDEXAMPLEFILES): $(DOC_GNU_EPS) groff troff eqn pic tbl \
-  grops font/devps/stamp contrib/hdtbl/examples/common.roff
+  grops grn font/devps/stamp contrib/hdtbl/examples/common.roff
 
 uninstall_groffdirs: uninstall-hdtbl-hook
 uninstall-hdtbl-hook:
