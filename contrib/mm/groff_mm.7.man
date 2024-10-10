@@ -2492,7 +2492,9 @@ assumes that the marks are not numeric.
 .
 If
 .I mark-or-format
-is unspecified,
+is empty
+(or the dummy character
+.RB \[lq] \[rs]& \[rq])
 .I mm
 sets items with a hanging indent;
 otherwise,

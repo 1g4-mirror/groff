@@ -2353,6 +2353,8 @@ breaking page
 .\" assign format
 .af li*cnt!\\n[li*lvl] 1
 .if \\n[li*type] \{\
+.	ie '\?\\*[li*mf]\?'\?\&\?' .af li*cnt!\\n[li*lvl] 0
+.	el \{\
 .		nr li*is-format-valid 0
 .		if \B'\\*[li*mf]'&\\*[li*mf]>-1 .nr li*is-format-valid 1
 .		if '\?\\*[li*mf]\?'\?a\?'       .nr li*is-format-valid 1
@@ -2365,6 +2367,7 @@ but mark argument '\\*[li*mf]' is not a valid register format; \
 assuming '0'
 .			ds li*mf 0\"
 .		\}
+.	\}
 .\}
 .\"
 .if \\n[li*lb-spc] .SP (u;\\n[li*lb-spc]*\\n[Lsp])

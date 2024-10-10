@@ -1,5 +1,12 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LB): Accept a dummy character escape sequence as a
+	synonym for an empty fifth argument.
+
+	* groff_mm.7.man (Macros) <LB>: Document this.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LB): Validate fifth (mark-or-format) argument.
 	Getting it wrong leads to surprising formatter diagnostics.
 	Since we're (ultimately) passing it to the `af` request, ensure
