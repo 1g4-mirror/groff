@@ -1,5 +1,21 @@
 2024-10-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac (doc-enclose-string): Add warning.  mdoc input
+	like this
+
+	  .Sq ,
+
+	...is something I see from time to time; it's a conspicuous
+	hazard of mdoc's macro system within a macro system.  It leads
+	to an unhelpful diagnostic when GNU troff warnings are dialed
+	up.
+
+	  warning: register 'doc-type0' not defined
+
+	Throw document maintainers, if not readers, a bone.
+
+2024-10-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac:
 	* tmac/doc.tmac: Fix code style nits; parallelize handling of
 	rendering option registers and strings.

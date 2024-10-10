@@ -1724,6 +1724,8 @@
 .    \" resp. suffix
 .    ie (\n[doc-type\n[doc-arg-count]] == 3) \{\
 .      nr doc-reg-des (\n[doc-arg-count] - 1)
+.      if !r doc-type\n[doc-reg-des] \
+.        doc-warn possible missing dummy character '\&' before argument
 .      while (\n[doc-type\n[doc-reg-des]] == 3) \
 .        nr doc-reg-des -1
 .
