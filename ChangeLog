@@ -1,5 +1,11 @@
 2024-10-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac:
+	* tmac/doc.tmac: Fix code style nits; parallelize handling of
+	rendering option registers and strings.
+
+2024-10-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/refer.tmac (ref*biblio-item-sfx): Define new string (if
 	not already defined) to specify trailing punctuation for a
 	bibliographic entry list item.  The default is a dot.
