@@ -1859,7 +1859,7 @@ in the current font)].
 .DE
 Stop numbering output lines if
 .i n
-missing,
+empty,
 otherwise continue with the number modified by
 \(+-\c
 .i n.
