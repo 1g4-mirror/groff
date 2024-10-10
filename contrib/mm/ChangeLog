@@ -1,5 +1,10 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (ref@start-print): Employ dummy character as "empty"
+	fifth argument to `LB` as prepared for.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LB): Accept a dummy character escape sequence as a
 	synonym for an empty fifth argument.
 
