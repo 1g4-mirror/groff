@@ -458,6 +458,10 @@ Macro packages
    example, a value of "3 4" more accurately reproduces London &
    Reiser's 1978 paper describing the porting of Unix to the VAX-11/780.
 
+*  The m (mm) macro package now supports an `Rpfmt` string specifying
+   the `LB` macro arguments that the package uses to format the items in
+   a reference list.
+
 *  The m (mm) macro package now supports the `E` register as DWB mm did.
 
 *  The m (mm) macro package now supports AT&T/DWB mm's `Rg` string.

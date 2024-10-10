@@ -3420,15 +3420,16 @@ automatically if references have accumulated.
 .
 .
 .IP
-References are list items,
-and thus are vertically separated
-(see
-.BR LB ).
+References are formatted as a list with
+.BR LB ;
+the
+.B Rpfmt
+string configures the list's appearance.
 .
 Setting register
 .B Ls
 .RB to\~ 0
-suppresses this spacing.
+suppresses spacing after the list.
 .
 The string
 .B Rp
@@ -4537,6 +4538,18 @@ call.
 .TP
 .B Rp
 \[lq]REFERENCES\[rq]
+.
+.
+.TP
+.B Rpfmt
+specifies the
+.B LB
+arguments that
+.I "groff mm"
+uses to format the items in a reference list.
+.
+The default is
+.RB \[lq] "\[rs]\[rs]n[Li] 0 1 0 \[rs]& 0 0" \[rq].
 .
 .
 .TP

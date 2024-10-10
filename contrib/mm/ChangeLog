@@ -1,3 +1,15 @@
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Support new `Rpfmt` string specifying the `LB` macro
+	arguments that the package uses to format the items in a
+	reference list.
+	(initialization): Define it.
+	(ref@start-print): Use it.
+
+	* groff_mm.7.man (Macros) <RS>: Cross reference `Rpfmt` register
+	description and recast.
+	(Strings) <Rpfmt>: Document it.
+
 2024-10-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Make new `LB`-based approach to reference page work both with
