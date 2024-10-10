@@ -5286,6 +5286,10 @@ see
 and
 .BR TB .
 .
+The punctuation in the separator is either a dot or the
+.B EM
+string.
+.
 The following values are recognized;
 the spaces shown are unpaddable
 .RB ( 0 ).
