@@ -1,5 +1,12 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LB): Validate fifth (mark-or-format) argument.
+	Getting it wrong leads to surprising formatter diagnostics.
+	Since we're (ultimately) passing it to the `af` request, ensure
+	that it's a nonnegative integer or in the set {a,A,i,I}.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Refactor reference list formatting.
 	(RS): Drop trailing dot from list item mark.
 	(ref@start-print): Format list in terms of mm `LB` and `LI`
