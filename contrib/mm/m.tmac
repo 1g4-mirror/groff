@@ -3102,7 +3102,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .if !''\\$1' .ds \\$1 \*[ref*(]\\n[ref*nr]\*[ref*)]
 .nr ref*flag 1
 .am ref*mac
-.ref@start-print \\n[ref*nr].
+.ref@start-print \\n[ref*nr]
 \\..
 .eo
 .am ref*mac RF
@@ -3117,13 +3117,12 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\"------------
 .de ref@start-print
 .di ref*div
-.in \\n[ref*nr-width]u
-.ti -(\w@\\$1@u+1n)
-\\$1
-.sp -1
+.LB \\n[Li] 0 1 1 "" 0 0
+.LI "\\$1"
 ..
+.\"------------
 .de ref@stop-print
-.br
+.LE
 .di
 .ne \\n[dn]u
 .ev ref*ev2

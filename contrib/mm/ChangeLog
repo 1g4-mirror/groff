@@ -1,5 +1,16 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Refactor reference list formatting.
+	(RS): Drop trailing dot from list item mark.
+	(ref@start-print): Format list in terms of mm `LB` and `LI`
+	macros instead of `in`, `ti`, and `sp` *roff requests.  This
+	includes setting `LB`'s "type" argument to "1", putting a
+	trailing dot after the mark.
+	(ref@stop-print): Call `LE` macro instead of invoking `br`
+	request.
+
+2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	The package no longer superscripts _and_ brackets a reference
 	mark (the `Rf` string).  Instead, the new `Rfstyle` register
 	controls its formatting.  The default, 0, selects bracketing in
