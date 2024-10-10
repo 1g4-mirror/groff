@@ -1791,6 +1791,7 @@ sub do_x
 	    }
 	    elsif (lc($xprm[1]) eq 'xrev')
 	    {
+		PutLine(0);
 		$xrev=!$xrev;
 	    }
 	    elsif (lc($xprm[1]) eq 'markstart')

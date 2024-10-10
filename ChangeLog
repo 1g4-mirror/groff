@@ -1,3 +1,9 @@
+2024-10-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* src/devices/gropdf/gropdf.pl: When switching writing
+	direction (\X'pdf: xrev') ensure any buffered output is
+	flushed.
+
 2024-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/table.cpp (table::add_entry): Refactor match
