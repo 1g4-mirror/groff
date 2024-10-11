@@ -1,5 +1,11 @@
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/psrm.cpp (read_uint_arg): When complaining
+	of invalid input (that we expect to be an ISO 646-encoded
+	decimal integer), disclose what that input is.
+
+2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/psrm.cpp (read_uint_arg): Boolify.
 
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>

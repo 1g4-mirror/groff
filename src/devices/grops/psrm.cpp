@@ -90,7 +90,7 @@ static bool read_uint_arg(const char **pp, unsigned *res)
   const char *start = *pp;
   unsigned long n = strtoul(start, (char **)pp, 10);
   if (*pp == start) {
-    error("not an integer");
+    error("not an integer: '%1'", *pp);
     return false;
   }
   *res = unsigned(n);
