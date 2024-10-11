@@ -38,8 +38,8 @@
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/table.cpp (table::add_entry): Quote the
-	contents of (ordinary) non-text-block table entries when
-	throwing diagnostics about their contents.
+	contents of ordinary (that is, non-text-block) table entries
+	when throwing diagnostics about their contents.
 
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -181,7 +181,7 @@
 
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[gropdf]: Handle errors and abnormal exits.
+	[gropdf]: Make pdfom handle errors and abnormal exits.
 
 	* src/devices/gropdf/pdfmom.pl: Handle signaled and error exits
 	from groff pipeline.  Improve diagnostics.  Store "basename" of
