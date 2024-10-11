@@ -2869,7 +2869,7 @@ implies
 .BR 1 .
 .
 .I addressee
-sets a string analogous to one used by AT&T cover sheet macros that are
+sets a string analogous to one used by AT&T cover sheet macros
 not implemented in
 .IR "groff mm" .
 .
