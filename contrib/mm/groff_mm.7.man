@@ -2519,10 +2519,6 @@ even if it fits within
 .I text-indent;
 this is a GNU extension.
 .
-The default
-.I type
-.RB is\~ 0 .
-.
 .
 .IP
 The last two arguments manage vertical space.
