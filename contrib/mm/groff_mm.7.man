@@ -3423,8 +3423,10 @@ automatically if references have accumulated.
 .
 .
 .IP
-References are formatted as a list with
-.BR LB ;
+.I "groff mm"
+calls
+.B LB
+to format the reference list;
 the
 .B Rpfmt
 string configures the list's appearance.
@@ -3442,16 +3444,18 @@ contains the reference list caption.
 .TP
 .B RPX
 This user-definable hook macro assumes responsibility for formatting
-the heading of the reference page produced when the document calls
-.B RP .
+the heading of the reference page that
+.B RP
+produces.
 .
 If not defined
 (the default),
-the reference list caption in the string
+.I mm
+sets the reference list caption in the string
 .B Rp
-is set after two vees of space,
+after two vees of space,
 centered in italics,
-and followed by another vee of space.
+followed by another vee of space.
 .
 .
 .br
@@ -4549,10 +4553,12 @@ specifies the
 .B LB
 arguments that
 .I "groff mm"
-uses to format the items in a reference list.
+uses to format the items in an
+.B RP
+reference list.
 .
 The default is
-.RB \[lq] "\[rs]\[rs]n[Li] 0 1 0 \[rs]& 0 0" \[rq].
+.RB \[lq] "\|\[rs]\[rs]n[Li] 0 1 0 \[rs]& 0\|" \[rq].
 .
 .
 .TP
