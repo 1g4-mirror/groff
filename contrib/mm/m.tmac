@@ -451,6 +451,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 'ti 0
 .ps \\n[@ps]u
 .vs \\n[@vs]u
+.ref*set-mark-style \" in case the document has changed it
 ..
 .de misc@toupper
 .tr aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
@@ -536,6 +537,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if \\n[par*do-indent] .ti +\\n[Pi]n
 .rr par*do-indent
 .nr par@suppress-indentation 0
+.ref*set-mark-style \" in case the document has changed it
 ..
 .\" ####### module line #######################################
 .de SP
@@ -3117,7 +3119,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\"------------
 .de RS
 .ref*set-mark-style \" in case the document changed it
-.if !''\\$1' .ds \\$1 \*[ref*(]\\n[ref*nr]\*[ref*)]
+.if !''\\$1' .ds \\$1 \\*[ref*(]\\n[ref*nr]\\*[ref*)]
 .nr ref*flag 1
 .am ref*mac
 .ref@start-print \\n[ref*nr]

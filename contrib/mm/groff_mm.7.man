@@ -5494,6 +5494,14 @@ Value@Meaning
 .TE
 .
 .
+.IP
+Changes to
+.BR Rfstyle 's
+value
+may not take effect until the next heading or paragraphing macro call.
+.\" ...and in certain other cases we don't document.
+.
+.
 .\" XXX: Why is this not named `Rpej`?
 .TP
 .B Rpe

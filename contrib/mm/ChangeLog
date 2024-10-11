@@ -1,3 +1,15 @@
+2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Fix nits in new `Rfstyle` feature.
+
+	* m.tmac (@reset, par@doit): Call `ref*set-mark-style`.
+	(RS): Assign to string named in argument using the _current_
+	values of `ref*(` and `ref*)`, not those at package
+	initialization time.
+
+	* groff_mm.7.man (Registers) <Rfstyle>: Document that the effect
+	of changing the register value is not necessarily immediate.
+
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Support new `Rpfmt` string specifying the `LB` macro
