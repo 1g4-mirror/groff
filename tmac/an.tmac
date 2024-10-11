@@ -26,7 +26,7 @@
 .
 .
 .\" Put site additions in the file man.local, loaded near the end of
-.\" this file.  To add things to TH, use '.am1 TH'.
+.\" this file.  To add things to `TH`, use '.am1 TH'.
 .
 .if !\n(.g \
 .  ab groff man macros require groff extensions; aborting
@@ -240,7 +240,7 @@
 .
 .
 .\" Begin man page.
-.\" .TH topic section[ extra1[ extra2[ extra3]]]
+.\" .TH identifier section[ extra1[ extra2[ extra3]]]
 .de1 TH
 .  if ((\\n[.$] < 2) : (\\n[.$] > 5)) \
 .    an-style-warn .\\$0 expects 2 to 5 arguments, got \\n[.$]
@@ -536,6 +536,9 @@
 .  while (\\n[an*index] < \\n[an*max-index]) \{\
 .    ds an*char \\$*
 .    substring an*char \\n[an*index] \\n[an*index]
+.    \" Note: Nasty hack alert!  DEL is a useful escape character for
+.    \" this string-iterating application because it is vanishingly
+.    \" unlikely to appear in man(7) document text--see Savannah #65469.
 .    ec 
 .    \" Use a weird delimiter to reduce lexical colorizer confusion.
 .    if _*[an*char]_\\_ .nr an*string-contains-backslash 1
