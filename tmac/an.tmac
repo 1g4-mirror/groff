@@ -337,14 +337,14 @@
 .  el                  .ds an-extra2 \" empty; but .AT/.UC can override
 .
 .  if '\\*[an-extra1]'' \{\
-.    ds an-msg .\\$0 missing third argument; suggest document\"
+.    ds an-msg .\\$0 missing third argument; consider document\"
 .    as an-msg " modification date in ISO 8601 format (YYYY-MM-DD)\"
 .    an-style-warn \\*[an-msg]
 .    rm an-msg
 .  \}
 .
 .  if '\\*[an-extra2]'' \{\
-.    ds an-msg .\\$0 missing fourth argument; suggest package/project\"
+.    ds an-msg .\\$0 missing fourth argument; consider package/project\"
 .    \" Yes, that's one double quote, then three, then two.
 .    as an-msg " name and version (e.g., """groff 1.23.0"")\"
 .    an-style-warn \\*[an-msg]
