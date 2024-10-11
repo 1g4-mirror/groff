@@ -750,9 +750,8 @@ and
 .BR AL \~[\c
 .IR number-format \~[ text-indent \~[\c
 .BR 1 ]]]
-Begin an auto-incrementing numbered list.
-.
-Item numbers start at one.
+Begin an auto-incrementing numbered list,
+where item numbers start at one and are followed by a dot.
 .
 .I number-format
 assigns the register format
@@ -3367,15 +3366,13 @@ without space between the arguments.
 .BR RL \~[\c
 .IR text-indent \~[\c
 .BR 1 ]]
-Begin reference list.
+Begin an auto-incrementing numbered list,
+where item numbers start at one and set between square brackets.
 .
-Each item is preceded by an automatically incremented number between
-square brackets;
-compare
-.BR AL .
-.
+A
 .I text-indent
-changes the default indentation.
+argument overrides register
+.BR Li .
 .
 A second argument suppresses the vertical space that normally precedes
 each list item;
@@ -3394,6 +3391,11 @@ to declare list items,
 and
 .B LE
 to end the list.
+.
+\[lq]RL\[rq] is a mnemonic for \[lq]reference list\[rq],
+but this macro has no relationship with
+.IR mm 's
+bibliographic reference list facilities.
 .
 .
 .TP
