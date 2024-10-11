@@ -1,3 +1,13 @@
+2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grops/psrm.cpp (read_uint_arg): Thirty years ago
+	{see "ChangeLog.old"}, James Clark converted some code in
+	grolj4(1) from strtoul(3) to strtol(3), possibly because the
+	function was not widespread or standardized.  Presumably that
+	lesson was applied here as well.  It's standard now, in ISO C99,
+	for which we require compiler support.  Migrate text-to-integer
+	conversion and discard diagnosis of negative value.
+
 2024-10-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Don't use inbuilt pdf parser on user supplied data.

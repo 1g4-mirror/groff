@@ -88,14 +88,9 @@ static int read_uint_arg(const char **pp, unsigned *res)
     return 0;
   }
   const char *start = *pp;
-  // XXX use strtoul
-  long n = strtol(start, (char **)pp, 10);
+  unsigned long n = strtoul(start, (char **)pp, 10);
   if (*pp == start) {
     error("not an integer");
-    return 0;
-  }
-  if (n < 0) {
-    error("argument must not be negative");
     return 0;
   }
   *res = unsigned(n);
