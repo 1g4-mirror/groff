@@ -1,5 +1,9 @@
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (TH): Simplify logic populating center header.
+
+2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Rename internal strings and registers.
 	    `an*topic`             -> `an*ident`
 	    `an*topic-abbv`        -> `an*ident-abbv`
