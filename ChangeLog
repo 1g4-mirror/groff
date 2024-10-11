@@ -1,5 +1,15 @@
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Rename internal strings and registers.
+	    `an*topic`             -> `an*ident`
+	    `an*topic-abbv`        -> `an*ident-abbv`
+	    `an*topic-string`      -> `an*ident-string`
+	    `an*topic-length`      -> `an*ident-length`
+	    `an*topic-length-prev` -> `an*ident-length-prev`
+	    `an*topic-style`       -> `an*ident-style`
+
+2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/psrm.cpp (read_uint_arg): When complaining
 	of invalid input (that we expect to be an ISO 646-encoded
 	decimal integer), disclose what that input is.
