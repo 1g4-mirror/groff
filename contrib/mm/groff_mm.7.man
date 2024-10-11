@@ -2445,25 +2445,19 @@ purpose.
 tracks the nesting level of lists;
 the outermost is\~0.
 .
-Each list item is indented by
-.I text-indent,
-and its mark
-by
-.I mark-indent.
+Each list item
+(text lines after an
+.B LI
+call)
+is indented by
+.I text-indent.
 .
-The mark is normally left-aligned.
-.
-If
+The mark is left-aligned at
+.IR mark-indent ,
+padded on the left with
 .I pad
-is greater than zero,
-it overrides
-.I mark-indent
-such that
-.I pad
-ens of space follow the mark.
+ens of space.
 .
-.
-.IP
 .I type
 determines the mark's format.
 .
@@ -2474,6 +2468,7 @@ tab(@);
 Lf(BI) Lb
 L L.
 type@Output for a mark \[lq]x\[rq]
+0@x
 1@x.
 2@x)
 3@(x)
@@ -2487,8 +2482,10 @@ type@Output for a mark \[lq]x\[rq]
 If
 .I type
 is\~0,
-.I mm
-assumes that the marks are not numeric.
+.I mark-or-format
+specifies each item's mark
+(which can be overridden by an argument to
+.BR LI ).
 .
 If
 .I mark-or-format
@@ -2496,25 +2493,29 @@ is empty
 (or the dummy character
 .RB \[lq] \[rs]& \[rq])
 .I mm
-sets items with a hanging indent;
-otherwise,
-.I mm
-treats
-.I mark-or-format
-as a string defining the mark.
+sets items at
+.I mark-indent
+with a hanging indent at
+.I text-indent.
 .
 .
 .IP
 If
 .I type
 is greater than zero,
-items are automatically numbered and
+.I mm
+supplies an automatically incrementing numeric mark,
+and interprets
 .I mark-or-format
-is interpreted as a register format.
+as a register format.
 .
+.
+.IP
 A
 .I type
-of\~\-1 breaks the line after the mark
+of\~\-1 causes
+.I "groff mm"
+to break the line after the mark
 even if it fits within
 .I text-indent;
 this is a GNU extension.
@@ -2588,15 +2589,18 @@ is called again.
 By default,
 the item's text is preceded by any mark configured by the current list.
 .
-If only
+If
 .I mark
-is specified,
-it replaces the configured mark.
-.
-If the width of the mark plus any padding
-(specified in the list's
+is the only argument,
+it replaces the mark configured in the corresponding
 .B LB
-call)
+call.
+.
+If the width of the mark plus any
+.I pad
+specified in the
+.B LB
+call
 exceeds the text indentation,
 .I "groff mm"
 warns and uses one en of padding between the mark and the text.
@@ -2604,9 +2608,10 @@ warns and uses one en of padding between the mark and the text.
 A second argument
 prefixes
 .I mark
-to the configured mark
-and conditionally puts an unbreakable space between the prefix and mark
-per the argument's Boolean value.
+to the
+.BR LB -configured
+mark and conditionally puts an unbreakable space
+between the prefix and mark per the argument's Boolean value.
 .
 .
 .TP
