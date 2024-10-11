@@ -1,3 +1,10 @@
+2024-10-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Don't use inbuilt pdf parser on user supplied data.
+
+	* src/devices/gropdf/gropdf.pl: Another example of using it
+	in an inappropriate situation.
+
 2024-10-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc.tmac (doc-enclose-string): Add warning.  mdoc input
