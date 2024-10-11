@@ -1,5 +1,13 @@
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (AT, UC): Fix code style nits.  In formatted
+	output comparisons, use `'` as the delimiter, as is done
+	everywhere else in the file.  Drop leading quotating marks from
+	string assignments when unnecessary (the value is known not to
+	contain leading space).
+
+2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (TH): Clarify language in style warning messages.
 
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
