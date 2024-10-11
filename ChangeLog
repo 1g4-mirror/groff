@@ -1,5 +1,9 @@
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/psrm.cpp (read_uint_arg): Boolify.
+
+2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/psrm.cpp (read_uint_arg): Thirty years ago
 	{see "ChangeLog.old"}, James Clark converted some code in
 	grolj4(1) from strtoul(3) to strtol(3), possibly because the
