@@ -5152,7 +5152,9 @@ and
 .
 .TP
 .B Li
-configures the text indentation applied to enumerated list types;
+configures the text indentation
+(in ens)
+applied to enumerated list types;
 that is,
 to items in
 .B AL
@@ -5357,10 +5359,11 @@ except when
 .
 .TP
 .B Pi
-configures the amount of indentation in ens applied
-to the first line of an unnumbered paragraph
+configures the indentation
+(in ens)
+applied to first line of an unnumbered paragraph that has such
 (see
-.BR P )
+.BR P );
 and the text indentation of non-enumerated list items;
 that is,
 to items in
