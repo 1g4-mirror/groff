@@ -153,12 +153,8 @@ tmac_TESTS = \
   tmac/tests/an-ext_SY-and-YS-work.sh \
   tmac/tests/an-ext_UR-works.sh \
   tmac/tests/an_AT-and-UC-footer-saved-and-restored.sh \
-  tmac/tests/an_CS-register-off.sh \
-  tmac/tests/an_CS-register-on.sh \
-  tmac/tests/an_CS-register-unspecified.sh \
-  tmac/tests/an_CT-register-off.sh \
-  tmac/tests/an_CT-register-on.sh \
-  tmac/tests/an_CT-register-unspecified.sh \
+  tmac/tests/an_CS-register-works.sh \
+  tmac/tests/an_CT-register-works.sh \
   tmac/tests/an_FT-bad-value-should-not-trash-titles.sh \
   tmac/tests/an_HY-register-works.sh \
   tmac/tests/an_LL-init-sanely.sh \

@@ -1,3 +1,19 @@
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Coalesce some tests.
+
+	* tmac/tests/an_CS-register-off.sh:
+	* tmac/tests/an_CS-register-on.sh:
+	* tmac/tests/an_CS-register-unspecified.sh:
+	* tmac/tests/an_CT-register-off.sh:
+	* tmac/tests/an_CT-register-on.sh:
+	* tmac/tests/an_CT-register-unspecified.sh: Delete files,
+	replacing with...
+	* tmac/tests/an_CS-register-works.sh:
+	* tmac/tests/an_CT-register-works.sh: ...these new files.
+
+	* tmac/tmac.am (tmac_TESTS): Update.
+
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (AT, UC): Fix code style nits.  In formatted
