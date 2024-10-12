@@ -483,13 +483,6 @@ http://savannah.gnu.org/bugs/?group=groff.
 .af par*number 01
 .nr par*number2 0 1
 .af par*number2 01
-.nr par*num-count 0 1
-.af par*num-count 01
-.\"	reset numbered paragraphs, arg1 = headerlevel
-.de par@reset-num
-.if \\$1<3 .nr par*num-count 0
-.if (\\$1=1)&(\\n[Np]=1) .nr par*number 0
-..
 .\"------------
 .\" paragraph
 .de P
@@ -1162,7 +1155,7 @@ numeric; got '\\$1'
 .ie \\n[hd*level]<=\\n[Hps] .SP (u;\\n[Hps2])
 .el                         .SP (u;\\n[Hps1])
 .\"
-.par@reset-num \\n[hd*level]\"			reset numbered paragraph
+.if \\$1=1&\\n[Np] .nr par*number 0
 .\" start diversion to measure size of header
 .di hd*div
 \\*[hd*mark]\\$2\\$3\\*[hd*suf-space]

@@ -1,5 +1,16 @@
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (initialization): Refactor.  Drop never-interpolated
+	register `par*num-counter`.
+	(par@reset-num): This macro was called in only one place, so
+	delete it...
+	(H): ...and open-code its logic at its lone call site.  Format
+	complex numeric expressions in conditionals using the dense and
+	AT&T-compatible manner of the rest of the package, omitting
+	parentheses and spaces where possible.
+
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tests/Np-register-works.sh: Add unit test.
 	* mm.am (mm_TESTS): Run test.
 
