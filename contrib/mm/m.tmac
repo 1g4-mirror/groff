@@ -479,10 +479,10 @@ http://savannah.gnu.org/bugs/?group=groff.
 .nr par@suppress-indentation 0
 .nr hd*last-pos -1
 .nr hd*last-hsize -1
-.nr par*number 0 1
-.af par*number 01
-.nr par*number2 0 1
-.af par*number2 01
+.nr par*nP-counter 0 1
+.af par*nP-counter 00
+.nr par*Np-counter 0 1
+.af par*Np-counter 00
 .\"------------
 .\" paragraph
 .de P
@@ -502,7 +502,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\}
 .nr par*indentation-eligible 1-\\n[par@suppress-indentation]
 .par@doit \\$*
-.if \\n[Np] \\n[H1].\\n+[par*number]\ \ \c
+.if \\n[Np] \\n[H1].\\n+[par*Np-counter]\ \ \c
 ..
 .\"------------
 .de nP
@@ -513,7 +513,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" A first-line indentation is meaningless for a numbered paragraph.
 .nr par*indentation-eligible 0
 .par@doit
-\\n[H2].\\n+[par*number2]\ \ \c
+\\n[H2].\\n+[par*nP-counter]\ \ \c
 ..
 .\"------------
 .de par@doit
@@ -1155,7 +1155,7 @@ numeric; got '\\$1'
 .ie \\n[hd*level]<=\\n[Hps] .SP (u;\\n[Hps2])
 .el                         .SP (u;\\n[Hps1])
 .\"
-.if \\$1=1&\\n[Np] .nr par*number 0
+.if \\$1=1&\\n[Np] .nr par*Np-counter 0
 .\" start diversion to measure size of header
 .di hd*div
 \\*[hd*mark]\\$2\\$3\\*[hd*suf-space]

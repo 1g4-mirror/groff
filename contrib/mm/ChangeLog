@@ -1,5 +1,11 @@
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Trivially refactor.  Rename registers for clarity.
+	    `par*number`  -> `par*nP-counter`
+	    `par*number2` -> `par*Np-counter`
+
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (initialization): Refactor.  Drop never-interpolated
 	register `par*num-counter`.
 	(par@reset-num): This macro was called in only one place, so
