@@ -130,10 +130,9 @@
 
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* contrib/mm/m.tmac (initialization, LB, LI): Trivially
-	refactor.  Rename internal string `li*mark` to `li*mf`, since it
-	can be _either_ an arbitrary string _or_ an argument to the `af`
-	request.
+	* m.tmac (initialization, LB, LI): Trivially refactor.  Rename
+	internal string `li*mark` to `li*mf`, since it can be _either_
+	an arbitrary string _or_ an argument to the `af` request.
 
 2024-09-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
