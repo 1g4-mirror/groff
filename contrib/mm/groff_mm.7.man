@@ -2471,7 +2471,7 @@ type@Output for a mark \[lq]x\[rq]
 .IP
 If
 .I type
-is\~0,
+.RB is\~ 0 ,
 .I mark-or-format
 specifies each item's mark
 (which can be overridden by an argument to
@@ -2503,7 +2503,8 @@ as a register format.
 .IP
 A
 .I type
-of\~\-1 causes
+.RB of\~ \-1
+causes
 .I "groff mm"
 to break the line after the mark
 even if it fits within
