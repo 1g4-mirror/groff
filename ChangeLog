@@ -1,5 +1,25 @@
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Rename some test scripts for clarity.
+
+	* tmac/tests/an_FT-bad-value-should-not-trash-titles.sh:
+	* tmac/tests/an_LL-init-sanely.sh:
+	* tmac/tests/an_ME-punct-hyphenates.sh:
+	* tmac/tests/an_UE-punct-hyphenates.sh:
+	* tmac/tests/doc_D-places-page-numbers-correctly.sh:
+	* tmac/tests/s_PN-works.sh: Rename these...
+
+	* tmac/tests/an_FT-register-value-should-not-trash-titles.sh:
+	* tmac/tests/an_LL-register-initializes-sanely.sh:
+	* tmac/tests/an_ME-second-argument-hyphenates.sh:
+	* tmac/tests/an_UE-second-argument-hyphenates.sh:
+	* tmac/tests/doc_D-register-places-page-numbers-correctly.sh:
+	* tmac/tests/s_PN-register-works.sh: ...to these.
+
+	* tmac/tmac.am (tmac_TESTS): Update.
+
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Coalesce some tests.
 
 	* tmac/tests/an_CS-register-off.sh:
