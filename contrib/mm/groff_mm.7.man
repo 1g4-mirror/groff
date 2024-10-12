@@ -787,8 +787,8 @@ Begin an appendix.
 If
 .I sequence-number
 is omitted,
-it is incremented
-(or initialized
+it increments
+(or is initialized
 .RB to\~ 1 ,
 .\" ...technically, initialized to zero but autoincremented.
 if necessary).
