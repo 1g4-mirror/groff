@@ -1964,12 +1964,13 @@ configures the indentation of text after headings.
 .
 Threshold register
 .B Hc
-enables the centering of headings;
-a heading level within both of the
+permits centering;
+.I mm
+centers a heading with a level below both of the
 .B Hb
 and
 .B Hc
-thresholds is centered.
+thresholds.
 .
 .
 .IP
