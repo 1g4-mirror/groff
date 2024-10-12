@@ -38,7 +38,7 @@
 
 	* tmac/an.tmac (AT, UC): Fix code style nits.  In formatted
 	output comparisons, use `'` as the delimiter, as is done
-	everywhere else in the file.  Drop leading quotating marks from
+	everywhere else in the file.  Drop leading quotation marks from
 	string assignments when unnecessary (the value is known not to
 	contain leading space).
 
