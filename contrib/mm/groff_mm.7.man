@@ -5264,14 +5264,11 @@ T}
 .
 .TP
 .B Np
-causes paragraphs after first-level headings (only) to be numbered
-in the format
+numbers paragraphs with a leading mark in the format
 .IR s . p ,
 where
 .IR s \~is
-is the section number
-(the number of the current first-level heading)
-and
+is first-level heading number and
 .IR p \~is
 the paragraph number,
 starting at 1;
