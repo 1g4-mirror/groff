@@ -1,3 +1,8 @@
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tests/Np-register-works.sh: Add unit test.
+	* mm.am (mm_TESTS): Run test.
+
 2024-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Fix nits in new `Rfstyle` feature.
