@@ -749,11 +749,7 @@ assigns the register format
 uses for the list item enumerators.
 .
 The default
-.RB is\~ 1 .
-.
-An explicitly empty
-.I type
-also indicates the default.
+.RB is\~ 0 .
 .
 A
 .I text-indent
