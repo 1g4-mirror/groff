@@ -4274,7 +4274,7 @@ it is surrounded by square brackets.
 .
 .TP
 .B H1txt
-stores the text of the current heading;
+stores the text of the current first-level heading;
 .B H
 and
 .B HU
