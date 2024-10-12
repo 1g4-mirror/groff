@@ -82,6 +82,7 @@ mm_TESTS = \
   contrib/mm/tests/memoranda-format-correctly.sh \
   contrib/mm/tests/ms-cover-sheet-robust-to-missing-AF.sh \
   contrib/mm/tests/mse_has-sufficient-footnote-space.sh \
+  contrib/mm/tests/nP-works.sh \
   contrib/mm/tests/place-equation-labels-correctly-in-displays.sh \
   contrib/mm/tests/remove-stale-bib-entry-data.sh \
   contrib/mm/tests/short-pages-do-not-overflow-stack.sh

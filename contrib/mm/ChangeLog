@@ -1,5 +1,12 @@
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Regression-test Savannah #63739 (unit-test `nP` macro).
+
+	* tests/nP-works.sh: Add unit test.
+	* mm.am (mm_TESTS): Run test.
+
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Trivially refactor.  Rename registers for clarity.
 	    `par*number`  -> `par*nP-counter`
 	    `par*number2` -> `par*Np-counter`
