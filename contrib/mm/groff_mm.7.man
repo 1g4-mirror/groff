@@ -226,17 +226,6 @@ DWB used a hard-coded value of 6\~ens.
 .
 .
 .IP \[bu]
-DWB
-.IR mm 's
-.B nP
-macro indented the second line of a paragraph to align it with the start
-of the text of the first
-(after the paragraph number);
-.IR "groff mm" 's
-does not.
-.
-.
-.IP \[bu]
 .I "groff mm"
 uses the same adjustment and font defaults in
 .I nroff
@@ -1962,9 +1951,10 @@ and register
 sets a threshold within which vertical space follows it.
 .
 If the heading level is above both of these,
-a
-.I run-in heading
-is produced;
+and the paragraph is not numbered,
+.I "groff mm"
+produces a
+.IR "run-in heading" ;
 paragraph text follows on the same output line.
 .
 Otherwise,
@@ -4947,7 +4937,13 @@ and
 sets the threshold for breaking the line after formatting a heading.
 .
 Text after headings at levels above this value is set on the same
-output line if possible;
+output line if possible.
+.
+Paragraphs numbered via
+.B nP
+or the
+.B Np
+register cause a break regardless;
 see
 .B H
 .RB ( 2 ).

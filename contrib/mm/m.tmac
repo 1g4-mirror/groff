@@ -510,10 +510,12 @@ http://savannah.gnu.org/bugs/?group=groff.
 .	tm Paragraph nl=\\n[nl], last=\\n[hd*last-pos]
 .	tm Paragraph .k=\\n[.k], hsize=\\n[hd*last-hsize]
 .\}
-.\" A first-line indentation is meaningless for a numbered paragraph.
+.\" `nP` handles indentation differently from `P`.
 .nr par*indentation-eligible 0
 .par@doit
 \\n[H2].\\n+[par*nP-counter]\ \ \c
+.\" Indent the paragraph's second line, too.
+'ti \w'\\n[H2].\\n[par*nP-counter]'u+2n
 ..
 .\"------------
 .de par@doit
@@ -1156,6 +1158,7 @@ numeric; got '\\$1'
 .el                         .SP (u;\\n[Hps1])
 .\"
 .if \\$1=1&\\n[Np] .nr par*Np-counter 0
+.if \\$1<3         .nr par*nP-counter 0
 .\" start diversion to measure size of header
 .di hd*div
 \\*[hd*mark]\\$2\\$3\\*[hd*suf-space]

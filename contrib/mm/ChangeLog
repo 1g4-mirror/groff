@@ -1,5 +1,22 @@
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Handle `nP` paragraphs more compatibly with DWB 3.3 mm.
+
+	* m.tmac (nP): Apply a temporary indentation to the second
+	output line of a paragraph to align it with the start of the
+	paragraph text (not the tag/label) in the first.
+	(H): Reset the `nP` paragraph counter when the first- or
+	second-level section heading number increments.
+
+	* groff_mm.7.man (Description): Drop notice of difference
+	between DWB 3.3 and groff mm `nP` behavior.
+	(Macros <H>, Registers <Hb>): Document interaction of `nP` and
+	`Np` features with run-in headings.
+
+	Fixes <https://savannah.gnu.org/bugs/?63739>.
+
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #63739 (unit-test `nP` macro).
 
 	* tests/nP-works.sh: Add unit test.
