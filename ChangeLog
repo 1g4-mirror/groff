@@ -1,5 +1,10 @@
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/preconv/preconv.cpp (do_file): Fix incorrect
+	handling of file name string (a post-groff 1.23.0 regression).
+
+2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Rename some test scripts for clarity.
 
 	* tmac/tests/an_FT-bad-value-should-not-trash-titles.sh:
