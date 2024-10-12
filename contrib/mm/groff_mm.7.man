@@ -5361,8 +5361,8 @@ except when
 .
 .TP
 .B Pi
-configures the amount of indentation applied
-to the first line of a paragraph
+configures the amount of indentation in ens applied
+to the first line of an unnumbered paragraph
 (see
 .BR P )
 and the text indentation of non-enumerated list items;
