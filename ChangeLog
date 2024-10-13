@@ -1,5 +1,12 @@
 2024-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[ms]: Regression-test Savannah #66328.
+
+	* tmac/tests/s_XA-reduces-line-length.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2024-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::add_entry): Refactor.  Since
 	we use the C string `extract()`ion of the groff `string` table
 	entry repeatedly, move logic that stores its pointer to an
