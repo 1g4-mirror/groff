@@ -1,5 +1,16 @@
 2024-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/s.tmac (XA): Revert commit a6e09ca7fb, 2022-04-17.  The
+	macro once again reduces the line length by eight ens for the
+	entire TOC if used.  This looks a little funny (shouldn't it
+	apply only to the entry augmentation?), but is consistent with
+	4.2BSD and 4.3BSD-Reno ms behavior, whence comes this extension.
+
+	Fixes <https://savannah.gnu.org/bugs/?66328>.  Thanks to Joerg
+	van den Hoff for the report.
+
+2024-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[ms]: Regression-test Savannah #66328.
 
 	* tmac/tests/s_XA-reduces-line-length.sh: Do it.
