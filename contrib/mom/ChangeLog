@@ -1,3 +1,26 @@
+2024-10-13
+
+	* om.tmac: Add linked endnotes; fix graphical objects; tweaks
+	+ adds internally linked endnotes
+	+ fixes graphical objects clobbering bottom of footer trap
+	  - move restoration of traps to the bottom of affected macros
+	+ resets $QUAD_VALUE before exiting ENDNOTE
+	+ tweaks QUOTE/BLOCKQUOTE and centred/right LISTs so they play
+	  nice with line numbering
+	+ makes UNDERSCORE2 clobber UNDERSCORE and vice versa in
+	  HEADING_STYLE
+	+ TYPEWRITE: fix spacing before first para after docheader
+
+	* BUGS, NEWS: Update
+	* examples/sample_docs.mom: small fix to sample_docs.mom for
+	TYPEWRITE
+	* momdoc/docelement.html:
+	* momdoc/docprocessing.html:
+	* momdoc/stylesheet.css: Update and emend docs
+
+	Fixes <https://savannah.gnu.org/bugs/?66322>.  Thanks to ¿¿¿ for
+	the report.
+
 2024-09-02  Sven Schober <sv3sch@gmail.com>
 
 	* examples/test-mom.sh.in: Handle discrepant
