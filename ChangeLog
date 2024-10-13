@@ -1,3 +1,12 @@
+2024-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::add_entry): Refactor.  Since
+	we use the C string `extract()`ion of the groff `string` table
+	entry repeatedly, move logic that stores its pointer to an
+	automatic variable much earlier, and reference that in
+	diagnostic messages instead of repeatedly calling a member
+	function.
+
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/preconv/preconv.cpp (do_file): Fix incorrect
