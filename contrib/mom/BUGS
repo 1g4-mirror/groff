@@ -23,6 +23,9 @@ the Subject line or you risk my spam filters nuking your message.
 
 Version 2.6_d
 =============
+PDF_IMAGE after only one line text after START is moves the image to
+the next page.
+---Fixed---
 Some graphical objects not recognising colours initialized with
 .XCOLOR.
 ---Fixed---
