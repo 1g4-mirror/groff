@@ -44,6 +44,9 @@ typesetting system
 .\}
 .rr do-fallback
 .
+.\" This man page employs an unusual character.
+.fchar \[u2717] X
+.
 .
 .\" TODO: Consider parallelizing with our Texinfo node "Macro Packages".
 .\" ====================================================================
