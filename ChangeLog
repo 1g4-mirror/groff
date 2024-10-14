@@ -1,3 +1,8 @@
+2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grops/ps.cpp (ps_printer::special): Fix off-by-one
+	error in diagnostic message's line number report.
+
 2024-10-15  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Work around debian's ImageMagick policy.
