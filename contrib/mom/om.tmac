@@ -2842,19 +2842,20 @@ end
 .    ds $RL_WEIGHT \\$1
 .    ds $RL_INDENT \\$2
 .    ds $RL_LENGTH \\$3
-.    nr #SAVED_WEIGHT     \\n[#RULE_WEIGHT]
-.    nr #SAVED_WEIGHT_ADJ \\n[#RULE_WEIGHT_ADJ]
+.    nr #SAVED_RULE_WEIGHT \\n[#RULE_WEIGHT]
+.    nr #SAVED_WEIGHT_ADJ  \\n[#RULE_WEIGHT_ADJ]
 .    di NULL
 .       if \\n[#NUM_ARGS]>=1 .RULE_WEIGHT \\*[$RL_WEIGHT]
 .    di
-.    if !'\\$4'' .gcolor \\$4
+.    if !'\\$4'' .COLOR \\$4
 .    ie \\n[#NUM_ARGS]=0 \{\
+.       ds $RL_INDENT 0
 .       ie \\n[#INDENT_ACTIVE] \{\
 .          nr #RESTORE_L_LENGTH \\n[.l]
 .          if \\n[#INDENT_BOTH_ACTIVE] .ll \\n[.l]u-\\n[#BL_INDENT]u
 .          if \\n[#INDENT_LEFT_ACTIVE] .ll \\n[.l]u-\\n[#L_INDENT]u
 \Z'\D't \\n[#RULE_WEIGHT]''\
-\h'\\*[$RL_INDENT]+\\n[#RULE_WEIGHT_ADJ]u'\
+\h'\\*[$RL_INDENT]'\
 \v'\\n[#RULE_WEIGHT_ADJ]u'\
 \D'l \En[.l]u 0'\v'-\\n[#RULE_WEIGHT_ADJ]u'\
 \v'-\\n[#RULE_WEIGHT_ADJ]u'\
@@ -2864,7 +2865,7 @@ end
 .       \}
 .       el \{\
 \Z'\D't \\n[#RULE_WEIGHT]''\
-\h'\\*[$RL_INDENT]+\\n[#RULE_WEIGHT_ADJ]u'\
+\h'\\*[$RL_INDENT]'\
 \v'\\n[#RULE_WEIGHT_ADJ]u'\
 \D'l \En[.l]u 0'\v'-\\n[#RULE_WEIGHT_ADJ]u'\
 \v'-\\n[#RULE_WEIGHT_ADJ]u'\
@@ -2873,7 +2874,7 @@ end
 .    \}
 .    el \{\
 \Z'\D't \\n[#RULE_WEIGHT]''\
-\h'\\*[$RL_INDENT]+\\n[#RULE_WEIGHT_ADJ]u'\
+\h'\\*[$RL_INDENT]'\
 \v'\\n[#RULE_WEIGHT_ADJ]u'\
 \D'l \\*[$RL_LENGTH] 0'\
 \v'-\\n[#RULE_WEIGHT_ADJ]u'\
@@ -2893,10 +2894,10 @@ end
 .       if \\n[#NOFILL_MODE]=3 .CENTER
 .       if \\n[#NOFILL_MODE]=5 .RIGHT
 .    \}
-.    nr #RULE_WEIGHT     \\n[#SAVED_WEIGHT]
+.    nr #RULE_WEIGHT     \\n[#SAVED_RULE_WEIGHT]
 .    nr #RULE_WEIGHT_ADJ \\n[#SAVED_WEIGHT_ADJ]
 .    rr #SAVED_WEIGHT
-.    rr #SAVED_WEIGHT_ADJ
+.    rr #SAVED_RULE_WEIGHT_ADJ
 .    if \\n[#RESTORE_TRAP]=1 \{\
 .       vpt
 .       rr #RESTORE_TRAP
@@ -2927,7 +2928,6 @@ end
 .       PRINT \
 \Z'\D't \\n[#RULE_WEIGHT]''\
 \v'\\n[#RULE_WEIGHT_ADJ]u'\
-\h'\\n[#RULE_WEIGHT_ADJ]u'\
 \Z'\D'l \En[.l]u 0'\v'-\\n[#RULE_WEIGHT_ADJ]u''\h'|0'\c
 .       ll
 .       rr #RESTORE_L_LENGTH
@@ -2936,7 +2936,6 @@ end
 .       PRINT \
 \Z'\D't \\n[#RULE_WEIGHT]''\
 \v'\\n[#RULE_WEIGHT_ADJ]u'\
-\h'\\n[#RULE_WEIGHT_ADJ]u'\
 \Z'\D'l \En[.l]u 0'\v'-\\n[#RULE_WEIGHT_ADJ]u''\h'|0'\c
 .    \}
 .    if \\n[fill] \{\
@@ -2962,12 +2961,12 @@ end
 .    ds $RL_WEIGHT \\$1
 .    ds $RL_INDENT \\$2
 .    ds $RL_DEPTH  \\$3
-.    if !'\\$4'' .gcolor \\$4
-.    nr #SAVED_WEIGHT     \\n[#RULE_WEIGHT]
-.    nr #SAVED_WEIGHT_ADJ \\n[#RULE_WEIGHT_ADJ]
+.    if !'\\$4'' .COLOR \\$4
+.    nr #SAVED_RULE_WEIGHT \\n[#RULE_WEIGHT]
+.    nr #SAVED_WEIGHT_ADJ  \\n[#RULE_WEIGHT_ADJ]
 .    RULE_WEIGHT \\*[$RL_WEIGHT]
 \Z'\D't \\n[#RULE_WEIGHT]''\
-\h'\\*[$RL_INDENT]+\\n[#RULE_WEIGHT]u+\\n[#RULE_WEIGHT_ADJ]u'\
+\h'\\*[$RL_INDENT]+\\n[#RULE_WEIGHT_ADJ]u'\
 \D'l 0 \\*[$RL_DEPTH]'\
 \Z'\D't \\n[#SAVED_RULE_WEIGHT]''
 .    gcolor default
@@ -3038,21 +3037,21 @@ end
 .       el             .ds $BX_COLOR \\$5
 .    \}
 .    el .ds $BX_COLOR default
-.    nr #SAVED_WEIGHT     \\n[#RULE_WEIGHT]
-.    nr #SAVED_WEIGHT_ADJ \\n[#WEIGHT_ADJ]
+.    nr #SAVED_RULE_WEIGHT \\n[#RULE_WEIGHT]
+.    nr #SAVED_WEIGHT_ADJ  \\n[#WEIGHT_ADJ]
 .    if !'\\$1'SOLID' .RULE_WEIGHT \\*[$BX_WEIGHT]
 .    ds $BX_INDENT \\*[$BX_INDENT]-\\n[#WEIGHT_ADJ]u
 .    ie \\n[#BX_SOLID]=1 \{\
 .       fcolor \\*[$BX_COLOR]
-\h'\\*[$BX_INDENT]+\\n[#BOX_WEIGHT_ADJ]u+\\n[#RULE_WEIGHT]u'\
+\h'\\*[$BX_INDENT]+\\n[#WEIGHT_ADJ]u'\
 \D'P \\*[$BX_WIDTH] 0 0 \\*[$BX_DEPTH] -\\*[$BX_WIDTH] 0 0 -\\*[$BX_DEPTH]'
 .       fcolor
 .       rr #BX_SOLID
 .    \}
 .    el \{\
-.       gcolor \\*[$BX_COLOR]
+.       COLOR \\*[$BX_COLOR]
 \Z'\D't \\n[#RULE_WEIGHT]''\
-\h'\\*[$BX_INDENT]+\\n[#RULE_WEIGHT]u+\\n[#RULE_WEIGHT_ADJ]u'\
+\h'\\*[$BX_INDENT]+\\n[#RULE_WEIGHT]u'\
 \v'\\n[#WEIGHT_ADJ]u'\
 \D'p \\*[$BX_WIDTH]-\\n[#RULE_WEIGHT]u 0 0 \\*[$BX_DEPTH]-\\n[#RULE_WEIGHT]u -\\*[$BX_WIDTH]+\\n[#RULE_WEIGHT]u 0 0 -\\*[$BX_DEPTH]+\\n[#RULE_WEIGHT]u'\
 \v'-\\n[#WEIGHT_ADJ]u'\
@@ -3099,11 +3098,11 @@ end
 .    ie '\\$1'SOLID' .nr #CL_SOLID 1
 .    el .ds $CL_WEIGHT \\$1
 .    ds $CL_INDENT \\$2
-.    ds $CL_WIDTH  \\$3
 .    ie '\\$3'FULL_MEASURE' \{\
-.       ie (\\n[#INDENT_LEFT_ACTIVE]+\\n[#INDENT_RIGHT_ACTIVE]+\\n[#INDENT_BOTH_ACTIVE])=0 \
+.       ie (\\n[#INDENT_LEFT_ACTIVE]+\\n[#INDENT_RIGHT_ACTIVE]+\\n[#INDENT_BOTH_ACTIVE])=0 \{\
 .          nr #WIDTH \\n[.l]
-.       ds $CL_WIDTH \\n[#WIDTH]u
+.          ds $CL_WIDTH \\n[#WIDTH]u
+.       \}
 .       el \{\
 .          if \\n[#INDENT_LEFT_ACTIVE] \{\
 .             nr #WIDTH \\n[.l]-\\n[#L_INDENT]
@@ -3126,13 +3125,13 @@ end
 .       el             .ds $CL_COLOR \\$5
 .    \}
 .    el .ds $CL_COLOR default
-.    nr #SAVED_WEIGHT     \\n[#RULE_WEIGHT]
-.    nr #SAVED_WEIGHT_ADJ \\n[#WEIGHT_ADJ]
+.    nr #SAVED_RULE_WEIGHT \\n[#RULE_WEIGHT]
+.    nr #SAVED_WEIGHT_ADJ  \\n[#WEIGHT_ADJ]
 .    if !'\\$1'SOLID' .RULE_WEIGHT \\*[$CL_WEIGHT]
 .    ds $CL_INDENT \\*[$CL_INDENT]-\\n[#WEIGHT_ADJ]u
 .    ie \\n[#CL_SOLID]=1 \{\
 .       fcolor \\*[$CL_COLOR]
-\h'\\*[$CL_INDENT]+\\n[#RULE_WEIGHT]u'\
+\h'\\*[$CL_INDENT]+\\n[#WEIGHT_ADJ]u'\
 \v'\\*[$CL_DEPTH]/2u'\
 \D'E \\*[$CL_WIDTH]-\\n[#RULE_WEIGHT]u \\*[$CL_DEPTH]-\\n[#RULE_WEIGHT]u'\
 \v'-\\*[$CL_DEPTH]/2u'
@@ -3140,9 +3139,9 @@ end
 .       rr #CL_SOLID
 .    \}
 .    el \{\
-.       gcolor \\*[$CL_COLOR]
+.       COLOR \\*[$CL_COLOR]
 \Z'\D't \\n[#RULE_WEIGHT]''\
-\h'\\*[$CL_INDENT]+\\n[#RULE_WEIGHT]u+\\n[#RULE_WEIGHT_ADJ]u'\
+\h'\\*[$CL_INDENT]+\\n[#RULE_WEIGHT]u'\
 \v'\\*[$CL_DEPTH]/2u'\
 \D'e \\*[$CL_WIDTH]-\\n[#RULE_WEIGHT]u \\*[$CL_DEPTH]-\\n[#RULE_WEIGHT]u'\
 \v'-(\\*[$CL_DEPTH]/2u)'\
