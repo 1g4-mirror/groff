@@ -23,6 +23,13 @@ the Subject line or you risk my spam filters nuking your message.
 
 Version 2.6_d
 =============
+Some graphical objects not recognising colours initialized with
+.XCOLOR.
+---Fixed---
+
+Graphical objects' left margins slightly offset to the right.
+---Fixed---
+
 Graphical objects with depth (vertical rules, boxes, ellipses) close
 to bottom margin clobbering footer trap.
 ---Fixed---
