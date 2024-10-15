@@ -1681,7 +1681,7 @@ sub do_x
 
 		if (!exists($incfil{$fil}))
 		{
-		    if ($gotexif)
+		    if ($gotexif and $FDnm!~m/\.pdf$/i)
 		    {
 			binmode $FD;
 

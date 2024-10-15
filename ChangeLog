@@ -1,3 +1,13 @@
+2024-10-15  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Work around debian's ImageMagick policy.
+
+	* src/devices/gropdf/gropdf.pl: Don't use perlmagick to embed
+	PDFs
+
+	Fixes <https://savannah.gnu.org/bugs/index.php?66333>. Thanks
+	to Branden for the report.
+
 2024-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (XA): Revert commit a6e09ca7fb, 2022-04-17.  The
