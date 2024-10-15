@@ -3924,8 +3924,9 @@ for use in all memorandum types except 4.
 .TP
 .BI TM\~ number\c
 \~.\|.\|.
-Declare technical memorandum number(s) used by
-.BR MT .
+Declare technical memorandum number(s) used with
+.B MT
+memoranda.
 .
 .
 .br
