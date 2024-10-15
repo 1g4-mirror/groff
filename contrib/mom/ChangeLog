@@ -1,5 +1,17 @@
 2024-10-13
 
+	* om.tmac:
+	+ Corrects PDF_IMAGE after only one line of text at the top of
+	documents placing the image on the next page.
+	+ Correct graphical objects' color handling and placement
+
+	* BUGS: Update
+
+	Fixes <https://savannah.gnu.org/bugs/?66332>.  Thanks to наб for
+	the report.
+
+2024-10-13
+
 	* om.tmac: Add linked endnotes; fix graphical objects; tweaks
 	+ adds internally linked endnotes
 	+ fixes graphical objects clobbering bottom of footer trap
