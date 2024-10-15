@@ -199,14 +199,14 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"	center headings of level <= Hc
 .nr Hc 0
 .\"	heading font, per level
-.ds HF 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+.ds HF 2 2 2 2 2 2 2
 .\"	indentation policy of text after headings
 .\"	0 -> no indentation
 .\"	1 -> first-line indentation, like ".P 1"
 .\"	2 -> indent to line up with text part of preceding heading
 .nr Hi 1
 .\"	header point (type) size, per level
-.ds HP 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+.ds HP 0 0 0 0 0 0 0
 .\"	put vertical space of \n[Hss] after headings of level <= Hs
 .nr Hs 2
 .\"	heading numbering type
@@ -303,6 +303,8 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" spacing before and after static displays (if undefined, Lsp is used)
 .\" .nr Dsp 1v
 .\" more heading level counters
+.as HF " 2 2 2 2 2 2 2
+.as HP " 0 0 0 0 0 0 0
 .nr H8 0 1
 .nr H9 0 1
 .nr H10 0 1

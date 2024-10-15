@@ -1,5 +1,10 @@
 2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Trivially refactor.  Organize groff mm extensions
+	together more cleanly with respect to `HF` and `HP` strings.
+
+2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Trivially refactor.  Rename internal register
 	`ref*flag` to `ref*was-RS-used`, which has the startling
 	property of documenting what it's for.
