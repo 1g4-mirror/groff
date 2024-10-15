@@ -3345,12 +3345,11 @@ is also stored in a string of that name.
 .
 .TP
 .B RF
-Reference end.
-.
-Ends a reference definition and returns to normal processing.
+End a bibliographic reference citiation started with
+.BR RS .
 .
 See
-.BR RS .
+.BR RP .
 .
 .
 .TP
@@ -3404,7 +3403,7 @@ bibliographic reference list facilities.
 .TP
 .BR RP \~\c \" space in roman; we must use 2-font macro with \c
 .RI [ suppress-counter-reset \~[ page-ejection-policy ]]
-Format a reference page,
+Format a reference list,
 listing items accumulated within
 .BR RS / RF
 pairs.
@@ -3466,25 +3465,37 @@ followed by another vee of space.
 .TP
 .BR RS \~[\c
 .IR reference-string ]
-Begin an automatically numbered reference definition.
+Begin citation of an automatically numbered bibliographic reference
+entry.
 .
-By default,
-references are numbered starting at 1;
-the number is available in register
-.BR :R .
+.I mm
+collects input until
+.B RF
+is called.
+.
+A subsequent
+.B RP
+call emits the accumulated entries.
+.
+References are numbered starting at 1;
+the register
+.B :R
+stores the most recently assigned number.
 .
 Interpolate the string
 .B Rf
-where the reference mark should be and write the reference between
-.BR RS / RF
-on an input line after the reference mark.
+where the reference mark should be,
+then place the entry between
+.B RS
+and
+.B RF
+calls on text lines after the reference mark.
 .
-The mark may be bracketed,
-superscripted,
-or both;
-see the
+The
 .B \%Rfstyle
-register.
+register determines whether the mark is bracketed,
+superscripted,
+or both.
 .
 If
 .I reference-string
