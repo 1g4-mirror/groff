@@ -1,5 +1,15 @@
 2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Trivially refactor.  Rename internal register
+	`ref*flag` to `ref*was-RS-used`, which has the startling
+	property of documenting what it's for.
+	(TC, B2, RS, ref@eot-print, ref@print-refs): Do it.
+	(ref@print-refs): Also drop autoincrement amount from register
+	redefinition.  Autoincrementation was never used with it, and it
+	looks like a copy-and-paste error from an `RP` call in `TC`.
+
+2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (EM): Simplify string definition: interpolate only the
 	`\[em]` special character always, even in nroff mode, and
 	without leading space.  It's the output device's responsibility

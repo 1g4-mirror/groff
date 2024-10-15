@@ -2700,7 +2700,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .br
 .\" print any pending displays and references
 .df@print-float 3
-.if \\n[ref*flag] .RP 0 1
+.if \\n[ref*was-RS-used] .RP 0 1
 .\"
 .if \w@\\$1@>0 .nr toc*slevel \\$1
 .if \w@\\$2@>0 .nr toc*spacing (u;\\$2*\\n[Lsp])
@@ -3079,7 +3079,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .nr ref*nr 0 1
 .aln :R ref*nr
 .nr ref*nr-width 5n
-.nr ref*flag 0		\" for end-of-text
+.nr ref*was-RS-used 0 \" for end-of-text
 .ds ref*nroff-( [
 .ds ref*troff-( \v'-.4m'\s-3
 .ds ref*nroff-) ]
@@ -3115,7 +3115,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de RS
 .ref*set-mark-style \" in case the document changed it
 .if !''\\$1' .ds \\$1 \\*[ref*(]\\n[ref*nr]\\*[ref*)]
-.nr ref*flag 1
+.nr ref*was-RS-used 1
 .am ref*mac
 .ref@start-print \\n[ref*nr]
 \\..
@@ -3176,10 +3176,10 @@ argument: '\\$2'
 .\"-----------
 .\" called by end-of-text!
 .de ref@eot-print
-.\".if \\n[ref*flag] \{\
+.\".if \\n[ref*was-RS-used] \{\
 .if d ref*mac \{\
 .	if \\n[D]>2 .tm Print references, called by eot
-.	nr ref*flag 0
+.	nr ref*was-RS-used 0
 .	br
 .	misc@ev-keep ne
 .	@reset
@@ -3208,7 +3208,7 @@ argument: '\\$2'
 .in
 .rm ref*mac
 .ev
-.nr ref*flag 0 1
+.nr ref*was-RS-used 0
 ..
 .\"########################### module app ############################
 .\"
