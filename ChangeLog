@@ -1,5 +1,11 @@
 2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/preconv/tests/smoke-test.sh: Comment out a test;
+	we no longer have a specimen of a Latin-1 document in the build
+	tree.
+
+2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/meintro_fr.me.in: Add back old-style Emacs file-local
 	variable to supply preconv(1) a "coding tag".  Doing so throws
 	that program a bone if the "uchardet" library is not available
