@@ -258,6 +258,21 @@ strings.
 .
 .
 .P
+.I "groff mm"
+features a new citation system that permits a bibliographic reference
+list to be sorted,
+an alternative to
+.BR RS / RE / RP .
+.
+See the
+.B INITR
+macro description below
+and the
+.MR mmroff @MAN1EXT@
+man page.
+.
+.
+.P
 Macro,
 register,
 and string descriptions in this page frequently mention each other;
