@@ -4234,9 +4234,8 @@ except the second
 .
 .TP
 .B BU
-interpolates a bullet mark in
-.B BL
-lists.
+interpolates a bullet mark,
+.BR \[rs][bu] .
 .
 .
 .TP
@@ -4273,9 +4272,8 @@ and register
 .
 .TP
 .B EM
-interpolates an em dash mark in
-.B DL
-lists.
+interpolates an em dash,
+.BR \[rs][em] .
 .
 .
 .TP
