@@ -1,3 +1,15 @@
+2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Rename some test scripts for clarity.
+
+	* tmac/tests/doc_CS-works.sh:
+	* tmac/tests/doc_CT-works.sh: Rename these...
+
+	* tmac/tests/doc_CS-register-works.sh:
+	* tmac/tests/doc_CT-register-works.sh: ...to these.
+
+	* tmac/tmac.am (tmac_TESTS): Update.
+
 2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/preconv/tests/smoke-test.sh: Comment out a test;

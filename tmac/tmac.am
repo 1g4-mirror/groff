@@ -195,8 +195,8 @@ tmac_TESTS = \
   tmac/tests/andoc_check-an-to-doc-transition.sh \
   tmac/tests/andoc_clear-doc-traps.sh \
   tmac/tests/andoc_flush-between-packages.sh \
-  tmac/tests/doc_CS-works.sh \
-  tmac/tests/doc_CT-works.sh \
+  tmac/tests/doc_CS-register-works.sh \
+  tmac/tests/doc_CT-register-works.sh \
   tmac/tests/doc_D-register-places-page-numbers-correctly.sh \
   tmac/tests/doc_Lk-respects-sentence-ending-punctuation.sh \
   tmac/tests/doc_Lk-works.sh \
