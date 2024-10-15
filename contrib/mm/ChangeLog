@@ -1,3 +1,13 @@
+2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac (EM): Simplify string definition: interpolate only the
+	`\[em]` special character always, even in nroff mode, and
+	without leading space.  It's the output device's responsibility
+	to fall back gracefully when encountering this Ossanna troff
+	special character.  This also makes the indentation of `DL`
+	list items consistent with those of other lists on nroff
+	devices.
+
 2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* groff_mmse.7.man: Add old-style Emacs file-local variable to
