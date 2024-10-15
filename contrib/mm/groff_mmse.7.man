@@ -1,3 +1,6 @@
+.\" -*- coding: utf-8; -*-  Help preconv(1) if uchardet is not present.
+.\" groff -K utf8 -man -msv
+.\" nroff -K utf8 -man -msv
 .TH groff_mmse @MAN7EXT@ "@MDATE@" "groff @VERSION@"
 .SH Namn
 groff_mmse \- svenska \(rqmemorandum\(rq makro f\(:or GNU
@@ -181,7 +184,7 @@ Sweden
 .
 .
 .\" Local Variables:
-.\" coding: latin-1
+.\" coding: utf-8
 .\" fill-column: 72
 .\" mode: nroff
 .\" End:

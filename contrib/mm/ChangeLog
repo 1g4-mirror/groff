@@ -1,5 +1,15 @@
 2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* groff_mmse.7.man: Add old-style Emacs file-local variable to
+	supply preconv(1) a "coding tag".  Doing so throws that program
+	a bone if the "uchardet" library is not available and the
+	program is asked to guess the file's input encoding.
+
+	Fixes <https://savannah.gnu.org/bugs/?66287> (2/2).  Thanks to
+	Dave Kemper for the report.
+
+2024-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* groff_mmse.7.man: Convert file encoding from Latin-1 to UTF-8.
 
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
