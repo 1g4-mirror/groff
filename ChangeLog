@@ -1,5 +1,15 @@
 2024-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/s.tmac (DS): Break line unconditionally, ensuring that
+	that the top-of-page trap springs even if the document starts
+	with a call of this macro.
+
+	Fixes <https://savannah.gnu.org/bugs/?66339>.  Thanks to Joerg
+	van den Hoff for the report.  Problem introduced by me in commit
+	1887bbe68c, 5 November 2021.
+
+2024-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[ms]: Regression-test Savannah #66339.
 
 	* tmac/tests/s_can-start-document-with-DS-call.sh: Do it.
