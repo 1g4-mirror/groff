@@ -1,3 +1,10 @@
+2024-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[ms]: Regression-test Savannah #66339.
+
+	* tmac/tests/s_can-start-document-with-DS-call.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Rename some test scripts for clarity.
