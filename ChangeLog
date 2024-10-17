@@ -1,5 +1,13 @@
 2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/pic.ms: Fix omission of `linethick` variable from
+	"Semi-Formal Grammar" section.
+
+	Fixes <https://savannah.gnu.org/bugs/?66335>.  Thanks to an
+	anonymous contributor for the report and patch.
+
+2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Better handle inapplicable or out-of-bounds (but still
 	numerically valid) output page selection list (`-o` argument).
 
