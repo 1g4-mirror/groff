@@ -1,5 +1,21 @@
 2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Better handle inapplicable or out-of-bounds (but still
+	numerically valid) output page selection list (`-o` argument).
+
+	* src/roff/troff/node.cpp: New global Boolean
+	`was_any_page_in_output_list` tracks this datum; defaults false.
+	(troff_output_file::trailer): When finishing up, don't write a
+	"trailer" grout command (and vertical motion) if no page ever
+	began.  Insted, throw a warning in category `range`.
+	(real_output_file::begin_page): Make
+	`was_any_page_in_output_list` true if any page is written.
+
+	Fixes <https://savannah.gnu.org/bugs/?64469>.  Thanks to Dave
+	Kemper for the report.
+
+2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (parse_output_page_list): Enhance
 	diagnostic message when `-o` option argument is nonsense; report
 	the invalid expression and inform user that it's being ignored.
