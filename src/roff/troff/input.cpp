@@ -8598,6 +8598,7 @@ bool in_output_page_list(int n)
 
 static void parse_output_page_list(const char *p)
 {
+  const char *pstart = p; // for diagnostic message
   for (;;) {
     int i;
     if (*p == '-')
@@ -8632,8 +8633,8 @@ static void parse_output_page_list(const char *p)
     ++p;
   }
   if (*p != '\0') {
-    error("bad output page list");
-    output_page_list = 0;
+    error("ignoring invalid output page list argument '%1'", pstart);
+    output_page_list = 0 /* nullptr */;
   }
 }
 

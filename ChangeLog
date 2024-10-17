@@ -1,5 +1,11 @@
 2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (parse_output_page_list): Enhance
+	diagnostic message when `-o` option argument is nonsense; report
+	the invalid expression and inform user that it's being ignored.
+
+2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (in_output_page_list): Demote return
 	type from `int` to `bool`.  Return Boolean, not integer,
 	literals.
