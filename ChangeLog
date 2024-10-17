@@ -1,3 +1,8 @@
+2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (parse_output_page_list): `const`ify
+	function argument.
+
 2024-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (DS): Break line unconditionally, ensuring that

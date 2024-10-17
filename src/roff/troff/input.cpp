@@ -8596,7 +8596,7 @@ int in_output_page_list(int n)
   return 0;
 }
 
-static void parse_output_page_list(char *p)
+static void parse_output_page_list(const char *p)
 {
   for (;;) {
     int i;
