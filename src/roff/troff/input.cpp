@@ -8586,14 +8586,14 @@ int page_range::contains(int n)
 
 page_range *output_page_list = 0 /* nullptr */;
 
-int in_output_page_list(int n)
+bool in_output_page_list(int n)
 {
   if (!output_page_list)
-    return 1;
+    return true;
   for (page_range *p = output_page_list; p; p = p->next)
     if (p->contains(n))
-      return 1;
-  return 0;
+      return true;
+  return false;
 }
 
 static void parse_output_page_list(const char *p)
