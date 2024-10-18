@@ -1,5 +1,28 @@
 2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grodvi/dvi.cpp (main):
+	* src/devices/grohtml/post-html.cpp (main):
+	* src/devices/grolbp/lbp.cpp (main):
+	* src/devices/grolj4/lj4.cpp (main):
+	* src/devices/grops/ps.cpp (main):
+	* src/devices/grotty/tty.cpp (main):
+	* src/preproc/eqn/main.cpp (main):
+	* src/preproc/grn/main.cpp (main):
+	* src/preproc/html/pre-html.cpp (main):
+	* src/preproc/pic/main.cpp (main):
+	* src/preproc/preconv/preconv.cpp (main):
+	* src/preproc/soelim/soelim.cpp (main):
+	* src/preproc/tbl/main.cpp (main):
+	* src/roff/troff/input.cpp (main):
+	* src/utils/hpftodit/hpftodit.cpp (usage):
+	* src/utils/indxbib/indxbib.cpp (main):
+	* src/utils/lkbib/lkbib.cpp (main):
+	* src/utils/lookbib/lookbib.cpp (main):
+	* src/utils/tfmtodit/tfmtodit.cpp (main): Emit our own
+	diagnostic for an invalid command-line option.
+
+2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/xtotroff/xtotroff.c (main): Emit our own diagnostic
 	for an invalid command-line option.
 

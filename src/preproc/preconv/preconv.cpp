@@ -1,4 +1,4 @@
-/* Copyright (C) 2005-2020 Free Software Foundation, Inc.
+/* Copyright (C) 2005-2024 Free Software Foundation, Inc.
      Written by Werner Lemberg (wl@gnu.org)
 
 This file is part of groff.
@@ -1257,6 +1257,7 @@ main(int argc, char **argv)
     { NULL, 0, 0, 0 }
   };
   // Parse the command-line options.
+  opterr = 0;
   while ((opt = getopt_long(argc, argv,
 			    "dD:e:hrv", long_options, NULL)) != EOF)
     switch (opt) {
@@ -1300,6 +1301,7 @@ main(int argc, char **argv)
       usage(stdout);
       break;
     case '?':
+      error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       exit(2);
       break;

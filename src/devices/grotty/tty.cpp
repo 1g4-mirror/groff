@@ -942,8 +942,9 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  while ((c = getopt_long(argc, argv, "bBcdfF:hiI:oruUv", long_options, NULL))
-	 != EOF)
+  opterr = 0;
+  while ((c = getopt_long(argc, argv, "bBcdfF:hiI:oruUv", long_options,
+	  NULL)) != EOF)
     switch(c) {
     case 'v':
       printf("GNU grotty (groff) version %s\n", Version_string);
@@ -1002,6 +1003,7 @@ int main(int argc, char **argv)
       usage(stdout);
       break;
     case '?':
+      error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       exit(2);
       break;

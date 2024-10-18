@@ -1,4 +1,4 @@
-/* Copyright (C) 1994-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1994-2024 Free Software Foundation, Inc.
      Written by Francisco Andrés Verdú <pandres@dragonet.es> with many
      ideas taken from the other groff drivers.
 
@@ -655,6 +655,7 @@ int main(int argc, char **argv)
   // command line parsing
   int c;
   int option_index = 0;
+  opterr = 0;
   while ((c = getopt_long(argc, argv, "c:F:hI:lo:p:vw:", long_options,
 			  &option_index))
 	 != EOF) {
@@ -721,6 +722,7 @@ int main(int argc, char **argv)
       usage(stdout);
       break;
     case '?':
+      error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       exit(2);
       break;

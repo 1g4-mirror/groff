@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2021 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2024 Free Software Foundation, Inc.
  * Written by Gaius Mulley (gaius@glam.ac.uk).
  *
  * This file is part of groff.
@@ -1603,6 +1603,7 @@ static int scanArguments(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { 0 /* nullptr */, 0, 0, 0 }
   };
+  opterr = 0;
   while ((c = getopt_long(argc, argv,
 	  "+a:bCdD:eF:g:Ghi:I:j:lno:prs:S:vVx:y", long_options,
 	  0 /* nullptr */))
@@ -1698,6 +1699,7 @@ static int scanArguments(int argc, char **argv)
       usage(stdout);
       break;
     case '?':
+      error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       exit(2);
       break;

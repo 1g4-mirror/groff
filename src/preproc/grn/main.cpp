@@ -352,6 +352,7 @@ main(int argc,
 	}
 	if (strcmp(*argv,"--help")==0) {
       case '?':
+	  error("unrecognized command-line option '%1'", char(optopt));
 	  usage(stdout);
 	  exit(2);
 	  break;

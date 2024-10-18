@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -923,8 +923,9 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  while ((c = getopt_long(argc, argv, "dF:I:lp:vw:", long_options, NULL))
-	 != EOF)
+  opterr = 0;
+  while ((c = getopt_long(argc, argv, "dF:I:lp:vw:", long_options,
+	  NULL)) != EOF)
     switch(c) {
     case 'd':
       draw_flag = 0;
@@ -961,6 +962,7 @@ int main(int argc, char **argv)
       exit(0);
       break;
     case '?':
+      error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       exit(2);
       break;
