@@ -6001,7 +6001,6 @@ static void device_request()
 	// character escape sequence?
 	bool is_valid = false;
 	string sc = "";
-	string scdup; // for composite character ugliness below
 	int c2 = get_copy(0 /* nullptr */);
 	for (; (c2 != '\0') && (c2 != '\n') && (c2 != EOF);
 	     c2 = get_copy(0 /* nullptr */)) {

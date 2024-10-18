@@ -1,3 +1,9 @@
+2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.c (device_request): Drop declaration of
+	unused variable (detritus from an attempt to finish Savannah
+	#63074).
+
 2024-10-18  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Use new \X''.
