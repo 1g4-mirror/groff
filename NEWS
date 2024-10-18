@@ -160,6 +160,15 @@ eqn
 
 *  The new "reset" primitive restores a named parameter to its default.
 
+groff
+-----
+
+*  The groff command now encodes the fate of failing processes in the
+   pipeline it constructs and runs so that this information cannot be
+   confused with groff's own error conditions (such as a usage error,
+   which now produces an exit status of 2).  See the section "Exit
+   status" of groff(1) for details.
+
 nroff
 -----
 

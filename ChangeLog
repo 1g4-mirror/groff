@@ -1,5 +1,20 @@
 2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Revise exit status computation.
+
+	* src/roff/groff/groff.cpp (main): Avoid collision between
+	groff's "own" exit status bits and those allocated to reporting
+	pipeline status.  Left-shift return value of `run_command()` by
+	two binary places.
+	* src/roff/groff/groff.1.man (Exit status): Document this.
+
+	* src/roff/groff/tests/ab-request-works.sh: Update test
+	expectations.
+
+	* NEWS: Add item.
+
+2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grodvi/dvi.cpp (main):
 	* src/devices/grohtml/post-html.cpp (main):
 	* src/devices/grolbp/lbp.cpp (main):

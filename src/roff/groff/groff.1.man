@@ -1696,12 +1696,18 @@ the databases.
 .\" ====================================================================
 .
 .I groff
-exits with a failure status if there was a problem parsing its arguments
-and a successful status if either of the options
+exits successfully (with
+.RB status\~ 0 )
+if either of the options
 .B \-h
 or
 .B \-\-help
-was specified.
+is specified,
+.RB status\~ 2
+if the program cannot interpret its command-line arguments,
+and
+.RB status\~ 1
+if it encounters an error during operation.
 .
 Otherwise,
 .I groff
@@ -1713,23 +1719,24 @@ does likewise.
 If not,
 .IR groff 's
 exit status encodes a summary of problems encountered,
-setting bit\~0 if a command exited with a failure status,
-bit\~1 if a command was terminated with a signal,
-and bit\~2 if a command could not be executed.
+setting bit\~2 if a command exited with a failure status,
+bit\~3 if a command was terminated with a signal,
+and bit\~4 if a command could not be executed.
 .
 (Thus,
-if all three misfortunes befell one's pipeline,
+if all three misfortunes befall one's pipeline,
 .I groff
-would exit with status 2\[ha]0 + 2\[ha]1 + 2\[ha]2 = 1+2+4 = 7.)
+exits with status 2\[ha]2 + 2\[ha]3 + 2\[ha]4 = 4+8+16 = 28.)
 .
 To troubleshoot pipeline problems,
-you may wish to re-run the
+re-run the
 .I groff
 command with the
 .B \-V
 option and break the reported pipeline down into separate stages,
-inspecting the exit status of and diagnostic messages emitted by each
-command.
+inspecting the exit status of,
+and diagnostic messages emitted by,
+each command.
 .
 .
 .\" ====================================================================

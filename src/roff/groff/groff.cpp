@@ -534,7 +534,10 @@ int main(int argc, char **argv)
     print_commands(Vflag == 1 ? stdout : stderr);
   if (Vflag == 1)
     xexit(EXIT_SUCCESS);
-  xexit(run_commands(want_version_info));
+  // We need the lower two bits of the exit status for ourselves.
+  int status = run_commands(want_version_info) << 2;
+  assert(status < 65 || 0 == "run_commands() returned too many bits");
+  xexit(status);
 }
 
 const char *xbasename(const char *s)
