@@ -1071,6 +1071,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .el .@error-recover mismatched .DE
 ..
 .de DS
+.\" Break to ensure that we spring the top-of-page trap (at the start of
+.\" a document, this also ensures that important registers like `PS` are
+.\" set).  Also, even if the drawing position is elsewhere and invalid
+.\" nesting occurs, the user will still expect a break.
 .br
 .if '\\n(.z'ds*div' .@error-recover cannot begin display within display
 .nr ds*badarg 0
