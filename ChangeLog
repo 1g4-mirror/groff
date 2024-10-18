@@ -1,5 +1,10 @@
 2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/lookbib/lookbib.cpp (main): Make `assert()` message
+	communicative.
+
+2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Make more commands exit with status 2 on usage error.
 
 	* src/devices/grodvi/dvi.cpp (main):
