@@ -1,3 +1,17 @@
+2024-10-18  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Use new \X''.
+
+	* tmac/pdf.tmac: The new \X'' code does no flush, perfect
+	for hotspots. Thanks Branden.
+
+2024-10-18  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Foundries are only a single letter.
+
+	* src/devices/gropdf/gropdf.pl: Look for single letter
+	followed by '-'.
+
 2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/xditview/xditview.c (NewFile): Fix code style
