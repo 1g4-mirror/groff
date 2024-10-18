@@ -17,7 +17,7 @@
 	* src/devices/xditview/xditview.c (NewFile): Fix code style
 	nits.  Promote repeated expression to temporary variable.
 	`sizeof` is an operator, not a function, so don't parenthesize
-	its parameter when it's an lvalue (as opposed to a type name).
+	its operand when it's an lvalue (as opposed to a type name).
 
 2024-08-12  Lukas Javorsky <ljavorsk@redhat.com>
 
@@ -60,7 +60,7 @@
 	`was_any_page_in_output_list` tracks this datum; defaults false.
 	(troff_output_file::trailer): When finishing up, don't write a
 	"trailer" grout command (and vertical motion) if no page ever
-	began.  Insted, throw a warning in category `range`.
+	began.  Instead, throw a warning in category `range`.
 	(real_output_file::begin_page): Make
 	`was_any_page_in_output_list` true if any page is written.
 
@@ -1536,7 +1536,7 @@
 	`want_att_compat` onto the stack before invoking/calling the
 	named request/macro, and pop it afterwards.
 	(class enclosing_want_att_compat_reg): Add new class to handle
-	dynamic construction of `.cp` register value.  I modeled the
+	dynamic construction of `.cp` register value.  I based the
 	approach on an idiom heavily used in "env.cpp", where read-only
 	registers are not modeled as accessors of C++ globals, because
 	they interpolate per-environment state.
