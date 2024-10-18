@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -170,6 +170,7 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
+  opterr = 0;
   while ((opt = getopt_long(
 		  argc, argv,
 		  "abcCd:D:eEf:F:gGhiI:jJkK:lL:m:M:"
@@ -362,6 +363,7 @@ int main(int argc, char **argv)
       need_postdriver = false;
       break;
     case '?':
+      error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       xexit(2);
       break;
