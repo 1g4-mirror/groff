@@ -38,10 +38,7 @@ input='.
 
 output=$(printf '%s\n' "$input" | "$groff" -T ps -Z 2> /dev/null \
   | grep '^x X')
-error=$(printf '%s\n' "$input" | "$groff" -T ps -Z 2>&1 > /dev/null)
-
 echo "$output"
-echo "$error"
 
 # Expected:
 #
@@ -102,17 +99,17 @@ echo "$output" | grep -Fqx 'x X bogus5: {||}~' || wail
 input='.
 .ds h Caf\['"'"'e] Hyphen-Minus and \[rs]\[u2010]
 \X"ps:exec 1:\\X     [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark"
-.fl
 \!x X ps:exec 2:\!     [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark
 .device ps:exec 3:device [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark
-.fl
 .output x X ps:exec 4:output [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark
 .'
 
+echo INPUT:
+printf '%s\n' "$input" | nl
+
 output=$(printf '%s\n' "$input" | "$groff" -T pdf -Z 2> /dev/null \
   | grep '^x X')
-error=$(printf '%s\n' "$input" | "$groff" -ww -T pdf -z)
-echo "$error"
+echo OUTPUT:
 printf "%s\n" "$output"
 
 # Expected:
@@ -144,26 +141,23 @@ printf "%s\n" "$output" \
   | grep -Fqx 'x X ps:exec 4:output [/Dest /pdf:bm1 /Title (Caf\['"'"'e] Hyphen-Minus and \[rs]\[u2010]) /Level 1 /OUT pdfmark' \
   || wail
 
-#test -z "$fail"
-#exit
-
 # Test the same thing, but with a composite special character escape
 # sequence.
 
 input='.
 .ds h Caf\[e aa] Hyphen-Minus and \[rs]\[u2010]
 \X"ps:exec 5:\\X     [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark"
-.fl
 \!x X ps:exec 6:\!     [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark
 .device ps:exec 7:device [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark
-.fl
 .output x X ps:exec 8:output [/Dest /pdf:bm1 /Title (\*[h]) /Level 1 /OUT pdfmark
 .'
 
+echo INPUT:
+printf '%s\n' "$input" | nl
+
 output=$(printf '%s\n' "$input" | "$groff" -T pdf -Z 2> /dev/null \
   | grep '^x X')
-error=$(printf '%s\n' "$input" | "$groff" -ww -T pdf -z)
-echo "$error"
+echo OUTPUT:
 printf "%s\n" "$output"
 
 # Expected:
