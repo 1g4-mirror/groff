@@ -1,5 +1,10 @@
 2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/pfbtops/pfbtops.c (main): Call `assert()` to catch
+	programmer error in command-line option handling.
+
+2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/lookbib/lookbib.cpp (main): Make `assert()` message
 	communicative.
 

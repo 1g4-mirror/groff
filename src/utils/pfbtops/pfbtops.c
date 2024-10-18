@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #define __GETOPT_PREFIX groff_
 
+#include <assert.h> // assert()
 #include <errno.h> // errno
 #include <stdio.h>
 #include <stdlib.h> // exit(), EXIT_FAILURE, EXIT_SUCCESS
@@ -193,6 +194,8 @@ int main(int argc, char **argv)
       usage(stderr);
       exit(2);
       break;
+    default:
+      assert(0 == "unhandled case of command-line option");
     }
   }
 
