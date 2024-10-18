@@ -400,7 +400,7 @@ static void
 usage()
 {
   usage(stderr);
-  exit(1);
+  exit(2);
 }
 
 File::File(const char *s)

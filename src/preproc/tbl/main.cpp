@@ -1666,7 +1666,7 @@ int main(int argc, char **argv)
       break;
     case '?':
       usage(stderr);
-      exit(EXIT_FAILURE);
+      exit(2);
       break;
     default:
       assert(0 == "unhandled getopt_long return value");

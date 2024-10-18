@@ -353,7 +353,7 @@ main(int argc,
 	if (strcmp(*argv,"--help")==0) {
       case '?':
 	  usage(stdout);
-	  exit(0);
+	  exit(2);
 	  break;
 	}
 	// fallthrough

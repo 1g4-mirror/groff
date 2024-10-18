@@ -363,7 +363,7 @@ int main(int argc, char **argv)
       break;
     case '?':
       usage(stderr);
-      xexit(EXIT_FAILURE);
+      xexit(2);
       break;
     default:
       assert(0 == "no case to handle option character");

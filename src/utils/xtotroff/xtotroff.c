@@ -318,7 +318,7 @@ int main(int argc, char **argv)
       break;
     case '?':
       usage(stderr);
-      xtotroff_exit(EXIT_FAILURE);
+      xtotroff_exit(2);
       break;
     }
   }

@@ -1,5 +1,54 @@
 2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Make more commands exit with status 2 on usage error.
+
+	* src/devices/grodvi/dvi.cpp (main):
+	* src/devices/grohtml/post-html.cpp (main):
+	* src/devices/grolbp/lbp.cpp (main):
+	* src/devices/grolj4/lj4.cpp (main):
+	* src/devices/grops/ps.cpp (main):
+	* src/devices/grotty/tty.cpp (main):
+	* src/preproc/eqn/main.cpp (main):
+	* src/preproc/grn/main.cpp (main):
+	* src/preproc/html/pre-html.cpp (main):
+	* src/preproc/pic/main.cpp (main):
+	* src/preproc/preconv/preconv.cpp (main):
+	* src/preproc/soelim/soelim.cpp (main):
+	* src/preproc/tbl/main.cpp (main):
+	* src/roff/groff/groff.cpp (main):
+	* src/roff/troff/input.cpp (main):
+	* src/utils/hpftodit/hpftodit.cpp (usage):
+	* src/utils/indxbib/indxbib.cpp (main):
+	* src/utils/lkbib/lkbib.cpp (main):
+	* src/utils/lookbib/lookbib.cpp (main):
+	* src/utils/tfmtodit/tfmtodit.cpp (main):
+	* src/utils/xtotroff/xtotroff.c (main): Do it.
+
+	* src/devices/grodvi/grodvi.1.man (Exit status):
+	* src/devices/grohtml/grohtml.1.man (Exit status):
+	* src/devices/grolbp/grolbp.1.man (Exit status):
+	* src/devices/grolj4/grolj4.1.man (Exit status):
+	* src/devices/grops/grops.1.man (Exit status):
+	* src/devices/grotty/grotty.1.man (Exit status):
+	* src/preproc/eqn/eqn.1.man (Exit status):
+	* src/preproc/grn/grn.1.man (Exit status):
+	* src/preproc/pic/pic.1.man (Exit status):
+	* src/preproc/preconv/preconv.1.man (Exit status):
+	* src/preproc/refer/refer.1.man (Exit status):
+	* src/preproc/soelim/soelim.1.man (Exit status):
+	* src/preproc/tbl/tbl.1.man (Exit status):
+	* src/roff/troff/troff.1.man (Exit status):
+	* src/utils/hpftodit/hpftodit.1.man (Exit status):
+	* src/utils/indxbib/indxbib.1.man (Exit status):
+	* src/utils/lkbib/lkbib.1.man (Exit status):
+	* src/utils/lookbib/lookbib.1.man (Exit status):
+	* src/utils/tfmtodit/tfmtodit.1.man (Exit status):
+	* src/utils/xtotroff/xtotroff.1.man (Exit status): Add section.
+
+	* NEWS: Add item.
+
+2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.c (device_request): Drop declaration of
 	unused variable (detritus from an attempt to finish Savannah
 	#63074).

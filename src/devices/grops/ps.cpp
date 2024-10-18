@@ -1861,7 +1861,7 @@ int main(int argc, char **argv)
       break;
     case '?':
       usage(stderr);
-      exit(1);
+      exit(2);
       break;
     default:
       assert(0);

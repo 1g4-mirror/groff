@@ -9024,7 +9024,7 @@ int main(int argc, char **argv)
       break;
     case '?':
       usage(stderr, argv[0]);
-      exit(1);
+      exit(2);
       break;		// never reached
     default:
       assert(0 == "unhandled case of command-line option");

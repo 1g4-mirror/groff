@@ -555,6 +555,21 @@ The default thickness is
 .
 .
 .\" ====================================================================
+.SH "Exit status"
+.\" ====================================================================
+.
+.I \%grodvi
+exits with
+.RB status\~ 0
+on successful operation,
+.RB status\~ 2
+if the program cannot interpret its command-line arguments,
+and
+.RB status\~ 1
+if it encounters an error during operation.
+.
+.
+.\" ====================================================================
 .SH Environment
 .\" ====================================================================
 .
