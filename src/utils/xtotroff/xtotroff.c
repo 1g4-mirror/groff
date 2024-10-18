@@ -1,4 +1,4 @@
-/* Copyright (C) 1992-2022 Free Software Foundation, Inc.
+/* Copyright (C) 1992-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -293,6 +293,7 @@ int main(int argc, char **argv)
 
   program_name = argv[0];
 
+  opterr = 0;
   while ((opt = getopt_long(argc, argv, "d:gr:s:v", long_options,
 			    NULL)) != EOF) {
     switch (opt) {
@@ -317,6 +318,8 @@ int main(int argc, char **argv)
       xtotroff_exit(EXIT_SUCCESS);
       break;
     case '?':
+      fprintf(stderr, "%s: unrecognized command-line option '%c'\n",
+	      program_name, (char) optopt);
       usage(stderr);
       xtotroff_exit(2);
       break;

@@ -1,5 +1,10 @@
 2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/xtotroff/xtotroff.c (main): Emit our own diagnostic
+	for an invalid command-line option.
+
+2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/pfbtops/pfbtops.c (main): Emit our own diagnostic
 	for an invalid command-line option.
 
