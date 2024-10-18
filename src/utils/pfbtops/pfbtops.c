@@ -1,4 +1,4 @@
-/* Copyright (C) 1992-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1992-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -180,7 +180,9 @@ int main(int argc, char **argv)
 
   program_name = argv[0];
 
-  while ((opt = getopt_long(argc, argv, "v", long_options, NULL)) != EOF) {
+  opterr = 0;
+  while ((opt = getopt_long(argc, argv, "v", long_options, NULL))
+	 != EOF) {
     switch (opt) {
     case 'v':
       printf("GNU pfbtops (groff) version %s\n", Version_string);
@@ -191,6 +193,8 @@ int main(int argc, char **argv)
       exit(EXIT_SUCCESS);
       break;
     case '?':
+      fprintf(stderr, "%s: error: unrecognized command-line option"
+	      " '%c'\n", program_name, (char) optopt);
       usage(stderr);
       exit(2);
       break;
