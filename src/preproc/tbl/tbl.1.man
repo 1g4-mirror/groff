@@ -1778,6 +1778,8 @@ _
 .RE
 .
 .
+.br
+.ne 2v
 .P
 These dummy columns have zero width and are therefore invisible;
 unfortunately they usually don't work as intended on terminal devices.
@@ -1800,6 +1802,11 @@ _
 .SH Examples
 .\" ====================================================================
 .
+.if t \{\
+.  \" Unstrand line.  What sins we commit for attractive page layout...
+.  nr old-PD \n[PD]
+.  nr PD 0.35v
+.\}
 It can be easier to acquire the language of
 .I tbl \" generic
 through examples than formal description,
@@ -1897,6 +1904,11 @@ LN.
 Total;\[ti]24.4
 .TE
 .RE
+.if t \{\
+.  \" Undo kludge.
+.  nr PD \n[old-PD]u
+.  rr old-PD
+.\}
 .
 .
 .br
