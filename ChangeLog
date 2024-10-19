@@ -1,5 +1,16 @@
 2024-10-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* PROBLEMS: Document macOS/Homebrew/uchardet issue.  Add item
+	and document workaround under "groff 1.22.4" because it likely
+	affected that release as well; Bertrand added uchardet as an
+	optional dependency in 2017, and the next groff release was in
+	December 2018.
+
+	Fixes <https://savannah.gnu.org/bugs/?66143>.  Thanks to Sven
+	Schober for the report and for determining the workaround.
+
+2024-10-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (troff_output_file::trailer): Clarify
 	new warning diagnostic when `-o` option given but no output
 	pages lie within the requested range.

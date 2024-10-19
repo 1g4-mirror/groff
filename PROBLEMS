@@ -971,6 +971,21 @@ future release of gnulib to do so.
 
 [groff 1.22.4]
 
+* I'm building groff for Homebrew on macOS, and the build does not find
+  the `uchardet` library even though I know it's installed.
+
+  groff and Homebrew have different ideas about where to find the
+  "uchardet.h" header file (because its API is undocumented), and this
+  causes groff's "configure" script to not find the library.  To work
+  around the problem, tell groff's "configure" script that uchardet
+  support is desired, and where to find the header file.
+
+  $  ../configure --with-uchardet CPPFLAGS=-I/opt/homebrew/include
+
+  Thanks to Sven Schober for researching this issue.
+
+----------------------------------------------------------------------
+
 * When compiling on NetBSD, make issues warnings like
 
   Warning: line 28: Unable to locate font(s)
