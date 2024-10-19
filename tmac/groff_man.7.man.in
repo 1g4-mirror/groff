@@ -1012,7 +1012,11 @@ _endif()dnl
 .\" ====================================================================
 .
 _ifnotstyle()dnl
-.if t .nr PD 0.3125v \" Unstrand line.  Oh, the shame.
+.if t \{\
+.  \" Unstrand line.  What sins we commit for attractive page layout...
+.  nr old-PD \n[PD]
+.  nr PD 0.3125v
+.\}
 _endif()dnl
 Use
 .B .SY
@@ -1107,7 +1111,11 @@ call is reused by the next
 .B .SY
 call instead of being computed.
 _ifnotstyle()dnl
-.if t .nr PD 0.4v \" Undo kludge.
+.if t \{\
+.  \" Undo kludge.
+.  nr PD \n[old-PD]u
+.  rr old-PD
+.\}
 _endif()dnl
 _ifstyle()dnl
 .
@@ -4501,9 +4509,9 @@ _endif()dnl
 .SH Authors
 .\" ====================================================================
 .
-The initial GNU implementation of the
+James Clark wrote the initial GNU implementation of the
 .I man
-macro package was written by James Clark. \" by 1.01
+macro package.  \" by 1.01
 .
 Later,
 .MT wl@\:gnu\:.org
