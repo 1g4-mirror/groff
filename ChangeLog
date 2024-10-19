@@ -1,3 +1,11 @@
+2024-10-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (doc/groff-man-pages.pdf)
+	(doc/groff-man-pages.utf8.txt): Run groff with "-K utf-8"
+	instead of "-K latin-1" to correct Unicode mojibake now that
+	groff_mmse(7) has been recoded to UTF-8.  Continues commit
+	4fc7d977dd, 14 October.
+
 2024-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Revise exit status computation.
