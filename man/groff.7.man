@@ -1676,7 +1676,8 @@ again,
 and
 .BR \|\[rs]n ).
 .
-In no case can an escape sequence parameter contain a newline.
+In no case can an escape sequence parameter contain an unescaped
+newline.
 .\" As with requests, use of some escape sequences in source documents
 .\" may interact poorly with a macro package you use; consult its
 .\" documentation to learn of ``safe'' sequences or alternative

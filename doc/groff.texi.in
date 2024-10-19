@@ -7073,9 +7073,9 @@ of the foregoing conventions (@code{\s}), designate their own
 termination sequence (@code{\?}), consume input until the next newline
 (@code{\!}, @code{\"}, @code{\#}), or support an additional modifier
 character (@code{\s} again, and @code{\n}).  In no case can an escape
-sequence parameter contain a newline.  As with requests, use of some
-escape sequences in source documents may interact poorly with a macro
-package you use; consult its documentation to learn of ``safe''
+sequence parameter contain an unescaped newline.  As with requests, use
+of some escape sequences in source documents may interact poorly with a
+macro package you use; consult its documentation to learn of ``safe''
 sequences or alternative facilities it provides to achieve the desired
 result.
 
