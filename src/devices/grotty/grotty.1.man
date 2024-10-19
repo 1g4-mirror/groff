@@ -289,7 +289,7 @@ There is therefore no need to filter its output through
 .SS "Device extension commands"
 .\" ====================================================================
 .
-.I grops
+.I grotty
 recognizes a device extension command produced by the
 .I groff
 request
