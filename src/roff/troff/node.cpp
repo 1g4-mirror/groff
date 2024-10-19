@@ -1613,7 +1613,7 @@ void troff_output_file::trailer(vunits page_length)
     }
   }
   else
-    warning(WARN_RANGE, "no pages in output page selection list");
+    warning(WARN_RANGE, "no pages match output page selection list");
   put("x stop\n");
 }
 

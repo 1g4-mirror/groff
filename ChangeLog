@@ -1,5 +1,11 @@
 2024-10-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (troff_output_file::trailer): Clarify
+	new warning diagnostic when `-o` option given but no output
+	pages lie within the requested range.
+
+2024-10-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (doc/groff-man-pages.pdf)
 	(doc/groff-man-pages.utf8.txt): Run groff with "-K utf-8"
 	instead of "-K latin-1" to correct Unicode mojibake now that
