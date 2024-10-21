@@ -4988,7 +4988,7 @@ see
 .ne 7v
 .TP
 .B Hi
-configures the indentation of text after headings.
+selects an indentation policy for text formatted after headings.
 .
 It does not affect \[lq]run-in\[rq] headings.
 .
@@ -5381,7 +5381,7 @@ except when
 .B Pi
 configures the indentation
 (in ens)
-applied to first line of an unnumbered paragraph that has such
+applied to the first line of an unnumbered paragraph that has such
 (see
 .BR P );
 and the text indentation of non-enumerated list items;
