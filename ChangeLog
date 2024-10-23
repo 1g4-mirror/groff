@@ -1,5 +1,11 @@
 2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/sv.tmac: Spell string translations using groff special
+	character escape sequences instead of Latin-1 code points; this
+	way they work with a document that uses them no matter what its
+	own encoding.
+
+2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 	* man/groff.7.man:
 	* man/groff_diff.7.man:
 	* src/preproc/eqn/eqn.1.man:
