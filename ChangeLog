@@ -155,6 +155,9 @@
 	* src/devices/gropdf/gropdf.pl: Look for single letter
 	followed by '-'.
 
+	Fixes <https://savannah.gnu.org/bugs/?66076>.  Thanks to наб for
+	the report.
+
 2024-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/xditview/xditview.c (NewFile): Fix code style
@@ -306,8 +309,8 @@
 	* src/devices/gropdf/gropdf.pl: Don't use perlmagick to embed
 	PDFs
 
-	Fixes <https://savannah.gnu.org/bugs/index.php?66333>. Thanks
-	to Branden for the report.
+	Fixes <https://savannah.gnu.org/bugs/?66333>.  Thanks to Branden
+	for the report.
 
 2024-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -4493,9 +4496,8 @@
 	and end angle. If arc describes a straight line, use line segment
 	rather than bezier curve. (grops does this as well)
 
-	Fixes https://savannah.gnu.org/bugs/index.php?65901
-
-	Thanks to Morten Bo Johansen for reporting this issue.
+	Fixes <https://savannah.gnu.org/bugs/?65901>.  Thanks to Morten
+	Bo Johansen for reporting this issue.
 
 2024-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -5823,6 +5825,8 @@
 	and bear in mind that you can use the mdoc.local file to
 	customize the font used to render nearly any mdoc(7) macro.
 	This mechanism has been in place since 1992.
+
+	Fixes <https://savannah.gnu.org/bugs/?62926>.
 
 2024-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
