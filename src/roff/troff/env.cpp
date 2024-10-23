@@ -3465,12 +3465,6 @@ void environment::print_env()
   //     tab_field_spaces, tab_precedes_field
   //   composite
   //
-  errprint("  previous line length: %1u\n",
-	   prev_line_length.to_units());
-  errprint("  line length: %1u\n", line_length.to_units());
-  errprint("  previous title line length: %1u\n",
-	   prev_title_length.to_units());
-  errprint("  title line length: %1u\n", title_length.to_units());
   if (!in_nroff_mode) {
     errprint("  previous type size: %1p (%2s)\n",
 	     prev_size.to_points(), prev_size.to_scaled_points());
@@ -3480,19 +3474,23 @@ void environment::print_env()
 	     prev_requested_size);
     errprint("  requested type size: %1s\n", requested_size);
     font_size::dump_size_list();
+    errprint("  previous default family: '%1'\n",
+	     prev_family->nm.contents());
+    errprint("  default family: '%1'\n", family->nm.contents());
   }
   errprint("  previous font selection: %1 ('%2')\n", prev_fontno,
 	   get_font_name(prev_fontno, this).contents());
   errprint("  font selection: %1 ('%2')\n", fontno,
 	   get_font_name(fontno, this).contents());
-  if (!in_nroff_mode) {
-    errprint("  previous default family: '%1'\n",
-	     prev_family->nm.contents());
-    errprint("  default family: '%1'\n", family->nm.contents());
-  }
   errprint("  space size: %1/12 of font space width\n", space_size);
   errprint("  sentence space size: %1/12 of font space width\n",
 	   sentence_space_size);
+  errprint("  previous line length: %1u\n",
+	   prev_line_length.to_units());
+  errprint("  line length: %1u\n", line_length.to_units());
+  errprint("  previous title line length: %1u\n",
+	   prev_title_length.to_units());
+  errprint("  title line length: %1u\n", title_length.to_units());
   errprint("  previous line interrupted/continued: %1\n",
 	   prev_line_interrupted ? "yes" : "no");
   errprint("  filling: %1\n", is_filling ? "on" : "off");

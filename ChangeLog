@@ -1,5 +1,12 @@
 2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::print_env): Rearrange
+	output.  Lead with all of the troff-specific environment data
+	{if not in nroff mode}.  Report inter-word and inter-sentence
+	space sizes after font data and before line length data.
+
+2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (font_size::dump_size_list): Fix
 	incorrect unit in reported list--it should be "s", not "z":
 	these are not scaled/subdivisible points but the subdivided
