@@ -1,5 +1,15 @@
 2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (font_size::dump_size_list): Fix
+	incorrect unit in reported list--it should be "s", not "z":
+	these are not scaled/subdivisible points but the subdivided
+	units themselves.
+
+	* src/roff/groff/tests/sizes-request-works.sh: Update text
+	expectations.
+
+2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor, renaming the font size "table" to
 	the font size "list"; it's not a two-dimensional structure.
 
