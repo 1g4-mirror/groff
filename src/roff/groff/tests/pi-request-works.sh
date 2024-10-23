@@ -20,7 +20,7 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
-echo "checking that 'pi' request works" >&2
+#echo "checking that 'pi' request works" >&2
 output=$(printf '.pi sed s/^/#/\nhello\n' | "$groff" -UZ)
 echo "$output"
 echo "$output" | grep -Eqx '^#t *hello'
