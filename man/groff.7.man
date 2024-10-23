@@ -2858,12 +2858,12 @@ compatibility mode per Boolean expression
 .
 .TPx
 .REQ .cs f
-Disable constant-width glyping spacing mode for font
+Disable constant-width glyph spacing mode for font
 .I f.
 .
 .TPx
 .REQ .cs "f n"
-Enable constant-width glyping spacing mode for font
+Enable constant-width glyph spacing mode for font
 .I f
 at
 .IR n /36
@@ -2871,7 +2871,7 @@ ems.
 .
 .TPx
 .REQ .cs "f n p"
-Enable constant-width glyping spacing mode for
+Enable constant-width glyph spacing mode for
 .I font
 at
 .IR n /36
@@ -8233,7 +8233,7 @@ They differ from that construction in that the contents of the string or
 macro
 .I name
 are not interpreted;
-futher,
+further,
 .I name
 may be a macro and thus contain newlines.
 .

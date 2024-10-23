@@ -1,3 +1,13 @@
+2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* man/groff.7.man:
+	* man/groff_diff.7.man:
+	* src/preproc/eqn/eqn.1.man:
+	* tmac/groff_mdoc.7.man: Fix spelling errors.
+
+	Fixes <https://savannah.gnu.org/bugs/?66371> (2/2).  Thanks to
+	Bjarni Ingi Gislason for the report.
+
 2024-10-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* PROBLEMS: Document macOS/Homebrew/uchardet issue.  Add item

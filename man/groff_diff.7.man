@@ -1529,7 +1529,7 @@ permitting inclusion of leading spaces.
 Such arguments are labeled
 .I contents,
 are read in copy mode,
-and cosume the rest of the input line.
+and consume the rest of the input line.
 .
 .
 .TP 8n \" ".break" + 2n
@@ -2995,7 +2995,7 @@ The formatter's default is
 .B 1
 for AT&T
 .I troff \" AT&T
-compatiblity.
+compatibility.
 .
 .I groff
 locale files generally set a more appropriate one;

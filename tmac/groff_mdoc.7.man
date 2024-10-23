@@ -1946,7 +1946,7 @@ Typically,
 in a
 .Dq Synopsis
 section,
-the function delcaration will begin the line.
+the function declaration will begin the line.
 .
 If more than one function is presented in the
 .Dq Synopsis
