@@ -657,7 +657,7 @@ extern bool mount_style(int, symbol);
 extern int is_good_fontno(int);
 extern int symbol_fontno(symbol);
 extern int next_available_font_position();
-extern void init_size_table(int *);
+extern void init_size_list(int *);
 extern int get_underline_fontno();
 
 class output_file {

@@ -222,7 +222,7 @@ void widow_control_request()
 
 /* font_size functions */
 
-size_range *font_size::size_table = 0 /* nullptr */;
+size_range *font_size::size_list = 0 /* nullptr */;
 int font_size::nranges = 0;
 
 extern "C" {
@@ -234,31 +234,31 @@ int compare_ranges(const void *p1, const void *p2)
 
 }
 
-void font_size::init_size_table(int *sizes)
+void font_size::init_size_list(int *sizes)
 {
   nranges = 0;
   while (sizes[nranges * 2] != 0)
     nranges++;
   assert(nranges > 0);
-  size_table = new size_range[nranges];
+  size_list = new size_range[nranges];
   for (int i = 0; i < nranges; i++) {
-    size_table[i].min = sizes[i * 2];
-    size_table[i].max = sizes[i * 2 + 1];
+    size_list[i].min = sizes[i * 2];
+    size_list[i].max = sizes[i * 2 + 1];
   }
-  qsort(size_table, nranges, sizeof(size_range), compare_ranges);
+  qsort(size_list, nranges, sizeof(size_range), compare_ranges);
 }
 
-void font_size::dump_size_table()
+void font_size::dump_size_list()
 {
   int lo, hi;
-  errprint("  valid type size table for selected font: ");
+  errprint("  valid type size list for selected font: ");
   if (nranges == 0)
     errprint(" empty!");
   else {
     bool need_comma = false;
     for (int i = 0; i < nranges; i++) {
-      lo = size_table[i].min;
-      hi = size_table[i].max;
+      lo = size_list[i].min;
+      hi = size_list[i].max;
       if (need_comma)
 	errprint(", ");
       if (lo == hi)
@@ -275,19 +275,19 @@ void font_size::dump_size_table()
 font_size::font_size(int sp)
 {
   for (int i = 0; i < nranges; i++) {
-    if (sp < size_table[i].min) {
-      if (i > 0 && size_table[i].min - sp >= sp - size_table[i - 1].max)
-	p = size_table[i - 1].max;
+    if (sp < size_list[i].min) {
+      if (i > 0 && size_list[i].min - sp >= sp - size_list[i - 1].max)
+	p = size_list[i - 1].max;
       else
-	p = size_table[i].min;
+	p = size_list[i].min;
       return;
     }
-    if (sp <= size_table[i].max) {
+    if (sp <= size_list[i].max) {
       p = sp;
       return;
     }
   }
-  p = size_table[nranges - 1].max;
+  p = size_list[nranges - 1].max;
 }
 
 int font_size::to_units()
@@ -1403,7 +1403,7 @@ void override_sizes()
     sizes[i++] = upper;
     p = strtok(0, " \t");
   }
-  font_size::init_size_table(sizes);
+  font_size::init_size_list(sizes);
 }
 
 void space_size()
@@ -3479,7 +3479,7 @@ void environment::print_env()
     errprint("  previous requested type size: %1s\n",
 	     prev_requested_size);
     errprint("  requested type size: %1s\n", requested_size);
-    font_size::dump_size_table();
+    font_size::dump_size_list();
   }
   errprint("  previous font selection: %1 ('%2')\n", prev_fontno,
 	   get_font_name(prev_fontno, this).contents());

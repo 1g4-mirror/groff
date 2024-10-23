@@ -24,7 +24,7 @@ struct size_range {
 };
 
 class font_size {
-  static size_range *size_table;
+  static size_range *size_list;
   static int nranges;
   int p;
 public:
@@ -35,8 +35,8 @@ public:
   int to_units();
   int operator==(font_size);
   int operator!=(font_size);
-  static void init_size_table(int *sizes);
-  static void dump_size_table();
+  static void init_size_list(int *sizes);
+  static void dump_size_list();
 };
 
 inline font_size::font_size() : p(0)

@@ -9049,7 +9049,7 @@ int main(int argc, char **argv)
   if (!have_explicit_default_family && (font::family != 0 /* nullptr */)
       && *font::family != '\0')
     default_family = symbol(font::family);
-  font_size::init_size_table(font::sizes);
+  font_size::init_size_list(font::sizes);
   int i;
   int j = 1;
   if (font::style_table)

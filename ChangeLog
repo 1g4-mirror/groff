@@ -1,5 +1,23 @@
 2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor, renaming the font size "table" to
+	the font size "list"; it's not a two-dimensional structure.
+
+	* src/roff/troff/env.h (class font_size): Rename member variable
+	`size_table` to `size_list`.  Rename member functions
+	`init_size_table()` and `dump_size_table()` to
+	`init_size_list()` and `dump_size_list()`.
+	* src/roff/troff/env.cpp: Update definition, call, and
+	derefernce sites in the global scope and...
+	(font_size::init_size_list, font_size::dump_size_list):
+	(font_size::font_size, override_sizes, environment::print_env):
+	...here.
+	* src/roff/troff/input.cpp (main): Update call site (setting up
+	size list for font used in default environment at startup).
+	* src/roff/troff/node.h: Update external declaration.
+
+2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/sv.tmac: Spell string translations using groff special
 	character escape sequences instead of Latin-1 code points; this
 	way they work with a document that uses them no matter what its
