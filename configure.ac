@@ -1,5 +1,5 @@
 # Autoconf configuration file for groff.
-# Copyright (C) 1989-2023 Free Software Foundation, Inc.
+# Copyright (C) 1989-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -25,12 +25,8 @@ AC_INIT([GNU roff],
 
 AC_PREREQ([2.64])
 
-# SHORT_VERSION contains only the number of REVISION before the first
-# '.'; e.g., if REVISION is '3.real.434-5aafd' then SHORT_VERSION is
-# 'x.yy.3', where x and yy are MAJOR_VERSION and MINOR_VERSION,
-# respectively.
-AC_SUBST([SHORT_VERSION],
-	m4_bregexp(AC_PACKAGE_VERSION,[^\(\w+\.\w+\.\w+\).*$],[\1]))
+GROFF_MAKE_SHORT_VERSION
+GROFF_CHECK_VERSION_FORMAT
 
 # Directories where the helper scripts should be found. This must be
 # consistent with the variable build_aux in bootstrap.conf.

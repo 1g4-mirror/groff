@@ -1,5 +1,5 @@
 # Autoconf macros for groff.
-# Copyright (C) 1989-2023 Free Software Foundation, Inc.
+# Copyright (C) 1989-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -15,6 +15,40 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Construct a short form of the groff version string.
+#
+# SHORT_VERSION contains only the number of REVISION before the first
+# '.'; e.g., if REVISION is '3.real.434-5aafd' then SHORT_VERSION is
+# 'x.yy.3', where x and yy are MAJOR_VERSION and MINOR_VERSION,
+# respectively.
+AC_DEFUN([GROFF_MAKE_SHORT_VERSION], [
+  AC_SUBST([SHORT_VERSION],
+	   m4_bregexp(AC_PACKAGE_VERSION,[^\(\w+\.\w+\.\w+\).*$],[\1]))
+])
+
+# Verify that the package versioning scheme is useful; GNU troff
+# requires a strictly numeric one in the first three components x.y.z.
+
+AC_DEFUN([GROFF_CHECK_VERSION_FORMAT], [
+  AC_REQUIRE([GROFF_MAKE_SHORT_VERSION])
+  groff_version_format_validity=invalid
+  AC_MSG_CHECKING([checking that groff version string has valid format])
+  if expr "$SHORT_VERSION" : '[[0-9]]\+\.[[0-9]]\+\.[[0-9]]\+' \
+    > /dev/null
+  then
+    groff_version_format_validity=valid
+  fi
+  AC_MSG_RESULT([$SHORT_VERSION $groff_version_format_validity])
+
+  if test "$groff_version_format_validity" = invalid
+  then
+    AC_MSG_NOTICE([groff's version string must start with three decimal
+integers separated by dots.  "$SHORT_VERSION" does not match.
+    ])
+    AC_MSG_ERROR([Aborting.], 1)
+  fi
+])
 
 # Locate a print spooler for certain output formats.
 
