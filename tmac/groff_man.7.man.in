@@ -4379,7 +4379,7 @@ that precedes it.
 .IP
 The
 .B .SH
-or
+and
 .B .SS
 sectioning macros clear relative insets;
 .B .RE
