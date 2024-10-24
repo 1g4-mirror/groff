@@ -19,7 +19,7 @@ troff
    since groff 1.02 (June 1991) at the latest.
 
 *  The `mso` request no longer attempts to open a macro file named, say,
-   "tmac.s" if "s.tmac" was specified in the argument and not found, or
+   "tmac.s" if "s.tmac" was specified as the argument and not found, or
    vice versa.  This feature was a convenience for some old AT&T troff
    installations, but few of those remain in the field, and of those
    that we know to survive, neither (DWB 3.3 and Solaris 10) uses a
@@ -322,7 +322,7 @@ Macro packages
    AT&T Unix System III manual (June 1980), the text area was 6.5 by 10
    inches (on typesetters).  When formatting for terminals with
    continuous rendering disabled (by default, it is enabled), the page
-   footer now sets 1 line higher than before.
+   footer now sets one line higher than before.
 
 *  The an (man) and doc (mdoc) macro packages have added additional
    registers `BP`, `PO`, and `TS` for user configuration of man page
@@ -371,7 +371,7 @@ Macro packages
    `Er`, `Fa`, `Fd`, `Fl`, `Fn`, `Ft`, `Ic`, `Li`, and `Nm` macros.
    This change was made to reduce the ambiguity of space widths when
    typesetting the monospaced Courier and proportional Times fonts
-   adjacently.  Bear in mind that you can use the mdoc.local file to
+   adjacently.  Bear in mind that you can use the "mdoc.local" file to
    customize the font used to render nearly any mdoc(7) macro's
    arguments; this mechanism has been in place since 1992.
 
