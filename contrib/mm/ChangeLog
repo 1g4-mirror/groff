@@ -1,5 +1,16 @@
 2024-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (let@print-head): Accept new second argument indicating
+	whether a blank line is desired before formatting the date.
+	(let@head_BL): Call `let@print-head` with that second argument.
+	This is more consistent with DWB 3.3 mm behavior.
+
+	* tests/artifacts/letter.BL: Update.
+
+	Fixes <https://savannah.gnu.org/bugs/?66380>.
+
+2024-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #66380 (blocked letters should put a
 	blank line before the date).
 

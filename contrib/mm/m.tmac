@@ -3776,7 +3776,7 @@ undefined
 ..
 .de let@head_BL
 .rm let@header
-.let@print-head 1
+.let@print-head 1 1
 ..
 .de let@sg_BL
 .ne 5v
@@ -3850,7 +3850,7 @@ undefined
 .\"--------------------------------------
 .\" format everything up to the body text of a letter
 .\"
-.\" let@print-head [want-indent]
+.\" let@print-head [want-indent] [want-space-before-date-line]
 .de let@print-head
 .nf
 .sp |11
@@ -3859,6 +3859,7 @@ undefined
 .ie d let@wa-div .let@wa-div
 .el              .sp 3
 .\" ---- date
+.if '1'\\$2' .sp
 \\*[cov*new-date]
 .sp
 .if '1'\\$1' .if !d let*lo-CN .if !d let*lo-RN .sp 2
