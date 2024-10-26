@@ -3848,31 +3848,33 @@ undefined
 .sp 2
 ..
 .\"--------------------------------------
-.\" Print the letter-head
+.\" format everything up to the body text of a letter
+.\"
+.\" let@print-head [want-indent]
 .de let@print-head
 .nf
 .sp |11
 .if '1'\\$1' .in (u;\\n[.l]/2)
-.\" ---- WA
+.\" ---- writer's (name and) address
 .ie d let@wa-div .let@wa-div
 .el              .sp 3
-.\" ---- datum
+.\" ---- date
 \\*[cov*new-date]
 .sp
 .if '1'\\$1' .if !d let*lo-CN .if !d let*lo-RN .sp 2
-.\" ---- Confidential
+.\" ---- confidential notation
 .if d let*lo-CN \{\
 .	ti 0
 .	ie !''\\*[let*lo-CN]' \\*[let*lo-CN]
 .	el \\*[LetCN]
 .	sp
 .\}
-.\" ---- Reference
+.\" ---- reference notation
 .if d let*lo-RN \{\
 \\*[LetRN] \\*[let*lo-RN]
 .	sp
 .\}
-.\" ---- IA
+.\" ---- recipient's (name and) address
 .sp
 .in 0
 .nr let*i 0 1
@@ -3881,19 +3883,19 @@ undefined
 \\*[let*ia-title!\\n[let*i]]
 .\}
 .if d let@ia-div .let@ia-div
-.\" ---- Attention
+.\" ---- attention notation
 .if d let*lo-AT \{\
 .	sp
 \\*[LetAT] \\*[let*lo-AT]
 .\}
-.\" ---- Salutation
+.\" ---- salutation
 .if !'\\*[let*type]'SP' .if d let*lo-SA \{\
 .	sp
 .	ti 0
 .	ie !''\\*[let*lo-SA]' \\*[let*lo-SA]
 .	el \\*[LetSA]
 .\}
-.\" ---- Subject
+.\" ---- subject notation
 .if d let*lo-SJ \{\
 .	ie '\\*[let*type]'SP' \{\
 .		sp 2
