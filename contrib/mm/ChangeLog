@@ -1,3 +1,11 @@
+2024-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Regression-test Savannah #66380 (blocked letters should put a
+	blank line before the date).
+
+	* tests/LT-BL-spaces-before-date.sh: Do it.
+	* mm.am (mm_TESTS): Run test.
+
 2024-10-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Trivially refactor.  Organize groff mm extensions
