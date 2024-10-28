@@ -42,8 +42,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 ..
 .\"------------
 .de cov@print-authors
-.ie !\\n[cov*au] .@error COVEND: no authors (AU) defined
-.el \{\
+.if \\n[cov*au] \{\
 .	SP
 .	nr cov*i 0 1
 .	while \\n+[cov*i]<=\\n[cov*au] \{\

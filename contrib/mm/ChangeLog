@@ -1,5 +1,11 @@
 2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/ms.cov (cov@print-authors): Stop erroring out if no authors
+	are defined; `AU` can be called simply to end title collection,
+	no authors need be specified, and nothing breaks if they aren't.
+
+2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Revamp debugging system.  The existing one was
 	undocumented except in vaguest terms, and this one remains so.
 	However, some broad principles are articulable.
