@@ -403,6 +403,10 @@ Macro packages
    argument in vees, instead of basic units, for consistency with the
    rest of the package.
 
+*  The m (mm) macro package's `ISODATE` macro (a GNU extension) is
+   deprecated, warns upon usage, and is slated for withdrawal in the
+   next release.  Assign to the new register `Isodate` instead.
+
 *  Similarly, the m (mm) macro package's `PIC` macro (a GNU extension)
    now interprets an argument to its `-I` option in ens instead of ems
    by default.
@@ -480,6 +484,9 @@ Macro packages
    paragraph to align it with the start of the paragraph text (not the
    tag/label) in the first, and resets the paragraph counter when the
    first- or second-level section heading number increments.
+
+*  The m (mm) macro package's `Iso` register is now named `Isodate` to
+   make its meaning less ambiguous.  The old name remains as an alias.
 
 *  The m (mm) macro package's `Rpe` register is now named `Rpej` for
    better symmetry with `Ej`.  The old name remains as an alias.

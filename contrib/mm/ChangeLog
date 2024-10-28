@@ -1,5 +1,23 @@
 2024-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac ([initialization]): Rename `Iso` register to `Isodate`
+	to make its meaning less ambiguous.  Retain `Iso` as an
+	undocumented alias.  Call `ND` to initialize date.
+	(ISODATE): Throw warning if called, but honor the instruction
+	{using existing internal macro `cov*set-date`}.
+	(ND): Accept leading space(s) in argument.  If no argument, call
+	`cov*set-date`.
+
+	* groff_mm.7.man (Macros) <ISODATE>: Delete.
+	(Strings) <DT>: Cross reference `Isodate` register, not
+	`ISODATE` macro or old `Iso` register.
+	(Registers) <Iso>: Replace this...
+	(Registers) <Isodate>: ...with this.  Recast.
+
+	Fixes <https://savannah.gnu.org/bugs/?66327>.
+
+2024-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac ([initialization], RP): Rename `Rpe` register to
 	`Rpej`, for better symmetry with `Ej` register.  Retain `Rpe` as
 	an undocumented alias.

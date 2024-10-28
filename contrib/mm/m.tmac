@@ -330,6 +330,9 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds H1txt \" empty
 .\" caption for the index
 .ds Index INDEX
+.\" use ISO 8601 date format
+.nr Isodate 0
+.aln Iso Isodate \" for groff <= 1.23 compatibility
 .\" flag for mkindex (XXX: undocumented: do we need this?)
 .if !r Idxf .nr Idxf 0
 .\" captions for displays
@@ -3508,14 +3511,17 @@ argument: '\\$2'
 .el          .ds cov*new-date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
 .\}
 ..
-.ISODATE 0
+.de ISODATE
+.@warning \\$0: macro is deprecated; define register 'Isodate' instead
+.cov*set-date \\$@
+..
 .als DT cov*new-date
 .de ND
 \\*[debug@dump-args]\\
-.ds cov*new-date \\$1
+.ie \\n[.$] .ds cov*new-date "\\$1\"
+.el         .cov*set-date \\n[Isodate]
 ..
-.\" switch to ISO-date if register Iso exist: YYYY-MM-DD
-.if r Iso .ISODATE 1
+.ND
 .\"-------------------
 .\" Save technical memorandum numbers.
 .de TM

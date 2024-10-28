@@ -2399,26 +2399,6 @@ without space between the arguments.
 .
 .
 .TP
-.BR ISODATE\~ [ 0 ]
-Use ISO\~8601 format for the date string
-.B DT
-used by some cover sheet and memorandum types;
-that is,
-.IR YYYY - MM - DD .
-.
-Must be called before
-.B ND
-to be effective.
-.
-If given an argument
-.RB of\~ 0,
-the traditional date format for the
-.I groff
-locale is used;
-this is also the default.
-.
-.
-.TP
 .BI LB\~ "text-indent mark-indent pad type"\~\c
 .RI [ mark-or-format \~[ pre-item-space \~[ pre-list-space ]]]
 Begin list.
@@ -4265,10 +4245,9 @@ see
 The
 .I groff
 locale determines its format,
-but see
-.B ISODATE
-and register
-.BR Iso .
+but register
+.B Isodate
+may override it.
 .
 .
 .TP
@@ -5116,15 +5095,17 @@ enables automatic hyphenation of words
 .
 .
 .TP
-.B Iso
-configures the use of ISO\~8601 date format
-if specified
-(with any value)
-on the command line;
-see
-.BR ISODATE .
+.B Isodate
+configures the use of ISO\~8601 date format;
+that is,
+.IR YYYY - MM - DD
+instead of the format specified by the localization file.
 .
-The default is determined by localization files.
+Call
+.B ND
+without arguments after updating its value
+(Boolean-valued;
+.BR 0 ).
 .
 .
 .TP
