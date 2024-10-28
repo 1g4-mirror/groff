@@ -183,12 +183,12 @@ macro is implemented only for memorandum type 4.
 The
 .I grap
 preprocessor is not explicitly supported;
-no
+.I "groff mm"
+defines no
 .B G1
-and
+or
 .B G2
-macros
-are defined.
+macros.
 .
 .
 .IP \[bu]
@@ -351,8 +351,8 @@ document with the command
 This package can also be localized by site or territory;
 for example,
 .I @MACRODIR@/\:@TMAC_M_PREFIX@mse\:.tmac
-illustrates how to adapt the output to a national standard using its ISO
-3166 territory code.
+illustrates how to adapt the output to a national standard using its
+ISO\~3166 territory code.
 .
 Such a package can define a string that causes a macro file
 .IR @MACRODIR@/\:mm/\:\% territory _locale
@@ -373,9 +373,9 @@ Much
 .I mm
 behavior can be configured by registers and strings.
 .
-A register is assigned with the
+The
 .B nr
-request.
+request assigns a value to a register.
 .
 .
 .RS
@@ -395,11 +395,11 @@ and
 .IR n \~is
 the value to be assigned.
 .
-.IR n \~can
-be prefixed with a plus or minus sign if incrementation or
-decrementation (respectively) of the register's existing value
-.RI by\~ n
-is desired.
+Prefixing
+.I n
+with
+a plus or minus sign increments or decrements (respectively) its
+existing value.
 .
 If assignment of a (possibly) negative
 .IR n \~is
@@ -409,7 +409,7 @@ further prefix it with a zero or enclose it in parentheses.
 If
 .IR i \~is
 specified,
-the register is automatically modified
+the register's value automatically changes
 .RI by \~i
 prior to interpolation if a plus or minus sign is included in the escape
 sequence as follows.
@@ -431,7 +431,21 @@ sequence.
 .
 .
 .P
-Strings are defined with the
+Many of the registers
+.I mm
+provides are as Boolean-valued,
+meaning that they are considered \[lq]true\[rq]
+(on,
+enabled)
+when they have a positive value,
+and \[lq]false\[rq]
+(off,
+disabled)
+otherwise.
+.
+.
+.P
+Define strings with the
 .B ds
 request.
 .
@@ -458,7 +472,7 @@ To include leading spaces in
 .IR contents ,
 prefix it with a double quote.
 .
-Strings are interpolated with the
+Interpolate strings with the
 .B \[rs]*
 escape sequence.
 .
@@ -745,9 +759,10 @@ or
 macros.
 .
 See
-.B MT
+.BR MT ,
+.BR COVER ,
 and
-.BR COVER .
+.MR groff_tmac @MAN5EXT@ .
 .
 .
 .TP
@@ -1798,7 +1813,7 @@ the footnote marker in the body text must be explicitly written.
 .RI [ string ]
 Interpolate
 .IR ref-name 's
-heading number,
+heading mark,
 or,
 if
 .I string
@@ -1875,7 +1890,7 @@ of the form
 .IR a . b . c .\|.\|.,
 with up to fourteen levels of nesting.
 .
-Each level's number increases automatically with each
+Each level's number increments automatically with each
 .B H
 call and is reset to zero when a more significant
 .I level
@@ -1963,7 +1978,7 @@ sets a threshold within which vertical space follows it.
 .
 If the heading level is above both of these,
 and the paragraph is not numbered,
-.I "groff mm"
+.I mm
 produces a
 .IR "run-in heading" ;
 paragraph text follows on the same output line.
@@ -1977,7 +1992,7 @@ Threshold register
 .B Hc
 permits centering;
 .I mm
-centers a heading with a level below both of the
+centers a heading with a level within both of the
 .B Hb
 and
 .B Hc
@@ -1987,7 +2002,7 @@ thresholds.
 .IP
 .I Heading typeface and size.
 .
-The fonts used for heading numbers and titles at each level are
+The fonts used for heading marks and titles at each level are
 configured by the
 .B HF
 string.
@@ -2166,11 +2181,10 @@ It could be used to change the page header to include a section heading.
 .
 .TP
 .BI HC\~ \fR[\fPhyphenation-character\fR]\fP
-Set hyphenation character.
-.
-The default is \[lq]\[rs]%\[rq].
-.
-Resets to the default if called without argument.
+Set hyphenation character,
+selecting the default,
+\[lq]\[rs]%\[rq],
+if called without argument.
 .
 .
 .TP
@@ -2200,7 +2214,7 @@ an optional
 .
 The heading is treated as a numbered heading of the level stored in
 .RB register\~ Hu ,
-but no heading number is output;
+but no heading mark is output;
 .RB see\~ H .
 .
 .
@@ -4514,7 +4528,7 @@ instead of \[lq]chapter\[rq].
 .
 .TP
 .B Qrfh
-stores the heading number corresponding to the most recent
+stores the heading mark corresponding to the most recent
 .B \%GETR
 call.
 .
@@ -4624,16 +4638,6 @@ The default
 Default register values,
 where meaningful,
 are shown in parentheses.
-.
-Many are also marked as Boolean-valued,
-meaning that they are considered \[lq]true\[rq]
-(on,
-enabled)
-when they have a positive value,
-and \[lq]false\[rq]
-(off,
-disabled)
-otherwise.
 .
 .
 .TP 9n \" "Letwam" + 2n + hand-tuned for PDF
