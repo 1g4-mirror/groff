@@ -112,6 +112,7 @@ bool is_writing_html = false;
 static int suppression_level = 0;	// depth of nested \O escapes
 
 bool in_nroff_mode = false;
+bool is_device_ps_or_pdf = false;
 
 // Keep track of whether \f, \F, \D'F...', \H, \m, \M, \O[345], \R, \s,
 // or \S has been processed in token::next().
@@ -9034,6 +9035,9 @@ int main(int argc, char **argv)
   if (want_unsafe_requests)
     mac_path = &macro_path;
   set_string(".T", device);
+  // TODO: Kill this off in groff 1.25.  See env.cpp.
+  if ((strcmp("pdf", device) == 0) || strcmp("ps", device) == 0)
+    is_device_ps_or_pdf = true;
   init_charset_table();
   init_hpf_code_table();
   if (0 /* nullptr */ == font::load_desc())

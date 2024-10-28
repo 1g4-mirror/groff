@@ -1,3 +1,32 @@
+2024-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Deprecate rather than withdrawing support for AT&T font names,
+	on "pdf" and "ps" devices only.
+
+	* tmac/ps.tmac: Restore font translations to groff font names.
+
+	* src/roff/troff/env.cpp: New global vector
+	`deprecated_font_identifiers` stores deprecated AT&T font names.
+	Add external declaration of `is_device_ps_or_pdf`.
+	(warn_if_font_name_deprecated): New function searches vector for
+	given symbol `nm` (a font name); if found, throws a warning in
+	category "font" and deletes the name from the vector.
+	(environment::set_font): If `is_device_ps_or_pdf`, call
+	`warn_if_font_name_deprecated()`.
+	(init_env_requests): Populate new vector.
+
+	* src/roff/troff/input.cpp: New global Boolean tracks whether
+	the output device is named "pdf" or "ps".  We need this because
+	"CW" is a valid, non-deprecated font name on the "dvi" device.
+	(main): Once the name of the output device is determined, update
+	`is_device_ps_or_pdf` if necessary.
+
+	* NEWS: Revise item.
+
+	Thanks to Deri James for the discussion; see
+	<https://lists.gnu.org/archive/html/groff/2024-10/msg00066.html>
+	and follow-ups.
+
 2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::print_env): Rearrange

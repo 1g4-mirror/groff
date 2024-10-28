@@ -185,22 +185,31 @@ Macro packages
    multi-line headings.  Thanks to Peter Schaffter.
 
 *  The device-specific macro files loaded by "troffrc" automatically on
-   startup, such as "ps.tmac" and "html.tmac", no longer perform font
-   translations for font names used by varieties of AT&T troff ('C',
-   'Hb', 'HX', and many others).  These names are not portable: in AT&T
-   troff, the font repertoire, like the special character repertoire,
-   was device-dependent.  Since groff 1.23.0, GNU troff diagnoses
-   attempts to use nonexistent font names.  We recommend addressing such
-   portability issues wherever suits you: (1) in a document, perhaps by
-   using `ie` and `el` requests and the `.g` register to test whether
-   the formatter claims support for groff extensions, then `ie` and `el`
-   again with the `F` groff conditional expression operator to check for
-   font availability, and performing font remappings with the groff
-   `ftr` request as desired; (2) doing so in your "troffrc" file; or (3)
-   by modifying these macro files similarly.  Users of the "dvi" and
-   "lbp" output devices should be aware that these devices don't supply
-   full families of monospaced fonts (and never have).  See grodvi(1)
-   and grolbp(1).
+   startup, such as "html.tmac", no longer perform font translations for
+   font names used by varieties of AT&T troff ('C', 'Hb', 'HX', and
+   several others).
+
+   These names are not portable: in AT&T troff, the font repertoire,
+   like the special character repertoire, was device-dependent.  Since
+   groff 1.23.0, GNU troff diagnoses attempts to use nonexistent font
+   names.  We recommend addressing such portability issues wherever
+   suits you: (1) in a document, perhaps by using `ie` and `el` requests
+   and the `.g` register to test whether the formatter claims support
+   for groff extensions, then `ie` and `el` again with the `F` groff
+   conditional expression operator to check for font availability, and
+   performing font remappings with the groff `ftr` request as desired;
+   (2) doing so in your "troffrc" file; or (3) by modifying these macro
+   files similarly.  Users of the "dvi" and "lbp" output devices should
+   be aware that these devices don't supply full families of monospaced
+   fonts (and never have).  See grodvi(1) and grolbp(1) for lists of
+   font names supported by each device.
+
+   The legacy names are retained for the "pdf" and "ps" devices for this
+   release; however, use of them prompts one warning in the "font"
+   category from the formatter per deprecated name.  We expect to
+   withdraw support for the names completely in the next groff release.
+   See gropdf(1) and grops(1) for lists of font names supported by each
+   device.
 
 *  Hyperlink support is now enabled by default on PDF and terminal
    devices for an (man) and doc (mdoc) documents.  Instructions and

@@ -39,6 +39,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h> // errno
 #include <math.h> // ceil()
 
+#include <vector>
+#include <algorithm> // find()
+
 symbol default_family("T");
 
 enum { ADJUST_LEFT = 0,
@@ -556,12 +559,32 @@ static node *configure_space_underlining(bool b)
   return new device_extension_node(m, 1);
 }
 
+// TODO: Kill this off in groff 1.25.
+std::vector<string> deprecated_font_identifiers;
+extern bool is_device_ps_or_pdf; // See input.cpp.
+
+static void warn_if_font_name_deprecated(symbol nm)
+{
+  const char *name = nm.contents();
+  std::vector<string>::iterator it
+    = find(deprecated_font_identifiers.begin(),
+	   deprecated_font_identifiers.end(), name);
+  if (it != deprecated_font_identifiers.end()) {
+    warning(WARN_FONT, "font name '%1' is deprecated", name);
+    // Warn only once for each name.
+    deprecated_font_identifiers.erase(it);
+  }
+}
+
 bool environment::set_font(symbol nm)
 {
   if (line_interrupted) {
     warning(WARN_FONT, "ignoring font selection on interrupted line");
     return true; // "no operation" is successful
   }
+  // TODO: Kill off in groff 1.25.
+  if (is_device_ps_or_pdf)
+    warn_if_font_name_deprecated(nm);
   if (nm == symbol("P") || nm.is_empty()) {
     if (family->make_definite(prev_fontno) < 0)
       return false;
@@ -4302,6 +4325,27 @@ void init_env_requests()
   register_dictionary.define("skw", new variable_reg(&skw_reg_contents));
   register_dictionary.define("ssc", new variable_reg(&ssc_reg_contents));
   register_dictionary.define("st", new variable_reg(&st_reg_contents));
+  // TODO: Kill the following off in groff 1.25.
+  deprecated_font_identifiers.push_back("AX");
+  deprecated_font_identifiers.push_back("KR");
+  deprecated_font_identifiers.push_back("KI");
+  deprecated_font_identifiers.push_back("KB");
+  deprecated_font_identifiers.push_back("KX");
+  deprecated_font_identifiers.push_back("CW");
+  deprecated_font_identifiers.push_back("C");
+  deprecated_font_identifiers.push_back("CO");
+  deprecated_font_identifiers.push_back("CX");
+  deprecated_font_identifiers.push_back("H");
+  deprecated_font_identifiers.push_back("HO");
+  deprecated_font_identifiers.push_back("HX");
+  deprecated_font_identifiers.push_back("Hr");
+  deprecated_font_identifiers.push_back("Hi");
+  deprecated_font_identifiers.push_back("Hb");
+  deprecated_font_identifiers.push_back("Hx");
+  deprecated_font_identifiers.push_back("PA");
+  deprecated_font_identifiers.push_back("PX");
+  deprecated_font_identifiers.push_back("NX");
+  deprecated_font_identifiers.push_back("ZI");
 }
 
 // Appendix H of _The TeXbook_ is useful background for the following.
