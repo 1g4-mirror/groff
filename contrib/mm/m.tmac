@@ -376,7 +376,8 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" 0 = auto (nroff/troff); 1 = bracket; 2 = superscript; 3 = both
 .nr Rfstyle 0
 .\" reference list page ejection policy
-.nr Rpe 0
+.nr Rpej 0
+.aln Rpej Rpe \" for groff <= 1.23 compatibility
 .\" reference list format (arguments to `LB`)
 .ds Rpfmt \\n[Li] 0 1 0 \& 0\"
 .\" use section-page page numbering?
@@ -3293,7 +3294,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 argument '\\$1' as '1'
 .\}
 .if \\n[ref*reset-counter] .nr ref*nr 0 1
-.nr ref*i \\n[Rpe]
+.nr ref*i \\n[Rpej]
 .if !''\\$2' \{\
 .	ie \B'\\$2' .nr ref*i \\$2
 .	el          .@warning \\$0: ignoring non-numeric second \

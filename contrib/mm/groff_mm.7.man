@@ -3414,7 +3414,7 @@ The reference counter is reset unless the first argument
 Normally,
 page breaks occur before and after the references are output;
 the register
-.B Rpe
+.B Rpej
 configures this behavior,
 and a second argument overrides its value.
 .
@@ -5521,9 +5521,8 @@ may not take effect until the next heading or paragraphing macro call.
 .\" ...and in certain other cases we don't document.
 .
 .
-.\" XXX: Why is this not named `Rpej`?
 .TP
-.B Rpe
+.B Rpej
 configures the default page ejection policy for reference pages;
 see
 .B RP

@@ -1,3 +1,12 @@
+2024-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac ([initialization], RP): Rename `Rpe` register to
+	`Rpej`, for better symmetry with `Ej` register.  Retain `Rpe` as
+	an undocumented alias.
+
+	* groff_mm.7.man (Macros) <RP>:
+	(Registers) <Rpej>: Document under new name.
+
 2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (VERBON): Improve argument validation.  Error out if
