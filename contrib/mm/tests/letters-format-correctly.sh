@@ -64,6 +64,7 @@ input="$examples_dir"/letter.mm
 for t in BL SB FB SP
 do
     echo "checking formatting of LT type '$t'" >&2
+    "$groff" -ww -m m -d lT=$t -T ascii -P -cbou "$input"
     expected=$(cksum "$artifacts_dir"/letter.$t | cut -d' ' -f1-2)
     actual=$("$groff" -ww -mm -dlT=$t -Tascii -P-cbou "$input" | cksum \
         | cut -d' ' -f1-2)
