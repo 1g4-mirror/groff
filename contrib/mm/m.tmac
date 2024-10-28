@@ -3499,19 +3499,14 @@ argument: '\\$2'
 .de AE
 \\*[debug@dump-args]\\
 ..
-.\" fixed for 2000, now uses \n[year].
-.de ISODATE
-.	\" support for ISO-date
-.	nr cov*mm \\n[mo]
-.	nr cov*dd \\n[dy]
-.	af cov*mm 01
-.	af cov*dd 01
-.	ie '0'\\$1' \{\
-.		ds cov*new-date \\*[MO\\n[mo]] \\n[dy], \\n[year]
-.	\}
-.	el \{\
-.		ds cov*new-date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
-.	\}
+.de cov*set-date
+.nr cov*mm \\n[mo]
+.nr cov*dd \\n[dy]
+.af cov*mm 01
+.af cov*dd 01
+.ie '0'\\$1' .ds cov*new-date \\*[MO\\n[mo]] \\n[dy], \\n[year]
+.el          .ds cov*new-date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
+.\}
 ..
 .ISODATE 0
 .als DT cov*new-date
