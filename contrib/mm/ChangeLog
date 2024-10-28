@@ -1,5 +1,23 @@
 2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Revamp debugging system.  The existing one was
+	undocumented except in vaguest terms, and this one remains so.
+	However, some broad principles are articulable.
+
+	  A sketch of debugging level meanings:
+	    0: no non-diagnostic output
+	    1: gross formatting progress: report each page start
+	    2: report output of conditional structural elements{*}
+	    3: report output of headers/footers
+	    4: report init, EOI macro, population and emission of
+	       diversions
+	    5: trace API macro calls, sprung traps, and init/shutdown
+	    6: dump internal computations
+
+	  {*} headings, footnotes, captioned items, references
+
+2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Slightly refactor; the entirety of a letter's header
 	was being formatted in the `pg*tl-ev` environment.  This seemed
 	unnecessary and with pending changes, caused the body text of
