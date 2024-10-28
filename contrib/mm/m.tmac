@@ -847,8 +847,8 @@ hd*last-hsize=\\n[hd*last-hsize]u
 .rm misc*rd misc*rd2
 ..
 .\"------------
-.\" VERBON [flag [type-size [font]]]
-.\"	flag
+.\" VERBON [format [type-size [font]]]
+.\"	format
 .\"	bit	function
 .\"	0	escape character disablement
 .\"	1	add an empty line before verbatim text
@@ -857,23 +857,28 @@ hd*last-hsize=\\n[hd*last-hsize]u
 .\"	4	indent text by amount in register Verbin
 .de VERBON
 \\*[debug@dump-args]\\
+.nr misc*verb 0
+.if !'\\$1'' \{\
+.	ie \B'\\$2' .nr misc*verb \\$1
+.	el          .@error \\$0: format argument is not numeric; got \
+'\\$1'
+.\}
 .br
-.nr misc*verb 0\\$1
-.if (0\\n[misc*verb]%4)/2 .SP \\n[Lsp]u
+.if (\\n[misc*verb]%4)/2 .SP \\n[Lsp]u
 .misc@ev-keep misc*verb-ev
 .nf
-.if (0\\n[misc*verb]%16)/8 .nm \\*[Verbnm]
+.if (\\n[misc*verb]%16)/8 .nm \\*[Verbnm]
 .ie !'\\$3'' .if F \\$3 .ft \\$3
 .el          .if F CR   .ft CR
-.ie 0\\$2 \{\
+.ie !'\\$2'' \{\
 .	ss \\$2
 .	ps \\$2
 .	vs \\$2
 .\}
 .el .ss 12
 .ta T 8u*\w@n@u
-.if (0\\n[misc*verb]%32)/16 .in +\\n[Verbin]u
-.if 0\\n[misc*verb]%2 \{\
+.if (\\n[misc*verb]%32)/16 .in +\\n[Verbin]u
+.if \\n[misc*verb]%2 \{\
 .	eo
 .	nr @in-verbatim-region 1
 .\}
@@ -881,9 +886,9 @@ hd*last-hsize=\\n[hd*last-hsize]u
 .de VERBOFF
 .ec
 .br
-.if (0\\n[misc*verb]%8)/4 .SP \\n[Lsp]u
-.if (0\\n[misc*verb]%16)/8 .nm
-.if (0\\n[misc*verb]%32)/16 .in
+.if (\\n[misc*verb]%8)/4 .SP \\n[Lsp]u
+.if (\\n[misc*verb]%16)/8 .nm
+.if (\\n[misc*verb]%32)/16 .in
 .ev
 .nr @in-verbatim-region 0
 ..

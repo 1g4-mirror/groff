@@ -1,5 +1,17 @@
 2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (VERBON): Improve argument validation.  Error out if
+	{optional} first argument is non-numeric, otherwise populate
+	`misc*verb` register as before.
+	(VERBON, VERBOFF): Stop prefixing `misc*verb` register
+	interpolations with literal zeroes.  This appears to have been a
+	copy-and-paste of an old troff idiom for interpolating _strings_
+	{or macro arguments}.  But a register's interpolation is always
+	valid in a numeric expressions {unless someone fiddles its
+	register format, which shouldn't happen to `misc*verb`}.
+
+2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/ms.cov (cov@print-authors): Stop erroring out if no authors
 	are defined; `AU` can be called simply to end title collection,
 	no authors need be specified, and nothing breaks if they aren't.
