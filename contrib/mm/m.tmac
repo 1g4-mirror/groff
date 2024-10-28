@@ -1394,10 +1394,10 @@ numeric; got '\\$1'
 .\".	pg@disable-top-trap
 .	if \\n[pg*extra-header-size] 'sp \\n[pg*extra-header-size]u
 .	if \\n[pg*top-margin] 'sp \\n[pg*top-margin]u
-.	ev pg*tl-ev
-.	pg@set-env
 .	ie d let@header .let@header
 .	el \{\
+.		ev pg*tl-ev
+.		pg@set-env
 .		ie d TP .TP
 .		el \{\
 '			sp 3
@@ -1410,8 +1410,8 @@ numeric; got '\\$1'
 .			el .tl \\*[pg*even-header]
 '			sp 2
 .		\}
+.		ev
 .	\}
-.	ev
 .	\" why no-space??
 .	if d PX \{\
 .		ns
@@ -3910,6 +3910,7 @@ undefined
 .	sp
 .\}
 .sp
+.fi
 ..
 .\"-------------------
 .\" .IA [name [title]]

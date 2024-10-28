@@ -1,3 +1,15 @@
+2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Slightly refactor; the entirety of a letter's header
+	was being formatted in the `pg*tl-ev` environment.  This seemed
+	unnecessary and with pending changes, caused the body text of
+	the letter to be set in that environment too, which is quite
+	wrong.
+	(pg@header): If `let@header` is defined, delegate any required
+	environment switching to it.
+	(let@print-head): Don't bother switching environments, but do
+	enable filling before starting the body text.
+
 2024-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (let@print-head): Accept new second argument indicating
