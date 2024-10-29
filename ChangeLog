@@ -1,3 +1,11 @@
+2024-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/de.tmac:
+	* tmac/fr.tmac: Spell string translations using groff special
+	character escape sequences instead of Latin-1 or Latin-9 code
+	points; this way they work with a document that uses them no
+	matter what its own encoding.
+
 2024-11-02  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Fix for 4-bit eps images
