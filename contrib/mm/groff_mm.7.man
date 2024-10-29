@@ -832,7 +832,7 @@ determines whether an appendix heading is then formatted.
 This heading uses the string
 .B App
 followed by
-.IR id .
+.IR sequence-number .
 .
 Appendices appear in any table of contents
 (see
@@ -2732,7 +2732,7 @@ see section \[lq]Internals\[rq] below.
 .TS
 tab(@);
 Lf(BI) Lb
-Lb Lx.
+L      Lx.
 style@Description
 BL@T{
 Blocked:
