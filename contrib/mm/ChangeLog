@@ -1,3 +1,9 @@
+2024-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Fix initialization errors.  Specify `aln` request
+	arguments in the correct order.  Set up `DT` alias of
+	`cov*new-date` string only once the latter is defined.
+
 2024-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac ([initialization]): Rename `Iso` register to `Isodate`

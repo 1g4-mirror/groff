@@ -380,7 +380,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .nr Rfstyle 0
 .\" reference list page ejection policy
 .nr Rpej 0
-.aln Rpej Rpe \" for groff <= 1.23 compatibility
+.aln Rpe Rpej \" for groff <= 1.23 compatibility
 .\" reference list format (arguments to `LB`)
 .ds Rpfmt \\n[Li] 0 1 0 \& 0\"
 .\" use section-page page numbering?
@@ -3515,13 +3515,13 @@ argument: '\\$2'
 .@warning \\$0: macro is deprecated; define register 'Isodate' instead
 .cov*set-date \\$@
 ..
-.als DT cov*new-date
 .de ND
 \\*[debug@dump-args]\\
 .ie \\n[.$] .ds cov*new-date "\\$1\"
 .el         .cov*set-date \\n[Isodate]
 ..
 .ND
+.als DT cov*new-date
 .\"-------------------
 .\" Save technical memorandum numbers.
 .de TM
