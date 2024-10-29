@@ -49,6 +49,23 @@
 	<https://lists.gnu.org/archive/html/groff/2024-10/msg00066.html>
 	and follow-ups.
 
+2024-10-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Abort the build if groff's version string is invalid.  This can
+	happen when building from the Git repository using a shallow
+	clone.
+
+	* configure.ac: Move `AC_SUBST` of `SHORT_VERSION` from here...
+	* m4/groff.m4 (GROFF_MAKE_SHORT_VERSION): ...into this new
+	macro.
+
+	* m4/groff.m4 (GROFF_CHECK_VERSION_FORMAT): New macro validates
+	format of groff's version string.
+
+	* configure.ac: Call the new macros.
+
+	Thanks to наб for the discussion in Debian #1082520.
+
 2024-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::print_env): Rearrange
