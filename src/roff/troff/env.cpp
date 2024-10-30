@@ -3707,7 +3707,7 @@ static void select_hyphenation_language()
   symbol nm = get_name();
   if (!nm.is_null()) {
     current_language = (hyphenation_language *)language_dictionary.lookup(nm);
-    if (!current_language) {
+    if (0 /* nullptr */ == current_language) {
       current_language = new hyphenation_language(nm);
       (void)language_dictionary.lookup(nm, (void *)current_language);
     }
@@ -3726,7 +3726,7 @@ static void add_hyphenation_exceptions()
     skip_line();
     return;
   }
-  if (!current_language) {
+  if (0 /* nullptr */ == current_language) {
     error("cannot add hyphenation exceptions when no hyphenation"
 	  " language is set");
     skip_line();
@@ -4184,7 +4184,8 @@ public:
 
 const char *hyphenation_language_reg::get_string()
 {
-  return current_language ? current_language->name.contents() : "";
+  return (current_language != 0 /* nullptr */)
+	  ? current_language->name.contents() : "";
 }
 
 class hyphenation_default_mode_reg : public reg {
@@ -4352,7 +4353,7 @@ void init_env_requests()
 
 void hyphenate(hyphen_list *h, unsigned flags)
 {
-  if (!current_language)
+  if (0 /* nullptr */ == current_language)
     return;
   while (h != 0 /* nullptr */) {
     while ((h != 0 /* nullptr */) && (0 == h->hyphenation_code))
@@ -4470,7 +4471,7 @@ static void read_hyphenation_patterns_from_file(bool append)
   // TODO: Read a file name, not a groff identifier.
   symbol name = get_long_name(true /* required */);
   if (!name.is_null()) {
-    if (!current_language)
+    if (0 /* nullptr */ == current_language)
       error("no current hyphenation language");
     else
       current_language->patterns.read_patterns_file(
