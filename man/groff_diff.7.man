@@ -3256,11 +3256,17 @@ in the top-level diversion.
 .
 .
 .TP
-.B .pcolor
-Report, to the standard error stream,
-each defined color name,
+.BR .pcolor \~[\c
+.IR col \~\&.\|.\|.]
+Report,
+to the standard error stream,
+each defined color named
+.IR col ,
 its color space identifier,
-and channel value assignments.
+and channel value assignments,
+or,
+without arguments,
+those of all defined colors.
 .
 A device's default stroke and/or fill colors,
 \[lq]default\[rq],

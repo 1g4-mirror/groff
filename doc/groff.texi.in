@@ -17180,12 +17180,13 @@ If you know in advance that there are many errors and no useful output,
 or are interested @emph{only} in diagnostic output, you can suppress GNU
 @code{troff}'s formatted output with its @option{-z} option.
 
-@Defreq {pcolor, }
+@Defreq {pcolor, [@Var{col} @r{@dots{}}]}
 @cindex dumping defined colors (@code{pcolor})
 @cindex defined colors, dumping (@code{pcolor})
 @cindex colors, defined, dumping (@code{pcolor})
-Report, to the standard error stream, each defined color name, its color
-space identifier, and channel value assignments.  A device's default
+Report, to the standard error stream, each defined color named
+@var{col}, its color space identifier, and channel value assignments,
+or, without arguments, those of all defined colors.  A device's default
 stroke and/or fill colors, ``default'', are not listed since they are
 immutable and their details unknown to the formatter.
 @endDefreq

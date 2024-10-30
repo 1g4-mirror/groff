@@ -3960,7 +3960,8 @@ Change the page number character used in titles
 .
 .TPx
 .REQ .pcolor
-Report, to the standard error stream,
+Report,
+to the standard error stream,
 each defined color name,
 its color space identifier,
 and channel value assignments.
@@ -3969,6 +3970,15 @@ A device's default stroke and/or fill colors,
 \[lq]default\[rq],
 are not listed since they are immutable and their details unknown to the
 formatter.
+.
+.TPx
+.REQ .pcolor "col \fR\&.\|.\|.\&\fP"
+Report,
+to the standard error stream,
+the name,
+color space identifier,
+and channel value assignments of each color
+.IR col .
 .
 .TPx
 .REQ .pcomposite

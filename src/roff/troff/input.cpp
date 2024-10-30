@@ -1558,15 +1558,23 @@ static void define_color()
 
 static void report_color()
 {
-  // TODO: Accept an argument to look up a color by name and dump its
-  // info (name, color space, channel values).
-  dictionary_iterator iter(color_dictionary);
   symbol key;
   color *value;
-  while (iter.get(&key, reinterpret_cast<void **>(&value))) {
-    assert(!key.is_null());
-    assert(value != 0 /* nullptr */);
-    errprint("%1\t%2\n", key.contents(), value->print_color());
+  if (has_arg()) {
+    do {
+      key = get_name();
+      value = static_cast<color *>(color_dictionary.lookup(key));
+      if (value != 0 /* nullptr */)
+	errprint("%1\t%2\n", key.contents(), value->print_color());
+    } while (has_arg());
+  }
+  else {
+    dictionary_iterator iter(color_dictionary);
+    while (iter.get(&key, reinterpret_cast<void **>(&value))) {
+      assert(!key.is_null());
+      assert(value != 0 /* nullptr */);
+      errprint("%1\t%2\n", key.contents(), value->print_color());
+    }
   }
   fflush(stderr);
   skip_line();

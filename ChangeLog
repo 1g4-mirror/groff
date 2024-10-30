@@ -1,5 +1,18 @@
 2024-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: The `pcolor` request now accepts color identifiers as
+	arguments.
+
+	* src/roff/troff/input.cpp (report_color): Do it.
+
+	* doc/groff.texi.in (Debugging) <pcolor>:
+	* man/groff.7.man (Request short reference) <pcolor>:
+	* man/groff_diff.7.man (New requests) <pcolor>: Document it.
+
+	* NEWS: Update item.
+
+2024-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/de.tmac:
 	* tmac/fr.tmac: Spell string translations using groff special
 	character escape sequences instead of Latin-1 or Latin-9 code
