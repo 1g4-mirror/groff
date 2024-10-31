@@ -3386,12 +3386,12 @@ and so on.
 .
 .TPx
 .REQ .hla
-Clear hyphenation language
+Clear the environment's hyphenation language
 (disabling automatic hyphenation).
 .
 .TPx
 .REQ .hla ident
-Set the hyphenation language to
+Set the environment's hyphenation language to
 .IR ident .
 .
 .TPx
