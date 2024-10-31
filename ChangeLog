@@ -1,5 +1,11 @@
 2024-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (select_hyphenation_language)
+	(environment_switch): Use C++ `static_cast` operator instead of
+	C-style type cast.
+
+2024-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment_switch, environment_copy):
 	Trivially refactor.  Relocate function definitions to prepare
 	for feature change that will require additional type and global

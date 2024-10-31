@@ -3647,10 +3647,12 @@ static void select_hyphenation_language()
   }
   symbol nm = get_name();
   if (!nm.is_null()) {
-    current_language = (hyphenation_language *)language_dictionary.lookup(nm);
+    current_language = static_cast<hyphenation_language *>
+      (language_dictionary.lookup(nm));
     if (0 /* nullptr */ == current_language) {
       current_language = new hyphenation_language(nm);
-      (void)language_dictionary.lookup(nm, (void *)current_language);
+      (void) language_dictionary.lookup(nm,
+	static_cast<hyphenation_language *>(current_language));
     }
   }
   skip_line();
@@ -3701,10 +3703,11 @@ void environment_switch()
       }
     }
     else {
-      environment *e = (environment *)env_dictionary.lookup(nm);
+      environment *e
+	= static_cast<environment *>(env_dictionary.lookup(nm));
       if (!e) {
 	e = new environment(nm);
-	(void)env_dictionary.lookup(nm, e);
+	(void) env_dictionary.lookup(nm, e);
       }
       env_stack = new env_list_node(curenv, env_stack);
       curenv = e;
