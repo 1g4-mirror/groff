@@ -212,6 +212,7 @@ class environment {
   int line_number_indent;	// in digit spaces
   int line_number_multiple;
   int no_number_count;
+  symbol language_code;
   unsigned hyphenation_mode;
   unsigned hyphenation_mode_default;
   int hyphen_line_count;
@@ -312,6 +313,8 @@ public:
   hunits get_input_line_position();
   const char *get_tabs();
   int is_using_line_tabs();
+  symbol get_language_code();
+  void set_language_code(const char *);
   unsigned get_hyphenation_mode();
   unsigned get_hyphenation_mode_default();
   int get_hyphen_line_max();
@@ -395,6 +398,7 @@ public:
   friend void number_lines();
   friend void leader_character();
   friend void tab_character();
+  friend void environment_switch();
   friend void hyphenate_request();
   friend void set_hyphenation_mode_default();
   friend void no_hyphenate();

@@ -1,3 +1,47 @@
+2024-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Couple the current hyphenation language more tightly
+	with the environment.  This is to ease maintenance of
+	multilingual documents, and address a curious situation where an
+	environment could bear an automatic hyphenation code that had
+	nothing to do with the selected hyphenation language, because
+	the `hla` request has to date never altered the environment.
+
+	* src/roff/troff/env.h (class environment): Add private member
+	variable `language_code` of type `symbol`.  Declare public
+	member functions `get_language_code()` and
+	`set_language_code()`.  Declare `environment_switch()` as a
+	friend function.
+	* src/roff/troff/env.cpp (environment::environment): Plain
+	constructor initializes `language_code` as empty string.
+	(environment::environment): Copy constructor copies the language
+	code from the source object.
+	(environment::copy): Member function backing `evc` request
+	copies the language code from the source environment.
+	(environment::print_env): Report the hyphenation language code
+	in use by the environment.  Clarify when the automatic
+	hyphenation mode is ignored because no hyphenation language is
+	configured in the environment.
+	(select_hyphenation_language): When the `hla` request is called
+	without an argument, set the current environment's hyphenation
+	language code to the empty string.  With an argument, update the
+	environment's hyphenation to the value of the argument.  Add
+	assertions prior to function return to enforce invariants: (1)
+	the current environment's hyphenation language code must not be
+	null and (2) the `current_language` global variable and the
+	current environment's hyphenation language code must agree.
+	(environment_copy, environment_switch): Set the
+	`current_language` global variable to current environment's
+	hyphenation language code.
+	(environment::get_language_code): Implement accessor.
+	(environment::set_language_code): Implement mutator.
+
+	* src/roff/groff/tests/\
+	current-language-and-environment-in-sync.sh: Add unit test.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	Fixes <https://savannah.gnu.org/bugs/?66387>.
+
 2024-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (select_hyphenation_language)
