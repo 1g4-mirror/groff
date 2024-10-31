@@ -1,5 +1,12 @@
 2024-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment_switch, environment_copy):
+	Trivially refactor.  Relocate function definitions to prepare
+	for feature change that will require additional type and global
+	variable visibility within them.
+
+2024-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::print_env): Describe
 	automatic hyphenation mode in plain English.
 

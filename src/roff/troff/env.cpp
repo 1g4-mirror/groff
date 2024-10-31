@@ -1235,65 +1235,6 @@ node *environment::extract_output_line()
   return nd;
 }
 
-/* environment related requests */
-
-void environment_switch()
-{
-  if (curenv->is_dummy()) {
-    error("cannot switch out of dummy environment");
-  }
-  else {
-    symbol nm = get_long_name();
-    if (nm.is_null()) {
-      if (env_stack == 0 /* nullptr */)
-	error("environment stack underflow");
-      else {
-	bool seen_space = curenv->seen_space;
-	bool seen_eol   = curenv->seen_eol;
-	bool suppress_next_eol = curenv->suppress_next_eol;
-	curenv = env_stack->env;
-	curenv->seen_space = seen_space;
-	curenv->seen_eol   = seen_eol;
-	curenv->suppress_next_eol = suppress_next_eol;
-	env_list_node *tem = env_stack;
-	env_stack = env_stack->next;
-	delete tem;
-      }
-    }
-    else {
-      environment *e = (environment *)env_dictionary.lookup(nm);
-      if (!e) {
-	e = new environment(nm);
-	(void)env_dictionary.lookup(nm, e);
-      }
-      env_stack = new env_list_node(curenv, env_stack);
-      curenv = e;
-    }
-  }
-  skip_line();
-}
-
-void environment_copy()
-{
-  if (!has_arg()) {
-    warning(WARN_MISSING, "environment copy request expects an"
-	    " argument");
-    skip_line();
-    return;
-  }
-  environment *e = 0 /* nullptr */;
-  tok.skip();
-  symbol nm = get_long_name();
-  assert(nm != 0 /* nullptr */);
-  e = static_cast<environment *>(env_dictionary.lookup(nm));
-  if (e != 0 /* nullptr */)
-    curenv->copy(e);
-  else
-    error("cannot copy from nonexistent environment '%1'",
-	  nm.contents());
-  skip_line();
-}
-
 void fill_color_change()
 {
   symbol s = get_name();
@@ -3710,6 +3651,63 @@ static void select_hyphenation_language()
     if (0 /* nullptr */ == current_language) {
       current_language = new hyphenation_language(nm);
       (void)language_dictionary.lookup(nm, (void *)current_language);
+    }
+  }
+  skip_line();
+}
+
+void environment_copy()
+{
+  if (!has_arg()) {
+    warning(WARN_MISSING, "environment copy request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
+  environment *e = 0 /* nullptr */;
+  tok.skip();
+  symbol nm = get_long_name();
+  assert(nm != 0 /* nullptr */);
+  e = static_cast<environment *>(env_dictionary.lookup(nm));
+  if (e != 0 /* nullptr */)
+    curenv->copy(e);
+  else
+    error("cannot copy from nonexistent environment '%1'",
+	  nm.contents());
+  skip_line();
+}
+
+void environment_switch()
+{
+  if (curenv->is_dummy()) {
+    error("cannot switch out of dummy environment");
+  }
+  else {
+    symbol nm = get_long_name();
+    if (nm.is_null()) {
+      if (env_stack == 0 /* nullptr */)
+	error("environment stack underflow");
+      else {
+	bool seen_space = curenv->seen_space;
+	bool seen_eol   = curenv->seen_eol;
+	bool suppress_next_eol = curenv->suppress_next_eol;
+	curenv = env_stack->env;
+	curenv->seen_space = seen_space;
+	curenv->seen_eol   = seen_eol;
+	curenv->suppress_next_eol = suppress_next_eol;
+	env_list_node *tem = env_stack;
+	env_stack = env_stack->next;
+	delete tem;
+      }
+    }
+    else {
+      environment *e = (environment *)env_dictionary.lookup(nm);
+      if (!e) {
+	e = new environment(nm);
+	(void)env_dictionary.lookup(nm, e);
+      }
+      env_stack = new env_list_node(curenv, env_stack);
+      curenv = e;
     }
   }
   skip_line();
