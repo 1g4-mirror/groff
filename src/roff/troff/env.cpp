@@ -3603,15 +3603,15 @@ void environment::print_env()
   }
   string hf = hyphenation_mode ? "on" : "off";
   if (hyphenation_mode & HYPHEN_NOT_LAST_LINE)
-    hf += ", not last line";
+    hf += ", not on line before vertical position trap";
   if (hyphenation_mode & HYPHEN_LAST_CHAR)
-    hf += ", last char";
+    hf += ", allowed before last character";
   if (hyphenation_mode & HYPHEN_NOT_LAST_CHARS)
-    hf += ", not last two chars";
+    hf += ", not allowed within last two characters";
   if (hyphenation_mode & HYPHEN_FIRST_CHAR)
-    hf += ", first char";
+    hf += ", allowed after first character";
   if (hyphenation_mode & HYPHEN_NOT_FIRST_CHARS)
-    hf += ", not first two chars";
+    hf += ", not allowed within first two characters";
   hf += '\0';
   errprint("  hyphenation mode: %1 (%2)\n", hyphenation_mode,
 	   hf.contents());

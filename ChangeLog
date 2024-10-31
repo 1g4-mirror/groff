@@ -1,3 +1,8 @@
+2024-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::print_env): Describe
+	automatic hyphenation mode in plain English.
+
 2024-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (select_hyphenation_language)
