@@ -6547,8 +6547,8 @@ not qualify, so our first attempt got a warning.
 
 An @dfn{identifier} labels a GNU @code{troff} datum such as a register,
 name (macro, string, or diversion), typeface, color, special character
-or character class, environment, or stream.  Valid identifiers consist
-of one or more ordinary characters.
+or character class, hyphenation language code, environment, or stream.
+Valid identifiers consist of one or more ordinary characters.
 @cindex ordinary character
 @cindex character, ordinary
 An @slanted{ordinary character} is an input character that is not the

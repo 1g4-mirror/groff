@@ -1281,6 +1281,7 @@ or diversion),
 typeface,
 color,
 special character or character class,
+hyphenation language code,
 environment,
 or stream.
 .
