@@ -24,7 +24,7 @@
 
 use strict;
 use warnings;
-use File::Spec qw/splitpath/;
+use File::Spec;
 use File::Temp qw/tempfile/;
 
 my @cmd;

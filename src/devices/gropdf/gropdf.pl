@@ -26,7 +26,7 @@ require 5.8.0;
 use Getopt::Long qw(:config bundling);
 use Encode qw(encode);
 use POSIX qw(mktime);
-use File::Spec qw(splitpath);
+use File::Spec;
 
 use constant
 {
