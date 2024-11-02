@@ -2714,7 +2714,7 @@ sub LoadMagick
 
     my $cs=$image->Get('colorspace');
     $cs='RGB' if $cs eq 'sRGB';
-    my $x = $image->Set(alpha => 'off', magick => $cs);
+    my $x = $image->Set(alpha => 'off', magick => $cs, depth => $BPC);
     Warn("Image '$JPnm': $x"), return if "$x";
     my @blobs = $image->ImageToBlob();
     Warn("Image '$JPnm': More than 1 image") if $#blobs > 0;

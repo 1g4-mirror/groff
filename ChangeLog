@@ -1,5 +1,12 @@
 2024-11-02  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	Fix for 4-bit eps images
+
+	* src/devices/gropdf/gropdf.pl: Use correct BitsPerComponent
+	when converting to raw format.
+
+2024-11-02  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	Import change in perl 5.40.
 
 	See <https://perldoc.perl.org/perl5400delta#Calling-the-import-
