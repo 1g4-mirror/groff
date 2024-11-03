@@ -585,9 +585,9 @@ is mapped to the bold-italic style if available in the font family.
 The inset level is reset to 1;
 see subsection \(lqHorizontal and vertical spacing\(rq below.
 .
-Text after
+Text lines after
 .I heading-text
-is set as an ordinary paragraph
+are set as an ordinary paragraph
 .RB ( .P ).
 .
 .
@@ -648,9 +648,9 @@ is mapped to the bold-italic style if available in the font family.
 The inset level is reset to 1;
 see subsection \(lqHorizontal and vertical spacing\(rq below.
 .
-Text after
+Text lines after
 .I subheading-text
-is set as an ordinary paragraph
+are set as an ordinary paragraph
 .RB ( .P ).
 .
 .
