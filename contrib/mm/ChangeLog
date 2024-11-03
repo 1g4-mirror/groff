@@ -1,3 +1,10 @@
+2024-11-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* examples/SETR:
+	* mm/ms.cov:
+	* refer-mm.tmac: Select fonts by mounting position, not style
+	name.  Continues a 28 March 2006 change by Nick Stoughton.
+
 2024-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Fix initialization errors.  Specify `aln` request
