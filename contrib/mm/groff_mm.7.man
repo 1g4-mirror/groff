@@ -549,11 +549,8 @@ A@0, A, B, C, .\|.\|., Z, AA, AB, .\|.\|.
 .SS Fonts
 .\" ====================================================================
 .
-In
-.IR "groff mm" ,
-the fonts
-(or rather,
-font styles)
+.I "groff mm"
+assumes that the font styles
 .BR R \~(roman),
 .BR I \~(italic),
 and
@@ -564,49 +561,19 @@ are mounted at font positions
 .RB and\~ 3 ,
 respectively.
 .
-Internally,
-font positions are used for backward compatibility.
+Use the
+.B fp
+request to mount substitute fonts at these positions as desired.
 .
-From a practical point of view,
-it doesn't make a big difference\[em]a different font family can still
-be selected by invoking
+The default font family is Times.
+.
+Select a different one
+by invoking
 .IR groff 's
 .B fam
 request or using its
 .B \-f
 command-line option.
-.
-On the other hand,
-if you want to replace just,
-for example,
-.RB font\~ I
-with Zapf Chancery Medium italic
-(available on
-.IR groff 's
-.B pdf
-and
-.B ps
-output devices),
-you have to use the
-.B fp
-request,
-replacing the font at position\~2 with
-.RB \[lq] .fp\~2\~ZCMI \[rq]).
-.
-Because the cover sheet,
-memorandum type,
-and
-.MR @g@refer @MAN1EXT@
-integration macros explicitly request fonts named
-.BR B ,
-.BR I ,
-and
-.BR R ,
-you will also need to remap these font names with the
-.B ftr
-request,
-for instance with
-.RB \[lq] .ftr\~I\~ZCMI \[rq].
 .
 .
 .\" ====================================================================
