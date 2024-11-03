@@ -105,11 +105,13 @@
 
 	* src/devices/gropdf/pdfmom.pl:
 	* src/devices/gropdf/gropdf.pl:
-	* src/utils/afmtodit/afmtodit.pl: Warning issued for unknown method
-	fixed.
+	* src/utils/afmtodit/afmtodit.pl: Warning issued for unknown
+	method fixed.
 
-	Thanks to Bjarni Gislason for the report, see
-	<https://lists.gnu.org/archive/html/groff/2024-10/msg00130.html>
+	Fixes <https://savannah.gnu.org/bugs/?66386>.  Thanks to Bjarni
+	Gislason for the report, see
+	<https://lists.gnu.org/archive/html/groff/2024-10/
+	msg00130.html>.
 
 2024-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
