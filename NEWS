@@ -408,14 +408,14 @@ Macro packages
    deprecated, warns upon usage, and is slated for withdrawal in the
    next release.  Assign to the new string `Abstract` instead.
 
+*  The m (mm) macro package's `ISODATE` macro (a GNU extension) is
+   deprecated, warns upon usage, and is slated for withdrawal in the
+   next release.  Assign to the new register `Isodate` instead.
+
 *  The m (mm) macro package's `EPIC` macro (a GNU extension) now
    interprets its "width" argument in ens by default, and its "height"
    argument in vees, instead of basic units, for consistency with the
    rest of the package.
-
-*  The m (mm) macro package's `ISODATE` macro (a GNU extension) is
-   deprecated, warns upon usage, and is slated for withdrawal in the
-   next release.  Assign to the new register `Isodate` instead.
 
 *  Similarly, the m (mm) macro package's `PIC` macro (a GNU extension)
    now interprets an argument to its `-I` option in ens instead of ems
@@ -483,7 +483,7 @@ Macro packages
 
 *  The m (mm) macro package now supports an `Rpfmt` string specifying
    the `LB` macro arguments that the package uses to format the items in
-   a reference list.
+   an `RP` reference list.
 
 *  The m (mm) macro package now supports the `E` register as DWB mm did.
 
