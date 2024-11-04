@@ -11854,9 +11854,9 @@ glyph so that the distance between it and the following glyph is correct
 if the latter is of upright shape.  For example, if an
 italic@tie{}@samp{f} is followed immediately by a roman right
 parenthesis, then in many fonts the top right portion of
-the@tie{}@samp{f} overlaps the top left of the right parenthesis, which
-is ugly.  Use this escape sequence whenever an oblique glyph is
-immediately followed by an upright glyph without any intervening space.
+the@tie{}@samp{f} overlaps the top of the right parenthesis, which is
+ugly.  Use this escape sequence whenever an oblique glyph is immediately
+followed by an upright glyph without any intervening space.
 @endDefesc
 
 @Defesc {\\@comma{}, , , }

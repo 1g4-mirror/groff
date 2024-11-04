@@ -1335,7 +1335,7 @@ For example,
 if an italic\~\[lq]f\^\[rq] is followed immediately by a roman right
 parenthesis,
 then in many fonts the top right portion of the\~\[lq]f\^\[rq] overlaps
-the top left of the right parenthesis,
+the top of the right parenthesis,
 .if t producing \f[I]f\f[R]),
 which is ugly.
 .
