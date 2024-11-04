@@ -512,17 +512,18 @@ Macro packages
 Output drivers
 --------------
 
-*  The PostScript output driver grops no longer accepts spaces as field
-   separators in its "download" file; this is so that spaces can appear
-   in font file names, and to better align the syntax of this file with
-   that used by gropdf.  The download file for grops shipped by groff
-   has long used tabs rather than spaces for field separation.
+*  The PostScript output driver grops(1) no longer accepts spaces as
+   field separators in its "download" file; this is so that spaces can
+   appear in font file names, and to better align the syntax of this
+   file with that used by gropdf(1).  The download file for grops
+   shipped by groff has long used tabs rather than spaces for field
+   separation.
 
-*  The PostScript output driver's macro file "ps.tmac" no longer defines
-   fallback special characters `\[S ,]` and `\[S ,]` to simulate support
-   for what Unicode calls LATIN {CAPITAL,SMALL} LETTER S WITH COMMA
-   BELOW.  The file's definition constructed these glyphs by
-   overstriking the Basic Latin "S" (or "s") with a cedilla accent,
+*  The PostScript output driver grops(1)'s macro file "ps.tmac" no
+   longer defines fallback special characters `\[S ,]` and `\[S ,]` to
+   simulate support for what Unicode calls LATIN {CAPITAL,SMALL} LETTER
+   S WITH COMMA BELOW.  The file's definition constructed these glyphs
+   by overstriking the Basic Latin "S" (or "s") with a cedilla accent,
    which is regarded as less orthographically acceptable than in the
    past.  A user's document or macro file can still do exactly what
    "ps.tmac" used to.
