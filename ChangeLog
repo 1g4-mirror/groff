@@ -1,3 +1,10 @@
+2024-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grog]: Recognize new `phcode` request.
+
+	* src/utils/grog/grog.pl (do_line): Recognize new `phcode`
+	request forthcoming in groff 1.24 release.
+
 2024-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Couple the current hyphenation language more tightly

@@ -328,16 +328,17 @@ sub interpret_line {
 		 'mk', 'mso', 'msoquiet', 'na', 'ne', 'nf', 'nh', 'nm',
 		 'nn', 'nop', 'nr', 'nroff', 'ns', 'nx', 'open',
 		 'opena', 'os', 'output', 'pc', 'pcolor', 'pcomposite',
-		 'pev', 'phw', 'pi', 'pl', 'pline', 'pm', 'pn', 'pnr',
-		 'po', 'ps', 'psbb', 'pso', 'ptr', 'pvs', 'rchar', 'rd',
-		 'return', 'rfschar', 'rj', 'rm', 'rn', 'rnn', 'rr',
-		 'rs', 'rt', 'schar', 'shc', 'shift', 'sizes', 'so',
-		 'soquiet', 'sp', 'special', 'spreadwarn', 'ss',
-		 'stringdown', 'stringup', 'sty', 'substring', 'sv',
-		 'sy', 'ta', 'tc', 'ti', 'tkf', 'tl', 'tm', 'tm1',
-		 'tmc', 'tr', 'trf', 'trin', 'trnt', 'troff', 'uf',
-		 'ul', 'unformat', 'vpt', 'vs', 'warn', 'warnscale',
-		 'wh', 'while', 'write', 'writec', 'writem');
+		 'pev', 'phcode', 'phw', 'pi', 'pl', 'pline', 'pm',
+		 'pn', 'pnr', 'po', 'ps', 'psbb', 'pso', 'ptr', 'pvs',
+		 'rchar', 'rd', 'return', 'rfschar', 'rj', 'rm', 'rn',
+		 'rnn', 'rr', 'rs', 'rt', 'schar', 'shc', 'shift',
+		 'sizes', 'so', 'soquiet', 'sp', 'special',
+		 'spreadwarn', 'ss', 'stringdown', 'stringup', 'sty',
+		 'substring', 'sv', 'sy', 'ta', 'tc', 'ti', 'tkf', 'tl',
+		 'tm', 'tm1', 'tmc', 'tr', 'trf', 'trin', 'trnt',
+		 'troff', 'uf', 'ul', 'unformat', 'vpt', 'vs', 'warn',
+		 'warnscale', 'wh', 'while', 'write', 'writec',
+		 'writem');
 
   # Ignore all other requests.  Again, macro names can contain Perl
   # regex metacharacters, so be careful.
