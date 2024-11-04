@@ -4650,7 +4650,10 @@ in memorandum \[lq]from\[rq] information;
 see
 .B COVER
 and
-.B MT
+.BR MT ,
+and the
+.B Aumt
+register
 (Boolean-valued;
 .BR 1 ).
 .
@@ -4832,7 +4835,7 @@ sets the threshold for page breaks (ejection) prior to the format of
 headings.
 .
 Headings at levels above this value are set on the same page and column
-if possible;
+as any preceding text if possible;
 see
 .B H
 .RB ( 0 ).
@@ -5041,8 +5044,8 @@ see
 .
 .TP
 .B Ht
-suppresses output of heading level counters above the lowest when the
-heading is formatted;
+suppresses output of heading level counters above the deepest when a
+heading mark is formatted;
 see
 .B H
 (Boolean-valued;
