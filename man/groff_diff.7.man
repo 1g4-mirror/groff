@@ -69,7 +69,7 @@ The GNU
 .I roff
 text processing system,
 .IR groff ,
-is an extension of AT&T
+is a reimplementation and extension of AT&T
 .IR troff , \" AT&T
 the typesetting system originating in Unix systems of the 1970s.
 .
@@ -100,7 +100,8 @@ GNU
 features identifiers of arbitrary length;
 supports color output,
 non-integral type sizes,
-and user-defined characters;
+user-defined characters,
+and automatic hyphenation of languages other than English;
 adds more conditional expression operators;
 recognizes additional scaling units and numeric operators;
 enables general file I/O
