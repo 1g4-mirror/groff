@@ -1383,7 +1383,7 @@ to \[lq]0\[rq] to suppress it.
 Caption an equation.
 .
 A caption comprises the string
-.B Liec
+.B Capec
 followed by an automatically incrementing counter stored in the register
 .BR Ec ,
 punctuation configured by the register
@@ -1599,7 +1599,7 @@ The register
 is the exhibit counter.
 .
 The string
-.B Liex
+.B Capex
 precedes the exhibit number and any
 .I title.
 .
@@ -1712,7 +1712,7 @@ The register
 is the figure counter.
 .
 The string
-.B Lifg
+.B Capfg
 precedes the figure number and any
 .I title.
 .
@@ -3690,7 +3690,7 @@ The register
 is the table counter.
 .
 The string
-.B Litb
+.B Captb
 precedes the table number and any
 .I title.
 .
@@ -3735,7 +3735,7 @@ calls
 .
 It then begins a new page with the contents caption,
 stored in the string
-.BR Licon ,
+.BR Capcon ,
 centered at the top.
 .
 The entries follow after three vees of space.
@@ -3827,11 +3827,11 @@ is \[lq]FG\[rq],
 \[lq]EC\[rq],
 or \[lq]EX\[rq],
 and strings
-.BR Lifg ,
-.BR Litb ,
-.BR Liec ,
+.BR Capfg ,
+.BR Captb ,
+.BR Capec ,
 and
-.B Liex
+.B Capex
 analogously configure the output of each captioned list.
 .
 .
@@ -4201,6 +4201,31 @@ interpolates a bullet mark,
 .
 .
 .TP
+.B Capcon
+\[lq]CONTENTS\[rq]
+.
+.
+.TP
+.B Capec
+\[lq]Equation\[rq]
+.
+.
+.TP
+.B Capex
+\[lq]Exhibit\[rq]
+.
+.
+.TP
+.B Capfg
+\[lq]Figure\[rq]
+.
+.
+.TP
+.B Captb
+\[lq]Table\[rq]
+.
+.
+.TP
 .B Ci
 assigns indentation amounts used by each heading level listed
 in a table of contents,
@@ -4437,31 +4462,6 @@ The default
 .TP
 .B Lf
 \[lq]LIST OF FIGURES\[rq]
-.
-.
-.TP
-.B Licon
-\[lq]CONTENTS\[rq]
-.
-.
-.TP
-.B Liec
-\[lq]Equation\[rq]
-.
-.
-.TP
-.B Liex
-\[lq]Exhibit\[rq]
-.
-.
-.TP
-.B Lifg
-\[lq]Figure\[rq]
-.
-.
-.TP
-.B Litb
-\[lq]Table\[rq]
 .
 .
 .TP

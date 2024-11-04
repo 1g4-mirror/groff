@@ -502,6 +502,16 @@ Macro packages
 *  The m (mm) macro package's `Rpe` register is now named `Rpej` for
    better symmetry with `Ej`.  The old name remains as an alias.
 
+*  The m (mm) macro package has renamed several strings to make their
+   purposes less obscure; they determine the content of captions, not
+   list items.
+     `Licon` -> `Capcon`
+     `Liec`  -> `Capec`
+     `Liex`  -> `Capex`
+     `Lifg`  -> `Capfg`
+     `Litb`  -> `Captb`
+   The old names remain as aliases.
+
 *  The s (ms) macro package now sets the vertical spacing register
    defaults for normal (`VS`) and footnote (`FVS`) text to 120% of the
    type size configured in the `PS` and `FPS` registers, respectively,

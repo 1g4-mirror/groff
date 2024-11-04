@@ -336,12 +336,18 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" flag for mkindex (XXX: undocumented: do we need this?)
 .if !r Idxf .nr Idxf 0
 .\" captions for displays
-.ds Lifg Figure
-.ds Litb Table
-.ds Liex Exhibit
-.ds Liec Equation
+.ds Capec Equation
+.ds Capex Exhibit
+.ds Capfg Figure
+.ds Captb Table
 .\" caption for the table of contents
-.ds Licon CONTENTS
+.ds Capcon CONTENTS
+.\" aliases for groff <= 1.23 compatibility
+.als Licon Capcon
+.als Liec Capec
+.als Liex Capex
+.als Lifg Capfg
+.als Litb Captb
 .\" Lsp controls the height of an empty line. Normally 0.5v
 .\" Normally used for nroff compatibility.
 .ie t .nr Lsp 0.5v

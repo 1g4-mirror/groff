@@ -1,3 +1,18 @@
+2024-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Rename several strings to make their purposes less
+	obscure; they determine the content of captions, not list items.
+	     `Licon` -> `Capcon`
+	     `Liec`  -> `Capec`
+	     `Liex`  -> `Capex`
+	     `Lifg`  -> `Capfg`
+	     `Litb`  -> `Captb`
+	The old names remain as aliases.
+
+	* groff_mm.7.man (Macros) <EC, EX, FG, TB, TC>
+	(Strings) <Capcon, Capec, Capex, Capfg, Captb>
+	<Licon, Liec, Liex, Lifg, Litb>: Update.
+
 2024-11-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* examples/SETR:
