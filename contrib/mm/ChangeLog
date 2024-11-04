@@ -47,7 +47,7 @@
 	interpolations with literal zeroes.  This appears to have been a
 	copy-and-paste of an old troff idiom for interpolating _strings_
 	{or macro arguments}.  But a register's interpolation is always
-	valid in a numeric expressions {unless someone fiddles its
+	valid in a numeric expression {unless someone fiddles its
 	register format, which shouldn't happen to `misc*verb`}.
 
 2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -508,7 +508,7 @@
 
 2024-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* m.tmac (RL): Honor `RL` setting for list items' text
+	* m.tmac (RL): Honor `Li` setting for list items' text
 	indentation as `AL` does instead of using a hard-coded value of
 	6 ens.
 	* groff_mm.7.man (Description): Document this difference.
