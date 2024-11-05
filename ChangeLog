@@ -14,6 +14,21 @@
 
 2024-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tmac]: Follow groff mm(7) string renames.
+
+	* tmac/cs.tmac:
+	* tmac/de.tmac:
+	* tmac/es.tmac:
+	* tmac/fr.tmac:
+	* tmac/it.tmac:
+	* tmac/ru.tmac:
+	* tmac/sv.tmac: Rename localized versions of
+	`li{con,ec,ex,fg,tb}` strings to `cap{con,ec,ex,fg,tb}`.
+
+	* tmac/trans.tmac: Rename aliases.
+
+2024-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/sv.tmac: Fix typo in translation, present since birth
 	{commit 4f906e7d0c, 3 March 2006}.
 
