@@ -1,5 +1,18 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Refactor approval line handling: move baseline lengths
+	and corresponding strings, and the minimum width of the gap
+	between them, into named parameters.
+	(AV): Adjust macro cosmetics to more closely resemble DWB 3.3
+	mm.  Center the "Date" label below the baseline rule drawn for
+	it, and make the proportions of the name and date baseline rules
+	better resemble DWB's.
+	(AV, AVL): Use the same logic in troff and nroff modes instead
+	of writing out literal long sequences of underscore character in
+	nroff mode.  Use `nop` request instead of text lines.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (let@print-head): Fix code style nit: use `nop` request
 	instead of text line in macro definition.
 

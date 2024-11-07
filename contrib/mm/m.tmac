@@ -3878,6 +3878,11 @@ undefined
 ..
 .\"------------------------
 .\" Approval signature
+.nr let*name-line-length 40n
+.nr let*date-line-length 15n
+.ds let*name-line \l'\n[let*name-line-length]u'
+.ds let*date-line \l'\n[let*date-line-length]u'
+.nr let*approval-gap 5m
 .de AV
 .ne 6v
 .nf
@@ -3885,10 +3890,15 @@ undefined
 .ie \\n[.$]<2 \\*[Letapp]
 .el           .sp
 .sp 2
-.ie n ______________________________      ______________
-.el   \D'l 25m 0'\h'4m'\D'l 12m 0'
-\Z'\\$1'\h'29m'\f[\\*[@metadata-font]]\\*[Letdate]\fP
+.\" Center the `Letdate` label below its line.
+.ie \w'\\*[Letdate]'>=\\n[let*date-line-length] .nr let*extra-gap 0
+.el .nr let*extra-gap \\n[let*date-line-length]-\w'\\*[Letdate]'/2
+.nop \\*[let*name-line]\h'\\n[let*approval-gap]u'\\*[let*date-line]
+.nop \Z'\\$1'\h'\\n[let*name-line-length]u'\
+\h'\\n[let*approval-gap]u+\\n[let*extra-gap]u'\
+\\*[Letdate]
 .fi
+.rr let*extra-gap
 ..
 .\"------------------------
 .\" Letter signature
@@ -3896,9 +3906,8 @@ undefined
 .ne 6v
 .nf
 .sp 3
-.ie n ______________________________
-.el   \D'l 25m 0'
-\Z'\\$1'
+.nop \\*[let*name-line]
+.nop \Z'\\$1'
 .fi
 ..
 .\"------------------------
