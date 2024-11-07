@@ -353,6 +353,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ie t .nr Lsp 0.5v
 .el   .nr Lsp 1v
 .
+.\" Note: See comment under `cov*set-date` macro definition.
 .ds MO1 January
 .ds MO2 February
 .ds MO3 March
@@ -3508,15 +3509,26 @@ argument: '\\$2'
 .de AE
 \\*[debug@dump-args]\\
 ..
+.\" XXX: In principle, a localization file can (and should be able to)
+.\" customize the month's register format, but we look up the string for
+.\" the month name assuming that `mo`'s format will be '0'.  To date,
+.\" however, no one has submitted a localization file for groff that
+.\" uses an alternative register format for `mo` (or `dy`).  If that day
+.\" comes, we might rename MO1 to MO01 (and so on) and look up the
+.\" string with a dedicated register using a format of '00'.
+.ds cov*local-date-format \E*[MO\En[mo]] \En[dy], \En[year]
 .af cov*iso-mm 00
 .af cov*iso-dd 00
+.ds cov*iso-date-format   \En[year]-\En[cov*iso-mm]-\En[cov*iso-dd]
+.\" TODO: After `ISODATE` is removed for groff 1.25, this macro can stop
+.\" handling an argument, instead testing the `Isodate` register.
 .de cov*set-date
 .\" In case the document has changed `mo` or `dy`, make sure their
 .\" alternatives using ISO 8601 format are synchronized.
 .nr cov*iso-mm \\n[mo]
 .nr cov*iso-dd \\n[dy]
-.ie '0'\\$1' .ds cov*date \\*[MO\\n[mo]] \\n[dy], \\n[year]
-.el          .ds cov*date \\n[year]-\\n[cov*iso-mm]-\\n[cov*iso-dd]
+.ie '0'\\$1' .ds cov*date \\*[cov*local-date-format]
+.el          .ds cov*date \\*[cov*iso-date-format]
 ..
 .de ISODATE
 .@warning \\$0: macro is deprecated; define register 'Isodate' instead

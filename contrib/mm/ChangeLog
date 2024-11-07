@@ -1,5 +1,18 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Refactor date format localization.
+
+	* m.tmac: New string `cov*local-date-format` does what it says,
+	using `\E` to delay interpretation of relevant registers and
+	strings.  New string `cov*iso-date-format` work similarly, but
+	is not expected to be overriden by localization files.
+	(cov*set-date): Use one or the other of the foregoing strings.
+
+	* tests/date-localization-works.sh: Add unit test.
+	* mm.am (mm_TESTS): Run test.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Trivially refactor: rename registers `cov*mm` and
 	`cov*dd` to `cov*iso-mm` and `cov*iso-dd`, respectively.
 

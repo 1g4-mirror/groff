@@ -1,5 +1,16 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/cs.tmac:
+	* tmac/de.tmac:
+	* tmac/es.tmac:
+	* tmac/fr.tmac:
+	* tmac/it.tmac:
+	* tmac/ru.tmac:
+	* tmac/sv.tmac: Migrate to new mm date format localization
+	method; now one string definition is all we need.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/ru.tmac: Stop enabling automatic hyphenation by default
 	for the mm package.  Enablement is inconsistent with our
 	documentation, with DWB 3.3 behavior, and with all of our other
