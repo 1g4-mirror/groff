@@ -1,5 +1,12 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/ru.tmac: Stop enabling automatic hyphenation by default
+	for the mm package.  Enablement is inconsistent with our
+	documentation, with DWB 3.3 behavior, and with all of our other
+	localization files.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/cs.tmac:
 	* tmac/de.tmac:
 	* tmac/es.tmac:
