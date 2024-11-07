@@ -17219,11 +17219,12 @@ listed in bracketed syntax using the default escape character.
 @cindex hyphenation exceptions, dumping (@code{phw})
 @cindex exceptions, hyphenation, dumping (@code{phw})
 Report, to the standard error stream, the list of hyphenation
-exceptions.  Each hyphenation point is marked with @samp{-}.  Words that
-will not be hyphenated at all are prefixed with @samp{-}.  Those to
-which automatic hyphenation applies (meaning those defined in a
-hyphenation pattern file rather than with the @code{hw} request) are
-suffixed with a tab and asterisk (@code{*}).
+exceptions associated with the current hyphenation language.  Each
+hyphenation point is marked with @samp{-}.  Words that will not be
+hyphenated at all are prefixed with @samp{-}.  Those to which automatic
+hyphenation applies (meaning those defined in a hyphenation pattern file
+rather than with the @code{hw} request) are suffixed with a tab and
+asterisk (@code{*}).
 @endDefreq
 
 @Defreq {pline, }

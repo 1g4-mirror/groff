@@ -4006,7 +4006,8 @@ the hyphenation code of each ordinary or special
 .REQ .phw
 Report,
 to the standard error stream,
-the list of hyphenation exceptions.
+the list of hyphenation exceptions
+associated with the current hyphenation language.
 .
 Each hyphenation point is marked with
 .RB \[lq] \- \[rq].

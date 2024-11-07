@@ -116,7 +116,8 @@ troff
    hyphenation code of each ordinary or special character argument.
 
 *  A new request, `phw`, reports to the standard error stream the
-   list of hyphenation exceptions.
+   list of hyphenation exceptions associated with the current
+   hyphenation language.
 
 *  A new request, `pline`, reports to the standard error stream the list
    of output nodes (an internal data structure) corresponding to the
