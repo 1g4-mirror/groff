@@ -1,5 +1,16 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/cs.tmac:
+	* tmac/de.tmac:
+	* tmac/es.tmac:
+	* tmac/fr.tmac:
+	* tmac/it.tmac:
+	* tmac/ru.tmac: Drop redundant requests from `ISODATE` macro
+	redefinition and redundant re-aliasing of `cov*new-date`.  These
+	are all identical to what is done for English in "m.tmac".
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (print_hyphenation_exceptions): Ensure
 	that a current hyphenation language is defined before attempting
 	to iterate its exception dictionary.

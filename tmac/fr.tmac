@@ -138,17 +138,11 @@
 .
 .	\" ISODATE and DT update
 .	de ISODATE
-.		nr cov*mm \\n[mo]
-.		nr cov*dd \\n[dy]
-.		af cov*mm 01
-.		af cov*dd 01
 .		ie '0'\\$1' \
 .			ds cov*new-date \\n[dy] \\*[MO\\n[mo]] \\n[year]
 .		el \
 .			ds cov*new-date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
 .	.
-.
-.	als DT cov*new-date
 .\}
 .
 .
