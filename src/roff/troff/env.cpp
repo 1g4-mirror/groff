@@ -3817,6 +3817,8 @@ static void add_hyphenation_exceptions()
 
 static void print_hyphenation_exceptions()
 {
+  if (0 /* nullptr */ == current_language)
+    return;
   dictionary_iterator iter(current_language->exceptions);
   symbol entry;
   unsigned char *hypoint;
