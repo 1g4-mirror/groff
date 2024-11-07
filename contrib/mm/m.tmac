@@ -3508,11 +3508,11 @@ argument: '\\$2'
 .de AE
 \\*[debug@dump-args]\\
 ..
+.af cov*mm 00
+.af cov*dd 00
 .de cov*set-date
 .nr cov*mm \\n[mo]
 .nr cov*dd \\n[dy]
-.af cov*mm 01
-.af cov*dd 01
 .ie '0'\\$1' .ds cov*date \\*[MO\\n[mo]] \\n[dy], \\n[year]
 .el          .ds cov*date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
 ..
