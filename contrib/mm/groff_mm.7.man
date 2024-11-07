@@ -1004,10 +1004,15 @@ See
 .IR name ]
 As
 .BR AV ,
-but omitting the date,
-date rule,
-and approval notation
-.BR Letapp .
+but omitting the approval notation
+(the
+.B Letapp
+string),
+the date rule,
+and the label below the date rule
+(the
+.B Letdate
+string).
 .
 .
 .TP
