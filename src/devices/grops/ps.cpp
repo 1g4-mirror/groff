@@ -782,7 +782,8 @@ static char *make_subencoding_name(int subencoding_index)
 
 const char *const WS = " \t\n\r";
 
-void ps_printer::define_encoding(const char *encoding, int encoding_index)
+void ps_printer::define_encoding(const char *encoding,
+				 int encoding_index)
 {
   char *vec[256];
   int i;
@@ -795,7 +796,7 @@ void ps_printer::define_encoding(const char *encoding, int encoding_index)
     if (errno <= 0)
       fatal("refusing to traverse directories to open PostScript"
 	    " encoding file '%1'");
-    fatal("can't open encoding file '%1'", encoding);
+    fatal("cannot open encoding file '%1'", encoding);
   }
   int lineno = 1;
   const int BUFFER_SIZE = 512;
@@ -808,7 +809,9 @@ void ps_printer::define_encoding(const char *encoding, int encoding_index)
       char *q = strtok(0, WS);
       int n = 0;		// pacify compiler
       if (q == 0 || sscanf(q, "%d", &n) != 1 || n < 0 || n >= 256)
-	fatal_with_file_and_line(path, lineno, "bad second field");
+	fatal_with_file_and_line(path, lineno, "invalid encoding file:"
+	    " expected integer in range 0-255 as second word on line,"
+	    " got '%1'", q);
       vec[n] = new char[strlen(p) + 1];
       strcpy(vec[n], p);
     }

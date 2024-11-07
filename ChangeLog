@@ -1,5 +1,18 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp (ps_printer::define_encoding):
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog)
+	(resource_manager::supply_resource)
+	(resource_manager::read_download_file): Align diagnostic message
+	wording with recent revisions to GNU troff.
+
+	* src/devices/grops/ps.cpp (ps_printer::define_encoding):
+	Substantially improve fatal diagnostic thrown when failing to
+	parse a grops encoding file, replacing "bad second field" with
+	information a user is more likely to be able to act on.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/cs.tmac:
 	* tmac/de.tmac:
 	* tmac/es.tmac:

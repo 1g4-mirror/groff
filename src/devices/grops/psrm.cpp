@@ -290,7 +290,7 @@ void resource_manager::output_prolog(ps_output &out)
     e += GROPS_PROLOGUE;
     e += '\0';
     if (putenv(strsave(e.contents())))
-      fatal("unable to update environment: %1", strerror(errno));
+      fatal("cannot update environment: %1", strerror(errno));
   }
   char *prologue = getenv("GROPS_PROLOGUE");
   FILE *fp = font::open_file(prologue, &path);
@@ -299,7 +299,7 @@ void resource_manager::output_prolog(ps_output &out)
     if (errno <= 0)
       fatal("refusing to traverse directories to open PostScript"
 	    " prologue file '%1'");
-    fatal("unable to open PostScript prologue file '%1': %2", prologue,
+    fatal("cannot open PostScript prologue file '%1': %2", prologue,
 	  strerror(errno));
   }
   fputs("%%BeginResource: ", outfp);
@@ -342,7 +342,7 @@ void resource_manager::supply_resource(resource *r, int rank,
 	  error("refusing to traverse directories to open PostScript"
 		" resource file '%1'");
 	else
-	  error("unable to open PostScript resource file '%1': %2",
+	  error("cannot open PostScript font file '%1': %2",
 		r->filename, strerror(errno));
 	delete[] r->filename;
 	r->filename = 0 /* nullptr */;
@@ -351,8 +351,8 @@ void resource_manager::supply_resource(resource *r, int rank,
     else {
       fp = include_search_path.open_file_cautious(r->filename);
       if (0 /* nullptr */ == fp) {
-	error("unable to open file '%1': %2", r->filename,
-	      strerror(errno));
+	error("cannot open PostScript resource file '%1': %2",
+	      r->filename, strerror(errno));
 	delete[] r->filename;
 	r->filename = 0 /* nullptr */;
       }
@@ -1069,7 +1069,7 @@ void resource_manager::read_download_file()
   char *path = 0 /* nullptr */;
   FILE *fp = font::open_file("download", &path);
   if (0 /* nullptr */ == fp)
-    fatal("unable to open 'download' file: %1", strerror(errno));
+    fatal("cannot open 'download' file: %1", strerror(errno));
   char buf[512];
   int lineno = 0;
   while (fgets(buf, sizeof buf, fp)) {
