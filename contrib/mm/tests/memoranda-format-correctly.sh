@@ -66,6 +66,7 @@ input="$examples_dir"/memorandum.mm
 for t in 0 1 2 3 4 5 custom
 do
     echo "checking formatting of MT type '$t'" >&2
+    "$groff" -ww -m m -d mT=$t -T ascii -P -cbou "$input"
     expected=$(cksum "$artifacts_dir"/memorandum.$t | cut -d' ' -f1-2)
     actual=$("$groff" -mm -dmT=$t -Tascii -P-cbou "$input" | cksum \
         | cut -d' ' -f1-2)
