@@ -1,5 +1,10 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Trivially refactor: rename registers `cov*mm` and
+	`cov*dd` to `cov*iso-mm` and `cov*iso-dd`, respectively.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Assign a number format to the `cov*mm` and `cov*dd`
 	registers only once instead of each time `cov*set-date` is
 	called.  These are internal registers that a document shouldn't

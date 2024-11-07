@@ -3508,13 +3508,15 @@ argument: '\\$2'
 .de AE
 \\*[debug@dump-args]\\
 ..
-.af cov*mm 00
-.af cov*dd 00
+.af cov*iso-mm 00
+.af cov*iso-dd 00
 .de cov*set-date
-.nr cov*mm \\n[mo]
-.nr cov*dd \\n[dy]
+.\" In case the document has changed `mo` or `dy`, make sure their
+.\" alternatives using ISO 8601 format are synchronized.
+.nr cov*iso-mm \\n[mo]
+.nr cov*iso-dd \\n[dy]
 .ie '0'\\$1' .ds cov*date \\*[MO\\n[mo]] \\n[dy], \\n[year]
-.el          .ds cov*date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
+.el          .ds cov*date \\n[year]-\\n[cov*iso-mm]-\\n[cov*iso-dd]
 ..
 .de ISODATE
 .@warning \\$0: macro is deprecated; define register 'Isodate' instead
