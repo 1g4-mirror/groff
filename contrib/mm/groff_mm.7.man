@@ -2689,7 +2689,7 @@ the signature
 and notations
 .RB ( NS / NE ).
 .
-Any of these may be omitted.
+Any of these except the body text may be omitted.
 .
 Letter options specified with
 .B LO
