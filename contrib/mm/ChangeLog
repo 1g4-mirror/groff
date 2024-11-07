@@ -1,5 +1,9 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mse.tmac: Stop calling deprecated `ISODATE` macro.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Refactor approval line handling: move baseline lengths
 	and corresponding strings, and the minimum width of the gap
 	between them, into named parameters.
