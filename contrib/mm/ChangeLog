@@ -1,5 +1,14 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Trivially refactor: rename string `cov*new-date` to
+	`cov*date`.  There is no "old date" to which we might refer.
+	* mm/0.MT:
+	* mm/5.MT:
+	* mm/ms.cov: Track the change.
+	* NOTES: Update documentation of internals.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mse.tmac: Stop calling deprecated `ISODATE` macro.
 
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>

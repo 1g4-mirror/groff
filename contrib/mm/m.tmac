@@ -3432,7 +3432,7 @@ argument: '\\$2'
 .\" title(s) of author(s) stored in cov*at!x!y
 .\" 	x is the author-index [1-cov*au], y is the argument-index [1-9].
 .\" author(s) firm stored in cov*firm
-.\" new date (if .ND exists) is stored in cov*new-date
+.\" date (if .ND was called) is stored in cov*date
 .\"
 .\"
 .nr cov*au 0
@@ -3513,8 +3513,8 @@ argument: '\\$2'
 .nr cov*dd \\n[dy]
 .af cov*mm 01
 .af cov*dd 01
-.ie '0'\\$1' .ds cov*new-date \\*[MO\\n[mo]] \\n[dy], \\n[year]
-.el          .ds cov*new-date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
+.ie '0'\\$1' .ds cov*date \\*[MO\\n[mo]] \\n[dy], \\n[year]
+.el          .ds cov*date \\n[year]-\\n[cov*mm]-\\n[cov*dd]
 ..
 .de ISODATE
 .@warning \\$0: macro is deprecated; define register 'Isodate' instead
@@ -3522,11 +3522,11 @@ argument: '\\$2'
 ..
 .de ND
 \\*[debug@dump-args]\\
-.ie \\n[.$] .ds cov*new-date "\\$1\"
+.ie \\n[.$] .ds cov*date "\\$1\"
 .el         .cov*set-date \\n[Isodate]
 ..
 .ND
-.als DT cov*new-date
+.als DT cov*date
 .\"-------------------
 .\" Save technical memorandum numbers.
 .de TM
@@ -4018,7 +4018,7 @@ undefined
 .el              .sp 3
 .\" ---- date
 .if '1'\\$2' .sp
-.nop \\*[cov*new-date]
+.nop \\*[cov*date]
 .sp
 .if '1'\\$1' .if !d let*lo-CN .if !d let*lo-RN .sp 2
 .\" ---- confidential notation

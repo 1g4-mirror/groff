@@ -55,7 +55,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .de cov@print-date
 .rj 1
 .ft \\*[@metadata-font]
-.nop \\*[cov*new-date]
+.nop \\*[cov*date]
 .ft
 ..
 .\"------------

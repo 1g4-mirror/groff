@@ -204,7 +204,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ll \\n[cov*column4-limit]u
 .sp -1
 .ft \\*[@metadata-font]
-.nop \\*[cov*new-date]
+.nop \\*[cov*date]
 .ft
 .fi
 .ll

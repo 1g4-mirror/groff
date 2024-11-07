@@ -90,7 +90,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"------------
 .de cov@print-date
 .SP 2
-\f[\\*[@metadata-font]]\\*[cov*new-date]\fP
+\f[\\*[@metadata-font]]\\*[cov*date]\fP
 ..
 .\"-----------------
 .de COVEND

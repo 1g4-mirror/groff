@@ -74,7 +74,7 @@ cov*abstract-indent	I	Indentation argument to .AS.
 
 cov*abstract		M	The abstract.
 
-cov*new-date		S	date (today if .ND not used)
+cov*date		S	date (or argument to .ND)
 
 cov*mt-type		S	memorandum type set by .MT
 cov*mt-addressee 	S	memorandum addressee set by .MT
