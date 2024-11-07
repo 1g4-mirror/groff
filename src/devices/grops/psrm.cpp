@@ -293,15 +293,14 @@ void resource_manager::output_prolog(ps_output &out)
       fatal("cannot update environment: %1", strerror(errno));
   }
   char *prologue = getenv("GROPS_PROLOGUE");
+  // TODO: (?) Skip this check if `-U` (unsafe) option specified.
+  if (strchr(prologue, '/') != 0 /* nullptr */)
+    fatal("a '/' is not allowed in PostScript prologue file name:"
+	  " '%1'", prologue);
   FILE *fp = font::open_file(prologue, &path);
-  if (0 /* nullptr */ == fp) {
-    // If errno not valid, assume file rejected due to '/'.
-    if (errno <= 0)
-      fatal("refusing to traverse directories to open PostScript"
-	    " prologue file '%1'");
+  if (0 /* nullptr */ == fp)
     fatal("cannot open PostScript prologue file '%1': %2", prologue,
 	  strerror(errno));
-  }
   fputs("%%BeginResource: ", outfp);
   procset_resource->print_type_and_name(outfp);
   putc('\n', outfp);
@@ -334,14 +333,14 @@ void resource_manager::supply_resource(resource *r, int rank,
   char *path = 0 /* nullptr */;
   FILE *fp = 0 /* nullptr */;
   if (r->filename != 0 /* nullptr */) {
+    // TODO: (?) Skip this check if `-U` (unsafe) option specified.
+    if (strchr(r->filename, '/') != 0 /* nullptr */)
+      fatal("a '/' is not allowed in PostScript %1 file name: '%2'",
+	    (r->type == RESOURCE_FONT) ? "font" : "resource",
+	    r->filename);
     if (r->type == RESOURCE_FONT) {
       fp = font::open_file(r->filename, &path);
       if (0 /* nullptr */ == fp) {
-	// If errno not valid, assume file rejected due to '/'.
-	if (errno <= 0)
-	  error("refusing to traverse directories to open PostScript"
-		" resource file '%1'");
-	else
 	  error("cannot open PostScript font file '%1': %2",
 		r->filename, strerror(errno));
 	delete[] r->filename;

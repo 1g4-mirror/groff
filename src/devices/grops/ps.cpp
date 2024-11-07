@@ -790,14 +790,11 @@ void ps_printer::define_encoding(const char *encoding,
   for (i = 0; i < 256; i++)
     vec[i] = 0;
   char *path;
+  if (strchr(encoding, '/') != 0 /* nullptr */)
+    fatal("a '/' is not allowed in encoding file name: '%1'", encoding);
   FILE *fp = font::open_file(encoding, &path);
-  if (0 /* nullptr */ == fp) {
-    // If errno not valid, assume file rejected due to '/'.
-    if (errno <= 0)
-      fatal("refusing to traverse directories to open PostScript"
-	    " encoding file '%1'");
+  if (0 /* nullptr */ == fp)
     fatal("cannot open encoding file '%1'", encoding);
-  }
   int lineno = 1;
   const int BUFFER_SIZE = 512;
   char buf[BUFFER_SIZE];

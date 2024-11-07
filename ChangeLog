@@ -1,5 +1,21 @@
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grops]: Further revise fix for Savannah #61424.  Instead of
+	checking for a nonpositive `errno` after calling
+	`font::open_file()` and assuming that that means the function
+	rejected the file name for having a slash character in it, check
+	the file name at the call site and throw a fatal error there if
+	it contains one.
+
+	* src/devices/grops/ps.cpp (ps_printer::define_encoding):
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog)
+	(resource_manager::supply_resource): Do it.
+
+	Begins to address <https://savannah.gnu.org/bugs/?66419>.
+	Thanks to Rob Kolstad for the report and the suggestion.
+
+2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/ps.cpp (ps_printer::define_encoding):
 	* src/devices/grops/psrm.cpp (resource_manager::output_prolog)
 	(resource_manager::supply_resource)
