@@ -330,7 +330,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .ds H1txt \" empty
 .\" caption for the index
 .ds Index INDEX
-.\" use ISO 8601 date format
+.\" use ISO 8601 date format?
 .nr Isodate 0
 .aln Iso Isodate \" for groff <= 1.23 compatibility
 .\" flag for mkindex (XXX: undocumented: do we need this?)
@@ -4009,7 +4009,7 @@ undefined
 .el              .sp 3
 .\" ---- date
 .if '1'\\$2' .sp
-\\*[cov*new-date]
+.nop \\*[cov*new-date]
 .sp
 .if '1'\\$1' .if !d let*lo-CN .if !d let*lo-RN .sp 2
 .\" ---- confidential notation
