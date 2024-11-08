@@ -4,7 +4,7 @@
 
 	* m.tmac: New string `cov*local-date-format` does what it says,
 	using `\E` to delay interpretation of relevant registers and
-	strings.  New string `cov*iso-date-format` work similarly, but
+	strings.  New string `cov*iso-date-format` works similarly, but
 	is not expected to be overriden by localization files.
 	(cov*set-date): Use one or the other of the foregoing strings.
 
