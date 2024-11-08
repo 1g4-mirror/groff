@@ -1,5 +1,12 @@
 2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc-old.tmac ([initialization]): Set `cR` register only
+	if not already defined on the command line.  This is so that the
+	package's trap locations can be compared with the original from
+	4.3BSD-Reno (1990) even in nroff mode.
+
+2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/grog/grog.pl (construct_command): Check for
 	truthiness of `main_package` scalar before using it in
 	comparison, avoiding the emission of Perl warnings.
