@@ -1,3 +1,12 @@
+2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/grog/grog.pl (construct_command): Check for
+	truthiness of `main_package` scalar before using it in
+	comparison, avoiding the emission of Perl warnings.
+
+	Fixes <https://savannah.gnu.org/bugs/?66429>.  Problem
+	introduced by me prior to groff 1.23.0 when I rewrote the tool.
+
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[grops]: Further revise fix for Savannah #61424.  Instead of

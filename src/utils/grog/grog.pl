@@ -638,11 +638,11 @@ sub construct_command {
     my $is_auxiliary_package = 1;
     if (grep(/$pkg/, @main_package)) {
       $is_auxiliary_package = 0;
-      if ($pkg ne $main_package) {
+      if ($main_package && ($pkg ne $main_package)) {
 	&warn("overriding inferred package '$main_package'"
 	      . " with requested package '$pkg'");
-	$main_package = $pkg;
       }
+      $main_package = $pkg;
     }
     if ($is_auxiliary_package) {
       push @auxiliary_package_argument, "-m" . $pkg;
