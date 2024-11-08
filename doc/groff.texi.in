@@ -7270,11 +7270,12 @@ read.
 @cindex @code{\S}, delimiters allowed by
 @cindex @code{\v}, delimiters allowed by
 @cindex @code{\x}, delimiters allowed by
-Finally, the escape sequences @code{\D}, @code{\h}, @code{\H},
-@code{\l}, @code{\L}, @code{\N}, @code{\R}, @code{\s}, @code{\S},
-@code{\v}, and @code{\x} prohibit delimiters that are meaningful in
-numeric expressions, because they accept such expressions as (or within)
-arguments.
+Conditional expressions@footnote{@xref{Operators in Conditionals}.}
+prohibit delimiters that are meaningful in numeric expressions, because
+the latter are a subset of the former.  The escape sequences @code{\D},
+@code{\h}, @code{\H}, @code{\l}, @code{\L}, @code{\N}, @code{\R},
+@code{\s}, @code{\S}, @code{\v}, and @code{\x} similarly prohibit them
+because they accept numeric expressions as (or within) their arguments.
 
 @itemize @bullet
 @item

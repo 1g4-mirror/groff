@@ -1748,7 +1748,7 @@ see below.
 .
 .
 .br
-.ne 2v
+.ne 3v
 .P
 The following escape sequences don't take arguments and thus are allowed
 as delimiters:
@@ -1789,10 +1789,13 @@ they can make the input confusing to read.
 .
 .
 .br
-.ne 2v
+.ne 3v
 .P
-Finally,
-the escape sequences
+Conditional expressions prohibit delimiters
+that are meaningful in numeric expressions,
+because the latter are a subset of the former.
+.
+The escape sequences
 .BR \[rs]D ,
 .BR \[rs]h ,
 .BR \[rs]H ,
@@ -1805,10 +1808,10 @@ the escape sequences
 .BR \[rs]v ,
 and
 .B \[rs]x
-prohibit delimiters that are meaningful in numeric expressions,
-because they accept such expressions as
+similarly prohibit them
+because they accept numeric expressions as
 (or within)
-arguments.
+their arguments.
 .
 .
 .RS
@@ -2124,7 +2127,8 @@ and
 .I s2
 produces the same output commands.
 .
-Other delimiters can be used in place of the neutral apostrophes.
+Other delimiters can be used in place of the neutral apostrophes;
+see section \[lq]Delimiters\[rq] above.
 .
 .I @g@troff
 formats
