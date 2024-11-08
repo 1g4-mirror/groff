@@ -1603,7 +1603,7 @@ Test the selection and embedding of the new font.
 .RS \" two RS calls to get inboard of IP indentation
 .EX
 printf "\[rs]\[rs]f[BSI]Hello, world!\[rs]n" \
-| groff \-T ps \-P \-e >hello.ps
+| groff \-T ps >hello.ps
 see hello.pdf
 .EE
 .RE
