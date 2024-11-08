@@ -1080,7 +1080,7 @@ without space between the arguments.
 Begin bulleted list.
 .
 .I mm
-marks each item with the bullet string
+marks each item with the string
 .BR BU .
 .
 A
@@ -1266,7 +1266,7 @@ and
 Begin dashed list.
 .
 .I mm
-marks each item with the em-dash string
+marks each item with the string
 .BR EM .
 .
 A
