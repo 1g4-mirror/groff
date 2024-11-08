@@ -1064,7 +1064,7 @@
 .    pl +1v
 .    sp 1v
 .  \}
-.  el .sp |(1i - 1m)
+.  el .sp .5i
 .  ev
 .  ns
 .  rm doc-xref

@@ -1,5 +1,15 @@
 2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man,mdoc]: Use more historically authentic margin of one
+	half-inch between header and body text.
+
+	* tmac/an.tmac (PT):
+	* tmac/mdoc/doc-common (doc-header): Do it.
+
+	Continues commit e9828b2927, 21 October 2023.
+
+2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc-old.tmac ([initialization]): Set `cR` register only
 	if not already defined on the command line.  This is so that the
 	package's trap locations can be compared with the original from
