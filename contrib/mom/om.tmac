@@ -14970,14 +14970,14 @@ E\\R'#CAP_HEIGHT \\n[.cht]'
 .             \}
 .\" Vertical raise amount here is more than when the same string is printed in
 .\" the endnotes so bottom of number aligns with top of bowl.
-.             PDF_TARGET EN-\\n+[#EN_NUMBER]-body
+.             PDF_TARGET EN-\\n[#CH_NUM]\\n+[#EN_NUMBER]-body
 .             PDF_LINK \
-EN-\\n[#EN_NUMBER] SUFFIX \c "\s-2\v'-\\n[#DOC_LEAD]u/5u'\\n[#EN_NUMBER]\v'+\\n[#DOC_LEAD]u/5u'\s+2\c"
+EN-\\n[#CH_NUM]\\n[#EN_NUMBER] SUFFIX \c "\s-2\v'-\\n[#DOC_LEAD]u/5u'\\n[#EN_NUMBER]\v'+\\n[#DOC_LEAD]u/5u'\s+2\c"
 .          \}
 .          if \\n[#PRINT_STYLE]=2 \{\
-.             PDF_TARGET EN-\\n+[#EN_NUMBER]-body
+.             PDF_TARGET EN-\\n[#CH_NUM]\\n+[#EN_NUMBER]-body
 .             PDF_LINK \
-EN-\\n[#EN_NUMBER] SUFFIX \c "\*[SUP]\\n[#EN_NUMBER]\*[SUPX]"
+EN-\\n[#CH_NUM]\\n[#EN_NUMBER] SUFFIX \c "\*[SUP]\\n[#EN_NUMBER]\*[SUPX]"
 .          \}
 .       \}
 .       el \{\
@@ -15128,13 +15128,13 @@ EN-\\n[#EN_NUMBER] SUFFIX \c "\*[SUP]\\n[#EN_NUMBER]\*[SUPX]"
 .          ie \\n[#PRINT_STYLE]=1 \{\
 .\" Vertical raise amount here is less than when the same string is printed in
 .\" the body of the text because number precedes a cap.
-.             PDF_TARGET EN-\\n[#EN_NUMBER]
+.             PDF_TARGET EN-\\n[#CH_NUM]\\n[#EN_NUMBER]
 .             PDF_LINK \
-EN-\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|\v'+\\n[#DOC_LEAD]u/7u'\s+2
+EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|\v'+\\n[#DOC_LEAD]u/7u'\s+2
 .          \}
 .          el \{\
-.             PDF_TARGET EN-\\n[#EN_NUMBER]
-.             PDF_LINK EN-\\n[#EN_NUMBER]-body \E*[SUP]\\n[#EN_NUMBER]\E*[SUPX]\h'.15m'
+.             PDF_TARGET EN-\\n[#CH_NUM]\\n[#EN_NUMBER]
+.             PDF_LINK EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \E*[SUP]\\n[#EN_NUMBER]\E*[SUPX]\h'.15m'
 .          \}
 .       \}
 .       EOL
