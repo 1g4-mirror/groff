@@ -4316,6 +4316,11 @@ Set the soft hyphen character
 .RI to\~ c .
 .
 .TPx
+.REQ .shift
+In a macro definition,
+left-shift arguments by one position.
+.
+.TPx
 .REQ .shift n
 In a macro definition,
 left-shift arguments by

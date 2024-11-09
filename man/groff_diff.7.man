@@ -3569,7 +3569,8 @@ are considered when assigning the soft hyphen character.
 .
 .
 .TP
-.BI .shift\~ n
+.BR .shift\~ [\c
+.IR n ]
 In a macro definition,
 shift the arguments by
 .I n
