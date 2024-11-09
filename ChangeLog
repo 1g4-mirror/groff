@@ -1,3 +1,7 @@
+2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (has_arg): Return false at EOF, too.
+
 2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man,mdoc,mdoc-old]: Unit-test vertical margins/gross layout.

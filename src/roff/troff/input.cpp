@@ -1907,7 +1907,7 @@ void token::skip()
 // delimited argument (`tl`).
 bool has_arg(bool want_peek)
 {
-  if (tok.is_newline())
+  if (tok.is_newline() || tok.is_eof())
     return false;
   if (want_peek) {
     int c;
