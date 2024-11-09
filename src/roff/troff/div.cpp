@@ -885,6 +885,12 @@ void need_space()
 
 void page_number()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "page number assignment request expects an"
+	    " argument");
+    skip_line();
+    return;
+  }
   int n = 0;
   // the ps4html register is set if we are using -Tps
   // to generate images for html

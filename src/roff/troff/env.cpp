@@ -1566,11 +1566,20 @@ void indent()
 void temporary_indent()
 {
   bool is_valid = true;
-  hunits temp;
-  if (!get_hunits(&temp, 'm', curenv->get_indent()))
-    is_valid = false;
-  while (!tok.is_newline() && !tok.is_eof())
-    tok.next();
+  hunits temp = H0;
+  if (!has_arg()) {
+    warning(WARN_MISSING, "temporary indentation request expects"
+	    " argument");
+    skip_line();
+    // _Don't_ return early; when invoked with the ordinary control
+    // character this request still breaks the line.
+  }
+  else {
+    if (!get_hunits(&temp, 'm', curenv->get_indent()))
+      is_valid = false;
+    while (!tok.is_newline() && !tok.is_eof())
+      tok.next();
+  }
   if (want_break)
     curenv->do_break();
   if (temp < H0) {

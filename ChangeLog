@@ -1,5 +1,16 @@
 2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Make more requests that take mandatory arguments--
+	specifically `pn`, `ti`, `rchar`, and `hpfcode`--throw warning
+	diagnostics in category "missing" when they aren't given any.
+
+	* src/roff/troff/div.cpp (page_number):
+	* src/roff/troff/env.cpp (temporary_indent):
+	* src/roff/troff/input.cpp (define_special_character)
+	(hyphenation_patterns_file_code): Do it.
+
+2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (has_arg): Return false at EOF, too.
 
 2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>

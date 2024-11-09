@@ -4573,6 +4573,12 @@ void define_special_character()
 static void remove_character()
 {
   tok.skip();
+  if (!has_arg()) {
+    warning(WARN_MISSING, "character definition removal request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
   while (!tok.is_newline() && !tok.is_eof()) {
     if (!tok.is_space() && !tok.is_tab()) {
       charinfo *ci = tok.get_char(true /* required */);
@@ -7879,6 +7885,12 @@ void hyphenation_patterns_file_code()
   error("hyphenation pattern file code assignment request will be"
 	" withdrawn in a future groff release; migrate to 'hcode'");
   tok.skip();
+  if (!has_arg()) {
+    warning(WARN_MISSING, "hyphenation pattern file code assignment"
+	    " request expects arguments");
+    skip_line();
+    return;
+  }
   while (!tok.is_newline() && !tok.is_eof()) {
     int n1, n2;
     if (get_integer(&n1) && (0 <= n1 && n1 <= 255)) {
