@@ -1901,6 +1901,12 @@ void token::skip()
     next();
 }
 
+// Indicate whether an argument lies ahead on the current line in the
+// input stream, skipping over spaces.  This function is therefore not
+// appropriate for use when handling requests or escape sequences that
+// don't use space to separate their arguments, as with `.tr aAbB` or
+// `\o'^e'`.
+//
 // Specify `want_peek` if request reads the next argument in copy mode,
 // or otherwise must interpret it specially, as when reading a
 // conditional expression (`if`, `ie`, `while`), or expecting a
@@ -1923,7 +1929,7 @@ bool has_arg(bool want_peek)
   else {
     while (tok.is_space())
       tok.next();
-    return !tok.is_newline();
+    return !(tok.is_newline() || tok.is_eof());
   }
 }
 
