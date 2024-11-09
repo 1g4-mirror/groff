@@ -394,7 +394,7 @@ class file_iterator : public input_iterator {
   unsigned char buf[BUF_SIZE];
   void close();
 public:
-  file_iterator(FILE *, const char *, int = 0);
+  file_iterator(FILE *, const char *, bool = false);
   ~file_iterator();
   int fill(node **);
   int peek();
@@ -406,14 +406,14 @@ public:
   bool is_file() { return true; }
 };
 
-file_iterator::file_iterator(FILE *f, const char *fn, int po)
-: fp(f), lineno(1), filename(fn), was_popened(po),
+file_iterator::file_iterator(FILE *f, const char *fn, bool popened)
+: fp(f), lineno(1), filename(fn), was_popened(popened),
   seen_newline(false), seen_escape(false)
 {
   if ((font::use_charnames_in_special) && (fn != 0 /* nullptr */)) {
     if (!the_output)
       init_output();
-    the_output->put_filename(fn, po);
+    the_output->put_filename(fn, popened);
   }
 }
 
@@ -6645,7 +6645,8 @@ void pipe_source_request() // .pso
       errno = 0;
       FILE *fp = popen(buf, POPEN_RT);
       if (fp)
-	input_stack::push(new file_iterator(fp, symbol(buf).contents(), 1));
+	input_stack::push(new file_iterator(fp, symbol(buf).contents(),
+					    true));
       else
 	error("cannot open pipe to process '%1': %2", buf,
 	      strerror(errno));

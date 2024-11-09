@@ -1,5 +1,12 @@
 2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (file_iterator::file_iterator):
+	Boolify and rename third argument, demoting integer `po` to
+	Boolean `popened`.  Use Boolean literal for default argument.
+	(pipe_source_request): Use Boolean literal at call site.
+
+2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (has_args): Slightly refactor; use
 	the same expression to compute the return value after having
 	advaced the input pointer through spaces as is used at the top
