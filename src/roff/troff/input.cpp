@@ -5703,7 +5703,7 @@ static const symbol percent_symbol("%");
 void read_title_parts(node **part, hunits *part_width)
 {
   tok.skip();
-  if (tok.is_newline() || tok.is_eof())
+  if (!has_arg())
     return;
   token start(tok);
   int start_level = input_stack::get_level();
@@ -7764,7 +7764,7 @@ static void set_character_flags()
   }
   int flags;
   if (get_integer(&flags)) {
-    if (tok.is_newline() || tok.is_eof()) {
+    if (!has_arg()) {
       warning(WARN_MISSING, "character flags configuration request"
 	      " expects one or more characters to configure");
       skip_line();
@@ -7787,7 +7787,7 @@ static void set_character_flags()
 static void set_hyphenation_codes()
 {
   tok.skip();
-  if (tok.is_newline() || tok.is_eof()) {
+  if (!has_arg()) {
     warning(WARN_MISSING, "hyphenation code assignment request expects"
 	    " arguments");
     skip_line();
@@ -7809,7 +7809,7 @@ static void set_hyphenation_codes()
     }
     tok.next();
     tok.skip();
-    if (tok.is_newline() || tok.is_eof()) {
+    if (!has_arg()) {
       error("hyphenation codes must be specified in pairs");
       break;
     }
@@ -7851,7 +7851,7 @@ static void set_hyphenation_codes()
 static void report_hyphenation_codes()
 {
   tok.skip();
-  if (tok.is_newline() || tok.is_eof()) {
+  if (!has_arg()) {
     warning(WARN_MISSING, "hyphenation code report request expects"
 	    " arguments");
     skip_line();
@@ -9576,7 +9576,7 @@ static void read_drawing_command_color_arguments(token &start)
   if (col)
     curenv->set_fill_color(col);
   while (tok != start) {
-    if (tok.is_newline() || tok.is_eof()) {
+    if (!has_arg()) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.

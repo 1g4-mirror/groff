@@ -436,7 +436,7 @@ void assign_register_format_request()
   }
   else if (c == 'i' || c == 'I' || c == 'a' || c == 'A')
     r->alter_format(c);
-  else if (tok.is_newline() || tok.is_eof())
+  else if (!has_arg())
     warning(WARN_MISSING, "register interpolation format assignment"
 	    " request register format as second argument");
   else

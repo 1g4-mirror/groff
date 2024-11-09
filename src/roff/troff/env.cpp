@@ -3785,7 +3785,7 @@ static void add_hyphenation_exceptions()
   unsigned char pos[WORD_MAX + 2];
   for (;;) {
     tok.skip();
-    if (tok.is_newline() || tok.is_eof())
+    if (!has_arg())
       break;
     int i = 0;
     int npos = 0;
