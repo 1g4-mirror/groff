@@ -190,11 +190,13 @@ tmac_TESTS = \
   tmac/tests/an_reset-hyphenation-correctly.sh \
   tmac/tests/an_title-abbreviation-works.sh \
   tmac/tests/an_use-input-traps-correctly.sh \
+  tmac/tests/an_vertical-margins-are-correct.sh \
   tmac/tests/an_works-with-ec.sh \
   tmac/tests/andoc_P-register-works.sh \
   tmac/tests/andoc_check-an-to-doc-transition.sh \
   tmac/tests/andoc_clear-doc-traps.sh \
   tmac/tests/andoc_flush-between-packages.sh \
+  tmac/tests/doc-old_vertical-margins-are-correct.sh \
   tmac/tests/doc_CS-register-works.sh \
   tmac/tests/doc_CT-register-works.sh \
   tmac/tests/doc_D-register-places-page-numbers-correctly.sh \
@@ -215,6 +217,7 @@ tmac_TESTS = \
   tmac/tests/doc_reset-data-between-documents.sh \
   tmac/tests/doc_smoke-test.sh \
   tmac/tests/doc_synopsis-is-not-adjusted.sh \
+  tmac/tests/doc_vertical-margins-are-correct.sh \
   tmac/tests/e_chapter-titles-work.sh \
   tmac/tests/e_columns-work-on-long-pages.sh \
   tmac/tests/e_delayed-text-marks-work.sh \

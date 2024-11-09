@@ -1,5 +1,14 @@
 2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man,mdoc,mdoc-old]: Unit-test vertical margins/gross layout.
+
+	* tmac/tests/an_vertical-margins-are-correct.sh:
+	* tmac/tests/doc-old_vertical-margins-are-correct.sh:
+	* tmac/tests/doc_vertical-margins-are-correct.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run tests.
+
+2024-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man,mdoc]: Use more historically authentic margin of one
 	half-inch between header and body text.
 
