@@ -7756,6 +7756,12 @@ void translate_input()
 
 static void set_character_flags()
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "character flags configuration request"
+	    " expects arguments");
+    skip_line();
+    return;
+  }
   int flags;
   if (get_integer(&flags)) {
     if (tok.is_newline() || tok.is_eof()) {
