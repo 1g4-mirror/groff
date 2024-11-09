@@ -1,5 +1,14 @@
 2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (add_hyphenation_exceptions):
+	* src/roff/troff/input.cpp (remove_character, read_title_parts)
+	(set_hyphenation_codes, report_hyphenation_codes)
+	(hyphenation_patterns_file_code): Drop unnecessary `tok.skip()`
+	calls before `has_arg()`: the latter advances through spaces if
+	needed.
+
+2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (pipe_source_request): Drop branch
 	unreachable since commit 6dee590de8, 12 September.
 

@@ -4578,7 +4578,6 @@ void define_special_character()
 
 static void remove_character()
 {
-  tok.skip();
   if (!has_arg()) {
     warning(WARN_MISSING, "character definition removal request expects"
 	    " arguments");
@@ -5708,7 +5707,6 @@ static const symbol percent_symbol("%");
 
 void read_title_parts(node **part, hunits *part_width)
 {
-  tok.skip();
   if (!has_arg())
     return;
   token start(tok);
@@ -7790,7 +7788,6 @@ static void set_character_flags()
 
 static void set_hyphenation_codes()
 {
-  tok.skip();
   if (!has_arg()) {
     warning(WARN_MISSING, "hyphenation code assignment request expects"
 	    " arguments");
@@ -7812,7 +7809,6 @@ static void set_hyphenation_codes()
       }
     }
     tok.next();
-    tok.skip();
     if (!has_arg()) {
       error("hyphenation codes must be specified in pairs");
       break;
@@ -7854,7 +7850,6 @@ static void set_hyphenation_codes()
 
 static void report_hyphenation_codes()
 {
-  tok.skip();
   if (!has_arg()) {
     warning(WARN_MISSING, "hyphenation code report request expects"
 	    " arguments");
@@ -7894,7 +7889,6 @@ void hyphenation_patterns_file_code()
 {
   error("hyphenation pattern file code assignment request will be"
 	" withdrawn in a future groff release; migrate to 'hcode'");
-  tok.skip();
   if (!has_arg()) {
     warning(WARN_MISSING, "hyphenation pattern file code assignment"
 	    " request expects arguments");
