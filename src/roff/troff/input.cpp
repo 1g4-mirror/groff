@@ -6607,7 +6607,8 @@ void source_quietly_request() // .soquiet
 void pipe_source_request() // .pso
 {
   if (!has_arg(true /* peek */)) {
-    warning(WARN_MISSING, "pipe sourcing request expects arguments");
+    warning(WARN_MISSING, "piped command source request expects"
+	    " arguments");
     skip_line();
     return;
   }
