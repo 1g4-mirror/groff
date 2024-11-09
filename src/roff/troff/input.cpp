@@ -4391,7 +4391,7 @@ void read_request()
   macro_iterator *mi = new macro_iterator;
   int reading_from_terminal = isatty(fileno(stdin));
   int had_prompt = 0;
-  if (!tok.is_newline() && !tok.is_eof()) {
+  if (has_arg(true /* peek */)) {
     int c = get_copy(0);
     while (c == ' ')
       c = get_copy(0);
@@ -7263,7 +7263,7 @@ const char *input_char_description(int c)
 
 void tag()
 {
-  if (!tok.is_newline() && !tok.is_eof()) {
+  if (has_arg(true /* peek */)) {
     string s;
     int c;
     for (;;) {
@@ -7286,7 +7286,7 @@ void tag()
 
 void taga()
 {
-  if (!tok.is_newline() && !tok.is_eof()) {
+  if (has_arg(true /* peek */)) {
     string s;
     int c;
     for (;;) {
@@ -7311,7 +7311,7 @@ void taga()
 
 void do_terminal(int newline, int string_like)
 {
-  if (!tok.is_newline() && !tok.is_eof()) {
+  if (has_arg(true /* peek */)) {
     int c;
     for (;;) {
       c = get_copy(0);
@@ -7531,7 +7531,7 @@ void do_write_request(int newline)
     skip_line();
     return;
   }
-  if (!tok.is_newline() && !tok.is_eof()) {
+  if (has_arg(true /* peek */)) {
     int c = get_copy(0 /* nullptr */);
     while (' ' == c)
       c = get_copy(0 /* nullptr */);
@@ -7801,7 +7801,7 @@ static void set_hyphenation_codes()
     skip_line();
     return;
   }
-  while (!tok.is_newline() && !tok.is_eof()) {
+  while (has_arg()) {
     unsigned char cdst = tok.ch();
     if (csdigit(cdst)) {
       error("cannot apply a hyphenation code to a numeral");
@@ -7865,7 +7865,7 @@ static void report_hyphenation_codes()
     skip_line();
     return;
   }
-  while (!tok.is_newline() && !tok.is_eof()) {
+  while (has_arg()) {
     unsigned char ch = tok.ch();
     if (csdigit(ch)) {
       error("a numeral cannot have a hyphenation code");
