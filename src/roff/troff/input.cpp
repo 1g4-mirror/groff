@@ -6617,9 +6617,6 @@ void pipe_source_request() // .pso
     skip_line();
   }
   else {
-    if (tok.is_newline() || tok.is_eof())
-      error("missing command");
-    else {
       int c;
       while ((c = get_copy(0)) == ' ' || c == '\t')
 	;
@@ -6652,7 +6649,6 @@ void pipe_source_request() // .pso
 	error("cannot open pipe to process '%1': %2", buf,
 	      strerror(errno));
       delete[] buf;
-    }
     tok.next();
   }
 }

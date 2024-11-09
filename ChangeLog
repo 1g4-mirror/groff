@@ -1,5 +1,10 @@
 2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (pipe_source_request): Drop branch
+	unreachable since commit 6dee590de8, 12 September.
+
+2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_request, do_terminal)
 	(do_write_request, set_hyphenation_codes)
 	(report_hyphenation_codes): Slightly refactor.  Replace
