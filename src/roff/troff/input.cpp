@@ -6617,38 +6617,38 @@ void pipe_source_request() // .pso
     skip_line();
   }
   else {
-      int c;
-      while ((c = get_copy(0)) == ' ' || c == '\t')
-	;
-      size_t buf_size = 24;
-      char *buf = new char[buf_size]; // C++03: new char[buf_size]();
-      (void) memset(buf, 0, (buf_size * sizeof(char)));
-      size_t buf_used = 0;
-      for (; c != '\n' && c != EOF; c = get_copy(0)) {
-	const char *s = asciify(c);
-	size_t slen = strlen(s);
-	if ((buf_used + slen + 1) > buf_size) {
-	  char *old_buf = buf;
-	  size_t old_buf_size = buf_size;
-	  buf_size *= 2;
-	  buf = new char[buf_size]; // C++03: new char[buf_size]();
-	  (void) memset(buf, 0, (buf_size * sizeof(char)));
-	  memcpy(buf, old_buf, old_buf_size);
-	  delete[] old_buf;
-	}
-	strcpy(buf + buf_used, s);
-	buf_used += slen;
+    int c;
+    while ((c = get_copy(0)) == ' ' || c == '\t')
+      ;
+    size_t buf_size = 24;
+    char *buf = new char[buf_size]; // C++03: new char[buf_size]();
+    (void) memset(buf, 0, (buf_size * sizeof(char)));
+    size_t buf_used = 0;
+    for (; c != '\n' && c != EOF; c = get_copy(0)) {
+      const char *s = asciify(c);
+      size_t slen = strlen(s);
+      if ((buf_used + slen + 1) > buf_size) {
+	char *old_buf = buf;
+	size_t old_buf_size = buf_size;
+	buf_size *= 2;
+	buf = new char[buf_size]; // C++03: new char[buf_size]();
+	(void) memset(buf, 0, (buf_size * sizeof(char)));
+	memcpy(buf, old_buf, old_buf_size);
+	delete[] old_buf;
       }
-      buf[buf_used] = '\0';
-      errno = 0;
-      FILE *fp = popen(buf, POPEN_RT);
-      if (fp)
-	input_stack::push(new file_iterator(fp, symbol(buf).contents(),
-					    true));
-      else
-	error("cannot open pipe to process '%1': %2", buf,
-	      strerror(errno));
-      delete[] buf;
+      strcpy(buf + buf_used, s);
+      buf_used += slen;
+    }
+    buf[buf_used] = '\0';
+    errno = 0;
+    FILE *fp = popen(buf, POPEN_RT);
+    if (fp)
+      input_stack::push(new file_iterator(fp, symbol(buf).contents(),
+					  true));
+    else
+      error("cannot open pipe to process '%1': %2", buf,
+	    strerror(errno));
+    delete[] buf;
     tok.next();
   }
 }
