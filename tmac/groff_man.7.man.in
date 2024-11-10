@@ -3683,6 +3683,25 @@ document.
 .
 .
 .TP
+.BI \-rCHECKSTYLE= n
+Report problems with usage of this macro package exhibited by the input
+at verbosity level
+.IR n ,
+where
+.I n
+is an integer in the range 0\(en3,
+inclusive;
+.B 0
+disables the messages and is the default.
+.
+This feature is a development and debugging aid
+for man page maintainers;
+the problems diagnosed,
+and range and meanings of the supported levels
+are subject to change.
+.
+.
+.TP
 .B \-rCS=1
 Set section headings
 (the argument(s) to

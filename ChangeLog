@@ -1,5 +1,13 @@
 2024-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/groff_man.7.man.in (Options) <-rCHECKSTYLE>: Document
+	feature introduced in groff 1.23.0.
+
+	Fixes <https://savannah.gnu.org/bugs/?62042>.  Thanks to Alex
+	Colomar for the report.
+
+2024-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (diagnose_invalid_identifier): Avoid
 	potentially reporting stale token description in diagnostic
 	message, using same technique as commit 1277744e72, 20 August.
