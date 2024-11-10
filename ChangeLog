@@ -1,3 +1,27 @@
+2024-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Improve input validation.  Use `has_arg()` (inverted if
+	necessary) more often to better distinguish between arguments
+	that are truly absent and those for which attempts to read
+	"symbol" (identifier) names result in their objects' `is_null()`
+	member functions returning true, which happens both for absent
+	and for syntactically invalid identifiers.
+
+	* src/roff/troff/reg.cpp (define_register_request)
+	(assign_register_format_request, alias_register_request): Remove
+	assertions that get tripped on invalid input.
+	(assign_register_format_request): Skip remainder of input line
+	and return early if the first argument is an invalid identifier.
+	(remove_register_request): Explicitly break out of loop as soon
+	as we run out of arguments.
+	(alias_register_request, rename_register_request): Throw warning
+	in category "missing" only if second argument is truly missing,
+	not if it is invalid; in this scenario, `get_name()` has already
+	thrown an error diagnostic.
+	(alias_register_request): Check second argument for validity as
+	identifier before attempting to look it up in the register
+	dictionary.
+
 2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (add_hyphenation_exceptions):

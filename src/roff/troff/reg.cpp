@@ -314,8 +314,8 @@ void define_register_request()
     return;
   }
   symbol nm = get_name();
-  assert(nm != 0 /* nullptr */);
   if (nm.is_null()) {
+    // get_name() has already thrown an error diagnostic on bogus input.
     skip_line();
     return;
   }
@@ -418,7 +418,11 @@ void assign_register_format_request()
     return;
   }
   symbol nm = get_name();
-  assert(nm != 0 /* nullptr */);
+  if (nm.is_null()) {
+    // get_name() has already thrown an error diagnostic on bogus input.
+    skip_line();
+    return;
+  }
   reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
   if (0 /* nullptr */ == r) {
     r = new number_reg;
@@ -455,9 +459,12 @@ void remove_register_request()
   }
   for (;;) {
     symbol s = get_name();
+    // get_name() has already thrown an error diagnostic on bogus input.
     if (s.is_null())
       break;
     register_dictionary.remove(s);
+    if (!has_arg())
+      break;
   }
   skip_line();
 }
@@ -471,15 +478,19 @@ void alias_register_request()
     return;
   }
   symbol s1 = get_name();
-  assert(s1 != 0 /* nullptr */);
+  // get_name() has already thrown an error diagnostic on bogus input.
   if (!s1.is_null()) {
-    symbol s2 = get_name();
-    if (s2.is_null())
+    if (!has_arg())
       warning(WARN_MISSING, "register aliasing request expects"
 	      " identifier of existing register as second argument");
     else {
-      if (!register_dictionary.alias(s1, s2))
-	error("cannot alias undefined register '%1'", s2.contents());
+      symbol s2 = get_name();
+      // get_name() has already thrown an error diagnostic on bogus
+      // input.
+      if (!s2.is_null()) {
+	if (!register_dictionary.alias(s1, s2))
+	  error("cannot alias undefined register '%1'", s2.contents());
+      }
     }
   }
   skip_line();
@@ -494,12 +505,14 @@ void rename_register_request()
     return;
   }
   symbol s1 = get_name();
-  if (!s1.is_null()) {
+  // get_name() has already thrown an error diagnostic on bogus input.
+  if (!has_arg())
+    warning(WARN_MISSING, "register renaming request exepects new"
+	    " identifier as second argument");
+  else if (!s1.is_null()) {
     symbol s2 = get_name();
-    if (s2.is_null())
-      warning(WARN_MISSING, "register renaming request exepects new"
-	      " identifier as second argument");
-    else
+    // get_name() has already thrown an error diagnostic on bogus input.
+    if (!s2.is_null())
       register_dictionary.rename(s1, s2);
   }
   skip_line();
