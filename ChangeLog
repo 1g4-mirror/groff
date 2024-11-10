@@ -1,5 +1,18 @@
 2024-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (diagnose_invalid_identifier): Avoid
+	potentially reporting stale token description in diagnostic
+	message, using same technique as commit 1277744e72, 20 August.
+	I was unable to verify that the token description really is
+	stale, however.  It might not be, since it is lazily computed
+	and the class's `description()` member function is not called in
+	the interim, but I also could not demonstrate to myself that the
+	relevant diagnostic message is reachable.  Use strdup() to copy
+	the token description (grabbing ~30 bytes from the heap) and
+	free that storage later just in case.
+
+2024-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Improve input validation.  Use `has_arg()` (inverted if
 	necessary) more often to better distinguish between arguments
 	that are truly absent and those for which attempts to read

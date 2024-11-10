@@ -2747,14 +2747,18 @@ static void diagnose_missing_identifier(bool required)
       warning(WARN_MISSING, "missing identifier");
   }
   else if (tok.is_right_brace() || tok.is_tab()) {
-    const char *start = tok.description();
+    // token::description() writes to static, class-wide storage, so we
+    // must allocate a copy of it before issuing the next diagnostic.
+    char *start = strdup(tok.description());
     do {
       tok.next();
     } while (tok.is_space() || tok.is_right_brace() || tok.is_tab());
+    // XXX: unreachable code? --GBR
     if (!tok.is_newline() && !tok.is_eof())
       error("%1 is not allowed before an argument", start);
     else if (required)
       warning(WARN_MISSING, "missing identifier");
+    free(start);
   }
   else if (required)
     error("expected identifier, got %1", tok.description());
