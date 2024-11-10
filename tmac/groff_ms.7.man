@@ -764,7 +764,8 @@ Set a paragraph with a left indentation.
 .
 The optional
 .I marker
-is not indented and is empty by default.
+is not indented and is empty by default;
+it is useful in the construction of lists.
 .
 .I width
 overrides the indentation amount in
