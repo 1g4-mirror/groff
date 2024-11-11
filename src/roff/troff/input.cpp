@@ -1121,19 +1121,20 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
     case 0:
       return escape_char;
     case '"':
-      (void) input_stack::get(0);
-      while ((c = input_stack::get(0)) != '\n' && c != EOF)
+      (void) input_stack::get(0 /* nullptr */);
+      while ((c = input_stack::get(0 /* nullptr */)) != '\n'
+	     && c != EOF)
 	;
       return c;
     case '#':			// Like \" but newline is ignored.
-      (void) input_stack::get(0);
-      while ((c = input_stack::get(0)) != '\n')
+      (void) input_stack::get(0 /* nullptr */);
+      while ((c = input_stack::get(0 /* nullptr */)) != '\n')
 	if (c == EOF)
 	  return EOF;
       break;
     case '$':
       {
-	(void) input_stack::get(0);
+	(void) input_stack::get(0 /* nullptr */);
 	symbol s = read_escape_parameter();
 	if (!(s.is_null() || s.is_empty()))
 	  interpolate_arg(s);
@@ -1141,7 +1142,7 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
       }
     case '*':
       {
-	(void) input_stack::get(0);
+	(void) input_stack::get(0 /* nullptr */);
 	symbol s = read_escape_parameter(WITH_ARGS);
 	if (!(s.is_null() || s.is_empty())) {
 	  if (have_multiple_params) {
@@ -1154,19 +1155,19 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
 	break;
       }
     case 'a':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return '\001';
     case 'e':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_e;
     case 'E':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       if (handle_escape_E)
 	goto again;
       return ESCAPE_E;
     case 'n':
       {
-	(void) input_stack::get(0);
+	(void) input_stack::get(0 /* nullptr */);
 	int inc;
 	symbol s = read_increment_and_escape_parameter(&inc);
 	if (!(s.is_null() || s.is_empty()))
@@ -1175,85 +1176,85 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
       }
     case 'g':
       {
-	(void) input_stack::get(0);
+	(void) input_stack::get(0 /* nullptr */);
 	symbol s = read_escape_parameter();
 	if (!(s.is_null() || s.is_empty()))
 	  interpolate_number_format(s);
 	break;
       }
     case 't':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return '\t';
     case 'V':
       {
-	(void) input_stack::get(0);
+	(void) input_stack::get(0 /* nullptr */);
 	symbol s = read_escape_parameter();
 	if (!(s.is_null() || s.is_empty()))
 	  interpolate_environment_variable(s);
 	break;
       }
     case '\n':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       if (is_defining)
 	return ESCAPE_NEWLINE;
       break;
     case ' ':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_SPACE;
     case '~':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_TILDE;
     case ':':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_COLON;
     case '|':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_BAR;
     case '^':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_CIRCUMFLEX;
     case '{':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_LEFT_BRACE;
     case '}':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_RIGHT_BRACE;
     case '`':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_LEFT_QUOTE;
     case '\'':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_RIGHT_QUOTE;
     case '-':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_HYPHEN;
     case '_':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_UNDERSCORE;
     case 'c':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_c;
     case '!':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_BANG;
     case '?':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_QUESTION;
     case '&':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_AMPERSAND;
     case ')':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_RIGHT_PARENTHESIS;
     case '.':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return c;
     case '%':
-      (void) input_stack::get(0);
+      (void) input_stack::get(0 /* nullptr */);
       return ESCAPE_PERCENT;
     default:
       if (c == escape_char) {
-	(void) input_stack::get(0);
+	(void) input_stack::get(0 /* nullptr */);
 	return c;
       }
       else
@@ -2182,7 +2183,8 @@ void token::next()
       case ':':
 	goto ESCAPE_COLON;
       case '"':
-	while ((cc = input_stack::get(0)) != '\n' && cc != EOF)
+	while ((cc = input_stack::get(0 /* nullptr */)) != '\n'
+	       && cc != EOF)
 	  ;
 	if (cc == '\n')
 	  type = TOKEN_NEWLINE;
@@ -2190,7 +2192,7 @@ void token::next()
 	  type = TOKEN_EOF;
 	return;
       case '#':			// Like \" but newline is ignored.
-	while ((cc = input_stack::get(0)) != '\n')
+	while ((cc = input_stack::get(0 /* nullptr */)) != '\n')
 	  if (cc == EOF) {
 	    type = TOKEN_EOF;
 	    return;
@@ -6226,7 +6228,7 @@ static void skip_branch()
     level++;
   int c;
   for (;;) {
-    c = input_stack::get(0);
+    c = input_stack::get(0 /* nullptr */);
     if (c == EOF)
       break;
     if (c == ESCAPE_LEFT_BRACE)
@@ -6234,7 +6236,7 @@ static void skip_branch()
     else if (c == ESCAPE_RIGHT_BRACE)
       --level;
     else if (c == escape_char && escape_char > 0)
-      switch (input_stack::get(0)) {
+      switch (input_stack::get(0 /* nullptr */)) {
       case '{':
 	++level;
 	break;
@@ -6242,7 +6244,8 @@ static void skip_branch()
 	--level;
 	break;
       case '"':
-	while ((c = input_stack::get(0)) != '\n' && c != EOF)
+	while ((c = input_stack::get(0 /* nullptr */)) != '\n'
+		&& c != EOF)
 	  ;
       }
     /*
@@ -6519,7 +6522,7 @@ static void while_request()
       input_stack::push(new string_iterator(mac, "while loop"));
       tok.next();
       if (!do_if_request()) {
-	while (input_stack::get(0) != EOF)
+	while (input_stack::get(0 /* nullptr */) != EOF)
 	  ;
 	break;
       }
@@ -6543,7 +6546,7 @@ static void while_break_request()
   }
   else {
     want_loop_break = true;
-    while (input_stack::get(0) != EOF)
+    while (input_stack::get(0 /* nullptr */) != EOF)
       ;
     tok.next();
   }
@@ -6556,7 +6559,7 @@ static void while_continue_request()
     skip_line();
   }
   else {
-    while (input_stack::get(0) != EOF)
+    while (input_stack::get(0 /* nullptr */) != EOF)
       ;
     tok.next();
   }
@@ -8409,7 +8412,7 @@ char *read_string()
   char *s = new char[len]; // C++03: new char[len]();
   (void) memset(s, 0, (len * sizeof(char)));
   int c;
-  while ((c = get_copy(0)) == ' ')
+  while ((c = get_copy(0 /* nullptr */)) == ' ')
     ;
   int i = 0;
   while (c != '\n' && c != EOF) {
@@ -8424,7 +8427,7 @@ char *read_string()
       }
       s[i++] = c;
     }
-    c = get_copy(0);
+    c = get_copy(0 /* nullptr */);
   }
   s[i] = '\0';
   tok.next();
@@ -8799,7 +8802,7 @@ static int evaluate_expression(const char *expr, units *res)
   input_stack::push(make_temp_iterator(expr));
   tok.next();
   int success = read_measurement(res, 'u');
-  while (input_stack::get(0) != EOF)
+  while (input_stack::get(0 /* nullptr */) != EOF)
     ;
   return success;
 }
