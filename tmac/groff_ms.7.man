@@ -2753,8 +2753,8 @@ _
 \[rs]*[8]	Interpolate small letter sharp s.
 \[rs]*[q]	Interpolate small letter o with hook accent (ogonek).
 \[rs]*[3]	Interpolate small letter yogh.
-\[rs]*[d-]	Interpolate small letter eth.
-\[rs]*[D-]	Interpolate capital letter eth.
+\[rs]*[d\-]	Interpolate small letter eth.
+\[rs]*[D\-]	Interpolate capital letter eth.
 \[rs]*[th]	Interpolate small letter thorn.
 \[rs]*[TH]	Interpolate capital letter thorn.
 \[rs]*[ae]	Interpolate small ae ligature.
