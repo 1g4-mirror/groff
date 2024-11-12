@@ -37,9 +37,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // The include search path initially contains only the current directory.
 static search_path include_search_path(0, 0, 0, 1);
 
-int compatible_flag = 0;
-int raw_flag = 0;
-int tex_flag = 0;
+bool want_att_compat = false;
+bool want_raw_output = false;
+bool want_tex_output = false;
 
 extern "C" const char *Version_string;
 
@@ -72,16 +72,16 @@ int main(int argc, char **argv)
       exit(0);
       break;
     case 'C':
-      compatible_flag = 1;
+      want_att_compat = true;
       break;
     case 'I':
       include_search_path.command_line_dir(optarg);
       break;
     case 'r':
-      raw_flag = 1;
+      want_raw_output = true;
       break;
     case 't':
-      tex_flag = 1;
+      want_tex_output = true;
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
@@ -108,8 +108,8 @@ int main(int argc, char **argv)
 
 void set_location()
 {
-  if (!raw_flag) {
-    if (!tex_flag)
+  if (!want_raw_output) {
+    if (!want_tex_output)
       printf(".lf %d %s\n", current_lineno, current_filename);
     else
       printf("%% file %s, line %d\n", current_filename, current_lineno);
@@ -237,7 +237,7 @@ int do_file(const char *filename)
       }
       break;
     case HAD_so:
-      if (c == ' ' || c == '\n' || compatible_flag) {
+      if (c == ' ' || c == '\n' || want_att_compat) {
 	string line;
 	for (; c != EOF && c != '\n'; c = getc(fp))
 	  line += c;
@@ -269,7 +269,7 @@ int do_file(const char *filename)
       }
       break;
     case HAD_lf:
-      if (c == ' ' || c == '\n' || compatible_flag) {
+      if (c == ' ' || c == '\n' || want_att_compat) {
 	string line;
 	for (; c != EOF && c != '\n'; c = getc(fp))
 	  line += c;

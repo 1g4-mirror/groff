@@ -2,9 +2,15 @@
 
 	[soelim]: Fix code style nits.
 
-	* src/preproc/soelim/soelim.cpp (do_so): Boolify and rename
-	local variable, demoting integer `success` to Boolean
-	`is_filename_valid`.  Use Boolean literals for assignments.
+	* src/preproc/soelim/soelim.cpp: Boolify and rename some global
+	variables.
+	    `compatible_flag` -> `want_att_compat`
+	    `raw_flag`        -> `want_raw_output`
+	    `tex_flag`        -> `want_tex_output`
+	(main, set_location, do_file): Track renames.
+	(do_so): Boolify and rename local variable, demoting integer
+	`success` to Boolean `is_filename_valid`.  Use Boolean literals
+	for assignments.
 	(do_file): Adjust language of diagnostic message.
 
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
