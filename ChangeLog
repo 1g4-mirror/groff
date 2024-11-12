@@ -1,3 +1,10 @@
+2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (decode_args, decode_string_args):
+	Boolify and rename local variable, demoting integer
+	`done_tab_warning` to Boolean `was_warned`.  Use Boolean
+	literals for assignments.
+
 2024-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/groff_man.7.man.in (Options) <-rCHECKSTYLE>: Document

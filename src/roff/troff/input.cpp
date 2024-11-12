@@ -4088,7 +4088,7 @@ static void decode_args(macro_iterator *mi)
 	break;
       macro arg;
       int quote_input_level = 0;
-      int done_tab_warning = 0;
+      bool was_warned = false; // about an input tab character
       arg.append(want_att_compat ? PUSH_COMP_MODE : PUSH_GROFF_MODE);
       // we store discarded double quotes for \$^
       if (c == '"') {
@@ -4096,7 +4096,8 @@ static void decode_args(macro_iterator *mi)
 	quote_input_level = input_stack::get_level();
 	c = get_copy(&n);
       }
-      while (c != EOF && c != '\n' && !(c == ' ' && quote_input_level == 0)) {
+      while (c != EOF && c != '\n'
+	     && !(c == ' ' && quote_input_level == 0)) {
 	if (quote_input_level > 0 && c == '"'
 	    && (want_att_compat
 		|| input_stack::get_level() == quote_input_level)) {
@@ -4113,9 +4114,10 @@ static void decode_args(macro_iterator *mi)
 	  if (c == 0)
 	    arg.append(n);
 	  else {
-	    if (c == '\t' && quote_input_level == 0 && !done_tab_warning) {
-	      warning(WARN_TAB, "tab character in unquoted macro argument");
-	      done_tab_warning = 1;
+	    if (c == '\t' && quote_input_level == 0 && !was_warned) {
+	      warning(WARN_TAB, "tab character in unquoted macro"
+		      " argument");
+	      was_warned = true;
 	    }
 	    arg.append(c);
 	  }
@@ -4144,7 +4146,7 @@ static void decode_string_args(macro_iterator *mi)
       break;
     macro arg;
     int quote_input_level = 0;
-    int done_tab_warning = 0;
+    bool was_warned = false; // about an input tab character
     if (c == '"') {
       quote_input_level = input_stack::get_level();
       c = get_copy(&n);
@@ -4166,9 +4168,11 @@ static void decode_string_args(macro_iterator *mi)
 	if (c == 0)
 	  arg.append(n);
 	else {
-	  if (c == '\t' && quote_input_level == 0 && !done_tab_warning) {
-	    warning(WARN_TAB, "tab character in unquoted string argument");
-	    done_tab_warning = 1;
+	  if (c == '\t' && quote_input_level == 0 && !was_warned)
+	  {
+	    warning(WARN_TAB, "tab character in parameterized escape"
+		    " sequence");
+	    was_warned = true;
 	  }
 	  arg.append(c);
 	}
