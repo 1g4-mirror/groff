@@ -1,5 +1,24 @@
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[soelim]: Read argument to `so` request in a more GNU troff-ish
+	fashion (and a more AT&T troff-ish fasion, if one considers the
+	`ds` and `as` requests).  Accept but discard a leading double
+	quote to permit embedding of leading spaces in the file name,
+	and accept unescaped literal spaces in argument.
+
+	* src/preproc/soelim/soelim.cpp (do_so): Do it.
+	* src/preproc/soelim/soelim.1.man (Description): Document it.
+
+	* src/preproc/soelim/tests/space-in-argument-works.sh: Add unit
+	test.
+	* src/preproc/soelim/soelim.am (soelim_TESTS): Run test.
+
+	* NEWS: Add item.
+
+	Fixes <https://savannah.gnu.org/bugs/?66027>.
+
+2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[soelim]: Fix code style nits.
 
 	* src/preproc/soelim/soelim.cpp: Boolify and rename some global

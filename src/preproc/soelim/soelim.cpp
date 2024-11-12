@@ -140,9 +140,10 @@ void do_so(const char *line)
     p++;
   string filename;
   bool is_filename_valid = true;
-  for (const char *q = p;
-       is_filename_valid && *q != '\0' && *q != '\n' && *q != ' ';
-       q++)
+  const char *q = p;
+  if ('"' == *q)
+    q++;
+  for (; is_filename_valid && (*q != '\0') && (*q != '\n'); q++)
     if (*q == '\\') {
       switch (*++q) {
       case 'e':

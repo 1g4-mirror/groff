@@ -184,6 +184,17 @@ nroff
 *  nroff now supports clustered options ("-tzms", for example) as groff,
    troff, and other GNU getopt-using programs do.
 
+soelim
+------
+
+*  soelim no longer requires embedded space characters in `so` arguments
+   to be backslash-escaped.  (It continues to support that syntax.)  If
+   the argument to a `so` request must contain leading spaces, any such
+   sequence of spaces must now be prefixed with a double quote character
+   ("), which the program then discards.  These changes are to better
+   align this program's parsing rules with those of GNU troff and of
+   AT&T troff historically; consider the `ds` and `as` requests.
+
 Macro packages
 --------------
 
