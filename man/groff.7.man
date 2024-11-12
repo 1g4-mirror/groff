@@ -4028,9 +4028,19 @@ are suffixed with a tab and asterisk
 .RB ( * ).
 .
 .TPx
-.REQ .pi command
-Pipe output to
-.IR command .
+.REQ .pi contents
+Pipe GNU
+.I troff \" GNU
+output through
+.I contents
+(which is read in copy mode)
+by passing it to
+.MR popen 3 .
+.
+Multiple
+.B pi
+requests construct a multi-stage pipeline in the same order as the
+formatter encounters the requests.
 .
 Unsafe request;
 disabled by default.
@@ -4504,12 +4514,12 @@ request
 .\" XXX: negative values accepted; check AT&T troff
 .
 .TPx
-.REQ .sy command-line
+.REQ .sy contents
 Execute
-.IR command-line ,
-a sequence of ordinary characters,
-.\" ...limiting the shell commands you can express; see Savannah #65108.
-with
+.I contents
+(which is read in copy mode)
+in the operating environment
+by passing it to
 .MR system 3 .
 .
 Unsafe request;

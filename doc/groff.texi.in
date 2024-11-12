@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle October 2024
+@subtitle November 2024
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -16430,7 +16430,7 @@ Dear Mr. Adollar,
 .ex
 @endExample
 
-@Defreq {pi, pipe}
+@Defreq {pi, contents}
 Use GNU @command{troff}'s device-independent output as the input to the
 commands specified in @var{pipe} and emit their output to the standard
 output stream instead of GNU @command{troff}'s usual output.
@@ -16440,6 +16440,13 @@ Since that output is in a page description
 language,@footnote{@xref{gtroff Output}.} using this request without
 specifying the @option{-Z} option to @command{groff} is likely to
 provoke fatal errors from an output driver.
+
+The formatter reads the remainder of the input line into @var{contents}
+and passes it to @cite{popen@r{(3)}}.  Output produced by the
+command(s) is not captured by GNU @command{troff}.
+
+Multiple @code{pi} requests construct a multi-stage pipeline in the same
+order as the formatter encounters the requests.
 
 @code{pi} must be invoked before GNU @command{troff} writes any nodes
 to its output.@footnote{@xref{Gtroff Internals}.}  The formatter reports
@@ -16456,13 +16463,9 @@ Use of this request in safer mode (GNU @command{troff}'s default) is
 erroneous.  Invoke GNU @command{troff} or a front end with the
 @option{-U} option to enable unsafe mode.
 
-Multiple calls to @code{pi} are allowed, acting as a chain.  For
-example,
-
 @Example
 .pi foo
 .pi bar
-@r{@dots{}}
 @endExample
 
 is the same as @w{@samp{.pi foo | bar}}.
@@ -16470,10 +16473,12 @@ is the same as @w{@samp{.pi foo | bar}}.
 
 @cindex system commands, running
 @cindex running system commands
-@DefreqList {sy, cmds}
+@DefreqList {sy, contents}
 @DefregListEndx {systat}
-Execute the shell command(s) specified by @var{cmds}.  The output is not
-saved anywhere, so it is up to the user to do so.
+Execute the specified shell command(s).  The formatter reads the
+remainder of the input line into @var{contents} and passes it to
+@cite{system@r{(3)}}.  Output produced by the command(s) is not captured
+by GNU @command{troff}.
 
 @cindex safer mode
 @cindex mode, safer
@@ -16483,6 +16488,13 @@ It is an error to use this request in safer mode; this is the default.
 Give GNU @code{troff} or a front end program the @option{-U} option to
 enable unsafe mode.
 
+@cindex @code{system()} return value register (@code{systat})
+The writable register @code{systat} contains the return value of the
+@cite{system@r{(3)}} function executed by the most recent @code{sy}
+request.
+
+@c XXX: This is a really lame example because we already have built-in
+@c registers for this.  Come up with something better.
 The following code fragment introduces the current time into a document.
 
 @pindex perl
@@ -16514,10 +16526,6 @@ output.
 \n[hours]:\n[minutes]:\n[seconds]
     @result{} 02:17:54
 @endExample
-
-@cindex @code{system()} return value register (@code{systat})
-The writable register @code{systat} contains the return value of the
-@code{system()} function executed by the last @code{sy} request.
 @endDefreq
 
 @DefreqList {open, stream file}
