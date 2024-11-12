@@ -12,6 +12,7 @@
 	`success` to Boolean `is_filename_valid`.  Use Boolean literals
 	for assignments.
 	(do_file): Adjust language of diagnostic message.
+	(usage): Expand usage message with an actual description.
 
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
