@@ -16430,7 +16430,7 @@ Dear Mr. Adollar,
 .ex
 @endExample
 
-@Defreq {pi, contents}
+@Defreq {pi, [@code{"}]@Var{contents}}
 Use GNU @command{troff}'s device-independent output as the input to the
 commands specified in @var{pipe} and emit their output to the standard
 output stream instead of GNU @command{troff}'s usual output.
@@ -16444,6 +16444,9 @@ provoke fatal errors from an output driver.
 The formatter reads the remainder of the input line into @var{contents}
 and passes it to @cite{popen@r{(3)}}.  Output produced by the
 command(s) is not captured by GNU @command{troff}.
+
+GNU @command{troff} strips a leading neutral double quote from the
+argument, allowing embedded leading spaces in @var{contents}.
 
 Multiple @code{pi} requests construct a multi-stage pipeline in the same
 order as the formatter encounters the requests.
@@ -16473,12 +16476,15 @@ is the same as @w{@samp{.pi foo | bar}}.
 
 @cindex system commands, running
 @cindex running system commands
-@DefreqList {sy, contents}
+@DefreqList {sy, [@code{"}]@Var{contents}}
 @DefregListEndx {systat}
 Execute the specified shell command(s).  The formatter reads the
 remainder of the input line into @var{contents} and passes it to
 @cite{system@r{(3)}}.  Output produced by the command(s) is not captured
 by GNU @command{troff}.
+
+GNU @command{troff} strips a leading neutral double quote from the
+argument, allowing embedded leading spaces in @var{contents}.
 
 @cindex safer mode
 @cindex mode, safer
@@ -17947,6 +17953,12 @@ Unlike @acronym{AT&T} @code{troff}, GNU @code{troff} does not ignore the
 @code{ss} request if the output is a terminal device; instead, the
 values of minimum inter-word and additional inter-sentence space are
 each rounded down to the nearest multiple of@tie{}12.
+
+@cindex @code{pi} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
+GNU @command{troff} strips a leading neutral double quote from the
+argument to the @code{pi} and @code{sy} requests, allowing it to contain
+embedded leading spaces.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{cs} request, incompatibilities with @acronym{AT&T} @code{troff}

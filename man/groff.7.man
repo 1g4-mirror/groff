@@ -4037,6 +4037,11 @@ output through
 by passing it to
 .MR popen 3 .
 .
+A leading neutral double quote is stripped from the argument,
+allowing embedded leading spaces in
+.I contents,
+which is read in copy mode and continues to the end of the input line.
+.
 Multiple
 .B pi
 requests construct a multi-stage pipeline in the same order as the
@@ -4521,6 +4526,11 @@ Execute
 in the operating environment
 by passing it to
 .MR system 3 .
+.
+A leading neutral double quote is stripped from the argument,
+allowing embedded leading spaces in
+.I contents,
+which is read in copy mode and continues to the end of the input line.
 .
 Unsafe request;
 disabled by default.

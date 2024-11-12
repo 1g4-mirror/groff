@@ -1,5 +1,13 @@
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_string): Recognize a leading
+	double quote in the argument and handle it like other
+	"contents"-reading requests do; the best known of these is the
+	string-definition request, `ds`, which however uses its own
+	logic.  This change affects only the `pi` and `sy` requests.
+
+2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(decode_args): Rename this...
 	(decode_macro_call_arguments): ...to this.

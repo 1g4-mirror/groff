@@ -6049,6 +6049,17 @@ inter-sentence space each to the nearest multiple of\~12.
 .
 .
 .P
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the argument to the
+.B pi
+and
+.B sy
+requests,
+allowing it to contain embedded leading spaces.
+.
+.
+.P
 In GNU
 .I troff \" GNU
 there is a fundamental difference between (unformatted) characters and

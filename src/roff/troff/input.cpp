@@ -8409,14 +8409,19 @@ void abort_request()
   cleanup_and_exit(EXIT_FAILURE);
 }
 
+// Consume the rest of the input line in copy mode; if, after spaces,
+// the argument starts with a `"`, discard it, letting any immediately
+// subsequent spaces populate the returned string.
 char *read_string()
 {
   int len = 256;
   char *s = new char[len]; // C++03: new char[len]();
   (void) memset(s, 0, (len * sizeof(char)));
-  int c;
-  while ((c = get_copy(0 /* nullptr */)) == ' ')
-    ;
+  int c = get_copy(0 /* nullptr */);
+  while (c == ' ')
+    c = get_copy(0 /* nullptr */);
+  if (c == '"')
+    c = get_copy(0 /* nullptr */);
   int i = 0;
   while (c != '\n' && c != EOF) {
     if (!is_invalid_input_char(c)) {

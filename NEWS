@@ -56,6 +56,10 @@ troff
    and abort evaluation of the expression, the formatter now emits a
    warning diagnostic in the "range" category.
 
+*  GNU troff now strips a leading neutral double quote from the argument
+   to the `pi` and `sy` requests, allowing it to contain embedded
+   leading spaces.
+
 *  The "el" warning category has been withdrawn.  If enabled (which it
    was not by default), the formatter would emit a diagnostic if it
    inferred an imbalance between `ie` and `el` requests.  Unfortunately
