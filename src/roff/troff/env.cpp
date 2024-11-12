@@ -1371,6 +1371,7 @@ void override_sizes()
     p = strtok(0, " \t");
   }
   font_size::init_size_list(sizes);
+  tok.next();
 }
 
 void space_size()

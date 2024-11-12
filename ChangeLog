@@ -1,5 +1,18 @@
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.  Shift responsibility for calling
+	`tok.next()` onto callers of `read_string()` instead of doing it
+	internally.  For the purpose I have in mind (migrating `so` and
+	`mso` to use `read_string()`), the latter advances the input
+	stream pointer too early--better to let the caller control that.
+
+	* src/roff/troff/input.cpp (read_string): Drop `tok.next()`
+	call.
+	* src/roff/troff/env.cpp (override_sizes): Add `tok.next()`
+	call.
+
+2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_string): Recognize a leading
 	double quote in the argument and handle it like other
 	"contents"-reading requests do; the best known of these is the

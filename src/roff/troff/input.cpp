@@ -8412,6 +8412,8 @@ void abort_request()
 // Consume the rest of the input line in copy mode; if, after spaces,
 // the argument starts with a `"`, discard it, letting any immediately
 // subsequent spaces populate the returned string.
+//
+// The caller must use `tok.next()` to advance the input stream pointer.
 char *read_string()
 {
   int len = 256;
@@ -8438,7 +8440,6 @@ char *read_string()
     c = get_copy(0 /* nullptr */);
   }
   s[i] = '\0';
-  tok.next();
   if (i == 0) {
     delete[] s;
     return 0 /* nullptr */;
