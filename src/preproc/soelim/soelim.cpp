@@ -84,7 +84,7 @@ int main(int argc, char **argv)
     switch (opt) {
     case 'v':
       printf("GNU soelim (groff) version %s\n", Version_string);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case 'C':
       want_att_compat = true;
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -108,7 +108,7 @@ int main(int argc, char **argv)
       exit(2);
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled getopt_long return value");
     }
   int nbad = 0;
   if (optind >= argc)
@@ -116,9 +116,11 @@ int main(int argc, char **argv)
   else
     for (int i = optind; i < argc; i++)
       nbad += !do_file(argv[i]);
-  if (ferror(stdout) || fflush(stdout) < 0)
-    fatal("output error");
-  return nbad != 0;
+  if (ferror(stdout))
+    fatal("error status on standard output stream");
+  if (fflush(stdout) < 0)
+    fatal("cannot flush standard output stream: %1", strerror(errno));
+  return (nbad != 0);
 }
 
 void set_location()
@@ -302,7 +304,7 @@ int do_file(const char *filename)
       }
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled state in file parser");
     }
   }
   switch (state) {
@@ -328,8 +330,10 @@ int do_file(const char *filename)
     break;
   }
   if (fp != stdin)
-    fclose(fp);
-  current_filename = 0;
+    if (fclose(fp) < 0)
+      fatal("cannot close '%1': %2", whole_filename.contents(),
+	    strerror(errno));
+  current_filename = 0 /* nullptr */;
   return 1;
 }
 

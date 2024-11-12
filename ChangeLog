@@ -13,6 +13,14 @@
 	for assignments.
 	(do_file): Adjust language of diagnostic message.
 	(usage): Expand usage message with an actual description.
+	(main): Use standard C library symbols `EXIT_SUCCESS` and
+	`EXIT_FAILURE` with `exit()` calls instead of integer literals.
+	(main, do_file): Replace `assert(0)` calls with communicative
+	predicates.
+	(do_file): Check return value of `fclose()`, and exit with fatal
+	error if it fails.
+	(main): Distinguish `ferror()` status and `fflush(stdout)`
+	failures when cleaning up before exit.
 
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
