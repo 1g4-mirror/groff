@@ -122,9 +122,9 @@ void do_so(const char *line)
   while (*p == ' ')
     p++;
   string filename;
-  int success = 1;
+  bool is_filename_valid = true;
   for (const char *q = p;
-       success && *q != '\0' && *q != '\n' && *q != ' ';
+       is_filename_valid && *q != '\0' && *q != '\n' && *q != ' ';
        q++)
     if (*q == '\\') {
       switch (*++q) {
@@ -136,13 +136,13 @@ void do_so(const char *line)
 	filename += ' ';
 	break;
       default:
-	success = 0;
+	is_filename_valid = false;
 	break;
       }
     }
     else
       filename += char(*q);
-  if (success && filename.length() > 0) {
+  if (is_filename_valid && (filename.length() > 0)) {
     filename += '\0';
     const char *fn = current_filename;
     int ln = current_lineno;
@@ -171,7 +171,8 @@ int do_file(const char *filename)
   whole_filename += '\0';
   free(file_name_in_path);
   if (fp == 0) {
-    error("can't open '%1': %2", whole_filename.contents(), strerror(err));
+    error("cannot open '%1': %2", whole_filename.contents(),
+	  strerror(err));
     return 0;
   }
   normalize_for_lf(whole_filename);

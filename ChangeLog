@@ -1,5 +1,14 @@
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[soelim]: Fix code style nits.
+
+	* src/preproc/soelim/soelim.cpp (do_so): Boolify and rename
+	local variable, demoting integer `success` to Boolean
+	`is_filename_valid`.  Use Boolean literals for assignments.
+	(do_file): Adjust language of diagnostic message.
+
+2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor.  Shift responsibility for calling
 	`tok.next()` onto callers of `read_string()` instead of doing it
 	internally.  For the purpose I have in mind (migrating `so` and
