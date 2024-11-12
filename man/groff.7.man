@@ -4361,6 +4361,11 @@ Replace the request's control line with the contents of
 .IR file ,
 \[lq]sourcing\[rq] it.
 .
+A leading neutral double quote is stripped from the argument,
+allowing embedded leading spaces in
+.I file,
+which is read in copy mode and continues to the end of the input line.
+.
 .TPx
 .REQ .soquiet file
 As

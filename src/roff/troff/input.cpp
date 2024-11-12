@@ -6570,23 +6570,17 @@ static void while_continue_request()
 
 void do_source(bool quietly)
 {
-  symbol nm = get_long_name(true /* required */);
-  if (nm.is_null())
-    skip_line();
-  else {
-    while (!tok.is_newline() && !tok.is_eof())
-      tok.next();
-    errno = 0;
-    FILE *fp = include_search_path.open_file_cautious(nm.contents());
-    if (fp)
-      input_stack::push(new file_iterator(fp, nm.contents()));
-    else
-      // Suppress diagnostic only if we're operating quietly and it's an
-      // expected problem.
-      if (!(quietly && (ENOENT == errno)))
-	error("cannot open '%1': %2", nm.contents(), strerror(errno));
-    tok.next();
-  }
+  char *filename = read_string();
+  errno = 0;
+  FILE *fp = include_search_path.open_file_cautious(filename);
+  if (fp != 0 /* nullptr */)
+    input_stack::push(new file_iterator(fp, filename));
+  else
+    // Suppress diagnostic only if we're operating quietly and it's an
+    // expected problem.
+    if (!(quietly && (ENOENT == errno)))
+      error("cannot open '%1': %2", filename, strerror(errno));
+  tok.next();
 }
 
 void source_request() // .so
@@ -8740,26 +8734,20 @@ static void process_startup_file(const char *filename)
 
 void do_macro_source(bool quietly)
 {
-  symbol nm = get_long_name(true /* required */);
-  if (nm.is_null())
-    skip_line();
-  else {
-    while (!tok.is_newline() && !tok.is_eof())
-      tok.next();
-    char *path;
-    FILE *fp = mac_path->open_file(nm.contents(), &path);
-    if (fp != 0 /* nullptr */) {
-      input_stack::push(new file_iterator(fp, symbol(path).contents()));
-      free(path);
-    }
-    else
-      // Suppress diagnostic only if we're operating quietly and it's an
-      // expected problem.
-      if (!quietly && (ENOENT == errno))
-	warning(WARN_FILE, "cannot open macro file '%1': %2",
-		nm.contents(), strerror(errno));
-    tok.next();
+  char *macro_filename = read_string();
+  char *path;
+  FILE *fp = mac_path->open_file(macro_filename, &path);
+  if (fp != 0 /* nullptr */) {
+    input_stack::push(new file_iterator(fp, macro_filename));
+    free(path);
   }
+  else
+    // Suppress diagnostic only if we're operating quietly and it's an
+    // expected problem.
+    if (!quietly && (ENOENT == errno))
+      warning(WARN_FILE, "cannot open macro file '%1': %2",
+	      macro_filename, strerror(errno));
+  tok.next();
 }
 
 void macro_source_request() // .mso

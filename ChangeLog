@@ -1,5 +1,27 @@
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_source, do_macro_source):
+	Refactor to use `read_string()` instead of `get_long_name()` to
+	obtain the argument; this means that the argument consumes the
+	rest of the input line instead of being treated as a groff
+	identifier.  This change permits spaces in sourced file names.
+
+	* doc/groff.texi.in (I/O) <so, soquiet, mso, msoquiet>
+	(Other Differences):
+	* man/groff.7.man (Request short reference) <so>:
+	* man/groff_diff.7.man (New requests) <mso, msoquiet, soquiet>:
+	(Other differences): Document it.
+
+	* src/roff/groff/tests/\
+	so-request-accepts-embedded-space-in-arg.sh: Test it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	* NEWS: Add item.
+
+	Fixes <https://savannah.gnu.org/bugs/?66434>.
+
+2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[soelim]: Read argument to `so` request in a more GNU troff-ish
 	fashion (and a more AT&T troff-ish fasion, if one considers the
 	`ds` and `as` requests).  Accept but discard a leading double

@@ -3153,7 +3153,8 @@ word spaces).
 .
 .
 .TP
-.BI .mso\~ file
+.BR .mso\~ [ \[dq] ]\c
+.I file
 As
 .RB \[lq] so \[rq],
 except that
@@ -3176,7 +3177,8 @@ and the request has no other effect.
 .
 .
 .TP
-.BI .msoquiet\~ file
+.BR .msoquiet\~ [ \[dq] ]\c
+.I file
 As
 .BR mso ,
 but no warning is emitted if
@@ -3616,7 +3618,8 @@ the argument list can't extend over more than one line.
 .
 .
 .TP
-.BI .soquiet\~ file
+.BR .soquiet\~ [ \[dq] ]\c
+.I file
 As
 .RB \[lq] so \[rq],
 but no warning is emitted if
@@ -6052,7 +6055,9 @@ inter-sentence space each to the nearest multiple of\~12.
 GNU
 .I troff \" GNU
 strips a leading neutral double quote from the argument to the
-.B pi
+.BR pi ,
+and
+.BR so ,
 and
 .B sy
 requests,

@@ -16245,8 +16245,8 @@ escape sequences.
 
 @command{gtroff} has several requests for including files:
 
-@DefreqList {so, file}
-@DefreqListEndx {soquiet, file}
+@DefreqList {so, [@code{"}]@Var{file}}
+@DefreqListEndx {soquiet, [@code{"}]@Var{file}}
 @cindex including a file (@code{so})
 @cindex file, inclusion (@code{so})
 Replace the @code{so} request's control line with the contents of the
@@ -16255,6 +16255,9 @@ the directories specified by @option{-I} command-line option.  If
 @var{file} does not exist, a warning in category @samp{file} is produced
 and the request has no further effect.  @xref{Warnings}, for
 information about the enablement and suppression of warnings.
+
+GNU @command{troff} strips a leading neutral double quote from the
+argument, allowing embedded leading spaces in @var{contents}.
 
 @code{so} can be useful for large documents; e.g., allowing each chapter
 of a book to be kept in a separate file.  However, files interpolated
@@ -16296,10 +16299,10 @@ The comment regarding a final newline for the @code{so} request is valid
 for @code{pso} also.
 @endDefreq
 
-@DefreqList {mso, file}
-@DefreqListEndx {msoquiet, file}
+@DefreqList {mso, [@code{"}]@Var{file}}
+@DefreqListEndx {msoquiet, [@code{"}]@Var{file}}
 Identical to the @code{so} and @code{soquiet} requests, respectively,
-except that @command{gtroff} searches for the specified @var{file} in
+except that GNU @command{troff} searches for the specified @var{file} in
 the same directories as macro files for the @option{-m} command-line
 option.
 @endDefreq
@@ -17955,10 +17958,11 @@ values of minimum inter-word and additional inter-sentence space are
 each rounded down to the nearest multiple of@tie{}12.
 
 @cindex @code{pi} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{so} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
 GNU @command{troff} strips a leading neutral double quote from the
-argument to the @code{pi} and @code{sy} requests, allowing it to contain
-embedded leading spaces.
+argument to the @code{pi}, @code{so}, and @code{sy} requests, allowing
+it to contain embedded leading spaces.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{cs} request, incompatibilities with @acronym{AT&T} @code{troff}
