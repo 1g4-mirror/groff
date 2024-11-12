@@ -1,5 +1,15 @@
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(decode_args): Rename this...
+	(decode_macro_call_arguments): ...to this.
+	(decode_string_args): ...and this...
+	(decode_escape_sequence_arguments): ...to this.
+	(macro::invoke, composite_glyph_name, read_request)
+	(interpolate_string_with_args): Update call sites.
+
+2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (decode_args, decode_string_args):
 	Boolify and rename local variable, demoting integer
 	`done_tab_warning` to Boolean `was_warned`.  Use Boolean

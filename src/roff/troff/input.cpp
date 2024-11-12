@@ -4076,7 +4076,7 @@ static void interpolate_macro(symbol nm, bool do_not_want_next_token)
   }
 }
 
-static void decode_args(macro_iterator *mi)
+static void decode_macro_call_arguments(macro_iterator *mi)
 {
   if (!tok.is_newline() && !tok.is_eof()) {
     node *n;
@@ -4130,8 +4130,7 @@ static void decode_args(macro_iterator *mi)
   }
 }
 
-// XXX: This is a misnomer.  It's used to read stuff like `\[e aa]` too.
-static void decode_string_args(macro_iterator *mi)
+static void decode_escape_sequence_arguments(macro_iterator *mi)
 {
   node *n;
   int c = get_copy(&n);
@@ -4186,7 +4185,7 @@ static void decode_string_args(macro_iterator *mi)
 void macro::invoke(symbol nm, bool do_not_want_next_token)
 {
   macro_iterator *mi = new macro_iterator(nm, *this);
-  decode_args(mi);
+  decode_macro_call_arguments(mi);
   input_stack::push(mi);
   // we must delay tok.next() in case the function has been called by
   // do_request to assure proper handling of want_att_compat
@@ -4287,7 +4286,7 @@ static void map_composite_character()
 static symbol composite_glyph_name(symbol nm)
 {
   macro_iterator *mi = new macro_iterator();
-  decode_string_args(mi);
+  decode_escape_sequence_arguments(mi);
   input_stack::push(mi);
   const char *nc = nm.contents();
   const char *gn = glyph_name_to_unicode(nc);
@@ -4415,7 +4414,7 @@ void read_request()
     }
     if (c == ' ') {
       tok.make_space();
-      decode_args(mi);
+      decode_macro_call_arguments(mi);
     }
   }
   if (reading_from_terminal) {
@@ -4636,7 +4635,7 @@ static void interpolate_string_with_args(symbol nm)
     error("cannot interpolate request '%1'", nm.contents());
   else {
     macro_iterator *mi = new macro_iterator(nm, *m);
-    decode_string_args(mi);
+    decode_escape_sequence_arguments(mi);
     input_stack::push(mi);
   }
 }
