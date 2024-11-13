@@ -3298,6 +3298,9 @@
 	array elements of `const char` type to character, not integer,
 	literals.
 
+	Fixes <https://savannah.gnu.org/bugs/?46470>.  Thanks to Hanno
+	Boeck for the report.
+
 2024-08-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Boolify and rename `compatible_flag`, demoting it from
