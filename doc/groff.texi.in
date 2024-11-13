@@ -593,13 +593,13 @@ Formatting commands can be low-level typesetting primitives, macros from
 a supplied package, or user-defined macros.  All three approaches can be
 combined.
 
-A reimplementation and extension of the typesetter from @acronym{AT&T}
-Unix, @code{groff} is present on most @acronym{POSIX} systems owing to
-its long association with Unix manuals (including man pages).  It and
-its predecessor are notable for their production of several best-selling
-software engineering texts.  @code{groff} is capable of producing
-typographically sophisticated documents while consuming minimal system
-resources.
+A reimplementation and extension of @command{troff} and other programs
+from @acronym{AT&T} Unix, @code{groff} is widely available on
+@acronym{POSIX} and other systems owing to its long association with
+Unix manuals, including man pages.  It and its predecessor have produced
+several best-selling software engineering texts.  @code{groff} can
+create typographically sophisticated documents while consuming minimal
+system resources.
 @c END Keep parallel with groff(1), section "Description" (after the
 @c first sentence).
 

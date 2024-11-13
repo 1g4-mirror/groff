@@ -157,18 +157,19 @@ reads the standard input stream.
 .
 .
 .P
-A reimplementation and extension of the typesetter from AT&T Unix,
+A reimplementation and extension of
+.I troff \" AT&T
+and other programs from AT&T Unix,
 .I groff
-is present on most POSIX systems owing to its long association with Unix
-manuals
-(including man pages).
+is widely available on POSIX and other systems
+owing to its long association with Unix manuals,
+including man pages.
 .
-It and its predecessor are notable for their production of several
-best-selling software engineering texts.
-.
+It and its predecessor have produced
+several best-selling software engineering texts.
 .I groff
-is capable of producing typographically sophisticated documents while
-consuming minimal system resources.
+can create typographically sophisticated documents
+while consuming minimal system resources.
 .\" END Keep parallel with groff.texi node "What Is groff?".
 .
 .

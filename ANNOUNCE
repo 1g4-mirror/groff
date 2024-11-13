@@ -29,12 +29,12 @@ commands can be low-level typesetting primitives, macros from a
 supplied package, or user-defined macros.  All three approaches can be
 combined.
 
-A reimplementation and extension of the typesetter from AT&T Unix, groff
-is present on most POSIX systems owing to its long association with Unix
-manuals (including man pages).  It and its predecessor are notable for
-their production of several best-selling software engineering texts.
-groff is capable of producing typographically sophisticated documents
-while consuming minimal system resources.
+A reimplementation and extension of troff and other programs from AT&T
+Unix, groff is widely available on POSIX and other systems owing to its
+long association with Unix manuals, including man pages.  It and its
+predecessor have produced several best-selling software engineering
+texts.  groff can create typographically sophisticated documents while
+consuming minimal system resources.
 
   https://www.gnu.org/software/groff/
 
