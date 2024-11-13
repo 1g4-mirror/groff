@@ -4056,14 +4056,14 @@ static void interpolate_macro(symbol nm, bool do_not_want_next_token)
       if (r) {
 	macro *m = r->to_macro();
 	if ((0 /* nullptr */ == m) || !m->is_empty()) {
-	  warning(WARN_SPACE, "macro '%1' not defined (possibly missing"
+	  warning(WARN_SPACE, "name '%1' not defined (possibly missing"
 		  " space after '%2')", nm.contents(), buf);
 	  was_warned = true;
 	}
       }
     }
     if (!was_warned) {
-      warning(WARN_MAC, "macro '%1' not defined", nm.contents());
+      warning(WARN_MAC, "name '%1' not defined", nm.contents());
       p = new macro;
       request_dictionary.define(nm, p);
     }
@@ -9374,7 +9374,7 @@ static request_or_macro *lookup_request(symbol nm)
   request_or_macro *p
     = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
   if (0 /* nullptr */ == p) {
-    warning(WARN_MAC, "macro '%1' not defined", nm.contents());
+    warning(WARN_MAC, "name '%1' not defined", nm.contents());
     p = new macro;
     request_dictionary.define(nm, p);
   }

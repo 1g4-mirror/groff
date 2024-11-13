@@ -1,5 +1,19 @@
 2024-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (interpolate_macro, lookup_request):
+	Recast warning diagnostic in "mac" category to report that a
+	"name", rather than a "macro", is not defined.  While more
+	vague, it's also less misleading, since requests, strings, and
+	diversions all occupy the same name space and the warning is
+	thrown only if no identifier of any of these types exists.
+
+	* doc/groff.texi.in (Dummy Characters): Update example.
+
+	Fixes <https://savannah.gnu.org/bugs/?66350>.  Thanks to Bjarni
+	Gislason for the report.
+
+2024-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (lookup_request): Use C++
 	`static_cast` operator instead of C-style type cast.  Reorder
 	equality comparison to avoid inadvertent lvalue assignment.

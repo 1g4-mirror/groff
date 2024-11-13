@@ -11922,7 +11922,7 @@ Prevent recognition of a control character.
 
 @Example
 .Test
-    @error{} warning: macro 'Test' not defined
+    @error{} warning: name 'Test' not defined
 \&.Test
     @result{} .Test
 @endExample
