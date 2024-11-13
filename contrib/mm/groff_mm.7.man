@@ -549,7 +549,7 @@ A@0, A, B, C, .\|.\|., Z, AA, AB, .\|.\|.
 .SS Fonts
 .\" ====================================================================
 .
-.I "groff mm"
+.I mm
 assumes that the font styles
 .BR R \~(roman),
 .BR I \~(italic),
