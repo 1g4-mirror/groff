@@ -1,3 +1,9 @@
+2024-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (lookup_request): Use C++
+	`static_cast` operator instead of C-style type cast.  Reorder
+	equality comparison to avoid inadvertent lvalue assignment.
+
 2024-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_source, do_macro_source):

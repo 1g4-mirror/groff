@@ -9371,8 +9371,9 @@ void init_request(const char *s, REQUEST_FUNCP f)
 static request_or_macro *lookup_request(symbol nm)
 {
   assert(!nm.is_null());
-  request_or_macro *p = (request_or_macro *)request_dictionary.lookup(nm);
-  if (p == 0) {
+  request_or_macro *p
+    = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
+  if (0 /* nullptr */ == p) {
     warning(WARN_MAC, "macro '%1' not defined", nm.contents());
     p = new macro;
     request_dictionary.define(nm, p);
