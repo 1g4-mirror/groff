@@ -30,7 +30,8 @@
 
 	* src/roff/troff/reg.cpp (define_register_request)
 	(assign_register_format_request, alias_register_request): Remove
-	assertions that get tripped on invalid input.
+	assertions I added in commit 2f6a72b9e3, 3 September, that get
+	tripped on invalid input.
 	(assign_register_format_request): Skip remainder of input line
 	and return early if the first argument is an invalid identifier.
 	(remove_register_request): Explicitly break out of loop as soon
@@ -81,7 +82,7 @@
 
 	* src/roff/troff/input.cpp (has_args): Slightly refactor; use
 	the same expression to compute the return value after having
-	advaced the input pointer through spaces as is used at the top
+	advanced the input pointer through spaces as is used at the top
 	of the function.
 
 2024-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
