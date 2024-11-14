@@ -220,7 +220,6 @@ GROFF_MAN_PAGES1 = \
   src/preproc/eqn/neqn.1 \
   src/roff/nroff/nroff.1 \
   src/devices/gropdf/pdfmom.1 \
-  contrib/pdfmark/pdfroff.1 \
   src/utils/pfbtops/pfbtops.1 \
   src/preproc/pic/pic.1 \
   contrib/pic2graph/pic2graph.1 \

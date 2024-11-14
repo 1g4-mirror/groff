@@ -1,5 +1,24 @@
 2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Stop distributing pdfmark.  It is now separately maintained.
+	Please visit <https://osdn.net/users/keith/pf/groff-pdfmark/>
+	for the latest version.
+
+	* contrib/pdfmark: Recursively delete.
+	* Makefile.am: Stop including its Automake file.
+	* doc/doc.am (GROFF_MAN_PAGES1): Drop pdfroff man page.
+	* src/utils/grog/tests/smoke-test.sh: Stop using
+	"contrib/pdfmark/{cover,pdfmark}.ms" as test artifacts.
+
+	* MANIFEST:
+	* src/roff/groff/groff.1.man: De-document.
+
+	* NEWS: Add item.
+
+	Fixes <https://savannah.gnu.org/bugs/?63827>.
+
+2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* NEWS: Explain changes to `\X` and `.device` argument
 	processing.
 

@@ -44,11 +44,9 @@ SH_SEP=@PATH_SEPARATOR@
 
 # 'ALT_GHOSTSCRIPT_PROGS' specifies a list of alternative names to be
 # tried if 'GHOSTSCRIPT' cannot be found at run time.
-# XXX: only pdfmark.am uses this
 
 # 'ALT_AWK_PROGS' similarly specifies a list of alternative names,
 # which can be tried at run time, to identify the awk program.
-# XXX: only pdfmark.am uses this
 
 # BROKEN_SPOOLER_FLAGS
 #
@@ -578,7 +576,6 @@ include $(top_srcdir)/contrib/grap2graph/grap2graph.am
 include $(top_srcdir)/contrib/hdtbl/hdtbl.am
 include $(top_srcdir)/contrib/mm/mm.am
 include $(top_srcdir)/contrib/mom/mom.am
-include $(top_srcdir)/contrib/pdfmark/pdfmark.am
 include $(top_srcdir)/contrib/pic2graph/pic2graph.am
 include $(top_srcdir)/contrib/rfc1345/rfc1345.am
 include $(top_srcdir)/contrib/sboxes/sboxes.am

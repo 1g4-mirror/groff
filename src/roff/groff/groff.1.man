@@ -2407,8 +2407,8 @@ Formatter program:
 Formatter wrappers:
 .\".MR groff @MAN1EXT@ , \" 42 -- this page
 .MR @g@nroff @MAN1EXT@ , \" #44
-.MR pdfmom @MAN1EXT@ , \" #30
-.MR pdfroff @MAN1EXT@ \" #14
+.MR pdfmom @MAN1EXT@ \" #30
+.\" MR pdfroff @MAN1EXT@ \" formerly #14
 .
 .
 .TP

@@ -218,6 +218,11 @@ soelim
 Macro packages
 --------------
 
+*  Keith Marshall's pdfmark package is no longer distributed with groff,
+   but is now separately maintained.  Please visit
+   <https://osdn.net/users/keith/pf/groff-pdfmark/> for the latest
+   version.
+
 *  mom version 2.6 is distributed with this release.  It supports
    multi-line headings.  Thanks to Peter Schaffter.
 
