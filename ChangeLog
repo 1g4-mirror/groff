@@ -1,3 +1,12 @@
+2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m4/groff.m4 (GROFF_CHECK_VERSION_FORMAT): Use a _basic_ (not
+	extended) regular expression as the pattern operand to expr(1)'s
+	`:` operator.  Should fix configuration failure on macOS.
+
+	Fixes <https://savannah.gnu.org/bugs/?66438>.  Thanks to Sven
+	Schober for the report.
+
 2024-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (interpolate_macro, lookup_request):
