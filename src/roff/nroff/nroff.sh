@@ -86,10 +86,9 @@ do
   # -s "
   # -f because terminal devices don't support font families.
   # -g because terminals don't do graphics.  (Some do, but grotty(1)
-  #    does not produce ReGIS or Sixel output.)
+  #    does not produce ReGIS or Sixel output.  Yet we support `-p`.)
   # -G "
   # -j "
-  # -p "
   # -l because terminal output is not suitable for a print spooler.
   # -L "
   # -N because we don't support -e.
