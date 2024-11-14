@@ -71,6 +71,22 @@ troff
    We recommend using brace escape sequences `\{` and `\}` to ensure
    that your control flow structures remain maintainable.
 
+*  GNU troff now performs some limited processing/transformation of the
+   argument to the `\X` escape sequence and its counterpart `device`
+   request, to address the requirement that some documents have to pass
+   metadata that must encode non-ASCII characters in device extension
+   commands.  (For example, a document author may desire a document's
+   section headings containing non-ASCII code points to appear correctly
+   in PDF bookmarks.  Further, GNU troff encodes its output page
+   description language only in ASCII.)  This change is expected to be
+   of significance mainly to developers of output drivers for groff;
+   groff_diff(7) describes the transformations.  If you have been using
+   `\X` or `.device` to pass ASCII data to the output driver as a device
+   extension command and require that it remain precisely as-is, use the
+   `\!` escape sequence or `output` request, and prefix your data with
+   "x X ", the device-independent troff means of expressing a device
+   extension command (see groff_out(5)).
+
 *  In nroff mode (in other words, when producing output for devices that
    claim to be terminals), the formatter now reports warning diagnostics
    regarding certain output problems using units of lines instead of

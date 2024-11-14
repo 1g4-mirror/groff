@@ -1,5 +1,13 @@
 2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* NEWS: Explain changes to `\X` and `.device` argument
+	processing.
+
+	Fixes <https://savannah.gnu.org/bugs/?63074>.  Thanks to Nikita
+	Ivanov for the report.
+
+2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/psrm.cpp (resource_manager::output_prolog)
 	(resource_manager::supply_resource): Migrate from using
 	`font::open_file()` to `font::open_resource_file()`, restoring
