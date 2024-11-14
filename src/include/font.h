@@ -1,5 +1,4 @@
-// -*- C++ -*-
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -212,14 +211,23 @@ public:
   static void command_line_font_dir(const char *);	// Prepend given
 			// path (arg1) to the list of directories in which
 			// to look up fonts.
-  static FILE *open_file(const char *, char **);	// Open
-			// a font file with the given name (arg1),
-			// searching along the current font path.  If
-			// arg2 points to a string pointer, set it to
-			// the found file name (this depends on the
-			// device also).  Return the opened file.  If
-			// not found, arg2 is unchanged, and a null
-			// pointer is returned.
+  static FILE *open_file(const char *, char **); // Open a font
+			// description file with the given name (arg1),
+			// searching along the current font path, and
+			// rejecting `arg1` if it contains a slash (see
+			// Savannah #61424).  If arg2 points to a string
+			// pointer, set it to the found file name (this
+			// depends on the device also).  Return the
+			// opened file's stream pointer.  If not found,
+			// arg2 is unchanged, and a null pointer is
+			// returned.
+  static FILE *open_resource_file(const char *, char **); // Open an
+			// externally supplied (non-groff) file required
+			// by the output driver, possibly to embed
+			// content in the generated file.  Like
+			// `open_file()` except that it accepts slashes
+			// in `arg1`.  Examples include Type 1 fonts
+			// embedded in PostScript output.
 
   // Open the DESC file (depending on the device) and initialize some
   // static variables with info from there.

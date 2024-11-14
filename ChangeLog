@@ -1,5 +1,17 @@
 2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/font.h (class font): Declare new
+	`open_resource_file()` member function with same interface as
+	`open_file()`, but intended to open arbitrary file
+	specifications instead of only files within groff's font search
+	path.  This is for use by drivers that need to embed auxiliary
+	files in their output, such as font files for PostScript
+	{contrast these with groff's font _description_ files}.
+	* src/libs/libgroff/fontfile.cpp (font::open_resource_file):
+	Implement new function.
+
+2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_CHECK_VERSION_FORMAT): Use a _basic_ (not
 	extended) regular expression as the pattern operand to expr(1)'s
 	`:` operator.  Should fix configuration failure on macOS.
