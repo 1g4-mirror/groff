@@ -293,11 +293,7 @@ void resource_manager::output_prolog(ps_output &out)
       fatal("cannot update environment: %1", strerror(errno));
   }
   char *prologue = getenv("GROPS_PROLOGUE");
-  // TODO: (?) Skip this check if `-U` (unsafe) option specified.
-  if (strchr(prologue, '/') != 0 /* nullptr */)
-    fatal("a '/' is not allowed in PostScript prologue file name:"
-	  " '%1'", prologue);
-  FILE *fp = font::open_file(prologue, &path);
+  FILE *fp = font::open_resource_file(prologue, &path);
   if (0 /* nullptr */ == fp)
     fatal("cannot open PostScript prologue file '%1': %2", prologue,
 	  strerror(errno));
@@ -333,13 +329,8 @@ void resource_manager::supply_resource(resource *r, int rank,
   char *path = 0 /* nullptr */;
   FILE *fp = 0 /* nullptr */;
   if (r->filename != 0 /* nullptr */) {
-    // TODO: (?) Skip this check if `-U` (unsafe) option specified.
-    if (strchr(r->filename, '/') != 0 /* nullptr */)
-      fatal("a '/' is not allowed in PostScript %1 file name: '%2'",
-	    (r->type == RESOURCE_FONT) ? "font" : "resource",
-	    r->filename);
     if (r->type == RESOURCE_FONT) {
-      fp = font::open_file(r->filename, &path);
+      fp = font::open_resource_file(r->filename, &path);
       if (0 /* nullptr */ == fp) {
 	  error("cannot open PostScript font file '%1': %2",
 		r->filename, strerror(errno));

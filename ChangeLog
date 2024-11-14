@@ -1,5 +1,16 @@
 2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog)
+	(resource_manager::supply_resource): Migrate from using
+	`font::open_file()` to `font::open_resource_file()`, restoring
+	grops's ability from groff 1.22.4 and earlier to open arbitrary
+	file specifications as PostScript prolog or font files.
+
+	Fixes <https://savannah.gnu.org/bugs/?66419>.  Thanks to Rob
+	Kolstad for the report.
+
+2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/font.h (class font): Declare new
 	`open_resource_file()` member function with same interface as
 	`open_file()`, but intended to open arbitrary file
