@@ -119,6 +119,8 @@ SUFFIXES += .roff .in .ps
 	&& sed -e "s|[@]fontdir[@]|$(fontdir)|" \
 	       -e "s|[@]EGREP[@]|$(EGREP)|" $< >$@
 
+# groff(1)'s `-I` implies `-g` and `-s`, so we must depend on grn and
+# soelim even though the documents don't require them.
 $(HDTBLPROCESSEDEXAMPLEFILES): $(DOC_GNU_EPS) groff troff eqn pic tbl \
   grops grn soelim font/devps/stamp contrib/hdtbl/examples/common.roff
 
