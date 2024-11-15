@@ -57,8 +57,8 @@ troff
    warning diagnostic in the "range" category.
 
 *  GNU troff now strips a leading neutral double quote from the argument
-   to the `pi`, `so`, and `sy` requests, allowing it to contain embedded
-   leading spaces.
+   to the `mso`, `msoquiet`, `pi`, `so`, `soquiet`, and `sy` requests,
+   allowing it to contain embedded leading spaces.
 
 *  GNU troff now accepts space characters in the argument to the `mso`,
    `msoquiet`, `so`, and `soquiet` requests.  See "soelim" below.
