@@ -33,7 +33,7 @@ AC_DEFUN([GROFF_MAKE_SHORT_VERSION], [
 AC_DEFUN([GROFF_CHECK_VERSION_FORMAT], [
   AC_REQUIRE([GROFF_MAKE_SHORT_VERSION])
   groff_version_format_validity=invalid
-  AC_MSG_CHECKING([checking that groff version string has valid format])
+  AC_MSG_CHECKING([that groff version string has valid format])
   if expr "$SHORT_VERSION" : \
       '[[0-9]][[0-9]]*\.[[0-9]][[0-9]]*\.[[0-9]][[0-9]]*' \
     > /dev/null
