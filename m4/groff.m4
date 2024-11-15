@@ -273,55 +273,6 @@ AC_DEFUN([GROFF_GROHTML_PROGRAM_NOTICE], [
   fi
 ])
 
-dnl pdfroff uses awk, and we use it in GROFF_URW_FONTS_CHECK.
-
-AC_DEFUN([GROFF_AWK_NOTICE], [
-  AC_REQUIRE([GROFF_AWK_PATH])
-
-  awk_names=awk
-  if test -n "$ALT_AWK_PROGS"
-  then
-    awk_names="$ALT_AWK_PROGS"
-  fi
-
-  if test "$AWK" = missing
-  then
-    AC_MSG_NOTICE([No awk program was found in \$PATH.
-
-  It was sought under the name(s) "$awk_names".
-    ])
-  fi
-])
-
-AC_DEFUN([GROFF_PDFROFF_DEPENDENCIES_CHECK], [
-  AC_REQUIRE([GROFF_AWK_PATH])
-  AC_REQUIRE([GROFF_GHOSTSCRIPT_PATH])
-
-  use_pdfroff=no
-  pdfroff_missing_deps=
-
-  test "$AWK" = missing && pdfroff_missing_deps="awk"
-
-  if test "$GHOSTSCRIPT" = missing
-  then
-    verb=is
-
-    if test -n "$pdfroff_missing_deps"
-    then
-      pdfroff_missing_deps="$pdfroff_missing_deps and "
-      verb=are
-    fi
-    pdfroff_missing_deps="${pdfroff_missing_deps}Ghostscript $verb"
-  fi
-
-  if test -z "$pdfroff_missing_deps"
-  then
-    use_pdfroff=yes
-  fi
-
-  AC_SUBST([use_pdfroff])
-])
-
 AC_DEFUN([GROFF_GROPDF_DEPENDENCIES_CHECK], [
   AC_REQUIRE([GROFF_GHOSTSCRIPT_PATH])
   AC_REQUIRE([GROFF_URW_FONTS_CHECK])
@@ -336,19 +287,6 @@ AC_DEFUN([GROFF_GROPDF_DEPENDENCIES_CHECK], [
   fi
 
   AC_SUBST([use_gropdf])
-])
-
-AC_DEFUN([GROFF_PDFROFF_PROGRAM_NOTICE], [
-  AC_REQUIRE([GROFF_PDFROFF_DEPENDENCIES_CHECK])
-
-  if test "$use_pdfroff" = no
-  then
-    AC_MSG_NOTICE(['pdfroff' will not be functional.
-
-  Because $pdfroff_missing_deps missing, 'pdfroff' will not operate
-  and the 'pdfmark.pdf' document will not be available.
-])
-  fi
 ])
 
 AC_DEFUN([GROFF_GROPDF_PROGRAM_NOTICE], [
@@ -662,29 +600,6 @@ AC_DEFUN([GROFF_GHOSTSCRIPT_VERSION_NOTICE], [
   ])
   fi
 ])
-
-# Check location of 'awk'; allow '--with-awk=PROG' option to override.
-
-AC_DEFUN([GROFF_AWK_PATH],
-  [AC_REQUIRE([GROFF_AWK_PREFS])
-   AC_ARG_WITH([awk],
-     [AS_HELP_STRING([--with-awk=PROG],
-       [actual [/path/]name of awk executable])],
-     [AWK=$withval],
-     [AC_CHECK_TOOLS(AWK, [$ALT_AWK_PROGS], [missing])])
-   test "$AWK" = no && AWK=missing])
-
-
-# Preferences for choice of 'awk' program; allow --with-alt-awk="LIST"
-# to override.
-
-AC_DEFUN([GROFF_AWK_PREFS],
-  [AC_ARG_WITH([alt-awk],
-    [AS_HELP_STRING([--with-alt-awk=LIST],
-      [alternative names for awk executable])],
-    [ALT_AWK_PROGS="$withval"],
-    [ALT_AWK_PROGS="gawk mawk nawk awk"])
-   AC_SUBST([ALT_AWK_PROGS])])
 
 
 # GROFF_CSH_HACK(if hack present, if not present)

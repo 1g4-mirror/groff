@@ -1,5 +1,17 @@
 2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Drop now-unused Autoconf macros.
+
+	* configure.ac: Stop expanding `GROFF_AWK_NOTICE`,
+	`GROFF_PDFROFF_DEPENDENCIES_CHECK`, and
+	`GROFF_PDFROFF_PROGRAM_NOTICE` macros.  Drop `AM_CONDITIONAL`
+	with `USE_PDFROFF` argument.
+	* m4/groff.m4 (GROFF_AWK_NOTICE, GROFF_AWK_PATH)
+	(GROFF_AWK_PREFS, GROFF_PDFROFF_DEPENDENCIES_CHECK)
+	(GROFF_PDFROFF_PROGRAM_NOTICE): Drop unused macro definitions.
+
+2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Stop distributing pdfmark.  It is now separately maintained.
 	Please visit <https://osdn.net/users/keith/pf/groff-pdfmark/>
 	for the latest version.

@@ -45,9 +45,6 @@ SH_SEP=@PATH_SEPARATOR@
 # 'ALT_GHOSTSCRIPT_PROGS' specifies a list of alternative names to be
 # tried if 'GHOSTSCRIPT' cannot be found at run time.
 
-# 'ALT_AWK_PROGS' similarly specifies a list of alternative names,
-# which can be tried at run time, to identify the awk program.
-
 # BROKEN_SPOOLER_FLAGS
 #
 # Normally the Postscript driver, grops, produces output that conforms
