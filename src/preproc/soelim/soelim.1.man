@@ -150,19 +150,19 @@ prefix the sequence with a neutral double quote
 .
 Non-leading spaces are interpreted literally.
 .
-If the included file name requires a backslash,
-use
-.B \[rs]\[rs]
-or
-.B \[rs]e
-to embed it.
-.
 A backslash followed by a space
 .RB (\[lq] \[rs]\~ \[rq])
 also encodes a space,
 for compatibility with earlier versions of
 GNU
 .IR soelim . \" GNU
+.
+If the included file name requires a backslash,
+use
+.B \[rs]\[rs]
+or
+.B \[rs]e
+to embed it.
 .
 Any other escape sequence in
 .IR included-file ,
