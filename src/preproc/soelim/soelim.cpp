@@ -59,13 +59,10 @@ void usage(FILE *stream)
 "lines of the form \".so included‐file\" within each text input-file\n"
 "with the contents of included-file, recursively.  By default, it\n"
 "writes \"lf\" requests as well to record the name and line number of\n"
-"each input-file and included-file, so that any diagnostics produced\n"
-"by later processing can be accurately traced to the original input.\n"
-"\n"
-"Use the -t option to produce TeX comments instead of roff requests.\n"
-"\n"
-"Use the -r option to process general text files, to flatten a tree\n"
-"of input documents.  See the soelim(1) manual page.\n",
+"each input-file and included-file.  Use the -t option to produce TeX\n"
+"comments instead of roff requests.  Use the -r option to process\n"
+"general text files, to flatten a tree of input documents.  See the\n"
+"soelim(1) manual page.\n",
 	  stream);
 }
 
