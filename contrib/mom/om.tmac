@@ -5024,7 +5024,7 @@ y\R'#DESCENDER \\n[.cdp]'
 .       FOOTER_RIGHT_SIZE +0
 .       FOOTER_RIGHT "\&.../\E*[$SUITE]
 .       FOOTER_ON_FIRST_PAGE
-.       em ALL_DONE
+.       ds $CC_STRING CC:
 .    \}
 .    if '\\$1'SLIDES' \{\
 .       shift
@@ -5143,7 +5143,12 @@ y\R'#DESCENDER \\n[.cdp]'
 \#   LETTERHEAD<n>
 \#
 .MAC DATE END
-.    if !'\\n[.z]'' .di
+.    if !'\\n[.z]'' \{\
+\!.     vpt
+.       di
+.       if \\n[#GET_CC_DEPTH] .nr #CC_DEPTH \\n[dn]
+.       rm #GET_CC_DEPTH
+.    \}
 .    di LETTERHEAD\\n+[#FIELD]
 .    ie \\n[#FIELD]=1 \{\
 .       nr #DATE_FIRST 1
@@ -5161,9 +5166,38 @@ y\R'#DESCENDER \\n[.cdp]'
 \#   diversion LETTERHEAD<n>
 \#
 .MAC TO END
-.    if !'\\n[.z]'' .di
+.    if !'\\n[.z]'' \{\
+\!.     vpt
+.       di
+.       if \\n[#GET_CC_DEPTH] .nr #CC_DEPTH \\n[dn]
+.       rm #GET_CC_DEPTH
+.    \}
 .    di LETTERHEAD\\n+[#FIELD]
 .    LEFT
+.END
+\#
+\# CC
+\# --
+\# *Arguments:
+\#   <none>
+\# *Function:
+\#   Stores CC list in diversion CC_LIST, output after closing and
+\#   signature.  Default $CC_STRING is CC: but can be user set with
+\#   CC_STRING.
+\#
+.MAC CC END
+.    if !'\\n[.z]'' .di
+.    nr #GET_CC_DEPTH 1
+.    di CC_LIST
+\!.  vpt 0
+\!.  IQ CLEAR
+.    nop \\*[$CC_STRING]\c
+.    EL
+\!.  in \w'\\\\*[$CC_STRING]\ \ 'u
+.END
+\#
+.MAC CC_STRING END
+.    ds $CC_STRING \\$1
 .END
 \#
 \# FROM
@@ -5175,7 +5209,12 @@ y\R'#DESCENDER \\n[.cdp]'
 \#   diversion LETTERHEAD<n>
 \#
 .MAC FROM END
-.    if !'\\n[.z]'' .di
+.    if !'\\n[.z]'' \{\
+\!.     vpt
+.       di
+.       if \\n[#GET_CC_DEPTH] .nr #CC_DEPTH \\n[dn]
+.       rm #GET_CC_DEPTH
+.    \}
 .    di LETTERHEAD\\n+[#FIELD]
 .    LEFT
 .END
@@ -5197,9 +5236,10 @@ y\R'#DESCENDER \\n[.cdp]'
 \# CLOSING
 \# -------
 \# *Arguments:
-\#   <closing string>
+\#   <none>
 \# *Function:
-\#   Stores greeting in diversion CLOSING.
+\#   Stores complimentary closing (entered on the next line) in
+\#   diversion CLOSING.
 \#
 .MAC CLOSING END
 .    if '\\*[$SIG_SPACE]'' .ds $SIG_SPACE 3v
@@ -5215,7 +5255,35 @@ y\R'#DESCENDER \\n[.cdp]'
 .    \}
 .    el .br
 .    nr #CLOSING 1
+.    sp
+.    it 1 END_LETTER
 .    di CLOSING_TEXT
+.    LEFT
+.END
+\#
+\# Prints complimentary closing, signature line, and CC list.
+\#
+.MAC END_LETTER END
+.    di
+.    ie !'\\*[$CLOSE_INDENT]'' .IL \\*[$CLOSE_INDENT]
+.    el .IL \\n[#DOC_L_LENGTH]u/2u
+.    nf
+.    CLOSING_TEXT
+.    sp \\*[$SIG_SPACE]
+.    PRINT \\*[$AUTHOR_1]
+.    sp
+.    if d CC_LIST \{\
+.       if !\\n[@TOP] \{\
+.          if \\n[#CC_DEPTH]>\\n[.t] \{\
+.             tm1 "[mom]: Insufficient room for CC list.
+.             tm1 "       Shifting to next page.
+.             NEWPAGE
+.             FOOTERS off
+.          \}
+.          CC_LIST
+.       \}
+.    \}
+.    FOOTERS off
 .END
 \#
 \# CLOSING INDENT
@@ -5223,7 +5291,7 @@ y\R'#DESCENDER \\n[.cdp]'
 \# *Argument:
 \#   <amount to indent closing from left margin>
 \# *Function:
-\#   Defines string $CLOSE_INDENT for use in macro, ALL_DONE.
+\#   Defines string $CLOSE_INDENT for use in macro END_LETTER.
 \#
 .MAC CLOSING_INDENT END
 .    ds $CLOSE_INDENT \\$1
@@ -5234,7 +5302,7 @@ y\R'#DESCENDER \\n[.cdp]'
 \# *Argument:
 \#   <amount of space to leave for signature>
 \# *Function:
-\#   Defines string $SIG_SPACE for use in macro, ALL_DONE.
+\#   Defines string $SIG_SPACE for use in macro END_LETTER.
 \#
 .MAC SIGNATURE_SPACE END
 .    ds $SIG_SPACE \\$1
@@ -18385,9 +18453,9 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    ta \\n[.l]u
 .END
 \#
-\# This .em (for all DOC_TYPEs, except 4 [LETTER]) ensures that
-\# deferred footnotes and floats that happen on the 2nd to last page
-\# get output, and the last page/col isn't flexed.
+\# This .em for all DOC_TYPEs ensures that deferred footnotes and
+\# floats that happen on the 2nd to last page get output, and the
+\# last page/col isn't flexed.
 \#
 .MAC TERMINATE END
 .    if dPDF.EXPORT .tm .ds last-page \\n%@\\n[#COL_NUM]
@@ -18412,39 +18480,6 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    \}
 .    if \\n[defer] \
 '       bp
-.END
-\#
-\# END MACRO FOR LETTERS
-\# ---------------------
-\# *Arguments:
-\#   none
-\# *Function:
-\#   The .em macro executed at the end of letters.  Turns footers
-\#   and pagination off, terminates and outputs diversion CLOSING
-\#   (indented with the author's name underneath).
-\#
-.MAC ALL_DONE END
-.    ch FOOTER
-.    ch HEADER
-.    br
-.    if \\n[#DOC_TYPE]=4 \{\
-.       if !'\\n[.z]'' \{\
-.          br
-.          ALD \\*[$SIG_SPACE]
-.          di
-.       \}
-.       IQ CLEAR
-.       TQ
-.       LEFT
-.       ie !'\\*[$CLOSE_INDENT]'' .IL \\*[$CLOSE_INDENT]
-.       el .IL \\n[#DOC_L_LENGTH]u/2u
-.       sp
-.       if \\n[#CLOSING] \{\
-.          CLOSING_TEXT
-.          br
-.       \}
-.       PRINT \\*[$AUTHOR_1]
-.    \}
 .END
 \#
 \# Set up a default papersize of US letter
