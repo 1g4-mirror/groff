@@ -1,5 +1,10 @@
 2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/soelim/soelim.1.man (Description):
+	* src/preproc/soelim/soelim.cpp (usage): Revise description.
+
+2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (DIVERSION_LENGTH_MAX): Declare as
 	`const`.
 

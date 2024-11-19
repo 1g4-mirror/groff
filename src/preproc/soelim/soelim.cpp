@@ -55,14 +55,14 @@ void usage(FILE *stream)
   if (stdout == stream)
     fputs(
 "\n"
-"GNU soelim eliminates source requests in roff(7) input; it replaces\n"
-"lines of the form \".so included‐file\" within each text input-file\n"
-"with the contents of included-file, recursively.  By default, it\n"
-"writes \"lf\" requests as well to record the name and line number of\n"
-"each input-file and included-file.  Use the -t option to produce TeX\n"
-"comments instead of roff requests.  Use the -r option to process\n"
-"general text files, to flatten a tree of input documents.  See the\n"
-"soelim(1) manual page.\n",
+"GNU soelim eliminates source requests in roff(7) and other text\n"
+"files; it replaces lines of the form \".so included‐file\" within\n"
+"each text input-file with the contents of included-file,\n"
+"recursively.  By default, it writes roff \"lf\" requests as well to\n"
+"record the name and line number of each input-file and\n"
+"included-file.  Use the -t option to produce TeX comments instead of\n"
+"roff requests.  Use the -r option to write neither, flattening a\n"
+"tree of documents.  See the soelim(1) manual page.\n",
 	  stream);
 }
 

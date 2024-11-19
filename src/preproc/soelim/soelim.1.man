@@ -97,9 +97,9 @@ is a preprocessor for the
 document formatting system.
 .
 .I @g@soelim
-works as a filter to eliminate source requests in
+eliminates source requests in
 .MR roff @MAN7EXT@
-input;
+and other text files;
 that is,
 it replaces lines of the form
 .RB \[lq] .so
@@ -112,6 +112,7 @@ recursively.
 .
 By default,
 it writes
+.I roff
 .B lf
 requests as well to record the name and line number of each
 .I input-file
@@ -231,7 +232,7 @@ option,
 therefore,
 .I @g@soelim
 can be used to process text files in general,
-to flatten a tree of input documents.
+to flatten a tree of documents.
 .
 .
 .PP
