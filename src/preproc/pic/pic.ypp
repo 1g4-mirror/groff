@@ -1469,7 +1469,7 @@ corner:
 	| DOT_NE
 		{ $$ = &object::north_east; }
 	| DOT_SE
-		{ $$ = &object:: south_east; }
+		{ $$ = &object::south_east; }
 	| DOT_NW
 		{ $$ = &object::north_west; }
 	| DOT_SW
