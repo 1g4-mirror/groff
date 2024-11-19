@@ -2385,12 +2385,9 @@ replaces any existing value.
 A leading minus sign
 .RI in\~ N
 is always interpreted as a decrementation operator,
-not an algebraic sign.
-.
-To assign a register a negative value or the negated value of another
-register,
-enclose it with its operand in
-parentheses or subtract it from zero.
+not an algebraic sign;
+section \[lq]Numeric expressions\[rq] above describes how to override
+its meaning.
 .
 If a prior value does not exist
 (the register was undefined),
@@ -6204,16 +6201,30 @@ request on its name first.
 In the
 .I roff
 language,
-numbers can be stored in
+numbers and measurements can be stored in
 .I registers.
 .
 Many built-in registers exist,
-supplying anything from the date to details of formatting parameters.
+supplying anything from the date to details of formatting parameters;
+some of these are read-only.
 .
 You can also define your own.
 .
 See section \[lq]Identifiers\[rq] above for information on constructing
 a valid name for a register.
+.
+.
+.P
+Each register
+(except read-only ones)
+can be assigned a
+.IR format ,
+causing its value to interpolate with leading zeroes,
+in Roman numerals,
+or alphabetically.
+.
+Some read-only registers are string-valued,
+meaning that they interpolate text and lack a format.
 .
 .
 .P
@@ -6277,12 +6288,19 @@ Predefined registers whose identifiers start with a dot are read-only.
 .
 Many are Boolean-valued.
 .
-Some are string-valued,
-meaning that they interpolate text.
 .
+.P
+.I Caution:
+Built-in registers are subject to removal like others;
+once removed,
+they can be recreated only as normal writable registers and will not
+reflect the configuration of the formatter.
+.
+.
+.P
 A register name
-(without the dot)
-is often associated with a request of the same name;
+is often associated with a request of the same name
+(without the dot);
 exceptions are noted.
 .
 .

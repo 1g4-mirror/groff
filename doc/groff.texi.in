@@ -7471,17 +7471,23 @@ the call of its end macro.
 
 @c =====================================================================
 
-@c BEGIN Keep (roughly) parallel with subsection "Registers" of
-@c groff(7).
+@c BEGIN Keep (roughly) parallel with section "Registers" of groff(7).
 @node Registers, Manipulating Filling and Adjustment, Formatter Instructions, GNU troff Reference
 @section Registers
 @cindex registers
 
-In the @code{roff} language, numbers can be stored in @dfn{registers}.
-Many built-in registers exist, supplying anything from the date to
-details of formatting parameters.  You can also define your own.
-@xref{Identifiers}, for information on constructing a valid name for a
-register.
+In the @code{roff} language, numbers and measurements can be stored in
+@dfn{registers}.  Many built-in registers exist, supplying anything from
+the date to details of formatting parameters; some of these are
+read-only.  You can also define your own.  @xref{Identifiers}, for
+information on constructing a valid name for a register.
+
+@cindex format, register
+@cindex register format
+Each register (except read-only ones) can be assigned a @dfn{format},
+causing its value to interpolate with leading zeroes, in Roman numerals,
+or alphabetically.  Some read-only registers are string-valued, meaning
+that they interpolate text and lack a format.
 
 @menu
 * Setting Registers::
@@ -7585,8 +7591,8 @@ A leading minus sign in @var{value} is always interpreted as a
 decrementation operator, not an algebraic sign.  To assign a register a
 negative value or the negated value of another register, you can
 force GNU @code{troff} to interpret @samp{-} as a negation or minus,
-rather than decrementation, operator: enclose it with its operand in
-parentheses or subtract it from zero.
+rather than decrementation, operator: enclose the @samp{-} with its
+operand in parentheses or subtract the expression of interest from zero.
 
 @Example
 .nr a 7
@@ -7644,7 +7650,7 @@ of warnings.
 To remove a register alias, invoke @code{rr} on its name.  A register's
 contents do not become inaccessible until it has no more names.
 @endDefreq
-@c END Keep (roughly) parallel with subsection "Registers" of groff(7).
+@c END Keep (roughly) parallel with section "Registers" of groff(7).
 
 @c ---------------------------------------------------------------------
 
@@ -7885,22 +7891,16 @@ desirable to test the page number independently of its format.
 Predefined registers whose identifiers start with a dot are read-only.
 Many are Boolean-valued, interpolating a true or false value testable
 with the @code{if}, @code{ie}, or @code{while} requests.
-@cindex format, register
-@cindex register format
-Each register can be assigned a @dfn{format}, causing its value to
-interpolate with leading zeroes, in Roman numerals, or alphabetically.
-Some read-only registers are string-valued, meaning that they
-interpolate text and lack a format.
 
 @cindex removing a built-in register
 @cindex register, built-in, removing
 @cindex built-in register, removing
 @strong{Caution:@:} Built-in registers are subject to removal like
 others; once removed, they can be recreated only as normal writable
-registers and will not reflect formatter state.
+registers and will not reflect the configuration of the formatter.
 
-A register name (without the dot) is often associated with a request of
-the same name.  A complete listing of all built-in registers can be
+A register name is often associated with a request of the same name
+(without the dot).  A complete listing of all built-in registers can be
 found in @ref{Register Index}.
 
 We present here a few built-in registers that are not described
