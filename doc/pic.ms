@@ -1059,12 +1059,12 @@ Objects are also numbered backward by type from the last one.
 You can say \fB2nd last box\fP to get the second-to-last box, or
 \fB3rd last ellipse\fP to get the third-to-last ellipse.
 .PP
-In places where \fIn\/\fBth\fR is allowed, \fB`\fIexpr\/\fB'th\fR is
+In places where \fIn\/\fBth\fR is allowed, \fB\[ga]\fIexpr\/\fB\[aq]th\fR is
 also allowed.
 Note that
-.B 'th
+.B \[aq]th
 is a single token: no space is allowed between the
-.B '
+.B \[aq]
 and the \fBth\fP.
 For example,
 .IP
@@ -1072,7 +1072,7 @@ For example,
 .DS
 .CW
 for i = 1 to 4 do {
-   line from `i'th box.nw to `i+1'th box.se
+   line from \[ga]i\[aq]th box.nw to \[ga]i+1\[aq]th box.se
 }
 .DE
 .R
@@ -3054,7 +3054,7 @@ There are lots of different ways to specify positions:
 <ordinal> ::=
   INT th
   INT st | INT nd | INT rd
-  ` <any-expr> 'th
+  \[ga] <any-expr> \[aq]th
 .R
 .DE
 .DS
@@ -3077,7 +3077,7 @@ barbaric, synonyms like \fB1st\fP and \fB3rd\fP are accepted as well.\[rq]
 Objects of a given type are numbered from 1 upward in order of
 declaration; the \fBlast\fP modifier counts backward.
 .PP
-The \[lq]'th\[rq] form (which allows you to select a previous object with
+The \[lq]\^\[aq]th\[rq] form (which allows you to select a previous object with
 an expression, as opposed to a numeric literal) is not documented in DWB's
 \fIpic\/\fR(1).
 .PP
