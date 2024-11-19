@@ -986,7 +986,9 @@ Arithmetic saturates rather than wrapping;
 if overflow would occur,
 .I @g@troff
 emits a warning in category
-.RB \%\[lq] range \[rq].
+.RB \%\[lq] range \[rq]
+(see section \[lq]Warnings\[rq] of
+.MR @g@troff 1 ).
 .
 .
 .P

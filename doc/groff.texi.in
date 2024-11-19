@@ -6195,7 +6195,8 @@ range of ±2 billion.@footnote{If that's not enough, see the
 package.}
 @cindex saturating arithmetic
 Arithmetic saturates rather than wrapping; if overflow would occur, GNU
-@command{troff} emits a warning in category @samp{range}.
+@command{troff} emits a warning in category @samp{range}
+(@pxref{Warnings}).
 
 @cindex arithmetic operators
 @cindex operators, arithmetic
