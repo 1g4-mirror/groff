@@ -18,10 +18,11 @@
 
 # Construct a short form of the groff version string.
 #
-# SHORT_VERSION contains only the number of REVISION before the first
-# '.'; e.g., if REVISION is '3.real.434-5aafd' then SHORT_VERSION is
-# 'x.yy.3', where x and yy are MAJOR_VERSION and MINOR_VERSION,
-# respectively.
+# SHORT_VERSION contains the MAJOR_VERSION, MINOR_VERSION, and a portion
+# of the REVISION, separated by dots.  Only the part of REVISION before
+# the first '.' is used.  For example, if REVISION is
+# '3.real.434-5aafd', then SHORT_VERSION is 'x.yy.3', where x and yy are
+# MAJOR_VERSION and MINOR_VERSION, respectively.
 AC_DEFUN([GROFF_MAKE_SHORT_VERSION], [
   AC_SUBST([SHORT_VERSION],
 	   m4_bregexp(AC_PACKAGE_VERSION,[^\(\w+\.\w+\.\w+\).*$],[\1]))
