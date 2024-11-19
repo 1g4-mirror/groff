@@ -8333,19 +8333,19 @@ This is an uninteresting sentence.
 To clearly present the next couple of requests, we must introduce the
 concept of ``productive'' input lines.  A @dfn{productive input line} is
 one that directly produces formatted output.  Text lines produce
-output,@footnote{unless diverted; see @ref{Diversions}} as do control
-lines containing requests like @code{tl} or escape sequences like
-@code{\D}.  Macro calls are not @emph{directly} productive, and thus not
-counted, but their interpolated contents can be.  Empty requests, and
-requests and escape sequences that define registers or strings or alter
-the formatting environment (as with changes to the size, face, height,
-slant, or color of the type) are not productive.@footnote{If you're not
-sure whether an input line has been productive, you can use the
-@code{pline} request before and after it to see whether it produced any
-output nodes.  @xref{Debugging}.}  We will also preview the output line
-continuation escape sequence, @code{\c}, which ``connects'' two input
-lines that would otherwise be counted separately.  @footnote{@xref{Line
-Continuation}.}
+output,@footnote{though not necessarily to the output device; see
+@ref{Diversions}} as do control lines containing requests like @code{tl}
+or escape sequences like @code{\D}.  Macro calls are not @emph{directly}
+productive, and thus not counted, but their interpolated contents can
+be.  Empty requests, and requests and escape sequences that define
+registers or strings or alter the formatting environment (as with
+changes to the size, face, height, slant, or color of the type) are not
+productive.@footnote{If you're not sure whether an input line has been
+productive, you can use the @code{pline} request before and after it to
+see whether it produced any output nodes.  @xref{Debugging}.}  We will
+also preview the output line continuation escape sequence, @code{\c},
+which ``connects'' two input lines that would otherwise be counted
+separately.  @footnote{@xref{Line Continuation}.}
 
 @Example
 @c .ll 56n
@@ -8593,8 +8593,9 @@ exceptions override any rules that would normally apply to a word
 matching a hyphenation exception defined with @code{hw}.
 
 Situations also arise when only a specific occurrence of a word needs
-its hyphenation altered or suppressed, or when a URL or similar string
-needs to be breakable in sensible places without hyphenation.
+its hyphenation altered or suppressed, or when a URL or similar
+specialized text needs to be breakable in sensible places without
+hyphenation.
 
 @DefescList {\\%, , , }
 @DefescListEndx {\:, , , }
