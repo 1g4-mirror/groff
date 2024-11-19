@@ -761,6 +761,7 @@ EXTRA_DIST += \
   ChangeLog.120 \
   ChangeLog.121 \
   ChangeLog.122 \
+  ChangeLog.123 \
   ChangeLog.old \
   FDL \
   HACKING \

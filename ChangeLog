@@ -1,5 +1,9 @@
 2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* Makefile.am (EXTRA_DIST): Ship "ChangeLog.123".
+
+2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* Makefile.am (EXTRA_DIST): Re-sort with `LC_COLLATE=C`.
 
 2024-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
