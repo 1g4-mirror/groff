@@ -6534,7 +6534,7 @@ surrounded by parentheses.  @xref{Invoking Requests}, and
 
 The @code{nr} request (@pxref{Setting Registers}) expects its second and
 optional third arguments to be numeric expressions; a bare @code{+} does
-not qualify, so our first attempt got a warning.
+not qualify, so our first attempt elicited an error diagnostic.
 @c END Keep (roughly) parallel with section "Numeric expressions" of
 @c groff(7).
 
