@@ -748,10 +748,7 @@ endif
 
 # Other files that should be present in the distribution archive.
 EXTRA_DIST += \
-  bootstrap \
-  bootstrap.conf \
   BUG-REPORT \
-  ChangeLog.old \
   ChangeLog.111 \
   ChangeLog.112 \
   ChangeLog.113 \
@@ -764,21 +761,24 @@ EXTRA_DIST += \
   ChangeLog.120 \
   ChangeLog.121 \
   ChangeLog.122 \
+  ChangeLog.old \
   FDL \
-  gendef.sh \
   HACKING \
   INSTALL.REPO \
   INSTALL.extra \
   LICENSES \
   MANIFEST \
-  mdate.pl \
   MORE.STUFF \
   PROBLEMS \
   PROJECTS \
   README.MinGW \
   arch/djgpp \
+  bootstrap \
+  bootstrap.conf \
   font/util/make-Rproto \
-  makevarescape.sed
+  gendef.sh \
+  makevarescape.sed \
+  mdate.pl
 
 MOSTLYCLEANFILES += $(prefixexecbin_SCRIPTS) $(bin_SCRIPTS) \
   $(man1_MANS) $(man5_MANS) $(man7_MANS) \
