@@ -246,7 +246,7 @@ macro_diversion::~macro_diversion()
   dn_reg_contents = vertical_position.to_units();
 }
 
-static int DIVERSION_LENGTH_MAX = INT_MAX;
+static const int DIVERSION_LENGTH_MAX = INT_MAX;
 
 vunits macro_diversion::distance_to_next_trap()
 {
