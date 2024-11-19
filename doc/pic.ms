@@ -352,8 +352,10 @@ line "1" "2" "3";
 line "1" "2" "3" "4";
 line "1" "2" "3" "4" "5";
 .PE
+.rs
 .sp 2
 .CE "4: Effects of multiple text arguments"
+.KS
 .PP
 The last line of Figure 3-2's program, `\fBarc; down; move;
 "arc"\fP', describing the captioned arc, introduces several new ideas.
@@ -361,7 +363,6 @@ Firstly, we see how to change the direction in which objects are
 joined.
 Had we written \fBarc; move; "arc"\fP, omitting \fBdown\fP the caption
 would have been joined to the top of the arc, like this:
-.KS
 .PS
 arc; move; "arc";
 .PE
@@ -415,6 +416,7 @@ If you don't like inches, it's possible to set a global style variable
 Setting \fBscale = 2.54\fP effectively changes the internal unit to
 centimeters (all other size variable values are scaled correspondingly).
 .
+.bp
 .NH 2
 Default Sizes of Objects
 .PP
@@ -485,13 +487,13 @@ There is also a \[lq]height\[rq] modifier that changes a box's height.
 The \fBwidth\fP keyword may be abbreviated to \fBwid\fP; the
 \fBheight\fP keyword to \fBht\fP.
 .
+.KS
 .NH 2
 Resizing Other Object Types
 .PP
 To change the size of a circle, give it a \fBrad[ius]\fP or
 \fBdiam[eter]\fP modifier; this changes the radius or diameter of the
 circle, according to the numeric argument that follows.
-.KS
 .PS
 {circle rad 0.1; move down 0.2 from last circle .s; "0.1"};
 move; circle rad 0.2 "0.2"; move; circle rad 0.3 "0.3";
@@ -546,6 +548,7 @@ box; box wid 1 ht 1; box same; box
 .CE "5: The \fBsame\fP keyword"
 .
 .
+.KS
 .NH 1
 Generalized Lines and Splines
 .
@@ -557,7 +560,6 @@ It is possible to specify diagonal lines or arrows by adding multiple \fBup\fP,
 Any of these can have a multiplier.
 To understand the effects, think of the drawing area as being gridded
 with standard-sized boxes.
-.KS
 .PS
 # Draw a demonstration up left arrow with grid box overlay
 define gridarrow
@@ -719,6 +721,7 @@ box dashed 0.2 "0.2";
 .PE
 .CE "1: Dashed objects"
 .
+.KS
 .NH 2
 Dotted Objects
 .PP
@@ -728,7 +731,6 @@ GNU \fBgpic\fP permits you to dot or dash ellipses, circles, and arcs
 dashing of lines and boxes.
 It too can be suffixed with a number to specify the interval between
 dots:
-.KS
 .PS
 box dotted "default";
 move;
@@ -3254,6 +3256,7 @@ Here the special rules for the `with' keyword using a path:
   . LABEL [. LABEL ...] [<corner>]
 .R
 .DE
+.bp
 .PP
 The following style variables control output:
 .TS H
