@@ -5403,7 +5403,7 @@ A@arrow{}B@arrow{}C@bullet{}D@arrow{}@bullet{}E
 @arrow{}2@arrow{}3@bullet{}4
 @arrow{}@bullet{}5
     @result{} A       B       C.......D       ........E
-    @result{} 1         2       3       4                 5
+    @result{} 1         2       3.......4         ........5
 @endExample
 
 Tabs and leaders lend themselves to table construction.@footnote{``Tab''
