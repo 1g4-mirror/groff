@@ -1309,6 +1309,45 @@ for i = 1 to 3 do {
 .EE
 .
 .
+.LP
+Arbitrary polygons can be drawn using the
+.BR polygon
+keyword followed by a series of n-1 line segments, where n is the number
+of edges of the polygon. This allows groff to interpret the line
+segments as a complete object such that the filled and shaded attributes
+may be used.
+The final drawing position and direction are specified by the last
+user-specified line segment.
+For example, a triangle can be drawn and filled with the following:
+.IP
+.EX
+polygon up 1 then right 1 down 0.5 fill 0.5
+.EE
+.LP
+To position polygons, two new suffixes are available:
+.RB \[lq] .v
+.IR expr \[rq]
+for locating the vertices, and
+.RB \[lq] .p
+.IR expr \[rq]
+for locating the center-points of edges. For example,
+.IP
+.EX
+arrow down
+polygon up 0.5 right 1 \[rs]
+then down 0.5 right 1 \[rs]
+then down 0.5 left 1 \[rs]
+with .v2 at last line.end
+arrow down from last polygon.v4
+.EE
+.LP
+creates and correctly places a flowchart decision diamond.
+Note that
+.BR .c
+is also available but the compass points will not work as expected and
+should not be used.
+.
+.
 .\" ====================================================================
 .SS "Converting \f[I]pic\f[] to other image formats"
 .\" ====================================================================

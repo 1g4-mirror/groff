@@ -26,6 +26,7 @@ enum object_type {
   ARC_OBJECT,
   SPLINE_OBJECT,
   LINE_OBJECT,
+  POLYGON_OBJECT,
   ARROW_OBJECT,
   MOVE_OBJECT,
   TEXT_OBJECT,
@@ -55,6 +56,9 @@ struct object {
   virtual position start();
   virtual position end();
   virtual position center();
+  virtual position vertex();
+  virtual position point();
+  virtual void set_vertex_number(int);
   virtual place *find_label(const char *);
   virtual void move_by(const position &);
   virtual int blank();
@@ -72,6 +76,12 @@ struct place {
 };
 
 struct string_list;
+
+struct vertex {
+  corner crn;
+  int vertex_number;
+  bool is_edge; // 0 for vertex, 1 for edge
+};
 
 class path {
   position pos;
@@ -190,6 +200,8 @@ struct object_spec {
   double fill;
   double xslanted;
   double yslanted;
+  int vertex_number;
+  bool is_edge;
   char *shaded;
   char *outlined;
   direction dir;

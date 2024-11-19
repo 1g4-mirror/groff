@@ -260,7 +260,7 @@ In general, the order of command arguments and modifiers like \[lq]width
 1.2\[rq] or \[lq]dashed\[rq] doesn't matter, except that the order of
 text arguments is significant.
 .PP
-Here are all but one of the basic \fBpic\fP objects at their default sizes:
+Here are all but two of the basic \fBpic\fP objects at their default sizes:
 .KS
 .PS
 box "box";
@@ -277,14 +277,16 @@ arc; down; move; "arc"
 .PE
 .CE "2: Basic \fBpic\fP objects"
 .PP
-The missing simple object type is a \fIspline\fP.
+The missing simple object types are \fIspline\fP and \fIpolygon\fP.
 There is also a way to collect objects into \fIblock composites\fP which
 allows you to treat the whole group as a single object (resembling a
 box) for many purposes.
-We'll describe both of these later on.
+We'll describe all of these later on.
 .PP
 The box, ellipse, circle, and block composite objects are \fIclosed\/\fR;
 lines, arrows, arcs and splines are \fIopen\fP.
+Polygons are a special case drawn using the syntax of open objects,
+but with most of the attributes of closed objects.
 This distinction is often important in explaining command modifiers.
 .PP
 Figure \n[H1]-2 was produced by the following \fBpic\fP program,
@@ -644,6 +646,21 @@ Arrowheads can be applied naturally to any path-based object, line or
 spline.
 We'll see how in the next section.
 .
+.NH 2
+Polygon Objects
+.PP
+GNU \fBgpic\fP supports arbitrary polygons constructed with the same syntax as multi-segment lines. The final line segment connecting back to the starting point is included automatically and should be omitted.
+.KS
+.PS
+POLY: polygon up 1 then down 0.5 right 1;
+"up 1" rjust at POLY.p`1' + (-0.1, 0.0);
+"down 0.5 right 1" ljust at POLY.p`2' + (0.0, 0.1);
+"automatically drawn" ljust at POLY.p`3' + (0.0, -0.1);
+.PE
+.CE "5: \fBpolygon up 1 then down 0.5 right 1\fP"
+.LP
+Polygons are decorated like closed objects as described in the next section.
+.
 .
 .NH 1
 Decorating Objects
@@ -835,7 +852,7 @@ this way.
 .NH 2
 Filled Objects
 .PP
-It is possible to fill boxes, circles, and ellipses.
+It is possible to fill boxes, circles, ellipses, and polygons.
 The modifier \fBfill[ed]\fP accomplishes this.
 You can suffix it with a fill value; the default is given by the style
 variable \fBfillval\fP.
@@ -1261,6 +1278,52 @@ critical(spline right 1 then up right then left then left 1);
 .PE
 .CE "2: Special points on open objects"
 .PP
+.
+.NH 4
+Locations Relative to Polygons
+.PP
+Polygons have three types of named points: (\fB.vertex\fP, \fB.ver\fP, \fB.v\fP), (\fB.point\fP, \fB.p\fP), and (\fB.center\fP, \fB.c\fP).
+They can also be used without leading dots in the \fBof\fP prefix form.
+The center of a polygon is the centroid, and may give unexpected results for non-simple polygons.
+.PP
+\fB.v\fP and \fB.p\fP locate the vertices and mid-points of the edges, respectively. They can be used in the forms \fB.v\fP \fIexpr\fR
+, or \fB.v\fP \[ga]\fIexpr\fR\[aq].
+The latter is required when the vertex/point expression is followed by an additional expression,
+as \fBpic\fP will otherwise attempt to reduce them to a single expression.
+For example,
+.IP
+.KS
+.DS
+.CW
+for i = 1 to n do {
+   circle rad 0.05 fill 1 at last polygon.vi
+}
+circle rad 0.05 fill 1 at last polygon.p \[ga]1\[aq] + (0.0,0.1)
+.DE
+.R
+.KE
+.LP
+would draw a dot 0.1i above the mid-point of the first edge at the default scale, and one at each vertex for a polygon with n vertices.
+.KS
+.PS
+define vertices {
+	[ VER: $1;
+		dot(VER.c);	"\fB.center\fP"	at VER.center + (0.0, 0.1)
+		for i = 1 to $2 do {
+			dot(VER.vi);
+			dot(VER.pi);
+		}
+		"\fB.v1\fP" at VER.v`1' + (-0.1, -0.1);
+		"\fB.v2\fP" at VER.v`2' + (-0.1, 0.1);
+		"\fB.v3\fP" at VER.v`3' + (0.1, 0.1);
+		"\fB.p1\fP" at VER.p`1' + (-0.1, 0.1);
+		"\fB.p2\fP" at VER.p`2' + (0.1, 0.1);
+		"\fB.p3\fP" at VER.p`3' + (0.1, -0.1);
+	]
+}
+vertices(polygon up 1 then down 0.5 right 1, 3);
+.PE
+.CE "3: Special points on polygons"
 .
 .NH 2
 Ways of Composing Positions
@@ -2658,6 +2721,65 @@ tblock(.5, 1, "Slave");
 .ft R
 .KE
 .
+.KS
+.PP
+Here is a flow chart with source code to demonstrate how a polygon attaches to other objects:
+.DS
+.CW
+\&.PS
+down;
+h = 0.25;
+w = 0.375;
+l = 0.75;
+r = 0.1;
+box rad r fill 0.3 outlined "green";
+"Start" at last box;
+arrow down l from last box.s;
+polygon \e
+	down h right w \e
+	then down h left w \e
+	then up h left w \e
+	with .v1 at last arrow.end \e
+	fill 0.3 outlined "blue";
+"Done?" at last polygon.c;
+arrow down l from last polygon.v3 " Yes" ljust;
+box rad r fill 0.3 outlined "green";
+"End" at last box.c;
+move to last polygon.v2;
+line right "" "No";
+arrow up l - h/2 then left lineht + w;
+\&.PE
+.
+.DE
+.ft R
+.KE
+.
+.KS
+.PS
+down;
+h = 0.25;
+w = 0.375;
+l = 0.75;
+r = 0.1;
+box rad r fill 0.3 outlined "green";
+"Start" at last box;
+arrow down l from last box.s;
+polygon \
+	down h right w \
+	then down h left w \
+	then up h left w \
+	with .v1 at last arrow.end \
+	fill 0.3 outlined "blue";
+"Done?" at last polygon.c;
+arrow down l from last polygon.v3 " Yes" ljust;
+box rad r fill 0.3 outlined "green";
+"End" at last box.c;
+move to last polygon.v2;
+line right "" "No";
+arrow up l - h/2 then left 0.5 + w;
+.PE
+.CE "3: Flowchart for demonstrating polygon attachment"
+.bp
 .
 .
 .NH 1
@@ -2878,6 +3000,7 @@ empty string is considered as `false' for `&&' and `|\||'.
   box                   \fR# closed object \[em] rectangle\fP
   circle                \fR# closed object \[em] circle\fP
   ellipse               \fR# closed object \[em] ellipse\fP
+  polygon               \fR# closed object \[em] polygon\fP
   arc                   \fR# open object \[em] quarter-circle\fP
   line                  \fR# open object \[em] line\fP
   arrow                 \fR# open object \[em] line with arrowhead\fP
@@ -3012,7 +3135,9 @@ There are lots of different ways to specify positions:
 <place> ::=
   <label>
   <label> <corner>
+  <label> <vertex>
   <corner> [of] <label>
+  <vertex> of <label>
   Here
 .R
 .DE
@@ -3034,6 +3159,15 @@ There are lots of different ways to specify positions:
   <north-of> | <south-of> | <east-of> | <west-of>
   <center-of> | <start-of> | <end-of>
   upper left | lower left | upper right | lower right
+.R
+.DE
+.DS
+.CW
+<vertex> ::=
+  .v[er[tex]] <expr>
+  .v[er[tex]] \[ga] <expr> \[aq]
+  .p[oint] <expr>
+  .p[oint] \[ga] <expr> \[aq]
 .R
 .DE
 .DS
@@ -3063,6 +3197,7 @@ There are lots of different ways to specify positions:
   box
   circle
   ellipse
+  polygon
   arc
   line
   arrow

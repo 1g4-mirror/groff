@@ -531,6 +531,7 @@ int lookup_keyword(const char *str, int len)
     { "outline", OUTLINED },
     { "outlined", OUTLINED },
     { "plot", PLOT },
+    { "polygon", POLYGON },
     { "print", PRINT },
     { "rad", RADIUS },
     { "radius", RADIUS },
@@ -863,6 +864,56 @@ int get_token_after_dot(int c)
     }
     context_buffer = ".b";
     return DOT_S;
+  case 'v':
+    input_stack::get_char();
+    c = input_stack::peek_char();
+    if (c == 'e') {
+      input_stack::get_char();
+      c = input_stack::peek_char();
+      if (c == 'r') {
+	input_stack::get_char();
+	c = input_stack::peek_char();
+	if (c == 't') {
+	  input_stack::get_char();
+	  c = input_stack::peek_char();
+	  if (c == 'e') {
+	    input_stack::get_char();
+	    c = input_stack::peek_char();
+	    if (c == 'x') {
+	      input_stack::get_char();
+	      context_buffer = ".vertex";
+	      return DOT_V;
+	    }
+	  }
+	context_buffer = ".ver";
+	return DOT_V;
+	}
+      }
+    }
+    context_buffer = ".v";
+    return DOT_V;
+  case 'p':
+    input_stack::get_char();
+    c = input_stack::peek_char();
+    if (c == 'o') {
+      input_stack::get_char();
+      c = input_stack::peek_char();
+      if (c == 'i') {
+	input_stack::get_char();
+	c = input_stack::peek_char();
+	if (c == 'n') {
+	  input_stack::get_char();
+	  c = input_stack::peek_char();
+	  if (c == 't') {
+	    input_stack::get_char();
+	    context_buffer = ".point";
+	    return DOT_P;
+	  }
+	}
+      }
+    }
+    context_buffer = ".p";
+    return DOT_P;
   default:
     context_buffer = '.';
     return '.';

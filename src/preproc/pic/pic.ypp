@@ -110,6 +110,7 @@ char *do_sprintf(const char *fmt, const double *v, int nv);
 	place pl;
 	object *obj;
 	corner crn;
+	vertex ver;
 	path *pth;
 	object_spec *spec;
 	saved_state *pstate;
@@ -134,6 +135,7 @@ char *do_sprintf(const char *fmt, const double *v, int nv);
 %token ELLIPSE
 %token ARC
 %token LINE
+%token POLYGON
 %token ARROW
 %token MOVE
 %token SPLINE
@@ -177,6 +179,8 @@ char *do_sprintf(const char *fmt, const double *v, int nv);
 %token DOT_NW
 %token DOT_SW
 %token DOT_C
+%token DOT_P
+%token DOT_V
 %token DOT_START
 %token DOT_END
 %token DOT_X
@@ -264,14 +268,14 @@ parses properly. */
 %left VARIABLE NUMBER '(' SIN COS ATAN2 LOG EXP SQRT K_MAX K_MIN INT RAND SRAND LAST
 %left ORDINAL HERE '`'
 
-%left BOX CIRCLE ELLIPSE ARC LINE ARROW SPLINE '['
+%left BOX CIRCLE ELLIPSE ARC LINE POLYGON ARROW SPLINE '['
 
 /* these need to be lower than '-' */
 %left HEIGHT RADIUS WIDTH DIAMETER FROM TO AT THICKNESS
 
 /* these must have higher precedence than CHOP so that 'label %prec CHOP'
 works */
-%left DOT_N DOT_E DOT_W DOT_S DOT_NE DOT_SE DOT_NW DOT_SW DOT_C
+%left DOT_N DOT_E DOT_W DOT_S DOT_NE DOT_SE DOT_NW DOT_SW DOT_C DOT_P DOT_V
 %left DOT_START DOT_END TOP BOTTOM LEFT_CORNER RIGHT_CORNER
 %left UPPER LOWER NORTH SOUTH EAST WEST CENTER START END
 
@@ -295,6 +299,7 @@ works */
 %type <if_data> simple_if
 %type <obj> nth_primitive
 %type <crn> corner
+%type <ver> vertex
 %type <pth> path label_path relative_path
 %type <pl> place label element element_list middle_element_list
 %type <spec> object_spec
@@ -694,6 +699,13 @@ object_spec:
 		  lookup_variable("linewid", & $$->segment_width);
 		  $$->dir = current_direction;
 		}
+	| POLYGON
+		{
+		  $$ = new object_spec(POLYGON_OBJECT);
+		  lookup_variable("lineht", & $$->segment_height);
+		  lookup_variable("linewid", & $$->segment_width);
+		  $$->dir = current_direction;
+		}
 	| ARROW
 		{
 		  $$ = new object_spec(ARROW_OBJECT);
@@ -899,6 +911,14 @@ object_spec:
 		  $$ = $1;
 		  $$->flags |= HAS_WITH;
 		  $$->with = $3;
+		}
+	| object_spec WITH vertex
+		{
+		  $$ = $1;
+		  $$->flags |= HAS_WITH;
+		  $$->with = new path($3.crn);
+		  $$->vertex_number = $3.vertex_number;
+		  $$->is_edge = $3.is_edge;
 		}
 	| object_spec WITH position				%prec ','
 		{
@@ -1286,6 +1306,13 @@ place:
 		  if (!pth.follow($1, & $$))
 		    YYABORT;
 		}
+	| label vertex
+		{
+		  $1.obj->set_vertex_number($2.vertex_number);
+		  path pth($2.crn);
+		  if (!pth.follow($1, & $$))
+		    YYABORT;
+		}
 	| corner label
 		{
 		  path pth($1);
@@ -1295,6 +1322,13 @@ place:
 	| corner OF label
 		{
 		  path pth($1);
+		  if (!pth.follow($3, & $$))
+		    YYABORT;
+		}
+	| vertex OF label
+		{
+		  $3.obj->set_vertex_number($1.vertex_number);
+		  path pth($1.crn);
 		  if (!pth.follow($3, & $$))
 		    YYABORT;
 		}
@@ -1388,6 +1422,8 @@ object_type:
 		{ $$ = ARC_OBJECT; }
 	| LINE
 		{ $$ = LINE_OBJECT; }
+	| POLYGON
+		{ $$ = POLYGON_OBJECT; }
 	| ARROW
 		{ $$ = ARROW_OBJECT; }
 	| SPLINE
@@ -1522,6 +1558,31 @@ corner:
 		{ $$ = &object::start; }
 	| END
 		{ $$ = &object::end; }
+	;
+
+vertex:
+	DOT_V expr
+		{
+		  $$.crn = &object::vertex;
+		  $$.vertex_number = $2;
+		}
+	| DOT_V '`' expr '\''
+		{
+		  $$.crn = &object::vertex;
+		  $$.vertex_number = $3;
+		}
+	| DOT_P expr
+		{
+		  $$.crn = &object::point;
+		  $$.vertex_number = $2;
+		  $$.is_edge = 1;
+		}
+	| DOT_P '`' expr '\''
+		{
+		  $$.crn = &object::point;
+		  $$.vertex_number = $3;
+		  $$.is_edge = 1;
+		}
 	;
 
 expr:
@@ -1909,6 +1970,8 @@ const char *object_type_name(object_type type)
     return "spline";
   case LINE_OBJECT:
     return "line";
+  case POLYGON_OBJECT:
+    return "polygon";
   case ARROW_OBJECT:
     return "arrow";
   case MOVE_OBJECT:

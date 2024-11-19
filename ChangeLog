@@ -1,3 +1,66 @@
+2024-11-19  Duncan Losin <dlosin@protonmail.com>
+
+	[pic]: Extend to allow drawing arbitrary polygons.
+
+	* src/preproc/pic/lex.cpp (get_token_after_dot): Add new checks
+	for `.v[er[tex]]` and `.p[oint]` syntax for polygons.
+
+	* src/preproc/pic/object.h (enum object_type, object_type)
+	(object_type_name):
+	* src/preproc/pic/lex.cpp (lookup_keyword): Add `polygon`
+	keyword and object type.
+
+	* src/preproc/pic/object.h (struct object): Declare new virtual
+	functions for determining polygon vertices and edge midpoints.
+
+	* src/preproc/pic/object.h (class path): Add new `vertex_number`
+	and `is_edge` member variables to determine what position should
+	be accessed.
+
+	* src/preproc/pic/pic.ypp (tokens): Add new tokens `POLYGON`,
+	`DOT_P`, and `DOT_V`.
+
+	* src/preproc/pic/pic.ypp (object_spec): Add new rule `POLYGON`
+	to create new object_spec of type `POLYGON_OBJECT`.  Add new
+	rule `object_spec WITH vertex` to locate polygons.
+
+	* src/preproc/pic/pic.ypp (place): Add new rules `label vertex`
+	and `vertex OF label` to locate polygons.
+
+	* src/preproc/pic/pic.ypp (vertex):
+	* src/preproc/pic/object.h (struct vertex): Define new `vertex`
+	structure and grammar rule for describing polygon vertices and
+	edge midpoints.
+
+	* src/preproc/pic/object.cpp (object::vertex, object::point):
+	(object::set_vertex_number): Define default behavior for new
+	functions.
+
+	* src/preproc/pic/object.cpp (object_spec::object_spec): Set
+	defaults for `vertex_number` and `is_edge`.
+
+	* src/preproc/pic/object.cpp (class polygon_object)
+	(polygon_object::polygon_object)
+	(polygon_object::center)
+	(polygon_object::point)
+	(polygon_object::set_fill)
+	(polygon_object::set_vertex_number)
+	(polygon_object::vertex)
+	(polygon_object::print): Add new `polygon` class and implement
+	member functions.
+
+	* src/preproc/pic/object.cpp (object_spec::make_line): Modify
+	line segment array from n-1 to n segments if a polygon has been
+	requested.  Create offsets for positioning new polygons.
+
+	* src/preproc/pic/object.cpp (object_spec::make_object): Add
+	check for the `POLYGON_OBJECT` object type.
+
+	* doc/pic.ms:
+	* src/preproc/pic/pic.1.man (Other changes): Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?66458>.
+
 2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (is_char_usable_as_delimiter): Loosen
