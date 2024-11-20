@@ -1,5 +1,11 @@
 2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp: Fix code style nits.  Parenthesize
+	complex expressions.  Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.
+
+2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (pipe_source_request): Refactor.
 	Return early when unsafe requests are not enabled, dropping the
 	rest of the function body by an indentation level.  Replace

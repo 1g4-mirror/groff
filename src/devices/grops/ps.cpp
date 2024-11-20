@@ -78,7 +78,7 @@ double degrees(double r)
 
 double radians(double d)
 {
-  return d*PI/180.0;
+  return (d * PI) / 180.0;
 }
 
 // This is used for testing whether a character should be output in the
@@ -217,19 +217,20 @@ ps_output &ps_output::put_string(const char *s, size_t n)
     else
       len += 4;
   }
-  if (len > n*2) {
-    if (col + n*2 + 2 > max_line_length && n*2 + 2 <= max_line_length) {
+  if (len > (n * 2)) {
+    if (((col + (n * 2) + 2) > max_line_length)
+	&& (((n * 2) + 2) <= max_line_length)) {
       putc('\n', fp);
       col = 0;
     }
-    if (col + 1 > max_line_length) {
+    if ((col + 1) > max_line_length) {
       putc('\n', fp);
       col = 0;
     }
     putc('<', fp);
     col++;
     for (i = 0; i < n; i++) {
-      if (col + 2 > max_line_length) {
+      if ((col + 2) > max_line_length) {
 	putc('\n', fp);
 	col = 0;
       }
@@ -240,11 +241,12 @@ ps_output &ps_output::put_string(const char *s, size_t n)
     col++;
   }
   else {
-    if (col + len + 2 > max_line_length && len + 2 <= max_line_length) {
+    if (((col + len + 2) > max_line_length)
+	&& ((len + 2) <= max_line_length)) {
       putc('\n', fp);
       col = 0;
     }
-    if (col + 2 > max_line_length) {
+    if ((col + 2) > max_line_length) {
       putc('\n', fp);
       col = 0;
     }
@@ -260,7 +262,7 @@ ps_output &ps_output::put_string(const char *s, size_t n)
       }
       else
 	len = 4;
-      if (col + len + 1 > max_line_length) {
+      if ((col + len + 1) > max_line_length) {
 	putc('\\', fp);
 	putc('\n', fp);
 	col = 0;
@@ -293,7 +295,7 @@ ps_output &ps_output::put_number(int n)
   char buf[1 + INT_DIGITS + 1];
   sprintf(buf, "%d", n);
   size_t len = strlen(buf);
-  if (col > 0 && col + len + need_space > max_line_length) {
+  if ((col > 0) && ((col + len + need_space) > max_line_length)) {
     putc('\n', fp);
     col = 0;
     need_space = 0;
@@ -312,7 +314,7 @@ ps_output &ps_output::put_fix_number(int i)
 {
   const char *p = if_to_a(i, fixed_point);
   size_t len = strlen(p);
-  if (col > 0 && col + len + need_space > max_line_length) {
+  if ((col > 0) && ((col + len + need_space) > max_line_length)) {
     putc('\n', fp);
     col = 0;
     need_space = 0;
@@ -337,7 +339,7 @@ ps_output &ps_output::put_float(double d)
   if (buf[last] == '.')
     last--;
   buf[++last] = '\0';
-  if (col > 0 && col + last + need_space > max_line_length) {
+  if ((col > 0) && ((col + last + need_space) > max_line_length)) {
     putc('\n', fp);
     col = 0;
     need_space = 0;
@@ -355,7 +357,7 @@ ps_output &ps_output::put_float(double d)
 ps_output &ps_output::put_symbol(const char *s)
 {
   size_t len = strlen(s);
-  if (col > 0 && col + len + need_space > max_line_length) {
+  if ((col > 0) && ((col + len + need_space) > max_line_length)) {
     putc('\n', fp);
     col = 0;
     need_space = 0;
@@ -375,7 +377,7 @@ ps_output &ps_output::put_color(unsigned int c)
   char buf[128];
   sprintf(buf, "%.3g", double(c) / double(color::MAX_COLOR_VAL));
   size_t len = strlen(buf);
-  if (col > 0 && col + len + need_space > max_line_length) {
+  if ((col > 0) && ((col + len + need_space) > max_line_length)) {
     putc('\n', fp);
     col = 0;
     need_space = 0;
@@ -393,7 +395,7 @@ ps_output &ps_output::put_color(unsigned int c)
 ps_output &ps_output::put_literal_symbol(const char *s)
 {
   size_t len = strlen(s);
-  if (col > 0 && col + len + 1 > max_line_length) {
+  if ((col > 0) && ((col + len + 1) > max_line_length)) {
     putc('\n', fp);
     col = 0;
   }
@@ -649,9 +651,10 @@ int ps_printer::set_encoding_index(ps_font *f)
     return f->encoding_index;
   for (font_pointer_list *p = font_list; p; p = p->next)
     if (p->p != f) {
-      char *encoding = ((ps_font *)p->p)->encoding;
-      int encoding_index = ((ps_font *)p->p)->encoding_index;
-      if (encoding != 0 && encoding_index >= 0 
+      char *encoding = (static_cast<ps_font *>(p->p))->encoding;
+      int encoding_index
+	= (static_cast<ps_font *>(p->p))->encoding_index;
+      if ((encoding != 0 /* nullptr */) && encoding_index >= 0
 	  && strcmp(f->encoding, encoding) == 0) {
 	return f->encoding_index = encoding_index;
       }
@@ -666,12 +669,12 @@ subencoding *ps_printer::set_subencoding(font *f, glyph *g,
   *codep = idx % 256;
   unsigned int num = idx >> 8;
   if (num == 0)
-    return 0;
-  subencoding *p = 0;
+    return 0 /* nullptr */;
+  subencoding *p = 0 /* nullptr */;
   for (p = subencodings; p; p = p->next)
-    if (p->p == f && p->num == num)
+    if ((p->p == f) && (p->num == num))
       break;
-  if (p == 0)
+  if (0 /* nullptr */ == p)
     p = subencodings = new subencoding(f, num, next_subencoding_index++,
 				       subencodings);
   p->glyphs[*codep] = f->get_special_device_encoding(g);
@@ -680,7 +683,7 @@ subencoding *ps_printer::set_subencoding(font *f, glyph *g,
 
 char *ps_printer::get_subfont(subencoding *sub, const char *stem)
 {
-  assert(sub != 0);
+  assert(sub != 0 /* nullptr */);
   if (!sub->subfont) {
     char *tem = new char[strlen(stem) + 2 + INT_DIGITS + 1];
     sprintf(tem, "%s@@%d", stem, sub->idx);
@@ -889,13 +892,13 @@ void ps_printer::set_style(const style &sty)
   sprintf(buf, "F%d", ndefined_styles);
   out.put_literal_symbol(buf);
   const char *psname = sty.f->get_internal_name();
-  if (psname == 0)
+  if (0 /* nullptr */ == psname)
     fatal("no internalname specified for font '%1'", sty.f->get_name());
   char *encoding = ((ps_font *)sty.f)->encoding;
   if (sty.sub == 0) {
-    if (encoding != 0) {
+    if (encoding != 0 /* nullptr */) {
       char *s = ((ps_font *)sty.f)->reencoded_name;
-      if (s == 0) {
+      if (0 /* nullptr */ == s) {
 	int ei = set_encoding_index((ps_font *)sty.f);
 	char *tem = new char[strlen(psname) + 1 + INT_DIGITS + 1];
 	sprintf(tem, "%s@%d", psname, ei);
