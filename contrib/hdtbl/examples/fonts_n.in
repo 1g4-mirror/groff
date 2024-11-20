@@ -103,9 +103,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .    tm \\*[fonts_n]: listing font '\\*[*$1]'...
 .
 .    TBL border=.1n bc=red cpd=0 csp=.1n bgc=
-.      CPTN groff font \\*[*$1] \
+.      CPTN groff font name \\*[*$1]; \
             .br \
-            val=b ".pso @EGREP@ internalname \\*[fontpath]/dev\*[.T]/\\*[*$1]"
+            val=b ".pso @EGREP@ internalname \\*[fontpath]/dev\*[.T]/\\*[*$1]" \
+            .br \
+            Grid is blank if font is not installed.
 .      TR
 .        TD
 .          TBL cols=12 border=.1n bc=red csp=.1n cpd=.2n fgc=red4 bgc=beige \

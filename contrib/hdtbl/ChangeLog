@@ -1,5 +1,12 @@
 2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* examples/fonts_n.in (fontdump):
+	* examples/fonts_x.in (fontdump): Tweak table caption.  Annotate
+	why the font grid might be blank, in preparation for Savannah
+	#62830.
+
+2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* examples/chess_board.roff:
 	* examples/col_rowspan_colors.roff:
 	* examples/color_boxes.roff:
