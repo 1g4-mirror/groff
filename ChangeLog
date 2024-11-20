@@ -1,5 +1,28 @@
 2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #64484.  This change restores groff
+	1.23.0's handling of characters in `device` request arguments,
+	except that {1} special character escape sequences are
+	interpreted (except for composite special characters, a planned
+	future development) and {2} unprintable character codes such as
+	ASCII 2 are no longer emitted in GNU troff output by this means.
+
+	* src/roff/troff/input.cpp (device_request): Refactor and revise
+	argument interpretation.  Reconstitute an encoded unbreakable
+	space code point as its escape sequence (spelled with the
+	default escape character).  Throw warning in category "syntax"
+	if a valid but unprintable input character is encountered.
+	Throw warning in category "syntax" if an escape sequence other
+	than `\[` is encountered.  (A reconstituted `\~` is not warned
+	about.)
+	* src/roff/troff/troff.1.man (Warnings): Document additional
+	circumstances under which warnings in "syntax" category are
+	thrown.
+
+	Fixes <https://savannah.gnu.org/bugs/?64484>.
+
+2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #64484.
 
 	* src/roff/groff/tests/\

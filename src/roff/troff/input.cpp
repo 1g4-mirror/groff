@@ -6013,17 +6013,43 @@ static void device_request()
   }
   if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
     topdiv->begin_page();
-  // Null characters can correspond to node types like vmotion_node that
-  // are unrepresentable in a device extension command, and got scrubbed
-  // by `asciify`.
-  for (int prevc = c; (c != '\0') && (c != '\n') && (c != EOF);
+  for (;
+      (c != '\0') && (c != '\n') && (c != EOF);
        c = get_copy(0 /* nullptr */)) {
-    if (!('\\' == c) && (prevc != '\\'))
+    // We may encounter some of the C0 and C1 character codes GNU troff
+    // uses for special purposes; see src/roff/troff/input.h.  They
+    // produce nothing in grout.  Warn only about the ones that are left
+    // for the user's purposes.  Use octal because input.h does.  Ignore
+    // 8-bit codes in general.  grout is an ISO 646 file format.
+    if (ESCAPE_TILDE == c) {
+      mac.append('\\');
+      mac.append('~');
+    }
+    else if ((c < 015) || (c >= 0177))
+      warning (WARN_SYNTAX, "ignoring character code %1 in device"
+	       " extension command request argument", c);
+    else if (c != '\\')
       mac.append(c);
     else {
       int c1 = get_copy(0 /* nullptr */);
-      if (c1 != '[')
+      if (c1 != '[') {
+	mac.append(c);
 	mac.append(c1);
+	string chardesc = "";
+	if (csprint(c1)) {
+	  chardesc += "'";
+	  chardesc += char(c1);
+	  chardesc += "'";
+	}
+	else {
+	  chardesc += "character code ";
+	  chardesc += i_to_a(c1);
+	}
+	chardesc += '\0'; // make it safe for .contents()
+	warning (WARN_SYNTAX, "not interpreting escaped %1 in device"
+		   " extension command request argument",
+		   chardesc.contents());
+      }
       else {
 	// Does the input resemble a valid (bracket-form) special
 	// character escape sequence?

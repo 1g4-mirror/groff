@@ -755,6 +755,9 @@ It never occurs in compatibility mode.
 A self-contradictory hyphenation mode was requested;
 an empty or incomplete numeric expression was encountered;
 an operand to a numeric operator was missing;
+a recognized but inapposite escape sequence
+or unprintable character code
+was used in a device extension command request;
 an attempt was made to define a recursive,
 empty,
 or nonsensical character class;
