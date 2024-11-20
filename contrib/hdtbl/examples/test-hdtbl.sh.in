@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2018 Free Software Foundation, Inc.
+# Copyright (C) 2018-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -25,24 +25,35 @@ builddir="@abs_top_builddir@"
 gs_program="@GHOSTSCRIPT@"
 ret=0
 
-if test "$gs_program" = "missing"; then
-   echo "ghostscript program missing, can't check hdtbl examples"
+if [ "$gs_program" = "missing" ]
+then
+   echo "ghostscript program missing, can't check hdtbl examples" >&2
    exit 77
 fi
 
 # $1 file, $2 expected number of pages
 check_number_pages()
 {
-    echo "Checking $1"
-    res=`$gs_program -o /dev/null/ -sDEVICE=bbox "$1" 2>&1 | grep HiResBoundingBox | wc -l`
-    if test $res != $2; then
-        echo "  Error: expected $2 pages, found $res pages"
-        ret=255
+    echo "checking $1 for $2 pages" >&2
+
+    if ! [ -r "$1" ]
+    then
+        echo "error: \"$1\" does not exist or is not readable" >&2
+        exit 2
+    fi
+
+    res=$("$gs_program" -o /dev/null/ -sDEVICE=bbox "$1" 2>&1 \
+          | grep HiResBoundingBox | wc -l)
+
+    if [ "$res" != $2 ]
+    then
+        echo "...FAILED; found $res page(s)" >&2
+        ret=1
     fi
 }
 
-check_number_pages $builddir/contrib/hdtbl/examples/fonts_n.ps 38
-check_number_pages $builddir/contrib/hdtbl/examples/fonts_x.ps 38
+check_number_pages "$builddir"/contrib/hdtbl/examples/fonts_n.ps 38
+check_number_pages "$builddir"/contrib/hdtbl/examples/fonts_x.ps 38
 
 exit $ret
 
