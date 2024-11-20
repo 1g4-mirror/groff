@@ -1,5 +1,13 @@
 2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #64484.
+
+	* src/roff/groff/tests/\
+	device-request-passes-most-escape-sequences.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.1.man (Description):
 	* src/preproc/soelim/soelim.cpp (usage): Revise description.
 
