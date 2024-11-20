@@ -54,8 +54,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  pso sh -c \
        "printf '%s' '.ds *f ' ; \
         ls \\*[fontpath]/dev\*[.T] \
-        | tr '[:cntrl:]' '[ *]'"
-.  \"	This dummy line is necessary; the preceding line eats it.
+        | tr '[:cntrl:]' '[ *]'; \
+        echo"
 .
 .  while !"\\*[*args]"" \{\
 .    pops *$1 *args

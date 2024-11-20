@@ -1,3 +1,12 @@
+2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* examples/fonts_n.in (fontdump):
+	* examples/fonts_x.in (fontdump): Put back the newline at the
+	end of the pipe stream constructed by `pso` request; the tr(1)
+	command in the pipeline was eliding it along with the intended
+	transformation of control characters.  Our Texinfo manual notes
+	this pitfall.
+
 2024-11-10  Robert Yang <liezhi.yang@windriver.com>
 
 	* hdtbl.am (HDTBLPROCESSEDEXAMPLEFILES): Declare dependency on
