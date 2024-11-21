@@ -154,7 +154,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .
 .  while (\\n+[*] < \\n[**]) \{\
 .    ds * \\$1\"
-.    substring * \\n[*] (\\n[*] + \\n[$2] - 1)
+.    substring * \\n[*] (\\n[*] <? (\\n[*] + \\n[$2] - 1))
 .    \" The surrounding \? escapes emulate string comparison.
 .    if "\?\\*[*]\?"\?\\$2\?" \
 .      break
@@ -273,7 +273,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .    nr \\$2 \\$4
 .
 .  ds $3 \\$3\"			remember stackname
-.  shift 4		\"	shift four args
+.  shift 4\"			shift four args
 .
 .  ds \\*[$3] "\\$@\"		fill stack with remaining elements
 ..
@@ -291,11 +291,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\"	******************************************************************
 .de t*DI
 .  nr * \\n[.u]
-.  nf		\"	diversion is already formatted - output it unchanged
-.  \\$1		\"	output the diversion ...
-.  rm \\$1	\"	... and remove it
+.  nf\"		diversion is already formatted - output it unchanged
+.  \\$1\"	output the diversion ...
+.  rm \\$1\"	... and remove it
 .  if \\n[*] \
-.    fi		\"	reactivate formatting
+.    fi\"	reactivate formatting
 ..
 .
 .\"	******************************************************************

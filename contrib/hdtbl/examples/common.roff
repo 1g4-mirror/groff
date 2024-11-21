@@ -147,8 +147,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  \" strip leading zero, if any
 .  ds * \\*[hex#]\"
 .  substring * 0 0
-.  if "\\*[*]"0" \
+.  length len# \\*[hex#]
+.  if \\n[len#]>1 .if "\\*[*]"0" \
 .    substring hex# 1 -1
+.  rr len#
 .
 .  if (\\$1 < 0) \
 .    ds hex# -\\*[hex#]\"

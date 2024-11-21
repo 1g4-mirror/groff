@@ -451,9 +451,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  t*cptn\\n[t*#]
 .  nr t*# -1
 .
-.  ll \\n[*cl\\n[t*#]]u          \"	restore ll outside this table
-.  in 0                          \"	reset indent
-.  gcolor \\*[t*m\\n[t*#]]       \"	reset previous fgc
+.  ll (u;\\n[.H]>?\\n[*cl\\n[t*#]]) \"	restore ll outside this table
+.  in 0                             \"	reset indent
+.  gcolor \\*[t*m\\n[t*#]]          \"	reset previous fgc
 .
 .  t*getarg hold \\$@
 .  if !\\n[t*#] \{\

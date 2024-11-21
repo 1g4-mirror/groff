@@ -31,7 +31,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .
 .de ctab
 .nr #cc 0
-.PN 21 ".nr #cc +.05f" ".defcolor \En[t*#] rgb \\$1 \\$2 \\$3" ".TBL border= csp=0 cpd=.5n bgc=\\\\n[t*#] bc=" .TR .TD
+.PN 21 ".nr #cc +.05f" \
+       ".nr #cc (1f<?\En[#cc])" \
+       ".defcolor \En[t*#] rgb \\$1 \\$2 \\$3" \
+       ".TBL border= csp=0 cpd=.5n bgc=\\\\n[t*#] bc=" \
+       .TR \
+       .TD
 .PN 21 .ETB
 ..
 .PN 30 Before table.

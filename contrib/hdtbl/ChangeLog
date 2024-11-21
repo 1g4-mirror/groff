@@ -1,3 +1,18 @@
+2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* hdmisc.tmac (t*index): Fix "range" warning: clamp substring
+	extraction at length of string.
+	(t*DI): Fix "tab" warnings: precede tab characters in macro
+	calls with comment character.
+	* hdtbl.tmac (ETC): Fix "range" warning: clamp line length at
+	horizontal motion quantum the desired value is less.
+	* hdtbl.am (HDTBLGROFF): Run groff with `-b` and `-wall`
+	options.
+	* examples/color_transitions.roff (ctab): When incrementing
+	color channel value, cap it at "1f" to avoid "range" warning.
+	* examples/common.roff (d2x): Fix "range" warning: clamp
+	substring extraction at length of string.
+
 2024-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* examples/fonts_n.in:

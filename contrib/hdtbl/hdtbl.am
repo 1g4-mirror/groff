@@ -30,7 +30,7 @@ HDTBLGROFF = \
     -dfontpath=$(top_srcdir)/font \
     -dsopath=$(hdtbl_srcdir)/ \
     -I $(doc_builddir) -I $(doc_srcdir) \
-     $(MFLAG) -M$(hdtbl_srcdir) -mhdtbl -t -p -e -U
+     $(MFLAG) -M$(hdtbl_srcdir) -mhdtbl -t -p -e -U -b -wall
 
 HDTBLTMACFILES = \
   contrib/hdtbl/hdtbl.tmac \
