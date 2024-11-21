@@ -1,3 +1,11 @@
+2024-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* examples/fonts_n.in:
+	* examples/fonts_x.in: Throw useful diagnostic and abort if
+	unsafe mode is not enabled; prevents horrendous spew of errors
+	from formatter.  Move status/progress message closer to the
+	relevant logic.
+
 2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* examples/fonts_n.in (fontdump):

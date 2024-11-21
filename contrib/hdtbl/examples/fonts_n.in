@@ -45,7 +45,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .if !d fontpath \
 .  ds fontpath @fontdir@
 .
-.tm \*[fonts_n]: listing fonts in \*[fontpath]/dev\*[.T]
+.if !\n[.U] \{\
+.  tmc \*[fonts_n]: document requires unsafe mode;
+.  tm1 " use groff's '-U' option
+.  ab
+.\}
 .
 .de fontdump
 .  ie \\n[.$] \
@@ -144,6 +148,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  \}
 ..
 .
+.tm \*[fonts_n]: listing fonts in \*[fontpath]/dev\*[.T]
 .fontdump all
 .
 .\" Local Variables:
