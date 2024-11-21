@@ -51,8 +51,8 @@ check_number_pages()
     fi
 }
 
-check_number_pages "$builddir"/contrib/hdtbl/examples/fonts_n.ps 38
-check_number_pages "$builddir"/contrib/hdtbl/examples/fonts_x.ps 38
+check_number_pages "$builddir"/contrib/hdtbl/examples/fonts_n.ps 46
+check_number_pages "$builddir"/contrib/hdtbl/examples/fonts_x.ps 46
 
 exit $ret
 

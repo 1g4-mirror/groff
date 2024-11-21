@@ -1,9 +1,14 @@
 2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* examples/test-hdtbl.sh.in: Update test expectations to reflect
+	addition of 8 font descriptions for CJK support.
+
+2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* hdtbl.am: Declare dependency of `HDTBLPROCESSEDEXAMPLEFILES`
 	on `DEVPSFONTFILES`.
 
-2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+2024-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* hdmisc.tmac (t*index): Fix "range" warning: clamp substring
 	extraction at length of string.
