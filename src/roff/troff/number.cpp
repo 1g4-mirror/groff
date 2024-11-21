@@ -541,9 +541,9 @@ static bool is_valid_term(units *u, int scaling_unit,
       warning(WARN_SCALE, "scaling unit invalid in context");
       break;
     case 'f':
-      if (c != 'f') {
+      if (c != 'f' && c != 'u') {
 	warning(WARN_SCALE, "'%1' scaling unit invalid in context;"
-		" use 'f'", c);
+		" use 'f' or 'u'", c);
 	break;
       }
       si = c;
