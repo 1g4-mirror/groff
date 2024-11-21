@@ -53,6 +53,8 @@ EXTRA_DIST += \
   contrib/hdtbl/examples/fonts_x.in \
   $(hdtbl_test_template)
 
+$(HDTBLPROCESSEDEXAMPLEFILES): $(DEVPSFONTFILES)
+
 HDTBLEXAMPLEFILES = \
   contrib/hdtbl/examples/common.roff \
   contrib/hdtbl/examples/chess_board.roff \
