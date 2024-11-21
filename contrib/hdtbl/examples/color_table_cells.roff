@@ -19,13 +19,18 @@ for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 ..
 .
 .if !d sopath \
 .  ds sopath
 .
-.so \*[sopath]examples/common.roff
+.ds lib examples/common.roff
+.soquiet \*[sopath]\*[lib]
+.if !d common \{\
+.  tmc \n[.F]: cannot find "\*[lib]"; specify its location
+.  tm1 " with groff '-I' or '-d sopath=' option
+.\}
+.
 .
 .\" Seed the random number generator for reproducible builds.
 .random-seed 131545532 19201711

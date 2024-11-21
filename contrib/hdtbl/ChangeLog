@@ -1,5 +1,21 @@
 2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* examples/chess_board.roff:
+	* examples/col_rowspan_colors.roff:
+	* examples/color_boxes.roff:
+	* examples/color_nested_tables.roff:
+	* examples/color_table_cells.roff:
+	* examples/color_transitions.roff:
+	* examples/fonts_n.in:
+	* examples/fonts_x.in:
+	* examples/mixed_pickles.roff:
+	* examples/rainbow.roff:
+	* examples/short_reference.roff: Use `soquiet` request instead
+	of `so` and provide a more helpful diagnostic than the formatter
+	would have.
+
+2024-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[hdtbl]: Tweak shell style in test script.
 
 	* examples/test-hdtbl.sh.in: Favor `[` command over `test` in

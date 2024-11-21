@@ -29,7 +29,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .if !d sopath \
 .  ds sopath
 .
-.so \*[sopath]examples/common.roff
+.ds lib examples/common.roff
+.soquiet \*[sopath]\*[lib]
+.if !d common \{\
+.  tmc \n[.F]: cannot find "\*[lib]"; specify its location
+.  tm1 " with groff '-I' or '-d sopath=' option
+.\}
+.
 .
 .H Table with Mixed Content: \
    .br \
