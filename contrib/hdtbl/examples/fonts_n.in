@@ -63,14 +63,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .    if "\\*[*$1]"all" \{\
 .      ds *args \\*[*f] \\*[*args]
 .      pops *$1 *args
-.      nr *all 1 
+.      nr *all 1
 .    \}
 .
 .    if \\n[*all] \{\
 .      if "\\*[*$1]"." \
 .        nr *all 0
 .      if !F \\*[*$1] \
-.        continue 
+.        continue
 .    \}
 .
 .    t*index "\\*[*f]" \\*[*$1]
@@ -92,7 +92,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .      ft
 .
 .      if (\\n[**] == \\n[*]) \
-.        continue 
+.        continue
 .    \}
 .
 .    if \\n[t*cptn] \
@@ -104,7 +104,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .      CPTN groff font \\*[*$1] \
             .br \
             val=b ".pso @EGREP@ internalname \\*[fontpath]/dev\*[.T]/\\*[*$1]"
-.      TR 
+.      TR
 .        TD
 .          TBL cols=12 border=.1n bc=red csp=.1n cpd=.2n fgc=red4 bgc=beige \
                hal=c fsz='1.2 1.2' fst=\\*[*$1]
@@ -129,14 +129,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                ".TD fgc=blue fst=HB" \
                  \\\\n[y#].
 .
-.            TR fst=HB fgc=blue 
-.              TD 
+.            TR fst=HB fgc=blue
+.              TD
 .                nr x# 0-1 1
 .              PN 10 .TD \
                  \&..\\\\n+[x#]
-.              TD 
-.          ETB 
-.    ETB 
+.              TD
+.          ETB
+.    ETB
 .  \}
 ..
 .
