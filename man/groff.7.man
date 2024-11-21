@@ -4141,14 +4141,13 @@ See registers
 .BR ury .
 .
 .TPx
-.REQ .pso command-line
-Execute
-.IR command-line ,
-a sequence of ordinary characters,
-.\" ...limiting the shell commands you can express; see Savannah #65108.
-with
-.MR popen 3
-and interpolate its output.
+.REQ .pso command
+As
+.RB \[lq] so \[rq],
+except that input comes from the standard output stream of
+.IR command ,
+which is passed to
+.MR popen 3 .
 .
 Unsafe request;
 disabled by default.

@@ -1,5 +1,22 @@
 2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (pipe_source_request): Refactor.
+	Return early when unsafe requests are not enabled, dropping the
+	rest of the function body by an indentation level.  Replace
+	input scanning logic with a call to `read_string()`, which is
+	written to do exactly the same thing (except that it knows how
+	to handle a leading neutral double quote, which this function
+	didn't).
+
+	* man/groff.7.man (Request short reference) <pso>:
+	* man/groff_diff.7.man (New requests) <pso>: Recast, strengthing
+	parallel with `so` request.
+
+	* NEWS: Document `pso` request's new handling of a leading
+	neutral double quote.
+
+2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_term): Accept scaling unit
 	of `u` in contexts where `f` is expected; `u` is valid in all
 	contexts.

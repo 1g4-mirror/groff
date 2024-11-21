@@ -3378,11 +3378,14 @@ these four registers are set to zero.
 .
 .
 .TP
-.BI .pso \~command
+.BR .pso\~ [ \[dq] ]\c
+.I command
 As
 .RB \[lq] so \[rq],
 except that input comes from the standard output stream of
-.IR command .
+.IR command ,
+which is passed to
+.MR popen 3 .
 .
 .
 .TP
