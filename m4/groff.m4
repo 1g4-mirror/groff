@@ -130,10 +130,10 @@ AC_DEFUN([GROFF_PERL], [
 # We need m4 to generate some man pages.
 
 AC_DEFUN([GROFF_PROG_M4], [
-  AC_CHECK_PROGS([M4], [m4], [missing])
+  AC_CHECK_PROGS([M4], [m4 gm4], [missing])
   if test "$M4" = missing
   then
-    AC_MSG_ERROR([could not find 'm4'], 1)
+    AC_MSG_ERROR([could not find an m4 program], 1)
   fi
 ])
 
