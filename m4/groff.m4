@@ -1781,7 +1781,7 @@ AC_DEFUN([GROFF_DIFF_D],
       fi
     fi
   fi
-  AC_MSG_RESULT([$groff_has_diff_d_option])
+  AC_MSG_RESULT([$DIFF_PROG])
   AC_SUBST([DIFF_PROG])])
 
 # Check if 'test' supports the option -ef.
