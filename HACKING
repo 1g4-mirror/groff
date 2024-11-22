@@ -175,6 +175,9 @@ Here are some portability notes on writing automated tests.
   in Issue 7 (2018) appears unchanged.
     https://pubs.opengroup.org/onlinepubs/9699919799/utilities/od.html )
 
+* Prior to POSIX.1-2024, the meaning of the sequence `\]` in a basic or
+  extended regular expression is undefined.  Spell it as `]` instead.
+
 * macOS sed requires semicolons after commands even if they are followed
   immediately by a closing brace.
 
