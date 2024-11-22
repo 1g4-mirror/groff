@@ -1042,8 +1042,8 @@ bool font::load(bool load_header_only)
 	  directive = nm;
 	  break;
 	}
-	int start_code = 0;
-	int end_code = 0;
+	unsigned int start_code = 0;
+	unsigned int end_code = 0;
 	int nrange = sscanf(nm, "u%X..u%X", &start_code, &end_code);
 	// TODO: Check for backwards range: end_code < start_code.
 	if (2 == nrange) {

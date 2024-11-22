@@ -1,5 +1,15 @@
 2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/font.cpp (font::load): Declare `start_code`
+	and `end_code` as `unsigned` integers, since Unicode code points
+	cannot be negative, and we are using the sscanf(3) conversion
+	specifier `%X` to read them from a font description file.
+
+	Fixes <https://savannah.gnu.org/bugs/?66473>.  Thanks to Bjarni
+	Ingi Gislason for the report.
+
+2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_PROG_M4): Also search for `gm4`.  Obviates
 	need to specify `M4=gm4` in `configure`'s environment on Solaris
 	10.
