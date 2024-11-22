@@ -49,7 +49,7 @@ do
     || wail
   echo "$output"
   # 3 backslashes
-  echo "$output" | grep -q 'x * X *pdf: \\\[u007E\]' || wail
+  echo "$output" | grep -q 'x * X *pdf: \\\[u007E]' || wail
 done
 
 test -z "$fail"

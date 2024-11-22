@@ -53,7 +53,7 @@ echo "$output" \
 
 #echo "checking device request, default escape character" >&2
 #echo "$output" \
-#  | grep -qx 'x X bogus1: req to-do\\\[u1F00\] -'"'"'"`^\\~' \
+#  | grep -qx 'x X bogus1: req to-do\\\[u1F00] -'"'"'"`^\\~' \
 #  || wail
 
 echo "checking X escape sequence, alternate escape character" >&2
@@ -62,7 +62,7 @@ echo "$output" \
 
 #echo "checking device request, alternate escape character" >&2
 #echo "$output" \
-#  | grep -qx 'x X bogus2: req to-do\\\[u1F00\] -'"'"'"`^\\~' \
+#  | grep -qx 'x X bogus2: req to-do\\\[u1F00] -'"'"'"`^\\~' \
 #  || wail
 
 input='.

@@ -1,3 +1,20 @@
+2024-11-22  Paul Eggert  <eggert@cs.ucla.edu>
+
+	* arch/djgpp/config.sed:
+	* bootstrap.conf:
+	* contrib/mm/tests/lists-indent-correctly.sh:
+	* src/roff/groff/tests/backslash-X-works.sh:
+	* src/roff/groff/tests/\
+	device-control-special-character-handling.sh:
+	* src/roff/groff/tests/device-request-works.sh: Use strict
+	POSIX.1-2017 regexes with grep and sed.
+
+	In POSIX.1-2017, the regular expression '\]' has undefined
+	behavior.  In POSIX.1-2024 it's equivalent to ']', but the groff
+	build process should not yet rely on this.
+
+	Fixes <https://savannah.gnu.org/bugs/?66476>.
+
 2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/font.cpp (font::load): Declare `start_code`
