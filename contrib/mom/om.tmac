@@ -11458,7 +11458,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .    \}
 .    if r pdfbx-top \{\
 .       ds $HEAD_\\n[#LEVEL]_BASELINE_ADJ \\*[$RESTORE_ADJ]
-.       if !\\n[#PARAHEAD] .sp \\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ] 
+.       if !\\n[#PARAHEAD] .sp \\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ]
 .    \}
 .    if !\\n[#PARAHEAD] \
 .       if \\n[#HEAD_\\n[#LEVEL]_SPACE_AFTER] .sp
@@ -20811,7 +20811,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .       ab Aborting.
 .    \}
 .    ev tbl*end \" Needed because of .ad changes
-.    evc \\*[ev-current] 
+.    evc \\*[ev-current]
 .    nh
 .    nf
 .    rr tbl*no-header
@@ -24353,7 +24353,7 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 . rr pdfbx-post-q
 ..
 \#
-.de rr-pdfbx-div-start 
+.de rr-pdfbx-div-start
 . rr pdfbx-div-start
 ..
 \#
@@ -24503,14 +24503,14 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .   nr pdfboxed 1
 . \}
 . if \\n[stack]=1 \{\
-.   if \\n[#INDENT_LEFT_ACTIVE]  .nr #IL_ACTIVE \\n[#L_INDENT] 
-.   if \\n[#INDENT_RIGHT_ACTIVE] .nr #IR_ACTIVE \\n[#R_INDENT] 
+.   if \\n[#INDENT_LEFT_ACTIVE]  .nr #IL_ACTIVE \\n[#L_INDENT]
+.   if \\n[#INDENT_RIGHT_ACTIVE] .nr #IR_ACTIVE \\n[#R_INDENT]
 .   if \\n[#INDENT_BOTH_ACTIVE]  \{\
-.     nr #IBL_ACTIVE \\n[#BL_INDENT] 
-.     nr #IBR_ACTIVE \\n[#BR_INDENT] 
+.     nr #IBL_ACTIVE \\n[#BL_INDENT]
+.     nr #IBR_ACTIVE \\n[#BR_INDENT]
 .   \}
 .   if \\n[#IN_ITEM] \
-.     if \\n[#BR_INDENT] .nr #IBR_ACTIVE \\n[#BR_INDENT] 
+.     if \\n[#BR_INDENT] .nr #IBR_ACTIVE \\n[#BR_INDENT]
 . \}
 .\" Set l
 . nr pdfbx-l \\n[#L_MARGIN]
@@ -24547,7 +24547,7 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .       IBX CLEAR
 .   if \\n[#IR_ACTIVE]:\\n[#IBR_ACTIVE] \
 .      nr pdfbx-pre-ll \\n[#L_LENGTH]
-.   rr pdfbx-clear 
+.   rr pdfbx-clear
 . \}
 .\" See if box fits
 .\" PIC and IMG are in floats, which take care of fit/defer.

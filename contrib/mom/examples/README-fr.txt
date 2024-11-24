@@ -77,7 +77,7 @@ Le fichier slide-demo.mom montre une présentation de diapositives
 avec des effets PAUSE et TRANSITION.  Le fichier .pdf généré avec
 pdfmom devrait être ouvert en mode Présentation d'un lecteur PDF
 (Okular, Evince, Acroread).  Notez que pas tous les effets de
-transition sont disponibles pour tous les lecteurs PDF.  
+transition sont disponibles pour tous les lecteurs PDF.
 
 ***mon_premier_doc.mom***
 

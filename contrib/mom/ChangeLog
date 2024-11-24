@@ -392,7 +392,7 @@
 
 	o overhaul of control macro handling
 
-	o overhaul of cover and docheader management 
+	o overhaul of cover and docheader management
 
 	o general code cleanup to remove redundancies and reduce size of
 		om.tmac
@@ -428,7 +428,7 @@
 	o Makefile.sub: KFLAG to run pdfmom with -k
 
 	o Set utf-8 preconv coding tag in examples/typesetting.mom and
-		examples/letter.mom 
+		examples/letter.mom
 
 * Mon Oct 20 2014
 
