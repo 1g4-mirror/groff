@@ -542,13 +542,18 @@ endif
 #info_TEXINFOS = doc/groff.texi
 #doc_groff_TEXINFOS = doc/fdl.texi
 
+if HAVE_MAKEINFO
+GROFF_INFO = doc/groff.info
+GROFF_TXT = doc/groff.txt
+GROFF_HTML = doc/groff.html
+endif
+
 if USE_TEX
 GROFF_DVI = doc/groff.dvi
 GROFF_PDF = doc/groff.pdf
-endif
+endif # USE_TEX
 
-all: doc/groff.info doc/groff.txt doc/groff.html \
-	$(GROFF_DVI) $(GROFF_PDF)
+all: $(GROFF_INFO) $(GROFF_TXT) $(GROFF_HTML) $(GROFF_DVI) $(GROFF_PDF)
 
 # Distribute the manual in source form as well.
 EXTRA_DIST += doc/groff.texi.in doc/groff.texi doc/fdl.texi

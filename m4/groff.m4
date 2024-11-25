@@ -164,22 +164,13 @@ AC_DEFUN([GROFF_PROG_MAKEINFO], [
       expr ${makeinfo_version_major}000 + $makeinfo_version_minor`
     if test $makeinfo_version_numeric -lt 5000
     then
-      missing="'makeinfo' is too old."
+      missing="'makeinfo' is too old; version 5.0 or newer needed"
       MAKEINFO=
     fi
   fi
 
-  if test -n "$missing"
-  then
-    infofile=doc/groff.info
-    test -f $infofile || infofile="$srcdir"/$infofile
-    if test ! -f $infofile \
-     || test "$srcdir"/doc/groff.texi -nt $infofile
-    then
-      AC_MSG_ERROR($missing
-[Get the 'texinfo' package version 5.0 or newer.])
-    fi
-  fi
+  groff_have_makeinfo=yes
+  test -n "$missing" && groff_have_makeinfo=no
   AC_SUBST([MAKEINFO])
 ])
 
@@ -289,6 +280,23 @@ AC_DEFUN([GROFF_GROPDF_DEPENDENCIES_CHECK], [
 
   AC_SUBST([use_gropdf])
 ])
+
+AC_DEFUN([GROFF_MAKEINFO_PROGRAM_NOTICE], [
+  AC_REQUIRE([GROFF_PROG_MAKEINFO])
+
+  if test "$groff_have_makeinfo" = no
+  then
+    AC_MSG_NOTICE([groff's Texinfo manual will not be generated.
+
+  Because 'makeinfo' is either outdated or missing, the Texinfo manual
+  will not be generated in any of its output formats (GNU Info, HTML,
+  plain text, TeX DVI, or PDF).
+
+  Get the 'texinfo' package version 5.0 or newer to build the manual.
+])
+  fi
+])
+
 
 AC_DEFUN([GROFF_GROPDF_PROGRAM_NOTICE], [
   AC_REQUIRE([GROFF_GROPDF_DEPENDENCIES_CHECK])

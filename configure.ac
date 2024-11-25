@@ -195,6 +195,7 @@ AM_CONDITIONAL([USE_GROFF_ALLOCATOR],
 AM_CONDITIONAL([HAVE_GHOSTSCRIPT], [test "$GHOSTSCRIPT" != no \
                 && test "$GHOSTSCRIPT" != missing])
 AM_CONDITIONAL([HAVE_URW_FONTS], [test "$groff_have_urw_fonts" = yes ])
+AM_CONDITIONAL([HAVE_MAKEINFO], [test "$groff_have_makeinfo" = yes ])
 AM_CONDITIONAL([HAVE_TEXI2DVI], [test "$groff_have_texi2dvi" = yes ])
 AM_CONDITIONAL([USE_TEX], [test "$groff_use_tex" = yes ])
 
@@ -242,7 +243,8 @@ then
 fi
 echo "\
  preconv can use uchardet library : $groff_have_uchardet
- can build groff.dvi, groff.pdf   : $groff_use_tex
+ can build groff.{info,html,txt}  : $groff_have_makeinfo
+ can build groff.{dvi,pdf}        : $groff_use_tex
 ----------------------------------------------------------------------"
 
 GROFF_APPDEFDIR_NOTICE
@@ -251,4 +253,5 @@ GROFF_GHOSTSCRIPT_VERSION_NOTICE
 GROFF_URW_FONTS_NOTICE
 GROFF_UCHARDET_NOTICE
 GROFF_GROHTML_PROGRAM_NOTICE
+GROFF_MAKEINFO_PROGRAM_NOTICE
 GROFF_GROPDF_PROGRAM_NOTICE

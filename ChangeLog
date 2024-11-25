@@ -1,3 +1,31 @@
+2024-12-22  onf <onf@disroot.org>
+
+	Support building without makeinfo(1) installed.
+
+	* m4/groff.m4 (GROFF_PROG_MAKEINFO): Simplify logic to not throw
+	error if "groff.info" is older than "groff.texi"; that is now an
+	accepted state of affairs during configuration.  (make(1) could
+	fail later, though.)  Set new variable `groff_have_makeinfo`.
+	Stop `AC_MSG_WARN`-ing if it's absent.
+	(GROFF_MAKEINFO_PROGRAM_NOTICE): New macro warns user of the
+	consequences of not having (a recent enough) makeinfo(1)
+	installed.
+	* configure.ac: Set Automake conditional `HAVE_MAKEINFO` if the
+	corresponding new shell variable was assigned by
+	`GROFF_PROG_MAKEINFO`.  Report in configuration summary whether
+	the Info, plain text, and HTML forms of groff's Texinfo manual
+	can be generated.  Call `GROFF_MAKEINFO_PROGRAM_NOTICE` macro.
+	* doc/doc.am: Indirect the file names of the Info, plain text,
+	and HTML forms of groff's Texinfo manual through new make(1)
+	macros, `GROFF_INFO`, `GROFF_TXT`, and `GROFF_HTML`.  Assign
+	them only if `HAVE_MAKEINFO` is true.
+	(all): Expand the new macros in place of literals.
+
+	Fixes <https://savannah.gnu.org/bugs/?66583>.
+
+	Co-authored-by: "G. Branden Robinson"
+	<g.branden.robinson@gmail.com>
+
 2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/eqn/neqn.sh: Handle `-h` and `--help` options:
