@@ -2609,8 +2609,12 @@ static bool is_char_usable_as_delimiter(int c)
   case '(':
   case ')':
   case '.':
-  case '|':
     return false;
+  // TODO: In groff 1.25, style-warn on '|' and [A-Za-z].
+  // TODO: In groff 1.26, promote style warning to error with
+  // deprecation message.
+  // TODO: In groff 1.27, make '|' and letters return false.
+  // See Savannah #66481.
   default:
     return true;
   }

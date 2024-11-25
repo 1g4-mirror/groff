@@ -1,3 +1,23 @@
+2024-11-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (is_char_usable_as_delimiter):
+	Revert fix for bug #66009.  Unfortunately, `|` is in use in the
+	wild as a delimiter, for instance in man pages for GNU awk, GNU
+	grep, and GNU rcs.  Weaning people off of it (because it is a
+	valid character in a numeric expression, and GNU troff has never
+	accepted most other such characters as delimeters,{*} whereas
+	AT&T troff accepted them all) looks to be a multi-stage,
+	multi-year process.
+
+	Fixes <https://savannah.gnu.org/bugs/?66481>.  Thanks to Paul
+	Eggert for the report.
+
+	{*} For distorted values of "most"--both GNU and AT&T troffs
+	accept any basic Latin letter (A-Za-z]) as a delimiter, a
+	collection of 52 exceptions that quantitatively swallows the
+	rule.  Pragmatically, few *roff document authors past or present
+	seem to have been adventurous enough to exercise this freedom.
+
 2024-11-22  Paul Eggert  <eggert@cs.ucla.edu>
 
 	* arch/djgpp/config.sed:
