@@ -1,5 +1,20 @@
 2024-11-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::is_usable_as_delimiter): If
+	in compatibility mode, accept any ordinary character as a
+	delimiter.
+
+	* doc/groff.texi.in (Delimiters, Compatibility Mode):
+	* man/groff_diff.7.man (Compatibility mode): Document it.
+
+	* src/roff/groff/tests/\
+	allow-wacky-delimiters-in-compatibility-mode.sh: Test it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	* NEWS: Add item.
+
+2024-11-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (is_char_usable_as_delimiter):
 	Revert fix for bug #66009.  Unfortunately, `|` is in use in the
 	wild as a delimiter, for instance in man pages for GNU awk, GNU

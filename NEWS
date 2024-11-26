@@ -168,6 +168,11 @@ troff
    units, such as the `ps` request and `\s` escape sequence, now also
    accept `p` and `s`.
 
+*  In compatibility mode, GNU troff now accepts delimiters that it
+   rejects when not in compatbility mode--namely, ordinary characters
+   that are meaningful in numeric expressions (which are often
+   delimited).  This change improves compatibilty with AT&T troff.
+
 eqn
 ---
 

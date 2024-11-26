@@ -2585,17 +2585,9 @@ bool token::operator!=(const token &t)
 // doesn't tokenize it) and accepts a user-specified delimiter.
 static bool is_char_usable_as_delimiter(int c)
 {
+  if (csdigit(c))
+    return false;
   switch (c) {
-  case '0':
-  case '1':
-  case '2':
-  case '3':
-  case '4':
-  case '5':
-  case '6':
-  case '7':
-  case '8':
-  case '9':
   case '+':
   case '-':
   case '/':
@@ -2626,6 +2618,10 @@ bool token::is_usable_as_delimiter(bool report_error)
   bool is_valid = false;
   switch (type) {
   case TOKEN_CHAR:
+    // AT&T troff accepted any character as a delimiter, even perverse
+    // choices like `\l91n+2n\&*`.  See Savannah #66481.
+    if (want_att_compat)
+      return true;
     is_valid = is_char_usable_as_delimiter(c);
     if (!is_valid && report_error)
       error("character '%1' is not allowed as a delimiter",
