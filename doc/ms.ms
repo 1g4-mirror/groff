@@ -1,3 +1,8 @@
+.\" groff -ept -ms
+.\"
+.\" Copyright (C) 2001 Larry Kollar
+.\" Copyright (C) 2020-2024 G. Branden Robinson
+.\"
 .\" This file is part of groff.
 .\"
 .\" groff is free software; you can redistribute it and/or modify it
@@ -35,7 +40,7 @@
 .nr TC-MARGIN \w'00' \" expect 2-digit page numbers at most
 .ie t .nr PI 3.5n
 .el   .nr PI 4n
-.ds date October 2024\"
+.ds date November 2024\"
 .ND \*[date]
 .EH '%''\*[date]'
 .EF ''''
@@ -2841,16 +2846,7 @@ itself.
 An application of
 .CW FS\-MARK
 is anchor placement for a hyperlink reference,
-so that a footnote can link back to its referential context.\**
-.
-.FS
-\[lq]Portable Document Format Publishing with GNU Troff\[rq],
-.I pdfmark.ms
-in the
-.I groff
-distribution,
-uses this technique.
-.FE
+so that a footnote can link back to its referential context.
 .
 By default,
 this macro has an empty definition.
@@ -3240,7 +3236,29 @@ center,
 and right header or footer texts from each other.
 .
 You can replace the neutral apostrophes (\[aq]) shown below with any
-character not appearing in the header or footer text.
+character not appearing in the header or footer text.\**
+.FS
+.CW \[dq] ,
+.CW # ,
+and
+.CW $
+are also good choices because
+.I groff
+handles delimiters in other contexts
+such as conditional and numeric expressions,
+where digits
+.CW 0 \[en]\c
+.CW 9
+and punctuation characters like
+.CW + ,
+.CW \- ,
+.CW * ,
+.CW / ,
+.CW & ,
+and
+.CW :
+are meaningful.
+.FE
 .
 These macros are Berkeley extensions.
 .
@@ -4149,7 +4167,7 @@ This implies that
 .CW \[rs]n[PO]
 should not be used early in the document,
 unless it is changed also:
-accessing an undefined register automatically defines it.
+interpolating an undefined register automatically defines it.
 .
 .
 .PP
