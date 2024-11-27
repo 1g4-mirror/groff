@@ -220,6 +220,19 @@ The defaults are chosen to produce reasonable values for a Times font.
 .
 .
 .\" ====================================================================
+.SH "Exit status"
+.\" ====================================================================
+.
+.I \%addftinfo
+exits with
+.RB status\~ 0
+on successful operation,
+and
+.RB status\~ 2
+if the program cannot interpret its command-line arguments.
+.
+.
+.\" ====================================================================
 .SH "See also"
 .\" ====================================================================
 .

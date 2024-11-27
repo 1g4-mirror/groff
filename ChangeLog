@@ -1,5 +1,18 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/addftinfo/addftinfo.cpp: Align with modern groff
+	conventions.  Add Autoconf "<config.h>"-inclusion boilerplate to
+	this translation unit.  Use standard symbol `EXIT_SUCCESS`
+	instead of zero literal.  Exit with status 2, not 1, on usage
+	errors.
+
+	* src/utils/addftinfo/addftinfo.1.man (Exit status): Add.
+
+	* NEWS: Add addftinfo to list of programs with changed exit
+	status conventions.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* bootstrap.conf: Add "getopt-gnu" to `gnulib_modules`.
 
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>

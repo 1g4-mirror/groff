@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -16,11 +16,15 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <errno.h>
+#include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
+
 #include "lib.h"
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <errno.h>
 #include "errarg.h"
 #include "error.h"
 #include "stringclass.h"
@@ -72,7 +76,7 @@ int main(int argc, char **argv)
       version();
     if (!strcmp(argv[i],"--help")) {
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
     }
   }
   if (argc < 4)
@@ -144,7 +148,7 @@ static void usage(FILE *stream)
 static void usage()
 {
   usage(stderr);
-  exit(1);
+  exit(2);
 }
 
 static void usage(const char *problem)
@@ -156,7 +160,7 @@ static void usage(const char *problem)
 static void version()
 {
   printf("GNU addftinfo (groff) version %s\n", Version_string);
-  exit(0);
+  exit(EXIT_SUCCESS);
 }
 
 static int get_line(FILE *fp, string *p)
