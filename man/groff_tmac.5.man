@@ -690,12 +690,12 @@ it has dependencies on external programs as shown below.
 .TS
 allbox center;
 Cb Ci Ci Ci
-L  C  C  C.
+Li C  C  C.
 \&	pdfinfo\fR(1)	file\fR(1)	identify\fR(1)
 \&.pdf	\[OK]	\[OK]	\[OK]
 \&.jpg	\[u2717]	\[OK]	\[OK]
 \&.jp2	\[u2717]	\[u2717]	\[OK]
-other	\[u2717]	\[u2717]	\[OK]
+\fRother	\[u2717]	\[u2717]	\[OK]
 .TE
 .
 .

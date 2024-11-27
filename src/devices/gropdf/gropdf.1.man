@@ -986,12 +986,12 @@ can embed in its output.
 .TS
 allbox center;
 Cb Ci Ci Ci Ci
-L  C  C  C  C.
-\&	none	file\fR(1)	identify\fR(1)	Image::Magick\fR(3pm)
+Li C  C  C  C.
+\&	\fRnone	file\fR(1)	identify\fR(1)	Image::Magick\fR(3pm)
 \&.pdf	\[OK]	\[OK]	\[OK]	\[OK]
 \&.jpg	\[u2717]	\[OK]	\[OK]	\[OK]
 \&.jp2	\[u2717]	\[u2717]	\[OK]	\[OK]
-other	\[u2717]	\[u2717]	\[u2717]	\[OK]
+\fRother	\[u2717]	\[u2717]	\[u2717]	\[OK]
 .TE
 .
 .
