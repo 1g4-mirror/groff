@@ -1777,6 +1777,7 @@ static bool do_file(const char *filename)
   else {
     fp = fopen(filename, "r");
     if (0 /* nullptr*/ == fp) {
+      current_filename = 0 /* nullptr */;
       error("unable to open '%1': %2", filename, strerror(errno));
       return false;
     }

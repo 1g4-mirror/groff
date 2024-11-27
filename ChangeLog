@@ -1,5 +1,11 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (do_file): Nullify
+	`current_filename` on failure to open file.  Fixes noise in
+	error message.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml]: Rename the `-U` option provided by Takuji to `-k`,
 	and document it.
 
