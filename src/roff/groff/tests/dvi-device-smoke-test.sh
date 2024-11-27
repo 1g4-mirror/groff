@@ -38,8 +38,9 @@ printf ".ft JPM\n$jstr\n" | "$groff" -Kutf8 -Tdvi -Z | tr '\n' ';' \
 
 # test for upTeX dvi with Japanese, DVI output
 echo "checking 'groff -Kutf8 -Tdvi'" >&2
+# 2 spaces before each '*'
 printf ".ft JPM\n$jstr" | "$groff" -Kutf8 -Tdvi | od -tx1 \
-  | grep -q '81 30 55 81 30 56 81 6c e2' || wail
+  | grep -q '81  *30  *55  *81  *30  *56  *81  *6c  *e2' || wail
 
 test -z "$fail"
 

@@ -168,12 +168,20 @@ Here are some portability notes on writing automated tests.
 
 * The "od" command on macOS can put extra space characters (i.e., spaces
   that don't correspond to the input) at the ends of lines when using
-  the "od -t c" format; GNU od does not.
+  the "-t c" format; GNU od does not.
 
   So a regex like this that works with GNU od:
     grep -Eqx '0000000 +A +\\b +B +\\b +C       D +\\n'
-  might need to be weakened to the following on macOS.
+  might need to be weakened to the following to work on macOS.
     grep -Eqx '0000000 +A +\\b +B +\\b +C       D +\\n *'
+
+* The "od" command on macOS puts extra space characters between the
+  hexadecimal values when using the "-t x1" format; GNU od does not.
+
+  So a regex like this that works with GNU od:
+    grep -q '81 30 55 81 30 56 81 6c e2'
+  might need to be weakened to the following to work on macOS.
+    grep -q '81  *30  *55  *81  *30  *56  *81  *6c  *e2'
 
 * The "od" command on macOS does not respect the environment variable
   assignment "LC_ALL=C" when processing byte values 127<x<256 decimal

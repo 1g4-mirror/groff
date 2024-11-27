@@ -1,5 +1,17 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Fix Savannah #66479 (2/2).
+
+	* HACKING: Document another macOS od(1) irritation.
+
+	* src/roff/groff/tests/dvi-device-smoke-test.sh: Work around
+	macOS od(1)'s injection of extra spaces into its "-tx1" output.
+
+	Fixes <https://savannah.gnu.org/bugs/?66479>.  Thanks to Sven
+	Schober for the report, analysis, and for proposing fixes.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Fix Savannah #66479 (1a/2).
 
 	* HACKING: Document macOS wc(1) irritation.
