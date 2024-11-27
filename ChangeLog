@@ -1,5 +1,15 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/libbib/index.cpp:
+	* src/utils/libbib/linear.cpp:
+	* src/utils/libbib/search.cpp: Align with modern groff
+	conventions.  Include system library headers before local ones.
+
+	* src/utils/libbib/index.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to this translation unit.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/hpftodit/hpftodit.cpp:
 	* src/utils/hpftodit/hpuni.cpp: Align with modern groff
 	conventions.  Add Autoconf "<config.h>"-inclusion boilerplate to
