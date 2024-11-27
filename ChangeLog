@@ -1,5 +1,16 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (main): When constructing
+	`pre-grohtml` command line, inject `--` argument before `troff`
+	command to help `getopt_long()` identify the end of
+	`pre-grohtml` options, particularly in cases where the argument
+	sequence is malformed (options that take arguments not getting
+	them, for example).
+
+	Fixes <https://savannah.gnu.org/bugs/?66485>.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (do_file): Nullify
 	`current_filename` on failure to open file.  Fixes noise in
 	error message.

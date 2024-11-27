@@ -393,6 +393,7 @@ int main(int argc, char **argv)
 			     " 'postpro' directive");
   if (predriver && !zflag) {
     commands[TROFF_INDEX].insert_arg(commands[TROFF_INDEX].get_name());
+    commands[TROFF_INDEX].insert_arg("--");
     commands[TROFF_INDEX].set_name(predriver);
     // pass the device arguments to the predrivers as well
     commands[TROFF_INDEX].insert_args(Pargs);
