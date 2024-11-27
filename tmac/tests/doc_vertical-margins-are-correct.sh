@@ -91,7 +91,10 @@ output=$(printf "%s" "$input1" "$input2" \
 echo "$output"
 
 echo "checking page length" >&2
-test "$(echo "$output" | wc -l)" = 66 || wail
+res=$(echo "$output" | wc -l)
+# macOS `wc` prefixes the line count with spaces.  Get rid of them.
+res=$(expr "$res" + 0) || exit 99
+test "$res" = 66 || wail
 
 echo "checking placement of page header" >&2
 echo "$output" \

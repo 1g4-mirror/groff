@@ -153,6 +153,19 @@ Here are some portability notes on writing automated tests.
     # emulate "seq 53"
     n=1; while [ $n -le 53 ]; do echo $n; n=$(( n + 1 )); done; unset n
 
+* The "wc" command on macOS can prefix the numeric count in its output
+  with spaces, which can be undesirable when storing that output to
+  variable that is later expanded within double quotes in the shell.
+
+  Here is a workaround.
+
+  res=$(whatever | wc -l)
+  res=$(expr "$res" + 0) || exit 99
+
+  "expr"'s output is more rigidly specified, and if for some reason we
+  get unacceptable non-integer garbage from "wc", we exit the test
+  script with the code reserved for "hard errors".
+
 * The "od" command on macOS can put extra space characters (i.e., spaces
   that don't correspond to the input) at the ends of lines when using
   the "od -t c" format; GNU od does not.
