@@ -2573,12 +2573,13 @@ exceeds the text indentation,
 .I "groff mm"
 warns and uses one en of padding between the mark and the text.
 .
-A second argument
-prefixes
+The presence of a second argument prefixes
 .I mark
 to the
 .BR LB -configured
-mark and conditionally puts an unbreakable space
+mark and,
+as a GNU extension,
+conditionally puts an unbreakable space
 between the prefix and mark per the argument's Boolean value.
 .
 .
