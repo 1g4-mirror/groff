@@ -1,5 +1,14 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Fix inclusion wart.  Include local
+	"posix.h" header before "nonposix.h".  This aligns better with
+	other groff code, and more importantly, "posix.h" itself
+	includes "<unistd.h>", which defines `_POSIX_VERSION` on POSIX
+	systems, and in turn prevents us from provoking compiler
+	warnings by redeclaring `WIFEXITED` et al. in this file.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/ptable.h: Include "<stdlib.h>" header, since the
 	macros this file defines use `malloc()` and `free()`.
 

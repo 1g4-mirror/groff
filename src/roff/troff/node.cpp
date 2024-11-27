@@ -39,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "input.h"
 #include "geometry.h"
 
+#include "posix.h"
 #include "nonposix.h"
 
 #ifdef _POSIX_VERSION
