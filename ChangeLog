@@ -1,5 +1,9 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* bootstrap.conf: Add "getopt-gnu" to `gnulib_modules`.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp (main): When constructing
 	`pre-grohtml` command line, inject `--` argument before `troff`
 	command to help `getopt_long()` identify the end of
