@@ -1,5 +1,20 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/lex.cpp:
+	* src/preproc/eqn/limit.cpp:
+	* src/preproc/eqn/list.cpp:
+	* src/preproc/eqn/main.cpp:
+	* src/preproc/eqn/mark.cpp:
+	* src/preproc/eqn/over.cpp:
+	* src/preproc/eqn/special.cpp:
+	* src/preproc/eqn/sqrt.cpp: Add Autoconf "<config.h>"-inclusion
+	boilerplate to these translation units.
+
+	* src/preproc/eqn/other.cpp: Include "<stdio.h>" since
+	`fprintf()` and `printf()` are used.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/lkbib/lkbib.cpp: Align with modern groff
 	conventions.  Include system library headers before local ones.
 	Use standard symbols `EXIT_SUCCESS` and `EXIT_FAILURE` instead
