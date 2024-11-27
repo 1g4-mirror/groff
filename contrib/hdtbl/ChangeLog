@@ -1,3 +1,10 @@
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Fix Savannah #66479 (1b/2).
+
+	* examples/test-hdtbl.sh.in: Work around macOS wc(1)'s
+	right-alignment of its integer output field.
+
 2024-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* examples/test-hdtbl.sh.in: Update test expectations to reflect
