@@ -1,5 +1,10 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/ptable.h: Include "<stdlib.h>" header, since the
+	macros this file defines use `malloc()` and `free()`.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/addftinfo/addftinfo.cpp: Align with modern groff
 	conventions.  Add Autoconf "<config.h>"-inclusion boilerplate to
 	this translation unit.  Use standard symbol `EXIT_SUCCESS`

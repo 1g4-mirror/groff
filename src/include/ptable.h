@@ -21,7 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <assert.h>
-#include <string.h>
+#include <stdlib.h> // free(), malloc()
+#include <string.h> // strcmp(), strcpy(), strlen()
 
 // This groffism can be replaced with
 // std::unordered_map<const char *, T> if/when we migrate to C++11.
