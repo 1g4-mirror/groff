@@ -101,7 +101,12 @@ static const int CHARSET_UTF8  = 2;
 static int charset_encoding = CHARSET_MIXED;/* The character set may be plain ASCII,    */
                                             /* pure UTF-8, or a mixture of character    */
                                             /* entity references.                       */
-
+/*
+ * TODO: CHARSET_MIXED doesn't seem to govern the output in any way.
+ * Everywhere `charset_encoding` is tested, it is cast to a `bool`, so
+ * all we're really choosing between is ASCII and UTF-8.  Can we get rid
+ * of CHARSET_MIXED?
+ */
 
 /*
  *  start with a few favorites
@@ -5575,10 +5580,8 @@ int main(int argc, char **argv)
     { NULL, 0, 0, 0 }
   };
   opterr = 0;
-  // TODO: Rename `U` option, which generally means "unsafe mode" in
-  // groff, to `u`.
   while ((c = getopt_long(argc, argv,
-	  "a:bCdD:eF:g:Ghi:I:j:lno:prs:S:U::vVx:y", long_options, NULL))
+	  "a:bCdD:eF:g:Ghi:I:j:k:lno:prs:S:vVx:y", long_options, NULL))
 	 != EOF)
     switch(c) {
     case 'a':
@@ -5626,6 +5629,20 @@ int main(int argc, char **argv)
       multiple_files = TRUE;
       job_name = optarg;
       break;
+    case 'k':
+      if (strcasecmp(optarg, "ascii") == 0)
+	charset_encoding = CHARSET_ASCII;
+      else if (strcasecmp(optarg, "mixed") == 0)
+	charset_encoding = CHARSET_MIXED;
+      else if ((strcasecmp(optarg, "utf8") == 0)
+	       || (strcasecmp(optarg, "utf-8") == 0))
+	charset_encoding = CHARSET_UTF8;
+      else {
+	warning("unsupported character encoding '%1'; assuming UTF-8",
+		optarg);
+	charset_encoding = CHARSET_UTF8;
+      }
+      break;
     case 'l':
       auto_links = FALSE;
       break;
@@ -5646,22 +5663,6 @@ int main(int argc, char **argv)
       break;
     case 'S':
       split_level = atoi(optarg) + 1;
-      break;
-    case 'U':
-      if (optarg) {
-	// TODO: This argument semantic scheme seems unergonomic to GBR;
-	// come up with an alternative.
-        if ((strcmp(optarg, "0") == 0 || strcmp(optarg, "-") == 0))
-          charset_encoding = CHARSET_ASCII;
-        else if ((strcmp(optarg, "1") == 0))
-          charset_encoding = CHARSET_MIXED;
-        else if (optarg && ((strcmp(optarg, "2") == 0)
-			     || strcmp(optarg, "+") == 0))
-          charset_encoding = CHARSET_UTF8;
-        else
-          charset_encoding = CHARSET_UTF8;
-      } else
-        charset_encoding = CHARSET_UTF8;
       break;
     case 'v':
       printf("GNU post-grohtml (groff) version %s\n", Version_string);
@@ -5706,8 +5707,9 @@ int main(int argc, char **argv)
 static void usage(FILE *stream)
 {
   fprintf(stream,
-"usage: %s [-bCGhlnrUVy] [-F font-directory] [-j output-stem]"
-" [-s base-type-size] [-S heading-level] [-x html-dialect] [file ...]\n"
+"usage: %s [-bCGhlnrVy] [-F font-directory] [-j output-stem]"
+" [-k encoding] [-s base-type-size] [-S heading-level]"
+" [-x html-dialect] [file ...]\n"
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	  program_name, program_name, program_name);

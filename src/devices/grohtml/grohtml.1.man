@@ -98,6 +98,8 @@ output driver for HTML
 .IR font-directory ]
 .RB [ \-j
 .IR output-stem ]
+.RB [ \-k
+.IR encoding ]
 .RB [ \-s
 .IR base-point-size ]
 .RB [ \-S
@@ -487,6 +489,18 @@ Output is written to a new file at each section heading
 below)
 named
 .IR output-stem\- n .html .
+.
+.
+.TP
+.BI \-k \~encoding
+Select the character encoding used in the generated document,
+affecting the declared encoding in the preamble
+and the form of character entity references.
+.
+.\" XXX: Don't present "mixed" until we know what it's for.
+Valid values are \[lq]ASCII\[rq] and \[lq]UTF\-8\[rq].
+.
+The default is \[lq]UTF-8\[rq].
 .
 .
 .TP

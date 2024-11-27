@@ -1604,10 +1604,8 @@ static int scanArguments(int argc, char **argv)
     { 0 /* nullptr */, 0, 0, 0 }
   };
   opterr = 0;
-  // TODO: Rename `U` option, which generally means "unsafe mode" in
-  // groff, to `u`.
   while ((c = getopt_long(argc, argv,
-	  "+a:bCdD:eF:g:Ghi:I:j:lno:prs:S:U::vVx:y", long_options,
+	  "+a:bCdD:eF:g:Ghi:I:j:k:lno:prs:S:vVx:y", long_options,
 	  0 /* nullptr */))
 	 != EOF)
     switch(c) {
@@ -1658,6 +1656,9 @@ static int scanArguments(int argc, char **argv)
     case 'j':
       // handled by post-grohtml (set job name for multiple file output)
       break;
+    case 'k':
+      // handled by post-grohtml (charset ASCII/mixed/UTF-8)
+      break;
     case 'l':
       // handled by post-grohtml (no automatic section links)
       break;
@@ -1678,9 +1679,6 @@ static int scanArguments(int argc, char **argv)
       break;
     case 'S':
       // handled by post-grohtml (set file split level)
-      break;
-    case 'U':
-      // handled by post-grohtml (charset UTF-8)
       break;
     case 'v':
       printf("GNU pre-grohtml (groff) version %s\n", Version_string);

@@ -1,5 +1,24 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grohtml]: Rename the `-U` option provided by Takuji to `-k`,
+	and document it.
+
+	* src/preproc/html/pre-html.cpp (scanArguments): Recognize but
+	ignore `-k` (rather than `-U`) option.  Also, make the argument
+	mandatory.  Nothing else in groff supports an optional option
+	argument, which can be ambiguous to parse, especially in light
+	of groff(1)'s `-P` option.
+	* src/devices/grohtml/post-html.cpp (main): Recognize and
+	interpret `-k` option, renamed from `-U`.  Make the argument
+	mandatory, and expect values of "ascii", "mixed", or "utf-8"
+	{case-insensitively}.  Throw warning if argument unrecognized.
+	(usage): Update.
+
+	* src/devices/grohtml/grohtml.1.man (Synopsis, Options):
+	Document it.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Fix Savannah #66479 (2/2).
 
 	* HACKING: Document another macOS od(1) irritation.
