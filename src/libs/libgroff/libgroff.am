@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2020 Free Software Foundation, Inc.
+# Copyright (C) 2014-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -39,8 +39,6 @@ libgroff_a_SOURCES = \
   src/libs/libgroff/font.cpp \
   src/libs/libgroff/fontfile.cpp \
   src/libs/libgroff/geometry.cpp \
-  src/libs/libgroff/getopt.c \
-  src/libs/libgroff/getopt1.c \
   src/libs/libgroff/glyphuni.cpp \
   src/libs/libgroff/htmlhint.cpp \
   src/libs/libgroff/hypot.cpp \

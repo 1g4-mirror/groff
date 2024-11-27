@@ -1,5 +1,18 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Drop local getopt_long implementation in favor of gnulib's.
+
+	* src/include/getopt.h:
+	* src/include/getopt_int.h:
+	* src/include/gettext.h:
+	* src/libs/libgroff/getopt.c:
+	* src/libs/libgroff/getopt1.c: Delete.
+
+	* src/libs/libgroff/libgroff.am: Drop foregoing `.c` files from
+	`libgroff_a_SOURCES` macro.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Improve header-file inclusion hygiene.
 
 	* src/include/itable.h:
