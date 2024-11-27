@@ -1,5 +1,17 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/hpftodit/hpftodit.cpp:
+	* src/utils/hpftodit/hpuni.cpp: Align with modern groff
+	conventions.  Add Autoconf "<config.h>"-inclusion boilerplate to
+	these translation units.  Include system library headers before
+	local ones.
+
+	* src/utils/hpftodit/hpftodit.cpp: Use standard symbol
+	`EXIT_SUCCESS` instead of zero literal.  Drop inclusion of
+	"<ctype.h>"; none of its symbols (`is*()`) are directly used.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Align with modern groff conventions.
 
 	* src/roff/troff/div.cpp:

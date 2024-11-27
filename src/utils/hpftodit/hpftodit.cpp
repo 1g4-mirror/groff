@@ -23,19 +23,21 @@ option to specify symbol sets to look in
 put filename in error messages (or fix lib)
 */
 
-#include "lib.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <assert.h>
-#include <ctype.h>
 #include <errno.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <math.h> // cos(), sin()
+#include <stdio.h> // FILE, fclose(), fgets(), fopen(), fprintf(),
+		   // freopen(), printf(), sprintf()
+#include <stdlib.h> // atoi(), exit(), EXIT_FAILURE, EXIT_SUCCESS,
+		    // strtol()
+#include <string.h> // strchr(), strcmp(), strerror(), strlen(),
+		    // strrchr(), strtok()
+
+#include "lib.h"
 
 #include "posix.h"
 #include "errarg.h"
@@ -319,11 +321,11 @@ main(int argc, char **argv)
       break;
     case 'v':
       printf("GNU hpftodit (groff) version %s\n", Version_string);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -344,7 +346,7 @@ main(int argc, char **argv)
   if (debug_flag)
     dump_tags(f);
   if (!debug_flag && !read_map(argv[optind + 1], tfm_type))
-    exit(1);
+    exit(EXIT_FAILURE);
   else if (debug_flag && argc - optind > 1)
     read_map(argv[optind + 1], tfm_type);
   current_filename = NULL;
