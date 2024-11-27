@@ -433,10 +433,10 @@ and
 .
 GNU
 .I eqn
-imputes types to the components of an equation,
-adjusting the spacing between them accordingly.
+imputes a type to each equation component,
+adjusting the space between them accordingly.
 .
-Recognized types are as follows;
+Recognized types follow;
 most affect spacing only,
 whereas the
 .RB \%\[lq] letter \[rq]
