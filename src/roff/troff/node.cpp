@@ -22,7 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <errno.h> // errno
+#include <errno.h>
+#include <stdlib.h> // free(), malloc()
 
 #include "dictionary.h"
 #include "hvunits.h"
@@ -4184,12 +4185,15 @@ void suppress_node::tprint(troff_output_file *out)
 	subimage_counter++;
 	assert(sizeof subimage_counter <= 8);
 	// A 64-bit signed int produces up to 19 decimal digits.
-	char *subimage_number = (char *)malloc(20); // 19 digits + \0
+	const size_t ndigits = 19;
+	// Reserve enough for that plus null terminator.
+	char *subimage_number
+	  = static_cast<char *>(malloc(ndigits + 1));
 	if (0 == subimage_number)
 	  fatal("memory allocation failure");
 	// Replace the %d in the filename with this number.
-	size_t enough = image_filename_len + 19 - format_len;
-	char *new_name = (char *)malloc(enough);
+	size_t enough = image_filename_len + ndigits - format_len;
+	char *new_name = static_cast<char *>(malloc(enough));
 	if (0 == new_name)
 	  fatal("memory allocation failure");
 	ptrdiff_t prefix_length = percent_position - image_filename;

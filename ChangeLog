@@ -1,5 +1,19 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Align with modern groff conventions.
+
+	* src/roff/troff/div.cpp:
+	* src/roff/troff/input.cpp: Add Autoconf "<config.h>"-inclusion
+	boilerplate to these translation units.  Include system library
+	headers before local ones.
+
+	* src/roff/troff/input.cpp: Fix code style nits. Include
+	"<string.h>" header, since this file calls `strdup()`.  Declare
+	a and use a constant object to store a magic number.  Use C++
+	`static_cast` operator instead of C-style type cast.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Fix inclusion wart.  Include local
 	"posix.h" header before "nonposix.h".  This aligns better with
 	other groff code, and more importantly, "posix.h" itself
