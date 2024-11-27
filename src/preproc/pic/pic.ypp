@@ -133,7 +133,7 @@ char *do_sprintf(const char *fmt, const double *v, int nv);
 %token AND
 %token HERE
 %token DOT_N
-%token DOT_E	
+%token DOT_E
 %token DOT_W
 %token DOT_S
 %token DOT_NE
@@ -225,7 +225,7 @@ parses properly. */
 %left XSLANTED YSLANTED
 %left LABEL
 
-%left VARIABLE NUMBER '(' SIN COS ATAN2 LOG EXP SQRT K_MAX K_MIN INT RAND SRAND LAST 
+%left VARIABLE NUMBER '(' SIN COS ATAN2 LOG EXP SQRT K_MAX K_MIN INT RAND SRAND LAST
 %left ORDINAL HERE '`'
 
 %left BOX CIRCLE ELLIPSE ARC LINE ARROW SPLINE '['
@@ -378,7 +378,7 @@ placeless_element:
 		}
 	| COPY TEXT THRU
 		{ delim_flag = 2; }
-	  DELIMITED 
+	  DELIMITED
 		{ delim_flag = 0; }
 	  until
 		{
@@ -402,13 +402,13 @@ placeless_element:
 		  delete[] $6;
 		}
 	| FOR VARIABLE '=' expr TO expr optional_by DO
-	  	{ delim_flag = 1; }
+		{ delim_flag = 1; }
 	  DELIMITED
-	  	{
+		{
 		  delim_flag = 0;
 		  if (yychar < 0)
 		    do_lookahead();
-		  do_for($2, $4, $6, $7.is_multiplicative, $7.val, $10); 
+		  do_for($2, $4, $6, $7.is_multiplicative, $7.val, $10);
 		}
 	| simple_if
 		{
@@ -482,7 +482,7 @@ print_args:
 	;
 
 print_arg:
-  	expr							%prec ','
+	expr							%prec ','
 		{
 		  $$.str = new char[GDIGITS + 1];
 		  sprintf($$.str, "%g", $1);
@@ -517,14 +517,14 @@ until:
 	| UNTIL TEXT
 		{ $$ = $2.str; }
 	;
-	
+
 any_expr:
 	expr
 		{ $$ = $1; }
 	| text_expr
 		{ $$ = $1; }
 	;
-	
+
 text_expr:
 	text EQUALEQUAL text
 		{
@@ -698,7 +698,7 @@ object_spec:
 					   $3.filename, $3.lineno);
 		  delete[] $3.str;
 		}
-	| '[' 
+	| '['
 		{
 		  saved_state *p = new saved_state;
 		  $<pstate>$ = p;
@@ -881,7 +881,7 @@ object_spec:
 		  $$->segment_pos.y += $3.y;
 		}
 	| object_spec THEN
-  		{
+		{
 		  $$ = $1;
 		  if (!($$->flags & HAS_SEGMENT))
 		    switch ($$->dir) {
@@ -980,7 +980,7 @@ object_spec:
 		  strcpy($$->outlined, $3.str);
 		}
 	| object_spec CHOP
-  		{
+		{
 		  $$ = $1;
 		  // line chop chop means line chop 0 chop 0
 		  if ($$->flags & IS_DEFAULT_CHOPPED) {
@@ -1158,10 +1158,10 @@ sprintf_args:
 	;
 
 position:
-  	position_not_place
+	position_not_place
 		{ $$ = $1; }
 	| place
-  		{
+		{
 		  position pos = $1;
 		  $$.x = pos.x;
 		  $$.y = pos.y;
@@ -1304,7 +1304,7 @@ ordinal:
 optional_ordinal_last:
 	LAST
 		{ $$ = 1; }
-  	| ordinal LAST
+	| ordinal LAST
 		{ $$ = $1; }
 	;
 
@@ -1343,7 +1343,7 @@ nth_primitive:
 
 object_type:
 	BOX
-  		{ $$ = BOX_OBJECT; }
+		{ $$ = BOX_OBJECT; }
 	| CIRCLE
 		{ $$ = CIRCLE_OBJECT; }
 	| ELLIPSE
@@ -1363,7 +1363,7 @@ object_type:
 	;
 
 label_path:
- 	'.' LABEL
+	'.' LABEL
 		{ $$ = new path($2); }
 	| label_path '.' LABEL
 		{
@@ -1377,7 +1377,7 @@ relative_path:
 		{ $$ = new path($1); }
 	/* give this a lower precedence than LEFT and RIGHT so that
 	   [A: box] with .A left == [A: box] with (.A left) */
-  	| label_path						%prec TEXT
+	| label_path						%prec TEXT
 		{ $$ = $1; }
 	| label_path corner
 		{
@@ -1424,7 +1424,7 @@ path:
 corner:
 	DOT_N
 		{ $$ = &object::north; }
-	| DOT_E	
+	| DOT_E
 		{ $$ = &object::east; }
 	| DOT_W
 		{ $$ = &object::west; }
@@ -1444,7 +1444,7 @@ corner:
 		{ $$ = &object::start; }
 	| DOT_END
 		{ $$ = &object::end; }
-  	| TOP
+	| TOP
 		{ $$ = &object::north; }
 	| BOTTOM
 		{ $$ = &object::south; }
@@ -1512,12 +1512,12 @@ expr_not_lower_than:
 	| NUMBER
 		{ $$ = $1; }
 	| place DOT_X
-  		{
+		{
 		  if ($1.obj != 0)
 		    $$ = $1.obj->origin().x;
 		  else
 		    $$ = $1.x;
-		}			
+		}
 	| place DOT_Y
 		{
 		  if ($1.obj != 0)
@@ -1698,7 +1698,7 @@ isn't under cfront */
 static struct {
   const char *name;
   double val;
-  int scaled;		     // non-zero if val should be multiplied by scale
+  int scaled;		// non-zero if val should be multiplied by scale
 } defaults_table[] = {
   { "arcrad", .25, 1 },
   { "arrowht", .1, 1 },
