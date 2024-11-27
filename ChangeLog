@@ -1,5 +1,12 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/lkbib/lkbib.cpp: Align with modern groff
+	conventions.  Include system library headers before local ones.
+	Use standard symbols `EXIT_SUCCESS` and `EXIT_FAILURE` instead
+	of `0` and `1` literals, respectively.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/libbib/index.cpp:
 	* src/utils/libbib/linear.cpp:
 	* src/utils/libbib/search.cpp: Align with modern groff

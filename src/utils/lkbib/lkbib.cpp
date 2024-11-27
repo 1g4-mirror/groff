@@ -16,15 +16,16 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "lib.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <assert.h>
 #include <errno.h>
-#include <stdlib.h>
+#include <stdlib.h> // exit(), EXIT_FAILURE, EXIT_SUCCESS, getenv(),
+		    // strtol()
+
+#include "lib.h"
 
 #include "errarg.h"
 #include "error.h"
@@ -86,7 +87,7 @@ int main(int argc, char **argv)
     case 'v':
       {
 	printf("GNU lkbib (groff) version %s\n", Version_string);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	break;
       }
     case 'p':
@@ -94,7 +95,7 @@ int main(int argc, char **argv)
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -106,7 +107,7 @@ int main(int argc, char **argv)
     }
   if (optind >= argc) {
     usage(stderr);
-    exit(1);
+    exit(EXIT_FAILURE);
   }
   char *filename = getenv("REFER");
   if (filename)
