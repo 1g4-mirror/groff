@@ -1,5 +1,20 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grn]: Align with modern groff conventions.
+
+	* src/preproc/grn/hdb.cpp:
+	* src/preproc/grn/main.cpp: Include system library headers
+	before local ones.
+
+	* src/preproc/grn/hgraph.cpp:
+	* src/preproc/grn/main.cpp: Add Autoconf "<config.h>"-inclusion
+	boilerplate to these translation units.
+
+	* src/preproc/grn/hpoint.cpp: Drop unnecessary inclusion of
+	"<stdlib.h>".
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/lex.cpp:
 	* src/preproc/eqn/limit.cpp:
 	* src/preproc/eqn/list.cpp:
