@@ -56,7 +56,7 @@ output driver for Portable Document Format
 ..
 .
 .\" This man page employs an unusual character.
-.fchar \[u2717] X
+.if !c \[u2717] .char \[u2717] X
 .
 .
 .\" ====================================================================
