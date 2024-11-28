@@ -1,5 +1,15 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libdriver]: Align with modern groff conventions.
+
+	* src/libs/libdriver/input.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to these translation units.  Include
+	system library headers before local ones.
+	* src/libs/libdriver/printer.cpp: Include required system
+	library header files.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grotty]: Align with modern groff conventions.
 
 	* src/devices/grotty/tty.cpp: Add Autoconf "<config.h>"-

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
 
    Written by James Clark (jjc@jclark.com)
    Major rewrite 2001 by Bernd Warken <groff-bernd.warken-72@web.de>
@@ -232,13 +232,18 @@
 // should be used.
 #undef USE_ENV_STACK
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <ctype.h> // isdigit()
+#include <errno.h>
+#include <stdio.h> // EOF, FILE, fclose(), fopen(), getc(), stdin,
+		   // ungetc()
+#include <stdlib.h> // strtol()
+
 #include "driver.h"
 #include "device.h"
-
-#include <stdlib.h>
-#include <errno.h>
-#include <ctype.h>
-#include <math.h>
 
 
 /**********************************************************************

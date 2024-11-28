@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
    Written by James Clark (jjc@jclark.com)
 
    This file is part of groff.
@@ -22,6 +22,8 @@
 #endif
 
 #include <assert.h>
+#include <errno.h> // EINVAL, errno
+#include <stdio.h> // clearerr(), ferror(), fflush(), stdout
 
 #include "driver.h"
 
