@@ -59,7 +59,7 @@ extern unsigned long hash_string(const char *);	// Return a hash code of the
 #define declare_ptable(T)						      \
 									      \
 struct PASSOC(T) {							      \
-  char *key;							      	      \
+  char *key;								      \
   T *val;								      \
   PASSOC(T)();								      \
 };									      \
@@ -145,7 +145,7 @@ const char *PTABLE(T)::define(const char *key, T *val)			      \
   assert(key != 0);							      \
   unsigned long h = hash_string(key);					      \
   unsigned n;								      \
-  for (n = unsigned(h % size);					      	      \
+  for (n = unsigned(h % size);						      \
        v[n].key != 0;							      \
        n = (n == 0 ? size - 1 : n - 1))					      \
     if (strcmp(v[n].key, key) == 0) {					      \
@@ -168,7 +168,7 @@ const char *PTABLE(T)::define(const char *key, T *val)			      \
 	  free(oldv[i].key);						      \
 	else {								      \
 	  unsigned j;							      \
-	  for (j = unsigned(hash_string(oldv[i].key) % size);	      	      \
+	  for (j = unsigned(hash_string(oldv[i].key) % size);		      \
 	       v[j].key != 0;						      \
 	       j = (j == 0 ? size - 1 : j - 1))				      \
 		 ;							      \
