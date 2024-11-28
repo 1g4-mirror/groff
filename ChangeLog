@@ -1,5 +1,24 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Improve header-file inclusion hygiene.
+
+	* src/include/itable.h:
+	* src/include/lib.h:
+	* src/include/ptable.h:
+	* src/include/stringclass.h: Drop Autoconf "<config.h>"-inclusion
+	boilerplate.
+
+	Per Paul Eggert, "You shouldn't need to put "#include
+	<config.h>" at the start of every source file. It needs to be
+	included first at the start of every compilation unit; that's
+	good enough.  The .cpp or .c file should include config.h first,
+	and .h files should therefore not need to include config.h."
+
+	See
+	<https://lists.gnu.org/archive/html/groff/2024-11/msg00154.html>.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tfmtodit]: Align with modern groff conventions.
 
 	* src/utils/tfmtodit/tfmtodit.cpp: Include system library

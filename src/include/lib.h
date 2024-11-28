@@ -19,10 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #ifndef GROFF_LIB_H
 #define GROFF_LIB_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #if defined(__INTERIX) && !defined(_ALL_SOURCE)
 #define _ALL_SOURCE
 #endif
