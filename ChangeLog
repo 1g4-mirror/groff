@@ -1,5 +1,19 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Align with modern groff conventions.
+
+	* src/roff/troff/dictionary.cpp:
+	* src/roff/troff/env.cpp:
+	* src/roff/troff/mtsm.cpp:
+	* src/roff/troff/reg.cpp: Add Autoconf "<config.h>"-inclusion
+	boilerplate to these translation units.
+
+	* src/roff/troff/env.cpp:
+	* src/roff/troff/node.cpp: Include system library headers before
+	local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Align with modern groff conventions.
 
 	* src/roff/groff/groff.cpp: Include system library headers

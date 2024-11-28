@@ -16,6 +16,16 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <errno.h> // errno
+#include <math.h> // ceil()
+
+#include <vector>
+#include <algorithm> // find()
+
 #include "troff.h"
 #include "dictionary.h"
 #include "hvunits.h"
@@ -31,16 +41,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "charinfo.h"
 #include "macropath.h"
 #include "input.h"
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <errno.h> // errno
-#include <math.h> // ceil()
-
-#include <vector>
-#include <algorithm> // find()
 
 symbol default_family("T");
 

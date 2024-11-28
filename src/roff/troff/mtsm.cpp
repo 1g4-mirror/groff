@@ -18,6 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 // mtsm: minimum troff state machine
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 extern bool want_html_debugging;
 
 #include "troff.h"

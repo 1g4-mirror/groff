@@ -16,8 +16,6 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "troff.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -25,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h>
 #include <stdlib.h> // free(), malloc()
 
+#include "troff.h"
 #include "dictionary.h"
 #include "hvunits.h"
 #include "stringclass.h"
@@ -3666,7 +3665,7 @@ space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
 }
 
 space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
- 						 node *nxt)
+						 node *nxt)
 : hmotion_node(i, c, 0, 0, nxt)
 {
 }
