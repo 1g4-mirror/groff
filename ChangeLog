@@ -1,5 +1,46 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Align with modern groff conventions.
+
+	* src/libs/libgroff/make-uniuni.cpp: Update script that
+	generates "uniuni.cpp" to add Autoconf "<config.h>"-inclusion
+	boilerplate.
+
+	* src/libs/libgroff/curtime.cpp:
+	* src/libs/libgroff/glyphuni.cpp:
+	* src/libs/libgroff/htmlhint.cpp:
+	* src/libs/libgroff/iftoa.cpp:
+	* src/libs/libgroff/invalid.cpp:
+	* src/libs/libgroff/itoa.cpp:
+	* src/libs/libgroff/lf.cpp:
+	* src/libs/libgroff/macropath.cpp:
+	* src/libs/libgroff/maxfilename.cpp:
+	* src/libs/libgroff/maxpathname.cpp:
+	* src/libs/libgroff/paper.cpp:
+	* src/libs/libgroff/symbol.cpp:
+	* src/libs/libgroff/tmpfile.cpp:
+	* src/libs/libgroff/tmpname.cpp:
+	* src/libs/libgroff/unicode.cpp:
+	* src/libs/libgroff/uniglyph.cpp:
+	* src/libs/libgroff/uniuni.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to these translation units.
+
+	* src/libs/libgroff/color.cpp:
+	* src/libs/libgroff/curtime.cpp:
+	* src/libs/libgroff/font.cpp:
+	* src/libs/libgroff/fontfile.cpp:
+	* src/libs/libgroff/htmlhint.cpp:
+	* src/libs/libgroff/lf.cpp:
+	* src/libs/libgroff/maxfilename.cpp:
+	* src/libs/libgroff/maxpathname.cpp:
+	* src/libs/libgroff/nametoindex.cpp:
+	* src/libs/libgroff/relocate.cpp:
+	* src/libs/libgroff/tmpfile.cpp:
+	* src/libs/libgroff/tmpname.cpp: Include system library headers
+	before local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libdriver]: Align with modern groff conventions.
 
 	* src/libs/libdriver/input.cpp: Add Autoconf "<config.h>"-

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -16,10 +16,14 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "lib.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <errno.h>
 #include <stdlib.h>
+
+#include "lib.h"
 
 #include "posix.h"
 #include "errarg.h"

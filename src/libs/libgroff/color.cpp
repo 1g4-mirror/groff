@@ -1,4 +1,4 @@
-/* Copyright (C) 2001-2020 Free Software Foundation, Inc.
+/* Copyright (C) 2001-2024 Free Software Foundation, Inc.
      Written by Gaius Mulley <gaius@glam.ac.uk>
 
 This file is part of groff.
@@ -16,10 +16,6 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "lib.h"
-#include "color.h"
-#include "cset.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -32,6 +28,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <unistd.h>
 #endif
 
+#include "lib.h"
+
+#include "color.h"
+#include "cset.h"
 #include "errarg.h"
 #include "error.h"
 

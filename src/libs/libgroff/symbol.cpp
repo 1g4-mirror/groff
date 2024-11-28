@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -15,6 +15,10 @@ for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include "lib.h"
 
@@ -39,9 +43,9 @@ const int BLOCK_SIZE = 1024;
 // the table will increase in size as necessary
 // the size will be chosen from the following array
 // add some more if you want
-static const unsigned int table_sizes[] = { 
+static const unsigned int table_sizes[] = {
   101, 503, 1009, 2003, 3001, 4001, 5003, 10007, 20011, 40009, 80021,
-  160001, 500009, 1000003, 1500007, 2000003, 0 
+  160001, 500009, 1000003, 1500007, 2000003, 0
 };
 const double FULL_MAX = 0.3;	// don't let the table get more than this full
 
@@ -91,8 +95,8 @@ symbol::symbol(const char *p, int how)
   }
   unsigned int hc = hash_string(p);
   const char **pp;
-  for (pp = table + hc % table_size; 
-       *pp != 0; 
+  for (pp = table + hc % table_size;
+       *pp != 0;
        (pp == table ? pp = table + table_size - 1 : --pp))
     if (strcmp(p, *pp) == 0) {
       s = *pp;
@@ -114,7 +118,7 @@ symbol::symbol(const char *p, int how)
     table = (const char **)new char*[table_size];
     for (i = 0; i < table_size; i++)
       table[i] = 0;
-    for (pp = old_table + old_table_size - 1; 
+    for (pp = old_table + old_table_size - 1;
 	 pp >= old_table;
 	 --pp) {
 	   symbol temp(*pp, 1); /* insert it into the new table */
@@ -122,7 +126,7 @@ symbol::symbol(const char *p, int how)
 	 }
     delete[] old_table;
     for (pp = table + hc % table_size;
-	 *pp != 0; 
+	 *pp != 0;
 	 (pp == table ? pp = table + table_size - 1 : --pp))
       ;
   }
