@@ -16,15 +16,22 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "lib.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <assert.h>
 #include <errno.h>
-#include <stdlib.h>
+#include <stdlib.h> // mkstemp(), strtol()
+#include <stdio.h> // EOF, FILE, fclose(), fdopen(), fopen(), fseek(),
+		   // getc(), rename(), setbuf(), stderr, stdin, stdout,
+		   // ungetc()
+#include <string.h> // strerror()
+#ifdef HAVE_UNISTD_H
+#include <unistd.h> // getcwd(), unlink()
+#endif
+
+#include "lib.h"
 
 #include "posix.h"
 #include "errarg.h"
@@ -57,7 +64,7 @@ struct block {
   block *next;
   int used;
   int v[BLOCK_SIZE];
-  
+
   block(block *p = 0) : next(p), used(0) { }
 };
 
@@ -119,7 +126,7 @@ int main(int argc, char **argv)
   program_name = argv[0];
   static char stderr_buf[BUFSIZ];
   setbuf(stderr, stderr_buf);
-  
+
   const char *base_name = 0;
   typedef int (*parser_t)(const char *);
   parser_t parser = do_file;
@@ -286,7 +293,7 @@ int main(int argc, char **argv)
   write_hash_table();
   if (fclose(indxfp) < 0)
     fatal("error closing temporary index file: %1", strerror(errno));
-  char *index_file = new char[strlen(base_name) + sizeof(INDEX_SUFFIX)];    
+  char *index_file = new char[strlen(base_name) + sizeof(INDEX_SUFFIX)];
   strcpy(index_file, base_name);
   strcat(index_file, INDEX_SUFFIX);
 #ifdef HAVE_RENAME
@@ -477,7 +484,7 @@ static int do_file(const char *filename)
     DISCARD,	// after truncate_len bytes of a key
     MIDDLE	// in between keys
   } state = START;
-  
+
   // In states START, BOL, IGNORE_BOL, space_count how many spaces at
   // the beginning have been seen.  In states PERCENT, IGNORE, KEY,
   // MIDDLE space_count must be 0.

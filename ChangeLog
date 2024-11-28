@@ -1,5 +1,12 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[indxbib]: Align with modern groff conventions.
+
+	* src/utils/indxbib/indxbib.cpp: Include system library headers
+	before local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/hvunits.h: Drop Autoconf "<config.h>"-inclusion
 	boilerplate; troff's ".cpp" files reliably have it now.
 
