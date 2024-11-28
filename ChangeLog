@@ -1,5 +1,16 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Align with modern groff conventions.
+
+	* src/preproc/refer/command.cpp:
+	* src/preproc/refer/label.ypp:
+	* src/preproc/refer/ref.cpp:
+	* src/preproc/refer/refer.cpp:
+	* src/preproc/refer/token.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to these translation units.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[preconv]: Align with modern groff conventions.
 
 	* src/preproc/preconv/preconv.cpp: Include system library
