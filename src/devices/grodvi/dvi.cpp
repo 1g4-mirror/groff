@@ -21,6 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <assert.h>
+#include <locale.h> // setlocale()
+#include <math.h> // atan2(), sqrt()
+#include <stdio.h> // EOF, FILE, fprintf(), printf(), putc(), setbuf(),
+		   // sprintf(), stderr, stdout
+#include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
 
 #include "driver.h"
 #include "nonposix.h"
@@ -84,7 +89,8 @@ dvi_font::~dvi_font()
 
 void dvi_font::handle_unknown_font_command(const char *command,
 					   const char *arg,
-					   const char *filename, int lineno)
+					   const char *filename,
+					   int lineno)
 {
   char *ptr;
   if (strcmp(command, "checksum") == 0) {
@@ -197,8 +203,9 @@ public:
 };
 
 dvi_printer::dvi_printer()
-: fp(stdout), byte_count(0), last_bop(-1), page_count(0), max_h(0), max_v(0),
-  cur_font(0), cur_point_size(-1), pushed(0), line_thickness(-1)
+: fp(stdout), byte_count(0), last_bop(-1), page_count(0),
+  max_h(0), max_v(0), cur_font(0), cur_point_size(-1), pushed(0),
+  line_thickness(-1)
 {
   if (font::res != RES)
     fatal("resolution must be %1", RES);
@@ -515,10 +522,12 @@ void dvi_printer::begin_page(int i)
   if (page_count == 1) {
     char buf[256];
     // at least dvips uses this
-    double length = user_paper_length ? user_paper_length :
-					double(font::paperlength) / font::res;
-    double width = user_paper_width ? user_paper_width :
-				      double(font::paperwidth) / font::res;
+    double length = user_paper_length ? user_paper_length
+				      : (double(font::paperlength)
+					 / font::res);
+    double width = user_paper_width ? user_paper_width
+				      : (double(font::paperwidth)
+					 / font::res);
     if (width > 0 && length > 0) {
       sprintf(buf, "papersize=%.3fin,%.3fin",
 	      landscape_flag ? length : width,
@@ -704,7 +713,8 @@ void draw_dvi_printer::fill_next(const environment *env)
   do_special(buf);
 }
 
-void draw_dvi_printer::draw(int code, int *p, int np, const environment *env)
+void draw_dvi_printer::draw(int code, int *p, int np,
+			    const environment *env)
 {
   char buf[1024];
   int fill_flag = 0;
@@ -947,7 +957,7 @@ int main(int argc, char **argv)
     case 'v':
       {
 	printf("GNU grodvi (groff) version %s\n", Version_string);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	break;
       }
     case 'w':
@@ -959,7 +969,7 @@ int main(int argc, char **argv)
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -967,7 +977,7 @@ int main(int argc, char **argv)
       exit(2);
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled getopt_long return value");
     }
   SET_BINARY(fileno(stdout));
   if (optind >= argc)
@@ -986,6 +996,10 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
           program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Translate the output of troff(1) into TeX DVI format.  See the\n"
+"grodvi(1) manual page.\n", stream);
 }
 
 // Local Variables:

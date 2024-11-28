@@ -1,3 +1,13 @@
+2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grodvi]: Align with modern groff conventions.
+
+	* src/drivers/grodvi/grodvi.cpp (main): Use standard symbol
+	`EXIT_SUCCESS` instead of `0` literal.  Replace `assert(0)` call
+	with communicative predicate.
+	(usage): If asked for `--help`, summarize command purpose in
+	message.
+
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Drop local getopt_long implementation in favor of gnulib's.
