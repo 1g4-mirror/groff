@@ -1,5 +1,13 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grotty]: Align with modern groff conventions.
+
+	* src/devices/grotty/tty.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to this translation unit.  Include
+	required system library header files.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grops]: Align with modern groff conventions.
 
 	* src/devices/grops/ps.cpp:
