@@ -22,19 +22,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
  *   http://partners.adobe.com/public/developer/en/ps/5001.DSC_Spec.pdf
  */
 
-#include "lib.h" // PI
-#include "driver.h"
-#include "stringclass.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <errno.h>
+#include <locale.h> // setlocale()
+#include <math.h> // atan2(), sqrt(), tan()
+#include <stdint.h> // uint16_t
+#include <stdio.h> // EOF, FILE, fclose(), fgets(), fseek(), getc(),
+		   // setbuf(), setderr, stdout
+#include <stdlib.h> // putenv(), strtol()
+#include <string.h> // strtok()
+#include <time.h> // asctime()
+
 #include "cset.h"
+#include "curtime.h"
+#include "driver.h"
+#include "lib.h" // PI
 #include "nonposix.h"
 #include "paper.h"
-#include "curtime.h"
+#include "stringclass.h"
 
 #include "ps.h"
-
-#include <errno.h> // errno
-#include <stdint.h> // uint16_t
-#include <time.h>
 
 #ifdef NEED_DECLARATION_PUTENV
 extern "C" {
@@ -1357,7 +1367,7 @@ void ps_printer::media_set()
    *    ProcessColorModel
    *  etc.
    */
-  if (!(broken_flags & (USE_PS_ADOBE_2_0|NO_PAPERSIZE))) { 
+  if (!(broken_flags & (USE_PS_ADOBE_2_0|NO_PAPERSIZE))) {
     out.begin_comment("BeginFeature:")
        .comment_arg("*PageSize")
        .comment_arg(media_name())
@@ -1477,7 +1487,7 @@ ps_printer::~ps_printer()
   }
   out.begin_comment("Orientation:")
      .comment_arg(landscape_flag ? "Landscape" : "Portrait")
-     .end_comment(); 
+     .end_comment();
   if (ncopies != 1) {
     out.end_line();
     fprintf(out.get_file(), "%%%%Requirements: numcopies(%d)\n", ncopies);

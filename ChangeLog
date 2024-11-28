@@ -1,5 +1,14 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grops]: Align with modern groff conventions.
+
+	* src/devices/grops/ps.cpp:
+	* src/devices/grops/psrm.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to these translation units.  Include
+	system library headers before local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml]: Align with modern groff conventions.
 
 	* src/devices/grohtml/html-table.cpp:

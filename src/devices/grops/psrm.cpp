@@ -16,13 +16,20 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <errno.h>
+#include <stdio.h> // EOF, FILE, fclose(), fgets(), getc(), ungetc()
+#include <stdlib.h> // getenv(), putenv(), strtoul()
+#include <string.h> // strerror(), strtok()
+
+#include "cset.h"
 #include "driver.h"
 #include "stringclass.h"
-#include "cset.h"
 
 #include "ps.h"
-
-#include <errno.h> // errno
 
 #ifdef NEED_DECLARATION_PUTENV
 extern "C" {
