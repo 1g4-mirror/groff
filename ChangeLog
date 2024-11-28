@@ -1,5 +1,12 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[soelim]: Align with modern groff conventions.
+
+	* src/preproc/soelim/soelim.cpp: Include system library headers
+	before local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[refer]: Align with modern groff conventions.
 
 	* src/preproc/refer/command.cpp:
