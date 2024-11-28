@@ -16,9 +16,7 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-// A front end for groff.
-
-#include "lib.h"
+// A front end for GNU troff.
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -26,8 +24,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <assert.h>
 #include <errno.h>
-#include <signal.h>
-#include <stdlib.h>
+#include <stdio.h> // EOF, FILE, fflush(), setbuf(), stderr, stdout
+#include <stdlib.h> // exit(), EXIT_SUCCESS, free(), getenv(), putenv()
+#include <string.h> // strerror()
+
+#include "lib.h"
 
 #include "errarg.h"
 #include "error.h"
