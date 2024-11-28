@@ -1,5 +1,13 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Align with modern groff conventions.
+
+	* src/preproc/tbl/main.cpp:
+	* src/preproc/tbl/table.cpp: Add Autoconf "<config.h>"-inclusion
+	boilerplate to these translation units.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[soelim]: Align with modern groff conventions.
 
 	* src/preproc/soelim/soelim.cpp: Include system library headers
