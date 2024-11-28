@@ -1,5 +1,34 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Align with modern groff conventions.
+
+	* src/preproc/pic/common.cpp:
+	* src/preproc/pic/lex.cpp:
+	* src/preproc/pic/main.cpp:
+	* src/preproc/pic/pic.ypp:
+	* src/preproc/pic/tex.cpp:
+	* src/preproc/pic/troff.cpp: Add Autoconf "<config.h>"-inclusion
+	boilerplate to these translation units.
+
+	* src/preproc/pic/pic.h: Move inclusions of system headers and
+	fallback declarations for system symbols from here...
+	* src/preproc/pic/pic.ypp: ...to here, where they're used.
+
+	* src/preproc/pic/common.cpp:
+	* src/preproc/pic/lex.cpp:
+	* src/preproc/pic/main.cpp:
+	* src/preproc/pic/object.cpp:
+	* src/preproc/pic/pic.ypp:
+	* src/preproc/pic/tex.cpp:
+	* src/preproc/pic/troff.cpp: Include requisite system headers.
+
+	* src/preproc/pic/pic.ypp: `sizeof` is an operator, not a
+	function, so don't parenthesize its operand when it's an lvalue
+	{as opposed to a type name}.  Use libgroff's newfangled
+	`array_length()` template function to measure arrays.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grn]: Align with modern groff conventions.
 
 	* src/preproc/grn/hdb.cpp:

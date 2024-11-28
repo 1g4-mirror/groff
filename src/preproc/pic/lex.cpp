@@ -16,8 +16,19 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "pic.h"
-#include "ptable.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <assert.h>
+#include <errno.h>
+#include <math.h> // pow()
+#include <stdio.h> // EOF, FILE, fclose(), fopen(), getc(), ungetc()
+#include <string.h> // strerror()
+
+#include "pic.h" // must precede object.h
+
+#include "ptable.h" // must precede object.h
 #include "object.h"
 #include "pic.hpp"
 
@@ -95,7 +106,7 @@ int file_input::read_line()
 	lex_error("invalid input character code %1", c);
       else {
 	line += char(c);
-	if (c == '\n') 
+	if (c == '\n')
 	  break;
       }
     }

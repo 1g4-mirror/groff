@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -20,9 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <stdlib.h>
+#include <assert.h>
+#include <math.h> // M_PI, acos(), atan2(), cos(), sin()
+#include <stdlib.h> // free()
 
-#include "pic.h"
+#include "pic.h" // includes cset.h, which declares csupper()
 #include "ptable.h"
 #include "object.h"
 
@@ -395,7 +397,7 @@ segment::segment(const position &a, int n, segment *p)
 }
 
 text_item::text_item(char *t, const char *fn, int ln)
-: next(0), text(t), filename(fn), lineno(ln) 
+: next(0), text(t), filename(fn), lineno(ln)
 {
   adj.h = CENTER_ADJUST;
   adj.v = NONE_ADJUST;
@@ -736,13 +738,13 @@ void closed_object::set_fill(double f)
   fill = f;
 }
 
-/* accept positive and negative values */ 
+/* accept positive and negative values */
 void closed_object::set_xslanted(double s)
 {
   //assert(s >= 0.0);
   xslanted = s;
 }
-/* accept positive and negative values */ 
+/* accept positive and negative values */
 void closed_object::set_yslanted(double s)
 {
   //assert(s >= 0.0);
@@ -1206,7 +1208,7 @@ graphic_object *object_spec::make_move(position *curpos, direction *dirp)
   for (segment *s = segment_list; s; s = s->next)
     if (s->is_absolute)
       endpos = s->pos;
-    else 
+    else
       endpos += s->pos;
   have_last_move = 1;
   last_move = endpos - startpos;
@@ -1352,7 +1354,7 @@ void line_object::move_by(const position &pos)
   for (int i = 0; i < n; i++)
     v[i] += pos;
 }
-  
+
 void spline_object::update_bounding_box(bounding_box *p)
 {
   p->encompass(strt);
@@ -1468,7 +1470,7 @@ linear_object *object_spec::make_line(position *curpos, direction *dirp)
     if ((flags & IS_SAME) && (type == LINE_OBJECT || type == ARROW_OBJECT)
 	&& have_last_line)
       segment_pos = last_line;
-    else 
+    else
       switch (dir) {
       case UP_DIRECTION:
 	segment_pos.y = segment_height;

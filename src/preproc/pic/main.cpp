@@ -16,6 +16,19 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <assert.h>
+#include <errno.h>
+#include <locale.h> // setlocale()
+#include <stdio.h> // EOF, FILE, fclose(), ferror(), fflush(), fopen(),
+		   // fprintf(), fputs(), getc(), printf(), setbuf(),
+		   // stderr, stdin, stdout, ungetc()
+#include <stdlib.h> // free(), exit()
+#include <string.h> // strerror()
+
 #include "pic.h"
 
 extern int yyparse();

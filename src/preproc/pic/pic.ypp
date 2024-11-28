@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2022 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -17,6 +17,42 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 %{
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <assert.h>
+#include <errno.h> // EDOM, ERANGE, errno
+#include <math.h> // atan2(), cos(), floor(), fmod(), log10(), pow(),
+		  // sin(), sqrt()
+#include <stdio.h> // fflush(), fprintf(), snprintf(), sprintf(), stderr
+#include <stdlib.h> // rand(), srand(), system()
+#include <string.h> // strcat(), strchr(), strcmp(), strcpy(), strlen()
+
+#ifdef NEED_DECLARATION_RAND
+#undef rand
+extern "C" {
+  int rand();
+}
+#endif /* NEED_DECLARATION_RAND */
+
+#ifdef NEED_DECLARATION_SRAND
+#undef srand
+extern "C" {
+#ifdef RET_TYPE_SRAND_IS_VOID
+  void srand(unsigned int);
+#else
+  int srand(unsigned int);
+#endif
+}
+#endif /* NEED_DECLARATION_SRAND */
+
+#ifndef HAVE_FMOD
+extern "C" {
+  double fmod(double, double);
+}
+#endif
+
 #include "pic.h"
 #include "ptable.h"
 #include "object.h"
@@ -1141,12 +1177,12 @@ sprintf_args:
 		      $$.maxv *= 2;
 #if 0
 		      $$.v = new double[$$.maxv];
-		      memcpy($$.v, oldv, $$.nv*sizeof(double));
+		      memcpy($$.v, oldv, ($$.nv * sizeof(double)));
 #else
 		      // workaround for bug in Compaq C++ V6.5-033
 		      // for Compaq Tru64 UNIX V5.1A (Rev. 1885)
 		      double *foo = new double[$$.maxv];
-		      memcpy(foo, oldv, $$.nv*sizeof(double));
+		      memcpy(foo, oldv, ($$.nv * sizeof(double)));
 		      $$.v = foo;
 #endif
 		      delete[] oldv;
@@ -1766,10 +1802,10 @@ void define_variable(const char *name, double val)
   if (strcmp(name, "scale") == 0) {
     // When the scale changes, reset all scaled predefined variables to
     // their default values.
-    for (unsigned int i = 0;
-	 i < sizeof(defaults_table)/sizeof(defaults_table[0]); i++) 
+    for (size_t i = 0; i < array_length(defaults_table); i++)
       if (defaults_table[i].scaled)
-	define_variable(defaults_table[i].name, val*defaults_table[i].val);
+	define_variable(defaults_table[i].name,
+			(val * defaults_table[i].val));
   }
 }
 
@@ -1786,8 +1822,7 @@ void parse_init()
 
 void reset(const char *nm)
 {
-  for (unsigned int i = 0;
-       i < sizeof(defaults_table)/sizeof(defaults_table[0]); i++)
+  for (size_t i = 0; i < array_length(defaults_table); i++)
     if (strcmp(nm, defaults_table[i].name) == 0) {
       double val = defaults_table[i].val;
       if (defaults_table[i].scaled) {
@@ -1807,8 +1842,7 @@ void reset_all()
   // aren't scaled because 'scale' is not scaled, and changing the
   // value of 'scale' will reset all the predefined variables that
   // are scaled.
-  for (unsigned int i = 0;
-       i < sizeof(defaults_table)/sizeof(defaults_table[0]); i++)
+  for (size_t i = 0; i < array_length(defaults_table); i++)
     if (!defaults_table[i].scaled)
       define_variable(defaults_table[i].name, defaults_table[i].val);
 }
@@ -1921,7 +1955,7 @@ char *do_sprintf(const char *fmt, const double *v, int nv)
       }
       if ('%' == *fmt) {
 	fmt++;
-	snprintf(sprintf_buf, sizeof(sprintf_buf), "%%");
+	snprintf(sprintf_buf, sizeof sprintf_buf, "%%");
       }
       else {
 	if (i >= nv) {
@@ -1936,7 +1970,7 @@ char *do_sprintf(const char *fmt, const double *v, int nv)
 // rejected, including `n`.
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-nonliteral"
-	snprintf(sprintf_buf, sizeof(sprintf_buf),
+	snprintf(sprintf_buf, sizeof sprintf_buf,
 		 one_format.contents(), v[i++]);
 #pragma GCC diagnostic pop
       }
