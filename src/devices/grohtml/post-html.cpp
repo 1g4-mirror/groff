@@ -21,24 +21,27 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "driver.h"
-#include "stringclass.h"
-#include "cset.h"
-#include "html.h"
-#include "html-text.h"
-#include "html-table.h"
-#include "curtime.h"
-#include "unicode.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
 #include <time.h>
-
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <string.h>
+#include "cset.h"
+#include "curtime.h"
+#include "driver.h"
+#include "stringclass.h"
+#include "unicode.h"
+
+#include "html.h"
+#include "html-text.h"
+#include "html-table.h"
 
 extern "C" const char *Version_string;
 

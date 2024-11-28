@@ -1,5 +1,4 @@
-// -*- C++ -*-
-/* Copyright (C) 2000-2020 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2024 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote output.cpp
  *  but it owes a huge amount of ideas and raw code from
@@ -26,16 +25,21 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "driver.h"
-#include "stringclass.h"
-#include "cset.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <time.h>
-#include "html.h"
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
+
+#include "driver.h"
+#include "stringclass.h"
+#include "cset.h"
+
+#include "html.h"
 
 #if !defined(TRUE)
 #   define TRUE  (1==1)
@@ -361,3 +365,9 @@ void simple_output::flush_last_word (void)
     }
   }
 }
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

@@ -1,5 +1,4 @@
-// -*- C++ -*-
-/* Copyright (C) 2002-2020 Free Software Foundation, Inc.
+/* Copyright (C) 2002-2024 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote html-table.cpp
  *
@@ -24,6 +23,10 @@ for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include "driver.h"
 #include "stringclass.h"
@@ -160,7 +163,7 @@ void tabs::init (const char *s)
     }
     last->alignment = align;
     last->position = total;
-    last->next = NULL;    
+    last->next = NULL;
   }
 }
 
@@ -251,7 +254,7 @@ html_table::~html_table ()
   cols *c;
   if (tab_stops != NULL)
     delete tab_stops;
-  
+
   c = columns;
   while (columns != NULL) {
     columns = columns->next;
@@ -399,7 +402,7 @@ void html_table::emit_colspan (void)
 	.put_number(is_gap(b))
 	.put_string("%\" class=\"center\"></col>")
 	.nl();
-    
+
     width = (get_right(c)*100 + get_effective_linelength()/2)
 	      / get_effective_linelength()
              - (c->left*100 + get_effective_linelength()/2)
@@ -482,7 +485,7 @@ void html_table::emit_col (int n)
       b = columns;
     else
       b = last_col;
-    
+
     // have we a gap?
     if (last_col != NULL) {
       emit_td(is_gap(b), "></td>");
@@ -533,7 +536,7 @@ void html_table::finish_row (void)
   if (last_col != NULL) {
     for (c = last_col->next; c != NULL; c = c->next)
       n = c->no;
-    
+
     if (n > 0)
       emit_col(n);
 #if 1
@@ -631,7 +634,7 @@ int html_table::insert_column (int coln, int hstart, int hend, char align)
 
   if ((l != NULL) && (hstart < l->right))
     return FALSE;	// new column bumps into previous one
-  
+
   if ((l != NULL) && (l->next != NULL) &&
       (l->next->left < hend))
     return FALSE;  // new column bumps into next one
@@ -667,7 +670,7 @@ int html_table::modify_column (cols *c, int hstart, int hend, char align)
 
   if ((l != NULL) && (hstart < l->right))
     return FALSE;	// new column bumps into previous one
-  
+
   if ((c->next != NULL) && (c->next->left < hend))
     return FALSE;  // new column bumps into next one
 
@@ -846,3 +849,9 @@ void html_indent::get_reg (int *ind, int *pageoffset, int *linelength)
   *pageoffset = pg;
   *linelength = ll;
 }
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

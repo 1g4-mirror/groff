@@ -1,5 +1,19 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grohtml]: Align with modern groff conventions.
+
+	* src/devices/grohtml/html-table.cpp:
+	* src/devices/grohtml/html-text.cpp:
+	* src/devices/grohtml/output.cpp:
+	* src/devices/grohtml/post-html.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to these translation units.
+
+	* src/preproc/grohtml/output.cpp:
+	* src/devices/grohtml/post-html.cpp: Include system library
+	headers before local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic]: Align with modern groff conventions.
 
 	* src/preproc/pic/common.cpp:
