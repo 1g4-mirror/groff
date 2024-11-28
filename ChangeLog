@@ -1,5 +1,16 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pre-grohtml]: Align with modern groff conventions.
+
+	* src/preproc/html/pushback.cpp: Add Autoconf "<config.h>"-
+	inclusion boilerplate to these translation units.
+
+	* src/preproc/html/pre-html.cpp:
+	* src/preproc/html/pushback.cpp: Include system library headers
+	before local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Align with modern groff conventions.
 
 	* src/libs/libgroff/make-uniuni.cpp: Update script that

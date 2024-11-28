@@ -19,10 +19,6 @@
  * 02110-1301, USA.
  */
 
-#define PREHTMLC
-
-#include "lib.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -32,6 +28,10 @@
 #include <errno.h>
 #include <signal.h>
 #include <stdlib.h>
+
+#define PREHTMLC
+
+#include "lib.h"
 
 #include "errarg.h"
 #include "error.h"
