@@ -1,5 +1,12 @@
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[preconv]: Align with modern groff conventions.
+
+	* src/preproc/preconv/preconv.cpp: Include system library
+	headers before local ones.
+
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pre-grohtml]: Align with modern groff conventions.
 
 	* src/preproc/html/pushback.cpp: Add Autoconf "<config.h>"-

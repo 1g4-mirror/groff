@@ -16,37 +16,39 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "lib.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <assert.h>
-#include <stdlib.h>
 #include <errno.h>
-#include <sys/stat.h>
-#ifdef HAVE_UCHARDET
-#include <uchardet/uchardet.h>
-#endif
-
-#include "errarg.h"
-#include "error.h"
-#include "localcharset.h"
-#include "nonposix.h"
-#include "stringclass.h"
-#include "lf.h"
-
-#include <locale.h>
-
 #if HAVE_ICONV
-# include <iconv.h>
+# include <iconv.h> // iconv(), iconv_close(), iconv_open()
 # ifdef WORDS_BIGENDIAN
 #  define UNICODE "UTF-32BE"
 # else
 #  define UNICODE "UTF-32LE"
 # endif
 #endif
+#include <locale.h> // setlocale()
+#include <stdio.h> // EOF, FILE, fclose(), ferror(), fflush(), fileno(),
+		   // fread(), fseek(), ftell(), getc(), rewind(),
+		   // stderr, stdin, stdout, ungetc()
+#include <stdlib.h> // exit(), EXIT_SUCCESS
+#include <string.h> // sterror()
+#include <sys/stat.h> // fstat(), stat
+#ifdef HAVE_UCHARDET
+#include <uchardet/uchardet.h>
+#endif
+
+#include "lib.h"
+
+#include "errarg.h"
+#include "error.h"
+#include "localcharset.h"
+#include "nonposix.h"
+#include "stringclass.h" // must precede lf.h
+#include "lf.h"
 
 #define MAX_VAR_LEN 100
 
