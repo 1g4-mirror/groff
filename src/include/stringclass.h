@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <assert.h>
-#include <string.h>
-#include <stdio.h>
+#include <string.h> // memcmp(), strlen()
+#include <stdio.h> // FILE
 
 // Ensure that the first declaration of functions that are later
 // declared as inline declares them as inline.
