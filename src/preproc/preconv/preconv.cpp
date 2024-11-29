@@ -32,9 +32,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 #include <locale.h> // setlocale()
 #include <stdio.h> // EOF, FILE, fclose(), ferror(), fflush(), fileno(),
-		   // fread(), fseek(), ftell(), getc(), rewind(),
-		   // stderr, stdin, stdout, ungetc()
-#include <stdlib.h> // exit(), EXIT_SUCCESS
+		   // fopen(), fprintf(), fread(), fseek(), ftell(),
+		   // getc(), printf(), putchar(), rewind(), stderr,
+		   // stdin, stdout, ungetc()
+#include <stdlib.h> // calloc(), exit(), EXIT_SUCCESS, free(), malloc()
 #include <string.h> // sterror()
 #include <sys/stat.h> // fstat(), stat
 #ifdef HAVE_UCHARDET
@@ -73,14 +74,14 @@ struct conversion {
 // names (which also work with the portable GNU libiconv package).  They
 // are marked with '*'.
 //
-// Encodings specific to XEmacs and Emacs are marked as such; no mark means
-// that they are used by both Emacs and XEmacs.
+// Encodings specific to XEmacs and Emacs are marked as such; no mark
+// means that they are used by both Emacs and XEmacs.
 //
 // Encodings marked with '--' are special to Emacs, XEmacs, or other
 // applications and shouldn't be used for data exchange.
 //
-// 'Not covered' means that the encoding can be handled neither by GNU iconv
-// nor by libiconv, or just one of them has support for it.
+// 'Not covered' means that the encoding can be handled neither by GNU
+// iconv nor by libiconv, or just one of them has support for it.
 //
 // A special case is VIQR encoding: Despite of having a MIME tag it is
 // missing in both libiconv 1.10 and iconv (coming with GNU libc 2.3.6).
@@ -89,10 +90,11 @@ struct conversion {
 // 'utf8' to catch those encoding names before iconv is called.
 //
 // Note that most entries are commented out -- only a small, (rather)
-// reliable and stable subset of encodings is recognized (for coding tags)
-// which are still in greater use today (January 2006).  Most notably, all
-// Windows-specific encodings are not selected because they lack stability:
-// Microsoft has changed the mappings instead of creating new versions.
+// reliable and stable subset of encodings is recognized (for coding
+// tags) which are still in greater use today (January 2006).  Most
+// notably, all Windows-specific encodings are not selected because they
+// lack stability: Microsoft has changed the mappings instead of
+// creating new versions.
 //
 // Please contact the groff list if you find the selection inadequate.
 
@@ -398,7 +400,7 @@ emacs2mime(char *emacs_enc)
     emacs_enc[emacs_enc_len - 5] = 0;
   for (const conversion *table = emacs_to_mime; table->from; table++)
     if (!strcasecmp(emacs_enc, table->from))
-      return (char *)table->to;
+      return const_cast<char *>(table->to);
   return emacs_enc;
 }
 
@@ -436,7 +438,8 @@ void
 conversion_latin1(FILE *fp, const string &data)
 {
   int len = data.length();
-  const unsigned char *ptr = (const unsigned char *)data.contents();
+  const unsigned char *ptr
+    = reinterpret_cast<const unsigned char *>(data.contents());
   for (int i = 0; i < len; i++)
     unicode_entity(ptr[i]);
   int c = -1;
@@ -613,7 +616,8 @@ conversion_utf8(FILE *fp, const string &data)
 {
   utf8 u(fp);
   int len = data.length();
-  const unsigned char *ptr = (const unsigned char *)data.contents();
+  const unsigned char *ptr
+    = reinterpret_cast<const unsigned char *>(data.contents());
   for (int i = 0; i < len; i++)
     u.add(ptr[i]);
   int c = -1;
@@ -661,7 +665,8 @@ conversion_cp1047(FILE *fp, const string &data)
     0x38, 0x39, 0xB3, 0xDB, 0xDC, 0xD9, 0xDA, 0x9F,
   };
   int len = data.length();
-  const unsigned char *ptr = (const unsigned char *)data.contents();
+  const unsigned char *ptr
+    = reinterpret_cast<const unsigned char *>(data.contents());
   for (int i = 0; i < len; i++)
     unicode_entity(cp1047[ptr[i]]);
   int c = -1;
@@ -676,40 +681,41 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
 {
   iconv_t handle = iconv_open(UNICODE, enc);
   if (handle == (iconv_t)-1) {
-    if (errno == EINVAL) {
-      error("encoding system '%1' not supported by iconv()", enc);
+    if (EINVAL == errno) {
+      error("character encoding '%1' not supported by iconv()", enc);
       return;
     }
-    fatal("iconv_open failed");
+    fatal("unable to convert character encoding: %1", strerror(errno));
   }
   char inbuf[BUFSIZ];
   int outbuf[BUFSIZ];
-  char *outptr = (char *)outbuf;
+  char *outptr = reinterpret_cast<char *>(outbuf);
   size_t outbytes_left = BUFSIZ * sizeof (int);
   // Handle 'data'.
-  char *inptr = (char *)data.contents();
+  char *inptr = const_cast<char *>(data.contents());
   size_t inbytes_left = data.length();
   char *limit;
   while (inbytes_left > 0) {
     size_t status = iconv(handle,
 			  (ICONV_CONST char **)&inptr, &inbytes_left,
 			  &outptr, &outbytes_left);
-    if (status == (size_t)-1) {
-      if (errno == EILSEQ) {
+    if (status == static_cast<size_t>(-1)) {
+      if (EILSEQ == errno) {
 	// Invalid byte sequence.  XXX
 	inptr++;
 	inbytes_left--;
       }
-      else if (errno == E2BIG) {
+      else if (E2BIG == errno) {
 	// Output buffer is full.
-	limit = (char *)outbuf + BUFSIZ * sizeof (int) - outbytes_left;
+	limit = reinterpret_cast<char *>(outbuf)
+	  + (BUFSIZ * sizeof (int)) - outbytes_left;
 	for (int *ptr = outbuf; (char *)ptr < limit; ptr++)
 	  unicode_entity(*ptr);
 	memmove(outbuf, outptr, outbytes_left);
-	outptr = (char *)outbuf + outbytes_left;
+	outptr = reinterpret_cast<char *>(outbuf) + outbytes_left;
 	outbytes_left = BUFSIZ * sizeof (int) - outbytes_left;
       }
-      else if (errno == EINVAL) {
+      else if (EINVAL == errno) {
 	// 'data' ends with partial input sequence.
 	memcpy(inbuf, inptr, inbytes_left);
 	break;
@@ -719,7 +725,8 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
   // Handle 'fp' and switch to 'inbuf'.
   size_t read_bytes;
   char *read_start = inbuf + inbytes_left;
-  while ((read_bytes = fread(read_start, 1, BUFSIZ - inbytes_left, fp)) > 0) {
+  while ((read_bytes = fread(read_start, 1, BUFSIZ - inbytes_left, fp))
+      > 0) {
     inptr = inbuf;
     inbytes_left += read_bytes;
     while (inbytes_left > 0) {
@@ -727,21 +734,22 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
 			    (ICONV_CONST char **)&inptr, &inbytes_left,
 			    &outptr, &outbytes_left);
       if (status == (size_t)-1) {
-	if (errno == EILSEQ) {
+	if (EILSEQ == errno) {
 	  // Invalid byte sequence.  XXX
 	  inptr++;
 	  inbytes_left--;
 	}
-	else if (errno == E2BIG) {
+	else if (E2BIG == errno) {
 	  // Output buffer is full.
-	  limit = (char *)outbuf + BUFSIZ * sizeof (int) - outbytes_left;
+	  limit = reinterpret_cast<char *>(outbuf)
+	    + (BUFSIZ * sizeof (int)) - outbytes_left;
 	  for (int *ptr = outbuf; (char *)ptr < limit; ptr++)
 	    unicode_entity(*ptr);
 	  memmove(outbuf, outptr, outbytes_left);
-	  outptr = (char *)outbuf + outbytes_left;
-	  outbytes_left = BUFSIZ * sizeof (int) - outbytes_left;
+	  outptr = reinterpret_cast<char *>(outbuf) + outbytes_left;
+	  outbytes_left = (BUFSIZ * sizeof (int)) - outbytes_left;
 	}
-	else if (errno == EINVAL) {
+	else if (EINVAL == errno) {
 	  // 'inbuf' ends with partial input sequence.
 	  memmove(inbuf, inptr, inbytes_left);
 	  break;
@@ -752,7 +760,8 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
   }
   iconv_close(handle);
   // XXX use ferror?
-  limit = (char *)outbuf + BUFSIZ * sizeof (int) - outbytes_left;
+  limit = reinterpret_cast<char *>(outbuf) + (BUFSIZ * sizeof (int))
+    - outbytes_left;
   for (int *ptr = outbuf; (char *)ptr < limit; ptr++)
     unicode_entity(*ptr);
 }
@@ -1029,7 +1038,7 @@ detect_file_encoding(FILE *fp)
      file. */
   rewind(fp);
   if (fstat(fileno(fp), &stat_buf) != 0) {
-    error("fstat: %1", strerror(errno));
+    error("unable to get file status: %1", strerror(errno));
     goto end;
   }
   len = stat_buf.st_size;
@@ -1037,15 +1046,15 @@ detect_file_encoding(FILE *fp)
     fprintf(stderr, "  len: %lu\n", (unsigned long)len);
   if (len == 0)
     goto end;
-  data = (char *)calloc(len, 1);
+  data = static_cast<char *>(calloc(len, 1));
   read_bytes = fread(data, 1, len, fp);
   if (read_bytes == 0) {
-    error("fread: %1", strerror(errno));
+    error("unable to read from file: %1", strerror(errno));
     goto end;
   }
   /* We rewind back to the original position */
   if (fseek(fp, current_position, SEEK_SET) != 0) {
-    fatal("fseek: %1", strerror(errno));
+    fatal("unable to seek within file: %1", strerror(errno));
     goto end;
   }
   ud = uchardet_new();
@@ -1067,7 +1076,7 @@ detect_file_encoding(FILE *fp)
   }
   /* uchardet 0.0.1 could return an empty string instead of NULL */
   if (charset && *charset) {
-    ret = (char *)malloc(strlen(charset) + 1);
+    ret = static_cast<char *>(malloc(strlen(charset) + 1));
     strcpy(ret, charset);
   }
 
@@ -1109,7 +1118,8 @@ do_file(const char *filename)
   }
   char *c_reported_filename = reported_filename.extract();
   if (!fp) {
-    error("can't open %1: %2", c_reported_filename, strerror(errno));
+    error("unable to open '%1': %2", c_reported_filename,
+	  strerror(errno));
     free(c_reported_filename);
     return 0;
   }
@@ -1136,8 +1146,8 @@ do_file(const char *filename)
 		      "no search for coding tag\n",
 		      user_encoding);
       if (BOM_encoding && strcmp(BOM_encoding, user_encoding))
-	fprintf(stderr, "  but BOM in data stream implies encoding '%s'!\n",
-			BOM_encoding);
+	fprintf(stderr, "  but BOM in data stream implies encoding"
+		" '%s'!\n", BOM_encoding);
     }
     encoding = (char *)user_encoding;
   }
@@ -1156,7 +1166,8 @@ do_file(const char *filename)
          file_encoding = detect_file_encoding(fp);
       if (!file_encoding) {
         if (is_debugging)
-          fprintf(stderr, "  could not detect encoding with uchardet\n");
+          fprintf(stderr,
+		  "  could not detect encoding with uchardet\n");
         file_encoding = fallback_encoding;
       }
       else
@@ -1172,11 +1183,10 @@ do_file(const char *filename)
   if (must_free_encoding)
     free(encoding);
   encoding = encoding_string;
-  // Translate from MIME & Emacs encoding names to locale encoding names.
+  // Translate from MIME/Emacs encoding names to locale encoding names.
   encoding = emacs2mime(encoding_string);
   if (encoding[0] == '\0') {
-    error("encoding '%1' not supported, not a portable encoding",
-	  encoding_string);
+    error("unportable encoding '%1' not supported", encoding_string);
     return 0;
   }
   if (is_debugging)
@@ -1264,7 +1274,8 @@ main(int argc, char **argv)
 			    "dD:e:hrv", long_options, NULL)) != EOF)
     switch (opt) {
     case 'v':
-      printf("GNU preconv (groff) version %s %s iconv support and %s uchardet support\n",
+      printf("GNU preconv (groff) version %s %s iconv support and %s"
+	     " uchardet support\n",
 	     Version_string,
 #ifdef HAVE_ICONV
 	     "with",
@@ -1277,7 +1288,7 @@ main(int argc, char **argv)
              "without"
 #endif /* HAVE_UCHARDET */
 	    );
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case 'd':
       is_debugging = true;
@@ -1308,7 +1319,7 @@ main(int argc, char **argv)
       exit(2);
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled getopt_long return value");
     }
   int nbad = 0;
   if (is_debugging)
@@ -1318,8 +1329,10 @@ main(int argc, char **argv)
   else
     for (int i = optind; i < argc; i++)
       nbad += !do_file(argv[i]);
-  if (ferror(stdout) || fflush(stdout) < 0)
-    fatal("output error");
+  if (ferror(stdout))
+    fatal("error status on standard output stream");
+  if (fflush(stdout) < 0)
+    fatal("cannot flush standard output stream: %1", strerror(errno));
   return nbad != 0;
 }
 

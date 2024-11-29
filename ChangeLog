@@ -1,5 +1,27 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[preconv]: Align with modern groff conventions.
+
+	* src/preproc/preconv/preconv.cpp (emacs2mine)
+	(conversion_iconv): Use C++ `const_cast` operator instead of
+	C-style type cast.
+	(conversion_latin1, conversion_utf8, conversion_cp1047)
+	(conversion_iconv): Use C++ `reinterpret_cast` operator instead
+	of C-style type cast for potentially narrowing conversions.
+	(conversion_iconv): Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.
+	(conversion_iconv, detect_file_encoding, do_file): Recast
+	wording of diagnostic messages.
+	(conversion_iconv, detect_file_encoding): Use C++ `static_cast`
+	operator instead of C-style type cast.
+	(conversion_iconv): Parenthesize complex expressions.
+	(main): Use standard symbol `EXIT_SUCCESS` instead of `0`
+	literal.  Replace `assert(0)` call with communicative predicate.
+	Distinguish `ferror()` status and `fflush(stdout)` failures when
+	cleaning up before exit.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic]: Align with modern groff conventions.
 
 	* src/preproc/pic/main.cpp (top_input::get, top_input::peek)
