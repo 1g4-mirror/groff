@@ -143,7 +143,7 @@ Syntax(const char *progname, bool had_error)
 	(void) fprintf (stream, "usage: %s {-help | --help}\n",
 			progname);
 	if (had_error)
-		exit(EXIT_FAILURE);
+		exit(2);
 	else
 		exit(EXIT_SUCCESS);
 }

@@ -1,3 +1,13 @@
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[gxditview]: Exit with status 2 on usage errors.
+
+	* src/devices/xditview/xditview.c (Syntax): Exit with status 2
+	on usage error, not `EXIT_FAILURE`.
+	* src/devices/xditview/gxditview.1.man (Exit status): Add
+	section.
+	* NEWS: Note the change.
+
 2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[grops]: Align with modern groff conventions.
