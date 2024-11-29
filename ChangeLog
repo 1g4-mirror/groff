@@ -1,5 +1,17 @@
 2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grops]: Align with modern groff conventions.
+
+	* src/devices/grops/ps.cpp (ps_output::put_string)
+	(ps_printer::flush_sbuf, main): Replace `assert(0)` call with
+	communicative predicate.
+	(ps_printer::set_style, ps_printer::draw, main): Recast wording
+	of diagnostic messages.
+	(ps_printer::~ps_printer): Use standard symbol `SEEK_SET`
+	instead of `0` literal.
+
+2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grolj4]: Align with modern groff conventions.
 
 	* src/devices/grolj4/lj4.cpp

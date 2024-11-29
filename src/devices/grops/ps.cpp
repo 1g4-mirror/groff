@@ -26,20 +26,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <assert.h>
 #include <errno.h>
 #include <locale.h> // setlocale()
 #include <math.h> // atan2(), sqrt(), tan()
 #include <stdint.h> // uint16_t
-#include <stdio.h> // EOF, FILE, fclose(), fgets(), fseek(), getc(),
-		   // setbuf(), setderr, stdout
-#include <stdlib.h> // putenv(), strtol()
-#include <string.h> // strtok()
+#include <stdio.h> // EOF, FILE, fclose(), fgets(), fileno(), fseek(),
+		   // getc(), setbuf(), stderr, stdout
+#include <stdlib.h> // exit(), EXIT_SUCCESS, putenv(), strtol()
+#include <string.h> // strchr(), strcmp(), strcpy(), strerror(),
+		    // strlen(), strncmp(), strstr(), strtok()
 #include <time.h> // asctime()
+
+#include "lib.h" // PI
 
 #include "cset.h"
 #include "curtime.h"
 #include "driver.h"
-#include "lib.h" // PI
 #include "nonposix.h"
 #include "paper.h"
 #include "stringclass.h"
@@ -298,7 +301,7 @@ ps_output &ps_output::put_string(const uint16_t *s, size_t n,
 	fprintf(fp, "\\%03o", c & 0377);
 	break;
       default:
-	assert(0);
+	assert(0 == "unhandled length of encoded character");
       }
       col += len;
     }
@@ -938,7 +941,8 @@ void ps_printer::set_style(const style &sty)
   out.put_literal_symbol(buf);
   const char *psname = sty.f->get_internal_name();
   if (0 /* nullptr */ == psname)
-    fatal("no internalname specified for font '%1'", sty.f->get_name());
+    fatal("no 'internalname' specified for font '%1'",
+	  sty.f->get_name());
   char *encoding = ((ps_font *)sty.f)->encoding;
   if (sty.sub == 0) {
     if (encoding != 0 /* nullptr */) {
@@ -1104,7 +1108,7 @@ void ps_printer::flush_sbuf()
        .put_fix_number(sbuf_vpos - output_vpos);
     break;
   default:
-    assert(0);
+    assert(0 == "unhandled motion relativity type");
   }
   out.put_symbol(sym);
   output_hpos = sbuf_end_hpos;
@@ -1305,7 +1309,7 @@ void ps_printer::draw(int code, int *p, int np, const environment *env)
     }
     break;
   default:
-    error("unrecognised drawing command '%1'", char(code));
+    error("unrecognized drawing command '%1'", char(code));
     break;
   }
   output_hpos = output_vpos = -1;
@@ -1433,8 +1437,8 @@ ps_printer::~ps_printer()
   out.simple_comment("Trailer")
      .put_symbol("end")
      .simple_comment("EOF");
-  if (fseek(tempfp, 0L, 0) < 0)
-    fatal("fseek on temporary file failed");
+  if (fseek(tempfp, 0L, SEEK_SET) < 0)
+    fatal("unable to seek within temporary file: %1", strerror(errno));
   fputs("%!PS-Adobe-", stdout);
   fputs((broken_flags & USE_PS_ADOBE_2_0) ? "2.0" : "3.0", stdout);
   putchar('\n');
@@ -1866,7 +1870,8 @@ int main(int argc, char **argv)
       break;
     case 'c':
       if (sscanf(optarg, "%d", &ncopies) != 1 || ncopies <= 0) {
-	error("bad number of copies '%1'", optarg);
+	error("expected positive integer argument to '-c' option, got"
+	      " '%1'; ignoring", optarg);
 	ncopies = 1;
       }
       break;
@@ -1896,11 +1901,12 @@ int main(int argc, char **argv)
       env += optarg;
       env += '\0';
       if (putenv(strsave(env.contents())))
-	fatal("putenv failed");
+	fatal("unable to update process environment: %1",
+	      strerror(errno));
       break;
     case 'v':
       printf("GNU grops (groff) version %s\n", Version_string);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case 'w':
       if (sscanf(optarg, "%d", &linewidth) != 1 || linewidth < 0) {
@@ -1910,7 +1916,7 @@ int main(int argc, char **argv)
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -1918,7 +1924,7 @@ int main(int argc, char **argv)
       exit(2);
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled getopt_long return value");
     }
   font::set_unknown_desc_command_handler(handle_unknown_desc_command);
   SET_BINARY(fileno(stdout));
