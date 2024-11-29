@@ -1,5 +1,19 @@
 2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grolj4]: Align with modern groff conventions.
+
+	* src/devices/grolj4/lj4.cpp
+	(lj4_font::handle_unknown_font_command): Use libgroff's
+	newfangled `array_length()` template function to measure arrays.
+	(lj4_font::handle_unknown_font_command, lj4_printer::draw)
+	(main): Recast wording of diagnostic messages.
+	(main): Use standard symbol `EXIT_SUCCESS` instead of `0`
+	literal.  Replace `assert(0)` call with communicative predicate.
+	(usage): If asked for `--help`, summarize command purpose in
+	message.
+
+2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[post-grohtml]: Align with modern groff conventions.
 
 	* src/drivers/grohtml/post-html.cpp: Update standard header file

@@ -35,6 +35,11 @@ X command to include bitmap graphics
 #endif
 
 #include <assert.h>
+#include <locale.h> // setlocale()
+#include <math.h> // atan2(), floor()
+#include <stdio.h> // EOF, FILE, fflush(), fprintf(), printf(),
+		   // setbuf(), stderr, stdout
+#include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
 
 #include "driver.h"
 #include "nonposix.h"
@@ -129,10 +134,10 @@ static struct {
 
 void lj4_font::handle_unknown_font_command(const char *command,
 					   const char *arg,
-					   const char *filename, int lineno)
+					   const char *filename,
+					   int lineno)
 {
-  for (unsigned int i = 0;
-       i < sizeof(command_table)/sizeof(command_table[0]); i++) {
+  for (size_t i = 0; i < array_length(command_table); i++) {
     if (strcmp(command, command_table[i].s) == 0) {
       if (arg == 0)
 	fatal_with_file_and_line(filename, lineno,
@@ -142,18 +147,20 @@ void lj4_font::handle_unknown_font_command(const char *command,
       long n = strtol(arg, &ptr, 10);
       if (ptr == arg)
 	fatal_with_file_and_line(filename, lineno,
-				 "'%1' command requires numeric argument",
-				 command);
+				 "'%1' command requires numeric"
+				 " argument", command);
       if (n < command_table[i].min) {
 	error_with_file_and_line(filename, lineno,
-				 "argument for '%1' command must not be less than %2",
-				 command, command_table[i].min);
+				 "'%1' command argument must not be"
+				 " less than %2", command,
+				 command_table[i].min);
 	n = command_table[i].min;
       }
       else if (n > command_table[i].max) {
 	error_with_file_and_line(filename, lineno,
-				 "argument for '%1' command must not be greater than %2",
-				 command, command_table[i].max);
+				 "'%1' command argument must not be"
+				 " greater than %2", command,
+				 command_table[i].max);
 	n = command_table[i].max;
       }
       this->*command_table[i].ptr = int(n);
@@ -538,7 +545,7 @@ void lj4_printer::draw(int code, int *p, int np, const environment *env)
       break;
     }
   default:
-    error("unrecognised drawing command '%1'", char(code));
+    error("unrecognized drawing command '%1'", char(code));
     break;
   }
 }
@@ -631,7 +638,8 @@ int main(int argc, char **argv)
 	fprintf(stderr, "duplex assumed to be long-side\n");
 	duplex_flag = 1;
       } else
-	fprintf(stderr, "option -%c requires an argument\n", optopt);
+	fprintf(stderr, "command-line option '%c' requires an"
+		" argument\n", optopt);
       fflush(stderr);
       break;
     case 'd':
@@ -639,7 +647,8 @@ int main(int argc, char **argv)
 	optind--;		//  args from messing up the arg list
       duplex_flag = atoi(optarg);
       if (duplex_flag != 1 && duplex_flag != 2) {
-	fprintf(stderr, "odd value for duplex; assumed to be long-side\n");
+	fprintf(stderr, "argument to command-line option 'd' out of"
+		" range; assuming long-side duplexing\n");
 	duplex_flag = 1;
       }
       break;
@@ -654,7 +663,7 @@ int main(int argc, char **argv)
       }
     case 'v':
       printf("GNU grolj4 (groff) version %s\n", Version_string);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case 'F':
       font::command_line_font_dir(optarg);
@@ -664,9 +673,11 @@ int main(int argc, char **argv)
 	char *ptr;
 	long n = strtol(optarg, &ptr, 10);
 	if (ptr == optarg)
-	  error("argument for -c must be a positive integer");
+	  error("argument to command-line option 'c' option must be a"
+		" positive integer");
 	else if (n <= 0 || n > 32767)
-	  error("out of range argument for -c");
+	  error("argument to command-line option 'c' out of range"
+		" [0, 32767)");
 	else
 	  ncopies = unsigned(n);
 	break;
@@ -676,16 +687,18 @@ int main(int argc, char **argv)
 	char *ptr;
 	long n = strtol(optarg, &ptr, 10);
 	if (ptr == optarg)
-	  error("argument for -w must be a non-negative integer");
+	  error("argument to command-line option 'w' must be a"
+		" non-negative integer");
 	else if (n < 0 || n > INT_MAX)
-	  error("out of range argument for -w");
+	  error("argument to command-line option 'w' out of range"
+		" (0, %1)", INT_MAX);
 	else
 	  line_width_factor = int(n);
 	break;
       }
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -693,7 +706,7 @@ int main(int argc, char **argv)
       exit(2);
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled getopt_long return value");
     }
   SET_BINARY(fileno(stdout));
   if (optind >= argc)
@@ -708,11 +721,15 @@ int main(int argc, char **argv)
 static void usage(FILE *stream)
 {
   fprintf(stream,
-	  "usage: %s [-l] [-c n] [-d [n]] [-F dir] [-p paper-format]"
-	  " [-w n] [file ...]\n"
-	  "usage: %s {-v | --version}\n"
-	  "usage: %s --help\n",
+"usage: %s [-l] [-c n] [-d [n]] [-F dir] [-p paper-format] [-w n]"
+" [file ...]\n"
+"usage: %s {-v | --version}\n"
+"usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Translate the output of troff(1) into PCL 5/LaserJet 4 format.  See\n"
+"the grolj4(1) manual page.\n", stream);
 }
 
 // Local Variables:
