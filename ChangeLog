@@ -10,6 +10,15 @@
 
 2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gxditview]: Align with modern groff conventions.
+
+	* src/devices/xditview/xditview.c (Syntax): If asked for
+	`--help`, summarize command purpose in message.
+	(QuitAction): Use standard symbol `EXIT_SUCCESS` instead of `0`
+	literal.
+
+2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grops]: Align with modern groff conventions.
 
 	* src/devices/grops/ps.cpp (ps_output::put_string)
