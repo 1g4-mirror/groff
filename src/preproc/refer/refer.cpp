@@ -287,8 +287,12 @@ int main(int argc, char **argv)
 	      n = 0;
 	    sprintf(strchr(buf, '\0'), "-%ld", n);
 	    opt = ptr;
-	    if (*opt != '\0')
+	    if (*opt != '\0') {
 	      error("argument to 'l' option not of form 'm,n'");
+	      while ((*opt != '\0') && (*opt != ' '))
+		opt++;
+	      break;
+	    }
 	  }
 	  strcat(buf, "%a");
 	  if (!set_label_spec(buf))

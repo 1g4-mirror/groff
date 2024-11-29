@@ -1,5 +1,11 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/refer/refer.cpp (main): Skip rest of argument to
+	`-l` option when encountering garbage, preventing the enclosing
+	loop from attempting to interpret the garbage as more options.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[preconv]: Align with modern groff conventions.
 
 	* src/preproc/preconv/preconv.cpp (emacs2mine)
