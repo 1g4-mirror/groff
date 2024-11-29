@@ -25,13 +25,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
+#include <assert.h>
+#include <errno.h>
+#include <stdio.h> // EOF, FILE, fclose(), fflush(), fopen(), freopen(),
+		   // fseek(), setbuf(), stderr, stdout
+#include <string.h> // strcasecmp(), strcmp(), strerror(), strlen(),
+		    // strncmp()
+#include <time.h> // asctime(), tm
 
 #include "cset.h"
 #include "curtime.h"
@@ -1832,8 +1832,9 @@ void assert_state::compare(assert_pos *t,
       f = "stdin";
     if (0 /* nullptr */ == l)
       l = "<none>";
-    fprintf(stderr, "%s:%s: grohtml assertion failed at id%s: "
-		    "expected %s, got %s\n", f, l, t->id, s, v);
+    fprintf(stderr, "%s:%s:%s: grohtml assertion failed at id%s: "
+		    "expected %s, got %s\n", program_name, f, l, t->id,
+		    s, v);
   }
 }
 
@@ -1850,8 +1851,8 @@ void assert_state::close (const char *c)
   else if (strcmp(c, "ce") == 0)
     check_ce_flag = 0;
   else
-    fprintf(stderr, "internal error: unrecognised tag in grohtml "
-		    "(%s)\n", c);
+    fprintf(stderr, "%s: ignoring unrecognized tag '%s'\n",
+	    program_name, c);
 }
 
 const char *replace_negate_str (const char *before, char *after)
@@ -1863,7 +1864,8 @@ const char *replace_negate_str (const char *before, char *after)
     int d = atoi(after);
 
     if (d < 0 || d > 1) {
-      fprintf(stderr, "expected nf/fi value of 0 or 1, got %d\n", d);
+      fprintf(stderr, "%s: expected nf/fi value of 0 or 1, got '%s';"
+	      " ignoring\n", program_name, after);
       d = 0;
     }
     if (d == 0)
@@ -1942,8 +1944,9 @@ int assert_state::check_value_error (int c, int v, const char *s,
       f = "stdin";
     if (0 /* nullptr */ == l)
       l = "<none>";
-    fprintf(stderr, "%s:%s:grohtml (troff state) assertion failed; "
-	    "expected %s to be %s, got %d\n", f, l, name, s, v);
+    fprintf(stderr, "%s:%s:%s: troff state assertion failed; "
+	    "expected %s to be %s, got %d\n", program_name, f, l, name,
+	    s, v);
     return 0;
   }
   return flag;
@@ -4338,7 +4341,7 @@ void html_printer::draw(int code, int *p, int np,
     break;
 
   default:
-    error("unrecognised drawing command '%1'", char(code));
+    error("unrecognized drawing command '%1'", char(code));
     break;
   }
 }
@@ -5095,9 +5098,10 @@ void html_printer::do_file_components (void)
   next = file_list.next_file_name();
   next += '\0';
   current = next;
-  while (file_list.get_file() != 0) {
-    if (fseek(file_list.get_file(), 0L, 0) < 0)
-      fatal("fseek on temporary file failed");
+  while (file_list.get_file() != 0 /* nullptr */) {
+    if (fseek(file_list.get_file(), 0L, SEEK_SET) < 0)
+      fatal("unable to seek within temporary file: %1",
+	    strerror(errno));
     html.copy_file(file_list.get_file());
     fclose(file_list.get_file());
     file_list.move_next();
@@ -5153,7 +5157,7 @@ void html_printer::do_file_components (void)
   if (fragment_no > 1)
     write_navigation(top, prev, next, current);
   else {
-    assert(current_paragraph != 0);
+    assert(current_paragraph != 0 /* nullptr */);
     current_paragraph->done_para();
     write_rule();
     if (valid_flag) {
@@ -5352,8 +5356,8 @@ char *make_val (char *s, int v, char *id, char *f, char *l)
 	f = (char *)"stdin";
       if (0 /* nullptr */ == l)
 	l = (char *)"<none>";
-      fprintf(stderr, "%s:%s: grohtml assertion failed at id%s; "
-	      "expected %d, got %s\n", f, l, id, v, s);
+      fprintf(stderr, "%s:%s:%s: assertion failed at id%s;"
+	      " expected %d, got %s\n", program_name, f, l, id, v, s);
     }
     return s;
   }
@@ -5669,7 +5673,7 @@ int main(int argc, char **argv)
       break;
     case 'v':
       printf("GNU post-grohtml (groff) version %s\n", Version_string);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case 'V':
       valid_flag = TRUE;
@@ -5688,7 +5692,7 @@ int main(int argc, char **argv)
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -5716,6 +5720,10 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Translate the output of troff(1) into (X)HTML.  See the grohtml(1)\n"
+"manual page.\n", stream);
 }
 
 // Local Variables:

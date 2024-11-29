@@ -1,5 +1,23 @@
 2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[post-grohtml]: Align with modern groff conventions.
+
+	* src/drivers/grohtml/post-html.cpp: Update standard header file
+	inclusions with respect to the symbols the file actually uses.
+	(html_printer::do_file_components): Use standard symbol
+	`SEEK_SET` instead of `0` literal.  Recast fatal error
+	diagnostic to parallelize wording with others, and to disclose
+	underlying system error.
+	(assert_state::compare, assert_state::close)
+	(replace_negate_str, assert_state::check_value_error)
+	(html_printer::draw, make_val): Recast diagnostics.
+	(main): Use standard symbol `EXIT_SUCCESS` instead of `0`
+	literal.
+	(usage): If asked for `--help`, summarize command purpose in
+	message.
+
+2024-11-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grodvi]: Align with modern groff conventions.
 
 	* src/drivers/grodvi/grodvi.cpp (main): Use standard symbol
