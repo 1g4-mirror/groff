@@ -1,5 +1,23 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Align with modern groff conventions.
+
+	* src/preproc/pic/main.cpp (top_input::get, top_input::peek)
+	(do_file): Drop pointless construction of temporary value from
+	argument that is already of the desired type.
+	(do_file, do_whole_file, main): Recast wording of diagnostic
+	messages.
+	(do_file, main): Replace `assert(0)` call with
+	communicative predicate.
+	(usage): If asked for `--help`, summarize command purpose in
+	message.
+	(main): Use standard symbols `EXIT_SUCCESS` and `EXIT_FAILURE`
+	instead of `0` and `1` literals, respectively.  Distinguish
+	`ferror()` status and `fflush(stdout)` failures when cleaning up
+	before exit.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grn]: Align with modern groff conventions.
 
 	* src/preproc/grn/main.cpp (usage): If asked for `--help`,
