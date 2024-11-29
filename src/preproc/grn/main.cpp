@@ -362,16 +362,15 @@ main(int argc,
 	}
 	if (strcmp(*argv,"--help")==0) {
       case '?':
-	  error("unrecognized command-line option '%1'", char(optopt));
 	  usage(stdout);
-	  exit(2);
+	  exit(EXIT_SUCCESS);
 	  break;
 	}
 	// fallthrough
       default:
 	error("unknown switch: %1", c);
 	usage(stderr);
-	exit(1);
+	exit(2);
       }
   }
 

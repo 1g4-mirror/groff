@@ -1,5 +1,14 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grn]: Fix command-line option handling.
+
+	* src/preproc/grn/main.cpp (main): Don't write diagnostic
+	message when asked for `--help`.  Exit with status 2 on
+	unrecognized option (for real this time, correcting commit
+	89283b0935, 18 October).
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[gxditview]: Exit with status 2 on usage errors.
 
 	* src/devices/xditview/xditview.c (Syntax): Exit with status 2
