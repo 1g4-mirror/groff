@@ -83,9 +83,9 @@
 #include <ctype.h> // isdigit(), isupper(), tolower()
 #include <errno.h>
 #include <locale.h> // setlocale()
-#include <stdio.h> // FILE, fclose(), fgets(), fopen(), stderr, stdin,
-		   // stdout
-#include <stdlib.h> // free(), malloc()
+#include <stdio.h> // FILE, fclose(), fgets(), fopen(), fprintf(),
+		   // fputs(), printf(), stderr, stdin, stdout
+#include <stdlib.h> // exit(), EXIT_SUCCESS, free(), malloc()
 #include <string.h> // strchr(), strcmp(), strcpy(), strerror(),
 		    // strlen()
 
@@ -273,6 +273,10 @@ usage(FILE *stream)
 	  "usage: %s {-v | --version}\n"
 	  "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Preprocess troff(1) input to incorporate gremlin image files.  See\n"
+"the grn(1) manual page.\n", stream);
 }
 
 
@@ -357,7 +361,7 @@ main(int argc,
 	if (strcmp(*argv,"--version")==0) {
       case 'v':
 	  printf("GNU grn (groff) version %s\n", Version_string);
-	  exit(0);
+	  exit(EXIT_SUCCESS);
 	  break;
 	}
 	if (strcmp(*argv,"--help")==0) {
@@ -368,7 +372,7 @@ main(int argc,
 	}
 	// fallthrough
       default:
-	error("unknown switch: %1", c);
+	error("unrecognized command-line option '%1'", c);
 	usage(stderr);
 	exit(2);
       }

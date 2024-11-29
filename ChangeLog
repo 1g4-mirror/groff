@@ -1,5 +1,14 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grn]: Align with modern groff conventions.
+
+	* src/preproc/grn/main.cpp (usage): If asked for `--help`,
+	summarize command purpose in message.
+	(main): Use standard symbol `EXIT_SUCCESS` instead of `0`
+	literal.  Recast wording of diagnostic message.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grn]: Fix command-line option handling.
 
 	* src/preproc/grn/main.cpp (main): Don't write diagnostic
