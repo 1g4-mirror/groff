@@ -160,11 +160,12 @@ Here are some portability notes on writing automated tests.
   Here is a workaround.
 
   res=$(whatever | wc -l)
-  res=$(expr "$res" + 0) || exit 99
+  res=$(( res + 0 )) || exit 99
 
-  "expr"'s output is more rigidly specified, and if for some reason we
-  get unacceptable non-integer garbage from "wc", we exit the test
-  script with the code reserved for "hard errors".
+  If for some reason we get unacceptable non-integer garbage from "wc",
+  we exit the test script with the code reserved for "hard errors".
+  Shell arithmetic is unfortunately one of the many POSIX shell features
+  that Solaris 10's /bin/sh does not implement; see the "PROBLEMS" file.
 
 * The "od" command on macOS can put extra space characters (i.e., spaces
   that don't correspond to the input) at the ends of lines when using
