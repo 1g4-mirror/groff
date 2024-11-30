@@ -1,3 +1,9 @@
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/tfmtodit/tfmtodit.cpp (main): Exit with status 2,
+	not 1, on usage error (insufficient arguments).  Continues
+	commit 89283b0935, 18 October.
+
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[lookbib]: Align with modern groff conventions.

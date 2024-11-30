@@ -741,7 +741,7 @@ int main(int argc, char **argv)
   if (argc - optind != 3) {
     error("insufficient arguments");
     usage(stderr);
-    exit(1);
+    exit(2);
   }
   gf g;
   if (gf_file) {
