@@ -2592,7 +2592,7 @@ the
 man page enumerates all man pages distributed with the system,
 and individual pages frequently refer to external resources as well as
 manuals on a variety of topics
-distributed with
+imbricated with
 .IR groff .
 .
 .
