@@ -1,5 +1,22 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Rely on gnulib for `unlink()` if necessary.
+
+	* bootstrap.conf: Add "unlink" to `gnulib_modules`.
+
+	* src/libs/libgroff/tmpfile.cpp:
+	* src/preproc/html/pre-html.cpp: Include "<unistd.h>" standard
+	header file to ensure visibility of `unlink` declaration.  Wrap
+	this in `HAVE_UNISTD_H` preprocessor conditional (a symbol we
+	direct the user to define in "Makefile.am" if necessary).  I
+	think gnulib obviates this, but the idiom is widely used in the
+	groff codebase for this header file so I leave an experimental
+	scrub-out for another day.  (It would also help to have a good
+	communication loop with someone building groff on a non-POSIX
+	system like native Windows; I don't have one handy.)
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Rely on gnulib for `strsignal()` if necessary.
 
 	* bootstrap.conf: Add "strsignal" to `gnulib_modules`.
