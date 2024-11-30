@@ -1,3 +1,12 @@
+2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[tfmtodit]: Align with modern groff conventions.
+
+	* src/utils/tfmtodit/tfmtodit.cpp: Include system library
+	headers before local ones.
+	(main): Use standard symbol `EXIT_SUCCESS` instead of `0`
+	literal.
+
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/tfmtodit/tfmtodit.cpp (main): Exit with status 2,

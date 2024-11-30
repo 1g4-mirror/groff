@@ -46,16 +46,16 @@ This need only be done for a font for which math_fitting is false;
 When it's true, the left_correction and subscript_correction should
 both be zero. */
 
-#include "lib.h"
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
+#include "lib.h"
+
 #include <assert.h>
 #include <errno.h>
-#include <math.h>
-#include <stdlib.h>
+#include <math.h> // atan2()
+#include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
 
 #include "errarg.h"
 #include "error.h"
@@ -723,12 +723,12 @@ int main(int argc, char **argv)
     case 'v':
       {
 	printf("GNU tfmtodit (groff) version %s\n", Version_string);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	break;
       }
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
