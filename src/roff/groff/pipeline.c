@@ -20,16 +20,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <signal.h>
 #include <errno.h>
-#include <sys/types.h>
+#include <fcntl.h> // open()
+#include <signal.h> // kill(), SIGINT, signal()
+#include <stdbool.h>
+#include <stdio.h> // sprintf()
 #include <string.h> // strerror(), strsignal()
+#include <sys/types.h> // kill(), open(), wait()
+#include <sys/stat.h> // open()
 #ifdef HAVE_UNISTD_H
-#include <unistd.h>
+#include <unistd.h> // dup(), pipe(), STDIN_FILENO, STDOUT_FILENO,
+		    // unlink()
 #endif
-
 
 #ifdef _POSIX_VERSION
 
