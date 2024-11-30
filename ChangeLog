@@ -1,3 +1,19 @@
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Rely on gnulib for `strsignal()` if necessary.
+
+	* bootstrap.conf: Add "strsignal" to `gnulib_modules`.
+	* configure.ac: Drop "strsignal" and "sys_siglist" from
+	`AC_CHECK_DECLS`; we don't need Autoconf's tests for these if
+	we've got gnulib's replacements.
+	* src/preproc/html/pre-html.cpp: Include "<string.h>" standard
+	header file to ensure visibility of `strsignal` (and `strerror`)
+	declarations.
+	* src/roff/groff/pipeline.c: Drop declaration of `xstrsignal`,
+	our own replacement for `strsignal`.
+	(strsignal): Drop.
+	(run_pipeline): Update call site.
+
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Rely on gnulib for `strerror()` if necessary.

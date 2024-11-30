@@ -90,8 +90,6 @@ extern const char *i_to_a(int);		/* from libgroff */
 #endif
 
 static void sys_fatal(const char *);
-static const char *xstrsignal(int);
-
 
 #if defined(__MSDOS__) \
     || (defined(_WIN32) && !defined(_UWIN) && !defined(__CYGWIN__)) \
@@ -531,7 +529,7 @@ int run_pipeline(int ncommands, char ***commands, bool no_pipe)
 	  {
 	    c_error("%1: %2%3",
 		    commands[i][0],
-		    xstrsignal(sig),
+		    strsignal(sig),
 		    WCOREDUMP(status) ? " (core dumped)" : "");
 	    ret |= 2;
 	  }
@@ -558,25 +556,6 @@ int run_pipeline(int ncommands, char ***commands, bool no_pipe)
 static void sys_fatal(const char *s)
 {
   c_fatal("%1: %2", s, strerror(errno), (char *)0);
-}
-
-static const char *xstrsignal(int n)
-{
-  static char buf[sizeof("Signal ") + 1 + sizeof(int) * 3];
-
-#ifdef NSIG
-#if HAVE_DECL_STRSIGNAL
-  if (n >= 0 && n < NSIG && strsignal(n) != 0)
-    return strsignal(n);
-#else
-#if HAVE_DECL_SYS_SIGLIST
-  if (n >= 0 && n < NSIG && sys_siglist[n] != 0)
-    return sys_siglist[n];
-#endif /* HAVE_DECL_SYS_SIGLIST */
-#endif /* HAVE_DECL_STRSIGNAL */
-#endif /* NSIG */
-  sprintf(buf, "Signal %d", n);
-  return buf;
 }
 
 // Local Variables:
