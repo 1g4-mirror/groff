@@ -1,3 +1,12 @@
+2024-11-30  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Using \*[PDFLB] does not work.
+
+	* tmac/pdf.tmac: Simplify string and fix misconception
+	about PDFNOTE.WIDTH and PDFNOTE.HEIGHT.
+
+	Fixes <https://savannah.gnu.org/bugs/index.php?66501>
+
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[lookbib]: Align with modern groff conventions.

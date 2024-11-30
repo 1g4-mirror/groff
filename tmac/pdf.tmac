@@ -118,8 +118,12 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" them correctly!  Anyway, let's set some suitable default values,
 .\" in case the user has a set up which does work as advertised.
 .\"
-.nr PDFNOTE.WIDTH  3.5i
-.nr PDFNOTE.HEIGHT 2.0i
+.\" [Deri] These dimensions are the size of the hotspot area containing
+.\" the popup icon, not the size of the window containing the popup
+.\" text, so ...
+.\"
+.nr PDFNOTE.WIDTH  1c
+.nr PDFNOTE.HEIGHT 1c
 .\"
 .\" "pdf:bbox" defines the expression used to set the size and location
 .\" of the bounding rectangle for display of notes and link "hot-spots".
@@ -138,7 +142,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\"
 .\"    .pdfnote  Some text.\*[PDFLB]Some more text, on a new line.
 .\"
-.ds PDFLB \\\\\\\\\\\\\\\\n
+.ds PDFLB \\012
 .\"
 .de pdfnote
 .\" ----------------------------------------------------------------------
@@ -151,7 +155,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\"
 .   mk pdf:ury
 .   nr pdf:llx \\n(.k+\\n(.o+\\n[.in]
-.   nr pdf:lly \\n[pdf:ury]-\\n[PDFNOTE.HEIGHT]
+.   nr pdf:lly \\n[pdf:ury]+\\n[PDFNOTE.HEIGHT]
 .   nr pdf:urx \\n[pdf:llx]+\\n[PDFNOTE.WIDTH]
 .   ds pdf:note.instance /Rect [\\*[pdf:bbox]]
 .\"
