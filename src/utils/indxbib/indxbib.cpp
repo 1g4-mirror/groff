@@ -203,8 +203,11 @@ int main(int argc, char **argv)
       assert(0);
       break;
     }
-  if (optind >= argc && foption == 0)
-    fatal("no files and no -f option");
+  if (optind >= argc && foption == 0) {
+    error("no file operands and no command-line 'f' option specified");
+    usage(stderr);
+    exit(2);
+  }
   if (!directory) {
     char *path = get_cwd();
     store_filename(path);

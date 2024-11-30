@@ -1,5 +1,13 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[indxbib]: Exit with status 2 on usage errors.
+
+	* src/utils/refer/refer.cpp (main): Exit with status 2, not 1,
+	on usage errors.  Continues commit 89283b0935, 18 October.
+	* NEWS: Note the change.
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/indxbib/indxbib.cpp: Include local "nonposix.h"
 	header file, to try to ensure visibility of `getcwd()` symbol on
 	non-POSIX systems.
