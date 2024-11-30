@@ -28,12 +28,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // ungetc()
 #include <string.h> // strerror()
 #ifdef HAVE_UNISTD_H
-#include <unistd.h> // getcwd(), unlink()
+#include <unistd.h> // unlink()
 #endif
 
 #include "lib.h"
 
+// needed for getcwd()
 #include "posix.h"
+#include "nonposix.h"
+
 #include "errarg.h"
 #include "error.h"
 #include "stringclass.h"

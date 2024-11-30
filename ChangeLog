@@ -1,5 +1,11 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/indxbib/indxbib.cpp: Include local "nonposix.h"
+	header file, to try to ensure visibility of `getcwd()` symbol on
+	non-POSIX systems.
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/pipeline.c: Sort (and annotate) inclusions of
 	standard header files.
 
