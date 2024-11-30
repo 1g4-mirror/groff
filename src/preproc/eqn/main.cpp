@@ -20,6 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <getopt.h> // getopt_long()
+
 #include "eqn.h"
 #include "stringclass.h"
 #include "device.h"

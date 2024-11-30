@@ -38,6 +38,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		    // strlen(), strncmp(), strstr(), strtok()
 #include <time.h> // asctime()
 
+#include <getopt.h> // getopt_long()
+
 #include "lib.h" // PI
 
 #include "cset.h"

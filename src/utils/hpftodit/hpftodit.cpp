@@ -37,6 +37,8 @@ put filename in error messages (or fix lib)
 #include <string.h> // strchr(), strcmp(), strerror(), strlen(),
 		    // strrchr(), strtok()
 
+#include <getopt.h> // getopt_long()
+
 #include "lib.h"
 
 #include "posix.h"

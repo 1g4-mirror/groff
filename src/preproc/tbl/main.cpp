@@ -20,6 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <getopt.h> // getopt_long()
+
 #include "table.h"
 
 #define MAX_POINT_SIZE 99

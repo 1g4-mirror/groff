@@ -33,6 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		    // strncmp()
 #include <time.h> // asctime(), tm
 
+#include <getopt.h> // getopt_long()
+
 #include "cset.h"
 #include "curtime.h"
 #include "driver.h"

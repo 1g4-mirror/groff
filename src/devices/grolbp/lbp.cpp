@@ -29,6 +29,8 @@ TODO
 
 #include <assert.h>
 
+#include <getopt.h> // getopt_long()
+
 #include "driver.h"
 #include "lbp.h"
 #include "charset.h"

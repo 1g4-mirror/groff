@@ -57,6 +57,8 @@ both be zero. */
 #include <math.h> // atan2()
 #include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
 
+#include <getopt.h> // getopt_long()
+
 #include "errarg.h"
 #include "error.h"
 #include "cset.h"

@@ -1,5 +1,33 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Reduce header file inclusion spam.
+
+	* src/include/lib.h: Drop inclusion of "<getopt.h>" header file,
+	a GNU extension.  This header file itself uses none of its
+	facilities.  Instead...
+	* src/devices/grodvi/dvi.cpp:
+	* src/devices/grohtml/post-html.cpp:
+	* src/devices/grolbp/lbp.cpp:
+	* src/devices/grolj4/lj4.cpp:
+	* src/devices/grops/ps.cpp:
+	* src/devices/grotty/tty.cpp:
+	* src/preproc/eqn/main.cpp:
+	* src/preproc/html/pre-html.cpp:
+	* src/preproc/pic/main.cpp:
+	* src/preproc/preconv/preconv.cpp:
+	* src/preproc/soelim/soelim.cpp:
+	* src/preproc/tbl/main.cpp:
+	* src/roff/groff/groff.cpp:
+	* src/roff/troff/input.cpp:
+	* src/utils/hpftodit/hpftodit.cpp:
+	* src/utils/indxbib/indxbib.cpp:
+	* src/utils/lkbib/lkbib.cpp:
+	* src/utils/lookbib/lookbib.cpp:
+	* src/utils/tfmtodit/tfmtodit.cpp: ...`#include` "<getopt.h>" in
+	files that directly use the symbols it exposes.
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/lib.h:
 	* src/libs/libgroff/libgroff.am (libgroff_a_CPPFLAGS):
 	* src/utils/pfbtops/pfbtops.c:

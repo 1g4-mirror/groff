@@ -33,6 +33,8 @@
 #include <unistd.h> // unlink()
 #endif
 
+#include <getopt.h> // getopt_long()
+
 #define PREHTMLC
 
 #include "lib.h"

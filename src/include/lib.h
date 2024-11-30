@@ -33,8 +33,6 @@ extern "C" {
 }
 #endif
 
-#include <getopt.h>
-
 #ifdef HAVE_SETLOCALE
 #include <locale.h>
 #define getlocale(category) setlocale(category, NULL)

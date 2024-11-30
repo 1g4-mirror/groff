@@ -29,6 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdlib.h> // exit(), EXIT_FAILURE, EXIT_SUCCESS, free()
 #include <string.h> // strerror()
 
+#include <getopt.h> // getopt_long()
+
 #include "pic.h"
 
 extern int yyparse();

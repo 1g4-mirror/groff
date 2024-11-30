@@ -41,6 +41,8 @@ X command to include bitmap graphics
 		   // setbuf(), stderr, stdout
 #include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
 
+#include <getopt.h> // getopt_long()
+
 #include "driver.h"
 #include "nonposix.h"
 

@@ -25,6 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdlib.h> // exit(), EXIT_FAILURE, EXIT_SUCCESS, getenv(),
 		    // strtol()
 
+#include <getopt.h> // getopt_long()
+
 #include "lib.h"
 
 #include "errarg.h"

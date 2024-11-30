@@ -32,6 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		    // free(), getenv(), putenv(), strtol(), system()
 #include <string.h> // strdup(), strerror()
 
+#include <getopt.h> // getopt_long()
+
 #include <stack>
 
 #include "troff.h"

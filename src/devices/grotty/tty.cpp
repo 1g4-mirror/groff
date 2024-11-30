@@ -26,6 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // putchar(), setbuf(), stderr, stdout
 #include <stdlib.h> // exit(), EXIT_SUCCESS, getenv(), strtol()
 
+#include <getopt.h> // getopt_long()
+
 #include "driver.h"
 #include "device.h"
 #include "ptable.h"

@@ -42,6 +42,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <uchardet/uchardet.h>
 #endif
 
+#include <getopt.h> // getopt_long()
+
 #include "lib.h"
 
 #include "errarg.h"

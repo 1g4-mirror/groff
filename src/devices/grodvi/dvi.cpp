@@ -27,6 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // sprintf(), stderr, stdout
 #include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
 
+#include <getopt.h> // getopt_long()
+
 #include "driver.h"
 #include "nonposix.h"
 #include "paper.h"
