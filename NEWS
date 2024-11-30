@@ -652,6 +652,9 @@ Miscellaneous
    pnmcut(1).  Per upstream, the former was introduced 23 years ago and
    the latter withdrawn 15 years ago.
 
+*  The Makefile macro `DEVICE` has been renamed to `DEFAULT_DEVICE`; be
+   aware if your builds don't use "ps" as the default output device.
+
 *  The groff_diff(7) man page no longer contains examples.  They remain
    in groff's Texinfo manual.
 

@@ -128,7 +128,7 @@ when the latter is given the
 option.
 .
 (In this installation,
-.B @DEVICE@
+.B @DEFAULT_DEVICE@
 is the default output device.)
 .
 Use

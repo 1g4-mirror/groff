@@ -153,7 +153,7 @@ or
 options.
 .
 (In this installation,
-.B @DEVICE@
+.B @DEFAULT_DEVICE@
 is the default output device.)
 .
 Use

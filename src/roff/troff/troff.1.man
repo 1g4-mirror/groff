@@ -467,7 +467,7 @@ Prepare output for device
 .I dev.
 .
 The default is
-.BR @DEVICE@ ;
+.BR @DEFAULT_DEVICE@ ;
 see
 .MR groff @MAN1EXT@ .
 .
@@ -881,7 +881,7 @@ after them.
 Set the default output device.
 .
 If empty or not set,
-.B @DEVICE@
+.B @DEFAULT_DEVICE@
 is used.
 .
 The

@@ -1,3 +1,8 @@
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* Makefile.sim: Rename Makefile macro `DEVICE` to
+	`DEFAULT_DEVICE`.
+
 2024-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Refactor date format localization.

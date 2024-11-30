@@ -1903,7 +1903,7 @@ is not loaded.
 .\" XXX: why NOT load eqnrc?
 .
 The default device is
-.BR @DEVICE@ .
+.BR @DEFAULT_DEVICE@ .
 .
 .
 .\" ====================================================================

@@ -1,5 +1,26 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Rename Makefile macro `DEVICE` to `DEFAULT_DEVICE`.
+
+	* Makefile.am: Do it.
+	* src/include/include.am (defs.h):
+	* src/libs/libgroff/device.cpp:
+	* src/devices/grodvi/grodvi.1.man:
+	* src/devices/grohtml/grohtml.1.man:
+	* src/devices/grolbp/grolbp.1.man:
+	* src/devices/grolj4/grolj4.1.man:
+	* src/devices/gropdf/gropdf.1.man:
+	* src/devices/grops/grops.1.man:
+	* src/devices/grotty/grotty.1.man:
+	* src/preproc/eqn/eqn.1.man:
+	* src/preproc/grn/grn.1.man:
+	* src/roff/groff/groff.1.man:
+	* src/roff/troff/troff.1.man: Reflect rename.
+
+	* NEWS: Add item.
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[indxbib]: Align with modern groff conventions.
 
 	* src/utils/indxbib/indxbib.cpp (main): Use standard symbol

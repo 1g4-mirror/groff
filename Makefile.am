@@ -74,8 +74,9 @@ SH_SEP=@PATH_SEPARATOR@
 # %!PS-Adobe-2.0 rather than %!PS-Adobe-3.0; this is needed when using
 # Sun's Newsprint with a printer that requires page reversal.
 
-# 'DEVICE' is the default output device.
-DEVICE=ps
+# 'DEFAULT_DEVICE' is the output device troff uses when not given a `-T`
+# command-line option.
+DEFAULT_DEVICE=ps
 
 # 'XPROGDIRS' is either "src/devices/xditview src/utils/xtotroff" or
 # empty.
@@ -846,7 +847,7 @@ SUFFIXES += .man
 	     -e "s|[@]DATASUBDIR[@]|`echo $(datasubdir) | sed -f $(makevarescape)`|g" \
 	     -e "s|[@]DEFAULT_INDEX[@]|`echo $(indexdir)/$(indexname) | sed -f $(makevarescape)`|g" \
 	     -e "s|[@]DEFAULT_INDEX_NAME[@]|`echo $(indexname) | sed -f $(makevarescape)`|g" \
-	     -e "s|[@]DEVICE[@]|\\\\%$(DEVICE)|g" \
+	     -e "s|[@]DEFAULT_DEVICE[@]|\\\\%$(DEFAULT_DEVICE)|g" \
 	     -e "s|[@]DOCDIR[@]|`echo $(docdir) | sed -f $(makevarescape)`|g" \
 	     -e "s|[@]EXAMPLEDIR[@]|`echo $(exampledir) | sed -f $(makevarescape)`|g" \
 	     -e "s|[@]FONTDIR[@]|`echo $(fontdir) | sed -f $(makevarescape)`|g" \

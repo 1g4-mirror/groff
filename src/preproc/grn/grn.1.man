@@ -935,7 +935,7 @@ Prepare device output using output driver
 .IR dev .
 .
 The default is
-.BR @DEVICE@ .
+.BR @DEFAULT_DEVICE@ .
 .
 See
 .MR groff @MAN1EXT@

@@ -1377,7 +1377,7 @@ If neither this option nor the
 .I \%GROFF_TYPESETTER
 environment variable is used,
 the default output device is
-.BR @DEVICE@ .
+.BR @DEFAULT_DEVICE@ .
 .
 An output device may be any of the following.
 .
@@ -1909,7 +1909,7 @@ commands use temporary files.
 Set the default output device.
 .
 If empty or not set,
-.B @DEVICE@
+.B @DEFAULT_DEVICE@
 is used.
 .
 The
