@@ -23,10 +23,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <assert.h>
 #include <errno.h>
 #include <stdlib.h> // mkstemp(), strtol()
-#include <stdio.h> // EOF, FILE, fclose(), fdopen(), fopen(), fseek(),
-		   // getc(), rename(), setbuf(), stderr, stdin, stdout,
-		   // ungetc()
-#include <string.h> // strerror()
+#include <stdio.h> // EOF, FILE, fclose(), fdopen(), fopen(), fprintf(),
+		   // fseek(), getc(), printf(), rename(), setbuf(),
+		   // stderr, stdin, stdout, ungetc()
+#include <string.h> // strcat(), strchr(), strcmp(), strcpy(),
+		    // strerror(), strlen(), strrchr()
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> // unlink()
 #endif
@@ -188,11 +189,11 @@ int main(int argc, char **argv)
       break;
     case 'v':
       printf("GNU indxbib (groff) version %s\n", Version_string);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -200,10 +201,10 @@ int main(int argc, char **argv)
       exit(2);
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled getopt_long return value");
       break;
     }
-  if (optind >= argc && foption == 0) {
+  if ((optind >= argc) && (foption == 0)) {
     error("no file operands and no command-line 'f' option specified");
     usage(stderr);
     exit(2);
@@ -240,11 +241,13 @@ int main(int argc, char **argv)
   else
     name_max = file_name_max(".");
   const char *filename = p ? p + 1 : base_name;
-  if (strlen(filename) + sizeof(INDEX_SUFFIX) - 1 > name_max)
-    fatal("'%1.%2' is too long for a filename", filename, INDEX_SUFFIX);
+  if (strlen(filename) + sizeof INDEX_SUFFIX  - 1 > name_max)
+    fatal("'%1.%2' is too long for a file name", filename,
+	  INDEX_SUFFIX);
   if (p) {
     p++;
-    temp_index_file = new char[p - base_name + sizeof(TEMP_INDEX_TEMPLATE)];
+    temp_index_file = new char[p - base_name
+		      + sizeof TEMP_INDEX_TEMPLATE];
     memcpy(temp_index_file, base_name, p - base_name);
     strcpy(temp_index_file + (p - base_name), TEMP_INDEX_TEMPLATE);
   }
@@ -254,12 +257,12 @@ int main(int argc, char **argv)
   catch_fatal_signals();
   int fd = mkstemp(temp_index_file);
   if (fd < 0)
-    fatal("can't create temporary index file: %1", strerror(errno));
+    fatal("cannot create temporary index file: %1", strerror(errno));
   indxfp = fdopen(fd, FOPEN_WB);
   if (indxfp == 0)
-    fatal("fdopen failed");
+    fatal("unable to open temporary index file: %1", strerror(errno));
   if (fseek(indxfp, sizeof(index_header), 0) < 0)
-    fatal("can't seek past index header: %1", strerror(errno));
+    fatal("cannot seek past index header: %1", strerror(errno));
   int failed = 0;
   if (foption) {
     FILE *fp = stdin;
@@ -267,7 +270,7 @@ int main(int argc, char **argv)
       errno = 0;
       fp = fopen(foption, "r");
       if (!fp)
-	fatal("can't open '%1': %2", foption, strerror(errno));
+	fatal("cannot open '%1': %2", foption, strerror(errno));
     }
     string path;
     int lineno = 1;
@@ -298,8 +301,8 @@ int main(int argc, char **argv)
       failed = 1;
   write_hash_table();
   if (fclose(indxfp) < 0)
-    fatal("error closing temporary index file: %1", strerror(errno));
-  char *index_file = new char[strlen(base_name) + sizeof(INDEX_SUFFIX)];
+    fatal("cannot close temporary index file: %1", strerror(errno));
+  char *index_file = new char[strlen(base_name) + sizeof INDEX_SUFFIX];
   strcpy(index_file, base_name);
   strcat(index_file, INDEX_SUFFIX);
 #ifdef HAVE_RENAME
@@ -321,18 +324,18 @@ int main(int argc, char **argv)
       *dot = '_';
     if (rename(temp_index_file, index_file) < 0)
 #endif
-    fatal("can't rename temporary index file: %1", strerror(errno));
+    fatal("cannot rename temporary index file: %1", strerror(errno));
   }
 #else /* not HAVE_RENAME */
   ignore_fatal_signals();
   if (unlink(index_file) < 0) {
     if (errno != ENOENT)
-      fatal("can't unlink '%1': %2", index_file, strerror(errno));
+      fatal("cannot unlink '%1': %2", index_file, strerror(errno));
   }
   if (link(temp_index_file, index_file) < 0)
-    fatal("can't link temporary index file: %1", strerror(errno));
+    fatal("cannot link temporary index file: %1", strerror(errno));
   if (unlink(temp_index_file) < 0)
-    fatal("can't unlink temporary index file: %1", strerror(errno));
+    fatal("cannot unlink temporary index file: %1", strerror(errno));
 #endif /* not HAVE_RENAME */
   temp_index_file = 0;
   return failed;
@@ -348,19 +351,28 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"GNU indxbib makes an inverted index of the bibliographic databases\n"
+"in each FILE to speed their access by refer(1), lookbib(1), and\n"
+"lkbib(1). See the indxbib(1) manual page.\n",
+	  stream);
 }
 
-static void check_integer_arg(char opt, const char *arg, int min, int *res)
+static void check_integer_arg(char opt, const char *arg, int min,
+			      int *res)
 {
   char *ptr;
   errno = 0;
   long n = strtol(arg, &ptr, 10);
   if (ptr == arg)
-    fatal("argument to -%1 not an integer", opt);
-  if (ERANGE == errno || n < min || n > INT_MAX)
-    fatal("argument to -%1 must be between %2 and %3", arg, min, INT_MAX);
+    fatal("command-line '%1' option argument is not an integer", opt);
+  if ((ERANGE == errno) || (n < min) || (n > INT_MAX))
+    fatal("command-line '%1' option argument must be between %2 and %3",
+	  arg, min, INT_MAX);
   if (*ptr != '\0')
-    fatal("junk after integer argument to -%1", opt);
+    fatal("invalid integer in argument to command-line option '%1'",
+	  opt);
   *res = static_cast<int>(n);
 }
 
@@ -374,10 +386,11 @@ static char *get_cwd()
     if (getcwd(buf, size))
       break;
     if (errno != ERANGE)
-      fatal("cannot get current working directory: %1", strerror(errno));
+      fatal("cannot determine current working directory: %1",
+	    strerror(errno));
     delete[] buf;
     if (size == INT_MAX)
-      fatal("current working directory longer than INT_MAX");
+      fatal("current working directory name exceeds %1 bytes", INT_MAX);
     if (size > INT_MAX/2)
       size = INT_MAX;
     else
@@ -400,7 +413,7 @@ static void read_common_words_file()
   errno = 0;
   FILE *fp = fopen(common_words_file, "r");
   if (!fp)
-    fatal("can't open '%1': %2", common_words_file, strerror(errno));
+    fatal("cannott open '%1': %2", common_words_file, strerror(errno));
   common_words_table = new word_list * [hash_table_size];
   for (int i = 0; i < hash_table_size; i++)
     common_words_table[i] = 0;
@@ -437,7 +450,7 @@ static int do_whole_file(const char *filename)
   errno = 0;
   FILE *fp = fopen(filename, "r");
   if (!fp) {
-    error("can't open '%1': %2", filename, strerror(errno));
+    error("cannot open '%1': %2", filename, strerror(errno));
     return 0;
   }
   int count = 0;
@@ -474,7 +487,7 @@ static int do_file(const char *filename)
   // byte counts to be consistent with fseek.
   FILE *fp = fopen(filename, FOPEN_RB);
   if (fp == 0) {
-    error("can't open '%1': %2", filename, strerror(errno));
+    error("cannot open '%1': %2", filename, strerror(errno));
     return 0;
   }
   int filename_index = filenames.length();
@@ -482,7 +495,7 @@ static int do_file(const char *filename)
 
   enum {
     START,	// at the start of the file; also in between references
-    BOL,	// in the middle of a reference, at the beginning of the line
+    BOL,	// in the middle of a reference, at beginning of line
     PERCENT,	// seen a percent at the beginning of the line
     IGNORE,	// ignoring a field
     IGNORE_BOL,	// at the beginning of a line ignoring a field
@@ -497,7 +510,7 @@ static int do_file(const char *filename)
   int space_count = 0;
   int byte_count = 0;		// bytes read
   int key_len = 0;
-  int ref_start = -1;		// position of start of current reference
+  int ref_start = -1;		// start position of current reference
   for (;;) {
     int c = getc(fp);
     if (c == EOF)
@@ -644,7 +657,7 @@ static int do_file(const char *filename)
 	state = BOL;
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled primary parser state");
     }
   }
   switch (state) {
@@ -663,7 +676,7 @@ static int do_file(const char *filename)
 		    byte_count - ref_start - space_count);
     break;
   default:
-    assert(0);
+    assert(0 == "unhandled secondary parser state");
   }
   fclose(fp);
   return 1;
@@ -675,7 +688,7 @@ static void store_reference(int filename_index, int pos, int len)
   t.filename_index = filename_index;
   t.start = pos;
   t.length = len;
-  fwrite_or_die(&t, sizeof(t), 1, indxfp);
+  fwrite_or_die(&t, sizeof t, 1, indxfp);
   ntags++;
 }
 
@@ -772,7 +785,7 @@ static void write_hash_table()
   }
   fwrite_or_die(filenames.contents(), 1, filenames.length(), indxfp);
   if (fseek(indxfp, 0, 0) < 0)
-    fatal("error seeking on index file: %1", strerror(errno));
+    fatal("cannot seek within index file: %1", strerror(errno));
   index_header h;
   h.magic = INDEX_MAGIC;
   h.version = INDEX_VERSION;
@@ -783,13 +796,14 @@ static void write_hash_table()
   h.truncate = truncate_len;
   h.shortest = shortest_len;
   h.common = n_ignore_words;
-  fwrite_or_die(&h, sizeof(h), 1, indxfp);
+  fwrite_or_die(&h, sizeof h, 1, indxfp);
 }
 
-static void fwrite_or_die(const void *ptr, int size, int nitems, FILE *fp)
+static void fwrite_or_die(const void *ptr, int size, int nitems,
+			  FILE *fp)
 {
   if (fwrite(ptr, size, nitems, fp) != (size_t)nitems)
-    fatal("fwrite failed: %1", strerror(errno));
+    fatal("cannot write to file: %1", strerror(errno));
 }
 
 void fatal_error_exit()

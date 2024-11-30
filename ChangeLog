@@ -1,5 +1,23 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[indxbib]: Align with modern groff conventions.
+
+	* src/utils/indxbib/indxbib.cpp (main): Use standard symbol
+	`EXIT_SUCCESS` instead of `0` literal.  Parenthesize complex
+	expressions.
+	(main, do_file): Replace `assert(0)` calls with communicative
+	predicates.
+	(main, store_reference, write_hash_table): `sizeof` is an
+	operator, not a function, so don't parenthesize its operand when
+	it's an lvalue {as opposed to a type name}.
+	(main, check_integer_arg, get_cwd, read_common_words_file)
+	(do_whole_file, do_file, write_hash_table, fwrite_or_die):
+	Recast wording of diagnostic messages.
+	(usage): If asked for `--help`, summarize command purpose in
+	message.
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[indxbib]: Exit with status 2 on usage errors.
 
 	* src/utils/refer/refer.cpp (main): Exit with status 2, not 1,
