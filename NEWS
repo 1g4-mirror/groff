@@ -603,10 +603,10 @@ Miscellaneous
 -------------
 
 *  The commands addftinfo, grodvi, post-grohtml, grolbp, grolj4, grops,
-   grotty, eqn, pre-grohtml, gxditview, pic, preconv, soelim, tbl,
-   groff, troff, hpftodit, lkbib, lookbib, tfmtodit, and xtotroff now
-   exit with status 2 instead of 1 on usage errors.  grn now exits with
-   status 2 on a usage error instead of a successful status (0).
+   grotty, eqn, pre-grohtml, gxditview, pic, preconv, refer, soelim,
+   tbl, groff, troff, hpftodit, lkbib, lookbib, tfmtodit, and xtotroff
+   now exit with status 2 instead of 1 on usage errors.  grn now exits
+   with status 2 on a usage error instead of a successful status (0).
 
 *  Support for terminal devices using the CCSID 1047 (EBCDIC) encoding
    has been withdrawn.

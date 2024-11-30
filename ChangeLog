@@ -1,5 +1,13 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Exit with status 2 on usage errors.
+
+	* src/utils/refer/refer.cpp (main): Exit with status 2, not 1,
+	on usage errors.  Continues commit 89283b0935, 18 October.
+	* NEWS: Note the change.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/refer/refer.cpp (main): Skip rest of argument to
 	`-l` option when encountering garbage, preventing the enclosing
 	loop from attempting to interpret the garbage as more options.

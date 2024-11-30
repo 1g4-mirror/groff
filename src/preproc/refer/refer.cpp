@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 	    else {
 	      error("'f' option requires an argument");
 	      usage(stderr);
-	      exit(1);
+	      exit(2);
 	    }
 	  }
 	  else {
@@ -315,7 +315,7 @@ int main(int argc, char **argv)
 	    else {
 	      error("option 'p' requires an argument");
 	      usage(stderr);
-	      exit(1);
+	      exit(2);
 	    }
 	  }
 	  else {
@@ -370,7 +370,7 @@ int main(int argc, char **argv)
       default:
 	error("unrecognized option '%1'", opt);
 	usage(stderr);
-	exit(1);
+	exit(2);
 	break;
       }
     }
