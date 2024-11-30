@@ -44,7 +44,7 @@ check_number_pages()
     res=$("$gs_program" -o /dev/null/ -sDEVICE=bbox "$1" 2>&1 \
           | grep HiResBoundingBox | wc -l)
     # macOS `wc` prefixes the line count with spaces.  Get rid of them.
-    res=$(expr "$res" + 0) || exit 99
+    res=$(( res + 0 )) || exit 99
 
     if [ "$res" != $2 ]
     then

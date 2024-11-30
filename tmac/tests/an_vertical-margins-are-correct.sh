@@ -91,7 +91,7 @@ echo "$output"
 echo "checking page length" >&2
 res=$(echo "$output" | wc -l)
 # macOS `wc` prefixes the line count with spaces.  Get rid of them.
-res=$(expr "$res" + 0) || exit 99
+res=$(( res + 0 )) || exit 99
 test "$res" = 66 || wail
 
 echo "checking placement of page header" >&2
