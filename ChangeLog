@@ -1,5 +1,11 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/lookbib/lookbib.cpp (main): Emit error diagnostic
+	and exit with status 2, not 1, when given no operands.
+	Continues commit 89283b0935, 18 October.
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Rename Makefile macro `DEVICE` to `DEFAULT_DEVICE`.
 
 	* Makefile.am: Do it.

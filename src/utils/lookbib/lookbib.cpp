@@ -101,8 +101,9 @@ int main(int argc, char **argv)
       assert(0 == "unhandled case of command-line option");
     }
   if (optind >= argc) {
+    error("no database file operands");
     usage(stderr);
-    exit(1);
+    exit(2);
   }
   search_list list;
   for (int i = optind; i < argc; i++)
