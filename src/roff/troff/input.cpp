@@ -20,9 +20,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <assert.h>
+#include <errno.h> // ENOENT, errno
+#include <locale.h> // setlocale()
+#include <stdio.h> // EOF, FILE, clearerr(), fclose(), fflush(),
+		   // fileno(), fopen(), fprintf(), fseek(), getc(),
+		   // pclose(), popen(), printf(), snprintf(),
+		   // sprintf(), setbuf(), stderr, stdin, stdout,
+		   // ungetc()
 #include <stdlib.h> // atoi(), exit(), EXIT_FAILURE, EXIT_SUCCESS,
 		    // free(), getenv(), putenv(), strtol(), system()
-#include <string.h> // strdup()
+#include <string.h> // strdup(), strerror()
+
+#include <stack>
 
 #include "troff.h"
 #include "dictionary.h"
@@ -43,17 +53,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "unicode.h"
 #include "curtime.h"
 
-#include <stack>
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <errno.h> // errno
-
-// Needed for getpid() and isatty()
+// needed for getpid() and isatty()
 #include "posix.h"
-
 #include "nonposix.h"
 
 #ifdef NEED_DECLARATION_PUTENV
@@ -8966,7 +8967,7 @@ int main(int argc, char **argv)
     case 'v':
       {
 	printf("GNU troff (groff) version %s\n", Version_string);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	break;
       }
     case 'I':
@@ -9066,7 +9067,7 @@ int main(int argc, char **argv)
 #endif
     case CHAR_MAX + 1: // --help
       usage(stdout, argv[0]);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));

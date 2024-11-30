@@ -1,5 +1,14 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Align with modern groff conventions.
+
+	* src/roff/troff/input.cpp: Include system library headers
+	before local ones.
+	(main): Use standard symbol `EXIT_SUCCESS` instead of `0`
+	literal.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[refer]: Align with modern groff conventions.
 
 	* src/preproc/refer/refer.cpp (main): Recast wording of
