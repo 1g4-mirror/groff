@@ -131,7 +131,7 @@ panel of document viewers,
 and may contain clickable internal and external links.
 .
 .P
-Normally.
+Normally,
 .IR groff 's
 native PDF driver,
 .MR gropdf @MAN1EXT@ ,
