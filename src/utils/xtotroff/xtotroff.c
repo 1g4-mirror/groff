@@ -26,8 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#define __GETOPT_PREFIX groff_
-
 #include <X11/Xlib.h>
 #include <stdbool.h>
 #include <stdio.h>

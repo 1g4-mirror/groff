@@ -1,3 +1,12 @@
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/include/lib.h:
+	* src/libs/libgroff/libgroff.am (libgroff_a_CPPFLAGS):
+	* src/utils/pfbtops/pfbtops.c:
+	* src/utils/xtotroff/xtotroff.c: Fix straggling definitions of
+	`__GETOPT_PREFIX`, which broke the build on Solaris 10.
+	Continues commit 68968197dc, 27 November.
+
 2024-11-30  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Using \*[PDFLB] does not work.

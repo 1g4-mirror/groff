@@ -19,7 +19,6 @@ libgroff_srcdir = $(top_srcdir)/src/libs/libgroff
 noinst_LIBRARIES += libgroff.a
 libgroff_a_CPPFLAGS = \
   $(AM_CPPFLAGS) \
-  -D__GETOPT_PREFIX=groff_ \
   -DENABLE_RELOCATABLE=1 \
   -DLIBDIR=\"$(libdir)\"
 

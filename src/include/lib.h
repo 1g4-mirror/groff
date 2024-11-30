@@ -33,7 +33,6 @@ extern "C" {
 }
 #endif
 
-#define __GETOPT_PREFIX groff_
 #include <getopt.h>
 
 #ifdef HAVE_SETLOCALE
