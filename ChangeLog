@@ -1,5 +1,25 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Align with modern groff conventions.
+
+	* src/preproc/refer/refer.cpp (main): Recast wording of
+	diagnostic messages; communicate what is done with an invalid
+	command-line option argument (it is ignored).  Reorder equality
+	comparisons to avoid inadvertent lvalue assignment.  Use
+	standard symbol `EXIT_SUCCESS` instead of `0` literal.
+	Distinguish `ferror()` status and `fflush(stdout)` failures when
+	cleaning up before exit.
+	(usage): If asked for `--help`, summarize command purpose in
+	message.
+	(do_file, find_reference, do_bib): Recast wording of diagnostic
+	messages.
+	(do_file): Construct temporary value instead of using a C-style
+	type cast.
+	(rcompare): Use C++ `const_cast` operator nested inside
+	`static_cast` operator instead of C-style type cast.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[refer]: Exit with status 2 on usage errors.
 
 	* src/utils/refer/refer.cpp (main): Exit with status 2, not 1,

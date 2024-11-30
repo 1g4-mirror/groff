@@ -20,7 +20,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include "refer.h"
+#include <assert.h>
+#include <errno.h>
+#include <stdio.h> // EOF, FILE, fclose(), ferror(), fflush(), fopen(),
+		   // fprintf(), getc(), printf(), putc(), rewind(),
+		   // setbuf(), sprintf(), stderr, stdin, stdout,
+		   // ungetc()
+#include <stdlib.h> // getenv(), qsort(), strtol()
+#include <string.h> // strcat(), strchr(), strcmp(), strcpy(),
+		    // strerror()
+
+#include "refer.h" // includes cset.h
 #include "refid.h"
 #include "ref.h"
 #include "token.h"
@@ -146,7 +156,7 @@ int main(int argc, char **argv)
 	  annotation_field = opt[0];
 	  annotation_macro = opt + 2;
 	}
-	opt = 0;
+	opt = 0 /* nullptr */;
 	break;
       case 'P':
 	move_punctuation = 1;
@@ -178,20 +188,20 @@ int main(int argc, char **argv)
 	      --argc;
 	    }
 	    else {
-	      error("'f' option requires an argument");
+	      error("command-line option 'f' requires an argument");
 	      usage(stderr);
 	      exit(2);
 	    }
 	  }
 	  else {
 	    num = opt;
-	    opt = 0;
+	    opt = 0 /* nullptr */;
 	  }
 	  const char *ptr;
 	  for (ptr = num; *ptr; ptr++)
 	    if (!csdigit(*ptr)) {
-	      error("invalid character '%1' in argument to 'f' option",
-		    *ptr);
+	      error("invalid character '%1' in argument to command-line"
+		    " option 'f'; ignoring", *ptr);
 	      break;
 	    }
 	  if (*ptr == '\0') {
@@ -215,7 +225,7 @@ int main(int argc, char **argv)
 	break;
       case 'c':
 	capitalize_fields = ++opt;
-	opt = 0;
+	opt = 0 /* nullptr */;
 	break;
       case 'k':
 	{
@@ -224,8 +234,8 @@ int main(int argc, char **argv)
 	    buf[0] = *opt++;
 	  else {
 	    if (*opt != '\0')
-	      error("invalid field name '%1' in argument to 'k' option",
-		    *opt++);
+	      error("invalid field name '%1' in argument to"
+		    " command-line option 'k'; assuming 'L'", *opt++);
 	    buf[0] = 'L';
 	  }
 	  buf[1] = '~';
@@ -241,19 +251,20 @@ int main(int argc, char **argv)
 	  const char *ptr;
 	  for (ptr = ++opt; *ptr; ptr++)
 	    if (!csdigit(*ptr)) {
-	      error("'a' option argument must be an integer");
+	      error("invalid integer '%1' in argument to command-line"
+		    " option 'a'; ignoring", opt);
 	      break;
 	    }
 	  if (*ptr == '\0') {
 	    reverse_fields = 'A';
 	    reverse_fields += opt;
 	  }
-	  opt = 0;
+	  opt = 0 /* nullptr */;
 	}
 	break;
       case 'i':
 	linear_ignore_fields = ++opt;
-	opt = 0;
+	opt = 0 /* nullptr */;
 	break;
       case 'l':
 	{
@@ -263,8 +274,9 @@ int main(int argc, char **argv)
 	    char *ptr;
 	    long n = strtol(opt, &ptr, 10);
 	    if (ptr == opt) {
-	      error("invalid integer '%1' in 'l' option argument", opt);
-	      opt = 0;
+	      error("invalid integer '%1' in argument to command-line"
+		    " option 'l'; ignoring", opt);
+	      opt = 0 /* nullptr */;
 	      break;
 	    }
 	    if (n < 0)
@@ -273,14 +285,15 @@ int main(int argc, char **argv)
 	    sprintf(strchr(buf, '\0'), "+%ld", n);
 	  }
 	  strcat(buf, "D.y");
-	  if (*opt == ',')
+	  if (',' == *opt)
 	    opt++;
 	  if (*opt != '\0') {
 	    char *ptr;
 	    long n = strtol(opt, &ptr, 10);
 	    if (ptr == opt) {
-	      error("invalid integer '%1' in 'l' option argument", opt);
-	      opt = 0;
+	      error("invalid integer '%1' in argument to command-line"
+		    " option 'l'; ignoring", opt);
+	      opt = 0 /* nullptr */;
 	      break;
 	    }
 	    if (n < 0)
@@ -288,7 +301,8 @@ int main(int argc, char **argv)
 	    sprintf(strchr(buf, '\0'), "-%ld", n);
 	    opt = ptr;
 	    if (*opt != '\0') {
-	      error("argument to 'l' option not of form 'm,n'");
+	      error("argument to 'l' option not of form 'm,n';"
+		    " ignoring");
 	      while ((*opt != '\0') && (*opt != ' '))
 		opt++;
 	      break;
@@ -307,7 +321,7 @@ int main(int argc, char **argv)
       case 'p':
 	{
 	  const char *filename = 0;
-	  if (*++opt == '\0') {
+	  if ('\0' == *++opt) {
 	    if (argc > 1) {
 	      filename = *++argv;
 	      argc--;
@@ -320,17 +334,17 @@ int main(int argc, char **argv)
 	  }
 	  else {
 	    filename = opt;
-	    opt = 0;
+	    opt = 0 /* nullptr */;
 	  }
 	  database_list.add_file(filename);
 	}
 	break;
       case 's':
-	if (*++opt == '\0')
+	if ('\0' == *++opt)
 	  sort_fields = "AD";
 	else {
 	  sort_fields = opt;
-	  opt = 0;
+	  opt = 0 /* nullptr */;
 	}
 	accumulate = 1;
 	break;
@@ -339,8 +353,9 @@ int main(int argc, char **argv)
 	  char *ptr;
 	  long n = strtol(opt, &ptr, 10);
 	  if (ptr == opt) {
-	    error("invalid integer '%1' in 't' option argument", opt);
-	    opt = 0;
+	      error("invalid integer '%1' in argument to command-line"
+		    " option 't'; ignoring", opt);
+	    opt = 0 /* nullptr */;
 	    break;
 	  }
 	  if (n < 1)
@@ -358,12 +373,12 @@ int main(int argc, char **argv)
 	if (strcmp(opt, "-version") == 0) {
       case 'v':
 	  printf("GNU refer (groff) version %s\n", Version_string);
-	  exit(0);
+	  exit(EXIT_SUCCESS);
 	  break;
 	}
 	if (strcmp(opt, "-help") == 0) {
 	  usage(stdout);
-	  exit(0);
+	  exit(EXIT_SUCCESS);
 	  break;
 	}
 	// fall through
@@ -393,8 +408,10 @@ int main(int argc, char **argv)
   }
   if (accumulate)
     output_references();
+  if (ferror(stdout))
+    fatal("error status on standard output stream");
   if (fflush(stdout) < 0)
-    fatal("output error: %1", strerror(errno));
+    fatal("cannot flush standard output stream: %1", strerror(errno));
   return 0;
 }
 
@@ -406,6 +423,14 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"GNU refer is a troff(1) preprocessor that prepares bibliographic\n"
+"citations by looking up keywords specified in a roff(7) document,\n"
+"obviating the need to type such annotations, and permitting the\n"
+"citation style in formatted output to be altered independently and\n"
+"systematically.  See the refer(1) manual page.\n",
+          stream);
 }
 
 static void possibly_load_default_database()
@@ -441,7 +466,7 @@ static void do_file(const char *filename)
     errno = 0;
     fp = fopen(filename, "r");
     if (fp == 0) {
-      error("can't open '%1': %2", filename, strerror(errno));
+      error("cannot open '%1': %2", filename, strerror(errno));
       return;
     }
   }
@@ -462,7 +487,7 @@ static void do_file(const char *filename)
 	break;
       }
       if (is_invalid_input_char(c))
-	error("invalid input character code %1", c);
+	error("invalid input character code %1; ignoring", c);
       else {
 	line += c;
 	if ('\n' == c)
@@ -493,7 +518,7 @@ static void do_file(const char *filename)
 	  if (d == ']') {
 	    while ((d = getc(fp)) != '\n' && d != EOF) {
 	      if (is_invalid_input_char(d))
-		error("invalid input character code %1", d);
+		error("invalid input character code %1; ignoring", d);
 	      else
 		post += d;
 	    }
@@ -503,7 +528,7 @@ static void do_file(const char *filename)
 	    ungetc(d, fp);
 	}
 	if (is_invalid_input_char(c))
-	  error("invalid input character code %1", c);
+	  error("invalid input character code %1; ignoring", c);
 	else
 	  str += c;
 	at_start_of_line = ('\n' == c);
@@ -523,7 +548,7 @@ static void do_file(const char *filename)
 	  if (accumulate && outfp == stdout)
 	    divert_to_temporary_file();
 	  if (pending_line.length() == 0) {
-	    warning("can't attach citation to previous line");
+	    warning("cannot attach citation to empty previous line");
 	  }
 	  else
 	    pending_line.set_length(pending_line.length() - 1);
@@ -536,7 +561,7 @@ static void do_file(const char *filename)
 	  if ((flags & FORCE_LEFT_BRACKET) || !have_text)
 	    pending_line += PRE_LABEL_MARKER;
 	  pending_line += pre;
-	  char lm = LABEL_MARKER + (int)lt;
+	  char lm = LABEL_MARKER + int(lt);
 	  pending_line += lm;
 	  pending_line += post;
 	  if ((flags & FORCE_RIGHT_BRACKET) || !have_text)
@@ -601,8 +626,8 @@ static void do_file(const char *filename)
 	}
 	if (is_invalid_input_char(c))
 	  error_with_file_and_line(current_filename, start_lineno,
-				   "invalid input character code %1",
-				   c);
+				   "invalid input character code %1;"
+				   " ignoring", c);
 	else {
 	  line += c;
 	  at_start_of_line = ('\n' == c);
@@ -954,7 +979,10 @@ extern "C" {
 
 int rcompare(const void *p1, const void *p2)
 {
-  return compare_reference(**(reference **)p1, **(reference **)p2);
+  // XXX: Would it make more sense to make non-const copies of p1, p2?
+  return compare_reference(
+      **static_cast<reference **>(const_cast<void *>(p1)),
+      **static_cast<reference **>(const_cast<void *>(p2)));
 }
 
 }
@@ -1037,8 +1065,8 @@ static reference *find_reference(const char *query, int query_len)
   const char *start;
   int len;
   if (!iter.next(&start, &len, &rid)) {
-    error("no matches for '%1'", str.contents());
-    return 0;
+    error("no reference matches '%1'", str.contents());
+    return 0 /* nullptr */;
   }
   const char *end = start + len;
   while (start < end) {
@@ -1048,13 +1076,13 @@ static reference *find_reference(const char *query, int query_len)
       ;
   }
   if (start >= end) {
-    error("found a reference for '%1' but it didn't contain any fields",
+    error("reference matching '%1' has no fields",
 	  str.contents());
-    return 0;
+    return 0 /* nullptr */;
   }
   reference *result = new reference(start, end - start, &rid);
   if (iter.next(&start, &len, &rid))
-    warning("multiple matches for '%1'", str.contents());
+    warning("multiple references match '%1'", str.contents());
   return result;
 }
 
@@ -1109,9 +1137,9 @@ static reference *make_reference(const string &str, unsigned *flagsp)
 static void do_ref(const string &str)
 {
   if (accumulate)
-    (void)store_reference(str);
+    (void) store_reference(str);
   else {
-    (void)immediately_handle_reference(str);
+    (void) immediately_handle_reference(str);
     immediately_output_references();
   }
 }
@@ -1134,7 +1162,7 @@ void do_bib(const char *filename)
     errno = 0;
     fp = fopen(filename, "r");
     if (fp == 0) {
-      error("can't open '%1': %2", filename, strerror(errno));
+      error("cannot open '%1': %2", filename, strerror(errno));
       return;
     }
     current_filename = filename;
@@ -1149,7 +1177,7 @@ void do_bib(const char *filename)
     if (EOF == c)
       break;
     if (is_invalid_input_char(c)) {
-      error("invalid input character code %1", c);
+      error("invalid input character code %1; ignoring", c);
       continue;
     }
     switch (state) {
