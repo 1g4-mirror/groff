@@ -26,9 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #ifdef __cplusplus
 extern "C" {
 #endif
-#ifndef HAVE_STRERROR
-  char *strerror(int);
-#endif
   const char *i_to_a(int);
   const char *ui_to_a(unsigned int);
   const char *if_to_a(int, int);

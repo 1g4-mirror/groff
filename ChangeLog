@@ -1,5 +1,18 @@
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Rely on gnulib for `strerror()` if necessary.
+
+	* bootstrap.conf: Add "strerror" to `gnulib_modules`.
+	* configure.ac: Drop "sterror" from `AC_REPLACE_FUNCS`; we don't
+	need Autoconf's replacement if we've got gnulib's.
+	* Makefile.am: Drop mention of function/macro in comment.
+	* src/include/lib.h: Drop C preprocessor conditional logic.
+	* src/roff/groff/pipeline.c: Drop fallback definition.  Let
+	existing "<config.h"> inclusion do the work, and include
+	"<string.h>" unconditionally.
+
+2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Align with modern groff conventions.
 
 	* src/roff/troff/input.cpp: Include system library headers

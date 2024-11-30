@@ -130,7 +130,7 @@ AC_FUNC_MMAP
 saved_libs="$LIBS"
 LIBS="$LIBS $LIBC $LIBM"
 AC_REPLACE_FUNCS([fmod getcwd putenv strcasecmp \
-                  strerror strncasecmp strtol])
+                  strncasecmp strtol])
 LIBS="$saved_libs"
 AC_CHECK_FUNCS([gettimeofday isatty kill rename setlocale strdup \
                 strsep])

@@ -25,15 +25,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <signal.h>
 #include <errno.h>
 #include <sys/types.h>
+#include <string.h> // strerror(), strsignal()
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 
-#ifdef HAVE_STRERROR
-#include <string.h>
-#else
-extern char *strerror();
-#endif
 
 #ifdef _POSIX_VERSION
 
