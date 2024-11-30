@@ -1,6 +1,6 @@
 .TH @g@indxbib @MAN1EXT@ "@MDATE@" "groff @VERSION@"
 .SH Name
-@g@indxbib \- make inverted index for bibliographic databases
+@g@indxbib \- make inverted index of bibliographic databases
 .
 .
 .\" ====================================================================
@@ -96,9 +96,9 @@
 .\" ====================================================================
 .
 .I @g@indxbib
-makes an inverted index for the bibliographic databases in each
+makes an inverted index of the bibliographic databases in each
 .I file
-for use with
+to speed their access by
 .MR @g@refer @MAN1EXT@ ,
 .MR @g@lookbib @MAN1EXT@ ,
 and
