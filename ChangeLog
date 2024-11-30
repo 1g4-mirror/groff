@@ -5,7 +5,7 @@
 	* tmac/pdf.tmac: Simplify string and fix misconception
 	about PDFNOTE.WIDTH and PDFNOTE.HEIGHT.
 
-	Fixes <https://savannah.gnu.org/bugs/index.php?66501>
+	Fixes <https://savannah.gnu.org/bugs/?66501>.
 
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -112,7 +112,7 @@
 	declarations.
 	* src/roff/groff/pipeline.c: Drop declaration of `xstrsignal`,
 	our own replacement for `strsignal`.
-	(strsignal): Drop.
+	(xstrsignal): Drop.
 	(run_pipeline): Update call site.
 
 2024-11-29  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -729,7 +729,7 @@
 	wild as a delimiter, for instance in man pages for GNU awk, GNU
 	grep, and GNU rcs.  Weaning people off of it (because it is a
 	valid character in a numeric expression, and GNU troff has never
-	accepted most other such characters as delimeters,{*} whereas
+	accepted most other such characters as delimiters,{*} whereas
 	AT&T troff accepted them all) looks to be a multi-stage,
 	multi-year process.
 
