@@ -22,7 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <assert.h>
 #include <errno.h>
-#include <stdlib.h>
+#include <stdio.h> // EOF, FILE, fflush(), fgets(), fileno(), fprintf(),
+		   // printf(), putchar(), setbuf(), stderr, stdin,
+		   // stdout
+#include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
+#include <string.h> // strerror()
 
 #include "lib.h"
 
@@ -33,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "refid.h"
 #include "search.h"
 
-/* for isatty() */
+// needed for isatty()
 #include "posix.h"
 #include "nonposix.h"
 
@@ -46,6 +50,16 @@ static void usage(FILE *stream)
 	  "usage: %s {-v | --version}\n"
 	  "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"GNU lookbib writes a prompt to the standard error stream (unless the\n"
+"standard input stream is not a terminal), reads from the standard\n"
+"input a line containing a set of keywords, searches each\n"
+"bibliographic DATABASE for references containing those keywords,\n"
+"writes any references found to the standard output stream, and\n"
+"repeats this process until the end of input.  See the lookbib(1)\n"
+"manual page.\n",
+	  stream);
 }
 
 int main(int argc, char **argv)
@@ -74,7 +88,8 @@ int main(int argc, char **argv)
 	char *ptr;
 	long n = strtol(optarg, &ptr, 10);
 	if (ptr == optarg) {
-	  error("bad integer '%1' in 't' option", optarg);
+	  error("invalid integer '%1' in argument to command-line 't'"
+		" option; ignoring", optarg);
 	  break;
 	}
 	if (n < 1)
@@ -85,12 +100,12 @@ int main(int argc, char **argv)
     case 'v':
       {
 	printf("GNU lookbib (groff) version %s\n", Version_string);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	break;
       }
     case CHAR_MAX + 1: // --help
       usage(stdout);
-      exit(0);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -117,7 +132,7 @@ int main(int argc, char **argv)
       fputs("> ", stderr);
       fflush(stderr);
     }
-    if (!fgets(line, sizeof(line), stdin))
+    if (!fgets(line, sizeof line, stdin))
       break;
     char *ptr = line;
     while (csspace(*ptr))
@@ -130,7 +145,8 @@ int main(int argc, char **argv)
     int count;
     for (count = 0; iter.next(&start, &len); count++) {
       if (fwrite(start, 1, len, stdout) != (size_t)len)
-	fatal("write error on stdout: %1", strerror(errno));
+	fatal("cannot write to standard output stream: %1",
+	      strerror(errno));
       // Can happen for last reference in file.
       if (start[len - 1] != '\n')
 	putchar('\n');

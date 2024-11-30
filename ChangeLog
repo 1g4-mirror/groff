@@ -1,5 +1,16 @@
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[lookbib]: Align with modern groff conventions.
+
+	* src/utils/lookbib/lookbib.cpp (usage): If asked for `--help`,
+	summarize command purpose in message.
+	(main): Recast wording of diagnostic messages.  Use standard
+	symbol `EXIT_SUCCESS` instead of `0` literal.  `sizeof` is an
+	operator, not a function, so don't parenthesize its operand when
+	it's an lvalue {as opposed to a type name}.
+
+2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/lookbib/lookbib.cpp (main): Emit error diagnostic
 	and exit with status 2, not 1, when given no operands.
 	Continues commit 89283b0935, 18 October.
