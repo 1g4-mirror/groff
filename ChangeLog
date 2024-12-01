@@ -1,3 +1,9 @@
+2024-12-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/grn/hdb.cpp: Include "<stdlib.h>" header file to
+	ensure visibility of `atoi()` declaration.  Problem detected on
+	Solaris 10.
+
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Reduce header file inclusion spam.

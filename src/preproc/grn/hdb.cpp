@@ -16,6 +16,7 @@
 
 #include <ctype.h> // isdigit()
 #include <stdio.h> // FILE, feof(), fgets(), getc()
+#include <stdlib.h> // atoi()
 #include <string.h> // strcmp()
 
 #include "errarg.h"
