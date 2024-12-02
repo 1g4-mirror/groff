@@ -129,6 +129,7 @@ environments,
 special characters,
 character classes,
 streams,
+hyphenation language codes,
 and colors can be of any length.
 .
 Anywhere AT&T
