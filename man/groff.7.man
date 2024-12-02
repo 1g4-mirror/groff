@@ -7966,7 +7966,7 @@ is in the
 if no diversion is active
 (that is,
 formatted output is being \[lq]diverted\[rq] immediately to the output
-device.
+device).
 .
 The top-level diversion has no name.
 .
