@@ -253,7 +253,7 @@ registers exercise color support.
 GNU
 .I troff \" GNU
 uses a hyphenation algorithm and language-specific pattern files
-(based on those used in \*[tx])
+(based on \*[tx]'s)
 to decide which words can be hyphenated and where.
 .
 AT&T
@@ -312,14 +312,16 @@ in one-to-one correspondence,
 and assigns a code of zero to all other characters.
 .
 .
+.br
+.ne 2v
 .P
 The
 .B hcode
 request extends this principle to letters
-outside the Unicode basic Latin alphabet;
+outside the Unicode basic Latin set;
 without it,
 words containing such letters
-won't be hyphenated properly
+won't hyphenate properly
 even if the corresponding hyphenation patterns contain them.
 .
 .

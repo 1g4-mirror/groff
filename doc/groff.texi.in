@@ -5284,8 +5284,8 @@ process of splitting a word so that it appears partially on one line,
 followed by a hyphen to indicate to the reader that the word has been
 broken, and its remainder on the next.  Hyphenation break points can be
 manually specified; GNU @code{troff} also uses a hyphenation algorithm
-and language-specific pattern files (based on those used in @TeX{}) to
-decide which words can be hyphenated and where.
+and language-specific pattern files (based on @TeX{}'s) to decide which
+words can be hyphenated and where.
 
 Hyphenation does not always occur even when the hyphenation rules for a
 word allow it; it can be disabled, and when not disabled there are
@@ -8948,10 +8948,14 @@ hyphenation codes to the letters @samp{a}--@samp{z}, applies the same
 codes to @samp{A}--@samp{Z} in one-to-one correspondence, and assigns a
 code of zero to all other characters.
 
-The @code{hcode} request extends this principle to letters outside the
-Unicode basic Latin alphabet; without it, words containing such letters
-won't be hyphenated properly even if the corresponding hyphenation
-patterns contain them.
+The
+@code{hcode}
+request extends this principle to letters
+outside the Unicode basic Latin set;
+without it,
+words containing such letters
+won't hyphenate properly
+even if the corresponding hyphenation patterns contain them.
 
 @Defreq {hcode, dst1 src1 [dst2 src2] @dots{}}
 @cindex hyphenation code (@code{hcode})
