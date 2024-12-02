@@ -2630,7 +2630,7 @@ bool token::is_usable_as_delimiter(bool report_error)
   switch (type) {
   case TOKEN_CHAR:
     // AT&T troff accepted any character as a delimiter, even perverse
-    // choices like `\l91n+2n\&*`.  See Savannah #66481.
+    // choices in cases like `\l91n+2n\&*9`.  See Savannah #66481.
     if (want_att_compat)
       return true;
     is_valid = is_char_usable_as_delimiter(c);
