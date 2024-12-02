@@ -5700,31 +5700,8 @@ accepts several characters as delimiters that it ordinarily rejects,
 because they are meaningful in numeric expressions and therefore
 potentially ambiguous to the document maintainer.
 .
-The set of additional delimiters is
-\[lq]0\[rq]
-\[lq]1\[rq]
-\[lq]2\[rq]
-\[lq]3\[rq]
-\[lq]4\[rq]
-\[lq]5\[rq]
-\[lq]6\[rq]
-\[lq]7\[rq]
-\[lq]8\[rq]
-\[lq]9\[rq]
-\[lq]+\[rq]
-\[lq]\-\[rq]
-\[lq]/\[rq]
-\[lq]*\[rq]
-\[lq]%\[rq]
-\[lq]<\[rq]
-\[lq]>\[rq]
-\[lq]=\[rq]
-\[lq]&\[rq]
-\[lq]:\[rq]
-\[lq](\[rq]
-\[lq])\[rq],
-and
-\[lq].\[rq].
+The set of additional delimiters comprises
+.RB \[lq] 0123456789+\-/*%<>=&:(). \[rq].
 .
 .
 .\" ====================================================================
