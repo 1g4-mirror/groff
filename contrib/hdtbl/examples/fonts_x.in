@@ -57,10 +57,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  el \
 .    ds *args \\n[.fn]
 .
+.\" Solaris 10 `tr` barfs if POSIX character classes are used in a
+.\" locale other than "C".
 .  pso sh -c \
        "printf '%s' '.ds *f ' ; \
         ls \\*[fontpath]/dev\*[.T] \
-        | tr '[:cntrl:]' '[ *]'; \
+        | env LC_ALL=C tr '[:cntrl:]' '[ *]'; \
         echo"
 .
 .  while !"\\*[*args]"" \{\

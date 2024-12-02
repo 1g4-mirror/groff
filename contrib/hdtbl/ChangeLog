@@ -1,3 +1,10 @@
+2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* examples/fonts_n.in:
+	* examples/fonts_x.in: Guard against substandard tr(1)
+	implementation on Solaris 10 by forcing locale to "C" when using
+	a POSIX regular expression character class.
+
 2024-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Fix Savannah #66479 (1b/2).
