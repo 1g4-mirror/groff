@@ -201,7 +201,7 @@ and the Bell System logo
 .P
 In
 .IR groff ,
-you can test support for any character
+test support for any character
 (ordinary or special)
 with the conditional expression operator
 .RB \[lq] c \[rq].
@@ -798,6 +798,8 @@ producing \[lq]\^\[u02DA]\^\[rq].
 .\" Use "GNU troff" in this paragraph because the contrast with AT&T
 .\" troff, which antedated Unicode, is important, and that contrast is
 .\" obscured with the default empty command prefix on "troff".
+.br
+.ne 2v
 .P
 Unicode code points can be composed as well;
 when they are,
@@ -991,6 +993,8 @@ and equals
 signs normally drawn from this range.
 .
 .
+.br
+.ne 5v
 .P
 .TS
 L L L Lx.
@@ -1688,25 +1692,24 @@ L Lf(CR) L Lx.
 .B \[rs][Fn]
 also appears in subsection \[lq]Supplementary Latin letters\[rq] above.
 .
-Observe the two varieties of the
+The
 plus-minus,
 multiplication,
-and division signs;
+and division signs,
 .BR \[rs][+\-] ,
 .BR \[rs][mu] ,
 and
-.B \[rs][di]
+.BR \[rs][di] ,
 are normally drawn from the special font,
 but have text font variants.
 .
-Also be aware of three glyphs available in special font variants that
-are normally drawn from text fonts:
-the plus,
+The plus,
 minus,
-and equals signs.
+and equals signs
+are normally drawn from text fonts have special font variants.
 .
-These variants may differ in appearance or spacing depending on the
-device and font selected.
+Variants may differ in appearance or spacing depending on the device and
+font selected.
 .
 .
 .P
@@ -1718,8 +1721,8 @@ served as the horizontal extension of the radical
 (square root)
 sign,
 .BR \[rs](sr ,
-and was drawn at the maximum height of the typeface's bounding box;
-this enabled the special character to double as an overline
+and was drawn at the maximum height of the typeface's bounding box,
+enabling it to double as an overline
 (see subsection \[lq]Rules and lines\[rq] above).
 .
 A contemporary font's radical sign might not ascend to such an extreme.
@@ -1934,6 +1937,8 @@ L Lf(CR) L Lx.
 .TE
 .
 .
+.br
+.ne 4v
 .\" ====================================================================
 .SH History
 .\" ====================================================================
