@@ -4122,6 +4122,29 @@ request is selected.
 .
 .
 .TP
+.BR .pi\~ [ \[dq] ]\c
+.I command
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the argument,
+allowing it to contain embedded leading spaces.
+.
+.
+.TP
+.BR .so\~ [ \[dq] ]\c
+.I file
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the argument,
+allowing it to contain embedded leading spaces.
+.
+Further,
+spaces in
+.I file
+are accepted as part of the file name.
+.
+.
+.TP
 .BI .ss\~ word-space-size\~\c
 .RI [ additional-sentence-space-size ]
 A second argument sets the amount of additional space separating
@@ -4139,6 +4162,15 @@ see
 The default for both parameters is\~12.
 .
 Negative values are erroneous.
+.
+.
+.TP
+.BR .sy\~ [ \[dq] ]\c
+.I command
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the argument,
+allowing it to contain embedded leading spaces.
 .
 .
 .TP
