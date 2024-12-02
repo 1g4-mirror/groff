@@ -588,8 +588,7 @@ request.
 .BI c\~ chr
 True if a character
 .I chr
-is available,
-where
+is available;
 .I chr
 is an ordinary character
 (Unicode basic Latin excluding control characters and the space),
