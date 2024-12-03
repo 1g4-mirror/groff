@@ -332,7 +332,9 @@ required for
 to source files.
 .
 .
-.PP
+.br
+.ne 2v
+.P
 If a file to be sourced should also be preprocessed,
 it must already be read
 .I before
