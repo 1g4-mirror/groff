@@ -1,5 +1,10 @@
 2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/xditview/xditview.c (Syntax): Align wording of
+	usage message better with those of other output drivers.
+
+2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Rationalize and annotate header file inclusions.
 
 	* src/devices/grohtml/output.cpp:

@@ -150,7 +150,7 @@ Syntax(const char *progname, bool had_error)
 		exit(2);
 	else {
 		fputs("\n"
-"View a troff(1) document in an X11 window. See the gxditview(1)\n"
+"View the output of troff(1) in an X11 window.  See the gxditview(1)\n"
 "manual page.\n", stream);
 		exit(EXIT_SUCCESS);
 	}
