@@ -1237,15 +1237,15 @@ it can be placed within a
 .
 .P
 .I @g@tbl
-interprets a table entry beginning with
+interprets a table entry of
 .RB \[lq] T{ \[rq]
-at the end of an input line not as table data,
-but as a token starting a text block.
+at the end of an input line specially,
+as a token starting a text block.
 .
 Similarly,
+an entry
 .RB \[lq] T} \[rq]
-at the start of an input line ends a text block;
-it must also end the table entry.
+at the start of an input line ends a text block.
 .
 Text block tokens can share an input line with other table data
 (preceding
@@ -1597,14 +1597,15 @@ if it encounters an error during operation.
 .SH Limitations
 .\" ====================================================================
 .
-In table entries that are not text blocks,
+Outside of text blocks,
 avoid use of
 .I roff
 escape sequences that read to the end of the line,
-like
+as
 .B \[rs]\[dq]
-or
-.BR \[rs]!\& .
+and
+.B \[rs]!\&
+do.
 .
 .
 .P
