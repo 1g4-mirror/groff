@@ -107,8 +107,9 @@ it replaces lines of the form
 within each text
 .I input-file
 with the contents of
-.IR included-file ,
-recursively.
+.I included-file
+recursively,
+flattening a tree of documents.
 .
 By default,
 it writes
@@ -231,8 +232,7 @@ With its
 option,
 therefore,
 .I @g@soelim
-can be used to process text files in general,
-to flatten a tree of documents.
+can be used to process text files in general.
 .
 .
 .PP

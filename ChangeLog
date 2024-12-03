@@ -1,5 +1,10 @@
 2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/soelim/soelim.cpp (usage):
+	* src/preproc/soelim/soelim.1.man: Revise program description.
+
+2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/maxfilename.cpp: Include local "posix.h"
 	header before "nonposix.h" (and both before "lib.h"), aligning
 	better with other groff code, and fixing build on Androic/Bionic
