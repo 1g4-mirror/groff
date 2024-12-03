@@ -1,5 +1,14 @@
 2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (system_request, pipe_output):
+	Consistently `return` early under invalid request invocation
+	conditions (absent mandatory arguments, not in unsafe mode, or--
+	in the case of `pi`--belated occurrence).  Drop the indentation
+	level of rest of function accordingly.  Parallelize wording of
+	"impossible" error diagnostics.
+
+2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (system_request, pipe_output): Call
 	`tok.next()` at end of non-error path.
 

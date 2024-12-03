@@ -8425,7 +8425,8 @@ void abort_request()
 // the argument starts with a `"`, discard it, letting any immediately
 // subsequent spaces populate the returned string.
 //
-// The caller must use `tok.next()` to advance the input stream pointer.
+// The caller must subsequently call `tok.next()` to advance the input
+// stream pointer.
 //
 // The caller has responsibility for freeing the returned array.
 char *read_string()
@@ -8472,36 +8473,34 @@ void pipe_output()
   if (!want_unsafe_requests) {
     error("output piping request is not allowed in safer mode");
     skip_line();
+    return;
   }
-  else {
-    if (the_output) {
-      error("cannot honor pipe request: output already started");
-      skip_line();
-    }
-    else {
-      char *pc = read_string();
-      // This shouldn't happen thanks to `has_arg()` above.
-      assert(pc != 0 /* nullptr */);
-      if (0 /* nullptr */ == pc)
-	error("cannot apply pipe request to empty command");
-      // Are we adding to an existing pipeline?
-      if (pipe_command != 0 /* nullptr */) {
-	// C++03: new char[strlen(pipe_command) + strlen(pc) + 1 + 1]();
-	char *s = new char[strlen(pipe_command) + strlen(pc) + 1 + 1];
-	(void) memset(s, 0, ((strlen(pipe_command) + strlen(pc) + 1 + 1)
-			     * sizeof(char)));
-	strcpy(s, pipe_command);
-	strcat(s, "|");
-	strcat(s, pc);
-	delete[] pipe_command;
-	delete[] pc;
-	pipe_command = s;
-      }
-      else
-	pipe_command = pc;
-      tok.next();
-    }
+  if (the_output) {
+    error("cannot honor pipe request: output already started");
+    skip_line();
+    return;
   }
+  char *pc = read_string();
+  // This shouldn't happen thanks to `has_arg()` above.
+  assert(pc != 0 /* nullptr */);
+  if (0 /* nullptr */ == pc)
+    error("cannot apply pipe request to empty command");
+  // Are we adding to an existing pipeline?
+  if (pipe_command != 0 /* nullptr */) {
+    // C++03: new char[strlen(pipe_command) + strlen(pc) + 1 + 1]();
+    char *s = new char[strlen(pipe_command) + strlen(pc) + 1 + 1];
+    (void) memset(s, 0, ((strlen(pipe_command) + strlen(pc) + 1 + 1)
+			 * sizeof(char)));
+    strcpy(s, pipe_command);
+    strcat(s, "|");
+    strcat(s, pc);
+    delete[] pipe_command;
+    delete[] pc;
+    pipe_command = s;
+  }
+  else
+    pipe_command = pc;
+  tok.next();
 }
 
 static int system_status;
@@ -8518,17 +8517,16 @@ void system_request()
     error("system command execution request is not allowed in safer"
 	  " mode");
     skip_line();
+    return;
   }
+  char *command = read_string();
+  // This shouldn't happen thanks to `has_arg()` above.
+  assert(command != 0 /* nullptr */);
+  if (0 /* nullptr */ == command)
+    error("cannot apply system request to empty command");
   else {
-    char *command = read_string();
-    // This shouldn't happen thanks to `has_arg()` above.
-    assert(command != 0 /* nullptr */);
-    if (0 /* nullptr */ == command)
-      error("empty command");
-    else {
-      system_status = system(command);
-      delete[] command;
-    }
+    system_status = system(command);
+    delete[] command;
   }
   tok.next();
 }
