@@ -142,7 +142,7 @@ and text size selection;
 motion of the printing position;
 page advancement;
 drawing of geometric primitives;
-and device control commands,
+and device extension commands,
 a catch-all for other operations.
 .
 The last includes directives to start and stop output,
