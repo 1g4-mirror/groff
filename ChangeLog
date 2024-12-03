@@ -1,5 +1,13 @@
 2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/grog/grog.pl (usage):
+	* src/utils/indxbib/indxbib.cpp (usage): Stop shouting operand
+	names.  We don't otherwise do this, and "FILE" in particular
+	frustrates "git grep"s because it collides with the "stdio.h"
+	data type.
+
+2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.cpp (usage):
 	* src/preproc/soelim/soelim.1.man: Revise program description.
 

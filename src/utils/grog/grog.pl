@@ -666,7 +666,7 @@ sub usage {
     "usage: $grog {-h | --help}\n";
   unless ($had_error) {
     print $stream "\n" .
-"Read each roff(7) input FILE and attempt to infer an appropriate\n" .
+"Read each roff(7) input file and attempt to infer an appropriate\n" .
 "groff(1) command to format it.  See the grog(1) manual page.\n";
   }
   exit $had_error;

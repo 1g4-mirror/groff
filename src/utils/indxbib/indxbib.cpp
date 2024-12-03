@@ -353,8 +353,8 @@ static void usage(FILE *stream)
   if (stdout == stream)
     fputs("\n"
 "GNU indxbib makes an inverted index of the bibliographic databases\n"
-"in each FILE to speed their access by refer(1), lookbib(1), and\n"
-"lkbib(1).  See the indxbib(1) manual page.\n",
+"in each operand file to speed their access by refer(1), lookbib(1),\n"
+"and lkbib(1).  See the indxbib(1) manual page.\n",
 	  stream);
 }
 
