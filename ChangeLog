@@ -1,5 +1,11 @@
 2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp: Include local "posix.h" header
+	before "nonposix.h" (and both before "lib.h"), aligning better
+	with other groff code.
+
+2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp: Include system library
 	headers before local ones.  Include local "posix.h" header
 	before "nonposix.h", aligning better with other groff code.
