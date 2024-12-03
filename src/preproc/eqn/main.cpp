@@ -322,6 +322,12 @@ void usage(FILE *stream)
     "usage: %s {-v | --version}\n"
     "usage: %s --help\n",
     program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"GNU eqn is a filter that translates expressions in its own language,\n"
+"embedded in roff(7) input, into mathematical notation typeset by\n"
+"GNU troff(1).  See the eqn(1) manual page.\n",
+	  stream);
 }
 
 int main(int argc, char **argv)
