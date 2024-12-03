@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <locale.h> // setlocale()
 #include <stdio.h> // EOF, FILE, clearerr(), fclose(), fflush(),
 		   // fileno(), fopen(), fprintf(), fseek(), getc(),
-		   // pclose(), popen(), printf(), snprintf(),
+		   // pclose(), popen(), printf(), SEEK_SET, snprintf(),
 		   // sprintf(), setbuf(), stderr, stdin, stdout,
 		   // ungetc()
 #include <stdlib.h> // atoi(), exit(), EXIT_FAILURE, EXIT_SUCCESS,

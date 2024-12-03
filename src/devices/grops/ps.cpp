@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <math.h> // atan2(), sqrt(), tan()
 #include <stdint.h> // uint16_t
 #include <stdio.h> // EOF, FILE, fclose(), fgets(), fileno(), fseek(),
-		   // getc(), setbuf(), stderr, stdout
+		   // getc(), SEEK_SET, setbuf(), stderr, stdout
 #include <stdlib.h> // exit(), EXIT_SUCCESS, putenv(), strtol()
 #include <string.h> // strchr(), strcmp(), strcpy(), strerror(),
 		    // strlen(), strncmp(), strstr(), strtok()

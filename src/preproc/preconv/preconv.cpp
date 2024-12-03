@@ -33,8 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <locale.h> // setlocale()
 #include <stdio.h> // EOF, FILE, fclose(), ferror(), fflush(), fileno(),
 		   // fopen(), fprintf(), fread(), fseek(), ftell(),
-		   // getc(), printf(), putchar(), rewind(), stderr,
-		   // stdin, stdout, ungetc()
+		   // getc(), printf(), putchar(), rewind(), SEEK_SET,
+		   // stderr, stdin, stdout, ungetc()
 #include <stdlib.h> // calloc(), exit(), EXIT_SUCCESS, free(), malloc()
 #include <string.h> // sterror()
 #include <sys/stat.h> // fstat(), stat
