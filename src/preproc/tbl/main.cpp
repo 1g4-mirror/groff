@@ -1641,6 +1641,12 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	 program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"GNU tbl is a filter that translates descriptions of tables embedded\n"
+"in roff(7) input into the language understood by GNU troff(1).  See\n"
+"the tbl(1) manual page.\n",
+	  stream);
 }
 
 int main(int argc, char **argv)
