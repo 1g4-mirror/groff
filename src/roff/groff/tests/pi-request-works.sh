@@ -20,9 +20,24 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
-#echo "checking that 'pi' request works" >&2
+fail=
+
+wail () {
+  echo ...FAILED >&2
+  fail=YES
+}
+
+echo "checking that 'pi' request works" >&2
 output=$(printf '.pi sed s/^/#/\nhello\n' | "$groff" -UZ)
 echo "$output"
 echo "$output" | grep -Eqx '^#t *hello'
+
+echo "checking that parser returns to correct state after 'pi'" >&2
+output=$(printf '.pi cat\n.tm goodbye\n' \
+  | "$groff" -UZ 2>&1 > /dev/null)
+echo $output
+echo $output | grep -Fqx goodbye || wail
+
+test -z "$fail"
 
 # vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:

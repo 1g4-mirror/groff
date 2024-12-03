@@ -1,5 +1,13 @@
 2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #66512.
+
+	* src/roff/groff/tests/pi-request-works.sh:
+	* src/roff/groff/tests/sy-request-works.sh: Add check of `tm`
+	output to standard error stream immediately after request.
+
+2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/xditview/xditview.c (Syntax): Align wording of
 	usage message better with those of other output drivers.
 
