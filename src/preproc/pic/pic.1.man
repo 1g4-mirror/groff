@@ -944,16 +944,14 @@ is valid.
 There is no limit to the depth to which blocks can be nested.
 .
 For example,
+.
 .RS
-.LP
 .EX
 [A: [B: [C: box ]]] with .A.B.C.sw at 1,2
 circle at last [].A.B.C
 .EE
 .RE
 .
-.
-.LP
 is acceptable.
 .
 .
