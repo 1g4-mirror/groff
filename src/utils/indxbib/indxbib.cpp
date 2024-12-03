@@ -246,7 +246,7 @@ int main(int argc, char **argv)
   if (p) {
     p++;
     temp_index_file = new char[p - base_name
-		      + sizeof TEMP_INDEX_TEMPLATE];
+			       + sizeof TEMP_INDEX_TEMPLATE];
     memcpy(temp_index_file, base_name, p - base_name);
     strcpy(temp_index_file + (p - base_name), TEMP_INDEX_TEMPLATE);
   }
@@ -354,7 +354,7 @@ static void usage(FILE *stream)
     fputs("\n"
 "GNU indxbib makes an inverted index of the bibliographic databases\n"
 "in each FILE to speed their access by refer(1), lookbib(1), and\n"
-"lkbib(1). See the indxbib(1) manual page.\n",
+"lkbib(1).  See the indxbib(1) manual page.\n",
 	  stream);
 }
 
