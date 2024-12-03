@@ -50,8 +50,6 @@ both be zero. */
 #include <config.h>
 #endif
 
-#include "lib.h"
-
 #include <assert.h>
 #include <errno.h>
 #include <math.h> // atan2()
@@ -59,10 +57,15 @@ both be zero. */
 
 #include <getopt.h> // getopt_long()
 
+// needed for DIR_SEPS, FOPEN_RB
+#include "posix.h"
+#include "nonposix.h"
+
+#include "lib.h"
+
 #include "errarg.h"
 #include "error.h"
 #include "cset.h"
-#include "nonposix.h"
 
 extern "C" const char *Version_string;
 
