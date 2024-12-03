@@ -190,7 +190,7 @@ The horizontal motion quantum is
 .IR n \~basic
 units.
 .
-Horizontal quantities are rounded to multiples
+Horizontal measurements round to multiples
 .RI of\~ n.
 .
 .
@@ -491,7 +491,7 @@ The vertical motion quantum is
 .IR n \~basic
 units.
 .
-Vertical quantities are rounded to multiples
+Vertical measurements round to multiples
 .RI of\~ n.
 .
 .
