@@ -8499,6 +8499,7 @@ void pipe_output()
       }
       else
 	pipe_command = pc;
+      tok.next();
     }
   }
 }
@@ -8529,6 +8530,7 @@ void system_request()
       delete[] command;
     }
   }
+  tok.next();
 }
 
 void copy_file()
