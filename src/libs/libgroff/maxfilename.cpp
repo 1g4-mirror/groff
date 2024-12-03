@@ -1,4 +1,4 @@
-/* Copyright (C) 1992-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1992-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -20,9 +20,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-/* file_name_max(dir) does the same as pathconf(dir, _PC_NAME_MAX) */
+// needed for _PC_NAME_MAX, pathconf()
+#include "posix.h"
+#include "nonposix.h"
 
 #include "lib.h"
+
+/* file_name_max(dir) does the same as pathconf(dir, _PC_NAME_MAX) */
 
 #ifdef _POSIX_VERSION
 
