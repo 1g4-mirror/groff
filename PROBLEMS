@@ -855,54 +855,10 @@ For Solaris 10, it is necessary to modify the shell-based test scripts
 in place to use a conforming shell.  Here is an example.
 
   $ gsed -i -e '1s@#!/bin/sh@#!/usr/xpg4/bin/sh@' \
-      `find . -name '*.sh' | grep /tests/`
+      `find . -name '*.sh' | egrep '/(examples|tests)/'`
+  $ gsed -i -e '1s@#!/bin/sh@#!/usr/xpg4/bin/sh@' \
+      `find . -name '*.sh.in' | egrep '/(examples|tests)/'`
   $ PATH=/usr/xpg4/bin:$PATH gmake check
-
-Some test failures remain expected on Solaris 10 and/or 11.
-
-1.  FAIL: contrib/hdtbl/examples/test-hdtbl.sh
-
-    /usr/bin/tr on Solaris 10 is non-conforming with the POSIX Issue 4
-    standard.  It furthermore issues anonymous diagnostics, saying only
-    "Bad string".
-
-    Install tr from GNU coreutils in the $PATH.  Edit line 57 of each of
-    contrib/hdtbl/examples/fonts_x.in and
-    contrib/hdtbl/examples/fonts_n.in.  Change "tr" to "gtr".
-    Alternatively, you can use the absolute path to GNU tr's location.
-    Re-run "gmake check" as above.  (Some files will be rebuilt.)
-
-    The tr commands in /usr/xpg4/bin and /usr/xpg6/bin also work, but
-    the documents constructed from the above inputs use groff's `pso`
-    request, which wraps the standard C library `popen()` function,
-    which sanitizes $PATH to avoid privilege escalation, thus making it
-    likely that the non-conforming tr in /usr/bin will be found first.
-
-2.  FAIL: src/roff/groff/tests/initialization_is_quiet.sh
-    FAIL: src/roff/groff/tests/msoquiet_works.sh
-    FAIL: src/roff/groff/tests/soquiet_works.sh
-
-    (The first of these might be SKIPped instead.)
-
-    /usr/xpg4/bin/sh is non-conforming with the POSIX Issue 4 standard,
-    despite its name.  Its "unset" builtin is buggy.  (The /usr/bin/sh
-    in Solaris 11 does not have this problem.)
-
-    These tests use the "unset" shell builtin command to prevent
-    environment variables from confounding test results.
-
-    POSIX says "[u]nsetting a variable ... that was not previously set
-    is not considered an error and will not cause the shell to abort."
-
-    Nevertheless this builtin returns an error exit status in this
-    circumstance.
-
-    $ /usr/xpg4/bin/sh -c 'unset _NON_EXISTENT_XYZ; echo $?'
-    1
-
-    You may disregard these failures, edit the test scripts to append
-    "|| true" to the "unset" commands, or change the scripts to use GNU
-    Bash or some other POSIX-conforming shell as illustrated above.
 
 ----------------------------------------------------------------------
 

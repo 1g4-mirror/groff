@@ -1,5 +1,20 @@
 2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Adapt tests to feeble systems lacking a shell or grep conforming
+	to POSIX Issue 4 (1994).
+
+	* src/roff/groff/tests/msoquiet-request-works.sh:
+	* src/roff/groff/tests/soquiet-request-works.sh:
+	* tmac/tests/an_UR-works.sh: Do it.
+
+	* tmac/tests/an_UR-works.sh: Also cope with versions of
+	pdftotext(1) that transcribe "fi" as a ligature.
+
+	* HACKING:
+	* PROBLEMS: Update advice.
+
+2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/main.cpp (usage): If asked for `--help`,
 	summarize command purpose in message.
 

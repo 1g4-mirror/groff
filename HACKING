@@ -246,8 +246,38 @@ Here are some portability notes on writing automated tests.
     };
     }
 
+* Solaris 10 cksum's output is non-conforming with XPG4.  It uses tabs
+  as field delimiters instead of spaces.
+
 * Solaris 10 tr exits with an error if you try to use a POSIX character
   class (such as "[:cntrl:]") in any locale but "C".
+
+* Solaris 10's /usr/xpg4/bin/sh is non-conforming with XPG4.
+  (Good job, guys!)
+
+  Its "unset" builtin is buggy.  (The /usr/bin/sh in Solaris 11 does not
+  have this problem.)
+
+  We sometimes must use the "unset" shell builtin command to prevent
+  environment variables from confounding test results.
+
+  POSIX says "[u]nsetting a variable ... that was not previously set is
+  not considered an error and will not cause the shell to abort."
+
+  Nevertheless this builtin returns an error exit status in this
+  circumstance.
+
+  $ /usr/xpg4/bin/sh -c 'unset _NON_EXISTENT_XYZ; echo $?'
+  1
+
+  You may want to check for this misbehavior and skip the test if
+  running under an afflicted shell.
+
+  if ! unset VARIABLE_OF_INTEREST
+  then
+      echo "unable to clear environment; skipping" >&2
+      exit 77
+  fi
 
 Updating gnulib
 ---------------
