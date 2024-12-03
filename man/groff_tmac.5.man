@@ -721,9 +721,10 @@ failure is likely if it is not one.
 supplies definitions of the macros
 .BR PS ,
 .BR PE ,
-and
 .BR PF ,
-usable with the
+and
+.BR PY ,
+used with the
 .MR @g@pic @MAN1EXT@
 preprocessor.
 .
