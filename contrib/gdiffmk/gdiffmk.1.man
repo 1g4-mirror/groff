@@ -160,21 +160,15 @@ Default:
 .
 .TP
 .B \-B
-By default,
-the deleted texts marked by the
+Suppress
+.B br
+requests inserted by
 .B \-D
-option end with an added
-.I roff
-break request,
-.BR .br ,
-to ensure that the deletions are marked properly.
+option.
 .
-This is the only way to guarantee that deletions and small
-changes get flagged.
-.
-This option directs the program not to insert these breaks;
-it makes no sense to use it without
-.BR \-D .
+Use with caution;
+such requests are the only way to guarantee that deletions and small
+changes are marked.
 .
 .
 .TP
