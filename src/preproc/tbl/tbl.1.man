@@ -1818,6 +1818,11 @@ especially at first.
 .\" output.  Recast with care.
 .RS
 .P
+.\" More sinning to fit the examples on 1 U.S. letter page.
+.if t \{\
+.  ps 9
+.  vs 11
+.\}
 .EX
 \&.TS
 box center tab(#);
@@ -1833,6 +1838,10 @@ Charisma#sells tomato-based fruit salads to hypercarnivores
 \&.TE
 .EE
 .RE
+.if t \{\
+.  ps
+.  vs
+.\}
 .
 .
 .P
@@ -1861,6 +1870,11 @@ description.
 .
 .RS
 .P
+.\" More sinning to fit the examples on 1 U.S. letter page.
+.if t \{\
+.  ps 9
+.  vs 11
+.\}
 .EX
 \&.TS
 center tab(;);
@@ -1882,6 +1896,10 @@ Total;\[rs][ti]24.4
 \&.TE
 .EE
 .RE
+.if t \{\
+.  ps
+.  vs
+.\}
 .
 .
 .RS
