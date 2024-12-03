@@ -824,6 +824,8 @@ It has no effect if the equation is part of a
 picture.
 .
 .
+.br
+.ne 4v
 .TP
 .BI special\~ "troff-macro e"
 Construct an object by calling
@@ -2217,6 +2219,8 @@ Independently,
 we can define a macro \[lq]frac\[rq] for setting fractions.
 .
 .
+.br
+.ne 5v
 .RS
 .P
 .EX
