@@ -20,15 +20,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-/* path_name_max(dir) does the same as pathconf(dir, _PC_PATH_MAX) */
-
-#include <sys/types.h>
-
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif /* HAVE_UNISTD_H */
-
 #include "lib.h"
+
+// needed for pathconf()
+#include "posix.h"
+#include "nonposix.h"
+
+/* path_name_max(dir) does the same as pathconf(dir, _PC_PATH_MAX) */
 
 #ifdef _POSIX_VERSION
 

@@ -1,3 +1,18 @@
+2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Rationalize and annotate header file inclusions.
+
+	* src/devices/grohtml/output.cpp:
+	* src/libs/libgroff/color.cpp:
+	* src/libs/libgroff/maxfilename.cpp:
+	* src/libs/libgroff/maxpathname.cpp:
+	* src/libs/libgroff/tmpfile.cpp:
+	* src/preproc/html/pre-html.cpp:
+	* src/preproc/html/pushback.cpp:
+	* src/roff/groff/pipeline.c:
+	* src/utils/indxbib/indxbib.cpp:
+	* src/utils/indxbib/signal.c: Do it.
+
 2024-12-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/grn/hdb.cpp: Include "<stdlib.h>" header file to

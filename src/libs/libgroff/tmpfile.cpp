@@ -21,10 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <errno.h>
-#include <stdlib.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h> // unlink()
-#endif
+#include <stdio.h> // FILE, fdopen()
+#include <stdlib.h> // getenv(), mkstemp()
+#include <string.h> // strcat(), strchr(), strcpy(), strerror(),
+		    // strlen()
+
+// needed for unlink()
+#include "posix.h"
+#include "nonposix.h"
 
 #include "lib.h"
 

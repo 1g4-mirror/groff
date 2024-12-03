@@ -29,16 +29,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <time.h>
-
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
+#include <stdio.h> // EOF, FILE, fflush(), fputc(), fputs(), fwrite(),
+		   // getc(), putc(), sprintf()
+#include <string.h> // strlen(), strncpy()
 
 #include "driver.h"
 #include "stringclass.h"
 #include "cset.h"
-
 #include "html.h"
 
 #if !defined(TRUE)

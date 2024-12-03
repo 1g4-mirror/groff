@@ -24,16 +24,22 @@
 #endif
 
 #include <assert.h>
-#include <ctype.h>
 #include <errno.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <string.h> // strerror(), strsignal()
-#ifdef HAVE_UNISTD_H
-#include <unistd.h> // unlink()
-#endif
+#include <stdarg.h> // va_list, va_end(), va_start(), vsnprintf()
+#include <stdio.h> // EOF, FILE, fclose(), feof(), fflush(), fopen(),
+		   // fprintf(), fputc(), fread(), getc(), printf(),
+		   // stderr, stdin, stdout, ungetc()
+#include <stdlib.h> // atexit(), atoi(), exit(), free(), getenv(),
+		    // malloc(), system()
+#include <string.h> // memcpy(), strchr(), strcmp(), strcpy(),
+		    // strerror(), strlen(), strncmp(), strsignal()
 
 #include <getopt.h> // getopt_long()
+
+// needed for close(), creat(), dup(), dup2(), execvp(), fork(),
+// getpid(), mkdir(), open(), pipe(), unlink(), wait(), write()
+#include "posix.h"
+#include "nonposix.h"
 
 #define PREHTMLC
 
@@ -42,18 +48,11 @@
 #include "errarg.h"
 #include "error.h"
 #include "stringclass.h"
-#include "posix.h"
 #include "defs.h"
 #include "searchpath.h"
 #include "paper.h"
 #include "device.h"
 #include "font.h"
-
-#include <errno.h>
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-# include <unistd.h>
-#endif
 
 #ifdef _POSIX_VERSION
 # include <sys/wait.h>
@@ -61,10 +60,6 @@
 #else /* not _POSIX_VERSION */
 # define PID_T int
 #endif /* not _POSIX_VERSION */
-
-#include <stdarg.h>
-
-#include "nonposix.h"
 
 #if 0
 # define DEBUGGING

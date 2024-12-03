@@ -20,23 +20,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <signal.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <errno.h>
+#include <stdio.h> // fflush(), fprintf(), printf(), putchar(), stderr
+#include <stdlib.h> // exit(), free(), malloc()
+#include <string.h> // strcpy(), strlen()
 
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
+// needed for close(), dup(), open(), read()
+#include "posix.h"
+#include "nonposix.h"
 
 #include "lib.h"
 
 #include "errarg.h"
 #include "error.h"
 #include "stringclass.h"
-#include "posix.h"
-#include "nonposix.h"
 
 #include "pushback.h"
 #include "pre-html.h"

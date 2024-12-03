@@ -28,17 +28,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // stderr, stdin, stdout, ungetc()
 #include <string.h> // strcat(), strchr(), strcmp(), strcpy(),
 		    // strerror(), strlen(), strrchr()
-#ifdef HAVE_UNISTD_H
-#include <unistd.h> // unlink()
-#endif
 
 #include <getopt.h> // getopt_long()
 
-#include "lib.h"
-
-// needed for getcwd()
+// needed for getcwd(), unlink()
 #include "posix.h"
 #include "nonposix.h"
+
+#include "lib.h"
 
 #include "errarg.h"
 #include "error.h"

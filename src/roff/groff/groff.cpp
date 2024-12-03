@@ -26,9 +26,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h>
 #include <stdio.h> // EOF, FILE, fflush(), setbuf(), stderr, stdout
 #include <stdlib.h> // exit(), EXIT_SUCCESS, free(), getenv(), putenv()
-#include <string.h> // strerror()
+#include <string.h> // strerror(), strsignal()
 
 #include <getopt.h> // getopt_long()
+//
+// TODO: operating system services proper (cf. the standard C/C++
+// runtime and libraries) should be abstracted through posix.h/
+// nonposix.h (if gnulib doesn't handle it for us).
+#include <sys/types.h> // pid_t
+#include <signal.h> // kill()
+
+// needed for close(), dup(), execvp(), _exit(), fork(), pipe(), wait()
+#include "posix.h"
+#include "nonposix.h"
 
 #include "lib.h"
 
@@ -39,7 +49,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "font.h"
 #include "device.h"
 #include "pipeline.h"
-#include "nonposix.h"
 #include "relocate.h"
 #include "defs.h"
 

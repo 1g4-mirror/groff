@@ -21,17 +21,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <errno.h>
-#include <fcntl.h> // open()
-#include <signal.h> // kill(), SIGINT, signal()
 #include <stdbool.h>
 #include <stdio.h> // sprintf()
 #include <string.h> // strerror(), strsignal()
-#include <sys/types.h> // kill(), open(), wait()
-#include <sys/stat.h> // open()
-#ifdef HAVE_UNISTD_H
-#include <unistd.h> // dup(), pipe(), STDIN_FILENO, STDOUT_FILENO,
-		    // unlink()
-#endif
+
+#include <signal.h> // kill(), SIGINT, signal()
+
+// needed for dup(), open(), pipe(), STDIN_FILENO, STDOUT_FILENO,
+// unlink()
+#include "posix.h"
+#include "nonposix.h"
 
 #ifdef _POSIX_VERSION
 
@@ -96,13 +95,6 @@ static void sys_fatal(const char *);
 #if defined(__MSDOS__) \
     || (defined(_WIN32) && !defined(_UWIN) && !defined(__CYGWIN__)) \
     || defined(__EMX__)
-
-#include <process.h>
-#include <fcntl.h>
-#include <string.h>
-#include <stdlib.h>
-
-#include "nonposix.h"
 
 static const char *sh = "sh";
 static const char *cmd = "cmd";
