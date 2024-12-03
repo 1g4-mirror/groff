@@ -474,21 +474,21 @@ expressions enclosed by previously defined delimiters
 When using
 .I @g@grn
 along with other preprocessors,
-it is best to run
+run
 .MR @g@tbl @MAN1EXT@
 before
 .IR @g@grn ,
 .MR @g@pic @MAN1EXT@ ,
 and/or
-.I ideal \" no GNU version yet
-to avoid overworking
-.IR @g@tbl .
+.IR ideal . \" no GNU version yet
 .
+If
 .MR @g@eqn @MAN1EXT@
-should always be run last.
+is needed,
+run it as the last preprocessor.
 .
 .MR groff @MAN1EXT@
-will automatically run preprocessors in the correct order.
+automatically runs preprocessors in the correct order.
 .
 .
 .PP
