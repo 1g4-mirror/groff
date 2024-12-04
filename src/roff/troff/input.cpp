@@ -6415,7 +6415,9 @@ static bool is_conditional_expression_true()
   }
   else if (tok.is_space())
     result = false;
-  else if (tok.is_usable_as_delimiter()) {
+  // Treat `|` specially for AT&T troff compatibility, where it _isn't_
+  // a delimiter in this context; see Savannah #66526.
+  else if (tok.is_usable_as_delimiter() && (tok.ch() != '|')) {
     // Perform (formatted) output comparison.
     token delim = tok;
     int delim_level = input_stack::get_level();

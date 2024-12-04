@@ -1,5 +1,27 @@
 2024-12-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (is_conditional_expression_true):
+	Stop treating `|` as a delimiter, but instead as beginning a
+	numeric expression, _only_ as the predicate of a control
+	structure request.  Improves compatibility with AT&T troff,
+	including DWB 3.3 and Heirloom Doctools.  Problem appears to
+	date back to groff 1.02.
+
+	GNU troff has long thrown diagnostics in this context, of
+	increasing detail in recent years.  For example:
+
+	troff:mm/0.MT:271: warning: missing closing delimiter in output
+	  comparison operator; expected character '|', got a newline
+
+	However, this was easily overlooked in our automated tests
+	because it didn't break formatting, except on Solaris 10 (or if
+	you ran the post-1.23.0 test "contrib/mm/tests/
+	memoranda-format-correctly.sh" with an older groff release).
+
+	Fixes <https://savannah.gnu.org/bugs/?66526>.
+
+2024-12-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(do_if_request): Rename this...
 	(is_conditional_expression_true): ...to this.
