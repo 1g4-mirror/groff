@@ -1,3 +1,10 @@
+2024-12-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(do_if_request): Rename this...
+	(is_conditional_expression_true): ...to this.
+	(if_else_request, if_request, while_request): Update call sites.
+
 2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Adapt tests to feeble systems lacking a shell or grep conforming

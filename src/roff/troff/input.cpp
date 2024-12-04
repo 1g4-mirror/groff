@@ -6317,7 +6317,7 @@ static void nop_request()
 
 static std::stack<bool> if_else_stack;
 
-static bool do_if_request()
+static bool is_conditional_expression_true()
 {
   bool want_test_sense_inverted = false;
   while (tok.is_space())
@@ -6483,7 +6483,7 @@ static void if_else_request()
     skip_line();
     return;
   }
-  if_else_stack.push(do_if_request());
+  if_else_stack.push(is_conditional_expression_true());
 }
 
 static void if_request()
@@ -6493,7 +6493,7 @@ static void if_request()
     skip_line();
     return;
   }
-  do_if_request();
+  (void) is_conditional_expression_true();
 }
 
 static void else_request()
@@ -6561,7 +6561,7 @@ static void while_request()
     for (;;) {
       input_stack::push(new string_iterator(mac, "while loop"));
       tok.next();
-      if (!do_if_request()) {
+      if (!is_conditional_expression_true()) {
 	while (input_stack::get(0 /* nullptr */) != EOF)
 	  ;
 	break;
