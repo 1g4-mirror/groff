@@ -1,5 +1,21 @@
 2024-12-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[nroff]: Work around malicious non-compliance with POSIX.
+
+	* src/roff/nroff/nroff.sh: We can use POSIX shell parameter
+	substitution only if the shell supports it, but it's a hard
+	feature to test for within a shell script because non-conforming
+	shells reject it as bad syntax, aborting interpretation of the
+	script.  Use the error return status of `unset` applied to a
+	nonexistent variable as a proxy.  If the shell is thus adjudged
+	as lousy, use a cruder method of obtaining the basename of the
+	script, and refuse to process option clusters, because we need
+	parameter substitution to handle them.
+	* src/roff/nroff/tests/verbose_option_works.sh: Skip test if
+	the system lacks a grep conforming to POSIX Issue 4 (1994).
+
+2024-12-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (is_conditional_expression_true):
 	Stop treating `|` as a delimiter, but instead as beginning a
 	numeric expression, _only_ as the predicate of a control

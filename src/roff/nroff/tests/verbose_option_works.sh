@@ -18,6 +18,12 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
+if ! echo foobar | grep -qx . >/dev/null 2>&1
+then
+    echo "$0: grep command does not support -qx options; skipping" >&2
+    exit 77 # skip
+fi
+
 fail=
 
 wail () {

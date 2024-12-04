@@ -21,7 +21,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-prog=${0##*/}
+# Screen for shells non-conforming with POSIX Issue 4 (1994).
+badshell=yes
+unset groff_ku7kiodu || badshell=
+
+if [ -n "$badshell" ]
+then
+  prog=`basename $0`
+else
+  prog=${0##*/}
+fi
 
 T=
 Topt=
@@ -55,6 +64,14 @@ do
         break
         ;;
       -[abCEikpRStUvzZ]*)
+        if test -n "$badshell"
+        then
+          # POSIX doesn't actually require $SHELL, but fortunately at
+          # least one craptastic non-conforming shell offers it.
+          echo "$prog: option cluster '$thisarg' not supported with" \
+            "POSIX non-conforming shell '$SHELL'" >&2
+          exit 2
+        fi
         remainder=${thisarg#-?}
         thisarg=${thisarg%%$remainder}
         newargs="$newargs $thisarg"
