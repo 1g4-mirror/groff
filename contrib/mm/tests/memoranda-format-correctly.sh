@@ -67,9 +67,15 @@ for t in 0 1 2 3 4 5 custom
 do
     echo "checking formatting of MT type '$t'" >&2
     "$groff" -ww -m m -d mT=$t -T ascii -P -cbou "$input"
-    expected=$(cksum "$artifacts_dir"/memorandum.$t | cut -d' ' -f1-2)
+    # We _would_ use "cut -d' ' -f1-2" here, but Solaris 10 cksum writes
+    # tabs between fields instead of spaces, nonconformantly with POSIX
+    # Issue 4 (1994); see XCU p. 195, PDF p. 217.  Quality!  So fire up
+    # big old AWK instead.  We're sure to be running on "enterprise"
+    # hardware with that fancy proprietary OS.
+    expected=$(cksum "$artifacts_dir"/memorandum.$t \
+        | awk '{ print $1, $2 }')
     actual=$("$groff" -mm -dmT=$t -Tascii -P-cbou "$input" | cksum \
-        | cut -d' ' -f1-2)
+        | awk '{ print $1, $2 }')
     test "$actual" = "$expected" || wail
 done
 

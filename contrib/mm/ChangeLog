@@ -1,3 +1,9 @@
+2024-12-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tests/letters-format-correctly.sh:
+	* tests/memoranda-format-correctly.sh: Adapt tests to feeble
+	systems lacking a cksum conforming to POSIX Issue 4 (1994).
+
 2024-11-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* Makefile.sim: Rename Makefile macro `DEVICE` to
