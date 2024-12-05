@@ -277,6 +277,58 @@ is also provided to accommodate
 documents that expect it to always be available.
 .
 .
+.P
+.I \%grohtml
+furthermore supports a naming scheme for East Asian typefaces
+shared with
+.MR grops @MAN1EXT@
+and
+.MR grotty @MAN1EXT@ .
+.
+.
+.RS
+.TP
+.B CSH
+Simplified Chinese,
+Hei style
+.
+.TQ
+.B CSS
+Simplified Chinese,
+Song style
+.
+.TQ
+.B CTH
+Traditional Chinese,
+Hei style
+.
+.TQ
+.B CTS
+Traditional Chinese,
+Song style
+.
+.TQ
+.B JPG
+Japanese,
+Gothic style
+.
+.TQ
+.B JPM
+Japanese,
+Mincho style
+.
+.TQ
+.B KOG
+Korean,
+Gothic style
+.
+.TQ
+.B KOM
+Korean,
+Mincho style
+.RE
+.
+.
 .\" ====================================================================
 .SS "Font description files"
 .\" ====================================================================

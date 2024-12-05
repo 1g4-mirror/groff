@@ -689,9 +689,9 @@ the font.
 .
 .
 .P
-The second section contains one or two subsections,
-which can appear in either order;
-either starts the second section.
+The second section contains one to three subsections,
+which can appear in any order,
+and any of which starts the second section.
 .
 Each starts with a directive on a line by itself.
 .
@@ -1005,6 +1005,25 @@ identifying
 as another name for the glyph mentioned in the preceding line.
 .
 Such aliases can be chained.
+.
+.
+.P
+A
+.B \%charset\-range
+subsection works like the
+.B charset
+directive except that the glyph descriptions use a
+.I name
+of the form
+.BI u AAAA ..u FFFF\c
+,
+where
+.I AAAA
+and
+.I FFFF
+are hexadecimal digit sequences;
+the specified metrics then apply identically
+to all glyphs in the designated range.
 .
 .
 .P

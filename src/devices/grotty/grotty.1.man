@@ -396,6 +396,58 @@ mode,
 attempts to set or change the font family or type size are ignored.
 .
 .
+.P
+.I grotty
+furthermore supports a naming scheme for East Asian typefaces
+shared with
+.MR grohtml @MAN1EXT@
+and
+.MR grops @MAN1EXT@ .
+.
+.
+.RS
+.TP
+.B CSH
+Simplified Chinese,
+Hei style
+.
+.TQ
+.B CSS
+Simplified Chinese,
+Song style
+.
+.TQ
+.B CTH
+Traditional Chinese,
+Hei style
+.
+.TQ
+.B CTS
+Traditional Chinese,
+Song style
+.
+.TQ
+.B JPG
+Japanese,
+Gothic style
+.
+.TQ
+.B JPM
+Japanese,
+Mincho style
+.
+.TQ
+.B KOG
+Korean,
+Gothic style
+.
+.TQ
+.B KOM
+Korean,
+Mincho style
+.RE
+.
+.
 .
 .\" ====================================================================
 .SH Options

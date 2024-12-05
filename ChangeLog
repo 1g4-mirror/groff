@@ -1,5 +1,17 @@
 2024-12-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Document new CJK/UTF-16 font support features.
+
+	* doc/groff.texi.in (Font Description File Format):
+	* man/groff_font.5.man (Font description file format):
+	* src/devices/grohtml/grohtml.1.man (Typefaces):
+	* src/devices/grops/grops.1.man (Typefaces):
+	* src/devices/grotty/grotty.1.man (Typefaces): Do it.
+
+	* NEWS: Add item.
+
+2024-12-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grolj4, indxbib]: Improve diagnostic messages.
 
 	* src/devices/grolj4/lj4.cpp (main): When reporting out-of-range

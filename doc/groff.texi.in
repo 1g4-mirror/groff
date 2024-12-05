@@ -19311,9 +19311,9 @@ Other directives in this section are ignored by GNU
 but may be used by postprocessors to obtain further information about
 the font.
 
-The second section contains one or two subsections,
-which can appear in either order;
-either starts the second section.
+The second section contains one to three subsections,
+which can appear in any order,
+and any of which starts the second section.
 Each starts with a directive on a line by itself.
 A
 @code{charset}
@@ -19473,6 +19473,22 @@ A line in the @code{charset} section can also have the form
 @noindent
 identifying @var{name} as another name for the glyph mentioned in the
 preceding line.  Such aliases can be chained.
+
+@kindex charset-range
+A
+@code{charset-range}
+subsection works like the
+@code{charset}
+directive except that the glyph descriptions use a
+@var{name} of the form
+@code{u}@var{AAAA}@code{..u}@var{FFFF},
+where
+@var{AAAA}
+and
+@var{FFFF}
+are hexadecimal digit sequences;
+the specified metrics then apply identically
+to all glyphs in the designated range.
 
 @kindex kernpairs
 The directive @code{kernpairs} starts a list of kerning adjustments to

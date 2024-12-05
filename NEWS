@@ -568,6 +568,11 @@ Macro packages
 Output drivers
 --------------
 
+*  grops(1), the PostScript output driver, now supports fonts encoded
+   using UTF-16.  Indicate the encoding by including the string
+   "-UTF16-" within the font's name as specified by the "internalname"
+   directive in its font description file.  Thanks to TANAKA Takuji.
+
 *  The PostScript output driver grops(1) no longer accepts spaces as
    field separators in its "download" file; this is so that spaces can
    appear in font file names, and to better align the syntax of this
@@ -594,6 +599,12 @@ Output drivers
    more image file formats, including PNG, PAM, and GIF can be embedded.
    See also the item regarding `PDFPIC` above.  Thanks to Deri James.
 
+*  grohtml(1), the (X)HTML output driver, supports a new `-k` command-
+   line option that takes a mandatory argument, either "ascii" or
+   "utf-8", which it recognizes case-insensitively.  This feature
+   configures representation of character entities in the output.  Based
+   on work by TANAKA Takuji.
+
 *  gxditview(1), the X11 output driver and document previewer, now
    accepts the option `-v` as a synonym of `--version` (and `-version`).
    This change aligns it with other groff output drivers, and makes it
@@ -601,6 +612,34 @@ Output drivers
 
 Miscellaneous
 -------------
+
+*  Font description files now support a variant of the "charset"
+   directive: "charset-range" works like the existing "charset"
+   directive except that the glyph descriptions use a `name` of the form
+   "uFFFF..uFFFF" (where "FFFF" is a hexadecimal digit sequence), and
+   apply the metrics identically to all glyphs in the designated range.
+   Thanks to TANAKA Takuji.
+
+*  groff now ships font description files usable with the "ps", "html",
+   "xhtml", and "utf8" output devices to support East Asian fonts.
+   (Caveat: with few exceptions, groff does not ship font files
+   themselves.)  These are intended as abstractions of faces to permit
+   consistent naming while permitting customization, just as with the 12
+   text typefaces supported across output devices for Latin scripts in
+   groff (three families of four styles each).  These CJK font
+   descriptions are not organized into groff font families, but are
+   similarly arranged.
+
+      CSH: Simplified Chinese, Hei style
+      CSS: Simplified Chinese, Song style
+      CTH: Traditional Chinese, Hei style
+      CTS: Traditional Chinese, Song style
+      JPG: Japanese, Gothic style
+      JPM: Japanese, Mincho style
+      KOG: Korean, Gothic style
+      KOM: Korean, Mincho style
+
+   Thanks to TANAKA Takuji.
 
 *  The commands addftinfo, grodvi, post-grohtml, grolbp, grolj4, grops,
    grotty, eqn, pre-grohtml, gxditview, pic, preconv, refer, soelim,
