@@ -148,11 +148,10 @@ and the encodings used by documents employing a macro file can vary.
 .SH "Macro packages"
 .\" ====================================================================
 .
-Macro packages come in two varieties;
-those that assume responsibility for page layout and other critical
-functions
-(\[lq]major\[rq] or \[lq]full-service\[rq])
-and those that do not
+Some macro packages assume responsibility for page layout
+and other critical functions
+(\[lq]major\[rq] or \[lq]full-service\[rq]);
+others do not
 (\[lq]supplemental\[rq] or \[lq]auxiliary\[rq]).
 .
 GNU
@@ -176,9 +175,11 @@ strings,
 and diversions)
 should be paid.
 .
-Name space management was a significant challenge in AT&T
-.IR troff ;
-.IR groff 's
+Name space management challenged AT&T
+.I troff \" AT&T
+users;
+GNU
+.IR troff 's \" GNU
 support for arbitrarily long identifiers affords few excuses for name
 collisions,
 apart from attempts at compatibility with the demands of historical
@@ -239,7 +240,7 @@ reloads each macro package as necessary.
 .
 .
 .\" ====================================================================
-.SS "Full-service packages"
+.SS "General full-service packages"
 .\" ====================================================================
 .
 The following packages each support composition of documents of any
@@ -287,8 +288,9 @@ see
 .\" ====================================================================
 .
 For Western languages,
-the localization file sets the hyphenation mode and loads hyphenation
-patterns and exceptions.
+an auxiliary package for localization
+sets the hyphenation mode and loads hyphenation patterns
+and exceptions.
 .
 Localization files can also adjust the date format and provide
 translations of strings used by some of the full-service macro packages;
@@ -517,7 +519,7 @@ see
 .
 .
 .\" ====================================================================
-.SS "Auxiliary packages"
+.SS "General auxiliary packages"
 .\" ====================================================================
 .
 The macro packages in this section are not intended for stand-alone
@@ -771,6 +773,8 @@ is loaded at startup by the
 file.
 .
 .
+.br
+.ne 3v
 .IP
 Its syntax is as follows.
 .RS
@@ -1317,14 +1321,15 @@ see
 .SS "Drafting macros"
 .\" ====================================================================
 .
-Temporarily disabling the escape mechanism can ease macro composition;
-bracket a macro definition with
+One approach temporarily disables escape sequences
+by bracketing a macro definition with
 .B eo
 and
 .B ec
 requests.
 .
 .
+.IP
 .RS
 .ds @1 \[rs]f[I]\[rs]$0\[rs]f[]\"
 .ds @2 arguments:\"
@@ -1332,8 +1337,7 @@ requests.
 \&.eo
 \&.ds midpart was called with the following
 \&.de print_args
-\&\*[@1]\~\[rs]*[midpart]\~\[rs]n[.$]\~\*[@2]
-\&\[rs]$*
+\&\*[@1]\~\[rs]*[midpart]\~\[rs]n[.$]\~\*[@2] \[rs]$*
 \&..
 \&.ec
 .EE
@@ -1343,7 +1347,7 @@ requests.
 .
 .
 .P
-This drafting procedure has limitations;
+The above procedure has limitations;
 it is unsuitable for a macro that requires certain interpolations at the
 time it is defined,
 or for indirect definitions of identifiers.
@@ -1394,11 +1398,14 @@ Write a comment macro that works in both draft and non-draft modes;
 since the escape character is disabled in draft mode,
 trouble might occur when comment escape sequences are used.
 .
+.\" XXX: We need the vees.
+.ig
 For example,
 the following macro ignores its arguments,
 so calling it is a harmless
 (if somewhat busy)
 null operation.
+..
 .
 .RS
 .IP

@@ -1933,10 +1933,15 @@ documents that require a series of such primitive operations to be
 performed.  These common tasks are grouped into @slanted{macros}, which
 are then collected into a @slanted{macro package}.
 
-Macro packages come in two varieties:@: ``major'' or ``full-service''
-ones that manage page layout with traps, and ``minor'' or ``auxiliary''
-ones that do not, but fulfill narrower purposes.  Find a list in
-@cite{groff_tmac@r{(5)}}.
+@c BEGIN Keep roughly parallel with groff_tmac(5) section "Macro
+@c packages".
+Some macro packages assume responsibility for page layout
+and other critical functions
+(``major'' or ``full-service'');
+others do not
+(``supplemental'' or ``auxiliary'').
+@c END Keep roughly parallel with groff_tmac(5) section "Macro
+@c packages".
 
 We present several capabilities of full-service macro packages below.
 Each package employs its own macro names to exercise them.  For details,
