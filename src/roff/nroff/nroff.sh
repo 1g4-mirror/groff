@@ -69,7 +69,7 @@ do
           # POSIX doesn't actually require $SHELL, but fortunately at
           # least one craptastic non-conforming shell offers it.
           echo "$prog: option cluster '$thisarg' not supported with" \
-            "POSIX non-conforming shell '$SHELL'" >&2
+            "POSIX-non-conforming shell '$SHELL'" >&2
           exit 2
         fi
         remainder=${thisarg#-?}
