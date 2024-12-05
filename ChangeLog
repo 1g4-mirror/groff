@@ -1,3 +1,15 @@
+2024-12-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grolj4, indxbib]: Improve diagnostic messages.
+
+	* src/devices/grolj4/lj4.cpp (main): When reporting out-of-range
+	option arguments, include the erroneous user-supplied argument.
+	Use interval notation correctly.
+	* src/utils/indxbib/indxbib.cpp (check_integer_arg): Use
+	interval notation correctly.  Annotate why we can't report the
+	erroneous user-supplied argument.
+	(read_common_words_file): Fix typo in diagnostic message.
+
 2024-12-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[nroff]: Work around malicious non-compliance with POSIX.

@@ -678,8 +678,8 @@ int main(int argc, char **argv)
 	  error("argument to command-line option 'c' option must be a"
 		" positive integer");
 	else if (n <= 0 || n > 32767)
-	  error("argument to command-line option 'c' out of range"
-		" [0, 32767)");
+	  error("argument to command-line option 'c' must be in range"
+		" (0, 32767]; got '%1'", optarg);
 	else
 	  ncopies = unsigned(n);
 	break;
@@ -692,8 +692,8 @@ int main(int argc, char **argv)
 	  error("argument to command-line option 'w' must be a"
 		" non-negative integer");
 	else if (n < 0 || n > INT_MAX)
-	  error("argument to command-line option 'w' out of range"
-		" (0, %1)", INT_MAX);
+	  error("argument to command-line option 'w' must be in range"
+		" [0, %1]; got '%2'", INT_MAX, optarg);
 	else
 	  line_width_factor = int(n);
 	break;

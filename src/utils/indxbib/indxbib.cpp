@@ -367,8 +367,10 @@ static void check_integer_arg(char opt, const char *arg, int min,
   if (ptr == arg)
     fatal("command-line '%1' option argument is not an integer", opt);
   if ((ERANGE == errno) || (n < min) || (n > INT_MAX))
-    fatal("command-line '%1' option argument must be between %2 and %3",
-	  arg, min, INT_MAX);
+    // We'd report the invalid argument, "errarg.h" doesn't support
+    // formatting more than 3 args.
+    fatal("command-line '%1' option argument must be in range [%2, %3]",
+	  opt, min, INT_MAX);
   if (*ptr != '\0')
     fatal("invalid integer in argument to command-line option '%1'",
 	  opt);
@@ -412,7 +414,7 @@ static void read_common_words_file()
   errno = 0;
   FILE *fp = fopen(common_words_file, "r");
   if (!fp)
-    fatal("cannott open '%1': %2", common_words_file, strerror(errno));
+    fatal("cannot open '%1': %2", common_words_file, strerror(errno));
   common_words_table = new word_list * [hash_table_size];
   for (int i = 0; i < hash_table_size; i++)
     common_words_table[i] = 0;
