@@ -795,6 +795,8 @@ rendered with
 produces the following output.
 .
 .
+.br
+.ne 5v
 .P
 .RS
 .EX

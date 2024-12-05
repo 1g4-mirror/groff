@@ -1050,6 +1050,8 @@ basic units which are in turn converted to PostScript units with the
 procedure.
 .
 .
+.br
+.ne 3v
 .P
 .I grops
 wraps user-specified PostScript code into a dictionary,
@@ -1238,8 +1240,7 @@ For example,
 is not able to display a proper
 .B \[rs][em]
 character because the standard X11 fonts do not provide it;
-this problem can be overcome by executing the following
-request
+this problem can be overcome with the following request.
 .
 .
 .IP
@@ -1272,6 +1273,8 @@ is previewed with
 .RE
 .
 .
+.br
+.ne 3v
 .P
 If a PostScript procedure
 .B BPhook
@@ -1287,11 +1290,9 @@ it is executed at the beginning of every page
 For example,
 to underlay the page contents with the word \[lq]DRAFT\[rq] in light
 gray,
-you might use
-.
+you might use the following.
 .
 .RS
-.P
 .EX
 \&.de XX
 ps: def
@@ -1313,7 +1314,7 @@ Or,
 to cause lines and polygons to be drawn with square linecaps and mitered
 linejoins instead of the round linecaps and linejoins normally used by
 .IR grops ,
-use
+use the following.
 .
 .RS
 .EX
@@ -1325,11 +1326,11 @@ ps: def
 .EE
 .RE
 .
-(square linecaps,
+(Square linecaps,
 as opposed to butt linecaps
 .RB (\[lq] "0 setlinecap" \[rq]),
 give true corners in boxed tables even though the lines are drawn
-unconnected).
+unconnected.)
 .
 .
 .\" ====================================================================
@@ -1370,9 +1371,9 @@ to
 .SS "TrueType and other font formats"
 .\" ====================================================================
 .
-TrueType fonts can be used with
-.I grops
-if converted first to Type\~42 format,
+To use TrueType fonts with
+.IR grops ,
+convert them first to Type\~42 format,
 a PostScript wrapper equivalent to the PFA format described in
 .MR pfbtops @MAN1EXT@ .
 .
@@ -1383,17 +1384,13 @@ Ghostscript\[em]see
 .
 .
 .P
-One approach is to use
 .UR https://fontforge.org/
 FontForge
-.UE ,
-a font editor that can convert most outline font formats.
+.UE
+converts most outline font formats.
 .
-Here's an example of using the Roboto Slab Serif font with
+Here's how we'd set up Roboto Slab Serif for use with
 .IR groff .
-.
-Several variables are used so that you can more easily adapt it into
-your own script.
 .
 .
 .RS 4
@@ -1421,9 +1418,9 @@ printf \[dq]$BASE\[rs]t$PFA\[rs]n\[dq] >> \[dq]$DIR/devps/download\[dq]
 .I fontforge
 and
 .I afmtodit
-may generate warnings depending on the attributes of the font.
+may produce warnings depending on font file attributes.
 .
-The test procedure is simple.
+Test the font as follows.
 .
 .
 .RS 4
@@ -1870,8 +1867,7 @@ PostScript printers do not natively support.
 creates temporary files using the template
 .RI \[lq] grops XXXXXX\[rq];
 see
-.MR groff @MAN1EXT@
-for details on their storage location.
+.MR groff @MAN1EXT@ .
 .
 .
 .\" ====================================================================

@@ -98,7 +98,7 @@ output driver for HTML
 .IR font-directory ]
 .RB [ \-j
 .IR output-stem ]
-.RB [ \-k
+.RB [ \-k\~\c
 .IR encoding ]
 .RB [ \-s
 .IR base-point-size ]
@@ -543,6 +543,8 @@ named
 .IR output-stem\- n .html .
 .
 .
+.br
+.ne 4v
 .TP
 .BI \-k \~encoding
 Select the character encoding used in the generated document,
