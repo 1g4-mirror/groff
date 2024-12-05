@@ -486,7 +486,7 @@ my $term="\n";
 my @bl;
 my %seac;
 my $thisfnt;
-my $parcln=qr/\[[^\]]*?\]|(?<term>.)((?!\g{term}).)*\g{term}/;
+my $parcln=qr/\[[^\]]*?\]|(.)((?!\1).)*\1/;
 my $parclntyp=qr/(?:[\d\w]|\([+-]?[\S]{2}|$parcln)/;
 
 if (!GetOptions('F=s' => \$fd, 'I=s' => \@idirs, 'l' => \$frot,
@@ -1697,10 +1697,16 @@ sub do_x
 		    else
 		    {
 			my $dim=`( identify $FDnm 2>/dev/null || file $FDnm )`;
-			$dim=~m/(?:(?:[,=A-Z]|JP2) (?<w>\d+)\s*x\s*(?<h>\d+))|(?:height=(?<h>\d+).+width=(?<w>\d+))/;
-
-			$info->{ImageWidth}=$+{w};
-			$info->{ImageHeight}=$+{h};
+			if ($dim=~m/(?:[,=A-Z]|JP2) (\d+)\s*x\s*(\d+)/)
+			{
+			    $info->{ImageWidth}=$1;
+			    $info->{ImageHeight}=$2;
+			}
+			elsif ($dim=~m/height=(\d+).+width=(\d+)/)
+			{
+			    $info->{ImageWidth}=$2;
+			    $info->{ImageHeight}=$1;
+			}
 
 			if ($dim=~m/JPEG \d+x|JFIF/)
 			{
@@ -2009,7 +2015,8 @@ sub do_x
 		my ($S,$P,$St);
 
 		$xprm[2]='' if !$xprm[2] or $xprm[2] eq '.';
-		$xprm[3]='' if defined($xprm[3]) and $xprm[3] eq '.';
+		$xprm[3]='' if !defined($xprm[3]) or $xprm[3] eq '.';
+		$xprm[4]='' if !defined($xprm[4]);
 
 		if ($xprm[2] and index('DRrAa',substr($xprm[2],0,1)) == -1)
 		{
@@ -2037,7 +2044,7 @@ sub do_x
 		    my $label={};
 		    $label->{S} = "/$S" if $S;
 		    $label->{P} = "($P)" if length($P);
-		    $label->{St} = $St if length($St);
+		    $label->{St} = $St if $St and length($St);
 
 		    $#PageLabel=$pginsert if $pginsert > $#PageLabel;
 		    splice(@PageLabel,$pginsert,0,$label);

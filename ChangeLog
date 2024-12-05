@@ -1,3 +1,17 @@
+2024-12-05  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Backport gropdf and pdfpic.tmac to Perl 5.8.
+
+	* src/devices/gropdf/gropdf.pl:
+	* tmac/pdfpic.tmac (pdfpic@get-image-dimensions): Use Perl
+	5.8-compatible regular expressions.
+
+	* src/devices/gropdf/gropdf.pl: Cope with pre-Perl-5.12
+	semantics for applying the `length` built-in function to an
+	undefined scalar.
+
+	Fixes <https://savannah.gnu.org/bugs/?66504>.
+
 2024-12-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Document new CJK/UTF-16 font support features.
