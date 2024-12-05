@@ -604,11 +604,11 @@ treatment of the particular citation.
 .
 AT&T
 .I \%refer \" AT&T
-treats these flags as keywords,
-but ignores them since they are non-alphanumeric.
+ignores them since they are non-alphanumeric.
 .
-The following flags direct GNU
-.IR \%refer . \" GNU
+They direct GNU
+.I \%refer \" GNU
+as follows.
 .
 .
 .TP
@@ -2026,11 +2026,11 @@ data for the reference;
 .RB \[lq] ][ \[rq];
 and (f) uses the
 .B lf
-request to restore the line numbers of the original input.
+request to restore the line numbers of the input.
 .
-As discussed in subsection \[lq]Macro interface\[rq] above,
-it is up to the document or a macro package to employ and format this
-information usefully.
+As noted in subsection \[lq]Macro interface\[rq] above,
+it is the document's responsibility to employ and format the information
+usefully.
 .
 Let us see how we might turn
 .MR groff_ms @MAN7EXT@
