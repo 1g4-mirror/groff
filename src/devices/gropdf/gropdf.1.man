@@ -323,7 +323,7 @@ font names.
 .
 .IR groff 's
 compilation process
-attempts to locate Type\~ fonts on the system,
+attempts to locate Type\~1 fonts on the system,
 populates a
 .I Foundry
 file with their locations,
