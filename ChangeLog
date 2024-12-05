@@ -30,9 +30,7 @@
 	  comparison operator; expected character '|', got a newline
 
 	However, this was easily overlooked in our automated tests
-	because it didn't break formatting, except on Solaris 10 (or if
-	you ran the post-1.23.0 test "contrib/mm/tests/
-	memoranda-format-correctly.sh" with an older groff release).
+	because it didn't break formatting.
 
 	Fixes <https://savannah.gnu.org/bugs/?66526>.
 
