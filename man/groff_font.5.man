@@ -682,17 +682,16 @@ the glyph is sought in any mounted fonts that bear this property.
 .
 .
 .P
-Other directives in this section are ignored by
-.IR @g@troff ,
+Other directives in this section are ignored by GNU
+.IR troff , \" GNU
 but may be used by postprocessors to obtain further information about
 the font.
 .
 .
 .P
-The second section contains one or two subsections.
-.
-These can appear in either order;
-the first one encountered commences the second section.
+The second section contains one or two subsections,
+which can appear in either order;
+either starts the second section.
 .
 Each starts with a directive on a line by itself.
 .
@@ -701,7 +700,7 @@ A
 subsection is mandatory unless the associated
 .I DESC
 file contains the
-.B unicode
+.B \%unicode
 directive.
 .
 Another subsection,

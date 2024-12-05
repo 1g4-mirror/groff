@@ -19306,15 +19306,24 @@ present in the formatter's currently selected font, the glyph is sought
 in any mounted fonts that bear this property.
 @end table
 
-Other directives in this section are ignored by GNU @code{troff}, but
-may be used by postprocessors to obtain further information about the
-font.
+Other directives in this section are ignored by GNU
+@command{troff},
+but may be used by postprocessors to obtain further information about
+the font.
 
-The second section contains one or two subsections.  These can appear in
-either order; the first one encountered commences the second section.
-Each starts with a directive on a line by itself.  A @code{charset}
-subsection is mandatory unless the associated @file{DESC} file contains
-the @code{unicode} directive.  Another subsection, @code{kernpairs},
+The second section contains one or two subsections,
+which can appear in either order;
+either starts the second section.
+Each starts with a directive on a line by itself.
+A
+@code{charset}
+subsection is mandatory unless the associated
+@file{DESC}
+file contains the
+@code{unicode}
+directive.
+Another subsection,
+@code{kernpairs},
 is optional.
 
 @kindex charset
