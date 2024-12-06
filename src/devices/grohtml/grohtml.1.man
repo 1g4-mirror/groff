@@ -53,21 +53,21 @@ output driver for HTML
 .
 .SY pre\-grohtml
 .RB [ \-epV ]
-.RB [ \-a
+.RB [ \-a\~c
 .IR anti-aliasing-text-bits ]
-.RB [ \-D
+.RB [ \-D\~c
 .IR image-directory ]
-.RB [ \-F
+.RB [ \-F\~c
 .IR font-directory ]
-.RB [ \-g
+.RB [ \-g\~c
 .IR anti-aliasing-graphic-bits ]
-.RB [ \-i
+.RB [ \-i\~c
 .IR resolution ]
-.RB [ \-I
+.RB [ \-I\~c
 .IR image-stem ]
-.RB [ \-o
+.RB [ \-o\~c
 .IR image-vertical-offset ]
-.RB [ \-x
+.RB [ \-x\~c
 .IR  html-dialect ]
 .I troff-command
 .I troff-argument
@@ -94,17 +94,17 @@ output driver for HTML
 .P
 .SY post\-grohtml
 .RB [ \-bCGhlnrVy ]
-.RB [ \-F
+.RB [ \-F\~c
 .IR font-directory ]
-.RB [ \-j
+.RB [ \-j\~c
 .IR output-stem ]
 .RB [ \-k\~\c
 .IR encoding ]
-.RB [ \-s
+.RB [ \-s\~c
 .IR base-point-size ]
-.RB [ \-S
+.RB [ \-S\~c
 .IR heading-level ]
-.RB [ \-x
+.RB [ \-x\~c
 .IR html-dialect ]
 .RI [ file\~ .\|.\|.]
 .YS
