@@ -37,6 +37,11 @@
 	* examples/common.roff (d2x): Fix "range" warning: clamp
 	substring extraction at length of string.
 
+	Fixes <https://savannah.gnu.org/bugs/?54461>,
+	<https://savannah.gnu.org/bugs/?54538>, and
+	<https://savannah.gnu.org/bugs/?54539>.  Thanks to Bjarni Ingi
+	Gislason for the reports.
+
 2024-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* examples/fonts_n.in:
