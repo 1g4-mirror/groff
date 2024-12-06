@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2020 Free Software Foundation, Inc.
+# Copyright (C) 2014-2024 Free Software Foundation, Inc.
 #
 # This file is part of 'groff'.
 #
@@ -26,7 +26,9 @@ DEVHTMLFONTSFILES = \
   font/devhtml/CI \
   font/devhtml/CB \
   font/devhtml/CBI \
-  font/devhtml/S \
+  font/devhtml/S
+
+DEVHTMLFONTSFILES_CJK = \
   font/devhtml/CSH \
   font/devhtml/CSS \
   font/devhtml/CTH \
@@ -41,12 +43,14 @@ DEVHTMLCPI = 10
 DEVHTMLLPI = 6
 
 devhtmlfontdir = $(fontdir)/devhtml
-devhtmlfont_DATA = $(DEVHTMLFONTSFILES) font/devhtml/DESC
+devhtmlfont_DATA = $(DEVHTMLFONTSFILES) $(DEVHTMLFONTSFILES_CJK) \
+  font/devhtml/DESC
 MOSTLYCLEANFILES += $(DEVHTMLFONTSFILES) font/devhtml/DESC
 EXTRA_DIST += \
   font/devhtml/R.proto \
   font/devhtml/DESC.proto \
-  font/devhtml/R.in
+  font/devhtml/R.in \
+  $(DEVHTMLFONTSFILES_CJK)
 
 $(DEVHTMLFONTSFILES): $(devhtml_srcdir)/R.proto
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \

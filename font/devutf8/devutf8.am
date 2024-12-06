@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2020 Free Software Foundation, Inc.
+# Copyright (C) 2014-2024 Free Software Foundation, Inc.
 #
 # This file is part of 'groff'.
 #
@@ -21,7 +21,9 @@ DEVUTF8FONTSFILES = \
   font/devutf8/R \
   font/devutf8/I \
   font/devutf8/B \
-  font/devutf8/BI \
+  font/devutf8/BI
+
+DEVUTF8FONTSFILES_CJK = \
   font/devutf8/CSH \
   font/devutf8/CSS \
   font/devutf8/CTH \
@@ -36,13 +38,15 @@ DEVUTF8CPI = 10
 DEVUTF8LPI = 6
 
 devutf8fontdir = $(fontdir)/devutf8
-devutf8font_DATA = $(DEVUTF8FONTSFILES) font/devutf8/DESC
+devutf8font_DATA = $(DEVUTF8FONTSFILES) $(DEVUTF8FONTSFILES_CJK) \
+  font/devutf8/DESC
 MOSTLYCLEANFILES += $(DEVUTF8FONTSFILES) font/devutf8/DESC
 EXTRA_DIST += \
   font/devutf8/R.proto \
   font/devutf8/DESC.proto \
   font/devutf8/NOTES \
-  font/devutf8/R.in
+  font/devutf8/R.in \
+  $(DEVUTF8FONTSFILES_CJK)
 
 $(DEVUTF8FONTSFILES): $(devutf8_srcdir)/R.proto
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \

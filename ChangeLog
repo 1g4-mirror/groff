@@ -1,3 +1,23 @@
+2024-12-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Stop pointlessly overwriting new CJK font descriptions for
+	grohtml(1) and grotty(1).  Unlike the Latin script descriptions,
+	they aren't generated from a ".proto" file.
+
+	* font/devhtml/devhtml.am (DEVHTMLFONTS): Move CJK font
+	description files from here...
+	(DEVHTMLFONTSFILES_CJK): ...to this new macro.
+	(devhtmlfont_DATA, EXTRA_DIST): Expand `DEVHTMLFONTSFILES_CJK`
+	here.  The latter ensures their presence in the distribution
+	archive.
+
+	* font/devutf8/devutf8.am (DEVUTF8FONTS): Move CJK font
+	description files from here...
+	(DEVUTF8FONTSFILES_CJK): ...to this new macro.
+	(devutf8font_DATA, EXTRA_DIST): Expand `DEVUTF8FONTSFILES_CJK`
+	here.  The latter ensures their presence in the distribution
+	archive.
+
 2024-12-05  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Backport gropdf and pdfpic.tmac to Perl 5.8.
