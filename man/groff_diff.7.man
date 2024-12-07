@@ -90,6 +90,13 @@ See
 .MR roff @MAN7EXT@
 for background.
 .
+GNU
+.I troff \" GNU
+can operate in a mode that increases support for documents written for
+AT&T
+.IR troff ; \" AT&T
+see section \[lq]Compatibility mode\[rq] below.
+.
 .
 .\" ====================================================================
 .SH Language
@@ -593,10 +600,8 @@ True if a character
 .I chr
 is available;
 .I chr
-is an ordinary character
-(Unicode basic Latin excluding control characters and the space),
-a special character
-(whether built-in or user-defined),
+is an ordinary or special character
+(whether built-in or user-defined)
 or
 .BI \[rs]N\[aq] index\c
 .BR \[aq] .
@@ -787,11 +792,10 @@ with its leftmost point at the drawing position.
 .
 .TP
 .BI \[rs]D\[aq]E\~ "h v" \[aq]
-Draw filled ellipse with
-.I h
-and
-.I v
-as the axis lengths and its leftmost point at the drawing position.
+Draw filled ellipse with axis lengths
+.IR h ,
+.IR v ,
+and its leftmost point at the drawing position.
 .
 .
 .TP
@@ -844,8 +848,8 @@ selects the minimum supported thickness.
 .
 A negative
 .I n
-selects a thickness proportional to the type size;
-this is the default.
+(the default)
+selects a thickness proportional to the type size.
 .
 .
 .TP
@@ -880,6 +884,8 @@ are synonyms;
 we recommend the former.
 .
 .
+.br
+.ne 4v
 .TP
 .BI \[rs]F f
 .TQ
@@ -1199,8 +1205,9 @@ produce warnings in category
 .BI \[rs]Y[ mac ]
 Interpolate a macro as a device extension command.
 .
-This is similar to
-.BI \[rs]X\[aq]\[rs]*[ mac ]\[aq]\f[R],
+As
+.BI \[rs]X\[aq]\[rs]*[ mac ]\[aq]\c
+,
 except the contents of
 .I mac
 are not interpreted,
@@ -1524,15 +1531,12 @@ requests work like AT&T
 and
 .B ds
 requests,
-accepting an optional leading neutral double-quote
-.B \[dq]
-in an argument that extends to the end of the input line,
+accepting an optional leading neutral double-quote,
+notated
+.RB \[lq][ \[dq] ]\[rq],
+in an argument that the formatter reads
+in copy mode to the end of the input line,
 permitting inclusion of leading spaces.
-.
-Such arguments are labeled
-.I contents,
-are read in copy mode,
-and consume the rest of the input line.
 .
 .
 .TP 8n \" ".break" + 2n
@@ -1611,9 +1615,7 @@ or diversion is aliased,
 redefinitions and appendments \[lq]write through\[rq] alias names.
 .
 To replace an alias with a separately defined object,
-you must use the
-.B rm
-request on its name first.
+remove its name first.
 .
 .
 .TP
@@ -1755,6 +1757,8 @@ If no argument is supplied,
 the default blank line behavior is (re-)established.
 .
 .
+.br
+.ne 4v
 .TP
 .BR .box\~ [\c
 .IR name ]
@@ -2399,9 +2403,7 @@ with compatibility mode disabled.
 .
 Compatibility mode is restored
 (only if it was active)
-when the
-.I expansion
-of
+when the interpolation of
 .I name
 is interpreted;
 that is,
@@ -2412,7 +2414,7 @@ or diversion
 as well as data read from files or pipes if
 .I name
 is any of the
-.BR so ,
+.RB \[lq] so \[rq],
 .BR soquiet ,
 .BR mso ,
 .BR msoquiet ,
@@ -2450,6 +2452,8 @@ if none has been saved.
 Save the current escape character.
 .
 .
+.br
+.ne 5v
 .TP
 .BI .evc\~ env
 Copy the properties of environment
@@ -3253,8 +3257,8 @@ append to it instead of truncating it.
 .
 .
 .TP
-.BR .output \~[[ \[dq] ]\c
-.IR contents ]
+.BR .output \~[ \[dq] ]\c
+.I contents
 Emit
 .I contents
 \[lq]transparently\[rq]
@@ -3400,7 +3404,7 @@ which is passed to
 .B .pstream
 Report,
 to the standard error stream,
-the name of each opened stream,
+the name of each open stream,
 the name of the file backing it,
 and its mode
 (writing or appending).
@@ -3469,9 +3473,10 @@ arguments.
 .TP
 .BR .return\~ [\c
 .IR anything ]
-.\" XXX: useless request warning?
-Stop interpreting a macro,
-skipping to the end of its definition.
+.\" XXX: useless request warning if not interpreting a macro?
+In a macro definition,
+stop interpretation,
+skipping to its end.
 .
 Do not confuse
 .RB \[lq] return \[rq]
@@ -3481,11 +3486,8 @@ with
 If called with an argument
 .I anything,
 the skip is performed twice\[em]once within the macro being interpreted
-and once in an enclosing macro.
-.
-.I trace.tmac
-uses this feature to define a wrapper macro for
-.RB \[lq] return \[rq].
+and once in an enclosing macro,
+permitting a macro to wrap the request.
 .
 .
 .TP
@@ -3507,12 +3509,12 @@ See
 .TP
 .BR .rj\~ [\c
 .IR n ]
-Right-align the
+Break,
+right-align the
 .RI next\~ n
-input lines.
-.
-Without an argument,
-right-align the next input line.
+(default: 1)
+input lines,
+then break again.
 .
 .B rj
 implies
@@ -3521,6 +3523,9 @@ and
 .B ce
 implies
 .RB \[lq] ".rj 0" \[rq].
+.
+If invoked with the no-break control character,
+the first break is suppressed.
 .
 .
 .TP
@@ -3583,9 +3588,10 @@ are considered when assigning the soft hyphen character.
 .
 .TP
 .BR .shift\~ [\c
+.\" XXX: useless request warning if not interpreting a macro?
 .IR n ]
 In a macro definition,
-shift the arguments by
+shift arguments by
 .I n
 positions:
 .RI argument\~ i
@@ -3598,9 +3604,6 @@ are no longer available.
 .RI If\~ n
 is missing,
 arguments are shifted by\~1.
-.
-No effect otherwise.
-.\" XXX: useless request warning?
 .
 .
 .TP
