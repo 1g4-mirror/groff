@@ -33,6 +33,15 @@
 
 2024-12-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (do_error): Fix off-by-one error in
+	output warnings in nroff mode.  By convention, lines on
+	terminals are numbered starting at one; for example, using U.S.
+	letter paper (with a nominal type size of 10 points on 12 point
+	spacing), the lines of the 11-inch page length are numbered
+	1-66, not 0-65.
+
+2024-12-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Stop pointlessly overwriting new CJK font descriptions for
 	grohtml(1) and grotty(1).  Unlike the Latin script descriptions,
 	they aren't generated from a ".proto" file.

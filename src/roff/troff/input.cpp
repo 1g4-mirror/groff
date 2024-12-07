@@ -9732,13 +9732,13 @@ static void do_error(error_type type,
     break;
   case OUTPUT_WARNING:
     if (in_nroff_mode) {
-      int fromtop = topdiv->get_vertical_position().to_units()
-		    / vresolution;
+      int fromtop = (topdiv->get_vertical_position().to_units()
+		     / vresolution) + 1;
       fprintf(stderr, "warning [page %d, line %d",
 	      topdiv->get_page_number(), fromtop);
       if (topdiv != curdiv) {
-	int fromdivtop = curdiv->get_vertical_position().to_units()
-			 / vresolution;
+	int fromdivtop = (curdiv->get_vertical_position().to_units()
+			  / vresolution) + 1;
 	fprintf(stderr, ", diversion '%s', line %d",
 		curdiv->get_diversion_name(), fromdivtop);
       }

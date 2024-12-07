@@ -2192,6 +2192,7 @@ static void distribute_space(node *nd, int nspaces,
 			     hunits desired_space,
 			     bool force_reverse_node_list = false)
 {
+  assert(desired_space >= H0);
   if (desired_space.is_zero() || nspaces == 0)
     return;
   // Positive desired space is the typical case.  Negative desired space
