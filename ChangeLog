@@ -1,5 +1,29 @@
 2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: The `hpf` and `hpfa` requests now accept leading and
+	embedded spaces in their "file" arguments, just like `so`.
+
+	* src/roff/troff/input.cpp
+	(read_hyphenation_patterns_from_file): Gather the argument with
+	`read_string()` (which reads a potentially spaceful argument
+	including a discardable leading double quote), not
+	`get_long_name()` (which reads a GNU troff identifier).  Call
+	`tok.next()` afterwards.
+	(load_hyphenation_patterns_from_file)
+	(append_hyphenation_patterns_from_file): "Peek" at the input
+	stream when checking for arguments to avoid advancing the input
+	stream pointer past the first character in the `hpf` or `hpfa`
+	request argument.  Annotate why we do not call `skip_next()` at
+	the end of the request handler, as most do.
+
+	* doc/groff.texi.in (Manipulating Hyphenation):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests): Document it.
+
+	* NEWS: Update existing items.
+
+2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: The `cf` and `trf` requests now accept leading and
 	embedded spaces in their "file" arguments, just like `so`.
 

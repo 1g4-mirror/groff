@@ -3417,14 +3417,14 @@ Set the consecutive automatically hyphenated line limit to
 A negative value means \[lq]no limit\[rq].
 .
 .TPx
-.REQ .hpf pattern-file
+.REQ .hpf file
 Read hyphenation patterns from
-.IR pattern-file .
+.IR file .
 .
 .TPx
-.REQ .hpfa pattern-file
+.REQ .hpfa file
 Append hyphenation patterns from
-.IR pattern-file .
+.IR file .
 .
 .TPx
 .REQ .hpfcode "a b \fR[\fPc d\fR] .\|.\|.\fP"

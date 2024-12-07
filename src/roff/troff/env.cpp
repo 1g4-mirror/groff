@@ -4520,39 +4520,41 @@ void hyphenate(hyphen_list *h, unsigned flags)
 
 static void read_hyphenation_patterns_from_file(bool append)
 {
-  // TODO: Read a file name, not a groff identifier.
-  symbol name = get_long_name(true /* required */);
-  if (!name.is_null()) {
+  char *filename = read_string();
+  if (filename != 0 /* nullptr */) {
     if (0 /* nullptr */ == current_language)
       error("no current hyphenation language");
     else
-      current_language->patterns.read_patterns_file(
-			  name.contents(), append,
-			  &current_language->exceptions);
+      current_language->patterns.read_patterns_file(filename, append,
+	&current_language->exceptions);
   }
-  skip_line();
+  tok.next();
 }
 
 static void load_hyphenation_patterns_from_file()
 {
-  if (!has_arg()) {
+  if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "hyphenation pattern load request expects"
 	    " argument");
     skip_line();
     return;
   }
   read_hyphenation_patterns_from_file(false /* append */);
+  // No `skip_line()` here; the above function calls `read_string()` and
+  // `tok.next()`.
 }
 
 static void append_hyphenation_patterns_from_file()
 {
-  if (!has_arg()) {
+  if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "hyphenation pattern appendment request"
 	    " expects argument");
     skip_line();
     return;
   }
   read_hyphenation_patterns_from_file(true /* append */);
+  // No `skip_line()` here; the above function calls `read_string()` and
+  // `tok.next()`.
 }
 
 // Most hyphenation functionality is environment-specific; see

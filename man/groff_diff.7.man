@@ -2767,7 +2767,8 @@ explicit hyphens are not.
 .
 .
 .TP
-.BI .hpf\~ pattern-file
+.BR .hpf\~ [ \[dq] ]\c
+.I pattern-file
 Read hyphenation patterns from
 .IR pattern-file .
 .
@@ -2930,7 +2931,8 @@ won't automatically hyphenate at all.
 .
 .
 .TP
-.BI .hpfa\~ pattern-file
+.BR .hpfa\~ [ \[dq] ]\c
+.I pattern-file
 As
 .BR hpf ,
 except that the hyphenation patterns and exceptions from

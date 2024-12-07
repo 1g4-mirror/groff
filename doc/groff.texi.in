@@ -8869,8 +8869,8 @@ register @samp{.hydefault}; it is associated with the environment
 @endDefreq
 
 @need 200
-@DefreqList {hpf, pattern-file}
-@DefreqListEndx {hpfa, pattern-file}
+@DefreqList {hpf, [@code{"}]@Var{pattern-file}}
+@DefreqListEndx {hpfa, [@code{"}]@Var{pattern-file}}
 @cindex hyphenation patterns (@code{hpf})
 @cindex patterns for hyphenation (@code{hpf})
 Read hyphenation patterns from @var{pattern-file}, which is sought
