@@ -2746,9 +2746,13 @@ stop centering.
 .
 .TPx
 .REQ .cf file
-Copy contents of
-.I file
-without formatting to the (top-level) diversion.
+Transparently output the contents of
+.I file.
+.
+Each of its lines is output
+as if preceded by
+.BR \[rs]!\& ,
+but is not read in copy mode.
 .
 .TPx
 .REQ .cflags "n c1 c2 \fR\&.\|.\|.\&\fP"
