@@ -3225,7 +3225,9 @@ See
 .
 .
 .TP
-.BI .open\~ "stream file"
+.BI .open\~ "stream\~\c
+.RB [ \[dq] ]\c
+.I file
 Open
 .I file
 for writing and associate
@@ -3239,7 +3241,9 @@ and
 .
 .
 .TP
-.BI .opena\~ "stream file"
+.BI .opena\~ "stream\~\c
+.RB [ \[dq] ]\c
+.I file
 As
 .BR open ,
 but if

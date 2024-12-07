@@ -16558,8 +16558,8 @@ output.
 @endExample
 @endDefreq
 
-@DefreqList {open, stream file}
-@DefreqListEndx {opena, stream file}
+@DefreqList {open, stream [@code{"}]file}
+@DefreqListEndx {opena, stream [@code{"}]file}
 @cindex opening file (@code{open})
 @cindex file, opening (@code{open})
 @cindex appending to a file (@code{opena})

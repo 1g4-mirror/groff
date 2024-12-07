@@ -7409,15 +7409,13 @@ static void open_file(bool appending)
 {
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
-    symbol fnarg = get_long_name(true /* required */);
-    if (!fnarg.is_null()) {
+    char *filename = read_string();
+    if (filename != 0 /* nullptr */) {
       const string mode = appending ? "appending" : "writing";
-      string filename = fnarg.contents();
       errno = 0;
-      FILE *fp = fopen(filename.contents(), appending ? "a" : "w");
+      FILE *fp = fopen(filename, appending ? "a" : "w");
       if (0 /* nullptr */ == fp) {
-	error("cannot open file '%1' for %2: %3",
-	      filename.contents(),
+	error("cannot open file '%1' for %2: %3", filename,
 	      appending ? "appending" : "writing",
 	      strerror(errno));
 	// If we already had a key of this name in the dictionary, it's
@@ -7432,16 +7430,15 @@ static void open_file(bool appending)
 	  assert(oldfp != 0 /* nullptr */);
 	  if (oldfp != 0 /* nullptr */ && (fclose(oldfp) != 0)) {
 	    error("cannot close file '%1' already associated with"
-		  " stream '%2': %3", filename.contents(),
-		  strerror(errno));
+		  " stream '%2': %3", filename, strerror(errno));
 	    return;
 	  }
 	}
-	grostream *grost = new grostream(filename.contents(), mode,
-					 &*fp);
+	grostream *grost = new grostream(filename, mode, &*fp);
 	stream_dictionary.define(stream, (object *)grost);
       }
     }
+    tok.next();
   }
 }
 
@@ -7458,7 +7455,7 @@ static void open_request() // .open
   }
   else
     open_file(false /* appending */);
-  skip_line();
+  // No skip_line() here; open_file() calls read_string(), tok.next().
 }
 
 static void opena_request() // .opena
@@ -7474,7 +7471,7 @@ static void opena_request() // .opena
   }
   else
     open_file(true /* appending */);
-  skip_line();
+  // No skip_line() here; open_file() calls read_string(), tok.next().
 }
 
 static void close_stream(symbol &stream)

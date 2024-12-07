@@ -1,5 +1,25 @@
 2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: The `open` and `opena` requests now accept leading and
+	embedded spaces in their "file" arguments, just like `so`.
+
+	* src/roff/troff/input.cpp (open_file): Gather the second
+	argument with `read_string()` (which reads a potentially
+	spaceful argument including a discardable leading double quote),
+	not `get_long_name()` (which reads a GNU troff identifier).
+	Call `tok.next()` at the end of the function as required by
+	`read_string()`.
+	(open_request, opena_request): Drop `skip_line()` call from end
+	of function and annotate why.
+
+	* doc/groff.texi.in (I/O):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests): Document it.
+
+	* NEWS: Update existing items.
+
+2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: The `nx` request now accepts leading and embedded
 	spaces in its optional "file" argument, similarly to `so`.
 
