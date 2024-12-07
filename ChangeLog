@@ -1,5 +1,16 @@
 2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[nroff]: Rename test script to better fit recent conventions.
+	We now use underscores only for structuring, as with the
+	various macro packages in the "tmac" directory.
+
+	* src/roff/nroff/tests/verbose_option_works.sh: Rename this...
+	* src/roff/nroff/tests/verbose-option-works.sh: ...to this.
+
+	* src/roff/nroff/nroff.am (nroff_TESTS): Reflect rename.
+
+2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[nroff]: Improve shell behavior check and fix goof in test
 	script.
 
