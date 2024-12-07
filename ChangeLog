@@ -174,7 +174,7 @@
 
 	* src/libs/libgroff/maxfilename.cpp: Include local "posix.h"
 	header before "nonposix.h" (and both before "lib.h"), aligning
-	better with other groff code, and fixing build on Androic/Bionic
+	better with other groff code, and fixing build on Android/Bionic
 	libc/Termux.
 
 2024-12-03  G. Branden Robinson <g.branden.robinson@gmail.com>
