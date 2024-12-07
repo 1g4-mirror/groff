@@ -2398,6 +2398,24 @@ an increment or decrement is applied as if to\~0.
 .SH "Request short reference"
 .\" ====================================================================
 .
+GNU
+.I troff \" GNU
+reads arguments named
+.I command,
+.I contents,
+.I file,
+and
+.I message
+in copy mode until the end of the input line;
+they thus can contain embedded spaces.
+.
+They can also be optionally prefixed with a neutral double quote
+.BR \[dq] ,
+which the formatter discards if present,
+permitting leading spaces in the argument.
+.
+.
+.P
 Not all details of request behavior are outlined here.
 .
 See the
@@ -2408,6 +2426,10 @@ for features new to GNU
 .MR groff_diff @MAN7EXT@ .
 .
 .
+.\" Note: The following syntax summaries do _not_ generally use brackets
+.\" to mark optional arguments (there are a few exceptions, alas).
+.\" Instead, request invocations taking different argument quantities
+.\" are synopsized separately.
 .P
 .LS
 .
@@ -2785,7 +2807,7 @@ Remove definition of ordinary or special
 .RI character\~ c.
 .
 .TPx
-.REQ .char "c \fR[\fB\[dq]\fP]\fIcontents"
+.REQ .char "c contents"
 Define ordinary or special character
 .I c
 as
@@ -3027,10 +3049,9 @@ As
 with compatibility mode disabled when the macro is interpreted.
 .
 .TPx
-.REQ .device \fR[\fB"\fP]\fIcontents
+.REQ .device contents
 Write
-.IR contents ,
-read in copy mode,
+.I contents
 to
 .I @g@troff
 output as a device extension command.
@@ -3081,12 +3102,6 @@ Create a string named
 .I ident
 containing
 .I contents.
-.
-A leading neutral double quote in the second argument is stripped from
-it,
-allowing embedded leading spaces in
-.I contents,
-which is read in copy mode and continues to the end of the input line.
 .
 .TPx
 .REQ .ds1 ident
@@ -3631,7 +3646,7 @@ Set leader repetition character
 .RB \[lq] . \[rq]).
 .
 .TPx
-.REQ .length "reg \fR[\fB\[dq]\fP]\fIcontents"
+.REQ .length "reg contents"
 Compute the number of characters in
 .I contents
 and store the count
@@ -3948,7 +3963,7 @@ Output vertical distance that was saved by the
 request.
 .
 .TPx
-.REQ .output \fR[\fB"\fP]\fIcontents
+.REQ .output contents
 Emit
 .I contents
 \[lq]transparently\[rq]
@@ -4040,11 +4055,6 @@ output through
 by passing it to
 .MR popen 3 .
 .
-A leading neutral double quote is stripped from the argument,
-allowing embedded leading spaces in
-.I contents,
-which is read in copy mode and continues to the end of the input line.
-.
 Multiple
 .B pi
 requests construct a multi-stage pipeline in the same order as the
@@ -4133,9 +4143,9 @@ also see
 .esc[] s \[+-]N .
 .
 .TPx
-.REQ .psbb file
+.REQ .psbb postscript-file
 Retrieve the bounding box of the PostScript image found in
-.I file,
+.I postscript-file,
 which must conform to Adobe's Document Structuring Conventions (DSC).
 .
 See registers
@@ -4357,16 +4367,16 @@ Each
 is interpreted in units of scaled points (\c
 .scaleindicator z ).
 .
+A leading neutral double quote is stripped from
+.IR s1 ;
+the arguments are
+read in copy mode and continue to the end of the input line.
+.
 .TPx
 .REQ .so file
 Replace the request's control line with the contents of
 .IR file ,
 \[lq]sourcing\[rq] it.
-.
-A leading neutral double quote is stripped from the argument,
-allowing embedded leading spaces in
-.I file,
-which is read in copy mode and continues to the end of the input line.
 .
 .TPx
 .REQ .soquiet file
@@ -4534,11 +4544,6 @@ in the operating environment
 by passing it to
 .MR system 3 .
 .
-A leading neutral double quote is stripped from the argument,
-allowing embedded leading spaces in
-.I contents,
-which is read in copy mode and continues to the end of the input line.
-.
 Unsafe request;
 disabled by default.
 .
@@ -4627,11 +4632,19 @@ Format three-part title.
 Write a newline to the standard error stream.
 .
 .TPx
-.REQ .tm message
+.REQ .tm terminal-message
 Write
-.I message,
+.I terminal-message,
 followed by a newline,
 to the standard error stream.
+.
+.I terminal-message
+is read in copy mode to the end of the input line,
+but does
+.I not
+recognize and strip a leading double quote;
+see
+.BR .tm1 .
 .
 .TPx
 .REQ .tm1
@@ -4835,11 +4848,6 @@ which must previously have been the subject of an
 .request \%.opena )
 request,
 followed by a newline.
-.
-A leading neutral double quote in the second argument is stripped,
-allowing embedded leading spaces in
-.IR contents ,
-which is read in copy mode until the end of the line.
 .
 GNU
 .I troff \" GNU
