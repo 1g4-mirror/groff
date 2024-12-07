@@ -8535,7 +8535,7 @@ void system_request()
 
 void copy_file()
 {
-  if (!has_arg()) {
+  if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "file throughput request expects a file name"
 	    " as argument");
     skip_line();
@@ -8545,13 +8545,12 @@ void copy_file()
     handle_initial_request(COPY_FILE_REQUEST);
     return;
   }
-  symbol filename = get_long_name(true /* required */);
-  while (!tok.is_newline() && !tok.is_eof())
-    tok.next();
+  char *filename = read_string();
+  tok.next();
   if (want_break)
     curenv->do_break();
-  if (!filename.is_null())
-    curdiv->copy_file(filename.contents());
+  if (filename != 0 /* nullptr */)
+    curdiv->copy_file(filename);
   tok.next();
 }
 
@@ -8579,7 +8578,7 @@ void vjustify()
 
 void transparent_file()
 {
-  if (!has_arg()) {
+  if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "transparent file throughput request expects"
 	    " a file name as argument");
     skip_line();
@@ -8589,17 +8588,15 @@ void transparent_file()
     handle_initial_request(TRANSPARENT_FILE_REQUEST);
     return;
   }
-  symbol filename = get_long_name(true /* required */);
-  while (!tok.is_newline() && !tok.is_eof())
-    tok.next();
+  char *filename = read_string();
+  tok.next();
   if (want_break)
     curenv->do_break();
-  if (!filename.is_null()) {
+  if (filename != 0 /* nullptr */) {
     errno = 0;
-    FILE *fp = include_search_path.open_file_cautious(filename.contents());
+    FILE *fp = include_search_path.open_file_cautious(filename);
     if (0 /* nullptr */ == fp)
-      error("cannot open '%1': %2", filename.contents(),
-	    strerror(errno));
+      error("cannot open '%1': %2", filename, strerror(errno));
     else {
       int bol = 1;
       for (;;) {

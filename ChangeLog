@@ -1,5 +1,22 @@
 2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: The `cf` and `trf` requests now accept leading and
+	embedded spaces in their "file" arguments, just like `so`.
+
+	* src/roff/troff/input.cpp (copy_file, transparent_file): Gather
+	the argument with `read_string()` (which reads a potentially
+	spaceful argument including a discardable leading double quote),
+	not `get_long_name()` (which reads a GNU troff identifier).
+	Call `tok.next()` afterwards.
+
+	* doc/groff.texi.in (I/O):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests): Document it.
+
+	* NEWS: Update existing items.
+
+2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[nroff]: Rename test script to better fit recent conventions.
 	We now use underscores only for structuring, as with the
 	various macro packages in the "tmac" directory.

@@ -4061,7 +4061,8 @@ are read in copy mode.
 .\" ====================================================================
 .
 .TP
-.BI .cf\~ file
+.BR .cf\~ [ \[dq] ]\c
+.I file
 In a diversion,
 embed an object which,
 when interpolated,
@@ -4076,6 +4077,18 @@ the contents of
 are immediately copied to the output regardless of whether a diversion
 is being written to;
 this behavior is so anomalous that it must be considered a bug.
+.
+.
+.IP
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the argument,
+allowing it to contain embedded leading spaces.
+.
+Further,
+spaces in
+.I file
+are accepted as part of the file name.
 .
 .
 .br

@@ -16328,8 +16328,8 @@ the same directories as macro files for the @option{-m} command-line
 option.
 @endDefreq
 
-@DefreqList {trf, file}
-@DefreqListEndx {cf, file}
+@DefreqList {trf, [@code{"}]@Var{file}}
+@DefreqListEndx {cf, [@code{"}]@Var{file}}
 @cindex transparent output (@code{cf}, @code{trf})
 @cindex output, transparent (@code{cf}, @code{trf})
 @cindex @code{cf} request, and copy mode

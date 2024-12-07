@@ -57,11 +57,12 @@ troff
    warning diagnostic in the "range" category.
 
 *  GNU troff now strips a leading neutral double quote from the argument
-   to the `mso`, `msoquiet`, `pi`, `pso`, `so`, `soquiet`, and `sy`
-   requests, allowing it to contain embedded leading spaces.
+   to the `cf`, `mso`, `msoquiet`, `pi`, `pso`, `so`, `soquiet`, `sy`,
+   and `trf` requests, allowing it to contain embedded leading spaces.
 
-*  GNU troff now accepts space characters in the argument to the `mso`,
-   `msoquiet`, `so`, and `soquiet` requests.  See "soelim" below.
+*  GNU troff now accepts space characters in the argument to the `cf`,
+   `mso`, `msoquiet`, `so`, `soquiet`, `trf` requests.  See "soelim"
+   below.
 
 *  The "el" warning category has been withdrawn.  If enabled (which it
    was not by default), the formatter would emit a diagnostic if it
