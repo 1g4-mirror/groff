@@ -246,11 +246,17 @@ Here are some portability notes on writing automated tests.
     };
     }
 
-* Solaris 10 cksum's output is non-conforming with XPG4.  It uses tabs
-  as field delimiters instead of spaces.
+* Solaris 10's /usr/bin/cksum output is non-conforming with XPG4.  It
+  uses tabs as field delimiters instead of spaces.
 
-* Solaris 10 tr exits with an error if you try to use a POSIX character
-  class (such as "[:cntrl:]") in any locale but "C".
+* Solaris 10's /usr/bin/grep is non-conforming with XPG4; it lacks
+  support for the `-E`, `-F`, `-q`, and `-x` options.
+
+* Solaris 10's /bin/sh is non-conforming with XPG4; it does not support
+  POSIX parameter expansion syntax.
+
+* Solaris 10's /usr/bin/tr exits with an error if you try to use a POSIX
+  character class (such as "[:cntrl:]") in any locale but "C".
 
 * Solaris 10's /usr/xpg4/bin/sh is non-conforming with XPG4.
   (Good job, guys!)

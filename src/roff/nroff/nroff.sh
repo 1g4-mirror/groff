@@ -23,7 +23,13 @@
 
 # Screen for shells non-conforming with POSIX Issue 4 (1994).
 badshell=yes
-unset groff_ku7kiodu || badshell=
+# Solaris 10 /bin/sh is so wretched that it not only doesn't support
+# standard parameter expansion, but it also writes diagnostic messages
+# to the standard output instead of standard error.
+if [ -n "$SHELL" ]
+then
+  "$SHELL" -c 'prog=${0##*/}' >/dev/null 2>&1 && badshell=
+fi
 
 if [ -n "$badshell" ]
 then

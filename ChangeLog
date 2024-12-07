@@ -1,3 +1,16 @@
+2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[nroff]: Improve shell behavior check and fix goof in test
+	script.
+
+	* src/roff/nroff/nroff.sh: Replace proxy `unset`-based test with
+	an actual measurement of parameter expansion.
+	* src/roff/nroff/tests/verbose_option_works.sh: Fix spurious
+	failure of test for grep(1) supporting `-q` and `-x` options.
+	Continues commt e05cf6d3b3, 4 December.
+
+	* HACKING: Document Solaris frustrations.
+
 2024-12-09  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Data provided to .pso must terminate with \n.
