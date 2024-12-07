@@ -1,5 +1,22 @@
 2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: The `nx` request now accepts leading and embedded
+	spaces in its optional "file" argument, similarly to `so`.
+
+	* src/roff/troff/input.cpp (next_file): Peek at the input stream
+	for an argument, and if there is one, gather it with
+	`read_string()` (which reads a potentially spaceful argument
+	including a discardable leading double quote), not
+	`get_long_name()` (which reads a GNU troff identifier).
+
+	* doc/groff.texi.in (I/O):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests): Document it.
+
+	* NEWS: Update existing items.
+
+2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: The `hpf` and `hpfa` requests now accept leading and
 	embedded spaces in their "file" arguments, just like `so`.
 

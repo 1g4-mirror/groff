@@ -16377,7 +16377,7 @@ The calls to @code{ev} prevent the partially collected output line
 from becoming part of the diversion (@pxref{Diversions}).
 @endDefreq
 
-@Defreq {nx, [@Var{file}]}
+@Defreq {nx, [[@code{"}]@Var{file}]}
 @cindex read next file (@code{nx})
 @cindex file, next, read (@code{nx})
 @cindex next file, read (@code{nx})

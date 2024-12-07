@@ -4139,6 +4139,20 @@ request is selected.
 .
 .
 .TP
+.BR .nx\~ [[ \[dq] ]\c
+.IR file ]
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the optional argument,
+allowing it to contain embedded leading spaces.
+.
+Further,
+spaces in
+.I file
+are accepted as part of the file name.
+.
+.
+.TP
 .BR .pi\~ [ \[dq] ]\c
 .I command
 GNU

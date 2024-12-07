@@ -911,18 +911,20 @@ void backtrace_request()
 
 void next_file()
 {
-  symbol nm = get_long_name();
-  while (!tok.is_newline() && !tok.is_eof())
+  char *filename = 0 /* nullptr */;
+  if (has_arg(true /* peek */)) {
+    filename = read_string();
     tok.next();
-  if (nm.is_null())
+  }
+  if (0 /* nullptr */ == filename)
     input_stack::end_file();
   else {
     errno = 0;
-    FILE *fp = include_search_path.open_file_cautious(nm.contents());
+    FILE *fp = include_search_path.open_file_cautious(filename);
     if (0 /* nullptr */ == fp)
-      error("cannot open '%1': %2", nm.contents(), strerror(errno));
+      error("cannot open '%1': %2", filename, strerror(errno));
     else
-      input_stack::next_file(fp, nm.contents());
+      input_stack::next_file(fp, filename);
   }
   tok.next();
 }
