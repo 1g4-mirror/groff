@@ -20,6 +20,12 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
+if ! echo foobar | grep -Eqx foobar >/dev/null 2>&1
+then
+    echo "$0: grep command does not support -Eqx options; skipping" >&2
+    exit 77 # skip
+fi
+
 fail=
 
 wail () {

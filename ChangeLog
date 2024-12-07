@@ -33,6 +33,16 @@
 
 2024-12-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Avoid test failures on Solaris 11 arising from system tool
+	limitations.  See "PROBLEMS" file.
+
+	* tmac/tests/an_vertical-margins-are-correct.sh:
+	* tmac/tests/doc-old_vertical-margins-are-correct.sh:
+	* tmac/tests/doc_vertical-margins-are-correct.sh: Skip test if
+	the system lacks a grep conforming to POSIX Issue 4 (1994).
+
+2024-12-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (do_error): Fix off-by-one error in
 	output warnings in nroff mode.  By convention, lines on
 	terminals are numbered starting at one; for example, using U.S.
