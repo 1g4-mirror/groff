@@ -57,7 +57,7 @@ static void usage(FILE *stream)
 "GNU lookbib writes a prompt to the standard error stream (unless the\n"
 "standard input stream is not a terminal), reads from the standard\n"
 "input a line containing a set of keywords, searches each\n"
-"bibliographic DATABASE for references containing those keywords,\n"
+"bibliographic \"database\" for references containing those keywords,\n"
 "writes any references found to the standard output stream, and\n"
 "repeats this process until the end of input.  See the lookbib(1)\n"
 "manual page.\n",
