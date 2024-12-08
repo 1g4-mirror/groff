@@ -1,5 +1,19 @@
 2024-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Disable `cf` request in safer mode.
+
+	* src/roff/troff/input.cpp (copy_file): Do it.
+
+	* doc/groff.texi.in (I/O) <cf>:
+	* man/groff.7.man (Request short reference) <cf>:
+	* man/groff_diff.7.man (Restricted requests): Do it.
+
+	* NEWS: Add item.
+
+	Fixes <https://savannah.gnu.org/bugs/?66546>.
+
+2024-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/libgroff.am (libgroff_a_LIBADD): Add to
 	ensure linkage with gnulib.
 	* src/libs/libgroff/string.cpp: Align with modern groff

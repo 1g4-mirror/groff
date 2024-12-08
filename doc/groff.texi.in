@@ -16366,6 +16366,15 @@ anomalous that it must be considered a bug.
 @cindex @code{trf} request, and invalid characters
 @cindex characters, invalid for @code{trf} request
 @cindex invalid characters for @code{trf} request
+@code{cf} copies the contents of @var{file} completely unprocessed;
+it is therefore an error to use this request in safer mode,
+which is the default.
+Invoke GNU
+@command{troff}
+or a front end with the
+@option{-U}
+option to enable unsafe mode.
+
 @code{trf} discards invalid input characters;
 recall @ref{Identifiers}.
 

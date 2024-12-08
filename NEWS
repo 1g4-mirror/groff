@@ -13,6 +13,13 @@ VERSION next
 troff
 -----
 
+*  The `cf` request is now disabled in safer mode; as with `pi` and
+   `sy`, you must specify the "unsafe mode" option `-U` to use it.
+   Alternatively, use the `trf` request, available since groff 0.6
+   (circa 1990), to embed a file in GNU troff's output while discarding
+   characters (most C0 and C1 controls) that are invalid as GNU troff
+   input--and incidentally also undefined in GNU troff output.
+
 *  The `hpfcode` request now emits an error when used, advising of its
    planned withdrawal, but then proceeds with normal behavior.  The
    documented replacement mechanism, the `hcode` request, has existed

@@ -8540,6 +8540,11 @@ void copy_file()
     skip_line();
     return;
   }
+  if (!want_unsafe_requests) {
+    error("file throughput request is not allowed in safer mode");
+    skip_line();
+    return;
+  }
   if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0)) {
     handle_initial_request(COPY_FILE_REQUEST);
     return;

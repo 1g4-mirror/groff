@@ -2783,6 +2783,9 @@ as if preceded by
 .BR \[rs]!\& ,
 but is not interpreted by the formatter.
 .
+Unsafe request;
+disabled by default.
+.
 .TPx
 .REQ .cflags "n c1 c2 \fR\&.\|.\|.\&\fP"
 Assign properties encoded

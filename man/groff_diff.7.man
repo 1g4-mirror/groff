@@ -1501,7 +1501,8 @@ It is discarded from the end of an output line if a break is forced.
 .
 To mitigate risks from untrusted input documents,
 the
-.B pi
+.BR cf ,
+.BR pi ,
 and
 .B sy
 requests are disabled by default.
