@@ -19,7 +19,7 @@ troff
    since groff 1.02 (June 1991) at the latest.
 
 *  The `mso` request no longer attempts to open a macro file named, say,
-   "tmac.s" if "s.tmac" was specified as the argument and not found, or
+   "tmac.s" if "s.tmac" was specified as the argument and not found, nor
    vice versa.  This feature was a convenience for some old AT&T troff
    installations, but few of those remain in the field, and of those
    that we know to survive, neither (DWB 3.3 and Solaris 10) uses a
