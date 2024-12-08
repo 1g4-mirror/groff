@@ -27,7 +27,7 @@ wail () {
     fail=YES
 }
 
-input1='.
+input='.
 .Dd 2024-11-08
 .Os "groff test suite"
 .Dt foo 1
@@ -84,9 +84,8 @@ input1='.
 49
 50
 51'
-input2=$(printf "\\c\n'fi\n")
 
-output=$(printf "%s" "$input1" "$input2" \
+output=$(printf "%s"'\\c'"\n'fi\n" "$input" \
     | "$groff" -r cR=0 -m doc-old -T ascii -P -cbou | nl -ba)
 echo "$output"
 
