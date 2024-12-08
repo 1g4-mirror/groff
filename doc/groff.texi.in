@@ -16338,11 +16338,24 @@ option.
 @cindex @code{trf} request, and copy mode
 @cindex copy mode, and @code{trf} request
 @cindex mode, copy, and @code{trf} request
-Transparently output the contents of @var{file}.  Each line is output as
-if preceded by @code{\!}, but is not read in copy mode.  If @var{file}
-does not end with a newline, @code{trf} appends one.  Both requests
-break the line before reading @var{file}, unless invoked with the
-no-break control character.
+Copy
+@var{file}
+as ``throughput'' to GNU
+@command{troff}
+output.
+Each line of
+@var{file}
+is output as if preceded by
+@code{\!},
+but is not interpreted by the formatter.
+If
+@var{file}
+does not end with a newline,
+@code{trf}
+appends one.
+Both requests break the line before reading
+@var{file},
+unless invoked with the no-break control character.
 
 When used in a diversion, these requests embed a node (@pxref{Gtroff
 Internals}) in it that, when interpolated, causes the contents of
@@ -16353,9 +16366,8 @@ anomalous that it must be considered a bug.
 @cindex @code{trf} request, and invalid characters
 @cindex characters, invalid for @code{trf} request
 @cindex invalid characters for @code{trf} request
-While @code{cf} copies the contents of @var{file} completely
-unprocessed, @code{trf} disallows characters such as NUL that are not
-valid @command{gtroff} input characters (@pxref{Identifiers}).
+@code{trf} discards invalid input characters;
+recall @ref{Identifiers}.
 
 For @code{cf}, within a diversion, ``completely unprocessed'' means that
 each line of a file to be inserted is handled as if it were preceded by

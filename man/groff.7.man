@@ -2768,13 +2768,20 @@ stop centering.
 .
 .TPx
 .REQ .cf file
-Transparently output the contents of
-.I file.
+Break and copy
+.I file
+as \[lq]throughput\[rq] to GNU
+.I troff \" GNU
+output
+(see
+.MR groff_out @MAN5EXT@ ).
 .
-Each of its lines is output
+Each line of
+.I file
+is output
 as if preceded by
 .BR \[rs]!\& ,
-but is not read in copy mode.
+but is not interpreted by the formatter.
 .
 .TPx
 .REQ .cflags "n c1 c2 \fR\&.\|.\|.\&\fP"
@@ -4682,14 +4689,25 @@ and so on prior to output.
 .
 .TPx
 .REQ .trf file
-Transparently output the contents of
-.I file.
+Break and copy
+.I file
+as \[lq]throughput\[rq] to GNU
+.I troff \" GNU
+output
+(see
+.MR groff_out @MAN5EXT@ ).
 .
 Unlike
 .request .cf ,
-invalid input characters in
+characters invalid as input to GNU
+.I troff \" GNU
+are discarded.
+.
+If
 .I file
-are rejected.
+does not end with a newline,
+.B trf
+appends one.
 .
 .TPx
 .REQ .trin abcd\fR\&.\|.\|.\&\fP

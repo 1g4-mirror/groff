@@ -3790,31 +3790,26 @@ but does not append a newline.
 .
 .TP
 .BI .trf\~ file
-Transparently output the contents of
-.IR file .
+Break and copy
+.I file
+as \[lq]throughput\[rq] to GNU
+.I troff \" GNU
+output,
+discarding characters that are invalid as input;
+contrast with
+.BR cf .
 .
-Each line is output as if preceded by
+Each line of
+.I file
+is output as if preceded by
 .BR \[rs]! ,
-but is not read in copy mode.
+but is not interpreted by the formatter.
 .
 If
 .I file
 does not end with a newline,
 .B trf
 appends one.
-.
-Like
-.BR cf ,
-.B trf
-breaks the line unless invoked with the no-break control character.
-.
-Characters in
-.I file
-that are invalid as input to GNU
-.I troff \" GNU
-are discarded;
-contrast with
-.BR cf .
 .
 .
 .TP
