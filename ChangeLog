@@ -1,3 +1,16 @@
+2024-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/libgroff.am (libgroff_a_LIBADD): Add to
+	ensure linkage with gnulib.
+	* src/libs/libgroff/string.cpp: Align with modern groff
+	conventions.  Include "<stdio.h>" header file to ensure
+	visibility of `FILE`, `putc()` and `sprintf()` symbols.  Include
+	"<string.h>" header file to ensure visibility of `memmem()`
+	declaration; problem detected on Solaris 10.  Parenthesize
+	complex expressions.
+	(string::extract): Use C++ `static_cast` operator instead of
+	C-style type cast.
+
 2024-12-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: The `open` and `opena` requests now accept leading and

@@ -20,7 +20,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <stdlib.h>
+#include <stdio.h> // FILE, putc(), sprintf()
+#include <stdlib.h> // malloc()
+#include <string.h> // memchr(), memcmp(), memcpy(), memmem(), memset(),
+		    // strlen(), size_t
 
 #include "lib.h"
 
@@ -29,7 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 static char *salloc(int len, int *sizep);
 static void sfree(char *ptr, int size);
 static char *sfree_alloc(char *ptr, int size, int len, int *sizep);
-static char *srealloc(char *ptr, int size, int oldlen, int newlen, int *sizep);
+static char *srealloc(char *ptr, int size, int oldlen, int newlen,
+		      int *sizep);
 
 static char *salloc(int len, int *sizep)
 {
@@ -38,7 +42,7 @@ static char *salloc(int len, int *sizep)
     return 0;
   }
   else
-    return new char[*sizep = len*2];
+    return new char[*sizep = (len * 2)];
 }
 
 static void sfree(char *ptr, int)
@@ -58,10 +62,11 @@ static char *sfree_alloc(char *ptr, int oldsz, int len, int *sizep)
     return 0;
   }
   else
-    return new char[*sizep = len*2];
+    return new char[*sizep = (len * 2)];
 }
 
-static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen, int *sizep)
+static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen,
+		      int *sizep)
 {
   if (oldsz >= newlen) {
     *sizep = oldsz;
@@ -73,7 +78,7 @@ static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen, int *sizep)
     return 0;
   }
   else {
-    char *p = new char[*sizep = newlen*2];
+    char *p = new char[*sizep = (newlen * 2)];
     if (oldlen < newlen && oldlen != 0)
       memcpy(p, ptr, oldlen);
     delete[] ptr;
@@ -305,7 +310,7 @@ char *string::extract() const
   for (i = 0; i < n; i++)
     if (p[i] == '\0')
       nnuls++;
-  char *q =(char*)malloc(n + 1 - nnuls);
+  char *q = static_cast<char *>(malloc(n + 1 - nnuls));
   if (q != 0 /* nullptr */) {
     char *r = q;
     for (i = 0; i < n; i++)
@@ -319,7 +324,7 @@ char *string::extract() const
 void string::remove_spaces()
 {
   int l = len - 1;
-  while (l >= 0 && ptr[l] == ' ')
+  while ((l >= 0) && (ptr[l] == ' '))
     l--;
   char *p = ptr;
   if (l > 0)
