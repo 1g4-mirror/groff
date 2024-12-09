@@ -45,6 +45,14 @@ static void usage(FILE *stream)
           "usage: %s {-v | --version}\n"
           "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"GNU lkbib searches bibliographic databases for references matching\n"
+"all keywords \"key\" and writes any references found to the standard\n"
+"output stream.  It reads databases given by -p options and then\n"
+"(unless -n is given) a default database.  See the lkbib(1) manual\n"
+"page.\n",
+	  stream);
 }
 
 int main(int argc, char **argv)

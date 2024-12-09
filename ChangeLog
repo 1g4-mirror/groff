@@ -1,3 +1,8 @@
+2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/lkbib/lkbib.cpp (usage): If asked for `--help`,
+	summarize command purpose in message.
+
 2024-12-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Disable `cf` request in safer mode.
