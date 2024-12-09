@@ -1,5 +1,12 @@
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* chem.pl (usage): Revise usage message.  Organize like other
+	groff commands' usage messages.  Use $0 in the synopses for
+	consistency with groff's C++ programs.  This also informs the
+	user with multiple versions available which they are running.
+
+2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* chem.am (chem): Use sed to replace magic token `@PERL@` with
 	contents of `PERL` macro, determined by groff configure script.
 	* chem.pl: Rewrite shebang line to use the magic token.

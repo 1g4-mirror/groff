@@ -1194,19 +1194,19 @@ sub setparams {
 } # setparams()
 
 
+# Use $0 in the usage message for consistency with groff's C++ programs.
+# This also informs the user with multiple versions available which they
+# are running.
 sub usage {
   print <<EOF;
-usage: $chem [file ...]
-usage: $chem { -h | --help | -v | --version }
+usage: $0 [file ...]
+usage: $0 { -v | --version }
+usage: $0 { -h | --help }
 
-$chem is a groff preprocessor for producing chemical structure
+$chem is a groff(1) preprocessor for producing chemical structure
 diagrams.  It produces input for the $makevar{'G'}pic preprocessor.  If
 no file operands are given, or if file is "-", the standard input stream
-is read.
-
-Options:
- -h, --help     Display this message and exit.
- -v, --version  Display version information and exit.
+is read.  See the $chem(1) manual page.
 EOF
 }
 
