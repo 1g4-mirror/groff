@@ -84,7 +84,8 @@ lkbib \- search bibliographic databases
 .\" ====================================================================
 .
 .I \%lkbib
-searches bibliographic databases for references containing keywords
+searches bibliographic databases for references matching all
+keywords
 .I key
 and writes any references found to the standard output
 stream.
