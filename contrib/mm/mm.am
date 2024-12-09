@@ -139,6 +139,7 @@ uninstall_mm:
 	$(RM) $(DESTDIR)$(tmacdir)/$(tmac_m_prefix)mse.tmac
 	$(RM) $(DESTDIR)$(tmacdir)/$(tmac_m_prefix)mmse.tmac
 	-rmdir $(DESTDIR)$(tmacdir)/mm
+	-rmdir $(DESTDIR)$(tmacdir)
 
 # Special distribution rule: we copy all .tmac files from contrib/mm
 dist-hook: dist_mm
