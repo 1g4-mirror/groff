@@ -1,5 +1,17 @@
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.am: Simplify.
+	(afmtodit): Drop branch handling the case where the `PERL` macro
+	is undefined or empty.  The groff configuration process has long
+	required a Perl interpreter to be present, and its absence is a
+	hard error; see `GROFF_PERL` in "m4/groff.m4".  Since
+	construction of the target is an interruptible multi-step
+	process involving sed(1) and chmod(1), `RM` the target before
+	constructing it, and favor `$@` expansion over literally naming
+	the target.
+
+2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/lkbib/lkbib.cpp (usage): If asked for `--help`,
 	summarize command purpose in message.
 
