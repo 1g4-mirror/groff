@@ -16292,7 +16292,7 @@ newline.
 
 @Example
 $ printf 'foo' > xxx
-$ groff <<EOF
+$ groff -T ascii <<EOF
 The situation is
 .so xxx
 bar.
