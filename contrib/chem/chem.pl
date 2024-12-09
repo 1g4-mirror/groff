@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!@PERL@
 
 # chem - a groff preprocessor for producing chemical structure diagrams
 

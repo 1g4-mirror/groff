@@ -1,3 +1,9 @@
+2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* chem.am (chem): Use sed to replace magic token `@PERL@` with
+	contents of `PERL` macro, determined by groff configure script.
+	* chem.pl: Rewrite shebang line to use the magic token.
+
 2023-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* chem.pl: Stop endorsing shebang line space myth.  See

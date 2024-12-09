@@ -27,7 +27,6 @@ prefixexecbin_SCRIPTS += chem
 chempicdir = $(datasubdir)/pic
 dist_chempic_DATA = contrib/chem/chem.pic
 
-
 CHEM_GENEXAMPLES = contrib/chem/examples/README
 CHEM_EXAMPLES =  \
   contrib/chem/examples/atp.chem \
@@ -78,6 +77,7 @@ contrib/chem/examples/122/README: $(chem_srcdir)/examples/122/README.txt
 chem: $(chem_srcdir)/chem.pl $(SH_DEPS_SED_SCRIPT)
 	$(AM_V_GEN)$(RM) $@ \
 	&& sed -f "$(SH_DEPS_SED_SCRIPT)" \
+	       -e "s|[@]PERL[@]|$(PERL)|" \
 	       -e "s|[@]g[@]|$(g)|g" \
 	       -e "s|[@]BINDIR[@]|$(DESTDIR)$(bindir)|g" \
 	       -e "s|[@]MACRODIR[@]|$(DESTDIR)$(tmacdir)|g" \
