@@ -42,7 +42,6 @@ TMACNORMALFILES = \
   tmac/doc-old.tmac \
   tmac/doc.tmac \
   tmac/mdoc.tmac \
-  tmac/pic.tmac \
   tmac/papersize.tmac \
   tmac/62bit.tmac \
   tmac/ec.tmac \

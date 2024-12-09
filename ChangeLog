@@ -1,5 +1,17 @@
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Improve build modularity.
+
+	* tmac/tmac.am (TMACNORMALFILES): Stop shipping "pic.tmac"
+	here...
+	* src/preproc/pic/pic.am: ...in favor of defining appropriate
+	module-specific Automake variables/make(1) macros here.
+	(uninstall_pic_hook): Attempt to remove `$(DESTDIR)/$(tmacdir)`
+	directory, ignoring failure, in case we just removed the last
+	thing in it.
+
+2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn]: Improve build modularity.
 
 	* tmac/tmac.am (TMACNORMALFILES): Stop shipping "eqnrc" here...
