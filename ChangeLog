@@ -1,5 +1,12 @@
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.pl: Use $0 in the usage message
+	for consistency with groff's C++ programs.  This also informs
+	the user with multiple versions available which they are
+	running.
+
+2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.am: Simplify.
 	(afmtodit): Drop branch handling the case where the `PERL` macro
 	is undefined or empty.  The groff configuration process has long
