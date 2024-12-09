@@ -1,3 +1,12 @@
+2024-12-09  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Data provided to .pso must terminate with \n.
+
+	* tmac/pdfpic.tmac: Add terminating linefeed.
+
+	Fixes <https://savannah.gnu.org/bugs/?66537> thanks to
+	Bjarni Ingi Gislason for the report and solution.
+
 2024-12-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Stop pointlessly overwriting new CJK font descriptions for

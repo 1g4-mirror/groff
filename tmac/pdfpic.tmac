@@ -70,7 +70,7 @@
 .de pdfpic@get-image-dimensions
 .  ds pdfpic*command pdfinfo \$1 2>/dev/null \"
 .  eo
-.  as pdfpic*command  | perl -ne 'print qq(. \\\\R\@pdfpic*width ${1}p@ \\\\R\@pdfpic*height ${2}p\@) if m/Page\s+size:\s+([\d.]+)\sx\s([\d.]+)/si;'
+.  as pdfpic*command  | perl -ne 'print qq(. \\\\R\@pdfpic*width ${1}p@ \\\\R\@pdfpic*height ${2}p\@),qq(\\n) if m/Page\s+size:\s+([\d.]+)\sx\s([\d.]+)/si;'
 .  ec
 .  pso \*[pdfpic*command]
 .  if !r pdfpic*width \{\
