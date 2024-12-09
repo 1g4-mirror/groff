@@ -1,4 +1,4 @@
-# Copyright (C) 1989-2020 Free Software Foundation, Inc.
+# Copyright (C) 1989-2024 Free Software Foundation, Inc.
 #      Written by James Clark <jjc@jclark.com>
 #      Automake migration by Bertrand Garrigues
 #        <bertrand.garrigues@laposte.net>
@@ -30,6 +30,7 @@ man7_MANS += \
   tmac/groff_trace.7 \
   tmac/groff_www.7
 
+# See dist_tmac_DATA below regarding "an.tmac" and "s.tmac".
 TMACNORMALFILES = \
   tmac/man.tmac \
   tmac/mandoc.tmac \
@@ -71,7 +72,6 @@ TMACNORMALFILES = \
   tmac/europs.tmac \
   tmac/composite.tmac \
   tmac/fallbacks.tmac \
-  tmac/eqnrc \
   tmac/refer.tmac \
   tmac/refer-me.tmac \
   tmac/refer-ms.tmac \
@@ -380,13 +380,11 @@ uninstall_tmac_hook:
 	fi
 	if test -d $(DESTDIR)$(mdocdir); then \
 	  rmdir $(DESTDIR)$(mdocdir); \
-	fi
-	if test -d $(DESTDIR)$(tmacdir); then \
-	  rmdir $(DESTDIR)$(tmacdir); \
-	fi
+	fi; \
 	if test -d $(DESTDIR)$(localtmacdir); then \
 	  rmdir $(DESTDIR)$(localtmacdir); \
 	fi
+	-rmdir $(DESTDIR)$(tmacdir)
 
 # Define convenience macros for in-tree documents to depend on.  Don't
 # use these above.

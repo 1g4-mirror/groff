@@ -1,5 +1,21 @@
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn]: Improve build modularity.
+
+	* tmac/tmac.am (TMACNORMALFILES): Stop shipping "eqnrc" here...
+	* src/preproc/eqn/eqn.am: ...in favor of defining appropriate
+	module-specific Automake variables/make(1) macros here.
+
+	* tmac/tmac.am (uninstall_tmac_hook): Ignore failure of `rmdir`
+	to remove `$(DESTDIR)/$(tmacdir)`.  Multiple Automake files
+	place things there, and we might be racing with them.
+
+	* src/preproc/eqn/eqn.am (uninstall_eqn_hook): Attempt to remove
+	`$(DESTDIR)/$(tmacdir)` directory, ignoring failure, in case we
+	just removed the last thing in it.
+
+2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.pl: Use $0 in the usage message
 	for consistency with groff's C++ programs.  This also informs
 	the user with multiple versions available which they are
