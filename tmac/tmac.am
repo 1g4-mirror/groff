@@ -71,7 +71,6 @@ TMACNORMALFILES = \
   tmac/europs.tmac \
   tmac/composite.tmac \
   tmac/fallbacks.tmac \
-  tmac/refer.tmac \
   tmac/refer-me.tmac \
   tmac/refer-ms.tmac \
   tmac/troffrc \
