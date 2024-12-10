@@ -1,5 +1,24 @@
 2024-12-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[src/devices, tmac]: Improve build modularity.
+
+	* tmac/tmac.am (TMACNORMALFILES, tmac_TESTS): Drop file names
+	from these macros that are better declared elsewhere.
+
+	* src/devices/grodvi/grodvi.am:
+	* src/devices/grohtml/grohtml.am:
+	* src/devices/grolbp/grolbp.am:
+	* src/devices/grolj4/grolj4.am:
+	* src/devices/gropdf/gropdf.am:
+	* src/devices/grops/grops.am:
+	* src/devices/grotty/grotty.am:
+	* src/devices/xditview/xditview.am: ...like here (using
+	appropriately particulized names).  Attempt to remove
+	`$(DESTDIR)/$(tmacdir)` directory, ignoring failure, in case we
+	just removed the last thing in it.
+
+2024-12-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tmac.am (TMACNORMALFILES): Ship "psfig.tmac".
 
 2024-12-10  G. Branden Robinson <g.branden.robinson@gmail.com>
