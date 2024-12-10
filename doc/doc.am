@@ -351,7 +351,7 @@ SUFFIXES += .me.in .me
 doc/meintro.ps doc/meintro_fr.ps doc/meref.ps: $(TMAC_PACKAGE_ME)
 
 .me.in.me:
-	$(GROFF_V)$(MKDIR_P) `dirname $@` \
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_SED) $< >$@
 
 .me.ps:

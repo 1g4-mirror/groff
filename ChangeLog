@@ -1,3 +1,9 @@
+2024-12-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (.me.in.me): Fix inference rule to expand correct
+	Automake macro in rule; use `AM_V_GEN`, not `GROFF_V` to report
+	progress, since we're running sed(1), not groff.
+
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[refer]: Improve build modularity.
