@@ -47,12 +47,13 @@ TMACNORMALFILES = \
   tmac/ec.tmac \
   tmac/trace.tmac \
   tmac/ps.tmac \
-  tmac/psold.tmac \
-  tmac/pdfpic.tmac \
-  tmac/pspic.tmac \
   tmac/psatk.tmac \
+  tmac/psfig.tmac \
+  tmac/psold.tmac \
+  tmac/pspic.tmac \
   tmac/ptx.tmac \
   tmac/pdf.tmac \
+  tmac/pdfpic.tmac \
   tmac/dvi.tmac \
   tmac/tty.tmac \
   tmac/tty-char.tmac \
