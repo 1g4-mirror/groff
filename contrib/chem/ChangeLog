@@ -1,3 +1,14 @@
+2024-12-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* chem.pl: Revise approach to determining program name.  This
+	reverts the change on 9 December; the Perl interpreter does not
+	populate `argv[0]` the same way that the shell typically does
+	with execve(2).  Drop global scalar `chem` in favor of a new
+	global scalar `prog`, populated by `File::Spec->splitpath()`.
+	(usage, version): Migrate from `chem` to `prog`.
+	(usage): Report only the "basename" of the script.  Revise and
+	shorten command description.
+
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* chem.pl (usage): Revise usage message.  Organize like other

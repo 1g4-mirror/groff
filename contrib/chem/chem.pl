@@ -40,11 +40,11 @@ use Math::Trig;
 
 # for catfile()
 use File::Spec;
+(undef,undef,my $prog)=File::Spec->splitpath($0);
 
 # $Bin is the directory where this script is located
 use FindBin;
 
-my $chem;
 my $File_chem_pic;
 
 my $is_in_source_tree;
@@ -58,13 +58,11 @@ if ($is_in_source_tree) {
   my $chem_dir = $FindBin::Bin;
   $makevar{'G'} = '';
   $File_chem_pic = File::Spec->catfile($chem_dir, 'chem.pic');
-  $chem = 'chem';
 } else {
   $groff_version = '@VERSION@';
   $makevar{'G'} = '@g@';
   $makevar{'PICDIR'} = '@PICDIR@';
   $File_chem_pic = File::Spec->catfile($makevar{'PICDIR'}, 'chem.pic');
-  $chem = $makevar{'G'} . 'chem';
 }
 
 
@@ -1198,22 +1196,22 @@ sub setparams {
 # This also informs the user with multiple versions available which they
 # are running.
 sub usage {
+  my $G = $makevar{'G'};
   print <<EOF;
-usage: $0 [file ...]
-usage: $0 { -v | --version }
-usage: $0 { -h | --help }
+usage: $prog [file ...]
+usage: $prog { -v | --version }
+usage: $prog { -h | --help }
 
-$chem is a groff(1) preprocessor for producing chemical structure
-diagrams.  It produces input for the $makevar{'G'}pic preprocessor.  If
-no file operands are given, or if file is "-", the standard input stream
-is read.  See the $chem(1) manual page.
+$prog is a groff(1) preprocessor for producing chemical structure
+diagrams.  It produces input for the ${G}pic(1) preprocessor.  See the
+$prog(1) manual page.
 EOF
 }
 
 
 sub version {
   print <<EOF;
-$chem (groff $groff_version) $chem_version
+$prog (groff $groff_version) $chem_version
 $copyright
 License GPLv2: GNU GPL version 2
 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>
