@@ -2329,6 +2329,8 @@ string,
 or diversion identifier,
 or the name of a request.
 .
+.br
+.ne 3v
 .TPx
 .I npl
 is a numeric expression constituting a count of subsequent
@@ -6063,11 +6065,10 @@ escape sequence dereferences a string's name,
 interpolating its contents.
 .
 If the name does not exist,
-it is defined as empty,
-nothing is interpolated,
-and a warning in category
-.RB \%\[lq] mac \[rq]
-is emitted.
+the formatter defines it as empty,
+interpolates nothing,
+and emits a warning in category
+.RB \%\[lq] mac \[rq].
 .
 See section \[lq]Warnings\[rq] in
 .MR @g@troff 1 .
@@ -6077,11 +6078,9 @@ macro arguments are;
 see section \[lq]Calling macros\[rq] above.
 .
 In contrast to macro calls,
-however,
-if a closing bracket
+an argument containing a closing bracket
 .B ]
-occurs in a string argument,
-that argument must be enclosed in double quotes.
+must be enclosed in double quotes.
 .
 When defining strings,
 argument interpolations must be escaped if they are to reference
