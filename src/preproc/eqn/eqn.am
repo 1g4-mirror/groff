@@ -42,6 +42,7 @@ eqn_SOURCES = \
   src/preproc/eqn/pbox.h \
   src/preproc/eqn/eqn.h
 
+# eqnrc is not really a troff macro ("tmac") file.
 EQNTMACFILES = tmac/eqnrc
 eqntmacdir = $(tmacdir)
 dist_eqntmac_DATA = $(EQNTMACFILES)
