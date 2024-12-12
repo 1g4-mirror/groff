@@ -1,3 +1,20 @@
+2024-12-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Move "chem.pic" from its own subdirectory (which has no other
+	contents provided by groff) to the "tmac" directory.  The
+	"eqnrc" file and groff's hyphenation pattern and exception files
+	establish a precedent for using "tmac" for things that aren't
+	"troff macro" files.  This makes it easier to run automated
+	tests on GNU chem from the build tree.
+
+	* chem.am (chempicdir, dist_chempic_DATA): Drop macros.
+	(CHEMTMACFILES, chemtmacdir, dist_chemtmac_DATA): Add macros.
+	(uninstall_chem_extra): Rename this...
+	(uninstall_chem_hook): ...to this, for consistency with other
+	groff Automake files.
+	* chem.pl: If running as "built" version of script, locate
+	"chem.pic" file relative to the build's "tmac" directory.
+
 2024-12-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* chem.pl: Revise approach to determining program name.  This
@@ -386,7 +403,7 @@
 ________________________________________________________________
 License
 
-Copyright (C) 2006-2020 Free Software Foundation, Inc.
+Copyright (C) 2006-2024 Free Software Foundation, Inc.
 Written by Bernd Warken <groff-bernd.warken-72@web.de>.
 
 Copying and distribution of this file, with or without

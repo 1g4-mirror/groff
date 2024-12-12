@@ -61,8 +61,8 @@ if ($is_in_source_tree) {
 } else {
   $groff_version = '@VERSION@';
   $makevar{'G'} = '@g@';
-  $makevar{'PICDIR'} = '@PICDIR@';
-  $File_chem_pic = File::Spec->catfile($makevar{'PICDIR'}, 'chem.pic');
+  $makevar{'MACRODIR'} = '@MACRODIR@';
+  $File_chem_pic = File::Spec->catfile($makevar{'MACRODIR'}, 'chem.pic');
 }
 
 
