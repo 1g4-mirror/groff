@@ -1508,6 +1508,11 @@ sub do_x
 		    FixPDFColour($annot->{DATA});
 		    $annot->{DATA}->{Dest}=UTFName($annot->{DATA}->{Dest}) if exists($annot->{DATA}->{Dest});
 		    $annot->{DATA}->{A}->{URI}=URIName($annot->{DATA}->{A}->{URI}) if exists($annot->{DATA}->{A}->{URI});
+		    if (exists($annot->{DATA}->{Subtype}) and $annot->{DATA}->{Subtype} eq '/Text')
+		    {
+			$annot->{DATA}->{M}="($dt)";
+			$annot->{DATA}->{T}=$info{Author} if !exists($annot->{DATA}->{T}) and exists($info{Author});
+		    }
 		    push(@PageAnnots,$annotno);
 		}
 		elsif ($pdfmark=~m/(.+) \/OUT\s*$/)

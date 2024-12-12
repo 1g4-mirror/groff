@@ -144,6 +144,23 @@ am solely responsible for any bugs I may have introduced into this file.
 .\"
 .ds PDFLB \\012
 .\"
+.\" "PDFNOTE.COLOUR" must be set to a sequence of three values,
+.\" each in the range 0.0 .. 1.0, representing the red, green, and
+.\" blue components of the colour specification in the RGB colour
+.\" domain, which is shared by "groff" and the PDF readers.
+.\"
+.ds PDFNOTE.COLOUR   1.00 1.00 0.00
+.\"
+.\" Accommodate users who prefer the American spelling, COLOR, to
+.\" the British spelling, COLOUR.
+.\"
+.als PDFNOTE.COLOR       PDFNOTE.COLOUR
+.\"
+.\" "PDFNOTE.OPACITY" set the opacity of the note icon (not the actual
+.\" popup window which is always opaque). Range 0->1 (opaque).
+.\"
+.ds PDFNOTE.OPACITY 0.60
+.\"
 .de pdfnote
 .\" ----------------------------------------------------------------------
 .\" Usage:
@@ -169,10 +186,14 @@ am solely responsible for any bugs I may have introduced into this file.
 .\"
 .\" Emit the note, and clean up
 .\"
-.   pdfmark \\*[pdf:note.instance] /Subtype /Text /Contents (\\$*) /ANN
+.   pdfmark \\*[pdf:note.instance] /Subtype /Text /Contents (\\$*) /Color [\\*[PDFNOTE.COLOUR]] /CA \\*[PDFNOTE.OPACITY] /ANN
 .   rm pdf:note.instance
 .   rr pdf:note.argc
 ..
+.\" The -T flag gives a title to the note window, if not used but a
+.\" document author has been given previously, the author's name is
+.\" used as the window title.
+.\"
 .de pdf:note-T
 .nr pdf:note.argc 2
 .as pdf:note.instance " /Title (\\$2)
