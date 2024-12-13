@@ -401,7 +401,7 @@ names the publisher (issuer).
 .
 .TP
 .B %J
-records the title of the journal within which a cited article is
+records the name of the journal within which a cited article is
 collected.
 .
 See
