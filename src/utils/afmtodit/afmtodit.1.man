@@ -94,16 +94,15 @@ PostScript and PDF output
 .\" ====================================================================
 .
 .I \%afmtodit
-adapts an
-Adobe Font Metric
-file,
-.IR afm-file ,
-for use with the
+generates a font description file for use with
+.MR groff 1 's
 .B ps
 and
 .B pdf
-output devices of
-.MR @g@troff @MAN1EXT@ .
+output devices from an
+Adobe Font Metric
+file,
+.IR afm-file .
 .
 .I map-file
 associates a

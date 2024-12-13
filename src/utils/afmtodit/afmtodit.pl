@@ -83,9 +83,9 @@ sub usage {
 	"usage: $0 --help\n";
     unless ($had_error) {
 	print $stream "\n" .
-"Adapt an Adobe Font Metric file, afm-file, for use with the 'ps'\n" .
-"and 'pdf' output devices of groff(1).  See the afmtodit(1) manual " .
-"page.\n";
+"Generate a font description file for use with groff(1)'s 'ps' and\n" .
+"'pdf' output devices from an Adobe Font Metric file, afm-file.\n" .
+"See the afmtodit(1) manual page.\n";
     }
     my $status = 0;
     $status = 2 if ($had_error);
