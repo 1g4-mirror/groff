@@ -1455,7 +1455,7 @@ human-readable form using UTC.
 A macro file must have a name in the form @code{@var{name}.tmac} or
 @code{tmac.@var{name}} and be placed in a @dfn{tmac directory} to be
 found by the @option{-m @var{mac}} command-line option.@footnote{The
-@code{mso} request does not have these limitations.  @xref{I/O}.}
+@code{mso} loads a macro file of any name.  @xref{I/O}.}
 @cindex tmac, directory
 @cindex directory, for tmac files
 @cindex tmac, path
