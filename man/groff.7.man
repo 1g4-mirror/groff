@@ -917,16 +917,18 @@ see below.
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Numeric
 .\" expressions".
-A
+When evaluated,
+a
 .I numeric expression
-evaluates to an integer.
-.
-The following operators are recognized.
-.\"evaluates to an integer:
-.\"it can be as simple as a literal
+interpolates an integer.
+.\"It can be as simple as a literal
 .\".RB \[lq] 0 \[rq]
 .\"or it can be a complex sequence of register and string interpolations
-.\"interleaved with measurement operators.
+.\"interleaved with measurements and operators.
+.
+GNU
+.I troff \" GNU
+recognizes the following operators.
 .
 .
 .P

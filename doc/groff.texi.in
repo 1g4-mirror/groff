@@ -6185,9 +6185,10 @@ scaling unit.
 @cindex numeric expressions
 @cindex expressions, numeric
 
-A @dfn{numeric expression} evaluates to an integer:@: it can be as
-simple as a literal @samp{0} or it can be a complex sequence of register
-and string interpolations interleaved with measurements and operators.
+When evaluated, a @dfn{numeric expression} interpolates an integer:@: it
+can be as simple as a literal @samp{0} or it can be a complex sequence
+of register and string interpolations interleaved with measurements and
+operators.
 
 GNU @code{troff} provides a set of mathematical and logical operators
 familiar to programmers---as well as some unusual ones---but supports
