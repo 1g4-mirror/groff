@@ -17828,8 +17828,12 @@ The set of additional delimiters comprises
 @cindex input level in delimited arguments
 @cindex interpolation depth in delimited arguments
 @cindex delimited arguments, incompatibilities with @acronym{AT&T} @code{troff}
-Normally, GNU @code{troff} preserves the interpolation depth in
-delimited arguments, but not in compatibility mode.
+Normally,
+GNU
+@command{troff}
+keeps track of delimited arguments' interpolation depth.
+In compatibility mode,
+it does not.
 
 @Example
 .ds xx '
