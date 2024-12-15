@@ -477,6 +477,7 @@ see
 Operate in
 .I unsafe mode,
 enabling the
+.BR cf ,
 .BR open ,
 .BR opena ,
 .BR pi ,
