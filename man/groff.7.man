@@ -2283,10 +2283,9 @@ system.
 .
 GNU
 .I troff \" GNU
-does not accept tabs,
-newlines
-(line feeds),
-or spaces in file names supplied as arguments to requests.
+does not accept newlines
+(line feeds)
+in file names supplied as arguments to requests.
 .
 .TPx
 .I font

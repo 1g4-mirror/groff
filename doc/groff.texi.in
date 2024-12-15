@@ -1306,15 +1306,34 @@ and Font Description Files}.)  This selection can be overridden with the
 @item -U
 @cindex mode, unsafe
 @cindex unsafe mode
-Operate in @dfn{unsafe mode}, which enables the @code{open},
-@code{opena}, @code{pi}, @code{pso}, and @code{sy} requests.  These
-requests are disabled by default because they allow an untrusted input
+Operate in
+@dfn{unsafe mode},
+enabling the
+@code{open},
+@code{opena},
+@code{pi},
+@code{pso},
+and
+@code{sy}
+requests,
+which are disabled by default because they allow an untrusted input
 document to write to arbitrary file names@footnote{GNU @command{troff}
-does not, however, accept tabs, newlines (line feeds), or spaces in file
-names supplied as arguments to requests.} and run arbitrary commands.
+does not, however, accept newlines (line feeds) in file names supplied
+as arguments to requests.} and run arbitrary commands.
 This option also adds the current directory to the macro package search
-path; see the @option{-m} option above.  @command{groff} passes
-@option{-U} to @command{gpic} and @command{gtroff}.
+path;
+see the
+@option{-m}
+and
+@option{-M}
+option above.
+@command{groff}
+passes
+@option{-U}
+to
+@command{gpic}
+and GNU
+@command{troff}.
 
 @item -v
 Write version information for @command{groff} and all programs run by it
