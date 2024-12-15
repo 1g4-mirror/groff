@@ -2011,10 +2011,9 @@ paragraph, which might use punctuation or a digit for a tag,
 respectively.  These are frequently used to construct lists.
 
 @Example
-  @result{} o    This  list  item  starts with a bullet.  When
+  @result{} *    This  list  item  starts with a bullet.  When
   @result{}      producing output for a device using the ASCII
-  @result{}      character set, an @quoteleft{}o@quoteright{} is@
-formatted instead.
+  @result{}      character set, an asterisk is formatted instead.
 @endExample
 
 @noindent
