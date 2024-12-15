@@ -977,7 +977,8 @@ the standard input stream.
 
 All @code{groff} commands accept a @option{--help} option, which
 summarizes usage similarly to the foregoing, and @option{--version},
-which discloses release information.  Both exit after reporting.
+which discloses release information.
+Both exit with a successful status after reporting.
 
 The rest of @command{groff}'s command-line options are as follows.
 
