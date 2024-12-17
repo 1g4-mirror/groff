@@ -827,7 +827,8 @@ public:
   void right(hunits);
   void down(vunits);
   void moveto(hunits, vunits);
-  void start_device_extension(color * /* fcol */,
+  void start_device_extension(tfont * /* tf */,
+			      color * /* gcol */, color * /* fcol */,
 			      bool /* omit_command_prefix */ = false);
   void start_device_extension();
   void write_device_extension_char(unsigned char c);
@@ -887,18 +888,15 @@ inline void troff_output_file::put(unsigned int i)
   put_string(ui_to_a(i), fp);
 }
 
-void troff_output_file::start_device_extension(color *fcol,
+void troff_output_file::start_device_extension(tfont *tf, color *gcol,
+					       color *fcol,
 					       bool omit_command_prefix)
 {
   flush_tbuf();
-#if 0
   set_font(tf);
   stroke_color(gcol);
-#endif
   fill_color(fcol);
-#if 0
   do_motion();
-#endif
   if (!omit_command_prefix)
     put("x X ");
 }
@@ -3978,7 +3976,7 @@ node *device_extension_node::copy()
 
 void device_extension_node::tprint_start(troff_output_file *out)
 {
-  out->start_device_extension(fcol, lacks_command_prefix);
+  out->start_device_extension(tf, gcol, fcol, lacks_command_prefix);
 }
 
 void device_extension_node::tprint_char(troff_output_file *out,

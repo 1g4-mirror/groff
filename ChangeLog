@@ -3412,20 +3412,6 @@
 
 2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/node.cpp (class troff_output_file):
-	Drop `tf` and `gcol` arguments from declaration, because...
-	(troff_output_file::start_device_extension): Cease output of
-	commands to update the font, stroke color, and drawing position.
-	Drop now-unused `tf` and `gcol` arguments.
-	(device_extension_node::tprint_start): Drop `tf` and `gcol`
-	arguments from call site.
-
-	* tmac/tests/an_MR-works.sh: Update test expectations.  The
-	expected commands shift location by two lines, but the output
-	still behaves as desired.
-
-2024-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/roff/troff/node.cpp
 	(troff_output_file::start_device_extension): Call `flush_tbuf()`
 	before any other function that may write to device-independent
