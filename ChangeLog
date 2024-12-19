@@ -1,3 +1,12 @@
+2024-12-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Regression-test Savannah #66587.
+
+	* src/roff/groff/tests/using-diversion-as-character-works.sh:
+	* src/roff/groff/tests/artifacts/small-gnu-head.sh: Add test and
+	its input artifact.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2024-12-12  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	Expose more attributes of pdfnotes
