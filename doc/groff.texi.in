@@ -7506,11 +7506,18 @@ the call of its end macro.
 @section Registers
 @cindex registers
 
-In the @code{roff} language, numbers and measurements can be stored in
-@dfn{registers}.  Many built-in registers exist, supplying anything from
-the date to details of formatting parameters; some of these are
-read-only.  You can also define your own.  @xref{Identifiers}, for
-information on constructing a valid name for a register.
+In the
+@code{roff}
+language,
+numbers and measurements can be stored in
+@dfn{registers}.
+Many built-in registers exist,
+supplying anything from components of the date
+to details of formatting parameters;
+some of these are read-only.
+You can also define your own.
+@xref{Identifiers},
+for information on constructing a valid name for a register.
 
 @cindex format, register
 @cindex register format
