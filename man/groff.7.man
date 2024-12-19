@@ -5145,13 +5145,13 @@ Interpolate a dummy character.
 .
 .
 .TP
-.ESC )
+.ESC \|)
 Interpolate a dummy character that is transparent to end-of-sentence
 recognition.
 .
 .
 .TP
-.ESC /
+.ESC \|/
 Apply italic correction.
 .
 Use between an immediately adjacent oblique glyph on the left and an
@@ -5159,7 +5159,7 @@ upright glyph on the right.
 .
 .
 .TP
-.ESC ,
+.ESC \|,
 Apply left italic correction.
 .
 Use between an immediately adjacent upright glyph on the left and an
