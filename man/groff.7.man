@@ -4939,14 +4939,18 @@ The escape sequences
 and
 .esc S
 are not tokenized when
-.I groff
-reads its input;
-.esc R
-updates only the formatter's internal state,
-and the rest only the environment.
+GNU
+.I troff \" GNU
+reads its input.
 .
-They do not contribute (directly) to output;
-see the \[lq]Gtroff Internals\[rq] section of the
+.esc R
+updates only the formatter's register dictionary,
+and does not contribute (directly) to output.
+.
+The others alter the environment
+(see section \[lq]Environments\[rq] below).
+.
+See the \[lq]Gtroff Internals\[rq] section of the
 .I groff
 Texinfo manual.
 .

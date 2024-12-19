@@ -7564,9 +7564,13 @@ interpolated.  @xref{Auto-increment}.)
 
 @cindex @code{\R} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\R}
-@code{\R} is not tokenized when GNU @code{troff} reads its input; it
-updates only the formatter's internal state and does not contribute
-(directly) to output.  @xref{Gtroff Internals}.
+@code{\R}
+is not tokenized when GNU
+@command{troff}
+reads its input;
+it updates only the formatter's register dictionary
+and does not contribute (directly) to output.
+@xref{Gtroff Internals}.
 
 Further surprise can occur if you use registers like
 @code{.k},@footnote{@xref{Page Motions}.} whose values are not
