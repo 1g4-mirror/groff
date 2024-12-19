@@ -3459,7 +3459,7 @@ Append hyphenation patterns from
 .
 .TPx
 .REQ .hpfcode "a b \fR[\fPc d\fR] .\|.\|.\fP"
-.B Caution:
+.I Caution:
 This request will be withdrawn in a future
 .I groff
 release.
@@ -6174,7 +6174,7 @@ string is later interpolated.
 .
 .
 .P
-.B Caution:
+.I Caution:
 The
 .B ds
 request,

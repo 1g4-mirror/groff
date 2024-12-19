@@ -2949,7 +2949,7 @@ of the environment.
 .TP
 .BI .hpfcode\~ "a b"\c
 .RI \~[ "c d" "] .\|.\|."
-.B Caution:
+.I Caution:
 This request will be withdrawn in a future
 .I groff
 release.

@@ -758,7 +758,7 @@ is implied.
 .
 Attributes can be specified in the same way as for a normal text object.
 .
-.B Caution:
+.I Caution:
 be very careful that you specify an appropriate format string in
 .I text;
 .IR @g@pic 's
