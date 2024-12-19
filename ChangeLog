@@ -26,7 +26,7 @@
 	* src/devices/grops/grops.am:
 	* src/devices/grotty/grotty.am:
 	* src/devices/xditview/xditview.am: ...like here (using
-	appropriately particulized names).  Attempt to remove
+	appropriately particularized names).  Attempt to remove
 	`$(DESTDIR)/$(tmacdir)` directory, ignoring failure, in case we
 	just removed the last thing in it.
 
@@ -230,7 +230,7 @@
 	an actual measurement of parameter expansion.
 	* src/roff/nroff/tests/verbose_option_works.sh: Fix spurious
 	failure of test for grep(1) supporting `-q` and `-x` options.
-	Continues commt e05cf6d3b3, 4 December.
+	Continues commit e05cf6d3b3, 4 December.
 
 	* HACKING: Document Solaris frustrations.
 
