@@ -1914,6 +1914,9 @@ except that it does not cancel a pending end-of-sentence state.
 .\" END Keep (roughly) parallel with groff.texi node "Dummy Characters".
 .
 .
+.\" TODO: Add sections here about characters (including custom
+.\" defintions with the `char` request family) and fonts (including
+.\" special fonts and the character resolution process).
 .\" ====================================================================
 .SH "Control structures"
 .\" ====================================================================
