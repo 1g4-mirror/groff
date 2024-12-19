@@ -1074,7 +1074,7 @@ scaling units are ignored in the evaluation
 .
 GNU
 .I troff \" GNU
-also provides a pair of operators to compute the extrema of two
+also provides a pair of operators to compute the extremum of two
 operands:
 .B >?\&
 (maximum)
@@ -1116,7 +1116,7 @@ others false.
 .
 .
 .P
-We can operate on truth values with the logical operators
+Operate on truth values with the logical operators
 .B &
 (logical conjunction or \[lq]and\[rq])
 and
@@ -2033,7 +2033,7 @@ their truth values are as shown below.
 .TS
 rf(BI) lB
 rB lx.
-cond-expr\f[R].\|.\|.	.\|.\|.is true if.\|.\|.
+cond-expr\f[B].\|.\|.	.\|.\|.is true if.\|.\|.
 _
 T{
 .BI \[aq] s1 \[aq] s2 \[aq]
@@ -2827,7 +2827,7 @@ Remove definition of ordinary or special
 Define ordinary or special character
 .I c
 as
-.I anything.
+.I contents.
 .
 .TPx
 .REQ .chop name
@@ -2923,7 +2923,6 @@ at
 .IR n /36
 ems,
 as if one em equals
-one em equals
 .I p
 scaled points.
 .
@@ -4492,7 +4491,7 @@ As
 .RB \[lq] .ss\~\c
 .IR n \[rq],
 but set additional inter-sentence space size to
-.IR n \~12ths
+.IR m \~12ths
 of the selected font's
 .B spacewidth
 parameter.
@@ -4559,6 +4558,9 @@ Execute
 in the operating environment
 by passing it to
 .MR system 3 .
+.
+See register
+.BR \%systat .
 .
 Unsafe request;
 disabled by default.
