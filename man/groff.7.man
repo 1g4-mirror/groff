@@ -5623,9 +5623,7 @@ request.
 .TP
 .ESC s( \[+-]N
 .TQ
-.fam C
 .BI \es \[+-] ( N
-.fam
 Set/increase/decrease the type size to/by
 .I N
 scaled points;
@@ -5640,15 +5638,11 @@ request.
 .TP
 .ESC[] s \[+-]N
 .TQ
-.fam C
 .BI \es \[+-] [ N ]
-.fam
 .TQ
 .ESCq s \[+-]N
 .TQ
-.fam C
 .BI \es \[+-] \[aq] N \[aq]
-.fam
 Set/increase/decrease the type size to/by
 .I N
 scaled points.
