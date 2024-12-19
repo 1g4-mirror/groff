@@ -12665,11 +12665,17 @@ Gray codes are explored in \*[cite Morgan 1998].
 @cindex trailing spaces in string definitions and appendments
 @cindex comments, with @code{ds}
 @cindex @code{ds} request, and comments
-@strong{Caution:@:} The @code{ds} request, unlike others, treats the
-remainder of the input line as its second argument, including trailing
-spaces.  This means that comments on a line with such a request can
-introduce unwanted space into a string when they are set off from the
-material they annotate, as is conventional.
+@strong{Caution:@:}
+The
+@code{ds}
+request treats the remainder of the input line as its second argument,
+including trailing spaces.
+Ending string definitions
+(and appendments)
+with a comment,
+even an empty one,
+prevents unwanted space from creeping into them during source document
+maintenance.
 
 @Example
 .ds H2O H\v'+.3m'\s'-2'2\v'-.3m'\s0O \" water

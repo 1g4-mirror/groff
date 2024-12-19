@@ -6177,9 +6177,7 @@ string is later interpolated.
 .I Caution:
 The
 .B ds
-request,
-unlike others,
-treats the remainder of the input line as its second argument,
+request treats the remainder of the input line as its second argument,
 including trailing spaces.
 .
 Ending string definitions
