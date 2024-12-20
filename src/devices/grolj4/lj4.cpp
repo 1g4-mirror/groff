@@ -625,8 +625,7 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  opterr = 0;
-  while ((c = getopt_long(argc, argv, "c:d:F:I:lp:vw:", long_options,
+  while ((c = getopt_long(argc, argv, ":c:d:F:I:lp:vw:", long_options,
 	  NULL)) != EOF)
     switch(c) {
     case 'l':

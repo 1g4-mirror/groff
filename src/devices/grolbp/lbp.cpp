@@ -657,8 +657,7 @@ int main(int argc, char **argv)
   // command line parsing
   int c;
   int option_index = 0;
-  opterr = 0;
-  while ((c = getopt_long(argc, argv, "c:F:hI:lo:p:vw:", long_options,
+  while ((c = getopt_long(argc, argv, ":c:F:hI:lo:p:vw:", long_options,
 			  &option_index))
 	 != EOF) {
     switch (c) {
@@ -725,6 +724,12 @@ int main(int argc, char **argv)
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
+      usage(stderr);
+      exit(2);
+      break;
+    case ':':
+      error("command-line option '%1' requires an argument",
+	    char(optopt));
       usage(stderr);
       exit(2);
       break;

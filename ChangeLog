@@ -9,6 +9,18 @@
 
 2024-12-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grodvi/dvi.cpp (main):
+	* src/devices/grohtml/post-html.cpp (main):
+	* src/devices/grolbp/lbp.cpp (main):
+	* src/devices/grolj4/lj4.cpp (main):
+	* src/devices/grops/ps.cpp (main):
+	* src/devices/grotty/tty.cpp (main): Migrate to modern
+	getopt_long(3) usage.  Drop `opterr` assignment; prefix the
+	option string with ":" instead.  Handle return of `:`, emit an
+	appropriate usage diagnostic, and exit with status 2.
+
+2024-12-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (main): Migrate to modern
 	getopt_long(3) usage.  Drop `opterr` assignment; prefix the
 	option string with ":" instead.  Handle return of `:`, emit an
