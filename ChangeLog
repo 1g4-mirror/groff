@@ -30,11 +30,11 @@
 	* tmac/pdfpic: Add registers PDFNOTE.COLO(U)R and
 	PDFNOTE.OPACITY which affect the rendering of the note.
 
-	* src/devices/gropdf/gropdf.pl: Add creation date. If no window title
-	given but the author's name has previously been given with .pdfinfo
-	use the name as the title.
+	* src/devices/gropdf/gropdf.pl: Add creation date. If no window
+	title given but the author's name has previously been given with
+	.pdfinfo use the name as the title.
 
-	Fixes <https://savannah.gnu.org/bugs/index.php?66556>.
+	Fixes <https://savannah.gnu.org/bugs/?66556>.
 
 2024-12-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
