@@ -1,3 +1,10 @@
+2024-12-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (main): Migrate to modern
+	getopt_long(3) usage.  Drop `opterr` assignment; prefix the
+	option string with ":" instead.  Handle return of `:`, emit an
+	appropriate usage diagnostic, and exit with status 2.
+
 2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Fix thinkos in new test.

@@ -8963,9 +8963,8 @@ int main(int argc, char **argv)
 #else
 #define DEBUG_OPTION ""
 #endif
-  opterr = 0;
   while ((c = getopt_long(argc, argv,
-			  "abciI:vw:W:zCEf:m:n:o:r:d:F:M:T:tqs:RU"
+			  ":abciI:vw:W:zCEf:m:n:o:r:d:F:M:T:tqs:RU"
 			  DEBUG_OPTION, long_options, 0))
 	 != EOF)
     switch (c) {
@@ -9076,6 +9075,12 @@ int main(int argc, char **argv)
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
+      usage(stderr, argv[0]);
+      exit(2);
+      break;		// never reached
+    case ':':
+      error("command-line option '%1' requires an argument",
+	    char(optopt));
       usage(stderr, argv[0]);
       exit(2);
       break;		// never reached
