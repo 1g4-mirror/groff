@@ -182,10 +182,9 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  opterr = 0;
   while ((opt = getopt_long(
 		  argc, argv,
-		  "abcCd:D:eEf:F:gGhiI:jJkK:lL:m:M:"
+		  ":abcCd:D:eEf:F:gGhiI:jJkK:lL:m:M:"
 		  "n:No:pP:r:RsStT:UvVw:W:XzZ",
 		  long_options, NULL))
 	 != EOF) {
@@ -376,6 +375,12 @@ int main(int argc, char **argv)
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
+      usage(stderr);
+      xexit(2);
+      break;
+    case ':':
+      error("command-line option '%1' requires an argument",
+	    char(optopt));
       usage(stderr);
       xexit(2);
       break;

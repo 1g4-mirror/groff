@@ -16,6 +16,13 @@
 
 2024-12-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (main): Migrate to modern
+	getopt_long(3) usage.  Drop `opterr` assignment; prefix the
+	option string with ":" instead.  Handle return of `:`, emit an
+	appropriate usage diagnostic, and exit with status 2.
+
+2024-12-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #66587.
 
 	* src/roff/groff/tests/using-diversion-as-character-works.sh:
