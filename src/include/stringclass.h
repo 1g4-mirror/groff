@@ -16,6 +16,9 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifndef GROFF_STRINGCLASS_H
+#define GROFF_STRINGCLASS_H
+
 #include <assert.h>
 #include <string.h> // memcmp(), strlen()
 #include <stdio.h> // FILE
@@ -193,6 +196,8 @@ inline string &string::operator+=(char c)
 void put_string(const string &, FILE *);
 
 string as_string(int);
+
+#endif // GROFF_STRINGCLASS_H
 
 // Local Variables:
 // fill-column: 72
