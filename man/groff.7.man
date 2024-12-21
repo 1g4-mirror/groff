@@ -5863,7 +5863,7 @@ with zero width\[em]without advancing the drawing position.
 Save the drawing position,
 format
 .IR anything ,
-then restore it.
+then restore the saved drawing position.
 .LE
 .
 .
