@@ -12160,8 +12160,10 @@ The @code{\s} escape sequence supports a variety of syntax forms.
 @item \s@var{n}
 Set the type size to @var{n}@tie{}scaled points.  @var{n}@tie{}must be a
 single digit.@footnote{In compatibility mode only, a non-zero @var{n}
-must be in the range 4--39.  @xref{Compatibility Mode}.}  If
-@var{n}@tie{}is 0, restore the previous size.
+must be in the range 4--39.  @xref{Compatibility Mode}.}
+If @var{n}@tie{}is
+@samp{0},
+restore the previous size.
 
 @item \s+@var{n}
 @itemx \s-@var{n}
@@ -12171,6 +12173,9 @@ Increase or decrease the type size by @var{n}@tie{}scaled points.
 @item \s(@var{nn}
 Set the type size to @var{nn}@tie{}scaled points.  @var{nn} must be
 exactly two digits.
+If @var{n}@tie{}is
+@samp{00},
+restore the previous size.
 
 @item \s+(@var{nn}
 @itemx \s-(@var{nn}
@@ -12408,6 +12413,9 @@ or @code{sizescale} directives in the device's @file{DESC} file) is 11
 points, the output driver uses the latter value.
 @endDefreg
 
+@cindex changing type sizes (@code{ps}, @code{\s})
+@cindex type sizes, changing (@code{ps}, @code{\s})
+@cindex point sizes, changing (@code{ps}, @code{\s})
 The @code{\s} escape sequence offers the following syntax forms that
 work with fractional type sizes and accept scaling units.  You may of
 course give them integral arguments.  The delimited forms need not use

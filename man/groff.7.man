@@ -5612,8 +5612,12 @@ Set/increase/decrease the type size to/by
 scaled points.
 .
 .I N
-must be a single digit;
-0 restores the previous type size.
+must be a single digit.
+.
+If
+.IR n \~is
+\[lq]0\[rq],
+restore the previous size.
 .
 (In compatibility mode only,
 a non-zero
@@ -5636,7 +5640,13 @@ scaled points;
 .I N
 is a two-digit number \[>=]1.
 .
-As
+If
+.IR n \~is
+\[lq]00\[rq],
+restore the previous size.
+.
+Otherwise,
+as
 .request .ps
 request.
 .
@@ -5653,7 +5663,14 @@ Set/increase/decrease the type size to/by
 .I N
 scaled points.
 .
-As
+If
+.IR n \~is
+\[lq]0\[rq]
+(with any number of leading zeroes),
+restore the previous size.
+.
+Otherwise,
+as
 .request .ps
 request.
 .
