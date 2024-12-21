@@ -65,14 +65,14 @@ troff
 
 *  GNU troff now strips a leading neutral double quote from the argument
    to the `cf`, `hpf`, `hpfa`, `mso`, `msoquiet`, `nx`, `pi`, `pso`,
-   `so`, `soquiet`, and `sy` requests, and the second argument to the
-   `open` and `opena` requests, allowing it to contain embedded leading
-   spaces.
+   `so`, `soquiet`, `sy`, and `trf` requests, and the second argument to
+   the `open` and `opena` requests, allowing it to contain embedded
+   leading spaces.
 
 *  GNU troff now accepts space characters in the argument to the `cf`,
-   `hpf`, `hpfa`, `mso`, `msoquiet`, `nx`, `so`, and `soquiet` requests,
-   and the second argument to the `open` and `opena` requests.  See
-   "soelim" below.
+   `hpf`, `hpfa`, `mso`, `msoquiet`, `nx`, `so`, `soquiet`, and `trf`
+   requests, and the second argument to the `open` and `opena` requests.
+   See "soelim" below.
 
 *  The "el" warning category has been withdrawn.  If enabled (which it
    was not by default), the formatter would emit a diagnostic if it
@@ -377,7 +377,7 @@ Macro packages
    changed the default line length when formatting on terminals from 78n
    to 80n.  The latter is a vastly more common device configuration, but
    that line length had been avoided for decades (perhaps as long as
-   groff has existed), for an undocumented reason.  That reason appears
+   groff has existed) for an undocumented reason.  That reason appears
    to have been the interaction of bugs in GNU tbl(1) with an aspect of
    grotty(1)'s design.  Those bugs have been resolved.  A man(1) program
    can still instruct groff to format for any desired line length by
@@ -607,8 +607,9 @@ Output drivers
 
 *  gropdf(1), the PDF output driver, now allows embedding of JFIF/JPEG
    and JPEG 2000 image file formats.  If PerlMagick is installed, many
-   more image file formats, including PNG, PAM, and GIF can be embedded.
-   See also the item regarding `PDFPIC` above.  Thanks to Deri James.
+   more image file formats, including PNG, PAM, and GIF, can be
+   embedded.  See also the item regarding `PDFPIC` above.  Thanks to
+   Deri James.
 
 *  grohtml(1), the (X)HTML output driver, supports a new `-k` command-
    line option that takes a mandatory argument, either "ascii" or
