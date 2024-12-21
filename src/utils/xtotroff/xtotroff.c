@@ -27,6 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <X11/Xlib.h>
+
+#include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -37,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <fcntl.h>
 #include <limits.h>
 
-#include <getopt.h>
+#include <getopt.h> // getopt_long()
 
 #include "XFontName.h"
 #include "DviChar.h"
@@ -326,7 +328,8 @@ int main(int argc, char **argv)
       usage(stderr);
       exit(2);
       break;
-    // XXX: need assert() for default case
+    default:
+      assert(0 == "unhandled getopt_long return value");
     }
   }
   if (argc - optind != 1) {

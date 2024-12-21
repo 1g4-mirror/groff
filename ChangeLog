@@ -1,5 +1,10 @@
 2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/xtotroff/xtotroff.c (main): Throw assertion if we
+	don't handle `getopt_long()`'s return value.
+
+2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/hpftodit/hpftodit.cpp (main):
 	* src/utils/indxbib/indxbib.cpp (main):
 	* src/utils/lkbib/lkbib.cpp (main):
