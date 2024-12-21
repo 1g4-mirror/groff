@@ -1,5 +1,10 @@
 2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/lf.h: Include "stringclass.h" header file, since
+	we refer to groff's `string` type.
+
+2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/stringclass.h: Introduce `GROFF_STRINGCLASS_H`
 	include guard.
 
