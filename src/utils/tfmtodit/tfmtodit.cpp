@@ -745,8 +745,7 @@ int main(int argc, char **argv)
       exit(2);
       break;
       break;
-    // XXX ?!
-    case EOF:
+    default:
       assert(0 == "EOF encountered in option processing");
     }
   if (argc - optind != 3) {
