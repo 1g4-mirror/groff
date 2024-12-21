@@ -20,7 +20,7 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
-# Regression-test Savannah #6XXXX.  Based on a reproducer by Peter
+# Regression-test Savannah #66587.  Based on a reproducer by Peter
 # Schaffter.
 
 input='.
@@ -32,7 +32,7 @@ input='.
 .di img-div
 .ev img-div
 .nf
-\X@pdf: pdfpic artifacts/GNU_head_small.pdf@
+\X@pdf: pdfpic artifacts/small-gnu-head.png@
 .ev
 .di
 .

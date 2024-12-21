@@ -1,3 +1,19 @@
+2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Fix thinkos in new test.
+
+	* src/roff/groff/tests/artifacts/small-gnu-head.sh: Rename
+	this...
+	* src/roff/groff/tests/artifacts/small-gnu-head.png: ...to this.
+	* src/roff/groff/tests/using-diversion-as-character-works.sh:
+	Refer to image file by correct name instead of neither of the
+	foregoing.
+
+	This didn't actually break the test because all we're testing is
+	the correct sequencing of grout commands in GNU troff output,
+	not whether a graphic actually appears.  But having a test
+	script that doesn't work right when you try it is a bad look.
+
 2024-12-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Regression-test Savannah #66587.
