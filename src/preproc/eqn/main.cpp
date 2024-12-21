@@ -342,8 +342,7 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  opterr = 0;
-  while ((opt = getopt_long(argc, argv, "CNrRd:f:m:M:p:s:T:v",
+  while ((opt = getopt_long(argc, argv, ":CNrRd:f:m:M:p:s:T:v",
 			    long_options, NULL)) != EOF)
     switch (opt) {
     case 'C':
@@ -431,6 +430,12 @@ int main(int argc, char **argv)
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
+      usage(stderr);
+      exit(2);
+      break;
+    case ':':
+      error("command-line option '%1' requires an argument",
+           char(optopt));
       usage(stderr);
       exit(2);
       break;

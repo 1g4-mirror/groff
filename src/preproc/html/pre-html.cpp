@@ -1604,9 +1604,8 @@ static int scanArguments(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { 0 /* nullptr */, 0, 0, 0 }
   };
-  opterr = 0;
   while ((c = getopt_long(argc, argv,
-	  "+a:bCdD:eF:g:Ghi:I:j:k:lno:prs:S:vVx:y", long_options,
+	  "+:a:bCdD:eF:g:Ghi:I:j:k:lno:prs:S:vVx:y", long_options,
 	  0 /* nullptr */))
 	 != EOF)
     switch(c) {
@@ -1704,6 +1703,12 @@ static int scanArguments(int argc, char **argv)
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
+      usage(stderr);
+      exit(2);
+      break;
+    case ':':
+      error("command-line option '%1' requires an argument",
+           char(optopt));
       usage(stderr);
       exit(2);
       break;

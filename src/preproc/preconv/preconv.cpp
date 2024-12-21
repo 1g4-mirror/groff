@@ -1271,9 +1271,8 @@ main(int argc, char **argv)
     { NULL, 0, 0, 0 }
   };
   // Parse the command-line options.
-  opterr = 0;
   while ((opt = getopt_long(argc, argv,
-			    "dD:e:hrv", long_options, NULL)) != EOF)
+			    ":dD:e:hrv", long_options, NULL)) != EOF)
     switch (opt) {
     case 'v':
       printf("GNU preconv (groff) version %s %s iconv support and %s"
@@ -1317,6 +1316,12 @@ main(int argc, char **argv)
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
+      usage(stderr);
+      exit(2);
+      break;
+    case ':':
+      error("command-line option '%1' requires an argument",
+           char(optopt));
       usage(stderr);
       exit(2);
       break;
