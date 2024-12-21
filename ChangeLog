@@ -1,5 +1,18 @@
 2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/hpftodit/hpftodit.cpp (main):
+	* src/utils/indxbib/indxbib.cpp (main):
+	* src/utils/lkbib/lkbib.cpp (main):
+	* src/utils/lookbib/lookbib.cpp (main):
+	* src/utils/pfbtops/pfbtops.c (main):
+	* src/utils/tfmtodit/tfmtodit.cpp (main):
+	* src/utils/xtotroff/xtotroff.c (main): Migrate to modern
+	getopt_long(3) usage.  Drop `opterr` assignment; prefix the
+	option string with ":" instead.  Handle return of `:`, emit an
+	appropriate usage diagnostic, and exit with status 2.
+
+2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/main.cpp (main):
 	* src/preproc/html/pre-html.cpp (main):
 	* src/preproc/pic/main.cpp (main):

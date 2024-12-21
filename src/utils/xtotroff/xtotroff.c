@@ -291,8 +291,7 @@ int main(int argc, char **argv)
 
   program_name = argv[0];
 
-  opterr = 0;
-  while ((opt = getopt_long(argc, argv, "d:gr:s:v", long_options,
+  while ((opt = getopt_long(argc, argv, ":d:gr:s:v", long_options,
 			    NULL)) != EOF) {
     switch (opt) {
     case 'd':
@@ -321,6 +320,13 @@ int main(int argc, char **argv)
       usage(stderr);
       xtotroff_exit(2);
       break;
+    case ':':
+      fprintf(stderr, "%s: error: command-line option '%c' requires an"
+	      " argument\n", program_name, (char) optopt);
+      usage(stderr);
+      exit(2);
+      break;
+    // XXX: need assert() for default case
     }
   }
   if (argc - optind != 1) {

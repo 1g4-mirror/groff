@@ -705,8 +705,7 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  opterr = 0;
-  while ((opt = getopt_long(argc, argv, "svg:k:", long_options, NULL))
+  while ((opt = getopt_long(argc, argv, ":svg:k:", long_options, NULL))
 	 != EOF)
     switch (opt) {
     case 'g':
@@ -739,7 +738,14 @@ int main(int argc, char **argv)
       error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       exit(2);
+    case ':':
+      error("command-line option '%1' requires an argument",
+           char(optopt));
+      usage(stderr);
+      exit(2);
       break;
+      break;
+    // XXX ?!
     case EOF:
       assert(0 == "EOF encountered in option processing");
     }

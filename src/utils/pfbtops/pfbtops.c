@@ -178,8 +178,7 @@ int main(int argc, char **argv)
 
   program_name = argv[0];
 
-  opterr = 0;
-  while ((opt = getopt_long(argc, argv, "v", long_options, NULL))
+  while ((opt = getopt_long(argc, argv, ":v", long_options, NULL))
 	 != EOF) {
     switch (opt) {
     case 'v':
@@ -193,6 +192,13 @@ int main(int argc, char **argv)
     case '?':
       fprintf(stderr, "%s: error: unrecognized command-line option"
 	      " '%c'\n", program_name, (char) optopt);
+      usage(stderr);
+      exit(2);
+      break;
+    // in case we ever accept options that take arguments
+    case ':':
+      fprintf(stderr, "%s: error: command-line option '%c' requires an"
+	      " argument\n", program_name, (char) optopt);
       usage(stderr);
       exit(2);
       break;
