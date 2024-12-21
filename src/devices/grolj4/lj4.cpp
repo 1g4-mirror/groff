@@ -635,15 +635,6 @@ int main(int argc, char **argv)
     case 'I':
       // ignore include search path
       break;
-    case ':':
-      if (optopt == 'd') {
-	fprintf(stderr, "duplex assumed to be long-side\n");
-	duplex_flag = 1;
-      } else
-	fprintf(stderr, "command-line option '%c' requires an"
-		" argument\n", optopt);
-      fflush(stderr);
-      break;
     case 'd':
       if (!isdigit(*optarg))	// this ugly hack prevents -d without
 	optind--;		//  args from messing up the arg list
@@ -706,6 +697,19 @@ int main(int argc, char **argv)
       error("unrecognized command-line option '%1'", char(optopt));
       usage(stderr);
       exit(2);
+      break;
+    case ':':
+      if (optopt == 'd') {
+	warning("command-line option 'd' requires an argument; assuming"
+		" duplexing on long side");
+	duplex_flag = 1;
+      }
+      else {
+	error("command-line option '%1' requires an argument",
+	      char(optopt));
+	usage(stderr);
+	exit(2);
+      }
       break;
     default:
       assert(0 == "unhandled getopt_long return value");
