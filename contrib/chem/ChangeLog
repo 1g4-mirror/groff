@@ -1,3 +1,7 @@
+2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* chem.am (all): Drop seemingly spurious use of target.
+
 2024-12-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Move "chem.pic" from its own subdirectory (which has no other
