@@ -5711,20 +5711,27 @@ Positive motion is downward.
 .
 .TP
 .ESC V e
-Interpolate contents of environment variable with one-character
-.RI name\~ e .
+Interpolate contents of system environment variable with one-character
+.RI name\~ e
+as returned by
+.MR getenv 3 .
 .
 .
 .TP
 .ESC V( ev
-Interpolate contents of environment variable with two-character
-.RI name\~ ev .
+Interpolate contents of system environment variable with two-character
+.RI name\~ ev
+as returned by
+.MR getenv 3 .
 .
 .
 .TP
 .ESC[] V env
-Interpolate contents of environment variable with arbitrarily long
-.RI name\~ env .
+Interpolate contents of system environment variable with arbitrarily
+long
+.RI name\~ env
+as returned by
+.MR getenv 3 .
 .
 .
 .TP

@@ -16716,9 +16716,13 @@ Here a simple macro to write an index entry.
 @cindex @code{\V}, and copy mode
 @cindex copy mode, and @code{\V}
 @cindex mode, copy, and @code{\V}
-Interpolate the contents of the specified environment variable @var{env}
-(one-character name@tie{}@var{e}, two-character name @var{ev}) as
-returned by the function @cite{getenv@r{(3)}}.
+Interpolate the contents of the system environment variable
+@var{env}
+(one-character
+name@tie{}@var{e},
+two-character
+name @var{ev})
+as returned by @cite{getenv@r{(3)}}.
 @cindex @code{\V}, interpretation in copy mode
 @code{\V} is interpreted even in copy mode (@pxref{Copy Mode}).
 @endDefesc

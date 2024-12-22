@@ -1105,8 +1105,12 @@ scaled points.
 .BI \[rs]V( ev
 .TQ
 .BI \[rs]V[ env ]
-Interpolate contents of the environment variable
-.IR env ,
+Interpolate contents of the system environment variable
+.I env
+(one-character
+.RI name\~ e ,
+two-character
+.RI name\~ ev)
 as returned by
 .MR getenv 3 .
 .
