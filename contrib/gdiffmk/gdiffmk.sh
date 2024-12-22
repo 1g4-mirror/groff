@@ -1,5 +1,5 @@
-#!@BASH_PROG@
-# Copyright (C) 2004-2023 Free Software Foundation, Inc.
+#!@POSIX_SHELL_PROG@
+# Copyright (C) 2004-2024 Free Software Foundation, Inc.
 # Written by Mike Bianchi <MBianchi@Foveal.com>
 # Changes from May 2015 onward by the groff development team
 
@@ -121,13 +121,12 @@ WouldClobber () {
 		;;
 	esac
 
-	# BASH_PROG is set to /bin/sh if bash was not found
-	if test "$HAVE_TEST_EF_OPTION" = "no" \
-		&& test "$BASH_PROG" = "/bin/sh"
+	cmd='test /dev/null -ef /dev/null > /dev/null 2>&1'
+	if ! @POSIX_SHELL_PROG@ -c "$cmd"
 	then
 		Exit 3 \
-		"Your shell does support test -ef, [OUTPUT] can only be the" \
-		"standard  output."
+		"The system's 'test' command does not support the" \
+		" '-ef' option; OUTPUT can be only the standard output."
 	else
 		if test "$1" -ef "$3"
 		then
@@ -167,8 +166,6 @@ RequiresArgument () {
 	esac
 }
 
-HAVE_TEST_EF_OPTION=@HAVE_TEST_EF_OPTION@
-BASH_PROG=@BASH_PROG@
 BADOPTION=
 DIFFCMD=@DIFF_PROG@
 SEDCMD=sed
