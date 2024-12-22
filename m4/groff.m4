@@ -1792,24 +1792,38 @@ AC_DEFUN([GROFF_DIFF_D],
   AC_MSG_RESULT([$DIFF_PROG])
   AC_SUBST([DIFF_PROG])])
 
-# Check if 'test' supports the option -ef.
 
-AC_DEFUN([GROFF_HAVE_TEST_EF_OPTION],
-  [AC_MSG_CHECKING(whether test supports option -ef)
-  HAVE_TEST_EF_OPTION=no
-  test /dev/null -ef /dev/null > /dev/null 2>&1 && HAVE_TEST_EF_OPTION=yes
-  AC_MSG_RESULT([$HAVE_TEST_EF_OPTION])
-  AC_SUBST([HAVE_TEST_EF_OPTION])])
+# Check if 'test' supports the option `-ef`.  POSIX Issue 8 (2024)
+# mandates it.  It could be a shell builtin or a separate executable; we
+# don't care as long as it works.
 
-# gdiffmk will attempt to use bash (for option -ef of 'test'). If bash
-# is not available it will use /bin/sh.
+AC_DEFUN([GROFF_PROG_TEST_SUPPORTS_EF_OPTION],
+  [AC_MSG_CHECKING(whether 'test' supports '-ef' option)
+  test_ef_works=no
+  sh -c 'test /dev/null -ef /dev/null > /dev/null 2>&1' \
+   && test_ef_works=yes
+  AC_MSG_RESULT([$test_ef_works])
+])
 
-AC_DEFUN([GROFF_BASH],
-  [AC_PATH_PROGS([BASH_PROG], [bash], [no])
-  if test "$BASH_PROG" = no; then
-     BASH_PROG=/bin/sh
+
+# gdiffmk needs a working 'test' `-ef` option.  If one is not available
+# in the default /bin/sh or /bin/test, use Bash to get it.
+#
+# This test could be made more general by testing other POSIX Issue 8
+# (or earlier) shell features, if we happen to rely upon them.  Solaris
+# 10 /bin/sh is notoriously incapable.
+
+AC_DEFUN([GROFF_PROG_SH_IS_POSIX_8_CONFORMING],
+  POSIX_SHELL_PROG=/bin/sh
+  if test "$test_ef_works" = no
+  then
+    # Use Bash if it is available; otherwise programs must complain at
+    # runtime if the environment is non-conforming to POSIX.
+    [AC_PATH_PROGS([POSIX_SHELL_PROG], [bash], [no])
   fi
-  AC_SUBST([BASH_PROG])])
+  AC_SUBST([POSIX_SHELL_PROG])
+])
+
 
 # Search for uchardet library used by preconv.
 
