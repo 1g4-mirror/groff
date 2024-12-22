@@ -1,5 +1,11 @@
 2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/neqn.sh: Handle `-h` and `--help` options:
+	display a usage message to the standard output and exit with a
+	successful status.
+
+2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/lf.h: Include "stringclass.h" header file, since
 	we refer to groff's `string` type.
 
