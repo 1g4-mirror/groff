@@ -7318,7 +7318,7 @@ The
 .B ftr
 request translates one font name to another;
 .B fzoom
-magnifies a resolved one.
+magnifies or reduces the typeface corresponding to a resolved one.
 .
 .B sty
 and
