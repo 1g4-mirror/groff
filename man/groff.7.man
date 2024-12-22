@@ -6299,7 +6299,7 @@ Registers can also be incremented or decremented by a configured amount
 at the time they are interpolated.
 .
 The value of the increment is specified with a third argument to the
-.request .nr
+.B nr
 request,
 and a special interpolation syntax,
 .BI \[rs]n \[+-]\c
