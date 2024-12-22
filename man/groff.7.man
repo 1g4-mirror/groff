@@ -6067,16 +6067,16 @@ or
 .
 .P
 The
-.request .ds
+.request ds
 request creates a string with a specified name and contents.
 .
 If the identifier named by
-.request .ds
+.request ds
 already exists as an alias,
 the target of the alias is redefined.
 .
 If
-.request .ds
+.request ds
 is called with only one argument,
 the named string becomes empty.
 .
@@ -6166,13 +6166,13 @@ see section \[lq]Punning names\[rq] below.
 .
 .P
 The
-.request .as
+.RB \[lq] as \[rq]
 request is similar to
-.request .ds
+.request ds
 but appends to a string instead of redefining it.
 .
 If
-.request .as
+.RB \[lq] as \[rq]
 is called with only one argument,
 no operation is performed
 (beyond dereferencing the string).
@@ -6186,13 +6186,13 @@ compatibility mode enablement when interpolated;
 see section \[lq]Compatibility mode\[rq] below.
 .
 The
-.request .ds1
+.request ds1
 request defines a string that suspends compatibility mode when the
 string is later interpolated.
 .
-.request .as1
+.request as1
 is likewise similar to
-.BR .as ,
+.RB \[lq] as \[rq],
 with compatibility mode suspended when the appended portion of the
 string is later interpolated.
 .
@@ -6219,20 +6219,20 @@ Several requests exist to perform rudimentary string operations.
 .
 Strings can be queried
 (\c
-.request .length )
+.request length )
 and modified
 (\c
-.request .chop ,
-.request .substring ,
-.request .stringup ,
-.request .stringdown ),
+.request chop ,
+.request substring ,
+.request stringup ,
+.request stringdown ),
 and their names can be manipulated through renaming,
 removal,
 and aliasing
 (\c
-.request .rn ,
-.request .rm ,
-.request .als).
+.request rn ,
+.request rm ,
+.request als).
 .
 .
 .br
