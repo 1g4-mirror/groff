@@ -665,6 +665,12 @@ Miscellaneous
 
 *  Building groff no longer requires the PSUtils package.
 
+*  Building groff no longer requires the makeinfo package.  Since groff
+   1.23.0, we ship groff's Texinfo manual in several formats as part of
+   groff's distribution archive.  We ask that distributors provide their
+   users with all formats appropriate to the platform (GNU Info, HTML,
+   plain text, TeX DVI, and PDF).
+
 *  Russian language input documents using the KOI8-R encoding are now
    supported, including hyphenation patterns from the ruhyphen project
    and localized strings for the man, ms, me, mm, and mom packages.
