@@ -1,3 +1,8 @@
+2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* mmroff.pl: If asked for `--help`, summarize command purpose in
+	message.
+
 2024-12-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mm.am (uninstall_mm): Attempt to remove
