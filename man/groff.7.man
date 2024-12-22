@@ -373,22 +373,22 @@ that are formatted as output.
 A dot at the beginning of an input line marks it as a control line.
 .
 It can also follow the
-.request .el
+.request el
 and
-.request .nop
+.request nop
 requests,
 and the condition in
-.request .if ,
-.request .ie ,
+.RB \[lq] if \[rq],
+.request ie ,
 and
-.request .while
+.RB \[lq] while \[rq]
 requests.
 .
 The control character invokes requests and calls macros by the name that
 follows it.
 .
 The
-.request .cc
+.request cc
 request can change the control character.
 .
 .
@@ -398,28 +398,28 @@ The neutral apostrophe is the
 recognized where the control character is.
 .
 It suppresses the (first) break implied by the
-.request .bp ,
-.request .ce ,
-.request .cf ,
-.request .fi ,
-.request .fl ,
-.request .in ,
-.request .nf ,
-.request .rj ,
-.request .sp ,
-.request .ti ,
+.request bp ,
+.request ce ,
+.request cf ,
+.request fi ,
+.request fl ,
+.RB \[lq] in \[rq],
+.request nf ,
+.request rj ,
+.request sp ,
+.request ti ,
 and
-.request .trf
+.request trf
 requests.
 .
 The requested operation takes effect at the next break.
 .
 It makes
-.request .br
+.request br
 nilpotent.
 .
 The no-break control character can be changed with the
-.request .c2
+.request c2
 request.
 .
 When formatted,
@@ -436,11 +436,11 @@ strings,
 and is required if those arguments contain space or tab characters.
 .
 In the
-.request .ds ,
-.request .ds1 ,
-.request .as ,
+.request ds ,
+.request ds1 ,
+.RB \[lq] as \[rq],
 and
-.request .as1
+.request as1
 requests,
 a leading neutral double quote in the second argument is stripped off
 to allow embedding of leading spaces.
@@ -456,9 +456,9 @@ special character escape sequence
 A backslash introduces an escape sequence.
 .
 The escape character can be changed with the
-.request .ec
+.request ec
 request;
-.request .eo
+.request eo
 disables escape sequence recognition.
 .
 Use the
@@ -520,7 +520,7 @@ to attempt end-of-sentence detection on the preceding word
 (and trailing punctuation).
 .
 The amount of space between words and sentences is controlled by the
-.request .ss
+.request ss
 request.
 .
 When filling is enabled
@@ -5626,7 +5626,7 @@ must be in the range 4\[en]39.)
 .
 Otherwise,
 as
-.request .ps
+.request ps
 request.
 .
 .
@@ -5647,7 +5647,7 @@ restore the previous size.
 .
 Otherwise,
 as
-.request .ps
+.request ps
 request.
 .
 .
@@ -5671,7 +5671,7 @@ restore the previous size.
 .
 Otherwise,
 as
-.request .ps
+.request ps
 request.
 .
 .
@@ -8595,7 +8595,7 @@ CSTR\~#54 are documented in
 provides an AT&T compatibility mode.
 .
 The
-.request .cp
+.request cp
 request and registers
 .B .C
 and
@@ -8632,19 +8632,19 @@ errors or warnings occur by means of
 .B \-b
 option,
 or produced on demand with the
-.request .backtrace
+.request backtrace
 request.
 .
-.BR .tm ,
-.BR .tmc ,
+.BR tm ,
+.BR tmc ,
 and
-.B .tm1
+.B tm1
 can be used to emit customized diagnostic messages or for
 instrumentation while troubleshooting.
 .
-.B .ex
+.B ex
 and
-.B .ab
+.B ab
 cause early termination with successful and error exit codes
 respectively,
 to halt further processing when continuing would be fruitless.
@@ -8653,25 +8653,25 @@ Examine the state of the formatter with requests that write lists of
 defined names\[em]macros,
 strings,
 and
-.RB diversions\[em]( .pm );
+.RB diversions\[em]( pm );
 colors
-.RB ( .pcolor );
+.RB ( pcolor );
 composite characters
-.RB ( .pcomposite );
+.RB ( pcomposite );
 environments
-.RB ( .pev );
+.RB ( pev );
 hyphenation codes
-.RB ( .phcode );
+.RB ( phcode );
 hyphenation exceptions
-.RB ( .phw );
+.RB ( phw );
 registers
-.RB ( .pnr );
+.RB ( pnr );
 open streams
-.RB ( .pstream );
+.RB ( pstream );
 page location traps
-.RB ( .ptr );
+.RB ( ptr );
 and a list of output nodes corresponding to the pending input line
-.RB ( .pline )
+.RB ( pline )
 to the standard error stream.
 .\" END Keep (roughly) parallel with groff.texi node "Debugging".
 .
