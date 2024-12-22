@@ -77,7 +77,8 @@ macro package
 is a simple wrapper for
 .IR groff ,
 used to expand cross references in
-.IR m@TMAC_M_PREFIX@m ;
+.I m@TMAC_M_PREFIX@m
+documents;
 see
 .MR groff_mm @MAN7EXT@ .
 .
