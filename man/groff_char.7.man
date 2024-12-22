@@ -458,7 +458,7 @@ will be visually distinguishable from double quotes
 (\[lq]thus\[rq])
 on terminal devices,
 and perhaps on others
-(depending on the font selected).
+(depending on the font selected and its kerning configuration).
 .
 .TS
 tab(@) center box;
@@ -523,15 +523,16 @@ Unicode calls \[lq]C1 controls\[rq]
 and the \[lq]Latin-1 supplement\[rq].
 .
 The C1 controls are neither printable nor usable as
-.I groff
+GNU
+.I troff \" GNU
 input.
 .
 .
 .P
-Two Latin-1 supplement characters are handled specially on input.
-.
-.I @g@troff
-never produces them as output.
+GNU
+.I troff \" GNU
+handles two Latin-1 supplement characters specially,
+and never produces them as output.
 .
 .
 .TP
@@ -689,7 +690,8 @@ employ
 .RB \[lq] ] \[rq].)
 .
 The foregoing acute accent example can be expressed in
-.I groff
+in GNU
+.I troff \" GNU
 as
 .BR \[rs][aa] .
 .
@@ -764,7 +766,7 @@ in subsection \[lq]Accents\[rq] below.
 .P
 Unicode encodes far more characters than
 .I groff
-has glyph names for;
+has names for;
 special character escape forms based on numerical code points enable
 access to any of them.
 .
