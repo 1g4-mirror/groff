@@ -593,7 +593,7 @@ Text lines after the call are set as an ordinary paragraph
 The content of
 .I heading-text
 and ordering of sections follows a set of common practices,
-as has much of the layout of material within sections.
+as does much of the layout of material within sections.
 .
 For example,
 a section called \(lqName\(rq or \(lqNAME\(rq must exist,
@@ -658,11 +658,15 @@ Begin and end example.
 .
 After
 .BR .EX ,
-filling is disabled and a constant-width (monospaced) font is selected.
+filling is disabled
+(and,
+on typesetters,
+a monospaced font family is selected).
 .
 Calling
 .B .EE
-enables filling and restores the previous font.
+enables filling
+(and restores the previous family).
 .
 .
 _ifstyle()dnl
@@ -2593,7 +2597,7 @@ even in man pages and usually do not cause portability problems.
 .
 Several of these render glyphs corresponding to punctuation code points
 in the Unicode basic Latin range
-(U+0000\(enU+007F)
+(U+0020\(enU+007F)
 that are handled specially in
 .I roff
 input;
@@ -2768,11 +2772,7 @@ a non-breaking space.
 .
 Used primarily in ellipses
 (\(lq.\e|.\e|.\(rq)\&
-to space the dots more pleasantly on typesetters like
-.BR dvi ,
-.BR pdf ,
-and
-.BR ps .
+to space the dots more pleasantly on typesetters.
 .
 .
 .TP
@@ -3028,13 +3028,12 @@ Use these for paired directional single quotes,
 Basic Latin quotation mark
 (double quote).
 .
-Use in macro calls to prevent
+Employ it in macro calls to work around interpretation of
+.RB \(oq\| \(dq \|\(cq
+as an argument delimiter.
 .\" This page prefers double quotes, but not here because they are more
 .\" confusing to the eye when another double quote is what is quoted!
-.RB \(oq\| \(dq \|\(cq
 .\" AT&T: .RB ` """'
-from being interpreted as beginning a quoted argument,
-or simply for readability.
 .
 .
 .RS
@@ -3252,6 +3251,11 @@ Use of this presentation-oriented macro is deprecated.
 It translates poorly to HTML,
 under which exact space control and tabulation are not readily
 available.
+.
+Further,
+some
+.MR man 1
+programs \(lqsqueeze\(rq multiple blank output lines into one.
 .
 Thus,
 information or distinctions that you use tab stops to express are likely
