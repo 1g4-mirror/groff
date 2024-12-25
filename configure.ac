@@ -95,8 +95,6 @@ GROFF_NEED_DECLARATION([pclose])
 GROFF_NEED_DECLARATION([putenv])
 GROFF_NEED_DECLARATION([rand])
 GROFF_NEED_DECLARATION([srand])
-GROFF_NEED_DECLARATION([strcasecmp])
-GROFF_NEED_DECLARATION([strncasecmp])
 GROFF_NEED_DECLARATION([vfprintf])
 GROFF_SYS_NERR
 GROFF_SYS_ERRLIST
@@ -129,8 +127,7 @@ AC_SUBST([LIBEXT],[$acl_libext])
 AC_FUNC_MMAP
 saved_libs="$LIBS"
 LIBS="$LIBS $LIBC $LIBM"
-AC_REPLACE_FUNCS([fmod getcwd putenv strcasecmp \
-                  strncasecmp strtol])
+AC_REPLACE_FUNCS([fmod getcwd putenv strtol])
 LIBS="$saved_libs"
 AC_CHECK_FUNCS([gettimeofday isatty kill rename setlocale strdup \
                 strsep])

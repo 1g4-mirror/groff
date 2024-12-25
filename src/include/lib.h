@@ -100,26 +100,6 @@ int mksdir(char *tmpl);
     return (c >= 0 && invalid_char_table[c]);
   }
 
-#ifdef HAVE_STRCASECMP
-#ifdef NEED_DECLARATION_STRCASECMP
-// Ultrix4.3's string.h fails to declare this.
-  int strcasecmp(const char *, const char *); }
-#endif /* NEED_DECLARATION_STRCASECMP */
-#else /* !HAVE_STRCASECMP */
-  int strcasecmp(const char *, const char *);
-#endif /* HAVE_STRCASECMP */
-
-#if !defined(_AIX) && !defined(sinix) && !defined(__sinix__)
-#ifdef HAVE_STRNCASECMP
-#ifdef NEED_DECLARATION_STRNCASECMP
-// SunOS's string.h fails to declare this.
-  int strncasecmp(const char *, const char *, int);
-#endif /* NEED_DECLARATION_STRNCASECMP */
-#else /* !HAVE_STRNCASECMP */
-  int strncasecmp(const char *, const char *, size_t);
-#endif /* HAVE_STRNCASECMP */
-#endif /* !_AIX && !sinix && !__sinix__ */
-
 #ifdef __cplusplus
 }
 #endif

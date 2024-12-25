@@ -100,8 +100,6 @@ static const char *sh = "sh";
 static const char *cmd = "cmd";
 static const char *command = "command";
 
-extern int strcasecmp(const char *, const char *);
-
 char *sbasename(const char *path)
 {
   char *base;

@@ -359,8 +359,8 @@ man7dir=$(manroot)/man$(man7ext)
 
 # Include
 #
-#   {fmod,getcwd,mkstemp,putenv,strcasecmp,
-#    strerror,strncasecmp,strtol}.$(OBJEXT)
+#   {fmod,getcwd,mkstemp,putenv,
+#    strerror,strtol}.$(OBJEXT)
 #
 # in 'LIBOBJS' if your C library is missing the corresponding function.
 

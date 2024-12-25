@@ -84,9 +84,7 @@ EXTRA_DIST += \
   src/libs/libgroff/fmod.c \
   src/libs/libgroff/getcwd.c \
   src/libs/libgroff/putenv.c \
-  src/libs/libgroff/strcasecmp.c \
   src/libs/libgroff/strerror.c \
-  src/libs/libgroff/strncasecmp.c \
   src/libs/libgroff/strtol.c \
   src/libs/libgroff/config.charset \
   src/libs/libgroff/ref-add.sin \

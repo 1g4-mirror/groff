@@ -1,3 +1,20 @@
+2024-12-24  Collin Funk  <collin.funk1@gmail.com>
+
+	Use the `strcase` Gnulib module.
+
+	* Makefile.am: Update comment.
+	* bootstrap.conf (gnulib_modules): Add strcase.
+	* configure.ac: Remove checks for strcasecmp and strncasecmp.
+	* src/libs/libgroff/strcasecmp.c: Delete file.
+	* src/libs/libgroff/strncasecmp.c: Likewise.
+	* src/libs/libgroff/libgroff.am (EXTRA_DIST): Remove deleted
+	files.
+	* src/include/lib.h (strcasecmp, strncasecmp): Remove
+	declarations.
+	* src/roff/groff/pipeline.c (strcasecmp): Likewise.
+
+	See <https://savannah.gnu.org/bugs/?66518>.
+
 2025-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* bootstrap: Resync with gnulib upstream.
