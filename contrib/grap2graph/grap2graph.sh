@@ -42,7 +42,7 @@ do
 	format=$2
 	shift;;
     -v | --version)
-	echo "GNU grap2graph (groff) version @VERSION@"
+	echo "grap2graph (groff) version @VERSION@"
 	exit 0;;
     --help)
 	echo "usage: grap2graph [ option ...] < in > out"

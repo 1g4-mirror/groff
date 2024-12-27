@@ -40,7 +40,7 @@ do
 	format=$2
 	shift;;
     -v | --version)
-	echo "GNU eqn2graph (groff) version @VERSION@"
+	echo "eqn2graph (groff) version @VERSION@"
 	exit 0;;
     --help)
 	echo "usage: eqn2graph [ option ...] < in > out"

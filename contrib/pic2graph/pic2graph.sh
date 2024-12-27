@@ -50,7 +50,7 @@ do
 	eqndelim=$2
 	shift;;
     -v | --version)
-	echo "GNU pic2graph (groff) version @VERSION@"
+	echo "pic2graph (groff) version @VERSION@"
 	exit 0;;
     --help)
 	echo "usage: pic2graph [ option ...] < in > out"
