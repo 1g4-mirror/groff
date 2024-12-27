@@ -1,3 +1,17 @@
+2024-12-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grog]: Use a proper "artifacts" directory for test scripts.
+
+	* src/utils/grog/tests/foo.man: Rename this...
+	* src/utils/grog/tests/artifacts/foo.man: ...to this.
+
+	* src/utils/grog/grog.am (EXTRA_DIST): Update location of
+	artifact.
+
+	* src/utils/grog/tests/recognize-perl-pod.sh: Search for test
+	artifact directory, and skip test if we can't find it.  Update
+	expected output.
+
 2024-12-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Revamp build-time check of POSIX-conforming test(1) command.
