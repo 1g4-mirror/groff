@@ -1749,7 +1749,7 @@ AC_DEFUN([GROFF_PROG_XPMTOPPM],
 # Check for make built-in variable RM.
 
 AC_DEFUN([GROFF_MAKE_DEFINES_RM], [
-  AC_MSG_CHECKING(whether make defines 'RM')
+  AC_MSG_CHECKING(whether 'make' defines 'RM')
   make=make
   if test -n "$MAKE"
   then

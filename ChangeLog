@@ -1,5 +1,10 @@
 2024-12-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m4/groff.m4 (GROFF_MAKE_DEFINES_RM): Quote name of "make"
+	command in "checking" message for clarity.
+
+2024-12-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grog]: Use a proper "artifacts" directory for test scripts.
 
 	* src/utils/grog/tests/foo.man: Rename this...
