@@ -182,7 +182,7 @@ troff
 *  In compatibility mode, GNU troff now accepts delimiters that it
    rejects when not in compatbility mode--namely, ordinary characters
    that are meaningful in numeric expressions (which are often
-   delimited).  This change improves compatibilty with AT&T troff.
+   delimited).  This change improves compatibility with AT&T troff.
 
 eqn
 ---
@@ -1011,7 +1011,7 @@ Macro packages
    program and macro package implementations either have set an LL
    register since 2002 (man-db man), 2005 (Brouwer/Lucifredi man), or
    don't let the user vary the line length freely (DWB troff, Solaris
-   troff, Plan 9 troff), don't permit its configuation via the `ll`
+   troff, Plan 9 troff), don't permit its configuration via the `ll`
    request (mandoc), or at all (Heirloom Doctools troff).
 
 *  The an (man) macro package now interprets the value of the `HY`
