@@ -4069,6 +4069,21 @@ are read in copy mode.
 .\" ====================================================================
 .
 .TP
+.BI .bd\~ "special-font font"
+Stop emboldening
+.I special-font
+when
+.I font
+is selected.
+.
+.\" XXX:
+.\" Possibly allow prefixing an integer with `\&` to force
+.\" interpretation of this form.
+.I special-font
+must be a font name,
+not a mounting position.
+.
+.TP
 .BR .cf\~ [ \[dq] ]\c
 .I file
 In a diversion,

@@ -11801,8 +11801,11 @@ issued repeatedly to set up different emboldening values for different
 current fonts.  If the second argument is missing, emboldening is turned
 off for this particular current font.
 
-This affects special fonts only (either set up with the @code{special}
-command in font files or with the @code{fspecial} request).
+Because the emboldening is conditional, it applies only if the glyph to
+be formatted is not available in the current font.  @var{font1} must
+therefore be a special font, configured either with the @code{special}
+directive in its font description file or with the @code{fspecial}
+request).
 @end itemize
 @endDefreq
 

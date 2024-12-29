@@ -2662,6 +2662,12 @@ when
 .I font
 is selected.
 .
+.\" XXX: Possibly allow prefixing an integer with `\&` to force
+.\" interpretation of this form.
+.I special-font
+must be a font name,
+not a mounting position.
+.
 .TPx
 .REQ .bd "special-font font n"
 Embolden
