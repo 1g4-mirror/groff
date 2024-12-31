@@ -1274,6 +1274,10 @@ maintainer.
 .
 Do not put blank (empty) lines in a man page source document.
 .
+Some
+.MR man 1
+programs \(lqsqueeze\(rq multiple blank output lines into one.
+.
 .
 .IP \(bu
 Command and option names are presented in
@@ -3251,11 +3255,6 @@ Use of this presentation-oriented macro is deprecated.
 It translates poorly to HTML,
 under which exact space control and tabulation are not readily
 available.
-.
-Further,
-some
-.MR man 1
-programs \(lqsqueeze\(rq multiple blank output lines into one.
 .
 Thus,
 information or distinctions that you use tab stops to express are likely
