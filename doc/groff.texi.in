@@ -2468,11 +2468,12 @@ End printing the change bar begun by @code{VS}.
 The following example @file{man.local} file alters the behavior of the
 @code{SH} macro.
 
+@c Wrap example at 56 columns.
 @Example
 .\" Make the heading font Helvetica bold.
 .ds HF HB
 .
-.\" Use more vertical space prior to headings on typesetters.
+.\" Add vertical space prior to headings on typesetters.
 .rn SH SH-orig
 .de SH
 .  if t .sp (u;\\n[PD]*2)
