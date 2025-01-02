@@ -4556,6 +4556,131 @@ missing ellipses can mislead the reader.
 Dots and space are universally supported.
 .\" XXX: Does an unconditional _preceding_ dummy character cause
 .\" problems?
+.
+.
+.IP \(bu
+When and how should I use quotation marks?
+.
+.
+.IP
+As noted above in subsection \(lqFont style macros\(rq,
+apply quotation marks to
+\(lqbrief specimens of literal text,
+such as article titles,
+inline examples,
+mentions of individual characters or short strings,
+and (sub)section headings in man pages\(rq.
+.
+When setting examples of multi-word literals,
+such as Unix commands,
+inline
+(as opposed to displaying them between
+.B .EX
+and
+.BR .EE ),
+use of quotation marks is important to ensure that the boundaries of the
+quotation are clear even when the material is stripped of font styling
+by,
+for example,
+copy-and-paste operations.
+.
+.IR groff ,
+Heirloom Doctools
+.IR troff , \" Heirloom
+.IR neatroff ,
+and
+.I mandoc
+support all of the special characters
+.BR \[rs](oq ,
+.BR \[rs](cq ,
+.BR \[rs](lq ,
+.BR \[rs](rq ,
+.BR \[rs](aq ,
+and
+.B \[rs](dq
+described in section \(lqPortability\(rq above.
+.
+Solaris\~10,
+DWB,
+and Plan\~9
+.IR troff s \" Solaris, DWB, Plan 9
+do not.
+.
+.
+.IP
+Historically,
+man pages used \(ga and \(aq exclusively for directional single
+quotation marks.
+.
+However,
+in recent years,
+some distributors of
+.I groff
+have chosen to override the meanings of these characters in man pages,
+remapping them to their Unicode Basic Latin code points.
+.
+Unfortunately,
+\(ga and \(aq are the
+.I only
+reliable means of obtaining directional single quotation marks in AT&T
+.IR troff ; \" AT&T
+in that implementation,
+often no special character escape sequences exist to obtain them.
+.
+Further,
+in AT&T
+.IR troff , \" troff
+the glyph repertoire,
+like the set of supported font names,
+is device-specific.
+.
+To achieve quotation portably in man pages rendered both by
+AT&T and more modern
+.IR troff s, \" generic
+consider adding a preamble to your page after the
+.B .TH
+call as follows.
+.
+.
+.IP
+.RS
+.RS
+.EX
+\&.ie \[rs]n(.g \[rs]{\[rs]
+\&.  ds oq \[rs](oq
+\&.  ds cq \[rs](cq
+\&.\[rs]}
+\&.el \[rs]{\[rs]
+\&.  ds oq \[ga]
+\&.  ds cq \[aq]
+\&.\[rs]}
+.EE
+.RE
+.RE
+.
+.
+.IP
+You must then use the
+.B \[rs]*
+escape sequence to interpolate the quotation mark strings.
+.
+.
+.IP
+.RS
+.RS
+.EX
+The command
+\&.RB \[rs]*(oq "while ! git pull; do sleep 10; done" \[rs]*(cq
+retries an update from our repository until it succeeds.
+.EE
+.RE
+.RE
+.
+.
+.IP
+If this procedure seems complex,
+petition your distributor to revert their remapping of the
+\[ga] and \[aq] characters.
 _endif()dnl
 .
 .
