@@ -249,7 +249,7 @@ void process_input_file(FILE *fp)
 	putchar('S');
 	while (c != '\n') {
 	  if (c == EOF) {
-	    error("end of file at beginning of table");
+	    error("end of input encountered at beginning of table");
 	    return;
 	  }
 	  putchar(c);
@@ -1271,7 +1271,7 @@ format *process_format(table_input &in, options *opt,
     if (!tem->width.empty()) {
       // use the last width
       if (!f->width[col].empty() && f->width[col] != tem->width)
-	error("multiple widths for column %1", col + 1);
+	error("multiple widths designated for column %1", col + 1);
       f->width[col] = tem->width;
     }
     if (tem->vrule_count)
@@ -1498,7 +1498,7 @@ table *process_data(table_input &in, format *f, options *opt)
 		}
 	      }
 	      if (c == EOF) {
-		error("end of data in middle of text block");
+		error("end of input in middle of text block");
 		give_up = true;
 		break;
 	      }
@@ -1587,7 +1587,7 @@ table *process_data(table_input &in, format *f, options *opt)
       break;
   }
   if (!give_up && current_row == 0) {
-    error("no real data");
+    error("no data in table");
     give_up = true;
   }
   if (give_up) {
@@ -1631,7 +1631,7 @@ void process_table(table_input &in)
   delete opt;
   delete fmt;
   if (!in.ended())
-    error("premature end of file");
+    error("unexpected end of input");
 }
 
 static void usage(FILE *stream)
@@ -1708,7 +1708,7 @@ int main(int argc, char **argv)
 	FILE *fp = fopen(argv[i], "r");
 	if (fp == 0) {
 	  current_filename = 0 /* nullptr */;
-	  fatal("can't open '%1': %2", argv[i], strerror(errno));
+	  fatal("cannot open '%1': %2", argv[i], strerror(errno));
 	}
 	else {
 	  current_lineno = 1;
