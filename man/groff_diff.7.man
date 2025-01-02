@@ -5779,7 +5779,7 @@ while it interprets its argument list.
 .P
 In compatibility mode,
 GNU
-.\" troff \" GNU
+troff \" GNU
 accepts several characters as delimiters that it ordinarily rejects,
 because they are meaningful in numeric expressions and therefore
 potentially ambiguous to the document maintainer.
