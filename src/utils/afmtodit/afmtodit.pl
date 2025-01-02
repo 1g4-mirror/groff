@@ -121,7 +121,7 @@ my (@encoding, %in_encoding);
 my (%width, %height, %depth);
 my (%left_side_bearing, %right_side_bearing);
 
-open(AFM, $afm) || &croak("unable to open '$ARGV[0]': $!");
+open(AFM, $afm) || &croak("cannot open '$ARGV[0]': $!");
 
 while (<AFM>) {
     chomp;
@@ -235,7 +235,7 @@ my ($sizescale, $resolution, $unitwidth);
 $sizescale = 1;
 
 open(DESC, $desc) || open(DESC, $sys_desc) ||
-    &croak("unable to open '$desc' or '$sys_desc': $!");
+    &croak("cannot open '$desc' nor '$sys_desc': $!");
 while (<DESC>) {
     next if /^#/;
     chop;
@@ -259,7 +259,7 @@ if ($opt_e) {
 
     my $sys_opt_e = $groff_sys_fontdir . "/devps/" . $opt_e;
     open(ENCODING, $opt_e) || open(ENCODING, $sys_opt_e) ||
-	&croak("unable to open '$opt_e' or '$sys_opt_e': $!");
+	&croak("cannot open '$opt_e' nor '$sys_opt_e': $!");
     while (<ENCODING>) {
 	next if /^#/;
 	chop;
@@ -280,7 +280,7 @@ if ($opt_e) {
 my (%nmap, %map);
 
 open(MAP, $map) || open(MAP, $sys_map) ||
-    &croak("unable to open '$map' or '$sys_map': $!");
+    &croak("cannot open '$map' nor '$sys_map': $!");
 while (<MAP>) {
     next if /^#/;
     chop;
@@ -474,7 +474,7 @@ foreach my $lig (sort keys %default_ligatures) {
 # print it all out
 
 open(FONT, ">$outfile") ||
-  &croak("unable to open '$outfile' for writing: $!");
+  &croak("cannot open '$outfile' for writing: $!");
 select(FONT);
 
 my @options;

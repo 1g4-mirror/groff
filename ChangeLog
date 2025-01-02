@@ -1,3 +1,10 @@
+2025-01-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/afmtodit/afmtodit.pl: Migrate diagnostics to newly
+	developing wording convention.
+
+	See <https://savannah.gnu.org/bugs/?66519>.
+
 2024-12-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m4/groff.m4 (GROFF_MAKE_DEFINES_RM): Quote name of "make"
@@ -13433,7 +13440,7 @@ ________________________________________________________________________
 
 ##### License
 
-Copyright 2023-2024 Free Software Foundation, Inc.
+Copyright 2023-2025 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
