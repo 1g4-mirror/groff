@@ -57,14 +57,14 @@ if ($opt_v) {
 }
 
 sub croak {
-  my $msg = shift;
-  print STDERR "$prog: error: $msg\n";
-  exit(1);
+    my $msg = shift;
+    print STDERR "$prog: error: $msg\n";
+    exit(1);
 }
 
 sub whine {
-  my $msg = shift;
-  print STDERR "$prog: warning: $msg\n";
+    my $msg = shift;
+    print STDERR "$prog: warning: $msg\n";
 }
 
 # Use $0 in the usage message for consistency with groff's C++ programs.
@@ -686,4 +686,4 @@ sub conv {
 # fill-column: 72
 # mode: CPerl
 # End:
-# vim: set cindent noexpandtab shiftwidth=2 softtabstop=2 textwidth=72:
+# vim: set cindent noexpandtab shiftwidth=4 softtabstop=4 textwidth=72:
