@@ -2272,6 +2272,17 @@ denotes a single input character,
 ordinary or special.
 .
 .TPx
+.I command
+is a sequence of ordinary characters and/or spaces
+to be passed to the system as a command
+(potentially with arguments).
+.\" ...limiting the file names you can express; see Savannah #64071.
+.
+A leading leading neutral double quote is stripped,
+allowing embedded leading spaces.
+.
+.
+.TPx
 .I div
 is a diversion identifier.
 .
@@ -2283,7 +2294,10 @@ is an environment identifier.
 .I file
 is a sequence of ordinary characters and/or spaces
 naming a file on the system.
-.\" ...limiting the file names you can express; see Savannah #64071.
+.\" ...limiting the file names you can express; see Savannah #65108.
+.
+A leading leading neutral double quote is stripped,
+allowing embedded leading spaces.
 .
 GNU
 .I troff \" GNU
@@ -2318,6 +2332,9 @@ is a macro identifier.
 is a sequence of ordinary characters and/or spaces
 to emit on the standard error stream.
 .\" ...limiting the messages you can express; see Savannah #62787.
+.
+A leading leading neutral double quote is stripped,
+allowing embedded leading spaces.
 .
 .TPx
 .I n
@@ -4069,11 +4086,11 @@ are suffixed with a tab and asterisk
 .RB ( * ).
 .
 .TPx
-.REQ .pi contents
+.REQ .pi command
 Pipe GNU
 .I troff \" GNU
 output through
-.I contents
+.I command
 (which is read in copy mode)
 by passing it to
 .MR popen 3 .
@@ -4559,9 +4576,9 @@ request
 .\" XXX: negative values accepted; check AT&T troff
 .
 .TPx
-.REQ .sy contents
+.REQ .sy command
 Execute
-.I contents
+.I command
 (which is read in copy mode)
 in the operating environment
 by passing it to

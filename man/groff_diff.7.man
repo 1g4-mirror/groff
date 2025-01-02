@@ -6154,6 +6154,8 @@ inter-sentence space each to the nearest multiple of\~12.
 GNU
 .I troff \" GNU
 strips a leading neutral double quote from the argument to the
+.BR cf ,
+.BR nx ,
 .BR pi ,
 and
 .BR so ,

@@ -16384,7 +16384,7 @@ and the request has no further effect.  @xref{Warnings}, for
 information about the enablement and suppression of warnings.
 
 GNU @command{troff} strips a leading neutral double quote from the
-argument, allowing embedded leading spaces in @var{contents}.
+argument, allowing embedded leading spaces in @var{file}.
 
 @code{so} can be useful for large documents; e.g., allowing each chapter
 of a book to be kept in a separate file.  However, files interpolated
@@ -16465,6 +16465,9 @@ Both requests break the line before reading
 @var{file},
 unless invoked with the no-break control character.
 
+GNU @command{troff} strips a leading neutral double quote from the
+argument, allowing embedded leading spaces in @var{file}.
+
 When used in a diversion, these requests embed a node (@pxref{Gtroff
 Internals}) in it that, when interpolated, causes the contents of
 @var{file} to be copied to the output.  In @acronym{AT&T} @code{troff},
@@ -16512,6 +16515,9 @@ from becoming part of the diversion (@pxref{Diversions}).
 @cindex next file, read (@code{nx})
 Stop processing the input file.  If @var{file} is specified, read it;
 otherwise, read the next pending input file, if any.
+
+GNU @command{troff} strips a leading neutral double quote from the
+argument, allowing embedded leading spaces in @var{file}.
 @endDefreq
 
 @Defreq {rd, [@Var{prompt} [@Var{arg1} @Var{arg2} @dots{}]]}
@@ -16583,7 +16589,7 @@ Dear Mr. Adollar,
 .ex
 @endExample
 
-@Defreq {pi, [@code{"}]@Var{contents}}
+@Defreq {pi, [@code{"}]@Var{command}}
 Use GNU @command{troff}'s device-independent output as the input to the
 commands specified in @var{pipe} and emit their output to the standard
 output stream instead of GNU @command{troff}'s usual output.
@@ -16594,12 +16600,12 @@ language,@footnote{@xref{gtroff Output}.} using this request without
 specifying the @option{-Z} option to @command{groff} is likely to
 provoke fatal errors from an output driver.
 
-The formatter reads the remainder of the input line into @var{contents}
+The formatter reads the remainder of the input line into @var{command}
 and passes it to @cite{popen@r{(3)}}.  Output produced by the
 command(s) is not captured by GNU @command{troff}.
 
 GNU @command{troff} strips a leading neutral double quote from the
-argument, allowing embedded leading spaces in @var{contents}.
+argument, allowing embedded leading spaces in @var{command}.
 
 Multiple @code{pi} requests construct a multi-stage pipeline in the same
 order as the formatter encounters the requests.
@@ -16629,15 +16635,15 @@ is the same as @w{@samp{.pi foo | bar}}.
 
 @cindex system commands, running
 @cindex running system commands
-@DefreqList {sy, [@code{"}]@Var{contents}}
+@DefreqList {sy, [@code{"}]@Var{command}}
 @DefregListEndx {systat}
 Execute the specified shell command(s).  The formatter reads the
-remainder of the input line into @var{contents} and passes it to
+remainder of the input line into @var{command} and passes it to
 @cite{system@r{(3)}}.  Output produced by the command(s) is not captured
 by GNU @command{troff}.
 
 GNU @command{troff} strips a leading neutral double quote from the
-argument, allowing embedded leading spaces in @var{contents}.
+argument, allowing embedded leading spaces in @var{command}.
 
 @cindex safer mode
 @cindex mode, safer
@@ -18141,12 +18147,22 @@ Unlike @acronym{AT&T} @code{troff}, GNU @code{troff} does not ignore the
 values of minimum inter-word and additional inter-sentence space are
 each rounded down to the nearest multiple of@tie{}12.
 
+@cindex @code{cf} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{nx} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{pi} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{so} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
-GNU @command{troff} strips a leading neutral double quote from the
-argument to the @code{pi}, @code{so}, and @code{sy} requests, allowing
-it to contain embedded leading spaces.
+GNU
+@command{troff}
+strips a leading neutral double quote from the argument to the
+@code{cf},
+@code{nx},
+@code{pi},
+@code{so},
+and
+@code{sy}
+requests,
+allowing it to contain embedded leading spaces.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{cs} request, incompatibilities with @acronym{AT&T} @code{troff}
