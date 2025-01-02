@@ -17811,10 +17811,18 @@ and @code{pso}.
 @cindex compatibility mode
 @cindex mode, compatibility
 
-Some implementation differences between GNU and @acronym{AT&T}
-@command{troff}s are thought too important to neglect; @code{groff}
-therefore makes available a @dfn{compatibility mode} in an effort to
-keep documents prepared for AT&T @command{troff} rendering well.
+Some syntactical and behavioral differences between GNU and
+@acronym{AT&T}
+@command{troff}s
+are thought too important to neglect;
+GNU
+@command{troff} @c GNU
+@code{groff}
+therefore makes available a
+@dfn{compatibility mode}
+in an effort to keep documents prepared for AT&T
+@command{troff}
+rendering well.
 
 @cindex long names
 @cindex names, long

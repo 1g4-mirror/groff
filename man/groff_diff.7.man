@@ -5639,10 +5639,11 @@ to the standard error stream.
 .SH "Compatibility mode"
 .\" ====================================================================
 .
-Some implementation differences between GNU and AT&T
+Some syntactical and behavioral differences between GNU
 .IR troff s \" generic
 are thought too important to neglect;
-.I groff
+GNU
+.I troff \" GNU
 therefore makes available a
 .I "compatibility mode"
 in an effort to keep documents prepared for AT&T
