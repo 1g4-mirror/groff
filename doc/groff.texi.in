@@ -2532,10 +2532,11 @@ A Swedish localization of @file{mm} is also available; see
 @section @file{mom}
 @cindex @file{mom} macro package
 
-The main documentation files for the @file{mom} macros are in
-@acronym{HTML} format.  Additional, useful documentation is in
-@acronym{PDF} format.  See the @cite{groff@r{(1)}} man page, section
-``Installation Directories'', for their location.
+The @file{mom} package's primary documentation is in @acronym{HTML}.
+Model documents illustrating many features are offered in @acronym{PDF}.
+See the @cite{groff@r{(1)}} man page,
+section ``Installation Directories'',
+for their location.
 
 @itemize @bullet
 @item
