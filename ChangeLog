@@ -1,3 +1,8 @@
+2025-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/main.cpp (main): Distinguish `ferror()` status
+	and `fflush(stdout)` failures when cleaning up before exit.
+
 2024-12-24  Collin Funk  <collin.funk1@gmail.com>
 
 	Use the `strcase` Gnulib module.

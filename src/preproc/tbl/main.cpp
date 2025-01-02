@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -1727,8 +1727,10 @@ int main(int argc, char **argv)
     printf(".lf 1 -\n");
     process_input_file(stdin);
   }
-  if (ferror(stdout) || fflush(stdout) < 0)
-    fatal("output error");
+  if (ferror(stdout))
+    fatal("error status on standard output stream");
+  if (fflush(stdout) < 0)
+    fatal("cannot flush standard output stream: %1", strerror(errno));
   return 0;
 }
 
