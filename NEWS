@@ -70,9 +70,9 @@ troff
    leading spaces.
 
 *  GNU troff now accepts space characters in the argument to the `cf`,
-   `hpf`, `hpfa`, `mso`, `msoquiet`, `nx`, `pi`, `so`, `soquiet`, and
-   `trf` requests, and the second argument to the `open` and `opena`
-   requests.  See "soelim" below.
+   `hpf`, `hpfa`, `mso`, `msoquiet`, `nx`, `so`, `soquiet`, and `trf`
+   requests, and the second argument to the `open` and `opena` requests.
+   See "soelim" below.
 
 *  The "el" warning category has been withdrawn.  If enabled (which it
    was not by default), the formatter would emit a diagnostic if it
