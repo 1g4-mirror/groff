@@ -370,11 +370,9 @@ those containing space \" or tab (in Plan 9 troff [only?])
 characters must be double-quoted to be interpreted correctly.
 .
 _endif()dnl
-An empty macro argument can be specified with a pair of double-quotes
-(""),
-but the
-.I man
-package is designed such that this should seldom be necessary.
+If an empty macro argument is required,
+specify it with a pair of double-quotes
+("").
 _ifstyle()dnl
 .
 See section \(lqNotes\(rq below for examples of cases where better
