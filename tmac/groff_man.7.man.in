@@ -1677,13 +1677,15 @@ _endif()dnl
 .
 .P
 If a
-.B .TP
-call is followed immediately by hyperlinking macros
 .BR .UR / .UE
 or
-.BR .MT / .ME ,
-and the device doesn't support hyperlinking,
-the package sets the link target at the beginning
+.BR .MT / .ME
+pair occurs in a
+.B .TP
+tag
+and hyperlinking is unavailable,
+.I "groff man"
+sets the link target at the beginning
 of the indented paragraph,
 not as part of the tag.
 .
@@ -1884,7 +1886,7 @@ such as article titles,
 inline examples,
 mentions of individual characters or short strings,
 and (sub)section headings in man pages,
-are suitable objects for quotation;
+are suitable for quotation;
 see the
 .BR \e(lq ,
 .BR \e(rq ,
@@ -2844,9 +2846,12 @@ $ \ec
 .RE
 .
 .
+.\" We once warned of \f possibly having "better portability" than \c;
+.\" after several years of looking, GBR finds no evidence that this is
+.\" the case.  However, po4a is confused by \c and refuses to process
+.\" documents using it.  https://github.com/mquinson/po4a/issues/527
 .IP
 Alternatively,
-and perhaps with better portability,
 the
 .B \ef
 font selection escape sequence can be used;
