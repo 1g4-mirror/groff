@@ -1297,6 +1297,7 @@ is an input character that is not the escape character,
 a leader,
 tab,
 newline,
+space,
 or invalid as GNU
 .I troff \" GNU
 input.

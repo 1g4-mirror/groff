@@ -6588,8 +6588,15 @@ or character class, hyphenation language code, environment, or stream.
 Valid identifiers consist of one or more ordinary characters.
 @cindex ordinary character
 @cindex character, ordinary
-An @slanted{ordinary character} is an input character that is not the
-escape character, a leader, tab, newline, or invalid as GNU @code{troff}
+An
+@slanted{ordinary character}
+is an input character that is not the escape character,
+a leader,
+tab,
+newline,
+space,
+or invalid as GNU
+@command{troff}
 input.
 
 @c XXX: We might move this discussion earlier since it is applicable to
