@@ -3071,7 +3071,8 @@ emitting a warning in category
 .
 .
 .TP
-.BI .itc\~ n\~name
+.BR .itc\~ n\~\c
+.RI [ name ]
 As
 .RB \[lq] it \[rq],
 but lines interrupted with the
@@ -3094,7 +3095,7 @@ is omitted.
 .
 .TP
 .BI .length\~ reg\~\c
-.RB [[ \[dq]\c
+.RB [[ \[dq] ]\c
 .IR contents ]
 Compute the number of characters in
 .I contents
@@ -4054,7 +4055,7 @@ to
 which must previously have been the subject of an
 .B open
 (or
-.B \%opena )
+.BR \%opena )
 request.
 .
 The contents of
