@@ -1,5 +1,14 @@
 2025-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Rationalize header inclusion.
+
+	* src/preproc/tbl/table.h: Drop inclusion of system headers,
+	relocating applicable ones...
+	* src/preproc/tbl/main.cpp:
+	* src/preproc/tbl/table.cpp: ...here.
+
+2025-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/main.cpp (process_input_file, process_format)
 	(process_data, process_table, main): Adjust wording of
 	diagnostic messages for clarity and consistency with documented

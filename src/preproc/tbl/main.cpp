@@ -20,6 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <assert.h>
+#include <errno.h>
+#include <stdlib.h> // EXIT_SUCCESS, exit()
+#include <stdio.h> // EOF, FILE, fclose(), ferror(), fflush(), fopen(),
+		   // fprintf(), fputs(), getc(), printf(), putchar(),
+		   // setbuf(), stderr, stdin, stdout, ungetc()
+#include <string.h> // strerror()
+
 #include <getopt.h> // getopt_long()
 
 #include "table.h"

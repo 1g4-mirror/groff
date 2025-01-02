@@ -18,10 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "lib.h"
 
-#include <stdlib.h>
-#include <ctype.h>
-#include <errno.h>
-
 #include "cset.h"
 #include "cmap.h"
 #include "stringclass.h"
