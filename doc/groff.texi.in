@@ -17959,10 +17959,27 @@ it does not.
 @cindex @code{\H}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\s}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\S}, incompatibilities with @acronym{AT&T} @code{troff}
-Further, the escape sequences @code{\f}, @code{\H}, @code{\m},
-@code{\M}, @code{\R}, @code{\s}, and @code{\S} are transparent at the
-beginning of a line only in compatibility mode.  For example, this code
-produces bold output in both cases, but the text differs.
+The escape sequences
+@code{\f},
+@code{\H},
+@code{\m},
+@code{\M},
+@code{\R},
+@code{\s},
+and
+@code{\S}
+are transparent at the beginning of a line only in compatibility mode.
+That is,
+upon interpreting them,
+GNU
+.@command{troff} @c GNU
+no longer recognizes a control character on the input line;
+AT&T
+.@command{troff} @c AT&T
+does.
+
+For example, this code produces bold output in both cases, but the text
+differs.
 
 @Example
 .de xx

@@ -5947,8 +5947,7 @@ See section \[lq]Miscellaneous\[rq] above.
 .
 .
 .P
-Further,
-the escape sequences
+The escape sequences
 .BR \[rs]f ,
 .BR \[rs]H ,
 .BR \[rs]m ,
@@ -5959,6 +5958,15 @@ and
 .B \[rs]S
 are transparent at the beginning of an input line only in compatibility
 mode.
+.
+That is,
+upon interpreting them,
+GNU
+.I troff \" GNU
+no longer recognizes a control character on the input line;
+AT&T
+.I troff \" AT&T
+does.
 .
 .
 .P
