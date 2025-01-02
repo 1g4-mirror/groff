@@ -2465,15 +2465,14 @@ End printing the change bar begun by @code{VS}.
 
 @unnumberedsubsubsec Simple example
 
-The following example @file{man.local} file alters the @code{SH} macro
-to add some extra vertical space before printing the heading.  Headings
-are printed in Helvetica bold.
+The following example @file{man.local} file alters the behavior of the
+@code{SH} macro.
 
 @Example
-.\" Make the heading fonts Helvetica
+.\" Make the heading font Helvetica bold.
 .ds HF HB
 .
-.\" Put more space in front of headings.
+.\" Use more vertical space prior to headings on typesetters.
 .rn SH SH-orig
 .de SH
 .  if t .sp (u;\\n[PD]*2)
