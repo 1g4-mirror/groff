@@ -1,3 +1,7 @@
+2025-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* gnulib: Update to stable/2025-01.
+
 2025-01-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/afmtodit/afmtodit.pl: Report input file name and
