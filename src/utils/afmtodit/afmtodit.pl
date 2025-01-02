@@ -1,5 +1,5 @@
 #!@PERL@
-# Copyright (C) 1989-2024 Free Software Foundation, Inc.
+# Copyright (C) 1989-2025 Free Software Foundation, Inc.
 #      Written by James Clark (jjc@jclark.com)
 #
 # This file is part of groff.
@@ -38,6 +38,10 @@ GetOptions( "a=s", "c", "d=s", "e=s", "f=s", "i=s", "k", "m", "n",
   "help" => \$want_help
 );
 
+# for diagnostics
+our $filename;
+our $lineno = 0;
+
 # We keep these two scalars separate so we can report out the option.
 $space_width = $opt_w if defined $opt_w;
 
@@ -58,13 +62,19 @@ if ($opt_v) {
 
 sub croak {
     my $msg = shift;
-    print STDERR "$prog: error: $msg\n";
+    my $pos;
+    $pos .= "$filename:" if $filename;
+    $pos .= "$lineno:" if $lineno;
+    print STDERR "$prog:$pos error: $msg\n";
     exit(1);
 }
 
 sub whine {
     my $msg = shift;
-    print STDERR "$prog: warning: $msg\n";
+    my $pos;
+    $pos .= "$filename:" if $filename;
+    $pos .= "$lineno:" if $lineno;
+    print STDERR "$prog:$pos warning: $msg\n";
 }
 
 # Use $0 in the usage message for consistency with groff's C++ programs.
@@ -121,9 +131,15 @@ my (@encoding, %in_encoding);
 my (%width, %height, %depth);
 my (%left_side_bearing, %right_side_bearing);
 
-open(AFM, $afm) || &croak("cannot open '$ARGV[0]': $!");
+if (open(AFM, $afm)) {
+    $filename = $afm;
+}
+else {
+    &croak("cannot open '$ARGV[0]': $!");
+}
 
 while (<AFM>) {
+    $lineno++;
     chomp;
     s/\x0D$//;
     my @field = split(' ');
@@ -228,15 +244,26 @@ while (<AFM>) {
     }
 }
 close(AFM);
+$filename = "";
+$lineno = 0;
 
 # read the DESC file
 
 my ($sizescale, $resolution, $unitwidth);
 $sizescale = 1;
 
-open(DESC, $desc) || open(DESC, $sys_desc) ||
+if (open(DESC, $desc)) {
+    $filename = $desc;
+}
+elsif (open(DESC, $sys_desc)) {
+    $filename = $sys_desc;
+}
+else {
     &croak("cannot open '$desc' nor '$sys_desc': $!");
+}
+
 while (<DESC>) {
+    $lineno++;
     next if /^#/;
     chop;
     my @field = split(' ');
@@ -253,6 +280,8 @@ while (<DESC>) {
     }
 }
 close(DESC);
+$filename = "";
+$lineno = 0;
 
 if ($opt_e) {
     # read the encoding file
@@ -279,9 +308,18 @@ if ($opt_e) {
 
 my (%nmap, %map);
 
-open(MAP, $map) || open(MAP, $sys_map) ||
+if (open(MAP, $map)) {
+    $filename = $map;
+}
+elsif (open(DESC, $sys_map)) {
+    $filename = $sys_map;
+}
+else {
     &croak("cannot open '$map' nor '$sys_map': $!");
+}
+
 while (<MAP>) {
+    $lineno++;
     next if /^#/;
     chop;
     my @field = split(' ');
@@ -316,6 +354,8 @@ while (<MAP>) {
     }
 }
 close(MAP);
+$filename = "";
+$lineno = 0;
 
 $italic_angle = $opt_a if $opt_a;
 

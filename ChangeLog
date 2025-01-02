@@ -1,5 +1,12 @@
 2025-01-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.pl: Report input file name and
+	line number in diagnostic messages.
+
+	Fixes <https://savannah.gnu.org/bugs/?66564>.
+
+2025-01-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.pl: Migrate diagnostics to newly
 	developing wording convention.
 
