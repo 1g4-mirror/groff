@@ -355,7 +355,8 @@ public:
 
 table_entry::table_entry(const table *p, const entry_modifier *m)
 : next(0), input_lineno(-1), input_filename(0),
-  start_row(-1), end_row(-1), start_col(-1), end_col(-1), parent(p), mod(m)
+  start_row(-1), end_row(-1), start_col(-1), end_col(-1), parent(p),
+  mod(m)
 {
 }
 
@@ -481,11 +482,12 @@ text_entry::text_entry(const table *p, const entry_modifier *m, char *s)
 
 text_entry::~text_entry()
 {
-  free(contents);
+  free(contents); // `malloc()`ed by `string::extract()`
 }
 
 repeated_char_entry::repeated_char_entry(const table *p,
-					 const entry_modifier *m, char *s)
+					 const entry_modifier *m,
+					 char *s)
 : text_entry(p, m, s)
 {
 }
@@ -651,7 +653,8 @@ void alphabetic_text_entry::add_tab()
   printfs(" \\n[%1]u", column_end_reg(end_col));
 }
 
-block_entry::block_entry(const table *p, const entry_modifier *m, char *s)
+block_entry::block_entry(const table *p, const entry_modifier *m,
+			 char *s)
 : table_entry(p, m), contents(s)
 {
 }
@@ -689,7 +692,8 @@ void block_entry::position_vertically()
     prints("." TEXT_BLOCK_STAGGERING_MACRO " -.5v\n");
 }
 
-int block_entry::divert(int ncols, const string *mw, int *sep, int do_expand)
+int block_entry::divert(int ncols, const string *mw, int *sep,
+			int do_expand)
 {
   do_divert(0, ncols, mw, sep, do_expand);
   return 1;
@@ -868,7 +872,8 @@ void line_entry::note_double_vrule_on_left(int is_corner)
   double_vrule_on_left = is_corner ? 1 : 2;
 }
 
-single_line_entry::single_line_entry(const table *p, const entry_modifier *m)
+single_line_entry::single_line_entry(const table *p,
+				     const entry_modifier *m)
 : line_entry(p, m)
 {
 }
@@ -953,7 +958,8 @@ double_line_entry *double_line_entry::to_double_line_entry()
   return this;
 }
 
-short_line_entry::short_line_entry(const table *p, const entry_modifier *m)
+short_line_entry::short_line_entry(const table *p,
+				   const entry_modifier *m)
 : simple_entry(p, m)
 {
 }
@@ -2238,7 +2244,8 @@ void table::build_span_list()
 	    && q->end_col == p->end_col)
 	  break;
       if (!q)
-	span_list = new horizontal_span(p->start_col, p->end_col, span_list);
+	span_list = new horizontal_span(p->start_col, p->end_col,
+					span_list);
     }
     p = p->next;
   }
@@ -2653,7 +2660,8 @@ void table::print_double_hrule(int r)
 	 ".vs\n");
 }
 
-void table::compute_vrule_top_adjust(int start_row, int col, string &result)
+void table::compute_vrule_top_adjust(int start_row, int col,
+				     string &result)
 {
   if (row_is_all_lines[start_row] && start_row < nrows - 1) {
     if (row_is_all_lines[start_row] == 2)
@@ -2708,7 +2716,8 @@ void table::compute_vrule_top_adjust(int start_row, int col, string &result)
   }
 }
 
-void table::compute_vrule_bot_adjust(int end_row, int col, string &result)
+void table::compute_vrule_bot_adjust(int end_row, int col,
+				     string &result)
 {
   if (row_is_all_lines[end_row] && end_row > 0) {
     end_row--;
@@ -2949,7 +2958,8 @@ void table::do_row(int r)
 	had_line = true;
       }
     }
-  // change the row *after* printing the stuff list (which might contain .TH)
+  // change the row *after* printing the stuff list (which might contain
+  // .TH)
   printfs("\\*[" TRANSPARENT_STRING_NAME "].nr " CURRENT_ROW_REG " %1\n",
 	  as_string(r));
   if (!had_line && row_is_all_lines[r])
