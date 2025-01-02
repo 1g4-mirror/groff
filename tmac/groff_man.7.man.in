@@ -1883,6 +1883,7 @@ and bold almost never.
 .
 Brief specimens of literal text,
 such as article titles,
+inline examples,
 mentions of individual characters or short strings,
 and (sub)section headings in man pages,
 are suitable objects for quotation;
