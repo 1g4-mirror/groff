@@ -278,7 +278,9 @@ separate input tokens.
 .
 .
 .P
-The positioning commands noted above,
+For example,
+the relative horizontal motion command
+.RB ( h )
 and the command to write one glyph
 .RB ( c ),
 each take a single argument;
@@ -327,7 +329,7 @@ Most commands assume a scaling unit
 (basic units),
 and others
 .RB use\~\[lq] z \[rq]
-(scaled points);
+(scaled points).
 .
 These are defined by the parameters specified in the device's
 .I DESC
