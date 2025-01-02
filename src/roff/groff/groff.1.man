@@ -897,8 +897,9 @@ benefit from a preamble in the document prior to the first macro call,
 while others,
 like
 .IR mm ,
-instead require the specification of registers on the command line to
-configure page dimensions.
+instead require the specification of registers on the command line,
+or otherwise before its macro file is interpreted,
+to configure page dimensions.
 .
 .
 .P

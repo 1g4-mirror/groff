@@ -1637,8 +1637,9 @@ portrait and landscape orientations.  Macro packages lack a consistent
 approach to configuration of parameters dependent on the paper format;
 some, like @file{ms}, benefit from a preamble in the document prior to
 the first macro call, while others, like @file{mm}, instead require the
-specification of registers on the command line to configure page
-dimensions.
+specification of registers on the command line,
+or otherwise before its macro file is interpreted,
+to configure page dimensions.
 
 Output drivers for typesetters also recognize command-line options
 @option{-p} to override the default page dimensions and @option{-l}
