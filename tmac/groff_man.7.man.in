@@ -1897,10 +1897,8 @@ escape sequences in subsection \(lqPortability\(rq below.
 .
 .
 _endif()dnl
-_ifnotstyle()dnl
 .br
 .ne 2v
-_endif()dnl
 .P
 Unlike the above font style macros,
 the font style alternation macros below set no input traps;
@@ -1929,6 +1927,12 @@ below for approaches.
 _endif()dnl
 .
 .
+.\" XXX: Begin shameful cheat to avoid stranded line in U.S. letter
+.\" PS/PDF output.  --GBR
+.if t \{\
+.  nr saved-PD \n[PD]
+.  nr PD -.025v
+.\}
 .TP
 .BI .BI " bold-text italic-text "\c
 \&.\|.\|.\&
@@ -2049,6 +2053,12 @@ was a fork of AT&T
 by Tim Morgan of the University of California at Irvine
 .EE
 .RE
+.\" XXX: End shameful cheat to avoid stranded line in U.S. letter
+.\" PS/PDF output.  --GBR
+.if t \{\
+.  nr PD \n[saved-PD]
+.  rr saved-PD
+.\}
 .
 .
 _endif()dnl
@@ -2619,6 +2629,12 @@ grave accent,
 tilde).
 .
 .
+.\" XXX: Begin shameful cheat to avoid stranded line in U.S. letter
+.\" PS/PDF output.  --GBR
+.if t \{\
+.  nr saved-PD \n[PD]
+.  nr PD -.025v
+.\}
 .br
 .ne 2v
 .if n .TP 10n \" "\newline" + 2n
@@ -3141,6 +3157,14 @@ _endif()dnl
 .SS Hooks
 .\" ====================================================================
 .
+_ifstyle()dnl
+.\" XXX: Begin shameful cheat to avoid stranded line in U.S. letter
+.\" PS/PDF output.  --GBR
+.if t \{\
+.  nr saved-PD \n[PD]
+.  nr PD -.05v
+.\}
+_endif()dnl
 Two macros,
 both GNU extensions,\" from groff 1.19
 are called internally by the
@@ -3335,6 +3359,14 @@ One could work around these limitations with font selection escape
 sequences,
 but it is preferable to use font style alternation macros,
 which afford greater flexibility.
+_ifstyle()dnl
+.\" XXX: End shameful cheat to avoid stranded line in U.S. letter
+.\" PS/PDF output.  --GBR
+.if t \{\
+.  nr PD \n[saved-PD]
+.  rr saved-PD
+.\}
+_endif()dnl
 .
 .
 .TP
