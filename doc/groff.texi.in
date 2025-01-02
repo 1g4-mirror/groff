@@ -1877,11 +1877,14 @@ points.  Some, but not all, macro packages expose a macro or register to
 configure the vertical spacing.
 
 A number of requests allow you to change the way the output is arranged
-on the page, sometimes called the @slanted{layout} of the page.  Most
-macro packages don't supply macros for performing these (at least not
-without performing other actions besides), as they are such basic
-operations.  The macro packages for writing man pages, @file{man} and
-@file{mdoc}, discourage explicit use of these requests altogether.
+on the page,
+sometimes called its @slanted{layout}.
+Most macro packages don't supply macros for performing these
+(at least not without performing other actions besides),
+as they are such basic operations.
+The macro packages for writing man pages,
+@file{man} and @file{mdoc},
+discourage explicit use of these requests altogether.
 
 @cindex spacing (introduction)
 Arguments to requests and macro calls can often be
@@ -1924,7 +1927,7 @@ lines without counting them, try the following technique.
 
 @noindent
 The @w{@samp{.ce 0}} request tells GNU @command{troff} to center zero
-more lines---in other words, to stop centering.
+more text lines---in other words, to stop centering.
 
 @cindex right-aligning lines (introduction)
 @cindex lines, right-aligning (introduction)
@@ -2060,8 +2063,9 @@ styles or sizes at different levels.  More sophisticated macro packages
 supply macros for designating chapters and appendices, and permit
 @cindex run-in headings
 @cindex headings, run-in
-``run-in headings'', where there is no break between the end of the
-heading text and the start of the subsequent paragraph.
+@dfn{run-in headings},
+where there is no break between the end of the heading text and the
+start of the subsequent paragraph.
 
 @c ---------------------------------------------------------------------
 
@@ -2148,9 +2152,14 @@ A package may handle a @slanted{table of contents} by directing section
 heading macros to save the heading's text and the page number where it
 occurs for use in a later @slanted{entry} for a table of contents.  It
 writes the collected entries at the end of the document, once all are
-known, upon request.  A row of dots (a @slanted{leader}) bridges the
-text on the left with its location on the right.  Other collections
-might work in this manner, providing lists of figures or tables.
+known, upon request.
+@cindex leader
+A @dfn{leader},
+a row of dots,
+bridges the text on the left with its location on the right.
+Other collections might work in this manner,
+providing lists of figures
+or tables.
 
 A table of contents is often found at the end of a GNU @command{troff}
 document because the formatter processes the document in a single pass.
