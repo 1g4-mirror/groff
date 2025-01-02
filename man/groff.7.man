@@ -2495,26 +2495,26 @@ The default is
 .BR 0 .
 .
 .TPx
-.REQ .aln "new old"
+.REQ .aln "new-register existing-register"
 Create alias
 (additional name)
-.I new
-for existing register named
-.IR old .
+.I new-register
+of
+.IR existing-register .
 .
 .TPx
-.REQ .als "new old"
+.REQ .als "new-name existing-name"
 Create alias
 (additional name)
-.I new
-for existing request,
+.I new-name
+of request,
 string,
 macro,
 or diversion
-.IR old .
+.IR existing-name .
 .
 If
-.I new
+.I new-name
 already exists,
 its contents are lost unless already aliased.
 .

@@ -1544,19 +1544,25 @@ permitting inclusion of leading spaces.
 .
 .
 .TP 8n \" ".break" + 2n
-.BI .aln\~ "new old"
+.BI .aln\~ "new-register existing-register"
 Create alias
-.I new
-for existing register named
-.IR old ,
-causing the names to refer to the same stored value.
+(additional name)
+.I new-register
+of
+.IR existing-register .
 .
 If
-.I old
+.I existing-register
 is undefined,
-a warning in category
-.B reg
-is generated and the request is ignored.
+GNU
+.I troff \" GNU
+produces a warning in category
+.RB \[lq] reg \[rq]
+and ignores the request.
+.
+See section \[lq]Warnings\[rq] of
+.MR @g@groff 1 ,
+regarding the enablement and suppression of warnings.
 .
 To remove a register alias,
 invoke
@@ -1568,40 +1574,34 @@ names.
 .
 .
 .TP
-.BI .als\~ "new old"
+.BI .als\~ "new-name existing-name"
 Create alias
-.I new
-for existing request,
+(additional name)
+.I new-name
+of request,
 string,
 macro,
-or diversion named
-.IR old ,
+or diversion
+.IR existing-name ,
 causing the names to refer to the same stored object.
 .
 If
-.I old
-is undefined,
-a warning in category
-.B mac
-is produced,
-and the request is ignored.
+.I new-name
+already exists,
+its contents are lost unless already aliased.
 .
-The
-.RB \[lq] am \[rq],
-.RB \[lq] as \[rq],
-.BR da ,
-.BR de ,
-.BR di ,
-and
-.B ds
-requests
-(together with their variants)
-create a new object only if the name of the macro,
-diversion,
-or string is currently undefined
-or if it is defined as a request;
-normally,
-they modify the value of an existing object.
+If
+.I existing-name
+is undefined,
+GNU
+.I troff \" GNU
+produces a warning in category
+.RB \[lq] mac \[rq]
+and ignores the request.
+.
+See section \[lq]Warnings\[rq] of
+.MR @g@groff 1 ,
+regarding the enablement and suppression of warnings.
 .
 To remove an alias,
 invoke

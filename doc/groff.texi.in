@@ -7692,21 +7692,36 @@ exist, the request is ignored.  Renaming a built-in register does not
 otherwise alter its properties.
 @endDefreq
 
-@Defreq {aln, new old}
+@Defreq {aln, new-register old-register}
 @cindex alias, register, creating (@code{aln})
 @cindex creating alias of register (@code{aln})
 @cindex register, creating alias of (@code{aln})
-Create an alias @var{new} for an existing register @var{old}, causing
-the names to refer to the same stored object.  If @var{old} is
-undefined, a warning in category @samp{reg} is produced and the request
-is ignored.  @xref{Warnings}, regarding the enablement and suppression
-of warnings.
+Create alias
+(additional name)
+@var{new-register}
+of
+@var{existing-register},
+causing the names to refer to the same stored object.
+If
+@var{existing-register}
+is undefined,
+GNU
+@command{troff}
+produces a warning in category
+@samp{reg}
+and ignores the request.
+@xref{Warnings},
+regarding the enablement and suppression of warnings.
 
 @cindex alias, register, removing (@code{rr})
 @cindex removing alias of register (@code{rr})
 @cindex register, removing alias of (@code{rr})
-To remove a register alias, invoke @code{rr} on its name.  A register's
-contents do not become inaccessible until it has no more names.
+To remove a register alias,
+invoke
+@code{rr}
+on its name.
+A register's contents do not become inaccessible until it has no more
+names.
 @endDefreq
 @c END Keep (roughly) parallel with section "Registers" of groff(7).
 
@@ -12928,7 +12943,7 @@ This request is incorrectly documented in the @acronym{AT&T}
 @endDefreq
 
 @anchor{als}
-@Defreq {als, new old}
+@Defreq {als, new-name existing-name}
 @cindex alias, string, creating (@code{als})
 @cindex alias, macro, creating (@code{als})
 @cindex alias, diversion, creating (@code{als})
@@ -12938,12 +12953,29 @@ This request is incorrectly documented in the @acronym{AT&T}
 @cindex string, creating alias of (@code{als})
 @cindex macro, creating alias of (@code{als})
 @cindex diversion, creating alias of (@code{als})
-Create an alias @var{new} for the existing request, string, macro, or
-diversion object named @var{old}, causing the names to refer to the same
-stored object.  If @var{new} already exists, its contents are lost
-unless already aliased.  If @var{old} is undefined, a warning in
-category @samp{mac} is produced, and the request is ignored.
-@xref{Warnings}, regarding the enablement and suppression of warnings.
+Create alias
+(additional name)
+@var{new-name}
+of request,
+string,
+macro,
+or diversion
+@var{existing-name},
+causing the names to refer to the same stored object.
+If
+@var{new-name}
+already exists,
+its contents are lost unless already aliased.
+If
+@var{existing-name}
+is undefined,
+GNU
+@command{troff}
+produces a warning in category
+@samp{mac}
+and ignores the request.
+@xref{Warnings},
+regarding the enablement and suppression of warnings.
 
 To understand how the @code{als} request works, consider two different
 storage pools:@: one for objects (macros, strings, etc.), and another
@@ -12987,12 +13019,19 @@ an error.  @xref{Writing Macros}.
 @cindex string, removing alias of (@code{rm})
 @cindex macro, removing alias of (@code{rm})
 @cindex diversion, removing alias of (@code{rm})
-To remove an alias, call @code{rm} on its name.  The object itself is
-not destroyed until it has no more names.
+To remove an alias,
+call
+@code{rm}
+on its name.
+The object itself is not destroyed until it has no more names.
 
-Redefinitions and appendments ``write through'' request, macro, string,
-and diversion names.  To replace an aliased object with a separately
-defined one, you must use the @code{rm} request on its name first.
+When a request,
+macro,
+string,
+or diversion is aliased
+redefinitions and appendments ``write through'' alias names.
+To replace an alias with a separately defined object,
+remove its name first.
 @endDefreq
 @c END Keep (roughly) parallel with section "Strings" of groff(7).
 
