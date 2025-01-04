@@ -119,10 +119,12 @@ troff
      .hy
      the foregoing request would not do exactly what we expect.
 
-   AT&T and other troffs would set the hyphenation mode to 1 instead of
-   the previous value; for GNU troff this was not an appropriate value
-   for the English hyphenation patterns.  (For example, "alibi" would
-   break as "ali-bi" instead of "al-ibi" after this argumentless `hy`
+   AT&T and other troffs apply a hyphenation mode of 1 to the final
+   input line (and subsequent ones), rather than restoring the mode in
+   use before the `nh` request.  Apart from overturning user
+   expectations, for GNU troff "1" is not an appropriate value for its
+   English hyphenation patterns.  (For example, "alibi" would break as
+   "ali-bi" instead of "al-ibi" after this argumentless `hy`
    invocation.)  With updates to groff's localization files accompanying
    this release, the foregoing input now works as desired.
 
