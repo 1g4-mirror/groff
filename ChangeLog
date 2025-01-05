@@ -1,5 +1,15 @@
 2025-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (SH): Restore closing brace escape sequence.
+
+	This caused the package to stop formatting the document if `SH`
+	was called without any arguments, a valid but uncommon usage.
+	Problem introduced by me in commit f3944d6305, 3 March.
+
+	Fixes <https://savannah.gnu.org/bugs/?66640>.
+
+2025-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Test argumentless `SH`, `SS` calls.
 
 	* tmac/tests/an_SH-works-with-pending-input-trap.sh:
