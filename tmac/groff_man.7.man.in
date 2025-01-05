@@ -2539,6 +2539,28 @@ sequences to access code points necessary in non-English text.
 .
 .
 .P
+AT&T
+.IR troff 's \" AT&T
+.I man
+package and those of many of its descendants format man pages
+using a line length of 65 ens
+(character cells)
+on terminals,
+whereas
+.I "groff man"
+uses 80 ens
+(and
+.MR mandoc 1
+78).
+.
+Readers with low vision may also benefit from the narrower line length.
+.
+Inspect your documents with
+.RB \(lq "nroff \-t \-r LL=65n \-man" \(rq
+to ensure that their output lines don't overrun.
+.
+.
+.P
 The two major features that control formatting in the
 .I roff
 language are requests and escape sequences.
