@@ -1,3 +1,11 @@
+2025-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Test argumentless `SH`, `SS` calls.
+
+	* tmac/tests/an_SH-works-with-pending-input-trap.sh:
+	* tmac/tests/an_SS-works-with-pending-input-trap.sh: Do it.
+	* tmac/tmac.am (tmac_TESTS): Run tests.
+
 2025-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tbl]: Rationalize header inclusion.
