@@ -621,6 +621,8 @@
 .als doc-str-St--isoC-90 doc-str-St--isoC
 .ds doc-str-St--isoC-2011      ISO/IEC\*[doc-str-St] 9899:2011
 .as doc-str-St--isoC-2011      " (\*[Lq]ISO\~C\^11\*[doc-str-St]\*[Rq])
+.ds doc-str-St--isoC-2023      ISO/IEC\*[doc-str-St] 9899:2024
+.as doc-str-St--isoC-2023      " (\*[Lq]ISO\~C\^23\*[doc-str-St]\*[Rq])
 .ds doc-str-St--isoC-99        ISO/IEC\*[doc-str-St] 9899:1999
 .as doc-str-St--isoC-99        " (\*[Lq]ISO\~C\^99\*[doc-str-St]\*[Rq])
 .ds doc-str-St--isoC-amd1       ISO/IEC\*[doc-str-St] 9899/AMD1:1995

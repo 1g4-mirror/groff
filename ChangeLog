@@ -1,3 +1,16 @@
+2025-01-07  Ingo Schwarze <schwarze@openbsd.org>
+
+	* tmac/mdoc/doc-syms: Support .St -isoC-2023.
+	* tmac/groff_mdoc.7.man: Document .St -isoC-2023.
+
+	The mismatch of the year numbers is not a typo.
+	The official name is "ISO/IEC 9899:2024", so the "4" is correct there.
+
+	But as a colloquial name, "C23" is more widespread than "C24",
+	probably because __STDC_VERSION__ == 202311L: The final version
+	of the standard was ready in 2023, only formally publishing it
+	took about 11 months after it was ready.
+
 2025-01-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (SH): Restore closing brace escape sequence.
