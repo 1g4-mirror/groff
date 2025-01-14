@@ -133,7 +133,7 @@ like the one you are reading.
 This document presents the macros thematically;
 for those needing only a quick reference,
 the following table lists them alphabetically,
-with cross references to appropriate subsections below.
+with references to appropriate subsections below.
 _ifstyle()dnl
 Experienced
 .I man
@@ -267,7 +267,7 @@ option in section \(lqOptions\(rq below).
 .
 An output line may be supplemented with
 .I inter-sentence space,
-and then optionally
+then potentially
 .I adjusted
 with more space to a consistent length
 (see the
@@ -741,13 +741,14 @@ _endif()dnl
 .TP
 .BR .RS " ["\c
 .IR inset-amount ]
-Start a new relative inset level.
+Start new relative inset.
 .
-The current inset amount is saved,
-then moved right by
+.I man
+saves any current inset amount,
+moves right by:
 .I inset-amount,
 if specified;
-by the
+the
 .I indentation
 amount of the preceding
 .BR .IP ,
@@ -756,20 +757,20 @@ or (deprecated)
 .B .HP
 macro call if no (sub-)sectioning or ordinary paragraphing macro has
 intervened;
-and by the amount of the
+or the amount of the
 .B IN
-register otherwise.
+register.
 .
-Calls to
 .B .RS
-can be nested;
-each increments by\~1
-the inset level used by
+calls can nest;
+each increments by\~1 the
+.I level
+used by
 .BR .RE .
 .
 The level prior to any
 .B .RS
-calls is\~1.
+call is\~1.
 .
 .
 .TP
@@ -2435,18 +2436,17 @@ write it solely with the macros described in this page
 (except for the ones identified as deprecated,
 which you should avoid).
 .
-The macros we have described as extensions might not be supported by a
-formatter that is important to your audience.
+Macros described as extensions might be unsupported by a formatter that
+is important to your audience.
 .
 Nevertheless,
 .IR groff 's
 extensions are present because they perform tasks that are otherwise
 difficult or tedious to achieve portably.
 .
-If you require an extension but also expect your man page to be rendered
+If you require an extension but expect your man page to be rendered
 on a system that doesn't support it,
-consider writing a configuration test that measures a property of the
-system,
+write a configuration test to measure a property of the system,
 and use
 .MR m4 1 ,
 .MR sed 1 ,
@@ -3119,7 +3119,7 @@ Use for an interruption\(emsuch as this one\(emin a sentence.
 En dash.
 .
 Use to separate the ends of a range,
-particularly between numbers;
+as between numbers;
 for example,
 \(lqthe digits 1\(en9\(rq.
 .
@@ -4652,11 +4652,11 @@ in that implementation,
 often no special character escape sequences exist to obtain them.
 .
 Further,
-in AT&T
-.IR troff , \" troff
-the glyph repertoire,
-like the set of supported font names,
-is device-specific.
+AT&T
+.IR troff 's \" troff
+special character identifiers,
+like its font names,
+were device-specific.
 .
 To achieve quotation portably in man pages rendered both by
 AT&T and more modern
@@ -4665,8 +4665,6 @@ consider adding a preamble to your page after the
 .B .TH
 call as follows.
 .
-.
-.IP
 .RS
 .RS
 .EX
@@ -4682,26 +4680,20 @@ call as follows.
 .RE
 .RE
 .
-.
-.IP
 You must then use the
 .B \[rs]*
 escape sequence to interpolate the quotation mark strings.
 .
-.
-.IP
 .RS
 .RS
 .EX
 The command
 \&.RB \[rs]*(oq "while ! git pull; do sleep 10; done" \[rs]*(cq
-retries an update from our repository until it succeeds.
+retries an update from the repository until it succeeds.
 .EE
 .RE
 .RE
 .
-.
-.IP
 If this procedure seems complex,
 petition your distributor to revert their remapping of the
 \[ga] and \[aq] characters.
