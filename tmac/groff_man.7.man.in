@@ -2864,7 +2864,8 @@ as in a command synopsis.
 .
 .
 .IP
-It also helps when changing font styles in
+.B \ec
+also helps when changing font styles in
 .BR .EX / .EE
 examples,
 since they are not filled.
