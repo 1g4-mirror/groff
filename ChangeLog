@@ -1,5 +1,11 @@
 2025-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Regression-test Savannah #66664.
+
+	* tmac/tests/an_title-abbreviation-works.sh: Add test case.
+
+2025-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (do_input_trap): Directly copy Boolean
 	value instead of using a control structure.
 
