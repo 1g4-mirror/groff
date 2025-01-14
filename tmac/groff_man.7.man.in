@@ -61,7 +61,7 @@ _endif()dnl
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1999-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1999-2025 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -4593,15 +4593,16 @@ inline examples,
 mentions of individual characters or short strings,
 and (sub)section headings in man pages\(rq.
 .
-When setting examples of multi-word literals,
+Multi-word literals,
 such as Unix commands,
-inline
-(as opposed to displaying them between
+when set inline
+(as opposed to displayed between
 .B .EX
 and
 .BR .EE ),
-use of quotation marks is important to ensure that the boundaries of the
-quotation are clear even when the material is stripped of font styling
+should be quoted
+to ensure that the boundaries of the literal
+are clear even when the material is stripped of font styling
 by,
 for example,
 copy-and-paste operations.
