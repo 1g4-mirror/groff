@@ -1,6 +1,6 @@
 .\" groff implementation of man(7) package
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"      Written by James Clark (jjc@jclark.com)
 .\" Enhanced by: Werner Lemberg <wl@gnu.org>
 .\"              Larry Kollar <kollar@alltel.net>
@@ -487,8 +487,11 @@
 .  \" PDF bookmarks.
 .  ds an*page-ref-string \\*[an*ident](\\*[an*section])\"
 .  ds an-pageref \\*[an*ident-abbv](\\*[an*section])\"
-.  nr an-header-width \\w'\\*[an-pageref]\\*[an-extra3]\\*[an-pageref]'
-.  while (\\n[an-header-width] >= \\n[.lt]) \{\
+.  \" Computer width of title text, plus 2n for minimal spacing on
+.  \" either side of the center header.
+.  nr an-header-width \
+     (\\w'\\*[an-pageref]\\*[an-extra3]\\*[an-pageref]' + 2n)
+.  while (\\n[an-header-width] > \\n[.lt]) \{\
 .    \" The page topic is too long; trim some bits out of the middle.
 .    length an*ident-length \\*[an*ident-string]
 .    \" roff uses truncating division.  Remove an additional character
@@ -510,8 +513,9 @@
 .    ie (\\n[an*ident-new-length] >= \\n[an*ident-length]) \
 .      break
 .    ds an-pageref \\*[an*ident-abbv](\\*[an*section])\"
+.    \" Recompute header width now that it's shorter.
 .    nr an-header-width \
-       \\w'\\*[an-pageref]\\*[an-extra3]\\*[an-pageref]'
+       (\\w'\\*[an-pageref]\\*[an-extra3]\\*[an-pageref]' + 2n)
 .  \}
 .  ds an-pageref \\*[an-lic]\f[\\*[MF]]\\*[an*ident-abbv]\\*[an-ic]\
 \f[R](\\*[an*section])\"

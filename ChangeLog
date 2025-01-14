@@ -1,5 +1,14 @@
 2025-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*abbreviate-page-topic): (Actually, it's the
+	_identifier_ we're abbreviating...)  Avoid crowding the middle
+	header with a combination of line length and identifier text
+	that is just right to exercise a corner case.
+
+	Fixes <https://savannah.gnu.org/bugs/?66664>.
+
+2025-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Regression-test Savannah #66664.
 
 	* tmac/tests/an_title-abbreviation-works.sh: Add test case.
