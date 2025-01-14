@@ -379,9 +379,9 @@ Macro packages
    changed the default line length when formatting on terminals from 78n
    to 80n.  The latter is a vastly more common device configuration, but
    that line length had been avoided since the groff 1.18 release in
-   July 2002 (prior to that, the line length was 65n/6.5i, as in Unix
-   troff), for an undocumented reason.  That reason appears to have been
-   the interaction of bugs in GNU tbl(1) with an aspect of grotty(1)'s
+   July 2002 (prior to that, the line length was 65n, as in Unix nroff),
+   for an undocumented reason.  That reason appears to have been the
+   interaction of bugs in GNU tbl(1) with an aspect of grotty(1)'s
    design.  Those bugs have been resolved.  A man(1) program can still
    instruct groff to format for any desired line length by setting the
    `LL` register on {g,n,t}roff's command line.
