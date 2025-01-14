@@ -1,3 +1,8 @@
+2025-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (do_input_trap): Directly copy Boolean
+	value instead of using a control structure.
+
 2025-01-07  Ingo Schwarze <schwarze@openbsd.org>
 
 	* tmac/mdoc/doc-syms: Support .St -isoC-2023.

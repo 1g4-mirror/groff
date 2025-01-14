@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -2699,10 +2699,7 @@ void do_input_trap(bool respect_continuation)
 {
   curenv->input_trap_count = -1;
   curenv->input_trap = 0 /* nullptr */;
-  if (respect_continuation)
-    curenv->continued_input_trap = true;
-  else
-    curenv->continued_input_trap = false;
+  curenv->continued_input_trap = respect_continuation;
   int n;
   if (has_arg() && get_integer(&n)) {
     if (n <= 0)
