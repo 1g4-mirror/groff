@@ -344,8 +344,6 @@ macro description).
 .\" possibly exhibit a horrorshow docbook-to-man example
 .
 .
-.br
-.ne 6v
 _endif()dnl
 .\" ====================================================================
 .SS "Macro reference preliminaries"
@@ -832,8 +830,6 @@ again excepted);
 see subsection \(lqFont style macros\(rq below.
 .
 .
-.br
-.ne 4v
 .TP
 .B .P
 .TQ
@@ -998,13 +994,6 @@ _endif()dnl
 .SS "Synopsis macros"
 .\" ====================================================================
 .
-_ifnotstyle()dnl
-.if t \{\
-.  \" Unstrand line.  What sins we commit for attractive page layout...
-.  nr old-PD \n[PD]
-.  nr PD 0.3125v
-.\}
-_endif()dnl
 Use
 .B SY
 and
@@ -1088,13 +1077,6 @@ the indentation corresponding to the previous
 call is reused by the next
 .B SY
 call instead of being computed.
-_ifnotstyle()dnl
-.if t \{\
-.  \" Undo kludge.
-.  nr PD \n[old-PD]u
-.  rr old-PD
-.\}
-_endif()dnl
 _ifstyle()dnl
 .
 .
@@ -1565,8 +1547,6 @@ angle brackets.
 _ifstyle()dnl
 .
 .
-.br
-.ne 6v
 .IP
 When rendered by
 .I groff
@@ -1711,8 +1691,6 @@ and inlined literals.
 _endif()dnl
 .
 .
-.br
-.ne 2v
 .P
 The default type size and family for typesetters is 10-point Times,
 except on the
@@ -1981,8 +1959,6 @@ command to change the name of the vbox.
 .RE
 .
 .
-.br
-.ne 8v
 _endif()dnl
 .TP
 .BI .RB " roman-text bold-text "\c
@@ -2157,7 +2133,7 @@ An extensive example follows.
 .
 .
 .br
-.ne 3v
+.ne 2v
 .P
 This ordinary
 .RB ( P )
@@ -2218,8 +2194,6 @@ only the former affects the mark,
 but both affect the text of the paragraph.
 .
 .
-.br
-.ne 3v
 .P
 This ordinary
 .RB ( P )
@@ -2312,8 +2286,6 @@ file as well;
 see section \(lqFiles\(rq below.
 .
 .
-.br
-.ne 7v
 .\" ====================================================================
 .SS Strings
 .\" ====================================================================
@@ -2394,8 +2366,6 @@ though even it supports
 avoid using the above strings.
 .
 .
-.br
-.ne 4v
 .\" ====================================================================
 .SS "Use of extensions"
 .\" ====================================================================
@@ -2621,14 +2591,6 @@ grave accent,
 tilde).
 .
 .
-.\" XXX: Begin shameful cheat to avoid stranded line in U.S. letter
-.\" PS/PDF output.  --GBR
-.if t \{\
-.  nr saved-PD \n[PD]
-.  nr PD -.025v
-.\}
-.br
-.ne 2v
 .if n .TP 10n \" "\newline" + 2n
 .if t .TP 9n \" we can get away with less on typesetters
 .B \e\(dq
@@ -2833,6 +2795,8 @@ as in a command synopsis.
 .RE
 .
 .
+.br
+.ne 5v
 .IP
 .B \ec
 also helps when changing font styles in
@@ -3028,8 +2992,6 @@ Some output devices format
 as a right single quotation mark.
 .
 .
-.br
-.ne 3v
 .TP
 .B \e(oq
 .TQ
@@ -3150,14 +3112,6 @@ _endif()dnl
 .SS Hooks
 .\" ====================================================================
 .
-_ifstyle()dnl
-.\" XXX: Begin shameful cheat to avoid stranded line in U.S. letter
-.\" PS/PDF output.  --GBR
-.if t \{\
-.  nr saved-PD \n[PD]
-.  nr PD -.05v
-.\}
-_endif()dnl
 Two macros,
 both GNU extensions,\" from groff 1.19
 are called internally by the
@@ -3316,6 +3270,8 @@ information or distinctions you mean to express with indentation may be
 lost.
 .
 .
+.br
+.ne 5v
 .TP
 .BI .OP " option-name"\/\c
 .RI " [" option-argument ]
@@ -3352,14 +3308,6 @@ One could work around these limitations with font selection escape
 sequences,
 but it is preferable to use font style alternation macros,
 which afford greater flexibility.
-_ifstyle()dnl
-.\" XXX: End shameful cheat to avoid stranded line in U.S. letter
-.\" PS/PDF output.  --GBR
-.if t \{\
-.  nr PD \n[saved-PD]
-.  rr saved-PD
-.\}
-_endif()dnl
 .
 .
 .TP
@@ -3848,6 +3796,8 @@ it is set to the line length
 above).
 .
 .
+.br
+.ne 5v
 .TP
 .BI \-dMF= man-page-topic-font
 Select the font used for man page identifiers in
@@ -3917,8 +3867,6 @@ paragraph's tag and its body.
 The default is\~2n.
 .
 .
-.br
-.ne 3v
 .TP
 .B \-rU0
 Disable generation of URI hyperlinks in output drivers capable of them,
@@ -4123,8 +4071,6 @@ file.
 Place the requests below at the end of the site-local file to
 manifest courtesy.
 .
-.br
-.ne 3v
 .RS
 .RS
 .EX
@@ -4463,8 +4409,6 @@ _
 .TE
 .
 .
-.br
-.ne 4v
 .IP \(bu
 Why doesn't the package provide a string to insert an ellipsis?
 .
@@ -4751,8 +4695,6 @@ and the
 macro. \" all 1.23 except where noted
 .
 .
-.br
-.ne 3v
 .P
 This document was originally written for the Debian GNU/Linux system by
 .MT sgk@\:debian\:.org
@@ -4772,8 +4714,6 @@ contributed most of the material on escape sequences.
 _endif()dnl
 .
 .
-.br
-.ne 4v
 .\" ====================================================================
 .SH "See also"
 .\" ====================================================================
