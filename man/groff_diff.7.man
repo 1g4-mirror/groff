@@ -11,7 +11,7 @@ and AT&T
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" This file is part of groff, the GNU roff type-setting system.
 .\"
@@ -1118,14 +1118,27 @@ is interpreted even in copy mode.
 .
 .
 .\" TODO: When we get this giant headache generalized and adapted to the
-.\" `\!` escape sequence and `device`, `output`, `cf`, and `trf`
-.\" requests, move this discussion into a dedicated subsection above.
+.\" `device` request, move this discussion into a dedicated subsection
+.\" above.
 .TP
-.BI \[rs]X\[aq] contents \[aq]
-The
-.I groff
-special character repertoire is unknown to output drivers outside of
-glyphs named in a device's fonts,
+.BI \[rs]X\[aq] character-sequence \[aq]
+Unlike AT&T
+.IR troff , \" AT&T
+GNU
+.I troff \"
+performs some limited processing of the sequence of ordinary characters,
+special characters,
+and spaces in
+.IR character-sequence .
+.
+.
+.\" XXX: Force paragraph spacing here.  I know--it's terrible.  And
+.\" unnecessary once we get this giant discussion moved to its own
+.\" (sub)section.
+.sp \n[PD]u
+.\"IP
+The formatter's special character repertoire is unknown
+to output drivers outside of glyphs named in a device's fonts,
 and even then they may not possess complete coverage of the names
 documented in
 .MR groff_char @MAN7EXT@ .
@@ -1137,26 +1150,42 @@ or that are dummy characters may appear in strings
 or be converted to nodes,
 particularly in diversions. \" (@pxref{Gtroff Internals})
 .
+When they occur in a device extension command,
+they produce warnings in category
+.RB \[lq] char \[rq].
+.
 These are not representable when interpolated directly into
 device-independent output,
 as might be done when writing out tag names for PDF bookmarks,
 which can appear in a viewer's navigation pane.
 .
+This is also the case for a small number of special characters,
+such as
+.BR \[rs][ru] ,
+the baseline rule,
+that lack a Unicode definition.
 .
-.\" XXX: Force paragraph spacing here.  I know--it's terrible.  And
-.\" unnecessary once we get this giant discussion moved to its own
-.\" (sub)section.
+.
 .sp \n[PD]u
 .\"IP
-So that documents or macro packages do not have to laboriously
-\[lq]sanitize\[rq] strings destined for interpolation
-in device extension commands,
-this escape sequence
-.\" XXX: and soon other things
-performs certain transformations on its argument.
+So that any Unicode code point can be represented in device extension
+commands,
+for example in an author's name in document metadata
+or as a usefully named bookmark or hyperlink anchor,
+GNU
+.I troff \" GNU
+transforms its argument to represent character outside the Unicode Basic
+Latin range as Unicode code points expressed in
+.IR groff 's
+notation for these,
+\[lq]\|\c
+.BI \[rs][u XXXX ]\c
+\|\[rq];
+see
+.MR groff_char @MAN7EXT@ .
 .
 For these transformations,
-character translations and definitions are ignored.
+the formatter ignores character translations and definitions.
 .
 .
 .sp \n[PD]u
@@ -1177,25 +1206,29 @@ and
 .RB \[lq]\| \[ti] \|\[rq];
 others are written as-is.
 .
+Thus,
+.RB \[lq]\| \[aq] \|\[rq]
+transforms to
+.RB \[lq]\| \[rs][u2019] \|\[rq].
+.
 .
 .sp \n[PD]u
 .\"IP
-Special characters that typeset as Unicode basic Latin characters
-are translated to basic Latin characters accordingly.
-.
-So that any Unicode code point can be represented in device extension
-commands,
-for example in an author's name in document metadata
-or as a usefully named bookmark or hyperlink anchor,
+Contrariwise,
 GNU
 .I troff \" GNU
-maps other special characters to Unicode special character notation.
+translates special characters that typeset
+as Unicode basic Latin characters
+to basic Latin characters accordingly.
 .
-Special characters without a Unicode representation,
-and escape sequences that do not interpolate a sequence
-of ordinary and/or special characters,
-produce warnings in category
-.RB \[lq] char \[rq].
+Thus,
+.RB \[lq]\| \[rs][ga] \|\[rq]
+transforms to
+.RB \[lq]\| \[ga] \|\[rq],
+.RB \[lq]\| \[rs][Do] \|\[rq]
+to
+.RB \[lq]\| $ \|\[rq],
+and so on.
 .
 .
 .br
@@ -2376,13 +2409,14 @@ is interpreted.
 .TP
 .BR .device\~ [\c
 .RB [ \[dq] ]\c
-.IR contents ]
+.IR character-sequence ]
 Write
-.IR contents ,
+.IR character-sequence ,
+a sequence of ordinary or special characters and spaces
 read in copy mode,
 to
 .I @g@troff
-output as a device extension command.
+output as the argument to a device extension command.
 .
 .
 .TP
@@ -2391,7 +2425,7 @@ Write contents of macro or string
 .I name
 to
 .I @g@troff
-output as a device extension command.
+output as the argument to a device extension command.
 .
 .
 .TP
@@ -3263,14 +3297,15 @@ append to it instead of truncating it.
 .
 .TP
 .BR .output \~[ \[dq] ]\c
-.I contents
 Emit
-.I contents
+.IR character-sequence ,
+a sequence of ordinary characters and spaces read in copy mode,
 \[lq]transparently\[rq]
 (directly) to
 .IR @g@troff 's
-output;
-this usage is similar to that of
+output.
+.
+This usage is similar to that of
 .B \[rs]!\&
 in the top-level diversion.
 .
@@ -4021,13 +4056,20 @@ loop's flow of control.
 .TP
 .BI .write\~ stream\~\c
 .RB [[ \[dq] ]\c
-.IR contents ]
 Write
-.I contents
+.IR character-sequence ,
+a sequence of ordinary characters,
+spaces,
+or tabs
+.\" ...or, technically, backspace and delete characters, but let's not
+.\" dwell on that.
+read in copy mode,
 to
 .IR stream ,
 which must previously have been the subject of an
-.B open
+.RB \[lq] open \[rq]
+(or
+.BR opena )
 request,
 followed by a newline.
 .
@@ -4039,7 +4081,7 @@ flushes the stream after writing to it.
 .TP
 .BI .writec\~ stream\~\c
 .RB [[ \[dq] ]\c
-.IR contents ]
+.IR character-sequence ]
 As
 .BR write ,
 but does not append a newline to
