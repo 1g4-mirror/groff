@@ -4434,7 +4434,7 @@ the
 macro's argument is an inset
 .I level.
 .
-.B .RE\~1
+.RB \(lq .RE\~1 \(rq
 goes to the level before any
 .B .RS
 macros were called,
