@@ -382,6 +382,15 @@ _endif()dnl
 Most macro arguments are formatted as text in the output;
 exceptions are noted.
 .
+_ifstyle()dnl
+We identify some macros as
+.I extensions
+that are not supported everywhere;
+to the set originally implemented;
+see subsection \(lqUse of extensions\(rq
+below.
+_endif()dnl
+.
 .
 .\" ====================================================================
 .SS "Document structure macros"
@@ -728,15 +737,6 @@ does not.
 .\" Solaris 10 troff does not support .EX/.EE.  Neatroff doesn't ship
 .\" (m)an macros.
 .
-See subsection \(lqUse of extensions\(rq
-_ifstyle()dnl
-below.
-_endif()dnl
-_ifnotstyle()dnl
-in
-.MR groff_man_style @MAN7EXT@ .
-_endif()dnl
-.
 .
 .TP
 .BR .RS " ["\c
@@ -927,16 +927,6 @@ or
 Solaris
 .IR troff s. \" DWB, Plan 9, Solaris
 .
-See subsection \(lqUse of extensions\(rq
-_ifstyle()dnl
-below.
-_endif()dnl
-_ifnotstyle()dnl
-in
-.MR groff_man_style @MAN7EXT@ .
-_endif()dnl
-_ifstyle()dnl
-.
 .
 .IP
 The description of
@@ -1040,15 +1030,6 @@ and
 Solaris
 .IR troff s \" DWB, Plan 9, Solaris
 do not.
-.
-See subsection \(lqUse of extensions\(rq
-_ifstyle()dnl
-below.
-_endif()dnl
-_ifnotstyle()dnl
-in
-.MR groff_man_style @MAN7EXT@ .
-_endif()dnl
 .
 .
 .TP
@@ -1438,15 +1419,6 @@ Plan\~9 from User Space's
 .I troff \" plan9port
 implements
 .BR .MR .
-.
-See subsection \(lqUse of extensions\(rq
-_ifstyle()dnl
-below.
-_endif()dnl
-_ifnotstyle()dnl
-in
-.MR groff_man_style @MAN7EXT@ .
-_endif()dnl
 .
 .
 .P
