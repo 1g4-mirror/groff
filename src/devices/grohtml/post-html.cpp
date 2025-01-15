@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2025 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote post-html.cpp
  *  but it owes a huge amount of ideas and raw code from
@@ -892,11 +892,11 @@ int text_glob::get_arg (void)
   if (strncmp("devtag:", text_string, strlen("devtag:")) == 0) {
     const char *p = text_string;
 
-    while ((*p != (char)0) && (!isspace(*p)))
+    while ((*p != '\0') && (!isspace(*p)))
       p++;
-    while ((*p != (char)0) && (isspace(*p)))
+    while ((*p != '\0') && (isspace(*p)))
       p++;
-    if (*p == (char)0)
+    if ('\0' == *p)
       return -1;
     return atoi(p);
   }
@@ -913,17 +913,17 @@ int text_glob::get_tab_args (char *align)
     const char *p = text_string;
 
     // firstly the alignment C|R|L
-    while ((*p != (char)0) && (!isspace(*p)))
+    while ((*p != '\0') && (!isspace(*p)))
       p++;
-    while ((*p != (char)0) && (isspace(*p)))
+    while ((*p != '\0') && (isspace(*p)))
       p++;
     *align = *p;
     // now the int value
-    while ((*p != (char)0) && (!isspace(*p)))
+    while ((*p != '\0') && (!isspace(*p)))
       p++;
-    while ((*p != (char)0) && (isspace(*p)))
+    while ((*p != '\0') && (isspace(*p)))
       p++;
-    if (*p == (char)0)
+    if ('\0' == *p)
       return -1;
     return atoi(p);
   }
@@ -1874,7 +1874,7 @@ const char *replace_negate_str (const char *before, char *after)
       after[0] = '1';
     else
       after[0] = '0';
-    after[1] = (char)0;
+    after[1] = '\0';
   }
   return after;
 }
@@ -3092,7 +3092,7 @@ void html_printer::do_job_name (char *name)
 {
   if (! multiple_files) {
     multiple_files = TRUE;
-    while (name != 0 && (*name != (char)0) && (*name == ' '))
+    while (name != 0 && (*name != '\0') && (*name == ' '))
       name++;
     job_name = name;
   }
@@ -4896,7 +4896,7 @@ glyph *html_printer::set_char_and_width(const char *nm,
     return UNDEFINED_GLYPH;
   }
   if (!(*f)->contains(g)) {
-    if (nm[0] != '\0' && nm[1] == '\0')
+    if ((nm[0] != '\0') && ('\0' == nm[1]))
       error("font '%1' does not contain ordinary character '%2'",
 	    (*f)->get_name(), nm[0]);
     else
@@ -5314,12 +5314,12 @@ static char *get_str (const char *s, char **n)
   int i = 0;
   char *v;
 
-  while ((s[i] != (char)0) && (s[i] != ',') && (s[i] != ']'))
+  while ((s[i] != '\0') && (s[i] != ',') && (s[i] != ']'))
     i++;
   if (i>0) {
     v = new char[i+1];
     memcpy(v, s, i+1);
-    v[i] = (char)0;
+    v[i] = '\0';
     if (s[i] == ',')
       (*n) = (char *)&s[i+1];
     else

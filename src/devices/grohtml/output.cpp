@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2025 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote output.cpp
  *  but it owes a huge amount of ideas and raw code from
@@ -66,7 +66,7 @@ word::word (const char *w, int n)
 {
   s = new char[n+1];
   strncpy(s, w, n);
-  s[n] = (char)0;
+  s[n] = '\0';
 }
 
 /*

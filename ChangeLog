@@ -1,3 +1,18 @@
+2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grohtml]: Fix code style nits.
+
+	* src/devices/grohtml/html-table.cpp (tabs::compatible)
+	(tabs::init):
+	* src/devices/grohtml/output.cpp (word::word):
+	* src/devices/grohtml/post-html.cpp (text_glob::get_arg)
+	(text_glob::get_tab_args, replace_negate_str)
+	(html_printer::do_job_name, html_printer::set_char_and_width)
+	(get_str): Spell null character using the C/C++ language literal
+	for expressing it, instead of C-casting `0` to `char`.  Reorder
+	equality comparisons to avoid inadvertent lvalue assignment.
+	Parenthesize complex expressions.
+
 2025-01-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (an*abbreviate-page-topic): (Actually, it's the

@@ -1,4 +1,4 @@
-/* Copyright (C) 2002-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2002-2025 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote html-table.cpp
  *
@@ -95,24 +95,24 @@ int tabs::compatible (const char *s)
     return FALSE;  // no tab stops defined
 
   // move over tag name
-  while ((*s != (char)0) && !isspace(*s))
+  while ((*s != '\0') && !isspace(*s))
     s++;
 
-  while (*s != (char)0 && last != NULL) {
+  while (*s != '\0' && last != NULL) {
     // move over whitespace
-    while ((*s != (char)0) && isspace(*s))
+    while ((*s != '\0') && isspace(*s))
       s++;
     // collect alignment
     align = *s;
     // move over alignment
     s++;
     // move over whitespace
-    while ((*s != (char)0) && isspace(*s))
+    while ((*s != '\0') && isspace(*s))
       s++;
     // collect tab position
     total = atoi(s);
     // move over tab position
-    while ((*s != (char)0) && !isspace(*s))
+    while ((*s != '\0') && !isspace(*s))
       s++;
     if (last->alignment != align || last->position != total)
       return FALSE;
@@ -135,24 +135,24 @@ void tabs::init (const char *s)
   clear(); // remove any tab stops
 
   // move over tag name
-  while ((*s != (char)0) && !isspace(*s))
+  while ((*s != '\0') && !isspace(*s))
     s++;
 
-  while (*s != (char)0) {
+  while (*s != '\0') {
     // move over whitespace
-    while ((*s != (char)0) && isspace(*s))
+    while ((*s != '\0') && isspace(*s))
       s++;
     // collect alignment
     align = *s;
     // move over alignment
     s++;
     // move over whitespace
-    while ((*s != (char)0) && isspace(*s))
+    while ((*s != '\0') && isspace(*s))
       s++;
     // collect tab position
     total = atoi(s);
     // move over tab position
-    while ((*s != (char)0) && !isspace(*s))
+    while ((*s != '\0') && !isspace(*s))
       s++;
     if (last == NULL) {
       tab = new tab_position;
