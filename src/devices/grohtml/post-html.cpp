@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <getopt.h> // getopt_long()
 
-#include "cset.h"
+#include "cset.h" // csspace()
 #include "curtime.h"
 #include "driver.h"
 #include "stringclass.h"
@@ -892,9 +892,9 @@ int text_glob::get_arg (void)
   if (strncmp("devtag:", text_string, strlen("devtag:")) == 0) {
     const char *p = text_string;
 
-    while ((*p != '\0') && (!isspace(*p)))
+    while ((*p != '\0') && (!csspace(*p)))
       p++;
-    while ((*p != '\0') && (isspace(*p)))
+    while ((*p != '\0') && (csspace(*p)))
       p++;
     if ('\0' == *p)
       return -1;
@@ -913,15 +913,15 @@ int text_glob::get_tab_args (char *align)
     const char *p = text_string;
 
     // firstly the alignment C|R|L
-    while ((*p != '\0') && (!isspace(*p)))
+    while ((*p != '\0') && (!csspace(*p)))
       p++;
-    while ((*p != '\0') && (isspace(*p)))
+    while ((*p != '\0') && (csspace(*p)))
       p++;
     *align = *p;
     // now the int value
-    while ((*p != '\0') && (!isspace(*p)))
+    while ((*p != '\0') && (!csspace(*p)))
       p++;
-    while ((*p != '\0') && (isspace(*p)))
+    while ((*p != '\0') && (csspace(*p)))
       p++;
     if ('\0' == *p)
       return -1;
@@ -3216,7 +3216,7 @@ void html_printer::do_tab_te (void)
 void html_printer::do_tab (char *s)
 {
   if (table) {
-    while (isspace(*s))
+    while (csspace(*s))
       s++;
     s++;
     int col = table->find_column(atoi(s) + pageoffset
