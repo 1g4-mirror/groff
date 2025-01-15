@@ -4194,7 +4194,7 @@
 	`enclosing_want_att_compat_reg` class instead of now-dead
 	`do_old_want_att_compat` global.
 
-	Fixes <https://savannah.gnu.org/bugs/?66110>.  Problem
+	Fixes <https://savannah.gnu.org/bugs/?61100>.  Problem
 	introduced by me when introducing `.cp` register in commit
 	6a37bb5f00, 17 April 2020.  Thanks to Bjarni Ingi Gislason for
 	suggesting the direction a minimal reproducer could take.
