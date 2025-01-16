@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
 
    Written by James Clark (jjc@jclark.com)
    Major rewrite 2001 by Bernd Warken <groff-bernd.warken-72@web.de>
@@ -241,6 +241,7 @@
 #include <stdio.h> // EOF, FILE, fclose(), fopen(), getc(), stdin,
 		   // ungetc()
 #include <stdlib.h> // strtol()
+#include <string.h> // strcmp(), strlen(), strncmp(), strncpy()
 
 #include "driver.h"
 #include "device.h"

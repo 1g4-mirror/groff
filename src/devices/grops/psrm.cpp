@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "cset.h"
 #include "driver.h"
+#include "lib.h" // array_length(), strsave()
 #include "stringclass.h"
 
 #include "ps.h"

@@ -33,9 +33,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // getc(), putc(), sprintf()
 #include <string.h> // strlen(), strncpy()
 
-#include "driver.h"
-#include "stringclass.h"
 #include "cset.h"
+#include "driver.h"
+#include "lib.h" // INT_DIGITS
+#include "stringclass.h"
+
 #include "html.h"
 
 #if !defined(TRUE)

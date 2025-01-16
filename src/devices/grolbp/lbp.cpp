@@ -29,17 +29,21 @@ TODO
 
 #include <assert.h>
 #include <errno.h>
+#include <limits.h> // INT_MAX
 #include <math.h> // fabs(), sqrt()
 #include <stdlib.h> // abs(), EXIT_SUCCESS, exit(), strtol()
+#include <string.h> // strcmp(), strcpy(), strlen(), strncpy()
+#include <strings.h> // strcasecmp()
 
 #include <getopt.h> // getopt_long()
 
+#include "nonposix.h"
+
+#include "charset.h"
 #include "driver.h"
 #include "lbp.h"
-#include "charset.h"
+#include "lib.h" // strsave()
 #include "paper.h"
-
-#include "nonposix.h"
 
 extern "C" const char *Version_string;
 

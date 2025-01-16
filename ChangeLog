@@ -1,5 +1,23 @@
 2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grodvi,grohtml,grolbp,grolj4,grops,grotty,libdriver]: Further
+	rationalize header file inclusions.
+
+	* src/devices/grodvi/dvi.cpp:
+	* src/devices/grohtml/html-table.cpp:
+	* src/devices/grohtml/output.cpp:
+	* src/devices/grohtml/post-html.cpp:
+	* src/devices/grolbp/lbp.cpp:
+	* src/devices/grolj4/lj4.cpp:
+	* src/devices/grops/psrm.cpp:
+	* src/devices/grotty/tty.cpp:
+	* src/libs/libdriver/input.cpp:
+	* src/libs/libdriver/printer.cpp: Include (only) the standard
+	libc and groff internal header files we need, so that
+	"driver.h", "font.h", and "symbol.h" needn't do this job.
+
+2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Reduce header file inclusion spam.
 
 	* src/include/driver.h: Drop inclusion of standard libc header

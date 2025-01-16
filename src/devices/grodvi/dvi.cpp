@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -21,11 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <assert.h>
+#include <limits.h> // CHAR_MAX
 #include <locale.h> // setlocale()
 #include <math.h> // atan2(), sqrt()
 #include <stdio.h> // EOF, FILE, fprintf(), printf(), putc(), setbuf(),
 		   // sprintf(), stderr, stdout
 #include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
+#include <string.h> // strcmp(), strlen()
 
 #include <getopt.h> // getopt_long()
 

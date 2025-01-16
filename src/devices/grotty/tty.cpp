@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
      OSC 8 support by G. Branden Robinson
 
@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <limits.h> // CHAR_MAX
 #include <locale.h> // setlocale()
 #include <stdio.h> // EOF, FILE, fprintf(), fputs(), printf(),
 		   // putchar(), setbuf(), stderr, stdout
@@ -28,8 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <getopt.h> // getopt_long()
 
-#include "driver.h"
 #include "device.h"
+#include "driver.h"
 #include "ptable.h"
 
 typedef signed char schar;

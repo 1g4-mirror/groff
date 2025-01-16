@@ -40,6 +40,8 @@ X command to include bitmap graphics
 #include <stdio.h> // EOF, FILE, fflush(), fprintf(), printf(),
 		   // setbuf(), stderr, stdout
 #include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
+#include <string.h> // strcmp()
+#include <strings.h> // strcasecmp()
 
 #include <getopt.h> // getopt_long()
 
@@ -47,6 +49,7 @@ X command to include bitmap graphics
 
 #include "cset.h" // csdigit()
 #include "driver.h"
+#include "lib.h" // array_size(), PI
 
 extern "C" const char *Version_string;
 

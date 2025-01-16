@@ -39,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "cset.h" // csspace()
 #include "curtime.h"
 #include "driver.h"
+#include "lib.h" // strsave(), xtmpfile()
 #include "stringclass.h"
 #include "unicode.h"
 
