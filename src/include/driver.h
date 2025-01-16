@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -18,11 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "lib.h"
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <errno.h>
-#include <math.h>
 #include "errarg.h"
 #include "error.h"
 #include "font.h"

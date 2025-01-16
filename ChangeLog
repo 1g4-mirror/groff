@@ -1,5 +1,12 @@
 2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Reduce header file inclusion spam.
+
+	* src/include/driver.h: Drop inclusion of standard libc header
+	files.  This header file itself uses none of its facilities.
+
+2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml,grolbp]: Rationalize header file inclusions.
 
 	* src/devices/grohtml/html-table.cpp:
