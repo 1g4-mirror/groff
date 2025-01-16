@@ -1,5 +1,14 @@
 2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Further rationalize header file inclusions.
+
+	* src/include/driver.h: Drop inclusion of groff's "lib.h"; this
+	header file itself uses none of its facilities.
+	* src/include/font.h: Include stdio.h.  Annotate why.
+	* src/include/symbol.h: Include stddef.h.  Annotate why.
+
+2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grodvi,grohtml,grolbp,grolj4,grops,grotty,libdriver]: Further
 	rationalize header file inclusions.
 

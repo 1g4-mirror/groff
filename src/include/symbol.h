@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2023 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -16,6 +16,7 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#include <stddef.h> // size_t
 #include <stdint.h> // uintptr_t
 
 #define DONT_STORE 1
