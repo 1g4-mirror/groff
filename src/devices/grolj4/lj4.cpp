@@ -1,4 +1,4 @@
-/* Copyright (C) 1994-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1994-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -43,8 +43,10 @@ X command to include bitmap graphics
 
 #include <getopt.h> // getopt_long()
 
-#include "driver.h"
 #include "nonposix.h"
+
+#include "cset.h" // csdigit()
+#include "driver.h"
 
 extern "C" const char *Version_string;
 
@@ -635,7 +637,7 @@ int main(int argc, char **argv)
       // ignore include search path
       break;
     case 'd':
-      if (!isdigit(*optarg))	// this ugly hack prevents -d without
+      if (!csdigit(*optarg))	// this ugly hack prevents -d without
 	optind--;		//  args from messing up the arg list
       duplex_flag = atoi(optarg);
       if (duplex_flag != 1 && duplex_flag != 2) {

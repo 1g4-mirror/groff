@@ -1,5 +1,13 @@
 2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grolj4]: Migrate `isdigit()` to `csdigit()`.
+
+	* src/devices/grolj4/lj4.cpp (main): Use "libgroff.a"'s facility
+	for determining character class membership, to conform with the
+	rest of the code base.
+
+2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml]: Migrate `isspace()` to `csspace()`.
 
 	* src/devices/grohtml/html-table.cpp (tabs::compatible)
