@@ -9006,6 +9006,27 @@ hyphenation patterns with the new ones.  Invoking @code{hpf} or
 @code{hpf} request is specified (either in the document, in a file
 loaded at startup, or in a macro package), GNU @code{troff} won't
 automatically hyphenate at all.
+
+@cindex trailing spaces in file name arguments
+@cindex comments, after file name arguments
+@cindex @code{hpf} request, and comments
+@cindex @code{hpfa} request, and comments
+@strong{Caution:@:}
+The
+@code{hpf}
+and
+@code{hpfa}
+requests interpret the remainder of the input line as the file name
+argument,
+including trailing spaces,
+up to a newline or comment escape sequence.
+Suffixing the file name with a comment,
+even an empty one,
+prevents unwanted space from creeping into it during source document
+maintenance.
+See the discussion of the
+@code{ds}
+request in @ref{Strings}.
 @endDefreq
 
 For automatic hyphenation to work, the formatter must know which letters
@@ -11410,6 +11431,12 @@ after the character can't be suppressed since the neighboring character
 on the right doesn't get examined.
 @endDefreq
 
+@cindex trailing spaces in character definitions
+@cindex comments, after character definitions
+@cindex @code{char} request, and comments
+@cindex @code{fchar} request, and comments
+@cindex @code{fschar} request, and comments
+@cindex @code{schar} request, and comments
 @DefreqList {char, c [@code{"}][@Var{contents}]}
 @DefreqItemx {fchar, c [@code{"}][@Var{contents}]}
 @DefreqItemx {fschar, f c [@code{"}][@Var{contents}]}
@@ -11501,6 +11528,15 @@ list of fonts declared as global special fonts with the @code{special}
 request, but before the already mounted special fonts.
 
 @xref{Character Classes}.
+
+@strong{Caution:@:}
+These requests treats the remainder of the input line
+as their second argument,
+including trailing spaces,
+up to a newline or comment escape sequence.
+See the discussion of the
+@code{ds}
+request in @ref{Strings}.
 @endDefreq
 
 @DefreqList {rchar, c @dots{}}
@@ -12711,13 +12747,17 @@ Gray codes are explored in \*[cite Morgan 1998].
 @c @endExample
 
 @cindex trailing spaces in string definitions and appendments
-@cindex comments, with @code{ds}
+@cindex comments, with string definitions and appendments
+@cindex @code{as} request, and comments
+@cindex @code{as1} request, and comments
 @cindex @code{ds} request, and comments
+@cindex @code{ds1} request, and comments
 @strong{Caution:@:}
 The
 @code{ds}
 request treats the remainder of the input line as its second argument,
-including trailing spaces.
+including trailing spaces,
+up to a newline or comment escape sequence.
 Ending string definitions
 (and appendments)
 with a comment,
@@ -12842,6 +12882,9 @@ Strings can be queried (@code{length}) and modified (@code{chop},
 can be manipulated through renaming, removal, and aliasing (@code{rn},
 @code{rm}, @code{als}).
 
+@cindex trailing spaces in string length measurement
+@cindex comments, with string length measurements
+@cindex @code{length} request, and comments
 @Defreq {length, reg contents}
 @cindex length of a string (@code{length})
 @cindex string, length of (@code{length})
@@ -12861,6 +12904,16 @@ the end of the input line in copy mode.
 \n[yyy]
     @result{} 14
 @endExample
+
+@strong{Caution:@:}
+The
+@code{length}
+request treats the remainder of the input line as its second argument,
+including trailing spaces,
+up to a newline or comment escape sequence.
+See the discussion of the
+@code{ds}
+request above.
 @endDefreq
 
 @Defreq {chop, object}
@@ -16372,6 +16425,32 @@ services provided by the operating environment.  GNU @command{troff}
 permits the reading of files and, when unsafe mode is enabled at the
 command line, the execution of an external commands, with or without
 inclusion of their output in the document.
+
+@cindex trailing spaces in file name or system command arguments
+@cindex comments, after file name or system command arguments
+@cindex @code{cf} request, and comments
+@cindex @code{mso} request, and comments
+@cindex @code{msoquiet} request, and comments
+@cindex @code{nx} request, and comments
+@cindex @code{open} request, and comments
+@cindex @code{opena} request, and comments
+@cindex @code{pi} request, and comments
+@cindex @code{so} request, and comments
+@cindex @code{soquiet} request, and comments
+@cindex @code{sy} request, and comments
+@cindex @code{trf} request, and comments
+@strong{Caution:@:}
+The requests discussed below that accept a file name or system command
+as an argument treat the remainder of the input line as that argument,
+including trailing spaces,
+up to a newline or comment escape sequence.
+Suffixing the file name or command with a comment,
+even an empty one,
+prevents unwanted space from creeping into it during source document
+maintenance.
+See the discussion of the
+@code{ds}
+request in @ref{Strings}.
 
 @DefreqList {so, [@code{"}]@Var{file}}
 @DefreqListEndx {soquiet, [@code{"}]@Var{file}}

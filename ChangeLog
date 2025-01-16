@@ -1,3 +1,18 @@
+2025-01-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* NEWS: Add item noting incompatible change to `cf`, `hpf`,
+	`hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`,
+	`soquiet`, and `trf` request syntax affecting users/documents
+	that apply comment escape sequences to them loosely.
+
+	* doc/groff.texi.in (Manipulating Hyphenation, Using Symbols)
+	(Strings, I/O):
+	* man/groff.7.man (Strings): Apply cautionary note (even with
+	respect to requests where behavior hasn't actually changed).
+
+	Fixes <https://savannah.gnu.org/bugs/?66673>.  Thanks to Dave
+	Kemper for the report.
+
 2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Further rationalize header file inclusions.

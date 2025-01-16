@@ -10,6 +10,31 @@ not described.  There are more details in the man and info pages.
 VERSION next
 ============
 
+Noteworthy incompatible changes
+-------------------------------
+* If your roff(7) documents follow any of the requests `cf`, `hpf`,
+  `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
+  `trf` with a comment after their file name argument, and did not place
+  that comment immediately after the end of the file name, you are
+  likely to get a diagnostic message.
+
+    warning: cannot open macro file 'e.tmac ': No such file or directory
+
+  That is because these requests are now able to process file names
+  containing space characters.  (This change also makes the request
+  syntax consistent with that of `ds`, `as`, and others.)  A quick fix
+  is to place the comment escape sequence as early as possible.  For
+  example, we would change:
+
+    .mso e.tmac \" Load Eric Allman's package.
+
+  to:
+
+    .mso e.tmac\" Load Eric Allman's package.
+
+  to tell the formatter to load the "e.tmac" file rather than "e.tmac ".
+  See the items below for further details.
+
 troff
 -----
 

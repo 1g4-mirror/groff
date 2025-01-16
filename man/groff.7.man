@@ -6241,10 +6241,10 @@ string is later interpolated.
 .
 .P
 .I Caution:
-The
-.B ds
-request treats the remainder of the input line as its second argument,
-including trailing spaces.
+These requests treat the remainder of the input line
+as their second argument,
+including trailing spaces,
+up to a newline or comment escape sequence.
 .
 Ending string definitions
 (and appendments)
@@ -6252,6 +6252,32 @@ with a comment,
 even an empty one,
 prevents unwanted space from creeping into them during source document
 maintenance.
+.
+This rule and suggestion also applies to the second argument of the
+.RB \[lq] length \[rq]
+request,
+to requests that define characters
+.RB ( char ,
+.BR fchar ,
+.BR fschar ,
+and
+.BR schar ),
+and to the file name or command arguments of the
+.BR cf ,
+.BR hpf ,
+.BR hpfa ,
+.BR mso ,
+.BR msoquiet ,
+.BR nx ,
+.RB \[lq] open \[rq],
+.BR opena ,
+.BR pi ,
+.BR pso ,
+.RB \[lq] so \[rq],
+.BR soquiet ,
+and
+.B trf
+requests.
 .
 .
 .br
