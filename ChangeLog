@@ -1,5 +1,14 @@
 2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grohtml,grolbp]: Rationalize header file inclusions.
+
+	* src/devices/grohtml/html-table.cpp:
+	* src/devices/grohtml/post-html.cpp:
+	* src/devices/grolbp/lbp.cpp: Include (only) the standard libc
+	header files we need, so that "driver.h" needn't do this job.
+
+2025-01-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grolj4]: Migrate `isdigit()` to `csdigit()`.
 
 	* src/devices/grolj4/lj4.cpp (main): Use "libgroff.a"'s facility

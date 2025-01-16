@@ -29,6 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h>
 #include <stdio.h> // EOF, FILE, fclose(), fflush(), fopen(), freopen(),
 		   // fseek(), SEEK_SET, setbuf(), stderr, stdout
+#include <stdlib.h> // abs(), atoi(), EXIT_SUCCESS, exit()
 #include <string.h> // strcasecmp(), strcmp(), strerror(), strlen(),
 		    // strncmp()
 #include <time.h> // asctime(), tm

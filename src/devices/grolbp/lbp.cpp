@@ -1,4 +1,4 @@
-/* Copyright (C) 1994-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1994-2025 Free Software Foundation, Inc.
      Written by Francisco Andrés Verdú <pandres@dragonet.es> with many
      ideas taken from the other groff drivers.
 
@@ -28,6 +28,9 @@ TODO
 #endif
 
 #include <assert.h>
+#include <errno.h>
+#include <math.h> // fabs(), sqrt()
+#include <stdlib.h> // abs(), EXIT_SUCCESS, exit(), strtol()
 
 #include <getopt.h> // getopt_long()
 
