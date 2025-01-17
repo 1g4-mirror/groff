@@ -1,5 +1,12 @@
 2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_character): Fix code style
+	nits.  Reorder equality comparison to avoid inadvertent lvalue
+	assignment.  Explicitly compare variable of pointer type to null
+	pointer literal instead of letting it pun down to a Boolean.
+
+2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename character-definition
 	request handler functions to end with `_request`, and rename the
 	workhorse function to simple `define_character`.  Mark them all

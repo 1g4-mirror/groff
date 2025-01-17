@@ -4542,11 +4542,11 @@ void define_character(char_mode mode, const char *font_name)
   int c;
   tok.skip();
   charinfo *ci = tok.get_char(true /* required */);
-  if (ci == 0) {
+  if (0 /* nullptr */ == ci) {
     skip_line();
     return;
   }
-  if (font_name) {
+  if (font_name != 0 /* nullptr */) {
     string s(font_name);
     s += ' ';
     s += ci->nm.contents();
