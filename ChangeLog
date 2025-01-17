@@ -1,9 +1,10 @@
 2025-01-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* NEWS: Add item noting incompatible change to `cf`, `hpf`,
-	`hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`,
-	`soquiet`, and `trf` request syntax affecting users/documents
-	that apply comment escape sequences to them loosely.
+	* NEWS: Add item at top making special note of incompatible
+	change to `cf`, `hpf`, `hpfa`, `mso`, `msoquiet`, `nx`, `open`,
+	`opena`, `so`, `soquiet`, and `trf` request syntax affecting
+	users/documents that append comment escape sequences to them
+	loosely.
 
 	* doc/groff.texi.in (Manipulating Hyphenation, Using Symbols)
 	(Strings, I/O):
@@ -508,7 +509,7 @@
 
 	* doc/groff.texi.in (I/O) <cf>:
 	* man/groff.7.man (Request short reference) <cf>:
-	* man/groff_diff.7.man (Restricted requests): Do it.
+	* man/groff_diff.7.man (Restricted requests): Document it.
 
 	* NEWS: Add item.
 
