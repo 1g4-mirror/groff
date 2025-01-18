@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -6411,13 +6411,13 @@ static void define_font_specific_character()
   if (!has_font(&finfo)) {
     font_lookup_error(finfo, "to define font-specific fallback glyph");
     // Normally we skip the remainder of the line unconditionally at the
-    // end of a request-implementing function, but do_define_character()
+    // end of a request-implementing function, but define_character()
     // will eat the rest of it for us.
     skip_line();
   }
   else {
     symbol f = font_table[finfo.position]->get_name();
-    do_define_character(CHAR_FONT_SPECIAL, f.contents());
+    define_character(CHAR_FONT_SPECIAL, f.contents());
   }
 }
 

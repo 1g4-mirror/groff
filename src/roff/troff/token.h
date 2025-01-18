@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -118,8 +118,8 @@ enum char_mode {
   CHAR_SPECIAL
 };
 
-extern void do_define_character(char_mode,
-			const char * /* font_name */ = 0 /* nullptr */);
+extern void define_character(char_mode,
+			     const char * /* font_name */ = 0 /* nullptr */);
 
 class hunits;
 extern void read_title_parts(node **part, hunits *part_width);

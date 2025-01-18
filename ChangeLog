@@ -1,3 +1,24 @@
+2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor.  Rename character-definition
+	request handler functions to end with `_request`, and rename the
+	workhorse function to simple `define_character`.  Mark them all
+	`static` (except for `define_font_specific_character`, which
+	already was) while we're at it.
+
+	* src/roff/troff/token.h:
+	* src/roff/troff/input.cpp:
+	* src/roff/troff/node.cpp: Do it.
+
+	* src/roff/troff/input.cpp (define_character_request)
+	(define_fallback_character_request)
+	(define_special_character_request):
+	* src/roff/troff/node.cpp
+	(define_font_specific_character_request): Update call sites.
+
+	* src/roff/troff/input.cpp (init_input_requests): Update
+	coupling of request names to request handler functions.
+
 2025-01-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* NEWS: Add item at top making special note of incompatible

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -4536,7 +4536,7 @@ void append_nocomp_string()
   do_define_string(DEFINE_APPEND, COMP_DISABLE);
 }
 
-void do_define_character(char_mode mode, const char *font_name)
+void define_character(char_mode mode, const char *font_name)
 {
   node *n = 0 /* nullptr */;
   int c;
@@ -4583,19 +4583,19 @@ void do_define_character(char_mode mode, const char *font_name)
   tok.next();
 }
 
-void define_character()
+static void define_character_request()
 {
-  do_define_character(CHAR_NORMAL);
+  define_character(CHAR_NORMAL);
 }
 
-void define_fallback_character()
+static void define_fallback_character_request()
 {
-  do_define_character(CHAR_FALLBACK);
+  define_character(CHAR_FALLBACK);
 }
 
-void define_special_character()
+static void define_special_character_request()
 {
-  do_define_character(CHAR_SPECIAL);
+  define_character(CHAR_SPECIAL);
 }
 
 static void remove_character()
@@ -9261,7 +9261,7 @@ void init_input_requests()
   init_request("c2", assign_no_break_control_character);
   init_request("cf", copy_file);
   init_request("cflags", set_character_flags);
-  init_request("char", define_character);
+  init_request("char", define_character_request);
   init_request("chop", chop_macro);
   init_request("class", define_class);
   init_request("close", close_request);
@@ -9286,7 +9286,7 @@ void init_input_requests()
   init_request("em", eoi_macro);
   init_request("eo", escape_off);
   init_request("ex", exit_request);
-  init_request("fchar", define_fallback_character);
+  init_request("fchar", define_fallback_character_request);
 #ifdef WIDOW_CONTROL
   init_request("fpl", flush_pending_lines);
 #endif /* WIDOW_CONTROL */
@@ -9320,7 +9320,7 @@ void init_input_requests()
   init_request("return", return_macro_request);
   init_request("rm", remove_macro);
   init_request("rn", rename_macro);
-  init_request("schar", define_special_character);
+  init_request("schar", define_special_character_request);
   init_request("shift", shift);
   init_request("so", source_request);
   init_request("soquiet", source_quietly_request);
