@@ -1,5 +1,12 @@
 2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_character): Improve
+	diagnostic message: characterize failing character definition as
+	"invalid", not "bad", identify which request is being handled,
+	report expected input, and describe input actually received.
+
+2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (define_character): Fix code style
 	nits.  Reorder equality comparison to avoid inadvertent lvalue
 	assignment.  Explicitly compare variable of pointer type to null

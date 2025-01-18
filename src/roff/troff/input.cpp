@@ -4559,7 +4559,29 @@ void define_character(char_mode mode, const char *font_name)
   else if (tok.is_tab())
     c = '\t';
   else if (!tok.is_space()) {
-    error("bad character definition");
+    // C++11: There may be a better way to do this with an enum class;
+    // we could then store these constants inside `char_mode`.
+    const char *modestr = 0 /* nullptr */;
+    switch (mode) {
+      case CHAR_NORMAL:
+	modestr = "";
+	break;
+      case CHAR_FALLBACK:
+	modestr = " fallback";
+	break;
+      case CHAR_SPECIAL:
+	modestr = " special fallback";
+	break;
+      case CHAR_FONT_SPECIAL:
+	modestr = " font-specific fallback";
+	break;
+      default:
+	assert(0 == "unhandled case of character mode");
+	break;
+    }
+    error("ignoring invalid%1 character definition; expected one"
+	  " ordinary or special character to define, got %2", modestr,
+	  tok.description());
     skip_line();
     return;
   }
