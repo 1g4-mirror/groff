@@ -6409,7 +6409,8 @@ static void define_font_specific_character()
   }
   font_lookup_info finfo;
   if (!has_font(&finfo)) {
-    font_lookup_error(finfo, "to define font-specific fallback glyph");
+    font_lookup_error(finfo, "to define font-specific fallback"
+		      " character");
     // Normally we skip the remainder of the line unconditionally at the
     // end of a request-implementing function, but define_character()
     // will eat the rest of it for us.
@@ -6431,7 +6432,8 @@ static void remove_font_specific_character()
   }
   font_lookup_info finfo;
   if (!has_font(&finfo))
-    font_lookup_error(finfo, "to remove font-specific fallback glyph");
+    font_lookup_error(finfo, "to remove font-specific fallback"
+		      " character");
   else {
     symbol f = font_table[finfo.position]->get_name();
     while (!tok.is_newline() && !tok.is_eof()) {

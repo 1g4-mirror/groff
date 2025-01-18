@@ -1,5 +1,13 @@
 2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (define_font_specific_character)
+	(remove_font_specific_character): Recast diagnostic messages.
+	"Glyphs" are rendered by fonts; no *roff has a mechanism for
+	constructing glyphs per se.  What we're throwing diagnostics
+	about here are font-specific fallback character definitions.
+
+2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Make more requests that take mandatory arguments--
 	specifically `char`, `fchar`, and `schar`--throw warning
 	diagnostics in category "missing" when they aren't given any.
