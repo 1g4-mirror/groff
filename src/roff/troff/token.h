@@ -114,8 +114,8 @@ extern void handle_initial_title();
 enum char_mode {
   CHAR_NORMAL,
   CHAR_FALLBACK,
-  CHAR_FONT_SPECIAL,
-  CHAR_SPECIAL
+  CHAR_FONT_SPECIFIC_FALLBACK,
+  CHAR_SPECIAL_FALLBACK
 };
 
 extern void define_character(char_mode,

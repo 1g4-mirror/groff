@@ -204,7 +204,7 @@ inline bool charinfo::is_fallback()
 
 inline bool charinfo::is_special()
 {
-  return (mode == CHAR_SPECIAL);
+  return (mode == CHAR_SPECIAL_FALLBACK);
 }
 
 inline charinfo *charinfo::get_translation(bool for_transparent_throughput)

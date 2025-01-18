@@ -4569,10 +4569,10 @@ void define_character(char_mode mode, const char *font_name)
       case CHAR_FALLBACK:
 	modestr = " fallback";
 	break;
-      case CHAR_SPECIAL:
+      case CHAR_SPECIAL_FALLBACK:
 	modestr = " special fallback";
 	break;
-      case CHAR_FONT_SPECIAL:
+      case CHAR_FONT_SPECIFIC_FALLBACK:
 	modestr = " font-specific fallback";
 	break;
       default:
@@ -4617,7 +4617,7 @@ static void define_fallback_character_request()
 
 static void define_special_character_request()
 {
-  define_character(CHAR_SPECIAL);
+  define_character(CHAR_SPECIAL_FALLBACK);
 }
 
 static void remove_character()

@@ -1,5 +1,21 @@
 2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Rename enumeration constants for clarity.
+
+	* src/roff/troff/token.h: Rename enumeration constants used for
+	character definitions.
+	    `CHAR_FONT_SPECIAL` -> `CHAR_FONT_SPECIFIC_FALLBACK`
+	    `CHAR_SPECIAL`      -> `CHAR_SPECIAL_FALLBACK`
+	The `char_mode` enumeration type involves the resolution order
+	for a character, not its syntax ("ordinary" vs. "special").
+	* src/roff/troff/charinfo.h (charinfo::is_special):
+	* src/roff/troff/input.cpp (define_character)
+	(define_fallback_character_request):
+	* src/roff/troff/node.cpp (define_font_specific_character):
+	Update usage sites.
+
+2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (define_character): Improve
 	diagnostic message: characterize failing character definition as
 	"invalid", not "bad", identify which request is being handled,

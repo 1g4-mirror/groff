@@ -6417,7 +6417,7 @@ static void define_font_specific_character()
   }
   else {
     symbol f = font_table[finfo.position]->get_name();
-    define_character(CHAR_FONT_SPECIAL, f.contents());
+    define_character(CHAR_FONT_SPECIFIC_FALLBACK, f.contents());
   }
 }
 
