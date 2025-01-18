@@ -1,5 +1,15 @@
 2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Make more requests that take mandatory arguments--
+	specifically `char`, `fchar`, and `schar`--throw warning
+	diagnostics in category "missing" when they aren't given any.
+
+	* src/roff/troff/input.cpp (define_character_request)
+	(define_fallback_character_request)
+	(define_special_character_request): Do it.
+
+2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Rename enumeration constants for clarity.
 
 	* src/roff/troff/token.h: Rename enumeration constants used for

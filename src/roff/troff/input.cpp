@@ -4607,16 +4607,34 @@ void define_character(char_mode mode, const char *font_name)
 
 static void define_character_request()
 {
+  if (!has_arg(true /* peek; we want to read in copy mode */)) {
+    warning(WARN_MISSING, "character definition request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
   define_character(CHAR_NORMAL);
 }
 
 static void define_fallback_character_request()
 {
+  if (!has_arg(true /* peek; we want to read in copy mode */)) {
+    warning(WARN_MISSING, "fallback character definition request"
+	    " expects arguments");
+    skip_line();
+    return;
+  }
   define_character(CHAR_FALLBACK);
 }
 
 static void define_special_character_request()
 {
+  if (!has_arg(true /* peek; we want to read in copy mode */)) {
+    warning(WARN_MISSING, "special character definition request expects"
+	    " arguments");
+    skip_line();
+    return;
+  }
   define_character(CHAR_SPECIAL_FALLBACK);
 }
 
