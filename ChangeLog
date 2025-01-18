@@ -1,3 +1,10 @@
+2025-01-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (define_character_request): Promote
+	scope of grammar computation describing the invoking request.
+	I'm going to need it for further refactoring of this function
+	anticipated to resolve Savannah #66675.
+
 2025-01-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/e.tmac (m1, m2, m3, m4, ba, ip, @p, 2c, PS): Migrate from
