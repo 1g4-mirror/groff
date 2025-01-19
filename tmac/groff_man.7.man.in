@@ -381,8 +381,9 @@ exceptions are noted.
 _ifstyle()dnl
 We identify some macros as
 .I extensions
-that are not supported everywhere;
-to the set originally implemented;
+to the set originally implemented.
+.
+They are not supported everywhere;
 see subsection \(lqUse of extensions\(rq
 below.
 _endif()dnl
@@ -740,8 +741,8 @@ does not.
 Start new relative inset.
 .
 .I man
-saves any current inset amount,
-moves right by:
+saves any current inset amount
+and moves right by:
 .I inset-amount,
 if specified;
 the
