@@ -15,16 +15,17 @@ Noteworthy incompatible changes
 * If your roff(7) documents follow any of the requests `cf`, `hpf`,
   `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
   `trf` with a comment after their file name argument, and did not place
-  that comment immediately after the end of the file name, you are
-  likely to get a diagnostic message.
+  that comment immediately after the file name, you are likely to get a
+  diagnostic message.
 
     warning: cannot open macro file 'e.tmac ': No such file or directory
 
-  That is because these requests are now able to process file names
-  containing space characters.  (This change also makes the request
-  syntax consistent with that of `ds`, `as`, and others.)  A quick fix
-  is to place the comment escape sequence as early as possible.  For
-  example, we would change:
+  Or, less likely, the formatter will open the wrong file, one with
+  spaces at the end of its name.  That is because these requests are now
+  able to process file names containing space characters.  (This change
+  also makes the request syntax consistent with that of `ds`, `as`, and
+  others.)  A quick fix is to place the comment escape sequence as early
+  as possible.  For example, we would change:
 
     .mso e.tmac \" Load Eric Allman's package.
 
@@ -634,13 +635,13 @@ Output drivers
      .hcode \[s ,]s
 
 *  The PostScript output driver grops(1) once again accepts a file name
-   containing slashes them as a document prolog or resource (such as a
-   font to be downloaded into the document).  This is a restoration of
-   groff 1.22.4 and earlier behavior; groff's 1.23.0 change of not
-   accepting a file name containing slashes as an encoding or font
-   description files remains in place.  (We impose this restriction
-   because the output driver interprets the contents of these files; it
-   does not interpret the PostScript prolog or resource files.)
+   containing slashes as a document prolog or resource (such as a font
+   to be downloaded into the document).  This is a restoration of groff
+   1.22.4 and earlier behavior; groff's 1.23.0 change of not accepting a
+   file name containing slashes as an encoding or font description files
+   remains in place.  (We impose this restriction because the output
+   driver interprets the contents of these files; it does not interpret
+   the PostScript prolog or resource files.)
 
 *  gropdf(1), the PDF output driver, now allows embedding of JFIF/JPEG
    and JPEG 2000 image file formats.  If PerlMagick is installed, many
