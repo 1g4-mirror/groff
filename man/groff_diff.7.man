@@ -163,13 +163,17 @@ ships with support for families containing each of the styles
 .RB \[lq] I \[rq],
 .RB \[lq] B \[rq],
 and
-.RB \[lq] BI \[rq].
+.RB \[lq] BI \[rq]
+(roman [upright],
+bold,
+italic [slanted],
+and bold-italic).
 .
 So that a document need not be coupled to a specific font family,
 an output device can associate a style in the abstract sense with a
 mounting position.
 .
-Thus the default family can be combined with a style dynamically,
+Thus the default family can combine with a style dynamically,
 producing a
 .I "resolved font name."
 .
@@ -906,6 +910,8 @@ See the
 request below.
 .
 .
+.br
+.ne 3v
 .TP
 .BI \[rs]k( rg
 .TQ
@@ -1174,8 +1180,9 @@ for example in an author's name in document metadata
 or as a usefully named bookmark or hyperlink anchor,
 GNU
 .I troff \" GNU
-transforms its argument to represent character outside the Unicode Basic
-Latin range as Unicode code points expressed in
+transforms its argument to represent characters
+outside the Unicode Basic Latin range
+as Unicode code points expressed in
 .IR groff 's
 notation for these,
 \[lq]\|\c
@@ -1195,7 +1202,7 @@ GNU
 converts several ordinary characters that typeset as non-basic Latin
 code points to code points outside that range so that they are used
 consistently whether they are formatted as glyphs or used in a device
-control command argument.
+extension command argument.
 .
 These ordinary characters are
 .RB \[lq]\| \[aq] \|\[rq],
@@ -1550,7 +1557,7 @@ restoring their function
 (and enabling additional
 .I groff
 extension requests,
-.BR open ,
+.RB \[lq] open \[rq],
 .BR opena ,
 and
 .BR pso ).
@@ -3297,6 +3304,7 @@ append to it instead of truncating it.
 .
 .TP
 .BR .output \~[ \[dq] ]\c
+.I character-sequence
 Emit
 .IR character-sequence ,
 a sequence of ordinary characters and spaces read in copy mode,
@@ -3987,15 +3995,16 @@ evaluates false.
 .I anything,
 which is often a conditional block,
 is referred to as the
-.B while
+.RB \[lq] while \[rq]
 request's
 .I body.
 .
 .
 .IP
-.I @g@troff
+GNU
+.I troff \" GNU
 treats the body of a
-.B while
+.RB \[lq] while \[rq]
 request similarly to that of a
 .B de
 request
@@ -4004,21 +4013,20 @@ but stores it under an internal name and deletes it when the loop
 finishes.
 .
 The operation of a macro containing a
-.B while
-request can slow significantly if the
-.B while
+.RB \[lq] while \[rq]
+request can slow significantly if its
 body is large.
 .
 Each time the macro is executed,
 the
-.B while
+.RB \[lq] while \[rq]
 body is parsed and stored again.
 .
 An often better solution\[em]and one that is more portable,
 since AT&T
 .I troff \" AT&T
 lacked the
-.B while
+.RB \[lq] while \[rq]
 request\[em]is to instead write a recursive macro.
 .
 It will be parsed only once (unless you redefine it).
@@ -4038,7 +4046,7 @@ See section \[lq]Debugging\[rq] below.
 .
 .IP
 If a
-.B while
+.RB \[lq] while \[rq]
 body begins with a conditional block,
 its closing brace must end an input line.
 .
@@ -4049,13 +4057,14 @@ The
 and
 .B continue
 requests alter a
-.B while
+.RB \[lq] while \[rq]
 loop's flow of control.
 .
 .
 .TP
 .BI .write\~ stream\~\c
 .RB [[ \[dq] ]\c
+.IR character-sequence ]
 Write
 .IR character-sequence ,
 a sequence of ordinary characters,
@@ -4095,7 +4104,7 @@ Write the contents of the macro or string
 to
 .IR stream ,
 which must previously have been the subject of an
-.B open
+.RB \[lq] open \[rq]
 (or
 .BR \%opena )
 request.
@@ -4313,6 +4322,8 @@ then at
 and so on.
 .
 .
+.br
+.ne 4v
 .\" ====================================================================
 .SS "Altered registers"
 .\" ====================================================================
@@ -4548,7 +4559,7 @@ Interpolate ligature mode.
 .
 .TP
 .B \[rs]n[.linetabs]
-Interpolate\~1 if line-tabs mode is enabled the environment,
+Interpolate\~1 if line-tabs mode is enabled in the environment,
 0\~otherwise.
 .
 .
@@ -4581,7 +4592,7 @@ This is a string-valued register.
 .B \[rs]n[.ne]
 Interpolate amount of space demanded by the most recent
 .B ne
-request that caused a page location trap to be sprung.
+request that sprung a page location trap.
 .
 See
 .BR \[rs]n[.trunc] .
@@ -5654,8 +5665,8 @@ also adds more flexible diagnostic output requests
 and
 .BR tm1 ).
 .
-More aspects of formatter state can be examined with requests that write
-lists of
+Examine more aspects of formatter state
+with requests that write lists of
 defined colors
 .RB ( pcolor ),
 composite characters
@@ -5682,7 +5693,7 @@ to the standard error stream.
 .SH "Compatibility mode"
 .\" ====================================================================
 .
-Some syntactical and behavioral differences between GNU
+Some syntactical and behavioral differences between AT&T and GNU
 .IR troff s \" generic
 are thought too important to neglect;
 GNU
@@ -5930,7 +5941,7 @@ after a word-initial one.
 .P
 The existence of the
 .B .T
-string is a common feature of post-CSTR\~#54
+string is a common feature of post-CSTR\~#97
 .IR troff s\[em]DWB\~3.3, \" others
 Solaris,
 Heirloom Doctools,
