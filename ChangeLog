@@ -1,3 +1,17 @@
+2025-01-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/e.tmac (m1, m2, m3, m4, ba, ip, @p, 2c, PS): Migrate from
+	AT&T troff idiom of applying a default scaling unit
+	{unconditionally appending one to a macro argument} to GNU
+	troff's, using `do` and the `;` numeric expression operator.
+	Since commit 2bd122bf56, 17 August, the old method provokes
+	syntax warnings when the user supplies an explicit scaling unit.
+	(PS): Convert an existing use of `;` to take place in a `do`
+	context to ensure that it works in compatibility mode.
+
+	Fixes <https://savannah.gnu.org/bugs/?66700>.  Thanks to Dave
+	Kemper for the report.
+
 2025-01-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (define_font_specific_character)
