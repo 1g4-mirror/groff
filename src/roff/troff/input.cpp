@@ -4599,7 +4599,7 @@ void define_character(char_mode mode, const char *font_name)
       m->append((unsigned char) c);
     c = get_copy(&n);
   }
-  m = ci->setx_macro(m, mode);
+  m = ci->set_macro(m, mode);
   if (m)
     delete m;
   tok.next();
@@ -10023,6 +10023,8 @@ void charinfo::set_asciify_code(unsigned char c)
   asciify_code = c;
 }
 
+// Replace character definition with macro `m`, returning previous
+// macro if any (if none, return a null pointer).
 macro *charinfo::set_macro(macro *m)
 {
   macro *tem = mac;
@@ -10030,7 +10032,10 @@ macro *charinfo::set_macro(macro *m)
   return tem;
 }
 
-macro *charinfo::setx_macro(macro *m, char_mode cm)
+// Replace character definition with macro `m` and update its character
+// mode to `cm`, returning previous macro if any (if none, return a null
+// pointer).
+macro *charinfo::set_macro(macro *m, char_mode cm)
 {
   macro *tem = mac;
   mac = m;

@@ -1,3 +1,18 @@
+2025-01-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Slightly refactor.  Use more idiomatic C++ style,
+	employing a function overload on the `charinfo` class's
+	`set_macro()` member function instead of a separate "extended"
+	version `setx_macro()` that takes an additional argument.
+
+	* src/roff/troff/charinfo.h (class charinfo): Do it.
+	* src/roff/troff/input.cpp (charinfo::setx_macro): Rename
+	this...
+	(charinfo::set_macro): ...to this, overloading the name.
+
+	* src/roff/troff/input.cpp (define_character): Update the
+	two-argument form's only call site.
+
 2025-01-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (define_character_request): Promote

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -94,7 +94,7 @@ public:
   void set_special_translation(int, int);
   int get_special_translation(bool = false);
   macro *set_macro(macro *);
-  macro *setx_macro(macro *, char_mode);
+  macro *set_macro(macro *, char_mode);
   macro *get_macro();
   bool first_time_not_found();
   void set_number(int);
