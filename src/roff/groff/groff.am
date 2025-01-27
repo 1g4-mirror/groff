@@ -77,6 +77,7 @@ groff_TESTS = \
   src/roff/groff/tests/html-device-smoke-test.sh \
   src/roff/groff/tests/html-device-works-with-grn-and-eqn.sh \
   src/roff/groff/tests/html-does-not-fumble-tagged-paragraph.sh \
+  src/roff/groff/tests/hys-request-works.sh \
   src/roff/groff/tests/initialization-is-quiet.sh \
   src/roff/groff/tests/latin1-device-maps-oq-to-0x27.sh \
   src/roff/groff/tests/localization-works.sh \

@@ -1,3 +1,10 @@
+2025-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Regression-test Savannah #66723.
+
+	* src/roff/groff/tests/hys-request-works.sh: Add test.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2025-01-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Slightly refactor.  Use more idiomatic C++ style,
