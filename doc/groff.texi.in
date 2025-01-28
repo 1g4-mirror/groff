@@ -17695,7 +17695,14 @@ default.
 
 @item delim
 @itemx 8
-The closing delimiter in an escape sequence was missing or mismatched.
+The selected delimiter character was ambiguous
+because it is also meaningful when beginning a numeric expression,
+or
+the closing delimiter in an escape sequence was missing or mismatched.
+
+A future @code{groff} release may reject ambiguous delimiters.
+In compatibility mode,
+ambiguous delimiters are accepted without warning.
 
 @c @item el
 @c @itemx 16
