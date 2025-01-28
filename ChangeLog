@@ -1,3 +1,34 @@
+2025-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (is_char_usable_as_delimiter):
+	Restore `|` character as an invalid delimiter when not in
+	compatibility mode.  This would regress the fix for Savannah
+	#66481, but...
+
+	(do_overstrike, do_bracket, do_name_test, do_zero_width_output)
+	(read_size, do_register, do_width, do_device_extension)
+	(read_drawing_command): Throw warning in "delimiter" category
+	and explain ambiguity of delimiter instead of emitting error and
+	refusing further interpretation of the escape sequence being
+	parsed.  Leave behind "#if"ed code for restoration of former
+	stricter behavior in a future groff release (which would fix
+	Savannah #66009).
+
+	(is_conditional_expression_true): Stop special-casing an
+	exception for `|` that permitted it to be used as a formatted
+	output comparison operator.  Savannah #66481 complained only
+	about groff's rejection of `|` to delimit the argument to the
+	`\w` (width measurement) escape sequence, not in general, and
+	was seen in some man pages.  The usage Paul Eggert reported
+	remains accepted, albeit warned about, per `do_width()` above.
+
+	* src/roff/groff/tests/check-delimiter-validity.sh: Update test
+	expectations.  We now expect `|` to be invalid once again to
+	delimit a line-drawing escape sequence.
+
+	Fixes <https://savannah.gnu.org/bugs/?66686>.  Thanks to Dave
+	Kemper for the report.  Savannah #66526 is implicated.
+
 2025-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::choose_breakpoint):

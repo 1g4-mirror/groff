@@ -1600,10 +1600,17 @@ node *do_overstrike() // \o
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     delete osnode;
     return 0 /* nullptr */;
   }
+#endif
   for (;;) {
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
@@ -1645,10 +1652,17 @@ static node *do_bracket() // \b
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     delete bracketnode;
     return 0 /* nullptr */;
   }
+#endif
   for (;;) {
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
@@ -1680,8 +1694,15 @@ static const char *do_name_test() // \A
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
+#endif
   bool got_bad_char = false;
   bool got_some_char = false;
   for (;;) {
@@ -1790,10 +1811,17 @@ static node *do_zero_width_output() // \Z
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     delete rev;
     return 0 /* nullptr */;
   }
+#endif
   for (;;) {
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
@@ -2614,12 +2642,8 @@ static bool is_char_usable_as_delimiter(int c)
   case '(':
   case ')':
   case '.':
+  case '|':
     return false;
-  // TODO: In groff 1.25, style-warn on '|' and [A-Za-z].
-  // TODO: In groff 1.26, promote style warning to error with
-  // deprecation message.
-  // TODO: In groff 1.27, make '|' and letters return false.
-  // See Savannah #66481.
   default:
     return true;
   }
@@ -5561,8 +5585,15 @@ static bool read_size(int *x)
     }
     val *= sizescale;
   }
-  else if (!tok.is_usable_as_delimiter(true /* report error */))
+  else if (!tok.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", tok.description());
+    // TODO: groff 1.25?
+#if 0
+  else if (!to.is_usable_as_delimiter(true /* report error */))
     return false;
+#endif
   else {
     token start(tok);
     tok.next();
@@ -5693,8 +5724,15 @@ static void do_register() // \R
 {
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter(true /* report error */))
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
+  if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     return;
+#endif
   tok.next();
   symbol nm = get_long_name(true /* required */);
   if (nm.is_null())
@@ -5726,8 +5764,15 @@ static void do_width() // \w
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return;
+#endif
   environment env(curenv);
   environment *oldenv = curenv;
   curenv = &env;
@@ -6005,8 +6050,15 @@ static node *do_device_extension() // \X
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
+#endif
   macro mac;
   if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
     topdiv->begin_page();
@@ -6457,9 +6509,7 @@ static bool is_conditional_expression_true()
   }
   else if (tok.is_space())
     result = false;
-  // Treat `|` specially for AT&T troff compatibility, where it _isn't_
-  // a delimiter in this context; see Savannah #66526.
-  else if (tok.is_usable_as_delimiter() && (tok.ch() != '|')) {
+  else if (tok.is_usable_as_delimiter()) {
     // Perform (formatted) output comparison.
     token delim = tok;
     int delim_level = input_stack::get_level();
@@ -9498,8 +9548,15 @@ static node *read_drawing_command()
 {
   token start_token;
   start_token.next();
+  if (!start_token.is_usable_as_delimiter())
+    warning(WARN_DELIM, "interpreting %1 as an escape sequence"
+	    " delimiter; it is ambiguous because it is also meaningful"
+	    " in a numeric expression", start_token.description());
+  // TODO: groff 1.25?
+#if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
+#endif
   else {
     tok.next();
     if (tok == start_token)
