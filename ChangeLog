@@ -1,5 +1,15 @@
 2025-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::choose_breakpoint):
+	Reparenthensize (very) complex expression, restoring documented
+	behavior of hyphenation space feature.  Problem introduced by me
+	in commit d2dceabb83, 30 August.
+
+	Fixes <https://savannah.gnu.org/bugs/?66723>.  Thanks to Dave
+	Kemper for the report.
+
+2025-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #66723.
 
 	* src/roff/groff/tests/hys-request-works.sh: Add test.

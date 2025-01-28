@@ -2042,11 +2042,11 @@ breakpoint *environment::choose_breakpoint()
 		   // Don't choose the hyphenated breakpoint if the line
 		   // can be justified by adding no more than
 		   // hyphenation_space to any word space.
-		   ? (bp->nspaces > 0
-		      && ((((target_text_length - bp->width)
-			    + ((bp->nspaces - 1) * hresolution)
-			       / bp->nspaces))
-			  <= hyphenation_space))
+		   ? ((bp->nspaces > 0)
+		      && (((target_text_length - bp->width)
+			    + ((bp->nspaces - 1) * hresolution))
+			    / bp->nspaces)
+			   <= hyphenation_space)
 		   // Don't choose the hyphenated breakpoint if the line
 		   // is no more than hyphenation_margin short of the
 		   // line length.
