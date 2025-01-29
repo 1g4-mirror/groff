@@ -9,7 +9,7 @@ or TeX
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -1286,10 +1286,10 @@ has no effect on objects whose start and end points are coincident.
 In places where
 .IB n th
 is allowed,
-.BI \[aq] expr \[aq]th
+.BI \[ga] expr \[aq]th
 is also allowed.
 .
-.RB \[lq] \[aq]th \[lq]
+.RB \[lq] \[aq]th \[rq]
 is a single token:
 no space is allowed between the apostrophe and the
 .RB \[lq] th \[rq].
@@ -1300,7 +1300,11 @@ Consider the following example.
 .IP
 .EX
 for i = 1 to 4 do {
-   line from \[aq]i\[aq]th box.nw to \[aq]i+1\[aq]th box.se
+   box
+   move right 0.5
+}
+for i = 1 to 3 do {
+   arrow from \[ga]i\[aq]th box.ne to \[ga]i+1\[aq]th box.sw
 }
 .EE
 .
