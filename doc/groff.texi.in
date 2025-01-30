@@ -12195,8 +12195,7 @@ used lead metal (Latin @emph{plumbum}).}
 
 @DefreqList {ps, [@Var{size}]}
 @DefreqItem {ps, @t{+}@Var{size}}
-@DefreqItem {ps, @t{-}@Var{size}}
-@DefescItemx {\\s, , size, }
+@DefreqItemx {ps, @t{-}@Var{size}}
 @DefregListEndx {.s}
 @cindex changing type sizes (@code{ps}, @code{\s})
 @cindex type sizes, changing (@code{ps}, @code{\s})
@@ -12225,8 +12224,14 @@ size in points as a decimal fraction; it is associated with the
 environment (@pxref{Environments}).  To obtain the type size in scaled
 points, interpolate the @code{.ps} register instead (@pxref{Using
 Fractional Type Sizes}).
+@endDefreq
 
-The @code{\s} escape sequence supports a variety of syntax forms.
+@Defesc {\\s, , size, }
+The
+@code{\s}
+escape sequence also determines the type size,
+but handles a zero argument differently.
+It supports a variety of syntax forms.
 
 @table @code
 @item \s@var{n}
@@ -12234,6 +12239,7 @@ Set the type size to @var{n}@tie{}scaled points.  @var{n}@tie{}must be a
 single digit.@footnote{In compatibility mode only, a non-zero @var{n}
 must be in the range 4--39.  @xref{Compatibility Mode}.}
 If @var{n}@tie{}is
+an unsigned
 @samp{0},
 restore the previous size.
 
@@ -12246,6 +12252,7 @@ Increase or decrease the type size by @var{n}@tie{}scaled points.
 Set the type size to @var{nn}@tie{}scaled points.  @var{nn} must be
 exactly two digits.
 If @var{n}@tie{}is
+an unsigned
 @samp{00},
 restore the previous size.
 
@@ -12267,7 +12274,7 @@ grin, grin,
 wink, wink, \s+2nudge, nudge,\s+8 say no more!
 .ps 10
 @endExample
-@endDefreq
+@endDefesc
 
 @cindex @code{\s} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\s}
@@ -12508,8 +12515,13 @@ numeric expression with a default scaling unit of @samp{z}.
 @itemx \s+'@var{n}'
 @itemx \s-'@var{n}'
 Increase or decrease the type size by @var{n}@tie{}scaled points;
-@var{n}@tie{}is a numeric expression (which may start with a minus sign)
-with a default scaling unit of @samp{z}.
+@var{n}@tie{}is
+a numeric expression with a default scaling unit of
+@samp{z}.
+If @var{n}@tie{}is
+an unsigned
+@samp{0},
+restore the previous size.
 @end table
 
 

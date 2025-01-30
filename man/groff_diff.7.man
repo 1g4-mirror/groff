@@ -1101,6 +1101,12 @@ or increment or decrement it by,
 .I n
 scaled points.
 .
+If
+.IR n \~is
+an unsigned
+.RB \[lq] 0 \[rq],
+restore the previous size.
+.
 .
 .br
 .ne 5v

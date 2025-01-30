@@ -5658,6 +5658,7 @@ must be a single digit.
 .
 If
 .IR n \~is
+an unsigned
 \[lq]0\[rq],
 restore the previous size.
 .
@@ -5684,6 +5685,7 @@ is a two-digit number \[>=]1.
 .
 If
 .IR n \~is
+an unsigned
 \[lq]00\[rq],
 restore the previous size.
 .
@@ -5707,6 +5709,7 @@ scaled points.
 .
 If
 .IR n \~is
+an unsigned
 \[lq]0\[rq]
 (with any number of leading zeroes),
 restore the previous size.
