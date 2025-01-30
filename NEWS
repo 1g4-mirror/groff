@@ -638,7 +638,7 @@ Output drivers
    containing slashes as a document prolog or resource (such as a font
    to be downloaded into the document).  This is a restoration of groff
    1.22.4 and earlier behavior; groff's 1.23.0 change of not accepting a
-   file name containing slashes as an encoding or font description files
+   file name containing slashes as an encoding or font description
    remains in place.  (We impose this restriction because the output
    driver interprets the contents of these files; it does not interpret
    the PostScript prolog or resource files.)
