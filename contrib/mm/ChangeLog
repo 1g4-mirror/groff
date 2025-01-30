@@ -269,7 +269,7 @@
 
 2024-10-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* m.tmac (initialization): Refactor.  Drop never-interpolated
+	* m.tmac ([initialization]): Refactor.  Drop never-interpolated
 	register `par*num-counter`.
 	(par@reset-num): This macro was called in only one place, so
 	delete it...
@@ -300,7 +300,7 @@
 	* m.tmac: Support new `Rpfmt` string specifying the `LB` macro
 	arguments that the package uses to format the items in a
 	reference list.
-	(initialization): Define it.
+	([initialization]): Define it.
 	(ref@start-print): Use it.
 
 	* groff_mm.7.man (Macros) <RS>: Cross reference `Rpfmt` register
@@ -360,8 +360,8 @@
 	in a document to obtain groff mm's previous mark formatting
 	behavior.
 
-	* m.tmac (initialization): Assign zero to `Rfstyle`.  Define new
-	`ref*{n,t}roff-{(,)}` strings.  Define `Rf` in terms of new
+	* m.tmac ([initialization]): Assign zero to `Rfstyle`.  Define
+	new `ref*{n,t}roff-{(,)}` strings.  Define `Rf` in terms of new
 	`ref*(` and `ref*)` strings below.  Call `ref*set-mark-style`.
 	(ref*set-mark-style): New macro maps a `Rfstyle` to 1
 	{nroff-style} or 2 {troff-style} as described above and defines
@@ -415,7 +415,7 @@
 
 2024-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* m.tmac (initialization, LB, LI): Trivially refactor.  Rename
+	* m.tmac ([initialization], LB, LI): Trivially refactor.  Rename
 	internal string `li*mark` to `li*mf`, since it can be _either_
 	an arbitrary string _or_ an argument to the `af` request.
 
@@ -931,7 +931,7 @@
 	logical indentation when formatting output.
 	(cov@print-abstract):  Favor font selection requests over escape
 	sequences.
-	(initialization): Define several registers to vertically and
+	([initialization]): Define several registers to vertically and
 	horizontally arrange the document metadata.  Adjust vertical
 	spacing around abstract and its caption.  Favor font selection
 	requests over escape sequences.
@@ -1038,7 +1038,7 @@
 	auxiliary author information optionally present in `AU` macro
 	calls.
 
-	* m.tmac (initialization, AV, let@print-head):
+	* m.tmac ([initialization], AV, let@print-head):
 	* mm/0.MT (cov@print-title, cov@print-authors, cov@print-date):
 	* mm/5.MT (cov@print-date):
 	* mm/ms.cov (cov@print-date): Do it.
