@@ -12202,10 +12202,12 @@ used lead metal (Latin @emph{plumbum}).}
 @cindex point sizes, changing (@code{ps}, @code{\s})
 Set (increase, decrease) the type size to (by) @var{size} scaled points.
 @code{ps} with no argument restores the previous size.  The @code{ps}
-request's default scaling unit is @samp{z}.  The requested size is
-rounded to the nearest valid size (with ties rounding down) within the
-limits supported by the device.  If the requested size is non-positive,
-it is treated as 1@dmn{u}.
+request's default scaling unit is @samp{z}.
+The formatter rounds the requested size to the nearest valid size
+(with ties rounding down)
+within the limits supported by the device,
+and if the requested size is non-positive,
+treats it as 1@dmn{u}.
 
 @cindex CSTR@tie{}#54 errata
 @cindex CSTR@tie{}#54 erratum, @code{ps} request
@@ -12278,9 +12280,12 @@ wink, wink, \s+2nudge, nudge,\s+8 say no more!
 
 @cindex @code{\s} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\s}
-@code{\s} is not tokenized when GNU @code{troff} reads its input; it
-instead updates the environment.  It thus can be used in requests that
-expect a single-character argument.  We can thus alter the type size
+The formatter does not tokenize
+@code{\s}
+when reading its input;
+it instead updates the environment.
+It thus can be used in requests that expect a single-character argument.
+We might alter the type size
 when writing a margin character as follows (@pxref{Miscellaneous}).
 
 @Example
@@ -12495,10 +12500,13 @@ points, the output driver uses the latter value.
 @cindex changing type sizes (@code{ps}, @code{\s})
 @cindex type sizes, changing (@code{ps}, @code{\s})
 @cindex point sizes, changing (@code{ps}, @code{\s})
-The @code{\s} escape sequence offers the following syntax forms that
-work with fractional type sizes and accept scaling units.  You may of
-course give them integral arguments.  The delimited forms need not use
-the neutral apostrophe; see @ref{Delimiters}.
+The
+@code{\s}
+escape sequence offers the following syntax forms
+that work with fractional type sizes and accept scaling units.
+You may of course give them dimensionless integral arguments.
+The delimited forms need not use the neutral apostrophe;
+see @ref{Delimiters}.
 
 @table @code
 @item \s[@var{n}]
