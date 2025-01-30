@@ -16,7 +16,7 @@
 
 	(is_conditional_expression_true): Stop special-casing an
 	exception for `|` that permitted it to be used as a formatted
-	output comparison operator.  Savannah #66481 complained only
+	output comparison delimiter.  Savannah #66481 complained only
 	about groff's rejection of `|` to delimit the argument to the
 	`\w` (width measurement) escape sequence, not in general, and
 	was seen in some man pages.  The usage Paul Eggert reported
@@ -134,7 +134,7 @@
 
 	[troff]: Trivially refactor.  Rename character-definition
 	request handler functions to end with `_request`, and rename the
-	workhorse function to simple `define_character`.  Mark them all
+	workhorse function to simply `define_character`.  Mark them all
 	`static` (except for `define_font_specific_character`, which
 	already was) while we're at it.
 
