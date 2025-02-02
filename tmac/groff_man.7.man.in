@@ -4584,12 +4584,12 @@ call as follows.
 .RS
 .EX
 \&.ie \[rs]n(.g \[rs]{\[rs]
-\&.  ds oq \[rs](oq
-\&.  ds cq \[rs](cq
+\&.  ds oq \[rs](oq\[rs]"
+\&.  ds cq \[rs](cq\[rs]"
 \&.\[rs]}
 \&.el \[rs]{\[rs]
-\&.  ds oq \[ga]
-\&.  ds cq \[aq]
+\&.  ds oq \[ga]\[rs]"
+\&.  ds cq \[aq]\[rs]"
 \&.\[rs]}
 .EE
 .RE
