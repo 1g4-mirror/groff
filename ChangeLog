@@ -1,3 +1,8 @@
+2025-02-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::description): When describing
+	special character, include its identifier.
+
 2025-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (is_char_usable_as_delimiter):

@@ -2686,7 +2686,11 @@ bool token::is_usable_as_delimiter(bool report_error)
 
 const char *token::description()
 {
-  const size_t bufsz = sizeof "character code XXX (U+XXXX)" + 1;
+  // Reserve a buffer large enough to handle the two lengthiest cases.
+  //   "character code XXX (U+XXXX)"
+  //   "special character 'bracketrighttp'"
+  const size_t maxstr = sizeof "special character 'bracketrighttp'";
+  const size_t bufsz = maxstr + 2; // for trailing '"' and null
   static char buf[bufsz];
   (void) memset(buf, 0, bufsz);
   switch (type) {
@@ -2734,7 +2738,12 @@ const char *token::description()
   case TOKEN_SPACE:
     return "a space";
   case TOKEN_SPECIAL_CHAR:
-    return "a special character";
+    // TODO: This truncates the names of impractically long special
+    // character names.  Do something about that.  (The truncation is
+    // visually indicated by the absence of a closing quotation mark.)
+    (void) snprintf(buf, maxstr, "special character \"%s\"",
+		    nm.contents());
+    return buf;
   case TOKEN_SPREAD:
     return "an escaped 'p'";
   case TOKEN_STRETCHABLE_SPACE:
