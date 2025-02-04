@@ -1,5 +1,18 @@
 2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add experimental charinfo dump feature.
+
+	* src/roff/troff/charinfo.h (class charinfo): Declare `dump()`
+	member function, taking and returning no arguments.
+
+	* src/roff/troff/input.cpp (charinfo::dump): Implement it.
+	(report_character_request): Add request handler that iterates
+	each ordinary or special character in the argument and calls
+	`dump()` on it.
+	(init_input_requests): Wire up `pchar` request to handler.
+
+2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (define_character): Refactor and
 	annotate.  Declare variables closer to their point of use.
 	Reorder conditional branches to put the more common case first.

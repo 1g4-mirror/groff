@@ -4680,6 +4680,29 @@ static void define_special_character_request()
   define_character(CHAR_SPECIAL_FALLBACK);
 }
 
+static void report_character_request()
+{
+  if (!has_arg()) {
+    warning(WARN_MISSING, "character report request expects arguments");
+    skip_line();
+    return;
+  }
+  charinfo *ci;
+  do {
+    ci = tok.get_char();
+    if (0 /* nullptr */ == ci)
+      warning(WARN_CHAR, "%1 is not a character", tok.description());
+    else {
+      // A charinfo doesn't know the name by which it is accessed.
+      errprint("%1\n", tok.description());
+      fflush(stderr);
+      ci->dump();
+    }
+    tok.next();
+  } while (!tok.is_newline() && !tok.is_eof());
+  skip_line();
+}
+
 static void remove_character()
 {
   if (!has_arg()) {
@@ -9415,6 +9438,7 @@ void init_input_requests()
   init_request("opena", opena_request);
   init_request("output", output_request);
   init_request("pc", set_page_character);
+  init_request("pchar", report_character_request);
   init_request("pcolor", report_color);
   init_request("pcomposite", report_composite_characters);
   init_request("phcode", report_hyphenation_codes);
@@ -10184,6 +10208,35 @@ bool charinfo::contains(charinfo *, bool)
   // Werner Lemberg marked this as "TODO" in 2010.
   assert(0 == "unimplemented member function");
   return false;
+}
+
+void charinfo::dump()
+{
+  if (translation != 0 /* nullptr */)
+    errprint("  is translated\n");
+  else
+    errprint("  is not translated\n");
+  if (mac != 0 /* nullptr */)
+    errprint("  has a macro\n");
+  else
+    errprint("  does not have a macro\n");
+  errprint("  special translation: %1\n",
+	   static_cast<int>(special_translation));
+  errprint("  hyphenation code: %1\n",
+	   static_cast<int>(hyphenation_code));
+  errprint("  flags: %1\n", flags);
+  errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
+  errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
+  errprint("  is%1 found\n", is_not_found ? " not" : "");
+  errprint("  is%1 transparently translatable\n",
+	   is_transparently_translatable ? "" : " not");
+  errprint("  is%1 translatable as input\n",
+	   translatable_as_input ? "" : " not");
+  const char *modestr = character_mode_description(mode);
+  if (strcmp(modestr, "") == 0)
+    modestr =" normal";
+  errprint("  mode:%1\n", modestr);
+  fflush(stderr);
 }
 
 symbol UNNAMED_SYMBOL("---");
