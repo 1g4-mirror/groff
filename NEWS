@@ -174,9 +174,6 @@ troff
 *  A new request, `pcomposite`, reports to the standard error stream the
    list of defined composite characters.
 
-*  A new request, `phcode`, reports to the standard error stream the
-   hyphenation code of each ordinary or special character argument.
-
 *  A new request, `phw`, reports to the standard error stream the
    list of hyphenation exceptions associated with the current
    hyphenation language.

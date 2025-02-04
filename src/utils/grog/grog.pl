@@ -328,7 +328,7 @@ sub interpret_line {
 		 'mk', 'mso', 'msoquiet', 'na', 'ne', 'nf', 'nh', 'nm',
 		 'nn', 'nop', 'nr', 'nroff', 'ns', 'nx', 'open',
 		 'opena', 'os', 'output', 'pc', 'pcolor', 'pcomposite',
-		 'pev', 'phcode', 'phw', 'pi', 'pl', 'pline', 'pm',
+		 'pev', 'phw', 'pi', 'pl', 'pline', 'pm',
 		 'pn', 'pnr', 'po', 'ps', 'psbb', 'pso', 'ptr', 'pvs',
 		 'rchar', 'rd', 'return', 'rfschar', 'rj', 'rm', 'rn',
 		 'rnn', 'rr', 'rs', 'rt', 'schar', 'shc', 'shift',

@@ -9084,8 +9084,8 @@ with a hyphenation code value of zero to it.  For example, @samp{.hcode
 ß $} removes the hyphenation code from @samp{ß} (unless @samp{$} has
 already been assigned a different one).
 
-The @code{phcode} request may be helpful to troubleshoot hyphenation
-code assignments.  @xref{Debugging}.
+The experimental @code{pchar} request may be helpful to troubleshoot
+hyphenation code assignments.  @xref{Debugging}.
 @endDefreq
 
 @Defreq {hpfcode, a b [c d] @dots{}}
@@ -17458,6 +17458,13 @@ If you know in advance that there are many errors and no useful output,
 or are interested @emph{only} in diagnostic output, you can suppress GNU
 @code{troff}'s formatted output with its @option{-z} option.
 
+@Defreq {pchar, c @r{@dots{}}}
+Report,
+to the standard error stream,
+information about each ordinary or special
+character@tie{}@var{c}.
+@endDefreq
+
 @Defreq {pcolor, [@Var{col} @r{@dots{}}]}
 @cindex dumping defined colors (@code{pcolor})
 @cindex defined colors, dumping (@code{pcolor})
@@ -17484,12 +17491,6 @@ characters.  The ``from'' code point is listed first, followed by its
 @cindex environments, dumping (@code{pev})
 Report the state of the current environment followed by that of all
 other environments to the standard error stream.
-@endDefreq
-
-@Defreq {phcode, c @r{@dots{}}}
-Report, to the standard error stream, the hyphenation code of each
-ordinary or special character@tie{}@var{c}.  Special characters are
-listed in bracketed syntax using the default escape character.
 @endDefreq
 
 @Defreq {phw, }

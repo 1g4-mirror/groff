@@ -1,5 +1,24 @@
 2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Drop `phcode` request introduced on 4 November.  The
+	experimental new `pchar` request handles that job and more.
+
+	* src/roff/troff/input.cpp (report_hyphenation_codes): Drop
+	request handler.
+	(init_input_requests): Unwire `phcode` request from handler.
+
+	* src/utils/grog/grog.pl (interpret_line): Unrecognize `phcode`
+	as a GNU troff request.
+
+	* NEWS: Drop item.
+	* doc/groff.texi.in (Manipulating Hyphenation, Debugging):
+	* man/groff.7.man (Request short reference, Debugging):
+	* man/groff_diff.7.man (New requests, Debugging): Replace
+	documentation of `phcode` with terse documentation of `pchar`,
+	noting its experimental status.
+
+2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add experimental charinfo dump feature.
 
 	* src/roff/troff/charinfo.h (class charinfo): Declare `dump()`

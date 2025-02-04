@@ -3325,6 +3325,15 @@ in the top-level diversion.
 .
 .
 .TP
+.BI .pchar\~ c\~\c
+\&.\|.\|.
+Report,
+to the standard error stream,
+information about each ordinary or special
+.RI character\~ c .
+.
+.
+.TP
 .BR .pcolor \~[\c
 .IR col \~\&.\|.\|.]
 Report,
@@ -3357,18 +3366,6 @@ followed by its \[lq]to\[rq] mapping.
 .B .pev
 Report the state of the current environment followed by that of all
 other environments to the standard error stream.
-.
-.
-.TP
-.BI .phcode\~ c\~\c
-\&.\|.\|.
-Report,
-to the standard error stream,
-the hyphenation code of each ordinary or special
-.RI character\~ c .
-.
-Special characters are listed in bracketed syntax using the default
-escape character.
 .
 .
 .TP
@@ -5673,15 +5670,16 @@ and
 .
 Examine more aspects of formatter state
 with requests that write lists of
-defined colors
+defined
+characters
+.RB ( pchar "; experimental);
+colors
 .RB ( pcolor ),
 composite characters
 .RB ( pcomposite ),
 environments
 .RB ( pev ),
 hyphenation codes
-.RB ( phcode ),
-hyphenation exceptions
 .RB ( phw ),
 registers
 .RB ( pnr ),

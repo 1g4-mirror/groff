@@ -4035,6 +4035,13 @@ Change the page number character used in titles
 .RI to\~ c .
 .
 .TPx
+.REQ .pchar "c \fR\&.\|.\|.\&\fP"
+Report,
+to the standard error stream,
+information about each ordinary or special
+.RI character\~ c .
+.
+.TPx
 .REQ .pcolor
 Report,
 to the standard error stream,
@@ -4069,13 +4076,6 @@ followed by its \[lq]to\[rq] mapping.
 .REQ .pev
 Report the state of the current environment followed by that of all
 other environments to the standard error stream.
-.
-.TPx
-.REQ .phcode "c \fR\&.\|.\|.\&\fP"
-Report,
-to the standard error stream,
-the hyphenation code of each ordinary or special
-.RI character\~ c .
 .
 .TPx
 .REQ .phw
@@ -8725,6 +8725,8 @@ defined names\[em]macros,
 strings,
 and
 .RB diversions\[em]( pm );
+characters
+.RB ( pchar "; experimental);
 colors
 .RB ( pcolor );
 composite characters
@@ -8732,8 +8734,6 @@ composite characters
 environments
 .RB ( pev );
 hyphenation codes
-.RB ( phcode );
-hyphenation exceptions
 .RB ( phw );
 registers
 .RB ( pnr );
