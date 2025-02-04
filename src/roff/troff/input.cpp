@@ -4569,10 +4569,10 @@ void append_nocomp_string()
   do_define_string(DEFINE_APPEND, COMP_DISABLE);
 }
 
-void define_character(char_mode mode, const char *font_name)
+static const char *character_mode_description(char_mode mode)
 {
   // C++11: There may be a better way to do this with an enum class;
-  // we could then store these constants inside `char_mode`.
+  // we could then store these string literals inside `char_mode`.
   const char *modestr = 0 /* nullptr */;
   switch (mode) {
     case CHAR_NORMAL:
@@ -4591,6 +4591,12 @@ void define_character(char_mode mode, const char *font_name)
       assert(0 == "unhandled case of character mode");
       break;
   }
+  return modestr;
+}
+
+void define_character(char_mode mode, const char *font_name)
+{
+  const char *modestr = character_mode_description(mode);
   node *n = 0 /* nullptr */;
   int c;
   tok.skip();

@@ -1,3 +1,11 @@
+2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Refactor.
+	(define_character): Break out character mode description logic
+	from here...
+	(character_mode_description): ...into this new function, since a
+	forthcoming change will also require it.
+
 2025-02-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::description): When describing
