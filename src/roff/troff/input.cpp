@@ -4597,8 +4597,6 @@ static const char *character_mode_description(char_mode mode)
 void define_character(char_mode mode, const char *font_name)
 {
   const char *modestr = character_mode_description(mode);
-  node *n = 0 /* nullptr */;
-  int c;
   tok.skip();
   charinfo *ci = tok.get_char(true /* required */);
   if (0 /* nullptr */ == ci) {
@@ -4613,6 +4611,8 @@ void define_character(char_mode mode, const char *font_name)
     ci = get_charinfo(symbol(s.contents()));
   }
   tok.next();
+  int c;
+  node *n = 0 /* nullptr */;
   if (tok.is_newline())
     c = '\n';
   else if (tok.is_tab())
@@ -4631,13 +4631,16 @@ void define_character(char_mode mode, const char *font_name)
   if (c == '"')
     c = get_copy(&n);
   macro *m = new macro;
+  // Construct a macro from input characters; if the input character
+  // code is 0, we've read a node--append that.
   while (c != '\n' && c != EOF) {
-    if (c == 0)
-      m->append(n);
+    if (c != 0)
+      m->append(static_cast<unsigned char>(c));
     else
-      m->append((unsigned char) c);
+      m->append(n);
     c = get_copy(&n);
   }
+  // Assign the macro to the character, discarding any previous macro.
   m = ci->set_macro(m, mode);
   if (m)
     delete m;

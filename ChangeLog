@@ -1,5 +1,12 @@
 2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_character): Refactor and
+	annotate.  Declare variables closer to their point of use.
+	Reorder conditional branches to put the more common case first.
+	Use C++ `static_cast` operator instead of C-style type cast.
+
+2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Refactor.
 	(define_character): Break out character mode description logic
 	from here...
