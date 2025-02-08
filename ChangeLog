@@ -1,5 +1,11 @@
 2025-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (interpolate_environment_variable):
+	Explicitly compare variable of pointer type to null pointer
+	literal instead of letting it pun down to a Boolean.
+
+2025-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/initialization-is-quiet.sh: Add new "es"
 	and "ru" localization macro files as test scenarios.
 	* tmac/LOCALIZATION: Document this step, since I forgot it.

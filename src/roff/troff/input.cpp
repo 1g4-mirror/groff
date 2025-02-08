@@ -5463,7 +5463,7 @@ void unformat_macro()
 static void interpolate_environment_variable(symbol nm)
 {
   const char *s = getenv(nm.contents());
-  if (s && *s)
+  if ((s != 0 /* nullptr */) && (*s != 0 /* nullptr */))
     input_stack::push(make_temp_iterator(s));
 }
 
