@@ -1,6 +1,6 @@
 .ig
 
-Copyright (C) 1991-2024 Free Software Foundation, Inc.
+Copyright (C) 1991-2025 Free Software Foundation, Inc.
 mm is written by Jörgen Hägg <jh@axis.com>
 
 Modified by G. Branden Robinson <g.branden.robinson@gmail.com> to more
@@ -269,7 +269,10 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" definition.)
 .if !d cov*mt-printed \{\
 .	cov@print-title subject
-.	ie d AFX .AFX
+.	ie d AFX \{\
+.		if \\n[D]>=5 .tm calling user-defined AFX macro
+.		AFX
+.	\}
 .	el       .cov@print-firm
 .	cov@print-date date
 .	cov@print-authors from

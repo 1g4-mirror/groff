@@ -1,6 +1,6 @@
 .ig
 
-Copyright (C) 1991-2024 Free Software Foundation, Inc.
+Copyright (C) 1991-2025 Free Software Foundation, Inc.
 groff mm is written by Jörgen Hägg <jh@axis.com>
 based on groff ms by James Clark <jjc@jclark.com>
 and further developed by Werner Lemberg <wl@gnu.org>
@@ -1582,7 +1582,10 @@ numeric; got '\\$1'
 .pg@set-env
 .vpt 0
 .\" user defined end-of-page macro
-.ie d EOP .EOP
+.ie d EOP \{\
+.	if \\n[D]>=5 .tm \\$0: calling user-defined EOP macro
+.	EOP
+.\}
 .el \{\
 .	ie o \{\
 .		if \\n[D]>=3 .tm Footer "\\*[pg*odd-footer]"
@@ -3335,7 +3338,10 @@ argument: '\\$2'
 .\" prints the references
 .de ref@print-refs
 .toc@save 1 "" "\\*[Rp]" \\n[%]
-.ie d RPX .RPX
+.ie d RPX \{\
+.	if \\n[D]>=5 .tm \\$0: calling user-defined RPX macro
+.	RPX
+.\}
 .el \{\
 .	SP 2
 .	ce

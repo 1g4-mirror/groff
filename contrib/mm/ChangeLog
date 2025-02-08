@@ -1,3 +1,12 @@
+2025-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Trace use of user-defined hooks.
+
+	* m.tmac (pg@print-footer): ...for `EOP`.
+	(ref@print-refs): ...for `RPX`.
+	* mm/0.MT:
+	* mm/4.MT: ...and for `AFX`.
+
 2024-12-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mmroff.pl: If asked for `--help`, summarize command purpose in
