@@ -64,8 +64,8 @@
 
 	(do_overstrike, do_bracket, do_name_test, do_zero_width_output)
 	(read_size, do_register, do_width, do_device_extension)
-	(read_drawing_command): Throw warning in "delimiter" category
-	and explain ambiguity of delimiter instead of emitting error and
+	(read_drawing_command): Throw warning in "delim" category and
+	explain ambiguity of delimiter instead of emitting error and
 	refusing further interpretation of the escape sequence being
 	parsed.  Leave behind "#if"ed code for restoration of former
 	stricter behavior in a future groff release (which would fix
