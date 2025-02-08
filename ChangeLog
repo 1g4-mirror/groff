@@ -1,3 +1,9 @@
+2025-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/initialization-is-quiet.sh: Add new "es"
+	and "ru" localization macro files as test scenarios.
+	* tmac/LOCALIZATION: Document this step, since I forgot it.
+
 2025-02-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.am (groff_XFAIL_TESTS): Add
