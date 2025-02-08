@@ -1,3 +1,12 @@
+2025-02-08  Colin Watson <cjwatson@debian.org>
+
+	* m.tmac (pg@print-footer): Fix missing brace escape sequence.
+
+	Fixes <https://savannah.gnu.org/bugs/?66758>.  [Problem
+	introduced by me in commit 88cd50aa, 27 October.  Thanks to Deri
+	James for the report and tracking down the (huge) offending
+	commit.  --GBR]
+
 2025-02-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Trace use of user-defined hooks.
