@@ -787,7 +787,6 @@ environment::environment(symbol nm)
   line_number_indent(0),
   line_number_multiple(1),
   no_number_count(0),
-  language_code(""),
   hyphenation_mode(1),
   hyphenation_mode_default(1),
   hyphen_line_count(0),
@@ -882,7 +881,6 @@ environment::environment(const environment *e)
   line_number_indent(e->line_number_indent),
   line_number_multiple(e->line_number_multiple),
   no_number_count(e->no_number_count),
-  language_code(e->language_code),
   hyphenation_mode(e->hyphenation_mode),
   hyphenation_mode_default(e->hyphenation_mode_default),
   hyphen_line_count(0),
@@ -970,7 +968,6 @@ void environment::copy(const environment *e)
   no_number_count = e->no_number_count;
   tab_char = e->tab_char;
   leader_char = e->leader_char;
-  set_language_code(e->language_code.contents());
   hyphenation_mode = e->hyphenation_mode;
   hyphenation_mode_default = e->hyphenation_mode_default;
   fontno = e->fontno;
@@ -3553,10 +3550,6 @@ void environment::print_env()
     errprint("  lines remaining for which to suppress numbering: %1\n",
 	     no_number_count);
   }
-  const char *hl = language_code.contents();
-  bool is_hyphenation_impossible = language_code.is_empty();
-  errprint("  hyphenation language code: %1\n",
-	   is_hyphenation_impossible ? "(none)" : hl);
   string hf = hyphenation_mode ? "on" : "off";
   if (hyphenation_mode & HYPHEN_NOT_LAST_LINE)
     hf += ", not on line before vertical position trap";
@@ -3569,10 +3562,8 @@ void environment::print_env()
   if (hyphenation_mode & HYPHEN_NOT_FIRST_CHARS)
     hf += ", not allowed within first two characters";
   hf += '\0';
-  errprint("  hyphenation mode: %1 (%2)%3\n", hyphenation_mode,
-	   hf.contents(),
-	   is_hyphenation_impossible ? " [no hyphenation language]"
-				     : "");
+  errprint("  hyphenation mode: %1 (%2)\n", hyphenation_mode,
+	   hf.contents());
   errprint("  hyphenation mode default: %1\n",
 	   hyphenation_mode_default);
   errprint("  count of consecutive hyphenated lines: %1\n",
@@ -3659,7 +3650,6 @@ static void select_hyphenation_language()
 {
   if (!has_arg()) {
     current_language = 0 /* nullptr */;
-    curenv->set_language_code("");
     skip_line();
     return;
   }
@@ -3672,21 +3662,9 @@ static void select_hyphenation_language()
       (void) language_dictionary.lookup(nm,
 	static_cast<hyphenation_language *>(current_language));
     }
-    curenv->set_language_code(nm.contents());
   }
-  assert(!(curenv->get_language_code().is_null()));
-  if (current_language != 0 /* nullptr */)
-    assert(strcmp(current_language->name.contents(),
-		  curenv->get_language_code().contents()) == 0);
   skip_line();
 }
-
-// The environment class has no visibility into which hyphenation
-// languages are defined; it has only a code that is either empty
-// or must reference a valid one (and since the code uniquely
-// identifies a language, a `const char *` is more ergonomic than a
-// pointer to a type that's not visible in the class's scope).  So
-// updating that code is a two-step process.
 
 void environment_copy()
 {
@@ -3701,25 +3679,12 @@ void environment_copy()
   symbol nm = get_long_name();
   assert(nm != 0 /* nullptr */);
   e = static_cast<environment *>(env_dictionary.lookup(nm));
-  if (e != 0 /* nullptr */) {
+  if (e != 0 /* nullptr */)
     curenv->copy(e);
-    current_language = static_cast<hyphenation_language *>
-      (language_dictionary.lookup(e->get_language_code()));
-  }
   else
     error("cannot copy from nonexistent environment '%1'",
 	  nm.contents());
   skip_line();
-}
-
-symbol environment::get_language_code()
-{
-  return language_code;
-}
-
-void environment::set_language_code(const char *lang)
-{
-    language_code = lang;
 }
 
 void environment_switch()
@@ -3737,8 +3702,6 @@ void environment_switch()
 	bool seen_eol   = curenv->seen_eol;
 	bool suppress_next_eol = curenv->suppress_next_eol;
 	curenv = env_stack->env;
-	current_language = static_cast<hyphenation_language *>
-	  (language_dictionary.lookup(curenv->language_code));
 	curenv->seen_space = seen_space;
 	curenv->seen_eol   = seen_eol;
 	curenv->suppress_next_eol = suppress_next_eol;
@@ -3756,8 +3719,6 @@ void environment_switch()
       }
       env_stack = new env_list_node(curenv, env_stack);
       curenv = e;
-      current_language = static_cast<hyphenation_language *>
-	(language_dictionary.lookup(curenv->language_code));
     }
   }
   skip_line();
