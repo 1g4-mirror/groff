@@ -5632,7 +5632,7 @@ static bool read_size(int *x)
 	    " in a numeric expression", tok.description());
     // TODO: groff 1.25?
 #if 0
-  else if (!to.is_usable_as_delimiter(true /* report error */))
+  else if (!tok.is_usable_as_delimiter(true /* report error */))
     return false;
 #endif
   else {
