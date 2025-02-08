@@ -1,3 +1,8 @@
+2025-02-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/groff.am (groff_XFAIL_TESTS): Add
+	".../current-language-and-environment-in-sync.sh".
+
 2025-02-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Drop `phcode` request introduced on 4 November.  The
