@@ -242,7 +242,7 @@ argument as a pair of equation delimiters.
 .I eqn
 input consists of tokens.
 .
-Consider a form of Newton's second law of motion.
+Consider a form of Newton's second law of motion for constant mass.
 .
 The input
 .
@@ -703,7 +703,6 @@ beginning with
 or
 .BR .EN .
 .
-If a relative path name,
 .I file
 is sought relative to the current working directory.
 .
