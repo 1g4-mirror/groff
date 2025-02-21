@@ -2422,7 +2422,7 @@ void token::next()
 		  val);
 	  break;
 	}
-	type = TOKEN_NUMBERED_CHAR;
+	type = TOKEN_INDEXED_CHAR;
 	return;
       case 'o':
 	nd = do_overstrike();
@@ -2608,7 +2608,7 @@ bool token::operator==(const token &t)
     return c == t.c;
   case TOKEN_SPECIAL_CHAR:
     return nm == t.nm;
-  case TOKEN_NUMBERED_CHAR:
+  case TOKEN_INDEXED_CHAR:
     return val == t.val;
   default:
     return true;
@@ -2732,7 +2732,7 @@ const char *token::description()
     return "a newline";
   case TOKEN_NODE:
     return "a node";
-  case TOKEN_NUMBERED_CHAR:
+  case TOKEN_INDEXED_CHAR:
     return "an escaped 'N'";
   case TOKEN_RIGHT_BRACE:
     return "an escaped '}'";
@@ -8154,7 +8154,7 @@ charinfo *token::get_char(bool required)
     return charset_table[c];
   if (type == TOKEN_SPECIAL_CHAR)
     return get_charinfo(nm);
-  if (type == TOKEN_NUMBERED_CHAR)
+  if (type == TOKEN_INDEXED_CHAR)
     return get_charinfo_by_number(val);
   if (type == TOKEN_ESCAPE) {
     if (escape_char != 0)
@@ -8232,7 +8232,7 @@ bool token::add_to_zero_width_node_list(node **pp)
     n = nd;
     nd = 0 /* nullptr */;
     break;
-  case TOKEN_NUMBERED_CHAR:
+  case TOKEN_INDEXED_CHAR:
     *pp = (*pp)->add_char(get_charinfo_by_number(val), curenv, &w, &s);
     break;
   case TOKEN_RIGHT_BRACE:
@@ -8325,7 +8325,7 @@ void token::process()
     curenv->add_node(nd);
     nd = 0;
     break;
-  case TOKEN_NUMBERED_CHAR:
+  case TOKEN_INDEXED_CHAR:
     curenv->add_char(get_charinfo_by_number(val));
     break;
   case TOKEN_REQUEST:

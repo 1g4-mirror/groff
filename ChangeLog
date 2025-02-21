@@ -1,5 +1,16 @@
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor; rename enumerator in `token` `enum`
+	type from `TOKEN_NUMBERED_CHAR` to `TOKEN_INDEXED_CHAR`.
+
+	* src/roff/troff/token.h (class token): Revise definition.
+	* src/roff/troff/input.cpp (token::next, token::operator==)
+	(token::description, token::get_char)
+	(token::add_to_zero_width_node_list, token::process): Update
+	sites of use.
+
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (remove_character, get_optional_char)
 	(get_charinfo_by_number): Fix code style nits.  Reorder equality
 	comparison to avoid inadvertent lvalue assignment.  Explicitly

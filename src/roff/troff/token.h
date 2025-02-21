@@ -43,7 +43,7 @@ class token {
     TOKEN_MARK_INPUT,		// \k
     TOKEN_NEWLINE,		// ^J
     TOKEN_NODE,
-    TOKEN_NUMBERED_CHAR,	// \N
+    TOKEN_INDEXED_CHAR,		// \N
     TOKEN_PAGE_EJECTOR,
     TOKEN_REQUEST,
     TOKEN_RIGHT_BRACE,		// \}
