@@ -9986,8 +9986,8 @@ dictionary charinfo_dictionary(501);
 charinfo *get_charinfo(symbol nm)
 {
   void *p = charinfo_dictionary.lookup(nm);
-  if (p != 0)
-    return (charinfo *)p;
+  if (p != 0 /* nullptr */)
+    return static_cast<charinfo *>(p);
   charinfo *cp = new charinfo(nm);
   (void) charinfo_dictionary.lookup(nm, cp);
   return cp;
