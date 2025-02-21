@@ -114,7 +114,7 @@ public:
   void dump();
 };
 
-charinfo *get_charinfo(symbol);
+charinfo *get_charinfo(symbol, bool /* lookup_only */ = false);
 extern charinfo *charset_table[];
 
 inline bool charinfo::overlaps_horizontally()

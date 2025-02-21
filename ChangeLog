@@ -1,5 +1,23 @@
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Make it possible to retrieve information about a *roff
+	character without creating it as a side effect.
+
+	* src/roff/troff/charinfo.h (get_charinfo):
+	* src/roff/troff/token.h (get_char):
+	* src/roff/troff/input.cpp (get_charinfo_by_index): Add new
+	`bool` argument `lookup_only`, defaulting `false`.
+	* src/roff/troff/input.cpp: Use these new facilities.
+	(report_character_request): Prevent creation of each character
+	we look up.  Improve diagnostics.  Report information about
+	indexed characters (`\N'123'`) more intelligibly.
+	(remove_character): Prevent creation of each character we
+	remove.  Intelligibly report nonexistence of characters for
+	which removal is attempted.  Throw error when attempt is made to
+	remove a non-character, like `\~`.
+
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add member functions to `token` class to assist with
 	runtime character analysis.
 

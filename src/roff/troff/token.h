@@ -99,7 +99,8 @@ public:
   bool operator!=(const token &); // ditto
   unsigned char ch();
   int character_index();
-  charinfo *get_char(bool /* required */ = false);
+  charinfo *get_char(bool /* required */ = false,
+		     bool /* lookup_only */ = false);
   bool add_to_zero_width_node_list(node **);
   void make_space();
   void make_newline();

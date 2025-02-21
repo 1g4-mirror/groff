@@ -4690,12 +4690,26 @@ static void report_character_request()
   }
   charinfo *ci;
   do {
-    ci = tok.get_char();
-    if (0 /* nullptr */ == ci)
-      warning(WARN_CHAR, "%1 is not a character", tok.description());
+    ci = tok.get_char(false, true /* lookup only */);
+    if (!tok.is_character()) {
+      error("character report request expects characters as arguments;"
+	    " got %1", tok.description());
+      break;
+    }
+    if (0 /* nullptr */ == ci) {
+      if (!tok.is_indexed_character())
+	warning(WARN_CHAR, "%1 is not defined", tok.description());
+      else
+	warning(WARN_CHAR, "character with index %1 in the current font"
+		" is not defined", tok.character_index());
+    }
     else {
       // A charinfo doesn't know the name by which it is accessed.
-      errprint("%1\n", tok.description());
+      if (tok.is_indexed_character())
+	errprint("character indexed %1 in current font\n",
+		 tok.character_index());
+      else
+	errprint("%1\n", tok.description());
       fflush(stderr);
       ci->dump();
     }
@@ -4714,12 +4728,27 @@ static void remove_character()
   }
   while (!tok.is_newline() && !tok.is_eof()) {
     if (!tok.is_space() && !tok.is_tab()) {
-      charinfo *ci = tok.get_char(true /* required */);
-      if (0 /* nullptr */ == ci)
+      if (tok.is_character()) {
+	charinfo *ci = tok.get_char(true /* required */,
+				    true /* lookup only */);
+	if (0 /* nullptr */ == ci) {
+	  if (!tok.is_indexed_character())
+	    warning(WARN_CHAR, "%1 is not defined", tok.description());
+	  else
+	    warning(WARN_CHAR, "character with index %1 in the current"
+		    " font is not defined", tok.character_index());
+	}
+	else {
+	  macro *m = ci->set_macro(0 /* nullptr */);
+	  if (m)
+	    delete m;
+	}
+      }
+      else {
+	error("cannot remove character; %1 is not a character",
+	      tok.description());
 	break;
-      macro *m = ci->set_macro(0 /* nullptr */);
-      if (m)
-	delete m;
+      }
     }
     tok.next();
   }
@@ -8148,16 +8177,17 @@ void define_class()
   skip_line();
 }
 
-static charinfo *get_charinfo_by_index(int n); // forward declaration
+// forward declaration
+static charinfo *get_charinfo_by_index(int n, bool lookup_only = false);
 
-charinfo *token::get_char(bool required)
+charinfo *token::get_char(bool required, bool lookup_only)
 {
   if (type == TOKEN_CHAR)
     return charset_table[c];
   if (type == TOKEN_SPECIAL_CHAR)
-    return get_charinfo(nm);
+    return get_charinfo(nm, lookup_only);
   if (type == TOKEN_INDEXED_CHAR)
-    return get_charinfo_by_index(val);
+    return get_charinfo_by_index(val, lookup_only);
   if (type == TOKEN_ESCAPE) {
     if (escape_char != 0)
       return charset_table[escape_char];
@@ -9986,14 +10016,18 @@ void debug_with_file_and_line(const char *filename,
 
 dictionary charinfo_dictionary(501);
 
-charinfo *get_charinfo(symbol nm)
+charinfo *get_charinfo(symbol nm, bool lookup_only)
 {
   void *p = charinfo_dictionary.lookup(nm);
   if (p != 0 /* nullptr */)
     return static_cast<charinfo *>(p);
-  charinfo *cp = new charinfo(nm);
-  (void) charinfo_dictionary.lookup(nm, cp);
-  return cp;
+  if (lookup_only)
+    return static_cast<charinfo *>(0 /* nullptr */);
+  else {
+    charinfo *cp = new charinfo(nm);
+    (void) charinfo_dictionary.lookup(nm, cp);
+    return cp;
+  }
 }
 
 int charinfo::next_index = 0;
@@ -10211,13 +10245,13 @@ symbol UNNAMED_SYMBOL("---");
 
 dictionary indexed_charinfo_dictionary(11);
 
-static charinfo *get_charinfo_by_index(int n)
+static charinfo *get_charinfo_by_index(int n, bool lookup_only)
 {
   static charinfo *index_table[256];
 
   if (n >= 0 && n < 256) {
     charinfo *ci = index_table[n];
-    if (0 /*nullptr */ == ci) {
+    if ((0 /*nullptr */ == ci) && !lookup_only) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
       index_table[n] = ci;
@@ -10227,7 +10261,7 @@ static charinfo *get_charinfo_by_index(int n)
   else {
     symbol ns(i_to_a(n));
     charinfo *ci = (charinfo *)indexed_charinfo_dictionary.lookup(ns);
-    if (0 /*nullptr */ == ci) {
+    if ((0 /*nullptr */ == ci) && !lookup_only) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
       (void) indexed_charinfo_dictionary.lookup(ns, ci);
