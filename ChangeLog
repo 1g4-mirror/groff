@@ -1,3 +1,9 @@
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::next): Recast warning
+	diagnostic issued when encountering an invalid character index
+	{in an `\N'xxx'` escape sequence}.
+
 2025-02-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (get_charinfo): Use C++ `static_cast`
