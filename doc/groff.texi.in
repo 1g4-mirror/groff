@@ -11463,8 +11463,10 @@ on the right doesn't get examined.
 @cindex @code{\e}, and glyph definitions
 @cindex @code{hcode} request, and glyph definitions
 Define an ordinary or special character@tie{}@var{c} as @var{contents}.
-If @var{contents} is absent, an existing character definition made with
-the same request is deleted.
+If
+@var{contents}
+is absent,
+the character is defined with empty contents.
 
 A leading neutral double quote in the second argument is stripped from
 it, allowing embedded leading spaces in @var{contents}, which is read to
@@ -11546,8 +11548,13 @@ request in @ref{Strings}.
 @cindex fallback glyph, removing definition (@code{rchar}, @code{rfschar})
 Remove definition of each ordinary or special character @var{c},
 undoing the effect of a @code{char}, @code{fchar}, or @code{schar}
-request.  Those supplied by font description files cannot be removed.
-Spaces need not separate @var{c}@tie{}arguments.
+request.
+The character definition removed
+(if any)
+is the first encountered in the glyph resolution process documented
+above.
+Those supplied by font description files cannot be removed.
+Spaces need not separate the arguments.
 
 The request @code{rfschar} removes glyph definitions defined with
 @code{fschar} for font@tie{}@var{f}.

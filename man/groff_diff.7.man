@@ -2060,7 +2060,7 @@ as
 If
 .I contents
 is absent,
-an existing character definition made with the same request is deleted.
+the character is defined with empty contents.
 .
 .
 .IP
@@ -2144,9 +2144,9 @@ requests take precedence if
 also applies
 .RI to\~ c .
 .
-A character definition can be removed with the
+The
 .B rchar
-request.
+request removes character definitions.
 .
 .
 .TP
@@ -3512,13 +3512,17 @@ or
 .B schar
 request.
 .
+The character definition removed
+(if any)
+is the first encountered in the glyph resolution process;
+see section \[lq]Using Symbols\[rq] of
+.IR "Groff: The GNU Implementation of troff" .
+.
 Glyphs,
 which are defined by font description files,
 cannot be removed.
 .
-Spaces and tabs may separate
-.I c
-arguments.
+Spaces need not separate the arguments.
 .
 .
 .TP

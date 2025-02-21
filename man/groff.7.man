@@ -2855,8 +2855,9 @@ by moving its location to
 .
 .TPx
 .REQ .char c
-Remove definition of ordinary or special
-.RI character\~ c.
+Define ordinary or special character
+.I c
+as empty.
 .
 .TPx
 .REQ .char "c contents"
@@ -3275,8 +3276,9 @@ and pad glyph to\~\c
 .
 .TPx
 .REQ .fchar c
-Remove definition of fallback
-.RI character\~ c.
+Define fallback
+.RI character\~ c
+as empty.
 .
 .TPx
 .REQ .fchar "c contents"
@@ -3335,10 +3337,11 @@ at non-negative position
 .
 .TPx
 .REQ .fschar "f c"
-Remove definition of fallback
+Define fallback
 .RI character\~ c
 specific to
-.RI font\~ f.
+.RI font\~ f
+as empty.
 .
 .TPx
 .REQ .fschar "f c contents"
@@ -4256,6 +4259,18 @@ or
 .request .schar
 request.
 .
+The character definition removed
+(if any)
+is the first encountered in the glyph resolution process;
+see section \[lq]Using Symbols\[rq] of
+.IR "Groff: The GNU Implementation of troff" .
+.
+Glyphs,
+which are defined by font description files,
+cannot be removed.
+.
+Spaces need not separate the arguments.
+.
 .TPx
 .REQ .rd
 Read insertion from standard input stream,
@@ -4367,8 +4382,9 @@ unit\~\c
 .
 .TPx
 .REQ .schar c
-Remove definition of global fallback
-.RI character\~ c.
+Define global fallback character
+.I c
+as empty.
 .
 .TPx
 .REQ .schar "c contents"
