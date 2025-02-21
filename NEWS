@@ -36,6 +36,26 @@ Noteworthy incompatible changes
   to tell the formatter to load the "e.tmac" file rather than "e.tmac ".
   See the items below for further details.
 
+* If your roff(7) documents specify a file name that starts with a
+  neutral double quote (") to any of the requests `cf`, `hpf`,
+  `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
+  `trf`, you are likely to get a diagnostic message, or the formatter
+  will open a file of the same name except for the leading neutral
+  double quote.  That is because these requests are now able to process
+  file names containing leading space characters.  (This change also
+  makes the request syntax consistent with that of `ds`, `as`, and
+  others.)  The solution is to add an additional neutral double quote to
+  the start of the file name argument.  For example, we would change:
+
+    .so "5150".lrc
+
+  to:
+
+    .so ""5150".lrc
+
+  to tell the formatter to read a file named '"5150".lrc', where the
+  neutral single quotes bracket the file name.
+
 troff
 -----
 
