@@ -8148,7 +8148,7 @@ void define_class()
   skip_line();
 }
 
-static charinfo *get_charinfo_by_number(int n); // forward declaration
+static charinfo *get_charinfo_by_index(int n); // forward declaration
 
 charinfo *token::get_char(bool required)
 {
@@ -8157,7 +8157,7 @@ charinfo *token::get_char(bool required)
   if (type == TOKEN_SPECIAL_CHAR)
     return get_charinfo(nm);
   if (type == TOKEN_INDEXED_CHAR)
-    return get_charinfo_by_number(val);
+    return get_charinfo_by_index(val);
   if (type == TOKEN_ESCAPE) {
     if (escape_char != 0)
       return charset_table[escape_char];
@@ -8235,7 +8235,7 @@ bool token::add_to_zero_width_node_list(node **pp)
     nd = 0 /* nullptr */;
     break;
   case TOKEN_INDEXED_CHAR:
-    *pp = (*pp)->add_char(get_charinfo_by_number(val), curenv, &w, &s);
+    *pp = (*pp)->add_char(get_charinfo_by_index(val), curenv, &w, &s);
     break;
   case TOKEN_RIGHT_BRACE:
     break;
@@ -8328,7 +8328,7 @@ void token::process()
     nd = 0;
     break;
   case TOKEN_INDEXED_CHAR:
-    curenv->add_char(get_charinfo_by_number(val));
+    curenv->add_char(get_charinfo_by_index(val));
     break;
   case TOKEN_REQUEST:
     // handled in process_input_stack()
@@ -10206,31 +10206,31 @@ void charinfo::dump()
 
 symbol UNNAMED_SYMBOL("---");
 
-// For numbered characters not between 0 and 255, we make a symbol out
+// For indexed characters not between 0 and 255, we make a symbol out
 // of the number and store them in this dictionary.
 
-dictionary numbered_charinfo_dictionary(11);
+dictionary indexed_charinfo_dictionary(11);
 
-static charinfo *get_charinfo_by_number(int n)
+static charinfo *get_charinfo_by_index(int n)
 {
-  static charinfo *number_table[256];
+  static charinfo *index_table[256];
 
   if (n >= 0 && n < 256) {
-    charinfo *ci = number_table[n];
+    charinfo *ci = index_table[n];
     if (0 /*nullptr */ == ci) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
-      number_table[n] = ci;
+      index_table[n] = ci;
     }
     return ci;
   }
   else {
     symbol ns(i_to_a(n));
-    charinfo *ci = (charinfo *)numbered_charinfo_dictionary.lookup(ns);
+    charinfo *ci = (charinfo *)indexed_charinfo_dictionary.lookup(ns);
     if (0 /*nullptr */ == ci) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
-      (void) numbered_charinfo_dictionary.lookup(ns, ci);
+      (void) indexed_charinfo_dictionary.lookup(ns, ci);
     }
     return ci;
   }
@@ -10256,7 +10256,7 @@ glyph *name_to_glyph(const char *nm)
 
 glyph *number_to_glyph(int n)
 {
-  return get_charinfo_by_number(n)->as_glyph();
+  return get_charinfo_by_index(n)->as_glyph();
 }
 
 const char *glyph_to_name(glyph *g)

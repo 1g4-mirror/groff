@@ -1,5 +1,22 @@
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (get_charinfo_by_number): Rename
+	function in declaration and definition from this...
+	(get_charinfo_by_index): ...to this.
+	(token::get_char)
+	(token::add_to_zero_width_node_list, token::process)
+	(name_to_glyph): Update call sites.
+
+	* src/roff/troff/input.cpp: Rename global object of `dictionary`
+	type from `numbered_charinfo_dictionary` to
+	`indexed_charinfo_dictionary`.
+
+	* src/roff/troff/input.cpp (get_charinfo_by_index): Rename
+	static local array of `charinfo` type from `number_table` to
+	`index_table`.
+
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Unpublish function that doesn't need to be visible
 	outside its translation unit.
 
