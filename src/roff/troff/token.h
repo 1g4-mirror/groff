@@ -16,6 +16,11 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <assert.h>
 
 class charinfo;
 struct node;
@@ -74,7 +79,9 @@ public:
   bool is_unstretchable_space();
   bool is_horizontal_space();
   bool is_white_space();
+  bool is_character();
   bool is_special_character();
+  bool is_indexed_character();
   bool is_newline();
   bool is_tab();
   bool is_leader();
@@ -91,6 +98,7 @@ public:
   bool operator==(const token &); // for delimiters & conditional exprs
   bool operator!=(const token &); // ditto
   unsigned char ch();
+  int character_index();
   charinfo *get_char(bool /* required */ = false);
   bool add_to_zero_width_node_list(node **);
   void make_space();
@@ -190,6 +198,23 @@ inline bool token::is_page_ejector()
 inline unsigned char token::ch()
 {
   return type == TOKEN_CHAR ? c : '\0';
+}
+
+inline bool token::is_character()
+{
+  return (TOKEN_CHAR == type) || (TOKEN_SPECIAL_CHAR == type)
+	  || (TOKEN_INDEXED_CHAR == type);
+}
+
+inline bool token::is_indexed_character()
+{
+  return TOKEN_INDEXED_CHAR == type;
+}
+
+inline int token::character_index()
+{
+  assert(TOKEN_INDEXED_CHAR == type);
+  return val;
 }
 
 inline bool token::is_eof()

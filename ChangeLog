@@ -1,5 +1,22 @@
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add member functions to `token` class to assist with
+	runtime character analysis.
+
+	* src/roff/troff/token.h (class charinfo): Declare new public
+	member functions `is_character()`, `is_indexed_character()`, and
+	`character_index()`.
+	(token::is_character): New function returns whether the object
+	has `type` of `TOKEN_CHAR`, `TOKEN_SPECIAL_CHAR`, or
+	`TOKEN_INDEXED_CHAR`.
+	(token::is_indexed_character): New function returns whether the
+	object has `type` of `TOKEN_INDEXED_CHAR`.
+	(token::character_index): New function returns value of `val`
+	private member variable.  Throws assertion if token's `type` is
+	not `TOKEN_INDEXED_CHAR`.
+
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Validate character indices in font description files
 	more rigorously.
 
