@@ -4715,7 +4715,7 @@ static void remove_character()
   while (!tok.is_newline() && !tok.is_eof()) {
     if (!tok.is_space() && !tok.is_tab()) {
       charinfo *ci = tok.get_char(true /* required */);
-      if (!ci)
+      if (0 /* nullptr */ == ci)
 	break;
       macro *m = ci->set_macro(0 /* nullptr */);
       if (m)
@@ -8183,7 +8183,7 @@ charinfo *get_optional_char()
   while (tok.is_space())
     tok.next();
   charinfo *ci = tok.get_char();
-  if (!ci)
+  if (0 /* nullptr */ == ci)
     check_missing_character();
   else
     tok.next();
@@ -10215,7 +10215,7 @@ charinfo *get_charinfo_by_number(int n)
 
   if (n >= 0 && n < 256) {
     charinfo *ci = number_table[n];
-    if (!ci) {
+    if (0 /*nullptr */ == ci) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
       number_table[n] = ci;
@@ -10225,7 +10225,7 @@ charinfo *get_charinfo_by_number(int n)
   else {
     symbol ns(i_to_a(n));
     charinfo *ci = (charinfo *)numbered_charinfo_dictionary.lookup(ns);
-    if (!ci) {
+    if (0 /*nullptr */ == ci) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
       (void) numbered_charinfo_dictionary.lookup(ns, ci);

@@ -1,5 +1,13 @@
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (remove_character, get_optional_char)
+	(get_charinfo_by_number): Fix code style nits.  Reorder equality
+	comparison to avoid inadvertent lvalue assignment.  Explicitly
+	compare variable of pointer type to null pointer literal instead
+	of letting it pun down to a Boolean.
+
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next): Recast warning
 	diagnostic issued when encountering an invalid character index
 	{in an `\N'xxx'` escape sequence}.
