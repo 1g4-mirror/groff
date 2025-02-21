@@ -1,5 +1,21 @@
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Validate character indices in font description files
+	more rigorously.
+
+	* src/libs/libgroff/font.cpp (font::load): Do it.  Refer to an
+	index as an "index", not a "code", in diagnostic messages.
+	Check for failure of strtol(3).  Reject indices that are out of
+	`int` range.  Thus convinced that a narrowing conversion will be
+	value-preserving, use C++ `static_cast` operator instead of
+	C-style type cast.
+
+	* doc/groff.texi.in (Font Description File Format):
+	* man/groff_font.5.man (Font description file format): Rename
+	"code" field to "index" and revise its description.
+
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (get_charinfo_by_number): Rename
 	function in declaration and definition from this...
 	(get_charinfo_by_index): ...to this.

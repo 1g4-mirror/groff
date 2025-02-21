@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <assert.h>
 #include <ctype.h>
+#include <errno.h>
+#include <limits.h> // INT_MAX, LONG_MAX
 #include <math.h>
 #include <stdlib.h>
 #include <wchar.h>
@@ -1167,15 +1169,34 @@ bool font::load(bool load_header_only)
 	  metric.type = type;
 	  p = strtok(0 /* nullptr */, WS);
 	  if (0 /* nullptr */ == p) {
-	    t.error("missing code for '%1'", nm);
+	    t.error("missing index for '%1'", nm);
 	    return false;
 	  }
 	  char *ptr;
-	  metric.code = (int)strtol(p, &ptr, 0);
+	  long index;
+	  errno = 0;
+	  index = strtol(p, &ptr, 0);
 	  if (ptr == p) {
-	    t.error("invalid code '%1' for character '%2'", p, nm);
+	    t.error("invalid index '%1' for character '%2'", p, nm);
 	    return false;
 	  }
+	  if (INT_MAX != LONG_MAX) {
+	    if ((index > INT_MAX) || (index < INT_MIN)) {
+	      // This is a fib since INT_MIN's absolute value is one
+	      // greater than INT_MAX's (on two's complement machines),
+	      // but we can pass 3 arguments at most to the error()
+	      // function.  Also, 31 bits ought to be enough for anyone.
+	      t.error("index %1 for character '%2' is out of range;"
+		      " must be within +/-%3", p, nm, INT_MAX);
+	      return false;
+	    }
+	  }
+	  if (errno != 0) {
+	    t.error("cannot convert index '%1' to integer for character"
+		    " '%2': %3", p, nm, strerror(errno));
+	    return false;
+	  }
+	  metric.code = static_cast<int>(index);
 	  p = strtok(0 /* nullptr */, WS);
 	  if ((0 /* nullptr */ == p) || (strcmp(p, "--") == 0)) {
 	    metric.special_device_coding = 0;

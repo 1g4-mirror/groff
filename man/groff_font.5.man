@@ -9,7 +9,7 @@ device and font description files
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2021 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" This file is part of groff (GNU roff), which is a free software
 .\" project.
@@ -725,7 +725,7 @@ spaces or tabs and organized as follows.
 .
 .
 .IP
-.I name metrics type code
+.I name metrics type index
 .RI [ entity-name ]
 .RB [ \-\-
 .IR comment ]
@@ -928,21 +928,26 @@ parentheses in some fonts.
 .
 .P
 The
-.I code
-field gives a numeric identifier that the postprocessor uses to render
-the glyph.
+.I index
+field is an integer that uniquely identifies a glyph within the font.
 .
 The glyph can be specified to
 .I troff \" generic
-using this code by means of the
+using this index by means of the
 .B \[rs]N
 escape sequence.
 .
-The code can be any integer
+The index can be any integer
 (that is,
 any integer parsable by the C standard library's
 .MR strtol 3
 function).
+.
+An
+.I index
+is limited to the range of the C language
+.I int
+type on the system.
 .
 .
 .P

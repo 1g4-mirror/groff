@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle January 2025
+@subtitle February 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -19660,7 +19660,7 @@ descriptions, one per line.  Each such glyph description comprises a set
 of fields separated by spaces or tabs and organized as follows.
 
 @quotation
-@var{name} @var{metrics} @var{type} @var{code} [@var{entity-name}]
+@var{name} @var{metrics} @var{type} @var{index} [@var{entity-name}]
 [@code{--} @var{comment}]
 @end quotation
 
@@ -19774,10 +19774,15 @@ means the glyph is both an ascender and a descender---this is true of
 parentheses in some fonts.
 @end table
 
-The @var{code} field gives a numeric identifier that the postprocessor
-uses to render the glyph.  The glyph can be specified to @code{troff}
-using this code by means of the @code{\N} escape sequence.  @var{code}
-can be any integer.@footnote{that is, any integer parsable by the C
+The
+@var{index}
+field is an integer that uniquely identifies a glyph within the font.
+The glyph can be specified to
+@code{troff} @c generic
+using this index by means of the
+@code{\N}
+escape sequence.
+The index can be any integer.@footnote{that is, any integer parsable by the C
 standard library's @cite{strtol@r{(3)}} function}
 
 The @var{entity-name} field defines an identifier for the glyph that the
