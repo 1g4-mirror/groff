@@ -1,5 +1,15 @@
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Unpublish function that doesn't need to be visible
+	outside its translation unit.
+
+	* src/roff/troff/charinfo.h (get_charinfo_by_number): Move
+	declaration from here...
+	* src/roff/troff/input.cpp (get_charinfo_by_number): ...to here.
+	Declare and define it as `static`.
+
+2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor; rename enumerator in `token` `enum`
 	type from `TOKEN_NUMBERED_CHAR` to `TOKEN_INDEXED_CHAR`.
 

@@ -8148,6 +8148,8 @@ void define_class()
   skip_line();
 }
 
+static charinfo *get_charinfo_by_number(int n); // forward declaration
+
 charinfo *token::get_char(bool required)
 {
   if (type == TOKEN_CHAR)
@@ -10209,7 +10211,7 @@ symbol UNNAMED_SYMBOL("---");
 
 dictionary numbered_charinfo_dictionary(11);
 
-charinfo *get_charinfo_by_number(int n)
+static charinfo *get_charinfo_by_number(int n)
 {
   static charinfo *number_table[256];
 

@@ -116,7 +116,6 @@ public:
 
 charinfo *get_charinfo(symbol);
 extern charinfo *charset_table[];
-charinfo *get_charinfo_by_number(int);
 
 inline bool charinfo::overlaps_horizontally()
 {
