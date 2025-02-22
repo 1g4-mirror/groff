@@ -17703,9 +17703,10 @@ circumstances.
 @table @samp
 @item char
 @itemx 1
-No mounted font defines a glyph for the requested character, or input
-could not be encoded for device-independent output.  This category is
-enabled by default.
+No user-defined character of the requested name or index exists
+and no mounted font defines a glyph for it,
+or input could not be encoded for device-independent output.
+This category is enabled by default.
 
 @item number
 @itemx 2
