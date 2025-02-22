@@ -4659,7 +4659,7 @@ and
 .BR MT ,
 and the
 .B Aumt
-register
+string
 (Boolean-valued;
 .BR 1 ).
 .
