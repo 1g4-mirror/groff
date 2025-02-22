@@ -23,9 +23,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
-#include <limits.h> // INT_MAX, LONG_MAX
+#include <limits.h> // INT_MAX, INT_MIN, LONG_MAX
 #include <math.h>
 #include <stdlib.h>
+#include <string.h> // strerror()
 #include <wchar.h>
 
 #include "lib.h"

@@ -1,3 +1,8 @@
+2025-02-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/font.cpp: Include "string.h" standard header
+	file, since we (now) use strerror(3).
+
 2025-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Make it possible to retrieve information about a *roff
