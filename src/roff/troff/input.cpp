@@ -397,7 +397,7 @@ public:
 class file_iterator : public input_iterator {
   FILE *fp;
   int lineno;
-  const char *filename;
+  char *filename;
   bool was_popened;
   bool seen_newline;
   bool seen_escape;
@@ -418,9 +418,10 @@ public:
 };
 
 file_iterator::file_iterator(FILE *f, const char *fn, bool popened)
-: fp(f), lineno(1), filename(fn), was_popened(popened),
+: fp(f), lineno(1), was_popened(popened),
   seen_newline(false), seen_escape(false)
 {
+  filename = strdup(const_cast<char *>(fn));
   if ((font::use_charnames_in_special) && (fn != 0 /* nullptr */)) {
     if (!the_output)
       init_output();
@@ -446,9 +447,8 @@ void file_iterator::close()
 bool file_iterator::next_file(FILE *f, const char *s)
 {
   close();
-  filename = s;
   fp = f;
-  lineno = 1;
+  set_location(s, 1);
   seen_newline = false;
   seen_escape = false;
   was_popened = false;
@@ -528,8 +528,13 @@ void file_iterator::backtrace()
 
 bool file_iterator::set_location(const char *f, int ln)
 {
-  if (f != 0 /* nullptr */)
-    filename = f;
+  if (f != 0 /* nullptr */) {
+    if (filename != 0 /* nullptr */) {
+      free(filename);
+      filename = 0 /* nullptr */;
+    }
+    filename = strdup(const_cast<char *>(f));
+  }
   lineno = ln;
   return true;
 }
@@ -8556,7 +8561,7 @@ void abort_request()
 // The caller must subsequently call `tok.next()` to advance the input
 // stream pointer.
 //
-// The caller has responsibility for freeing the returned array.
+// The caller has responsibility for `delete`ing the returned array.
 char *read_string()
 {
   int len = 256;
@@ -9850,7 +9855,7 @@ static void do_error(error_type type,
     input_stack::backtrace();
   if (!get_file_line(&filename, &lineno))
     filename = 0 /* nullptr */;
-  if (filename) {
+  if (filename != 0 /* nullptr */) {
     if (program_name)
       errprint("%1:", program_name);
     errprint("%1:%2: ", filename, lineno);

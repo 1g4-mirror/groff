@@ -1,3 +1,22 @@
+2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (class file_iterator): Make class
+	manage its own memory for storing file names, instead of reusing
+	externally managed pointers (which sometimes refer to statically
+	allocated storage, as with "-" representing the standard input
+	stream).  De-`const` `filename` member variable.
+	(file_iterator::file_iterator): Constructor now uses strdup(3)
+	to copy the supplied file name instead of just a pointer to it
+	via the initializer list.  (In C++, tastes differ whether a
+	constructor should call [non-virtual] member functions.  In this
+	case, I don't.)
+	(file_iterator::next_file): Call member function
+	`set_location()` instead of manipulating member variables, to
+	ensure reliable memory management.
+	(file_iterator::set_location): Use strdup(3) to allocate storage
+	for the file name and use the returned pointer.  If the file
+	name pointer is not null, free(3) it first.
+
 2025-02-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/font.cpp: Include "string.h" standard header
