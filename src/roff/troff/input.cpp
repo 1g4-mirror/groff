@@ -4696,7 +4696,7 @@ static void report_character_request()
   }
   charinfo *ci;
   do {
-    ci = tok.get_char(false, true /* lookup only */);
+    ci = tok.get_char(false /* required */, true /* lookup only */);
     if (!tok.is_character()) {
       error("character report request expects characters as arguments;"
 	    " got %1", tok.description());
