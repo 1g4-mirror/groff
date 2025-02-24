@@ -1,3 +1,13 @@
+2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac ([initialization])
+	* tmac/doc.tmac ([initialization]): Remap the text minus sign
+	character `\-` to `\N'45'` (U+002D) on the "html" device.
+	Annotate the limited scope of this remapping more thoroughly.
+
+	Fixes <https://savannah.gnu.org/bugs/?66836>.  Thanks to Benno
+	Schulenberg for the report.
+
 2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[eqn,preconv,refer,tbl]: Trivially refactor.

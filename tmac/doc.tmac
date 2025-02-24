@@ -7216,9 +7216,17 @@ should this have been '.Em ...'?
 .blm doc-empty-line
 .
 .
-.\" For UTF-8, map the minus sign to the hyphen-minus to facilitate
-.\" copy and paste of code examples, file names, and URLs embedding it.
+.\" On output devices that typically have separate hyphen and minus sign
+.\" glyphs _and_ a glyph for ASCII/ISO Latin's hybrid "hyphen-minus",
+.\" remap the (text) minus sign to the hyphen-minus to facilitate copy
+.\" and paste of code examples, file names, and URLs embedding it.  We
+.\" do this for man pages but not for general typesetting.  See
+.\" groff_char(7) for further background.
+.\"
+.\" PDF's "CMap" feature solves this problem so we don't have to.
 .if '\*[.T]'utf8' \
+.  char \- \N'45'
+.if '\*[.T]'html' \
 .  char \- \N'45'
 .
 .
