@@ -931,6 +931,7 @@ void next_file()
     else
       input_stack::next_file(fp, filename);
   }
+  delete[] filename;
   tok.next();
 }
 
@@ -6787,6 +6788,7 @@ void do_source(bool quietly)
     // expected problem.
     if (!(quietly && (ENOENT == errno)))
       error("cannot open '%1': %2", filename, strerror(errno));
+  delete[] filename;
   tok.next();
 }
 
@@ -6827,7 +6829,7 @@ void pipe_source_request() // .pso
     return;
   }
   char *pcmd = read_string();
-  // This shouldn't happen thanks to `has_arg()` above.
+  // `has_arg()` should have ensured that this pointer is non-null.
   assert(pcmd != 0 /* nullptr */);
   if (0 /* nullptr */ == pcmd)
     error("cannot apply piped command source request to empty"
@@ -7604,6 +7606,7 @@ static void open_file(bool appending)
 	stream_dictionary.define(stream, (object *)grost);
       }
     }
+    delete[] filename;
     tok.next();
   }
 }
@@ -8614,7 +8617,7 @@ void pipe_output()
     return;
   }
   char *pc = read_string();
-  // This shouldn't happen thanks to `has_arg()` above.
+  // `has_arg()` should have ensured that this pointer is non-null.
   assert(pc != 0 /* nullptr */);
   if (0 /* nullptr */ == pc)
     error("cannot apply pipe request to empty command");
@@ -8633,6 +8636,7 @@ void pipe_output()
   }
   else
     pipe_command = pc;
+  delete[] pc;
   tok.next();
 }
 
@@ -8653,14 +8657,13 @@ void system_request()
     return;
   }
   char *command = read_string();
-  // This shouldn't happen thanks to `has_arg()` above.
+  // `has_arg()` should have ensured that this pointer is non-null.
   assert(command != 0 /* nullptr */);
   if (0 /* nullptr */ == command)
     error("cannot apply system request to empty command");
-  else {
+  else
     system_status = system(command);
-    delete[] command;
-  }
+  delete[] command;
   tok.next();
 }
 
@@ -8687,6 +8690,7 @@ void copy_file()
     curenv->do_break();
   if (filename != 0 /* nullptr */)
     curdiv->copy_file(filename);
+  delete[] filename;
   tok.next();
 }
 
@@ -8751,6 +8755,7 @@ void transparent_file()
       fclose(fp);
     }
   }
+  delete[] filename;
   tok.next();
 }
 
@@ -8902,6 +8907,7 @@ void do_macro_source(bool quietly)
     if (!quietly && (ENOENT == errno))
       warning(WARN_FILE, "cannot open macro file '%1': %2",
 	      macro_filename, strerror(errno));
+  delete[] macro_filename;
   tok.next();
 }
 

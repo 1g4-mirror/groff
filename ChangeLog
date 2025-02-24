@@ -1,5 +1,13 @@
 2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: More reliably release heap memory
+	allocated by `read_string()`.
+	(next_file, do_source, pipe_source_request, pipe_output)
+	(system_request, copy_file, transparent_file, do_macro_source):
+	Do it.
+
+2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (class file_iterator): Make class
 	manage its own memory for storing file names, instead of reusing
 	externally managed pointers (which sometimes refer to statically
