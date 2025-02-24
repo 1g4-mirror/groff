@@ -5947,6 +5947,28 @@ after a word-initial one.
 .
 .
 .P
+GNU
+.I troff \" GNU
+interprets request arguments representing file names
+in the same way it does the
+.I contents
+argument to the
+.B ds
+and
+.RB \[lq] as \[rq]
+requests:
+by stripping any leading neutral double quote
+.RB \[lq] \[dq] \[rq]
+and reading to the end of the input line in copy mode.
+This difference permits the formatter to handle files
+with spaces in their names,
+but requires more care with trailing comments,
+and doubling of an initial neutral double quote
+.RB \[lq] \[dq] \[rq]
+if the file name contains one.
+.
+.
+.P
 The existence of the
 .B .T
 string is a common feature of post-CSTR\~#97

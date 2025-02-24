@@ -18221,6 +18221,29 @@ one.@footnote{Thus,
 @endExample
 produces different results with each of the three formatters.}
 
+@cindex file name arguments to requests, in other implementations
+@cindex arguments, file name, to requests, in other implementations
+@cindex requests handling file name arguments, in other implementations
+GNU
+@command{troff}
+interprets request arguments representing file names
+in the same way it does the
+@var{contents}
+argument to the
+@code{ds}
+and
+@code{as}
+requests:@:
+by stripping any leading neutral double quote
+@samp{"}
+and reading to the end of the input line in copy mode.
+This difference permits the formatter to handle files
+with spaces in their names,
+but requires more care with trailing comments,
+and doubling of an initial neutral double quote
+@samp{"}
+if the file name contains one.
+
 @cindex output device name string (@code{.T}), in other implementations
 GNU @code{troff} predefines a string @code{.T} containing the argument
 given to the @option{-T} command-line option, namely the current output
