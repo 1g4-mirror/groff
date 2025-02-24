@@ -2274,6 +2274,7 @@ ordinary or special.
 .TPx
 .I command
 is a sequence of ordinary characters and/or spaces
+.\" XXX: or tabs, leaders, backspace, and delete characters
 to be passed to the system as a command
 (potentially with arguments).
 .\" ...limiting the file names you can express; see Savannah #64071.
@@ -2286,9 +2287,9 @@ allowing embedded leading spaces.
 is a sequence of ordinary characters,
 spaces,
 tabs,
+leaders,
 or escape sequences
-.\" ...or, technically, backspace and delete characters, but let's not
-.\" dwell on that.
+.\" XXX: or backspace and delete characters
 (including special characters)
 populating a string or character definition.
 .
@@ -2303,6 +2304,7 @@ is an environment identifier.
 .TPx
 .I file
 is a sequence of ordinary characters and/or spaces
+.\" XXX: or tabs, leaders, backspace, and delete characters
 naming a file on the system.
 .\" ...limiting the file names you can express; see Savannah #65108.
 .
