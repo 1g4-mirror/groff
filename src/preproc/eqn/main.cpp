@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -105,7 +105,7 @@ void do_file(FILE *fp, const char *filename)
   normalize_for_lf(fn);
   current_filename = fn.contents();
   if (output_format == troff)
-    printf(".lf 1 %s\n", current_filename);
+    printf(".lf 1 \"%s\n", current_filename);
   current_lineno = 1;
   while (read_line(fp, &linebuf)) {
     if (linebuf.length() >= 4

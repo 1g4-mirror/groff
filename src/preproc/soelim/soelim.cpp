@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -130,8 +130,9 @@ void set_location()
 {
   if (!want_raw_output) {
     if (!want_tex_output)
-      printf(".lf %d %s\n", current_lineno, current_filename);
+      printf(".lf %d \"%s\n", current_lineno, current_filename);
     else
+      // XXX: Should we quote the file name?  What's TeX-conventional?
       printf("%% file %s, line %d\n", current_filename, current_lineno);
   }
 }

@@ -1724,7 +1724,7 @@ int main(int argc, char **argv)
 	  fn += '\0';
 	  normalize_for_lf(fn);
 	  current_filename = fn.contents();
-	  printf(".lf 1 %s\n", current_filename);
+	  printf(".lf 1 \"%s\n", current_filename);
 	  process_input_file(fp);
 	}
       }

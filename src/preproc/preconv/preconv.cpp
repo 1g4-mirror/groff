@@ -1197,7 +1197,7 @@ do_file(const char *filename)
     string fn(filename);
     fn += '\0';
     normalize_for_lf(fn);
-    printf(".lf 1 %s\n", fn.contents());
+    printf(".lf 1 \"%s\n", fn.contents());
   }
   int success = 1;
   // Call converter (converters write to stdout).

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -600,7 +600,7 @@ void troff_output::set_location(const char *s, int n)
     }
   }
   if (update_file_name)
-    printf(".lf %d %s\n", n, s);
+    printf(".lf %d \"%s\n", n, s);
   else
     printf(".lf %d\n", n);
 }

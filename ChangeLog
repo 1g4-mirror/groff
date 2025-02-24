@@ -1,5 +1,20 @@
 2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn,pic,preconv,refer,soelim,tbl]: Use `lf` requests more
+	carefully.
+
+	* src/preproc/eqn/main.cpp (do_file):
+	* src/preproc/pic/troff.cpp (troff_output::set_location):
+	* src/preproc/preconv/preconv.cpp (do_file):
+	* src/preproc/refer/refer.cpp (do_file, output_pending_line):
+	* src/preproc/soelim/soelim.cpp (set_location):
+	* src/preproc/tbl/main.cpp (main):
+	* src/preproc/tbl/table.cpp (set_troff_location): Output file
+	name with leading double quote in `lf` request, in case the name
+	starts with a space or double quote.
+
+2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Treat `lf`'s second argument, if present, like string
 	contents.
 
