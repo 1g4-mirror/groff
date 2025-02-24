@@ -1706,9 +1706,10 @@ int main(int argc, char **argv)
   if (argc > optind) {
     for (int i = optind; i < argc; i++)
       if (argv[i][0] == '-' && argv[i][1] == '\0') {
-	current_filename = "-";
 	current_lineno = 1;
-	printf(".lf 1 -\n");
+	current_filename = "-";
+	(void) printf(".lf %d \"\%s\n", current_lineno,
+		      current_filename);
 	process_input_file(stdin);
       }
       else {
@@ -1719,20 +1720,21 @@ int main(int argc, char **argv)
 	  fatal("cannot open '%1': %2", argv[i], strerror(errno));
 	}
 	else {
-	  current_lineno = 1;
 	  string fn(argv[i]);
 	  fn += '\0';
 	  normalize_for_lf(fn);
+	  current_lineno = 1;
 	  current_filename = fn.contents();
-	  printf(".lf 1 \"%s\n", current_filename);
+	  (void) printf(".lf %d \"\%s\n", current_lineno,
+			current_filename);
 	  process_input_file(fp);
 	}
       }
   }
   else {
-    current_filename = "-";
     current_lineno = 1;
-    printf(".lf 1 -\n");
+    current_filename = "-";
+    (void) printf(".lf %d \"\%s\n", current_lineno, current_filename);
     process_input_file(stdin);
   }
   if (ferror(stdout))

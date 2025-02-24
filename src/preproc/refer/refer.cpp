@@ -473,9 +473,10 @@ static void do_file(const char *filename)
   string fn(filename);
   fn += '\0';
   normalize_for_lf(fn);
-  current_filename = fn.contents();
-  fprintf(outfp, ".lf 1 \"%s\n", current_filename);
   current_lineno = 1;
+  current_filename = fn.contents();
+  (void) fprintf(outfp, ".lf %d \"%s\n", current_lineno,
+		 current_filename);
   string line;
   for (;;) {
     line.clear();

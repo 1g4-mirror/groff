@@ -1,5 +1,18 @@
 2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn,preconv,refer,tbl]: Trivially refactor.
+
+	* src/preproc/eqn/main.cpp (do_file):
+	* src/preproc/preconv/preconv.cpp (do_file):
+	* src/preproc/refer/refer.cpp (do_file):
+	* src/preproc/tbl/main.cpp (main): Use a consistent pattern when
+	writing `lf` requests to output; employ an {f,}printf(3) call
+	parameterized in the line number and file name, explicitly
+	discard its return value, and assign to the globals
+	`current_lineno` and `current_filename` beforehand.
+
+2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn,pic,preconv,refer,soelim,tbl]: Use `lf` requests more
 	carefully.
 

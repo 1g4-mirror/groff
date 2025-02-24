@@ -103,10 +103,10 @@ void do_file(FILE *fp, const char *filename)
   string fn(filename);
   fn += '\0';
   normalize_for_lf(fn);
+  current_lineno = 1;
   current_filename = fn.contents();
   if (output_format == troff)
-    printf(".lf 1 \"%s\n", current_filename);
-  current_lineno = 1;
+    (void) printf(".lf %d \"%s\n", current_lineno, current_filename);
   while (read_line(fp, &linebuf)) {
     if (linebuf.length() >= 4
 	&& linebuf[0] == '.' && linebuf[1] == 'l' && linebuf[2] == 'f'
