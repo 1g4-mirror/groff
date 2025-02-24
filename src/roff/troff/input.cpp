@@ -6405,12 +6405,14 @@ void line_file()
 {
   int n;
   if (get_integer(&n)) {
-    const char *filename = 0 /* nullptr */;
-    if (has_arg()) {
-      symbol s = get_long_name();
-      filename = s.contents();
+    if (has_arg(true /* peek */)) {
+      const char *reported_file_name = read_string();
+      (void) input_stack::set_location(reported_file_name, (n - 1));
+      delete[] reported_file_name;
+      tok.next();
+      return;
     }
-    (void) input_stack::set_location(filename, (n - 1));
+    (void) input_stack::set_location(0 /* nullptr */, (n - 1));
   }
   skip_line();
 }

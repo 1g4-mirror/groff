@@ -3728,11 +3728,20 @@ Set number of next input line to
 .IR n .
 .
 .TPx
-.REQ .lf "n f"
+.REQ .lf "n file-identifier"
 Set number of next input line to
 .I n
 and report input file name as
-.IR f .
+.IR file-identifier ,
+a sequence of ordinary characters and/or spaces.
+.\" XXX: or tabs, leaders, backspace, and delete characters
+.\" ...limiting the file names you can express; see Savannah #65108.
+.
+GNU
+.I troff \" GNU
+strips a leading leading neutral double quote from
+.IR file-identifier ,
+allowing it to contain embedded leading spaces.
 .
 .TPx
 .REQ .lg

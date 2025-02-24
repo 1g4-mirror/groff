@@ -17396,17 +17396,34 @@ output nodes corresponding to the pending input line to the standard
 error stream.
 @c END Keep parallel with section "Debugging" of groff(7).
 
-@Defreq {lf, line [@Var{name}]}
+@Defreq {lf, input-line-number [[@code{"}]@Var{file-identifier}]}
 @pindex soelim
 @cindex multi-file documents
 @cindex documents, multi-file
 @cindex assign input line number request (@code{lf})
 @cindex input line number, assignment, request (@code{lf})
 @cindex number, input line, assignment request (@code{lf})
-Set the input line number (and, optionally, the name) GNU
-@code{troff} shall use for error and warning messages.  @var{line} is
-the input line number of the @emph{next} line.  Without an argument, the
-request is ignored.
+Set the input line number
+(and,
+optionally,
+the file name)
+GNU
+@command{troff}
+uses when reporting diagnostics.
+@var{line}
+is the input line number of the
+@emph{next}
+line.
+@var{file-identifier}
+is a sequence of ordinary characters and/or spaces.
+@c XXX: or tabs, leaders, backspace, and delete characters
+@c ...limiting the file names you can express; see Savannah #65108.
+GNU
+@command{troff}
+.I troff \" GNU
+strips a leading leading neutral double quote from
+@var{file-identifier},
+allowing it to contain embedded leading spaces.
 
 @code{lf}'s primary purpose is to aid the debugging of documents that
 undergo preprocessing.  Programs like @command{tbl} that transform input

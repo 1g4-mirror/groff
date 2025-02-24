@@ -1,5 +1,24 @@
 2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Treat `lf`'s second argument, if present, like string
+	contents.
+
+	* src/roff/troff/input.cpp (line_file): Do it.
+
+	* src/roff/groff/tests/lf-request-works.sh: Test it.
+
+	* doc/groff.texi.in (Debugging) <lf>:
+	* man/groff.7.man (Request short reference) <lf>:
+	* man/groff_diff.7.man (Altered requests) <lf>:
+	(Other differences): Document it.
+
+	* NEWS: Update items.
+
+	Thanks to onf for pointing out that soelim(1)'s injection of
+	`lf` requests would make reported file names misleading.
+
+2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Add unit test for `lf` request.
 
 	* src/roff/groff/tests/lf-request-works.sh: Do it.

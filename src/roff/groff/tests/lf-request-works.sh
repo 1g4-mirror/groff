@@ -49,6 +49,17 @@ output=$(printf "%s\n" "$input" | "$groff" 2>&1)
 echo "$output"
 echo "$output" | grep -Fqx '901 myfile' || wail
 
+input='.
+.lf 900 my file
+.ec @
+.tm @n[.c] @n[.F]
+.'
+
+echo "checking 'lf' request behavior with spaceful second argument" >&2
+output=$(printf "%s\n" "$input" | "$groff" 2>&1)
+echo "$output"
+echo "$output" | grep -Fqx '901 my file' || wail
+
 test -z "$fail"
 
 # vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:

@@ -4219,6 +4219,21 @@ request is selected.
 .
 .
 .TP
+.BI .lf\~ next-line-number\~\c
+.RB [[ \[dq] ]\c
+.IR file-identifier ]
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the optional second argument,
+allowing it to contain embedded leading spaces.
+.
+Further,
+non-leading spaces in
+.I file-identifier
+are also accepted.
+.
+.
+.TP
 .BR .nx\~ [[ \[dq] ]\c
 .IR file ]
 GNU
@@ -6255,6 +6270,11 @@ and
 and
 .B sy
 requests,
+and the second argument
+(if present)
+to the
+.B lf
+request,
 allowing it to contain embedded leading spaces.
 .
 .
