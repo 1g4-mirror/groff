@@ -1,5 +1,12 @@
 2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Add unit test for `lf` request.
+
+	* src/roff/groff/tests/lf-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2025-02-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: More reliably release heap memory
 	allocated by `read_string()`.
 	(next_file, do_source, pipe_source_request, pipe_output)
