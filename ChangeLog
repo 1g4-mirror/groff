@@ -1,5 +1,24 @@
 2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Implement approximate (`troff -a`) output of zero-width nodes
+	{these are constructed from `\Z` escape sequences, and might be
+	better termed "drawing position resetting nodes"}.
+
+	* src/roff/troff/node.h (class zero_width_node): Declare
+	`ascii_print` member function.
+
+	* src/roff/troff/node.cpp (ascii_print_node_list): New static
+	helper function iterates a node list, calling each of its
+	elements' `ascii_print()` member functions.
+	(zero_width_node::ascii_print): New member function calls the
+	foregoing.
+
+	Fixes <https://savannah.gnu.org/bugs/?66815>.  Thanks to Dave
+	Kemper for the report.  Problem appears to date back to groff's
+	birth.
+
+2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Fix code style nits.
 	Parenthesize complex expression.  Reorder equality comparisons
 	to avoid inadvertent lvalue assignment.  Use Boolean literals

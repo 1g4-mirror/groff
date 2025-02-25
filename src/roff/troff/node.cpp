@@ -3531,6 +3531,15 @@ void vline_node::vertical_extent(vunits *min, vunits *max)
 
 /* ascii_print methods */
 
+static void ascii_print_node_list(ascii_output_file *ascii, node *n)
+{
+  node *nn = n;
+  while(nn != 0 /* nullptr */) {
+    nn->ascii_print(ascii);
+    nn = nn->next;
+  }
+}
+
 static void ascii_print_reverse_node_list(ascii_output_file *ascii, node *n)
 {
   if (0 /* nullptr */ == n)
@@ -3570,6 +3579,11 @@ void hmotion_node::ascii_print(ascii_output_file *ascii)
 void space_char_hmotion_node::ascii_print(ascii_output_file *ascii)
 {
   ascii->outc(' ');
+}
+
+void zero_width_node::ascii_print(ascii_output_file *out)
+{
+  ascii_print_node_list(out, n);
 }
 
 /* asciify methods */

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -461,6 +461,7 @@ public:
   ~zero_width_node();
   node *copy();
   void tprint(troff_output_file *);
+  void ascii_print(ascii_output_file *);
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();
