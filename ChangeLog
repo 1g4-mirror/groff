@@ -1,5 +1,12 @@
 2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Fix code style nits.
+	Parenthesize complex expression.  Reorder equality comparisons
+	to avoid inadvertent lvalue assignment.  Use Boolean literals
+	for return values of function returning `bool`.
+
+2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac ([initialization])
 	* tmac/doc.tmac ([initialization]): Remap the text minus sign
 	character `\-` to `\N'45'` (U+002D) on the "html" device.

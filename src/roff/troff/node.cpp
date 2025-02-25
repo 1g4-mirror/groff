@@ -652,8 +652,8 @@ symbol SYMBOL_Fl("Fl");
 charinfo *tfont::get_lig(charinfo *c1, charinfo *c2)
 {
   if (ligature_mode == 0)
-    return 0;
-  charinfo *ci = 0;
+    return 0 /* nullptr */;
+  charinfo *ci = 0 /* nullptr */;
   if (c1->get_ascii_code() == 'f') {
     switch (c2->get_ascii_code()) {
     case 'f':
@@ -684,7 +684,7 @@ charinfo *tfont::get_lig(charinfo *c1, charinfo *c2)
   }
   if (ci != 0 && fm->contains(ci->as_glyph()))
     return ci;
-  return 0;
+  return 0 /* nullptr */;
 }
 
 inline int tfont::get_kern(charinfo *c1, charinfo *c2, hunits *res)
@@ -2150,7 +2150,7 @@ node *glyph_node::merge_glyph_node(glyph_node *gn)
 				gn->div_nest_level, next1);
     }
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 #ifdef STORE_WIDTH
@@ -2649,7 +2649,7 @@ node *dbreak_node::last_char_node()
     if (last_node)
       return last_node;
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 hunits dbreak_node::italic_correction()
@@ -2666,7 +2666,8 @@ class italic_corrected_node : public node {
   node *n;
   hunits x;
 public:
-  italic_corrected_node(node *, hunits, statem *, int, node * = 0);
+  italic_corrected_node(node *, hunits, statem *, int,
+			node * = 0 /* nullptr */);
   ~italic_corrected_node();
   node *copy();
   void ascii_print(ascii_output_file *);
@@ -2809,8 +2810,9 @@ class break_char_node : public node {
   char prev_break_code;
   color *col;
 public:
-  break_char_node(node *, int, int, color *, node * = 0);
-  break_char_node(node *, int, int, color *, statem *, int, node * = 0);
+  break_char_node(node *, int, int, color *, node * = 0 /* nullptr */);
+  break_char_node(node *, int, int, color *, statem *, int,
+		  node * = 0 /* nullptr */);
   ~break_char_node();
   node *copy();
   hunits width();
@@ -3087,7 +3089,7 @@ node *vline_node::copy()
 
 hunits vline_node::width()
 {
-  return n == 0 ? H0 : n->width();
+  return (0 /* nullptr */ == n) ? H0 : n->width();
 }
 
 zero_width_node::zero_width_node(node *nd, statem *s, int divlevel)
@@ -3171,7 +3173,7 @@ node *overstrike_node::copy()
 
 void overstrike_node::overstrike(node *n)
 {
-  if (n == 0)
+  if (0 /* nullptr */ == n)
     return;
   hunits w = n->width();
   if (w > max_width)
@@ -3206,7 +3208,7 @@ bracket_node::~bracket_node()
 node *bracket_node::copy()
 {
   bracket_node *on = new bracket_node(state, div_nest_level);
-  node *last_node = 0;
+  node *last_node = 0 /* nullptr */;
   node *tem;
   if (list)
     list->last = 0;
@@ -3222,7 +3224,7 @@ node *bracket_node::copy()
 
 void bracket_node::bracket(node *n)
 {
-  if (n == 0)
+  if (0 /* nullptr */ == n)
     return;
   hunits w = n->width();
   if (w > max_width)
@@ -3490,7 +3492,7 @@ void node::vertical_extent(vunits *min, vunits *max)
 
 void vline_node::vertical_extent(vunits *min, vunits *max)
 {
-  if (n == 0)
+  if (0 /* nullptr */ == n)
     node::vertical_extent(min, max);
   else {
     vunits cmin, cmax;
@@ -3531,7 +3533,7 @@ void vline_node::vertical_extent(vunits *min, vunits *max)
 
 static void ascii_print_reverse_node_list(ascii_output_file *ascii, node *n)
 {
-  if (n == 0)
+  if (0 /* nullptr */ == n)
     return;
   ascii_print_reverse_node_list(ascii, n->next);
   n->ascii_print(ascii);
@@ -3600,7 +3602,7 @@ void kern_pair_node::asciify(macro *m)
 
 static void asciify_reverse_node_list(macro *m, node *n)
 {
-  if (n == 0)
+  if (0 /* nullptr */ == n)
     return;
   asciify_reverse_node_list(m, n->next);
   n->asciify(m);
@@ -3769,7 +3771,7 @@ breakpoint *dbreak_node::get_breakpoints(hunits wd, int ns,
   breakpoint *bp = new breakpoint;
   bp->next = rest;
   bp->width = wd;
-  for (node *tem = pre; tem != 0; tem = tem->next)
+  for (node *tem = pre; tem != 0 /* nullptr */; tem = tem->next)
     bp->width += tem->width();
   bp->nspaces = ns;
   bp->hyphenated = 1;
@@ -3788,7 +3790,7 @@ breakpoint *dbreak_node::get_breakpoints(hunits wd, int ns,
 int dbreak_node::nbreaks()
 {
   int i = 1;
-  for (node *tem = none; tem != 0; tem = tem->next)
+  for (node *tem = none; tem != 0 /* nullptr */; tem = tem->next)
     i += tem->nbreaks();
   return i;
 }
@@ -4431,7 +4433,7 @@ tfont *composite_node::get_tfont()
 
 node *reverse_node_list(node *n)
 {
-  node *r = 0;
+  node *r = 0 /* nullptr */;
   while (n) {
     node *tem = n;
     n = n->next;
@@ -4597,11 +4599,11 @@ bool draw_node::is_same_as(node *n)
   draw_node *nd = (draw_node *)n;
   if (code != nd->code || npoints != nd->npoints || sz != nd->sz
       || gcol != nd->gcol || fcol != nd->fcol)
-    return 0;
+    return false;
   for (int i = 0; i < npoints; i++)
     if (point[i].h != nd->point[i].h || point[i].v != nd->point[i].v)
-      return 0;
-  return 1;
+      return false;
+  return true;
 }
 
 const char *draw_node::type()
@@ -4726,7 +4728,7 @@ void hline_node::tprint(troff_output_file *out)
     out->right(x);
     x = -x;
   }
-  if (n == 0) {
+  if (0 /* nullptr */ == n) {
     out->right(x);
     return;
   }
@@ -4764,7 +4766,7 @@ void hline_node::tprint(troff_output_file *out)
 
 void vline_node::tprint(troff_output_file *out)
 {
-  if (n == 0) {
+  if (0 /* nullptr */ == n) {
     out->down(x);
     return;
   }
@@ -4923,7 +4925,7 @@ void kern_pair_node::tprint(troff_output_file *out)
 
 static void tprint_reverse_node_list(troff_output_file *out, node *n)
 {
-  if (n == 0)
+  if (0 /* nullptr */ == n)
     return;
   tprint_reverse_node_list(out, n->next);
   n->tprint(out);
@@ -4991,7 +4993,7 @@ static node *make_composite_node(charinfo *s, environment *env)
   int fontno = env_definite_font(env);
   if (fontno < 0) {
     error("cannot format composite glyph: no current font");
-    return 0;
+    return 0 /* nullptr */;
   }
   assert(fontno < font_table_size && font_table[fontno] != 0);
   node *n = charinfo_to_node_list(s, env);
@@ -5540,7 +5542,7 @@ left_italic_corrected_node::~left_italic_corrected_node()
 
 node *left_italic_corrected_node::merge_glyph_node(glyph_node *gn)
 {
-  if (n == 0) {
+  if (0 /* nullptr */ == n) {
     hunits lic = gn->left_italic_correction();
     if (!lic.is_zero()) {
       x = lic;
@@ -5556,7 +5558,7 @@ node *left_italic_corrected_node::merge_glyph_node(glyph_node *gn)
       return this;
     }
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 node *left_italic_corrected_node::copy()
