@@ -1,5 +1,31 @@
 2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (BS, BE): Use box diversion instead of a regular one to
+	populate the bottom block.  This fixes interaction of the bottom
+	block feature--when `BS` and `BE` are called prior to formatting
+	any other text--with `LT` letters specifically but might also
+	resolve other similar problems with BS/BE use.  Using a regular
+	diversion moved the vertical drawing position from its
+	"pre-page" location of "-1" (because the `BS` macro called `br`
+	to ensure that the bottom block didn't absorb any partially
+	collected line).  That in turn sprung the default header trap
+	that writes a centered page number.  The `LT` macro is written
+	such that if the drawing position is not at the top of the page,
+	it fails to format the pre-body letter material (writer's
+	address, date, inside address, salutation, etc.).  (Because the
+	first page has already started and the drawing position was
+	non-negative, the `LT` macro was also too late to turn off the
+	default header on the first page.)
+	(BE): Annotate explicit `br` retained here; we don't want to
+	silently discard a partially collected line when closing the box
+	diversion.  The document author should delete from a bottom
+	block any undesired content on a partially collected line.
+
+	Fixes <https://savannah.gnu.org/bugs/?66439>.  Thanks to Oliver
+	Corff for prompting detection of this bug.
+
+2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #66439 (the bottom block feature BS/BE
 	should work with LT letters).
 
