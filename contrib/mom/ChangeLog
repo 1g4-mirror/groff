@@ -1,3 +1,11 @@
+2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* mom.am: Stop specifying `PDFMOM_BIN_PATH` environment
+	variable in `MOMPDFMOM` macro housing shell command.  Nothing
+	checks the environment for this variable, and according to `git
+	log -p` history going all the way back to 2012 when pdfmom(1)
+	landed, nothing ever has.
+
 2024-10-15
 
 	* om.tmac: [PDF_IMAGE]: remove superfluous \!
