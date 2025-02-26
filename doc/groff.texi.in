@@ -19842,8 +19842,15 @@ The glyph can be specified to
 using this index by means of the
 @code{\N}
 escape sequence.
-The index can be any integer.@footnote{that is, any integer parsable by the C
-standard library's @cite{strtol@r{(3)}} function}
+The index can be any integer.@footnote{that is, any integer parsable by
+the C standard library's
+@cite{strtol@r{(3)}}
+function}
+An
+@var{index}
+is limited to the range of the C language
+@code{int}
+type on the system.
 
 The @var{entity-name} field defines an identifier for the glyph that the
 postprocessor uses to print the GNU @code{troff} glyph @var{name}.  This
