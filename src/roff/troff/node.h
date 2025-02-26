@@ -85,7 +85,7 @@ struct node {
   virtual node *add_discretionary_hyphen();
   virtual node *add_self(node *, hyphen_list **);
   virtual hyphen_list *get_hyphen_list(hyphen_list *, int *);
-  virtual void ascii_print(ascii_output_file *);
+  virtual void ascii_print(const ascii_output_file *);
   virtual void asciify(macro *);
   virtual int discardable();
   virtual void spread_space(int *, hunits *);
@@ -201,7 +201,7 @@ public:
 			      bool /* is_inner */ = false);
   int nbreaks();
   void split(int, node **, node **);
-  void ascii_print(ascii_output_file *);
+  void ascii_print(const ascii_output_file *);
   bool is_same_as(node *);
   void asciify(macro *);
   const char *type();
@@ -350,7 +350,7 @@ public:
   void asciify(macro *);
   void tprint(troff_output_file *);
   hunits width();
-  void ascii_print(ascii_output_file *);
+  void ascii_print(const ascii_output_file *);
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();
@@ -367,7 +367,7 @@ public:
   space_char_hmotion_node(hunits, color *, statem *, int,
 			  node * /* nxt */ = 0 /* nullptr */);
   node *copy();
-  void ascii_print(ascii_output_file *);
+  void ascii_print(const ascii_output_file *);
   void asciify(macro *);
   void tprint(troff_output_file *);
   bool is_same_as(node *);
@@ -461,7 +461,7 @@ public:
   ~zero_width_node();
   node *copy();
   void tprint(troff_output_file *);
-  void ascii_print(ascii_output_file *);
+  void ascii_print(const ascii_output_file *) const;
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();
@@ -480,7 +480,7 @@ public:
 			     node * /* xx */ = 0 /* nullptr */);
   ~left_italic_corrected_node();
   void tprint(troff_output_file *);
-  void ascii_print(ascii_output_file *);
+  void ascii_print(const ascii_output_file *);
   void asciify(macro *);
   node *copy();
   bool is_same_as(node *);
