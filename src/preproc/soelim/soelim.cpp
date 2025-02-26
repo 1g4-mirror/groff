@@ -130,7 +130,8 @@ void set_location()
 {
   if (!want_raw_output) {
     if (!want_tex_output)
-      printf(".lf %d \"%s\n", current_lineno, current_filename);
+      printf(".lf %d %s%s\n", current_lineno,
+	('"' == current_filename[0]) ? "" : "\"", current_filename);
     else
       // XXX: Should we quote the file name?  What's TeX-conventional?
       printf("%% file %s, line %d\n", current_filename, current_lineno);

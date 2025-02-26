@@ -1708,7 +1708,8 @@ int main(int argc, char **argv)
       if (argv[i][0] == '-' && argv[i][1] == '\0') {
 	current_lineno = 1;
 	current_filename = "-";
-	(void) printf(".lf %d \"\%s\n", current_lineno,
+	(void) printf(".lf %d %s%s\n", current_lineno,
+		      ('"' == current_filename[0]) ? "" : "\"",
 		      current_filename);
 	process_input_file(stdin);
       }
@@ -1725,7 +1726,8 @@ int main(int argc, char **argv)
 	  normalize_for_lf(fn);
 	  current_lineno = 1;
 	  current_filename = fn.contents();
-	  (void) printf(".lf %d \"\%s\n", current_lineno,
+	  (void) printf(".lf %d %s%s\n", current_lineno,
+			('"' == current_filename[0]) ? "" : "\"",
 			current_filename);
 	  process_input_file(fp);
 	}
@@ -1734,7 +1736,9 @@ int main(int argc, char **argv)
   else {
     current_lineno = 1;
     current_filename = "-";
-    (void) printf(".lf %d \"\%s\n", current_lineno, current_filename);
+    (void) printf(".lf %d %s%s\n", current_lineno,
+		  ('"' == current_filename[0]) ? "" : "\"",
+		  current_filename);
     process_input_file(stdin);
   }
   if (ferror(stdout))

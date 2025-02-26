@@ -1,3 +1,18 @@
+2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[eqn,pic,preconv,refer,soelim,tbl]: Use `lf` requests _even
+	more_ carefully.
+
+	* src/preproc/eqn/main.cpp (do_file):
+	* src/preproc/pic/troff.cpp (troff_output::set_location):
+	* src/preproc/preconv/preconv.cpp (do_file):
+	* src/preproc/refer/refer.cpp (do_file, output_pending_line):
+	* src/preproc/soelim/soelim.cpp (set_location):
+	* src/preproc/tbl/main.cpp (main):
+	* src/preproc/tbl/table.cpp (set_troff_location): Output file
+	name with leading double quote in generated `lf` request only if
+	it doesn't already start with one.
+
 2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Implement approximate (`troff -a`) output of zero-width nodes

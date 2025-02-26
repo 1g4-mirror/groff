@@ -600,7 +600,8 @@ void troff_output::set_location(const char *s, int n)
     }
   }
   if (update_file_name)
-    printf(".lf %d \"%s\n", n, s);
+    printf(".lf %d %s%s\n", current_lineno,
+	('"' == current_filename[0]) ? "" : "\"", current_filename);
   else
     printf(".lf %d\n", n);
 }

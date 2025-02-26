@@ -475,8 +475,8 @@ static void do_file(const char *filename)
   normalize_for_lf(fn);
   current_lineno = 1;
   current_filename = fn.contents();
-  (void) fprintf(outfp, ".lf %d \"%s\n", current_lineno,
-		 current_filename);
+  (void) fprintf(outfp, ".lf %d %s%s\n", current_lineno,
+	('"' == current_filename[0]) ? "" : "\"", current_filename);
   string line;
   for (;;) {
     line.clear();
@@ -691,7 +691,8 @@ static void output_pending_line()
   if (!accumulate)
     immediately_output_references();
   if (need_syncing) {
-    fprintf(outfp, ".lf %d \"%s\n", current_lineno, current_filename);
+    fprintf(outfp, ".lf %d %s%s\n", current_lineno,
+	  ('"' == current_filename[0]) ? "" : "\"", current_filename);
     need_syncing = 0;
   }
 }

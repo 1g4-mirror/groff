@@ -106,7 +106,8 @@ void do_file(FILE *fp, const char *filename)
   current_lineno = 1;
   current_filename = fn.contents();
   if (output_format == troff)
-    (void) printf(".lf %d \"%s\n", current_lineno, current_filename);
+    (void) printf(".lf %d %s%s\n", current_lineno,
+	('"' == current_filename[0]) ? "" : "\"", current_filename);
   while (read_line(fp, &linebuf)) {
     if (linebuf.length() >= 4
 	&& linebuf[0] == '.' && linebuf[1] == 'l' && linebuf[2] == 'f'

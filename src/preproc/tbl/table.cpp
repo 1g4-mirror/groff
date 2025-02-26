@@ -3208,7 +3208,9 @@ void set_troff_location(const char *fn, int ln)
     string filename(fn);
     filename += '\0';
     normalize_for_lf(filename);
-    printfs(".lf %1 \"%2\n", as_string(ln), filename.contents());
+    printfs(".lf 1 %1%2\n", ('"' == filename[0]) ? "" : "\"",
+	    filename.contents());
+
     last_filename = fn;
     location_force_filename = 0;
   }
