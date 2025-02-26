@@ -1,5 +1,13 @@
 2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Trivially refactor to align with terminology
+	used in groff_man(7).
+	(an*abbreviate-page-topic): Rename this...
+	(an*abbreviate-page-identifier): ...to this.
+	(TH): Update call site.
+
+2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn,pic,preconv,refer,soelim,tbl]: Use `lf` requests _even
 	more_ carefully.
 
