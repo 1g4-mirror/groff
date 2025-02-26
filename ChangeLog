@@ -1,5 +1,11 @@
 2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Fix code style nit.
+	(glyph_node::ascii_print): Spell null character using the C/C++
+	language literal for expressing it.
+
+2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Trivially refactor to align with terminology
 	used in groff_man(7).
 	(an*abbreviate-page-topic): Rename this...

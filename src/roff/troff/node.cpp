@@ -2204,7 +2204,7 @@ hyphenation_type glyph_node::get_hyphenation_type()
 void glyph_node::ascii_print(ascii_output_file *ascii)
 {
   unsigned char c = ci->get_ascii_code();
-  if (c != 0)
+  if (c != '\0')
     ascii->outc(c);
   else
     ascii->outs(ci->nm.contents());
