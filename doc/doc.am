@@ -33,6 +33,8 @@ DOC_SED = $(SED) \
 # It includes flags to locate its tmac and device/font description
 # directories and to produce verbose diagnostics in the event of syntax
 # or formatting problems.
+#
+# `-M $(doc_srcdir)` is so that grn can find "grnexampl.g".
 DOC_GROFF = \
   GROFF_COMMAND_PREFIX= \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
@@ -41,7 +43,7 @@ DOC_GROFF = \
 DOC_PDFMOM = \
   GROFF_COMMAND_PREFIX= \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
-  $(GROFF_BIN_PATH)/pdfmom -M $(doc_srcdir) $(MFLAG) $(FFLAG) -ww -b --roff
+  $(PDFMOMBIN) $(MFLAG) $(FFLAG) -ww -b --roff
 
 # This image file is used by several documents in the groff source tree.
 DOC_GNU_EPS = doc/gnu.eps

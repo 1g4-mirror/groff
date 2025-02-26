@@ -1,5 +1,11 @@
 2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am: In `DOC_PDFMOM` macro, use `PDFMOMBIN` macro
+	defined in "Makefile.am" to locate `pdfmom` executable; as with
+	`GROFFBIN`, that's what it's there for.
+
+2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.{h,cpp}: Improve `const`-correctness of
 	`ascii_output_file` class and related helper functions.
 
