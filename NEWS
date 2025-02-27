@@ -192,7 +192,7 @@ troff
    their details unknown to the formatter.)
 
 *  A new request, `pcomposite`, reports to the standard error stream the
-   list of defined composite characters.
+   list of defined composite character mappings.
 
 *  A new request, `phw`, reports to the standard error stream the
    list of hyphenation exceptions associated with the current
