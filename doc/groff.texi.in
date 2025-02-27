@@ -16993,12 +16993,21 @@ in an author's name in document metadata or as a usefully named bookmark
 or hyperlink anchor, GNU @command{troff} maps other special characters
 to Unicode special character notation.  @xref{Using Symbols}.
 
-Special characters without a Unicode representation, and escape
-sequences that do not interpolate a sequence of ordinary and/or special
-characters, produce warnings in category @samp{char}.
+GNU
+@command{troff} @c GNU
+does not write special characters
+without a Unicode representation
+and escape sequences that do not interpolate
+a sequence of ordinary and/or special characters
+as arguments to device extension commands;
+when encountered,
+these produce warnings in category @samp{char}.
+@xref{Warnings}.
 @endDefesc
 
-GNU @command{troff} also permits the interpolation of macro contents
+GNU
+@command{troff}
+also permits the interpolation of macro contents
 as a device extension command.
 
 @DefreqList {devicem, name}
