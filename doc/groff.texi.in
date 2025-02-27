@@ -16744,13 +16744,19 @@ is the same as @w{@samp{.pi foo | bar}}.
 @cindex running system commands
 @DefreqList {sy, [@code{"}]@Var{command}}
 @DefregListEndx {systat}
-Execute the specified shell command(s).  The formatter reads the
-remainder of the input line into @var{command} and passes it to
-@cite{system@r{(3)}}.  Output produced by the command(s) is not captured
-by GNU @command{troff}.
-
-GNU @command{troff} strips a leading neutral double quote from the
-argument, allowing embedded leading spaces in @var{command}.
+Execute the specified shell command(s).
+The formatter reads the remainder of the input line into a buffer
+and passes it to
+@cite{system@r{(3)}}.
+The formatter does not capture the output produced by the command(s).
+GNU
+@command{troff}
+strips a leading leading neutral double quote from
+@var{command},
+which it reads in copy mode
+(recall
+@pxref{Copy Mode}),
+allowing it to contain embedded leading spaces.
 
 @cindex safer mode
 @cindex mode, safer
