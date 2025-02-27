@@ -841,7 +841,7 @@ after body text nearly fills the page,
 the trap springs.
 .
 The macro called by the trap draws a line across the page
-and emits the stored diversion.
+and emits the stored diversion by calling it like a macro.
 .
 Thus,
 the footnote is rendered.

@@ -14871,20 +14871,27 @@ later use.  A @dfn{trap} is a condition on the input or output, tested
 automatically by the formatter, that is associated with a macro:
 fulfilling the condition @dfn{springs} the trap---calls the macro.
 
-Footnote support often exercises all three of the foregoing features.  A
-simple implementation might work as follows.  The author writes a pair
-of macros: one starts a footnote and the other ends it.  They further
-set a trap a small distance above the page bottom, reserving a footnote
-area.  The author calls the first macro where a footnote marker is
-desired.  The macro establishes a diversion so that the footnote text is
-collected at the place in the body text where its corresponding marker
-appears.  It further creates an environment for the footnote so that it
-sets at a smaller typeface.  The footnote text is formatted in the
-diversion using that environment, but it does not yet appear in the
-output.  The document author calls the footnote end macro, which returns
-to the previous environment and ends the diversion.  Later, after body
-text nearly fills the page, the trap springs.  The macro called by the
-trap draws a line across the page and emits the stored diversion.  Thus,
+Footnote support often exercises all three of the foregoing features.
+A simple implementation might work as follows.
+The author writes a pair of macros:@:
+one starts a footnote and the other ends it.
+They further set a trap a small distance above the page bottom,
+reserving a footnote area.
+The author calls the first macro where a footnote marker is desired.
+The macro establishes a diversion so that the footnote text is collected
+at the place in the body text where its corresponding marker appears.
+It further creates an environment for the footnote so that it
+sets at a smaller typeface.
+The footnote text is formatted in the diversion using that environment
+but it does not yet appear in the output.
+The document author calls the footnote end macro,
+which returns to the previous environment and ends the diversion.
+Later,
+after body
+text nearly fills the page, the trap springs.
+The macro called by the trap draws a line across the page
+and emits the stored diversion by calling it like a macro.
+Thus,
 the footnote renders.
 
 Diversions and traps make the text formatting process non-linear.  Let
@@ -14892,15 +14899,17 @@ us imagine a set of text lines or paragraphs labelled @samp{A},
 @samp{B}, and so on.  If we set up a trap that produces text @samp{T}
 (as a page footer, say), and we also use a diversion to store the
 formatted text @samp{D}, then a document with input text in the order
-@samp{A B C D E F} might render as @samp{A B C E T F}.  The diversion
-@samp{D} will never be output if we do not call for it.
+@samp{A B C D E F} might render as @samp{A B C E T F}.
+The diversion
+@samp{D}
+is never output if we do not call it.
 
 Environments of themselves are not a source of non-linearity in document
 formatting:@: environment switches have immediate effect.  One could
 always write a macro to change as many formatting parameters as desired
 with a single convenient call.  But because diversions can be nested and
 macros called by traps that are sprung by other trap-called macros, they
-may be called upon in varying contexts.  For example, consider a page
+may be interpolated in varying contexts.  For example, consider a page
 header that is always to be set in Helvetica.  A document that uses
 Times for most of its body text, but Courier for displayed code
 examples, poses a challenge if a page break occurs in the middle of a
