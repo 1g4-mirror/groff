@@ -676,9 +676,15 @@ The list of ligatures must not extend over more than one line.
 .B special
 The font is
 .IR special :
-when a glyph is requested that is not present in the formatter's
-currently selected font,
+when the document attempts to format a glyph
+that is not present in the formatter's currently selected font,
 the glyph is sought in any mounted fonts that bear this property.
+Often,
+such fonts are
+.IR unstyled ,
+having no heavy (bold) or oblique
+(slanted or italic)
+variants.
 .
 .
 .P

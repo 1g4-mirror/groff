@@ -19705,9 +19705,16 @@ must not extend over more than one line.
 @item special
 @cindex special fonts
 @kindex special
-The font is @dfn{special}:@: when a glyph is requested that is not
-present in the formatter's currently selected font, the glyph is sought
-in any mounted fonts that bear this property.
+The font is @dfn{special}:@:
+when the document attempts to format a glyph
+that is not present in the formatter's currently selected font,
+the glyph is sought in any mounted fonts that bear this property.
+Often,
+such fonts are
+@dfn{unstyled},
+having no heavy (bold) or oblique
+(slanted or italic)
+variants.
 @end table
 
 Other directives in this section are ignored by GNU
