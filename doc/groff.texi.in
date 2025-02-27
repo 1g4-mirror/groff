@@ -17420,7 +17420,6 @@ is a sequence of ordinary characters and/or spaces.
 @c ...limiting the file names you can express; see Savannah #65108.
 GNU
 @command{troff}
-.I troff \" GNU
 strips a leading leading neutral double quote from
 @var{file-identifier},
 allowing it to contain embedded leading spaces.
