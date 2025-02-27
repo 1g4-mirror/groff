@@ -17378,9 +17378,13 @@ multi-stage pipeline processing in the surrounding system.  Nevertheless
 there exist several features useful for troubleshooting.
 
 Preprocessors use the @code{lf} request to preserve the identity of the
-line numbers and names of input files.  GNU @code{troff} emits a variety
-of error diagnostics and supports several categories of warning; the
-output of these can be selectively suppressed.  A trace of the
+line numbers and names of input files.
+GNU
+@command{troff} @c GNU
+emits a variety of error diagnostics
+and supports several categories of warning;
+the output of each category can be selectively enabled or suppressed.
+A trace of the
 formatter's input processing stack can be emitted when errors or
 warnings occur by means of GNU @code{troff}'s @option{-b} option, or
 produced on demand with the @code{backtrace} request.  The @code{tm}
