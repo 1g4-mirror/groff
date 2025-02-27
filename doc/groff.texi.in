@@ -17422,6 +17422,9 @@ GNU
 @command{troff}
 strips a leading leading neutral double quote from
 @var{file-identifier},
+which it reads in copy mode
+(recall
+@pxref{Copy Mode}),
 allowing it to contain embedded leading spaces.
 
 @code{lf}'s primary purpose is to aid the debugging of documents that
