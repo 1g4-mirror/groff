@@ -4696,7 +4696,8 @@ static void report_character_request()
   }
   charinfo *ci;
   do {
-    ci = tok.get_char(false /* required */, true /* lookup only */);
+    ci = tok.get_char(false /* required */,
+		      true /* suppress creation */);
     if (!tok.is_character()) {
       error("character report request expects characters as arguments;"
 	    " got %1", tok.description());
@@ -4736,7 +4737,7 @@ static void remove_character()
     if (!tok.is_space() && !tok.is_tab()) {
       if (tok.is_character()) {
 	charinfo *ci = tok.get_char(true /* required */,
-				    true /* lookup only */);
+				    true /* suppress creation */);
 	if (0 /* nullptr */ == ci) {
 	  if (!tok.is_indexed_character())
 	    warning(WARN_CHAR, "%1 is not defined", tok.description());
@@ -8188,16 +8189,17 @@ void define_class()
 }
 
 // forward declaration
-static charinfo *get_charinfo_by_index(int n, bool lookup_only = false);
+static charinfo *get_charinfo_by_index(int n,
+				       bool suppress_creation = false);
 
-charinfo *token::get_char(bool required, bool lookup_only)
+charinfo *token::get_char(bool required, bool suppress_creation)
 {
   if (type == TOKEN_CHAR)
     return charset_table[c];
   if (type == TOKEN_SPECIAL_CHAR)
-    return get_charinfo(nm, lookup_only);
+    return get_charinfo(nm, suppress_creation);
   if (type == TOKEN_INDEXED_CHAR)
-    return get_charinfo_by_index(val, lookup_only);
+    return get_charinfo_by_index(val, suppress_creation);
   if (type == TOKEN_ESCAPE) {
     if (escape_char != 0)
       return charset_table[escape_char];
@@ -10029,12 +10031,12 @@ void debug_with_file_and_line(const char *filename,
 
 dictionary charinfo_dictionary(501);
 
-charinfo *get_charinfo(symbol nm, bool lookup_only)
+charinfo *get_charinfo(symbol nm, bool suppress_creation)
 {
   void *p = charinfo_dictionary.lookup(nm);
   if (p != 0 /* nullptr */)
     return static_cast<charinfo *>(p);
-  if (lookup_only)
+  if (suppress_creation)
     return static_cast<charinfo *>(0 /* nullptr */);
   else {
     charinfo *cp = new charinfo(nm);
@@ -10258,13 +10260,13 @@ symbol UNNAMED_SYMBOL("---");
 
 dictionary indexed_charinfo_dictionary(11);
 
-static charinfo *get_charinfo_by_index(int n, bool lookup_only)
+static charinfo *get_charinfo_by_index(int n, bool suppress_creation)
 {
   static charinfo *index_table[256];
 
   if (n >= 0 && n < 256) {
     charinfo *ci = index_table[n];
-    if ((0 /*nullptr */ == ci) && !lookup_only) {
+    if ((0 /*nullptr */ == ci) && !suppress_creation) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
       index_table[n] = ci;
@@ -10274,7 +10276,7 @@ static charinfo *get_charinfo_by_index(int n, bool lookup_only)
   else {
     symbol ns(i_to_a(n));
     charinfo *ci = (charinfo *)indexed_charinfo_dictionary.lookup(ns);
-    if ((0 /*nullptr */ == ci) && !lookup_only) {
+    if ((0 /*nullptr */ == ci) && !suppress_creation) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);
       (void) indexed_charinfo_dictionary.lookup(ns, ci);

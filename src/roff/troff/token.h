@@ -100,7 +100,7 @@ public:
   unsigned char ch();
   int character_index();
   charinfo *get_char(bool /* required */ = false,
-		     bool /* lookup_only */ = false);
+		     bool /* suppress_creation */ = false);
   bool add_to_zero_width_node_list(node **);
   void make_space();
   void make_newline();

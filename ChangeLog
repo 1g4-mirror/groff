@@ -1,5 +1,13 @@
 2025-02-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (report_character_request):
+	(remove_character, get_char, get_charinfo)
+	(get_charinfo_by_index): Trivially refactor.  Rename
+	`lookup_only` function arguments to `suppress_creation`, a name
+	already used by register classes for the same purpose.
+
+2025-02-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Make `pnr` request report autoincrement amounts.
 
 	* src/roff/troff/reg.h (class reg): Declare `const` virtual
