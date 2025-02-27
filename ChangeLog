@@ -1,3 +1,31 @@
+2025-02-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Make `pnr` request report autoincrement amounts.
+
+	* src/roff/troff/reg.h (class reg): Declare `const` virtual
+	functions `get_increment()` and `can_autoincrement()` returning
+	`int` and `bool`, respectively.  These exist at the root of the
+	register class hierarchy because the `dictionary` class that
+	tracks defined registers effectively erases details of their
+	types.  (groff doesn't use RTTI anywhere, and doing so seemed
+	unnecessary, so I didn't explore it.)
+	(class general_reg): Declare non-virtual versions of
+	`get_increment()` and `can_autoincrement()`.
+	* src/roff/troff/reg.cpp: Include "lib.h" since we now need its
+	`INT_DIGITS` symbol.
+	(reg::get_increment): Define as returning constant zero.
+	(reg::can_autoincrement): Define as returning constant false.
+	(general_reg::get_increment): Define.
+	(general_reg::can_autoincrement): Define as returning constant
+	true.
+	(dump_register): If the register can autoincrement, report the
+	autoincrement amount, with an explicit sign for clarity and easy
+	distinction from the register's value and number format.
+
+	* doc/groff.texi.in (Debugging) <pnr>:
+	* man/groff.7.man (Request short reference) <pnr>:
+	* man/groff_diff.7.man (New requests) <pnr>: Document it.
+
 2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am: In `DOC_PDFMOM` macro, use `PDFMOMBIN` macro

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "troff.h"
 #include "dictionary.h"
+#include "lib.h" // INT_DIGITS
 #include "token.h"
 #include "request.h"
 #include "reg.h"
@@ -50,6 +51,11 @@ void reg::set_increment(units /*n*/)
   error("cannot automatically increment read-only register");
 }
 
+int reg::get_increment() const
+{
+  return 0;
+}
+
 void reg::alter_format(char /*f*/, int /*w*/)
 {
   error("cannot assign format of read-only register");
@@ -63,6 +69,11 @@ const char *reg::get_format()
 void reg::set_value(units /*n*/)
 {
   error("cannot write read-only register");
+}
+
+bool reg::can_autoincrement() const
+{
+  return false;
 }
 
 general_reg::general_reg() : format('1'), width(0), inc(0)
@@ -233,6 +244,16 @@ void general_reg::decrement()
 void general_reg::set_increment(units n)
 {
   inc = n;
+}
+
+int general_reg::get_increment() const
+{
+  return inc;
+}
+
+bool general_reg::can_autoincrement() const
+{
+  return true;
 }
 
 void general_reg::alter_format(char f, int w)
@@ -521,9 +542,15 @@ void rename_register_request()
 static void dump_register(symbol *id, reg *r)
 {
   int n;
+  const size_t sz = INT_DIGITS + 1 /* leading sign */;
+  char inc[sz];
   errprint("%1\t", id->contents());
   if (r->get_value(&n)) {
     errprint("%1", n);
+    if (r->can_autoincrement()) {
+      (void) snprintf(inc, sz, "%+d", r->get_increment());
+      errprint("\t%1", inc);
+    }
     const char *f = r->get_format();
     assert(f != 0 /* nullptr */);
     if (f != 0 /* nullptr*/)

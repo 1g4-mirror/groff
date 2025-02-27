@@ -3403,7 +3403,7 @@ The list is empty if there are none.
 .IR reg \~.\|.\|.]
 Report the name and value and,
 if the value is numeric,
-the assigned format of each register
+the autoincrement amount and assigned format of each register
 .IR reg ,
 or,
 without arguments,

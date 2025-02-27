@@ -17580,9 +17580,14 @@ strings, and diversions with their sizes in bytes.
 @Defreq {pnr, [@Var{reg} @r{@dots{}}]}
 @cindex dumping registers (@code{pnr})
 @cindex registers, dumping (@code{pnr})
-Report the name and value and, if the value is numeric, the assigned
-format of each register @var{reg}, or, without arguments, those of all
-defined registers, to the standard error stream.
+Report the name and value and,
+if the value is numeric,
+the autoincrement amount and assigned format of each register
+@var{reg},
+or,
+without arguments,
+those of all defined registers,
+to the standard error stream.
 @endDefreq
 
 @Defreq {pstream, }
