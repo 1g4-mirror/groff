@@ -18465,8 +18465,18 @@ the top-level diversion) at the end of input; GNU @code{troff} will not.
 @cindex file formats
 @cindex formats, file
 
-All files read and written by @command{gtroff} are text files.  The
-following two sections describe their format.
+All files that GNU
+@command{troff} @c GNU
+reads and writes are text files.@footnote{GNU
+@command{troff} @c GNU
+also reads files that don't satisfy
+the strict POSIX definition of a text file---for example,
+those lacking a final newline character---and the
+@code{cf}
+and
+@code{trf} requests read arbitrary files.
+Recall @ref{I/O}.}
+The next two sections describe their format.
 
 @menu
 * gtroff Output::
