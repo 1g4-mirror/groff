@@ -202,8 +202,9 @@ troff
    of output nodes (an internal data structure) corresponding to the
    pending output line.  The list is empty if no such nodes exist.
 
-*  The `pnr` request now additionally reports the interpolation format
-   of each register (if it is not string-valued).
+*  The `pnr` request now additionally reports the autoincrementation
+   amount and interpolation format of each register (if it is not
+   string-valued).
 
 *  The `pnr` request now accepts arguments.  It treats each as
    identifying a register and reports its properties to the standard
