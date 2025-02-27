@@ -16939,16 +16939,16 @@ Embed @var{contents} into GNU @command{troff} output as parameters to an
 The interpretation of such parameters is determined by the output driver
 or other postprocessor.
 
-A leading neutral double quote in the argument to @code{device} is
-stripped from it, allowing embedded leading spaces in @var{contents},
-which is read to the end of the input line in copy mode.
-
 @cindex @code{device} request, and copy mode
 @cindex copy mode, and @code{device} request
 @cindex mode, copy, and @code{device} request
-The @code{device} request processes its arguments in copy mode
-(@pxref{Copy Mode}).  An initial neutral double quote in @var{contents}
-is stripped to allow embedding of leading spaces.
+GNU
+@command{troff} @c GNU
+strips a leading neutral double quote from
+@var{contents}
+to permit initial embedded spaces,
+and reads it to the end of the input line in copy mode.
+Recall @ref{Copy Mode}.
 
 @cindex nodes, in device extension commands
 @cindex special characters, in device extension commands
