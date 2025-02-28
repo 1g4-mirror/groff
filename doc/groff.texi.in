@@ -16504,12 +16504,18 @@ of a book to be kept in a separate file.  However, files interpolated
 with @code{so} are not preprocessed; to overcome this limitation, see
 the @cite{gsoelim@r{(1)}} man page.
 
-@strong{Caution:@:} Since the formatter replaces the entire control line
-with the contents of a file, @var{file} must end with a newline, or the
-formatter will continue reading the next input line of the @code{roff}
-file as if were part of the last line of the sourced file.  Consider a
-file @file{xxx} containing only the word @samp{foo} without a trailing
-newline.
+@strong{Caution:@:}
+Since the formatter replaces the entire control line
+with the contents of a file,
+@var{file}
+must end with a newline,
+or the formatter will continue reading the next input line
+of the
+@code{roff}
+file as if it were part of the last line of the sourced file.
+Consider a file
+@file{xxx}
+containing only the word @samp{foo} without a trailing newline.
 
 @Example
 $ printf 'foo' > xxx
