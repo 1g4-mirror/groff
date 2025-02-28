@@ -8404,16 +8404,21 @@ copies a named environment's parameters to the current one.
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Postprocessor
 .\" Access".
-Two escape sequences and two requests enable documents to pass
-information directly to an output driver or other postprocessor.
+Beyond the
+.B cf
+and
+.B trf
+requests,
+two escape sequences and two requests enable documents
+to pass information directly to a postprocessor.
 .
 These are useful for exercising device-specific capabilities that the
 .I groff
 language does not abstract or generalize;
 examples include the embedding of hyperlinks and image files.
 .
-Device-specific functions are documented in each output driver's man
-page,
+Device-specific functions are documented
+in each output driver's man page,
 such as
 .MR gropdf @MAN1EXT@ ,
 .MR grops @MAN1EXT@ ,

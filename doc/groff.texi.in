@@ -16924,13 +16924,26 @@ as returned by @cite{getenv@r{(3)}}.
 @cindex postprocessor access
 @cindex access to postprocessor
 
-Two escape sequences and two requests enable documents to pass
-information directly to a postprocessor.  These are useful for
-exercising device-specific capabilities that the @code{groff} language
-does not abstract or generalize; examples include the embedding of
-hyperlinks and image files.  Device-specific functions are documented in
-each output driver's man page, such as @cite{gropdf@r{(1)}},
-@cite{grops@r{(1)}}, or @cite{grotty@r{(1)}}.
+Beyond the
+@code{cf}
+and
+@code{trf}
+requests
+(recall
+@ref{I/O}),
+two escape sequences and two requests enable documents
+to pass information directly to a postprocessor.
+These are useful for exercising device-specific capabilities that the
+@code{groff}
+language does not abstract or generalize;
+examples include the embedding of hyperlinks and image files.
+Device-specific functions are documented
+in each output driver's man page,
+such as
+@cite{gropdf@r{(1)}},
+@cite{grops@r{(1)}},
+or
+@cite{grotty@r{(1)}}.
 
 @DefreqList {device, [@code{"}]@Var{contents}}
 @DefescListEndx {\\X, @code{'}, contents @r{@dots{}}, @code{'}}
