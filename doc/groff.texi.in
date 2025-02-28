@@ -16484,7 +16484,7 @@ Suffixing the file name or command with a comment,
 even an empty one,
 prevents unwanted space from creeping into it during source document
 maintenance.
-See the discussion of the
+Recall the discussion of the
 @code{ds}
 request in @ref{Strings}.
 
