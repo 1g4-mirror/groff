@@ -3329,7 +3329,9 @@ in the top-level diversion.
 \&.\|.\|.
 Report,
 to the standard error stream,
-information about each ordinary or special
+information about each ordinary,
+special,
+or indexed
 .RI character\~ c .
 .
 .
