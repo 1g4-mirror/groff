@@ -16456,11 +16456,14 @@ escape sequences.
 @cindex requests for input and output
 @cindex output and input requests
 
-Occasionally a document wants to access the file system or other
-services provided by the operating environment.  GNU @command{troff}
-permits the reading of files and, when unsafe mode is enabled at the
-command line, the execution of an external commands, with or without
-inclusion of their output in the document.
+Occasionally a document wants to access the file system
+or other services provided by the operating environment.
+GNU
+@command{troff} @c GNU
+permits the reading of files into the input stream.
+Enabling unsafe mode at the command line permits
+the writing of files and execution of external commands,
+with or without inclusion of their output in the document.
 
 @cindex trailing spaces in file name or system command arguments
 @cindex comments, after file name or system command arguments
