@@ -17116,10 +17116,23 @@ This guy's arrogance takes your breath away.
 
 @DefreqList {nn, [@Var{skip}]}
 @DefregListEndx {.nn}
-Suppress numbering of the next @var{skip} output lines that would
-otherwise be numbered.  The default is@tie{}1.  @code{nn} can be invoked
-when line numbering is not active; suppression of numbering will take
-effect for @var{skip} lines once @code{nm} enables it.
+Suppress numbering of the next
+@var{skip}
+output lines counted by the
+@code{nm}
+request.
+If
+@var{skip}=0,
+@c XXX: negative values accepted; check AT&T troff
+cancel suppression.
+The default is@tie{}1.
+@code{nn}
+can be invoked when line numbering is not active;
+suppression of numbering takes effect for
+@var{skip}
+lines once
+@code{nm}
+enables it.
 
 The @code{.nn} register stores the count of output lines still to have
 their numbering suppressed.

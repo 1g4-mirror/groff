@@ -3926,14 +3926,14 @@ numeral widths
 .
 .TPx
 .REQ .nn
-Suppress numbering of the next output line to be numbered with
+Suppress numbering of the next output line counted by
 .BR nm .
 .
 .TPx
 .REQ .nn n
 Suppress numbering of the next
 .I n
-output lines to be numbered with
+output lines counted by
 .BR nm .
 .
 If
