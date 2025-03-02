@@ -765,17 +765,17 @@ public:
   void really_transparent_char(unsigned char);
   void really_print_line(hunits x, vunits y, node *n, vunits, vunits, hunits width);
   void really_begin_page(int pageno, vunits page_length);
-  void outc(unsigned char c) const;
-  void outs(const char *s) const;
+  void outc(unsigned char c);
+  void outs(const char *s);
 };
 
-void ascii_output_file::outc(unsigned char c) const
+void ascii_output_file::outc(unsigned char c)
 {
   if (fp != 0 /* nullptr */)
     fputc(c, fp);
 }
 
-void ascii_output_file::outs(const char *s) const
+void ascii_output_file::outs(const char *s)
 {
   if (fp != 0 /* nullptr */) {
     fputc('<', fp);
@@ -1925,7 +1925,7 @@ public:
   void zero_width_tprint(troff_output_file *);
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
   node *add_self(node *, hyphen_list **);
-  void ascii_print(const ascii_output_file *);
+  void ascii_print(ascii_output_file *);
   void asciify(macro *);
   int character_type();
   bool is_same_as(node *);
@@ -1953,7 +1953,7 @@ public:
   node *copy();
   node *add_self(node *, hyphen_list **);
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
-  void ascii_print(const ascii_output_file *);
+  void ascii_print(ascii_output_file *);
   void asciify(macro *);
   bool is_same_as(node *);
   const char *type();
@@ -1981,7 +1981,7 @@ public:
   void tprint(troff_output_file *);
   hyphenation_type get_hyphenation_type();
   int ends_sentence();
-  void ascii_print(const ascii_output_file *);
+  void ascii_print(ascii_output_file *);
   void asciify(macro *);
   bool is_same_as(node *);
   const char *type();
@@ -2012,7 +2012,7 @@ public:
   int ends_sentence();
   void split(int, node **, node **);
   hyphenation_type get_hyphenation_type();
-  void ascii_print(const ascii_output_file *);
+  void ascii_print(ascii_output_file *);
   void asciify(macro *);
   bool is_same_as(node *);
   const char *type();
@@ -2201,7 +2201,7 @@ hyphenation_type glyph_node::get_hyphenation_type()
   return HYPHEN_MIDDLE;
 }
 
-void glyph_node::ascii_print(const ascii_output_file *ascii)
+void glyph_node::ascii_print(ascii_output_file *ascii)
 {
   unsigned char c = ci->get_ascii_code();
   if (c != '\0')
@@ -2265,7 +2265,7 @@ node *ligature_node::copy()
 #endif
 }
 
-void ligature_node::ascii_print(const ascii_output_file *ascii)
+void ligature_node::ascii_print(ascii_output_file *ascii)
 {
   n1->ascii_print(ascii);
   n2->ascii_print(ascii);
@@ -2670,7 +2670,7 @@ public:
 			node * = 0 /* nullptr */);
   ~italic_corrected_node();
   node *copy();
-  void ascii_print(const ascii_output_file *);
+  void ascii_print(ascii_output_file *);
   void asciify(macro *);
   hunits width();
   node *last_char_node();
@@ -2748,7 +2748,7 @@ hunits italic_corrected_node::subscript_correction()
   return n->subscript_correction() - x;
 }
 
-void italic_corrected_node::ascii_print(const ascii_output_file *out)
+void italic_corrected_node::ascii_print(ascii_output_file *out)
 {
   n->ascii_print(out);
 }
@@ -2824,7 +2824,7 @@ public:
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
   void tprint(troff_output_file *);
   void zero_width_tprint(troff_output_file *);
-  void ascii_print(const ascii_output_file *);
+  void ascii_print(ascii_output_file *);
   void asciify(macro *);
   hyphenation_type get_hyphenation_type();
   int overlaps_vertically();
@@ -2947,7 +2947,7 @@ hyphenation_type break_char_node::get_hyphenation_type()
   return HYPHEN_MIDDLE;
 }
 
-void break_char_node::ascii_print(const ascii_output_file *ascii)
+void break_char_node::ascii_print(ascii_output_file *ascii)
 {
   ch->ascii_print(ascii);
 }
@@ -3531,8 +3531,7 @@ void vline_node::vertical_extent(vunits *min, vunits *max)
 
 /* ascii_print methods */
 
-static void ascii_print_node_list(const ascii_output_file *ascii,
-				  node *n)
+static void ascii_print_node_list(ascii_output_file *ascii, node *n)
 {
   node *nn = n;
   while(nn != 0 /* nullptr */) {
@@ -3541,8 +3540,7 @@ static void ascii_print_node_list(const ascii_output_file *ascii,
   }
 }
 
-static void ascii_print_reverse_node_list(
-    const ascii_output_file *ascii, node *n)
+static void ascii_print_reverse_node_list(ascii_output_file *ascii, node *n)
 {
   if (0 /* nullptr */ == n)
     return;
@@ -3550,40 +3548,40 @@ static void ascii_print_reverse_node_list(
   n->ascii_print(ascii);
 }
 
-void dbreak_node::ascii_print(const ascii_output_file *ascii)
+void dbreak_node::ascii_print(ascii_output_file *ascii)
 {
   ascii_print_reverse_node_list(ascii, none);
 }
 
-void kern_pair_node::ascii_print(const ascii_output_file *ascii)
+void kern_pair_node::ascii_print(ascii_output_file *ascii)
 {
   n1->ascii_print(ascii);
   n2->ascii_print(ascii);
 }
 
-void node::ascii_print(const ascii_output_file *)
+void node::ascii_print(ascii_output_file *)
 {
 }
 
-void space_node::ascii_print(const ascii_output_file *ascii)
+void space_node::ascii_print(ascii_output_file *ascii)
 {
   if (!n.is_zero())
     ascii->outc(' ');
 }
 
-void hmotion_node::ascii_print(const ascii_output_file *ascii)
+void hmotion_node::ascii_print(ascii_output_file *ascii)
 {
   // this is pretty arbitrary
   if (n >= points_to_units(2))
     ascii->outc(' ');
 }
 
-void space_char_hmotion_node::ascii_print(const ascii_output_file *ascii)
+void space_char_hmotion_node::ascii_print(ascii_output_file *ascii)
 {
   ascii->outc(' ');
 }
 
-void zero_width_node::ascii_print(const ascii_output_file *out) const
+void zero_width_node::ascii_print(ascii_output_file *out)
 {
   ascii_print_node_list(out, n);
 }
@@ -4332,7 +4330,7 @@ public:
   units size();
   void tprint(troff_output_file *);
   hyphenation_type get_hyphenation_type();
-  void ascii_print(const ascii_output_file *);
+  void ascii_print(ascii_output_file *);
   void asciify(macro *);
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
   node *add_self(node *, hyphen_list **);
@@ -4413,7 +4411,7 @@ void composite_node::asciify(macro *m)
     m->append(this);
 }
 
-void composite_node::ascii_print(const ascii_output_file *ascii)
+void composite_node::ascii_print(ascii_output_file *ascii)
 {
   unsigned char c = ci->get_ascii_code();
   if (c != 0)
@@ -5617,7 +5615,7 @@ bool left_italic_corrected_node::is_same_as(node *nd)
 	  && same_node(n, ((left_italic_corrected_node *)nd)->n));
 }
 
-void left_italic_corrected_node::ascii_print(const ascii_output_file *out)
+void left_italic_corrected_node::ascii_print(ascii_output_file *out)
 {
   if (n)
     n->ascii_print(out);

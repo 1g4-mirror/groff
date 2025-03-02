@@ -42,39 +42,6 @@
 
 2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/node.{h,cpp}: Improve `const`-correctness of
-	`ascii_output_file` class and related helper functions.
-
-	* src/roff/troff/node.h (struct node, class space_node)
-	(class hmotion_node, class space_char_hmotion_node)
-	(class zero_width_node, class left_italic_corrected_node): Mark
-	`ascii_print()` member functions' `ascii_output_file` pointer
-	argument as `const`.
-
-	* src/roff/troff/node.cpp (class ascii_output_file): Declare
-	`outc()` and `outs()` member functions as `const` (for our
-	C-only readers, this means they don't mutate the object upon
-	which they're called).
-	(ascii_output_file::outc, ascii_output_file::outs): Mark them
-	as `const` in corresponding definitions.
-	(class glyph_node, class ligature_node, class kern_pair_node)
-	(class dbreak_node, class glyph_node, class ligature_node)
-	(class italic_corrected_node, class break_char_node)
-	(class composite_node): Mark `ascii_print()` member functions'
-	`ascii_output_file` pointer argument as `const`.
-	(italic_corrected_node::ascii_print)
-	(break_char_node::ascii_print, dbreak_node::ascii_print)
-	(kern_pair_node::ascii_print, node::ascii_print)
-	(space_node::ascii_print, hmotion_node::ascii_print)
-	(space_char_hmotion_node::ascii_print)
-	(zero_width_node::ascii_print, composite_node::ascii_print)
-	(left_italic_corrected_node::ascii_print): Mark them as `const`
-	in corresponding definitions.
-	(ascii_print_node_list, ascii_print_reverse_node_list): Mark
-	`ascii_output_file` pointer argument as `const`.
-
-2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/roff/troff/node.cpp: Fix code style nit.
 	(glyph_node::ascii_print): Spell null character using the C/C++
 	language literal for expressing it.
