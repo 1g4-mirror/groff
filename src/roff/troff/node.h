@@ -138,7 +138,7 @@ inline node::node(node *n, statem *s, int divlevel)
   push_state(0 /* nullptr */),
   div_nest_level(divlevel), is_special(false)
 {
-  if (s)
+  if (s != 0 /* nullptr */)
     state = new statem(s);
   else
     state = 0 /* nullptr */;
