@@ -469,26 +469,26 @@ void mtsm::flush(FILE *fp, statem *s, string tag_list)
 
 void statem::display_state()
 {
-  fprintf(stderr, " <state ");
+  fprintf(stderr, "\"<state");
   if (bool_values[MTSM_BR].is_known) {
     if (bool_values[MTSM_BR].value)
-      fprintf(stderr, "[br]");
+      fprintf(stderr, " [br]");
     else
-      fprintf(stderr, "[!br]");
+      fprintf(stderr, " [!br]");
   }
   if (bool_values[MTSM_EOL].is_known) {
     if (bool_values[MTSM_EOL].value)
-      fprintf(stderr, "[eol]");
+      fprintf(stderr, " [eol]");
     else
-      fprintf(stderr, "[!eol]");
+      fprintf(stderr, " [!eol]");
   }
   if (int_values[MTSM_SP].is_known) {
     if (int_values[MTSM_SP].value)
-      fprintf(stderr, "[sp %d]", int_values[MTSM_SP].value);
+      fprintf(stderr, " [sp %d]", int_values[MTSM_SP].value);
     else
-      fprintf(stderr, "[!sp]");
+      fprintf(stderr, " [!sp]");
   }
-  fprintf(stderr, ">");
+  fprintf(stderr, ">\"");
   fflush(stderr);
 }
 

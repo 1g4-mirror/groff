@@ -1,5 +1,12 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/mtsm.cpp (statem::display_state):
+	* src/roff/troff/node.cpp (glyph_node::dump_node)
+	(node::dump_node, composite_node::dump_node)
+	(dbreak_node::dump_node): Tweak format of debugging output.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add new constructor for `node` type, permitting
 	`is_special` member variable to be initialized in initializer
 	lists.
