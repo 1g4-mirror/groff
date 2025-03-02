@@ -12722,8 +12722,8 @@ sequence does not exist, it is defined as empty, nothing is
 interpolated, and a warning in category @samp{mac} is emitted.
 @xref{Warnings}, regarding the enablement and suppression of warnings.
 
-@DefreqList {ds, name [@code{"}][@Var{contents}]}
-@DefreqItemx {ds1, name [@code{"}][@Var{contents}]}
+@DefreqList {ds, name [[@code{"}]@Var{contents}]}
+@DefreqItemx {ds1, name [[@code{"}]@Var{contents}]}
 @DefescItemx {\\*, , n, }
 @DefescItem {\\*, (, nm, }
 @c XXX: Can't mark the parameters with @Var because @Var gets called
@@ -12884,8 +12884,8 @@ save} token is inserted at the beginning of @var{contents}, and a
 @endExample
 @endDefreq
 
-@DefreqList {as, name [@code{"}][@Var{contents}]}
-@DefreqListEndx {as1, name [@code{"}][@Var{contents}]}
+@DefreqList {as, name [[@code{"}]@Var{contents}]}
+@DefreqListEndx {as1, name [[@code{"}]@Var{contents}]}
 @cindex appending to a string (@code{as})
 @cindex string, appending (@code{as})
 The @code{as} request is similar to @code{ds} but appends @var{contents}
@@ -12912,7 +12912,7 @@ can be manipulated through renaming, removal, and aliasing (@code{rn},
 @cindex trailing spaces in string length measurement
 @cindex comments, with string length measurements
 @cindex @code{length} request, and comments
-@Defreq {length, reg contents}
+@Defreq {length, reg [[@code{"}]@Var{contents}]}
 @cindex length of a string (@code{length})
 @cindex string, length of (@code{length})
 @cindex @code{length} request, and copy mode
