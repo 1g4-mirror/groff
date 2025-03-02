@@ -351,7 +351,7 @@ void environment::add_char(charinfo *ci)
       start_line();
 #if 0
     fprintf(stderr, "current line is\n");
-    line->dump_node_list();
+    dump_node_list(line);
 #endif
     if (ci != hyphen_indicator_char)
       line = line->add_char(ci, this, &width_total, &space_total, &gc_np);
@@ -360,7 +360,7 @@ void environment::add_char(charinfo *ci)
   }
 #if 0
   fprintf(stderr, "now after we have added character the line is\n");
-  line->dump_node_list();
+  dump_node_list(line);
 #endif
   if ((!suppress_push) && gc_np) {
     if (gc_np && (gc_np->state == 0 /* nullptr */)) {
@@ -374,7 +374,7 @@ void environment::add_char(charinfo *ci)
   }
 #if 0
   fprintf(stderr, "now we have possibly added the state the line is\n");
-  line->dump_node_list();
+  dump_node_list(line);
 #endif
 }
 
@@ -2418,10 +2418,11 @@ void environment::dump_troff_state()
 #undef SPACES
 }
 
-void environment::dump_node_list()
+extern void dump_node_list(node *);
+
+void environment::dump_pending_nodes()
 {
-  if (line != 0 /* nullptr */)
-    line->dump_node_list();
+  dump_node_list(line);
 }
 
 statem *environment::construct_state(bool has_only_eol)
@@ -3599,7 +3600,7 @@ void print_env()
 
 static void print_nodes_from_input_line()
 {
-  curenv->dump_node_list();
+  curenv->dump_pending_nodes();
   skip_line();
 }
 

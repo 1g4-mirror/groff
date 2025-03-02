@@ -1,5 +1,26 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (struct node): Undeclare
+	`dump_node_list()` virtual function.
+	* src/roff/troff/node.cpp (node::dump_node_list): Rename this...
+	(dump_node_list): ...to this.  Instead of being a member
+	function, it is now an ordinary function taking a
+	pointer-to-node as argument.  This is a temporary measure to
+	keep node list dumping working.  Stop throwing assertion if the
+	given node pointer is null.  Instead, we simply write an empty
+	list (`[ ]`).
+	* src/roff/troff/env.h (class environment): Rename member
+	function `dump_node_list()` to `dump_pending_nodes()`.
+	* src/roff/troff/env.cpp (environment::dump_node_list): Rename
+	this...
+	(environment::dump_pending_nodes): ...to this.
+	(environment:add_char) [0]: Update call sites.
+	(environment::dump_node_list): Rename this...
+	(environment::dump_pending_nodes): ...to this.  Stop refusing to
+	dump a null pointer.  Update call site as above.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Revise `pline` output style.  Use more JSON/YAML-ish
 	syntax.  Present node properties in a consistent order: first,
 	general node properties (read: member variables of the `node`
