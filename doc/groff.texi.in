@@ -7430,8 +7430,6 @@ Start a comment; read everything up to the next newline in copy mode
 
 It can be tricky to keep the comments from interfering with the
 appearance of the output.
-@cindex @code{ds}, @code{ds1} requests, and comments
-@cindex @code{as}, @code{as1} requests, and comments
 If the escape sequence is to the right of some text or a request, that
 portion of the line is ignored, but GNU @command{troff} processes spaces
 preceding it normally.  This affects requests that read the remainder of
@@ -11468,9 +11466,13 @@ If
 is absent,
 the character is defined with empty contents.
 
-A leading neutral double quote in the second argument is stripped from
-it, allowing embedded leading spaces in @var{contents}, which is read to
-the end of the input line in copy mode.
+GNU
+@command{troff} @c GNU
+removes a leading neutral double quote from
+@var{contents}
+permitting initial embedded spaces,
+and reads it to the end of the input line in copy mode.
+@xref{Copy Mode}.
 
 Defining (or redefining) a character @var{c} creates a formatter object
 that is recognized like any other ordinary or special character on
@@ -12780,9 +12782,9 @@ Gray codes are explored in \*[cite Morgan 1998].
 @cindex @code{ds} request, and comments
 @cindex @code{ds1} request, and comments
 @strong{Caution:@:}
-The
-@code{ds}
-request treats the remainder of the input line as its second argument,
+After the formatter has read the space character that ends the first
+argument,
+it treats the remainder of the input line as the second argument,
 including trailing spaces,
 up to a newline or comment escape sequence.
 Ending string definitions
@@ -12793,37 +12795,48 @@ prevents unwanted space from creeping into them during source document
 maintenance.
 
 @Example
-.ds H2O H\v'+.3m'\s'-2'2\v'-.3m'\s0O \" water
+.ds Si silicon \" use chemical symbol
+We observed a \*[Si]-based life form.
+    @result{} We observed a silicon -based life form.
 @endExample
 
 @noindent
-Instead, place the comment on another line or put the comment escape
-sequence immediately adjacent to the last character of the string.
+Instead,
+place the comment on another line
+or put the comment escape sequence immediately adjacent
+to the last character of the string.
 
 @Example
-.ds H2O H\v'+.3m'\s'-2'2\v'-.3m'\s0O\" water
+.ds Si silicon\" use chemical symbol
+We observed a \*[Si]-based life form.
+    @result{} We observed a silicon-based life form.
 @endExample
 
-Ending string definitions (and appendments) with a comment, even an
-empty one, prevents unwanted space from creeping into them during source
-document maintenance.
+Because the first space after the string name separates the arguments,
+you can retain it while using a comment to document an empty string.
 
 @Example
 .ds author Alice Pleasance Liddell\"
 .ds friends \" empty; append to with .as
 @endExample
 
-@cindex trailing double quotes in strings
-@cindex double quotes, trailing, in strings
-@cindex @code{ds} request, and double quotes
-@cindex leading spaces with @code{ds}
-@cindex spaces with @code{ds}
-@cindex @code{ds} request, and leading spaces
-The formatter removes a leading neutral double quote @code{"} in
-@var{contents} to permit the embedding of leading spaces.  Any other
-@code{"} is interpreted literally, but it is wise to use the special
-character escape sequence @code{\[dq]} instead if the string might be
-interpolated as part of a macro argument; see @ref{Calling Macros}.
+@cindex @code{ds} and @code{ds1} requests, arguments starting with double quote @code{"}, and comments
+@cindex leading spaces in @code{ds} and @code{ds1} argument
+@cindex spaces in @code{ds} and @code{ds1} argument, leading
+@cindex @code{ds} and @code{ds1} request, and leading spaces
+The formatter removes a leading neutral double quote
+@samp{"}
+from
+@var{contents}
+to permit the embedding of leading spaces.
+It interprets any other
+@samp{"}
+literally,
+but the wise author uses the special character escape sequence
+@code{\[dq]}
+instead if the string
+might be interpolated as part of a macro argument;
+see @ref{Calling Macros}.
 
 @c Examples should be more accessible than Unix nerd stuff like this,
 @c but in general document authors shouldn't want to use "straight"
@@ -12898,6 +12911,17 @@ the string).
 .as salutation " with shallots, onions and garlic,\"
 @endExample
 
+@cindex @code{as} and @code{as1} requests, arguments starting with double quote @code{"}, and comments
+@strong{Caution:@:}
+The formatter reads the second argument to the end of the line
+in copy mode,
+omitting any leading neutral double quote
+@samp{"}
+character.
+See the discussion of the
+@code{ds}
+request above.
+
 The @code{as1} request works as does @code{as}, but like @code{ds1}, it
 brackets @var{contents} with @slanted{compatibility save} and
 @slanted{restore} tokens.
@@ -12921,9 +12945,10 @@ can be manipulated through renaming, removal, and aliasing (@code{rn},
 Compute the number of characters in @var{contents} and store the count
 in the register @var{reg}.  If @var{reg} doesn't exist, it is created.
 
-A leading neutral double quote in the argument is stripped from it,
-allowing embedded leading spaces in @var{contents}, which is read to
-the end of the input line in copy mode.
+GNU
+@command{troff} @c GNU
+removes a leading neutral double quote from the argument to the request,
+permitting embedded leading spaces.
 
 @Example
 .ds xxx abcd\h'3i'efgh
@@ -12933,11 +12958,9 @@ the end of the input line in copy mode.
 @endExample
 
 @strong{Caution:@:}
-The
-@code{length}
-request treats the remainder of the input line as its second argument,
-including trailing spaces,
-up to a newline or comment escape sequence.
+GNU
+@command{troff} @c GNU
+reads the second argument to the end of the line in copy mode.
 See the discussion of the
 @code{ds}
 request above.
@@ -15968,9 +15991,13 @@ no output at all; its argument is simply ignored.
 Emit @var{contents} directly to GNU @command{troff}'s output; this usage
 is similar to that of @code{\!} in the top-level diversion.
 
-A leading neutral double quote in the argument to @code{output} is
-stripped from it, allowing embedded leading spaces in @var{contents},
-which is read to the end of the input line in copy mode.
+GNU
+@command{troff} @c GNU
+removes a leading neutral double quote from
+@var{contents}
+permitting initial embedded spaces,
+and reads it to the end of the input line in copy mode.
+Recall @ref{Copy Mode}.
 
 @strong{Caution:@:} Use of these features can put syntactically invalid
 content into GNU @command{troff}'s output, which @code{groff}'s output
@@ -16467,17 +16494,19 @@ with or without inclusion of their output in the document.
 
 @cindex trailing spaces in file name or system command arguments
 @cindex comments, after file name or system command arguments
-@cindex @code{cf} request, and comments
-@cindex @code{mso} request, and comments
-@cindex @code{msoquiet} request, and comments
-@cindex @code{nx} request, and comments
-@cindex @code{open} request, and comments
-@cindex @code{opena} request, and comments
-@cindex @code{pi} request, and comments
-@cindex @code{so} request, and comments
-@cindex @code{soquiet} request, and comments
-@cindex @code{sy} request, and comments
-@cindex @code{trf} request, and comments
+@cindex @code{"}, at the start of a request argument
+@cindex double quote, at the start of a request argument
+@cindex @code{cf} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{mso} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{msoquiet} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{nx} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{open} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{opena} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{pi} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{so} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{soquiet} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{sy} request, arguments starting with double quote @code{"}, and comments
+@cindex @code{trf} request, arguments starting with double quote @code{"}, and comments
 @strong{Caution:@:}
 The requests discussed below that accept a file name or system command
 as an argument treat the remainder of the input line as that argument,
@@ -16487,6 +16516,11 @@ Suffixing the file name or command with a comment,
 even an empty one,
 prevents unwanted space from creeping into it during source document
 maintenance.
+GNU
+@command{troff} @c GNU
+removes a leading neutral double quote from such arguments
+permitting initial embedded spaces,
+and reads it to the end of the input line in copy mode.
 Recall the discussion of the
 @code{ds}
 request in @ref{Strings}.
@@ -16940,11 +16974,12 @@ or other postprocessor.
 @cindex @code{device} request, and copy mode
 @cindex copy mode, and @code{device} request
 @cindex mode, copy, and @code{device} request
+@cindex @code{device} request, arguments starting with double quote @code{"}, and comments
 GNU
 @command{troff} @c GNU
-strips a leading neutral double quote from
+removes a leading neutral double quote from
 @var{contents}
-to permit initial embedded spaces,
+permitting initial embedded spaces,
 and reads it to the end of the input line in copy mode.
 Recall @ref{Copy Mode}.
 
@@ -17442,6 +17477,7 @@ error stream.
 @cindex assign input line number request (@code{lf})
 @cindex input line number, assignment, request (@code{lf})
 @cindex number, input line, assignment request (@code{lf})
+@cindex @code{lf} request, arguments starting with double quote @code{"}, and comments
 Set the input line number
 (and,
 optionally,
@@ -17449,22 +17485,20 @@ the file name)
 GNU
 @command{troff}
 uses when reporting diagnostics.
-@var{line}
-is the input line number of the
+The argument becomes the input line number of the
 @emph{next}
-line.
+line the formatter reads.
 @var{file-identifier}
 is a sequence of ordinary characters and/or spaces.
 @c XXX: or tabs, leaders, backspace, and delete characters
 @c ...limiting the file names you can express; see Savannah #65108.
 GNU
-@command{troff}
-strips a leading leading neutral double quote from
-@var{file-identifier},
-which it reads in copy mode
-(recall
-@ref{Copy Mode}),
-allowing it to contain embedded leading spaces.
+@command{troff} @c GNU
+removes a leading neutral double quote from
+@var{file-identifier}
+permitting initial embedded spaces,
+and reads it to the end of the input line in copy mode.
+Recall @ref{Copy Mode}.
 
 @code{lf}'s primary purpose is to aid the debugging of documents that
 undergo preprocessing.  Programs like @command{tbl} that transform input
@@ -17473,20 +17507,31 @@ diagnostic messages emitted by @code{troff} correspond to the source
 document.
 @endDefreq
 
-@DefreqList {tm, message}
+@DefreqList {tm, terminal-message}
 @DefreqItemx {tm1, [@code{"}]message}
 @DefreqListEndx {tmc, [@code{"}]message}
 @cindex print to the standard error stream (@code{tm}, @code{tm1}, @code{tmc})
 @cindex standard error stream, write to (@code{tm}, @code{tm1}, @code{tmc})
 @cindex stream, standard error, write to (@code{tm}, @code{tm1}, @code{tmc})
-Send @var{message}, which consumes the remainder of the input line and
-cannot contain special characters, to the standard error stream,
-followed by a newline.  Leading spaces in @var{message} are ignored.
+Send
+@var{terminal-message}
+to the standard error stream.
+The formatter reads the argument
+to the end of the input line in copy mode,
+but does
+@emph{not}
+removing a leading double quote;
+contrast
+@code{tm1}.
 
-@code{tm1} is similar, but recognizes and strips a leading neutral
-double quote, allowing leading embedded spaces in @var{message}.
+@code{tm1}
+removes a leading neutral double quote from
+@var{message},
+allowing leading embedded spaces.
 
-@code{tmc} works as @code{tm1}, but does not append a newline.
+@code{tmc} works as
+@code{tm1},
+but does not append a newline.
 @endDefreq
 
 @Defreq {ab, [@Var{message}]}
@@ -18378,13 +18423,14 @@ values of minimum inter-word and additional inter-sentence space are
 each rounded down to the nearest multiple of@tie{}12.
 
 @cindex @code{cf} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{nx} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{pi} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{so} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
 GNU
 @command{troff}
-strips a leading neutral double quote from the argument to the
+removes a leading neutral double quote from the argument to the
 @code{cf},
 @code{nx},
 @code{pi},
@@ -18392,7 +18438,12 @@ strips a leading neutral double quote from the argument to the
 and
 @code{sy}
 requests,
-allowing it to contain embedded leading spaces.
+and the second argument
+(if present)
+to the
+@code{lf}
+request,
+permitting embedded leading spaces.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{cs} request, incompatibilities with @acronym{AT&T} @code{troff}

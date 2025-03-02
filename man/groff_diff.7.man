@@ -2062,6 +2062,15 @@ If
 is absent,
 the character is defined with empty contents.
 .
+GNU
+.I troff \" GNU
+removes a leading neutral double quote from
+.IR contents ,
+permitting initial embedded spaces,
+and reads it to the end of the input line in copy mode.
+See section \[lq]Copy Mode\[rq] of
+.MR groff @MAN7EXT@ .
+.
 .
 .IP
 Defining
@@ -2266,11 +2275,11 @@ request.
 Close the named
 .IR stream ,
 invalidating it as an argument to the
-.B write
+.RB \[lq] write \[rq]
 request.
 .
 See
-.BR open .
+.RB \[lq] open \[rq].
 .
 .
 .TP
@@ -3301,7 +3310,7 @@ and
 .RB [ \[dq] ]\c
 .I file
 As
-.BR open ,
+.RB \[lq] open \[rq],
 but if
 .I file
 exists,
@@ -3831,17 +3840,17 @@ the increase in width is a linear function of the type size.
 .IR message ]
 As
 .BR tm ,
-but recognizes and strips a leading neutral double quote,
-allowing embedded leading spaces in
-.IR message .
+but
+removes a leading neutral double quote from
+.IR message ,
+permitting initial embedded spaces.
 .
 .
 .TP
 .BR .tmc \~[[ \[dq] ]\c
 .IR message ]
 As
-.B tm1
-request,
+.BR tm1 ,
 but does not append a newline.
 .
 .
@@ -4101,7 +4110,7 @@ flushes the stream after writing to it.
 .RB [[ \[dq] ]\c
 .IR character-sequence ]
 As
-.BR write ,
+.RB \[lq] write \[rq],
 but does not append a newline to
 .IR contents .
 .
@@ -4166,8 +4175,8 @@ this behavior is so anomalous that it must be considered a bug.
 .IP
 GNU
 .I troff \" GNU
-strips a leading neutral double quote from the argument,
-allowing it to contain embedded leading spaces.
+removes a leading neutral double quote from the argument,
+permitting initial embedded spaces.
 .
 Further,
 spaces in
@@ -4221,18 +4230,18 @@ request is selected.
 .
 .
 .TP
-.BI .lf\~ next-line-number\~\c
+.BI .lf\~ input-line-number\~\c
 .RB [[ \[dq] ]\c
 .IR file-identifier ]
-GNU
+In GNU
 .I troff \" GNU
-strips a leading neutral double quote from the optional second argument,
-allowing it to contain embedded leading spaces.
-.
-Further,
-non-leading spaces in
-.I file-identifier
-are also accepted.
+the first argument becomes the input line number of the
+.I next
+line the formatter reads.
+It also
+removes a leading neutral double quote from
+.IR file-identifier ,
+permitting initial embedded spaces.
 .
 .
 .TP
@@ -4240,8 +4249,8 @@ are also accepted.
 .IR file ]
 GNU
 .I troff \" GNU
-strips a leading neutral double quote from the optional argument,
-allowing it to contain embedded leading spaces.
+removes a leading neutral double quote from the optional argument,
+permitting initial embedded spaces.
 .
 Further,
 spaces in
@@ -4255,7 +4264,7 @@ are accepted as part of the file name.
 GNU
 .I troff \" GNU
 strips a leading neutral double quote from the argument,
-allowing it to contain embedded leading spaces.
+permitting initial embedded spaces.
 .
 .
 .TP
@@ -4264,7 +4273,7 @@ allowing it to contain embedded leading spaces.
 GNU
 .I troff \" GNU
 strips a leading neutral double quote from the argument,
-allowing it to contain embedded leading spaces.
+permitting initial embedded spaces.
 .
 Further,
 spaces in
@@ -4298,7 +4307,7 @@ Negative values are erroneous.
 GNU
 .I troff \" GNU
 strips a leading neutral double quote from the argument,
-allowing it to contain embedded leading spaces.
+permitting initial embedded spaces.
 .
 .
 .TP
@@ -6263,12 +6272,11 @@ inter-sentence space each to the nearest multiple of\~12.
 .P
 GNU
 .I troff \" GNU
-strips a leading neutral double quote from the argument to the
+removes a leading neutral double quote from the argument to the
 .BR cf ,
 .BR nx ,
 .BR pi ,
-and
-.BR so ,
+.RB \[lq] so \[rq],
 and
 .B sy
 requests,
@@ -6277,7 +6285,7 @@ and the second argument
 to the
 .B lf
 request,
-allowing it to contain embedded leading spaces.
+permitting initial embedded spaces.
 .
 .
 .P

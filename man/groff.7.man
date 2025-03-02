@@ -435,15 +435,35 @@ The neutral double quote can be used to enclose arguments to macros and
 strings,
 and is required if those arguments contain space or tab characters.
 .
-In the
+The requests
+.RB \[lq] as \[rq],
+.request as1 ,
+.request cf ,
+.request char ,
 .request ds ,
 .request ds1 ,
-.RB \[lq] as \[rq],
+.request fchar ,
+.request fschar ,
+.request mso ,
+.request msoquiet ,
+.request nx ,
+.RB \[lq] open \[rq],
+.request opena ,
+.request pi ,
+.request schar ,
+.RB \[lq] so \[rq],
+.request soquiet ,
+.request sy ,
 and
-.request as1
-requests,
-a leading neutral double quote in the second argument is stripped off
+.request trf
+strip a leading neutral double quote
+from their final arguments
 to allow embedding of leading spaces.
+All such arguments are \[lq]strings\[rq] in a general sense,
+representing character sequences,
+file names,
+operating system commands,
+or parameters to an output device extension command.
 .
 To include a double quote inside a quoted argument,
 use the
@@ -2444,12 +2464,15 @@ reads arguments named
 .I file,
 and
 .I message
-in copy mode until the end of the input line;
+in copy mode
+(see section \[lq]Copy Mode\[rq] below)
+until the end of the input line;
 they thus can contain embedded spaces.
 .
-They can also be optionally prefixed with a neutral double quote
-.BR \[dq] ,
-which the formatter discards if present,
+A neutral double quote
+.RB \[oq] \[dq] \[cq] \" single quotes around double quote
+can optionally prefix these;
+the formatter discards one if present,
 permitting leading spaces in the argument.
 .
 .
@@ -3723,15 +3746,21 @@ expression
 .IR b .
 .
 .TPx
-.REQ .lf n
-Set number of next input line to
-.IR n .
+.REQ .lf input-line-number
+Set the input line number
+GNU
+.I troff \" GNU
+uses when reporting diagnostics.
+The argument becomes the input line number of the
+.I next
+line the formatter reads.
 .
 .TPx
-.REQ .lf "n file-identifier"
-Set number of next input line to
-.I n
-and report input file name as
+.REQ .lf "input-line-number file-identifier"
+As
+.B lf
+with one argument,
+but also update the reported file name to
 .IR file-identifier ,
 a sequence of ordinary characters and/or spaces.
 .\" XXX: or tabs, leaders, backspace, and delete characters
@@ -3739,7 +3768,7 @@ a sequence of ordinary characters and/or spaces.
 .
 GNU
 .I troff \" GNU
-strips a leading leading neutral double quote from
+removes a leading leading neutral double quote from
 .IR file-identifier ,
 allowing it to contain embedded leading spaces.
 .
@@ -4718,17 +4747,16 @@ Write a newline to the standard error stream.
 .
 .TPx
 .REQ .tm terminal-message
-Write
-.I terminal-message,
+Send
+.IR terminal-message ,
 followed by a newline,
 to the standard error stream.
-.
-.I terminal-message
-is read in copy mode to the end of the input line,
+The formatter reads the argument
+to the end of the input line in copy mode,
 but does
 .I not
-recognize and strip a leading double quote;
-see
+remove a leading double quote;
+contrast
 .BR .tm1 .
 .
 .TPx
@@ -4740,9 +4768,9 @@ As
 .REQ .tm1 message
 As
 .request .tm ,
-but recognizes and strips a leading neutral double quote,
-allowing embedded leading spaces in
-.IR message .
+but removes a leading neutral double quote from
+.IR message ,
+allowing embedded leading spaces.
 .
 .TPx
 .REQ .tmc
@@ -4752,7 +4780,7 @@ No operation.
 .REQ .tmc message
 As
 .request .tm1 ,
-without emitting a newline.
+but does not append a newline.
 .
 .TPx
 .REQ .tr abcd\fR\&.\|.\|.\&\fP
@@ -6154,10 +6182,19 @@ If
 is called with only one argument,
 the named string becomes empty.
 .
-Otherwise,
-.I @g@troff
-stores the remainder of the control line in copy mode;
-see subsection \[lq]Copy mode\[rq] below.
+The formatter removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq] \" single quotes around double quote
+from
+.I contents
+to permit the embedding of leading spaces.
+It interprets any other
+.RB \[oq] \[dq] \[cq] \" single quotes around double quote
+literally,
+but the wise author uses the special character escape sequence
+.B \[rs][dq]
+instead if the string
+might be interpolated as part of a macro argument;
+see section \[lq]Calling macros\[rq] above.
 .
 .
 .P
