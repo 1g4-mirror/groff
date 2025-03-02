@@ -59,6 +59,7 @@ struct node {
   node();
   node(node *);
   node(node *, statem *, int);
+  node(node *, statem *, int, bool);
   node *add_char(charinfo *, environment *, hunits *, int *,
 		 node ** /* glyph_comp_np */ = 0 /* nullptr */);
 
@@ -137,6 +138,17 @@ inline node::node(node *n, statem *s, int divlevel)
 : next(n), last(0 /* nullptr */),
   push_state(0 /* nullptr */),
   div_nest_level(divlevel), is_special(false)
+{
+  if (s != 0 /* nullptr */)
+    state = new statem(s);
+  else
+    state = 0 /* nullptr */;
+}
+
+inline node::node(node *n, statem *s, int divlevel, bool special)
+: next(n), last(0 /* nullptr */),
+  push_state(0 /* nullptr */),
+  div_nest_level(divlevel), is_special(special)
 {
   if (s != 0 /* nullptr */)
     state = new statem(s);

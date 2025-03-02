@@ -1,5 +1,17 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add new constructor for `node` type, permitting
+	`is_special` member variable to be initialized in initializer
+	lists.
+
+	* src/roff/troff/node.h (struct node, node::node): Do it.
+	* src/roff/troff/node.cpp
+	(device_extension_node::device_extension_node)
+	(suppress_node::suppress_node): Migrate constructors of derived
+	classes to it where applicable.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (node::node): Fix code style nit;
 	explicitly compare variable of pointer type to null pointer
 	literal instead of letting it pun down to a Boolean.

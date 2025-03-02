@@ -3926,7 +3926,8 @@ int node::interpret(macro *)
 }
 
 device_extension_node::device_extension_node(const macro &m, bool b)
-: mac(m), lacks_command_prefix(b)
+: node(0 /* nullptr */, 0 /* nullptr */, 0, true), mac(m),
+  lacks_command_prefix(b)
 {
   font_size fs = curenv->get_font_size();
   int char_height = curenv->get_char_height();
@@ -3937,17 +3938,15 @@ device_extension_node::device_extension_node(const macro &m, bool b)
     tf = tf->get_plain();
   gcol = curenv->get_stroke_color();
   fcol = curenv->get_fill_color();
-  is_special = 1;
 }
 
 device_extension_node::device_extension_node(const macro &m, tfont *t,
 			   color *gc, color *fc,
 			   statem *s, int divlevel,
 			   bool b)
-: node(0, s, divlevel), mac(m), tf(t), gcol(gc), fcol(fc),
-  lacks_command_prefix(b)
+: node(0 /* nullptr */, s, divlevel, true), mac(m), tf(t), gcol(gc),
+  fcol(fc), lacks_command_prefix(b)
 {
-  is_special = 1;
 }
 
 bool device_extension_node::is_same_as(node *n)
@@ -4018,9 +4017,9 @@ suppress_node::suppress_node(int on_or_off, int issue_limits)
 }
 
 suppress_node::suppress_node(symbol f, char p, int id)
-: is_on(2), emit_limits(0), filename(f), position(p), image_id(id)
+: node(0 /* nullptr */, 0 /* nullptr */, 0, true), is_on(2),
+  emit_limits(0), filename(f), position(p), image_id(id)
 {
-  is_special = 1;
 }
 
 suppress_node::suppress_node(int issue_limits, int on_or_off,
@@ -4054,9 +4053,8 @@ node *suppress_node::copy()
 /* tag_node */
 
 tag_node::tag_node()
-: delayed(0)
+: node(0 /* nullptr */, 0 /* nullptr */, 0, true), delayed(false)
 {
-  is_special = 1;
 }
 
 tag_node::tag_node(string s, int delay)
