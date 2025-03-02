@@ -3040,8 +3040,7 @@ node *transparent_dummy_node::copy()
 
 hline_node::~hline_node()
 {
-  if (n)
-    delete n;
+  delete n;
 }
 
 hline_node::hline_node(hunits i, node *c, node *nxt)
@@ -3078,8 +3077,7 @@ vline_node::vline_node(vunits i, node *c, statem *s,
 
 vline_node::~vline_node()
 {
-  if (n)
-    delete n;
+  delete n;
 }
 
 node *vline_node::copy()

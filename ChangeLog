@@ -1,5 +1,10 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (hline_node::~hline_node)
+	(vline_node::~vline_node): Fix code style nit, simplifying.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (copy_file, transparent_file): Drop
 	extraneous `tok.next()` calls; they are already performed just
 	prior to function return.  They caused the input stream pointer
