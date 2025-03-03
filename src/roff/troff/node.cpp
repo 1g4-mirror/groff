@@ -2014,6 +2014,7 @@ public:
   bool causes_tprint();
   bool is_tag();
   void vertical_extent(vunits *, vunits *);
+  void dump_properties();
 };
 
 class dbreak_node : public node {
@@ -2296,6 +2297,13 @@ kern_pair_node::kern_pair_node(hunits n, node *first, node *second,
 			       statem* s, int divlevel, node *x)
 : node(x, s, divlevel), amount(n), n1(first), n2(second)
 {
+}
+
+void kern_pair_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"amount\": %d", amount.to_units());
+  fflush(stderr);
 }
 
 dbreak_node::dbreak_node(node *n, node *p, statem *s, int divlevel,
