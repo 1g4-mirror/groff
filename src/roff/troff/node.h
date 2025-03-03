@@ -229,6 +229,7 @@ struct width_list {
   width_list *next;
   width_list(hunits, hunits);
   width_list(width_list *);
+  void dump();
 };
 
 class word_space_node : public space_node {
@@ -253,6 +254,7 @@ public:
   bool did_space_merge(hunits, hunits, hunits);
   bool causes_tprint();
   bool is_tag();
+  void dump_properties();
 };
 
 class unbreakable_space_node : public word_space_node {

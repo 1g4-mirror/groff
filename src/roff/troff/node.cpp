@@ -4622,6 +4622,25 @@ width_list::width_list(width_list *w)
 {
 }
 
+void width_list::dump()
+{
+  fputc('[', stderr);
+  bool need_comma = false;
+  fprintf(stderr, "{ \"width\": %d", width.to_units());
+  fprintf(stderr, ", \"sentence_width\": %d }",
+	  sentence_width.to_units());
+  fflush(stderr);
+  width_list *n = this;
+  while (n->next != 0 /* nullptr */) {
+    if (need_comma)
+      fputs(", ", stderr);
+    need_comma = true;
+    n = n->next;
+  }
+  fputc(']', stderr);
+  fflush(stderr);
+}
+
 word_space_node::word_space_node(hunits d, color *c, width_list *w, node *x)
 : space_node(d, c, x), orig_width(w), unformat(false)
 {
@@ -4632,6 +4651,17 @@ word_space_node::word_space_node(hunits d, int s, color *c,
 				 int divlevel, node *x)
 : space_node(d, s, 0, c, st, divlevel, x), orig_width(w), unformat(flag)
 {
+}
+
+void word_space_node::dump_properties()
+{
+  space_node::dump_properties();
+  if (orig_width != 0 /* nullptr */) {
+    fputs(", \"width_list\": ", stderr);
+    orig_width->dump();
+  }
+  fprintf(stderr, ", \"unformat\": %s", unformat ? "true" : "false");
+  fflush(stderr);
 }
 
 word_space_node::~word_space_node()

@@ -1,5 +1,18 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (struct width_list): Declare `dump()`
+	member function.
+	(class word_space_node): Specialize (override)
+	`dump_properties()` for this class.
+	* src/roff/troff/node.cpp (width_list::dump): New member
+	function traverses a singly-linked of `width_list` nodes, and
+	reports values of `width` and `sentence_width` properties.
+	(word_space_node::dump_properties): New member function
+	reports values of `width_list` (if not a null pointer) and
+	`unformat` properties.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class draw_node): Specialize (override)
 	`dump_properties()` for this class.
 	* src/roff/troff/node.cpp (draw_node::dump_properties): New
