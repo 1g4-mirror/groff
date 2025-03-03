@@ -3115,6 +3115,13 @@ hline_node::hline_node(hunits i, node *c, statem *s, int divlevel,
 {
 }
 
+void hline_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"hunits\": %d", x.to_units());
+  fflush(stderr);
+}
+
 node *hline_node::copy()
 {
   return new hline_node(x, (nodes != 0 /* nullptr */) ? nodes->copy()
