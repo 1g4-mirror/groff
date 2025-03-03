@@ -1,5 +1,17 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class charinfo_node): Declare
+	member function `dump_properties()` overriding base here...
+	(class glyph_node): ...instead of here.
+	(composite_node::dump_properties): Rename this...
+	(charinfo_node::dump_properties): ...to this (and relocate it to
+	live alongside `charinfo_node`'s other member functions).
+	(class glyph_node): Undeclare member function `dump_node()`.
+	(glyph_node::dump_node): Drop.  The `charinfo_node` base class
+	now does everything its derived classes need.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class composite_node): Rename member
 	function `dump_node()` to `dump_properties()`, altering its
 	purpose.

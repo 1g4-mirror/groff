@@ -38,6 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "charinfo.h"
 #include "input.h"
 #include "geometry.h"
+#include "json-encode.h" // json_encode_char()
 
 #include "posix.h"
 #include "nonposix.h"
@@ -1865,6 +1866,7 @@ public:
   int ends_sentence();
   int overlaps_vertically();
   int overlaps_horizontally();
+  void dump_properties();
 };
 
 charinfo_node::charinfo_node(charinfo *c, statem *s, int divlevel,
@@ -1890,6 +1892,31 @@ int charinfo_node::overlaps_horizontally()
 int charinfo_node::overlaps_vertically()
 {
   return ci->overlaps_vertically();
+}
+
+void charinfo_node::dump_properties()
+{
+  node::dump_properties();
+  // GNU troff multiplexes the distinction of ordinary vs. special
+  // characters though the special character code zero.
+  unsigned char c = ci->get_ascii_code();
+  if (c) {
+    fputs(", \"character\": ", stderr);
+    // It's not a `string` or `symbol` we can `.json_dump()`, so we have
+    // to write the quotation marks ourselves.
+    fputc('\"', stderr);
+    json_char jc = json_encode_char(c);
+    // Write out its JSON representation by character by character to
+    // keep libc string functions from interpreting C escape sequences.
+    for (size_t i = 0; i < jc.len; i++)
+      fputc(jc.buf[i], stderr);
+    fputc('\"', stderr);
+  }
+  else {
+    fputs(", \"special character\": ", stderr);
+    ci->nm.json_dump();
+  }
+  fflush(stderr);
 }
 
 class glyph_node : public charinfo_node {
@@ -1932,7 +1959,6 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
-  void dump_node();
 };
 
 class ligature_node : public glyph_node {
@@ -2209,50 +2235,6 @@ void glyph_node::ascii_print(ascii_output_file *ascii)
   else
     ascii->outs(ci->nm.contents());
 }
-
-// XXX: This and `composite_node::dump_node()` are identical.  C++
-// presumably has several different solutions for this.  Pick one.
-void glyph_node::dump_node()
-{
-  fprintf(stderr, "{\"type\": \"%s\"", type());
-  // GNU troff multiplexes the distinction of ordinary vs. special
-  // characters though the special character code zero.
-  unsigned char c = ci->get_ascii_code();
-  if (c) {
-    fputs(", \"character\": ", stderr);
-    fputc('\"', stderr);
-    // JSON-encode the (printable Basic Latin) character.
-    switch (c) {
-    case '"':
-    case '\\':
-    case '/':
-      fputc('\\', stderr);
-      // fall through
-    default:
-      fputc(c, stderr);
-      break;
-    }
-    fputc('\"', stderr);
-  }
-  else {
-    fputs(", \"special character\": ", stderr);
-    ci->nm.json_dump();
-  }
-  fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
-  fprintf(stderr, ", \"is_special_node\": %s",
-	  is_special ? "true" : "false");
-  if (push_state) {
-    fputs(", \"push_state\": ", stderr);
-    push_state->display_state();
-  }
-  if (state) {
-    fputs(", \"state\": ", stderr);
-    state->display_state();
-  }
-  fputs("}", stderr);
-  fflush(stderr);
-}
-
 ligature_node::ligature_node(charinfo *c, tfont *t,
 			     color *gc, color *fc,
 			     node *gn1, node *gn2, statem *s,
@@ -5041,18 +5023,14 @@ void composite_node::dump_properties()
   unsigned char c = ci->get_ascii_code();
   if (c) {
     fputs(", \"character\": ", stderr);
+    // It's not a `string` or `symbol` we can `.json_dump()`, so we have
+    // to write the quotation marks ourselves.
     fputc('\"', stderr);
-    // JSON-encode the (printable Basic Latin) character.
-    switch (c) {
-    case '"':
-    case '\\':
-    case '/':
-      fputc('\\', stderr);
-      // fall through
-    default:
-      fputc(c, stderr);
-      break;
-    }
+    json_char jc = json_encode_char(c);
+    // Write out its JSON representation by character by character to
+    // keep libc string functions from interpreting C escape sequences.
+    for (size_t i = 0; i < jc.len; i++)
+      fputc(jc.buf[i], stderr);
     fputc('\"', stderr);
   }
   else {
