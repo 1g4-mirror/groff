@@ -4390,7 +4390,7 @@ public:
   bool is_tag();
   void vertical_extent(vunits *, vunits *);
   vunits vertical_width();
-  void dump_node();
+  void dump_properties();
 };
 
 composite_node::composite_node(node *p, charinfo *c, tfont *t, statem *s,
@@ -5033,11 +5033,9 @@ void composite_node::tprint(troff_output_file *out)
     out->right(track_kern);
 }
 
-// XXX: This and `glyph_node::dump_node()` are identical.  C++
-// presumably has several different solutions for this.  Pick one.
-void composite_node::dump_node()
+void composite_node::dump_properties()
 {
-  fprintf(stderr, "{\"type\": \"%s\"", type());
+  node::dump_properties();
   // GNU troff multiplexes the distinction of ordinary vs. special
   // characters though the special character code zero.
   unsigned char c = ci->get_ascii_code();
@@ -5061,18 +5059,6 @@ void composite_node::dump_node()
     fputs(", \"special character\": ", stderr);
     ci->nm.json_dump();
   }
-  fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
-  fprintf(stderr, ", \"is_special_node\": %s",
-	  is_special ? "true" : "false");
-  if (push_state) {
-    fputs(", \"push_state\": ", stderr);
-    push_state->display_state();
-  }
-  if (state) {
-    fputs(", \"state\": ", stderr);
-    state->display_state();
-  }
-  fputs("}", stderr);
   fflush(stderr);
 }
 

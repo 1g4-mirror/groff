@@ -1,5 +1,15 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class composite_node): Rename member
+	function `dump_node()` to `dump_properties()`, altering its
+	purpose.
+	(composite_node::dump_node): Rename this...
+	(composite_node::dump_properties): ...to this.  Now we override
+	a different function, and can ditch repetitious code that
+	reported properties of the base class.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (struct node): Add new virtual member
 	function, `dump_properties()`, to support modular composition of
 	node dumping.  All nodes have properties, but some dervived
