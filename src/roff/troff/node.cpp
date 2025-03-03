@@ -2633,8 +2633,8 @@ void node::dump_node()
   fflush(stderr);
 }
 
-// TODO: Turn this into container_node::dump().
-void dump_node_list(node *nlist)
+// TODO: Move this into env.cpp.
+void dump_node_list_in_reverse(node *nlist)
 {
   // It's stored in reverse order already; this puts it forward again.
   std::stack<node *> reversed_node_list;

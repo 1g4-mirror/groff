@@ -1,3 +1,15 @@
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: The property of the environment that holds the pending
+	output line appears to be unique in storing the elements of its
+	node list in reverse order.  Rename function to reflect its
+	specialized purpose.
+
+	* src/roff/troff/node.cpp (dump_node_list): Rename this...
+	(dump_node_list_in_reverse): ...to this.
+	* src/roff/troff/env.cpp (environment::add_char) [0]:
+	(environment::dump_pending_nodes): Update call sites.
+
 2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.h (class break_char_node):
