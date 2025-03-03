@@ -1961,6 +1961,8 @@ public:
   bool is_tag();
 };
 
+// TODO: Do not derive from `container_node`; implement custom double
+// container dumper in dump_node().
 class ligature_node : public glyph_node {
   node *n1;
   node *n2;
@@ -1987,6 +1989,8 @@ public:
   bool is_tag();
 };
 
+// TODO: Do not derive from `container_node`; implement custom double
+// container dumper in dump_node().
 class kern_pair_node : public node {
   hunits amount;
   node *n1;
@@ -2017,6 +2021,8 @@ public:
   void dump_properties();
 };
 
+// Not derived from `container_node`; implements custom triple container
+// dumper in dump_node().
 class dbreak_node : public node {
   node *none;
   node *pre;
@@ -2696,6 +2702,7 @@ hunits dbreak_node::subscript_correction()
   return none ? none->subscript_correction() : H0;
 }
 
+// TODO: Derive from abstract class `container_node`.
 class italic_corrected_node : public node {
   node *nodes;
   hunits x;
@@ -2847,6 +2854,7 @@ int italic_corrected_node::character_type()
   return nodes->character_type();
 }
 
+// TODO: Derive from abstract class `container_node`.
 class break_char_node : public node {
   node *nodes;
   char break_code;

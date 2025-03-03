@@ -478,6 +478,7 @@ public:
   hyphenation_type get_hyphenation_type();
 };
 
+// TODO: Derive from abstract class `container_node`.
 class zero_width_node : public node {
   node *nodes;
 public:
