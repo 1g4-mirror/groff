@@ -1,5 +1,15 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class suppress_node): Specialize
+	{override} `dump_properties()` for this class.
+	* src/roff/troff/node.cpp
+	(suppress_node::dump_properties): New member function
+	reports values of `is_on`, `emit_limits`, `filename` (if not
+	null), `position` (if not a null character), and `image_id`
+	properties.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class device_extension_node):
 	Specialize {override} `dump_properties()` for this class.
 	* src/roff/troff/node.cpp

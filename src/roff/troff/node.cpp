@@ -4167,6 +4167,20 @@ suppress_node::suppress_node(int issue_limits, int on_or_off,
 {
 }
 
+void suppress_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"is_on\": %d", is_on);
+  fprintf(stderr, ", \"emit_limits\": %s",
+	  emit_limits ? "true" : "false");
+  if (filename.contents() != 0 /* nullptr */)
+    fprintf(stderr, ", \"filename\": \"%s\"", filename.contents());
+  if (position != '\0')
+    fprintf(stderr, ", \"position\": \"%c\"", position);
+  fprintf(stderr, ", \"image_id\": %d", image_id);
+  fflush(stderr);
+}
+
 bool suppress_node::is_same_as(node *n)
 {
   return ((is_on == ((suppress_node *)n)->is_on)
