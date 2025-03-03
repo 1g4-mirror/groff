@@ -529,6 +529,7 @@ public:
   void dump_properties();
 };
 
+// TODO: Derive from abstract class `container_node`.
 class overstrike_node : public node {
   node *nodes;
   hunits max_width;
@@ -547,6 +548,7 @@ public:
   node *add_self(node *, hyphen_list **);
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
   hyphenation_type get_hyphenation_type();
+  void dump_properties();
 };
 
 class bracket_node : public node {

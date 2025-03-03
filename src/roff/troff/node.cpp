@@ -3237,6 +3237,13 @@ overstrike_node::overstrike_node(statem *s, int divlevel)
 {
 }
 
+void overstrike_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"max_width\": %d", max_width.to_units());
+  fflush(stderr);
+}
+
 overstrike_node::~overstrike_node()
 {
   delete_node_list(nodes);

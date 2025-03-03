@@ -1,5 +1,12 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class overstrike_node): Specialize
+	{override} `dump_properties()` for this class.
+	* src/roff/troff/node.cpp (overstrike_node::dump_properties):
+	New member function reports value of `max_width` property.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class left_italic_corrected_node):
 	Specialize (override) `dump_properties()` for this class.
 	* src/roff/troff/node.cpp
