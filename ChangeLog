@@ -1,5 +1,13 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class hmotion_node): Specialize
+	{override} `dump_properties()` for this class.
+	* src/roff/troff/node.cpp (hmotion_node::dump_properties): New
+	member function reports values of `hunits`, `was_tab`,
+	`unformat`, and `terminal_color` properties.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class vertical_size_node): Specialize
 	{override} `dump_properties()` for this class.
 	* src/roff/troff/node.cpp (vertical_size_node::dump_properties):

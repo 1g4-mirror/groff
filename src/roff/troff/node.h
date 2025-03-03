@@ -375,6 +375,7 @@ public:
   node *add_self(node *, hyphen_list **);
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
   hyphenation_type get_hyphenation_type();
+  void dump_properties();
 };
 
 class space_char_hmotion_node : public hmotion_node {

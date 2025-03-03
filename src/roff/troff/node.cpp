@@ -3044,6 +3044,17 @@ void vertical_size_node::dump_properties()
   fflush(stderr);
 }
 
+void hmotion_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"hunits\": %d", n.to_units());
+  fprintf(stderr, ", \"was_tab\": %s", was_tab ? "true" : "false");
+  fprintf(stderr, ", \"unformat\": %s", unformat ? "true" : "false");
+  fputs(", \"terminal_color\": ", stderr);
+  col->nm.json_dump();
+  fflush(stderr);
+}
+
 node *hmotion_node::copy()
 {
   return new hmotion_node(n, was_tab, unformat, col, state, div_nest_level);
