@@ -415,6 +415,20 @@ public:
   void dump_properties();
 };
 
+struct container_node : public node {
+  node *nodes;
+  container_node(node * /* contents */);
+  container_node(node * /* next */, node * /* contents */);
+  container_node(node * /* next */, statem *, int);
+  //container_node(node * /* next */, statem *, node * /* contents */);
+  container_node(node * /* next */, statem *, int,
+		 node * /* contents */);
+  container_node(node * /* next */, statem *, int, bool,
+		 node * /* contents */);
+  ~container_node();
+  virtual void dump_node();
+};
+
 // TODO: Derive from abstract class `container_node`.
 class hline_node : public node {
   hunits x;

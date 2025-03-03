@@ -1,5 +1,30 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Create new `struct container_node` for node types that
+	contain a {possibly singleton} list of other nodes.
+
+	* src/roff/troff/node.h (container_node): Do it.  Declare
+	constructors mirroring those of `struct node` (but with an extra
+	argument for the contained node list); a destructor; and virtual
+	member function `dump_node()`, overriding that of `struct node`.
+	* src/roff/troff/node.cpp (dump_node_list): New function, a
+	counterpart to `copy_node_list()` and `delete_node_list()`,
+	walks a singly-linked list of nodes and directs each to dump
+	itself.
+	(container_node::container_node)
+	(container_node::~container_node, container_node::dump_node):
+	Define the foregoing.
+	(container_node::~container_node): Destructor always calls
+	`delete_node_list()` because some node types seem intended to
+	contain only one other node, and others a list.  Unifying the
+	destruction procedure seems more likely to avoid memory leaks,
+	at a cost per destroyed object derived from `container_node`
+	of an additional function call and a test of a pointer for
+	nullity--but only for objects of classes where this wasn't
+	already happening.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: The property of the environment that holds the pending
 	output line appears to be unique in storing the elements of its
 	node list in reverse order.  Rename function to reflect its

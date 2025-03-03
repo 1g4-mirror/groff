@@ -2450,6 +2450,25 @@ void delete_node_list(node *n)
   }
 }
 
+void dump_node_list(node *n)
+{
+  bool need_comma = false;
+  fputs("\"contents\": [", stderr);
+  while (n != 0 /* nullptr */) {
+    if (need_comma)
+      fputs(", ", stderr);
+    n->dump_node();
+    need_comma = true;
+    n = n->next;
+  }
+  // !need_comma implies that the list was empty.  JSON convention is to
+  // put a space between an empty pair of square brackets.
+  if (!need_comma)
+    fputc(' ', stderr);
+  fputc(']', stderr);
+  fflush(stderr);
+}
+
 node *dbreak_node::copy()
 {
   dbreak_node *p = new dbreak_node(copy_node_list(none),
@@ -2629,6 +2648,56 @@ void node::dump_node()
   // we know that we traversed to a new node.
   fflush(stderr);
   dump_properties();
+  fputc('}', stderr);
+  fflush(stderr);
+}
+
+container_node::container_node(node *contents)
+: node(), nodes(contents)
+{
+}
+
+container_node::container_node(node *nxt, node *contents)
+: node(nxt), nodes(contents)
+{
+}
+
+// `left_italic_corrected_node` uses an initially empty container.
+container_node::container_node(node *nxt, statem *s, int divl)
+: node(nxt, s, divl), nodes(0 /* nullptr */)
+{
+}
+
+#if 0
+container_node::container_node(node *nxt, statem *s, node *contents)
+: node(nxt, s), nodes(contents)
+{
+}
+#endif
+
+container_node::container_node(node *nxt, statem *s, int divl,
+			       node *contents)
+: node(nxt, s, divl), nodes(contents)
+{
+}
+
+container_node::container_node(node *nxt, statem *s, int divl,
+			       bool special, node *contents)
+: node(nxt, s, divl, special), nodes(contents)
+{
+}
+
+container_node::~container_node()
+{
+  delete_node_list(nodes);
+}
+
+void container_node::dump_node()
+{
+  fputc('{', stderr);
+  dump_properties();
+  fputs(", ", stderr);
+  dump_node_list(nodes);
   fputc('}', stderr);
   fflush(stderr);
 }
