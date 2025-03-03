@@ -4757,6 +4757,19 @@ draw_node::draw_node(char c, hvpair *p, int np, font_size s,
     point[i] = p[i];
 }
 
+void draw_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"code\": \"%c\"", code);
+  fprintf(stderr, ", \"npoints\": %d", npoints);
+  fprintf(stderr, ", \"font_size\": %d", sz.to_units());
+  fprintf(stderr, ", \"stroke_color\": \"%s\"", gcol->nm.contents());
+  fprintf(stderr, ", \"fill_color\": \"%s\"", fcol->nm.contents());
+  fprintf(stderr, ", \"point\": \"(%d, %d)\"",
+	  point->h.to_units(), point->v.to_units());
+  fflush(stderr);
+}
+
 bool draw_node::is_same_as(node *n)
 {
   draw_node *nd = (draw_node *)n;
