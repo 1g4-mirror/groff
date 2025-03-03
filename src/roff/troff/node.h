@@ -220,6 +220,7 @@ public:
   bool causes_tprint();
   bool is_tag();
   hyphenation_type get_hyphenation_type();
+  void dump_properties();
 };
 
 struct width_list {

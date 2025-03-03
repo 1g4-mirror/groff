@@ -3293,6 +3293,18 @@ space_node::space_node(hunits nn, int s, int flag, color *c, statem *st,
 {
 }
 
+void space_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"hunits\": %d", n.to_units());
+  fprintf(stderr, ", \"undiscardable\": %s", set ? "true" : "false");
+  fprintf(stderr, ", \"is hyphenless breakpoint\": %s",
+	  was_escape_colon ? "true" : "false");
+  fputs(", \"terminal_color\": ", stderr);
+  col->nm.json_dump();
+  fflush(stderr);
+}
+
 #if 0
 space_node::~space_node()
 {

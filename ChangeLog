@@ -1,5 +1,12 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class space_node): Specialize
+	{override} `dump_properties()` for this class.
+	* src/roff/troff/node.cpp (space_node::dump_properties): New
+	member function reports value of `hunits` property.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class charinfo_node): Declare
 	member function `dump_properties()` overriding base here...
 	(class glyph_node): ...instead of here.
