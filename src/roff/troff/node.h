@@ -429,15 +429,12 @@ struct container_node : public node {
   virtual void dump_node();
 };
 
-// TODO: Derive from abstract class `container_node`.
-class hline_node : public node {
+class hline_node : public container_node {
   hunits x;
-  node *nodes;
 public:
   hline_node(hunits, node *, node * /* nxt */ = 0 /* nullptr */);
   hline_node(hunits, node *, statem *, int,
 	     node * /* nxt */ = 0 /* nullptr */);
-  ~hline_node();
   node *copy();
   hunits width();
   void tprint(troff_output_file *);

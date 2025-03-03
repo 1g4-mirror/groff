@@ -3203,19 +3203,14 @@ node *transparent_dummy_node::copy()
   return new transparent_dummy_node;
 }
 
-hline_node::~hline_node()
-{
-  delete nodes;
-}
-
 hline_node::hline_node(hunits i, node *c, node *nxt)
-: node(nxt), x(i), nodes(c)
+: container_node(nxt, c), x(i)
 {
 }
 
 hline_node::hline_node(hunits i, node *c, statem *s, int divlevel,
 		       node *nxt)
-: node(nxt, s, divlevel), x(i), nodes(c)
+: container_node(nxt, s, divlevel, c), x(i)
 {
 }
 

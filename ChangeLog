@@ -1,5 +1,16 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Derive class `hline_node` from struct `container_node`.
+
+	* src/roff/troff/node.h (class hline_node): Do it.  Drop
+	pointer-to-node member variable and declaration of destructor.
+	* src/roff/troff/node.cpp (hline_node::~hline_node): Drop; our
+	base class handles destruction of contained node(s).
+	(hline_node::hline_node): Migrate constructors to use new base
+	class.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Create new `struct container_node` for node types that
 	contain a {possibly singleton} list of other nodes.
 
