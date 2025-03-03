@@ -8689,7 +8689,6 @@ void copy_file()
     return;
   }
   char *filename = read_string();
-  tok.next();
   if (want_break)
     curenv->do_break();
   if (filename != 0 /* nullptr */)
@@ -8733,7 +8732,6 @@ void transparent_file()
     return;
   }
   char *filename = read_string();
-  tok.next();
   if (want_break)
     curenv->do_break();
   if (filename != 0 /* nullptr */) {

@@ -1,5 +1,15 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (copy_file, transparent_file): Drop
+	extraneous `tok.next()` calls; they are already performed just
+	prior to function return.  They caused the input stream pointer
+	to advance too far.
+
+	Fixes <https://savannah.gnu.org/bugs/?66863>.  Problem
+	introduced by me in commit f087165933, 7 December.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #66863.
 
 	* src/roff/groff/tests/cf-request-works.sh:
