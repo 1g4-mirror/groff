@@ -322,6 +322,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  void dump_properties();
 };
 
 class vertical_size_node : public node {

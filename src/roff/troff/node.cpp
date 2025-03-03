@@ -3014,6 +3014,13 @@ extra_size_node::extra_size_node(vunits i)
 {
 }
 
+void extra_size_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"vunits\": %d", n.to_units());
+  fflush(stderr);
+}
+
 node *vertical_size_node::copy()
 {
   return new vertical_size_node(n, state, div_nest_level);

@@ -1,5 +1,12 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class extra_size_node): Specialize
+	{override} `dump_properties()` for this class.
+	* src/roff/troff/node.cpp (extra_size_node::dump_properties):
+	New member function reports value of `vunits` property.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class diverted_copy_file_node):
 	Specialize (override) `dump_properties()` for this class.
 	* src/roff/troff/node.cpp
