@@ -3416,6 +3416,14 @@ diverted_copy_file_node::diverted_copy_file_node(symbol s, node *p)
 {
 }
 
+void diverted_copy_file_node::dump_properties()
+{
+  node::dump_properties();
+  fputs(", \"filename\": ", stderr);
+  filename.json_dump();
+  fflush(stderr);
+}
+
 node *diverted_copy_file_node::copy()
 {
   return new diverted_copy_file_node(filename, state, div_nest_level);

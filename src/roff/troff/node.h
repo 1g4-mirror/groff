@@ -308,6 +308,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  void dump_properties();
 };
 
 class extra_size_node : public node {

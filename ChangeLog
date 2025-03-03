@@ -1,3 +1,11 @@
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.h (class diverted_copy_file_node):
+	Specialize (override) `dump_properties()` for this class.
+	* src/roff/troff/node.cpp
+	(diverted_copy_file_node::dump_properties): New member function
+	reports value of `filename` property.
+
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.h (class diverted_space_node): Specialize
