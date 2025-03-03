@@ -551,6 +551,7 @@ public:
   void dump_properties();
 };
 
+// TODO: Derive from abstract class `container_node`.
 class bracket_node : public node {
   node *nodes;
   hunits max_width;
@@ -566,6 +567,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  void dump_properties();
 };
 
 class device_extension_node : public node {
