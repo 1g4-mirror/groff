@@ -1,5 +1,16 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Derive class `vline_node` from struct `container_node`.
+
+	* src/roff/troff/node.h (class vline_node): Do it.  Drop
+	pointer-to-node member variable and declaration of destructor.
+	* src/roff/troff/node.cpp (vline_node::~vline_node): Drop; our
+	base class handles destruction of contained node(s).
+	(vline_node::vline_node): Migrate constructors to use new base
+	class.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Derive class `hline_node` from struct `container_node`.
 
 	* src/roff/troff/node.h (class hline_node): Do it.  Drop

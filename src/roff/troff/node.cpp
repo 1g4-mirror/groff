@@ -3234,13 +3234,13 @@ hunits hline_node::width()
 }
 
 vline_node::vline_node(vunits i, node *c, node *nxt)
-: node(nxt), x(i), nodes(c)
+: container_node(nxt, c), x(i)
 {
 }
 
 vline_node::vline_node(vunits i, node *c, statem *s,
 		       int divlevel, node *nxt)
-: node(nxt, s, divlevel), x(i), nodes(c)
+: container_node(nxt, s, divlevel, c), x(i)
 {
 }
 
@@ -3249,11 +3249,6 @@ void vline_node::dump_properties()
   node::dump_properties();
   fprintf(stderr, ", \"vunits\": %d", x.to_units());
   fflush(stderr);
-}
-
-vline_node::~vline_node()
-{
-  delete nodes;
 }
 
 node *vline_node::copy()

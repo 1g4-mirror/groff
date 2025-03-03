@@ -445,15 +445,12 @@ public:
   void dump_properties();
 };
 
-// TODO: Derive from abstract class `container_node`.
-class vline_node : public node {
+class vline_node : public container_node {
   vunits x;
-  node *nodes;
 public:
   vline_node(vunits, node *, node * /* nxt */ = 0 /* nullptr */);
   vline_node(vunits, node *, statem *, int,
 	     node * /* nxt */ = 0 /* nullptr */);
-  ~vline_node();
   node *copy();
   void tprint(troff_output_file *);
   hunits width();
