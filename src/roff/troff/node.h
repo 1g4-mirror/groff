@@ -494,6 +494,7 @@ public:
   void vertical_extent(vunits *, vunits *);
 };
 
+// TODO: Derive from abstract class `container_node`.
 class left_italic_corrected_node : public node {
   node *nodes;
   hunits x;
@@ -525,6 +526,7 @@ public:
   hyphen_list *get_hyphen_list(hyphen_list *, int *);
   node *add_self(node *, hyphen_list **);
   node *merge_glyph_node(glyph_node *);
+  void dump_properties();
 };
 
 class overstrike_node : public node {

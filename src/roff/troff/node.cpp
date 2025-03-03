@@ -5662,6 +5662,13 @@ left_italic_corrected_node::left_italic_corrected_node(statem *s,
 {
 }
 
+void left_italic_corrected_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"hunits\": %d", x.to_units());
+  fflush(stderr);
+}
+
 left_italic_corrected_node::~left_italic_corrected_node()
 {
   delete nodes;
