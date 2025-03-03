@@ -2609,9 +2609,9 @@ units node::size()
   return points_to_units(10);
 }
 
-void node::dump_node()
+void node::dump_properties()
 {
-  fprintf(stderr, "{\"type\": \"%s\"", type());
+  fprintf(stderr, "\"type\": \"%s\"", type());
   fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
   fprintf(stderr, ", \"is_special_node\": %s",
 	  is_special ? "true" : "false");
@@ -2623,7 +2623,17 @@ void node::dump_node()
     fputs(", \"state\": ", stderr);
     state->display_state();
   }
-  fputs("}", stderr);
+  fflush(stderr);
+}
+
+void node::dump_node()
+{
+  fputc('{', stderr);
+  // Flush so that in case something goes wrong with property dumping,
+  // we know that we traversed to a new node.
+  fflush(stderr);
+  dump_properties();
+  fputc('}', stderr);
   fflush(stderr);
 }
 

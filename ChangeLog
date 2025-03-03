@@ -1,5 +1,18 @@
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (struct node): Add new virtual member
+	function, `dump_properties()`, to support modular composition of
+	node dumping.  All nodes have properties, but some dervived
+	classes of `node` have _additional_ properties.  Also, we want
+	to be able to distinguish property reporting from contained-node
+	reporting, which is where recursion comes in.
+	(node::dump_properties): Implement it.  This takes over most of
+	the former function of `node::dump_node()`...
+	(node::dump_node): ...which now just writes out braces `{` `}`
+	with properties in between.
+
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (struct node): Undeclare
 	`dump_node_list()` virtual function.
 	* src/roff/troff/node.cpp (node::dump_node_list): Rename this...

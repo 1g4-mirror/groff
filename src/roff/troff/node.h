@@ -116,6 +116,7 @@ struct node {
 
   virtual bool is_same_as(node *) = 0;
   virtual const char *type() = 0;
+  virtual void dump_properties();
   virtual void dump_node();
 };
 
