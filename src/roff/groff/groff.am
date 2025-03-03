@@ -44,6 +44,7 @@ groff_TESTS = \
   src/roff/groff/tests/backslash-s-works-with-single-digit-argument.sh \
   src/roff/groff/tests/break-zero-length-output-line-sanely.sh \
   src/roff/groff/tests/cf-request-early-does-not-fail.sh \
+  src/roff/groff/tests/cf-request-works.sh \
   src/roff/groff/tests/check-delimiter-validity.sh \
   src/roff/groff/tests/current-language-and-environment-in-sync.sh \
   src/roff/groff/tests/degenerate-control-flow-works.sh \
@@ -101,6 +102,7 @@ groff_TESTS = \
   src/roff/groff/tests/stringup-request-transforms-non-basic-latin.sh \
   src/roff/groff/tests/substring-request-works.sh \
   src/roff/groff/tests/sy-request-works.sh \
+  src/roff/groff/tests/trf-request-works.sh \
   src/roff/groff/tests/unencodable-things-in-grout.sh \
   src/roff/groff/tests/using-diversion-as-character-works.sh \
   src/roff/groff/tests/write-request-handles-empty-second-arg.sh

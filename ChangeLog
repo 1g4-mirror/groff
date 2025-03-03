@@ -1,3 +1,13 @@
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Regression-test Savannah #66863.
+
+	* src/roff/groff/tests/cf-request-works.sh:
+	* src/roff/groff/tests/trf-request-works.sh: Add tests.
+	* src/roff/groff/tests/artifacts/throughput-file: Add their
+	input artifact.
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
 2025-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::next): Clarify warning
