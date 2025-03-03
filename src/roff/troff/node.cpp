@@ -3075,6 +3075,15 @@ vmotion_node::vmotion_node(vunits i, color *c, statem *s, int divlevel)
 {
 }
 
+void vmotion_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"vunits\": %d", n.to_units());
+  fputs(", \"terminal_color\": ", stderr);
+  col->nm.json_dump();
+  fflush(stderr);
+}
+
 node *vmotion_node::copy()
 {
   return new vmotion_node(n, col, state, div_nest_level);
