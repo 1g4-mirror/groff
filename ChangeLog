@@ -1,5 +1,14 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class device_extension_node):
+	Specialize {override} `dump_properties()` for this class.
+	* src/roff/troff/node.cpp
+	(device_extension_node::dump_properties): New member function
+	reports values of `tfont`, `stroke_color`, and `fill_color`
+	properties.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class bracket_node): Specialize
 	{override} `dump_properties()` for this class.
 	* src/roff/troff/node.cpp (bracket_node::dump_properties):

@@ -4073,6 +4073,19 @@ device_extension_node::device_extension_node(const macro &m, tfont *t,
 {
 }
 
+void device_extension_node::dump_properties()
+{
+  node::dump_properties();
+  // TODO: Implement `macro::dump()` and call it on `mac` from here.
+  fputs(", \"tfont\": ", stderr);
+  tf->get_name().json_dump();
+  fputs(", \"stroke_color\": ", stderr);
+  gcol->nm.json_dump();
+  fputs(", \"fill_color\": ", stderr);
+  fcol->nm.json_dump();
+  fflush(stderr);
+}
+
 bool device_extension_node::is_same_as(node *n)
 {
   return ((mac == static_cast<device_extension_node *>(n)->mac)

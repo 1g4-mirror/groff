@@ -594,6 +594,7 @@ public:
   bool is_tag();
   int ends_sentence();
   tfont *get_tfont();
+  void dump_properties();
 };
 
 class suppress_node : public node {
