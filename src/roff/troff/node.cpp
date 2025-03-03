@@ -3037,6 +3037,13 @@ vertical_size_node::vertical_size_node(vunits i)
 {
 }
 
+void vertical_size_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"vunits\": %d", n.to_units());
+  fflush(stderr);
+}
+
 node *hmotion_node::copy()
 {
   return new hmotion_node(n, was_tab, unformat, col, state, div_nest_level);

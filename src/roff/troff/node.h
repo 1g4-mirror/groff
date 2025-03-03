@@ -338,6 +338,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  void dump_properties();
 };
 
 class hmotion_node : public node {
