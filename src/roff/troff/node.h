@@ -292,6 +292,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  void dump_properties();
 };
 
 class diverted_copy_file_node : public node {

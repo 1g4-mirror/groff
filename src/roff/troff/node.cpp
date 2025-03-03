@@ -3393,6 +3393,13 @@ diverted_space_node::diverted_space_node(vunits d, node *p)
 {
 }
 
+void diverted_space_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"vunits\": %d", n.to_units());
+  fflush(stderr);
+}
+
 node *diverted_space_node::copy()
 {
   return new diverted_space_node(n, state, div_nest_level);
