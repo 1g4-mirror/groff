@@ -636,6 +636,7 @@ public:
   bool causes_tprint();
   bool is_tag();
   int ends_sentence(); // three-valued Boolean :-|
+  void dump_properties();
 };
 
 struct hvpair {

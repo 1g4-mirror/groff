@@ -1,5 +1,13 @@
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class tag_node): Specialize (override)
+	`dump_properties()` for this class.
+	* src/roff/troff/node.cpp (tag_node::dump_properties): New
+	member function reports values of `string` and `delayed`
+	properties.
+
+2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (struct width_list): Declare `dump()`
 	member function.
 	(class word_space_node): Specialize (override)

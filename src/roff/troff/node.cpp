@@ -4220,6 +4220,15 @@ tag_node::tag_node(string s, statem *st, int divlevel, int delay)
   is_special = !delay;
 }
 
+void tag_node::dump_properties()
+{
+  node::dump_properties();
+  fputs(", \"string\": ", stderr);
+  tag_string.json_dump();
+  fprintf(stderr, ", \"delayed\": %s", delayed ? "true" : "false");
+  fflush(stderr);
+}
+
 node *tag_node::copy()
 {
   return new tag_node(tag_string, state, div_nest_level, delayed);
