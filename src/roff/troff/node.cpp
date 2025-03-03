@@ -3145,6 +3145,13 @@ vline_node::vline_node(vunits i, node *c, statem *s,
 {
 }
 
+void vline_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"vunits\": %d", x.to_units());
+  fflush(stderr);
+}
+
 vline_node::~vline_node()
 {
   delete nodes;
