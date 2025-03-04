@@ -2879,6 +2879,7 @@ public:
   bool causes_tprint();
   bool is_tag();
   int get_break_code();
+  void dump_properties();
 };
 
 break_char_node::break_char_node(node *n, int bc, int pbc, color *c, node *x)
@@ -2891,6 +2892,16 @@ break_char_node::break_char_node(node *n, int bc, int pbc, color *c,
 : node(x, s, divlevel), nodes(n), break_code(bc), prev_break_code(pbc),
   col(c)
 {
+}
+
+void break_char_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"break code before\": %d", break_code);
+  fprintf(stderr, ", \"break code after\": %d", prev_break_code);
+  fputs(", \"terminal_color\": ", stderr);
+  col->nm.json_dump();
+  fflush(stderr);
 }
 
 break_char_node::~break_char_node()

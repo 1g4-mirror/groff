@@ -1,5 +1,14 @@
 2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class break_char_node):
+	Specialize (override) `dump_properties()` for this class.
+	* src/roff/troff/node.cpp
+	(break_char_node::dump_properties): New member function reports
+	values of `break code before`, `break code after`, and
+	`terminal_color` properties.
+
+2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class italic_corrected_node):
 	Specialize (override) `dump_properties()` for this class.
 	* src/roff/troff/node.cpp
