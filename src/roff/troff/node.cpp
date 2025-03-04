@@ -2915,9 +2915,7 @@ int italic_corrected_node::character_type()
   return nodes->character_type();
 }
 
-// TODO: Derive from abstract class `container_node`.
-class break_char_node : public node {
-  node *nodes;
+class break_char_node : public container_node {
   char break_code;
   char prev_break_code;
   color *col;
@@ -2925,7 +2923,6 @@ public:
   break_char_node(node *, int, int, color *, node * = 0 /* nullptr */);
   break_char_node(node *, int, int, color *, statem *, int,
 		  node * = 0 /* nullptr */);
-  ~break_char_node();
   node *copy();
   hunits width();
   vunits vertical_width();
@@ -2952,14 +2949,13 @@ public:
 };
 
 break_char_node::break_char_node(node *n, int bc, int pbc, color *c, node *x)
-: node(x), nodes(n), break_code(bc), prev_break_code(pbc), col(c)
+: container_node(x, n), break_code(bc), prev_break_code(pbc), col(c)
 {
 }
 
 break_char_node::break_char_node(node *n, int bc, int pbc, color *c,
 				 statem *s, int divlevel, node *x)
-: node(x, s, divlevel), nodes(n), break_code(bc), prev_break_code(pbc),
-  col(c)
+: container_node(x, s, divlevel, n), break_code(bc), prev_break_code(pbc), col(c)
 {
 }
 
@@ -2971,11 +2967,6 @@ void break_char_node::dump_properties()
   fputs(", \"terminal_color\": ", stderr);
   col->nm.json_dump();
   fflush(stderr);
-}
-
-break_char_node::~break_char_node()
-{
-  delete nodes;
 }
 
 node *break_char_node::copy()
