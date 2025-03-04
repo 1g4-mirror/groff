@@ -2771,14 +2771,11 @@ hunits dbreak_node::subscript_correction()
   return none ? none->subscript_correction() : H0;
 }
 
-// TODO: Derive from abstract class `container_node`.
-class italic_corrected_node : public node {
-  node *nodes;
+class italic_corrected_node : public container_node {
   hunits x;
 public:
   italic_corrected_node(node *, hunits, statem *, int,
 			node * = 0 /* nullptr */);
-  ~italic_corrected_node();
   node *copy();
   void ascii_print(ascii_output_file *);
   void asciify(macro *);
@@ -2818,7 +2815,7 @@ node *node::add_italic_correction(hunits *wd)
 
 italic_corrected_node::italic_corrected_node(node *nn, hunits xx, statem *s,
 					     int divlevel, node *p)
-: node(p, s, divlevel), nodes(nn), x(xx)
+: container_node(p, s, divlevel, nn), x(xx)
 {
   assert(nodes != 0 /* nullptr */);
 }
@@ -2828,11 +2825,6 @@ void italic_corrected_node::dump_properties()
   node::dump_properties();
   fprintf(stderr, ", \"hunits\": %d", x.to_units());
   fflush(stderr);
-}
-
-italic_corrected_node::~italic_corrected_node()
-{
-  delete nodes;
 }
 
 node *italic_corrected_node::copy()
