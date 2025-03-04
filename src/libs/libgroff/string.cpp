@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -21,11 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <stdio.h> // FILE, putc(), sprintf()
-#include <stdlib.h> // malloc()
+#include <stdlib.h> // calloc()
 #include <string.h> // memchr(), memcmp(), memcpy(), memmem(), memset(),
 		    // strlen(), size_t
 
+#include "cset.h" // csprint()
 #include "lib.h"
+#include "json-encode.h" // json_encode_char()
 
 #include "stringclass.h"
 
@@ -299,8 +301,9 @@ int string::find(const char *c) const
   return (p != 0 /* nullptr */) ? (p - ptr) : -1;
 }
 
-// we silently strip nuls
-
+// Return pointer to null-terminated C string; any nulls internal to the
+// string are omitted.  The caller is responsible for `free()`ing the
+// returned storage.
 char *string::extract() const
 {
   char *p = ptr;
@@ -310,7 +313,7 @@ char *string::extract() const
   for (i = 0; i < n; i++)
     if (p[i] == '\0')
       nnuls++;
-  char *q = static_cast<char *>(malloc(n + 1 - nnuls));
+  char *q = static_cast<char *>(calloc(n + 1 - nnuls, sizeof(char)));
   if (q != 0 /* nullptr */) {
     char *r = q;
     for (i = 0; i < n; i++)
@@ -319,6 +322,79 @@ char *string::extract() const
     *r = '\0';
   }
   return q;
+}
+
+// Compute length of JSON representation of object.
+size_t string::json_length() const
+{
+  size_t n = len;
+  const char *p = ptr;
+  char ch;
+  int nextrachars = 2; // leading and trailing double quotes
+  for (size_t i = 0; i < n; i++) {
+    ch = p[i];
+    // Handle the most common cases first.
+    if (ch < 128) {
+      if (csprint(ch))
+	;
+      else
+	switch (ch) {
+	case '"':
+	case '\\':
+	case '/':
+	case '\b':
+	case '\f':
+	case '\n':
+	case '\r':
+	case '\t':
+	  nextrachars++;
+	  break;
+	default:
+	  nextrachars += 5;
+      }
+    }
+    else
+      nextrachars += 5;
+  }
+  return (n + nextrachars);
+}
+
+// Like `extract()`, but double-quote the string and escape characters
+// per JSON and emit nulls.  This string is not null-terminated!  Caller
+// MUST use .json_length().
+const char *string::json_extract() const
+{
+  const char *p = ptr;
+  size_t n = len;
+  size_t i;
+  char *q = static_cast<char *>(calloc(this->json_length(),
+				       sizeof (char)));
+  if (q != 0 /* nullptr */) {
+    char *r = q;
+    *r++ = '"';
+    json_char ch;
+    for (i = 0; i < n; i++, p++) {
+      ch = json_encode_char(*p);
+      for (size_t j = 0; j < ch.len; j++)
+        *r++ = ch.buf[j];
+    }
+    *r++ = '"';
+  }
+  else
+    return strdup("\"\"");
+  return q;
+}
+
+// Dump string in JSON representation to standard error stream.
+void string::json_dump() const
+{
+  const char *repr = this->json_extract();
+  size_t jsonlen = this->json_length();
+  // Write it out by character to keep libc string functions from
+  // interpreting escape sequences.
+  for (size_t i = 0; i < jsonlen; i++)
+    fputc(repr[i], stderr);
+  free(const_cast<char *>(repr));
 }
 
 void string::remove_spaces()

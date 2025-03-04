@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -69,6 +69,9 @@ public:
   int search(const char) const;
   int find(const char *) const;
   char *extract() const;
+  size_t json_length() const;
+  const char *json_extract() const;
+  void json_dump() const;
   void remove_spaces();
   void clear();
   void move(string &);

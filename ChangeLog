@@ -1,3 +1,13 @@
+2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Add `json_length()`, `json_extract()`, and
+	`json_dump()` public member functions to `string` class.  The
+	enhanced node printing feature will require them.
+
+	* src/include/stringclass.h (class string): Declare them.
+	* src/libs/libgroff/string.cpp (string::json_length):
+	(string::json_extract, string::json_dump): Implement them.
+
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Support dumping of some object types in JSON format.
