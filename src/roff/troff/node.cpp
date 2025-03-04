@@ -2724,6 +2724,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  void dump_properties();
 };
 
 node *node::add_italic_correction(hunits *wd)
@@ -2744,6 +2745,13 @@ italic_corrected_node::italic_corrected_node(node *nn, hunits xx, statem *s,
 : node(p, s, divlevel), nodes(nn), x(xx)
 {
   assert(nodes != 0 /* nullptr */);
+}
+
+void italic_corrected_node::dump_properties()
+{
+  node::dump_properties();
+  fprintf(stderr, ", \"hunits\": %d", x.to_units());
+  fflush(stderr);
 }
 
 italic_corrected_node::~italic_corrected_node()

@@ -1,3 +1,11 @@
+2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.h (class italic_corrected_node):
+	Specialize (override) `dump_properties()` for this class.
+	* src/roff/troff/node.cpp
+	(italic_corrected_node::dump_properties): New member function
+	reports value of `hunits` property.
+
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.h (class kern_pair_node): Specialize
