@@ -486,13 +486,10 @@ public:
   hyphenation_type get_hyphenation_type();
 };
 
-// TODO: Derive from abstract class `container_node`.
-class zero_width_node : public node {
-  node *nodes;
+class zero_width_node : public container_node {
 public:
   zero_width_node(node *);
   zero_width_node(node *, statem *, int);
-  ~zero_width_node();
   node *copy();
   void tprint(troff_output_file *);
   void ascii_print(ascii_output_file *);

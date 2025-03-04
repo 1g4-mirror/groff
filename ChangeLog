@@ -1,3 +1,15 @@
+2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Derive class `zero_width_node` from struct
+	`container_node`.
+
+	* src/roff/troff/node.h (class zero_width_node): Do it.  Drop
+	pointer-to-node member variable and declaration of destructor.
+	* src/roff/troff/node.cpp (zero_width_node::~zero_width_node):
+	Drop; our base class handles destruction of contained node(s).
+	(zero_width_node::zero_width_node): Migrate constructors to use
+	new base class.
+
 2025-03-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Derive class `vline_node` from struct `container_node`.

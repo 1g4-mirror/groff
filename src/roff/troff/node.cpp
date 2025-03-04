@@ -3264,18 +3264,13 @@ hunits vline_node::width()
 }
 
 zero_width_node::zero_width_node(node *nd, statem *s, int divlevel)
-: node(0 /* nullptr */, s, divlevel), nodes(nd)
+: container_node(0 /* nullptr */, s, divlevel, nd)
 {
 }
 
 zero_width_node::zero_width_node(node *nd)
-: nodes(nd)
+: container_node(nd)
 {
-}
-
-zero_width_node::~zero_width_node()
-{
-  delete_node_list(nodes);
 }
 
 node *zero_width_node::copy()
