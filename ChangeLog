@@ -1,6 +1,16 @@
 2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Add `json_length()`, `json_extract()`, and
+	`json_dump()` public member functions to `symbol` class.  The
+	enhanced node printing feature will require them.
+
+	* src/include/symbol.h (class symbol): Declare them.
+	* src/libs/libgroff/symbol.cpp (symbol::json_length):
+	(symbol::json_extract, symbol::json_dump): Implement them.
+
+2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Add `json_length()`, `json_extract()`, and
 	`json_dump()` public member functions to `string` class.  The
 	enhanced node printing feature will require them.
 

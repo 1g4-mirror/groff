@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -22,7 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <assert.h>
 #include <string.h> // strcat(), strcmp(), strcpy(), strlen()
+#include <stdlib.h> // calloc()
 
+#include "cset.h" // csprint()
+#include "json-encode.h" // json_encode_char()
 #include "lib.h"
 
 #include "errarg.h"
@@ -158,6 +161,81 @@ symbol concat(symbol s1, symbol s2)
   symbol res(buf);
   delete[] buf;
   return res;
+}
+
+// Compute length of JSON representation of object.
+size_t symbol::json_length() const
+{
+  size_t len = 0;
+  const char *p = s;
+  char ch;
+  int nextrachars = 2; // leading and trailing double quotes
+  for (size_t i = 0; p[i] != '\0'; i++, len++) {
+    ch = p[i];
+    // Handle the most common cases first.
+    if (ch < 128) {
+      if (csprint(ch))
+	;
+      else
+	switch (ch) {
+	case '"':
+	case '\\':
+	case '/':
+	case '\b':
+	case '\f':
+	case '\n':
+	case '\r':
+	case '\t':
+	  nextrachars++;
+	  break;
+	default:
+	  nextrachars += 5;
+      }
+    }
+    else
+      nextrachars += 5;
+  }
+  return (len + nextrachars);
+}
+
+// Like `extract()`, but double-quote the string and escape characters
+// per JSON.  (Unlike groff's `string`, a `symbol` doesn't contain
+// embedded null characters.)  This string is not null-terminated!
+// Caller MUST use .json_length().  (The member variable backing us up
+// _is_ a null-terminated C string.)
+const char *symbol::json_extract() const
+{
+  const char *p = s;
+  size_t n = strlen(s);
+  size_t i;
+  char *q = static_cast<char *>(calloc(this->json_length(),
+				       sizeof (char)));
+  if (q != 0 /* nullptr */) {
+    char *r = q;
+    *r++ = '"';
+    json_char ch;
+    for (i = 0; i < n; i++, p++) {
+      ch = json_encode_char(*p);
+      for (size_t j = 0; j < ch.len; j++)
+        *r++ = ch.buf[j];
+    }
+    *r++ = '"';
+  }
+  else
+    return strdup("\"\""); // so it can be free()d
+  return q;
+}
+
+// Dump symbol in JSON representation to standard error stream.
+void symbol::json_dump() const
+{
+  const char *repr = this->json_extract();
+  size_t jsonlen = this->json_length();
+  // Write it out by character to keep libc string functions from
+  // interpreting escape sequences.
+  for (size_t i = 0; i < jsonlen; i++)
+    fputc(repr[i], stderr);
+  free(const_cast<char *>(repr));
 }
 
 symbol default_symbol("default");

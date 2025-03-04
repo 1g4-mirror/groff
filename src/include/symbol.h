@@ -38,6 +38,9 @@ public:
   const char *contents() const;
   bool is_null() const;
   bool is_empty() const;
+  size_t json_length() const;
+  const char *json_extract() const;
+  void json_dump() const;
 };
 
 
