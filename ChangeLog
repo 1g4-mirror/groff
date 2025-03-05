@@ -1,3 +1,12 @@
+2025-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Add unit tests for `devicem` request and `\Y` escape
+	sequence.
+
+	* src/roff/groff/tests/backslash-Y-works.sh:
+	* src/roff/groff/tests/devicem-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
 2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/mtsm.cpp (statem::display_state):
