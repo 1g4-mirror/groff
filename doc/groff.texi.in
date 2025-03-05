@@ -17743,9 +17743,13 @@ asterisk (@code{*}).
 @cindex node list, of pending output line, dumping (@code{pline})
 @cindex output line, node list of pending, dumping (@code{pline})
 @cindex pending node list of output line, dumping (@code{pline})
-Report, to the standard error stream, the list of output nodes
-corresponding to the pending output line.  The list is empty if there
-are none.
+Report,
+in JSON syntax to the standard error stream,
+the list of output nodes corresponding to the pending output line.
+In JSON,
+a pair of empty brackets
+@samp{[ ]}
+represents an empty list.
 @endDefreq
 
 @Defreq {pm, }

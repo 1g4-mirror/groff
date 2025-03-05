@@ -3415,10 +3415,13 @@ are suffixed with a tab and asterisk
 .TP
 .B .pline
 Report,
-to the standard error stream,
+in JSON syntax to the standard error stream,
 the list of output nodes corresponding to the pending output line.
 .
-The list is empty if there are none.
+In JSON,
+a pair of empty brackets
+.RB \[lq] "[ ]" \[rq]
+represents an empty list.
 .
 .
 .TP
