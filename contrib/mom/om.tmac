@@ -8135,7 +8135,7 @@ $\\*[DOC_]COVERTITLE_\\n+[#\\*[DOC_]COVERTITLE_NUM] \\$\\n[#\\*[DOC_]COVERTITLE_
 .          if !\\n[#SKIP_PDF_OUTLINE] \
 .             PDF_BOOKMARK 1 \\*[$TOC_TITLE_ITEM]
 .          if r #SKIP_PDF_OUTLINE .rr #SKIP_PDF_OUTLINE
-.          if !r #NO_TOC_ENTRY .TITLE_TO_TOC
+.          if !\\n[#NO_TOC_ENTRY] .TITLE_TO_TOC
 .          if r #NO_TOC_ENTRY  .rr #NO_TOC_ENTRY
 .       \}
 .    \}
@@ -12097,11 +12097,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 \#   PRINTSTYLE TYPEWRITE without SINGLESPACE.
 \#
 .MAC PARA_SPACE END
+.    nr #PP_SPACE 1
 .    ie '\\$1'' \
-.       nr #PP_SPACE 1
+.       ds $PP_SPACE_AMOUNT 1v
 .    el \{\
 .       ie \B'\\$1' \{\
-.          nr #PP_SPACE 1
 .          ds $PP_SPACE_AMOUNT \\$1
 .       \}
 .       el .rr #PP_SPACE
@@ -15295,6 +15295,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    nf
 .    END_NOTES
 .    rm END_NOTES
+.    if \\n[.vpt]=0 .vpt
 .    ps \\n[#DOC_PT_SIZE]u
 .    if \\n[#PRINT_STYLE]=1 .vs \\n[#DOC_LEAD]u
 .    if \\n[#PRINT_STYLE]=2 \{\
@@ -20868,6 +20869,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    if !\\n[#MLA] \{\
 .       if (\\n[tbl*have-label]=1):(\\n[tbl*autolabel]=1):(\\n[tbl*caption-after-label]=1) \{\
 .          ev label
+.          evc \\*[ev-current]
 .          if '\\*[ev-current]'FLOAT' .evc 0
 .          ie \\n[#PRINT_STYLE]=1 .TYPEWRITER
 .          el \{\
@@ -23796,10 +23798,6 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .       nr pdf-img:float 1
 .       FLOAT
 .    \}
-.    if \\n[#FILLED] \{\
-.       fi
-.       rr #FILLED
-.    \}
 .    PDF_TARGET fig:\\n+[lists*target]
 .    nr float*img 1
 .    ds ev-current \\n[.ev]
@@ -24100,6 +24098,10 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .             if !\\n[pdf-img*no-flex] .FLEX
 .    \}
 .    PDF_IMAGE_CLEAN
+.    if \\n[#FILLED] \{\
+.       fi
+.       rr #FILLED
+.    \}
 .END
 \#
 .MAC CHECK_IMAGE_FORMAT END
