@@ -3226,15 +3226,19 @@ word spaces).
 .I file
 As
 .RB \[lq] so \[rq],
-except that
+except that GNU
+.I troff \" GNU
+searches for the specified
 .I file
-is sought in the same directories as arguments to the
+in the same directories as macro files;
+see
+.I GROFF_TMAC_PATH
+in section \[lq]Environment\[rq] of
 .MR groff @MAN1EXT@
 and
-.MR @g@troff @MAN1EXT@
 .B \-m
-command-line option are
-(the \[lq]tmac path\[rq]).
+in section \[lq]Options\[rq]
+of the same page.
 .
 If
 .I file

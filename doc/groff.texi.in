@@ -16605,10 +16605,25 @@ The cautionary note regarding a final newline in the stream read by the
 
 @DefreqList {mso, [@code{"}]@Var{file}}
 @DefreqListEndx {msoquiet, [@code{"}]@Var{file}}
-Identical to the @code{so} and @code{soquiet} requests, respectively,
-except that GNU @command{troff} searches for the specified @var{file} in
-the same directories as macro files for the @option{-m} command-line
-option.
+As the
+@code{so}
+and
+@code{soquiet}
+requests,
+respectively,
+except that GNU
+@command{troff} @c GNU
+searches for the specified
+@var{file}
+in the same directories as macro files;
+see
+@env{GROFF_TMAC_PATH}
+in
+@ref{Environment}
+and
+@option{-m}
+in
+@ref{Groff Options}.
 @endDefreq
 
 @DefreqList {trf, [@code{"}]@Var{file}}

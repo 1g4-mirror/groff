@@ -3880,11 +3880,19 @@ Mark vertical drawing position in register
 .REQ .mso file
 As
 .request .so ,
-except that
+except that GNU
+.I troff \" GNU
+searches for the specified
 .I file
-is sought in the
-.I tmac
-directories.
+in the same directories as macro files;
+see
+.I GROFF_TMAC_PATH
+in section \[lq]Environment\[rq] of
+.MR groff @MAN1EXT@
+and
+.B \-m
+in section \[lq]Options\[rq]
+of the same page.
 .
 .TPx
 .REQ .msoquiet file
