@@ -818,18 +818,23 @@ it may be broken here for readability).
 .
 .
 .P
-There must not be any spaces,
+Spaces,
 tabs,
-or newlines between these
+and newlines are prohibited
+between these
 .I subfields,
+which are expressed as decimal integers.
 .
-which are in basic units expressed as decimal integers.
+The unit of measure is that established by the
+.B \%unitwidth
+directive and scaled to the type size.
 .
 Unspecified subfields default
 .RB to\~ 0 .
 .
 Since there is no associated binary format,
-these values are not required to fit into the C language data type
+these values are not required to fit
+into the C language data type
 .B char
 as they are in AT&T device-independent
 .IR troff . \" AT&T
@@ -1055,6 +1060,10 @@ is typeset immediately before
 .IR g2 ,
 the space between them should be increased
 .RI by\~ n .
+.
+The unit of measure is that established by the
+.B \%unitwidth
+directive and scaled to the type size.
 .
 Most kerning pairs should have a negative value
 .RI for\~ n .

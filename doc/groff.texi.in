@@ -19970,13 +19970,24 @@ The form of the @var{metrics} field is as follows.
 @end display
 
 @noindent
-There must not be any spaces, tabs, or newlines between these
-@dfn{subfields} (which have been split here into two lines only for
-better legibility).  The subfields are in basic units expressed as
-decimal integers.  Unspecified subfields default to@tie{}@code{0}.
-Since there is no associated binary format, these values are not
-required to fit into the C language data type @samp{char} as they are in
-@acronym{AT&T} device-independent @code{troff}.
+Spaces,
+tabs,
+and newlines are prohibited
+between these
+@dfn{subfields},
+which are expressed as decimal integers
+(and have been split here into two lines only for better legibility).
+The unit of measure is that established by the
+@code{unitwidth}
+directive and scaled to the type size.
+Unspecified subfields default
+to@tie{}@code{0}.
+Since there is no associated binary format,
+these values are not required to fit
+into the C language data type
+@samp{char}
+as they are in @acronym{AT&T} device-independent
+@code{troff}. @c AT&T
 
 The @var{width} subfield gives the width of the glyph.  The @var{height}
 subfield gives the height of the glyph (upward is positive); if a glyph
@@ -20084,9 +20095,15 @@ of lines formatted as follows.
 @endExample
 
 @noindent
-The foregoing means that when glyph @var{g1} is typeset immediately
-before @var{g2}, the space between them should be increased
-by@tie{}@var{n}.  Most kerning pairs should have a negative value
+The foregoing means that when glyph
+@var{g1}
+is typeset immediately before @var{g2},
+the space between them should be increased
+by@tie{}@var{n}.
+The unit of measure is that established by the
+@code{unitwidth}
+directive and scaled to the type size.
+Most kerning pairs should have a negative value
 for@tie{}@var{n}.
 @c END Keep parallel with groff_font(5).
 
