@@ -14904,7 +14904,7 @@ The author calls the first macro where a footnote marker is desired.
 The macro establishes a diversion so that the footnote text is collected
 at the place in the body text where its corresponding marker appears.
 It further creates an environment for the footnote so that it
-sets at a smaller typeface.
+sets using a smaller typeface.
 The footnote text is formatted in the diversion using that environment
 but it does not yet appear in the output.
 The document author calls the footnote end macro,
