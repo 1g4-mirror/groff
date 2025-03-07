@@ -4487,7 +4487,8 @@ read in copy mode and continue to the end of the input line.
 .
 .TPx
 .REQ .so file
-Replace the request's control line with the text of
+Replace the request's control line
+with the contents of
 .IR file ,
 \[lq]sourcing\[rq] it.
 .
