@@ -2424,8 +2424,8 @@ void token::next()
 	if (!read_delimited_number(&val, 0))
 	  break;
 	if (val < 0) {
-	  warning(WARN_CHAR, "ignoring negative character index %1",
-		  val);
+	  warning(WARN_CHAR, "character with negative index %1 is"
+		  " invalid; ignoring", val);
 	  break;
 	}
 	type = TOKEN_INDEXED_CHAR;

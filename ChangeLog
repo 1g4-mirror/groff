@@ -1,3 +1,9 @@
+2025-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::next): Clarify warning
+	diagnostic; in `\N'-5'`, the index is invalid and the character
+	is ignored.
+
 2025-02-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (report_character_request):
