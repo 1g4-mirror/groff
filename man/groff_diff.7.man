@@ -3290,31 +3290,36 @@ See
 .
 .
 .TP
-.BI .open\~ "stream\~\c
+.BI .open\~ "ident\~\c
 .RB [ \[dq] ]\c
 .I file
 Open
 .I file
-for writing and associate
-.I stream
-with it.
+for writing and associate a stream named
+.I ident
+with it,
+making it available for
+.RB \[lq] write \[rq]
+requests.
 .
-See
-.B write
+Unsafe request;
+disabled by default.
+.
+Also see
+.B writec
 and
-.BR close .
-.
+.RB \[lq] close \[rq].
 .
 .TP
-.BI .opena\~ "stream\~\c
+.BI .opena\~ "ident\~\c
 .RB [ \[dq] ]\c
 .I file
 As
 .RB \[lq] open \[rq],
 but if
 .I file
-exists,
-append to it instead of truncating it.
+already exists,
+appends to it instead of overwriting it.
 .
 .
 .TP

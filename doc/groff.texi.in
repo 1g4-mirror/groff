@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle February 2025
+@subtitle March 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -16844,11 +16844,23 @@ output.
 @cindex file, opening (@code{open})
 @cindex appending to a file (@code{opena})
 @cindex file, appending to (@code{opena})
-Open the specified @var{file} for writing and associates the specified
-@var{stream} with it.
+Open
+@var{file}
+for writing and associate a stream named
+@var{ident}
+with it,
+making it available for
+@code{write}
+requests.
 
-The @code{opena} request is like @code{open}, but if the file exists,
-append to it instead of truncating it.
+The
+@code{opena}
+request is like
+@code{open},
+but if
+@var{file}
+already exists,
+appends to it instead of overwriting it.
 
 @cindex safer mode
 @cindex mode, safer

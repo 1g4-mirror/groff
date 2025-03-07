@@ -4044,9 +4044,11 @@ disabled by default.
 .TPx
 .REQ .opena "ident file"
 As
-.RB \[lq] open \[rq] ,
-but append to
-.I file.
+.RB \[lq] open \[rq],
+but if
+.I file
+already exists,
+appends to it instead of overwriting it.
 .
 Unsafe request;
 disabled by default.
