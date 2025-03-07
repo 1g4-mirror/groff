@@ -18685,20 +18685,35 @@ were no longer as tight.
 @subsection Language Concepts
 
 @c BEGIN Keep parallel with introductory paragraph of groff_out(5).
-The fundamental operation of the GNU @code{troff} formatter is the
-translation of the @code{groff} input language into a device-independent
-form primarily concerned with what has to be written or drawn at
-specific positions on the output device.  This language is simple and
-imperative.  In the following discussion, the term @dfn{command} always
-refers to this device-independent output language, and never to the
-@code{groff} language intended for direct use by document authors.
-Device-independent output commands comprise several categories: glyph
-output; font, color, and text size selection; motion of the printing
-position; page advancement; drawing of geometric objects; and device
-control commands, a catch-all for operations not easily classified as
-any of the foregoing, such as directives to start and stop output,
-identify the intended output device, or place URL hyperlinks in
-supported output formats.
+The fundamental operation of the GNU
+@code{troff} @c GNU
+formatter is the translation of the
+@code{groff}
+input language
+into a series of instructions concerned primarily
+with placing glyphs or geometric objects
+at specific positions on a rectangular page.
+In the following discussion,
+the term
+@dfn{command}
+always refers to this device-independent output language,
+and never to the
+@code{groff}
+language intended for direct use by document authors.
+Device-independent output commands comprise several categories:@:
+glyph output;
+font,
+color,
+and text size selection;
+motion of the printing position;
+page advancement;
+drawing of geometric objects;
+and device control commands,
+a catch-all for operations not easily classified
+as any of the foregoing,
+such as directives to start and stop output,
+identify the intended output device,
+or place URL hyperlinks in supported output formats.
 @c END Keep parallel with introductory paragraph of groff_out(5).
 
 @menu

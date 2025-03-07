@@ -122,9 +122,10 @@ The fundamental operation of the
 .MR @g@troff @MAN1EXT@
 formatter is the translation of the
 .MR groff @MAN7EXT@
-input language into a series of instructions concerned primarily with
-placing glyphs or geometric objects at specific positions on a
-rectangular page.
+input language
+into a series of instructions concerned primarily
+with placing glyphs or geometric objects
+at specific positions on a rectangular page.
 .
 In the following discussion,
 the term
