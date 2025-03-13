@@ -181,22 +181,24 @@
 .\"fchar \[u2019] \[cq]\" right single quotation mark
 .\"fchar \[u201C] \[lq]\" left double quotation mark
 .\"fchar \[u201D] \[rq]\" right double quotation mark
-.\" XXX: The next two are troublesome; see Savannah #63332.
-.\"fchar \[u2020] \[dg]\" dagger
-.\"fchar \[u2021] \[dd]\" double dagger
+.\" XXX: The next two are troublesome in nroff; see Savannah #63332.
+.if \n[fallbacks*troff-mode] .fchar \[u2020] \[dg]\" dagger
+.if \n[fallbacks*troff-mode] .fchar \[u2021] \[dd]\" double dagger
 .fchar \[u2022] \[bu]\" bullet
 .fchar \[u2024] .\" one dot leader
 .fchar \[u2025] .\|.\" two dot leader
 .fchar \[u2026] .\|.\|.\" horizontal ellipsis
 .fchar \[u2027] \[pc]\" hyphenation point
-.\"fchar \[u2030] \[%0]\" per mille sign \" Savannah #63332 again
+.if \n[fallbacks*troff-mode] \
+.  fchar \[u2030] \[%0]\" per mille sign \" Savannah #63332 again
 .fchar \[u2032] \[fm]\" prime
 .fchar \[u2033] \[sd]\" double prime
 .fchar \[u2039] \[fo]\" left single chevron
 .fchar \[u203A] \[fc]\" right single chevron
 .if \n[fallbacks*troff-mode] \
 .  fchar \[u203D] \o'?!'\" interrobang
-.\"fchar \[u203E] \[rn]\" overline \" Savannah #63332 again
+.if \n[fallbacks*troff-mode] \
+.  fchar \[u203E] \[rn]\" overline \" Savannah #63332 again
 .fchar \[u2044] \[f/]\" fraction slash
 .fchar \[u2052] %\" commercial minus sign
 .fchar \[u2053] \[ti]\" swung dash

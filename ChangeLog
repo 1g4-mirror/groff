@@ -1,3 +1,11 @@
+2025-03-13  Dave Kemper <saint.snit@gmail.com>
+
+	* tmac/fallbacks.tmac: Allow recognition of more Unicode
+	characters in output formats where Savannah #63332 isn't an
+	issue.
+
+	Fixes <https://savannah.gnu.org/bugs/?66905>.
+
 2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tbl]: Fix Savannah #66931.
