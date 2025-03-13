@@ -1756,7 +1756,7 @@ sub do_x
 		    my $bbox=$incfil{$fil}->[1];
 		    $imgtype=$incfil{$fil}->[2];
 		    Warn("Failed to extract width x height for '$FDnm'"),return if !defined($bbox->[2]) or !defined($bbox->[3]);
-		    $wid=($bbox->[2]-$bbox->[0]) if $wid <= 0;
+		    $wid=($bbox->[2]-$bbox->[0]) if $wid <= 0 and $hgt <= 0;
 		    my $xscale=d3($wid/($bbox->[2]-$bbox->[0]));
 		    my $yscale=d3(($hgt<=0)?$xscale:($hgt/($bbox->[3]-$bbox->[1])));
 		    $xscale=($wid<=0)?$yscale:$xscale;

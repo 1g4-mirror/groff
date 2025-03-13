@@ -1,3 +1,13 @@
+2025-03-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: \X'pdf: pdfpic ...' scales incorrectly
+
+	When no width is given (<=0), scaling should use height. If
+	both are missing or <=0, don't scale.
+
+	* src/devices/gropdf/gropdf.pl: No scaling if BOTH width and
+	height are not given.
+
 2025-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add unit tests for `devicem` request and `\Y` escape
