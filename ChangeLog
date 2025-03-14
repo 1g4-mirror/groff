@@ -1,3 +1,10 @@
+2025-03-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Further rationalize header file inclusions.
+
+	* src/libs/libgroff/string.cpp: Include assert.h and string.h.
+	Annotate why.
+
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Slightly refactor.

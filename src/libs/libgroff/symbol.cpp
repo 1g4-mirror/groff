@@ -20,6 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <assert.h>
+#include <string.h> // strcat(), strcmp(), strcpy(), strlen()
+
 #include "lib.h"
 
 #include "errarg.h"
@@ -140,7 +143,7 @@ symbol::symbol(const char *p, int how)
       block_size = len > BLOCK_SIZE ? len : BLOCK_SIZE;
       block = new char [block_size];
     }
-    (void)strcpy(block, p);
+    (void) strcpy(block, p);
     s = *pp = block;
     block += len;
     block_size -= len;
