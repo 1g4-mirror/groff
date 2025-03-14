@@ -1,3 +1,15 @@
+2025-03-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: .pdfhref M fails with no -N/-D flag
+
+	The documentation for this macro has always stated that the
+	first word of "descriptive text" is used as the destination
+	name if neither -N nor -D are present.
+
+	* tmac/pdf.tmac: Do it.
+
+	Fixes bug <https://savannah.gnu.org/bugs/index.php?66914>
+
 2025-03-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: \X'pdf: pdfpic ...' scales incorrectly

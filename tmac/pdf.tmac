@@ -646,10 +646,10 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \" if we are formatting for immediate output,
 .   \" emit PDFMARK code to establish the associated view
 .   \"
+.   ds PDFBOOKMARK.NAME \\$1
 .   ie '\\n(.z'' \{\
 .      pdf:href.sety
 .      pdfmark /Dest /\\$1 /View [\\*[PDFHREF.VIEW]] /DEST
-.      ds PDFHREF.NAME \\$1
 .      rr PDFPAGE.Y
 .      \}
 .   \"
