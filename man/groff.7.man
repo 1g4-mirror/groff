@@ -8298,9 +8298,9 @@ This facility is termed
 .
 .P
 The
-.B asciify
+.B \%asciify
 and
-.B unformat
+.RB \%\[lq] unformat \[rq]
 requests reprocess diversions.
 .\" XXX: That's a weak statement.  What we need is a `for` request and
 .\" a new conditional operator that tests whether an item in a node list

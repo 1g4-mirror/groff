@@ -1764,7 +1764,7 @@ request.
 .
 .
 .IP
-.B asciify
+.B \%asciify
 cannot return all items in a diversion to their source equivalent:
 nodes such as those produced by
 .BR \[rs]N[ .\|.\|.\& ]
@@ -1773,7 +1773,7 @@ so the result cannot be guaranteed to be a pure string.
 .
 Glyph parameters such as the type face and size are not preserved;
 use
-.B unformat
+.RB \%\[lq] unformat \[rq]
 to achieve that.
 .
 .
@@ -3897,7 +3897,7 @@ appends one.
 This is the same as the
 .B tr
 request except that the
-.B asciify
+.B \%asciify
 request uses the character code
 (if any)
 before the character translation.
@@ -3932,8 +3932,8 @@ Unformat the diversion
 .IR div .
 .
 Unlike
-.BR asciify ,
-.B unformat
+.BR \%asciify ,
+.RB \%\[lq] unformat \[rq]
 handles only tabs and spaces between words,
 the latter usually arising from spaces or newlines in the input.
 .
