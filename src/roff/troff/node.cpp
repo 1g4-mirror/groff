@@ -1961,8 +1961,8 @@ public:
   bool is_tag();
 };
 
-// TODO: Do not derive from `container_node`; implement custom double
-// container dumper in dump_node().
+// Not derived from `container_node`; implements custom double container
+// dumper in dump_node().
 class ligature_node : public glyph_node {
   node *n1;
   node *n2;
@@ -1987,6 +1987,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  void dump_node();
 };
 
 // TODO: Do not derive from `container_node`; implement custom double
@@ -2297,6 +2298,25 @@ node *ligature_node::add_self(node *n, hyphen_list **p)
   n1 = n2 = 0 /* nullptr */;
   delete this;
   return n;
+}
+
+void ligature_node::dump_node()
+{
+  fputc('{', stderr);
+  // Flush so that in case something goes wrong with property dumping,
+  // we know that we traversed to a new node.
+  fflush(stderr);
+  node::dump_properties();
+  if (n1 != 0 /* nullptr */) {
+    fputs(", \"n1\": ", stderr);
+    n1->dump_node();
+  }
+  if (n2 != 0 /* nullptr */) {
+    fputs(", \"n2\": ", stderr);
+    n2->dump_node();
+  }
+  fputc('}', stderr);
+  fflush(stderr);
 }
 
 kern_pair_node::kern_pair_node(hunits n, node *first, node *second,

@@ -1,5 +1,13 @@
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class ligature_node): Add `dump_node`
+	member function, overriding virtual function in `node` base
+	class.
+	(ligature_node::dump_node): Disclose more information, namely
+	the contents of any contained nodes.
+
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Derive class `bracket_node` from struct
 	`container_node`.
 
