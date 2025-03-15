@@ -1,3 +1,20 @@
+2025-03-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Revise `pline` output style.  Use more JSON/YAML-ish
+	syntax.  Present node properties in a consistent order: first,
+	general node properties (read: member variables of the `node`
+	abstract class); next, type-specific properties (read: member
+	variables of classes derived from `node`); then, general node
+	properties used only by MTSM/grohtml, which I hope one day to
+	refactor away.
+
+	* src/roff/troff/node.cpp (glyph_node::dump_node)
+	(node::dump_node, node::dump_node_list)
+	(composite_node::dump_node, dbreak_node::dump_node): Do it.
+	(node::dump_node): Report the `is_special` Boolean property.
+	(glyph_node::dump_node, composite_node::dump_node): Write string
+	values with JSON-valid escaped characters.
+
 2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Add `json_length()`, `json_extract()`, and

@@ -2214,19 +2214,41 @@ void glyph_node::ascii_print(ascii_output_file *ascii)
 // presumably has several different solutions for this.  Pick one.
 void glyph_node::dump_node()
 {
+  fprintf(stderr, "{\"type\": \"%s\"", type());
+  // GNU troff multiplexes the distinction of ordinary vs. special
+  // characters though the special character code zero.
   unsigned char c = ci->get_ascii_code();
-  fprintf(stderr, "{type: %s, character: ", type());
-  if (c)
-    fprintf(stderr, "\"%c\"", c);
-  else
-    fprintf(stderr, "\"\\%s\"", ci->nm.contents());
-  if (push_state)
-    fprintf(stderr, ", push_state");
+  if (c) {
+    fputs(", \"character\": ", stderr);
+    fputc('\"', stderr);
+    // JSON-encode the (printable Basic Latin) character.
+    switch (c) {
+    case '"':
+    case '\\':
+    case '/':
+      fputc('\\', stderr);
+      // fall through
+    default:
+      fputc(c, stderr);
+      break;
+    }
+    fputc('\"', stderr);
+  }
+  else {
+    fputs(", \"special character\": ", stderr);
+    ci->nm.json_dump();
+  }
+  fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
+  fprintf(stderr, ", \"is_special_node\": %s",
+	  is_special ? "true" : "false");
+  if (push_state) {
+    fputs(", \"push_state\": ", stderr);
+    push_state->display_state();
+  }
   if (state) {
-    fprintf(stderr, ", state: ");
+    fputs(", \"state\": ", stderr);
     state->display_state();
   }
-  fprintf(stderr, ", diversion level: %d", div_nest_level);
   fputs("}", stderr);
   fflush(stderr);
 }
@@ -2589,12 +2611,18 @@ units node::size()
 
 void node::dump_node()
 {
-  fprintf(stderr, "{type: %s", type());
-  if (push_state)
-    fputs(", <push_state>", stderr);
-  if (state)
-    fputs(", <state>", stderr);
-  fprintf(stderr, ", diversion level: %d", div_nest_level);
+  fprintf(stderr, "{\"type\": \"%s\"", type());
+  fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
+  fprintf(stderr, ", \"is_special_node\": %s",
+	  is_special ? "true" : "false");
+  if (push_state) {
+    fputs(", \"push_state\": ", stderr);
+    push_state->display_state();
+  }
+  if (state) {
+    fputs(", \"state\": ", stderr);
+    state->display_state();
+  }
   fputs("}", stderr);
   fflush(stderr);
 }
@@ -2604,13 +2632,14 @@ void node::dump_node_list()
   // It's stored in reverse order already; this puts it forward again.
   std::stack<node *> reversed_node_list;
   node *n = next;
-  bool need_comma = false;
 
   assert(next != 0 /* nullptr */);
   do {
     reversed_node_list.push(n);
     n = n->next;
   } while (n != 0 /* nullptr */);
+  fputc('[', stderr);
+  bool need_comma = false;
   while (!reversed_node_list.empty()) {
     if (need_comma)
       fputs(",\n", stderr);
@@ -2618,7 +2647,11 @@ void node::dump_node_list()
     reversed_node_list.pop();
     need_comma = true;
   }
-  fputc('\n', stderr);
+  // !need_comma implies that the list was empty.  JSON convention is to
+  // put a space between an empty pair of square brackets.
+  if (!need_comma)
+    fputc(' ', stderr);
+  fputs("]\n", stderr);
   fflush(stderr);
 }
 
@@ -4994,19 +5027,41 @@ void composite_node::tprint(troff_output_file *out)
 // presumably has several different solutions for this.  Pick one.
 void composite_node::dump_node()
 {
+  fprintf(stderr, "{\"type\": \"%s\"", type());
+  // GNU troff multiplexes the distinction of ordinary vs. special
+  // characters though the special character code zero.
   unsigned char c = ci->get_ascii_code();
-  fprintf(stderr, "{type: %s, character: ", type());
-  if (c)
-    fprintf(stderr, "\"%c\"", c);
-  else
-    fprintf(stderr, "\"\\%s\"", ci->nm.contents());
-  if (push_state)
-    fprintf(stderr, ", push_state, ");
+  if (c) {
+    fputs(", \"character\": ", stderr);
+    fputc('\"', stderr);
+    // JSON-encode the (printable Basic Latin) character.
+    switch (c) {
+    case '"':
+    case '\\':
+    case '/':
+      fputc('\\', stderr);
+      // fall through
+    default:
+      fputc(c, stderr);
+      break;
+    }
+    fputc('\"', stderr);
+  }
+  else {
+    fputs(", \"special character\": ", stderr);
+    ci->nm.json_dump();
+  }
+  fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
+  fprintf(stderr, ", \"is_special_node\": %s",
+	  is_special ? "true" : "false");
+  if (push_state) {
+    fputs(", \"push_state\": ", stderr);
+    push_state->display_state();
+  }
   if (state) {
-    fprintf(stderr, ", state: ");
+    fputs(", \"state\": ", stderr);
     state->display_state();
   }
-  fprintf(stderr, ", diversion level: %d", div_nest_level);
   fputs("}", stderr);
   fflush(stderr);
 }
@@ -5890,25 +5945,31 @@ bool dbreak_node::is_tag()
 
 void dbreak_node::dump_node()
 {
-  fprintf(stderr, "{type: %s", type());
-  if (push_state)
-    fprintf(stderr, ", <push_state>");
-  if (state)
-    fprintf(stderr, ", <state>");
-  fprintf(stderr, ", diversion level: %d", div_nest_level);
+  fprintf(stderr, "{\"type\": \"%s\"", type());
   if (none != 0 /* nullptr */) {
-    fputs(", none: ", stderr);
+    fputs(", \"none\": ", stderr);
     none->dump_node();
   }
   if (pre != 0 /* nullptr */) {
-    fputs(", pre: ", stderr);
+    fputs(", \"pre\": ", stderr);
     pre->dump_node();
   }
   if (post != 0 /* nullptr */) {
-    fputs(", post: ", stderr);
+    fputs(", \"post\": ", stderr);
     post->dump_node();
   }
-  fprintf(stderr, "}");
+  fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
+  fprintf(stderr, ", \"is_special_node\": %s",
+	  is_special ? "true" : "false");
+  if (push_state) {
+    fputs(", \"push_state\": ", stderr);
+    push_state->display_state();
+  }
+  if (state) {
+    fputs(", \"state\": ", stderr);
+    state->display_state();
+  }
+  fputs("}", stderr);
   fflush(stderr);
 }
 
