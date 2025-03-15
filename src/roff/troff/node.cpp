@@ -3343,13 +3343,12 @@ hunits overstrike_node::width()
 }
 
 bracket_node::bracket_node()
-: nodes(0 /* nullptr */), max_width(H0)
+: container_node(0 /* nullptr */), max_width(H0)
 {
 }
 
 bracket_node::bracket_node(statem *s, int divlevel)
-: node(0 /* nullptr */, s, divlevel), nodes(0 /* nullptr */),
-  max_width(H0)
+: container_node(0 /* nullptr */, s, divlevel), max_width(H0)
 {
 }
 
@@ -3358,11 +3357,6 @@ void bracket_node::dump_properties()
   node::dump_properties();
   fprintf(stderr, ", \"max_width\": %d", max_width.to_units());
   fflush(stderr);
-}
-
-bracket_node::~bracket_node()
-{
-  delete_node_list(nodes);
 }
 
 node *bracket_node::copy()

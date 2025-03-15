@@ -553,14 +553,11 @@ public:
   void dump_properties();
 };
 
-// TODO: Derive from abstract class `container_node`.
-class bracket_node : public node {
-  node *nodes;
+class bracket_node : public container_node {
   hunits max_width;
 public:
   bracket_node();
   bracket_node(statem *, int);
-  ~bracket_node();
   node *copy();
   void tprint(troff_output_file *);
   void bracket(node *);	// add another node to be overstruck
