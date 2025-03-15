@@ -36,6 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stack>
 
+#include "json-encode.h" // json_encode_char()
+
 #include "troff.h"
 #include "dictionary.h"
 #include "hvunits.h"
@@ -3548,6 +3550,7 @@ public:
   node_list nl;
   macro_header() { count = 1; }
   macro_header *copy(int);
+  void json_dump();
 };
 
 macro::~macro()
@@ -3711,6 +3714,11 @@ void macro::print_size()
   errprint("%1", len);
 }
 
+void macro::json_dump()
+{
+  p->json_dump();
+}
+
 // make a copy of the first n bytes
 
 macro_header *macro_header::copy(int n)
@@ -3732,6 +3740,21 @@ macro_header *macro_header::copy(int n)
     }
   }
   return p;
+}
+
+void macro_header::json_dump()
+{
+  fputc('\"', stderr);
+  int macro_len = cl.length();
+  for (int i = 0; i < macro_len; i++) {
+    json_char jc = json_encode_char(cl.get(i));
+    // Write out its JSON representation by character by character to
+    // keep libc string functions from interpreting C escape sequences.
+    for (size_t j = 0; j < jc.len; j++)
+      fputc(jc.buf[j], stderr);
+  }
+  fputc('\"', stderr);
+  fflush(stderr);
 }
 
 void print_macros()

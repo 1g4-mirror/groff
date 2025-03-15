@@ -4148,7 +4148,8 @@ device_extension_node::device_extension_node(const macro &m, tfont *t,
 void device_extension_node::dump_properties()
 {
   node::dump_properties();
-  // TODO: Implement `macro::dump()` and call it on `mac` from here.
+  fputs(", \"macro\": ", stderr);
+  mac.json_dump();
   fputs(", \"tfont\": ", stderr);
   tf->get_name().json_dump();
   fputs(", \"stroke_color\": ", stderr);

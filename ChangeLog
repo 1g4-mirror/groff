@@ -1,5 +1,22 @@
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Implement dumping of device extension node contents.
+
+	* src/roff/troff/request.h (class macro): Declare `json_dump()`
+	member function.
+	* src/roff/troff/node.cpp
+	(device_extension_node::dump_properties): Call member variable
+	`mac`'s `json_dump()` member function.
+	* src/roff/troff/input.cpp (class macro_header): Declare
+	`json_dump()` member function.
+	(macro::json_dump): New member function calls `macro_header` `p`
+	member variable's `json_dump()` member function.
+	(macro_header::json_dump): New member function iterates though
+	`char_list` `cl` member variable's elements, calling
+	`json_encode_char()` on each one.
+
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/node.cpp: Relocate `dump_node_list_in_reverse`
