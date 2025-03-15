@@ -8499,37 +8499,41 @@ or other postprocessor.
 .P
 GNU
 .I troff \" GNU
-also permits the interpolation of macro contents as a device extension
-command.
+also permits the interpolation of macro or string contents
+as a device extension command.
 .
 The
 .B devicem
-request
-and
+request and
 .B \[rs]Y
-escape sequence are each approximately equivalent to
-.RB \[lq] \[rs]X\[aq]\c
-.IB name \[aq]\c
-\[rq].
+escape sequence correspond to
+.RB \[lq] ".device \[rs]*[\c"
+.IB name ]\c
+\[rq]
+and
+.RB \[lq] \[rs]X\[aq]\[rs]*[\c
+.IB name ]\c
+\[rq],
+respectively.
 .
-They differ from that construction in that the contents of the string or
-macro
-.I name
-are not interpreted;
+They differ from their counterparts
+in that GNU
+.I troff \" GNU
+does not interpret the contents of the string or macro
+.IR name ;
 further,
 .I name
 may be a macro and thus contain newlines.
 .
-(There is no way to embed a newline
-in the arguments to
+(There is no way to embed a newline in the arguments to
 .RB \[lq] device \[rq]
 or
 .BR \[rs]X .)
 .
 The inclusion of newlines requires an extension to the AT&T
 .I troff \" AT&T
-device-independent page description language;
-their presence confuses drivers that do not know about it
+device-independent page description language,
+and their presence confuses drivers that do not know about it
 (see subsection \[lq]Device control commands\[rq] of
 .MR groff_out @MAN5EXT@ ).
 .

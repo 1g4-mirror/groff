@@ -1252,25 +1252,27 @@ and so on.
 .BI \[rs]Y( ma
 .TQ
 .BI \[rs]Y[ mac ]
-Interpolate a macro as a device extension command.
+Interpolate a macro or string as a device extension command.
 .
 As
 .BI \[rs]X\[aq]\[rs]*[ mac ]\[aq]\c
 ,
-except the contents of
-.I mac
-are not interpreted,
-and
+except that GNU
+.I troff \" GNU
+does not interpret the contents of
+.IR mac ;
+further,
 .I mac
 can be a macro and thus contain newlines,
-whereas the argument to
-.B \[rs]X
-cannot.
+unlike the argument to
+.B \[rs]X .
 .
 This inclusion of newlines requires an extension to the AT&T
 .I troff \" AT&T
-page description language,
-and confuses postprocessors that do not know about it.
+device-independent page description language,
+and their presence confuses drivers that do not know about it
+(see subsection \[lq]Device control commands\[rq] of
+.MR groff_out @MAN5EXT@ ).
 .
 .
 .TP

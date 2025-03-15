@@ -17107,23 +17107,43 @@ these produce warnings in category @samp{char}.
 
 GNU
 @command{troff}
-also permits the interpolation of macro contents
+also permits the interpolation of macro or string contents
 as a device extension command.
 
 @DefreqList {devicem, name}
 @DefescItemx {\\Y, , n, }
 @DefescItem {\\Y, (, nm, }
 @DefescListEnd {\\Y, [, name, ]}
-The @code{devicem} request and @code{\Y} escape sequence are each
-approximately equivalent to @samp{\X'\*[@var{name}]'} (one-character
-name@tie{}@var{n}, two-character name @var{nm}).  They differ from that
-construction in that the contents of the string or macro @var{name} are
-not interpreted; further, @var{name} may be a macro and thus contain
-newlines.  (There is no way to embed a newline in the arguments to
-@code{device} or @code{\X}.)  The inclusion of newlines requires an
-extension to the @acronym{AT&T} @command{troff} device-independen page
-description language; their presence confuses drivers that do not know
-about it (@pxref{Device Control Commands}).
+The
+@code{devicem}
+request and
+@code{\Y}
+escape sequence correspond to
+@samp{.device \*[@var{name}]}
+and
+@samp{\X'\*[@var{name}]'}
+(one-character
+name@tie{}@var{n},
+two-character name
+@var{nm}),
+respectively.
+They differ from their counterparts
+in that GNU
+@command{troff} @c GNU
+does not interpret the contents of the string or macro
+@var{name};
+further,
+@var{name}
+may be a macro and thus contain newlines.
+(There is no way to embed a newline in the arguments to
+@code{device}
+or
+@code{\X}.)
+The inclusion of newlines requires an extension to the @acronym{AT&T}
+@command{troff} @c AT&T
+device-independent page description language,
+and their presence confuses drivers that do not know about it
+(@pxref{Device Control Commands}).
 @endDefesc
 
 @DefreqList {tag, name}
