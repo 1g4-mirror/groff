@@ -5919,7 +5919,7 @@ is more portable.
 .
 .
 .P
-When adjusting to both margins,
+When adjusting output lines to both margins,
 AT&T
 .I troff \" AT&T
 at first adjusts spaces starting from the right;
@@ -5927,8 +5927,10 @@ GNU
 .I troff \" GNU
 begins from the left.
 .
-Both implementations adjust spaces from opposite ends on alternating
-output lines to prevent \[lq]rivers\[rq] in the text.
+Both implementations adjust spaces
+from opposite ends on alternating output lines
+in this adjustment mode
+to prevent \[lq]rivers\[rq] in the text.
 .
 .
 .P
