@@ -1,3 +1,8 @@
+2025-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/number.cpp (is_valid_term): When warning of an
+	invalid scaling unit, report the character encountered.
+
 2025-03-14  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: .pdfhref M fails with no -N/-D flag

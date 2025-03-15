@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -538,7 +538,7 @@ static bool is_valid_term(units *u, int scaling_unit,
       && (strchr(SCALING_UNITS, c) != 0 /* nullptr */)) {
     switch (scaling_unit) {
     case 0:
-      warning(WARN_SCALE, "scaling unit invalid in context");
+      warning(WARN_SCALE, "scaling unit '%1' invalid in context", c);
       break;
     case 'f':
       if (c != 'f' && c != 'u') {
