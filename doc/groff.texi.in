@@ -11887,8 +11887,8 @@ esthetics of typeset text.  @dfn{Ligatures} are sequences of glyphs that
 are visually connected or ``tied'', overlapping them and slightly
 altering their shapes.  @dfn{Kerning} is the adjustment of horizontal
 spacing between glyphs.  Neither is employed on terminals.@footnote{A
-monospaced font may possess glyphs for ligatures, but they are
-nevertheless seldom used to set text.}
+monospaced font may possess glyphs for ligatures, but they nevertheless
+seldom see use to set text.}
 
 Most typesetters support ligatures for the sequences `fi', `fl', `ff',
 `ffi', and `ffl', and @code{troff} does likewise.  Some fonts may
