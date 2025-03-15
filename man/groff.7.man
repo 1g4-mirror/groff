@@ -2500,10 +2500,10 @@ Abort processing;
 exit with failure status.
 .
 .TPx
-.REQ .ab message
+.REQ .ab terminal-message
 Abort processing;
 write
-.I message
+.I terminal-message
 to the standard error stream and exit with failure status.
 .
 .TPx

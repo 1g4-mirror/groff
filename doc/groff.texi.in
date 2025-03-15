@@ -17603,11 +17603,17 @@ allowing leading embedded spaces.
 but does not append a newline.
 @endDefreq
 
-@Defreq {ab, [@Var{message}]}
+@Defreq {ab, [@Var{terminal-message}]}
 @cindex abort (@code{ab})
-Write any @var{message} to the standard error stream (like @code{tm})
-and then abort GNU @code{troff}; that is, stop processing and terminate
-with a failure status.
+Write any
+@var{terminal-message}
+to the standard error stream
+(like
+@code{tm})
+and then abort GNU
+@command{troff}; @c GNU
+that is,
+stop processing and terminate with a failure status.
 @endDefreq
 
 @Defreq {ex, }
