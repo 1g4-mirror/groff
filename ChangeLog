@@ -1,5 +1,10 @@
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (dbreak_node::dump_node): Refactor to
+	use new `dump_properties` member function of `node` base class.
+
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class ligature_node): Add `dump_node`
 	member function, overriding virtual function in `node` base
 	class.

@@ -6169,7 +6169,11 @@ bool dbreak_node::is_tag()
 
 void dbreak_node::dump_node()
 {
-  fprintf(stderr, "{\"type\": \"%s\"", type());
+  fputc('{', stderr);
+  // Flush so that in case something goes wrong with property dumping,
+  // we know that we traversed to a new node.
+  fflush(stderr);
+  node::dump_properties();
   if (none != 0 /* nullptr */) {
     fputs(", \"none\": ", stderr);
     none->dump_node();
@@ -6182,18 +6186,7 @@ void dbreak_node::dump_node()
     fputs(", \"post\": ", stderr);
     post->dump_node();
   }
-  fprintf(stderr, ", \"diversion level\": %d", div_nest_level);
-  fprintf(stderr, ", \"is_special_node\": %s",
-	  is_special ? "true" : "false");
-  if (push_state) {
-    fputs(", \"push_state\": ", stderr);
-    push_state->display_state();
-  }
-  if (state) {
-    fputs(", \"state\": ", stderr);
-    state->display_state();
-  }
-  fputs("}", stderr);
+  fputc('}', stderr);
   fflush(stderr);
 }
 
