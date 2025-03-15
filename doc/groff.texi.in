@@ -9005,7 +9005,7 @@ hyphenation patterns with the new ones.  Invoking @code{hpf} or
 loaded at startup, or in a macro package), GNU @code{troff} won't
 automatically hyphenate at all.
 
-@cindex trailing spaces in file name arguments
+@cindex spaces in file name arguments
 @cindex comments, after file name arguments
 @cindex @code{hpf} request, and comments
 @cindex @code{hpfa} request, and comments
@@ -9016,7 +9016,7 @@ and
 @code{hpfa}
 requests interpret the remainder of the input line as the file name
 argument,
-including trailing spaces,
+including any spaces,
 up to a newline or comment escape sequence.
 Suffixing the file name with a comment,
 even an empty one,
@@ -11429,7 +11429,7 @@ after the character can't be suppressed since the neighboring character
 on the right doesn't get examined.
 @endDefreq
 
-@cindex trailing spaces in character definitions
+@cindex spaces in character definitions
 @cindex comments, after character definitions
 @cindex @code{char} request, and comments
 @cindex @code{fchar} request, and comments
@@ -11468,9 +11468,11 @@ the character is defined with empty contents.
 
 GNU
 @command{troff} @c GNU
-removes a leading neutral double quote from
-@var{contents}
-permitting initial embedded spaces,
+removes a leading neutral double quote
+@samp{"}
+from
+@var{contents},
+permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 @xref{Copy Mode}.
 
@@ -11534,9 +11536,11 @@ request, but before the already mounted special fonts.
 @xref{Character Classes}.
 
 @strong{Caution:@:}
-These requests treats the remainder of the input line
+These requests remove a leading neutral double quote
+@samp{"}
+and treat the remainder of the input line
 as their second argument,
-including trailing spaces,
+including any spaces,
 up to a newline or comment escape sequence.
 See the discussion of the
 @code{ds}
@@ -12775,7 +12779,7 @@ Gray codes are explored in \*[cite Morgan 1998].
 @c     @result{} I see a big, hairy wildebeest.
 @c @endExample
 
-@cindex trailing spaces in string definitions and appendments
+@cindex spaces in string definitions and appendments
 @cindex comments, with string definitions and appendments
 @cindex @code{as} request, and comments
 @cindex @code{as1} request, and comments
@@ -12785,7 +12789,7 @@ Gray codes are explored in \*[cite Morgan 1998].
 After the formatter has read the space character that ends the first
 argument,
 it treats the remainder of the input line as the second argument,
-including trailing spaces,
+including any spaces,
 up to a newline or comment escape sequence.
 Ending string definitions
 (and appendments)
@@ -12827,8 +12831,9 @@ you can retain it while using a comment to document an empty string.
 The formatter removes a leading neutral double quote
 @samp{"}
 from
-@var{contents}
-to permit the embedding of leading spaces.
+@var{contents},
+permitting initial embedded spaces in it.
+@c We briefly introduce and discuss "copy mode" below.
 It interprets any other
 @samp{"}
 literally,
@@ -12836,7 +12841,7 @@ but the wise author uses the special character escape sequence
 @code{\[dq]}
 instead if the string
 might be interpolated as part of a macro argument;
-see @ref{Calling Macros}.
+recall @ref{Calling Macros}.
 
 @c Examples should be more accessible than Unix nerd stuff like this,
 @c but in general document authors shouldn't want to use "straight"
@@ -12933,7 +12938,7 @@ Strings can be queried (@code{length}) and modified (@code{chop},
 can be manipulated through renaming, removal, and aliasing (@code{rn},
 @code{rm}, @code{als}).
 
-@cindex trailing spaces in string length measurement
+@cindex spaces in string length measurement
 @cindex comments, with string length measurements
 @cindex @code{length} request, and comments
 @Defreq {length, reg [[@code{"}]@Var{contents}]}
@@ -12947,8 +12952,13 @@ in the register @var{reg}.  If @var{reg} doesn't exist, it is created.
 
 GNU
 @command{troff} @c GNU
-removes a leading neutral double quote from the argument to the request,
-permitting embedded leading spaces.
+removes a leading neutral double quote
+@samp{"}
+from
+@var{length},
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
+@xref{Copy Mode}.
 
 @Example
 .ds xxx abcd\h'3i'efgh
@@ -12957,10 +12967,13 @@ permitting embedded leading spaces.
     @result{} 14
 @endExample
 
+@cindex @code{length} request, arguments starting with double quote @code{"}, and comments
 @strong{Caution:@:}
-GNU
-@command{troff} @c GNU
-reads the second argument to the end of the line in copy mode.
+The formatter reads the second argument to the end of the line
+in copy mode,
+omitting any leading neutral double quote
+@samp{"}
+character.
 See the discussion of the
 @code{ds}
 request above.
@@ -15993,9 +16006,11 @@ is similar to that of @code{\!} in the top-level diversion.
 
 GNU
 @command{troff} @c GNU
-removes a leading neutral double quote from
-@var{contents}
-permitting initial embedded spaces,
+removes a leading neutral double quote
+@samp{"}
+from
+@var{anything}, @c TODO: -> character-sequence
+permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 Recall @ref{Copy Mode}.
 
@@ -16501,7 +16516,7 @@ Enabling unsafe mode at the command line permits
 the writing of files and execution of external commands,
 with or without inclusion of their output in the document.
 
-@cindex trailing spaces in file name or system command arguments
+@cindex spaces in file name or system command arguments
 @cindex comments, after file name or system command arguments
 @cindex @code{"}, at the start of a request argument
 @cindex double quote, at the start of a request argument
@@ -16519,7 +16534,7 @@ with or without inclusion of their output in the document.
 @strong{Caution:@:}
 The requests discussed below that accept a file name or system command
 as an argument treat the remainder of the input line as that argument,
-including trailing spaces,
+including any spaces,
 up to a newline or comment escape sequence.
 Suffixing the file name or command with a comment,
 even an empty one,
@@ -16527,12 +16542,12 @@ prevents unwanted space from creeping into it during source document
 maintenance.
 GNU
 @command{troff} @c GNU
-removes a leading neutral double quote from such arguments
-permitting initial embedded spaces,
+removes a leading neutral double quote
+@samp{"}
+from such an argument,
+permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
-Recall the discussion of the
-@code{ds}
-request in @ref{Strings}.
+Recall @ref{Copy Mode}.
 
 @DefreqList {so, [@code{"}]@Var{file}}
 @DefreqListEndx {soquiet, [@code{"}]@Var{file}}
@@ -17044,9 +17059,11 @@ or other postprocessor.
 @cindex @code{device} request, arguments starting with double quote @code{"}, and comments
 GNU
 @command{troff} @c GNU
-removes a leading neutral double quote from
-@var{contents}
-permitting initial embedded spaces,
+removes a leading neutral double quote
+@samp{"}
+from
+@var{contents},
+permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 Recall @ref{Copy Mode}.
 
@@ -17583,9 +17600,11 @@ is a sequence of ordinary characters and/or spaces.
 @c ...limiting the file names you can express; see Savannah #65108.
 GNU
 @command{troff} @c GNU
-removes a leading neutral double quote from
-@var{file-identifier}
-permitting initial embedded spaces,
+removes a leading neutral double quote
+@samp{"}
+from
+@var{file-identifier},
+permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 Recall @ref{Copy Mode}.
 
@@ -17606,7 +17625,8 @@ Send
 @var{terminal-message}
 to the standard error stream.
 The formatter reads the argument
-to the end of the input line in copy mode,
+to the end of the input line in copy mode
+(@pxref{Copy Mode}),
 but does
 @emph{not}
 removing a leading double quote;
@@ -17614,9 +17634,11 @@ contrast
 @code{tm1}.
 
 @code{tm1}
-removes a leading neutral double quote from
-@var{message},
-allowing leading embedded spaces.
+removes a leading neutral double quote
+@samp{"}
+from
+@var{contents},
+permitting initial embedded spaces in it.
 
 @code{tmc} works as
 @code{tm1},
@@ -18534,7 +18556,9 @@ each rounded down to the nearest multiple of@tie{}12.
 @cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
 GNU
 @command{troff}
-removes a leading neutral double quote from the argument to the
+removes a leading neutral double quote
+@samp{"}
+from the argument to the
 @code{cf},
 @code{nx},
 @code{pi},
@@ -18547,7 +18571,9 @@ and the second argument
 to the
 @code{lf}
 request,
-permitting embedded leading spaces.
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
+Recall @ref{Copy Mode}.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{cs} request, incompatibilities with @acronym{AT&T} @code{troff}

@@ -2466,14 +2466,27 @@ and
 .I message
 in copy mode
 (see section \[lq]Copy Mode\[rq] below)
-until the end of the input line;
-they thus can contain embedded spaces.
+until the end of the input line.
+.
+A
+.I character-sequence
+comprises one or more ordinary,
+special,
+or indexed characters;
+spaces;
+or escape sequences that interpolate only these.
+.\" XXX: or tabs, leaders, backspace, and delete characters
+.
+The remaining argument names named for clarity;
+they are also
+.I character-sequences.
 .
 A neutral double quote
 .RB \[oq] \[dq] \[cq] \" single quotes around double quote
-can optionally prefix these;
+can optionally prefix a
+.I character-sequence;
 the formatter discards one if present,
-permitting leading spaces in the argument.
+permitting initial embedded spaces in the argument.
 .
 .
 .P
@@ -3756,21 +3769,13 @@ The argument becomes the input line number of the
 line the formatter reads.
 .
 .TPx
-.REQ .lf "input-line-number file-identifier"
+.REQ .lf "input-line-number character-sequence"
 As
 .B lf
 with one argument,
 but also update the reported file name to
-.IR file-identifier ,
-a sequence of ordinary characters and/or spaces.
-.\" XXX: or tabs, leaders, backspace, and delete characters
+.IR character-sequence .
 .\" ...limiting the file names you can express; see Savannah #65108.
-.
-GNU
-.I troff \" GNU
-removes a leading leading neutral double quote from
-.IR file-identifier ,
-allowing it to contain embedded leading spaces.
 .
 .TPx
 .REQ .lg
@@ -4783,9 +4788,12 @@ As
 .REQ .tm1 message
 As
 .request .tm ,
-but removes a leading neutral double quote from
+but removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq]
+from
 .IR message ,
-allowing embedded leading spaces.
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
 .
 .TPx
 .REQ .tmc
@@ -6202,6 +6210,7 @@ The formatter removes a leading neutral double quote
 from
 .I contents
 to permit the embedding of leading spaces.
+.
 It interprets any other
 .RB \[oq] \[dq] \[cq] \" single quotes around double quote
 literally,
@@ -6241,13 +6250,7 @@ argument interpolations must be escaped if they are to reference
 parameters from the calling context;
 see section \[lq]Parameters\[rq] below.
 .
-.
-.P
-The formatter removes a leading neutral double quote
-.B \[dq]
-in the string contents to permit the embedding of leading spaces.
-.
-Any other
+Any non-initial neutral double quote
 .B \[dq]
 is interpreted literally,
 but it is wise to use the special character escape sequence
@@ -6327,7 +6330,7 @@ string is later interpolated.
 .I Caution:
 These requests treat the remainder of the input line
 as their second argument,
-including trailing spaces,
+including any spaces,
 up to a newline or comment escape sequence.
 .
 Ending string definitions
