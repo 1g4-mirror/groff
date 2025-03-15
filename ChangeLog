@@ -1,3 +1,57 @@
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/node.cpp:
+	* src/roff/troff/node.h: Rename all `ch`, `n` and `list` member
+	variables of node classes to `nodes` to later enable insertion
+	of a `container_node` abstract class into the inheritance
+	structure.  This change throws more light on a pitfall of GNU
+	troff's class design; some node classes can contain other nodes
+	by using pointers to `node`s, but this is done without recourse
+	to any C++ language features to indicate whether such pointers
+	are expected to be single elements or lists.  (Compounding the
+	ambiguity is that `node` is inherently set up for use as a
+	member of a doubly-linked list.)  Thus, this renaming
+	unfortunately removes some information about class design
+	intentions.  On the other hand, since only programmer knowledge
+	and discipline were enforcing the singleton/list distinction
+	already, the member variable names were _only_ documentary.  In
+	the future, we might want to enhance some of these classes to
+	enforce their containment of singleton nodes only.
+	* src/roff/troff/node.cpp (hline_node::copy, vline_node::copy)
+	(vline_node::width, left_italic_corrected_node::width)
+	(left_italic_corrected_node::skew)
+	(left_italic_corrected_node::subscript_correction)
+	(left_italic_corrected_node::italic_correction)
+	(left_italic_corrected_node::ends_sentence)
+	(left_italic_corrected_node::overlaps_horizontally)
+	(left_italic_corrected_node::overlaps_vertically)
+	(left_italic_corrected_node::last_char_node)
+	(left_italic_corrected_node::get_tfont)
+	(italic_corrected_node::skew, glyph_node::tprint)
+	(glyph_node::zero_width_tprint, hline_node::tprint):
+	Parenthesize (formally) complex expressions.
+	(bracket_node::copy, hline_node::copy, vline_node::copy)
+	(reverse_node_list)
+	(left_italic_corrected_node::asciify)
+	(left_italic_corrected_node::copy)
+	(left_italic_corrected_node::tprint)
+	(left_italic_corrected_node::ascii_print)
+	(left_italic_corrected_node::vertical_extent)
+	(left_italic_corrected_node::get_hyphenation_type)
+	(left_italic_corrected_node::add_self)
+	(left_italic_corrected_node::width): Explicitly compare variable
+	of pointer type to null pointer literal instead of letting it
+	pun down to a Boolean.
+	(glyph_node::asciify): Compare local variable of `char` type to
+	character rather than integer literal.
+	(overstrike_node::add_self): Rename parameter from `nodes` to
+	`more_nodes`, since the former now collides with a class member
+	variable.
+	(space_node::space_node): Initialize member variable of `char`
+	type with character rather than integer literal.
+
 2025-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/number.cpp (is_valid_term): When warning of an

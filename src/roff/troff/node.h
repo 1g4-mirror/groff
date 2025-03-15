@@ -408,7 +408,7 @@ public:
 
 class hline_node : public node {
   hunits x;
-  node *n;
+  node *nodes;
 public:
   hline_node(hunits, node *, node * /* nxt */ = 0 /* nullptr */);
   hline_node(hunits, node *, statem *, int,
@@ -425,7 +425,7 @@ public:
 
 class vline_node : public node {
   vunits x;
-  node *n;
+  node *nodes;
 public:
   vline_node(vunits, node *, node * /* nxt */ = 0 /* nullptr */);
   vline_node(vunits, node *, statem *, int,
@@ -466,7 +466,7 @@ public:
 };
 
 class zero_width_node : public node {
-  node *n;
+  node *nodes;
 public:
   zero_width_node(node *);
   zero_width_node(node *, statem *, int);
@@ -484,7 +484,7 @@ public:
 };
 
 class left_italic_corrected_node : public node {
-  node *n;
+  node *nodes;
   hunits x;
 public:
   left_italic_corrected_node(node * /* xx */ = 0 /* nullptr */);
@@ -517,7 +517,7 @@ public:
 };
 
 class overstrike_node : public node {
-  node *list;
+  node *nodes;
   hunits max_width;
 public:
   overstrike_node();
@@ -537,7 +537,7 @@ public:
 };
 
 class bracket_node : public node {
-  node *list;
+  node *nodes;
   hunits max_width;
 public:
   bracket_node();
@@ -580,7 +580,7 @@ public:
 };
 
 class suppress_node : public node {
-  int is_on;
+  int is_on; // three-valued Boolean :-|
   int emit_limits;	// must we issue extent of the area written out?
   symbol filename;
   char position;
