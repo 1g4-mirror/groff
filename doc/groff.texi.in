@@ -17662,9 +17662,12 @@ immutable and their details unknown to the formatter.
 @cindex defined composite characters, dumping (@code{pcomposite})
 @cindex composite characters, defined, dumping (@code{pcomposite})
 @cindex characters, composite, dumping defined (@code{pcomposite})
-Report, to the standard error stream, the list of defined composite
-characters.  The ``from'' code point is listed first, followed by its
-``to'' mapping.
+Report,
+to the standard error stream,
+the list of defined composite character mappings.
+Recall the @code{composite} request description in @ref{Using Symbols}.
+The ``from'' code point is listed first,
+followed by its ``to'' mapping.
 @endDefreq
 
 @Defreq {pev, }

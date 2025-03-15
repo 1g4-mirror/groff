@@ -3376,7 +3376,11 @@ formatter.
 .B .pcomposite
 Report,
 to the standard error stream,
-the list of defined composite characters.
+the list of defined composite character mappings.
+.
+See the
+.RB \%\[lq] composite \[rq]
+request in section \[lq]New requests\[rq] above.
 .
 The \[lq]from\[rq] code point is listed first,
 followed by its \[lq]to\[rq] mapping.
