@@ -1,5 +1,13 @@
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class kern_pair_node): Add
+	`dump_node` member function, overriding virtual function in
+	`node` base class.
+	(kern_pair_node::dump_node): Disclose more information, namely
+	the contents of any contained nodes.
+
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (dbreak_node::dump_node): Refactor to
 	use new `dump_properties` member function of `node` base class.
 

@@ -1990,8 +1990,8 @@ public:
   void dump_node();
 };
 
-// TODO: Do not derive from `container_node`; implement custom double
-// container dumper in dump_node().
+// Not derived from `container_node`; implements custom double container
+// dumper in dump_node().
 class kern_pair_node : public node {
   hunits amount;
   node *n1;
@@ -2020,6 +2020,7 @@ public:
   bool is_tag();
   void vertical_extent(vunits *, vunits *);
   void dump_properties();
+  void dump_node();
 };
 
 // Not derived from `container_node`; implements custom triple container
@@ -2329,6 +2330,25 @@ void kern_pair_node::dump_properties()
 {
   node::dump_properties();
   fprintf(stderr, ", \"amount\": %d", amount.to_units());
+  fflush(stderr);
+}
+
+void kern_pair_node::dump_node()
+{
+  fputc('{', stderr);
+  // Flush so that in case something goes wrong with property dumping,
+  // we know that we traversed to a new node.
+  fflush(stderr);
+  dump_properties();
+  if (n1 != 0 /* nullptr */) {
+    fputs(", \"n1\": ", stderr);
+    n1->dump_node();
+  }
+  if (n2 != 0 /* nullptr */) {
+    fputs(", \"n2\": ", stderr);
+    n2->dump_node();
+  }
+  fputc('}', stderr);
   fflush(stderr);
 }
 
