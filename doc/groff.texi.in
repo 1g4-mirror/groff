@@ -18576,8 +18576,15 @@ the character escape @code{\(rs} or @code{\[rs]}, for ``reverse
 solidus'', from its name in the @acronym{ECMA}-6 and @w{ISO 10646}
 standards.@footnote{The @code{rs} special character identifier was not
 defined in @acronym{AT&T} @code{troff}'s font description files, but is
-in those of its lineal descendant, Heirloom Doctools @code{troff}, as of
-the latter's 060716 release (July 2006).}
+in those of its descendant Heirloom Doctools @code{troff}, as of the
+latter's 060716 release (July 2006).}
+@c The foregoing once said "lineal" descendant; that appears not to be
+@c true.  Heirloom Doctools troff is based on Open Solaris troff, which
+@c descends from DWB 2.0 troff (effectively a fork).  "Lineal"
+@c descendants of DWB 2.0 troff would be DWB 3.3 and, possibly, Plan 9
+@c troff.  (The accuracy of this last claim depends on the degree of
+@c resemblance between Research Unix troff--the version maintained by
+@c Kernighan--and DWB troff, of which 3.4 was the final release.)
 
 To store an escape sequence in a diversion that is interpreted when the
 diversion is interpolated, either use the traditional @code{\!}

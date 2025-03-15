@@ -6372,10 +6372,17 @@ from its name in the ECMA-6 (ISO/IEC\~646) standard.
 .
 [This escape sequence is not portable to AT&T
 .IR troff , \" AT&T
-but is to its lineal descendant,
+but is to its descendant
 Heirloom Doctools
 .IR troff ,
 as of its 060716 release (July 2006).]
+.\" The foregoing once said "lineal" descendant; that appears not to be
+.\" true.  Heirloom Doctools troff is based on Open Solaris troff, which
+.\" descends from DWB 2.0 troff (effectively a fork).  "Lineal"
+.\" descendants of DWB 2.0 troff would be DWB 3.3 and, possibly, Plan 9
+.\" troff.  (The accuracy of this last claim depends on the degree of
+.\" resemblance between Research Unix troff--the version maintained by
+.\" Kernighan--and DWB troff, of which 3.4 was the final release.)
 .
 .
 .P
