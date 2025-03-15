@@ -5816,14 +5816,14 @@ bool italic_corrected_node::is_tag()
 }
 
 left_italic_corrected_node::left_italic_corrected_node(node *xx)
-: node(xx), nodes(0 /* nullptr */)
+: container_node(xx)
 {
 }
 
 left_italic_corrected_node::left_italic_corrected_node(statem *s,
 						       int divlevel,
 						       node *xx)
-: node(xx, s, divlevel), nodes(0 /* nullptr */)
+: container_node(xx, s, divlevel)
 {
 }
 
@@ -5832,11 +5832,6 @@ void left_italic_corrected_node::dump_properties()
   node::dump_properties();
   fprintf(stderr, ", \"hunits\": %d", x.to_units());
   fflush(stderr);
-}
-
-left_italic_corrected_node::~left_italic_corrected_node()
-{
-  delete nodes;
 }
 
 node *left_italic_corrected_node::merge_glyph_node(glyph_node *gn)

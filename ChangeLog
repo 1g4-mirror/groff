@@ -1,3 +1,17 @@
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Derive class `left_italic_corrected_node` from struct
+	`container_node`.
+
+	* src/roff/troff/node.h (class left_italic_corrected_node): Do
+	it.  Drop pointer-to-node member variable and declaration of
+	destructor.
+	* src/roff/troff/node.cpp
+	(left_italic_corrected_node::left_italic_corrected_node):
+	Migrate constructors to use new base class.
+	(left_italic_corrected_node::~left_italic_corrected_node): Drop;
+	our base class handles destruction of contained node(s).
+
 2025-03-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Derive class `break_char_node` from struct

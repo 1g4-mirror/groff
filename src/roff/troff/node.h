@@ -502,15 +502,12 @@ public:
   void vertical_extent(vunits *, vunits *);
 };
 
-// TODO: Derive from abstract class `container_node`.
-class left_italic_corrected_node : public node {
-  node *nodes;
+class left_italic_corrected_node : public container_node {
   hunits x;
 public:
   left_italic_corrected_node(node * /* xx */ = 0 /* nullptr */);
   left_italic_corrected_node(statem *, int,
 			     node * /* xx */ = 0 /* nullptr */);
-  ~left_italic_corrected_node();
   void tprint(troff_output_file *);
   void ascii_print(ascii_output_file *);
   void asciify(macro *);
