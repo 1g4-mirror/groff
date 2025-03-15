@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2024 Free Software Foundation, Inc.
+# Copyright (C) 2014-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -44,6 +44,7 @@ libgroff_a_SOURCES = \
   src/libs/libgroff/iftoa.c \
   src/libs/libgroff/invalid.cpp \
   src/libs/libgroff/itoa.c \
+  src/libs/libgroff/json_encode.cpp \
   src/libs/libgroff/lf.cpp \
   src/libs/libgroff/lineno.cpp \
   src/libs/libgroff/localcharset.c \
