@@ -17708,7 +17708,7 @@ strings, and diversions with their sizes in bytes.
 @cindex dumping registers (@code{pnr})
 @cindex registers, dumping (@code{pnr})
 Report the name and value and,
-if the value is numeric,
+if its type is numeric,
 the autoincrement amount and assigned format of each register
 @var{reg},
 or,

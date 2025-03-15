@@ -4218,7 +4218,7 @@ assigned formats of all defined registers to the standard error stream.
 .TPx
 .REQ .pnr "reg \fR\&.\|.\|.\&\fP"
 Report the name and value and,
-if the value is numeric,
+if its type is numeric,
 the autoincrement amount and assigned format,
 of each register
 .I reg

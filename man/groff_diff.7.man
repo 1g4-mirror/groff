@@ -3422,7 +3422,7 @@ The list is empty if there are none.
 .BR .pnr \~[\c
 .IR reg \~.\|.\|.]
 Report the name and value and,
-if the value is numeric,
+if its type is numeric,
 the autoincrement amount and assigned format of each register
 .IR reg ,
 or,
