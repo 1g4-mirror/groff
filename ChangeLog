@@ -8,7 +8,7 @@
 
 	* tmac/pdf.tmac: Do it.
 
-	Fixes bug <https://savannah.gnu.org/bugs/index.php?66914>
+	Fixes <https://savannah.gnu.org/bugs/?66914>.
 
 2025-03-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
@@ -19,6 +19,8 @@
 
 	* src/devices/gropdf/gropdf.pl: No scaling if BOTH width and
 	height are not given.
+
+	Fixes <https://savannah.gnu.org/bugs/?66910>.
 
 2025-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
