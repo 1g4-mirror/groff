@@ -534,14 +534,11 @@ public:
   void dump_properties();
 };
 
-// TODO: Derive from abstract class `container_node`.
-class overstrike_node : public node {
-  node *nodes;
+class overstrike_node : public container_node {
   hunits max_width;
 public:
   overstrike_node();
   overstrike_node(statem *, int);
-  ~overstrike_node();
   node *copy();
   void tprint(troff_output_file *);
   void overstrike(node *);	// add another node to be overstruck

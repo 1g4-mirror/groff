@@ -1,5 +1,17 @@
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Derive class `overstrike_node` from struct
+	`container_node`.
+
+	* src/roff/troff/node.h (class overstrike_node): Do it.  Drop
+	pointer-to-node member variable and declaration of destructor.
+	* src/roff/troff/node.cpp (overstrike_node::overstrike_node):
+	Migrate constructors to use new base class.
+	(overstrike_node::~overstrike_node): Drop; our base class
+	handles destruction of contained node(s).
+
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Derive class `left_italic_corrected_node` from struct
 	`container_node`.
 
