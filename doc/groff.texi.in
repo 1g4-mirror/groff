@@ -17222,7 +17222,7 @@ output lines counted by the
 @code{nm}
 request.
 If
-@var{skip}=0,
+@var{skip} is@tie{}@samp{0},
 @c XXX: negative values accepted; check AT&T troff
 cancel suppression.
 The default is@tie{}1.
@@ -17234,8 +17234,10 @@ lines once
 @code{nm}
 enables it.
 
-The @code{.nn} register stores the count of output lines still to have
-their numbering suppressed.
+The @code{.nn} register stores the
+count of lines @c in the environment
+for which numbering is suppressed
+while output line numbering is enabled.
 
 This count is associated with the environment (@pxref{Environments}).
 @endDefreq

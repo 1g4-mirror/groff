@@ -6807,8 +6807,9 @@ Output line numbering is enabled in the environment (Boolean-valued).
 .
 .TP
 .REG .nn
-Count of output lines remaining in the environment
-to have numbering suppressed.
+Count of lines in the environment
+for which numbering is suppressed
+while output line numbering is enabled.
 .
 .TP
 .REG .ns
