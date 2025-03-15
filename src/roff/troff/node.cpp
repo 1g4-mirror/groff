@@ -3257,7 +3257,7 @@ bool node::did_space_merge(hunits, hunits, hunits)
 
 
 space_node::space_node(hunits nn, color *c, node *p)
-: node(p, 0 /* nullptr */, 0), n(nn), set('\0'), was_escape_colon(0),
+: node(p, 0 /* nullptr */, 0), n(nn), set('\0'), was_escape_colon(false),
   col(c)
 {
 }
@@ -3323,7 +3323,7 @@ void space_node::spread_space(int *n_spaces, hunits *desired_space)
       n += extra;
     }
     *n_spaces -= 1;
-    set = 1;
+    set = true;
   }
 }
 
@@ -3333,7 +3333,7 @@ void node::freeze_space()
 
 void space_node::freeze_space()
 {
-  set = 1;
+  set = true;
 }
 
 void node::is_escape_colon()
@@ -3342,7 +3342,7 @@ void node::is_escape_colon()
 
 void space_node::is_escape_colon()
 {
-  was_escape_colon = 1;
+  was_escape_colon = true;
 }
 
 diverted_space_node::diverted_space_node(vunits d, statem *s,
@@ -3428,14 +3428,14 @@ int node::overlaps_vertically()
   return 0;
 }
 
-int node::discardable()
+bool node::discardable()
 {
-  return 0;
+  return false;
 }
 
-int space_node::discardable()
+bool space_node::discardable()
 {
-  return set ? 0 : 1;
+  return !set;
 }
 
 vunits node::vertical_width()
@@ -4028,7 +4028,7 @@ suppress_node::suppress_node(int on_or_off, int issue_limits)
 
 suppress_node::suppress_node(symbol f, char p, int id)
 : node(0 /* nullptr */, 0 /* nullptr */, 0, true), is_on(2),
-  emit_limits(0), filename(f), position(p), image_id(id)
+  emit_limits(false), filename(f), position(p), image_id(id)
 {
 }
 

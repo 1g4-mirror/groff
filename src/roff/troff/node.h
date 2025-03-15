@@ -88,7 +88,7 @@ struct node {
   virtual hyphen_list *get_hyphen_list(hyphen_list *, int *);
   virtual void ascii_print(ascii_output_file *);
   virtual void asciify(macro *);
-  virtual int discardable();
+  virtual bool discardable();
   virtual void spread_space(int *, hunits *);
   virtual void freeze_space();
   virtual void is_escape_colon();
@@ -192,8 +192,8 @@ class space_node : public node {
 private:
 protected:
   hunits n;
-  char set;
-  char was_escape_colon;
+  bool set;
+  bool was_escape_colon;
   color *col;			/* for grotty */
   space_node(hunits, int, int, color *, statem *, int,
 	     node * = 0 /* nullptr */);
@@ -202,7 +202,7 @@ public:
   node *copy();
   int nspaces();
   hunits width();
-  int discardable();
+  bool discardable();
   bool did_space_merge(hunits, hunits, hunits);
   void freeze_space();
   void is_escape_colon();
@@ -581,7 +581,7 @@ public:
 
 class suppress_node : public node {
   int is_on; // three-valued Boolean :-|
-  int emit_limits;	// must we issue extent of the area written out?
+  bool emit_limits;	// must we issue extent of the area written out?
   symbol filename;
   char position;
   int  image_id;

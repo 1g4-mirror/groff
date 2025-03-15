@@ -1,5 +1,25 @@
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.
+
+	* src/roff/troff/node.h: Boolify: demote some class member
+	variables and member function return types from `int` to `bool`.
+	(struct node, class space_node): Update `discardable()`
+	declaration.
+	(class space_node): Update `set` and `was_escape_colon`
+	declarations.
+	(class suppress_node): Update `emit_limits` declaration.
+	* src/roff/troff/node.cpp (space_node::space_node): Use Boolean
+	instead of integer literal in `was_escape_colon` initializer.
+	(space_node::spread_space, space_node::freeze_space)
+	(space_node::is_escape_colon): Use Boolean instead of integer
+	literals when assigning to `bool` member variables.
+	(node::discardable, space_node::discardable): Update return
+	type.
+	(space_node::discardable): Simplify expression.
+
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/node.cpp:
