@@ -1,5 +1,13 @@
 2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/unicode.cpp (valid_unicode_code_sequence):
+	Stop writing newline character into error buffer.  It's the
+	caller's responsibility to assemble an error message (and
+	existing callers do so).  Avoids extraneous newlines on standard
+	error stream.
+
+2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::dump): Dump user-defined
 	character definitions' macro contents.  This is a JSON-encoded
 	string, but the other character properties are traditionally

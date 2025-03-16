@@ -33,7 +33,7 @@ const char *valid_unicode_code_sequence(const char *u, char *errbuf)
   if (*u != 'u') {
     if (errbuf != 0 /* nullptr */)
       snprintf(errbuf, ERRBUFSZ, "Unicode special character sequence"
-	       " lacks 'u' as first character\n");
+	       " lacks 'u' as first character");
     return 0 /* nullptr */;
   }
   const char *p = ++u;
@@ -45,7 +45,7 @@ const char *valid_unicode_code_sequence(const char *u, char *errbuf)
       if (!csxdigit(*p)) {
 	if (errbuf != 0 /* nullptr */)
 	  snprintf(errbuf, ERRBUFSZ, "Unicode special character"
-		   " sequence has non-hexadecimal digit '%c'\n", *p);
+		   " sequence has non-hexadecimal digit '%c'", *p);
 	return 0 /* nullptr */;
       }
       if (csdigit(*p))
@@ -56,7 +56,7 @@ const char *valid_unicode_code_sequence(const char *u, char *errbuf)
 	if (errbuf != 0 /* nullptr */)
 	  snprintf(errbuf, ERRBUFSZ, "Unicode special character"
 		" sequence must use uppercase hexadecimal digit, not"
-		" '%c'\n", *p);
+		" '%c'", *p);
 	return 0 /* nullptr */;
       }
       else {
@@ -67,7 +67,7 @@ const char *valid_unicode_code_sequence(const char *u, char *errbuf)
       if (val > 0x10FFFF) {
 	if (errbuf != 0 /* nullptr */)
 	  snprintf(errbuf, ERRBUFSZ, "Unicode special character code"
-		   " point %04X is out of range (0000..10FFFF)\n", val);
+		   " point %04X is out of range (0000..10FFFF)", val);
 	return 0 /* nullptr */;
       }
       p++;
@@ -79,20 +79,20 @@ const char *valid_unicode_code_sequence(const char *u, char *errbuf)
 	|| (val >= 0xDC00 && val <= 0xDFFF)) {
       if (errbuf != 0 /* nullptr */)
 	snprintf(errbuf, ERRBUFSZ, "Unicode special character code"
-		 " point %04X is a surrogate\n", val);
+		 " point %04X is a surrogate", val);
       return 0 /* nullptr */;
     }
     const ptrdiff_t width = p - start;
     if (width < 4) {
       if (errbuf != 0 /* nullptr */)
 	snprintf(errbuf, ERRBUFSZ, "Unicode special character sequence"
-		 " must be 4..6 digits\n");
+		 " must be 4..6 digits");
       return 0 /* nullptr */;
     }
     else if ((width > 4) && ('0' == *u)) {
       if (errbuf != 0 /* nullptr */)
 	snprintf(errbuf, ERRBUFSZ, "Unicode special character sequence"
-		 " %s has invalid leading zero(es)\n", u);
+		 " %s has invalid leading zero(es)", u);
       return 0 /* nullptr */;
     }
     if (*p == '\0')
