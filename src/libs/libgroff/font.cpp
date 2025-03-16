@@ -172,7 +172,8 @@ static int glyph_to_ucs_codepoint(glyph *g)
 {
   const char *nm = glyph_to_name(g);
   if (nm != 0 /* nullptr */) {
-    if (valid_unicode_code_sequence(nm) && (strchr(nm, '_') == 0)) {
+    if ((valid_unicode_code_sequence(nm) != 0 /* nullptr */)
+	&& (strchr(nm, '_') == 0)) {
       char *ignore;
       return static_cast<int>(strtol(nm + 1, &ignore, 16));
     }
@@ -202,7 +203,7 @@ int glyph_to_unicode(glyph *g)
       }
     }
     // Unicode character?
-    if (valid_unicode_code_sequence(nm)) {
+    if (valid_unicode_code_sequence(nm) != 0 /* nullptr */) {
       char *ignore;
       return (int)strtol(nm + 1, &ignore, 16);
     }
