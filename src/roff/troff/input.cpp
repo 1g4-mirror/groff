@@ -3716,7 +3716,10 @@ void macro::print_size()
 
 void macro::json_dump()
 {
-  p->json_dump();
+  if (p != 0 /* nullptr */)
+    p->json_dump();
+  else
+    fputs("\"\"", stderr);
 }
 
 // make a copy of the first n bytes

@@ -1,5 +1,11 @@
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (macro:json_dump): A `macro` object
+	is not guaranteed to contain a `macro_header`; check for a null
+	pointer and report an empty JSON string if there's no header.
+
+2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Implement dumping of device extension node contents.
 
 	* src/roff/troff/request.h (class macro): Declare `json_dump()`
