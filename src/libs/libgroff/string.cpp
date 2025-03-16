@@ -333,15 +333,14 @@ size_t string::json_length() const
   int nextrachars = 2; // leading and trailing double quotes
   for (size_t i = 0; i < n; i++) {
     ch = p[i];
-    // Handle the most common cases first.
     if (ch < 128) {
-      if (csprint(ch))
+      // These printable characters require escaping.
+      if (('"' == ch) || ('\\' == ch) || ('/' == ch))
+	nextrachars++;
+      else if (csprint(ch))
 	;
       else
 	switch (ch) {
-	case '"':
-	case '\\':
-	case '/':
 	case '\b':
 	case '\f':
 	case '\n':

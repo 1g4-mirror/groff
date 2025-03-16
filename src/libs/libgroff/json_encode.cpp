@@ -26,20 +26,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "json-encode.h" // json_char
 
 // Return pointer to mutable buffer representing character `c` as a JSON
-// string.  The caller must free the buffer.
+// string (without bracketing `"`s).  The caller must free the buffer.
 json_char json_encode_char(unsigned char c)
 {
   assert(c < 256);
   json_char jc;
-  // Handle the most common cases first.
-  if (csprint(c)) {
-    jc.len = 1;
-    jc.buf[0] = c;
-  }
-  else if (('"' == c) || ('\\' == c) || ('/' == c)) {
+  // These printable characters require escaping.
+  if (('"' == c) || ('\\' == c) || ('/' == c)) {
     jc.len = 2;
     jc.buf[0] = '\\';
     jc.buf[1] = c;
+  }
+  else if (csprint(c)) {
+    jc.len = 1;
+    jc.buf[0] = c;
   }
   else if ('\b' == c) {
     jc.len = 2;

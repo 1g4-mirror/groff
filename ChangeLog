@@ -1,3 +1,17 @@
+2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Fix logic error when encoding characters ", \, and /
+	as (or in) JSON strings.
+
+	* src/libs/libgroff/json_encode.cpp (json_encode_char):
+	* src/libs/libgroff/string.cpp (string::json_length):
+	* src/libs/libgroff/symbol.cpp (symbol::json_length):
+	Restructure control flow to handle them before other printable
+	characters.
+
+	Problem introduced yesterday with landing of new JSON encoding
+	feature.
+
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (macro:json_dump): A `macro` object
