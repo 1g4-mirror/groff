@@ -1,5 +1,15 @@
 2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (suppress_node::dump_properties):
+	JSON-encode `position` member variable of this node type.
+	(draw_node::dump_properties): JSON-encode `gcol` and `fcol`
+	member variables of this node type.
+
+	Problem introduced yesterday with landing of new JSON encoding
+	feature.
+
+2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Fix logic error when encoding characters ", \, and /
 	as (or in) JSON strings.
 

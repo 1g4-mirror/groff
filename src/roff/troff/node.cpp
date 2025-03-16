@@ -4246,10 +4246,17 @@ void suppress_node::dump_properties()
   fprintf(stderr, ", \"is_on\": %d", is_on);
   fprintf(stderr, ", \"emit_limits\": %s",
 	  emit_limits ? "true" : "false");
-  if (filename.contents() != 0 /* nullptr */)
-    fprintf(stderr, ", \"filename\": \"%s\"", filename.contents());
-  if (position != '\0')
-    fprintf(stderr, ", \"position\": \"%c\"", position);
+  if (filename.contents() != 0 /* nullptr */) {
+    fputs(", \"filename\": ", stderr);
+    filename.json_dump();
+  }
+  fputs(", \"position\": \"", stderr);
+  json_char jc = json_encode_char(position);
+  // Write out its JSON representation by character by character to
+  // keep libc string functions from interpreting C escape sequences.
+  for (size_t i = 0; i < jc.len; i++)
+    fputc(jc.buf[i], stderr);
+  fputc('\"', stderr);
   fprintf(stderr, ", \"image_id\": %d", image_id);
   fflush(stderr);
 }
@@ -4875,8 +4882,10 @@ void draw_node::dump_properties()
   fprintf(stderr, ", \"code\": \"%c\"", code);
   fprintf(stderr, ", \"npoints\": %d", npoints);
   fprintf(stderr, ", \"font_size\": %d", sz.to_units());
-  fprintf(stderr, ", \"stroke_color\": \"%s\"", gcol->nm.contents());
-  fprintf(stderr, ", \"fill_color\": \"%s\"", fcol->nm.contents());
+  fputs(", \"stroke color\": ", stderr);
+  gcol->nm.json_dump();
+  fputs(", \"fill color\": ", stderr);
+  fcol->nm.json_dump();
   fprintf(stderr, ", \"point\": \"(%d, %d)\"",
 	  point->h.to_units(), point->v.to_units());
   fflush(stderr);
