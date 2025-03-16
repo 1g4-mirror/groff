@@ -1,5 +1,12 @@
 2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::dump): Dump user-defined
+	character definitions' macro contents.  This is a JSON-encoded
+	string, but the other character properties are traditionally
+	reported.
+
+2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (suppress_node::dump_properties):
 	JSON-encode `position` member variable of this node type.
 	(draw_node::dump_properties): JSON-encode `gcol` and `fcol`

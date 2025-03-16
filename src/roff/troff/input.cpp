@@ -10254,8 +10254,11 @@ void charinfo::dump()
     errprint("  is translated\n");
   else
     errprint("  is not translated\n");
-  if (mac != 0 /* nullptr */)
-    errprint("  has a macro\n");
+  if (mac != 0 /* nullptr */) {
+    errprint("  has a macro: ");
+    mac->json_dump();
+    errprint("\n");
+  }
   else
     errprint("  does not have a macro\n");
   errprint("  special translation: %1\n",
