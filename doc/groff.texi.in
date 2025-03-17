@@ -17744,9 +17744,9 @@ asterisk (@code{*}).
 @cindex output line, node list of pending, dumping (@code{pline})
 @cindex pending node list of output line, dumping (@code{pline})
 Report,
-in JSON syntax to the standard error stream,
+in @acronym{JSON} syntax to the standard error stream,
 the list of output nodes corresponding to the pending output line.
-In JSON,
+In @acronym{JSON},
 a pair of empty brackets
 @samp{[ ]}
 represents an empty list.
