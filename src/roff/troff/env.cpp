@@ -2418,32 +2418,7 @@ void environment::dump_troff_state()
 #undef SPACES
 }
 
-static void dump_node_list_in_reverse(node *nlist)
-{
-  // It's stored in reverse order already; this puts it forward again.
-  std::stack<node *> reversed_node_list;
-  node *n = nlist;
-
-  while (n != 0 /* nullptr */) {
-    reversed_node_list.push(n);
-    n = n->next;
-  }
-  fputc('[', stderr);
-  bool need_comma = false;
-  while (!reversed_node_list.empty()) {
-    if (need_comma)
-      fputs(",\n", stderr);
-    reversed_node_list.top()->dump_node();
-    reversed_node_list.pop();
-    need_comma = true;
-  }
-  // !need_comma implies that the list was empty.  JSON convention is to
-  // put a space between an empty pair of square brackets.
-  if (!need_comma)
-    fputc(' ', stderr);
-  fputs("]\n", stderr);
-  fflush(stderr);
-}
+extern void dump_node_list_in_reverse(node *);
 
 void environment::dump_pending_nodes()
 {

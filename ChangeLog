@@ -69,14 +69,6 @@
 
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Trivially refactor.
-
-	* src/roff/troff/node.cpp: Relocate `dump_node_list_in_reverse`
-	function from here...
-	* src/roff/troff/env.cpp: ...to here.
-
-2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/roff/troff/node.cpp (class kern_pair_node): Add
 	`dump_node` member function, overriding virtual function in
 	`node` base class.
