@@ -1,5 +1,41 @@
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.  Boolify and rename global and
+	local variables, class member functions, and member function
+	arguments relating to diversion re-reading and interpreter state
+	tracking whether the input stream is being read at the beginning
+	of an input line (or the predicate of a certain
+	control-structure requests, where ordinary and no-break control
+	characters are recognized).
+
+	* src/roff/troff/column.cpp (class vjustify_node) [0]:
+	* src/roff/troff/node.h (struct node, class word_space_node)
+	(class unbreakable_space_node, class diverted_space_node)
+	(class diverted_copy_file_node, hmotion_node): Rename `reread()`
+	member function to `need_reread()` and demote its argument and
+	return value to `bool` and pointer to `bool`, respectively.
+
+	* src/roff/troff/column.cpp (vjustify_node::reread) [0]: Rename
+	this...
+	(vjustify_node::need_reread) [0]: ...to this, and update return
+	and argument types.
+
+	* src/roff/troff/input.cpp (bool::reread)
+	(diverted_space_node::reread, diverted_copy_file_node::reread)
+	(word_space_node::reread, unbreakable_space_node::reread)
+	(hmotion_node::reread): Rename this...
+	(bool::need_reread, diverted_space_node::need_reread)
+	(diverted_copy_file_node::need_reread)
+	(word_space_node::need_reread)
+	(unbreakable_space_node::need_reread)
+	(hmotion_node::need_reread): ...to this, and update return and
+	argument types.
+	(process_input_stack, do_define_macro, transparent_file): Rename
+	`bol` to `reading_beginning_of_input_line` and demote it from
+	`int` to `bool`.
+
+2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Make bracket and overstrike nodes (created with `\b`
 	and `\o`, respectively) produce approximate output.
 

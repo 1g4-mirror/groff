@@ -98,7 +98,7 @@ struct node {
   virtual int nbreaks();
   virtual void split(int, node **, node **);
   virtual hyphenation_type get_hyphenation_type();
-  virtual int reread(int *);
+  virtual bool need_reread(bool *);
   virtual token_node *get_token_node();
   virtual int overlaps_vertically();
   virtual int overlaps_horizontally();
@@ -245,7 +245,7 @@ public:
 		  node * /* x */ = 0 /* nullptr */);
   ~word_space_node();
   node *copy();
-  int reread(int *);
+  bool need_reread(bool *);
   bool set_unformat_flag();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
@@ -264,7 +264,7 @@ public:
   unbreakable_space_node(hunits, color *,
 			 node * /* x */ = 0 /* nullptr */);
   node *copy();
-  int reread(int *);
+  bool need_reread(bool *);
   void tprint(troff_output_file *);
   bool is_same_as(node *);
   void asciify(macro *);
@@ -289,7 +289,7 @@ public:
   diverted_space_node(vunits, statem *, int,
 		      node * /* p */ = 0 /* nullptr */);
   node *copy();
-  int reread(int *);
+  bool need_reread(bool *);
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();
@@ -305,7 +305,7 @@ public:
   diverted_copy_file_node(symbol, statem *, int,
 			  node * /* p */ = 0 /* nullptr */);
   node *copy();
-  int reread(int *);
+  bool need_reread(bool *);
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();
@@ -364,7 +364,7 @@ public:
 	       node *nxt = 0 /* nullptr */)
     : node(nxt), n(i), was_tab(flag1), unformat(flag2), col(c) {}
   node *copy();
-  int reread(int *);
+  bool need_reread(bool *);
   bool set_unformat_flag();
   void asciify(macro *);
   void tprint(troff_output_file *);

@@ -3059,14 +3059,14 @@ static int transparent_translate(int cc)
   return cc;
 }
 
-int node::reread(int *)
+bool node::need_reread(bool *)
 {
-  return 0 /* nullptr */;
+  return false;
 }
 
 int global_diverted_space = 0;
 
-int diverted_space_node::reread(int *bolp)
+bool diverted_space_node::need_reread(bool *bolp)
 {
   global_diverted_space = 1;
   if (curenv->get_fill())
@@ -3074,41 +3074,41 @@ int diverted_space_node::reread(int *bolp)
   else
     curdiv->space(n);
   global_diverted_space = 0;
-  *bolp = 1;
-  return 1;
+  *bolp = true;
+  return true;
 }
 
-int diverted_copy_file_node::reread(int *bolp)
+bool diverted_copy_file_node::need_reread(bool *bolp)
 {
   curdiv->copy_file(filename.contents());
-  *bolp = 1;
-  return 1;
+  *bolp = true;
+  return true;
 }
 
-int word_space_node::reread(int *)
+bool word_space_node::need_reread(bool *)
 {
   if (unformat) {
     for (width_list *w = orig_width; w; w = w->next)
       curenv->space(w->width, w->sentence_width);
     unformat = 0;
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
 
-int unbreakable_space_node::reread(int *)
+bool unbreakable_space_node::need_reread(bool *)
 {
-  return 0;
+  return false;
 }
 
-int hmotion_node::reread(int *)
+bool hmotion_node::need_reread(bool *)
 {
   if (unformat && was_tab) {
     curenv->handle_tab(0);
     unformat = 0;
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
 
 static int leading_spaces_number = 0;
@@ -3117,14 +3117,14 @@ static int leading_spaces_space = 0;
 void process_input_stack()
 {
   std::stack<int> trap_bol_stack;
-  int bol = 1;
+  bool reading_beginning_of_input_line = true;
   for (;;) {
     int suppress_next = 0;
     switch (tok.type) {
     case token::TOKEN_CHAR:
       {
 	unsigned char ch = tok.c;
-	if (bol && !have_formattable_input
+	if (reading_beginning_of_input_line && !have_formattable_input
 	    && (curenv->get_control_character() == ch
 		|| curenv->get_no_break_control_character() == ch)) {
 	  want_break = (curenv->get_control_character() == ch);
@@ -3179,14 +3179,14 @@ void process_input_stack()
 	      ch = tok.c;
 	    }
 	    suppress_next = 1;
-	    bol = 0;
+	    reading_beginning_of_input_line = false;
 	  }
 	}
 	break;
       }
     case token::TOKEN_TRANSPARENT:
       {
-	if (bol) {
+	if (reading_beginning_of_input_line) {
 	  if (possibly_handle_first_page_transition())
 	    ;
 	  else {
@@ -3209,12 +3209,13 @@ void process_input_stack()
       }
     case token::TOKEN_NEWLINE:
       {
-	if (bol && !have_formattable_input_on_interrupted_line
+	if (reading_beginning_of_input_line
+	    && !have_formattable_input_on_interrupted_line
 	    && !curenv->get_prev_line_interrupted())
 	  trapping_blank_line();
 	else {
 	  curenv->newline();
-	  bol = 1;
+	  reading_beginning_of_input_line = true;
 	}
 	break;
       }
@@ -3248,7 +3249,8 @@ void process_input_stack()
       {
 	if (possibly_handle_first_page_transition())
 	  ;
-	else if (bol && !curenv->get_prev_line_interrupted()) {
+	else if (reading_beginning_of_input_line
+		 && !curenv->get_prev_line_interrupted()) {
 	  int nspaces = 0;
 	  // save space_width now so that it isn't changed by \f or \s
 	  // which we wouldn't notice here
@@ -3270,12 +3272,12 @@ void process_input_stack()
 	      curenv->add_node(new hmotion_node(space_width * nspaces,
 						curenv->get_fill_color()));
 	    }
-	    bol = 0;
+	    reading_beginning_of_input_line = false;
 	  }
 	}
 	else {
 	  curenv->space();
-	  bol = 0;
+	  reading_beginning_of_input_line = false;
 	}
 	break;
       }
@@ -3286,14 +3288,14 @@ void process_input_stack()
       {
 	if (possibly_handle_first_page_transition())
 	  ;
-	else if (tok.nd->reread(&bol)) {
+	else if (tok.nd->need_reread(&reading_beginning_of_input_line)) {
 	  delete tok.nd;
 	  tok.nd = 0;
 	}
 	else {
 	  curenv->add_node(tok.nd);
 	  tok.nd = 0;
-	  bol = 0;
+	  reading_beginning_of_input_line = false;
 	  curenv->possibly_break_line(true /* must break here */);
 	}
 	break;
@@ -3302,13 +3304,13 @@ void process_input_stack()
       {
 	continue_page_eject();
 	// I think we just want to preserve bol.
-	// bol = 1;
+	// reading_beginning_of_input_line = true;
 	break;
       }
     case token::TOKEN_BEGIN_TRAP:
       {
-	trap_bol_stack.push(bol);
-	bol = 1;
+	trap_bol_stack.push(reading_beginning_of_input_line);
+	reading_beginning_of_input_line = true;
 	have_formattable_input = false;
 	break;
       }
@@ -3317,7 +3319,7 @@ void process_input_stack()
 	if (trap_bol_stack.empty())
 	  error("spurious end trap token detected!");
 	else {
-	  bol = trap_bol_stack.top();
+	  reading_beginning_of_input_line = trap_bol_stack.top();
 	  trap_bol_stack.pop();
 	}
 	have_formattable_input = false;
@@ -3348,7 +3350,7 @@ void process_input_stack()
       }
     default:
       {
-	bol = 0;
+	reading_beginning_of_input_line = false;
 	tok.process();
 	break;
       }
@@ -5001,7 +5003,7 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
     if (mm && mode == DEFINE_APPEND)
       mac = *mm;
   }
-  int bol = 1;
+  bool reading_beginning_of_input_line = true;
   if (comp == COMP_DISABLE)
     mac.append(PUSH_GROFF_MODE);
   else if (comp == COMP_ENABLE)
@@ -5014,7 +5016,7 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
 	mac.append(c);
       c = get_copy(&n, true /* is defining */);
     }
-    if (bol && c == '.') {
+    if (reading_beginning_of_input_line && c == '.') {
       const char *s = term.contents();
       int d = 0;
       // see if it matches term
@@ -5087,7 +5089,7 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
       else
 	mac.append(c);
     }
-    bol = (c == '\n');
+    reading_beginning_of_input_line = (c == '\n');
     c = get_copy(&n, true /* is defining */);
   }
 }
@@ -8766,7 +8768,7 @@ void transparent_file()
     if (0 /* nullptr */ == fp)
       error("cannot open '%1': %2", filename, strerror(errno));
     else {
-      int bol = 1;
+      bool reading_beginning_of_input_line = true;
       for (;;) {
 	int c = getc(fp);
 	if (c == EOF)
@@ -8775,10 +8777,10 @@ void transparent_file()
 	  warning(WARN_INPUT, "invalid input character code %1", int(c));
 	else {
 	  curdiv->transparent_output(c);
-	  bol = c == '\n';
+	  reading_beginning_of_input_line = c == '\n';
 	}
       }
-      if (!bol)
+      if (!reading_beginning_of_input_line)
 	curdiv->transparent_output('\n');
       fclose(fp);
     }
