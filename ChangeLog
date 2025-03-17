@@ -1,5 +1,19 @@
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Trivially refactor.
+	(class hyphen_inhibitor_node): Declare member functions in the
+	same order as they appear in `struct node`'s declaration; in the
+	latter, there are many: some are virtual, and some are pure
+	virtual.
+	(hyphen_inhibitor_node::causes_tprint)
+	(hyphen_inhibitor_node::is_tag): Define them in the same order,
+	too.
+	(dbreak_node::add_discretionary_hyphen): Explicitly compare
+	return value of pointer type to null pointer literal instead of
+	letting it pun down to a Boolean.
+
+2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/mtsm.h: Rationalize "#include"s.  Include C
 	standard library and libgroff header files we require.  Annotate
 	why we don't "#include" a GNU troff header file.

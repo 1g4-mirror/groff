@@ -2534,10 +2534,10 @@ class hyphen_inhibitor_node : public node {
 public:
   hyphen_inhibitor_node(node * = 0 /* nullptr */);
   node *copy();
-  bool is_same_as(node *);
-  const char *type();
   bool causes_tprint();
   bool is_tag();
+  bool is_same_as(node *);
+  const char *type();
   hyphenation_type get_hyphenation_type();
 };
 
@@ -2550,16 +2550,6 @@ node *hyphen_inhibitor_node::copy()
   return new hyphen_inhibitor_node;
 }
 
-bool hyphen_inhibitor_node::is_same_as(node *)
-{
-  return true;
-}
-
-const char *hyphen_inhibitor_node::type()
-{
-  return "hyphen_inhibitor_node";
-}
-
 bool hyphen_inhibitor_node::causes_tprint()
 {
   return false;
@@ -2568,6 +2558,16 @@ bool hyphen_inhibitor_node::causes_tprint()
 bool hyphen_inhibitor_node::is_tag()
 {
   return false;
+}
+
+bool hyphen_inhibitor_node::is_same_as(node *)
+{
+  return true;
+}
+
+const char *hyphen_inhibitor_node::type()
+{
+  return "hyphen_inhibitor_node";
 }
 
 hyphenation_type hyphen_inhibitor_node::get_hyphenation_type()
@@ -2589,7 +2589,7 @@ node *dbreak_node::add_discretionary_hyphen()
 node *node::add_discretionary_hyphen()
 {
   tfont *tf = get_tfont();
-  if (!tf)
+  if (0 /* nullptr */ == tf)
     return new hyphen_inhibitor_node(this);
   if (tf->contains(soft_hyphen_char)) {
     color *gcol = get_stroke_color();
