@@ -17824,7 +17824,7 @@ device-independent output.
 
 Historically, @code{fl} was used with @code{rd} to produce interactive
 @command{nroff} documents.  GNU @command{troff} does not easily support
-this mode of operation, because its output for terminals is first
+that mode of operation, because its output for terminals is first
 prepared in device-independent format, which @command{grotty} renders a
 page at a time.
 @endDefreq
