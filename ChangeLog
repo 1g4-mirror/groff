@@ -1,5 +1,15 @@
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (composite_node::ascii_print): When
+	rendering a composite node for approximate output, traverse into
+	it and write its nodes' representations in forward order.
+
+	Fixes <https://savannah.gnu.org/bugs/?55799>.  Thanks to Dave
+	Kemper for the report.  Problem appears to date back to groff's
+	birth.
+
+2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #55799.
 
 	* src/roff/groff/tests/\

@@ -4680,12 +4680,7 @@ void composite_node::asciify(macro *m)
 
 void composite_node::ascii_print(ascii_output_file *ascii)
 {
-  unsigned char c = ci->get_ascii_code();
-  if (c != 0)
-    ascii->outc(c);
-  else
-    ascii->outs(ci->nm.contents());
-
+  ascii_print_reverse_node_list(ascii, nodes);
 }
 
 hyphen_list *composite_node::get_hyphen_list(hyphen_list *tail, int *count)
