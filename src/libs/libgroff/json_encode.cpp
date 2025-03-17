@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "json-encode.h" // json_char
 
 // Return pointer to mutable buffer representing character `c` as a JSON
-// string (without bracketing `"`s).  The caller must free the buffer.
+// string (without bracketing `"`s).
 json_char json_encode_char(unsigned char c)
 {
   assert(c < 256);
