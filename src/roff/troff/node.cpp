@@ -2742,7 +2742,6 @@ void container_node::dump_node()
   fflush(stderr);
 }
 
-// TODO: Move this into env.cpp.
 void dump_node_list_in_reverse(node *nlist)
 {
   // It's stored in reverse order already; this puts it forward again.
@@ -4581,6 +4580,8 @@ hunits suppress_node::width()
 
 /* composite_node */
 
+// Not derived from `container_node`; implements custom contained node
+// dumper in dump_node().
 class composite_node : public charinfo_node {
   node *nodes;
   tfont *tf;
@@ -4606,6 +4607,7 @@ public:
   void vertical_extent(vunits *, vunits *);
   vunits vertical_width();
   void dump_properties();
+  void dump_node();
 };
 
 composite_node::composite_node(node *p, charinfo *c, tfont *t, statem *s,
@@ -5315,6 +5317,16 @@ void composite_node::dump_properties()
     fputs(", \"special character\": ", stderr);
     ci->nm.json_dump();
   }
+  fflush(stderr);
+}
+
+void composite_node::dump_node()
+{
+  fputc('{', stderr);
+  dump_properties();
+  fputs(", \"contents\": ", stderr);
+  dump_node_list_in_reverse(nodes);
+  fputc('}', stderr);
   fflush(stderr);
 }
 

@@ -1,5 +1,17 @@
 2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (class composite_node): Add
+	`dump_node` member function, overriding virtual function in
+	`node` (remote) base class.
+
+	(composite_node::dump_node): Disclose more information, namely
+	the contents of any defined nodes within.  Because these are
+	stored in reverse order--a composite node strongly resembles an
+	output line, including a `line_start_node` and tail-first
+	ordering--list them in reversed order, putting them forward.
+
+2025-03-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/font.cpp (glyph_to_ucs_codepoint)
 	(glyph_to_unicode): Fix code style nit; explicitly compare
 	return value of pointer type to null pointer literal instead of
