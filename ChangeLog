@@ -1,5 +1,11 @@
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/mtsm.h: Rationalize "#include"s.  Include C
+	standard library and libgroff header files we require.  Annotate
+	why we don't "#include" a GNU troff header file.
+
+2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (set_hyphenation_codes): Use
 	character, not integer, literals when assigning and comparing to
 	local variables of `char` type.
