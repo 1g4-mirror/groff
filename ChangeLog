@@ -1,5 +1,16 @@
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Make bracket and overstrike nodes (created with `\b`
+	and `\o`, respectively) produce approximate output.
+
+	* src/roff/troff/node.h (class bracket_node)
+	(class overstrike_node): Declare `ascii_print` member function.
+	* src/roff/troff/node.cpp (bracket_node::ascii_print)
+	(overstrike_node::ascii_print): Implement `ascii_print` member
+	function.
+
+2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (composite_node::ascii_print): When
 	rendering a composite node for approximate output, traverse into
 	it and write its nodes' representations in forward order.

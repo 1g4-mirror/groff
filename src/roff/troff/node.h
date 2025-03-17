@@ -543,6 +543,7 @@ public:
   void tprint(troff_output_file *);
   void overstrike(node *);	// add another node to be overstruck
   hunits width();
+  void ascii_print(ascii_output_file *);
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();
@@ -562,6 +563,7 @@ public:
   void tprint(troff_output_file *);
   void bracket(node *);	// add another node to be overstruck
   hunits width();
+  void ascii_print(ascii_output_file *);
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();

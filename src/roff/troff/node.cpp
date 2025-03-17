@@ -3769,6 +3769,11 @@ static void ascii_print_reverse_node_list(ascii_output_file *ascii, node *n)
   n->ascii_print(ascii);
 }
 
+void bracket_node::ascii_print(ascii_output_file *ascii)
+{
+  ascii_print_reverse_node_list(ascii, nodes);
+}
+
 void dbreak_node::ascii_print(ascii_output_file *ascii)
 {
   ascii_print_reverse_node_list(ascii, none);
@@ -3782,6 +3787,11 @@ void kern_pair_node::ascii_print(ascii_output_file *ascii)
 
 void node::ascii_print(ascii_output_file *)
 {
+}
+
+void overstrike_node::ascii_print(ascii_output_file *ascii)
+{
+  ascii_print_node_list(ascii, nodes);
 }
 
 void space_node::ascii_print(ascii_output_file *ascii)
