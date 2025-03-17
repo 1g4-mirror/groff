@@ -4603,7 +4603,7 @@ escape sequence to interpolate the quotation mark strings.
 .RS
 .EX
 The command
-\&.RB \[rs]*(oq "while ! git pull; do sleep 10; done" \[rs]*(cq
+\&.RB \[rs]*(oq "while !\[rs]& git pull; do sleep 10; done" \[rs]*(cq
 retries an update from the repository until it succeeds.
 .EE
 .RE
