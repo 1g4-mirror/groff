@@ -1477,7 +1477,7 @@ end
 .\" The QUAD in PP adds an unwanted linespace after a HEADING at the
 .\" top of a pdf box because of this .br, so HEADING assigns the
 .\" tmp register "bx-top\n[stack]" to inhibit it.
-.    ie !\\n[pdfbx-top\\n[stack]] 'br
+.    ie !\\n[pdfbx-top\\n[stack]] .if !\\n[#TOC] .br
 .    el .rr pdfbx-top\\n[stack]
 .    if \\n[#COVERTEXT_PP] \
 .       ds $RESTORE_DOC_QUAD \\*[$QUAD_VALUE]
@@ -5745,6 +5745,11 @@ SMALLCAPS takes precedence.
 .          el .\\*[$STYLE_TYPE]_QUAD \\$1
 .          shift
 .       \}
+.       if '\\$1'TITLE_QUAD' \{\
+.          shift
+.          \\*[$STYLE_TYPE]_QUAD \\$1
+.          shift
+.       \}
 .       if '\\$1'INDENT' \{\
 .          shift
 .          \\*[$STYLE_TYPE]_INDENT \\$1
@@ -5980,16 +5985,16 @@ SMALLCAPS takes precedence.
 .             HEADER_MARGIN \\n[#HEADER_MARGIN]
 .             HEADER_GAP \\n[#HEADER_GAP]
 .          \}
-.          el .if !r #T_MARGIN .T_MARGIN 6P
+.          el .if !\\n[#T_MARGIN] .T_MARGIN 6P
 .       \}
 .    \}
-.    if !r #T_MARGIN \
+.    if !\\n[#T_MARGIN] \
 .       T_MARGIN \\n[#HEADER_MARGIN]+\\n[#HEADER_GAP]
 .    if !r #DOCHEADER_ADVANCE \
 .       nr #DOCHEADER_ADVANCE \\n[#T_MARGIN]
 .    if !r #FOOTER_MARGIN .FOOTER_MARGIN 3P
 .    if !r #FOOTER_GAP    .FOOTER_GAP 3P
-.    if !r #B_MARGIN \
+.    if !\\n[#B_MARGIN] \
 .       B_MARGIN \\n[#FOOTER_MARGIN]u+\\n[#FOOTER_GAP]u
 .    if !\\n[#HEADER_RULE_GAP] .HEADER_RULE_GAP 4p
 .    if !\\n[#FOOTER_RULE_GAP] .FOOTER_RULE_GAP 4p
@@ -6716,7 +6721,7 @@ SMALLCAPS takes precedence.
 .       substring $\\*[$CALLING_MACRO]_QUAD 0 0
 .       if '\\*[$\\*[$CALLING_MACRO]_QUAD]'L' .LEFT
 .       if '\\*[$\\*[$CALLING_MACRO]_QUAD]'C' .CENTER
-.       if '\\*[$\\*[$CALLING_MACRO]_QUAD]'C' .RIGHT
+.       if '\\*[$\\*[$CALLING_MACRO]_QUAD]'R' .RIGHT
 .    \}
 .    el .CENTER
 .END
@@ -8165,7 +8170,7 @@ $\\*[DOC_]COVERTITLE_\\n+[#\\*[DOC_]COVERTITLE_NUM] \\$\\n[#\\*[DOC_]COVERTITLE_
 .       PP
 .       PARA_INDENT \\n[#STORED_PP_INDENT]u
 .       rr #STORED_PP_INDENT
-.       ie r #ADVANCE_FROM_TOP \{\
+.       ie \\n[#ADVANCE_FROM_TOP] \{\
 .          br
 .          sp |\\n[#ADVANCE_FROM_TOP]u-1v
 .          if \\n[#ADJ_DOC_LEAD]=1 \
@@ -8529,6 +8534,7 @@ $\\*[DOC_]COVERTITLE_\\n+[#\\*[DOC_]COVERTITLE_NUM] \\$\\n[#\\*[DOC_]COVERTITLE_
 .       rr #DOC_AUTOLEAD
 .       rr #DOC_AUTOLEAD_FACTOR
 .       nr #DOC_LEAD \\n[.v]
+.       if '\\$2'ADJUST' .TRAPS
 .    \}
 .    nr #RESET_TRAPS 1
 .    if !\\n[#ADJ_DOC_LEAD] .nr #REMOVE_ADJ 1
@@ -16299,11 +16305,9 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .       TRAPS
 .    \}
 .    el .DOC_LEAD \\*[$TOC_LEAD]
-.    if '\\*[.T]'ps'  .nr #SPACE_CORRECTION 1
-.    if '\\*[.T]'pdf' .nr #SPACE_CORRECTION 2
 .    ie \\n[#TOC_HEADER_V_POS] \
 .       DOCHEADER OFF \\n[#TOC_HEADER_V_POS]u-\\n[#DOC_LEAD]u
-.    el .DOCHEADER OFF \\n[#T_MARGIN]u-(\\n[#DOC_LEAD]u*\\n[#SPACE_CORRECTION]u)
+.    el .DOCHEADER OFF
 .    if (\\n[#PRINT_STYLE]=1)&(\\n[#SINGLE_SPACE]=1) \
 .       DOCHEADER OFF \\n[#T_MARGIN]u-(\\n[#DOC_LEAD]u*2u)
 .    START
@@ -16319,6 +16323,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    QUAD \\*[$TOC_HEADER_QUAD]
 .    if \\n[#TOC_STRING_CAPS] .CAPS
 .    if \\n[#TOC_STRING_SMALLCAPS] .SMALLCAPS
+.    sp |\\n[#T_MARGIN]u-1v
 .    if \\n[#PRINT_STYLE]=1 \
 .       UNDERSCORE 3p "\\*[$TOC_HEADER_STRING]"
 .    if \\n[#PRINT_STYLE]=2 \{\
@@ -16334,7 +16339,8 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    CAPS OFF
 .    if \\n[#TOC_HEADER_COLOR]=1 .gcolor default
 .    br
-.    if \\n[#PRINT_STYLE]=2 .sp
+.    RESTORE_SPACE
+.    sp
 .    SHIM_1
 .    nf
 .    TOC_ENTRIES
@@ -17943,6 +17949,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 \#
 \#
 .MAC FLOAT END
+.    if \\n[#START] .RR_ADVANCE_FROM_TOP
 .    nr ll-pre-float \\n[.l]
 .    if \\n[#NUM_ARGS]>0 \{\
 .       nr loop-count 0 1
@@ -18294,6 +18301,10 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .       rr #FORCE
 .       rm P_QUOTE
 .       rm B_QUOTE
+.       rm $FLOATING_CAPTION
+.       rm $FLOATING_LABEL
+.       rm $LIST_LABEL
+.       rm $LIST_CAPTION
 .       if \\n[float*img] .rr float*img
 .       if \\n[float*pic] .rr float*pic
 .       if \\n[float*eqn] .rr float*eqn
@@ -18336,7 +18347,10 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .END
 \#
 .MAC TRAPS END
-.    if !\\n[#UNADJUSTED_DOC_LEAD] .nr #UNADJUSTED_DOC_LEAD \\n[#DOC@LEAD]
+.    if !\\n[#UNADJUSTED_DOC_LEAD] \{\
+.       nr #UNADJUSTED_DOC_LEAD \\n[#DOC@LEAD]
+.       nr #DOC_LEAD \\n[#UNADJUSTED_DOC_LEAD] 
+.    \}
 .\" Remove all header/footer traps
 .    if !\\n[#NO_TRAP_RESET] \{\
 .       ch DO_T_MARGIN
@@ -19588,7 +19602,13 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    if \\n[#QUOTE] .nr q-float 1
 .    if '\\$0'CAPTION' \{\
 .       ds labelcap caption
-.       ds $FLOATING_CAPTION \\$*
+.       nr loop-counter 0 1
+.       nr loop-count \\n[#NUM_ARGS]
+.          ds $FLOATING_CAPTION \\$1
+.          if '\\$2'TO_LIST' \{\
+.             nr to-list 1
+.             ds $LIST_OF \\$3
+.          \}
 .    \}
 .    if '\\$0'LABEL' \{\
 .       ds labelcap label
@@ -19608,9 +19628,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .          \}
 .          if '\\$1'TO_LIST' \{\
 .             nr to-list 1
-.             if '\\$2'FIGURES'   .ds $LIST_OF FIGURES
-.             if '\\$2'EQUATIONS' .ds $LIST_OF EQUATIONS
-.             if '\\$2'TABLES'    .ds $LIST_OF TABLES
+.             ds $LIST_OF \\$2
 .             shift 2
 .          \}
 .       \}
@@ -19666,6 +19684,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .          if '\\*[$LIST_OF]'EQUATIONS' \
 .             if r eqn*label-num .STRIP_PRFX_SFFX "\\*[$FLOATING_LABEL]"
 .       \}
+.       if '\\*[$LIST_LABEL]'' .ds $LIST_LABEL \\*[$FLOATING_LABEL]
 .       ds $FLOATING_LABEL \
 \F[\\\\*[floating*label-family]]\
 \f[\\\\*[floating*label-font]]\
@@ -19678,16 +19697,14 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .          sp \\n[floating*caption-lead-diff]u
 .       if !'\\*[floating*caption-space]'' \
 .          sp \\*[floating*caption-space]
-.       while !'\\$1'' \{\
 .          nop \
 \F[\\*[floating*caption-family]]\
 \f[\\*[floating*caption-font]]\
 \s[\\*[floating*caption-size-change]]\
 \m[\\*[floating*caption-color]]\
-\\$1
-.          if \\n[.u]=1 .br
-.          shift
-.       \}
+\\*[$FLOATING_CAPTION]
+.       if \\n[.u]=1 .br
+.       shift
 .       if !'\\*[floating*caption-space]'' \
 .          sp -\\*[floating*caption-space]
 .    \}
@@ -19748,7 +19765,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .          ds floating*\\*[labelcap]-color pdf:href.colour
 .          ds labelcap caption
 .       \}
-.       ie '\\*[$LIST_LABEL]'' .TO_\\*[$LIST_OF] "\\*[$FLOATING_LABEL]
+.       ie '\\*[$LIST_LABEL]'' .TO_\\*[$LIST_OF] "\\*[$FLOATING_CAPTION]
 .       el .TO_\\*[$LIST_OF] "\\*[$LIST_LABEL]" "\\*[$LIST_CAPTION]
 .       rr to-list
 .       nr loop-counter 0 1
@@ -19763,10 +19780,6 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .       \}
 .    \}
 .    rr with-caption
-.    rm $FLOATING_CAPTION
-.    rm $FLOATING_LABEL
-.    rm $LIST_LABEL
-.    rm $LIST_CAPTION
 .END
 .
 .ALIAS CAPTION LABEL
@@ -20648,7 +20661,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .       if !'\\*[tbl*space-adj]'' .sp \\*[tbl*space-adj]u
 .    if !\\n[#MLA] \{\
 .      if (\\n[tbl*have-caption]=0):(\\n[tbl*caption-after-label]=1) \{\
-.         ie !'\\n[.z]'FLOAT*DIV' \{\
+.         if !'\\n[.z]'FLOAT*DIV' \{\
 .            ie !\\n[tbl*boxed]=2 \{\
 .               if \\n[tbl*have-header] .nr tbl*restore-header 1
 .               if !\\n[@TOP] .sp .5v
@@ -20660,13 +20673,11 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .               sp .25v
 .            \}
 .         \}
-.         el .sp .5v
 .      \}
 .    \}
 .    if \\n[nl]=\\n[#PAGE_TOP] .ns
 .    if '\\n[.z]'FLOAT*DIV' \{\
-.       ie \\n[defer]>0 .sp .5v
-.       el .sp .25v
+.       if \\n[defer]>0 .sp .5v
 .    \}
 .    if \\n[@TOP] .rr @TOP
 .    ds ev-current \\n[.ev]
@@ -20709,10 +20720,14 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .          ie !'\\n[.z]'' \{\
 .             if (\\n[float*img]=0)&(\\n[float*pic]=0)&(\\n[float*eqn]=0) \{\
 \!.              PDF_TARGET tbl:\\\\n+[lists*target]
-.                ie !'\\*[tbl*label]'' \
-\!.                 TO_TABLES "\\*[tbl*label]" "\\*[tbl*caption\\*[short]]"
-.                el \
-\!.                 TO_TABLES "\\*[tbl*caption\\*[short]]"
+.                if '\\*[$FLOATING_LABEL]'' \{\
+.                   if '\\*[$FLOATING_CAPTION]'' \{\
+.                      ie !'\\*[tbl*label]'' \
+\!.                       TO_TABLES "\\*[tbl*label]" "\\*[tbl*caption\\*[short]]"
+.                      el \
+\!.                       TO_TABLES "\\*[tbl*caption\\*[short]]"
+.                   \}
+.                \}
 .             \}
 .          \}
 .          el \{\
