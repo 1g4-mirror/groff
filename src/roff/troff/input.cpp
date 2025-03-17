@@ -8026,8 +8026,8 @@ static void set_hyphenation_codes()
     charinfo *cidst = tok.get_char();
     if (0 == cdst) {
       if (0 /* nullptr */ == cidst) {
-	error("expected ordinary or special character, got %1",
-	      tok.description());
+	error("expected ordinary, special, or indexed character,"
+	      " got %1", tok.description());
 	break;
       }
     }
@@ -8049,8 +8049,8 @@ static void set_hyphenation_codes()
       new_code = cisrc->get_hyphenation_code();
     if (0 == csrc) {
       if (0 /* nullptr */ == cisrc) {
-	error("expected ordinary or special character, got %1",
-	      tok.description());
+	error("expected ordinary, special, or indexed character,"
+	      " got %1", tok.description());
 	break;
       }
       new_code = cisrc->get_hyphenation_code();
