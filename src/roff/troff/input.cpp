@@ -8024,7 +8024,7 @@ static void set_hyphenation_codes()
       break;
     }
     charinfo *cidst = tok.get_char();
-    if (0 == cdst) {
+    if ('\0' == cdst) {
       if (0 /* nullptr */ == cidst) {
 	error("expected ordinary, special, or indexed character,"
 	      " got %1", tok.description());
@@ -8041,13 +8041,13 @@ static void set_hyphenation_codes()
       error("cannot use the hyphenation code of a numeral");
       break;
     }
-    unsigned char new_code = 0;
+    unsigned char new_code = '\0';
     charinfo *cisrc = tok.get_char();
     if (cisrc != 0 /* nullptr */)
       // Common case: assign destination character the hyphenation code
       // of the source character.
       new_code = cisrc->get_hyphenation_code();
-    if (0 == csrc) {
+    if ('\0' == csrc) {
       if (0 /* nullptr */ == cisrc) {
 	error("expected ordinary, special, or indexed character,"
 	      " got %1", tok.description());

@@ -1,5 +1,11 @@
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (set_hyphenation_codes): Use
+	character, not integer, literals when assigning and comparing to
+	local variables of `char` type.
+
+2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor.  Boolify and rename global and
 	local variables, class member functions, and member function
 	arguments relating to diversion re-reading and interpreter state
