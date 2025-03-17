@@ -1199,25 +1199,6 @@ and follow it with the text of the caption surrounded by double-quotes:
   .FLOAT
   .CAPTION "Caption at top of float"
 </span>
-<b>CAPTION</b> can take multiple string arguments, allowing for
-captions that run to several lines.  There is a caveat: the strings
-are not automatically broken into individual lines.  You must
-provide strings that include literal breaks or spaces:
-<br/>
-<span class="pre-in-pp">
-  .FLOAT
-  .CAPTION "Caption" ".BR" "at top" ".BR" "of float"
-</span>
-or, easier to read:
-<br/>
-<span class="pre-in-pp">
-  .FLOAT
-  .CAPTION "Caption" \
-  ".BR" \
-  "at top" \
-  ".BR" \
-  "of float"
-</span>
 If you want a caption at the bottom, put <kbd>CAPTION</kbd> immediately
 before ending the float:
 <br/>
