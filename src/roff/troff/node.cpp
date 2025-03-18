@@ -850,6 +850,7 @@ public:
   int get_hpos() { return hpos; }
   int get_vpos() { return vpos; }
   void add_to_tag_list(string s);
+  void comment(string s);
   friend void space_char_hmotion_node::tprint(troff_output_file *);
   friend void unbreakable_space_node::tprint(troff_output_file *);
 };
@@ -1380,6 +1381,16 @@ void troff_output_file::add_to_tag_list(string s)
     tag_list += string("\n");
     tag_list += s;
   }
+}
+
+void troff_output_file::comment(string s)
+{
+  flush_tbuf();
+  assert(s.search('\n') == -1); // Don't write a multi-line comment.
+  put("# ");
+  string t = s + '\0';
+  put(t.contents());
+  put('\n');
 }
 
 // determine_line_limits - works out the smallest box which will contain

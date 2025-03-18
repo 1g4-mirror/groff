@@ -1,5 +1,15 @@
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add internal facility for writing trout/grout comments
+	to GNU troff output.  This is a developers' aid.
+
+	* src/roff/troff/node.cpp (class troff_output_file): Declare new
+	`comment()` member function, taking a groff string and returning
+	void.
+	(troff_output_file::comment): Define it.
+
+2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor.
 	(class hyphen_inhibitor_node): Declare member functions in the
 	same order as they appear in `struct node`'s declaration; in the
