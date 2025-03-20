@@ -6282,7 +6282,8 @@ units.
 .
 GNU
 .I troff \" GNU
-ignores any arguments and reports the sizes in bytes.
+reports the sizes in bytes if given no arguments,
+and otherwise dumps the contents of each named argument.
 .
 .
 .P

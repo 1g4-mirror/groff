@@ -17760,11 +17760,21 @@ a pair of empty brackets
 represents an empty list.
 @endDefreq
 
-@Defreq {pm, }
+@Defreq {pm, [@Var{name} @r{@dots{}}]}}
+@cindex dumping macros, strings, or diversions (@code{pm})
 @cindex dumping symbol table (@code{pm})
 @cindex symbol table, dumping (@code{pm})
+@cindex macro, dumping (@code{pm})
+@cindex string, dumping (@code{pm})
+@cindex diversion, dumping (@code{pm})
 Report,
 to the standard error stream,
+the name and @acronym{JSON}-encoded contents of each macro,
+string,
+or diversion
+@var{name},
+or,
+without arguments,
 the names of all defined macros,
 strings,
 and diversions and their sizes in bytes.

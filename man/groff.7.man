@@ -4221,6 +4221,15 @@ strings,
 and diversions and their sizes in bytes.
 .
 .TPx
+.REQ .pm "name \fR\&.\|.\|.\&\fP"
+Report,
+to the standard error stream,
+the name and JSON-encoded contents of each macro,
+string,
+or diversion
+.IR name .
+.
+.TPx
 .REQ .pn \[+-]N
 Set next page number.
 .

@@ -3552,7 +3552,8 @@ public:
   node_list nl;
   macro_header() { count = 1; }
   macro_header *copy(int);
-  void json_dump();
+  void json_dump_macro();
+  void json_dump_diversion();
 };
 
 macro::~macro()
@@ -3719,7 +3720,10 @@ void macro::print_size()
 void macro::json_dump()
 {
   if (p != 0 /* nullptr */)
-    p->json_dump();
+    if (is_a_diversion)
+      p->json_dump_diversion();
+    else
+      p->json_dump_macro();
   else
     fputs("\"\"", stderr);
 }
@@ -3747,9 +3751,17 @@ macro_header *macro_header::copy(int n)
   return p;
 }
 
-void macro_header::json_dump()
+extern void dump_node_list(node *);
+
+void macro_header::json_dump_diversion()
 {
-  fputc('\"', stderr);
+  dump_node_list(nl.head);
+  fflush(stderr);
+}
+
+void macro_header::json_dump_macro()
+{
+  errprint("\"contents\": \"");
   int macro_len = cl.length();
   for (int i = 0; i < macro_len; i++) {
     json_char jc = json_encode_char(cl.get(i));
@@ -3758,22 +3770,41 @@ void macro_header::json_dump()
     for (size_t j = 0; j < jc.len; j++)
       fputc(jc.buf[j], stderr);
   }
-  fputc('\"', stderr);
+  errprint("\"");
   fflush(stderr);
 }
 
 void print_macros()
 {
-  object_dictionary_iterator iter(request_dictionary);
   request_or_macro *rm;
+  macro *m = 0 /* nullptr */;
   symbol s;
-  while (iter.get(&s, (object **)&rm)) {
-    assert(!s.is_null());
-    macro *m = rm->to_macro();
-    if (m) {
-      errprint("%1\t", s.contents());
-      m->print_size();
-      errprint("\n");
+  if (has_arg()) {
+    do {
+      s = get_name();
+      rm = static_cast<request_or_macro *>(request_dictionary.lookup(s));
+      if (rm != 0 /* nullptr */)
+	m = rm->to_macro();
+      if (m != 0 /* nullptr */) {
+	errprint("{\"name\": ");
+	s.json_dump();
+	errprint(", ");
+	m->json_dump();
+	errprint("}\n");
+	fflush(stderr);
+      }
+    } while (has_arg());
+  }
+  else {
+    object_dictionary_iterator iter(request_dictionary);
+    while (iter.get(&s, (object **)&rm)) {
+      assert(!s.is_null());
+      m = rm->to_macro();
+      if (m != 0 /* nullptr */) {
+	errprint("%1\t", s.contents());
+	m->print_size();
+	errprint("\n");
+      }
     }
   }
   fflush(stderr);
