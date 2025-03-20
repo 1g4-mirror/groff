@@ -191,6 +191,9 @@ troff
    fill colors, "default", are not listed since they are immutable and
    their details unknown to the formatter.)
 
+*  A new request, `pchar`, reports to the standard error stream data
+   about any ordinary, special, or indexed character arguments.
+
 *  A new request, `pcomposite`, reports to the standard error stream the
    list of defined composite character mappings.
 
@@ -201,6 +204,9 @@ troff
 *  A new request, `pline`, reports to the standard error stream the list
    of output nodes (an internal data structure) corresponding to the
    pending output line.  The list is empty if no such nodes exist.
+
+*  The `pm` request now interprets any arguments as a sequence of macro,
+   string, or diversion names, and reports their contents.
 
 *  The `pnr` request now additionally reports the autoincrementation
    amount and interpolation format of each register (if it is not
