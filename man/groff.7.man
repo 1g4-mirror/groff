@@ -4216,12 +4216,9 @@ represents an empty list.
 .REQ .pm
 Report,
 to the standard error stream,
-the names and sizes in bytes of
-defined
-macros,
+the names of all defined macros,
 strings,
-and
-diversions.
+and diversions and their sizes in bytes.
 .
 .TPx
 .REQ .pn \[+-]N

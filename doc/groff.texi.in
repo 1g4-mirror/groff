@@ -17763,8 +17763,11 @@ represents an empty list.
 @Defreq {pm, }
 @cindex dumping symbol table (@code{pm})
 @cindex symbol table, dumping (@code{pm})
-Report, to the standard error stream, the names of all defined macros,
-strings, and diversions with their sizes in bytes.
+Report,
+to the standard error stream,
+the names of all defined macros,
+strings,
+and diversions and their sizes in bytes.
 @endDefreq
 
 @Defreq {pnr, [@Var{reg} @r{@dots{}}]}
