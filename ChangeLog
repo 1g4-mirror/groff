@@ -1,3 +1,30 @@
+2025-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Implement macro/string/diversion dumper.
+
+	* src/roff/troff/input.cpp: Do it.  Add inelegant `extern`
+	declaration roping in `dump_node_list()` function from
+	"node.cpp".
+	(class macro_header): Replace `json_dump()` member function with
+	`json_dump_macro()` and `json_dump_diversion()`, since how we
+	dump depends on what component objects we contain.
+	(macro::json_dump): Call appropriate aforementioned function;
+	`json_dump_macro` on macros and strings, `json_dump_diversion`
+	on diversions.
+	(macro_header::json_dump_diversion): Call `dump_node_list()` on
+	the `head` member of this object's `node_list` `struct`.
+	(macro::json_dump): Rename this...
+	(macro::json_dump_macro): ...to this.  Also use `errprint()`
+	instead of `fputc()`.
+	(print_macros): Check for arguments.  If given any, interpret
+	them as macro/string/diversion names and dump the contents of
+	each, JSON-encoded.  If not, proceed with previously
+	unconditional behavior.
+
+	* doc/groff.texi.in (Debugging) <pm>:
+	* man/groff.7.man (Request short reference) <pm>:
+	* man/groff_diff.7.man (Other differences): Document it.
+
 2025-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add internal facility for writing trout/grout comments
@@ -159,7 +186,7 @@
 
 2025-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/input.cpp (macro:json_dump): A `macro` object
+	* src/roff/troff/input.cpp (macro::json_dump): A `macro` object
 	is not guaranteed to contain a `macro_header`; check for a null
 	pointer and report an empty JSON string if there's no header.
 
