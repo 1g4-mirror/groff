@@ -3351,6 +3351,15 @@ special,
 or indexed
 .RI character\~ c .
 .
+A character defined by a request
+.RB ( char ,
+.BR \%fchar ,
+.BR \%fschar ,
+or
+.BR \%schar ),
+reports its contents as a JSON-encoded string,
+but the output is not otherwise in JSON format.
+.
 .
 .TP
 .BR .pcolor \~[\c

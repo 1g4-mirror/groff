@@ -17692,6 +17692,14 @@ information about each ordinary,
 special,
 or indexed
 character@tie{}@var{c}.
+A character defined by a request
+(@code{char},
+@code{fchar},
+@code{fschar},
+or
+@code{schar}),
+reports its contents as a @acronym{JSON}-encoded string,
+but the output is not otherwise in @acronym{JSON} format.
 @endDefreq
 
 @Defreq {pcolor, [@Var{col} @r{@dots{}}]}
