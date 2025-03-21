@@ -1,5 +1,18 @@
 2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Fix Savannah #66931.
+
+	* src/preproc/tbl/table.cpp (set_troff_location): Fix logic
+	error.  When writing a *roff `lf` request with a file name
+	argument, write out the actual corresponding input file line
+	number instead of "1".
+
+	Fixes <https://savannah.gnu.org/bugs/?66931>.  Thanks to Bjarni
+	Ingi Gislason for the report.  Problem introduced by me in
+	commit 25ef9f6bda, 26 February.
+
+2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Regression-test Savannah #66931.
 
 	* src/preproc/tbl/tests/emit-accurate-lf-requests.sh: Do it.
