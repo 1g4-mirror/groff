@@ -1,5 +1,12 @@
 2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Regression-test Savannah #66931.
+
+	* src/preproc/tbl/tests/emit-accurate-lf-requests.sh: Do it.
+	* src/src/preproc/tbl/tbl.am (tbl_TESTS): Run test.
+
+2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Warn on failure to adjust the output line.
 
 	* src/roff/troff/env.cpp (distribute_space): I planted an

@@ -36,6 +36,7 @@ tbl_TESTS = \
   src/preproc/tbl/tests/do-not-overlap-bottom-border-in-nroff.sh \
   src/preproc/tbl/tests/do-not-segv-on-invalid-vertical-span-entry.sh \
   src/preproc/tbl/tests/do-not-segv-when-backslash-R-in-text-block.sh \
+  src/preproc/tbl/tests/emit-accurate-lf-requests.sh \
   src/preproc/tbl/tests/expand-region-option-works.sh \
   src/preproc/tbl/tests/format-time-diagnostics-work.sh \
   src/preproc/tbl/tests/horizontal-rules-not-drawn-too-long.sh \
