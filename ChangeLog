@@ -1,3 +1,28 @@
+2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Warn on failure to adjust the output line.
+
+	* src/roff/troff/env.cpp (distribute_space): I planted an
+	`assert()` land mine for myself back in December and it finally
+	went off.  Remove assertion that the amount of `desired_space`
+	for adjustment must be nonnegative.  While rare, this can in
+	fact happen with perverse inputs such as long, unhyphenable
+	character sequences or short output line lengths.  Throw new
+	warnings in category "break" when adjustment is desired but
+	impossible: (1) the output line has no adjustable spaces on it,
+	or (2) any adjustable spaces would have to be squeezable/
+	shrinkable to achieve a fit, and that is not yet implemented in
+	GNU troff (see Savannah #44018).  (Even if/when we do implement
+	it, there will be a [likely configurable] limit to how narrow an
+	adjustable space can become.)
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document additional
+	circumstances under which warnings in "break" category are
+	thrown.  Clarify existing circumstances.
+
+	Fixes <https://savannah.gnu.org/bugs/?66392>.
+
 2025-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Implement macro/string/diversion dumper.

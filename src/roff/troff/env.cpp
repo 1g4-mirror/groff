@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <errno.h> // errno
 #include <math.h> // ceil()
+#include <stdlib.h> // abs()
 
 #include <vector>
 #include <algorithm> // find()
@@ -2100,6 +2101,9 @@ breakpoint *environment::choose_breakpoint()
   }
   if (best_bp) {
     if (!best_bp_fits)
+      // TODO: If we implement shrinkable/squeezable adjustable spaces,
+      // this warning could become spurious in cases where we can
+      // achieve the desired adjustment.
       output_warning(WARN_BREAK, "cannot break line");
     return best_bp;
   }
@@ -2189,9 +2193,19 @@ static void distribute_space(node *nd, int nspaces,
 			     hunits desired_space,
 			     bool force_reverse_node_list = false)
 {
-  assert(desired_space >= H0);
   if (desired_space.is_zero() || nspaces == 0)
     return;
+  if (desired_space < H0) {
+    // TODO: Implement shrinkable/squeezable space adjustments here.
+    if (nspaces == 0)
+      output_warning(WARN_BREAK, "cannot adjust line lacking adjustable"
+		     " spaces; overset by %1 units",
+		     abs(desired_space.to_units()));
+    else
+      output_warning(WARN_BREAK, "cannot adjust line; overset by %1"
+		     " units", abs(desired_space.to_units()));
+    return;
+  }
   // Positive desired space is the typical case.  Negative desired space
   // is possible if we have overrun an unbreakable line.  But we should
   // not get here if there are no adjustable space nodes to adjust.

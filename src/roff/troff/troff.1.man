@@ -579,9 +579,12 @@ _
 .
 .TP \nxu+3n
 .BR break "\t4"
-A filled output line could not be broken such that its length was less
-than the output line length
-.BR \[rs]n[.l] .
+A filled output line could not be
+broken such that its length was less than or equal to,
+or
+adjusted such that its length was exactly equal to,
+the output line length
+.RB \[lq] \[rs]n[.l] \[rq].
 .
 This category is enabled by default.
 .

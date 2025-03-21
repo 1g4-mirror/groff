@@ -17973,9 +17973,14 @@ by default.
 @itemx 4
 @cindex filling, and @code{break} warnings
 @cindex mode, fill, and @code{break} warnings
-A filled output line could not be broken such that its length was less
-than the output line length @samp{\n[.l]}.  This category is enabled by
-default.
+@cindex adjustment, and @code{break} warnings
+A filled output line could not be
+broken such that its length was less than or equal to,
+or
+adjusted such that its length was exactly equal to,
+the output line length
+@samp{\n[.l]}.
+This category is enabled by default.
 
 @item delim
 @itemx 8
