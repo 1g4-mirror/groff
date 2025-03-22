@@ -276,12 +276,12 @@ soelim
 
 *  soelim no longer requires embedded space characters in `so` arguments
    to be backslash-escaped.  (It continues to support that syntax, even
-   though neither AT&T nor GNU troff ever has.)  If the argument to a
-   `so` request must contain leading spaces, any such sequence of spaces
-   must now be prefixed with a double quote character ("), which the
-   program then discards.  These changes are to better align this
-   program's parsing rules with the language of the formatter; consider
-   the `ds` and `as` requests.
+   though neither AT&T nor GNU troff ever has.)  You can now embed a
+   sequence of leading spaces in the argument by prefixing it with a
+   with a neutral double quote character ("), which the program then
+   discards.  These changes are to better align this program's parsing
+   rules with the language of the formatter; consider the `ds` and `as`
+   requests.
 
 Macro packages
 --------------
