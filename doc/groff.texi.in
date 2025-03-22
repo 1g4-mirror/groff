@@ -17576,12 +17576,23 @@ and related requests can be used to emit customized diagnostic messages
 or for instrumentation while troubleshooting.  The @code{ex} and
 @code{ab} requests cause early termination with successful and error
 exit codes respectively, to halt further processing when continuing
-would be fruitless.  Examine the state of the formatter with requests
-that write lists of defined names (macros, strings, and diversions),
-colors, composite characters, environments, hyphenation codes and
-exceptions, registers, open streams, page location traps, and a list of
-output nodes corresponding to the pending input line to the standard
-error stream.
+would be fruitless.
+Examine the state of the formatter with requests that write lists of
+defined names---macros, strings, and diversions---@
+colors,
+composite character mappings,
+environments,
+automatic hyphenation codes
+and exceptions,
+registers,
+open streams,
+and page location traps.
+Other requests disclose
+to the standard error stream
+the internal properties and representations of
+characters,
+macros (and strings and diversions),
+and the list of output nodes corresponding to the pending input line.
 @c END Keep parallel with section "Debugging" of groff(7).
 
 @Defreq {lf, input-line-number [[@code{"}]@Var{file-identifier}]}

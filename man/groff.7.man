@@ -8837,24 +8837,34 @@ strings,
 and
 .RB diversions\[em]( pm );
 characters
-.RB ( pchar "; experimental);
+.RB ( pchar "; experimental);"
 colors
 .RB ( pcolor );
-composite characters
+composite character mappings
 .RB ( pcomposite );
 environments
 .RB ( pev );
-hyphenation codes
+automatic hyphenation codes
+.RB ( pchar )
+and exceptions
 .RB ( phw );
 registers
 .RB ( pnr );
 open streams
 .RB ( pstream );
+and
 page location traps
-.RB ( ptr );
-and a list of output nodes corresponding to the pending input line
-.RB ( pline )
-to the standard error stream.
+.RB ( ptr ).
+.
+Other requests disclose
+to the standard error stream
+the internal properties and representations of
+characters
+.RB ( pchar ),
+macros (and strings and diversions)
+.RB ( pm ),
+and the list of output nodes corresponding to the pending input line
+.RB ( pline ).
 .\" END Keep (roughly) parallel with groff.texi node "Debugging".
 .
 .
