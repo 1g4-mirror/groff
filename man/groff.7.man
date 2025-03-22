@@ -6468,7 +6468,8 @@ escape sequence.
 .
 .
 .P
-Registers can also be incremented or decremented by a configured amount
+User-defined registers can also be incremented or decremented
+by a configured amount
 at the time they are interpolated.
 .
 The value of the increment is specified with a third argument to the
@@ -6477,8 +6478,7 @@ request,
 and a special interpolation syntax,
 .BI \[rs]n \[+-]\c
 ,
-is used to alter and then retrieve
-the register's value.
+alters and then retrieves the register's value.
 .
 Together,
 these features are called
@@ -6491,24 +6491,23 @@ considered an \[lq]auto-decrement\[rq].)
 .P
 Many predefined registers are available.
 .
-In the following presentation,
-the register interpolation syntax
+The following presentation uses
+register interpolation syntax
 .BI \[rs]n[ name ]
-is used to refer to a register
+to refer to a register
 .I name
 to clearly distinguish it from a string or request
-.IR name .
+.IR name ;
+the symbols
+.B \[rs]n[]
+are
+.I not
+part of the register name.
 .
 The register name space is separate from that used for requests,
 macros,
 strings,
 and diversions.
-.
-The symbols
-.B \[rs]n[]
-are
-.I not
-part of the register name.
 .\" END Keep (roughly) parallel with groff.texi node "Registers".
 .
 .
@@ -6525,8 +6524,8 @@ Many are Boolean-valued.
 .I Caution:
 Built-in registers are subject to removal like others;
 once removed,
-they can be recreated only as normal writable registers and will not
-reflect the configuration of the formatter.
+they can be recreated only as normal writable registers
+and will not otherwise reflect the configuration of the formatter.
 .
 .
 .P

@@ -7775,11 +7775,17 @@ value is interpolated, and a warning in category @samp{reg} is emitted.
 @cindex incrementation, automatic, of a register
 @cindex decrementation, automatic, of a register
 
-Registers can also be incremented or decremented by a configured amount
-at the time they are interpolated.  The value of the increment is
-specified with a third argument to the @code{nr} request, and a special
-interpolation syntax is used to alter and then retrieve the register's
-value.  Together, these features are called
+User-defined registers can also be incremented or decremented
+by a configured amount
+at the time they are interpolated.
+The value of the increment is specified with a third argument to the
+@code{nr}
+request,
+and a special interpolation syntax
+@c XXX: Texinfo 5.0 doesn't have a command for the ± glyph.
+alters and then retrieves the register's value.
+Together,
+these features are called
 @dfn{auto-increment}.@footnote{A negative auto-increment can be
 considered an ``auto-decrement''.}
 
@@ -7967,9 +7973,11 @@ with the @code{if}, @code{ie}, or @code{while} requests.
 @cindex removing a built-in register
 @cindex register, built-in, removing
 @cindex built-in register, removing
-@strong{Caution:@:} Built-in registers are subject to removal like
-others; once removed, they can be recreated only as normal writable
-registers and will not reflect the configuration of the formatter.
+@strong{Caution:@:}
+Built-in registers are subject to removal like others;
+once removed,
+they can be recreated only as normal writable registers
+and will not otherwise reflect the configuration of the formatter.
 
 A register name is often associated with a request of the same name
 (without the dot).  A complete listing of all built-in registers can be
