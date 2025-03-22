@@ -1,3 +1,11 @@
+2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/afmtodit/afmtodit.pl (croak, whine): Fix my
+	misunderstanding of uninitialized Perl scalars.  Initialize
+	scalars used as strings to explicit empty strings.
+
+	Continues commit 658f7afb8e, 2 January.
+
 2025-03-13  Dave Kemper <saint.snit@gmail.com>
 
 	* tmac/fallbacks.tmac: Allow recognition of more Unicode

@@ -62,7 +62,7 @@ if ($opt_v) {
 
 sub croak {
     my $msg = shift;
-    my $pos;
+    my $pos = "";
     $pos .= "$filename:" if $filename;
     $pos .= "$lineno:" if $lineno;
     print STDERR "$prog:$pos error: $msg\n";
@@ -71,7 +71,7 @@ sub croak {
 
 sub whine {
     my $msg = shift;
-    my $pos;
+    my $pos = "";
     $pos .= "$filename:" if $filename;
     $pos .= "$lineno:" if $lineno;
     print STDERR "$prog:$pos warning: $msg\n";
