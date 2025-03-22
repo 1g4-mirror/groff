@@ -199,8 +199,11 @@ to HTML.
 .
 .P
 .I \%grohtml
-writes \%UTF-8-\:encoded output and has built-in HTML entities for all
-non-composite Unicode characters.
+writes \%UTF-8-\:encoded output
+(but see the
+.B \-k
+option)
+and has built-in HTML entities for all non-composite Unicode characters.
 .
 In spite of this,
 .I groff
@@ -209,6 +212,7 @@ found during the first pass.
 .
 You can ignore these warnings unless the special characters appear
 inside a table or equation.
+.\" XXX: or pic(1) description?
 .
 .
 .\" ====================================================================
