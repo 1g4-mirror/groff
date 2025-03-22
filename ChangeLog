@@ -1,3 +1,17 @@
+2025-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::next): Stop throwing an error
+	diagnostic and aborting interpretation of a special character
+	identifier when it starts with "u" and is of length > 2.  For
+	example, `\[unhappy]` is a valid special character
+	interpolation, simply not a _Unicode_ special character
+	interpolation.  Also solves the same problem when reading
+	special character identifiers from font description files.
+
+	Fixes <https://savannah.gnu.org/bugs/?66675>.  Thanks to Dave
+	Kemper for the report.  Problem introduced by me in commit
+	6bf627403c, 4 September.
+
 2025-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/afmtodit/afmtodit.pl (croak, whine): Fix my

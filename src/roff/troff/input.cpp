@@ -2564,14 +2564,8 @@ void token::next()
 	    char errbuf[ERRBUFSZ];
 	    const char *sc = s.contents();
 	    const char *gn = 0 /* nullptr */;
-	    if ((strlen(sc) > 2) && (sc[0] == 'u')) {
+	    if ((strlen(sc) > 2) && (sc[0] == 'u'))
 	      gn = valid_unicode_code_sequence(sc, errbuf);
-	      if (0 /* nullptr */ == gn) {
-		error("special character '%1' is invalid: %2", sc,
-		      errbuf);
-		break;
-	      }
-	    }
 	    if (gn != 0 /* nullptr */) {
 	      const char *gn_decomposed = decompose_unicode(gn);
 	      if (gn_decomposed)
