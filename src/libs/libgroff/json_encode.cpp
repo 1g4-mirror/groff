@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <assert.h>
 #include <stdio.h> // snprintf()
 
 #include "cset.h" // csprint()
@@ -29,7 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // string (without bracketing `"`s).
 json_char json_encode_char(unsigned char c)
 {
-  assert(c < 256);
   json_char jc;
   // These printable characters require escaping.
   if (('"' == c) || ('\\' == c) || ('/' == c)) {

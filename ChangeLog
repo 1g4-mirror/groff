@@ -1,5 +1,13 @@
 2025-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/json_encode.cpp (json_encode_char): Kill off
+	tautological assertion.
+
+	Fixes "-Wtautological-constant-out-of-range-compare" warning
+	from GCC.
+
+2025-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next): Stop throwing an error
 	diagnostic and aborting interpretation of a special character
 	identifier when it starts with "u" and is of length > 2.  For
