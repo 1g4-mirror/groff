@@ -104,7 +104,7 @@ to the standard output stream
 consisting of
 .I file2
 with added margin character
-.RB ( .mc )
+.RB ( mc )
 requests indicating output lines that differ from
 .I file1.
 .
