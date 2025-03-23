@@ -4294,6 +4294,19 @@ permitting initial embedded spaces.
 .
 .
 .TP
+.BI .pm\~ name\~\c
+\&.\|.\|.
+GNU
+.I troff \" GNU
+reports,
+to the standard error stream,
+the JSON-encoded name and contents of each macro,
+string,
+or diversion
+.IR name .
+.
+.
+.TP
 .BR .so\~ [ \[dq] ]\c
 .I file
 GNU
