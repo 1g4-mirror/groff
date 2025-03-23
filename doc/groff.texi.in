@@ -17788,7 +17788,7 @@ represents an empty list.
 @cindex diversion, dumping (@code{pm})
 Report,
 to the standard error stream,
-the name and @acronym{JSON}-encoded contents of each macro,
+the @acronym{JSON}-encoded name and contents of each macro,
 string,
 or diversion
 @var{name},

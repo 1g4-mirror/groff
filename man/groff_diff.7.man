@@ -6283,7 +6283,8 @@ units.
 GNU
 .I troff \" GNU
 reports the sizes in bytes if given no arguments,
-and otherwise dumps the contents of each named argument.
+and otherwise dumps
+the JSON-encoded name and contents of each named argument.
 .
 .
 .P
