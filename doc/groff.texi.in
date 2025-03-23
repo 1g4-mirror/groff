@@ -17578,8 +17578,7 @@ or for instrumentation while troubleshooting.  The @code{ex} and
 exit codes respectively, to halt further processing when continuing
 would be fruitless.
 Examine the state of the formatter with requests that write lists of
-defined names---macros, strings, and diversions---@
-colors,
+defined names---macros, strings, and diversions---colors,
 composite character mappings,
 environments,
 automatic hyphenation codes
