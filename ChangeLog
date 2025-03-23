@@ -1,3 +1,10 @@
+2025-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (report_character_request): Make
+	`pchar` request accept space between characters, as documented.
+
+	Continues commit d84dd6ddc7, 4 February.
+
 2025-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::next): Discard local array

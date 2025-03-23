@@ -4748,6 +4748,8 @@ static void report_character_request()
   }
   charinfo *ci;
   do {
+    while (tok.is_space())
+      tok.next();
     ci = tok.get_char(false /* required */,
 		      true /* suppress creation */);
     if (!tok.is_character()) {
