@@ -79,7 +79,7 @@
 	circumstances under which warnings in "break" category are
 	thrown.  Clarify existing circumstances.
 
-	Fixes <https://savannah.gnu.org/bugs/?66392>.
+	Fixes <https://savannah.gnu.org/bugs/?66932>.
 
 2025-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
