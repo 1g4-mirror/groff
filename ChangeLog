@@ -1,5 +1,16 @@
 2025-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::next): Discard local array
+	variable `errbuf`.  Pass a null pointer instead of it to
+	`valid_unicode_code_sequence()`, so that the latter function
+	does not waste resources constructing a diagnostic message that
+	we are not going to emit.
+
+	Continues commit b4397231a0, earlier today.  Thanks to Dave
+	Kemper for pointing out the lingering pessimization.
+
+2025-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/json_encode.cpp (json_encode_char): Kill off
 	tautological assertion.
 

@@ -2561,11 +2561,10 @@ void token::next()
 	    nm = composite_glyph_name(s);
 	  }
 	  else {
-	    char errbuf[ERRBUFSZ];
 	    const char *sc = s.contents();
 	    const char *gn = 0 /* nullptr */;
 	    if ((strlen(sc) > 2) && (sc[0] == 'u'))
-	      gn = valid_unicode_code_sequence(sc, errbuf);
+	      gn = valid_unicode_code_sequence(sc, 0 /* nullptr */);
 	    if (gn != 0 /* nullptr */) {
 	      const char *gn_decomposed = decompose_unicode(gn);
 	      if (gn_decomposed)
