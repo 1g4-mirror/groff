@@ -9090,8 +9090,8 @@ with a hyphenation code value of zero to it.  For example, @samp{.hcode
 ß $} removes the hyphenation code from @samp{ß} (unless @samp{$} has
 already been assigned a different one).
 
-The experimental @code{pchar} request may be helpful to troubleshoot
-hyphenation code assignments.  @xref{Debugging}.
+The @code{pchar} request may be helpful to troubleshoot hyphenation code
+assignments.  @xref{Debugging}.
 @endDefreq
 
 @Defreq {hpfcode, a b [c d] @dots{}}
@@ -17568,10 +17568,17 @@ GNU
 emits a variety of error diagnostics
 and supports several categories of warning;
 the output of each category can be selectively enabled or suppressed.
-A trace of the
-formatter's input processing stack can be emitted when errors or
-warnings occur by means of GNU @code{troff}'s @option{-b} option, or
-produced on demand with the @code{backtrace} request.  The @code{tm}
+A trace of the formatter's input processing stack
+can be emitted when errors or warnings occur
+by means of
+GNU
+@code{troff}'s @c GNU
+@option{-b}
+option,
+or produced on demand with the
+@code{backtrace}
+request.
+The @code{tm}
 and related requests can be used to emit customized diagnostic messages
 or for instrumentation while troubleshooting.  The @code{ex} and
 @code{ab} requests cause early termination with successful and error
@@ -17586,7 +17593,9 @@ and exceptions,
 registers,
 open streams,
 and page location traps.
-Other requests disclose
+GNU
+@command{troff} @c GNU
+can also disclose
 to the standard error stream
 the internal properties and representations of
 characters,

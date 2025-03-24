@@ -4096,7 +4096,9 @@ Change the page number character used in titles
 .REQ .pchar "c \fR\&.\|.\|.\&\fP"
 Report,
 to the standard error stream,
-information about each ordinary or special
+information about each ordinary,
+special,
+or indexed
 .RI character\~ c .
 .
 A character defined by a request
