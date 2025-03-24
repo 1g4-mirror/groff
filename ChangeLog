@@ -70,7 +70,7 @@
 	impossible: (1) the output line has no adjustable spaces on it,
 	or (2) any adjustable spaces would have to be squeezable/
 	shrinkable to achieve a fit, and that is not yet implemented in
-	GNU troff (see Savannah #44018).  (Even if/when we do implement
+	GNU troff (see Savannah #40963).  (Even if/when we do implement
 	it, there will be a [likely configurable] limit to how narrow an
 	adjustable space can become.)
 
