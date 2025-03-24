@@ -7150,7 +7150,7 @@ sequences.
 @Example
 .ds family C\" Courier
 .ds style I\" oblique
-Choice a typeface \f(\*[family]\*[style]wisely.
+Choose a typeface \f(\*[family]\*[style]wisely.
     @result{} Choose a typeface @slanted{wisely.}
 @endExample
 
