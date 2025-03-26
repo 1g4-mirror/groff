@@ -9135,7 +9135,6 @@ int main(int argc, char **argv)
   bool have_explicit_first_page_number = false;
   bool want_startup_macro_files_skipped = false;
   int next_page_number = 0;	// pacify compiler
-  opterr = 0;
   hresolution = vresolution = 1;
   // restore $PATH if called from groff
   char* groff_path = getenv("GROFF_PATH__");

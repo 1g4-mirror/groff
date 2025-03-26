@@ -1,5 +1,10 @@
 2025-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.c (main): Finish migrating to modern
+	getopt_long(3) usage: drop `opterr` assignment.
+
+2025-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/grog/grog.pl (interpret_line): Recognize `pchar` as
 	a GNU troff request.
 
