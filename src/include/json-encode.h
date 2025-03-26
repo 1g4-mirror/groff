@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 struct json_char {
-  char len;
+  unsigned char len;
   char buf[7]; // '\uXXXX' + '\0'
 };
 

@@ -1,5 +1,12 @@
 2025-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/json-encode.h (struct json_char): Use explicitly
+	`unsigned` character type when employing it as a numeric value
+	{counting the number of `char`s necessary to JSON-encode a C/C++
+	character}.  See CMU SEI INT07-C.
+
+2025-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.c (main): Finish migrating to modern
 	getopt_long(3) usage: drop `opterr` assignment.
 
