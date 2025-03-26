@@ -2494,7 +2494,7 @@
 
 	[preconv]: Align with modern groff conventions.
 
-	* src/preproc/preconv/preconv.cpp (emacs2mine)
+	* src/preproc/preconv/preconv.cpp (emacs2mime)
 	(conversion_iconv): Use C++ `const_cast` operator instead of
 	C-style type cast.
 	(conversion_latin1, conversion_utf8, conversion_cp1047)
@@ -13920,7 +13920,7 @@
 	* src/preproc/eqn/delim.cpp (define_extensible_string):
 	* src/preproc/html/pre-html.cpp (char_buffer::can_see):
 	* src/preproc/html/pushback.cpp (pushBackBuffer::isString):
-	* src/preproc/preconv/preconv.cpp (emacs2mine):
+	* src/preproc/preconv/preconv.cpp (emacs2mime):
 	* src/preproc/refer/label.ypp (format_expr::evaluate):
 	* src/roff/troff/input.cpp (make_temp_iterator, pipe_source):
 	* src/utils/tfmtodit/tfmtodit.cpp (main): Do it.
