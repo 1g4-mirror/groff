@@ -9695,9 +9695,14 @@ glyph@tie{}@var{d}, and so on.  If there is an odd number of characters
 in the argument, the last one is translated to a fixed-width space (the
 same one obtained by the @code{\@key{SPC}} escape sequence).
 
-The @code{trin} request is identical to @code{tr}, but when you unformat
-a diversion with @code{asciify} it ignores the translation.
-@xref{Diversions}, for details about the @code{asciify} request.
+The
+@code{trin}
+request works as does
+@code{tr},
+except that
+@code{asciify}
+(@pxref{Diversions})
+ignores the translation when a diversion is interpolated.
 
 Some notes:
 
@@ -10006,13 +10011,20 @@ previous invocation of @code{in}, and zero if there is none.  If
 category @samp{range} and sets the indentation to zero; a temporary
 indentation (see below) is reset to zero as well.
 
-The effect of @code{in} is delayed until a partially collected line (if
-it exists) is output.  In other words, it does not change a pending
-output line's indentation.
+The formatter delays the effect of
+@code{in}
+until it has emitted any partially collected line.
+In other words,
+@code{in}
+does not change a pending output line's indentation.
 
-The indentation (as set by @code{in}) can be found in the read-only
-register @samp{.i}; it ignores temporary indentation (see below).  The
-indentation is associated with the environment (@pxref{Environments}).
+The read-only register
+@samp{.i}
+interpolates the indentation amount,
+ignoring temporary indentation
+(see below).
+The indentation amount is associated with the environment
+(@pxref{Environments}).
 @endDefreq
 
 @DefreqList {ti, offset}
@@ -10613,9 +10625,13 @@ default family.
 @cindex selecting the previous font (@code{ft})
 @cindex previous font, selecting (@code{ft})
 @cindex font, previous, selecting (@code{ft})
-The @code{ft} request selects the typeface @var{font}.  If the argument
-is absent or @samp{P}, it selects the previously used typeface; if there
-is none, it ignores the request.  If @var{font} is a non-negative
+The @code{ft} request selects the typeface @var{font}.
+If the argument is absent or
+@samp{P},
+it selects the previously used typeface;
+if there is none,
+the formatter ignores the request.
+If @var{font} is a non-negative
 integer, it is interpreted as a mounting position; the font mounted
 there is selected.  If that position refers to an abstract style, it is
 combined with the default family (see @code{fam} and @code{\F} below) to
