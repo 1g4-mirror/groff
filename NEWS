@@ -152,7 +152,7 @@ troff
 
 *  The device-independent page description language produced by GNU
    troff now reports unbreakable spaces (those produced with the `\~`
-   escape sequence) as word breaks with the documentary 'w' command,
+   escape sequence) as word boundaries with the documentary 'w' command,
    just as it does for regular breakable spaces.
 
 *  A new request, `hydefault`, and read-only register, `.hydefault`,
