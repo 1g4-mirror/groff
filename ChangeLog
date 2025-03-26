@@ -1,3 +1,12 @@
+2025-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::description): Fix potentially
+	misleading diagnostics.  When describing a non-Basic Latin
+	printable character in a diagnostic message (or `pchar` output),
+	remove Unicode-style annotation ("U+XXXX").  While accurate if
+	"latin1.tmac" is loaded, it can be incorrect if any of
+	"latin[259].tmac" or "koi8-r.tmac" is loaded.
+
 2025-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (report_character_request): Make

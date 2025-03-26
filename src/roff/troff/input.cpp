@@ -2689,8 +2689,10 @@ bool token::is_usable_as_delimiter(bool report_error)
 const char *token::description()
 {
   // Reserve a buffer large enough to handle the two lengthiest cases.
-  //   "character code XXX (U+XXXX)"
+  //   "character code XXX"
   //   "special character 'bracketrighttp'"
+  // Future:
+  //   "character code XXX (U+XXXX)" or similar
   const size_t maxstr = sizeof "special character 'bracketrighttp'";
   const size_t bufsz = maxstr + 2; // for trailing '"' and null
   static char buf[bufsz];
@@ -2710,7 +2712,7 @@ const char *token::description()
       return buf;
     }
     else {
-      (void) snprintf(buf, bufsz, "character code %d (U+%04X)", c, c);
+      (void) snprintf(buf, bufsz, "character code %d", c);
       return buf;
     }
   case TOKEN_DUMMY:
