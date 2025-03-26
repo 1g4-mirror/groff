@@ -24,8 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "cset.h" // csprint()
 #include "json-encode.h" // json_char
 
-// Return pointer to mutable buffer representing character `c` as a JSON
-// string (without bracketing `"`s).
+// Return JSON representation of character `c` without bracketing `"`s.
 json_char json_encode_char(unsigned char c)
 {
   json_char jc;

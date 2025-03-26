@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdlib.h> // calloc()
 
 #include "cset.h" // csprint()
-#include "json-encode.h" // json_encode_char()
+#include "json-encode.h" // json_char, json_encode_char()
 #include "lib.h"
 
 #include "errarg.h"
