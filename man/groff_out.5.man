@@ -205,7 +205,7 @@ implementation,
 recognizes a GNU extension to the language,
 and supports an obsolete construct for compatibility;
 otherwise,
-both formats are the same.
+the formats are the same.
 .
 (The parser for device-independent output can be found in the
 .I groff

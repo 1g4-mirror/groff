@@ -18827,10 +18827,14 @@ output can be thought of as a ``page description language''.
 In the following discussion, the term @dfn{troff output} describes what
 is output by GNU @command{troff}, while @dfn{page description} denotes
 the language accepted by the parser that interprets this output for the
-output drivers.  This parser handles whitespace more flexibly than
-@acronym{AT&T} @command{troff}'s implementation, recognizes a GNU
-extension to the language, and supports an obsolete construct for
-compatibility; otherwise, both formats are the same.@footnote{The parser
+output drivers.
+This parser handles whitespace more flexibly than @acronym{AT&T}
+@command{troff}'s
+implementation,
+recognizes a GNU extension to the language,
+and supports an obsolete construct for compatibility;
+otherwise,
+the formats are the same.@footnote{The parser
 for device-independent output can be found in the file
 @file{@var{groff-source-dir}/@/src/@/libs/@/libdriver/@/input.cpp}.}
 
