@@ -1389,14 +1389,15 @@ as arguments.
 .B \[rs]\|/
 Apply an
 .IR "italic correction" :
-modify the spacing of the preceding glyph so that the distance between
-it and the following glyph is correct if the latter is of upright shape.
+modify the spacing of the preceding glyph
+so that the distance between it and the following glyph
+is correct if the latter is of upright shape.
 .
 For example,
-if an italic\~\[lq]f\^\[rq] is followed immediately by a roman right
-parenthesis,
-then in many fonts the top right portion of the\~\[lq]f\^\[rq] overlaps
-the top of the right parenthesis,
+if an italic\~\[lq]f\^\[rq] is followed immediately
+by a roman right parenthesis,
+then in many fonts the top right portion of the\~\[lq]f\^\[rq]
+overlaps the top of the right parenthesis,
 .if t producing \f[I]f\f[R]),
 which is ugly.
 .
@@ -1411,20 +1412,25 @@ between them
 .\}
 avoids this problem.
 .
-Use this escape sequence whenever an oblique glyph is immediately
-followed by an upright glyph without any intervening space.
+Use
+.B \[rs]\^/
+whenever a slanted glyph
+is immediately followed by an upright glyph
+without any intervening space.
 .
 .
 .TP
 .B \[rs],
 Apply a
 .IR "left italic correction" :
-modify the spacing of the following glyph so that the distance between
-it and the preceding glyph is correct if the latter is of upright shape.
+if a roman left parenthesis is immediately followed by an
+modify the spacing of the following glyph
+so that the distance between it and the preceding glyph
+is correct if the latter is of upright shape.
 .
 For example,
-if a roman left parenthesis is immediately followed by an
-italic\~\[lq]f\^\[rq],
+if a roman left parenthesis is immediately followed
+by an italic\~\[lq]f\^\[rq],
 then in many fonts the bottom left portion of the\~\[lq]f\^\[rq]
 overlaps the bottom of the left parenthesis,
 .if t producing \f[R](\f[I]f\f[R],
@@ -1441,8 +1447,11 @@ between them
 .\}
 avoids this problem.
 .
-Use this escape sequence whenever an upright glyph is followed
-immediately by an oblique glyph without any intervening space.
+Use
+@code{\,}
+whenever an upright glyph
+is followed immediately by a slanted glyph
+without any intervening space.
 .
 .
 .TP

@@ -12006,17 +12006,24 @@ space between them may require adjustment.
 @Defesc {\\/, , , }
 @cindex italic correction (@code{\/})
 @cindex correction, italic (@code{\/})
-@cindex correction between oblique and upright glyph (@code{\/}, @code{\,})
-@cindex roman glyph, correction after italic glyph (@code{\/})
-@cindex upright glyph, correction after oblique glyph (@code{\/})
-Apply an @dfn{italic correction}:@: modify the spacing of the preceding
-glyph so that the distance between it and the following glyph is correct
-if the latter is of upright shape.  For example, if an
-italic@tie{}@samp{f} is followed immediately by a roman right
-parenthesis, then in many fonts the top right portion of
-the@tie{}@samp{f} overlaps the top of the right parenthesis, which is
-ugly.  Use this escape sequence whenever an oblique glyph is immediately
-followed by an upright glyph without any intervening space.
+@cindex corrections between slanted and upright glyphs (@code{\/}, @code{\,})
+@cindex roman glyph, correction after slanted glyph (@code{\/})
+@cindex upright glyph, correction after slanted glyph (@code{\/})
+Apply an @dfn{italic correction}:@:
+modify the spacing of the preceding glyph
+so that the distance between it and the following glyph
+is correct if the latter is of upright shape.
+For example,
+if an italic@tie{}@samp{f} is followed immediately
+by a roman right parenthesis,
+then in many fonts the top right portion of the@tie{}@samp{f}
+overlaps the top of the right parenthesis,
+which is ugly.
+Use
+@code{\/}
+whenever a slanted glyph
+is followed immediately by an upright glyph
+without any intervening space.
 @endDefesc
 
 @Defesc {\\@comma{}, , , }
@@ -12025,14 +12032,21 @@ followed by an upright glyph without any intervening space.
 @cindex correction between upright and oblique glyph (@code{\/}, @code{\,})
 @cindex roman glyph, correction before italic glyph (@code{\,})
 @cindex upright glyph, correction before oblique glyph (@code{\,})
-Apply a @dfn{left italic correction}:@: modify the spacing of the
-following glyph so that the distance between it and the preceding
-glyph is correct if the latter is of upright shape.  For example,
-if a roman left parenthesis is immediately followed by an
-italic@tie{}@samp{f}, then in many fonts the bottom left portion of
-the@tie{}@samp{f} overlaps the bottom of the left parenthesis, which is
-ugly.  Use this escape sequence whenever an upright glyph is followed
-immediately by an oblique glyph without any intervening space.
+Apply a @dfn{left italic correction}:@:
+modify the spacing of the following glyph
+so that the distance between it and the preceding glyph
+is correct if the latter is of upright shape.
+For example,
+if a roman left parenthesis is immediately followed
+by an italic@tie{}@samp{f},
+then in many fonts the bottom left portion of the@tie{}@samp{f}
+overlaps the bottom of the left parenthesis,
+which is ugly.
+Use
+@code{\,}
+whenever an upright glyph
+is followed immediately by a slanted glyph
+without any intervening space.
 @endDefesc
 
 @c XXX: Can we move this node earlier in the text?  Should it come
@@ -20016,8 +20030,8 @@ the glyph is sought in any mounted fonts that bear this property.
 Often,
 such fonts are
 @dfn{unstyled},
-having no heavy (bold) or oblique
-(slanted or italic)
+having no heavy (bold) or slanted
+(italic or oblique)
 variants.
 @end table
 
@@ -20139,14 +20153,26 @@ rather than a negative height.  The @var{depth} subfield gives the depth
 of the glyph, that is, the distance below the baseline to which the
 glyph extends (downward is positive); if a glyph does not extend below
 the baseline, it should be given a zero depth, rather than a negative
-depth.  Italic corrections are relevant to glyphs in italic or oblique
-styles.  The @var{italic-correction} is the amount of space that should
-be added after an oblique glyph to be followed immediately by an upright
-glyph.  The @var{left-italic-correction} is the amount of space that
-should be added before an oblique glyph to be preceded immediately by an
-upright glyph.  The @var{subscript-correction} is the amount of space
-that should be added after an oblique glyph to be followed by a
-subscript; it should be less than the italic correction.
+depth.
+Italic corrections apply when upright and slanted
+(italic or oblique)
+styles are typeset adjacently.
+The
+@var{italic-correction}
+is the amount of space
+that should be added after a slanted glyph
+to be followed immediately by an upright glyph.
+The
+@var{left-italic-correction}
+is the amount of space
+that should be added before a slanted glyph
+to be preceded immediately by an upright glyph.
+The
+@var{subscript-correction}
+is the amount of space
+that should be added after a slanted glyph
+to be followed by a subscript;
+it should be less than the italic correction.
 
 For fonts used with typesetters, the @var{type} field gives a featural
 description of the glyph: it is a bit mask recording whether the glyph
