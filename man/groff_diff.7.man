@@ -6048,6 +6048,7 @@ after a word-initial one.
 GNU
 .I troff \" GNU
 interprets request arguments representing file names
+and system commands
 in the same way it does the
 .I contents
 argument to the
@@ -6055,9 +6056,23 @@ argument to the
 and
 .RB \[lq] as \[rq]
 requests:
-by stripping any leading neutral double quote
-.RB \[lq] \[dq] \[rq]
-and reading to the end of the input line in copy mode.
+it removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq]
+from the argument to the
+.BR cf ,
+.BR nx ,
+.BR pi ,
+.RB \[lq] so \[rq],
+and
+.B sy
+requests,
+and the second argument
+(if present)
+to the
+.B lf
+request,
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
 This difference permits the formatter to handle files
 with spaces in their names,
 but requires more care with trailing comments,
@@ -6341,28 +6356,6 @@ GNU
 .I troff \" GNU
 rounds down the values of minimum inter-word and additional
 inter-sentence space each to the nearest multiple of\~12.
-.
-.
-.P
-GNU
-.I troff \" GNU
-removes a leading neutral double quote
-.RB \[oq] \[dq] \[cq]
-from the argument to the
-.BR cf ,
-.BR nx ,
-.BR pi ,
-.RB \[lq] so \[rq],
-and
-.B sy
-requests,
-and the second argument
-(if present)
-to the
-.B lf
-request,
-permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
 .
 .
 .P

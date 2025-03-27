@@ -18546,9 +18546,17 @@ produces different results with each of the three formatters.}
 @cindex file name arguments to requests, in other implementations
 @cindex arguments, file name, to requests, in other implementations
 @cindex requests handling file name arguments, in other implementations
+
+@cindex @code{cf} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{nx} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{pi} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{so} request, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
 GNU
-@command{troff}
+@command{troff} @c GNU
 interprets request arguments representing file names
+and system commands
 in the same way it does the
 @var{contents}
 argument to the
@@ -18556,9 +18564,24 @@ argument to the
 and
 @code{as}
 requests:@:
-by stripping any leading neutral double quote
+it removes a leading neutral double quote
 @samp{"}
-and reading to the end of the input line in copy mode.
+from the argument to the
+@code{cf},
+@code{nx},
+@code{pi},
+@code{so},
+and
+@code{sy}
+requests,
+and the second argument
+(if present)
+to the
+@code{lf}
+request,
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
+Recall @ref{Copy Mode}.
 This difference permits the formatter to handle files
 with spaces in their names,
 but requires more care with trailing comments,
@@ -18647,33 +18670,6 @@ Unlike @acronym{AT&T} @code{troff}, GNU @code{troff} does not ignore the
 @code{ss} request if the output is a terminal device; instead, the
 values of minimum inter-word and additional inter-sentence space are
 each rounded down to the nearest multiple of@tie{}12.
-
-@cindex @code{cf} request, incompatibilities with @acronym{AT&T} @code{troff}
-@cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
-@cindex @code{nx} request, incompatibilities with @acronym{AT&T} @code{troff}
-@cindex @code{pi} request, incompatibilities with @acronym{AT&T} @code{troff}
-@cindex @code{so} request, incompatibilities with @acronym{AT&T} @code{troff}
-@cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
-GNU
-@command{troff}
-removes a leading neutral double quote
-@samp{"}
-from the argument to the
-@code{cf},
-@code{nx},
-@code{pi},
-@code{so},
-and
-@code{sy}
-requests,
-and the second argument
-(if present)
-to the
-@code{lf}
-request,
-permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
-Recall @ref{Copy Mode}.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{cs} request, incompatibilities with @acronym{AT&T} @code{troff}
