@@ -5774,8 +5774,11 @@ can also disclose
 to the standard error stream
 the internal properties and representations of
 characters,
+.RB ( pchar ),
 macros (and strings and diversions),
-and the list of output nodes corresponding to the pending input line.
+.RB ( pm ),
+and the list of output nodes corresponding to the pending input line
+.RB ( pline ).
 .\" END Keep (roughly) parallel with relevant material from groff.texi
 .\" node "Debugging".
 .
