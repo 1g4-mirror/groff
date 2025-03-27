@@ -13514,8 +13514,6 @@ nested.
 @cindex escape sequences, brace (@code{\@{}, @code{\@}})
 @cindex opening brace escape sequence (@code{\@}})
 @cindex closing brace escape sequence (@code{\@})}
-@cindex brace escape sequence, opening (@code{\@})}
-@cindex brace escape sequence, closing (@code{\@})}
 @code{\@{} begins a conditional block; it must appear (after optional
 spaces and tabs) immediately subsequent to the conditional expression of
 an @code{if}, @code{ie}, or @code{while}
@@ -13604,7 +13602,7 @@ package.  Indentation is used to clarify the logic.
 
 @node while,  , if-else, Conditionals and Loops
 @subsection while
-@cindex while
+@cindex @code{while} request
 
 @code{groff} provides a looping construct:@: the @code{while} request.
 Its syntax matches the @code{if} request.
@@ -14481,7 +14479,7 @@ word spaces are.  @xref{Breaking}.
 @DefregItemx {ct}
 @DefregItemx {ssc}
 @DefregListEndx {skw}
-@cindex width escape (@code{\w})
+@cindex width computation escape sequence (@code{\w})
 Interpolate the width of @var{anything} in basic units.  This escape
 sequence allows several properties of formatted output to be measured
 without writing it out.
@@ -14493,9 +14491,12 @@ The length of the string 'abc' is \w'abc'u.
 
 @cindex dummy environment, used by @code{\w} escape sequence
 @cindex environment, dummy, used by @code{\w} escape sequence
-@var{anything} is processed in a dummy environment:@: this means that
-font and type size changes, for example, may occur within it without
-affecting subsequent output.
+The formatter processes
+@var{anything}
+in a dummy environment:@:
+this means that font and type size changes,
+for example,
+may occur within it without affecting subsequent output.
 
 @need 500
 After each use, @code{\w} sets several registers.
@@ -14683,7 +14684,7 @@ above.
 @cindex drawing vertical lines (@code{\L})
 @cindex vertical line drawing (@code{\L})
 @cindex line, vertical, drawing (@code{\L})
-@cindex box rule rule special character(@code{\[br]})
+@cindex box rule special character (@code{\[br]})
 Draw a vertical line of length @var{l} from the drawing position.
 Downward motion is positive.  The default scaling unit is @samp{v}.  The
 default glyph is the box rule, @code{\[br]}.  As with vertical motion
@@ -16990,8 +16991,7 @@ standard error stream; @ref{Debugging}.
 @cindex copy mode, and @code{writec} request
 @cindex @code{writec} request, and copy mode
 @cindex mode, copy, and @code{writec} request
-@cindex write to file stream (@code{write}, @code{writec})
-@cindex file stream, write to (@code{write}, @code{writec})
+@cindex file stream, writing to (@code{write}, @code{writec})
 Write @var{contents} to @var{stream}, which must previously have been
 the subject of an @code{open} (or @code{opena}) request.  GNU
 @command{troff} flushes the stream after writing to it.
@@ -17694,7 +17694,7 @@ contrast
 removes a leading neutral double quote
 @samp{"}
 from
-@var{contents},
+@var{message},
 permitting initial embedded spaces in it.
 
 @code{tmc} works as
@@ -17771,10 +17771,9 @@ immutable and their details unknown to the formatter.
 @endDefreq
 
 @Defreq {pcomposite, }
-@cindex dumping defined composite characters (@code{pcomposite})
-@cindex defined composite characters, dumping (@code{pcomposite})
-@cindex composite characters, defined, dumping (@code{pcomposite})
-@cindex characters, composite, dumping defined (@code{pcomposite})
+@cindex dumping composite character mappings (@code{pcomposite})
+@cindex composite characters mappings, dumping (@code{pcomposite})
+@cindex character mappings, composite, dumping (@code{pcomposite})
 Report,
 to the standard error stream,
 the list of defined composite character mappings.
@@ -18414,10 +18413,10 @@ are transparent at the beginning of a line only in compatibility mode.
 That is,
 upon interpreting them,
 GNU
-.@command{troff} @c GNU
+@command{troff} @c GNU
 no longer recognizes a control character on the input line;
 AT&T
-.@command{troff} @c AT&T
+@command{troff} @c AT&T
 does.
 
 For example, this code produces bold output in both cases, but the text
