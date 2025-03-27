@@ -18625,9 +18625,23 @@ The @code{bp} request differs from @acronym{AT&T} @code{troff}: GNU
 number; the former (somewhat uselessly) does.
 
 @cindex @code{pm} request, incompatibilities with @acronym{AT&T} @code{troff}
-The @code{pm} request differs from @acronym{AT&T} @code{troff}: GNU
-@code{troff} reports the sizes of macros, strings, and diversions in
-bytes and ignores an argument to report only the sum of the sizes.
+In @acronym{AT&T}
+@command{troff}, @c AT&T
+the
+@code{pm}
+request reports
+macro,
+string,
+and
+diversion
+sizes in units of 128-byte blocks,
+and an argument reduces the report to a sum of the above in the same
+units.
+GNU
+@command{troff} @c GNU
+reports the sizes in bytes if given no arguments,
+and otherwise dumps
+the @acronym{JSON}-encoded name and contents of each named argument.
 
 @cindex @code{ss} request, incompatibilities with @acronym{AT&T} @code{troff}
 Unlike @acronym{AT&T} @code{troff}, GNU @code{troff} does not ignore the
