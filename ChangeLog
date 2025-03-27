@@ -1,3 +1,23 @@
+2025-03-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor.
+
+	Rename `read_string()` to `read_rest_of_line_as_argument()`.
+	What it reads does not necessarily become a *roff language
+	string.
+
+	* src/roff/troff/input.cpp: Do it.
+	* src/roff/troff/token.h: Update declaration.
+	* src/roff/troff/env.cpp (override_sizes)
+	(read_hyphenation_patterns_from_file)
+	(load_hyphenation_patterns_from_file)
+	(append_hyphenation_patterns_from_file):
+	* src/roff/troff/input.cpp (next_file, line_file)
+	(do_source, pipe_source_request, open_file, open_request)
+	(opena_request, abort_request, pipe_output, system_request)
+	(copy_file, transparent_file, do_macro_source): Update call
+	sites.
+
 2025-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/include/json-encode.h (struct json_char): Use explicitly

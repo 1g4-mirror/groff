@@ -1334,7 +1334,7 @@ void override_sizes()
   int *sizes = new int[n]; // C++03: new int[n]();
   (void) memset(sizes, 0, (n * sizeof(int)));
   int i = 0;
-  char *buf = read_string();
+  char *buf = read_rest_of_line_as_argument();
   if (!buf)
     return;
   char *p = strtok(buf, " \t");
@@ -4493,7 +4493,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
 
 static void read_hyphenation_patterns_from_file(bool append)
 {
-  char *filename = read_string();
+  char *filename = read_rest_of_line_as_argument();
   if (filename != 0 /* nullptr */) {
     if (0 /* nullptr */ == current_language)
       error("no current hyphenation language");
@@ -4513,8 +4513,8 @@ static void load_hyphenation_patterns_from_file()
     return;
   }
   read_hyphenation_patterns_from_file(false /* append */);
-  // No `skip_line()` here; the above function calls `read_string()` and
-  // `tok.next()`.
+  // No `skip_line()` here; the above function calls
+  // `read_rest_of_line_as_argument()` and `tok.next()`.
 }
 
 static void append_hyphenation_patterns_from_file()
@@ -4526,8 +4526,8 @@ static void append_hyphenation_patterns_from_file()
     return;
   }
   read_hyphenation_patterns_from_file(true /* append */);
-  // No `skip_line()` here; the above function calls `read_string()` and
-  // `tok.next()`.
+  // No `skip_line()` here; the above function calls
+  // `read_rest_of_line_as_argument()` and `tok.next()`.
 }
 
 // Most hyphenation functionality is environment-specific; see

@@ -115,7 +115,7 @@ extern token tok;		// the current token
 extern symbol get_name(bool /* required */ = false);
 extern symbol get_long_name(bool /* required */ = false);
 extern charinfo *get_optional_char();
-extern char *read_string();
+extern char *read_rest_of_line_as_argument();
 extern void check_missing_character();
 extern void skip_line();
 extern void handle_initial_title();

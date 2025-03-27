@@ -920,7 +920,7 @@ void next_file()
 {
   char *filename = 0 /* nullptr */;
   if (has_arg(true /* peek */)) {
-    filename = read_string();
+    filename = read_rest_of_line_as_argument();
     tok.next();
   }
   if (0 /* nullptr */ == filename)
@@ -6463,7 +6463,7 @@ void line_file()
   int n;
   if (get_integer(&n)) {
     if (has_arg(true /* peek */)) {
-      const char *reported_file_name = read_string();
+      const char *reported_file_name = read_rest_of_line_as_argument();
       (void) input_stack::set_location(reported_file_name, (n - 1));
       delete[] reported_file_name;
       tok.next();
@@ -6837,7 +6837,7 @@ static void while_continue_request()
 
 void do_source(bool quietly)
 {
-  char *filename = read_string();
+  char *filename = read_rest_of_line_as_argument();
   errno = 0;
   FILE *fp = include_search_path.open_file_cautious(filename);
   if (fp != 0 /* nullptr */)
@@ -6887,7 +6887,7 @@ void pipe_source_request() // .pso
     skip_line();
     return;
   }
-  char *pcmd = read_string();
+  char *pcmd = read_rest_of_line_as_argument();
   // `has_arg()` should have ensured that this pointer is non-null.
   assert(pcmd != 0 /* nullptr */);
   if (0 /* nullptr */ == pcmd)
@@ -7636,7 +7636,7 @@ static void open_file(bool appending)
 {
   symbol stream = get_name(true /* required */);
   if (!stream.is_null()) {
-    char *filename = read_string();
+    char *filename = read_rest_of_line_as_argument();
     if (filename != 0 /* nullptr */) {
       const string mode = appending ? "appending" : "writing";
       errno = 0;
@@ -7683,7 +7683,8 @@ static void open_request() // .open
   }
   else
     open_file(false /* appending */);
-  // No skip_line() here; open_file() calls read_string(), tok.next().
+  // No skip_line() here; open_file() calls
+  // read_rest_of_line_as_argument(), tok.next().
 }
 
 static void opena_request() // .opena
@@ -7699,7 +7700,8 @@ static void opena_request() // .opena
   }
   else
     open_file(true /* appending */);
-  // No skip_line() here; open_file() calls read_string(), tok.next().
+  // No skip_line() here; open_file() calls
+  // read_rest_of_line_as_argument(), tok.next().
 }
 
 static void close_stream(symbol &stream)
@@ -8625,7 +8627,7 @@ void abort_request()
 // stream pointer.
 //
 // The caller has responsibility for `delete`ing the returned array.
-char *read_string()
+char *read_rest_of_line_as_argument()
 {
   int len = 256;
   char *s = new char[len]; // C++03: new char[len]();
@@ -8676,7 +8678,7 @@ void pipe_output()
     skip_line();
     return;
   }
-  char *pc = read_string();
+  char *pc = read_rest_of_line_as_argument();
   // `has_arg()` should have ensured that this pointer is non-null.
   assert(pc != 0 /* nullptr */);
   if (0 /* nullptr */ == pc)
@@ -8716,7 +8718,7 @@ void system_request()
     skip_line();
     return;
   }
-  char *command = read_string();
+  char *command = read_rest_of_line_as_argument();
   // `has_arg()` should have ensured that this pointer is non-null.
   assert(command != 0 /* nullptr */);
   if (0 /* nullptr */ == command)
@@ -8744,7 +8746,7 @@ void copy_file()
     handle_initial_request(COPY_FILE_REQUEST);
     return;
   }
-  char *filename = read_string();
+  char *filename = read_rest_of_line_as_argument();
   if (want_break)
     curenv->do_break();
   if (filename != 0 /* nullptr */)
@@ -8787,7 +8789,7 @@ void transparent_file()
     handle_initial_request(TRANSPARENT_FILE_REQUEST);
     return;
   }
-  char *filename = read_string();
+  char *filename = read_rest_of_line_as_argument();
   if (want_break)
     curenv->do_break();
   if (filename != 0 /* nullptr */) {
@@ -8952,7 +8954,7 @@ static void process_startup_file(const char *filename)
 
 void do_macro_source(bool quietly)
 {
-  char *macro_filename = read_string();
+  char *macro_filename = read_rest_of_line_as_argument();
   char *path;
   FILE *fp = mac_path->open_file(macro_filename, &path);
   if (fp != 0 /* nullptr */) {
