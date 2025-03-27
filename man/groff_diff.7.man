@@ -4266,7 +4266,7 @@ It also
 removes a leading neutral double quote
 .RB \[oq] \[dq] \[cq]
 from
-.IR contents ,
+.I file-identifier,
 permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 .
@@ -4290,7 +4290,7 @@ and reads it to the end of the input line in copy mode.
 GNU
 .I troff \" GNU
 strips a leading neutral double quote from the argument,
-permitting initial embedded spaces.
+permitting initial embedded spaces in it.
 .
 .
 .TP
@@ -4311,13 +4311,12 @@ or diversion
 .I file
 GNU
 .I troff \" GNU
-strips a leading neutral double quote from the argument,
-permitting initial embedded spaces.
-.
-Further,
-spaces in
-.I file
-are accepted as part of the file name.
+removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq]
+from
+.IR file ,
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
 .
 .
 .TP
@@ -4346,7 +4345,7 @@ Negative values are erroneous.
 GNU
 .I troff \" GNU
 strips a leading neutral double quote from the argument,
-permitting initial embedded spaces.
+permitting initial embedded spaces in it.
 .
 .
 .TP
@@ -4433,9 +4432,11 @@ if the macro is called with the \[lq]normal\[rq] control character
 (\[lq].\[rq] by default),
 and\~0 otherwise.
 .
-This facility allows the reliable modification of requests.
+This facility allows requests to be reliably wrapped by a macro.
 .
-Using this register outside of a macro definition makes no sense.
+Interpolating the
+.B .br
+register outside of a macro definition makes no sense.
 .
 .
 .TP
