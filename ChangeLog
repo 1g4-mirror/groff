@@ -1,5 +1,14 @@
 2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m4/groff.m4 (GROFF_PROG_SH_IS_POSIX_8_CONFORMING): Add
+	`AC_REQUIRE` on `GROFF_PROG_TEST_SUPPORTS_EF_OPTION`, because we
+	need the shell variable `test_ef_works` to be populated.  Also
+	fix latent m4 syntax error.
+	* configure.ac: Drop `GROFF_PROG_TEST_SUPPORTS_EF_OPTION`, now
+	depended-upon inside "groff.m4".
+
+2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* gnulib: Update stable/2025-01 branch to commit 3fbc2c7bb3, 3
 	March.
 

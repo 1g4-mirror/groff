@@ -1,5 +1,5 @@
 # Autoconf macros for groff.
-# Copyright (C) 1989-2024 Free Software Foundation, Inc.
+# Copyright (C) 1989-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -1813,13 +1813,14 @@ AC_DEFUN([GROFF_PROG_TEST_SUPPORTS_EF_OPTION],
 # (or earlier) shell features, if we happen to rely upon them.  Solaris
 # 10 /bin/sh is notoriously incapable.
 
-AC_DEFUN([GROFF_PROG_SH_IS_POSIX_8_CONFORMING],
+AC_DEFUN([GROFF_PROG_SH_IS_POSIX_8_CONFORMING], [
+  AC_REQUIRE([GROFF_PROG_TEST_SUPPORTS_EF_OPTION])
   POSIX_SHELL_PROG=/bin/sh
   if test "$test_ef_works" = no
   then
     # Use Bash if it is available; otherwise programs must complain at
     # runtime if the environment is non-conforming to POSIX.
-    [AC_PATH_PROGS([POSIX_SHELL_PROG], [bash], [no])
+    AC_PATH_PROGS([POSIX_SHELL_PROG], [bash], [no])
   fi
   AC_SUBST([POSIX_SHELL_PROG])
 ])
