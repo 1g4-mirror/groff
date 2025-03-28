@@ -1,5 +1,13 @@
 2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m4/groff.m4 (GROFF_PROG_TEST_SUPPORTS_EF_OPTION): Force
+	Autoconf to test "/bin/sh", not a more capable and more
+	POSIX-conforming shell it might manage to scare up, because we
+	need to know whether to update our script programs' declared
+	shell interpreter.
+
+2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_PROG_SH_IS_POSIX_8_CONFORMING): Add
 	`AC_REQUIRE` on `GROFF_PROG_TEST_SUPPORTS_EF_OPTION`, because we
 	need the shell variable `test_ef_works` to be populated.  Also

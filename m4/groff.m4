@@ -1796,11 +1796,19 @@ AC_DEFUN([GROFF_DIFF_D],
 # Check if 'test' supports the option `-ef`.  POSIX Issue 8 (2024)
 # mandates it.  It could be a shell builtin or a separate executable; we
 # don't care as long as it works.
+#
+# We want to truly test /bin/sh here, because that's what our script
+# programs identify as the interpreter unless overridden by
+# POSIX_SHELL_PROG; determination of that depends on _this_ test.
+#
+# Using plain 'sh' leads to false positives because Autoconf is good at
+# locating a capable shell.  But we want to test the rattletrap jalopy
+# that a system might have installed as /bin/sh (hello, Solaris 10).
 
 AC_DEFUN([GROFF_PROG_TEST_SUPPORTS_EF_OPTION],
   [AC_MSG_CHECKING(whether 'test' supports '-ef' option)
   test_ef_works=no
-  sh -c 'test /dev/null -ef /dev/null > /dev/null 2>&1' \
+  /bin/sh -c 'test /dev/null -ef /dev/null > /dev/null 2>&1' \
    && test_ef_works=yes
   AC_MSG_RESULT([$test_ef_works])
 ])
