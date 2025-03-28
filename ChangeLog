@@ -43,6 +43,14 @@
 
 2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::possibly_break_line):
+	Supply more information in "cannot adjust line" diagnostic;
+	since we now have two others of this form that warn when an
+	output line (1) has no adjustable spaces or (2) oversets, in
+	this case disclose that it's (3) underset, and say by how much.
+
+2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_PROG_TEST_SUPPORTS_EF_OPTION): Force
 	Autoconf to test "/bin/sh", not a more capable and more
 	POSIX-conforming shell it might manage to scare up, because we

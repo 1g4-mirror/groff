@@ -2260,13 +2260,18 @@ void environment::possibly_break_line(bool must_break_here,
     bp->nd->split(bp->index, &pre, &post);
     *ndp = post;
     hunits extra_space_width = H0;
+    // TODO: We compute (target_text_length - bp->width) in several
+    // cases below.  Consider computing it once, unconditionally, and
+    // giving it a name (`extra_space_width`?  `desired_space`?).
     switch (adjust_mode) {
     case ADJUST_BOTH:
       if (bp->nspaces != 0)
 	extra_space_width = target_text_length - bp->width;
       else if (bp->width > 0 && target_text_length > 0
 	       && target_text_length > bp->width)
-	output_warning(WARN_BREAK, "cannot adjust line");
+	output_warning(WARN_BREAK, "cannot adjust line; underset by %1"
+                      " units",
+		      hunits(target_text_length - bp->width).to_units());
       break;
     case ADJUST_CENTER:
       saved_indent += (target_text_length - bp->width)/2;
