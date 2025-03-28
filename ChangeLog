@@ -1,3 +1,8 @@
+2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* gnulib: Update stable/2025-01 branch to commit 3fbc2c7bb3, 3
+	March.
+
 2025-03-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor.
