@@ -1708,7 +1708,8 @@ but have text font variants.
 The plus,
 minus,
 and equals signs
-are normally drawn from text fonts have special font variants.
+are normally drawn from text fonts,
+but have special font variants.
 .
 Variants may differ in appearance or spacing depending on the device and
 font selected.
