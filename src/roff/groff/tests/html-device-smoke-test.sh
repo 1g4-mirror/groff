@@ -55,7 +55,7 @@ foobar
 
 echo "checking production of inline image for tbl(1) table" >&2
 output=$(echo "$input" | "$groff" -t -Thtml)
-echo "$output" | grep -q '<img src="grohtml-[0-9]\+-1.png"' || wail
+echo "$output" | grep -q '<img src="grohtml-[0-9]\{1,\}-1.png"' || wail
 
 input='.EQ
 x sup 2 + y sup 2 = z sup 2
@@ -63,7 +63,7 @@ x sup 2 + y sup 2 = z sup 2
 
 echo "checking production of inline image for eqn(1) equation" >&2
 output=$(echo "$input" | "$groff" -e -Thtml)
-echo "$output" | grep -q '<img src="grohtml-[0-9]\+-2.png"' || wail
+echo "$output" | grep -q '<img src="grohtml-[0-9]\{1,\}-2.png"' || wail
 
 cleanup
 

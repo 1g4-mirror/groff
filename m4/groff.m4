@@ -942,7 +942,7 @@ AC_DEFUN([GROFF_PAGE], [
   papersize=/etc/papersize
   if test -z "$PAGE" && test -r "$papersize"
   then
-    sedexpr='s/#.*//;s/[ \t]\+/ /;s/ \+$//;s/^ \+//;/^$/d;p'
+    sedexpr='s/#.*//;s/[ \t]\{1,\}/ /;s/  *$//;s/^  *//;/^$/d;p'
     PAGE=`sed -n "$sedexpr" "$papersize"`
     test -n "$PAGE" && whence=$papersize
   fi
@@ -969,10 +969,10 @@ AC_DEFUN([GROFF_PAGE], [
 
     if test -n "$descfile"
     then
-      if grep -q ['^paperlength[	 ]\+841890'] "$descfile"
+      if grep -q ['^paperlength[	 ]\{1,\}841890'] "$descfile"
       then
 	PAGE=A4
-      elif grep -q ['^papersize[	 ]\+[aA]4'] "$descfile"
+      elif grep -q ['^papersize[	 ]\{1,\}[aA]4'] "$descfile"
       then
 	PAGE=A4
       fi
@@ -986,7 +986,7 @@ AC_DEFUN([GROFF_PAGE], [
     domains=
     if test -r "$resolvconf"
     then
-      sedexpr='s/#.*//;s/[ \t]\+/ /;s/ \+$//;s/^ \+//;/^$/d;
+      sedexpr='s/#.*//;s/[ \t]\{1,\}/ /;s/  *$//;s/^  *//;/^$/d;
 /^\(domain\|search\)/!d;s/\(domain\|search\) //;p'
       domains=`sed -n "$sedexpr" "$resolvconf"`
     fi

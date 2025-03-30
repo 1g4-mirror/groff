@@ -1,3 +1,23 @@
+2025-03-30  Lennart Jablonka <humm@ljabl.com>
+
+	Don't use non-POSIX syntax `\+` in BREs.
+
+	It's implementation-defined whether \+ behaves like literal + or
+	like \{1,\}.  (The same applies to \? and \|; I didn't find uses
+	of those.)  As it happens, OpenBSD treats it as literal '+'.
+
+	* m4/groff.m4 (GROFF_PAGE):
+	* makevarescape.sed:
+	* src/libs/libgroff/make-uniuni:
+	* src/roff/groff/tests/html-device-smoke-test.sh:
+	* src/utils/afmtodit/make-afmtodit-tables: Use more portable
+	sed(1) and grep(1) syntax.
+
+	Found through a failure of html-device-smoke-test.sh.
+
+	See <https://pubs.opengroup.org/onlinepubs/\
+	9799919799.2024edition/basedefs/V1_chap09.html#tag_09_03_02>.
+
 2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[font]: Update and parallelize `DESC` file generation.
