@@ -859,10 +859,18 @@ manuals, and of man pages to this day.} When you see a citation like
 @cite{groff_man@r{(7)}}, understand that you can type @samp{man
 groff_man} at the command line to view it.  The numbered category
 distinguishes pages by their purpose.  You can try @samp{man 'groff(1)'}
-and @samp{man 'groff(7)'} to observe this distinction.@footnote{POSIX
-has not standardized a mechanism for the @code{man} command to
-distinguish pages by numeric category.  If @samp{man 'groff(7)'}
-produces an error, attempt @samp{man 7 groff} or @samp{man -s 7 groff}.}
+and @samp{man 'groff(7)'} to observe this
+distinction.@footnote{@acronym{POSIX} has not standardized a mechanism
+for the
+@code{man}
+command to distinguish pages by numeric category.
+If
+ @samp{man 'groff(7)'}
+produces an error,
+attempt
+@samp{man 7 groff}
+or
+@samp{man -s 7 groff}.}
 Your system likely offers an @w{@cite{intro@r{(1)}}} page that will help
 you make the most of this resource.
 
@@ -18779,7 +18787,7 @@ All files that GNU
 reads and writes are text files.@footnote{GNU
 @command{troff} @c GNU
 also reads files that don't satisfy
-the strict POSIX definition of a text file---for example,
+the strict @acronym{POSIX} definition of a text file---for example,
 those lacking a final newline character---and the
 @code{cf}
 and
