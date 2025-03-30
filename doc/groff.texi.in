@@ -19944,8 +19944,8 @@ directive.
 
 @item unitwidth @var{n}
 @kindex unitwidth
-Quantities in the font description files are in basic units for fonts
-whose type size is @var{n}@tie{}scaled points.
+Arbitary basis with respect to which font metrics are proportionally
+scaled when rendering glyphs at a type size of one point.
 
 @item unscaled_charwidths
 @kindex unscaled_charwidths
@@ -20001,20 +20001,59 @@ information about the device.
 On typesetting output devices, each font is typically available at
 multiple sizes.  While paper measurements in the device description file
 are in absolute units, measurements applicable to fonts must be
-proportional to the type size.  @code{groff} achieves this using the
-precedent set by @acronym{AT&T} device-independent @code{troff}: one
-font size is chosen as a norm, and all others are scaled linearly
-relative to that basis.  The ``unit width'' is the number of basic units
-per point when the font is rendered at this nominal size.
+proportional to the type size.
+The font's
+@slanted{unit width}
+establishes a numerical basis
+that permits all of its metrics to be expressed as integers
+if rendered at one point.
+When the formatter configures a type size,
+it scales the metrics linearly relative to that basis.
+The unit width has no inherent relationship to the device resolution;
+all it does is provide a basis for the magnitudes of the font metrics.
+The same division procedure applies to all font metrics.
+One observes that whatever unit might select for the unit width,
+the division operation cancels them out,
+leaving a dimensionless quantity.
 
-For instance, @code{groff}'s @code{lbp} device uses a @code{unitwidth}
-of@tie{}800.  Its Times roman font @samp{TR} has a @code{spacewidth}
-of@tie{}833; this is also the width of its comma, period, centered
-period, and mathematical asterisk, while its @samp{M} is 2,963 basic
-units.  Thus, an @samp{M} on the @code{lbp} device is 2,963 basic units
-wide at a notional type size of 800@tie{}points.@footnote{800-point type
-is not practical for most purposes, but using it enables the quantities
-in the font description files to be expressed as integers.}
+For instance,
+@code{groff}'s
+@code{lbp}
+device uses a
+@code{unitwidth}
+directive with an argument
+of@tie{}800.
+Its Times roman font
+@samp{TR}
+has a
+@code{spacewidth}
+of@tie{}833;
+this is also the width of its comma,
+period,
+centered period,
+and mathematical asterisk,
+while its
+@samp{M}
+has a width of 2,963.
+Thus,
+an
+@samp{M}
+on the
+@code{lbp}
+device is 2,963 ÷ 800 times the unit width
+(approximately 3.7).
+At a type size of 10 points,
+a Times roman
+@samp{M}
+is therefore 37 units wide.
+
+@Example
+$ groff -T lbp
+.ps 10
+.nr Mw \w'M'
+.tm width of 'M' at 10 points=\n(Mw
+    @result{} width of 'M' at 10 points=37
+@endExample
 
 A font description file has two sections.  The first is a sequence of
 directives, and is parsed similarly to the @file{DESC} file described

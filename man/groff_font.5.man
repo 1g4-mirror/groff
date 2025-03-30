@@ -458,10 +458,8 @@ output devices use this directive.
 .
 .TP
 .BI unitwidth\~ n
-Quantities in the font description files are in basic units for fonts
-whose type size is
-.IR n \~scaled
-points.
+Arbitrary basis with respect to which font metrics are proportionally
+scaled when rendering glyphs at a type size of one point.
 .
 .
 .TP
@@ -543,43 +541,56 @@ While paper measurements in the device description file are in absolute
 units,
 measurements applicable to fonts must be proportional to the type size.
 .
-.I groff
-achieves this using the precedent set by AT&T device-independent
-.IR troff : \" AT&T
-one font size is chosen as a norm,
-and all others are scaled linearly relative to that basis.
+The font's
+.I "unit width"
+establishes a numerical basis
+that permits all of its metrics to be expressed as integers
+if rendered at one point.
 .
-The \[lq]unit width\[rq] is the number of basic units per point when the
-font is rendered at this nominal size.
+When the formatter configures a type size,
+it scales the metrics linearly relative to that basis.
+.
+The unit width has no inherent relationship to the device resolution;
+all it does is provide a basis for the magnitudes of the font metrics.
+.
+The same division procedure applies to all font metrics.
+.
+One observes that whatever unit might select for the unit width,
+the division operation cancels them out,
+leaving a dimensionless quantity.
 .
 .
 .P
 For instance,
-.IR groff 's
+.BR groff 's
 .B lbp
 device uses a
-.B unitwidth
-of\~800.
-.
+.B \%unitwidth
+directive with an argument
+.RB of\~ 800 .
 Its Times roman font
-.RB (\[lq] TR \[rq])
+.B TR
 has a
-.B spacewidth
-of\~833;
+.B \%spacewidth
+.RB of\~ 833 ;
 this is also the width of its comma,
 period,
 centered period,
 and mathematical asterisk,
-while its \[lq]M\[rq] is 2,963 basic units.
-.
+while its
+.RB \[lq] M \[rq]
+has a width of 2,963.
 Thus,
-an \[lq]M\[rq] on the
+an
+.RB \[lq] M \[rq]
+on the
 .B lbp
-device is 2,963 basic units wide at a notional type size of 800\~points.
-.
-(800-point type is not practical for most purposes,
-but using it enables the quantities in the font description files to be
-expressed as integers.)
+device is 2,963 \[tdi] 800 times the unit width
+(approximately 3.7).
+At a type size of 10 points,
+a Times roman
+.RB \[lq] M \[rq]
+is therefore 37 units wide.
 .
 .
 .P
