@@ -1821,7 +1821,7 @@ AC_DEFUN([GROFF_PROG_TEST_SUPPORTS_EF_OPTION],
 # (or earlier) shell features, if we happen to rely upon them.  Solaris
 # 10 /bin/sh is notoriously incapable.
 
-AC_DEFUN([GROFF_PROG_SH_IS_POSIX_8_CONFORMING], [
+AC_DEFUN([GROFF_PROG_SH], [
   AC_REQUIRE([GROFF_PROG_TEST_SUPPORTS_EF_OPTION])
   POSIX_SHELL_PROG=/bin/sh
   if test "$test_ef_works" = no

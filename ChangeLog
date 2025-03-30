@@ -1,3 +1,11 @@
+2025-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m4/groff.m4 (GROFF_PROG_SH_IS_POSIX_8_CONFORMING): Rename
+	this...
+	(GROFF_PROG_SH): ...to this.  We may have demands on the shell
+	other than POSIX Issue 8 conformance.
+	* configure.ac: Track rename.
+
 2025-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m4/groff.m4 (GROFF_PROG_TEST_SUPPORTS_EF_OPTION): Force
