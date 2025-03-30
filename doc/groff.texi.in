@@ -20241,21 +20241,23 @@ parentheses in some fonts.
 
 The
 @var{index}
-field is an integer that uniquely identifies a glyph within the font.
-The glyph can be specified to
-@code{troff} @c generic
-using this index by means of the
-@code{\N}
-escape sequence.
-The index can be any integer.@footnote{that is, any integer parsable by
-the C standard library's
+field is an integer that uniquely identifies a glyph within the font;
+any integer is accepted as input,@footnote{that is,
+any integer parsable
+by the C standard library's
 @cite{strtol@r{(3)}}
 function}
+but no practical font employs all possible values.
 An
 @var{index}
-is limited to the range of the C language
-@code{int}
-type on the system.
+is limited to the range of the system's C language data type
+@code{int}.
+In a
+@command{troff} @c generic
+document,
+use the indexed character escape sequence
+@code{\N}
+to specify a glyph by index.
 
 The @var{entity-name} field defines an identifier for the glyph that the
 postprocessor uses to print the GNU @code{troff} glyph @var{name}.  This

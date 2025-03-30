@@ -945,25 +945,26 @@ parentheses in some fonts.
 .P
 The
 .I index
-field is an integer that uniquely identifies a glyph within the font.
-.
-The glyph can be specified to
-.I troff \" generic
-using this index by means of the
-.B \[rs]N
-escape sequence.
-.
-The index can be any integer
+field is an integer that uniquely identifies a glyph within the font;
+any integer is accepted as input,
 (that is,
-any integer parsable by the C standard library's
+any integer parsable
+by the C standard library's
 .MR strtol 3
-function).
+function)
+but no practical font employs all possible values.
 .
 An
 .I index
-is limited to the range of the C language
-.I int
-type on the system.
+is limited to the range of the system's C language data type
+.IR int .
+.
+In a
+.I troff \" generic
+document,
+use the indexed character escape sequence
+.B \[rs]N
+to specify a glyph by index.
 .
 .
 .P
