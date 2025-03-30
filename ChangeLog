@@ -7991,8 +7991,10 @@
 
 2024-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* bootstrap: Resync with gnulib upstream.  Thanks to Collin Funk
-	for the suggestion.
+	* bootstrap: Resync with gnulib upstream.  Thanks to Dave Kemper
+	for the report and Collin Funk for the suggested fix.
+
+	Fixes <https://savannah.gnu.org/bugs/?65800>.
 
 2024-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
