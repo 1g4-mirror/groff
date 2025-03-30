@@ -35,6 +35,17 @@
 
 2025-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::next): Drop warning
+	diagnostic.  DWB troff accepts a negative argument to the `\N`
+	escape sequence; so should we.  (Interestingly, it seems to be
+	difficult or impossible to get Heirloom Doctools to emit a
+	"trout" `N` command--some table maps negative character indices
+	to special character names.  For instance, we expect `N-1` but
+	get `Chy`.  If no mapping exists for `\N`'s argument, it emits
+	_no_ trout command for the character.)
+
+2025-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_PROG_SH_IS_POSIX_8_CONFORMING): Rename
 	this...
 	(GROFF_PROG_SH): ...to this.  We may have demands on the shell
