@@ -10514,13 +10514,24 @@ one.
 @cindex font, text
 @cindex font, special
 @cindex font, unstyled
+@cindex normal (font stroke weight)
+@cindex heavy (font stroke weight)
+@cindex upright (font shape)
+@cindex slanted (font shape)
+@cindex oblique (font shape)
 In digital typography, a @dfn{font} is a collection of characters in a
 specific typeface that a device can render as glyphs at a desired
 size.@footnote{Terminals and some typesetters have fonts that render at
 only one or two sizes.  As examples, take the @code{groff} @code{lj4}
 device's Lineprinter, and @code{lbp}'s Courier and Elite faces.}  A
 @code{roff} formatter can change typefaces at any point in the text.
-The basic faces are a set of @dfn{styles} combining upright and slanted
+The basic faces are a set of
+@dfn{styles}
+combining
+@slanted{upright}
+and
+@slanted{slanted}
+(italic or oblique)
 shapes with normal and heavy stroke weights: @samp{R}, @samp{I},
 @samp{B}, and @samp{BI}---these stand for @slanted{roman},
 @slanted{italic}, @slanted{bold}, and @slanted{bold-italic}.  For
@@ -12037,9 +12048,9 @@ without any intervening space.
 @Defesc {\\@comma{}, , , }
 @cindex left italic correction (@code{\,})
 @cindex correction, left italic (@code{\,})
-@cindex correction between upright and oblique glyph (@code{\/}, @code{\,})
-@cindex roman glyph, correction before italic glyph (@code{\,})
-@cindex upright glyph, correction before oblique glyph (@code{\,})
+@cindex correction between upright and slanted glyph (@code{\/}, @code{\,})
+@cindex roman glyph, correction before slanted glyph (@code{\,})
+@cindex upright glyph, correction before slanted glyph (@code{\,})
 Apply a @dfn{left italic correction}:@:
 modify the spacing of the following glyph
 so that the distance between it and the preceding glyph
