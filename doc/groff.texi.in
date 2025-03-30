@@ -16719,10 +16719,8 @@ Both requests break the line before reading
 unless invoked with the no-break control character.
 
 When used in a diversion, these requests embed a node (@pxref{Gtroff
-Internals}) in it that, when interpolated, causes the contents of
-@var{file} to be copied to the output.  In @acronym{AT&T} @code{troff},
-@code{cf} does so even if a diversion is in use; this behavior is so
-anomalous that it must be considered a bug.
+Internals}) in it that, when interpolated, copies the contents of
+@var{file} to the output.
 
 @cindex @code{trf} request, and invalid characters
 @cindex characters, invalid for @code{trf} request
@@ -16769,6 +16767,15 @@ file@tie{}@file{f}, use
 @noindent
 The calls to @code{ev} prevent the partially collected output line
 from becoming part of the diversion (@pxref{Diversions}).
+
+@cindex AT&T troff bugs
+@cindex AT&T troff bug, in @code{cf} request
+@cindex bug, in AT&T troff @code{cf} request
+In @acronym{AT&T} @code{troff},
+@code{cf}
+copies the contents of @var{file} to the output immediately
+even if a diversion is active;
+this behavior is so anomalous that it must be considered a bug.
 @endDefreq
 
 @Defreq {nx, [[@code{"}]@Var{file}]}
