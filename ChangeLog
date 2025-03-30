@@ -1,3 +1,12 @@
+2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m4/groff.m4 (GROFF_PROG_SH): Search more aggressively for
+	Bourne/Korn-style shells that stand a better chance of being
+	POSIX-conforming in ways we require than, oh, say, Solaris 10
+	/bin/sh.  Search for bash, ksh, dash, and ash in that order.
+	If none are found, use /bin/sh anyway and surrender to our
+	run-time fate.
+
 2025-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m4/groff.m4 (GROFF_PROG_SH_IS_POSIX_8_CONFORMING): Rename

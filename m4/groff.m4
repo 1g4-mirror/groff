@@ -1823,12 +1823,17 @@ AC_DEFUN([GROFF_PROG_TEST_SUPPORTS_EF_OPTION],
 
 AC_DEFUN([GROFF_PROG_SH], [
   AC_REQUIRE([GROFF_PROG_TEST_SUPPORTS_EF_OPTION])
-  POSIX_SHELL_PROG=/bin/sh
+  POSIX_SHELL_PROG=no
   if test "$test_ef_works" = no
   then
-    # Use Bash if it is available; otherwise programs must complain at
-    # runtime if the environment is non-conforming to POSIX.
-    AC_PATH_PROGS([POSIX_SHELL_PROG], [bash], [no])
+    # Try to find a shell that is likely to be more modern than the
+    # system's /bin/sh; otherwise programs must complain at runtime if
+    # the environment is non-conforming to POSIX.
+    AC_PATH_PROGS([POSIX_SHELL_PROG], [bash ksh dash ash], [no])
+  fi
+  if test "$POSIX_SHELL_PROG" = no
+  then
+    POSIX_SHELL_PROG=/bin/sh
   fi
   AC_SUBST([POSIX_SHELL_PROG])
 ])
