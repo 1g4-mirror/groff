@@ -4725,7 +4725,8 @@
 	`write` and `writec` behave more like other requests that read
 	`contents` or `anything` arguments.
 
-	Fixes <https://savannah.gnu.org/bugs/?66255>.
+	Fixes <https://savannah.gnu.org/bugs/?66255>.  Problem appears
+	to date back to groff's birth.
 
 2024-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
