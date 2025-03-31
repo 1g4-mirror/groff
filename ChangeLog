@@ -10,8 +10,8 @@
 2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[nroff]: Now that our "configure" script searches for a shell
-	that is at least minimally competent, and an Automake macro to
-	expand its name, use it in the "nroff" shell script.  This
+	that is at least minimally competent, and has an Automake macro
+	to expand its name, use it in the "nroff" shell script.  This
 	change doesn't obviate the need for run-time checks for features
 	that we rely upon but which buggy shells mis-implement; we
 	_search_ for a good shell, but an unsatisfactory "/bin/sh" might
