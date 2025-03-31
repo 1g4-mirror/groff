@@ -20052,7 +20052,7 @@ $ groff -T lbp
 .ps 10
 .nr Mw \w'M'
 .tm width of 'M' at 10 points=\n(Mw
-    @result{} width of 'M' at 10 points=37
+    @error{} width of 'M' at 10 points=37
 @endExample
 
 A font description file has two sections.  The first is a sequence of
