@@ -20008,11 +20008,10 @@ that permits all of its metrics to be expressed as integers
 if rendered at one point.
 When the formatter configures a type size,
 it scales the metrics linearly relative to that basis.
-The unit width has no inherent relationship to the device resolution;
-all it does is provide a basis for the magnitudes of the font metrics.
-The same division procedure applies to all font metrics.
+The unit width has no inherent relationship to the device resolution,
+and the same division procedure applies to all font metrics.
 One observes that whatever unit might select for the unit width,
-the division operation cancels them out,
+the division operation implied by scaling cancels them out,
 leaving a dimensionless quantity.
 
 For instance,
