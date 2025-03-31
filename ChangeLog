@@ -1,5 +1,14 @@
 2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/nroff/tests/verbose-option-works.sh: Indirect
+	invocation of "nroff" command through a shell variable to ensure
+	that we test the one that has been built, not one in the $PATH.
+	Most other groff automated tests already work this way.  Also
+	check for POSIX-non-comforming shell, and skip test if one
+	doesn't seem to be present.
+
+2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[nroff]: Now that our "configure" script searches for a shell
 	that is at least minimally competent, and an Automake macro to
 	expand its name, use it in the "nroff" shell script.  This

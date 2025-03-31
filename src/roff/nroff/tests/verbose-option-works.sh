@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020-2024 Free Software Foundation, Inc.
+# Copyright (C) 2020-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
+
+nroff="${abs_top_builddir:-.}/nroff"
 
 if ! echo foobar | grep -qx foobar >/dev/null 2>&1
 then
@@ -49,8 +51,8 @@ export GROFF_TEST_GROFF=${abs_top_builddir:-.}/test-groff
 sedexpr='s/^PATH=.*test-groff /test-groff /'
 PATH=${abs_top_builddir:-.}:$PATH
 
-nroff_ver=$(nroff -v | awk 'NR == 1 {print $NF}')
-groff_ver=$(nroff -v | awk 'NR == 2 {print $NF}')
+nroff_ver=$("$nroff" -v | awk 'NR == 1 {print $NF}')
+groff_ver=$("$nroff" -v | awk 'NR == 2 {print $NF}')
 
 # If this test is skipped, you may need to `make distclean` and rebuild.
 echo nroff: $nroff_ver >&2
@@ -62,43 +64,51 @@ then
 fi
 
 echo "checking 'nroff -V'" >&2
-nroff -V | sed "$sedexpr"
-nroff -V | sed "$sedexpr" | grep -qx "test-groff -Tascii -mtty-char" \
+"$nroff" -V | sed "$sedexpr"
+"$nroff" -V | sed "$sedexpr" | grep -qx "test-groff -Tascii -mtty-char" \
     || wail
 
 echo "checking 'nroff -V 1'" >&2
-nroff -V 1 | sed "$sedexpr"
-nroff -V 1 | sed "$sedexpr" \
+"$nroff" -V 1 | sed "$sedexpr"
+"$nroff" -V 1 | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char 1" || wail
 
 echo "checking 'nroff -V \"1a 1b\"'" >&2
-nroff -V \"1a 1b\" | sed "$sedexpr"
-nroff -V \"1a 1b\" | sed "$sedexpr" \
+"$nroff" -V \"1a 1b\" | sed "$sedexpr"
+"$nroff" -V \"1a 1b\" | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char \"1a 1b\"" || wail
 
 echo "checking 'nroff -V \"1a 1b\" 2'" >&2
-nroff -V \"1a 1b\" 2 | sed "$sedexpr"
-nroff -V \"1a 1b\" 2 | sed "$sedexpr" \
+"$nroff" -V \"1a 1b\" 2 | sed "$sedexpr"
+"$nroff" -V \"1a 1b\" 2 | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char \"1a 1b\" 2" || wail
 
 echo "checking 'nroff -V 1a\\\"1b 2'" >&2
-nroff -V 1a\"1b 2 | sed "$sedexpr"
-nroff -V 1a\"1b 2 | sed "$sedexpr" \
+"$nroff" -V 1a\"1b 2 | sed "$sedexpr"
+"$nroff" -V 1a\"1b 2 | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char 1a\"1b 2" || wail
 
 echo "checking 'nroff -V -d FOO=BAR 1'" >&2
-nroff -V -d FOO=BAR 1 | sed "$sedexpr"
-nroff -V -d FOO=BAR 1 | sed "$sedexpr" \
+"$nroff" -V -d FOO=BAR 1 | sed "$sedexpr"
+"$nroff" -V -d FOO=BAR 1 | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char -d FOO=BAR 1" || wail
 
+echo "checking for argument declustering support" >&2
+"$nroff" -V -tz
+if [ $? -eq 2 ]
+then
+    echo "$0: shell is not POSIX-conforming; skipping" >&2
+    exit 77 # skip
+fi
+
 echo "checking argument declustering: 'nroff -V -tz'" >&2
-nroff -V -tz | sed "$sedexpr"
-nroff -V -tz | sed "$sedexpr" \
+"$nroff" -V -tz | sed "$sedexpr"
+"$nroff" -V -tz | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char -t -z" || wail
 
 echo "checking argument declustering: 'nroff -V -tzms'" >&2
-nroff -V -tzms | sed "$sedexpr"
-nroff -V -tzms | sed "$sedexpr" \
+"$nroff" -V -tzms | sed "$sedexpr"
+"$nroff" -V -tzms | sed "$sedexpr" \
     | grep -qx "test-groff -Tascii -mtty-char -t -z -ms" || wail
 
 test -z "$fail"
