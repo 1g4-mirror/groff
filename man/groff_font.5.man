@@ -562,17 +562,15 @@ leaving a dimensionless quantity.
 .
 .P
 For instance,
-.BR groff 's
+.IR groff 's
 .B lbp
 device uses a
 .B \%unitwidth
-directive with an argument
-.RB of\~ 800 .
+directive with an argument of\~800.
 Its Times roman font
 .B TR
 has a
-.B \%spacewidth
-.RB of\~ 833 ;
+.B \%spacewidth of\~833;
 this is also the width of its comma,
 period,
 centered period,
