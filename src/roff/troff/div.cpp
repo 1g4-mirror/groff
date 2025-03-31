@@ -167,7 +167,7 @@ void box()
 
 void box_append()
 {
-  do_divert(true /* appending */, true /* appending */);
+  do_divert(true /* appending */, true /* boxing */);
 }
 
 void diversion::need(vunits n)
