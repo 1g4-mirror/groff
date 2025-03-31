@@ -736,8 +736,7 @@ format or byte stream that a piece of (possibly emulated) hardware
 understands.  @code{groff} features output drivers for PostScript
 devices, terminal emulators (and other simple typewriter-like machines),
 X11 (for previewing), @TeX{} DVI, HP LaserJet@tie{}4/PCL5 printers,
-Canon LBP (@acronym{CaPSL}-using printers), @acronym{HTML},
-@acronym{XHTML}, and @acronym{PDF}.
+Canon LBP (@acronym{CaPSL}-using printers), HTML, XHTML, and PDF.
 
 
 @c =====================================================================
@@ -1239,7 +1238,7 @@ following output devices are available.
 For PostScript printers and previewers.
 
 @item pdf
-For @acronym{PDF} viewers or printers.
+For PDF viewers or printers.
 
 @item dvi
 For @TeX{} DVI format.
@@ -1295,7 +1294,7 @@ printers).
 @cindex @code{grohtml}, the program
 @item html
 @itemx xhtml
-To produce @acronym{HTML} and @acronym{XHTML} output, respectively.
+To produce HTML and XHTML output, respectively.
 This driver consists of two parts, a preprocessor
 (@command{pre-grohtml}) and a postprocessor (@command{post-grohtml}).
 @end table
@@ -2541,8 +2540,8 @@ A Swedish localization of @file{mm} is also available; see
 @section @file{mom}
 @cindex @file{mom} macro package
 
-The @file{mom} package's primary documentation is in @acronym{HTML}.
-Model documents illustrating many features are offered in @acronym{PDF}.
+The @file{mom} package's primary documentation is in HTML@.
+Model documents illustrating many features are offered in PDF@.
 See the @cite{groff@r{(1)}} man page,
 section ``Installation Directories'',
 for their location.
@@ -2559,7 +2558,7 @@ category.
 
 @item
 @file{mom-pdf.pdf}
-@acronym{PDF} features and usage.
+PDF features and usage.
 @end itemize
 
 The mom macros are in active development between @code{groff} releases.
@@ -2568,7 +2567,7 @@ available at @uref{http://www.schaffter.ca/mom/mom-05.html}.
 
 The @cite{groff_mom@r{(7)}} man page (type @samp{man groff_mom} at
 the command line) contains a partial list of available macros, however
-their usage is best understood by consulting the @acronym{HTML}
+their usage is best understood by consulting the HTML
 documentation.
 
 
@@ -20302,7 +20301,7 @@ The @var{entity-name} field defines an identifier for the glyph that the
 postprocessor uses to print the GNU @code{troff} glyph @var{name}.  This
 field is optional; it was introduced so that the @code{grohtml} output
 driver could encode its character set.  For example, the glyph
-@samp{\[Po]} is represented by @samp{&pound;} in @acronym{HTML} 4.0.
+@samp{\[Po]} is represented by @samp{&pound;} in HTML 4.0.
 For efficiency, these data are now compiled directly into
 @code{grohtml}.  @code{grops} uses the field to build sub-encoding
 arrays for PostScript fonts containing more than 256 glyphs.  Anything
