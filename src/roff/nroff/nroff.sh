@@ -1,8 +1,8 @@
-#!/bin/sh
+#!@POSIX_SHELL_PROG@
 #
 # Emulate nroff with groff.
 #
-# Copyright (C) 1992-2024 Free Software Foundation, Inc.
+# Copyright (C) 1992-2025 Free Software Foundation, Inc.
 #
 # Written by James Clark, Werner Lemberg, and G. Branden Robinson.
 #

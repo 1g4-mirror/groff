@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2020 Free Software Foundation, Inc.
+# Copyright (C) 2014-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -32,6 +32,7 @@ nroff: $(nroff_srcdir)/nroff.sh $(SH_DEPS_SED_SCRIPT)
 	&& sed -f $(SH_DEPS_SED_SCRIPT) \
 	       -e $(SH_SCRIPT_SED_CMD) \
 	       -e "s|[@]VERSION[@]|$(VERSION)|" \
+	       -e "s|[@]POSIX_SHELL_PROG[@]|$(POSIX_SHELL_PROG)|g" \
 	       $(nroff_srcdir)/nroff.sh \
 	       >$@ \
 	&& chmod +x $@

@@ -1,5 +1,22 @@
 2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[nroff]: Now that our "configure" script searches for a shell
+	that is at least minimally competent, and an Automake macro to
+	expand its name, use it in the "nroff" shell script.  This
+	change doesn't obviate the need for run-time checks for features
+	that we rely upon but which buggy shells mis-implement; we
+	_search_ for a good shell, but an unsatisfactory "/bin/sh" might
+	be all we find.  Also, we don't rely on the semantics of an
+	empty interpreter name (`#!` followed by a newline), because
+	some of our scripts need to invoke a subshell by name: 'test `sh
+	-c "echo foo"` && status=good' works; 'test ` -c "echo foo"` &&
+	status=good' does not.
+
+	* src/roff/nroff/nroff.sh: Update shebang line to use macro.
+	* src/roff/nroff/nroff.am (nroff): Perform macro substitution.
+
+2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_PROG_SH): Search more aggressively for
 	Bourne/Korn-style shells that stand a better chance of being
 	POSIX-conforming in ways we require than, oh, say, Solaris 10
