@@ -509,11 +509,13 @@ bool file_iterator::get_location(bool /*allow_macro*/,
 				 const char **filenamep, int *linenop)
 {
   *linenop = lineno;
-  if (filename != 0 && strcmp(filename, "-") == 0)
+  if (0 /* nullptr */ == filename)
+    return false;
+  if (strcmp(filename, "-") == 0)
     *filenamep = "<standard input>";
   else
     *filenamep = filename;
-  return 1;
+  return true;
 }
 
 void file_iterator::backtrace()

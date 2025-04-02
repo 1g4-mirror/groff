@@ -1,5 +1,14 @@
 2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (file_iterator::get_location): This
+	`bool`-returning function always returned true.  Return `false`
+	if no file name information is available; one should always be
+	available, and the line number is meaningless without a file
+	name (we handle the standard input stream specially, and it
+	_has_ a file name for our purposes).
+
+2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (string::json_extract):
 	* src/libs/libgroff/symbol.cpp (symbol::json_extract): Since we
 	return a pointer-to-const-char, null-terminate what we hand
