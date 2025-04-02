@@ -1,5 +1,13 @@
 2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (macro::json_dump): Add more
+	information when dumping a macro (or diversion or string):
+	report name of file where it's defined if this information is
+	available.  Also report line number and length.  Also favor
+	`errprint()` over `fputs()`.
+
+2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (file_iterator::get_location): This
 	`bool`-returning function always returned true.  Return `false`
 	if no file name information is available; one should always be

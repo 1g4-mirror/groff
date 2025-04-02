@@ -3711,13 +3711,30 @@ void macro::print_size()
 
 void macro::json_dump()
 {
-  if (p != 0 /* nullptr */)
+  bool need_comma = false;
+  // XXX: Unfortunately, if you alias or rename a request, the location
+  // of its invocation site is used for location information instead of
+  // its true origin.
+  if (filename != 0 /* nullptr */) {
+    symbol fn(filename); // `symbol` because it can't contain nulls.
+    const char *jsonfn = fn.json_extract();
+    errprint("\"file name\": %1", jsonfn);
+    free(const_cast<char *>(jsonfn));
+    fflush(stderr);
+    errprint(", \"starting line number\": %1", lineno);
+    need_comma = true;
+  }
+  if (need_comma)
+    errprint(", ");
+  errprint("\"length\": %1", len);
+  if (p != 0 /* nullptr */) {
+    if (need_comma)
+      errprint(", ");
     if (is_a_diversion)
       p->json_dump_diversion();
     else
       p->json_dump_macro();
-  else
-    fputs("\"\"", stderr);
+  }
 }
 
 // make a copy of the first n bytes
