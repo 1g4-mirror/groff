@@ -359,27 +359,29 @@ size_t string::json_length() const
 }
 
 // Like `extract()`, but double-quote the string and escape characters
-// per JSON and emit nulls.  This string is not null-terminated!
+// per JSON and emit nulls.
 const char *string::json_extract() const
 {
   const char *p = ptr;
+  char *r;
   size_t n = len;
   size_t i;
-  char *q = static_cast<char *>(calloc(this->json_length(),
+  char *q = static_cast<char *>(calloc(this->json_length() + 1,
 				       sizeof (char)));
   if (q != 0 /* nullptr */) {
-    char *r = q;
+    r = q;
     *r++ = '"';
     json_char ch;
     for (i = 0; i < n; i++, p++) {
       ch = json_encode_char(*p);
       for (size_t j = 0; j < ch.len; j++)
-        *r++ = ch.buf[j];
+	*r++ = ch.buf[j];
     }
     *r++ = '"';
   }
   else
     return strdup("\"\"");
+  *r++ = '\0';
   return q;
 }
 

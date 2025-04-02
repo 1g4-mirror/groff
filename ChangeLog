@@ -1,3 +1,11 @@
+2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp (string::json_extract):
+	* src/libs/libgroff/symbol.cpp (symbol::json_extract): Since we
+	return a pointer-to-const-char, null-terminate what we hand
+	back.  Impedance matching (or, more precisely, conversion)
+	between C strings and groff strings is just too hard otherwise.
+
 2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/nroff/tests/verbose-option-works.sh: Indirect

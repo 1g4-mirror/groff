@@ -199,28 +199,29 @@ size_t symbol::json_length() const
 
 // Like `extract()`, but double-quote the string and escape characters
 // per JSON.  (Unlike groff's `string`, a `symbol` doesn't contain
-// embedded null characters.)  This string is not null-terminated!
-// (The member variable backing us up _is_ a null-terminated C string.)
+// embedded null characters.)
 const char *symbol::json_extract() const
 {
   const char *p = s;
+  char *r;
   size_t n = strlen(s);
   size_t i;
-  char *q = static_cast<char *>(calloc(this->json_length(),
+  char *q = static_cast<char *>(calloc((this->json_length() + 1),
 				       sizeof (char)));
   if (q != 0 /* nullptr */) {
-    char *r = q;
+    r = q;
     *r++ = '"';
     json_char ch;
     for (i = 0; i < n; i++, p++) {
       ch = json_encode_char(*p);
       for (size_t j = 0; j < ch.len; j++)
-        *r++ = ch.buf[j];
+	*r++ = ch.buf[j];
     }
     *r++ = '"';
   }
   else
     return strdup("\"\""); // so it can be free()d
+  *r++ = '\0';
   return q;
 }
 
