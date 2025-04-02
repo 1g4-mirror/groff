@@ -525,7 +525,7 @@ void file_iterator::backtrace()
   // Get side effect of filename rewrite if stdin.
   (void) get_location(false /* allow macro */, &f, &n);
   if (program_name)
-    fprintf(stderr, "%s: ", program_name);
+    errprint("%1: ", program_name);
   errprint("backtrace: %3 '%1':%2\n", f, n,
 	   was_popened ? "pipe" : "file");
 }
@@ -1349,7 +1349,7 @@ static color *lookup_color(symbol nm)
   if (nm == default_symbol)
     return &default_color;
   color *c = (color *)color_dictionary.lookup(nm);
-  if (c == 0)
+  if (0 == c /* nullptr */)
     warning(WARN_COLOR, "color '%1' not defined", nm.contents());
   return c;
 }
@@ -3127,7 +3127,7 @@ void process_input_stack()
 	  symbol nm = get_name();
 #if defined(DEBUGGING)
 	  if (want_html_debugging) {
-	    if (! nm.is_null()) {
+	    if (!nm.is_null()) {
 	      if (strcmp(nm.contents(), "test") == 0) {
 		fprintf(stderr, "found it!\n");
 		fflush(stderr);
@@ -3953,19 +3953,18 @@ bool string_iterator::get_location(bool allow_macro,
 
 void string_iterator::backtrace()
 {
-  if (mac.filename) {
-    if (program_name)
-      fprintf(stderr, "%s: ", program_name);
+  if (mac.filename != 0 /* nullptr */) {
+    if (program_name != 0 /* nullptr */)
+      errprint("%1: ", program_name);
     errprint("backtrace: '%1':%2", mac.filename,
-	     mac.lineno + lineno - 1);
-    if (how_invoked) {
+	     (mac.lineno + lineno - 1));
+    if (how_invoked != 0 /* nullptr */) {
       if (!nm.is_null())
-	errprint(": %1 '%2'\n", how_invoked, nm.contents());
+	errprint(": %1 '%2'", how_invoked, nm.contents());
       else
-	errprint(": %1\n", how_invoked);
+	errprint(": %1", how_invoked);
     }
-    else
-      errprint("\n");
+    errprint("\n");
   }
 }
 

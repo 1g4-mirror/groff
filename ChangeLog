@@ -1,5 +1,20 @@
 2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor and fix code style nits.
+
+	* src/roff/troff/input.cpp (file_iterator::backtrace)
+	(string_iterator::backtrace): Favor `errprint()` over
+	`fprintf()`.
+	(string_iterator::backtrace): Explicitly compare values of
+	pointer type to null pointer literals instead of letting them
+	pun down to Booleans.  Parenthesize (formally) complex
+	expressions.  Always terminate backtrace message with newline if
+	anything at all was written.
+	(lookup_color): Reorder equality comparison to avoid inadvertent
+	lvalue assignment.
+
+2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (macro::json_dump): Add more
 	information when dumping a macro (or diversion or string):
 	report name of file where it's defined if this information is
