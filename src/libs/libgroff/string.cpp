@@ -359,8 +359,7 @@ size_t string::json_length() const
 }
 
 // Like `extract()`, but double-quote the string and escape characters
-// per JSON and emit nulls.  This string is not null-terminated!  Caller
-// MUST use .json_length().
+// per JSON and emit nulls.  This string is not null-terminated!
 const char *string::json_extract() const
 {
   const char *p = ptr;
