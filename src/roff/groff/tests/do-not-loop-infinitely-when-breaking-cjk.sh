@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020 Free Software Foundation, Inc.
+# Copyright (C) 2020-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -26,4 +26,4 @@ DOC='ン
 ああAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 '
 
-echo "$DOC" | "$groff" -D utf8 -Tutf8 -mja
+echo "$DOC" | "$groff" -D utf8 -Tutf8 -mja -ww
