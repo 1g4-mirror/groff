@@ -157,19 +157,16 @@
 .fchar \[u2005] \h'1/4u'\" four-per-em space
 .fchar \[u2006] \h'1/6u'\" six-per-em space
 .fchar \[u2007] \0\" figure space
-.fchar \[u2008] \^\" punctuation space
+.ie \n[fallbacks*troff-mode] .fchar \[u2008] \|\" punctuation space
+.el                          .fchar \[u2008] " \" punctuation space
 .fchar \[u2009] \|\" thin space
 .fchar \[u200A] \^\" hair space
 .\" Mapping U+200B awaits resolution of Savannah #58958.
 .\"fchar \[u200B] \h'0'\" zero-width space
 .\" \[u2010] is always defined thanks to uniglyph.cpp.
-.\"fchar \[u2010] -\:\" hyphen
 .\" Mapping U+2011 awaits resolution of Savannah #63354.
 .\"fchar \[u2011] -\" non-breaking hyphen (won't break w/o .hcode or \:)
-.ie \n[fallbacks*troff-mode] \
-.  fchar \[u2012] \^\v'-.3m'\l'\w"\0"u'\v'+.3m'\^\" figure dash
-.el \
-.  fchar \[u2012] \-
+.fchar \[u2012] \o'-\0'\" figure dash
 .fchar \[u2013] \[en]\" en dash
 .fchar \[u2014] \[em]\" em dash
 .fchar \[u2015] \[em]\" horizontal bar (quotation dash)
@@ -189,14 +186,17 @@
 .fchar \[u2025] .\|.\" two dot leader
 .fchar \[u2026] .\|.\|.\" horizontal ellipsis
 .fchar \[u2027] \[pc]\" hyphenation point
+.fchar \[u202F] \|\" narrow no-break space
 .if \n[fallbacks*troff-mode] \
 .  fchar \[u2030] \[%0]\" per mille sign \" Savannah #63332 again
 .fchar \[u2032] \[fm]\" prime
 .fchar \[u2033] \[sd]\" double prime
 .fchar \[u2039] \[fo]\" left single chevron
 .fchar \[u203A] \[fc]\" right single chevron
-.if \n[fallbacks*troff-mode] \
+.ie \n[fallbacks*troff-mode] \
 .  fchar \[u203D] \o'?!'\" interrobang
+.el \
+.  fchar \[u203D] !?
 .if \n[fallbacks*troff-mode] \
 .  fchar \[u203E] \[rn]\" overline \" Savannah #63332 again
 .fchar \[u2044] \[f/]\" fraction slash

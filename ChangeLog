@@ -1,3 +1,14 @@
+2025-08-28  Dave Kemper <saint.snit@gmail.com>
+
+	* tmac/fallbacks.tmac: Add fallback character definitions for
+	more code points from Unicode's General Punctuation code chart.
+	- U+2008 PUNCTUATION SPACE
+	- U+2012 FIGURE DASH
+	- U+202F NARROW NO-BREAK SPACE
+	- U+203D INTERROBANG
+
+	Fixes <https://savannah.gnu.org/bugs/?63354>.
+
 2025-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devpdf/devpdf.am: Rationalize use of make(1) macros for
