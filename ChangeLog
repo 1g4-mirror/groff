@@ -1,3 +1,11 @@
+2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Regression-test Savannah #66981.
+
+	* src/roff/groff/tests/do-not-free-file-name-pointers-early.sh:
+	Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2025-04-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Slightly refactor and fix code style nits.
