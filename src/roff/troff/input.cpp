@@ -532,13 +532,8 @@ void file_iterator::backtrace()
 
 bool file_iterator::set_location(const char *f, int ln)
 {
-  if (f != 0 /* nullptr */) {
-    if (filename != 0 /* nullptr */) {
-      free(filename);
-      filename = 0 /* nullptr */;
-    }
-    filename = strdup(const_cast<char *>(f));
-  }
+  if (f != 0 /* nullptr */)
+    filename = const_cast<char *>(f);
   lineno = ln;
   return true;
 }
@@ -935,7 +930,7 @@ void next_file()
     else
       input_stack::next_file(fp, filename);
   }
-  delete[] filename;
+  // TODO: Add `filename` to file name set.
   tok.next();
 }
 
@@ -2935,6 +2930,7 @@ void exit_troff()
     tok.next();
     process_input_stack();
   }
+  // TODO: delete pointers in file name set.
   cleanup_and_exit(EXIT_SUCCESS);
 }
 
@@ -6478,7 +6474,7 @@ void line_file()
     if (has_arg(true /* peek */)) {
       const char *reported_file_name = read_rest_of_line_as_argument();
       (void) input_stack::set_location(reported_file_name, (n - 1));
-      delete[] reported_file_name;
+      // TODO: Add `reported_file_name` to file name set.
       tok.next();
       return;
     }
@@ -6860,7 +6856,7 @@ void do_source(bool quietly)
     // expected problem.
     if (!(quietly && (ENOENT == errno)))
       error("cannot open '%1': %2", filename, strerror(errno));
-  delete[] filename;
+  // TODO: Add `filename` to file name set.
   tok.next();
 }
 
@@ -7678,7 +7674,7 @@ static void open_file(bool appending)
 	stream_dictionary.define(stream, (object *)grost);
       }
     }
-    delete[] filename;
+    // TODO: Add `filename` to file name set.
     tok.next();
   }
 }
@@ -8764,7 +8760,7 @@ void copy_file()
     curenv->do_break();
   if (filename != 0 /* nullptr */)
     curdiv->copy_file(filename);
-  delete[] filename;
+  // TODO: Add `filename` to file name set.
   tok.next();
 }
 
@@ -8828,7 +8824,7 @@ void transparent_file()
       fclose(fp);
     }
   }
-  delete[] filename;
+  // TODO: Add `filename` to file name set.
   tok.next();
 }
 
@@ -8980,7 +8976,7 @@ void do_macro_source(bool quietly)
     if (!quietly && (ENOENT == errno))
       warning(WARN_FILE, "cannot open macro file '%1': %2",
 	      macro_filename, strerror(errno));
-  delete[] macro_filename;
+  // TODO: Add `macro_filename` to file name set.
   tok.next();
 }
 

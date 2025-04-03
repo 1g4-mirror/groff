@@ -1,5 +1,21 @@
 2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (file_iterator::set_location)
+	(next_file, line_file, do_source, open_file, copy_file)
+	(transparent_file, do_macro_source): Stop freeing memory
+	dynamically allocated to store file names encountered in (and
+	copied from) the input document.  *roff is a powerful enough
+	language that the lifetimes of these file name strings are
+	highly variable, and moreover their pointers tend to get copied
+	into internal data structures.  Overly aggressive freeing can
+	cause garbage to appear in lieu of file names in backtrace
+	reports, dumped macros, and so forth.  Add comments musing about
+	a future approach to management of this storage.
+
+	Fixes <https://savannah.gnu.org/bugs/?66981>.
+
+2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #66981.
 
 	* src/roff/groff/tests/do-not-free-file-name-pointers-early.sh:

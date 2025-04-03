@@ -627,6 +627,8 @@ void end_diversions()
   }
 }
 
+// TODO: This might be better named `write_trailer_and_exit()`.  Most
+// formatter state is "cleaned up" in input.cpp:exit_troff().
 void cleanup_and_exit(int exit_code)
 {
   if (the_output != 0 /* nullptr */) {
