@@ -3787,6 +3787,9 @@ void print_macros()
   if (has_arg()) {
     do {
       s = get_name();
+      if (s.is_null())
+	// get_name() already threw an error.
+	break;
       rm = static_cast<request_or_macro *>(request_dictionary.lookup(s));
       if (rm != 0 /* nullptr */)
 	m = rm->to_macro();

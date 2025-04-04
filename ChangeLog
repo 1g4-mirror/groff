@@ -1,5 +1,11 @@
 2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (print_macros): Fix infloop when
+	`pm` is given an invalid argument.  Continues commit 52f93e69dd,
+	20 March.
+
+2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (file_iterator::set_location)
 	(next_file, line_file, do_source, open_file, copy_file)
 	(transparent_file, do_macro_source): Stop freeing memory
