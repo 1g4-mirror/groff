@@ -1,5 +1,11 @@
 2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (macro::json_dump): Always print a
+	comma before dumping contents, since the "length" datum always
+	precedes it.  Fixes malformed output of `.pm .T`.
+
+2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (print_macros): Fix infloop when
 	`pm` is given an invalid argument.  Continues commit 52f93e69dd,
 	20 March.

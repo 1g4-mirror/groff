@@ -3724,8 +3724,7 @@ void macro::json_dump()
     errprint(", ");
   errprint("\"length\": %1", len);
   if (p != 0 /* nullptr */) {
-    if (need_comma)
-      errprint(", ");
+    errprint(", ");
     if (is_a_diversion)
       p->json_dump_diversion();
     else
