@@ -2189,12 +2189,12 @@ static node *node_list_reverse(node *nd)
   return res;
 }
 
-static void distribute_space(node *nd, int nspaces,
+static bool distribute_space(node *nd, int nspaces,
 			     hunits desired_space,
 			     bool force_reverse_node_list = false)
 {
   if (desired_space.is_zero() || nspaces == 0)
-    return;
+    return false;
   if (desired_space < H0) {
     // TODO: Implement shrinkable/squeezable space adjustments here.
     if (nspaces == 0)
@@ -2204,7 +2204,7 @@ static void distribute_space(node *nd, int nspaces,
     else
       output_warning(WARN_BREAK, "cannot adjust line; overset by %1"
 		     " units", abs(desired_space.to_units()));
-    return;
+    return false;
   }
   // Positive desired space is the typical case.  Negative desired space
   // is possible if we have overrun an unbreakable line.  But we should
@@ -2234,6 +2234,7 @@ static void distribute_space(node *nd, int nspaces,
     (void)node_list_reverse(nd);
   if (!force_reverse_node_list)
     do_reverse_node_list = !do_reverse_node_list;
+  return true;
 }
 
 void environment::possibly_break_line(bool must_break_here,
@@ -2289,16 +2290,12 @@ void environment::possibly_break_line(bool must_break_here,
     default:
       assert(0 == "unhandled case of `adjust_mode`");
     }
-    distribute_space(pre, bp->nspaces, extra_space);
-    hunits output_width = bp->width + extra_space;
-    // This should become an assert() when we can get reliable width
-    // data from CJK glyphs.  See Savannah #44018.
-    if (output_width <= 0) {
-      double output_width_in_ems = output_width.to_units();
-      output_warning(WARN_BREAK, "line has non-positive width %1m",
-		     output_width_in_ems);
+    hunits output_width = bp->width; // 0 if no breakpoint is found.
+    if (distribute_space(pre, bp->nspaces, extra_space))
+      output_width += extra_space;
+    // If we had an unbreakable, overset line, we can do no more.
+    if (output_width <= 0)
       return;
-    }
     input_line_start -= output_width;
     if (bp->hyphenated)
       hyphen_line_count++;
@@ -3153,14 +3150,14 @@ void environment::wrap_up_field()
 			       tab_field_spaces,
 			       field_spaces + tab_field_spaces);
     padding -= tab_padding;
-    distribute_space(tab_contents, tab_field_spaces, tab_padding,
-		     true /* force reversal of node list */);
+    (void) distribute_space(tab_contents, tab_field_spaces, tab_padding,
+			    true /* force reversal of node list */);
     tab_field_spaces = 0;
     tab_width += tab_padding;
   }
   if (field_spaces != 0) {
-    distribute_space(line, field_spaces, padding,
-		     true /* force reversal of node list */);
+    (void) distribute_space(line, field_spaces, padding,
+			    true /* force reversal of node list */);
     width_total += padding;
     if (current_tab != TAB_NONE) {
       // the start of the tab has been moved to the right by padding, so

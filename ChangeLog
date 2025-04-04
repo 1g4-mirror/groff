@@ -1,3 +1,21 @@
+2025-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Slightly refactor to clarify adjustment logic in
+	difficult cases.
+
+	* src/roff/troff/env.cpp (distribute_space): Promote return type
+	from `void` to `bool`, communicating whether this function
+	successfully adjusted spaces.  Add/update `return` statements.
+	(environment::possibly_break_line): Populate `output_width`
+	variable in stages, adding `extra_space` only if the
+	`distribute_space()` call was successful.  Annotate early
+	scenario return for comprehensibility.
+	(environment::wrap_up_field): Cast return value of
+	`distribute_space()` to `void`; since that's what was happening
+	implicitly before, this is a trivial type-correctness change.
+
+	This change might finally solve the mystery of Savannah #44018.
+
 2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::possibly_break_line):
