@@ -4510,7 +4510,7 @@ mentions of individual characters or short strings,
 and (sub)section headings in man pages\(rq.
 .
 Multi-word literals,
-such as Unix commands,
+such as Unix commands with arguments,
 when set inline
 (as opposed to displayed between
 .B EX
