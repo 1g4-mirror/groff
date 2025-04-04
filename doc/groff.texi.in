@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle March 2025
+@subtitle April 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -14086,18 +14086,70 @@ Applying string interpolation to a macro does not change this name.
 @cindex mode, copy
 @cindex mode, copy
 
-GNU @code{troff} processes certain requests in @dfn{copy mode}: it
-interpolates the escape sequences @code{\n}, @code{\g}, @code{\$},
-@code{\*}, @code{\V}, and @code{\?} normally; interprets
-@code{\@key{RET}} immediately; discards comments @code{\"} and
-@code{\#}; interpolates the current leader, escape, or tab character
-with @code{\a}, @code{\e}, and @code{\t}, respectively; and represents
-all other escape sequences in an encoded form.  The term ``copy mode''
-reflects its most visible application in requests that populate macros
-and strings, but other requests also use it when interpreting arguments
-that can't meaningfully represent typesetting operations.  For example,
-a font selection escape sequence has no meaning in a hyphenation pattern
-file name (@code{hpf}) or a diagnostic message written to the terminal
+GNU
+@code{troff}
+processes certain requests in
+@dfn{copy mode}:@:
+it copies ordinary,
+special,
+and indexed characters as-is;
+interpolates the escape sequences
+@code{\n},
+@code{\g},
+@code{\$},
+@code{\*},
+@code{\V},
+and
+@code{\?}
+normally;
+discards comments
+@code{\"}
+and
+@code{\#};
+interpolates
+@code{\a},
+@code{\e},
+and
+@code{\t},
+as the current
+leader,
+escape,
+or
+tab
+character,
+respectively;
+represents
+@c see src/roff/troff/input.h
+@code{\RET},
+@code{\&},
+@code{\_},
+@code{\|},
+@code{\^},
+@code{\@{},
+@code{\@}},
+@code{\`},
+@code{\'},
+@code{\-},
+@code{\!},
+@code{\c},
+@code{\%},
+@code{\SPC},
+@code{\E},
+@code{\)},
+@code{\~},
+and
+@code{\:}
+in an encoded form,
+and copies other escape sequences as-is.
+The term ``copy mode'' reflects its most visible application
+in requests that populate macros and strings,
+but other requests also use it when interpreting arguments
+that can't meaningfully represent typesetting operations.
+For example,
+a font selection escape sequence has no meaning
+in a hyphenation pattern file name
+(@code{hpf})
+or a diagnostic message written to the terminal
 (@code{tm}).
 
 @cindex interpretation mode

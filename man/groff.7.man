@@ -7793,10 +7793,14 @@ Applying string interpolation to a macro does not change this name.
 .SS "Copy mode"
 .\" ====================================================================
 .
-.I @g@troff
+GNU
+.I troff \" GNU
 processes certain requests in
 .I "copy mode:"
-it interpolates the escape sequences
+it copies ordinary,
+special,
+and indexed characters as-is;
+interpolates the escape sequences
 .BR \[rs]n ,
 .BR \[rs]g ,
 .BR \[rs]$ ,
@@ -7805,29 +7809,55 @@ it interpolates the escape sequences
 and
 .B \[rs]?\&
 normally;
-interprets
-.BI \[rs] newline
-immediately;
 discards comments
 .B \[rs]"
 and
 .BR \[rs]# ;
-interpolates the current leader,
-escape,
-or tab character with
+interpolates
 .BR \[rs]a ,
 .BR \[rs]e ,
 and
 .BR \[rs]t ,
+as the current
+leader,
+escape,
+or
+tab
+character with
 respectively;
-and represents all other escape sequences in an encoded form.
-The term \[lq]copy mode\[rq] reflects its most visible application in
-requests that populate macros and strings,
-but other requests also use it when interpreting arguments that can't
-meaningfully represent typesetting operations.
+represents
+.\" see src/roff/troff/input.h
+.BI \[rs] newline \c
+,
+.BR \[rs]& ,
+.BR \[rs]_ ,
+.BR \[rs]| ,
+.BR \[rs]\[ha] ,
+.BR \[rs]{ ,
+.BR \[rs]} ,
+.BR \[rs]\[ga] ,
+.BR \[rs]\[aq] ,
+.BR \[rs]\- ,
+.BR \[rs]! ,
+.BR \[rs]c ,
+.BR \[rs]% ,
+.BI \[rs] space \c
+,
+.BR \[rs]E ,
+.BR \[rs]) ,
+.BR \[rs]\[ti] ,
+and
+.B \[rs]:
+in an encoded form,
+and copies other escape sequences as-is.
+.
+The term \[lq]copy mode\[rq] reflects its most visible application
+in requests that populate macros and strings,
+but other requests also use it when interpreting arguments
+that can't meaningfully represent typesetting operations.
 For example,
-a font selection escape sequence has no meaning in a hyphenation pattern
-file name
+a font selection escape sequence has no meaning
+in a hyphenation pattern file name
 .RB ( hpf )
 or a diagnostic message written to the terminal
 .RB ( tm ).
