@@ -1,5 +1,11 @@
 2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/\
+	do-not-loop-infinitely-when-breaking-cjk.sh: Make test case more
+	illustrative.  Conform better to modern groff test conventions.
+
+2025-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (macro::json_dump): Always print a
 	comma before dumping contents, since the "length" datum always
 	precedes it.  Fixes malformed output of `.pm .T`.
