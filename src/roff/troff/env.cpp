@@ -2259,26 +2259,28 @@ void environment::possibly_break_line(bool must_break_here,
       ndp = &(*ndp)->next;
     bp->nd->split(bp->index, &pre, &post);
     *ndp = post;
-    hunits extra_space_width = H0;
-    // TODO: We compute (target_text_length - bp->width) in several
-    // cases below.  Consider computing it once, unconditionally, and
-    // giving it a name (`extra_space_width`?  `desired_space`?).
+    // The space deficit tells us how much the line is overset (or, if
+    // negative, underset) relative to the configured line length.
+    hunits space_deficit = target_text_length - bp->width;
+    // The extra space is the amount of space to distribute among the
+    // adjustable space nodes in an output line; this process occurs
+    // only if adjustment is enabled.
+    hunits extra_space = H0;
     switch (adjust_mode) {
     case ADJUST_BOTH:
       if (bp->nspaces != 0)
-	extra_space_width = target_text_length - bp->width;
+	extra_space = space_deficit;
       else if (bp->width > 0 && target_text_length > 0
 	       && target_text_length > bp->width)
 	output_warning(WARN_BREAK, "cannot adjust line; underset by %1"
-                      " units",
-		      hunits(target_text_length - bp->width).to_units());
+                      " units", space_deficit.to_units());
       break;
     case ADJUST_CENTER:
-      saved_indent += (target_text_length - bp->width)/2;
+      saved_indent += space_deficit / 2;
       was_centered = true;
       break;
     case ADJUST_RIGHT:
-      saved_indent += target_text_length - bp->width;
+      saved_indent += space_deficit;
       break;
     case ADJUST_LEFT:
     case ADJUST_CENTER - 1:
@@ -2287,8 +2289,8 @@ void environment::possibly_break_line(bool must_break_here,
     default:
       assert(0 == "unhandled case of `adjust_mode`");
     }
-    distribute_space(pre, bp->nspaces, extra_space_width);
-    hunits output_width = bp->width + extra_space_width;
+    distribute_space(pre, bp->nspaces, extra_space);
+    hunits output_width = bp->width + extra_space;
     // This should become an assert() when we can get reliable width
     // data from CJK glyphs.  See Savannah #44018.
     if (output_width <= 0) {
