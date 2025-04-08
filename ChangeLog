@@ -1,5 +1,14 @@
 2025-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor break/adjustment warning production.
+
+	* src/roff/troff/env.cpp (environment::choose_breakpoint): Stop
+	throwing break warnings here...
+	(distribute_space): ...and here...
+	(environment::possibly_break_line): ...instead doing so here.
+
+2025-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Test for presence of over-/underset line diagnostics
 	when filling.
 

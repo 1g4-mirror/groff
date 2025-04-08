@@ -2099,14 +2099,8 @@ breakpoint *environment::choose_breakpoint()
     }
     nd = nd->next;
   }
-  if (best_bp) {
-    if (!best_bp_fits)
-      // TODO: If we implement shrinkable/squeezable adjustable spaces,
-      // this warning could become spurious in cases where we can
-      // achieve the desired adjustment.
-      output_warning(WARN_BREAK, "cannot break line");
+  if (best_bp)
     return best_bp;
-  }
   return 0 /* nullptr */;
 }
 
@@ -2193,19 +2187,8 @@ static bool distribute_space(node *nd, int nspaces,
 			     hunits desired_space,
 			     bool force_reverse_node_list = false)
 {
-  if (desired_space.is_zero() || nspaces == 0)
+  if (desired_space.is_zero() || (nspaces == 0) || (desired_space < H0))
     return false;
-  if (desired_space < H0) {
-    // TODO: Implement shrinkable/squeezable space adjustments here.
-    if (nspaces == 0)
-      output_warning(WARN_BREAK, "cannot adjust line lacking adjustable"
-		     " spaces; overset by %1 units",
-		     abs(desired_space.to_units()));
-    else
-      output_warning(WARN_BREAK, "cannot adjust line; overset by %1"
-		     " units", abs(desired_space.to_units()));
-    return false;
-  }
   // Positive desired space is the typical case.  Negative desired space
   // is possible if we have overrun an unbreakable line.  But we should
   // not get here if there are no adjustable space nodes to adjust.
@@ -2260,21 +2243,31 @@ void environment::possibly_break_line(bool must_break_here,
       ndp = &(*ndp)->next;
     bp->nd->split(bp->index, &pre, &post);
     *ndp = post;
-    // The space deficit tells us how much the line is overset (or, if
-    // negative, underset) relative to the configured line length.
+    // The space deficit tells us how much the line is overset if
+    // negative, or underset if positive, relative to the configured
+    // line length.
     hunits space_deficit = target_text_length - bp->width;
+    // An overset line always gets a warning.
+    if (space_deficit < H0)
+      output_warning(WARN_BREAK, "cannot %1 line; overset by %2 units",
+		     (ADJUST_BOTH == adjust_mode) ? "adjust" : "break",
+		     abs(space_deficit.to_units()));
+    // An underset line warns only if it requires adjustment but no
+    // adjustable spaces exist on the line.
+    else if ((ADJUST_BOTH == adjust_mode)
+	     && (space_deficit > H0)
+	     && (0 == bp->nspaces))
+      output_warning(WARN_BREAK, "cannot adjust line; underset by %1"
+		     " units", space_deficit.to_units());
     // The extra space is the amount of space to distribute among the
     // adjustable space nodes in an output line; this process occurs
-    // only if adjustment is enabled.
+    // only if adjustment is enabled.  We may however want to synthesize
+    // an extra indentation from it if centering or right-aligning.
     hunits extra_space = H0;
     switch (adjust_mode) {
     case ADJUST_BOTH:
       if (bp->nspaces != 0)
 	extra_space = space_deficit;
-      else if (bp->width > 0 && target_text_length > 0
-	       && target_text_length > bp->width)
-	output_warning(WARN_BREAK, "cannot adjust line; underset by %1"
-                      " units", space_deficit.to_units());
       break;
     case ADJUST_CENTER:
       saved_indent += space_deficit / 2;
