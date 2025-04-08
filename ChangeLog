@@ -1,3 +1,13 @@
+2025-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Test for presence of over-/underset line diagnostics
+	when filling.
+
+	* src/roff/groff/tests/warn-on-overset-adjusted-line.sh:
+	* src/roff/groff/tests/warn-on-overset-unadjusted-line.sh:
+	* src/roff/groff/tests/warn-on-underset-adjusted-line.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
 2025-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Slightly refactor to clarify adjustment logic in
