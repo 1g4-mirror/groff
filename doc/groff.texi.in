@@ -864,7 +864,7 @@ for the
 @code{man}
 command to distinguish pages by numeric category.
 If
- @samp{man 'groff(7)'}
+@samp{man 'groff(7)'}
 produces an error,
 attempt
 @samp{man 7 groff}
