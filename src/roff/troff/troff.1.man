@@ -493,7 +493,7 @@ and write to arbitrary file names.
 .I troff \" GNU
 does not,
 however,
-accept tabs or newlines
+accept newlines
 (line feeds)
 in file names supplied as arguments to requests.)
 .\" ...nor other characters invalid as input; Savannah #65108.
