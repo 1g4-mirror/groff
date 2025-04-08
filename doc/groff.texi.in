@@ -20068,7 +20068,7 @@ it scales the metrics linearly relative to that basis.
 The unit width has no inherent relationship to the device resolution,
 and the same division procedure applies to all font metrics.
 One observes that whatever unit might select for the unit width,
-the division operation implied by scaling cancels them out,
+the division operation implied by scaling cancels it out,
 leaving a dimensionless quantity.
 
 For instance,
