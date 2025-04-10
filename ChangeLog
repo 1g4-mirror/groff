@@ -42,7 +42,7 @@
 	(environment::possibly_break_line): Populate `output_width`
 	variable in stages, adding `extra_space` only if the
 	`distribute_space()` call was successful.  Annotate early
-	scenario return for comprehensibility.
+	return scenario for comprehensibility.
 	(environment::wrap_up_field): Cast return value of
 	`distribute_space()` to `void`; since that's what was happening
 	implicitly before, this is a trivial type-correctness change.
