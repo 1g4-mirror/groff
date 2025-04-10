@@ -21,7 +21,7 @@
 	* src/roff/troff/env.cpp (environment::possibly_break_line):
 	Trivially refactor.  Lift computation that is performed in 3 of
 	6 cases into a variable, `space_deficit`, whose value is
-	computed uncoditionally.  (It's an integer subtraction--not too
+	computed unconditionally.  (It's an integer subtraction--not too
 	spendy.)  Rename `extra_space_width` to `extra_space`.  Simplify
 	expressions and annotate logic.
 
