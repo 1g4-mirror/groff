@@ -587,6 +587,21 @@ adjusted such that its length was exactly equal to,
 the output line length
 .RB \[lq] \[rs]n[.l] \[rq].
 .
+GNU
+.I troff \" GNU
+reports the amount of overset or underset in the scaling unit configured
+by the
+.B \%warnscale
+request in
+.B troff \" mode
+mode,
+and in ens
+.RB (\[oq] n \[cq];
+character cells)
+in
+.B nroff \" mode
+mode.
+.
 This category is enabled by default.
 .
 .

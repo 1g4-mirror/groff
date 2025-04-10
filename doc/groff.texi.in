@@ -18118,6 +18118,20 @@ or
 adjusted such that its length was exactly equal to,
 the output line length
 @samp{\n[.l]}.
+GNU
+@command{troff} @c GNU
+reports the amount of overset or underset in the scaling unit configured
+by the
+@code{warnscale}
+request in
+@code{troff}
+mode,
+and in ens (@samp{n};
+character cells)
+in
+@code{nroff}
+mode.
+@xref{@code{troff} and @code{nroff} Modes}.
 This category is enabled by default.
 
 @item delim

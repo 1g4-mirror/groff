@@ -1,3 +1,17 @@
+2025-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::possibly_break_line):
+	Improve "break" warning diagnostic messages when adjustment is
+	frustrated.  In troff mode, use the scaling unit configured by
+	the `warnscale` request.  In nroff mode, use ens (which, since
+	they are defined in a typeface-proportional manner, are not an
+	acceptable scaling unit for `warnscale`).
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document it.
+
+	* NEWS: Update item regarding output warnings in nroff mode.
+
 2025-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Refactor break/adjustment warning production.

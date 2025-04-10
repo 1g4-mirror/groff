@@ -146,9 +146,10 @@ troff
 
 *  In nroff mode (in other words, when producing output for devices that
    claim to be terminals), the formatter now reports warning diagnostics
-   regarding certain output problems using units of lines instead of
-   inches (or the unit configured with the `warnscale` request) to
-   describe the vertical drawing position where the problem occurred.
+   regarding certain output problems using units of lines (vertically)
+   and character cells [ens] (horizontally) instead of inches (or the
+   unit configured with the `warnscale` request) to describe the
+   vertical drawing position where the problem occurred.
 
 *  The device-independent page description language produced by GNU
    troff now reports unbreakable spaces (those produced with the `\~`
