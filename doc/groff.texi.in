@@ -13262,12 +13262,22 @@ Boolean operators are available; the members of this expanded class are
 termed @dfn{conditional expressions}.
 
 @table @code
-@item c @var{glyph}
-True if @var{glyph} is available, where @var{glyph} is an ordinary
-character, a special character @samp{\(@var{xx}} or @samp{\[@var{xxx}]}
-(whether built-in or user-defined), @samp{\N'@var{xxx}'}, or has been
-defined by any of the @code{char}, @code{fchar}, @code{fschar}, or
-@code{schar} requests.
+@item c @var{chr}
+True if a character
+@var{chr}
+is available;
+@var{chr}
+is an
+ordinary,
+special
+(@samp{\(@var{xx}}
+or
+@samp{\[@var{xxx}]}),
+or
+indexed
+(@samp{\N'@var{xxx}'})
+character,
+whether defined by a font description file or a request.
 
 @item d @var{name}
 True if a string, macro, diversion, or request called @var{name} exists.

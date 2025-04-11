@@ -609,11 +609,13 @@ True if a character
 .I chr
 is available;
 .I chr
-is an ordinary or special character
-(whether built-in or user-defined)
+is an
+ordinary,
+special,
 or
-.BI \[rs]N\[aq] index\c
-.BR \[aq] .
+indexed
+character,
+whether defined by a font description file or a request.
 .
 .
 .TP

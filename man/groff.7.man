@@ -2066,9 +2066,9 @@ T}
 T{
 .BI c\~ g
 T}	T{
-a glyph
+a character
 .I g
-is available.
+is defined.
 T}
 T{
 .BI d\~ m
