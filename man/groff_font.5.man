@@ -553,7 +553,7 @@ it scales the metrics linearly relative to that basis.
 The unit width has no inherent relationship to the device resolution,
 and the same division procedure applies to all font metrics.
 .
-One observes that whatever unit might select for the unit width,
+Observe that whatever unit might one select for the unit width,
 the division operation implied by scaling cancels it out,
 leaving a dimensionless quantity.
 .
@@ -857,18 +857,18 @@ The
 subfield gives the height of the glyph
 (upward is positive);
 if a glyph does not extend above the baseline,
-it should be given a zero height,
-rather than a negative height.
+give it a zero height,
+not a negative height.
 .
 The
 .I depth
-subfield gives the depth of the glyph,
+subfield gives the depth of the glyph\[em]\c
 that is,
 the distance below the baseline to which the glyph extends
 (downward is positive);
 if a glyph does not extend below the baseline,
-it should be given a zero depth,
-rather than a negative depth.
+give it a zero depth,
+not a negative depth.
 .
 Italic corrections apply when upright and slanted
 (italic or oblique)
@@ -877,20 +877,20 @@ styles are typeset adjacently.
 The
 .I italic-correction
 is the amount of space
-that should be added after a slanted glyph
+to add after a slanted glyph
 to be followed immediately by an upright glyph.
 .
 The
 .I left-italic-correction
 is the amount of space
-that should be added before a slanted glyph
+to add before a slanted glyph
 to be preceded immediately by an upright glyph.
 .
 The
 .I
 subscript-correction
 is the amount of space
-that should be added after a slanted glyph
+to add after a slanted glyph
 to be followed by a subscript;
 it should be less than the italic correction.
 .

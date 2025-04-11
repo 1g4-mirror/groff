@@ -20093,7 +20093,7 @@ When the formatter configures a type size,
 it scales the metrics linearly relative to that basis.
 The unit width has no inherent relationship to the device resolution,
 and the same division procedure applies to all font metrics.
-One observes that whatever unit might select for the unit width,
+Observe that whatever unit might one select for the unit width,
 the division operation implied by scaling cancels it out,
 leaving a dimensionless quantity.
 
@@ -20306,31 +20306,41 @@ into the C language data type
 as they are in @acronym{AT&T} device-independent
 @code{troff}. @c AT&T
 
-The @var{width} subfield gives the width of the glyph.  The @var{height}
-subfield gives the height of the glyph (upward is positive); if a glyph
-does not extend above the baseline, it should be given a zero height,
-rather than a negative height.  The @var{depth} subfield gives the depth
-of the glyph, that is, the distance below the baseline to which the
-glyph extends (downward is positive); if a glyph does not extend below
-the baseline, it should be given a zero depth, rather than a negative
-depth.
+The
+@var{width}
+subfield gives the width of the glyph.
+The
+@var{height}
+subfield gives the height of the glyph
+(upward is positive);
+if a glyph does not extend above the baseline,
+give it a zero height,
+not a negative height.
+The
+@var{depth}
+subfield gives the depth of the glyph---that is,
+the distance below the baseline to which the glyph extends
+(downward is positive);
+if a glyph does not extend below the baseline,
+give it a zero depth,
+not a negative depth.
 Italic corrections apply when upright and slanted
 (italic or oblique)
 styles are typeset adjacently.
 The
 @var{italic-correction}
 is the amount of space
-that should be added after a slanted glyph
+to add after a slanted glyph
 to be followed immediately by an upright glyph.
 The
 @var{left-italic-correction}
 is the amount of space
-that should be added before a slanted glyph
+to add before a slanted glyph
 to be preceded immediately by an upright glyph.
 The
 @var{subscript-correction}
 is the amount of space
-that should be added after a slanted glyph
+to add after a slanted glyph
 to be followed by a subscript;
 it should be less than the italic correction.
 
