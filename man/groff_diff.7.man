@@ -260,8 +260,6 @@ registers exercise color support.
 .SS Hyphenation
 .\" ====================================================================
 .
-.\" BEGIN Keep (roughly) parallel with relevant material from groff.texi
-.\" nodes "Hyphenation" and "Manipulating Hyphenation".
 GNU
 .I troff \" GNU
 uses a hyphenation algorithm and language-specific pattern files
@@ -301,6 +299,8 @@ GNU
 does not perform automatic hyphenation.
 .
 .
+.\" BEGIN Keep (roughly) parallel with groff.texi node "Manipulating
+.\" Hyphenation".
 .P
 For automatic hyphenation to work,
 the formatter must know which letters are equivalent;
@@ -336,16 +336,21 @@ words containing such letters
 won't hyphenate properly
 even if the corresponding hyphenation patterns contain them.
 .
+Localization files for the input character set and language
+configure hyphenation codes;
+see
+.MR groff_tmac @MAN5EXT@ .
+.\" END Keep (roughly) parallel with groff.texi node "Manipulating
+.\" Hyphenation".
+.
 .
 .P
 GNU
 .IR troff 's \" GNU
 .B \[rs]:
-escape sequence is analogous to the
+escape sequence works like
 .B \[rs]%
-sequence but produces no hyphen if the word breaks at that location.
-.\" END Keep (roughly) parallel with relevant material from groff.texi
-.\" nodes "Hyphenation" and "Manipulating Hyphenation".
+but produces no hyphen if the word breaks at that location.
 .
 .
 .\" ====================================================================

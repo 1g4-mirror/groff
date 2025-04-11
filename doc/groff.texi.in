@@ -9047,6 +9047,8 @@ See the discussion of the
 request in @ref{Strings}.
 @endDefreq
 
+@c BEGIN Keep (roughly) parallel with (parts of) section "Hyphenation"
+@c of groff_diff(7).
 For automatic hyphenation to work, the formatter must know which letters
 are equivalent; for example, the letter @samp{E} behaves like @samp{e};
 only the latter typically appears in hyphenation pattern files.  GNU
@@ -9065,6 +9067,12 @@ without it,
 words containing such letters
 won't hyphenate properly
 even if the corresponding hyphenation patterns contain them.
+Localization files for the input character set and language
+configure hyphenation codes;
+see
+@cite{groff_tmac@r{(5)}}.
+@c END Keep (roughly) parallel with (parts of) section "Hyphenation"
+@c of groff_diff(7).
 
 @Defreq {hcode, dst1 src1 [dst2 src2] @dots{}}
 @cindex hyphenation code (@code{hcode})
