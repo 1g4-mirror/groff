@@ -21,8 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <errno.h> // errno
-#include <math.h> // ceil()
-#include <stdlib.h> // abs()
+#include <math.h> // ceil(), fabs()
 
 #include <vector>
 #include <algorithm> // find()
@@ -2252,27 +2251,27 @@ void environment::possibly_break_line(bool must_break_here,
     // line length.
     hunits space_deficit = target_text_length - bp->width;
     // An overset line always gets a warning.
-    if (space_deficit < H0)
+    if (space_deficit < H0) {
+      double dsd = static_cast<double>(space_deficit.to_units());
       output_warning(WARN_BREAK, "cannot %1 line; overset by %2%3",
 		     (ADJUST_BOTH == adjust_mode) ? "adjust" : "break",
 		     in_nroff_mode
-		     ? static_cast<int>(ceil(abs(space_deficit
-						 .to_units()
-					/ hresolution)))
-		     : abs(space_deficit.to_units() / warn_scale),
+		     ? static_cast<int>(ceil(fabs(dsd / hresolution)))
+		     : fabs(dsd / warn_scale),
 		     in_nroff_mode ? 'n' : warn_scaling_unit);
+    }
     // An underset line warns only if it requires adjustment but no
     // adjustable spaces exist on the line.
     else if ((ADJUST_BOTH == adjust_mode)
 	     && (space_deficit > H0)
-	     && (0 == bp->nspaces))
+	     && (0 == bp->nspaces)) {
+      double dsd = static_cast<double>(space_deficit.to_units());
       output_warning(WARN_BREAK, "cannot adjust line; underset by %1%2",
 		     in_nroff_mode
-		     ? static_cast<int>(ceil(abs(space_deficit
-						 .to_units()
-					/ hresolution)))
-		     : abs(space_deficit.to_units() / warn_scale),
+		     ? static_cast<int>(ceil(fabs(dsd / hresolution)))
+		     : fabs(dsd / warn_scale),
 		     in_nroff_mode ? 'n' : warn_scaling_unit);
+    }
     // The extra space is the amount of space to distribute among the
     // adjustable space nodes in an output line; this process occurs
     // only if adjustment is enabled.  We may however want to synthesize

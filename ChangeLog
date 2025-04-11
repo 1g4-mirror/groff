@@ -1,3 +1,11 @@
+2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::possibly_break_line): Fix
+	build error with GCC 5.5 on Solaris 10.  Introduce a temporary
+	variable `dsd` to store `space_deficit` as a `double`, and use
+	it in divisions when computing the size of overset or underset
+	reported in diagnostics.  Use `fabs()` instead of `abs()`.
+
 2025-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::possibly_break_line):
