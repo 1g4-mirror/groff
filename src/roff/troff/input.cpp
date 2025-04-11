@@ -509,6 +509,7 @@ bool file_iterator::get_location(bool /*allow_macro*/,
 				 const char **filenamep, int *linenop)
 {
   *linenop = lineno;
+  assert(filename != 0 /* nullptr */);
   if (0 /* nullptr */ == filename)
     return false;
   if (strcmp(filename, "-") == 0)
