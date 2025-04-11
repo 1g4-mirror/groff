@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020-2024 Free Software Foundation, Inc.
+# Copyright (C) 2020-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -103,7 +103,7 @@ printf '\303\241' | "$groff" -k -Thtml | grep -qx '<p>&aacute;</p>' \
 # We test compatibility-mode HTML output somewhat differently since
 # preconv only emits groffish \[uXXXX] escapes for non-ASCII codepoints.
 echo "checking -C -k -Thtml" >&2
-printf "\('a" | "$groff" -C -k -Thtml | grep -qx '<p>&aacute;</p>' \
+printf '\\('"'"a | "$groff" -C -k -Thtml | grep -qx '<p>&aacute;</p>' \
     || wail
 
 test -z "$fail"

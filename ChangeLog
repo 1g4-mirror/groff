@@ -1,3 +1,9 @@
+2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/html-device-smoke-test.sh: Use printf(1)
+	more portably (`\(` is not well-defined in a format string).
+	Thanks to Lennart Jablonka for the report and a proposed patch.
+
 2025-03-30  Lennart Jablonka <humm@ljabl.com>
 
 	Don't use non-POSIX syntax `\+` in BREs.
