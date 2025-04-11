@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020 Free Software Foundation, Inc.
+# Copyright (C) 2020-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -26,7 +26,7 @@ for cmd in pnmcrop pamcut pnmtopng pnmtops ps2ps
 do
     if ! command -v $cmd >/dev/null
     then
-        echo "cannot locate '$cmd' command; skipping test" >&2
+        echo "$0: cannot locate '$cmd' command; skipping test" >&2
         exit 77 # skip
     fi
 done
@@ -44,3 +44,5 @@ The faster clocks are $ PN $'
 
 output=$("$groff" -b -ww -Thtml -eg -me "$input")
 test -n "$output"
+
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:

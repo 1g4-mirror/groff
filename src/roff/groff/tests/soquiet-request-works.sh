@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2021-2024 Free Software Foundation, Inc.
+# Copyright (C) 2021-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -27,7 +27,7 @@ set -e
 # The "unset" in Solaris /usr/xpg4/bin/sh can actually fail.
 if ! unset GROFF_ENCODING
 then
-    echo "unable to clear environment; skipping" >&2
+    echo "$0: unable to clear environment; skipping" >&2
     exit 77
 fi
 

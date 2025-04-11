@@ -44,4 +44,4 @@ printf "%s\n" "$output" | grep -qw 'backtrace: file' || wail
 
 test -z "$fail"
 
-# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
