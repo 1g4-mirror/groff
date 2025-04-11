@@ -726,6 +726,14 @@ Miscellaneous
 *  Support for terminal devices using the CCSID 1047 (EBCDIC) encoding
    has been withdrawn.
 
+*  You can now specify any paper format you like--including the file
+   specification "/etc/papersize" for systems using "libpaper"--as the
+   default that the groff build writes to generated device description
+   files ("DESC") for the "dvi", "lbp", "lj4", "pdf", and "ps" output
+   drivers.  (The paper format must still be valid; see groff_font(5)).
+
+     Example: ./configure PAGE=/etc/papersize --prefix=/opt/gnu
+
 *  Building groff no longer requires the PSUtils package.
 
 *  Building groff no longer requires the makeinfo package.  Since groff

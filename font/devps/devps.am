@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2022 Free Software Foundation, Inc.
+# Copyright (C) 2014-2025 Free Software Foundation, Inc.
 #
 # This file is part of 'groff'.
 #
@@ -151,11 +151,7 @@ font/devps/DESC: $(devps_srcdir)/DESC.in
 	$(AM_V_GEN)$(MKDIR_P) font/devps \
 	&& cat $(devps_srcdir)/DESC.in >$@.tmp \
 	&& echo broken $(BROKEN_SPOOLER_FLAGS) >>$@.tmp \
-	&& if test "$(PAGE)" = A4; then \
-	     echo "papersize a4" >>$@.tmp; \
-	   else \
-	     echo "papersize letter" >>$@.tmp; \
-	   fi \
+	&& echo "papersize $(PAGE)" >>$@.tmp \
 	&& (test -z '$(PSPRINT)' \
 	    || echo print '$(PSPRINT)' >>$@.tmp)
 	$(AM_V_at)mv $@.tmp $@

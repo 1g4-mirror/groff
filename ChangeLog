@@ -1,5 +1,20 @@
 2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devdvi/devdvi.am (font/devdvi/DESC):
+	* font/devlbp/devlbp.am (font/devlbp/DESC):
+	* font/devlj4/devlj4.am (font/devlj4/DESC):
+	* font/devpdf/devpdf.am (font/devpdf/DESC):
+	* font/devps/devps.am (font/devps/DESC): Write the "configure"d
+	paper format to generated device description files, instead of
+	only ever "a4" or "letter".
+
+	* NEWS: Add item.
+
+	Fixes <https://savannah.gnu.org/bugs/?67013>.  Thanks to Lennart
+	Jablonka for prompting this idea.
+
+2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* Makefile.am: Drop comments documenting `PAGE` and
 	`GHOSTSCRIPT` as appearing in "config.h".  Neither appears there
 	because they are `AC_SUBST()`ed (into generated Make files), not

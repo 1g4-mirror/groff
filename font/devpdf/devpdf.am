@@ -1,4 +1,4 @@
-# Copyright (C) 2011-2020 Free Software Foundation, Inc.
+# Copyright (C) 2011-2025 Free Software Foundation, Inc.
 #      Written by Deri James <deri@chuzzlewit.myzen.co.uk>
 #      Automake migration by Bertrand Garrigues
 #        <bertrand.garrigues@laposte.net>
@@ -91,12 +91,7 @@ font/devpdf/DESC: $(devpdf_srcdir)/DESC.in
 	$(AM_V_GEN)$(MKDIR_P) $(top_builddir)/font/devpdf \
 	&& cat $(devpdf_srcdir)/DESC.in \
 	  >$(top_builddir)/font/devpdf/DESC \
-	&& if test "$(PAGE)" = A4; then \
-	     echo "papersize a4" >>$(top_builddir)/font/devpdf/DESC; \
-	   else \
-	     echo "papersize letter" \
-	       >>$(top_builddir)/font/devpdf/DESC; \
-	   fi
+	&& echo "papersize $(PAGE)" >>$@
 
 font/devpdf/Foundry: $(devpdf_srcdir)/Foundry.in
 	$(AM_V_at)$(MKDIR_P) $(top_builddir)/font/devpdf/
