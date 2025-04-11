@@ -848,7 +848,8 @@ on successful operation,
 if the program cannot interpret its command-line arguments,
 and
 .RB status\~ 1
-if it encounters an error during operation.
+if it encounters a fatal error during operation,
+or is directed to abort by the input.
 .
 .
 .\" ====================================================================
