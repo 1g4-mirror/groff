@@ -148,7 +148,7 @@ EXTRA_DIST += \
   font/devps/generate/zapfdr.sed
 
 font/devps/DESC: $(devps_srcdir)/DESC.in
-	$(AM_V_GEN)$(MKDIR_P) font/devps \
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& cat $(devps_srcdir)/DESC.in >$@.tmp \
 	&& echo broken $(BROKEN_SPOOLER_FLAGS) >>$@.tmp \
 	&& echo "papersize $(PAGE)" >>$@.tmp \

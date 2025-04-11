@@ -1,5 +1,24 @@
 2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[font]: Update and parallelize `DESC` file generation.
+
+	* font/devdvi/devdvi.am (font/devdvi/DESC):
+	* font/devlbp/devlbp.am (font/devlbp/DESC):
+	* font/devlj4/devlj4.am (font/devlj4/DESC):
+	* font/devpdf/devpdf.am (font/devpdf/DESC): When constructing
+	file by stages, write to the target name suffixed with `.tmp`,
+	then move it into place once it is complete.
+
+	* font/devpdf/devpdf.am (font/devpdf/DESC):
+	* font/devps/devps.am (font/devps/DESC): Replace hard-coded
+	directory name with output of `dirname` command on Make's `$@`
+	internal variable.
+
+	* font/devpdf/devpdf.am (font/devpdf/DESC): Replace hard-coded
+	target name with Make's `$@` internal variable.
+
+2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* font/devdvi/devdvi.am (font/devdvi/DESC):
 	* font/devlbp/devlbp.am (font/devlbp/DESC):
 	* font/devlj4/devlj4.am (font/devlj4/DESC):

@@ -86,12 +86,13 @@ MOSTLYCLEANFILES += font/devlj4/DESC
 
 font/devlj4/DESC: $(devlj4_srcdir)/DESC.in
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
-	&& echo "res $(LJ4RES)" >$@ \
-	&& echo "unitwidth `expr 7620000 / $(LJ4RES)`" >>$@ \
-	&& cat $(devlj4_srcdir)/DESC.in >>$@ \
-	&& echo "papersize $(PAGE)" >>$@ \
+	&& echo "res $(LJ4RES)" >$@.tmp \
+	&& echo "unitwidth `expr 7620000 / $(LJ4RES)`" >>$@.tmp \
+	&& cat $(devlj4_srcdir)/DESC.in >>$@.tmp \
+	&& echo "papersize $(PAGE)" >>$@.tmp \
 	&& (test -z '$(LJ4PRINT)' \
-	    || echo print '$(LJ4PRINT)' >>$@)
+	    || echo print '$(LJ4PRINT)' >>$@.tmp)
+	$(AM_V_at)mv $@.tmp $@
 
 fonts: devlj4_fonts
 devlj4_fonts: hpftodit font/devlj4/DESC

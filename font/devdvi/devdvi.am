@@ -87,10 +87,11 @@ MOSTLYCLEANFILES += font/devdvi/DESC
 
 font/devdvi/DESC: $(devdvi_srcdir)/DESC.in
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
-	&& cat $(devdvi_srcdir)/DESC.in >$@ \
-	&& echo "papersize $(PAGE)" >>$@ \
+	&& cat $(devdvi_srcdir)/DESC.in >$@.tmp \
+	&& echo "papersize $(PAGE)" >>$@.tmp \
 	&& (test -z '$(DVIPRINT)' \
-	    || echo print '$(DVIPRINT)' >>$@)
+	    || echo print '$(DVIPRINT)' >>$@.tmp)
+	$(AM_V_at)mv $@.tmp $@
 
 
 # Local Variables:

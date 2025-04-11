@@ -88,10 +88,10 @@ font/devpdf/util/BuildFoundries: \
 
 MOSTLYCLEANFILES += font/devpdf/DESC
 font/devpdf/DESC: $(devpdf_srcdir)/DESC.in
-	$(AM_V_GEN)$(MKDIR_P) $(top_builddir)/font/devpdf \
-	&& cat $(devpdf_srcdir)/DESC.in \
-	  >$(top_builddir)/font/devpdf/DESC \
-	&& echo "papersize $(PAGE)" >>$@
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& cat $(devpdf_srcdir)/DESC.in >$@.tmp \
+	&& echo "papersize $(PAGE)" >>$@.tmp
+	$(AM_V_at)mv $@.tmp $@
 
 font/devpdf/Foundry: $(devpdf_srcdir)/Foundry.in
 	$(AM_V_at)$(MKDIR_P) $(top_builddir)/font/devpdf/
