@@ -1829,7 +1829,8 @@ AC_DEFUN([GROFF_PROG_SH], [
     # Try to find a shell that is likely to be more modern than the
     # system's /bin/sh; otherwise programs must complain at runtime if
     # the environment is non-conforming to POSIX.
-    AC_PATH_PROGS([POSIX_SHELL_PROG], [bash ksh dash ash], [no])
+    AC_PATH_PROGS([POSIX_SHELL_PROG], [bash ksh ksh93 ksh88 mksh dash \
+                                       ash yash], [no])
   fi
   if test "$POSIX_SHELL_PROG" = no
   then

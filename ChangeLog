@@ -1,5 +1,20 @@
 2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m4/groff.m4 (GROFF_PROG_SH): Search for more shells.  A recent
+	message to the Austin Group mailing list revealed which shells
+	they routinely work with.  Search for shells named ksh93, ksh88,
+	mksh, and yash as well.
+
+	"Using the test script in Mantis bug 1915 we have observed four
+	different behaviors among shells whose behavior we usually
+	consider when investigating issues: one shared by dash, ksh93
+	and yash; and one each from bash, mksh and ksh88."
+
+	See <https://www.mail-archive.com/austin-group-l@opengroup.org/\
+	msg13723.html>.
+
+2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (file_iterator::get_location): Add
 	`assert()`; a file iterator should always have a defined file
 	name.
