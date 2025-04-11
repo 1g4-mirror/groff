@@ -20159,7 +20159,8 @@ a font named @samp{0} cannot be automatically mounted by the
 
 @item spacewidth @var{n}
 @kindex spacewidth
-The width of an unadjusted inter-word space is @var{n}@tie{}basic units.
+The width of an unadjusted inter-word space is @var{n},
+relative to the device's unit width.
 @end table
 
 The directives above must appear in the first section; those below are

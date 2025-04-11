@@ -635,8 +635,8 @@ file.)
 .TP
 .BI spacewidth\~  n
 The width of an unadjusted inter-word space is
-.IR n \~basic
-units.
+.IR n ,
+relative to the device's unit width.
 .
 .
 .P
