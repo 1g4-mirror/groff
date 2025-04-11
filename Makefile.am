@@ -352,10 +352,6 @@ man7dir=$(manroot)/man$(man7ext)
 #
 # uintmax_t=<value>		define to `unsigned long' or `unsigned long
 #				long' if <inttypes.h> does not exist
-#
-# PAGE=A4			if the printer's page size is A4
-# GHOSTSCRIPT=gs		the name (and directory if required) of the
-#				ghostscript program
 
 # Include
 #

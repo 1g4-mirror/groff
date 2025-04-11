@@ -1,5 +1,15 @@
 2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* Makefile.am: Drop comments documenting `PAGE` and
+	`GHOSTSCRIPT` as appearing in "config.h".  Neither appears there
+	because they are `AC_SUBST()`ed (into generated Make files), not
+	`AC_DEFINE()`d (in "config.h").  Further, the Ghostscript-
+	related macro that we expand is named `ALT_GHOSTSCRIPT_PROGS`,
+	not `GHOSTSCRIPT`.  Prompted by a report and proposed patch by
+	Lennart Jablonka.
+
+2025-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::possibly_break_line): Fix
 	build error with GCC 5.5 on Solaris 10.  Introduce a temporary
 	variable `dsd` to store `space_deficit` as a `double`, and use
