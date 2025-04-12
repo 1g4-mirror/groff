@@ -17935,8 +17935,20 @@ to the standard error stream.
 @cindex dumping open streams (@code{pstream})
 @cindex open streams, dumping (@code{pstream})
 @cindex streams, open, dumping (@code{pstream})
-Report, to the standard error stream, the name of each opened stream,
-the name of the file backing it, and its mode (writing or appending).
+Report,
+in
+@acronym{JSON}
+syntax to the standard error stream,
+the list of open streams,
+including the name of each open stream,
+the name of the file backing it,
+and its mode
+(writing or appending).
+In
+@acronym{JSON},
+a pair of empty brackets
+@samp{[ ]}
+represents an empty list.
 @endDefreq
 
 @Defreq {ptr, }

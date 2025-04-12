@@ -4306,8 +4306,11 @@ disabled by default.
 .TPx
 .REQ .pstream
 Report,
-to the standard error stream,
-the name of each opened stream,
+in
+JSON
+syntax to the standard error stream,
+the list of open streams,
+including the name of each open stream,
 the name of the file backing it,
 and its mode
 (writing or appending).

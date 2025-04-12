@@ -1,3 +1,12 @@
+2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (print_streams): Report open streams
+	using JSON syntax.
+
+	* doc/groff.texi.in (Debugging):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests): Document it.
+
 2025-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (grostream::grostream):

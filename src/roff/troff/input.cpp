@@ -7634,14 +7634,25 @@ void print_streams()
   object_dictionary_iterator iter(stream_dictionary);
   symbol stream_name;
   grostream *grost;
+  errprint("[ ");
+  bool need_comma = false;
   while (iter.get(&stream_name, (object **)&grost)) {
     assert(!stream_name.is_null());
     if (stream_name != 0 /* nullptr */) {
-      errprint("%1\t", stream_name.contents());
-      errprint("%1\t%2\n", grost->filename.contents(),
-	       grost->mode.contents());
+      if (need_comma)
+	errprint(", ");
+      errprint("{\"stream\": ");
+      stream_name.json_dump();
+      errprint(", \"file name\": ");
+      grost->filename.json_dump();
+      errprint(", \"mode\": ");
+      grost->mode.json_dump();
+      errprint("}");
+      fflush(stderr);
+      need_comma = true;
     }
   }
+  errprint(" ]\n");
   fflush(stderr);
   skip_line();
 }
