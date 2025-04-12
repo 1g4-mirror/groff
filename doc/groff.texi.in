@@ -4683,11 +4683,21 @@ of its own.
 @c Texinfo's @cite command conceives only of citations of long-form
 @c works, like books, and forces italics.  Article citations are
 @c typically placed in quotation marks instead.
-The internals of @code{groff} @file{ms} differ from the internals of
-@acronym{AT&T} @file{ms}.  Documents that depend upon implementation
-details of @acronym{AT&T} @file{ms} may not format properly with
-@code{groff} @file{ms}.  Such details include macros whose function was
-not documented in the @acronym{AT&T} @file{ms}
+The internals of
+@code{groff}
+@file{ms}
+differ from those of
+@acronym{AT&T}
+@file{ms}.
+Documents that depend upon implementation details of
+@acronym{AT&T}
+@file{ms}
+may not format properly with
+@code{groff}
+@file{ms}.
+Such details include macros whose function was not documented in the
+@acronym{AT&T}
+@file{ms}
 manual.@footnote{``Typing Documents on the UNIX System: Using the
 -ms Macros with Troff and Nroff'', M.@tie{}E.@: Lesk, Bell Laboratories,
 1978}

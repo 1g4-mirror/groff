@@ -2343,10 +2343,12 @@ and adds several of its own.
 .IP \[bu] 3n
 The internals of
 .I groff ms
-differ from the internals of AT&T
+differ from those of
+AT&T
 .IR ms .
 .
-Documents that depend upon implementation details of AT&T
+Documents that depend upon implementation details of
+AT&T
 .I ms
 may not format properly with
 .IR "groff ms" .
