@@ -7784,6 +7784,13 @@ void do_write_request(int newline)
     return;
   }
   grostream *grost = (grostream *)stream_dictionary.lookup(stream);
+  if (0 /* nullptr */ == grost) {
+    error("cannot write to nonexistent stream '%1'", stream.contents());
+    skip_line();
+    return;
+  }
+  // Invariant: if the groff stream exists, the backing C stream must.
+  assert(grost->file != 0 /* nullptr */);
   FILE *fp = grost->file;
   if (0 /* nullptr */ == fp) {
     error("cannot write to nonexistent stream '%1'", stream.contents());

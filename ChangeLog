@@ -1,5 +1,10 @@
 2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_write_request): Fix SEGV when
+	attempting to write to a stream that doesn't exist.
+
+2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (macro_header::json_dump): If a macro
 	has non-zero "length", always dump both its "contents" _and_ its
 	"node list".  The `asciify` and `unformat` requests produce a
