@@ -756,6 +756,14 @@ and then by symbol roughly in Unicode code point order.
 .\" Exceptions are made to group closely-related escape sequences in an
 .\" order more agreeable to the development of a topic.
 .
+Neutral apostrophes
+.B \[aq]
+illustrate escape sequences with a user-selectable delimiter.
+.
+Many others are available;
+see subsection \[lq]Miscellaneous\[rq]
+and section \[lq]Compatibility Mode\[rq] below.
+.
 .
 .\"TP 10n \" "\D'E h v'" + 2n + hand-tuned for PDF
 .TP 14n \" "\A'anything'" + 2n
@@ -876,7 +884,7 @@ It is also convenient to define strings containing escape sequences that
 need to work when used in copy mode
 (for example,
 as macro arguments),
-or which will be interpolated at varying macro nesting depths.
+or that will be interpolated at varying macro nesting depths.
 .
 .
 .TP
@@ -887,11 +895,12 @@ which may be a mounting position,
 abstract style,
 or font name.
 .
-.B \[rs]f\^[]
+.BR \[rs]f\^[] ,
+.BR \[rs]f\^[P] ,
 and
 .B \[rs]f\^P
 are synonyms;
-we recommend the former.
+we recommend the first.
 .
 .
 .br
@@ -1094,6 +1103,12 @@ Synonymous with
 .RB \[lq] .nr
 .IR name\~\[+-]n \[rq].
 .
+.TP
+.BI \[rs]s[ 0 ]
+.TQ
+.BI \[rs]s\[aq] 0 \[aq]
+Restore the previous type size;
+no operation if there is none.
 .
 .TP
 .BI \[rs]s[ \[+-]n ]
@@ -1107,12 +1122,6 @@ Set the type size to,
 or increment or decrement it by,
 .I n
 scaled points.
-.
-If
-.IR n \~is
-an unsigned
-.RB \[lq] 0 \[rq],
-restore the previous size.
 .
 .
 .br
