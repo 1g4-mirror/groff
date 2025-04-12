@@ -2893,13 +2893,23 @@ by moving its location to
 .
 .TPx
 .REQ .char c
-Define ordinary or special character
+Define an
+ordinary,
+special,
+or
+indexed
+character
 .I c
 as empty.
 .
 .TPx
 .REQ .char "c contents"
-Define ordinary or special character
+Define an
+ordinary,
+special,
+or
+indexed
+character
 .I c
 as
 .I contents.
@@ -4333,21 +4343,26 @@ Change post-vertical line spacing according to
 .
 .TPx
 .REQ .rchar "c1 c2 \fR.\|.\|.\&\fP"
-Remove definition of each ordinary or special character
-.IR c1 ,
-.IR c2 ,
-\&.\|.\|.\& defined by a
-.request .char ,
-.request .fchar ,
+Remove definition of each
+ordinary,
+special,
 or
-.request .schar
+indexed
+character
+.IR c ,
+undoing the effect of a
+.BR char ,
+.BR \%fchar ,
+or
+.B \%schar
 request.
 .
 The character definition removed
 (if any)
-is the first encountered in the glyph resolution process;
-see section \[lq]Using Symbols\[rq] of
+is the first encountered in the resolution process documented
+in section \[lq]Using Symbols\[rq] of
 .IR "Groff: The GNU Implementation of troff" .
+.\" TODO: Get that information into this man page!
 .
 Glyphs,
 which are defined by font description files,
@@ -4381,10 +4396,13 @@ and once in an enclosing macro.
 .
 .TPx
 .REQ .rfschar "f c1 c2 \fR\&.\|.\|.\&\fP"
-Remove the font-specific definitions of glyphs
+Remove font-specific character definitions
 .IR c1 ,
 .IR c2 ,
 \&.\|.\|.\& for
+created by
+.B \%fschar
+for
 .RI font\~ f .
 .
 .TPx

@@ -11557,12 +11557,23 @@ on the right doesn't get examined.
 @cindex @code{\&}, and glyph definitions
 @cindex @code{\e}, and glyph definitions
 @cindex @code{hcode} request, and glyph definitions
-Define an ordinary or special character@tie{}@var{c} as @var{contents}.
-If
-@var{contents}
-is absent,
-the character is defined with empty contents.
+Define an
+ordinary,
+special,
+or
+indexed
+character
+@var{c}
+as
+@var{contents}.
 
+Omitting
+@var{contents}
+gives
+@var{c}
+an empty definition.
+
+@c Omit this paragraph from man pages.
 GNU
 @command{troff} @c GNU
 removes a leading neutral double quote
@@ -11646,21 +11657,38 @@ request in @ref{Strings}.
 
 @DefreqList {rchar, c @dots{}}
 @DefreqListEndx {rfschar, f c @dots{}}
-@cindex removing glyph definition (@code{rchar}, @code{rfschar})
+@cindex removing character definition (@code{rchar}, @code{rfschar})
+@cindex character, removing definition (@code{rchar}, @code{rfschar})
+@cindex fallback character, removing definition of (@code{rchar}, @code{rfschar})
+@c obsolete terminology follows
 @cindex glyph, removing definition (@code{rchar}, @code{rfschar})
-@cindex fallback glyph, removing definition (@code{rchar}, @code{rfschar})
-Remove definition of each ordinary or special character @var{c},
-undoing the effect of a @code{char}, @code{fchar}, or @code{schar}
+Remove definition of each
+ordinary,
+special,
+or
+indexed
+character
+@var{c},
+undoing the effect of a
+@code{char},
+@code{fchar},
+or
+@code{schar}
 request.
 The character definition removed
 (if any)
-is the first encountered in the glyph resolution process documented
-above.
-Those supplied by font description files cannot be removed.
+is the first encountered in the resolution process documented above.
+Glyphs,
+which are defined by font description files,
+cannot be removed.
 Spaces need not separate the arguments.
 
-The request @code{rfschar} removes glyph definitions defined with
-@code{fschar} for font@tie{}@var{f}.
+The request
+@code{rfschar}
+removes character definitions created by
+@code{fschar}
+for
+font@tie{}@var{f}.
 @endDefreq
 
 @c ---------------------------------------------------------------------

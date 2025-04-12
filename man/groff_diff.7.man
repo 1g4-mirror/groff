@@ -2073,24 +2073,21 @@ character on the right doesn't get examined.
 .BI .char\~ c\~\c
 .RB [[ \[dq] ]\c
 .IR contents ]
-Define an ordinary or special
-.RI character\~ c
+Define an
+ordinary,
+special,
+or
+indexed
+character
+.I c
 as
 .I contents.
 .
-If
+Omitting
 .I contents
-is absent,
-the character is defined with empty contents.
-.
-GNU
-.I troff \" GNU
-removes a leading neutral double quote
-.RB \[oq] \[dq] \[cq]
-from
-.IR contents ,
-permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
+gives
+.I c
+an empty definition.
 .
 .
 .IP
@@ -3563,20 +3560,25 @@ and the post-vertical line spacing set by this request.
 .TP
 .BI .rchar\~ c\~\c
 \&.\|.\|.
-Remove definition of each ordinary or special character
+Remove definition of each
+ordinary,
+special,
+or
+indexed
+character
 .IR c ,
 undoing the effect of a
 .BR char ,
-.BR fchar ,
+.BR \%fchar ,
 or
-.B schar
+.B \%schar
 request.
-.
 The character definition removed
 (if any)
-is the first encountered in the glyph resolution process;
-see section \[lq]Using Symbols\[rq] of
+is the first encountered in the resolution process documented
+in section \[lq]Using Symbols\[rq] of
 .IR "Groff: The GNU Implementation of troff" .
+.\" TODO: Get that information into this man page!
 .
 Glyphs,
 which are defined by font description files,
