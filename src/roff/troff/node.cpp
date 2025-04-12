@@ -2504,7 +2504,7 @@ void delete_node_list(node *n)
 void dump_node_list(node *n)
 {
   bool need_comma = false;
-  fputs("\"contents\": [", stderr);
+  fputc('[', stderr);
   while (n != 0 /* nullptr */) {
     if (need_comma)
       fputs(", ", stderr);

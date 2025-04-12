@@ -3760,6 +3760,7 @@ extern void dump_node_list(node *);
 
 void macro_header::json_dump_diversion()
 {
+  errprint("\"node list\": ");
   dump_node_list(nl.head);
   fflush(stderr);
 }
