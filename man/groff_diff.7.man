@@ -1792,8 +1792,8 @@ request.
 .B \%asciify
 cannot return all items in a diversion to their source equivalent:
 nodes such as those produced by
-.BR \[rs]N[ .\|.\|.\& ]
-will remain nodes,
+.BR \[rs]N ,
+remain nodes,
 so the result cannot be guaranteed to be a pure string.
 .
 Glyph parameters such as the type face and size are not preserved;
