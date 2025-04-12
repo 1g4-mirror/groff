@@ -11378,26 +11378,43 @@ and drawn lower than the underscore @samp{_}.
 @endDefesc
 
 @Defreq {cflags, n c1 c2 @dots{}}
-@cindex glyph properties (@code{cflags})
+@cindex glyph properties (@code{cflags}) @c obsolete terminology
 @cindex character properties (@code{cflags})
-@cindex properties of glyphs (@code{cflags})
+@cindex properties of glyphs (@code{cflags}) @c obsolete terminology
 @cindex properties of characters (@code{cflags})
-Assign properties encoded by the number @var{n} to characters @var{c1},
-@var{c2}, and so on.
+Assign properties encoded by the number
+@var{n}
+to characters
+@var{c1},
+@var{c2},
+and so on.
 
-Input characters, including special characters introduced by an escape,
-have certain properties associated with them.@footnote{Output glyphs
-have different properties.  The only ones known to GNU @code{troff} are
-those in its font's description file.  Recall @ref{Using Fonts}.}  These
-properties can be modified with this request.  The first argument is the
-sum of the desired flags and the remaining arguments are the characters
-to be assigned those properties.  Spaces need not separate the @var{cn}
-arguments.  Any argument @var{cn} can be a character class defined with
-the @code{class} request rather than an individual character.
+Characters,
+whether
+ordinary,
+special,
+or
+indexed,
+have certain associated properties.
+The first argument is the sum of the desired flags and the remaining
+arguments are the characters to be assigned those properties.
+Spaces need not separate the
+@var{cn}
+arguments.
+Any argument
+@var{cn}
+can be a character class defined with the
+@code{class}
+request rather than an individual character.
 @xref{Character Classes}.
 
-The non-negative integer @var{n} is the sum of any of the following.
-Some combinations are nonsensical, such as @samp{33} (1 + 32).
+The non-negative integer
+@var{n}
+is the sum of any of the following.
+Some combinations are nonsensical,
+such as
+@samp{33}
+(1 + 32).
 
 @table @code
 @item 1
