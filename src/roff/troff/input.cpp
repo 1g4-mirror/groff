@@ -3726,10 +3726,9 @@ void macro::json_dump()
   errprint("\"length\": %1", len);
   if (p != 0 /* nullptr */) {
     errprint(", ");
-    if (is_a_diversion)
-      p->json_dump_diversion();
-    else
-      p->json_dump_macro();
+    p->json_dump_macro();
+    errprint(", ");
+    p->json_dump_diversion();
   }
 }
 

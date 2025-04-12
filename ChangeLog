@@ -1,5 +1,13 @@
 2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (macro_header::json_dump): If a macro
+	has non-zero "length", always dump both its "contents" _and_ its
+	"node list".  The `asciify` and `unformat` requests produce a
+	hybrid macro-diversion containing both.  Each null character in
+	the "contents" corresponds to a node in the "node "list".
+
+2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Adjust debugging/dump output.
 
 	* src/roff/troff/node.cpp (dump_node_list): Drop label from
