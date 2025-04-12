@@ -5664,8 +5664,8 @@ Interpolate value of register with arbitrarily long
 .
 .TP
 .ESCq N n
-Interpolate glyph of character with
-.RI index\~ n
+Format indexed character numbered
+.I n
 in the current font.
 .
 .TP

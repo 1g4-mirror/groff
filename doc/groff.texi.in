@@ -11301,18 +11301,33 @@ standard error stream with the @code{pcomposite} request.
 @endDefreq
 
 @Defesc {\\N, @code{'}, n, @code{'}}
-@cindex numbered glyph (@code{\N})
-@cindex glyph, numbered (@code{\N})
+@cindex indexed character, formatting (@code{\N})
+@cindex character, indexed, formatting (@code{\N})
+@cindex numbered glyph, accessing (@code{\N})
+@cindex glyph, numbered, accessing (@code{\N})
 @cindex @code{char} request, used with @code{\N}
 @cindex Unicode
-Typeset the glyph with code@tie{}@var{n} in the current font
-(@code{n}@tie{}is @emph{not} the input character code).  The number
-@var{n}@tie{}can be any non-negative decimal integer.  Most devices only
-have glyphs with codes between 0 and@tie{}255; the Unicode output device
-uses codes in the range 0--65535.  If the current font does not contain
-a glyph with that code, special fonts are @emph{not} searched.  The
-@code{\N} escape sequence can be conveniently used in conjunction with
-the @code{char} request:
+Format indexed character numbered
+@var{n}
+in the current font
+(@code{n}@tie{}is
+@emph{not}
+the input character code).
+@var{n}@tie{}can
+be any non-negative decimal integer.
+Most devices number glyphs with codes between 0 and@tie{}255 only;
+the
+@code{utf8}
+output device uses codes in the range 0--65535.
+If the current font does not contain a glyph with that code,
+special fonts are
+@emph{not}
+searched.
+The
+@code{\N}
+escape sequence can be conveniently used in conjunction with the
+@code{char}
+request.
 
 @Example
 .char \[phone] \f[ZD]\N'37'
