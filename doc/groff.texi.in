@@ -18639,7 +18639,7 @@ Graphic Systems C/A/T phototypesetter (the original device target for
 in the range 6--36 points, so Ossanna contrived a special case in the
 parser to do what the user must have meant.  Kernighan warned of this in
 the 1992 revision of CSTR@tie{}#54 (§2.3), and more recently, McIlroy
-referred to it as a ``living fossil''.} should be migrated to another
+referred to it as a ``living fossil''.} should migrate to another
 @code{\s} form.
 
 @c ---------------------------------------------------------------------
@@ -18647,10 +18647,15 @@ referred to it as a ``living fossil''.} should be migrated to another
 @node Other Differences, , Compatibility Mode, Implementation Differences
 @subsection Other Differences
 
-@code{groff} request names unrecognized by other @code{troff}
-implementations will likely be ignored by them; escape sequences that
-are @code{groff} extensions are liable to be interpreted as if the
-escape character were not present.
+GNU
+@command{troff} @c GNU
+request names unrecognized by other
+@command{troff} @c generic
+implementations will likely be ignored by them,
+and escape sequences that are
+GNU
+@command{troff} @c GNU
+extensions are liable to format their function selector character.
 @cindex @code{\~}, incompatibilities with @acronym{AT&T} @code{troff}
 For example, the adjustable, non-breaking space escape sequence
 @code{\~}

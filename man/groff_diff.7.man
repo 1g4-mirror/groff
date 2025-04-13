@@ -6197,8 +6197,8 @@ GNU
 .I troff \" GNU
 request names unrecognized by other
 .I troff \" generic
-implementations will likely be ignored;
-escape sequences that are GNU
+implementations will likely be ignored by them,
+and escape sequences that are GNU
 .I troff \" GNU
 extensions are liable to format their function selector character.
 .
@@ -6285,7 +6285,7 @@ a
 .RI non-zero\~ n
 must be in the range 4\[en]39.
 .
-Legacy documents relying upon this quirk of parsing should be migrated
+Legacy documents relying upon this quirk of parsing should migrate
 to another
 .B \[rs]s
 form.
