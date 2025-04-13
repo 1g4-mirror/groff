@@ -57,7 +57,7 @@
 	has non-zero "length", always dump both its "contents" _and_ its
 	"node list".  The `asciify` and `unformat` requests produce a
 	hybrid macro-diversion containing both.  Each null character in
-	the "contents" corresponds to a node in the "node "list".
+	the "contents" corresponds to a node in the "node list".
 
 2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
