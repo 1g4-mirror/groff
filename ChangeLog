@@ -1,3 +1,8 @@
+2025-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (grostream::grostream):
+	Null-terminate `mode` structure member as well.
+
 2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_write_request): Fix SEGV when

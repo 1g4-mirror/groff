@@ -7616,7 +7616,9 @@ struct grostream {
 grostream::grostream(const string &fn, string m, FILE *fp)
 : filename(fn), mode(m), file(fp)
 {
-  filename += '\0'; // Don't leak garbage in print_streams().
+  // Don't leak garbage in print_streams().
+  filename += '\0';
+  mode += '\0';
 }
 
 // XXX: Maybe we should try to close the libc FILE stream here.
