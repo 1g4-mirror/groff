@@ -3641,8 +3641,9 @@ and
 implies
 .RB \[lq] ".rj 0" \[rq].
 .
-If invoked with the no-break control character,
-the first break is suppressed.
+Invoking the request
+with the no-break control character
+suppresses the first break.
 .
 .
 .TP
@@ -3929,6 +3930,10 @@ If
 does not end with a newline,
 .B trf
 appends one.
+.
+Invoking the request
+with the no-break control character
+suppresses the break.
 .
 .
 .TP
