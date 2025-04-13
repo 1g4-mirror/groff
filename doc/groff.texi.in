@@ -17799,7 +17799,8 @@ can also disclose
 to the standard error stream
 the internal properties and representations of
 characters,
-macros (and strings and diversions),
+macros
+(and strings and diversions),
 and the list of output nodes corresponding to the pending input line.
 @c END Keep parallel with section "Debugging" of groff(7).
 

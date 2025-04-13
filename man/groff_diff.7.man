@@ -5810,7 +5810,8 @@ to the standard error stream
 the internal properties and representations of
 characters
 .RB ( pchar ),
-macros (and strings and diversions)
+macros
+(and strings and diversions)
 .RB ( pm ),
 and the list of output nodes corresponding to the pending input line
 .RB ( pline ).
