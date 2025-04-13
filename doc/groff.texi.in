@@ -18881,20 +18881,60 @@ each rounded down to the nearest multiple of@tie{}12.
 @cindex output glyphs, and input characters, compatibility with @acronym{AT&T} @code{troff}
 @cindex characters, input, and output glyphs, compatibility with @acronym{AT&T} @code{troff}
 @cindex glyphs, output, and input characters, compatibility with @acronym{AT&T} @code{troff}
-In GNU @code{troff} there is a fundamental difference between
-(unformatted) characters and (formatted) glyphs.  Everything that
-affects how a glyph is output is stored with the glyph node; once a
-glyph node has been constructed, it is unaffected by any subsequent
-requests that are executed, including @code{bd}, @code{cs}, @code{tkf},
-@code{tr}, or @code{fp} requests.  Normally, glyphs are constructed from
-characters immediately before the glyph is added to an output line.
-Macros, diversions, and strings are all, in fact, the same type of
-object; they contain a sequence of intermixed character and glyph nodes.
-Special characters transform from one to the other:@: before being added
-to the output, they behave as characters; afterward, they are glyphs.  A
-glyph node does not behave like a character node when it is processed by
-a macro:@: it does not inherit any of the special properties that the
-character from which it was constructed might have had.  For example,
+@c TODO: A lot of this discussion should move to "Using Symbols" and
+@c "Gtroff Internals".
+GNU
+@command{troff} @c GNU
+fundamentally distinguishes characters from glyphs.
+Characters can be ordinary,
+special,
+or indexed,
+and populate strings and macros.
+Characters
+@emph{per se}
+have not (yet) been formatted.
+Glyphs represent graphemes
+(supplied by the output device)
+and populate diversions
+or the pending output line.
+The formatting process converts characters into
+(sequences of)
+glyphs.
+GNU
+@command{troff} @c GNU
+stores properties of the environment
+that affect how a glyph is rendered with the glyph node's data.
+Thus,
+subsequent formatting operations do not affect it,
+including
+@code{bd},
+@code{cs},
+@code{tkf},
+@code{tr},
+and
+@code{fp}
+requests.
+Normally,
+a macro or string
+contains only a list of characters
+and a diversion
+contains only a list of nodes.
+However,
+applying the
+@code{asciify}
+or
+@code{unformat}
+requests to diversion converts some of its nodes back into characters.
+Where the formatter cannot recover the character representation of node,
+it stores a null character
+corresponding to a single node in the node list.
+
+Consequently,
+a glyph node does not behave like a character
+when it is processed by a macro:@:
+it does not inherit any of the special properties
+that the character from which it was constructed might have had.
+For example,
 the input
 
 @Example
