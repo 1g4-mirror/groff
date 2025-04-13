@@ -32,10 +32,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "error.h"
 #include "symbol.h"
 
-const char **symbol::table = 0;
-int symbol::table_used = 0;
+const char **symbol::table = 0 /* nullptr */;
+int symbol::table_used = 0; // # of entries in use
 int symbol::table_size = 0;
-char *symbol::block = 0;
+char *symbol::block = 0 /* nullptr */;
 size_t symbol::block_size = 0;
 
 const symbol NULL_SYMBOL;
@@ -53,7 +53,8 @@ static const unsigned int table_sizes[] = {
   101, 503, 1009, 2003, 3001, 4001, 5003, 10007, 20011, 40009, 80021,
   160001, 500009, 1000003, 1500007, 2000003, 0
 };
-const double FULL_MAX = 0.3;	// don't let the table get more than this full
+// Don't populate table entries above this ratio.
+const double FULL_MAX = 0.3;
 
 static unsigned int hash_string(const char *p)
 {
@@ -84,35 +85,36 @@ inline void unused(void *) { }
 
 symbol::symbol(const char *p, int how)
 {
-  if (p == 0) {
-    s = 0;
+  if (p == 0 /* nullptr */) {
+    s = 0 /* nullptr */;
     return;
   }
-  if (*p == 0) {
+  if (*p == 0 /* nullptr */) {
     s = "";
     return;
   }
-  if (table == 0) {
+  if (table == 0 /* nullptr */) {
     table_size = table_sizes[0];
     table = (const char **)new char*[table_size];
     for (int i = 0; i < table_size; i++)
-      table[i] = 0;
+      table[i] = 0 /* nullptr */;
     table_used = 0;
   }
   unsigned int hc = hash_string(p);
   const char **pp;
   for (pp = table + hc % table_size;
-       *pp != 0;
+       *pp != 0 /* nullptr */;
        (pp == table ? pp = table + table_size - 1 : --pp))
     if (strcmp(p, *pp) == 0) {
       s = *pp;
       return;
     }
   if (how == MUST_ALREADY_EXIST) {
-    s = 0;
+    s = 0 /* nullptr */;
     return;
   }
-  if (table_used  >= table_size - 1 || table_used >= table_size*FULL_MAX) {
+  if ((table_used >= (table_size - 1))
+      || (table_used >= (table_size * FULL_MAX))) {
     const char **old_table = table;
     unsigned int old_table_size = table_size;
     int i;
@@ -123,7 +125,7 @@ symbol::symbol(const char *p, int how)
     table_used = 0;
     table = (const char **)new char*[table_size];
     for (i = 0; i < table_size; i++)
-      table[i] = 0;
+      table[i] = 0 /* nullptr */;
     for (pp = old_table + old_table_size - 1;
 	 pp >= old_table;
 	 --pp) {
@@ -132,17 +134,16 @@ symbol::symbol(const char *p, int how)
 	 }
     delete[] old_table;
     for (pp = table + hc % table_size;
-	 *pp != 0;
+	 *pp != 0 /* nullptr */;
 	 (pp == table ? pp = table + table_size - 1 : --pp))
       ;
   }
   ++table_used;
-  if (how == DONT_STORE) {
+  if (how == DONT_STORE)
     s = *pp = p;
-  }
   else {
     size_t len = strlen(p) + 1;
-    if (block == 0 || block_size < len) {
+    if ((block == 0 /* nullptr */) || (block_size < len)) {
       block_size = len > BLOCK_SIZE ? len : BLOCK_SIZE;
       block = new char [block_size];
     }
@@ -155,7 +156,9 @@ symbol::symbol(const char *p, int how)
 
 symbol concat(symbol s1, symbol s2)
 {
-  char *buf = new char [strlen(s1.contents()) + strlen(s2.contents()) + 1];
+  char *buf = new char [strlen(s1.contents())
+			+ strlen(s2.contents())
+			+ 1];
   strcpy(buf, s1.contents());
   strcat(buf, s2.contents());
   symbol res(buf);

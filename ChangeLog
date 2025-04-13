@@ -1,3 +1,9 @@
+2025-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/symbol.cpp: Fix code style nits.
+	(symbol::symbol): Parenthesize complex expressions.  Drop braces
+	guarding single-statement control structure bodies.
+
 2025-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (print_streams): Report open streams
