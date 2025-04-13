@@ -2477,7 +2477,7 @@ spaces;
 or escape sequences that interpolate only these.
 .\" XXX: or tabs, leaders, backspace, and delete characters
 .
-The remaining argument names named for clarity;
+We name the remaining arguments for clarity;
 they are also
 .I character-sequences.
 .
