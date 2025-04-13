@@ -7605,20 +7605,18 @@ void terminal_continue()
   do_terminal(0, 1);
 }
 
-struct grostream {
-  string filename;
-  string mode;
+class grostream : public object {
+public:
+  symbol filename;
+  symbol mode;
   FILE *file;
-  grostream(const string &fn, string m, FILE *fp);
+  grostream(const char *fn, symbol m, FILE *fp);
   ~grostream();
 };
 
-grostream::grostream(const string &fn, string m, FILE *fp)
+grostream::grostream(const char *fn, symbol m, FILE *fp)
 : filename(fn), mode(m), file(fp)
 {
-  // Don't leak garbage in print_streams().
-  filename += '\0';
-  mode += '\0';
 }
 
 // XXX: Maybe we should try to close the libc FILE stream here.
@@ -7663,7 +7661,7 @@ static void open_file(bool appending)
   if (!stream.is_null()) {
     char *filename = read_rest_of_line_as_argument();
     if (filename != 0 /* nullptr */) {
-      const string mode = appending ? "appending" : "writing";
+      const char *mode = appending ? "appending" : "writing";
       errno = 0;
       FILE *fp = fopen(filename, appending ? "a" : "w");
       if (0 /* nullptr */ == fp) {
@@ -7686,8 +7684,8 @@ static void open_file(bool appending)
 	    return;
 	  }
 	}
-	grostream *grost = new grostream(filename, mode, &*fp);
-	stream_dictionary.define(stream, (object *)grost);
+	stream_dictionary.define(stream,
+				 new grostream(filename, mode, &*fp));
       }
     }
     // TODO: Add `filename` to file name set.

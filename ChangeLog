@@ -1,5 +1,33 @@
 2025-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Refactor `grostream` class for
+	memory safety.
+	(struct grosteam): Convert from this...
+	(class grostream): ...to this, inheriting from class `object` so
+	that it casts less dangerously thence and thither when stashing
+	`grostream`s into and retrieving them from `object_dictionary`
+	objects.
+	(class grostream): Also re-type `filename` and `mode` member
+	variables from (groff) `string` to `symbol`, since they won't
+	have embedded null characters (and take up half as much space;
+	`sizeof (string)` is 16 on GNU/Linux amd64 whereas that of
+	`symbol` is 8).  Making this change by itself exposed memory
+	corruption problems, resolved by resituating `grostream` in the
+	class hierarchy.
+	(grostream::grostream): Drop now unnecessary explicit null
+	termination.  That property is implied by the `symbol` class.
+	(open_file): Make newly created object anonymous, and drop
+	frightening C-style typecast.  Now a `grostream` casts safely
+	and implicitly to and from `object`.
+
+	Problem likely introduced by me in commit 6d32f2492, 24
+	September, but it was latent (requiring the `symbol` change
+	noted above), and without JSON dumpers for `string` and `symbol`
+	objects, visibility into memory mischief was limited if it
+	didn't cause a SEGV on a developer's machine.
+
+2025-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/symbol.cpp: Fix code style nits.
 	(symbol::symbol): Parenthesize complex expressions.  Drop braces
 	guarding single-statement control structure bodies.
