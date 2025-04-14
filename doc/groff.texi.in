@@ -18081,11 +18081,11 @@ However, the @emph{reported} horizontal drawing position is still
 reckoned from the start of the input line.
 
 @Example
-foo bar \n(hp
-foo bar \c
+foo \n(hp
+bar \c
 'fl
-\n(hp
-    @result{} foo bar 192 foo bar 0
+\n(hp baz \n(hp
+    @result{} foo 96 bar 0 baz 144
 @endExample
 
 The timing of a flush is most easily perceived in GNU @command{troff}'s
