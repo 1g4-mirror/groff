@@ -17150,7 +17150,7 @@ Give GNU @code{troff} or a front end program the @option{-U} option to
 enable unsafe mode.
 
 The @code{pstream} request dumps the list of open streams to the
-standard error stream; @ref{Debugging}.
+standard error stream; see @ref{Debugging}.
 @endDefreq
 
 @DefreqList {write, stream [@code{"}]@Var{contents}}
