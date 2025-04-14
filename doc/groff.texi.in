@@ -18885,7 +18885,7 @@ each rounded down to the nearest multiple of@tie{}12.
 @c "Gtroff Internals".
 GNU
 @command{troff} @c GNU
-fundamentally distinguishes characters from glyphs.
+distinguishes characters from glyphs.
 Characters can be ordinary,
 special,
 or indexed,
@@ -18926,7 +18926,7 @@ or
 @code{unformat}
 requests to diversion converts some of its nodes back into characters.
 Where the formatter cannot recover the character representation of node,
-it stores a null character
+it stores a null character in the character list
 corresponding to a single node in the node list.
 
 Consequently,

@@ -6385,12 +6385,12 @@ inter-sentence space each to the nearest multiple of\~12.
 .
 .
 .\" TODO: A lot of this discussion should move to "Using Symbols" and
-.\" "Gtroff Internals" (or whatever those section get named once ported
+.\" "Gtroff Internals" (or whatever those sections get named once ported
 .\" to this man page).
 .P
 GNU
 .I troff \" GNU
-fundamentally distinguishes characters from glyphs.
+distinguishes characters from glyphs.
 .
 Characters can be ordinary,
 special,
@@ -6439,7 +6439,7 @@ or
 requests to diversion converts some of its nodes back into characters.
 .
 Where the formatter cannot recover the character representation of node,
-it stores a null character
+it stores a null character in the character list
 corresponding to a single node in the node list.
 .
 Consequently,
