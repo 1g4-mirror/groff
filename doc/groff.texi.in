@@ -15741,13 +15741,22 @@ the default blank line behavior is (re-)established.
 @DefregItemx {lsn}
 @DefregListEndx {lss}
 @cindex leading spaces macro (@code{lsm})
-Set a leading space trap, calling the macro @var{name} when GNU
-@command{troff} encounters leading spaces on a text line; the implicit
-line break that normally happens in this case is suppressed.  The
-formatter stores the count of leading spaces on the text line in
-register @code{lsn}, and the amount of corresponding horizontal motion
-in register @code{lss}, irrespective of whether a leading space trap is
-set.  When it is, GNU @command{troff} removes the leading spaces from
+Set a leading space trap,
+calling the macro
+@var{name}
+when GNU
+@command{troff} @c GNU
+encounters leading spaces on a text line;
+the implicit line break that normally happens in this case
+is suppressed.
+The formatter stores the count of leading spaces on the text line
+in register
+@code{lsn},
+and the amount of corresponding horizontal motion
+in register
+@code{lss},
+irrespective of whether a leading space trap is set.
+When it is, GNU @command{troff} removes the leading spaces from
 the input line and produces no motion before calling @var{name}.
 
 If no argument is supplied, GNU @command{troff} reëstablishes the
