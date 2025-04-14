@@ -1711,16 +1711,18 @@ newline.
 .
 .
 .P
-If an escape character is followed by a character
-that does not identify a defined operation,
-GNU
+If the character that follows the escape character
+does not identify a defined operation,
+the formatter ignores the escape character.
+.
+(GNU
 .I troff \" GNU
-ignores the escape character
-(producing a warning in category
-.RB \[lq] escape \[rq]
-if enabled),
-processing the next character
-as if it were not preceded by an escape character.
+produces a warning in category
+.RB \%\[lq] escape \[rq].
+@xref{Warnings}.
+.
+See section \[lq]Warnings\[rq] in
+.MR @g@troff 1 .)
 .
 .
 .P
