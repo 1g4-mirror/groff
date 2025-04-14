@@ -4491,7 +4491,7 @@ It is positive if the glyph extends below the baseline.
 .
 .TP
 .B \[rs]n[.ce]
-Interpolate number of input lines remaining to be centered
+Interpolate count of input lines remaining to be centered
 in the environment.
 .
 .
@@ -4631,8 +4631,8 @@ was \[lq]interrupted\[rq] or continued with
 .
 .TP
 .B \[rs]n[.it]
-Interpolate the count of lines remaining in the environment's
-pending input trap.
+Interpolate count of input lines remaining
+in the environment's pending input trap.
 .
 .
 .TP
@@ -4712,8 +4712,9 @@ Interpolate\~1 if output line numbering is enabled in the environment
 .
 .TP
 .B \[rs]n[.nn]
-Interpolate count of output lines remaining in the environment
-to have numbering suppressed.
+Interpolate count of lines remaining in the environment
+for which numbering is suppressed
+while output line numbering is enabled.
 .
 .
 .TP
@@ -4772,7 +4773,7 @@ Interpolate the environment's post-vertical line spacing amount.
 .
 .TP
 .B \[rs]n[.rj]
-Interpolate number of input lines remaining to be right-aligned
+Interpolate count of input lines remaining to be right-aligned
 in the environment.
 .
 .

@@ -8477,9 +8477,9 @@ length and indentation without filling, then break again regardless of
 the invoking control character.
 @c Temporary indentation is ignored.
 If the argument is not positive, centering is disabled.  Omitting the
-argument implies an @var{n} of @samp{1}.  The count of lines remaining
-to be centered is stored in the read-only register @code{.ce} and is
-associated with the environment (@pxref{Environments}).
+argument implies an @var{n} of @samp{1}.  The count of input lines
+remaining to be centered is stored in the read-only register @code{.ce}
+and is associated with the environment (@pxref{Environments}).
 
 @cindex @code{ce} request, difference from @w{@samp{.ad c}}
 While the @w{@samp{.ad c}} request also centers text, it fills the text
@@ -8527,8 +8527,8 @@ of the next @var{n} productive input lines to the right margin without
 filling, then break again regardless of the control character.
 @c Temporary indentation is ignored.
 If the argument is not positive, right-alignment is disabled.  Omitting
-the argument implies an @var{n} of @samp{1}.  The count of lines
-remaining to be right-aligned is stored in the read-only register
+the argument implies an @var{n} of @samp{1}.  The count of input lines
+remaining to be right-aligned is stored in the read-only registeinput r
 @code{.rj} and is associated with the environment
 (@pxref{Environments}).
 
@@ -15655,10 +15655,10 @@ the trap is sprung.
 @endExample
 
 The @code{.it}, @code{.itc}, and @code{.itm} registers report the number
-of lines remaining in a pending input trap, a Boolean indication of
-whether that pending input trap honors output line continuation, and the
-name of the macro associated with the pending input trap, respectively.
-All are read-only; @code{.itm} is string-valued as well.
+of input lines remaining in a pending input trap, a Boolean indication
+of whether that pending input trap honors output line continuation, and
+the name of the macro associated with the pending input trap,
+respectively.  All are read-only; @code{.itm} is string-valued as well.
 
 @need 500
 Let us consider in more detail the sorts of input lines that are or are
@@ -17489,7 +17489,7 @@ lines once
 enables it.
 
 The @code{.nn} register stores the
-count of lines @c in the environment
+count of lines remaining in the environment
 for which numbering is suppressed
 while output line numbering is enabled.
 
