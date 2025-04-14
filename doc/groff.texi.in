@@ -5687,13 +5687,37 @@ conversions.  Input to the GNU @code{troff} formatter itself, on the
 other hand, must be in a single-byte encoding compatible with @w{ISO
 646:1991 IRV} (US-@acronym{ASCII}).
 
-Certain macro files are responsible for translating input character
-codes above 127 decimal to appropriate GNU @code{troff} escape
-sequences, and setting up hyphenation codes for letters their encodings
-define; typically, they also invoke @code{hcode} requests to case-fold
-such letters where necessary so that they match hyphenation patterns.
-As a rule, a localization file (recall @pxref{Manipulating Hyphenation})
-loads one of these files; a document need not do so directly.
+Localization influences automatic hyphenation
+in two distinct but related respects.
+A macro file specific to a character coding identifies
+which character codes correspond to letters expected
+in the language's hyphenation pattern files
+and sets up case equivalences for those letters.
+A language's macro file determines which of these letters
+are equivalent to other letters for hyphenation purposes.
+
+For example,
+in English,
+the letter @samp{ñ} occurs in loan words.
+The
+@file{latin1.tmac}
+and
+@file{latin9.tmac}
+macro files define a hyphenation code for @samp{ñ}
+and make @samp{Ñ} equivalent to it.
+The English localization file
+@file{en.tmac}
+furthermore makes @samp{ñ} equivalent to @samp{n}.
+In Spanish
+(@file{es.tmac}),
+however,
+@samp{ñ} and @samp{n} are
+@emph{not}
+equivalent.
+The language localization file
+(@pxref{Manipulating Hyphenation})
+loads an appropriate encoding localization file;
+a document need not do so directly.
 
 @table @code
 @item latin1
