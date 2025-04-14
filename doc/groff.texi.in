@@ -5998,10 +5998,16 @@ glyph from lying partially or wholly off the page.
 
 @cindex page offset
 @cindex offset, page
-Further, it is conventional not to write or draw at the extreme edges of
-the page.  Typesetters configure a @dfn{page offset}, a rightward shift
-from the left edge.@footnote{@code{groff}'s terminal output devices have
-page offsets of zero.}
+Further,
+it is conventional not to write or draw
+at the extreme edges of the page.
+Typesetters configure a
+@dfn{page offset},
+a rightward shift from the left edge
+that defines the zero point
+from which the formatter reckons the line indentation
+and length.@footnote{@code{groff}'s
+terminal output devices have page offsets of zero.}
 
 @cindex page break
 @cindex break, page

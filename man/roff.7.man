@@ -588,12 +588,15 @@ preventing a glyph from lying partially or wholly off the page.
 .
 .P
 Further,
-it is conventional not to write or draw at the extreme edges of the
-page.
+it is conventional not to write or draw
+at the extreme edges of the page.
 .
 Typesetters configure a
 .I "page offset,"
-a rightward shift from the left edge.
+a rightward shift from the left edge
+that defines the zero point
+from which the formatter reckons the line indentation
+and length.
 .
 .RI ( groff 's
 terminal output devices have page offsets of zero.)
