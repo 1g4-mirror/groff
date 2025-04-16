@@ -71,7 +71,7 @@ test -z "$fail" || exit
 # We need uchardet to work to get past this point.
 if ! "$preconv" -v | grep -q 'with uchardet support'
 then
-    echo "$0: preconv lacks uchardet support; skipping test" >&2
+    echo "$0: preconv lacks uchardet support; skipping" >&2
     exit 77 # skip
 fi
 

@@ -26,7 +26,7 @@ for cmd in pnmcrop pamcut pnmtopng pnmtops ps2ps
 do
     if ! command -v $cmd >/dev/null
     then
-        echo "$0: cannot locate '$cmd' command; skipping test" >&2
+        echo "$0: cannot locate '$cmd' command; skipping" >&2
         exit 77 # skip
     fi
 done

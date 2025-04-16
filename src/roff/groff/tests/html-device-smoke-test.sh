@@ -87,7 +87,7 @@ fi
 
 if [ -n "$give_up" ]
 then
-    echo "$0: $message; skipping test" >&2
+    echo "$message; skipping test" >&2
     exit 77 # skip
 fi
 
