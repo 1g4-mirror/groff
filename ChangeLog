@@ -1,5 +1,11 @@
 2025-04-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (open_file, close_stream)
+	(do_write_request, write_macro_request): Fix code style nit,
+	using C++-style (static) type cast instead of C-style cast.
+
+2025-04-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Tidy up `grostream` type definition.
 	(class grostream): Convert (back) from this...
 	(struct grostream): ...to this, since all its members are public

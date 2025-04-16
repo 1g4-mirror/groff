@@ -7672,8 +7672,8 @@ static void open_file(bool appending)
 	stream_dictionary.remove(stream);
       }
       else {
-	grostream *oldgrost
-	  = (grostream *)stream_dictionary.lookup(stream);
+	grostream *oldgrost = static_cast<grostream *>(stream_dictionary
+						       .lookup(stream));
 	if (oldgrost != 0 /* nullptr */) {
 	  FILE *oldfp = oldgrost->file;
 	  assert(oldfp != 0 /* nullptr */);
@@ -7731,7 +7731,8 @@ static void close_stream(symbol &stream)
   assert(!stream.is_null());
   bool is_valid = false;
   FILE *fp = 0 /* nullptr */;
-  grostream *grost = (grostream *)stream_dictionary.lookup(stream);
+  grostream *grost = static_cast<grostream *>(stream_dictionary
+					      .lookup(stream));
   if (grost != 0 /* nullptr */) {
     fp = grost->file;
     // We shouldn't have stored a null pointer in the first place.
@@ -7793,7 +7794,8 @@ void do_write_request(int newline)
     skip_line();
     return;
   }
-  grostream *grost = (grostream *)stream_dictionary.lookup(stream);
+  grostream *grost = static_cast<grostream *>(stream_dictionary
+					      .lookup(stream));
   if (0 /* nullptr */ == grost) {
     error("cannot write to nonexistent stream '%1'", stream.contents());
     skip_line();
@@ -7841,7 +7843,8 @@ void write_macro_request()
     skip_line();
     return;
   }
-  grostream *grost = (grostream *)stream_dictionary.lookup(stream);
+  grostream *grost = static_cast<grostream *>(stream_dictionary
+					      .lookup(stream));
   FILE *fp = grost->file;
   if (0 /* nullptr */ == fp) {
     error("no stream named '%1'", stream.contents());
