@@ -2212,7 +2212,8 @@ possible.
 @subsection Columnation
 
 Macro packages apart from @file{man} and @file{mdoc} for man page
-formatting offer a facility for setting multiple columns on the page.
+formatting offer a facility for setting multiple text columns on the
+page.
 
 @c ---------------------------------------------------------------------
 
