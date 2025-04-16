@@ -35,4 +35,4 @@ qux
 
 printf '%s\n' "$input" | "$groff" -K utf8 -T utf8 -m ja -w w
 
-# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:

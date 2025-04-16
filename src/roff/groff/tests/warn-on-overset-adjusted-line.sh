@@ -29,11 +29,11 @@ ABCD
 echo "verifying that overset filled line warns in nroff mode" >&2
 printf '%s\n' "$input" | "$groff" -a -Ww -wbreak -T ascii
 printf '%s\n' "$input" | "$groff" -z -Ww -wbreak -T ascii 2>&1 \
-  | grep -q . || exit 1
+    | grep -q . || exit 1
 
 echo "verifying that overset filled line warns in troff mode" >&2
 printf '%s\n' "$input" | "$groff" -a -Ww -wbreak
 printf '%s\n' "$input" | "$groff" -z -Ww -wbreak 2>&1 \
-  | grep -q . || exit 1
+    | grep -q . || exit 1
 
-# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
