@@ -80,4 +80,6 @@ printf '%s\n' "$input" | "$groff" -a -Ww -wbreak
 printf '%s\n' "$input" | "$groff" -z -Ww -wbreak 2>&1 \
   | grep -q . || wail
 
+test -z "$fail"
+
 # vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
