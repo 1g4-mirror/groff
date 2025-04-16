@@ -929,7 +929,7 @@ the GNU @command{troff} formatter program, and a postprocessor.
 @pindex preconv
 @command{groff} runs the GNU @command{troff} program and, normally, a
 postprocessor appropriate to the selected device.  The default device is
-@samp{ps}, unless changed at @code{groff}'s build-time configuration).
+@samp{ps}, unless changed at @code{groff}'s build-time configuration.
 @command{groff} can preprocess input with any of @code{gpic},
 @code{geqn}, @code{gtbl}, @code{ggrn}, @code{grap}, @code{gchem},
 @code{grefer}, @code{gsoelim}, or @code{preconv}.
@@ -945,7 +945,7 @@ and output drivers can be found in the man pages @cite{gpic@r{(1)}},
 @cite{gropdf@r{(1)}}, @cite{grohtml@r{(1)}}, @cite{grodvi@r{(1)}},
 @cite{grolj4@r{(1)}}, @cite{grolbp@r{(1)}}, and @cite{gxditview@r{(1)}}.
 
-A summary of @command{groff}'s usage is as follows.
+A summary of @command{groff}'s usage follows.
 
 @Example
 groff [-abcCeEgGijklNpRsStUVXzZ] [-d @var{c}@var{s}]@
@@ -1488,7 +1488,7 @@ human-readable form using UTC.
 A macro file must have a name in the form @code{@var{name}.tmac} or
 @code{tmac.@var{name}} and be placed in a @dfn{tmac directory} to be
 found by the @option{-m @var{mac}} command-line option.@footnote{The
-@code{mso} loads a macro file of any name.  @xref{I/O}.}
+@code{mso} request loads a macro file of any name.  @xref{I/O}.}
 @cindex tmac, directory
 @cindex directory, for tmac files
 @cindex tmac, path
