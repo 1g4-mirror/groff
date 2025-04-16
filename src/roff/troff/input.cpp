@@ -7605,11 +7605,10 @@ void terminal_continue()
   do_terminal(0, 1);
 }
 
-class grostream : public object {
-public:
-  symbol filename;
-  symbol mode;
-  FILE *file;
+struct grostream : object {
+  const symbol filename;
+  const symbol mode;
+  FILE * const file;
   grostream(const char *fn, symbol m, FILE *fp);
   ~grostream();
 };

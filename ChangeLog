@@ -1,3 +1,13 @@
+2025-04-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Tidy up `grostream` type definition.
+	(class grostream): Convert (back) from this...
+	(struct grostream): ...to this, since all its members are public
+	anyway.  Also drop `public` access specifier from `object` base
+	class since we require no visibility of its members.  Also mark
+	member variables as `const` since they should be immutable after
+	construction.
+
 2025-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Refactor `grostream` class for
