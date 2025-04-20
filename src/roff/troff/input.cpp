@@ -6392,17 +6392,17 @@ static node *do_suppress(symbol nm) // \O
   const char *s = nm.contents();
   switch (*s) {
   case '0':
-    if (suppression_level == 0)
+    if (0 == suppression_level)
       // suppress generation of glyphs
       return new suppress_node(0, 0);
     break;
   case '1':
-    if (suppression_level == 0)
+    if (0 == suppression_level)
       // enable generation of glyphs
       return new suppress_node(1, 0);
     break;
   case '2':
-    if (suppression_level == 0)
+    if (0 == suppression_level)
       return new suppress_node(1, 1);
     break;
   case '3':
@@ -6417,27 +6417,27 @@ static node *do_suppress(symbol nm) // \O
     {
       s++;			// move over '5'
       char position = *s;
-      if (*s == '\0') {
+      if ('\0' == *s) {
 	error("missing position and file name in output suppression"
 	      " escape sequence");
 	return 0 /* nullptr */;
       }
-      if (!(position == 'l'
-	    || position == 'r'
-	    || position == 'c'
-	    || position == 'i')) {
+      if ((position != 'l')
+	  && (position != 'r')
+	  && (position != 'c')
+	  && (position != 'i')) {
 	error("expected position 'l', 'r', 'c', or 'i' in output"
 	      " suppression escape sequence, got '%1'", position);
-	return 0;
+	return 0 /* nullptr */;
       }
       s++;			// onto image name
-      if (s == (char *)0) {
+      if (0 == s /* nullptr */) {
 	error("missing image name in output suppression escape"
 	      " sequence");
-	return 0;
+	return 0 /* nullptr */;
       }
       image_no++;
-      if (suppression_level == 0)
+      if (0 == suppression_level)
 	return new suppress_node(symbol(s), position, image_no);
       else
 	have_formattable_input = true;
@@ -6447,7 +6447,7 @@ static node *do_suppress(symbol nm) // \O
     error("invalid argument '%1' to output suppression escape sequence",
 	  *s);
   }
-  return 0;
+  return 0 /* nullptr */;
 }
 
 void device_extension_node::tprint(troff_output_file *out)
@@ -6456,10 +6456,11 @@ void device_extension_node::tprint(troff_output_file *out)
   string_iterator iter(mac);
   for (;;) {
     int c = iter.get(0);
-    if (c == EOF)
+    if (c != EOF)
+      for (const char *s = ::asciify(c); *s; s++)
+	tprint_char(out, *s);
+    else
       break;
-    for (const char *s = ::asciify(c); *s; s++)
-      tprint_char(out, *s);
   }
   tprint_end(out);
 }

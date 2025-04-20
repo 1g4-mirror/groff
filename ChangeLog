@@ -1,3 +1,47 @@
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/input.cpp (do_suppress): Drop unnecessary cast
+	of `0` when performing null pointer comparison.  "A constant
+	expression ... that evaluates to 0 can be implicitly converted
+	to any pointer or pointer to member type." (_The C++ Programming
+	Language, Special Edition_, Stroustrup, 1997, p.  835).
+
+	* src/roff/troff/input.cpp (do_suppress):
+	* src/roff/troff/node.cpp (has_font, env_space_width)
+	(env_sentence_space_width, env_half_narrow_space_width)
+	(env_narrow_space_width): Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.
+
+	* src/roff/troff/input.cpp (do_suppress): ...and apply
+	DeMorgan's Law to the same end.
+
+	* src/roff/troff/input.cpp (device_extension_node::tprint):
+	Invert sense of and reorder `if` statement to (1) avoid
+	inadvertent lvalue assignment and (2) execute the common case
+	first, for the human reader's benefit as well as a gesture at
+	assisting branch prediction.
+
+	* src/roff/troff/node.cpp: Initialize global `last_position` of
+	type `char` to a meaningful default.  This datum should be of an
+	`enum` type, but enum types in C and C++ prior to C++11 were
+	feeble and rewarded sloppy programming techniques.  ("An
+	enumerated type can be seen as a degenerate tagged union of unit
+	type." [Wikipedia].  Because C is really B++ and B was typeless
+	{see Ritchie 1993, HOPL 2}, disciples of Ritchie blessed the
+	world with countless billion-dollar mistakes; see Hoare 2009.)
+	(font_info::contains, font_info::is_special)
+	(font_info::is_style, make_composite_node, make_glyph_node)
+	(mount_font_no_translate, mount_style)
+	(font_family::make_definite, has_font, zoom_font, symbol_fontno)
+	(is_good_fontno, get_bold_fontno, env_space_width)
+	(env_sentence_space_width, env_half_narrow_space_width)
+	(env_narrow_space_width): Parenthesize complex expressions.
+	(suppress_node_put): Compare element of `char` array to
+	character literal rather than an integer literal with a C-style
+	typecast to `char`.
+
 2025-04-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (open_file, close_stream)

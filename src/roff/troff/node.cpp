@@ -242,24 +242,24 @@ static int font_table_size = 0;
 font_info::font_info(symbol nm, int n, symbol enm, font *f)
 : last_tfont(0), number(n), last_size(0),
   internal_name(nm), external_name(enm), fm(f),
-  is_bold(0), is_constant_spaced(CONSTANT_SPACE_NONE), last_ligature_mode(1),
-  last_kern_mode(1), cond_bold_list(0), sf(0)
+  is_bold(0), is_constant_spaced(CONSTANT_SPACE_NONE),
+  last_ligature_mode(1), last_kern_mode(1), cond_bold_list(0), sf(0)
 {
 }
 
 inline int font_info::contains(charinfo *ci)
 {
-  return fm != 0 && fm->contains(ci->as_glyph());
+  return (fm != 0) && fm->contains(ci->as_glyph());
 }
 
 inline int font_info::is_special()
 {
-  return fm != 0 && fm->is_special();
+  return (fm != 0) && fm->is_special();
 }
 
 inline int font_info::is_style()
 {
-  return fm == 0;
+  return (fm == 0);
 }
 
 void font_info::set_zoom(int zoom)
@@ -4421,7 +4421,7 @@ static const char *get_string(const char *p)
 void suppress_node::put(troff_output_file *out, const char *s)
 {
   int i = 0;
-  while (s[i] != (char)0) {
+  while (s[i] != '\0') {
     out->write_device_extension_char(s[i]);
     i++;
   }
@@ -4433,7 +4433,7 @@ void suppress_node::put(troff_output_file *out, const char *s)
  *  produce a bounding box with no associated image or position thereof.
  */
 
-static char last_position = 0;
+static char last_position = 'i';
 static const char *image_filename = "";
 static size_t image_filename_len = 0;
 static int subimage_counter = 0;
@@ -5353,7 +5353,8 @@ static node *make_composite_node(charinfo *s, environment *env)
     error("cannot format composite glyph: no current font");
     return 0 /* nullptr */;
   }
-  assert(fontno < font_table_size && font_table[fontno] != 0);
+  assert((fontno < font_table_size)
+	 && font_table[fontno] != 0 /* nullptr*/);
   node *n = charinfo_to_node_list(s, env);
   font_size fs = env->get_font_size();
   int char_height = env->get_char_height();
@@ -5373,7 +5374,8 @@ static node *make_glyph_node(charinfo *s, environment *env,
     error("cannot format glyph: no current font");
     return 0 /* nullptr */;
   }
-  assert(fontno < font_table_size && font_table[fontno] != 0);
+  assert((fontno < font_table_size)
+	 && font_table[fontno] != 0 /* nullptr*/);
   int fn = fontno;
   bool found = font_table[fontno]->contains(s);
   if (!found) {
@@ -6417,7 +6419,7 @@ static void grow_font_table(int n)
   assert(n >= font_table_size);
   font_info **old_font_table = font_table;
   int old_font_table_size = font_table_size;
-  font_table_size = font_table_size ? (font_table_size*3)/2 : 10;
+  font_table_size = font_table_size ? ((font_table_size * 3) / 2) : 10;
   if (font_table_size <= n)
     font_table_size = n + 10;
   font_table = new font_info *[font_table_size];
@@ -6426,7 +6428,7 @@ static void grow_font_table(int n)
 	   old_font_table_size*sizeof(font_info *));
   delete[] old_font_table;
   for (int i = old_font_table_size; i < font_table_size; i++)
-    font_table[i] = 0;
+    font_table[i] = 0 /* nullptr */;
 }
 
 dictionary font_translation_dictionary(17);
@@ -6470,7 +6472,7 @@ static bool mount_font_no_translate(int n, symbol name,
   if (check_only)
     return true;
   if (n >= font_table_size) {
-    if (n - font_table_size > 1000) {
+    if ((n - font_table_size) > 1000) {
       error("font position too much larger than first unused position");
       return false;
     }
@@ -6512,13 +6514,13 @@ bool mount_style(int n, symbol name)
 {
   assert(n >= 0);
   if (n >= font_table_size) {
-    if (n - font_table_size > 1000) {
+    if ((n - font_table_size) > 1000) {
       error("font position too much larger than first unused position");
       return false;
     }
     grow_font_table(n);
   }
-  else if (font_table[n] != 0)
+  else if (font_table[n] != 0 /* nullptr */)
     delete font_table[n];
   font_table[n] = new font_info(get_font_translation(name), n,
 				NULL_SYMBOL, 0);
@@ -6608,6 +6610,14 @@ font_family::~font_family()
 // usable by the output driver.  (Positions 1 through 4 are typically
 // allocated to styles, and are not usable thus.)  A return value of
 // `-1` indicates failure.
+// TODO: Rename this to ::resolve() to align with documentation.
+// TODO: Make a `const int FONT_NOT_MOUNTED = -1;`, and use that in
+// callers (here and in "env.cpp").  Aping libc-style, `errno`-using
+// functions conceals more than it reveals here since we have no analog
+// to `errno`.  (`errno` was a blind alley anyway, being as reentrant
+// and concurrency-friendly as a global lock.  Option types,
+// error-storing function parameters, and exceptions are all better
+// solutions.)
 int font_family::make_definite(int mounting_position)
 {
   assert(mounting_position >= 0);
@@ -6616,7 +6626,8 @@ int font_family::make_definite(int mounting_position)
     return -1;
   if (pos < map_size && map[pos] >= 0)
     return map[pos];
-  if (!(pos < font_table_size && font_table[pos] != 0))
+  if (!((pos < font_table_size)
+	&& (font_table[pos] != 0 /* nullptr */)))
     return -1;
   if (pos >= map_size) {
     int old_map_size = map_size;
@@ -6639,7 +6650,7 @@ int font_family::make_definite(int mounting_position)
   // Don't use symbol_fontno, because that might return a style and
   // because we don't want to translate the name.
   for (n = 0; n < font_table_size; n++)
-    if (font_table[n] != 0 && font_table[n]->is_named(f)
+    if ((font_table[n] != 0 /* nullptr */) && font_table[n]->is_named(f)
 	&& !font_table[n]->is_style())
       break;
   if (n >= font_table_size) {
@@ -6737,7 +6748,9 @@ static bool has_font(font_lookup_info *finfo)
   }
   else if (get_integer(&n)) {
     finfo->requested_position = n;
-    if (!(n < 0 || n >= font_table_size || font_table[n] == 0))
+    if (!((n < 0)
+	  || (n >= font_table_size)
+	  || (0 /* nullptr */ == font_table[n])))
       finfo->position = curenv->get_family()->make_definite(n);
   }
   return (finfo->position != -1);
@@ -6933,7 +6946,9 @@ static void zoom_font()
 int next_available_font_position()
 {
   int i;
-  for (i = 1; i < font_table_size && font_table[i] != 0; i++)
+  for (i = 1;
+      (i < font_table_size) && (font_table[i] != 0 /* nullptr */);
+      i++)
     ;
   return i;
 }
@@ -6942,19 +6957,26 @@ int symbol_fontno(symbol s)
 {
   s = get_font_translation(s);
   for (int i = 0; i < font_table_size; i++)
-    if (font_table[i] != 0 && font_table[i]->is_named(s))
+    if ((font_table[i] != 0 /* nullptr */)
+	&& font_table[i]->is_named(s))
       return i;
   return -1;
 }
 
+/* TODO: mark `inline`? */
 int is_good_fontno(int n)
 {
-  return n >= 0 && n < font_table_size && font_table[n] != 0;
+  return (n >= 0)
+	 && (n < font_table_size)
+	 && (font_table[n] != 0 /* nullptr */);
 }
 
 int get_bold_fontno(int n)
 {
-  if (n >= 0 && n < font_table_size && font_table[n] != 0) {
+  /* TODO: if (is_good_fontno(n)) */
+  if ((n >= 0)
+      && (n < font_table_size)
+      && (font_table[n] != 0 /* nullptr */)) {
     hunits offset;
     if (font_table[n]->get_bold(&offset))
       return offset.to_units() + 1;
@@ -6977,12 +6999,26 @@ hunits env_digit_width(environment *env)
     return H0;
 }
 
+// TODO: Make the following an inline function?
+// TODO: Double-check the putative name.  Flip its sense?
+
+#if 0
+static inline bool is_font_unresolvable(int fn) {
+  return (fn < 0)
+	 || (fn >= font_table_size)
+	 || (0 /* nullptr */ == font_table[fn]);
+}
+#endif
+
 hunits env_space_width(environment *env)
 {
   int fn = env_definite_font(env);
   font_size fs = env->get_font_size();
-  if (fn < 0 || fn >= font_table_size || font_table[fn] == 0)
-    return scale(fs.to_units()/3, env->get_space_size(), 12);
+  // TODO: is_font_unresolvable()
+  if ((fn < 0)
+      || (fn >= font_table_size)
+      || (0 /* nullptr */ == font_table[fn]))
+    return scale(fs.to_units() / 3, env->get_space_size(), 12);
   else
     return font_table[fn]->get_space_width(fs, env->get_space_size());
 }
@@ -6991,8 +7027,12 @@ hunits env_sentence_space_width(environment *env)
 {
   int fn = env_definite_font(env);
   font_size fs = env->get_font_size();
-  if (fn < 0 || fn >= font_table_size || font_table[fn] == 0)
-    return scale(fs.to_units()/3, env->get_sentence_space_size(), 12);
+  // TODO: use temp var for env->get_sentence_space_size()
+  // TODO: is_font_unresolvable()
+  if ((fn < 0)
+      || (fn >= font_table_size)
+      || (0 /* nullptr */ == font_table[fn]))
+    return scale(fs.to_units() / 3, env->get_sentence_space_size(), 12);
   else
     return font_table[fn]->get_space_width(fs, env->get_sentence_space_size());
 }
@@ -7001,7 +7041,10 @@ hunits env_half_narrow_space_width(environment *env)
 {
   int fn = env_definite_font(env);
   font_size fs = env->get_font_size();
-  if (fn < 0 || fn >= font_table_size || font_table[fn] == 0)
+  // TODO: is_font_unresolvable()
+  if ((fn < 0)
+      || (fn >= font_table_size)
+      || (0 /* nullptr */ == font_table[fn]))
     return 0;
   else
     return font_table[fn]->get_half_narrow_space_width(fs);
@@ -7011,7 +7054,10 @@ hunits env_narrow_space_width(environment *env)
 {
   int fn = env_definite_font(env);
   font_size fs = env->get_font_size();
-  if (fn < 0 || fn >= font_table_size || font_table[fn] == 0)
+  // TODO: is_font_unresolvable()
+  if ((fn < 0)
+      || (fn >= font_table_size)
+      || (0 /* nullptr */ == font_table[fn]))
     return 0;
   else
     return font_table[fn]->get_narrow_space_width(fs);
