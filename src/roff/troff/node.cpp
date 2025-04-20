@@ -229,7 +229,7 @@ public:
   friend tfont *make_tfont(tfont_spec &);
 };
 
-inline int env_definite_font(environment *env)
+static inline int env_resolve_font(environment *env)
 {
   return env->get_family()->resolve(env->get_font());
 }
@@ -4176,7 +4176,7 @@ device_extension_node::device_extension_node(const macro &m, bool b)
   font_size fs = curenv->get_font_size();
   int char_height = curenv->get_char_height();
   int char_slant = curenv->get_char_slant();
-  int fontno = env_definite_font(curenv);
+  int fontno = env_resolve_font(curenv);
   tf = font_table[fontno]->get_tfont(fs, char_height, char_slant, fontno);
   if (curenv->is_composite())
     tf = tf->get_plain();
@@ -5348,7 +5348,7 @@ void composite_node::dump_node()
 
 static node *make_composite_node(charinfo *s, environment *env)
 {
-  int fontno = env_definite_font(env);
+  int fontno = env_resolve_font(env);
   if (fontno < 0) {
     error("cannot format composite glyph: no current font");
     return 0 /* nullptr */;
@@ -5369,7 +5369,7 @@ static node *make_composite_node(charinfo *s, environment *env)
 static node *make_glyph_node(charinfo *s, environment *env,
 			     bool want_warnings = true)
 {
-  int fontno = env_definite_font(env);
+  int fontno = env_resolve_font(env);
   if (fontno < 0) {
     error("cannot format glyph: no current font");
     return 0 /* nullptr */;
@@ -7011,7 +7011,7 @@ static inline bool is_font_unresolvable(int fn) {
 
 hunits env_space_width(environment *env)
 {
-  int fn = env_definite_font(env);
+  int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
   // TODO: is_font_unresolvable()
   if ((fn < 0)
@@ -7024,7 +7024,7 @@ hunits env_space_width(environment *env)
 
 hunits env_sentence_space_width(environment *env)
 {
-  int fn = env_definite_font(env);
+  int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
   // TODO: use temp var for env->get_sentence_space_size()
   // TODO: is_font_unresolvable()
@@ -7038,7 +7038,7 @@ hunits env_sentence_space_width(environment *env)
 
 hunits env_half_narrow_space_width(environment *env)
 {
-  int fn = env_definite_font(env);
+  int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
   // TODO: is_font_unresolvable()
   if ((fn < 0)
@@ -7051,7 +7051,7 @@ hunits env_half_narrow_space_width(environment *env)
 
 hunits env_narrow_space_width(environment *env)
 {
-  int fn = env_definite_font(env);
+  int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
   // TODO: is_font_unresolvable()
   if ((fn < 0)

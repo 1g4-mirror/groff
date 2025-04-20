@@ -1,5 +1,17 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/node.cpp (env_definite_font): Rename this...
+	(env_resolve_font): ...to this.  Also mark it `static` since it
+	requires no external linkage.
+	(device_extension_node::device_extension_node)
+	(make_composite_node, make_glyph_node, env_space_width)
+	(env_sentence_space_width, env_half_narrow_space_width)
+	(env_narrow_space_width): Update call sites.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename
 	`font_family::make_definite()` to `font_family::resolve()`, to
 	better align internal naming practices with our documentation.
