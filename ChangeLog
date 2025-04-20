@@ -1,5 +1,35 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.  Use a manifest constant for
+	failures to look up a font.  Aping libc-style, `errno`-using
+	functions conceals more than it reveals here since we have no
+	analog to `errno`.  (`errno` was a blind alley anyway, being as
+	reentrant and concurrency-friendly as a global lock, but worse
+	because it led to indeterminate program states instead of
+	slow-but-correct operation.  Option types, error-storing
+	function parameters, and exceptions are all better solutions.)
+
+	* src/roff/troff/node.h: Declare `FONT_NOT_MOUNTED`.
+	* src/roff/troff/node.cpp: Define it.
+	* src/roff/troff/node.cpp (font_lookup_info::font_lookup_info)
+	(troff_output_file::really_begin_page)
+	(troff_output_file::really_copy_file)
+	(font_family::font_family)
+	(font_family::resolve)
+	(font_family::invalidate_fontno)
+	(has_font)
+	(symbol_fontno): Use it instead of a `-1` literal.
+
+	* src/roff/troff/env.cpp (environment::set_font)
+	(environment::set_family)
+	(environment::environment): Determine font lookup failure by
+	explicit comparison to `FONT_NOT_MOUNTED` instead of checking
+	for any negative value.
+	(font_family::resolve): Add assertion to spit up if caller tries
+	to smuggle us a nonsense mounting position.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/node.cpp (env_definite_font): Rename this...

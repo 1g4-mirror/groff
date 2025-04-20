@@ -98,6 +98,8 @@ struct special_font_list {
 special_font_list *global_special_fonts;
 static int global_ligature_mode = 1; // three-valued Boolean :-|
 static bool global_kern_mode = true;
+// Font mounting positions are non-negative integers.
+const int FONT_NOT_MOUNTED = -1;
 
 class track_kerning_function {
   int non_zero;
@@ -120,8 +122,8 @@ struct font_lookup_info {
   font_lookup_info();
 };
 
-font_lookup_info::font_lookup_info() : position(-1),
-  requested_position(-1), requested_name(0)
+font_lookup_info::font_lookup_info() : position(FONT_NOT_MOUNTED),
+  requested_position(FONT_NOT_MOUNTED), requested_name(0)
 {
 }
 
@@ -1562,7 +1564,7 @@ void troff_output_file::really_begin_page(int pageno, vunits page_length)
   else
     has_page_begun = true;
   current_tfont = 0;
-  current_font_number = -1;
+  current_font_number = FONT_NOT_MOUNTED;
   current_size = 0;
   // current_height = 0;
   // current_slant = 0;
@@ -1597,7 +1599,7 @@ void troff_output_file::really_copy_file(hunits x, vunits y,
   must_update_drawing_position = true;
   current_size = 0;
   current_tfont = 0;
-  current_font_number = -1;
+  current_font_number = FONT_NOT_MOUNTED;
   for (int i = 0; i < nfont_positions; i++)
     font_position[i] = NULL_SYMBOL;
 }
@@ -6598,7 +6600,7 @@ font_family::font_family(symbol s)
 {
   map = new int[map_size];
   for (int i = 0; i < map_size; i++)
-    map[i] = -1;
+    map[i] = FONT_NOT_MOUNTED;
 }
 
 font_family::~font_family()
@@ -6609,25 +6611,19 @@ font_family::~font_family()
 // Resolve a requested font mounting position to a mounting position
 // usable by the output driver.  (Positions 1 through 4 are typically
 // allocated to styles, and are not usable thus.)  A return value of
-// `-1` indicates failure.
-// TODO: Make a `const int FONT_NOT_MOUNTED = -1;`, and use that in
-// callers (here and in "env.cpp").  Aping libc-style, `errno`-using
-// functions conceals more than it reveals here since we have no analog
-// to `errno`.  (`errno` was a blind alley anyway, being as reentrant
-// and concurrency-friendly as a global lock.  Option types,
-// error-storing function parameters, and exceptions are all better
-// solutions.)
+// `FONT_NOT_MOUNTED` indicates failure.
 int font_family::resolve(int mounting_position)
 {
   assert(mounting_position >= 0);
   int pos = mounting_position;
+  assert((pos >= 0) || (FONT_NOT_MOUNTED == pos));
   if (pos < 0)
-    return -1;
+    return FONT_NOT_MOUNTED;
   if (pos < map_size && map[pos] >= 0)
     return map[pos];
   if (!((pos < font_table_size)
 	&& (font_table[pos] != 0 /* nullptr */)))
-    return -1;
+    return FONT_NOT_MOUNTED;
   if (pos >= map_size) {
     int old_map_size = map_size;
     int *old_map = map;
@@ -6639,7 +6635,7 @@ int font_family::resolve(int mounting_position)
     memcpy(map, old_map, old_map_size * sizeof (int));
     delete[] old_map;
     for (int j = old_map_size; j < map_size; j++)
-      map[j] = -1;
+      map[j] = FONT_NOT_MOUNTED;
   }
   if (!(font_table[pos]->is_style()))
     return map[pos] = pos;
@@ -6655,7 +6651,7 @@ int font_family::resolve(int mounting_position)
   if (n >= font_table_size) {
     n = next_available_font_position();
     if (!mount_font_no_translate(n, f, f))
-      return -1;
+      return FONT_NOT_MOUNTED;
   }
   return map[pos] = n;
 }
@@ -6681,10 +6677,10 @@ void font_family::invalidate_fontno(int n)
   while (iter.get(&nam, (void **)&fam)) {
     int mapsize = fam->map_size;
     if (n < mapsize)
-      fam->map[n] = -1;
+      fam->map[n] = FONT_NOT_MOUNTED;
     for (int i = 0; i < mapsize; i++)
       if (fam->map[i] == n)
-	fam->map[i] = -1;
+	fam->map[i] = FONT_NOT_MOUNTED;
   }
 }
 
@@ -6726,8 +6722,7 @@ static void font_lookup_error(font_lookup_info& finfo,
 
 // Read the next token and look it up as a font name or position number.
 // Return lookup success.  Store, in the supplied struct argument, the
-// requested name or position, and the position actually resolved; -1
-// means not found (see `font_lookup_info` constructor).
+// requested name or position, and the position actually resolved.
 static bool has_font(font_lookup_info *finfo)
 {
   int n;
@@ -6752,7 +6747,7 @@ static bool has_font(font_lookup_info *finfo)
 	  || (0 /* nullptr */ == font_table[n])))
       finfo->position = curenv->get_family()->resolve(n);
   }
-  return (finfo->position != -1);
+  return (finfo->position != FONT_NOT_MOUNTED);
 }
 
 static int underline_fontno = 2;
@@ -6959,7 +6954,7 @@ int symbol_fontno(symbol s)
     if ((font_table[i] != 0 /* nullptr */)
 	&& font_table[i]->is_named(s))
       return i;
-  return -1;
+  return FONT_NOT_MOUNTED;
 }
 
 /* TODO: mark `inline`? */
