@@ -1,5 +1,21 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename
+	`font_family::make_definite()` to `font_family::resolve()`, to
+	better align internal naming practices with our documentation.
+
+	* src/roff/troff/node.h (class font_family): Do it.
+	* src/roff/troff/node.cpp (font_family::make_definite): Rename
+	this...
+	(font_family::resolve): ...to this.
+
+	* src/roff/troff/env.cpp (environment::set_font)
+	(environment::set_family,environment::environment):
+	* src/roff/troff/node.h (env_definite_font, env_get_zoom)
+	(has_font): Update call sites.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/input.cpp (do_suppress): Drop unnecessary cast

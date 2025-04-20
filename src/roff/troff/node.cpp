@@ -231,7 +231,7 @@ public:
 
 inline int env_definite_font(environment *env)
 {
-  return env->get_family()->make_definite(env->get_font());
+  return env->get_family()->resolve(env->get_font());
 }
 
 /* font_info functions */
@@ -285,7 +285,7 @@ tfont *make_tfont(tfont_spec &spec)
 
 int env_get_zoom(environment *env)
 {
-  int fontno = env->get_family()->make_definite(env->get_font());
+  int fontno = env->get_family()->resolve(env->get_font());
   return font_table[fontno]->get_zoom();
 }
 
@@ -6610,7 +6610,6 @@ font_family::~font_family()
 // usable by the output driver.  (Positions 1 through 4 are typically
 // allocated to styles, and are not usable thus.)  A return value of
 // `-1` indicates failure.
-// TODO: Rename this to ::resolve() to align with documentation.
 // TODO: Make a `const int FONT_NOT_MOUNTED = -1;`, and use that in
 // callers (here and in "env.cpp").  Aping libc-style, `errno`-using
 // functions conceals more than it reveals here since we have no analog
@@ -6618,7 +6617,7 @@ font_family::~font_family()
 // and concurrency-friendly as a global lock.  Option types,
 // error-storing function parameters, and exceptions are all better
 // solutions.)
-int font_family::make_definite(int mounting_position)
+int font_family::resolve(int mounting_position)
 {
   assert(mounting_position >= 0);
   int pos = mounting_position;
@@ -6743,7 +6742,7 @@ static bool has_font(font_lookup_info *finfo)
 	if (mount_font(n, s))
 	  finfo->position = n;
       }
-      finfo->position = curenv->get_family()->make_definite(n);
+      finfo->position = curenv->get_family()->resolve(n);
     }
   }
   else if (get_integer(&n)) {
@@ -6751,7 +6750,7 @@ static bool has_font(font_lookup_info *finfo)
     if (!((n < 0)
 	  || (n >= font_table_size)
 	  || (0 /* nullptr */ == font_table[n])))
-      finfo->position = curenv->get_family()->make_definite(n);
+      finfo->position = curenv->get_family()->resolve(n);
   }
   return (finfo->position != -1);
 }

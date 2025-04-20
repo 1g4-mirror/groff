@@ -586,7 +586,7 @@ bool environment::set_font(symbol nm)
   if (is_device_ps_or_pdf)
     warn_if_font_name_deprecated(nm);
   if (nm == symbol("P") || nm.is_empty()) {
-    if (family->make_definite(prev_fontno) < 0)
+    if (family->resolve(prev_fontno) < 0)
       return false;
     int tem = fontno;
     fontno = prev_fontno;
@@ -600,7 +600,7 @@ bool environment::set_font(symbol nm)
       if (!mount_font(n, nm))
 	return false;
     }
-    if (family->make_definite(n) < 0)
+    if (family->resolve(n) < 0)
       return false;
     fontno = n;
   }
@@ -633,7 +633,7 @@ void environment::set_family(symbol fam)
   if (line_interrupted)
     return;
   if (fam.is_null() || fam.is_empty()) {
-    int previous_mounting_position = prev_family->make_definite(fontno);
+    int previous_mounting_position = prev_family->resolve(fontno);
     assert(previous_mounting_position >= 0);
     if (previous_mounting_position < 0)
       return;
@@ -650,7 +650,7 @@ void environment::set_family(symbol fam)
 	   (0 != "font family dictionary lookup"));
     if (0 /* nullptr */ == f)
       return;
-    if (f->make_definite(fontno) < 0) {
+    if (f->resolve(fontno) < 0) {
       error("no font family named '%1' exists", fam.contents());
       return;
     }
@@ -816,7 +816,7 @@ environment::environment(symbol nm)
   prev_fontno = fontno = 1;
   if (!is_good_fontno(1))
     fatal("font mounted at position 1 is not valid");
-  if (family->make_definite(1) < 0)
+  if (family->resolve(1) < 0)
     fatal("invalid default font family '%1'",
 	  default_family.contents());
   prev_fontno = fontno;

@@ -732,7 +732,7 @@ public:
   const symbol nm;
   font_family(symbol);
   ~font_family();
-  int make_definite(int);
+  int resolve(int);
   static void invalidate_fontno(int);
 };
 
