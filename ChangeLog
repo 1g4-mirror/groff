@@ -1,5 +1,26 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.  Boolify and rename
+	`is_good_fontno()` to `is_valid_font_mounting_position()`, and
+	use it in more places instead of complex expressions meaning the
+	same thing.
+
+	* src/roff/troff/node.h: Update declaration.
+	* src/roff/troff/node.cpp: Update definition, and define earlier
+	to avoid necessity of forward declaration.
+
+	* src/roff/troff/env.cpp (environment::set_font)
+	(environment::environment): Update call sites.
+
+	* src/roff/troff/node.cpp (has_font, get_bold_fontno)
+	(env_space_width)
+	(env_sentence_space_width)
+	(env_half_narrow_space_width)
+	(env_narrow_space_width): Add call sites, replacing complex
+	expressions.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor.  Use a manifest constant for
 	failures to look up a font.  Aping libc-style, `errno`-using
 	functions conceals more than it reveals here since we have no

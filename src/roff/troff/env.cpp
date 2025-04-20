@@ -617,7 +617,7 @@ bool environment::set_font(int n)
 {
   if (line_interrupted)
     return false;
-  if (is_good_fontno(n)) {
+  if (is_valid_font_mounting_position(n)) {
     prev_fontno = fontno;
     fontno = n;
   }
@@ -814,7 +814,7 @@ environment::environment(symbol nm)
 {
   prev_family = family = lookup_family(default_family);
   prev_fontno = fontno = 1;
-  if (!is_good_fontno(1))
+  if (!is_valid_font_mounting_position(1))
     fatal("font mounted at position 1 is not valid");
   if (family->resolve(1) == FONT_NOT_MOUNTED)
     fatal("invalid default font family '%1'",

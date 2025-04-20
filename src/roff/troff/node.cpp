@@ -6720,6 +6720,13 @@ static void font_lookup_error(font_lookup_info& finfo,
 	  finfo.requested_position, msg);
 }
 
+inline bool is_valid_font_mounting_position(int n)
+{
+  return (n >= 0)
+	 && (n < font_table_size)
+	 && (font_table[n] != 0 /* nullptr */);
+}
+
 // Read the next token and look it up as a font name or position number.
 // Return lookup success.  Store, in the supplied struct argument, the
 // requested name or position, and the position actually resolved.
@@ -6742,9 +6749,7 @@ static bool has_font(font_lookup_info *finfo)
   }
   else if (get_integer(&n)) {
     finfo->requested_position = n;
-    if (!((n < 0)
-	  || (n >= font_table_size)
-	  || (0 /* nullptr */ == font_table[n])))
+    if (is_valid_font_mounting_position(n))
       finfo->position = curenv->get_family()->resolve(n);
   }
   return (finfo->position != FONT_NOT_MOUNTED);
@@ -6957,20 +6962,10 @@ int symbol_fontno(symbol s)
   return FONT_NOT_MOUNTED;
 }
 
-/* TODO: mark `inline`? */
-int is_good_fontno(int n)
-{
-  return (n >= 0)
-	 && (n < font_table_size)
-	 && (font_table[n] != 0 /* nullptr */);
-}
-
+// XXX: This does _not_ return a font "number" (mounting position)!
 int get_bold_fontno(int n)
 {
-  /* TODO: if (is_good_fontno(n)) */
-  if ((n >= 0)
-      && (n < font_table_size)
-      && (font_table[n] != 0 /* nullptr */)) {
+  if (is_valid_font_mounting_position(n)) {
     hunits offset;
     if (font_table[n]->get_bold(&offset))
       return offset.to_units() + 1;
@@ -6993,25 +6988,11 @@ hunits env_digit_width(environment *env)
     return H0;
 }
 
-// TODO: Make the following an inline function?
-// TODO: Double-check the putative name.  Flip its sense?
-
-#if 0
-static inline bool is_font_unresolvable(int fn) {
-  return (fn < 0)
-	 || (fn >= font_table_size)
-	 || (0 /* nullptr */ == font_table[fn]);
-}
-#endif
-
 hunits env_space_width(environment *env)
 {
   int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
-  // TODO: is_font_unresolvable()
-  if ((fn < 0)
-      || (fn >= font_table_size)
-      || (0 /* nullptr */ == font_table[fn]))
+  if (!is_valid_font_mounting_position(fn))
     return scale(fs.to_units() / 3, env->get_space_size(), 12);
   else
     return font_table[fn]->get_space_width(fs, env->get_space_size());
@@ -7022,10 +7003,7 @@ hunits env_sentence_space_width(environment *env)
   int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
   // TODO: use temp var for env->get_sentence_space_size()
-  // TODO: is_font_unresolvable()
-  if ((fn < 0)
-      || (fn >= font_table_size)
-      || (0 /* nullptr */ == font_table[fn]))
+  if (!is_valid_font_mounting_position(fn))
     return scale(fs.to_units() / 3, env->get_sentence_space_size(), 12);
   else
     return font_table[fn]->get_space_width(fs, env->get_sentence_space_size());
@@ -7035,10 +7013,7 @@ hunits env_half_narrow_space_width(environment *env)
 {
   int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
-  // TODO: is_font_unresolvable()
-  if ((fn < 0)
-      || (fn >= font_table_size)
-      || (0 /* nullptr */ == font_table[fn]))
+  if (!is_valid_font_mounting_position(fn))
     return 0;
   else
     return font_table[fn]->get_half_narrow_space_width(fs);
@@ -7048,10 +7023,7 @@ hunits env_narrow_space_width(environment *env)
 {
   int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
-  // TODO: is_font_unresolvable()
-  if ((fn < 0)
-      || (fn >= font_table_size)
-      || (0 /* nullptr */ == font_table[fn]))
+  if (!is_valid_font_mounting_position(fn))
     return 0;
   else
     return font_table[fn]->get_narrow_space_width(fs);
