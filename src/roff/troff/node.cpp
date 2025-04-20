@@ -7002,11 +7002,11 @@ hunits env_sentence_space_width(environment *env)
 {
   int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
-  // TODO: use temp var for env->get_sentence_space_size()
+  units sss = env->get_sentence_space_size();
   if (!is_valid_font_mounting_position(fn))
-    return scale(fs.to_units() / 3, env->get_sentence_space_size(), 12);
+    return scale(fs.to_units() / 3, sss, 12);
   else
-    return font_table[fn]->get_space_width(fs, env->get_sentence_space_size());
+    return font_table[fn]->get_space_width(fs, sss);
 }
 
 hunits env_half_narrow_space_width(environment *env)

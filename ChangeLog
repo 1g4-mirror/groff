@@ -1,5 +1,11 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (env_sentence_space_width): Trivially
+	refactor for readability.  Introduce local variable to store
+	return value of member function that is called invariantly.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor.  Boolify and rename
 	`is_good_fontno()` to `is_valid_font_mounting_position()`, and
 	use it in more places instead of complex expressions meaning the
