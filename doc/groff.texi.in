@@ -680,6 +680,9 @@ Elemental typesetting functions can be be laborious to use directly with
 complex documents.  A @dfn{macro} facility specifies how certain routine
 operations, such as starting paragraphs, or printing headers and
 footers, should be performed in terms of those low-level instructions.
+One then
+@slanted{calls} @c only implicitly defined here
+the macro to make it perform its task.
 Macros can be specific to one document or collected together into a
 @dfn{macro package} for use by many.  @code{groff} supplies versions of
 the widely used macro packages @file{man}, @file{mdoc}, @file{me},
