@@ -1,5 +1,22 @@
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slighty refactor (boolify, rename).
+
+	* src/roff/troff/node.cpp (class font_info)
+	(class tfont): Demote return type of `get_bold()` member
+	functions from `int` to `bool` and rename to `is_emboldened()`.
+	(font_info::get_bold, tfont::get_bold): Same for function
+	definitions, renaming these...
+	(font_info::is_emboldened, tfont::is_emboldened): ...to these.
+	Return Boolean instead of integer literals.
+	(composite_node::width)
+	(glyph_node::tprint)
+	(glyph_node::zero_width_tprint)
+	(composite_node::tprint)
+	(env_font_emboldening_offset): Update call sites.
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor (boolify).
 
 	* src/roff/troff/node.h (struct node):

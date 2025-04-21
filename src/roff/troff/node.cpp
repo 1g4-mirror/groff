@@ -170,7 +170,7 @@ public:
   hunits get_space_width(font_size, int);
   hunits get_narrow_space_width(font_size);
   hunits get_half_narrow_space_width(font_size);
-  int get_bold(hunits *);
+  bool is_emboldened(hunits *); // "by how many hunits?" in argument
   int is_special();
   int is_style();
   void set_zoom(int);
@@ -209,7 +209,7 @@ public:
   tfont(tfont_spec &);
   int contains(charinfo *);
   hunits get_width(charinfo *c);
-  int get_bold(hunits *);
+  bool is_emboldened(hunits *); // "by how many hunits?" in argument
   int get_constant_space(hunits *);
   hunits get_track_kern();
   tfont *get_plain();
@@ -347,14 +347,14 @@ tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
   return last_tfont;
 }
 
-int font_info::get_bold(hunits *res)
+bool font_info::is_emboldened(hunits *res)
 {
   if (is_bold) {
     *res = bold_offset;
-    return 1;
+    return true;
   }
   else
-    return 0;
+    return false;
 }
 
 void font_info::unbold()
@@ -591,14 +591,14 @@ inline int tfont::get_character_type(charinfo *ci)
   return fm->get_character_type(ci->as_glyph());
 }
 
-inline int tfont::get_bold(hunits *res)
+inline bool tfont::is_emboldened(hunits *res)
 {
   if (is_bold) {
     *res = bold_offset;
-    return 1;
+    return true;
   }
   else
-    return 0;
+    return false;
 }
 
 inline int tfont::get_constant_space(hunits *res)
@@ -4659,7 +4659,7 @@ hunits composite_node::width()
   for (node *tem = nodes; tem; tem = tem->next)
     x += tem->width();
   hunits offset;
-  if (tf->get_bold(&offset))
+  if (tf->is_emboldened(&offset))
     x += offset;
   x += tf->get_track_kern();
   return x;
@@ -5010,7 +5010,7 @@ void glyph_node::tprint(troff_output_file *out)
     out->put_char_width(ci, ptf, gcol, fcol, width(), H0);
   else {
     hunits offset;
-    int bold = tf->get_bold(&offset);
+    bool bold = tf->is_emboldened(&offset);
     hunits w = ptf->get_width(ci);
     hunits k = H0;
     hunits x;
@@ -5037,7 +5037,7 @@ void glyph_node::zero_width_tprint(troff_output_file *out)
 {
   tfont *ptf = tf->get_plain();
   hunits offset;
-  int bold = tf->get_bold(&offset);
+  int bold = tf->is_emboldened(&offset);
   hunits x;
   int cs = tf->get_constant_space(&x);
   if (cs) {
@@ -5284,7 +5284,7 @@ void dbreak_node::tprint(troff_output_file *out)
 void composite_node::tprint(troff_output_file *out)
 {
   hunits bold_offset;
-  int is_bold = tf->get_bold(&bold_offset);
+  int is_bold = tf->is_emboldened(&bold_offset);
   hunits track_kern = tf->get_track_kern();
   hunits constant_space;
   int is_constant_spaced = tf->get_constant_space(&constant_space);
@@ -6969,7 +6969,7 @@ hunits env_font_emboldening_offset(environment *env, int n)
   if (is_valid_font_mounting_position(n)) {
     hunits offset;
     int fontno = env->get_family()->resolve(env->get_font());
-    if (font_table[fontno]->get_bold(&offset))
+    if (font_table[fontno]->is_emboldened(&offset))
       return offset.to_units() + 1;
     else
       return 0;
