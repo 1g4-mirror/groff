@@ -100,8 +100,8 @@ struct node {
   virtual hyphenation_type get_hyphenation_type();
   virtual bool need_reread(bool *);
   virtual token_node *get_token_node();
-  virtual int overlaps_vertically();
-  virtual int overlaps_horizontally();
+  virtual bool overlaps_vertically();
+  virtual bool overlaps_horizontally();
   virtual units size();
   virtual bool interpret(macro *);
 
@@ -520,8 +520,8 @@ public:
   node *last_char_node();
   void vertical_extent(vunits *, vunits *);
   int ends_sentence();
-  int overlaps_horizontally();
-  int overlaps_vertically();
+  bool overlaps_horizontally();
+  bool overlaps_vertically();
   hyphenation_type get_hyphenation_type();
   tfont *get_tfont();
   int character_type();

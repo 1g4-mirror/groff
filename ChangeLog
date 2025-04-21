@@ -2,6 +2,37 @@
 
 	[troff]: Slighty refactor (boolify, rename).
 
+	* src/roff/troff/node.h (struct node)
+	(class left_italic_corrected_node): Demote return type
+	of `overlaps_horizontally()` and `overlaps_vertically()` virtual
+	member functions from `int` to `bool`.
+	* src/roff/troff/node.cpp (class charinfo_node)
+	(class italic_corrected_node)
+	(class break_char_node): Same for classes with no visibility
+	external to this translation unit.
+	(charinfo_node::overlaps_horizontally)
+	(charinfo_node::overlaps_vertically)
+	(italic_corrected_node::overlaps_horizontally)
+	(italic_corrected_node::overlaps_vertically)
+	(break_char_node::overlaps_horizontally)
+	(break_char_node::overlaps_vertically)
+	(node::overlaps_horizontally)
+	(node::overlaps_vertically)
+	(left_italic_corrected_node::overlaps_horizontally)
+	(left_italic_corrected_node::overlaps_vertically): Same for
+	function definitions.
+	(node::overlaps_horizontally)
+	(node::overlaps_vertically)
+	(left_italic_corrected_node::overlaps_horizontally)
+	(left_italic_corrected_node::overlaps_vertically): Return
+	Boolean instead of integer literals.
+	(vline_node::tprint): Demote local variable `overlaps`
+	similarly.
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Slighty refactor (boolify, rename).
+
 	* src/roff/troff/node.cpp (class tfont_spec): Demote return type
 	of `operator==` from `int` to `bool`.
 	(tfont_spec::operator==): Same for function definition.

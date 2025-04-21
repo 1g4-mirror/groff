@@ -1877,8 +1877,8 @@ protected:
 public:
   charinfo_node(charinfo *, statem *, int, node * = 0 /* nullptr */);
   int ends_sentence();
-  int overlaps_vertically();
-  int overlaps_horizontally();
+  bool overlaps_vertically();
+  bool overlaps_horizontally();
   void dump_properties();
 };
 
@@ -1897,12 +1897,12 @@ int charinfo_node::ends_sentence()
   return 0;
 }
 
-int charinfo_node::overlaps_horizontally()
+bool charinfo_node::overlaps_horizontally()
 {
   return ci->overlaps_horizontally();
 }
 
-int charinfo_node::overlaps_vertically()
+bool charinfo_node::overlaps_vertically()
 {
   return ci->overlaps_vertically();
 }
@@ -2835,8 +2835,8 @@ public:
   node *last_char_node();
   void vertical_extent(vunits *, vunits *);
   int ends_sentence();
-  int overlaps_horizontally();
-  int overlaps_vertically();
+  bool overlaps_horizontally();
+  bool overlaps_vertically();
   bool is_same_as(node *);
   hyphenation_type get_hyphenation_type();
   tfont *get_tfont();
@@ -2921,12 +2921,12 @@ int italic_corrected_node::ends_sentence()
   return nodes->ends_sentence();
 }
 
-int italic_corrected_node::overlaps_horizontally()
+bool italic_corrected_node::overlaps_horizontally()
 {
   return nodes->overlaps_horizontally();
 }
 
-int italic_corrected_node::overlaps_vertically()
+bool italic_corrected_node::overlaps_vertically()
 {
   return nodes->overlaps_vertically();
 }
@@ -2988,8 +2988,8 @@ public:
   void ascii_print(ascii_output_file *);
   void asciify(macro *);
   hyphenation_type get_hyphenation_type();
-  int overlaps_vertically();
-  int overlaps_horizontally();
+  bool overlaps_vertically();
+  bool overlaps_horizontally();
   units size();
   tfont *get_tfont();
   bool is_same_as(node *);
@@ -3118,12 +3118,12 @@ void break_char_node::ascii_print(ascii_output_file *ascii)
   nodes->ascii_print(ascii);
 }
 
-int break_char_node::overlaps_vertically()
+bool break_char_node::overlaps_vertically()
 {
   return nodes->overlaps_vertically();
 }
 
-int break_char_node::overlaps_horizontally()
+bool break_char_node::overlaps_horizontally()
 {
   return nodes->overlaps_horizontally();
 }
@@ -3644,14 +3644,14 @@ int dbreak_node::ends_sentence()
   return node_list_ends_sentence(none);
 }
 
-int node::overlaps_horizontally()
+bool node::overlaps_horizontally()
 {
-  return 0;
+  return false;
 }
 
-int node::overlaps_vertically()
+bool node::overlaps_vertically()
 {
-  return 0;
+  return false;
 }
 
 bool node::discardable()
@@ -5116,7 +5116,7 @@ void vline_node::tprint(troff_output_file *out)
     return;
   }
   vunits h = nodes->size();
-  int overlaps = nodes->overlaps_vertically();
+  bool overlaps = nodes->overlaps_vertically();
   vunits y = x;
   if (y < V0) {
     y = -y;
@@ -6007,15 +6007,16 @@ int left_italic_corrected_node::ends_sentence()
   return (nodes != 0 /* nullptr */) ? nodes->ends_sentence() : 0;
 }
 
-int left_italic_corrected_node::overlaps_horizontally()
+bool left_italic_corrected_node::overlaps_horizontally()
 {
   return (nodes != 0 /* nullptr */) ? nodes->overlaps_horizontally()
-				    : 0;
+				    : false;
 }
 
-int left_italic_corrected_node::overlaps_vertically()
+bool left_italic_corrected_node::overlaps_vertically()
 {
-  return (nodes != 0 /* nullptr */) ? nodes->overlaps_vertically() : 0;
+  return (nodes != 0 /* nullptr */) ? nodes->overlaps_vertically()
+				    : false;
 }
 
 node *left_italic_corrected_node::last_char_node()
