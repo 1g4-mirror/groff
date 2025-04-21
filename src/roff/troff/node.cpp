@@ -6715,6 +6715,8 @@ static void font_lookup_error(font_lookup_info& finfo,
 {
   if (finfo.requested_name)
     error("cannot load font '%1' %2", finfo.requested_name, msg);
+  else if (finfo.position == FONT_NOT_MOUNTED)
+    error("cannot load font %1", msg); // don't report position `-1`
   else
     error("cannot load font at position %1 %2",
 	  finfo.requested_position, msg);

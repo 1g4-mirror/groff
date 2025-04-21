@@ -1,5 +1,13 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (font_lookup_info): Improve diagnostic
+	message.  When complaining, for example, that a font can't be
+	loaded because its mounting position was unresolvable, don't
+	report a mounting position of "-1" in the message.  That's an
+	internal sentinel value and meaningless to the user.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #67038.
 
 	* src/roff/troff/node.h: Declare `get_bold_fontno` as taking a
