@@ -298,7 +298,7 @@
 	of `0` when performing null pointer comparison.  "A constant
 	expression ... that evaluates to 0 can be implicitly converted
 	to any pointer or pointer to member type." (_The C++ Programming
-	Language, Special Edition_, Stroustrup, 1997, p.  835).
+	Language, Special Edition_, Stroustrup, 1997, p. 835).
 
 	* src/roff/troff/input.cpp (do_suppress):
 	* src/roff/troff/node.cpp (has_font, env_space_width)
