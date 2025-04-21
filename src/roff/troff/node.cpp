@@ -217,7 +217,7 @@ public:
   int get_zoom();
   symbol get_name();
   charinfo *get_lig(charinfo *c1, charinfo *c2);
-  int get_kern(charinfo *c1, charinfo *c2, hunits *res);
+  bool is_kerned(charinfo *c1, charinfo *c2, hunits *res);
   int get_input_position();
   int get_character_type(charinfo *);
   int get_height();
@@ -690,24 +690,24 @@ charinfo *tfont::get_lig(charinfo *c1, charinfo *c2)
   return 0 /* nullptr */;
 }
 
-inline int tfont::get_kern(charinfo *c1, charinfo *c2, hunits *res)
+inline bool tfont::is_kerned(charinfo *c1, charinfo *c2, hunits *res)
 {
   if (kern_mode == 0)
-    return 0;
+    return false;
   else {
     int n = fm->get_kern(c1->as_glyph(),
 			 c2->as_glyph(),
 			 size.to_scaled_points());
     if (n) {
       *res = hunits(n);
-      return 1;
+      return true;
     }
     else
-      return 0;
+      return false;
   }
 }
 
-tfont *tfont::tfont_list = 0;
+tfont *tfont::tfont_list = 0 /* nullptr */;
 
 tfont::tfont(tfont_spec &spec) : tfont_spec(spec)
 {
@@ -2191,7 +2191,7 @@ node *glyph_node::merge_glyph_node(glyph_node *gn)
 			       gn->div_nest_level, next1);
     }
     hunits kern;
-    if (tf->get_kern(ci, gn->ci, &kern)) {
+    if (tf->is_kerned(ci, gn->ci, &kern)) {
       node *next1 = next;
       next = 0 /* nullptr */;
       return new kern_pair_node(kern, this, gn, state,

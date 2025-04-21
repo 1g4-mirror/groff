@@ -3,6 +3,19 @@
 	[troff]: Slighty refactor (boolify, rename).
 
 	* src/roff/troff/node.cpp (class tfont): Demote return type of
+	`get_kern()` member function from `int` to `bool` and rename to
+	`is_kerned()`.
+	(tfont::get_kern): Same for function definition, renaming
+	this...
+	(tfont::is_kerned): ...to this.  Return Boolean instead of
+	integer literals.
+	(glyph_node::merge_glyph_node): Update call site.
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Slighty refactor (boolify, rename).
+
+	* src/roff/troff/node.cpp (class tfont): Demote return type of
 	`get_constant_space()` member function from `int` to `bool` and
 	rename to `is_constantly_spaced()`.
 	(tfont::get_constant_space): Same for function definition,
