@@ -197,7 +197,7 @@ protected:
 public:
   tfont_spec(symbol, int, font *, font_size, int, int);
   tfont_spec plain();
-  int operator==(const tfont_spec &);
+  bool operator==(const tfont_spec &);
   friend tfont *font_info::get_tfont(font_size fs, int, int, int);
 };
 
@@ -496,7 +496,7 @@ tfont_spec::tfont_spec(symbol nm, int n, font *f,
     height = 0;
 }
 
-int tfont_spec::operator==(const tfont_spec &spec)
+bool tfont_spec::operator==(const tfont_spec &spec)
 {
   if (fm == spec.fm
       && size == spec.size
@@ -514,9 +514,9 @@ int tfont_spec::operator==(const tfont_spec &spec)
 	  : !spec.is_constant_spaced)
       && ligature_mode == spec.ligature_mode
       && kern_mode == spec.kern_mode)
-    return 1;
+    return true;
   else
-    return 0;
+    return false;
 }
 
 tfont_spec tfont_spec::plain()
