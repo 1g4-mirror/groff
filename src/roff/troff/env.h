@@ -288,7 +288,7 @@ public:
   int get_zoom();			// .zoom
   int get_numbering_nodes();		// .nm
   font_family *get_family() { return family; }
-  int get_bold();			// .b
+  hunits get_emboldening_offset();	// .b
   unsigned get_adjust_mode();		// .j
   int get_fill();			// .u
   hunits get_indent();			// .i

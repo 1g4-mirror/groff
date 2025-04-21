@@ -1078,9 +1078,9 @@ vunits environment::total_post_vertical_spacing()
   return tem;
 }
 
-int environment::get_bold()
+hunits environment::get_emboldening_offset()
 {
-  return get_bold_fontno(this, fontno);
+  return env_font_emboldening_offset(this, fontno);
 }
 
 hunits environment::get_digit_width()
@@ -4302,7 +4302,7 @@ void init_env_requests()
 #ifdef WIDOW_CONTROL
   init_request("wdc", widow_control_request);
 #endif /* WIDOW_CONTROL */
-  init_int_env_reg(".b", get_bold);
+  init_hunits_env_reg(".b", get_emboldening_offset);
   init_vunits_env_reg(".cdp", get_prev_char_depth);
   init_int_env_reg(".ce", get_centered_line_count);
   init_vunits_env_reg(".cht", get_prev_char_height);

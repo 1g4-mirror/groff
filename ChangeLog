@@ -1,5 +1,23 @@
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.
+
+	* src/roff/troff/env.h (get_bold): Rename this declaration...
+	(get_emboldening_offset): ...to this.  Change return type from
+	`int` to `hunits`.
+	* src/roff/troff/env.cpp (get_bold):
+	(get_emboldening_offset): Same for definition.
+	(init_env_requests): Wire up `.b` register to
+	`get_emboldening_offset()` using `init_hunits_env_reg()` instead
+	of `init_int_env_reg()`.
+
+	* src/roff/troff/node.h (get_bold_fontno): Rename this
+	declaration...
+	(env_font_emboldening_offset): ...to this.  Change return type
+	from `int` to `hunits`.
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (embolden_font): Add diagnostics.
 	Throw error when input attempts to apply emboldening request to
 	syntactically invalid object (e.g., ".bd \N'12'" or ".bd 1

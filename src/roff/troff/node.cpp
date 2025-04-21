@@ -6964,8 +6964,7 @@ int symbol_fontno(symbol s)
   return FONT_NOT_MOUNTED;
 }
 
-// XXX: This does _not_ return a font "number" (mounting position)!
-int get_bold_fontno(environment *env, int n)
+hunits env_font_emboldening_offset(environment *env, int n)
 {
   if (is_valid_font_mounting_position(n)) {
     hunits offset;
