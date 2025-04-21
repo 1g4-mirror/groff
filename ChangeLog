@@ -1,3 +1,18 @@
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (embolden_font): Add diagnostics.
+	Throw error when input attempts to apply emboldening request to
+	syntactically invalid object (e.g., ".bd \N'12'" or ".bd 1
+	\N'12'").  Add new Boolean local variable
+	`emboldening_may_be_conditional` to improve diagnostics when the
+	argument count makes the request ambiguous.  Throw warning if
+	we're ignoring the third argument because the first two were
+	interpreted as a mounting position and emboldening amount,
+	respectively.  As annotated in comments, 'Does ".bd 1 2" mean
+	"embolden font position 1 by 2 units" (really one unit), or
+	"stop conditionally emboldening font 2 when font 1 is
+	selected"?'  Also parenthesize complex expression.
+
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Add unit test for `bd` request.

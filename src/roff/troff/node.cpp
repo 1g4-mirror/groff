@@ -7036,7 +7036,6 @@ hunits env_narrow_space_width(environment *env)
 // not position.  Does ".bd 1 2" mean "embolden font position 1 by 2
 // units" (really one unit), or "stop conditionally emboldening font 2
 // when font 1 is selected"?
-
 static void embolden_font()
 {
   if (!(has_arg())) {
@@ -7048,6 +7047,29 @@ static void embolden_font()
     skip_line();
     return;
   }
+  if ((!tok.is_character())
+      || tok.is_special_character()
+      || tok.is_indexed_character()) {
+    error("emboldening request expects font name or mounting position"
+	  " as first argument, got %1", tok.description());
+    skip_line();
+    return;
+  }
+  // If the 1st argument starts with a non-numeral, we must be prepared
+  // to expect a third argument to specify an emboldening amount...
+  // .bd S TB 3 \" embolden S when `TB` selected
+  // ...or removal of conditional emboldening.
+  // .bd S TB \" don't embolden S when `TB` selected
+  //
+  // XXX: Our approach forecloses the emboldening of fonts whose names
+  // _start_ with numerals but _contain_ non-numerals, like '3foo'.  If
+  // one agrees that Kernighan's grammar for the extended `bd` request
+  // of device-independent troff is ambiguous, there may not be a
+  // perfect solution.  (This approach could be improved by scanning
+  // ahead in the input, but is it worth the trouble?)
+  bool emboldening_may_be_conditional = false;
+  if (!csdigit(tok.ch()))
+    emboldening_may_be_conditional = true;
   font_lookup_info finfo;
   if (!read_font_identifier(&finfo)) {
     font_lookup_error(finfo, "for emboldening");
@@ -7056,7 +7078,18 @@ static void embolden_font()
   }
   int n = finfo.position;
   if (has_arg()) {
-    if (tok.is_usable_as_delimiter()) {
+    if ((!tok.is_character())
+	|| tok.is_special_character()
+	|| tok.is_indexed_character()) {
+      error("emboldening request expects font name or emboldening"
+	    " amount as second argument, got %1", tok.description());
+      skip_line();
+      return;
+    }
+    // If both arguments start with numerals, assume this form.
+    // .bd 2 4 \" embolden font position 2 by 3 (yes, 3) units
+    // ...otherwise...
+    if (emboldening_may_be_conditional && !(csdigit(tok.ch()))) {
       font_lookup_info finfo2;
       if (!read_font_identifier(&finfo2)) {
 	font_lookup_error(finfo2, "for conditional emboldening");
@@ -7066,18 +7099,23 @@ static void embolden_font()
       int f = finfo2.position;
       units offset;
       if (has_arg()
-	  && read_measurement(&offset, 'u') && offset >= 1)
+	  && read_measurement(&offset, 'u')
+	  && (offset >= 1))
 	font_table[f]->set_conditional_bold(n, hunits(offset - 1));
       else
 	font_table[f]->conditional_unbold(n);
     }
     else {
-      // A numeric second argument must be an emboldening amount.
+      // The second argument must be an emboldening amount.
       units offset;
-      if (read_measurement(&offset, 'u') && offset >= 1)
+      if (read_measurement(&offset, 'u') && (offset >= 1))
 	font_table[n]->set_bold(hunits(offset - 1));
       else
 	font_table[n]->unbold();
+      if (has_arg())
+	warning(WARN_FONT, "ignoring third argument to font emboldening"
+		" request when first interpreted as mounting position"
+		" and second as emboldening amount");
     }
   }
   else
