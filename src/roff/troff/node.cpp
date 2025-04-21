@@ -6730,7 +6730,7 @@ inline bool is_valid_font_mounting_position(int n)
 // Read the next token and look it up as a font name or position number.
 // Return lookup success.  Store, in the supplied struct argument, the
 // requested name or position, and the position actually resolved.
-static bool has_font(font_lookup_info *finfo)
+static bool read_font_identifier(font_lookup_info *finfo)
 {
   int n;
   tok.skip();
@@ -6766,7 +6766,7 @@ static void select_underline_font()
     return;
   }
   font_lookup_info finfo;
-  if (!has_font(&finfo))
+  if (!read_font_identifier(&finfo))
     font_lookup_error(finfo, "to make it the underline font");
   else
     underline_fontno = finfo.position;
@@ -6787,7 +6787,7 @@ static void define_font_specific_character()
     return;
   }
   font_lookup_info finfo;
-  if (!has_font(&finfo)) {
+  if (!read_font_identifier(&finfo)) {
     font_lookup_error(finfo, "to define font-specific fallback"
 		      " character");
     // Normally we skip the remainder of the line unconditionally at the
@@ -6810,7 +6810,7 @@ static void remove_font_specific_character()
     return;
   }
   font_lookup_info finfo;
-  if (!has_font(&finfo))
+  if (!read_font_identifier(&finfo))
     font_lookup_error(finfo, "to remove font-specific fallback"
 		      " character");
   else {
@@ -6847,7 +6847,7 @@ static void read_special_fonts(special_font_list **sp)
   special_font_list **p = sp;
   while (has_arg()) {
     font_lookup_info finfo;
-    if (!has_font(&finfo))
+    if (!read_font_identifier(&finfo))
       font_lookup_error(finfo, "to mark it as special");
     else {
       special_font_list *tem = new special_font_list;
@@ -6868,7 +6868,7 @@ static void set_font_specific_special_fonts()
     return;
   }
   font_lookup_info finfo;
-  if (!has_font(&finfo))
+  if (!read_font_identifier(&finfo))
     font_lookup_error(finfo, "to mark other fonts as special"
 			     " contingently upon it"); // a mouthful :-/
   else
@@ -7046,7 +7046,7 @@ static void embolden_font()
     return;
   }
   font_lookup_info finfo;
-  if (!has_font(&finfo)) {
+  if (!read_font_identifier(&finfo)) {
     font_lookup_error(finfo, "for emboldening");
     skip_line();
     return;
@@ -7055,7 +7055,7 @@ static void embolden_font()
   if (has_arg()) {
     if (tok.is_usable_as_delimiter()) {
       font_lookup_info finfo2;
-      if (!has_font(&finfo2)) {
+      if (!read_font_identifier(&finfo2)) {
 	font_lookup_error(finfo2, "for conditional emboldening");
 	skip_line();
 	return;
@@ -7142,7 +7142,7 @@ static void configure_track_kerning()
     return;
   }
   font_lookup_info finfo;
-  if (!has_font(&finfo))
+  if (!read_font_identifier(&finfo))
     font_lookup_error(finfo, "for track kerning");
   else {
     int n = finfo.position, min_s, max_s;
@@ -7171,7 +7171,7 @@ static void constantly_space_font()
     return;
   }
   font_lookup_info finfo;
-  if (!has_font(&finfo))
+  if (!read_font_identifier(&finfo))
     font_lookup_error(finfo, "for constant spacing");
   else {
     int n = finfo.position, x, y;

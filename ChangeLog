@@ -1,5 +1,23 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Trivially refactor, continuing naming
+	reform of functions that advance the input stream pointer to use
+	the verb "read" instead of "get" or "has", which are more
+	general, and can refer to accessor functions that don't mutate
+	the state of the formatter.
+	(has_font): Rename this...
+	(read_font_identifier): ...to this.
+	(select_underline_font)
+	(define_font_specific_character)
+	(remove_font_specific_character)
+	(read_special_fonts)
+	(set_font_specific_special_fonts)
+	(embolden_font)
+	(configure_track_kerning)
+	(constantly_space_font): Update call sites.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (env_sentence_space_width): Trivially
 	refactor for readability.  Introduce local variable to store
 	return value of member function that is called invariantly.
