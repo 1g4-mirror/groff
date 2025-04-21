@@ -6973,10 +6973,10 @@ hunits env_font_emboldening_offset(environment *env, int n)
     if (font_table[fontno]->is_emboldened(&offset))
       return offset.to_units() + 1;
     else
-      return 0;
+      return H0;
   }
   else
-    return 0;
+    return H0;
 }
 
 hunits env_digit_width(environment *env)
@@ -7017,7 +7017,7 @@ hunits env_half_narrow_space_width(environment *env)
   int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
   if (!is_valid_font_mounting_position(fn))
-    return 0;
+    return H0;
   else
     return font_table[fn]->get_half_narrow_space_width(fs);
 }
@@ -7027,7 +7027,7 @@ hunits env_narrow_space_width(environment *env)
   int fn = env_resolve_font(env);
   font_size fs = env->get_font_size();
   if (!is_valid_font_mounting_position(fn))
-    return 0;
+    return H0;
   else
     return font_table[fn]->get_narrow_space_width(fs);
 }

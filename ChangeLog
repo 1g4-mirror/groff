@@ -1,5 +1,12 @@
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (env_font_emboldening_offset)
+	(env_half_narrow_space_width)
+	(env_narrow_space_width): Trivially refactor.  Return
+	type-correct constant for a horizontal measure of zero.
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slighty refactor (boolify, rename).
 
 	* src/roff/troff/node.h (struct node)
