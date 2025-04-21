@@ -2,6 +2,22 @@
 
 	[troff]: Slighty refactor (boolify, rename).
 
+	* src/roff/troff/node.cpp (class tfont): Demote return type of
+	`get_constant_space()` member function from `int` to `bool` and
+	rename to `is_constantly_spaced()`.
+	(tfont::get_constant_space): Same for function definition,
+	renaming this...
+	(tfont::is_constantly_spaced): ...to this.  Return Boolean
+	instead of integer literals.
+	(composite_node::width)
+	(glyph_node::tprint)
+	(glyph_node::zero_width_tprint)
+	(composite_node::tprint): Update call sites.
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Slighty refactor (boolify, rename).
+
 	* src/roff/troff/node.cpp (class font_info)
 	(class tfont): Demote return type of `get_bold()` member
 	functions from `int` to `bool` and rename to `is_emboldened()`.

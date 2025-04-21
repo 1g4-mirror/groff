@@ -210,7 +210,7 @@ public:
   int contains(charinfo *);
   hunits get_width(charinfo *c);
   bool is_emboldened(hunits *); // "by how many hunits?" in argument
-  int get_constant_space(hunits *);
+  bool is_constantly_spaced(hunits *); // "by how many hunits?" in arg
   hunits get_track_kern();
   tfont *get_plain();
   font_size get_size();
@@ -601,14 +601,14 @@ inline bool tfont::is_emboldened(hunits *res)
     return false;
 }
 
-inline int tfont::get_constant_space(hunits *res)
+inline bool tfont::is_constantly_spaced(hunits *res)
 {
   if (is_constant_spaced) {
     *res = constant_space_width;
-    return 1;
+    return true;
   }
   else
-    return 0;
+    return false;
 }
 
 inline hunits tfont::get_track_kern()
@@ -4653,7 +4653,7 @@ node *composite_node::copy()
 hunits composite_node::width()
 {
   hunits x;
-  if (tf->get_constant_space(&x))
+  if (tf->is_constantly_spaced(&x))
     return x;
   x = H0;
   for (node *tem = nodes; tem; tem = tem->next)
@@ -5014,7 +5014,7 @@ void glyph_node::tprint(troff_output_file *out)
     hunits w = ptf->get_width(ci);
     hunits k = H0;
     hunits x;
-    int cs = tf->get_constant_space(&x);
+    bool cs = tf->is_constantly_spaced(&x);
     if (cs) {
       x -= w;
       if (bold)
@@ -5039,7 +5039,7 @@ void glyph_node::zero_width_tprint(troff_output_file *out)
   hunits offset;
   int bold = tf->is_emboldened(&offset);
   hunits x;
-  int cs = tf->get_constant_space(&x);
+  int cs = tf->is_constantly_spaced(&x);
   if (cs) {
     x -= ptf->get_width(ci);
     if (bold)
@@ -5287,7 +5287,7 @@ void composite_node::tprint(troff_output_file *out)
   int is_bold = tf->is_emboldened(&bold_offset);
   hunits track_kern = tf->get_track_kern();
   hunits constant_space;
-  int is_constant_spaced = tf->get_constant_space(&constant_space);
+  int is_constant_spaced = tf->is_constantly_spaced(&constant_space);
   hunits x = H0;
   if (is_constant_spaced) {
     x = constant_space;
