@@ -1,5 +1,12 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Add unit test for `bd` request.
+
+	* src/roff/groff/tests/bd-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (font_lookup_info): Improve diagnostic
 	message.  When complaining, for example, that a font can't be
 	loaded because its mounting position was unresolvable, don't
