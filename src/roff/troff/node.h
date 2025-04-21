@@ -676,7 +676,7 @@ node *reverse_node_list(node *);
 void delete_node_list(node *);
 node *copy_node_list(node *);
 
-int get_bold_fontno(int);
+int get_bold_fontno(environment *, int);
 
 inline hyphen_list::hyphen_list(unsigned char code, hyphen_list *p)
 : is_hyphen(false), is_breakable(false), hyphenation_code(code), next(p)

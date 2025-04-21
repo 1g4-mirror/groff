@@ -6963,11 +6963,12 @@ int symbol_fontno(symbol s)
 }
 
 // XXX: This does _not_ return a font "number" (mounting position)!
-int get_bold_fontno(int n)
+int get_bold_fontno(environment *env, int n)
 {
   if (is_valid_font_mounting_position(n)) {
     hunits offset;
-    if (font_table[n]->get_bold(&offset))
+    int fontno = env->get_family()->resolve(env->get_font());
+    if (font_table[fontno]->get_bold(&offset))
       return offset.to_units() + 1;
     else
       return 0;

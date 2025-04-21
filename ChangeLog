@@ -1,5 +1,19 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #67038.
+
+	* src/roff/troff/node.h: Declare `get_bold_fontno` as taking a
+	new first argument, a pointer to an `environment`.
+	* src/roff/troff/node.cpp (get_bold_font): Likewise with
+	definition, and resolve the environment's currently selected
+	font so that we report the correct emboldening amount even if an
+	abstract style is the current font selection.  Use a temporary
+	variable to avoid yard-long expression, like `env_get_zoom()`.
+
+	Fixes <https://savannah.gnu.org/bugs/?67038>.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #67038 (behavior of `.b`
 	register).
 

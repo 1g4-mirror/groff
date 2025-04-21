@@ -1080,7 +1080,7 @@ vunits environment::total_post_vertical_spacing()
 
 int environment::get_bold()
 {
-  return get_bold_fontno(fontno);
+  return get_bold_fontno(this, fontno);
 }
 
 hunits environment::get_digit_width()
