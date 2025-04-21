@@ -6723,7 +6723,7 @@ static void font_lookup_error(font_lookup_info& finfo,
 	  finfo.requested_position, msg);
 }
 
-inline bool is_valid_font_mounting_position(int n)
+bool is_valid_font_mounting_position(int n)
 {
   return (n >= 0)
 	 && (n < font_table_size)

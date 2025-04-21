@@ -1,5 +1,16 @@
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix build failure with Clang 20.
+
+	* src/roff/troff/node.cpp (is_valid_font_mounting_position):
+	Drop `inline` from definition of externally visible function.
+	"[T]he ... otherwise perfectly logical combination of external
+	linkage and inlining is banned to make life simpler for compiler
+	writers[.]." (_The C++ Programming Language, Special Edition_,
+	Stroustrup, 1997, p. 199).
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (env_font_emboldening_offset)
 	(env_half_narrow_space_width)
 	(env_narrow_space_width): Trivially refactor.  Return
