@@ -1287,7 +1287,7 @@ class non_interpreted_char_node : public node {
 public:
   non_interpreted_char_node(unsigned char);
   node *copy();
-  int interpret(macro *);
+  bool interpret(macro *);
   bool is_same_as(node *);
   const char *type();
   bool causes_tprint();
@@ -1324,10 +1324,10 @@ node *non_interpreted_char_node::copy()
   return new non_interpreted_char_node(c);
 }
 
-int non_interpreted_char_node::interpret(macro *mac)
+bool non_interpreted_char_node::interpret(macro *mac)
 {
   mac->append(c);
-  return 1;
+  return true;
 }
 
 // forward declarations
@@ -5990,7 +5990,7 @@ class non_interpreted_node : public node {
   macro mac;
 public:
   non_interpreted_node(const macro &);
-  int interpret(macro *);
+  bool interpret(macro *);
   node *copy();
   int ends_sentence();
   bool is_same_as(node *);
@@ -6033,7 +6033,7 @@ node *non_interpreted_node::copy()
   return new non_interpreted_node(mac);
 }
 
-int non_interpreted_node::interpret(macro *m)
+bool non_interpreted_node::interpret(macro *m)
 {
   string_iterator si(mac);
   node *n = 0 /* nullptr */;
@@ -6046,7 +6046,7 @@ int non_interpreted_node::interpret(macro *m)
     else
       m->append(c);
   }
-  return 1;
+  return true;
 }
 
 static node *do_non_interpreted() // \?

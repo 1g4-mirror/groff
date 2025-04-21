@@ -103,7 +103,7 @@ struct node {
   virtual int overlaps_vertically();
   virtual int overlaps_horizontally();
   virtual units size();
-  virtual int interpret(macro *);
+  virtual bool interpret(macro *);
 
   virtual node *merge_glyph_node(glyph_node *);
   virtual tfont *get_tfont();

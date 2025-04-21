@@ -1,5 +1,21 @@
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor (boolify).
+
+	* src/roff/troff/node.h (struct node):
+	* src/roff/troff/node.cpp (node::interpret): Demote return type
+	of `interpret` virtual member function from `int` to `bool`.
+	* src/roff/troff/input.cpp (class non_interpreted_char_node)
+	(non_interpreted_char_node::interpret)
+	(class non_interpreted_node)
+	(non_interpreted_node::interpret): Same.
+	* src/roff/troff/input.cpp
+	(non_interpreted_char_node::interpret)
+	(non_interpreted_node::interpret): Return Boolean instead of
+	integer literals.
+
+2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor.
 
 	* src/roff/troff/env.h (get_bold): Rename this declaration...

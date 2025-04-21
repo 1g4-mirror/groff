@@ -4166,9 +4166,9 @@ hyphenation_type unbreakable_space_node::get_hyphenation_type()
   return HYPHEN_MIDDLE;
 }
 
-int node::interpret(macro *)
+bool node::interpret(macro *)
 {
-  return 0;
+  return false;
 }
 
 device_extension_node::device_extension_node(const macro &m, bool b)
