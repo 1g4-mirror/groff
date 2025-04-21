@@ -1,5 +1,13 @@
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #67038 (behavior of `.b`
+	register).
+
+	* src/roff/groff/tests/dot-b-register-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor, continuing naming
 	reform of functions that advance the input stream pointer to use
 	the verb "read" instead of "get" or "has", which are more
