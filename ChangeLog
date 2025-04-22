@@ -133,8 +133,9 @@
 
 	* src/roff/troff/node.h (get_bold_fontno): Rename this
 	declaration...
-	(env_font_emboldening_offset): ...to this.  Change return type
-	from `int` to `hunits`.
+	(env_font_emboldening_offset): ...to this, because it doesn't
+	return a "fontno" (mounting position) at all.  Change return
+	type from `int` to `hunits`.
 
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -175,10 +176,13 @@
 	* src/roff/troff/node.cpp (get_bold_font): Likewise with
 	definition, and resolve the environment's currently selected
 	font so that we report the correct emboldening amount even if an
-	abstract style is the current font selection.  Use a temporary
-	variable to avoid yard-long expression, like `env_get_zoom()`.
+	abstract style is the current font selection.  Like
+	`env_get_zoom()`, use a temporary variable to avoid yard-long
+	expression.  This behavior comports better with DWB and Heirloom
+	Doctools troffs.
 
-	Fixes <https://savannah.gnu.org/bugs/?67038>.
+	Fixes <https://savannah.gnu.org/bugs/?67038>.  Problem appears
+	to date back to groff's birth.
 
 2025-04-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
