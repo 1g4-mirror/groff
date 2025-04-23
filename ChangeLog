@@ -1,5 +1,11 @@
 2025-04-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/stringclass.h (operator+): Fix code style nit:
+	reorder equality comparisons to avoid inadvertent lvalue
+	assignment.
+
+2025-04-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/stringclass.h (operator[], string::empty)
 	(operator+, string::substring): Fix code style nit: parenthesize
 	formally complex expressions.

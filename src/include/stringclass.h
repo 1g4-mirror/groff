@@ -138,12 +138,14 @@ inline string operator+(const string &s1, const string &s2)
 
 inline string operator+(const string &s1, const char *s2)
 {
-  return (s2 == 0) ? s1 : string(s1.ptr, s1.len, s2, strlen(s2));
+  return (0 /* nullptr */ == s2)
+	 ? s1 : string(s1.ptr, s1.len, s2, strlen(s2));
 }
 
 inline string operator+(const char *s1, const string &s2)
 {
-  return (s1 == 0) ? s2 : string(s1, strlen(s1), s2.ptr, s2.len);
+  return (0 /* nullptr */ == s1)
+	 ? s2 : string(s1, strlen(s1), s2.ptr, s2.len);
 }
 
 inline string operator+(const string &s, char c)
