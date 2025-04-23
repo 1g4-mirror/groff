@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <errno.h>
 #include <stdlib.h> // free(), malloc()
+#include <string.h> // strerror()
 
 #include "troff.h"
 #include "dictionary.h"
@@ -5588,10 +5589,7 @@ node *node::add_char(charinfo *ci, environment *env,
   return res;
 }
 
-#ifdef __GNUG__
-inline
-#endif
-int same_node(node *n1, node *n2)
+static inline int same_node(node *n1, node *n2)
 {
   if (n1 != 0 /* nullptr */) {
     if (n2 != 0 /* nullptr */)

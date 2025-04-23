@@ -1,5 +1,16 @@
 2025-04-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/input.cpp (temp_iterator::temp_iterator):
+	* src/roff/troff/node.cpp (same_node): Un-guard `inline` keyword
+	from preprocessor.  `inline` is a standard C++98 keyword, and
+	not (any longer?) a GNU extension.
+	* src/roff/troff/node.h: Rationalize "#include"s.  Include C
+	standard library header file we require.
+
+2025-04-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: When input blows out the stack, say how big it was.
 
 	* src/roff/troff/input.cpp (input_stack::push)

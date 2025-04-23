@@ -3976,10 +3976,7 @@ public:
   friend input_iterator *make_temp_iterator(const char *);
 };
 
-#ifdef __GNUG__
-inline
-#endif
-temp_iterator::temp_iterator(const char *s, int len)
+inline temp_iterator::temp_iterator(const char *s, int len)
 : base(0 /* nullptr */)
 {
   if (len > 0) {
