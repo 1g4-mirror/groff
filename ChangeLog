@@ -1,3 +1,9 @@
+2025-04-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/include/stringclass.h (operator[], string::empty)
+	(operator+, string::substring): Fix code style nit: parenthesize
+	formally complex expressions.
+
 2025-04-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/include/stringclass.h (operator+): Dump workaround for

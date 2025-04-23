@@ -101,13 +101,13 @@ private:
 
 inline char &string::operator[](int i)
 {
-  assert(i >= 0 && i < len);
+  assert((i >= 0) && (i < len));
   return ptr[i];
 }
 
 inline char string::operator[](int i) const
 {
-  assert(i >= 0 && i < len);
+  assert((i >= 0) && (i < len));
   return ptr[i];
 }
 
@@ -118,7 +118,7 @@ inline int string::length() const
 
 inline int string::empty() const
 {
-  return len == 0;
+  return (len == 0);
 }
 
 inline int string::operator*() const
@@ -138,12 +138,12 @@ inline string operator+(const string &s1, const string &s2)
 
 inline string operator+(const string &s1, const char *s2)
 {
-  return s2 == 0 ? s1 : string(s1.ptr, s1.len, s2, strlen(s2));
+  return (s2 == 0) ? s1 : string(s1.ptr, s1.len, s2, strlen(s2));
 }
 
 inline string operator+(const char *s1, const string &s2)
 {
-  return s1 == 0 ? s2 : string(s1, strlen(s1), s2.ptr, s2.len);
+  return (s1 == 0) ? s2 : string(s1, strlen(s1), s2.ptr, s2.len);
 }
 
 inline string operator+(const string &s, char c)
@@ -170,7 +170,7 @@ inline int operator!=(const string &s1, const string &s2)
 
 inline string string::substring(int i, int n) const
 {
-  assert(i >= 0 && i + n <= len);
+  assert((i >= 0) && ((i + n) <= len));
   return string(ptr + i, n);
 }
 
