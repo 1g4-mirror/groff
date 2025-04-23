@@ -1,5 +1,11 @@
 2025-04-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/stringclass.h (operator+): Dump workaround for
+	ancient (~1995) compiler bug affecting ternary operator.  Sun
+	C++ 4.0 is no longer relevant.
+
+2025-04-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/input.cpp (temp_iterator::temp_iterator):

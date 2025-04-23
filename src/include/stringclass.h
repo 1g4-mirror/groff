@@ -138,26 +138,12 @@ inline string operator+(const string &s1, const string &s2)
 
 inline string operator+(const string &s1, const char *s2)
 {
-#ifdef __GNUG__
-  if (s2 == 0)
-    return s1;
-  else
-    return string(s1.ptr, s1.len, s2, strlen(s2));
-#else
   return s2 == 0 ? s1 : string(s1.ptr, s1.len, s2, strlen(s2));
-#endif
 }
 
 inline string operator+(const char *s1, const string &s2)
 {
-#ifdef __GNUG__
-  if (s1 == 0)
-    return s2;
-  else
-    return string(s1, strlen(s1), s2.ptr, s2.len);
-#else
   return s1 == 0 ? s2 : string(s1, strlen(s1), s2.ptr, s2.len);
-#endif
 }
 
 inline string operator+(const string &s, char c)
