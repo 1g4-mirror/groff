@@ -1,3 +1,12 @@
+2025-04-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: When input blows out the stack, say how big it was.
+
+	* src/roff/troff/input.cpp (input_stack::push)
+	(input_stack::next_file): In fatal diagnostics complaining of
+	excessive *roff language stack use (not the process stack), say
+	how many levels of stack were configured.
+
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix build failure with Clang 20, GCC 9.3 and likely

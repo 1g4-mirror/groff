@@ -714,7 +714,8 @@ void input_stack::push(input_iterator *in)
   if (in == 0)
     return;
   if (++level > limit && limit > 0)
-    fatal("input stack limit exceeded (probable infinite loop)");
+    fatal("input stack limit of %1 levels exceeded"
+	  " (probable infinite loop)", limit);
   in->next = top;
   top = in;
   if (top->is_diversion) {
@@ -839,7 +840,7 @@ void input_stack::next_file(FILE *fp, const char *s)
     if ((*pp)->next_file(fp, s))
       return;
   if (++level > limit && limit > 0)
-    fatal("input stack limit exceeded");
+    fatal("input stack limit of %1 levels exceeded", limit);
   *pp = new file_iterator(fp, s);
   (*pp)->next = &nil_iterator;
 }
