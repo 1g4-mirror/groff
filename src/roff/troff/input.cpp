@@ -1297,7 +1297,7 @@ public:
 
 bool non_interpreted_char_node::is_same_as(node *nd)
 {
-  return c == ((non_interpreted_char_node *)nd)->c;
+  return c == static_cast<non_interpreted_char_node *>(nd)->c;
 }
 
 const char *non_interpreted_char_node::type()
@@ -1345,7 +1345,7 @@ static color *lookup_color(symbol nm)
   assert(!nm.is_null());
   if (nm == default_symbol)
     return &default_color;
-  color *c = (color *)color_dictionary.lookup(nm);
+  color *c = static_cast<color *>(color_dictionary.lookup(nm));
   if (0 == c /* nullptr */)
     warning(WARN_COLOR, "color '%1' not defined", nm.contents());
   return c;
@@ -1894,7 +1894,7 @@ token_node *token_node::get_token_node()
 
 bool token_node::is_same_as(node *nd)
 {
-  return tk == ((token_node *)nd)->tk;
+  return (tk == static_cast<token_node *>(nd)->tk);
 }
 
 const char *token_node::type()
@@ -4159,7 +4159,7 @@ bool operator==(const macro &m1, const macro &m2)
 static void interpolate_macro(symbol nm, bool do_not_want_next_token)
 {
   request_or_macro *p
-    = (request_or_macro *)request_dictionary.lookup(nm);
+    = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
   if (0 /* nullptr */ == p) {
     bool was_warned = false;
     const char *s = nm.contents();
@@ -4169,7 +4169,8 @@ static void interpolate_macro(symbol nm, bool do_not_want_next_token)
       buf[0] = s[0];
       buf[1] = s[1];
       buf[2] = '\0';
-      r = (request_or_macro *)request_dictionary.lookup(symbol(buf));
+      r = static_cast<request_or_macro *>
+	  (request_dictionary.lookup(symbol(buf)));
       if (r) {
 	macro *m = r->to_macro();
 	if ((0 /* nullptr */ == m) || !m->is_empty()) {
@@ -4593,7 +4594,8 @@ void do_define_string(define_mode mode, comp_mode comp)
   if (c == '"')
     c = get_copy(&n);
   macro mac;
-  request_or_macro *rm = (request_or_macro *)request_dictionary.lookup(nm);
+  request_or_macro *rm
+    = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
   macro *mm = rm ? rm->to_macro() : 0 /* nullptr */;
   if (mode == DEFINE_APPEND && mm)
     mac = *mm;
@@ -6008,7 +6010,7 @@ int non_interpreted_node::ends_sentence()
 
 bool non_interpreted_node::is_same_as(node *nd)
 {
-  return mac == ((non_interpreted_node *)nd)->mac;
+  return (mac == static_cast<non_interpreted_node *>(nd)->mac);
 }
 
 const char *non_interpreted_node::type()
@@ -10364,7 +10366,8 @@ static charinfo *get_charinfo_by_index(int n, bool suppress_creation)
   }
   else {
     symbol ns(i_to_a(n));
-    charinfo *ci = (charinfo *)indexed_charinfo_dictionary.lookup(ns);
+    charinfo *ci =
+      static_cast<charinfo *>(indexed_charinfo_dictionary.lookup(ns));
     if ((0 /*nullptr */ == ci) && !suppress_creation) {
       ci = new charinfo(UNNAMED_SYMBOL);
       ci->set_number(n);

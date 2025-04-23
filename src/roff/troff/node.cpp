@@ -2374,7 +2374,7 @@ dbreak_node::dbreak_node(node *n, node *p, statem *s, int divlevel,
 
 node *dbreak_node::merge_glyph_node(glyph_node *gn)
 {
-  glyph_node *gn2 = (glyph_node *)gn->copy();
+  glyph_node *gn2 = static_cast<glyph_node *>(gn->copy());
   node *new_none = none ? none->merge_glyph_node(gn) : 0 /* nullptr */;
   node *new_post = post ? post->merge_glyph_node(gn2) : 0 /* nullptr */;
   if ((0 /* nullptr */ == new_none) && (0 /* nullptr */ == new_post)) {
@@ -4314,11 +4314,11 @@ void suppress_node::dump_properties()
 
 bool suppress_node::is_same_as(node *n)
 {
-  return ((is_on == ((suppress_node *)n)->is_on)
-	  && (emit_limits == ((suppress_node *)n)->emit_limits)
-	  && (filename == ((suppress_node *)n)->filename)
-	  && (position == ((suppress_node *)n)->position)
-	  && (image_id == ((suppress_node *)n)->image_id));
+  return ((is_on == static_cast<suppress_node *>(n)->is_on)
+	  && (emit_limits == static_cast<suppress_node *>(n)->emit_limits)
+	  && (filename == static_cast<suppress_node *>(n)->filename)
+	  && (position == static_cast<suppress_node *>(n)->position)
+	  && (image_id == static_cast<suppress_node *>(n)->image_id));
 }
 
 const char *suppress_node::type()
@@ -4375,8 +4375,8 @@ void tag_node::tprint(troff_output_file *out)
 
 bool tag_node::is_same_as(node *nd)
 {
-  return tag_string == ((tag_node *)nd)->tag_string
-	 && delayed == ((tag_node *)nd)->delayed;
+  return ((tag_string == static_cast<tag_node *>(nd)->tag_string)
+	  && (delayed == static_cast<tag_node *>(nd)->delayed));
 }
 
 const char *tag_node::type()
@@ -4404,7 +4404,7 @@ int tag_node::ends_sentence()
 static int get_register(const char *p)
 {
   assert(p != 0 /* nullptr */);
-  reg *r = (reg *)register_dictionary.lookup(p);
+  reg *r = static_cast<reg *>(register_dictionary.lookup(p));
   assert(r != 0 /* nullptr */);
   units value;
   assert(r->get_value(&value));
@@ -4416,7 +4416,7 @@ static int get_register(const char *p)
 static const char *get_string(const char *p)
 {
   assert(p != 0 /* nullptr */);
-  reg *r = (reg *)register_dictionary.lookup(p);
+  reg *r = static_cast<reg *>(register_dictionary.lookup(p));
   assert(r != 0 /* nullptr */);
   return r->get_string();
 }
@@ -4942,7 +4942,7 @@ void draw_node::dump_properties()
 
 bool draw_node::is_same_as(node *n)
 {
-  draw_node *nd = (draw_node *)n;
+  draw_node *nd = static_cast<draw_node *>(n);
   if (code != nd->code || npoints != nd->npoints || sz != nd->sz
       || gcol != nd->gcol || fcol != nd->fcol)
     return false;
@@ -5614,7 +5614,7 @@ int same_node_list(node *n1, node *n2)
 
 bool extra_size_node::is_same_as(node *nd)
 {
-  return n == ((extra_size_node *)nd)->n;
+  return (n == static_cast<extra_size_node *>(nd)->n);
 }
 
 const char *extra_size_node::type()
@@ -5634,7 +5634,7 @@ bool extra_size_node::is_tag()
 
 bool vertical_size_node::is_same_as(node *nd)
 {
-  return n == ((vertical_size_node *)nd)->n;
+  return (n == static_cast<vertical_size_node *>(nd)->n);
 }
 
 const char *vertical_size_node::type()
@@ -5659,8 +5659,8 @@ bool vertical_size_node::is_tag()
 
 bool hmotion_node::is_same_as(node *nd)
 {
-  return n == ((hmotion_node *)nd)->n
-	 && col == ((hmotion_node *)nd)->col;
+  return ((n == static_cast<hmotion_node *>(nd)->n)
+	  && (col == static_cast<hmotion_node *>(nd)->col));
 }
 
 const char *hmotion_node::type()
@@ -5700,8 +5700,8 @@ hyphen_list *hmotion_node::get_hyphen_list(hyphen_list *tail, int *)
 
 bool space_char_hmotion_node::is_same_as(node *nd)
 {
-  return n == ((space_char_hmotion_node *)nd)->n
-	 && col == ((space_char_hmotion_node *)nd)->col;
+  return ((n == static_cast<space_char_hmotion_node *>(nd)->n
+	  && col == static_cast<space_char_hmotion_node *>(nd)->col));
 }
 
 const char *space_char_hmotion_node::type()
@@ -5736,8 +5736,8 @@ hyphen_list *space_char_hmotion_node::get_hyphen_list(hyphen_list *tail,
 
 bool vmotion_node::is_same_as(node *nd)
 {
-  return n == ((vmotion_node *)nd)->n
-	 && col == ((vmotion_node *)nd)->col;
+  return ((n == static_cast<vmotion_node *>(nd)->n)
+	  && col == static_cast<vmotion_node *>(nd)->col);
 }
 
 const char *vmotion_node::type()
@@ -5757,8 +5757,8 @@ bool vmotion_node::is_tag()
 
 bool hline_node::is_same_as(node *nd)
 {
-  return x == ((hline_node *)nd)->x
-	       && same_node(nodes, ((hline_node *)nd)->nodes);
+  return ((x == static_cast<hline_node *>(nd)->x)
+	  && same_node(nodes, static_cast<hline_node *>(nd)->nodes));
 }
 
 const char *hline_node::type()
@@ -5778,8 +5778,8 @@ bool hline_node::is_tag()
 
 bool vline_node::is_same_as(node *nd)
 {
-  return x == ((vline_node *)nd)->x
-	       && same_node(nodes, ((vline_node *)nd)->nodes);
+  return ((x == static_cast<vline_node *>(nd)->x)
+	  && same_node(nodes, static_cast<vline_node *>(nd)->nodes));
 }
 
 const char *vline_node::type()
@@ -5864,8 +5864,9 @@ bool zero_width_node::is_tag()
 
 bool italic_corrected_node::is_same_as(node *nd)
 {
-  return (x == ((italic_corrected_node *)nd)->x
-	  && same_node(nodes, ((italic_corrected_node *)nd)->nodes));
+  return ((x == static_cast<italic_corrected_node *>(nd)->x)
+	  && same_node(nodes,
+	       static_cast<italic_corrected_node *>(nd)->nodes));
 }
 
 const char *italic_corrected_node::type()
@@ -5959,9 +5960,9 @@ bool left_italic_corrected_node::is_tag()
 
 bool left_italic_corrected_node::is_same_as(node *nd)
 {
-  return (x == ((left_italic_corrected_node *)nd)->x
+  return ((x == static_cast<left_italic_corrected_node *>(nd)->x)
 	  && same_node(nodes,
-                       ((left_italic_corrected_node *)nd)->nodes));
+	       static_cast<left_italic_corrected_node *>(nd)->nodes));
 }
 
 void left_italic_corrected_node::ascii_print(ascii_output_file *out)
@@ -6120,8 +6121,9 @@ bool bracket_node::is_tag()
 
 bool composite_node::is_same_as(node *nd)
 {
-  return ci == ((composite_node *)nd)->ci
-    && same_node_list(nodes, ((composite_node *)nd)->nodes);
+  return ((ci == static_cast<composite_node *>(nd)->ci)
+	  && same_node(nodes,
+	               static_cast<composite_node *>(nd)->nodes));
 }
 
 const char *composite_node::type()
@@ -6141,10 +6143,10 @@ bool composite_node::is_tag()
 
 bool glyph_node::is_same_as(node *nd)
 {
-  return ci == ((glyph_node *)nd)->ci
-	 && tf == ((glyph_node *)nd)->tf
-	 && gcol == ((glyph_node *)nd)->gcol
-	 && fcol == ((glyph_node *)nd)->fcol;
+  return ((ci == static_cast<glyph_node *>(nd)->ci)
+	  && (tf == static_cast<glyph_node *>(nd)->tf)
+	  && (gcol == static_cast<glyph_node *>(nd)->gcol)
+	  && (fcol == static_cast<glyph_node *>(nd)->fcol));
 }
 
 const char *glyph_node::type()
@@ -6186,9 +6188,9 @@ bool ligature_node::is_tag()
 
 bool kern_pair_node::is_same_as(node *nd)
 {
-  return (amount == ((kern_pair_node *)nd)->amount
-	  && same_node(n1, ((kern_pair_node *)nd)->n1)
-	  && same_node(n2, ((kern_pair_node *)nd)->n2));
+  return ((amount == static_cast<kern_pair_node *>(nd)->amount)
+	  && same_node(n1, static_cast<kern_pair_node *>(nd)->n1)
+	  && same_node(n2, static_cast<kern_pair_node *>(nd)->n2));
 }
 
 const char *kern_pair_node::type()
@@ -6253,9 +6255,10 @@ void dbreak_node::dump_node()
 
 bool break_char_node::is_same_as(node *nd)
 {
-  return break_code == ((break_char_node *)nd)->break_code
-	 && col == ((break_char_node *)nd)->col
-	 && same_node(nodes, ((break_char_node *)nd)->nodes);
+  return (break_code == static_cast<break_char_node *>(nd)->break_code)
+	 && (col == static_cast<break_char_node *>(nd)->col)
+	 && (same_node(nodes,
+	               static_cast<break_char_node *>(nd)->nodes));
 }
 
 const char *break_char_node::type()
@@ -6300,9 +6303,9 @@ bool line_start_node::is_tag()
 
 bool space_node::is_same_as(node *nd)
 {
-  return n == ((space_node *)nd)->n
-	      && set == ((space_node *)nd)->set
-	      && col == ((space_node *)nd)->col;
+  return ((n == static_cast<space_node *>(nd)->n)
+	  && (set == static_cast<space_node *>(nd)->set)
+	  && (col == static_cast<space_node *>(nd)->col));
 }
 
 const char *space_node::type()
@@ -6312,9 +6315,9 @@ const char *space_node::type()
 
 bool word_space_node::is_same_as(node *nd)
 {
-  return n == ((word_space_node *)nd)->n
-	 && set == ((word_space_node *)nd)->set
-	 && col == ((word_space_node *)nd)->col;
+  return ((n == static_cast<word_space_node *>(nd)->n)
+	  && (set == static_cast<word_space_node *>(nd)->set)
+	  && (col == static_cast<word_space_node *>(nd)->col));
 }
 
 const char *word_space_node::type()

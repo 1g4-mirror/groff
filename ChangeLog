@@ -1,3 +1,30 @@
+2025-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Favor C++-style `static_cast` over C-style omnipotent
+	casts.
+
+	* src/roff/troff/column.cpp (vjustify_node::same) [0]:
+	* src/roff/troff/dictionary.cpp (object_dictionary::lookup)
+	(object_dictionary::rename, object_dictionary::remove)
+	(object_dictionary::alias):
+	* src/roff/troff/env.cpp (hyphen_trie::do_match)
+	(hyphen_trie::do_match):
+	* src/roff/troff/input.cpp
+	(non_interpreted_char_node::is_same_as, lookup_color)
+	(token_node::is_same_as, interpolate_macro, do_define_string)
+	(non_interpreted_node::is_same_as, get_charinfo_by_index):
+	* src/roff/troff/node.cpp (dbreak_node::merge_glyph_node)
+	(suppress_node::is_same_as, tag_node::is_same_as, get_register)
+	(get_string, draw_node::is_same_as, extra_size_node::is_same_as)
+	(vertical_size_node::is_same_as, hmotion_node::is_same_as)
+	(space_char_hmotion_node::is_same_as, vmotion_node::is_same_as)
+	(hline_node::is_same_as, vline_node::is_same_as)
+	(italic_corrected_node::is_same_as)
+	(left_italic_corrected_node::is_same_as)
+	(composite_node::is_same_as, glyph_node::is_same_as)
+	(kern_pair_node::is_same_as, break_char_node::is_same_as)
+	(space_node::is_same_as, word_space_node::is_same_as): Do it.
+
 2025-04-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/include/stringclass.h (operator+): Fix code style nit:

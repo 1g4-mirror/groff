@@ -3987,7 +3987,7 @@ inline int max(int m, int n)
 
 void hyphen_trie::do_match(int i, void *v)
 {
-  operation *op = (operation *)v;
+  operation *op = static_cast<operation *>(v);
   while (op != 0) {
     h[i - op->distance] = max(h[i - op->distance], op->num);
     op = op->next;
@@ -3996,7 +3996,7 @@ void hyphen_trie::do_match(int i, void *v)
 
 void hyphen_trie::do_delete(void *v)
 {
-  operation *op = (operation *)v;
+  operation *op = static_cast<operation *>(v);
   while (op) {
     operation *tem = op;
     op = tem->next;

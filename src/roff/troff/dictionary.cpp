@@ -173,14 +173,14 @@ object *object_dictionary::lookup(symbol nm)
 void object_dictionary::define(symbol nm, object *obj)
 {
   obj->add_reference();
-  obj = (object *)d.lookup(nm, obj);
+  obj = static_cast<object *>(d.lookup(nm, obj));
   if (obj)
     obj->remove_reference();
 }
 
 void object_dictionary::rename(symbol oldnm, symbol newnm)
 {
-  object *obj = (object *)d.remove(oldnm);
+  object *obj = static_cast<object *>(d.remove(oldnm));
   if (obj) {
     obj = (object *)d.lookup(newnm, obj);
     if (obj)
@@ -190,7 +190,7 @@ void object_dictionary::rename(symbol oldnm, symbol newnm)
 
 void object_dictionary::remove(symbol nm)
 {
-  object *obj = (object *)d.remove(nm);
+  object *obj = static_cast<object *>(d.remove(nm));
   if (obj)
     obj->remove_reference();
 }
@@ -199,10 +199,10 @@ void object_dictionary::remove(symbol nm)
 
 bool object_dictionary::alias(symbol newnm, symbol oldnm)
 {
-  object *obj = (object *)d.lookup(oldnm);
+  object *obj = static_cast<object *>(d.lookup(oldnm));
   if (obj) {
     obj->add_reference();
-    obj = (object *)d.lookup(newnm, obj);
+    obj = static_cast<object *>(d.lookup(newnm, obj));
     if (obj)
       obj->remove_reference();
     return true;

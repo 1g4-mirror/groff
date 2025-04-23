@@ -674,7 +674,7 @@ const char *vjustify_node::type()
 
 int vjustify_node::same(node *nd)
 {
-  return typ == ((vjustify_node *)nd)->typ;
+  return typ == static_cast<vjustify_node *>(nd)->typ;
 }
 
 bool vjustify_node::need_reread(bool *bolp)
