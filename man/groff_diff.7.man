@@ -1608,7 +1608,7 @@ requests work like AT&T
 and
 .B ds
 requests,
-accepting an optional leading neutral double-quote,
+accepting an optional leading neutral double quote,
 notated
 .RB \[lq][ \[dq] ]\[rq],
 in an argument that the formatter reads

@@ -367,7 +367,7 @@ characters must be double-quoted to be interpreted correctly.
 .
 _endif()dnl
 If an empty macro argument is required,
-specify it with a pair of double-quotes
+specify it with a pair of double quotes
 ("").
 _ifstyle()dnl
 .
@@ -2597,7 +2597,7 @@ tilde).
 .B \e\(dq
 Comment.
 .
-The formatter ignores everything after the double-quote to the end of
+The formatter ignores everything after the double quote to the end of
 the input line.
 .
 Place whole-line comments on a control line
