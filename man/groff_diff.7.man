@@ -80,11 +80,11 @@ by the
 .I troff \" generic
 formatter.
 .
-Differences arising from
+We also note here differences arising from
 .IR groff 's
 implementation of AT&T
 .I troff \" AT&T
-features are also noted.
+features.
 .
 See
 .MR roff @MAN7EXT@
@@ -92,8 +92,8 @@ for background.
 .
 GNU
 .I troff \" GNU
-can operate in a mode that increases support for documents written for
-AT&T
+can operate in a manner that increases support
+for documents written for AT&T
 .IR troff ; \" AT&T
 see section \[lq]Compatibility mode\[rq] below.
 .
@@ -696,7 +696,10 @@ to a form suitable for Versatec and Benson-Varian plotters.)
 .
 GNU
 .I troff \" GNU
-offers drawing commands to create filled
+extends the
+.B \[rs]D
+escape sequence
+with drawing commands to create filled
 circles and ellipses,
 and polygons.
 .\" CSTR #54 did not countenance polygons, but DWB 3.3 had outlined ones
@@ -810,10 +813,11 @@ with its leftmost point at the drawing position.
 .
 .TP
 .BI \[rs]D\[aq]E\~ "h v" \[aq]
-Draw filled ellipse with axis lengths
-.IR h ,
+Draw filled ellipse of axis lengths
+.I h
+and
 .IR v ,
-and its leftmost point at the drawing position.
+with its leftmost point at the drawing position.
 .
 .
 .TP
@@ -945,7 +949,8 @@ or arbitrary register
 .BI \[rs]m( cl
 .TQ
 .BI \[rs]m[ col ]
-Set the stroke color.
+Set stroke color to
+.IR col .
 .
 .B \[rs]m[]
 restores the previous stroke color,
@@ -958,7 +963,8 @@ or the default if there is none.
 .BI \[rs]M( cl
 .TQ
 .BI \[rs]M[ col ]
-Set the fill color.
+Set fill color to
+.IR col .
 .
 .B \[rs]M[]
 restores the previous fill color,
@@ -1104,9 +1110,9 @@ Synonymous with
 .IR name\~\[+-]n \[rq].
 .
 .TP
-.BI \[rs]s[ 0 ]
+.B \[rs]s[0]
 .TQ
-.BI \[rs]s\[aq] 0 \[aq]
+.B \[rs]s\[aq]0\[aq]
 Restore the previous type size;
 no operation if there is none.
 .
@@ -1340,7 +1346,9 @@ or
 .IR nnn th
 argument.
 .
-Macros and strings can have an unlimited number of arguments.
+In GNU
+.IR troff , \" GNU
+macros and strings can have an unlimited number of arguments.
 .
 .
 .TP
@@ -1428,7 +1436,7 @@ between them
 .\}
 avoids this problem.
 .
-Use
+Consider using
 .B \[rs]\^/
 whenever a slanted glyph
 is immediately followed by an upright glyph
@@ -1463,8 +1471,8 @@ between them
 .\}
 avoids this problem.
 .
-Use
-@code{\,}
+Consider using
+.B \[rs]\^,
 whenever an upright glyph
 is followed immediately by a slanted glyph
 without any intervening space.
@@ -1496,7 +1504,8 @@ Use it with the output comparison operator to compare its operands
 by character rather than as formatted output.
 .
 Since
-.MR @g@troff
+GNU
+.I troff \" GNU
 reads comparands protected with
 .B \[rs]?\&
 in copy mode,
@@ -1566,9 +1575,14 @@ for a list of components used in composite glyph names.
 .
 .TP
 .B \[rs]\[ti]
-Insert an unbreakable space that is adjustable like an ordinary space.
+Insert an adjustable,
+unbreakable space.
 .
-It is discarded from the end of an output line if a break is forced.
+As with ordinary spaces,
+GNU
+.I troff \" GNU
+discards any sequence of these at the end of an output line
+if a break occurs.
 .
 .
 .\" ====================================================================
@@ -1700,11 +1714,17 @@ remove its name first.
 .RI [ end-name ]
 As
 .RB \[lq] am \[rq],
-but compatibility mode is disabled while the appendment to
-.I name
-is interpreted:
-a \[lq]compatibility save\[rq] token is inserted at its beginning,
-and a \[lq]compatibility restore\[rq] token at its end.
+but
+GNU
+.I troff \" GNU
+disables compatibility mode while interpreting the appendment to
+.I name:
+it inserts a
+.I "compatibility save"
+token at the beginning of the appendment,
+and a
+.I "compatibility restore"
+token at its end.
 .
 As a consequence,
 the requests
@@ -1735,8 +1755,13 @@ below.
 .RI [ end-name ]
 As
 .BR ami ,
-but compatibility mode is disabled during interpretation of the
-appendment.
+but
+GNU
+.I troff \" GNU
+disables compatibility mode
+while interpreting the appendment to the macro
+named by the contents of string
+.I name.
 .
 .
 .TP
@@ -1745,12 +1770,18 @@ appendment.
 .IR contents ]
 As
 .RB \[lq] as \[rq],
-but compatibility mode is disabled while the appendment to
-.I name
-is interpreted:
-a \[lq]compatibility save\[rq] token is inserted at the beginning of
-.IR contents ,
-and a \[lq]compatibility restore\[rq] token after it.
+but
+GNU
+.I troff \" GNU
+disables compatibility mode
+while interpreting the appendment to the string
+.I name:
+it inserts a
+.I "compatibility save"
+token at the beginning of the appendment,
+and a
+.I "compatibility restore"
+token at its end.
 .
 As a consequence,
 the requests
@@ -2415,11 +2446,17 @@ A device's default stroke and fill colors are not necessarily the same.
 .RI [ end-name ]
 As
 .RB \[lq] de \[rq],
-but compatibility mode is disabled while the macro
-.I ident
-is interpreted:
-a \[lq]compatibility save\[rq] token is inserted at its beginning,
-and a \[lq]compatibility restore\[rq] token at its end.
+but
+GNU
+.I troff \" GNU
+disables compatibility mode while interpreting
+.I name:
+it inserts a
+.I "compatibility save"
+token at the beginning of the macro definition,
+and a
+.I "compatibility restore"
+token at its end.
 .
 See
 .BR .am1 .
@@ -2440,10 +2477,18 @@ and the name of the end macro terminating its definition in string
 .RI [ end-name ]
 As
 .BR dei ,
-but compatibility mode is disabled while the definition of the macro
-named in string
-.I name
-is interpreted.
+but
+GNU
+.I troff \" GNU
+disables compatibility mode
+while interpreting the macro
+named by the contents of string
+.I name.
+.
+See
+.B am1
+and
+.BR de1 .
 .
 .
 .TP
@@ -4264,13 +4309,18 @@ these requests behave similarly to
 and
 .BR as1 ,
 respectively:
-a \[lq]compatibility save\[rq] token is inserted at the beginning,
-and a \[lq]compatibility restore\[rq] token at the end,
-with compatibility mode switched on during interpolation of the
-applicable macro definition,
-appendment,
-or string
-.I contents.
+GNU
+.I troff \" GNU
+inserts a
+.I "compatibility save"
+token at its beginning of
+.I contents
+and a
+.I "compatibility restore"
+token at its end,
+causing compatibility mode to switch on during interpolation
+of the applicable macro or string definition,
+or appendment thereto.
 .
 .
 .TP

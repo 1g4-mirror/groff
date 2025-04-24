@@ -8306,8 +8306,13 @@ quantity and its units.
 @Defesc {\\~, , , }
 @cindex unbreakable space (@code{\~})
 @cindex space, unbreakable (@code{\~})
-Insert an unbreakable space that is adjustable like an ordinary space.
-It is discarded from the end of an output line if a break is forced.
+Insert an adjustable,
+unbreakable space.
+As with ordinary spaces,
+GNU
+@command{troff} @c GNU
+discards any sequence of these at the end of an output line
+if a break occurs.
 
 @Example
 Set the output speed to\~1.
@@ -12803,9 +12808,15 @@ withdrawn.}
 @DefescItem {\\m, (, co, }
 @DefescItem {\\m, [, col, ]}
 @DefregListEndx {.m}
-Set the stroke color.  The escape sequence @code{\m[]} restores the
-previous stroke color, or the default if there is none, as does a
-@code{gcolor} request without an argument.
+Set stroke color to
+@var{col}.
+The escape sequence
+@code{\m[]}
+restores the previous stroke color,
+or the default if there is none,
+as does a
+@code{gcolor}
+request without an argument.
 
 @Example
 .gcolor red
@@ -12840,10 +12851,17 @@ when writing a margin character as follows (@pxref{Miscellaneous}).
 @DefescItem {\\M, (, co, }
 @DefescItem {\\M, [, col, ]}
 @DefregListEndx {.M}
-Set the fill color for objects drawn with @code{\D'@dots{}'} escape
-sequences.  The escape sequence @code{\M[]} restores the previous fill
-color, or the default if there is none, as does an @code{fcolor} request
-without an argument.
+Set fill color for objects drawn with
+@code{\D'@dots{}'}
+escape sequences to
+@var{col}.
+The escape sequence
+@code{\M[]}
+restores the previous fill color,
+or the default if there is none,
+as does an
+@code{fcolor}
+request without an argument.
 
 @cindex @code{\M} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\M}
@@ -13059,9 +13077,17 @@ Because strings are similar to macros, they too can be defined so as to
 suppress AT&T @code{troff} compatibility mode when used; see
 @ref{Writing Macros} and @ref{Compatibility Mode}.  The @code{ds1}
 request defines a string such that compatibility mode is off when the
-string is later interpolated.  To be more precise, a @dfn{compatibility
-save} token is inserted at the beginning of @var{contents}, and a
-@dfn{compatibility restore} token at the end.
+string is later interpolated.
+To be more precise,
+GNU
+@command{troff} @c GNU
+inserts a
+a
+@dfn{compatibility save}
+token at the beginning of @var{contents},
+and a
+@dfn{compatibility restore}
+token at the end.
 
 @Example
 .nr xxx 12345
@@ -13491,9 +13517,17 @@ comparisons in other programming languages.
 @cindex copy mode, and @code{\?}
 @cindex mode, copy, and @code{\?}
 @noindent
-Since GNU @code{troff} reads comparands protected with @code{\?} in copy
-mode (@pxref{Copy Mode}), they need not even be valid @code{groff}
-syntax.  The escape character is still lexically recognized, however,
+Since
+GNU
+@command{troff}
+reads comparands protected with
+@code{\?}
+in copy mode (@pxref{Copy Mode}),
+they need not even be valid
+@code{groff}
+syntax.
+The escape character is still lexically recognized,
+however,
 and consumes the next character.
 
 @Example
