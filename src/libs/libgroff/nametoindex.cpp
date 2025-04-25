@@ -147,7 +147,7 @@ glyph *number_to_glyph(int n)
   return indexer.numbered_char_glyph(n);
 }
 
-// troff overrides this function with its own version.
+// troff overrides these functions with its own versions.
 
 glyph *name_to_glyph(const char *s)
 {
