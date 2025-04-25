@@ -1,3 +1,11 @@
+2025-04-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp: Fix code style nits.
+	(is_valid_font_mounting_position): Parenthesize formally complex
+	expression.
+	(read_font_identifier): Favor C++-style `const_cast` over
+	C-style omnipotent cast.
+
 2025-04-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Favor C++-style `static_cast` over C-style omnipotent

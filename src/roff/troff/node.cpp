@@ -6726,9 +6726,9 @@ static void font_lookup_error(font_lookup_info& finfo,
 
 bool is_valid_font_mounting_position(int n)
 {
-  return (n >= 0)
-	 && (n < font_table_size)
-	 && (font_table[n] != 0 /* nullptr */);
+  return ((n >= 0)
+	  && (n < font_table_size)
+	  && (font_table[n] != 0 /* nullptr */));
 }
 
 // Read the next token and look it up as a font name or position number.
@@ -6740,7 +6740,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
   tok.skip();
   if (tok.is_usable_as_delimiter()) {
     symbol s = get_name(true /* required */);
-    finfo->requested_name = (char *)s.contents();
+    finfo->requested_name = const_cast<char *>(s.contents());
     if (!s.is_null()) {
       n = symbol_fontno(s);
       if (n < 0) {
