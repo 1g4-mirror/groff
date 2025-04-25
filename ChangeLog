@@ -1,3 +1,8 @@
+2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (glyph_to_name): Parenthesize
+	formally complex expression.
+
 2025-04-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (glyph_to_name): Use explicit

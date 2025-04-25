@@ -10406,7 +10406,8 @@ const char *glyph_to_name(glyph *g)
   // The `glyph` type is used by libgroff, which doesn't need to know
   // about the `charinfo` type.
   charinfo *ci = reinterpret_cast<charinfo *>(g);
-  return (ci->nm != UNNAMED_SYMBOL ? ci->nm.contents() : 0);
+  return ((ci->nm != UNNAMED_SYMBOL) ? ci->nm.contents()
+				     : 0 /* nullptr */);
 }
 
 // Local Variables:
