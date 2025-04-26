@@ -10408,9 +10408,8 @@ glyph *number_to_glyph(int n)
 
 const char *glyph_to_name(glyph *g)
 {
-  // In troff, every `glyph` `g` is actually created as a `charinfo`.
-  // The `glyph` type is used by libgroff, which doesn't need to know
-  // about the `charinfo` type.
+  // In both libgroff and troff, `charinfo` has `glyph` as a base class.
+  // But in troff, `charinfo` stores much more information.
   charinfo *ci = reinterpret_cast<charinfo *>(g);
   return ((ci->nm != UNNAMED_SYMBOL) ? ci->nm.contents()
 				     : 0 /* nullptr */);

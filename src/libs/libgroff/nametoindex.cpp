@@ -171,7 +171,9 @@ glyph *name_to_glyph(const char *s)
 
 const char *glyph_to_name(glyph *g)
 {
-  charinfo *ci = (charinfo *)g; // Every glyph is actually a charinfo.
+  // In both libgroff and troff, `charinfo` has `glyph` as a base class.
+  // But in troff, `charinfo` stores much more information.
+  charinfo *ci = reinterpret_cast<charinfo *>(g);
   return ci->name;
 }
 
