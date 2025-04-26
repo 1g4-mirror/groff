@@ -85,7 +85,7 @@ troff
    that `mso` is itself a groff extension), consider the following.
 
      .\" Load the ms package, whatever it might be named.
-     .msoquiet s.tmac \" If file present, defines `LP` macro.
+     .msoquiet s.tmac\" If file present, defines `LP` macro.
      .if !d LP .msoquiet tmac.s
 
 *  GNU troff no longer accepts nonpositive page lengths.  Attempting to
@@ -148,8 +148,8 @@ troff
    claim to be terminals), the formatter now reports warning diagnostics
    regarding certain output problems using units of lines (vertically)
    and character cells [ens] (horizontally) instead of inches (or the
-   unit configured with the `warnscale` request) to describe the
-   vertical drawing position where the problem occurred.
+   unit configured with the `warnscale` request) to describe the drawing
+   position where the problem occurred.
 
 *  The device-independent page description language produced by GNU
    troff now reports unbreakable spaces (those produced with the `\~`
@@ -169,7 +169,7 @@ troff
    AT&T and other troffs apply a hyphenation mode of 1 to the final
    input line (and subsequent ones), rather than restoring the mode in
    use before the `nh` request.  Apart from overturning user
-   expectations, for GNU troff "1" is not an appropriate value for its
+   expectations, for GNU troff "1" is not an appropriate mode for its
    English hyphenation patterns.  (For example, "alibi" would break as
    "ali-bi" instead of "al-ibi" after this argumentless `hy`
    invocation.)  With updates to groff's localization files accompanying
@@ -233,7 +233,7 @@ troff
    accept `p` and `s`.
 
 *  In compatibility mode, GNU troff now accepts delimiters that it
-   rejects when not in compatbility mode--namely, ordinary characters
+   rejects when not in compatibility mode--namely, ordinary characters
    that are meaningful in numeric expressions (which are often
    delimited).  This change improves compatibility with AT&T troff.
 
@@ -574,8 +574,8 @@ Macro packages
    normal operation.  Applications include customization of letterhead.
 
 *  The m (mm) macro package now supports a user-definable hook macro
-   `RPX`, which if defined is called by `RP` to format the reference
-   list caption string `Rp` instead of the default formatting.
+   `RPX`, which if defined is called by `RP` in lieu of the latter's
+   normal operation (formatting the reference list caption string `Rp`).
 
 *  The m (mm) macro package's `LI` macro now interprets its second
    argument as a Boolean value indicating whether a space should
