@@ -1,5 +1,19 @@
 2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/nametoindex.cpp: Fix code style nits.
+	(character_indexer::ascii_char_glyph)
+	(character_indexer::numbered_char_glyph)
+	(name_to_glyph): Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.
+	(character_indexer::named_char_glyph)
+	(character_indexer::numbered_char_glyph)
+	(name_to_glyph): Parenthesize formally complex expressions.
+	(character_indexer::named_char_glyph): Slightly refactor;
+	replace series of individual character comparisons with a
+	`strncmp()` call.
+
+2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (glyph_to_name): Parenthesize
 	formally complex expression.
 

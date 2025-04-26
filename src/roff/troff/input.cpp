@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // ungetc()
 #include <stdlib.h> // atoi(), exit(), EXIT_FAILURE, EXIT_SUCCESS,
 		    // free(), getenv(), putenv(), strtol(), system()
-#include <string.h> // strdup(), strerror()
+#include <string.h> // strcpy(), strdup(), strerror()
 
 #include <getopt.h> // getopt_long()
 
@@ -7919,12 +7919,18 @@ void spreadwarn_request()
   skip_line();
 }
 
+// Keep this in sync with "src/libs/libgroff/nametoindex.cpp".
+// constexpr // C++11
+static const char char_prefix[] = { 'c', 'h', 'a', 'r' };
+// constexpr // C++11
+static const size_t char_prefix_len = sizeof char_prefix;
+
 static void init_charset_table()
 {
   char buf[16];
-  strcpy(buf, "char");
+  (void) strncpy(buf, char_prefix, char_prefix_len);
   for (int i = 0; i < 256; i++) {
-    strcpy(buf + 4, i_to_a(i));
+    (void) strcpy((buf + char_prefix_len), i_to_a(i));
     charset_table[i] = get_charinfo(symbol(buf));
     charset_table[i]->set_ascii_code(i);
     if (csalpha(i))

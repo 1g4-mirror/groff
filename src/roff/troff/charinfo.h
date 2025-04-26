@@ -24,6 +24,8 @@ extern void get_flags();
 
 class macro;
 
+// libgroff has a simpler `charinfo` class that stores much less
+// information.
 class charinfo : glyph {
   static int next_index;
   charinfo *translation;
