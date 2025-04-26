@@ -726,6 +726,11 @@ Miscellaneous
 *  Support for terminal devices using the CCSID 1047 (EBCDIC) encoding
    has been withdrawn.
 
+*  groff's "configure" script now tries harder to determine an
+   appropriate paper format for the system; its output reports how it
+   reached its determination.  Any existing "/etc/papersize" file is one
+   of the resources it consults.
+
 *  You can now specify any paper format you like--including the file
    specification "/etc/papersize" for systems using "libpaper"--as the
    default that the groff build writes to generated device description
