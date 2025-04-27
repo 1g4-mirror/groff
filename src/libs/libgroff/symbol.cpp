@@ -175,27 +175,24 @@ size_t symbol::json_length() const
   int nextrachars = 2; // leading and trailing double quotes
   for (size_t i = 0; p[i] != '\0'; i++, len++) {
     ch = p[i];
-    if (ch < 128) {
-      // These printable characters require escaping.
-      if (('"' == ch) || ('\\' == ch) || ('/' == ch))
-	nextrachars++;
-      else if (csprint(ch))
-	;
-      else
-	switch (ch) {
-	case '\b':
-	case '\f':
-	case '\n':
-	case '\r':
-	case '\t':
-	  nextrachars++;
-	  break;
-	default:
-	  nextrachars += 5;
-      }
-    }
+    assert ((ch >= 0) && (ch <= 127));
+    // These printable characters require escaping.
+    if (('"' == ch) || ('\\' == ch) || ('/' == ch))
+      nextrachars++;
+    else if (csprint(ch))
+      ;
     else
-      nextrachars += 5;
+      switch (ch) {
+      case '\b':
+      case '\f':
+      case '\n':
+      case '\r':
+      case '\t':
+	nextrachars++;
+	break;
+      default:
+	nextrachars += 5;
+    }
   }
   return (len + nextrachars);
 }

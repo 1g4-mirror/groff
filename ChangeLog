@@ -1,5 +1,12 @@
 2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp (string::json_length):
+	* src/libs/libgroff/symbol.cpp (symbol::json_length): Drop
+	unnecessary/tautologous comparisons of integer literals with
+	objects of plain `char` type, which are of undefined signedness.
+
+2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/nametoindex.cpp (glyph_to_name): Use
 	explicit `reinterpret_cast` C++ operator instead of C-style
 	cast.  Annotate why we use this footgun.
