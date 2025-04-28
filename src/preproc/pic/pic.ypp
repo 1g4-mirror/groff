@@ -1731,7 +1731,7 @@ isn't under cfront */
 #undef const
 #endif
 
-static struct {
+static struct pic_defaults_table {
   const char *name;
   double val;
   int scaled;		// non-zero if val should be multiplied by scale

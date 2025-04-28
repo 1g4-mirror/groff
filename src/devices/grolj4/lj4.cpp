@@ -127,7 +127,7 @@ lj4_font *lj4_font::load_lj4_font(const char *s)
   return f;
 }
 
-static struct {
+static struct lj4_command_table {
   const char *s;
   int lj4_font::*ptr;
   int min;

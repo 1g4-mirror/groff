@@ -1,5 +1,14 @@
 2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grolj4, pic]: Improve C++98 conformance.
+
+	* src/devices/grolj4/lj4.cpp (struct lj4_command_table):
+	* src/preproc/pic/pic.ypp (struct pic_defaults_table): Give
+	anonymous structure types names; anonymous structs cannot be
+	passed to templates prior to C++11.
+
+2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (string::json_length):
 	* src/libs/libgroff/symbol.cpp (symbol::json_length): Drop
 	unnecessary/tautologous comparisons of integer literals with
