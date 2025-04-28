@@ -1,5 +1,13 @@
 2025-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[indxbib]: Drop dead code (unused function).
+
+	* src/utils/indxbib/indxbib.cpp (fatal_error_exit): Do it.
+	Revealed by `-Wunused-function` when marking this function as
+	`static`.
+
+2025-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Drop dead code (unused function).
 
 	* src/roff/troff/input.cpp (get_output_registers): Do it.

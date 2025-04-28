@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <assert.h>
 #include <errno.h>
-#include <stdlib.h> // mkstemp(), strtol()
+#include <stdlib.h> // EXIT_SUCCESS, exit(), mkstemp(), strtol()
 #include <stdio.h> // EOF, FILE, fclose(), fdopen(), fopen(), fprintf(),
 		   // fseek(), getc(), printf(), rename(), setbuf(),
 		   // stderr, stdin, stdout, ungetc()
@@ -810,12 +810,6 @@ static void fwrite_or_die(const void *ptr, int size, int nitems,
 {
   if (fwrite(ptr, size, nitems, fp) != (size_t)nitems)
     fatal("cannot write to file: %1", strerror(errno));
-}
-
-void fatal_error_exit()
-{
-  cleanup();
-  exit(3);
 }
 
 extern "C" {
