@@ -9471,14 +9471,6 @@ void reset_output_registers()
   output_reg_maxy_contents = -1;
 }
 
-void get_output_registers(int *minx, int *miny, int *maxx, int *maxy)
-{
-  *minx = output_reg_minx_contents;
-  *miny = output_reg_miny_contents;
-  *maxx = output_reg_maxx_contents;
-  *maxy = output_reg_maxy_contents;
-}
-
 void init_input_requests()
 {
   init_request("ab", abort_request);

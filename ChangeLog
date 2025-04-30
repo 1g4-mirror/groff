@@ -1,3 +1,11 @@
+2025-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Drop dead code (unused function).
+
+	* src/roff/troff/input.cpp (get_output_registers): Do it.
+	Revealed by `-Wunused-function` when marking these functions as
+	`static`.
+
 2025-04-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[grolj4, pic]: Improve C++98 conformance.
