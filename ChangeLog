@@ -1,3 +1,11 @@
+2025-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Drop dead code.
+
+	* src/libs/libgroff/assert.cpp: Delete.
+	* src/libs/libgroff/libgroff.am (libgroff_a_SOURCES): Remove
+	aforementioned file from macro definition.
+
 2025-04-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[indxbib]: Drop dead code (unused function).

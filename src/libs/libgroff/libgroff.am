@@ -24,7 +24,6 @@ libgroff_a_CPPFLAGS = \
 
 # Build from OBJS
 libgroff_a_SOURCES = \
-  src/libs/libgroff/assert.cpp \
   src/libs/libgroff/change_lf.cpp \
   src/libs/libgroff/cmap.cpp \
   src/libs/libgroff/color.cpp \
