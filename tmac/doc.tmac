@@ -133,6 +133,9 @@
 .if !r CS \
 .  nr CS 0
 .
+.\" `Sh` sets this register to \n[CS].
+.nr doc-do-capitalize 0
+.
 .\" full capitalization of page identifier
 .if !r CT \
 .  nr CT 0

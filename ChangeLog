@@ -1,5 +1,11 @@
 2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac: Unconditionally initialize `doc-do-capitalize`,
+	to avoid warnings when formatting degenerate documents lacking
+	an `Sh` call.
+
+2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac: Save and restore AT&T troff compatibility mode,
 	as man(7) does.
 
