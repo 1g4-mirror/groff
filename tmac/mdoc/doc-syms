@@ -880,11 +880,8 @@
 .
 .    ie d doc-str-Lb-\*[doc-arg\n[doc-arg-ptr]] \
 .      ds doc-str-Lb1 "\*[doc-str-Lb-\*[doc-arg\n[doc-arg-ptr]]]
-.    el \{\
-.      doc-warn .Lb: no description available for library \
-'\*[doc-arg\n[doc-arg-ptr]]'
-.      ds doc-str-Lb1 library \*[Lq]\*[doc-arg\n[doc-arg-ptr]]\*[Rq]
-.    \}
+.    el \
+.      ds doc-str-Lb1 "\*[doc-arg\n[doc-arg-ptr]]
 .
 .    \" replacing argument with result
 .    ds doc-arg\n[doc-arg-ptr] "\*[doc-str-Lb1]

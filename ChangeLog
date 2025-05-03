@@ -1,5 +1,16 @@
 2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-syms (Lb): Stop throwing warning if no
+	description is available for the argument.  `Lb` usage is not
+	universal among mdoc(7) documents; per Ingo Schwarze, FreeBSD
+	and NetBSD use it, but OpenBSD does not.  (And in my opinion, a
+	central registry for library descriptions is not tractable.)
+
+	Fixes <https://savannah.gnu.org/bugs/?66410>.  Thanks to Andrew
+	Bower for the report.
+
+2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac: Unconditionally initialize `doc-do-capitalize`,
 	to avoid warnings when formatting degenerate documents lacking
 	an `Sh` call.
