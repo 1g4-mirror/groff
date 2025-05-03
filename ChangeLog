@@ -1,5 +1,13 @@
 2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac: Save and restore AT&T troff compatibility mode,
+	as man(7) does.
+
+	Fixes <https://savannah.gnu.org/bugs/?65702>.  Thanks to Bjarni
+	Ingi Gislason for the report.
+
+2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac (Nm): Stop suppressing use of bold (or typeface
 	configured via the `doc-Nm-font` string) when rendering
 	occurrence in the "Name" section of a document.

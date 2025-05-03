@@ -58,7 +58,7 @@
 .
 .do if d Dd .nx
 .
-.
+.do nr *groff_doc_tmac_C \n[.cp]
 .cp 0
 .
 .\" Macros that are part of the external interface (Dd, Sh, Pp, etc.) or
@@ -7230,6 +7230,9 @@ should this have been '.Em ...'?
 .
 .\" load local modifications
 .mso mdoc.local
+.
+.cp \n[*groff_doc_tmac_C]
+.do rr *groff_doc_tmac_C
 .
 .\" Local Variables:
 .\" mode: nroff
