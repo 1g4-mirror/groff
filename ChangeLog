@@ -1,3 +1,12 @@
+2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/doc.tmac (Nm): Stop suppressing use of bold (or typeface
+	configured via the `doc-Nm-font` string) when rendering
+	occurrence in the "Name" section of a document.
+
+	Fixes <https://savannah.gnu.org/bugs/?65101>.  Thanks to наб for
+	the report.  Reverts a change I made in groff 1.23.0.
+
 2025-04-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Drop dead code.

@@ -1199,14 +1199,12 @@
 .  if !\n[doc-arg-count] \{\
 .    ds doc-macro-name Nm
 .    ie \n[.$] \{\
-.      \" Handle '.Nm ...' in "Name" section: don't use a special font.
-.      ie \n[doc-in-name-section] \{\
+.      \" Handle '.Nm ...' in "Name" section.
+.      if \n[doc-in-name-section] \{\
 .        if "\*[doc-topic-name]"" \
 .          ds doc-topic-name "\$1\"
-.        No \$@
 .      \}
-.      el \
-.        doc-parse-args \$@
+.      doc-parse-args \$@
 .    \}
 .    el \{\
 .      ie "\*[doc-topic-name]"" \
