@@ -2372,7 +2372,8 @@ loop's body,
 immediately retesting its conditional expression.
 .
 See
-.RB \[lq] break \[rq].
+.RB \[lq] break \[rq]
+above.
 .
 .
 .TP
@@ -2474,7 +2475,8 @@ and a
 token at its end.
 .
 See
-.BR .am1 .
+.B .am1
+above.
 .
 .
 .TP
