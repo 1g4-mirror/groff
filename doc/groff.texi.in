@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle April 2025
+@subtitle May 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -9113,8 +9113,8 @@ code of zero to all other characters.
 
 The
 @code{hcode}
-request extends this principle to letters
-outside the Unicode basic Latin set;
+request enables application of hyphenation codes
+to characters outside the Unicode basic Latin set;
 without it,
 words containing such letters
 won't hyphenate properly

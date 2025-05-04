@@ -329,8 +329,8 @@ and assigns a code of zero to all other characters.
 .P
 The
 .B hcode
-request extends this principle to letters
-outside the Unicode basic Latin set;
+request enables application of hyphenation codes
+to characters outside the Unicode basic Latin set;
 without it,
 words containing such letters
 won't hyphenate properly
