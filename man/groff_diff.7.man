@@ -2714,40 +2714,44 @@ as
 .
 As
 .BR char ,
-but a character defined by
+but GNU
+.I troff \" GNU
+locates a character defined by
 .B fschar
-is located after the list of fonts declared with
+after any fonts named as arguments to the
 .B \%fspecial
-is searched and before those declared with the
+are searched and before those named as arguments to the
 .RB \%\[lq] special \[rq]
 request.
 .
 .TP
-.BI .fspecial\~ f\~\c
-.RI [ s\~ .\|.\|.]
+.BI .fspecial\~ fnt\~\c
+.RI [ sfnt\~ .\|.\|.]
 When
-.RI font\~ f
+.RI font\~ fnt
 is selected,
 treat each font
-.I s
-as special;
+.I sfnt
+as
+.I special;
 that is,
 search it for any glyph not found in
 .IR f .
 .
-Fonts specified by the
+GNU
+.I troff \" GNU
+searches fonts specified as arguments to the
 .RB \%\[lq] special \[rq]
-request are searched after those
-listed in the
+request after those given as arguments to the
 .B fspecial
 request.
 .
 Without
-.I s
+.I sfnt
 arguments,
 .B \%fspecial
 empties the list of fonts treated as special when
-.I f
+.RI font\~ fnt
 is selected.
 .
 .
@@ -3731,9 +3735,11 @@ as
 .
 As
 .BR char ,
-but a character defined with
+but GNU
+.I troff \" GNU
+locates a character defined with
 .B schar
-is located after the list of fonts declared with the
+after any fonts named as arguments to the
 .RB \%\[lq] special \[rq]
 request and before any mounted special fonts.
 .
@@ -3825,7 +3831,8 @@ does not exist.
 .IR s\~ .\|.\|.]
 Declare each font
 .I s
-as special,
+as
+.I special,
 searching it for glyphs not found in the selected font.
 .
 Without arguments,

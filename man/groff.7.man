@@ -3413,11 +3413,13 @@ as
 .
 As
 .request .char ,
-but a character defined by
+but GNU
+.I troff \" GNU
+locates a character defined by
 .B fschar
-is located after the list of fonts declared with
+after any fonts named as arguments to the
 .B \%fspecial
-is searched and before those declared with the
+are searched and before those named as arguments to the
 .RB \%\[lq] special \[rq]
 request.
 .
@@ -3428,15 +3430,25 @@ Empty the list of fonts treated as special when
 is selected.
 .
 .TPx
-.REQ .fspecial "font s1 s2 \fR\&.\|.\|.\&\fP"
+.REQ .fspecial "fnt sfnt \fR\&.\|.\|.\&\fP"
 When
-.I font
+.RI font\~ fnt
 is selected,
-treat the fonts
-.IR s1 ,
-.IR s2 ,
-\&.\|.\|.\&
-as special.
+treat each font
+.I sfnt
+as
+.I special;
+that is,
+search it for any glyph not found in
+.IR f .
+.
+GNU
+.I troff \" GNU
+searches fonts specified as arguments to the
+.RB \%\[lq] special \[rq]
+request after those given as arguments to the
+.B fspecial
+request.
 .
 .TPx
 .REQ .ft
@@ -4507,11 +4519,13 @@ as
 .IR contents .
 .
 As
-.request .char ,
-but a character defined with
+.BR char ,
+but GNU
+.I troff \" GNU
+locates a character defined with
 .B schar
-is located after the list of fonts declared with the
-.request \%.special
+after any fonts named as arguments to the
+.RB \%\[lq] special \[rq]
 request and before any mounted special fonts.
 .
 .TPx
@@ -4604,15 +4618,16 @@ is ignored inside a diversion.
 .
 .TPx
 .REQ .special
-Reset global list of fallback special fonts to be empty.
+Empty the list of special fonts designated by this request
+when given arguments.
 .
 .TPx
-.REQ .special "s1 s2 \fR\&.\|.\|.\&\fR"
-Fonts
-.IR s1 ,
-.IR s2 ,
-etc.\& are special and are searched for glyphs not in the
-current font.
+.REQ .special "s \fR\&.\|.\|.\&\fP"
+Declare each font
+.I s
+as
+.I special,
+searching it for glyphs not found in the selected font.
 .
 .TPx
 .REQ .spreadwarn
