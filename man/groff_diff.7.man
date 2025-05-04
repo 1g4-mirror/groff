@@ -1625,7 +1625,10 @@ and
 requests,
 accepting an optional leading neutral double quote,
 notated
-.RB \[lq][ \[dq] ]\[rq],
+.\" Use single quotes here for quotation to avoid the perversity of an
+.\" output device lacking directional double quotes rendering the
+.\" following as `"["]"`.
+.RB \[oq][ \[dq] ]\[cq],
 in an argument that the formatter reads
 in copy mode to the end of the input line,
 permitting inclusion of leading spaces.
