@@ -714,7 +714,7 @@ stroked figure,
 you must draw the same figure twice using each command.
 .
 A filled figure is smaller
-than a stroked one with the same parameters
+than a stroked one using the same parameters
 because the former is drawn only within its defined area,
 whereas strokes have a line thickness,
 set with another new drawing command.
@@ -824,8 +824,8 @@ with its leftmost point at the drawing position.
 .BI \[rs]D\[aq]p\~ "h1 v1"\~\c
 .RI .\|.\|.\~ "hn vn"\c
 .B \[aq]
-Draw polygon with vertices at drawing position and each point
-in sequence.
+Draw polygon with vertices at the drawing position
+and each point in sequence.
 .
 GNU
 .I troff \" GNU

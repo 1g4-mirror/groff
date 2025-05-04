@@ -6164,8 +6164,8 @@ Draw line from the drawing position to
 .BI \[rs]D\[aq]p\~ "h1 v1"\~\c
 .RI .\|.\|.\~ "hn vn"\c
 .B \[aq]
-Draw polygon with vertices at drawing position and each point
-in sequence.
+Draw polygon with vertices at the drawing position
+and each point in sequence.
 .
 GNU
 .I troff \" GNU

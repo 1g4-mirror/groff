@@ -15071,14 +15071,19 @@ box margin.
 @cindex polygon, outlined, drawing (@samp{\D'p @dots{}'})
 @cindex drawing an outlined polygon (@samp{\D'p @dots{}'})
 @cindex outlined polygon, drawing (@samp{\D'p @dots{}'})
-Draw polygon with vertices at drawing position and each point in
-sequence.  GNU @code{troff} closes the polygon by drawing a line from
-(@var{hn}, @var{vn}) back to the initial drawing position.
+Draw polygon with vertices at the drawing position
+and each point in sequence.
+GNU
+@code{troff} closes the polygon by drawing a line from
+(@var{hn}, @var{vn})
+back to the initial drawing position.
 @c XXX: This would be the "STUPID_DRAWING_POSITIONING" complained of in
 @c src/libs/libdriver/input.cpp.  It is neither the rightmost point
 @c of the figure nor the initial drawing position that GNU troff
 @c automatically returned to to close the figure.
-Afterward, the drawing position is left at (@var{hn}, @var{vn}).
+Afterward,
+the drawing position is left at
+(@var{hn}, @var{vn}).
 
 @item \D'P @var{dx1} @var{dy1} @var{dx2} @var{dy2} @dots{}'
 @cindex polygon, filled, drawing (@samp{\D'P @dots{}'})
