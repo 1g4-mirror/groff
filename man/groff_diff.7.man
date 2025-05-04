@@ -1765,7 +1765,10 @@ GNU
 disables compatibility mode
 while interpreting the appendment to the macro
 named by the contents of string
-.I name.
+.I name;
+see
+.B am1
+above.
 .
 .
 .TP
@@ -2492,7 +2495,8 @@ named by the contents of string
 See
 .B am1
 and
-.BR de1 .
+.B de1
+above.
 .
 .
 .TP
