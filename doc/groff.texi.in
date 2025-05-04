@@ -18049,7 +18049,7 @@ immutable and their details unknown to the formatter.
 @cindex character mappings, composite, dumping (@code{pcomposite})
 Report,
 to the standard error stream,
-the list of defined composite character mappings.
+the list of configured composite character mappings.
 Recall the @code{composite} request description in @ref{Using Symbols}.
 The ``from'' code point is listed first,
 followed by its ``to'' mapping.

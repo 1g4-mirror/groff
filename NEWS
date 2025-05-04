@@ -196,7 +196,7 @@ troff
    about any ordinary, special, or indexed character arguments.
 
 *  A new request, `pcomposite`, reports to the standard error stream the
-   list of defined composite character mappings.
+   list of configured composite character mappings.
 
 *  A new request, `pftr`, reports to the standard error stream the
    list of configured font translations.

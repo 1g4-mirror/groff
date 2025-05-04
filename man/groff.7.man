@@ -4173,7 +4173,7 @@ and channel value assignments of each color
 .REQ .pcomposite
 Report,
 to the standard error stream,
-the list of defined composite character mappings.
+the list of configured composite character mappings.
 .
 See the
 .RB \%\[lq] composite \[rq]
