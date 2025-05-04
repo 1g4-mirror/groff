@@ -1652,7 +1652,7 @@ produces a warning in category
 and ignores the request.
 .
 See section \[lq]Warnings\[rq] of
-.MR @g@groff 1 ,
+.MR @g@groff 1
 regarding the enablement and suppression of warnings.
 .
 To remove a register alias,
@@ -1691,7 +1691,7 @@ produces a warning in category
 and ignores the request.
 .
 See section \[lq]Warnings\[rq] of
-.MR @g@groff 1 ,
+.MR @g@groff 1
 regarding the enablement and suppression of warnings.
 .
 To remove an alias,
