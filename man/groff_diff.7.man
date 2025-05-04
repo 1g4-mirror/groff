@@ -3010,7 +3010,7 @@ character is still recognized as the start of a comment).
 Use the
 .B hcode
 request
-(see below)
+(see above)
 to map the encoding used in hyphenation pattern files to
 .IR groff 's
 input encoding.
