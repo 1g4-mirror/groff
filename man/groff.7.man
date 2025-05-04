@@ -6704,7 +6704,7 @@ Name of the environment's default font family (string-valued).
 .
 .TP
 .REG .fn
-Resolved name of font selected in the environment(string-valued);
+Resolved name of font selected in the environment (string-valued);
 see
 .request .ft
 and
