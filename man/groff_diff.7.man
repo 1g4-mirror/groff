@@ -2372,7 +2372,7 @@ loop's body,
 immediately retesting its conditional expression.
 .
 See
-.BR break .
+.RB \[lq] break \[rq].
 .
 .
 .TP
@@ -2774,7 +2774,7 @@ or in the
 .BR bd ,
 .BR cs ,
 .BR tkf ,
-.BR \%special ,
+.RB \%\[lq] special \[rq],
 .BR \%fspecial ,
 .BR fp ,
 or
@@ -3734,7 +3734,7 @@ As
 but a character defined with
 .B schar
 is located after the list of fonts declared with the
-.B \%special
+.RB \%\[lq] special \[rq]
 request and before any mounted special fonts.
 .
 .
@@ -4190,9 +4190,9 @@ its closing brace must end an input line.
 .
 .IP
 The
-.B break
+.RB \[lq] break \[rq]
 and
-.B continue
+.RB \[lq] continue \[rq]
 requests alter a
 .RB \[lq] while \[rq]
 loop's flow of control.
