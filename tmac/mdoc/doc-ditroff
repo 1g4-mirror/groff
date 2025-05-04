@@ -259,12 +259,12 @@
 .      doc-report-usage .Ql argument ...
 .  \}
 .
-.    ds doc-saved-family-Ql \n[.fam]
+.  ds doc-saved-family-Ql \n[.fam]
 .
-.    ds doc-quote-left \F[C]
-.    ds doc-quote-right \F[\*[doc-saved-family-Ql]]
+.  ds doc-quote-left \F[C]
+.  ds doc-quote-right \F[\*[doc-saved-family-Ql]]
 .
-.    doc-enclose-string \$@
+.  doc-enclose-string \$@
 ..
 .ec
 .
