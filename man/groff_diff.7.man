@@ -5319,7 +5319,9 @@ as well as by the
 .
 Translation of a character to
 .B \[rs]\[ti]
-is unnecessary.
+is generally unnecessary,
+but might be employed to obtain an unbreakable space when the escape
+character will subsequently be disabled.
 .
 .
 .P
