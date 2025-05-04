@@ -2689,7 +2689,9 @@ definitions are used only if the font
 lacks a glyph for
 .IR c .
 .
-This test happens before special fonts are searched.
+GNU
+.I troff \" GNU
+performs this test before searching special fonts.
 .
 .
 .TP

@@ -3355,6 +3355,10 @@ definitions are used only if the font
 lacks a glyph for
 .IR c .
 .
+GNU
+.I troff \" GNU
+performs this test before searching special fonts.
+.
 .TPx
 .REQ .fcolor
 Restore previous fill color,
