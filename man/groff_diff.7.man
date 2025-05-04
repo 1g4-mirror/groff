@@ -3032,24 +3032,9 @@ By default,
 .I troffrc
 loads the localization file for English.
 .
-(As of
-.I groff
-1.23.0,
-localization files for Czech
-.RI ( cs ),
-German
-.RI ( de ),
-English
-.RI ( en ),
-French
-.RI ( fr ),
-Japanese
-.RI ( ja ),
-Swedish
-.RI ( sv ),
-and Chinese
-.RI ( zh )
-exist.)
+See subsection \[lq]Localization packages\[rq] of
+.MR groff_tmac @MAN5EXT@
+for a list of available localization files.
 .
 For Western languages,
 the localization file sets the hyphenation mode and loads hyphenation
