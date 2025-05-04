@@ -2582,6 +2582,15 @@ or diversion
 .IR existing-name .
 .
 If
+.I existing-name
+is undefined,
+GNU
+.I troff \" GNU
+produces a warning in category
+.RB \[lq] mac \[rq]
+and ignores the request.
+.
+If
 .I new-name
 already exists,
 its definition is lost unless already aliased.

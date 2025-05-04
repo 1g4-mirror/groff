@@ -1677,11 +1677,6 @@ or diversion
 causing the names to refer to the same stored object.
 .
 If
-.I new-name
-already exists,
-its contents are lost unless already aliased.
-.
-If
 .I existing-name
 is undefined,
 GNU
@@ -1689,6 +1684,11 @@ GNU
 produces a warning in category
 .RB \[lq] mac \[rq]
 and ignores the request.
+.
+If
+.I new-name
+already exists,
+its contents are lost unless already aliased.
 .
 See section \[lq]Warnings\[rq] of
 .MR @g@groff 1

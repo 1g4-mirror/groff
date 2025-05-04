@@ -13285,10 +13285,6 @@ or diversion
 @var{existing-name},
 causing the names to refer to the same stored object.
 If
-@var{new-name}
-already exists,
-its contents are lost unless already aliased.
-If
 @var{existing-name}
 is undefined,
 GNU
@@ -13296,6 +13292,10 @@ GNU
 produces a warning in category
 @samp{mac}
 and ignores the request.
+If
+@var{new-name}
+already exists,
+its contents are lost unless already aliased.
 @xref{Warnings},
 regarding the enablement and suppression of warnings.
 
