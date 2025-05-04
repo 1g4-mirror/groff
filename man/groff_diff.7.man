@@ -1447,7 +1447,6 @@ without any intervening space.
 .B \[rs],
 Apply a
 .IR "left italic correction" :
-if a roman left parenthesis is immediately followed by an
 modify the spacing of the following glyph
 so that the distance between it and the preceding glyph
 is correct if the latter is of upright shape.
