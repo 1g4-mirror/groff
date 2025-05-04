@@ -1828,11 +1828,19 @@ request.
 .
 .IP
 .B \%asciify
-cannot return all items in a diversion to their source equivalent:
-nodes such as those produced by
-.BR \[rs]N ,
+cannot return all nodes in a diversion to their source equivalents:
+those produced by indexed characters
+.RB ( \[rs]N ),
+for example,
 remain nodes,
-so the result cannot be guaranteed to be a pure string.
+so the result cannot be guaranteed to be a character sequence
+as a macro or string is.
+.\" TODO: We _could_ store the integer argument to the `\N` escape
+.\" sequence in the node data, enabling such reversal.
+.
+Give the diversion name as an argument to the
+.B pm
+request to inspect its contents and node list.
 .
 Glyph parameters such as the type face and size are not preserved;
 use
