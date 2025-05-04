@@ -1,3 +1,16 @@
+2025-05-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Implement new `pftr` request.
+
+	* src/roff/troff/node.cpp (dump_font_translations): Add.
+	(init_none_requests): Wire up `pftr` request name to
+	`dump_font_translations()`.
+
+	* doc/groff.texi (Selecting Fonts, Debugging):
+	* man/groff.7.man (Request short reference, Debugging):
+	* man/groff_diff.7.man (New requests, Debugging):
+	* NEWS: Document it.
+
 2025-05-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/mdoc/doc-syms (Lb): Stop throwing warning if no

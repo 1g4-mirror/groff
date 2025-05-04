@@ -10807,6 +10807,10 @@ the @code{ft}, @code{ul}, @code{bd}, @code{cs}, @code{tkf},
 to@tie{}@var{f}, GNU @command{troff} uses @var{g} instead.  Omit @var{g}
 or repeat @var{f} as@tie{}@var{g} to untranslate @var{f}.  @var{f} and
 @var{g} need not be mounted fonts.
+
+You can obtain a report of font translations defined by @code{ftr} on
+the standard error stream with the @code{pftr} request.
+@xref{Debugging}.
 @endDefreq
 
 @DefreqList {fzoom, font [@Var{zoom}]}
@@ -17885,6 +17889,7 @@ Examine the state of the formatter with requests that write lists of
 defined names---macros, strings, and diversions---colors,
 composite character mappings,
 environments,
+font translations,
 automatic hyphenation codes
 and exceptions,
 registers,
@@ -18055,6 +18060,18 @@ followed by its ``to'' mapping.
 @cindex environments, dumping (@code{pev})
 Report the state of the current environment followed by that of all
 other environments to the standard error stream.
+@endDefreq
+
+@Defreq {pftr, }
+@cindex dumping font translations (@code{pftr})
+@cindex font translations, dumping (@code{pftr})
+@cindex translations, font, dumping (@code{pftr})
+Report,
+to the standard error stream,
+the list of font translations.
+Recall the @code{ftr} request description in @ref{Selecting Fonts}.
+The ``from'' font identifier is listed first,
+followed by its ``to'' translation.
 @endDefreq
 
 @Defreq {phw, }

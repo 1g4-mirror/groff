@@ -6567,6 +6567,17 @@ static void translate_font()
   skip_line();
 }
 
+static void dump_font_translations()
+{
+  dictionary_iterator iter(font_translation_dictionary);
+  symbol from, to;
+  while (iter.get(&from, reinterpret_cast<void **>(&to)))
+    errprint("%1\t%2\n", from.contents(), to.contents());
+  fflush(stderr);
+  skip_line();
+  return;
+}
+
 static void mount_font_at_position()
 {
   if (!has_arg()) {
@@ -7304,6 +7315,7 @@ void init_node_requests()
   init_request("ftr", translate_font);
   init_request("kern", set_kerning_mode);
   init_request("lg", set_ligature_mode);
+  init_request("pftr", dump_font_translations);
   init_request("rfschar", remove_font_specific_character);
   init_request("shc", set_soft_hyphen_character);
   init_request("special", set_special_fonts);

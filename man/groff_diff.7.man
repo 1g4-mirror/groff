@@ -3474,6 +3474,20 @@ other environments to the standard error stream.
 .
 .
 .TP
+.B .pftr
+Report,
+to the standard error stream,
+the list of font translations.
+.
+See the
+.RB \[lq] pftr \[rq]
+request in section \[lq]New requests\[rq] above.
+.
+The \[lq]from\[rq] font identifier is listed first,
+followed by its \[lq]to\[rq] translation.
+.
+.
+.TP
 .B .phw
 Report,
 to the standard error stream,
@@ -5856,6 +5870,8 @@ composite characters
 .RB ( pcomposite ),
 environments
 .RB ( pev ),
+font translations
+.RB ( pftr ),
 automatic hyphenation codes
 .RB ( pchar )
 and exceptions

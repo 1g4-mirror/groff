@@ -4188,6 +4188,12 @@ Report the state of the current environment followed by that of all
 other environments to the standard error stream.
 .
 .TPx
+.REQ .pftr
+Report,
+to the standard error stream,
+the list of font translations.
+.
+.TPx
 .REQ .phw
 Report,
 to the standard error stream,
@@ -8930,6 +8936,8 @@ composite character mappings
 .RB ( pcomposite );
 environments
 .RB ( pev );
+font translations
+.RB ( pftr );
 automatic hyphenation codes
 .RB ( pchar )
 and exceptions
