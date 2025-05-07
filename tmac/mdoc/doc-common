@@ -1,7 +1,7 @@
 .\" Copyright (c) 1991, 1993
 .\"   The Regents of the University of California.  All rights reserved.
 .\"
-.\" Copyright (C) 1999-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1999-2025 Free Software Foundation, Inc.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
 .\" modification, are permitted provided that the following conditions
@@ -1034,23 +1034,23 @@
 .
 .eo
 .de1 doc-header
-.  ds doc-xref \*[doc-page-identifier-font]\*[doc-page-identifier]\f[]\"
-.  as doc-xref \*[doc-page-section-font](\*[doc-section])\f[]\"
+.  ds doc-xref \f[\*[doc-page-identifier-font]]\*[doc-page-identifier]\f[]\"
+.  as doc-xref \f[\*[doc-page-section-font]](\*[doc-section])\f[]\"
 .  ds doc-abbv \*[doc-page-identifier]\"
 .  ev doc-env-dh
 .  doc-setup-page-layout
 .  ie \n[cR] .pl +1v
 .  el        .sp |(.5i - .5m)
-.  nr doc-reg-dh \w'\*[doc-page-identifier-font]\*[doc-xref]\f[]'
+.  nr doc-reg-dh \w'\f[\*[doc-page-identifier-font]]\*[doc-xref]\f[]'
 .  nr doc-reg-dh1 \w'\*[doc-volume]'
 .  if (\n[doc-reg-dh] + \n[doc-reg-dh1] + \n[doc-reg-dh] >= \n[.lt]) \{\
 .    while (\n[doc-reg-dh] + \n[doc-reg-dh1] + \n[doc-reg-dh] >= \n[.lt]) \{\
-.      ds doc-xref \*[doc-page-identifier-font]\*[doc-abbv]\f[]\"
-.      as doc-xref \*[doc-page-section-font](\*[doc-section])\f[]\"
+.      ds doc-xref \f[\*[doc-page-identifier-font]]\*[doc-abbv]\f[]\"
+.      as doc-xref \f[\*[doc-page-section-font]](\*[doc-section])\f[]\"
 .      length doc-abbv-len-prev \*[doc-abbv]
 .      substring doc-abbv 0 -2
 .      length doc-abbv-len \*[doc-abbv]
-.      nr doc-reg-dh \w'\*[doc-page-identifier-font]\*[doc-abbv]\|.\|.\|.\f[]'
+.      nr doc-reg-dh \w'\f[\*[doc-page-identifier-font]]\*[doc-abbv]\|.\|.\|.\f[]'
 .      \" If header string didn't actually get shorter, stop trying.
 .      if (\n[doc-abbv-len-prev] <= \n[doc-abbv-len]) \
 .        break
@@ -1090,8 +1090,8 @@
 .
 .eo
 .de1 doc-footer
-.  ds doc-xref \*[doc-page-identifier-font]\*[doc-page-identifier]\f[]\"
-.  as doc-xref \*[doc-page-section-font](\*[doc-section])\f[]\"
+.  ds doc-xref \f[\*[doc-page-identifier-font]]\*[doc-page-identifier]\f[]\"
+.  as doc-xref \f[\*[doc-page-section-font]](\*[doc-section])\f[]\"
 .  ds doc-page-id \n[%]
 .  if r X \{\
 .    if (\n[%] > \n[X]) \{\
@@ -1427,7 +1427,7 @@
 .      nr doc-arg-ptr +1
 .      ie (\n[doc-arg-count] >= \n[doc-arg-ptr]) \{\
 .        nr doc-curr-font \n[.f]
-.        nop \*[doc-Sh-font]\c
+.        nop \f[\*[doc-Sh-font]]\c
 .        doc-print-recursive
 .      \}
 .      el \{\
@@ -1515,7 +1515,7 @@
 .
 .    nr doc-arg-ptr +1
 .    nr doc-curr-font \n[.f]
-.    nop \*[doc-Sh-font]\c
+.    nop \f[\*[doc-Sh-font]]\c
 .    doc-print-recursive
 .
 .    if t \
@@ -1557,7 +1557,7 @@
 .      nr doc-arg-ptr +1
 .      ie (\n[doc-arg-count] >= \n[doc-arg-ptr]) \{\
 .        nr doc-curr-font \n[.f]
-.        nop \*[doc-Sh-font]\c
+.        nop \f[\*[doc-Sh-font]]\c
 .        doc-print-recursive
 .      \}
 .      el \{\
@@ -1596,7 +1596,7 @@
 .
 .    nr doc-arg-ptr +1
 .    nr doc-curr-font \n[.f]
-.    nop \*[doc-Sh-font]\c
+.    nop \f[\*[doc-Sh-font]]\c
 .    doc-print-recursive
 .
 .    ss \n[doc-reg-Ss] \n[doc-reg-Ss1]

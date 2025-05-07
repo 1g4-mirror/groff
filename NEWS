@@ -56,6 +56,13 @@ Noteworthy incompatible changes
   to tell the formatter to read a file named '"5150".lrc', where the
   neutral single quotes bracket the file name.
 
+* groff mdoc(7)'s font customization feature, undocumented but analogous
+  to that of 4.4BSD mdoc, now expects the strings that designate font
+  names to be precisely that: font _names_ (or abstract styles, or
+  mounting positions), rather than arbitrary *roff syntax.  (String
+  interpolations remain acceptable, as long as what they interpolate is
+  a valid argument to the `\f[xxx]` escape sequence.)
+
 troff
 -----
 

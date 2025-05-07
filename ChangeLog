@@ -1,3 +1,34 @@
+2025-05-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[mdoc]: Revise font customization feature.
+
+	groff's mdoc(7) package now expects the strings that designate
+	font names to be precisely that: font _names_ (or abstract
+	styles, or mounting positions), rather than arbitrary *roff
+	syntax.  This undocumented customization feature is analogous to
+	one in 4.4BSD mdoc(7) but has no counterpart in mandoc(1).
+
+	This change also makes groff mdoc's (complex) internal logic
+	easier to follow in the `Nm`, `Pa`, `doc-bullet-list`,
+	`doc-dash-list`, `Xr`, `Ot`, `doc-do-func`, `Fn`, `Fo`, `Rv`,
+	`doc-header`, and `doc-footer` macro definitions.
+
+	* tmac/mdoc/doc-ditroff:
+	* tmac/mdoc/doc-nroff: Update default definitions of
+	`doc-*-font` strings to omit font selection escape sequence,
+	leaving only font names or string interpolations like `\*[MF]`
+	and `\*[HF]` that are themselves specified as naming fonts.
+
+	* tmac/doc.tmac (Fl, doc-generic-macro, Ar, Cd, Fd, In, Nm, Pa)
+	(Tn, Bf, Bd, doc-bullet-list, doc-dash-list, doc-diag-list, Xr)
+	(Vt, Ft, Ot, Fa, doc-do-func, Fn, Fo, %B, %I, %J, %T, Rv, Mt)
+	(Lk):
+	* tmac/mdoc/doc-common (doc-header, doc-footer, Sh, Ss):
+	* tmac/mdoc/doc-nroff (Dl): Bracket interpolations of
+	`doc-*-font` strings with font selection escape sequence syntax.
+
+	* NEWS: Add item warning of incompatible change.
+
 2025-05-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Implement new `pftr` request.
