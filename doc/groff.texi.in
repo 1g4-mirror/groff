@@ -13539,6 +13539,7 @@ and consumes the next character.
 .ds b \[
 .if '\?\*a\?'\?\*b\?' a and b equivalent
 .if '\?\\?'\?\\?' backslashes equivalent
+.if '\?\P\?'\?P\?' backslash-P and P equivalent
     @result{} a and b equivalent
 @c slack lines for pagination control
 @c    @error{} warning: missing closing delimiter in
