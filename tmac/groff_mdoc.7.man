@@ -266,14 +266,14 @@ their interpretation.
 .Pp
 Macros in GNU
 .Xr troff
-accept an unlimited number of arguments,
-in contrast to other
+accept an unlimited number of arguments;
+other
 .Xr troff Ns No s
-that often can't handle more than nine.
+often can't handle more than nine.
 .
-In limited cases,
-arguments may be continued or extended on the next input line without
-resort to the
+In some cases,
+arguments may continue or extend onto the next input line
+without resort to the
 .Ql \[rs] Ns Em newline
 escape sequence;
 see subsection
