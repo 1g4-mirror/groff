@@ -99,13 +99,23 @@ and
 and writes another
 to the standard output stream
 (or
-.IR output-file )
-consisting of
-.I file2
-with added margin character
-.RB ( mc )
-requests indicating output lines that differ from
-.I file1.
+.IR output-file ),
+adding margin characters to mark places in the output
+where the input documents differ.
+.
+.I gdiffmk
+does not interpret the source documents;
+it treats
+.I roff
+comments and nilpotent changes to formatting as meaningful.
+.
+For example,
+it does not know that
+.BR \[rs]h\[aq]3m\[aq] ,
+.BR \[rs]h\[aq](1 * 3m)\[aq] ,
+and
+.B \[rs]h\[aq]3m+0\[aq]
+all mean the same thing.
 .
 If the
 .I file1
@@ -267,7 +277,7 @@ or
 .IR file2 .
 .
 .\" ====================================================================
-.SH Bugs
+.SH Caveats
 .\" ====================================================================
 .
 The output is not necessarily compatible with all macro packages or
@@ -278,7 +288,7 @@ A reliable workaround is to run
 on the output of the final preprocessor instead of the input source.
 .
 .
-.LP
+.PP
 .I gdiffmk
 relies on the
 .B \-D
