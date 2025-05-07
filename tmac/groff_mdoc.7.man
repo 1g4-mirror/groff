@@ -274,7 +274,7 @@ often can't handle more than nine.
 In some cases,
 arguments may continue or extend onto the next input line
 without resort to the
-.Ql \[rs] Ns Em newline
+.Ql \e Ns Em newline
 escape sequence;
 see subsection
 .Sx "Extended arguments"
@@ -636,12 +636,12 @@ below.
 .
 .Pp
 A comment in the source file of a man page can begin with
-.Sq Li .\e"
+.Ql .\e\[dq]
 at the start of an input line,
-.Sq Li \e"
+.Ql \e\[dq]
 after other input,
 or
-.Sq Li \e#
+.Ql \e#
 anywhere
 (the last is a
 .Xr groff
