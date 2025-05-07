@@ -9,7 +9,7 @@ files
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 2004-2023 Free Software Foundation, Inc.
+.\" Copyright (C) 2004-2025 Free Software Foundation, Inc.
 .\"
 .\" This file is part of gdiffmk, which is part of groff, the GNU roff
 .\" typesetting system.
@@ -146,22 +146,21 @@ both exit afterward.
 .
 .TP
 .BI \-a\~ add-mark
-Use
-.I add-mark
-for source lines not in
+Annotate material absent from
 .I file1
 but present in
-.IR file2 .
-.
-Default:
-.RB \[lq] + \[rq].
+.I file2
+with
+.I add-mark
+(default:
+.RB \[lq] + \[rq]).
 .
 .
 .TP
 .B \-B
 Suppress
 .B br
-requests inserted by
+requests normally inserted by
 .B \-D
 option.
 .
@@ -172,59 +171,63 @@ changes are marked.
 .
 .TP
 .BI \-c\~ change-mark
-Use
+Annotate material differing between
+.I file1
+and
+.I file2
+with
 .I change-mark
-for changed source lines.
-.
-Default:
-.RB \[lq] | \[rq].
+(default:
+.RB \[lq] | \[rq]).
 .
 .
 .TP
 .BI \-d\~ delete-mark
-Use the
+Annotate material present in
+.I file1
+but absent from
+.I file2
+with
 .I delete-mark
-for deleted source lines.
-.
-Default:
-.RB \[lq] * \[rq].
+(default:
+.RB \[lq] * \[rq]).
 .
 .TP
 .B \-D
-Show the deleted portions from changed and deleted text.
+Mark changed and deleted material with surrounding delimiters.
 .
 .
 .TP
 .BI \-M\~ "mark1 mark2"
-Change the delimiting marks for the
+Use
+.I mark1
+(default:
+.RB \[lq] [[ \[rq])
+and
+.I mark2
+(default:
+.RB \[lq] ]] \[rq])
+as delimiters when using the
 .B \-D
 option.
-.
-It makes no sense to use this option without
-.BR \-D .
-.
-Default delimiting marks:
-.RB \[lq] [[ "\[rq] .\|.\|.\& \[lq]" ]] \[rq].
 .
 .
 .TP
 .BI \-x\~ diff-command
 Use the
 .I diff-command
-command to perform the comparison of
+program to perform the comparison of
 .I file1
 and
 .IR file2 .
 .
-In particular,
 .I diff-command
-should accept the GNU
-.MR diff 1
+(default:
+.BR diff )
+must accept GNU
+.MR diff 1 's
 .B \-D
-option.
-.
-Default:
-.BR diff .
+extension option.
 .
 .
 .TP
