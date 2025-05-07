@@ -1,5 +1,15 @@
 2025-05-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac (Bd): Fix code style nit.  Perform "strict"
+	string comparison when using formatted output comparison
+	operator to peform matching on macro argument.  See
+	subsection/node "Operators in Conditionals" in groff's Texinfo
+	manual.
+
+	See <https://savannah.gnu.org/bugs/?65763>.
+
+2025-05-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Revise font customization feature.
 
 	groff's mdoc(7) package now expects the strings that designate

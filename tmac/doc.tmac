@@ -3077,7 +3077,7 @@
 .  nr doc-display-ad-stack\n[doc-display-depth] \n[.j]
 .  nr doc-display-fi-stack\n[doc-display-depth] \n[.u]
 .
-.  ie        "\$1"-literal" \{\
+.  ie        "\?\$1\?"\?-literal\?" \{\
 .    ds doc-display-type-stack\n[doc-display-depth] literal
 .    nr doc-display-ft-stack\n[doc-display-depth] \n[.f]
 .    nr doc-display-ps-stack\n[doc-display-depth] \n[.ps]
@@ -3090,22 +3090,22 @@
 .      ta T 8n
 .    nf
 .  \}
-.  el \{ .ie "\$1"-filled" \{\
+.  el \{ .ie "\?\$1\?"\?-filled\?" \{\
 .    ds doc-display-type-stack\n[doc-display-depth] filled
 .    ad b
 .    fi
 .  \}
-.  el \{ .ie "\$1"-ragged" \{\
+.  el \{ .ie "\?\$1\?"\?-ragged\?" \{\
 .    ds doc-display-type-stack\n[doc-display-depth] ragged
 .    na
 .    fi
 .  \}
-.  el \{ .ie "\$1"-centered" \{\
+.  el \{ .ie "\?\$1\?"\?-centered\?" \{\
 .    ds doc-display-type-stack\n[doc-display-depth] centered
 .    ad c
 .    fi
 .  \}
-.  el \{ .ie "\$1"-unfilled" \{\
+.  el \{ .ie "\?\$1\?"\?-unfilled\?" \{\
 .    ds doc-display-type-stack\n[doc-display-depth] unfilled
 .    nf
 .  \}
