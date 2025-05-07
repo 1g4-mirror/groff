@@ -96,8 +96,7 @@ documents,
 .I file1
 and
 .IR file2 ,
-and writes a
-.I roff
+and writes another
 to the standard output stream
 (or
 .IR output-file )
