@@ -11875,9 +11875,19 @@ necessary in GNU @code{troff}.  Nevertheless, they are supported.
 @cindex changing the font height (@code{\H})
 @cindex font height, changing (@code{\H})
 @cindex height, font, changing (@code{\H})
-Change (increment, decrement) the height of the current font, but not
-the width.  If @var{height} is zero, restore the original height.
-Default scaling unit is @samp{z}.
+Change (increment, decrement) the height of the current font,
+but not the width.
+If
+@var{height}
+is zero,
+set the font height to the selected type size.
+The default scaling unit is @samp{z}.
+
+Changing the font height does not affect vertical spacing;
+dramatic changes may be better accompanied by an
+@code{\x}
+escape sequence to add extra pre-vertical space to the output line.
+@xref{Manipulating Spacing}.
 
 The read-only register @code{.height} contains the font height as set by
 @code{\H}.

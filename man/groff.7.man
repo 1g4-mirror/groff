@@ -5608,6 +5608,10 @@ Set height of current font to
 points
 (or specified units).
 .
+If
+.I N
+is zero,
+set the font height to the selected type size.
 .
 .TP
 .ESC k r
