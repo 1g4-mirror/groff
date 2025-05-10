@@ -6448,7 +6448,7 @@ units.
 .
 GNU
 .I troff \" GNU
-reports the sizes in bytes if given no arguments,
+reports their lengths in characters or nodes if given no arguments,
 and otherwise dumps
 the JSON-encoded name and contents of each named argument.
 .

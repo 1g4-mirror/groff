@@ -18129,7 +18129,7 @@ or,
 without arguments,
 the names of all defined macros,
 strings,
-and diversions and their sizes in bytes.
+and diversions and their lengths in characters or nodes.
 @endDefreq
 
 @Defreq {pnr, [@Var{reg} @r{@dots{}}]}
@@ -18988,7 +18988,7 @@ and an argument reduces the report to a sum of the above in the same
 units.
 GNU
 @command{troff} @c GNU
-reports the sizes in bytes if given no arguments,
+reports ther lengths in characters or nodes if given no arguments,
 and otherwise dumps
 the @acronym{JSON}-encoded name and contents of each named argument.
 

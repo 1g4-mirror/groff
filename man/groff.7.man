@@ -4263,7 +4263,7 @@ Report,
 to the standard error stream,
 the names of all defined macros,
 strings,
-and diversions and their sizes in bytes.
+and diversions and their lengths in characters or nodes.
 .
 .TPx
 .REQ .pm "name \fR\&.\|.\|.\&\fP"
