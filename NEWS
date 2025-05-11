@@ -61,7 +61,7 @@ Noteworthy incompatible changes
   names to be precisely that: font _names_ (or abstract styles, or
   mounting positions), rather than arbitrary *roff syntax.  (String
   interpolations remain acceptable, as long as what they interpolate is
-  a valid argument to the `\f[xxx]` escape sequence.)
+  a valid argument to the `ft` request or `\f[xxx]` escape sequence.)
 
 troff
 -----
