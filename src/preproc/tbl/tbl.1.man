@@ -525,7 +525,7 @@ GNU
 implicitly extends any row definition with fewer
 on the right-hand side with
 .B L
-classifiers as many times as necessary to make the table rectangular.
+descriptors as many times as necessary to make the table rectangular.
 .\" Heirloom Doctools tbl also does that; DWB tbl does not.
 .
 .
