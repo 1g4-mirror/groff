@@ -800,9 +800,8 @@ This is a GNU extension.
 .
 .TP
 .BR e ,\~ E
-Equalize the widths of columns with this modifier.
-.
-The column with the largest width controls.
+Equalize the widths of columns with this modifier
+to that of the widest.
 .
 This modifier sets the default line length used in a text block.
 .
