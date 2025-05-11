@@ -584,7 +584,8 @@ If multiple decimal separators are adjacent to a digit,
 it uses the rightmost one for vertical alignment.
 .
 If there is no decimal separator,
-the rightmost digit is used for vertical alignment;
+.I @g@tbl
+uses the rightmost digit for vertical alignment;
 if no digits are present,
 .I @g@tbl
 centers the entry within the column.
