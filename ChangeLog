@@ -2,6 +2,17 @@
 
 	[troff]: Slighty refactor (boolify, rename).
 
+	* src/roff/troff/node.cpp (glyph_node::tprint)
+	(glyph_node::zero_width_tprint, composite_node::tprint): Rename
+	`bold` and `cs` local variables to `is_emboldened` and
+	`is_constantly_spaced` to express logical predication.
+	(glyph_node::zero_width_tprint, composite_node::tprint): Demote
+	same local variables from `int` to `bool`.
+
+2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Slighty refactor (boolify, rename).
+
 	* src/roff/troff/node.cpp (class tfont_spec): Demote member
 	variable `is_constant_spaced` from `char` to `bool`, and rename
 	it to `has_constant_spacing`.  It only ever takes two values, so

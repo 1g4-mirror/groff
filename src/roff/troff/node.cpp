@@ -5011,14 +5011,14 @@ void glyph_node::tprint(troff_output_file *out)
     out->put_char_width(ci, ptf, gcol, fcol, width(), H0);
   else {
     hunits offset;
-    bool bold = tf->is_emboldened(&offset);
+    bool is_emboldened = tf->is_emboldened(&offset);
     hunits w = ptf->get_width(ci);
     hunits k = H0;
     hunits x;
-    bool cs = tf->is_constantly_spaced(&x);
-    if (cs) {
+    bool is_constantly_spaced = tf->is_constantly_spaced(&x);
+    if (is_constantly_spaced) {
       x -= w;
-      if (bold)
+      if (is_emboldened)
 	x -= offset;
       hunits x2 = (x / 2);
       out->right(x2);
@@ -5026,7 +5026,7 @@ void glyph_node::tprint(troff_output_file *out)
     }
     else
       k = tf->get_track_kern();
-    if (bold) {
+    if (is_emboldened) {
       out->put_char(ci, ptf, gcol, fcol);
       out->right(offset);
     }
@@ -5038,23 +5038,23 @@ void glyph_node::zero_width_tprint(troff_output_file *out)
 {
   tfont *ptf = tf->get_plain();
   hunits offset;
-  int bold = tf->is_emboldened(&offset);
+  bool is_emboldened = tf->is_emboldened(&offset);
   hunits x;
-  int cs = tf->is_constantly_spaced(&x);
-  if (cs) {
+  bool is_constantly_spaced = tf->is_constantly_spaced(&x);
+  if (is_constantly_spaced) {
     x -= ptf->get_width(ci);
-    if (bold)
+    if (is_emboldened)
       x -= offset;
     x = (x / 2);
     out->right(x);
   }
   out->put_char(ci, ptf, gcol, fcol);
-  if (bold) {
+  if (is_emboldened) {
     out->right(offset);
     out->put_char(ci, ptf, gcol, fcol);
     out->right(-offset);
   }
-  if (cs)
+  if (is_constantly_spaced)
     out->right(-x);
 }
 
@@ -5285,22 +5285,22 @@ void dbreak_node::tprint(troff_output_file *out)
 void composite_node::tprint(troff_output_file *out)
 {
   hunits bold_offset;
-  int is_bold = tf->is_emboldened(&bold_offset);
+  bool is_emboldened = tf->is_emboldened(&bold_offset);
   hunits track_kern = tf->get_track_kern();
   hunits constant_space;
-  int is_constant_spaced = tf->is_constantly_spaced(&constant_space);
+  bool is_constantly_spaced = tf->is_constantly_spaced(&constant_space);
   hunits x = H0;
-  if (is_constant_spaced) {
+  if (is_constantly_spaced) {
     x = constant_space;
     for (node *tem = nodes; tem; tem = tem->next)
       x -= tem->width();
-    if (is_bold)
+    if (is_emboldened)
       x -= bold_offset;
     hunits x2 = x / 2;
     out->right(x2);
     x -= x2;
   }
-  if (is_bold) {
+  if (is_emboldened) {
     int hpos = out->get_hpos();
     int vpos = out->get_vpos();
     tprint_reverse_node_list(out, nodes);
@@ -5308,7 +5308,7 @@ void composite_node::tprint(troff_output_file *out)
     out->right(bold_offset);
   }
   tprint_reverse_node_list(out, nodes);
-  if (is_constant_spaced)
+  if (is_constantly_spaced)
     out->right(x);
   else
     out->right(track_kern);
