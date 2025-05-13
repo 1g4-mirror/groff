@@ -296,7 +296,8 @@ int env_get_zoom(environment *env)
 // this is the current_font, fontno is where we found the character,
 // presumably a special font
 
-tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
+tfont *font_info::get_tfont(font_size fs, int height, int slant,
+			    int fontno)
 {
   if (last_tfont == 0 || fs != last_size
       || height != last_height || slant != last_slant
@@ -538,10 +539,12 @@ hunits tfont::get_width(charinfo *c)
   if (has_constant_spacing)
     return constant_space_width;
   else if (has_emboldening)
-    return (hunits(fm->get_width(c->as_glyph(), size.to_scaled_points()))
+    return (hunits(fm->get_width(c->as_glyph(),
+		   size.to_scaled_points()))
 	    + track_kern + bold_offset);
   else
-    return (hunits(fm->get_width(c->as_glyph(), size.to_scaled_points()))
+    return (hunits(fm->get_width(c->as_glyph(),
+		   size.to_scaled_points()))
 	    + track_kern);
 }
 
@@ -565,12 +568,14 @@ vunits tfont::get_char_depth(charinfo *c)
 
 hunits tfont::get_char_skew(charinfo *c)
 {
-  return hunits(fm->get_skew(c->as_glyph(), size.to_scaled_points(), slant));
+  return hunits(fm->get_skew(c->as_glyph(), size.to_scaled_points(),
+			     slant));
 }
 
 hunits tfont::get_italic_correction(charinfo *c)
 {
-  return hunits(fm->get_italic_correction(c->as_glyph(), size.to_scaled_points()));
+  return hunits(fm->get_italic_correction(c->as_glyph(),
+					  size.to_scaled_points()));
 }
 
 hunits tfont::get_left_italic_correction(charinfo *c)
@@ -741,9 +746,11 @@ class real_output_file : public output_file {
   int output_on;	// \O[0] or \O[1] escape sequences
   virtual void really_transparent_char(unsigned char) = 0;
   virtual void really_print_line(hunits x, vunits y, node *n,
-				 vunits before, vunits after, hunits width) = 0;
+				 vunits before, vunits after,
+				 hunits width) = 0;
   virtual void really_begin_page(int pageno, vunits page_length) = 0;
-  virtual void really_copy_file(hunits x, vunits y, const char *filename);
+  virtual void really_copy_file(hunits x, vunits y,
+				const char *filename);
   virtual void really_put_filename(const char *, int);
   virtual void really_on();
   virtual void really_off();
@@ -753,7 +760,8 @@ public:
   ~real_output_file();
   void flush();
   void transparent_char(unsigned char);
-  void print_line(hunits x, vunits y, node *n, vunits before, vunits after, hunits width);
+  void print_line(hunits x, vunits y, node *n,
+		  vunits before, vunits after, hunits width);
   void begin_page(int pageno, vunits page_length);
   void put_filename(const char *, int);
   void on();
@@ -767,7 +775,8 @@ class suppress_output_file : public real_output_file {
 public:
   suppress_output_file();
   void really_transparent_char(unsigned char);
-  void really_print_line(hunits x, vunits y, node *n, vunits, vunits, hunits width);
+  void really_print_line(hunits x, vunits y, node *n,
+			 vunits, vunits, hunits width);
   void really_begin_page(int pageno, vunits page_length);
 };
 
@@ -775,7 +784,8 @@ class ascii_output_file : public real_output_file {
 public:
   ascii_output_file();
   void really_transparent_char(unsigned char);
-  void really_print_line(hunits x, vunits y, node *n, vunits, vunits, hunits width);
+  void really_print_line(hunits x, vunits y, node *n,
+			 vunits, vunits, hunits width);
   void really_begin_page(int pageno, vunits page_length);
   void outc(unsigned char c);
   void outs(const char *s);
@@ -835,7 +845,8 @@ public:
   void flush();
   void trailer(vunits page_length);
   void put_char(charinfo *, tfont *, color *, color *);
-  void put_char_width(charinfo *, tfont *, color *, color *, hunits, hunits);
+  void put_char_width(charinfo *, tfont *, color *, color *, hunits,
+		      hunits);
   void right(hunits);
   void down(vunits);
   void moveto(hunits, vunits);
@@ -847,7 +858,8 @@ public:
   void end_device_extension();
   void word_marker();
   void really_transparent_char(unsigned char c);
-  void really_print_line(hunits x, vunits y, node *n, vunits before, vunits after, hunits width);
+  void really_print_line(hunits x, vunits y, node *n,
+			 vunits before, vunits after, hunits width);
   void really_begin_page(int pageno, vunits page_length);
   void really_copy_file(hunits x, vunits y, const char *filename);
   void really_put_filename(const char *, int);
@@ -939,7 +951,8 @@ inline void troff_output_file::moveto(hunits h, vunits v)
 }
 
 void troff_output_file::really_print_line(hunits x, vunits y, node *n,
-					  vunits before, vunits after, hunits)
+					  vunits before, vunits after,
+					  hunits)
 {
   moveto(x, y);
   while (n != 0 /* nullptr */) {
@@ -2872,12 +2885,14 @@ node *node::add_italic_correction(hunits *wd)
     node *next1 = next;
     next = 0;
     *wd += ic;
-    return new italic_corrected_node(this, ic, state, div_nest_level, next1);
+    return new italic_corrected_node(this, ic, state, div_nest_level,
+				     next1);
   }
 }
 
-italic_corrected_node::italic_corrected_node(node *nn, hunits xx, statem *s,
-					     int divlevel, node *p)
+italic_corrected_node::italic_corrected_node(node *nn, hunits xx,
+					     statem *s, int divlevel,
+					     node *p)
 : container_node(p, s, divlevel, nn), x(xx)
 {
   assert(nodes != 0 /* nullptr */);
@@ -3011,14 +3026,16 @@ public:
   void dump_properties();
 };
 
-break_char_node::break_char_node(node *n, int bc, int pbc, color *c, node *x)
+break_char_node::break_char_node(node *n, int bc, int pbc, color *c,
+				 node *x)
 : container_node(x, n), break_code(bc), prev_break_code(pbc), col(c)
 {
 }
 
 break_char_node::break_char_node(node *n, int bc, int pbc, color *c,
 				 statem *s, int divlevel, node *x)
-: container_node(x, s, divlevel, n), break_code(bc), prev_break_code(pbc), col(c)
+: container_node(x, s, divlevel, n), break_code(bc),
+  prev_break_code(pbc), col(c)
 {
 }
 
@@ -3468,8 +3485,8 @@ bool node::did_space_merge(hunits, hunits, hunits)
 
 
 space_node::space_node(hunits nn, color *c, node *p)
-: node(p, 0 /* nullptr */, 0), n(nn), set('\0'), was_escape_colon(false),
-  col(c)
+: node(p, 0 /* nullptr */, 0), n(nn), set('\0'),
+  was_escape_colon(false), col(c)
 {
 }
 
@@ -3499,7 +3516,8 @@ space_node::~space_node()
 
 node *space_node::copy()
 {
-  return new space_node(n, set, was_escape_colon, col, state, div_nest_level);
+  return new space_node(n, set, was_escape_colon, col, state,
+			div_nest_level);
 }
 
 bool space_node::causes_tprint()
@@ -3786,7 +3804,8 @@ static void ascii_print_node_list(ascii_output_file *ascii, node *n)
   }
 }
 
-static void ascii_print_reverse_node_list(ascii_output_file *ascii, node *n)
+static void ascii_print_reverse_node_list(ascii_output_file *ascii,
+					  node *n)
 {
   if (0 /* nullptr */ == n)
     return;
@@ -4078,7 +4097,8 @@ void space_node::split(int where, node **pre, node **post)
   delete this;
 }
 
-static void node_list_split(node *p, int *wherep, node **prep, node **postp)
+static void node_list_split(node *p, int *wherep,
+			    node **prep, node **postp)
 {
   if (p == 0)
     return;
@@ -4191,7 +4211,8 @@ device_extension_node::device_extension_node(const macro &m, bool b)
   int char_height = curenv->get_char_height();
   int char_slant = curenv->get_char_slant();
   int fontno = env_resolve_font(curenv);
-  tf = font_table[fontno]->get_tfont(fs, char_height, char_slant, fontno);
+  tf = font_table[fontno]->get_tfont(fs, char_height, char_slant,
+				     fontno);
   if (curenv->is_composite())
     tf = tf->get_plain();
   gcol = curenv->get_stroke_color();
@@ -4339,8 +4360,8 @@ const char *suppress_node::type()
 
 node *suppress_node::copy()
 {
-  return new suppress_node(emit_limits, is_on, filename, position, image_id,
-			   state, div_nest_level);
+  return new suppress_node(emit_limits, is_on, filename, position,
+			   image_id, state, div_nest_level);
 }
 
 /* tag_node */
@@ -4645,8 +4666,8 @@ public:
   void dump_node();
 };
 
-composite_node::composite_node(node *p, charinfo *c, tfont *t, statem *s,
-			       int divlevel, node *x)
+composite_node::composite_node(node *p, charinfo *c, tfont *t,
+			       statem *s, int divlevel, node *x)
 : charinfo_node(c, s, divlevel, x), nodes(p), tf(t)
 {
 }
@@ -4791,7 +4812,8 @@ void width_list::dump()
   fflush(stderr);
 }
 
-word_space_node::word_space_node(hunits d, color *c, width_list *w, node *x)
+word_space_node::word_space_node(hunits d, color *c, width_list *w,
+				 node *x)
 : space_node(d, c, x), orig_width(w), unformat(false)
 {
 }
@@ -4864,7 +4886,8 @@ bool word_space_node::did_space_merge(hunits h, hunits sw, hunits ssw)
   return true;
 }
 
-unbreakable_space_node::unbreakable_space_node(hunits d, color *c, node *x)
+unbreakable_space_node::unbreakable_space_node(hunits d, color *c,
+					       node *x)
 : word_space_node(d, c, 0, x)
 {
 }
@@ -5469,7 +5492,8 @@ static node *make_glyph_node(charinfo *s, environment *env,
   font_size fs = env->get_font_size();
   int char_height = env->get_char_height();
   int char_slant = env->get_char_slant();
-  tfont *tf = font_table[fontno]->get_tfont(fs, char_height, char_slant, fn);
+  tfont *tf = font_table[fontno]->get_tfont(fs, char_height, char_slant,
+					    fn);
   if (env->is_composite())
     tf = tf->get_plain();
   color *gcol = env->get_stroke_color();
