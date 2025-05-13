@@ -2,6 +2,28 @@
 
 	[troff]: Slighty refactor (boolify, rename).
 
+	* src/roff/troff/node.cpp (class tfont_spec): Demote member
+	variable `is_constant_spaced` from `char` to `bool`, and rename
+	it to `has_constant_spacing`.  It only ever takes two values, so
+	the use of a `char` instead of an `int` (in pre-standard C++)
+	might have been a premature space optimization.  The new name
+	avoids collision with the member function `is_constantly_spaced`
+	and also somewhat better implies a process applied to a font
+	rather than an inherent property of a typeface.  Both senses of
+	"constant spacing" exist in *roff (contrast proportional with
+	monospaced typefaces); this is the one manipulated by the `cs`
+	request.
+	(tfont_spec::tfont_spec): Use Boolean, not integer, literal for
+	it in initializer list.
+	(tfont_spec::tfont_spec, font_info::get_tfont, tfont::get_width)
+	(tfont::is_constantly_spaced): Track rename.
+	(font_info::get_tfont): Use Boolean, not integer, literals in
+	assignments to variable of type `bool`.
+
+2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Slighty refactor (boolify, rename).
+
 	* src/roff/troff/node.cpp (class font_info, class tfont_spec):
 	Demote member variable `is_bold` from `char` to `bool`, and
 	rename it to `has_emboldening`.  It only ever takes two values,

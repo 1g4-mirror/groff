@@ -187,7 +187,7 @@ protected:
   font *fm;
   font_size size;
   bool has_emboldening;
-  char is_constant_spaced;
+  bool has_constant_spacing;
   int ligature_mode;
   int kern_mode;
   hunits bold_offset;
@@ -321,11 +321,11 @@ tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
 	case CONSTANT_SPACE_NONE:
 	  break;
 	case CONSTANT_SPACE_ABSOLUTE:
-	  spec.is_constant_spaced = 1;
+	  spec.has_constant_spacing = true;
 	  spec.constant_space_width = constant_space;
 	  break;
 	case CONSTANT_SPACE_RELATIVE:
-	  spec.is_constant_spaced = 1;
+	  spec.has_constant_spacing = true;
 	  spec.constant_space_width
 	    = scale(constant_space*fs.to_scaled_points(),
 		    units_per_inch,
@@ -490,7 +490,7 @@ hunits font_info::get_half_narrow_space_width(font_size fs)
 tfont_spec::tfont_spec(symbol nm, int n, font *f,
 		       font_size s, int h, int sl)
 : name(nm), input_position(n), fm(f), size(s),
-  has_emboldening(false), is_constant_spaced(0), ligature_mode(1),
+  has_emboldening(false), has_constant_spacing(false), ligature_mode(1),
   kern_mode(1), height(h), slant(sl)
 {
   if (height == size.to_scaled_points())
@@ -509,10 +509,10 @@ bool tfont_spec::operator==(const tfont_spec &spec)
 	  ? (spec.has_emboldening && bold_offset == spec.bold_offset)
 	  : !spec.has_emboldening)
       && track_kern == spec.track_kern
-      && (is_constant_spaced
-	  ? (spec.is_constant_spaced
+      && (has_constant_spacing
+	  ? (spec.has_constant_spacing
 	     && constant_space_width == spec.constant_space_width)
-	  : !spec.is_constant_spaced)
+	  : !spec.has_constant_spacing)
       && ligature_mode == spec.ligature_mode
       && kern_mode == spec.kern_mode)
     return true;
@@ -527,7 +527,7 @@ tfont_spec tfont_spec::plain()
 
 hunits tfont::get_width(charinfo *c)
 {
-  if (is_constant_spaced)
+  if (has_constant_spacing)
     return constant_space_width;
   else if (has_emboldening)
     return (hunits(fm->get_width(c->as_glyph(), size.to_scaled_points()))
@@ -604,7 +604,7 @@ inline bool tfont::is_emboldened(hunits *res)
 
 inline bool tfont::is_constantly_spaced(hunits *res)
 {
-  if (is_constant_spaced) {
+  if (has_constant_spacing) {
     *res = constant_space_width;
     return true;
   }
