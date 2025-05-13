@@ -1290,9 +1290,9 @@ void troff_output_file::fill_color(color *col)
   do_motion();
   put("DF");
   unsigned int components[4];
-  color_scheme cs;
-  cs = col->get_components(components);
-  switch (cs) {
+  color_scheme scheme;
+  scheme = col->get_components(components);
+  switch (scheme) {
   case DEFAULT:
     put('d');
     break;
@@ -1344,9 +1344,9 @@ void troff_output_file::stroke_color(color *col)
   do_motion();
   put("m");
   unsigned int components[4];
-  color_scheme cs;
-  cs = col->get_components(components);
-  switch (cs) {
+  color_scheme scheme;
+  scheme = col->get_components(components);
+  switch (scheme) {
   case DEFAULT:
     put('d');
     break;
