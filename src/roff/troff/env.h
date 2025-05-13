@@ -231,15 +231,17 @@ class environment {
   unsigned char no_break_control_character;
 
   tab_type distance_to_next_tab(hunits *);
-  tab_type distance_to_next_tab(hunits *distance, hunits *leftpos);
+  tab_type distance_to_next_tab(hunits * /* distance */,
+				hunits * /* leftpos */);
   void start_line();
   void output_line(node * /* nd */, hunits /* width */,
 		   bool /* was_centered */);
   void output(node * /* nd */, bool /* suppress_filling */,
 	      vunits /* vs */, vunits /* post_vs */, hunits /* width */,
 	      bool /* was_centered */);
-  void output_title(node *nd, bool suppress_filling, vunits vs,
-		    vunits post_vs, hunits width);
+  void output_title(node * /* nd */, bool /* suppress_filling */,
+		    vunits /* vs */, vunits /* post_vs */,
+		    hunits /* width */);
 #ifdef WIDOW_CONTROL
   void mark_last_line();
 #endif /* WIDOW_CONTROL */
@@ -248,7 +250,8 @@ class environment {
   void start_field();
   void wrap_up_field();
   void add_padding();
-  node *make_tab_node(hunits d, node *next = 0);
+  node *make_tab_node(hunits /* d */,
+		      node * /* next */ = 0 /* nullptr */);
   node *get_prev_char();
 public:
   bool seen_space;

@@ -166,7 +166,8 @@ void environment::output(node *nd, bool suppress_filling,
       ) {
     curenv->construct_format_state(nd, was_centered, !suppress_filling);
     curdiv->output(nd, suppress_filling, vs, post_vs, width);
-  } else {
+  }
+  else {
     pending_output_line **p;
     for (p = &pending_lines; *p; p = &(*p)->next)
       ;
@@ -191,7 +192,8 @@ void environment::output_title(node *nd, bool suppress_filling,
 
 void environment::output_pending_lines()
 {
-  while (pending_lines && pending_lines->output()) {
+  while ((pending_lines != 0 /* nullptr */) && pending_lines->output())
+  {
     pending_output_line *tem = pending_lines;
     pending_lines = pending_lines->next;
     delete tem;
@@ -306,7 +308,7 @@ static symbol default_environment_name("0");
 void init_environments()
 {
   curenv = new environment(default_environment_name);
-  (void)env_dictionary.lookup(default_environment_name, curenv);
+  (void) env_dictionary.lookup(default_environment_name, curenv);
 }
 
 void tab_character()
@@ -766,23 +768,23 @@ environment::environment(symbol nm)
   underline_spaces(false),
   input_trap_count(-1),
   continued_input_trap(false),
-  line(0),
+  line(0 /* nullptr */),
   prev_text_length(0),
   width_total(0),
   space_total(0),
   input_line_start(0),
   using_line_tabs(false),
   current_tab(TAB_NONE),
-  leader_node(0),
-  tab_char(0),
+  leader_node(0 /* nullptr */),
+  tab_char(0 /* nullptr */),
   leader_char(charset_table['.']),
   has_current_field(false),
   is_discarding(false),
   is_spreading(false),
   margin_character_flags(0),
-  margin_character_node(0),
+  margin_character_node(0 /* nullptr */),
   margin_character_distance(points_to_units(10)),
-  numbering_nodes(0),
+  numbering_nodes(0 /* nullptr */),
   number_text_separation(1),
   line_number_indent(0),
   line_number_multiple(1),
@@ -794,7 +796,7 @@ environment::environment(symbol nm)
   hyphenation_space(H0),
   hyphenation_margin(H0),
   composite(false),
-  pending_lines(0),
+  pending_lines(0 /* nullptr */),
 #ifdef WIDOW_CONTROL
   want_widow_control(false),
 #endif /* WIDOW_CONTROL */
@@ -808,7 +810,7 @@ environment::environment(symbol nm)
   seen_eol(false),
   suppress_next_eol(false),
   seen_break(false),
-  tabs(units_per_inch/2, TAB_LEFT),
+  tabs((units_per_inch / 2), TAB_LEFT),
   name(nm),
   hyphen_indicator_char(0)
 {
@@ -860,14 +862,14 @@ environment::environment(const environment *e)
   underline_spaces(false),
   input_trap_count(-1),
   continued_input_trap(false),
-  line(0),
+  line(0) /* nullptr */,
   prev_text_length(e->prev_text_length),
   width_total(0),
   space_total(0),
   input_line_start(0),
   using_line_tabs(e->using_line_tabs),
   current_tab(TAB_NONE),
-  leader_node(0),
+  leader_node(0 /* nullptr */),
   tab_char(e->tab_char),
   leader_char(e->leader_char),
   has_current_field(false),
@@ -876,7 +878,7 @@ environment::environment(const environment *e)
   margin_character_flags(e->margin_character_flags),
   margin_character_node(e->margin_character_node),
   margin_character_distance(e->margin_character_distance),
-  numbering_nodes(0),
+  numbering_nodes(0 /* nullptr */),
   number_text_separation(e->number_text_separation),
   line_number_indent(e->line_number_indent),
   line_number_multiple(e->line_number_multiple),
@@ -888,7 +890,7 @@ environment::environment(const environment *e)
   hyphenation_space(e->hyphenation_space),
   hyphenation_margin(e->hyphenation_margin),
   composite(false),
-  pending_lines(0),
+  pending_lines(0 /* nullptr */),
 #ifdef WIDOW_CONTROL
   want_widow_control(e->want_widow_control),
 #endif /* WIDOW_CONTROL */
@@ -903,7 +905,7 @@ environment::environment(const environment *e)
   suppress_next_eol(e->suppress_next_eol),
   seen_break(e->seen_break),
   tabs(e->tabs),
-  name(e->name),		// so that, e.g., '.if "\n[.ev]"0"' works
+  name(e->name),	// so that, e.g., '.if "\n[.ev]"0"' works
   hyphen_indicator_char(e->hyphen_indicator_char)
 {
 }
@@ -2213,7 +2215,7 @@ static bool distribute_space(node *nd, int nspaces,
   for (node *tem = nd; tem != 0 /* nullptr */; tem = tem->next)
     tem->spread_space(&nspaces, &desired_space);
   if (force_reverse_node_list || do_reverse_node_list)
-    (void)node_list_reverse(nd);
+    (void) node_list_reverse(nd);
   if (!force_reverse_node_list)
     do_reverse_node_list = !do_reverse_node_list;
   return true;
@@ -2622,7 +2624,7 @@ void title()
   }
   node *part[3];
   hunits part_width[3];
-  part[0] = part[1] = part[2] = 0;
+  part[0] = part[1] = part[2] = 0 /* nullptr */;
   environment env(curenv);
   environment *oldenv = curenv;
   curenv = &env;
@@ -3628,7 +3630,8 @@ static void print_nodes_from_input_line()
   skip_line();
 }
 
-// Hyphenation - TeX's hyphenation algorithm with a less fancy implementation.
+// Hyphenation - TeX's hyphenation algorithm with a less fancy
+// implementation.
 
 struct trie_node;
 
@@ -3638,7 +3641,7 @@ class trie {
   virtual void do_delete(void *) = 0;
   void delete_trie_node(trie_node *);
 public:
-  trie() : tp(0) {}
+  trie() : tp(0 /* nullptr */) {}
   virtual ~trie();		// virtual to shut up g++
   void insert(const char *, int, void *);
   // find calls do_match for each match it finds
@@ -4183,8 +4186,8 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
 	if (have_patterns || have_hyphenation)
 	  error("'{' is not allowed within %1 group",
 		have_patterns ? "\\patterns" : "\\hyphenation");
-	c = hpf_getc(fp);		// skipped if not starting \patterns
-					// or \hyphenation
+	c = hpf_getc(fp);		// skipped if not starting
+					// \patterns or \hyphenation
       }
     }
     else {
