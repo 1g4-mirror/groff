@@ -134,7 +134,7 @@ struct conditional_bold {
   conditional_bold *next;
   int fontno;
   hunits offset;
-  conditional_bold(int, hunits, conditional_bold * = 0);
+  conditional_bold(int, hunits, conditional_bold * = 0 /* nullptr */);
 };
 
 class font_info {
@@ -243,31 +243,32 @@ static font_info **font_table = 0 /* nullptr */;
 static int font_table_size = 0;
 
 font_info::font_info(symbol nm, int n, symbol enm, font *f)
-: last_tfont(0), number(n), last_size(0),
+: last_tfont(0 /* nullptr */), number(n), last_size(0),
   internal_name(nm), external_name(enm), fm(f),
   has_emboldening(false), is_constant_spaced(CONSTANT_SPACE_NONE),
-  last_ligature_mode(1), last_kern_mode(1), cond_bold_list(0), sf(0)
+  last_ligature_mode(1), last_kern_mode(1),
+  cond_bold_list(0 /* nullptr */), sf(0 /* nullptr */)
 {
 }
 
 inline int font_info::contains(charinfo *ci)
 {
-  return (fm != 0) && fm->contains(ci->as_glyph());
+  return (fm != 0 /* nullptr */) && fm->contains(ci->as_glyph());
 }
 
 inline int font_info::is_special()
 {
-  return (fm != 0) && fm->is_special();
+  return (fm != 0 /* nullptr */) && fm->is_special();
 }
 
 inline int font_info::is_style()
 {
-  return (fm == 0);
+  return (0 /* nullptr */ == fm);
 }
 
 void font_info::set_zoom(int zoom)
 {
-  assert(fm != 0);
+  assert(fm != 0 /* nullptr */);
   fm->set_zoom(zoom);
 }
 
@@ -280,7 +281,7 @@ inline int font_info::get_zoom()
 
 tfont *make_tfont(tfont_spec &spec)
 {
-  for (tfont *p = tfont::tfont_list; p; p = p->next)
+  for (tfont *p = tfont::tfont_list; p != 0 /* nullptr */; p = p->next)
     if (*p == spec)
       return p;
   return new tfont(spec);
@@ -303,8 +304,11 @@ tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
       || global_kern_mode != last_kern_mode
       || fontno != number) {
 	font_info *f = font_table[fontno];
-	tfont_spec spec(f->external_name, f->number, f->fm, fs, height, slant);
-	for (conditional_bold *p = cond_bold_list; p; p = p->next)
+	tfont_spec spec(f->external_name, f->number, f->fm, fs, height,
+			slant);
+	for (conditional_bold *p = cond_bold_list;
+	     p != 0 /* nullptr */;
+	     p = p->next)
 	  if (p->fontno == fontno) {
 	    spec.has_emboldening = true;
 	    spec.bold_offset = p->offset;
@@ -327,9 +331,9 @@ tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
 	case CONSTANT_SPACE_RELATIVE:
 	  spec.has_constant_spacing = true;
 	  spec.constant_space_width
-	    = scale(constant_space*fs.to_scaled_points(),
+	    = scale(constant_space * fs.to_scaled_points(),
 		    units_per_inch,
-		    36*72*sizescale);
+		    36 * 72 * sizescale);
 	  break;
 	default:
 	  assert(0 == "unhandled case of constant spacing mode");
@@ -377,7 +381,9 @@ void font_info::set_bold(hunits offset)
 
 void font_info::set_conditional_bold(int fontno, hunits offset)
 {
-  for (conditional_bold *p = cond_bold_list; p; p = p->next)
+  for (conditional_bold *p = cond_bold_list;
+       p != 0 /* nullptr */;
+       p = p->next)
     if (p->fontno == fontno) {
       if (offset != p->offset) {
 	p->offset = offset;
@@ -395,7 +401,9 @@ conditional_bold::conditional_bold(int f, hunits h, conditional_bold *x)
 
 void font_info::conditional_unbold(int fontno)
 {
-  for (conditional_bold **p = &cond_bold_list; *p; p = &(*p)->next)
+  for (conditional_bold **p = &cond_bold_list;
+       *p != 0 /* nullptr */;
+       p = &(*p)->next)
     if ((*p)->fontno == fontno) {
       conditional_bold *tem = *p;
       *p = (*p)->next;
@@ -464,7 +472,7 @@ hunits font_info::get_space_width(font_size fs, int space_sz)
     return constant_space;
   else
     return scale(constant_space*fs.to_scaled_points(),
-		 units_per_inch, 36*72*sizescale);
+		 units_per_inch, 36 * 72 * sizescale);
 }
 
 hunits font_info::get_narrow_space_width(font_size fs)
@@ -686,14 +694,14 @@ charinfo *tfont::get_lig(charinfo *c1, charinfo *c2)
       break;
     }
   }
-  if (ci != 0 && fm->contains(ci->as_glyph()))
+  if (ci != 0 /* nullptr */ && fm->contains(ci->as_glyph()))
     return ci;
   return 0 /* nullptr */;
 }
 
 inline bool tfont::is_kerned(charinfo *c1, charinfo *c2, hunits *res)
 {
-  if (kern_mode == 0)
+  if (0 == kern_mode)
     return false;
   else {
     int n = fm->get_kern(c1->as_glyph(),
@@ -716,7 +724,7 @@ tfont::tfont(tfont_spec &spec) : tfont_spec(spec)
   tfont_list = this;
   tfont_spec plain_spec = plain();
   tfont *p;
-  for (p = tfont_list; p; p = p->next)
+  for (p = tfont_list; p != 0 /* nullptr */; p = p->next)
     if (*p == plain_spec) {
       plain_version = p;
       break;
@@ -783,7 +791,7 @@ void ascii_output_file::outs(const char *s)
 {
   if (fp != 0 /* nullptr */) {
     fputc('<', fp);
-    if (s)
+    if (s != 0 /* nullptr */)
       fputs(s, fp);
     fputc('>', fp);
   }
@@ -1411,16 +1419,16 @@ void troff_output_file::determine_line_limits(char code, hvpair *point,
   case 'C':
     // only the h field is used when defining a circle
     check_output_limits(output_hpos,
-			output_vpos - point[0].h.to_units()/2);
+			output_vpos - point[0].h.to_units() / 2);
     check_output_limits(output_hpos + point[0].h.to_units(),
-			output_vpos + point[0].h.to_units()/2);
+			output_vpos + point[0].h.to_units() / 2);
     break;
   case 'E':
   case 'e':
     check_output_limits(output_hpos,
-			output_vpos - point[0].v.to_units()/2);
+			output_vpos - point[0].v.to_units() / 2);
     check_output_limits(output_hpos + point[0].h.to_units(),
-			output_vpos + point[0].v.to_units()/2);
+			output_vpos + point[0].v.to_units() / 2);
     break;
   case 'P':
   case 'p':
@@ -1540,7 +1548,8 @@ void troff_output_file::really_off()
   flush_tbuf();
 }
 
-void troff_output_file::really_put_filename(const char *filename, int po)
+void troff_output_file::really_put_filename(const char *filename,
+					    int po)
 {
   flush_tbuf();
   put("x F ");
@@ -1552,7 +1561,8 @@ void troff_output_file::really_put_filename(const char *filename, int po)
   put('\n');
 }
 
-void troff_output_file::really_begin_page(int pageno, vunits page_length)
+void troff_output_file::really_begin_page(int pageno,
+					  vunits page_length)
 {
   flush_tbuf();
   if (has_page_begun) {
@@ -2403,7 +2413,7 @@ node *kern_pair_node::merge_glyph_node(glyph_node *gn)
     return 0 /* nullptr */;
   n2 = nd;
   nd = n2->merge_self(n1);
-  if (nd) {
+  if (nd != 0 /* nullptr */) {
     nd->next = next;
     n1 = n2 = 0 /* nullptr */;
     delete this;
@@ -2436,7 +2446,7 @@ void kern_pair_node::vertical_extent(vunits *min, vunits *max)
 node *kern_pair_node::add_discretionary_hyphen()
 {
   tfont *tf = n1->get_tfont();
-  if (tf) {
+  if (tf != 0 /* nullptr */) {
     if (tf->contains(soft_hyphen_char)) {
       color *gcol = n2->get_stroke_color();
       color *fcol = n2->get_fill_color();
@@ -2791,7 +2801,7 @@ hunits kern_pair_node::width()
 node *kern_pair_node::last_char_node()
 {
   node *nd = n2->last_char_node();
-  if (nd)
+  if (nd != 0 /* nullptr */)
     return nd;
   return n1->last_char_node();
 }
@@ -2806,7 +2816,7 @@ hunits dbreak_node::width()
 
 node *dbreak_node::last_char_node()
 {
-  for (node *n = none; n; n = n->next) {
+  for (node *n = none; n != 0 /* nullptr */; n = n->next) {
     node *last_node = n->last_char_node();
     if (last_node)
       return last_node;
@@ -3197,7 +3207,8 @@ void hmotion_node::dump_properties()
 
 node *hmotion_node::copy()
 {
-  return new hmotion_node(n, was_tab, unformat, col, state, div_nest_level);
+  return new hmotion_node(n, was_tab, unformat, col, state,
+			  div_nest_level);
 }
 
 node *space_char_hmotion_node::copy()
@@ -3318,7 +3329,7 @@ node *zero_width_node::copy()
 int node_list_character_type(node *p)
 {
   int t = 0;
-  for (; p; p = p->next)
+  for (; p != 0 /* nullptr */; p = p->next)
     t |= p->character_type();
   return t;
 }
@@ -3334,7 +3345,7 @@ void node_list_vertical_extent(node *p, vunits *min, vunits *max)
   *max = V0;
   vunits cur_vpos = V0;
   vunits v1, v2;
-  for (; p; p = p->next) {
+  for (; p != 0 /* nullptr */; p = p->next) {
     p->vertical_extent(&v1, &v2);
     v1 += cur_vpos;
     if (v1 < *min)
@@ -3371,7 +3382,7 @@ void overstrike_node::dump_properties()
 node *overstrike_node::copy()
 {
   overstrike_node *on = new overstrike_node(state, div_nest_level);
-  for (node *tem = nodes; tem; tem = tem->next)
+  for (node *tem = nodes; tem != 0 /* nullptr */; tem = tem->next)
     on->overstrike(tem->copy());
   return on;
 }
@@ -3384,7 +3395,7 @@ void overstrike_node::overstrike(node *n)
   if (w > max_width)
     max_width = w;
   node **p;
-  for (p = &nodes; *p; p = &(*p)->next)
+  for (p = &nodes; *p != 0 /* nullptr */; p = &(*p)->next)
     ;
   n->next = 0 /* nullptr */;
   *p = n;
@@ -3419,12 +3430,12 @@ node *bracket_node::copy()
   node *tem;
   if (nodes != 0 /* nullptr */)
     nodes->last = 0 /* nullptr */;
-  for (tem = nodes; tem; tem = tem->next) {
+  for (tem = nodes; tem != 0 /* nullptr */; tem = tem->next) {
     if (tem->next)
       tem->next->last = tem;
     last_node = tem;
   }
-  for (tem = last_node; tem; tem = tem->last)
+  for (tem = last_node; tem != 0 /* nullptr */; tem = tem->last)
     on->bracket(tem->copy());
   return on;
 }
@@ -3855,7 +3866,7 @@ void kern_pair_node::asciify(macro *m)
 {
   n1->asciify(m);
   n2->asciify(m);
-  n1 = n2 = 0;
+  n1 = n2 = 0 /* nullptr */;
   delete this;
 }
 
@@ -3925,7 +3936,7 @@ space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
 
 space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
 						 node *nxt)
-: hmotion_node(i, c, 0, 0, nxt)
+: hmotion_node(i, c, 0 /* nullptr */, 0, nxt)
 {
 }
 
@@ -3947,7 +3958,7 @@ void space_node::asciify(macro *m)
 
 void word_space_node::asciify(macro *m)
 {
-  for (width_list *w = orig_width; w; w = w->next)
+  for (width_list *w = orig_width; w != 0 /* nullptr */; w = w->next)
     m->append(' ');
   delete this;
 }
@@ -4063,7 +4074,7 @@ void space_node::split(int where, node **pre, node **post)
 {
   assert(where == 0);
   *pre = next;
-  *post = 0;
+  *post = 0 /* nullptr */;
   delete this;
 }
 
@@ -4093,24 +4104,24 @@ void dbreak_node::split(int where, node **prep, node **postp)
   assert(where >= 0);
   if (where == 0) {
     *postp = post;
-    post = 0;
-    if (pre == 0)
+    post = 0 /* nullptr */;
+    if (0 /* nullptr */ == pre)
       *prep = next;
     else {
       node *tem;
-      for (tem = pre; tem->next != 0; tem = tem->next)
+      for (tem = pre; tem->next != 0 /* nullptr */; tem = tem->next)
 	;
       tem->next = next;
       *prep = pre;
     }
-    pre = 0;
+    pre = 0 /* nullptr */;
     delete this;
   }
   else {
     *prep = next;
     where -= 1;
     node_list_split(none, &where, prep, postp);
-    none = 0;
+    none = 0 /* nullptr */;
     delete this;
   }
 }
@@ -4657,7 +4668,7 @@ hunits composite_node::width()
   if (tf->is_constantly_spaced(&x))
     return x;
   x = H0;
-  for (node *tem = nodes; tem; tem = tem->next)
+  for (node *tem = nodes; tem != 0 /* nullptr */; tem = tem->next)
     x += tem->width();
   hunits offset;
   if (tf->is_emboldened(&offset))
@@ -4674,7 +4685,7 @@ node *composite_node::last_char_node()
 vunits composite_node::vertical_width()
 {
   vunits v = V0;
-  for (node *tem = nodes; tem; tem = tem->next)
+  for (node *tem = nodes; tem != 0 /* nullptr */; tem = tem->next)
     v += tem->vertical_width();
   return v;
 }
@@ -4707,7 +4718,8 @@ void composite_node::ascii_print(ascii_output_file *ascii)
   ascii_print_reverse_node_list(ascii, nodes);
 }
 
-hyphen_list *composite_node::get_hyphen_list(hyphen_list *tail, int *count)
+hyphen_list *composite_node::get_hyphen_list(hyphen_list *tail,
+					     int *count)
 {
   (*count)++;
   return new hyphen_list(ci->get_hyphenation_code(), tail);
@@ -4846,7 +4858,7 @@ bool word_space_node::did_space_merge(hunits h, hunits sw, hunits ssw)
   n += h;
   assert(orig_width != 0);
   width_list *w = orig_width;
-  for (; w->next; w = w->next)
+  for (; w->next != 0 /* nullptr */; w = w->next)
     ;
   w->next = new width_list(sw, ssw);
   return true;
@@ -5189,8 +5201,8 @@ void zero_width_node::tprint(troff_output_file *out)
 void overstrike_node::tprint(troff_output_file *out)
 {
   hunits pos = H0;
-  for (node *tem = nodes; tem; tem = tem->next) {
-    hunits x = (max_width - tem->width())/2;
+  for (node *tem = nodes; tem != 0 /* nullptr */; tem = tem->next) {
+    hunits x = (max_width - tem->width()) / 2;
     out->right(x - pos);
     pos = x;
     tem->zero_width_tprint(out);
@@ -5204,13 +5216,13 @@ void bracket_node::tprint(troff_output_file *out)
     return;
   int npieces = 0;
   node *tem;
-  for (tem = nodes; tem; tem = tem->next)
+  for (tem = nodes; tem != 0 /* nullptr */; tem = tem->next)
     ++npieces;
   vunits h = nodes->size();
   vunits totalh = h*npieces;
-  vunits y = (totalh - h)/2;
+  vunits y = (totalh - h) / 2;
   out->down(y);
-  for (tem = nodes; tem; tem = tem->next) {
+  for (tem = nodes; tem != 0 /* nullptr */; tem = tem->next) {
     tem->zero_width_tprint(out);
     out->down(-h);
   }
@@ -5292,7 +5304,7 @@ void composite_node::tprint(troff_output_file *out)
   hunits x = H0;
   if (is_constantly_spaced) {
     x = constant_space;
-    for (node *tem = nodes; tem; tem = tem->next)
+    for (node *tem = nodes; tem != 0 /* nullptr */; tem = tem->next)
       x -= tem->width();
     if (is_emboldened)
       x -= bold_offset;
@@ -5462,7 +5474,8 @@ static node *make_glyph_node(charinfo *s, environment *env,
     tf = tf->get_plain();
   color *gcol = env->get_stroke_color();
   color *fcol = env->get_fill_color();
-  return new glyph_node(s, tf, gcol, fcol, 0, 0);
+  return new glyph_node(s, tf, gcol, fcol, 0 /* nullptr */,
+			0 /* nullptr */);
 }
 
 node *make_node(charinfo *ci, environment *env)
@@ -5481,7 +5494,7 @@ node *make_node(charinfo *ci, environment *env)
     break;
   }
   charinfo *tem = ci->get_translation();
-  if (tem)
+  if (tem != 0 /* nullptr */)
     ci = tem;
   macro *mac = ci->get_macro();
   if (mac && ci->is_normal())
@@ -5495,7 +5508,7 @@ bool character_exists(charinfo *ci, environment *env)
   if (ci->get_special_translation() != charinfo::TRANSLATE_NONE)
     return true;
   charinfo *tem = ci->get_translation();
-  if (tem)
+  if (tem != 0 /* nullptr */)
     ci = tem;
   if (ci->get_macro())
     return true;
@@ -5530,7 +5543,7 @@ node *node::add_char(charinfo *ci, environment *env,
     return add_discretionary_hyphen();
   }
   charinfo *tem = ci->get_translation();
-  if (tem)
+  if (tem != 0 /* nullptr */)
     ci = tem;
   macro *mac = ci->get_macro();
   if (mac && ci->is_normal()) {
@@ -5549,7 +5562,7 @@ node *node::add_char(charinfo *ci, environment *env,
   }
   else {
     node *gn = make_glyph_node(ci, env);
-    if (gn == 0)
+    if (0 /* nullptr */ == gn)
       return this;
     else {
       hunits old_width = width();
@@ -5915,7 +5928,7 @@ node *left_italic_corrected_node::merge_glyph_node(glyph_node *gn)
   }
   else {
     node *nd = nodes->merge_glyph_node(gn);
-    if (nd) {
+    if (nd != 0 /* nullptr */) {
       nodes = nd;
       x = nodes->left_italic_correction();
       return this;
@@ -6038,8 +6051,8 @@ hyphenation_type left_italic_corrected_node::get_hyphenation_type()
     return HYPHEN_MIDDLE;
 }
 
-hyphen_list *left_italic_corrected_node::get_hyphen_list(hyphen_list *tail,
-							 int *count)
+hyphen_list *left_italic_corrected_node::get_hyphen_list(
+    hyphen_list *tail, int *count)
 {
   return (nodes != 0 /* nullptr */)
           ? nodes->get_hyphen_list(tail, count) : tail;
@@ -6371,7 +6384,8 @@ node *unbreakable_space_node::add_self(node *nd, hyphen_list **p)
   return this;
 }
 
-hyphen_list *unbreakable_space_node::get_hyphen_list(hyphen_list *tail, int *)
+hyphen_list *unbreakable_space_node::get_hyphen_list(hyphen_list *tail,
+						     int *)
 {
   return new hyphen_list(0, tail);
 }
@@ -6841,7 +6855,7 @@ static void remove_font_specific_character()
 	if (!ci)
 	  break;
 	macro *m = ci->set_macro(0 /* nullptr */);
-	if (m)
+	if (m != 0 /* nullptr */)
 	  delete m;
       }
       tok.next();
@@ -6961,8 +6975,8 @@ int next_available_font_position()
 {
   int i;
   for (i = 1;
-      (i < font_table_size) && (font_table[i] != 0 /* nullptr */);
-      i++)
+       (i < font_table_size) && (font_table[i] != 0 /* nullptr */);
+       i++)
     ;
   return i;
 }
@@ -6994,7 +7008,7 @@ hunits env_font_emboldening_offset(environment *env, int n)
 hunits env_digit_width(environment *env)
 {
   node *n = make_glyph_node(charset_table['0'], env);
-  if (n) {
+  if (n != 0 /* nullptr */) {
     hunits x = n->width();
     delete n;
     return x;
@@ -7237,7 +7251,7 @@ static void constantly_space_font()
 	font_table[n]->set_constant_space(CONSTANT_SPACE_ABSOLUTE,
 					  scale(y*x,
 						units_per_inch,
-						36*72*sizescale));
+						36 * 72 * sizescale));
     }
   }
   skip_line();

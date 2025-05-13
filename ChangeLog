@@ -1,5 +1,44 @@
 2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Fix code style nits.
+	(font_info::is_style)
+	(tfont::is_kerned)
+	(dbreak_node::split)
+	(node::add_char): Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.
+	(make_tfont)
+	(font_info::get_tfont)
+	(font_info::set_conditional_bold)
+	(font_info::conditional_unbold)
+	(tfont::tfont)
+	(ascii_output_file::outs)
+	(kern_pair_node::merge_glyph_node)
+	(kern_pair_node::add_discretionary_hyphen)
+	(kern_pair_node::last_char_node)
+	(dbreak_node::last_char_node)
+	(node_list_character_type)
+	(node_list_vertical_extent)
+	(overstrike_node::copy)
+	(overstrike_node::overstrike)
+	(bracket_node::copy)
+	(word_space_node::asciify)
+	(dbreak_node::split)
+	(composite_node::width)
+	(composite_node::vertical_width)
+	(word_space_node::did_space_merge)
+	(overstrike_node::tprint)
+	(bracket_node::tprint)
+	(make_node)
+	(character_exists)
+	(node::add_char)
+	(left_italic_corrected_node::merge_glyph_node)
+	(remove_font_specific_character)
+	(env_digit_width): Explicitly compare values of pointer type to
+	null pointer literals instead of letting them pun down to
+	Booleans.
+
+2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slighty refactor (boolify, rename).
 
 	* src/roff/troff/node.cpp (glyph_node::tprint)
