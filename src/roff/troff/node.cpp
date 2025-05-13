@@ -146,7 +146,7 @@ class font_info {
   symbol internal_name;
   symbol external_name;
   font *fm;
-  char is_bold;
+  bool has_emboldening;
   hunits bold_offset;
   track_kerning_function track_kern;
   constant_space_type is_constant_spaced;
@@ -186,7 +186,7 @@ protected:
   int input_position;
   font *fm;
   font_size size;
-  char is_bold;
+  bool has_emboldening;
   char is_constant_spaced;
   int ligature_mode;
   int kern_mode;
@@ -245,7 +245,7 @@ static int font_table_size = 0;
 font_info::font_info(symbol nm, int n, symbol enm, font *f)
 : last_tfont(0), number(n), last_size(0),
   internal_name(nm), external_name(enm), fm(f),
-  is_bold(0), is_constant_spaced(CONSTANT_SPACE_NONE),
+  has_emboldening(false), is_constant_spaced(CONSTANT_SPACE_NONE),
   last_ligature_mode(1), last_kern_mode(1), cond_bold_list(0), sf(0)
 {
 }
@@ -306,12 +306,12 @@ tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
 	tfont_spec spec(f->external_name, f->number, f->fm, fs, height, slant);
 	for (conditional_bold *p = cond_bold_list; p; p = p->next)
 	  if (p->fontno == fontno) {
-	    spec.is_bold = 1;
+	    spec.has_emboldening = true;
 	    spec.bold_offset = p->offset;
 	    break;
 	  }
-	if (!spec.is_bold && is_bold) {
-	  spec.is_bold = 1;
+	if (!spec.has_emboldening && has_emboldening) {
+	  spec.has_emboldening = true;
 	  spec.bold_offset = bold_offset;
 	}
 	spec.track_kern = track_kern.compute(fs.to_scaled_points());
@@ -350,7 +350,7 @@ tfont *font_info::get_tfont(font_size fs, int height, int slant, int fontno)
 
 bool font_info::is_emboldened(hunits *res)
 {
-  if (is_bold) {
+  if (has_emboldening) {
     *res = bold_offset;
     return true;
   }
@@ -360,16 +360,16 @@ bool font_info::is_emboldened(hunits *res)
 
 void font_info::unbold()
 {
-  if (is_bold) {
-    is_bold = 0;
+  if (has_emboldening) {
+    has_emboldening = false;
     flush();
   }
 }
 
 void font_info::set_bold(hunits offset)
 {
-  if (!is_bold || offset != bold_offset) {
-    is_bold = 1;
+  if (!has_emboldening || offset != bold_offset) {
+    has_emboldening = true;
     bold_offset = offset;
     flush();
   }
@@ -490,8 +490,8 @@ hunits font_info::get_half_narrow_space_width(font_size fs)
 tfont_spec::tfont_spec(symbol nm, int n, font *f,
 		       font_size s, int h, int sl)
 : name(nm), input_position(n), fm(f), size(s),
-  is_bold(0), is_constant_spaced(0), ligature_mode(1), kern_mode(1),
-  height(h), slant(sl)
+  has_emboldening(false), is_constant_spaced(0), ligature_mode(1),
+  kern_mode(1), height(h), slant(sl)
 {
   if (height == size.to_scaled_points())
     height = 0;
@@ -505,9 +505,9 @@ bool tfont_spec::operator==(const tfont_spec &spec)
       && name == spec.name
       && height == spec.height
       && slant == spec.slant
-      && (is_bold
-	  ? (spec.is_bold && bold_offset == spec.bold_offset)
-	  : !spec.is_bold)
+      && (has_emboldening
+	  ? (spec.has_emboldening && bold_offset == spec.bold_offset)
+	  : !spec.has_emboldening)
       && track_kern == spec.track_kern
       && (is_constant_spaced
 	  ? (spec.is_constant_spaced
@@ -529,7 +529,7 @@ hunits tfont::get_width(charinfo *c)
 {
   if (is_constant_spaced)
     return constant_space_width;
-  else if (is_bold)
+  else if (has_emboldening)
     return (hunits(fm->get_width(c->as_glyph(), size.to_scaled_points()))
 	    + track_kern + bold_offset);
   else
@@ -594,7 +594,7 @@ inline int tfont::get_character_type(charinfo *ci)
 
 inline bool tfont::is_emboldened(hunits *res)
 {
-  if (is_bold) {
+  if (has_emboldening) {
     *res = bold_offset;
     return true;
   }

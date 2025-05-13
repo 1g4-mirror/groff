@@ -1,5 +1,29 @@
 2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slighty refactor (boolify, rename).
+
+	* src/roff/troff/node.cpp (class font_info, class tfont_spec):
+	Demote member variable `is_bold` from `char` to `bool`, and
+	rename it to `has_emboldening`.  It only ever takes two values,
+	so the use of a `char` instead of an `int` (in pre-standard C++)
+	might have been a premature space optimization.  The new name
+	avoids collision with the member function `is_emboldened` and
+	also somewhat better implies a process applied to a font rather
+	than an inherent property of a typeface.  Both senses of "bold"
+	exist in *roff; this is the one manipulated by the `bd` request.
+	(font_info::font_info, tfont_spec::tfont_spec): Use Boolean, not
+	integer, literal for it in initializer list.
+	(font_info::font_info, tfont_spec::tfont_spec)
+	(font_info::get_tfont, font_info::is_emboldened)
+	(font_info::unbold, font_info::set_bold, tfont_spec::operator==)
+	(tfont::get_width, tfont::is_emboldened): Track rename.
+	(font_info::get_tfont, font_info::is_emboldened)
+	(font_info::unbold, font_info::set_bold, tfont_spec::operator==)
+	(tfont::get_width, tfont::is_emboldened): Use Boolean, not
+	integer, literals in assignments to variables of type `bool`.
+
+2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (compare_ranges, distribute_space)
 	(hyphen_trie::read_patterns_file): Favor C++-style `static_cast`
 	and `const_cast` over C-style omnipotent casts.
