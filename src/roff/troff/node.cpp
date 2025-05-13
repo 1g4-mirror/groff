@@ -6096,7 +6096,7 @@ node *overstrike_node::add_self(node *more_nodes, hyphen_list **p)
 
 hyphen_list *overstrike_node::get_hyphen_list(hyphen_list *tail, int *)
 {
-  return new hyphen_list(0 /* nullptr */, tail);
+  return new hyphen_list(0, tail);
 }
 
 bool bracket_node::is_same_as(node *nd)
