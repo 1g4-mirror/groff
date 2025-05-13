@@ -1,5 +1,10 @@
 2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (make_glyph_node): Assign Boolean, not
+	integer, literal, to variable of type `bool`.
+
+2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (troff_output_file::fill_color)
 	(troff_output_file::stroke_color): Rename local variable from
 	`cs` to `scheme`; `cs` can be confusing in a troff context.

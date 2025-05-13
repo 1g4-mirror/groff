@@ -5437,7 +5437,7 @@ static node *make_glyph_node(charinfo *s, environment *env,
 	if (font_table[fn]
 	    && font_table[fn]->is_special()
 	    && font_table[fn]->contains(s)) {
-	  found = 1;
+	  found = true;
 	  break;
 	}
     }
