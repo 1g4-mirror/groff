@@ -1,5 +1,10 @@
 2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (container_node::dump_node): Give
+	contained node list a JSON key name.
+
+2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (troff_output_file::fill_color)
 	(troff_output_file::stroke_color): Emit motion commands prior to
 	changing fill or stroke color only in nroff mode.  Annotate why.

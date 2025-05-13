@@ -2780,7 +2780,7 @@ void container_node::dump_node()
 {
   fputc('{', stderr);
   dump_properties();
-  fputs(", ", stderr);
+  fputs(", \"contains\": ", stderr);
   dump_node_list(nodes);
   fputc('}', stderr);
   fflush(stderr);
