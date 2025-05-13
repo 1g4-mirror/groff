@@ -1300,7 +1300,11 @@ void troff_output_file::fill_color(color *col)
   if (!want_color_output)
     return;
   flush_tbuf();
-  do_motion();
+  // In nroff-mode devices (grotty), the fill color is a property of the
+  // character cell; our drawing position has to be on the page, lest
+  // grotty grouse "output above first line discarded".
+  if (in_nroff_mode)
+    do_motion();
   put("DF");
   unsigned int components[4];
   color_scheme scheme;
@@ -1353,8 +1357,11 @@ void troff_output_file::stroke_color(color *col)
   if (!want_color_output)
     return;
   flush_tbuf();
-  // grotty doesn't like a color command if the vertical position is zero.
-  do_motion();
+  // In nroff-mode devices (grotty), the stroke color is a property of
+  // the character cell; our drawing position has to be on the page,
+  // lest grotty grouse "output above first line discarded".
+  if (in_nroff_mode)
+    do_motion();
   put("m");
   unsigned int components[4];
   color_scheme scheme;
