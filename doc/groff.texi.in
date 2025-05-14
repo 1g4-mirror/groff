@@ -18110,6 +18110,11 @@ In @acronym{JSON},
 a pair of empty brackets
 @samp{[ ]}
 represents an empty list.
+A
+@emph{pending}
+output line has not yet undergone adjustment,
+and lacks a line number and margin character
+(all as applicable).
 @endDefreq
 
 @Defreq {pm, [@Var{name} @r{@dots{}}]}}

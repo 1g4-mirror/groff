@@ -3519,6 +3519,12 @@ a pair of empty brackets
 .RB \[lq] "[ ]" \[rq]
 represents an empty list.
 .
+A
+.I pending
+output line has not yet undergone adjustment,
+and lacks a line number and margin character
+(all as applicable).
+.
 .
 .TP
 .BR .pnr \~[\c
