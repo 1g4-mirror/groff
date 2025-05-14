@@ -19062,7 +19062,8 @@ applying the
 or
 @code{unformat}
 requests to diversion converts some of its nodes back into characters.
-Where the formatter cannot recover the character representation of node,
+Where the formatter cannot recover the character representation
+of a node,
 it stores a null character in the character list
 corresponding to a single node in the node list.
 
