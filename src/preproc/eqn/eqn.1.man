@@ -10,7 +10,7 @@ or MathML
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -1898,9 +1898,8 @@ is
 .I @g@eqn
 produces output in that language rather than
 .IR roff ,
-and
-.I eqnrc
-is not loaded.
+and does not load
+.IR eqnrc .
 .\" XXX: why NOT load eqnrc?
 .
 The default device is
@@ -2032,9 +2031,11 @@ the
 .I eqn \" generic
 command
 .RB \%\[lq]\^ "gifont PI" \^\[rq]
-does not select
-.IR groff 's
-Palatino italic font for the global italic face;
+does not select the
+.MR gropdf @MAN1EXT@
+or
+.MR grops @MAN1EXT@
+device's Palatino italic font as the global italic face;
 you must use
 .RB \%\[lq]\^ "gifont \[dq]PI\[dq]" \^\[rq]
 instead.
