@@ -10,7 +10,7 @@ documents
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -468,7 +468,7 @@ Others perform special operations like drawing lines or spanning entries
 from adjacent cells in the table.
 .
 Except for
-.RB \[lq] | \[rq],
+.RB \[lq]\^ | \^\[rq],
 any classifier can be followed by one or more
 .I modifiers;
 some of these accept an argument,
