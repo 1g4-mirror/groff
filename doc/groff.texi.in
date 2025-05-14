@@ -14807,10 +14807,17 @@ over that glyph.
 @cindex input line position, horizontal, saving (@code{\k})
 @cindex position, horizontal input line, saving (@code{\k})
 @cindex line, input, horizontal position, saving (@code{\k})
-Store the horizontal drawing position relative to that corresponding to
-the beginning of the input line in a register with the name
-@var{position} (one-character name@tie{}@var{p}, two-character name
-@var{ps}).  Use this, for example, to move to the beginning of a word
+Store the horizontal drawing position,
+relative to that corresponding to the start of the input line
+(ignoring page offset and indentation),
+in a register with the name
+@var{position}
+(one-character name@tie{}@var{p},
+two-character name
+@var{ps}).
+Use this,
+for example,
+to later move to the beginning of a word
 for highlighting or other decoration.
 @endDefesc
 

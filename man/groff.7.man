@@ -5621,18 +5621,27 @@ set the font height to the selected type size.
 .
 .TP
 .ESC k r
-Mark horizontal position in one-character register
+Store the horizontal drawing position,
+relative to that corresponding to the start of the input line
+(ignoring page offset and indentation),
+in register
 .RI name\~ r .
 .
 .TP
 .ESC k( rg
-Mark horizontal position in two-character register
+Store the horizontal drawing position,
+relative to that corresponding to the start of the input line
+(ignoring page offset and indentation),
+in register
 .RI name\~ rg .
 .
 .
 .TP
 .ESC[] k reg
-Mark horizontal position in register with arbitrarily long
+Store the horizontal drawing position,
+relative to that corresponding to the start of the input line
+(ignoring page offset and indentation),
+in register
 .RI name\~ reg .
 .
 .

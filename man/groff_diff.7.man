@@ -936,8 +936,10 @@ request below.
 .BI \[rs]k( rg
 .TQ
 .BI \[rs]k[ reg ]
-Mark horizontal drawing position in
-two-character register
+Store the horizontal drawing position,
+relative to that corresponding to the start of the input line
+(ignoring page offset and indentation),
+in two-character register
 .RI name\~ rg
 or arbitrary register
 .RI name\~ reg .
