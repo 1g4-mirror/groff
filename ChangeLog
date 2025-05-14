@@ -1,3 +1,9 @@
+2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (compare_ranges, distribute_space)
+	(hyphen_trie::read_patterns_file): Favor C++-style `static_cast`
+	and `const_cast` over C-style omnipotent casts.
+
 2025-05-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc.tmac (Bd): Fix code style nit.  Perform "strict"

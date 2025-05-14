@@ -234,7 +234,8 @@ extern "C" {
 
 int compare_ranges(const void *p1, const void *p2)
 {
-  return ((size_range *)p1)->min - ((size_range *)p2)->min;
+  return (  static_cast<size_range *>(const_cast<void *>(p1))->min
+	  - static_cast<size_range *>(const_cast<void *>(p2))->min);
 }
 
 }
@@ -2207,8 +2208,8 @@ static bool distribute_space(node *nd, int nspaces,
   if (!force_reverse_node_list && spread_limit >= 0
       && desired_space.to_units() > 0) {
     hunits em = curenv->get_size();
-    double Ems = (double)desired_space.to_units() / nspaces
-		 / (em.is_zero() ? hresolution : em.to_units());
+    double Ems = static_cast<double>(desired_space.to_units() / nspaces
+		 / (em.is_zero() ? hresolution : em.to_units()));
     if (Ems > spread_limit)
       output_warning(WARN_BREAK, "spreading %1m per space", Ems);
   }
@@ -4197,7 +4198,7 @@ void hyphen_trie::read_patterns_file(const char *name, int append,
     if (i > 0) {
       if (have_patterns || is_final_pattern || is_traditional) {
 	for (int j = 0; j < i; j++)
-	  buf[j] = hpf_code_table[(unsigned char)buf[j]];
+	  buf[j] = hpf_code_table[static_cast<unsigned char>(buf[j])];
 	insert_pattern(buf, i, num);
 	is_final_pattern = false;
       }
