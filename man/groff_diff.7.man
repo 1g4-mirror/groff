@@ -3459,9 +3459,9 @@ Report,
 to the standard error stream,
 the list of configured composite character mappings.
 .
-See the
+See
 .RB \%\[lq] composite \[rq]
-request in section \[lq]New requests\[rq] above.
+above.
 .
 The \[lq]from\[rq] code point is listed first,
 followed by its \[lq]to\[rq] mapping.
@@ -3479,9 +3479,9 @@ Report,
 to the standard error stream,
 the list of font translations.
 .
-See the
-.RB \[lq] pftr \[rq]
-request in section \[lq]New requests\[rq] above.
+See
+.B pftr
+above.
 .
 The \[lq]from\[rq] font identifier is listed first,
 followed by its \[lq]to\[rq] translation.
