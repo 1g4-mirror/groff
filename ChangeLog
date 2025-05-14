@@ -168,7 +168,7 @@
 	[troff]: Implement new `pftr` request.
 
 	* src/roff/troff/node.cpp (dump_font_translations): Add.
-	(init_none_requests): Wire up `pftr` request name to
+	(init_node_requests): Wire up `pftr` request name to
 	`dump_font_translations()`.
 
 	* doc/groff.texi (Selecting Fonts, Debugging):
