@@ -2921,10 +2921,25 @@ void exit_troff()
     is_eoi_macro_finished = true;
     topdiv->set_ejecting();
     static unsigned char buf[2] = { LAST_PAGE_EJECTOR, '\0' };
-    input_stack::push(make_temp_iterator((char *)buf));
+    // XXX: Ugliness alert.  GNU troff wants to eat its cake and have it
+    // too, using the explicit `unsigned char` numeric type to represent
+    // input characters while also using C/C++'s `char` type--of
+    // undefined signedness--and its literals, including character
+    // string literals like `"\n"`, in free admixture therewith.
+    //
+    // Fixing this the right way means widening the fundamental
+    // character type of GNU troff formatting operations, possibly to
+    // `char32_t` (C++11).  That's a heavy lift; see Savannah #40720.
+    input_stack::push(make_temp_iterator(reinterpret_cast<char *>(buf)));
     topdiv->space(topdiv->get_page_length(), true /* forcing */);
     tok.next();
     process_input_stack();
+    // TODO: Resolve the follwing case and enable the assertion.
+    // $ printf '.DS\n.DE\n' | ./build/test-groff -ms
+    // troff: ../src/roff/troff/input.cpp:2937: void exit_troff():
+    //   Assertion `seen_last_page_ejector == 1' failed.
+    // .../build/groff: error: troff: Aborted (core dumped)
+    //assert(seen_last_page_ejector == 1);
     seen_last_page_ejector = 1;	// should be set already
     topdiv->set_ejecting();
     push_page_ejector();
@@ -4442,7 +4457,7 @@ static symbol composite_glyph_name(symbol nm)
       u = &decomposed[1];
     void *mapped_composite = composite_dictionary.lookup(symbol(u));
     if (mapped_composite)
-      u = (const char *)mapped_composite;
+      u = static_cast<const char *>(mapped_composite);
     glyph_name += u;
   }
   glyph_name += '\0';
@@ -5037,7 +5052,7 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
   macro *mm = 0 /* nullptr */;
   if (mode == DEFINE_NORMAL || mode == DEFINE_APPEND) {
     request_or_macro *rm =
-      (request_or_macro *)request_dictionary.lookup(nm);
+      static_cast<request_or_macro *>(request_dictionary.lookup(nm));
     if (rm)
       mm = rm->to_macro();
     if (mm && mode == DEFINE_APPEND)
@@ -10205,7 +10220,8 @@ void charinfo::get_flags()
 #if defined(DEBUGGING)
       if (want_html_debugging)
 	fprintf(stderr, "charinfo::get_flags %p %s %d\n",
-			(void *)ci, ci->nm.contents(), ci->flags);
+			static_cast<void *>(ci), ci->nm.contents(),
+			ci->flags);
 #endif
       flags |= ci->flags;
     }

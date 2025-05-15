@@ -1,5 +1,15 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (exit_troff)
+	(composite_glyph_name)
+	(do_define_macro)
+	(charinfo::get_flags) [0]: Favor C++-style `static_cast` over
+	C-style omnipotent casts.
+	(exit_troff): Use explicit `reinterpret_cast` C++ operator
+	instead of C-style cast.  Annotate why we use this footgun.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Warn on out-of-range `cflags` request argument.
 
 	* src/roff/troff/charinfo.h (class charinfo): Add `CFLAGS_MAX`
