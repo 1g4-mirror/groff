@@ -7996,7 +7996,7 @@ static void do_translate(int translate_transparent, int translate_input)
       continue;
     }
     charinfo *ci1 = tok.get_char(true /* required */);
-    if (ci1 == 0)
+    if (0 /* nullptr */ == ci1)
       break;
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
@@ -8018,12 +8018,14 @@ static void do_translate(int translate_transparent, int translate_input)
 				   translate_transparent);
     else {
       charinfo *ci2 = tok.get_char(true /* required */);
-      if (ci2 == 0)
+      if (0 /* nullptr */ == ci2)
 	break;
       if (ci1 == ci2)
-	ci1->set_translation(0, translate_transparent, translate_input);
+	ci1->set_translation(0 /* nullptr */, translate_transparent,
+			     translate_input);
       else
-	ci1->set_translation(ci2, translate_transparent, translate_input);
+	ci1->set_translation(ci2, translate_transparent,
+			     translate_input);
     }
     tok.next();
   }
