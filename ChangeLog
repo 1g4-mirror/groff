@@ -1,3 +1,15 @@
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Boolify member function of `output_file` class that
+	indicates whether the current page is selected for printing (as
+	with troff's `-o` option.
+
+	* src/roff/troff/node.h (class output_put): Demote
+	member function `is_printing` from `int` to `bool`, and rename
+	it to `is_selected_for_printing`.
+	* src/roff/troff/node.cpp (class real_output_file): Update
+	declaration and definition accordingly in derived class.
+
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (real_output_file::on): Comment out

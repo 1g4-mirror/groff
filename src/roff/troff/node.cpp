@@ -769,7 +769,7 @@ public:
   void on();
   void off();
   bool is_on();
-  int is_printing();
+  bool is_selected_for_printing();
   void copy_file(hunits x, vunits y, const char *filename);
 };
 
@@ -1778,7 +1778,7 @@ void real_output_file::flush()
   }
 }
 
-int real_output_file::is_printing()
+bool real_output_file::is_selected_for_printing()
 {
   return printing;
 }
@@ -7348,7 +7348,7 @@ public:
 const char *printing_reg::get_string()
 {
   if (the_output)
-    return the_output->is_printing() ? "1" : "0";
+    return the_output->is_selected_for_printing() ? "1" : "0";
   else
     return "0";
 }

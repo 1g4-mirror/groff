@@ -709,7 +709,7 @@ public:
 			  hunits width) = 0;
   virtual void begin_page(int pageno, vunits page_length) = 0;
   virtual void copy_file(hunits x, vunits y, const char *filename) = 0;
-  virtual int is_printing() = 0;
+  virtual bool is_selected_for_printing() = 0;
   virtual void put_filename(const char *, int);
   virtual void on();
   virtual void off();
