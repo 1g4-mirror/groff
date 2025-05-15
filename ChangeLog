@@ -1,5 +1,19 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Respell the `unsigned` data type
+	as `unsigned int`.  Use of `signed` and `unsigned` as if they
+	were types of themselves rather than qualifiers on types is a
+	slovenly practice from pre-ANSI C.
+
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp (environment::get_hyphenation_mode)
+	(environment::get_hyphenation_mode_default)
+	(class unsigned_env_reg):
+	(unsigned_env_reg::get_value):
+	(hyphenate): Do it.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor margin character flag handling.  Namespace it
 	inside the `environment` class and use enumeration constants
 	rather than global ones.

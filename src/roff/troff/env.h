@@ -209,8 +209,8 @@ class environment {
   int line_number_indent;	// in digit spaces
   int line_number_multiple;
   int no_number_count;
-  unsigned hyphenation_mode;
-  unsigned hyphenation_mode_default;
+  unsigned int hyphenation_mode;
+  unsigned int hyphenation_mode_default;
   int hyphen_line_count;
   int hyphen_line_max;
   hunits hyphenation_space;

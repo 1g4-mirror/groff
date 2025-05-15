@@ -439,12 +439,12 @@ void environment::add_hyphen_indicator()
   line = line->add_discretionary_hyphen();
 }
 
-unsigned environment::get_hyphenation_mode()
+unsigned int environment::get_hyphenation_mode()
 {
   return hyphenation_mode;
 }
 
-unsigned environment::get_hyphenation_mode_default()
+unsigned int environment::get_hyphenation_mode_default()
 {
   return hyphenation_mode_default;
 }
@@ -1097,7 +1097,7 @@ hunits environment::get_digit_width()
   return env_digit_width(this);
 }
 
-unsigned environment::get_adjust_mode()
+unsigned int environment::get_adjust_mode()
 {
   return adjust_mode;
 }
@@ -3222,7 +3222,7 @@ void environment::add_padding()
 }
 
 typedef int (environment::*INT_FUNCP)();
-typedef unsigned (environment::*UNSIGNED_FUNCP)();
+typedef unsigned int (environment::*UNSIGNED_FUNCP)();
 typedef vunits (environment::*VUNITS_FUNCP)();
 typedef hunits (environment::*HUNITS_FUNCP)();
 typedef const char *(environment::*STRING_FUNCP)();
@@ -3240,7 +3240,7 @@ class unsigned_env_reg : public reg {
  public:
   unsigned_env_reg(UNSIGNED_FUNCP);
   const char *get_string();
-  bool get_value(unsigned *val);
+  bool get_value(unsigned int *val);
 };
 
 class vunits_env_reg : public reg {
@@ -3285,7 +3285,7 @@ unsigned_env_reg::unsigned_env_reg(UNSIGNED_FUNCP f) : func(f)
 {
 }
 
-bool unsigned_env_reg::get_value(unsigned *val)
+bool unsigned_env_reg::get_value(unsigned int *val)
 {
   *val = (curenv->*func)();
   return true;
@@ -4395,7 +4395,7 @@ void init_env_requests()
 
 // Appendix H of _The TeXbook_ is useful background for the following.
 
-void hyphenate(hyphen_list *h, unsigned flags)
+void hyphenate(hyphen_list *h, unsigned int flags)
 {
   if (0 /* nullptr */ == current_language)
     return;
