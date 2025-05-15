@@ -745,7 +745,7 @@ tfont::tfont(tfont_spec &spec) : tfont_spec(spec)
 class real_output_file : public output_file {
   int piped;
   int printing;		// decision via optional page list
-  int output_on;	// \O[0] or \O[1] escape sequences
+  bool is_output_on;	// controlled by \O[0], \O[1] escape sequences
   virtual void really_transparent_char(unsigned char) = 0;
   virtual void really_print_line(hunits x, vunits y, node *n,
 				 vunits before, vunits after,
@@ -768,7 +768,7 @@ public:
   void put_filename(const char *, int);
   void on();
   void off();
-  int is_on(); // three-valued Boolean :-|
+  bool is_on();
   int is_printing();
   void copy_file(hunits x, vunits y, const char *filename);
 };
@@ -1718,7 +1718,7 @@ void output_file::off()
 }
 
 real_output_file::real_output_file()
-: printing(0), output_on(1)
+: printing(0), is_output_on(true)
 {
   if (pipe_command) {
     if ((fp = popen(pipe_command, POPEN_WT)) != 0 /* nullptr */) {
@@ -1795,14 +1795,14 @@ void real_output_file::begin_page(int pageno, vunits page_length)
 void real_output_file::copy_file(hunits x, vunits y,
 				 const char *filename)
 {
-  if (printing && output_on)
+  if (printing && is_output_on)
     really_copy_file(x, y, filename);
   check_output_limits(x.to_units(), y.to_units());
 }
 
 void real_output_file::transparent_char(unsigned char c)
 {
-  if (printing && output_on)
+  if (printing && is_output_on)
     really_transparent_char(c);
 }
 
@@ -1831,19 +1831,19 @@ void real_output_file::really_put_filename(const char *, int)
 void real_output_file::on()
 {
   really_on();
-  if (output_on == 0)
-    output_on = 1;
+  if (!is_output_on)
+    is_output_on = true;
 }
 
 void real_output_file::off()
 {
   really_off();
-  output_on = 0;
+  is_output_on = false;
 }
 
-int real_output_file::is_on() // three-valued Boolean :-|
+bool real_output_file::is_on()
 {
-  return output_on;
+  return is_output_on;
 }
 
 void real_output_file::really_on()

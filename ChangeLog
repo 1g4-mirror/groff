@@ -1,5 +1,28 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify output enablement-related (meaning: not
+	suppressed by `\O[0]`) member variables and functions.
+
+	* src/roff/troff/node.cpp (class real_output_file): Demote
+	member variable `output_on` from `int` to `bool`, and rename it
+	to `is_output_on`, to imply a logical predicate.  Demote public
+	member function `is_on()` from `int` to `bool`.  Drop annotation
+	of three-valued status; that unfortunate fact applies only to
+	the `is_on` member variable of the `suppress_node` class.
+	(real_output_file::real_output_file): Track rename and
+	boolification in initializer and use of constant literal of
+	Boolean type.
+	(real_output_file::copy_file)
+	(real_output_file::transparent_char): Track rename.
+	(real_output_file::is_on): Track rename and demotion of return
+	type.
+	(real_output_file::on, real_output_file::off): Assign Boolean,
+	rather than integer, literal to `is_output_on` member variable.
+	(real_output_file::on): Express `if` statement as
+	straightforward test of logical predicate.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Respell the `unsigned` data type
 	as `unsigned int`.  Use of `signed` and `unsigned` as if they
 	were types of themselves rather than qualifiers on types is a
