@@ -1,5 +1,11 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::charinfo): Fix code style
+	nit.  Use unsigned integer literal when initializing character
+	flags, which are of type `unsigned int`.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (exit_troff)
 	(composite_glyph_name)
 	(do_define_macro)

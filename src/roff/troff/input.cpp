@@ -10158,7 +10158,7 @@ int charinfo::next_index = 0;
 charinfo::charinfo(symbol s)
 : translation(0 /* nullptr */), mac(0 /* nullptr */),
   special_translation(TRANSLATE_NONE), hyphenation_code(0U),
-  flags(0), ascii_code(0), asciify_code(0),
+  flags(0U), ascii_code(0), asciify_code(0),
   is_not_found(false), is_transparently_translatable(true),
   translatable_as_input(false), mode(CHAR_NORMAL), nm(s)
 {
