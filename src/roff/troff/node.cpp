@@ -744,7 +744,7 @@ tfont::tfont(tfont_spec &spec) : tfont_spec(spec)
 
 class real_output_file : public output_file {
   int piped;
-  int printing;		// decision via optional page list
+  bool want_page_printed;	// if selected with `troff -o`
   bool is_output_on;	// controlled by \O[0], \O[1] escape sequences
   virtual void really_transparent_char(unsigned char) = 0;
   virtual void really_print_line(hunits x, vunits y, node *n,
@@ -1718,7 +1718,7 @@ void output_file::off()
 }
 
 real_output_file::real_output_file()
-: printing(0), is_output_on(true)
+: want_page_printed(true), is_output_on(true)
 {
   if (pipe_command) {
     if ((fp = popen(pipe_command, POPEN_WT)) != 0 /* nullptr */) {
@@ -1780,13 +1780,13 @@ void real_output_file::flush()
 
 bool real_output_file::is_selected_for_printing()
 {
-  return printing;
+  return want_page_printed;
 }
 
 void real_output_file::begin_page(int pageno, vunits page_length)
 {
-  printing = in_output_page_list(pageno);
-  if (printing) {
+  want_page_printed = in_output_page_list(pageno);
+  if (want_page_printed) {
     was_any_page_in_output_list = true;
     really_begin_page(pageno, page_length);
   }
@@ -1795,21 +1795,21 @@ void real_output_file::begin_page(int pageno, vunits page_length)
 void real_output_file::copy_file(hunits x, vunits y,
 				 const char *filename)
 {
-  if (printing && is_output_on)
+  if (want_page_printed && is_output_on)
     really_copy_file(x, y, filename);
   check_output_limits(x.to_units(), y.to_units());
 }
 
 void real_output_file::transparent_char(unsigned char c)
 {
-  if (printing && is_output_on)
+  if (want_page_printed && is_output_on)
     really_transparent_char(c);
 }
 
 void real_output_file::print_line(hunits x, vunits y, node *n,
 			     vunits before, vunits after, hunits width)
 {
-  if (printing)
+  if (want_page_printed)
     really_print_line(x, y, n, before, after, width);
   delete_node_list(n);
 }
