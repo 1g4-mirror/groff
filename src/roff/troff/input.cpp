@@ -8058,6 +8058,13 @@ static void set_character_flags()
   }
   int flags;
   if (get_integer(&flags)) {
+    if ((flags < 0) || (flags > charinfo::CFLAGS_MAX)) {
+      warning(WARN_RANGE, "character flags must be in range 0..%1",
+	      charinfo::CFLAGS_MAX);
+      skip_line();
+      return;
+    }
+    // TODO: Check for contradictory character flags.
     if (!has_arg()) {
       warning(WARN_MISSING, "character flags configuration request"
 	      " expects one or more characters to configure");

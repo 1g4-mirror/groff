@@ -1,5 +1,16 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Warn on out-of-range `cflags` request argument.
+
+	* src/roff/troff/charinfo.h (class charinfo): Add `CFLAGS_MAX`
+	enumeration constant.
+
+	* src/roff/troff/input.cpp (set_character_flags): Throw warning
+	in category "range" and ignore request if first argument is a
+	valid integer but out of range.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nit; use unsigned integer literals when
 	assigning to or comparing with hyphenation codes, which are of
 	type `unsigned char`.
