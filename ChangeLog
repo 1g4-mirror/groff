@@ -1,5 +1,24 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor margin character flag handling.  Namespace it
+	inside the `environment` class and use enumeration constants
+	rather than global ones.
+
+	* src/roff/troff/env.h: Drop global constant unsigned `int`s
+	`MARGIN_CHARACTER_ON` and `MARGIN_CHARACTER_NEXT` in favor of...
+	(class enviromment): ...a public anonymous enum type with
+	constant values `MC_ON` and `MC_NEXT`.
+	* src/roff/troff/env.cpp (environment::environment): Use
+	unsigned integer literal when initializing
+	`margin_character_flags` member variable.
+	(margin_character, environment::print_env): Migrate to the
+	namespaced enumeration constants.
+	(margin_character, environment::output_line): Use unsigned
+	integer literal when comparing to `margin_character_flags`
+	member variable.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_translate): Fix code style nit.
 	Reorder equality comparisons to avoid inadvertent lvalue
 	assignment.

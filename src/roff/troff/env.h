@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -91,9 +91,6 @@ public:
   void add_tab(hunits pos, tab_type type, bool is_repeated);
   const char *to_string();
 };
-
-const unsigned MARGIN_CHARACTER_ON = 1;
-const unsigned MARGIN_CHARACTER_NEXT = 2;
 
 class charinfo;
 struct node;
@@ -203,7 +200,7 @@ class environment {
   bool tab_precedes_field;
   bool is_discarding;
   bool is_spreading;		// set by \p
-  unsigned margin_character_flags;
+  unsigned char margin_character_flags;
   node *margin_character_node;
   hunits margin_character_distance;
   node *numbering_nodes;
@@ -254,6 +251,11 @@ class environment {
 		      node * /* next */ = 0 /* nullptr */);
   node *get_prev_char();
 public:
+  // C++11: Use `enum : unsigned char`.
+  enum {
+    MC_ON = 0x1,
+    MC_NEXT = 0x2
+  };
   bool seen_space;
   bool seen_eol;
   bool suppress_next_eol;

@@ -788,7 +788,7 @@ environment::environment(symbol nm)
   has_current_field(false),
   is_discarding(false),
   is_spreading(false),
-  margin_character_flags(0),
+  margin_character_flags(0U),
   margin_character_node(0 /* nullptr */),
   margin_character_distance(points_to_units(10)),
   numbering_nodes(0 /* nullptr */),
@@ -1653,8 +1653,8 @@ void margin_character()
     if (nd) {
       delete curenv->margin_character_node;
       curenv->margin_character_node = nd;
-      curenv->margin_character_flags = MARGIN_CHARACTER_ON
-				       | MARGIN_CHARACTER_NEXT;
+      curenv->margin_character_flags = environment::MC_ON
+				       | environment::MC_NEXT;
       hunits d;
       if (has_arg() && get_hunits(&d, 'm'))
 	curenv->margin_character_distance = d;
@@ -1662,8 +1662,8 @@ void margin_character()
   }
   else {
     check_missing_character();
-    curenv->margin_character_flags &= ~MARGIN_CHARACTER_ON;
-    if (curenv->margin_character_flags == 0) {
+    curenv->margin_character_flags &= ~environment::MC_ON;
+    if (curenv->margin_character_flags == 0U) {
       delete curenv->margin_character_node;
       curenv->margin_character_node = 0 /* nullptr */;
     }
@@ -1901,14 +1901,14 @@ void environment::newline()
 void environment::output_line(node *nd, hunits width, bool was_centered)
 {
   prev_text_length = width;
-  if (margin_character_flags) {
+  if (margin_character_flags > 0U) {
     hunits d = line_length + margin_character_distance - saved_indent
 	       - width;
     if (d > 0) {
       nd = new hmotion_node(d, get_fill_color(), nd);
       width += d;
     }
-    margin_character_flags &= ~MARGIN_CHARACTER_NEXT;
+    margin_character_flags &= ~MC_NEXT;
     node *tem;
     if (!margin_character_flags) {
       tem = margin_character_node;
@@ -3559,12 +3559,11 @@ void environment::print_env()
   errprint("  forcing adjustment: %1\n", is_spreading ? "yes" : "no");
   if (margin_character_node != 0 /* nullptr */) {
     errprint("  margin character flags: %1\n",
-	     margin_character_flags == MARGIN_CHARACTER_ON
+	     margin_character_flags == MC_ON
 	       ? "on"
-	       : margin_character_flags == MARGIN_CHARACTER_NEXT
+	       : margin_character_flags == MC_NEXT
 		   ? "next"
-		   : margin_character_flags == (MARGIN_CHARACTER_ON
-						| MARGIN_CHARACTER_NEXT)
+		   : margin_character_flags == (MC_ON | MC_NEXT)
 		       ? "on, next"
 		       : "none");
     errprint("  margin character distance: %1u\n",
