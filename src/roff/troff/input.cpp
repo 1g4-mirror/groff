@@ -1133,7 +1133,7 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
 	c = input_stack::get(nd);
       } while (c == ESCAPE_NEWLINE);
     }
-    if (c != escape_char || escape_char <= 0)
+    if ((c != escape_char) || (escape_char <= 0))
       return c;
   again:
     c = input_stack::peek();
@@ -2002,7 +2002,7 @@ void token::next()
   for (;;) {
     node *n = 0 /* nullptr */;
     int cc = input_stack::get(&n);
-    if (cc != escape_char || escape_char == 0) {
+    if ((cc != escape_char) || (0 == escape_char)) {
     handle_ordinary_char:
       switch (cc) {
       case INPUT_NO_BREAK_SPACE:
@@ -2585,7 +2585,7 @@ void token::next()
 	}
 	goto handle_ordinary_char;
       default:
-	if (cc != escape_char && cc != '.')
+	if ((cc != escape_char) && (cc != '.'))
 	  warning(WARN_ESCAPE, "ignoring escape character before %1",
 		  input_char_description(cc));
 	goto handle_ordinary_char;
@@ -6531,7 +6531,7 @@ static void skip_branch()
       ++level;
     else if (c == ESCAPE_RIGHT_BRACE)
       --level;
-    else if (c == escape_char && escape_char > 0)
+    else if ((c == escape_char) && (escape_char > 0))
       switch (input_stack::get(0 /* nullptr */)) {
       case '{':
 	++level;
@@ -7412,7 +7412,7 @@ void ps_bbox_request() // .psbb
 const char *asciify(int c)
 {
   static char buf[3];
-  buf[0] = escape_char == '\0' ? '\\' : escape_char;
+  buf[0] = (0 == escape_char) ? '\\' : escape_char;
   buf[1] = buf[2] = '\0';
   switch (c) {
   case ESCAPE_QUESTION:

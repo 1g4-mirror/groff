@@ -1,5 +1,12 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (get_copy, token::next, skip_branch)
+	(asciify): Fix code style nits.  Parenthesize formally complex
+	expressions.  Reorder equality comparisons to avoid inadvertent
+	lvalue assignment.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (open_file): Un-pessimize.  Stop
 	senselessly recomputing string literal selection when we already
 	have a `char` pointer we can use.
