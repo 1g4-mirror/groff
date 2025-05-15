@@ -2144,11 +2144,11 @@ void environment::hyphenate_line(bool must_break_here)
   }
   if (!inhibit) {
     // this is for characters like hyphen and emdash
-    int prev_code = 0;
+    unsigned char prev_code = 0U;
     for (hyphen_list *h = sl; h; h = h->next) {
-      h->is_breakable = (prev_code != 0
+      h->is_breakable = (prev_code != 0U
 			 && h->next != 0 /* nullptr */
-			 && h->next->hyphenation_code != 0);
+			 && h->next->hyphenation_code != 0U);
       prev_code = h->hyphenation_code;
     }
   }
@@ -3791,7 +3791,7 @@ static void add_hyphenation_exceptions()
       }
       else {
 	unsigned char c = ci->get_hyphenation_code();
-	if (0 == c)
+	if (0U == c)
 	  break;
 	buf[i++] = c;
       }
@@ -4395,7 +4395,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
   if (0 /* nullptr */ == current_language)
     return;
   while (h != 0 /* nullptr */) {
-    while ((h != 0 /* nullptr */) && (0 == h->hyphenation_code))
+    while ((h != 0 /* nullptr */) && (0U == h->hyphenation_code))
       h = h->next;
     int len = 0;
     // Locate hyphenable points within a (subset of) an input word.
@@ -4419,7 +4419,7 @@ void hyphenate(hyphen_list *h, unsigned flags)
     char *bufp = hbuf + 1;
     hyphen_list *tem;
     for (tem = h; tem && len < WORD_MAX; tem = tem->next) {
-      if (tem->hyphenation_code != 0)
+      if (tem->hyphenation_code != 0U)
 	bufp[len++] = tem->hyphenation_code;
       else
 	break;

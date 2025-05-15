@@ -212,7 +212,7 @@ inline bool charinfo::is_special()
 inline charinfo *charinfo::get_translation(bool for_transparent_throughput)
 {
   return ((for_transparent_throughput && !is_transparently_translatable)
-	  ? 0
+	  ? 0 /* nullptr */
 	  : translation);
 }
 
@@ -228,7 +228,7 @@ inline unsigned char charinfo::get_ascii_code()
 
 inline unsigned char charinfo::get_asciify_code()
 {
-  return (translatable_as_input ? asciify_code : 0);
+  return (translatable_as_input ? asciify_code : 0U);
 }
 
 inline void charinfo::set_flags(unsigned int c)

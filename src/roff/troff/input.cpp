@@ -8110,7 +8110,7 @@ static void set_hyphenation_codes()
       error("cannot use the hyphenation code of a numeral");
       break;
     }
-    unsigned char new_code = '\0';
+    unsigned char new_code = 0U;
     charinfo *cisrc = tok.get_char();
     if (cisrc != 0 /* nullptr */)
       // Common case: assign destination character the hyphenation code
@@ -10135,7 +10135,7 @@ int charinfo::next_index = 0;
 
 charinfo::charinfo(symbol s)
 : translation(0 /* nullptr */), mac(0 /* nullptr */),
-  special_translation(TRANSLATE_NONE), hyphenation_code(0),
+  special_translation(TRANSLATE_NONE), hyphenation_code(0U),
   flags(0), ascii_code(0), asciify_code(0),
   is_not_found(false), is_transparently_translatable(true),
   translatable_as_input(false), mode(CHAR_NORMAL), nm(s)
@@ -10161,11 +10161,11 @@ void charinfo::set_translation(charinfo *ci, int tt, int ti)
 {
   translation = ci;
   if (ci && ti) {
-    if (hyphenation_code != 0)
+    if (hyphenation_code != 0U)
       ci->set_hyphenation_code(hyphenation_code);
-    if (asciify_code != 0)
+    if (asciify_code != 0U)
       ci->set_asciify_code(asciify_code);
-    else if (ascii_code != 0)
+    else if (ascii_code != 0U)
       ci->set_asciify_code(ascii_code);
     ci->make_translatable_as_input();
   }

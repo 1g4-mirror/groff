@@ -3103,7 +3103,7 @@ enum break_char_type {
 node *break_char_node::add_self(node *n, hyphen_list **p)
 {
   bool have_space_node = false;
-  assert(0 == (*p)->hyphenation_code);
+  assert(0U == (*p)->hyphenation_code);
   if (break_code & ALLOWS_BREAK_BEFORE) {
     if (((*p)->is_breakable)
 	|| (break_code & IGNORES_SURROUNDING_HYPHENATION_CODES)) {
@@ -4733,9 +4733,9 @@ hyphenation_type composite_node::get_hyphenation_type()
 void composite_node::asciify(macro *m)
 {
   unsigned char c = ci->get_asciify_code();
-  if (0 == c)
+  if (0U == c)
     c = ci->get_ascii_code();
-  if (c != 0) {
+  if (c != 0U) {
     m->append(c);
     delete this;
   }
@@ -6142,7 +6142,7 @@ node *overstrike_node::add_self(node *more_nodes, hyphen_list **p)
 
 hyphen_list *overstrike_node::get_hyphen_list(hyphen_list *tail, int *)
 {
-  return new hyphen_list(0, tail);
+  return new hyphen_list(0U, tail);
 }
 
 bool bracket_node::is_same_as(node *nd)

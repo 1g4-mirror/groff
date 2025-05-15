@@ -1,5 +1,22 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix code style nit; use unsigned integer literals when
+	assigning to or comparing with hyphenation codes, which are of
+	type `unsigned char`.
+
+	* src/roff/troff/charinfo.h (charinfo_node::get_asciify_code):
+	* src/roff/troff/env.cpp (environment::hyphenate_line)
+	(add_hyphenation_exceptions)
+	(hyphenate):
+	* src/roff/troff/input.cpp (set_hyphenation_codes)
+	(charinfo::charinfo)
+	(charinfo::set_translation):
+	* src/roff/troff/node.cpp (break_char_node::add_self)
+	(composite_node::asciify)
+	(overstrike_node::get_hyphen_list): Do it.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Fix code style nits.
 	(font_info::get_tfont)
 	(tfont::get_lig)
