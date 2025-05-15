@@ -1,5 +1,24 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Continue fixing Savanah #64104 after two years.
+
+	* src/roff/troff/input.cpp (assign_control_character): Fix bug
+	when `cc` request given no arguments; don't try to make the
+	control character `\` (which fails unless the user has already
+	changed the escape character).  Make it `.` instead, as
+	documented.
+	(assign_no_break_control_character): Fix bug when `c2` request
+	given no arguments; don't try to make the no-break control
+	character `\` (which fails unless the user has already changed
+	the escape character).  Make it `'` instead, as documented.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?64104>.
+	Problem introduced by me in a branch on 7 March 2023, but not
+	merged onto the trunk until 10 July of that year, after the
+	groff 1.23.0 release (fortunately).
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	src/roff/troff/input.cpp: Fix code style nit.
 
 	* src/roff/troff/input.cpp (token::next, exit_troff): Assign

@@ -257,7 +257,7 @@ void assign_control_character()
       cc = tok.ch();
   }
   else
-    cc = '\\';
+    cc = '.';
   bool do_nothing = false;
   char already_ec[] = "the escape character is already";
   char already_nbcc[] = "the no-break control character is already";
@@ -294,7 +294,7 @@ void assign_no_break_control_character()
       nbcc = tok.ch();
   }
   else
-    nbcc = '\\';
+    nbcc = '\'';
   bool do_nothing = false;
   char already_ec[] = "the escape character is already";
   char already_cc[] = "the (breaking) control character is already";
