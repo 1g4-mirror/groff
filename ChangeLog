@@ -3,7 +3,8 @@
 	* src/roff/troff/input.cpp (charinfo::charinfo)
 	(charinfo::get_unicode_code): Fix code style nit.  Use unsigned
 	integer literals when initializing and comparing to character
-	flags and "ASCII codes", which are of type `unsigned int`.
+	flags, "ASCII codes", and "asciify codes" which are of type
+	`unsigned int`.
 
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
