@@ -3054,8 +3054,6 @@ static int transparent_translate(int cc)
       int c = ci->get_ascii_code();
       if (c != '\0')
 	return c;
-      // TODO: When Savannah #63074 is fixed, the user will have a way
-      // to avoid this error.
       error("cannot translate %1 to special character '%2' in"
 	    " device-independent output", input_char_description(cc),
 	    ci->nm.contents());
