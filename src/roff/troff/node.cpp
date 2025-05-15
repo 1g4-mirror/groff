@@ -299,8 +299,10 @@ int env_get_zoom(environment *env)
 tfont *font_info::get_tfont(font_size fs, int height, int slant,
 			    int fontno)
 {
-  if (last_tfont == 0 || fs != last_size
-      || height != last_height || slant != last_slant
+  if (0 /* nullptr */ == last_tfont
+      || fs != last_size
+      || height != last_height
+      || slant != last_slant
       || global_ligature_mode != last_ligature_mode
       || global_kern_mode != last_kern_mode
       || fontno != number) {
@@ -668,7 +670,7 @@ symbol SYMBOL_Fl("Fl");
 
 charinfo *tfont::get_lig(charinfo *c1, charinfo *c2)
 {
-  if (ligature_mode == 0)
+  if (0 == ligature_mode)
     return 0 /* nullptr */;
   charinfo *ci = 0 /* nullptr */;
   if (c1->get_ascii_code() == 'f') {
@@ -1060,9 +1062,9 @@ void troff_output_file::flush_tbuf()
     return;
   }
 
-  if (tbuf_len == 0)
+  if (0 == tbuf_len)
     return;
-  if (tbuf_kern == 0)
+  if (0 == tbuf_kern)
     put('t');
   else {
     put('u');
@@ -1117,7 +1119,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
     else {
       put('C');
       const char *s = ci->nm.contents();
-      if (s[1] == 0) {
+      if (0 == s[1]) {
 	put('\\');
 	put(s[0]);
       }
@@ -1194,7 +1196,7 @@ void troff_output_file::put_char(charinfo *ci, tfont *tf,
     else {
       put('C');
       const char *s = ci->nm.contents();
-      if (s[1] == 0) {
+      if (0 == s[1]) {
 	put('\\');
 	put(s[0]);
       }
@@ -1283,7 +1285,7 @@ void troff_output_file::set_font(tfont *tf)
   int height = tf->get_height();
   if (current_height != height) {
     put("x Height ");
-    put(height == 0 ? current_size : height);
+    put((0 == height) ? current_size : height);
     put('\n');
     current_height = height;
   }
@@ -1619,7 +1621,7 @@ void troff_output_file::really_copy_file(hunits x, vunits y,
   do_motion();
   errno = 0;
   FILE *ifp = include_search_path.open_file_cautious(filename);
-  if (ifp == 0)
+  if (0 /* nullptr */ == ifp)
     error("cannot open '%1': %2", filename, strerror(errno));
   else {
     int c;
@@ -2644,7 +2646,7 @@ node *node::add_discretionary_hyphen()
     glyph_node *gn = new glyph_node(soft_hyphen_char, tf, gcol, fcol,
 				    state, div_nest_level);
     node *n1 = n->merge_glyph_node(gn);
-    if (n1 == 0 /* nullptr */) {
+    if (0 /* nullptr */ == n1) {
       gn->next = n;
       n1 = gn;
     }
@@ -3101,7 +3103,7 @@ enum break_char_type {
 node *break_char_node::add_self(node *n, hyphen_list **p)
 {
   bool have_space_node = false;
-  assert((*p)->hyphenation_code == 0);
+  assert(0 == (*p)->hyphenation_code);
   if (break_code & ALLOWS_BREAK_BEFORE) {
     if (((*p)->is_breakable)
 	|| (break_code & IGNORES_SURROUNDING_HYPHENATION_CODES)) {
@@ -4098,7 +4100,7 @@ void node::split(int /*where*/, node ** /*prep*/, node ** /*postp*/)
 
 void space_node::split(int where, node **pre, node **post)
 {
-  assert(where == 0);
+  assert(0 == where);
   *pre = next;
   *post = 0 /* nullptr */;
   delete this;
@@ -4107,7 +4109,7 @@ void space_node::split(int where, node **pre, node **post)
 static void node_list_split(node *p, int *wherep,
 			    node **prep, node **postp)
 {
-  if (p == 0)
+  if (0 /* nullptr */ == p)
     return;
   int nb = p->nbreaks();
   node_list_split(p->next, wherep, prep, postp);
@@ -4129,7 +4131,7 @@ static void node_list_split(node *p, int *wherep,
 void dbreak_node::split(int where, node **prep, node **postp)
 {
   assert(where >= 0);
-  if (where == 0) {
+  if (0 == where) {
     *postp = post;
     post = 0 /* nullptr */;
     if (0 /* nullptr */ == pre)
@@ -4731,7 +4733,7 @@ hyphenation_type composite_node::get_hyphenation_type()
 void composite_node::asciify(macro *m)
 {
   unsigned char c = ci->get_asciify_code();
-  if (c == 0)
+  if (0 == c)
     c = ci->get_ascii_code();
   if (c != 0) {
     m->append(c);
@@ -5127,7 +5129,7 @@ void hline_node::tprint(troff_output_file *out)
     return;
   }
   int i = int(x / w);
-  if (i == 0) {
+  if (0 == i) {
     hunits xx = x - w;
     hunits xx2 = (xx / 2);
     out->right(xx2);
@@ -5165,7 +5167,7 @@ void vline_node::tprint(troff_output_file *out)
     y = -y;
     int i = y / h;
     vunits rem = y - i*h;
-    if (i == 0) {
+    if (0 == i) {
       out->right(nodes->width());
       out->down(-rem);
     }
@@ -5191,7 +5193,7 @@ void vline_node::tprint(troff_output_file *out)
   else {
     int i = y / h;
     vunits rem = y - i*h;
-    if (i == 0) {
+    if (0 == i) {
       out->down(rem);
       out->right(nodes->width());
     }
@@ -5242,7 +5244,7 @@ void overstrike_node::tprint(troff_output_file *out)
 
 void bracket_node::tprint(troff_output_file *out)
 {
-  if (nodes == 0)
+  if (0 /* nullptr */ == nodes)
     return;
   int npieces = 0;
   node *tem;
@@ -5598,7 +5600,7 @@ node *node::add_char(charinfo *ci, environment *env,
     else {
       hunits old_width = width();
       node *p = gn->merge_self(this);
-      if (p == 0) {
+      if (0 /* nullptr */ == p) {
 	*widthp += gn->width();
 	gn->next = this;
 	res = gn;
@@ -5642,7 +5644,7 @@ static inline int same_node(node *n1, node *n2)
       return false;
   }
   else
-    return n2 == 0;
+    return 0 /* nullptr */ == n2;
 }
 
 int same_node_list(node *n1, node *n2)

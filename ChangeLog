@@ -1,3 +1,25 @@
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp: Fix code style nits.
+	(font_info::get_tfont)
+	(tfont::get_lig)
+	(troff_output_file::flush_tbuf)
+	(troff_output_file::put_char_width)
+	(troff_output_file::put_char)
+	(troff_output_file::set_font)
+	(troff_output_file::really_copy_file)
+	(node::add_discretionary_hyphen)
+	(break_char_node::add_self)
+	(space_node::split)
+	(node_list_split)
+	(composite_node::asciify)
+	(hline_node::tprint)
+	(vline_node::tprint)
+	(overstrike_node::tprint)
+	(node::add_char)
+	(same_node): Reorder equality comparisons to avoid inadvertent
+	lvalue assignment.
+
 2025-05-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (container_node::dump_node): Give
