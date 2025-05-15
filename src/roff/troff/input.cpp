@@ -2049,7 +2049,7 @@ void token::next()
 	type = TOKEN_END_TRAP;
 	return;
       case LAST_PAGE_EJECTOR:
-	seen_last_page_ejector = 1;
+	seen_last_page_ejector = true;
 	// fall through
       case PAGE_EJECTOR:
 	type = TOKEN_PAGE_EJECTOR;
@@ -2937,10 +2937,10 @@ void exit_troff()
     // TODO: Resolve the follwing case and enable the assertion.
     // $ printf '.DS\n.DE\n' | ./build/test-groff -ms
     // troff: ../src/roff/troff/input.cpp:2937: void exit_troff():
-    //   Assertion `seen_last_page_ejector == 1' failed.
+    //   Assertion `seen_last_page_ejector' failed.
     // .../build/groff: error: troff: Aborted (core dumped)
-    //assert(seen_last_page_ejector == 1);
-    seen_last_page_ejector = 1;	// should be set already
+    //assert(seen_last_page_ejector);
+    seen_last_page_ejector = true;	// should be set already
     topdiv->set_ejecting();
     push_page_ejector();
     topdiv->space(topdiv->get_page_length(), true /* forcing */);

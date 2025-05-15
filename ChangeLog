@@ -1,5 +1,12 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	src/roff/troff/input.cpp: Fix code style nit.
+
+	* src/roff/troff/input.cpp (token::next, exit_troff): Assign
+	Boolean, not integer, literal, to variable of type `bool`.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class real_output_file): Demote
 	member variable `piped` from `int` to `bool`, and rename it
 	to `is_output_piped`.
