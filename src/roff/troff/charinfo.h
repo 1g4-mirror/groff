@@ -48,6 +48,8 @@ public:
   //
   // Keep these symbol names in sync with the subset used in the `enum`
   // `break_char_type`; see "node.cpp".
+  //
+  // C++11: Use `enum : unsigned int`.
   enum {
     ENDS_SENTENCE = 0x01,
     ALLOWS_BREAK_BEFORE = 0x02,
@@ -61,6 +63,8 @@ public:
     IS_INTERWORD_SPACE = 0x200,
     CFLAGS_MAX = 0x2FF
   };
+  //
+  // C++11: Use `enum : unsigned char`.
   enum {
     TRANSLATE_NONE,
     TRANSLATE_SPACE,

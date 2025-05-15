@@ -44,6 +44,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 symbol default_family("T");
 
+// C++11: Use `enum : char`.
+// TODO: Can we move this into a (possibly struct/class-implicit)
+// namespace?
 enum { ADJUST_LEFT = 0,
   ADJUST_BOTH = 1,
   ADJUST_CENTER = 3,
@@ -51,6 +54,9 @@ enum { ADJUST_LEFT = 0,
   ADJUST_MAX = 5
 };
 
+// C++11: Use `enum : unsigned char`.
+// TODO: Can we move this into a (possibly struct/class-implicit)
+// namespace?
 enum {
   // Not all combinations are valid; see hyphenate_request() below.
   HYPHEN_NONE = 0,
