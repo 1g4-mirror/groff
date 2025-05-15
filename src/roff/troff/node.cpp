@@ -743,9 +743,9 @@ tfont::tfont(tfont_spec &spec) : tfont_spec(spec)
 /* output_file */
 
 class real_output_file : public output_file {
-  int piped;
+  bool is_output_piped;		// as with `pi` request
   bool want_page_printed;	// if selected with `troff -o`
-  bool is_output_on;	// controlled by \O[0], \O[1] escape sequences
+  bool is_output_on;		// as by \O[0], \O[1] escape sequences
   virtual void really_transparent_char(unsigned char) = 0;
   virtual void really_print_line(hunits x, vunits y, node *n,
 				 vunits before, vunits after,
@@ -1722,12 +1722,12 @@ real_output_file::real_output_file()
 {
   if (pipe_command) {
     if ((fp = popen(pipe_command, POPEN_WT)) != 0 /* nullptr */) {
-      piped = 1;
+      is_output_piped = true;
       return;
     }
     error("pipe open failed: %1", strerror(errno));
   }
-  piped = 0;
+  is_output_piped = false;
   fp = stdout;
 }
 
@@ -1746,7 +1746,7 @@ real_output_file::~real_output_file()
     fp = 0 /* nullptr */;
     fatal("unable to flush output file: %1", strerror(errno));
   }
-  if (piped) {
+  if (is_output_piped) {
     int result = pclose(fp);
     fp = 0 /* nullptr */;
     if (result < 0)

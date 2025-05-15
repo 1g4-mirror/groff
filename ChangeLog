@@ -1,6 +1,15 @@
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (class real_output_file): Demote
+	member variable `piped` from `int` to `bool`, and rename it
+	to `is_output_piped`.
+	(real_output_file::real_output_file): Track rename and
+	boolification in use of constant literals of Boolean type.
+	(real_output_file::~real_output_file): Track rename.
+
+2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (class real_output_file): Demote
 	member variable `printing` from `int` to `bool`, and rename it
 	to `want_page_printed`.
 	(real_output_file::real_output_file): Track rename and
