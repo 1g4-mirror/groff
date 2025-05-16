@@ -2419,7 +2419,7 @@ node *environment::make_tag(const char *nm, int i)
     macro m;
     m.append_str("devtag:");
     for (const char *p = nm; *p; p++)
-      if (!is_invalid_input_char((unsigned char)*p))
+      if (!is_invalid_input_char(static_cast<unsigned char>(*p)))
 	m.append(*p);
     m.append(' ');
     m.append_int(i);

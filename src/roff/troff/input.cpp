@@ -9132,7 +9132,7 @@ static void set_string(const char *name, const char *value)
 {
   macro *m = new macro;
   for (const char *p = value; *p != 0 /* nullptr */; p++)
-    if (!is_invalid_input_char((unsigned char)*p))
+    if (!is_invalid_input_char(static_cast<unsigned char>(*p)))
       m->append(*p);
   request_dictionary.define(name, m);
 }

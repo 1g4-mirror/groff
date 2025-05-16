@@ -66,7 +66,7 @@ void *dictionary::lookup(symbol s, void *v)
   ++used;
   table[i].v = v;
   table[i].s = s;
-  if ((double)used/(double)size >= threshold || used + 1 >= size) {
+  if ((double(used) / double(size) >= threshold) || used + 1 >= size) {
     int old_size = size;
     size = int(size * factor);
     while (!is_good_size(size))
@@ -76,7 +76,7 @@ void *dictionary::lookup(symbol s, void *v)
     used = 0;
     for (i = 0; i < old_size; i++)
       if (old_table[i].v != 0 /* nullptr */)
-	(void)lookup(old_table[i].s, old_table[i].v);
+	(void) lookup(old_table[i].s, old_table[i].v);
     delete[] old_table;
   }
   return 0 /* nullptr */;

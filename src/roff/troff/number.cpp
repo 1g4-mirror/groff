@@ -650,7 +650,9 @@ units scale(units n, units x, units y)
       return (n * x) / y;
   }
   else {
-    if (-(unsigned)n <= -(unsigned)INT_MIN / x)
+    // I'd prefer to say "(unsigned int(n))", but C++ doesn't seem to
+    // permit function-style construction with a type qualifier.  --GBR
+    if (-(unsigned(n)) <= -(unsigned(INT_MIN)) / x)
       return (n * x) / y;
   }
   double res = n * double(x) / double(y);

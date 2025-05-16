@@ -1,5 +1,19 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/dictionary.cpp (dictionary::lookup):
+	* src/roff/troff/node.cpp (suppress_node::tprint): Favor
+	function-style construction for temporaries over C-style type
+	casts.
+	* src/roff/troff/env.cpp (environment::make_tag):
+	* src/roff/troff/input.cpp (set_string): Favor C++-style
+	`static_cast` over C-style omnipotent casts.
+	* src/roff/troff/mtsm.cpp (state_set::incl, state_set::excl)
+	(state_set::is_in): Discard unnecessary C-style type casts of
+	objects of enumerated type to `int`.  Pre-C++11 `enum`s like
+	these are always backed by `int`s.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.  Give the
 	anonymous `struct` type used for `warning_table` a name, so that
 	it can be passed to a template function in C++98-conformantly.

@@ -554,62 +554,62 @@ state_set::~state_set()
 
 void state_set::incl(bool_value_state b)
 {
-  boolset |= 1 << (int)b;
+  boolset |= 1 << b;
 }
 
 void state_set::incl(int_value_state i)
 {
-  intset |= 1 << (int)i;
+  intset |= 1 << i;
 }
 
 void state_set::incl(units_value_state u)
 {
-  unitsset |= 1 << (int)u;
+  unitsset |= 1 << u;
 }
 
 void state_set::incl(string_value_state s)
 {
-  stringset |= 1 << (int)s;
+  stringset |= 1 << s;
 }
 
 void state_set::excl(bool_value_state b)
 {
-  boolset &= ~(1 << (int)b);
+  boolset &= ~(1 << b);
 }
 
 void state_set::excl(int_value_state i)
 {
-  intset &= ~(1 << (int)i);
+  intset &= ~(1 << i);
 }
 
 void state_set::excl(units_value_state u)
 {
-  unitsset &= ~(1 << (int)u);
+  unitsset &= ~(1 << u);
 }
 
 void state_set::excl(string_value_state s)
 {
-  stringset &= ~(1 << (int)s);
+  stringset &= ~(1 << s);
 }
 
 int state_set::is_in(bool_value_state b)
 {
-  return (boolset & (1 << (int)b)) != 0;
+  return (boolset & (1 << b)) != 0;
 }
 
 int state_set::is_in(int_value_state i)
 {
-  return (intset & (1 << (int)i)) != 0;
+  return (intset & (1 << i)) != 0;
 }
 
 int state_set::is_in(units_value_state u)
 {
-  return (unitsset & (1 << (int)u)) != 0;
+  return (unitsset & (1 << u)) != 0;
 }
 
 int state_set::is_in(string_value_state s)
 {
-  return (stringset & (1 << (int)s)) != 0;
+  return (stringset & (1 << s)) != 0;
 }
 
 void state_set::add(units_value_state, int n)

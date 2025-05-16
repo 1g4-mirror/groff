@@ -4554,7 +4554,7 @@ void suppress_node::tprint(troff_output_file *out)
 	if (len > (namebuflen - 1))
 	  error("constructed file name in suppressed output escape"
 		" sequence is too long (>= %1 bytes); skipping image",
-		(int)namebuflen);
+		int(namebuflen));
 	else
 	  strncpy(name, new_name, (namebuflen - 1));
 	free(new_name);
@@ -4563,7 +4563,7 @@ void suppress_node::tprint(troff_output_file *out)
       else {
 	if (image_filename_len > (namebuflen - 1))
 	  error("file name in suppressed output escape sequence is too"
-		" long (>= %1 bytes); skipping image", (int)namebuflen);
+		" long (>= %1 bytes); skipping image", int(namebuflen));
 	else
 	  strcpy(name, image_filename);
       }
@@ -6512,10 +6512,10 @@ static bool mount_font_no_translate(int n, symbol name,
     if (check_only)
       return fm != 0 /* nullptr */;
     if (0 /* nullptr */ == fm) {
-      (void)font_dictionary.lookup(external_name, &a_char);
+      (void) font_dictionary.lookup(external_name, &a_char);
       return false;
     }
-    (void)font_dictionary.lookup(name, fm);
+    (void) font_dictionary.lookup(name, fm);
   }
   else if (p == &a_char) {
     return false;
@@ -6725,7 +6725,7 @@ font_family *lookup_family(symbol nm)
   font_family *f = (font_family *)family_dictionary.lookup(nm);
   if (!f) {
     f = new font_family(nm);
-    (void)family_dictionary.lookup(nm, f);
+    (void) family_dictionary.lookup(nm, f);
   }
   return f;
 }
