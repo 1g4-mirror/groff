@@ -1,4 +1,4 @@
-# Copyright (C) 2002-2024 Free Software Foundation, Inc.
+# Copyright (C) 2002-2025 Free Software Foundation, Inc.
 # Original Makefile.sub written by Werner Lemberg <wl@gnu.org>.
 # Adapted to Automake by Bertrand Garrigues
 #   (bertrand.garrigues@laposte.net).
@@ -394,7 +394,9 @@ doc/pic.html: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS)
 	$(GROFF_V)$(MKDIR_P) $(doc_builddir) \
 	&& cd $(doc_builddir) \
 	&& $(DOC_GROFF) -pet -P-Ipic -P-Dimg -P-jpic -Thtml -ms \
-	  $(doc_srcdir)/pic.ms > pic.html
+	  $(doc_srcdir)/pic.ms > pic.html.tmp
+	$(AM_V_at)test -f $(doc_builddir)/img/pic-1.png \
+	  && mv $@.tmp $@
 
 # groff(1)'s `-I` implies `-g` and `-s`, so we must depend on grn and
 # soelim even though the document doesn't require them.
@@ -406,7 +408,9 @@ doc/webpage.html: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	&& cd $(doc_builddir) \
 	&& $(DOC_GROFF) -t -I $(doc_srcdir) -P-jwebpage -P-nrb \
 	  -P-Iwebpage -P-Dimg -Thtml -ms $(doc_srcdir)/webpage.ms \
-	  > webpage.html
+	  > webpage.html.tmp
+	$(AM_V_at)test -f $(doc_builddir)/img/webpage-1.png \
+	  && mv $@.tmp $@
 
 # We remove groff.css only from an out-of-source build tree.
 mostlyclean-local: mostlyclean_doc

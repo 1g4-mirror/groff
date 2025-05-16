@@ -1,3 +1,12 @@
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Make build more sensitive to failure of HTML output.
+
+	* doc/doc.am (doc/pic.html, doc/webpage.html): Create output as
+	a ".tmp"-suffixed file at first, then check for the first of
+	multiple associated image files we know should exist, moving the
+	target into place only if it does.
+
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (real_output_file::on)
