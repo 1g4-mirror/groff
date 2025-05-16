@@ -1,5 +1,53 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Fix code style nit.
+	(file_iterator::backtrace)
+	(input_stack::check_end_diversion)
+	(input_stack::shift)
+	(input_stack::get_location)
+	(input_stack::backtrace)
+	(input_stack::set_location)
+	(do_stroke_color)
+	(do_fill_color)
+	(define_color)
+	(do_zero_width_output)
+	(token::next)
+	(do_request)
+	(transparent_translate)
+	(word_space_node::need_reread)
+	(macro::append_str)
+	(string_iterator::fill)
+	(arg_list::arg_list)
+	(macro_iterator::add_arg)
+	(interpolate_macro)
+	(macro_iterator::macro_iterator)
+	(map_composite_character)
+	(composite_glyph_name)
+	(spring_trap)
+	(read_request)
+	(define_character)
+	(remove_character)
+	(do_define_macro)
+	(read_size)
+	(device_macro_request)
+	(device_extension_node::tprint)
+	(line_file)
+	(set_character_flags)
+	(token::add_to_zero_width_node_list)
+	(pipe_output)
+	(in_output_page_list)
+	(do_register_assignment)
+	(main)
+	(read_drawing_command)
+	(do_error)
+	(fatal_with_file_and_line)
+	(error_with_file_and_line)
+	(debug_with_file_and_line): Explicitly compare values of pointer
+	type to null pointer literals instead of letting them pun down
+	to Booleans.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Handle input characters, which are
 	of type `unsigned char`, more scrupulously.  Declare
 	`escape_char` and `saved_escape_char` using that type instead of

@@ -525,7 +525,7 @@ void file_iterator::backtrace()
   int n;
   // Get side effect of filename rewrite if stdin.
   (void) get_location(false /* allow macro */, &f, &n);
-  if (program_name)
+  if (program_name != 0 /* nullptr */)
     errprint("%1: ", program_name);
   errprint("backtrace: %3 '%1':%2\n", f, n,
 	   was_popened ? "pipe" : "file");
@@ -657,7 +657,7 @@ void input_stack::check_end_diversion(input_iterator *t)
 {
   if (t->is_diversion) {
     div_level--;
-    if (diversion_state)
+    if (diversion_state != 0 /* nullptr */)
       delete diversion_state;
     diversion_state = t->diversion_state;
   }
@@ -795,7 +795,7 @@ int input_stack::get_break_flag()
 
 void input_stack::shift(int n)
 {
-  for (input_iterator *p = top; p; p = p->next)
+  for (input_iterator *p = top; p != 0 /* nullptr */; p = p->next)
     if (p->has_args()) {
       p->shift(n);
       return;
@@ -813,7 +813,7 @@ int input_stack::nargs()
 bool input_stack::get_location(bool allow_macro, const char **filenamep,
 			      int *linenop)
 {
-  for (input_iterator *p = top; p; p = p->next)
+  for (input_iterator *p = top; p != 0 /* nullptr */; p = p->next)
     if (p->get_location(allow_macro, filenamep, linenop))
       return true;
   return false;
@@ -821,13 +821,13 @@ bool input_stack::get_location(bool allow_macro, const char **filenamep,
 
 void input_stack::backtrace()
 {
-  for (input_iterator *p = top; p; p = p->next)
+  for (input_iterator *p = top; p != 0 /* nullptr */; p = p->next)
     p->backtrace();
 }
 
 bool input_stack::set_location(const char *filename, int lineno)
 {
-  for (input_iterator *p = top; p; p = p->next)
+  for (input_iterator *p = top; p != 0 /* nullptr */; p = p->next)
     if (p->set_location(filename, lineno))
       return true;
   return false;
@@ -1359,7 +1359,7 @@ void do_stroke_color(symbol nm) // \m
     curenv->set_stroke_color(curenv->get_prev_stroke_color());
   else {
     color *tem = lookup_color(nm);
-    if (tem)
+    if (tem != 0 /* nullptr */)
       curenv->set_stroke_color(tem);
     else
       (void) color_dictionary.lookup(nm, new color(nm));
@@ -1374,7 +1374,7 @@ void do_fill_color(symbol nm) // \M
     curenv->set_fill_color(curenv->get_prev_fill_color());
   else {
     color *tem = lookup_color(nm);
-    if (tem)
+    if (tem != 0 /* nullptr */)
       curenv->set_fill_color(tem);
     else
       (void) color_dictionary.lookup(nm, new color(nm));
@@ -1570,7 +1570,7 @@ static void define_color()
     skip_line();
     return;
   }
-  if (col) {
+  if (col != 0 /* nullptr */) {
     col->nm = color_name;
     (void) color_dictionary.lookup(color_name, col);
   }
@@ -1797,7 +1797,7 @@ static node *do_zero_width_output()
   curenv = oldenv;
   node *rev = env.extract_output_line();
   node *n = 0 /* nullptr */;
-  while (rev) {
+  while (rev != 0 /* nullptr */) {
     node *tem = rev;
     rev = rev->next;
     tem->next = n;
@@ -2130,7 +2130,7 @@ void token::next()
       case ESCAPE_QUESTION:
       ESCAPE_QUESTION:
 	nd = do_non_interpreted();
-	if (nd) {
+	if (nd != 0 /* nullptr */) {
 	  type = TOKEN_NODE;
 	  return;
 	}
@@ -2162,7 +2162,7 @@ void token::next()
 	{
 	  assert(n != 0 /* nullptr */);
 	  token_node *tn = n->get_token_node();
-	  if (tn) {
+	  if (tn != 0 /* nullptr */) {
 	    *this = tn->tk;
 	    delete tn;
 	  }
@@ -2561,10 +2561,10 @@ void token::next()
 	      gn = valid_unicode_code_sequence(sc, 0 /* nullptr */);
 	    if (gn != 0 /* nullptr */) {
 	      const char *gn_decomposed = decompose_unicode(gn);
-	      if (gn_decomposed)
+	      if (gn_decomposed != 0 /* nullptr */)
 		gn = &gn_decomposed[1];
 	      const char *groff_gn = unicode_to_glyph_name(gn);
-	      if (groff_gn)
+	      if (groff_gn != 0 /* nullptr */)
 		nm = symbol(groff_gn);
 	      else {
 		// C++03: new char[strlen(gn) + 1 + 1]();
@@ -3019,7 +3019,7 @@ void do_request()
   want_att_compat_stack.pop();
   request_or_macro *p = lookup_request(nm);
   macro *m = p->to_macro();
-  if (m)
+  if (m != 0 /* nullptr */)
     tok.next();
 }
 
@@ -3050,7 +3050,7 @@ static int transparent_translate(int cc)
     }
     // This is really ugly.
     ci = ci->get_translation(1);
-    if (ci) {
+    if (ci != 0 /* nullptr */) {
       int c = ci->get_ascii_code();
       if (c != '\0')
 	return c;
@@ -3091,7 +3091,7 @@ bool diverted_copy_file_node::need_reread(bool *bolp)
 bool word_space_node::need_reread(bool *)
 {
   if (unformat) {
-    for (width_list *w = orig_width; w; w = w->next)
+    for (width_list *w = orig_width; w != 0 /* nullptr */; w = w->next)
       curenv->space(w->width, w->sentence_width);
     unformat = 0;
     return true;
@@ -3673,7 +3673,7 @@ void macro::append_str(const char *s)
 {
   int i = 0;
 
-  if (s) {
+  if (s != 0 /* nullptr */) {
     while (s[i] != '\0') {
       append(s[i]);
       i++;
@@ -3909,7 +3909,7 @@ int string_iterator::fill(node **np)
     p = bp->s;
   }
   if (*p == '\0') {
-    if (np) {
+    if (np != 0 /* nullptr */) {
       *np = nd->copy();
       if (is_diversion())
 	(*np)->div_nest_level = input_stack::get_div_level();
@@ -4040,7 +4040,7 @@ arg_list::arg_list(const arg_list *al)
   space_follows = al->space_follows;
   arg_list **a = &next;
   arg_list *p = al->next;
-  while (p) {
+  while (p != 0 /* nullptr */) {
     *a = new arg_list(p->mac, p->space_follows);
     p = p->next;
     a = &(*a)->next;
@@ -4117,7 +4117,7 @@ bool macro_iterator::space_follows_arg(int i)
 void macro_iterator::add_arg(const macro &m, int s)
 {
   arg_list **p;
-  for (p = &args; *p; p = &((*p)->next))
+  for (p = &args; *p != 0 /* nullptr */; p = &((*p)->next))
     ;
   *p = new arg_list(m, s);
   ++argc;
@@ -4184,7 +4184,7 @@ static void interpolate_macro(symbol nm, bool do_not_want_next_token)
       buf[2] = '\0';
       r = static_cast<request_or_macro *>
 	  (request_dictionary.lookup(symbol(buf)));
-      if (r) {
+      if (r != 0 /* nullptr */) {
 	macro *m = r->to_macro();
 	if ((0 /* nullptr */ == m) || !m->is_empty()) {
 	  warning(WARN_SPACE, "name '%1' not defined (possibly missing"
@@ -4342,7 +4342,7 @@ macro_iterator::macro_iterator(symbol s, macro &m,
 {
   if (want_arguments_initialized) {
     arg_list *al = input_stack::get_arg_list();
-    if (al) {
+    if (al != 0 /* nullptr */) {
       args = new arg_list(al);
       argc = input_stack::nargs();
     }
@@ -4386,7 +4386,7 @@ static void map_composite_character()
     }
   }
   const char *from_decomposed = decompose_unicode(from_gn);
-  if (from_decomposed)
+  if (from_decomposed != 0 /* nullptr */)
     from_gn = &from_decomposed[1];
   symbol to = get_name();
   if (to.is_null()) {
@@ -4405,7 +4405,7 @@ static void map_composite_character()
     }
   }
   const char *to_decomposed = decompose_unicode(to_gn);
-  if (to_decomposed)
+  if (to_decomposed != 0 /* nullptr */)
     to_gn = &to_decomposed[1];
   if (strcmp(from_gn, to_gn) == 0)
     composite_dictionary.remove(symbol(from_gn));
@@ -4451,16 +4451,16 @@ static symbol composite_glyph_name(symbol nm)
       }
     }
     const char *decomposed = decompose_unicode(u);
-    if (decomposed)
+    if (decomposed != 0 /* nullptr */)
       u = &decomposed[1];
     void *mapped_composite = composite_dictionary.lookup(symbol(u));
-    if (mapped_composite)
+    if (mapped_composite != 0 /* nullptr */)
       u = static_cast<const char *>(mapped_composite);
     glyph_name += u;
   }
   glyph_name += '\0';
   const char *groff_gn = unicode_to_glyph_name(glyph_name.contents());
-  if (groff_gn)
+  if (groff_gn != 0 /* nullptr */)
     return symbol(groff_gn);
   gl.clear();
   gl += 'u';
@@ -4502,7 +4502,7 @@ void spring_trap(symbol nm)
   // because a request name might be replaced by a macro by the time the
   // trap springs.
   macro *m = p->to_macro();
-  if (m)
+  if (m != 0 /* nullptr */)
     input_stack::push(new macro_iterator(nm, *m, "trap-called macro"));
   else
     error("trap failed to spring: '%1' is a request", nm.contents());
@@ -4561,7 +4561,7 @@ void read_request()
       warning(WARN_INPUT, "invalid input character code %1", int(c));
     else {
       if (c == '\n') {
-	if (nl)
+	if (nl != 0 /* nullptr */)
 	  break;
 	else
 	  nl = 1;
@@ -4728,7 +4728,7 @@ void define_character(char_mode mode, const char *font_name)
   }
   // Assign the macro to the character, discarding any previous macro.
   m = ci->set_macro(m, mode);
-  if (m)
+  if (m != 0 /* nullptr */)
     delete m;
   tok.next();
 }
@@ -4828,7 +4828,7 @@ static void remove_character()
 	}
 	else {
 	  macro *m = ci->set_macro(0 /* nullptr */);
-	  if (m)
+	  if (m != 0 /* nullptr */)
 	    delete m;
 	}
       }
@@ -5051,9 +5051,9 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
   if (mode == DEFINE_NORMAL || mode == DEFINE_APPEND) {
     request_or_macro *rm =
       static_cast<request_or_macro *>(request_dictionary.lookup(nm));
-    if (rm)
+    if (rm != 0 /* nullptr */)
       mm = rm->to_macro();
-    if (mm && mode == DEFINE_APPEND)
+    if (mm != 0 /* nullptr */ && mode == DEFINE_APPEND)
       mac = *mm;
   }
   bool reading_beginning_of_input_line = true;
@@ -5772,7 +5772,7 @@ static bool read_size(int *x)
     }
   }
   if (contains_invalid_digit) {
-    if (c)
+    if (c != 0U)
       error("expected valid digit in type size escape sequence, got %1",
 	    input_char_description(c));
     else
@@ -6362,7 +6362,7 @@ static void device_macro_request()
   if (!(s.is_null() || s.is_empty())) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
-    if (m)
+    if (m != 0 /* nullptr */)
       curenv->add_node(new device_extension_node(*m));
     else
       error("cannot interpolate '%1' to device-independent output;"
@@ -6470,7 +6470,7 @@ void device_extension_node::tprint(troff_output_file *out)
   for (;;) {
     int c = iter.get(0);
     if (c != EOF)
-      for (const char *s = ::asciify(c); *s; s++)
+      for (const char *s = ::asciify(c); *s != 0 /* nullptr */; s++)
 	tprint_char(out, *s);
     else
       break;
@@ -7016,7 +7016,7 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
   // and CRs not followed by an LF, so open them in binary mode.
   //
   fp = include_search_path.open_file_cautious(filename, 0, FOPEN_RB);
-  if (fp) {
+  if (fp != 0 /* nullptr */) {
     // After successfully opening the file, acquire the first
     // line, whence we may determine the file format...
     //
@@ -8087,9 +8087,9 @@ static void set_character_flags()
     }
     while (has_arg()) {
       charinfo *ci = tok.get_char(true /* required */);
-      if (ci) {
+      if (ci != 0 /* nullptr */) {
 	charinfo *tem = ci->get_translation();
-	if (tem)
+	if (tem != 0 /* nullptr */)
 	  ci = tem;
 	ci->set_flags(flags);
       }
@@ -8425,7 +8425,7 @@ bool token::add_to_zero_width_node_list(node **pp)
   default:
     return false;
   }
-  if (n) {
+  if (n != 0 /* nullptr */) {
     n->next = *pp;
     *pp = n;
   }
@@ -8733,7 +8733,7 @@ void pipe_output()
     skip_line();
     return;
   }
-  if (the_output) {
+  if (the_output != 0 /* nullptr */) {
     error("cannot honor pipe request: output already started");
     skip_line();
     return;
@@ -8904,7 +8904,9 @@ bool in_output_page_list(int n)
 {
   if (!output_page_list)
     return true;
-  for (page_range *p = output_page_list; p; p = p->next)
+  for (page_range *p = output_page_list;
+       p != 0 /* nullptr */;
+       p = p->next)
     if (p->contains(n))
       return true;
   return false;
@@ -9111,7 +9113,7 @@ static void do_register_assignment(const char *s)
 static void set_string(const char *name, const char *value)
 {
   macro *m = new macro;
-  for (const char *p = value; *p; p++)
+  for (const char *p = value; *p != 0 /* nullptr */; p++)
     if (!is_invalid_input_char((unsigned char)*p))
       m->append(*p);
   request_dictionary.define(name, m);
@@ -9200,7 +9202,7 @@ int main(int argc, char **argv)
   hresolution = vresolution = 1;
   // restore $PATH if called from groff
   char* groff_path = getenv("GROFF_PATH__");
-  if (groff_path) {
+  if (groff_path != 0 /* nullptr */) {
     string e = "PATH";
     e += '=';
     if (*groff_path)
@@ -9369,7 +9371,7 @@ int main(int argc, char **argv)
   int i;
   int j = 1;
   if (font::style_table)
-    for (i = 0; font::style_table[i]; i++)
+    for (i = 0; font::style_table[i] != 0 /* nullptr */; i++)
       // Mounting a style can't actually fail due to a bad style name;
       // that's not determined until the full font name is resolved.
       // The DESC file also can't provoke a problem by requesting over a
@@ -9377,7 +9379,7 @@ int main(int argc, char **argv)
       if (!mount_style(j++, symbol(font::style_table[i])))
 	warning(WARN_FONT, "cannot mount style '%1' directed by 'DESC'"
 		" file for device '%2'", font::style_table[i], device);
-  for (i = 0; font::font_name_table[i]; i++, j++)
+  for (i = 0; font::font_name_table[i] != 0 /* nullptr */; i++, j++)
     // In the DESC file, a font name of 0 (zero) means "leave this
     // position empty".
     if (strcmp(font::font_name_table[i], "0") != 0)
@@ -9401,13 +9403,13 @@ int main(int argc, char **argv)
   init_reg_requests();
   init_hyphenation_pattern_requests();
   init_environments();
-  while (string_assignments) {
+  while (string_assignments != 0 /* nullptr */) {
     do_string_assignment(string_assignments->s);
     string_list *tem = string_assignments;
     string_assignments = string_assignments->next;
     delete tem;
   }
-  while (register_assignments) {
+  while (register_assignments != 0 /* nullptr */) {
     do_register_assignment(register_assignments->s);
     string_list *tem = register_assignments;
     register_assignments = register_assignments->next;
@@ -9415,7 +9417,7 @@ int main(int argc, char **argv)
   }
   if (!want_startup_macro_files_skipped)
     process_startup_file(INITIAL_STARTUP_FILE);
-  while (macros) {
+  while (macros != 0 /* nullptr */) {
     process_macro_package_argument(macros->s);
     string_list *tem = macros;
     macros = macros->next;
@@ -9859,7 +9861,7 @@ static void read_drawing_command_color_arguments(token &start)
     col = read_rgb(end);
     break;
   }
-  if (col)
+  if (col != 0 /* nullptr */)
     curenv->set_fill_color(col);
   while (tok != start) {
     if (!has_arg()) {
@@ -9973,11 +9975,11 @@ static void do_error(error_type type,
   if (!get_file_line(&filename, &lineno))
     filename = 0 /* nullptr */;
   if (filename != 0 /* nullptr */) {
-    if (program_name)
+    if (program_name != 0 /* nullptr */)
       errprint("%1:", program_name);
     errprint("%1:%2: ", filename, lineno);
   }
-  else if (program_name)
+  else if (program_name != 0 /* nullptr */)
     fprintf(stderr, "%s: ", program_name);
   switch (type) {
   case FATAL:
@@ -10088,7 +10090,7 @@ void fatal_with_file_and_line(const char *filename, int lineno,
 			      const errarg &arg2,
 			      const errarg &arg3)
 {
-  if (program_name)
+  if (program_name != 0 /* nullptr */)
     fprintf(stderr, "%s:", program_name);
   fprintf(stderr, "%s:", filename);
   if (lineno > 0)
@@ -10106,7 +10108,7 @@ void error_with_file_and_line(const char *filename, int lineno,
 			      const errarg &arg2,
 			      const errarg &arg3)
 {
-  if (program_name)
+  if (program_name != 0 /* nullptr */)
     fprintf(stderr, "%s:", program_name);
   fprintf(stderr, "%s:", filename);
   if (lineno > 0)
@@ -10125,7 +10127,7 @@ void debug_with_file_and_line(const char *filename,
 			      const errarg &arg2,
 			      const errarg &arg3)
 {
-  if (program_name)
+  if (program_name != 0 /* nullptr */)
     fprintf(stderr, "%s:", program_name);
   fprintf(stderr, "%s:", filename);
   if (lineno > 0)
