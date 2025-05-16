@@ -7678,8 +7678,7 @@ static void open_file(bool appending)
       errno = 0;
       FILE *fp = fopen(filename, appending ? "a" : "w");
       if (0 /* nullptr */ == fp) {
-	error("cannot open file '%1' for %2: %3", filename,
-	      appending ? "appending" : "writing",
+	error("cannot open file '%1' for %2: %3", filename, mode,
 	      strerror(errno));
 	// If we already had a key of this name in the dictionary, it's
 	// invalid now.

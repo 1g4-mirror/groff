@@ -1,5 +1,11 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (open_file): Un-pessimize.  Stop
+	senselessly recomputing string literal selection when we already
+	have a `char` pointer we can use.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (print_streams): Mark as `static`
 	since this function requires no external linkage.
 
