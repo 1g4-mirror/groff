@@ -1,5 +1,16 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Warn on contradictory `cflags` request argument.
+
+	* src/roff/troff/input.cpp (set_character_flags): Throw warning
+	in category "syntax" and ignore request if contradictory flag
+	bits are set in the first argument.
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document it.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/dictionary.cpp (dictionary::lookup):
 	* src/roff/troff/node.cpp (suppress_node::tprint): Favor
 	function-style construction for temporaries over C-style type

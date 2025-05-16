@@ -8079,6 +8079,17 @@ static void set_character_flags()
       skip_line();
       return;
     }
+    if (((flags & charinfo::ENDS_SENTENCE)
+	  && (flags & charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE))
+	|| ((flags & charinfo::ALLOWS_BREAK_BEFORE)
+	  && (flags & charinfo::PROHIBITS_BREAK_BEFORE))
+	|| ((flags & charinfo::ALLOWS_BREAK_AFTER)
+	  && (flags & charinfo::PROHIBITS_BREAK_AFTER))) {
+      warning(WARN_SYNTAX, "contradictory character flags ignored: "
+	"%1", flags);
+      skip_line();
+      return;
+    }
     // TODO: Check for contradictory character flags.
     if (!has_arg()) {
       warning(WARN_MISSING, "character flags configuration request"

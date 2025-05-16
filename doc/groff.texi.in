@@ -18403,7 +18403,7 @@ A numeric expression was out of range for its context.
 
 @item syntax
 @itemx 128
-A self-contradictory hyphenation mode was requested;
+A self-contradictory hyphenation mode or character flags were requested;
 an empty or incomplete numeric expression was encountered;
 an operand to a numeric operator was missing;
 a recognized but inapposite escape sequence
