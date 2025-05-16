@@ -114,7 +114,7 @@ static bool want_input_ignored = false;
 static void enable_warning(const char *);
 static void disable_warning(const char *);
 
-static int escape_char = '\\';
+static unsigned char escape_char = '\\';
 static symbol end_of_input_macro_name;
 static symbol blank_line_macro_name;
 static symbol leading_spaces_macro_name;
@@ -191,10 +191,10 @@ void chop_macro();	// declare to avoid friend name injection
 
 static void assign_escape_character()
 {
-  char ec = '\0';
+  unsigned char ec = 0U;
   bool is_invalid = false;
   if (has_arg()) {
-    if (tok.ch() == 0)
+    if (tok.ch() == 0U)
       is_invalid = true;
     else
       ec = tok.ch();
@@ -228,11 +228,11 @@ static void assign_escape_character()
 
 void escape_off()
 {
-  escape_char = 0;
+  escape_char = 0U;
   skip_line();
 }
 
-static int saved_escape_char = '\\';
+static unsigned char saved_escape_char = '\\';
 
 void save_escape_char()
 {
@@ -248,10 +248,10 @@ void restore_escape_char()
 
 void assign_control_character()
 {
-  char cc = '\0';
+  unsigned char cc = 0U;
   bool is_invalid = false;
   if (has_arg()) {
-    if (tok.ch() == 0)
+    if (tok.ch() == 0U)
       is_invalid = true;
     else
       cc = tok.ch();
@@ -285,10 +285,10 @@ void assign_control_character()
 
 void assign_no_break_control_character()
 {
-  char nbcc = '\0';
+  unsigned char nbcc = 0U;
   bool is_invalid = false;
   if (has_arg()) {
-    if (tok.ch() == 0)
+    if (tok.ch() == 0U)
       is_invalid = true;
     else
       nbcc = tok.ch();
@@ -1133,7 +1133,7 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
 	c = input_stack::get(nd);
       } while (c == ESCAPE_NEWLINE);
     }
-    if ((c != escape_char) || (escape_char <= 0))
+    if ((c != escape_char) || (0U == escape_char))
       return c;
   again:
     c = input_stack::peek();
@@ -2002,7 +2002,7 @@ void token::next()
   for (;;) {
     node *n = 0 /* nullptr */;
     int cc = input_stack::get(&n);
-    if ((cc != escape_char) || (0 == escape_char)) {
+    if ((cc != escape_char) || 0U == escape_char) {
     handle_ordinary_char:
       switch (cc) {
       case INPUT_NO_BREAK_SPACE:
@@ -6531,7 +6531,7 @@ static void skip_branch()
       ++level;
     else if (c == ESCAPE_RIGHT_BRACE)
       --level;
-    else if ((c == escape_char) && (escape_char > 0))
+    else if ((c == escape_char) && (escape_char != 0U))
       switch (input_stack::get(0 /* nullptr */)) {
       case '{':
 	++level;
@@ -7412,7 +7412,7 @@ void ps_bbox_request() // .psbb
 const char *asciify(int c)
 {
   static char buf[3];
-  buf[0] = (0 == escape_char) ? '\\' : escape_char;
+  buf[0] = (0U == escape_char) ? '\\' : escape_char;
   buf[1] = buf[2] = '\0';
   switch (c) {
   case ESCAPE_QUESTION:
@@ -8319,7 +8319,7 @@ charinfo *token::get_char(bool required, bool suppress_creation)
   if (type == TOKEN_INDEXED_CHAR)
     return get_charinfo_by_index(val, suppress_creation);
   if (type == TOKEN_ESCAPE) {
-    if (escape_char != 0)
+    if (escape_char != 0U)
       return charset_table[escape_char];
     else {
       // XXX: Is this possible?  token::add_to_zero_width_node_list()
@@ -8375,7 +8375,7 @@ bool token::add_to_zero_width_node_list(node **pp)
     n = new dummy_node;
     break;
   case TOKEN_ESCAPE:
-    if (escape_char != 0)
+    if (escape_char != 0U)
       *pp = (*pp)->add_char(charset_table[escape_char], curenv, &w, &s);
     break;
   case TOKEN_HYPHEN_INDICATOR:
@@ -8454,7 +8454,7 @@ void token::process()
     assert(0 == "unhandled end-of-file token");
     break;
   case TOKEN_ESCAPE:
-    if (escape_char != 0)
+    if (escape_char != 0U)
       curenv->add_char(charset_table[escape_char]);
     break;
   case TOKEN_BEGIN_TRAP:
@@ -9663,7 +9663,7 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
   // Don't interpret character definitions in compatible mode.
   int old_want_att_compat = want_att_compat;
   want_att_compat = false;
-  int previous_escape_char = escape_char;
+  unsigned char previous_escape_char = escape_char;
   escape_char = '\\';
   macro *mac = ci->set_macro(0 /* nullptr */);
   assert(mac != 0 /* nullptr */);

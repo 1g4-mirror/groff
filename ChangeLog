@@ -1,5 +1,25 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Handle input characters, which are
+	of type `unsigned char`, more scrupulously.  Declare
+	`escape_char` and `saved_escape_char` using that type instead of
+	`int`.
+	(assign_escape_character): Declare local variable `ec`
+	as `unsigned char` instead of `char` (of undefined signedness).
+	(assign_escape_character, escape_off, assign_control_character)
+	(assign_no_break_control_character, get_copy, token::next)
+	(skip_branch, asciify, token::get_char)
+	(token::add_to_zero_width_node_list, token::process): Use `0U`
+	literal in assignments and comparisons to `unsigned char`
+	objects instead of `0` or '\0'.
+	(get_copy): Use better relational operator with unsigned value
+	when comparing to zero.
+	(charinfo_to_node_list): Declare local variable
+	`previous_escape_char` as `unsigned char` instead of `char` (of
+	undefined signedness).
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (get_copy, token::next, skip_branch)
 	(asciify): Fix code style nits.  Parenthesize formally complex
 	expressions.  Reorder equality comparisons to avoid inadvertent
