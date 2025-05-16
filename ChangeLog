@@ -1,5 +1,29 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Use an _unsigned_ `int` to handle
+	the warning mask.  An unsigned type is more idiomatic for bit
+	vectors like this.  Update type of `warning_mask`, and its type
+	in the `warning_table` structure of anonymous type.  We still
+	can't (or shouldn't) use the most significant bit, because all
+	*roff arithmetic is signed.  That problem is still 11 warning
+	categories away (not counting bit 4, temporarily unused).
+	(lookup_warning): Add `unsigned` to return type.
+	(lookup_warning, warning, output_warning): Use `0U` literal in
+	assignments and comparisons to `unsigned int` objects, and in
+	return values instead of `0`.
+	(enable_warning, disable_warning): Add `unsigned` to type of
+	local variable `mask`.  Explicitly compare value of integral
+	type to integral literal instead of letting it pun down to a
+	Boolean.
+	(do_expr_test): Add `unsigned` to type of local variable
+	`saved_warning_mask`.
+	(init_input_requests): Create `.warn` built-in register as
+	object of type `readonly_mask_register` instead of
+	`readonly_register`, since the storage backing it is of unsigned
+	integral type.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Add new class
 	`readonly_mask_register` so we can represent unsigned values.
 	(class readonly_mask_register): Do it.

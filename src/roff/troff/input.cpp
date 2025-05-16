@@ -107,7 +107,7 @@ char *pipe_command = 0 /* nullptr */;
 charinfo *charset_table[256];
 unsigned char hpf_code_table[256];
 
-static int warning_mask = DEFAULT_WARNING_MASK;
+static unsigned int warning_mask = DEFAULT_WARNING_MASK;
 static bool want_errors_inhibited = false;
 static bool want_input_ignored = false;
 
@@ -1744,7 +1744,7 @@ static const char *do_expr_test() // \B
     return 0 /* nullptr */;
   tok.next();
   // disable all warning and error messages temporarily
-  int saved_warning_mask = warning_mask;
+  unsigned int saved_warning_mask = warning_mask;
   bool saved_want_errors_inhibited = want_errors_inhibited;
   warning_mask = 0;
   want_errors_inhibited = true;
@@ -9630,7 +9630,7 @@ void init_input_requests()
   register_dictionary.define(".R", new readonly_text_register(INT_MAX));
   register_dictionary.define(".U", new readonly_boolean_register(&want_unsafe_requests));
   register_dictionary.define(".V", new readonly_register(&vresolution));
-  register_dictionary.define(".warn", new readonly_register(&warning_mask));
+  register_dictionary.define(".warn", new readonly_mask_register(&warning_mask));
   extern const char *major_version;
   register_dictionary.define(".x", new readonly_text_register(major_version));
   extern const char *revision;
@@ -9900,7 +9900,7 @@ static void read_drawing_command_color_arguments(token &start)
 
 static struct {
   const char *name;
-  int mask;
+  unsigned int mask;
 } warning_table[] = {
   { "char", WARN_CHAR },
   { "range", WARN_RANGE },
@@ -9927,20 +9927,20 @@ static struct {
   { "default", DEFAULT_WARNING_MASK },
 };
 
-static int lookup_warning(const char *name)
+static unsigned int lookup_warning(const char *name)
 {
-  for (unsigned int i = 0;
+  for (unsigned int i = 0U;
        i < sizeof(warning_table)/sizeof(warning_table[0]);
        i++)
     if (strcmp(name, warning_table[i].name) == 0)
       return warning_table[i].mask;
-  return 0;
+  return 0U;
 }
 
 static void enable_warning(const char *name)
 {
-  int mask = lookup_warning(name);
-  if (mask)
+  unsigned int mask = lookup_warning(name);
+  if (mask != 0U)
     warning_mask |= mask;
   else
     error("unrecognized warning category '%1'", name);
@@ -9948,8 +9948,8 @@ static void enable_warning(const char *name)
 
 static void disable_warning(const char *name)
 {
-  int mask = lookup_warning(name);
-  if (mask)
+  unsigned int mask = lookup_warning(name);
+  if (mask != 0U)
     warning_mask &= ~mask;
   else
     error("unrecognized warning category '%1'", name);
@@ -10063,7 +10063,7 @@ int warning(warning_type t,
 	    const errarg &arg2,
 	    const errarg &arg3)
 {
-  if ((t & warning_mask) != 0) {
+  if ((t & warning_mask) != 0U) {
     do_error(WARNING, format, arg1, arg2, arg3);
     return 1;
   }
@@ -10077,7 +10077,7 @@ int output_warning(warning_type t,
 		   const errarg &arg2,
 		   const errarg &arg3)
 {
-  if ((t & warning_mask) != 0) {
+  if ((t & warning_mask) != 0U) {
     do_error(OUTPUT_WARNING, format, arg1, arg2, arg3);
     return 1;
   }
