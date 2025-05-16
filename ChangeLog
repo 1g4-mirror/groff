@@ -1,3 +1,8 @@
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (print_streams): Mark as `static`
+	since this function requires no external linkage.
+
 2025-05-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Continue fixing Savanah #64104 after two years.

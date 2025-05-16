@@ -7640,7 +7640,7 @@ grostream::~grostream()
 
 object_dictionary stream_dictionary(20);
 
-void print_streams()
+static void print_streams()
 {
   object_dictionary_iterator iter(stream_dictionary);
   symbol stream_name;
