@@ -1,5 +1,16 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Add new class
+	`readonly_mask_register` so we can represent unsigned values.
+	(class readonly_mask_register): Do it.
+	(readonly_mask_register::readonly_mask_register): Constructor
+	takes pointer to `unsigned int`.
+	(readonly_mask_register::get_string): Member function
+	dynamically constructs a string representation of unsigned
+	integral value.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Fix code style nit.
 	(file_iterator::backtrace)
 	(input_stack::check_end_diversion)

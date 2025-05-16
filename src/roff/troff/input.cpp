@@ -8659,6 +8659,23 @@ const char *readonly_boolean_register::get_string()
   return i_to_a(*p);
 }
 
+class readonly_mask_register : public reg {
+  unsigned int *mask;
+public:
+  readonly_mask_register(unsigned int *);
+  const char *get_string();
+};
+
+readonly_mask_register::readonly_mask_register(unsigned int * m)
+: mask(m)
+{
+}
+
+const char *readonly_mask_register::get_string()
+{
+  return ui_to_a(*mask);
+}
+
 void abort_request()
 {
   int c;
