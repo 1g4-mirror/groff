@@ -10378,7 +10378,55 @@ void charinfo::dump()
 	   static_cast<int>(special_translation));
   errprint("  hyphenation code: %1\n",
 	   static_cast<int>(hyphenation_code));
-  errprint("  flags: %1\n", flags);
+  errprint("  flags: %1 (", flags);
+  if (0U == flags)
+    errprint("none)\n");
+  else {
+    char none[] = { '\0', '\0' };
+    char comma[] = { ',', ' ' };
+    char *separator = none;
+    if (flags & ENDS_SENTENCE) {
+      errprint("%1ends sentence", separator);
+      separator = comma;
+    }
+    if (flags & ALLOWS_BREAK_BEFORE) {
+      errprint("%1allows break before", separator);
+      separator = comma;
+    }
+    if (flags & ALLOWS_BREAK_AFTER) {
+      errprint("%1allows break after", separator);
+      separator = comma;
+    }
+    if (flags & OVERLAPS_HORIZONTALLY) {
+      errprint("%1overlaps horizontally", separator);
+      separator = comma;
+    }
+    if (flags & OVERLAPS_VERTICALLY) {
+      errprint("%1overlaps vertically", separator);
+      separator = comma;
+    }
+    if (flags & IS_TRANSPARENT_TO_END_OF_SENTENCE) {
+      errprint("%1is transparent to end of sentence", separator);
+      separator = comma;
+    }
+    if (flags & IGNORES_SURROUNDING_HYPHENATION_CODES) {
+      errprint("%1ignores surrounding hyphenation codes", separator);
+      separator = comma;
+    }
+    if (flags & PROHIBITS_BREAK_BEFORE) {
+      errprint("%1prohibits break before", separator);
+      separator = comma;
+    }
+    if (flags & PROHIBITS_BREAK_AFTER) {
+      errprint("%1prohibits break after", separator);
+      separator = comma;
+    }
+    if (flags & IS_INTERWORD_SPACE) {
+      errprint("%1is interword space", separator);
+      separator = comma;
+    }
+    errprint(")\n");
+  }
   errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
   errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
   errprint("  is%1 found\n", is_not_found ? " not" : "");

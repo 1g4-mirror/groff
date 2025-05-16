@@ -1,5 +1,13 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Make reported character flags scrutable.
+
+	* src/roff/troff/input.cpp (charinfo::dump): When dumping
+	character information with the `pchar` request, convert
+	character flags bit mask to comprehensible human language.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Warn on contradictory `cflags` request argument.
 
 	* src/roff/troff/input.cpp (set_character_flags): Throw warning
