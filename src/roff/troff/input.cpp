@@ -37,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stack>
 
 #include "json-encode.h" // json_encode_char()
+#include "lib.h" // array_length()
 
 #include "troff.h"
 #include "dictionary.h"
@@ -9898,7 +9899,7 @@ static void read_drawing_command_color_arguments(token &start)
   have_formattable_input = true;
 }
 
-static struct {
+static struct warning_category {
   const char *name;
   unsigned int mask;
 } warning_table[] = {
@@ -9929,9 +9930,7 @@ static struct {
 
 static unsigned int lookup_warning(const char *name)
 {
-  for (unsigned int i = 0U;
-       i < sizeof(warning_table)/sizeof(warning_table[0]);
-       i++)
+  for (unsigned int i = 0U; i < array_length(warning_table); i++)
     if (strcmp(name, warning_table[i].name) == 0)
       return warning_table[i].mask;
   return 0U;

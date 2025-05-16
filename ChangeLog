@@ -1,5 +1,14 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.  Give the
+	anonymous `struct` type used for `warning_table` a name, so that
+	it can be passed to a template function in C++98-conformantly.
+	Preprocessor-include "lib.h" so we can use `array_length()`.
+	(lookup_warning): Use `array_length()` to compute size of
+	`warning_table` object.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Use an _unsigned_ `int` to handle
 	the warning mask.  An unsigned type is more idiomatic for bit
 	vectors like this.  Update type of `warning_mask`, and its type
