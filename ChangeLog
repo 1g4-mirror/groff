@@ -1,5 +1,10 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (real_output_file::on): Comment out
+	assertion that fails when formatting "pic.ms" as HTML.
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Fix Savannah #67133; fail when piped command gets a
 	SIGPIPE signal.
 

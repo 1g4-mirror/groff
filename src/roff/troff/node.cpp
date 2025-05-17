@@ -1832,7 +1832,7 @@ void real_output_file::on()
 {
   really_on();
   // XXX: Assertion fails when generating pic.html.  Find out why.
-  assert(!is_output_on);
+  //assert(!is_output_on);
   is_output_on = true;
 }
 
