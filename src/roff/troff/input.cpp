@@ -8074,8 +8074,8 @@ static void set_character_flags()
   int flags;
   if (get_integer(&flags)) {
     if ((flags < 0) || (flags > charinfo::CFLAGS_MAX)) {
-      warning(WARN_RANGE, "character flags must be in range 0..%1",
-	      charinfo::CFLAGS_MAX);
+      warning(WARN_RANGE, "character flags must be in range 0..%1,"
+	      " got %2", charinfo::CFLAGS_MAX, flags);
       skip_line();
       return;
     }
@@ -8085,8 +8085,8 @@ static void set_character_flags()
 	  && (flags & charinfo::PROHIBITS_BREAK_BEFORE))
 	|| ((flags & charinfo::ALLOWS_BREAK_AFTER)
 	  && (flags & charinfo::PROHIBITS_BREAK_AFTER))) {
-      warning(WARN_SYNTAX, "contradictory character flags ignored: "
-	"%1", flags);
+      warning(WARN_SYNTAX, "ignoring contradictory character flags: "
+	      "%1", flags);
       skip_line();
       return;
     }

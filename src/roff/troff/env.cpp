@@ -1391,12 +1391,12 @@ void space_size()
   int n;
   if (get_integer(&n)) {
     if (n < 0)
-      warning(WARN_RANGE, "negative word space size ignored: '%1'", n);
+      warning(WARN_RANGE, "ignoring negative word space size: '%1'", n);
     else
       curenv->space_size = n;
     if (has_arg() && get_integer(&n))
       if (n < 0)
-	warning(WARN_RANGE, "negative sentence space size ignored: "
+	warning(WARN_RANGE, "ignoring negative sentence space size: "
 		"'%1'", n);
       else
 	curenv->sentence_space_size = n;
@@ -1753,15 +1753,15 @@ void hyphenate_request()
   int n;
   if (has_arg() && get_integer(&n)) {
     if (n < HYPHEN_NONE) {
-      warning(WARN_RANGE, "negative hyphenation flags ignored: %1", n);
+      warning(WARN_RANGE, "ignoring negative hyphenation flags: %1", n);
     } else if (n > HYPHEN_MAX) {
-      warning(WARN_RANGE, "unknown hyphenation flags ignored (maximum "
-	"%1): %2", HYPHEN_MAX, n);
+      warning(WARN_RANGE, "hyphenation flags must be in range 0..%1,"
+	      " got %2", HYPHEN_MAX, n);
     } else if (((n & HYPHEN_DEFAULT) && (n & ~HYPHEN_DEFAULT))
 	|| ((n & HYPHEN_FIRST_CHAR) && (n & HYPHEN_NOT_FIRST_CHARS))
 	|| ((n & HYPHEN_LAST_CHAR) && (n & HYPHEN_NOT_LAST_CHARS)))
-      warning(WARN_SYNTAX, "contradictory hyphenation flags ignored: "
-	"%1", n);
+      warning(WARN_SYNTAX, "ignoring contradictory hyphenation flags: "
+	      "%1", n);
     else
       curenv->hyphenation_mode = n;
   }
@@ -2710,8 +2710,9 @@ void adjust()
 	if (n < 0)
 	  warning(WARN_RANGE, "negative adjustment mode");
 	else if (n > ADJUST_MAX)
-	  warning(WARN_RANGE, "out-of-range adjustment mode ignored: "
-		  "%1", n);
+	  warning(WARN_RANGE, "adjustment mode must be in range 0..%1"
+		  " (or 'l', 'r', 'c', 'b', or 'n'), got %2",
+		  ADJUST_MAX, n);
 	else
 	  curenv->adjust_mode = n;
       }
