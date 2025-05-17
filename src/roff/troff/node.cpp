@@ -1831,13 +1831,15 @@ void real_output_file::really_put_filename(const char *, int)
 void real_output_file::on()
 {
   really_on();
-  if (!is_output_on)
-    is_output_on = true;
+  // XXX: Assertion fails when generating pic.html.  Find out why.
+  assert(!is_output_on);
+  is_output_on = true;
 }
 
 void real_output_file::off()
 {
   really_off();
+  assert(is_output_on);
   is_output_on = false;
 }
 
