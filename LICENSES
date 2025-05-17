@@ -39,8 +39,9 @@ strictly part of groff.  That is, they are distributed with it and are
 Free Software <https://www.gnu.org/philosophy/free-sw.en.html>, but they
 are not considered essential parts of the distribution.  Further, they
 may bear licenses in addition to the GPL, or the FSF does not administer
-their copyrights.  To determine their copyright status and licensing,
-see the "COPYRIGHT" file in the appropriate subdirectory of contrib/.
+their copyrights.  For convenience, a "COPYRIGHT" file the appropriate
+subdirectory of contrib/ may clarify a contributed component's copyright
+status and licensing.
 
 Some files are part of groff but bear licenses in addition to the GPL,
 or have been placed into the public domain, because they originated
