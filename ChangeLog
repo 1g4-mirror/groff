@@ -35,7 +35,7 @@
 
 	* src/roff/troff/input.cpp: Trivially refactor.  Give the
 	anonymous `struct` type used for `warning_table` a name, so that
-	it can be passed to a template function in C++98-conformantly.
+	it can be passed to a template function C++98-conformantly.
 	Preprocessor-include "lib.h" so we can use `array_length()`.
 	(lookup_warning): Use `array_length()` to compute size of
 	`warning_table` object.
