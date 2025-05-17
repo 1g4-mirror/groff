@@ -188,8 +188,8 @@ Renderings in HTML, TeX DVI, and PDF are also available.
   xdvi doc/groff.dvi
   evince doc/groff.pdf
 
-A compilation of groff's man pages is available in text (with ISO 6429
-escape sequences) and PDF.
+A compilation of groff's man pages is available in text (with ISO 6429/
+ECMA-48 escape sequences) and PDF.
 
   less -R doc/groff-man-pages.utf8.txt
   evince doc/groff-man-pages.pdf
