@@ -4619,6 +4619,38 @@ If this procedure seems complex,
 petition your distributor to revert their remapping of the
 \[ga] and \[aq] characters.
 .RE
+.
+.
+.IP \[bu]
+Escape sequences of the form
+.BI \[rs][ xx ]
+don't format correctly.
+.
+.
+.IP
+The
+.BI \[rs][ xx ]
+special character escape sequence is a
+GNU
+.I troff
+extension also supported by
+.I mandoc,
+Heirloom Doctools
+.I troff,
+and
+.I neatroff.
+.
+Solaris\~10,
+Plan\~9,
+and DWB
+.IR troff s
+don't implement it.
+.
+If your man page requires portability to these formatters,
+spell such escape sequences as
+.RB \[lq]\^ \[rs](\c
+.IR xx \[rq];
+no closing parenthesis is used.
 _endif()dnl
 .
 .
