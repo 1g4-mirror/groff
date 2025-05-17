@@ -38,7 +38,7 @@ Files in the contrib/ subdirectory of the source distribution are not
 strictly part of groff.  That is, they are distributed with it and are
 Free Software <https://www.gnu.org/philosophy/free-sw.en.html>, but they
 are not considered essential parts of the distribution.  Further, they
-may bear licenses other than the GPL or the FSF does not administer
+may bear licenses in addition to the GPL, or the FSF does not administer
 their copyrights.  To determine their copyright status and licensing,
 see the "COPYRIGHT" file in the appropriate subdirectory of contrib/.
 
