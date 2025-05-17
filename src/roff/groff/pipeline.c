@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -327,7 +327,7 @@ int run_pipeline(int ncommands, char ***commands, bool no_pipe)
   return ret;
 }
 
-#else  /* not _WIN32 */
+#else  /* not _WIN32 but __MSDOS__, _UWIN, __CYWGIN__, or __EMX__ */
 
 /* MS-DOS doesn't have 'fork', so we need to simulate the pipe by
    running the programs in sequence with standard streams redirected to
@@ -497,6 +497,7 @@ int run_pipeline(int ncommands, char ***commands, bool no_pipe)
 	pids[i] = -1;
 	--proc_count;
 	if (WIFSIGNALED(status)) {
+	  ret |= 2;
 	  int sig = WTERMSIG(status);
 #ifdef SIGPIPE
 	  if (sig == SIGPIPE) {
@@ -518,13 +519,10 @@ int run_pipeline(int ncommands, char ***commands, bool no_pipe)
 	  }
 	  else
 #endif /* SIGPIPE */
-	  {
 	    c_error("%1: %2%3",
 		    commands[i][0],
 		    strsignal(sig),
 		    WCOREDUMP(status) ? " (core dumped)" : "");
-	    ret |= 2;
-	  }
 	}
 	else if (WIFEXITED(status)) {
 	  int exit_status = WEXITSTATUS(status);

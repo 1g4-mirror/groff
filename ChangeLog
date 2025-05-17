@@ -1,5 +1,33 @@
 2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Fix Savannah #67133; fail when piped command gets a
+	SIGPIPE signal.
+
+	* src/roff/groff/pipeline.c (run_pipeline) [!_WIN32 &&
+	!__MSDOS__ && !_UWIN && !__CYGWIN__ && !__EMX__]:
+	_Unconditionally_ set bit 2 of the return value in the event of
+	_any_ signal hitting a pipelined process.  A workaround that
+	James Clark put in for a SunOS 4.1.1 X11-related bug in groff
+	1.06 (1992) appears to have led us to grief; if any of the child
+	processes in the pipeline being wait(2)ed on was signaled with
+	SIGPIPE, this alteration of the return value was not being done.
+	If that child was the last in the pipeline (gxditview, the code
+	presumes), he walks the list of commands in the pipeline and
+	kill(2)s them all with SIGPIPE.  If a process has multiple fatal
+	signals pending, which one wins?  Apparently, on Linux 5.10, in
+	a fight between SIGPIPE and SIGABRT (raised by abort(3), called
+	by assert(3)), SIGPIPE always wins.  So bit 2 of this function's
+	return value, which (after a left shift) ultimately becomes
+	groff(1)'s exit status, never got set, and so groff happily
+	reported success when it should have screamed hideously of
+	failure.  Likely the SunOS 4 workaround should be ripped out
+	entirely, but this fix adequately detects grohtml failures.
+
+	Fixes <https://savannah.gnu.org/bugs/?67133>.  Problem appears
+	to date back to groff 1.06 (1992).
+
+2025-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Make build more sensitive to failure of HTML output.
 
 	* doc/doc.am (doc/pic.html, doc/webpage.html): Create output as
