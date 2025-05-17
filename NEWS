@@ -114,7 +114,7 @@ troff
 *  GNU troff now implements saturating rather than wrapping integer
    arithmetic.  Where before overflow would cause an error diagnostic
    and abort evaluation of the expression, the formatter now emits a
-   warning diagnostic in the "range" category.
+   warning diagnostic in the "range" category and continues evaluation.
 
 *  GNU troff now strips a leading neutral double quote from the argument
    to the `cf`, `hpf`, `hpfa`, `lf`, `mso`, `msoquiet`, `nx`, `pi`,
@@ -289,7 +289,7 @@ soelim
    to be backslash-escaped.  (It continues to support that syntax, even
    though neither AT&T nor GNU troff ever has.)  You can now embed a
    sequence of leading spaces in the argument by prefixing it with a
-   with a neutral double quote character ("), which the program then
+   with a neutral double quote character ("), which the program
    discards.  These changes are to better align this program's parsing
    rules with the language of the formatter; consider the `ds` and `as`
    requests.
@@ -318,7 +318,7 @@ Macro packages
    and the `.g` register to test whether the formatter claims support
    for groff extensions, then `ie` and `el` again with the `F` groff
    conditional expression operator to check for font availability, and
-   performing font remappings with the groff `ftr` request as desired;
+   to perform font remappings with the groff `ftr` request as desired;
    (2) doing so in your "troffrc" file; or (3) by modifying these macro
    files similarly.  Users of the "dvi" and "lbp" output devices should
    be aware that these devices don't supply full families of monospaced
@@ -738,14 +738,14 @@ Miscellaneous
 
 *  groff's "configure" script now tries harder to determine an
    appropriate paper format for the system; its output reports how it
-   reached its determination.  Any existing "/etc/papersize" file is one
-   of the resources it consults.
+   made its determination.  Any existing "/etc/papersize" file is one of
+   the resources it consults.
 
 *  You can now specify any paper format you like--including the file
    specification "/etc/papersize" for systems using "libpaper"--as the
    default that the groff build writes to generated device description
    files ("DESC") for the "dvi", "lbp", "lj4", "pdf", and "ps" output
-   drivers.  (The paper format must still be valid; see groff_font(5)).
+   drivers.  (The paper format must still be valid; see groff_font(5).)
 
      Example: ./configure PAGE=/etc/papersize --prefix=/opt/gnu
 
@@ -792,8 +792,8 @@ Miscellaneous
    July 2002), incremented from 5.6.1.
 
 *  groff now looks for the Netpbm program pamcut(1) rather than
-   pnmcut(1).  Per upstream, the former was introduced 23 years ago and
-   the latter withdrawn 15 years ago.
+   pnmcut(1).  Per its developers, the former was introduced 23 years
+   ago and the latter withdrawn 15 years ago.
 
 *  The Makefile macro `DEVICE` has been renamed to `DEFAULT_DEVICE`; be
    aware if your builds don't use "ps" as the default output device.
