@@ -1416,7 +1416,7 @@ characters where necessary,
 particularly the hyphen-minus.
 _ifstyle()dnl
 .
-(See section \[lq]Portability\[rq] below.)
+(See subsection \[lq]Portability\[rq] below.)
 .
 URIs can be lengthy;
 rendering them can result in jarring adjustment or variations in line
@@ -4537,7 +4537,7 @@ support all of the special characters
 .BR \[rs](aq ,
 and
 .B \[rs](dq
-described in section \(lqPortability\(rq above.
+described in subsection \(lqPortability\(rq above.
 .
 Solaris\~10,
 DWB,
