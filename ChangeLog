@@ -1,3 +1,32 @@
+2025-05-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Refactor continuous rendering mode to use an "infinite
+	page length" method facilated by the new semantics of the `.R`
+	register.
+
+	* tmac/an.tmac (an-ne): Drop unneeded macro.
+	(an-bp): Rename this...
+	(an*bp): ...to this, define it with `de1` to temporary disable
+	compatibility mode, and replace definition.  No longer altering
+	the page length, it works like `br`, including
+	control-character-sensitive behavior.
+	(an-end): If continously rendering, stop incrementing the page
+	length prior to writing the footer and document separation line,
+	and upon encountering the end of the last document (the input
+	file name register `.F` becomes empty), set the page length to
+	the vertical drawing position.
+	(an-end, TH): Call `an*break-page-with-new-number` only if _not_
+	continuously rendering.
+	(an-set-up-continuous-rendering): Drop macro in favor of
+	open-coded initialization logic.
+	(PT, BT): Stop manipulating the page length when continuously
+	rendering.
+	([initialization]): If continuously rendering, set up
+	replacement macro for `bp` request and set the page length to
+	"infinite".
+
+	Fixes Savannah #65190 (1/2).
+
 2025-05-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Improve warning diagnostics.
