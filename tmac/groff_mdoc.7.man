@@ -908,8 +908,8 @@ manuals to automatically insert the current date when committing.
 This macro is neither callable nor parsed.
 .
 .
-.br
-.ne 5v
+.\"br
+.\"ne 5v
 .It Li .Dt Ar identifier Op Ar section-id \
 Op Ar section-keyword-or-title
 .
@@ -1042,8 +1042,8 @@ attempted,
 is used.
 .
 .
-.br
-.ne 10v \" Keep explanatory paragraph with the following table.
+.\"br
+.\"ne 10v \" Keep explanatory paragraph with the following table.
 .Pp
 The effects of varying
 .Ql .Dt
@@ -1209,8 +1209,8 @@ This macro is neither callable nor parsed.
 .El
 .
 .
-.br
-.ne 4v
+.\"br
+.\"ne 4v
 .Sh "Introduction to manual and general text domains"
 .
 .
@@ -2557,8 +2557,8 @@ X/Open
 .El
 .Pp
 .
-.br
-.ne 4v
+.\"br
+.\"ne 4v
 Miscellaneous
 .Pp
 .Bl -tag -width ".Li \-p1003.1g\-2000" -compact -offset indent
@@ -5213,8 +5213,8 @@ request in
 .Xr groff @MAN7EXT@ ) .
 .
 .
-.br
-.ne 4v
+.\"br
+.\"ne 4v
 .Sh Files
 .
 .Bl -tag
