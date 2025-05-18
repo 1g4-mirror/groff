@@ -112,7 +112,7 @@ comments and nilpotent changes to formatting as meaningful.
 For example,
 it does not know that
 .BR \[rs]h\[aq]3m\[aq] ,
-.BR \[rs]h\[aq](1 * 3m)\[aq] ,
+.BR \[rs]h\[aq](1\~*\~3m)\[aq] ,
 and
 .B \[rs]h\[aq]3m+0\[aq]
 all mean the same thing.
