@@ -266,7 +266,7 @@ if automatic hyphenation is enabled
 option in section \(lqOptions\(rq below).
 .
 An output line may be supplemented with
-.I inter-sentence space,
+.I "inter-sentence space,"
 then potentially
 .I adjusted
 with more space to a consistent length
@@ -277,7 +277,7 @@ option).
 .MR roff @MAN7EXT@
 details these processes.
 .
-Output is prepared for
+The formatter prepares output for
 .I terminals
 or for more capable
 .I typesetters
@@ -285,10 +285,27 @@ that can change the type size and font family.
 .
 .
 .P
-An input line that starts with a dot (.\&)
-or neutral apostrophe (\(aq)
+A
+.I roff
+document can contain
+.I "control lines,"
+which start with a dot
+.RB ( .\& )
+or neutral apostrophe
+.RB ( \(aq ).
+.
+All other input lines are
+.I "text lines"
+to be formatted.
+.
+A
+.I macro
+collects control and/or text lines
+to ease document composition.
+.
+.I man
 is a
-.I control line.
+.I "macro package."
 .
 To call a macro,
 put its name after a dot on a control line.
@@ -305,18 +322,15 @@ unless escaped
 marks the end of the macro call.
 .
 A control line with no macro name on it is called an
-.I empty request;
+.I "empty request;"
 it does nothing.
-.
-.I Text lines
-are input lines that are not control lines.
 .
 .
 .P
 We describe below several
 .I man
 macros that plant one-line
-.I input traps:
+.I "input traps:"
 the next input line that directly produces formatted output is treated
 specially.
 .
@@ -366,9 +380,9 @@ those containing space \" or tab (in Plan 9 troff [only?])
 characters must be double-quoted to be interpreted correctly.
 .
 _endif()dnl
-If an empty macro argument is required,
-specify it with a pair of double quotes
-("").
+If you require an empty macro argument,
+specify it as a pair of neutral double quotes
+.RB ( \(dq\^\(dq ).
 _ifstyle()dnl
 .
 See section \(lqNotes\(rq below for examples of cases where better
@@ -565,8 +579,9 @@ Set
 .I heading-text
 as a section heading.
 .
-If no argument is given,
-the macro plants a one-line input trap;
+Given no argument,
+.B SH
+plants a one-line input trap;
 text on the next line
 .\", which can be formatted with a macro, \" true but discouraged
 becomes
@@ -629,8 +644,9 @@ as a subsection heading indented between a section heading and an
 ordinary paragraph
 .RB ( P ).
 .
-If no argument is given,
-the macro plants a one-line input trap;
+Given no argument,
+.B SS
+plants a one-line input trap;
 text on the next line
 .\", which can be formatted with a macro, \" true but discouraged
 becomes
@@ -712,13 +728,14 @@ before the spaces.
 .
 _endif()dnl
 .IP
+Ninth Edition Unix introduced the
 .\" Also see subsection "History" below...
 .B EX
 and
 .B EE
-are extensions introduced in Ninth Edition Unix.
+extensions.
 .
-Documenter's Workbench,
+Documenter's Workbench (DWB),
 Heirloom Doctools,
 and
 Plan\~9
@@ -726,13 +743,12 @@ Plan\~9
 and
 .I mandoc
 (since 1.12.2)
-also support them.
+support them.
 .
 Solaris
 .I troff \" Solaris
 does not.
-.\" Solaris 10 troff does not support EX/EE.  Neatroff doesn't ship
-.\" (m)an macros.
+.\" Neatroff doesn't ship (m)an macros.
 .
 .
 .TP
@@ -779,8 +795,9 @@ The inset amount corresponding to
 .I inset-level
 is restored.
 .
-If no argument is given,
-the inset level is reduced by\~1.
+Given no argument,
+.B RE
+reduces the inset level by\~1.
 .
 .
 .\" ====================================================================
@@ -1116,7 +1133,7 @@ of synopsis syntax one may encounter.
 \&.IR fallback\-encoding ]
 .EE
 .
-.I (and so on similarly)
+.I "(and so on similarly)"
 .
 .EX
 \&.RI [ file\e\(ti .\e|.\e|.]
@@ -1149,6 +1166,8 @@ of synopsis syntax one may encounter.
 .
 .
 .P
+Given the foregoing input,
+.I "groff man"
 produces the following output.
 .
 .
@@ -1325,7 +1344,7 @@ as follows.
 .
 .
 .P
-.I man
+.I "groff man"
 produces the following result.
 .
 .
@@ -1355,9 +1374,9 @@ _endif()dnl
 are best presented with
 .BR MR .
 .
-Text may be hyperlinked to email addresses with
+Mark email addresses with
 .BR MT / ME
-or other sorts of URI with
+and other sorts of URI with
 .BR UR / UE .
 .
 To hyperlink text,
@@ -1370,10 +1389,10 @@ When device support is unavailable or disabled with the
 .B U
 register
 (see section \[lq]Options\[rq] below),
-.B MT
-and
-.B UR
-URIs are rendered between angle brackets after the linked text.
+.I "groff man"
+renders these URIs between angle brackets
+.RB ( \[la]\~\[ra] )
+after the linked text.
 .
 .
 .P
@@ -1661,9 +1680,6 @@ Italic text may instead render underscored on terminals.
 sets text at a smaller type size,
 which differs visually from regular-sized text only on typesetters.
 .
-It is often necessary to set text in different styles without
-intervening space.
-.
 The macros
 .BR BI ,
 .BR BR ,
@@ -1671,14 +1687,9 @@ The macros
 .BR IR ,
 .BR RB ,
 and
-.BR RI ,
-where \(lqB\(rq,
-\(lqI\(rq,
-and \(lqR\(rq indicate bold,
-italic,
-and roman,
-respectively,
-set their odd- and even-numbered arguments in alternating styles,
+.B RI
+set their odd- and even-numbered arguments
+as text in the alternating styles their names indicate,
 with no space separating them.
 _ifstyle()dnl
 .
@@ -1710,8 +1721,9 @@ Set
 .I text
 in bold.
 .
-If no argument is given,
-the macro plants a one-line input trap;
+Given no argument,
+.B B
+plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set in bold.
@@ -1744,8 +1756,9 @@ Set
 .I text
 in an italic or oblique face.
 .
-If no argument is given,
-the macro plants a one-line input trap;
+Given no argument,
+.B I
+plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set in an italic or oblique face.
@@ -1788,8 +1801,9 @@ Set
 .I text
 one point smaller than the default type size on typesetters.
 .
-If no argument is given,
-the macro plants a one-line input trap;
+Given no argument,
+.B SM
+plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set smaller.
@@ -1877,12 +1891,6 @@ below for approaches.
 _endif()dnl
 .
 .
-.\" XXX: Begin shameful cheat to avoid stranded line in U.S. letter
-.\" PS/PDF output.  --GBR
-.if t \{\
-.  nr saved-PD \n[PD]
-.  nr PD -.025v
-.\}
 .TP
 .BI .BI " bold-text italic-text "\c
 \&.\|.\|.\&
@@ -2001,12 +2009,6 @@ was a fork of AT&T
 by Tim Morgan of the University of California at Irvine
 .EE
 .RE
-.\" XXX: End shameful cheat to avoid stranded line in U.S. letter
-.\" PS/PDF output.  --GBR
-.if t \{\
-.  nr PD \n[saved-PD]
-.  rr saved-PD
-.\}
 .
 .
 _endif()dnl
@@ -2502,21 +2504,21 @@ to ensure that their output lines don't overrun.
 .
 .
 .P
-The two major features that control formatting in the
+In
 .I roff
-language are requests and escape sequences.
+systems,
+elemental typesetting functions called
+.I requests
+and
+.I "escape sequences"
+control formatting operations.
 .
-Since the
-.I man
-macros are implemented in terms of these,
-one can,
-in principle,
-supplement the functionality of
-.I man
-with these lower-level elements where necessary.
+A request appears on a control line.
 .
+An escape sequence starts with a backslash
+.RB ( \(rs )
+and can appear anywhere.
 .
-.P
 However,
 use of
 .I roff
@@ -2529,8 +2531,6 @@ formatters that attempt to interpret page sources.
 .
 (Historically,
 this was commonly attempted for HTML conversion.)
-.
-Requests may make assumptions that do not hold in an HTML environment.
 .
 Many of these programs don't interpret the full
 .I roff
@@ -2615,8 +2615,7 @@ a series of lines ending in backslash-newline appears to
 .I groff
 as a single input line.
 .
-Use this escape sequence to split excessively long input lines for
-document maintenance.
+Splitting excessively long input lines can ease document maintenance.
 .
 .
 .TP
@@ -2796,8 +2795,6 @@ as in a command synopsis.
 .RE
 .
 .
-.br
-.ne 5v
 .IP
 .B \ec
 also helps when changing font styles in
@@ -2806,6 +2803,8 @@ examples,
 since they are not filled.
 .
 .
+.br
+.ne 6v
 .RS
 .IP
 .\" from src/devices/grotty/grotty.1.man
@@ -2825,10 +2824,10 @@ $ \ec
 .\" the case.  However, po4a is confused by \c and refuses to process
 .\" documents using it.  https://github.com/mquinson/po4a/issues/527
 .IP
-Alternatively,
-the
+The
 .B \ef
-font selection escape sequence can be used;
+font selection escape sequence is an alternative to
+.BR \ec ;
 see below.
 .
 Using
@@ -2851,11 +2850,11 @@ Format the
 escape character on the output;
 widely used in man pages to render a backslash glyph.
 .
-.\" Don't bold the .ec request in this discussion; it's not a major
+.\" Don't bold the ec request in this discussion; it's not a major
 .\" topic of _this_ page as it would be in groff(7).  Also, we don't
 .\" want to encourage people to mess with this old kludge by drawing
 .\" attention to it.
-It works reliably as long as the \[lq].ec\[rq] request is not used,
+It works reliably as long as the \[lq]ec\[rq] request is not used,
 which should never happen in man pages,
 and it is slightly more portable than the more explicit
 .B \e(rs
@@ -3116,7 +3115,7 @@ _endif()dnl
 Two macros,
 both GNU extensions,\" from groff 1.19
 are called internally by the
-.I groff man
+.I "groff man"
 package to format page headers and footers and can be redefined by the
 administrator in a site's
 .I man.local
@@ -3128,14 +3127,14 @@ The presentation of
 above describes the default headers and footers.
 .
 Because these macros are hooks for
-.I groff man
+.I "groff man"
 internals,
 man pages have no reason to call them.
 .
-Such hook definitions typically consist of \[lq].sp\[rq] and
-\[lq].tl\[rq] requests.
+Such hook definitions typically consist of \[lq]sp\[rq] and
+\[lq]tl\[rq] requests.
 .
-They must also increase the page length with \[lq].pl\[rq] requests in
+They must also increase the page length with \[lq]pl\[rq] requests in
 continuous rendering mode;
 .B PT
 furthermore has the responsibility of emitting a PDF bookmark after
@@ -3349,8 +3348,9 @@ in bold and
 (on typesetters)
 one point smaller than the default type size.
 .
-If no argument is given,
-the macro plants a one-line input trap;
+Given no argument,
+.B SB
+plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
 is set smaller and in bold.
@@ -3562,7 +3562,7 @@ and
 .BR UR / UE .
 .\" ...along with implementations of OP, EX, and EE.
 .\"
-.\" It's not clear exactly when `OP` showed up in DWB troff.  It wasn't
+.\" It's not clear exactly when OP showed up in DWB troff.  It wasn't
 .\" in 1.0 (1984), but was by the time of the 3.3 release (1992).  Scans
 .\" of DWB manuals online suggest that AT&T did not bother to document
 .\" DWB's man(7) implementation in printed matter (nor its ms(7)).
@@ -3616,7 +3616,7 @@ for left alignment
 .
 Any valid argument to
 .IR groff 's
-\[lq].ad\[rq] request may be used.
+\[lq]ad\[rq] request may be used.
 .
 See
 .MR groff @MAN7EXT@
@@ -3736,7 +3736,7 @@ the default is
 .
 Any valid argument to
 .IR groff 's
-\[lq].ft\[rq] request may be used.
+\[lq]ft\[rq] request may be used.
 .
 See
 .MR groff @MAN7EXT@ .
@@ -3812,7 +3812,7 @@ the default is
 .
 Any valid argument to
 .IR groff 's
-\[lq].ft\[rq] request may be used.
+\[lq]ft\[rq] request may be used.
 .
 If the
 .B MF
@@ -3882,7 +3882,7 @@ calls visible as formatted text.
 and
 .MR grotty @MAN1EXT@
 enable hyperlinks by default
-(the last only if not in legacy output mode).
+(the last only if not in its legacy output mode).
 .
 .
 .TP
@@ -3896,7 +3896,7 @@ as
 and so forth.
 .
 The register tracking the suffixed page letter uses format \(lqa\(rq
-(see the \(lq.af\(rq request in
+(see the \(lqaf\(rq request in
 .MR groff @MAN7EXT@ ).
 .
 _ifstyle()dnl
@@ -4174,13 +4174,12 @@ _
 .
 .
 .IP
-Additionally,
-if a neutral double quote (") is needed in a macro argument,
+If a neutral double quote (") is needed in a macro argument,
 you can use
 .B \(rs(dq
 to get it.
 .
-You should
+Do
 .I not
 use
 .B \(rs(aq
@@ -4191,7 +4190,8 @@ or
 for an ordinary hyphen
 (as in \(lqword-aligned\(rq).
 .
-Review subsection \(lqPortability\(rq above.
+.\" slack wording for managing stranded lines in PS/PDF output
+.\"Review subsection \(lqPortability\(rq above.
 .
 .
 .IP \(bu
@@ -4341,15 +4341,14 @@ doesn't move the inset back to the expected level.
 .
 .
 .IP
-The
-.B RS
-macro takes an inset
-.I amount
-as an argument;
-the
 .B RE
-macro's argument is an inset
-.I level.
+takes an inset
+.I level
+as an argument,
+unlike
+.BR RS 's
+inset
+.I amount.
 .
 .RB \(lq .RE\~1 \(rq
 goes to the level before any
@@ -4496,6 +4495,8 @@ Dots and space are universally supported.
 .\" problems?
 .
 .
+.br
+.ne 4v
 .IP \(bu
 When and how should I use quotation marks?
 .
@@ -4548,8 +4549,11 @@ do not.
 .
 .IP
 Historically,
-man pages used \(ga and \(aq exclusively for directional single
-quotation marks.
+man pages used
+.B \(ga
+and
+.B \(aq
+exclusively for directional single quotation marks.
 .
 However,
 in recent years,
@@ -4559,7 +4563,10 @@ have chosen to override the meanings of these characters in man pages,
 remapping them to their Unicode Basic Latin code points.
 .
 Unfortunately,
-\(ga and \(aq are the
+.B \(ga
+and
+.B \(aq
+are the
 .I only
 reliable means of obtaining directional single quotation marks in AT&T
 .IR troff ; \" AT&T
@@ -4593,7 +4600,6 @@ call as follows.
 \&.\[rs]}
 .EE
 .RE
-.RE
 .
 You must then use the
 .B \[rs]*
@@ -4612,6 +4618,7 @@ retries an update from the repository until it succeeds.
 If this procedure seems complex,
 petition your distributor to revert their remapping of the
 \[ga] and \[aq] characters.
+.RE
 _endif()dnl
 .
 .
