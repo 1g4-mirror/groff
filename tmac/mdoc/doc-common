@@ -217,43 +217,20 @@
 .\" because they might be called from a context where compatibility mode
 .\" is enabled.  For other macros, `de` suffices.
 .
-.\" Define replacements for requests to handle continuous rendering.
-.\"
-.\" This .ne replacement avoids page breaks; instead, the page length is
-.\" increased to the necessary amount (this is needed for tables).
-.
 .eo
-.de doc-ne
-.  ie \n[.$] .nr doc-amount (v;\$*)
-.  el        .nr doc-amount 1v
-.  if (\n[doc-amount] >= \n[.t]) \
-.    pl +(\n[doc-amount]u - \n[.t]u + 1v)
-.  rr doc-amount
-..
-.ec
-.
-.\" This .bp replacement for continuous rendering mode adjusts the page
-.\" length to the current position so that no empty lines are inserted.
-.
-.eo
-.de doc-bp
-.  pl \n[nl]u
+.de1 doc-bp
+.  if \n[.br] .br
 ..
 .ec
 .
 .
-.\" NS doc-set-up-continuous-rendering
-.\"   Move macros into place for continuous rendering.  An end-of-input
-.\"   macro is set up by doc-set-up-titles.
-.de doc-set-up-continuous-rendering
-.  rn ne doc-real-ne
+.\" In continuous rendering mode, make page breaks less potent and the
+.\" page length "infinite".
+.if \n[cR] \{\
 .  rn bp doc-real-bp
-.  rn doc-ne ne
 .  rn doc-bp bp
-..
-.
-.if \n[cR] \
-.  doc-set-up-continuous-rendering
+.  pl \n[.R]u/1v
+.\}
 .
 .
 .\" header assembly macros
@@ -327,7 +304,7 @@
 .    \" Clear the page header trap so it is not sprung with stale
 .    \" information.
 .    ch doc-header
-.    doc-break-page-with-new-number
+.    if !\n[cR] .doc-break-page-with-new-number
 .  \}
 .  if \n[C] .rr P
 .
@@ -1169,15 +1146,6 @@
 .  doc-check-depth
 .
 .  if \n[cR] \{\
-.    \" We might have a pending output line that is not yet broken, and
-.    \" also be 1v from the bottom of the page.  If we break (or flush)
-.    \" the output line now, the page will get ejected afterward and
-.    \" troff will exit because we're in an end-of-input macro--our
-.    \" footer will never be output.  So, if that is the case, further
-.    \" extend the page length by 1v.
-.    if ((\n[.p] - \n[nl]) <= \n[.V]) .pl +1v
-.    br
-.    pl +1v
 .    sp 1v
 .    doc-footer
 .    \" If we're processing multiple documents and have started a new
@@ -1193,7 +1161,11 @@
 .    pl \n[nl]u
 .  \}
 .  ch doc-header
-.  doc-break-page-with-new-number
+.  \" At the end of the last document, the file name becomes empty;
+.  \" force the page length to match the vertical drawing position in
+.  \" continuous rendering mode.
+.  ie \\n[cR] .if '\\n[.F]'' .pl \\n[nl]u
+.  el         .doc-break-page-with-new-number
 ..
 .ec
 .
