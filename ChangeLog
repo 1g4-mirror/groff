@@ -1,5 +1,15 @@
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp: Add `const` qualifier to `char
+	*`-typed globals `macroset_template`, `image_dir`, and
+	`antiAlias`.
+	(make_strike): `const`-qualify `char *` return type.
+	(imageList::createImage): Declare local variable `s` closer to
+	point of use, and `const`-qualify its `char *` type.  Use C++
+	`const_cast` operator when passing it to free(3).
+
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/lib.h (xtmpfile): Update declaration to add
 	`const` qualifier to `char **` argument `namep`.
 	* src/libs/libgroff/tmpfile.cpp (xtmpfile): Do the same for the

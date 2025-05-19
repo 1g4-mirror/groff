@@ -211,16 +211,16 @@ static int image_res = DEFAULT_IMAGE_RES;
 static int vertical_offset = 0;
 static char *image_template = 0 /* nullptr */;	// image file name
 						// template
-static char *macroset_template= 0 /* nullptr */;	// image file
+static const char *macroset_template= 0 /* nullptr */;	// image file
 							// name template
 							// passed to
 							// troff by -D
 static int troff_arg = 0;		// troff arg index
-static char *image_dir = 0 /* nullptr */;	// user-specified image
+static const char *image_dir = 0 /* nullptr */;	// user-specified image
 						// directory
 static int textAlphaBits = MAX_ALPHA_BITS;
 static int graphicAlphaBits = MAX_ALPHA_BITS;
-static char *antiAlias = 0 /* nullptr */;	// anti-alias arguments
+static const char *antiAlias = 0 /* nullptr */;	// anti-alias arguments
 						// to be passed to gs
 static bool want_progress_report = false;	// display page numbers
 						// as they are processed
@@ -424,7 +424,7 @@ void html_system(const char *s, int redirect_stdout)
  *                failure as invariably fatal.
  */
 
-char *make_string(const char *fmt, ...)
+const char *make_string(const char *fmt, ...)
 {
   size_t size = 0;
   char *p = 0 /* nullptr */;
@@ -915,8 +915,6 @@ imageList::~imageList()
 
 int imageList::createPage(int pageno)
 {
-  char *s;
-
   if (currentPageNo == pageno)
     return 0;
 
@@ -941,8 +939,8 @@ int imageList::createPage(int pageno)
 	    pageno);
 #endif
 
-  s = make_string("ps2ps -sPageList=%d %s %s",
-		   pageno, psFileName, psPageName);
+  const char *s = make_string("ps2ps -sPageList=%d %s %s",
+			      pageno, psFileName, psPageName);
   html_system(s, 1);
   assert(strlen(image_gen) > 0);
   s = make_string("echo showpage | "
@@ -960,7 +958,7 @@ int imageList::createPage(int pageno)
 		  imagePageName,
 		  psPageName);
   html_system(s, 1);
-  free(s);
+  free(const_cast<char *>(s));
   currentPageNo = pageno;
   return 0;
 }
@@ -1015,7 +1013,6 @@ int imageList::getMaxX(int pageno)
 void imageList::createImage(imageItem *i)
 {
   if (i->X1 != -1) {
-    char *s;
     int x1 = max(min(i->X1, i->X2) * image_res / postscriptRes
 		   - IMAGE_BORDER_PIXELS,
 		 0);
@@ -1029,19 +1026,19 @@ void imageList::createImage(imageItem *i)
 	     + max(i->Y1, i->Y2) * image_res / postscriptRes
 	     + 1 + IMAGE_BORDER_PIXELS;
     if (createPage(i->pageNo) == 0) {
-      s = make_string("pamcut%s %d %d %d %d < %s "
-		      "| pnmcrop%s " PNMTOOLS_QUIET
-		      "| pnmtopng%s " PNMTOOLS_QUIET " %s"
-		      "> %s",
-		      EXE_EXT,
-		      x1, y1, x2 - x1 + 1, y2 - y1 + 1,
-		      imagePageName,
-		      EXE_EXT,
-		      EXE_EXT,
-		      TRANSPARENT,
-		      i->imageName);
+      const char *s = make_string("pamcut%s %d %d %d %d < %s "
+				  "| pnmcrop%s " PNMTOOLS_QUIET
+				  "| pnmtopng%s " PNMTOOLS_QUIET " %s"
+				  "> %s",
+				  EXE_EXT,
+				  x1, y1, x2 - x1 + 1, y2 - y1 + 1,
+				  imagePageName,
+				  EXE_EXT,
+				  EXE_EXT,
+				  TRANSPARENT,
+				  i->imageName);
       html_system(s, 0);
-      free(s);
+      free(const_cast<char *>(s));
     }
     else {
       fprintf(stderr, "%s: failed to generate image of page %d\n",
