@@ -1045,7 +1045,7 @@ void imageList::createImage(imageItem *i)
   }
   else {
     if (debugging) {
-      fprintf(stderr, "%s: debug: ignoring image as x1 coord is -1\n"
+      fprintf(stderr, "%s: debug: ignoring image as x1 coord is -1\n",
 	      program_name);
       fflush(stderr);
     }
@@ -1821,7 +1821,7 @@ int main(int argc, char **argv)
     sys_fatal("atexit");
   int operand_index = scanArguments(argc, argv);
   image_gen = strsave(get_image_generator());
-  if (0 == image_gen)
+  if (0 /* nullptr */ == image_gen)
     fatal("'image_generator' directive not found in file '%1'",
 	  devhtml_desc);
   postscriptRes = get_resolution();

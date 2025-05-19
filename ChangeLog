@@ -1,3 +1,8 @@
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/html/pre-html.cpp (imageList::createImage)
+	[DEBUGGING]: Fix syntax error in disabled code.
+
 2025-05-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Refactor continuous rendering mode to use an "infinite
