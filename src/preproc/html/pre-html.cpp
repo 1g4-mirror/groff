@@ -61,10 +61,6 @@
 # define PID_T int
 #endif /* not _POSIX_VERSION */
 
-#if 0
-# define DEBUGGING
-#endif
-
 /* Establish some definitions to facilitate discrimination between
    differing runtime environments. */
 
@@ -145,7 +141,6 @@
 
 #endif /* not __MSDOS__ or _WIN32 */
 
-#ifdef DEBUGGING
 // For a DEBUGGING version, we need some additional macros,
 // to direct the captured debugging mode output to appropriately named
 // files in the specified DEBUG_FILE_DIR.
@@ -153,7 +148,6 @@
 # define DEBUG_TEXT(text) #text
 # define DEBUG_NAME(text) DEBUG_TEXT(text)
 # define DEBUG_FILE(name) DEBUG_NAME(DEBUG_FILE_DIR) "/" name
-#endif
 
 extern "C" const char *Version_string;
 
@@ -377,13 +371,11 @@ static char *get_image_generator(void)
 
 void html_system(const char *s, int redirect_stdout)
 {
-#if defined(DEBUGGING)
   if (debugging) {
     fprintf(stderr, "%s: debug: executing: ", program_name);
     fwrite(s, sizeof(char), strlen(s), stderr);
     fflush(stderr);
   }
-#endif
   {
     int saved_stdout = dup(STDOUT_FILENO);
     int fdnull = open(NULL_DEV, O_WRONLY|O_BINARY, 0666);
@@ -933,11 +925,9 @@ int imageList::createPage(int pageno)
     fflush(stderr);
   }
 
-#if defined(DEBUGGING)
   if (debugging)
     fprintf(stderr, "%s: debug: creating page %d\n", program_name,
 	    pageno);
-#endif
 
   const char *s = make_string("ps2ps -sPageList=%d %s %s",
 			      pageno, psFileName, psPageName);
@@ -1294,8 +1284,6 @@ void dump_args(int argc, char *argv[])
  *  print_args - Print arguments as if issued on the command line.
  */
 
-#if defined(DEBUGGING)
-
 void print_args(int argc, char *argv[])
 {
   if (debugging) {
@@ -1305,14 +1293,6 @@ void print_args(int argc, char *argv[])
     fputc('\n', stderr);
   }
 }
-
-#else
-
-void print_args(int, char **)
-{
-}
-
-#endif
 
 int char_buffer::run_output_filter(int filter, int argc, char **argv)
 {
@@ -1491,7 +1471,6 @@ int char_buffer::do_html(int argc, char *argv[])
     }
   }
 
-#if defined(DEBUGGING)
 # define HTML_DEBUG_STREAM  OUTPUT_STREAM(htmlFileName)
   // slight security risk: only enabled if defined(DEBUGGING)
   if (debugging) {
@@ -1500,7 +1479,6 @@ int char_buffer::do_html(int argc, char *argv[])
     emit_troff_output(DEVICE_FORMAT(HTML_OUTPUT_FILTER));
     set_redirection(STDOUT_FILENO, saved_stdout);
   }
-#endif
 
   return run_output_filter(HTML_OUTPUT_FILTER, argc, argv);
 }
@@ -1539,7 +1517,6 @@ int char_buffer::do_image(int argc, char *argv[])
     argc++;
   }
 
-#if defined(DEBUGGING)
 # define IMAGE_DEBUG_STREAM  OUTPUT_STREAM(troffFileName)
   // slight security risk: only enabled if defined(DEBUGGING)
   if (debugging) {
@@ -1548,7 +1525,6 @@ int char_buffer::do_image(int argc, char *argv[])
     emit_troff_output(DEVICE_FORMAT(IMAGE_OUTPUT_FILTER));
     set_redirection(STDOUT_FILENO, saved_stdout);
   }
-#endif
 
   return run_output_filter(IMAGE_OUTPUT_FILTER, argc, argv);
 }
@@ -1626,9 +1602,7 @@ static int scanArguments(int argc, char **argv)
       // handled by post-grohtml (don't write Creator HTML comment)
       break;
     case 'd':
-#if defined(DEBUGGING)
       debugging = true;
-#endif
       break;
     case 'D':
       image_dir = optarg;
@@ -1739,14 +1713,12 @@ static int scanArguments(int argc, char **argv)
 
 static void makeTempFiles(void)
 {
-#if defined(DEBUGGING)
   psFileName = DEBUG_FILE("prehtml-ps");
   regionFileName = DEBUG_FILE("prehtml-region");
   imagePageName = DEBUG_FILE("prehtml-page");
   psPageName = DEBUG_FILE("prehtml-psn");
   troffFileName = DEBUG_FILE("prehtml-troff");
   htmlFileName = DEBUG_FILE("prehtml-html");
-#else /* not DEBUGGING */
   FILE *f;
 
   // psPageName contains a single page of PostScript.
@@ -1774,7 +1746,6 @@ static void makeTempFiles(void)
   if (0 /* nullptr */ == f)
     sys_fatal("xtmpfile");
   fclose(f);
-#endif /* not DEBUGGING */
 }
 
 static bool do_file(const char *filename)

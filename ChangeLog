@@ -1,5 +1,10 @@
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp: Enable debugging code, ripping
+	out use of preprocessor to disable it.
+
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp: Add `const` qualifier to `char
 	*`-typed globals `macroset_template`, `image_dir`, and
 	`antiAlias`.
