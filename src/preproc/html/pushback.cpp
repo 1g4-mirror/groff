@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2025 Free Software Foundation, Inc.
      Written by Gaius Mulley (gaius@glam.ac.uk).
 
 This file is part of groff.
@@ -56,7 +56,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
  *  constructor for pushBackBuffer
  */
 
-pushBackBuffer::pushBackBuffer (char *filename)
+pushBackBuffer::pushBackBuffer (const char *filename)
 {
   charStack = (char *)malloc(MAXPUSHBACKSTACK);
   if (charStack == 0) {

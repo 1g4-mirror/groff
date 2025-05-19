@@ -1,5 +1,24 @@
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/lib.h (xtmpfile): Update declaration to add
+	`const` qualifier to `char **` argument `namep`.
+	* src/libs/libgroff/tmpfile.cpp (xtmpfile): Do the same for the
+	definition.  This way C++ string literals can be passed to these
+	functions without provoking `-Wwrite-string` complaints from the
+	compiler.
+	* src/preproc/html/pre-html.cpp: Add `const` qualifier to `char
+	*` globals `psFileName`, `psPageName`, `regionFileName`,
+	`imagePageName`, `troffFileName`, and `htmlFileName`.
+	(generateImages): Add `const` qualifier to `char *` argument.
+	* src/preproc/html/pushback.h: Add `const` qualifier to `char *`
+	private member variable `fileName` and to argumentful
+	constructor.
+	* src/preproc/html/pushback.cpp
+	(pushBackBuffer::pushBackBuffer): Add `const` qualifier to `char
+	*` argument.
+
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (imageList::createImage)
 	[DEBUGGING]: Fix syntax error in disabled code.
 

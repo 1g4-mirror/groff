@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -75,7 +75,7 @@ int mkstemp(char *tmpl);
 int mksdir(char *tmpl);
 
 #ifdef __cplusplus
-  FILE *xtmpfile(char **namep = 0 /* nullptr */,
+  FILE *xtmpfile(const char **namep = 0 /* nullptr */,
 		 const char *postfix_long = 0 /* nullptr */,
 		 const char *postfix_short = 0 /* nullptr */);
   char *xtmptemplate(const char *postfix_long,

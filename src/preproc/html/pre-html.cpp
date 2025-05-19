@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2000-2025 Free Software Foundation, Inc.
  * Written by Gaius Mulley (gaius@glam.ac.uk).
  *
  * This file is part of groff.
@@ -190,16 +190,22 @@ static int postscriptRes = -1;		// PostScript resolution,
 static int stdoutfd = 1;		// output file descriptor -
 					// normally 1 but might move
 					// -1 means closed
-static char *psFileName = 0 /* nullptr */;	// PostScript file name
-static char *psPageName = 0 /* nullptr */;	// name of file
-						// containing current
-						// PostScript page
-static char *regionFileName = 0 /* nullptr */;	// name of file
-						// containing all image
-						// regions
-static char *imagePageName = 0 /* nullptr */;	// name of bitmap image
-						// file containing
-						// current page
+static const char *psFileName = 0 /* nullptr */;	// PostScript
+							// file name
+static const char *psPageName = 0 /* nullptr */;	// name of file
+							// containing
+							// current
+							// PostScript
+							// page
+static const char *regionFileName = 0 /* nullptr */;	// name of file
+							// containing
+							// all image
+							// regions
+static const char *imagePageName = 0 /* nullptr */;	// name of
+							// bitmap image
+							// file
+							// containing
+							// current page
 static const char *image_device = "pnmraw";
 static int image_res = DEFAULT_IMAGE_RES;
 static int vertical_offset = 0;
@@ -219,13 +225,14 @@ static char *antiAlias = 0 /* nullptr */;	// anti-alias arguments
 static bool want_progress_report = false;	// display page numbers
 						// as they are processed
 static int currentPageNo = -1;		// current image page number
-#if defined(DEBUGGING)
 static bool debugging = false;
-static char *troffFileName = 0 /* nullptr */;	// pre-html output sent
-						// to troff -Tps
-static char *htmlFileName = 0 /* nullptr */;	// pre-html output sent
-						// to troff -Thtml
-#endif
+static const char *troffFileName = 0 /* nullptr */;	// pre-html
+							// output sent
+							// to troff -Tps
+static const char *htmlFileName = 0 /* nullptr */;	// pre-html
+							// output sent
+							// to troff
+							// -Thtml
 static bool need_eqn = false;		// must we preprocess via eqn?
 
 static char *linebuf = 0 /* nullptr */;	// for scanning devps/DESC
@@ -1095,7 +1102,7 @@ static imageList listOfImages;	// list of images defined by region file
  *                   x1,y1--x2,y2 extents of each image.
  */
 
-static void generateImages(char *region_file_name)
+static void generateImages(const char *region_file_name)
 {
   pushBackBuffer *f=new pushBackBuffer(region_file_name);
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -175,7 +175,7 @@ static void add_tmp_file(const char *name)
 
 // Open a temporary file; any failure is fatal.
 
-FILE *xtmpfile(char **namep,
+FILE *xtmpfile(const char **namep,
 	       const char *postfix_long, const char *postfix_short)
 {
   // `xtmptemplate()` allocates storage for `templ` with `new`.
