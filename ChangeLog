@@ -1,5 +1,11 @@
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (do_divert): Fix code style nit.
+	Assign Boolean, not integer, literal, to variable of type
+	`bool`.
+
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #67139.  Make diversion objects track
 	whether they're "boxed" diversions; GNU troff does not deal
 	gracefully with opening a diversion as the regular kind but

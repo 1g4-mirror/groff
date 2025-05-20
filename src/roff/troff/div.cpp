@@ -138,9 +138,9 @@ void do_divert(bool appending, bool boxing)
     curdiv->saved_seen_space = curenv->seen_space;
     curdiv->saved_seen_eol = curenv->seen_eol;
     curdiv->saved_suppress_next_eol = curenv->suppress_next_eol;
-    curenv->seen_break = 0;
-    curenv->seen_space = 0;
-    curenv->seen_eol = 0;
+    curenv->seen_break = false;
+    curenv->seen_space = false;
+    curenv->seen_eol = false;
     if (boxing) {
       curdiv->saved_line = curenv->line;
       curdiv->saved_width_total = curenv->width_total;
