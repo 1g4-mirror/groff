@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -53,9 +53,9 @@ static bool honor_vertical_position_traps = true;
 static vunits truncated_space;
 static vunits needed_space;
 
-diversion::diversion(symbol s)
+diversion::diversion(symbol s, bool boxing)
 : prev(0 /* nullptr */), nm(s), vertical_position(V0),
-  high_water_mark(V0), is_in_no_space_mode(false),
+  high_water_mark(V0), is_box(boxing), is_in_no_space_mode(false),
   saved_seen_break(false), saved_seen_space(false),
   saved_seen_eol(false), saved_suppress_next_eol(false),
   marked_place(V0)
@@ -103,7 +103,13 @@ void do_divert(bool appending, bool boxing)
   tok.skip();
   symbol nm = get_name();
   if (nm.is_null()) {
-    if (curdiv->prev) {
+    // Why the asymmetric diagnostic severity?  See Savannah #67139.
+    if (!(curdiv->is_box) && boxing)
+      fatal("cannot close ordinary diversion with box request");
+    if (curdiv->is_box && !boxing)
+      error("cannot close box diversion with ordinary diversion"
+	    " request");
+    else if (curdiv->prev) {
       curenv->seen_break = curdiv->saved_seen_break;
       curenv->seen_space = curdiv->saved_seen_space;
       curenv->seen_eol = curdiv->saved_seen_eol;
@@ -125,7 +131,7 @@ void do_divert(bool appending, bool boxing)
       warning(WARN_DI, "diversion stack underflow");
   }
   else {
-    macro_diversion *md = new macro_diversion(nm, appending);
+    macro_diversion *md = new macro_diversion(nm, appending, boxing);
     md->prev = curdiv;
     curdiv = md;
     curdiv->saved_seen_break = curenv->seen_break;
@@ -180,8 +186,8 @@ void diversion::need(vunits n)
   }
 }
 
-macro_diversion::macro_diversion(symbol s, bool appending)
-: diversion(s), max_width(H0), diversion_trap(0 /* nullptr */),
+macro_diversion::macro_diversion(symbol s, bool appending, bool boxing)
+: diversion(s, boxing), max_width(H0), diversion_trap(0 /* nullptr */),
   diversion_trap_pos(0)
 {
 #if 0

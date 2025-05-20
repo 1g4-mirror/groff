@@ -1,5 +1,31 @@
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #67139.  Make diversion objects track
+	whether they're "boxed" diversions; GNU troff does not deal
+	gracefully with opening a diversion as the regular kind but
+	trying to close it as a boxed one.
+
+	* src/roff/troff/div.h (class diversion): Add public member
+	variable `is_box`.  Add Boolean argument to constructor with
+	default value of `false`.
+	(class macro_diversion): Add Boolean argument to constructor.
+	* src/roff/troff/div.cpp (diversion::diversion): Constructor now
+	takes `boxing` Boolean argument and sets `is_box` from it in the
+	initializer list.
+	(do_divert): Throw error diagnostics and ignore diversion
+	closure attempt if the request mismatches the box property of
+	the current diversion.  It's a plain error in the `.box foo,
+	.di` case and a fatal one in `.di foo, .box` one because (only)
+	the latter causes invalid memory access.
+
+	Fixes Savannah #67139.  Thanks to an anonymous submitter for the
+	report.  Problem reproducible with groff 1.22.3 (2014), and
+	appears to date back at least to commit dc3c168c3b, 10 October
+	2004.  Another guess would be the introduction of box diversions
+	in groff 1.17 (2001).
+
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #67139 (attempted closure of a
 	regular diversion with the `box` request causes invalid memory
 	access).
