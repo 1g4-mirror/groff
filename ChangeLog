@@ -1,5 +1,15 @@
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #67139 (attempted closure of a
+	regular diversion with the `box` request causes invalid memory
+	access).
+
+	* src/roff/groff/tests/\
+	  do-not-crash-on-mismatched-diversion-request.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp: Enable debugging code, ripping
 	out use of preprocessor to disable it.
 
