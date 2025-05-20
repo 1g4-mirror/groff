@@ -1,5 +1,11 @@
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (dump_node_list)
+	(dump_node_list_in_reverse): Add assertions.  These functions
+	should never be passed null pointers.
+
+2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (do_divert): Fix code style nit.
 	Assign Boolean, not integer, literal, to variable of type
 	`bool`.

@@ -2540,6 +2540,7 @@ void delete_node_list(node *n)
 
 void dump_node_list(node *n)
 {
+  assert(n != 0 /* nullptr */);
   bool need_comma = false;
   fputc('[', stderr);
   while (n != 0 /* nullptr */) {
@@ -2792,6 +2793,7 @@ void container_node::dump_node()
 
 void dump_node_list_in_reverse(node *nlist)
 {
+  assert(nlist != 0 /* nullptr */);
   // It's stored in reverse order already; this puts it forward again.
   std::stack<node *> reversed_node_list;
   node *n = nlist;
