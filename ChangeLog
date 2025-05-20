@@ -27,8 +27,8 @@
 	(do_divert): Throw error diagnostics and ignore diversion
 	closure attempt if the request mismatches the box property of
 	the current diversion.  It's a plain error in the `.box foo,
-	.di` case and a fatal one in `.di foo, .box` one because (only)
-	the latter causes invalid memory access.
+	.di` case and a fatal one in `.di foo, .box` because (only) the
+	latter causes invalid memory access.
 
 	Fixes Savannah #67139.  Thanks to an anonymous submitter for the
 	report.  Problem reproducible with groff 1.22.3 (2014), and
