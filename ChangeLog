@@ -1,3 +1,43 @@
+2025-05-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* src/devices/grotty/tty.cpp: Add support for devices supporting
+	ECMA-48/ISO 6429 SGR 38 and 48 escape sequences for specifying
+	24-bit color values in the RGB color space.  Add global Boolean
+	variable `want_sgr_truecolor`.
+	(class tty_glyph): Promote `back_color_idx` and
+	`fore_color_idx` member variables from `schar` (signed char) to
+	`long`.
+	(class tty_printer): Promote `curr_fore_idx` and `curr_back_idx`
+	member variables from `schar` (signed char) to `long`.  Promote
+	return value of `color_to_idx()` member function from
+	pointer-to-`schar` to pointer-to-`long`.  Promote fourth
+	argument of `has_color()` member function from
+	pointer-to-`schar` to pointer-to-`long`.  Promote first argument
+	of `put_color()` member function from `schar` to `long`.
+	(tty_printer::has_color): Promote `idx` argument from
+	pointer-to-`schar` to pointer-to-`long`.  Guard existing
+	color-definition logic behind test of `want_sgr_truecolor` for
+	falsity; otherwise, compute `idx` using bitwise shifts and
+	addition.
+	(tty_printer::tty_printer): Promote `dummy` local variable
+	from `schar` to `long`.
+	(tty_printer::color_to_idx): Promote return value from
+	pointer-to-`schar` to pointer-to-`long`.  Promote `idx` local
+	variable from `schar` to `long`.
+	(tty_printer::put_color): Promote `color_index` argument from
+	`schar` to `long`.  Guard existing SGR color escape sequence
+	emission logic (which uses SGR 30-37 and 40-47) behind test of
+	`want_sgr_truecolor` for falsity; otherwise, emit SGR 38 and 48
+	sequences.
+	(main): Recognize new `-t` option to select use of SGR 38 and 48
+	escape sequences.  If specified, configure `want_sgr_truecolor`
+	as true.
+	* src/devices/grotty/grotty.1.man (Synopsis, Description)
+	(Options):
+	* src/devices/grotty/tty.cpp (usage): Document new `-t` option.
+
+	Fixes <https://savannah.gnu.org/bugs/?67153>.
+
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grotty/tty.cpp (class tty_printer): Rename member

@@ -68,7 +68,7 @@ static bool do_sgr_italics;
 static bool want_reverse_video_for_italics = false;
 static bool do_reverse_video;
 static bool use_overstriking_drawing_scheme = false;
-
+static bool want_sgr_truecolor = false;
 static void update_options();
 static void usage(FILE *stream);
 
@@ -169,8 +169,8 @@ public:
   int hpos;
   unsigned int code;
   unsigned char mode;
-  schar back_color_idx;
-  schar fore_color_idx;
+  long back_color_idx;
+  long fore_color_idx;
   inline int draw_mode() { return mode & (VDRAW_MODE|HDRAW_MODE); }
   inline int order() {
     return mode & (VDRAW_MODE|HDRAW_MODE|CU_MODE|COLOR_CHANGE); }
@@ -182,20 +182,20 @@ class tty_printer : public printer {
   int nlines;
   int cached_v;
   int cached_vpos;
-  schar curr_fore_idx;
-  schar curr_back_idx;
+  long curr_fore_idx;
+  long curr_back_idx;
   bool is_underlining;
   bool is_boldfacing;
   bool is_continuously_underlining;
   PTABLE(schar) tty_colors;
   void make_underline(int);
   void make_bold(output_character, int);
-  schar color_to_idx(color *);
+  long color_to_idx(color *);
   void add_char(output_character, int, int, int, color *, color *,
 		unsigned char);
   void simple_add_char(const output_character, const environment *);
   char *make_rgb_string(unsigned int, unsigned int, unsigned int);
-  bool has_color(unsigned int, unsigned int, unsigned int, schar *,
+  bool has_color(unsigned int, unsigned int, unsigned int, long *,
 		 schar = DEFAULT_COLOR_IDX);
   void line(int, int, int, int, color *, color *);
   void draw_line(int *, int, const environment *);
@@ -210,7 +210,7 @@ public:
   void change_color(const environment * const);
   void change_fill_color(const environment * const);
   void put_char(output_character);
-  void put_color(schar, int);
+  void put_color(long, int);
   void begin_page(int) { }
   void end_page(int);
   font *make_font(const char *);
@@ -240,19 +240,24 @@ char *tty_printer::make_rgb_string(unsigned int r,
 
 bool tty_printer::has_color(unsigned int r,
 			    unsigned int g,
-			    unsigned int b, schar *idx, schar value)
+			    unsigned int b, long *idx, schar value)
 {
   bool is_known_color = true;
-  char *s = make_rgb_string(r, g, b);
-  schar *i = tty_colors.lookup(s);
-  if (0 /* nullptr */ == i) {
-    is_known_color = false;
-    i = new schar[1];
-    *i = value;
-    tty_colors.define(s, i);
+  if (!want_sgr_truecolor) {
+    char *s = make_rgb_string(r, g, b);
+    schar *i = tty_colors.lookup(s);
+    if (0 /* nullptr */ == i) {
+      is_known_color = false;
+      i = new schar[1];
+      *i = value;
+      tty_colors.define(s, i);
+    }
+    *idx = *i;
+    delete[] s;
   }
-  *idx = *i;
-  delete[] s;
+  else {
+    *idx=((r>>8)<<16) + ((g>>8)<<8) + (b>>8);
+  }
   return is_known_color;
 }
 
@@ -263,7 +268,7 @@ tty_printer::tty_printer() : cached_v(0)
     vline_char = 0x2502;
   }
   // TODO: Skip color setup if terminfo `colors` capability is "-1".
-  schar dummy;
+  long dummy;
   // Create the eight ANSI X3.64/ECMA-48/ISO 6429 standard colors.
   // black, white
   (void) has_color(0, 0, 0, &dummy, 0);
@@ -334,13 +339,13 @@ void tty_printer::make_bold(output_character c, int w)
   }
 }
 
-schar tty_printer::color_to_idx(color *col)
+long tty_printer::color_to_idx(color *col)
 {
   if (col->is_default())
     return DEFAULT_COLOR_IDX;
   unsigned int r, g, b;
   col->get_rgb(&r, &g, &b);
-  schar idx;
+  long idx;
   if (!has_color(r, g, b, &idx)) {
     char *s = col->print_color();
     error("unsupported color '%1' mapped to default", s);
@@ -702,33 +707,48 @@ void tty_printer::put_char(output_character wc)
     putchar(wc);
 }
 
-void tty_printer::put_color(schar color_index, int back)
+void tty_printer::put_color(long color_index, int back)
 {
-  if (color_index == DEFAULT_COLOR_IDX) {
-    putstring(SGR_DEFAULT);
-    // set bold and underline again
-    if (is_boldfacing)
-      putstring(SGR_BOLD);
-    if (is_underlining) {
-      if (do_sgr_italics)
-	putstring(SGR_ITALIC);
-      else if (do_reverse_video)
-	putstring(SGR_REVERSE);
-      else
-	putstring(SGR_UNDERLINE);
+  if (!want_sgr_truecolor) {
+    if (color_index == DEFAULT_COLOR_IDX) {
+      putstring(SGR_DEFAULT);
+      // set bold and underline again
+      if (is_boldfacing)
+        putstring(SGR_BOLD);
+      if (is_underlining) {
+        if (do_sgr_italics)
+          putstring(SGR_ITALIC);
+        else if (do_reverse_video)
+          putstring(SGR_REVERSE);
+        else
+          putstring(SGR_UNDERLINE);
+      }
+      // set other color again
+      back = !back;
+      color_index = back ? curr_back_idx : curr_fore_idx;
     }
-    // set other color again
-    back = !back;
-    color_index = back ? curr_back_idx : curr_fore_idx;
+    if (color_index != DEFAULT_COLOR_IDX) {
+      putstring(CSI);
+      if (back)
+        putchar('4');
+      else
+        putchar('3');
+      putchar(color_index + '0');
+      putchar('m');
+    }
   }
-  if (color_index != DEFAULT_COLOR_IDX) {
+  else {
+    if (color_index == DEFAULT_COLOR_IDX) {
+      putstring(SGR_DEFAULT);
+      back = !back;
+      color_index = back ? curr_back_idx : curr_fore_idx;
+      if (color_index == DEFAULT_COLOR_IDX) {return;}
+    }
     putstring(CSI);
-    if (back)
-      putchar('4');
-    else
-      putchar('3');
-    putchar(color_index + '0');
-    putchar('m');
+    int fb = back ? 48 : 38;
+    static char buf[24];
+    sprintf(buf,"%d;2;%u;%u;%um",fb, color_index>>16, (color_index>>8) & 0xff, color_index & 0xff);
+    putstring(buf);
   }
 }
 
@@ -959,7 +979,7 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  while ((c = getopt_long(argc, argv, ":bBcdfF:hiI:oruUv", long_options,
+  while ((c = getopt_long(argc, argv, ":bBcdfF:hiI:ortuUv", long_options,
 	  NULL)) != EOF)
     switch(c) {
     case 'v':
@@ -1015,6 +1035,10 @@ int main(int argc, char **argv)
       // Ignore \D commands.
       allow_drawing_commands = false;
       break;
+    case 't':
+      // TRUECOLOR
+      want_sgr_truecolor = true;
+      break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
       break;
@@ -1045,7 +1069,7 @@ int main(int argc, char **argv)
 static void usage(FILE *stream)
 {
   fprintf(stream,
-"usage: %s [-dfho] [-i|-r] [-F font-directory] [file ...]\n"
+"usage: %s [-dfhot] [-i|-r] [-F font-directory] [file ...]\n"
 "usage: %s -c [-bBdfhouU] [-F font-directory] [file ...]\n"
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
