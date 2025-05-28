@@ -3504,7 +3504,7 @@ which had been internal to Seventh Edition Unix
 .\" says PWB 2.0 was released in June 1979.  I found no record of later
 .\" releases and cannot account for the discrepancy (field updates?).
 .\" -- GBR
-PWB/UNIX 2.0 (1980) added the
+PWB/Unix 2.0 (1980) added the
 .B Tm
 string.
 .
@@ -4138,7 +4138,7 @@ without knowing whether the installed document uses
 \[lq]printf\|\[rq],
 \[lq]fprintf\|\[rq],
 or even \[lq]c_printf\|\[rq]
-as an identifier.
+as its identifier.
 .
 .
 .IP \[bu] 2n
