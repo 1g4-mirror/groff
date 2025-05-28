@@ -1,4 +1,4 @@
-    Copyright 1989-2023 Free Software Foundation, Inc.
+    Copyright 1989-2025 Free Software Foundation, Inc.
 
     Copying and distribution of this file, with or without modification,
     are permitted in any medium without royalty provided the copyright
@@ -30,6 +30,30 @@ you set up with the "--prefix" option to groff's "configure" script.
 General Problems
 ================
 
+
+
+[groff 1.24.0]
+
+* When using groff 1.23 or earlier to format man(7) pages using the
+  groff 1.24 man(7) idioms for the `SY` and `YS` extension macros to
+  format multiple synopses, two synopses get formatted on the same line.
+
+We changed the behavior of `SY` and `YS` in groff 1.24 to permit the
+document to exercise more control over vertical spacing and indentation.
+As a side effect, pages written using these macros with groff 1.23 and
+earlier behavior in mind will sometimes fail to break the line where
+desired when formatted with groff 1.24.
+
+You can either migrate your man(7) document to use the new `SY` and `YS`
+idioms as documented in the groff 1.24 "NEWS" file and the groff_man(7)
+and groff_man_style(7) pages--the last has examples--or add the
+following line at each place where you expect the break to occur.
+
+--- start ---
+.if (\n(.g&\n(.x=1&\n(.y<24) .YS
+--- end ---
+
+----------------------------------------------------------------------
 
 [groff 1.19.2]
 
