@@ -287,12 +287,12 @@ soelim
 
 *  soelim no longer requires embedded space characters in `so` arguments
    to be backslash-escaped.  (It continues to support that syntax, even
-   though neither AT&T nor GNU troff ever has.)  You can now embed a
-   sequence of leading spaces in the argument by prefixing it with a
-   with a neutral double quote character ("), which the program
-   discards.  These changes are to better align this program's parsing
-   rules with the language of the formatter; consider the `ds` and `as`
-   requests.
+   though neither the AT&T nor GNU troff formatters ever have.)  You can
+   now embed a sequence of leading spaces in the argument by prefixing
+   it with a with a neutral double quote character ("), which the
+   program discards.  These changes are to better align this program's
+   parsing rules with the language of the formatter; consider the `ds`
+   and `as` requests.
 
 Macro packages
 --------------
@@ -307,7 +307,7 @@ Macro packages
 
 *  The device-specific macro files loaded by "troffrc" automatically on
    startup, such as "html.tmac", no longer perform font translations for
-   font names used by varieties of AT&T troff ('C', 'Hb', 'HX', and
+   some font names used by varieties of AT&T troff ('C', 'Hb', 'HX', and
    several others).
 
    These names are not portable: in AT&T troff, the font repertoire,
@@ -585,7 +585,8 @@ Macro packages
 
 *  The m (mm) macro package now supports a user-definable hook macro
    `RPX`, which if defined is called by `RP` in lieu of the latter's
-   normal operation (formatting the reference list caption string `Rp`).
+   normal operation (breaking the page [potentially], and formatting the
+   reference list caption string `Rp`).
 
 *  The m (mm) macro package's `LI` macro now interprets its second
    argument as a Boolean value indicating whether a space should
