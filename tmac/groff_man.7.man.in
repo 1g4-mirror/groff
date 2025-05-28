@@ -745,8 +745,8 @@ and
 (since 1.12.2)
 support them.
 .
-Solaris
-.I troff \" Solaris
+Solaris\~10
+.I troff \" Solaris 10
 does not.
 .\" Neatroff doesn't ship (m)an macros.
 .
@@ -933,11 +933,11 @@ and
 .I mandoc
 (since 1.14.5)
 but not by
-Documenter's Workbench,
+DWB,
 Plan\~9,
 or
-Solaris
-.IR troff s. \" DWB, Plan 9, Solaris
+Solaris\~10
+.IR troff s. \" DWB, Plan 9, Solaris 10
 .
 .
 .IP
@@ -1029,11 +1029,11 @@ and
 .I mandoc
 (since 1.14.5)
 support these GNU extensions;
-Documenter's Workbench,
+DWB,
 Plan\~9,
-and
-Solaris
-.IR troff s \" DWB, Plan 9, Solaris
+or
+Solaris\~10
+.IR troff s \" DWB, Plan 9, Solaris 10
 do not.
 .
 .
@@ -1409,11 +1409,11 @@ since 1.12.3;
 .BR MT / ME
 since 1.14.2)
 but not by
-Documenter's Workbench,
-Plan\~9,
+DWB,
+Plan\~9 (original),
 or
-Solaris
-.IR troff s. \" DWB, Plan 9, Solaris
+Solaris\~10
+.IR troff s. \" DWB, Plan 9, Solaris 10
 .
 Plan\~9 from User Space's
 .I troff \" plan9port
@@ -2353,7 +2353,7 @@ change it restore its original value afterward.
 .
 Better alternatives exist for the rest;
 simply use the
-.BR \[rs][rg] , \" Heirloom Doctools, mandoc, neatmkfn, Plan 9, Solaris
+.BR \[rs][rg] , \" Heirloom Doctools, mandoc, neatmkfn, Plan 9, Solaris 10
 .BR \[rs][lq] , \" Heirloom Doctools, mandoc, neatmkfn, Plan 9
 .BR \[rs][rq] , \" Heirloom Doctools, mandoc, neatmkfn, Plan 9
 and
@@ -2362,7 +2362,7 @@ special character escape sequences directly.
 .
 Unless you are aiming for a pathological level of portability\[em]perhaps
 composing a man page for consumption on simulators of 1980s Unix systems
-(or Solaris
+(or Solaris\~10
 .IR troff ,
 though even it supports
 .BR \[rs][rg] )\[em]\c
@@ -2670,10 +2670,12 @@ and
 .I neatroff
 (commit 399a4936,
 2014-02-17),
-but not by Plan\~9,
-Solaris,
-or Documenter's Workbench
-.IR troff s. \" Plan 9, Solaris, DWB
+but not by
+DWB,
+Plan\~9,
+or
+Solaris\~10
+.IR troff s. \" DWB, Plan 9, Solaris 10
 .\" as of this writing, 2022-08-13
 .
 .
@@ -2714,9 +2716,11 @@ Plan\~9 from User Space
 .I troff \" Plan 9
 (commit 93f8143600,
 2022-08-12),
-but not by Solaris
-or Documenter's Workbench
-.IR troff s. \" Solaris, DWB
+but not by
+DWB
+or
+Solaris\~10
+.IR troff s. \" DWB, Solaris 10
 .\" as of this writing, 2022-08-13
 .\" END Keep in sync with groff.texi node "Other Differences" and
 .\" groff_diff(7).
@@ -2945,8 +2949,12 @@ did not consistently `define' the characters listed below,
 .\" PostScript DESC file example.  In DWB 3.3, \[aq] was supported by the
 .\" "post" device, and \[dq] by "pcl" and "Latin1".
 but its descendants,
-like Plan\~9 or Solaris
-.IR troff , \" Plan 9, Solaris
+like
+DWB,
+Plan\~9,
+or
+Solaris\~10
+.IR troff , \" DWB, Plan 9, Solaris 10
 can be made to support them by defining them in font description files,
 making them aliases of existing glyphs if necessary;
 see
@@ -2962,10 +2970,12 @@ Heirloom Doctools
 .IR troff , \" Heirloom Doctools
 and
 .IR neatroff ,
-but not Documenter's Workbench,
+but not
+DWB,
 Plan\~9,
-or Solaris
-.I troff. \" DWB, Plan 9, Solaris
+or
+Solaris\~10
+.IR troff s. \" DWB, Plan 9, Solaris 10
 .
 .
 .TP
@@ -3296,7 +3306,7 @@ Square brackets in roman surround both arguments.
 .IP
 Use of this quasi-semantic macro,
 .\" https://github.com/n-t-roff/DWB3.3/blob/master/macros/man/an.sr#L37
-an extension originating in Documenter's Workbench
+an extension originating in DWB
 .IR troff ,\" DWB
 is deprecated.
 .
@@ -4540,10 +4550,11 @@ and
 .B \[rs][dq]
 described in subsection \[lq]Portability\[rq] above.
 .
-Solaris\~10,
 DWB,
-and Plan\~9
-.IR troff s \" Solaris, DWB, Plan 9
+Plan\~9,
+and
+Solaris\~10
+.IR troff s \" DWB, Plan 9, Solaris 10
 do not.
 .
 .
@@ -4640,10 +4651,11 @@ Heirloom Doctools
 and
 .I neatroff.
 .
-Solaris\~10,
+DWB,
 Plan\~9,
-and DWB
-.IR troff s
+and
+Solaris\~10
+.IR troff s \" DWB, Plan 9, Solaris 10
 don't implement it.
 .
 If your man page requires portability to these formatters,
