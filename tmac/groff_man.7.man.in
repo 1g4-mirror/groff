@@ -3144,8 +3144,6 @@ man pages have no reason to call them.
 Such hook definitions typically consist of \[lq]sp\[rq] and
 \[lq]tl\[rq] requests.
 .
-They must also increase the page length with \[lq]pl\[rq] requests in
-continuous rendering mode;
 .B PT
 furthermore has the responsibility of emitting a PDF bookmark after
 writing the first page header in a document.
