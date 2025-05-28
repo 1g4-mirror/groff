@@ -63,6 +63,9 @@ Noteworthy incompatible changes
   interpolations remain acceptable, as long as what they interpolate is
   a valid argument to the `ft` request or `\f[xxx]` escape sequence.)
 
+* Support for terminal devices using the CCSID 1047 (EBCDIC) encoding
+  has been withdrawn.
+
 troff
 -----
 
