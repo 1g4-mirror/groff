@@ -4598,7 +4598,9 @@ consider adding a preamble to your page after the
 .B TH
 call as follows.
 .
+.
 .RS
+.P
 .RS
 .EX
 \&.ie \[rs]n(.g \[rs]{\[rs]
@@ -4612,11 +4614,14 @@ call as follows.
 .EE
 .RE
 .
+.
+.P
 You must then use the
 .B \[rs]*
 escape sequence to interpolate the quotation mark strings.
 .
-.RS
+.
+.P
 .RS
 .EX
 The command
@@ -4624,8 +4629,8 @@ The command
 retries an update from the repository until it succeeds.
 .EE
 .RE
-.RE
 .
+.P
 If this procedure seems complex,
 petition your distributor to revert their remapping of the
 \[ga] and \[aq] characters.
