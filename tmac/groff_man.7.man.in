@@ -2303,7 +2303,8 @@ see
 .MR groff_man_style @MAN7EXT@ .
 _endif()dnl
 .
-Others are supported for configuration of rendering parameters;
+.I "groff man"
+supports others for configuration of rendering parameters;
 see section \[lq]Options\[rq] below.
 .
 .
