@@ -1836,9 +1836,9 @@ titles of anything other than major works of literature;
 identifiers for standards documents or technical reports such as
 CSTR\~#54,
 RFC\~1918,
-Unicode\~13.0,
+Unicode\~16,
 or
-POSIX.1-2017;
+POSIX.1-2024;
 acronyms;
 and occurrences after the first of a technical term.
 .
