@@ -9467,8 +9467,8 @@ void warn_request()
   int n;
   if (has_arg() && get_integer(&n)) {
     if (n & ~WARN_MAX) {
-      warning(WARN_RANGE, "warning mask must be in range 0..%1",
-	      WARN_MAX);
+      warning(WARN_RANGE, "warning mask must be in range 0..%1, got %2",
+	      WARN_MAX, n);
       n &= WARN_MAX;
     }
     warning_mask = n;

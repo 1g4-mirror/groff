@@ -1,3 +1,9 @@
+2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (warn_request): Disclose value of
+	invalid argument encountered when warning of its out-of-range
+	status.
+
 2025-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (dump_node_list)
