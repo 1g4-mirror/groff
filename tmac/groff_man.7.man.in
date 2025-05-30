@@ -1985,7 +1985,7 @@ _ifstyle()dnl
 .EX
 \&.I file
 is
-\&.RB \[rs][lq] \- \[rs][rq],
+\&.RB \[rs][lq] \[rs]\- \[rs][rq],
 \&.I groff
 reads the standard input stream.
 .RE
