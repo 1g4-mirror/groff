@@ -1314,9 +1314,11 @@ follows the ellipsis when further text is to follow after space on the
 output line,
 keeping its last period from being interpreted as the end of a
 sentence
-.\" ...because it is followed by characters that are transparent to
-.\" end-of-sentence detection, and a newline...
-and causing additional inter-sentence space to be placed after it.
+because it is followed by characters that are transparent to
+end-of-sentence detection,
+and/or a newline,
+which would in turn normally cause the formatter
+to place additional inter-sentence space after it.
 .
 See subsection \[lq]Portability\[rq] below.
 .
@@ -2758,30 +2760,7 @@ to space the dots more pleasantly on typesetters.
 .B \ec
 End a text line without inserting space or attempting a break.
 .
-.\" TODO: When we explain what a "sentence" is, move this parenthetical
-.\" there.
-Normally,
-if filling is enabled,
-the end of a text line is treated like a space;
-.\" end-of-sentence detection is performed, and...
-an output line
-.I may
-break there
-(if it does not,
-.I @g@troff
-inserts an adjustable space);
-if filling is disabled,
-the line
-.I will
-break there,
-as in
-.BR EX / EE
-examples.
-.
-The next line is interpreted as usual and can `include' a macro call
-(contrast with
-.BI \e newline\/\c
-).
+Nothing on the input line after this escape sequence is formatted.
 .
 .B \[rs]c
 is useful when three font styles are
@@ -2821,6 +2800,36 @@ $ \ec
 \&.EE
 .EE
 .RE
+.
+.
+.IP
+.\" TODO: When we explain what a "sentence" is, move this pargraph
+.\" there.
+Normally,
+if filling is enabled,
+the formatter treats the end of a text line like a space.
+.
+It checks for the end of a sentence,
+and
+.I may
+break the output line
+(if not,
+it inserts an adjustable space).
+.
+If filling is disabled,
+the formatter
+.I will
+break the output line,
+as in
+.BR EX / EE
+examples.
+.
+The formatter interprets the next input line as usual,
+recognizing control lines,
+including macro calls
+(contrast with
+.BI \e newline\/\c
+).
 .
 .
 .\" We once warned of \f possibly having "better portability" than \c;
