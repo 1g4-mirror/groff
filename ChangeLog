@@ -1,5 +1,11 @@
 2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (set_soft_hyphen_character):
+	Explicitly compare value of pointer type to null pointer literal
+	instead of letting it pun down to a Boolean.
+
+2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (warn_request): Disclose value of
 	invalid argument encountered when warning of its out-of-range
 	status.

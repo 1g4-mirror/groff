@@ -2896,7 +2896,7 @@ node *node::add_italic_correction(hunits *wd)
     return this;
   else {
     node *next1 = next;
-    next = 0;
+    next = 0 /* nullptr */;
     *wd += ic;
     return new italic_corrected_node(this, ic, state, div_nest_level,
 				     next1);
@@ -5632,7 +5632,7 @@ node *node::add_char(charinfo *ci, environment *env,
     break_code |= IS_INTERWORD_SPACE;
   if (break_code) {
     node *next1 = res->next;
-    res->next = 0;
+    res->next = 0 /* nullptr */;
     res = new break_char_node(res, break_code, get_break_code(),
 			      env->get_fill_color(), next1);
   }
@@ -6918,7 +6918,7 @@ static void read_special_fonts(special_font_list **sp)
     else {
       special_font_list *tem = new special_font_list;
       tem->n = finfo.position;
-      tem->next = 0;
+      tem->next = 0 /* nullptr */;
       *p = tem;
       p = &(tem->next);
     }
@@ -7317,7 +7317,7 @@ static void set_kerning_mode()
 static void set_soft_hyphen_character()
 {
   soft_hyphen_char = get_optional_char();
-  if (!soft_hyphen_char)
+  if (0 /* nullptr */ == soft_hyphen_char)
     soft_hyphen_char = get_charinfo(HYPHEN_SYMBOL);
   skip_line();
 }
