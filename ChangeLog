@@ -92,7 +92,7 @@
 	register.
 
 	* tmac/mdoc/doc-common (doc-ne): Drop unneeded macro.
-	(doc-bp): Define with `de1` to temporary disable compatibility
+	(doc-bp): Define with `de1` to temporarily disable compatibility
 	mode, and replace definition.  No longer altering the page
 	length, it works like `br`, including control-character-
 	sensitive behavior.
@@ -101,11 +101,11 @@
 	([initialization]): If continuously rendering, set up
 	replacement macro for `bp` request and set the page length to
 	"infinite".
-	(Dd): Call `an*break-page-with-new-number` only if _not_
+	(Dd): Call `doc-break-page-with-new-number` only if _not_
 	continuously rendering.
 	(doc-end-macro): If continously rendering, stop incrementing the
 	page length prior to writing the footer and document separation
-	line, and upon encountering the end of the last document (the
+	rule, and upon encountering the end of the last document (the
 	input file name register `.F` becomes empty), set the page
 	length to the vertical drawing position.
 
@@ -119,12 +119,12 @@
 
 	* tmac/an.tmac (an-ne): Drop unneeded macro.
 	(an-bp): Rename this...
-	(an*bp): ...to this, define it with `de1` to temporary disable
+	(an*bp): ...to this, define it with `de1` to temporarily disable
 	compatibility mode, and replace definition.  No longer altering
 	the page length, it works like `br`, including
 	control-character-sensitive behavior.
 	(an-end): If continously rendering, stop incrementing the page
-	length prior to writing the footer and document separation line,
+	length prior to writing the footer and document separation rule,
 	and upon encountering the end of the last document (the input
 	file name register `.F` becomes empty), set the page length to
 	the vertical drawing position.
