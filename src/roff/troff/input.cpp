@@ -5981,12 +5981,14 @@ void read_title_parts(node **part, hunits *part_width)
   tok.next();
   for (int i = 0; i < 3; i++) {
     while (!tok.is_newline() && !tok.is_eof()) {
-      if (tok == start
-	  && (want_att_compat || input_stack::get_level() == start_level)) {
+      if ((tok == start)
+	  && (want_att_compat
+	      || input_stack::get_level() == start_level)) {
 	tok.next();
 	break;
       }
-      if (page_character != 0 && tok.get_char() == page_character)
+      if ((page_character != 0 /* nullptr */)
+	  && (tok.get_char() == page_character))
 	interpolate_register(percent_symbol, 0);
       else
 	tok.process();

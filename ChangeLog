@@ -1,5 +1,10 @@
 2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_title_parts): Fix code style
+	nit; parenthesize formally complex expressions.
+
+2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor, continuing naming reform of
 	functions that advance the input stream pointer to use the verb
 	"read" instead of "get" or "has", which are more general, and
