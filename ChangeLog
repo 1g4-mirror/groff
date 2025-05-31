@@ -1,5 +1,23 @@
 2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor, continuing naming reform of
+	functions that advance the input stream pointer to use the verb
+	"read" instead of "get" or "has", which are more general, and
+	can refer to accessor functions that don't mutate the state of
+	the formatter.
+
+	* src/roff/troff/token.h:
+	* src/roff/troff/input.cpp:
+	(get_optional_char): Rename this...
+	(read_character): ...to this.
+	* src/roff/troff/env.cpp (tab_character, leader_character)
+	(hyphen_char, field_characters):
+	* src/roff/troff/input.cpp (set_page_character):
+	* src/roff/troff/node.cpp (set_soft_hyphen_character): Update
+	call sites.
+
+2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (set_soft_hyphen_character):
 	Explicitly compare value of pointer type to null pointer literal
 	instead of letting it pun down to a Boolean.

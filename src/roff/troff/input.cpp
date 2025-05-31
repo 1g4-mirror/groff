@@ -5966,7 +5966,7 @@ charinfo *page_character;
 
 void set_page_character()
 {
-  page_character = get_optional_char();
+  page_character = read_character();
   skip_line();
 }
 
@@ -8352,11 +8352,12 @@ charinfo *token::get_char(bool required, bool suppress_creation)
   return 0 /* nullptr */;
 }
 
-charinfo *get_optional_char()
+charinfo *read_character(/* TODO?: bool required */)
 {
   while (tok.is_space())
     tok.next();
   charinfo *ci = tok.get_char();
+  // TODO?: if (required && (0 /* nullptr */ == ci))
   if (0 /* nullptr */ == ci)
     check_missing_character();
   else

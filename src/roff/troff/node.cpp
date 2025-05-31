@@ -7316,7 +7316,7 @@ static void set_kerning_mode()
 
 static void set_soft_hyphen_character()
 {
-  soft_hyphen_char = get_optional_char();
+  soft_hyphen_char = read_character();
   if (0 /* nullptr */ == soft_hyphen_char)
     soft_hyphen_char = get_charinfo(HYPHEN_SYMBOL);
   skip_line();

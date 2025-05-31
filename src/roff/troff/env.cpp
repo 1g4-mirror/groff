@@ -320,13 +320,13 @@ void init_environments()
 
 void tab_character()
 {
-  curenv->tab_char = get_optional_char();
+  curenv->tab_char = read_character();
   skip_line();
 }
 
 void leader_character()
 {
-  curenv->leader_char = get_optional_char();
+  curenv->leader_char = read_character();
   skip_line();
 }
 
@@ -1795,7 +1795,7 @@ void set_hyphenation_mode_default()
 
 void hyphen_char()
 {
-  curenv->hyphen_indicator_char = get_optional_char();
+  curenv->hyphen_indicator_char = read_character();
   skip_line();
 }
 
@@ -3019,9 +3019,9 @@ tab_type environment::distance_to_next_tab(hunits *distance, hunits *leftpos)
 
 void field_characters()
 {
-  field_delimiter_char = get_optional_char();
+  field_delimiter_char = read_character();
   if (field_delimiter_char)
-    padding_indicator_char = get_optional_char();
+    padding_indicator_char = read_character();
   else
     padding_indicator_char = 0 /* nullptr */;
   skip_line();
