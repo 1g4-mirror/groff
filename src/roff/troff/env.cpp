@@ -309,7 +309,6 @@ int font_size::to_units()
 
 // we can't do this in a static constructor because various dictionaries
 // have to get initialized first
-
 static symbol default_environment_name("0");
 
 void init_environments()
@@ -318,13 +317,21 @@ void init_environments()
   (void) env_dictionary.lookup(default_environment_name, curenv);
 }
 
-void tab_character()
+// Set tab character, used to fill out the remainder of a tab stop where
+// a tab (TAB, U+0009) occurs in the input.  If a null pointer,
+// horizontal motion "fills" the tab stop.
+void tab_character_request()
 {
   curenv->tab_char = read_character();
   skip_line();
 }
 
-void leader_character()
+// Set leader character, used to fill out the remainder of a tab stop
+// where a leader (SOH, U+0001) occurs in the input.  If a null pointer,
+// horizontal motion "fills" the tab stop.  Used when the behavior of a
+// null pointer tab character is also desired on the same output line
+// (or more generally).
+void leader_character_request()
 {
   curenv->leader_char = read_character();
   skip_line();
@@ -1793,9 +1800,13 @@ void set_hyphenation_mode_default()
   skip_line();
 }
 
-void hyphen_char()
+// Set hyphenation character, which the input uses to mark the position
+// of a discretionary break ("dbreak") in a word.
+void hyphenation_character_request()
 {
   curenv->hyphen_indicator_char = read_character();
+  // TODO?: If null pointer, set to ESCAPE_PERCENT, eliminating test(s)
+  // while processing output line?
   skip_line();
 }
 
@@ -3017,7 +3028,8 @@ tab_type environment::distance_to_next_tab(hunits *distance, hunits *leftpos)
 					leftpos);
 }
 
-void field_characters()
+// XXX: Field characters are global; shouldn't they be environmental?
+static void field_characters_request()
 {
   field_delimiter_char = read_character();
   if (field_delimiter_char)
@@ -4270,12 +4282,12 @@ void init_env_requests()
   init_request("ev", environment_switch);
   init_request("evc", environment_copy);
   init_request("fam", family_change);
-  init_request("fc", field_characters);
+  init_request("fc", field_characters_request);
   init_request("fi", fill);
   init_request("fcolor", fill_color_change);
   init_request("ft", select_font);
   init_request("gcolor", stroke_color_change);
-  init_request("hc", hyphen_char);
+  init_request("hc", hyphenation_character_request);
   init_request("hla", select_hyphenation_language);
   init_request("hlm", hyphen_line_max_request);
   init_request("hy", hyphenate_request);
@@ -4285,7 +4297,7 @@ void init_env_requests()
   init_request("in", indent);
   init_request("it", input_trap);
   init_request("itc", input_trap_continued);
-  init_request("lc", leader_character);
+  init_request("lc", leader_character_request);
   init_request("linetabs", line_tabs_request);
   init_request("ll", line_length);
   init_request("ls", line_spacing);
@@ -4305,7 +4317,7 @@ void init_env_requests()
   init_request("ss", space_size);
   init_request("ta", set_tabs);
   init_request("ti", temporary_indent);
-  init_request("tc", tab_character);
+  init_request("tc", tab_character_request);
   init_request("tl", title);
   init_request("ul", underline);
   init_request("vs", vertical_spacing);

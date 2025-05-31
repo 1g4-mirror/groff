@@ -398,8 +398,8 @@ public:
   friend void margin_character();
   friend void no_number();
   friend void number_lines();
-  friend void leader_character();
-  friend void tab_character();
+  friend void leader_character_request();
+  friend void tab_character_request();
   friend void hyphenate_request();
   friend void set_hyphenation_mode_default();
   friend void no_hyphenate();

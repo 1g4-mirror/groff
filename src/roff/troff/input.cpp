@@ -5964,9 +5964,16 @@ static void do_width() // \w
 
 charinfo *page_character;
 
-void set_page_character()
+// XXX: The page character is global; shouldn't it be environmental?
+// Its idiomatic use is in `tl` requests when formatting titles (headers
+// or footers), which full-service macro packages typically put in their
+// own environment anyway to ensure that a consistent typeface is used
+// there regardless of how body text is styled.
+static void page_character_request()
 {
   page_character = read_character();
+  // TODO?: If null pointer, set to `percent_symbol` (see below),
+  // eliminating test in `read_title_parts()` (also below)?
   skip_line();
 }
 
@@ -9589,7 +9596,7 @@ void init_input_requests()
   init_request("open", open_request);
   init_request("opena", opena_request);
   init_request("output", output_request);
-  init_request("pc", set_page_character);
+  init_request("pc", page_character_request);
   init_request("pchar", report_character_request);
   init_request("pcolor", report_color);
   init_request("pcomposite", report_composite_characters);

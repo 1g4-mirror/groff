@@ -1,5 +1,37 @@
 2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor, continuing reform of functions that
+	are troff request handlers such that their names end with
+	`_request`.
+
+	* src/roff/troff/env.cpp
+	(tab_character): Rename this...
+	(tab_character_request): ...to this.
+	(leader_character): Rename this...
+	(leader_character_request): ...to this.
+	(hyphen_char): Rename this...
+	(hyphenation_character_request): ...to this.
+	(field_characters): Rename this...
+	(field_characters_request): ...to this.  Also mark it `static`
+	because the `environment` class has no need for `friend` access
+	to it, unlike the foregoing.
+	(init_env_requests): Wire up request names to new handler
+	function names.
+	* src/roff/troff/input.cpp
+	(set_page_character): Rename this...
+	(page_character_request): ...to this.  Also mark it `static`
+	because the `environment` class has no need for `friend` access
+	to it.
+	(init_input_requests): Wire up request name to new handler
+	function name.
+	* src/roff/troff/node.cpp
+	(set_soft_hyphen_character): Rename this...
+	(soft_hyphen_character_request): ...to this.
+	(init_node_requests): Wire up request name to new handler
+	function name.
+
+2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_title_parts): Fix code style
 	nit; parenthesize formally complex expressions.
 

@@ -7314,7 +7314,13 @@ static void set_kerning_mode()
   skip_line();
 }
 
-static void set_soft_hyphen_character()
+// Set (soft) hyphenation character, used to mark where a discretionary
+// break ("dbreak") has occurred in formatted output, conventionally
+// within a word at a syllable boundary.
+//
+// XXX: The soft hyphen character is global; shouldn't it be
+// environmental?
+static void soft_hyphen_character_request()
 {
   soft_hyphen_char = read_character();
   if (0 /* nullptr */ == soft_hyphen_char)
@@ -7368,7 +7374,7 @@ void init_node_requests()
   init_request("lg", set_ligature_mode);
   init_request("pftr", dump_font_translations);
   init_request("rfschar", remove_font_specific_character);
-  init_request("shc", set_soft_hyphen_character);
+  init_request("shc", soft_hyphen_character_request);
   init_request("special", set_special_fonts);
   init_request("sty", associate_style_with_font_position);
   init_request("tkf", configure_track_kerning);
