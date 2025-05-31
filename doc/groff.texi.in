@@ -8449,6 +8449,30 @@ sequence is itself neither a break nor a space of any kind; it can thus
 be placed in the middle of a word to cause a break at the end of that
 word.
 
+@code{\p} is typically used for fine-tuning of typeset output
+late in the document revision process.
+One of its applications is prevention of a break
+after an explicit hyphen when this occurs in an undesired place,
+such as at the end of a verso page,
+or before a displayed figure.
+The hyphenation mode can be configured to prevent breaks
+after
+@emph{automatically}
+placed hyphens,
+but not explicit ones
+(@pxref{Manipulating Hyphenation}).
+What one can do in this scenario
+is place @code{\p} at the end of the word
+@emph{before}
+the one that breaks undesirably.
+
+@Example
+.ll 1.375i
+The next data were out-of-band. \" breaks after "out-"
+.br
+The next data were\p out-of-band. \" breaks after "were"
+@endExample
+
 Breaking with immediate adjustment can produce ugly results since GNU
 @code{troff} doesn't have a sophisticated paragraph-building algorithm,
 as @TeX{} has, for example.  Instead, GNU @code{troff} fills and adjusts
