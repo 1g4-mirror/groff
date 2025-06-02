@@ -6549,15 +6549,25 @@ within @code{if}, @code{ie}, and @code{while} requests.
 @c This is worded to avoid implying that the operator doesn't apply
 @c to conditional expressions in general, albeit without mentioning them
 @c because they're out of scope.
-Furthermore, @code{!} is recognized only at the beginning of a numeric
-expression not contained by another numeric expression.  In other words,
-it must be the ``outermost'' operator.  Including it elsewhere in the
-expression produces a warning in the @samp{number} category
-(@pxref{Warnings}), and its expression evaluates false.  This
-unfortunate limitation maintains compatibility with @acronym{AT&T}
-@code{troff}.  Test a numeric expression for falsity within a complex
-expression by comparing it to a false value.@footnote{@xref{Conditionals
-and Loops}.}
+Furthermore,
+the formatter recognizes
+@code{!}
+only at the beginning of a numeric expression
+not contained by another numeric expression.
+In other words,
+@code{!} must be the ``outermost'' operator.
+Its presence elsewhere causes the expression
+to evaluate false.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{number}.
+@xref{Warnings}.}
+This unfortunate limitation maintains compatibility with @acronym{AT&T}
+@command{troff}.
+Test a numeric expression for falsity
+within a complex expression
+by comparing it
+to a false value.@footnote{@xref{Conditionals and Loops}.}
 
 @Example
 .nr X 1

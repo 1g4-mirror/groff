@@ -1237,19 +1237,24 @@ requests.
 .\" conditional expressions in general, albeit without mentioning them
 .\" because they're out of scope.
 Furthermore,
+the formatter recognizes
 .B !\&
-is recognized only at the beginning of a numeric expression not
-contained by another numeric expression.
+only at the beginning of a numeric expression
+not contained by another numeric expression.
 .
 In other words,
-it must be the \[lq]outermost\[rq] operator.
+.B !\&
+must be the \[lq]outermost\[rq] operator.
 .
-Including it elsewhere in the expression produces a warning in the
-.RB \%\[lq] number \[rq]
-category
-(see
-.MR @g@troff @MAN1EXT@ ),
-and its expression evaluates false.
+Its presence elsewhere causes the expression
+to evaluate false.
+.
+(GNU
+.I troff \" GNU
+emits a warning in category
+.RB \%\[lq] number \[rq].
+See section \[lq]Warnings\[rq] of
+.MR @g@troff @MAN1EXT@ .)
 .
 This unfortunate limitation maintains compatibility with AT&T
 .IR troff .\" AT&T
