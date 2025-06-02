@@ -4124,19 +4124,23 @@ all warning categories are enabled.
 .
 .
 .TP
-.BI .warnscale\~ si
-Set the scaling unit used in warnings to
-.IR si .
-.
-Valid values for
-.I si
-are
+.BI .warnscale\~ scaling-unit
+Select scaling unit used in certain warnings \" `output_warning()`
+(one of
 .BR u ,
-.B i
-(the default),
+.BR i ,
 .BR c ,
 .BR p ,
-.RB and\~ P .
+or
+.BR P ;
+default:
+.BR i ).
+.
+Ignored on
+.IR nroff -mode
+output devices,
+for which these diagnostics report the vertical page location in lines,
+and the horizontal page location in ens.
 .
 .
 .TP

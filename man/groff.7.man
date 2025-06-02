@@ -5031,9 +5031,11 @@ or
 default:
 .BR i ).
 .
-Ignored in
-.B nroff
-mode.
+Ignored on
+.IR nroff -mode
+output devices,
+for which these diagnostics report the vertical page location in lines,
+and the horizontal page location in ens.
 .
 .TPx
 .REQ .wh vertical-position

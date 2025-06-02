@@ -18284,12 +18284,22 @@ there is no limit: recursion can continue until program memory is
 exhausted.  The default is 1,000.
 @endDefreg
 
-@Defreq {warnscale, su}
+@Defreq {warnscale, scaling-unit}
 Set the scaling unit used in certain warnings @c `output_warning()`
-to @var{su}, which can take the values @samp{u}, @samp{i}, @samp{c},
-@samp{p}, and @samp{P}.  The default is @samp{i}.  Ignored on
-@code{nroff}-mode output devices, for which these diagnostics report the
-vertical page location in lines.
+(one of
+@samp{u},
+@samp{i},
+@samp{c},
+@samp{p},
+and
+@samp{P};
+default:
+@samp{i}).
+Ignored on
+@code{nroff}-mode
+output devices,
+for which these diagnostics report the vertical page location in lines,
+and the horizontal page location in ens.
 @endDefreq
 
 @Defreq {spreadwarn, [@Var{limit}]}
