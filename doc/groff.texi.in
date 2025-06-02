@@ -6840,9 +6840,16 @@ If the identifier is interpreted as a string, macro, or diversion, GNU
 empty, and interpolates nothing.  If the identifier is interpreted as a
 register, GNU @code{troff} emits a warning in category @samp{reg},
 initializes it to zero, and interpolates that value.  @xref{Warnings},
-@ref{Interpolating Registers}, and @ref{Strings}.  Attempting to use an
-undefined typeface, special character or character class, color,
-environment, or stream generally provokes an error diagnostic.
+@ref{Interpolating Registers}, and @ref{Strings}.
+Attempting to use an undefined
+typeface,
+special character or character class,
+color,
+environment,
+hyphenation language code,
+or
+stream
+generally provokes an error diagnostic.
 
 @need 1000
 @cindex name space, common, of macros, diversions, and strings

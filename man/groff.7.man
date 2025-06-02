@@ -1464,11 +1464,13 @@ and subsection \[lq]Interpolating registers\[rq] and section
 .
 Attempting to use an undefined
 typeface,
-style,
 special character or character class,
 color,
 environment,
-or stream generally provokes an error diagnostic.
+hyphenation language code,
+or
+stream
+generally provokes an error diagnostic.
 .
 .
 .P
