@@ -311,7 +311,7 @@ my (%nmap, %map);
 if (open(MAP, $map)) {
     $filename = $map;
 }
-elsif (open(DESC, $sys_map)) {
+elsif (open(MAP, $sys_map)) {
     $filename = $sys_map;
 }
 else {

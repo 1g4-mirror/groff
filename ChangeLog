@@ -1,3 +1,12 @@
+2025-06-02  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* src/utils/afmtodit/afmtodit.pl: Fix logic error; when falling
+	back to system map file, associate scalar `sys_map` with `MAP`
+	file handle, not `DESC`.
+
+	Re-fixes <https://savannah.gnu.org/bugs/?66564>.  [Problem
+	introduced by me in commit 658f7afb8e, 2 January.  --GBR]
+
 2025-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor, continuing reform of functions that
