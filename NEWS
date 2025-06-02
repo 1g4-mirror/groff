@@ -16,7 +16,7 @@ Noteworthy incompatible changes
   `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
   `trf` with a comment after their file name argument, and did not place
   that comment immediately after the file name, you are likely to get a
-  diagnostic message.
+  diagnostic message resembling the following.
 
     warning: cannot open macro file 'e.tmac ': No such file or directory
 
