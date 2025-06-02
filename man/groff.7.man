@@ -844,28 +844,33 @@ now withdrawn.)
 .\" ====================================================================
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Measurements".
-Numeric parameters that specify measurements are expressed as
-integers or decimal fractions with an optional
-.I scaling unit
+Express numeric parameters that specify measurements
+as integers
+or decimal fractions
+with an optional
+.I "scaling unit"
 suffixed.
 .
-A scaling unit is a letter that immediately follows the last digit of a
-number.
+A scaling unit is a letter
+that immediately follows the last digit of a number.
 .
 Digits after the decimal point are optional.
 .
 .
 .P
-Measurements are scaled by the scaling unit and stored internally
+The formatter scales measurements by the specified scaling unit,
+storing them internally
 (with any fractional part discarded)
 in basic units.
 .
-The device resolution can therefore be obtained by storing a value of
+The device resolution can therefore be obtained
+by storing a value of
 .RB \[lq] 1i \[rq]
-to a register.
+to a register,
+then reading the register.
 .
-The only constraint on the basic unit is that it is at least as small as
-any other unit.
+The only constraint on the basic unit
+is that it is at least as small as any other unit.
 .\" That's a fib.  A device resolution of around 2^31 would surely also
 .\" cause problems.  But nobody does that.
 .

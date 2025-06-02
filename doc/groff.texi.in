@@ -6150,23 +6150,37 @@ one vee.
 @cindex indicator, scaling
 
 @cindex units of measurement
-The formatter sometimes requires the input of numeric parameters to
-specify measurements.  These are specified as integers or decimal
-fractions with an optional @dfn{scaling unit} suffixed.  A scaling unit
-is a letter that immediately follows the last digit of a number.  Digits
-after the decimal point are optional.  Examples of measurements include
-@samp{10.5p}, @samp{11i}, and @samp{3.c}.
+A @code{roff} document sometimes
+requires the input of numeric parameters to specify measurements.
+These are expressed as integers
+or decimal fractions
+with an optional
+@dfn{scaling unit}
+suffixed.
+A scaling unit is a letter
+that immediately follows the last digit of a number.
+Digits after the decimal point are optional.
+Examples of measurements include
+@samp{10.5p},
+@samp{11i},
+and @samp{3.c}.
 
 @cindex basic units, conversion to
 @cindex units, basic, conversion to
 @cindex conversion to basic units
-Measurements are scaled by the scaling unit and stored internally (with
-any fractional part discarded) in basic units.
+The formatter scales measurements by the specified scaling unit,
+storing them internally
+(with any fractional part discarded)
+in basic units.
 @cindex device resolution, obtaining in the formatter
 @cindex resolution, device, obtaining in the formatter
-The device resolution can therefore be obtained by storing a value of
-@samp{1i} to a register.  The only constraint on the basic unit is that
-it is at least as small as any other unit.
+The device resolution can therefore be obtained
+by storing a value of
+@samp{1i}
+to a register,
+then reading the register.
+The only constraint on the basic unit
+is that it is at least as small as any other unit.
 @c That's a fib.  A device resolution of around 2^31 would surely also
 @c cause problems.  But nobody does that.
 
