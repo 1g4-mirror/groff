@@ -45,6 +45,15 @@ language reference
 .
 .
 .\" ====================================================================
+.\" Local definitions
+.\" ====================================================================
+.
+.\" define a string tx for the TeX logo
+.ie t .ds tx T\h'-.1667m'\v'.224m'E\v'-.224m'\h'-.125m'X
+.el   .ds tx TeX
+.
+.
+.\" ====================================================================
 .\" Setup
 .\" ====================================================================
 .
@@ -282,7 +291,7 @@ you can browse it interactively with \[lq]info groff\[rq].
 Additional formats,
 including plain text,
 HTML,
-DVI,
+\*(tx DVI,
 and PDF,
 may be available in
 .IR @DOCDIR@ .
@@ -317,7 +326,7 @@ a program that reads device and font descriptions
 interprets the
 .I groff
 language expressed in input text,
-translating it to a device-independent page description language
+and translates it into a device-independent page description language
 (\c
 .MR groff_out @MAN5EXT@ )
 that is usually then post-processed by an output driver to produce
@@ -9128,6 +9137,9 @@ presents a detailed history of
 .I roff
 systems and summarizes concepts common to them.
 .
+.
+.\" Clean up.
+.rm tx
 .
 .\" Restore compatibility mode (for, e.g., Solaris 10/11).
 .cp \n[*groff_groff_7_man_C]
