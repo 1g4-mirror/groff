@@ -368,8 +368,7 @@ GNU
 discards them upon reading.
 (It also emits a warning in category
 \[lq]input\[rq];
-see section \[lq]Warnings\[rq]
-of
+see section \[lq]Warnings\[rq] of
 .MR @g@troff @MAN1EXT@ .)
 .
 It processes
@@ -1083,12 +1082,13 @@ for the
 .I 62bit.tmac
 macro package.)
 .
-Arithmetic saturates rather than wrapping;
-if overflow would occur,
-.I @g@troff
+Arithmetic saturates.
+(If overflow would occur,
+GNU
+.I troff \" GNU
 emits a warning in category
-.RB \%\[lq] range \[rq]
-(see section \[lq]Warnings\[rq] of
+.RB \%\[lq] range \[rq].
+See section \[lq]Warnings\[rq] of
 .MR @g@troff 1 ).
 .
 .

@@ -6395,9 +6395,13 @@ range of ±2 billion.@footnote{If that's not enough, see the
 @cite{groff_tmac@r{(5)}} man page for the @file{62bit.tmac} macro
 package.}
 @cindex saturating arithmetic
-Arithmetic saturates rather than wrapping; if overflow would occur, GNU
-@command{troff} emits a warning in category @samp{range}
-(@pxref{Warnings}).
+Arithmetic saturates.@footnote{If overflow would
+occur,
+GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{range}.
+@xref{Warnings}.}
 
 @cindex arithmetic operators
 @cindex operators, arithmetic
