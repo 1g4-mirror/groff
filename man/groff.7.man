@@ -718,8 +718,8 @@ as a control or text line.
 .BI \[rs] newline
 is useful for managing line lengths in the input during document
 maintenance;
-you can break an input line in the middle of a
-word,
+you can break an input line at a space,
+or in the middle of a word,
 request invocation,
 macro call,
 or escape sequence.
