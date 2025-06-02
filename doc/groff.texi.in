@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle May 2025
+@subtitle June 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -5156,6 +5156,7 @@ inter-sentence space.
 * Tabs and Leaders::
 * Requests and Macros::
 * Macro Packages::
+* Input Format::
 * Input Encodings::
 * Input Conventions::
 @end menu
@@ -5655,7 +5656,7 @@ minimize forward references.
 
 @c ---------------------------------------------------------------------
 
-@node Macro Packages, Input Encodings, Requests and Macros, Text
+@node Macro Packages, Input Format, Requests and Macros, Text
 @subsection Macro Packages
 @cindex macro package
 @cindex package, macro
@@ -5675,21 +5676,104 @@ package can load it with the @code{mso} (``macro source'') request.
 
 @c ---------------------------------------------------------------------
 
-@c TODO: Move a lot of this node to the "Invoking groff" chapter.  Some
-@c of the discussion is better placed in discussion of output drivers
-@c (e.g., what character encodings _they_ support for output and their
-@c responsibility for converting to them) as well.
+@c BEGIN Keep roughly parallel with groff(7) section "Input Format".
+@node Input Format, Input Encodings, Macro Packages, Text
+@subsection Input Format
+
+@cindex Unicode
+Organize input to
+GNU
+@command{troff} @c GNU
+into lines separated by the Unix newline character
+(@code{U+000A}),
+using the character encoding it recognizes:
+ISO@tie{}Latin-1 (8859-1).
+We recommend use of ISO@tie{}646:1991@tie{}IRV (US-ASCII)
+or (equivalently) the Basic Latin subset
+of ISO@tie{}10646 (Unicode);
+see
+@cite{groff_char@r{(7)}}.
+
+@cindex invalid input characters
+@cindex input characters, invalid
+@cindex characters, invalid input
+A subset of control characters
+(from the sets ``C0 Controls'' and ``C1 Controls''
+as Unicode describes them)
+are invalid as input characters.
+GNU
+@command{troff} @c GNU
+discards such characters instead of interpreting them.@footnote{It also
+emits a warning in category
+@samp{input}.
+@xref{Warnings}.}
+It processes
+a character sequence ``foo'',
+followed by an invalid
+character and then ``bar'',
+as ``foobar''.
+
+Invalid input characters comprise
+@code{0x00},
+@code{0x0B},
+@code{0x0D}--@code{0x1F},
+and
+@code{0x80}--@code{0x9F}.@footnote{Historically,
+control characters like
+@acronym{ASCII}
+@code{STX},
+@code{ETX},
+and
+@code{BEL}
+(@key{Control+B},
+@key{Control+C},
+and
+@key{Control+G},
+respectively)
+have been observed in
+@code{roff}
+documents,
+particularly in macro packages employing them as delimiters
+with the output comparison operator
+to try to avoid collisions
+with the content of arbitrary user-supplied parameters
+(@pxref{Operators in Conditionals}).
+We discourage this expedient;
+in
+GNU
+@command{troff} @c GNU
+it is unnecessary
+(outside of compatibility mode)
+because the program parses delimited arguments
+at a different input level than their surrounding context.
+@xref{Implementation Differences}.}
+GNU
+@command{troff} @c GNU
+uses some of these code points for internal purposes,
+making non-trivial the extension of the program
+to accept UTF-8
+or other encodings that use characters from these ranges.
+@c END Keep roughly parallel with groff(7) section "Input Format".
+
+@c ---------------------------------------------------------------------
 
 @c BEGIN Keep roughly parallel with groff_tmac(5) section "Input
 @c Encodings".
-@node Input Encodings, Input Conventions, Macro Packages, Text
+@node Input Encodings, Input Conventions, Input Format, Text
 @subsection Input Encodings
 
-The @command{groff} command's @option{-k} option calls the
-@command{preconv} preprocessor to perform input character encoding
-conversions.  Input to the GNU @code{troff} formatter itself, on the
-other hand, must be in a single-byte encoding compatible with @w{ISO
-646:1991 IRV} (US-@acronym{ASCII}).
+The
+@command{groff}
+command's
+@option{-k}
+option calls the
+@command{preconv}
+preprocessor
+to perform input character encoding conversions to satisfy
+GNU
+@command{troff}'s
+requirement of a single-byte encoding compatible with
+@w{ISO 646:1991 IRV} (US-@acronym{ASCII}).
 
 Localization influences automatic hyphenation
 in two distinct but related respects.
@@ -5754,11 +5838,13 @@ To use @w{KOI8-R}, an encoding for the Russian language, either place
 supply @samp{-m koi8-r} as a command-line argument to @code{groff}.  The
 localization file @file{ru.tmac} takes care of this automatically; see
 @ref{Manipulating Hyphenation}.@footnote{KOI8-R code points in the range
-@code{0x80}--@code{0x9F} are not valid input to GNU @command{troff}; see
-@ref{Identifiers}.  This should be no impediment to practical documents,
-as these KOI8-R code points do not encode letters, but box-drawing
-symbols and characters that are better obtained via special character
-escape sequences; see @cite{groff_char@r{(7)}}.}
+@code{0x80}--@code{0x9F} are not valid input to GNU @command{troff};
+recall @ref{Input Format}.
+This restriction should be no impediment to practical documents,
+as these KOI8-R code points do not encode letters,
+but box-drawing symbols and characters
+that are better obtained via special character escape sequences;
+see @cite{groff_char@r{(7)}}.}
 
 @item latin2
 @cindex encoding, input, @w{ISO Latin-2} (@w{8859-2})
@@ -6654,40 +6740,8 @@ newline,
 space,
 or invalid as GNU
 @command{troff}
-input.
-
-@c XXX: We might move this discussion earlier since it is applicable to
-@c troff input in general, and include a reference to the `trin`
-@c request.
-@cindex invalid input characters
-@cindex input characters, invalid
-@cindex characters, invalid input
-@cindex Unicode
-Invalid input characters are a subset of control characters (from the
-sets ``C0 Controls'' and ``C1 Controls'' as Unicode describes them).
-When GNU @code{troff} encounters one in an identifier, it produces a
-warning in category @samp{input} (@pxref{Warnings}).  They are removed
-during interpretation: an identifier @samp{foo}, followed by an invalid
-character and then @samp{bar}, is processed as @samp{foobar}.
-
-Invalid input characters are @code{0x00}, @code{0x0B},
-@code{0x0D}--@code{0x1F}, and
-@code{0x80}--@code{0x9F}.@footnote{Historically, control characters like
-ASCII STX, ETX, and BEL (@key{Control+B}, @key{Control+C}, and
-@key{Control+G}) have been observed in @code{roff} documents,
-particularly in macro packages employing them as delimiters with the
-output comparison operator to try to avoid collisions with the content
-of arbitrary user-supplied parameters (@pxref{Operators in
-Conditionals}).  We discourage this expedient; in GNU @code{troff} it is
-unnecessary (outside of compatibility mode) because delimited arguments
-are parsed at a different input level than the surrounding context.
-@xref{Implementation Differences}.}  Some of these code points are used
-by GNU @code{troff} internally, making it non-trivial to extend the
-program to accept UTF-8 or other encodings that use characters from
-these ranges.@footnote{Consider what happens when a C1 control
-@code{0x80}--@code{0x9F} is necessary as a continuation byte in a UTF-8
-sequence.}
-
+input;
+recall @ref{Input Format}.
 Thus, the identifiers @samp{br}, @samp{PP}, @samp{end-list},
 @samp{ref*normal-print}, @samp{|}, @samp{@@_}, and @samp{!"#$%'()*+,-./}
 are all valid.  Discretion should be exercised to prevent confusion.
@@ -17043,7 +17097,7 @@ or a front end with the
 option to enable unsafe mode.
 
 @code{trf} discards invalid input characters;
-recall @ref{Identifiers}.
+recall @ref{Input Format}.
 
 For @code{cf}, within a diversion, ``completely unprocessed'' means that
 each line of a file to be inserted is handled as if it were preceded by

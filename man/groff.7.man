@@ -341,11 +341,13 @@ or terminal output.
 .SH "Input format"
 .\" ====================================================================
 .
-Input to GNU
+.\" BEGIN Keep (roughly) parallel with groff.texi node "Input Format".
+Organize input to
+GNU
 .I troff \" GNU
-is organized into lines separated by the Unix newline character
+into lines separated by the Unix newline character
 (U+000A),
-and must be in the character encoding it recognizes:
+using the character encoding it recognizes:
 ISO\~Latin-1 (8859-1).
 .
 We recommend use of ISO\~646:1991\~IRV (US-ASCII)
@@ -354,13 +356,76 @@ of ISO\~10646 (Unicode);
 see
 .MR groff_char @MAN7EXT@ .
 .
-The
-.MR preconv @MAN1EXT@
-preprocessor transforms other encodings,
-including UTF-8,
-to satisfy
-.IR @g@troff 's
-requirements.
+.
+.P
+A subset of control characters
+(from the sets \[lq]C0 Controls\[rq] and \[lq]C1 Controls\[rq]
+as Unicode describes them)
+are invalid as input characters.
+.
+GNU
+.I troff \" GNU
+discards such characters instead of interpreting them.
+(It also emits a warning in category
+\[lq]input\[rq];
+see section \[lq]Warnings\[rq]
+of
+.MR groff @MAN1EXT@ .)
+.
+It processes
+a character sequence \[lq]foo\[rq],
+followed by an invalid
+character and then \[lq]bar\[rq],
+as \[lq]foobar\[rq].
+.
+.
+.P
+Invalid input characters comprise
+.BR 0x00 ,
+.BR 0x0B ,
+.BR 0x0D \[en] 0x1F ,
+and
+.BR 0x80 \[en] 0x9F .
+(Historically,
+control characters like
+ASCII
+STX,
+ETX,
+and
+BEL
+(Control+B,
+Control+C,
+and
+Control+G)
+respectively)
+have been observed in
+.I roff
+documents,
+particularly in macro packages employing them as delimiters
+with the output comparison operator
+to try to avoid collisions with the content
+of arbitrary user-supplied parameters
+(see subsection \[lq]Conditional expressions\[rq] below).
+.
+We discourage this expedient;
+in
+GNU
+.I troff \" GNU
+it is unnecessary
+(outside of compatibility mode)
+because the program parses delimited arguments
+at a different input level than their surrounding context.
+.
+See section \[lq]Miscellaneous\[rq] of
+.MR groff_diff @MAN7EXT@ .)
+.
+GNU
+.I troff \" GNU
+uses some of these code points for internal purposes,
+making non-trivial the extension of the program
+to accept UTF-8
+or other encodings that use characters from these ranges.
+.\" END Keep (roughly) parallel with groff.texi node "Input Format".
 .
 .
 .\" ====================================================================
@@ -1330,44 +1395,6 @@ space,
 or invalid as GNU
 .I troff \" GNU
 input.
-.
-.
-.\" XXX: We might move this discussion earlier since it is applicable to
-.\" troff input in general, and include a reference to the `trin`
-.\" request.
-.P
-Invalid input characters are a subset of control characters
-(from the sets \[lq]C0 Controls\[rq] and \[lq]C1 Controls\[rq] as
-Unicode describes them).
-.
-When
-.I @g@troff
-encounters one in an identifier,
-it produces a warning in category
-.RB \%\[lq] input \[rq]
-(see section \[lq]Warnings\[rq] in
-.MR @g@troff @MAN1EXT@ ).
-.
-They are removed during interpretation:
-an identifier \[lq]foo\[rq],
-followed by an invalid
-character and then \[lq]bar\[rq],
-is processed as \[lq]foobar\[rq].
-.
-.
-.P
-Invalid input characters are
-.BR 0x00 ,
-.BR 0x0B ,
-.BR 0x0D \[en] 0x1F ,
-and
-.BR 0x80 \[en] 0x9F .
-.
-Some of these code points are used by
-.I @g@troff
-internally,
-making it non-trivial to extend the program to accept UTF-8 or other
-encodings that use characters from these ranges.
 .
 .
 .P
