@@ -4440,6 +4440,23 @@ from
 permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 .
+GNU
+.I troff \" GNU
+searches for
+.I file
+in any directories specified by
+.B \-I
+command-line options,
+followed by the current working directory.
+.
+If
+.I file
+does not exist,
+GNU
+.I troff \" GNU
+emits a warning in category
+.RB \[lq] file \[rq].
+.
 .
 .TP
 .BI .ss\~ word-space-size\~\c

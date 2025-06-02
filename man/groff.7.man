@@ -4590,6 +4590,23 @@ Replace the request's control line
 with the contents of
 .IR file ,
 \[lq]sourcing\[rq] it.
+GNU
+.I troff \" GNU
+searches for
+.I file
+in any directories specified by
+.B \-I
+command-line options,
+followed by the current working directory.
+.
+If
+.I file
+does not exist,
+the formatter ignores the request.
+(GNU
+.I troff \" GNU
+emits a warning in category
+.RB \[lq] file \[rq].)
 .
 .TPx
 .REQ .soquiet file

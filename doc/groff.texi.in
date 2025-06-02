@@ -16906,16 +16906,18 @@ GNU
 @command{troff} @c GNU
 searches for
 @var{file}
-in the directories specified by the @option{-I} command-line option.
+in any directories specified by
+@option{-I}
+command-line options,
+followed by the current working directory.
 If
 @var{file}
 does not exist,
-GNU
+the formatter ignores the request.@footnote{GNU
 @command{troff} @c GNU
 emits a warning in category
-@samp{file}
-and the request has no further effect.
-@xref{Warnings}.
+@samp{file}.
+@xref{Warnings}.}
 
 @code{so} can be useful for large documents,
 allowing each chapter of a book,
