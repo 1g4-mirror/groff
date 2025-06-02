@@ -358,14 +358,14 @@ see
 .
 .
 .P
-A subset of control characters
+Some control characters
 (from the sets \[lq]C0 Controls\[rq] and \[lq]C1 Controls\[rq]
 as Unicode describes them)
 are invalid as input characters.
 .
 GNU
 .I troff \" GNU
-discards such characters instead of interpreting them.
+discards them upon reading.
 (It also emits a warning in category
 \[lq]input\[rq];
 see section \[lq]Warnings\[rq]

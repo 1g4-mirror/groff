@@ -5697,13 +5697,13 @@ see
 @cindex invalid input characters
 @cindex input characters, invalid
 @cindex characters, invalid input
-A subset of control characters
+Some control characters
 (from the sets ``C0 Controls'' and ``C1 Controls''
 as Unicode describes them)
 are invalid as input characters.
 GNU
 @command{troff} @c GNU
-discards such characters instead of interpreting them.@footnote{It also
+discards them upon reading.@footnote{It also
 emits a warning in category
 @samp{input}.
 @xref{Warnings}.}
