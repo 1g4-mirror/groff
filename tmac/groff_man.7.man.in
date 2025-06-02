@@ -4676,6 +4676,11 @@ spell such escape sequences as
 .RB \[lq]\^ \[rs](\c
 .IR xx \[rq];
 no closing parenthesis is used.
+.
+.I xx
+must be exactly two characters;
+.MR groff_char @MAN7EXT@
+lists portable special character identifiers.
 _endif()dnl
 .
 .
