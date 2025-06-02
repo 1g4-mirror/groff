@@ -5954,6 +5954,14 @@ into control lines.
 @item
 Do not use spaces to perform indentation or align columns of a table.
 Leading spaces are reliable when text is not being filled.
+(Exception:@:
+when laying out a table with
+GNU
+@command{tbl}, @c GNU
+specifying the
+@code{nospaces}
+region option
+causes the program to ignore spaces at the boundaries of table cells.)
 
 @item
 Comment your document.  It is never too soon to apply comments to

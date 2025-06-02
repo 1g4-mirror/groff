@@ -2154,6 +2154,15 @@ so that revisions to the input don't turn them into control lines.
 Do not use spaces to perform indentation or align columns of a table.
 Leading spaces are reliable when text is not being filled.
 .
+(Exception:
+when laying out a table with
+GNU
+.IR tbl , \" GNU
+specifying the
+.B nospaces
+region option
+causes the program to ignore spaces at the boundaries of table cells.)
+.
 .
 .IP \[bu]
 Comment your document.
