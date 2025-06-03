@@ -1273,7 +1273,7 @@ void stroke_color_change()
 
 static symbol P_symbol("P");
 
-static void select_font()
+static void select_font_request()
 {
   symbol s = get_name();
   bool is_number = true;
@@ -4294,7 +4294,7 @@ void init_env_requests()
   init_request("fc", field_characters_request);
   init_request("fi", fill);
   init_request("fcolor", fill_color_change);
-  init_request("ft", select_font);
+  init_request("ft", select_font_request);
   init_request("gcolor", stroke_color_change);
   init_request("hc", hyphenation_character_request);
   init_request("hla", select_hyphenation_language);

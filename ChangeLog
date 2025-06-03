@@ -1,5 +1,14 @@
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor, continuing reform of functions that
+	are troff request handlers such that their names end with
+	`_request`.
+
+	* src/roff/troff/env.cpp (select_font): Rename this...
+	(select_font_request): ...to this.
+
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (select_font): Emit warning diagnostic
 	in "range" when the `ft` request is given an out-of-range
 	mounting position.
