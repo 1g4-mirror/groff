@@ -10812,7 +10812,6 @@ typeface: by its mounting position (@samp{3}), by its identifier
 (@samp{TB}), or by an abstract style (@samp{B}) to be combined with the
 default family.
 
-@c TODO: Add requests `pft`, `rft`?
 @DefreqList {ft, [@Var{font}]}
 @DefescItemx {\\f, , f, }
 @DefescItem {\\f, (, fn, }
@@ -10829,19 +10828,43 @@ default family.
 @cindex selecting the previous font (@code{ft})
 @cindex previous font, selecting (@code{ft})
 @cindex font, previous, selecting (@code{ft})
-The @code{ft} request selects the typeface @var{font}.
+The
+@code{ft}
+request selects the typeface
+@var{font}.
 If the argument is absent or
 @samp{P},
 it selects the previously used typeface;
 if there is none,
 the formatter ignores the request.
-If @var{font} is a non-negative
-integer, it is interpreted as a mounting position; the font mounted
-there is selected.  If that position refers to an abstract style, it is
-combined with the default family (see @code{fam} and @code{\F} below) to
-make a resolved font name.  If the mounting position is not a style and
-no font is mounted there, GNU @code{troff} emits a warning in category
-@samp{font} and ignores the request.
+If
+@var{font}
+is an integer,
+the formatter interprets it as a mounting position;
+the font mounted there is selected.
+If that position refers to an abstract style,
+GNU
+@command{troff} @c GNU
+combines it with the default family
+(see
+@code{fam}
+and
+@code{\F}
+below)
+to make a resolved font name.
+If
+@var{font}
+is
+@samp{DESC},
+if the mounting position is not an abstract style
+and no font is mounted there,
+or the mounting position is negative,
+GNU
+@command{troff} @c GNU
+ignores the request.@footnote{It also
+emits a warning in category @samp{font} or @samp{range},
+as appropriate.
+@xref{Warnings}.}
 
 If @var{font} matches a style name, it is combined with the default
 family to make a resolved font name.  If not, @var{font} is assumed
@@ -11115,6 +11138,7 @@ it is selected; GNU @code{troff} will search @env{GROFF_FONT_PATH} for
 it by name and mount it at the first free position on demand.
 
 @need 500
+@c TODO: Add request `rfp` to unmount a font?
 @DefreqList {fp, pos id [@Var{font-description-file-name}]}
 @DefregItemx {.f}
 @DefregListEndx {.fp}

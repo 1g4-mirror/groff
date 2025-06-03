@@ -3506,27 +3506,49 @@ request.
 .REQ .ft
 .TQ
 .REQ ".ft P"
-Select previous font mounting position
-(abstract style or font);
-same as
-.esc f[]
-or
-.esc fP .
+Select the typeface
+.I font.
 .
-.TPx
-.REQ .ft font
-Select typeface
-.I font,
-a mounting position,
-abstract style,
-or font name;
-same as
-.esc[] f font
-escape sequence.
-.
+If
 .I font
-cannot be
-.BR P .
+is an integer,
+the formatter interprets it as a mounting position;
+the font mounted there is selected.
+.
+If that position refers to an abstract style,
+GNU
+.I troff \" GNU
+combines it with the default family
+(see
+.B fam
+above and
+.B \[rs]F
+below)
+to make a resolved font name.
+.
+If
+.I font
+is
+.RB \[lq] DESC \[rq],
+if the mounting position is not an abstract style
+and no font is mounted there,
+or the mounting position is negative,
+GNU
+.I troff \" GNU
+ignores the request.
+.
+(It also
+emits a warning in category
+.RB \[lq] font \[rq],
+or
+.RB \[lq] range \[rq],
+as appropriate.
+.
+See section \[lq]Warnings\[rq] in
+.MR @g@troff @MAN1EXT@ .)
+.
+Also see
+.B \[rs]f .
 .
 .TPx
 .REQ .ftr f
