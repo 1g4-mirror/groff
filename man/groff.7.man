@@ -1772,7 +1772,6 @@ the formatter ignores the escape character.
 .I troff \" GNU
 produces a warning in category
 .RB \%\[lq] escape \[rq].
-@xref{Warnings}.
 .
 See section \[lq]Warnings\[rq] in
 .MR @g@troff 1 .)
