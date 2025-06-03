@@ -1,5 +1,12 @@
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::next): Drop dead code from
+	`\f` and `\F` escape sequence handlers;
+	`read_escape_parameter()` never returns a null pointer.  (It can
+	return `NULL_SYMBOL`, but that is an object with an address.)
+
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor, moving font selection logic into a dedicated
 	function (so that the `\f` escape handler can also use it).
 

@@ -2321,8 +2321,6 @@ void token::next()
       case 'f':
 	{
 	  symbol s = read_escape_parameter(ALLOW_EMPTY);
-	  if (s.is_null())
-	    break;
 	  const char *p;
 	  for (p = s.contents();
 	       p != 0 /* nullptr */ && *p != '\0';
@@ -2348,8 +2346,6 @@ void token::next()
       case 'F':
 	{
 	  symbol s = read_escape_parameter(ALLOW_EMPTY);
-	  if (s.is_null())
-	    break;
 	  curenv->set_family(s);
 	  have_formattable_input = true;
 	  break;
