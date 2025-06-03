@@ -1282,9 +1282,11 @@ static void select_font()
   if (s == P_symbol)
     is_number = false;
   else {
-    for (const char *p = s.contents();
-	 p != 0 /* nullptr */ && *p != '\0';
-	 p++)
+    const char *p = s.contents();
+    assert(*p != 0 /* nullptr */);
+    if ((csdigit(*p)) || ('-' == *p))
+      p++;
+    for (; p != 0 /* nullptr */ && *p != '\0'; p++)
       if (!csdigit(*p)) {
 	is_number = false;
 	break;
@@ -1292,8 +1294,15 @@ static void select_font()
   }
   // environment::set_font warns if a bogus mounting position is
   // requested.  We must warn here if a bogus font name is selected.
-  if (is_number)
-    (void) curenv->set_font(atoi(s.contents()));
+  if (is_number) {
+    errno = 0;
+    long val = strtol(s.contents(), NULL, 10);
+    if ((ERANGE == errno) || (val > INT_MAX) || (val < 0))
+      warning(WARN_RANGE, "font mounting position must be in range"
+	      " 0..%1, got %2", INT_MAX, s.contents());
+    else
+      (void) curenv->set_font(int(val));
+  }
   else {
     if (s == "DESC")
       error("'%1' is not a valid font name", s.contents());

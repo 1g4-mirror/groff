@@ -1,3 +1,9 @@
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (select_font): Emit warning diagnostic
+	in "range" when the `ft` request is given an out-of-range
+	mounting position.
+
 2025-06-02  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	* src/utils/afmtodit/afmtodit.pl: Fix logic error; when falling
