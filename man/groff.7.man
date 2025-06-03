@@ -1770,11 +1770,11 @@ the formatter ignores the escape character.
 .
 (GNU
 .I troff \" GNU
-produces a warning in category
+emits a warning in category
 .RB \%\[lq] escape \[rq].
 .
 See section \[lq]Warnings\[rq] in
-.MR @g@troff 1 .)
+.MR @g@troff @MAN1EXT@ .)
 .
 .
 .P

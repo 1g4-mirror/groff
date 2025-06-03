@@ -7297,8 +7297,8 @@ result.
 If the character that follows the escape character
 does not identify a valid operation,
 the formatter ignores the escape character.@footnote{GNU
-@code{troff} @c GNU
-produces a warning in category
+@command{troff} @c GNU
+emits a warning in category
 @samp{escape}.
 @xref{Warnings}.}
 
