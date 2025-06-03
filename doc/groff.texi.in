@@ -7140,10 +7140,17 @@ definitions (or any input lines) with blank lines.
 @cindex macro arguments
 @cindex arguments to macros
 
-If a macro of the desired name does not exist when called, it is
-created, assigned an empty definition, and a warning in category
-@samp{mac} is emitted.  Calling an undefined macro @emph{does} end a
-macro definition naming it as its end macro (@pxref{Writing Macros}).
+If a macro of the desired name does not exist when called,
+the formatter creates it
+and assigns it an empty definition.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{mac}.
+@xref{Warnings}.}
+Calling an undefined macro
+@emph{does}
+end a macro definition naming it as its end macro
+(@pxref{Writing Macros}).
 
 @cindex spaces, in a macro argument
 To embed spaces @emph{within} a macro argument, enclose the argument in

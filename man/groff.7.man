@@ -1620,11 +1620,16 @@ authors use them to indent the source of documents or macro files.
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Calling Macros".
 If a macro of the desired name does not exist when called,
-it is created,
-assigned an empty definition,
-and a warning in category
-.RB \[lq] mac \[rq]
-is emitted.
+the formatter creates it
+and assigns it an empty definition.
+.
+(GNU
+.I troff \" GNU
+emits a warning in category
+.RB \[lq] mac \[rq].
+.
+See section \[lq]Warnings\[rq] in
+.MR @g@troff @MAN1EXT@ .)
 .
 Calling an undefined macro
 .I does
