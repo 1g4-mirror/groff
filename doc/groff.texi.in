@@ -6854,15 +6854,25 @@ Expressions} for the @code{\B} escape sequence.
 
 @cindex undefined identifiers
 @cindex identifiers, undefined
-How GNU @code{troff} handles the interpretation of an undefined
-identifier depends on the context.  There is no way to invoke an
-undefined request; such syntax is interpreted as a macro call instead.
-If the identifier is interpreted as a string, macro, or diversion, GNU
-@code{troff} emits a warning in category @samp{mac}, defines it as
-empty, and interpolates nothing.  If the identifier is interpreted as a
-register, GNU @code{troff} emits a warning in category @samp{reg},
-initializes it to zero, and interpolates that value.  @xref{Warnings},
-@ref{Interpolating Registers}, and @ref{Strings}.
+The formatter's handling of undefined identifiers is context-dependent.
+There is no way to invoke an undefined request;
+such syntax is interpreted as a macro call instead.
+If the identifier is interpreted as a string,
+macro,
+or diversion name,
+the formatter defines it as empty and interpolates nothing.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{mac}.
+@xref{Warnings}.}
+Similarly,
+if the identifier is interpreted as a register name,
+the formatter initializes it to zero
+and interpolates that value.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{reg}.
+@xref{Warnings}.}
 Attempting to use an undefined
 typeface,
 special character or character class,

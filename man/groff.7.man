@@ -1438,29 +1438,29 @@ tests its argument for validity as an identifier.
 .
 .
 .P
-How GNU
-.I troff \" GNU
-handles the interpretation of an undefined identifier depends on the
-context.
+The formatter's handling of undefined identifiers is context-dependent.
 .
 There is no way to invoke an undefined request;
 such syntax is interpreted as a macro call instead.
 .
 If the identifier is interpreted as a string,
 macro,
-or diversion,
-.I @g@troff
+or diversion name,
+the formatter defines it as empty and interpolates nothing.
+(GNU
+.I troff \" GNU
 emits a warning in category
-.RB \[lq] mac \[rq],
-defines it as empty,
-and interpolates nothing.
+.RB \[lq] mac \[rq].
+See section \[lq]Warnings\[rq] of
+.MR @g@troff @MAN1EXT@ .)
 .
-If the identifier is interpreted as a register,
+Similarly,
+if the identifier is interpreted as a register name,
+the formatter initializes it to zero
+and interpolates that value.
 .I @g@troff
 emits a warning in category
 .RB \[lq] reg \[rq],
-initializes it to zero,
-and interpolates that value.
 .
 See section \[lq]Warnings\[rq] in
 .MR @g@troff @MAN1EXT@ ,
