@@ -2320,25 +2320,7 @@ void token::next()
 	goto handle_escape_char;
       case 'f':
 	{
-	  symbol s = read_escape_parameter(ALLOW_EMPTY);
-	  const char *p;
-	  for (p = s.contents();
-	       p != 0 /* nullptr */ && *p != '\0';
-	       p++)
-	    if (!csdigit(*p))
-	      break;
-	  // environment::set_font warns if a bogus mounting position is
-	  // requested.  We must warn here if a bogus font name is
-	  // selected.
-	  if (*p != '\0' || s.is_empty()) {
-	    if (s == "DESC")
-	      error("'%1' is not a valid font name", s.contents());
-	    else if (!curenv->set_font(s))
-	      warning(WARN_FONT, "cannot select font '%1'",
-		      s.contents());
-	  }
-	  else
-	    (void) curenv->set_font(atoi(s.contents()));
+	  select_font(read_escape_parameter(ALLOW_EMPTY));
 	  if (!want_att_compat)
 	    have_formattable_input = true;
 	  break;
