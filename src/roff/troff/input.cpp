@@ -2327,8 +2327,7 @@ void token::next()
 	}
       case 'F':
 	{
-	  symbol s = read_escape_parameter(ALLOW_EMPTY);
-	  curenv->set_family(s);
+	  curenv->set_family(read_escape_parameter(ALLOW_EMPTY));
 	  have_formattable_input = true;
 	  break;
 	}

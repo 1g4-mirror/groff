@@ -1,5 +1,10 @@
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::next): Drop unnecessary
+	temporary variable from `\F` escape sequence handler.
+
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next): Replace most of the
 	`\f` escape sequence handler with a call to `select_font()`.
 
