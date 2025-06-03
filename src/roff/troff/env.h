@@ -423,6 +423,7 @@ extern environment *curenv;
 extern void pop_env();
 extern void push_env(int);
 
+void select_font(symbol);
 void init_environments();
 
 extern double spread_limit;

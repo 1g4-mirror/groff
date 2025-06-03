@@ -1273,11 +1273,11 @@ void stroke_color_change()
 
 static symbol P_symbol("P");
 
-static void select_font_request()
+// Select font with name or mounting position `s`.
+void select_font(symbol s)
 {
-  symbol s = get_name();
   bool is_number = true;
-  if (s.is_null())
+  if (s.is_null() || s.is_empty())
     s = P_symbol;
   if (s == P_symbol)
     is_number = false;
@@ -1292,7 +1292,7 @@ static void select_font_request()
 	break;
       }
   }
-  // environment::set_font warns if a bogus mounting position is
+  // environment::set_font warns if an unused mounting position is
   // requested.  We must warn here if a bogus font name is selected.
   if (is_number) {
     errno = 0;
@@ -1309,6 +1309,11 @@ static void select_font_request()
     else if (!curenv->set_font(s))
       warning(WARN_FONT, "cannot select font '%1'", s.contents());
   }
+}
+
+static void select_font_request()
+{
+  select_font(get_name());
   skip_line();
 }
 

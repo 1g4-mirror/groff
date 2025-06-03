@@ -1,5 +1,18 @@
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor, moving font selection logic into a dedicated
+	function (so that the `\f` escape handler can also use it).
+
+	* src/roff/troff/env.h: Give new `select_font()` function
+	external linkage.
+	* src/roff/troff/env.cpp (select_font_request): Move bulk of
+	logic from here...
+	(select_font): ...to here.  Also recognize an empty symbol, in
+	addition to a null one, as equivalent to `.ft P`, to accommodate
+	what the `\f` escape sequence handler will pass as an argument.
+
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor, continuing reform of functions that
 	are troff request handlers such that their names end with
 	`_request`.
