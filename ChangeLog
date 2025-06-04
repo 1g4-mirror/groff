@@ -167,6 +167,16 @@
 
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (mount_font_no_translate): Rename
+	argument from `external_name` to `filename` for clarity.  This
+	argument only ever stores the name of the font description file,
+	which is usually also the font identifier in GNU troff (but can
+	differ if the `fp` request's three-argument form is used).
+	(mount_font_at_position): Rename local variable `external_name`
+	to `filename` for the same reason.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grodvi/dvi.cpp
 	(class dvi_font): Comment member function formal argument names
 	as a compromise with the Stroustrup-style C++ used in most of

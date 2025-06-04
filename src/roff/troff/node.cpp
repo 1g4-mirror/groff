@@ -6500,21 +6500,21 @@ dictionary font_dictionary(50);
 font nonexistent_font = font("\0");
 
 // Mount font at position `n` with troff identifier `name` and
-// description file name `external_name`.  If `check_only`, just look up
-// `name` in the existing list of mounted fonts.
-static bool mount_font_no_translate(int n, symbol name,
-				    symbol external_name,
+// description file name `filename` (these are often identical).  If
+// `check_only`, just look up `name` in the existing list of mounted
+// fonts.
+static bool mount_font_no_translate(int n, symbol name, symbol filename,
 				    bool check_only = false)
 {
   assert(n >= 0);
   font *fm = 0 /* nullptr */;
-  void *p = font_dictionary.lookup(external_name);
+  void *p = font_dictionary.lookup(filename);
   if (0 /* nullptr */ == p) {
-    fm = font::load_font(external_name.contents(), check_only);
+    fm = font::load_font(filename.contents(), check_only);
     if (check_only)
       return fm != 0 /* nullptr */;
     if (0 /* nullptr */ == fm) {
-      (void) font_dictionary.lookup(external_name, &nonexistent_font);
+      (void) font_dictionary.lookup(filename, &nonexistent_font);
       return false;
     }
     (void) font_dictionary.lookup(name, fm);
@@ -6534,7 +6534,7 @@ static bool mount_font_no_translate(int n, symbol name,
   }
   else if (font_table[n] != 0 /* nullptr */)
     delete font_table[n];
-  font_table[n] = new font_info(name, n, external_name, fm);
+  font_table[n] = new font_info(name, n, filename, fm);
   font_family::invalidate_fontno(n);
   return true;
 }
@@ -6642,11 +6642,11 @@ static void mount_font_at_position()
     else {
       symbol internal_name = get_name(true /* required */);
       if (!internal_name.is_null()) {
-	symbol external_name = get_long_name();
-	if (!mount_font(n, internal_name, external_name)) {
+	symbol filename = get_long_name();
+	if (!mount_font(n, internal_name, filename)) {
 	  string msg;
-	  if (external_name != 0 /* nullptr */)
-	    msg += string(" from file '") + external_name.contents()
+	  if (filename != 0 /* nullptr */)
+	    msg += string(" from file '") + filename.contents()
 	      + string("'");
 	  msg += '\0';
 	  error("cannot load font description '%1'%2 for mounting",
