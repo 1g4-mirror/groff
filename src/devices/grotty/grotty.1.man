@@ -9,7 +9,7 @@ output driver for typewriter-like (terminal) devices
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -146,7 +146,8 @@ reverse video
 [\[lq]negative image\[rq]]
 and colors).
 .
-By default, devices supporting the appropriate sequences can view
+Devices supporting
+SGR 30\[en]37 and 40\[en]47 sequences can view
 .I roff
 documents using eight different background and foreground colors.
 .
@@ -165,36 +166,11 @@ and cyan.
 Unrecognized colors are mapped to the default color,
 which is dependent on the settings of the terminal.
 .
-If
-.B -P-t
-is passed to groff (which sets
-.I grotty's
-.B -t
-flag - see below) it operates in TRUECOLOR mode and any
-RGB colour can be used as foreground and background.
-Many terminal emulators now support the TRUECOLOR extensions
-if your environment includes:-
-.P
-.RS
-COLORTERM="truecolor"
-.RE
-.P
-You specify the RGB colours using the usual:-
-.P
-.RS
-\&.defcolor mediumspringgreen rgb #00fa9a
-.P
-.RE
-NOTE: only rgb colour definitions are supported.
-.P
-And then use \[rs]m[...] and \[rs]M[...] to specify the foreground
-and background colours.
-The 8 legacy, 4 bit, colours (defined above) may look different when
-used with 24 bit colours. The reason is because although tty.tmac
-defines "yellow" as rgb #ffff00, it uses rgb #b26818 (or #e5cb3f for
-text when the bold font is selected), whereas for 24 bit colours the
-full #ffff00 is used, and using the bold font just bolds the text
-rather than alter the colour.
+Also see
+.B \-t
+in section \[lq]Options\[rq] below.
+.
+.
 .P
 OSC\~8 hyperlinks are produced for these devices.
 .
@@ -619,7 +595,14 @@ is also specified.
 .
 .TP
 .B \-t
-Use 24 bit "TRUECOLOR" extension rather than 4 bit legacy colours.
+Assume that the output device supports
+SGR\~38 and 48 escape sequences,
+which permit specification
+of character cell foreground and background colors
+in the RGB color space
+with 8 bits per channel.
+.
+.
 .TP
 .B \-u
 Suppress the use of underlining for italic characters in legacy output
