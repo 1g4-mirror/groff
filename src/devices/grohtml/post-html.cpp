@@ -429,7 +429,7 @@ char *char_buffer::add_string (const char *s, unsigned int length)
   int i = 0;
   unsigned int old_used;
 
-  if (0 /* nullptr */ == s || length == 0)
+  if (0 /* nullptr */ == s || 0 == length)
     return 0 /* nullptr */;
 
   if (0 /* nullptr */ == tail) {
@@ -1799,7 +1799,7 @@ void assert_state::add (assert_pos **h,
       t->next = *h;
       (*h) = t;
     }
-    if (v == 0 || v[0] != '=') {
+    if (0 == v || v[0] != '=') {
       if (0 /* nullptr */ == f)
 	f = strsave("stdin");
       if (0 /* nullptr */ == l)
@@ -1885,7 +1885,7 @@ const char *replace_negate_str (const char *before, char *after)
 	      " ignoring\n", program_name, after);
       d = 0;
     }
-    if (d == 0)
+    if (0 == d)
       after[0] = '1';
     else
       after[0] = '0';
@@ -2422,7 +2422,7 @@ static int exists (const char *filename)
   assert(filename != 0 /* nullptr */);
   FILE *fp = fopen(filename, "r");
 
-  if (fp == 0 /* nullptr */) {
+  if (0 /* nullptr */ == fp) {
     return FALSE;
   } else {
     fclose(fp);
@@ -2691,7 +2691,7 @@ void html_printer::write_header (void)
 
 void html_printer::determine_header_level (int level)
 {
-  if (level == 0) {
+  if (0 == level) {
     int i;
 
     for (i = 0; ((i<header.header_buffer.length())
@@ -3009,7 +3009,7 @@ void html_printer::do_check_center(void)
   if (seen_center) {
     seen_center = FALSE;
     if (next_center > 0) {
-      if (end_center == 0) {
+      if (0 == end_center) {
 	int space = current_paragraph->retrieve_para_space()
 		    || seen_space;
 	current_paragraph->done_para();
@@ -3066,7 +3066,7 @@ void html_printer::do_eol_ce (void)
 	current_paragraph->do_break();
 
     end_center--;
-    if (end_center == 0) {
+    if (0 == end_center) {
       current_paragraph->done_para();
       suppress_sub_sup = TRUE;
     }
@@ -3888,9 +3888,9 @@ void html_printer::lookahead_for_tables (void)
       }
       if (((! g->is_a_tag()) || g->is_tab()) && (start_of_table != 0)) {
 	// we are in a table and have a glyph
-	if ((ncol == 0)
+	if ((0 == ncol)
 	    || (! tbl->add_column(ncol, colmin, colmax, align))) {
-	  if (ncol == 0)
+	  if (0 == ncol)
 	    add_table_end("*** NCOL == 0 ***");
 	  else
 	    add_table_end("*** CROSSED COLS ***");
@@ -4364,7 +4364,7 @@ void html_printer::draw(int code, int *p, int np,
     break;
   case 't':
     {
-      if (np == 0) {
+      if (0 == np) {
 	line_thickness = -1;
       } else {
 	// troff gratuitously adds an extra 0
@@ -4474,7 +4474,7 @@ html_printer::html_printer()
   space_width       = font::hor;
   paper_length      = font::paperlength;
   linelength        = font::res*13/2;
-  if (paper_length == 0)
+  if (0 == paper_length)
     paper_length    = 11*font::res;
 
   page_contents = new page();
@@ -4529,7 +4529,7 @@ int html_printer::sbuf_continuation (glyph *g, const char *name,
     return TRUE;
   } else {
     if ((env->hpos >= sbuf_end_hpos)
-	&& ((sbuf_kern == 0)
+	&& ((0 == sbuf_kern)
 	    || (sbuf_end_hpos - sbuf_kern != env->hpos))) {
       /*
        *  lets see whether a space is needed or not
@@ -4926,7 +4926,7 @@ void html_printer::set_numbered_char(int num, const environment *env,
     return;
   }
   font *f = font_table[fn];
-  if (f == 0 /* nullptr */) {
+  if (0 /* nullptr */ == f) {
     error("no font mounted at position %1", fn);
     return;
   }
@@ -4959,7 +4959,7 @@ glyph *html_printer::set_char_and_width(const char *nm,
     return UNDEFINED_GLYPH;
   }
   *f = font_table[fn];
-  if (*f == 0 /* nullptr */) {
+  if (0 /* nullptr */ == *f) {
     error("no font mounted at position %1", fn);
     return UNDEFINED_GLYPH;
   }

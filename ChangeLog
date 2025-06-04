@@ -1,6 +1,24 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp
+	(char_buffer::add_string)
+	(assert_state::add)
+	(replace_negate_str)
+	(exists)
+	(html_printer::determine_header_level)
+	(html_printer::do_check_center)
+	(html_printer::do_eol_ce)
+	(html_printer::lookahead_for_tables)
+	(html_printer::draw)
+	(html_printer::html_printer)
+	(html_printer::sbuf_continuation)
+	(html_printer::set_numbered_char)
+	(html_printer::set_char_and_width): Reorder equality comparisons
+	to avoid inadvertent lvalue assignment.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp
 	(html_printer::do_tab_te)
 	(html_printer::do_tab)
 	(html_printer::do_tab0)
