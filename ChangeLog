@@ -1,3 +1,9 @@
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grotty/tty.cpp (tty_printer::put_color): Fix
+	`-Wformat` compiler warning; use `%lu` instead of `%u`
+	conversion with `sprintf()` with `long` arguments.
+
 2025-05-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	* src/devices/grotty/tty.cpp: Add support for devices supporting

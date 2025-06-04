@@ -747,7 +747,7 @@ void tty_printer::put_color(long color_index, int back)
     putstring(CSI);
     int fb = back ? 48 : 38;
     static char buf[24];
-    sprintf(buf,"%d;2;%u;%u;%um",fb, color_index>>16, (color_index>>8) & 0xff, color_index & 0xff);
+    sprintf(buf,"%d;2;%lu;%lu;%lum",fb, color_index>>16, (color_index>>8) & 0xff, color_index & 0xff);
     putstring(buf);
   }
 }
