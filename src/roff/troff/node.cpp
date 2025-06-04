@@ -176,6 +176,7 @@ public:
   int is_style();
   void set_zoom(int);
   int get_zoom();
+  font *get_font() const;
   friend symbol get_font_name(int, environment *);
   friend symbol get_style_name(int);
 };
@@ -277,6 +278,11 @@ inline int font_info::get_zoom()
   if (is_style())
     return 0;
   return fm->get_zoom();
+}
+
+font *font_info::get_font() const
+{
+  return fm;
 }
 
 tfont *make_tfont(tfont_spec &spec)

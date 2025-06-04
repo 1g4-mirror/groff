@@ -167,6 +167,16 @@
 
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Extend `font_info` class.  I need this so I can
+	implement a font mounting position dumper.
+
+	* src/roff/troff/node.cpp (class font_info): Declare new
+	`get_font()` member function, returning pointer to contained
+	`font` object.
+	(font_info::get_font): Implement accessor member function.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (mount_font_no_translate): Clarify
 	error diagnostic when the `fp` request is given a too-huge
 	mounting position; disclose both the rejected argument and value
