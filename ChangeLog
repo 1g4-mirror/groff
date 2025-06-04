@@ -1,5 +1,17 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libdriver/printer.cpp: Fix code style nits.
+	(printer::load_font): Reorder equality comparison to avoid
+	inadvertent lvalue assignment.
+	(printer::set_ascii_char, printer::set_special_char)
+	(printer::set_char_and_width, printer::set_numbered_char):
+	Explicitly compare value of pointer type to null pointer literal
+	instead of letting it pun down to a Boolean.
+	(printer::set_char_and_width, printer::set_numbered_char):
+	Parenthesize formally complex expressions.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (mount_font_at_position)
 	(font_lookup_error): Clarify error diagnostics; distinguish
 	problems with loading a font description (to mount it) from
