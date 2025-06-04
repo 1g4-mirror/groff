@@ -1,5 +1,14 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Fix code style nits.
+	(get_font_translation, mount_font_no_translate, lookup_family):
+	Favor C++ `static_cast<>` operator over omnipotent C-style
+	casts.
+	(mount_font_no_translate): Drop braces around single-statement
+	control flow branch; groff generally eschews these.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff, troff]: Refactor.
 
 	* src/include/font.h (class font): Promote constructor from

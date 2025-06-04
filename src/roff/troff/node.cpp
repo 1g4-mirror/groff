@@ -6491,7 +6491,7 @@ dictionary font_translation_dictionary(17);
 static symbol get_font_translation(symbol nm)
 {
   void *p = font_translation_dictionary.lookup(nm);
-  return p ? symbol((char *)p) : nm;
+  return p ? symbol(static_cast<char *>(p)) : nm;
 }
 
 dictionary font_dictionary(50);
@@ -6519,11 +6519,10 @@ static bool mount_font_no_translate(int n, symbol name,
     }
     (void) font_dictionary.lookup(name, fm);
   }
-  else if (&nonexistent_font == p) {
+  else if (&nonexistent_font == p)
     return false;
-  }
   else
-    fm = (font*)p;
+    fm = static_cast<font *>(p);
   if (check_only)
     return true;
   if (n >= font_table_size) {
@@ -6724,7 +6723,8 @@ dictionary family_dictionary(5);
 
 font_family *lookup_family(symbol nm)
 {
-  font_family *f = (font_family *)family_dictionary.lookup(nm);
+  font_family *f
+    = static_cast<font_family *>(family_dictionary.lookup(nm));
   if (!f) {
     f = new font_family(nm);
     (void) family_dictionary.lookup(nm, f);
