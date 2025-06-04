@@ -1756,15 +1756,15 @@ assert_state::~assert_state ()
   while (xhead != 0 /* nullptr */) {
     t = xhead;
     xhead = xhead->next;
-    delete[] (char *)t->val;
-    delete[] (char *)t->id;
+    delete[] t->val;
+    delete[] t->id;
     delete t;
   }
   while (yhead != 0 /* nullptr */) {
     t = yhead;
     yhead = yhead->next;
-    delete[] (char *)t->val;
-    delete[] (char *)t->id;
+    delete[] t->val;
+    delete[] t->id;
     delete t;
   }
 }
@@ -1812,9 +1812,9 @@ void assert_state::add (assert_pos **h,
     }
     t->id = i;
     t->val = v;
-    delete[] (char *)c;
-    delete[] (char *)f;
-    delete[] (char *)l;
+    delete[] c;
+    delete[] f;
+    delete[] l;
   }
 }
 
@@ -1874,7 +1874,7 @@ void assert_state::close (const char *c)
 const char *replace_negate_str (const char *before, char *after)
 {
   if (before != 0 /* nullptr */)
-    delete[] (char *)before;
+    delete[] before;
 
   assert(after != 0 /* nullptr */);
   if (strlen(after) > 0) {
@@ -1897,7 +1897,7 @@ const char *replace_negate_str (const char *before, char *after)
 const char *replace_str (const char *before, const char *after)
 {
   if (before != 0 /* nullptr */)
-    delete[] (char *)before;
+    delete[] before;
   return after;
 }
 
@@ -2508,7 +2508,7 @@ void html_printer::do_title (void)
 	t = page_contents->glyphs.get_data();
 	removed_from_head = FALSE;
 	if (t->is_auto_img()) {
-	  string img = generate_img_src((char *)(t->text_string + 20));
+	  string img = generate_img_src((t->text_string + 20));
 
 	  if (! img.empty()) {
 	    if (found_title_start)
@@ -2728,7 +2728,7 @@ void html_printer::do_heading (char *arg)
     horiz = g->minh;
     do {
       if (g->is_auto_img()) {
-	string img=generate_img_src((char *)(g->text_string + 20));
+	string img=generate_img_src((g->text_string + 20));
 
 	if (! img.empty()) {
 	  // we cannot use full heading anchors with images
@@ -3314,7 +3314,7 @@ void html_printer::troff_tag (text_glob *g)
   /*
    *  firstly skip over devtag:
    */
-  char *t=(char *)g->text_string+strlen("devtag:");
+  char *t=const_cast<char *>(g->text_string)+strlen("devtag:");
   if (strncmp(g->text_string, "html</p>:", strlen("html</p>:")) == 0) {
     do_end_para(g);
   } else if (strncmp(g->text_string, "html<?p>:", strlen("html<?p>:"))
@@ -3331,7 +3331,7 @@ void html_printer::troff_tag (text_glob *g)
   } else if (g->is_eol_ce()) {
     do_eol_ce();
   } else if (strncmp(t, ".sp", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_space(a);
   } else if (strncmp(t, ".br", 3) == 0) {
     seen_break = 1;
@@ -3344,10 +3344,10 @@ void html_printer::troff_tag (text_glob *g)
   } else if (strcmp(t, ".left-image") == 0) {
     do_left_image();
   } else if (strncmp(t, ".auto-image", 11) == 0) {
-    char *a = (char *)t+11;
+    char *a = t+11;
     do_auto_image(g, a);
   } else if (strncmp(t, ".ce", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     suppress_sub_sup = TRUE;
     do_center(a);
   } else if (g->is_tl()) {
@@ -3359,37 +3359,37 @@ void html_printer::troff_tag (text_glob *g)
     title.with_h1 = FALSE;
     do_title();
   } else if (strncmp(t, ".fi", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_fill(a);
   } else if ((strncmp(t, ".SH", 3) == 0)
 	      || (strncmp(t, ".NH", 3) == 0)) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_heading(a);
   } else if (strncmp(t, ".ll", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_linelength(a);
   } else if (strncmp(t, ".po", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_pageoffset(a);
   } else if (strncmp(t, ".in", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_indentation(a);
   } else if (strncmp(t, ".ti", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_tempindent(a);
   } else if (strncmp(t, ".vs", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_verticalspacing(a);
   } else if (strncmp(t, ".ps", 3) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_pointsize(a);
   } else if (strcmp(t, ".links") == 0) {
     do_links();
   } else if (strncmp(t, ".job-name", 9) == 0) {
-    char *a = (char *)t+9;
+    char *a = t+9;
     do_job_name(a);
   } else if (strncmp(t, ".head", 5) == 0) {
-    char *a = (char *)t+5;
+    char *a = t+5;
     do_head(a);
   } else if (strcmp(t, ".no-auto-rule") == 0) {
     auto_rule = FALSE;
@@ -3398,10 +3398,10 @@ void html_printer::troff_tag (text_glob *g)
   } else if (strcmp(t, ".tab-te") == 0) {
     do_tab_te();
   } else if (strncmp(t, ".col ", 5) == 0) {
-    char *a = (char *)t+4;
+    char *a = t+4;
     do_col(a);
   } else if (strncmp(t, "tab ", 4) == 0) {
-    char *a = (char *)t+3;
+    char *a = t+3;
     do_tab(a);
   } else if (strncmp(t, "tab0", 4) == 0) {
     do_tab0();
@@ -4557,7 +4557,7 @@ const char *get_html_translation (font *f, const string &name)
   if ((0 /* nullptr */ == f) || name.empty())
     return 0 /* nullptr */;
   else {
-    glyph *g = name_to_glyph((char *)(name + '\0').contents());
+    glyph *g = name_to_glyph((name + '\0').contents());
     if (f->contains(g))
       return get_html_entity(f->get_code(g));
     else
@@ -5392,15 +5392,15 @@ static char *get_str (const char *s, char **n)
     memcpy(v, s, i+1);
     v[i] = '\0';
     if (s[i] == ',')
-      (*n) = (char *)&s[i+1];
+      (*n) = const_cast<char *>(&s[i+1]);
     else
-      (*n) = (char *)&s[i];
+      (*n) = const_cast<char *>(&s[i]);
     return v;
   }
   if (s[i] == ',')
-    (*n) = (char *)&s[1];
+    (*n) = const_cast<char *>(&s[1]);
   else
-    (*n) = (char *)s;
+    (*n) = const_cast<char *>(s);
   return 0;
 }
 
@@ -5429,9 +5429,9 @@ char *make_val (char *s, int v, char *id, char *f, char *l)
       t++;
     if (atoi(t) != v) {
       if (0 /* nullptr */ == f)
-	f = (char *)"stdin";
+	f = const_cast<char *>("stdin");
       if (0 /* nullptr */ == l)
-	l = (char *)"<none>";
+	f = const_cast<char *>("<none>");
       fprintf(stderr, "%s:%s:%s: assertion failed at id%s;"
 	      " expected %d, got %s\n", program_name, f, l, id, v, s);
     }
@@ -5476,7 +5476,7 @@ void html_printer::handle_state_assertion (text_glob *g)
 {
   if (g != 0 /* nullptr */ && g->is_a_tag()
       && (strncmp(g->text_string, "assertion:[", 11) == 0)) {
-    char *n   = (char *)&g->text_string[11];
+    char *n   = const_cast<char *>(&g->text_string[11]);
     char *cmd = get_str(n, &n);
     char *val = get_str(n, &n);
     (void)get_str(n, &n);	// unused
@@ -5538,13 +5538,13 @@ void html_printer::special(char *s, const environment *env, char type)
 	f = font::load_font("TR");
 
       if (strncmp(s, "math<?p>:", 9) == 0) {
-	if (strncmp((char *)&s[9], "<math>", 6) == 0) {
+	if (strncmp(&s[9], "<math>", 6) == 0) {
 	  s[9] = '\0';
 	  t = s;
 	  t += "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">";
-	  t += (char *)&s[15];
+	  t += &s[15];
 	  t += '\0';
-	  s = (char *)&t[0];
+	  s = &t[0];
 	}
       }
 

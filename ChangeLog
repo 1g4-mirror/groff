@@ -1,6 +1,24 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp
+	(assert_state::~assert_state)
+	(assert_state::add)
+	(replace_negate_str)
+	(replace_str)
+	(html_printer::do_title)
+	(html_printer::do_heading)
+	(html_printer::troff_tag)
+	(get_html_translation)
+	(html_printer::special): Remove unnecessary C-style type casts.
+	(html_printer::troff_tag)
+	(get_str)
+	(make_val)
+	(html_printer::handle_state_assertion): Favor C++-style
+	`const_cast` over C-style omnipotent casts.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp
 	(files::add_new_file)
 	(text_glob::get_tab_args)
 	(list::is_less)
