@@ -705,7 +705,7 @@ Output drivers
    $ groff -T utf8 -P -t <<EOF
    .defcolor pink rgb #ffc0cb
    .defcolor springgreen rgb #00ff7f
-   Hello, \f[B]\m[pink]colorful \\m[springgreen]world\m[default]\f[]!
+   Hello, \f[B]\m[pink]colorful \m[springgreen]world\m[default]\f[]!
    .pl \n[nl]u
    EOF
 
