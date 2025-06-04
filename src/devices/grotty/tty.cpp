@@ -195,7 +195,7 @@ class tty_printer : public printer {
 		unsigned char);
   void simple_add_char(const output_character, const environment *);
   char *make_rgb_string(unsigned int, unsigned int, unsigned int);
-  bool tty_color(unsigned int, unsigned int, unsigned int, schar *,
+  bool has_color(unsigned int, unsigned int, unsigned int, schar *,
 		 schar = DEFAULT_COLOR_IDX);
   void line(int, int, int, int, color *, color *);
   void draw_line(int *, int, const environment *);
@@ -238,14 +238,14 @@ char *tty_printer::make_rgb_string(unsigned int r,
   return s;
 }
 
-bool tty_printer::tty_color(unsigned int r,
+bool tty_printer::has_color(unsigned int r,
 			    unsigned int g,
 			    unsigned int b, schar *idx, schar value)
 {
   bool is_known_color = true;
   char *s = make_rgb_string(r, g, b);
   schar *i = tty_colors.lookup(s);
-  if (!i) {
+  if (0 /* nullptr */ == i) {
     is_known_color = false;
     i = new schar[1];
     *i = value;
@@ -262,20 +262,25 @@ tty_printer::tty_printer() : cached_v(0)
     hline_char = 0x2500;
     vline_char = 0x2502;
   }
+  // TODO: Skip color setup if terminfo `colors` capability is "-1".
   schar dummy;
+  // Create the eight ANSI X3.64/ECMA-48/ISO 6429 standard colors.
   // black, white
-  (void)tty_color(0, 0, 0, &dummy, 0);
-  (void)tty_color(color::MAX_COLOR_VAL,
-		  color::MAX_COLOR_VAL,
-		  color::MAX_COLOR_VAL, &dummy, 7);
+  (void) has_color(0, 0, 0, &dummy, 0);
+  (void) has_color(color::MAX_COLOR_VAL,
+                   color::MAX_COLOR_VAL,
+                   color::MAX_COLOR_VAL, &dummy, 7);
   // red, green, blue
-  (void)tty_color(color::MAX_COLOR_VAL, 0, 0, &dummy, 1);
-  (void)tty_color(0, color::MAX_COLOR_VAL, 0, &dummy, 2);
-  (void)tty_color(0, 0, color::MAX_COLOR_VAL, &dummy, 4);
+  (void) has_color(color::MAX_COLOR_VAL, 0, 0, &dummy, 1);
+  (void) has_color(0, color::MAX_COLOR_VAL, 0, &dummy, 2);
+  (void) has_color(0, 0, color::MAX_COLOR_VAL, &dummy, 4);
   // yellow, magenta, cyan
-  (void)tty_color(color::MAX_COLOR_VAL, color::MAX_COLOR_VAL, 0, &dummy, 3);
-  (void)tty_color(color::MAX_COLOR_VAL, 0, color::MAX_COLOR_VAL, &dummy, 5);
-  (void)tty_color(0, color::MAX_COLOR_VAL, color::MAX_COLOR_VAL, &dummy, 6);
+  (void) has_color(color::MAX_COLOR_VAL, color::MAX_COLOR_VAL, 0,
+		   &dummy, 3);
+  (void) has_color(color::MAX_COLOR_VAL, 0, color::MAX_COLOR_VAL,
+		   &dummy, 5);
+  (void) has_color(0, color::MAX_COLOR_VAL, color::MAX_COLOR_VAL,
+		   &dummy, 6);
   nlines = 66;
   lines = new tty_glyph *[nlines];
   for (int i = 0; i < nlines; i++)
@@ -336,7 +341,7 @@ schar tty_printer::color_to_idx(color *col)
   unsigned int r, g, b;
   col->get_rgb(&r, &g, &b);
   schar idx;
-  if (!tty_color(r, g, b, &idx)) {
+  if (!has_color(r, g, b, &idx)) {
     char *s = col->print_color();
     error("unsupported color '%1' mapped to default", s);
     delete[] s;
@@ -562,7 +567,7 @@ void tty_printer::draw_polygon(int *p, int np, const environment *env)
     error("no arguments for polygon");
     return;
   }
-  // We only draw polygons which consist entirely of horizontal and
+  // We draw only polygons that consist entirely of horizontal and
   // vertical lines.
   int hpos = 0;
   int vpos = 0;

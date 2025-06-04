@@ -1,5 +1,15 @@
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grotty/tty.cpp (class tty_printer): Rename member
+	function `tty_color` to `has_color`; since it returns a Boolean,
+	the name should imply a logical predicate.
+	(tty_printer::tty_color): Rename this...
+	(tty_printer::has_color): ...to this.
+	(tty_printer::tty_printer, tty_printer::color_to_idx): Update
+	call sites.
+
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grotty/tty.cpp (tty_printer::color_to_idx):
 	Clarify error diagnostic: the problem isn't that a color is
 	unrecognized, but that it is unsupported by the device.
