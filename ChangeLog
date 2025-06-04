@@ -1,6 +1,13 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp
+	(html_printer::set_numbered_char): Compare integer-valued
+	variable to integer literal instead of letting it pun down to a
+	Boolean.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp
 	(char_buffer::add_string)
 	(assert_state::add)
 	(replace_negate_str)

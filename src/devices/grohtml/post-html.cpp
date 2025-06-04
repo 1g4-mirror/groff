@@ -4935,7 +4935,7 @@ void html_printer::set_numbered_char(int num, const environment *env,
     return;
   }
   int w;
-  if (nbsp_width)
+  if (nbsp_width > 0)
     w = nbsp_width;
   else
     w = f->get_width(g, env->size);
