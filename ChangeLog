@@ -1,3 +1,21 @@
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grotty/tty.cpp: Refactor and fix code style nits.
+	Convert manifest constant `DEFAULT_COLOR_IDX` from preprocessor
+	macro to global variable of type `const int`.
+	(tty_printer::put_color): Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.  Compute buffer length for
+	formatted string using `sizeof()` on string literal representing
+	expected output of maximal length.  Drop `static` qualifier from
+	same buffer; the buffer's contents do not need to outlive the
+	function call, and allocating ~18 bytes from the stack should
+	never be a problem.  Convert `sprintf()` call to `snprintf()`
+	and save its return value instead of discarding it.  Use
+	`assert()` to check for truncation of formatted string.  This
+	is merely an `assert()` because we don't expect truncation to
+	ever occur in a production environment, because the buffer is
+	sized for output of maximal length.
+
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grotty/tty.cpp (tty_printer::put_color): Fix

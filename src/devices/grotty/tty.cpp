@@ -108,7 +108,7 @@ static unsigned char bold_underline_mode;
 // 'CSI 0 m' exclusively
 #define SGR_DEFAULT CSI "0m"
 
-#define DEFAULT_COLOR_IDX -1
+const int DEFAULT_COLOR_IDX = -1;
 
 class tty_font : public font {
   tty_font(const char *);
@@ -710,7 +710,7 @@ void tty_printer::put_char(output_character wc)
 void tty_printer::put_color(long color_index, int back)
 {
   if (!want_sgr_truecolor) {
-    if (color_index == DEFAULT_COLOR_IDX) {
+    if (DEFAULT_COLOR_IDX == color_index) {
       putstring(SGR_DEFAULT);
       // set bold and underline again
       if (is_boldfacing)
@@ -738,16 +738,22 @@ void tty_printer::put_color(long color_index, int back)
     }
   }
   else {
-    if (color_index == DEFAULT_COLOR_IDX) {
+    if (DEFAULT_COLOR_IDX == color_index) {
       putstring(SGR_DEFAULT);
       back = !back;
       color_index = back ? curr_back_idx : curr_fore_idx;
-      if (color_index == DEFAULT_COLOR_IDX) {return;}
+      if (DEFAULT_COLOR_IDX == color_index)
+	return;
     }
     putstring(CSI);
     int fb = back ? 48 : 38;
-    static char buf[24];
-    sprintf(buf,"%d;2;%lu;%lu;%lum",fb, color_index>>16, (color_index>>8) & 0xff, color_index & 0xff);
+    const size_t buflen = sizeof "48;2;255;255;255m";
+    char buf[buflen];
+    size_t written = snprintf(buf, buflen, "%d;2;%lu;%lu;%lum", fb,
+			      (color_index >> 16),
+			      ((color_index >> 8) & 0xff),
+			      (color_index & 0xff));
+    assert(written < buflen);
     putstring(buf);
   }
 }
@@ -1036,7 +1042,7 @@ int main(int argc, char **argv)
       allow_drawing_commands = false;
       break;
     case 't':
-      // TRUECOLOR
+      // Use SGR 38 and 48 sequences instead of SGR 30-37 and 40-47.
       want_sgr_truecolor = true;
       break;
     case CHAR_MAX + 1: // --help
