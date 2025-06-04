@@ -6527,7 +6527,9 @@ static bool mount_font_no_translate(int n, symbol name, symbol filename,
     return true;
   if (n >= font_table_size) {
     if ((n - font_table_size) > 1000) {
-      error("font position too much larger than first unused position");
+      error("requested font mounting position %1 too much larger than"
+	    " first unused position %2", n,
+	    next_available_font_position());
       return false;
     }
     grow_font_table(n);
