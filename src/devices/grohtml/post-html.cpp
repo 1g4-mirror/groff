@@ -2227,7 +2227,10 @@ void html_printer::set_style(const style &sty)
 {
   const char *fontname = sty.f->get_filename();
   if (0 /* nullptr */ == fontname)
-    fatal("no internalname specified for font");
+    // XXX: Is this the only circumstance that can cause a null font
+    // description file name?  ps.cpp uses sty.f->get_internal_name()...
+    fatal("cannot set style; font description lacks an 'internalname'"
+	  " directive");
 
 #if 0
   change_font(fontname, (font::res / (72 * font::sizescale))
@@ -2242,6 +2245,8 @@ void html_printer::set_style(const style &sty)
 int html_printer::is_bold (font *f)
 {
   assert(f != 0 /* nullptr */);
+  // XXX: This property should be inferred from font description data,
+  // not the file name.
   const char *fontname = f->get_filename();
   return (strcmp(fontname, "B") == 0) || (strcmp(fontname, "BI") == 0);
 }
@@ -2253,6 +2258,8 @@ int html_printer::is_bold (font *f)
 font *html_printer::make_bold (font *f)
 {
   assert(f != 0 /* nullptr */);
+  // XXX: This logic locks us into a font description file naming
+  // scheme.
   const char *fontname = f->get_filename();
 
   if (strcmp(fontname, "B") == 0)
@@ -4036,9 +4043,10 @@ int html_printer::is_line_start (int nf)
 
 int html_printer::is_font_courier (font *f)
 {
+  // XXX: This logic locks us into a font description file naming
+  // scheme.
   if (f != 0 /* nullptr */) {
     const char *fontname = f->get_filename();
-
     return((fontname != 0 /* nullptr */) && (fontname[0] == 'C'));
   }
   return FALSE;
@@ -4931,7 +4939,8 @@ void html_printer::set_numbered_char(int num, const environment *env,
     return;
   }
   if (!f->contains(g)) {
-    error("font '%1' has no glyph at index %2", f->get_filename(), num);
+    error("font description file '%1' has no glyph at index %2",
+	  f->get_filename(), num);
     return;
   }
   int w;
@@ -4945,6 +4954,8 @@ void html_printer::set_numbered_char(int num, const environment *env,
   set_char(g, f, env, w, 0 /* nullptr */);
 }
 
+// XXX: Except for `w = round_width(w);`, this seems to be identical
+// to the overridden `printer::set_char_and_width()`.
 glyph *html_printer::set_char_and_width(const char *nm,
 					const environment *env,
 					int *widthp, font **f)
@@ -4965,11 +4976,11 @@ glyph *html_printer::set_char_and_width(const char *nm,
   }
   if (!(*f)->contains(g)) {
     if ((nm[0] != '\0') && ('\0' == nm[1]))
-      error("font '%1' does not contain ordinary character '%2'",
-	    (*f)->get_filename(), nm[0]);
+      error("font description file '%1' lacks glyph for ordinary"
+	    " character '%2'", (*f)->get_filename(), nm[0]);
     else
-      error("font '%1' does not contain special character '%2'",
-	    (*f)->get_filename(), nm);
+      error("font description file '%1' lacks glyph for special"
+	    " character '%2'", (*f)->get_filename(), nm);
     return UNDEFINED_GLYPH;
   }
   int w = (*f)->get_width(g, env->size);

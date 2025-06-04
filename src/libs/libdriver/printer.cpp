@@ -222,11 +222,11 @@ glyph *printer::set_char_and_width(const char *nm,
   }
   if (!(*f)->contains(g)) {
     if ((nm[0] != '\0') && ('\0' == nm[1]))
-      error("font '%1' does not contain ordinary character '%2'",
-	    (*f)->get_filename(), nm[0]);
+      error("font description file '%1' lacks glyph for ordinary"
+	    " character '%2'", (*f)->get_filename(), nm[0]);
     else
-      error("font '%1' does not contain special character '%2'",
-	    (*f)->get_filename(), nm);
+      error("font description file '%1' lacks glyph for special"
+	    " character '%2'", (*f)->get_filename(), nm);
     return UNDEFINED_GLYPH;
   }
   int w = (*f)->get_width(g, env->size);

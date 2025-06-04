@@ -1,5 +1,19 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libdriver,grohtml,grops]: Revise diagnostic messages.
+
+	* src/devices/grohtml/post-html.cpp
+	(html_printer::set_style)
+	(html_printer::set_numbered_char)
+	(html_printer::set_char_and_width):
+	* src/devices/grops/ps.cpp (ps_printer::set_style):
+	* src/libs/libdriver/printer.cpp (printer::set_char_and_width):
+	Clarify diagnostics; state what operation failed and
+	characterize source of invalid data as "font _description_
+	file", not simply a "font".
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp
 	(html_printer::set_numbered_char): Compare integer-valued
 	variable to integer literal instead of letting it pun down to a

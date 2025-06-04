@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -946,8 +946,8 @@ void ps_printer::set_style(const style &sty)
   out.put_literal_symbol(buf);
   const char *psname = sty.f->get_internal_name();
   if (0 /* nullptr */ == psname)
-    fatal("no 'internalname' specified for font '%1'",
-	  sty.f->get_filename());
+    fatal("cannot set style; font description file '%1' lacks an"
+	  " 'internalname' directive", sty.f->get_filename());
   char *encoding = ((ps_font *)sty.f)->encoding;
   if (sty.sub == 0) {
     if (encoding != 0 /* nullptr */) {
