@@ -215,7 +215,7 @@ files::files ()
 
 FILE *files::get_file (void)
 {
-  if (ptr)
+  if (ptr != 0 /* nullptr */)
     return ptr->fp;
   else
     return 0 /* nullptr */;
@@ -1471,7 +1471,7 @@ void page::add_and_encode (style *s, const string &str,
       if (i > 0) {
 	string troff_charname = str.substring(a, i - a);
 	html_glyph = get_html_translation(s->f, troff_charname);
-	if (html_glyph)
+	if (html_glyph != 0 /* nullptr */)
 	  html_string += html_glyph;
 	else {
 	  glyph *g = name_to_glyph((troff_charname + '\0').contents());
@@ -1960,7 +1960,7 @@ int assert_state::check_value_error (int c, int v, const char *s,
 				     const char *name, const char *f,
 				     const char *l, int flag)
 {
-  if (! c) {
+  if (0 /* nullptr */ == c) {
     if (0 /* nullptr */ == f)
       f = "stdin";
     if (0 /* nullptr */ == l)
@@ -3240,7 +3240,7 @@ void html_printer::do_tab_ts (text_glob *g)
 
 void html_printer::do_tab_te (void)
 {
-  if (table) {
+  if (table != 0 /* nullptr */) {
     current_paragraph->done_para();
     current_paragraph->remove_para_space();
     table->emit_finish_table();
@@ -3257,7 +3257,7 @@ void html_printer::do_tab_te (void)
 void html_printer::do_tab (char *s)
 {
   assert(s != 0 /* nullptr */);
-  if (table) {
+  if (table != 0 /* nullptr */) {
     while (csspace(*s))
       s++;
     s++;
@@ -3276,7 +3276,7 @@ void html_printer::do_tab (char *s)
 
 void html_printer::do_tab0 (void)
 {
-  if (table) {
+  if (table != 0 /* nullptr */) {
     int col = table->find_column(pageoffset+get_troff_indent());
     if (col > 0) {
       current_paragraph->done_para();
@@ -3292,7 +3292,7 @@ void html_printer::do_tab0 (void)
 void html_printer::do_col (char *s)
 {
   assert(s != 0 /* nullptr */);
-  if (table) {
+  if (table != 0 /* nullptr */) {
     if (atoi(s) < current_column)
       row_space = seen_space;
 
@@ -4940,7 +4940,7 @@ void html_printer::set_numbered_char(int num, const environment *env,
   else
     w = f->get_width(g, env->size);
   w = round_width(w);
-  if (widthp)
+  if (widthp != 0 /* nullptr */)
     *widthp = w;
   set_char(g, f, env, w, 0 /* nullptr */);
 }
@@ -4974,7 +4974,7 @@ glyph *html_printer::set_char_and_width(const char *nm,
   }
   int w = (*f)->get_width(g, env->size);
   w = round_width(w);
-  if (widthp)
+  if (widthp != 0 /* nullptr */)
     *widthp = w;
   return g;
 }
