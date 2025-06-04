@@ -338,7 +338,7 @@ schar tty_printer::color_to_idx(color *col)
   schar idx;
   if (!tty_color(r, g, b, &idx)) {
     char *s = col->print_color();
-    error("unrecognized color '%1' mapped to default", s);
+    error("unsupported color '%1' mapped to default", s);
     delete[] s;
   }
   return idx;

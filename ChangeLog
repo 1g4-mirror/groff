@@ -1,5 +1,11 @@
 2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grotty/tty.cpp (tty_printer::color_to_idx):
+	Clarify error diagnostic: the problem isn't that a color is
+	unrecognized, but that it is unsupported by the device.
+
+2025-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next): Drop unnecessary
 	temporary variable from `\F` escape sequence handler.
 
