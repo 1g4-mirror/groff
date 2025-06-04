@@ -208,6 +208,10 @@ troff
 *  A new request, `pcomposite`, reports to the standard error stream the
    list of configured composite character mappings.
 
+*  A new request, `pfp`, reports to the standard error stream the
+   list of occupied font mounting positions and the corresponding
+   abstract style name or font information.
+
 *  A new request, `pftr`, reports to the standard error stream the
    list of configured font translations.
 

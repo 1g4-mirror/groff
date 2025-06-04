@@ -4262,6 +4262,26 @@ Report the state of the current environment followed by that of all
 other environments to the standard error stream.
 .
 .TPx
+.REQ .pfp
+Report,
+to the standard error stream,
+the list of occupied font mounting positions.
+.\" Recall the @code{fp} request description in @ref{Selecting Fonts}.
+.
+Occupied mounting positions are listed,
+one per line,
+in increasing order,
+followed by the typeface name;
+if the name corresponds to an abstract style,
+the entry ends there.
+.
+Otherwise,
+the name of the font description file
+and the font's \[lq]internal name\[rq] datum,
+the meaning of which varies by output device,
+follow.
+.
+.TPx
 .REQ .pftr
 Report,
 to the standard error stream,
@@ -9048,6 +9068,8 @@ composite character mappings
 .RB ( pcomposite );
 environments
 .RB ( pev );
+occupied font mounting positions
+.RB ( pfp );
 font translations
 .RB ( pftr );
 automatic hyphenation codes

@@ -6547,6 +6547,25 @@ static bool mount_font_no_translate(int n, symbol name, symbol filename,
   return true;
 }
 
+void dump_font_mounting_positions_request()
+{
+  for (int i = 0; i < font_table_size; i++) {
+    font_info *fi = font_table[i];
+    if (0 /* nullptr */ == fi) // No font mounted here.
+      continue;
+    errprint("%1\t%2", i, fi->get_name().contents());
+    font *f = font_table[i]->get_font();
+    if (f != 0 /* nullptr */) { // It's not an abstract style.
+      errprint("\t%1", f->get_filename());
+      if (f->get_internal_name() != 0 /* nullptr */)
+	errprint("\t%1", f->get_internal_name());
+    }
+    errprint("\n");
+    fflush(stderr);
+  }
+  skip_line();
+}
+
 bool mount_font(int n, symbol name, symbol external_name)
 {
   assert(n >= 0);
@@ -7380,6 +7399,7 @@ void init_node_requests()
   init_request("ftr", translate_font);
   init_request("kern", set_kerning_mode);
   init_request("lg", set_ligature_mode);
+  init_request("pfp", dump_font_mounting_positions_request);
   init_request("pftr", dump_font_translations);
   init_request("rfschar", remove_font_specific_character);
   init_request("shc", soft_hyphen_character_request);

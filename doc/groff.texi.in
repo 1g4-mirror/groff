@@ -11198,6 +11198,16 @@ identifiers.
 @c exercised this freedom in 30+ years, and we should consider
 @c prohibiting it.  --GBR
 
+You can obtain a report of occupied font mounting positions
+(whether configured by the
+@samp{DESC}
+file or the
+@code{fp}
+request)
+on the standard error stream with the
+@code{pfp} request.
+@xref{Debugging}.
+
 @cindex font position register (@code{.f})
 The position of the currently selected font (or abstract style) is
 available in the read-only register @samp{.f}.  It is associated with
@@ -18070,6 +18080,7 @@ Examine the state of the formatter with requests that write lists of
 defined names---macros, strings, and diversions---colors,
 composite character mappings,
 environments,
+occupied font mounting positions,
 font translations,
 automatic hyphenation codes
 and exceptions,
@@ -18241,6 +18252,32 @@ followed by its ``to'' mapping.
 @cindex environments, dumping (@code{pev})
 Report the state of the current environment followed by that of all
 other environments to the standard error stream.
+@endDefreq
+
+@Defreq {pfp, }
+@cindex dumping occupied font mounting positions (@code{pfp})
+@cindex occupied font mounting positions, dumping (@code{pfp})
+@cindex font mounting positions, occupied, dumping (@code{pfp})
+@cindex mounting positions, occupied by fonts, dumping (@code{pfp})
+@cindex positions, font mounting, occupied, dumping (@code{pfp})
+Report,
+to the standard error stream,
+the list of occupied font mounting positions.
+Recall the
+@code{fp}
+request description in
+@ref{Selecting Fonts}.
+Occupied mounting positions are listed,
+one per line,
+in increasing order,
+followed by the typeface name;
+if the name corresponds to an abstract style,
+the entry ends there.
+Otherwise,
+the name of the font description file
+and the font's ``internal name'' datum,
+the meaning of which varies by output device,
+follow.
 @endDefreq
 
 @Defreq {pftr, }

@@ -167,6 +167,21 @@
 
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Implement new `pfp` request.
+
+	* src/roff/troff/node.cpp
+	(dump_font_mounting_positions_request): Add.
+
+	(init_node_requests): Wire up `pfp` request name to
+	`dump_font_mounting_positions_request()`.
+
+	* doc/groff.texi.in (Selecting Fonts, Debugging):
+	* man/groff.7.man (Request short reference, Debugging):
+	* man/groff_diff.7.man (New requests, Debugging):
+	* NEWS: Document it.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Extend `font_info` class.  I need this so I can
 	implement a font mounting position dumper.
 
