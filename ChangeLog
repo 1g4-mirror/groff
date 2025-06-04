@@ -1,5 +1,40 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Trivially refactor `font` class for clarity.  Fonts
+	have up to three names in groff: (1) a font description file
+	name; (2) a GNU troff identifier used for its selection [and
+	often, but not necessarily, the same as (1); see the `fp`
+	request]; (3) an "internalname" that serves multiple purposes--
+	for some output drivers, it's a file name of an actual digital
+	font file, and for others, it's an integer that encodes styling
+	properties.  [Item (3) screams for further refactoring.]  It's
+	important to know which of these names we're dealing with, so
+	eliminate the unqualified term "name" in the API.
+
+	* src/include/font.h (class font): Rename public member function
+	`get_name()` to `get_filename()`.  Rename private member
+	variable `name` to `filename`.
+	* src/libs/libgroff/font.cpp
+	(font::font): Rename constructor argument from `s` to `fn`.
+	(font::~font): Delete `filename`, not `name`.
+	(font::get_name): Rename this...
+	(font::get_filename): ...to this.
+	(font::load_font): Rename `s` argument to `fn`.
+	(font::get_filename, font::load): Track rename of member
+	variable.
+
+	* src/libs/libdriver/printer.cpp (printer::find_font)
+	(printer::set_char_and_width, printer::set_numbered_char):
+	* src/devices/grohtml/post-html.cpp (html_printer::set_style)
+	(html_printer::is_bold, html_printer::make_bold)
+	(html_printer::is_font_courier, html_printer::do_font)
+	(html_printer::set_numbered_char)
+	(html_printer::set_char_and_width)
+	* src/devices/grops/ps.cpp (ps_printer::set_style): Update call
+	sites.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libdriver/printer.cpp: Fix code style nits.
 	(printer::load_font): Reorder equality comparison to avoid
 	inadvertent lvalue assignment.

@@ -226,15 +226,15 @@ int glyph_to_unicode(glyph *g)
 
 /* font functions */
 
-font::font(const char *s) : ligatures(0),
+font::font(const char *fn) : ligatures(0),
   kern_hash_table(0 /* nullptr */),
   space_width(0), special(false), internalname(0 /* nullptr */),
   slant(0.0), zoom(0), ch_index(0 /* nullptr */), nindices(0),
   ch(0 /* nullptr */), wch(0 /* nullptr */), ch_used(0), ch_size(0),
   widths_cache(0 /* nullptr */)
 {
-  name = new char[strlen(s) + 1];
-  strcpy(name, s);
+  filename = new char[strlen(fn) + 1];
+  strcpy(filename, fn);
 }
 
 font::~font()
@@ -255,7 +255,7 @@ font::~font()
     }
     delete[] kern_hash_table;
   }
-  delete[] name;
+  delete[] filename;
   delete[] internalname;
   while (widths_cache) {
     font_widths_cache *tem = widths_cache;
@@ -690,9 +690,9 @@ int font::get_code(glyph *g)
   abort(); // -Wreturn-type
 }
 
-const char *font::get_name()
+const char *font::get_filename()
 {
-  return name;
+  return filename;
 }
 
 const char *font::get_internal_name()
@@ -812,9 +812,9 @@ void font::copy_entry(glyph *new_glyph, glyph *old_glyph)
   ch_index[new_index] = ch_index[old_index];
 }
 
-font *font::load_font(const char *s, bool load_header_only)
+font *font::load_font(const char *fn, bool load_header_only)
 {
-  font *f = new font(s);
+  font *f = new font(fn);
   if (!f->load(load_header_only)) {
     delete f;
     return 0 /* nullptr */;
@@ -892,7 +892,7 @@ again:
 bool font::load(bool load_header_only)
 {
   char *path;
-  FILE *fp = open_file(name, &path);
+  FILE *fp = open_file(filename, &path);
   if (0 /* nullptr */ == fp)
     return false;
   text_file t(fp, path);
@@ -907,9 +907,9 @@ bool font::load(bool load_header_only)
 	t.error("'name' directive requires an argument");
 	return false;
       }
-      if (strcmp(p, name) != 0) {
+      if (strcmp(p, filename) != 0) {
 	t.error("font description file name '%1' does not match 'name'"
-		" argument '%2'", name, p);
+		" argument '%2'", filename, p);
 	return false;
       }
       saw_name_directive = true;

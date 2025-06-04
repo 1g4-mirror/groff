@@ -189,7 +189,8 @@ public:
 			// special device-dependent information about
 			// the given glyph.  Return null pointer if
 			// there is no special information.
-  const char *get_name();	// Return the name of this font.
+  const char *get_filename();	// Return file name containing font
+			// description.
   const char *get_internal_name();	// Return the 'internalname'
 			// attribute of this font or null pointer if it
 			// has none.
@@ -284,7 +285,7 @@ private:
   int space_width;	// The normal width of a space.  Used by
 			// get_space_width().
   bool special;		// See public is_special() above.
-  char *name;		// The name of this font.  Used by get_name().
+  char *filename;	// File name of font description.
   char *internalname;	// The 'internalname' attribute of this font, or
 			// a null pointer.  Used by get_internal_name().
   double slant;		// The natural slant angle (in degrees) of this font.
@@ -341,7 +342,7 @@ private:
   font_char_metric *get_font_wchar_metric(int);
 
 protected:
-  font(const char *);	// Initialize a font with the given name.
+  font(const char *);	// Load font description from file name.
 
   // Load the font description file with the name in member variable
   // `name` into this object.  If arg1 is true, only the part of the

@@ -135,7 +135,7 @@ void printer::load_font(int n, const char *nm)
 font *printer::find_font(const char *nm)
 {
   for (font_pointer_list *p = font_list; p; p = p->next)
-    if (strcmp(p->p->get_name(), nm) == 0)
+    if (strcmp(p->p->get_filename(), nm) == 0)
       return p->p;
   font *f = make_font(nm);
   if (0 /* nullptr */ == f)
@@ -223,10 +223,10 @@ glyph *printer::set_char_and_width(const char *nm,
   if (!(*f)->contains(g)) {
     if ((nm[0] != '\0') && ('\0' == nm[1]))
       error("font '%1' does not contain ordinary character '%2'",
-	    (*f)->get_name(), nm[0]);
+	    (*f)->get_filename(), nm[0]);
     else
       error("font '%1' does not contain special character '%2'",
-	    (*f)->get_name(), nm);
+	    (*f)->get_filename(), nm);
     return UNDEFINED_GLYPH;
   }
   int w = (*f)->get_width(g, env->size);
@@ -250,7 +250,7 @@ void printer::set_numbered_char(int num, const environment *env, int
     return;
   }
   if (!f->contains(g)) {
-    error("font '%1' has no glyph at index %2", f->get_name(), num);
+    error("font '%1' has no glyph at index %2", f->get_filename(), num);
     return;
   }
   int w = f->get_width(g, env->size);

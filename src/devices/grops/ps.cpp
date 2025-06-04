@@ -947,7 +947,7 @@ void ps_printer::set_style(const style &sty)
   const char *psname = sty.f->get_internal_name();
   if (0 /* nullptr */ == psname)
     fatal("no 'internalname' specified for font '%1'",
-	  sty.f->get_name());
+	  sty.f->get_filename());
   char *encoding = ((ps_font *)sty.f)->encoding;
   if (sty.sub == 0) {
     if (encoding != 0 /* nullptr */) {

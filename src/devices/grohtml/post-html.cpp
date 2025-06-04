@@ -2206,7 +2206,7 @@ static void usage(FILE *stream);
 
 void html_printer::set_style(const style &sty)
 {
-  const char *fontname = sty.f->get_name();
+  const char *fontname = sty.f->get_filename();
   if (0 /* nullptr */ == fontname)
     fatal("no internalname specified for font");
 
@@ -2222,7 +2222,7 @@ void html_printer::set_style(const style &sty)
 
 int html_printer::is_bold (font *f)
 {
-  const char *fontname = f->get_name();
+  const char *fontname = f->get_filename();
   return (strcmp(fontname, "B") == 0) || (strcmp(fontname, "BI") == 0);
 }
 
@@ -2232,7 +2232,7 @@ int html_printer::is_bold (font *f)
 
 font *html_printer::make_bold (font *f)
 {
-  const char *fontname = f->get_name();
+  const char *fontname = f->get_filename();
 
   if (strcmp(fontname, "B") == 0)
     return f;
@@ -2240,7 +2240,7 @@ font *html_printer::make_bold (font *f)
     return font::load_font("BI");
   if (strcmp(fontname, "BI") == 0)
     return f;
-  return 0;
+  return 0 /* nullptr */;
 }
 
 void html_printer::end_of_line()
@@ -3989,10 +3989,10 @@ int html_printer::is_line_start (int nf)
 
 int html_printer::is_font_courier (font *f)
 {
-  if (f != 0) {
-    const char *fontname = f->get_name();
+  if (f != 0 /* nullptr */) {
+    const char *fontname = f->get_filename();
 
-    return( (fontname != 0) && (fontname[0] == 'C') );
+    return((fontname != 0 /* nullptr */) && (fontname[0] == 'C'));
   }
   return FALSE;
 }
@@ -4112,11 +4112,11 @@ void html_printer::do_font (text_glob *g)
 
   if (g->text_style.f != output_style.f) {
     if (output_style.f != 0) {
-      end_font(output_style.f->get_name());
+      end_font(output_style.f->get_filename());
     }
     output_style.f = g->text_style.f;
     if (output_style.f != 0) {
-      start_font(output_style.f->get_name());
+      start_font(output_style.f->get_filename());
     }
   }
   if (output_style.point_size != g->text_style.point_size) {
@@ -4868,7 +4868,7 @@ void html_printer::set_numbered_char(int num, const environment *env,
     return;
   }
   if (!f->contains(g)) {
-    error("font '%1' has no glyph at index %2", f->get_name(), num);
+    error("font '%1' has no glyph at index %2", f->get_filename(), num);
     return;
   }
   int w;
@@ -4900,10 +4900,10 @@ glyph *html_printer::set_char_and_width(const char *nm,
   if (!(*f)->contains(g)) {
     if ((nm[0] != '\0') && ('\0' == nm[1]))
       error("font '%1' does not contain ordinary character '%2'",
-	    (*f)->get_name(), nm[0]);
+	    (*f)->get_filename(), nm[0]);
     else
       error("font '%1' does not contain special character '%2'",
-	    (*f)->get_name(), nm);
+	    (*f)->get_filename(), nm);
     return UNDEFINED_GLYPH;
   }
   int w = (*f)->get_width(g, env->size);
