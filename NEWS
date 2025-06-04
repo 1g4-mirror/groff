@@ -694,6 +694,21 @@ Output drivers
    configures representation of character entities in the output.  Based
    on work by TANAKA Takuji.
 
+*  grotty(1) now supports devices recognizing ECMA-48/ISO 6429 SGR 38
+   and 48 escape sequences that select RGB colors using 8 bits per color
+   channel.  A new command-line option, `-t`, configures emission of
+   these escape sequences instead of the SGR 30-37 and 40-47 sequences
+   supporting 3- or 4-bit color.  Thanks to Deri James.
+
+   Example:
+
+   $ groff -T utf8 -P -t <<EOF
+   .defcolor pink rgb #ffc0cb
+   .defcolor springgreen rgb #00ff7f
+   Hello, \f[B]\m[pink]colorful \\m[springgreen]world\m[default]\f[]!
+   .pl \n[nl]u
+   EOF
+
 *  gxditview(1), the X11 output driver and document previewer, now
    accepts the option `-v` as a synonym of `--version` (and `-version`).
    This change aligns it with other groff output drivers, and makes it
