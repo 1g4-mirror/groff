@@ -1,5 +1,12 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (mount_font_at_position)
+	(font_lookup_error): Clarify error diagnostics; distinguish
+	problems with loading a font description (to mount it) from
+	problems with _selecting_ a font.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grotty/tty.cpp: Refactor and fix code style nits.
 	Convert manifest constant `DEFAULT_COLOR_IDX` from preprocessor
 	macro to global variable of type `const int`.

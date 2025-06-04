@@ -6650,7 +6650,7 @@ static void mount_font_at_position()
 	    msg += string(" from file '") + external_name.contents()
 	      + string("'");
 	  msg += '\0';
-	  error("cannot load font '%1'%2 for mounting",
+	  error("cannot load font description '%1'%2 for mounting",
 		internal_name.contents(), msg.contents());
 	}
       }
@@ -6778,11 +6778,11 @@ static void font_lookup_error(font_lookup_info& finfo,
 			      const char *msg)
 {
   if (finfo.requested_name)
-    error("cannot load font '%1' %2", finfo.requested_name, msg);
+    error("cannot select font '%1' %2", finfo.requested_name, msg);
   else if (finfo.position == FONT_NOT_MOUNTED)
-    error("cannot load font %1", msg); // don't report position `-1`
+    error("cannot select font %1", msg); // don't report position `-1`
   else
-    error("cannot load font at position %1 %2",
+    error("cannot select font at position %1 %2",
 	  finfo.requested_position, msg);
 }
 
