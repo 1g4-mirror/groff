@@ -106,6 +106,7 @@ public:
     LIG_ffl = 16
   };
 
+  font(const char *);	// Load font description from file name.
   virtual ~font();	// Destructor.
   bool contains(glyph *);	// This font contains the given glyph.
   bool is_special();	// This font is searched for glyphs not defined
@@ -342,8 +343,6 @@ private:
   font_char_metric *get_font_wchar_metric(int);
 
 protected:
-  font(const char *);	// Load font description from file name.
-
   // Load the font description file with the name in member variable
   // `name` into this object.  If arg1 is true, only the part of the
   // font description file before the 'charset' and 'kernpairs' sections

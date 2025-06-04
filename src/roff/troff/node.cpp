@@ -6495,6 +6495,9 @@ static symbol get_font_translation(symbol nm)
 }
 
 dictionary font_dictionary(50);
+// We store the address of this font in `font_dictionary` to indicate
+// that we've previously tried to mount the font and failed.
+font nonexistent_font = font("\0");
 
 // Mount font at position `n` with troff identifier `name` and
 // description file name `external_name`.  If `check_only`, just look up
@@ -6504,9 +6507,6 @@ static bool mount_font_no_translate(int n, symbol name,
 				    bool check_only = false)
 {
   assert(n >= 0);
-  // We store the address of this char in `font_dictionary` to indicate
-  // that we've previously tried to mount the font and failed.
-  static char a_char;
   font *fm = 0 /* nullptr */;
   void *p = font_dictionary.lookup(external_name);
   if (0 /* nullptr */ == p) {
@@ -6514,12 +6514,12 @@ static bool mount_font_no_translate(int n, symbol name,
     if (check_only)
       return fm != 0 /* nullptr */;
     if (0 /* nullptr */ == fm) {
-      (void) font_dictionary.lookup(external_name, &a_char);
+      (void) font_dictionary.lookup(external_name, &nonexistent_font);
       return false;
     }
     (void) font_dictionary.lookup(name, fm);
   }
-  else if (p == &a_char) {
+  else if (&nonexistent_font == p) {
     return false;
   }
   else

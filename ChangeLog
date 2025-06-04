@@ -1,5 +1,19 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff, troff]: Refactor.
+
+	* src/include/font.h (class font): Promote constructor from
+	`protected` visibility to `public`.  This is so that GNU troff
+	can create a `nonexistent_font` object with which to mark font
+	mounting positions that fail to mount a font.
+	* src/roff/troff/node.cpp: Do so at the global scope.
+	(mount_font_no_translate): Drop `static char a_char` formerly
+	used for this purpose.  It felt squicky to me to store an object
+	of the "wrong" type in the `font_dictionary`.  Reorder equality
+	comparisons to avoid inadvertent lvalue assignment.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libdriver,grohtml,grops]: Revise diagnostic messages.
 
 	* src/devices/grohtml/post-html.cpp
