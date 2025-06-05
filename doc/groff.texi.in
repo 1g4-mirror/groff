@@ -11194,7 +11194,6 @@ Are \f[Emph]these names\f[] \f[Strong]comfortable\f[]?
 
 @samp{DESC}, @samp{P}, and non-negative integers are not usable as font
 identifiers.
-@c XXX: TODO: Catch the DESC case earlier and throw an error for it.
 @c XXX: This identifier could be used as a style name, but no one's
 @c exercised this freedom in 30+ years, and we should consider
 @c prohibiting it.  --GBR
