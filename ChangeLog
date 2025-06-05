@@ -1,5 +1,13 @@
 2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp: Rename `none` enumeration
+	constant to `none_tag` for conformity with other constants in
+	the same (anonymous) enum.  C++ enums weren't name-spaced or
+	properly type-checked until C++11, and C's still aren't.  (Ada
+	had proper sum types back in 1983.)
+
+2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp (main): Spell null pointer
 	constant the idiomatic C++98 way (`0`) instead of as `NULL`.
 

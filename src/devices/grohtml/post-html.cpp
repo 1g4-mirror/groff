@@ -64,7 +64,7 @@ extern "C" const char *Version_string;
                                      /* either encoded by their glyph names or if */
                                      /* there is no name then we use &#nnn;       */
 typedef enum {CENTERED, LEFT, RIGHT, INLINE} TAG_ALIGNMENT;
-typedef enum {col_tag, tab_tag, tab0_tag, none} colType;
+typedef enum {col_tag, tab_tag, tab0_tag, none_tag} colType;
 
 #undef DEBUG_TABLES
 // #define DEBUG_TABLES
@@ -3926,7 +3926,7 @@ void html_printer::lookahead_for_tables (void)
   text_glob  *start_of_line  = 0 /* nullptr */;
   text_glob  *start_of_table = 0 /* nullptr */;
   text_glob  *last           = 0 /* nullptr */;
-  colType     type_of_col    = none;
+  colType     type_of_col    = none_tag;
   int         found_col      = FALSE;
   int         ncol           = 0;
   int         colmin         = 0;		// pacify compiler
@@ -4041,7 +4041,7 @@ void html_printer::lookahead_for_tables (void)
 	    start_of_table->remember_table(tbl);
 	    tbl = new html_table(&html, -1);
 	    start_of_table = 0 /* nullptr */;
-	    type_of_col = none;
+	    type_of_col = none_tag;
 	    last = 0 /* nullptr */;
 	  }
 	  tbl->tab_stops->init(tab_defs);
@@ -4059,7 +4059,7 @@ void html_printer::lookahead_for_tables (void)
 	  start_of_table->remember_table(tbl);
 	  tbl = new html_table(&html, -1);
 	  start_of_table = 0 /* nullptr */;
-	  type_of_col = none;
+	  type_of_col = none_tag;
 	  last = 0 /* nullptr */;
 	}
       }
