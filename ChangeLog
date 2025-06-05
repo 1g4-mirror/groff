@@ -1,3 +1,9 @@
+2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp (class html_printer): Delete
+	unused member function declarations.  They appear to have been
+	pasted from grops.
+
 2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grops/ps.cpp

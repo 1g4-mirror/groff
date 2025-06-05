@@ -2087,11 +2087,6 @@ class html_printer : public printer {
   void  flush_sbuf                    ();
   void  set_style                     (const style &);
   void  set_space_code                (unsigned char c);
-  void  do_exec                       (char *, const environment *);
-  void  do_import                     (char *, const environment *);
-  void  do_def                        (char *, const environment *);
-  void  do_mdef                       (char *, const environment *);
-  void  do_file                       (char *, const environment *);
   void  set_line_thickness            (const environment *);
   void  terminate_current_font        (void);
   void  flush_font                    (void);
