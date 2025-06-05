@@ -1,5 +1,10 @@
 2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp (main): Spell null pointer
+	constant the idiomatic C++98 way (`0`) instead of as `NULL`.
+
+2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp
 	(struct file)
 	(class files)
