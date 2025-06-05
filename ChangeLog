@@ -1,5 +1,19 @@
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grodvi/dvi.cpp
+	(class dvi_font): Comment member function formal argument names
+	as a compromise with the Stroustrup-style C++ used in most of
+	groff.
+	(dvi_font::handle_unknown_font_command): Rename argument from
+	`filename` to `fn` to preëmpt `-Wshadow` compiler warning with
+	planned refactoring of `class font`.
+	(dvi_printer::define_font, dvi_printer::set_font): Rename
+	argument from `i` to `mounting_position` for clarity.
+	(main): Spell null pointer constant the idiomatic C++98 way
+	{`0`} instead of as `NULL`.
+
+2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Fix code style nits.
 	(get_font_translation, mount_font_no_translate, lookup_family):
 	Favor C++ `static_cast<>` operator over omnipotent C-style

@@ -67,8 +67,10 @@ public:
   int checksum;
   int design_size;
   ~dvi_font();
-  void handle_unknown_font_command(const char *command, const char *arg,
-				   const char *filename, int lineno);
+  void handle_unknown_font_command(const char * /* command */,
+				   const char * /* arg */,
+				   const char * /* fn */,
+				   int /* lineno */);
   static dvi_font *load_dvi_font(const char *);
 };
 
@@ -77,7 +79,7 @@ dvi_font *dvi_font::load_dvi_font(const char *s)
   dvi_font *f = new dvi_font(s);
   if (!f->load()) {
     delete f;
-    return 0;
+    return 0 /* nullptr */;
   }
   return f;
 }
@@ -93,26 +95,26 @@ dvi_font::~dvi_font()
 
 void dvi_font::handle_unknown_font_command(const char *command,
 					   const char *arg,
-					   const char *filename,
+					   const char *fn,
 					   int lineno)
 {
   char *ptr;
   if (strcmp(command, "checksum") == 0) {
     if (arg == 0)
-      fatal_with_file_and_line(filename, lineno,
+      fatal_with_file_and_line(fn, lineno,
 			       "'checksum' command requires an argument");
     checksum = int(strtol(arg, &ptr, 10));
     if (ptr == arg) {
-      fatal_with_file_and_line(filename, lineno, "bad checksum");
+      fatal_with_file_and_line(fn, lineno, "bad checksum");
     }
   }
   else if (strcmp(command, "designsize") == 0) {
     if (arg == 0)
-      fatal_with_file_and_line(filename, lineno,
+      fatal_with_file_and_line(fn, lineno,
 			       "'designsize' command requires an argument");
     design_size = int(strtol(arg, &ptr, 10));
     if (ptr == arg) {
-      fatal_with_file_and_line(filename, lineno, "bad design size");
+      fatal_with_file_and_line(fn, lineno, "bad design size");
     }
   }
 }
@@ -122,7 +124,7 @@ void dvi_font::handle_unknown_font_command(const char *command,
 struct output_font {
   dvi_font *f;
   int point_size;
-  output_font() : f(0) { }
+  output_font() : f(0 /* nullptr */) { }
 };
 
 class dvi_printer : public printer {
@@ -146,10 +148,10 @@ class dvi_printer : public printer {
   int have_pushed;
   void preamble();
   void postamble();
-  void define_font(int);
-  void set_font(int);
+  void define_font(int /* mounting_position */);
+  void set_font(int /* mounting_position */);
   void possibly_begin_line();
-  void set_color(color *);
+  void set_color(color * /* col */);
 protected:
   enum {
     id_byte = 2,
@@ -188,28 +190,33 @@ public:
   font *make_font(const char *);
   void begin_page(int);
   void end_page(int);
-  void set_char(glyph *, font *, const environment *, int, const char *);
-  void special(char *, const environment *, char);
+  void set_char(glyph * /* g */, font * /* f */,
+		const environment * /* env */ , int /* w */,
+		const char *);
+  void special(char * /* arg */, const environment * /* env* */,
+	       char /* type */);
   void end_of_line();
-  void draw(int, int *, int, const environment *);
+  void draw(int /* code */, int * /* p */, int /* np */,
+	    const environment * /* env */);
 };
 
 
 class draw_dvi_printer : public dvi_printer {
   int output_pen_size;
-  void set_line_thickness(const environment *);
-  void fill_next(const environment *);
+  void set_line_thickness(const environment * /* env */);
+  void fill_next(const environment * /* env */);
 public:
   draw_dvi_printer();
   ~draw_dvi_printer();
-  void draw(int code, int *p, int np, const environment *env);
+  void draw(int /* code */, int * /* p */, int /* np */,
+	    const environment * /* env */);
   void end_page(int);
 };
 
 dvi_printer::dvi_printer()
 : fp(stdout), byte_count(0), last_bop(-1), page_count(0),
-  max_h(0), max_v(0), cur_font(0), cur_point_size(-1), pushed(0),
-  line_thickness(-1)
+  max_h(0), max_v(0), cur_font(0 /* nullptr */), cur_point_size(-1),
+  pushed(0), line_thickness(-1)
 {
   if (font::res != RES)
     fatal("resolution must be %1", RES);
@@ -411,24 +418,24 @@ void dvi_printer::set_char(glyph *g, font *f, const environment *env,
     out_unsigned(set1, code);
 }
 
-void dvi_printer::define_font(int i)
+void dvi_printer::define_font(int mounting_position)
 {
-  out_unsigned(fnt_def1, i);
-  dvi_font *f = output_font_table[i].f;
+  out_unsigned(fnt_def1, mounting_position);
+  dvi_font *f = output_font_table[mounting_position].f;
   out4(f->checksum);
-  out4(output_font_table[i].point_size*RES_7227);
+  out4(output_font_table[mounting_position].point_size*RES_7227);
   out4(int((double(f->design_size)/(1<<20))*RES_7227*100 + .5));
   const char *nm = f->get_internal_name();
   out1(0);
   out_string(nm);
 }
 
-void dvi_printer::set_font(int i)
+void dvi_printer::set_font(int mounting_position)
 {
-  if (i >= 0 && i <= 63)
-    out1(fnt_num_0 + i);
+  if (mounting_position >= 0 && mounting_position <= 63)
+    out1(fnt_num_0 + mounting_position);
   else
-    out_unsigned(fnt1, i);
+    out_unsigned(fnt1, mounting_position);
 }
 
 void dvi_printer::out_signed(unsigned char base, int param)
@@ -549,7 +556,7 @@ void dvi_printer::end_page(int)
   if (pushed)
     end_of_line();
   out1(eop);
-  cur_font = 0;
+  cur_font = 0 /* nullptr */;
 }
 
 void draw_dvi_printer::end_page(int len)
@@ -933,12 +940,12 @@ int main(int argc, char **argv)
   setbuf(stderr, stderr_buf);
   int c;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0, 0 }
   };
   while ((c = getopt_long(argc, argv, ":dF:I:lp:vw:", long_options,
-	  NULL)) != EOF)
+	  0 /* nullptr */)) != EOF)
     switch(c) {
     case 'd':
       draw_flag = 0;
