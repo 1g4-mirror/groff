@@ -1,5 +1,24 @@
 2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp
+	(struct file)
+	(class files)
+	(struct style)
+	(struct char_block)
+	(class char_buffer)
+	(class text_glob)
+	(struct element_list)
+	(class list)
+	(class page)
+	(class html_font)
+	(class header_desc)
+	(class assert_state)
+	(class html_printer): Comment member function formal argument
+	names as a compromise with the Stroustrup-style C++ used in most
+	of groff.
+
+2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp (class html_printer): Delete
 	unused member function declarations.  They appear to have been
 	pasted from grops.
