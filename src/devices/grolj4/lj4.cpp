@@ -97,15 +97,17 @@ static int lookup_paper_size(const char *);
 class lj4_font : public font {
 public:
   ~lj4_font();
-  void handle_unknown_font_command(const char *command, const char *arg,
-				   const char *filename, int lineno);
-  static lj4_font *load_lj4_font(const char *);
+  void handle_unknown_font_command(const char * /* command */,
+				   const char * /* arg */,
+				   const char * /* fn */,
+				   int lineno);
+  static lj4_font *load_lj4_font(const char * /* s */);
   int weight;
   int style;
   int proportional;
   int typeface;
 private:
-  lj4_font(const char *);
+  lj4_font(const char * /* nm */);
 };
 
 lj4_font::lj4_font(const char *nm)
@@ -122,7 +124,7 @@ lj4_font *lj4_font::load_lj4_font(const char *s)
   lj4_font *f = new lj4_font(s);
   if (!f->load()) {
     delete f;
-    return 0;
+    return 0 /* nullptr */;
   }
   return f;
 }
@@ -141,30 +143,30 @@ static struct lj4_command_table {
 
 void lj4_font::handle_unknown_font_command(const char *command,
 					   const char *arg,
-					   const char *filename,
+					   const char *fn,
 					   int lineno)
 {
   for (size_t i = 0; i < array_length(command_table); i++) {
     if (strcmp(command, command_table[i].s) == 0) {
-      if (arg == 0)
-	fatal_with_file_and_line(filename, lineno,
+      if (arg == 0 /* nullptr */)
+	fatal_with_file_and_line(fn, lineno,
 				 "'%1' command requires an argument",
 				 command);
       char *ptr;
       long n = strtol(arg, &ptr, 10);
       if (ptr == arg)
-	fatal_with_file_and_line(filename, lineno,
+	fatal_with_file_and_line(fn, lineno,
 				 "'%1' command requires numeric"
 				 " argument", command);
       if (n < command_table[i].min) {
-	error_with_file_and_line(filename, lineno,
+	error_with_file_and_line(fn, lineno,
 				 "'%1' command argument must not be"
 				 " less than %2", command,
 				 command_table[i].min);
 	n = command_table[i].min;
       }
       else if (n > command_table[i].max) {
-	error_with_file_and_line(filename, lineno,
+	error_with_file_and_line(fn, lineno,
 				 "'%1' command argument must not be"
 				 " greater than %2", command,
 				 command_table[i].max);
@@ -180,19 +182,24 @@ class lj4_printer : public printer {
 public:
   lj4_printer(int);
   ~lj4_printer();
-  void set_char(glyph *, font *, const environment *, int, const char *name);
-  void draw(int code, int *p, int np, const environment *env);
-  void begin_page(int);
-  void end_page(int page_length);
-  font *make_font(const char *);
+  void set_char(glyph * /* g */,
+		font * /* f */,
+		const environment * /* env */,
+		int /* w */,
+		const char * /* UNUSED */);
+  void draw(int /* code */, int * /* p */, int  /* np */,
+	    const environment * /* env */);
+  void begin_page(int /* UNUSED */);
+  void end_page(int /* page_length */);
+  font *make_font(const char * /* nm */);
   void end_of_line();
 private:
-  void set_line_thickness(int size, int dot = 0);
+  void set_line_thickness(int /* size */, int /* dot */ = 0);
   void hpgl_init();
   void hpgl_start();
   void hpgl_end();
-  int moveto(int hpos, int vpos);
-  int moveto1(int hpos, int vpos);
+  int moveto(int /* hpos */, int /* vpos */);
+  int moveto1(int /* hpos */, int /* vpos */);
 
   int cur_hpos;
   int cur_vpos;
@@ -230,7 +237,7 @@ void lj4_printer::hpgl_end()
 
 lj4_printer::lj4_printer(int ps)
 : cur_hpos(-1),
-  cur_font(0),
+  cur_font(0 /* nullptr */),
   cur_size(0),
   cur_symbol_set(0),
   line_thickness(-1),
@@ -626,12 +633,12 @@ int main(int argc, char **argv)
   setbuf(stderr, stderr_buf);
   int c;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((c = getopt_long(argc, argv, ":c:d:F:I:lp:vw:", long_options,
-	  NULL)) != EOF)
+	  0 /* nullptr */)) != EOF)
     switch(c) {
     case 'l':
       landscape_flag = 1;
