@@ -148,7 +148,7 @@ void lj4_font::handle_unknown_font_command(const char *command,
 {
   for (size_t i = 0; i < array_length(command_table); i++) {
     if (strcmp(command, command_table[i].s) == 0) {
-      if (arg == 0 /* nullptr */)
+      if (0 /* nullptr */ == arg)
 	fatal_with_file_and_line(fn, lineno,
 				 "'%1' command requires an argument",
 				 command);
@@ -300,7 +300,7 @@ void lj4_printer::end_of_line()
 inline
 int is_unprintable(unsigned char c)
 {
-  return c < 32 && (c == 0 || (7 <= c && c <= 15) || c == 27);
+  return c < 32 && (0 == c || (7 <= c && c <= 15) || 27 == c);
 }
 
 void lj4_printer::set_char(glyph *g, font *f, const environment *env,
@@ -356,10 +356,10 @@ int lj4_printer::moveto1(int hpos, int vpos)
     printf("%dx%dY", hpos - x_offset, vpos);
   else {
     if (cur_hpos != hpos)
-      printf("%s%d%c", hpos > cur_hpos ? "+" : "",
-	     hpos - cur_hpos, vpos == cur_vpos ? 'X' : 'x');
+      printf("%s%d%c", (hpos > cur_hpos) ? "+" : "",
+	     hpos - cur_hpos, (vpos == cur_vpos) ? 'X' : 'x');
     if (cur_vpos != vpos)
-      printf("%s%dY", vpos > cur_vpos ? "+" : "", vpos - cur_vpos);
+      printf("%s%dY", (vpos > cur_vpos) ? "+" : "", vpos - cur_vpos);
   }
   cur_hpos = hpos;
   cur_vpos = vpos;
@@ -401,18 +401,18 @@ void lj4_printer::draw(int code, int *p, int np, const environment *env)
     if (!moveto(env->hpos, env->vpos))
       return;
     hpgl_start();
-    set_line_thickness(env->size, p[0] == 0 && p[1] == 0);
+    set_line_thickness(env->size, 0 == p[0] && 0 == p[1]);
     printf("PD%d,%d", p[0], p[1]);
     hpgl_end();
     break;
   case 'p':
   case 'P':
     {
-      if (np & 1) {
+      if ((np % 2) == 1) {
 	error("even number of arguments required for polygon");
 	break;
       }
-      if (np == 0) {
+      if (0 == np) {
 	error("no arguments for polygon");
 	break;
       }
@@ -420,22 +420,22 @@ void lj4_printer::draw(int code, int *p, int np, const environment *env)
       if (!moveto(env->hpos, env->vpos))
 	return;
       hpgl_start();
-      if (code == 'p')
+      if ('p' == code)
 	set_line_thickness(env->size);
       printf("PMPD%d", p[0]);
       for (int i = 1; i < np; i++)
 	printf(",%d", p[i]);
-      printf("PM2%cP", code == 'p' ? 'E' : 'F');
+      printf("PM2%cP", ('p' == code) ? 'E' : 'F');
       hpgl_end();
       break;
     }
   case '~':
     {
-      if (np & 1) {
+      if ((np % 2) == 1) {
 	error("even number of arguments required for spline");
 	break;
       }
-      if (np == 0) {
+      if (0 == np) {
 	error("no arguments for spline");
 	break;
       }
@@ -468,7 +468,7 @@ void lj4_printer::draw(int code, int *p, int np, const environment *env)
   case 'c':
   case 'C':
     // troff adds an extra argument to C
-    if (np != 1 && !(code == 'C' && np == 2)) {
+    if (np != 1 && !(('C' == code) && (2 == np))) {
       error("1 argument required for circle");
       break;
     }
@@ -476,7 +476,7 @@ void lj4_printer::draw(int code, int *p, int np, const environment *env)
     if (!moveto(env->hpos + p[0]/2, env->vpos))
       return;
     hpgl_start();
-    if (code == 'c') {
+    if ('c' == code) {
       set_line_thickness(env->size);
       printf("CI%d", p[0]/2);
     }
@@ -495,7 +495,7 @@ void lj4_printer::draw(int code, int *p, int np, const environment *env)
       return;
     hpgl_start();
     printf("SC0,%.4f,0,-%.4f,2", hpgl_scale * double(p[0])/p[1], hpgl_scale);
-    if (code == 'e') {
+    if ('e' == code) {
       set_line_thickness(env->size);
       printf("CI%d", p[1]/2);
     }
@@ -545,7 +545,7 @@ void lj4_printer::draw(int code, int *p, int np, const environment *env)
     break;
   case 't':
     {
-      if (np == 0) {
+      if (0 == np) {
 	line_thickness = -1;
       }
       else {
@@ -710,7 +710,7 @@ int main(int argc, char **argv)
       exit(2);
       break;
     case ':':
-      if (optopt == 'd') {
+      if ('d' == optopt) {
 	warning("command-line option 'd' requires an argument; assuming"
 		" duplexing on long side");
 	duplex_flag = 1;

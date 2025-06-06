@@ -1,5 +1,18 @@
 2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grolj4/lj4.cpp: Fix code style nits.
+	(lj4_font::handle_unknown_font_command, is_unprintable)
+	(lj4_printer::draw, main): Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.
+	(lj4_printer::draw, lj4_printer::moveto1): Parenthesize formally
+	complex expressions.
+	(lj4_printer::draw): Eschew cleverness.  Use modulus and
+	equality operators to determine even cardinality of integer
+	value instead of a bitwise operator and letting the result pun
+	to a Boolean.
+
+2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grolj4/lj4.cpp
 	(class lj4_font): Comment member function formal argument names
 	as a compromise with the Stroustrup-style C++ used in most of
