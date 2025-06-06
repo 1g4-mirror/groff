@@ -161,6 +161,7 @@ void printer::devtag(char *, const environment *, char)
 {
 }
 
+// TODO: 1st and 3rd args should be `const`.
 void printer::draw(int, int *, int, const environment *)
 {
 }
