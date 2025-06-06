@@ -440,9 +440,11 @@ public:
   char *encoding;
   char *reencoded_name;
   ~ps_font();
-  void handle_unknown_font_command(const char *command, const char *arg,
-				   const char *filename, int lineno);
-  static ps_font *load_ps_font(const char *);
+  void handle_unknown_font_command(const char * /* command */,
+				   const char * /* arg */,
+				   const char * /* fn */,
+				   int lineno);
+  static ps_font *load_ps_font(const char * /* s */);
 };
 
 ps_font *ps_font::load_ps_font(const char *s)
@@ -467,11 +469,11 @@ ps_font::~ps_font()
 }
 
 void ps_font::handle_unknown_font_command(const char *command, const char *arg,
-					  const char *filename, int lineno)
+					  const char *fn, int lineno)
 {
   if (strcmp(command, "encoding") == 0) {
     if (arg == 0)
-      error_with_file_and_line(filename, lineno,
+      error_with_file_and_line(fn, lineno,
 			       "'encoding' command requires an argument");
     else
       encoding = strsave(arg);
@@ -479,11 +481,11 @@ void ps_font::handle_unknown_font_command(const char *command, const char *arg,
 }
 
 static void handle_unknown_desc_command(const char *command, const char *arg,
-					const char *filename, int lineno)
+					const char *fn, int lineno)
 {
   if (strcmp(command, "broken") == 0) {
     if (arg == 0)
-      error_with_file_and_line(filename, lineno,
+      error_with_file_and_line(fn, lineno,
 			       "'broken' command requires an argument");
     else if (!bflag)
       broken_flags = atoi(arg);
@@ -498,12 +500,13 @@ struct subencoding {
   const char *glyphs[256];
   subencoding *next;
 
-  subencoding(font *, unsigned int, int, subencoding *);
+  subencoding(font * /* f */, unsigned int /* n */, int /* ix */,
+	      subencoding * /* s */);
   ~subencoding();
 };
 
 subencoding::subencoding(font *f, unsigned int n, int ix, subencoding *s)
-: p(f), num(n), idx(ix), subfont(0), next(s)
+: p(f), num(n), idx(ix), subfont(0 /* nullptr */), next(s)
 {
   for (int i = 0; i < 256; i++)
     glyphs[i] = 0;
@@ -521,12 +524,13 @@ struct style {
   int height;
   int slant;
   style();
-  style(font *, subencoding *, int, int, int);
+  style(font * /* p */, subencoding * /* s */, int /* sz */,
+	int /* h */, int /* sl */);
   int operator==(const style &) const;
   int operator!=(const style &) const;
 };
 
-style::style() : f(0)
+style::style() : f(0 /* nullptr */)
 {
 }
 
@@ -589,25 +593,28 @@ class ps_printer : public printer {
   int invis_count;
 
   void flush_sbuf();
-  void set_style(const style &);
-  void set_space_code(unsigned char);
-  int set_encoding_index(ps_font *);
-  subencoding *set_subencoding(font *, glyph *, uint16_t *);
-  char *get_subfont(subencoding *, const char *);
-  void do_exec(char *, const environment *);
-  void do_import(char *, const environment *);
-  void do_def(char *, const environment *);
-  void do_mdef(char *, const environment *);
-  void do_file(char *, const environment *);
-  void do_invis(char *, const environment *);
-  void do_endinvis(char *, const environment *);
-  void set_line_thickness_and_color(const environment *);
-  void fill_path(const environment *);
+  void set_style(const style & /* sty */);
+  void set_space_code(unsigned char /* c */);
+  int set_encoding_index(ps_font * /* f */);
+  subencoding *set_subencoding(font * /* f */, glyph * /* g */,
+			       uint16_t * /* code */);
+  char *get_subfont(subencoding * /* sub */, const char * /* stem */);
+  void do_exec(char * /* arg */, const environment * /* env */);
+  void do_import(char * /* arg */, const environment * /* env */);
+  void do_def(char * /* arg */, const environment * /* env */);
+  void do_mdef(char * /* arg */, const environment * /* env */);
+  void do_file(char * /* arg */, const environment * /* env */);
+  void do_invis(char * /* UNUSED */, const environment * /* UNUSED */);
+  void do_endinvis(char * /* UNUSED */,
+		   const environment * /* UNUSED */);
+  void set_line_thickness_and_color(const environment * /* env */);
+  void fill_path(const environment * /* env */);
   void encode_fonts();
-  void encode_subfont(subencoding *);
-  void define_encoding(const char *, int);
-  void reencode_font(ps_font *);
-  void set_color(color *, int = 0);
+  void encode_subfont(subencoding * /* sub */);
+  void define_encoding(const char * /* encoding */,
+		       int /* encoding_index */);
+  void reencode_font(ps_font * /* f */);
+  void set_color(color * /* col */, int /* fill */ = 0);
 
   const char *media_name();
   int media_width();
@@ -617,12 +624,18 @@ class ps_printer : public printer {
 public:
   ps_printer(double);
   ~ps_printer();
-  void set_char(glyph *, font *, const environment *, int, const char *);
-  void draw(int, int *, int, const environment *);
-  void begin_page(int);
-  void end_page(int);
-  void special(char *, const environment *, char);
-  font *make_font(const char *);
+  void set_char(glyph * /* g */,
+		font * /* f */,
+		const environment * /* env */,
+		int /* w */,
+		const char * /* UNUSED */);
+  void draw(int /* code */, int * /* p */, int  /* np */,
+	    const environment * /* env */);
+  void begin_page(int /* n */);
+  void end_page(int /* UNUSED */);
+  void special(char * /* arg */, const environment * /* env */,
+	       char /* type */);
+  font *make_font(const char * /* nm */);
   void end_of_line();
 };
 
@@ -735,8 +748,8 @@ char *ps_printer::get_subfont(subencoding *sub, const char *stem)
   return sub->subfont;
 }
 
-void ps_printer::set_char(glyph *g, font *f, const environment *env, int w,
-			  const char *)
+void ps_printer::set_char(glyph *g, font *f, const environment *env,
+			  int w, const char *)
 {
   if (g == space_glyph || invis_count > 0)
     return;
@@ -1688,14 +1701,14 @@ void ps_printer::do_file(char *arg, const environment *env)
     error("missing argument to X file command");
     return;
   }
-  const char *filename = arg;
+  const char *resource_filename = arg;
   do {
     ++arg;
   } while (*arg != '\0' && *arg != ' ' && *arg != '\n');
   out.put_fix_number(env->hpos)
      .put_fix_number(env->vpos)
      .put_symbol("EBEGIN");
-  rm.import_file(filename, out);
+  rm.import_file(resource_filename, out);
   out.put_symbol("EEND");
   output_hpos = output_vpos = -1;
   output_style.f = 0;
@@ -1860,12 +1873,12 @@ int main(int argc, char **argv)
   setbuf(stderr, stderr_buf);
   int c;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((c = getopt_long(argc, argv, ":b:c:F:gI:lmp:P:vw:",
-	  long_options, NULL)) != EOF)
+	  long_options, 0 /* nullptr */)) != EOF)
     switch(c) {
     case 'b':
       // XXX check this

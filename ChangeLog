@@ -1,5 +1,22 @@
 2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp
+	(class ps_font)
+	(struct subencoding)
+	(struct style)
+	(class ps_printer):
+	Comment member function formal argument names
+	as a compromise with the Stroustrup-style C++ used in most of
+	groff.
+	(main): Spell null pointer constant the idiomatic C++98 way
+	{`0`} instead of as `NULL`.
+	(ps_font::handle_unknown_font_command)
+	(handle_unknown_desc_command): Rename argument from `filename`
+	to `fn` to preëmpt `-Wshadow` compiler warning with planned
+	refactoring of `class font`.
+
+2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grolj4/lj4.cpp: Fix code style nits.
 	(lj4_font::handle_unknown_font_command, is_unprintable)
 	(lj4_printer::draw, main): Reorder equality comparisons to avoid
