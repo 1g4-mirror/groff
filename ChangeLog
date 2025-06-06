@@ -1,3 +1,17 @@
+2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an-ext.tmac (SY): The single-argument form of `SY` need
+	not set an ubreakable space and output line continuation
+	character after formatting the argument.  That distinction is in
+	fact the whole point of accepting a second argument (a new
+	post-1.23 feature), which is set in bold like the first.  (It is
+	why you would write `.SY foo bar` rather than `.SY "foo bar".)
+	* tmac/groff_man.7.man.in (Synopsis macros) <SY>: Document this
+	fact.
+
+	Fixes a regression from groff 1.23.0.  Thanks to Alex Colomar
+	for the report.
+
 2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp: Fix code style nits.

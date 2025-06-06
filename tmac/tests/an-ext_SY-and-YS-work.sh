@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2023-2024 Free Software Foundation, Inc.
+# Copyright (C) 2023-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -145,6 +145,26 @@ echo "$output2" | grep -Eq '^ {13}char \*\*_NotNullable' || wail
 echo 'checking for automatic hyphenation disablement inside synopsis' \
     >&2
 echo "$output2" | grep -q 're-$' && wail
+
+input3='.
+.TH foo 1 2025-06-06 "groff test suite"
+.SH Name
+foo \\- frobnicate a bar
+.SH Synopsis
+.SY foo
+.B \\-\\-baz
+.YS \\&
+.
+.P
+.SY \\%ridiculously\\-long\\-command\\-name\\-can\\-you\\-believe\\-it
+\\%\\-\\-equally\\-bafflingly\\-garrulous\\-and\\-interminable\\-option
+.'
+
+output3=$(echo "$input3" | "$groff" -rLL=80n -man -T ascii -P -cbou)
+echo "$output3"
+
+echo 'checking that long unbreakable words do not overset' >&2
+echo "$output3" | grep -Eq '^ {9}--equally-bafflingly' || wail
 
 test -z "$fail"
 

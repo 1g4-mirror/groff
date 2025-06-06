@@ -1055,6 +1055,12 @@ and any
 .I suffix
 are set in bold.
 .
+When
+.I suffix
+is present,
+.I "groff man"
+sets the next word after it without intervening space.
+.
 If a break is required in subsequent text
 (up to a paragraphing,
 sectioning,
