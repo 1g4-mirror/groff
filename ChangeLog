@@ -1,5 +1,75 @@
 2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp: Fix code style nits.
+	(files::next_file_name)
+	(style::operator==)
+	(char_buffer::add_string)
+	(list::move_to)
+	(assert_state::add)
+	(replace_negate_str)
+	(html_printer::determine_header_level)
+	(html_printer::do_indent)
+	(html_printer::do_space)
+	(html_printer::draw)
+	(html_printer::html_printer)
+	(html_printer::set_char)
+	(html_printer::set_numbered_char)
+	(html_printer::set_char_and_width):
+	Parenthesize formally complex expressions.
+	(style::operator==)
+	(text_glob::is_nf)
+	(text_glob::is_fi)
+	(text_glob::is_br)
+	(html_printer::emit_raw)
+	(html_printer::do_title)
+	(html_printer::do_heading)
+	(html_printer::is_courier_until_eol)
+	(html_printer::do_indent)
+	(html_printer::do_check_center)
+	(html_printer::remove_tabs)
+	(html_printer::lookahead_for_tables)
+	(html_printer::start_font)
+	(html_printer::do_font)
+	(html_printer::start_subscript)
+	(html_printer::start_superscript)
+	(html_printer::end_subscript)
+	(html_printer::end_superscript)
+	(html_printer::handle_assertion)
+	(html_printer::special):
+	Put operators subjected to input line wrapping at the beginning
+	of the continuation line, not at the end of the broken one.
+	The former is preponderant groff style.
+	(header_desc::write_headings)
+	(html_printer::emit_line)
+	(html_printer::emit_raw)
+	(generate_img_src)
+	(html_printer::do_title)
+	(html_printer::write_html_anchor)
+	(html_printer::write_xhtml_anchor)
+	(html_printer::determine_header_level)
+	(html_printer::do_linelength)
+	(html_printer::do_check_center)
+	(html_printer::insert_split_file)
+	(html_printer::do_job_name)
+	(html_printer::is_font_courier)
+	(html_printer::do_font)
+	(html_printer::draw)
+	(html_printer::write_title)
+	(html_printer::do_file_components)
+	(html_printer::writeHeadMetaStyle)
+	(html_printer::~html_printer)
+	(get_str)
+	(make_val)
+	(html_printer::round_width)
+	(html_printer::handle_valid_flag):
+	Reorder equality comparisons to avoid inadvertent lvalue
+	assignment.
+	(generate_img_src):
+	Explicitly compare value of pointer type to null pointer literal
+	instead of letting it pun down to a Boolean.
+
+2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp: Rename `none` enumeration
 	constant to `none_tag` for conformity with other constants in
 	the same (anonymous) enum.  C++ enums weren't name-spaced or
