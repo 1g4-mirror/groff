@@ -1,3 +1,19 @@
+2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grolbp/lbp.cpp
+	(class lbp_font): Comment member function formal argument names
+	as a compromise with the Stroustrup-style C++ used in most of
+	groff.
+	(lbp_font::~lbp_font)
+	(lbp_printer::set_line_thickness)
+	(struct option)
+	(main): Spell null pointer constant the idiomatic C++98 way
+	{`0`} instead of as `NULL`.
+	(lbp_font::handle_unknown_font_command)
+	(handle_unknown_desc_command): Rename argument from `filename`
+	to `fn` to preëmpt `-Wshadow` compiler warning with planned
+	refactoring of `class font`.
+
 2025-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grodvi/dvi.cpp
