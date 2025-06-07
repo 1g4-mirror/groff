@@ -19019,8 +19019,9 @@ For example, the adjustable, non-breaking space escape sequence
 is also supported by Heirloom Doctools @code{troff} 050915 (September
 2005), @code{mandoc} 1.9.5 (2009-09-21), @code{neatroff} (commit
 1c6ab0f6e, 2016-09-13), and Plan@tie{}9 from User Space @code{troff}
-(commit 93f8143600, 2022-08-12), but not by Solaris or Documenter's
-Workbench @code{troff}s.
+(commit 93f8143600, 2022-08-12), but not by Solaris@tie{}10
+or Documenter's Workbench
+@code{troff}s.
 @c as of this writing, 2022-08-13
 @c END Keep in sync with groff_diff(7) and groff_man_style(7).
 @xref{Manipulating Filling and Adjustment}.

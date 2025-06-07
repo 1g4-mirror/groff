@@ -6245,7 +6245,7 @@ The existence of the
 .B .T
 string is a common feature of post-CSTR\~#97
 .IR troff s\[em]DWB\~3.3, \" others
-Solaris,
+Solaris\~10,
 Heirloom Doctools,
 and Plan\~9
 .I troff \" foreign
@@ -6354,8 +6354,8 @@ and Plan\~9 from User Space
 .I troff \" Plan 9
 (commit 93f8143600,
 2022-08-12),
-but not by Solaris/Illumos
-.IR troff s, \" Solaris/Illumos
+but not by Solaris\~10
+.IR troff s, \" Solaris
 which will render it as
 .BR \[ti] .
 .\" as of this writing, 2022-08-13
