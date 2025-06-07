@@ -1,8 +1,8 @@
 2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an-ext.tmac (SY): The single-argument form of `SY` need
-	not set an ubreakable space and output line continuation
-	character after formatting the argument.  That distinction is in
+	not set an ubreakable space and output line continuation escape
+	sequence after formatting the argument.  That distinction is in
 	fact the whole point of accepting a second argument (a new
 	post-1.23 feature), which is set in bold like the first.  (It is
 	why you would write `.SY foo bar` rather than `.SY "foo bar".)
