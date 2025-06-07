@@ -6313,8 +6313,13 @@ The escape sequences
 .BR \[rs]s ,
 and
 .B \[rs]S
-are transparent at the beginning of an input line only in compatibility
-mode.
+are transparent at the beginning of an input line,
+or after the conditional expression of an
+.RB \[lq] if \[rq]
+or
+.B ie
+request,
+only in compatibility mode.
 .
 That is,
 upon interpreting them,

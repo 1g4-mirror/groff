@@ -18961,7 +18961,13 @@ The escape sequences
 @code{\s},
 and
 @code{\S}
-are transparent at the beginning of a line only in compatibility mode.
+are transparent at the beginning of a line,
+or after the conditional expression of an
+@code{if}
+or
+@code{ie}
+request,
+only in compatibility mode.
 That is,
 upon interpreting them,
 GNU
