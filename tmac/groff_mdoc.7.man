@@ -5381,7 +5381,7 @@ As of
 1.23,
 .Ql \&Tn
 no longer changes the type size;
-this functionality may return in the next release.
+this functionality may return in a future release.
 .\" Note what happens if the parameter list overlaps a newline
 .\" boundary.
 .\" to make sure a line boundary is crossed:
