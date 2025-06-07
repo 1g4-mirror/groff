@@ -45,8 +45,8 @@ earlier behavior in mind will sometimes fail to break the line where
 desired when formatted with groff 1.24.
 
 You can either migrate your man(7) document to use the new `SY` and `YS`
-idioms as documented in the groff 1.24 "NEWS" file and the groff_man(7)
-and groff_man_style(7) pages--the last has examples--or add the
+idioms documented in the groff 1.24 groff_man(7) and groff_man_style(7)
+pages and "NEWS" file--the latter two have examples--or add the
 following line at each place where you expect the break to occur.
 
 --- start ---
