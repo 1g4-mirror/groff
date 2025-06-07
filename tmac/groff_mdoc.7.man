@@ -4855,21 +4855,21 @@ for a full discussion of these special character escape sequences.
 Cb Lb2 Lb2 Lb Lb Lb
 Lf(CR) L2 L2 L Lf(CR) L.
 String	7-bit	8-bit	UCS	Prefer	Meaning
-\[rs]*(<=	<=  	<=	\*[<=]	\[rs](<=	less than or equal to
-\[rs]*(>=	>=  	>=	\*[>=]	\[rs](>=	greater than or equal to
-\[rs]*(Rq	"  	"	\*[Rq]	\[rs](rq	right double quote
-\[rs]*(Lq	"  	"	\*[Lq]	\[rs](lq	left double quote
+\[rs]*(<=	<=	<=	\*[<=]	\[rs](<=	less than or equal to
+\[rs]*(>=	>=	>=	\*[>=]	\[rs](>=	greater than or equal to
+\[rs]*(Rq	"	"	\*[Rq]	\[rs](rq	right double quote
+\[rs]*(Lq	"	"	\*[Lq]	\[rs](lq	left double quote
 \[rs]*(ua	\[ha]	\[ha]	\*[ua]	\[rs](ua	vertical arrow up
 \[rs]*(aa	\[aq]	\'	\*[aa]	\[rs](aa	acute accent
-\[rs]*(ga	\`  	\`	\*[ga]	\[rs](ga	grave accent
-\[rs]*(q 	\&" 	\&"	\*[q] 	\[rs](dq	neutral double quote
-\[rs]*(Pi	pi  	pi	\*[Pi]	\[rs](*p	lowercase pi
-\[rs]*(Ne	!=  	!=	\*[Ne]	\[rs](!=	not equals
-\[rs]*(Le	<=  	<=	\*[Le]	\[rs](<=	less than or equal to
-\[rs]*(Ge	>=  	>=	\*[Ge]	\[rs](>=	greater than or equal to
-\[rs]*(Lt	<   	<	\*[Lt]	<	less than
-\[rs]*(Gt	>   	>	\*[Gt]	>	greater than
-\[rs]*(Pm	+\- 	\[+-]	\*[Pm]	\[rs](+\-	plus or minus
+\[rs]*(ga	\`	\`	\*[ga]	\[rs](ga	grave accent
+\[rs]*(q	\&"	\&"	\*[q]	\[rs](dq	neutral double quote
+\[rs]*(Pi	pi	pi	\*[Pi]	\[rs](*p	lowercase pi
+\[rs]*(Ne	!=	!=	\*[Ne]	\[rs](!=	not equals
+\[rs]*(Le	<=	<=	\*[Le]	\[rs](<=	less than or equal to
+\[rs]*(Ge	>=	>=	\*[Ge]	\[rs](>=	greater than or equal to
+\[rs]*(Lt	<	<	\*[Lt]	<	less than
+\[rs]*(Gt	>	>	\*[Gt]	>	greater than
+\[rs]*(Pm	+\-	\[+-]	\*[Pm]	\[rs](+\-	plus or minus
 \[rs]*(If	infinity	infinity	\*[If]	\[rs](if	infinity
 \[rs]*(Am	\*[Am]	\*[Am]	\*[Am]	&	ampersand
 \[rs]*(Na	\*[Na]	\*[Na]	\*[Na]	.Em NaN	not a number (slanted)
