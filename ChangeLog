@@ -1,5 +1,19 @@
 2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (is_char_usable_as_delimiter): Loosen
+	the choke on prohibited delimiters.  To eliminate syntactic
+	ambiguity in conditional expressions, we need only reject
+	characters that can _begin_ numeric expressions; those in the
+	set '/*%<>=&:)' cannot, so permit them as delimiters once more.
+	(do_overstrike, do_bracket, do_name_test, do_zero_width_output)
+	(read_size, do_register, do_width, do_device_extension)
+	(read_drawing_command): Clarify warning diagnostic accordingly.
+
+	* doc/groff.texi.in (Compatibility Mode):
+	* man/groff_diff.7.man (Compatibility mode): Update.
+
+2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an-ext.tmac (SY): The single-argument form of `SY` need
 	not set an ubreakable space and output line continuation escape
 	sequence after formatting the argument.  That distinction is in

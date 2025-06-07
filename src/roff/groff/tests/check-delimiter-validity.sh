@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2024 Free Software Foundation, Inc.
+# Copyright (C) 2024-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -38,7 +38,7 @@ do
   echo "$output" | grep -Fqx ___ || wail
 done
 
-for c in 0 1 2 3 4 5 6 7 8 9 + - / '*' % '<' '>' = '&' : '(' ')' . '|'
+for c in 0 1 2 3 4 5 6 7 8 9 + - '(' . '|'
 do
   echo "checking invalidity of '$c' as delimiter in normal mode" \
     >&2

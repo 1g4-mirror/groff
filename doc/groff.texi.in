@@ -18929,7 +18929,7 @@ accepts several characters as delimiters that it ordinarily rejects,
 because they are meaningful in numeric expressions and therefore
 potentially ambiguous to the document maintainer.
 The set of additional delimiters comprises
-@samp{0123456789+-/*%<>=&:().|}.
+@samp{0123456789+-(.|}.
 
 @cindex input level in delimited arguments
 @cindex interpolation depth in delimited arguments

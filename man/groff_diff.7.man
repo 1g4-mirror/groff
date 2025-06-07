@@ -6103,7 +6103,7 @@ because they are meaningful in numeric expressions and therefore
 potentially ambiguous to the document maintainer.
 .
 The set of additional delimiters comprises
-.RB \[lq] 0123456789+\-/*%<>=&:().| \[rq].
+.RB \[lq] 0123456789+\-(.| \[rq].
 .
 .
 .\" ====================================================================

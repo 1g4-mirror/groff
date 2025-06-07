@@ -1610,9 +1610,9 @@ node *do_overstrike() // \o
   start_token.next();
   if (!start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", start_token.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     delete osnode;
@@ -1662,9 +1662,9 @@ static node *do_bracket() // \b
   start_token.next();
   if (!start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", start_token.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     delete bracketnode;
@@ -1704,9 +1704,9 @@ static const char *do_name_test() // \A
   start_token.next();
   if (!start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", start_token.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
@@ -1821,9 +1821,9 @@ static node *do_zero_width_output() // \Z
   start_token.next();
   if (!start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", start_token.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     delete rev;
@@ -2605,16 +2605,16 @@ static bool is_char_usable_as_delimiter(int c)
   switch (c) {
   case '+':
   case '-':
-  case '/':
-  case '*':
-  case '%':
-  case '<':
-  case '>':
-  case '=':
-  case '&':
-  case ':':
+  // case '/':
+  // case '*':
+  // case '%':
+  // case '<':
+  // case '>':
+  // case '=':
+  // case '&':
+  // case ':':
   case '(':
-  case ')':
+  // case ')':
   case '.':
   case '|':
     return false;
@@ -5724,9 +5724,9 @@ static bool read_size(int *x)
   }
   else if (!tok.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", tok.description());
-    // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", tok.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   else if (!tok.is_usable_as_delimiter(true /* report error */))
     return false;
@@ -5863,9 +5863,9 @@ static void do_register() // \R
   start_token.next();
   if (!start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", start_token.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     return;
@@ -5905,7 +5905,7 @@ static void do_width() // \w
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it is also meaningful"
 	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return;
@@ -6198,9 +6198,9 @@ static node *do_device_extension() // \X
   start_token.next();
   if (!start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", start_token.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
@@ -9365,7 +9365,7 @@ int main(int argc, char **argv)
   if (want_unsafe_requests)
     mac_path = &macro_path;
   set_string(".T", device);
-  // TODO: Kill this off in groff 1.25.  See env.cpp.
+  // TODO: Kill this off in groff 1.24.0 release + 2 years.  See env.cpp.
   if ((strcmp("pdf", device) == 0) || strcmp("ps", device) == 0)
     is_device_ps_or_pdf = true;
   init_charset_table();
@@ -9727,9 +9727,9 @@ static node *read_drawing_command()
   start_token.next();
   if (!start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
-	    " delimiter; it is ambiguous because it is also meaningful"
-	    " in a numeric expression", start_token.description());
-  // TODO: groff 1.25?
+	    " delimiter; it is ambiguous because it can also begin a"
+	    " numeric expression", start_token.description());
+  // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
