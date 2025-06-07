@@ -4023,7 +4023,7 @@ and permissively licensed\[em]not copylefted.
 .
 To reduce the risk of name space collisions,
 string and register names begin only with
-.RB \[lq] m \[rq] .
+.RB \[lq] m \[rq].
 .
 We encourage man page authors
 who are concerned about portability to legacy Unix systems
