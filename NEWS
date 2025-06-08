@@ -289,6 +289,13 @@ nroff
 *  nroff now supports clustered options ("-tzms", for example) as groff,
    troff, and other GNU getopt-using programs do.
 
+pic
+---
+*  pic now supports drawing of polygons with arbitrary vertices with the
+   new `polygon` command, which accepts the `filled` modifier.  Further,
+   the vertices and the egde midpoints of polygons can be addressed with
+   the new `.v[er[tex]]` and `.p[oint]` syntax.  Thanks to Duncan Losin.
+
 soelim
 ------
 
