@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2024 Free Software Foundation, Inc.
+# Copyright (C) 2014-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -46,6 +46,11 @@ EXTRA_DIST += \
 
 # Since pic_CPPFLAGS was set, all .o files have a 'pic-' prefix.
 src/preproc/pic/pic-lex.$(OBJEXT): src/preproc/pic/pic.hpp
+
+pic_TESTS = \
+  src/preproc/pic/tests/polygon-command-works.sh
+TESTS += $(pic_TESTS)
+EXTRA_DIST += $(pic_TESTS)
 
 uninstall_groffdirs: uninstall_pic_hook
 uninstall_pic_hook:

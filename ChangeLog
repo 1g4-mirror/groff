@@ -1,5 +1,14 @@
 2025-06-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Add unit test for `polygon` command.
+
+	* src/preproc/pic/tests/polygon-command-works.sh: Do it.
+	* src/src/preproc/pic/pic.am (pic_TESTS): Run test.
+	(TESTS): Add test to suite.
+	(EXTRA_DIST): Ship test in distribution archive.
+
+2025-06-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/object.cpp (object::point): Fix compiler
 	warning when building paranoiacally; don't give an actual
 	parameter a name when it's unused.
