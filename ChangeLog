@@ -28,8 +28,8 @@
 	(html_printer::html_printer)
 	(html_printer::set_char)
 	(html_printer::set_numbered_char)
-	(html_printer::set_char_and_width):
-	Parenthesize formally complex expressions.
+	(html_printer::set_char_and_width): Parenthesize formally
+	complex expressions.
 	(style::operator==)
 	(text_glob::is_nf)
 	(text_glob::is_fi)
@@ -49,10 +49,9 @@
 	(html_printer::end_subscript)
 	(html_printer::end_superscript)
 	(html_printer::handle_assertion)
-	(html_printer::special):
-	Put operators subjected to input line wrapping at the beginning
-	of the continuation line, not at the end of the broken one.
-	The former is preponderant groff style.
+	(html_printer::special): Put operators subjected to input line
+	wrapping at the beginning of the continuation line, not at the
+	end of the broken one.  The former is preponderant groff style.
 	(header_desc::write_headings)
 	(html_printer::emit_line)
 	(html_printer::emit_raw)
@@ -75,12 +74,11 @@
 	(get_str)
 	(make_val)
 	(html_printer::round_width)
-	(html_printer::handle_valid_flag):
-	Reorder equality comparisons to avoid inadvertent lvalue
-	assignment.
-	(generate_img_src):
-	Explicitly compare value of pointer type to null pointer literal
-	instead of letting it pun down to a Boolean.
+	(html_printer::handle_valid_flag): Reorder equality comparisons
+	to avoid inadvertent lvalue assignment.
+	(generate_img_src): Explicitly compare value of pointer type to
+	null pointer literal instead of letting it pun down to a
+	Boolean.
 
 2025-06-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -126,10 +124,9 @@
 	(class ps_font)
 	(struct subencoding)
 	(struct style)
-	(class ps_printer):
-	Comment member function formal argument names
-	as a compromise with the Stroustrup-style C++ used in most of
-	groff.
+	(class ps_printer): Comment member function formal argument
+	names as a compromise with the Stroustrup-style C++ used in most
+	of groff.
 	(main): Spell null pointer constant the idiomatic C++98 way
 	{`0`} instead of as `NULL`.
 	(ps_font::handle_unknown_font_command)
