@@ -1311,7 +1311,7 @@ for i = 1 to 3 do {
 .
 .LP
 Arbitrary polygons can be drawn using the
-.BR polygon
+.B polygon
 keyword followed by a series of n-1 line segments, where n is the number
 of edges of the polygon. This allows groff to interpret the line
 segments as a complete object such that the filled and shaded attributes
@@ -1343,7 +1343,7 @@ arrow down from last polygon.v4
 .LP
 creates and correctly places a flowchart decision diamond.
 Note that
-.BR .c
+.B .c
 is also available but the compass points will not work as expected and
 should not be used.
 .
