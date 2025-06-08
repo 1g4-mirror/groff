@@ -926,13 +926,13 @@ these have values 8.5 and 11,
 respectively.
 .
 .
-.LP
+.P
 Scientific notation is allowed for numbers,
 as with
 .RB \[lq] "x = 5e\-2" \[rq].
 .
 .
-.LP
+.P
 Text attributes can be compounded.
 .
 For example,
@@ -940,7 +940,7 @@ For example,
 is valid.
 .
 .
-.LP
+.P
 There is no limit to the depth to which blocks can be nested.
 .
 For example,
@@ -955,12 +955,12 @@ circle at last [].A.B.C
 is acceptable.
 .
 .
-.LP
+.P
 Arcs have compass points determined by the circle of which the arc is a
 part.
 .
 .
-.LP
+.P
 Circles,
 ellipses,
 and arcs can be dotted or dashed.
@@ -969,7 +969,7 @@ In \*[tx] mode,
 splines can be dotted or dashed as well.
 .
 .
-.LP
+.P
 Boxes can have rounded corners.
 .
 The
@@ -1008,7 +1008,7 @@ and
 offsets of the box's upper right corner from its default position.
 .
 .
-.LP
+.P
 The
 .B .PS
 line accepts a second argument specifying a maximum height for the
@@ -1026,7 +1026,7 @@ This differs from DWB 2.0
 which may change the picture's aspect ratio if a height is specified.
 .
 .
-.LP
+.P
 Each text object has an associated invisible box that determines its
 compass points and implicit motion.
 .
@@ -1050,7 +1050,7 @@ and
 have values of\~0.
 .
 .
-.LP
+.P
 In
 (almost all)
 .\" XXX: So what _are_ the exceptions?
@@ -1088,7 +1088,7 @@ and
 are supported.
 .
 .
-.LP
+.P
 The thickness of the lines used to draw objects is controlled by the
 .B linethick
 variable,
@@ -1138,7 +1138,7 @@ nor by the width or height given in the
 line.
 .
 .
-.LP
+.P
 Boxes
 (including boxes with rounded corners or slanted sides),
 circles,
@@ -1208,7 +1208,7 @@ assumes at the beginning of each picture that the stroke and fill colors
 are set to the device defaults.
 .
 .
-.LP
+.P
 To change the name of the vbox in \*[tx] mode,
 set the pseudo-variable
 .B \%figname
@@ -1229,7 +1229,7 @@ makes the picture available in the box
 .BR \[rs]foobar .
 .
 .
-.LP
+.P
 Arrow heads are drawn as solid triangles if the variable
 .B \%arrowhead
 is non-zero and either \*[tx] mode is enabled or the
@@ -1244,7 +1244,7 @@ Solid arrow heads are always filled with the current outline (stroke)
 color.
 .
 .
-.LP
+.P
 The
 .I troff
 output of
@@ -1262,7 +1262,7 @@ they are never interpreted as
 basic units.
 .
 .
-.LP
+.P
 Objects can have an
 .B \%aligned
 attribute,
@@ -1282,7 +1282,7 @@ points of the object.
 has no effect on objects whose start and end points are coincident.
 .
 .
-.LP
+.P
 In places where
 .IB n th
 is allowed,
@@ -1309,28 +1309,46 @@ for i = 1 to 3 do {
 .EE
 .
 .
-.LP
+.P
 Arbitrary polygons can be drawn using the
 .B polygon
-keyword followed by a series of n-1 line segments, where n is the number
-of edges of the polygon. This allows groff to interpret the line
-segments as a complete object such that the filled and shaded attributes
-may be used.
+keyword followed by a series of
+.IR n \-1
+line segments,
+where
+.I n
+is the number of edges of the polygon.
+.
+This allows
+GNU
+.I troff \" GNU
+to interpret the line segments as a complete object such that the
+.B \%filled
+and
+.B \%shaded
+attributes may be used.
+.
 The final drawing position and direction are specified by the last
 user-specified line segment.
-For example, a triangle can be drawn and filled with the following:
+For example,
+draw and fill a triangle
+with the following.
 .IP
 .EX
 polygon up 1 then right 1 down 0.5 fill 0.5
 .EE
 .LP
-To position polygons, two new suffixes are available:
+To position polygons,
+two new suffixes are available:
 .RB \[lq] .v
 .IR expr \[rq]
-for locating the vertices, and
+for locating the vertices,
+and
 .RB \[lq] .p
 .IR expr \[rq]
-for locating the center-points of edges. For example,
+for locating the center points of edges.
+.
+For example,
 .IP
 .EX
 arrow down
@@ -1340,12 +1358,14 @@ then down 0.5 left 1 \[rs]
 with .v2 at last line.end
 arrow down from last polygon.v4
 .EE
-.LP
+.
+.
+.P
 creates and correctly places a flowchart decision diamond.
-Note that
+.
 .B .c
 is also available but the compass points will not work as expected and
-should not be used.
+should not be used with polygons.
 .
 .
 .\" ====================================================================
@@ -1409,7 +1429,7 @@ One of these is
 the PostScript interpreter Ghostscript
 .RI ( gs (1)),
 which exposes format converters via its
-.B \-sDEVICE=
+.B \%\-sDEVICE=
 option.
 .
 .RB \[lq] "gs \-\-help" \[rq]
