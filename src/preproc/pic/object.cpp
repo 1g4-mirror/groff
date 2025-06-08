@@ -381,7 +381,7 @@ position object::point()
   return origin();
 }
 
-void object::set_vertex_number(int vnum)
+void object::set_vertex_number(int)
 {
 }
 

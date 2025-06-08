@@ -1,3 +1,9 @@
+2025-06-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/pic/object.cpp (object::point): Fix compiler
+	warning when building paranoiacally; don't give an actual
+	parameter a name when it's unused.
+
 2024-11-19  Duncan Losin <dlosin@protonmail.com>
 
 	[pic]: Extend to allow drawing arbitrary polygons.
