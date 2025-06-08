@@ -50,7 +50,7 @@ and groff_man_style(7) pages--the last has examples--or add the
 following line at each place where you expect the break to occur.
 
 --- start ---
-.if (\n(.g&\n(.x=1&\n(.y<24) .YS
+.if (\n(.g&(\n(.x=1)&(\n(.y<24)) .YS
 --- end ---
 
 ----------------------------------------------------------------------
