@@ -136,6 +136,8 @@
 	(handle_unknown_desc_command): Rename argument from `filename`
 	to `fn` to preëmpt `-Wshadow` compiler warning with planned
 	refactoring of `class font`.
+	(ps_printer::do_file): Rename local variable from `filename` to
+	`resource_filename` for clarity.
 
 2025-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
