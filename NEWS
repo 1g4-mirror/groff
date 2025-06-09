@@ -12,6 +12,7 @@ VERSION next
 
 Noteworthy incompatible changes
 -------------------------------
+
 * If your roff(7) documents follow any of the requests `cf`, `hpf`,
   `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
   `trf` with a comment after their file name argument, and did not place
@@ -291,10 +292,13 @@ nroff
 
 pic
 ---
-*  pic now supports drawing of polygons with arbitrary vertices with the
-   new `polygon` command, which accepts the `filled` modifier.  Further,
-   the vertices and the egde midpoints of polygons can be addressed with
-   the new `.v[er[tex]]` and `.p[oint]` syntax.  Thanks to Duncan Losin.
+
+*  A new command, `polygon`, supports drawing polygons using arbitrary
+   vertices.  The command furthermore accepts the `fill[ed]` modifier.
+   You can address a polygon's vertices and the midpoints of its edges
+   with the new `.v[er[tex]]` and `.p[oint]` syntax suffixed to an
+   object identifer, analogously to the existing compass point and
+   `.c[enter]` feature.  Thanks to Duncan Losin.
 
 soelim
 ------
