@@ -1,3 +1,10 @@
+2025-06-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/devutf8/devutf8.am (DEVUTF8FONTS): Tweak ordering of
+	mounted CJK faces in "DESC" file generated for "utf8" output
+	device.  Consistently arrange the Hei (~serif) faces before the
+	Song (~sans-serif) ones.
+
 2025-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp (html_printer::set_style):

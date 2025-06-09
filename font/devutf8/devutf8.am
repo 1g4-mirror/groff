@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 devutf8_srcdir = $(top_srcdir)/font/devutf8
-DEVUTF8FONTS = R I B BI CSH CSS CTS CTH JPG JPM KOG KOM
+DEVUTF8FONTS = R I B BI CSH CSS CTH CTS JPG JPM KOG KOM
 DEVUTF8FONTSFILES = \
   font/devutf8/R \
   font/devutf8/I \
