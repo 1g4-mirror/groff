@@ -891,7 +891,8 @@ file.
 .I grops
 furthermore supports a naming scheme for East Asian typefaces
 shared with
-.MR grohtml @MAN1EXT@
+.MR grohtml @MAN1EXT@ ,
+.MR gropdf @MAN1EXT@ ,
 and
 .MR grotty @MAN1EXT@ .
 .

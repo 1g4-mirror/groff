@@ -285,7 +285,8 @@ documents that expect it to always be available.
 .I \%grohtml
 furthermore supports a naming scheme for East Asian typefaces
 shared with
-.MR grops @MAN1EXT@
+.MR gropdf @MAN1EXT@ ,
+.MR grops @MAN1EXT@ ,
 and
 .MR grotty @MAN1EXT@ .
 .

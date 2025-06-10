@@ -407,7 +407,8 @@ attempts to set or change the font family or type size are ignored.
 .I grotty
 furthermore supports a naming scheme for East Asian typefaces
 shared with
-.MR grohtml @MAN1EXT@
+.MR grohtml @MAN1EXT@ ,
+.MR gropdf @MAN1EXT@ ,
 and
 .MR grops @MAN1EXT@ .
 .
