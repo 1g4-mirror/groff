@@ -1,5 +1,14 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gropdf]: Use stricter MS-DOS/Windows filespec check.
+
+	* src/devices/gropdf/gropdf.pl (OpenFontFile)
+	(OpenIncludedFile): Make check for MS-DOS/Windows-style absolute
+	filespec stricter; not only must the second character be ':',
+	but the first must now be an uppercase Basic Latin letter.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl: Refactor.
 	(OpenInc): Rename this subroutine...
 	(OpenIncludedFile): ...to this.  Also rename local scalars for

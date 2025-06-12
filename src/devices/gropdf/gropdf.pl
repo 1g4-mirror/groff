@@ -1238,8 +1238,9 @@ sub OpenFontFile
     # Is the file specification absolute?
     #
     # XXX: Forbid this?  See Savannah #66419.
-    if ((substr($fileName,0,1) eq '/')
-	or (substr($fileName,1,1) eq ':')) # dos
+    if (substr($fileName,0,1) eq '/' # POSIX
+	or (substr($fileName,0,1) =~ m/[A-Z]/
+	    and substr($fileName,1,1) eq ':')) # MS-DOS/Windows
     {
 	$resolvedFileName=$fileName
 	    if (-r "$fileName" and open($$f,"<$fileName"));
@@ -2463,7 +2464,10 @@ sub OpenIncludedFile
     my $fileName=undef;
     my $F;
 
-    if (substr($arg,0,1) eq '/' or substr($arg,1,1) eq ':') # dos
+    # Is the file specification absolute?
+    if (substr($arg,0,1) eq '/' # POSIX
+	or (substr($arg,0,1) =~ m/[A-Z]/
+	    and substr($arg,1,1) eq ':')) # MS-DOS/Windows
     {
 	if (-r $arg and open($F,"<$arg"))
 	{
