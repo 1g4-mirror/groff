@@ -1477,7 +1477,9 @@ end
 .\" The QUAD in PP adds an unwanted linespace after a HEADING at the
 .\" top of a pdf box because of this .br, so HEADING assigns the
 .\" tmp register "bx-top\n[stack]" to inhibit it.
-.    ie !\\n[pdfbx-top\\n[stack]] .if !\\n[#TOC] .br
+.    ie !\\n[pdfbx-top\\n[stack]] \
+.       if !\\n[#TOC] \
+.          if !\\n[#START] .br
 .    el .rr pdfbx-top\\n[stack]
 .    if \\n[#COVERTEXT_PP] \
 .       ds $RESTORE_DOC_QUAD \\*[$QUAD_VALUE]
@@ -2795,6 +2797,18 @@ end
 \#
 \# +++GRAPHICAL OBJECTS+++
 \#
+\# Define adjustment modes
+.nr saved_.j \n[.j]
+.ad b
+.nr #ADJ_B \n[.j]
+.ad c
+.nr #ADJ_C \n[.j]
+.ad l
+.nr #ADJ_L \n[.j]
+.ad r
+.nr #ADJ_R \n[.j]
+.ad \n[saved_.j]
+.rr saved_.j
 \# Set params for graphical objects.
 \#
 .MAC GRAPHICAL_OBJ END
@@ -2813,8 +2827,8 @@ end
 .    \}
 .    el \{\
 .       nr #NOFILL 1
-.       if \\n[.ce]>0 .nr #NOFILL_MODE 3
-.       if \\n[.rj]>0 .nr #NOFILL_MODE 5
+.       if \\n[.ce]>0 .nr #NOFILL_MODE \\n[#ADJ_C]
+.       if \\n[.rj]>0 .nr #NOFILL_MODE \\n[#ADJ_R]
 .       ce 0
 .       rj 0
 .    \}
@@ -2847,7 +2861,7 @@ end
 .    di NULL
 .       if \\n[#NUM_ARGS]>=1 .RULE_WEIGHT \\*[$RL_WEIGHT]
 .    di
-.    if !'\\$4'' .COLOR \\$4
+.    if !'\\$4'' .gcolor \\$4
 .    ie \\n[#NUM_ARGS]=0 \{\
 .       ds $RL_INDENT 0
 .       ie \\n[#INDENT_ACTIVE] \{\
@@ -2883,16 +2897,16 @@ end
 .    \}
 .    gcolor default
 .    if \\n[#FILLED]=1 \{\
-.       if \\n[#FILL_MODE]=0 .QUAD LEFT
-.       if \\n[#FILL_MODE]=1 .JUSTIFY
-.       if \\n[#FILL_MODE]=3 .QUAD CENTER
-.       if \\n[#FILL_MODE]=5 .QUAD RIGHT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_L] .QUAD LEFT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_B] .JUSTIFY
+.       if \\n[#FILL_MODE]=\\n[#ADJ_C] .QUAD CENTER
+.       if \\n[#FILL_MODE]=\\n[#ADJ_R] .QUAD RIGHT
 .       rr #FILLED
 .    \}
 .    sp -1v
 .    if \\n[#NOFILL]=1 \{\
-.       if \\n[#NOFILL_MODE]=3 .CENTER
-.       if \\n[#NOFILL_MODE]=5 .RIGHT
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_C] .CENTER
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_R] .RIGHT
 .    \}
 .    nr #RULE_WEIGHT     \\n[#SAVED_RULE_WEIGHT]
 .    nr #RULE_WEIGHT_ADJ \\n[#SAVED_WEIGHT_ADJ]
@@ -2961,7 +2975,7 @@ end
 .    ds $RL_WEIGHT \\$1
 .    ds $RL_INDENT \\$2
 .    ds $RL_DEPTH  \\$3
-.    if !'\\$4'' .COLOR \\$4
+.    if !'\\$4'' .gcolor \\$4
 .    nr #SAVED_RULE_WEIGHT \\n[#RULE_WEIGHT]
 .    nr #SAVED_WEIGHT_ADJ  \\n[#RULE_WEIGHT_ADJ]
 .    RULE_WEIGHT \\*[$RL_WEIGHT]
@@ -2971,16 +2985,16 @@ end
 \Z'\D't \\n[#SAVED_RULE_WEIGHT]''
 .    gcolor default
 .    if \\n[#FILLED]=1 \{\
-.       if \\n[#FILL_MODE]=0 .QUAD LEFT
-.       if \\n[#FILL_MODE]=1 .JUSTIFY
-.       if \\n[#FILL_MODE]=3 .QUAD CENTER
-.       if \\n[#FILL_MODE]=5 .QUAD RIGHT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_L] .QUAD LEFT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_B] .JUSTIFY
+.       if \\n[#FILL_MODE]=\\n[#ADJ_C] .QUAD CENTER
+.       if \\n[#FILL_MODE]=\\n[#ADJ_R] .QUAD RIGHT
 .       rr #FILLED
 .    \}
 .    sp -1v
 .    if \\n[#NOFILL]=1 \{\
-.       if \\n[#NOFILL_MODE]=3 .CENTER
-.       if \\n[#NOFILL_MODE]=5 .RIGHT
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_C] .CENTER
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_R] .RIGHT
 .    \}
 .    nr #RULE_WEIGHT     \\n[#SAVED_WEIGHT]
 .    nr #RULE_WEIGHT_ADJ \\n[#SAVED_WEIGHT_ADJ]
@@ -3049,7 +3063,7 @@ end
 .       rr #BX_SOLID
 .    \}
 .    el \{\
-.       COLOR \\*[$BX_COLOR]
+.       gcolor \\*[$BX_COLOR]
 \Z'\D't \\n[#RULE_WEIGHT]''\
 \h'\\*[$BX_INDENT]+\\n[#RULE_WEIGHT]u'\
 \v'\\n[#WEIGHT_ADJ]u'\
@@ -3059,16 +3073,16 @@ end
 .    \}
 .    gcolor default
 .    if \\n[#FILLED]=1 \{\
-.       if \\n[#FILL_MODE]=0 .QUAD LEFT
-.       if \\n[#FILL_MODE]=1 .JUSTIFY
-.       if \\n[#FILL_MODE]=3 .QUAD CENTER
-.       if \\n[#FILL_MODE]=5 .QUAD RIGHT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_L] .QUAD LEFT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_B] .JUSTIFY
+.       if \\n[#FILL_MODE]=\\n[#ADJ_C] .QUAD CENTER
+.       if \\n[#FILL_MODE]=\\n[#ADJ_R] .QUAD RIGHT
 .       rr #FILLED
 .    \}
 .    sp -1v
 .    if \\n[#NOFILL]=1 \{\
-.       if \\n[#NOFILL_MODE]=3 .CENTER
-.       if \\n[#NOFILL_MODE]=5 .RIGHT
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_C] .CENTER
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_R] .RIGHT
 .    \}
 .    nr #RULE_WEIGHT \\n[#SAVED_WEIGHT]
 .    nr #WEIGHT_ADJ  \\n[#SAVED_WEIGHT_ADJ]
@@ -3139,7 +3153,7 @@ end
 .       rr #CL_SOLID
 .    \}
 .    el \{\
-.       COLOR \\*[$CL_COLOR]
+.       gcolor \\*[$CL_COLOR]
 \Z'\D't \\n[#RULE_WEIGHT]''\
 \h'\\*[$CL_INDENT]+\\n[#RULE_WEIGHT]u'\
 \v'\\*[$CL_DEPTH]/2u'\
@@ -3149,16 +3163,16 @@ end
 .       gcolor default
 .    \}
 .    if \\n[#FILLED]=1 \{\
-.       if \\n[#FILL_MODE]=0 .QUAD LEFT
-.       if \\n[#FILL_MODE]=1 .JUSTIFY
-.       if \\n[#FILL_MODE]=3 .QUAD CENTER
-.       if \\n[#FILL_MODE]=5 .QUAD RIGHT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_L] .QUAD LEFT
+.       if \\n[#FILL_MODE]=\\n[#ADJ_B] .JUSTIFY
+.       if \\n[#FILL_MODE]=\\n[#ADJ_C] .QUAD CENTER
+.       if \\n[#FILL_MODE]=\\n[#ADJ_R] .QUAD RIGHT
 .       rr #FILLED
 .    \}
 .    sp -1v
 .    if \\n[#NOFILL]=1 \{\
-.       if \\n[#NOFILL_MODE]=3 .CENTER
-.       if \\n[#NOFILL_MODE]=5 .RIGHT
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_C] .CENTER
+.       if \\n[#NOFILL_MODE]=\\n[#ADJ_R] .RIGHT
 .    \}
 .    nr #RULE_WEIGHT \\n[#SAVED_WEIGHT]
 .    nr #WEIGHT_ADJ  \\n[#SAVED_WEIGHT_ADJ]
