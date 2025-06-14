@@ -1,3 +1,9 @@
+2025-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (charinfo::dump): Fix thinko when
+	initializing static `char` array literals.  `none` requires only
+	{one} null terminator.  Append one to `comma`.
+
 2025-06-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[pic]: Add unit test for `polygon` command.

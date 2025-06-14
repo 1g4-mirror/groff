@@ -10369,8 +10369,8 @@ void charinfo::dump()
   if (0U == flags)
     errprint("none)\n");
   else {
-    char none[] = { '\0', '\0' };
-    char comma[] = { ',', ' ' };
+    char none[] = { '\0' };
+    char comma[] = { ',', ' ', '\0' };
     char *separator = none;
     if (flags & ENDS_SENTENCE) {
       errprint("%1ends sentence", separator);
