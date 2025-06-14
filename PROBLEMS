@@ -60,7 +60,7 @@ following line at each place where you expect the break to occur.
 * When viewing man pages, some characters on my UTF-8 terminal emulator
   look funny or copy-and-paste wrong.  Why?
 
-Some Unicode Basic Latin ("ASCII") input characters are mapped to
+GNU troff maps some Unicode Basic Latin ("ASCII") input characters to
 non-Basic Latin code points in output for consistency with other output
 devices, like PDF.  See groff_man_style(7) and groff_char(7) for correct
 input conventions and background.  If you use the correct groff special
@@ -84,6 +84,10 @@ groff was configured when it was built.
 --- end ---
 
 You may also wish to do the same for "mdoc.local".
+
+However, remapping ' and ` in this manner eliminates the only means of
+inputting directional ("typographer's") quotation marks that is portable
+to AT&T troff.  See section "Notes" of groff_man_style(7).
 
 In man pages (only), groff maps the minus sign special character '\-' to
 the Basic Latin hyphen-minus (U+002D) because man pages require this
