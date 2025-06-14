@@ -1,5 +1,10 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl (do_x): Trivially refactor.
+	Rename scalar `FDnm` to `fileName`.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (LoadDownload): Drop scalar `f`;
 	we won't need it anymore.  Rename scalar `found` to
 	`anyDownloadFilefound`, and manipulate it like a Boolean, not a

@@ -1712,23 +1712,23 @@ sub do_x
 		my $info;
 		my $image;
 
-		my ($FD,$FDnm)=OpenInc($fil);
+		my ($FD,$fileName)=OpenInc($fil);
 
 		if (!defined($FD))
 		{
-		    Warn("failed to open image file '$FDnm'");
+		    Warn("failed to open image file '$fileName'");
 		    return;
 		}
 
 		if (!exists($incfil{$fil}))
 		{
-		    if ($gotexif and $FDnm!~m/\.pdf$/i)
+		    if ($gotexif and $fileName!~m/\.pdf$/i)
 		    {
 			binmode $FD;
 
 			$image = Image::Magick->new;
 			my $x = $image->Read(file => $FD);
-			Warn("Image '$FDnm': $x"), return if "$x";
+			Warn("Image '$fileName': $x"), return if "$x";
 			$imgtype=$image->Get('magick');
 			$info->{ImageWidth}=$image->Get('width');
 			$info->{ImageHeight}=$image->Get('height');
@@ -1737,7 +1737,7 @@ sub do_x
 		    }
 		    else
 		    {
-			my $dim=`( identify $FDnm 2>/dev/null || file $FDnm )`;
+			my $dim=`( identify $fileName 2>/dev/null || file $fileName )`;
 			if ($dim=~m/(?:[,=A-Z]|JP2) (\d+)\s*x\s*(\d+)/)
 			{
 			    $info->{ImageWidth}=$1;
@@ -1767,19 +1767,19 @@ sub do_x
 
 		    if ($imgtype eq 'PDF')
 		    {
-			$incfil{$fil}=LoadPDF($FD,$FDnm,$mat,$wid,$hgt,"pdfpic");
+			$incfil{$fil}=LoadPDF($FD,$fileName,$mat,$wid,$hgt,"pdfpic");
 		    }
 		    elsif ($imgtype eq 'JPEG')
 		    {
-			$incfil{$fil}=LoadJPEG($FD,$FDnm,$info);
+			$incfil{$fil}=LoadJPEG($FD,$fileName,$info);
 		    }
 		    elsif ($imgtype eq 'JP2')
 		    {
-			$incfil{$fil}=LoadJP2($FD,$FDnm,$info);
+			$incfil{$fil}=LoadJP2($FD,$fileName,$info);
 		    }
 		    else
 		    {
-			$incfil{$fil}=LoadMagick($image,$FDnm,$info);
+			$incfil{$fil}=LoadMagick($image,$fileName,$info);
 		    }
 
 		    return if !defined($incfil{$fil});
@@ -1791,7 +1791,7 @@ sub do_x
 		    IsGraphic();
 		    my $bbox=$incfil{$fil}->[1];
 		    $imgtype=$incfil{$fil}->[2];
-		    Warn("Failed to extract width x height for '$FDnm'"),return if !defined($bbox->[2]) or !defined($bbox->[3]);
+		    Warn("Failed to extract width x height for '$fileName'"),return if !defined($bbox->[2]) or !defined($bbox->[3]);
 		    $wid=($bbox->[2]-$bbox->[0]) if $wid <= 0 and $hgt <= 0;
 		    my $xscale=d3($wid/($bbox->[2]-$bbox->[0]));
 		    my $yscale=d3(($hgt<=0)?$xscale:($hgt/($bbox->[3]-$bbox->[1])));
