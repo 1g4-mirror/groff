@@ -1,5 +1,11 @@
 2025-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp (html_printer::set_style):
+	Disclose name of font description file lacking `internalname`
+	directive in fatal diagnostic when this is the case.
+
+2025-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::dump): Fix thinko when
 	initializing static `char` array literals.  `none` requires only
 	{one} null terminator.  Append one to `comma`.

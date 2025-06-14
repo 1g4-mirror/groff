@@ -2378,8 +2378,8 @@ void html_printer::set_style(const style &sty)
   if (0 /* nullptr */ == fontname)
     // XXX: Is this the only circumstance that can cause a null font
     // description file name?  ps.cpp uses sty.f->get_internal_name()...
-    fatal("cannot set style; font description lacks an 'internalname'"
-	  " directive");
+    fatal("cannot set style; font description file '%1' lacks an"
+	  " 'internalname' directive", fontname);
 
 #if 0
   change_font(fontname, (font::res / (72 * font::sizescale))
