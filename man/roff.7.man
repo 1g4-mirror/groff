@@ -2159,7 +2159,7 @@ when laying out a table with
 GNU
 .IR tbl , \" GNU
 specifying the
-.B nospaces
+.B \%nospaces
 region option
 causes the program to ignore spaces at the boundaries of table cells.)
 .
