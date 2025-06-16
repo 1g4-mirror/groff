@@ -1,3 +1,14 @@
+2025-06-16  Dave Kemper <saint.snit@gmail.com>
+
+	* src/roff/troff/env.cpp (distribute_space): Fix expression
+	involving C++ `static_cast<>` operator to stop permitting
+	integer division within, leading to undesired loss of precision
+	when reporting the amount of "spread" applied when performing
+	adjustment, as configured by the `spreadwarn` request.
+
+	Fixes <https://savannah.gnu.org/bugs/?67219>.  [Problem
+	introduced by me in commit 8b6ccbce48, 13 May.  --GBR]
+
 2025-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tests/an-ext_SY-and-YS-work.sh: Use printf(1), not

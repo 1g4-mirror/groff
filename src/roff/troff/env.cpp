@@ -2239,8 +2239,8 @@ static bool distribute_space(node *nd, int nspaces,
   if (!force_reverse_node_list && spread_limit >= 0
       && desired_space.to_units() > 0) {
     hunits em = curenv->get_size();
-    double Ems = static_cast<double>(desired_space.to_units() / nspaces
-		 / (em.is_zero() ? hresolution : em.to_units()));
+    double Ems = static_cast<double>(desired_space.to_units()) / nspaces
+		 / (em.is_zero() ? hresolution : em.to_units());
     if (Ems > spread_limit)
       output_warning(WARN_BREAK, "spreading %1m per space", Ems);
   }
