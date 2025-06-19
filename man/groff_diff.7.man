@@ -2203,6 +2203,14 @@ it is subject to automatic hyphenation.
 .
 .
 .IP
+However,
+a user-defined character
+.I c
+does not participate at its boundaries
+in kerning adjustments or italic corrections.
+.
+.
+.IP
 To prevent infinite recursion,
 occurrences of
 .I c

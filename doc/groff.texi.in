@@ -11814,14 +11814,36 @@ glyphs in @var{contents}.
 @c TODO: Document Peter Schaffter's diversion-as-character trick.
 @c https://lists.gnu.org/archive/html/groff/2024-12/msg00085.html
 
-A character defined by these requests can be used just like a glyph
-provided by the output device.  In particular, other characters can be
-translated to it with the @code{tr} or @code{trin} requests; it can be
-made the tab or leader fill character with the @code{tc} and @code{lc}
-requests, respectively; repeated patterns can be drawn with it using the
-@code{\l} and @code{\L} escape sequences; and words
-containing@tie{}@var{c} can be hyphenated correctly if the @code{hcode}
-request is used to give the object a hyphenation code.
+A character defined by these requests
+can be used just like a glyph provided by the output device.
+In particular,
+other characters can be translated to it with the
+@code{tr}
+and
+@code{trin} requests;
+it can be made the tab or leader fill character with the
+@code{tc}
+and
+@code{lc}
+requests,
+respectively;
+sequences of it can be drawn with the
+@code{\l}
+and
+@code{\L}
+escape sequences;
+and,
+if the
+@code{hcode}
+request is used on
+@var{c},
+it is subject to automatic hyphenation.
+
+However,
+a user-defined character
+@var{c}
+does not participate at its boundaries
+in kerning adjustments or italic corrections.
 
 There is a special anti-recursion feature: use of the object within its
 own definition is handled like a normal character (not
