@@ -1,3 +1,12 @@
+2025-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tests/an-ext_SY-and-YS-work.sh: Use printf(1), not
+	echo(1), when an argument contains backslashes.  Thanks to Dave
+	Kemper and Deri James for reporting test failures arising from
+	the non-portability of backslash usage in echo(1) arguments,
+	which frustratingly did not create problems on any systems
+	readily available to me.
+
 2025-06-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devutf8/devutf8.am (DEVUTF8FONTS): Tweak ordering of
