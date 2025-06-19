@@ -1107,7 +1107,7 @@
 
 	[troff]: Boolify member function of `output_file` class that
 	indicates whether the current page is selected for printing (as
-	with troff's `-o` option.
+	with troff's `-o` option).
 
 	* src/roff/troff/node.h (class output_put): Demote
 	member function `is_printing` from `int` to `bool`, and rename
