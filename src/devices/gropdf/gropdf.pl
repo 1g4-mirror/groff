@@ -463,6 +463,7 @@ sub usage
 }
 
 my $fd;
+my @fdlist;
 my $frot;
 my $fpsz;
 my $embedall=0;
@@ -489,7 +490,7 @@ my $thisfnt;
 my $parcln=qr/\[[^\]]*?\]|(.)((?!\1).)*\1/;
 my $parclntyp=qr/(?:[\d\w]|\([+-]?[\S]{2}|$parcln)/;
 
-if (!GetOptions('F=s' => \$fd, 'I=s' => \@idirs, 'l' => \$frot,
+if (!GetOptions('F=s' => \@fdlist, 'I=s' => \@idirs, 'l' => \$frot,
     'p=s' => \$fpsz, 'd!' => \$debug, 'help' => \$want_help, 'pdfver=f' => \$PDFver,
     'v' => \$version, 'version' => \$version, 'opt=s' => \$options,
     'e' => \$embedall, 'y=s' => \$Foundry, 's' => \$stats,
@@ -499,6 +500,7 @@ if (!GetOptions('F=s' => \$fd, 'I=s' => \@idirs, 'l' => \$frot,
 }
 
 unshift(@idirs,'.');
+$fd=join('@RT_SEP@',@fdlist) if $#fdlist > -1;
 
 &usage(0) if ($want_help);
 
