@@ -65,7 +65,7 @@
 	when reporting the amount of "spread" applied when performing
 	adjustment, as configured by the `spreadwarn` request.
 
-	Fixes <https://savannah.gnu.org/bugs/?67219>.  [Problem
+	Fixes <https://savannah.gnu.org/bugs/?67218>.  [Problem
 	introduced by me in commit 8b6ccbce48, 13 May.  --GBR]
 
 2025-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -96,7 +96,7 @@
 
 	* src/roff/troff/input.cpp (charinfo::dump): Fix thinko when
 	initializing static `char` array literals.  `none` requires only
-	{one} null terminator.  Append one to `comma`.
+	one null terminator.  Append one to `comma`.
 
 2025-06-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -1753,8 +1753,8 @@
 
 	* src/roff/troff/input.cpp (input_stack::push)
 	(input_stack::next_file): In fatal diagnostics complaining of
-	excessive *roff language stack use (not the process stack), say
-	how many levels of stack were configured.
+	excessive *roff language stack use (not the process stack),
+	disclose how many levels of stack were configured.
 
 2025-04-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
