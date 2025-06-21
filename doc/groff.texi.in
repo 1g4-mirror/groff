@@ -7645,17 +7645,34 @@ undefined macro (namely @samp{''}).
 
 @Defesc {\\#, , , }
 Start a whole-line comment; read everything up to and including the next
-newline in copy mode (@pxref{Copy Mode}) and discard it.  GNU
-@command{troff} introduced this extension to avoid the problems
-described above.
+newline in copy mode (@pxref{Copy Mode}) and discard it.
+GNU
+@command{troff}
+introduced this extension to avoid the problems described above.
+(@code{\"}
+is still widely seen,
+and remains useful for partial-line comments on control lines.)
 @cindex @code{\#}, interpretation in copy mode
 @code{\#} is interpreted even in copy mode.
 
 @Example
-apples bananas
+.nr in-indonesia 1
+apples bananas \" common favorites
 \# cantaloupes
-durians
+.ie \n[in-indonesia] durians \" Borneo, Sumatra
+.el                  elderberries \" England, France
     @result{} apples bananas durians
+@endExample
+
+If we change the comment escape sequence from
+@code{\"}
+to
+@code{\#}
+on the line with the @code{ie} request,
+we get the following undesired output.
+
+@Example
+    @result{} apples bananas durians .el elderberries
 @endExample
 @endDefesc
 
