@@ -1432,13 +1432,12 @@ sub do_x
 		    my $t=$1;
 		    $t=~s/\\\) /\\\\\) /g;
 		    $t=~s/\\e/\\\\/g;
-		    $t=~m/^\/Dest (.+?) \/Title \((.*)(\).*)/;
-		    my ($d,$title,$post)=($1,$2,$3);
+		    $t=~m/^\/Dest (.+?) \/Title \((.*)\) \/Level (-?[0-9]+)/;
+		    my ($d,$title,$lvl)=($1,$2,$3);
 		    $title=utf16($title);
 
 		    $title="\\134" if $title eq "\\";
-		    my @xwds=split(' ',"<< \/Title ($title$post >>");
-		    my $out=ParsePDFValue(\@xwds);
+		    my $out={"Level" => $lvl, "Title" => "($title)"};
 		    $out->{Dest}=UTFName($d);
 
 		    my $this=[$out,[]];

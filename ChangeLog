@@ -1,5 +1,12 @@
 2025-06-21  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	Remove unneccessary call to pdf parser.
+
+	* src/devices/gropdf/gropdf.pl: (do_X) (/OUT) Parse Title/Level
+	manually.
+
+2025-06-21  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	Saner ordering of perl switch statement.
 
 	* src/devices/gropdf/gropdf.pl: (do_X) handle pdfmark commands
