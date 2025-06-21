@@ -1,3 +1,10 @@
+2025-06-21  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Saner ordering of perl switch statement.
+
+	* src/devices/gropdf/gropdf.pl: (do_X) handle pdfmark commands
+	first.
+
 2025-06-20  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[devpdf, gropdf]: Add `SS` slanted-symbol font support.  Replace

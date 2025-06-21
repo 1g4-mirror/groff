@@ -1365,97 +1365,7 @@ sub do_x
 
 	if ($xprm[0] eq 'ps:')
 	{
-	    if ($xprm[1] eq 'invis')
-	    {
-		$suppress=1;
-	    }
-	    elsif ($xprm[1] eq 'endinvis')
-	    {
-		$suppress=0;
-	    }
-	    elsif ($par=~m/exec gsave currentpoint 2 copy translate (.+) rotate neg exch neg exch translate/)
-	    {
-		# This is added by gpic to rotate a single object
-
-		my $theta=-rad($1);
-
-		IsGraphic();
-		my ($curangle,$hyp)=RtoP($xpos,GraphY($ypos));
-		my ($x,$y)=PtoR($theta+$curangle,$hyp);
-		my ($tx, $ty) = ($xpos - $x, GraphY($ypos) - $y);
-		if ($frot) {
-		    ($tx, $ty) = ($tx *  sin($theta) + $ty * -cos($theta),
-				  $tx * -cos($theta) + $ty * -sin($theta));
-		}
-		$stream.="q\n".sprintf("%.3f %.3f %.3f %.3f %.3f %.3f cm",cos($theta),sin($theta),-sin($theta),cos($theta),$tx,$ty)."\n";
-		$InPicRotate=1;
-	    }
-	    elsif ($par=~m/exec grestore/ and $InPicRotate)
-	    {
-		IsGraphic();
-		$stream.="Q\n";
-		$InPicRotate=0;
-	    }
-	    elsif ($par=~m/exec.*? (\d) setlinejoin/)
-	    {
-		IsGraphic();
-		$linejoin=$1;
-		$stream.="$linejoin j\n";
-	    }
-	    if ($par=~m/exec.*? (\d) setlinecap/)
-	    {
-		IsGraphic();
-		$linecap=$1;
-		$stream.="$linecap J\n";
-	    }
-	    elsif ($par=~m/exec %%%%PAUSE/i and !$noslide)
-	    {
-		my $trans='BLOCK';
-
-		if ($firstpause)
-		{
-		    $trans='PAGE';
-		    $firstpause=0;
-		}
-		MakeXO();
-		NewPage($trans);
-		$present=1;
-	    }
-	    elsif ($par=~m/exec %%%%BEGINONCE/)
-	    {
-		if ($noslide)
-		{
-		    $suppress=1;
-		}
-		else
-		{
-		    my $trans='BLOCK';
-
-		    if ($firstpause)
-		    {
-			$trans='PAGE';
-			$firstpause=0;
-		    }
-		    MakeXO();
-		    NewPage($trans);
-		    $present=1;
-		}
-	    }
-	    elsif ($par=~m/exec %%%%ENDONCE/)
-	    {
-		if ($noslide)
-		{
-		    $suppress=0;
-		}
-		else
-		{
-		    MakeXO();
-		    NewPage('BLOCK');
-		    $present=1;
-		    pop(@XOstream);
-		}
-	    }
-	    elsif ($par=~m/\[(.+) pdfmark/)
+	    if ($par=~m/\[(.+) pdfmark/)
 	    {
 		my $pdfmark=$1;
 		$pdfmark=~s((\d{4,6}) u)(sprintf("%.1f",$1/$desc{sizescale}))eg;
@@ -1598,6 +1508,96 @@ sub do_x
 			}
 		    }
 		}
+	    }
+	    elsif ($xprm[1] eq 'invis')
+	    {
+		$suppress=1;
+	    }
+	    elsif ($xprm[1] eq 'endinvis')
+	    {
+		$suppress=0;
+	    }
+	    elsif ($par=~m/exec gsave currentpoint 2 copy translate (.+) rotate neg exch neg exch translate/)
+	    {
+		# This is added by gpic to rotate a single object
+
+		my $theta=-rad($1);
+
+		IsGraphic();
+		my ($curangle,$hyp)=RtoP($xpos,GraphY($ypos));
+		my ($x,$y)=PtoR($theta+$curangle,$hyp);
+		my ($tx, $ty) = ($xpos - $x, GraphY($ypos) - $y);
+		if ($frot) {
+		    ($tx, $ty) = ($tx *  sin($theta) + $ty * -cos($theta),
+				  $tx * -cos($theta) + $ty * -sin($theta));
+		}
+		$stream.="q\n".sprintf("%.3f %.3f %.3f %.3f %.3f %.3f cm",cos($theta),sin($theta),-sin($theta),cos($theta),$tx,$ty)."\n";
+		$InPicRotate=1;
+	    }
+	    elsif ($par=~m/exec grestore/ and $InPicRotate)
+	    {
+		IsGraphic();
+		$stream.="Q\n";
+		$InPicRotate=0;
+	    }
+	    elsif ($par=~m/exec.*? (\d) setlinejoin/)
+	    {
+		IsGraphic();
+		$linejoin=$1;
+		$stream.="$linejoin j\n";
+	    }
+	    elsif ($par=~m/exec %%%%PAUSE/i and !$noslide)
+	    {
+		my $trans='BLOCK';
+
+		if ($firstpause)
+		{
+		    $trans='PAGE';
+		    $firstpause=0;
+		}
+		MakeXO();
+		NewPage($trans);
+		$present=1;
+	    }
+	    elsif ($par=~m/exec %%%%BEGINONCE/)
+	    {
+		if ($noslide)
+		{
+		    $suppress=1;
+		}
+		else
+		{
+		    my $trans='BLOCK';
+
+		    if ($firstpause)
+		    {
+			$trans='PAGE';
+			$firstpause=0;
+		    }
+		    MakeXO();
+		    NewPage($trans);
+		    $present=1;
+		}
+	    }
+	    elsif ($par=~m/exec %%%%ENDONCE/)
+	    {
+		if ($noslide)
+		{
+		    $suppress=0;
+		}
+		else
+		{
+		    MakeXO();
+		    NewPage('BLOCK');
+		    $present=1;
+		    pop(@XOstream);
+		}
+	    }
+	    if ($par=~m/exec.*? (\d) setlinecap/)
+	    {
+		IsGraphic();
+		$linecap=$1;
+		$stream.="$linecap J\n";
 	    }
 	}
 	elsif (lc($xprm[0]) eq 'pdf:')
