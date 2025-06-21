@@ -262,10 +262,12 @@ $(M4CHECK): tmac/groff_man.7.man.in
 
 tmac/groff_man.7.man: tmac/groff_man.7.man.in $(M4CHECK)
 	$(AM_V_GEN)$(M4) -D_groff_man_not_style \
+	  -DREVISION_DATE=`$(PERL) $(top_srcdir)/mdate.pl $(top_srcdir)/tmac/groff_man.7.man.in` \
 	  $(tmac_srcdir)/groff_man.7.man.in > $@
 
 tmac/groff_man_style.7.man: tmac/groff_man.7.man.in $(M4CHECK)
 	$(AM_V_GEN)$(M4) -D_groff_man_style \
+	  -DREVISION_DATE=`$(PERL) $(top_srcdir)/mdate.pl $(top_srcdir)/tmac/groff_man.7.man.in` \
 	  $(tmac_srcdir)/groff_man.7.man.in > $@
 
 # The installation of groff compatibility wrappers for vendor-provided
