@@ -1,3 +1,10 @@
+2025-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/GMPfront.t.in: Rename this...
+	* doc/groff-man-pages-cover.groff.in: ...to this.
+	* doc/doc.am (DOC_GMP_COVER_PAGE): Update macro definition
+	accordingly.
+
 2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/preconv/preconv.cpp (do_file): Tweak diagnostic
