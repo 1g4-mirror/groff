@@ -941,7 +941,7 @@ that take the same arguments and behave equivalently.
 .
 .TP
 .BI "\[rs]X\[aq]pdf: pdfpic\~" file\~\c
-.IR "alignment width height line-length" \[aq]
+.IB "alignment width height line-length" \[aq]
 Place an image from file
 .I file
 of desired
