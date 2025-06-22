@@ -20387,11 +20387,31 @@ are stored in a @file{dev@var{name}} directory.  The device description
 file is called @file{DESC}, and, for each font supported by the device,
 a font description file is called@tie{}@file{@var{f}}, where
 @var{f}@tie{}is usually an abbreviation of a font's name and/or style.
-For example, the @code{ps} (PostScript) device has @code{groff} font
-description files for Times roman (@file{TR}) and Zapf Chancery Medium
-italic (@file{ZCMI}), among many others, while the @code{utf8} device
-(for terminals) has only font descriptions for the roman, italic, bold,
-and bold-italic styles (@file{R}, @file{I}, @file{B}, and @file{BI},
+For example,
+the
+@code{ps}
+(PostScript)
+device has
+@code{groff}
+font
+description files for Times roman
+(@file{TR})
+and Zapf Chancery Medium italic
+(@file{ZCMI}),
+among many others,
+while the
+@code{utf8}
+device
+(for terminals)
+has font descriptions for the roman,
+italic,
+bold,
+and bold-italic styles
+(@file{R},
+@file{I},
+@file{B},
+and
+@file{BI},
 respectively).
 
 Device and font description files are read both by the formatter, GNU

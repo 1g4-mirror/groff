@@ -96,7 +96,7 @@ while the
 .B utf8
 device
 (for terminals)
-has only font descriptions for the roman,
+has font descriptions for the roman,
 italic,
 bold,
 and bold-italic styles
