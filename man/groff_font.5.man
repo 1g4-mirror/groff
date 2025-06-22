@@ -663,12 +663,12 @@ Glyphs
 .I lign
 are ligatures;
 possible ligatures are
-.BR ff ,
-.BR fi ,
-.BR fl ,
-.BR ffi ,
+.BR f\&f ,
+.BR f\&i ,
+.BR f\&l ,
+.BR f\&f\&i ,
 and
-.BR ffl .
+.BR f\&f\&l .
 .
 For compatibility with other
 .I troff
