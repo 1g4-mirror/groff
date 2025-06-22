@@ -1,7 +1,3 @@
-.ig
-	front.t
-..
-.
 .if !'\*[.T]'pdf' .nx
 .
 .nr PDFOUTLINE.FOLDLEVEL 1
