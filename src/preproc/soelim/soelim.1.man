@@ -192,7 +192,7 @@ This convention allows source requests to be \[lq]protected\[rq] from
 processing by
 .IR @g@soelim ,
 for instance as part of macro definitions or
-.RB \[lq] if \[rq]
+.RB \[lq] if \^\[rq]
 requests.
 .
 .
