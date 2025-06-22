@@ -581,8 +581,8 @@ an
 .RB \[lq] M \[rq]
 on the
 .B lbp
-device is 2,963 \[tdi] 800 times the unit width
-(approximately 3.7).
+device is 2,963 \[tdi] 800 times the unit width,
+or approximately 3.7.
 At a type size of 10 points,
 a Times roman
 .RB \[lq] M \[rq]
