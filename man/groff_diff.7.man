@@ -2768,6 +2768,9 @@ empties the list of fonts treated as special when
 .RI font\~ fnt
 is selected.
 .
+Initially,
+this list is empty for all fonts.
+.
 .
 .TP
 .BI .ftr\~ f\~\c
@@ -3910,6 +3913,9 @@ searching it for glyphs not found in the selected font.
 Without arguments,
 .RB \[lq] \%special \[rq]
 empties this list of special fonts.
+.
+Initially,
+this list is empty.
 .
 .
 .TP

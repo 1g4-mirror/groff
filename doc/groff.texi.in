@@ -12051,11 +12051,14 @@ a document to supplement the set of fonts searched for glyphs.
 @DefreqListEndx {fspecial, f [@Var{s1} @Var{s2} @dots{}]}
 @kindex fonts
 @pindex DESC
-@code{special} designates each font @var{s}n as special.  Initially,
+@code{special} designates each font @var{s}n as special.
+Initially,
 this list is empty.
 
 @code{fspecial} designates each font as special only when
-font@tie{}@var{f} is selected.  Initially, this list is empty.
+font@tie{}@var{f} is selected.
+Initially,
+this list is empty for all fonts.
 
 @c TODO: Add requests `pspecial`, `pfspecial`?
 Invoking @code{special} or @code{fspecial} again overwrites the previous
