@@ -674,6 +674,16 @@ Output drivers
    embedded.  See also the item regarding `PDFPIC` above.  Thanks to
    Deri James.
 
+*  gropdf now supplies its own "SS" (slanted symbol) font to improve
+   rendering of documents requiring slanted lowercase Greek letters,
+   such as those employing the eqn(1) preprocessor.  groff supplies the
+   font in PFB format, and gropdf automatically embeds it, as it is not
+   a standard PDF font.  Formerly, groff's "pdf.tmac" file defined
+   fallback characters for lowercase Greek letters, applying a slant of
+   16 degrees to the upright glyphs available in the standard symbol
+   font "S".  That technique produced glyphs that were slightly too
+   large for those accustomed to grops's "SS" font.
+
 *  grops(1), the PostScript output driver, now supports fonts encoded
    using UTF-16.  Indicate the encoding by including the string
    "-UTF16-" within the font's name as specified by the "internalname"
