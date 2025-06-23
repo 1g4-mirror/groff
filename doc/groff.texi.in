@@ -13373,15 +13373,23 @@ can be manipulated through renaming, removal, and aliasing (@code{rn},
 @cindex @code{length} request, and copy mode
 @cindex copy mode, and @code{length} request
 @cindex mode, copy, and @code{length} request
-Compute the number of characters in @var{contents} and store the count
-in the register @var{reg}.  If @var{reg} doesn't exist, it is created.
+Compute the number of characters in
+@var{contents}
+and store the count in the register
+@var{reg}.
+If
+@var{reg}
+doesn't exist,
+GNU
+@command{troff} @c GNU
+creates it.
 
 GNU
 @command{troff} @c GNU
 removes a leading neutral double quote
 @samp{"}
 from
-@var{length},
+@var{contents},
 permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 @xref{Copy Mode}.
@@ -13403,6 +13411,28 @@ character.
 See the discussion of the
 @code{ds}
 request above.
+
+@strong{Caution:@:}
+If you interpolate a macro or diversion in
+@var{contents}
+(@pxref{Punning Names}),
+the
+@code{length}
+request counts characters
+(or nodes)
+only up to the first newline,
+and leaves the rest on the input stream.
+In conventional circumstances,
+that means the remainder is interpreted,
+and may be formatted.
+To discover the length of any
+string,
+macro,
+or diversion,
+use the
+@code{pm}
+request.
+@xref{Debugging}.
 @endDefreq
 
 @Defreq {chop, object}

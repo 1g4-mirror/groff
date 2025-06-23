@@ -1,3 +1,11 @@
+2025-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (Strings) <length>:
+	* man/groff_diff.7.man (New requests) <length>: Document
+	pitfall.
+
+	Fixes <https://savannah.gnu.org/bugs/?67231>.
+
 2025-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/GMPfront.t.in: Rename this...
