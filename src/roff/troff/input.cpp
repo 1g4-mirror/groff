@@ -4402,7 +4402,8 @@ static symbol composite_glyph_name(symbol nm)
   if (0 /* nullptr */ == gn) {
     gn = valid_unicode_code_sequence(nc);
     if (0 /* nullptr */ == gn) {
-      error("invalid base glyph '%1' in composite glyph name", nc);
+      error("invalid base character '%1' in composite character name",
+	    nc);
       return EMPTY_SYMBOL;
     }
   }
@@ -9692,7 +9693,7 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
   token old_tok = tok;
   input_stack::add_boundary();
   string_iterator *si =
-    new string_iterator(*mac, "composite character", ci->nm);
+    new string_iterator(*mac, "special character", ci->nm);
   input_stack::push(si);
   // we don't use process_input_stack, because we don't want to recognise
   // requests

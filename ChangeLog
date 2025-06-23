@@ -1,3 +1,13 @@
+2025-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (composite_glyph_name)
+	(charinfo_to_node_list): Reform terminology in diagnostic
+	messages.  Use the term "character" when dealing with input;
+	it's up to the output driver to elicit "glyphs" from a device.
+	(charinfo_to_node_list): Refer to "special", not "composite",
+	characters, when processing a user-defined character with a
+	string iterator.
+
 2025-06-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/groff.texi.in (Strings) <length>:
