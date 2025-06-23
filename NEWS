@@ -662,6 +662,18 @@ Macro packages
 Output drivers
 --------------
 
+*  grohtml(1), the (X)HTML output driver, supports a new `-k` command-
+   line option that takes a mandatory argument, either "ascii" or
+   "utf-8", which it recognizes case-insensitively.  This feature
+   configures representation of character entities in the output.  Based
+   on work by TANAKA Takuji.
+
+*  gropdf(1), the PDF output driver, now allows embedding of JFIF/JPEG
+   and JPEG 2000 image file formats.  If PerlMagick is installed, many
+   more image file formats, including PNG, PAM, and GIF, can be
+   embedded.  See also the item regarding `PDFPIC` above.  Thanks to
+   Deri James.
+
 *  grops(1), the PostScript output driver, now supports fonts encoded
    using UTF-16.  Indicate the encoding by including the string
    "-UTF16-" within the font's name as specified by the "internalname"
@@ -696,18 +708,6 @@ Output drivers
    remains in place.  (We impose this restriction because the output
    driver interprets the contents of these files; it does not interpret
    the PostScript prolog or resource files.)
-
-*  gropdf(1), the PDF output driver, now allows embedding of JFIF/JPEG
-   and JPEG 2000 image file formats.  If PerlMagick is installed, many
-   more image file formats, including PNG, PAM, and GIF, can be
-   embedded.  See also the item regarding `PDFPIC` above.  Thanks to
-   Deri James.
-
-*  grohtml(1), the (X)HTML output driver, supports a new `-k` command-
-   line option that takes a mandatory argument, either "ascii" or
-   "utf-8", which it recognizes case-insensitively.  This feature
-   configures representation of character entities in the output.  Based
-   on work by TANAKA Takuji.
 
 *  grotty(1) now supports devices recognizing ECMA-48/ISO 6429 SGR 38
    and 48 escape sequences that select RGB colors using 8 bits per color
