@@ -11937,9 +11937,10 @@ is the first encountered in the resolution process documented above.
 Glyphs,
 which are defined by font description files,
 cannot be removed.
-Spaces need not separate the arguments.
+Spaces need not separate the
+@var{cn}
+arguments.
 
-The request
 @code{rfschar}
 removes character definitions created by
 @code{fschar}

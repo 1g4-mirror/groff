@@ -3724,7 +3724,9 @@ Glyphs,
 which are defined by font description files,
 cannot be removed.
 .
-Spaces need not separate the arguments.
+Spaces need not separate the
+.I cn
+arguments.
 .
 .
 .TP
