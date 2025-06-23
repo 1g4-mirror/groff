@@ -11169,7 +11169,7 @@ a list of font @dfn{positions} at which fonts required by a document are
 typically configures a set of pre-mounted fonts; see @ref{Device and
 Font Description Files}.  A font need not be explicitly mounted before
 it is selected; GNU @code{troff} will search @env{GROFF_FONT_PATH} for
-it by name and mount it at the first free position on demand.
+a file name matching the identifier and mount it on demand.
 
 @need 500
 @c TODO: Add request `rfp` to unmount a font?
@@ -11218,9 +11218,11 @@ identifiers.
 You can obtain a report of occupied font mounting positions
 (whether configured by the
 @samp{DESC}
-file or the
+file,
+the
 @code{fp}
-request)
+request,
+or automatic mounting)
 on the standard error stream with the
 @code{pfp} request.
 @xref{Debugging}.
