@@ -11818,15 +11818,36 @@ permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 @xref{Copy Mode}.
 
-Defining (or redefining) a character @var{c} creates a formatter object
-that is recognized like any other ordinary or special character on
-input, and produces @var{contents} on output.  Every time @var{c} is to
-be output, @var{contents} is processed in a temporary environment and
-the result encapsulated in a node.@footnote{@xref{Gtroff Internals}.}
-Compatibility mode is disabled and the escape character set to @code{\}
-while @var{contents} is interpreted.  Any emboldening, constant spacing,
-or track kerning is applied to this object rather than to individual
-glyphs in @var{contents}.
+Defining
+(or redefining)
+a
+character@tie{}@var{c}
+creates a formatter object
+that is recognized like any other ordinary,
+special,
+or indexed character on input,
+and produces
+@var{contents}
+on output.
+When
+formatting
+@var{c},
+GNU
+@command{troff} @c GNU
+processes
+@var{contents}
+in a temporary environment and enscapsulates the result
+in a node;@footnote{@xref{Gtroff Internals}.}
+disabling compatibility mode
+and setting the escape character
+to@tie{}@code{\}
+while interpreting
+@var{contents}.
+Any emboldening,
+constant spacing,
+or track kerning applies to this object
+rather than to individual glyphs resulting from the formatting of
+@var{contents}.
 
 @c TODO: Document Peter Schaffter's diversion-as-character trick.
 @c https://lists.gnu.org/archive/html/groff/2024-12/msg00085.html
@@ -11862,9 +11883,15 @@ a user-defined character
 does not participate at its boundaries
 in kerning adjustments or italic corrections.
 
-There is a special anti-recursion feature: use of the object within its
-own definition is handled like a normal character (not
-defined with @code{char}).
+The formatter prevents infinite recursion
+by treating an occurrence
+of a character in its own definition
+as if were undefined;
+when interpolating such a character,
+GNU
+@command{troff} @c GNU
+emits a warning in category @samp{char}.@footnote{Mutually recursive
+character definitions are handled similarly.}
 
 The @code{tr} and @code{trin} requests take precedence if @code{char}
 accesses the same symbol.

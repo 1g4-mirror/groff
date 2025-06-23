@@ -2143,36 +2143,39 @@ Defining
 (or redefining)
 a
 .RI character\~ c
-creates a formatter object that is recognized like any other
-ordinary or special character on input,
+creates a formatter object
+that is recognized like any other ordinary,
+special,
+or indexed character on input,
 and produces
 .I contents
 on output.
 .
-Every time
-.I c
-is to be output,
+When
+formatting
+.IR c ,
+GNU
+.I troff \" GNU
+processes
 .I contents
-is processed in a temporary environment and the result encapsulated in a
-node.
-.
-(See section \[lq]Gtroff Internals\[rq] in
+in a temporary environment and encapsulates the result
+in a node
+(see section \[lq]Gtroff Internals\[rq] in
 .IR "Groff: The GNU Implementation of troff" ,
 the
 .I groff
-Texinfo manual.)
-.
-Compatibility mode is disabled and the escape character set
+Texinfo manual);
+disabling compatibility mode
+and setting the escape character to
 .RB to\~ \[rs]
-while
-.I contents
-is processed.
+while interpreting
+.I contents.
 .
 Any emboldening,
 constant spacing,
-or track kerning is applied to this object as a whole,
-not to each character in
-.IR contents .
+or track kerning applies to this object
+rather than to individual glyphs resulting from the formatting of
+.I contents.
 .
 .
 .IP
@@ -2211,13 +2214,19 @@ in kerning adjustments or italic corrections.
 .
 .
 .IP
-To prevent infinite recursion,
-occurrences of
-.I c
-within its own definition are treated normally
-(as if it were not being defined with
-.BR char ).
+The formatter prevents infinite recursion
+by treating an occurrence
+of a character in its own definition
+as if were undefined;
+when interpolating such a character,
+GNU
+.I troff \" GNU
+emits a warning in category
+.RB \[lq] char \[rq].
+(Mutually recursive character definitions are handled similarly.)
 .
+.
+.IP
 The
 .B tr
 and
