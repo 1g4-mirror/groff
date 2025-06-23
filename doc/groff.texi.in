@@ -8184,7 +8184,7 @@ command-line options, processing progress, or the operating environment.
 @cindex approximation output register (@code{.A})
 @cindex plain text approximation output register (@code{.A})
 Approximate output is being formatted (Boolean-valued); see
-@command{groff} @option{-a} option (@ref{Groff Options}).
+@command{groff}'s @option{-a} option (@ref{Groff Options}).
 
 @item \n[.c]
 @vindex .c
@@ -8211,7 +8211,7 @@ this to ask the formatter if it claims @code{groff} compatibility.
 
 @item \n[.P]
 @vindex .P
-Output page selection status (Boolean-valued); see @command{groff}
+Output page selection status (Boolean-valued); see @command{groff}'s
 @option{-o} option (@ref{Groff Options}).
 
 @item \n[.R]
@@ -8228,7 +8228,7 @@ many zeroes or nines to indicate an arbitrary large quantity.
 @item \n[.T]
 @vindex .T
 Indicator of output device selection (Boolean-valued); see
-@command{groff} @option{-T} option (@ref{Groff Options}).
+@command{groff}'s @option{-T} option (@ref{Groff Options}).
 
 @item \n[.U]
 @cindex safer mode
@@ -8236,7 +8236,7 @@ Indicator of output device selection (Boolean-valued); see
 @cindex unsafe mode
 @cindex mode, unsafe
 @vindex .U
-Unsafe mode enablement status (Boolean-valued); see @command{groff}
+Unsafe mode enablement status (Boolean-valued); see @command{groff}'s
 @option{-U} option (@ref{Groff Options}).
 
 @item \n[.x]
