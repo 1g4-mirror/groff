@@ -12659,7 +12659,6 @@ Set the type size to @var{n}@tie{}scaled points.  @var{n}@tie{}must be a
 single digit.@footnote{In compatibility mode only, a non-zero @var{n}
 must be in the range 4--39.  @xref{Compatibility Mode}.}
 If @var{n}@tie{}is
-an unsigned
 @samp{0},
 restore the previous size.
 
@@ -12672,7 +12671,6 @@ Increase or decrease the type size by @var{n}@tie{}scaled points.
 Set the type size to @var{nn}@tie{}scaled points.  @var{nn} must be
 exactly two digits.
 If @var{n}@tie{}is
-an unsigned
 @samp{00},
 restore the previous size.
 
@@ -12945,7 +12943,6 @@ Increase or decrease the type size by @var{n}@tie{}scaled points;
 a numeric expression with a default scaling unit of
 @samp{z}.
 If @var{n}@tie{}is
-an unsigned
 @samp{0},
 restore the previous size.
 @end table
