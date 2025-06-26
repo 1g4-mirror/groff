@@ -50,6 +50,11 @@
 	for grops(1) when building groff--we should, someday.  (Among
 	other manual changes, we added kerning pairs; see Savannah
 	#58897.)
+	* font/devps/generate/text.map: Drop all mappings of symbolic/
+	mathematical/unstyled Greek special characters `*[A-Za-z]` to
+	PostScript glyph names.  As noted above, such mappings are not
+	appropriate for text fonts, which (typically) have multiple
+	styles available.
 
 2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
