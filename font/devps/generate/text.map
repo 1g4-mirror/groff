@@ -1,5 +1,9 @@
 #
-# Predefined groff symbols for textual fonts.
+# Map between PostScript glyph names and groff character identifiers
+# (ordinary ones have a one-character name; special character names are
+# longer).
+#
+# Use this map with (styled) text fonts.
 #
 a14 rh
 a a
