@@ -103,7 +103,7 @@
 	[pic]: Add unit test for `polygon` command.
 
 	* src/preproc/pic/tests/polygon-command-works.sh: Do it.
-	* src/src/preproc/pic/pic.am (pic_TESTS): Run test.
+	* src/preproc/pic/pic.am (pic_TESTS): Run test.
 	(TESTS): Add test to suite.
 	(EXTRA_DIST): Ship test in distribution archive.
 
