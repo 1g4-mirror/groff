@@ -1,3 +1,15 @@
+2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/devpdf/generate/StandardSymSL.sfd: Add human-readable
+	source format for new font.  Everything in groff is available
+	under the GNU GPL, so we should provide a "preferred form for
+	modification".  (We already do so for "freeeuro.sfd".)
+	* font/devpdf/devpdf.am (EXTRA_DIST): ...and ship it in the
+	distribution archive.  At this time, we also ship the "compiled"
+	PFB file; the build process does not perform any transformation
+	of the source SFD file.  That can change in the future if we can
+	tolerate a build-time dependency on fontforge(1).
+
 2025-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (composite_glyph_name)

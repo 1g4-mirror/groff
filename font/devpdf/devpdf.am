@@ -53,6 +53,7 @@ EXTRA_DIST += \
   font/devpdf/StandardSymSL.pfb \
   font/devpdf/Foundry.in \
   font/devpdf/download.in \
+  font/devpdf/generate/StandardSymSL.sfd \
   font/devpdf/util/BuildFoundries.pl
 
 all: font/devpdf/stamp
