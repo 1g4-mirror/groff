@@ -1,5 +1,16 @@
 2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devpdf/DESC.in: Mount `SS`, `S`, and `ZD` fonts in same
+	positions as "ps" device.  This should have little effect other
+	than to minimize differences between the devices, however the
+	"ps" device continues to have a font, `ZDR`, mounted after all
+	of the foregoing, that the "pdf" device lacks and does not
+	require.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?67207>.
+
+2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Fix Savannah #67244.
 
 	* font/devps/AB:
