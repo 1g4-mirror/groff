@@ -1,3 +1,12 @@
+2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[pfbtops]: Add test for `pfbtops` command.
+
+	* src/util/pfbtops/tests/smoke-test.sh: Do it.
+	* src/util/pfbtops/pfbtops.am (pfbtops_TESTS): Run test.
+	(TESTS): Add test to suite.
+	(EXTRA_DIST): Ship test in distribution archive.
+
 2025-06-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/grog/grog.pl (interpet_line): Recognize new `pfp`
