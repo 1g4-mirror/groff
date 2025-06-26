@@ -1,5 +1,58 @@
 2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Fix Savannah #67244.
+
+	* font/devps/AB:
+	* font/devps/ABI:
+	* font/devps/AI:
+	* font/devps/AR:
+	* font/devps/BMB:
+	* font/devps/BMBI:
+	* font/devps/BMI:
+	* font/devps/BMR:
+	* font/devps/CB:
+	* font/devps/CBI:
+	* font/devps/CI:
+	* font/devps/CR:
+	* font/devps/HB:
+	* font/devps/HBI:
+	* font/devps/HI:
+	* font/devps/HNB:
+	* font/devps/HNBI:
+	* font/devps/HNI:
+	* font/devps/HNR:
+	* font/devps/HR:
+	* font/devps/NB:
+	* font/devps/NBI:
+	* font/devps/NI:
+	* font/devps/NR:
+	* font/devps/PB:
+	* font/devps/PBI:
+	* font/devps/PI:
+	* font/devps/PR:
+	* font/devps/TB:
+	* font/devps/TBI:
+	* font/devps/TI:
+	* font/devps/TR:
+	* font/devps/ZCMI: Replace/rename entry for `*m` glyph to `mc`,
+	removing `mc` as an alias thereof; annotate the corresponding
+	code point as U+00B5, not U+03BC.  The micro sign (groff: \[mc])
+	is a styled glyph often found in text faces.  `*m` is an
+	unstyled, but traditionally slanted, lowercase Greek mu used
+	overwhelmingly in mathematical or scientific typesetting
+	contexts.  It is not appropriate for setting the modern Greek
+	language.
+	* font/devps/generate/symbol.map:
+	* font/devps/generate/text.map: Remove spurious mappings of
+	groff's `\[mc]` to PostScript's `mu`.  This prevents afmtodit(1)
+	from resurrecting the aforementioned problem, though for
+	unrelated reasons we don't regenerate the font description files
+	for grops(1) when building groff--we should, someday.  (Among
+	other manual changes, we added kerning pairs; see Savannah
+	#58897.)
+
+2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pfbtops]: Add test for `pfbtops` command.
 
 	* src/util/pfbtops/tests/smoke-test.sh: Do it.

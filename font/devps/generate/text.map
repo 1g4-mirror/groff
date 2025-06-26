@@ -243,8 +243,6 @@ mu1 mc
 multiply tmu
 mu *m
 Mu *M
-# if there is "mu1" glyph in the font - comment out the following line
-mu mc
 nine 9
 n n
 N N
