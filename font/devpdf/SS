@@ -1,4 +1,8 @@
 # This file has been generated with GNU afmtodit (groff) version 1.20.1
+# ...but is maintained by hand, as at the time of this writing we have
+# no way to tell afmtodit(1) to apply a scaling factor to the font
+# metrics.  Traditionally, the glyphs in the slanted symbol font are
+# 0.89 the size of those in the (upright) symbol font.
 #
 #   FullName Symbol Slanted
 #   Version 001.008

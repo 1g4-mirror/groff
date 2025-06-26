@@ -6,6 +6,7 @@
 	"ps" device continues to have a font, `ZDR`, mounted after all
 	of the foregoing, that the "pdf" device lacks and does not
 	require.
+	* font/devpdf/SS: Annotate file's hand-maintained status.
 
 	Begins fixing <https://savannah.gnu.org/bugs/?67207>.
 
