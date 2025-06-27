@@ -1,3 +1,11 @@
+2025-06-28  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* font/devpdf/generate/StandardSymSL.sfd: Adjust glyph positions
+	within cell to match grops rendering.
+	* font/devpdf/StandardSymSL.pfb: Regenerate from changes above.
+
+	Fixes <https://savannah.gnu.org/bugs/?67234>.
+
 2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devpdf/generate/StandardSymSL.sfd: Add human-readable
