@@ -63,6 +63,9 @@
 	  stdint      -> stdint-h
 	  sys_wait    -> sys_wait-h
 
+	Fixes <https://savannah.gnu.org/bugs/?66731>.  Thanks to Collin
+	Funk for the report.
+
 2025-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man]: Fix inaccurately reported revision date of groff_man(7)
