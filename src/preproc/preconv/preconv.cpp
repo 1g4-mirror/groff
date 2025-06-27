@@ -1120,8 +1120,7 @@ do_file(const char *filename)
   }
   char *c_reported_filename = reported_filename.extract();
   if (!fp) {
-    error("unable to open '%1': %2", c_reported_filename,
-	  strerror(errno));
+    error("cannot open %1: %2", c_reported_filename, strerror(errno));
     free(c_reported_filename);
     return 0;
   }

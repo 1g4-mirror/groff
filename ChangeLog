@@ -1,3 +1,9 @@
+2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/preconv/preconv.cpp (do_file): Tweak diagnostic
+	message; drop extra layer of quoting of file name, and migrate
+	to "cannot" from "unable to" phrasing.
+
 2025-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* bootstrap.conf: Migrate to contemporary names for gnulib
