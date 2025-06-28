@@ -1,4 +1,4 @@
-/* Copyright (C) 2005-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2005-2025 Free Software Foundation, Inc.
      Written by Werner Lemberg (wl@gnu.org)
 
 This file is part of groff.
