@@ -196,15 +196,15 @@ troff
    line continuation (cf. the `it` and `itc` requests), and the name of
    the macro associated with the pending input trap, respectively.
 
+*  A new request, `pchar`, reports to the standard error stream data
+   about any ordinary, special, or indexed character arguments.
+
 *  A new request, `pcolor`, reports to the standard error stream details
    of each color name specified as an argument, including its color
    space identifier and channel value assignments.  Without arguments,
    all defined colors are listed.  (A device's default stroke and/or
    fill colors, "default", are not listed since they are immutable and
    their details unknown to the formatter.)
-
-*  A new request, `pchar`, reports to the standard error stream data
-   about any ordinary, special, or indexed character arguments.
 
 *  A new request, `pcomposite`, reports to the standard error stream the
    list of configured composite character mappings.
