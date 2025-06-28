@@ -1,3 +1,8 @@
+2025-06-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/grog/grog.pl (interpet_line): Recognize new `pfp`
+	and `pftr` request names.
+
 2025-06-28  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	* font/devpdf/generate/StandardSymSL.sfd: Adjust glyph positions
