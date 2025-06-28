@@ -55,6 +55,10 @@
 	PostScript glyph names.  As noted above, such mappings are not
 	appropriate for text fonts, which (typically) have multiple
 	styles available.
+	* src/libs/libgroff/uniglyph.cpp (struct S): Delete mappings
+	of code points from Unicode Greek and Coptic block
+	{U+0370..U+03FF} to *roff's special character identifiers for
+	"technical" use of classical Greek; see above.
 
 2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
