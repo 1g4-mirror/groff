@@ -5688,11 +5688,19 @@ into lines separated by the Unix newline character
 (@code{U+000A}),
 using the character encoding it recognizes:
 ISO@tie{}Latin-1 (8859-1).
-We recommend use of ISO@tie{}646:1991@tie{}IRV (US-ASCII)
-or (equivalently) the Basic Latin subset
-of ISO@tie{}10646 (Unicode);
-see
-@cite{groff_char@r{(7)}}.
+A document encoded in
+@w{ISO 646:1991 IRV}
+(US-@acronym{ASCII}),
+or,
+equivalently,
+uses only code points from the
+``C0 Controls'' and ``Basic Latin'' parts of the Unicode character set
+is also a valid ISO @w{Latin-1} document;
+the standards are interchangeable
+in their first 128 code points.@footnote{The
+@emph{semantics} of certain punctuation code points have gotten stricter
+with the successive standards, a cause of some frustration among man
+page writers; see @cite{groff_char@r{(7)}}.}
 
 @cindex invalid input characters
 @cindex input characters, invalid
@@ -5806,26 +5814,8 @@ The language localization file
 (@pxref{Manipulating Hyphenation})
 loads an appropriate encoding localization file;
 a document need not do so directly.
-
-@table @code
-@item latin1
-@cindex encoding, input, @w{ISO Latin-1} (@w{8859-1})
-@cindex @w{Latin-1} (@w{ISO 8859-1}) input encoding
-@cindex @w{ISO Latin-1} (@w{8859-1}) input encoding
-@cindex input encoding, @w{ISO Latin-1} (@w{8859-1})
-@pindex latin1.tmac
-ISO @w{Latin-1} is an encoding for Western European languages.
-@end table
-
-@noindent
-Any document that is encoded in @w{ISO 646:1991 IRV}
-(US-@acronym{ASCII}), or, equivalently, uses only code points from the
-``C0 Controls'' and ``Basic Latin'' parts of the Unicode character set
-is also a valid ISO @w{Latin-1} document; the standards are
-interchangeable in their first 128 code points.@footnote{The
-@emph{semantics} of certain punctuation code points have gotten stricter
-with the successive standards, a cause of some frustration among man
-page writers; see @cite{groff_char@r{(7)}}.}
+@c END Keep roughly parallel with groff_tmac(5) section "Input
+@c Encodings".
 
 @table @code
 @item koi8-r
@@ -5835,9 +5825,12 @@ page writers; see @cite{groff_char@r{(7)}}.}
 @pindex koi8-r.tmac
 To use @w{KOI8-R}, an encoding for the Russian language, either place
 @w{@samp{.mso koi8-r.tmac}} at the very beginning of your document or
-supply @samp{-m koi8-r} as a command-line argument to @code{groff}.  The
-localization file @file{ru.tmac} takes care of this automatically; see
-@ref{Manipulating Hyphenation}.@footnote{KOI8-R code points in the range
+supply @samp{-m koi8-r} as a command-line argument to @code{groff}.
+The
+@file{ru.tmac}
+localization file loads
+@file{koi8-r.tmac}
+automatically.@footnote{KOI8-R code points in the range
 @code{0x80}--@code{0x9F} are not valid input to GNU @command{troff};
 recall @ref{Input Format}.
 This restriction should be no impediment to practical documents,
@@ -5845,6 +5838,23 @@ as these KOI8-R code points do not encode letters,
 but box-drawing symbols and characters
 that are better obtained via special character escape sequences;
 see @cite{groff_char@r{(7)}}.}
+
+@item latin1
+@cindex encoding, input, @w{ISO Latin-1} (@w{8859-1})
+@cindex @w{Latin-1} (@w{ISO 8859-1}) input encoding
+@cindex @w{ISO Latin-1} (@w{8859-1}) input encoding
+@cindex input encoding, @w{ISO Latin-1} (@w{8859-1})
+@pindex latin1.tmac
+ISO @w{Latin-1} is an encoding for Western European languages.
+The
+@file{de.tmac},
+@file{en.tmac},
+@file{it.tmac},
+and
+@file{sv.tmac}
+localization files load
+@file{latin1.tmac}
+automatically.
 
 @item latin2
 @cindex encoding, input, @w{ISO Latin-2} (@w{8859-2})
@@ -5856,6 +5866,11 @@ To use ISO @w{Latin-2}, an encoding for Central and Eastern European
 languages, invoke @w{@samp{.mso latin2.tmac}} at the beginning of your
 document or supply @samp{-m latin2} as a command-line argument to
 @code{groff}.
+The
+@file{cs.tmac}
+localization file loads
+@file{latin2.tmac}
+automatically.
 
 @item latin5
 @cindex encoding, input, @w{ISO Latin-5} (@w{8859-9})
@@ -5877,9 +5892,14 @@ ISO @w{Latin-9} succeeds @w{Latin-1}; it includes a Euro sign and better
 coverage for French.  To use this encoding, invoke @w{@samp{.mso
 latin9.tmac}} at the beginning of your document or supply
 @samp{-m latin9} as a command-line argument to @code{groff}.
+The
+@file{es.tmac}
+and
+@file{fr.tmac}
+localization files load
+@file{latin9.tmac}
+automatically.
 @end table
-@c END Keep roughly parallel with groff_tmac(5) section "Input
-@c Encodings".
 
 Some characters from an input encoding may not be available with a
 particular output driver, or their glyphs may not have representation in
