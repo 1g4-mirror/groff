@@ -1,3 +1,9 @@
+2025-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/pdf.tmac (pdf:SS): Delete now-unused macro.
+
+	Fixes <https://savannah.gnu.org/bugs/?67207>.
+
 2025-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devpdf/devpdf.am: Refactor.  Make this script
