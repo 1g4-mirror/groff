@@ -6166,7 +6166,7 @@ with an optional
 @dfn{scaling unit}
 suffixed.
 A scaling unit is a letter
-that immediately follows the last digit of a number.
+that immediately follows a number.
 Digits after the decimal point are optional.
 Examples of measurements include
 @samp{10.5p},
