@@ -43,7 +43,7 @@ _ifnotstyle()dnl
 .TH groff_man @MAN7EXT@ "REVISION_DATE" "groff @VERSION@"
 _endif()dnl
 _ifstyle()dnl
-.TH groff_man_style @MAN7EXT@ "@MDATE_IN@" "groff @VERSION@"
+.TH groff_man_style @MAN7EXT@ "REVISION_DATE" "groff @VERSION@"
 _endif()dnl
 .SH Name
 _ifnotstyle()dnl
