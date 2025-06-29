@@ -19,25 +19,103 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 devpdf_srcdir = $(top_srcdir)/font/devpdf
-ENC_FILES=`cd $(top_builddir)/font/devpdf; ls enc/*`
-MAP_FILES=`cd $(top_builddir)/font/devpdf; ls map/*`
+devpdf_builddir = $(top_builddir)/font/devpdf
+DEVPDFFONTFILES_FROM_DEVPS = \
+  font/devpdf/S \
+  font/devpdf/ZD \
+  font/devpdf/ZCMI \
+  font/devpdf/AB \
+  font/devpdf/ABI \
+  font/devpdf/AI \
+  font/devpdf/AR \
+  font/devpdf/BMB \
+  font/devpdf/BMBI \
+  font/devpdf/BMI \
+  font/devpdf/BMR \
+  font/devpdf/CB \
+  font/devpdf/CBI \
+  font/devpdf/CI \
+  font/devpdf/CR \
+  font/devpdf/HB \
+  font/devpdf/HBI \
+  font/devpdf/HI \
+  font/devpdf/HR \
+  font/devpdf/HNB \
+  font/devpdf/HNBI \
+  font/devpdf/HNI \
+  font/devpdf/HNR \
+  font/devpdf/NB \
+  font/devpdf/NBI \
+  font/devpdf/NI \
+  font/devpdf/NR \
+  font/devpdf/PB \
+  font/devpdf/PBI \
+  font/devpdf/PI \
+  font/devpdf/PR \
+  font/devpdf/TB \
+  font/devpdf/TBI \
+  font/devpdf/TI \
+  font/devpdf/TR \
+  font/devpdf/EURO
 
-MOSTLYCLEANFILES += \
-  font/devpdf/download \
-  font/devpdf/DESC \
-  font/devpdf/Foundry \
-  font/devpdf/util/BuildFoundries
+if HAVE_URW_FONTS
+DEVPDFFONTFILES_FOR_URW = \
+  font/devpdf/U-S \
+  font/devpdf/U-ZD \
+  font/devpdf/U-ZCMI \
+  font/devpdf/U-AB \
+  font/devpdf/U-ABI \
+  font/devpdf/U-AI \
+  font/devpdf/U-AR \
+  font/devpdf/U-BMB \
+  font/devpdf/U-BMBI \
+  font/devpdf/U-BMI \
+  font/devpdf/U-BMR \
+  font/devpdf/U-CB \
+  font/devpdf/U-CBI \
+  font/devpdf/U-CI \
+  font/devpdf/U-CR \
+  font/devpdf/U-HB \
+  font/devpdf/U-HBI \
+  font/devpdf/U-HI \
+  font/devpdf/U-HR \
+  font/devpdf/U-HNB \
+  font/devpdf/U-HNBI \
+  font/devpdf/U-HNI \
+  font/devpdf/U-HNR \
+  font/devpdf/U-NB \
+  font/devpdf/U-NBI \
+  font/devpdf/U-NI \
+  font/devpdf/U-NR \
+  font/devpdf/U-PB \
+  font/devpdf/U-PBI \
+  font/devpdf/U-PI \
+  font/devpdf/U-PR \
+  font/devpdf/U-TB \
+  font/devpdf/U-TBI \
+  font/devpdf/U-TI \
+  font/devpdf/U-TR
+endif
 
-devpdffontdir = $(fontdir)/devpdf
-devpdffont_DATA = \
+DEVPDFFONTFILES = $(DEVPDFFONTFILES_FROM_DEVPS) \
   font/devpdf/DESC \
   font/devpdf/SS \
-  font/devpdf/download \
   font/devpdf/StandardSymSL.pfb \
+  font/devpdf/download
+
+devpdffontdir = $(fontdir)/devpdf
+devpdffontdata = \
+  $(DEVPDFFONTFILES) \
+  $(DEVPDFFONTFILES_FOR_URW) \
   font/devpdf/Foundry
+devpdffont_DATA = $(devpdffontdata)
+MOSTLYCLEANFILES += $(devpdffontdata)
 
 devpdffontencdir = $(devpdffontdir)/enc
-devpdffontenc_DATA = font/devpdf/enc/text.enc
+devpdffontencdata = \
+  font/devpdf/enc/text.enc
+devpdffontenc_DATA = $(devpdffontencdata)
+MOSTLYCLEANFILES += $(devpdffontencdata)
 
 devpdffontmapdir = $(devpdffontdir)/map
 devpdffontmapdata = \
@@ -46,11 +124,12 @@ devpdffontmapdata = \
   font/devpdf/map/symbolchars \
   font/devpdf/map/text.map
 devpdffontmap_DATA = $(devpdffontmapdata)
+MOSTLYCLEANFILES += $(devpdffontmapdata)
 
 EXTRA_DIST += \
   font/devpdf/DESC.in \
-  font/devpdf/SS \
-  font/devpdf/StandardSymSL.pfb \
+  font/devpdf/SS.in \
+  font/devpdf/StandardSymSL.pfb.in \
   font/devpdf/Foundry.in \
   font/devpdf/download.in \
   font/devpdf/generate/StandardSymSL.sfd \
@@ -58,18 +137,30 @@ EXTRA_DIST += \
 
 all: font/devpdf/stamp
 
-font/devpdf/enc/text.enc:
+$(DEVPDFFONTFILES_FROM_DEVPS):
+	$(AM_V_at)$(MKDIR_P) $(top_builddir)/font/devpdf
+	$(AM_V_at)for f in $@; do \
+	  cp -f $(top_srcdir)/font/devps/`basename $$f` \
+	    $(top_builddir)/font/devpdf; \
+	done
+
+$(devpdffontencdata):
 	$(AM_V_at)$(MKDIR_P) $(top_builddir)/font/devpdf/enc
-	$(AM_V_at)cp -f $(top_srcdir)/font/devps/text.enc \
+	$(AM_V_at)cp -f $(top_srcdir)/font/devps/`basename $@` \
 	  $(top_builddir)/font/devpdf/enc
 
-font/devpdf/SS: font/devpdf/download
-	$(AM_V_at)$(MKDIR_P) $(top_builddir)/font/devpdf
-	if [ "$(top_srcdir)" != "$(top_builddir)" ]; then \
-	    cp -u $(top_srcdir)/font/devpdf/SS \
-	    $(top_srcdir)/font/devpdf/StandardSymSL.pfb \
-	    $(top_builddir)/font/devpdf; \
-	fi
+# The following 2 rules are lame hacks to get around the fact that, but
+# for the rename, we'd have no work to do if the source tree is the
+# build tree, but we have to copy each file if the build tree differs.
+#
+# XXX: Maybe a Make or Automake guru can advise how to improve this.
+
+font/devpdf/SS: $(devpdf_srcdir)/SS.in
+	$(AM_V_GEN)cp -f $(devpdf_srcdir)/SS.in $@
+
+$(devpdf_builddir)/StandardSymSL.pfb: \
+  $(devpdf_srcdir)/StandardSymSL.pfb.in
+	$(AM_V_GEN)cp -f $(devpdf_srcdir)/StandardSymSL.pfb.in $@
 
 $(devpdffontmapdata):
 	$(AM_V_at)$(MKDIR_P) $(top_builddir)/font/devpdf/map
@@ -101,9 +192,6 @@ font/devpdf/util/BuildFoundries: \
 	&& cp -f $(top_srcdir)/font/devpdf/download.in \
 	         $(top_builddir)/font/devpdf/download
 
-GROFF_FONT_FILES=`cd $(top_builddir)/font/devpdf \
-  && grep -ls internalname [A-CEG-RT-Z]*`
-
 MOSTLYCLEANFILES += font/devpdf/DESC
 font/devpdf/DESC: $(devpdf_srcdir)/DESC.in
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
@@ -123,12 +211,11 @@ endif
 
 # This is kind of a cheat, but works because BuildFoundries produces so
 # many artifacts.
-$(DEFAULT_BASE35_FONTS) $(URW_BASE35_FONTS): font/devpdf/download
+$(DEVPDFFONTFILES_FOR_URW) $(DEFAULT_BASE35_FONTS) \
+  $(URW_BASE35_FONTS): font/devpdf/download
 
-MOSTLYCLEANFILES += font/devpdf/download
-font/devpdf/download: $(devpdffontmapdata) font/devpdf/DESC \
-  font/devpdf/Foundry font/devpdf/enc/text.enc \
-  font/devpdf/util/BuildFoundries
+font/devpdf/download: $(devpdffontencdata) $(devpdffontmapdata) \
+  font/devpdf/DESC font/devpdf/Foundry font/devpdf/util/BuildFoundries
 	$(AM_V_GEN)$(MKDIR_P) $(top_builddir)/font/devpdf \
 	&& echo "# foundry	ps-font-name	ps-font-file" >$@.tmp \
 	&& echo "# A blank foundry is the default." >>$@.tmp \
@@ -143,59 +230,9 @@ font/devpdf/download: $(devpdffontmapdata) font/devpdf/DESC \
 # PDFs to be produced by troff should depend on this stamp file to
 # ensure that gropdf's device and font description files are available.
 MOSTLYCLEANFILES += font/devpdf/stamp
-font/devpdf/stamp: font/devpdf/DESC font/devpdf/download \
-  $(devpdffontenc_DATA) $(devpdffontmap_DATA) $(devpdffont_DATA)
+font/devpdf/stamp: font/devpdf/DESC $(DEVPDFFONTFILES) \
+  font/devpdf/download
 	$(AM_V_at)>$@
-
-mostlyclean-local: mostlyclean_devpdf_extra
-mostlyclean_devpdf_extra:
-	@echo Cleaning font/devpdf
-	rm -rf $(top_builddir)/font/devpdf/enc \
-	  $(top_builddir)/font/devpdf/map;
-	if test -d $(top_builddir)/font/devpdf; then \
-	  for f in $(GROFF_FONT_FILES) S; do \
-	    $(RM) $(top_builddir)/font/devpdf/$$f; \
-	  done; \
-	fi
-	if [ "$(top_srcdir)" != "$(top_builddir)" ]; then \
-	  for f in SS StandardSymSL.pfb; do \
-	    $(RM) $(top_builddir)/font/devpdf/$$f; \
-	  done; \
-	fi
-
-install-data-local: install_devpdf
-install_devpdf:
-	@echo Installing devpdf files
-	-@test -d $(DESTDIR)$(devpdffontdir) \
-	  || $(mkinstalldirs) $(DESTDIR)$(devpdffontdir)
-	@for f in $(GROFF_FONT_FILES) S; do \
-	  $(RM) $(DESTDIR)$(devpdffontdir)/$$f; \
-	  if test -f $$f; then \
-	    $(INSTALL_DATA) $$f $(DESTDIR)$(devpdffontdir)/$$f; \
-	  else \
-	    $(INSTALL_DATA) $(top_builddir)/font/devpdf/$$f \
-	      $(DESTDIR)$(devpdffontdir)/$$f; \
-	  fi; \
-	done
-	$(INSTALL_DATA) $(top_builddir)/font/devpdf/download \
-	  $(DESTDIR)$(devpdffontdir)/
-
-uninstall_groffdirs: uninstall_devpdf
-uninstall_devpdf:
-	@echo Uninstalling devpdf files
-	if test -d $(DESTDIR)$(devpdffontdir); then \
-	  for f in $(GROFF_FONT_FILES) S; do \
-	    $(RM) $(DESTDIR)$(devpdffontdir)/$$f; \
-	  done; \
-	  if test -d $(DESTDIR)$(devpdffontencdir); then \
-	    rmdir $(DESTDIR)$(devpdffontencdir); \
-	  fi; \
-	  if test -d $(DESTDIR)$(devpdffontmapdir); then \
-	    rmdir $(DESTDIR)$(devpdffontmapdir); \
-	  fi; \
-	  $(RM) $(DESTDIR)$(devpdffontdir)/download; \
-	  rmdir $(DESTDIR)$(devpdffontdir); \
-	fi
 
 font_devpdf_default_test=\
   $(devpdf_srcdir)/tests/check-default-foundry.sh.in
