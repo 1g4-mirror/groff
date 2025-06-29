@@ -5220,7 +5220,8 @@ Welcome to groff.
 @endExample
 
 @cindex end-of-sentence characters
-@cindex sentence space
+@cindex sentence-ending punctuation
+@cindex inter-sentence space
 @cindex space between sentences
 @cindex French spacing
 GNU @code{troff} flags certain characters (normally @samp{!}, @samp{?},
@@ -5963,8 +5964,15 @@ punctuation is correlated with pauses for breathing and changes in
 prosody.
 
 @item
-Use @code{\&} after @samp{!}, @samp{?}, and @samp{.} if they are
-followed by space, tab, or newline characters and don't end a sentence.
+Use
+@code{\&}
+after
+@samp{!},
+@samp{?},
+and
+@samp{.}
+if they are followed by space or newline characters
+and don't end a sentence.
 
 @item
 In filled text lines, use @code{\&} before @samp{.} and @samp{'} if they

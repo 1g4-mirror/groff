@@ -2133,9 +2133,8 @@ after
 .RB \[lq] ?\& \[rq],
 and
 .RB \[lq] .\& \[rq]
-if they are followed by space,
-tab,
-or newline characters and don't end a sentence.
+if they are followed by space or newline characters
+and don't end a sentence.
 .
 .
 .IP \[bu]
