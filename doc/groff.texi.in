@@ -6501,7 +6501,7 @@ extrema of two operands: @code{>?} (maximum) and @code{<?} (minimum).
 .nr candidates 3
 .nr salaries (\n[slots] <? \n[candidates])
 Looks like we'll end up paying \n[salaries] salaries.
-    @result{} Looks like we'll end up paying 3 salaries.
+    @result{} Looks like we@quoteright{}ll end up paying 3 salaries.
 @endExample
 
 @cindex comparison operators
