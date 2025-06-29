@@ -69,6 +69,7 @@ extern void do_stroke_color(symbol);
 extern void do_fill_color(symbol);
 
 extern bool suppress_push;
+extern bool want_nodes_dumped;
 
 // Local Variables:
 // fill-column: 72

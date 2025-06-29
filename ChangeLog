@@ -1,3 +1,22 @@
+2025-06-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Add experimental, undocumented global node dumping
+	feature.  This essentially produces a graph of the internal
+	representation of the entire input.  (It's a forest, with one
+	tree per output line.)
+
+	* src/roff/troff/input.h: Declare new global Boolean,
+	`want_nodes_dumped`.
+	* src/roff/troff/input.cpp: Define new global Boolean,
+	`want_nodes_dumped`, defaulting false.
+	(main): Set it to true if the environment variable
+	`GROFF_DUMP_NODES` exists (with any value).
+	* src/roff/troff/env.cpp (environment::do_break): Check the new
+	global variable; if it is true and if output is going to the
+	top-level diversion, dump the pending output line's node list in
+	JSON format (to the standard error stream) just prior to writing
+	it as *roff output (to the standard output stream).
+
 2025-06-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/pdf.tmac (pdf:SS): Delete now-unused macro.

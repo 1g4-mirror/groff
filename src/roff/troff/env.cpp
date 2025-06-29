@@ -2601,6 +2601,8 @@ void environment::do_break(bool want_adjustment)
 	break;
       }
     }
+    if (want_nodes_dumped && (curdiv == topdiv))
+      curenv->dump_pending_nodes();
     node *tem = line;
     line = 0 /* nullptr */;
     output_line(tem, width_total, was_centered);

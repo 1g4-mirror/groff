@@ -121,6 +121,7 @@ static symbol blank_line_macro_name;
 static symbol leading_spaces_macro_name;
 static bool want_att_compat = false;
 bool want_abstract_output = false;
+bool want_nodes_dumped = false;
 bool want_output_suppressed = false;
 bool is_writing_html = false;
 static int suppression_level = 0;	// depth of nested \O escapes
@@ -9217,6 +9218,8 @@ int main(int argc, char **argv)
   bool want_startup_macro_files_skipped = false;
   int next_page_number = 0;	// pacify compiler
   hresolution = vresolution = 1;
+  if (getenv("GROFF_DUMP_NODES") != 0 /* nullptr */)
+    want_nodes_dumped = true;
   // restore $PATH if called from groff
   char* groff_path = getenv("GROFF_PATH__");
   if (groff_path != 0 /* nullptr */) {
