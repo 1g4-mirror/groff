@@ -46,6 +46,10 @@ typesetting
 .\}
 .rr do-fallback
 .
+.\" define a string tx for the TeX logo
+.ie t .ds tx T\h'-.1667m'\v'.224m'E\v'-.224m'\h'-.125m'X
+.el   .ds tx TeX
+.
 .
 .\" ====================================================================
 .SH Description
@@ -241,12 +245,15 @@ is the process of splitting a word so that it appears partially on one
 line,
 followed by a hyphen to indicate to the reader that the word has been
 broken,
-and its remainder on the next.
+and that its remainder lies on the next.
 .
 Hyphenation break points can be manually specified;
-.I groff
-also uses a hyphenation algorithm and language-specific pattern files to
-decide which words can be hyphenated and where.
+GNU
+.I troff
+also uses a hyphenation algorithm and language-specific pattern files
+(based on
+\*[tx]'s)
+to decide which words can be hyphenated and where.
 .
 Hyphenation does not always occur even when the hyphenation rules for a
 word allow it;
@@ -328,8 +335,8 @@ Trailing spaces on
 (see below)
 are discarded.
 .
-The formatter flushes any pending output line upon encountering the end
-of input.
+The formatter breaks the pending output line without adjustment
+upon encountering the end of input.
 .
 .
 .P
@@ -2615,6 +2622,9 @@ but
 .MR troff 1 \" foreign troff
 might be a good starting point.
 .
+.
+.\" Clean up.
+.rm tx
 .
 .\" Restore compatibility mode (for, e.g., Solaris 10/11).
 .cp \n[*groff_roff_7_man_C]

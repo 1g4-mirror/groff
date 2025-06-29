@@ -5341,15 +5341,24 @@ Adjustment}.
 @subsection Hyphenation
 @cindex hyphenation
 
-When an output line is nearly full, it is uncommon for the next word
-collected from the input to exactly fill it---typically, there is room
-left over only for part of the next word.  @dfn{Hyphenation} is the
+When an output line is nearly full,
+it is uncommon for the next word collected from the input
+to exactly fill it---typically,
+there is room left over only for part of the next word.
+@dfn{Hyphenation}
+is the
 process of splitting a word so that it appears partially on one line,
-followed by a hyphen to indicate to the reader that the word has been
-broken, and its remainder on the next.  Hyphenation break points can be
-manually specified; GNU @code{troff} also uses a hyphenation algorithm
-and language-specific pattern files (based on @TeX{}'s) to decide which
-words can be hyphenated and where.
+followed by a hyphen to indicate to the reader
+that the word has been broken,
+and that its remainder lies on the next.
+Hyphenation break points can be manually specified;
+GNU
+@command{troff}
+also uses a hyphenation algorithm
+and language-specific pattern files
+(based on
+@TeX{}'s)
+to decide which words can be hyphenated and where.
 
 Hyphenation does not always occur even when the hyphenation rules for a
 word allow it; it can be disabled, and when not disabled there are
@@ -5416,12 +5425,15 @@ methods of producing indented paragraphs.  Trailing spaces on text lines
 are discarded.@footnote{``Text lines'' are defined in @ref{Requests and
 Macros}.}
 
-What if the file ends before enough words have been collected to fill an
-output line?  Or the output line is exactly full but not yet broken, and
-there is no more input?  GNU @code{troff} flushes the pending output
-line upon encountering the end of input.  Certain requests also cause
-breaks, implicitly or explicitly.  This is discussed in
-@ref{Manipulating Filling and Adjustment}.
+What if the file ends before enough words have been collected
+to fill an output line?
+Or the output line is exactly full but not yet broken,
+and there is no more input?
+The formatter breaks the pending output line without adjustment
+upon encountering the end of input.
+Certain requests also cause breaks,
+implicitly or explicitly.
+This is discussed in @ref{Manipulating Filling and Adjustment}.
 
 @c ---------------------------------------------------------------------
 
@@ -5485,8 +5497,11 @@ preprocessor to lay out tables.
 @subsection Requests and Macros
 
 We have now encountered almost all of the syntax there is in the
-@code{roff} language, with an exception already noted in
-passing.@footnote{The backspace character is another; see
+@code{roff}
+language,
+with an exception already noted in passing.@footnote{The backspace
+character is also meaningful;
+see
 @ref{Page Motions}.}
 @cindex request
 @cindex control character (@code{.})
@@ -5532,14 +5547,23 @@ macros is more flexible but also more complex.  @xref{Calling Macros}.}
 @cindex macro
 @cindex calling macros (introduction)
 @cindex interpolation
-A @dfn{macro} can be thought of as an abbreviation you can define for a
-collection of control and text lines.  When the macro is @dfn{called} by
-giving its name after a control character, it is replaced with what it
-stands for.  The process of textual replacement is known as
+A
+@dfn{macro}
+can be thought of as an abbreviation you can define
+for a collection of control and text lines.
+When a document
+@dfn{calls}
+a macro
+by placing its name after a control character,
+the formatter replaces the control line with the macro's definition.
+The process of textual replacement is known as
 @dfn{interpolation}.@footnote{Some escape sequences undergo
-interpolation as well.}  Interpolations are handled as soon as they are
-recognized, and once performed, a @code{roff} formatter scans the
-replacement for further requests, macro calls, and escape sequences.
+interpolation as well.}
+Interpolations are handled as soon as they are recognized,
+and once performed,
+the formatter scans the replacement for further requests,
+macro calls,
+and escape sequences.
 
 In @code{roff} systems, the @code{de} request defines a
 macro.@footnote{GNU @code{troff} offers additional ones.  @xref{Writing
