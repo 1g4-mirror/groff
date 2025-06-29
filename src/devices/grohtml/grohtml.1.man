@@ -203,7 +203,11 @@ writes \%UTF-8-\:encoded output
 (but see the
 .B \-k
 option)
-and has built-in HTML entities for all non-composite Unicode characters.
+and produces HTML character references
+for most non-composite,
+non-basic Latin
+Unicode characters.
+.\" XXX: Exception: ˚.  Why?
 .
 In spite of this,
 .I groff
