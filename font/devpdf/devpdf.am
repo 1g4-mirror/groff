@@ -129,7 +129,6 @@ devpdffontmapdir = $(devpdffontdir)/map
 devpdffontmapdata = \
   font/devpdf/map/dingbats.map \
   font/devpdf/map/symbol.map \
-  font/devpdf/map/symbolchars \
   font/devpdf/map/text.map
 devpdffontmap_DATA = $(devpdffontmapdata)
 MOSTLYCLEANFILES += $(devpdffontmapdata)
