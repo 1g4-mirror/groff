@@ -3453,7 +3453,21 @@ sub LoadFont
 	    $r[3]=oct($r[3]) if substr($r[3],0,1) eq '0';
 	    $r[4]=$r[0] if !defined($r[4]);
 	    $r[6]=$1 if !defined($r[6] and defined($r[5]) and $r[5]=~m/^-- ([0-9A-F]{4})/);
-	    $r[0]="#$r[3]" if exists($fnt{NAM}->{$r[0]});
+	    if (exists($fnt{NAM}->{$r[0]}))
+	    {
+		# Prefer postscript names other than 'uni' or 'afii' as primary
+		if ($fnt{NAM}->{$r[0]}->[2]=~m'^/(:afii\d{5}|uni[A-F0-9]{4,5})')
+		{
+		    my $n=$fnt{NAM}->{$r[0]}->[1];
+		    $fnt{NAM}->{"#$n"}=$fnt{NAM}->{$r[0]};
+		    $fnt{NO}->[$n]="#$n";
+		}
+		else
+		{
+		    $r[0]="#$r[3]";
+		}
+	    }
+
 	    $fnt{NAM}->{$r[0]}=[$p[0],$r[3],'/'.$r[4],undef,undef,$r[6]];
 	    $fnt{NO}->[$r[3]]=$r[0];
 	    $lastnm=$r[0];

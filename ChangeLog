@@ -1,5 +1,14 @@
 2025-07-01  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf] More rational handling of duplicate font entries.
+
+	* src/devices/gropdf/gropdf.pl (LoadFont): The primary entry
+	has a proper postscript name such as 'iota' whereas
+	alternatives tend to have 'uniXXXX' or 'afiiNNNNN'. So
+	choose the primary.
+
+2025-07-01  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	[gropdf] Changes for greek glyphs
 
 	* src/devices/gropdf/gropdf.pl (Clean): More permissive re
