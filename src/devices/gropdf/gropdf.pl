@@ -2106,7 +2106,7 @@ sub Clean
     $p=~s/\\[FfgkMmnVY]$parclntyp//g;
     $p=~s/\\[hs][-+]?$parclntyp//g;
 
-    $p=~s/\\\((\w\w)/\\\[$1\]/g;	# convert \(xx to \[xx]
+    $p=~s/\\\((..)/\\\[$1\]/g;	# convert \(xx to \[xx]
 
     return $p;
 }
@@ -3452,6 +3452,8 @@ sub LoadFont
 
 	    $r[3]=oct($r[3]) if substr($r[3],0,1) eq '0';
 	    $r[4]=$r[0] if !defined($r[4]);
+	    $r[6]=$1 if !defined($r[6] and defined($r[5]) and $r[5]=~m/^-- ([0-9A-F]{4})/);
+	    $r[0]="#$r[3]" if exists($fnt{NAM}->{$r[0]});
 	    $fnt{NAM}->{$r[0]}=[$p[0],$r[3],'/'.$r[4],undef,undef,$r[6]];
 	    $fnt{NO}->[$r[3]]=$r[0];
 	    $lastnm=$r[0];

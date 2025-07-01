@@ -1,3 +1,16 @@
+2025-07-01  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] Changes for greek glyphs
+
+	* src/devices/gropdf/gropdf.pl (Clean): More permissive re
+	to allow for \(+h etc.
+	(Loadfont): Cater for (unintentional?) change to afmtodit
+	output format by GBR. Handle duplicate font entries more
+	sanely - keep first entry and preserve duplicate so it can
+	be used with \N'nnn' the same as unnamed ("---") glyphs.
+	Not ideal but forced compromise because groff uses decomposed
+	unicode names which can lead to duplicate entries.
+
 2025-06-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add experimental, undocumented global node dumping
