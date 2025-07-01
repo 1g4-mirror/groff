@@ -1,3 +1,8 @@
+2025-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am ($(GROFF_INFO)) [HAVE_MAKEINFO]: Make target
+	creation depend on `HAVE_MAKEINFO` configuration variable.
+
 2025-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tty.tmac: Fix misspelled special character identifiers

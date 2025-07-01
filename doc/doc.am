@@ -571,12 +571,14 @@ doc/groff.texi: $(top_srcdir)/doc/groff.texi.in
 
 EXTRA_DIST += doc/groff.info
 MAINTAINERCLEANFILES += doc/groff.info
-doc/groff.info: doc/groff.texi
+if HAVE_MAKEINFO
+$(GROFF_INFO): doc/groff.texi
 	$(AM_V_at)$(MKDIR_P) $(doc_builddir)
 	$(AM_V_GEN)LANG=C \
 	LC_ALL=C \
 	$(MAKEINFO) -o doc/groff.info --enable-encoding \
 	  -I $(doc_srcdir) $(doc_builddir)/groff.texi
+endif
 
 # Distribute the Info files.
 dist-hook: dist-info-bits
