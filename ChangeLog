@@ -1,3 +1,10 @@
+2025-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/afmtodit/afmtodit.pl: Fix code style nits.  Stop
+	using `&` sigil in subroutine calls; that's nonidiomatic Perl,
+	an exception to the language's otherwise relentless dedication
+	to sigil prefixes.
+
 2025-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am ($(GROFF_INFO)) [HAVE_MAKEINFO]: Make target

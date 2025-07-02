@@ -102,11 +102,11 @@ sub usage {
     exit($status);
 }
 
-&usage(0) if ($want_help);
+usage(0) if ($want_help);
 
 if ($#ARGV != 2) {
     print STDERR "$prog: usage error: insufficient arguments\n";
-    &usage(1);
+    usage(1);
 }
 
 my $afm = $ARGV[0];
@@ -120,7 +120,7 @@ my $sys_desc = $groff_sys_fontdir . "/devps/" . $desc;
 # read the afm file
 
 my $psname;
-my ($notice, $version, $fullname, $familyname, @comments); 
+my ($notice, $version, $fullname, $familyname, @comments);
 my $italic_angle = 0;
 my (@kern1, @kern2, @kernx);
 my (%italic_correction, %left_italic_correction);
@@ -135,7 +135,7 @@ if (open(AFM, $afm)) {
     $filename = $afm;
 }
 else {
-    &croak("cannot open '$ARGV[0]': $!");
+    croak("cannot open '$ARGV[0]': $!");
 }
 
 while (<AFM>) {
@@ -259,7 +259,7 @@ elsif (open(DESC, $sys_desc)) {
     $filename = $sys_desc;
 }
 else {
-    &croak("cannot open '$desc' nor '$sys_desc': $!");
+    croak("cannot open '$desc' nor '$sys_desc': $!");
 }
 
 while (<DESC>) {
@@ -288,7 +288,7 @@ if ($opt_e) {
 
     my $sys_opt_e = $groff_sys_fontdir . "/devps/" . $opt_e;
     open(ENCODING, $opt_e) || open(ENCODING, $sys_opt_e) ||
-	&croak("cannot open '$opt_e' nor '$sys_opt_e': $!");
+	croak("cannot open '$opt_e' nor '$sys_opt_e': $!");
     while (<ENCODING>) {
 	next if /^#/;
 	chop;
@@ -315,7 +315,7 @@ elsif (open(MAP, $sys_map)) {
     $filename = $sys_map;
 }
 else {
-    &croak("cannot open '$map' nor '$sys_map': $!");
+    croak("cannot open '$map' nor '$sys_map': $!");
 }
 
 while (<MAP>) {
@@ -328,11 +328,11 @@ while (<MAP>) {
 	if ($field[1] eq "space") {
 	    # The PostScript character "space" is automatically mapped
 	    # to the groff character "space"; this is for grops.
-	    &whine("you are not allowed to map to the groff character"
+	    whine("you are not allowed to map to the groff character"
 		   . " 'space'");
 	}
 	elsif ($field[0] eq "space") {
-	    &whine("you are not allowed to map the PostScript character"
+	    whine("you are not allowed to map the PostScript character"
 		   . " 'space'");
 	}
 	else {
@@ -482,7 +482,7 @@ if (!$opt_x) {
 	    $u =~ s/^_/u/;
 	    if ($u) {
 		if (defined $mapped{$u}) {
-		    &whine("both $mapped{$u} and $ch map to $u");
+		    whine("both $mapped{$u} and $ch map to $u");
 		}
 		else {
 		    $mapped{$u} = $ch;
@@ -514,7 +514,7 @@ foreach my $lig (sort keys %default_ligatures) {
 # print it all out
 
 open(FONT, ">$outfile") ||
-  &croak("cannot open '$outfile' for writing: $!");
+  croak("cannot open '$outfile' for writing: $!");
 select(FONT);
 
 my @options;
