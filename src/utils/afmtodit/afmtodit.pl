@@ -255,11 +255,14 @@ $sizescale = 1;
 if (open(DESC, $desc)) {
     $filename = $desc;
 }
-elsif (open(DESC, $sys_desc)) {
-    $filename = $sys_desc;
-}
 else {
-    croak("cannot open '$desc' nor '$sys_desc': $!");
+    whine("cannot open '$desc': $!");
+    if (open(DESC, $sys_desc)) {
+	$filename = $sys_desc;
+    }
+    else {
+	croak("cannot '$sys_desc': $!");
+    }
 }
 
 while (<DESC>) {
