@@ -196,9 +196,7 @@ font/devpdf/util/BuildFoundries: \
 	         $(devpdf_srcdir)/util/BuildFoundries.pl \
 	         >$(top_builddir)/font/devpdf/util/BuildFoundries; \
 	   fi \
-	&& chmod +x $(top_builddir)/font/devpdf/util/BuildFoundries \
-	&& cp -f $(top_srcdir)/font/devpdf/download.in \
-	         $(top_builddir)/font/devpdf/download
+	&& chmod +x $(top_builddir)/font/devpdf/util/BuildFoundries
 
 MOSTLYCLEANFILES += font/devpdf/DESC
 font/devpdf/DESC: $(devpdf_srcdir)/DESC.in
@@ -225,14 +223,12 @@ $(DEVPDFFONTFILES_FOR_URW) $(DEFAULT_BASE35_FONTS) \
 font/devpdf/download: $(devpdffontencdata) $(devpdffontmapdata) \
   font/devpdf/DESC font/devpdf/Foundry font/devpdf/util/BuildFoundries
 	$(AM_V_GEN)$(MKDIR_P) $(top_builddir)/font/devpdf \
-	&& echo "# foundry	ps-font-name	ps-font-file" >$@.tmp \
-	&& echo "# A blank foundry is the default." >>$@.tmp \
 	&& PATH="$(abs_top_builddir)$(GROFF_PATH_SEPARATOR)$(abs_top_builddir)/build-aux$(GROFF_PATH_SEPARATOR)$(PATH)" \
-	     $(abs_top_builddir)/font/devpdf/util/BuildFoundries \
-	       --strict $(abs_top_builddir)/font/devpdf \
-	       '$(abs_top_srcdir)/font/devps:$(abs_top_builddir)/font/devps' \
-	       >>$@.tmp \
-	&& chmod u+w $@ \
+	$(abs_top_builddir)/font/devpdf/util/BuildFoundries \
+	  --download $(abs_top_srcdir)/font/devpdf/download.in \
+	  --strict $(abs_top_builddir)/font/devpdf \
+	  '$(abs_top_srcdir)/font/devpdf:$(abs_top_builddir)/font/devpdf' \
+	  >>$@.tmp \
 	&& mv $@.tmp $@
 
 # PDFs to be produced by troff should depend on this stamp file to

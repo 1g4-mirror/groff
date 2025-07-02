@@ -133,7 +133,6 @@ sub LoadFoundry
 		    {
 			if (uc($r[1]) ne 'Y')
 			{
-			    $gotf=0;
 			    my $fns=join(', ',split('!',$r[5]));
 			    my $sub=\&Warn;
 			    $sub=\&Die if ($beStrict);
@@ -144,7 +143,6 @@ sub LoadFoundry
 			    unlink $gfont;
 			}
 		    }
-		    Notice("copied grops font $gfont") if $gotf;
 
 		}
 		else
@@ -405,7 +403,11 @@ sub UseGropsVersion
 
 	close(GF);
 
-	if ($psfont)
+	if ($beStrict and -r "$gfontbase")
+	{
+	    Notice("not overwriting existing groff font description file '$gfontbase' for foundry '$foundry'");
+	}
+	elsif ($psfont)
 	{
 	    Notice("trying to open '$gfontbase' for writing");
 	    if (open(GF,">$gfontbase"))
@@ -413,6 +415,7 @@ sub UseGropsVersion
 		local $"='';
 		print GF "@gf";
 		close(GF);
+		Notice("copied grops font $gfont");
 	    }
 	    else
 	    {
@@ -432,8 +435,6 @@ sub UseGropsVersion
 		  . " '$foundry' lacks 'internalname' directive;"
 		  . " ignoring file");
 	}
-
-	close(GF);
     }
     else
     {

@@ -1,5 +1,38 @@
 2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devpdf/util/BuildFoundries.pl (LoadFoundry): Stop
+	throwing notice about grops(1) font [description file] being
+	copied; this notification was far away from where the rewrite
+	was actually happening.  Drop now-unused `gotf` scalar.
+	(UseGropsVersion): If we're being strict and the destination
+	font description file name (scalar `gfontbase`) already exists,
+	emit a `Notice()` that we're not overwriting it.  If we are
+	rewriting it, emit the aforementioned notice here, where it
+	happens.  Drop redundant/unnecessary (depending on whether a
+	file open was sucessfule) close of `GF` file handle.
+
+	* font/devpdf/devpdf.am: Tidy up for better build reliability.
+	(font/devpdf/util/BuildFoundries): Stop manipulating the
+	"download" file.
+	(font/devpdf/download): Move the file's comment header from
+	here...
+	* font/devpdf/download.in: ...to here.
+	* font/devpdf/devpdf.am (font/devpdf/download): Use
+	"BuildFoundries"'s new `--download` option to construct the
+	target from "download.in".  Stop setting write permission on the
+	generated download file in the build tree; it's no longer
+	necessary.  Stop giving "BuildFoundries" a search path in the
+	"font/devps" directory; use "font/devpdf" instead.  This is what
+	ultimately angered "make distcheck"; now that make(1) produces
+	the "pdf" device's font description files for the default
+	foundry (copying them from "font/grops", there's no need for
+	"BuildFoundries" to rewrite them, in either directory.
+
+	Fixes <https://savannah.gnu.org/bugs/?67268>.  Thanks to Dave
+	Kemper for the report.
+
+2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* font/devpdf/util/BuildFoundries.pl: Support new `--download`
 	option, taking an input download file as argument and storing it
 	to new `downloadFile` scalar.  Default to "download" as before.
