@@ -1,3 +1,11 @@
+2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp: Trivially refactor.  Use better data
+	type for `deprecated_font_identifiers`; make a vector of
+	`symbol`s rather than of `string`s.
+	(warn_if_font_name_deprecated): Use compatible type for vector
+	iterator.
+
 2025-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/afmtodit/afmtodit.pl: Throw separate diagnostic

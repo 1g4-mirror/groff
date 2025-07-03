@@ -575,14 +575,14 @@ static node *configure_space_underlining(bool b)
   return new device_extension_node(m, 1);
 }
 
-// TODO: Kill this off in groff 1.25.
-std::vector<string> deprecated_font_identifiers;
+// TODO: Kill this off in groff 1.24.0 release + 2 years.  See input.cpp.
+std::vector<symbol> deprecated_font_identifiers;
 extern bool is_device_ps_or_pdf; // See input.cpp.
 
 static void warn_if_font_name_deprecated(symbol nm)
 {
   const char *name = nm.contents();
-  std::vector<string>::iterator it
+  std::vector<symbol>::iterator it
     = find(deprecated_font_identifiers.begin(),
 	   deprecated_font_identifiers.end(), name);
   if (it != deprecated_font_identifiers.end()) {
