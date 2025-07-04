@@ -1,3 +1,9 @@
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (DOC_PDFMOM): Build documents more verbosely,
+	passing `-P -d` option to pdfmom(1) (and ultimately `-d` to
+	gropdf(1)).
+
 2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devpdf/util/BuildFoundries.pl (LoadFoundry): Stop
