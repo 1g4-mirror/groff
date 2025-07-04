@@ -1176,7 +1176,7 @@ sub LoadDownload
     foreach my $dir (@dirs)
     {
 	$f=undef;
-	OpenFile(\$f,$dir,"download");
+	OpenFontFile(\$f,$dir,"download");
 	next if !defined($f);
 	$found++;
 
@@ -1211,7 +1211,10 @@ sub LoadDownload
     Die("failed to open 'download' file") if !$found;
 }
 
-sub OpenFile
+# Locate and open a file in the groff font directory search path.
+#
+# Return the opened file handle in the first scalar argument `f`.
+sub OpenFontFile
 {
     my $f=shift;
     my $dirs=shift;
@@ -1234,7 +1237,7 @@ sub LoadDesc
 {
     my $f;
 
-    OpenFile(\$f,$fontPath,"DESC");
+    OpenFontFile(\$f,$fontPath,"DESC");
     Die("failed to open device description file 'DESC'")
     if !defined($f);
 
@@ -3394,13 +3397,13 @@ sub LoadFont
     return $fontlst{$fontno}->{OBJ} if (exists($fontlst{$fontno}) and $fontnm eq $fontlst{$fontno}->{FNT}->{name}) ;
 
     my $f;
-    OpenFile(\$f,$fontPath,"$fontnm");
+    OpenFontFile(\$f,$fontPath,$fontnm);
 
     if (!defined($f) and $Foundry)
     {
 	# Try with no foundry
 	$fontnm=~s/.*?-//;
-	OpenFile(\$f,$fontPath,$fontnm);
+	OpenFontFile(\$f,$fontPath,$fontnm);
     }
 
     Die("unable to open font '$ofontnm' for mounting") if !defined($f);
@@ -3575,7 +3578,7 @@ sub GetType1
     my ($head,$body,$tail);	# Font contents
     my $f;
 
-    OpenFile(\$f,$fontPath,"$file");
+    OpenFontFile(\$f,$fontPath,"$file");
     Die("unable to open font '$file' for embedding") if !defined($f);
 
     $head=GetChunk($f,1,"currentfile eexec");
