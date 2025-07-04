@@ -151,9 +151,10 @@ SGR 30\[en]37 and 40\[en]47 sequences can view
 .I roff
 documents using eight different background and foreground colors.
 .
-Following ISO\~6429,
-the following colors are defined in
-.IR tty.tmac :
+.IR grotty 's
+.I tty.tmac
+file defines the eight color names of
+ISO\~6429:
 black,
 white,
 red,
@@ -163,12 +164,12 @@ yellow,
 magenta,
 and cyan.
 .
-Unrecognized colors are mapped to the default color,
-which is dependent on the settings of the terminal.
+Unrecognized colors map to the default color,
+the value of which depends on the settings of the terminal.
 .
-Also see
+Also see the
 .B \-t
-in section \[lq]Options\[rq] below.
+option below.
 .
 .
 .P
