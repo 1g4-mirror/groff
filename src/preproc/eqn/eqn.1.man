@@ -434,7 +434,7 @@ and
 GNU
 .I eqn
 imputes a type to each equation component,
-adjusting the space between them accordingly.
+adjusting the space around it accordingly.
 .
 Recognized types follow;
 most affect spacing only,
