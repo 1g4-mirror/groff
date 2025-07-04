@@ -126,7 +126,7 @@ and any of
 .BR .PE ,
 .BR .PF ,
 or
-.B .PY
+.BR .PY ,
 which it interprets as picture descriptions.
 .
 End a
