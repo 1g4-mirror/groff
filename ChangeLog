@@ -1,5 +1,19 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl (LoadDownload): Drop scalar `f`;
+	we won't need it anymore.  Rename scalar `found` to
+	`anyDownloadFilefound`, and manipulate it like a Boolean, not a
+	counter.  Attempt `open()` of "download" in each directory in
+	the groff font search path directly, instead of indirectly
+	through `OpenFontFile()`; we want to read all download files
+	available, not stop at the first one encountered.  Use an
+	ordinary file handle (`DL`) for this `open()`; we don't need a
+	scalar for it because we don't return it.  Issue `Notice()`s of
+	each open, whether successful or failed.  Recast diagnostics.
+	Annotate and motivate logic.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl: Trivially refactor.  Rename
 	global scalar `fontdir` to `fontPath`.
 	(LoadDownload, LoadFont, GetType1): Update dereference sites.

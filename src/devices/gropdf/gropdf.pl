@@ -1166,21 +1166,30 @@ sub ToPoints
     }
 }
 
+# Read _all_ files named "download" in the groff font search path and
+# populate the `download` hash using foundry+`internalname` as the keys
+# and a file name as the values.  If the file name is not found,
+# populate the `missing` hash the same way.
+#
+# We don't use `OpenFontFile()` for this task because that search
+# _stops_ at the first file successfully opened.
 sub LoadDownload
 {
-    my $f;
-    my $found=0;
-
+    my $anyDownloadFilefound=0;
     my (@dirs)=split($cfg{RT_SEP},$fontPath);
 
     foreach my $dir (@dirs)
     {
-	$f=undef;
-	OpenFontFile(\$f,$dir,"download");
-	next if !defined($f);
-	$found++;
+	my $downloadFile="$dir/$devnm/download";
+	if (!open(DL,"<$downloadFile"))
+	{
+	    Notice("cannot open '$downloadFile': $!");
+	    next;
+	}
+	$anyDownloadFilefound=1;
 
-	while (<$f>)
+	Notice("reading '$downloadFile'");
+	while (<DL>)
 	{
 	    chomp;
 	    s/#.*$//;
@@ -1202,13 +1211,18 @@ sub LoadDownload
 		next;
 	    }
 
-	    $download{"$foundry $name"}=$file if !exists($download{"$foundry $name"});
+	    # The first successfully located font file wins; subsequent
+	    # entries, in the same "download" file or later ones, do not
+	    # override the first success.  That seems okay because it is
+	    # how $GROFF_FONT_PATH works otherwise.
+	    $download{"$foundry $name"}=$file
+		if !exists($download{"$foundry $name"});
 	}
 
-	close($f);
+	close(DL);
     }
 
-    Die("failed to open 'download' file") if !$found;
+    Die("no 'download' files found") if !$anyDownloadFilefound;
 }
 
 # Locate and open a file in the groff font directory search path.
