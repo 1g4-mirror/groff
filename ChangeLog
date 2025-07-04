@@ -1,5 +1,10 @@
 2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/addftinfo/addftinfo.cpp (usage): Summarize purpose
+	of command when help is requested.
+
+2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Trivially refactor.  Use better data
 	type for `deprecated_font_identifiers`; make a vector of
 	`symbol`s rather than of `string`s.

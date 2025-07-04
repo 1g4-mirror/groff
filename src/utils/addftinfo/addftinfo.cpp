@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -143,6 +143,12 @@ static void usage(FILE *stream)
   fputs(" resolution unit-width font\n", stream);
   fprintf(stream, "usage: %s {-v | --version}\n"
 	  "usage: %s --help\n", program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Read an AT&T troff font description file, add further font metric\n"
+"information required by GNU troff, and write the combined result to\n"
+"the standard output stream.  See the addftinfo(1) manual page.\n",
+          stream);
 }
 
 static void usage()
