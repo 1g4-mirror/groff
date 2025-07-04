@@ -1,5 +1,13 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl (OpenFontFile): Refactor.  Rename
+	scalar `fnm` to `fileName`.  Add scalar `resolvedFileName`,
+	recording the file specification actually opened in the event of
+	success.  Eliminate multiple returns.  Use global scalar
+	`fontPath` instead of `dirs` argument to search for files.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (OpenFile): Rename this...
 	(OpenFontFile): ...to this, reflecting the specificity of its
 	operation--it opens files corresponding to the output device in

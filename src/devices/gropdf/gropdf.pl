@@ -1218,19 +1218,34 @@ sub OpenFontFile
 {
     my $f=shift;
     my $dirs=shift;
-    my $fnm=shift;
+    my $fileName=shift;
+    my $resolvedFileName;
 
-    if (substr($fnm,0,1)  eq '/' or substr($fnm,1,1) eq ':') # dos
+    # Is the file specification absolute?
+    #
+    # XXX: Forbid this?  See Savannah #66419.
+    if ((substr($fileName,0,1) eq '/')
+	or (substr($fileName,1,1) eq ':')) # dos
     {
-	return if -r "$fnm" and open($$f,"<$fnm");
+	$resolvedFileName=$fileName
+	    if (-r "$fileName" and open($$f,"<$fileName"));
+    }
+    else
+    {
+	my (@dirs)=split($cfg{RT_SEP},$fontPath);
+
+	foreach my $dir (@dirs)
+	{
+	    my $attempt="$dir/$devnm/$fileName";
+	    if (-r "$attempt" and open($$f,"<$attempt")) {
+		$resolvedFileName=$attempt;
+		last;
+	    }
+	}
     }
 
-    my (@dirs)=split($cfg{RT_SEP},$dirs);
-
-    foreach my $dir (@dirs)
-    {
-	last if -r "$dir/$devnm/$fnm" and open($$f,"<$dir/$devnm/$fnm");
-    }
+    Notice("opened '$resolvedFileName' for reading")
+	if $resolvedFileName;
 }
 
 sub LoadDesc
