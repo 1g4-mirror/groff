@@ -1183,6 +1183,7 @@ sub LoadDownload
 	{
 	    chomp;
 	    s/#.*$//;
+	    s/\s+$//;
 	    next if $_ eq '';
 	    my ($foundry,$name,$file)=split(/\t+/);
 	    if (substr($file,0,1) eq '*')
