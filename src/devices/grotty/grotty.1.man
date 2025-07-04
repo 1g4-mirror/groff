@@ -277,7 +277,7 @@ which may render bold italics as reverse video.
 .\" SGR sequences (including color) with no flags required.
 Some implementations of
 .MR more 1
-are also able to display these sequences;
+also are able to display these sequences;
 you may wish to experiment with that command's
 .B \-b
 option.
