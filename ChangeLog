@@ -1,5 +1,11 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl: Trivially refactor.  Rename
+	global list `idirs` to `includeDirs` so its purpose is clearer.
+	Update dereference sites.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (OpenFontFile): Refactor.  This
 	subroutine no longer does anything with its second argument (of
 	three), so eliminate it.

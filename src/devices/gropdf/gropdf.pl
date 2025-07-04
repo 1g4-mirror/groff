@@ -474,7 +474,7 @@ my $stats=0;
 my $unicodemap;
 my $options=7;
 my $PDFver=1.7;
-my @idirs;
+my @includeDirs;
 
 my $alloc=-1;
 my $cftmajor=0;
@@ -491,16 +491,17 @@ my $parcln=qr/\[[^\]]*?\]|(.)((?!\1).)*\1/;
 my $parclntyp=qr/(?:[\d\w]|\([+-]?[\S]{2}|$parcln)/;
 my $makeWarningsFatal=0;
 
-if (!GetOptions('F=s' => \@fdlist, 'I=s' => \@idirs, 'l' => \$frot,
-    'p=s' => \$fpsz, 'd!' => \$debug, 'help' => \$want_help, 'pdfver=f' => \$PDFver,
-    'v' => \$version, 'version' => \$version, 'opt=s' => \$options,
-    'e' => \$embedall, 'y=s' => \$Foundry, 's' => \$stats,
-    'u:s' => \$unicodemap, 'W' => \$makeWarningsFatal))
+if (!GetOptions('F=s' => \@fdlist, 'I=s' => \@includeDirs,
+    'l' => \$frot, 'p=s' => \$fpsz, 'd!' => \$debug,
+    'help' => \$want_help, 'pdfver=f' => \$PDFver, 'v' => \$version,
+    'version' => \$version, 'opt=s' => \$options, 'e' => \$embedall,
+    'y=s' => \$Foundry, 's' => \$stats, 'u:s' => \$unicodemap,
+    'W' => \$makeWarningsFatal))
 {
     &usage(1);
 }
 
-unshift(@idirs,'.');
+unshift(@includeDirs,'.');
 $fd=join('@RT_SEP@',@fdlist) if $#fdlist > -1;
 
 &usage(0) if ($want_help);
@@ -2475,7 +2476,7 @@ sub OpenIncludedFile
     }
     else
     {
-	foreach my $dir (@idirs)
+	foreach my $dir (@includeDirs)
 	{
 	    $fileName="$dir/$arg";
 
