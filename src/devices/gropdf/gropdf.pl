@@ -541,9 +541,10 @@ $PDFver=int($PDFver*10)-10;
 # Search for 'font directory': paths in -f opt, shell var
 # GROFF_FONT_PATH, default paths
 
-my $fontdir=$cfg{GROFF_FONT_PATH};
-$fontdir=$ENV{GROFF_FONT_PATH}.$cfg{RT_SEP}.$fontdir if exists($ENV{GROFF_FONT_PATH});
-$fontdir=$fd.$cfg{RT_SEP}.$fontdir if defined($fd);
+my $fontPath=$cfg{GROFF_FONT_PATH};
+$fontPath=$ENV{GROFF_FONT_PATH}.$cfg{RT_SEP}.$fontPath
+    if exists($ENV{GROFF_FONT_PATH});
+$fontPath=$fd.$cfg{RT_SEP}.$fontPath if defined($fd);
 
 $rot=90 if $frot;
 $matrix="0 1 -1 0" if $frot;
@@ -1170,7 +1171,7 @@ sub LoadDownload
     my $f;
     my $found=0;
 
-    my (@dirs)=split($cfg{RT_SEP},$fontdir);
+    my (@dirs)=split($cfg{RT_SEP},$fontPath);
 
     foreach my $dir (@dirs)
     {
@@ -1233,7 +1234,7 @@ sub LoadDesc
 {
     my $f;
 
-    OpenFile(\$f,$fontdir,"DESC");
+    OpenFile(\$f,$fontPath,"DESC");
     Die("failed to open device description file 'DESC'")
     if !defined($f);
 
@@ -3393,13 +3394,13 @@ sub LoadFont
     return $fontlst{$fontno}->{OBJ} if (exists($fontlst{$fontno}) and $fontnm eq $fontlst{$fontno}->{FNT}->{name}) ;
 
     my $f;
-    OpenFile(\$f,$fontdir,"$fontnm");
+    OpenFile(\$f,$fontPath,"$fontnm");
 
     if (!defined($f) and $Foundry)
     {
 	# Try with no foundry
 	$fontnm=~s/.*?-//;
-	OpenFile(\$f,$fontdir,$fontnm);
+	OpenFile(\$f,$fontPath,$fontnm);
     }
 
     Die("unable to open font '$ofontnm' for mounting") if !defined($f);
@@ -3574,7 +3575,7 @@ sub GetType1
     my ($head,$body,$tail);	# Font contents
     my $f;
 
-    OpenFile(\$f,$fontdir,"$file");
+    OpenFile(\$f,$fontPath,"$file");
     Die("unable to open font '$file' for embedding") if !defined($f);
 
     $head=GetChunk($f,1,"currentfile eexec");

@@ -1,5 +1,13 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl: Trivially refactor.  Rename
+	global scalar `fontdir` to `fontPath` to better reflect its
+	syntax.
+	(LoadDownload, LoadDesc, LoadFont, GetType1): Update dereference
+	sites.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl: Recast diagnostic messages to
 	describe the default foundry in a less confusing way.  Add new
 	scalar, `foundryDescription`, to store the string "default
