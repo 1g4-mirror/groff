@@ -1712,7 +1712,7 @@ sub do_x
 		my $info;
 		my $image;
 
-		my ($FD,$fileName)=OpenInc($fil);
+		my ($FD,$fileName)=OpenIncludedFile($fil);
 
 		if (!defined($FD))
 		{
@@ -2453,33 +2453,37 @@ sub LoadSWF
     return $xonm;
 }
 
-sub OpenInc
+# Open file named in argument; if the file specification is not
+# absolute, resolve it by searching the include path constructed with
+# the `-I` option.  Return a 2-list.
+#   (file handle or undef, "resolved" file name)
+sub OpenIncludedFile
 {
-    my $fn=shift;
-    my $fnm=$fn;
+    my $arg=shift;
+    my $fileName=undef;
     my $F;
 
-    if (substr($fnm,0,1)  eq '/' or substr($fnm,1,1) eq ':') # dos
+    if (substr($arg,0,1) eq '/' or substr($arg,1,1) eq ':') # dos
     {
-	if (-r $fnm and open($F,"<$fnm"))
+	if (-r $arg and open($F,"<$arg"))
 	{
-	    return($F,$fnm);
+	    return($F,$arg);
 	}
     }
     else
     {
 	foreach my $dir (@idirs)
 	{
-	    $fnm="$dir/$fn";
+	    $fileName="$dir/$arg";
 
-	    if (-r "$fnm" and open($F,"<$fnm"))
+	    if (-r "$fileName" and open($F,"<$fileName"))
 	    {
-		return($F,$fnm);
+		return($F,$fileName);
 	    }
 	}
     }
 
-    return(undef,$fn);
+    return(undef,$arg);
 }
 
 sub LoadPDF

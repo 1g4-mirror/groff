@@ -1,5 +1,18 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl: Refactor.
+	(OpenInc): Rename this subroutine...
+	(OpenIncludedFile): ...to this.  Also rename local scalars for
+	clarity, and give them clearer semantics.  `fn` becomes `arg`,
+	and is the untransformed actual parameter passed in.  Rename
+	`fnm` to `fileName`, which is used only when the subroutine
+	performs a transformation on `arg` (when it is not an absolute
+	filespec, the code tries to locate it by prefixing with elements
+	of the `idirs` list).
+	(do_x): Update call site.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (do_x): Trivially refactor.
 	Rename scalar `FDnm` to `fileName`.
 
