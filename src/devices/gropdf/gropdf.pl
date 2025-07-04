@@ -1231,7 +1231,6 @@ sub LoadDownload
 sub OpenFontFile
 {
     my $f=shift;
-    my $dirs=shift;
     my $fileName=shift;
     my $resolvedFileName;
 
@@ -1267,7 +1266,7 @@ sub LoadDesc
 {
     my $f;
 
-    OpenFontFile(\$f,$fontPath,"DESC");
+    OpenFontFile(\$f,"DESC");
     Die("failed to open device description file 'DESC'")
     if !defined($f);
 
@@ -3434,13 +3433,13 @@ sub LoadFont
     return $fontlst{$fontno}->{OBJ} if (exists($fontlst{$fontno}) and $fontnm eq $fontlst{$fontno}->{FNT}->{name}) ;
 
     my $f;
-    OpenFontFile(\$f,$fontPath,$fontnm);
+    OpenFontFile(\$f,$fontnm);
 
     if (!defined($f) and $Foundry)
     {
 	# Try with no foundry
 	$fontnm=~s/.*?-//;
-	OpenFontFile(\$f,$fontPath,$fontnm);
+	OpenFontFile(\$f,$fontnm);
     }
 
     Die("unable to open font '$ofontnm' for mounting") if !defined($f);
@@ -3615,7 +3614,7 @@ sub GetType1
     my ($head,$body,$tail);	# Font contents
     my $f;
 
-    OpenFontFile(\$f,$fontPath,"$file");
+    OpenFontFile(\$f,"$file");
     Die("unable to open font '$file' for embedding") if !defined($f);
 
     $head=GetChunk($f,1,"currentfile eexec");
