@@ -3,7 +3,7 @@
 # BuildFoundries: Given a Foundry file, generate groff font description
 # files and a "download" file so gropdf can embed fonts in PDF output.
 #
-# Copyright (C) 2011-2020 Free Software Foundation, Inc.
+# Copyright (C) 2011-2025 Free Software Foundation, Inc.
 #      Written by Deri James <deri@chuzzlewit.myzen.co.uk>
 #
 # This file is part of groff.
@@ -210,6 +210,7 @@ sub RunAfmtodit
 	$cmd.=" $flg{$f}";
     }
 
+    Notice("running \"$cmd $enc '$afmfile' $map $gfont\"");
     system("$cmd $enc '$afmfile' $map $gfont");
 
     if ($?)
@@ -387,6 +388,7 @@ sub UseGropsVersion
 
 	if ($psfont)
 	{
+	    Notice("trying to open '$gfontbase' for writing");
 	    if (open(GF,">$gfontbase"))
 	    {
 		local $"='';
@@ -433,7 +435,10 @@ sub LoadDownload
 {
     my $fn=shift;
 
-    return if !open(F,"<$fn");
+    if (!open(F,"<$fn")) {
+	Notice("cannot open '$fn': $!");
+	return;
+    }
 
     while (<F>)
     {

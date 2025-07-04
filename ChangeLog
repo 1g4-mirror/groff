@@ -1,5 +1,16 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devpdf/util/BuildFoundries.pl: Throw more
+	`Notice` (debugging) diagnostic messages...
+	(RunAfmtodit): ...when running `afmtodit`...
+	(UseGropsVersion): ...when trying to open a font description
+	file for writing...
+	(LoadDownload): ...and when the download file cannot be opened.
+
+	Continues fixing Savannah #67268.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (LoadDownload): Skip lines that
 	consist only of whitespace.
 
