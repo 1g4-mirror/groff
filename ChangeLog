@@ -36,8 +36,6 @@
 	* font/devpdf/util/BuildFoundries.pl: Support new `--download`
 	option, taking an input download file as argument and storing it
 	to new `downloadFile` scalar.  Default to "download" as before.
-	(LoadDownload): Throw `notice` diagnostic if we can't open the
-	"download" file, and report the error encountered by `open()`.
 
 	Continues fixing Savannah #67268.
 
