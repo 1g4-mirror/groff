@@ -3514,6 +3514,7 @@ sub LoadFont
     Warn("\nFont '$fnt{internalname} ($ofontnm)' has $lastchr glyphs\n"
 	."You would see a noticeable speedup if you install the perl module Inline::C\n") if !$gotinline and $lastchr > 1000;
 
+    Notice("looking up '$fontkey' to embed font");
     if (exists($download{$fontkey}))
     {
 	# Real font needs subsetting

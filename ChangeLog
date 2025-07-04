@@ -1,5 +1,11 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl (LoadFont): Add a `Notice()` of
+	the key we're looking up in the `download` hash (or, if that
+	fails, the `missing` hash).
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (DOC_PDFMOM): Build documents more verbosely,
 	passing `-P -d` option to pdfmom(1) (and ultimately `-d` to
 	gropdf(1)).
