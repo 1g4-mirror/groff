@@ -134,9 +134,11 @@ sub LoadFoundry
 			{
 			    $gotf=0;
 			    my $fns=join(', ',split('!',$r[5]));
-			    Warn("groff font '$gfont' will not be"
-				 . " available for PDF output; unable"
-				 . " to locate font file(s): $fns");
+			    my $sub=\&Warn;
+			    $sub=\&Die if ($beStrict);
+			    &$sub("groff font '$gfont' will not be"
+				  . " available for PDF output; unable"
+				  . " to locate font file(s): $fns");
 			    $notFoundFont=1;
 			    unlink $gfont;
 			}
@@ -146,7 +148,10 @@ sub LoadFoundry
 		}
 		else
 		{
-		    Warn("Can't read grops font '$r[0]' for Foundry '$foundry'");
+		    my $sub=\&Warn;
+		    $sub=\&Die if ($beStrict);
+		    &$sub("cannot read grops font '$r[0]' for Foundry"
+			  . " '$foundry'");
 		}
 	    }
 	    else
@@ -174,7 +179,10 @@ sub LoadFoundry
 		}
 		else
 		{
-		    Warn("Failed to create groff font '$gfont' by running afmtodit");
+		    my $sub=\&Warn;
+		    $sub=\&Die if ($beStrict);
+		    &$sub("cannot create groff font description file"
+			  . " '$gfont' with afmtodit");
 		    $notFoundFont=1;
 		}
 	    }
@@ -203,7 +211,11 @@ sub RunAfmtodit
     {
 	if (!exists($flg{$f}))
 	{
-	    Warn("Can't use undefined flag '$f' in calling afmtodit for groff font '$gfont'");
+	    my $sub=\&Warn;
+	    $sub=\&Die if ($beStrict);
+	    &$sub("cannot use recognized afmtodir option '$f' when "
+		  . " attempting to create groff font description file"
+		  . " '$gfont'");
 	    return('');
 	}
 
@@ -230,7 +242,10 @@ sub RunAfmtodit
 	}
 	else
 	{
-	    Warn("Unexpected format for grops font '$gfont' for Foundry '$foundry' - ignoring");
+	    my $sub=\&Warn;
+	    $sub=\&Die if ($beStrict);
+	    &$sub("groff font description file '$gfont' for foundry"
+		  . " '$foundry' has unexpected format; ignoring file");
 	}
 
 	close(GF);
@@ -381,7 +396,10 @@ sub UseGropsVersion
 	}
 	else
 	{
-	    Warn("Unexpected format for grops font '$gfont' for Foundry '$foundry' - ignoring");
+	    my $sub=\&Warn;
+	    $sub=\&Die if ($beStrict);
+	    &$sub("groff font description file '$gfont' for foundry"
+		  . " '$foundry' has unexpected format; ignoring file");
 	}
 
 	close(GF);
@@ -398,19 +416,30 @@ sub UseGropsVersion
 	    else
 	    {
 		$psfont='';
-		Warn("Failed to create new font '$gfont' for Foundry '$foundry'");
+		my $sub=\&Warn;
+		$sub=\&Die if ($beStrict);
+		&$sub("cannot create groff font description file"
+		      . " '$gfont' for foundry '$foundry': $!");
 	    }
 	}
 	else
 	{
-	    Warn("Failed to locate postscript internalname in grops font '$gfont' for Foundry '$foundry'");
+	    $psfont='';
+	    my $sub=\&Warn;
+	    $sub=\&Die if ($beStrict);
+	    &$sub("groff font description file '$gfont' for foundry"
+		  . " '$foundry' lacks 'internalname' directive;"
+		  . " ignoring file");
 	}
 
 	close(GF);
     }
     else
     {
-	Warn("Failed to open grops font '$gfont' for Foundry '$foundry'");
+	my $sub=\&Warn;
+	$sub=\&Die if ($beStrict);
+	&$sub("cannot read groff font description file '$gfont' for"
+	      . " foundry '$foundry': $!");
     }
 
     return($psfont);

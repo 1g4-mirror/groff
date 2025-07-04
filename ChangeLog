@@ -1,5 +1,21 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devpdf/util/BuildFoundries.pl: Make `--strict` option
+	stricter, turning more warnings fatal...
+	(LoadFoundry): ...when an embeddable font file is known to be
+	unavailable, when a grops(1) font description file is
+	unreadable, when afmtodit(1) fails [the inference is
+	indirect]...
+	(RunAfmtodit): ...when a font description file has an unexpected
+	format...
+	(UseGropsVersion): ...when a font description file can't be
+	created, when one being read lacks an `internalname` directive,
+	and when the file can't be opened for reading.
+
+	Continues fixing Savannah #67268.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* font/devpdf/util/BuildFoundries.pl: Throw more
 	`Notice` (debugging) diagnostic messages...
 	(RunAfmtodit): ...when running `afmtodit`...
