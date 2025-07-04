@@ -1,5 +1,12 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl (LoadFont): Recast diagnostic
+	message.
+
+	Continues fixing Savannah #66519.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (LoadFont): Add a `Notice()` of
 	the key we're looking up in the `download` hash (or, if that
 	fails, the `missing` hash).

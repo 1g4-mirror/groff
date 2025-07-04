@@ -3538,9 +3538,9 @@ sub LoadFont
 	{
 	    my $sub=\&Warn;
 	    $sub=\&Die if ($makeWarningsFatal);
-	    &$sub("unable to embed font file for '$fnt{internalname}'"
-	    . " ($ofontnm) (missing entry in 'download' file?)")
-	    if $embedall;
+	    &$sub("cannot embed font file for '$fnt{internalname}'; no"
+	    . " 'download' file has an entry for groff font description"
+	    . " file '$ofontnm'") if $embedall;
 	}
     }
 
