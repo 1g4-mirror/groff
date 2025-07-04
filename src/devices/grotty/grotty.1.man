@@ -179,8 +179,11 @@ OSC\~8 hyperlinks are produced for these devices.
 .P
 In keeping with long-standing practice and the rarity of terminals
 (and emulators)
-that support oblique or italic fonts,
-italicized text is represented with underlining by default\[em]but see
+that support slanted
+(oblique or italic) faces,
+.I grotty
+marks italicized character cells with underlines instead
+by default\[em]but see
 the
 .B \-i
 option below.
@@ -367,9 +370,11 @@ is a decimal integer.
 If the 01 bit in
 .I n
 is set,
-then the font is treated as an italic font;
+.I grotty
+treats the font as slanted;
 if the 02 bit is set,
-then it is treated as a bold font.
+.I grotty
+treats the font as bold.
 .
 .\" The following seems to say nothing that is not true of font
 .\" description files in general; if so, it belongs in groff_font(5).
@@ -555,10 +560,7 @@ Tabs are assumed to be set every 8 columns.
 .
 .TP
 .B \-i
-Render oblique-styled fonts
-.RB ( I
-and
-.BR BI )
+Render fonts marked as slanted
 with the SGR attribute for italic text
 rather than underlined text.
 .
@@ -582,10 +584,7 @@ format is in use).
 .
 .TP
 .B \-r
-Render oblique-styled fonts
-.RB ( I
-and
-.BR BI )
+Render fonts marked as slanted
 with the SGR attribute for reverse video text
 rather than underlined text.
 .
