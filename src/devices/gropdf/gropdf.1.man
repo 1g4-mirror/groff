@@ -9,7 +9,7 @@ output driver for Portable Document Format
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 2011-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 2011-2025 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -64,7 +64,7 @@ output driver for Portable Document Format
 .\" ====================================================================
 .
 .SY gropdf
-.RB [ \-dels ]
+.RB [ \-delsW ]
 .RB [ \-F\~\c
 .IR font-directory ]
 .RB [ \-I\~\c
@@ -250,6 +250,15 @@ this makes it easier to search for words which contain ligatures.
 You can include your own CMap by specifying a
 .I cmap-file
 or have no CMap at all by omitting the argument.
+.
+.
+.TP
+.B \-W
+Exit with failure status if font embedding fails.
+.
+Normally,
+.I gropdf
+issues a warning diagnostic and proceeds.
 .
 .
 .\" .TP

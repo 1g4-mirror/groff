@@ -1,3 +1,17 @@
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[gropdf]: Add `-W` option to make font embedding warnings fatal.
+
+	* src/devices/gropdf/gropdf.pl: Add global scalar
+	`makeWarningsFatal`.  Recognize option when calling
+	`GetOptions()`.
+	(LoadFont): Fall over dead if embedding fails.
+
+	* src/devices/gropdf/gropdf.pl (usage):
+	* src/devices/gropdf/gropdf.1.man (Options): Document it.
+
+	Begins fixing Savannah #67268.
+
 2025-07-01  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf] More rational handling of duplicate font entries.

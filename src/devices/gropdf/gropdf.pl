@@ -449,7 +449,7 @@ sub usage
     my $had_error = shift;
     $stream = *STDERR if $had_error;
     print $stream
-"usage: $prog [-dels] [-F font-directory] [-I inclusion-directory]" .
+"usage: $prog [-delsW] [-F font-directory] [-I inclusion-directory]" .
 " [-p paper-format] [-u [cmap-file]] [-y foundry] [file ...]\n" .
 "usage: $prog {-v | --version}\n" .
 "usage: $prog --help\n";
@@ -489,12 +489,13 @@ my %seac;
 my $thisfnt;
 my $parcln=qr/\[[^\]]*?\]|(.)((?!\1).)*\1/;
 my $parclntyp=qr/(?:[\d\w]|\([+-]?[\S]{2}|$parcln)/;
+my $makeWarningsFatal=0;
 
 if (!GetOptions('F=s' => \@fdlist, 'I=s' => \@idirs, 'l' => \$frot,
     'p=s' => \$fpsz, 'd!' => \$debug, 'help' => \$want_help, 'pdfver=f' => \$PDFver,
     'v' => \$version, 'version' => \$version, 'opt=s' => \$options,
     'e' => \$embedall, 'y=s' => \$Foundry, 's' => \$stats,
-    'u:s' => \$unicodemap))
+    'u:s' => \$unicodemap, 'W' => \$makeWarningsFatal))
 {
     &usage(1);
 }
@@ -3533,7 +3534,9 @@ sub LoadFont
 	}
 	else
 	{
-	    Warn("unable to embed font file for '$fnt{internalname}'"
+	    my $sub=\&Warn;
+	    $sub=\&Die if ($makeWarningsFatal);
+	    &$sub("unable to embed font file for '$fnt{internalname}'"
 	    . " ($ofontnm) (missing entry in 'download' file?)")
 	    if $embedall;
 	}
