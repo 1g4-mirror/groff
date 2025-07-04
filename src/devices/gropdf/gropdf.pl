@@ -3405,7 +3405,9 @@ sub LoadFont
     Die("unable to open font '$ofontnm' for mounting") if !defined($f);
 
     my $foundry='';
+    my $foundryDescription="default foundry";
     $foundry=$1 if $fontnm=~m/^(.)-/;
+    $foundryDescription="foundry \"$1\"" if $foundry;
     my $stg=1;
     my %fnt;
     my @fntbbox=(0,0,0,0);
@@ -3532,7 +3534,9 @@ sub LoadFont
 	if (exists($missing{$fontkey}))
 	{
 	    Warn("The download file in '$missing{$fontkey}' "
-	    . " has erroneous entry for '$fnt{internalname} ($ofontnm)'");
+	    . " has erroneous entry for '$fnt{internalname}'"
+	    . " (groff font description file '$ofontnm' from"
+	    . " $foundryDescription)");
 	}
 	else
 	{
@@ -3540,7 +3544,7 @@ sub LoadFont
 	    $sub=\&Die if ($makeWarningsFatal);
 	    &$sub("cannot embed font file for '$fnt{internalname}'; no"
 	    . " 'download' file has an entry for groff font description"
-	    . " file '$ofontnm'") if $embedall;
+	    . " file '$ofontnm' from $foundryDescription") if $embedall;
 	}
     }
 

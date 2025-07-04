@@ -1,5 +1,16 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl: Recast diagnostic messages to
+	describe the default foundry in a less confusing way.  Add new
+	scalar, `foundryDescription`, to store the string "default
+	foundry" when the foundry would otherwise be reported as an
+	empty string, which could mislead the user into thinking that a
+	variable has gone unintentionally unpopulated.
+	(LoadFont): Update phrasing of diagnostics to work with new
+	scalar.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (LoadFont): Recast diagnostic
 	message.
 
