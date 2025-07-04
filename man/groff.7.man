@@ -937,7 +937,9 @@ an em is equal to the current type size in points.
 .TP
 .B n
 En;
-an en is one-half em.
+on typesetters,
+an en is one-half em,
+but on terminals an en equals an em.
 .
 .TP
 .B v

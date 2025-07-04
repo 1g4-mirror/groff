@@ -6302,7 +6302,9 @@ that need to scale with the typeface or vertical spacing.
 @cindex @code{m} scaling unit
 @cindex unit, scaling, @code{m}
 @cindex scaling unit @code{m}
-Em; an em is equal to the current type size in points.  It is named thus
+Em;
+an em is equal to the current type size in points.
+It is named thus
 because it is approximately the width of the letter@tie{}@samp{M}.
 
 @item n
@@ -6310,7 +6312,10 @@ because it is approximately the width of the letter@tie{}@samp{M}.
 @cindex @code{n} scaling unit
 @cindex unit, scaling, @code{n}
 @cindex scaling unit @code{n}
-En; an en is one-half em.
+En;
+on typesetters,
+an en is one-half em,
+but on terminals an en equals an em.
 
 @item v
 @cindex vertical space unit (@code{v})
