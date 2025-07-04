@@ -29,10 +29,11 @@ my $pathsep='@PATH_SEPARATOR@';
 
 my $check=0;
 my $dirURW='';
+my $downloadFile="download";
 my $beStrict=0;
 
 GetOptions("check" => \$check, "dirURW=s" => \$dirURW,
-	   "strict" => \$beStrict);
+	   "download=s" => \$downloadFile, "strict" => \$beStrict);
 
 (my $progname = $0) =~s @.*/@@;
 my $where=shift||'';
@@ -52,7 +53,7 @@ if ($check)
 }
 else
 {
-    LoadDownload("download"); # not required
+    LoadDownload($downloadFile); # not required
     LoadFoundry("Foundry");
     WriteDownload();
 }
