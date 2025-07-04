@@ -43,7 +43,7 @@ DOC_GROFF = \
 DOC_PDFMOM = \
   GROFF_COMMAND_PREFIX= \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
-  $(PDFMOMBIN) $(MFLAG) $(FFLAG) -ww -b --roff
+  $(PDFMOMBIN) $(MFLAG) $(FFLAG) -ww -b -P -W --roff
 
 # This image file is used by several documents in the groff source tree.
 DOC_GNU_EPS = doc/gnu.eps

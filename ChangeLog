@@ -1,5 +1,13 @@
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[doc]: Use new gropdf `-W` option.
+
+	* doc/doc.am (DOC_PDFMOM): Append `-P -W` to `pdfmom` arguments.
+
+	Continues fixing Savannah #67268.
+
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[gropdf]: Add `-W` option to make font embedding warnings fatal.
 
 	* src/devices/gropdf/gropdf.pl: Add global scalar
