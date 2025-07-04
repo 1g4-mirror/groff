@@ -1070,22 +1070,23 @@ which should be a string as described in
 .MR printf 3 ,
 and appropriate to the quantity of arguments supplied.
 .
-Only the modifiers
+GNU
+.I pic
+supports only the conversion specifiers
+.BR e ,
+.BR E ,
+.BR f ,
+.BR g ,
+.BR G ,
+and
+.BR % ,
+modifiers
 .RB \[lq] # \[rq],
 .RB \[lq] \- \[rq],
 .RB \[lq] + \[rq],
 and \[lq]\~\[rq] [space]),
 a minimum field width,
-an optional precision,
-and the conversion specifiers
-.BR %e ,
-.BR %E ,
-.BR %f ,
-.BR %g ,
-.BR %G ,
-and
-.B %%
-are supported.
+and an optional precision.
 .
 .
 .P
