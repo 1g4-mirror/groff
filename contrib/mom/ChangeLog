@@ -1,3 +1,9 @@
+2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* mom.am (MOMPDFMOM): Append `-P -W` to `pdfmom` arguments.
+
+	Continues fixing Savannah #67268.
+
 2025-02-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mom.am: Stop specifying `PDFMOM_BIN_PATH` environment
