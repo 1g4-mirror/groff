@@ -1000,7 +1000,7 @@ to set a paragraph with a short
 .I mark
 that is not semantically important,
 such as a bullet (\[bu])\[em]obtained with the
-.B \e(bu
+.B \e[bu]
 special character escape sequence\[em]or list enumerator,
 as seen in this very paragraph.
 .RE \" Move left margin back to IP indentation.
@@ -1860,11 +1860,11 @@ mentions of individual characters or short strings,
 and (sub)section headings in man pages,
 are suitable for quotation;
 see the
-.BR \e(lq ,
-.BR \e(rq ,
-.BR \e(oq ,
+.BR \e[lq] ,
+.BR \e[rq] ,
+.BR \e[oq] ,
 and
-.B \e(cq
+.B \e[cq]
 escape sequences in subsection \[lq]Portability\[rq] below.
 .
 .
@@ -2314,11 +2314,16 @@ supports others for configuration of rendering parameters;
 see section \[lq]Options\[rq] below.
 .
 .
+.\" In the rest of this section, we retain use of legacy AT&T syntax;
+.\" there seems little point in illustrating groff syntax for features
+.\" of man(7) that users of groff don't need, and should avoid.
+.\"
+.\" Special characters named here are not in AT&T's repertoire.
 .TP 8n \" accommodate "\e*(Tm", hand-tuned for PDF
 .B \e*R
 interpolates a special character escape sequence for the \[lq]registered
 sign\[rq] glyph,
-.BR \e(rg ,
+.BR \e[rg] ,
 if available,
 and \[lq](Reg.)\[rq] otherwise.
 .
@@ -2877,7 +2882,7 @@ widely used in man pages to render a backslash glyph.
 It works reliably as long as the \[lq]ec\[rq] request is not used,
 which should never happen in man pages,
 and it is slightly more portable than the more explicit
-.B \e(rs
+.B \e[rs]
 (\[lq]reverse solidus\[rq]) special character escape sequence.
 .
 .
@@ -3010,7 +3015,7 @@ some output devices format it as U+2010
 .
 .
 .TP
-.B \e(aq
+.B \e[aq]
 Basic Latin neutral apostrophe.
 .
 Some output devices format
@@ -3019,9 +3024,9 @@ as a right single quotation mark.
 .
 .
 .TP
-.B \e(oq
+.B \e[oq]
 .TQ
-.B \e(cq
+.B \e[cq]
 Opening (left) and closing (right) single quotation marks.
 .
 Use these for paired directional single quotes,
@@ -3029,7 +3034,7 @@ Use these for paired directional single quotes,
 .
 .
 .TP
-.B \e(dq
+.B \e[dq]
 Basic Latin quotation mark
 (double quote).
 .
@@ -3046,7 +3051,7 @@ as an argument delimiter.
 .\" from src/preproc/eqn/eqn.1.man
 .EX
 \&.TP
-\&.BI \[dq]split \e(dq\[dq] text \e(dq
+\&.BI \[dq]split \e[dq]\[dq] text \e[dq]
 .EE
 .RE
 .
@@ -3056,9 +3061,9 @@ as an argument delimiter.
 .\" interaction with TP's own use of the ne request.
 .ne 4v
 .TP
-.B \e(lq
+.B \e[lq]
 .TQ
-.B \e(rq
+.B \e[rq]
 Left and right double quotation marks.
 .
 Use these for paired directional double quotes,
@@ -3066,14 +3071,14 @@ Use these for paired directional double quotes,
 .
 .
 .TP
-.B \e(em
+.B \e[em]
 Em dash.
 .
 Use for an interruption\[em]such as this one\[em]in a sentence.
 .
 .
 .TP
-.B \e(en
+.B \e[en]
 En dash.
 .
 Use to separate the ends of a range,
@@ -3083,7 +3088,7 @@ for example,
 .
 .
 .TP
-.B \e(ga
+.B \e[ga]
 Basic Latin grave accent.
 .
 Some output devices format
@@ -3092,7 +3097,7 @@ as a left single quotation mark.
 .
 .
 .TP
-.B \e(ha
+.B \e[ha]
 Basic Latin circumflex accent
 (\[lq]hat\[rq]).
 .
@@ -3103,7 +3108,7 @@ as U+02C6
 .
 .
 .TP
-.B \e(rs
+.B \e[rs]
 Reverse solidus
 (backslash).
 .
@@ -3118,7 +3123,7 @@ above.
 .
 .
 .TP
-.B \e(ti
+.B \e[ti]
 Basic Latin tilde.
 .
 Some output devices format
@@ -3713,8 +3718,8 @@ Set section headings
 .BR SH )
 in full capitals.
 .
-This transformation is off by default because it discards case
-distinction information.
+This transformation is off by default because it discards lettercase
+distinctions.
 .
 .
 .TP
@@ -3724,8 +3729,8 @@ Set the man page identifier
 .BR TH )
 in full capitals in headers and footers.
 .
-This transformation is off by default because it discards case
-distinction information.
+This transformation is off by default because it discards lettercase
+distinctions.
 .
 .
 .TP
