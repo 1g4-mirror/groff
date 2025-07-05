@@ -4375,15 +4375,20 @@ not a mounting position.
 .TP
 .BR .cf\~ [ \[dq] ]\c
 .I file
-In a diversion,
-embed an object which,
-when interpolated,
-will cause the contents of
+Break and copy the contents of
 .I file
-to be copied verbatim to the output.
+as \[lq]throughput\[rq] to
+GNU
+.IR troff 's \" GNU
+output.
+.
+If a diversion is in use,
+GNU
+.I troff \" GNU
+performs the copy only when the diversion is emitted.
 .
 In AT&T
-.IR troff ,
+.IR troff , \" AT&T
 the contents of
 .I file
 are immediately copied to the output regardless of whether a diversion

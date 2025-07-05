@@ -17310,10 +17310,10 @@ in
 @cindex @code{trf} request, and copy mode
 @cindex copy mode, and @code{trf} request
 @cindex mode, copy, and @code{trf} request
-Copy
+Break and copy the contents of
 @var{file}
 as ``throughput'' to GNU
-@command{troff}
+@command{troff}'s
 output.
 Each line of
 @var{file}
@@ -17328,10 +17328,10 @@ appends one.
 Both requests break the line before reading
 @var{file},
 unless invoked with the no-break control character.
-
-When used in a diversion, these requests embed a node (@pxref{Gtroff
-Internals}) in it that, when interpolated, copies the contents of
-@var{file} to the output.
+If a diversion is in use,
+GNU
+@command{troff} @c GNU
+performs the copy only when the diversion is emitted.
 
 @cindex @code{trf} request, and invalid characters
 @cindex characters, invalid for @code{trf} request
