@@ -252,7 +252,7 @@ troff
 
 *  In compatibility mode, GNU troff now accepts delimiters that it
    rejects when not in compatibility mode--namely, ordinary characters
-   that are meaningful in numeric expressions (which are often
+   that can validly begin numeric expressions (which are often
    delimited).  This change improves compatibility with AT&T troff.
 
 eqn
@@ -681,8 +681,8 @@ Output drivers
    a standard PDF font.  Formerly, groff's "pdf.tmac" file defined
    fallback characters for lowercase Greek letters, applying a slant of
    16 degrees to the upright glyphs available in the standard symbol
-   font "S".  That technique produced glyphs that were slightly too
-   large for those accustomed to grops's "SS" font.
+   font "S".  That technique produced glyphs slightly larger than those
+   in grops's "SS" font.  Thanks to Deri James.
 
 *  grops(1), the PostScript output driver, now supports fonts encoded
    using UTF-16.  Indicate the encoding by including the string
