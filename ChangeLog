@@ -9,7 +9,7 @@
 	emit a `Notice()` that we're not overwriting it.  If we are
 	rewriting it, emit the aforementioned notice here, where it
 	happens.  Drop redundant/unnecessary (depending on whether a
-	file open was sucessfule) close of `GF` file handle.
+	file open was sucessful) close of `GF` file handle.
 
 	* font/devpdf/devpdf.am: Tidy up for better build reliability.
 	(font/devpdf/util/BuildFoundries): Stop manipulating the
