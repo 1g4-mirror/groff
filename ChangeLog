@@ -50,8 +50,9 @@
 	(RunAfmtodit): ...when a font description file has an unexpected
 	format...
 	(UseGropsVersion): ...when a font description file can't be
-	created, when one being read lacks an `internalname` directive,
-	and when the file can't be opened for reading.
+	created ("copied" with potential modification of relative file
+	specifications), when one being read lacks an `internalname`
+	directive, and when the file can't be opened for reading.
 
 	Continues fixing Savannah #67268.
 
