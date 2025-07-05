@@ -655,9 +655,9 @@ GNU \fBgpic\fP supports arbitrary polygons constructed with the same syntax as m
 .KS
 .PS
 POLY: polygon up 1 then down 0.5 right 1;
-"up 1" rjust at POLY.p`1' + (-0.1, 0.0);
-"down 0.5 right 1" ljust at POLY.p`2' + (0.0, 0.1);
-"automatically drawn" ljust at POLY.p`3' + (0.0, -0.1);
+"up 1" rjust at POLY.mid`1' + (-0.1, 0.0);
+"down 0.5 right 1" ljust at POLY.mid`2' + (0.0, 0.1);
+"automatically drawn" ljust at POLY.mid`3' + (0.0, -0.1);
 .PE
 .CE "5: \fBpolygon up 1 then down 0.5 right 1\fP"
 .LP
@@ -1284,14 +1284,31 @@ critical(spline right 1 then up right then left then left 1);
 .NH 4
 Locations Relative to Polygons
 .PP
-Polygons have three types of named points: (\fB.vertex\fP, \fB.ver\fP, \fB.v\fP), (\fB.point\fP, \fB.p\fP), and (\fB.center\fP, \fB.c\fP).
-They can also be used without leading dots in the \fBof\fP prefix form.
-The center of a polygon is the centroid, and may give unexpected results for non-simple polygons.
+Polygons have three types of reference points:
+.I vertices
+(\fB.vertex\fP, \fB.ver\fP, \fB.v\fP),
+.I midpoints
+of edges between the vertices
+(\fB.midpoint\fP, \fB.mid\fP),
+and a
+.I center
+(\fB.center\fP, \fB.c\fP).
+Reference points can be used
+without leading dots in the \fBof\fP prefix form.
+The center of a polygon is the centroid,
+and may give unexpected results for non-simple polygons.
 .PP
-\fB.v\fP and \fB.p\fP locate the vertices and mid-points of the edges, respectively. They can be used in the forms \fB.v\fP \fIexpr\fR
-, or \fB.v\fP \[ga]\fIexpr\fR\[aq].
-The latter is required when the vertex/point expression is followed by an additional expression,
-as \fBpic\fP will otherwise attempt to reduce them to a single expression.
+GNU
+.B pic
+numbers vertices and midpoints in drawing order starting from
+.B 1 .
+Express them in the forms \fB.v\fP \fIexpr\fR
+or
+\fB.v\fP \[ga]\fIexpr\fR\[aq].
+The latter is required when the vertex/point expression is followed
+by an additional expression,
+as \fBpic\fP otherwise attempts to reduce them
+to a single expression.
 For example,
 .IP
 .KS
@@ -1300,7 +1317,7 @@ For example,
 for i = 1 to n do {
    circle rad 0.05 fill 1 at last polygon.vi
 }
-circle rad 0.05 fill 1 at last polygon.p \[ga]1\[aq] + (0.0,0.1)
+circle rad 0.05 fill 1 at last polygon.mid \[ga]1\[aq] + (0.0,0.1)
 .DE
 .R
 .KE
@@ -1313,14 +1330,14 @@ define vertices {
 		dot(VER.c);	"\fB.center\fP"	at VER.center + (0.0, 0.1)
 		for i = 1 to $2 do {
 			dot(VER.vi);
-			dot(VER.pi);
+			dot(VER.midi);
 		}
 		"\fB.v1\fP" at VER.v`1' + (-0.1, -0.1);
 		"\fB.v2\fP" at VER.v`2' + (-0.1, 0.1);
 		"\fB.v3\fP" at VER.v`3' + (0.1, 0.1);
-		"\fB.p1\fP" at VER.p`1' + (-0.1, 0.1);
-		"\fB.p2\fP" at VER.p`2' + (0.1, 0.1);
-		"\fB.p3\fP" at VER.p`3' + (0.1, -0.1);
+		"\fB.mid1\fP" at VER.mid`1' + (-0.1, 0.1);
+		"\fB.mid2\fP" at VER.mid`2' + (0.1, 0.1);
+		"\fB.mid3\fP" at VER.mid`3' + (0.1, -0.1);
 	]
 }
 vertices(polygon up 1 then down 0.5 right 1, 3);
@@ -3137,9 +3154,9 @@ There are lots of different ways to specify positions:
 <place> ::=
   <label>
   <label> <corner>
-  <label> <vertex>
+  <label> <reference-point>
   <corner> [of] <label>
-  <vertex> of <label>
+  <reference-point> of <label>
   Here
 .R
 .DE
@@ -3165,11 +3182,11 @@ There are lots of different ways to specify positions:
 .DE
 .DS
 .CW
-<vertex> ::=
+<reference-point> ::=
   .v[er[tex]] <expr>
   .v[er[tex]] \[ga] <expr> \[aq]
-  .p[oint] <expr>
-  .p[oint] \[ga] <expr> \[aq]
+  .mid[point] <expr>
+  .mid[point] \[ga] <expr> \[aq]
 .R
 .DE
 .DS

@@ -179,7 +179,7 @@ char *do_sprintf(const char *fmt, const double *v, int nv);
 %token DOT_NW
 %token DOT_SW
 %token DOT_C
-%token DOT_P
+%token DOT_MID
 %token DOT_V
 %token DOT_START
 %token DOT_END
@@ -275,7 +275,7 @@ parses properly. */
 
 /* these must have higher precedence than CHOP so that 'label %prec CHOP'
 works */
-%left DOT_N DOT_E DOT_W DOT_S DOT_NE DOT_SE DOT_NW DOT_SW DOT_C DOT_P DOT_V
+%left DOT_N DOT_E DOT_W DOT_S DOT_NE DOT_SE DOT_NW DOT_SW DOT_C DOT_MID DOT_V
 %left DOT_START DOT_END TOP BOTTOM LEFT_CORNER RIGHT_CORNER
 %left UPPER LOWER NORTH SOUTH EAST WEST CENTER START END
 
@@ -1571,13 +1571,13 @@ vertex:
 		  $$.crn = &object::vertex;
 		  $$.vertex_number = $3;
 		}
-	| DOT_P expr
+	| DOT_MID expr
 		{
 		  $$.crn = &object::point;
 		  $$.vertex_number = $2;
 		  $$.is_edge = 1;
 		}
-	| DOT_P '`' expr '\''
+	| DOT_MID '`' expr '\''
 		{
 		  $$.crn = &object::point;
 		  $$.vertex_number = $3;

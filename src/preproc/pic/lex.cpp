@@ -892,28 +892,41 @@ int get_token_after_dot(int c)
     }
     context_buffer = ".v";
     return DOT_V;
-  case 'p':
+  case 'm':
     input_stack::get_char();
     c = input_stack::peek_char();
-    if (c == 'o') {
+    if (c == 'i') {
       input_stack::get_char();
       c = input_stack::peek_char();
-      if (c == 'i') {
+      if (c == 'd') {
 	input_stack::get_char();
 	c = input_stack::peek_char();
-	if (c == 'n') {
+	if (c == 'p') {
 	  input_stack::get_char();
 	  c = input_stack::peek_char();
-	  if (c == 't') {
+	  if (c == 'o') {
 	    input_stack::get_char();
-	    context_buffer = ".point";
-	    return DOT_P;
+	    c = input_stack::peek_char();
+	    if (c == 'i') {
+	      input_stack::get_char();
+	      c = input_stack::peek_char();
+	      if (c == 'n') {
+		input_stack::get_char();
+		c = input_stack::peek_char();
+		if (c == 't') {
+		  input_stack::get_char();
+		  context_buffer = ".midpoint";
+		  return DOT_MID;
+		}
+	      }
+	    }
 	  }
 	}
+	context_buffer = ".mid";
+	return DOT_MID;
       }
     }
-    context_buffer = ".p";
-    return DOT_P;
+    // fall through
   default:
     context_buffer = '.';
     return '.';

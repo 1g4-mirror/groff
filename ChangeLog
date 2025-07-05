@@ -1,3 +1,19 @@
+2025-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[pic]: Adjust new polygon feature.  Adopt the term "reference
+	points" for object-relative locators, and rename the `.p[oint]`
+	specimen thereof to `.mid[point]`.
+
+	* src/preproc/pic/lex.cpp (get_token_after_dot):
+	* src/preproc/pic/yex.cpp: Rename `DOT_P` symbol/token to
+	`DOT_MID`.
+	* src/preproc/pic/lex.cpp (get_token_after_dot): Recognize `mid`
+	and `midpoint`, rather than `p` and `point`, as token `DOT_MID`
+	instead of `DOT_P`.
+
+	Fixes <https://savannah.gnu.org/bugs/?67250>.  Thanks to Doug
+	McIlroy for the discussion.
+
 2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/addftinfo/addftinfo.cpp (usage): Summarize purpose

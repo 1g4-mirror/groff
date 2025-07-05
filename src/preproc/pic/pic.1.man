@@ -1329,26 +1329,52 @@ and
 .B \%shaded
 attributes may be used.
 .
-The final drawing position and direction are specified by the last
-user-specified line segment.
+The last user-specified line segment determines the polygon's
+final drawing position and direction.
+.
 For example,
 draw and fill a triangle
 with the following.
-.IP
+.
+.
+.RS
+.P
 .EX
 polygon up 1 then right 1 down 0.5 fill 0.5
 .EE
-.LP
-To position polygons,
-two new suffixes are available:
-.RB \[lq] .v
-.IR expr \[rq]
-for locating the vertices,
-and
-.RB \[lq] .p
-.IR expr \[rq]
-for locating the center points of edges.
+.RE
 .
+.
+.P
+Two reference point suffixes permit the positioning
+of drawing elements relative to a polygon.
+.
+.RB \[lq] .vertex
+.IR expr \[rq]
+locates the vertices,
+and
+.RB \[lq] .midpoint
+.IR expr \[rq]
+for locating the midpoints of edges.
+.
+GNU
+.B pic
+numbers vertices and midpoints in drawing order starting from
+.B 1 .
+.
+You can abbreviate
+.B \%.vertex
+as
+.B .v
+or
+.BR .ver ,
+and
+.B \%.midpoint
+as
+.BR .mid .
+.
+.
+.P
 For example,
 .IP
 .EX
@@ -1364,9 +1390,13 @@ arrow down from last polygon.v4
 .P
 creates and correctly places a flowchart decision diamond.
 .
-.B .c
-is also available but the compass points will not work as expected and
-should not be used with polygons.
+.
+.P
+.B \%.center
+.RB ( .c )
+is also available,
+but compass points do not work as expected
+and should not be used with polygons.
 .
 .
 .\" ====================================================================

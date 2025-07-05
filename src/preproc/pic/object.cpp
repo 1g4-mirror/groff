@@ -1474,7 +1474,7 @@ protected:
   int vertex_number;
 public:
   polygon_object(const position &s, const position &e, position *, int);
-  position point();		// Select center point between two vertices
+  position point();		// Select midpoint between two vertices
   position vertex();		// Select vertex
   position center();		// Calculate centroid of the polygon
   void set_vertex_number(int);
