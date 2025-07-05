@@ -679,20 +679,18 @@ ZapfChancery-MediumItalic
 .P
 Special fonts include
 .BR S ,
-the PostScript Symbol font,
-and
+the PostScript Symbol font;
+.BR SS ,
+a subset of
+.B S
+with slanted lowercase Greek letters;
 .BR EURO ,
-which offers a Euro glyph for use with old devices lacking it.
-.
-.\" XXX: This is expected to change in groff 1.24.
-Lowercase Greek letters are automatically slanted to match the
-SymbolSlanted font
-.RB ( SS )
-available to
-.MR grops @MAN1EXT@ .
-.
-Zapf Dingbats is available as
-.BR ZD .
+which offers a Euro glyph
+in several styles
+for use with old devices lacking it;
+and
+.BR ZD ,
+Zapf Dingbats.
 .
 In contrast to
 .I grops ,
@@ -707,16 +705,22 @@ since it is defined using the
 device extension command
 (see below).
 .
-Most glyphs in these fonts are unnamed and must be accessed using
-.BR \[rs]N .
+Some glyphs in these fonts are unnamed and must be accessed
+as indexed characters,
+using the
+.B \[rs]N
+escape sequence.
 .
+.P
+The fonts corresponding to
 .B EURO
-is not a standard PDF font,
-but supplied by
+and
+.B SS
+are unknown to the PDF standard;
 .I groff
-and therefore included in the default
-.I download
-file.
+therefore provides their AFM files
+(font metrics)
+and PFA or PFB files to ease their use with other applications.
 .
 .
 .P
@@ -1967,6 +1971,14 @@ device's downloadable font support).
 is a data file used by the
 .I groff
 build system to locate PostScript Type\~1 fonts.
+.
+.
+.TP
+.I @FONTDIR@/\:\%devpdf/\%StandardSymbolSL.pfb
+supplies the slanted symbol font known to
+.I groff
+as
+.BR SS .
 .
 .
 .TP
