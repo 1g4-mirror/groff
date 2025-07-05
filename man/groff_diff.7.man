@@ -4095,9 +4095,10 @@ suppresses the break.
 .
 .TP
 .BI .trin\~ abcd
-This is the same as the
+As the
 .B tr
-request except that the
+request,
+but the
 .B \%asciify
 request uses the character code
 (if any)
@@ -4106,9 +4107,10 @@ before the character translation.
 .
 .TP
 .BI .trnt\~ abcd
-This is the same as the
+As the
 .B tr
-request except that the translations do not apply to text that is
+request,
+but the translations do not apply to text that is
 transparently throughput into a diversion with
 .BR \[rs]! .
 .
