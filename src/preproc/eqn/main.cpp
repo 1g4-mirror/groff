@@ -350,7 +350,7 @@ int main(int argc, char **argv)
       compatible_flag = 1;
       break;
     case 'R':			// don't load eqnrc
-      want_startup_file = true;
+      want_startup_file = false;
       break;
     case 'M':
       config_macro_path.command_line_dir(optarg);

@@ -1,3 +1,9 @@
+2025-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/eqn/main.cpp (main): Actually set
+	`want_startup_file` to `false` when `-R` option is seen.
+	Problem introduced by me in commit d22a547b9b, 27 August 2023.
+
 2025-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[pic]: Adjust new polygon feature.  Adopt the term "reference
