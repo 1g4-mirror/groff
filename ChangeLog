@@ -57,6 +57,21 @@
 	(warn_if_font_name_deprecated): Use compatible type for vector
 	iterator.
 
+2025-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[devps]: Stop generating "symbol.map" from "symbolchars".
+
+	* font/devpdf/devpdf.am (devpdffontdata): Drop
+	"font/devpdf/map/symbolchars".
+	* font/devps/devps.am (DEVPSGENFILES): Drop "symbol.map" and
+	"symbolchars".  Add "symbolsl.awk".
+	* font/devps/generate/Makefile ($(srcdir)/symbol.map): Drop
+	target.
+	(clean): Stop cleaning "$(srcdir)/symbol.map".
+	* font/devps/generate/symbolchars: Delete.
+
+	Begins a build refactoring motivated by Savannah #66876.
+
 2025-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/afmtodit/afmtodit.pl: Throw separate diagnostic
@@ -204,7 +219,7 @@
 	emit a `Notice()` that we're not overwriting it.  If we are
 	rewriting it, emit the aforementioned notice here, where it
 	happens.  Drop redundant/unnecessary (depending on whether a
-	file open was sucessful) close of `GF` file handle.
+	file open was successful) close of `GF` file handle.
 
 	* font/devpdf/devpdf.am: Tidy up for better build reliability.
 	(font/devpdf/util/BuildFoundries): Stop manipulating the
@@ -284,7 +299,8 @@
 	* src/devices/gropdf/gropdf.pl: Add global scalar
 	`makeWarningsFatal`.  Recognize option when calling
 	`GetOptions()`.
-	(LoadFont): Fall over dead if embedding fails.
+	(LoadFont): Fall over dead if embedding fails and if
+	`makeWarningsFatal` is true.
 
 	* src/devices/gropdf/gropdf.pl (usage):
 	* src/devices/gropdf/gropdf.1.man (Options): Document it.
@@ -317,7 +333,7 @@
 
 	[troff]: Add experimental, undocumented global node dumping
 	feature.  This essentially produces a graph of the internal
-	representation of the entire input.  (It's a forest, with one
+	representation of the entire output.  (It's a forest, with one
 	tree per output line.)
 
 	* src/roff/troff/input.h: Declare new global Boolean,
