@@ -1,5 +1,13 @@
 2025-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn]: Regression-test Savannah #67285.
+
+	* src/preproc/eqn/tests/\
+	passes-through-input-with-eighth-bit-set.sh: Do it.
+	* src/preproc/eqn/eqn.am (eqn_TESTS): Run test.
+
+2025-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/main.cpp (main): Actually set
 	`want_startup_file` to `false` when `-R` option is seen.
 	Problem introduced by me in commit d22a547b9b, 27 August 2023.
