@@ -85,10 +85,18 @@ static bool read_line(FILE *fp, string *p)
 {
   p->clear();
   int c = -1;
+  bool seen_backslash = false;
+  bool in_comment = false;
   while ((c = getc(fp)) != EOF) {
-    if (!is_invalid_input_char(c))
-      *p += char(c);
+    // Don't throw invalid input errors inside *roff comments.
+    if (seen_backslash && (('"' == c) || ('#' == c)))
+      in_comment = true;
+    if ('\\' == c)
+      seen_backslash = true;
     else
+      seen_backslash = false;
+    *p += char(c);
+    if (is_invalid_input_char(c) && !in_comment)
       error("invalid input (%1)", input_char_description(c));
     if (c == '\n')
       break;

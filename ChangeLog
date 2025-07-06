@@ -1,5 +1,21 @@
 2025-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn]: Fix Savannah #67285.
+
+	* src/preproc/eqn/main.cpp (read_line): Stop discarding invalid
+	input characters, as this function doesn't know whether we're
+	reading an eqn region.  Keep track of whether we've seen the
+	default *roff escape character (`\`) and a `"` or `#`
+	immediately after one.  If so, stop throwing warnings about
+	these characters as well.  ("lex.cpp"'s
+	`file_input::read_line()` independently checks for invalid
+	character codes encountered when _interpreting_ the input.)
+
+	Fixes <https://savannah.gnu.org/bugs/?67285>.  Problem dates
+	back at least to groff 1.02, 2 June 1991.
+
+2025-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn]: Regression-test Savannah #67285.
 
 	* src/preproc/eqn/tests/\
