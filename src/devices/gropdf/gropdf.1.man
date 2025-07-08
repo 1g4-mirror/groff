@@ -700,7 +700,9 @@ does not require a reversed variant of it
 the \[lq]hand pointing left\[rq] glyph
 .RB ( \[rs][lh] )
 is available nevertheless,
-since it is defined using the
+since
+.I \%pdf.tmac
+defines it using the
 .B \[rs]X\[aq]pdf: xrev\[aq]
 device extension command
 (see below).
@@ -720,7 +722,9 @@ are unknown to the PDF standard;
 .I groff
 therefore provides their AFM files
 (font metrics)
-and PFA or PFB files to ease their use with other applications.
+and PFA or PFB files
+so that they can be used with other software
+and embedded in PDF output.
 .
 .
 .P
