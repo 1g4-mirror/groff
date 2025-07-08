@@ -3490,8 +3490,8 @@ const char *environment::get_requested_point_size_string()
 
 void environment::print_env()
 {
-  // at the time of calling .pev, those values are always zero or
-  // meaningless:
+  // At the time this request is invoked, the following values are zero
+  // or meaningless.
   //
   //   char_height, char_slant,
   //   line_interrupted
@@ -3513,9 +3513,9 @@ void environment::print_env()
 	     prev_family->nm.contents());
     errprint("  default family: '%1'\n", family->nm.contents());
   }
-  errprint("  previous font selection: %1 ('%2')\n", prev_fontno,
-	   get_font_name(prev_fontno, this).contents());
-  errprint("  font selection: %1 ('%2')\n", fontno,
+  errprint("  previous resolved font selection: %1 ('%2')\n",
+	   prev_fontno, get_font_name(prev_fontno, this).contents());
+  errprint("  resolved font selection: %1 ('%2')\n", fontno,
 	   get_font_name(fontno, this).contents());
   errprint("  space size: %1/12 of font space width\n", space_size);
   errprint("  sentence space size: %1/12 of font space width\n",

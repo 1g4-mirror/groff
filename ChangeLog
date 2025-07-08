@@ -1,3 +1,11 @@
+2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::print_env): Tweak output;
+	describe current and previous font selections as "resolved",
+	since if the font position of an abstract style is selected,
+	that's not what shows up here, because the abstract style is
+	combined with the default family.
+
 2025-07-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[eqn]: Fix Savannah #67285.
