@@ -971,9 +971,7 @@ request.
 Setting
 .CW \[rs]n[HY]
 .CW 0 "" to\~
-is equivalent to using the
-.CW nh
-request.
+disables automatic hyphenation.
 .
 This is a Research Tenth Edition Unix extension.
 .KE

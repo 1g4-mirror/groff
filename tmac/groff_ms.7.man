@@ -663,9 +663,7 @@ request.
 Setting
 .B \[rs]n[HY]
 .RB to\~ 0
-is equivalent to using the
-.B nh
-request.
+disables automatic hyphenation.
 .
 This is a Research Tenth Edition Unix extension.
 .
