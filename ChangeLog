@@ -141,12 +141,6 @@
 
 2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/devices/gropdf/gropdf.pl: Trivially refactor.  Rename
-	global scalar `fontdir` to `fontPath`.
-	(LoadDownload, LoadFont, GetType1): Update dereference sites.
-
-2025-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* src/devices/gropdf/gropdf.pl (OpenFontFile): Refactor.  Rename
 	scalar `fnm` to `fileName`.  Add scalar `resolvedFileName`,
 	recording the file specification actually opened in the event of
