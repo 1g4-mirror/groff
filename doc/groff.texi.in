@@ -4312,7 +4312,7 @@ past,@footnote{Unix Version@tie{}7 @file{ms}, its descendants, and GNU
 was used for the line length in footnotes; however, setting this
 register at document initialization time had no effect on the footnote
 line length in multi-column arrangements.@footnote{You could reset it
-after each call to @code{.1C}, @code{.2C}, or @code{.MC}.}
+after each call to @code{1C}, @code{2C}, or @code{MC}.}
 
 @code{FR} should be used in preference to the old @code{FL} register in
 contemporary documents.  The footnote line length is effectively

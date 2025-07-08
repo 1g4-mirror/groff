@@ -1,7 +1,7 @@
 .\" groff -ept -ms
 .\"
 .\" Copyright (C) 2001 Larry Kollar
-.\" Copyright (C) 2020-2024 G. Branden Robinson
+.\" Copyright (C) 2020-2025 G. Branden Robinson
 .\"
 .\" This file is part of groff.
 .\"
@@ -170,10 +170,10 @@ is a formatting instruction to
 Put a macro call on a line by itself.
 .
 Use
-.CW .PP
+.CW PP
 if you want your paragraph's first line indented,
 or
-.CW .LP
+.CW LP
 if you don't.
 .KE
 .
@@ -673,9 +673,9 @@ at the top of the first page.
 .
 .PP
 Define these data by calling the macros below in the order shown;
-.CW .DA
+.CW DA
 or
-.CW .ND
+.CW ND
 can be called to set the document date
 (or other identifier)
 at any time before (a) the abstract,
@@ -684,18 +684,18 @@ or (b) its information is required in a header or footer.
 .
 Use of these macros is optional,
 except that
-.CW .TL
+.CW TL
 is mandatory if any of
-.CW .RP ,
-.CW .AU ,
-.CW .AI ,
+.CW RP ,
+.CW AU ,
+.CW AI ,
 or
-.CW .AB
+.CW AB
 is called,
 and
-.CW .AE
+.CW AE
 is mandatory if
-.CW .AB
+.CW AB
 is called.
 .
 .
@@ -727,7 +727,7 @@ subsequently
 macro below regarding the date).
 .
 Normally,
-.CW .RP
+.CW RP
 sets the page number following the cover page to\~1.
 .
 Specifying the optional
@@ -748,8 +748,8 @@ Specify the document title.
 .I ms
 collects text on input lines following this call into the title
 until reaching
-.CW .AU ,
-.CW .AB ,
+.CW AU ,
+.CW AB ,
 or a heading or paragraphing macro call.
 T}
 _
@@ -759,10 +759,10 @@ Specify an author's name.
 .I ms
 collects text on input lines following this call into the author's name
 until reaching
-.CW .AI ,
-.CW .AB ,
+.CW AI ,
+.CW AB ,
 another
-.CW .AU ,
+.CW AU ,
 or a heading or paragraphing macro call.
 .
 Call it repeatedly to specify multiple authors.
@@ -772,20 +772,20 @@ _
 Specify the preceding author's institutional affiliation.
 .
 An
-.CW .AU
+.CW AU
 call is usefully followed by at most one
-.CW .AI
+.CW AI
 call;
 if there are more,
 the last
-.CW .AI
+.CW AI
 call controls.
 .
 .I ms
 collects text on input lines following this call into the author's
 institution until reaching
-.CW .AU ,
-.CW .AB ,
+.CW AU ,
+.CW AB ,
 or a heading or paragraphing macro call.
 T}
 _
@@ -796,7 +796,7 @@ or any
 in the center footer,
 and,
 if
-.CW .RP
+.CW RP
 is also called,
 left-aligned at the end of the document description on the cover page.
 T}
@@ -806,7 +806,7 @@ Typeset the current date,
 or any
 .I x , arguments\~
 if
-.CW .RP
+.CW RP
 is also called,
 left-aligned at the end of the document description on the cover page.
 .
@@ -821,7 +821,7 @@ Begin the abstract.
 .I ms
 collects text on input lines following this call into the abstract
 until reaching an
-.CW .AE
+.CW AE
 call.
 .
 By default,
@@ -1104,7 +1104,7 @@ its default unit is
 Once specified,
 .I width
 applies to further
-.CW .IP
+.CW IP
 calls until specified again or a heading or different paragraphing macro
 is called.
 T}
@@ -1127,9 +1127,9 @@ a region where each paragraph is indented from both margins by
 .CW \[rs]n[QI] .
 .
 The text between
-.CW .QS
+.CW QS
 and
-.CW .QE
+.CW QE
 can be structured further by use of other paragraphing macros.
 T}
 _
@@ -1327,7 +1327,7 @@ T}
 .
 .PP
 After
-.CW .NH
+.CW NH
 is called,
 the assigned number is made available in the strings
 .CW SN\-DOT
@@ -1368,7 +1368,7 @@ lf(CR).
 .LP
 Any such change in numbering style becomes effective from the next use
 of
-.CW .NH
+.CW NH
 following redefinition of the alias for
 .CW \[rs]*[SN\-STYLE] .
 .
@@ -1380,9 +1380,9 @@ for example,
 table captions,
 equation labels,
 and
-.CW .XS /\c
-.CW .XA /\c
-.CW .XE
+.CW XS /\c
+.CW XA /\c
+.CW XE
 table of contents entries.
 .
 .
@@ -1401,7 +1401,7 @@ argument is a GNU extension indicating the heading depth corresponding
 to the
 .I depth
 argument of
-.CW .NH .
+.CW NH .
 .
 It matches the type size at which the heading is set to that of a
 numbered heading at the same depth when the
@@ -1464,9 +1464,9 @@ if the value of
 register is greater than the
 .I depth
 argument to a
-.CW .NH
+.CW NH
 or
-.CW .SH
+.CW SH
 call,
 the type size of a heading produced by these macros increases by
 .CW \[rs]n[PSINCR]
@@ -1618,7 +1618,7 @@ T}
 _
 \&.R \f[R][\f[I]text\f[] [\f[I]post\f[] [\f[I]pre\f[]]]]	T{
 As
-.CW .B ,
+.CW B ,
 but use the roman style
 (upright text of normal weight)
 instead of bold.
@@ -1628,7 +1628,7 @@ T}
 _
 \&.I \f[R][\f[I]text\f[] [\f[I]post\f[] [\f[I]pre\f[]]]]	T{
 As
-.CW .B ,
+.CW B ,
 but use an
 .I italic
 or oblique style instead of bold.
@@ -1636,7 +1636,7 @@ T}
 _
 \&.BI \f[R][\f[I]text\f[] [\f[I]post\f[] [\f[I]pre\f[]]]]	T{
 As
-.CW .B ,
+.CW B ,
 but use a
 .BI "bold italic"
 or bold oblique style instead of upright bold.
@@ -1647,7 +1647,7 @@ T}
 _
 \&.CW \f[R][\f[I]text\f[] [\f[I]post\f[] [\f[I]pre\f[]]]]	T{
 As
-.CW .B ,
+.CW B ,
 but use a
 .CW constant-width
 (monospaced) roman typeface instead of bold.
@@ -1835,7 +1835,7 @@ Because changes to
 .CW \[rs]*[FAM]
 take effect only at the next paragraph,
 this document uses
-.CW .CW
+.CW CW
 to \[lq]inline\[rq] a change to the font family,
 marking syntactical elements of
 .I ms
@@ -2281,7 +2281,7 @@ _
 Boxed keep macros cause breaks;
 to box words within a line,
 recall
-.CW .BX
+.CW BX
 in section \[lq]Typeface and decoration\[rq] above.
 .
 Box lines are drawn as close as possible to the text they enclose so
@@ -2289,12 +2289,12 @@ that they are usable within paragraphs.
 .
 When boxing entire paragraphs thus,
 you may improve their appearance by calling
-.CW .B1
+.CW B1
 after the first paragraphing macro,
 and invoking the
 .CW sp
 request before calling
-.CW .B2 .
+.CW B2 .
 .
 .
 .TS
@@ -2313,13 +2313,13 @@ Happy Fun Ball may suddenly accelerate to dangerous speeds.
 .LP
 If you want a boxed keep to float,
 enclose the
-.CW .B1
+.CW B1
 and
-.CW .B2
+.CW B2
 calls within a pair of
-.CW .KF
+.CW KF
 and
-.CW .KE
+.CW KE
 calls.
 .
 .
@@ -2388,15 +2388,15 @@ The
 .CW DI
 register is a GNU extension;
 its value is an indentation applied to displays created with
-.CW .DS
+.CW DS
 and
-.CW .ID
+.CW ID
 without arguments,
 to
-.CW .DS\~I \[rq] \[lq]
+.CW DS\~I \[rq] \[lq]
 without an indentation argument,
 and to equations set with
-.CW .EQ\~I \[rq]. \[lq]
+.CW EQ\~I \[rq]. \[lq]
 .
 Changes to either register take effect at the next display boundary.
 .
@@ -2482,7 +2482,7 @@ preprocessor.
 The optional
 .CW H
 argument to
-.CW .TS
+.CW TS
 instructs
 .I ms
 to repeat table rows
@@ -2513,9 +2513,9 @@ marks the start of a
 preprocessor
 diagram;
 either of
-.CW .PE
+.CW PE
 or
-.CW .PF
+.CW PF
 ends it,
 the latter with \[lq]flyback\[rq] to the vertical position at its top.
 .
@@ -2593,7 +2593,7 @@ emits collected references
 it interpolates the string
 .CW \[rs]*[REFERENCES]
 as an unnumbered heading
-.CW .SH ). (
+.CW SH ). (
 .
 .
 .KS
@@ -2818,7 +2818,7 @@ as an argument to the
 macro.
 .
 Such manual marks should be repeated as arguments to
-.CW .FS
+.CW FS
 or as part of the footnote text to disambiguate their correspondence.
 .
 You may wish to use
@@ -2888,15 +2888,15 @@ You can place a second
 interpolation between a
 .CW \[rs]**
 and its corresponding
-.CW .FS
+.CW FS
 call as long as each
-.CW .FS
+.CW FS
 call occurs
 .I after
 the corresponding
 .CW \[rs]**
 and occurrences of
-.CW .FS
+.CW FS
 are in the same order as corresponding occurrences of
 .CW \[rs]** .
 .
@@ -2932,7 +2932,7 @@ The
 register controls the formatting of automatically numbered footnote
 paragraphs,
 and those for which
-.CW .FS
+.CW FS
 is given a
 .I marker
 argument,
@@ -2952,12 +2952,12 @@ or surrounded by square brackets
 (on terminals).
 .
 The footnote paragraph is indented as with
-.CW .PP
+.CW PP
 if there is an
-.CW .FS
+.CW FS
 argument or an automatic number,
 and as with
-.CW .LP
+.CW LP
 otherwise.
 .
 This is the default.
@@ -2973,14 +2973,14 @@ As
 .CW 1 ,
 but without indentation
 (like
-.CW .LP ).
+.CW LP ).
 T}
 3	T{
 As
 .CW 1 ,
 but set the footnote paragraph with the marker hanging
 (like
-.CW .IP ).
+.CW IP ).
 T}
 .TE
 .KE
@@ -3016,10 +3016,10 @@ the footnote line length in multi-column arrangements.\**
 .
 .FS
 You could reset it after each call to
-.CW .1C ,
-.CW .2C ,
+.CW 1C ,
+.CW 2C ,
 or
-.CW .MC .
+.CW MC .
 .FE
 .
 .
@@ -3315,7 +3315,7 @@ in practice,
 unless your page numbering is unusual,
 this means that you should call it early,
 before
-.CW .TL
+.CW TL
 or any heading or paragraphing macro.
 .
 This is a Berkeley extension.
@@ -3350,9 +3350,9 @@ sets up to format the header also calls the
 (normally undefined)
 .CW HD
 macro after
-.CW .PT ;
+.CW PT ;
 you can define
-.CW .HD
+.CW HD
 if you need additional processing after setting the header
 (for example,
 to draw a line below it).
@@ -3540,8 +3540,8 @@ The
 .CW XA
 macro,
 used within
-.CW .XS /\c
-.CW .XE
+.CW XS /\c
+.CW XE
 pairs,
 supplements an entry\[em]for instance,
 when it requires multiple output lines,
@@ -3556,9 +3556,9 @@ or by providing a second argument to the
 .CW XA
 macro.
 .
-.CW .XS
+.CW XS
 and
-.CW .XA
+.CW XA
 automatically associate the page number where they are called with the
 text following them,
 but they accept arguments to override this behavior.
@@ -3569,7 +3569,7 @@ call
 or
 .CW PX
 to emit the table of contents;
-.CW .TC
+.CW TC
 resets the page number
 .B i "" to\~
 (Roman numeral one),
@@ -3599,10 +3599,10 @@ of
 prevents a leader and page number from being emitted for that entry.
 .
 Use of
-.CW .XA
+.CW XA
 within
-.CW .XS /\c
-.CW .XE
+.CW XS /\c
+.CW XE
 is optional;
 it can be repeated.
 .
@@ -3613,11 +3613,11 @@ a supplemental entry is indented by that amount;
 ens are assumed if no unit is indicated.
 .
 Text on input lines between
-.CW .XS
+.CW XS
 and
-.CW .XE
+.CW XE
 is stored for later recall by
-.CW .PX .
+.CW PX .
 T}
 \&.XA \f[R][\f[I]page-number\f[] [\f[I]indentation\f[]]]	\^
 \&.XE	\^
@@ -3783,7 +3783,7 @@ call.
 T}
 \&.XH \f[I]depth heading-text	T{
 As
-.CW .XN ,
+.CW XN ,
 but use
 .I depth
 to determine the indentation.
@@ -3805,9 +3805,9 @@ Macro	Description
 _
 \&.XN\-REPLACEMENT \f[I]heading-text	T{
 These hook macros implement
-.CW .XN
+.CW XN
 and
-.CW .XH ,
+.CW XH ,
 respectively.
 .
 They call
@@ -3816,7 +3816,7 @@ and
 pass their
 .I heading-text
 arguments to
-.CW .\%XH\-UPDATE\-TOC .
+.CW \%XH\-UPDATE\-TOC .
 T}
 \&.XH\-REPLACEMENT \f[I]depth heading-text	\^
 \&.XH\-INIT	T{
@@ -4073,9 +4073,9 @@ This can cause problems for documents that define additional macros of
 their own that manipulate indentation.
 .
 Use
-.CW .RS
+.CW RS
 and
-.CW .RE
+.CW RE
 instead of the
 .CW in
 request.
@@ -4191,7 +4191,7 @@ and desire special treatment of certain page numbers
 you may need to handle a non-Arabic page number format,
 as
 .I "groff ms" 's
-.CW .PT
+.CW PT
 does;
 see the macro package source.
 .
@@ -4213,14 +4213,14 @@ and
 as setting the default column width and \[lq]intercolumn gap\[rq],
 respectively,
 and which applied when
-.CW .MC
+.CW MC
 was called with fewer than two arguments.
 .
 .I "groff ms"
 instead treats
-.CW .MC
+.CW MC
 without arguments as synonymous with
-.CW .2C ;
+.CW 2C ;
 there is thus no occasion for a default column width register.
 .
 Further,
@@ -4228,7 +4228,7 @@ the
 .CW MINGW
 register
 and the second argument to
-.CW .MC
+.CW MC
 specify a
 .I minimum
 space between columns,
