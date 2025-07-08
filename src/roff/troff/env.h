@@ -272,7 +272,7 @@ public:
   unsigned char get_no_break_control_character();
   bool set_no_break_control_character(unsigned char);
   statem *construct_state(bool has_only_eol);
-  void print_env();
+  void dump();
   void copy(const environment *);
   bool is_dummy() { return is_dummy_env; }
   bool is_empty();

@@ -3488,7 +3488,7 @@ const char *environment::get_requested_point_size_string()
   return sptoa(curenv->get_requested_point_size());
 }
 
-void environment::print_env()
+void environment::dump()
 {
   // At the time this request is invoked, the following values are zero
   // or meaningless.
@@ -3640,10 +3640,10 @@ void environment::print_env()
 #endif /* WIDOW_CONTROL */
 }
 
-void print_env()
+void dump_environment_request()
 {
   errprint("Current Environment:\n");
-  curenv->print_env();
+  curenv->dump();
   dictionary_iterator iter(env_dictionary);
   symbol s;
   environment *e;
@@ -3651,7 +3651,7 @@ void print_env()
     assert(!s.is_null());
     errprint("Environment %1:\n", s.contents());
     if (e != curenv)
-      e->print_env();
+      e->dump();
     else
       errprint("  current\n");
   }
@@ -3659,7 +3659,7 @@ void print_env()
   skip_line();
 }
 
-static void print_nodes_from_input_line()
+static void dump_pending_output_line_request()
 {
   curenv->dump_pending_nodes();
   skip_line();
@@ -4324,8 +4324,8 @@ void init_env_requests()
   init_request("nh", no_hyphenate);
   init_request("nm", number_lines);
   init_request("nn", no_number);
-  init_request("pev", print_env);
-  init_request("pline", print_nodes_from_input_line);
+  init_request("pev", dump_environment_request);
+  init_request("pline", dump_pending_output_line_request);
   init_request("ps", point_size);
   init_request("pvs", post_vertical_spacing);
   init_request("rj", right_justify);

@@ -1,5 +1,23 @@
 2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor, continuing naming reform of
+	functions that are troff request handlers such that their names
+	end with `_request`, and of member functions that write class
+	object data to the standard error stream to `dump`.
+
+	* src/roff/troff/env.h (class environment): Rename public member
+	function `print_env` to `dump` in declaration.
+
+	* src/roff/troff/env.cpp (environment::print_env): Rename
+	this...
+	(environment::dump): ...to this in definition.
+	(dump_environment_request): Update call sites.
+	(print_nodes_from_input_line): Rename this...
+	(dump_pending_output_line_request): ...to this.
+	(init_env_requests): Track latter rename in handler setup.
+
+2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::print_env): Tweak output;
 	describe current and previous font selections as "resolved",
 	since if the font position of an abstract style is selected,
