@@ -9184,11 +9184,8 @@ system.
 .
 .TP
 .MR groff_char @MAN7EXT@
-discusses character encoding issues,
-escape sequences that produce glyphs,
-and enumerates
-.IR groff 's
-predefined special character escape sequences.
+discusses character encoding issues
+and escape sequences that produce glyphs.
 .
 .
 .TP
@@ -9200,8 +9197,7 @@ formatter,
 its device and font description file formats,
 its device-independent page description language,
 and those of AT&T
-.IR troff ,\" AT&T
-whose design it reimplements.
+.IR troff .\" AT&T
 .
 .
 .TP
@@ -9217,7 +9213,9 @@ surveys macro packages provided with
 .IR groff ,
 describes how documents can take advantage of them,
 offers guidance on writing macro packages and using diversions,
-and includes historical information on macro package naming conventions.
+and includes historical information.
+.\" slack text for widow/orphan management
+.\" on macro package naming conventions.
 .
 .
 .TP
