@@ -525,6 +525,8 @@ the author of the original macro package and the technical papers
 documenting it.
 .
 .
+.br
+.ne 4v
 .\" ====================================================================
 .SH "See also"
 .\" ====================================================================
