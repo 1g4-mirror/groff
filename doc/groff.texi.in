@@ -2595,13 +2595,18 @@ macros feature cover page and table of contents generation,
 automatically numbered headings, several paragraph styles, a variety of
 text styling options, footnotes, and multi-column page layouts.
 @file{ms} supports the @command{tbl}, @command{eqn}, @command{pic}, and
-@command{refer} preprocessors for inclusion of tables, mathematical
-equations, diagrams, and standardized bibliographic citations.  This
-implementation is mostly compatible with the documented interface and
-behavior of AT&T Unix Version@tie{}7 @file{ms}.  Many extensions from
-4.2BSD (Berkeley)
+@command{refer}
+preprocessors for inclusion of tables,
+mathematical equations,
+diagrams,
+and consistently formatted bibliographic citations.
+@code{groff} @file{ms}
+is mostly compatible with the documented interface
+and behavior of AT&T Unix Version\~7
+@code{ms}.
+It recreates most extensions from 4.2BSD (Berkeley)
 @c Few changes were made in 4.3, Tahoe, Reno, or 4.4.
-and Research Tenth Edition Unix have been recreated.
+and Research Tenth Edition Unix.
 
 @menu
 * ms Introduction::

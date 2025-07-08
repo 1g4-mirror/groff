@@ -102,17 +102,18 @@ and
 preprocessors for inclusion of tables,
 mathematical equations,
 diagrams,
-and standardized bibliographic citations.
+and consistently formatted bibliographic citations.
 .
 .
-.LP
-This implementation is mostly compatible with the documented interface
+.P
+.I "groff ms"
+is mostly compatible with the documented interface
 and behavior of AT&T Unix Version\~7
 .IR ms .
 .
-Many extensions from 4.2BSD (Berkeley)
+It recreates most extensions from 4.2BSD (Berkeley)
 .\" Few changes were made in 4.3, Reno, Tahoe, or 4.4.
-and Research Tenth Edition Unix have been recreated.
+and Research Tenth Edition Unix.
 .
 .
 .\" ====================================================================
