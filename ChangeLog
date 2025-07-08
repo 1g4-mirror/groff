@@ -1,5 +1,11 @@
 2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/gropdf.pl (LoadDownload): Trivially
+	refactor.  Rename scalar `anyDownloadFilefound` to
+	`anyDownloadFileFound` for proper camel casery.
+
+2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor, continuing naming reform of
 	functions that are troff request handlers such that their names
 	end with `_request`, and of member functions that write class

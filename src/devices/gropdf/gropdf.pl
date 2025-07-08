@@ -1176,7 +1176,7 @@ sub ToPoints
 # _stops_ at the first file successfully opened.
 sub LoadDownload
 {
-    my $anyDownloadFilefound=0;
+    my $anyDownloadFileFound=0;
     my (@dirs)=split($cfg{RT_SEP},$fontPath);
 
     foreach my $dir (@dirs)
@@ -1187,7 +1187,7 @@ sub LoadDownload
 	    Notice("cannot open '$downloadFile': $!");
 	    next;
 	}
-	$anyDownloadFilefound=1;
+	$anyDownloadFileFound=1;
 
 	Notice("reading '$downloadFile'");
 	while (<DL>)
@@ -1223,7 +1223,7 @@ sub LoadDownload
 	close(DL);
     }
 
-    Die("no 'download' files found") if !$anyDownloadFilefound;
+    Die("no 'download' files found") if !$anyDownloadFileFound;
 }
 
 # Locate and open a file in the groff font directory search path.
