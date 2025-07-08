@@ -61,9 +61,9 @@ G.\& Branden Robinson
 .AI
 g.branden.robinson@gmail.com
 .AB no
-The
+Use the
 .I ms
-(\[lq]manuscript\[rq]) package is suitable for the composition of
+(\[lq]manuscript\[rq]) package to compose
 letters,
 memoranda,
 reports,
@@ -129,18 +129,31 @@ shipped with Sixth Edition (1975) and was documented by Mike Lesk in a
 Bell Labs internal memorandum.
 .FE
 .
-While the
+Whereas
 .I man
-package was designed for brief reference documents,
-the
+suits brief references,
 .I ms
-macros are also suitable for longer works intended for printing and
-possible publication.
+can handle long or complex works
+intended for printing and possible publication.
 .
 .
 .PP
 In this document,
-a right arrow (\[->]) is used to indicate a tab character in the input.
+a right arrow (\[->]) indicates a tab character in the input.
+.
+Macro,
+register,
+and string descriptions frequently mention each other;
+most references are to macros.
+.
+Where a register or string is referenced,
+we annotate its type.
+.
+.I ms 's
+identifiers use only capital letters,
+numerals,
+and
+.CW \- \[rq]. \[lq]
 .
 .
 .KS
@@ -152,22 +165,20 @@ Basic information
 .
 .
 .LP
+Prepare an
 .I ms
-documents are plain text files;
-prepare them with your preferred text editor.
+document with your preferred text editor.
 .
-If you're in a hurry to start,
-know that
+Call an
 .I ms
-needs one of its macros called at the beginning of a document so that it
-can initialize.
+macro early in the document to initialize the package.
 .
 A
 .I macro
 is a formatting instruction to
 .I ms.
 .
-Put a macro call on a line by itself.
+Put a macro call on a line by itself with a dot before its name.
 .
 Use
 .CW PP
@@ -175,12 +186,8 @@ if you want your paragraph's first line indented,
 or
 .CW LP
 if you don't.
-.KE
 .
-.
-.PP
-After that,
-start typing normally.
+Then type text normally.
 .
 It is a good practice to start each sentence on a new line,
 or to put two spaces after sentence-ending punctuation,
@@ -192,6 +199,7 @@ and you can indent with tabs.
 .
 When you need one of the features mentioned earlier,
 return to this manual.
+.KE
 .
 .
 .PP
@@ -207,7 +215,7 @@ can be useful for previewing.
 .TS
 box center;
 Lf(CR)1 Lf(CB).
-$	editor radical.ms \f[TI]# vim, emacs, .\|.\|.
+$	editor radical.ms \f[TI]# vim, emacs, nano, .\|.\|.
 $	nroff -ww -z -ms radical.ms \f[TI]# check for errors
 $	nroff \-ms radical.ms | less \-R
 $	groff \-T pdf \-ms radical.ms > radical.pdf
@@ -263,7 +271,7 @@ p	point (1/72\[sd])
 P	pica (1/6\[sd])
 v	\[lq]vee\[rq]; current vertical spacing
 m	\[lq]em\[rq]; width of an \[lq]M\[rq] in the current font
-n	\[lq]en\[rq]; one-half em
+n	\[lq]en\[rq]; one-half em (same as \f[CR]m\f[] on terminals)
 .TE
 .
 .

@@ -2589,12 +2589,28 @@ documentation.
 @section @file{ms}
 @cindex @file{ms} macro package
 
-The @file{ms} (``manuscript'') package is suitable for the preparation
-of letters, memoranda, reports, and books.  These @code{groff}
+Use the
+@file{ms}
+(``manuscript'')
+package to compose
+letters,
+memoranda,
+reports,
+and books.
+These
+@code{groff}
 macros feature cover page and table of contents generation,
-automatically numbered headings, several paragraph styles, a variety of
-text styling options, footnotes, and multi-column page layouts.
-@file{ms} supports the @command{tbl}, @command{eqn}, @command{pic}, and
+automatically numbered headings,
+several paragraph styles,
+a variety of text styling options,
+footnotes,
+and multi-column page layouts.
+@file{ms}
+supports the
+@command{tbl},
+@command{eqn},
+@command{pic},
+and
 @command{refer}
 preprocessors for inclusion of tables,
 mathematical equations,
@@ -2630,10 +2646,25 @@ The @file{ms} macros are the oldest surviving package for @code{roff}
 systems.@footnote{While manual @emph{pages} are older, early ones used
 macros supplanted by the @file{man} package of Seventh Edition Unix
 (1979).  @file{ms} shipped with Sixth Edition (1975) and was documented
-by Mike Lesk in a Bell Labs internal memorandum.}  While the @file{man}
-package was designed for brief reference documents, the @file{ms} macros
-are also suitable for longer works intended for printing and possible
-publication.
+by Mike Lesk in a Bell Labs internal memorandum.}
+Whereas
+@file{man}
+suits brief references,
+@file{ms}
+can handle long or complex works
+intended for printing and possible publication.
+
+Macro,
+register,
+and string descriptions frequently mention each other;
+most references are to macros.
+Where a register or string is referenced,
+we annotate its type.
+@file{ms}'s
+identifiers use only capital letters,
+numerals,
+and
+@samp{-}.
 
 @menu
 * ms basic information::
@@ -2644,26 +2675,44 @@ publication.
 @node ms basic information, ms Document Structure, ms Introduction, ms Introduction
 @subsubsection Basic information
 
-@file{ms} documents are plain text files; prepare them with your
-preferred text editor.  If you're in a hurry to start, know that
-@file{ms} needs one of its macros called at the beginning of a document
-so that it can initialize.  A @dfn{macro} is a formatting instruction to
-@file{ms}.  Put a macro call on a line by itself.  Use @samp{.PP} if you
-want your paragraph's first line indented, or @samp{.LP} if you don't.
+Prepare an
+@file{ms}
+document
+with your preferred text editor.
+Call an
+@file{ms}
+macro early in the document to initialize the package.
+A
+@dfn{macro}
+is a formatting instruction to
+@file{ms}.
+Put a macro call on a line by itself with a dot before its name.
+Use
+@samp{.PP}
+if you want your paragraph's first line indented,
+or
+@samp{.LP}
+if you don't.
+Then type text
+normally.
+It is a good practice to start each sentence on a new line,
+or to put two spaces after sentence-ending punctuation,
+so that the formatter knows where the sentence boundaries are.
+You can separate paragraphs with further paragraphing macros,
+or with blank lines,
+and you can indent with tabs.
+When you need one of the features mentioned earlier
+(@pxref{ms}),
+return to this subsection.
 
-After that, start typing normally.  It is a good practice to start each
-sentence on a new line, or to put two spaces after sentence-ending
-punctuation, so that the formatter knows where the sentence boundaries
-are.  You can separate paragraphs with further paragraphing macros, or
-with blank lines, and you can indent with tabs.  When you need one of
-the features mentioned earlier (@pxref{ms}), return to this part of the
-manual.
-
-Format the document with the @command{groff} command.  @command{nroff}
+Format the document with the
+@command{groff}
+command.
+@command{nroff}
 can be useful for previewing.
 
 @Example
-$ editor radical.ms # vim, emacs, @dots{}
+$ editor radical.ms # vim, emacs, nano, @dots{}
 $ nroff -ww -z -ms radical.ms # check for errors
 $ nroff -ms radical.ms | less -R
 $ groff -T ps -ms radical.ms > radical.ps
@@ -2682,7 +2731,7 @@ denied than admitted.
 @arrow{}That's what Dijkstra said, anyway.
 @endExample
 
-@need 750
+@need 1000
 @file{ms} exposes many aspects of document layout to user control via
 @code{groff}'s @dfn{registers} and @dfn{strings}, which store numbers
 and text, respectively.  Measurements in @code{groff} are expressed with
@@ -2708,7 +2757,7 @@ vees; current vertical spacing
 ems; width of an ``M'' in the current font
 
 @item n
-ens; one-half em
+ens; one-half em (same as @code{m} on terminals)
 @end table
 
 Set registers with the @code{nr} request and strings with the @code{ds}
