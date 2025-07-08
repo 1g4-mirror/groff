@@ -251,15 +251,14 @@ are separated by spaces and newlines.
 A transition to a new output line is called a
 .I break.
 .
-When formatted,
-a word may be broken at hyphens,
+Breaks can occur at explicit hyphens,
 at
 .B \e%
 or
 .B \e:
 escape sequences
 (see subsection \[lq]Portability\[rq] below),
-or at predetermined locations
+or at predetermined locations in a word
 if automatic hyphenation is enabled
 (see the
 .B \-rHY
@@ -2323,7 +2322,7 @@ see section \[lq]Options\[rq] below.
 .B \e*R
 interpolates a special character escape sequence for the \[lq]registered
 sign\[rq] glyph,
-.BR \e[rg] ,
+.BR \e(rg ,
 if available,
 and \[lq](Reg.)\[rq] otherwise.
 .
@@ -2358,12 +2357,12 @@ _ifstyle()dnl
 .
 .
 .P
-None of the above is necessary in a contemporary man page.
+A contemporary man page needs none of the above.
 .
 .B \e*S
-is superfluous,
-since type size changes are invisible on terminals and macros that
-change it restore its original value afterward.
+is superfluous;
+type size changes are invisible on terminals,
+and macros that change it restore its original value afterward.
 .
 Better alternatives exist for the rest;
 simply use the
@@ -2374,12 +2373,13 @@ and
 .B \[rs][tm] \" Heirloom Doctools, mandoc, neatmkfn, Plan 9
 special character escape sequences directly.
 .
-Unless you are aiming for a pathological level of portability\[em]perhaps
-composing a man page for consumption on simulators of 1980s Unix systems
+Unless you are aiming for a pathological level of portability\[em]\
+perhaps composing a man page
+for consumption on simulators of 1980s Unix systems
 (or Solaris\~10
 .IR troff ,
 though even it supports
-.BR \[rs][rg] )\[em]\c
+.RB \[lq]\^ \[rs](rg \[rq])\[em]\c
 avoid using the above strings.
 .
 .
@@ -3970,8 +3970,8 @@ program detects whether the
 .I man
 or
 .I mdoc
-macro package is being used by a document and loads the correct macro
-definitions,
+macro package is used by a document
+and loads the correct macro definitions,
 taking advantage of the fact that pages using them must call
 .B TH
 or
