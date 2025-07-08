@@ -10,7 +10,7 @@ manuscript macro package for formatting documents
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
@@ -2770,30 +2770,59 @@ _
 .SH "Naming conventions"
 .\" ====================================================================
 .
-The following conventions are used for names of macros,
-strings,
-and registers.
-.
 External names available to documents that use the
-.I groff ms
+.I "groff ms"
 macros contain only uppercase letters and digits.
 .
+The package reserves for internal use the following identifiers:
 .
-.LP
-Internally,
-the macros are divided into modules.
 .
-Conventions for identifier names are as follows.
+.IP \[bu] 3n
+those containing the characters
+.BR * ,
+.BR @ ,
+and\~\c
+.BR : ;
+and
+.
+.
+.IP \[bu]
+those containing only uppercase letters and digits.
+.
+.
+.P
+When selecting a name for your document's own macros,
+strings,
+and
+registers,
+avoid those reserved by
+.I "groff ms"
+and those defined by
+GNU
+.IR troff ;\" GNU
+see
+.MR groff @MAN7EXT@
+for complete lists thereof.
+.
+.
+.P
+.I "groff ms"
+organizes most of its internal names into modules.
+.
+The naming convenion is as follows.
+.
 .
 .IP \[bu] 3n
 Names used only within one module are of the form
 .IB \%module * name\c
 \&.
 .
+.
 .IP \[bu]
 Names used outside the module in which they are defined are of the form
 .IB \%module @ name\c
 \&.
+.
 .
 .IP \[bu]
 Names associated with a particular environment are of the form
@@ -2803,31 +2832,16 @@ these are used only within the
 .B par
 module.
 .
+.
 .IP \[bu]
 .I name
 does not have a module prefix.
 .
+.
 .IP \[bu]
-Constructed names used to implement arrays are of the form
+Names constructed to implement arrays are of the form
 .IB \%array ! index\c
 \&.
-.
-.
-.PP
-Thus the
-.I groff ms
-macros reserve the following identifiers:
-.
-.IP \[bu] 3n
-those containing the characters
-.BR * ,
-.BR @ ,
-and\~\c
-.BR : ,
-and
-.
-.IP \[bu]
-those containing only uppercase letters and digits.
 .
 .
 .\" ====================================================================

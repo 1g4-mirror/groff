@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle June 2025
+@subtitle July 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -5025,11 +5025,45 @@ Interpolate capital OE ligature.
 @cindex naming conventions, @file{ms} macros
 
 The following conventions are used for names of macros, strings, and
-registers.  External names available to documents that use the
-@code{groff} @file{ms} macros contain only uppercase letters and digits.
+registers.
+External names available to documents that use the
+@code{groff} @file{ms}
+macros contain only uppercase letters and digits.
+The package reserves the following identifiers for internal use.
 
-Internally, the macros are divided into modules.  Conventions for
-identifier names are as follows.
+@itemize @bullet
+@item
+those containing the characters
+@code{*},
+@code{@@},
+and@tie{}@code{:};
+and
+
+@item
+those containing only uppercase letters and digits.
+@end itemize
+
+When selecting a name for your document's own macros,
+strings,
+and
+registers,
+avoid those reserved by
+@code{groff} @file{ms}
+and those defined by
+GNU
+@command{troff} @c GNU
+see
+@ref{Macro Index},
+@ref{String Index},
+and
+@ref{Register Index},
+or
+@cite{groff_char@r{(7)}}
+for complete lists thereof.
+
+@code{groff} @file{ms}
+organizes most of its internal names into modules.
+The naming convenion is as follows.
 
 @itemize @bullet
 @item
@@ -5042,27 +5076,18 @@ Names used outside the module in which they are defined are of the form
 
 @item
 Names associated with a particular environment are of the form
-@var{environment}@code{:}@var{name}; these are used only within the
-@code{par} module.
+@var{environment}@code{:}@var{name};
+these are used only within the
+@code{par}
+module.
 
 @item
-@var{name} does not have a module prefix.
+@var{name}
+does not have a module prefix.
 
 @item
-Constructed names used to implement arrays are of the form
+Names constructed to implement arrays are of the form
 @var{array}@code{!}@var{index}.
-@end itemize
-
-Thus the @code{groff} @file{ms} macros reserve the following
-identifiers:
-
-@itemize @bullet
-@item
-those containing the characters @code{*}, @code{@@}, and@tie{}@code{:},
-and
-
-@item
-those containing only uppercase letters and digits.
 @end itemize
 
 
