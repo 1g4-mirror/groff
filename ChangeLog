@@ -6,6 +6,11 @@
 
 2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.pl: Fix missing word in fatal
+	diagnostic message.
+
+2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (LoadDownload): Trivially
 	refactor.  Rename scalar `anyDownloadFilefound` to
 	`anyDownloadFileFound` for proper camel casery.

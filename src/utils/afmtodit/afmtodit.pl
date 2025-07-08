@@ -261,7 +261,7 @@ else {
 	$filename = $sys_desc;
     }
     else {
-	croak("cannot '$sys_desc': $!");
+	croak("cannot open '$sys_desc': $!");
     }
 }
 
