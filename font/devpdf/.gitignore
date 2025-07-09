@@ -40,7 +40,6 @@
 /PR
 /S
 /SS
-/StandardSymSL.pfb
 /TB
 /TBI
 /TI
@@ -88,6 +87,7 @@
 /map/text.map
 /map/dingbats.map
 /stamp
+/symbolsl.pfb
 /util/BuildFoundries
 # test ("make check") artifacts
 /tests/check-default-foundry.sh

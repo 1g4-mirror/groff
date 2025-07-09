@@ -1974,7 +1974,7 @@ build system to locate PostScript Type\~1 fonts.
 .
 .
 .TP
-.I @FONTDIR@/\:\%devpdf/\%StandardSymbolSL.pfb
+.I @FONTDIR@/\:\%devpdf/\:\%symbolsl\:.pfb
 supplies the slanted symbol font known to
 .I groff
 as

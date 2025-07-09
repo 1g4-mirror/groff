@@ -108,7 +108,7 @@ endif
 DEVPDFFONTFILES = $(DEVPDFFONTFILES_FROM_DEVPS) \
   font/devpdf/DESC \
   font/devpdf/SS \
-  font/devpdf/StandardSymSL.pfb \
+  font/devpdf/symbolsl.pfb \
   font/devpdf/download
 
 devpdffontdir = $(fontdir)/devpdf
@@ -136,10 +136,10 @@ MOSTLYCLEANFILES += $(devpdffontmapdata)
 EXTRA_DIST += \
   font/devpdf/DESC.in \
   font/devpdf/SS.in \
-  font/devpdf/StandardSymSL.pfb.in \
+  font/devpdf/symbolsl.pfb.in \
   font/devpdf/Foundry.in \
   font/devpdf/download.in \
-  font/devpdf/generate/StandardSymSL.sfd \
+  font/devpdf/generate/symbolsl.sfd \
   font/devpdf/util/BuildFoundries.pl
 
 all: font/devpdf/stamp
@@ -165,9 +165,9 @@ $(devpdffontencdata):
 font/devpdf/SS: $(devpdf_srcdir)/SS.in
 	$(AM_V_GEN)cp -f $(devpdf_srcdir)/SS.in $@
 
-$(devpdf_builddir)/StandardSymSL.pfb: \
-  $(devpdf_srcdir)/StandardSymSL.pfb.in
-	$(AM_V_GEN)cp -f $(devpdf_srcdir)/StandardSymSL.pfb.in $@
+$(devpdf_builddir)/symbolsl.pfb: \
+  $(devpdf_srcdir)/symbolsl.pfb.in
+	$(AM_V_GEN)cp -f $(devpdf_srcdir)/symbolsl.pfb.in $@
 
 $(devpdffontmapdata):
 	$(AM_V_at)$(MKDIR_P) $(top_builddir)/font/devpdf/map

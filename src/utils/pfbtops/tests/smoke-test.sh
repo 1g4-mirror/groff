@@ -19,7 +19,7 @@
 #
 
 pfbtops="${abs_top_builddir:-.}/pfbtops"
-pfbfont="${abs_top_builddir:-.}/font/devpdf/StandardSymSL.pfb"
+pfbfont="${abs_top_builddir:-.}/font/devpdf/symbolsl.pfb"
 
 # Smoke-test pfbtops command.
 

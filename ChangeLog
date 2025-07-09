@@ -1,5 +1,28 @@
 2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[devpdf]: Rename slanted symbol font.  It's not a standard PDF
+	font, so it's less misleading to omit "Standard" from its name.
+
+	* font/devpdf/generate/StandardSymSL.sfd: Rename this...
+	* font/devpdf/generate/symbolsl.sfd: ...to this...
+	* font/devpdf/StandardSymSL.pfb.in: ...and this...
+	* font/devpdf/symbolsl.pfb.in: ...to this.
+	* font/devpdf/devpdf.am (DEVPDFFONTFILES): Update macro
+	definition.
+	(EXTRA_DIST): Update macro appendment.
+	($(devpdf_builddir)/StandardSymSL.pfb): Rename target from
+	this...
+	($(devpdf_builddir)/symbolsl.pfb): ...to this.  Update
+	prerequisite and rule to use new names.
+
+	* font/devpdf/download.in: Update embeddable font file name.
+
+	* src/util/pfbtops/tests/smoke-test.sh: Update test.
+
+	* src/devices/gropdf/gropdf.1.man (Files): Reflect rename.
+
+2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/gropdf.pl (LoadFont): Tweak warning
 	diagnostic emitted when a "download" file entry is invalid
 	{typically because the font file named there doesn't exist}.
