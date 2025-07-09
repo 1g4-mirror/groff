@@ -1,5 +1,12 @@
 2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am: Trivially refactor.  Rename `install_infodoc`
+	target to `install-info-local` and `install-txt` to
+	`install-txt-local` for consistency with
+	`install-{dvi,pdf,html}-local`.
+
+2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[devpdf]: Ship AFM file for slanted symbol font.
 
 	* font/devpdf/devpdf.am (DEVPDFFONTFILES): Add it.

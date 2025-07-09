@@ -677,8 +677,8 @@ maintainer-clean-local:
 # directory (distribution archive build) or in the build directory (Git
 # repository build).
 
-install-data-local: install-txt
-install-txt:
+install-data-local: install-txt-local
+install-txt-local:
 	-test -d $(DESTDIR)$(docdir) \
 	  || $(mkinstalldirs) $(DESTDIR)$(docdir)
 	for d in $(doc_builddir) $(doc_srcdir); do \
@@ -688,8 +688,8 @@ install-txt:
 	  fi; \
 	done
 
-install-data-local: install_infodoc
-install_infodoc: doc/groff.info
+install-data-local: install-info-local
+install-info-local: doc/groff.info
 	-test -d $(DESTDIR)$(infodir) \
 	  || $(mkinstalldirs) $(DESTDIR)$(infodir)
 	$(RM) $(DESTDIR)/doc/groff.info*
