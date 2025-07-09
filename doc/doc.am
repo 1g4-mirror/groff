@@ -676,9 +676,14 @@ maintainer-clean-local:
 # Generated forms of the groff Texinfo manual might be in the source
 # directory (distribution archive build) or in the build directory (Git
 # repository build).
+#
+# Targets that do the work have a macro prerequisite that is empty if
+# build-time dependencies for regenerating the document are unavailable;
+# thus we (re)build the document only if we can actually do so.  If not,
+# the user gets the "stock" version from distribution archive.
 
 install-data-local: install-txt-local
-install-txt-local:
+install-txt-local: $(GROFF_TXT)
 	-test -d $(DESTDIR)$(docdir) \
 	  || $(mkinstalldirs) $(DESTDIR)$(docdir)
 	for d in $(doc_builddir) $(doc_srcdir); do \
@@ -689,7 +694,7 @@ install-txt-local:
 	done
 
 install-data-local: install-info-local
-install-info-local: doc/groff.info
+install-info-local: $(GROFF_INFO)
 	-test -d $(DESTDIR)$(infodir) \
 	  || $(mkinstalldirs) $(DESTDIR)$(infodir)
 	$(RM) $(DESTDIR)/doc/groff.info*
@@ -702,7 +707,7 @@ install-info-local: doc/groff.info
 	  fi; \
 	done
 
-install-dvi-local: doc/groff.dvi
+install-dvi-local: $(GROFF_DVI)
 	-test -d $(DESTDIR)$(docdir) \
 	  || $(mkinstalldirs) $(DESTDIR)$(docdir)
 	for d in $(doc_builddir) $(doc_srcdir); do \
@@ -712,7 +717,7 @@ install-dvi-local: doc/groff.dvi
 	  fi; \
 	done
 
-install-pdf-local: doc/groff.pdf
+install-pdf-local: $(GROFF_PDF)
 	-test -d $(DESTDIR)$(pdfdocdir) \
 	  || $(mkinstalldirs) $(DESTDIR)$(pdfdocdir)
 	for d in $(doc_builddir) $(doc_srcdir); do \
@@ -722,7 +727,7 @@ install-pdf-local: doc/groff.pdf
 	  fi; \
 	done
 
-install-html-local: doc/groff.html
+install-html-local: $(GROFF_HTML)
 	-test -d $(DESTDIR)$(htmldocdir)/groff.html.mono \
 	  || $(mkinstalldirs) $(DESTDIR)$(htmldocdir)/groff.html.mono
 	for d in $(doc_builddir) $(doc_srcdir); do \

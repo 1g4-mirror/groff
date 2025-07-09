@@ -1,5 +1,18 @@
 2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am: Rationalize Texinfo document installation targets.
+	(install-txt-local)
+	(install-info-local)
+	(install-dvi-local)
+	(install-pdf-local)
+	(install-html-local): Name as prerequisites (only) the macros
+	conditionally populated when `HAVE_MAKEINFO` and `USE_TEX` are
+	defined.  Thus we (re)build each document only if we can
+	actually do so.  If not, the user gets the "stock" version from
+	distribution archive.
+
+2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am: Trivially refactor.  Rename `install_infodoc`
 	target to `install-info-local` and `install-txt` to
 	`install-txt-local` for consistency with
