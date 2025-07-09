@@ -23,7 +23,7 @@ eqn="${abs_top_builddir:-.}/eqn"
 # Regression-test Savannah #67285.  eqn should not strip "invalid"
 # characters from parts of a document it does not interpret.
 
-output=$(printf '.\\" degree sign: \313\232\n' | "$eqn" -R 2>/dev/null)
+output=$(printf '.\\" degree sign: \313\232\n' | "$eqn" -R)
 printf "%s" "$output" | od -c | grep -q ' 232'
 
 # vim:set ai et sw=4 ts=4 tw=72:
