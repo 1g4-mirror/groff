@@ -1974,6 +1974,18 @@ build system to locate PostScript Type\~1 fonts.
 .
 .
 .TP
+.I @FONTDIR@/\:\%devpdf/\:\%symbolsl\:.afm
+provides metrics for the slanted symbol font known to
+.I groff
+as
+.BR SS .
+.
+These data facilitate use of the font with
+.RI non- groff
+software.
+.
+.
+.TP
 .I @FONTDIR@/\:\%devpdf/\:\%symbolsl\:.pfb
 supplies the slanted symbol font known to
 .I groff

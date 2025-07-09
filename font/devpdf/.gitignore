@@ -87,6 +87,7 @@
 /map/text.map
 /map/dingbats.map
 /stamp
+/symbolsl.afm
 /symbolsl.pfb
 /util/BuildFoundries
 # test ("make check") artifacts

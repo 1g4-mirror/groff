@@ -108,6 +108,7 @@ endif
 DEVPDFFONTFILES = $(DEVPDFFONTFILES_FROM_DEVPS) \
   font/devpdf/DESC \
   font/devpdf/SS \
+  font/devpdf/symbolsl.afm \
   font/devpdf/symbolsl.pfb \
   font/devpdf/download
 
@@ -136,6 +137,7 @@ MOSTLYCLEANFILES += $(devpdffontmapdata)
 EXTRA_DIST += \
   font/devpdf/DESC.in \
   font/devpdf/SS.in \
+  font/devpdf/symbolsl.afm.in \
   font/devpdf/symbolsl.pfb.in \
   font/devpdf/Foundry.in \
   font/devpdf/download.in \
@@ -164,6 +166,10 @@ $(devpdffontencdata):
 
 font/devpdf/SS: $(devpdf_srcdir)/SS.in
 	$(AM_V_GEN)cp -f $(devpdf_srcdir)/SS.in $@
+
+$(devpdf_builddir)/symbolsl.afm: \
+  $(devpdf_srcdir)/symbolsl.afm.in
+	$(AM_V_GEN)cp -f $(devpdf_srcdir)/symbolsl.afm.in $@
 
 $(devpdf_builddir)/symbolsl.pfb: \
   $(devpdf_srcdir)/symbolsl.pfb.in
