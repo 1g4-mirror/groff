@@ -3498,7 +3498,7 @@ argument: '\\$2'
 \\*[debug@dump-args]\\
 .if !''\\$1' .ds cov*firm \\$1
 ..
-.\" Kill this macro off in groff 1.25.
+.\" TODO: Kill this off in groff 1.24.0 release + 2 years.
 .de AST
 .@warning \\$0: macro is deprecated; define string 'Abstract' instead
 .ds Abstract "\\$1\"

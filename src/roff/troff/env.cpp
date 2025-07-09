@@ -598,7 +598,7 @@ bool environment::set_font(symbol nm)
     warning(WARN_FONT, "ignoring font selection on interrupted line");
     return true; // "no operation" is successful
   }
-  // TODO: Kill off in groff 1.25.
+  // TODO: Kill this off in groff 1.24.0 release + 2 years.
   if (is_device_ps_or_pdf)
     warn_if_font_name_deprecated(nm);
   if (nm == symbol("P") || nm.is_empty()) {
@@ -4399,7 +4399,7 @@ void init_env_requests()
   register_dictionary.define("skw", new variable_reg(&skw_reg_contents));
   register_dictionary.define("ssc", new variable_reg(&ssc_reg_contents));
   register_dictionary.define("st", new variable_reg(&st_reg_contents));
-  // TODO: Kill the following off in groff 1.25.
+  // TODO: Kill the following off in groff 1.24.0 release + 2 years.
   deprecated_font_identifiers.push_back("AX");
   deprecated_font_identifiers.push_back("KR");
   deprecated_font_identifiers.push_back("KI");
