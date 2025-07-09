@@ -1993,6 +1993,14 @@ device refers to it.
 .
 .
 .TP
+.I @FONTDIR@/\:\%devpdf/\:\%generate/\:\%symbolsl\:.sfd
+is the source form of the
+.I \%symbolsl.pfb
+font,
+in spline font database (SFD) format.
+.
+.
+.TP
 .I @MACRODIR@/\:pdf\:.tmac
 defines macros for use with the
 .B pdf
