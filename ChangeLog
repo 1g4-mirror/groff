@@ -1,5 +1,15 @@
 2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[devpdf]: Ship AFM file for slanted symbol font.
+
+	* font/devpdf/devpdf.am (DEVPDFFONTFILES): Add it.
+	(EXTRA_DIST): Distribute its (contrived) ".in" file.
+	($(devpdf_builddir)/symbolsl.afm): Add rule to contrive it.
+
+	* src/devices/gropdf/gropdf.1.man (Files): Document it.
+
+2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[devpdf]: Add Makefile script for regenerating slanted symbol
 	font.
 
