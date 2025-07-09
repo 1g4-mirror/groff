@@ -1,5 +1,18 @@
 2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[devpdf]: Add Makefile script for regenerating slanted symbol
+	font.
+
+	* font/devpdf/generate/Makefile: New file (re)creates AFM and
+	PFB files for slanted symbol font from SFD source.  We emplace
+	the files with ".in" suffixes so that they'll work with the
+	groff build process in both in-tree and out-of-tree scenarios.
+	* font/devpdf/generate/symbolsl.sfd: Update metadata to credit
+	Deri with modifications.
+	* font/devpdf/symbolsl.afm.in: New file.
+
+2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[devpdf]: Rename slanted symbol font.  It's not a standard PDF
 	font, so it's less misleading to omit "Standard" from its name.
 
