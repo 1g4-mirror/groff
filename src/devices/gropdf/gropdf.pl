@@ -3574,9 +3574,9 @@ sub LoadFont
     {
 	if (exists($missing{$fontkey}))
 	{
-	    Warn("The download file in '$missing{$fontkey}' "
-	    . " has erroneous entry for '$fnt{internalname}'"
-	    . " (groff font description file '$ofontnm' from"
+	    Warn("download file '$missing{$fontkey}' has invalid entry"
+	    . " for font '$fnt{internalname}' corresponding to groff"
+	    . " font description file '$ofontnm' from"
 	    . " $foundryDescription)");
 	}
 	else

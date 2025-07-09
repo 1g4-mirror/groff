@@ -1,3 +1,9 @@
+2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/gropdf/gropdf.pl (LoadFont): Tweak warning
+	diagnostic emitted when a "download" file entry is invalid
+	{typically because the font file named there doesn't exist}.
+
 2025-07-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/gropdf/gropdf.pl (LoadDownload): Trivially
