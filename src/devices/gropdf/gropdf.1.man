@@ -693,7 +693,7 @@ and
 Zapf Dingbats.
 .
 In contrast to
-.I grops ,
+.IR grops ,
 .I gropdf
 does not require a reversed variant of it
 .RB ( ZDR );
