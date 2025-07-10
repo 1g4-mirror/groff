@@ -8707,23 +8707,23 @@ void abort_request()
 // The caller has responsibility for `delete`ing the returned array.
 char *read_rest_of_line_as_argument()
 {
-  int len = 256;
-  char *s = new char[len]; // C++03: new char[len]();
-  (void) memset(s, 0, (len * sizeof(char)));
+  int buf_size = 256;
+  char *s = new char[buf_size]; // C++03: new char[buf_size]();
+  (void) memset(s, 0, (buf_size * sizeof(char)));
   int c = get_copy(0 /* nullptr */);
-  while (c == ' ')
+  while (' ' == c)
     c = get_copy(0 /* nullptr */);
-  if (c == '"')
+  if ('"' == c)
     c = get_copy(0 /* nullptr */);
   int i = 0;
-  while (c != '\n' && c != EOF) {
+  while ((c != '\n') && (c != EOF)) {
     if (!is_invalid_input_char(c)) {
-      if (i + 2 > len) {
+      if ((i + 2) > buf_size) {
 	char *tem = s;
-	s = new char[len * 2]; // C++03: new char[len * 2]();
-	(void) memset(s, 0, (len * 2 * sizeof(char)));
-	memcpy(s, tem, len);
-	len *= 2;
+	s = new char[buf_size * 2]; // C++03: new char[buf_size * 2]();
+	(void) memset(s, 0, (buf_size * 2 * sizeof(char)));
+	memcpy(s, tem, buf_size);
+	buf_size *= 2;
 	delete[] tem;
       }
       s[i++] = c;
@@ -8731,7 +8731,7 @@ char *read_rest_of_line_as_argument()
     c = get_copy(0 /* nullptr */);
   }
   s[i] = '\0';
-  if (i == 0) {
+  if (0 == i) {
     delete[] s;
     return 0 /* nullptr */;
   }
