@@ -1,5 +1,17 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Retire our `strerror()` implementation.  It was specified in
+	ANSI C89, we require ISO C99 anyway, and on top of that we use
+	gnulib's "strerror" module to patch any egregious hole of that
+	name on any host system.
+
+	* src/libs/libgroff/strerror.c: Delete it.
+	* src/libs/libgroff/libgroff.am (EXTRA_DIST): Stop shipping it.
+
+	Continues fixing Savannah #66518.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* [grn,soelim,tbl]: Add tests verifying pass-through of 8-bit
 	input.
 
