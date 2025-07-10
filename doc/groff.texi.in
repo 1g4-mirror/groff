@@ -18372,8 +18372,9 @@ Recall @ref{Copy Mode}.
 @code{lf}'s primary purpose is to aid the debugging of documents that
 undergo preprocessing.  Programs like @command{tbl} that transform input
 in their own languages into @code{roff} requests use it so that any
-diagnostic messages emitted by @code{troff} correspond to the source
-document.
+diagnostic messages emitted by a subsequent preprocessor or by
+@command{troff} @c generic
+correspond to the source document.
 @endDefreq
 
 @DefreqList {tm, terminal-message}
