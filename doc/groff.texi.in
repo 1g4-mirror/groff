@@ -18458,7 +18458,7 @@ A character defined by a request
 @code{fchar},
 @code{fschar},
 or
-@code{schar}),
+@code{schar})
 reports its contents as a @acronym{JSON}-encoded string,
 but the output is not otherwise in @acronym{JSON} format.
 @endDefreq

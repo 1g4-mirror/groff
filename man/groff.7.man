@@ -4217,7 +4217,7 @@ A character defined by a request
 .BR \%fchar ,
 .BR \%fschar ,
 or
-.BR \%schar ),
+.BR \%schar )
 reports its contents as a JSON-encoded string,
 but the output is not otherwise in JSON format.
 .
