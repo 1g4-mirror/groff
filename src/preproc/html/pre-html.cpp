@@ -36,6 +36,8 @@
 
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
+
 // needed for close(), creat(), dup(), dup2(), execvp(), fork(),
 // getpid(), mkdir(), open(), pipe(), unlink(), wait(), write()
 #include "posix.h"
@@ -268,7 +270,14 @@ static bool get_line(FILE *f, const char *file_name, int lineno)
     return false;
   if (0 /* nullptr */ == linebuf) {
     linebufsize = 128;
-    linebuf = new char[linebufsize];
+    try {
+      linebuf = new char[linebufsize];
+    }
+    catch (std::bad_alloc &e) {
+      fatal_with_file_and_line(file_name, lineno, "cannot allocate %1"
+			       " bytes to read line; aborting",
+			       linebufsize);
+    }
   }
   int i = 0;
   // skip leading whitespace
@@ -288,7 +297,14 @@ static bool get_line(FILE *f, const char *file_name, int lineno)
     if (i + 1 >= linebufsize) {
       int newbufsize = linebufsize * 2;
       char *old_linebuf = linebuf;
-      linebuf = new char[newbufsize];
+      try {
+	linebuf = new char[newbufsize];
+      }
+      catch (std::bad_alloc &e) {
+	fatal_with_file_and_line(file_name, lineno, "cannot allocate"
+				 " more than %1 bytes to read line;"
+				 " aborting", linebufsize);
+      }
       memcpy(linebuf, old_linebuf, linebufsize);
       delete[] old_linebuf;
       linebufsize = newbufsize;

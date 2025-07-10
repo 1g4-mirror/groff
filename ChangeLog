@@ -1,5 +1,12 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (get_line): Catch
+	`std::bad_alloc` exceptions from `new` operator.  Throw a fatal
+	error indicating how much memory we couldn't allocate and which
+	line of which file we were reading when we had trouble.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (get_resolution)
 	(get_image_generator): Track the line number in the files we
 	read to process the "resolution" and "image_generator"
