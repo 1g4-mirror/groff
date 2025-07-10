@@ -1,5 +1,11 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/font.cpp (text_file::next_line): Handle
+	ludicrously long input line lengths by diagnosing the problem
+	and cleanly aborting.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/font.cpp (text_file::next_line): Trivially
 	refactor.  Reorder equality comparisons to avoid inadvertent
 	lvalue assignment.

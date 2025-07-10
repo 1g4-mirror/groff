@@ -127,11 +127,15 @@ bool text_file::next_line()
 	error("invalid input character code %1", int(c));
       else {
 	if (length + 1 >= linebufsize) {
+	  int newbufsize = linebufsize * 2;
+	  if (newbufsize < 0) // integer multiplication wrapped
+	    fatal("line length exceeds %1 bytes; aborting",
+		  linebufsize);
 	  char *old_buf = buf;
-	  buf = new char[linebufsize * 2];
+	  buf = new char[newbufsize];
 	  memcpy(buf, old_buf, linebufsize);
 	  delete[] old_buf;
-	  linebufsize *= 2;
+	  linebufsize = newbufsize;
 	}
 	buf[length++] = c;
 	if ('\n' == c)
