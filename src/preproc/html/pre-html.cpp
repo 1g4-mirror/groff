@@ -267,8 +267,8 @@ static bool get_line(FILE *f)
   if (0 /* nullptr */ == f)
     return false;
   if (0 /* nullptr */ == linebuf) {
-    linebuf = new char[128];
     linebufsize = 128;
+    linebuf = new char[linebufsize];
   }
   int i = 0;
   // skip leading whitespace
@@ -286,11 +286,12 @@ static bool get_line(FILE *f)
     if (EOF == c)
       break;
     if (i + 1 >= linebufsize) {
+      int newbufsize = linebufsize * 2;
       char *old_linebuf = linebuf;
-      linebuf = new char[linebufsize * 2];
+      linebuf = new char[newbufsize];
       memcpy(linebuf, old_linebuf, linebufsize);
       delete[] old_linebuf;
-      linebufsize *= 2;
+      linebufsize = newbufsize;
     }
     linebuf[i++] = c;
     if ('\n' == c) {
