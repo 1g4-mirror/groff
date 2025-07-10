@@ -1,5 +1,10 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/soelim/soelim.am (soelim_TESTS): Actually run the
+	test we added back in November to fix Savannah #66027.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/main.cpp (read_line): Revise fix for Savannah
 	#67285; stop tracking whether a *roff comment has been seen in
 	the input, and thus stop throwing an invalid character

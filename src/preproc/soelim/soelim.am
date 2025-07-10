@@ -23,10 +23,10 @@ EXTRA_DIST += \
   src/preproc/soelim/TODO \
   src/preproc/soelim/soelim.1.man
 
-soelim_TESTS =
+soelim_TESTS = \
+  src/preproc/soelim/tests/space-in-argument-works.sh
 TESTS += $(soelim_TESTS)
 EXTRA_DIST += $(soelim_TESTS)
-
 
 # Local Variables:
 # fill-column: 72
