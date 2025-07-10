@@ -262,11 +262,11 @@ void sys_fatal(const char *s)
  *             global line buffer.
  */
 
-int get_line(FILE *f)
+static bool get_line(FILE *f)
 {
-  if (f == 0)
-    return 0;
-  if (linebuf == 0) {
+  if (0 /* nullptr */ == f)
+    return false;
+  if (0 /* nullptr */ == linebuf) {
     linebuf = new char[128];
     linebufsize = 128;
   }
@@ -274,8 +274,8 @@ int get_line(FILE *f)
   // skip leading whitespace
   for (;;) {
     int c = getc(f);
-    if (c == EOF)
-      return 0;
+    if (EOF == c)
+      return false;
     if (c != ' ' && c != '\t') {
       ungetc(c, f);
       break;
@@ -283,7 +283,7 @@ int get_line(FILE *f)
   }
   for (;;) {
     int c = getc(f);
-    if (c == EOF)
+    if (EOF == c)
       break;
     if (i + 1 >= linebufsize) {
       char *old_linebuf = linebuf;
@@ -293,13 +293,13 @@ int get_line(FILE *f)
       linebufsize *= 2;
     }
     linebuf[i++] = c;
-    if (c == '\n') {
+    if ('\n' == c) {
       i--;
       break;
     }
   }
   linebuf[i] = '\0';
-  return 1;
+  return true;
 }
 
 /*

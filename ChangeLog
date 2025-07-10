@@ -1,5 +1,13 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (get_line): Fix code style nits.
+	Boolify: demote return type from `int` to `bool`, and return
+	Boolean rather than integer literals.  Mark as `static` since
+	this function requires no external linkage.  Reorder equality
+	comparisons to avoid inadvertent lvalue assignment.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff, eqn, pic, refer, soelim, tbl]: Trivially
 	refactor.  Rename `interpret_lf_args()` library function to
 	`interpret_lf_request_arguments()` so that its purpose is
