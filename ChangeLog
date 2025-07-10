@@ -1,5 +1,24 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* [grn,soelim,tbl]: Add tests verifying pass-through of 8-bit
+	input.
+
+	* src/preproc/grn/tests/\
+	passes-through-input-with-eighth-bit-set.sh: Add test.
+	* src/preproc/grn/grn.am (grn_TESTS): Run test.
+	(TESTS): Add test to suite.
+	(EXTRA_DIST): Ship test in distribution archive.
+
+	* src/preproc/soelim/tests/\
+	passes-through-input-with-eighth-bit-set.sh: Add test.
+	* src/preproc/soelim/soelim.am (soelim_TESTS): Run test.
+
+	* src/preproc/tbl/tests/\
+	passes-through-input-with-eighth-bit-set.sh: Add test.
+	* src/preproc/tbl/tbl.am (tbl_TESTS): Run test.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.am (soelim_TESTS): Actually run the
 	test we added back in November to fix Savannah #66027.
 

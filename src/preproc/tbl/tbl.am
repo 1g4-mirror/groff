@@ -40,6 +40,7 @@ tbl_TESTS = \
   src/preproc/tbl/tests/expand-region-option-works.sh \
   src/preproc/tbl/tests/format-time-diagnostics-work.sh \
   src/preproc/tbl/tests/horizontal-rules-not-drawn-too-long.sh \
+  src/preproc/tbl/tests/passes-through-input-with-eighth-bit-set.sh \
   src/preproc/tbl/tests/repeated-character-entry-works.sh \
   src/preproc/tbl/tests/save-and-restore-hyphenation-parameters.sh \
   src/preproc/tbl/tests/save-and-restore-inter-sentence-space.sh \
@@ -49,7 +50,6 @@ tbl_TESTS = \
   src/preproc/tbl/tests/x-column-modifier-works.sh
 TESTS += $(tbl_TESTS)
 EXTRA_DIST += $(tbl_TESTS)
-
 
 # Local Variables:
 # fill-column: 72
