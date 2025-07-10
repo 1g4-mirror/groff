@@ -1330,7 +1330,8 @@ and
 requests,
 which are disabled by default because they allow an untrusted input
 document to run arbitrary commands
-and write to arbitrary file names.@footnote{GNU @command{troff}
+and write to arbitrary file names.@footnote{GNU
+@command{troff} @c GNU
 does not,
 however,
 accept newlines
@@ -4749,11 +4750,9 @@ of its own.
 The internals of
 @code{groff}
 @file{ms}
-differ from those of
-@acronym{AT&T}
+differ from those of @acronym{AT&T}
 @file{ms}.
-Documents that depend upon implementation details of
-@acronym{AT&T}
+Documents that depend upon implementation details of @acronym{AT&T}
 @file{ms}
 may not format properly with
 @code{groff}
@@ -5437,7 +5436,7 @@ that the word has been broken,
 and that its remainder lies on the next.
 Hyphenation break points can be manually specified;
 GNU
-@command{troff}
+@command{troff} @c GNU
 also uses a hyphenation algorithm
 and language-specific pattern files
 (based on
@@ -6916,7 +6915,7 @@ tab,
 newline,
 space,
 or invalid as GNU
-@command{troff}
+@command{troff} @c GNU
 input;
 recall @ref{Input Format}.
 Thus, the identifiers @samp{br}, @samp{PP}, @samp{end-list},
@@ -7788,7 +7787,7 @@ undefined macro (namely @samp{''}).
 Start a whole-line comment; read everything up to and including the next
 newline in copy mode (@pxref{Copy Mode}) and discard it.
 GNU
-@command{troff}
+@command{troff} @c GNU
 introduced this extension to avoid the problems described above.
 (@code{\"}
 is still widely seen,
@@ -7913,7 +7912,7 @@ interpolated.  @xref{Auto-increment}.)
 @cindex untokenized escape sequence, @code{\R}
 @code{\R}
 is not tokenized when GNU
-@command{troff}
+@command{troff} @c GNU
 reads its input;
 it updates only the formatter's register dictionary
 and does not contribute (directly) to output.
@@ -8036,7 +8035,7 @@ If
 @var{existing-register}
 is undefined,
 GNU
-@command{troff}
+@command{troff} @c GNU
 produces a warning in category
 @samp{reg}
 and ignores the request.
@@ -13713,7 +13712,7 @@ If
 @var{existing-name}
 is undefined,
 GNU
-@command{troff}
+@command{troff} @c GNU
 produces a warning in category
 @samp{mac}
 and ignores the request.
@@ -13944,7 +13943,7 @@ comparisons in other programming languages.
 @noindent
 Since
 GNU
-@command{troff}
+@command{troff} @c GNU
 reads comparands protected with
 @code{\?}
 in copy mode (@pxref{Copy Mode}),
@@ -17424,7 +17423,7 @@ performs the copy only when the diversion is emitted.
 it is therefore an error to use this request in safer mode,
 which is the default.
 Invoke GNU
-@command{troff}
+@command{troff} @c GNU
 or a front end with the
 @option{-U}
 option to enable unsafe mode.
@@ -17863,7 +17862,7 @@ these produce warnings in category @samp{char}.
 @endDefesc
 
 GNU
-@command{troff}
+@command{troff} @c GNU
 also permits the interpolation of macro or string contents
 as a device extension command.
 
@@ -18351,7 +18350,7 @@ Set the input line number
 optionally,
 the file name)
 GNU
-@command{troff}
+@command{troff} @c GNU
 uses when reporting diagnostics.
 The argument becomes the input line number of the
 @emph{next}
@@ -19009,7 +19008,7 @@ implementations.
 @cindex @code{pi} request, disabled by default
 @cindex @code{sy} request, disabled by default
 GNU
-@command{troff}
+@command{troff} @c GNU
 operates in ``safer'' mode by default;
 to mitigate risks from untrusted input documents,
 the
@@ -19046,23 +19045,54 @@ GNU
 therefore makes available a
 @dfn{compatibility mode}
 in an effort to keep documents prepared for AT&T
-@command{troff}
+@command{troff} @c AT&T
 rendering well.
 
 @cindex long names
 @cindex names, long
 @cindex @code{\*}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\n}, incompatibilities with @acronym{AT&T} @code{troff}
-Identifier names of arbitrary length may be GNU @code{troff}'s most
-obvious innovation.  @acronym{AT&T} @code{troff} interprets
-@samp{.dsabcd} as defining a string @samp{ab} with contents @samp{cd}.
-Normally, GNU @code{troff} interprets this as a call of a macro named
-@code{dsabcd}.  @acronym{AT&T} @code{troff} also interprets @samp{\*[}
-and @samp{\n[} as an interpolation of a string or register,
-respectively, named @samp{[}.  In GNU @code{troff}, however, the
-@samp{[} is normally interpreted as delimiting a long name.  In
-compatibility mode, GNU @code{troff} interprets names in the traditional
-way; they thus can be two characters long at most.
+Identifier names of arbitrary length may be
+GNU
+@command{troff}'s @c GNU
+most obvious innovation.
+@acronym{AT&T}
+@command{troff} @c AT&T
+interprets
+@samp{.dsabcd}
+as defining a string
+@samp{ab}
+with contents
+@samp{cd}.
+Normally,
+GNU
+@command{troff} @c GNU
+interprets this input as calling a macro named
+@code{dsabcd}.
+@acronym{AT&T}
+@code{troff} @c AT&T
+also interprets
+@samp{\*[}
+and
+@samp{\n[}
+as interpolating a string or register,
+respectively,
+named
+@samp{[}.
+GNU
+@command{troff}, @c GNU
+however,
+normally interprets
+@samp{[}
+as bracketing a long name
+(with
+@samp{]}
+at the distal end).
+In compatibility mode,
+GNU
+@command{troff} @c GNU
+interprets names in the traditional way;
+they thus can be two characters long at most.
 
 @DefreqList {cp, [@Var{b}]}
 @DefregListEndx {.C}
@@ -19078,16 +19108,38 @@ Compatibility mode is also enabled by the @option{-C} command-line
 option.
 @endDefreq
 
-@DefreqList {do, name}
+@DefreqList {do, name [@Var{argument} @r{@dots{}}]}
 @DefregListEndx {.cp}
-The @code{do} request interprets the string, request, diversion, or
-macro @var{name} (along with any further arguments) with compatibility
-mode disabled.  Compatibility mode is restored (only if it was active)
-when the @emph{expansion} of @var{name} is interpreted; that is, the
-restored compatibility state applies to the contents of the macro,
-string, or diversion @var{name} as well as data read from files or pipes
-if @var{name} is any of the @code{so}, @code{soquiet}, @code{mso},
-@code{msoquiet}, or @code{pso} requests.
+Interpret the string,
+request,
+diversion,
+or macro
+@var{name}
+(along with any further arguments)
+with compatibility mode disabled.
+Compatibility mode is restored
+(only if it was active)
+when the interpolation
+of
+@var{name}
+is interpreted;
+that is,
+the restored compatibility state applies to the request or
+contents of the macro,
+string,
+or diversion
+@var{name},
+its arguments,
+and data read from files or pipes if
+@var{name}
+is the
+@code{so},
+@code{soquiet},
+@code{mso},
+@code{msoquiet},
+or
+@code{pso}
+request.
 
 The following example illustrates several aspects of @code{do} behavior.
 
@@ -19130,14 +19182,27 @@ compatibility mode off with @samp{.cp 0}, then restore it from that
 register at the end with @samp{.cp \n(_C}.  At the same time, a modular
 design of a document or macro package may lead you to multiple layers of
 inclusion.  You cannot use the same register name everywhere lest you
-``clobber'' the value from a preceding or enclosing context.  The
-two-character register name space of @acronym{AT&T} @code{troff} is
-confining and mnemonically challenging; you may wish to use the more
-capacious name space of GNU @code{troff}.  However, attempting @samp{.nr
-_my_saved_C \n(.C} will not work in compatibility mode; the register
-name is too long.  ``This is exactly what @code{do} is for,'' you think,
-@samp{.do nr _my_saved_C \n(.C}.  The foregoing will always save zero to
-your register, because @code{do} turns compatibility mode @emph{off}
+``clobber'' the value from a preceding or enclosing context.
+The two-character register name space of @acronym{AT&T}
+@command{troff} @c AT&T
+is confining,
+but employing
+GNU
+@command{troff}'s @c GNU
+more capacious one,
+as with
+@samp{.nr _my_saved_C \n(.C},
+will not work in compatibility mode;
+the register name is too long.
+Employing the
+@code{do}
+request is no help:@:
+@samp{.do nr _my_saved_C \n(.C}
+always saves zero to the register,
+because
+@code{do}
+turns compatibility mode
+@emph{off}
 while it interprets its argument list.
 
 @need 375 @c 250 < x < 500
@@ -19148,27 +19213,30 @@ To robustly save compatibility mode before switching it off, use
 .cp 0
 @endExample
 
-at the beginning of your file, followed by
+at the beginning of your file,
+followed by
 
 @Example
 .cp \n[_my_saved_C]
 .do rr _my_saved_C
 @endExample
 
-at the end.  As in the C language, we all have to share one big
-name space, so choose a register name that is unlikely to collide with
-other uses.
+at the end.
+As the C language exposes application programs' symbols
+to those defined by libraries,
+@code{roff} documents share a name space with macro packages;
+choose a register name that is unlikely to collide with other uses.
 @endDefreq
 
 @cindex additional delimiters accepted by @acronym{AT&T} @code{troff}
 @cindex delimiters, additional, accepted by @acronym{AT&T} @code{troff}
 In compatibility mode,
 GNU
-@command{troff}
-accepts several characters as delimiters that it ordinarily rejects,
-because they are meaningful in numeric expressions and therefore
-potentially ambiguous to the document maintainer.
-The set of additional delimiters comprises
+@command{troff} @c GNU
+accepts several characters as delimiters that it ordinarily rejects
+because they can begin numeric expressions and therefore
+may be ambiguous to the document maintainer.
+This set of additional delimiters comprises
 @samp{0123456789+-(.|}.
 
 @cindex input level in delimited arguments
@@ -19176,7 +19244,7 @@ The set of additional delimiters comprises
 @cindex delimited arguments, incompatibilities with @acronym{AT&T} @code{troff}
 Normally,
 GNU
-@command{troff}
+@command{troff} @c GNU
 keeps track of delimited arguments' interpolation depth.
 In compatibility mode,
 it does not.
@@ -19216,9 +19284,8 @@ no longer recognizes a control character on the input line;
 AT&T
 @command{troff} @c AT&T
 does.
-
-For example, this code produces bold output in both cases, but the text
-differs.
+Thus the next example produces bold output in both modes,
+but the text differs.
 
 @Example
 .de xx
@@ -19229,6 +19296,7 @@ Hello!
     @result{} Hello! @r{(compatibility mode)}
 @endExample
 
+@need 1000
 @cindex @code{\s}, incompatibilities with @acronym{AT&T} @code{troff}
 Normally, the syntax form @code{\s}@var{n} accepts only a single
 character (a digit) for @var{n}, consistently with other forms that
@@ -19391,7 +19459,7 @@ with spaces in their names,
 but requires more care with trailing comments,
 and doubling of an initial neutral double quote
 @samp{"}
-if the file name contains one.
+if the file name has one.
 
 @cindex output device name string (@code{.T}), in other implementations
 GNU @code{troff} predefines a string @code{.T} containing the argument
@@ -19410,11 +19478,23 @@ registers; GNU @code{troff} honors such requests.  @xref{Built-in
 Registers}.
 
 @cindex output device usage register (@code{.T}), incompatibility with @acronym{AT&T} @code{troff}
-The (read-only) register @code{.T} interpolates@tie{}1 if GNU
-@code{troff} is called with the @option{-T} command-line option, and
-0@tie{}otherwise.  This behavior differs from AT&T @code{troff}, which
-interpolated@tie{}1 only if @code{nroff} was the formatter and was
-called with @option{-T}.
+The (read-only) register
+@code{.T}
+interpolates@tie{}1
+if
+GNU
+@command{troff} @c GNU
+is run with the
+@option{-T}
+option,
+and 0@tie{}otherwise.
+In contrast,
+AT&T
+@command{troff} @c AT&T
+interpolated@tie{}1 only if
+@command{nroff}
+was the formatter and was run with
+@option{-T}.
 
 @cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
 @acronym{AT&T} @code{troff} and other implementations handle the
@@ -19446,9 +19526,15 @@ arguments are given, and it exits with a failure status instead of a
 successful one.
 
 @cindex @code{bp} request, incompatibilities with @acronym{AT&T} @code{troff}
-The @code{bp} request differs from @acronym{AT&T} @code{troff}: GNU
-@code{troff} does not accept a scaling unit on the argument, a page
-number; the former (somewhat uselessly) does.
+The
+@code{bp}
+request differs from @acronym{AT&T}
+@command{troff}:@: @c AT&T
+GNU
+@command{troff} @c GNU
+does not accept a scaling unit on the argument,
+a page number;
+the former does (uselessly).
 
 @cindex @code{pm} request, incompatibilities with @acronym{AT&T} @code{troff}
 In @acronym{AT&T}
@@ -19470,10 +19556,15 @@ and otherwise dumps
 the @acronym{JSON}-encoded name and contents of each named argument.
 
 @cindex @code{ss} request, incompatibilities with @acronym{AT&T} @code{troff}
-Unlike @acronym{AT&T} @code{troff}, GNU @code{troff} does not ignore the
-@code{ss} request if the output is a terminal device; instead, the
-values of minimum inter-word and additional inter-sentence space are
-each rounded down to the nearest multiple of@tie{}12.
+AT&T
+@command{troff} @c AT&T
+ignores the
+@code{ss}
+request if the output is a terminal device;
+GNU
+@command{troff} @c GNU
+rounds down the values of minimum inter-word and additional
+inter-sentence space each to the nearest multiple of@tie{}12.
 
 @cindex @code{bd} request, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{cs} request, incompatibilities with @acronym{AT&T} @code{troff}
@@ -19499,7 +19590,7 @@ Glyphs represent graphemes
 (supplied by the output device)
 and populate diversions
 or the pending output line.
-The formatting process converts characters into
+Formatting converts characters into
 (sequences of)
 glyphs.
 GNU
@@ -19526,16 +19617,16 @@ applying the
 @code{asciify}
 or
 @code{unformat}
-requests to diversion converts some of its nodes back into characters.
+requests to a diversion converts some of its nodes back into characters.
 Where the formatter cannot recover the character representation
 of a node,
 it stores a null character in the character list
 corresponding to a single node in the node list.
 
 Consequently,
-a glyph node does not behave like a character
-when it is processed by a macro:@:
-it does not inherit any of the special properties
+a glyph node does not behave as a character does
+in macro interpolation:@:
+it does not inherit special properties
 that the character from which it was constructed might have had.
 For example,
 the input
@@ -19576,10 +19667,17 @@ backslash's common use as a @code{troff} escape character---perhaps in
 discussion of character sets or other programming languages---is
 the character escape @code{\(rs} or @code{\[rs]}, for ``reverse
 solidus'', from its name in the @acronym{ECMA}-6 and @w{ISO 10646}
-standards.@footnote{The @code{rs} special character identifier was not
-defined in @acronym{AT&T} @code{troff}'s font description files, but is
-in those of its descendant Heirloom Doctools @code{troff}, as of the
-latter's 060716 release (July 2006).}
+standards.@footnote{@acronym{AT&T}
+@command{troff}'s
+font description files
+did not define the
+@code{rs}
+special character,
+but those of
+its descendant Heirloom Doctools
+@command{troff} @c Heirloom
+do,
+as of its 060716 release (July 2006).}
 @c The foregoing once said "lineal" descendant; that appears not to be
 @c true.  Heirloom Doctools troff is based on Open Solaris troff, which
 @c descends from DWB 2.0 troff (effectively a fork).  "Lineal"

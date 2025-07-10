@@ -3240,20 +3240,18 @@ Direct output to diversion
 .IR ident .
 .
 .TPx
-.REQ .do "name \fR\&.\|.\|.\&\fP"
+.REQ .do "name argument \fR\&.\|.\|.\&\fP"
 Interpret the string,
 request,
 diversion,
 or macro
 .I name
-(along with any arguments)
+(along with any further arguments)
 with compatibility mode disabled.
 .
 Compatibility mode is restored
 (only if it was active)
-when the
-.I expansion
-of
+when the interpolation of
 .I name
 is interpreted.
 .

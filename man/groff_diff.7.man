@@ -2552,13 +2552,13 @@ output as the argument to a device extension command.
 .
 .TP
 .BI .do\~ name\~\c
-.RI [ arg \~.\|.\|.]
+.RI [ argument \~.\|.\|.]
 Interpret the string,
 request,
 diversion,
 or macro
 .I name
-(along with any arguments)
+(along with any further arguments)
 with compatibility mode disabled.
 .
 Compatibility mode is restored
@@ -2567,20 +2567,22 @@ when the interpolation of
 .I name
 is interpreted;
 that is,
-the restored compatibility state applies to the contents of the macro,
+the restored compatibility state applies to the request or
+contents of the macro,
 string,
 or diversion
+.IR name ,
+its arguments,
+and data read from files or pipes if
 .I name
-as well as data read from files or pipes if
-.I name
-is any of the
+is the
 .RB \[lq] so \[rq],
 .BR soquiet ,
 .BR mso ,
 .BR msoquiet ,
 or
 .B pso
-requests.
+request.
 .
 .
 .TP
@@ -5286,15 +5288,23 @@ namely the output device
 or
 .BR utf8 ).
 .
-The (read-only)
-.I register
+The (read-only) register
 .B .T
-interpolates\~1 if GNU
+interpolates\~1
+if
+GNU
 .I troff \" GNU
 is run with the
 .B \-T
-command-line option,
+option,
 and 0\~otherwise.
+In contrast,
+AT&T
+.I troff \" AT&T
+interpolated\~1 only if
+.I nroff
+was the formatter and was run with
+.BR \-T .
 .
 .
 .br
@@ -6031,7 +6041,8 @@ rendering well.
 .
 .
 .P
-Identifier names of arbitrary length may be GNU
+Identifier names of arbitrary length may be
+GNU
 .IR troff 's \" GNU
 most obvious innovation.
 .
@@ -6047,7 +6058,7 @@ with contents
 Normally,
 GNU
 .I troff \" GNU
-interprets this as a call of a macro named
+interprets this input as calling a macro named
 .RB \[lq] dsabcd \[rq].
 .
 AT&T
@@ -6056,23 +6067,26 @@ also interprets
 .B \[rs]*[
 and
 .B \[rs]n[
-as an interpolation of a string or register,
+as interpolating a string or register,
 respectively,
-called
+named
 .RB \[lq] [ \[rq].
 .
-In GNU
+GNU
 .IR troff , \" GNU
 however,
-the
+normally interprets
 .RB \[lq] [ \[rq]
-is normally interpreted as beginning the enclosure of a long identifier.
+as bracketing a long name
+(with
+.RB \[lq] ] \[rq]
+at the distal end).
 .
 In compatibility mode,
 GNU
 .I troff \" GNU
 interprets names in the traditional way,
-which means that they are limited to one or two characters.
+they thus can be two characters long at most.
 .
 See the
 .B \-C
@@ -6131,24 +6145,21 @@ You cannot use the same register name everywhere lest you
 .
 The two-character register name space of AT&T
 .I troff \" AT&T
-is confining and mnemonically challenging;
-you may wish to use
+is confining,
+but employing
 GNU
 .IR troff 's \" GNU
-more capacious name space.
-.
-However,
-attempting
+more capacious one,
+as with
 .RB \[lq] ".nr _my_saved_C \[rs]n(.C" \[rq]
 will not work in compatibility mode;
 the register name is too long.
 .
-\[lq]This is exactly what
-.B .do
-is for,\[rq] you think,
+Employing the
+.RB \[lq] do \[rq]
+request is no help:
 .RB \[lq] ".do nr _my_saved_C \[rs]n(.C" \[rq].
-.
-The foregoing will always save zero to your register,
+always saves zero to the register,
 because
 .RB \[lq] do \[rq]
 turns compatibility mode
@@ -6161,8 +6172,8 @@ In compatibility mode,
 GNU
 troff \" GNU
 accepts several characters as delimiters that it ordinarily rejects,
-because they are meaningful in numeric expressions and therefore
-potentially ambiguous to the document maintainer.
+because they can begin numeric expressions and therefore
+may be ambiguous to the document maintainer.
 .
 The set of additional delimiters comprises
 .RB \[lq] 0123456789+\-(.| \[rq].
@@ -6299,7 +6310,7 @@ with spaces in their names,
 but requires more care with trailing comments,
 and doubling of an initial neutral double quote
 .RB \[lq] \[dq] \[rq]
-if the file name contains one.
+if the file name has one.
 .
 .
 .P
@@ -6546,9 +6557,7 @@ GNU
 .I troff \" GNU
 does not accept a scaling unit on the argument,
 a page number;
-the former
-(somewhat uselessly)
-does.
+the former does (uselessly).
 .
 .
 .P
@@ -6606,7 +6615,7 @@ Glyphs represent graphemes
 and populate diversions
 or the pending output line.
 .
-The formatting process converts characters into
+Formatting converts characters into
 (sequences of)
 glyphs.
 .
@@ -6636,7 +6645,7 @@ applying the
 .B \%asciify
 or
 .B \%unformat
-requests to diversion converts some of its nodes back into characters.
+requests to a diversion converts some of its nodes back into characters.
 .
 Where the formatter cannot recover the character representation
 of a node,
@@ -6644,9 +6653,9 @@ it stores a null character in the character list
 corresponding to a single node in the node list.
 .
 Consequently,
-a glyph node does not behave like a character
-when it is processed by a macro:
-it does not inherit any of the special properties
+a glyph node does not behave as a character does
+in macro interpolation:
+it does not inherit special properties
 that the character from which it was constructed might have had.
 .
 .
@@ -6679,13 +6688,18 @@ programming languages\[em]is the character escape
 or
 .BR \[rs][rs] ,
 for \[lq]reverse solidus\[rq],
-from its name in the ECMA-6 (ISO/IEC\~646) standard.
+from its name in the ECMA-6 and ISO\~10646 standards.
 .
-[This escape sequence is not portable to AT&T
-.IR troff , \" AT&T
-but is to its descendant
-Heirloom Doctools
-.IR troff ,
+[AT&T
+.I troff 's \" AT&T
+font description files
+did not define the
+.B rs
+special character,
+but those of
+its descendant Heirloom Doctools
+.I troff \" Heirloom
+do,
 as of its 060716 release (July 2006).]
 .\" The foregoing once said "lineal" descendant; that appears not to be
 .\" true.  Heirloom Doctools troff is based on Open Solaris troff, which
