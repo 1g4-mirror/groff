@@ -1,5 +1,20 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/main.cpp (read_line): Revise fix for Savannah
+	#67285; stop tracking whether a *roff comment has been seen in
+	the input, and thus stop throwing an invalid character
+	diagnostic under any circumstance (within this function;
+	"lex.cpp" continues to, when interpreting eqn input proper).
+	The idea is that eqn, like grn, pic, refer, soelim, and tbl, is
+	a _filter_.  Its job is to transform only _part_ of its input
+	stream and leave the rest unaltered.
+
+	* src/preproc/eqn/tests/\
+	diagnostics-report-correct-line-numbers.sh: Comment out now-
+	inapplicable checks.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/de.tmac (_td_format) [@R]: Fix German date localization
 	for me(7) package; don't put a dot after the month name.
 
