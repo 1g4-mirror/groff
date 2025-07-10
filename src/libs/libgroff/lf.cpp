@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -67,7 +67,7 @@ bool interpret_lf_args(const char *p)
 }
 
 #if defined(__MSDOS__) || (defined(_WIN32) && !defined(__CYGWIN__))
-void normalize_for_lf (string &fn)
+void normalize_file_name_for_lf_request(string &fn)
 {
   int fnlen = fn.length();
   for (int i = 0; i < fnlen; i++) {
@@ -76,7 +76,7 @@ void normalize_for_lf (string &fn)
   }
 }
 #else
-void normalize_for_lf (string &)
+void normalize_file_name_for_lf_request(string &)
 {
 }
 #endif

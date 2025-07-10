@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -330,7 +330,7 @@ void do_file(const char *filename)
   }
   string fn(filename);
   fn += '\0';
-  normalize_for_lf(fn);
+  normalize_file_name_for_lf_request(fn);
   current_filename = fn.contents();
   out->set_location(current_filename, 1);
   current_lineno = 1;

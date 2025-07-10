@@ -99,7 +99,7 @@ void do_file(FILE *fp, const char *filename)
   string str;
   string fn(filename);
   fn += '\0';
-  normalize_for_lf(fn);
+  normalize_file_name_for_lf_request(fn);
   current_lineno = 1;
   current_filename = fn.contents();
   if (output_format == troff)

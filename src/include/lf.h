@@ -1,4 +1,4 @@
-/* Copyright (C) 2014-2024 Free Software Foundation, Inc.
+/* Copyright (C) 2014-2025 Free Software Foundation, Inc.
      Written by Werner Lemberg (wl@gnu.org)
 
 This file is part of groff.
@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "stringclass.h"
 
 bool interpret_lf_args(const char *p);
-void normalize_for_lf (string &fn);
+void normalize_file_name_for_lf_request(string &fn);
 
 // Local Variables:
 // fill-column: 72

@@ -198,7 +198,7 @@ int do_file(const char *filename)
 	  strerror(err));
     return 0;
   }
-  normalize_for_lf(whole_filename);
+  normalize_file_name_for_lf_request(whole_filename);
   current_filename = whole_filename.contents();
   current_lineno = 1;
   set_location();

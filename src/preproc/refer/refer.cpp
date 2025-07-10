@@ -472,7 +472,7 @@ static void do_file(const char *filename)
   }
   string fn(filename);
   fn += '\0';
-  normalize_for_lf(fn);
+  normalize_file_name_for_lf_request(fn);
   current_lineno = 1;
   current_filename = fn.contents();
   (void) fprintf(outfp, ".lf %d %s%s\n", current_lineno,

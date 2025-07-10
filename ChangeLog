@@ -1,5 +1,24 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff, eqn, pic, preconv, refer, soelim, tbl]: Trivially
+	refactor.  Rename `normalize_for_lf()` library function to
+	`normalize_file_name_for_lf_request()` so that its purpose and
+	argument are obvious.
+
+	* src/include/lf.h:
+	* src/libs/libgroff/lf.cpp: Rename it.
+
+	* src/preproc/eqn/main.cpp (main):
+	* src/preproc/pic/main.cpp (main):
+	* src/preproc/preconv/preconv.cpp (do_file):
+	* src/preproc/refer/refer.cpp (do_file):
+	* src/preproc/soelim/soelim.cpp (do_file):
+	* src/preproc/tbl/main.cpp (main):
+	* src/preproc/tbl/table.cpp (set_troff_location): Update call
+	sites.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/font.cpp (text_file::next_line): Handle
 	ludicrously long input line lengths by diagnosing the problem
 	and cleanly aborting.

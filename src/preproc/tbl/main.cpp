@@ -1723,7 +1723,7 @@ int main(int argc, char **argv)
 	else {
 	  string fn(argv[i]);
 	  fn += '\0';
-	  normalize_for_lf(fn);
+	  normalize_file_name_for_lf_request(fn);
 	  current_lineno = 1;
 	  current_filename = fn.contents();
 	  (void) printf(".lf %d %s%s\n", current_lineno,

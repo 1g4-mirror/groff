@@ -1195,7 +1195,7 @@ do_file(const char *filename)
   if (!raw_flag) {
     string fn(filename);
     fn += '\0';
-    normalize_for_lf(fn);
+    normalize_file_name_for_lf_request(fn);
     (void) printf(".lf 1 %s%s\n", ('"' == filename[0]) ? "" : "\"",
 		  fn.contents());
   }
