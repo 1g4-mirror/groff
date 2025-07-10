@@ -192,13 +192,13 @@ macros.
 .
 .
 .IP \[bu]
-The registers
+Registers
 .BR A ,
 .BR C ,
 .BR T ,
 and
 .BR U ,
-typically set from the
+set from the
 .I troff \" generic
 or
 .I nroff \" generic
