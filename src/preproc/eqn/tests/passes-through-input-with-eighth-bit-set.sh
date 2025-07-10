@@ -24,6 +24,7 @@ eqn="${abs_top_builddir:-.}/eqn"
 # characters from parts of a document it does not interpret.
 
 output=$(printf '.\\" degree sign: \313\232\n' | "$eqn" -R)
-printf "%s" "$output" | od -c | grep -q ' 232'
+printf "%s\n" "$output"
+printf "%s\n" "$output" | od -c | grep -q ' 232'
 
 # vim:set ai et sw=4 ts=4 tw=72:
