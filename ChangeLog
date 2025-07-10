@@ -1,3 +1,15 @@
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/de.tmac (_td_format) [@R]: Fix German date localization
+	for me(7) package; don't put a dot after the month name.
+
+	* tmac/tests/e_ld-works.sh: Update test expectations.
+
+	Fixes <https://savannah.gnu.org/bugs/?67303>.  Thanks to Stefan
+	Möding for the report and patch.  Problem appears to date back
+	to the introduction of German localization to groff, in commit
+	9ed99d14cb, 19 December 2006.
+
 2025-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am: Rationalize Texinfo document installation targets.
