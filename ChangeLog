@@ -1,6 +1,16 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/html/pre-html.cpp (get_resolution)
+	(get_image_generator): Track the line number in the files we
+	read to process the "resolution" and "image_generator"
+	directives (see groff_font(5)).  Pass the line number and
+	resolved file name for the file thus opened to `get_line()`.
+	(get_line): Update definition to accept these new arguments.
+	{We don't yet do anything with them.}
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/html/pre-html.cpp (get_resolution)
 	(get_image_generator): Slightly refactor.  Free `pathp` _after_
 	we've looped through all the lines in the file we've opened
 	instead of before.  This is to to prepare for a change where we

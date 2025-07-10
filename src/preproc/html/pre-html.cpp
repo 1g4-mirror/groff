@@ -262,7 +262,7 @@ void sys_fatal(const char *s)
  *             global line buffer.
  */
 
-static bool get_line(FILE *f)
+static bool get_line(FILE *f, const char *file_name, int lineno)
 {
   if (0 /* nullptr */ == f)
     return false;
@@ -318,7 +318,8 @@ static unsigned int get_resolution(void)
   // XXX: We should break out of this loop if we hit a "charset" line.
   // "This line and everything following it in the file are ignored."
   // (groff_font(5))
-  while (get_line(f))
+  int lineno = 1;
+  while (get_line(f, pathp, lineno++))
     (void) sscanf(linebuf, "res %u", &res);
   free(pathp);
   fclose(f);
@@ -344,7 +345,8 @@ static char *get_image_generator(void)
   // XXX: We should break out of this loop if we hit a "charset" line.
   // "This line and everything following it in the file are ignored."
   // (groff_font(5))
-  while (get_line(f)) {
+  int lineno = 1;
+  while (get_line(f, pathp, lineno++)) {
     char *cursor = linebuf;
     size_t limit = strlen(linebuf);
     char *end = linebuf + limit;
