@@ -299,7 +299,7 @@ int do_file(const char *filename)
 	current_lineno++;
 	line += '\n';
 	line += '\0';
-	interpret_lf_args(line.contents());
+	interpret_lf_request_arguments(line.contents());
 	printf(".lf%s", line.contents());
 	state = START;
       }

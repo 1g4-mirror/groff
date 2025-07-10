@@ -113,7 +113,7 @@ void do_file(FILE *fp, const char *filename)
       put_string(linebuf, stdout);
       linebuf += '\0';
       // In GNU roff, `lf` assigns the number of the _next_ line.
-      if (interpret_lf_args(linebuf.contents() + 3))
+      if (interpret_lf_request_arguments(linebuf.contents() + 3))
 	current_lineno--;
     }
     else if (linebuf.length() >= 4

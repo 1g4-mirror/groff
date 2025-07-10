@@ -1,5 +1,22 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff, eqn, pic, refer, soelim, tbl]: Trivially
+	refactor.  Rename `interpret_lf_args()` library function to
+	`interpret_lf_request_arguments()` so that its purpose is
+	obvious.
+
+	* src/include/lf.h:
+	* src/libs/libgroff/lf.cpp: Rename it.
+
+	* src/preproc/eqn/main.cpp (do_file):
+	* src/preproc/pic/main.cpp (do_file):
+	* src/preproc/refer/refer.cpp (do_file):
+	* src/preproc/soelim/soelim.cpp (do_file):
+	* src/preproc/tbl/main.cpp (process_input_file, process_data):
+	Update call sites.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff, eqn, pic, preconv, refer, soelim, tbl]: Trivially
 	refactor.  Rename `normalize_for_lf()` library function to
 	`normalize_file_name_for_lf_request()` so that its purpose and

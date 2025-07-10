@@ -435,7 +435,7 @@ void do_file(const char *filename)
 	  c = getc(fp);
 	}
 	line += '\0';
-	interpret_lf_args(line.contents());
+	interpret_lf_request_arguments(line.contents());
 	printf(".lf%s", line.contents());
 	state = START;
       }

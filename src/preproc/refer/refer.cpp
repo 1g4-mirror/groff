@@ -579,7 +579,7 @@ static void do_file(const char *filename)
     {
       pending_lf_lines += line;
       line += '\0';
-      if (interpret_lf_args(line.contents() + 3))
+      if (interpret_lf_request_arguments(line.contents() + 3))
 	current_lineno--;
     }
     else if (recognize_R1_R2

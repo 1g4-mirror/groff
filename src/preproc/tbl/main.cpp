@@ -317,7 +317,7 @@ void process_input_file(FILE *fp)
 	  c = getc(fp);
 	}
 	line += '\0';
-	interpret_lf_args(line.contents());
+	interpret_lf_request_arguments(line.contents());
 	printf(".lf%s", line.contents());
 	state = START;
       }
@@ -1467,7 +1467,7 @@ table *process_data(table_input &in, format *f, options *opt)
 		      c = in.get();
 		    }
 		    args += '\0';
-		    interpret_lf_args(args.contents());
+		    interpret_lf_request_arguments(args.contents());
 		    // remove the '\0'
 		    args.set_length(args.length() - 1);
 		    input_entry += args;
@@ -1578,7 +1578,7 @@ table *process_data(table_input &in, format *f, options *opt)
 	if (line.length() >= 3
 	    && line[0] == '.' && line[1] == 'l' && line[2] == 'f') {
 	  line += '\0';
-	  interpret_lf_args(line.contents() + 3);
+	  interpret_lf_request_arguments(line.contents() + 3);
 	}
       }
       break;
