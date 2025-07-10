@@ -441,9 +441,10 @@
 2025-06-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add experimental, undocumented global node dumping
-	feature.  This essentially produces a graph of the internal
-	representation of the entire output.  (It's a forest, with one
-	tree per output line.)
+	feature.  Except for line numbers and margin characters, this
+	essentially produces a graph of the internal representation of
+	the entire output--except for line numbers and margin
+	characters.  (It's a forest, with one tree per output line.)
 
 	* src/roff/troff/input.h: Declare new global Boolean,
 	`want_nodes_dumped`.
@@ -609,7 +610,7 @@
 
 2025-06-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/utils/grog/grog.pl (interpet_line): Recognize new `pfp`
+	* src/utils/grog/grog.pl (interpret_line): Recognize new `pfp`
 	and `pftr` request names.
 
 2025-06-28  Deri James  <deri@chuzzlewit.myzen.co.uk>
@@ -662,6 +663,8 @@
 	* src/preproc/preconv/preconv.cpp (do_file): Tweak diagnostic
 	message; drop extra layer of quoting of file name, and migrate
 	to "cannot" from "unable to" phrasing.
+
+	Continues the long process of fixing Savannah #66519.
 
 2025-06-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -1619,7 +1622,7 @@
 2025-05-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Refactor continuous rendering mode to use an "infinite
-	page length" method facilated by the new semantics of the `.R`
+	page length" method facilitated by the new semantics of the `.R`
 	register.
 
 	* tmac/mdoc/doc-common (doc-ne): Drop unneeded macro.
@@ -1645,7 +1648,7 @@
 2025-05-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man]: Refactor continuous rendering mode to use an "infinite
-	page length" method facilated by the new semantics of the `.R`
+	page length" method facilitated by the new semantics of the `.R`
 	register.
 
 	* tmac/an.tmac (an-ne): Drop unneeded macro.
@@ -3128,8 +3131,8 @@
 	invocation of "nroff" command through a shell variable to ensure
 	that we test the one that has been built, not one in the $PATH.
 	Most other groff automated tests already work this way.  Also
-	check for POSIX-non-comforming shell, and skip test if one
-	doesn't seem to be present.
+	check for POSIX-non-comforming shell, and skip test if a
+	conforming one doesn't seem to be present.
 
 2025-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
