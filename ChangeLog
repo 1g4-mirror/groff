@@ -1,5 +1,13 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (get_resolution)
+	(get_image_generator): Slightly refactor.  Free `pathp` _after_
+	we've looped through all the lines in the file we've opened
+	instead of before.  This is to to prepare for a change where we
+	pass `pathp` to `get_line()` as a new argument.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (get_line): Slightly refactor.
 	Use named variables more and constant literals less.
 
