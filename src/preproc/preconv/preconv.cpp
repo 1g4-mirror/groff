@@ -701,8 +701,8 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
   char *limit;
   while (inbytes_left > 0) {
     size_t status = iconv(handle,
-			  (ICONV_CONST char **)&inptr, &inbytes_left,
-			  &outptr, &outbytes_left);
+			  static_cast<ICONV_CONST char **>(&inptr),
+			  &inbytes_left, &outptr, &outbytes_left);
     if (status == static_cast<size_t>(-1)) {
       if (EILSEQ == errno) {
 	// Invalid byte sequence.  XXX
@@ -735,8 +735,8 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
     inbytes_left += read_bytes;
     while (inbytes_left > 0) {
       size_t status = iconv(handle,
-			    (ICONV_CONST char **)&inptr, &inbytes_left,
-			    &outptr, &outbytes_left);
+			    static_cast<ICONV_CONST char **>(&inptr),
+			    &inbytes_left, &outptr, &outbytes_left);
       if (status == (size_t)-1) {
 	if (EILSEQ == errno) {
 	  // Invalid byte sequence.  XXX
@@ -1154,12 +1154,12 @@ do_file(const char *filename)
 	fprintf(stderr, "  but BOM in data stream implies encoding"
 		" '%s'!\n", BOM_encoding);
     }
-    encoding = (char *)user_encoding;
+    encoding = static_cast<char *>(user_encoding);
   }
   else if (BOM_encoding != 0 /* nullptr */) {
     if (is_debugging)
       fprintf(stderr, "  found BOM, no search for coding tag\n");
-    encoding = (char *)BOM_encoding;
+    encoding = const_cast<char *>(BOM_encoding);
   }
   else {
     // 'check_coding_tag' returns a pointer to a static array (or a null

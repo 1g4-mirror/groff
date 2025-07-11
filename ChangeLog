@@ -19,6 +19,8 @@
 	(emacs2mime, check_coding_tag, detect_file_encoding, do_file)
 	(main): Explicitly compare values of pointer type to null
 	pointer literals instead of letting them pun down to Booleans.
+	(conversion_iconv, do_file): Favor C++ `static_cast<>` and
+	`const_cast<>` operators over omnipotent C-style casts.
 
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
