@@ -729,8 +729,9 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
   // Handle 'fp' and switch to 'inbuf'.
   size_t read_bytes;
   char *read_start = inbuf + inbytes_left;
-  while ((read_bytes = fread(read_start, 1, BUFSIZ - inbytes_left, fp))
-      > 0) {
+  while ((read_bytes = fread(read_start, 1, (BUFSIZ - inbytes_left),
+			     fp))
+	 > 0) {
     inptr = inbuf;
     inbytes_left += read_bytes;
     while (inbytes_left > 0) {
@@ -1185,7 +1186,7 @@ do_file(const char *filename)
     encoding = file_encoding;
   }
   strncpy(encoding_string, encoding, MAX_VAR_LEN - 1);
-  encoding_string[MAX_VAR_LEN - 1] = 0;
+  encoding_string[MAX_VAR_LEN - 1] = '\0';
   if (must_free_encoding)
     free(encoding);
   encoding = encoding_string;
@@ -1346,7 +1347,7 @@ main(int argc, char **argv)
     fatal("error status on standard output stream");
   if (fflush(stdout) < 0)
     fatal("cannot flush standard output stream: %1", strerror(errno));
-  return nbad != 0;
+  return (nbad != 0);
 }
 
 // Local Variables:

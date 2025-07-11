@@ -21,6 +21,10 @@
 	pointer literals instead of letting them pun down to Booleans.
 	(conversion_iconv, do_file): Favor C++ `static_cast<>` and
 	`const_cast<>` operators over omnipotent C-style casts.
+	(conversion_iconv, main): Parenthesize (formally) complex
+	pexpressions.
+	(do_file): Assign character rather than integer literal to
+	element of `char` array.
 
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
