@@ -1,5 +1,13 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Catch `std::bad_alloc` exceptions from `new` operator.
+	Throw a fatal error indicating how much memory we couldn't
+	allocate.
+
+	* src/roff/troff/input.cpp (read_long_escape_parameters): Do it.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Refactor to simplify.  As an
 	apparent optimization (dating back as far as groff 1.02, 1991)
 	parts of the input parser that needed to read arbitrarily far

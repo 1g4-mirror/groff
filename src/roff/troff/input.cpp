@@ -996,7 +996,15 @@ static symbol read_long_escape_parameters(read_mode mode)
 {
   int start_level = input_stack::get_level();
   int buf_size = default_buffer_size;
-  char *buf = new char[buf_size];
+  char *buf = 0 /* nullptr */;
+  try {
+    // C++03: new char[buf_size]();
+    buf = new char[buf_size];
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes to read input line", buf_size);
+  }
+  (void) memset(buf, 0, (buf_size * sizeof(char)));
   int i = 0;
   char c;
   bool have_char = false;
@@ -1011,11 +1019,17 @@ static symbol read_long_escape_parameters(read_mode mode)
       break;
     if (i + 2 > buf_size) {
       char *old_buf = buf;
-      // C++03: new char[buf_size * 2]();
-      buf = new char[buf_size * 2];
-      (void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
+      int new_buf_size = buf_size * 2;
+      // C++03: new char[new_buf_size]();
+      try {
+	buf = new char[new_buf_size];
+      }
+      catch (const std::bad_alloc &e) {
+	fatal("cannot allocate %1 bytes to read input line", buf_size);
+      }
+      (void) memset(buf, 0, (new_buf_size * sizeof(char)));
       memcpy(buf, old_buf, buf_size);
-      buf_size *= 2;
+      buf_size = new_buf_size;
       delete[] old_buf;
     }
     if ((']' == c) && (input_stack::get_level() == start_level))
