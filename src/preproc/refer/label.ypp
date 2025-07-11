@@ -209,9 +209,9 @@ public:
   void evaluate(int, const reference &, string &, substring_position &);
 };
 
-static expression *parsed_label = 0;
-static expression *parsed_date_label = 0;
-static expression *parsed_short_label = 0;
+static expression *parsed_label = 0 /* nullptr */;
+static expression *parsed_date_label = 0 /* nullptr */;
+static expression *parsed_short_label = 0 /* nullptr */;
 
 static expression *parse_result;
 
@@ -222,8 +222,8 @@ string literals;
 %union {
   int num;
   expression *expr;
-  struct { int ndigits; int val; } dig;
-  struct { int start; int len; } str;
+  struct dig_s { int ndigits; int val; } dig;
+  struct str_s { int start; int len; } str;
 }
 
 /* uppercase or lowercase letter */

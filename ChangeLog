@@ -1,5 +1,12 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/refer/label.ypp: Give the anonymous `struct` types
+	used for `dig` and `str` names, so that they can be passed to a
+	template function C++98-conformantly.  Lamely, apply an `_s`
+	suffix to the object names to create the type names.
+
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/preconv/preconv.cpp: Fix code style nits.  Spell
 	null pointer constant the idiomatic C++98 way (`0`) instead of
 	as `NULL`.  Boolify: demote global variable `raw_flag` from
