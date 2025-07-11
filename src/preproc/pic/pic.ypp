@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -102,11 +102,11 @@ char *do_sprintf(const char *fmt, const double *v, int nv);
 	char *str;
 	int n;
 	double x;
-	struct { double x, y; } pair;
-	struct { double x; char *body; } if_data;
-	struct { char *str; const char *filename; int lineno; } lstr;
-	struct { double *v; int nv; int maxv; } dv;
-	struct { double val; int is_multiplicative; } by;
+	struct pair_s { double x, y; } pair;
+	struct if_data_s { double x; char *body; } if_data;
+	struct lstr_s { char *str; const char *filename; int lineno; } lstr;
+	struct dv_s { double *v; int nv; int maxv; } dv;
+	struct by_s { double val; int is_multiplicative; } by;
 	place pl;
 	object *obj;
 	corner crn;

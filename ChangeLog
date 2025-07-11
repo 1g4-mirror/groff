@@ -1,5 +1,13 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/pic.ypp: Fix code style nit.  Give the
+	anonymous `struct` types used for `pair`, `if_data`, `lstr`,
+	`dv`, and `by` name, so that they can be passed to a template
+	function C++98-conformantly.  Lamely, apply an `_s` suffix to
+	the object names to create the type names.
+
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/lex.cpp: Fix code style nits.  Sort libgroff
 	header files before program-specific ones.  Give the anonymous
 	`struct` type used for `token_table` a name, so that it can be
