@@ -1,6 +1,8 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/preproc/preconv/preconv.cpp: Fix code style nits.
+	* src/preproc/preconv/preconv.cpp: Fix code style nits.  Spell
+	null pointer constant the idiomatic C++98 way (`0`) instead of
+	as `NULL`.
 	(get_BOM): Give the anonymous `struct` type used for `BOM_table`
 	a name, and move it into the global scope (it was already
 	`static`), so that it can be passed to a template function

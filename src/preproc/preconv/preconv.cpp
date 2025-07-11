@@ -381,7 +381,7 @@ emacs_to_mime[] = {
 //  {"x-ctext",				""},		// --
 //  {"x-ctext-with-extensions",		""},		// --
 
-  {NULL,				NULL},
+  {0 /* nullptr */,				0 /* nullptr */},
 };
 
 // ---------------------------------------------------------
@@ -794,7 +794,8 @@ static struct bom_s {
 // the byte after the BOM.  This function reads (at most)
 // four bytes from the data stream.
 //
-// Return encoding if a BOM is found, NULL otherwise.
+// Return encoding if a BOM is found, and a null pointer
+// otherwise.
 // ---------------------------------------------------------
 const char *
 get_BOM(FILE *fp, string &BOM, string &data)
@@ -807,7 +808,7 @@ get_BOM(FILE *fp, string &BOM, string &data)
   //   UTF-32: 0x0000FEFF or 0xFFFE0000
   const int BOM_table_len = array_length(BOM_table);
   char BOM_string[4];
-  const char *retval = NULL;
+  const char *retval = 0 /* nullptr */;
   int len;
   for (len = 0; len < 4; len++) {
     int c = getc(fp);
@@ -836,8 +837,8 @@ get_BOM(FILE *fp, string &BOM, string &data)
 // Get first two lines from input stream.
 //
 // Return string (allocated with 'new') without zero bytes
-// or NULL in case no coding tag can occur in the data
-// (which is stored unmodified in 'data').
+// or a null pointer in case no coding tag can occur in the
+// data (which is stored unmodified in 'data').
 // ---------------------------------------------------------
 char *
 get_tag_lines(FILE *fp, string &data)
@@ -854,7 +855,7 @@ get_tag_lines(FILE *fp, string &data)
     prev = c;
   }
   if (newline_count > 1)
-    return NULL;
+    return 0 /* nullptr */;
   bool emit_warning = true;
   for (int lines = newline_count; lines < 2; lines++) {
     while ((c = getc(fp)) != EOF) {
@@ -919,8 +920,8 @@ is_comment_line(char *s)
 // Leading and trailing blanks are ignored.  There might be
 // more than one blank after ':' and ';'.
 //
-// Return position of next value/variable pair or NULL if
-// at end of data.
+// Return position of next value/variable pair or a null
+// pointer if at end of data.
 // ---------------------------------------------------------
 char *
 get_variable_value_pair(char *d1, char **variable, char **value)
@@ -940,7 +941,7 @@ get_variable_value_pair(char *d1, char **variable, char **value)
     d1++;
   val[0] = 0;
   if (!*d1)
-    return NULL;
+    return 0 /* nullptr */;
   if (*d1 == ';')
     return d1 + 1;
   d1++;
@@ -956,7 +957,7 @@ get_variable_value_pair(char *d1, char **variable, char **value)
     d1++;
   if (*d1 == ';')
     return d1 + 1;
-  return NULL;
+  return 0 /* nullptr */;
 }
 
 // ---------------------------------------------------------
@@ -985,11 +986,12 @@ get_variable_value_pair(char *d1, char **variable, char **value)
 // which specifies the coding system used for the data
 // stream.
 //
-// Return <value> if found, NULL otherwise.
+// Return <value> if found, and a null pointer otherwise.
 //
-// Note that null bytes in the data are skipped before applying
-// the algorithm.  This should work even with files encoded as
-// UTF-16 or UTF-32 (or its siblings) in most cases.
+// Note that null bytes in the data are skipped before
+// applying the algorithm.  This should work even with files
+// encoded as UTF-16 or UTF-32 (or its siblings) in most
+// cases.
 // ---------------------------------------------------------
 char *
 check_coding_tag(FILE *fp, string &data)
@@ -997,7 +999,7 @@ check_coding_tag(FILE *fp, string &data)
   char *inbuf = get_tag_lines(fp, data);
   char *lineend;
   for (char *p = inbuf; is_comment_line(p); p = lineend + 1) {
-    if ((lineend = strchr(p, '\n')) == NULL)
+    if ((lineend = strchr(p, '\n')) == 0 /* nullptr */)
       break;
     *lineend = 0;		// switch temporarily to '\0'
     char *d1 = strstr(p, "-*-");
@@ -1021,20 +1023,20 @@ check_coding_tag(FILE *fp, string &data)
     *d2 = '-';			// restore '-'
   }
   free(inbuf);
-  return NULL;
+  return 0 /* nullptr */;
 }
 
 char *
 detect_file_encoding(FILE *fp)
 {
 #ifdef HAVE_UCHARDET
-  uchardet_t ud = NULL;
+  uchardet_t ud = 0 /* nullptr */;
   struct stat stat_buf;
   size_t len, read_bytes;
-  char *data = NULL;
+  char *data = 0 /* nullptr */;
   int res, current_position;
   const char *charset;
-  char *ret = NULL;
+  char *ret = 0 /* nullptr */;
 
   current_position = ftell(fp);
   /* Due to BOM and tag detection, we are not at the beginning of the
@@ -1072,13 +1074,14 @@ detect_file_encoding(FILE *fp)
   uchardet_data_end(ud);
   charset = uchardet_get_charset(ud);
   if (is_debugging) {
-    if (charset)
+    if (charset != 0 /* nullptr */)
        fprintf(stderr, "  charset: %s\n", charset);
     else
        fprintf(stderr, "  charset is NULL\n");
   }
-  /* uchardet 0.0.1 could return an empty string instead of NULL */
-  if (charset && *charset) {
+  /* uchardet 0.0.1 could return an empty string instead of a null
+   * pointer. */
+  if ((charset != 0 /* nullptr */) && (*charset != '\0')) {
     ret = static_cast<char *>(malloc(strlen(charset) + 1));
     strcpy(ret, charset);
   }
@@ -1091,7 +1094,7 @@ end:
 
   return ret;
 #else /* not HAVE_UCHARDET */
-  return NULL;
+  return 0 /* nullptr */;
 #endif /* not HAVE_UCHARDET */
 }
 
@@ -1159,7 +1162,8 @@ do_file(const char *filename)
     encoding = (char *)BOM_encoding;
   }
   else {
-    // 'check_coding_tag' returns a pointer to a static array (or NULL).
+    // 'check_coding_tag' returns a pointer to a static array (or a null
+    // pointer).
     char *file_encoding = check_coding_tag(fp, data);
     if (!file_encoding) {
       if (is_debugging)
@@ -1267,13 +1271,14 @@ main(int argc, char **argv)
   program_name = argv[0];
   int opt;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, 'h' },
-    { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, 'h' },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   // Parse the command-line options.
   while ((opt = getopt_long(argc, argv,
-			    ":dD:e:hrv", long_options, NULL)) != EOF)
+			    ":dD:e:hrv", long_options,
+			    0 /* nullptr */)) != EOF)
     switch (opt) {
     case 'v':
       printf("GNU preconv (groff) version %s %s iconv support and %s"
