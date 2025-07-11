@@ -4,7 +4,8 @@
 	Throw a fatal error indicating how much memory we couldn't
 	allocate.
 
-	* src/roff/troff/input.cpp (read_long_escape_parameters): Do it.
+	* src/roff/troff/input.cpp (read_long_escape_parameters)
+	(do_get_long_name): Do it.
 
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
