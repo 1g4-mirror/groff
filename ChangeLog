@@ -1,5 +1,23 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Refactor to simplify.  As an
+	apparent optimization (dating back as far as groff 1.02, 1991)
+	parts of the input parser that needed to read arbitrarily far
+	ahead in the input stream to consume a token used an initial
+	stack-allocated buffer of 16 bytes.  (Also known as "automatic"
+	storage, thus the name "abuf", I think.)  If 16 bytes wasn't
+	enough, open-coded logic would allocate a buffer from the heap
+	and double it in size until the token fit.  Simplify by
+	converting `ABUF_SIZE` from a preprocessor macro to a `const`
+	symbol named `default_buffer_size`, and _always_ allocate from
+	the heap.  In the future, we can convert stuff like this to a
+	C++ STL `vector` and let the standard library worry about
+	dynamic storage management.
+	(read_long_escape_parameters, do_get_long_name)
+	(get_delimited_name): Do it.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Fix code style nits.
 	(read_long_escape_parameters, read_escape_parameter)
 	(do_get_long_name): Parenthesize (formally) complex expressions.

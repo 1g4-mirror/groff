@@ -80,11 +80,11 @@ extern "C" {
      (WARN_CHAR|WARN_NUMBER|WARN_BREAK|WARN_SPACE|WARN_FONT|WARN_FILE)
 #endif
 
-// initial size of buffer for reading names; expanded as necessary
-#define ABUF_SIZE 16
-
 extern "C" const char *program_name;
 extern "C" const char *Version_string;
+
+// initial size for input buffers that need to grow arbitrarily
+static const int default_buffer_size = 16;
 
 #ifdef COLUMN
 void init_column_requests();
@@ -995,39 +995,28 @@ static symbol read_two_char_escape_parameter()
 static symbol read_long_escape_parameters(read_mode mode)
 {
   int start_level = input_stack::get_level();
-  char abuf[ABUF_SIZE];
-  char *buf = abuf;
-  int buf_size = ABUF_SIZE;
+  int buf_size = default_buffer_size;
+  char *buf = new char[buf_size];
   int i = 0;
   char c;
   bool have_char = false;
   for (;;) {
     c = get_char_for_escape_parameter(have_char && (WITH_ARGS == mode));
     if ('\0' == c) {
-      if (buf != abuf)
-	delete[] buf;
+      delete[] buf;
       return NULL_SYMBOL;
     }
     have_char = true;
     if ((WITH_ARGS == mode) && (' ' == c))
       break;
-    if ((i + 2) > buf_size) {
-      if (buf == abuf) {
-	// C++03: new char[ABUF_SIZE * 2]();
-	buf = new char[ABUF_SIZE * 2];
-	(void) memset(buf, 0, (ABUF_SIZE * 2 * sizeof(char)));
-	memcpy(buf, abuf, buf_size);
-	buf_size = ABUF_SIZE * 2;
-      }
-      else {
-	char *old_buf = buf;
-	// C++03: new char[buf_size * 2]();
-	buf = new char[buf_size * 2];
-	(void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
-	memcpy(buf, old_buf, buf_size);
-	buf_size *= 2;
-	delete[] old_buf;
-      }
+    if (i + 2 > buf_size) {
+      char *old_buf = buf;
+      // C++03: new char[buf_size * 2]();
+      buf = new char[buf_size * 2];
+      (void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
+      memcpy(buf, old_buf, buf_size);
+      buf_size *= 2;
+      delete[] old_buf;
     }
     if ((']' == c) && (input_stack::get_level() == start_level))
       break;
@@ -1043,14 +1032,9 @@ static symbol read_long_escape_parameters(read_mode mode)
   }
   if (' ' == c)
     have_multiple_params = true;
-  if (buf == abuf) {
-    return symbol(abuf);
-  }
-  else {
-    symbol s(buf);
-    delete[] buf;
-    return s;
-  }
+  symbol s(buf);
+  delete[] buf;
+  return s;
 }
 
 static symbol read_escape_parameter(read_mode mode)
@@ -2834,29 +2818,19 @@ static symbol do_get_long_name(bool required, char end_char)
 {
   while (tok.is_space())
     tok.next();
-  char abuf[ABUF_SIZE];
-  char *buf = abuf;
-  int buf_size = ABUF_SIZE;
+  int buf_size = default_buffer_size;
+  char *buf = new char[buf_size];
   int i = 0;
   for (;;) {
     // If `end_char` != `\0` we normally have to append a null byte.
     if ((i + 2) > buf_size) {
-      if (buf == abuf) {
-	// C++03: new char[ABUF_SIZE * 2]();
-	buf = new char[ABUF_SIZE * 2];
-	(void) memset(buf, 0, (ABUF_SIZE * 2 * sizeof(char)));
-	memcpy(buf, abuf, (buf_size * sizeof(char)));
-	buf_size = ABUF_SIZE * 2;
-      }
-      else {
-	char *old_buf = buf;
-	// C++03: new char[buf_size * 2]();
-	buf = new char[buf_size * 2];
-	(void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
-	memcpy(buf, old_buf, (buf_size * sizeof(char)));
-	buf_size *= 2;
-	delete[] old_buf;
-      }
+      char *old_buf = buf;
+      // C++03: new char[buf_size * 2]();
+      buf = new char[buf_size * 2];
+      (void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
+      memcpy(buf, old_buf, (buf_size * sizeof(char)));
+      buf_size *= 2;
+      delete[] old_buf;
     }
     if ((buf[i] = tok.ch()) == '\0' || (buf[i] == end_char))
       break;
@@ -2871,13 +2845,9 @@ static symbol do_get_long_name(bool required, char end_char)
     buf[i + 1] = '\0';
   else
     diagnose_invalid_identifier();
-  if (buf == abuf)
-    return symbol(buf);
-  else {
-    symbol s(buf);
-    delete[] buf;
-    return s;
-  }
+  symbol s(buf);
+  delete[] buf;
+  return s;
 }
 
 static void close_all_streams();
@@ -5801,28 +5771,18 @@ static symbol get_delimited_name()
     return NULL_SYMBOL;
   }
   int start_level = input_stack::get_level();
-  char abuf[ABUF_SIZE];
-  char *buf = abuf;
-  int buf_size = ABUF_SIZE;
+  int buf_size = default_buffer_size;
+  char *buf = new char[buf_size];
   int i = 0;
   for (;;) {
     if ((i + 1) > buf_size) {
-      if (buf == abuf) {
-	// C++03: new char[ABUF_SIZE * 2]();
-	buf = new char[ABUF_SIZE * 2];
-	(void) memset(buf, 0, (ABUF_SIZE * 2 * sizeof(char)));
-	memcpy(buf, abuf, buf_size);
-	buf_size = ABUF_SIZE * 2;
-      }
-      else {
-	char *old_buf = buf;
-	// C++03: new char[buf_size * 2]();
-	buf = new char[buf_size * 2];
-	(void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
-	memcpy(buf, old_buf, buf_size);
-	buf_size *= 2;
-	delete[] old_buf;
-      }
+      char *old_buf = buf;
+      // C++03: new char[buf_size * 2]();
+      buf = new char[buf_size * 2];
+      (void) memset(buf, 0, (buf_size * 2 * sizeof(char)));
+      memcpy(buf, old_buf, buf_size);
+      buf_size *= 2;
+      delete[] old_buf;
     }
     tok.next();
     if ((tok == start_token)
@@ -5838,26 +5798,19 @@ static symbol get_delimited_name()
 	error("closing delimiter does not match; expected %1, got %2",
 	      delimdesc, tok.description());
       free(delimdesc);
-      if (buf != abuf)
-	delete[] buf;
+      delete[] buf;
       return NULL_SYMBOL;
     }
     i++;
   }
   buf[i] = '\0';
-  if (buf == abuf) {
-    if (0 == i) {
-      error("empty delimited name");
-      return NULL_SYMBOL;
-    }
-    else
-      return symbol(buf);
+  if (0 == i) {
+    error("empty delimited name");
+    return NULL_SYMBOL;
   }
-  else {
-    symbol s(buf);
-    delete[] buf;
-    return s;
-  }
+  symbol s(buf);
+  delete[] buf;
+  return s;
 }
 
 static void do_register() // \R
