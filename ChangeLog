@@ -1,5 +1,12 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/pic.ypp (object_spec): Revert "workaround for
+	bug in Compaq C++ V6.5-033 for Compaq Tru64 UNIX V5.1A (Rev.
+	1885)" on the assumption that this compiler version has reached
+	its end-of-support date.
+
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/pic.ypp: Fix code style nit.  Give the
 	anonymous `struct` types used for `pair`, `if_data`, `lstr`,
 	`dv`, and `by` name, so that they can be passed to a template
