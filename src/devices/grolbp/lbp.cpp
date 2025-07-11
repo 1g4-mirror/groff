@@ -42,7 +42,7 @@ TODO
 #include "charset.h"
 #include "driver.h"
 #include "lbp.h"
-#include "lib.h" // strsave()
+#include "lib.h" // array_length(), strsave()
 #include "paper.h"
 
 extern "C" const char *Version_string;
@@ -159,7 +159,7 @@ static void wp54charset()
 {
   unsigned int i;
   lbpputs("\033[714;100;29;0;32;120.}");
-  for (i = 0; i < sizeof(symset); i++)
+  for (i = 0; i < sizeof symset; i++)
     lbpputc(symset[i]);
   lbpputs("\033[100;0 D");
   return;
@@ -401,9 +401,9 @@ lbp_printer::vdmflush()
   /* let's copy the vdm code to the output */
   rewind(vdmoutput);
   do {
-    bytes_read = fread(buffer, 1, sizeof(buffer), vdmoutput);
+    bytes_read = fread(buffer, 1, sizeof buffer, vdmoutput);
     bytes_read = fwrite(buffer, 1, bytes_read, lbpoutput);
-  } while (bytes_read == sizeof(buffer));
+  } while (bytes_read == sizeof buffer);
   fclose(vdmoutput);	// This will also delete the file,
 			// since it is created by tmpfile()
   vdmoutput = 0 /* nullptr */;
@@ -584,7 +584,7 @@ printer *make_printer()
   return new lbp_printer(user_papersize, user_paperwidth, user_paperlength);
 }
 
-static struct {
+static struct lbp_paper_size {
   const char *name;
   int code;
 } lbp_papersizes[] =
@@ -599,7 +599,7 @@ static int set_papersize(const char *paperformat)
   unsigned int i;
   // First, test for a standard (i.e. supported directly by the printer)
   // paper format.
-  for (i = 0 ; i < sizeof(lbp_papersizes) / sizeof(lbp_papersizes[0]); i++)
+  for (i = 0 ; i < array_length(lbp_papersizes); i++)
   {
     if (strcasecmp(lbp_papersizes[i].name,paperformat) == 0)
       return lbp_papersizes[i].code;

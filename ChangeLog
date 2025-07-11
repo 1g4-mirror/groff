@@ -1,5 +1,16 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grolbp/lbp.cpp: Fix code style nits.  Give the
+	anonymous `struct` type used for `lbp_papersizes` a name, so
+	that it can be passed to a template function C++98-conformantly.
+	(set_papersize): Use `array_length()` on `lbp_papersizes`
+	instead of `sizeof` and division.
+	(wp54charset, lbp_printer::vdmflush): `sizeof` is an operator,
+	not a function, so don't parenthesize its operand when it's an
+	lvalue (as opposed to a type name).
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Catch `std::bad_alloc` exceptions from `new` operator.
 	Throw a fatal error indicating how much memory we couldn't
 	allocate.
