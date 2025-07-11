@@ -1,5 +1,14 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_long_escape_parameters):
+	Slightly refactor.  Test for an empty argument (or argument
+	sequence) earlier, before worrying about whether the input
+	buffer just populated is still the stack-allocated one or was
+	relocated to the heap.  This is to facilitate a simplification
+	of input buffer management.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_rest_of_line_as_argument):
 	Trivially refactor.  Rename local variable `len` to `buf_size`,
 	for consistency with several other functions in this file that

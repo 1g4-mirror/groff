@@ -1034,16 +1034,16 @@ static symbol read_long_escape_parameters(read_mode mode)
     buf[i++] = c;
   }
   buf[i] = 0;
+  if (i == 0) {
+    if (mode != ALLOW_EMPTY)
+      // XXX: `.device \[]` passes through as-is but `\X \[]` doesn't,
+      // landing here.  Implement almost-but-not-quite-copy-mode?
+      copy_mode_error("empty escape sequence argument in copy mode");
+    return EMPTY_SYMBOL;
+  }
   if (c == ' ')
     have_multiple_params = true;
   if (buf == abuf) {
-    if (i == 0) {
-      if (mode != ALLOW_EMPTY)
-	// XXX: `.device \[]` passes through as-is but `\X \[]` doesn't,
-	// landing here.  Implement almost-but-not-quite-copy-mode?
-	copy_mode_error("empty escape sequence argument in copy mode");
-      return EMPTY_SYMBOL;
-    }
     return symbol(abuf);
   }
   else {
