@@ -1,5 +1,23 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Stop validating non-intepreted input for character codes
+	acceptable to GNU troff.
+
+	* src/preproc/eqn/main.cpp (top_input::get, top_input::peek)
+	(do_file): Stop diagnosing errors on and discarding GNU
+	troff-invalid input characters in portions of the input that are
+	passed through without alteration.  pic, like eqn, grn, refer,
+	soelim, and tbl, is a _filter_.  Its job is to transform only
+	_part_ of its input stream and leave the rest unaltered.
+
+	* src/preproc/pic/tests/\
+	passes-through-input-with-eighth-bit-set.sh: Add test.
+	* src/preproc/pic/pic.am (pic_TESTS): Run test.
+
+	Continues fixing Savannah #67285.
+
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/addftinfo/addftinfo.cpp: Fix code style nits.  Give
 	the anonymous `struct` type used for `param_table` a name,
 	`parameter`, so it can be passed to a template function

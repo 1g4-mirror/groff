@@ -96,11 +96,6 @@ int top_input::get()
     return c;
   }
   int c = getc(fp);
-  while (is_invalid_input_char(c)) {
-    error("invalid input character code %1", c);
-    c = getc(fp);
-    bol = 0;
-  }
   if (bol && c == '.') {
     c = getc(fp);
     if (c == 'P') {
@@ -169,11 +164,6 @@ int top_input::peek()
   if (push_back[0] != EOF)
     return push_back[0];
   int c = getc(fp);
-  while (is_invalid_input_char(c)) {
-    error("invalid input character code %1", c);
-    c = getc(fp);
-    bol = 0;
-  }
   if (bol && c == '.') {
     c = getc(fp);
     if (c == 'P') {
@@ -338,10 +328,6 @@ void do_file(const char *filename)
     = START;
   for (;;) {
     int c = getc(fp);
-    while (is_invalid_input_char(c)) {
-      error("invalid input character code %1", c);
-      c = getc(fp);
-    }
     if (c == EOF)
       break;
     switch (state) {
