@@ -1038,7 +1038,7 @@ static symbol read_long_escape_parameters(read_mode mode)
     if (mode != ALLOW_EMPTY)
       // XXX: `.device \[]` passes through as-is but `\X \[]` doesn't,
       // landing here.  Implement almost-but-not-quite-copy-mode?
-      copy_mode_error("empty escape sequence argument in copy mode");
+      copy_mode_error("empty escape sequence argument");
     return EMPTY_SYMBOL;
   }
   if (c == ' ')
@@ -1408,7 +1408,7 @@ static color *read_rgb(char end = 0)
   symbol component = do_get_long_name(0, end);
   if (component.is_null()) {
     warning(WARN_COLOR, "missing rgb color values");
-    return 0;
+    return 0 /* nullptr */;
   }
   const char *s = component.contents();
   color *col = new color;
@@ -1417,7 +1417,7 @@ static color *read_rgb(char end = 0)
       warning(WARN_COLOR, "expecting rgb color definition,"
 	      " not '%1'", s);
       delete col;
-      return 0;
+      return 0 /* nullptr */;
     }
   }
   else {
@@ -1438,7 +1438,7 @@ static color *read_cmy(char end = 0)
   symbol component = do_get_long_name(0, end);
   if (component.is_null()) {
     warning(WARN_COLOR, "missing cmy color values");
-    return 0;
+    return 0 /* nullptr */;
   }
   const char *s = component.contents();
   color *col = new color;
@@ -1447,7 +1447,7 @@ static color *read_cmy(char end = 0)
       warning(WARN_COLOR, "expecting cmy color definition,"
 	      " not '%1'", s);
       delete col;
-      return 0;
+      return 0 /* nullptr */;
     }
   }
   else {
@@ -1468,7 +1468,7 @@ static color *read_cmyk(char end = 0)
   symbol component = do_get_long_name(0, end);
   if (component.is_null()) {
     warning(WARN_COLOR, "missing cmyk color values");
-    return 0;
+    return 0 /* nullptr */;
   }
   const char *s = component.contents();
   color *col = new color;
@@ -1477,7 +1477,7 @@ static color *read_cmyk(char end = 0)
       warning(WARN_COLOR, "expecting cmyk color definition,"
 	      " not '%1'", s);
       delete col;
-      return 0;
+      return 0 /* nullptr */;
     }
   }
   else {
@@ -1499,7 +1499,7 @@ static color *read_gray(char end = 0)
   symbol component = do_get_long_name(0, end);
   if (component.is_null()) {
     warning(WARN_COLOR, "missing gray value");
-    return 0;
+    return 0 /* nullptr */;
   }
   const char *s = component.contents();
   color *col = new color;
@@ -1508,7 +1508,7 @@ static color *read_gray(char end = 0)
       warning(WARN_COLOR, "expecting gray definition,"
 	      " not '%1'", s);
       delete col;
-      return 0;
+      return 0 /* nullptr */;
     }
   }
   else {
@@ -3361,7 +3361,7 @@ request_or_macro::request_or_macro()
 
 macro *request_or_macro::to_macro()
 {
-  return 0;
+  return 0 /* nullptr */;
 }
 
 request::request(REQUEST_FUNCP pp) : p(pp)
@@ -6063,7 +6063,7 @@ static node *do_non_interpreted() // \?
       mac.append(c);
   if (c == EOF || c == '\n') {
     error("unterminated transparent embedding escape sequence");
-    return 0;
+    return 0 /* nullptr */;
   }
   return new non_interpreted_node(mac);
 }
