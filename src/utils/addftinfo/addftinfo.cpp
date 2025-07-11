@@ -41,7 +41,7 @@ static void convert_font(const font_params &, FILE *, FILE *);
 
 typedef int font_params::*param_t;
 
-static struct {
+static struct parameter {
   const char *name;
   param_t par;
 } param_table[] = {
@@ -115,7 +115,7 @@ int main(int argc, char **argv)
       usage("option requires argument");
     size_t j;
     for (j = 0;; j++) {
-      if (j >= sizeof(param_table)/sizeof(param_table[0]))
+      if (j >= array_length(param_table))
 	fatal("parameter '%1' not recognized", argv[i] + 1);
       if (strcmp(param_table[j].name, argv[i] + 1) == 0)
 	break;
@@ -137,7 +137,7 @@ int main(int argc, char **argv)
 static void usage(FILE *stream)
 {
   fprintf(stream, "usage: %s", program_name);
-  size_t len = sizeof(param_table)/sizeof(param_table[0]);
+  size_t len = array_length(param_table);
   for (size_t i = 0; i < len; i++)
     fprintf(stream, " [-%s n]", param_table[i].name);
   fputs(" resolution unit-width font\n", stream);

@@ -1,5 +1,14 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/addftinfo/addftinfo.cpp: Fix code style nits.  Give
+	the anonymous `struct` type used for `param_table` a name,
+	`parameter`, so it can be passed to a template function
+	C++98-conformantly.
+	(main): Use `array_length()` on `param_table` instead of
+	`sizeof` and division.
+
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/refer/label.ypp: Give the anonymous `struct` types
 	used for `dig` and `str` names, so that they can be passed to a
 	template function C++98-conformantly.  Lamely, apply an `_s`
