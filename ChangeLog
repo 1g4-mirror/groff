@@ -1,5 +1,14 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/preconv/preconv.cpp: Fix code style nits.
+	(get_BOM): Give the anonymous `struct` type used for `BOM_table`
+	a name, and move it into the global scope (it was already
+	`static`), so that it can be passed to a template function
+	C++98-conformantly.  Use `array_length()` on `BOM_table` instead
+	of `sizeof` and division.
+
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/pic.ypp (object_spec): Revert "workaround for
 	bug in Compaq C++ V6.5-033 for Compaq Tru64 UNIX V5.1A (Rev.
 	1885)" on the assumption that this compiler version has reached

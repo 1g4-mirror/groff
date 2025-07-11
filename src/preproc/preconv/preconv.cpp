@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <getopt.h> // getopt_long()
 
-#include "lib.h"
+#include "lib.h" // array_length()
 
 #include "errarg.h"
 #include "error.h"
@@ -769,6 +769,18 @@ conversion_iconv(FILE *fp, const string &data, char *enc)
 }
 #endif /* HAVE_ICONV */
 
+static struct bom_s {
+  int len;
+  const char *str;
+  const char *name;
+} BOM_table[] = {
+  {4, "\x00\x00\xFE\xFF", "UTF-32"},
+  {4, "\xFF\xFE\x00\x00", "UTF-32"},
+  {3, "\xEF\xBB\xBF", "UTF-8"},
+  {2, "\xFE\xFF", "UTF-16"},
+  {2, "\xFF\xFE", "UTF-16"},
+};
+
 // ---------------------------------------------------------
 // Handle Byte Order Mark.
 //
@@ -793,18 +805,7 @@ get_BOM(FILE *fp, string &BOM, string &data)
   //   UTF-8: 0xEFBBBF
   //   UTF-16: 0xFEFF or 0xFFFE
   //   UTF-32: 0x0000FEFF or 0xFFFE0000
-  static struct {
-    int len;
-    const char *str;
-    const char *name;
-  } BOM_table[] = {
-    {4, "\x00\x00\xFE\xFF", "UTF-32"},
-    {4, "\xFF\xFE\x00\x00", "UTF-32"},
-    {3, "\xEF\xBB\xBF", "UTF-8"},
-    {2, "\xFE\xFF", "UTF-16"},
-    {2, "\xFF\xFE", "UTF-16"},
-  };
-  const int BOM_table_len = sizeof (BOM_table) / sizeof (BOM_table[0]);
+  const int BOM_table_len = array_length(BOM_table);
   char BOM_string[4];
   const char *retval = NULL;
   int len;
