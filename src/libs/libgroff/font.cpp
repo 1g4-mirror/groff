@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <string.h> // strerror()
 #include <wchar.h>
 
-#include "lib.h"
+#include "lib.h" // array_length()
 
 #include "errarg.h"
 #include "error.h"
@@ -1256,10 +1256,10 @@ bool font::load(bool load_header_only)
   return true;
 }
 
-static struct {
-  const char *numeric_directive;
+static struct numeric_directive {
+  const char *name;
   int *ptr;
-} table[] = {
+} numeric_directive_table[] = {
   { "res", &font::res },
   { "hor", &font::hor },
   { "vert", &font::vert },
@@ -1286,10 +1286,12 @@ const char *font::load_desc()
     char *p = strtok(t.buf, WS);
     assert(p != 0 /* nullptr */);
     bool numeric_directive_found = false;
-    unsigned int idx;
-    for (idx = 0; !numeric_directive_found
-		  && idx < sizeof(table) / sizeof(table[0]); idx++)
-      if (strcmp(table[idx].numeric_directive, p) == 0)
+    size_t idx;
+    for (idx = 0;
+	 (!numeric_directive_found
+	  && (idx < array_length(numeric_directive_table)));
+	 idx++)
+      if (strcmp(numeric_directive_table[idx].name, p) == 0)
 	numeric_directive_found = true;
     if (numeric_directive_found) {
       char *q = strtok(0 /* nullptr */, WS);
@@ -1314,7 +1316,7 @@ const char *font::load_desc()
 		" positive number, got '%2'", p, val);
 	return 0 /* nullptr */;
       }
-      *(table[idx-1].ptr) = val;
+      *(numeric_directive_table[idx - 1].ptr) = val;
     }
     else if (strcmp("family", p) == 0) {
       p = strtok(0 /* nullptr */, WS);

@@ -1,3 +1,16 @@
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/font.cpp: Fix code style nits.  Give the
+	anonymous `struct` type used for `table` a name, so that it
+	can be passed to a template function C++98-conformantly.  Give
+	`table` a better name: `numeric_directive_table`.  Now that
+	their enclosures have better names, give the `numeric_directive`
+	`struct` element `numeric_directive` the better name `name`.
+	(font::load_desc): Track renames.  Use a `size_t` as the loop
+	index.  Parenthesize (formally) complex pexpressions.  Use
+	`array_length()` on `numeric_directive_table` instead of
+	`sizeof` and division.
+
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grolj4/lj4.cpp (lookup_paper_size): Sanity-check
