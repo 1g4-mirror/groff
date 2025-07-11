@@ -1,5 +1,14 @@
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Fix code style nits.
+	(read_long_escape_parameters, read_escape_parameter)
+	(do_get_long_name): Parenthesize (formally) complex expressions.
+	Reorder equality comparisons to avoid inadvertent lvalue
+	assignment.  Compare objects of `char` type to character, not
+	integer, literals.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_long_escape_parameters):
 	Slightly refactor.  Test for an empty argument (or argument
 	sequence) earlier, before worrying about whether the input

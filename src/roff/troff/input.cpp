@@ -1002,16 +1002,16 @@ static symbol read_long_escape_parameters(read_mode mode)
   char c;
   bool have_char = false;
   for (;;) {
-    c = get_char_for_escape_parameter(have_char && mode == WITH_ARGS);
-    if (c == 0) {
+    c = get_char_for_escape_parameter(have_char && (WITH_ARGS == mode));
+    if ('\0' == c) {
       if (buf != abuf)
 	delete[] buf;
       return NULL_SYMBOL;
     }
     have_char = true;
-    if (mode == WITH_ARGS && c == ' ')
+    if ((WITH_ARGS == mode) && (' ' == c))
       break;
-    if (i + 2 > buf_size) {
+    if ((i + 2) > buf_size) {
       if (buf == abuf) {
 	// C++03: new char[ABUF_SIZE * 2]();
 	buf = new char[ABUF_SIZE * 2];
@@ -1029,19 +1029,19 @@ static symbol read_long_escape_parameters(read_mode mode)
 	delete[] old_buf;
       }
     }
-    if (c == ']' && input_stack::get_level() == start_level)
+    if ((']' == c) && (input_stack::get_level() == start_level))
       break;
     buf[i++] = c;
   }
-  buf[i] = 0;
-  if (i == 0) {
+  buf[i] = '\0';
+  if (0 == i) {
     if (mode != ALLOW_EMPTY)
       // XXX: `.device \[]` passes through as-is but `\X \[]` doesn't,
       // landing here.  Implement almost-but-not-quite-copy-mode?
       copy_mode_error("empty escape sequence argument");
     return EMPTY_SYMBOL;
   }
-  if (c == ' ')
+  if (' ' == c)
     have_multiple_params = true;
   if (buf == abuf) {
     return symbol(abuf);
@@ -1056,11 +1056,11 @@ static symbol read_long_escape_parameters(read_mode mode)
 static symbol read_escape_parameter(read_mode mode)
 {
   char c = get_char_for_escape_parameter();
-  if (c == 0)
+  if ('\0' == c)
     return NULL_SYMBOL;
-  if (c == '(')
+  if ('(' == c)
     return read_two_char_escape_parameter();
-  if (c == '[' && !want_att_compat)
+  if (('[' == c) && !want_att_compat)
     return read_long_escape_parameters(mode);
   char buf[2];
   buf[0] = c;
@@ -2840,7 +2840,7 @@ static symbol do_get_long_name(bool required, char end_char)
   int i = 0;
   for (;;) {
     // If `end_char` != `\0` we normally have to append a null byte.
-    if (i + 2 > buf_size) {
+    if ((i + 2) > buf_size) {
       if (buf == abuf) {
 	// C++03: new char[ABUF_SIZE * 2]();
 	buf = new char[ABUF_SIZE * 2];
@@ -2858,17 +2858,17 @@ static symbol do_get_long_name(bool required, char end_char)
 	delete[] old_buf;
       }
     }
-    if ((buf[i] = tok.ch()) == '\0' || buf[i] == end_char)
+    if ((buf[i] = tok.ch()) == '\0' || (buf[i] == end_char))
       break;
     i++;
     tok.next();
   }
-  if (i == 0) {
+  if (0 == i) {
     diagnose_missing_identifier(required);
     return NULL_SYMBOL;
   }
-  if (end_char && buf[i] == end_char)
-    buf[i+1] = '\0';
+  if ((end_char != '\0') && (buf[i] == end_char))
+    buf[i + 1] = '\0';
   else
     diagnose_invalid_identifier();
   if (buf == abuf)
@@ -5806,7 +5806,7 @@ static symbol get_delimited_name()
   int buf_size = ABUF_SIZE;
   int i = 0;
   for (;;) {
-    if (i + 1 > buf_size) {
+    if ((i + 1) > buf_size) {
       if (buf == abuf) {
 	// C++03: new char[ABUF_SIZE * 2]();
 	buf = new char[ABUF_SIZE * 2];
@@ -5825,10 +5825,11 @@ static symbol get_delimited_name()
       }
     }
     tok.next();
-    if (tok == start_token
-	&& (want_att_compat || input_stack::get_level() == start_level))
+    if ((tok == start_token)
+	&& (want_att_compat
+	    || (input_stack::get_level() == start_level)))
       break;
-    if ((buf[i] = tok.ch()) == 0) {
+    if ((buf[i] = tok.ch()) == '\0') {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
       // diagnostic.
@@ -5845,7 +5846,7 @@ static symbol get_delimited_name()
   }
   buf[i] = '\0';
   if (buf == abuf) {
-    if (i == 0) {
+    if (0 == i) {
       error("empty delimited name");
       return NULL_SYMBOL;
     }
