@@ -11,6 +11,12 @@
 
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/xditview/DviP.h: Fix code style nit.  Give the
+	anonymous `struct` type used for `DviPart` a name, so that it
+	can be passed to a template function C++98-conformantly.
+
+2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grolj4/lj4.cpp: Fix code style nits.  Give the
 	anonymous `struct` type used for `paper_table` a name, so
 	that it can be passed to a template function C++98-conformantly.
