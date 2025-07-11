@@ -400,7 +400,9 @@ emacs2mime(char *emacs_enc)
   if (emacs_enc_len > 5
       && !strcasecmp(emacs_enc + emacs_enc_len - 5, "-unix"))
     emacs_enc[emacs_enc_len - 5] = 0;
-  for (const conversion *table = emacs_to_mime; table->from; table++)
+  for (const conversion *table = emacs_to_mime;
+       table->from != 0 /* nullptr */;
+       table++)
     if (!strcasecmp(emacs_enc, table->from))
       return const_cast<char *>(table->to);
   return emacs_enc;
@@ -1001,15 +1003,15 @@ check_coding_tag(FILE *fp, string &data)
       break;
     *lineend = 0;		// switch temporarily to '\0'
     char *d1 = strstr(p, "-*-");
-    char *d2 = 0;
-    if (d1)
+    char *d2 = 0 /* nullptr */;
+    if (d1 != 0 /* nullptr */)
       d2 = strstr(d1 + 3, "-*-");
     *lineend = '\n';		// restore newline
     if (!d1 || !d2)
       continue;
     *d2 = 0;			// switch temporarily to '\0'
     d1 += 3;
-    while (d1) {
+    while (d1 != 0 /* nullptr */) {
       char *variable, *value;
       d1 = get_variable_value_pair(d1, &variable, &value);
       if (!strcasecmp(variable, "coding")) {
@@ -1085,9 +1087,9 @@ detect_file_encoding(FILE *fp)
   }
 
 end:
-  if (ud)
+  if (ud != 0 /* nullptr */)
      uchardet_delete(ud);
-  if (data)
+  if (data != 0 /* nullptr */)
      free(data);
 
   return ret;
@@ -1154,7 +1156,7 @@ do_file(const char *filename)
     }
     encoding = (char *)user_encoding;
   }
-  else if (BOM_encoding) {
+  else if (BOM_encoding != 0 /* nullptr */) {
     if (is_debugging)
       fprintf(stderr, "  found BOM, no search for coding tag\n");
     encoding = (char *)BOM_encoding;
@@ -1299,7 +1301,7 @@ main(int argc, char **argv)
       is_debugging = true;
       break;
     case 'e':
-      if (optarg) {
+      if (optarg != 0 /* nullptr */) {
 	strncpy(user_encoding, optarg, MAX_VAR_LEN - 1);
 	user_encoding[MAX_VAR_LEN - 1] = 0;
       }
@@ -1307,7 +1309,7 @@ main(int argc, char **argv)
 	user_encoding[0] = 0;
       break;
     case 'D':
-      if (optarg) {
+      if (optarg != 0 /* nullptr */) {
 	strncpy(fallback_encoding, optarg, MAX_VAR_LEN - 1);
 	fallback_encoding[MAX_VAR_LEN - 1] = 0;
       }

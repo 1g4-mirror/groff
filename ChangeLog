@@ -16,6 +16,9 @@
 	to it.  Demote variable `success` from `int` to `bool`, rename
 	it to `was_successful`, and assign Boolean rather than integer
 	literals to it.
+	(emacs2mime, check_coding_tag, detect_file_encoding, do_file)
+	(main): Explicitly compare values of pointer type to null
+	pointer literals instead of letting them pun down to Booleans.
 
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
