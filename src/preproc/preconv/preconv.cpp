@@ -61,7 +61,7 @@ char fallback_encoding[MAX_VAR_LEN];
 char user_encoding[MAX_VAR_LEN];
 char encoding_string[MAX_VAR_LEN];
 bool is_debugging = false;
-int raw_flag = 0;
+bool want_raw_output = false;
 
 struct conversion {
   const char *from;
@@ -881,15 +881,13 @@ get_tag_lines(FILE *fp, string &data)
 }
 
 // ---------------------------------------------------------
-// Check whether C string starts with a comment.
-//
-// Return 1 if true, 0 otherwise.
+// Indicate whether C string starts with a comment.
 // ---------------------------------------------------------
-int
+bool
 is_comment_line(char *s)
 {
   if (!s || !*s)
-    return 0;
+    return false;
   if (*s == '.' || *s == '\'')
   {
     s++;
@@ -899,16 +897,16 @@ is_comment_line(char *s)
     {
       s++;
       if (*s == '"' || *s == '#')
-	return 1;
+	return true;
     }
   }
   else if (*s == '\\')
   {
     s++;
     if (*s == '#')
-      return 1;
+      return true;
   }
-  return 0;
+  return false;
 }
 
 // ---------------------------------------------------------
@@ -1099,12 +1097,12 @@ end:
 }
 
 // ---------------------------------------------------------
-// Handle an input file.  If `filename` is "-", read the
+// Process an input file.  If `filename` is "-", read the
 // standard input stream.
 //
-// Return 1 on success, 0 otherwise.
+// Return Boolean indicating successful completion.
 // ---------------------------------------------------------
-int
+bool
 do_file(const char *filename)
 {
   FILE *fp;
@@ -1126,7 +1124,7 @@ do_file(const char *filename)
   if (!fp) {
     error("cannot open %1: %2", c_reported_filename, strerror(errno));
     free(c_reported_filename);
-    return 0;
+    return false;
   }
   if (is_debugging) {
     fprintf(stderr, "processing %s\n", c_reported_filename);
@@ -1144,7 +1142,7 @@ do_file(const char *filename)
   const char *BOM_encoding = get_BOM(fp, BOM, data);
   // Determine the encoding.
   char *encoding;
-  int must_free_encoding = 0;
+  bool must_free_encoding = false;
   if (user_encoding[0]) {
     if (is_debugging) {
       fprintf(stderr, "  user-specified encoding '%s', "
@@ -1177,7 +1175,7 @@ do_file(const char *filename)
         file_encoding = fallback_encoding;
       }
       else
-        must_free_encoding = 1;
+        must_free_encoding = true;
     }
     else
       if (is_debugging)
@@ -1193,18 +1191,18 @@ do_file(const char *filename)
   encoding = emacs2mime(encoding_string);
   if (encoding[0] == '\0') {
     error("unportable encoding '%1' not supported", encoding_string);
-    return 0;
+    return false;
   }
   if (is_debugging)
     fprintf(stderr, "  encoding used: '%s'\n", encoding);
-  if (!raw_flag) {
+  if (!want_raw_output) {
     string fn(filename);
     fn += '\0';
     normalize_file_name_for_lf_request(fn);
     (void) printf(".lf 1 %s%s\n", ('"' == filename[0]) ? "" : "\"",
 		  fn.contents());
   }
-  int success = 1;
+  bool was_successful = true;
   // Call converter (converters write to stdout).
   if (!strcasecmp(encoding, "ISO-8859-1"))
     conversion_latin1(fp, BOM + data);
@@ -1217,12 +1215,12 @@ do_file(const char *filename)
     conversion_iconv(fp, BOM + data, encoding);
 #else
     error("encoding system '%1' not supported", encoding);
-    success = 0;
+    was_successful = false;
 #endif /* HAVE_ICONV */
   }
   if (fp != stdin)
     fclose(fp);
-  return success;
+  return was_successful;
 }
 
 // ---------------------------------------------------------
@@ -1315,7 +1313,7 @@ main(int argc, char **argv)
       }
       break;
     case 'r':
-      raw_flag = 1;
+      want_raw_output = true;
       break;
     case 'h':
       usage(stdout);

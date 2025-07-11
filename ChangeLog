@@ -2,12 +2,20 @@
 
 	* src/preproc/preconv/preconv.cpp: Fix code style nits.  Spell
 	null pointer constant the idiomatic C++98 way (`0`) instead of
-	as `NULL`.
+	as `NULL`.  Boolify: demote global variable `raw_flag` from
+	`int` to `bool`, and rename it to `want_raw_output`.
 	(get_BOM): Give the anonymous `struct` type used for `BOM_table`
 	a name, and move it into the global scope (it was already
 	`static`), so that it can be passed to a template function
 	C++98-conformantly.  Use `array_length()` on `BOM_table` instead
 	of `sizeof` and division.
+	(is_comment_line, do_file): Demote return type from `int` to
+	`bool`, and return Boolean rather than integer literals.
+	(do_file): Boolify: demote variable `must_free_encoding` from
+	`int` to `bool`, and assign Boolean rather than integer literals
+	to it.  Demote variable `success` from `int` to `bool`, rename
+	it to `was_successful`, and assign Boolean rather than integer
+	literals to it.
 
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
