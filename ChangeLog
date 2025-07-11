@@ -1,5 +1,15 @@
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/lex.cpp: Fix code style nits.  Sort libgroff
+	header files before program-specific ones.  Give the anonymous
+	`struct` type used for `token_table` a name, so that it can be
+	passed to a template function C++98-conformantly.
+	(init_table): Use `array_length()` on `token_table`,
+	`common_defs`, `troff_defs`, and `mathml_defs` instead of
+	`sizeof` and division.
+
+2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/font.cpp: Fix code style nits.  Give the
 	anonymous `struct` type used for `table` a name, so that it
 	can be passed to a template function C++98-conformantly.  Give
