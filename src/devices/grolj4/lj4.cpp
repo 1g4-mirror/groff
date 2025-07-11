@@ -53,7 +53,7 @@ X command to include bitmap graphics
 
 extern "C" const char *Version_string;
 
-static struct {
+static struct lj4_paper_sizes {
   const char *name;
   int code;
   // at 300dpi
@@ -612,11 +612,10 @@ printer *make_printer()
 static
 int lookup_paper_size(const char *s)
 {
-  for (unsigned int i = 0;
-       i < sizeof(paper_table)/sizeof(paper_table[0]); i++) {
+  for (int i = 0; i < array_length(paper_table); i++) {
     // FIXME Perhaps allow unique prefix.
     if (strcasecmp(s, paper_table[i].name) == 0)
-      return i;
+      return int(i);
   }
   return -1;
 }
