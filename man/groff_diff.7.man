@@ -289,9 +289,8 @@ whereas
 .B hpf
 and
 .B hpfa
-load
-(or append to)
-the language's hyphenation patterns.
+respectively
+load and append to the language's hyphenation patterns.
 .
 If no hyphenation language is set or no patterns are loaded,
 GNU
