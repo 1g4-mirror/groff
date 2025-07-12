@@ -33,14 +33,15 @@
 .\" want a copy- and-pastable hyphen-minus.
 .char \- \N'45'
 .\" A very limited output device might not have a dagger glyph.
-.fchar \[dg] *
+.\" Pick a fallback that isn't confusable with an asterisk.
+.fchar \[dg] +
 .nr PS 11
 .nr VS 13
 .ds FR 1
 .nr TC-MARGIN \w'00' \" expect 2-digit page numbers at most
 .ie t .nr PI 3.5n
 .el   .nr PI 4n
-.ds date November 2024\"
+.ds date July 2025\"
 .ND \*[date]
 .EH '%''\*[date]'
 .EF ''''
