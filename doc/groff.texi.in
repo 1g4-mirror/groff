@@ -19440,12 +19440,32 @@ or Documenter's Workbench
 @cindex @code{\!}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\%}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\c}, incompatibilities with @acronym{AT&T} @code{troff}
-GNU @code{troff} does not allow the use of the escape sequences
-@code{\|}, @code{\^}, @code{\&}, @code{\@{}, @code{\@}},
-@code{\@key{SPC}}, @code{\'}, @code{\`}, @code{\-}, @code{\_}, @code{\!},
-@code{\%}, and @code{\c} in identifiers; @acronym{AT&T} @code{troff}
-does.  The @code{\A} escape sequence (@pxref{Identifiers}) may be
-helpful in avoiding use of these escape sequences in names.
+GNU
+@command{troff} @c GNU
+does not allow the use of the escape sequences
+@code{\|},
+@code{\^},
+@code{\&},
+@code{\@{},
+@code{\@}},
+@code{\@key{SPC}},
+@code{\'},
+@code{\`},
+@code{\-},
+@code{\_},
+@code{\!},
+@code{\%},
+or
+@code{\c}
+in identifiers;
+@acronym{AT&T}
+@command{troff} @c AT&T
+does.
+The
+@code{\A}
+escape sequence
+(@pxref{Identifiers})
+may be helpful in avoiding their use.
 
 @cindex trailing space, on input lines, difference from @acronym{AT&T} @code{troff}
 @cindex space, trailing, on input lines, difference from @acronym{AT&T} @code{troff}
