@@ -6970,10 +6970,20 @@ forms.
 @cindex @code{[}, macro names starting with, and @code{refer}
 @cindex @code{]}, macro names starting with, and @code{refer}
 @cindex macro names, starting with @code{[} or @code{]}, and @code{refer}
-If you begin a macro, string, or diversion name with either of the
-characters @samp{[} or @samp{]}, you foreclose use of the @code{grefer}
-preprocessor, which recognizes input lines starting with @samp{.[} and
-@samp{.]} as bibliographic reference delimiters.
+Beginning a macro,
+string,
+or diversion name with the character
+@samp{[}
+or
+@samp{]}
+forecloses use of the
+@code{grefer}
+preprocessor,
+which recognizes input lines starting with
+@samp{.[}
+and
+@samp{.]}
+as bibliographic reference delimiters.
 
 @Defesc {\\A, @code{'}, anything, @code{'}}
 Interpolate@tie{}1 if @var{anything} is a valid identifier, and@tie{}0

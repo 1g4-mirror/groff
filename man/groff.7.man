@@ -1426,14 +1426,19 @@ with bracket forms.
 .
 .
 .P
-If you begin a macro,
+Beginning a macro,
 string,
-or diversion name with either of the characters \[lq][\[rq] or
-\[lq]]\[rq],
-you foreclose use of the
+or diversion name with the character
+\[lq][\[rq]
+or
+\[lq]]\[rq]
+forecloses use of the
 .MR @g@refer @MAN1EXT@
 preprocessor,
-which recognizes input lines starting with \[lq].[\[rq] and \[lq].]\[rq]
+which recognizes input lines starting with
+\[lq].[\[rq]
+and
+\[lq].]\[rq]
 as bibliographic reference delimiters.
 .
 .
@@ -1496,6 +1501,8 @@ No other object types do.
 .\" END Keep (roughly) parallel with groff.texi node "Identifiers".
 .
 .
+.br
+.ne 4v
 .\" ====================================================================
 .SH "Control characters"
 .\" ====================================================================
