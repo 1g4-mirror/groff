@@ -868,17 +868,13 @@ by storing a value of
 to a register,
 then reading the register.
 .
-The only constraint on the basic unit
-is that it is at least as small as any other unit.
-.\" That's a fib.  A device resolution of around 2^31 would surely also
-.\" cause problems.  But nobody does that.
-.
 .
 .P
 .LS
 .TP
 .B u
-Basic unit.
+Basic unit;
+it is at least as small as any other unit.
 .
 .TP
 .B i
