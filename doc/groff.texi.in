@@ -6356,6 +6356,10 @@ Centimeter; a centimeter is about 0.3937@tie{}inches.
 @cindex scaling unit @code{p}
 Point; a typesetter's unit used for measuring type size.
 There are 72@tie{}points to an inch.
+Also called an ``integral'' point because historical
+@code{roff}
+systems used only integral values of
+@code{p}.
 
 @item P
 @cindex pica scaling unit (@code{P})
@@ -6366,8 +6370,24 @@ Pica; another typesetter's unit.  There are 6@tie{}picas to an inch and
 12@tie{}points to a pica.
 
 @item s
-@itemx z
-@xref{Using Fractional Type Sizes}, for a discussion of these units.
+@cindex scaled point scaling unit (@code{s})
+@cindex point, scaled, scaling unit (@code{s})
+@cindex @code{s} scaling unit
+@cindex unit, scaling, @code{s}
+@cindex scaling unit @code{s}
+Scaled point; see @ref{Using Fractional Type Sizes}.
+
+@item z
+@cindex typographical point scaling unit (@code{z})
+@cindex point, typographical, scaling unit (@code{z})
+@cindex @code{z} scaling unit
+@cindex unit, scaling, @code{z}
+@cindex scaling unit @code{z}
+Typographical point;
+like
+@code{p},
+but permits non-integral quantities.
+@c TODO: Make "p" truncate to integer like AT&T if -C?
 
 @item f
 GNU @code{troff} defines this unit to scale decimal fractions in the
@@ -13002,9 +13022,13 @@ to support, for instance, ten and a half-point type.  In GNU
 subdivides a point into ``scaled points''.  A type size expressed in
 scaled points can thus represent a non-integral size in points.
 
+@cindex scaled point scaling unit (@code{s})
+@cindex point, scaled, scaling unit (@code{s})
 @cindex @code{s} scaling unit
 @cindex unit, scaling, @code{s}
 @cindex scaling unit @code{s}
+@cindex typographical point scaling unit (@code{z})
+@cindex point, typographical, scaling unit (@code{z})
 @cindex @code{z} scaling unit
 @cindex unit, scaling, @code{z}
 @cindex scaling unit @code{z}
@@ -13013,17 +13037,45 @@ scaled points can thus represent a non-integral size in points.
 @cindex @code{tkf} request, with fractional type sizes
 @cindex @code{\H}, with fractional type sizes
 @cindex @code{\s}, with fractional type sizes
-A @dfn{scaled point} is equal to @math{1/@var{sizescale}} points, where
-@var{sizescale} is specified in the device description file @file{DESC},
-and defaults to@tie{}1.@footnote{@xref{Device and Font Description
-Files}.}  Requests and escape sequences in GNU @code{troff} interpret
-arguments that represent a type size in scaled points, which the
-formatter multiplies by @var{sizescale} and converts to an integer.
-Arguments treated in this way comprise those to the escape sequences
-@code{\H} and @code{\s}, to the request @code{ps}, the third argument to
-the @code{cs} request, and the second and fourth arguments to the
-@code{tkf} request.  Scaled points may be specified explicitly with the
-@code{z} scaling unit.
+A
+@dfn{scaled point},
+scaling unit
+@code{s},
+is equal to
+@math{1/@var{sizescale}}
+points,
+where the device description file
+@file{DESC}
+specifies
+@var{sizescale}
+and otherwise defaults to@tie{}1.@footnote{@xref{Device and Font
+Description Files}.}
+Requests and escape sequences in GNU
+@command{troff}
+interpret arguments that represent a type size in typographical points,
+which the formatter multiplies by
+@var{sizescale}
+and converts to an integer.
+The scaling unit
+@code{z}
+explicitly specifies these typographical points of potentially
+non-integral measure.
+Arguments GNU
+@command{troff} @c GNU
+interprets in
+@code{z}
+units by default comprise those to the escape sequences
+@code{\H}
+and
+@code{\s},
+to the request
+@code{ps},
+the third argument to the
+@code{cs}
+request,
+and the second and fourth arguments to the
+@code{tkf}
+request.
 
 For example, if @var{sizescale} is@tie{}1000, then a scaled point is one
 thousandth of a point.  The request @samp{.ps 10.5} is synonymous with
@@ -13033,12 +13085,11 @@ thousandth of a point.  The request @samp{.ps 10.5} is synonymous with
 
 @Defreg {.ps}
 This read-only register interpolates the type size in scaled points.
+@samp{\n[.ps]s}
+is equal to
+@samp{1m}
+by definition.
 @endDefreg
-
-Another GNU @code{troff} scaling unit, @samp{s}, multiplies by the
-number of basic units in a scaled point.  Thus, @samp{\n[.ps]s} is equal
-to @samp{1m} by definition.  Do not confuse the @samp{s} and @samp{z}
-scaling units.
 
 @Example
 .tm device=\*[.T]
