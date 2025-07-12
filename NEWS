@@ -13,59 +13,61 @@ VERSION next
 Noteworthy incompatible changes
 -------------------------------
 
-* If your roff(7) documents follow any of the requests `cf`, `hpf`,
-  `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
-  `trf` with a comment after their file name argument, and did not place
-  that comment immediately after the file name, you are likely to get a
-  diagnostic message resembling the following.
+*  If your roff(7) documents follow any of the requests `cf`, `hpf`,
+   `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
+   `trf` with a comment after their file name argument, and did not
+   place that comment immediately after the file name, you are likely to
+   get a diagnostic message resembling the following.
 
     warning: cannot open macro file 'e.tmac ': No such file or directory
 
-  Or, less likely, the formatter will open the wrong file, one with
-  spaces at the end of its name.  That is because these requests are now
-  able to process file names containing space characters.  (This change
-  also makes the request syntax consistent with that of `ds`, `as`, and
-  others.)  A quick fix is to place the comment escape sequence as early
-  as possible.  For example, we would change:
+   Or, less likely, the formatter will open the wrong file, one with
+   spaces at the end of its name.  That is because these requests are
+   now able to process file names containing space characters.  (This
+   change also makes the request syntax consistent with that of `ds`,
+   `as`, and others.)  A quick fix is to place the comment escape
+   sequence as early as possible.  For example, we would change:
 
-    .mso e.tmac \" Load Eric Allman's package.
+     .mso e.tmac \" Load Eric Allman's package.
 
-  to:
+   to:
 
-    .mso e.tmac\" Load Eric Allman's package.
+     .mso e.tmac\" Load Eric Allman's package.
 
-  to tell the formatter to load the "e.tmac" file rather than "e.tmac ".
-  See the items below for further details.
+   to tell the formatter to load the "e.tmac" file rather than
+   "e.tmac ".  See the items below for further details.
 
-* If your roff(7) documents specify a file name that starts with a
-  neutral double quote (") to any of the requests `cf`, `hpf`,
-  `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
-  `trf`, you are likely to get a diagnostic message, or the formatter
-  will open a file of the same name except for the leading neutral
-  double quote.  That is because these requests are now able to process
-  file names containing leading space characters.  (This change also
-  makes the request syntax consistent with that of `ds`, `as`, and
-  others.)  The solution is to add an additional neutral double quote to
-  the start of the file name argument.  For example, we would change:
+*  If your roff(7) documents specify a file name that starts with a
+   neutral double quote (") to any of the requests `cf`, `hpf`,
+   `hpfa`, `mso`, `msoquiet`, `nx`, `open`, `opena`, `so`, `soquiet`, or
+   `trf`, you are likely to get a diagnostic message, or the formatter
+   will open a file of the same name except for the leading neutral
+   double quote.  That is because these requests are now able to process
+   file names containing leading space characters.  (This change also
+   makes the request syntax consistent with that of `ds`, `as`, and
+   others.)  The solution is to add an additional neutral double quote
+   to the start of the file name argument.  For example, we would
+   change:
 
-    .so "5150".lrc
+     .so "5150".lrc
 
-  to:
+   to:
 
-    .so ""5150".lrc
+     .so ""5150".lrc
 
-  to tell the formatter to read a file named '"5150".lrc', where the
-  neutral single quotes bracket the file name.
+   to tell the formatter to read a file named '"5150".lrc', where the
+   neutral single quotes bracket the file name.
 
-* groff mdoc(7)'s font customization feature, undocumented but analogous
-  to that of 4.4BSD mdoc, now expects the strings that designate font
-  names to be precisely that: font _names_ (or abstract styles, or
-  mounting positions), rather than arbitrary *roff syntax.  (String
-  interpolations remain acceptable, as long as what they interpolate is
-  a valid argument to the `ft` request or `\f[xxx]` escape sequence.)
+*  groff mdoc(7)'s font customization feature, undocumented but
+   analogous to that of 4.4BSD mdoc, now expects the strings that
+   designate font names to be precisely that: font _names_ (or abstract
+   styles, or mounting positions), rather than arbitrary *roff syntax.
+   (String interpolations remain acceptable, as long as what they
+   interpolate is a valid argument to the `ft` request or `\f[xxx]`
+   escape sequence.)
 
-* Support for terminal devices using the CCSID 1047 (EBCDIC) encoding
-  has been withdrawn.  See below for motivation and a workaround.
+*  Support for terminal devices using the CCSID 1047 (EBCDIC) encoding
+   has been withdrawn.  See below for motivation and a workaround.
 
 troff
 -----
