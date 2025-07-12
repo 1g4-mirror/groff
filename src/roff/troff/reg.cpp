@@ -577,6 +577,8 @@ void dump_register_request()
   }
   else {
     object_dictionary_iterator iter(register_dictionary);
+    // We must use the nuclear `reinterpret_cast` operator because GNU
+    // troff's dictionary types use a pre-STL approach to containers.
     while (iter.get(&identifier, reinterpret_cast<object **>(&r))) {
       assert(!identifier.is_null());
       dump_register(&identifier, r);

@@ -6646,6 +6646,8 @@ static void dump_font_translations()
 {
   dictionary_iterator iter(font_translation_dictionary);
   symbol from, to;
+  // We must use the nuclear `reinterpret_cast` operator because GNU
+  // troff's dictionary types use a pre-STL approach to containers.
   while (iter.get(&from, reinterpret_cast<void **>(&to)))
     errprint("%1\t%2\n", from.contents(), to.contents());
   fflush(stderr);

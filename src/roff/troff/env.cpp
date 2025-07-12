@@ -3858,6 +3858,8 @@ static void print_hyphenation_exceptions()
   // space; see `hyphen_trie::read_patterns_file()`.
   const size_t bufsz = WORD_MAX * 2;
   char wordbuf[bufsz]; // need to `errprint()` it, so not `unsigned`
+  // We must use the nuclear `reinterpret_cast` operator because GNU
+  // troff's dictionary types use a pre-STL approach to containers.
   while (iter.get(&entry, reinterpret_cast<void **>(&hypoint))) {
     assert(!entry.is_null());
     assert(hypoint != 0 /* nullptr */);

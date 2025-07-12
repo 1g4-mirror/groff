@@ -1591,6 +1591,8 @@ static void report_color()
   }
   else {
     dictionary_iterator iter(color_dictionary);
+    // We must use the nuclear `reinterpret_cast` operator because GNU
+    // troff's dictionary types use a pre-STL approach to containers.
     while (iter.get(&key, reinterpret_cast<void **>(&value))) {
       assert(!key.is_null());
       assert(value != 0 /* nullptr */);
@@ -3796,7 +3798,9 @@ void print_macros()
   }
   else {
     object_dictionary_iterator iter(request_dictionary);
-    while (iter.get(&s, (object **)&rm)) {
+    // We must use the nuclear `reinterpret_cast` operator because GNU
+    // troff's dictionary types use a pre-STL approach to containers.
+    while (iter.get(&s, reinterpret_cast<object **>(&rm))) {
       assert(!s.is_null());
       m = rm->to_macro();
       if (m != 0 /* nullptr */) {
@@ -4451,6 +4455,8 @@ static void report_composite_characters()
   dictionary_iterator iter(composite_dictionary);
   symbol key;
   char *value;
+  // We must use the nuclear `reinterpret_cast` operator because GNU
+  // troff's dictionary types use a pre-STL approach to containers.
   while (iter.get(&key, reinterpret_cast<void **>(&value))) {
     assert(!key.is_null());
     assert(value != 0 /* nullptr */);
@@ -5413,11 +5419,11 @@ void substring_request()
 	string_iterator iter(*m);
 	int i;
 	for (i = 0; i < start; i++) {
-	  int c = iter.get(0);
+	  int c = iter.get(0 /* nullptr */);
 	  while (c == PUSH_GROFF_MODE
 		 || c == PUSH_COMP_MODE
 		 || c == POP_GROFFCOMP_MODE)
-	    c = iter.get(0);
+	    c = iter.get(0 /* nullptr */);
 	  if (c == EOF)
 	    break;
 	}
@@ -5428,7 +5434,7 @@ void substring_request()
 	  while (c == PUSH_GROFF_MODE
 		 || c == PUSH_COMP_MODE
 		 || c == POP_GROFFCOMP_MODE)
-	    c = iter.get(0);
+	    c = iter.get(0 /* nullptr */);
 	  if (c == EOF)
 	    break;
 	  if (c == 0)
@@ -6453,7 +6459,7 @@ void device_extension_node::tprint(troff_output_file *out)
   tprint_start(out);
   string_iterator iter(mac);
   for (;;) {
-    int c = iter.get(0);
+    int c = iter.get(0 /* nullptr */);
     if (c != EOF)
       for (const char *s = ::asciify(c); *s != 0 /* nullptr */; s++)
 	tprint_char(out, *s);
@@ -7861,7 +7867,7 @@ void write_macro_request()
   else {
     string_iterator iter(*m);
     for (;;) {
-      int c = iter.get(0);
+      int c = iter.get(0 /* nullptr */);
       if (c == EOF)
 	break;
       fputs(asciify(c), fp);
@@ -10216,7 +10222,9 @@ void get_flags()
   dictionary_iterator iter(charinfo_dictionary);
   charinfo *ci;
   symbol s;
-  while (iter.get(&s, (void **)&ci)) {
+  // We must use the nuclear `reinterpret_cast` operator because GNU
+  // troff's dictionary types use a pre-STL approach to containers.
+  while (iter.get(&s, reinterpret_cast<void **>(&ci))) {
     assert(!s.is_null());
     ci->get_flags();
   }
@@ -10229,7 +10237,9 @@ void charinfo::get_flags()
   dictionary_iterator iter(char_class_dictionary);
   charinfo *ci;
   symbol s;
-  while (iter.get(&s, (void **)&ci)) {
+  // We must use the nuclear `reinterpret_cast` operator because GNU
+  // troff's dictionary types use a pre-STL approach to containers.
+  while (iter.get(&s, reinterpret_cast<void **>(&ci))) {
     assert(!s.is_null());
     if (ci->contains(get_unicode_code())) {
 #if defined(DEBUGGING)

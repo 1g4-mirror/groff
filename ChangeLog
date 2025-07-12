@@ -1,5 +1,12 @@
 2025-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (print_macros, get_flags)
+	(charinfo::get_flags): Use explicit `reinterpret_cast` C++
+	operator instead of C-style cast.  Annotate why we use this
+	footgun.
+
+2025-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/eqnrc: Drop unneccessary setup.  Since commit 4b3e5417d5,
 	18 February 2017, GNU eqn self-serves by synthesizing
 	conditional empty fallback definitions of `EQ` and `EN` in its
