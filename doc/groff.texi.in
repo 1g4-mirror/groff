@@ -19505,18 +19505,35 @@ GNU
 @command{troff} @c GNU
 extensions are liable to format their function selector character.
 @cindex @code{\~}, incompatibilities with @acronym{AT&T} @code{troff}
-For example, the adjustable, non-breaking space escape sequence
+For example,
+the adjustable,
+non-breaking space escape sequence
 @code{\~}
 @c BEGIN Keep in sync with groff_diff(7) and groff_man_style(7).
-is also supported by Heirloom Doctools @code{troff} 050915 (September
-2005), @code{mandoc} 1.9.5 (2009-09-21), @code{neatroff} (commit
-1c6ab0f6e, 2016-09-13), and Plan@tie{}9 from User Space @code{troff}
-(commit 93f8143600, 2022-08-12), but not by Solaris@tie{}10
+is also supported by Heirloom Doctools
+@command{troff} @c Heirloom
+050915 (September 2005),
+@command{mandoc}
+1.9.5 (2009-09-21),
+@command{neatroff}
+(commit 1c6ab0f6e,
+2016-09-13),
+and Plan@tie{}9 from User Space
+@command{troff} @c Plan 9
+(commit 93f8143600, 2022-08-12),
+but not by Solaris@tie{}10
 or Documenter's Workbench
-@code{troff}s.
+@code{troff}s. @c DWB, Solaris 10
+which both render it as
+@samp{~}.
 @c as of this writing, 2022-08-13
 @c END Keep in sync with groff_diff(7) and groff_man_style(7).
 @xref{Manipulating Filling and Adjustment}.
+GNU
+@command{troff}'s @c GNU
+features sometimes cause incompatibilities with documents written
+assuming old implementations of
+@code{troff}. @c generic
 
 @cindex @code{\A}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\|}, incompatibilities with @acronym{AT&T} @code{troff}
@@ -19583,18 +19600,39 @@ in this adjustment mode
 to prevent ``rivers'' in the text.
 
 @cindex hyphenation, incompatibilities with @acronym{AT&T} @code{troff}
-GNU @command{troff} does not always hyphenate words as @acronym{AT&T}
-@command{troff} does.  The @acronym{AT&T} implementation uses a set of
-hard-coded rules specific to English, while GNU @command{troff} uses
-language-specific hyphenation pattern files derived from @TeX{}.
-Furthermore, in old versions of @command{troff} there was a limited
-amount of space to store hyphenation exceptions (arguments to the
-@code{hw} request); GNU @command{troff} has no such restriction.  When
-the @code{hy} request is invoked without an argument, GNU
-@command{troff} sets the automatic hyphenation mode to the value of the
-@code{.hydefault} register; the @acronym{AT&T} implementation sets it to
-@samp{1}, which is not suitable in GNU @command{troff} for some
-languages, including English.
+GNU
+@command{troff} @c GNU
+does not always hyphenate words as @acronym{AT&T}
+@command{troff} @c AT&T
+does.
+The @acronym{AT&T} implementation uses a set of hard-coded rules
+specific to U.S.@: English,
+while GNU
+@command{troff} @c GNU
+uses language-specific hyphenation pattern files derived from @TeX{}.
+In some versions of
+@code{troff} @c generic
+there was limited space to store hyphenation exceptions
+(arguments to the
+@code{hw}
+request);
+GNU
+@command{troff} @c GNU
+has no such restriction.
+When the
+@code{hy}
+request is invoked without an argument,
+GNU
+@command{troff} @c GNU
+sets the automatic hyphenation mode to the value of the
+@code{.hydefault}
+register;
+the @acronym{AT&T} implementation sets it to
+@samp{1},
+which is not suitable in GNU
+@command{troff}
+for some languages,
+including English.
 
 GNU @command{troff} handles the dummy character @code{\&} differently
 from @acronym{AT&T} @command{troff} when it is followed by the
@@ -19660,27 +19698,21 @@ and doubling of an initial neutral double quote
 if the file name has one.
 
 @cindex output device name string (@code{.T}), in other implementations
-GNU @code{troff} predefines a string @code{.T} containing the argument
-given to the @option{-T} command-line option, namely the current output
-device (for example, @samp{pdf} or @samp{utf8}).  The existence of this
+The existence of the
+@code{.T}
 string is a common feature of device-independent
-@code{troff}s@footnote{DWB@tie{}3.3, Solaris, Heirloom Doctools, and
-Plan@tie{}9 @code{troff}s all support it.} but valid values are specific
-to each implementation.
-
-@cindex removal of read-only registers, incompatibility with @acronym{AT&T} @code{troff}
-@cindex register, read-only, removal, incompatibility with @acronym{AT&T} @code{troff}
-@cindex read-only register removal, incompatibility with @acronym{AT&T} @code{troff}
-@acronym{AT&T} @code{troff} ignored attempts to remove read-only
-registers; GNU @code{troff} honors such requests.  @xref{Built-in
-Registers}.
+@code{troff}s---DWB@tie{}3.3, @c others
+Solaris@tie{}10,
+Heirloom Doctools,
+and Plan@tie{}9
+@code{troff}s @c foreign
+all support it---but valid values are specific to each implementation.
 
 @cindex output device usage register (@code{.T}), incompatibility with @acronym{AT&T} @code{troff}
 The (read-only) register
 @code{.T}
 interpolates@tie{}1
-if
-GNU
+if GNU
 @command{troff} @c GNU
 is run with the
 @option{-T}
@@ -19690,21 +19722,48 @@ In contrast,
 AT&T
 @command{troff} @c AT&T
 interpolated@tie{}1 only if
-@command{nroff}
+@command{nroff} @c AT&T
 was the formatter and was run with
 @option{-T}.
 
+@cindex removal of read-only registers, incompatibility with @acronym{AT&T} @code{troff}
+@cindex register, read-only, removal, incompatibility with @acronym{AT&T} @code{troff}
+@cindex read-only register removal, incompatibility with @acronym{AT&T} @code{troff}
+@acronym{AT&T}
+@command{troff} @c AT&T
+ignored attempts to remove read-only registers;
+GNU
+@command{troff} @c GNU
+honors such requests.
+@xref{Built-in Registers}.
+
 @cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
-@acronym{AT&T} @code{troff} and other implementations handle the
-@code{lf} request differently.  For them, its @var{line} argument
-changes the line number of the @emph{current} line.
+The
+@code{lf}
+request sets the number of the
+@emph{current}
+input line in AT&T
+@command{troff} @c AT&T
+and the
+@emph{next}
+in GNU
+@command{troff}. @c GNU
 
 @cindex environment availability and naming, incompatibilities with
-@acronym{AT&T} @code{troff} had only environments named @samp{0},
-@samp{1}, and @samp{2}.  In GNU @code{troff}, any number of environments
-may exist, using any valid identifiers for their names
+@acronym{AT&T}
+@command{troff} @c AT&T
+had only environments named
+@samp{0},
+@samp{1},
+and
+@samp{2}.
+In GNU
+@command{troff},
+any number of environments may exist,
+using any valid identifiers for their names
 (@pxref{Identifiers}.)
 
+@c TODO: Resume groff_diff(7) synchronization work here.
 @cindex fractional point sizes
 @cindex fractional type sizes
 @cindex point sizes, fractional
