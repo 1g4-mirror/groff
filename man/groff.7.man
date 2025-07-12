@@ -1013,6 +1013,8 @@ see below.
 .\" END Keep (roughly) parallel with groff.texi node "Default Units".
 .
 .
+.br
+.ne 5v
 .\" ====================================================================
 .SH "Numeric expressions"
 .\" ====================================================================
