@@ -7135,8 +7135,9 @@ available via both requests and escape sequences.
 
 The mechanism of using @code{roff}'s control characters to invoke
 requests and call macros was introduced in @ref{Requests and Macros}.
-Control characters are recognized only at the beginning of an input
-line, or at the beginning of a branch of a control structure request;
+The formatter recognizes a control character
+only at the beginning of an input line,
+or at the beginning of a branch of a control structure request;
 see @ref{Conditionals and Loops}.
 
 A few requests cause a break implicitly; use the no-break control
