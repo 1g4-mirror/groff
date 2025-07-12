@@ -13182,7 +13182,6 @@ The
 @code{\s}
 escape sequence offers the following syntax forms
 that work with fractional type sizes and accept scaling units.
-You may of course give them dimensionless integral arguments.
 The delimited forms need not use the neutral apostrophe;
 see @ref{Delimiters}.
 
