@@ -13055,14 +13055,28 @@ scaling units.
     @result{} E: .s=10.5z, .ps=10500s
 @endExample
 
-It makes no sense to use the @samp{z} scaling unit in a numeric
-expression whose default scaling unit is neither @samp{u} nor @samp{z},
-so GNU @code{troff} disallows this.  Similarly, it is nonsensical to use
-scaling units other than @samp{p}, @samp{s}, @samp{z}, or @samp{u} in a
-numeric expression whose default scaling unit is@tie{}@samp{z}, and so
-GNU @code{troff} disallows those as well.
-@c END Keep (roughly) parallel with subsection "Fractional type sizes
-@c and new scaling units" of groff_diff(7).
+It makes no sense to use the
+@samp{z}@tie{}scaling
+unit in a numeric expression whose default scaling unit is neither
+@samp{u}
+nor
+@samp{z},
+so GNU
+@command{troff} @c GNU
+disallows this.
+Similarly,
+it is nonsensical to use scaling units other than
+@samp{p},
+@samp{s},
+@samp{z},
+or
+@samp{u}
+in a
+numeric expression whose default scaling unit
+is@tie{}@samp{z},
+and so GNU
+@command{troff}
+disallows those as well.
 
 @DefregList {.psr}
 @DefregListEndx {.sr}
@@ -13072,19 +13086,40 @@ GNU @code{troff} disallows those as well.
 @cindex point size registers, last-requested (@code{.psr}, @code{.sr})
 @cindex @code{.ps} register, compared to @code{.psr}
 @cindex @code{.s} register, compared to @code{.sr}
-Output devices may be limited in the type sizes they can employ.  The
-@code{.s} and @code{.ps} registers represent the type size selected by
-the formatter as it understands a device's capability.  The last
-@emph{requested} type size is interpolated in scaled points by the
-read-only register @code{.psr} and in points as a decimal fraction by
-the read-only string-valued register @code{.sr}.  Both are associated
-with the environment (@pxref{Environments}).
+Output devices may be limited in the type sizes they can employ.
+The
+@code{.s}
+and
+@code{.ps}
+registers represent the type size selected by the formatter
+as it understands a device's capability.
+The last
+@emph{requested}
+type size is interpolated in scaled points
+by the read-only register
+@code{.psr}
+and in points as a decimal fraction
+by the read-only string-valued register
+@code{.sr}.
+Both are associated with the environment (@pxref{Environments}).
 
-For example, if a type size of 10.95 points is requested, and the
-nearest size permitted by a @code{sizes} request (or by the @code{sizes}
-or @code{sizescale} directives in the device's @file{DESC} file) is 11
-points, the output driver uses the latter value.
+For example,
+if a type size of 10.95@tie{}points is requested,
+and the nearest size permitted by a
+@code{sizes}
+request
+(or by the
+@code{sizes}
+or
+@code{sizescale}
+directives in the device's
+@file{DESC}
+file)
+is 11@tie{}points,
+the output driver uses the latter value.
 @endDefreg
+@c END Keep (roughly) parallel with subsection "Fractional type sizes
+@c and new scaling units" of groff_diff(7).
 
 @cindex changing type sizes (@code{ps}, @code{\s})
 @cindex type sizes, changing (@code{ps}, @code{\s})

@@ -490,6 +490,26 @@ disallows those as well.
 .P
 Output devices may be limited in the type sizes they can employ.
 .
+The
+.B .s
+and
+.B .ps
+registers represent the type size selected by the formatter
+as it understands a device's capability.
+.
+The last
+.I requested
+type size is interpolated in scaled points
+by the read-only register
+.B .psr
+and in points as a decimal fraction by the read-only string-valued
+register
+.BR .sr .
+.
+Both are associated with the environment.
+.
+.
+.P
 For example,
 if a type size of 10.95\~points is requested,
 and the nearest size permitted by a
@@ -504,23 +524,6 @@ directives in the device's
 file)
 is 11\~points,
 the output driver uses the latter value.
-.
-The
-.B .s
-and
-.B .ps
-registers represent the type size selected by the formatter as it
-understands a device's capability.
-.
-The last
-.I requested
-type size is interpolated in scaled points by the read-only register
-.B .psr
-and in points as a decimal fraction by the read-only string-valued
-register
-.BR .sr .
-.
-Both are associated with the environment.
 .\" END Keep (roughly) parallel with groff.texi node "Using Fractional
 .\" Type Sizes".
 .
