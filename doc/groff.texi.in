@@ -7782,8 +7782,11 @@ nor between arguments.
 
 @cindex undefined request
 @cindex request, undefined
-A @code{\"} comment on a line by itself is treated as a blank line,
-because after eliminating the comment, that is all that remains.
+The formatter handles a
+@code{\"}
+comment on a line by itself as a blank line,
+because after eliminating the comment,
+that is all that remains.
 
 @Example
 apples bananas
@@ -7794,20 +7797,31 @@ durians
     @result{} durians
 @endExample
 
-To compensate, it is common to combine the empty request with the
-comment escape sequence as @samp{.\"}, causing the input line to be
-ignored.
+To compensate,
+it is common to combine the empty request
+with the comment escape sequence as
+@samp{.\"},
+causing the input line to be ignored.
 
 @cindex @code{'}, as a comment
-Another commenting scheme sometimes seen is three consecutive neutral
-apostrophes (@code{'''}) at the beginning of an input line.  This works,
-but GNU @command{troff} emits a warning diagnostic (if enabled) about an
-undefined macro (namely @samp{''}).
+Another commenting scheme sometimes seen
+is three consecutive neutral apostrophes
+(@code{'''})
+at the beginning of an input line.
+This works, but GNU
+@command{troff} @c GNU
+emits a warning diagnostic
+(if enabled)
+about an undefined macro
+(namely
+@samp{''}).
 @endDefesc
 
 @Defesc {\\#, , , }
-Start a whole-line comment; read everything up to and including the next
-newline in copy mode (@pxref{Copy Mode}) and discard it.
+Start a whole-line comment;
+read everything up to and including the next newline
+in copy mode@footnote{@xref{Copy Mode}.}
+and discard it.
 GNU
 @command{troff} @c GNU
 introduced this extension to avoid the problems described above.
