@@ -1,3 +1,10 @@
+2025-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/eqnrc: Drop unneccessary setup.  Since commit 4b3e5417d5,
+	18 February 2017, GNU eqn self-serves by synthesizing
+	conditional empty fallback definitions of `EQ` and `EN` in its
+	output.
+
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[pic]: Stop validating non-intepreted input for character codes
