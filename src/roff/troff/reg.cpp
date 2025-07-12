@@ -563,7 +563,7 @@ static void dump_register(symbol *id, reg *r)
   errprint("\n");
 }
 
-void dump_register_request()
+void print_register_request()
 {
   reg *r;
   symbol identifier;
@@ -595,7 +595,7 @@ void init_reg_requests()
   init_request("af", assign_register_format_request);
   init_request("aln", alias_register_request);
   init_request("rnn", rename_register_request);
-  init_request("pnr", dump_register_request);
+  init_request("pnr", print_register_request);
 }
 
 // Local Variables:

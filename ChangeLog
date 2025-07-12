@@ -1,12 +1,34 @@
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/input.cpp: Trivially refactor, continuing
-	naming reform of functions that are troff request handlers.
+	[troff]: Trivially refactor, continuing naming reform of
+	functions that are troff request handlers and which lists of
+	objects or properties thereof.  Revert to using `print` for
+	{debugging} request handlers, and reserve `dump` for member
+	functions of classes.  (One might use the latter from within
+	GDB, for example.)
+
+	* src/roff/troff/env.cpp:
+	(dump_environment_request): Rename this...
+	(print_environment_request): ...to this...
+	(dump_pending_output_line_request): ...and this...
+	(print_pending_output_line_request): ...to this.
+	(init_env_requests): Update request handler setup.
+	* src/roff/troff/input.cpp:
 	(set_character_flags): Rename this...
 	(set_character_flags_request): ...to this...
 	(warn_request): ...and this...
 	(set_warning_mask_request): ...to this.
 	(init_input_requests): Update request handler setup.
+	* src/roff/troff/node.cpp:
+	(dump_font_mounting_positions_request): Rename this...
+	(print_font_mounting_position_request): ...to this...
+	(dump_font_translations): ...and this...
+	(print_font_translation_request): ...to this.
+	(init_node_requests): Update request handler setup.
+	* src/roff/troff/reg.cpp:
+	(dump_register_request): Rename this...
+	(print_register_request): ...to this.
+	(init_reg_requests): Update request handler setup.
 
 2025-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 

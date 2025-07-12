@@ -3641,7 +3641,7 @@ void environment::dump()
   fflush(stderr);
 }
 
-void dump_environment_request()
+void print_environment_request()
 {
   errprint("Current Environment:\n");
   curenv->dump();
@@ -3660,7 +3660,7 @@ void dump_environment_request()
   skip_line();
 }
 
-static void dump_pending_output_line_request()
+static void print_pending_output_line_request()
 {
   curenv->dump_pending_nodes();
   skip_line();
@@ -4327,8 +4327,8 @@ void init_env_requests()
   init_request("nh", no_hyphenate);
   init_request("nm", number_lines);
   init_request("nn", no_number);
-  init_request("pev", dump_environment_request);
-  init_request("pline", dump_pending_output_line_request);
+  init_request("pev", print_environment_request);
+  init_request("pline", print_pending_output_line_request);
   init_request("ps", point_size);
   init_request("pvs", post_vertical_spacing);
   init_request("rj", right_justify);

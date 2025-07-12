@@ -1577,7 +1577,7 @@ static void define_color()
   skip_line();
 }
 
-static void report_color()
+static void print_color_request()
 {
   symbol key;
   color *value;
@@ -3772,7 +3772,7 @@ void macro_header::json_dump_macro()
   fflush(stderr);
 }
 
-void print_macros()
+void print_macro_request()
 {
   request_or_macro *rm;
   macro *m = 0 /* nullptr */;
@@ -4450,7 +4450,7 @@ static symbol composite_glyph_name(symbol nm)
   return symbol(gl.contents());
 }
 
-static void report_composite_characters()
+static void print_composite_character_request()
 {
   dictionary_iterator iter(composite_dictionary);
   symbol key;
@@ -4750,7 +4750,7 @@ static void define_special_character_request()
   define_character(CHAR_SPECIAL_FALLBACK);
 }
 
-static void report_character_request()
+static void print_character_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character report request expects arguments");
@@ -7631,7 +7631,7 @@ grostream::~grostream()
 
 object_dictionary stream_dictionary(20);
 
-static void print_streams()
+static void print_stream_request()
 {
   object_dictionary_iterator iter(stream_dictionary);
   symbol stream_name;
@@ -9580,14 +9580,14 @@ void init_input_requests()
   init_request("opena", opena_request);
   init_request("output", output_request);
   init_request("pc", page_character_request);
-  init_request("pchar", report_character_request);
-  init_request("pcolor", report_color);
-  init_request("pcomposite", report_composite_characters);
+  init_request("pchar", print_character_request);
+  init_request("pcolor", print_color_request);
+  init_request("pcomposite", print_composite_character_request);
   init_request("pi", pipe_output);
-  init_request("pm", print_macros);
+  init_request("pm", print_macro_request);
   init_request("psbb", ps_bbox_request);
   init_request("pso", pipe_source_request);
-  init_request("pstream", print_streams);
+  init_request("pstream", print_stream_request);
   init_request("rchar", remove_character);
   init_request("rd", read_request);
   init_request("return", return_macro_request);
