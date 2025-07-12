@@ -13969,11 +13969,21 @@ Versatec and Benson-Varian plotters.}
 If the first argument to an @code{if}, @code{ie}, or @code{while}
 request begins with a non-alphanumeric character apart from @code{!}
 (see below), it performs an @slanted{output comparison test}.
-@footnote{Strictly, letters not otherwise recognized @emph{are} treated
-as output comparison delimiters.  For portability, it is wise to avoid
-using letters not in the list above; for example, Plan@tie{}9
-@code{troff} uses @samp{h} to test a mode it calls @code{htmlroff}, and
-GNU @code{troff} may provide additional operators in the future.}
+@footnote{Strictly,
+letters not otherwise recognized
+@emph{are}
+treated as output comparison delimiters.
+A portable document avoids using letters not in the list above;
+for example,
+Plan@tie{}9
+@command{troff} @c Plan 9
+uses
+@samp{h}
+to test a mode it calls
+@code{htmlroff},
+and GNU
+@command{troff} @c GNU
+may provide additional operators in the future.}
 
 @cindex output comparison operator
 @table @code
