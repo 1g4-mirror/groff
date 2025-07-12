@@ -8021,12 +8021,23 @@ apostrophe; see @ref{Delimiters}.
 @endExample
 
 @cindex negating register values
-A leading minus sign in @var{value} is always interpreted as a
-decrementation operator, not an algebraic sign.  To assign a register a
-negative value or the negated value of another register, you can
-force GNU @code{troff} to interpret @samp{-} as a negation or minus,
-rather than decrementation, operator: enclose the @samp{-} with its
-operand in parentheses or subtract the expression of interest from zero.
+A
+@code{roff}
+formatter always interprets a leading minus sign in
+@var{value}
+as a decrementation operator,
+not an algebraic sign.
+To assign a register a negative value
+or the negated value of another register,
+you must force the formatter to interpret
+@samp{-}
+as a negation or minus,
+rather than decrementation,
+operator:@:
+enclose the
+@samp{-}
+with its operand in parentheses
+or subtract the expression of interest from zero.
 
 @Example
 .nr a 7
