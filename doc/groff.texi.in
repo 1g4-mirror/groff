@@ -12771,6 +12771,8 @@ GNU @code{troff} uses 10@tie{}point type on 12@tie{}point spacing.
 Typographers call the difference between type size and vertical spacing
 @dfn{leading}.@footnote{Rhyme with ``sledding''; mechanical typography
 used lead metal (Latin @emph{plumbum}).}
+Both properties are associated with the environment;
+see @ref{Environments})
 
 @menu
 * Changing the Type Size::
@@ -12813,10 +12815,12 @@ the next larger valid size will result, with a maximum of
 @cindex type size registers (@code{.s}, @code{.ps})
 @cindex point size registers (@code{.s}, @code{.ps})
 The read-only string-valued register @code{.s} interpolates the type
-size in points as a decimal fraction; it is associated with the
-environment (@pxref{Environments}).  To obtain the type size in scaled
-points, interpolate the @code{.ps} register instead (@pxref{Using
-Fractional Type Sizes}).
+size in points as a decimal fraction.
+To obtain the type size in scaled points,
+interpolate the
+@code{.ps}
+register instead
+(@pxref{Using Fractional Type Sizes}).
 @endDefreq
 
 @Defesc {\\s, , size, }
@@ -12915,8 +12919,9 @@ register).
 a vertical motion.  You must explicitly issue this request before
 interpolating the diversion.
 
-The read-only register @code{.v} contains the vertical spacing; it is
-associated with the environment (@pxref{Environments}).
+The read-only register
+@code{.v}
+contains the vertical spacing.
 @endDefreq
 
 @need 200
@@ -12973,8 +12978,8 @@ before the last call to @code{pvs}.  GNU @code{troff} emits a warning in
 category @samp{range} if @var{space} is negative; the post-vertical
 spacing is then set to zero.
 
-The read-only register @code{.pvs} contains the post-vertical spacing;
-it is associated with the environment (@pxref{Environments}).
+The read-only register @code{.pvs}
+interpolates the post-vertical spacing.
 @endDefreq
 
 @c ---------------------------------------------------------------------
@@ -13027,8 +13032,7 @@ thousandth of a point.  The request @samp{.ps 10.5} is synonymous with
 @code{.s} can interpolate a non-integral type size.
 
 @Defreg {.ps}
-This read-only register interpolates the type size in scaled points; it
-is associated with the environment (@pxref{Environments}).
+This read-only register interpolates the type size in scaled points.
 @endDefreg
 
 Another GNU @code{troff} scaling unit, @samp{s}, multiplies by the
@@ -13101,7 +13105,6 @@ by the read-only register
 and in points as a decimal fraction
 by the read-only string-valued register
 @code{.sr}.
-Both are associated with the environment (@pxref{Environments}).
 
 For example,
 if a type size of 10.95@tie{}points is requested,
