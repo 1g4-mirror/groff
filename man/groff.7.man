@@ -1582,12 +1582,18 @@ but only spaces can separate an argument from its successor.
 Only one between arguments is necessary;
 any excess is ignored.
 .
+.\" slack text for widow/orphan management
+.\" (In compatibility mode,
+.\" a space is not necessary
+.\" after a request or macro name of two characters' length.)
+.
 GNU
 .I troff \" GNU
 does not allow tabs for argument separation.
-.\" @footnote{In compatibility mode, a space is not necessary after a
-.\" request or macro name of two characters' length.  Also, Plan@tie{}9
-.\" @code{troff} allows tabs to separate arguments.}
+.
+(Plan\~9
+.I troff \" Plan 9
+does.)
 .
 .
 .br

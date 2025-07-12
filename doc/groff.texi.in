@@ -7216,15 +7216,20 @@ non-destructively replaced.  @xref{Strings}.
 @cindex tabs, and request arguments
 @cindex request arguments, and tabs
 @cindex arguments to requests, and tabs
-There is no inherent limit on argument length or quantity.  Most
-requests take one or more arguments, and ignore any they do not expect.
-A request may be separated from its arguments by tabs or spaces, but
-only spaces can separate an argument from its successor.  Only one
-between arguments is necessary; any excess is ignored.  GNU @code{troff}
-does not allow tabs for argument separation.@footnote{In compatibility
-mode, a space is not necessary after a request or macro name of two
-characters' length.  Also, Plan@tie{}9 @code{troff} allows tabs to
-separate arguments.}
+There is no inherent limit on argument length or quantity.
+Most requests take one or more arguments,
+and ignore any they do not expect.
+A request may be separated from its arguments by tabs or spaces,
+but only spaces can separate an argument from its successor.
+Only one between arguments is necessary;
+any excess is ignored.@footnote{In compatibility mode,
+a space is not necessary
+after a request or macro name of two characters' length.}
+GNU
+@command{troff} @c GNU
+does not interpret tabs as argument separators.@footnote{Plan@tie{}9
+@command{troff} @c Plan 9
+does.}
 
 Generally, a space @emph{within} a request argument is not relevant, not
 meaningful, or is supported by bespoke provisions, as with the @code{tl}
