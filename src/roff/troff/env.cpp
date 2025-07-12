@@ -3638,6 +3638,7 @@ void environment::dump()
 #ifdef WIDOW_CONTROL
   errprint("  widow control: %1\n", want_widow_control ? "yes" : "no");
 #endif /* WIDOW_CONTROL */
+  fflush(stderr);
 }
 
 void dump_environment_request()

@@ -1,5 +1,10 @@
 2025-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::dump): Flush the standard
+	error stream after writing an environment's properties to it.
+
+2025-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (print_macros, get_flags)
 	(charinfo::get_flags): Use explicit `reinterpret_cast` C++
 	operator instead of C-style cast.  Annotate why we use this
