@@ -7845,6 +7845,7 @@ the ignored region @emph{will} be modified if interpolated with
 
 @c Wrap example at 56 columns.
 @Example
+.ll 45n
 hand\c
 .de TX
 fasting
@@ -7852,12 +7853,21 @@ fasting
 .ig TX
 This is part of a large block of input that has been
 temporarily(?) commented out.
-We can restore it simply by removing the .ig request and
-the call of its end macro.
 .TX
+shake
 @endExample
 @Example
-    @result{} handfasting
+    @result{} handfasting shake
+@endExample
+
+Observe the result if we remove the
+@code{ig}
+request and the call of its end macro.
+
+@Example
+    @result{} handThis  is  part  of a large block of input
+    @result{} that has been temporarily(?)  commented  out.
+    @result{} shake
 @endExample
 @endDefreq
 
