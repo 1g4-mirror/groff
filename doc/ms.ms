@@ -3967,21 +3967,21 @@ register.
 .  bp
 .\}
 .NH 1
-Differences from AT&T
+Differences from historical
 .BI ms
 .XS
-Differences from AT&T
+Differences from historical
 .I ms
 .XE
 .LP
-The
 .I "groff ms"
-macros are an independent reimplementation,
-using no AT&T code.
+was written without reusing AT&T or Berkeley code.
 .
-Since they take advantage of the extended features of
-.I groff ,
-they cannot be used with AT&T
+Since it takes advantage of
+GNU
+.I troff 's
+extensions,
+it cannot be used with AT&T
 .I troff .
 .
 .I "groff ms"
@@ -3993,20 +3993,23 @@ and adds several of its own.
 .PP
 The internals of
 .I "groff ms"
-differ from those of AT&T
+differ from those of AT&T and Berkeley
 .I ms .
 .
-Documents that depend upon implementation details of AT&T
-.I ms
-may not format properly with
+Documents that depend upon undocumented behavioral details of
+those implementations
+might not format as expected with
 .I "groff ms" .
 .
-Such details include macros whose function was not documented in the
-AT&T
-.I ms
-manual [Lesk 1978].
-.\" TODO: Use refer(1).
-.\" XXX: We support RT anyway; maybe we should stop?
+It therefore defines the register
+.CW GS ,
+which AT&T and Berkeley do not use,
+to\~1.
+.
+A document can test its value to determine whether it is being formatted
+with
+.I "groff ms"
+or another implementation.
 .
 .
 .PP
@@ -4254,21 +4257,6 @@ register;
 Berkeley and
 .I "groff ms"
 do.
-.
-.
-.PP
-.I "groff ms"
-sets the register
-.CW GS
-to\~1;
-the AT&T
-.I ms
-package does not use it.
-.
-A document can test its value to determine whether it is being formatted
-with
-.I "groff ms"
-or another implementation.
 .
 .
 .\" XXX: We can't use a keep here because the wrong page number will be
