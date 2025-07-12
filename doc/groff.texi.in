@@ -7937,11 +7937,12 @@ interpolated.  @xref{Auto-increment}.)
 
 @cindex @code{\R} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\R}
-@code{\R}
-is not tokenized when GNU
+GNU
 @command{troff} @c GNU
-reads its input;
-it updates only the formatter's register dictionary
+does not tokenize
+@code{\R}
+when reading it;
+the escape sequence updates only the formatter's register dictionary
 and does not contribute (directly) to output.
 @xref{Gtroff Internals}.
 
@@ -11120,10 +11121,15 @@ for later use.
 
 @cindex @code{\f} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\f}
-@code{\f} is not tokenized when GNU @code{troff} reads its input; it
-instead updates the environment.  It thus can be used in requests that
-expect a single-character argument.  We can assign a font to a margin
-character as follows (@pxref{Miscellaneous}).
+GNU
+@command{troff} @c GNU
+does not tokenize
+@code{\f}
+when reading it;
+the escape sequence updates the environment.
+It thus can be used in requests that expect a single-character argument.
+We can assign a font to a margin character as follows
+(@pxref{Miscellaneous}).
 
 @Example
 .mc \f[I]x\f[]
@@ -11265,10 +11271,15 @@ and spam.
 
 @cindex @code{\F} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\F}
-@code{\F} is not tokenized when GNU @code{troff} reads its input; it
-instead updates the environment.  It thus can be used in requests that
-expect a single-character argument.  We can thus alter the font family
-when writing a margin character as follows (@pxref{Miscellaneous}).
+GNU
+@command{troff} @c GNU
+does not tokenize
+@code{\F}
+when reading it;
+the escape sequence updates the environment.
+It thus can be used in requests that expect a single-character argument.
+We can assign a font family to a margin character as follows
+(@pxref{Miscellaneous}).
 
 @Example
 .mc \F[P]x\F[]
@@ -12307,10 +12318,15 @@ this feature.
 
 @cindex @code{\H} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\H}
-@code{\H} is not tokenized when GNU @code{troff} reads its input; it
-instead updates the environment.  It thus can be used in requests that
-expect a single-character argument.  We can thus alter the font height
-when writing a margin character as follows (@pxref{Miscellaneous}).
+GNU
+@command{troff} @c GNU
+does not tokenize
+@code{\H}
+when reading it;
+the escape sequence updates the environment.
+It thus can be used in requests that expect a single-character argument.
+We can alter the font height of a margin character as follows
+(@pxref{Miscellaneous}).
 
 @Example
 .mc \H'+5z'x\H'0'
@@ -12347,10 +12363,15 @@ this feature.
 
 @cindex @code{\S} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\S}
-@code{\S} is not tokenized when GNU @code{troff} reads its input; it
-instead updates the environment.  It thus can be used in requests that
-expect a single-character argument.  We can thus alter the font slant
-when writing a margin character as follows (@pxref{Miscellaneous}).
+GNU
+@command{troff} @c GNU
+does not tokenize
+@code{\S}
+when reading it;
+the escape sequence updates the environment.
+It thus can be used in requests that expect a single-character argument.
+We can apply a slant to a margin character as follows
+(@pxref{Miscellaneous}).
 
 @Example
 .mc \S'20'x\S'0'
@@ -13325,10 +13346,15 @@ string-valued register @samp{.m}; it is associated with the environment
 
 @cindex @code{\m} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\m}
-@code{\m} is not tokenized when GNU @code{troff} reads its input; it
-instead updates the environment.  It thus can be used in requests that
-expect a single-character argument.  We can thus alter the stroke color
-when writing a margin character as follows (@pxref{Miscellaneous}).
+GNU
+@command{troff} @c GNU
+does not tokenize
+@code{\m}
+when reading it;
+the escape sequence updates the environment.
+It thus can be used in requests that expect a single-character argument.
+We can assign a stroke color to a margin character as follows
+(@pxref{Miscellaneous}).
 
 @Example
 .mc \m[red]x\m[]
@@ -13354,12 +13380,17 @@ request without an argument.
 
 @cindex @code{\M} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\M}
-@code{\M} is not tokenized when GNU @code{troff} reads its input; it
-instead updates the environment.  It thus can be used in requests that
-expect a single-character argument.  We can thus alter the fill color
-when writing a margin character as follows (@pxref{Miscellaneous});
-@command{grotty} interprets the fill color as a character cell
-background color.
+GNU
+@command{troff} @c GNU
+does not tokenize
+@code{\F}
+when reading it;
+the escape sequence updates the environment.
+It thus can be used in requests that expect a single-character argument.
+We can assign a fill color to a margin character as follows
+(@pxref{Miscellaneous});
+@command{grotty}
+interprets the fill color as a character cell background color.
 
 @Example
 .mc \m[black]\M[green]x\M[]\m[]
