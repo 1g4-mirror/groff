@@ -7623,8 +7623,6 @@ grostream::grostream(const char *fn, symbol m, FILE *fp)
 {
 }
 
-// XXX: Maybe we should try to close the libc FILE stream here.
-// Resource Release Is Destruction?
 grostream::~grostream()
 {
 }
@@ -7691,7 +7689,6 @@ static void open_file(bool appending)
 				 new grostream(filename, mode, &*fp));
       }
     }
-    // TODO: Add `filename` to file name set.
     tok.next();
   }
 }
@@ -8895,7 +8892,6 @@ void transparent_file()
       fclose(fp);
     }
   }
-  // TODO: Add `filename` to file name set.
   tok.next();
 }
 
