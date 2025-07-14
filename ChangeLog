@@ -1,6 +1,17 @@
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/scripts/gendesc.sh:
+	* font/scripts/genfonts.sh: Exit with status 2, not 255, on
+	usage error.  The latter value is not good practice per
+	POSIX--shells use the eighth bit of the exit status to indicate
+	that a signal was received.
+
+	See <https://pubs.opengroup.org/onlinepubs/9799919799/\
+	utilities/V3_chap02.html#tag_19_08_02>.
+
+2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/scripts/gendesc.sh:
 	* font/scripts/genfonts.sh: Prevent recurrence of previous
 	problem by computing the basename of the script file, storing it
 	a variable `progname`, and using that variable in diagnostics.

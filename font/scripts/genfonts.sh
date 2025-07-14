@@ -3,7 +3,7 @@
 # genfonts.sh <input .proto file> <RES> <CPI> <FONT name>
 progname=${0##*/}
 if test -z "$1" || test -z "$2" || test -z "$3" || test -z "$4"; then
-    echo "$progname: missing parameter"; exit 255;
+    echo "$progname: missing parameter"; exit 2;
 fi
 
 INPUT=$1
