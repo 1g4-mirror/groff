@@ -8053,7 +8053,7 @@ void translate_input()
   do_translate(1 /* transparent */, 1 /* input */);
 }
 
-static void set_character_flags()
+static void set_character_flags_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character flags configuration request"
@@ -9455,7 +9455,7 @@ int main(int argc, char **argv)
   return 0;			// not reached
 }
 
-void warn_request()
+void set_warning_mask_request()
 {
   int n;
   if (has_arg() && get_integer(&n)) {
@@ -9533,7 +9533,7 @@ void init_input_requests()
   init_request("cc", assign_control_character);
   init_request("c2", assign_no_break_control_character);
   init_request("cf", copy_file);
-  init_request("cflags", set_character_flags);
+  init_request("cflags", set_character_flags_request);
   init_request("char", define_character_request);
   init_request("chop", chop_macro);
   init_request("class", define_class);
@@ -9616,7 +9616,7 @@ void init_input_requests()
 #ifdef COLUMN
   init_request("vj", vjustify);
 #endif /* COLUMN */
-  init_request("warn", warn_request);
+  init_request("warn", set_warning_mask_request);
   init_request("warnscale", warnscale_request);
   init_request("while", while_request);
   init_request("write", write_request);

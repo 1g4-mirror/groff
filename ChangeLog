@@ -1,3 +1,13 @@
+2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Trivially refactor, continuing
+	naming reform of functions that are troff request handlers.
+	(set_character_flags): Rename this...
+	(set_character_flags_request): ...to this...
+	(warn_request): ...and this...
+	(set_warning_mask_request): ...to this.
+	(init_input_requests): Update request handler setup.
+
 2025-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::dump): Flush the standard
