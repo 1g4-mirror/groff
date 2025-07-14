@@ -1,6 +1,12 @@
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/scripts/gendesc.sh:
+	* font/scripts/genfonts.sh: Fix shell style nits.  Stop using
+	semicolons to simulate K&R C brace style.
+
+2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/scripts/gendesc.sh:
 	* font/scripts/genfonts.sh: Exit with status 2, not 255, on
 	usage error.  The latter value is not good practice per
 	POSIX--shells use the eighth bit of the exit status to indicate
