@@ -1,5 +1,12 @@
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/scripts/gendesc.sh:
+	* font/scripts/genfonts.sh: Prevent recurrence of previous
+	problem by computing the basename of the script file, storing it
+	a variable `progname`, and using that variable in diagnostics.
+
+2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* font/scripts/gendesc.sh: Fix copy and paste error causing
 	script's error diagnostic to misreport its own name.
 

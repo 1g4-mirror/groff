@@ -1,8 +1,9 @@
 #!/bin/sh
 # Usage: gendesc.sh <input .proto> <RES> <CPI> <LPI> <list of fonts>
+progname=${0##*/}
 if test -z "$1" || test -z "$2" || test -z "$3" || test -z "$4" || \
     test -z "$5"; then
-    echo "gendesc.sh: missing parameter"; exit 255;
+    echo "$progname: missing parameter"; exit 255;
 fi
 INPUT=$1
 RES=$2
