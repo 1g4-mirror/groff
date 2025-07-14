@@ -6,16 +6,16 @@
 	any other text--with `LT` letters specifically but might also
 	resolve other similar problems with BS/BE use.  Using a regular
 	diversion moved the vertical drawing position from its
-	"pre-page" location of "-1" (because the `BS` macro called `br`
+	"pre-page" location of "-1" (because the `BS` macro invoked `br`
 	to ensure that the bottom block didn't absorb any partially
 	collected line).  That in turn sprung the default header trap
 	that writes a centered page number.  The `LT` macro is written
-	such that if the drawing position is not at the top of the page,
-	it fails to format the pre-body letter material (writer's
-	address, date, inside address, salutation, etc.).  (Because the
-	first page has already started and the drawing position was
-	non-negative, the `LT` macro was also too late to turn off the
-	default header on the first page.)
+	such that if the drawing position is not at the top of the page
+	when called, it fails to format the pre-body letter material
+	{writer's address, date, inside address, salutation, etc.}.
+	{Because the first page had already started and the drawing
+	position was non-negative, the `LT` macro was also too late to
+	turn off the default header on the first page.}
 	(BE): Annotate explicit `br` retained here; we don't want to
 	silently discard a partially collected line when closing the box
 	diversion.  The document author should delete from a bottom
@@ -191,11 +191,7 @@
 	{optional} first argument is non-numeric, otherwise populate
 	`misc*verb` register as before.
 	(VERBON, VERBOFF): Stop prefixing `misc*verb` register
-	interpolations with literal zeroes.  This appears to have been a
-	copy-and-paste of an old troff idiom for interpolating _strings_
-	{or macro arguments}.  But a register's interpolation is always
-	valid in a numeric expression {unless someone fiddles its
-	register format, which shouldn't happen to `misc*verb`}.
+	interpolations with literal zeroes.
 
 2024-10-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
