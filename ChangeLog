@@ -1,5 +1,10 @@
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/scripts/gendesc.sh: Fix copy and paste error causing
+	script's error diagnostic to misreport its own name.
+
+2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor, continuing naming reform of
 	functions that are troff request handlers and which lists of
 	objects or properties thereof.  Revert to using `print` for
