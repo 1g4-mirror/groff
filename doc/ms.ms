@@ -490,15 +490,13 @@ Macros enable the collection of entries for a table of contents
 (or index)
 as the material they discuss appears in the document.
 .
-You then call a macro to emit the table of contents at the end of
-your document.
+A macro call at the end of the document emits the collected entries.
 .
-The table of contents must necessarily follow the rest of the text since
-GNU
-.I troff
+This material necessarily follows the rest of the text since GNU
+.I troff \" GNU
 is a single-pass formatter;
-it thus cannot determine the page number of a division of the text until
-it has been set and output.
+it cannot determine the page number of a division of the text
+until it has been set and output.
 .
 Since
 .I ms
@@ -527,8 +525,8 @@ Document control settings
 .
 .
 .LP
-The document parameters below are presented in the syntax
-used to interpolate their values.
+We present the document parameters below
+in the syntax used to interpolate their contents.
 .
 For any unsatisfactory default,
 define its register,
@@ -745,10 +743,12 @@ argument suppresses this alteration.
 .
 Optional arguments can occur in any order.
 .
+.I ms
+recognizes
 .CW no
-is recognized as a synonym of
+as a synonym of
 .CW no\-\:\%repeat\-\:\%info
-for AT&T compatibility.
+to maintain AT&T compatibility.
 T}
 _
 \&.TL	T{
@@ -1074,7 +1074,7 @@ If a new paragraph starts close to the bottom of a page,
 and there is insufficient space to accommodate
 .CW \[rs]n[PORPHANS]
 lines before an automatic page break,
-.I ms
+.I "groff ms"
 forces a page break before formatting the paragraph.
 .
 This is a GNU extension.
@@ -1524,20 +1524,22 @@ since it corresponds to heading depth\~2.
 .
 .
 .PP
-The
-.CW \[rs]n[HORPHANS]
-register operates in conjunction with the
+In
+.I "groff ms,"
+the
 .CW NH
 and
 .CW SH
-macros to inhibit the printing of isolated headings at the bottom of a
+macros consult the
+.CW HORPHANS
+register to prevent the output of isolated headings at the bottom of a
 page;
 it specifies the minimum number of lines of the subsequent paragraph
 that must be kept on the same page as the heading.
 .
 If insufficient space remains on the current page to accommodate the
 heading and this number of lines of paragraph text,
-.I ms
+.I "groff ms"
 forces a page break before setting the heading.
 .
 Any display macro call or
@@ -2293,8 +2295,9 @@ recall
 .CW BX
 in section \[lq]Typeface and decoration\[rq] above.
 .
-Box lines are drawn as close as possible to the text they enclose so
-that they are usable within paragraphs.
+.I ms
+draws box lines close to the text they enclose
+so that they are usable within paragraphs.
 .
 When boxing entire paragraphs thus,
 you may improve their appearance by calling
