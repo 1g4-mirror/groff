@@ -13196,11 +13196,17 @@ and the second and fourth arguments to the
 @code{tkf}
 request.
 
-For example, if @var{sizescale} is@tie{}1000, then a scaled point is one
-thousandth of a point.  The request @samp{.ps 10.5} is synonymous with
-@samp{.ps 10.5z} and sets the type size to 10,500@tie{}scaled points, or
-10.5@tie{}points.  Consequently, in GNU @code{troff}, the register
-@code{.s} can interpolate a non-integral type size.
+For example,
+if
+@var{sizescale}
+is@tie{}1000,
+then a scaled point is one thousandth of a point.
+The request
+@samp{.ps 10.5}
+is synonymous with
+@samp{.ps 10.5z};
+both set the type size to 10,500@tie{}scaled points,
+or 10.5@tie{}typographical points.
 
 @Defreg {.ps}
 This read-only register interpolates the type size in scaled points.

@@ -448,8 +448,8 @@ Consequently,
 .RB \[lq] ".ps 10.5" \[rq]
 is synonymous with
 .RB \[lq] ".ps 10.5z" \[rq];
-both set the type size to 10,500\~scaled points,
-or 10.5\~points.
+both set the type size to 10,500\~scaled points
+or 10.5\~typographical points.
 .
 .
 .P
@@ -497,7 +497,8 @@ and in points as a decimal fraction by the read-only string-valued
 register
 .BR .sr .
 .
-Both are associated with the environment.
+Like the actual current and previous type size,
+the requested ones are properties of an environment.
 .
 .
 .P
