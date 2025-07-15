@@ -92,8 +92,6 @@ const int DEFAULT_HPGL_UNITS = 1016;
 int line_width_factor = DEFAULT_LINE_WIDTH_FACTOR;
 unsigned ncopies = 0;		// 0 means don't send ncopies command
 
-static ssize_t lookup_paper_size(const char *);
-
 class lj4_font : public font {
 public:
   ~lj4_font();
@@ -176,6 +174,16 @@ void lj4_font::handle_unknown_font_command(const char *command,
       break;
     }
   }
+}
+
+static ssize_t lookup_paper_size(const char *s)
+{
+  for (size_t i = 0; i < array_length(paper_table); i++) {
+    // FIXME Perhaps allow unique prefix.
+    if (strcasecmp(s, paper_table[i].name) == 0)
+      return int(i);
+  }
+  return -1;
 }
 
 class lj4_printer : public printer {
@@ -607,17 +615,6 @@ font *lj4_printer::make_font(const char *nm)
 printer *make_printer()
 {
   return new lj4_printer(user_paper_size);
-}
-
-static
-ssize_t lookup_paper_size(const char *s)
-{
-  for (size_t i = 0; i < array_length(paper_table); i++) {
-    // FIXME Perhaps allow unique prefix.
-    if (strcasecmp(s, paper_table[i].name) == 0)
-      return int(i);
-  }
-  return -1;
 }
 
 static void usage(FILE *stream);
