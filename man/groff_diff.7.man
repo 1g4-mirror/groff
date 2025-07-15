@@ -6109,13 +6109,13 @@ GNU
 more capacious one,
 as with
 .RB \[lq] ".nr _my_saved_C \[rs]n(.C" \[rq]
-will not work in compatibility mode;
+does not work in compatibility mode;
 the register name is too long.
 .
 Employing the
 .RB \[lq] do \[rq]
 request is no help:
-.RB \[lq] ".do nr _my_saved_C \[rs]n(.C" \[rq].
+.RB \[lq] ".do nr _my_saved_C \[rs]n(.C" \[rq]
 always saves zero to the register,
 because
 .RB \[lq] do \[rq]

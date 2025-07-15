@@ -19420,7 +19420,7 @@ GNU
 more capacious one,
 as with
 @samp{.nr _my_saved_C \n(.C},
-will not work in compatibility mode;
+does not work in compatibility mode;
 the register name is too long.
 Employing the
 @code{do}
