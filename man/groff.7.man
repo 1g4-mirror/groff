@@ -1095,7 +1095,7 @@ GNU
 emits a warning in category
 .RB \%\[lq] range \[rq].
 See section \[lq]Warnings\[rq] of
-.MR @g@troff 1 ).
+.MR @g@troff 1 .)
 .
 .
 .P
@@ -2098,7 +2098,7 @@ Furthermore,
 a
 .esc }
 closing the body of a
-.request .while
+.RB \[lq] while \[rq]
 request must be the last such escape sequence on an input line.
 .
 .
@@ -2109,10 +2109,10 @@ request must be the last such escape sequence on an input line.
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Operators in
 .\" Conditionals".
 The
-.request .if ,
-.request .ie ,
+.RB \[lq] if \^\[rq],
+.BR ie ,
 and
-.request .while
+.RB \[lq] while \[rq]
 requests test the truth values of numeric expressions.
 .
 They also support several additional Boolean operators;
@@ -2209,13 +2209,14 @@ T}
 .ne 2v
 .P
 If the first argument to an
-.BR .if ,
-.BR .ie ,
+.RB \[lq] if \^\[rq],
+.BR ie ,
 or
-.B .while
+.RB \[lq] while \[rq]
 request begins with a non-alphanumeric character apart from
-.B !\&
-(see below);
+.RB \[lq] !\& \[rq]
+(see below)
+and is not a numeric expression,
 it performs an
 .I output comparison test.
 .
@@ -2231,14 +2232,14 @@ produces the same output commands.
 Other delimiters can be used in place of the neutral apostrophes;
 see section \[lq]Delimiters\[rq] above.
 .
-.I @g@troff
+.I troff \" generic
 formats
 .I s1
 and
 .I s2
 in separate scratch buffers;
-after the comparison,
-the resulting data are discarded.
+after comparison,
+it discards the resulting data.
 .
 The resulting glyph properties,
 including font family,
@@ -2247,8 +2248,8 @@ size,
 and
 slant,
 must match,
-but not necessarily the requests and/or escape sequences used to obtain
-them.
+but not necessarily the requests and/or escape sequences
+used to obtain them.
 .
 Motions must match in orientation and magnitude to within the applicable
 horizontal or vertical motion quantum of the device,
@@ -2412,7 +2413,7 @@ in file names supplied as arguments to requests.
 .
 .TPx
 .I font
-is a typeface specified as a font name,
+is a typeface specified as a font identifier,
 an abstract style,
 or a mounting position.
 .
@@ -2469,9 +2470,9 @@ those that directly produce formatted output.
 .
 Text lines produce output,
 as do control lines containing requests like
-.request .tl
+.RB \[lq] ".tl //\^Page %//\^" \[rq]
 or escape sequences like
-.esc D .
+.RB \[lq] \[rs]\^l\[aq]1i\[aq] \[rq].
 .
 Macro calls are not themselves productive,
 but their interpolations can be.

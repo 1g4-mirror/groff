@@ -8890,12 +8890,18 @@ This is an uninteresting sentence.
 @cindex line, productive input
 To clearly present the next couple of requests, we must introduce the
 concept of ``productive'' input lines.  A @dfn{productive input line} is
-one that directly produces formatted output.  Text lines produce
-output,@footnote{though not necessarily to the output device; see
-@ref{Diversions}} as do control lines containing requests like @code{tl}
-or escape sequences like @code{\D}.  Macro calls are not @emph{directly}
-productive, and thus not counted, but their interpolated contents can
-be.  Empty requests, and requests and escape sequences that define
+one that directly produces formatted output.
+Text lines produce output,@footnote{though not necessarily to the output
+device;
+see
+@ref{Diversions}}
+as do control lines containing requests like
+@samp{.tl //Page %//}
+or escape sequences like
+@samp{\l'1i'}.
+Macro calls are not themselves productive,
+but their interpolations can be.
+Empty requests, and requests and escape sequences that define
 registers or strings or alter the formatting environment (as with
 changes to the size, face, height, slant, or color of the type) are not
 productive.@footnote{If you're not sure whether an input line has been
@@ -14036,10 +14042,17 @@ in the branches or bodies of these structures is unusual.
 @cindex @code{while} request, operators to use with
 @cindex conditional expressions
 @cindex expressions, conditional
-In @code{if}, @code{ie}, and @code{while} requests, in addition to the
-numeric expressions described in @ref{Numeric Expressions}, several
-Boolean operators are available; the members of this expanded class are
-termed @dfn{conditional expressions}.
+The
+@code{if},
+@code{ie},
+and
+@code{while}
+requests test the truth values of numeric expressions.
+They also support several additional Boolean operators;
+the members of this expanded class are termed
+@dfn{conditional expressions};
+.IR "conditional expressions" ;
+their truth values are as shown below.
 
 @table @code
 @item c @var{chr}
@@ -14104,9 +14117,17 @@ early-vintage @acronym{AT&T} @code{troff} to a form suitable for
 Versatec and Benson-Varian plotters.}
 @end table
 
-If the first argument to an @code{if}, @code{ie}, or @code{while}
-request begins with a non-alphanumeric character apart from @code{!}
-(see below), it performs an @slanted{output comparison test}.
+If the first argument to an
+@code{if},
+@code{ie},
+or
+@code{while}
+request begins with a non-alphanumeric character apart from
+@code{!}
+(see below)
+and is not a numeric expression,
+it performs an
+@slanted{output comparison test}.
 @footnote{Strictly,
 letters not otherwise recognized
 @emph{are}
@@ -14126,12 +14147,26 @@ may provide additional operators in the future.}
 @cindex output comparison operator
 @table @code
 @item @code{'}@var{xxx}@code{'}@var{yyy}@code{'}
-True if formatting the comparands @var{xxx} and @var{yyy} produces the
-same output commands.  The delimiter need not be a neutral apostrophe:
+This
+@dfn{output comparison operator}
+interpolates a true value
+if formatting the comparands
+@var{xxx}
+and
+@var{yyy}
+produces the same output commands.
+The delimiter need not be a neutral apostrophe:
 the output comparison operator accepts the same delimiters as most
-escape sequences; see @ref{Delimiters}.  This @dfn{output comparison
-operator} formats @var{xxx} and @var{yyy} in separate scratch buffers;
-after the comparison, the resulting data are discarded.
+escape sequences;
+see @ref{Delimiters}.
+@command{troff} @c generic
+formats
+@var{xxx}
+and
+@var{yyy}
+in separate scratch buffers;
+after comparison,
+it discards the resulting data.
 
 @Example
 .ie "|"\fR|\fP" true
@@ -14140,9 +14175,16 @@ after the comparison, the resulting data are discarded.
 @endExample
 
 @noindent
-The resulting glyph properties, including font family, style, size, and
-slant, must match, but not necessarily the requests and/or escape
-sequences used to obtain them.  In the previous example, @samp{|} and
+The resulting glyph properties,
+including font family,
+style,
+size,
+and
+slant,
+must match,
+but not necessarily the requests and/or escape sequences
+used to obtain them.
+In the previous example, @samp{|} and
 @samp{\fR|\fP} result in @samp{|} glyphs in the same typefaces at the
 same positions, so the comparands are equal.  If @samp{.ft@tie{}I} had
 been added before the @samp{.ie}, they would differ: the first @samp{|}
