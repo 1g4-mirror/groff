@@ -6636,6 +6636,28 @@ SMALLCAPS takes precedence.
 .       nr #AUTOLEAD_VALUE  \\n[#SAVED_AUTOLEAD_VALUE]
 .    \}
 .    if !\\n[#SKIP_TRAPS] .TRAPS
+.\" Adjust these here if HEADING_STYLEs have been set already.
+.\" They need #DOC_LEAD from TRAPS to calculate the default baseline-adj
+.\" in the event that none was given
+.    nr #LEVEL 0 1 \" loop step
+.    nr #LOOP 9       \" loop count
+.    while \\n+[#LEVEL]<=\\n[#LOOP] \{\
+.       if '\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ]'' \
+.          ds $HEAD_\\n[#LEVEL]_BASELINE_ADJ \\n[#DOC_LEAD]/10
+.       if !'\\*[$HEAD_\\n[#LEVEL]_UL_GAP]'' \{\
+.          nr #UL_RAISE \
+\\*[$STORED_HEAD_\\n[#LEVEL]_UL_GAP]-(\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ])
+.          ds $HEAD_\\n[#LEVEL]_UL_GAP \\n[#UL_RAISE]u
+.          rr #UL_RAISE
+.       \}
+.       if !'\\*[$HEAD_\\n[#LEVEL]_UL2_GAP_1]'' \{\
+.          nr #UL_RAISE \
+\\*[$STORED_HEAD_\\n[#LEVEL]_UL2_GAP_1]-(\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ])
+.          ds $HEAD_\\n[#LEVEL]_UL2_GAP_1 \\n[#UL_RAISE]u
+.          rr #UL_RAISE
+.      \}
+.    \}
+.    rr #LEVEL
 .    rr #SKIP_TRAPS
 .    if \\n[#REMOVE_ADJ] .DOC_LEAD \\n[#DOC_LEAD]u-\\n[#DOC_LEAD_ADJ]u
 .    if (\\n[#FOOTER_MARGIN]+\\n[.v]>=\\n[#B_MARGIN]) \{\
@@ -7080,8 +7102,8 @@ SMALLCAPS takes precedence.
 .       sp -1
 .    \}
 .    vs \\n[#DOC_LEAD]u
-.    if \\n[#SINGLE_SPACE] .sp 2
-.sp
+.    ie \\n[#SINGLE_SPACE] .sp 2
+.    el .sp
 .END
 \#
 .MAC NAMED_DOCHEADER END
@@ -8239,8 +8261,6 @@ $\\*[DOC_]COVERTITLE_\\n+[#\\*[DOC_]COVERTITLE_NUM] \\$\\n[#\\*[DOC_]COVERTITLE_
 .          if \\n[.ns] .rs
 .          ev DOCHEADER
 .          evc 0
-.          if \\n[#DOCHEADER_COLOR]=1 \
-.             COLOR \\*[$DOCHEADER_COLOR]
 .          L_MARGIN \\n[#DOC_L_MARGIN]u
 .          LL       \\n[#DOC_L_LENGTH]u
 .          ta \\n[.l]u
@@ -8257,8 +8277,6 @@ $\\*[DOC_]COVERTITLE_\\n+[#\\*[DOC_]COVERTITLE_NUM] \\$\\n[#\\*[DOC_]COVERTITLE_
 .          \}
 .          ev DOCHEADER
 .          evc 0
-.          if \\n[#DOCHEADER_COLOR]=1 \
-.             COLOR \\*[$DOCHEADER_COLOR]
 .          L_MARGIN \\n[#DOC_L_MARGIN]u
 .          LL       \\n[#DOC_L_LENGTH]u
 .          ta \\n[.l]u
@@ -8351,9 +8369,9 @@ $\\*[DOC_]COVERTITLE_\\n+[#\\*[DOC_]COVERTITLE_NUM] \\$\\n[#\\*[DOC_]COVERTITLE_
 .       nr #PDF_PN \\n%+\\n[#PAGE_NUM_ADJ]
 .       ds $PDF_PN_FORMAT \\*[$PAGENUM_STYLE]
 .       substring $PDF_PN_FORMAT  0 0
-.       if !\\n[#ADVANCE_FROM_TOP] .sp -1
 .       pdfpagenumbering \\*[$PDF_PN_FORMAT] . \\n[#PDF_PN]
 .    \}
+.    RESTORE_SPACE
 .    if \\n[#COLUMNS] .mk dc
 .END
 \#
@@ -8595,7 +8613,7 @@ $\\*[DOC_]COVERTITLE_\\n+[#\\*[DOC_]COVERTITLE_NUM] \\$\\n[#\\*[DOC_]COVERTITLE_
 \# First, a little convenience macro
 \#
 .MAC PROCESS_SHIM END
-.    if !\\n[nl]=\\n[#VALID_BASELINE] \{\
+.    if !\\n[#CURRENT_V_POS]=\\n[#VALID_BASELINE] \{\
 .       while \\n+[#VALID_BASELINE]<\\n[#CURRENT_V_POS] .
 .       nr #SHIM \\n[#VALID_BASELINE]-\\n[#CURRENT_V_POS]
 .    \}
@@ -8630,7 +8648,10 @@ Flex-spacing must be disabled with NO_FLEX before using SHIM.
 .       \}
 .    \}
 .    nr #VALID_BASELINE \\n[#T_MARGIN]-\\n[#DOC_LEAD] \\n[#DOC_LEAD]
-.    if !r#CURRENT_V_POS .nr #CURRENT_V_POS \\n[.d]
+.    if !r#CURRENT_V_POS \{\
+.       ie !'\\n[.z]'' .nr #CURRENT_V_POS \\n[.d]
+.       el .nr #CURRENT_V_POS \\n[nl]
+.    \}
 .    ie \\n[#ADVANCE_FROM_TOP] \{\
 .       ie \\n[#CURRENT_V_POS]<(\\n[#T_MARGIN]-1v) \{\
 .          while \\n-[#VALID_BASELINE]>\\n[#CURRENT_V_POS] .
@@ -8643,7 +8664,8 @@ Flex-spacing must be disabled with NO_FLEX before using SHIM.
 .    nr #SHIM_MAX \\n[#DOC_LEAD]*10/15
 .    if !\\n[#CALCULATE_ONLY] \{\
 .       if !\\n[defer-count] \
-.          if \\n[#SHIM]>\\n[#SHIM_MAX] .sp -1
+.          if !\\n[#TOC] \
+.             if \\n[#SHIM]>\\n[#SHIM_MAX] .sp -1
 '          sp \\n[#SHIM]u
 .       \}
 .    rr #CURRENT_V_POS
@@ -9360,6 +9382,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .   rs
 .   nop \&
 .   sp -1
+.   if \\n[#START] .sp -1
 .   if \\n[#FILLED] \{\
 .      fi
 .      rr #FILLED
@@ -11071,12 +11094,33 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .       if !\\n[@TOP] \{\
 .          nr #HEAD 1
 .          ie !\\n[#START] \{\
-.             nr #HEADING_NEEDS \\n[#NUM_ARGS]v+\\*[$HEAD_\\n[#LEVEL]_NEEDS]v+1v
-.             if \\n[#HEAD_\\n[#LEVEL]_SPACE_AFTER] .nr #HEADING_NEEDS +1v
+.             ie \\n[#NUM_ARGS]=1 \
+.                nr #HEADING_NEEDS \
+\\n[#NUM_ARGS]v+\\*[$HEAD_\\n[#LEVEL]_NEEDS]v
+.             el \{\
+.                vs \\n[.v]u\\*[$HEAD_\\n[#LEVEL]_LEAD]
+.                nr #HEADING_NEEDS \\n[.v]*(\\n[#NUM_ARGS]-1)
+.                nr #HEADING_NEEDS +(\\n[#DOC_LEAD]*\\*[$HEAD_\\n[#LEVEL]_NEEDS])
+.                nr nl +\\n[#HEADING_NEEDS]
+.                nr #CURRENT_V_POS \\n[nl]
+.                nr #CALCULATE_ONLY 1
+.                SHIM
+.                nr #HEADING_NEEDS +\\n[#SHIM]
+.                nr nl -(\\n[#HEADING_NEEDS]+\\n[#SHIM])
+.                rr #CURRENT_V_POS
+.                rr #CALCULATE_ONLY
+.                vs
+.             \}
+.             if \\n[#HEAD_\\n[#LEVEL]_SPACE_AFTER] \
+.                nr #HEADING_NEEDS +1v
 .             ch RR_ADVANCE_FROM_TOP
-.             if \\n[.t]<\\n[#HEADING_NEEDS] .sp \\n[.t]u
-.             vpt 0
-.             if !\\n[pdfbx-top] \
+.             if (\\n[.t]-\\n[#HEADING_NEEDS])=1 \
+.                nr #HEADING_NEEDS +1
+.             if \\n[.t]<=\\n[#HEADING_NEEDS] \{\
+.                nr #HEADING_DEFERRED 1
+.                sp \\n[.t]u
+.             \}
+.             if !r pdfbx-top \
 .               if !\\n[#SPACE_ADDED] .if !\\n[#LINEBREAK] .sp
 .          \}
 .          el \{\
@@ -11101,12 +11145,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .             el \{\
 .                if !\\n[#NO_FLEX] \
 .                   if !\\n[#HEAD_\\n[#LEVEL]_NO_FLEX] \
-.                   if !r pdfbx-top .FLEX
+.                     if !r pdfbx-top .FLEX
 .             \}
 .          \}
 .       \}
 .       el .rr #SPACE_ADDED
-.       vpt
 .    \}
 .    el \{\
 .       if \\n[#NUM_ARGS]>1 \{\
@@ -11128,6 +11171,17 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .    \}
 .    ev HEADING
 .    evc 0
+.    if !'\\*[$HEAD_\\n[#LEVEL]_LEAD]'' \{\
+.       ds $HEAD_LEAD_OP \\*[$HEAD_\\n[#LEVEL]_LEAD]
+.       substring $HEAD_LEAD_OP 0 0
+.       ds $HEAD_LEAD \\*[$HEAD_\\n[#LEVEL]_LEAD]
+.       substring $HEAD_LEAD 1 -1
+.       ie '\\*[$HEAD_LEAD_OP]'+' .ds $HEAD_LEAD_OP -
+.       el  .ds $HEAD_LEAD_OP 
+.       sp \\*[$HEAD_LEAD_OP]\\*[$HEAD_LEAD]*(\\n[#NUM_ARGS]u)
+.       rm $HEAD_LEAD_OP
+.       rm $HEAD_LEAD
+.    \}
 .\" Style
 .    if \\n[#PRINT_STYLE]=2 \{\
 .       fam \\*[$HEAD_\\n[#LEVEL]_FAM]
@@ -11135,7 +11189,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .       ps  \\n[#DOC_PT_SIZE]u\\*[$HEAD_\\n[#LEVEL]_SIZE]
 .       if !\\n[#PARAHEAD] \
 .          vs \\n[#DOC_LEAD]u\\*[$HEAD_\\n[#LEVEL]_LEAD]
-.       if \\n[pdfbx-top] \{\
+.       if r pdfbx-top \{\
 .          SIZESPECS
 .          ie \\n[#PP]=0 \{\
 .             rt
@@ -11366,6 +11420,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
               \w'\\*[$HD_NUM]\\$[\\n[#ARG_NUM]]'+\w'\[parahead-spacer]'
 .       if (\\n[#HEAD_\\n[#LEVEL]_UNDERSCORE]=0)&(\\n[#HEAD_\\n[#LEVEL]_UNDERSCORE2]=0) \{\
 .          ie \\n[#HD_NUM_INDENT] \{\
+.             if \\n[@TOP] \{\
+.                sp |\\n[#T_MARGIN]u-1
+.                rr @TOP
+.                ch RR_@TOP
+.             \}
 .             if !'\\*[$HEAD_\\n[#LEVEL]_QUAD]'CENTER' \
 .                ti \\n[#HD_NUM_INDENT]u
 .             PRINT \
@@ -11374,6 +11433,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .          \}
 .          el \{\
 .             ie !\\n[#PARAHEAD] \{\
+.                if \\n[@TOP] \{\
+.                   sp |\\n[#T_MARGIN]u-1
+.                   rr @TOP
+.                   ch RR_@TOP
+.                \}
 .                PRINT \
 "\v'-\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ]'\\*[$HD_NUM]\\$[\\n[#ARG_NUM]]
 .                br
@@ -11405,6 +11469,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .          nr #SAVED_UL_WEIGHT \\n[#UNDERSCORE_WEIGHT]
 .          UNDERSCORE_WEIGHT \\*[$HEAD_\\n[#LEVEL]_UL_WEIGHT]
 .          ie \\n[#HD_NUM_INDENT] \{\
+.                if \\n[@TOP] \{\
+.                   sp |\\n[#T_MARGIN]u-1
+.                   rr @TOP
+.                   ch RR_@TOP
+.                \}
 .             if !'\\*[$HEAD_\\n[#LEVEL]_QUAD]'CENTER' \
 .                ti \\n[#HD_NUM_INDENT]u
 .             UNDERSCORE \\*[$HEAD_\\n[#LEVEL]_UL_GAP] \
@@ -11413,6 +11482,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .          \}
 .          el \{\
 .             ie !\\n[#PARAHEAD] \{\
+.                if \\n[@TOP] \{\
+.                   sp |\\n[#T_MARGIN]u-1
+.                   rr @TOP
+.                   ch RR_@TOP
+.                \}
 .                UNDERSCORE \\*[$HEAD_\\n[#LEVEL]_UL_GAP] \
 "\v'-\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ]'\\*[$HD_NUM]\\$[\\n[#ARG_NUM]]
 .                br
@@ -11440,6 +11514,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .          nr #SAVED_UL2_WEIGHT \\n[#UNDERSCORE_WEIGHT]
 .          UNDERSCORE_WEIGHT \\*[$HEAD_\\n[#LEVEL]_UL2_WEIGHT]
 .          ie \\n[#HD_NUM_INDENT] \{\
+.             if \\n[@TOP] \{\
+.                sp |\\n[#T_MARGIN]u-1
+.                rr @TOP
+.                ch RR_@TOP
+.             \}
 .             if !'\\*[$HEAD_\\n[#LEVEL]_QUAD]'CENTER' \
 .                ti \\n[#HD_NUM_INDENT]u
 .             UNDERSCORE2 \\*[$HEAD_\\n[#LEVEL]_UL2_GAP_1] \
@@ -11449,6 +11528,11 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .          \}
 .          el \{\
 .             ie !\\n[#PARAHEAD] \{\
+.                if \\n[@TOP] \{\
+.                   sp |\\n[#T_MARGIN]u-1
+.                   rr @TOP
+.                   ch RR_@TOP
+.                \}
 .                UNDERSCORE2 \\*[$HEAD_\\n[#LEVEL]_UL2_GAP_1] \
                    \\*[$HEAD_\\n[#LEVEL]_UL2_GAP_2] \
 "\v'-\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ]'\\*[$HD_NUM]\\$[\\n[#ARG_NUM]]
@@ -11480,8 +11564,6 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .       ds $HEAD_\\n[#LEVEL]_BASELINE_ADJ \\*[$RESTORE_ADJ]
 .       if !\\n[#PARAHEAD] .sp \\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ]
 .    \}
-.    if !\\n[#PARAHEAD] \
-.       if \\n[#HEAD_\\n[#LEVEL]_SPACE_AFTER] .sp
 .    if \\n[#CAPS_OFF] \{\
 .       CAPS OFF
 .       rr #CAPS_OFF
@@ -11512,7 +11594,26 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .       ie !\\n[pdfbx-running] .ti \\n[#PP_TEXT_OFFSET]u
 .       el .ti \\n[#PP_TEXT_OFFSET]u+\\*[wt\\n[stack]]+\\*[gap\\n[stack]]u
 .    \}
-.    if !\\n[#PARAHEAD]  .nr #PP 0
+.    if !\\n[#PARAHEAD]  \{\
+.       if !\\n[#NUM_ARGS]=1 \{\
+.          if !'\\*[$HEAD_\\n[#LEVEL]_LEAD]'' \{\
+.             SHIM_1
+.          \}
+.          if \\n[#HEADING_DEFERRED] \{\
+.             nr nl-1 \\n[nl]
+.             sp 1
+.             nr nl-2 \\n[nl]
+.             sp -1
+.             if (\\n[nl-2]-\\n[nl-1])<(\\*[$HEADING_\\n[#LEVEL]_BASELINE_ADJ]) .sp
+.             rr nl-1
+.             rr nl-2
+.             rr #HEADING_DEFERRED
+.          \}
+.       \}
+.       nr #PP 0
+.    \}
+.    if !\\n[#PARAHEAD] \
+.       if \\n[#HEAD_\\n[#LEVEL]_SPACE_AFTER] .sp
 .    rr #PARAHEAD
 .    if \\n[#LB_4_HD]    .rr #LB_4_HD
 .    if \\n[#QUOTE_4_HD] .rr #QUOTE_4_HD
@@ -11542,6 +11643,8 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 \#   BASELINE_ADJUST
 \#---when called as TOC_ENTRY_STYLE this is also available---
 \#   INDENT
+\#   SPACE_BEFORE
+\#   SPACE_BENEATH
 \# *Function:
 \#   Sets up complete style parameters for HEADING <level>.  If
 \#   invoked as TOC_ENTRY_STYLE, sets up parameters for the
@@ -11592,6 +11695,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .             ab   [mom]: Aborting '\\n[.F]' at \\$0, line \\n[.c].
 .          \}
 .          ds $HEAD_\\n[#LEVEL]_UL_GAP \\$1
+.          ds $STORED_HEAD_\\n[#LEVEL]_UL_GAP \\$1
 .          shift
 .       \}
 .       if '\\$1'NO_UNDERSCORE' \{\
@@ -11614,6 +11718,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .             ab   [mom]: Aborting '\\n[.F]' at \\$0, line \\n[.c].
 .          \}
 .          ds $HEAD_\\n[#LEVEL]_UL2_GAP_1 \\$1
+.          ds $STORED_HEAD_\\n[#LEVEL]_UL2_GAP_1 \\$1
 .          shift
 .          if '\\$1'' \{\
 .             tm1 "[mom]: The UNDERSCORE2 argument to \\$0 requires an inter-rule gap.
@@ -11692,7 +11797,9 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .       \}
 .       if '\\$1'BASELINE_ADJUST' \{\
 .          shift
-.          ds $HEAD_\\n[#LEVEL]_BASELINE_ADJ \\$1
+.          ie '\\$1'DEFAULT' \
+.             ds $HEAD_\\n[#LEVEL]_BASELINE_ADJ \\n[#DOC_LEAD]/10
+.          el .ds $HEAD_\\n[#LEVEL]_BASELINE_ADJ \\$1
 .          shift
 .       \}
 .       if '\\$1'CAPS' \{\
@@ -11724,6 +11831,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .          shift
 .          ie \B'\\$1' \{\
 .             PREFIX_CHAPTER_NUMBER \\$1
+.             shift
 .          \}
 .          el .PREFIX_CHAPTER_NUMBER
 .       \}
@@ -11755,6 +11863,16 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .          shift
 .       \}
 .    \}
+.    if \\n[#HEAD_\\n[#LEVEL]_UNDERSCORE] \{\
+.       nr #UL_RAISE \\*[$STORED_HEAD_\\n[#LEVEL]_UL_GAP]-(\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ])
+.       ds $HEAD_\\n[#LEVEL]_UL_GAP \\n[#UL_RAISE]u
+.       rr #UL_RAISE
+.    \}
+.    if \\n[#HEAD_\\n[#LEVEL]_UNDERSCORE2] \{\
+.       nr #UL_RAISE \\*[$STORED_HEAD_\\n[#LEVEL]_UL2_GAP_1]-(\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ])
+.       ds $HEAD_\\n[#LEVEL]_UL2_GAP_1 \\n[#UL_RAISE]u
+.       rr #UL_RAISE
+.   \}
 .    rr #LEVEL
 .    if d$TOC .rm $TOC
 .END
@@ -16353,9 +16471,7 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .    CAPS OFF
 .    if \\n[#TOC_HEADER_COLOR]=1 .gcolor default
 .    br
-.    RESTORE_SPACE
 .    sp
-.    SHIM_1
 .    nf
 .    TOC_ENTRIES
 .    if \\n[#LINENUMBERS]=3 \{\
@@ -21074,9 +21190,9 @@ EN-\\n[#CH_NUM]\\n[#EN_NUMBER]-body \s-2\v'-\\n[#DOC_LEAD]u/7u'\\n[#EN_NUMBER]\|
 .                 \}
 .                 el \{\
 .                    if \\n[.ns] .if !(\\n[nl]=\\n[#PAGE_TOP]) .rs
-.                    if !\\n[pdfbx-top] .sp \\n[#DOC_LEAD]u/2u
+.                    if !r pdfbx-top .sp \\n[#DOC_LEAD]u/2u
 .                 \}
-.                 if \\n[pdfbx-top] \{\
+.                 if r pdfbx-top \{\
 .                    ps \\*[tbl*caption-size-change]
 .                    SIZESPECS
 .                    ps
@@ -22140,7 +22256,7 @@ does not fit on page \\n[pgnum]\\*[col-num].
 .    if (\\n[grap]=1)&(\\n[pic*caption-after-label]=1) \
 \!.     sp -2
 .    if \\n[pdfbx-running] \{\
-.       if \\n[pdfbx-top] \{\
+.       if r pdfbx-top \{\
 .          ie !\\n[pic*left] \!.in -\\*[gap\\n[stack]]u*2u
 .          el .in -\\*[wt\\n[stack]]
 .       \}
@@ -23946,7 +24062,7 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .       \}
 .    \}
 .    if r IMG \{\
-.       if \\n[pdfbx-top] \
+.       if r pdfbx-top \
 .          rt
 .       sp (\\*[wt\\n[stack]]/2u)+\\*[gap\\n[stack]]u
 .       nr img*pdfbx 1
@@ -24358,38 +24474,52 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 \#
 .de rr-pdfbx-top
 . rr pdfbx-top
+. it
 ..
 \#
 .de rr-pdfbx-end
 . rr pdfbx-end
+. it
 ..
 \#
 .de rr-pdfbxstop
 . rr pdfbxstop
+. it
 ..
 \#
 .de rr-pic*pdfbx
 . rr pic*pdfbx
+. it
 ..
 \#
 .de rr-tbl*pdfbx
 . rr tbl*pdfbx
+. it
 ..
 \#
 .de rr-img*pdfbx
 . rr img*pdfbx
+. it
 ..
 \#
 .de rr-pdfbx-post-q
 . rr pdfbx-post-q
+. it
 ..
 \#
 .de rr-pdfbx-div-start
 . rr pdfbx-div-start
+. it
 ..
 \#
 .de rr-boxed-heading
 . rr boxed-heading
+. it
+..
+\#
+.de rr-post-box
+. rr post-box
+. ch rr-post-box
 ..
 \#
 \# Heavy lifting macros called from BOX.
@@ -24677,7 +24807,7 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 . if \\n[img*pdfbx]=2 \
 .   sp -.5
 . if \\n[boxed-heading] \{\
-.   if !\\n[pdfbx-newpage] .sp -1
+.   if !\\n[pdfbx-newpage] .sp -1-\\n[#SHIM]u
 .   rr pdfbx-newpage
 .   sp -(\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ])u
 .   rr boxed-heading
@@ -24799,6 +24929,7 @@ No room to start \\*[MN-pos] margin note #\\n[MN-curr] on page \\n[#P].
 .   \}
 . \}
 . nr post-box 1
+. wh \\n[.d]u+1v rr-post-box
 ..
 \#
 \# PDF outline page numbering
