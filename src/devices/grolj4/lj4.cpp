@@ -92,7 +92,7 @@ const int DEFAULT_HPGL_UNITS = 1016;
 int line_width_factor = DEFAULT_LINE_WIDTH_FACTOR;
 unsigned ncopies = 0;		// 0 means don't send ncopies command
 
-static int lookup_paper_size(const char *);
+static ssize_t lookup_paper_size(const char *);
 
 class lj4_font : public font {
 public:
@@ -610,9 +610,9 @@ printer *make_printer()
 }
 
 static
-int lookup_paper_size(const char *s)
+ssize_t lookup_paper_size(const char *s)
 {
-  for (int i = 0; i < array_length(paper_table); i++) {
+  for (size_t i = 0; i < array_length(paper_table); i++) {
     // FIXME Perhaps allow unique prefix.
     if (strcasecmp(s, paper_table[i].name) == 0)
       return int(i);
@@ -657,7 +657,7 @@ int main(int argc, char **argv)
       break;
     case 'p':
       {
-	int n = lookup_paper_size(optarg);
+	ssize_t n = lookup_paper_size(optarg);
 	if (n < 0)
 	  error("ignoring invalid paper format '%1'", font::papersize);
 	else

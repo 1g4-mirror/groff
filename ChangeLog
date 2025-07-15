@@ -3,10 +3,12 @@
 	* src/devices/grolj4/lj4.cpp: Fix code style nits.  Give the
 	anonymous `struct` type used for `paper_table` a name, so
 	that it can be passed to a template function C++98-conformantly.
-	(lookup_paper_size): Use a (signed) `int` as the loop index,
-	which happens to conform with the signedness of the function's
-	return value as which it can be used.  Use `array_length()` on
-	`paper_table` instead of `sizeof` and division.
+	(lookup_paper_size): Use a `size_t` as the loop index.  Use
+	`array_length()` on `paper_table` instead of `sizeof` and
+	division.  Change return type to `ssize_t` so that we can
+	continue to return `-1` meaning "not found".
+	(main): Change type of local variable `n` to match altered
+	return type of `lookup_paper_size()`.
 
 2025-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
