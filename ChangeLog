@@ -1,5 +1,11 @@
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grolj4/lj4.cpp (lookup_paper_size): Sanity-check
+	the size of the `paper_table` array.  It's statically defined,
+	so only hacking on the source can violate the invariant.
+
+2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grolj4/lj4.cpp: Relocate definition of
 	`lookup_paper_size()`, eliminating need for forward declaration.
 

@@ -178,7 +178,13 @@ void lj4_font::handle_unknown_font_command(const char *command,
 
 static ssize_t lookup_paper_size(const char *s)
 {
-  for (size_t i = 0; i < array_length(paper_table); i++) {
+  // C++11: constexpr
+  const size_t paper_table_length = array_length(paper_table);
+  // ...and once it's a constexpr, we can do this...
+  //static_assert(paper_table_length < INT_MAX);
+  // ...but until then...
+  assert(paper_table_length < INT_MAX);
+  for (size_t i = 0; i < paper_table_length; i++) {
     // FIXME Perhaps allow unique prefix.
     if (strcasecmp(s, paper_table[i].name) == 0)
       return int(i);
