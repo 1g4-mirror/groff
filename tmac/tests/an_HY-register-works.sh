@@ -47,7 +47,7 @@ output=$(printf "%s\n" "$input" | "$groff" -rHY=0 -man -Tascii -P-cbou)
 echo "$output"
 
 echo "checking hyphenation when HY is 0" >&2
-echo "$output" | grep -Eq "to +disestablish$" || wail
+echo "$output" | grep -Eq 'antidisestablishmentarianism\.$' || wail
 
 test -z "$fail"
 
