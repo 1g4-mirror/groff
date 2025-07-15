@@ -1138,6 +1138,13 @@ hierarchically and concatenatively, e.g.
   2.2.1
 </span>
 By default, a blank line precedes headings, regardless of the level.
+In addition, mom
+<a href="docprocessing.html#shim">SHIM</a>s
+the heading, if necessary, to ensure conformity with the
+<a href="definitions.html#baseline-grid">baseline grid</a>.
+</p>
+
+<p>
 Mom initially sets up a very basic style for nine levels of heading,
 of which you can have an infinite number, although as has been said,
 if you need more than four levels of heading, you should consider
@@ -1208,7 +1215,7 @@ PDF_LINK usage is explained in the manual,
 The final argument is the text of the heading, surrounded by double
 quotes.  Long headings that are likely to exceed the current
 line length should be broken into chunks, each surrounded by
-double-quotes, like this:
+double-quotes, like this, producing a multi-line heading:
 <br/>
 <span class="pre-in-pp">
   .HEADING 1 "A needlessly long but instructive" "first level heading"
@@ -1225,7 +1232,9 @@ it, she will set the head at the top of the next page.
 </div>
 
 <div class="box-tip">
-<h3 id="head-spacing-notes" class="docs" style="padding-top: 9px; font-size: 100%; text-transform: none">Spacing of headings</h3>
+<h3 id="head-spacing-notes" class="docs"
+  style="padding-top: 9px; font-size: 100%; text-transform: none">
+Spacing of headings</h3>
 
 <p>
 As described above, mom inserts a blank line before each heading.
@@ -1285,6 +1294,56 @@ it can be re-enabled for the heading level with
 </p>
 </div>
 
+<div class="box-tip" style="margin-top: 2em">
+<h3 id="head-spacing-notes" class="docs"
+  style="padding-top: 9px; font-size: 100%; text-transform: none">
+Multi-line headings</h3>
+
+<p>
+Multi-line headings grow upwards, encroaching on the space above
+them.  The reason is that multi-line headings with
+<kbd>LEAD</kbd> given to <kbd>HEADING_STYLE</kbd> deviate from the
+<a href="definitions.html#baseline-grid">baseline grid</a>.
+If headings were set downwards, the compensation mom would have to
+apply afterwards (shimming; see
+<a href="docprocessing.html#vertical-whitespace-management">vertical whitespace management</a>)
+would introduce a gaping hole after the heading.  Since mom always
+deposits a blank line before a heading, it makes more sense
+typographically to steal from the space above rather than to add
+space below.  If the space stolen is too much, precede the heading
+with <kbd>SP</kbd> (mom) or <kbd>sp</kbd> (groff) to introduce an
+additional linespace beforehand.
+</p>
+
+<p style="margin-top: -.5em">
+Multi-line headings at the top of a page sometimes have too much
+whitespace afterwards, a by-product of shimming, which mom always
+applies after multi-line headings that have a <kbd>LEAD</kbd>
+argument in their heading style.  If there are other shimmed elements
+on the page, (see
+<a href="docprocessing.html#">SHIM</a>),
+you may remove the excess space after the heading with a negative
+spacing command, e.g. <kbd><span class="nobr">.SP -.5</span></kbd>
+or <kbd><span class="nobr">.sp -.5</span></kbd>.  If there are no
+other shimmed elements, use the <kbd>BASELINE_ADJUST</kbd> argument
+to <kbd>HEADING_STYLE</kbd>, passing it a negative value to lower
+the heading.
+</p>
+
+<p style="margin-top: -.5em">
+Boxed headings with <kbd>LEAD</kbd> given to their heading style
+will not be centred vertically within the box.  Raise or lower the
+heading into a blanaced position with <kbd>BASELINE_ADJUST</kbd>.
+</p>
+
+<p class="tip-bottom" style="margin-top: -.5em">
+If flex is enabled and it introduces unwanted space on a page,
+which it certainly will if a heading near the bottom of a page
+gets deferred to the next, pass <kbd>HEADING_STYLE</kbd> the
+<kbd>NO_FLEX</kbd> option, either globally for the heading level, or
+on a one-off basis, restoring flexing afterwards.
+</div>
+
 <div class="defaults-container" style="background-color: #ded4bd; border: none;">
 <h3 id="heading-control" class="defaults" style="margin-left: 6px; margin-bottom: -1em">HEADING control and defaults</h3>
 
@@ -1327,7 +1386,7 @@ which may be given in any order:
   UNDERSCORE2 &lt;weight&gt; &lt;gap1&gt; &lt;gap2&gt; | NO_UNDERSCORE2 \
   CAPS | NO_CAPS \
   SMALLCAPS | NO_SMALLCAPS \
-  BASELINE_ADJUST &lt;amount to raise heading from the baseline&gt; \
+  BASELINE_ADJUST &lt;amount to raise or lower heading from the baseline&gt; \
   NEEDS &lt;lines of text required beneath the heading&gt; \
   PREFIX_CHAPTER [&lt;n&gt;] \
   SPACE_AFTER | NO_SPACE_AFTER \
@@ -1362,7 +1421,8 @@ by which you wish to increase or decrease the leading, preceded by a
 plus (+) or minus (-) sign.  Note that there is no need to append
 the
 <a href="definitions.html#unitofmeasure">unit of measure</a>
-<kbd>p</kbd> to the argument.
+<kbd>p</kbd> to the argument.  Please see the
+<a href="#multi-line-heading">Multi-line headings</a>.
 </p>
 
 <p class="defaults" style="margin-bottom: 1em">
@@ -1383,16 +1443,18 @@ Contents, where capitalization of entries is controlled by
 </p>
 
 <p class="defaults" style="margin-bottom: 1em">
-<kbd>BASELINE_ADJUST</kbd> allows you to raise a heading slightly
-above the baseline on which it would otherwise sit.  For aesthetic
-reasons, it is often desirable to introduce a small amount of space
-between a heading and the text following it.  Since headings are
-preceded by a blank line, it is preferable to move the heading
-upward than to lower the text following it.  The argument to
-BASELINE_ADJUST is the amount by which to raise the heading.  It
-requires no <kbd>+</kbd> or <kbd>-</kbd> sign, and must have a
+<kbd>BASELINE_ADJUST</kbd> allows you to raise or lower a heading
+slightly from the baseline on which it would otherwise sit.  For
+aesthetic reasons, it is often desirable to introduce a small
+amount of space between a heading and the text following it.  Since
+headings are preceded by a blank line, it is preferable to move the
+heading upward slightly rather than lowering the text following it.
+Used for this purpose, no <kbd>+</kbd> sign is required.  The
+argument must have a
 <a href="definitions.html#unitofmeasure">unit of measure</a>
-appended to it.
+appended to it, usually <kbd>p</kbd>.  It is also possible to lower
+the position of headings by prepending a <kbd>-</kbd> sign to the
+argument.
 </p>
 
 <p class="defaults" style="margin-bottom: 1em">
@@ -1414,13 +1476,12 @@ to match the number of dropcap lines.
 <kbd>PREFIX_CHAPTER</kbd> instructs mom to prefix the current
 chapter number to numbered headings.  If mom is unable to determine
 a chapter number, she will ask for one.
-</p>
-
-<p class="defaults" style="margin-bottom: 1em">
+If you want to disable the prefixing of chapter numbers to headings,
+you must use
+<a href="#prefix-chapter-number">PREFIX_CHAPTER_NUMBER</a>.
 Note that using <kbd>PREFIX_CHAPTER</kbd> with an explicit chapter
 number will also set the chapter number for subsequent
-<a href="images.html#autolabel">automatically-generated image and pre-processor labels</a>
-as well.
+<a href="images.html#autolabel">automatically-generated image and pre-processor labels</a>.
 </p>
 
 <p class="defaults" style="margin-bottom: 1em">
