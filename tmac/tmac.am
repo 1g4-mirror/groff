@@ -169,6 +169,7 @@ tmac_TESTS = \
   tmac/tests/an_do-not-abbreviate-escape-using-TH-arguments.sh \
   tmac/tests/an_font-remapping-does-not-affect-titles.sh \
   tmac/tests/an_handle-degenerate-input-quietly.sh \
+  tmac/tests/an_hyphenation-mode-restoration-works.sh \
   tmac/tests/an_inner-footer-abbreviation-works.sh \
   tmac/tests/an_link-macros-work-in-paragraph-tags.sh \
   tmac/tests/an_link-trailing-text-hugs-previous.sh \

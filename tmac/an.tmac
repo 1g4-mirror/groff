@@ -152,25 +152,26 @@
 .  vs \\n[VS]u
 ..
 .
-.\" Resetting the hyphenation mode is a complicated dance because:
+.\" Resetting the hyphenation mode is a complicated dance.
 .\"   1.  Man pages sometimes disable automatic hyphenation--when they
-.\"       do, they nearly always forget to put it back the way it was;
-.\"   2.  in AT&T troff there was no register exposing the hyphenation
+.\"       do, they nearly always forget to put it back the way it was.
+.\"   2.  In AT&T troff there was no register exposing the hyphenation
 .\"       mode (nor the enablement status of automatic hyphenation), so
-.\"       no idioms for performing such restoration have arisen;
-.\"   3.  groff man(7)'s `HY` register isn't supported everywhere;
-.\"   4.  we want user preferences, if expressed, to override the page
-.\"       author's; and
-.\"   5.  even if we didn't want (4), one page author's can override
+.\"       no idioms for performing such restoration have arisen.
+.\"   3.  groff man(7)'s `HY` register isn't supported everywhere.
+.\"   4.  We want user preferences, if expressed, to override the page
+.\"       author's.
+.\"   5.  Even if we didn't want (4), one page author's can override
 .\"       another's when formatting multiple man(7) documents in
 .\"       sequence--we thus keep track of the initial hyphenation mode.
 .\"
 .\" So we recover the "page's" preferred hyphenation mode, if expressed
 .\" via `HY`, at every paragraph (and (sub)sectioning macro call; and
-.\" recover the user's preferred hyphenation mode at each new document.
-.\"
+.\" recover the user's preferred hyphenation mode at each new document
+.\" by accepting it as an argument (see the `TH` macro definition).
 .\" Also see the initialization logic below.
 .de an*reset-hyphenation-mode
+.  if \\n[.$] .if \B'\\$1' .nr HY \\$1
 .  nr an*want-hyphenation 1
 .  if r HY .if !\\n[HY] .nr an*want-hyphenation 0
 .  ie \\n[an*want-hyphenation] \
@@ -307,6 +308,11 @@
 .  rr TW
 .  nr an-was-tbl-failure-reported 0
 .
+.  \" When rendering multiple documents, we want to clear any page-local
+.  \" manipulation of hyphenation mode from the previous document.
+.  rr HY
+.
+.  an*reset-hyphenation-mode \\n[andoc*HY]
 .  an*reset-section-parameters
 .  an*reset-paragraph-parameters
 .  ll \\n[LL]u
@@ -1468,6 +1474,13 @@ contains unsupported escape sequence
 .ie d msoquiet .msoquiet man.local
 .el            .mso      man.local
 .
+.\" Save `HY` value configured by {man,mdoc}.local or command line.
+.if !r andoc*is-initialized \{\
+.  ie r HY .nr andoc*HY \n[HY]
+.  el      .nr andoc*HY 1
+.  nr andoc*is-initialized 1
+.\}
+.
 .\" Set each rendering parameter only if its -[dr] option or man.local
 .\" did not.
 .
@@ -1562,8 +1575,6 @@ contains unsupported escape sequence
 .    rm an-msg
 .  \}
 .\}
-.
-.\" We handle `HY` in `an*reset-hyphenation-mode`, not here.
 .
 .\" standard indentation
 .if !r IN \{\
