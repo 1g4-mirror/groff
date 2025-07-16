@@ -164,31 +164,35 @@ echo "$output" | grep -Fqx '.hy=34' || wail
 # do with any language) is preserved when switching locales back from a
 # CJK language, since those languages' modes unconditionally clear it.
 
-input='.TH foo 1 2022-04-09 "groff test suite"
+input='.
+.TH foo 1 2022-04-09 "groff test suite"
 .SH 名前
 foo \- APT 用選択制御ファイル
 .mso en.tmac
 .TH bar 1 2022-04-09 "groff test suite"
 .SH Name
 bar \- three subjects walk into this
-.tm .hy=\n[.hy]'
+.tm .hy=\n[.hy]
+.'
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mja \
-  -men 2>&1)
+output=$(printf "%s\n" "$input" | "$groff" -K utf8 -Tutf8 -P-cbou \
+  -man -mja -men 2>&1)
 echo 'checking -man with -mja -men' >&2
 echo "$output" | grep -Fqx '.hy=6' || wail
 
-input='.TH foo 1 2022-04-09 "groff test suite"
+input='.
+.TH foo 1 2022-04-09 "groff test suite"
 .SH 名称
 foo \- 解析 man 手册页的头部信息
 .mso en.tmac
 .TH bar 1 2022-04-09 "groff test suite"
 .SH Name
 bar \- three subjects walk into this
-.tm .hy=\n[.hy]'
+.tm .hy=\n[.hy]
+.'
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mzh \
-  -men 2>&1)
+output=$(printf "%s\n" "$input" | "$groff" -K utf8 -Tutf8 -P-cbou \
+  -man -mzh -men 2>&1)
 echo 'checking -man with -mzh -men' >&2
 echo "$output" | grep -Fqx '.hy=6' || wail
 
