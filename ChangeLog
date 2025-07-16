@@ -1,6 +1,41 @@
 2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man]: Make man page rendering more robust against meddling with
+	the adjustment mode by individual pages.  In part this is to
+	ensure that meddling doesn't persist outside the meddlesome
+	document when rendering multiple pages, but it also makes user
+	preferences more reliably discernible.  Prompted by a discussion
+	with Russ Allbery in late 2023.
+
+	* tmac/an.tmac ([initialization]): When rendering a man page,
+	this macro file is read before any man(7) document: therefore,
+	when interpreting a man page package macro file for the first
+	time (which we know thanks to the `andoc*is-initialized`
+	register), if the `AD` string is set, we know it was specified
+	on the command line or by the "man.local" file.  Stash its value
+	in new string `andoc*AD` so it can be recovered after meddling
+	by the document.
+	(an*reset-adjustment-mode): New macro assumes responsibility for
+	configuring adjustment.  Accept an argument, and if valid,
+	assign its contents to the `AD` string.
+	(an*reset-paragraph-parameters): Stop manipulating adjustment in
+	favor of calling the new macro.
+	(TH): Remove the potentially page-local `AD` string when
+	starting a new document, and call `an*reset-adjustment-mode`
+	interpolating `andoc*AD` as an argument to impose the user's
+	preference (or the package default) at each new document.
+
+	* tmac/tests/an_adjustment-mode-restoration-works.sh: Add test
+	to verify preservation of document- and user-selected adjustment
+	mode.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+	Fixes <https://savannah.gnu.org/bugs/?67363> (2/4).  Thanks to
+	Russ Allbery for posing the challenge.
+
+2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Make man page rendering more robust against meddling with
 	the hyphenation mode by individual pages.  In part this is to
 	ensure that meddling doesn't persist outside the meddlesome
 	document when rendering multiple pages, but it also makes user

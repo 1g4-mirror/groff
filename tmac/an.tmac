@@ -152,6 +152,49 @@
 .  vs \\n[VS]u
 ..
 .
+.\" Resetting the adjustment mode is a complicated dance.
+.\"   1.  Man pages sometimes disable adjustment--when they do, they
+.\"       often forget to put it back the way it was.
+.\"   2.  When they do remember to put it back, they often fail to do
+.\"       so correctly because of the `ad` request's quirky semantics
+.\"       starting from Seventh Edition Unix troff/nroff.  Briefly, the
+.\"       `ad` request without arguments turns adjustment back on after
+.\"       an `na` even if the previous adjustment mode was `l` (align to
+.\"       the left with NO adjustment).
+.\"   3.  The default adjustment mode historically has not been
+.\"       predictable; it can depend on nroff vs. troff mode and on the
+.\"       vendor of the *roff system in use.
+.\"   4.  It's possible (and portable) to obtain the previous adjustment
+.\"       mode via the `.j` register so that it can be saved prior to
+.\"       meddling and restored later, but in practice man page authors
+.\"       neglect to do so.
+.\"   5.  groff man(7)'s `AD` string isn't supported everywhere.
+.\"   6.  We want user preferences, if expressed, to override the page
+.\"       author's.
+.\"   7.  Even if we didn't want (6), one page author's can override
+.\"       another's when formatting multiple man(7) documents in
+.\"       sequence--we thus keep track of the initial adjustment mode.
+.\"
+.\" So we recover the "page's" preferred adjustment mode, if expressed
+.\" via `AD`, at every paragraph (and (sub)sectioning) macro call; and
+.\" recover the user's preferred adjustment mode at each new document by
+.\" accepting it as an argument (see the `TH` macro definition).  Also
+.\" see the initialization logic below.
+.\"
+.\" This macro is at pains to distinguish alignment from adjustment.
+.de an*reset-adjustment-mode
+.  if \\n[.$] .ds AD \\$1\"
+.  nr an*want-adjustment 1
+.  if d AD .if '\?\\*[AD]\?'\?l\?' .nr an*want-adjustment 0
+.  if d AD .if '\?\\*[AD]\?'\?c\?' .nr an*want-adjustment 0
+.  if d AD .if '\?\\*[AD]\?'\?r\?' .nr an*want-adjustment 0
+.  ie \\n[an*want-adjustment] .ds an*adjustment-mode b
+.  el                         .ds an*adjustment-mode \\*[AD]
+.  ad \\*[an*adjustment-mode]
+.  rm an*adjustment-mode
+.  rr an*want-adjustment
+..
+.
 .\" Resetting the hyphenation mode is a complicated dance.
 .\"   1.  Man pages sometimes disable automatic hyphenation--when they
 .\"       do, they nearly always forget to put it back the way it was.
@@ -198,8 +241,7 @@
 .\" between (P, LP, PP, HP) and (IP, TP) paragraphs.
 .de an*reset-paragraph-parameters
 .  an*reset-text-parameters
-.  ie d AD .ad \\*[AD]
-.  el      .ad b
+.  an*reset-adjustment-mode
 .  an*reset-hyphenation-mode
 ..
 .
@@ -309,10 +351,13 @@
 .  nr an-was-tbl-failure-reported 0
 .
 .  \" When rendering multiple documents, we want to clear any page-local
-.  \" manipulation of hyphenation mode from the previous document.
+.  \" manipulation of hyphenation and adjustment modes from the previous
+.  \" document.
 .  rr HY
+.  rm AD
 .
 .  an*reset-hyphenation-mode \\n[andoc*HY]
+.  an*reset-adjustment-mode \\*[andoc*AD]
 .  an*reset-section-parameters
 .  an*reset-paragraph-parameters
 .  ll \\n[LL]u
@@ -1474,10 +1519,13 @@ contains unsupported escape sequence
 .ie d msoquiet .msoquiet man.local
 .el            .mso      man.local
 .
-.\" Save `HY` value configured by {man,mdoc}.local or command line.
+.\" Save `HY` value and `AD` contents configured by {man,mdoc}.local or
+.\" command line.
 .if !r andoc*is-initialized \{\
 .  ie r HY .nr andoc*HY \n[HY]
 .  el      .nr andoc*HY 1
+.  ie d AD .ds andoc*AD \*[AD]\"
+.  el      .ds andoc*AD b\"
 .  nr andoc*is-initialized 1
 .\}
 .
