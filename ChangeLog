@@ -1,3 +1,30 @@
+2025-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[mdoc]: Refactor hyphenation mode handling.
+
+	* tmac/doc.tmac: Refactor.
+	([initialization]): Stop assigning `HY` register a default value
+	if it's unspecified by the user (on the command line or via
+	"man.local").
+	(doc-reset-args): Stop resetting hyphenation mode here;
+	replacing it with a call to `doc-reset-hyphenation-mode` causes
+	infinite macro recursion.  (Will this bite us later?)
+	(doc-print-reference): Call `doc-reset-hyphenation-mode` instead
+	of manipulating automatic hyphenation mode directly.
+	* tmac/mdoc/doc-common ([initialization]): Drop logic that sets
+	up `doc-hyphen-flags` register, which we're retiring in favor of
+	a new macro.
+	(Dd, Nd): Call `doc-reset-hyphenation-mode`.  The lack of a
+	hyphenation mode reset in the latter macro was apparently an
+	oversight, caught by a forthcoming automated test.
+	(doc-reset-hyphenation-mode): New macro works if the `HY`
+	register is not defined.  Use new local register
+	`doc-want-hyphenation` to determine which hyphenation mode
+	ultimately gets set (that of the locale, or zero).  Remove
+	register when done.
+	(Sh): Call `doc-reset-hyphenation-mode` instead of manipulating
+	automatic hyphenation mode directly.
+
 2025-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Disable hyphenation less aggressively.

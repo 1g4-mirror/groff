@@ -213,12 +213,7 @@
 .rr doc-HF-length
 .rm doc-heading-style
 .
-.\" \n[HY] is recognized for groff_man(7) compatibility, particularly
-.\" via andoc.tmac and man(1); see \n[doc-hyphen-flags] in doc-common.
-.\"
-.\" hyphenation enablement
-.if !r HY \
-.  nr HY 1
+.\" `doc-reset-hyphenation-mode` handles the `HY` register.
 .
 .\" groff mdoc does _not_ use groff man's `IN` register.
 .
@@ -561,8 +556,6 @@
 .  nr doc-arg-count 0
 .  nr doc-arg-ptr 0
 .  nr doc-have-slot 0
-.
-.  hy \n[doc-hyphen-flags]
 ..
 .ec
 .
@@ -5881,7 +5874,7 @@ arguments
 .  if \n[doc-reference-count] \
 .    doc-warn unresolved reference problem
 .
-.  hy \n[doc-hyphen-flags]
+.  doc-reset-hyphenation-mode
 ..
 .ec
 .

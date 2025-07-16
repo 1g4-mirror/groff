@@ -309,6 +309,7 @@
 .  if \n[C] .rr P
 .
 .  doc-reset-titles
+.  doc-reset-hyphenation-mode
 .
 .  if !\n[.$] \
 .    doc-warn .Dd directive expects an argument
@@ -989,15 +990,6 @@
 .ec
 .
 .
-.\" NS doc-hyphen-flags global register
-.\" NS   the parameter for the '.hy' request
-.ie \n[HY] \{\
-.  ie \n[cR] .nr doc-hyphen-flags \n[\*[locale]*hyphenation-mode-base]
-.  el        .nr doc-hyphen-flags \n[\*[locale]*hyphenation-mode-trap]
-.\}
-.el .nr doc-hyphen-flags 0
-.
-.
 .\" NS doc-header macro
 .\" NS   print page header
 .\" NS
@@ -1135,6 +1127,26 @@
 .ec
 .
 .
+.\" NS doc-reset-hyphenation-mode
+.\" NS   Repair automatic hyphenation after man page meddling.
+.
+.eo
+.de doc-reset-hyphenation-mode
+.  nr doc-want-hyphenation 1
+.  if r HY .ie !\n[HY] .nr doc-want-hyphenation 0
+.  ie \n[doc-want-hyphenation] \{\
+.    ie \n[cR] \
+.      nr doc-hyphenation-mode \n[\*[locale]*hyphenation-mode-base]
+.    el \
+.      nr doc-hyphenation-mode \n[\*[locale]*hyphenation-mode-trap]
+.  \}
+.  el .nr doc-hyphenation-mode 0
+.  hy \n[doc-hyphenation-mode]
+.  rr doc-want-hyphenation
+..
+.ec
+.
+.
 .\" NS doc-end-macro macro
 .\" NS   finish output
 .\" NS
@@ -1254,6 +1266,7 @@
 .
 .eo
 .de Nd
+.  doc-reset-hyphenation-mode
 .  nop \[em] \$*
 ..
 .ec
@@ -1420,7 +1433,7 @@
 .    doc-parse-args \$@
 .
 .    ad \*[AD]
-.    hy \n[HY]
+.    doc-reset-hyphenation-mode
 .
 .    ie "\*[doc-sec-head]"\*[doc-section-name]" \{\
 .      doc-set-up-titles
