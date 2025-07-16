@@ -99,10 +99,6 @@
 .if r ps4html \
 .  nr doc-is-output-html 1
 .
-.\" adjustment mode
-.if !d AD \
-.  ds AD b\"
-.
 .\" base paragraph indentation
 .if !r BP \
 .  nr BP 5n
@@ -7212,10 +7208,13 @@ should this have been '.Em ...'?
 .ie d msoquiet .msoquiet mdoc.local
 .el            .mso      mdoc.local
 .
-.\" Save `HY` value configured by {man,mdoc}.local or command line.
+.\" Save `HY` value and `AD` contents configured by {man,mdoc}.local or
+.\" command line.
 .if !r andoc*is-initialized \{\
 .  ie r HY .nr andoc*HY \n[HY]
 .  el      .nr andoc*HY 1
+.  ie d AD .ds andoc*AD \*[AD]\"
+.  el      .ds andoc*AD b\"
 .  nr andoc*is-initialized 1
 .\}
 .

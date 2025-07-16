@@ -202,6 +202,7 @@ tmac_TESTS = \
   tmac/tests/doc_X-register-works.sh \
   tmac/tests/doc_Xr-works.sh \
   tmac/tests/doc_accept-mixed-case-section-headings.sh \
+  tmac/tests/doc_adjustment-mode-restoration-works.sh \
   tmac/tests/doc_do-not-loop-infinitely-when-shortening-headers.sh \
   tmac/tests/doc_heading-font-remapping-works.sh \
   tmac/tests/doc_hyphenation-mode-restoration-works.sh \

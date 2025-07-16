@@ -1,6 +1,44 @@
 2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Make man page rendering more robust against meddling
+	with the adjustment mode by individual pages.  In part this is
+	to ensure that meddling doesn't persist outside the meddlesome
+	document when rendering multiple pages, but it also makes user
+	preferences more reliably discernible.  Prompted by a discussion
+	with Russ Allbery (about man(7)) in late 2023.
+
+	* tmac/doc.tmac ([initialization]): When rendering a man page,
+	this macro file is read before any mdoc(7) document; therefore,
+	if the `AD` string is set, we know it was specified on the
+	command line or by the "mdoc.local" file.  Stash its value in
+	new string `andoc*AD` so it can be recovered after meddling by
+	the document.
+	* tmac/mdoc/doc-common (Dd): Remove the potentially page-local
+	`AD` string when starting a new document, and call
+	`an*reset-adjustment-mode` interpolating `andoc*AD` as an
+	argument to impose the user's preference (or the package
+	default) at each new document.
+	(doc-reset-adjustment-mode): New macro.  Recover that value.
+	Compute the desired adjustment mode based on, in descending
+	priority: (1) the user's preference; (2) the page's preference.
+	(Sh): Configure adjustment _after_ determining formatting
+	parameters dependent on the name of the section heading.  Move
+	`na` request out of control branch matching the `doc-sec-head`
+	and `doc-section-synopsis` strings.  Later, invoke `na` if we're
+	in a synopsis section and `doc-reset-adjustment-mode` otherwise.
+	(Ss): Invoke `na` if we're in a synopsis section and
+	`doc-reset-adjustment-mode` otherwise.
+
+	* tmac/tests/doc_user-preferred-adjustment-restored.sh: Add test
+	to verify preservation of user-selected adjustment mode.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+	Fixes <https://savannah.gnu.org/bugs/?67363> (4/4).  Thanks to
+	Russ Allbery for posing the challenge.
+
+2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[mdoc]: Make man page rendering more robust against meddling
 	with the hyphenation mode by individual pages.  In part this is
 	to ensure that meddling doesn't persist outside the meddlesome
 	document when rendering multiple pages, but it also makes user

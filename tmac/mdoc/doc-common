@@ -309,11 +309,14 @@
 .  if \n[C] .rr P
 .
 .  \" When rendering multiple documents, we want to clear any page-local
-.  \" manipulation of hyphenation mode from the previous document.
+.  \" manipulation of hyphenation and adjustment modes from the previous
+.  \" document.
 .  rr HY
+.  rm AD
 .
 .  doc-reset-titles
 .  doc-reset-hyphenation-mode \n[andoc*HY]
+.  doc-reset-adjustment-mode \*[andoc*AD]
 .
 .  if !\n[.$] \
 .    doc-warn .Dd directive expects an argument
@@ -1131,6 +1134,55 @@
 .ec
 .
 .
+.\" NS doc-reset-adjustment-mode
+.\" NS   Repair output line adjustment after man page meddling.
+.\"
+.\" Resetting the adjustment mode is a complicated dance.
+.\"   1.  Man pages sometimes disable adjustment--when they do, they
+.\"       often forget to put it back the way it was.
+.\"   2.  When they do remember to put it back, they often fail to do
+.\"       so correctly because of the `ad` request's quirky semantics
+.\"       starting from Seventh Edition Unix troff/nroff.  Briefly, the
+.\"       `ad` request without arguments turns adjustment back on after
+.\"       an `na` even if the previous adjustment mode was `l` (align to
+.\"       the left with NO adjustment).
+.\"   3.  The default adjustment mode historically has not been
+.\"       predictable; it can depend on nroff vs. troff mode and on the
+.\"       vendor of the *roff system in use.
+.\"   4.  It's possible (and portable) to obtain the previous adjustment
+.\"       mode via the `.j` register so that it can be saved prior to
+.\"       meddling and restored later, but in practice man page authors
+.\"       neglect to do so.
+.\"   5.  groff mdoc(7)'s `AD` string isn't supported everywhere.
+.\"   6.  We want user preferences, if expressed, to override the page
+.\"       author's.
+.\"   7.  Even if we didn't want (6), one page author's can override
+.\"       another's when formatting multiple mdoc(7) documents in
+.\"       sequence--we thus keep track of the initial adjustment mode.
+.\"
+.\" So we recover the "page's" preferred adjustment mode, if expressed
+.\" via `AD`, at every paragraph (and (sub)sectioning) macro call; and
+.\" recover the user's preferred adjustment mode at each new document by
+.\" accepting it as an argument (see the `Dd` macro definition).  Also
+.\" see the initialization logic in "tmac/doc.tmac".
+.\"
+.\" This macro is at pains to distinguish alignment from adjustment.
+.
+.eo
+.de doc-reset-adjustment-mode
+.  if \n[.$] .ds AD \$1\"
+.  nr doc-want-adjustment 1
+.  if d AD .if '\?\*[AD]\?'\?l\?' .nr doc-want-adjustment 0
+.  if d AD .if '\?\*[AD]\?'\?c\?' .nr doc-want-adjustment 0
+.  if d AD .if '\?\*[AD]\?'\?r\?' .nr doc-want-adjustment 0
+.  ie \n[doc-want-adjustment] .ds doc-adjustment-mode b
+.  el                         .ds doc-adjustment-mode l
+.  ad \*[doc-adjustment-mode]
+.  rr doc-want-adjustment
+..
+.ec
+.
+.
 .\" NS doc-reset-hyphenation-mode
 .\" NS   Repair automatic hyphenation after man page meddling.
 .\"
@@ -1286,6 +1338,7 @@
 .
 .eo
 .de Nd
+.  doc-reset-adjustment-mode
 .  doc-reset-hyphenation-mode
 .  nop \[em] \$*
 ..
@@ -1453,8 +1506,6 @@
 .  ds doc-macro-name Sh
 .  doc-parse-args \$@
 .
-.  ad \*[AD]
-.
 .  ie "\*[doc-sec-head]"\*[doc-section-name]" \{\
 .    doc-set-up-titles
 .    in 0
@@ -1468,7 +1519,6 @@
 .    nr doc-in-authors-section 0
 .
 .    ie        "\*[doc-sec-head]"\*[doc-section-synopsis]" \{\
-.      na
 .      nr doc-in-synopsis-section 1
 .      nr doc-indent-synopsis 0
 .      nr doc-indent-synopsis-active 0
@@ -1495,8 +1545,14 @@
 .    nr doc-have-author 0
 .  \}
 .
-.  ie \n[doc-in-synopsis-section] .nh
-.  el                             .doc-reset-hyphenation-mode
+.  ie \n[doc-in-synopsis-section] \{\
+.    na
+.    nh
+.  \}
+.  el \{\
+.    doc-reset-adjustment-mode
+.    doc-reset-hyphenation-mode
+.  \}
 .
 .  doc-setup-page-layout
 .  sp \n[doc-paragraph-space]u
@@ -1583,10 +1639,16 @@
 .  ds doc-macro-name Ss
 .  doc-parse-args \$@
 .
-.  ie \n[doc-in-synopsis-section] .nh
-.  el                             .doc-reset-hyphenation-mode
-.
 .  ds doc-subsection-heading \$*
+.
+.  ie \n[doc-in-synopsis-section] \{\
+.    na
+.    nh
+.  \}
+.  el \{\
+.    doc-reset-adjustment-mode
+.    doc-reset-hyphenation-mode
+.  \}
 .
 .  sp \n[doc-paragraph-space]u
 .  if !\n[cR] \
