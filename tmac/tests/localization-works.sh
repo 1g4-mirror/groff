@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2021-2023 Free Software Foundation, Inc.
+# Copyright (C) 2021-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -128,69 +128,37 @@ echo "$output" | grep -Fqx '.hy=34' || wail
 input='.TH foo 1 2022-01-06 "groff test suite"
 .tm .hy=\n[.hy]'
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mcs 2>&1)
-echo 'checking -man with -rcR=0 -mcs' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mcs 2>&1)
+echo 'checking -man with -mcs' >&2
 echo "$output" | grep -Fqx '.hy=2' || wail
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mde 2>&1)
-echo 'checking -man with -rcR=0 -mde' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mde 2>&1)
+echo 'checking -man with -mde' >&2
 echo "$output" | grep -Fqx '.hy=2' || wail
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -men 2>&1)
-echo 'checking -man with -rcR=0 -men' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -men 2>&1)
+echo 'checking -man with -men' >&2
 echo "$output" | grep -Fqx '.hy=6' || wail
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mes 2>&1)
-echo 'checking -man with -rcR=0 -mes' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mes 2>&1)
+echo 'checking -man with -mes' >&2
 echo "$output" | grep -Fqx '.hy=2' || wail
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mfr 2>&1)
-echo 'checking -man with -rcR=0 -mfr' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mfr 2>&1)
+echo 'checking -man with -mfr' >&2
 echo "$output" | grep -Fqx '.hy=6' || wail
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mit 2>&1)
-echo 'checking -man with -rcR=0 -mit' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mit 2>&1)
+echo 'checking -man with -mit' >&2
 echo "$output" | grep -Fqx '.hy=2' || wail
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mru 2>&1)
-echo 'checking -man with -rcR=0 -mru' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mru 2>&1)
+echo 'checking -man with -mru' >&2
 echo "$output" | grep -Fqx '.hy=2' || wail
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -msv 2>&1)
-echo 'checking -man with -rcR=0 -msv' >&2
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -msv 2>&1)
+echo 'checking -man with -msv' >&2
 echo "$output" | grep -Fqx '.hy=34' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -mcs 2>&1)
-echo 'checking -man with -rcR=1 -mcs' >&2
-echo "$output" | grep -Fqx '.hy=1' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -mde 2>&1)
-echo 'checking -man with -rcR=1 -mde' >&2
-echo "$output" | grep -Fqx '.hy=1' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -men 2>&1)
-echo 'checking -man with -rcR=1 -men' >&2
-echo "$output" | grep -Fqx '.hy=4' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -mes 2>&1)
-echo 'checking -man with -rcR=1 -mes' >&2
-echo "$output" | grep -Fqx '.hy=1' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -mfr 2>&1)
-echo 'checking -man with -rcR=1 -mfr' >&2
-echo "$output" | grep -Fqx '.hy=4' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -mit 2>&1)
-echo 'checking -man with -rcR=1 -mit' >&2
-echo "$output" | grep -Fqx '.hy=1' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -mru 2>&1)
-echo 'checking -man with -rcR=1 -mru' >&2
-echo "$output" | grep -Fqx '.hy=1' || wail
-
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=1 -man -msv 2>&1)
-echo 'checking -man with -rcR=1 -msv' >&2
-echo "$output" | grep -Fqx '.hy=32' || wail
 
 # Ensure that the 'trap bit' (hyphenation value 2, which has nothing to
 # do with any language) is preserved when switching locales back from a
@@ -205,9 +173,9 @@ foo \- APT 用選択制御ファイル
 bar \- three subjects walk into this
 .tm .hy=\n[.hy]'
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mja \
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mja \
   -men 2>&1)
-echo 'checking -man with -rcR=0 -mja -men' >&2
+echo 'checking -man with -mja -men' >&2
 echo "$output" | grep -Fqx '.hy=6' || wail
 
 input='.TH foo 1 2022-04-09 "groff test suite"
@@ -219,9 +187,9 @@ foo \- 解析 man 手册页的头部信息
 bar \- three subjects walk into this
 .tm .hy=\n[.hy]'
 
-output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -rcR=0 -man -mzh \
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -mzh \
   -men 2>&1)
-echo 'checking -man with -rcR=0 -mzh -men' >&2
+echo 'checking -man with -mzh -men' >&2
 echo "$output" | grep -Fqx '.hy=6' || wail
 
 test -z "$fail"

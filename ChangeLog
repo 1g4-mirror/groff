@@ -1,5 +1,20 @@
 2025-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Refactor to simplify.
+	(an*reset-hyphenation-mode): Now that continuous rendering mode
+	is handled via a humongous page length, it's no longer necessary
+	for this macro package to use a different hyphenation mode in
+	continuous rendering mode.  (It formerly was, because the
+	{invisible} bottom of each output page had what our
+	documentation terms an "implicit page trap", causing hyphenation
+	to be suppressed on some output lines for no obvious reason.)
+	We no longer have to dance around that: kill the logic for it.
+
+	* tmac/tests/localization-works.sh: Drop sensitivity to
+	continuous rendering mode.
+
+2025-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Refactor.
 	(an*reset-hyphenation-mode): Update to work if the `HY` register
 	is not defined.  Use new local register `an*want-hyphenation` to
