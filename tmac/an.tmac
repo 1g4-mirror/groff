@@ -122,17 +122,15 @@
 .  el         .an*break-page-with-new-number
 ..
 .
+.\" `TH` and localization macro files call this.
 .de an*reset-hyphenation-mode
-.  ie \\n[HY] \{\
-.    \" No page breaks occur in continuous rendering.
-.    ie \\n[cR] \
-.      nr an*hyphenation-mode \\n[\\*[locale]*hyphenation-mode-base]
-.    el \
-.      nr an*hyphenation-mode \\n[\\*[locale]*hyphenation-mode-trap]
-.  \}
-.  el \
-.    nr an*hyphenation-mode 0
+.  nr an*want-hyphenation 1
+.  if r HY .if !\\n[HY] .nr an*want-hyphenation 0
+.  ie \\n[an*want-hyphenation] \
+.    nr an*hyphenation-mode \\n[\\*[locale]*hyphenation-mode-trap]
+.  el .nr an*hyphenation-mode 0
 .  hy \\n[an*hyphenation-mode]
+.  rr an*want-hyphenation
 ..
 .
 .de an*reset-tab-stops
@@ -1548,9 +1546,7 @@ contains unsupported escape sequence
 .  \}
 .\}
 .
-.\" hyphenation enablement
-.if !r HY \
-.  nr HY 1
+.\" We handle `HY` in the `TH` macro definition, not here.
 .
 .\" standard indentation
 .if !r IN \{\

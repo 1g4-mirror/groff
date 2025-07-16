@@ -1,3 +1,14 @@
+2025-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Refactor.
+	(an*reset-hyphenation-mode): Update to work if the `HY` register
+	is not defined.  Use new local register `an*want-hyphenation` to
+	determine which hyphenation mode ultimately gets set (that of
+	the locale, or zero).  Remove register when done.
+	([initialization]): Stop assigning `HY` register a default value
+	if it's unspecified by the user (on the command line or via
+	"man.local").
+
 2025-07-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Refactor.

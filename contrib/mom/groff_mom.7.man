@@ -72,10 +72,12 @@ groff_mom \- modern macros for document composition with GNU
 .	shift 2
 .  \}
 .  if (\\n[.$] = 1) .as result \,\f[\\$1]
+.  nr saved-hy \\n[.hy]
 .  nh
 .  nop \\*[result]\&
 .  rm result
-.  hy \\n[HY]
+.  hy \\n[saved-hy]
+.  rr saved-hy
 ..
 .
 .
