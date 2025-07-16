@@ -1,5 +1,22 @@
 2025-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Refactor to simplify hyphenation handling.
+
+	* tmac/mdoc/doc-common (doc-reset-hyphenation-mode): Refactor to
+	simplify.  Now that continuous rendering mode is handled via a
+	humongous page length, it's no longer necessary for this macro
+	package to use a different hyphenation mode in continuous
+	rendering mode.  (It formerly was, because the [invisible]
+	bottom of each output page had what our documentation terms an
+	"implicit page trap", causing hyphenation to be suppressed on
+	some output lines for no obvious reason.)  We no longer have to
+	dance around that: kill the logic for it.
+
+	* tmac/tests/localization-works.sh: Add test cases for use of
+	mdoc with every locale supported by groff.
+
+2025-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Refactor hyphenation mode handling.
 
 	* tmac/doc.tmac: Refactor.

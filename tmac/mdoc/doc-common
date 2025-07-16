@@ -1134,12 +1134,8 @@
 .de doc-reset-hyphenation-mode
 .  nr doc-want-hyphenation 1
 .  if r HY .ie !\n[HY] .nr doc-want-hyphenation 0
-.  ie \n[doc-want-hyphenation] \{\
-.    ie \n[cR] \
-.      nr doc-hyphenation-mode \n[\*[locale]*hyphenation-mode-base]
-.    el \
-.      nr doc-hyphenation-mode \n[\*[locale]*hyphenation-mode-trap]
-.  \}
+.  ie \n[doc-want-hyphenation] \
+.    nr doc-hyphenation-mode \n[\*[locale]*hyphenation-mode-trap]
 .  el .nr doc-hyphenation-mode 0
 .  hy \n[doc-hyphenation-mode]
 .  rr doc-want-hyphenation

@@ -196,6 +196,97 @@ output=$(printf "%s\n" "$input" | "$groff" -K utf8 -Tutf8 -P-cbou \
 echo 'checking -man with -mzh -men' >&2
 echo "$output" | grep -Fqx '.hy=6' || wail
 
+input='.
+.Dd 2025-07-16
+.Dt foo 1
+.Os "groff test suite"
+.tm .hy=\n[.hy]
+.'
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -mcs 2>&1)
+echo 'checking -mdoc with -mcs' >&2
+echo "$output" | grep -Fqx '.hy=2' || wail
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -mde 2>&1)
+echo 'checking -mdoc with -mde' >&2
+echo "$output" | grep -Fqx '.hy=2' || wail
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -men 2>&1)
+echo 'checking -mdoc with -men' >&2
+echo "$output" | grep -Fqx '.hy=6' || wail
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -mes 2>&1)
+echo 'checking -mdoc with -mes' >&2
+echo "$output" | grep -Fqx '.hy=2' || wail
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -mfr 2>&1)
+echo 'checking -mdoc with -mfr' >&2
+echo "$output" | grep -Fqx '.hy=6' || wail
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -mit 2>&1)
+echo 'checking -mdoc with -mit' >&2
+echo "$output" | grep -Fqx '.hy=2' || wail
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -mru 2>&1)
+echo 'checking -mdoc with -mru' >&2
+echo "$output" | grep -Fqx '.hy=2' || wail
+
+output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -mdoc -msv 2>&1)
+echo 'checking -mdoc with -msv' >&2
+echo "$output" | grep -Fqx '.hy=34' || wail
+
+# Ensure that the 'trap bit' (hyphenation value 2, which has nothing to
+# do with any language) is preserved when switching locales back from a
+# CJK language, since those languages' modes unconditionally clear it.
+
+input='.
+.Dd 2025-07-16
+.Dt foo 1
+.Os "groff test suite"
+.Sh 名前
+.Nm foo
+.Nd APT 用選択制御ファイル
+.mso en.tmac
+.Dd 2025-07-16
+.Dt bar 1
+.Os "groff test suite"
+.Sh Name
+.Nm bar
+.Nd three subjects walk into this
+.\".Sh Description
+.\"Stuff.
+.tm .hy=\n[.hy]
+.'
+
+output=$(printf "%s\n" "$input" | "$groff" -K utf8 -Tutf8 -P-cbou \
+  -mdoc -mja -men 2>&1)
+echo 'checking -mdoc with -mja -men' >&2
+echo "$output" | grep -Fqx '.hy=6' || wail
+
+input='.
+.Dd 2025-07-16
+.Dt foo 1
+.Os "groff test suite"
+.Sh 名称
+.Nm foo
+.Nd 解析 mdoc 手册页的头部信息
+.mso en.tmac
+.Dd 2025-07-16
+.Dt bar 1
+.Os "groff test suite"
+.Sh Name
+.Nm bar
+.Nd three subjects walk into this
+.\".Sh Description
+.\"Stuff.
+.tm .hy=\n[.hy]
+.'
+
+output=$(printf "%s\n" "$input" | "$groff" -K utf8 -Tutf8 -P-cbou \
+  -mdoc -mzh -men 2>&1)
+echo 'checking -mdoc with -mzh -men' >&2
+echo "$output" | grep -Fqx '.hy=6' || wail
+
 test -z "$fail"
 
 # vim:set ai et sw=4 ts=4 tw=72:
