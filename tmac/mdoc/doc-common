@@ -1480,7 +1480,7 @@
 .    ss (\n[.ss] * 5 / 3) (\n[.sss] * 5 / 3)
 .  \}
 .
-.  if \n[doc-remap-I-style-in-headings] \
+.  if \n[doc-remap-I-style-in-headings] \{\
 .    ftr \*[doc-heading-family]I \*[doc-heading-family]BI
 .
 .    nr doc-arg-ptr +1

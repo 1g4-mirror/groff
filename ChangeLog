@@ -1,5 +1,9 @@
 2025-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common (Sh): Fix missing brace escape sequence.
+
+2025-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-common (Sh): Stop disabling adjustment in troff
 	mode in "See also" sections.  That seemed like an odd choice;
 	typically, adjustment is uglier in _nroff_ mode, not troff mode.
