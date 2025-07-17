@@ -1,5 +1,35 @@
 2025-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Disable hyphenation less aggressively.
+
+	* tmac/doc.tmac (doc-parse-args, doc-parse-arg-vector)
+	(doc-enclose-close, doc-inset-list, doc-hang-list)
+	(doc-ohang-list, doc-diag-list, doc-tag-list, Fc)
+	(doc-print-reference): Stop invoking `nh` request.  This
+	package's bespoke internal macro reprocessing system
+	aggressively exercises Savannah #67310 (a missing feature in the
+	formatter); with these requests in place, automatic hyphenation
+	was getting disabled in far more places than it should have
+	been, and because there appears to be no mechanism for
+	reënabling it when departing the appropriate nested scope, it's
+	simpler to just stop trying.  Making this change had no
+	measurable effect on formatting of groff_mdoc(7), except with
+	respect to the formatting of URL link text, which has seen heavy
+	revision since groff 1.23.0 anyway.
+	(Lk): Macro now does what more mdoc(7) documents should probably
+	have already been doing: employ the `\%` escape sequence in
+	appropriate places.  (Alternatively, those who enjoy mandoc(1)'s
+	approach can disable automatic hyphenation altogether at
+	formatting time by setting the `HY` register to zero in
+	"mdoc.local" or on the command line.)  This change eliminates
+	the one regression noted above.
+
+	* tmac/tests/doc_indents-correctly.sh: Update test expectations,
+	now that (sub)section headings that are so long that they break
+	can also hyphenate.
+
+2025-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-common (Sh): Fix missing brace escape sequence.
 
 2025-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>

@@ -416,8 +416,6 @@
 .    shift
 .    doc-parse-args \$@
 .  \}
-.
-.  nh
 ..
 .ec
 .
@@ -465,8 +463,6 @@
 .    nr doc-num-args -1
 .    doc-parse-arg-vector
 .  \}
-.
-.  nh
 ..
 .ec
 .
@@ -2296,7 +2292,6 @@
 .  chop doc-enclosure-box\n[doc-nesting-level]
 .  unformat doc-enclosure-box\n[doc-nesting-level]
 .
-.  nh
 .  nop \*[doc-enclosure-box\n[doc-nesting-level]]\c
 .  nop \)\*[doc-quote-right]\)\c
 .
@@ -4170,7 +4165,6 @@ arguments
 .  doc-set-vertical-and-indent 0
 .  br
 .
-.  nh
 .  doc-item-box\n[doc-list-depth]
 .
 .  nr doc-in-list 0
@@ -4202,7 +4196,6 @@ arguments
 .  nr doc-reg-dhl (\n[doc-list-indent-stack\n[doc-list-depth]]u + \n[doc-digit-width]u)
 .  ti -\n[doc-reg-dhl]u
 .
-.  nh
 .  ie (\n[dl]u > \n[doc-list-indent-stack\n[doc-list-depth]]u) \
 .    doc-item-box\n[doc-list-depth]
 .  el \{\
@@ -4234,7 +4227,6 @@ arguments
 .  unformat doc-item-box\n[doc-list-depth]
 .
 .  doc-set-vertical-and-indent 0
-.  nh
 .  doc-item-box\n[doc-list-depth]
 .  br
 .
@@ -4355,7 +4347,6 @@ arguments
 .    br
 .  nr doc-diag-list-input-line-count \n[.c]
 .
-.  nh
 .  nop \f[\*[doc-Sy-font]]\c
 .  if \n[doc-num-args] \
 .    doc-remaining-args
@@ -4402,7 +4393,6 @@ arguments
 .  nr doc-reg-dtl (\n[doc-list-indent-stack\n[doc-list-depth]]u + \n[doc-digit-width]u)
 .  ti -\n[doc-reg-dtl]u
 .
-.  nh
 .  doc-item-box\n[doc-list-depth]
 .  ie (\n[dl]u > \n[doc-list-indent-stack\n[doc-list-depth]]u) \
 .    br
@@ -5571,7 +5561,6 @@ arguments
 .    ti -\n[doc-indent-synopsis]u
 .  \}
 .
-.  nh
 .  nop \*[doc-func-box]\c
 .
 .  nr doc-arg-ptr +1
@@ -5786,9 +5775,6 @@ arguments
 .
 .eo
 .de doc-print-reference
-.
-.  nh
-.
 .  if \n[doc-author-count] \{\
 .    doc-print-reference-authors
 .    nr doc-reference-count -\n[doc-author-count]
@@ -7144,12 +7130,12 @@ arguments
 .    \" If we won't/can't hyperlink, format the link target.
 .    if !\n[U] \{\
 .      nop \" put a breaking space on the output
-.      nop \[la]\*[doc-target-Lk]\[ra]\c
+.      nop \%\[la]\*[doc-target-Lk]\[ra]\c
 .    \}
 .  \}
 .  \" If no link text, format the link target as its own link text.
 .  el \
-.    nop \f[\*[doc-Lk-font]]\*[doc-target-Lk]\c
+.    nop \f[\*[doc-Lk-font]]\%\*[doc-target-Lk]\c
 .  nop \f[\n[doc-curr-font]]\c
 .
 .  doc-end-hyperlink-\*[.T]
