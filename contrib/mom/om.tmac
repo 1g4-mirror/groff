@@ -11116,7 +11116,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .             ch RR_ADVANCE_FROM_TOP
 .             if (\\n[.t]-\\n[#HEADING_NEEDS])=1 \
 .                nr #HEADING_NEEDS +1
-.             if \\n[.t]<=\\n[#HEADING_NEEDS] \{\
+.             if \\n[.t]<\\n[#HEADING_NEEDS] \{\
 .                nr #HEADING_DEFERRED 1
 .                sp \\n[.t]u
 .             \}
@@ -11604,7 +11604,7 @@ Shimming must be disabled with NO_SHIM before using FLEX.
 .             sp 1
 .             nr nl-2 \\n[nl]
 .             sp -1
-.             if (\\n[nl-2]-\\n[nl-1])<(\\*[$HEADING_\\n[#LEVEL]_BASELINE_ADJ]) .sp
+.             if (\\n[nl-2]-\\n[nl-1])<(\\*[$HEAD_\\n[#LEVEL]_BASELINE_ADJ]) .sp
 .             rr nl-1
 .             rr nl-2
 .             rr #HEADING_DEFERRED
