@@ -1451,8 +1451,6 @@
 .        nr doc-num-func-args 0
 .      \}
 .      el \{ .ie "\*[doc-sec-head]"\*[doc-section-see-also]" \{\
-.        if t \
-.          na
 .        nr doc-in-see-also-section 1
 .      \}
 .      el \{ .ie "\*[doc-sec-head]"\*[doc-section-files]" \

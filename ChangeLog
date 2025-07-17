@@ -1,3 +1,9 @@
+2025-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/mdoc/doc-common (Sh): Stop disabling adjustment in troff
+	mode in "See also" sections.  That seemed like an odd choice;
+	typically, adjustment is uglier in _nroff_ mode, not troff mode.
+
 2025-07-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/mdoc/doc-syms (doc-str-Lb-*): Protect literals from
