@@ -1,3 +1,8 @@
+2025-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grolj4/lj4.cpp (lookup_paper_size): Return
+	type-correct constructed values.
+
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/scripts/gendesc.sh:

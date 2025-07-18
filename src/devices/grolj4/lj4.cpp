@@ -187,9 +187,9 @@ static ssize_t lookup_paper_size(const char *s)
   for (size_t i = 0; i < paper_table_length; i++) {
     // FIXME Perhaps allow unique prefix.
     if (strcasecmp(s, paper_table[i].name) == 0)
-      return int(i);
+      return ssize_t(i);
   }
-  return -1;
+  return ssize_t(-1);
 }
 
 class lj4_printer : public printer {
