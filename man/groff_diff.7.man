@@ -5208,6 +5208,11 @@ Interpolate number of hours elapsed since midnight.
 .
 .
 .TP
+.\" The `hp` register was documented in the original 1976 Ossanna troff
+.\" "Nroff/Troff User's Manual" and in the January 1981 "Addendum to
+.\" the Nroff/Troff User's Manual" (presumably by Kernighan), and is
+.\" widely supported by descendants of his device-independent troff, but
+.\" appears to have been overlooked in his 1992 revision of CSTR #54.
 .B \[rs]n[hp]
 Interpolate horizontal position relative to that at the start of the
 input line.
