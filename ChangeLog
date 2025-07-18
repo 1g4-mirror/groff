@@ -20,7 +20,8 @@
 	* font/scripts/gendesc.sh:
 	* font/scripts/genfonts.sh: Prevent recurrence of previous
 	problem by computing the basename of the script file, storing it
-	a variable `progname`, and using that variable in diagnostics.
+	in a variable `progname`, and using that variable in
+	diagnostics.
 
 2025-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
