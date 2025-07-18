@@ -4136,6 +4136,16 @@ For example,
 at the shell prompt is equivalent to placing
 .CW ".nr PS 10.5p" \[rq] \[lq]
 at the beginning of the document.
+.\" Note to document maintainers:
+.\"
+.\" We use the integral point scaling unit `p` instead of the
+.\" typographical point ("scaled point") `z` because this is a register
+.\" assignment; the value gets coverted to scaled points automatically.
+.\" Observe:
+.\"    $ printf '.nr PS 10.5p\n.pnr PS\n' | groff # 1.24 or later
+.\"    PS      10500   +0      0
+.\"
+.\" groff ms users can thus remain innocent of the z unit if they like.
 .
 .
 .PP

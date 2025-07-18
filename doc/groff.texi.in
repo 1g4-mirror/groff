@@ -4848,9 +4848,22 @@ by@tie{}1,000.@footnote{Register values are converted to and stored as
 basic units.  @xref{Measurements}.}  This threshold makes use of a
 scaling unit with these parameters practical for high-resolution
 devices while preserving backward compatibility.  It also permits
-expression of non-integral type sizes.  For example, @samp{groff
--rPS=10.5p} at the shell prompt is equivalent to placing @samp{.nr PS
-10.5p} at the beginning of the document.
+expression of non-integral type sizes.
+For example,
+@samp{groff -rPS=10.5p}
+at the shell prompt is equivalent to placing
+@samp{.nr PS 10.5p}
+at the beginning of the document.
+@c Note to document maintainers:
+@c
+@c We use the integral point scaling unit `p` instead of the
+@c typographical point ("scaled point") `z` because this is a register
+@c assignment; the value gets coverted to scaled points automatically.
+@c Observe:
+@c    $ printf '.nr PS 10.5p\n.pnr PS\n' | groff # 1.24 or later
+@c    PS      10500   +0      0
+@c
+@c groff ms users can thus remain innocent of the z unit if they like.
 
 @item
 @acronym{AT&T} @file{ms}'s @code{AU} macro supported arguments whose
