@@ -5702,13 +5702,6 @@ at the polygon's
 drawing position.
 .
 .
-.IP
-At the moment,
-GNU
-.I pic \" GNU
-uses this command only to generate triangles and rectangles.
-.
-.
 .TP
 .BR DP\~ "$dx sub 1 ~ dy sub 1 ~ ldots ~ dx sub n ~ dy sub n$"
 As
