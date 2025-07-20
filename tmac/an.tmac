@@ -96,7 +96,7 @@
 .\" continuous rendering mode.
 .de1 an-end
 .  if !r an-TH-was-called .return
-.  an-input-trap
+.  an*input-trap
 .  if '\\n[.z]'an*paragraph-tag' .an*TP-trap
 .  if \\n[cR] \{\
 .    sp 1v
@@ -650,7 +650,7 @@ contains unsupported escape sequence
 .\" Handle macros that may take an "argument" on the next input line
 .\" producing written or drawn output: .SH, .SS, .B, .I, .SM, .SB.
 .\" For .TP, see below.
-.de1 an-input-trap
+.de1 an*input-trap
 .  if \\n[an-devtag-needs-end-of-heading] .DEVTAG-EO-H
 .  nr an-devtag-needs-end-of-heading 0
 .  if \\n[an-devtag-needs-second-column] .DEVTAG-COL 2
@@ -706,7 +706,7 @@ contains unsupported escape sequence
 .  ti 0
 .  nr an-devtag-needs-end-of-heading 1
 .  DEVTAG-SH 1
-.  it 1 an-input-trap
+.  it 1 an*input-trap
 .  nr an-need-no-space-mode 1
 .  nr an-need-break 1
 .  ps \\n[PS-SH]u
@@ -735,7 +735,7 @@ contains unsupported escape sequence
 .  ti \\n[SN]u
 .  nr an-devtag-needs-end-of-heading 1
 .  DEVTAG-SH 2
-.  it 1 an-input-trap
+.  it 1 an*input-trap
 .  nr an-need-no-space-mode 1
 .  nr an-need-break 1
 .  ps \\n[PS-SS]u
@@ -754,7 +754,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) in bold style.
 .de1 B
-.  it 1 an-input-trap
+.  it 1 an*input-trap
 .  ft B
 .  if \\n[.$] \&\\$*
 ..
@@ -762,7 +762,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) in italic style.
 .de1 I
-.  it 1 an-input-trap
+.  it 1 an*input-trap
 .  ft I
 .  if \\n[.$] \,\\$*\/
 ..
@@ -770,7 +770,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) at smaller type size.
 .de1 SM
-.  it 1 an-input-trap
+.  it 1 an*input-trap
 .  ps -1
 .  if \\n[.$] \&\\$*
 ..
@@ -793,7 +793,7 @@ contains unsupported escape sequence
 .\" .SB [text]
 .de1 SB
 .  nop \\*[an-deprecation-warn]\\
-.  it 1 an-input-trap
+.  it 1 an*input-trap
 .  ps -1
 .  ft B
 .  if \\n[.$] \&\\$*
@@ -821,7 +821,7 @@ contains unsupported escape sequence
 .    return
 .  \}
 .  nr an*have-paragraph-tag 1
-.  itc 1 an-input-trap
+.  itc 1 an*input-trap
 .  in 0
 .  ll -\\n[an-margin]u
 .  nr an*saved-adjustment-mode \\n[.j]
