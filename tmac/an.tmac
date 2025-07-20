@@ -241,14 +241,10 @@
 .  \" Set up rendering parameters.  We do this in TH instead of only
 .  \" once when initializing the package because when rendering multiple
 .  \" pages, a previous page might have changed them.
-.
-.  fam \\*[an*body-family]
-.  ft R
-.
 .  nr PS    10z \" default type size
+.  nr VS    12p \" default vertical spacing
 .  nr PS-SS 10z
 .  nr PS-SH 10.95z
-.  nr VS    12p
 .
 .  \" use sizes similar to LaTeX
 .  if t \{\
@@ -272,11 +268,6 @@
 .  \" different language.
 .  if '\\*[locale]'english' .an*localize-strings
 .
-.  ps \\n[PS]u
-.  vs \\n[VS]u
-.  ad \\*[AD]
-.  ll \\n[LL]u
-.
 .  \" Reset any lingering state from extensions in an-ext.tmac.
 .  nr mE 0
 .  nr mS 0
@@ -286,6 +277,12 @@
 .  nr an-was-tbl-failure-reported 0
 .
 .  an*reset-section-parameters
+.  fam \\*[an*body-family]
+.  ft R
+.  ps \\n[PS]u
+.  vs \\n[VS]u
+.  ad \\*[AD]
+.  ll \\n[LL]u
 .  an*reset-hyphenation-mode
 .  an*reset-tab-stops
 .  an*reset-paragraph-spacing

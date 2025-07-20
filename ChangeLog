@@ -1,5 +1,11 @@
 2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (TH): Rationalize; organize register and string
+	initialization before macro calls and requests that alter
+	formatting parameters.
+
+2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Slightly refactor.
 	(TH, SH, SS): Rearrange macro calls to place
 	`an*reset-section-parameters` before calls of macros that adjust
