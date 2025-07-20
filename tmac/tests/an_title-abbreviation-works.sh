@@ -70,6 +70,7 @@ echo "checking that known troublesome man page title abbreviates well" \
     >&2
 for width in 64 65 66 67 68
 do
+    echo "...at width ${width}n" >&2
     output=$(echo "$input" \
         | "$groff" -r LL=${width}n -m an -T ascii -P -cbou)
     echo "$output"
