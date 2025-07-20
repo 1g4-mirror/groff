@@ -683,7 +683,7 @@ contains unsupported escape sequence
 ..
 .
 .\" Break a paragraph.  Restore defaults, except for indentation.
-.de an-break-paragraph
+.de an*break-paragraph
 .  ft R
 .  ps \\n[PS]u
 .  vs \\n[VS]u
@@ -695,7 +695,7 @@ contains unsupported escape sequence
 .\" if none) as a section heading.
 .de1 SH
 .  fam \\*[an*body-family]
-.  an-break-paragraph
+.  an*break-paragraph
 .  an-reset-margin-and-inset-level
 .  fi
 .  in \\n[BP]u
@@ -724,7 +724,7 @@ contains unsupported escape sequence
 .\" if none) as a subsection heading.
 .de1 SS
 .  fam \\*[an*body-family]
-.  an-break-paragraph
+.  an*break-paragraph
 .  an-reset-margin-and-inset-level
 .  fi
 .  in \\n[BP]u
@@ -797,7 +797,7 @@ contains unsupported escape sequence
 .
 .\" Set an ordinary paragraph.
 .de1 P
-.  an-break-paragraph
+.  an*break-paragraph
 .  in \\n[an-margin]u
 .  nr an-prevailing-indent \\n[IN]
 ..
@@ -810,7 +810,7 @@ contains unsupported escape sequence
 .\" producing written or drawn output.
 .\" .TP [indent]
 .de1 TP
-.  an-break-paragraph
+.  an*break-paragraph
 .  if \\n[.$] .nr an-prevailing-indent (n;\\$1)
 .  if '\\n[.z]'an*paragraph-tag' \{\
 .    an-warn cannot nest .\\$0 or .TQ inside .\\$0; supply a tag
@@ -829,7 +829,7 @@ contains unsupported escape sequence
 .\" .IP [marker[ indentation-amount]]
 .de1 IP
 .  nr an*enforce-tag-separation 0
-.  an-break-paragraph
+.  an*break-paragraph
 .  ie !\\n[.$] \{\
 .    ne (1v + 1u)
 .    in (\\n[an-margin]u + \\n[an-prevailing-indent]u)
@@ -845,7 +845,7 @@ contains unsupported escape sequence
 .\" Set a paragraph with a hanging indentation.
 .\" .HP [indent]
 .de1 HP
-.  an-break-paragraph
+.  an*break-paragraph
 .  ne (1v + 1u)
 .  if \\n[.$] .nr an-prevailing-indent (n;\\$1)
 .  in (\\n[an-margin]u + \\n[an-prevailing-indent]u)
