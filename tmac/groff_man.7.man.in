@@ -788,22 +788,21 @@ call is\~1.
 .TP
 .BR .RE " ["\c
 .IR inset-level ]
-End a relative inset.
-.
-The inset amount corresponding to
-.I inset-level
-is restored.
-.
-Given no argument,
-.B RE
-reduces the inset level by\~1.
+End a relative inset,
+restoring the inset amount of
+.I inset-level,
+or\~1 if none is specified.
 .
 .
 .\" ====================================================================
 .SS "Paragraphing macros"
 .\" ====================================================================
 .
-An ordinary paragraph
+These macros break the output line.
+.
+An
+.I ordinary
+paragraph
 .RB ( P )
 _ifstyle()dnl
 like this one
@@ -826,27 +825,30 @@ with
 .BR TP ,
 or to present an itemized or ordered list.
 .
-All of these macros break the output line.
-.
-If another paragraph macro has occurred since the previous
+If paragraph macro has been called since
 .B SH
 or
 .BR SS ,
-they
-(except for
-.BR TQ )
-follow the break with a default amount of vertical space,
-which can be changed by the deprecated
+all except for
+.B TQ
+follow the break with vertical space
+(in an amount configured by the deprecated
 .B PD
-macro;
+macro);
 see subsection \[lq]Horizontal and vertical spacing\[rq] below.
 .
-They also reset the type size and font style to defaults
-.RB ( TQ
-again excepted);
-see subsection \[lq]Font style macros\[rq] below.
+Except for
+.BR TQ ,
+these macros
+reset the type size and font style to defaults.
+.\" slack wording for managing stranded lines in PS/PDF output
+.\" [end previous text line with semicolon, not period]
+.\"see subsections \[lq]Font style macros\[rq] and \[lq]Options\[rq]
+.\"below.
 .
 .
+.br
+.ne 4v
 .TP
 .B .P
 .TQ
