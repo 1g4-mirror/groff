@@ -140,6 +140,7 @@
 ..
 .
 .de an*reset-section-parameters
+.  fam \\*[an*body-family]
 .  nr an-inset-level 1
 .  nr an-margin \\n[BP]
 .  nr an-saved-margin!1 \\n[BP]
@@ -277,7 +278,6 @@
 .  nr an-was-tbl-failure-reported 0
 .
 .  an*reset-section-parameters
-.  fam \\*[an*body-family]
 .  ft R
 .  ps \\n[PS]u
 .  vs \\n[VS]u
@@ -696,7 +696,6 @@ contains unsupported escape sequence
 .\" if none) as a section heading.
 .de1 SH
 .  an*reset-section-parameters
-.  fam \\*[an*body-family]
 .  an*break-paragraph
 .  fi
 .  in \\n[BP]u
@@ -725,7 +724,6 @@ contains unsupported escape sequence
 .\" if none) as a subsection heading.
 .de1 SS
 .  an*reset-section-parameters
-.  fam \\*[an*body-family]
 .  an*break-paragraph
 .  fi
 .  in \\n[BP]u

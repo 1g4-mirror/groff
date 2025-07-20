@@ -1,3 +1,10 @@
+2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Refactor.
+	(an*reset-section-parameters): Perform restoration of configured
+	font family for body text here...
+	(TH, SH, SS): ...instead of here.
+
 2025-07-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tests/an_paragraph-reset-preserves-line-length.sh: Add
