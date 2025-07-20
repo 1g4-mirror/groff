@@ -139,6 +139,14 @@
 .  ta T .5i
 ..
 .
+.de an*reset-section-parameters
+.  nr an-inset-level 1
+.  nr an-margin \\n[BP]
+.  nr an-saved-margin!1 \\n[BP]
+.  nr an-prevailing-indent \\n[IN]
+.  nr an-saved-prevailing-indent!1 \\n[IN]
+..
+.
 .\" This logic would be part of `an*reset-paragraph-parameters`, but
 .\" unfortunately we have to support the legacy `PD` macro, which
 .\" permits unseemly fiddling at arbitrary places in the text.  (99
@@ -149,14 +157,6 @@
 .  \" Restore spacing to handle a "belated" `PD` call immediately after
 .  \" a paragraphing macro (`P`, `HP`, or `IP` with no marker argument).
 .  rs
-..
-.
-.de an-reset-margin-and-inset-level
-.  nr an-inset-level 1
-.  nr an-margin \\n[BP]
-.  nr an-saved-margin!1 \\n[BP]
-.  nr an-prevailing-indent \\n[IN]
-.  nr an-saved-prevailing-indent!1 \\n[IN]
 ..
 .
 .\" Break the page and update its number depending on the C (consecutive
@@ -288,7 +288,7 @@
 .  an*reset-hyphenation-mode
 .  an-reset-tab-stops
 .  an*reset-paragraph-spacing
-.  an-reset-margin-and-inset-level
+.  an*reset-section-parameters
 .
 .  nr an-need-no-space-mode 0
 .  nr an-need-break 0
@@ -700,7 +700,7 @@ contains unsupported escape sequence
 .de1 SH
 .  fam \\*[an*body-family]
 .  an*break-paragraph
-.  an-reset-margin-and-inset-level
+.  an*reset-section-parameters
 .  fi
 .  in \\n[BP]u
 .  ti 0
@@ -729,7 +729,7 @@ contains unsupported escape sequence
 .de1 SS
 .  fam \\*[an*body-family]
 .  an*break-paragraph
-.  an-reset-margin-and-inset-level
+.  an*reset-section-parameters
 .  fi
 .  in \\n[BP]u
 .  ti \\n[SN]u
