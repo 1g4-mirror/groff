@@ -126,6 +126,8 @@
 .de an*reset-hyphenation-mode
 .  nr an*want-hyphenation 1
 .  if r HY .if !\\n[HY] .nr an*want-hyphenation 0
+.  \" We don't want automatic hyphenation in synopses; see an-ext.tmac.
+.  if r mN .if \\n[mN]  .nr an*want-hyphenation 0
 .  ie \\n[an*want-hyphenation] \
 .    nr an*hyphenation-mode \\n[\\*[locale]*hyphenation-mode-trap]
 .  el .nr an*hyphenation-mode 0

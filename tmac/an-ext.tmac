@@ -1,6 +1,6 @@
 .\" groff extension macros for man(7) package
 .\"
-.\" Copyright (C) 2007-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 2007-2025 Free Software Foundation, Inc.
 .\"
 .\" Written by Eric S. Raymond <esr@thyrsus.com>
 .\"            Werner Lemberg <wl@gnu.org>
@@ -51,6 +51,7 @@
 .    do nr mH \\n[.hy] \" groff extension register
 ..
 .
+.nr mN 0 \" in a synopsis (SY/YS)?
 .nr mS 0 \" reuse indentation of previous synopsis?
 .nr mE 0 \" in an example (EX/EE)?
 .
@@ -59,6 +60,7 @@
 .\" .SY keyword [punctuation]
 .de SY
 .  ie \\n(.$ \{\
+.    nr mN 1
 .    if !\\n(mS \{\
 .      nr mI \\n(.i
 .      nr mT \\n(.k+\w'\fB\\$1\fP'
@@ -102,6 +104,7 @@
 .\" reuses the indentation computed for the one ended by this call.
 .\" .YS [argument]
 .de YS
+.  nr mN 0
 .  in \\n(mIu
 .  ad \\n(mA
 .  hy \\n(mH
