@@ -122,7 +122,24 @@
 .  el         .an*break-page-with-new-number
 ..
 .
-.\" `TH` and localization macro files call this.
+.\" Resetting the hyphenation mode is a complicated dance because:
+.\"   1.  Man pages sometimes disable automatic hyphenation--when they
+.\"       do, they nearly always forget to put it back the way it was;
+.\"   2.  in AT&T troff there was no register exposing the hyphenation
+.\"       mode (nor the enablement status of automatic hyphenation), so
+.\"       no idioms for performing such restoration have arisen;
+.\"   3.  groff man(7)'s `HY` register isn't supported everywhere;
+.\"   4.  we want user preferences, if expressed, to override the page
+.\"       author's; and
+.\"   5.  even if we didn't want (4), one page author's can override
+.\"       another's when formatting multiple man(7) documents in
+.\"       sequence--we thus keep track of the initial hyphenation mode.
+.\"
+.\" So we recover the "page's" preferred hyphenation mode, if expressed
+.\" via `HY`, at every paragraph (and (sub)sectioning macro call; and
+.\" recover the user's preferred hyphenation mode at each new document.
+.\"
+.\" Also see the initialization logic below.
 .de an*reset-hyphenation-mode
 .  nr an*want-hyphenation 1
 .  if r HY .if !\\n[HY] .nr an*want-hyphenation 0
@@ -155,7 +172,7 @@
 .  ps \\n[PS]u
 .  vs \\n[VS]u
 .  \" TODO: ad \\*[AD]
-.  \" TODO: hy \\n[HY]
+.  an*reset-hyphenation-mode
 ..
 .
 .\" This logic would be part of `an*reset-paragraph-parameters`, but
@@ -294,7 +311,6 @@
 .  an*reset-paragraph-parameters
 .  ll \\n[LL]u
 .  in 0 \" Well-formed documents call `SH` after `TH`.
-.  an*reset-hyphenation-mode
 .  an*reset-tab-stops
 .  an*reset-paragraph-spacing
 .
@@ -1548,7 +1564,7 @@ contains unsupported escape sequence
 .  \}
 .\}
 .
-.\" We handle `HY` in the `TH` macro definition, not here.
+.\" We handle `HY` in `an*reset-hyphenation-mode`, not here.
 .
 .\" standard indentation
 .if !r IN \{\

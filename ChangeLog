@@ -1,5 +1,13 @@
 2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*reset-paragraph-parameters): Call
+	`an*reset-hyphenation-mode`.
+	(TH): Stop calling `an*reset-hyphenation-mode`.
+	* tmac/groff_man.7.man.in (Paragraphing macros): Document
+	paragraphing macros' restoration of configured hyphenation mode.
+
+2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Add `mN` register to track whether we're setting a
 	synopsis, because that status overrides some formatting choices.
 
