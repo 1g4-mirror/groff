@@ -3,7 +3,9 @@
 	* tmac/an.tmac: Trivially refactor, continuing a name space
 	reform in progress since 2022.
 	(an-break-paragraph): Rename this...
-	(an*break-paragraph): ...to this.
+	(an*break-paragraph): ...to this...
+	(an-reset-paragraph-spacing): ...and this...
+	(an*reset-paragraph-spacing): ...to this.
 
 2025-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 

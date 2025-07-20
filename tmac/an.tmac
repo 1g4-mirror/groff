@@ -139,7 +139,11 @@
 .  ta T .5i
 ..
 .
-.de an-reset-paragraph-spacing
+.\" This logic would be part of `an*reset-paragraph-parameters`, but
+.\" unfortunately we have to support the legacy `PD` macro, which
+.\" permits unseemly fiddling at arbitrary places in the text.  (99
+.\" times out of 100, all people want is a "compact list" macro.)
+.de an*reset-paragraph-spacing
 .  ie \\n[.$] .nr PD (v;\\$1)
 .  el         .nr PD (.4v >? \n[.V])
 .  \" Restore spacing to handle a "belated" `PD` call immediately after
@@ -283,7 +287,7 @@
 .
 .  an*reset-hyphenation-mode
 .  an-reset-tab-stops
-.  an-reset-paragraph-spacing
+.  an*reset-paragraph-spacing
 .  an-reset-margin-and-inset-level
 .
 .  nr an-need-no-space-mode 0
@@ -406,7 +410,7 @@
 .\" .PD [distance]
 .de1 PD
 .  nop \\*[an-deprecation-warn]\\
-.  nop \\*[an-reset-paragraph-spacing]\\
+.  nop \\*[an*reset-paragraph-spacing]\\
 ..
 .
 .\" Write the page header; can be redefined by man.local.
