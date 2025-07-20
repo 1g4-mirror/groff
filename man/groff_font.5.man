@@ -821,7 +821,9 @@ it may be broken here for readability).
 .RI [\fB,\fP[ \:\%italic-correction\/\c
 .RI [\fB,\fP[ \:\%left-italic-correction\/\c
 .RI [\fB,\fP[ \:\%subscript-correction ]]]]]]]]]]
-.ad \*[AD]
+.\" XXX: cringe
+.ie d AD .ad \*[AD]
+.el      .ad b
 .
 .
 .P

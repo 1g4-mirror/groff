@@ -171,7 +171,8 @@
 .  ft R
 .  ps \\n[PS]u
 .  vs \\n[VS]u
-.  \" TODO: ad \\*[AD]
+.  ie d AD .ad \\*[AD]
+.  el      .ad b
 .  an*reset-hyphenation-mode
 ..
 .
@@ -307,7 +308,6 @@
 .  nr an-was-tbl-failure-reported 0
 .
 .  an*reset-section-parameters
-.  ad \\*[AD] \" TODO: Handle this in `an*reset-paragraph-parameters`.
 .  an*reset-paragraph-parameters
 .  ll \\n[LL]u
 .  in 0 \" Well-formed documents call `SH` after `TH`.
@@ -1677,10 +1677,6 @@ contains unsupported escape sequence
 .  rr X
 .  rm an-msg
 .\}
-.
-.\" adjustment mode
-.if !d AD \
-.  ds AD b\"
 .
 .\" (sub)section heading font
 .if !d HF \

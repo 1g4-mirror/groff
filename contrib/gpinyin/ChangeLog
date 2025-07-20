@@ -1,3 +1,8 @@
+2025-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* gpinyin.1.man: Stop assuming `AD` string is defined in some
+	hairy bits of typesetting.
+
 2023-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* gpinyin.pl: Stop endorsing shebang line space myth.  See

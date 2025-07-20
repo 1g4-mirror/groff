@@ -1,5 +1,21 @@
 2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Refactor adjustment management.
+	(TH): Stop handling adjustment here, instead relying on
+	`an*reset-paragraph-parameters`.
+	([initialization]): Stop assigning `AD` string a default value
+	if it's unspecified by the user (on the command line or via
+	"man.local").
+
+	* tmac/tests/\
+	an_adjustment-mode-preserved-after-paragraph-tag.sh: Revise test
+	expectations.
+
+	* man/groff_font.5.man: Stop assuming `AD` string is defined in
+	a hairy bit of typesetting.
+
+2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an*reset-paragraph-parameters): Call
 	`an*reset-hyphenation-mode`.
 	(TH): Stop calling `an*reset-hyphenation-mode`.
