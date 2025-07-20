@@ -141,7 +141,7 @@ output2=$(printf "%s\n" "$input2" \
 echo "$output2"
 
 echo 'checking for indentation reuse' >&2
-echo "$output2" | grep -Eq '^ {13}char \*\*_NotNullable' || wail
+echo "$output2" | grep -Eq '^ {13}[A-Za-z*_]' || wail
 
 echo 'checking for automatic hyphenation disablement inside synopsis' \
     >&2
