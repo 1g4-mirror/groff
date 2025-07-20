@@ -285,10 +285,10 @@
 .  rr TW
 .  nr an-was-tbl-failure-reported 0
 .
+.  an*reset-section-parameters
 .  an*reset-hyphenation-mode
 .  an*reset-tab-stops
 .  an*reset-paragraph-spacing
-.  an*reset-section-parameters
 .
 .  nr an-need-no-space-mode 0
 .  nr an-need-break 0
@@ -698,9 +698,9 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) as a section heading.
 .de1 SH
+.  an*reset-section-parameters
 .  fam \\*[an*body-family]
 .  an*break-paragraph
-.  an*reset-section-parameters
 .  fi
 .  in \\n[BP]u
 .  ti 0
@@ -727,9 +727,9 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) as a subsection heading.
 .de1 SS
+.  an*reset-section-parameters
 .  fam \\*[an*body-family]
 .  an*break-paragraph
-.  an*reset-section-parameters
 .  fi
 .  in \\n[BP]u
 .  ti \\n[SN]u
