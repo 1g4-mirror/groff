@@ -27,7 +27,8 @@ wail () {
     fail=YES
 }
 
-input='.TH foo 1 2023-01-08 "groff test suite"
+input='.
+.TH foo 1 2023-01-08 "groff test suite"
 .SH Name
 foo \- frobinicate a bar
 .SH Synopsis
@@ -35,7 +36,8 @@ foo \- frobinicate a bar
 .YS
 .SH Description
 Now is the time for all good citizens to disestablish
-antidisestablishmentarianism.'
+antidisestablishmentarianism.
+.'
 
 output=$(printf "%s\n" "$input" | "$groff" -man -Tascii -P-cbou)
 echo "$output"
