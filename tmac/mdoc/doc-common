@@ -1424,6 +1424,7 @@
 .      doc-report-usage .Sh section_name ...
 .      return
 .    \}
+.  \}
 .
 .    ds doc-macro-name Sh
 .    doc-parse-args \$@
@@ -1552,6 +1553,7 @@
 .      doc-report-usage .Ss subsection_name ...
 .      return
 .    \}
+.  \}
 .
 .    ds doc-macro-name Ss
 .    doc-parse-args \$@
