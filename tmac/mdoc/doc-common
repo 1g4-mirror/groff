@@ -308,8 +308,12 @@
 .  \}
 .  if \n[C] .rr P
 .
+.  \" When rendering multiple documents, we want to clear any page-local
+.  \" manipulation of hyphenation mode from the previous document.
+.  rr HY
+.
 .  doc-reset-titles
-.  doc-reset-hyphenation-mode
+.  doc-reset-hyphenation-mode \n[andoc*HY]
 .
 .  if !\n[.$] \
 .    doc-warn .Dd directive expects an argument
@@ -1129,9 +1133,29 @@
 .
 .\" NS doc-reset-hyphenation-mode
 .\" NS   Repair automatic hyphenation after man page meddling.
+.\"
+.\" Resetting the hyphenation mode is a complicated dance.
+.\"   1.  Man pages sometimes disable automatic hyphenation--when they
+.\"       do, they nearly always forget to put it back the way it was.
+.\"   2.  In AT&T troff there was no register exposing the hyphenation
+.\"       mode (nor the enablement status of automatic hyphenation), so
+.\"       no idioms for performing such restoration have arisen.
+.\"   3.  groff mdoc(7)'s `HY` register isn't supported everywhere.
+.\"   4.  We want user preferences, if expressed, to override the page
+.\"       author's.
+.\"   5.  Even if we didn't want (4), one page author's can override
+.\"       another's when formatting multiple mdoc(7) documents in
+.\"       sequence--we thus keep track of the initial hyphenation mode.
+.\"
+.\" So we recover the "page's" preferred hyphenation mode, if expressed
+.\" via `HY`, at every paragraph (and (sub)sectioning macro call; and
+.\" recover the user's preferred hyphenation mode at each new document
+.\" by accepting it as an argument (see the `Dd` macro definition).
+.\" Also see the initialization logic in "tmac/doc.tmac".
 .
 .eo
 .de doc-reset-hyphenation-mode
+.  if \n[.$] .if \B'\$1' .nr HY \$1
 .  nr doc-want-hyphenation 1
 .  if r HY .ie !\n[HY] .nr doc-want-hyphenation 0
 .  ie \n[doc-want-hyphenation] \
@@ -1430,7 +1454,6 @@
 .  doc-parse-args \$@
 .
 .  ad \*[AD]
-.  doc-reset-hyphenation-mode
 .
 .  ie "\*[doc-sec-head]"\*[doc-section-name]" \{\
 .    doc-set-up-titles
@@ -1446,7 +1469,6 @@
 .
 .    ie        "\*[doc-sec-head]"\*[doc-section-synopsis]" \{\
 .      na
-.      nh
 .      nr doc-in-synopsis-section 1
 .      nr doc-indent-synopsis 0
 .      nr doc-indent-synopsis-active 0
@@ -1472,6 +1494,9 @@
 .    in 0
 .    nr doc-have-author 0
 .  \}
+.
+.  ie \n[doc-in-synopsis-section] .nh
+.  el                             .doc-reset-hyphenation-mode
 .
 .  doc-setup-page-layout
 .  sp \n[doc-paragraph-space]u
@@ -1558,7 +1583,8 @@
 .  ds doc-macro-name Ss
 .  doc-parse-args \$@
 .
-.  doc-reset-hyphenation-mode
+.  ie \n[doc-in-synopsis-section] .nh
+.  el                             .doc-reset-hyphenation-mode
 .
 .  ds doc-subsection-heading \$*
 .

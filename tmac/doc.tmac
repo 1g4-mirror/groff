@@ -213,8 +213,6 @@
 .rr doc-HF-length
 .rm doc-heading-style
 .
-.\" `doc-reset-hyphenation-mode` handles the `HY` register.
-.
 .\" groff mdoc does _not_ use groff man's `IN` register.
 .
 .\" LL and LT registers are handled by the doc-setup-page-layout macro.
@@ -7213,6 +7211,13 @@ should this have been '.Em ...'?
 .\" Load site-local configuration.
 .ie d msoquiet .msoquiet mdoc.local
 .el            .mso      mdoc.local
+.
+.\" Save `HY` value configured by {man,mdoc}.local or command line.
+.if !r andoc*is-initialized \{\
+.  ie r HY .nr andoc*HY \n[HY]
+.  el      .nr andoc*HY 1
+.  nr andoc*is-initialized 1
+.\}
 .
 .cp \n[*groff_doc_tmac_C]
 .do rr *groff_doc_tmac_C
