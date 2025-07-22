@@ -1426,60 +1426,60 @@
 .    \}
 .  \}
 .
-.    ds doc-macro-name Sh
-.    doc-parse-args \$@
+.  ds doc-macro-name Sh
+.  doc-parse-args \$@
 .
-.    ad \*[AD]
-.    doc-reset-hyphenation-mode
+.  ad \*[AD]
+.  doc-reset-hyphenation-mode
 .
-.    ie "\*[doc-sec-head]"\*[doc-section-name]" \{\
-.      doc-set-up-titles
-.      in 0
+.  ie "\*[doc-sec-head]"\*[doc-section-name]" \{\
+.    doc-set-up-titles
+.    in 0
+.  \}
+.  el \{\
+.    nr doc-in-name-section 0
+.    nr doc-in-synopsis-section 0
+.    nr doc-in-library-section 0
+.    nr doc-in-see-also-section 0
+.    nr doc-in-files-section 0
+.    nr doc-in-authors-section 0
+.
+.    ie        "\*[doc-sec-head]"\*[doc-section-synopsis]" \{\
+.      na
+.      nh
+.      nr doc-in-synopsis-section 1
+.      nr doc-indent-synopsis 0
+.      nr doc-indent-synopsis-active 0
 .    \}
-.    el \{\
-.      nr doc-in-name-section 0
-.      nr doc-in-synopsis-section 0
-.      nr doc-in-library-section 0
-.      nr doc-in-see-also-section 0
-.      nr doc-in-files-section 0
-.      nr doc-in-authors-section 0
-.
-.      ie        "\*[doc-sec-head]"\*[doc-section-synopsis]" \{\
-.        na
-.        nh
-.        nr doc-in-synopsis-section 1
-.        nr doc-indent-synopsis 0
-.        nr doc-indent-synopsis-active 0
-.      \}
-.      el \{ .ie "\*[doc-sec-head]"\*[doc-section-library]" \{\
-.        nr doc-in-library-section 1
-.      \}
-.      el \{ .ie "\*[doc-sec-head]"\*[doc-section-description]" \{\
-.        nr doc-is-func 0
-.        nr doc-func-count 0
-.        nr doc-func-args-processed 0
-.        nr doc-num-func-args 0
-.      \}
-.      el \{ .ie "\*[doc-sec-head]"\*[doc-section-see-also]" \{\
-.        nr doc-in-see-also-section 1
-.      \}
-.      el \{ .ie "\*[doc-sec-head]"\*[doc-section-files]" \
-.        nr doc-in-files-section 1
-.      el .if    "\*[doc-sec-head]"\*[doc-section-authors]" \
-.        nr doc-in-authors-section 1
-.      \}\}\}\}
-.
-.      in 0
-.      nr doc-have-author 0
+.    el \{ .ie "\*[doc-sec-head]"\*[doc-section-library]" \{\
+.      nr doc-in-library-section 1
 .    \}
+.    el \{ .ie "\*[doc-sec-head]"\*[doc-section-description]" \{\
+.      nr doc-is-func 0
+.      nr doc-func-count 0
+.      nr doc-func-args-processed 0
+.      nr doc-num-func-args 0
+.    \}
+.    el \{ .ie "\*[doc-sec-head]"\*[doc-section-see-also]" \{\
+.      nr doc-in-see-also-section 1
+.    \}
+.    el \{ .ie "\*[doc-sec-head]"\*[doc-section-files]" \
+.      nr doc-in-files-section 1
+.    el .if    "\*[doc-sec-head]"\*[doc-section-authors]" \
+.      nr doc-in-authors-section 1
+.    \}\}\}\}
 .
-.    doc-setup-page-layout
-.    sp \n[doc-paragraph-space]u
-.    ns
-.    ta T .5i
-.    if !\n[cR] \
-.      ne 3
-.    fi
+.    in 0
+.    nr doc-have-author 0
+.  \}
+.
+.  doc-setup-page-layout
+.  sp \n[doc-paragraph-space]u
+.  ns
+.  ta T .5i
+.  if !\n[cR] \
+.    ne 3
+.  fi
 .
 .  if '\*[.T]'pdf' \
 .    pdfbookmark 2 "\*[doc-sec-head]"
@@ -1505,10 +1505,10 @@
 .    ns
 .
 .    doc-check-depth
-.  if \n[doc-remap-I-style-in-headings] \
-.    ftr \*[doc-heading-family]I \*[doc-heading-family]I
-.  \}
 .
+.    if \n[doc-remap-I-style-in-headings] \
+.      ftr \*[doc-heading-family]I \*[doc-heading-family]I
+.  \}
 .
 .  \" Don't let doc-print-recursive force caps on anything else.
 .  nr doc-do-capitalize 0
@@ -1555,41 +1555,43 @@
 .    \}
 .  \}
 .
-.    ds doc-macro-name Ss
-.    doc-parse-args \$@
+.  ds doc-macro-name Ss
+.  doc-parse-args \$@
 .
-.    ds doc-subsection-heading \$*
+.  doc-reset-hyphenation-mode
 .
-.    sp \n[doc-paragraph-space]u
-.    if !\n[cR] \
-.      ne 3
-.    in \n[SN]u
+.  ds doc-subsection-heading \$*
 .
-.    if '\*[.T]'pdf' \
-.      pdfbookmark 3 "\*[doc-subsection-heading]"
+.  sp \n[doc-paragraph-space]u
+.  if !\n[cR] \
+.    ne 3
+.  in \n[SN]u
 .
-.    nr doc-reg-Ss \n[.ss]
-.    nr doc-reg-Ss1 \n[.sss]
-.    ss (\n[.ss] * 5 / 4) (\n[.sss] * 5 / 4)
+.  if '\*[.T]'pdf' \
+.    pdfbookmark 3 "\*[doc-subsection-heading]"
+.
+.  nr doc-reg-Ss \n[.ss]
+.  nr doc-reg-Ss1 \n[.sss]
+.  ss (\n[.ss] * 5 / 4) (\n[.sss] * 5 / 4)
 .
 .  if \n[doc-remap-I-style-in-headings] \
 .    ftr \*[doc-heading-family]I \*[doc-heading-family]BI
 .
-.    nr doc-arg-ptr +1
-.    nr doc-curr-font \n[.f]
-.    nop \f[\*[doc-Sh-font]]\c
-.    doc-print-recursive
+.  nr doc-arg-ptr +1
+.  nr doc-curr-font \n[.f]
+.  nop \f[\*[doc-Sh-font]]\c
+.  doc-print-recursive
 .
-.    ss \n[doc-reg-Ss] \n[doc-reg-Ss1]
+.  ss \n[doc-reg-Ss] \n[doc-reg-Ss1]
 .
-.    ta T .5i
-.    in
-.    if !\n[cR] \
-.      ne 2
-.    br
-.    ns
+.  ta T .5i
+.  in
+.  if !\n[cR] \
+.    ne 2
+.  br
+.  ns
 .
-.    doc-check-depth
+.  doc-check-depth
 .  if \n[doc-remap-I-style-in-headings] \
 .    ftr \*[doc-heading-family]I \*[doc-heading-family]I
 .  \}
