@@ -6524,9 +6524,9 @@ Fractional type size support causes an incompatibility.
 .
 In AT&T
 .IR troff , \" AT&T
-the
 .B ps
-request ignores scaling units and thus
+ignores scaling units
+and thus
 .RB \[lq] .ps\~10u \[rq]
 sets the type size to 10\~points,
 whereas in GNU
@@ -6534,7 +6534,13 @@ whereas in GNU
 it sets the type size to
 .RI 10\~ scaled
 points,
-which may be a much smaller measurement.
+possibly a much smaller measurement.
+.
+AT&T's behavior also means that
+.RB \[lq] .ps\~10p \[rq]
+and
+.RB \[lq] .ps\~10z \[rq]
+are portable.
 .
 See subsection \[lq]Fractional type sizes and new scaling units\[rq]
 above.
