@@ -6345,13 +6345,13 @@ one vee.
 @cindex units of measurement
 A @code{roff} document sometimes
 requires the input of numeric parameters to specify measurements.
-These are expressed as integers
+Express them as integers
 or decimal fractions
-with an optional
+with an optional scaling unit suffixed.
+A
 @dfn{scaling unit}
-suffixed.
-A scaling unit is a letter
-that immediately follows a number.
+is a letter
+that immediately follows the magnitude of a measurement.
 Digits after the decimal point are optional.
 Examples of measurements include
 @samp{10.5p},

@@ -846,12 +846,12 @@ now withdrawn.)
 Express numeric parameters that specify measurements
 as integers
 or decimal fractions
-with an optional
-.I "scaling unit"
-suffixed.
+with an optional scaling unit suffixed.
 .
-A scaling unit is a letter
-that immediately follows the last digit of a number.
+A
+.I "scaling unit"
+is a letter
+that immediately follows the magnitude of a measurement.
 .
 Digits after the decimal point are optional.
 .
