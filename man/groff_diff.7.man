@@ -1124,8 +1124,8 @@ no operation if there is none.
 .BI \[rs]s \[+-] \[aq] n \[aq]
 Set the type size to,
 or increment or decrement it by,
-.I n
-scaled points.
+.IR n \~typographical
+points.
 .
 .
 .br

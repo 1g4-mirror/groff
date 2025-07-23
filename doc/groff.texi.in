@@ -12977,22 +12977,33 @@ It supports a variety of syntax forms.
 
 @table @code
 @item \s@var{n}
-Set the type size to @var{n}@tie{}scaled points.  @var{n}@tie{}must be a
-single digit.@footnote{In compatibility mode only, a non-zero @var{n}
-must be in the range 4--39.  @xref{Compatibility Mode}.}
-If @var{n}@tie{}is
+Set the type size to
+@var{n}@tie{}integral
+points.
+@var{n}@tie{}must
+be a single digit.@footnote{In compatibility mode only, a non-zero
+@var{n} must be in the range 4--39.
+@xref{Compatibility Mode}.}
+If
+@var{n}@tie{}is
 @samp{0},
 restore the previous size.
 
 @item \s+@var{n}
 @itemx \s-@var{n}
-Increase or decrease the type size by @var{n}@tie{}scaled points.
+Increase or decrease the type size by
+@var{n}@tie{}integral
+points.
 @var{n}@tie{}must be exactly one digit.
 
 @item \s(@var{nn}
-Set the type size to @var{nn}@tie{}scaled points.  @var{nn} must be
-exactly two digits.
-If @var{n}@tie{}is
+Set the type size to
+@var{nn}
+integral points.
+@var{nn}
+must be exactly two digits.
+If
+@var{n}@tie{}is
 @samp{00},
 restore the previous size.
 
@@ -13000,11 +13011,17 @@ restore the previous size.
 @itemx \s-(@var{nn}
 @itemx \s(+@var{nn}
 @itemx \s(-@var{nn}
-Alter the type size in scaled points by the two-digit value @var{nn}.
+Alter the type size in scaled points by the
+@var{nn}
+integral points.
+@var{nn}
+must be exactly two digits.
 @end table
 
-@xref{Using Fractional Type Sizes}, for further syntactical forms of the
-@code{\s} escape sequence that additionally accept decimal fractions.
+@xref{Using Fractional Type Sizes},
+for further syntactical forms of the
+@code{\s}
+escape sequence that additionally accept decimal fractions.
 
 @Example
 snap, snap,
@@ -13319,8 +13336,12 @@ see @ref{Delimiters}.
 @table @code
 @item \s[@var{n}]
 @itemx \s'@var{n}'
-Set the type size to @var{n}@tie{}scaled points; @var{n}@tie{}is a
-numeric expression with a default scaling unit of @samp{z}.
+Set the type size to
+@var{n}@tie{}typographical
+points;
+@var{n}@tie{}is
+a numeric expression with a default scaling unit of
+@samp{z}.
 
 @item \s[+@var{n}]
 @itemx \s[-@var{n}]
@@ -13330,7 +13351,9 @@ numeric expression with a default scaling unit of @samp{z}.
 @itemx \s'-@var{n}'
 @itemx \s+'@var{n}'
 @itemx \s-'@var{n}'
-Increase or decrease the type size by @var{n}@tie{}scaled points;
+Increase or decrease the type size by
+@var{n}@tie{}typographical
+points;
 @var{n}@tie{}is
 a numeric expression with a default scaling unit of
 @samp{z}.
