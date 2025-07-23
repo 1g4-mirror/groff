@@ -4408,6 +4408,14 @@ from the argument,
 permitting initial embedded spaces in it,
 and reads it to the end of the input line in copy mode.
 .
+If
+.I file
+does not exist or is not readable,
+a warning in category
+.RB \[lq] file \[rq]
+is emitted
+and the request has no other effect.
+.
 .
 .br
 .ne 6v
