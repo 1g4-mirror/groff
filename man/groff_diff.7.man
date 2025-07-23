@@ -1612,6 +1612,276 @@ and
 .BR pso ).
 .
 .
+.br
+.ne 6v
+.\" ====================================================================
+.SS "Altered requests"
+.\" ====================================================================
+.
+.TP
+.BI .bd\~ "special-font font"
+Stop emboldening
+.I special-font
+when
+.I font
+is selected.
+.
+.\" XXX:
+.\" Possibly allow prefixing an integer with `\&` to force
+.\" interpretation of this form.
+.I special-font
+must be a font name,
+not a mounting position.
+.
+.TP
+.BR .cf\~ [ \[dq] ]\c
+.I file
+Break and copy the contents of
+.I file
+as \[lq]throughput\[rq] to
+GNU
+.IR troff 's \" GNU
+output.
+.
+If a diversion is in use,
+GNU
+.I troff \" GNU
+performs the copy only when the diversion is emitted.
+.
+In AT&T
+.IR troff , \" AT&T
+the contents of
+.I file
+are immediately copied to the output regardless of whether a diversion
+is being written to;
+this behavior is so anomalous that it must be considered a bug.
+.
+.
+.IP
+GNU
+.I troff \" GNU
+removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq]
+from the argument,
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
+.
+If
+.I file
+does not exist or is not readable,
+a warning in category
+.RB \[lq] file \[rq]
+is emitted
+and the request has no other effect.
+.
+.
+.br
+.ne 6v
+.TP
+.BI .de\~ name\~\c
+.RI [ end-name ]
+.TQ
+.BI .am\~ name\~\c
+.RI [ end-name ]
+.TQ
+.BI .ds\~ name\~\c
+.RB [[ \[dq] ]\c
+.IR contents ]
+.TQ
+.BI .as\~ name\~\c
+.RB [[ \[dq] ]\c
+.IR contents ]
+In compatibility mode,
+these requests behave similarly to
+.BR de1 ,
+.BR am1 ,
+.BR ds1 ,
+and
+.BR as1 ,
+respectively:
+GNU
+.I troff \" GNU
+inserts a
+.I "compatibility save"
+token at its beginning of
+.I contents
+and a
+.I "compatibility restore"
+token at its end,
+causing compatibility mode to switch on during interpolation
+of the applicable macro or string definition,
+or appendment thereto.
+.
+.
+.TP
+.BI .hy\~ n
+New values 16 and\~32 are available;
+the former enables hyphenation before the last character in a word,
+and the latter enables hyphenation after the first character in a word.
+.
+If invoked without an argument,
+the mode configured by the
+.B hydefault
+request is selected.
+.
+.
+.TP
+.BI .lf\~ input-line-number\~\c
+.RB [[ \[dq] ]\c
+.IR file-identifier ]
+In GNU
+.I troff \" GNU
+the first argument becomes the input line number of the
+.I next
+line the formatter reads.
+It also
+removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq]
+from
+.I file-identifier,
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
+.
+.
+.TP
+.BR .nx\~ [[ \[dq] ]\c
+.IR file ]
+GNU
+.I troff \" GNU
+removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq]
+from
+.IR file ,
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
+.
+.
+.TP
+.BR .pi\~ [ \[dq] ]\c
+.I command
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the argument,
+permitting initial embedded spaces in it.
+.
+.
+.TP
+.BI .pm\~ name\~\c
+\&.\|.\|.
+GNU
+.I troff \" GNU
+reports,
+to the standard error stream,
+the JSON-encoded name and contents of each macro,
+string,
+or diversion
+.IR name .
+.
+.
+.TP
+.BR .so\~ [ \[dq] ]\c
+.I file
+GNU
+.I troff \" GNU
+removes a leading neutral double quote
+.RB \[oq] \[dq] \[cq]
+from
+.IR file ,
+permitting initial embedded spaces in it,
+and reads it to the end of the input line in copy mode.
+.
+GNU
+.I troff \" GNU
+searches for
+.I file
+in any directories specified by
+.B \-I
+command-line options,
+followed by the current working directory.
+.
+If
+.I file
+does not exist or is not readable,
+GNU
+.I troff \" GNU
+emits a warning in category
+.RB \[lq] file \[rq].
+.
+.
+.TP
+.BI .ss\~ word-space-size\~\c
+.RI [ additional-sentence-space-size ]
+A second argument sets the amount of additional space separating
+sentences on the same output line.
+.
+If omitted,
+this amount is set to
+.IR word-space-size .
+.
+Both arguments are in twelfths of current font's space width
+(typically one-fourth to one-third em for Western scripts;
+see
+.MR groff_font @MAN5EXT@ ).
+.
+The default for both parameters is\~12.
+.
+Negative values are erroneous.
+.
+.
+.TP
+.BR .sy\~ [ \[dq] ]\c
+.I command
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from the argument,
+permitting initial embedded spaces in it.
+.
+.
+.TP
+.BR .ta\~ [[\c
+.IR "n1 n2\~" .\|.\|.\~ nn \~]\c
+.BR T \~\c \" space in roman because we must use 2-font macro with \c
+.IR "r1 r2\~" .\|.\|.\~ rn ]
+GNU
+.I troff \" GNU
+supports an extended syntax to specify repeating tab stops after
+the
+.RB \[lq] T \[rq]
+mark.
+.
+These values are always taken as relative distances from the previous
+tab stop.
+.
+This is the idiomatic way to specify tab stops at equal intervals in
+.IR groff .
+.
+GNU
+.IR troff 's \" GNU
+startup value is
+.RB \[lq] "T 0.5i" \[rq].
+.
+.
+.IP
+The syntax summary above instructs
+.I groff
+to set tabs at positions
+.IR n1 ,
+.IR n2 ,
+\&.\|.\|.\|,
+.IR nn ,
+then at
+.IR nn \|+\| r1 ,
+.IR nn \|+\| r2 ,
+\&.\|.\|.\|,
+.IR nn \|+\| rn ,
+then at
+.IR nn \|+\| rn \|+\| r1 ,
+.IR nn \|+\| rn \|+\| r2 ,
+\&.\|.\|.\|,
+.IR nn \|+\| rn \|+\| rn ,
+and so on.
+.
+.
 .\" ====================================================================
 .SS "New requests"
 .\" ====================================================================
@@ -4352,276 +4622,6 @@ request.
 The contents of
 .I name
 are read in copy mode.
-.
-.
-.br
-.ne 6v
-.\" ====================================================================
-.SS "Altered requests"
-.\" ====================================================================
-.
-.TP
-.BI .bd\~ "special-font font"
-Stop emboldening
-.I special-font
-when
-.I font
-is selected.
-.
-.\" XXX:
-.\" Possibly allow prefixing an integer with `\&` to force
-.\" interpretation of this form.
-.I special-font
-must be a font name,
-not a mounting position.
-.
-.TP
-.BR .cf\~ [ \[dq] ]\c
-.I file
-Break and copy the contents of
-.I file
-as \[lq]throughput\[rq] to
-GNU
-.IR troff 's \" GNU
-output.
-.
-If a diversion is in use,
-GNU
-.I troff \" GNU
-performs the copy only when the diversion is emitted.
-.
-In AT&T
-.IR troff , \" AT&T
-the contents of
-.I file
-are immediately copied to the output regardless of whether a diversion
-is being written to;
-this behavior is so anomalous that it must be considered a bug.
-.
-.
-.IP
-GNU
-.I troff \" GNU
-removes a leading neutral double quote
-.RB \[oq] \[dq] \[cq]
-from the argument,
-permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
-.
-If
-.I file
-does not exist or is not readable,
-a warning in category
-.RB \[lq] file \[rq]
-is emitted
-and the request has no other effect.
-.
-.
-.br
-.ne 6v
-.TP
-.BI .de\~ name\~\c
-.RI [ end-name ]
-.TQ
-.BI .am\~ name\~\c
-.RI [ end-name ]
-.TQ
-.BI .ds\~ name\~\c
-.RB [[ \[dq] ]\c
-.IR contents ]
-.TQ
-.BI .as\~ name\~\c
-.RB [[ \[dq] ]\c
-.IR contents ]
-In compatibility mode,
-these requests behave similarly to
-.BR de1 ,
-.BR am1 ,
-.BR ds1 ,
-and
-.BR as1 ,
-respectively:
-GNU
-.I troff \" GNU
-inserts a
-.I "compatibility save"
-token at its beginning of
-.I contents
-and a
-.I "compatibility restore"
-token at its end,
-causing compatibility mode to switch on during interpolation
-of the applicable macro or string definition,
-or appendment thereto.
-.
-.
-.TP
-.BI .hy\~ n
-New values 16 and\~32 are available;
-the former enables hyphenation before the last character in a word,
-and the latter enables hyphenation after the first character in a word.
-.
-If invoked without an argument,
-the mode configured by the
-.B hydefault
-request is selected.
-.
-.
-.TP
-.BI .lf\~ input-line-number\~\c
-.RB [[ \[dq] ]\c
-.IR file-identifier ]
-In GNU
-.I troff \" GNU
-the first argument becomes the input line number of the
-.I next
-line the formatter reads.
-It also
-removes a leading neutral double quote
-.RB \[oq] \[dq] \[cq]
-from
-.I file-identifier,
-permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
-.
-.
-.TP
-.BR .nx\~ [[ \[dq] ]\c
-.IR file ]
-GNU
-.I troff \" GNU
-removes a leading neutral double quote
-.RB \[oq] \[dq] \[cq]
-from
-.IR file ,
-permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
-.
-.
-.TP
-.BR .pi\~ [ \[dq] ]\c
-.I command
-GNU
-.I troff \" GNU
-strips a leading neutral double quote from the argument,
-permitting initial embedded spaces in it.
-.
-.
-.TP
-.BI .pm\~ name\~\c
-\&.\|.\|.
-GNU
-.I troff \" GNU
-reports,
-to the standard error stream,
-the JSON-encoded name and contents of each macro,
-string,
-or diversion
-.IR name .
-.
-.
-.TP
-.BR .so\~ [ \[dq] ]\c
-.I file
-GNU
-.I troff \" GNU
-removes a leading neutral double quote
-.RB \[oq] \[dq] \[cq]
-from
-.IR file ,
-permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
-.
-GNU
-.I troff \" GNU
-searches for
-.I file
-in any directories specified by
-.B \-I
-command-line options,
-followed by the current working directory.
-.
-If
-.I file
-does not exist or is not readable,
-GNU
-.I troff \" GNU
-emits a warning in category
-.RB \[lq] file \[rq].
-.
-.
-.TP
-.BI .ss\~ word-space-size\~\c
-.RI [ additional-sentence-space-size ]
-A second argument sets the amount of additional space separating
-sentences on the same output line.
-.
-If omitted,
-this amount is set to
-.IR word-space-size .
-.
-Both arguments are in twelfths of current font's space width
-(typically one-fourth to one-third em for Western scripts;
-see
-.MR groff_font @MAN5EXT@ ).
-.
-The default for both parameters is\~12.
-.
-Negative values are erroneous.
-.
-.
-.TP
-.BR .sy\~ [ \[dq] ]\c
-.I command
-GNU
-.I troff \" GNU
-strips a leading neutral double quote from the argument,
-permitting initial embedded spaces in it.
-.
-.
-.TP
-.BR .ta\~ [[\c
-.IR "n1 n2\~" .\|.\|.\~ nn \~]\c
-.BR T \~\c \" space in roman because we must use 2-font macro with \c
-.IR "r1 r2\~" .\|.\|.\~ rn ]
-GNU
-.I troff \" GNU
-supports an extended syntax to specify repeating tab stops after
-the
-.RB \[lq] T \[rq]
-mark.
-.
-These values are always taken as relative distances from the previous
-tab stop.
-.
-This is the idiomatic way to specify tab stops at equal intervals in
-.IR groff .
-.
-GNU
-.IR troff 's \" GNU
-startup value is
-.RB \[lq] "T 0.5i" \[rq].
-.
-.
-.IP
-The syntax summary above instructs
-.I groff
-to set tabs at positions
-.IR n1 ,
-.IR n2 ,
-\&.\|.\|.\|,
-.IR nn ,
-then at
-.IR nn \|+\| r1 ,
-.IR nn \|+\| r2 ,
-\&.\|.\|.\|,
-.IR nn \|+\| rn ,
-then at
-.IR nn \|+\| rn \|+\| r1 ,
-.IR nn \|+\| rn \|+\| r2 ,
-\&.\|.\|.\|,
-.IR nn \|+\| rn \|+\| rn ,
-and so on.
 .
 .
 .br
