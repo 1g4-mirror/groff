@@ -425,11 +425,12 @@ In GNU
 .IR troff , \" GNU
 the register
 .B \[rs]n[.s]
-can interpolate a non-integral type size.
-.
-The register
+interpolates the type size in typographical points
+.RB ( z ),
+whereas the register
 .B \[rs]n[.ps]
-interpolates the type size in scaled points.
+interpolates it in scaled points
+.RB ( s ).
 .
 .RB \[lq] \[rs]n[.ps] \[rq]
 is equal to
