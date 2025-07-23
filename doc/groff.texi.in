@@ -18601,9 +18601,7 @@ and exceptions,
 registers,
 open streams,
 and page location traps.
-GNU
-@command{troff} @c GNU
-can also disclose
+Requests can also disclose
 to the standard error stream
 the internal properties and representations of
 characters,

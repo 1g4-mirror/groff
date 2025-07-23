@@ -9114,7 +9114,7 @@ and
 page location traps
 .RB ( ptr ).
 .
-Other requests disclose
+Requests can also disclose
 to the standard error stream
 the internal properties and representations of
 characters
