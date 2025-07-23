@@ -13051,7 +13051,7 @@ type size (such as @samp{12000}), or a range of sizes (such as
 @cindex vertical line spacing, changing (@code{vs})
 @cindex vertical line spacing register (@code{.v})
 Set the vertical spacing to, or alter it by, @var{space}.  The default
-scaling unit is @samp{p}.  If @code{vs} is called without an argument,
+scaling unit is @samp{p}.  If @code{vs} is invoked without an argument,
 the vertical spacing is reset to the previous value before the last call
 to @code{vs}.
 @cindex @code{.V} register, and @code{vs}
@@ -13117,7 +13117,7 @@ the @code{ls} request.
 @cindex post-vertical line spacing, changing (@code{pvs})
 @cindex post-vertical line spacing register (@code{.pvs})
 Set the post-vertical spacing to, or alter it by, @var{space}.  The
-default scaling unit is @samp{p}.  If @code{pvs} is called without an
+default scaling unit is @samp{p}.  If @code{pvs} is invoked without an
 argument, the post-vertical spacing is reset to the previous value
 before the last call to @code{pvs}.  GNU @code{troff} emits a warning in
 category @samp{range} if @var{space} is negative; the post-vertical
@@ -13561,7 +13561,7 @@ interpolated, and a warning in category @samp{mac} is emitted.
 @cindex arguments, to strings
 Define a string called @var{name} with contents @var{contents}.  If
 @var{name} already exists as an alias, the target of the alias is
-redefined; see @code{als} and @code{rm} below.  If @code{ds} is called
+redefined; see @code{als} and @code{rm} below.  If @code{ds} is invoked
 with only one argument, @var{name} is defined as an empty string.
 Otherwise, GNU @code{troff} stores @var{contents} in copy
 mode.
@@ -13733,7 +13733,7 @@ token at the end.
 @cindex string, appending (@code{as})
 The @code{as} request is similar to @code{ds} but appends @var{contents}
 to the string stored as @var{name} instead of redefining it.  If
-@var{name} doesn't exist yet, it is created.  If @code{as} is called
+@var{name} doesn't exist yet, it is created.  If @code{as} is invoked
 with only one argument, no operation is performed (beyond dereferencing
 the string).
 
@@ -16749,8 +16749,8 @@ including any pending output line in the diversion; see
 
 Invoking @code{di} or @code{da} without an argument stops diverting
 output to the diversion named by the most recent corresponding request.
-If @code{di} or @code{da} is called without an argument when there is no
-current diversion, a warning in category @samp{di} is produced.
+If @code{di} or @code{da} is invoked without an argument when there is
+no current diversion, a warning in category @samp{di} is produced.
 @xref{Warnings}, regarding the enablement and suppression of warnings.
 
 @Example

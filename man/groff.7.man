@@ -6441,7 +6441,7 @@ the target of the alias is redefined.
 .
 If
 .request ds
-is called with only one argument,
+is invoked with only one argument,
 the named string becomes empty.
 .
 The formatter removes a leading neutral double quote
@@ -6541,7 +6541,7 @@ but appends to a string instead of redefining it.
 .
 If
 .RB \[lq] as \[rq]
-is called with only one argument,
+is invoked with only one argument,
 no operation is performed
 (beyond dereferencing the string).
 .
