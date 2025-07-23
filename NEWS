@@ -298,7 +298,7 @@ pic
 *  A new command, `polygon`, supports drawing polygons using arbitrary
    vertices.  The command furthermore accepts the `fill[ed]` modifier.
    You can address a polygon's vertices and the midpoints of its edges
-   with the new `.v[er[tex]]` and `.p[oint]` syntax suffixed to an
+   with the new `.v[er[tex]]` and `.mid[point]` syntax suffixed to an
    object identifer, analogously to the existing compass point and
    `.c[enter]` feature.  Thanks to Duncan Losin.
 
@@ -591,9 +591,9 @@ Macro packages
    itself uses ems), and groff mm's own historical behavior, which used
    basic units.
 
-*  The m (mm) macro package's `HU` macro now supports a second argument
-   as a GNU extension.  It corresponds to the optional third argument of
-   the `H` macro.
+*  The m (mm) macro package's `HU` macro now supports an optional second
+   argument as a GNU extension.  It corresponds to the optional third
+   argument of the `H` macro.
 
 *  The m (mm) macro package's `IND` macro (a GNU extension), now calls
    `SK` only if no `TXIND` macro is defined, instead of performing this
@@ -747,18 +747,18 @@ Miscellaneous
 *  Font description files now support a variant of the "charset"
    directive: "charset-range" works like the existing "charset"
    directive except that the glyph descriptions use a `name` of the form
-   "uFFFF..uFFFF" (where "FFFF" is a hexadecimal digit sequence), and
-   apply the metrics identically to all glyphs in the designated range.
-   Thanks to TANAKA Takuji.
+   "uEEEE..uFFFF" (where "EEEE" and "FFFF" are hexadecimal digit
+   sequences), and apply the metrics identically to all glyphs in the
+   designated range.  Thanks to TANAKA Takuji.
 
 *  groff now ships font description files usable with the "ps", "html",
    "xhtml", and "utf8" output devices to support East Asian fonts.
    (Caveat: with few exceptions, groff does not ship font files
    themselves.)  These are intended as abstractions of faces to permit
-   consistent naming while permitting customization, just as with the 12
-   text typefaces supported across output devices for Latin scripts in
-   groff (three families of four styles each).  These CJK font
-   descriptions are not organized into groff font families, but are
+   consistent naming while allowing custom font selections, just as with
+   the 12 text typefaces supported across output devices for Latin
+   scripts in groff (three families of four styles each).  These CJK
+   font descriptions are not organized into groff font families, but are
    similarly arranged.
 
       CSH: Simplified Chinese, Hei style
@@ -803,7 +803,7 @@ Miscellaneous
 
 *  Building groff no longer requires the PSUtils package.
 
-*  Building groff no longer requires the makeinfo package.  Since groff
+*  Building groff no longer requires the makeinfo command.  Since groff
    1.23.0, we ship groff's Texinfo manual in several formats as part of
    groff's distribution archive.  We ask that distributors provide their
    users with all formats appropriate to the platform (GNU Info, HTML,
