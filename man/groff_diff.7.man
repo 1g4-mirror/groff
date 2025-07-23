@@ -567,7 +567,7 @@ and
 .
 .TP
 .BI ( c ; e )
-Evaluate expression
+Interpolate expression
 .I e
 using
 .I c
@@ -1497,7 +1497,10 @@ This feature has two applications.
 .
 .
 .IP
-Use it with the output comparison operator to compare its operands
+Surround operands to the output comparison operator
+with
+.B \[rs]?\&
+to compare them
 by character rather than as formatted output.
 .
 Since
@@ -1728,14 +1731,14 @@ and a
 .I "compatibility restore"
 token at its end.
 .
-As a consequence,
-the requests
+The requests
 .RB \[lq] am \[rq],
 .BR am1 ,
 .BR de ,
 and
 .B de1
-can be intermixed freely since the compatibility save/\:restore tokens
+can thus be intermixed freely
+since the compatibility save/\:restore tokens
 affect only the parts of the macro populated by
 .B am1
 and
@@ -1788,15 +1791,15 @@ and a
 .I "compatibility restore"
 token at its end.
 .
-As a consequence,
-the requests
+The requests
 .RB \[lq] as \[rq],
 .BR as1 ,
 .BR ds ,
 and
 .B ds1
-can be intermixed freely since the compatibility save/\:restore tokens
-affect only the portions of the strings populated by
+can thus be intermixed freely
+since the compatibility save/\:restore tokens
+affect only the portions of the string populated by
 .B as1
 and
 .BR ds1 .
@@ -6127,7 +6130,7 @@ while it interprets its argument list.
 .P
 In compatibility mode,
 GNU
-troff \" GNU
+.I troff \" GNU
 accepts several characters as delimiters that it ordinarily rejects,
 because they can begin numeric expressions and therefore
 may be ambiguous to the document maintainer.
@@ -6140,6 +6143,11 @@ The set of additional delimiters comprises
 .SH "Other differences"
 .\" ====================================================================
 .
+GNU
+.IR troff 's \" GNU
+features sometimes cause incompatibilities with documents written
+assuming old implementations of
+.IR troff . \" generic
 GNU
 .I troff \" GNU
 request names unrecognized by other
@@ -6175,11 +6183,6 @@ which both render it as
 .\" as of this writing, 2022-08-13
 .\" END Keep in sync with groff.texi node "Other Differences" and
 .\" groff_man_style(7).
-GNU
-.IR troff 's \" GNU
-features sometimes cause incompatibilities with documents written
-assuming old implementations of
-.IR troff . \" generic
 .
 .
 .P
@@ -6439,7 +6442,7 @@ and
 .B \[rs]S
 are transparent at the beginning of an input line,
 or after the conditional expression of an
-.RB \[lq] if \[rq]
+.RB \[lq] if \^\[rq]
 or
 .B ie
 request,
