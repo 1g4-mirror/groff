@@ -1,3 +1,11 @@
+2025-07-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac ([initialization]):
+	* tmac/doc.tmac ([initialization]): Parallelize loading of
+	site-local customization.  Use `msoquiet`, but only if it's
+	available--that way we avoid a hard dependency on groff 1.23 or
+	later.  If not, use `mso` as groff 1.22.4 and earlier did.
+
 2025-07-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/mdoc/doc-common (Sh, Ss): Fix missing brace escape

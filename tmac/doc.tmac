@@ -7210,8 +7210,9 @@ should this have been '.Em ...'?
 .  char \- \N'45'
 .
 .
-.\" load local modifications
-.mso mdoc.local
+.\" Load site-local configuration.
+.ie d msoquiet .msoquiet mdoc.local
+.el            .mso      mdoc.local
 .
 .cp \n[*groff_doc_tmac_C]
 .do rr *groff_doc_tmac_C
