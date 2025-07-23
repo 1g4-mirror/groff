@@ -3367,7 +3367,7 @@ of the same page.
 .
 If
 .I file
-does not exist,
+does not exist or is not readable,
 a warning in category
 .RB \[lq] file \[rq]
 is emitted
@@ -4543,7 +4543,7 @@ followed by the current working directory.
 .
 If
 .I file
-does not exist,
+does not exist or is not readable,
 GNU
 .I troff \" GNU
 emits a warning in category
