@@ -9535,7 +9535,7 @@ The
 @code{hcode}
 request enables application of hyphenation codes
 to characters outside the Unicode basic Latin set;
-without it,
+without doing so,
 words containing such letters
 won't hyphenate properly
 even if the corresponding hyphenation patterns contain them.
