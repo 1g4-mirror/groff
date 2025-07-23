@@ -4769,7 +4769,10 @@ is the formatter.
 .
 .TP
 .B \[rs]n[.height]
-Interpolate height of the environment's selected font.
+Interpolate the rescaled height in scaled points
+of the environment's selected font.
+.
+It is zero if the font height is not rescaled.
 .
 See
 .BR \[rs]H .
@@ -4824,7 +4827,7 @@ in the environment.
 .B \[rs]n[.int]
 Interpolate\~1 if the text most recently formatted in the environment
 was \[lq]interrupted\[rq] or continued with
-.BR \[rs]c ),
+.BR \[rs]c ,
 0\~otherwise.
 .
 .
@@ -4880,14 +4883,14 @@ Interpolate the environment's title line length.
 .
 .TP
 .B \[rs]n[.m]
-Interpolate name of the selected stroke color.
+Interpolate name of the environment's selected stroke color.
 .
 This is a string-valued register.
 .
 .
 .TP
 .B \[rs]n[.M]
-Interpolate name of the selected fill color.
+Interpolate name of the environment's selected fill color.
 .
 This is a string-valued register.
 .
@@ -4896,7 +4899,7 @@ This is a string-valued register.
 .B \[rs]n[.ne]
 Interpolate amount of space demanded by the most recent
 .B ne
-request that sprung a page location trap.
+request that sprang a page location trap.
 .
 See
 .BR \[rs]n[.trunc] .
@@ -4932,7 +4935,8 @@ See
 .
 .TP
 .B \[rs]n[.P]
-Interpolate\~1 if the current page is selected for output.
+Interpolate\~1 if the current page is selected for output,
+0\~otherwise.
 .
 See
 .B \-o
@@ -4987,7 +4991,7 @@ See
 .TP
 .B \[rs]n[.sr]
 Interpolate the environment's most recently requested type size
-in points as a decimal fraction.
+in typographical points.
 .
 This is a string-valued register.
 .
@@ -5071,7 +5075,7 @@ Interpolate\~1 if vertical position traps are enabled,
 .
 .TP
 .B \[rs]n[.warn]
-Interpolate warning mode.
+Interpolate warning mask.
 .
 See section \[lq]Warnings\[rq] of
 .MR @g@troff @MAN1EXT@ .
@@ -5821,9 +5825,15 @@ and its output drivers may abandon the application of this assumption to
 drawing commands not explicitly specified in the AT&T \[lq]Troff User's
 Manual\[rq].
 .
+You can ensure predictable output by enclosing drawing commands
+in the zero-motion escape sequence
+.BR \[rs]Z .
+.
 .
 .P
-Fill color selection is implemented with another set of extensions.
+GNU
+.I troff \" GNU
+implements fill color selection with another set of extensions.
 .
 .
 .TP
@@ -5960,7 +5970,7 @@ Examine the state of the formatter with requests that write lists of
 defined \" names---macros, strings, and diversions---
 colors
 .RB ( pcolor ),
-composite characters
+composite character mappings
 .RB ( pcomposite ),
 environments
 .RB ( pev ),
