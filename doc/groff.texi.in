@@ -1223,8 +1223,11 @@ Run @command{gsoelim} preprocessor.
 @cindex @code{pi} request, and safer mode
 @cindex safer mode
 @cindex mode, safer
-Operate in ``safer'' mode; see @option{-U} below for its opposite.  For
-security reasons, safer mode is enabled by default.
+Operate in ``safer'' mode;
+see
+@option{-U}
+below for its opposite.
+Safer mode is enabled by default.
 
 @item -t
 Run @command{gtbl} preprocessor.
