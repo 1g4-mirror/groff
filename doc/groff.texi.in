@@ -2897,8 +2897,7 @@ its preparation requires separate processing.
 registers and strings.
 
 @Defreq {nr, reg value}
-Set register @var{reg} to @var{value}.  If @var{reg} doesn't exist, GNU
-@code{troff} creates it.
+Set register @var{reg} to @var{value}.
 @endDefreq
 
 @Defreq {ds, name contents}
