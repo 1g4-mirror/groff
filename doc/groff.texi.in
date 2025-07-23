@@ -2622,7 +2622,7 @@ diagrams,
 and consistently formatted bibliographic citations.
 @code{groff} @file{ms}
 is mostly compatible with the documented interface
-and behavior of AT&T Unix Version\~7
+and behavior of AT&T Unix Version@tie{}7
 @code{ms}.
 It recreates most extensions from 4.2BSD (Berkeley)
 @c Few changes were made in 4.3, Tahoe, Reno, or 4.4.
