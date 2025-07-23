@@ -20053,13 +20053,16 @@ is---and you'll likely get something other than a backslash in the
 output.} regardless of whether it is used in a diversion; it also works
 in both GNU @code{troff} and @acronym{AT&T} @code{troff}.
 
-The other correct way, appropriate in contexts independent of the
-backslash's common use as a @code{troff} escape character---perhaps in
-discussion of character sets or other programming languages---is
-the character escape @code{\(rs} or @code{\[rs]}, for ``reverse
-solidus'', from its name in the @acronym{ECMA}-6 and @w{ISO 10646}
+The other correct way,
+appropriate in contexts independent of the backslash's common use as a
+@code{roff}
+escape character---perhaps in discussion of character sets or other
+programming languages---is the special character escape sequence
+@code{\(rs} or @code{\[rs]},
+for ``reverse solidus'',
+from its name in the @acronym{ECMA}-6 and @w{ISO 10646}
 standards.@footnote{@acronym{AT&T}
-@command{troff}'s
+@command{troff}'s @c AT&T
 font description files
 did not define the
 @code{rs}

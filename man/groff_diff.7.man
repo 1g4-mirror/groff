@@ -6693,7 +6693,7 @@ The other correct way,
 appropriate in contexts independent of the backslash's common use as a
 .I roff
 escape character\[em]perhaps in discussion of character sets or other
-programming languages\[em]is the character escape
+programming languages\[em]is the special character escape sequence
 .B \[rs](rs
 or
 .BR \[rs][rs] ,
