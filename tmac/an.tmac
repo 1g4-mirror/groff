@@ -148,6 +148,16 @@
 .  nr an-saved-prevailing-indent!1 \\n[IN]
 ..
 .
+.\" We don't handle the line length here because its handling differs
+.\" between (P, LP, PP, HP) and (IP, TP) paragraphs.
+.de an*reset-paragraph-parameters
+.  ft R
+.  ps \\n[PS]u
+.  vs \\n[VS]u
+.  \" TODO: ad \\*[AD]
+.  \" TODO: hy \\n[HY]
+..
+.
 .\" This logic would be part of `an*reset-paragraph-parameters`, but
 .\" unfortunately we have to support the legacy `PD` macro, which
 .\" permits unseemly fiddling at arbitrary places in the text.  (99
@@ -156,7 +166,9 @@
 .  ie \\n[.$] .nr PD (v;\\$1)
 .  el         .nr PD (.4v >? \n[.V])
 .  \" Restore spacing to handle a "belated" `PD` call immediately after
-.  \" a paragraphing macro (`P`, `HP`, or `IP` with no marker argument).
+.  \" a paragraphing macro (`P`, `HP`, or `IP` with no marker argument),
+.  \" maintaining compatibility with Unix Version 7 man and descendants.
+.  \" See Savannah #64267.
 .  rs
 ..
 .
@@ -278,11 +290,10 @@
 .  nr an-was-tbl-failure-reported 0
 .
 .  an*reset-section-parameters
-.  ft R
-.  ps \\n[PS]u
-.  vs \\n[VS]u
-.  ad \\*[AD]
+.  ad \\*[AD] \" TODO: Handle this in `an*reset-paragraph-parameters`.
+.  an*reset-paragraph-parameters
 .  ll \\n[LL]u
+.  in 0 \" Well-formed documents call `SH` after `TH`.
 .  an*reset-hyphenation-mode
 .  an*reset-tab-stops
 .  an*reset-paragraph-spacing
@@ -652,9 +663,7 @@ contains unsupported escape sequence
 .  nr an-devtag-needs-end-of-heading 0
 .  if \\n[an-devtag-needs-second-column] .DEVTAG-COL 2
 .  nr an-devtag-needs-second-column 0
-.  ft R
-.  ps \\n[PS]u
-.  vs \\n[VS]u
+.  an*reset-paragraph-parameters
 .  if \\n[an-need-break] \{\
 .    br
 .    nr an-need-break 0
@@ -685,9 +694,7 @@ contains unsupported escape sequence
 .
 .\" Break a paragraph.  Restore defaults, except for indentation.
 .de an*break-paragraph
-.  ft R
-.  ps \\n[PS]u
-.  vs \\n[VS]u
+.  an*reset-paragraph-parameters
 .  sp \\n[PD]u
 .  ns
 ..
@@ -797,6 +804,7 @@ contains unsupported escape sequence
 .\" Set an ordinary paragraph.
 .de1 P
 .  an*break-paragraph
+.  ll \\n[LL]u
 .  in \\n[an-margin]u
 .  nr an-prevailing-indent \\n[IN]
 ..
@@ -845,6 +853,7 @@ contains unsupported escape sequence
 .\" .HP [indent]
 .de1 HP
 .  an*break-paragraph
+.  ll \\n[LL]u
 .  ne (1v + 1u)
 .  if \\n[.$] .nr an-prevailing-indent (n;\\$1)
 .  in (\\n[an-margin]u + \\n[an-prevailing-indent]u)

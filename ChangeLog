@@ -1,3 +1,16 @@
+2025-07-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Refactor.
+	(an*reset-paragraph-parameters): New macro resets the font
+	style, type size, and vertical spacing, but not the line length.
+	(TH, an*input-trap, an*break-paragraph): Call it instead of
+	invoking the corresponding requests directly.
+	(TH, P, HP): Reset line length to configured `LL` register
+	value.
+	(TH): Reset indentation to zero.  A well-formed man(7) document
+	formats no text between a `TH` call and an `SH` call, but a
+	predictable indentation is useful for crafting test cases.
+
 2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Refactor.
