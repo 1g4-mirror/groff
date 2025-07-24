@@ -449,7 +449,7 @@ sub usage
     my $had_error = shift;
     $stream = *STDERR if $had_error;
     print $stream
-"usage: $prog [-delsW] [-F font-directory] [-I inclusion-directory]" .
+"usage: $prog [-dels] [-F font-directory] [-I inclusion-directory]" .
 " [-p paper-format] [-u [cmap-file]] [-y foundry] [file ...]\n" .
 "usage: $prog {-v | --version}\n" .
 "usage: $prog --help\n";
@@ -474,7 +474,7 @@ my $stats=0;
 my $unicodemap;
 my $options=7;
 my $PDFver=1.7;
-my @includeDirs;
+my @idirs;
 
 my $alloc=-1;
 my $cftmajor=0;
@@ -489,19 +489,17 @@ my %seac;
 my $thisfnt;
 my $parcln=qr/\[[^\]]*?\]|(.)((?!\1).)*\1/;
 my $parclntyp=qr/(?:[\d\w]|\([+-]?[\S]{2}|$parcln)/;
-my $makeWarningsFatal=0;
 
-if (!GetOptions('F=s' => \@fdlist, 'I=s' => \@includeDirs,
-    'l' => \$frot, 'p=s' => \$fpsz, 'd!' => \$debug,
-    'help' => \$want_help, 'pdfver=f' => \$PDFver, 'v' => \$version,
-    'version' => \$version, 'opt=s' => \$options, 'e' => \$embedall,
-    'y=s' => \$Foundry, 's' => \$stats, 'u:s' => \$unicodemap,
-    'W' => \$makeWarningsFatal))
+if (!GetOptions('F=s' => \@fdlist, 'I=s' => \@idirs, 'l' => \$frot,
+    'p=s' => \$fpsz, 'd!' => \$debug, 'help' => \$want_help, 'pdfver=f' => \$PDFver,
+    'v' => \$version, 'version' => \$version, 'opt=s' => \$options,
+    'e' => \$embedall, 'y=s' => \$Foundry, 's' => \$stats,
+    'u:s' => \$unicodemap))
 {
     &usage(1);
 }
 
-unshift(@includeDirs,'.');
+unshift(@idirs,'.');
 $fd=join('@RT_SEP@',@fdlist) if $#fdlist > -1;
 
 &usage(0) if ($want_help);
@@ -542,10 +540,9 @@ $PDFver=int($PDFver*10)-10;
 # Search for 'font directory': paths in -f opt, shell var
 # GROFF_FONT_PATH, default paths
 
-my $fontPath=$cfg{GROFF_FONT_PATH};
-$fontPath=$ENV{GROFF_FONT_PATH}.$cfg{RT_SEP}.$fontPath
-    if exists($ENV{GROFF_FONT_PATH});
-$fontPath=$fd.$cfg{RT_SEP}.$fontPath if defined($fd);
+my $fontdir=$cfg{GROFF_FONT_PATH};
+$fontdir=$ENV{GROFF_FONT_PATH}.$cfg{RT_SEP}.$fontdir if exists($ENV{GROFF_FONT_PATH});
+$fontdir=$fd.$cfg{RT_SEP}.$fontdir if defined($fd);
 
 $rot=90 if $frot;
 $matrix="0 1 -1 0" if $frot;
@@ -1167,34 +1164,24 @@ sub ToPoints
     }
 }
 
-# Read _all_ files named "download" in the groff font search path and
-# populate the `download` hash using foundry+`internalname` as the keys
-# and a file name as the values.  If the file name is not found,
-# populate the `missing` hash the same way.
-#
-# We don't use `OpenFontFile()` for this task because that search
-# _stops_ at the first file successfully opened.
 sub LoadDownload
 {
-    my $anyDownloadFileFound=0;
-    my (@dirs)=split($cfg{RT_SEP},$fontPath);
+    my $f;
+    my $found=0;
+
+    my (@dirs)=split($cfg{RT_SEP},$fontdir);
 
     foreach my $dir (@dirs)
     {
-	my $downloadFile="$dir/$devnm/download";
-	if (!open(DL,"<$downloadFile"))
-	{
-	    Notice("cannot open '$downloadFile': $!");
-	    next;
-	}
-	$anyDownloadFileFound=1;
+	$f=undef;
+	OpenFile(\$f,$dir,"download");
+	next if !defined($f);
+	$found++;
 
-	Notice("reading '$downloadFile'");
-	while (<DL>)
+	while (<$f>)
 	{
 	    chomp;
 	    s/#.*$//;
-	    s/\s+$//;
 	    next if $_ eq '';
 	    my ($foundry,$name,$file)=split(/\t+/);
 	    if (substr($file,0,1) eq '*')
@@ -1212,62 +1199,39 @@ sub LoadDownload
 		next;
 	    }
 
-	    # The first successfully located font file wins; subsequent
-	    # entries, in the same "download" file or later ones, do not
-	    # override the first success.  That seems okay because it is
-	    # how $GROFF_FONT_PATH works otherwise.
-	    $download{"$foundry $name"}=$file
-		if !exists($download{"$foundry $name"});
+	    $download{"$foundry $name"}=$file if !exists($download{"$foundry $name"});
 	}
 
-	close(DL);
+	close($f);
     }
 
-    Die("no 'download' files found") if !$anyDownloadFileFound;
+    Die("failed to open 'download' file") if !$found;
 }
 
-# Locate and open a file in the groff font directory search path.
-#
-# Return the opened file handle in the first scalar argument `f`.
-sub OpenFontFile
+sub OpenFile
 {
     my $f=shift;
-    my $fileName=shift;
-    my $resolvedFileName;
+    my $dirs=shift;
+    my $fnm=shift;
 
-    # Is the file specification absolute?
-    #
-    # XXX: Forbid this?  See Savannah #66419.
-    if (substr($fileName,0,1) eq '/' # POSIX
-	or (substr($fileName,0,1) =~ m/[A-Z]/
-	    and substr($fileName,1,1) eq ':')) # MS-DOS/Windows
+    if (substr($fnm,0,1)  eq '/' or substr($fnm,1,1) eq ':') # dos
     {
-	$resolvedFileName=$fileName
-	    if (-r "$fileName" and open($$f,"<$fileName"));
-    }
-    else
-    {
-	my (@dirs)=split($cfg{RT_SEP},$fontPath);
-
-	foreach my $dir (@dirs)
-	{
-	    my $attempt="$dir/$devnm/$fileName";
-	    if (-r "$attempt" and open($$f,"<$attempt")) {
-		$resolvedFileName=$attempt;
-		last;
-	    }
-	}
+	return if -r "$fnm" and open($$f,"<$fnm");
     }
 
-    Notice("opened '$resolvedFileName' for reading")
-	if $resolvedFileName;
+    my (@dirs)=split($cfg{RT_SEP},$dirs);
+
+    foreach my $dir (@dirs)
+    {
+	last if -r "$dir/$devnm/$fnm" and open($$f,"<$dir/$devnm/$fnm");
+    }
 }
 
 sub LoadDesc
 {
     my $f;
 
-    OpenFontFile(\$f,"DESC");
+    OpenFile(\$f,$fontdir,"DESC");
     Die("failed to open device description file 'DESC'")
     if !defined($f);
 
@@ -1713,23 +1677,23 @@ sub do_x
 		my $info;
 		my $image;
 
-		my ($FD,$fileName)=OpenIncludedFile($fil);
+		my ($FD,$FDnm)=OpenInc($fil);
 
 		if (!defined($FD))
 		{
-		    Warn("failed to open image file '$fileName'");
+		    Warn("failed to open image file '$FDnm'");
 		    return;
 		}
 
 		if (!exists($incfil{$fil}))
 		{
-		    if ($gotexif and $fileName!~m/\.pdf$/i)
+		    if ($gotexif and $FDnm!~m/\.pdf$/i)
 		    {
 			binmode $FD;
 
 			$image = Image::Magick->new;
 			my $x = $image->Read(file => $FD);
-			Warn("Image '$fileName': $x"), return if "$x";
+			Warn("Image '$FDnm': $x"), return if "$x";
 			$imgtype=$image->Get('magick');
 			$info->{ImageWidth}=$image->Get('width');
 			$info->{ImageHeight}=$image->Get('height');
@@ -1738,7 +1702,7 @@ sub do_x
 		    }
 		    else
 		    {
-			my $dim=`( identify $fileName 2>/dev/null || file $fileName )`;
+			my $dim=`( identify $FDnm 2>/dev/null || file $FDnm )`;
 			if ($dim=~m/(?:[,=A-Z]|JP2) (\d+)\s*x\s*(\d+)/)
 			{
 			    $info->{ImageWidth}=$1;
@@ -1768,19 +1732,19 @@ sub do_x
 
 		    if ($imgtype eq 'PDF')
 		    {
-			$incfil{$fil}=LoadPDF($FD,$fileName,$mat,$wid,$hgt,"pdfpic");
+			$incfil{$fil}=LoadPDF($FD,$FDnm,$mat,$wid,$hgt,"pdfpic");
 		    }
 		    elsif ($imgtype eq 'JPEG')
 		    {
-			$incfil{$fil}=LoadJPEG($FD,$fileName,$info);
+			$incfil{$fil}=LoadJPEG($FD,$FDnm,$info);
 		    }
 		    elsif ($imgtype eq 'JP2')
 		    {
-			$incfil{$fil}=LoadJP2($FD,$fileName,$info);
+			$incfil{$fil}=LoadJP2($FD,$FDnm,$info);
 		    }
 		    else
 		    {
-			$incfil{$fil}=LoadMagick($image,$fileName,$info);
+			$incfil{$fil}=LoadMagick($image,$FDnm,$info);
 		    }
 
 		    return if !defined($incfil{$fil});
@@ -1792,7 +1756,7 @@ sub do_x
 		    IsGraphic();
 		    my $bbox=$incfil{$fil}->[1];
 		    $imgtype=$incfil{$fil}->[2];
-		    Warn("Failed to extract width x height for '$fileName'"),return if !defined($bbox->[2]) or !defined($bbox->[3]);
+		    Warn("Failed to extract width x height for '$FDnm'"),return if !defined($bbox->[2]) or !defined($bbox->[3]);
 		    $wid=($bbox->[2]-$bbox->[0]) if $wid <= 0 and $hgt <= 0;
 		    my $xscale=d3($wid/($bbox->[2]-$bbox->[0]));
 		    my $yscale=d3(($hgt<=0)?$xscale:($hgt/($bbox->[3]-$bbox->[1])));
@@ -2454,40 +2418,33 @@ sub LoadSWF
     return $xonm;
 }
 
-# Open file named in argument; if the file specification is not
-# absolute, resolve it by searching the include path constructed with
-# the `-I` option.  Return a 2-list.
-#   (file handle or undef, "resolved" file name)
-sub OpenIncludedFile
+sub OpenInc
 {
-    my $arg=shift;
-    my $fileName=undef;
+    my $fn=shift;
+    my $fnm=$fn;
     my $F;
 
-    # Is the file specification absolute?
-    if (substr($arg,0,1) eq '/' # POSIX
-	or (substr($arg,0,1) =~ m/[A-Z]/
-	    and substr($arg,1,1) eq ':')) # MS-DOS/Windows
+    if (substr($fnm,0,1)  eq '/' or substr($fnm,1,1) eq ':') # dos
     {
-	if (-r $arg and open($F,"<$arg"))
+	if (-r $fnm and open($F,"<$fnm"))
 	{
-	    return($F,$arg);
+	    return($F,$fnm);
 	}
     }
     else
     {
-	foreach my $dir (@includeDirs)
+	foreach my $dir (@idirs)
 	{
-	    $fileName="$dir/$arg";
+	    $fnm="$dir/$fn";
 
-	    if (-r "$fileName" and open($F,"<$fileName"))
+	    if (-r "$fnm" and open($F,"<$fnm"))
 	    {
-		return($F,$fileName);
+		return($F,$fnm);
 	    }
 	}
     }
 
-    return(undef,$arg);
+    return(undef,$fn);
 }
 
 sub LoadPDF
@@ -3434,21 +3391,19 @@ sub LoadFont
     return $fontlst{$fontno}->{OBJ} if (exists($fontlst{$fontno}) and $fontnm eq $fontlst{$fontno}->{FNT}->{name}) ;
 
     my $f;
-    OpenFontFile(\$f,$fontnm);
+    OpenFile(\$f,$fontdir,"$fontnm");
 
     if (!defined($f) and $Foundry)
     {
 	# Try with no foundry
 	$fontnm=~s/.*?-//;
-	OpenFontFile(\$f,$fontnm);
+	OpenFile(\$f,$fontdir,$fontnm);
     }
 
     Die("unable to open font '$ofontnm' for mounting") if !defined($f);
 
     my $foundry='';
-    my $foundryDescription="default foundry";
     $foundry=$1 if $fontnm=~m/^(.)-/;
-    $foundryDescription="foundry \"$1\"" if $foundry;
     my $stg=1;
     my %fnt;
     my @fntbbox=(0,0,0,0);
@@ -3557,7 +3512,6 @@ sub LoadFont
     Warn("\nFont '$fnt{internalname} ($ofontnm)' has $lastchr glyphs\n"
 	."You would see a noticeable speedup if you install the perl module Inline::C\n") if !$gotinline and $lastchr > 1000;
 
-    Notice("looking up '$fontkey' to embed font");
     if (exists($download{$fontkey}))
     {
 	# Real font needs subsetting
@@ -3574,18 +3528,14 @@ sub LoadFont
     {
 	if (exists($missing{$fontkey}))
 	{
-	    Warn("download file '$missing{$fontkey}' has invalid entry"
-	    . " for font '$fnt{internalname}' corresponding to groff"
-	    . " font description file '$ofontnm' from"
-	    . " $foundryDescription)");
+	    Warn("The download file in '$missing{$fontkey}' "
+	    . " has erroneous entry for '$fnt{internalname} ($ofontnm)'");
 	}
 	else
 	{
-	    my $sub=\&Warn;
-	    $sub=\&Die if ($makeWarningsFatal);
-	    &$sub("cannot embed font file for '$fnt{internalname}'; no"
-	    . " 'download' file has an entry for groff font description"
-	    . " file '$ofontnm' from $foundryDescription") if $embedall;
+	    Warn("unable to embed font file for '$fnt{internalname}'"
+	    . " ($ofontnm) (missing entry in 'download' file?)")
+	    if $embedall;
 	}
     }
 
@@ -3615,7 +3565,7 @@ sub GetType1
     my ($head,$body,$tail);	# Font contents
     my $f;
 
-    OpenFontFile(\$f,"$file");
+    OpenFile(\$f,$fontdir,"$file");
     Die("unable to open font '$file' for embedding") if !defined($f);
 
     $head=GetChunk($f,1,"currentfile eexec");
