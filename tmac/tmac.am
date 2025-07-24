@@ -135,6 +135,7 @@ tmac_TESTS = \
   tmac/tests/an-ext_MT-works.sh \
   tmac/tests/an-ext_SY-and-YS-work.sh \
   tmac/tests/an-ext_UR-works.sh \
+  tmac/tests/an-ext_synopses_do_not_automatically_adjust.sh \
   tmac/tests/an-ext_synopses_do_not_automatically_hyphenate.sh \
   tmac/tests/an_AT-and-UC-footer-saved-and-restored.sh \
   tmac/tests/an_CS-register-works.sh \

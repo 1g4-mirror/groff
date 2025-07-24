@@ -1,5 +1,11 @@
 2025-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an-ext_synopses_do_not_automatically_adjust.sh: Add
+	test.
+	* tmac/tmac.am (tmac_TESTS): Run it.
+
+2025-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an-ext_synopses_do_not_automatically_hyphenate.sh:
 	Add test.
 	* tmac/tmac.am (tmac_TESTS): Run it.
