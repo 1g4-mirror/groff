@@ -13188,8 +13188,8 @@ scaling unit
 is equal to
 @math{1/@var{sizescale}}
 points,
-where the device description file
-@file{DESC}
+where the device description file,
+@file{DESC},
 specifies
 @var{sizescale}
 and otherwise defaults to@tie{}1.@footnote{@xref{Device and Font

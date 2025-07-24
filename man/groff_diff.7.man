@@ -385,7 +385,7 @@ is equal to
 .RI 1/ sizescale
 points,
 where the device description file,
-.I DESC
+.IR DESC ,
 specifies
 .I sizescale
 and otherwise defaults to\~1;
