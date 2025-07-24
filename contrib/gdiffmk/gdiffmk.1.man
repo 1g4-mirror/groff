@@ -294,7 +294,7 @@ relies on the
 .B \-D
 option of GNU
 .I diff
-to make a merged \[lq]#ifdef\[rq] output format.
+to make a merged \[lq]#ifdef\^\[rq] output format.
 .
 Busybox
 .I diff
