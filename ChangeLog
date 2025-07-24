@@ -91,8 +91,11 @@
 	reënabling it when departing the appropriate nested scope, it's
 	simpler to just stop trying.  Making this change had no
 	measurable effect on formatting of groff_mdoc(7), except with
-	respect to the formatting of URL link text, which has seen heavy
-	revision since groff 1.23.0 anyway.
+	respect to {1} URL link text, which has seen heavy
+	revision since groff 1.23.0 anyway (and see below); {2} material
+	between `Rs` and `Re` macros is now subject to automatic
+	hyphenation; {3} text marked with the `Me` macro is now subject
+	to automatic hyphenation.  The latter two changes seem correct.
 	(Lk): Macro now does what more mdoc(7) documents should probably
 	have already been doing: employ the `\%` escape sequence in
 	appropriate places.  (Alternatively, those who enjoy mandoc(1)'s
