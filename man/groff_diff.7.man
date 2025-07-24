@@ -394,7 +394,10 @@ see
 .
 Requests and escape sequences in GNU
 .I troff \" GNU
-interpret arguments that represent a type size in typographical points,
+interpret arguments that accept a numerical expression
+indicating a type size defaulting to units of typographical points,
+.\" Legacy forms of the `\s` escape sequence don't accept numerical
+.\" expressions--only integers.
 which the formatter multiplies by
 .I sizescale
 and converts to an integer.

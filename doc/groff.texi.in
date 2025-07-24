@@ -13196,7 +13196,10 @@ and otherwise defaults to@tie{}1.@footnote{@xref{Device and Font
 Description Files}.}
 Requests and escape sequences in GNU
 @command{troff}
-interpret arguments that represent a type size in typographical points,
+interpret arguments that accept a numerical expression
+indicating a type size defaulting to units of typographical points,
+@c Legacy forms of the `\s` escape sequence don't accept numerical
+@c expressions--only integers.
 which the formatter multiplies by
 @var{sizescale}
 and converts to an integer.
