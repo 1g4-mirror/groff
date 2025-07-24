@@ -4859,8 +4859,8 @@ at the beginning of the document.
 @c Note to document maintainers:
 @c
 @c We use the integral point scaling unit `p` instead of the
-@c typographical point ("scaled point") `z` because this is a register
-@c assignment; the value gets coverted to scaled points automatically.
+@c typographical point `z` because this is a register assignment; the
+@c value gets converted to scaled points automatically.
 @c Observe:
 @c    $ printf '.nr PS 10.5p\n.pnr PS\n' | groff # 1.24 or later
 @c    PS      10500   +0      0
