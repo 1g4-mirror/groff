@@ -313,7 +313,7 @@ doc/grnexmpl.ps: $(doc_srcdir)/grnexmpl.me $(doc_srcdir)/grnexmpl.g \
 #     special target.
 #       error: use variable 'SUFFIXES', not target '.SUFFIXES'
 # 4.  What about a target rule?  We'd have to explicitly write the first
-#     dependency name in the rule commands because NetBSD make (and
+#     preprequisite name in the rule commands because NetBSD make (and
 #     reportedly OpenBSD) refuses to honor the $< variable in target
 #     rules.
 #
@@ -333,7 +333,7 @@ doc/grnexmpl.ps: $(doc_srcdir)/grnexmpl.me $(doc_srcdir)/grnexmpl.g \
 # A double-suffix rule won't work in an obvious way because its
 # semantics are that the suffix is replaced, not removed.  You have to
 # add both suffixes to the .SUFFIXES special target, in order with the
-# dependency first.
+# preprequisite first.
 #   .SUFFIXES: .me.in .me
 #   .me.in.me:
 #	$(DOC_SED) $< >$@
