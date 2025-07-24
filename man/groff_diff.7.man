@@ -1707,14 +1707,17 @@ GNU
 .I troff \" GNU
 inserts a
 .I "compatibility save"
-token at its beginning of
-.I contents
+token at its beginning of the macro,
+string,
+or appendment thereto as applicable
 and a
 .I "compatibility restore"
 token at its end,
-causing compatibility mode to switch on during interpolation
-of the applicable macro or string definition,
-or appendment thereto.
+enabling compatibility mode during its interpolation.
+.
+Thus they work as expected
+even if the surrounding interpretation context
+disables compatibility mode.
 .
 .
 .TP
