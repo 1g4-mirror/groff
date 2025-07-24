@@ -679,7 +679,11 @@ contains unsupported escape sequence
 .  nr an-devtag-needs-end-of-heading 0
 .  if \\n[an-devtag-needs-second-column] .DEVTAG-COL 2
 .  nr an-devtag-needs-second-column 0
-.  an*reset-paragraph-parameters
+.  \" TODO: We might factor this into `an*reset-typeface-parameters` and
+.  \" have `an*reset-paragraph-parameters` call it as well.
+.  ft R
+.  ps \\n[PS]u
+.  vs \\n[VS]u
 .  if \\n[an-need-break] \{\
 .    br
 .    nr an-need-break 0

@@ -1,5 +1,16 @@
 2025-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*input-trap): Stop calling
+	`an*reset-paragraph-parameters`, instead invoking `ft`, `ps`,
+	and `vs` directly.  The former macro is indeed responsible for a
+	"paragraph reset", but this input trap is also (and
+	predominantly) used by macros that perform "inline" style
+	changes (`B`, `I`, `SM`, and so on).  A paragraph reset can
+	alter adjustment and hyphenation modes, and we _don't_ want that
+	here--it makes synopses format incorrectly.
+
+2025-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an-ext_synopses_do_not_automatically_adjust.sh: Add
 	test.
 	* tmac/tmac.am (tmac_TESTS): Run it.
