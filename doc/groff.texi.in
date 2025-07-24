@@ -14135,11 +14135,15 @@ True if the document is being processed in @code{troff} mode.
 
 @pindex vtroff
 @item v
-Always false.  This condition is recognized only for compatibility with
-certain other @code{troff} implementations.@footnote{This refers to
-@code{vtroff}, a translator that would convert the C/A/T output from
-early-vintage @acronym{AT&T} @code{troff} to a form suitable for
-Versatec and Benson-Varian plotters.}
+Always false.
+This condition exists for compatibility with certain other
+@code{troff}
+implementations.@footnote{We refer to
+@code{vtroff},
+a translator that converted the C/A/T command stream
+produced by from early-vintage @acronym{AT&T}
+@command{troff}
+to a form suitable for Versatec and Benson-Varian plotters.}
 @end table
 
 If the first argument to an

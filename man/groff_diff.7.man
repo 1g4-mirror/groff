@@ -673,13 +673,14 @@ Font translations apply.
 .B v
 Always false.
 .
-This condition is for compatibility with certain other
+This condition exists for compatibility with certain other
 .I troff
-implementations only.
+implementations.
 .
-(This refers to
+(We refer to
 .IR vtroff ,
-a translator that would convert the C/A/T output from early-vintage AT&T
+a translator that converted the C/A/T command stream
+produced by early-vintage AT&T
 .I troff \" AT&T
 to a form suitable for Versatec and Benson-Varian plotters.)
 .
