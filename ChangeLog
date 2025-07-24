@@ -153,7 +153,7 @@
 	* tmac/an-ext.tmac: Define the register as off/false by default.
 	(SY): Make it true.
 	(YS): Make it false.
-	* tmac/an.tmac (reset-hyphenation-mode): Disable automatic
+	* tmac/an.tmac (an*reset-hyphenation-mode): Disable automatic
 	hyphenation in synopses regardless of document or user
 	preference configuration.
 
