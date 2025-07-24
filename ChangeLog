@@ -1,3 +1,9 @@
+2025-07-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/mdoc/doc-syms (doc-str-Lb-*): Protect literals from
+	hyphenation, in preparation for a planned change to make the
+	mdoc(7) package employ `nh` requests less promiscuously.
+
 2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Refactor adjustment management.
