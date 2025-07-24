@@ -42,6 +42,7 @@ chdir $where if $where ne '';
 my (%flg,@downloadpreamble,%download);
 my $GSpath=FindGSpath();
 my $lct=0;
+my $xitcd=0;
 my $foundry='';	# the default foundry
 my $notFoundFont=0;
 
@@ -56,7 +57,7 @@ else
     LoadFoundry("Foundry");
     WriteDownload();
 }
-exit 0;
+exit $xitcd;
 
 
 
@@ -89,7 +90,7 @@ sub LoadFoundry
 
 	if (lc($r[0]) eq 'foundry')
 	{
-	    Warn("\nThe path(s) used for searching:\n".join(':',@{$foundrypath})."\n") if $notFoundFont;
+	    Notice("\nThe path(s) used for searching:\n".join(':',@{$foundrypath})."\n") if $notFoundFont;
 	    $foundry=uc($r[1]);
 	    $foundrypath=[];
 	    push(@{$foundrypath},$dirURW) if $dirURW;
@@ -154,9 +155,7 @@ sub LoadFoundry
 		# Use afmtodit to create a groff font description file.
 		my $afmfile=LocateAF($foundrypath,$r[5]);
 		if (!$afmfile) {
-		    my $sub=\&Warn;
-		    $sub=\&Die if ($beStrict);
-		    &$sub("cannot locate AFM file for font '$gfont'");
+		    Warn("cannot locate AFM file for font '$gfont'");
 		    next;
 		}
 		my $psfont=RunAfmtodit($gfont,$afmfile,$r[2],$r[3],$r[4]);
@@ -182,7 +181,7 @@ sub LoadFoundry
     }
 
     close(F);
-    Warn("\nThe path(s) used for searching:\n".join(':',@{$foundrypath})."\n") if $notFoundFont;
+    Notice("\nThe path(s) used for searching:\n".join(':',@{$foundrypath})."\n") if $notFoundFont;
 }
 
 sub RunAfmtodit
@@ -210,11 +209,11 @@ sub RunAfmtodit
 	$cmd.=" $flg{$f}";
     }
 
-    Notice("running \"$cmd $enc '$afmfile' $map $gfont\"");
     system("$cmd $enc '$afmfile' $map $gfont");
 
     if ($?)
     {
+	Warn("failed running \"$cmd $enc '$afmfile' $map $gfont\"");
 	unlink $gfont;
 	return('');
     }
@@ -386,21 +385,7 @@ sub UseGropsVersion
 
 	close(GF);
 
-	if ($psfont)
-	{
-	    if (open(GF,">$gfontbase"))
-	    {
-		local $"='';
-		print GF "@gf";
-		close(GF);
-	    }
-	    else
-	    {
-		$psfont='';
-		Warn("Failed to create new font '$gfont' for Foundry '$foundry'");
-	    }
-	}
-	else
+	if (!$psfont)
 	{
 	    Warn("Failed to locate postscript internalname in grops font '$gfont' for Foundry '$foundry'");
 	}
@@ -481,6 +466,7 @@ sub Notice {
 sub Warn {
     my $msg=shift;
     Msg("warning: line $lct: $msg");
+    $xitcd=2;
 }
 
 sub Die {

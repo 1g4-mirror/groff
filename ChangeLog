@@ -1,3 +1,23 @@
+2025-07-24  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* font/devpdf/util/BuildFoundries.pl: If any warnings issued
+	during run, exit code 2 at end of run. This will abort any
+	build. Change to Notice any information only messages.
+	Remove code which copied grops fonts to gropdf (Branden added
+	this to devpdf.am so is now unnecessary).
+
+	* src/devices/gropdf/gropdf.pl: Exit with code 2 if any
+	warnings issued during run (this will stop a 'make'). Report
+	a 'Notice' if duplicate font entries and 1 is incorrect.
+	Report path of download file in messages.
+
+	* src/devices/gropdf.1.man: Document exit status.
+
+	* contrib/mom/mom.am:
+	* doc/doc.am: -W flag no longer required
+
+	Continues fixing Savannah #67268.
+
 2025-07-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac ([initialization]):

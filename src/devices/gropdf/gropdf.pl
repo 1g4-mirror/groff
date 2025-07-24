@@ -224,6 +224,7 @@ unshift(@ARGV,split(' ',$ENV{GROPDF_OPTIONS})) if exists($ENV{GROPDF_OPTIONS});
 my $gotzlib=0;
 my $gotinline=0;
 my $gotexif=0;
+my $xitcd=0;
 
 my $rc = eval
 {
@@ -1003,6 +1004,7 @@ else
 
 print "startxref\n$xrefct\n\%\%EOF\n";
 print "\% Pages=$pages->{Count}\n" if $stats;
+exit $xitcd;
 
 sub MakeMatrix
 {
@@ -1195,11 +1197,11 @@ sub LoadDownload
 
 	    if (!-r $pth)
 	    {
-		$missing{"$foundry $name"}="$dir/$devnm";
+		$missing{"$foundry $name"}="$dir/$devnm" if !exists($download{"$foundry $name"});
 		next;
 	    }
 
-	    $download{"$foundry $name"}=$file if !exists($download{"$foundry $name"});
+	    $download{"$foundry $name"}=[$file,$dir] if !exists($download{"$foundry $name"});
 	}
 
 	close($f);
@@ -3025,8 +3027,7 @@ sub ParsePDFHash
 
 	if ($w[0])
 	{
-	    Warn("PDF Dict Key '$wd' does not start with '/'");
-	    exit 1;
+	    Die("PDF Dict Key '$wd' does not start with '/'");
 	}
 	else
 	{
@@ -3179,12 +3180,9 @@ sub ParsePDFArray
 
 sub Notice
 {
-    if ($debug)
-    {
-	unshift(@_, "debug: ");
-	my $msg=join('',@_);
-	Msg(0,$msg);
-    }
+    unshift(@_, "notice: ");
+    my $msg=join('',@_);
+    Msg(0,$msg);
 }
 
 sub Warn
@@ -3192,6 +3190,7 @@ sub Warn
     unshift(@_, "warning: ");
     my $msg=join('',@_);
     Msg(0,$msg);
+    $xitcd=2;
 }
 
 sub Die
@@ -3501,7 +3500,7 @@ sub LoadFont
     $fnt{slant}=$slant;
     $fnt{nospace}=(!defined($fnt{NAM}->{space}->[PSNAME]) or $fnt{NAM}->{space}->[PSNAME] ne '/space' or !exists($fnt{'spacewidth'}))?1:0;
     $fnt{'spacewidth'}=270 if !exists($fnt{'spacewidth'});
-    Notice("Using nospace mode for font '$ofontnm'") if $fnt{nospace} == 1 and $options & USESPACE;
+    Notice("Using nospace mode for font '$ofontnm'") if $debug and $fnt{nospace} == 1 and $options & USESPACE;
 
     $t1flags|=2**0 if $fixwid > -1;
     $t1flags|=(exists($fnt{'special'}))?2**2:2**5;
@@ -3515,7 +3514,13 @@ sub LoadFont
     if (exists($download{$fontkey}))
     {
 	# Real font needs subsetting
-	$fnt{fontfile}=$download{$fontkey};
+	$fnt{fontfile}=$download{$fontkey}[0];
+	if (exists($missing{$fontkey}))
+	{
+	    Notice("The download file in '$missing{$fontkey}'"
+	    . " has erroneous entry for '$fnt{internalname} ($ofontnm)'"
+	    . " but entry in '$download{$fontkey}[1]' used instead");
+	}
 #	my ($head,$body,$tail)=GetType1($download{$fontkey});
 #	$head=~s/\/Encoding .*?readonly def\b/\/Encoding StandardEncoding def/s;
 #	$fontlst{$fontno}->{HEAD}=$head;
@@ -3528,7 +3533,7 @@ sub LoadFont
     {
 	if (exists($missing{$fontkey}))
 	{
-	    Warn("The download file in '$missing{$fontkey}' "
+	    Warn("The download file in '$missing{$fontkey}'"
 	    . " has erroneous entry for '$fnt{internalname} ($ofontnm)'");
 	}
 	else

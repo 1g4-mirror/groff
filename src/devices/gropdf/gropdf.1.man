@@ -1878,6 +1878,19 @@ see hello.pdf
 .br
 .ne 5v
 .\" ====================================================================
+.SH Exit Status
+.\" ====================================================================
+.
+The exit code reflects the result of the run.
+.IP 0
+Success. The operation completed successfully.
+.IP 1
+Critical error. PDF produced will be unusable.
+.IP 2
+Warnings were issued. PDF produced may be usable, but it will have issues.
+.br
+.ne 5v
+.\" ====================================================================
 .SH Environment
 .\" ====================================================================
 .
@@ -2062,6 +2075,8 @@ Deri James
 .ME .
 .
 .
+.br
+.ne 3v
 .\" ====================================================================
 .SH "See also"
 .\" ====================================================================
