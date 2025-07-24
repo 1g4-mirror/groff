@@ -1,3 +1,9 @@
+2025-07-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tests/an_paragraph-reset-preserves-line-length.sh: Add
+	test.
+	* tmac/tmac.am (tmac_TESTS): Run it.
+
 2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (TH): Rationalize; organize register and string

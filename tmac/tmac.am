@@ -172,6 +172,7 @@ tmac_TESTS = \
   tmac/tests/an_output-footer-when-continuously-rendering.sh \
   tmac/tests/an_page-footers-present.sh \
   tmac/tests/an_page-header-has-current-data.sh \
+  tmac/tests/an_paragraph-reset-preserves-line-length.sh \
   tmac/tests/an_reset-hyphenation-correctly.sh \
   tmac/tests/an_title-abbreviation-works.sh \
   tmac/tests/an_use-input-traps-correctly.sh \
