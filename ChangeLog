@@ -174,18 +174,6 @@
 	* tmac/groff_man.7.man.in (Paragraphing macros): Document
 	paragraphing macros' restoration of configured hyphenation mode.
 
-2025-07-20  G. Branden Robinson <g.branden.robinson@gmail.com>
-
-	[man]: Add `mN` register to track whether we're setting a
-	synopsis, because that status overrides some formatting choices.
-
-	* tmac/an-ext.tmac: Define the register as off/false by default.
-	(SY): Make it true.
-	(YS): Make it false.
-	* tmac/an.tmac (an*reset-hyphenation-mode): Disable automatic
-	hyphenation in synopses regardless of document or user
-	preference configuration.
-
 2025-07-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Refactor to simplify.
