@@ -112,13 +112,16 @@
 	was getting disabled in far more places than it should have
 	been, and because there appears to be no mechanism for
 	reënabling it when departing the appropriate nested scope, it's
-	simpler to just stop trying.  Making this change had no
-	measurable effect on formatting of groff_mdoc(7), except with
-	respect to {1} URL link text, which has seen heavy
-	revision since groff 1.23.0 anyway (and see below); {2} material
-	between `Rs` and `Re` macros is now subject to automatic
-	hyphenation; {3} text marked with the `Me` macro is now subject
-	to automatic hyphenation.  The latter two changes seem correct.
+	simpler to just stop trying.  Making this change had little
+	effect on formatting of groff_mdoc(7), except for the following.
+	  {1} URL link text, when it was the URL itself (as on output
+	      devices that don't support hyperlinking) was undesirably
+	      hyphenated, but see below;
+	  {2} text not otherwise marked up between `Rs` and `Re` macros
+	      is now subject to automatic hyphenation; and
+	  {3} text marked with the `Me` macro is now subject to
+	      automatic hyphenation.
+	Changes {2} and {3} seem correct.
 	(Lk): Macro now does what more mdoc(7) documents should probably
 	have already been doing: employ the `\%` escape sequence in
 	appropriate places.  (Alternatively, those who enjoy mandoc(1)'s
