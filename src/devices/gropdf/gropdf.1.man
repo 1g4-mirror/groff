@@ -1875,19 +1875,26 @@ see hello.pdf
 .RE
 .
 .
-.br
-.ne 5v
 .\" ====================================================================
-.SH Exit Status
+.SH "Exit status"
 .\" ====================================================================
 .
-The exit code reflects the result of the run.
 .IP 0
-Success. The operation completed successfully.
+.I gropdf
+successfully produced a PDF document.
 .IP 1
-Critical error. PDF produced will be unusable.
+.I gropdf
+experienced a critical error,
+or could not interpret its arguments.
+No PDF was produced,
+or the document produced will be unusable.
 .IP 2
-Warnings were issued. PDF produced may be usable, but it will have issues.
+.I gropdf
+emitted warnings.
+The document produced may be usable,
+but may fail to render as desired.
+.
+.
 .br
 .ne 5v
 .\" ====================================================================
