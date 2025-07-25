@@ -1,3 +1,10 @@
+2025-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Unit-test `S` register behavior.
+
+	* tmac/tests/an_S-register-works.sh: Add test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2025-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (an*input-trap): Stop calling

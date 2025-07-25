@@ -149,6 +149,7 @@ tmac_TESTS = \
   tmac/tests/an_MT-works.sh \
   tmac/tests/an_P-register-works.sh \
   tmac/tests/an_PD-restores-spacing.sh \
+  tmac/tests/an_S-register-works.sh \
   tmac/tests/an_SH-works-with-pending-input-trap.sh \
   tmac/tests/an_SS-works-with-pending-input-trap.sh \
   tmac/tests/an_TH-repairs-ad-damage.sh \
