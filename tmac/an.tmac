@@ -122,6 +122,36 @@
 .  el         .an*break-page-with-new-number
 ..
 .
+.de an*reset-text-parameters
+.  nr PS    10z \" default type size
+.  nr VS    12p \" default vertical spacing
+.
+.  nr PS-SS 10z
+.  nr PS-SH 10.95z
+.
+.  \" Use sizes similar to LaTeX.
+.  if t \{\
+.    ie (\\n[S] = 11) \{\
+.      nr PS    10.95z
+.      nr PS-SS 10.95z
+.      nr PS-SH 12z
+.      nr VS    13.6p
+.    \}
+.    el \{\
+.      if (\\n[S] = 12) \{\
+.        nr PS    12z
+.        nr PS-SS 12z
+.        nr PS-SH 14.4z
+.        nr VS    14.5p
+.      \}
+.    \}
+.  \}
+.
+.  ft R
+.  ps \\n[PS]u
+.  vs \\n[VS]u
+..
+.
 .\" Resetting the hyphenation mode is a complicated dance because:
 .\"   1.  Man pages sometimes disable automatic hyphenation--when they
 .\"       do, they nearly always forget to put it back the way it was;
@@ -166,9 +196,7 @@
 .\" We don't handle the line length here because its handling differs
 .\" between (P, LP, PP, HP) and (IP, TP) paragraphs.
 .de an*reset-paragraph-parameters
-.  ft R
-.  ps \\n[PS]u
-.  vs \\n[VS]u
+.  an*reset-text-parameters
 .  ie d AD .ad \\*[AD]
 .  el      .ad b
 .  an*reset-hyphenation-mode
@@ -267,32 +295,6 @@
 .
 .  nr an-TH-was-called 1 \" an-end can make certain assumptions.
 .
-.  \" Set up rendering parameters.  We do this in TH instead of only
-.  \" once when initializing the package because when rendering multiple
-.  \" pages, a previous page might have changed them.
-.  nr PS    10z \" default type size
-.  nr VS    12p \" default vertical spacing
-.  nr PS-SS 10z
-.  nr PS-SH 10.95z
-.
-.  \" use sizes similar to LaTeX
-.  if t \{\
-.    ie (\\n[S] == 11) \{\
-.      nr PS    10.95z
-.      nr PS-SS 10.95z
-.      nr PS-SH 12z
-.      nr VS    13.6p
-.    \}
-.    el \{\
-.      if (\\n[S] == 12) \{\
-.        nr PS    12z
-.        nr PS-SS 12z
-.        nr PS-SH 14.4z
-.        nr VS    14.5p
-.      \}
-.    \}
-.  \}
-.
 .  \" The previous document rendered in a batch may have been in a
 .  \" different language.
 .  if '\\*[locale]'english' .an*localize-strings
@@ -358,8 +360,6 @@
 .
 .  \" Initialize environment for headers and footers.
 .  ev an*env-header-and-footer
-.  ps \\n[PS]u
-.  vs \\n[VS]u
 .  lt \\n[LT]u
 .  an*abbreviate-page-identifier
 .  \" If AT or UC is called, we will need to abbreviate again.
@@ -677,11 +677,7 @@ contains unsupported escape sequence
 .  nr an-devtag-needs-end-of-heading 0
 .  if \\n[an-devtag-needs-second-column] .DEVTAG-COL 2
 .  nr an-devtag-needs-second-column 0
-.  \" TODO: We might factor this into `an*reset-typeface-parameters` and
-.  \" have `an*reset-paragraph-parameters` call it as well.
-.  ft R
-.  ps \\n[PS]u
-.  vs \\n[VS]u
+.  an*reset-text-parameters
 .  if \\n[an-need-break] \{\
 .    br
 .    nr an-need-break 0

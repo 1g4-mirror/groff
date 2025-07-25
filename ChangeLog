@@ -1,3 +1,16 @@
+2025-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Refactor.
+	(an*reset-text-parameters): New macro configures the type size
+	and vertical spacing registers, a task formerly done by `TH`,
+	and (re-)sets the font style, type size, vertical spacing, a
+	task formerly done by `an*reset-paragraph-parameters`, `TH`, and
+	`an*input-trap`.
+	(an*reset-paragraph-parameters, TH, an*input-trap): Call new
+	macro instead of doing the work ourselves.
+
+	Fixes <https://savannah.gnu.org/bugs/?67344>.
+
 2025-07-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man]: Unit-test handling of degerate documents.
