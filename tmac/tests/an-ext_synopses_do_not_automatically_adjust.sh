@@ -25,12 +25,9 @@ input='.
 .SH Name
 foo \- frobnicate a bar
 .SH Synopsis
-.tm GBR1: doc: .j=\n(.j
 .ad l
-.tm GBR2: doc: .j=\n(.j
 .br
 .B void *\c
-.tm GBR3: doc: .j=\n(.j
 .SY bsearch (
 .BI int\~ one ,
 .BI int\~ two ,
@@ -48,6 +45,17 @@ foo \- frobnicate a bar
 
 # Expected output:
 #
+# foo(3)                 Library Functions Manual                 foo(3)
+#
+# Name
+#      foo - frobnicate a bar
+#
+# Synopsis
+#      void *bsearch(int one, int two, int three, int four, int five,
+#                    int six, int seven, int eight, int nine, int ten,
+#                    int eleven);
+#
+# groff test suite              2025-07-24                        foo(3)
 
 output=$(printf "%s\n" "$input" \
     | "$groff" -rLL=70n -man -Tascii -P-cbou)
