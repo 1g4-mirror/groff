@@ -165,6 +165,7 @@ tmac_TESTS = \
   tmac/tests/an_adjust-link-text-correctly.sh \
   tmac/tests/an_adjustment-mode-preserved-after-paragraph-tag.sh \
   tmac/tests/an_avoid-two-font-denial-of-service.sh \
+  tmac/tests/an_degenerate-documents-work.sh \
   tmac/tests/an_do-not-abbreviate-escape-using-TH-arguments.sh \
   tmac/tests/an_font-remapping-does-not-affect-titles.sh \
   tmac/tests/an_handle-degenerate-input-quietly.sh \
