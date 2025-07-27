@@ -13318,7 +13318,7 @@ by the read-only string-valued register
 @code{.sr}.
 
 For example,
-if a type size of 10.95@tie{}points is requested,
+if a document requests a type size of 10.95@tie{}points,
 and the nearest size permitted by a
 @code{sizes}
 request
@@ -13330,7 +13330,8 @@ directives in the device's
 @file{DESC}
 file)
 is 11@tie{}points,
-the output driver uses the latter value.
+@code{groff}
+uses the latter value.
 @endDefreg
 @c END Keep (roughly) parallel with subsection "Fractional type sizes
 @c and new scaling units" of groff_diff(7).
@@ -19657,7 +19658,7 @@ and a
 @slanted{compatibility restore}
 token at its end,
 enabling compatibility mode during its interpolation.@footnote{Recall
-@ref{Strings}.}}
+@ref{Strings}.}
 Thus they work as expected
 even if the interpolation context disables compatibility mode.
 @c END Keep in sync with groff_diff(7), subsection "Altered requests".

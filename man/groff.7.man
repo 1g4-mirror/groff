@@ -4692,21 +4692,20 @@ positions.
 .
 .TPx
 .REQ .sizes "s1 s2 \f[R].\|.\|.\&\f[] sn \f[R][\f[B]0\f[]]"
-Set available type sizes similarly to the
-.B sizes
-directive in a
-.I DESC
-file.
-.
-Each
+Set available type sizes to the list of values or ranges;
+each
 .IR s i
 is interpreted in units of scaled points (\c
-.scaleindicator z ).
+.scaleindicator s ).
 .
-A leading neutral double quote is stripped from
+GNU
+.I troff \" GNU
+strips a leading neutral double quote from
 .IR s1 ;
-the arguments are
-read in copy mode and continue to the end of the input line.
+it reads
+each
+.IR s i
+in copy mode.
 .
 .TPx
 .REQ .so file

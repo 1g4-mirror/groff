@@ -392,20 +392,17 @@ and otherwise defaults to\~1;
 see
 .MR groff_font @MAN5EXT@ .
 .
-Requests and escape sequences in GNU
+GNU
 .I troff \" GNU
-interpret arguments that accept a numerical expression
-indicating a type size default to units of typographical points,
-.\" Legacy forms of the `\s` escape sequence don't accept numerical
-.\" expressions--only integers.
-which the program multiplies by
-.I sizescale
-and converts to an integer.
-.
-The scaling unit
-.B z
-explicitly specifies these typographical points of potentially
+also defines the
+.I "typographical point,"
+scaling unit
+.BR z ,
+which explicitly specifies type size of potentially
 non-integral measure.
+The program multiplies typographical points by
+.I sizescale
+and converts the value to an integer.
 .
 Arguments GNU
 .I troff \" GNU
@@ -415,6 +412,8 @@ units by default comprise those to the escape sequences
 .B \[rs]H
 and
 .BR \[rs]s ,
+.\" Legacy forms of the `\s` escape sequence don't accept numerical
+.\" expressions--only integers.
 to the request
 .BR ps ,
 the third argument to the
@@ -507,7 +506,7 @@ the requested ones are properties of an environment.
 .
 .P
 For example,
-if a type size of 10.95\~points is requested,
+if a document requests a type size of 10.95\~points,
 and the nearest size permitted by a
 .B sizes
 request
@@ -519,7 +518,8 @@ directives in the device's
 .I DESC
 file)
 is 11\~points,
-the output driver uses the latter value.
+.I groff
+uses the latter value.
 .\" END Keep (roughly) parallel with groff.texi node "Using Fractional
 .\" Type Sizes".
 .
