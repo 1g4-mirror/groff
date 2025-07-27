@@ -19616,7 +19616,6 @@ Hello!
     @result{} Hello! @r{(compatibility mode)}
 @endExample
 
-@need 1000
 @cindex @code{\s}, incompatibilities with @acronym{AT&T} @code{troff}
 Normally, the syntax form @code{\s}@var{n} accepts only a single
 character (a digit) for @var{n}, consistently with other forms that
@@ -19631,6 +19630,37 @@ parser to do what the user must have meant.  Kernighan warned of this in
 the 1992 revision of CSTR@tie{}#54 (§2.3), and more recently, McIlroy
 referred to it as a ``living fossil''.} should migrate to another
 @code{\s} form.
+
+@c BEGIN Keep in sync with groff_diff(7), subsection "Altered requests".
+In compatibility mode,
+the
+@code{de},
+@code{am},
+@code{ds},
+and
+@code{as}
+requests behave as
+@code{de1},
+@code{am1},
+@code{ds1},
+and
+@code{as1},
+respectively:
+GNU
+@command{troff} @c GNU
+inserts a
+@slanted{compatibility save}
+token at the beginning of the macro,
+string,
+or appendment thereto as applicable
+and a
+@slanted{compatibility restore}
+token at its end,
+enabling compatibility mode during its interpolation.@footnote{Recall
+@ref{Strings}.}}
+Thus they work as expected
+even if the interpolation context disables compatibility mode.
+@c END Keep in sync with groff_diff(7), subsection "Altered requests".
 
 @c ---------------------------------------------------------------------
 

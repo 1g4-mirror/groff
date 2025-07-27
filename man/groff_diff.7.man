@@ -1679,6 +1679,7 @@ is emitted
 and the request has no other effect.
 .
 .
+.\" BEGIN Keep in sync with groff.texi node "Compatibility Mode".
 .br
 .ne 6v
 .TP
@@ -1696,7 +1697,7 @@ and the request has no other effect.
 .RB [[ \[dq] ]\c
 .IR contents ]
 In compatibility mode,
-these requests behave similarly to
+these requests behave as
 .BR de1 ,
 .BR am1 ,
 .BR ds1 ,
@@ -1707,7 +1708,7 @@ GNU
 .I troff \" GNU
 inserts a
 .I "compatibility save"
-token at its beginning of the macro,
+token at the beginning of the macro,
 string,
 or appendment thereto as applicable
 and a
@@ -1716,8 +1717,8 @@ token at its end,
 enabling compatibility mode during its interpolation.
 .
 Thus they work as expected
-even if the surrounding interpretation context
-disables compatibility mode.
+even if the interpolation context disables compatibility mode.
+.\" END Keep in sync with groff.texi node "Compatibility Mode".
 .
 .
 .TP
