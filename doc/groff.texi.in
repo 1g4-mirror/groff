@@ -12321,11 +12321,18 @@ as part of the range syntax.
 It is not possible to use class names as end points of range
 definitions.
 
-A typical use of the @code{class} request is to control line-breaking
-and hyphenation rules as defined by the @code{cflags} request.  For
-example, to inhibit line breaks before the characters belonging to the
-@code{prepunctx} class defined in the previous example, you can write
-the following.
+Typically,
+one sets up a character class
+to then apply breaking and hyphenation properties
+to it with the
+@code{cflags}
+request.
+For example,
+to inhibit line breaks before the characters belonging
+to the
+@samp{prepunctx}
+class defined in the previous example,
+you can write the following.
 
 @Example
 .cflags 2 \C'[prepunctx]'

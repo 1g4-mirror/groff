@@ -2621,11 +2621,11 @@ definitions.
 .
 .
 .IP
-A typical use of the
-.B class
-request is to control line-breaking and hyphenation rules as defined by
-the
-.B cflags
+Typically,
+one sets up a character class
+to then apply breaking and hyphenation properties
+to it with the
+.B \%cflags
 request.
 .
 .
