@@ -1,6 +1,6 @@
 2025-07-27  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	[devpdf]: Error reporting.
+	[gropdf]: Error reporting.
 
 	* src/devices/gropdf/gropdf.pl (GetType1, GetChunk): Perform
 	rudimentary check we are given an Adobe type 1 font, and die
@@ -15,7 +15,7 @@
 	* tmac/an.tmac: Refactor.
 	(an*reset-text-parameters): New macro configures the type size
 	and vertical spacing registers, a task formerly done by `TH`,
-	and (re-)sets the font style, type size, vertical spacing, a
+	and (re-)sets the font style, type size, and vertical spacing, a
 	task formerly done by `an*reset-paragraph-parameters`, `TH`, and
 	`an*input-trap`.
 	(an*reset-paragraph-parameters, TH, an*input-trap): Call new
