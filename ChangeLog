@@ -1,3 +1,15 @@
+2025-07-27  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[devpdf]: Error reporting.
+
+	* src/devices/gropdf/gropdf.pl (GetType1, GetChunk): Perform
+	rudimentary check we are given an Adobe type 1 font, and die
+	immediately if binary format invalid. Include font filename
+	in error messages.
+
+	Fixes <https://savannah.gnu.org/bugs/?67295>. Thanks to
+	G. Branden Robinson for report.
+
 2025-07-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Refactor.

@@ -3571,11 +3571,15 @@ sub GetType1
     my $f;
 
     OpenFile(\$f,$fontdir,"$file");
-    Die("unable to open font '$file' for embedding") if !defined($f);
+    Die("cannot open font '$file' for embedding") if !defined($f);
 
-    $head=GetChunk($f,1,"currentfile eexec");
-    $body=GetChunk($f,2,"00000000") if !eof($f);
-    $tail=GetChunk($f,3,"cleartomark") if !eof($f);
+    $head=GetChunk($f,1,"currentfile eexec",$file);
+
+    Die("'$file' not an Adobe Type 1 font") if $head!~m/^%!PS-AdobeFont-1.0:/;
+    Die("font format for '$file' not recognised: font header missing") if eof($f);
+
+    $body=GetChunk($f,2,"00000000",$file);
+    $tail=GetChunk($f,3,"cleartomark",$file);
 
     return($head,$body,$tail);
 }
@@ -3585,7 +3589,8 @@ sub GetChunk
     my $F=shift;
     my $segno=shift;
     my $ascterm=shift;
-    my ($type,$hdr,$chunk,@msg);
+    my $file=shift;
+    my ($type,$hdr,$chunk);
     binmode($F);
     my $enc="ascii";
 
@@ -3614,11 +3619,11 @@ sub GetChunk
 		return if $chunktype == 3;
 
 		$ct=read($F,$hdr,4);
-		Die("failed to read binary segment length") if $ct != 4;
+		Die("font format for '$file' not recognised: failed to read binary segment length") if $ct != 4;
 		my $sl=unpack('V',$hdr);
 		my $data;
 		my $chk=read($F,$data,$sl);
-		Die("failed to read binary segment") if $chk != $sl;
+		Die("font format for '$file' not recognised: failed to read binary segment") if $chk != $sl;
 		$chunk.=$data;
 	    }
 	    else
@@ -3659,7 +3664,7 @@ sub GetChunk
 	}
 	else
 	{
-	    push(@msg,"Failed to read 2 header bytes");
+	    Die("font format for '$file' not recognised: failed to read 2 header bytes");
 	}
     }
 
