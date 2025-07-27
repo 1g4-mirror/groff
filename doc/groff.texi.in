@@ -13449,10 +13449,15 @@ withdrawn.}
 @DefescItem {\\m, (, co, }
 @DefescItem {\\m, [, col, ]}
 @DefregListEndx {.m}
-Set stroke color to
-@var{col}.
+Select
+@var{col}
+as the stroke color for glyphs,
+rules,
+and objects drawn with
+@code{\D'@dots{}'}
+escape sequences.
 The escape sequence
-@code{\m[]}
+@code{\M[]}
 restores the previous stroke color,
 or the default if there is none,
 as does a
@@ -13470,10 +13475,10 @@ and these words are in the previous color.
 @cindex stroke color name register (@code{.m})
 @cindex name, stroke color, register (@code{.m})
 @cindex color name, stroke, register (@code{.m})
-The name of the current stroke color is available in the read-only
-string-valued register @samp{.m}; it is associated with the environment
-(@pxref{Environments}).  The default stroke color is named
-@samp{default}.
+The current environment's stroke color selection
+is available in the read-only string-valued register @samp{.m}
+(@pxref{Environments}).
+The default strike color is named @samp{default}.
 
 @cindex @code{\m} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\m}
@@ -13497,10 +13502,11 @@ We can assign a stroke color to a margin character as follows
 @DefescItem {\\M, (, co, }
 @DefescItem {\\M, [, col, ]}
 @DefregListEndx {.M}
-Set fill color for objects drawn with
+Select
+@var{col}
+as the fill color for objects drawn with
 @code{\D'@dots{}'}
-escape sequences to
-@var{col}.
+escape sequences.
 The escape sequence
 @code{\M[]}
 restores the previous fill color,
@@ -13533,9 +13539,10 @@ interprets the fill color as a character cell background color.
 @cindex fill color name register (@code{.M})
 @cindex name, fill color, register (@code{.M})
 @cindex color name, fill, register (@code{.M})
-The name of the current fill color is available in the read-only
-string-valued register @samp{.M}; it is associated with the environment
-(@pxref{Environments}).  The default fill color is named @samp{default}.
+The current environment's fill color selection
+is available in the read-only string-valued register @samp{.M}
+(@pxref{Environments}).
+The default fill color is named @samp{default}.
 
 Create an ellipse with a red interior as follows.
 

@@ -2994,11 +2994,12 @@ performs this test before searching special fonts.
 .TP
 .BR .fcolor\~ [\c
 .IR col ]
-Set the fill color to
-.IR col ,
+Select
+.I col
+as the environment's fill color,
 or,
 without an argument,
-restore the previous stroke color,
+restore the previous fill color,
 or the default if there is none.
 .
 .
@@ -3123,8 +3124,9 @@ not an abstract style or mounting position.
 .TP
 .BR .gcolor\~ [\c
 .IR col ]
-Set the stroke color to
-.IR col ,
+Select
+.I col
+as the environment's stroke color,
 or,
 without an argument,
 restore the previous stroke color,

@@ -5814,19 +5814,19 @@ default scaling unit\~\c
 .
 .TP
 .ESC m c
-Set stroke color to that with one-character
+Select stroke color with one-character
 .RI name\~ c .
 .
 .
 .TP
 .ESC m( cl
-Set stroke color to that with two-character
+Select stroke color with two-character
 .RI name\~ cl .
 .
 .
 .TP
 .ESC[] m color
-Set stroke color to that with arbitrarily long
+Select stroke color with arbitrarily long
 .RI name\~ color .
 .
 .
@@ -5837,19 +5837,19 @@ Restore previous stroke color.
 .
 .TP
 .ESC M c
-Set fill color to that with one-character
+Select fill color with one-character
 .RI name\~ c .
 .
 .
 .TP
 .ESC M( cl
-Set fill color to that with two-character
+Select fill color with two-character
 .RI name\~ cl .
 .
 .
 .TP
 .ESC[] M color
-Set fill color to that with arbitrarily long
+Select fill color with arbitrarily long
 .RI name\~ color .
 .
 .
