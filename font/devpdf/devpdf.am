@@ -231,7 +231,7 @@ font/devpdf/download: $(devpdffontencdata) $(devpdffontmapdata) \
 	&& PATH="$(abs_top_builddir)$(GROFF_PATH_SEPARATOR)$(abs_top_builddir)/build-aux$(GROFF_PATH_SEPARATOR)$(PATH)" \
 	$(abs_top_builddir)/font/devpdf/util/BuildFoundries \
 	  --download $(abs_top_srcdir)/font/devpdf/download.in \
-	  --strict $(abs_top_builddir)/font/devpdf \
+	  $(abs_top_builddir)/font/devpdf \
 	  '$(abs_top_srcdir)/font/devpdf:$(abs_top_builddir)/font/devpdf' \
 	  >>$@.tmp \
 	&& mv $@.tmp $@
