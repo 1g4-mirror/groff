@@ -4747,14 +4747,14 @@ Lemberg and
 .MT esr@\:thyrsus\:.com
 Eric S.\& Raymond
 .ME
-wrote
+contributed
 .BR EX / EE ,
 .BR MT / ME ,
 .BR UR / UE ,
+.BR TQ ,
+and an early version of the
 .BR SY / YS ,
-and
-.B TQ
-macros for
+macros to
 .I groff
 1.20 (2009).
 .
@@ -4766,17 +4766,27 @@ implemented the
 and
 .B MF
 strings;
-.BR BP , \" 1.24
 .BR CS ,
 .BR CT ,
-.BR PO , \" 1.24
-.BR TS , \" 1.24
 and
 .B U
 registers;
 and the
 .B MR
-macro. \" all 1.23 except where noted
+macro for
+.I groff
+1.23 (2023),
+and the
+.BR BP ,
+.BR PO ,
+and
+.B TS
+registers
+and a revised implementation of the
+.BR SY / YS
+macros for
+.I groff
+1.24 (2025).
 .
 .
 .P
