@@ -242,8 +242,8 @@ EXTRA_DIST += $(tmac_TESTS)
 
 tmac_XFAIL_TESTS = \
   tmac/tests/an-ext_ME-punct-hyphenates.sh \
-  tmac/tests/an-ext_UE-punct-hyphenates.sh \
   tmac/tests/an-ext_UE-breaks-before-long-URIs.sh \
+  tmac/tests/an-ext_UE-punct-hyphenates.sh \
   tmac/tests/e_footnotes-work-with-columns.sh \
   tmac/tests/pdf_bookmark-starting-with-control-char-works.sh
 XFAIL_TESTS += $(tmac_XFAIL_TESTS)
