@@ -1,5 +1,21 @@
 2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Make `pev` request report previous and current stroke
+	and fill colors.  They are properties of the environment, this
+	request already reports plenty of data that are otherwise
+	available via built-in registers, and the _previous_ values
+	thereofre are not thus exposed.
+
+	* src/roff/troff/env.h (class environment): Declare new public
+	member functions `get_prev_stroke_color()` and
+	`get_prev_fill_color_string()`.
+	* src/roff/troff/env.cpp
+	(environment::get_prev_stroke_color_string):
+	(environment::get_prev_fill_color_string): Define them.
+	(environment::dump): Report the data.
+
+2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Trivially refactor, continuing naming
 	reform of functions that are troff request handlers and which
 	lists of objects or properties thereof.  Also mark these request

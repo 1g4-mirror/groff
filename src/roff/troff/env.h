@@ -365,6 +365,8 @@ public:
   void space_newline();
   const char *get_stroke_color_string();
   const char *get_fill_color_string();
+  const char *get_prev_stroke_color_string();
+  const char *get_prev_fill_color_string();
   const char *get_font_family_string();
   const char *get_font_name_string();
   const char *get_style_name_string();

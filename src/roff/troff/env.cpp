@@ -3411,6 +3411,16 @@ const char *environment::get_fill_color_string()
   return fill_color->nm.contents();
 }
 
+const char *environment::get_prev_stroke_color_string()
+{
+  return prev_stroke_color->nm.contents();
+}
+
+const char *environment::get_prev_fill_color_string()
+{
+  return prev_fill_color->nm.contents();
+}
+
 const char *environment::get_font_name_string()
 {
   symbol f = get_font_name(fontno, this);
@@ -3638,6 +3648,12 @@ void environment::dump()
 #ifdef WIDOW_CONTROL
   errprint("  widow control: %1\n", want_widow_control ? "yes" : "no");
 #endif /* WIDOW_CONTROL */
+  errprint("  previous stroke color: %1\n",
+	   get_prev_stroke_color_string());
+  errprint("  stroke color: %1\n", get_stroke_color_string());
+  errprint("  previous fill color: %1\n",
+	   get_prev_fill_color_string());
+  errprint("  fill color: %1\n", get_fill_color_string());
   fflush(stderr);
 }
 
