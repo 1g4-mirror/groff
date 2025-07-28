@@ -1251,7 +1251,7 @@ node *environment::extract_output_line()
   return nd;
 }
 
-void fill_color_change()
+static void select_fill_color_request()
 {
   symbol s = get_name();
   if (s.is_null())
@@ -1261,7 +1261,7 @@ void fill_color_change()
   skip_line();
 }
 
-void stroke_color_change()
+static void select_stroke_color_request()
 {
   symbol s = get_name();
   if (s.is_null())
@@ -1347,7 +1347,7 @@ void point_size()
   skip_line();
 }
 
-void override_sizes()
+static void override_available_type_sizes_request()
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "available font sizes override request"
@@ -2983,7 +2983,7 @@ void tab_stops::operator=(const tab_stops &ts)
   }
 }
 
-void set_tabs()
+static void configure_tab_stops_request()
 {
   hunits pos;
   hunits prev_pos = 0;
@@ -4303,9 +4303,9 @@ void init_env_requests()
   init_request("fam", family_change);
   init_request("fc", field_characters_request);
   init_request("fi", fill);
-  init_request("fcolor", fill_color_change);
+  init_request("fcolor", select_fill_color_request);
   init_request("ft", select_font_request);
-  init_request("gcolor", stroke_color_change);
+  init_request("gcolor", select_stroke_color_request);
   init_request("hc", hyphenation_character_request);
   init_request("hla", select_hyphenation_language);
   init_request("hlm", hyphen_line_max_request);
@@ -4332,9 +4332,9 @@ void init_env_requests()
   init_request("ps", point_size);
   init_request("pvs", post_vertical_spacing);
   init_request("rj", right_justify);
-  init_request("sizes", override_sizes);
+  init_request("sizes", override_available_type_sizes_request);
   init_request("ss", space_size);
-  init_request("ta", set_tabs);
+  init_request("ta", configure_tab_stops_request);
   init_request("ti", temporary_indent);
   init_request("tc", tab_character_request);
   init_request("tl", title);
