@@ -3710,7 +3710,7 @@ disables the messages and is the default.
 This feature is a development and debugging aid
 for man page maintainers;
 the problems diagnosed,
-and range and meanings of the supported levels
+and range and meanings of the supported levels,
 are subject to change.
 .
 .
