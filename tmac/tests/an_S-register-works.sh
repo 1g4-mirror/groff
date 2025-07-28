@@ -52,13 +52,13 @@ Paragraph ps=\n[.s]z, vs=\n[.v]u.
 
 output=$(printf "%s\n" "$input" | "$groff" -a -rS10 -man -Tps)
 echo "$output"
-echo "checking header and footer parameters when given -rS10"
+echo "checking header and footer parameters when given -rS10" >&2
 echo "$output" | grep -q 'suite ps=10z, vs=12000u' || wail
-echo "checking section heading parameters when given -rS10"
+echo "checking section heading parameters when given -rS10" >&2
 echo "$output" | grep -q 'Section ps=10.95z, vs=12000u' || wail
-echo "checking subsection heading parameters when given -rS10"
+echo "checking subsection heading parameters when given -rS10" >&2
 echo "$output" | grep -q 'Subsection ps=10z, vs=12000u' || wail
-echo "checking paragraph parameters when given -rS10"
+echo "checking paragraph parameters when given -rS10" >&2
 echo "$output" | grep -q 'Paragraph ps=10z, vs=12000u' || wail
 
 # Expected output:
@@ -71,13 +71,13 @@ echo "$output" | grep -q 'Paragraph ps=10z, vs=12000u' || wail
 
 output=$(printf "%s\n" "$input" | "$groff" -a -rS11 -man -Tps)
 echo "$output"
-echo "checking header and footer parameters when given -rS11"
+echo "checking header and footer parameters when given -rS11" >&2
 echo "$output" | grep -q 'suite ps=10.95z, vs=13600u' || wail
-echo "checking section heading parameters when given -rS11"
+echo "checking section heading parameters when given -rS11" >&2
 echo "$output" | grep -q 'Section ps=12z, vs=13600u' || wail
-echo "checking subsection heading parameters when given -rS11"
+echo "checking subsection heading parameters when given -rS11" >&2
 echo "$output" | grep -q 'Subsection ps=10.95z, vs=13600u' || wail
-echo "checking paragraph parameters when given -rS11"
+echo "checking paragraph parameters when given -rS11" >&2
 echo "$output" | grep -q 'Paragraph ps=10.95z, vs=13600u' || wail
 
 # Expected output:
@@ -90,13 +90,13 @@ echo "$output" | grep -q 'Paragraph ps=10.95z, vs=13600u' || wail
 
 output=$(printf "%s\n" "$input" | "$groff" -a -rS12 -man -Tps)
 echo "$output"
-echo "checking header and footer parameters when given -rS12"
+echo "checking header and footer parameters when given -rS12" >&2
 echo "$output" | grep -q 'suite ps=12z, vs=14500u' || wail
-echo "checking section heading parameters when given -rS12"
+echo "checking section heading parameters when given -rS12" >&2
 echo "$output" | grep -q 'Section ps=14.4z, vs=14500u' || wail
-echo "checking subsection heading parameters when given -rS12"
+echo "checking subsection heading parameters when given -rS12" >&2
 echo "$output" | grep -q 'Subsection ps=12z, vs=14500u' || wail
-echo "checking paragraph parameters when given -rS12"
+echo "checking paragraph parameters when given -rS12" >&2
 echo "$output" | grep -q 'Paragraph ps=12z, vs=14500u' || wail
 
 test -z "$fail"
