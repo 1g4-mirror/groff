@@ -1,5 +1,5 @@
 #!@PERL@
-# Copyright (C) 1989-2023 Free Software Foundation, Inc.
+# Copyright (C) 1989-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
@@ -29,7 +29,7 @@ use Config;
 # I do agree however that the previous way opened a whole bunch
 # of security holes.
 
-my $no_exec;
+my $want_only_xref_update = 0;
 
 if (grep(/^--help$/, @ARGV)) {
 	print <<EOF;
@@ -54,7 +54,7 @@ if (grep(/^--version$/, @ARGV)) {
 
 # check for -x and remove it
 if (grep(/^-x$/, @ARGV)) {
-	$no_exec++;
+	$want_only_xref_update = 1;
 	@ARGV = grep(!/^-x$/, @ARGV);
 }
 
@@ -148,7 +148,7 @@ if ($rfilename) {
 	close(OUT);
 }
 
-exit 0 if $no_exec;
+exit 0 if $want_only_xref_update;
 exit system($second_pass);
 
 sub print_index {

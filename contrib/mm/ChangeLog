@@ -1,5 +1,10 @@
 2025-07-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mmroff.pl: Rename scalar `no_exec` to `want_only_xref_update`
+	for clarity.  Manipulate it like a Boolean, not a counter.
+
+2025-07-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mmroff.pl: Better parallelize usage message with man page.
 
 2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
