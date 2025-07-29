@@ -4790,8 +4790,9 @@ is the formatter.
 .
 .TP
 .B \[rs]n[.height]
-Interpolate the rescaled height in scaled points
-of the environment's selected font.
+Interpolate the rescaled height
+of the environment's selected font,
+in scaled points.
 .
 It is zero if the font height is not rescaled.
 .
