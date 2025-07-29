@@ -7479,8 +7479,13 @@ intact through multiple macro calls.
 @cindex level, input
 @cindex interpolation depth
 @cindex depth, interpolation
-Outside of compatibility mode, GNU @code{troff} doesn't exhibit this
-problem because it tracks the nesting depth of interpolations.
+@cindex nesting depth, of interpolations
+@cindex depth, nesting, of interpolations
+Outside of compatibility mode,
+GNU
+@command{troff} @c GNU
+doesn't exhibit this problem
+because it tracks the nesting depth of interpolations.
 @xref{Implementation Differences}.
 
 @c ---------------------------------------------------------------------
@@ -7779,13 +7784,23 @@ any escape sequences other than @code{\%}, @code{\:}, @code{\@{},
 @code{\/}, @code{\c}, @code{\e}, and @code{\p}
 @end itemize
 
+@cindex input level
+@cindex level, input
+@cindex interpolation depth
+@cindex depth, interpolation
+@cindex nesting depth, of interpolations
+@cindex depth, nesting, of interpolations
 Delimiter syntax is complex and flexible primarily for historical
 reasons; the foregoing restrictions need be kept in mind mainly when
-using @code{groff} in @acronym{AT&T} compatibility mode.  GNU
-@code{troff} keeps track of the nesting depth of escape sequence
-interpolations, so the only characters you need to avoid using as
-delimiters are those that appear in the arguments you input, not any
-that result from interpolation. Typically, @code{'} works fine.
+using @code{groff} in @acronym{AT&T} compatibility mode.
+GNU
+@command{troff}
+keeps track of the nesting depth of escape sequence interpolations,
+so the only characters you need to avoid using as delimiters are those
+that appear in the arguments you input,
+not any that result from interpolation.
+Typically,
+@code{'} works fine.
 @xref{Implementation Differences}.
 
 @Example
@@ -14686,6 +14701,8 @@ inserts some vertical space.  It could be used to separate paragraphs.
 ..
 @endExample
 
+@cindex nesting depth, of macro definitions
+@cindex depth, nesting, of macro definitions
 We can define one macro within another.  Attempting to nest @samp{..}
 naïvely will end the outer definition because the inner definition
 isn't interpreted as such until the outer macro is later interpolated.
@@ -15129,6 +15146,8 @@ the input.  Use @code{\e} to represent the escape character,
 and @samp{'} where GNU @code{troff} expects them as control characters
 if you mean to use them literally (recall @ref{Requests and Macros}).
 
+@cindex nesting depth, of escape sequences in macro definitions
+@cindex depth, nesting, of escape sequences in macro definitions
 Macro definitions can be nested to arbitrary depth.  The mechanics of
 parsing the escape character have significant consequences for this
 practice.
@@ -19584,13 +19603,16 @@ may be ambiguous to the document maintainer.
 This set of additional delimiters comprises
 @samp{0123456789+-(.|}.
 
-@cindex input level in delimited arguments
-@cindex interpolation depth in delimited arguments
-@cindex delimited arguments, incompatibilities with @acronym{AT&T} @code{troff}
+@cindex input level
+@cindex level, input
+@cindex interpolation depth
+@cindex depth, interpolation
+@cindex nesting depth, of interpolations
+@cindex depth, nesting, of interpolations
 Normally,
 GNU
 @command{troff} @c GNU
-keeps track of delimited arguments' interpolation depth.
+tracks the nesting depth of interpolations.
 In compatibility mode,
 it does not.
 
