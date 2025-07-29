@@ -33,17 +33,16 @@ my $no_exec;
 
 if (grep(/^--help$/, @ARGV)) {
 	print <<EOF;
-usage: mmroff [-x] [groff-option ...] [file ...]
+usage: mmroff [-x] [groff-argument ...]
 usage: mmroff --version
 usage: mmroff --help
 
 $progname is a simple wrapper for groff(1), used to expand cross
 references in mm documents; see groff_mm(7).  It also handles the
-inclusion of PostScript images.
-
-Documents that do not use these features of groff mm (the INITI, IND,
-INDP, INITR, SETR, GETHN, GETPN, GETR, GETST, PIC macros) do not require
-mmroff.  See the mmroff(1) manual page.
+inclusion of PostScript images.  Documents that do not use these
+features of groff mm (the INITI, IND, INDP, INITR, SETR, GETHN, GETPN,
+GETR, GETST, PIC macros) do not require mmroff.  See the mmroff(1)
+manual page.
 EOF
 	exit;
 }

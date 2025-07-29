@@ -1,3 +1,7 @@
+2025-07-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* mmroff.pl: Better parallelize usage message with man page.
+
 2025-02-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (BS, BE): Use box diversion instead of a regular one to
