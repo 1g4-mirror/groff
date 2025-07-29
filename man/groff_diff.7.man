@@ -398,7 +398,7 @@ also defines the
 .I "typographical point,"
 scaling unit
 .BR z ,
-which explicitly specifies type size of potentially
+which explicitly specifies a type size of potentially
 non-integral measure.
 The program multiplies typographical points by
 .I sizescale

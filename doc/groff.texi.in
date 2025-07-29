@@ -13201,19 +13201,17 @@ specifies
 @var{sizescale}
 and otherwise defaults to@tie{}1.@footnote{@xref{Device and Font
 Description Files}.}
-Requests and escape sequences in GNU
+GNU
 @command{troff}
-interpret arguments that accept a numerical expression
-indicating a type size defaulting to units of typographical points,
-@c Legacy forms of the `\s` escape sequence don't accept numerical
-@c expressions--only integers.
-which the formatter multiplies by
-@var{sizescale}
-and converts to an integer.
-The scaling unit
-@code{z}
-explicitly specifies these typographical points of potentially
+also defines the
+@dfn{typographical point},
+scaling unit
+@code{z},
+which explicitly specifies a type size of potentially
 non-integral measure.
+The program multiplies typographical points by
+@var{sizescale}
+and converts the value to an integer.
 Arguments GNU
 @command{troff} @c GNU
 interprets in
@@ -13222,6 +13220,8 @@ units by default comprise those to the escape sequences
 @code{\H}
 and
 @code{\s},
+@c Legacy forms of the `\s` escape sequence don't accept numerical
+@c expressions--only integers.
 to the request
 @code{ps},
 the third argument to the
