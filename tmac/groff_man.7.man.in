@@ -4753,7 +4753,7 @@ contributed
 .BR UR / UE ,
 .BR TQ ,
 and an early version of the
-.BR SY / YS ,
+.BR SY / YS
 macros to
 .I groff
 1.20 (2009).
