@@ -4,7 +4,7 @@
 	and fill colors.  They are properties of the environment, this
 	request already reports plenty of data that are otherwise
 	available via built-in registers, and the _previous_ values
-	thereofre are not thus exposed.
+	thereof are not thus exposed.
 
 	* src/roff/troff/env.h (class environment): Declare new public
 	member functions `get_prev_stroke_color()` and
