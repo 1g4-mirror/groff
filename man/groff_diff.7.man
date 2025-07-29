@@ -4654,6 +4654,17 @@ Favor its use over numeric literals with many zeroes or nines
 to indicate an arbitrary large quantity.
 .
 .
+.TP
+.B \[rs]n[.s]
+In GNU
+.IR troff , \" GNU
+the
+.B .s
+register is string-valued;
+it interpolates the type size in typographical points,
+which can be represented as a decimal fraction.
+.
+.
 .\" ====================================================================
 .SS "New registers"
 .\" ====================================================================
