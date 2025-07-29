@@ -530,23 +530,22 @@ Suppress formatted output.
 .
 .\" BEGIN Keep parallel with groff.texi node "Warnings".
 .\" Caveat: the Texinfo manual sorts them by number, not name.
-Warning diagnostics emitted by
-.I @g@troff
-are divided into named,
+GNU
+.I troff \" GNU
+divides its warning diagnostics into named,
 numbered categories.
-.
-The name associated with each warning category is used by the
+The
 .B \-w
 and
 .B \-W
-options.
+options use the associated names.
 .
-Each category is also assigned a power of two;
-the sum of enabled category codes is used by the
+A power of two characterizes each category;
+the
 .B warn
 request and the
 .B .warn
-register.
+register respectively set and report the sum of enabled category codes.
 .
 Warnings of each category are produced under the following
 circumstances.

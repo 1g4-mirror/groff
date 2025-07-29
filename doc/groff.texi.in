@@ -19133,12 +19133,21 @@ codes of enabled warning categories.
 @subsection Warnings
 @cindex warnings
 
-Warning diagnostics emitted by GNU @code{troff} are divided into named,
-numbered categories.  The name associated with each warning category is
-used by the @option{-w} and @option{-W} options.  Each category is also
-assigned a power of two; the sum of enabled category values is used by
-the @code{warn} request and the @code{.warn} register.
-
+GNU
+@command{troff} @c GNU
+divides its warning diagnostics into named,
+numbered categories.
+The
+@option{-w}
+and
+@option{-W}
+options use the associated names.
+A power of two characterizes each category;
+the
+@code{warn}
+request and the
+@code{.warn}
+register respectively set and report the sum of enabled category codes.
 Warnings of each category are produced under the following
 circumstances.
 
