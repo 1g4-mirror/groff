@@ -5363,6 +5363,8 @@ See section \[lq]Punning Names\[rq] in
 .
 .
 .\" XXX: Is this really not an AT&T troff feature?
+.br
+.ne 2v
 .P
 If a font description file contains pairwise kerning information,
 glyphs from that font are kerned.
