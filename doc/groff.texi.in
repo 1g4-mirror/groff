@@ -18968,11 +18968,18 @@ they can affect the visibility of subsequently planted traps.
 @cindex interactive use of GNU @command{troff}
 @cindex @command{gtroff}, interactive use of
 @cindex @command{troff}, GNU, interactive use of
-Break the line and flush any pending output line immediately.  The
-effect is the same as the @code{br} request unless the no-break control
-character is used; @samp{'br} does nothing, whereas @samp{'fl} writes
-the pending output line without further updating the drawing position.
-However, the @emph{reported} horizontal drawing position is still
+Break the line and flush any pending output line immediately.
+The effect is the same as the
+@code{br}
+request unless the no-break control character is used;
+@samp{'br}
+does nothing,
+whereas
+@samp{'fl}
+writes the pending output line
+without further updating the drawing position.
+However,
+the @emph{reported} horizontal drawing position is still
 reckoned from the start of the input line.
 
 @Example
