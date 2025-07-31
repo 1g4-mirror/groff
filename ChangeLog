@@ -1,5 +1,10 @@
 2025-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (get_line): Clear heap-allocated
+	memory and annotate how we could do so in-language in C++03.
+
+2025-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (get_resolution)
 	(get_image_generator): Fix off-by-one errors in line counting.
 

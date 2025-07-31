@@ -262,6 +262,10 @@ void sys_fatal(const char *s)
 /*
  *  get_line - Copy a line (w/o newline) from a file to the
  *             global line buffer.
+ *
+ * TODO: Discard; migrate callers to POSIX `getline()`.
+ * https://pubs.opengroup.org/onlinepubs/9799919799/functions/\
+ *   getline.html
  */
 
 static bool get_line(FILE *f, const char *file_name, int lineno)
@@ -271,7 +275,8 @@ static bool get_line(FILE *f, const char *file_name, int lineno)
   if (0 /* nullptr */ == linebuf) {
     linebufsize = 128;
     try {
-      linebuf = new char[linebufsize];
+      linebuf = new char[linebufsize]; // C++03: new int[linebufsize]();
+      (void) memset(linebuf, '\0', (linebufsize * sizeof(char)));
     }
     catch (std::bad_alloc &e) {
       fatal_with_file_and_line(file_name, lineno, "cannot allocate %1"
@@ -298,7 +303,8 @@ static bool get_line(FILE *f, const char *file_name, int lineno)
       int newbufsize = linebufsize * 2;
       char *old_linebuf = linebuf;
       try {
-	linebuf = new char[newbufsize];
+	linebuf = new char[newbufsize]; // C++03: new int[newbufsize]();
+	(void) memset(linebuf, '\0', (newbufsize * sizeof(char)));
       }
       catch (std::bad_alloc &e) {
 	fatal_with_file_and_line(file_name, lineno, "cannot allocate"
