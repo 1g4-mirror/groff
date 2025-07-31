@@ -1,5 +1,13 @@
 2025-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (get_resolution)
+	(get_image_generator): Read devices' "DESC" files as libgroff
+	does and as documented in groff_font(5) (and CSTR #54 [1992]);
+	upon encountering a "charset" directive, we stop interpreting
+	directives.
+
+2025-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (get_line): Clear heap-allocated
 	memory and annotate how we could do so in-language in C++03.
 

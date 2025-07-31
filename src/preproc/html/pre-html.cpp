@@ -24,6 +24,7 @@
 #endif
 
 #include <assert.h>
+#include <ctype.h> // isspace()
 #include <errno.h>
 #include <stdarg.h> // va_list, va_end(), va_start(), vsnprintf()
 #include <stdio.h> // EOF, FILE, fclose(), feof(), fflush(), fopen(),
@@ -337,12 +338,17 @@ static unsigned int get_resolution(void)
   f = font_path.open_file(devps_desc, &pathp);
   if (0 /* nullptr */ == f)
     fatal("cannot open file '%1': %2", devps_desc, strerror(errno));
-  // XXX: We should break out of this loop if we hit a "charset" line.
-  // "This line and everything following it in the file are ignored."
-  // (groff_font(5))
   int lineno = 0;
-  while (get_line(f, pathp, lineno++))
+  while (get_line(f, pathp, lineno++)) {
     (void) sscanf(linebuf, "res %u", &res);
+    // We must stop reading at a "charset" line; see groff_font(5).
+    if (strncmp(linebuf, "charset", sizeof "charset") == 0) {
+      // Don't be fooled by non-groff extensions.
+      char trailing_char = linebuf[(sizeof "charset") - 1];
+      if (isspace(trailing_char) || '\0' == trailing_char)
+	break;
+    }
+  }
   free(pathp);
   fclose(f);
   return res;
@@ -364,9 +370,6 @@ static char *get_image_generator(void)
   f = font_path.open_file(devhtml_desc, &pathp);
   if (0 /* nullptr */ == f)
     fatal("cannot open file '%1': %2", devhtml_desc, strerror(errno));
-  // XXX: We should break out of this loop if we hit a "charset" line.
-  // "This line and everything following it in the file are ignored."
-  // (groff_font(5))
   int lineno = 0;
   while (get_line(f, pathp, lineno++)) {
     char *cursor = linebuf;
@@ -383,6 +386,13 @@ static char *get_image_generator(void)
       if (cursor == end)
 	continue;
       generator = cursor;
+    }
+    // We must stop reading at a "charset" line; see groff_font(5).
+    if (strncmp(linebuf, "charset", sizeof "charset") == 0) {
+      // Don't be fooled by non-groff extensions.
+      char trailing_char = linebuf[(sizeof "charset") - 1];
+      if (isspace(trailing_char) || '\0' == trailing_char)
+	break;
     }
   }
   free(pathp);
