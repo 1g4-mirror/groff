@@ -334,7 +334,7 @@ static unsigned int get_resolution(void)
   // XXX: We should break out of this loop if we hit a "charset" line.
   // "This line and everything following it in the file are ignored."
   // (groff_font(5))
-  int lineno = 1;
+  int lineno = 0;
   while (get_line(f, pathp, lineno++))
     (void) sscanf(linebuf, "res %u", &res);
   free(pathp);
@@ -352,7 +352,7 @@ static char *get_image_generator(void)
 {
   char *pathp;
   FILE *f;
-  char *generator = 0;
+  char *generator = 0 /* nullptr */;
   const char keyword[] = "image_generator";
   const size_t keyword_len = strlen(keyword);
   f = font_path.open_file(devhtml_desc, &pathp);
@@ -361,7 +361,7 @@ static char *get_image_generator(void)
   // XXX: We should break out of this loop if we hit a "charset" line.
   // "This line and everything following it in the file are ignored."
   // (groff_font(5))
-  int lineno = 1;
+  int lineno = 0;
   while (get_line(f, pathp, lineno++)) {
     char *cursor = linebuf;
     size_t limit = strlen(linebuf);

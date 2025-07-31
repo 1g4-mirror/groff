@@ -1,5 +1,10 @@
 2025-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pre-html.cpp (get_resolution)
+	(get_image_generator): Fix off-by-one errors in line counting.
+
+2025-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi.in (Debugging): Expand `ab`, `fl` discussion.
 
 	Fixes <https://savannah.gnu.org/bugs/?67380>.  Thanks to Dave
