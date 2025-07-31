@@ -1,3 +1,10 @@
+2025-07-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (Debugging): Expand `ab`, `fl` discussion.
+
+	Fixes <https://savannah.gnu.org/bugs/?67380>.  Thanks to Dave
+	Kemper for bringing details of `ab` behavior to my attention.
+
 2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Make `pev` request report previous and current stroke

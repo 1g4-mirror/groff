@@ -18738,6 +18738,13 @@ and then abort GNU
 @command{troff}; @c GNU
 that is,
 stop processing and terminate with a failure status.
+Aborting does not flush a partially collected line,
+a potentially significant fact if you're using
+@code{ab}
+to ``bisect'' a troublesome document or macro definition;
+see the
+@code{fl}
+request below.
 @endDefreq
 
 @Defreq {ex, }
@@ -18978,6 +18985,16 @@ bar \c
 
 The timing of a flush is most easily perceived in GNU @command{troff}'s
 device-independent output.
+
+Use of
+@samp{'fl}
+may be desirable immediately prior to an
+@code{ab}
+request
+when troubleshooting a document or macro definition line by line,
+because a significant number of formatting operations
+can accumulate on a partially collected output line,
+misleading you about ``where'' the abort ``really'' took place.
 
 Historically, @code{fl} was used with @code{rd} to produce interactive
 @command{nroff} documents.  GNU @command{troff} does not easily support
