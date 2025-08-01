@@ -891,10 +891,6 @@ Point;
 a typesetter's unit used for measuring type size.
 .
 There are 72\~points to an inch.
-Also called an \[lq]integral\[rq] point because historical
-.I roff
-systems used only integral values of
-.BR p .
 .
 .TP
 .B P
@@ -908,7 +904,9 @@ There are 6\~picas to an inch and 12\~points to a pica.
 Typographical point;
 like
 .BR p ,
-but permits non-integral quantities.
+but used only with type sizes,
+to overcome a limitation of AT&T
+.IR troff . \" AT&T
 .\" TODO: Make "p" truncate to integer like AT&T if -C?
 .
 .TP

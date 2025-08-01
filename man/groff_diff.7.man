@@ -358,22 +358,21 @@ but produces no hyphen if the word breaks at that location.
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Using Fractional
 .\" Type Sizes".
+When configuring the type size,
 AT&T
 .I troff \" AT&T
-interpreted all type size measurements in points.
-.
+ignored scaling units and intepreted all measurements in points.
 Combined with integer arithmetic,
 this design choice made it impossible to support,
 for instance,
-ten and a half-point type.
+ten-and-a-half-point type.
 .
 In GNU
-.IR troff , \" GNU
-an output device can select a scaling factor that subdivides a point
-into \[lq]scaled points\[rq].
-.
-A type size expressed in scaled points can thus represent a non-integral
-size in points.
+.I troff \" GNU
+an output device can select a scaling factor
+that subdivides a point into \[lq]scaled points\[rq].
+A type size expressed in scaled points
+can thus represent a non-integral size in points.
 .
 .
 .P
@@ -434,10 +433,11 @@ whereas the register
 interpolates it in scaled points
 .RB ( s ).
 .
-.RB \[lq] \[rs]n[.ps] \[rq]
-is equal to
+.RB \[lq] \[rs]n[.ps]s \[rq],
+.RB \[lq] \[rs]n[.s]z \[rq],
+and
 .RB \[lq] 1m \[rq]
-by definition.
+are co-equal by definition.
 .
 .
 .P

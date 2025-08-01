@@ -4138,9 +4138,9 @@ at the shell prompt is equivalent to placing
 at the beginning of the document.
 .\" Note to document maintainers:
 .\"
-.\" We use the integral point scaling unit `p` instead of the
-.\" typographical point `z` because this is a register assignment; the
-.\" value gets converted to scaled points automatically.
+.\" We use the scaling unit `p` instead of the typographical point `z`
+.\" because this is a register assignment; the value gets converted to
+.\" scaled points automatically.
 .\" Observe:
 .\"    $ printf '.nr PS 10.5p\n.pnr PS\n' | groff # 1.24 or later
 .\"    PS      10500   +0      0

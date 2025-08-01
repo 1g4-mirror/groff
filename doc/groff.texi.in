@@ -4858,9 +4858,9 @@ at the shell prompt is equivalent to placing
 at the beginning of the document.
 @c Note to document maintainers:
 @c
-@c We use the integral point scaling unit `p` instead of the
-@c typographical point `z` because this is a register assignment; the
-@c value gets converted to scaled points automatically.
+@c We use the scaling unit `p` instead of the typographical point `z`
+@c because this is a register assignment; the value gets converted to
+@c scaled points automatically.
 @c Observe:
 @c    $ printf '.nr PS 10.5p\n.pnr PS\n' | groff # 1.24 or later
 @c    PS      10500   +0      0
@@ -6405,10 +6405,6 @@ Centimeter; a centimeter is about 0.3937@tie{}inches.
 @cindex scaling unit @code{p}
 Point; a typesetter's unit used for measuring type size.
 There are 72@tie{}points to an inch.
-Also called an ``integral'' point because historical
-@code{roff}
-systems used only integral values of
-@code{p}.
 
 @item P
 @cindex pica scaling unit (@code{P})
@@ -6435,7 +6431,9 @@ Scaled point; see @ref{Using Fractional Type Sizes}.
 Typographical point;
 like
 @code{p},
-but permits non-integral quantities.
+but used only with type sizes,
+to overcome a limitation of AT&T
+@command{troff}. @c AT&T
 @c TODO: Make "p" truncate to integer like AT&T if -C?
 
 @item f
@@ -13020,7 +13018,7 @@ It supports a variety of syntax forms.
 @table @code
 @item \s@var{n}
 Set the type size to
-@var{n}@tie{}integral
+@var{n}@tie{}typographical
 points.
 @var{n}@tie{}must
 be a single digit.@footnote{In compatibility mode only, a non-zero
@@ -13034,14 +13032,14 @@ restore the previous size.
 @item \s+@var{n}
 @itemx \s-@var{n}
 Increase or decrease the type size by
-@var{n}@tie{}integral
+@var{n}@tie{}typographical
 points.
 @var{n}@tie{}must be exactly one digit.
 
 @item \s(@var{nn}
 Set the type size to
 @var{nn}
-integral points.
+typographical points.
 @var{nn}
 must be exactly two digits.
 If
@@ -13055,7 +13053,7 @@ restore the previous size.
 @itemx \s(-@var{nn}
 Alter the type size in scaled points by the
 @var{nn}
-integral points.
+typographical points.
 @var{nn}
 must be exactly two digits.
 @end table
@@ -13199,12 +13197,20 @@ interpolates the post-vertical spacing.
 @cindex point sizes, fractional
 @cindex sizes, fractional type
 
-AT&T @code{troff} interpreted all type size measurements in points.
-Combined with integer arithmetic, this design choice made it impossible
-to support, for instance, ten and a half-point type.  In GNU
-@code{troff}, an output device can select a scaling factor that
-subdivides a point into ``scaled points''.  A type size expressed in
-scaled points can thus represent a non-integral size in points.
+When configuring the type size,
+AT&T
+@command{troff} @c AT&T
+ignored scaling units and intepreted all measurements in points.
+Combined with integer arithmetic,
+this design choice made it impossible to support,
+for instance,
+ten-and-a-half-point type.
+In GNU
+@command{troff}, @c GNU
+an output device can select a scaling factor
+that subdivides a point into ``scaled points''.
+A type size expressed in scaled points
+can thus represent a non-integral size in points.
 
 @cindex scaled point scaling unit (@code{s})
 @cindex point, scaled, scaling unit (@code{s})
@@ -13278,10 +13284,11 @@ or 10.5@tie{}typographical points.
 
 @Defreg {.ps}
 This read-only register interpolates the type size in scaled points.
-@samp{\n[.ps]s}
-is equal to
+@samp{\n[.ps]s},
+@samp{\n[.s]z},
+and
 @samp{1m}
-by definition.
+are co-equal by definition.
 @endDefreg
 
 @Example
