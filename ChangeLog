@@ -18,9 +18,9 @@
 	`an*reset-adjustment-mode` interpolating `andoc*AD` as an
 	argument to impose the user's preference (or the package
 	default) at each new document.
-	(doc-reset-adjustment-mode): New macro.  Recover that value.
-	Compute the desired adjustment mode based on, in descending
-	priority: (1) the user's preference; (2) the page's preference.
+	(doc-reset-adjustment-mode): New macro assumes responsibility
+	for configuring adjustment.  Accept an argument, and if valid,
+	assign its contents to the `AD` string.
 	(Sh): Configure adjustment _after_ determining formatting
 	parameters dependent on the name of the section heading.  Move
 	`na` request out of control branch matching the `doc-sec-head`
@@ -236,7 +236,7 @@
 
 2025-07-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[man]: Unit-test handling of degerate documents.
+	[man]: Unit-test handling of degenerate documents.
 
 	* tmac/tests/an_degenerate-documents-work.sh: Add test.
 	* tmac/tmac.am (tmac_TESTS): Run test.
