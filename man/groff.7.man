@@ -1200,14 +1200,12 @@ Comparison operators comprise
 (greater than or equal),
 and
 .B =
-(equal).
+(equal,
+with a synonym
+.BR == ).
 .
-.B ==
-is a synonym for
-.BR = .
-.
-When evaluated,
-a comparison is replaced with
+When evaluating a comparison,
+the formatter replaces it with
 .RB \[lq] 0 \[rq]
 if it is false and
 .RB \[lq] 1 \[rq]

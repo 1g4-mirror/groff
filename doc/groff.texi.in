@@ -6724,12 +6724,30 @@ Looks like we'll end up paying \n[salaries] salaries.
 @opindex <=
 @opindex =
 @opindex ==
-Comparison operators comprise @code{<} (less than), @code{>} (greater
-than), @code{<=} (less than or equal), @code{>=} (greater than or
-equal), and @code{=} (equal).  @code{==} is a synonym for @code{=}.
-When evaluated, a comparison is replaced with @samp{0} if it is false
-and @samp{1} if true.  In the @code{roff} language, positive values are
-true, others false.
+Comparison operators comprise
+@code{<}
+(less than),
+@code{>}
+(greater than),
+@code{<=}
+(less than or equal),
+@code{>=}
+(greater than or equal),
+and
+@code{=}
+(equal,
+with synonym @code{==}).
+When evaluating a comparison,
+the formatter replaces it with
+@samp{0}
+if it is false and
+@samp{1}
+if true.
+In the
+@code{roff}
+language,
+positive values are true,
+others false.
 
 @cindex logical operators
 @cindex operators, logical
