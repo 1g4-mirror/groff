@@ -851,6 +851,8 @@ by default,
 but can be customized to interpret it.
 .
 .
+.br
+.ne 4v
 .IP
 .TS
 tab(@);
@@ -1346,6 +1348,8 @@ for compatibility with
 .RI DWB\~ mm.
 .
 .
+.br
+.ne 4v
 .IP
 .TS
 tab(@);
@@ -1516,6 +1520,9 @@ See
 .BR TP .
 .
 .
+.br
+.ie t .ne 4v
+.el   .ne 5v \" for horizontal rule
 .IP
 .TS
 tab(@);
@@ -2604,7 +2611,7 @@ regarding the date.
 tab(@);
 Lf(BI) Lb
 L Lx.
-option@Effect
+option@Meaning and Effect
 AT@T{
 Attention;
 put contents of string
@@ -3909,6 +3916,9 @@ See
 .BR EOP .
 .
 .
+.br
+.ie t .ne 4v
+.el   .ne 5v \" for horizontal rule
 .IP
 .TS
 tab(@);
@@ -4161,7 +4171,7 @@ Many
 strings interpolate predefined,
 localizable text.
 .
-These are presented in quotation marks.
+We present their contents in quotation marks.
 .
 .
 .TP 10n \" "Abstract" + 2n
@@ -4188,7 +4198,7 @@ call.
 lists
 space-separated indices of positional arguments to the
 .B AU
-macro that should be suppressed from appearing in the document heading
+macro that should be suppressed from appearance in the document heading
 on the first page of
 .B MT
 memorandum types 0\[en]3 and 6.
@@ -5100,6 +5110,8 @@ The default is that of the selected
 output device.
 .
 .
+.br
+.ne 5v
 .TP
 .B Le
 .TQ
@@ -5406,6 +5418,8 @@ see
 .RB ( 0 ).
 .
 .
+.br
+.ne 4v
 .IP
 .TS
 tab(@);
