@@ -1,5 +1,12 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an_degenerate-input-uses-sane-page-length.sh:
+	* tmac/tests/doc_degenerate-input-uses-sane-page-length.sh: Add
+	tests.
+	* tmac/tmac.am (tmac_TESTS): Run tests.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* font/devpdf/util/BuildFoundries.pl (RunAfmtodit): Run
 	`afmtodit` with the new `-q` flag.  Recent versions of the URW
 	fonts have tons of duplicate mappings (for groff's purposes) and

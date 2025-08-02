@@ -167,6 +167,7 @@ tmac_TESTS = \
   tmac/tests/an_adjustment-mode-restoration-works.sh \
   tmac/tests/an_avoid-two-font-denial-of-service.sh \
   tmac/tests/an_degenerate-documents-work.sh \
+  tmac/tests/an_degenerate-input-uses-sane-page-length.sh \
   tmac/tests/an_do-not-abbreviate-escape-using-TH-arguments.sh \
   tmac/tests/an_font-remapping-does-not-affect-titles.sh \
   tmac/tests/an_handle-degenerate-input-quietly.sh \
@@ -203,6 +204,7 @@ tmac_TESTS = \
   tmac/tests/doc_Xr-works.sh \
   tmac/tests/doc_accept-mixed-case-section-headings.sh \
   tmac/tests/doc_adjustment-mode-restoration-works.sh \
+  tmac/tests/doc_degenerate-input-uses-sane-page-length.sh \
   tmac/tests/doc_do-not-loop-infinitely-when-shortening-headers.sh \
   tmac/tests/doc_heading-font-remapping-works.sh \
   tmac/tests/doc_hyphenation-mode-restoration-works.sh \
