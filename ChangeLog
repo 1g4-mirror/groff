@@ -1,5 +1,13 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/grog/grog.pl: Trivially refactor to fix a Perl
+	warning.
+	(warn): Rename this subroutine...
+	(gripe): ...to this.
+	(infer_man_or_ms_package, construct_command): Update call sites.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/grog/grog.pl: Fix code style nit.  Stop using `&`
 	sigil in subroutine calls; that's nonidiomatic Perl, an
 	exception to the language's otherwise relentless dedication to

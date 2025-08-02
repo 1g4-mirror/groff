@@ -76,7 +76,7 @@ sub fail {
 }
 
 
-sub warn {
+sub gripe {
   my $text = shift;
   print STDERR "$program_name: warning: $text\n";
 }
@@ -554,7 +554,7 @@ sub infer_man_or_ms_package {
     if (!$score{'TH'}) {
       push_main_package('s');
     } else {
-      warn("document ambiguous; disambiguate with -man or -ms option");
+      gripe("document ambiguous; disambiguate with -man or -ms option");
       $had_inference_problem = 1;
     }
     return 0;
@@ -620,7 +620,7 @@ sub construct_command {
     for my $pkg (@main_package) {
       if (grep(/$pkg/, @inferred_main_package)) {
 	$main_package = $pkg;
-	warn("document ambiguous (choosing '$main_package'"
+	gripe("document ambiguous (choosing '$main_package'"
 	      . " from '@inferred_main_package'); disambiguate with -m"
 	      . " option");
 	$had_inference_problem = 1;
@@ -639,7 +639,7 @@ sub construct_command {
     if (grep(/$pkg/, @main_package)) {
       $is_auxiliary_package = 0;
       if ($main_package && ($pkg ne $main_package)) {
-	warn("overriding inferred package '$main_package'"
+	gripe("overriding inferred package '$main_package'"
 	      . " with requested package '$pkg'");
       }
       $main_package = $pkg;
