@@ -1,4 +1,4 @@
-/* Copyright (C) 1992-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1992-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -54,6 +54,13 @@ static void usage(FILE *stream)
 	  "usage: %s {-v | --version}\n"
 	  "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Translate a PostScript Type 1 font in Printer Font Binary (PFB) format"
+"\n"
+"to Printer Font ASCII (PFA) format.  See the pfbtops(1) manual page."
+"\n",
+	  stream);
 }
 
 static void get_text(int n)
