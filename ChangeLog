@@ -1,5 +1,14 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* font/devpdf/util/BuildFoundries.pl (RunAfmtodit): Run
+	`afmtodit` with the new `-q` flag.  Recent versions of the URW
+	fonts have tons of duplicate mappings (for groff's purposes) and
+	to our knowledge these are all harmless; we don't want to
+	distress people attentive to the messages scrolling by in an
+	otherwise unremarkable groff build.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.pl: Add `-q` command-line option
 	to suppress diagnostics reporting duplicate mappings in favor of
 	a count thereof.  Add new `opt_q` and `duplicate_mappings_count`

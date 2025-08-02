@@ -196,7 +196,7 @@ sub RunAfmtodit
     $enc="-e 'enc/$enc'" if $enc;
     $map="'map/$map'" if $map;
 
-    my $cmd='afmtodit -c -dDESC';
+    my $cmd='afmtodit -cq -dDESC';
 
     foreach my $f (split('',$flags))
     {
