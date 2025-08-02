@@ -2532,7 +2532,7 @@ or subtract the expression of interest from zero.
 .
 If a prior value does not exist\c
 \[em](the register was undefined\[em]\c
-an increment or decrement is applied as if to\~0.
+an increment or decrement applies as if to\~0.
 .
 .
 .\" ====================================================================
