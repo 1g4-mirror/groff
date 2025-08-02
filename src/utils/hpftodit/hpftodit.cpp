@@ -1,4 +1,4 @@
-/* Copyright (C) 1994-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1994-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -406,6 +406,13 @@ usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	  program_name, program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Create a font description file for use with a Hewlett-Packard\n"
+"LaserJet 4-series (or newer) printer and the grolj4(1) output driver\n"
+"of groff(1), using data from an HP tagged font metric (TFM) file.\n"
+"See the hpftodit(1) manual page.\n",
+	  stream);
 }
 
 static void

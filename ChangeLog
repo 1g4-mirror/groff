@@ -1,5 +1,12 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[hpftodit]: Improve usage message upon `--help`.
+
+	* src/utils/hpftodit/hpftodit.cpp (usage): Summarize purpose of
+	command when help is requested.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grolbp,grotty,pre-grohtml,preconv,groff]: Slightly refactor.
 	Get `usage()` functions out of the business of `exit()`ing,
 	which they were doing only in successful cases.  (The calling
