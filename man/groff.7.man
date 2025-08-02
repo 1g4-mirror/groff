@@ -4146,7 +4146,8 @@ Define or update register
 with value
 .I N
 and auto-increment
-.IR I .
+.IR I ,
+which may be any integer.
 .
 .TPx
 .REQ .nroff
