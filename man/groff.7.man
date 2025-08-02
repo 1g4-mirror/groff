@@ -4208,7 +4208,7 @@ disabled by default.
 .
 .TPx
 .REQ .os
-Output vertical distance that was saved by the
+Output vertical space that was saved by the
 .request .sv
 request.
 .
