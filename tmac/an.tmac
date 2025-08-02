@@ -94,7 +94,7 @@
 .\" write the footer for the final man page rendered.  We can also be
 .\" called by andoc when switching to an mdoc(7) page, irrespective of
 .\" continuous rendering mode.
-.de1 an-end
+.de1 an*end-document
 .  if !r an-TH-was-called .return
 .  an*input-trap
 .  if '\\n[.z]'an*paragraph-tag' .an*TP-trap
@@ -327,7 +327,7 @@
 .  \" If batch processing (rendering multiple) man page documents, we
 .  \" must handle the end of a previous document.
 .  if \\n[an*need-titles-reset] \{\
-.    if \\n[cR] .an-end
+.    if \\n[cR] .an*end-document
 .
 .    \" Clear the page header trap so it is not sprung with stale
 .    \" information.
@@ -336,7 +336,7 @@
 .  \}
 .  if \\n[C] .rr P
 .
-.  nr an-TH-was-called 1 \" an-end can make certain assumptions.
+.  nr an-TH-was-called 1 \" an*end-document can make certain assumptions.
 .
 .  \" The previous document rendered in a batch may have been in a
 .  \" different language.
@@ -436,7 +436,7 @@
 .    \}
 .  \}
 .
-.  em an-end
+.  em an*end-document
 .  nr an*need-titles-reset 1
 ..
 .

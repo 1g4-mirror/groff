@@ -42,8 +42,8 @@
 .de reload-doc
 .  \" Flush any partially collected output line and write page footer in
 .  \" continuous rendering mode.
-.  do if d an-end \
-.    do an-end
+.  do if d an*end-document \
+.    do an*end-document
 .
 .  \" Remove traps planted by an.tmac.
 .  do ch an-header

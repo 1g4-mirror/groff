@@ -1,5 +1,15 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Trivially refactor.  Rename `an-end` to
+	`an*end-document`.
+
+	* tmac/an.tmac (an-end, an*end-document): Do it.
+	* tmac/andoc.tmac (reload-doc):
+	* tmac/an.tmac (TH): Update call sites.
+	* tmac/an.tmac ([initialization]): Configure it under new name.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Trivially refactor.  Rename `doc-end-macro` to
 	`doc-end-document`.
 
