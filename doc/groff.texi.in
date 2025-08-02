@@ -17813,6 +17813,7 @@ to a postprocessor that interprets
 contents and filters it out
 before sending it to the output device.
 
+@need 1000
 To define a macro@tie{}@code{x} containing the contents of
 file@tie{}@file{f}, use
 
