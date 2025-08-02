@@ -33,11 +33,11 @@ my $want_help;
 my $space_width = 0;
 
 our ($opt_a, $opt_c, $opt_d, $opt_e, $opt_f, $opt_i, $opt_k,
-     $opt_m, $opt_n, $opt_o, $opt_s, $opt_v, $opt_w, $opt_x);
+     $opt_m, $opt_n, $opt_o, $opt_q, $opt_s, $opt_v, $opt_w, $opt_x);
 
 use Getopt::Long qw(:config gnu_getopt);
 GetOptions( "a=s", "c", "d=s", "e=s", "f=s", "i=s", "k", "m", "n",
-  "o=s", "s", "v", "w=i", "x", "version" => \$opt_v,
+  "o=s", "q", "s", "v", "w=i", "x", "version" => \$opt_v,
   "help" => \$want_help
 );
 
@@ -361,7 +361,7 @@ $filename = "";
 $lineno = 0;
 
 $italic_angle = $opt_a if $opt_a;
-
+my $duplicate_mappings_count = 0; # used only if $opt_q
 
 if (!$opt_x) {
     my %mapped;
@@ -375,10 +375,15 @@ if (!$opt_x) {
 	if ($nmap{$ch}) {
 	    for (my $j = 0; $j < $nmap{$ch}; $j++) {
 		if (defined $mapped{$map{$ch, $j}}) {
-		    print STDERR "$program_name: AGL name"
-		      . " '$mapped{$map{$ch, $j}}' already mapped to"
-		      . " groff name '$map{$ch, $j}'; ignoring AGL"
-		      . " name '$ch'\n";
+		    if ($opt_q) {
+			$duplicate_mappings_count++;
+		    }
+		    else {
+			print STDERR "$program_name: AGL name"
+			  . " '$mapped{$map{$ch, $j}}' already mapped"
+			  . " to groff name '$map{$ch, $j}'; ignoring"
+			  . " AGL name '$ch'\n";
+		    }
 		}
 		else {
 		    $mapped{$map{$ch, $j}} = $ch;
@@ -532,6 +537,7 @@ push @options, "-k"        if defined $opt_k;
 push @options, "-m"        if defined $opt_m;
 push @options, "-n"        if defined $opt_n;
 push @options, "-o $opt_o" if defined $opt_o;
+# Don't add $opt_q here; it is irrelevant to the generated file.
 push @options, "-s"        if defined $opt_s;
 push @options, "-v"        if defined $opt_v;
 push @options, "-w $opt_w" if defined $opt_w;
@@ -718,6 +724,11 @@ for (my $i = 0; $i <= $#encoding; $i++) {
     if (defined $ch && $ch eq "space" && defined $width{"space"}) {
 	printf("space\t%d\t0\t%d\tspace\n", conv($width{"space"}), $i);
     }
+}
+
+if ($opt_q && $duplicate_mappings_count) {
+    print STDERR "$program_name: $duplicate_mappings_count duplicate"
+      . "mappings encountered";
 }
 
 sub conv {

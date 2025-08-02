@@ -1,5 +1,18 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.pl: Add `-q` command-line option
+	to suppress diagnostics reporting duplicate mappings in favor of
+	a count thereof.  Add new `opt_q` and `duplicate_mappings_count`
+	scalars.  Update `GetOptions()` call.  Implement the logic.
+	_Don't_ report the flag in the header of the generated file.
+	If the option was given and any duplicate mappings were
+	encountered, report the count to the standard error stream
+	before exiting.
+	* src/utils/afmtodit/afmtodit.1.man (Options, Diagnostics):
+	Document it.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/afmtodit/afmtodit.pl: Trivially refactor, renaming
 	scalar `prog` to `program_name`.
 	(usage): Use that scalar instead of `$0` when reporting
