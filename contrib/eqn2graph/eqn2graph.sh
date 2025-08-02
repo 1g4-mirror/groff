@@ -6,29 +6,28 @@
 #
 # In Unixland, the magic is in knowing what to string together...
 #
-# Take an eqn equation on stdin, emit cropped bitmap on stdout.
-# The eqn markup should *not* be wrapped in .EQ/.EN, this script will do that.
+# Take an eqn equation on stdin, emit cropped bitmap on stdout.  The eqn
+# markup should *not* be wrapped in .EQ/.EN, this script will do that.
 # A -format FOO option changes the image output format to any format
 # supported by convert(1).  All other options are passed to convert(1).
 # The default format is PNG.
 #
 # This is separate from pic2graph because pic processing has some weird
-# clipping effect on the output, mangling equations that are very wide 
+# clipping effect on the output, mangling equations that are very wide
 # or deep.  Besides, this tool can supply its own delimiters.
 #
-
-# Requires the groff suite and the ImageMagick tools.  Both are open source.
-# This code is released to the public domain.
+# Requires the groff suite and the ImageMagick tools.  Both are open
+# source.  This code is released to the public domain.
 #
 # Here are the assumptions behind the option processing:
 #
 # 1. None of the options of eqn(1) are relevant.
 #
 # 2. Many options of convert(1) are potentially relevant, (especially
-# -density, -interlace, -transparency, -border, and -comment).
+#    -density, -interlace, -transparency, -border, and -comment).
 #
 # Thus, we pass everything except -format to convert(1).
-#
+
 convert_opts=""
 convert_trim_arg="-trim"
 format="png"
@@ -67,11 +66,13 @@ fi
 
 if ! tmp=`(umask 077 && mktemp -d -q "$d/eqn2graph-XXXXXX") 2> /dev/null`
 then
-    # mktemp failed--not installed or is a version that doesn't support those
-    # flags?  Fall back to older method which uses more predictable naming.
+    # mktemp failed--not installed or is a version that doesn't support
+    # those flags?  Fall back to older method which uses more
+    # predictable naming.
     #
-    # $RANDOM is a Bashism.  The fallback of $PPID is not good pseudorandomness,
-    # but is supported by the stripped-down dash shell, for instance.
+    # $RANDOM is a Bashism.  The fallback of $PPID is not good
+    # pseudorandomness, but is supported by the stripped-down dash
+    # shell, for instance.
     tmp="$d/eqn2graph$$-${RANDOM:-$PPID}"
     (umask 077 && mkdir "$tmp") 2> /dev/null
 fi

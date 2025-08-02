@@ -6,16 +6,15 @@
 #
 # In Unixland, the magic is in knowing what to string together...
 #
-# Take grap description on stdin, emit cropped bitmap on stdout.
-# The grap markup should *not* be wrapped in .G1/.G2, this script will do that.
-# A -U option on the command line enables gpic/groff "unsafe" mode.
-# A -format FOO option changes the image output format to any format
-# supported by convert(1).  All other options are passed to convert(1).
-# The default format is PNG.
+# Take grap description on stdin, emit cropped bitmap on stdout.  The
+# grap markup should *not* be wrapped in .G1/.G2, this script will do
+# that.  A -U option on the command line enables gpic/groff "unsafe"
+# mode.  A -format FOO option changes the image output format to any
+# format supported by convert(1).  All other options are passed to
+# convert(1).  The default format is PNG.
 #
-
-# Requires the groff suite and the ImageMagick tools.  Both are open source.
-# This code is released to the public domain.
+# Requires the groff suite and the ImageMagick tools.  Both are open
+# source.  This code is released to the public domain.
 #
 # Here are the assumptions behind the option processing:
 #
@@ -23,11 +22,11 @@
 #
 # 2. Only the -U option of groff(1) is relevant.
 #
-# 3. Many options of convert(1) are potentially relevant, (especially 
-# -density, -interlace, -transparency, -border, and -comment).
+# 3. Many options of convert(1) are potentially relevant, (especially
+#    -density, -interlace, -transparency, -border, and -comment).
 #
 # Thus, we pass -U to groff(1), and everything else to convert(1).
-#
+
 groff_opts=""
 convert_opts=""
 convert_trim_arg="-trim"
@@ -69,11 +68,13 @@ fi
 
 if ! tmp=`(umask 077 && mktemp -d -q "$d/grap2graph-XXXXXX") 2> /dev/null`
 then
-    # mktemp failed--not installed or is a version that doesn't support those
-    # flags?  Fall back to older method which uses more predictable naming.
+    # mktemp failed--not installed or is a version that doesn't support
+    # those flags?  Fall back to older method which uses more
+    # predictable naming.
     #
-    # $RANDOM is a Bashism.  The fallback of $PPID is not good pseudorandomness,
-    # but is supported by the stripped-down dash shell, for instance.
+    # $RANDOM is a Bashism.  The fallback of $PPID is not good
+    # pseudorandomness, but is supported by the stripped-down dash
+    # shell, for instance.
     tmp="$d/grap2graph$$-${RANDOM:-$PPID}"
     (umask 077 && mkdir "$tmp") 2> /dev/null
 fi
