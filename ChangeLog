@@ -1,5 +1,17 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac ([initialization]): Configure end-of-input macro
+	unconditionally, even on degenerate inputs that never call `Dd`.
+	This prevents an insane page length from being used when
+	continuous rendering is enabled.
+	* tmac/mdoc/doc-common (Dd): Stop doing so here.
+
+	Fixes <https://savannah.gnu.org/bugs/?67385>.  Continues commit
+	d8cd70f3a8c, 18 May.  Discovered in conversation with Ingo
+	Schwarze.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an_degenerate-input-uses-sane-page-length.sh:
 	* tmac/tests/doc_degenerate-input-uses-sane-page-length.sh: Add
 	tests.

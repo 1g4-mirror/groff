@@ -271,8 +271,6 @@
 .    wh (\n[doc-footer-location]u - .5i) doc-break-body-text
 .    rr doc-footer-location
 .  \}
-.
-.  e@ doc-end-macro
 ..
 .ec
 .
