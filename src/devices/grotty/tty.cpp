@@ -1047,6 +1047,7 @@ int main(int argc, char **argv)
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
@@ -1080,15 +1081,12 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	  program_name, program_name, program_name, program_name);
-  if (stdout == stream) {
-    fputs(
-"\n"
+  if (stdout == stream)
+    fputs("\n"
 "Translate the output of troff(1) into a form suitable for\n"
 "typewriter‐like devices, including terminal emulators.  See the\n"
 "grotty(1) manual page.\n",
 	  stream);
-    exit(EXIT_SUCCESS);
-  }
 }
 
 // Local Variables:

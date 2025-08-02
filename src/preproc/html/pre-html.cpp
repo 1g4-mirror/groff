@@ -1581,8 +1581,7 @@ static void usage(FILE *stream)
 "usage: %s --help\n",
 	 program_name, program_name, program_name);
   if (stdout == stream) {
-    fputs(
-"\n"
+    fputs("\n"
 "Prepare a troff(1) document for HTML formatting.\n"
 "\n"
 "This program is not intended to be executed standalone; it is\n"
@@ -1593,7 +1592,6 @@ static void usage(FILE *stream)
     fprintf(stream,
 "'%s' is called.  See the grohtml(1) manual page.\n",
 	  program_name);
-    exit(EXIT_SUCCESS);
   }
 }
 
@@ -1713,6 +1711,7 @@ static int scanArguments(int argc, char **argv)
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));

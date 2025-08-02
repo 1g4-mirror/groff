@@ -1,5 +1,21 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grolbp,grotty,pre-grohtml,preconv,groff]: Slightly refactor.
+	Get `usage()` functions out of the business of `exit()`ing,
+	which they were doing only in successful cases.  (The calling
+	scope `exit()`s with status 2 on usage errors.)  This was
+	discrepant with grodvi, post-grohtml, grolj4, grops, eqn, grn,
+	pic, refer, soelim, tbl, addftinfo, hpftodit, indxbib, lkbib,
+	lookbib, pfbtops, tfmtodit, and xtotroff.
+
+	* src/devices/grolbp/lbp.cpp (usage, main):
+	* src/devices/grotty/tty.cpp (main, usage):
+	* src/preproc/html/pre-html.cpp (usage, scanArguments):
+	* src/preproc/preconv/preconv.cpp (usage, main):
+	* src/roff/groff/groff.cpp (main, uage): Do it.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/grog/grog.pl: Trivially refactor to fix a Perl
 	warning.
 	(warn): Rename this subroutine...

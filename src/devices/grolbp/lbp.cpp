@@ -653,15 +653,12 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s {-h | --help}\n",
 	  program_name, program_name, program_name);
-  if (stdout == stream) {
-    fputs(
-"\n"
+  if (stdout == stream)
+    fputs("\n"
 "Translate the output of troff(1) into a CaPSL and VDM format suitable"
 "\n"
 "for Canon LBP-4 and LBP-8 printers.  See the grolbp(1) manual page.\n",
 	  stream);
-    exit(EXIT_SUCCESS);
-  }
 }
 
 int main(int argc, char **argv)
@@ -736,6 +733,7 @@ int main(int argc, char **argv)
       }
     case 'h':
       usage(stdout);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));

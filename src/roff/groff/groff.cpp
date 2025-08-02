@@ -298,6 +298,7 @@ int main(int argc, char **argv)
       break;
     case 'h':
       usage(stdout);
+      exit(EXIT_SUCCESS);
       break;
     case 'E':
     case 'b':
@@ -859,16 +860,13 @@ void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s {-h | --help}\n",
 	  program_name, program_name, program_name);
-  if (stdout == stream) {
-    fputs(
-"\n"
+  if (stdout == stream)
+    fputs("\n"
 "groff (GNU roff) is a typesetting system that reads plain text input\n"
 "files that include formatting commands to produce output in\n"
 "PostScript, PDF, HTML, or DVI formats or for display to a terminal.\n"
 "See the groff(1) manual page.\n",
 	  stream);
-    exit(EXIT_SUCCESS);
-  }
 }
 
 extern "C" {

@@ -1237,7 +1237,7 @@ usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s {-h | --help}\n",
 	  program_name, program_name, program_name);
-  if (stdout == stream) {
+  if (stdout == stream)
     fprintf(stream,
 "\n"
 "Read each file, convert its encoded characters to a form GNU"
@@ -1246,8 +1246,6 @@ usage(FILE *stream)
 "The default fallback encoding is '%s'.  See the preconv(1) manual"
 " page.\n",
 	  fallback_encoding);
-    exit(EXIT_SUCCESS);
-  }
 }
 
 // ---------------------------------------------------------
@@ -1320,6 +1318,7 @@ main(int argc, char **argv)
       break;
     case 'h':
       usage(stdout);
+      exit(EXIT_SUCCESS);
       break;
     case '?':
       error("unrecognized command-line option '%1'", char(optopt));
