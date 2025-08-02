@@ -2519,7 +2519,7 @@ as a decrementation operator,
 not an algebraic sign.
 .
 To assign a register a negative value
-or the negated value of another register,
+or the negated value of another interpolation,
 you must force the formatter to interpret
 .RB \[lq] \- \[rq]
 as a negation or minus,
