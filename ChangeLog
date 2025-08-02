@@ -1,3 +1,11 @@
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/soelim/soelim.cpp (do_so): Throw warning if input
+	document backslash-escapes a space in a `so` token argument.  As
+	the diagnostic message notes, doing so is not compatible with
+	{any} troff's syntax, and is (now, in GNU soelim and troff)
+	unnecessary for handling of spacey file names.
+
 2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Make man page rendering more robust against meddling

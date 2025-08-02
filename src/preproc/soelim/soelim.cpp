@@ -156,7 +156,11 @@ void do_so(const char *line)
 	filename += '\\';
 	break;
       case ' ':
+	warning("escaping a space is unnecessary and not compatible"
+		" with troff syntax");
 	filename += ' ';
+	// TODO: groff 1.24.0 release + 2 years?
+	// is_filename_valid = false; // or fall through
 	break;
       default:
 	is_filename_valid = false;
