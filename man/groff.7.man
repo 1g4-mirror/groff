@@ -2024,7 +2024,7 @@ of these structures is unusual.
 They have a common form:
 the request name is
 (except for
-.request .el
+.request el
 \[lq]else\[rq])
 followed by a conditional expression
 .IR cond-expr ;
@@ -2700,7 +2700,7 @@ can be a request.
 .TPx
 .REQ .am1 mac
 As
-.request .am ,
+.RB \[rq] am \[rq],
 with compatibility mode disabled when the appendment to macro
 .I mac
 is interpreted.
@@ -2726,7 +2726,7 @@ encountering
 Append to a macro indirectly.
 .
 As
-.request .am ,
+.RB \[rq] am \[rq],
 but
 .I str
 and
@@ -2738,13 +2738,13 @@ respectively.
 .TPx
 .REQ .ami1 str
 As
-.request .ami ,
+.request ami ,
 with compatibility mode disabled when the appendment is interpreted.
 .
 .TPx
 .REQ .ami1 "str end-mac-str"
 As
-.request .ami ,
+.request ami ,
 with compatibility mode disabled when the appendment is interpreted.
 .
 .\" a degenerate case
@@ -2774,7 +2774,7 @@ As
 .TPx
 .REQ .as1 "str contents"
 As
-.request .as ,
+.RB \[rq] as \[rq],
 with compatibility mode disabled when the appendment to string
 .I str
 is interpreted.
@@ -2895,7 +2895,7 @@ adjust if applicable.
 .TPx
 .REQ .break
 Break out of a
-.request .while
+.RB \[rq] while \[rq]
 loop.
 .
 .TPx
@@ -2978,7 +2978,7 @@ Unplant page location trap
 Change page location trap
 .I mac
 planted by
-.request .wh
+.request wh
 by moving its location to
 .I vertical-position
 (default scaling unit\~\c
@@ -3028,7 +3028,7 @@ and so on.
 Close
 .IR stream ,
 making it unavailable for
-.request .write
+.RB \[rq] write \[rq]
 requests.
 .
 .TPx
@@ -3150,7 +3150,7 @@ can be a request.
 .TPx
 .REQ .de1 ident
 As
-.request .de ,
+.request de ,
 with compatibility mode disabled when
 .I mac
 is interpreted.
@@ -3210,7 +3210,7 @@ which multiplies its value by 65,536
 Define macro indirectly.
 .
 As
-.request .de ,
+.request de ,
 but interpolate string
 .I str
 to obtain the macro's name.
@@ -3220,7 +3220,7 @@ to obtain the macro's name.
 Define macro indirectly.
 .
 As
-.request .de ,
+.request de ,
 but
 .I str
 and
@@ -3232,13 +3232,13 @@ respectively.
 .TPx
 .REQ .dei1 str
 As
-.request .dei ,
+.request dei ,
 with compatibility mode disabled when the macro is interpreted.
 .
 .TPx
 .REQ .dei1 "str end-mac-str"
 As
-.request .dei ,
+.request dei ,
 with compatibility mode disabled when the macro is interpreted.
 .
 .TPx
@@ -3300,7 +3300,7 @@ containing
 .TQ
 .REQ .ds1 "ident contents"
 As
-.request .ds ,
+.request ds ,
 with compatibility mode disabled when the string is interpreted.
 .
 .TPx
@@ -3331,7 +3331,7 @@ as the escape character.
 .TPx
 .REQ .ecr
 Restore escape character saved with
-.request .ecs .
+.request ecs .
 .
 .TPx
 .REQ .ecs
@@ -3340,7 +3340,7 @@ Save the escape character.
 .TPx
 .REQ .el
 Interpolate a newline if the conditional expression of the corresponding
-.request .ie
+.request ie
 request was false.
 .
 .TPx
@@ -3349,7 +3349,7 @@ Interpret
 .I anything
 as if it were an input line if the conditional expression of the
 corresponding
-.request .ie
+.request ie
 request was false.
 .
 .TPx
@@ -3427,7 +3427,7 @@ as
 .IR contents .
 .
 As
-.request .char ,
+.request char ,
 but while that request hides a glyph with the same name in the selected
 font,
 .B fchar
@@ -3496,7 +3496,7 @@ as
 .IR contents .
 .
 As
-.request .char ,
+.request char ,
 but GNU
 .I troff \" GNU
 locates a character defined by
@@ -3760,7 +3760,7 @@ Interpolate a newline if
 .I cond-expr
 is true,
 otherwise skip to a corresponding
-.request .el
+.request el
 request.
 .
 .TPx
@@ -3772,7 +3772,7 @@ interpret
 .I anything
 as if it were an input line,
 otherwise skip to a corresponding
-.request .el
+.request el
 request.
 .
 .TPx
@@ -3851,7 +3851,7 @@ Cancel any pending input line trap.
 .TPx
 .REQ .itc "npl mac"
 As
-.request .it ,
+.RB \[rq] it \[rq],
 except that input lines interrupted with the
 .B \[rs]c
 escape sequence are not counted.
@@ -4023,7 +4023,7 @@ Mark vertical drawing position in register
 .TPx
 .REQ .mso file
 As
-.request .so ,
+.RB \[rq] so \[rq],
 except that GNU
 .I troff \" GNU
 searches for the specified
@@ -4041,7 +4041,7 @@ of the same page.
 .TPx
 .REQ .msoquiet file
 As
-.request .mso ,
+.request mso ,
 but no warning is emitted if
 .I file
 does not exist.
@@ -4188,7 +4188,7 @@ for writing and associate a stream named
 .I ident
 with it,
 making it available for
-.request .write
+.RB \[rq] write \[rq]
 requests.
 .
 Unsafe request;
@@ -4209,7 +4209,7 @@ disabled by default.
 .TPx
 .REQ .os
 Output vertical space that was saved by the
-.request .sv
+.request sv
 request.
 .
 .TPx
@@ -4732,7 +4732,7 @@ emits a warning in category
 .TPx
 .REQ .soquiet file
 As
-.request .so ,
+.RB \[rq] so \[rq],
 but no warning is emitted if
 .I file
 does not exist.
@@ -4804,7 +4804,7 @@ The default scaling unit is\~\c
 .scaleindicator m .
 .
 At startup,
-.request .spreadwarn
+.request spreadwarn
 is inactive and
 .I N
 is
@@ -4867,21 +4867,21 @@ Negative indices count backward from the end of the string.
 .TPx
 .REQ .sv
 As
-.request .ne ,
+.request ne ,
 but save
 .scalednumber "1 v"
 for output with
-.request .os
+.request os
 request.
 .
 .TPx
 .REQ .sv d
 As
-.request .ne ,
+.request ne ,
 but save distance
 .I d
 for later output with
-.request .os
+.request os
 request
 (default scaling unit\~\c
 .scaleindicator v ).
@@ -5003,12 +5003,12 @@ contrast
 .TPx
 .REQ .tm1
 As
-.request .tm .
+.request tm .
 .
 .TPx
 .REQ .tm1 message
 As
-.request .tm ,
+.request tm ,
 but removes a leading neutral double quote
 .RB \[oq] \[dq] \[cq]
 from
@@ -5023,7 +5023,7 @@ No operation.
 .TPx
 .REQ .tmc message
 As
-.request .tm1 ,
+.request tm1 ,
 but does not append a newline.
 .
 .TPx
@@ -5048,7 +5048,7 @@ output
 .MR groff_out @MAN5EXT@ ).
 .
 Unlike
-.request .cf ,
+.request cf ,
 characters invalid as input to GNU
 .I troff \" GNU
 are discarded.
@@ -5062,15 +5062,15 @@ appends one.
 .TPx
 .REQ .trin abcd\fR\&.\|.\|.\&\fP
 As
-.request .tr ,
+.request tr ,
 except that
-.request .asciify
+.request asciify
 ignores the translation when a diversion is interpolated.
 .
 .TPx
 .REQ .trnt abcd\fR\&.\|.\|.\&\fP
 As
-.request .tr ,
+.request tr ,
 except that translations are suppressed in the argument to
 .esc ! .
 .
@@ -5085,7 +5085,7 @@ false.
 .TPx
 .REQ .uf font
 Set underline font used by
-.request .ul
+.request ul
 to
 .I font.
 .
@@ -5231,7 +5231,7 @@ flushes the stream after writing to it.
 .TPx
 .REQ .writec "stream character-sequence"
 As
-.request .write ,
+.RB \[rq] write \[rq],
 but does not write a newline to the output.
 .
 .TPx
@@ -5395,7 +5395,7 @@ with each surrounded by double quotes and separated by spaces.
 .ESC $\[ha]
 Interpolate catenation of all macro or string parameters
 as if they were arguments to the
-.request .ds
+.request ds
 request.
 .
 .
@@ -6778,7 +6778,7 @@ option.
 .REG .b
 Font emboldening offset;
 see
-.request .bd .
+.request bd .
 .
 .TP
 .REG .br
@@ -6789,7 +6789,7 @@ interpreted (Boolean-valued).
 .REG .c
 Input line number;
 see
-.request .lf
+.request lf
 and
 .register \f[R]\[lq]\f[]c.\f[R]\[rq]\f[] .
 .
@@ -6799,10 +6799,10 @@ AT&T
 .I troff \" AT&T
 compatibility mode is enabled (Boolean-valued);
 see
-.request .cp .
+.request cp .
 .
 Always false when processing
-.request .do ;
+.RB \[rq] do \[rq];
 see
 .register .cp .
 .
@@ -6830,7 +6830,7 @@ Color output is enabled (Boolean-valued).
 .TP
 .REG .cp
 Within
-.request .do ,
+.RB \[rq] do \[rq],
 the saved value of compatibility mode;
 see
 .register .C .
@@ -6853,7 +6853,7 @@ Name of environment (string-valued).
 .REG .f
 Mounting position of selected font;
 see
-.request .ft
+.request ft
 and
 .esc f .
 .
@@ -6861,7 +6861,7 @@ and
 .REG .F
 Name of input file (string-valued);
 see
-.request .lf .
+.request lf .
 .
 .TP
 .REG .fam
@@ -6871,7 +6871,7 @@ Name of the environment's default font family (string-valued).
 .REG .fn
 Resolved name of font selected in the environment (string-valued);
 see
-.request .ft
+.request ft
 and
 .esc f .
 .
@@ -6932,14 +6932,14 @@ Hyphenation space adjustment threshold in environment.
 .REG .i
 Environment's indentation amount;
 see
-.request .in .
+.RB \[rq] in \[rq].
 .
 .TP
 .REG .in
 Indentation amount applicable to the output line pending
 in the environment;
 see
-.request .ti .
+.request ti .
 .
 .TP
 .REG .int
@@ -6969,9 +6969,9 @@ Name of the macro associated with the pending input trap
 .REG .j
 The environment's adjustment mode encoded as an integer;
 see
-.request .ad
+.request ad
 and
-.request .na .
+.request na .
 .
 Do not interpret or perform arithmetic on its value.
 .
@@ -6987,13 +6987,13 @@ Pairwise kerning is enabled (Boolean-valued).
 .REG .l
 Line length;
 see
-.request .ll .
+.request ll .
 .
 .TP
 .REG .L
 Line spacing;
 see
-.request .ls .
+.request ls .
 .
 .TP
 .REG .lg
@@ -7015,7 +7015,7 @@ Environment's title line length.
 .REG .m
 Stroke color (string-valued);
 see
-.request .gcolor
+.request gcolor
 and
 .esc m .
 .
@@ -7026,7 +7026,7 @@ The default stroke color is named
 .REG .M
 Fill color (string-valued);
 see
-.request .fcolor
+.request fcolor
 and
 .esc M .
 .
@@ -7040,7 +7040,7 @@ Length of formatted output on previous output line.
 .TP
 .REG .ne
 Amount of vertical space required by last
-.request .ne
+.request ne
 that caused a trap to be sprung;
 also see
 .register .trunc .
@@ -7063,7 +7063,7 @@ No-space mode is enabled (Boolean-valued).
 .REG .o
 Page offset;
 see
-.request .po .
+.request po .
 .
 .TP
 .REG .O
@@ -7075,7 +7075,7 @@ see
 .REG .p
 Page length;
 see
-.request .pl .
+.request pl .
 .
 .TP
 .REG .P
@@ -7101,7 +7101,7 @@ The environment's type size in scaled points.
 .REG .psr
 The environment's most recently requested type size in scaled points;
 see
-.request .ps
+.request ps
 and
 .esc s .
 .
@@ -7124,7 +7124,7 @@ in the environment.
 The environment's type size in points as a decimal fraction
 (string-valued);
 see
-.request .ps
+.request ps
 and
 .esc s .
 .
@@ -7140,7 +7140,7 @@ The environment's most recently requested type size
 in points as a decimal fraction
 (string-valued);
 see
-.request .ps
+.request ps
 and
 .esc s .
 .
@@ -7158,7 +7158,7 @@ in twelfths of the space width of the selected font.
 .REG .sty
 The environment's selected abstract style (string-valued);
 see
-.request .ft
+.request ft
 and
 .esc f .
 .
@@ -7166,9 +7166,9 @@ and
 .REG .t
 Distance to next vertical position trap;
 see
-.request .wh
+.request wh
 and
-.request .ch .
+.request ch .
 .
 If no such traps exist between the drawing position
 and the bottom of the page,
@@ -7194,7 +7194,7 @@ option.
 The environment's tab stop settings
 (if any)
 suitable for use as argument to
-.request .ta
+.request ta
 (string-valued).
 .
 .TP
@@ -7203,10 +7203,10 @@ Name of the next vertical position trap
 after the vertical drawing position.
 (string-valued);
 see
-.request .wh ,
-.request .ch ,
+.request wh ,
+.request ch ,
 and
-.request .dt .
+.request dt .
 .
 .TP
 .REG .trunc
@@ -7214,9 +7214,9 @@ Amount of vertical space truncated by the most recently sprung
 vertical position trap,
 or,
 if the trap was sprung by an
-.request .ne ,
+.request ne ,
 minus the amount of vertical motion produced by
-.request .ne ;
+.request ne ;
 also see
 .register .ne .
 .
@@ -7224,9 +7224,9 @@ also see
 .REG .u
 Filling is enabled in the environment (Boolean-valued);
 see
-.request .fi
+.request fi
 and
-.request .nf .
+.request nf .
 .
 .TP
 .REG .U
@@ -7240,7 +7240,7 @@ option.
 .REG .v
 The environment's vertical line spacing;
 see
-.request .vs .
+.request vs .
 .
 .TP
 .REG .V
@@ -7288,7 +7288,7 @@ Magnification of the environment's selected font
 (in thousandths;
 zero if no magnification);
 see
-.request .fzoom .
+.request fzoom .
 .LE
 .
 .
@@ -7369,7 +7369,7 @@ coordinate
 (in PostScript units)
 of PostScript image;
 see
-.request .psbb .
+.request psbb .
 .
 .TP
 .REG lly
@@ -7379,13 +7379,13 @@ coordinate
 (in PostScript units)
 of PostScript image;
 see
-.request .psbb .
+.request psbb .
 .
 .TP
 .REG ln
 Output line number;
 see
-.request .nm .
+.request nm .
 .
 .TP
 .REG lsn
@@ -7479,7 +7479,7 @@ after rendering into dummy environment by
 Return value of
 .MR system 3 ;
 see
-.request .sy .
+.request sy .
 .
 .TP
 .REG urx
@@ -7489,7 +7489,7 @@ coordinate
 (in PostScript units)
 of PostScript image;
 see
-.request .psbb .
+.request psbb .
 .
 .TP
 .REG ury
@@ -7499,7 +7499,7 @@ coordinate
 (in PostScript units)
 of PostScript image;
 see
-.request .psbb .
+.request psbb .
 .
 .TP
 .REG year
