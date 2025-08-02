@@ -568,7 +568,8 @@ directive with an argument of\~800.
 Its Times roman font
 .B TR
 has a
-.B \%spacewidth of\~833;
+.B \%spacewidth
+of\~833;
 this is also the width of its comma,
 period,
 centered period,
@@ -838,13 +839,12 @@ The unit of measure is that established by the
 .B \%unitwidth
 directive and scaled to the type size.
 .
-Unspecified subfields default
-.RB to\~ 0 .
+Unspecified subfields default to\~0.
 .
 Since there is no associated binary format,
 these values are not required to fit
 into the C language data type
-.B char
+.I char
 as they are in AT&T device-independent
 .IR troff . \" AT&T
 .
