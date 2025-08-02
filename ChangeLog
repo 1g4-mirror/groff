@@ -6456,7 +6456,8 @@
 	`tok.next()` at end of non-error path.
 
 	Fixes <https://savannah.gnu.org/bugs/?66512>.  Thanks to Deri
-	James for the report.
+	James for the report.  Problem introduced by me in commit
+	24e314b94c3, 12 November.
 
 2024-12-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
