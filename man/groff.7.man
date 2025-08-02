@@ -4215,8 +4215,7 @@ request.
 .TPx
 .REQ .output character-sequence
 Emit
-.IR character-sequence ,
-a sequence of ordinary characters and spaces,
+.I character-sequence
 \[lq]transparently\[rq]
 (directly) to
 .IR @g@troff 's
