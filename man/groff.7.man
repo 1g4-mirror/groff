@@ -2941,7 +2941,7 @@ stop centering.
 .
 .TPx
 .REQ .cf file
-Break and copy
+Break and copy contents of
 .I file
 as \[lq]throughput\[rq] to GNU
 .I troff \" GNU
@@ -5039,7 +5039,7 @@ and so on prior to output.
 .
 .TPx
 .REQ .trf file
-Break and copy
+Break and copy contents of
 .I file
 as \[lq]throughput\[rq] to GNU
 .I troff \" GNU
@@ -5054,8 +5054,8 @@ characters invalid as input to GNU
 are discarded.
 .
 If
-.I file
-does not end with a newline,
+.IR file 's
+contents do not end with a newline,
 .B trf
 appends one.
 .
