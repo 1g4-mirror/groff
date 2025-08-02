@@ -4537,10 +4537,10 @@ Read insertion from standard input stream,
 ringing terminal bell as prompt.
 .
 .TPx
-.REQ .rd message
+.REQ .rd terminal-message
 Read insertion from standard input stream,
 writing
-.I message
+.I terminal-message
 to standard error stream as prompt.
 .
 .TPx
