@@ -1,5 +1,16 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Trivially refactor.  Rename `doc-end-macro` to
+	`doc-end-document`.
+
+	* tmac/mdoc/doc-common.tmac (doc-end-macro, doc-end-document):
+	Do it.
+	* tmac/andoc.tmac (reload-man):
+	* tmac/mdoc/doc-common.tmac (Dd): Update call sites.
+	* tmac/doc.tmac ([initialization]): Configure it under new name.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/doc.tmac ([initialization]): Configure end-of-input macro
 	unconditionally, even on degenerate inputs that never call `Dd`.
 	This prevents an insane page length from being used when

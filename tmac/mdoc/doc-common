@@ -297,7 +297,7 @@
 .  \" If also continuously rendering, cause a page transition to a new
 .  \" mdoc(7) document.
 .  if \n[doc-end-previous-document] \{\
-.    if \n[cR] .doc-end-macro
+.    if \n[cR] .doc-end-document
 .
 .    \" Clear the page header trap so it is not sprung with stale
 .    \" information.
@@ -1217,14 +1217,14 @@
 .ec
 .
 .
-.\" NS doc-end-macro macro
-.\" NS   finish output
+.\" NS doc-end-document macro
+.\" NS   Finish document output.
 .\" NS
 .\" NS modifies:
 .\" NS   doc-end-previous-document
 .
 .eo
-.de1 doc-end-macro
+.de1 doc-end-document
 .  doc-check-depth
 .
 .  if \n[cR] \{\
