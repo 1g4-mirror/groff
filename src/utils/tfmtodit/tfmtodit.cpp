@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -893,6 +893,11 @@ static void usage(FILE *stream)
 "usage: %s {-v | --version}\n"
 "usage: %s --help\n",
 	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Create a font description file for use with groff(1)'s 'dvi' output\n"
+"device.  See the tfmtodit(1) manual page.\n",
+	  stream);
 }
 
 // Local Variables:

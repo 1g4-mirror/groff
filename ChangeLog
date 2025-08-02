@@ -1,5 +1,12 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tfmtodit]: Improve usage message upon `--help`.
+
+	* src/utils/tfmtodit/tfmtodit.cpp (usage): Summarize purpose of
+	command when help is requested.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pfbtops]: Improve usage message upon `--help`.
 
 	* src/utils/pfbtops/pfbtops.c (usage): Summarize purpose of
