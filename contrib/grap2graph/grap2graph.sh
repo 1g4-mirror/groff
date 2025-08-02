@@ -3,8 +3,7 @@
 # grap2graph -- compile graph description descriptions to bitmap images
 #
 # by Eric S. Raymond <esr@thyrsus.com>, May 2003
-#
-# In Unixland, the magic is in knowing what to string together...
+# based on a recipe by W. Richard Stevens
 #
 # Take grap description on stdin, emit cropped bitmap on stdout.  The
 # grap markup should *not* be wrapped in .G1/.G2, this script will do
@@ -13,8 +12,9 @@
 # format supported by convert(1).  All other options are passed to
 # convert(1).  The default format is PNG.
 #
-# Requires the groff suite and the ImageMagick tools.  Both are open
-# source.  This code is released to the public domain.
+# Requires the groff suite and the ImageMagick tools.  Both are Free
+# Software <https://www.gnu.org/philosophy/free-sw.en.html>.  This code
+# is released to the public domain.
 #
 # Here are the assumptions behind the option processing:
 #

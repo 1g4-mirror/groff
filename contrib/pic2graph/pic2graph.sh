@@ -3,8 +3,7 @@
 # pic2graph -- compile PIC image descriptions to bitmap images
 #
 # by Eric S. Raymond <esr@thyrsus.com>, July 2002
-#
-# In Unixland, the magic is in knowing what to string together...
+# based on a recipe by W. Richard Stevens
 #
 # Take a pic/eqn diagram on stdin, emit cropped bitmap on stdout.  The
 # pic markup should *not* be wrapped in .PS/.PE, this script will do
@@ -14,8 +13,9 @@
 # delimiters.  All other options are passed to convert(1).  The default
 # format in PNG.
 #
-# Requires the groff suite and the ImageMagick tools.  Both are open
-# source.  This code is released to the public domain.
+# Requires the groff suite and the ImageMagick tools.  Both are Free
+# Software <https://www.gnu.org/philosophy/free-sw.en.html>.  This code
+# is released to the public domain.
 #
 # Here are the assumptions behind the option processing:
 #

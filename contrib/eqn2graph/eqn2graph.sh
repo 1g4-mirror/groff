@@ -3,8 +3,7 @@
 # eqn2graph -- compile EQN equation descriptions to bitmap images
 #
 # by Eric S. Raymond <esr@thyrsus.com>, July 2002
-#
-# In Unixland, the magic is in knowing what to string together...
+# based on a recipe by W. Richard Stevens
 #
 # Take an eqn equation on stdin, emit cropped bitmap on stdout.  The eqn
 # markup should *not* be wrapped in .EQ/.EN, this script will do that.
@@ -16,8 +15,9 @@
 # clipping effect on the output, mangling equations that are very wide
 # or deep.  Besides, this tool can supply its own delimiters.
 #
-# Requires the groff suite and the ImageMagick tools.  Both are open
-# source.  This code is released to the public domain.
+# Requires the groff suite and the ImageMagick tools.  Both are Free
+# Software <https://www.gnu.org/philosophy/free-sw.en.html>.  This code
+# is released to the public domain.
 #
 # Here are the assumptions behind the option processing:
 #
