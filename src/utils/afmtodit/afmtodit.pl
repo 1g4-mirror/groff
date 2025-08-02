@@ -332,11 +332,11 @@ while (<MAP>) {
 	    # The PostScript character "space" is automatically mapped
 	    # to the groff character "space"; this is for grops.
 	    whine("you are not allowed to map to the groff character"
-		   . " 'space'");
+		  . " 'space'");
 	}
 	elsif ($field[0] eq "space") {
 	    whine("you are not allowed to map the PostScript character"
-		   . " 'space'");
+		  . " 'space'");
 	}
 	else {
 	    $nmap{$field[0]} += 0;
@@ -376,9 +376,9 @@ if (!$opt_x) {
 	    for (my $j = 0; $j < $nmap{$ch}; $j++) {
 		if (defined $mapped{$map{$ch, $j}}) {
 		    print STDERR "$program_name: AGL name"
-			 . " '$mapped{$map{$ch, $j}}' already mapped to"
-			 . " groff name '$map{$ch, $j}'; ignoring AGL"
-			 . " name '$ch'\n";
+		      . " '$mapped{$map{$ch, $j}}' already mapped to"
+		      . " groff name '$map{$ch, $j}'; ignoring AGL"
+		      . " name '$ch'\n";
 		}
 		else {
 		    $mapped{$map{$ch, $j}} = $ch;
@@ -721,8 +721,8 @@ for (my $i = 0; $i <= $#encoding; $i++) {
 }
 
 sub conv {
-    $_[0]*$unitwidth*$resolution/(72*1000*$sizescale) +
-      ($_[0] < 0 ? -.5 : .5);
+    $_[0]*$unitwidth*$resolution/(72*1000*$sizescale)
+      + ($_[0] < 0 ? -.5 : .5);
 }
 
 # Local Variables:
