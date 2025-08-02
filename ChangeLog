@@ -1,5 +1,12 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/grog/grog.pl: Fix code style nit.  Stop using `&`
+	sigil in subroutine calls; that's nonidiomatic Perl, an
+	exception to the language's otherwise relentless dedication to
+	sigil prefixes.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Trivially refactor.  Rename `an-end` to
 	`an*end-document`.
 
