@@ -3328,18 +3328,21 @@ Square brackets in roman surround both arguments.
 .IP
 Use of this quasi-semantic macro,
 .\" https://github.com/n-t-roff/DWB3.3/blob/master/macros/man/an.sr#L37
-an extension originating in DWB
+an extension whose name originated in DWB
 .IR troff ,\" DWB
-is deprecated.
+is deprecated;
+.IR groff 's
+implementation differs.
 .
-It cannot easily be used to annotate options that take optional
-arguments or options whose arguments have internal structure
+Neither can easily be used to annotate options
+that take optional arguments
+or options whose arguments have internal structure
 (such as a mixture of literal and variable components).
 .
-One could work around these limitations with font selection escape
-sequences,
-but it is preferable to use font style alternation macros,
-which afford greater flexibility.
+One could work around these limitations
+with font selection escape sequences,
+but font style alternation macros are preferable;
+they are more flexible and perform italic corrections on typesetters.
 .
 .
 .TP
