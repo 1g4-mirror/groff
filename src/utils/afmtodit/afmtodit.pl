@@ -23,7 +23,7 @@ use strict;
 @afmtodit.tables@
 
 use File::Spec;
-(undef,undef,my $prog)=File::Spec->splitpath($0);
+(undef,undef,my $program_name)=File::Spec->splitpath($0);
 
 my $groff_sys_fontdir = "@FONTDIR@";
 my $want_help;
@@ -65,7 +65,7 @@ sub croak {
     my $pos = "";
     $pos .= "$filename:" if $filename;
     $pos .= "$lineno:" if $lineno;
-    print STDERR "$prog:$pos error: $msg\n";
+    print STDERR "$program_name:$pos error: $msg\n";
     exit(1);
 }
 
@@ -74,23 +74,20 @@ sub whine {
     my $pos = "";
     $pos .= "$filename:" if $filename;
     $pos .= "$lineno:" if $lineno;
-    print STDERR "$prog:$pos warning: $msg\n";
+    print STDERR "$program_name:$pos warning: $msg\n";
 }
 
-# Use $0 in the usage message for consistency with groff's C++ programs.
-# This also informs the user with multiple versions available which they
-# are running.
 sub usage {
     my $stream = *STDOUT;
     my $had_error = shift;
     $stream = *STDERR if $had_error;
-    print $stream "usage: $0 [-ckmnsx] [-a slant]" .
+    print $stream "usage: $program_name [-ckmnsx] [-a slant]" .
 	" [-d device-description-file] [-e encoding-file]" .
 	" [-f internal-name] [-i italic-correction-factor]" .
 	" [-o output-file] [-w space-width] afm-file map-file" .
 	" font-description-file\n" .
-	"usage: $0 {-v | --version}\n" .
-	"usage: $0 --help\n";
+	"usage: $program_name {-v | --version}\n" .
+	"usage: $program_name --help\n";
     unless ($had_error) {
 	print $stream "\n" .
 "Generate a font description file for use with groff(1)'s 'ps' and\n" .
@@ -105,7 +102,7 @@ sub usage {
 usage(0) if ($want_help);
 
 if ($#ARGV != 2) {
-    print STDERR "$prog: usage error: insufficient arguments\n";
+    print STDERR "$program_name: usage error: insufficient arguments\n";
     usage(1);
 }
 
@@ -375,7 +372,7 @@ if (!$opt_x) {
 	if ($nmap{$ch}) {
 	    for (my $j = 0; $j < $nmap{$ch}; $j++) {
 		if (defined $mapped{$map{$ch, $j}}) {
-		    print STDERR "$prog: AGL name"
+		    print STDERR "$program_name: AGL name"
 			 . " '$mapped{$map{$ch, $j}}' already mapped to"
 			 . " groff name '$map{$ch, $j}'; ignoring AGL"
 			 . " name '$ch'\n";

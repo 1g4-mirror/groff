@@ -1,5 +1,14 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/afmtodit/afmtodit.pl: Trivially refactor, renaming
+	scalar `prog` to `program_name`.
+	(usage): Use that scalar instead of `$0` when reporting
+	program's identity.  Drop incorrect annotation.  This new
+	behavior is what is consistent with groff's other install
+	programs.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.cpp (do_so): Throw warning if input
 	document backslash-escapes a space in a `so` token argument.  As
 	the diagnostic message notes, doing so is not compatible with
