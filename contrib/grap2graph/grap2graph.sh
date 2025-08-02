@@ -5,6 +5,8 @@
 # by Eric S. Raymond <esr@thyrsus.com>, May 2003
 # based on a recipe by W. Richard Stevens
 #
+# salves for shell portability agonies by G. Branden Robinson
+#
 # Take grap description on stdin, emit cropped bitmap on stdout.  The
 # grap markup should *not* be wrapped in .G1/.G2, this script will do
 # that.  A -U option on the command line enables gpic/groff "unsafe"
@@ -27,6 +29,32 @@
 #
 # Thus, we pass -U to groff(1), and everything else to convert(1).
 
+# Screen for shells non-conforming with POSIX Issue 4 (1994).
+badshell=yes
+# Solaris 10 /bin/sh is so wretched that it not only doesn't support
+# standard parameter expansion, but it also writes diagnostic messages
+# to the standard output instead of standard error.
+if [ -n "$SHELL" ]
+then
+  "$SHELL" -c 'prog=${0##*/}' >/dev/null 2>&1 && badshell=
+fi
+
+if [ -n "$badshell" ]
+then
+  prog=`basename $0`
+else
+  prog=${0##*/}
+fi
+
+usage="usage: $prog [-unsafe] [-format output-format] \
+[convert-argument ...]
+$prog {-v | --version}
+$prog --help
+
+Read a grap(1) program from the standard input and write an image file,
+by default in Portable Network Graphics (PNG) format, to the standard
+output.  See the grap2graph(1) manual page."
+
 groff_opts=""
 convert_opts=""
 convert_trim_arg="-trim"
@@ -41,10 +69,10 @@ do
 	format=$2
 	shift;;
     -v | --version)
-	echo "grap2graph (groff) version @VERSION@"
+	echo "$prog (groff) version @VERSION@"
 	exit 0;;
     --help)
-	echo "usage: grap2graph [ option ...] < in > out"
+	echo "$usage"
 	exit 0;;
     *)
 	convert_opts="$convert_opts $1";;

@@ -5,6 +5,8 @@
 # by Eric S. Raymond <esr@thyrsus.com>, July 2002
 # based on a recipe by W. Richard Stevens
 #
+# salves for shell portability agonies by G. Branden Robinson
+#
 # Take a pic/eqn diagram on stdin, emit cropped bitmap on stdout.  The
 # pic markup should *not* be wrapped in .PS/.PE, this script will do
 # that.  An -unsafe option on the command line enables gpic/groff
@@ -34,6 +36,34 @@
 # We don't have complete option coverage on eqn because this is
 # primarily intended as a pic translator; we can live with eqn defaults.
 
+# Screen for shells non-conforming with POSIX Issue 4 (1994).
+badshell=yes
+# Solaris 10 /bin/sh is so wretched that it not only doesn't support
+# standard parameter expansion, but it also writes diagnostic messages
+# to the standard output instead of standard error.
+if [ -n "$SHELL" ]
+then
+  "$SHELL" -c 'prog=${0##*/}' >/dev/null 2>&1 && badshell=
+fi
+
+if [ -n "$badshell" ]
+then
+  prog=`basename $0`
+else
+  prog=${0##*/}
+fi
+
+usage="usage: $prog [-unsafe] [-format output-format] \
+[-eqn delimiters] [convert-argument ...]
+$prog {-v | --version}
+$prog --help
+
+Read a pic(1) program from the standard input and write an image file,
+by default in Portable Network Graphics (PNG) format, to the standard
+output.  The program furthermore translates eqn(1) constructs, so it can
+be used to generate images of mathematical formulae.  See the
+pic2graph(1) manual page."
+
 groffpic_opts=""
 convert_opts=""
 convert_trim_arg="-trim"
@@ -52,10 +82,10 @@ do
 	eqndelim=$2
 	shift;;
     -v | --version)
-	echo "pic2graph (groff) version @VERSION@"
+	echo "$prog (groff) version @VERSION@"
 	exit 0;;
     --help)
-	echo "usage: pic2graph [ option ...] < in > out"
+	echo "$usage"
 	exit 0;;
     *)
 	convert_opts="$convert_opts $1";;
