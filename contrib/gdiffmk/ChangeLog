@@ -1,3 +1,8 @@
+2025-08-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* gdiffmk.sh (Usage): Update description, (roughly) syncing it
+	with man page.
+
 2024-12-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Track revisions to groff Autotools usage, prompted by the fact

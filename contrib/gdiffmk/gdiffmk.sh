@@ -49,10 +49,10 @@ EOF
 	then
 		cat >&2 <<EOF
 
-Compare roff(7) documents file1 and file2, and write a roff document
-to the standard output stream (or output-file) consisting of file2 with
-added margin character ('mc') requests indicating output lines that
-differ from file1.  See the gdiffmk(1) manual page.
+Compare roff(7) documents file1 and file2, and write another, derived
+from both, to the standard output stream (or output-file), adding margin
+character ('mc') requests at places in the output where the input
+documents differ.
 EOF
 	fi
 	exit $status

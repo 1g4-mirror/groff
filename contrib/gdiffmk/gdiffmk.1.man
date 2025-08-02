@@ -96,11 +96,14 @@ documents,
 .I file1
 and
 .IR file2 ,
-and writes another
+and writes another,
+derived from both,
 to the standard output stream
 (or
 .IR output-file ),
-adding margin characters to mark places in the output
+adding margin character
+.RB ( mc )
+requests at places in the output
 where the input documents differ.
 .
 .I gdiffmk
