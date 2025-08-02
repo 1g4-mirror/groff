@@ -741,6 +741,21 @@ Output drivers
    This change aligns it with other groff output drivers, and makes it
    work correctly with "groff -vX".
 
+Utilities
+---------
+
+*  afmtodit now recognizes a '-q' option to suppress diagnostics
+   reporting duplicate mappings in favor of a count thereof, and the
+   "BuildFoundries" script uses it.  Recent versions of the URW fonts
+   have tons of duplicate mappings (for groff's purposes) and to our
+   knowledge these are all harmless.
+
+*  grog no longer supports the `--ligatures` and `--run` options.
+   Simulate the former (which was specific to the "pdf" output device)
+   with the option sequence "-P -U -P y", and the latter by using the
+   command substitution feature of your shell; see section "Examples" of
+   groff(1).
+
 Miscellaneous
 -------------
 
@@ -833,12 +848,6 @@ Miscellaneous
    notes for 1.23.0, so it is easier to defend time-zone-invariant
    output to them.  In all other cases, the current time remains
    displayed in local time.  Thanks to Colin Watson.
-
-*  grog(1) no longer supports the `--ligatures` and `--run` options.
-   Simulate the former (which was specific to the "pdf" output device)
-   with the option sequence "-P -U -P y", and the latter by using the
-   command substitution feature of your shell; see section "Examples" of
-   groff(1).
 
 *  The minimum version of Perl required to build groff is now 5.8 (18
    July 2002), incremented from 5.6.1.
