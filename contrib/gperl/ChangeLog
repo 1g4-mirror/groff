@@ -1,3 +1,20 @@
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* gperl.pl: Revise usage and version messages.  Rename scalar
+	`version` to `gperl_version`.  Add scalar `groff_version`, and
+	make its value robust to use of the program directly from the
+	source tree or in built form, copying a technique from groff's
+	`chem` contributed component.  Stop accepting abbreviated forms
+	of `--help` and `--version` options, apart from `-h` and `-v`.
+	Developers have over the decades come to repent of this old,
+	terrible idea, because it prevents them from adding an option
+	name that is a leading substring of another without changing the
+	semantics of existing command lines.  Bump minor component of
+	`gperl_version` accordingly.
+	(usage, version): Reuse subroutines from grog(1), updating usage
+	message appropriately and formatting version report per GNU
+	Coding Standards.
+
 2023-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* gperl.pl: Stop endorsing shebang line space myth.  See

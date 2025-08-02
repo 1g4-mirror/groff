@@ -759,6 +759,10 @@ Utilities
 Miscellaneous
 -------------
 
+*  The contributed program gperl no longer accepts abbreviated forms of
+   the long options `--help` and `--version`.  The respective synonymous
+   short options `-h` and `-v` remain.
+
 *  Font description files now support a variant of the "charset"
    directive: "charset-range" works like the existing "charset"
    directive except that the glyph descriptions use a `name` of the form
