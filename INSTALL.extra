@@ -1,4 +1,4 @@
-    Copyright 1997-2022 Free Software Foundation, Inc.
+    Copyright 1997-2025 Free Software Foundation, Inc.
 
     Copying and distribution of this file, with or without modification,
     are permitted in any medium without royalty provided the copyright
@@ -123,6 +123,9 @@ automatically used by 'preconv'.  Discovery of the 'uchardet' library
 requires the 'pkg-config' program to be installed on your system, as
 well as the library's C header files--on a package-based host system,
 this can mean installing uchardet's '-dev' or '-devel' package.
+
+The contributed program 'glilypond' requires the Perl module
+'File::HomeDir'.
 
 URW fonts
 ---------
