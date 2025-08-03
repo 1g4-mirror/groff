@@ -1122,6 +1122,8 @@ and up to the end of
 otherwise.
 .
 .
+.br
+.ne 4v
 .TP
 .BR .YS\~ [\c
 .IR reuse-indentation ]
@@ -1466,6 +1468,8 @@ implements
 .BR MR .
 .
 .
+.br
+.ne 2v
 .P
 Prepare arguments to
 .BR MR ,
@@ -1665,6 +1669,8 @@ angle brackets.
 _ifstyle()dnl
 .
 .
+.br
+.ne 2v
 .IP
 When rendered by
 .I groff
@@ -2577,7 +2583,7 @@ use of
 requests
 (apart from the empty request
 .RB \[lq] . \[rq])\&
-risks poor rendering when your page is processed by
+risks poor rendering when a page is processed by
 .RI non- roff
 formatters that attempt to interpret page sources.
 .
@@ -2592,10 +2598,10 @@ they may be incapable of handling numeric expressions,
 control structures,
 or register,
 string,
-and macro definitions.
-.
-Such limitations can lead to portions of a document being presented
-incomprehensibly or omitted altogether.
+and macro definitions,
+causing a document's contents
+to be presented incomprehensibly
+or omitted entirely.
 .
 .
 .P
@@ -2828,6 +2834,8 @@ as in a command synopsis.
 .RE
 .
 .
+.br
+.ne 4v
 .IP
 .B \ec
 also helps when changing font styles in
@@ -3451,6 +3459,11 @@ The inside footer is populated per the value of
 .RS \" Invisibly move left margin to current IP indentation.
 .RS \" Now indent further, visibly.
 .TP
+.if t \{\
+.  \" begin hideous cheat for U.S. letter paper
+.  do nr saved-PD \n[PD]
+.  do nr PD 0.25v
+.\}
 3
 3rd Berkeley Distribution
 .I (default)
@@ -3476,6 +3489,11 @@ The inside footer is populated per the value of
 4.4 Berkeley Distribution
 .RE \" Move left margin back to IP indentation.
 .RE \" Move left margin back to standard position.
+.if t \{\
+.  \" end hideous cheat for U.S. letter paper
+.  do nr PD \n[saved-PD]u
+.  do rr saved-PD
+.\}
 .
 .
 .\" ====================================================================
