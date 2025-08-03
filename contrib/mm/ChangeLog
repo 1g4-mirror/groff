@@ -1,5 +1,19 @@
 2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (LB): Fix bugs.  (1) Fix copy-and-paste error that
+	prevented "I" from being recognized as a valid register format;
+	next (2) in a *roff numeric expression, `&` doesn't have
+	short-circuit semantics like C's `&&` or Ada's `and then`, so
+	use nested `if` requests to prevent interpolation of a
+	non-number as an operand to a comparison; and finally (3)
+	actually assign the valid format to the appropriate register for
+	the (nested) list.
+
+	Fixes <https://savannah.gnu.org/bugs/?67388>.  Problems
+	introduced by me in commit c243961bce, 9 October.
+
+2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tests/LB-mark-format-works.sh: Unit-test handling of `LB`
 	macro's `mark-format` argument.
 	* mm.am (mm_TESTS): Run test.

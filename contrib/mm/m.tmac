@@ -2493,17 +2493,19 @@ h=\\n[df*height!\\n[df*o-fnr]]
 .	ie '\?\\*[li*mf]\?'\?\&\?' .af li*cnt!\\n[li*lvl] 0
 .	el \{\
 .		nr li*is-format-valid 0
-.		if \B'\\*[li*mf]'&\\*[li*mf]>-1 .nr li*is-format-valid 1
 .		if '\?\\*[li*mf]\?'\?a\?'       .nr li*is-format-valid 1
 .		if '\?\\*[li*mf]\?'\?A\?'       .nr li*is-format-valid 1
 .		if '\?\\*[li*mf]\?'\?i\?'       .nr li*is-format-valid 1
-.		if '\?\\*[li*mf]\?'\?i\?'       .nr li*is-format-valid 1
+.		if '\?\\*[li*mf]\?'\?I\?'       .nr li*is-format-valid 1
+.		if \B'\\*[li*mf]' \
+.			if \\*[li*mf]>-1        .nr li*is-format-valid 1
 .		if !\\n[li*is-format-valid] \{\
 .			@warning \\$0: type argument is \\n[li*type] \
 but mark argument '\\*[li*mf]' is not a valid register format; \
 assuming '0'
 .			ds li*mf 0\"
 .		\}
+.		af li*cnt!\\n[li*lvl] \\*[li*mf]
 .	\}
 .\}
 .\"
