@@ -99,7 +99,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .	cov@print-title
 .	cov@print-authors
 .	ie d AFX \{\
-.		if \\n[D]>=5 .tm calling user-defined AFX macro
+.		if \n[D]>=5 .tm calling user-defined AFX macro
 .		AFX
 .	\}
 .	el       .cov@print-firm

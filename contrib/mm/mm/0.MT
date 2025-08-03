@@ -270,7 +270,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .if !d cov*mt-printed \{\
 .	cov@print-title subject
 .	ie d AFX \{\
-.		if \\n[D]>=5 .tm calling user-defined AFX macro
+.		if \n[D]>=5 .tm calling user-defined AFX macro
 .		AFX
 .	\}
 .	el       .cov@print-firm

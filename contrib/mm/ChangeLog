@@ -1,5 +1,11 @@
 2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/0.MT:
+	* mm/4.MT: Drop extraneous escape characters from register
+	interpolation; we're not in a macro definition.
+
+2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (LB): Fix bugs.  (1) Fix copy-and-paste error that
 	prevented "I" from being recognized as a valid register format;
 	next (2) in a *roff numeric expression, `&` doesn't have
