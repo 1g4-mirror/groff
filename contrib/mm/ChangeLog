@@ -1,5 +1,11 @@
 2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mm/0.MT: Let right-most column of document heading stretch to
+	the configured text width (the `W` register), but only if it is
+	defined and greater than the default.
+
+2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mm/0.MT:
 	* mm/4.MT: Drop extraneous escape characters from register
 	interpolation; we're not in a macro definition.

@@ -38,14 +38,18 @@ http://savannah.gnu.org/bugs/?group=groff.
 .	nr cov*column2-limit 4i
 .	nr cov*column3-hpos   4.3i \" "date", "from"
 .	nr cov*column4-hpos   4.65i \" date, author names, TM number
-.	nr cov*column4-limit 6i
+.	nr cov*user-width     0
+.	if r W .nr cov*user-width \n[W]u
+.	nr cov*column4-limit (6i>?\n[cov*user-width]u)
 .\}
 .el \{\
 .	nr cov*column2-hpos   9n
 .	nr cov*column2-limit 37n
 .	nr cov*column3-hpos  39n
 .	nr cov*column4-hpos  45n
-.	nr cov*column4-limit 60n
+.	nr cov*user-width     0
+.	if r W .nr cov*user-width \n[W]u
+.	nr cov*column4-limit (60n>?\n[cov*user-width]u)
 .\}
 .\"------------
 .de cov@print-title
