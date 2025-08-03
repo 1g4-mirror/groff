@@ -1,5 +1,11 @@
 2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tests/LB-mark-format-works.sh: Unit-test handling of `LB`
+	macro's `mark-format` argument.
+	* mm.am (mm_TESTS): Run test.
+
+2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac (debug@little-dump, debug@big-dump, S): In debugging
 	output, report units associated with value of `.s` register as
 	`z` ("typographical" points), not `p` ("spacing" points}.
