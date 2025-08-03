@@ -67,6 +67,16 @@
 	with proper white space and correct grammar when only one
 	duplicate mapping is encountered.
 
+	2025-08-03  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[BuildFoundries]: Improve diagnostics.
+
+	* font/devpdf/util/BuildFoundries.pl [RunAfmtodit]: Diagnose
+	return code from running afmtodit.
+
+	Fixes <https://savannah.gnu.org/bugs/index.php?67390> thanks
+	to G. Branden Robinson for report and patch.
+
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/groff_man.7.man.in: Un-deprecate `HP` macro.  Retain

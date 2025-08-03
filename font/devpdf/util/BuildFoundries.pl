@@ -211,9 +211,18 @@ sub RunAfmtodit
 
     system("$cmd $enc '$afmfile' $map $gfont");
 
+    if ($? == -1) {
+	Die("unable to run afmtodit: $!\n");
+    }
+    elsif ($? & 127) {
+	Die("afmtodit terminated by signal " . ($? & 127) . ", "
+	. (($? & 128) ? "with" : "without") . " core dump");
+    }
+
     if ($?)
     {
-	Warn("failed running \"$cmd $enc '$afmfile' $map $gfont\"");
+	Warn("command \"$cmd $enc '$afmfile' $map $gfont\" exited"
+	. " with status $?");
 	unlink $gfont;
 	return('');
     }
