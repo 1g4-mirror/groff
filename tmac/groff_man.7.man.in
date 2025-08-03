@@ -160,6 +160,7 @@ typesetting system.
 .
 _endif()dnl
 .P
+.if t .vs 11.75p \" begin hideous cheat for U.S. letter paper
 .TS
 l l l.
 Macro	Meaning	Subsection
@@ -171,6 +172,7 @@ _
 \&.BR	Bold, roman alternating	Font style macros
 \&.EE	Example end	Document structure macros
 \&.EX	Example begin	Document structure macros
+\&.HP	Begin paragraph with hanging indent	Paragraphing macros
 \&.I	Italic	Font style macros
 \&.IB	Italic, bold alternating	Font style macros
 \&.IP	Indented paragraph	Paragraphing macros
@@ -196,13 +198,13 @@ _
 \&.UR	URI start	Hyperlink macros
 \&.YS	Synopsis end	Synopsis macros
 .TE
+.if t .vs \" end hideous cheat for U.S. letter paper
 .
 .
 .P
 We discuss other macros
 .RB ( AT ,
 .BR DT ,
-.BR HP ,
 .BR OP ,
 .BR PD ,
 .BR SB ,
@@ -765,7 +767,7 @@ the
 amount of the preceding
 .BR IP ,
 .BR TP ,
-or (deprecated)
+or
 .B HP
 macro call if no (sub-)sectioning or ordinary paragraphing macro has
 intervened;
@@ -808,6 +810,12 @@ _ifstyle()dnl
 like this one
 _endif()dnl
 indents all output lines by the same amount.
+.
+A hanging paragraph
+.RB ( HP )
+is a cosmetic variant of
+.B P
+with a hanging indent.
 .
 Definition lists frequently occur in man pages;
 these can be set as
@@ -862,7 +870,7 @@ these macros are synonymous.
 Any indentation from use of
 .BR IP ,
 .BR TP ,
-or the deprecated
+or
 .B HP
 is cleared.
 .
@@ -872,6 +880,33 @@ as affected by
 and
 .BR RE ,
 is not.
+.
+.
+.TP
+.BR .HP " ["\c
+.IR indentation ]
+Set a paragraph with a hanging indentation.
+The first line sets with no (additional) indentation,
+and any further lines as with
+.B TP
+or
+.BR IP .
+.
+.
+.IP
+.I Caution:
+A hanging indentation cannot be expressed naturally in (pure) HTML,
+a hanging paragraph is not distinguishable from an ordinary one if it
+formats on only one output line,
+and
+.RI non- roff -based
+man page interpreters may treat
+.B HP
+as an ordinary paragraph anyway.
+.
+Thus,
+information or distinctions you mean to express with indentation may be
+lost.
 .
 .
 .TP
@@ -2067,7 +2102,7 @@ register configures the default indentation amount used by
 .IR inset-amount ),
 .BR IP ,
 .BR TP ,
-and the deprecated
+and
 .BR HP ;
 an overriding argument
 is a number plus an optional scaling unit.
@@ -2089,7 +2124,7 @@ _endif()dnl
 An indentation specified in a call to
 .BR IP ,
 .BR TP ,
-or the deprecated
+or
 .B HP
 persists until
 (1) another of these macros is called with an
@@ -2135,7 +2170,7 @@ reset it);
 it is imposed by the
 .BR TP ,
 .BR IP ,
-and deprecated
+and
 .B HP
 macros,
 and cancelled by
@@ -2243,7 +2278,7 @@ tab characters or the indentation arguments to
 .BR IP ,
 .BR TP ,
 .BR RS ,
-or the deprecated
+or
 .BR HP ;
 the result may not be comprehensible on an output device you fail to
 check,
@@ -2263,7 +2298,7 @@ Several macros insert vertical space:
 .B P
 (and its synonyms),
 .BR IP ,
-and the deprecated
+and
 .BR HP .
 .
 The default inter-section and inter-paragraph spacing
@@ -3274,34 +3309,6 @@ consider composing a table using
 instead.
 .
 .
-.TP
-.BR .HP " ["\c
-.IR indentation ]
-Set a paragraph with a hanging indentation.
-The first line sets with no (additional) indentation,
-and any further lines as with
-.B TP
-or
-.BR IP .
-.
-.
-.IP
-Use this presentation-oriented macro with caution.
-.
-A hanging indentation cannot be expressed naturally in (pure) HTML,
-a hanging paragraph is not distinguishable from an ordinary one if it
-formats on only one output line,
-and
-.RI non- roff -based
-man page interpreters may treat
-.B HP
-as an ordinary paragraph anyway.
-.
-Thus,
-information or distinctions you mean to express with indentation may be
-lost.
-.
-.
 .br
 .ne 5v
 .TP
@@ -3797,7 +3804,7 @@ Set the default indentation amount used by
 .BR IP ,
 .BR TP ,
 .\" TQ inherits its indentation from the preceding TP.
-and the deprecated
+and
 .BR HP ,
 and the inset amount used by
 .BR RS .
@@ -4337,7 +4344,7 @@ This register also determines
 the default indentation used by
 .BR IP ,
 .BR TP ,
-and the deprecated
+and
 .BR HP .
 .
 To create an inset relative to an indented paragraph,

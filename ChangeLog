@@ -1,5 +1,16 @@
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/groff_man.7.man.in: Un-deprecate `HP` macro.  Retain
+	cautionary language addressing its limited utility.
+
+	Fixes <https://savannah.gnu.org/bugs/?67387>.  Thanks to Alan
+	Coopersmith and Thomas Dickey for the discussion in
+	<https://gitlab.freedesktop.org/xorg/lib/libxt/-/\
+	merge_requests/74> and those evidently silently assenting to
+	<https://lists.gnu.org/r/groff/2024-04/msg00118.html>.
+
+2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tfmtodit]: Improve usage message upon `--help`.
 
 	* src/utils/tfmtodit/tfmtodit.cpp (usage): Summarize purpose of
