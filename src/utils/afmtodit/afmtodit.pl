@@ -728,7 +728,8 @@ for (my $i = 0; $i <= $#encoding; $i++) {
 
 if ($opt_q && $duplicate_mappings_count) {
     print STDERR "$program_name: $duplicate_mappings_count duplicate"
-      . "mappings encountered";
+      . " mapping" . (($duplicate_mappings_count > 1) ? "s" : "" )
+      . " encountered\n";
 }
 
 sub conv {
