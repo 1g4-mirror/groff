@@ -525,13 +525,13 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" We assume that people calling these macros understand that register
 .\" values are stored in basic units.
 .de debug@little-dump
-.tmc \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s],\\n[.ps]
+.tmc \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s]z,\\n[.ps]s
 .tm1 " in=\\n[.i] fi=\\n[.u] .d=\\n[.d] nl=\\n[nl] pg=\\n[%]
 ..
 .de debug@big-dump
 .nr debug*n 1n
 .nr debug*m 1m
-.tmc \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s] in=\\n[.i]
+.tmc \\$1:\\n[.F]:\\n[c.] ll=\\n[.l] vs=\\n[.v] ps=\\n[.s]z in=\\n[.i]
 .tm1 " ad=\\n[.j] fi=\\n[.u] pl=\\n[.p] page=\\n[%] .o=\\n[.o]
 .tmc _______ .d=\\n[.d] .f=\\n[.f] .h=\\n[.h] .k=\\n[.k] .n=\\n[.n]
 .tmc " .p=\\n[.p] .t=\\n[.t] .z=\\n[.z] nl=\\n[nl] dn=\\n[dn]
@@ -819,7 +819,7 @@ hd*last-hsize=\\n[hd*last-hsize]u
 .\"
 .if \\n[D]>=6 \{\
 .	tmc \\$0: misc*a=\\*[misc*a], misc*b=\\*[misc*b]
-.	tmc " => ps:\\n[.s]p (\\n[@psu]u), vs:\\n[@vsp]p (\\n[@vs]u),
+.	tmc " => ps:\\n[.s]z (\\n[@psu]u), vs:\\n[@vsp]p (\\n[@vs]u),
 .	tm1 " (res:\\n[@res])
 .\}
 .nr misc*S-ps  \\n[misc*S-ps1]
