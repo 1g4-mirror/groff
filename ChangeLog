@@ -1,3 +1,13 @@
+2025-08-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/afmtodit/afmtodit.pl: Stop throwing duplicate
+	mapping warning diagnostics in a handful of cases where we
+	expect them.  (All are cases of classical Greek letters
+	repurposed for technical applications).  Per James Cloos, some
+	redundant character code points, and thus duplicate Unicode->AGL
+	mappings, exist to preserve round-trip compatibility when
+	converting between character sets.
+
 2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/afmtodit/afmtodit.pl: Fix up new diagnostic message

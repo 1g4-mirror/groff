@@ -490,7 +490,14 @@ if (!$opt_x) {
 	    $u =~ s/^_/u/;
 	    if ($u) {
 		if (defined $mapped{$u}) {
-		    whine("both $mapped{$u} and $ch map to $u");
+		    # Don't whine about duplicates that exist to
+		    # preserve round-trip conversions; thanks to James
+		    # Cloos for pointing this out.
+		    if (!(($mapped{$u} eq 'Delta' and ($ch eq 'uni0394'))
+			 or ($mapped{$u} eq 'mu' and ($ch eq 'uni03BC'))
+			 or ($mapped{$u} eq 'uni03A9' and ($ch eq 'uni2126')))) {
+			whine("both $mapped{$u} and $ch map to $u");
+		    }
 		}
 		else {
 		    $mapped{$u} = $ch;
