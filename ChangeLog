@@ -44,7 +44,7 @@
 	* src/devices/grotty/tty.cpp (main, usage):
 	* src/preproc/html/pre-html.cpp (usage, scanArguments):
 	* src/preproc/preconv/preconv.cpp (usage, main):
-	* src/roff/groff/groff.cpp (main, uage): Do it.
+	* src/roff/groff/groff.cpp (main, usage): Do it.
 
 2025-08-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -320,7 +320,7 @@
 	thereof are not thus exposed.
 
 	* src/roff/troff/env.h (class environment): Declare new public
-	member functions `get_prev_stroke_color()` and
+	member functions `get_prev_stroke_color_string()` and
 	`get_prev_fill_color_string()`.
 	* src/roff/troff/env.cpp
 	(environment::get_prev_stroke_color_string):
