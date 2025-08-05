@@ -39,6 +39,7 @@
 .\" Modified by jjc@jclark.com and g.branden.robinson@gmail.com for
 .\" groff.
 .\"UC 7
+.if n .po 10n
 .nr fi 1n
 .nr sx 0
 .\"pn 0
@@ -76,6 +77,7 @@
 .\" the length of the longest entry.
 .nr DI \w'.sh \(+-N T a b c d e f'+2n
 .he '\*(MR''%'
+.fo ''\f(BIgroff\fP \*(MO''
 .de NR
 .b "\en\\$1" "\\$2"
 ..
