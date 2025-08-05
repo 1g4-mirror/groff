@@ -10,7 +10,7 @@ special character and glyph repertoire
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2025 Free Software Foundation, Inc.
 .\"
 .\" This file is part of groff (GNU roff), which is a free software
 .\" project.
@@ -1851,6 +1851,11 @@ not for typesetting Greek language text;
 normally,
 the uppercase letters have upright shape,
 and the lowercase ones are slanted.
+For the latter,
+we include in parentheses under \[lq]Unicode\[rq]
+more appropriate code points
+from the Mathematical Alphanumeric Symbols block
+of the Supplementary Multilingual Plane.
 .
 .
 .P
@@ -1887,36 +1892,36 @@ L Lf(CR) L Lx.
 \[*Q]	\e[*Q]	u03A8	uppercase psi +
 \[*W]	\e[*W]	u03A9	uppercase omega +
 
-\[*a]	\e[*a]	u03B1	lowercase alpha +
-\[*b]	\e[*b]	u03B2	lowercase beta +
-\[*g]	\e[*g]	u03B3	lowercase gamma +
-\[*d]	\e[*d]	u03B4	lowercase delta +
-\[*e]	\e[*e]	u03B5	lowercase epsilon +
-\[*z]	\e[*z]	u03B6	lowercase zeta +
-\[*y]	\e[*y]	u03B7	lowercase eta +
-\[*h]	\e[*h]	u03B8	lowercase theta +
-\[*i]	\e[*i]	u03B9	lowercase iota +
-\[*k]	\e[*k]	u03BA	lowercase kappa +
-\[*l]	\e[*l]	u03BB	lowercase lambda +
-\[*m]	\e[*m]	u03BC	lowercase mu +
-\[*n]	\e[*n]	u03BD	lowercase nu +
-\[*c]	\e[*c]	u03BE	lowercase xi +
-\[*o]	\e[*o]	u03BF	lowercase omicron +
-\[*p]	\e[*p]	u03C0	lowercase pi +
-\[*r]	\e[*r]	u03C1	lowercase rho +
-\[*s]	\e[*s]	u03C3	lowercase sigma +
-\[*t]	\e[*t]	u03C4	lowercase tau +
-\[*u]	\e[*u]	u03C5	lowercase upsilon +
-\[*f]	\e[*f]	u03D5	lowercase phi +
-\[*x]	\e[*x]	u03C7	lowercase chi +
-\[*q]	\e[*q]	u03C8	lowercase psi +
-\[*w]	\e[*w]	u03C9	lowercase omega +
+\[*a]	\e[*a]	u03B1 (u1D6FC)	lowercase alpha +
+\[*b]	\e[*b]	u03B2 (u1D6FD)	lowercase beta +
+\[*g]	\e[*g]	u03B3 (u1D6FE)	lowercase gamma +
+\[*d]	\e[*d]	u03B4 (u1D6FF)	lowercase delta +
+\[*e]	\e[*e]	u03B5 (u1D700)	lowercase epsilon +
+\[*z]	\e[*z]	u03B6 (u1D701)	lowercase zeta +
+\[*y]	\e[*y]	u03B7 (u1D702)	lowercase eta +
+\[*h]	\e[*h]	u03B8 (u1D703)	lowercase theta +
+\[*i]	\e[*i]	u03B9 (u1D704)	lowercase iota +
+\[*k]	\e[*k]	u03BA (u1D705)	lowercase kappa +
+\[*l]	\e[*l]	u03BB (u1D706)	lowercase lambda +
+\[*m]	\e[*m]	u03BC (u1D707)	lowercase mu +
+\[*n]	\e[*n]	u03BD (u1D708)	lowercase nu +
+\[*c]	\e[*c]	u03BE (u1D709)	lowercase xi +
+\[*o]	\e[*o]	u03BF (u1D70A)	lowercase omicron +
+\[*p]	\e[*p]	u03C0 (u1D70B)	lowercase pi +
+\[*r]	\e[*r]	u03C1 (u1D70C)	lowercase rho +
+\[*s]	\e[*s]	u03C3 (u1D70E)	lowercase sigma +
+\[*t]	\e[*t]	u03C4 (u1D70F)	lowercase tau +
+\[*u]	\e[*u]	u03C5 (u1D710)	lowercase upsilon +
+\[*f]	\e[*f]	u03D5 (u1D717)	lowercase phi +
+\[*x]	\e[*x]	u03C7 (u1D712)	lowercase chi +
+\[*q]	\e[*q]	u03C8 (u1D713)	lowercase psi +
+\[*w]	\e[*w]	u03C9 (u1D714)	lowercase omega +
 
-\[+e]	\e[+e]	u03F5	variant epsilon (lunate)
-\[+h]	\e[+h]	u03D1	variant theta (cursive form)
-\[+p]	\e[+p]	u03D6	variant pi (similar to omega)
-\[+f]	\e[+f]	u03C6	variant phi (curly shape)
-\[ts]	\e[ts]	u03C2	terminal lowercase sigma +
+\[+e]	\e[+e]	u03F5 (u1D716)	variant epsilon (lunate)
+\[+h]	\e[+h]	u03D1 (u1D717)	variant theta (cursive form)
+\[+p]	\e[+p]	u03D6 (u1D717)	variant pi (similar to omega)
+\[+f]	\e[+f]	u03C6 (u1D71B)	variant phi (curly shape)
+\[ts]	\e[ts]	u03C2 (u1D70D)	terminal lowercase sigma +
 .TE
 .
 .
