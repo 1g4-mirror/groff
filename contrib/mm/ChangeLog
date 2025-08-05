@@ -1,3 +1,17 @@
+2025-08-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac ([initializtion): Configure a 3v margin (one half-inch
+	when typesetting using the defaults of 10 point type on 12 point
+	spacing) below the footer, instead of 2v.
+	* tests/artifacts/letter_with_bottom_block:
+	* tests/artifacts/memorandum.0:
+	* tests/artifacts/memorandum.1:
+	* tests/artifacts/memorandum.2:
+	* tests/artifacts/memorandum.3:
+	* tests/artifacts/memorandum.custom:
+	* tests/short-pages-do-not-overflow-stack.sh: Update test
+	expectations.
+
 2025-08-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mm/0.MT: Let right-most column of document heading stretch to

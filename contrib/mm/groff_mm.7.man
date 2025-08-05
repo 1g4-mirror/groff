@@ -4058,11 +4058,14 @@ is specified, set those margins to
 and
 .IR bottom .
 .
-If no argument is given, reset the margin to zero, or to the default
-(\[lq]7v 5v\[rq])
+If no measurement arguments are given,
+reset the margins to zero,
+or,
 if
 .B \-T
-is used.
+is used,
+to the defaults
+(\[lq]7v 6v\[rq])
 .
 It is highly recommended that macros
 .B TP

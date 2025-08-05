@@ -47,13 +47,13 @@ test "$(echo "$output" | wc -l)" -eq 132 || wail # 66 lines * 2 pages
 
 echo "checking that sample document fits using -rL5v" >&2
 output=$(printf "%s\n" "$input" \
-    | "$groff" -b -rL5v -mm -Tascii -P-cbou | nl -ba)
+    | "$groff" -b -rL6v -mm -Tascii -P-cbou | nl -ba)
 echo "$output"
-test "$(echo "$output" | wc -l)" -eq 40 || wail # 5 lines * 8 pages
+test "$(echo "$output" | wc -l)" -eq 48 || wail # 6 lines * 8 pages
 
-echo "checking that sample document fails gracefully using -rL4v" >&2
+echo "checking that sample document fails gracefully using -rL5v" >&2
 error=$(printf "%s\n" "$input" \
-    | "$groff" -b -rL4v -mm -Tascii -P-cbou -z 2>&1)
+    | "$groff" -b -rL5v -mm -Tascii -P-cbou -z 2>&1)
 # Assume that >= 10 lines of stderr must be due to a giant backtrace.
 test $(echo "$error" | wc -l) -lt 10 || wail
 

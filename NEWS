@@ -542,6 +542,13 @@ Macro packages
 *  The new macro file "koi8-r.tmac" supports the KOI8-R character
    encoding, which supports the new Russian locale for groff.
 
+*  The m (mm) macro package now uses a 3v bottom margin rather than 2v.
+   (Using the default type size and vertical spacing, the result is a
+   half-inch margin, just like the existing top margin.)  When
+   formatting for terminals, content aligned to the bottom of the page
+   (footers, footnotes, `BS`/`BE` bottom blocks, and similar) now sets
+   one line higher than before.
+
 *  The m (mm) macro package's `Limsp` register (a GNU extension) has
    been removed; see the item regarding the `LI` macro below.
 
