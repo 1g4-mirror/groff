@@ -6434,7 +6434,6 @@ like
 but used only with type sizes,
 to overcome a limitation of AT&T
 @command{troff}. @c AT&T
-@c TODO: Make "p" truncate to integer like AT&T if -C?
 
 @item f
 GNU @code{troff} defines this unit to scale decimal fractions in the

@@ -907,7 +907,6 @@ like
 but used only with type sizes,
 to overcome a limitation of AT&T
 .IR troff . \" AT&T
-.\" TODO: Make "p" truncate to integer like AT&T if -C?
 .
 .TP
 .B s
