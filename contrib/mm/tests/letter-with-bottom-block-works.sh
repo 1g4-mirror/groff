@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2025 Free Software Foundation, Inc.
+# Copyright (C) 2025 G. Branden Robinson
 #
 # This file is part of groff.
 #
@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 groff="${abs_top_builddir:-.}/test-groff"
 
@@ -72,11 +71,10 @@ shows is going to regret it.
 .'
 
 echo "checking formatting of LT letter with BS/BE bottom block" >&2
-# POSIX mandates that the shell remove all but one trailing newline when
-# performing command substitutions.
-output=$(printf "%s\n" "$input" | "$groff" -ww -m m -T ascii -P -cbou; \
-    echo TRAILER)
-echo "$output" | grep -v TRAILER
+# GNU coreutils's `nl` command adds trailing tabs to empty lines.
+output=$(printf "%s\n" "$input" | "$groff" -ww -m m -T ascii -P -cbou \
+    | nl -ba | sed 's/[	 ]*$//') # That's [tab space].
+echo "$output"
 # We _would_ use "cut -d' ' -f1-2" here, but Solaris 10 cksum writes
 # tabs between fields instead of spaces, nonconformantly with POSIX
 # Issue 4 (1994); see XCU p. 195, PDF p. 217.  Quality!  So fire up big
@@ -84,8 +82,7 @@ echo "$output" | grep -v TRAILER
 # with that fancy proprietary OS.
 expected=$(cksum "$artifacts_dir"/letter_with_bottom_block \
     | awk '{ print $1, $2 }')
-actual=$(echo "$output" | grep -v TRAILER | cksum \
-    | awk '{ print $1, $2 }')
+actual=$(echo "$output" | cksum | awk '{ print $1, $2 }')
 test "$actual" = "$expected" || wail
 
 test -z "$fail"
