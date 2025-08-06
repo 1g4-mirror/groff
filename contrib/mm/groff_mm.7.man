@@ -9,7 +9,8 @@ groff_mm \- memorandum macros for GNU
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1989-2024 Free Software Foundation, Inc.
+.\" Copyright (C) 1989-2019 Free Software Foundation, Inc.
+.\"               2020-2024 G. Branden Robinson
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
