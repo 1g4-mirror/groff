@@ -1,3 +1,9 @@
+2025-08-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/tests/s_vertical-margins-are-correct.sh: Add unit test of
+	correct vertical margins.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2025-08-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/afmtodit/afmtodit.pl: Stop throwing duplicate
