@@ -573,8 +573,8 @@ Cb        Cb Cb Cb
 Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Parameter	Definition	Effective\*[Next]	Default
-.TH
 _
+.TH
 Margins
 \[rs]n[PO]	Page offset (left margin)	page\
 	1i \f[R](\f[]0\f[R])\*{*\*}
