@@ -43,7 +43,7 @@
 .ds FR 1
 .nr TC-MARGIN \w'00' \" expect 2-digit page numbers at most
 .ds header-title Using \f[I]groff\f[] with the \f[I]ms\f[] macros\"
-.ds date July 2025\"
+.ds date August 2025\"
 .ND \*[date]
 .ds CH \" empty
 .ie t \{\
@@ -2717,9 +2717,15 @@ string to base the equation label on the current heading number,
 giving us more flexibility to reorganize the document.
 .
 .
+.ie t \{\
 .EQ C (\*[SN-NO-DOT]a)
 p ~ = ~ q sqrt { 1 + ~ ( x / q sup 2 ) }
 .EN
+.\}
+.el \{
+.ce
+.B "[Equation not rendered on terminal output device.]"
+.\}
 .
 .
 .PP
@@ -2740,7 +2746,7 @@ circle "output";
 .TE
 .
 .
-.if t \{\
+.ie t \{\
 .PS
 circle "input";
 arrow;
@@ -2748,6 +2754,10 @@ box width 1.5i "\f[CR]groff \-Rept \-ms\f[]";
 arrow;
 circle "output";
 .PE
+.\}
+.el \{
+.ce
+.B "[Picture not rendered on terminal output device.]"
 .\}
 .
 .
