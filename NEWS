@@ -668,6 +668,17 @@ Macro packages
    size of 20 points, the vertical spacing now defaults to 24 points
    rather than 22.
 
+*  The s (ms) macro package now subtracts one vee from the footer trap
+   location computed using the `FM` register.  When using the default
+   `FM` value of `1i`, this makes the size of the margin from the footer
+   baseline to the bottom of the page 3 vees or one half-inch,
+   consistently with that between the header baseline and the page top.
+   While a bug fix, and consistent with DWB 3.3 ms, this computation is
+   inconsistent with Seventh Edition Unix ms and Heirloom Doctools ms.
+   When formatting for terminals, footers now set one line higher than
+   before.  The size of the footnote area is not affected; instead there
+   is a 1v smaller margin between its bottom and the footer baseline.
+
 Output drivers
 --------------
 

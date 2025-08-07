@@ -566,8 +566,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .de P1
 .nr pg*P1 1
 ..
+.\" Establish traps for the bottom of the text area and the footer line.
+.\" Various macros move them, but pg@top restores them at each new page.
 .wh -\n[FM]u pg@bottom
-.wh -\n[FM]u/2u pg*footer
+.wh -\n[FM]u/2u-1v pg*footer
 .nr MINGW 2n
 .nr pg@ncols 1
 .de @MC
@@ -618,7 +620,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .	pl \\n[nl]u
 .	ab
 .\}
-.ch pg*footer -\\n[FM]u/2u
+.ch pg*footer -\\n[FM]u/2u-1v
 .nr pg*col-num 0
 .nr pg@fn-bottom-margin 0
 .po \\n[PO]u

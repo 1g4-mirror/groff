@@ -112,7 +112,7 @@ echo "$output" | grep -q '^ *57[	 ]*sint et molestiae' || wail
 
 echo "checking for footer on correct output line" >&2
 # That's [tab space] on the next line.
-echo "$output" | grep -qx ' *64[	 ]*Footer' || wail
+echo "$output" | grep -qx ' *63[	 ]*Footer' || wail
 
 # ...with titles and a short footnote...
 
@@ -143,7 +143,7 @@ echo "$output" | grep -q ' *60[	 ]*.*short footnote' || wail
 
 echo "checking for footer on correct output line" >&2
 # That's [tab space] on the next line.
-echo "$output" | grep -qx ' *64[	 ]*Footer' || wail
+echo "$output" | grep -qx ' *63[	 ]*Footer' || wail
 
 # ...and with titles and a longer footnote.
 
@@ -176,7 +176,7 @@ echo "$output" | grep -q ' *57[	 ]*.*longer footnote' || wail
 
 echo "checking for footer on correct output line" >&2
 # That's [tab space] on the next line.
-echo "$output" | grep -qx ' *64[	 ]*Footer' || wail
+echo "$output" | grep -qx ' *63[	 ]*Footer' || wail
 
 test -z "$fail"
 

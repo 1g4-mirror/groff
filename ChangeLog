@@ -1,3 +1,17 @@
+2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/s.tmac ([initialization], pg@top): Alter placement of
+	page footer, shifting it upward by one vee, so that the size of
+	the "footer margin" (register `FM`) measures as documented, and
+	consistently with the "header margin" (register `HM`).  While a
+	bug fix, and consistent with DWB 3.3 ms, it is inconsistent with
+	Seventh Edition Unix ms and Heirloom Doctools ms.
+
+	* tmac/tests/s_vertical-margins-are-correct.sh: Update test
+	expectations.
+
+	Fixes <https://savannah.gnu.org/bugs/?67401>.
+
 2025-08-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tests/s_vertical-margins-are-correct.sh: Add unit test of
