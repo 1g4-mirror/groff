@@ -54,18 +54,19 @@ DOC_GMP_COVER_PAGE = doc/groff-man-pages-cover.groff
 # Files located in the source tree
 DOCFILES_INST = \
   doc/me-revisions \
-  doc/ms.ms \
   doc/pic.ms
 DOCFILES_NOINST = \
   doc/groff-man-pages-cover.groff.in \
   doc/meintro.me.in \
   doc/meintro_fr.me.in \
-  doc/meref.me.in
+  doc/meref.me.in \
+  doc/ms.ms.in
 # Files that undergo a transformation prior to groff processing
 GENERATEDDOCFILES = \
   doc/meintro.me \
   doc/meintro_fr.me \
-  doc/meref.me
+  doc/meref.me \
+  doc/ms.ms
 # Files generated in the build tree
 if USE_GROHTML
 PROCESSEDDOCFILES_HTML = \
@@ -367,9 +368,14 @@ doc/meintro_fr.ps: doc/meintro_fr.me preconv tbl
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_GROFF) -K utf8 -t -Tps -me -mfr $< >$@
 
-doc/ms.ps: $(doc_srcdir)/ms.ms $(TMAC_PACKAGE_MS) eqn pic tbl
+SUFFIXES += .ms.in .ms
+.ms.in.ms:
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& $(DOC_SED) $< >$@
+
+doc/ms.ps: doc/ms.ms $(TMAC_PACKAGE_MS) eqn pic tbl
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
-	&& $(DOC_GROFF) -pet -Tps -ms $(doc_srcdir)/ms.ms >$@
+	&& $(DOC_GROFF) -pet -Tps -ms doc/ms.ms >$@
 
 doc/pic.ps: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS) eqn pic tbl
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \

@@ -1,5 +1,22 @@
 2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[ms]: Generate "ms.ms" document from "ms.ms.in".  This way we
+	can embed groff's version string in it.
+
+	* doc/ms.ms: Rename this...
+	* doc/ms.ms.in: ...to this.
+	* doc/doc.am (DOCFILES_INST): Drop "doc/ms.ms".
+	(DOCFILES_NOINST): Add "doc/ms.ms.in".
+	(GENERATEDDOCFILES): Add "doc/ms.ms".
+	(SUFFIXES): Add "ms.in" and ".ms", in that order, duplicating
+	the dubious, nonstandard, but apparently portable and effective
+	make(1) trick we use for our me(7) manuals.
+	(.ms.in.ms): New suffix rule creates "ms.ms" from "ms.ms.in".
+	(doc/ms.ps): Revise rule to look for prerequisite in the build
+	instead of the source directory.
+
+2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/s.tmac ([initialization], pg@top): Alter placement of
 	page footer, shifting it upward by one vee, so that the size of
 	the "footer margin" (register `FM`) measures as documented, and
