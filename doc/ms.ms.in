@@ -44,9 +44,8 @@
 .ds date July 2025\"
 .ND \*[date]
 .EH '%''\*[date]'
-.EF ''''
 .OH 'Using \f[I]groff\f[] with the \f[I]ms\f[] macros''%'
-.OF ''''
+.ds CF groff @VERSION@\"
 .TL
 Using
 .BI groff

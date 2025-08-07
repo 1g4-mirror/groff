@@ -1,5 +1,9 @@
 2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/ms.ms.in: Report groff version in page footers.
+
+2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[ms]: Generate "ms.ms" document from "ms.ms.in".  This way we
 	can embed groff's version string in it.
 
