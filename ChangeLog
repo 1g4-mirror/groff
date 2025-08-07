@@ -1,5 +1,11 @@
 2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/ms.ms.in: Reformat nroff-mode page headers.  Stop
+	distinguishing recto and verso pages; if formatting in nroff
+	mode, we're likely going to a video terminal (or emulator).
+
+2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/ms.ms.in: Report groff version in page footers.
 
 2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>

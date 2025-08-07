@@ -39,12 +39,21 @@
 .nr VS 13
 .ds FR 1
 .nr TC-MARGIN \w'00' \" expect 2-digit page numbers at most
-.ie t .nr PI 3.5n
-.el   .nr PI 4n
+.ds header-title Using \f[I]groff\f[] with the \f[I]ms\f[] macros\"
 .ds date July 2025\"
 .ND \*[date]
-.EH '%''\*[date]'
-.OH 'Using \f[I]groff\f[] with the \f[I]ms\f[] macros''%'
+.ds CH \" empty
+.ie t \{\
+.  nr PI 3.5n
+.  EH '%''\*[date]'
+.  OH '\*[header-title]''%'
+.\}
+.el   \{\
+.  nr PI 4n
+.  ds LH \*[date]\"
+.  ds CH \*[header-title]\"
+.  ds RH \\n[%]\"
+.\}
 .ds CF groff @VERSION@\"
 .TL
 Using
