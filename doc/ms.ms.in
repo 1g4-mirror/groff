@@ -1,4 +1,5 @@
 .\" groff -ept -ms
+.\" nroff -t -rLL=$(stty size | cut -f2 -d' ')n -ms
 .\"
 .\" Copyright (C) 2001 Larry Kollar
 .\" Copyright (C) 2020-2025 G. Branden Robinson
@@ -26,6 +27,10 @@
 .  ftr CBI BI
 .  \" Redefine CW to use bold instead for a visible font change.
 .  als CW B
+.  if \n[LL]<74n \{\
+.    tm \n[.F]: This document needs at least 74 columns to render.
+.    tm \n[.F]: Consult the comment header of the file for advice.
+.    ab
 .\}
 .\" This document doesn't require the minus sign (in Times) but we do
 .\" want a copy- and-pastable hyphen-minus.
