@@ -542,12 +542,19 @@ or special character before calling any
 macro other than
 .CW RP .
 .
-The \[lq]Next\[rq] heading indicates that changes to the parameter are
-effective as of the next new element processed of the listed type.
+.\" Improve a column heading if we have the elbow room.
+.ds Next \" empty
+.if t .ds Next " Next\|.\|.\|.\"
+.if n .if \n[LL]>81n .ds Next " Next...\"
+The \[lq]Effective\*[Next]\[rq] heading indicates
+that changes to the parameter
+take effect at the next element of the listed type
+.I ms
+processes.
 .
 For entries marked
 .I special ,
-see the discussion in the applicable section.
+see discussion in the applicable section.
 .
 .if t \{\
 .  nr saved-DD \n[DD]
@@ -560,7 +567,7 @@ box;
 Cb        Cb Cb Cb
 Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
-Parameter	Definition	Effective	Default
+Parameter	Definition	Effective\*[Next]	Default
 .TH
 _
 Margins
@@ -648,6 +655,7 @@ Other
 .  rr saved-DD
 .  vs
 .\}
+.rm Next
 .
 .
 .IP \*{*\*}
