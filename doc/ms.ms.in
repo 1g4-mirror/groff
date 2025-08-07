@@ -1108,7 +1108,9 @@ lf(CR) lx.
 Macro	Description
 _
 .TH
-\&.LP	Set a paragraph without any (additional) indentation.
+\&.LP	T{
+Set a paragraph without (additional) indentation.
+T}
 _
 \&.PP	T{
 Set a paragraph with a first-line left indentation of
