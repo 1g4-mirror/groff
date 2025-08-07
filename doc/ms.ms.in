@@ -549,10 +549,16 @@ For entries marked
 .I special ,
 see the discussion in the applicable section.
 .
+.if t \{\
+.  nr saved-DD \n[DD]
+.  nr DD 0
+.  sp 0.5v
+.  vs -.095625v
+.\}
 .TS H
 box;
 Cb        Cb Cb Cb
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Parameter	Definition	Effective	Default
 .TH
@@ -566,7 +572,7 @@ Margins
 \[rs]n[FM]	Bottom (footer) margin	page	1i
 _
 .T&
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Titles (headers, footers)
 \[rs]*[LH]	Left header text	header	\f[I]empty
@@ -577,7 +583,7 @@ Titles (headers, footers)
 \[rs]*[RF]	Right footer text	footer	\f[I]empty
 _
 .T&
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Text
 \[rs]n[PS]	Type (point) size	paragraph	10p
@@ -586,7 +592,7 @@ Text
 \[rs]*[FAM]	Font family	paragraph	T
 _
 .T&
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Paragraphs
 \[rs]n[PI]	Indentation	paragraph	5n
@@ -596,7 +602,7 @@ Paragraphs
 \[rs]n[PORPHANS]	# of initial lines kept	paragraph	1
 _
 .T&
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Headings
 \[rs]n[PSINCR]	Type (point) size increment	heading	1p
@@ -605,7 +611,7 @@ Headings
 \[rs]*[SN\-STYLE]	Numbering style (alias)	heading	\[rs]*[SN\-DOT]
 _
 .T&
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Footnotes
 \[rs]n[FI]	Indentation	footnote	2n
@@ -617,7 +623,7 @@ Footnotes
 \[rs]*[FR]	Line length ratio	\f[I]special	11/12
 _
 .T&
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Displays
 \[rs]n[DD]	Display distance (spacing)	\f[I]special\
@@ -625,7 +631,7 @@ Displays
 \[rs]n[DI]	Display indentation	\f[I]special	0.5i
 _
 .T&
-Cb        S  S  S
+Cbp-1     S  S  S
 Lf(CR)p-1 Lx L  Lf(CR)p-1.
 Other
 \[rs]n[MINGW]	Minimum gutter width	page	2n
@@ -634,6 +640,12 @@ Other
 \[rs][TC\-LEADER]	TOC leader character\
 	\f[CR]PX\f[] call	.\[rs]h\[aq]1m\[aq]
 .TE
+.if t \{\
+.  rs
+.  nr DD \n[saved-DD]
+.  rr saved-DD
+.  vs
+.\}
 .
 .
 .IP \*{*\*}
@@ -658,10 +670,6 @@ this is the case only for output to terminals.
 .
 .
 .\" ------------------------
-.if t \{\
-.  br
-.  bp
-.\}
 .NH 1
 Document description macros
 .XS
