@@ -564,10 +564,12 @@ Parameter	Definition	Effective	Default
 .TH
 _
 Margins
-\[rs]n[PO]	Page offset (left margin)	page	1i (0)\*{*\*}
-\[rs]n[LL]	Line length	paragraph	6.5i (65n)\*{*\*}
+\[rs]n[PO]	Page offset (left margin)	page\
+	1i \f[R](\f[]0\f[R])\*{*\*}
+\[rs]n[LL]	Line length	paragraph\
+	6.5i \f[R](\f[]65n\f[R])\*{*\*}
 \[rs]n[LT]	Title line length	paragraph\
-	6.5i (65n)\*{*\*}
+	6.5i \f[R](\f[]65n\f[R])\*{*\*}
 \[rs]n[HM]	Top (header) margin	page	1i
 \[rs]n[FM]	Bottom (footer) margin	page	1i
 _
