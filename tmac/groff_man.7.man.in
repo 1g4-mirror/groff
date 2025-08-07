@@ -886,11 +886,13 @@ is not.
 .BR .HP " ["\c
 .IR indentation ]
 Set a paragraph with a hanging indentation.
-The first line sets with no (additional) indentation,
-and any further lines as with
-.B TP
-or
-.BR IP .
+.
+Text on output lines after the first is indented by
+.I indentation,
+if specified,
+and by the amount of the
+.B IN
+register otherwise.
 .
 .
 .IP
