@@ -26,8 +26,6 @@
 .  ftr CBI BI
 .  \" Redefine CW to use bold instead for a visible font change.
 .  als CW B
-.  \" The "document control settings" table imposes this minimum width.
-.  nr LL 87n
 .\}
 .\" This document doesn't require the minus sign (in Times) but we do
 .\" want a copy- and-pastable hyphen-minus.
@@ -551,74 +549,89 @@ For entries marked
 .I special ,
 see the discussion in the applicable section.
 .
-.
 .TS H
 box;
-cb | cb cb cb cb
-l | lf(CR)p-1 lx l lf(CR)p-1.
-Type	Parameter	Definition	Next	Default
-_
+Cb        Cb Cb Cb
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Parameter	Definition	Effective	Default
 .TH
-Margins	\[rs]n[PO]	Page offset (left margin)	page\
-	1i (0)\*{*\*}
-\^	\[rs]n[LL]	Line length	paragraph	\
-6.5i (65n)\*{*\*}
-\^	\[rs]n[LT]	Title line length	paragraph	\
-6.5i (65n)\*{*\*}
-\^	\[rs]n[HM]	Top (header) margin	page	1i
-\^	\[rs]n[FM]	Bottom (footer) margin	page	1i
 _
-T{
-Titles
-.br
-(headers,
-.br
-footers)
-T}	\[rs]*[LH]	Left header text	header	\f[I]empty
-\^	\[rs]*[CH]	Center header text	header	\-\[rs]n[%]\-
-\^	\[rs]*[RH]	Right header text	header	\f[I]empty
-\^	\[rs]*[LF]	Left footer text	footer	\f[I]empty
-\^	\[rs]*[CF]	Center footer text	footer	\f[I]empty
-\^	\[rs]*[RF]	Right footer text	footer	\f[I]empty
+Margins
+\[rs]n[PO]	Page offset (left margin)	page	1i (0)\*{*\*}
+\[rs]n[LL]	Line length	paragraph	6.5i (65n)\*{*\*}
+\[rs]n[LT]	Title line length	paragraph\
+	6.5i (65n)\*{*\*}
+\[rs]n[HM]	Top (header) margin	page	1i
+\[rs]n[FM]	Bottom (footer) margin	page	1i
 _
-Text	\[rs]n[PS]	Type (point) size	paragraph	10p
-\^	\[rs]n[VS]	Vertical spacing	paragraph	12p
-\^	\[rs]n[HY]	Hyphenation mode	paragraph	6
-\^	\[rs]*[FAM]	Font family	paragraph	T
+.T&
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Titles (headers, footers)
+\[rs]*[LH]	Left header text	header	\f[I]empty
+\[rs]*[CH]	Center header text	header	\-\[rs]n[%]\-
+\[rs]*[RH]	Right header text	header	\f[I]empty
+\[rs]*[LF]	Left footer text	footer	\f[I]empty
+\[rs]*[CF]	Center footer text	footer	\f[I]empty
+\[rs]*[RF]	Right footer text	footer	\f[I]empty
 _
-Paragraphs	\[rs]n[PI]	Indentation	paragraph	5n
-\^	\[rs]n[PD]	Paragraph distance (spacing)	paragraph\
+.T&
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Text
+\[rs]n[PS]	Type (point) size	paragraph	10p
+\[rs]n[VS]	Vertical spacing	paragraph	12p
+\[rs]n[HY]	Hyphenation mode	paragraph	6
+\[rs]*[FAM]	Font family	paragraph	T
+_
+.T&
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Paragraphs
+\[rs]n[PI]	Indentation	paragraph	5n
+\[rs]n[PD]	Paragraph distance (spacing)	paragraph\
 	0.3v \f[R](\f[]1v\f[R])\*{\[dg]\*}
-\^	\[rs]n[QI]	Quotation indentation	paragraph	5n
-\^	\[rs]n[PORPHANS]	# of initial lines kept	paragraph\
-	1
+\[rs]n[QI]	Quotation indentation	paragraph	5n
+\[rs]n[PORPHANS]	# of initial lines kept	paragraph	1
 _
-Headings	\[rs]n[PSINCR]	Type (point) size increment\
-	heading	1p
-\^	\[rs]n[GROWPS]	Size increase depth limit	heading	0
-\^	\[rs]n[HORPHANS]	# of following lines kept\
-	heading	1
-\^	\[rs]*[SN\-STYLE]	Numbering style (alias)	heading\
-	\[rs]*[SN\-DOT]
+.T&
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Headings
+\[rs]n[PSINCR]	Type (point) size increment	heading	1p
+\[rs]n[GROWPS]	Size increase depth limit	heading	0
+\[rs]n[HORPHANS]	# of following lines kept	heading	1
+\[rs]*[SN\-STYLE]	Numbering style (alias)	heading	\[rs]*[SN\-DOT]
 _
-Footnotes	\[rs]n[FI]	Indentation	footnote	2n
-\^	\[rs]n[FF]	Format	footnote	0
-\^	\[rs]n[FPS]	Type (point) size	footnote\
-	\[rs]n[PS]\-2p
-\^	\[rs]n[FVS]	Vertical spacing	footnote\
-	\[rs]n[FPS]+2p
-\^	\[rs]n[FPD]	Paragraph distance (spacing)	footnote\
+.T&
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Footnotes
+\[rs]n[FI]	Indentation	footnote	2n
+\[rs]n[FF]	Format	footnote	0
+\[rs]n[FPS]	Type (point) size	footnote	\[rs]n[PS]\-2p
+\[rs]n[FVS]	Vertical spacing	footnote	\[rs]n[FPS]+2p
+\[rs]n[FPD]	Paragraph distance (spacing)	footnote\
 	\[rs]n[PD]/2
-\^	\[rs]*[FR]	Line length ratio	\f[I]special	11/12
+\[rs]*[FR]	Line length ratio	\f[I]special	11/12
 _
-Displays	\[rs]n[DD]	Display distance (spacing)\
-	\f[I]special	0.5v \f[R](\f[]1v\f[R])\*{\[dg]\*}
-\^	\[rs]n[DI]	Display indentation	\f[I]special	0.5i
+.T&
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Displays
+\[rs]n[DD]	Display distance (spacing)	\f[I]special\
+	0.5v \f[R](\f[]1v\f[R])\*{\[dg]\*}
+\[rs]n[DI]	Display indentation	\f[I]special	0.5i
 _
-Other	\[rs]n[MINGW]	Minimum gutter width	page	2n
-\^	\[rs]n[TC\-MARGIN]	TOC page number margin width\
+.T&
+Cb        S  S  S
+Lf(CR)p-1 Lx L  Lf(CR)p-1.
+Other
+\[rs]n[MINGW]	Minimum gutter width	page	2n
+\[rs]n[TC\-MARGIN]	TOC page number margin width\
 	\f[CR]PX\f[] call	\[rs]w\[aq]000\[aq]
-\^	\[rs][TC\-LEADER]	TOC leader character\
+\[rs][TC\-LEADER]	TOC leader character\
 	\f[CR]PX\f[] call	.\[rs]h\[aq]1m\[aq]
 .TE
 .

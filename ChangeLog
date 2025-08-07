@@ -1,5 +1,11 @@
 2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/ms.ms.in: Revise parameter table layout.  Make it fit
+	better on nroff-mode devices.  It now requires 74n instead of
+	87n, which makes it good enough for an 80-column terminal.
+
+2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/ms.ms.in: Reformat nroff-mode page headers.  Stop
 	distinguishing recto and verso pages; if formatting in nroff
 	mode, we're likely going to a video terminal (or emulator).
