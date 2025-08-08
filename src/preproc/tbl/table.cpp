@@ -1639,7 +1639,8 @@ void table::add_entry(int r, int c, const string &str,
   }
   else if (strncmp(s, "\\R", 2) == 0) {
     if (len < 3) {
-      error("an ordinary or special character must follow '\\R'");
+      error("an ordinary, special, or indexed character must follow"
+	    " '\\R'");
       e = new empty_entry(this, f);
     }
     else {

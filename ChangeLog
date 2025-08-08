@@ -1,3 +1,9 @@
+2025-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::add_entry): Improve
+	diagnostic.  Indexed characters are also valid fodder for the
+	`\R` character repetition token.
+
 2025-08-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/ms.ms.in: Revise parameter table layout.  Make it fit
