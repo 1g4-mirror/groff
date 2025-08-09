@@ -1,3 +1,11 @@
+2025-08-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/ms.ms.in: Fix missing brace escape sequence.
+
+	Fixes <https://savannah.gnu.org/bugs/?67411>.  Continues commit
+	ca42eb2c73, 7 August.  Thanks to Bjarni Ingi Gislason for the
+	report.
+
 2025-08-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/table.cpp (table::add_entry): Improve

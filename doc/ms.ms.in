@@ -31,6 +31,7 @@
 .    tm \n[.F]: This document needs at least 74 columns to render.
 .    tm \n[.F]: Consult the comment header of the file for advice.
 .    ab
+.  \}
 .\}
 .\" This document doesn't require the minus sign (in Times) but we do
 .\" want a copy- and-pastable hyphen-minus.
