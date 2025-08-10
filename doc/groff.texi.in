@@ -2778,15 +2778,26 @@ represents a length, size, or distance.
 @endExample
 
 @noindent
-In the foregoing, we see that @code{\"} begins a comment.  This is an
-example of an @dfn{escape sequence}, the other kind of formatting
-instruction.  Escape sequences can appear anywhere.  They begin with the
-escape character (@code{\}) and are followed by at least one more
-character.  @file{ms} documents
+In the foregoing,
+we see that
+@code{\"}
+begins a comment.
+This is an example of an
+@dfn{escape sequence},
+the other kind of formatting instruction.
+Escape sequences can appear almost anywhere.
+They begin with the escape character
+(@code{\})
+and are followed by at least one more character.
+@file{ms}
+documents
 @c like this one
-tend to use only a few of @code{groff}'s many requests and escape
-sequences; see @ref{Request Index} and @ref{Escape Sequence Index} or
-the @cite{groff@r{(7)}} man page for complete lists.
+tend to use only a few of
+@code{groff}'s
+many requests and escape sequences;
+see @ref{Request Index} and @ref{Escape Sequence Index} or the
+@cite{groff@r{(7)}}
+man page for complete lists.
 
 @table @code
 @item \"
@@ -3311,6 +3322,9 @@ recognizes
 as a synonym of
 @code{no-repeat-info}
 to maintain @acronym{AT&T} compatibility.
+Options other than
+@code{no}
+are GNU extensions.
 @endDefmac
 
 @Defmac {TL, , ms}

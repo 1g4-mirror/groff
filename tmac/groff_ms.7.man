@@ -513,6 +513,10 @@ as a synonym of
 .B no\-\:\%repeat\-\:\%info
 to maintain AT&T compatibility.
 .
+Options other than
+.B no
+are GNU extensions.
+.
 .
 .TP
 .B .TL

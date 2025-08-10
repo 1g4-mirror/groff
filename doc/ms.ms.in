@@ -332,7 +332,9 @@ This is an example of an
 .I "escape sequence,"
 the other kind of formatting instruction.
 .
-Escape sequences can appear anywhere.
+Escape sequences can appear almost anywhere.
+.\" ...but not where GNU troff expects an escape function selector or
+.\" delimiter.
 .
 They begin with the escape character
 .CW \[rs] ) (
@@ -794,6 +796,10 @@ recognizes
 as a synonym of
 .CW no\-\:\%repeat\-\:\%info
 to maintain AT&T compatibility.
+.
+Options other than
+.CW no
+are GNU extensions.
 T}
 _
 \&.TL	T{
