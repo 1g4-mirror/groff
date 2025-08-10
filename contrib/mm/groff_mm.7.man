@@ -4044,43 +4044,54 @@ to end the list.
 .
 .TP
 .BI "VM \fR[\fP\-T\fR] [\fP" "top \fR[\fPbottom\fR]]\fP"
-Vertical margin.
+Configure vertical margins.
 .
-Increase the top and bottom margin by
+.
+.IP
+Without a
+.B \-T
+argument,
+increment the top and bottom margins by
 .I top
 and
 .IR bottom ,
 respectively.
 .
-If option
-.B \-T
-is specified, set those margins to
+If absent,
+set the corresponding margin to zero.
+.
+.
+.IP
+With the
+.B -T
+argument,
+set the top and bottom margins to
 .I top
 and
-.IR bottom .
+.IR bottom ,
+respectively.
 .
-If no measurement arguments are given,
-reset the margins to zero,
-or,
-if
-.B \-T
-is used,
-to the defaults
-(\[lq]7v 6v\[rq])
+If absent,
+set the respective margin to the default
+(top:
+.BR 7v ,
+bottom:
+.BR 6v ).
 .
-It is highly recommended that macros
+.
+.IP
+We recommend defining the hook macros
 .B TP
 and/or
 .B EOP
-are defined if using
+if using
 .B \-T
-and setting top and/or bottom margin to less than the default.
+and setting top and/or bottom margin to values less than the default.
 .
-This undocumented DWB
-.I mm
-macro is exposed by
 .I groff mm
-to increase user control of page layout.
+exposes this undocumented DWB
+.I mm
+macro to enable greater user control of page layout.
 .
 .
 .TP
