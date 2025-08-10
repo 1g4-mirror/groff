@@ -2908,18 +2908,18 @@ uses a diversion and operates in a separate environment.
 .
 .
 .TP
-.B MULN
-Begin next column in alternative column mode.
-.
-.
-.TP
 .B MULE
 End alternative multi-column mode and emit the columns.
 .
 .
 .TP
+.B MULN
+Start next column in alternative column mode.
+.
+.
+.TP
 .B NCOL
-Move to the start of the next column
+Start next column
 (only when using
 .B 2C
 or
