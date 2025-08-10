@@ -3660,10 +3660,11 @@ Multiple
 calls in sequence produce only the largest of the specified
 .I distances.
 .
-Absolute motions with a prefixed
+.B SP
+accepts boundary-relative motions specified with a prefixed
 .B |
-operator are accepted;
-negative ones are not.
+operator,
+but not negative ones.
 .
 .
 .IP
