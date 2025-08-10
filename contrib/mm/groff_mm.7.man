@@ -3078,7 +3078,7 @@ the paragraph fully left\-aligned.
 A
 .I type
 .RB of\~ 1
-idents the first line by
+indents the first line by
 .B \[rs][Pi]
 ens.
 .
