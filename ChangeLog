@@ -1,5 +1,13 @@
 2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::print_single_hrule):
+	Refactor.  Clarify generated *roff logic by restricting
+	performance operations that are no-ops in nroff mode (type size
+	changes and quarter-vee vertical motions) to when the `t` *roff
+	condition is true.
+
+2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/s.tmac: Trivially refactor.
 	(@TS, tbl*print-header, TH, TE): Rename diversion
 	`tbl*header-div` to `tbl*heading-diversion`.

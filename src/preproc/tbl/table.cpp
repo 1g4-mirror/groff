@@ -2553,11 +2553,12 @@ void table::compute_widths()
 void table::print_single_hrule(int r)
 {
   prints(".vs " LINE_SEP ">?\\n[.V]u\n"
-	 ".ls 1\n"
+	 ".ls 1\n");
+  prints(".if t "
 	 "\\v'" BODY_DEPTH "'"
-	 "\\s[\\n[" LINESIZE_REG "]]");
+	 "\\s[\\n[" LINESIZE_REG "]]\\c\n");
   if (r > nrows - 1)
-    prints("\\D'l |\\n[TW]u 0'");
+    prints("\\D'l |\\n[TW]u 0'\\c");
   else {
     int start_col = 0;
     for (;;) {
@@ -2589,7 +2590,9 @@ void table::print_single_hrule(int r)
       start_col = end_col;
     }
   }
-  prints("\\s0\n");
+  prints("\\c\n");
+  prints(".ie t \\s0\n"
+	 ".el   \\&\n");
   prints(".ls\n"
 	 ".vs\n");
 }
