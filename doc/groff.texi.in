@@ -6308,6 +6308,22 @@ from which the formatter reckons the line indentation
 and length.@footnote{@code{groff}'s
 terminal output devices have page offsets of zero.}
 
+@cindex origin
+@cindex initial drawing position
+@cindex drawing position, initial
+Combining the foregoing facts results in an origin that lies
+at the page offset in the horizontal dimension
+and at the text baseline (using the default vertical spacing)
+in the vertical dimension.
+A document can change these prior to the first written or drawn output;
+see @ref{Line Layout} and
+@ref{Manipulating Type Size and Vertical Spacing}.
+@c This origin isn't necessarily--and generally is not--the one used by
+@c the device-independent output, but that coordinate system is not
+@c exposed in the *roff language, though it can be expressed in
+@c formatter instructions that construct device-independent output
+@c commands (`\!`, `\X`, `.output`, `.device`).
+
 @cindex page break
 @cindex break, page
 @cindex page ejection

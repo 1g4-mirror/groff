@@ -1,3 +1,12 @@
+2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (Page Geometry):
+	* man/roff.7.man (Page geometry): Clarify how the origin of the
+	page's coordinate system is determined in the *roff language.
+
+	Fixes <https://savannah.gnu.org/bugs/?67235>.  Thanks to Dave
+	Kemper for the discussion.
+
 2025-08-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/tests/an_paragraph-reset-restores-hyphenation-mode.sh:

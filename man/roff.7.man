@@ -610,6 +610,21 @@ terminal output devices have page offsets of zero.)
 .
 .
 .P
+Combining the foregoing facts results in an origin that lies
+at the page offset in the horizontal dimension
+and at the text baseline (using the default vertical spacing)
+in the vertical dimension.
+A document can change these prior to the first written or drawn output.
+.\" see @ref{Line Layout} and
+.\" @ref{Manipulating Type Size and Vertical Spacing}.
+.\" This origin isn't necessarily--and generally is not--the one used by
+.\" the device-independent output, but that coordinate system is not
+.\" exposed in the *roff language, though it can be expressed in
+.\" formatter instructions that construct device-independent output
+.\" commands (`\!`, `\X`, `.output`, `.device`).
+.
+.
+.P
 Vertical spacing has an impact on page-breaking decisions.
 .
 Generally,
