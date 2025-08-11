@@ -2020,7 +2020,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .	el .if '\\n[.z]'kp@fdiv' \
 .		@warning \\*[tbl*stem] .KF/.KE floating keep
 .	rm tbl*stem
-.	di tbl*header-div
+.	di tbl*heading-diversion
 .\}
 .if '\*(.T'html' \{\
 .	nr tbl*ll \\n[.l]
@@ -2036,12 +2036,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
 .de tbl*print-header
 .ev nf
-.tbl*header-div
+.tbl*heading-diversion
 .ev
 .mk #T
 ..
 .de TH
-.ie '\\n[.z]'tbl*header-div' \{\
+.ie '\\n[.z]'tbl*heading-diversion' \{\
 .	nr T. 0
 .	T#
 .	br
@@ -2065,12 +2065,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\}
 .el .@error-recover .TH without .TS H
 ..
-.de @div-end!tbl*header-div
+.de @div-end!tbl*heading-diversion
 .TH
 .TE
 ..
 .de TE
-.ie '\\n(.z'tbl*header-div' .@error-recover .TS H but no .TH before .TE
+.ie '\\n(.z'tbl*heading-diversion' \
+.	@error-recover .TS H but no .TH before .TE
 .el \{\
 .	nr tbl*have-header 0
 .	if !'\*(.T'html' \{\

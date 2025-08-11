@@ -1,5 +1,11 @@
 2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/s.tmac: Trivially refactor.
+	(@TS, tbl*print-header, TH, TE): Rename diversion
+	`tbl*header-div` to `tbl*heading-diversion`.
+
+2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi.in (Page Geometry):
 	* man/roff.7.man (Page geometry): Clarify how the origin of the
 	page's coordinate system is determined in the *roff language.
