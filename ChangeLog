@@ -7,6 +7,9 @@
 	Rename register `tbl*have-header` to `tbl*has-heading`.
 	(tbl@top-hook, TH): Rename register `tbl*header-ht` to
 	`tbl*heading-height`.
+	(tbl*print-header): Rename this...
+	(tbl*print-heading): ...to this.
+	(tbl@top-hook, TH): Update call sites.
 
 2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
