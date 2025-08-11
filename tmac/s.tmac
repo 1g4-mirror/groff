@@ -2030,7 +2030,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
 .de tbl@top-hook
 .if \\n[tbl*has-heading] \{\
-.	ie \\n[.t]-\\n[tbl*header-ht]-1v .tbl*print-header
+.	ie \\n[.t]-\\n[tbl*heading-height]-1v .tbl*print-header
 .	el .sp \\n[.t]u
 .\}
 ..
@@ -2057,7 +2057,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .		tbl*print-header
 .	\}
 .	el \{\
-.		nr tbl*header-ht \\n[dn]
+.		nr tbl*heading-height \\n[dn]
 .		ds@need \\n[dn]u+1v
 .		tbl*print-header
 .		nr tbl*has-heading 1
