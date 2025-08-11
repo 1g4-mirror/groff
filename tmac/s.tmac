@@ -2004,7 +2004,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\" ****************************
 .\" Tbl support.
 .nr tbl@within-table 0
-.nr tbl*have-header 0
+.nr tbl*has-heading 0
 .\" This gets called if TS occurs before the first paragraph.
 .de TS
 .LP
@@ -2029,7 +2029,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .HTML-IMAGE
 ..
 .de tbl@top-hook
-.if \\n[tbl*have-header] \{\
+.if \\n[tbl*has-heading] \{\
 .	ie \\n[.t]-\\n[tbl*header-ht]-1v .tbl*print-header
 .	el .sp \\n[.t]u
 .\}
@@ -2060,7 +2060,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .		nr tbl*header-ht \\n[dn]
 .		ds@need \\n[dn]u+1v
 .		tbl*print-header
-.		nr tbl*have-header 1
+.		nr tbl*has-heading 1
 .	\}
 .\}
 .el .@error-recover .TH without .TS H
@@ -2073,7 +2073,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .ie '\\n(.z'tbl*heading-diversion' \
 .	@error-recover .TS H but no .TH before .TE
 .el \{\
-.	nr tbl*have-header 0
+.	nr tbl*has-heading 0
 .	if !'\*(.T'html' \{\
 .		sp \\n[DD]u
 .		ns
@@ -2087,7 +2087,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .nr tbl@within-table 0
 ..
 .de tbl@bottom-hook
-.if \\n[tbl*have-header] \{\
+.if \\n[tbl*has-heading] \{\
 .	nr T. 1
 .	T#
 .\}

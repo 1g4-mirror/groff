@@ -3,6 +3,8 @@
 	* tmac/s.tmac: Trivially refactor.
 	(@TS, tbl*print-header, TH, TE): Rename diversion
 	`tbl*header-div` to `tbl*heading-diversion`.
+	([initialization], tbl@top-hook, TH, TE, tbl@bottom-hook):
+	Rename register `tbl*have-header` to `tbl*has-heading`.
 
 2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
