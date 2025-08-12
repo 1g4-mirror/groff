@@ -1,5 +1,21 @@
 2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::print_single_hrule): When
+	drawing a horizontal rule in a boxed table, also draw vertical
+	rules at the table edges in nroff mode such that grotty(1)
+	correctly detects horizontal and vertical rule intersections,
+	producing correct box-drawing glyphs on the "utf8" device.
+
+	Fixes <https://savannah.gnu.org/bugs/?67420>.  This bug could be
+	characterized as an incomplete feature requiring cooperation
+	between tbl and grotty.  One could date the problem back to the
+	introduction of "utf8" output device support in January 2000
+	{released in groff 1.16, May 2000}, or the addition of Unicode
+	box-drawing character support to represent rule intersections in
+	grotty in July 2003 (released in groff 1.19.1, May 2004).
+
+2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/tests/boxed-TH-tables-work-on-utf8-device.sh:
 	Add test.
 	* src/preproc/tbl/tbl.am (tbl_TESTS): Run test.

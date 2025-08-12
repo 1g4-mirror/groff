@@ -2557,6 +2557,8 @@ void table::print_single_hrule(int r)
   prints(".if t "
 	 "\\v'" BODY_DEPTH "'"
 	 "\\s[\\n[" LINESIZE_REG "]]\\c\n");
+  if ((r > 0) && (flags & (BOX | DOUBLEBOX | ALLBOX)))
+    prints(".if n \\Z@\\r\\D'l 0 2v'@\\c\n");
   if (r > nrows - 1)
     prints("\\D'l |\\n[TW]u 0'\\c");
   else {
@@ -2591,6 +2593,8 @@ void table::print_single_hrule(int r)
     }
   }
   prints("\\c\n");
+  if ((r > 0) && (flags & (BOX | DOUBLEBOX | ALLBOX)))
+    prints(".if n \\Z@\\r\\D'l 0 2v'@\\c\n");
   prints(".ie t \\s0\n"
 	 ".el   \\&\n");
   prints(".ls\n"
