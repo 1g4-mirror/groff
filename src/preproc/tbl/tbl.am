@@ -26,6 +26,7 @@ EXTRA_DIST += src/preproc/tbl/tbl.1.man
 
 tbl_TESTS = \
   src/preproc/tbl/tests/align-staggered-text-blocks-correctly.sh \
+  src/preproc/tbl/tests/boxed-TH-tables-work-on-utf8-device.sh \
   src/preproc/tbl/tests/boxes-and-vertical-rules.sh \
   src/preproc/tbl/tests/check-horizontal-line-length.sh \
   src/preproc/tbl/tests/check-line-intersections.sh \

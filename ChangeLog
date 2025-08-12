@@ -1,5 +1,11 @@
 2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/tests/boxed-TH-tables-work-on-utf8-device.sh:
+	Add test.
+	* src/preproc/tbl/tbl.am (tbl_TESTS): Run test.
+
+2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::print_single_hrule):
 	Refactor.  Clarify generated *roff logic by restricting
 	performance operations that are no-ops in nroff mode (type size
