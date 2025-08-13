@@ -1,3 +1,28 @@
+2025-08-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/devpdf/devpdf.am: Rationalize use of make(1) macros for
+	intelligibility and to fix a missing-prerequisite bug.
+	(DEVPDFFONTFILES_FROM_DEVPS): Rename this...
+	(devpdffont_descriptions_from_devps): ...to this.  Not all
+	"files" are font descriptions, and we need a macro to track only
+	the latter.
+	(DEVPDFFONTFILES_FOR_URW): Rename this...
+	(devpdffont_descriptions_for_urw): ...to this for similar
+	reasons.
+	(DEVPDFFONTFILES): Rename and rescope this...
+	(devpdffontdescriptions): ...to this.  Retain the "SS" font
+	description file in its expansion but drop "symbolsl.{afm,pfb}"
+	and "download"...
+	(devpdffontdata): ...moving them here, along with the expansion
+	of `devpdffontdescriptions`.
+	(font/devpdf/download): Depend on the expansion of
+	`devpdffont_descriptions_from_devps`.
+
+	Fixes <https://savannah.gnu.org/bugs/?67415>.  Thanks to Bjarni
+	Ingi Gislason for the report and analysis.  Problem introduced
+	{I think--its exposure required "make --shuffle"} by me in
+	commit bace292caf, 29 June.
+
 2025-08-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/table.cpp (table::print_single_hrule): When
