@@ -629,24 +629,6 @@ published interface but are documented aspects of
 .
 .
 .TP 8n \" "COVEND" + 2n
-.BI )E\  "level text"
-Add heading text
-.I text
-to the table of contents with
-.IR level ,
-which is either\~0 or in the range 1 to\~7.
-.
-See also
-.BR H .
-.
-This undocumented DWB
-.I mm
-macro is exposed by
-.I groff mm
-to enable customized tables of contents.
-.
-.
-.TP
 .BR 1C\~ [ 1 ]
 Format page text in one column.
 .
