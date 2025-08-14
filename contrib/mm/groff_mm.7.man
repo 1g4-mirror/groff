@@ -260,10 +260,14 @@ strings.
 .
 .P
 .I "groff mm"
-features a new citation system that permits a bibliographic reference
-list to be sorted,
-an alternative to
-.BR RS / RE / RP .
+features a citation
+(or \[lq]bookmark\[rq])
+system,
+permitting the document to make (customizable) internal references like
+\[lq]See chapter 5,
+page 128.\[rq].
+.
+Forward references require two-pass formatting.
 .
 See the
 .B INITR
