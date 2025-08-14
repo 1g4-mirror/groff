@@ -1,5 +1,11 @@
 2025-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac: Add new aliases `Ftnum` and `Rfnum` for the internal
+	register names `ft*nr` and `ref*nr`, respectively.
+	* groff_mm.7.man (Registers): Document them.
+
+2025-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Rename API string `Tcst` to `Tcstatus` to make its
 	purpose less obscure.  Its new name is no more lengthy than
 	`Letnsdef`, and the package elsewhere uses "st" to abbreviate

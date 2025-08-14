@@ -1744,7 +1744,7 @@ is called is collected into a footnote.
 By default,
 footnotes are automatically numbered starting at 1;
 the number is available in register
-.B :p
+.B Ftnum
 and,
 with a trailing period,
 in
@@ -4639,20 +4639,6 @@ is in use
 .
 .
 .TP
-.B :p
-is an auto-incrementing footnote counter;
-see
-.BR FS .
-.
-.
-.TP
-.B :R
-is an auto-incrementing reference counter;
-see
-.BR RS .
-.
-.
-.TP
 .B Aph
 formats an appendix heading
 (and title,
@@ -4892,6 +4878,22 @@ to vertically separate footnotes;
 see
 .B FS
 .RB ( 1 ).
+.
+.
+.TP
+.B Ftnum
+is an auto-incrementing footnote counter;
+see
+.BR FS .
+.
+.I "groff mm"
+recognizes
+.B :p
+as an alias of
+.B Ftnum
+for DWB
+.I mm
+compatibility.
 .
 .
 .TP
@@ -5457,6 +5459,22 @@ and
 .B RS
 (Boolean-valued;
 .BR 0 ).
+.
+.
+.TP
+.B Rfnum
+is an auto-incrementing reference counter;
+see
+.BR RS .
+.
+.I "groff mm"
+recognizes
+.B :R
+as an alias of
+.B Rfnum
+for DWB
+.I mm
+compatibility.
 .
 .
 .TP

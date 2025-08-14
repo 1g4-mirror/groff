@@ -1935,7 +1935,8 @@ breaking page
 .nr ft*note-size 0
 .nr ft*busy 0
 .nr ft*nr 0 1
-.aln :p ft*nr
+.aln Ftnum ft*nr
+.aln :p ft*nr		\" for DWB mm compatibility
 .nr ft*wide 0
 .nr ft*hyphen 0\"	hyphenation value
 .nr ft*adjust 1\"	>0 if adjust true
@@ -3226,9 +3227,10 @@ exceeds depth of nested lists (\\n[li*lvl])
 .\"########################### module ref ############################
 .mso refer-mm.tmac
 .nr ref*nr 0 1
-.aln :R ref*nr
+.aln Rfnum ref*nr
+.aln :R ref*nr		\" for DWB mm compatibility
 .nr ref*nr-width 5n
-.nr ref*was-RS-used 0 \" for end-of-text
+.nr ref*was-RS-used 0	\" for end-of-text
 .ds ref*nroff-( [
 .ds ref*troff-( \v'-.4m'\s-3
 .ds ref*nroff-) ]

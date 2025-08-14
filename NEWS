@@ -663,6 +663,11 @@ Macro packages
 *  The m (mm) macro package has renamed the `Tcst` string to `Tcstatus`
    to make its purpose less obscure.  The old name remains as an alias.
 
+*  The m (mm) macro package recognizes new register names `Ftnum` and
+   `Rfnum` for the automatically incrementing footnote and reference
+   counters.  The old, DWB-compatible but cryptic, names `:p` and `:R`
+   remain supported.
+
 *  The s (ms) macro package now sets the vertical spacing register
    defaults for normal (`VS`) and footnote (`FVS`) text to 120% of the
    type size configured in the `PS` and `FPS` registers, respectively,
