@@ -404,7 +404,9 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\" state of TOC formatting
 .\" This is empty outside the table of contents; inside it is set to co,
 .\" fg, tb, ec, ex, or ap.
-.ds Tcst \" empty
+.ds Tcstatus \" empty
+.\" alias for groff <= 1.23 compatibility
+.als Tcst Tcstatus
 .\" argument(s) for VERBON to give to `nm` request
 .ds Verbnm 1\"
 .\" indentation of verbatim regions (VERBON)
@@ -2853,7 +2855,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .if \w@\\$4@>0 .nr toc*tab \\$4
 .if \\n[pg*cols-per-page]>1 .1C
 .ds H1txt \\*[Licon]
-.ds Tcst co
+.ds Tcstatus co
 .pg@clear-hd
 .EF ""
 .OF ""
@@ -3087,7 +3089,7 @@ exceeds depth of nested lists (\\n[li*lvl])
 .de lix@print-ds
 .\" arg: fg,tb,ec,ex text
 .ds H1txt \\$3
-.ds Tcst \\$1
+.ds Tcstatus \\$1
 .if !\\n[Cp] .pg@next-page
 .\" print LIST OF XXXX
 .\" execute user-defined macros
@@ -3375,7 +3377,7 @@ argument: '\\$2'
 .\" .if \\n[.$]<2 .@error "APP: too few arguments"
 .app@set-ind "\\$1"
 .\"
-.ds Tcst ap
+.ds Tcstatus ap
 .ds Apptxt \\$2
 .\"
 .ie \\n[Aph] .app@header \\*[app*ind] "\\$2"
@@ -3389,7 +3391,7 @@ argument: '\\$2'
 .if \\n[.$]<2 .@error \\$0: expected 2 or 3 arguments, got \\n[.$]
 .app@set-ind "\\$1"
 .\"
-.ds Tcst ap
+.ds Tcstatus ap
 .ds Apptxt \\$3
 .\"
 .ie \\n[Aph] .app@header \\*[app*ind] "\\$3"

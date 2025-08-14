@@ -660,6 +660,9 @@ Macro packages
      `Litb`  -> `Captb`
    The old names remain as aliases.
 
+*  The m (mm) macro package has renamed the `Tcst` string to `Tcstatus`
+   to make its purpose less obscure.  The old name remains as an alias.
+
 *  The s (ms) macro package now sets the vertical spacing register
    defaults for normal (`VS`) and footnote (`FVS`) text to 120% of the
    type size configured in the `PS` and `FPS` registers, respectively,

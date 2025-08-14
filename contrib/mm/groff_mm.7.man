@@ -4567,7 +4567,7 @@ interpolates the service mark sign.
 .
 .
 .TP
-.B Tcst
+.B Tcstatus
 interpolates an indicator of the
 .B TC
 macro's processing status.

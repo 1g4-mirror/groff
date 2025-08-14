@@ -1,3 +1,12 @@
+2025-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Rename API string `Tcst` to `Tcstatus` to make its
+	purpose less obscure.  Its new name is no more lengthy than
+	`Letnsdef`, and the package elsewhere uses "st" to abbreviate
+	"string", as in the `GETST` macro.  Retain the old name as an
+	alias.
+	* groff_mm.7.man (Strings): Document it.
+
 2025-08-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac ([initializtion): Configure a 3v margin (one half-inch
