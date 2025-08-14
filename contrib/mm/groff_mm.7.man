@@ -630,7 +630,8 @@ published interface but are documented aspects of
 .
 .TP 8n \" "COVEND" + 2n
 .BR 1C\~ [ 1 ]
-Format page text in one column.
+Format page text in one column
+(the default layout).
 .
 The page is broken.
 .
