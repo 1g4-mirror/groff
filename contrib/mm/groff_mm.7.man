@@ -281,7 +281,7 @@ man page.
 Macro,
 register,
 and string descriptions in this page frequently mention each other;
-most cross references are to macros.
+most references are to macros.
 .
 Where a register or string is referenced,
 its type is explicitly identified.
@@ -2424,16 +2424,17 @@ purpose.
 tracks the nesting level of lists;
 the outermost is\~0.
 .
-Each list item
-(text lines after an
+It indents
+each list item
+(text formatted after an
 .B LI
 call)
-is indented by
+by
 .I text-indent.
 .
 The mark is left-aligned at
 .IR mark-indent ,
-padded on the left with
+and padded on the left with
 .I pad
 ens of space.
 .
@@ -2536,9 +2537,12 @@ or only those from the current level down to
 if specified.
 .
 .B H
-calls
+and
+.B HU
+call
 .B LC
 automatically.
+.\" `H` calls `LC`, and `HU` calls `H`.
 .
 .
 .TP
@@ -4067,7 +4071,7 @@ set the corresponding margin to zero.
 .
 .IP
 With the
-.B -T
+.B \-T
 argument,
 set the top and bottom margins to
 .I top
