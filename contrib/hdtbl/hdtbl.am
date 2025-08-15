@@ -123,8 +123,9 @@ SUFFIXES += .roff .in .ps
 
 # groff(1)'s `-I` implies `-g` and `-s`, so we must depend on grn and
 # soelim even though the documents don't require them.
-$(HDTBLPROCESSEDEXAMPLEFILES): $(DOC_GNU_EPS) groff troff eqn pic tbl \
-  grops grn soelim font/devps/stamp contrib/hdtbl/examples/common.roff
+$(HDTBLPROCESSEDEXAMPLEFILES): $(HDTBLTMACFILES) $(DOC_GNU_EPS) groff \
+  troff eqn pic tbl grops grn soelim font/devps/stamp \
+  contrib/hdtbl/examples/common.roff
 
 uninstall_groffdirs: uninstall-hdtbl-hook
 uninstall-hdtbl-hook:
