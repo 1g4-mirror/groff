@@ -329,7 +329,7 @@ Most commands assume a scaling unit
 .RB of\~\[lq] u \[rq]
 (basic units),
 and others
-.RB use\~\[lq] z \[rq]
+.RB use\~\[lq] s \[rq]
 (scaled points).
 .
 These are defined by the parameters specified in the device's
