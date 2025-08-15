@@ -228,7 +228,7 @@ DWB used a hard-coded value of 6\~ens.
 .
 .IP \[bu]
 .I "groff mm"
-uses the same adjustment and font defaults in
+uses the same adjustment and font style defaults in
 .I nroff
 and
 .I troff
@@ -433,6 +433,10 @@ sequence as follows.
 be negative;
 it combines algebraically with the sign in the interpolation escape
 sequence.
+.
+The brackets around
+.I ident
+are literal.
 .
 .
 .P
