@@ -310,6 +310,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\"		else like .TD
 .de TH
 .  ft 1
+.  if !\\n[t*#] \{\
+.    tm \\n[.F]:\\n[.c]: Table heading (.TH) without preceding table start (.TBL).
+.    return
+.  \}
 .  t*getarg hal \\$@
 .  if "\\*[hal]"" \
 .    ds hal c\"
