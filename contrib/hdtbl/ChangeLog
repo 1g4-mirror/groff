@@ -1,5 +1,17 @@
 2025-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* hdtbl.tmac: Define new `hdtbl` string containing the
+	{canonical} file name of the macro package, so that it can
+	announce itself in diagnostic messages.
+
+	* hdmisc.tmac (t*EM):
+	* hdtbl.tmac (TBL, CPTN, TR, TH, TD, ETB, t*free, t*cl, t*dntr)
+	(t*args, t*hm): Prefix diagnostic messages with it.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?52463>.
+
+2025-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* hdtbl.tmac (TH): Confirm (just as `TR` does) that macro usage
 	occurs within a table context; return early if it doesn't.
 
