@@ -2,6 +2,7 @@
 This file is part of groff, the GNU roff typesetting system.
 
 Copyright (C) 2005-2020 Free Software Foundation, Inc.
+              2025 G. Branden Robinson
 written by Joachim Walsdorff <Joachim.Walsdorff@urz.uni-heidelberg.de>.
 
 groff is free software; you can redistribute it and/or modify it under
@@ -24,10 +25,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\"	*			Vers. 0.91 December 2005		*
 .\"	*****************************************************************
 .
+.if !\n(.g \{\
+.  tm groff hdtbl macros require groff extensions; cannot load package
+.  nx
+.\}
+.
+.if \n(.C \{\
+.  tm groff hdtbl macros do not work in compatibility mode; cannot \
+load package
+.\}
+.
 .if d TBL \
 .  nx
 .
 .ds hdtbl hdtbl.tmac\"
+.
+.\" Check for name space collisions with full-service macro packages.
+.
+.if d TD \{\
+.  tm \*[hdtbl]: cannot load package; macro 'TD' is already defined
+.  nx
+.\}
+.
+.if d TH \{\
+.  tm \*[hdtbl]: cannot load package; macro 'TH' is already defined
+.  nx
+.\}
+.
+.if d TR \{\
+.  tm \*[hdtbl]: cannot load package; macro 'TR' is already defined
+.  nx
+.\}
+.
 .
 .mso hdmisc.tmac
 .mso 62bit.tmac

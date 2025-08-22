@@ -1,3 +1,16 @@
+2025-08-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* hdtbl.tmac: Diagnose and skip loading the package in
+	situations that would cause it to malfunction.
+	- if the formatter does not claim groff compatibility
+	- if the formatter is in groff's AT&T compatibility mode
+	- if a macro named `TD` is already defined
+	- if a macro named `TH` is already defined
+	- if a macro named `TR` is already defined
+
+	Fixes <https://savannah.gnu.org/bugs/?67418>.  Thanks to Morten
+	Bo Johansen for the report.
+
 2025-08-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* hdtbl.tmac: Define new `hdtbl` string containing the
