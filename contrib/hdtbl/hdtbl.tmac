@@ -143,7 +143,7 @@ load package
 .  ie "\\*[cols]"" \
 .    nr t*cols\\n[t*#] \\n[t*cols]
 .  el \{\
-.    ie \B\\*[cols] \
+.    ie \B"\\*[cols]" \
 .      nr t*cols\\n[t*#] \\*[cols]
 .    el \{\
 .      tmc \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid number of columns value
@@ -155,7 +155,7 @@ load package
 .  ie "\\*[cpd]"" \
 .    nr t*cpd\\n[t*#] \\n[t*cpd]
 .  el \{\
-.    ie \B\\*[cpd] \
+.    ie \B"\\*[cpd]" \
 .      nr t*cpd\\n[t*#] \\*[cpd]
 .    el \{\
 .      tmc \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid cell padding value
@@ -167,7 +167,7 @@ load package
 .  ie "\\*[csp]"" \
 .    nr t*csp\\n[t*#] \\n[t*csp]
 .  el \{\
-.    ie \B\\*[csp] \
+.    ie \B"\\*[csp]" \
 .      nr t*csp\\n[t*#] \\*[csp]
 .    el \{\
 .      tmc \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid cell spacing value
@@ -182,7 +182,7 @@ load package
 .    ie "\\*[border]"" \
 .      nr t*b\\n[t*#] \\n[t*b]
 .    el \{\
-.      ie \B\\*[border] \
+.      ie \B"\\*[border]" \
 .        nr t*b\\n[t*#] \\*[border]
 .      el \{\
 .        tmc \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid border thickness
@@ -221,7 +221,7 @@ load package
 .  ie "\\*[height]"" \
 .    nr t*height\\n[t*#] 0
 .  el \{\
-.    ie \B\\*[height] \
+.    ie \B"\\*[height]" \
 .      nr t*height\\n[t*#] (\\*[height] \
                             - ((2 * \\n[cscp\\n[t*#]]) \
                                 + (3 * \\n[b/2\\n[t*#]])))
@@ -328,7 +328,7 @@ load package
 .  ie "\\*[height]"" \
 .    nr t*height\\*[#t#r] 0
 .  el \{\
-.    ie \B\\*[height] \
+.    ie \B"\\*[height]" \
 .      nr t*height\\*[#t#r] \\*[height]
 .    el \{\
 .      tmc \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid table row height
@@ -387,7 +387,7 @@ load package
 .  t*getarg rowspan \\$@
 .  nr rowspan 1
 .  if !"\\*[rowspan]"" \{\
-.    ie \B\\*[rowspan] \{\
+.    ie \B"\\*[rowspan]" \{\
 .      nr rowspan (\\*[rowspan] >? 1)
 .      nr *rsp*\\*[*#trc*] (\\n[rowspan] - 1)
 .    \}
@@ -398,7 +398,7 @@ load package
 .  t*getarg colspan \\*[args]
 .  nr colspan 1
 .  if !"\\*[colspan]"" \{\
-.    ie \B\\*[colspan] \
+.    ie \B"\\*[colspan]" \
 .      nr colspan (\\*[colspan] >? 1)
 .    el \
 .      tm \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid value of 'colspan' keyword.
@@ -788,7 +788,7 @@ load package
 .      ie "\\*[*]"%" \{\
 .        ds ** \\$[\\n[*]]\"
 .        substring ** 0 -2
-.        ie \B\\*[**] \
+.        ie \B"\\*[**]" \
 .          nr $\\n[*] (\\*[**] * \\n[.l] / 100)
 .        el \{\
 .          tmc \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid relative cell width
@@ -796,7 +796,7 @@ load package
 .        \}
 .      \}
 .      el \{\
-.        ie \B\\$[\\n[*]] \
+.        ie \B"\\$[\\n[*]]" \
 .          nr $\\n[*] \\$[\\n[*]]
 .        el \{\
 .          tmc \*[hdtbl]:\\n[.F]:\\n[.c]: Invalid cell width

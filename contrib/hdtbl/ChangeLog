@@ -1,5 +1,11 @@
 2025-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* hdtbl.tmac (TBL, TR, TD, t*cl): Replace Control+G character
+	used as escape sequence delimiter with `"`, as otherwise
+	commonly used in the file.
+
+2025-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* hdmisc.tmac (t*index): Replace Control+G character used in
 	string processing with dummy character.  (It's not used for
 	matching, but apparently to work around the `substring`
