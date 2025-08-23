@@ -148,12 +148,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .    return
 .  \}
 .
-.  length ** \\$1
+.  length ** \\$1\&
 .  length $2 \\$2
 .  nr * 0-1 1
 .
 .  while (\\n+[*] < \\n[**]) \{\
-.    ds * \\$1\"
+.    ds * \\$1\&\"
 .    substring * \\n[*] (\\n[*] <? (\\n[*] + \\n[$2] - 1))
 .    \" The surrounding \? escapes emulate string comparison.
 .    if "\?\\*[*]\?"\?\\$2\?" \
