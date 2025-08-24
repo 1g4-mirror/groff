@@ -1433,8 +1433,9 @@ T}
 .
 .
 .IP
-Equation captions are centered irrespective of the alignment of any
-enclosing display.
+.I mm
+centers equation captions irrespective of the alignment of any enclosing
+display.
 .
 .
 .IP
@@ -1607,8 +1608,9 @@ The string
 precedes the exhibit number and any
 .I title.
 .
-Exhibit captions are centered irrespective of the alignment of any
-enclosing display.
+.I mm
+centers exhibit captions irrespective of the alignment of any enclosing
+display.
 .
 .
 .IP
@@ -1720,8 +1722,9 @@ The string
 precedes the figure number and any
 .I title.
 .
-Figure captions are centered irrespective of the alignment of any
-enclosing display.
+.I mm
+centers figure captions irrespective of the alignment of any enclosing
+display.
 .
 .
 .IP
@@ -3704,8 +3707,9 @@ The string
 precedes the table number and any
 .I title.
 .
-Table captions are centered irrespective of the alignment of any
-enclosing display.
+.I mm
+centers table captions irrespective of the alignment of any enclosing
+display.
 .
 .
 .IP
