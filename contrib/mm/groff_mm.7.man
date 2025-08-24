@@ -1450,7 +1450,7 @@ Recognition of this argument is a GNU extension.
 .
 .
 .IP
-Captioned equations are listed in a table of contents
+The package lists captioned equations in a table of contents
 (see
 .BR TC )
 if the Boolean register
@@ -1614,7 +1614,7 @@ display.
 .
 .
 .IP
-Captioned exhibits are listed in a table of contents
+The package lists captioned exhibits in a table of contents
 (see
 .BR TC )
 if the Boolean register
@@ -1728,7 +1728,7 @@ display.
 .
 .
 .IP
-Captioned figures are listed in a table of contents
+The package lists captioned figures in a table of contents
 (see
 .BR TC )
 if the Boolean register
@@ -3713,7 +3713,7 @@ display.
 .
 .
 .IP
-Captioned tables are listed in a table of contents
+The package lists captioned tables in a table of contents
 (see
 .BR TC )
 if the Boolean register
