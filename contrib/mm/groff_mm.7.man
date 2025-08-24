@@ -1504,10 +1504,10 @@ see
 .
 .TP
 .B EOP
-If defined,
-this macro is called in lieu of normal page footer layout.
+.I "groff mm"
+calls this hook macro in lieu of normal page footer layout.
 .
-Headers and footers are formatted in a separate environment.
+The package uses a separate environment to format headers and footers.
 .
 See
 .BR TP .
@@ -3908,10 +3908,10 @@ memoranda.
 .ne 6v
 .TP
 .B TP
-If defined,
-this macro is called in lieu of normal page header layout.
+.I mm
+calls this hook macro in lieu of normal page header layout.
 .
-Headers and footers are formatted in a separate environment.
+The package uses a separate environment to format headers and footers.
 .
 See
 .BR EOP .
