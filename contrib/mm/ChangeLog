@@ -1,3 +1,12 @@
+2025-08-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Rename API string `Capcon` (formerly `Licon`) to
+	`Captc` to align with the naming convention used by `Capec`,
+	`Capex`, `Capfg`, and `Captb`; the "Cap" ("caption") prefix is
+	followed by the downcased name of the macro that interpolates
+	the caption.
+	* groff_mm.7.man (Strings): Document it.
+
 2025-08-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Add new aliases `Ftnum` and `Rfnum` for the internal

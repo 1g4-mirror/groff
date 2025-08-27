@@ -653,7 +653,7 @@ Macro packages
 *  The m (mm) macro package has renamed several strings to make their
    purposes less obscure; they determine the content of captions, not
    list items.
-     `Licon` -> `Capcon`
+     `Licon` -> `Captc`
      `Liec`  -> `Capec`
      `Liex`  -> `Capex`
      `Lifg`  -> `Capfg`

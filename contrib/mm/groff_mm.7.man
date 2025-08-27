@@ -3749,7 +3749,7 @@ calls
 .
 It then begins a new page with the contents caption,
 stored in the string
-.BR Capcon ,
+.BR Captc ,
 centered at the top.
 .
 The entries follow after three vees of space.
@@ -4232,7 +4232,7 @@ interpolates a bullet mark,
 .
 .
 .TP
-.B Capcon
+.B Captc
 \[lq]CONTENTS\[rq]
 .
 .
