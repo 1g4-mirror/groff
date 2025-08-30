@@ -6194,7 +6194,7 @@ static void encode_character_for_device_output(macro *mac, const char c)
       encode_special_character_for_device_output(mac);
     else
       warning(WARN_CHAR, "%1 is not encodable in device-independent"
-	      " output", tok.description());
+	      " output ('asciify' might help)", tok.description());
   }
   else {
     if (c == escape_char)
