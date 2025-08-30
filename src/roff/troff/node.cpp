@@ -1112,7 +1112,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
   }
   set_font(tf);
   unsigned char c = ci->get_ascii_code();
-  if (c == '\0') {
+  if (0U == c) {
     stroke_color(gcol);
     fill_color(fcol);
     flush_tbuf();
@@ -1190,7 +1190,7 @@ void troff_output_file::put_char(charinfo *ci, tfont *tf,
     return;
   set_font(tf);
   unsigned char c = ci->get_ascii_code();
-  if (c == '\0') {
+  if (0U == c) {
     stroke_color(gcol);
     fill_color(fcol);
     flush_tbuf();
@@ -1954,7 +1954,7 @@ void charinfo_node::dump_properties()
   // GNU troff multiplexes the distinction of ordinary vs. special
   // characters though the special character code zero.
   unsigned char c = ci->get_ascii_code();
-  if (c) {
+  if (c != 0U) {
     fputs(", \"character\": ", stderr);
     // It's not a `string` or `symbol` we can `.json_dump()`, so we have
     // to write the quotation marks ourselves.
@@ -2293,7 +2293,7 @@ hyphenation_type glyph_node::get_hyphenation_type()
 void glyph_node::ascii_print(ascii_output_file *ascii)
 {
   unsigned char c = ci->get_ascii_code();
-  if (c != '\0')
+  if (c != 0U)
     ascii->outc(c);
   else
     ascii->outs(ci->nm.contents());
@@ -3888,9 +3888,10 @@ void node::asciify(macro *m)
 void glyph_node::asciify(macro *m)
 {
   unsigned char c = ci->get_asciify_code();
-  if (c == '\0')
+  if (0U == c)
     c = ci->get_ascii_code();
-  if (c != '\0') {
+  // XXX: What if it's a Unicode special character?
+  if (c != 0U) {
     m->append(c);
     delete this;
   }
@@ -4743,6 +4744,7 @@ void composite_node::asciify(macro *m)
   unsigned char c = ci->get_asciify_code();
   if (0U == c)
     c = ci->get_ascii_code();
+  // XXX: What if it's a Unicode special character?
   if (c != 0U) {
     m->append(c);
     delete this;
@@ -5372,7 +5374,7 @@ void composite_node::dump_properties()
   // GNU troff multiplexes the distinction of ordinary vs. special
   // characters though the special character code zero.
   unsigned char c = ci->get_ascii_code();
-  if (c) {
+  if (c != 0U) {
     fputs(", \"character\": ", stderr);
     // It's not a `string` or `symbol` we can `.json_dump()`, so we have
     // to write the quotation marks ourselves.
@@ -5484,7 +5486,7 @@ static node *make_glyph_node(charinfo *s, environment *env,
     if (!found) {
       if (want_warnings && s->first_time_not_found()) {
 	unsigned char input_code = s->get_ascii_code();
-	if (input_code != 0) {
+	if (input_code != 0U) {
 	  if (csgraph(input_code))
 	    warning(WARN_CHAR, "character '%1' not defined",
 		    input_code);

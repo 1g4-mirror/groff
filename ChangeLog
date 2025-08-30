@@ -1,5 +1,20 @@
 2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Trivially refactor.  `unsigned char`
+	is a _numeric_ type, not a character type (properly considered).
+	Compare values of this type to unsigned numeric literals, not to
+	character literals that are to be used with `char`, which is of
+	undefined signedness.  Reorder equality comparisons to avoid
+	inadvertent lvalue assignment.
+	(troff_output_file::put_char_width, troff_output_file::put_char)
+	(glyph_node::get_hyphenation_type, node::asciify)
+	(composite_node::dump_properties, make_glyph_node): Do it.
+	(charinfo_node::dump_properties): Perform explicit comparison to
+	unsigned numeric literal instead of letting its value pun down
+	to a Boolean.
+
+2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Make `-c` option neuter the `color` request.
 
 	* src/roff/troff/input.cpp: Add `permit_color_output` static
