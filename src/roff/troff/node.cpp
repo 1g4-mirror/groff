@@ -1974,6 +1974,8 @@ void charinfo_node::dump_properties()
   fflush(stderr);
 }
 
+// A glyph node corresponds to a glyph supplied by a device font.
+
 class glyph_node : public charinfo_node {
 protected:
   tfont *tf;
@@ -3891,7 +3893,6 @@ void glyph_node::asciify(macro *m)
   unsigned char c = ci->get_asciify_code();
   if (0U == c)
     c = ci->get_ascii_code();
-  // XXX: What if it's a Unicode special character?
   if (c != 0U) {
     m->append(c);
     delete this;
@@ -4655,6 +4656,9 @@ hunits suppress_node::width()
 
 /* composite_node */
 
+// A composite (glyph) node corresponds to a user-defined GNU troff
+// character with a macro definition.
+
 // Not derived from `container_node`; implements custom contained node
 // dumper in dump_node().
 class composite_node : public charinfo_node {
@@ -4745,7 +4749,6 @@ void composite_node::asciify(macro *m)
   unsigned char c = ci->get_asciify_code();
   if (0U == c)
     c = ci->get_ascii_code();
-  // XXX: What if it's a Unicode special character?
   if (c != 0U) {
     m->append(c);
     delete this;
