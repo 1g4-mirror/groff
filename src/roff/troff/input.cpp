@@ -116,7 +116,8 @@ static bool want_input_ignored = false;
 static void enable_warning(const char *);
 static void disable_warning(const char *);
 
-static unsigned char escape_char = '\\';
+static unsigned char escape_char = (unsigned char)('\\');
+
 static symbol end_of_input_macro_name;
 static symbol blank_line_macro_name;
 static symbol leading_spaces_macro_name;

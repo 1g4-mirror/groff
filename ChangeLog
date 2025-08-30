@@ -29,6 +29,13 @@
 
 2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::environment):
+	* src/roff/troff/input.cpp: Trivially refactor.  Explicitly
+	construct default values of control and escape characters as
+	values of `unsigned char` type.
+
+2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/glyphuni.cpp: Stop mapping the special
 	character `ru` (baseline rule) to U+005F.  The Unicode "LOW
 	LINE" is a not a baseline rule (while my DEC VT525's character
