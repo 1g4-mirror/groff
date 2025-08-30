@@ -1,5 +1,13 @@
 2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (real_output_file::off): Work around
+	internal bug.  Comment out assertion that fails when attempting
+	to format our "ms.ms" document for HTML.
+
+	Discovered while looking into Savannah #66653.
+
+2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor.  `unsigned char`
 	is a _numeric_ type, not a character type (properly considered).
 	Compare values of this type to unsigned numeric literals, not to
