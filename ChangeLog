@@ -1,5 +1,16 @@
 2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/glyphuni.cpp: Stop mapping the special
+	character `ru` (baseline rule) to U+005F.  The Unicode "LOW
+	LINE" is a not a baseline rule (while my DEC VT525's character
+	set disagrees, the fonts on my GNU/Linux box do not).  `ru` and
+	`bs` (the Bell System logo) are the only special characters
+	groff internally defines that have no Unicode representation.
+	GNU troff offers the `char` request, enabling a document to
+	define `\[ru]` as equivalent to `_` if it wishes.
+
+2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (real_output_file::off): Work around
 	internal bug.  Comment out assertion that fails when attempting
 	to format our "ms.ms" document for HTML.
