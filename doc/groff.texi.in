@@ -5446,12 +5446,15 @@ Normally, the occurrence of a visible non-end-of-sentence character (as
 opposed to a space or tab) immediately after an end-of-sentence
 character cancels detection of the end of a sentence.  For example, it
 would be incorrect for GNU @code{troff} to infer the end of a sentence
-after the dot in @samp{3.14159}.  However, several characters are
-treated @emph{transparently} after the occurrence of an end-of-sentence
-character.  That is, GNU @code{troff} does not cancel end-of-sentence
-detection when it processes them.  This is because such characters are
-often used as footnote markers or to close quotations and
-parentheticals.  The default set is @samp{"}, @samp{'}, @samp{)},
+after the dot in @samp{3.14159}.
+However,
+the formatter treats several characters
+@emph{transparently}
+after the occurrence of an end-of-sentence character---it does not
+cancel end-of-sentence status upon encountering them.
+Such characters are often used as footnote markers
+or to close quotations and parentheticals.
+The default set is @samp{"}, @samp{'}, @samp{)},
 @samp{]}, @samp{*}, @code{\[dg]}, @code{\[dd]}, @code{\[rq]}, and
 @code{\[cq]}.  The last four are examples of @dfn{special characters},
 escape sequences whose purpose is to obtain glyphs that are not easily

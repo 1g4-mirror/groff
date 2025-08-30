@@ -200,17 +200,13 @@ immediately after an end-of-sentence
 character cancels detection of the end of a sentence.
 .
 However,
-several characters are treated
+the formatter treats several characters
 .I transparently
-after the occurrence of an end-of-sentence character.
+after the occurrence of an end-of-sentence character\[em]it does not
+cancel end-of-sentence status upon encountering them.
 .
-That is,
-a
-.I roff
-does not cancel end-of-sentence detection when it processes them.
-.
-This is because such characters are often used as footnote markers or to
-close quotations and parentheticals.
+Such characters are often used as footnote markers
+or to close quotations and parentheticals.
 .
 The default set is
 .BR \[dq] ,
@@ -230,8 +226,8 @@ escape sequences whose purpose is to obtain glyphs that are not easily
 typed at the keyboard,
 or which have special meaning to the formatter
 (like
-.BR \[rs] ).
-.\" slack wording: itself).
+.B \[rs]
+itself).
 .
 .
 .P
