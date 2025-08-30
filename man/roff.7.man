@@ -264,9 +264,9 @@ in certain circumstances.
 .
 .P
 Once an output line is full,
-the next word
+the formatter places the next word
 (or remainder of a hyphenated one)
-is placed on a different output line;
+on a different output line;
 this is called a
 .I break.
 .

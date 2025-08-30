@@ -5524,8 +5524,11 @@ several parameters that can prevent it in certain circumstances.
 @cindex line break, output
 @cindex output line break
 
-Once an output line is full, the next word (or remainder of a hyphenated
-one) is placed on a different output line; this is called a @dfn{break}.
+Once an output line is full,
+the formatter places the next word
+(or remainder of a hyphenated one)
+on a different output line;
+this is called a @dfn{break}.
 In this manual and in @code{roff} discussions generally, a ``break'' if
 not further qualified always refers to the termination of an output
 line.  When the formatter is filling text, it introduces breaks
