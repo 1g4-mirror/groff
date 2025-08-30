@@ -5023,7 +5023,7 @@ This is a string-valued register.
 .TQ
 .B \[rs]n[.sss]
 Interpolate values of the environment's minimum inter-word space
-and additional inter-sentence space,
+and supplemental inter-sentence space,
 respectively,
 in twelfths of the space width of the selected font.
 .

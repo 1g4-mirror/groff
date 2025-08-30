@@ -170,7 +170,7 @@ The exceptions separate words.
 A
 .I roff
 formatter attempts to detect boundaries between sentences,
-and supplies additional inter-sentence space between them.
+and supplies supplemental inter-sentence space between them.
 .
 It flags certain characters
 (normally

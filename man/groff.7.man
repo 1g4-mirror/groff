@@ -4813,7 +4813,7 @@ is
 .
 .TPx
 .REQ .ss n
-Set minimum inter-word space and additional inter-sentence space sizes
+Set minimum inter-word space and supplemental inter-sentence space sizes
 to
 .IR n \~12ths
 of the selected font's
@@ -4826,7 +4826,7 @@ parameter
 As
 .RB \[lq] .ss\~\c
 .IR n \[rq],
-but set additional inter-sentence space size to
+but set supplemental inter-sentence space size to
 .IR m \~12ths
 of the selected font's
 .B spacewidth
@@ -7150,7 +7150,7 @@ in twelfths of the space width of the selected font.
 .
 .TP
 .REG .sss
-Size of the environment's additional inter-sentence space
+Size of the environment's supplemental inter-sentence space
 in twelfths of the space width of the selected font.
 .
 .TP

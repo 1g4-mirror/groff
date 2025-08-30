@@ -5359,8 +5359,8 @@ well-researched jeremiad appreciated by @code{groff} contributors on
 both sides of the sentence-spacing debate can be found at
 @uref{https://web.archive.org@//web@//20171217060354@//http://www.heracliteanriver.com@//?p=324}.}
 GNU @code{troff} follows the example of @acronym{AT&T} @code{troff};
-it attempts to detect the boundaries between sentences, and supplies
-additional inter-sentence space between them.
+it attempts to detect the boundaries between sentences, and supplements
+them with inter-sentence space.
 
 @Example
 Hello, world!
@@ -5480,7 +5480,7 @@ been shocking to the rich.\[rq]
 
 The sets of characters that potentially end sentences or are transparent
 to sentence endings are configurable.  See the @code{cflags} request in
-@ref{Using Symbols}.  To change the additional inter-sentence space
+@ref{Using Symbols}.  To change the supplemental inter-sentence space
 amount---even to remove it entirely---see @ref{Manipulating Filling and
 Adjustment}.
 
@@ -9100,6 +9100,7 @@ for both parameters is@tie{}12.  Negative values are erroneous.
 The first argument is a minimum; if an output line undergoes adjustment,
 such spaces may increase in width.
 @cindex inter-sentence space, additional
+@cindex supplemental inter-sentence space
 @cindex additional inter-sentence space
 @cindex space, between sentences
 The optional second argument sets the amount of additional space
@@ -9120,7 +9121,7 @@ always precedes it may be.  Further input spaces after the second, if
 present, are adjusted as normal.
 
 The read-only registers @code{.ss} and @code{.sss} hold the minimum
-inter-word space and additional inter-sentence space amounts,
+inter-word space and supplemental inter-sentence space amounts,
 respectively.  These parameters are part of the environment
 (@pxref{Environments}).
 
@@ -11348,7 +11349,7 @@ A change of the zoom factor affects scaling of glyph sizes, inter-word
 and inter-sentence spaces, and kerning adjustments on the output device,
 but @emph{not} vertical spacing.  It is not reflected in registers that
 report the requested or current type size, or the minimum inter-word and
-additional inter-sentence space sizes.  It @emph{is} reflected in
+supplemental inter-sentence space sizes.  It @emph{is} reflected in
 measurements of formatted output:@: the horizontal drawing position
 register @code{hp}, interpolation of the @code{\w} escape sequence, and
 the registers updated by that escape sequence or the formatting of a
