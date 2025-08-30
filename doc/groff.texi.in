@@ -464,7 +464,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle July 2025
+@subtitle August 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -5478,11 +5478,17 @@ been shocking to the rich.\[rq]
 @end ifnottex
 @endExample
 
-The sets of characters that potentially end sentences or are transparent
-to sentence endings are configurable.  See the @code{cflags} request in
-@ref{Using Symbols}.  To change the supplemental inter-sentence space
-amount---even to remove it entirely---see @ref{Manipulating Filling and
-Adjustment}.
+Configure the sets of characters that potentially end sentences
+or are transparent to sentence endings
+with the
+@code{cflags}
+request
+(@pxref{Using Symbols}).
+Use the
+@code{ss}
+request
+to change---or eliminate---supplemental inter-sentence space
+(@pxref{Manipulating Filling and Adjustment}).
 
 @c ---------------------------------------------------------------------
 

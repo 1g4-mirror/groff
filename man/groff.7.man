@@ -657,6 +657,23 @@ the next defined tab stop.
 .
 .
 .\" ====================================================================
+.SH Sentences
+.\" ====================================================================
+.
+Configure the sets of characters that potentially end sentences
+or are transparent to sentence endings
+with the
+.B \%cflags
+request.
+.\" (@pxref{Using Symbols}).
+.
+Use the
+.B ss
+request
+to change\[em]or eliminate\[em]supplemental inter-sentence space.
+.\" (@pxref{Manipulating Filling and Adjustment}).
+.
+.\" ====================================================================
 .SH "Tabs and leaders"
 .\" ====================================================================
 .
