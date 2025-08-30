@@ -5492,8 +5492,8 @@ Adjustment}.
 
 When an output line is nearly full,
 it is uncommon for the next word collected from the input
-to exactly fill it---typically,
-there is room left over only for part of the next word.
+to exactly fill it---often,
+there is room left over for only part of the next word.
 @dfn{Hyphenation}
 is the
 process of splitting a word so that it appears partially on one line,
