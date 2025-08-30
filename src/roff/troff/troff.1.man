@@ -228,7 +228,9 @@ macros.
 .
 .TP
 .B \-c
-Start with color output disabled.
+Disable multi-color output and
+.RB \[lq] color \[rq]
+request's ability to enable it.
 .
 .
 .TP

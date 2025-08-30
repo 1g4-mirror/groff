@@ -1,3 +1,21 @@
+2025-08-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Make `-c` option neuter the `color` request.
+
+	* src/roff/troff/input.cpp: Add `permit_color_output` static
+	Boolean variable.
+	(activate_color): Introduce `is_color_desired` local Boolean.
+	If `permit_color_output` is false and color enablement is
+	attempted, refuse with an error diagnostic.
+	(main): `-c` option configures value of `permit_color_output`
+	rather than `want_color_output`.
+
+	* doc/groff.texi.in (Groff Options) <-c>:
+	* src/roff/troff/troff.1.man (Options) <-c>:
+	* NEWS: Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?67309>.
+
 2025-08-28  Dave Kemper <saint.snit@gmail.com>
 
 	* tmac/fallbacks.tmac: Add fallback character definitions for

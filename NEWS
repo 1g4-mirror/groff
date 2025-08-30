@@ -252,6 +252,9 @@ troff
    units, such as the `ps` request and `\s` escape sequence, now also
    accept `p` and `s`.
 
+*  The `-c` command-line option now also removes the `color` request's
+   ability to enable multi-color output.
+
 *  In compatibility mode, GNU troff now accepts delimiters that it
    rejects when not in compatibility mode--namely, ordinary characters
    that can validly begin numeric expressions (which are often

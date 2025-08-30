@@ -1036,7 +1036,9 @@ append to
 macros.
 
 @item -c
-Start with color output disabled.
+Disable multi-color output and
+@code{color}
+request's ability to enable it.
 
 @item -C
 Enable AT&T @command{troff} compatibility mode; implies @option{-c}.

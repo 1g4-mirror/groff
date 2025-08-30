@@ -102,6 +102,7 @@ void transparent_file();
 token tok;
 bool want_break = false;
 bool using_character_classes = false;
+static bool permit_color_output = true;
 bool want_color_output = true;
 static bool want_backtraces = false;
 char *pipe_command = 0 /* nullptr */;
@@ -1523,10 +1524,16 @@ static color *read_gray(char end = 0)
 static void activate_color()
 {
   int n;
+  bool is_color_desired = false;
   if (has_arg() && get_integer(&n))
-    want_color_output = (n > 0);
+    is_color_desired = (n > 0);
   else
-    want_color_output = true;
+    is_color_desired = true;
+  if (is_color_desired && !permit_color_output) {
+    error("color output disabled via command line");
+    is_color_desired = false;
+  }
+  want_color_output = is_color_desired;
   skip_line();
 }
 
@@ -9265,7 +9272,7 @@ int main(int argc, char **argv)
       want_att_compat = true;
       // fall through
     case 'c':
-      want_color_output = false;
+      permit_color_output = false;
       break;
     case 'M':
       macro_path.command_line_dir(optarg);
