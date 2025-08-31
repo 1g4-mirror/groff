@@ -1,5 +1,19 @@
 2025-08-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: "Asciify" transparent dummy nodes as nothing,
+	suppressing non-actionable diagnostic message.  (The output line
+	continuation escape sequence produces a transparent dummy node
+	when formatted.)
+
+	* src/roff/troff/node.h (class transparent_dummy_node): Declare
+	`asciify` member function, thus overriding base class.
+	* src/roff/troff/node.cpp (transparent_dummy_node::asciify): New
+	member function does "nothing" in the same way that those of
+	`line_start_node` and `vertical_size_node`s do: delete the
+	`this` object and return.
+
+2025-08-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: "Asciify" dummy nodes as nothing, suppressing
 	non-actionable diagnostic message.  (The dummy character escape
 	sequence produces a dummy node when formatted.)
