@@ -1,3 +1,18 @@
+2025-08-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: "Asciify" dummy nodes as nothing, suppressing
+	non-actionable diagnostic message.  (The dummy character escape
+	sequence produces a dummy node when formatted.)
+
+	* src/roff/troff/node.h (class dummy_node): Declare `asciify`
+	member function, thus overriding base class.
+	* src/roff/troff/node.cpp (dummy_node::asciify): New member
+	function does "nothing" in the same way that those of
+	`line_start_node` and `vertical_size_node`s do: delete the
+	`this` object and return.
+
+	Thanks to Deri James for the discussion and proof of concept.
+
 2025-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Unit-test `asciify` request.

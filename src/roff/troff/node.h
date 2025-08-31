@@ -466,6 +466,7 @@ public:
 class dummy_node : public node {
 public:
   dummy_node(node * nd = 0 /* nullptr */) : node(nd) {}
+  void asciify(macro *);
   node *copy();
   bool is_same_as(node *);
   const char *type();
