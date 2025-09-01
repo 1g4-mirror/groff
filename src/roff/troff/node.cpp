@@ -4013,6 +4013,7 @@ void line_start_node::asciify(macro *)
   delete this;
 }
 
+// TODO: If we chose a delimiter, we could undivert these.
 void vertical_size_node::asciify(macro *)
 {
   delete this;
@@ -4020,24 +4021,31 @@ void vertical_size_node::asciify(macro *)
 
 void dummy_node::asciify(macro *)
 {
+  // TODO: m->append(ESCAPE_AMPERSAND); ?
   delete this;
 }
 
 void transparent_dummy_node::asciify(macro *)
 {
+  // TODO: m->append(ESCAPE_c); ?
   delete this;
 }
 
+// XXX: Could tag_node justify itself as a kind of device_extension_node
+// that can't be undiverted?
 void tag_node::asciify(macro *)
 {
   delete this;
 }
 
+// TODO: If we knew what delimiter to select, we could undivert these,
+// but the macro's character list could contain anything.
 void device_extension_node::asciify(macro *)
 {
   delete this;
 }
 
+// TODO: If we chose a delimiter, we could undivert these.
 void vmotion_node::asciify(macro *)
 {
   delete this;
