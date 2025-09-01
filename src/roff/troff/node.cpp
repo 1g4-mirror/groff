@@ -4038,6 +4038,11 @@ void device_extension_node::asciify(macro *)
   delete this;
 }
 
+void vmotion_node::asciify(macro *)
+{
+  delete this;
+}
+
 breakpoint *node::get_breakpoints(hunits /* width */, int /* nspaces */,
 				  breakpoint *rest, bool /* is_inner */)
 {

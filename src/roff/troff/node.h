@@ -405,6 +405,7 @@ class vmotion_node : public node {
 public:
   vmotion_node(vunits, color *);
   vmotion_node(vunits, color *, statem *, int);
+  void asciify(macro *);
   void tprint(troff_output_file *);
   node *copy();
   vunits vertical_width();

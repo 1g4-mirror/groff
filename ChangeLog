@@ -1,3 +1,17 @@
+2025-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: "Asciify" vertical motion nodes as nothing, suppressing
+	non-actionable diagnostic message.  (Vertical motion nodes are
+	produced by the `\v` escape sequence and other formatter
+	facilities.)
+
+	* src/roff/troff/node.h (class vmotion_node): Declare `asciify`
+	member function, thus overriding base class.
+	* src/roff/troff/node.cpp (vmotion_node::asciify): New member
+	function does "nothing" in the same way that those of
+	`line_start_node` and `vertical_size_node`s do: delete the
+	`this` object and return.
+
 2025-08-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: "Asciify" device extension nodes as nothing,
