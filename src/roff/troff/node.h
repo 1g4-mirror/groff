@@ -180,12 +180,12 @@ struct breakpoint {
 class line_start_node : public node {
 public:
   line_start_node() {}
+  void asciify(macro *);
   node *copy() { return new line_start_node; }
   bool is_same_as(node *);
   bool causes_tprint();
   bool is_tag();
   const char *type();
-  void asciify(macro *);
 };
 
 class space_node : public node {
@@ -199,6 +199,7 @@ protected:
 	     node * = 0 /* nullptr */);
 public:
   space_node(hunits, color *, node * = 0 /* nullptr */);
+  void asciify(macro *);
   node *copy();
   int nspaces();
   hunits width();
@@ -215,7 +216,6 @@ public:
   void split(int, node **, node **);
   void ascii_print(ascii_output_file *);
   bool is_same_as(node *);
-  void asciify(macro *);
   const char *type();
   bool causes_tprint();
   bool is_tag();
@@ -244,12 +244,12 @@ public:
   word_space_node(hunits, color *, width_list *,
 		  node * /* x */ = 0 /* nullptr */);
   ~word_space_node();
+  void asciify(macro *);
   node *copy();
   bool need_reread(bool *);
   bool set_unformat_flag();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
-  void asciify(macro *);
   const char *type();
   bool did_space_merge(hunits, hunits, hunits);
   bool causes_tprint();
@@ -263,11 +263,11 @@ class unbreakable_space_node : public word_space_node {
 public:
   unbreakable_space_node(hunits, color *,
 			 node * /* x */ = 0 /* nullptr */);
+  void asciify(macro *);
   node *copy();
   bool need_reread(bool *);
   void tprint(troff_output_file *);
   bool is_same_as(node *);
-  void asciify(macro *);
   const char *type();
   bool causes_tprint();
   bool is_tag();
@@ -332,8 +332,8 @@ class vertical_size_node : public node {
 public:
   vertical_size_node(vunits, statem *, int);
   vertical_size_node(vunits);
-  void set_vertical_size(vertical_size *);
   void asciify(macro *);
+  void set_vertical_size(vertical_size *);
   node *copy();
   bool set_unformat_flag();
   bool is_same_as(node *);
@@ -363,10 +363,10 @@ public:
   hmotion_node(hunits i, bool flag1, bool flag2, color *c,
 	       node *nxt = 0 /* nullptr */)
     : node(nxt), n(i), was_tab(flag1), unformat(flag2), col(c) {}
+  void asciify(macro *);
   node *copy();
   bool need_reread(bool *);
   bool set_unformat_flag();
-  void asciify(macro *);
   void tprint(troff_output_file *);
   hunits width();
   void ascii_print(ascii_output_file *);
@@ -387,8 +387,8 @@ public:
   space_char_hmotion_node(hunits, color *, statem *, int,
 			  node * /* nxt */ = 0 /* nullptr */);
   node *copy();
-  void ascii_print(ascii_output_file *);
   void asciify(macro *);
+  void ascii_print(ascii_output_file *);
   void tprint(troff_output_file *);
   bool is_same_as(node *);
   const char *type();
@@ -510,9 +510,9 @@ public:
   left_italic_corrected_node(node * /* xx */ = 0 /* nullptr */);
   left_italic_corrected_node(statem *, int,
 			     node * /* xx */ = 0 /* nullptr */);
+  void asciify(macro *);
   void tprint(troff_output_file *);
   void ascii_print(ascii_output_file *);
-  void asciify(macro *);
   node *copy();
   bool is_same_as(node *);
   const char *type();
