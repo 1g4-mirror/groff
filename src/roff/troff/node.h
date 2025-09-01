@@ -630,6 +630,7 @@ public:
   tag_node();
   tag_node(string, int);
   tag_node(string, statem *, int, int);
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
