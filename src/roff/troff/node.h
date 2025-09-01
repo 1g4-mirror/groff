@@ -589,6 +589,7 @@ public:
 			color * /* gcol */, color * /* fcol */,
 			statem * /* s */, int divlevel,
 			bool /* lacks_command_prefix */ = false);
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
