@@ -1,5 +1,11 @@
 2025-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am (DOC_GROFF): Move `-M` option that is present only
+	for the sake of building "grnexampl.ps" from this macro...
+	(doc/grnexampl.ps): ...to this target rule.
+
+2025-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Drop `GROFF_ISC_SYSV3` Autoconf macro.  ISC Unix has been end-
 	of-lifed since 2006, per Wikipedia.
 
