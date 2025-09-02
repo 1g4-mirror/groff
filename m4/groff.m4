@@ -634,18 +634,6 @@ EOF
    rm -f conftest.sh])
 
 
-# From udodo!hans@relay.NL.net (Hans Zuidam)
-
-AC_DEFUN([GROFF_ISC_SYSV3],
-  [AC_MSG_CHECKING([for ISC 3.x or 4.x])
-   if grep ['[34]\.'] /usr/options/cb.name >/dev/null 2>&1
-   then
-     AC_MSG_RESULT([yes])
-     AC_DEFINE([_SYSV3], [1], [Define if you have ISC 3.x or 4.x.])
-   else
-     AC_MSG_RESULT([no])
-   fi])
-
 AC_DEFUN([GROFF_POSIX],
   [AC_MSG_CHECKING([whether -D_POSIX_SOURCE is necessary])
    AC_LANG_PUSH([C++])

@@ -1,3 +1,11 @@
+2025-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Drop `GROFF_ISC_SYSV3` Autoconf macro.  ISC Unix has been end-
+	of-lifed since 2006, per Wikipedia.
+
+	* m4/groff.m4 (GROFF_ISC_SYSV3): Delete.
+	* configure.ac: Drop its expansion.
+
 2025-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: "Asciify" vertical motion nodes as nothing, suppressing

@@ -84,7 +84,6 @@ AC_SUBST([SH_SCRIPT_SED_CMD])
 AC_CHECK_HEADERS([stdbool.h stddef.h stdlib.h unistd.h dirent.h \
                   limits.h sys/dir.h string.h strings.h math.h \
                   sys/time.h direct.h process.h])
-GROFF_ISC_SYSV3
 GROFF_POSIX
 
 # checks for header stuff
