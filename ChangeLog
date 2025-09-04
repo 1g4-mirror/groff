@@ -1,5 +1,14 @@
 2025-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Unit-test `asciify` request.
+
+	* src/roff/groff/tests/asciify-request-works.sh: Test
+	undiversion of ordinary character and some special character
+	types.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2025-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::dump): Report Unicode
 	mapping corresponding to character.
 
