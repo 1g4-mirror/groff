@@ -8233,8 +8233,8 @@ void define_class()
 	skip_line();
 	return;
       }
-      int u1 = child1->get_unicode_code();
-      int u2 = child2->get_unicode_code();
+      int u1 = child1->get_unicode_mapping();
+      int u2 = child2->get_unicode_mapping();
       if (u1 < 0) {
 	warning(WARN_SYNTAX,
 		"invalid start value in character range");
@@ -8260,7 +8260,7 @@ void define_class()
 	ci->add_to_class(child1);
       }
       else {
-	int u1 = child1->get_unicode_code();
+	int u1 = child1->get_unicode_mapping();
 	if (u1 < 0) {
 	  warning(WARN_SYNTAX,
 		  "invalid character value in class '%1'",
@@ -8290,7 +8290,7 @@ void define_class()
       ci->add_to_class(child1);
     }
     else {
-      int u1 = child1->get_unicode_code();
+      int u1 = child1->get_unicode_mapping();
       if (u1 < 0) {
 	warning(WARN_SYNTAX,
 		"invalid character value in class '%1'",
@@ -10198,7 +10198,7 @@ charinfo::charinfo(symbol s)
   get_flags();
 }
 
-int charinfo::get_unicode_code()
+int charinfo::get_unicode_mapping()
 {
   if (ascii_code != 0U)
     return ascii_code;
@@ -10251,7 +10251,7 @@ void charinfo::get_flags()
   // troff's dictionary types use a pre-STL approach to containers.
   while (iter.get(&s, reinterpret_cast<void **>(&ci))) {
     assert(!s.is_null());
-    if (ci->contains(get_unicode_code())) {
+    if (ci->contains(get_unicode_mapping() >= 0)) {
 #if defined(DEBUGGING)
       if (want_html_debugging)
 	fprintf(stderr, "charinfo::get_flags %p %s %d\n",

@@ -88,7 +88,7 @@ public:
   unsigned char get_hyphenation_code();
   unsigned char get_ascii_code();
   unsigned char get_asciify_code();
-  int get_unicode_code();
+  int get_unicode_mapping();
   void set_hyphenation_code(unsigned char);
   void set_ascii_code(unsigned char);
   void set_asciify_code(unsigned char);
