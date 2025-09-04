@@ -403,21 +403,18 @@
 	of chem is an awk script written by Brian Kernighan.  This project
 	is a rewrite of chem in Perl.
 
-2006-10-15  Bernd Warken  <groff-bernd.warken-72@web.de>
-________________________________________________________________
-License
+________________________________________________________________________
 
-Copyright (C) 2006-2024 Free Software Foundation, Inc.
-Written by Bernd Warken <groff-bernd.warken-72@web.de>.
+Copyright 2006-2015 Free Software Foundation, Inc.
+Copyright 2022-2024 G. Branden Robinson
 
-Copying and distribution of this file, with or without
-modification, are permitted provided the copyright notice and this
-notice are preserved.
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
 
-This file is part of `chem', which is part of the `groff' project.
-
-
-##### Editor settings
 Local Variables:
+fill-column: 72
 mode: change-log
+version-control: never
 End:
+vim:set autoindent textwidth=72:
