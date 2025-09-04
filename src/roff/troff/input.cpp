@@ -1029,7 +1029,7 @@ static symbol read_long_escape_parameters(read_mode mode)
 	fatal("cannot allocate %1 bytes to read input line", buf_size);
       }
       (void) memset(buf, 0, (new_buf_size * sizeof(char)));
-      memcpy(buf, old_buf, buf_size);
+      (void) memcpy(buf, old_buf, buf_size);
       buf_size = new_buf_size;
       delete[] old_buf;
     }
@@ -2553,6 +2553,7 @@ void token::next()
 	      if (groff_gn != 0 /* nullptr */)
 		nm = symbol(groff_gn);
 	      else {
+		// ISO C++ does not permit VLAs on the stack.
 		// C++03: new char[strlen(gn) + 1 + 1]();
 		char *buf = new char[strlen(gn) + 1 + 1];
 		(void) memset(buf, 0,
@@ -2865,7 +2866,7 @@ static symbol do_get_long_name(bool required, char end_char)
 	fatal("cannot allocate %1 bytes to read input line", buf_size);
       }
       (void) memset(buf, 0, (new_buf_size * sizeof(char)));
-      memcpy(buf, old_buf, (buf_size * sizeof(char)));
+      (void) memcpy(buf, old_buf, (buf_size * sizeof(char)));
       buf_size = new_buf_size;
       delete[] old_buf;
     }
@@ -4364,7 +4365,7 @@ static void map_composite_character()
   }
   const char *fc = from.contents();
   const char *from_gn = glyph_name_to_unicode(fc);
-  char errbuf[ERRBUFSZ];
+  char errbuf[ERRBUFSZ]; // C++03: char errbuf[ERRBUFSZ]()
   if (0 /* nullptr */ == from_gn) {
     from_gn = valid_unicode_code_sequence(fc, errbuf);
     if (0 /* nullptr */ == from_gn) {
@@ -5835,7 +5836,7 @@ static symbol get_delimited_name()
 	fatal("cannot allocate %1 bytes to read input line", buf_size);
       }
       (void) memset(buf, 0, (new_buf_size * sizeof(char)));
-      memcpy(buf, old_buf, buf_size);
+      (void) memcpy(buf, old_buf, buf_size);
       buf_size = new_buf_size;
       delete[] old_buf;
     }
@@ -6126,10 +6127,10 @@ static void map_special_character_for_device_output(macro *mac,
       }
     }
     else {
-      char errbuf[ERRBUFSZ];
-      const size_t unibufsz = UNIBUFSZ + 1 /* '\0' */;
-      char character[unibufsz];
+      char errbuf[ERRBUFSZ]; // C++03: char errbuf[ERRBUFSZ]()
       (void) memset(errbuf, '\0', ERRBUFSZ);
+      const size_t unibufsz = UNIBUFSZ + 1 /* '\0' */;
+      char character[unibufsz]; // C++03: char errbuf[ERRBUFSZ]()
       (void) memset(character, '\0', UNIBUFSZ);
       // If it looks like something other than an attempt at a Unicode
       // special character escape sequence already, try to convert it
@@ -8769,6 +8770,7 @@ void pipe_output()
     error("cannot apply pipe request to empty command");
   // Are we adding to an existing pipeline?
   if (pipe_command != 0 /* nullptr */) {
+    // ISO C++ does not permit VLAs on the stack.
     // C++03: new char[strlen(pipe_command) + strlen(pc) + 1 + 1]();
     char *s = new char[strlen(pipe_command) + strlen(pc) + 1 + 1];
     (void) memset(s, 0, ((strlen(pipe_command) + strlen(pc) + 1 + 1)
@@ -8980,6 +8982,7 @@ static void parse_output_page_list(const char *p)
 static FILE *open_macro_package(const char *mac, char **path)
 {
   // Try `mac`.tmac first, then tmac.`mac`.  Expect ENOENT errors.
+  // ISO C++ does not permit VLAs on the stack.
   // C++03: new char[strlen(mac) + strlen(MACRO_POSTFIX) + 1]();
   char *s1 = new char[strlen(mac) + strlen(MACRO_POSTFIX) + 1];
   (void) memset(s1, 0, ((strlen(mac) + strlen(MACRO_POSTFIX) + 1)
@@ -8991,6 +8994,7 @@ static FILE *open_macro_package(const char *mac, char **path)
     error("cannot open macro file '%1': %2", s1, strerror(errno));
   delete[] s1;
   if (0 /* nullptr */ == fp) {
+    // ISO C++ does not permit VLAs on the stack.
     // C++03: new char[strlen(mac) + strlen(MACRO_PREFIX) + 1]();
     char *s2 = new char[strlen(mac) + strlen(MACRO_PREFIX) + 1];
     (void) memset(s2, 0, ((strlen(mac) + strlen(MACRO_PREFIX) + 1)
@@ -9122,9 +9126,10 @@ static void do_register_assignment(const char *s)
       set_register(buf, n);
   }
   else {
+    // ISO C++ does not permit VLAs on the stack.
     char *buf = new char[p - s + 1]; // C++03: new char[p - s + 1]();
     (void) memset(buf, 0, ((p - s + 1) * sizeof(char)));
-    memcpy(buf, s, p - s);
+    (void) memcpy(buf, s, p - s);
     buf[p - s] = 0;
     units n;
     if (evaluate_expression(p + 1, &n))
@@ -9152,9 +9157,10 @@ static void do_string_assignment(const char *s)
     set_string(buf, s + 1);
   }
   else {
+    // ISO C++ does not permit VLAs on the stack.
     char *buf = new char[p - s + 1]; // C++03: new char[p - s + 1]();
     (void) memset(buf, 0, ((p - s + 1) * sizeof(char)));
-    memcpy(buf, s, p - s);
+    (void) memcpy(buf, s, p - s);
     buf[p - s] = 0;
     set_string(buf, p + 1);
     delete[] buf;
@@ -9968,6 +9974,7 @@ static void copy_mode_error(const char *format,
 {
   if (want_input_ignored) {
     static const char prefix[] = "(in ignored input) ";
+    // ISO C++ does not permit VLAs on the stack.
     // C++03: new char[sizeof prefix + strlen(format)]();
     char *s = new char[sizeof prefix + strlen(format)];
     (void) memset(s, 0, (sizeof prefix + (strlen(format)

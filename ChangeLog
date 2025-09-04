@@ -1,3 +1,11 @@
+2025-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(read_long_escape_parameters, do_get_long_name)
+	(get_delimited_name, do_register_assignment)
+	(do_string_assignment): Explicitly cast unused function return
+	values to `void`.
+
 2025-09-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/html.tmac:
