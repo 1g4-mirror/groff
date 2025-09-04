@@ -1362,7 +1362,7 @@
 	* tests/flush-long-displays-at-end-of-input.sh: Do it.
 	* mm.am (mm_TESTS): Run test.
 
-2023-08-16 G. Branden Robinson <g.branden.robinson@gmail.com>
+2023-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* groff_mm.7.man: Document difference from DWB in paragraph
 	indentation for semi-blocked letter style.  Correct
@@ -1370,20 +1370,20 @@
 
 	Fixes <https://savannah.gnu.org/bugs/?64315>.
 
-2023-07-04 G. Branden Robinson <g.branden.robinson@gmail.com>
+2023-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac: Stop suppressing warnings if Boolean register `Ref` is
 	true.  Diagnostic output does not interfere with index/reference
 	output, the lines of which are prefixed in a way that is not
 	confusable with warnings.
 
-2023-06-30 G. Branden Robinson <g.branden.robinson@gmail.com>
+2023-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (IND): Throw error if vertical drawing position is
 	negative.  (What page number can be recorded when that is the
 	case?)  Thanks to Damian McGuckin for raising this scenario.
 
-2023-06-30 G. Branden Robinson <g.branden.robinson@gmail.com>
+2023-06-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Trivially refactor.
 
@@ -1428,7 +1428,7 @@
 	followed by any formatting changes appropriate to the index
 	entries, belongs to `TYIND`.
 
-2023-07-04 G. Branden Robinson <g.branden.robinson@gmail.com>
+2023-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (IND): Use `hd@mark-trimmed` instead of `hd*mark` in
 	index entries, just as is done with references; we don't want
