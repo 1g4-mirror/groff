@@ -143,22 +143,18 @@
 	* gperl.pl, gperl.man, ChangeLog, Makefile.sub:
 	first version 1.0
 
-2014-02-25  Bernd Warken  <groff-bernd.warken-72@web.de>
 ________________________________________________________________________
-License
 
-Copyright (C) 2014-2020 Free Software Foundation, Inc.
-Written by Bernd Warken <groff-bernd.warken-72@web.de>.
+Copyright 2014-2021 Free Software Foundation, Inc.
+Copyright      2025 G. Branden Robinson
 
-Copying and distribution of this file, with or without
-modification, are permitted provided the copyright notice and this
-notice are preserved.
-
-This file is part of `gperl', which is part of the `groff'
-project.
-
-##### Editor settings
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
 
 Local Variables:
+fill-column: 72
 mode: change-log
+version-control: never
 End:
+vim:set autoindent textwidth=72:
