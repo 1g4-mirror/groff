@@ -300,7 +300,7 @@
 	* mom.am: Delete one INSTALL_SHIPPED_HTML and one BUILD_EXAMPLES
 	conditional and use BUILD_PDFDOC instead of BUILD_PDFEXAMPLES.
 
-2021-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+2022-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mom.am: Eliminate `MOM_TFLAG` and `MOM_PFLAG` Make macros;
 	they were expanded in only one place.
