@@ -1,5 +1,10 @@
 2025-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::dump): Report Unicode
+	mapping corresponding to character.
+
+2025-09-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename `charinfo` class's member
 	function `get_unicode_code()` to `get_unicode_mapping()`.
 

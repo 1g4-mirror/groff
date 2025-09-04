@@ -10434,6 +10434,17 @@ void charinfo::dump()
     }
     errprint(")\n");
   }
+  int mapping = get_unicode_mapping();
+  if (mapping >= 0) {
+    const size_t buflen = 6; // enough for five hex digits + '\0'
+    char hexbuf[buflen];
+    (void) memset(hexbuf, '\0', buflen);
+    (void) snprintf(hexbuf, buflen, "%.4X", mapping);
+    errprint("  Unicode mapping: U+%1\n", hexbuf);
+  }
+  else
+    errprint("  Unicode mapping: none (%1)\n", mapping);
+  errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
   errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
   errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
   errprint("  is%1 found\n", is_not_found ? " not" : "");
