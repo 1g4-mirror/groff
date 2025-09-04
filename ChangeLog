@@ -536,8 +536,8 @@
 2025-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp: Trivially refactor, continuing naming
-	reform of functions that are troff request handlers and which
-	lists of objects or properties thereof.  Also mark these request
+	reform of functions that are troff request handlers and that
+	list objects or properties thereof.  Also mark these request
 	handlers as `static` since they do not require external linkage.
 	(fill_color_change): Rename this...
 	(select_fill_color_request): ...to this...
