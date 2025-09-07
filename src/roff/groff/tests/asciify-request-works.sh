@@ -41,30 +41,30 @@ A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 output=$(printf "%s\n" "$input" | "$groff" -T ps -a)
 echo "$output"
 
-echo "checking undiversion of ordinary character 'A'" >&2
+echo "checking textification of ordinary character 'A'" >&2
 echo "$output" | grep -q '^A' || wail
 
-echo "checking undiversion of special character 'dq'" >&2
+echo "checking textification of special character 'dq'" >&2
 echo "$output" | grep -q '<dq>' || wail
 
-echo "checking undiversion of composite special character 'e aa'" >&2
+echo "checking textification of composite special character 'e aa'" >&2
 echo "$output" | grep -q "<'e>" || wail
 
-echo "checking undiversion of Unicode special character with Latin-1" \
+echo "checking textification of Unicode special character with Latin-1" \
   "mapping 'u00E1'" >&2
 echo "$output" | grep -q "<'a>" || wail
 
-echo "checking undiversion of decomposable (with Basic Latin base" \
+echo "checking textification of decomposable (with Basic Latin base" \
   "character) Unicode special character 'u0106'" >&2
 echo "$output" | grep -q "C<aa>" || wail
 
-echo "checking undiversion of ligature special character 'fl'" >&2
+echo "checking textification of ligature special character 'fl'" >&2
 echo "$output" | grep -q "i<fl>" || wail
 
-echo "checking undiversion of ligature special character 'Fl'" >&2
+echo "checking textification of ligature special character 'Fl'" >&2
 echo "$output" | grep -q "of<fl>" || wail
 
-echo "checking undiversion of user-defined special character 'Z'" >&2
+echo "checking textification of user-defined special character 'Z'" >&2
 echo "$output" | grep -q "ZYX" || wail
 
 test -z "$fail"
