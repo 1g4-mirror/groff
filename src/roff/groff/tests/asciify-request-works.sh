@@ -31,6 +31,11 @@ input='.
 .ec #
 .char #[Z] ZYX
 A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
+.br
+1@#&2@#)3@#c
+4@#c
+.tag foo
+5@#X"bar"6@#v".5v"7@
 .ec
 .br
 .box
@@ -66,6 +71,26 @@ echo "$output" | grep -q "of<fl>" || wail
 
 echo "checking textification of user-defined special character 'Z'" >&2
 echo "$output" | grep -q "ZYX" || wail
+
+echo "checking textification of dummy character escape sequence" >&2
+echo "$output" | grep -q "1@2" || wail
+
+echo "checking textification of EOS-transparent dummy character" \
+   "escape sequence" >&2
+echo "$output" | grep -q "2@3" || wail
+
+echo "checking textification of output line continuation escape" \
+   "sequence" >&2
+echo "$output" | grep -q "3@4" || wail
+
+echo "checking textification of tag request" >&2
+echo "$output" | grep -q "4@5" || wail
+
+echo "checking textification of device extension escape sequence" >&2
+echo "$output" | grep -q "5@6" || wail
+
+echo "checking textification of vertical motion escape sequence" >&2
+echo "$output" | grep -q "6@7" || wail
 
 test -z "$fail"
 

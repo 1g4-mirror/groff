@@ -1,3 +1,9 @@
+2025-09-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/asciify-request-works.sh: Add test cases
+	for null transformation (removal) of `\&`, `\(`, `\c`, `.tag`,
+	`\X`, and `\v`.
+
 2025-09-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Fix.
