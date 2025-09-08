@@ -5719,10 +5719,13 @@ unless the letterhead is desired on subsequent pages.
 .TP
 .BI let@sg_ type\~\c
 .IR "name title n is-final\~" [ SG-arg\~ .\|.\|.]
+is called by
 .B SG
-calls this macro only for letters;
+only for
+.B LT
+letters;
 .B MT
-memoranda have their own signature processing.
+memoranda implement their own signature processing.
 .
 .I name
 and
@@ -5745,9 +5748,9 @@ arguments are appended to the signature line.
 .
 .TP
 .BI let@fc_ "type closing"
-This macro is called by
+is called by
 .BR FC ,
-and has the formal closing as the argument.
+and takes the formal closing as its argument.
 .
 .
 .P
