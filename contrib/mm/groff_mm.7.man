@@ -705,7 +705,7 @@ cover page style.
 If not defined
 (the default),
 internally defined macros handle this task;
-see sections \[lq]Internals\[rq] and \[lq]Files\[rq] below.
+see subsection \[lq]Internals\[rq] and section \[lq]Files\[rq] below.
 .
 Applications include setting the firm name in a different font family
 or at a larger type size,
@@ -2702,7 +2702,7 @@ Letter options specified with
 .B LO
 add further annotations,
 which are extensible;
-see section \[lq]Internals\[rq] below.
+see subsection \[lq]Internals\[rq] below.
 .
 .
 .br
@@ -3568,7 +3568,7 @@ memoranda.
 The format of a signature block depends on the letter or memorandum
 type.
 .
-See section \[lq]Internals\[rq] below.
+See subsection \[lq]Internals\[rq] below.
 .
 .
 .IP
@@ -5656,7 +5656,7 @@ see
 .
 .
 .\" ====================================================================
-.SH Internals
+.SS Internals
 .\" ====================================================================
 .
 The argument
