@@ -1,3 +1,10 @@
+2025-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (class charinfo_node): Make class more
+	obviously abstract--the obvious intention of the hierarchy--by
+	annotating it and marking member functions (apart from the
+	constructor) as `virtual`.
+
 2025-09-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/asciify-request-works.sh: Add test cases

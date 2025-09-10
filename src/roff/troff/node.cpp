@@ -1913,15 +1913,16 @@ void suppress_output_file::really_transparent_char(unsigned char)
 
 /* glyphs, ligatures, kerns, discretionary breaks */
 
+// abstract
 class charinfo_node : public node {
 protected:
   charinfo *ci;
 public:
   charinfo_node(charinfo *, statem *, int, node * = 0 /* nullptr */);
-  int ends_sentence();
-  bool overlaps_vertically();
-  bool overlaps_horizontally();
-  void dump_properties();
+  virtual int ends_sentence();
+  virtual bool overlaps_vertically();
+  virtual bool overlaps_horizontally();
+  virtual void dump_properties();
 };
 
 charinfo_node::charinfo_node(charinfo *c, statem *s, int divlevel,
