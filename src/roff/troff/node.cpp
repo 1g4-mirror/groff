@@ -3904,15 +3904,21 @@ void glyph_node::asciify(macro *m)
 
 void kern_pair_node::asciify(macro *m)
 {
-  n1->asciify(m);
-  n2->asciify(m);
+  assert(n1 != 0 /* nullptr */);
+  assert(n2 != 0 /* nullptr */);
+  if (n1 != 0 /* nullptr */)
+    n1->asciify(m);
+  if (n2 != 0 /* nullptr */)
+    n2->asciify(m);
   n1 = n2 = 0 /* nullptr */;
   delete this;
 }
 
 static void asciify_reverse_node_list(macro *m, node *n)
 {
-  if (0 /* nullptr */ == n)
+  assert(m != 0 /* nullptr */);
+  assert(n != 0 /* nullptr */);
+  if ((0 /* nullptr */ == m) || (0 /* nullptr */ == n))
     return;
   asciify_reverse_node_list(m, n->next);
   n->asciify(m);
@@ -3920,39 +3926,45 @@ static void asciify_reverse_node_list(macro *m, node *n)
 
 void dbreak_node::asciify(macro *m)
 {
-  asciify_reverse_node_list(m, none);
-  none = 0 /* nullptr */;
+  assert(m != 0 /* nullptr */);
+  if (m != 0 /* nullptr */)
+    asciify_reverse_node_list(m, none);
   delete this;
 }
 
 void ligature_node::asciify(macro *m)
 {
-  n1->asciify(m);
-  n2->asciify(m);
+  assert(n1 != 0 /* nullptr */);
+  assert(n2 != 0 /* nullptr */);
+  if (n1 != 0 /* nullptr */)
+    n1->asciify(m);
+  if (n2 != 0 /* nullptr */)
+    n2->asciify(m);
   n1 = n2 = 0 /* nullptr */;
   delete this;
 }
 
 void break_char_node::asciify(macro *m)
 {
-  nodes->asciify(m);
-  nodes = 0 /* nullptr */;
+  assert(nodes != 0 /* nullptr */);
+  if (nodes != 0 /* nullptr */)
+    nodes->asciify(m);
   delete this;
 }
 
 void italic_corrected_node::asciify(macro *m)
 {
-  nodes->asciify(m);
-  nodes = 0 /* nullptr */;
+  assert(nodes != 0 /* nullptr */);
+  if (nodes != 0 /* nullptr */)
+    nodes->asciify(m);
   delete this;
 }
 
 void left_italic_corrected_node::asciify(macro *m)
 {
-  if (nodes != 0 /* nullptr */) {
+  assert(nodes != 0 /* nullptr */);
+  if (nodes != 0 /* nullptr */)
     nodes->asciify(m);
-    nodes = 0 /* nullptr */;
-  }
   delete this;
 }
 

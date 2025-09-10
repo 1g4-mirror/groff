@@ -1,5 +1,28 @@
 2025-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Add more `assert()`ions and validity
+	checks to node classes' `asciify()` member functions, eliminate
+	unnecessary statements, and more consistently delete node
+	objects after `asciify`-ing them.  (The `asciify` request
+	modifies a macro/string/diversion--usually a diversion--in
+	place.)
+	(kern_pair_node::asciify, ligature_node::asciify): `assert()`
+	that each of the contained nodes is not a null pointer and do
+	not recursively `asciify()` them if they are.
+	(asciify_reverse_node_list): `assert()` that macro and node
+	pointer arguments are not null, and return early if they are.
+	(dbreak_node::asciify): `assert()` that macro pointer argument
+	is not null, and do not call `asciify_reverse_node_list()` on it
+	if it is.  Also drop dead store (pointless assignment) to member
+	variable just before deleting the object.
+	(break_char_node::asciify, italic_corrected_node::asciify)
+	(left_italic_corrected_node::asciify): `assert()` that macro
+	pointer argument is not null, and do not recursively `asciify()`
+	it if it is.  Also drop dead store (pointless assignment) to
+	member variable just before deleting the object.
+
+2025-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (class charinfo_node): Make class more
 	obviously abstract--the obvious intention of the hierarchy--by
 	annotating it and marking member functions (apart from the
