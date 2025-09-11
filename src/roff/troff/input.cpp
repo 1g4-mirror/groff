@@ -1290,6 +1290,7 @@ class non_interpreted_char_node : public node {
   unsigned char c;
 public:
   non_interpreted_char_node(unsigned char);
+  void asciify(macro *);
   node *copy();
   bool interpret(macro *);
   bool is_same_as(node *);
@@ -1321,6 +1322,11 @@ bool non_interpreted_char_node::is_tag()
 non_interpreted_char_node::non_interpreted_char_node(unsigned char cc) : c(cc)
 {
   assert(cc != 0);
+}
+
+void non_interpreted_char_node::asciify(macro *)
+{
+  delete this;
 }
 
 node *non_interpreted_char_node::copy()
