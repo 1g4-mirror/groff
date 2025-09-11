@@ -1285,6 +1285,7 @@ static int get_copy(node **nd, bool is_defining, bool handle_escape_E)
   }
 }
 
+// \a or \t
 class non_interpreted_char_node : public node {
   unsigned char c;
 public:
@@ -5999,6 +6000,7 @@ void read_title_parts(node **part, hunits *part_width)
     tok.next();
 }
 
+// contents of `\?...\?`
 class non_interpreted_node : public node {
   macro mac;
 public:

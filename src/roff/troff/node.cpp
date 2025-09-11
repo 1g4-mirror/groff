@@ -3814,7 +3814,7 @@ void vline_node::vertical_extent(vunits *min, vunits *max)
   }
 }
 
-/* ascii_print methods */
+// `ascii_print()` represents a node for `troff -a`
 
 static void ascii_print_node_list(ascii_output_file *ascii, node *n)
 {
@@ -3882,7 +3882,10 @@ void zero_width_node::ascii_print(ascii_output_file *out)
   ascii_print_node_list(out, nodes);
 }
 
-/* asciify methods */
+// `asciify()` extracts the simple character content of a node; this is
+// a plain text (but not necessarily plain "ASCII") representation
+// suitable for storage in a groff string or embedding in a device
+// extension command escape sequence (as for PDF metadata).
 
 void node::asciify(macro *m)
 {
@@ -4016,7 +4019,6 @@ void line_start_node::asciify(macro *)
   delete this;
 }
 
-// TODO: If we chose a delimiter, we could undivert these.
 void vertical_size_node::asciify(macro *)
 {
   delete this;
@@ -4024,31 +4026,24 @@ void vertical_size_node::asciify(macro *)
 
 void dummy_node::asciify(macro *)
 {
-  // TODO: m->append(ESCAPE_AMPERSAND); ?
   delete this;
 }
 
 void transparent_dummy_node::asciify(macro *)
 {
-  // TODO: m->append(ESCAPE_c); ?
   delete this;
 }
 
-// XXX: Could tag_node justify itself as a kind of device_extension_node
-// that can't be undiverted?
 void tag_node::asciify(macro *)
 {
   delete this;
 }
 
-// TODO: If we knew what delimiter to select, we could undivert these,
-// but the macro's character list could contain anything.
 void device_extension_node::asciify(macro *)
 {
   delete this;
 }
 
-// TODO: If we chose a delimiter, we could undivert these.
 void vmotion_node::asciify(macro *)
 {
   delete this;

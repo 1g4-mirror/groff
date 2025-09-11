@@ -188,6 +188,7 @@ public:
   const char *type();
 };
 
+// Represent a space of any width, including zero.
 class space_node : public node {
 private:
 protected:
