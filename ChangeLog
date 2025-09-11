@@ -1,5 +1,15 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: "Asciify" bracket nodes as nothing.  (Bracket nodes are
+	produced by the `\b` bracket-building escape sequence.)
+
+	* src/roff/troff/node.h (class bracket_node): Declare `asciify`
+	member function, thus overriding base class.
+	* src/roff/troff/node.cpp (bracket_node::asciify): New member
+	function simply deletes `this`.
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/asciify-request-works.sh: Add test case
 	for transformation of nodes produced by `\b` (bracket-building
 	escape sequence).

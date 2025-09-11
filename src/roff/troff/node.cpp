@@ -4050,6 +4050,11 @@ void vmotion_node::asciify(macro *)
   delete this;
 }
 
+void bracket_node::asciify(macro *)
+{
+  delete this;
+}
+
 void hyphen_inhibitor_node::asciify(macro *)
 {
   delete this;

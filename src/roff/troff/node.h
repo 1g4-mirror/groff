@@ -563,6 +563,7 @@ class bracket_node : public container_node {
 public:
   bracket_node();
   bracket_node(statem *, int);
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   void bracket(node *);	// add another node to be overstruck
