@@ -27,10 +27,11 @@ wail () {
 }
 
 input='.
-.box DIV
 .ec #
-foobar	baz#" leader, then tab
+!#?qux#?!
 .br
+.box DIV
+foobar	baz#" leader, then tab
 .char #[Z] ZYX
 A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 .br
@@ -39,7 +40,8 @@ A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 .tag foo
 .ds tab #t#"
 .ds leader #a#"
-5@#X"bar"6@#v".5v"7@#*[tab]8@#h"2m"9@# 10@#~11@#:12@#*[leader]13@
+5@#X"bar"6@#v".5v"7@#*[tab]8@#h"2m"9@# 10@#~11@#:12@#*[leader]13@#
+#?jat#?14@
 .ec
 .br
 .box
@@ -113,6 +115,12 @@ echo "$output" | grep -q "11@12" || wail
 
 echo "checking textification of uninterpreted leader escape sequence" >&2
 echo "$output" | grep -q "12@13" || wail
+
+echo "checking textification of non-diverted uninterpreted character sequence escape sequence" >&2
+echo "$output" | grep -q '!!' || wail
+
+echo "checking textification of diverted uninterpreted character sequence escape sequence" >&2
+echo "$output" | grep -q '13@jat14' || wail
 
 test -z "$fail"
 

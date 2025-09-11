@@ -1,5 +1,12 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/asciify-request-works.sh: Add test case
+	for transformation of nodes produced by `\?` (uninterpreted
+	character sequence escape sequence).  Check both diverted and
+	undiverted scenarios.
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/asciify-request-works.sh: Add test cases
 	for transformation of nodes produced by leaders and tabs.
 
