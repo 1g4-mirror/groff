@@ -1,5 +1,11 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/asciify-request-works.sh: Add test case
+	for transformation of nodes produced by `\b` (bracket-building
+	escape sequence).
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor.  Explicitly "asciify" hyphen inhibitor nodes
 	as nothing.  These correspond to the `\%` escape sequence at the
 	beginning of a word.

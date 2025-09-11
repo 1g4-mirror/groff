@@ -49,7 +49,7 @@ A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 .br
 .ec $
 .box DIV2
-$%antimatter15@
+$%antimatter15@$b"hup"16@
 .br
 .box
 .asciify DIV2
@@ -132,6 +132,9 @@ echo "$output" | grep -q '13@jat14' || wail
 
 echo "checking textification of hyphenation inhibitor escape sequence" >&2
 echo "$output" | grep -q '^antimatter15' || wail
+
+echo "checking textification of bracket-building escape sequence" >&2
+echo "$output" | grep -q '15@16' || wail
 
 test -z "$fail"
 
