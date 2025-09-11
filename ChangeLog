@@ -1,3 +1,19 @@
+2025-08-03  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Handle TTF->PFB converted fonts better, and
+	restore cut'n'paste handling of '\-' mapped to U+2212.
+
+	* src/devices/gropdf/gropdf.pl (FindChr): Some fonts
+	invent Unicode Code Points for characters which have
+	no sanctioned UCP, use the base UCP.
+	(LoadFont): Handle 6 char UCPs.
+	(LoadFont, AssignGlyph): Restore functionality of
+	mapping U+2212 (minus) to U+002D (hyphen) when cutting
+	and pasting from a pdf.
+	(Subset): Other 'naughty' fonts use hyphen(s) when
+	assigning a postscript name to a glyph (e.g. 'f-f-i'),
+	allow it.
+
 2025-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am (DOC_GROFF): Move `-M` option that is present only

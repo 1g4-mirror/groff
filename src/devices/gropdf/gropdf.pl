@@ -2159,7 +2159,7 @@ sub FindChr
 	}
 	elsif (defined($thisfnt->{NAM}->{$ch}->[UNICODE]))
 	{
-	    return pack('U',hex($thisfnt->{NAM}->{$ch}->[UNICODE]))
+	    return pack('U',hex(substr($thisfnt->{NAM}->{$ch}->[UNICODE],0,4)));
 	}
     }
     elsif ($ch=~m/^\w+$/)       # ligature not in font i.e. \(ff
@@ -3451,11 +3451,11 @@ sub LoadFont
 
 	    $r[3]=oct($r[3]) if substr($r[3],0,1) eq '0';
 	    $r[4]=$r[0] if !defined($r[4]);
-	    $r[6]=$1 if !defined($r[6] and defined($r[5]) and $r[5]=~m/^-- ([0-9A-F]{4})/);
+	    $r[6]=$1 if !defined($r[6] and defined($r[5]) and $r[5]=~m/^-- ([0-9A-F]{4,6})/);
 	    if (exists($fnt{NAM}->{$r[0]}))
 	    {
 		# Prefer postscript names other than 'uni' or 'afii' as primary
-		if ($fnt{NAM}->{$r[0]}->[2]=~m'^/(:afii\d{5}|uni[A-F0-9]{4,5})')
+		if ($fnt{NAM}->{$r[0]}->[2]=~m'^/(:afii\d{5}|uni[A-F0-9]{4,6})')
 		{
 		    my $n=$fnt{NAM}->{$r[0]}->[1];
 		    $fnt{NAM}->{"#$n"}=$fnt{NAM}->{$r[0]};
@@ -3547,7 +3547,7 @@ sub LoadFont
     $fontlst{$fontno}->{NM}='/F'.$fontno;
     $fontlst{$fontno}->{FNT}=\%fnt;
 
-    if (defined($fnt{encoding}) and $fnt{encoding} eq 'text.enc' and $ucmap ne '')
+    if ($ucmap ne '')
     {
 	if ($textenccmap eq '')
 	{
@@ -4517,7 +4517,7 @@ sub AssignGlyph
     {
 	($chf->[MINOR],$chf->[MAJOR])=($chf->[CHRCODE],0);
     }
-    elsif ($chf->[CHRCODE] == 173)
+    elsif ($chf->[UNICODE] eq "2212") # minus
     {
 	($chf->[MINOR],$chf->[MAJOR])=(31,0);
     }
@@ -5096,7 +5096,7 @@ sub Subset
     my $glyphs=shift;
     my $extra=shift;
 
-    foreach my $g ($glyphs=~m/(\/[.\w]+)/g)
+    foreach my $g ($glyphs=~m/(\/[.\w-]+)/g)
     {
 	if (exists($sec{$g}))
 	{
