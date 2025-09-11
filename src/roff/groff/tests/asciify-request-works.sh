@@ -29,6 +29,8 @@ wail () {
 input='.
 .box DIV
 .ec #
+foobar	baz#" leader, then tab
+.br
 .char #[Z] ZYX
 A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 .br
@@ -49,7 +51,7 @@ output=$(printf "%s\n" "$input" | "$groff" -T ps -a)
 echo "$output"
 
 echo "checking textification of ordinary character 'A'" >&2
-echo "$output" | grep -q '^A' || wail
+echo "$output" | grep -q ' A' || wail
 
 echo "checking textification of special character 'dq'" >&2
 echo "$output" | grep -q '<dq>' || wail
