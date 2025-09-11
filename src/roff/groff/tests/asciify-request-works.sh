@@ -36,7 +36,7 @@ A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 4@#c
 .tag foo
 .ds tab #t#"
-5@#X"bar"6@#v".5v"7@#*[tab]8@#h"2m"9@# 10@
+5@#X"bar"6@#v".5v"7@#*[tab]8@#h"2m"9@# 10@#~11@
 .ec
 .br
 .box
@@ -101,6 +101,9 @@ echo "$output" | grep -q "8@9" || wail
 
 echo "checking textification of unadjustable space escape sequence" >&2
 echo "$output" | grep -q "9@ 10" || wail
+
+echo "checking textification of unbreakable space escape sequence" >&2
+echo "$output" | grep -q "10@ 11" || wail
 
 test -z "$fail"
 

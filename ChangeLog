@@ -1,5 +1,11 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/asciify-request-works.sh: Add test case
+	for transformation of node produced by `\~` (unbreakable space)
+	escape sequence.
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (space_char_hmotion_node::asciify):
 	Asciify a space character horizontal motion node (the kind
 	produced by the `\ ` unadjustable space escape sequence) as an
