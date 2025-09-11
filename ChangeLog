@@ -1,5 +1,11 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/asciify-request-works.sh: Add test case
+	for transformation of node produced by `\a` (uninterpreted
+	leader) escape sequence.
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: "Asciify" token nodes as nothing.  Token nodes are used
 	only internally to manipulate the input stream; they don't
 	directly correspond to any sort of document feature.
