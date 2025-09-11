@@ -3968,14 +3968,9 @@ void left_italic_corrected_node::asciify(macro *m)
   delete this;
 }
 
-void hmotion_node::asciify(macro *m)
+void hmotion_node::asciify(macro *)
 {
-  if (was_tab) {
-    m->append('\t');
-    delete this;
-  }
-  else
-    m->append(this);
+  delete this;
 }
 
 space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,

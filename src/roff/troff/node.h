@@ -346,7 +346,7 @@ public:
 class hmotion_node : public node {
 protected:
   hunits n;
-  bool was_tab;
+  bool was_tab;			// needed by `unformat`
   bool unformat;
   color *col;			/* for grotty */
 public:

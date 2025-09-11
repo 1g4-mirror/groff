@@ -1,5 +1,18 @@
 2025-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (hmotion_node::asciify): Stop
+	asciifying a horizontal motion node that was a tab character as
+	a tab; instead delete it like any other horizontal motion.  We
+	have no semantics for tab characters in, for example, the
+	parameters of device extension commands.  Ensure that the node
+	object is deleted on every path through the function (now
+	trivial).
+	* src/roff/groff/tests/asciify-request-works.sh: Add test cases
+	for transformation of nodes produced by `\t` and `\h` escape
+	sequences.
+
+2025-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Add more `assert()`ions and validity
 	checks to node classes' `asciify()` member functions, eliminate
 	unnecessary statements, and more consistently delete node
