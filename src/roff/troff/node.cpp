@@ -4012,7 +4012,7 @@ void word_space_node::asciify(macro *m)
 
 void unbreakable_space_node::asciify(macro *m)
 {
-  m->append(ESCAPE_TILDE);
+  m->append(' ');
   delete this;
 }
 
