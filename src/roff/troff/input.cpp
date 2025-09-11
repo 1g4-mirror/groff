@@ -1881,6 +1881,7 @@ class token_node : public node {
 public:
   token tk;
   token_node(const token &t);
+  void asciify(macro *);
   node *copy();
   token_node *get_token_node();
   bool is_same_as(node *);
@@ -1891,6 +1892,12 @@ public:
 
 token_node::token_node(const token &t) : tk(t)
 {
+}
+
+void token_node::asciify(macro *)
+{
+  assert(0 == "attempting to 'asciify' a `token_node`");
+  delete this;
 }
 
 node *token_node::copy()

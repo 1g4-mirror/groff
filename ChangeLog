@@ -1,5 +1,16 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: "Asciify" token nodes as nothing.  Token nodes are used
+	only internally to manipulate the input stream; they don't
+	directly correspond to any sort of document feature.
+
+	* src/roff/troff/node.h (class token_node): Declare `asciify`
+	member function, thus overriding base class.
+	* src/roff/troff/node.cpp (token_node::asciify): Plant land mine
+	with `assert()`.  Delete the `this` object and return.
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: "Asciify" (plain) space nodes as nothing.  (Plain space
 	nodes--contrast word space nodes and others--are produced by the
 	formatter with a width of zero (`H0`) in nearly all cases.  The
