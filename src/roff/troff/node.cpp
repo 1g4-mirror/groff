@@ -4244,6 +4244,7 @@ hyphenation_type overstrike_node::get_hyphenation_type()
 
 hyphenation_type space_node::get_hyphenation_type()
 {
+  // XXX: This conditional seems to have no practical consequence. --GBR
   if (was_escape_colon)
     return HYPHEN_MIDDLE;
   return HYPHEN_BOUNDARY;
