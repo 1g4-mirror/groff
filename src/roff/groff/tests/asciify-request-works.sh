@@ -36,7 +36,7 @@ A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 4@#c
 .tag foo
 .ds tab #t#"
-5@#X"bar"6@#v".5v"7@#*[tab]8@#h"2m"9@
+5@#X"bar"6@#v".5v"7@#*[tab]8@#h"2m"9@# 10@
 .ec
 .br
 .box
@@ -98,6 +98,9 @@ echo "$output" | grep -q "7@8" || wail
 
 echo "checking textification of (plain) horizontal motion escape sequence" >&2
 echo "$output" | grep -q "8@9" || wail
+
+echo "checking textification of unadjustable space escape sequence" >&2
+echo "$output" | grep -q "9@ 10" || wail
 
 test -z "$fail"
 

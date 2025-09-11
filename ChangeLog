@@ -1,3 +1,9 @@
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/asciify-request-works.sh: Add test case
+	for transformation of node produced by `\ ` (unadjustable space)
+	escape sequence.
+
 2025-09-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (hmotion_node::asciify): Stop
