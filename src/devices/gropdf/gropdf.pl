@@ -4517,7 +4517,7 @@ sub AssignGlyph
     {
 	($chf->[MINOR],$chf->[MAJOR])=($chf->[CHRCODE],0);
     }
-    elsif ($chf->[UNICODE] eq "2212") # minus
+    elsif (defined($chf->[UNICODE]) and $chf->[UNICODE] eq "2212") # minus
     {
 	($chf->[MINOR],$chf->[MAJOR])=(31,0);
     }

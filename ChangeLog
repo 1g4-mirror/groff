@@ -1,4 +1,14 @@
-2025-08-03  Deri James  <deri@chuzzlewit.myzen.co.uk>
+2025-09-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Fix.
+
+	* src/devices/gropdf/gropdf.pl (AssignGlyph): Check
+	if the glyph has a Unicode value before testing it!!!
+
+	Fixes <https://savannah.gnu.org/bugs/?67501> thanks to
+	Branden for the "heads up".
+
+2025-09-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Handle TTF->PFB converted fonts better, and
 	restore cut'n'paste handling of '\-' mapped to U+2212.
