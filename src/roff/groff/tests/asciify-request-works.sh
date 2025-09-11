@@ -30,7 +30,7 @@ input='.
 .ec #
 !#?qux#?!
 .br
-.box DIV
+.box DIV1
 foobar	baz#" leader, then tab
 .char #[Z] ZYX
 A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
@@ -42,11 +42,19 @@ A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 .ds leader #a#"
 5@#X"bar"6@#v".5v"7@#*[tab]8@#h"2m"9@# 10@#~11@#:12@#*[leader]13@#
 #?jat#?14@
-.ec
 .br
 .box
-.asciify DIV
-.DIV
+.asciify DIV1
+.DIV1
+.br
+.ec $
+.box DIV2
+$%antimatter15@
+.br
+.box
+.asciify DIV2
+.DIV2
+.ec
 .'
 
 output=$(printf "%s\n" "$input" | "$groff" -T ps -a)
@@ -121,6 +129,9 @@ echo "$output" | grep -q '!!' || wail
 
 echo "checking textification of diverted uninterpreted character sequence escape sequence" >&2
 echo "$output" | grep -q '13@jat14' || wail
+
+echo "checking textification of hyphenation inhibitor escape sequence" >&2
+echo "$output" | grep -q '^antimatter15' || wail
 
 test -z "$fail"
 
