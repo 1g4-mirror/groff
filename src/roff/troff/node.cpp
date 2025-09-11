@@ -3989,7 +3989,7 @@ space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
 
 void space_char_hmotion_node::asciify(macro *m)
 {
-  m->append(ESCAPE_SPACE);
+  m->append(' ');
   delete this;
 }
 

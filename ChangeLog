@@ -1,5 +1,15 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (space_char_hmotion_node::asciify):
+	Asciify a space character horizontal motion node (the kind
+	produced by the `\ ` unadjustable space escape sequence) as an
+	ordinary space instead of an `ESCAPE_SPACE` token.  The latter
+	is not necessary for the `asciify` request's revised charter
+	{and only known application to date} of making diversion
+	contents fit for use as device extension command arguments.
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/asciify-request-works.sh: Add test case
 	for transformation of node produced by `\ ` (unadjustable space)
 	escape sequence.
