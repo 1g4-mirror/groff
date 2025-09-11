@@ -2591,6 +2591,7 @@ hyphen_list *kern_pair_node::get_hyphen_list(hyphen_list *tail,
 class hyphen_inhibitor_node : public node {
 public:
   hyphen_inhibitor_node(node * = 0 /* nullptr */);
+  void asciify(macro *);
   node *copy();
   bool causes_tprint();
   bool is_tag();
@@ -4045,6 +4046,11 @@ void device_extension_node::asciify(macro *)
 }
 
 void vmotion_node::asciify(macro *)
+{
+  delete this;
+}
+
+void hyphen_inhibitor_node::asciify(macro *)
 {
   delete this;
 }
