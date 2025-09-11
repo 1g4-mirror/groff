@@ -3993,14 +3993,9 @@ void space_char_hmotion_node::asciify(macro *m)
   delete this;
 }
 
-void space_node::asciify(macro *m)
+void space_node::asciify(macro *)
 {
-  if (was_escape_colon) {
-    m->append(ESCAPE_COLON);
-    delete this;
-  }
-  else
-    m->append(this);
+  delete this;
 }
 
 void word_space_node::asciify(macro *m)

@@ -1,5 +1,16 @@
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: "Asciify" (plain) space nodes as nothing.  (Plain space
+	nodes--contrast word space nodes and others--are produced by the
+	formatter with a width of zero (`H0`) in nearly all cases.  The
+	exception is when a space node is copied, which case the
+	destination space node gets whatever width its source had.)
+
+	* src/roff/troff/node.cpp (space_node::asciify): Simplify;
+	member function now simply deletes `this`.
+
+2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/asciify-request-works.sh: Add test case
 	for transformation of node produced by `\:` (hyphenless
 	breakpoint) escape sequence.
