@@ -6013,6 +6013,7 @@ class non_interpreted_node : public node {
 public:
   non_interpreted_node(const macro &);
   bool interpret(macro *);
+  void asciify(macro *);
   node *copy();
   int ends_sentence();
   bool is_same_as(node *);
@@ -6048,6 +6049,11 @@ bool non_interpreted_node::causes_tprint()
 bool non_interpreted_node::is_tag()
 {
   return false;
+}
+
+void non_interpreted_node::asciify(macro *)
+{
+  delete this;
 }
 
 node *non_interpreted_node::copy()
