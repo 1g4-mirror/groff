@@ -2,27 +2,25 @@
 
 	[gropdf]: Fix.
 
-	* src/devices/gropdf/gropdf.pl (AssignGlyph): Check
-	if the glyph has a Unicode value before testing it!!!
+	* src/devices/gropdf/gropdf.pl (AssignGlyph): Check if the glyph
+	has a Unicode value before testing it!!!
 
-	Fixes <https://savannah.gnu.org/bugs/?67501> thanks to
-	Branden for the "heads up".
+	Fixes <https://savannah.gnu.org/bugs/?67501> thanks to Branden
+	for the "heads up".
 
 2025-09-11  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	[gropdf]: Handle TTF->PFB converted fonts better, and
-	restore cut'n'paste handling of '\-' mapped to U+2212.
+	[gropdf]: Handle TTF->PFB converted fonts better, and restore
+	cut'n'paste handling of '\-' mapped to U+2212.
 
-	* src/devices/gropdf/gropdf.pl (FindChr): Some fonts
-	invent Unicode Code Points for characters which have
-	no sanctioned UCP, use the base UCP.
+	* src/devices/gropdf/gropdf.pl (FindChr): Some fonts invent
+	Unicode Code Points for characters which have no sanctioned UCP,
+	use the base UCP.
 	(LoadFont): Handle 6 char UCPs.
-	(LoadFont, AssignGlyph): Restore functionality of
-	mapping U+2212 (minus) to U+002D (hyphen) when cutting
-	and pasting from a pdf.
-	(Subset): Other 'naughty' fonts use hyphen(s) when
-	assigning a postscript name to a glyph (e.g. 'f-f-i'),
-	allow it.
+	(LoadFont, AssignGlyph): Restore functionality of mapping U+2212
+	{minus} to U+002D (hyphen) when cutting and pasting from a pdf.
+	(Subset): Other 'naughty' fonts use hyphen(s) when assigning a
+	postscript name to a glyph (e.g. 'f-f-i'), allow it.
 
 2025-09-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
