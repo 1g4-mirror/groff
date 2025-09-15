@@ -4058,6 +4058,10 @@ void hyphen_inhibitor_node::asciify(macro *)
 {
 }
 
+void vline_node::asciify(macro *)
+{
+}
+
 breakpoint *node::get_breakpoints(hunits /* width */, int /* nspaces */,
 				  breakpoint *rest, bool /* is_inner */)
 {

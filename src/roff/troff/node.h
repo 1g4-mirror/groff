@@ -456,6 +456,7 @@ public:
   vline_node(vunits, node *, node * /* nxt */ = 0 /* nullptr */);
   vline_node(vunits, node *, statem *, int,
 	     node * /* nxt */ = 0 /* nullptr */);
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   hunits width();
