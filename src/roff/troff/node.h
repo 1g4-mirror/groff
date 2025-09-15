@@ -547,6 +547,7 @@ class overstrike_node : public container_node {
 public:
   overstrike_node();
   overstrike_node(statem *, int);
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   void overstrike(node *);	// add another node to be overstruck

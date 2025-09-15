@@ -4058,6 +4058,10 @@ void hyphen_inhibitor_node::asciify(macro *)
 {
 }
 
+void overstrike_node::asciify(macro *)
+{
+}
+
 void vline_node::asciify(macro *)
 {
 }
