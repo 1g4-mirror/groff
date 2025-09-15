@@ -4046,6 +4046,10 @@ void draw_node::asciify(macro *)
 {
 }
 
+void extra_size_node::asciify(macro *)
+{
+}
+
 void hyphen_inhibitor_node::asciify(macro *)
 {
 }

@@ -321,6 +321,7 @@ public:
   extra_size_node(vunits);
   extra_size_node(vunits, statem *, int);
   void set_vertical_size(vertical_size *);
+  void asciify(macro *);
   node *copy();
   bool is_same_as(node *);
   const char *type();
