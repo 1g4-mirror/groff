@@ -1,5 +1,12 @@
 2025-09-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.h (class draw_node): Declare `asciify`
+	member function, thus overriding base class.
+	* src/roff/troff/node.cpp (draw_node::asciify): New member
+	function simply does nothing.
+
+2025-09-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/asciify-request-works.sh: Add test case
 	for transformation of nodes produced by `\D` drawing escape
 	sequences.

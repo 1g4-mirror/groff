@@ -4042,6 +4042,10 @@ void diverted_space_node::asciify(macro *)
 {
 }
 
+void draw_node::asciify(macro *)
+{
+}
+
 void hyphen_inhibitor_node::asciify(macro *)
 {
 }

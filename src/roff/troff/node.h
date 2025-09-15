@@ -666,6 +666,7 @@ public:
   ~draw_node();
   hunits width();
   vunits vertical_width();
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   bool is_same_as(node *);
