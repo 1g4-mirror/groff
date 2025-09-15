@@ -439,6 +439,7 @@ public:
   hline_node(hunits, node *, node * /* nxt */ = 0 /* nullptr */);
   hline_node(hunits, node *, statem *, int,
 	     node * /* nxt */ = 0 /* nullptr */);
+  void asciify(macro *);
   node *copy();
   hunits width();
   void tprint(troff_output_file *);
