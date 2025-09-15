@@ -55,7 +55,7 @@ $%antimatter15@$b"hup"16@$c
 .c2 !
 !sp
 .c2
-17@$D"l 1i 1i"18@$x".5v"19@
+17@$D"l 1i 1i"18@$x".5v"19@$l"1i"20@
 .br
 .box
 .asciify DIV2
@@ -150,6 +150,9 @@ echo "$output" | grep -q '17@18' || wail
 
 echo "checking textification of extra leading escape sequence" >&2
 echo "$output" | grep -q '18@19' || wail
+
+echo "checking textification of horizontal rule escape sequence" >&2
+echo "$output" | grep -q '19@20' || wail
 
 test -z "$fail"
 
