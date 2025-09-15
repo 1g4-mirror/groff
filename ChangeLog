@@ -1,3 +1,10 @@
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.h (class suppress_node): Declare
+	`asciify` member function, thus overriding base class.
+	* src/roff/troff/node.cpp (suppress_node::asciify): New member
+	function simply does nothing.
+
 2025-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.h (class overstrike_node): Declare

@@ -620,6 +620,7 @@ public:
   suppress_node(symbol, char, int);
   suppress_node(int, int, symbol, char, int, statem *, int);
   suppress_node(int, int, symbol, char, int);
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   hunits width();

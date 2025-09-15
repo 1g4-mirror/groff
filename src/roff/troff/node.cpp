@@ -4062,6 +4062,10 @@ void overstrike_node::asciify(macro *)
 {
 }
 
+void suppress_node::asciify(macro *)
+{
+}
+
 void vline_node::asciify(macro *)
 {
 }
