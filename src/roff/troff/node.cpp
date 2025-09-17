@@ -3898,10 +3898,8 @@ void glyph_node::asciify(macro *m)
   unsigned char c = ci->get_asciify_code();
   if (0U == c)
     c = ci->get_ascii_code();
-  if (c != 0U) {
+  if (c != 0U)
     m->append(c);
-    delete this;
-  }
   else
     m->append(this);
 }
@@ -3915,7 +3913,6 @@ void kern_pair_node::asciify(macro *m)
   if (n2 != 0 /* nullptr */)
     n2->asciify(m);
   n1 = n2 = 0 /* nullptr */;
-  delete this;
 }
 
 static void asciify_reverse_node_list(macro *m, node *n)
@@ -3933,7 +3930,6 @@ void dbreak_node::asciify(macro *m)
   assert(m != 0 /* nullptr */);
   if (m != 0 /* nullptr */)
     asciify_reverse_node_list(m, none);
-  delete this;
 }
 
 void ligature_node::asciify(macro *m)
@@ -3945,7 +3941,6 @@ void ligature_node::asciify(macro *m)
   if (n2 != 0 /* nullptr */)
     n2->asciify(m);
   n1 = n2 = 0 /* nullptr */;
-  delete this;
 }
 
 void break_char_node::asciify(macro *m)
@@ -3953,7 +3948,6 @@ void break_char_node::asciify(macro *m)
   assert(nodes != 0 /* nullptr */);
   if (nodes != 0 /* nullptr */)
     nodes->asciify(m);
-  delete this;
 }
 
 void italic_corrected_node::asciify(macro *m)
@@ -3961,7 +3955,6 @@ void italic_corrected_node::asciify(macro *m)
   assert(nodes != 0 /* nullptr */);
   if (nodes != 0 /* nullptr */)
     nodes->asciify(m);
-  delete this;
 }
 
 void left_italic_corrected_node::asciify(macro *m)
@@ -3969,12 +3962,10 @@ void left_italic_corrected_node::asciify(macro *m)
   assert(nodes != 0 /* nullptr */);
   if (nodes != 0 /* nullptr */)
     nodes->asciify(m);
-  delete this;
 }
 
 void hmotion_node::asciify(macro *)
 {
-  delete this;
 }
 
 space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
@@ -3994,70 +3985,57 @@ space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
 void space_char_hmotion_node::asciify(macro *m)
 {
   m->append(' ');
-  delete this;
 }
 
 void space_node::asciify(macro *)
 {
-  delete this;
 }
 
 void word_space_node::asciify(macro *m)
 {
   for (width_list *w = orig_width; w != 0 /* nullptr */; w = w->next)
     m->append(' ');
-  delete this;
 }
 
 void unbreakable_space_node::asciify(macro *m)
 {
   m->append(' ');
-  delete this;
 }
 
 void line_start_node::asciify(macro *)
 {
-  delete this;
 }
 
 void vertical_size_node::asciify(macro *)
 {
-  delete this;
 }
 
 void dummy_node::asciify(macro *)
 {
-  delete this;
 }
 
 void transparent_dummy_node::asciify(macro *)
 {
-  delete this;
 }
 
 void tag_node::asciify(macro *)
 {
-  delete this;
 }
 
 void device_extension_node::asciify(macro *)
 {
-  delete this;
 }
 
 void vmotion_node::asciify(macro *)
 {
-  delete this;
 }
 
 void bracket_node::asciify(macro *)
 {
-  delete this;
 }
 
 void hyphen_inhibitor_node::asciify(macro *)
 {
-  delete this;
 }
 
 breakpoint *node::get_breakpoints(hunits /* width */, int /* nspaces */,
@@ -4792,10 +4770,8 @@ void composite_node::asciify(macro *m)
   unsigned char c = ci->get_asciify_code();
   if (0U == c)
     c = ci->get_ascii_code();
-  if (c != 0U) {
+  if (c != 0U)
     m->append(c);
-    delete this;
-  }
   else
     m->append(this);
 }

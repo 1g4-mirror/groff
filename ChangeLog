@@ -1,3 +1,40 @@
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (glyph_node::asciify)
+	(kern_pair_node::asciify, dbreak_node::asciify)
+	(asciify_reverse_node_list, ligature_node::asciify)
+	(break_char_node::asciify, italic_corrected_node::asciify)
+	(left_italic_corrected_node::asciify)
+	(space_char_hmotion_node::asciify, space_node::asciify)
+	(word_space_node::asciify, unbreakable_space_node::asciify)
+	(line_start_node::asciify, vertical_size_node::asciify)
+	(dummy_node::asciify, transparent_dummy_node::asciify)
+	(tag_node::asciify, device_extension_node::asciify)
+	(vmotion_node::asciify, bracket_node::asciify)
+	(hyphen_inhibitor_node::asciify, composite_node::asciify): Stop
+	deleting the `this` object.  I added many of these deletions
+	recently, but several {`glyph_node`, `kern_pair_node`,
+	`dbreak_node`, `ligature_node`, `break_char_node`,
+	`italic_corrected_node`, `left_italic_corrected_node`,
+	`hmotion_node`, `space_char_hmotion_node`, `space_node`,
+	`word_space_node`, `unbreakable_space_node`, `line_start_node`,
+	`vertical_size_node`, and `composite_node`} already were in
+	groff 1.23.0, and for untold years before--sometimes only
+	conditionally depending on the node contents.  Why stop deleting
+	them?  Because the node list is actually list of (potential)
+	trees; some nodes can contain further nodes, and so on
+	recursively.  It's difficult, and there is no need to, mark the
+	root of each tree in the list so that we can return to it later
+	to delete it; instead what we can do is have the `asciify`
+	request walk the list again and perform a delete operation,
+	which due to the class hierarchy design will automatically be a
+	complete, recursive operation.  There is no reason _not_ to do
+	this because the whole point of `asciify` is to convert nodes
+	back into some form of text; the idiomatic application (and only
+	one, as seen in "om.tmac" and "e.tmac") is to convert strings or
+	diversions into PDF bookmarks or HTML URLs that are embedded in
+	a document as metadata or markup, not as formatted text.
+
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.am (EXTRA_DIST): Ship "throughput-file"
