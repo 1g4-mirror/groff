@@ -2,8 +2,20 @@
 
 	* src/roff/troff/node.h (class suppress_node): Declare
 	`asciify` member function, thus overriding base class.
-	* src/roff/troff/node.cpp (suppress_node::asciify): New member
-	function simply does nothing.
+	* src/roff/troff/node.cpp: New file-scoped global variable
+	`is_output_supressed` tracks whether output is suppressed with
+	the `\O` escape sequence.
+	(suppress_node::asciify): New member function assigns to
+	`is_output_supressed` per the escape sequence argument
+	{indirectly, via the unhelpfully named `is_on` tri-state
+	member variable.}
+	(node::asciify, glyph_node::asciify, kern_pair_node::asciify)
+	(dbreak_node::asciify, ligature_node::asciify)
+	(break_char_node::asciify, italic_corrected_node::asciify)
+	(left_italic_corrected_node::asciify)
+	(space_char_hmotion_node::asciify, word_space_node::asciify)
+	(unbreakable_space_node::asciify, composite_node::asciify):
+	Texify node contents only if output is not suppressed.
 
 2025-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 

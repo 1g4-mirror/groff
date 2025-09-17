@@ -63,6 +63,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stack>
 
+static bool is_output_supressed = false;
+
 // declarations to avoid friend name injections
 class tfont;
 class tfont_spec;
@@ -3890,29 +3892,34 @@ void zero_width_node::ascii_print(ascii_output_file *out)
 
 void node::asciify(macro *m)
 {
-  m->append(this);
+  if (!is_output_supressed)
+    m->append(this);
 }
 
 void glyph_node::asciify(macro *m)
 {
-  unsigned char c = ci->get_asciify_code();
-  if (0U == c)
-    c = ci->get_ascii_code();
-  if (c != 0U)
-    m->append(c);
-  else
-    m->append(this);
+  if (!is_output_supressed) {
+    unsigned char c = ci->get_asciify_code();
+    if (0U == c) {
+      c = ci->get_ascii_code();
+      if (c != 0U)
+	m->append(c);
+      else
+	m->append(this);
+    }
+    else
+      m->append(this);
+  }
 }
 
 void kern_pair_node::asciify(macro *m)
 {
-  assert(n1 != 0 /* nullptr */);
-  assert(n2 != 0 /* nullptr */);
-  if (n1 != 0 /* nullptr */)
-    n1->asciify(m);
-  if (n2 != 0 /* nullptr */)
-    n2->asciify(m);
-  n1 = n2 = 0 /* nullptr */;
+  if (!is_output_supressed) {
+    if (n1 != 0 /* nullptr */)
+      n1->asciify(m);
+    if (n2 != 0 /* nullptr */)
+      n2->asciify(m);
+  }
 }
 
 static void asciify_reverse_node_list(macro *m, node *n)
@@ -3928,26 +3935,29 @@ static void asciify_reverse_node_list(macro *m, node *n)
 void dbreak_node::asciify(macro *m)
 {
   assert(m != 0 /* nullptr */);
-  if (m != 0 /* nullptr */)
-    asciify_reverse_node_list(m, none);
-  none = 0 /* nullptr */;
+  if (!is_output_supressed) {
+    if (m != 0 /* nullptr */)
+      asciify_reverse_node_list(m, none);
+    none = 0 /* nullptr */;
+  }
 }
 
 void ligature_node::asciify(macro *m)
 {
   assert(n1 != 0 /* nullptr */);
   assert(n2 != 0 /* nullptr */);
-  if (n1 != 0 /* nullptr */)
-    n1->asciify(m);
-  if (n2 != 0 /* nullptr */)
-    n2->asciify(m);
-  n1 = n2 = 0 /* nullptr */;
+  if (!is_output_supressed) {
+    if (n1 != 0 /* nullptr */)
+      n1->asciify(m);
+    if (n2 != 0 /* nullptr */)
+      n2->asciify(m);
+  }
 }
 
 void break_char_node::asciify(macro *m)
 {
   assert(nodes != 0 /* nullptr */);
-  if (nodes != 0 /* nullptr */)
+  if (!is_output_supressed && (nodes != 0 /* nullptr */))
     nodes->asciify(m);
   nodes = 0 /* nullptr */;
 }
@@ -3955,7 +3965,7 @@ void break_char_node::asciify(macro *m)
 void italic_corrected_node::asciify(macro *m)
 {
   assert(nodes != 0 /* nullptr */);
-  if (nodes != 0 /* nullptr */)
+  if (!is_output_supressed && (nodes != 0 /* nullptr */))
     nodes->asciify(m);
   nodes = 0 /* nullptr */;
 }
@@ -3963,7 +3973,7 @@ void italic_corrected_node::asciify(macro *m)
 void left_italic_corrected_node::asciify(macro *m)
 {
   assert(nodes != 0 /* nullptr */);
-  if (nodes != 0 /* nullptr */)
+  if (!is_output_supressed && (nodes != 0 /* nullptr */))
     nodes->asciify(m);
   nodes = 0 /* nullptr */;
 }
@@ -3988,7 +3998,8 @@ space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
 
 void space_char_hmotion_node::asciify(macro *m)
 {
-  m->append(' ');
+  if (!is_output_supressed)
+    m->append(' ');
 }
 
 void space_node::asciify(macro *)
@@ -3997,13 +4008,16 @@ void space_node::asciify(macro *)
 
 void word_space_node::asciify(macro *m)
 {
-  for (width_list *w = orig_width; w != 0 /* nullptr */; w = w->next)
-    m->append(' ');
+  if (!is_output_supressed) {
+    for (width_list *w = orig_width; w != 0 /* nullptr */; w = w->next)
+      m->append(' ');
+  }
 }
 
 void unbreakable_space_node::asciify(macro *m)
 {
-  m->append(' ');
+  if (!is_output_supressed)
+    m->append(' ');
 }
 
 void line_start_node::asciify(macro *)
@@ -4064,6 +4078,7 @@ void overstrike_node::asciify(macro *)
 
 void suppress_node::asciify(macro *)
 {
+  is_output_supressed = (is_on == 0); // it's a three-valued Boolean :-/
 }
 
 void vline_node::asciify(macro *)
@@ -4799,13 +4814,15 @@ hyphenation_type composite_node::get_hyphenation_type()
 
 void composite_node::asciify(macro *m)
 {
-  unsigned char c = ci->get_asciify_code();
-  if (0U == c)
-    c = ci->get_ascii_code();
-  if (c != 0U)
-    m->append(c);
-  else
-    m->append(this);
+  if (!is_output_supressed) {
+    unsigned char c = ci->get_asciify_code();
+    if (0U == c)
+      c = ci->get_ascii_code();
+    if (c != 0U)
+      m->append(c);
+    else
+      m->append(this);
+  }
 }
 
 void composite_node::ascii_print(ascii_output_file *ascii)
