@@ -1,5 +1,12 @@
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Regression-test Savannah #67532.
+
+	* src/roff/groff/tests/trf-request-works.sh: Add unit tests of
+	`trf` request functionality in undiverted and diverted cases.
+
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.h (class zero_width_node): Declare
 	`asciify` member function, thus overriding base class.
 	* src/roff/troff/node.cpp (zero_width_node::asciify): New member
