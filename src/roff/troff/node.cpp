@@ -3916,22 +3916,12 @@ void kern_pair_node::asciify(macro *m)
   }
 }
 
-static void asciify_reverse_node_list(macro *m, node *n)
-{
-  assert(m != 0 /* nullptr */);
-  assert(n != 0 /* nullptr */);
-  if ((0 /* nullptr */ == m) || (0 /* nullptr */ == n))
-    return;
-  asciify_reverse_node_list(m, n->next);
-  n->asciify(m);
-}
-
 void dbreak_node::asciify(macro *m)
 {
   assert(m != 0 /* nullptr */);
   if (!is_output_supressed) {
     if (m != 0 /* nullptr */)
-      asciify_reverse_node_list(m, none);
+      none->asciify(m);
     none = 0 /* nullptr */;
   }
 }

@@ -1,5 +1,14 @@
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Refactor.
+	(dbreak_node::asciify): Replace call of
+	`asciify_reverse_node_list()` with a more idiomatic recursive
+	call of the `none` contained node's `asciify()` member function.
+	(asciify_reverse_node_list): Drop function with no remaining
+	call sites.
+
+2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac:
 	* tmac/doc.tmac: Man pages more often use the neutral double
 	quote `"` as a "code literal" than as a quotation character.
