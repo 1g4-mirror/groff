@@ -1,5 +1,23 @@
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor `node` class hierarchy.  Make `node` an
+	abstract class.  The `asciify` feature had several bugs, and I
+	think it's because the class design permitted derived classes to
+	reuse the `node` base class's `asciify` member function, which
+	robotically appended the `this` object to the macro pointed to
+	in the function argument.  In most cases, the correct
+	"asciification" of a node is to do nothing, discarding it.
+	Rather than making the member function empty in the base class,
+	I prefer to make the base class abstract to force conscious
+	consideration of how each derived class should be "asciified".
+
+	* src/roff/troff/node.h: Mark `add_char()`, `asciify()`, and
+	`add_italic_correction()` member functions as `virtual`.
+	Further mark `asciify` as _pure_ virtual (notation: "= 0").
+	* src/roff/troff/node.cpp (node::asciify): Delete.
+
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/asciify-request-works.sh: Add test case
 	for transformation of nodes produced by diverted `trf` requests.
 

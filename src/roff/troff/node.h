@@ -60,7 +60,7 @@ struct node {
   node(node *);
   node(node *, statem *, int);
   node(node *, statem *, int, bool);
-  node *add_char(charinfo *, environment *, hunits *, int *,
+  virtual node *add_char(charinfo *, environment *, hunits *, int *,
 		 node ** /* glyph_comp_np */ = 0 /* nullptr */);
 
   virtual ~node();
@@ -87,7 +87,7 @@ struct node {
   virtual node *add_self(node *, hyphen_list **);
   virtual hyphen_list *get_hyphen_list(hyphen_list *, int *);
   virtual void ascii_print(ascii_output_file *);
-  virtual void asciify(macro *);
+  virtual void asciify(macro *) = 0;
   virtual bool discardable();
   virtual void spread_space(int *, hunits *);
   virtual void freeze_space();
@@ -112,7 +112,7 @@ struct node {
   virtual void tprint(troff_output_file *);
   virtual void zero_width_tprint(troff_output_file *);
 
-  node *add_italic_correction(hunits *);
+  virtual node *add_italic_correction(hunits *);
 
   virtual bool is_same_as(node *) = 0;
   virtual const char *type() = 0;

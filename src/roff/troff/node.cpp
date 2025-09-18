@@ -3890,12 +3890,6 @@ void zero_width_node::ascii_print(ascii_output_file *out)
 // suitable for storage in a groff string or embedding in a device
 // extension command escape sequence (as for PDF metadata).
 
-void node::asciify(macro *m)
-{
-  if (!is_output_supressed)
-    m->append(this);
-}
-
 void glyph_node::asciify(macro *m)
 {
   if (!is_output_supressed) {
