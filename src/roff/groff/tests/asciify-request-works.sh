@@ -49,7 +49,13 @@ A#[dq]#[e aa]#[u00E1]#[u0106]i#[fl]o#[Fl]#[Z]
 .br
 .ec $
 .box DIV2
-$%antimatter15@$b"hup"16@
+$%antimatter15@$b"hup"16@$c
+.$" Use the no-break control character because the ordinary one still
+.$" results in a newline in asciified diversion.  Bug?
+.c2 !
+!sp
+.c2
+17@
 .br
 .box
 .asciify DIV2
@@ -135,6 +141,9 @@ echo "$output" | grep -q '^antimatter15' || wail
 
 echo "checking textification of bracket-building escape sequence" >&2
 echo "$output" | grep -q '15@16' || wail
+
+echo "checking textification of diverted 'sp' request" >&2
+echo "$output" | grep -q '16@17' || wail
 
 test -z "$fail"
 
