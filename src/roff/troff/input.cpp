@@ -90,6 +90,7 @@ static const int default_buffer_size = 16;
 void init_column_requests();
 #endif /* COLUMN */
 
+// forward declarations
 static node *read_drawing_command();
 static void read_drawing_command_color_arguments(token &);
 static void push_token(const token &);
@@ -97,7 +98,7 @@ void copy_file();
 #ifdef COLUMN
 void vjustify();
 #endif /* COLUMN */
-void transparent_file();
+static void transparent_file();
 
 token tok;
 bool want_break = false;
@@ -5517,7 +5518,7 @@ void length_request()
   tok.next();
 }
 
-void asciify_macro()
+static void asciify_macro()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "diversion asciification request expects a"
@@ -8888,7 +8889,7 @@ void vjustify()
 
 #endif /* COLUMN */
 
-void transparent_file()
+static void transparent_file()
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "transparent file throughput request expects"

@@ -1,5 +1,11 @@
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.  Mark the
+	`transparent_file()` request handler as `static` since it does
+	not require external linkage.
+
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (transparent_file): Test whether
 	the current diversion is the top-level diversion.  If so,
 	proceed as we have to date.  But if not, call `copy_file()`
