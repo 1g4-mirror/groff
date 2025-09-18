@@ -289,6 +289,7 @@ public:
   diverted_space_node(vunits, node * /* p */ = 0 /* nullptr */);
   diverted_space_node(vunits, statem *, int,
 		      node * /* p */ = 0 /* nullptr */);
+  void asciify(macro *);
   node *copy();
   bool need_reread(bool *);
   bool is_same_as(node *);
