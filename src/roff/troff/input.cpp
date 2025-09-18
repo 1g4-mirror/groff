@@ -9722,9 +9722,10 @@ static request_or_macro *lookup_request(symbol nm)
   return p;
 }
 
+// XXX: move to node.cpp, its only call site?
 node *charinfo_to_node_list(charinfo *ci, const environment *envp)
 {
-  // Don't interpret character definitions in compatible mode.
+  // Don't interpret character definitions in AT&T compatibility mode.
   int old_want_att_compat = want_att_compat;
   want_att_compat = false;
   unsigned char previous_escape_char = escape_char;
@@ -9740,8 +9741,8 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
   string_iterator *si =
     new string_iterator(*mac, "special character", ci->nm);
   input_stack::push(si);
-  // we don't use process_input_stack, because we don't want to recognise
-  // requests
+  // Don't use process_input_stack, because we don't want to recognize
+  // requests.
   for (;;) {
     tok.next();
     if (tok.is_eof())

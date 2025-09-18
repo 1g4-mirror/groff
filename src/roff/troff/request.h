@@ -89,6 +89,7 @@ extern void init_request(const char *, REQUEST_FUNCP);
 class charinfo;
 class environment;
 
+// XXX: defined in input.cpp, but its only call site is in node.cpp
 node *charinfo_to_node_list(charinfo *, const environment *);
 
 // Local Variables:
