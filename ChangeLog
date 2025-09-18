@@ -1,5 +1,15 @@
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (transparent_file): Test whether
+	the current diversion is the top-level diversion.  If so,
+	proceed as we have to date.  But if not, call `copy_file()`
+	member function of the current diversion.
+
+	Fixes <https://savannah.gnu.org/bugs/?67532>.  Problem appears
+	to date back to groff's birth.
+
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Regression-test Savannah #67532.
 
 	* src/roff/groff/tests/trf-request-works.sh: Add unit tests of

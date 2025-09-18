@@ -8909,21 +8909,26 @@ void transparent_file()
     if (0 /* nullptr */ == fp)
       error("cannot open '%1': %2", filename, strerror(errno));
     else {
-      bool reading_beginning_of_input_line = true;
-      for (;;) {
-	int c = getc(fp);
-	if (c == EOF)
-	  break;
-	if (is_invalid_input_char(c))
-	  warning(WARN_INPUT, "invalid input character code %1", int(c));
-	else {
-	  curdiv->transparent_output(c);
-	  reading_beginning_of_input_line = c == '\n';
+      if (curdiv != topdiv)
+	curdiv->copy_file(filename);
+      else {
+	bool reading_beginning_of_input_line = true;
+	for (;;) {
+	  int c = getc(fp);
+	  if (c == EOF)
+	    break;
+	  if (is_invalid_input_char(c))
+	    warning(WARN_INPUT, "invalid input character code %1",
+		    int(c));
+	  else {
+	    curdiv->transparent_output(c);
+	    reading_beginning_of_input_line = c == '\n';
+	  }
 	}
+	if (!reading_beginning_of_input_line)
+	  curdiv->transparent_output('\n');
+	fclose(fp);
       }
-      if (!reading_beginning_of_input_line)
-	curdiv->transparent_output('\n');
-      fclose(fp);
     }
   }
   tok.next();
