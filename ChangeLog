@@ -1,5 +1,14 @@
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(asciify_macro, copy_file, transparent_file): Rename these...
+	(asciify_request, unsafe_transparent_throughput_file_request)
+	(transparent_throughput_file_request): ...to these.
+	(process_input_stack, init_input_requests): Update call sites
+	and request-name-to-handler-function correspondences.
+
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.  Mark the
 	`transparent_file()` request handler as `static` since it does
 	not require external linkage.

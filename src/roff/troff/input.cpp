@@ -94,11 +94,11 @@ void init_column_requests();
 static node *read_drawing_command();
 static void read_drawing_command_color_arguments(token &);
 static void push_token(const token &);
-void copy_file();
+static void unsafe_transparent_throughput_file_request();
 #ifdef COLUMN
 void vjustify();
 #endif /* COLUMN */
-static void transparent_file();
+static void transparent_throughput_file_request();
 
 token tok;
 bool want_break = false;
@@ -3234,10 +3234,10 @@ void process_input_stack()
 	  title();
 	  break;
 	case COPY_FILE_REQUEST:
-	  copy_file();
+	  unsafe_transparent_throughput_file_request();
 	  break;
 	case TRANSPARENT_FILE_REQUEST:
-	  transparent_file();
+	  transparent_throughput_file_request();
 	  break;
 #ifdef COLUMN
 	case VJUSTIFY_REQUEST:
@@ -5518,7 +5518,7 @@ void length_request()
   tok.next();
 }
 
-static void asciify_macro()
+static void asciify_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "diversion asciification request expects a"
@@ -8841,7 +8841,7 @@ void system_request()
   tok.next();
 }
 
-void copy_file()
+static void unsafe_transparent_throughput_file_request()
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "file throughput request expects a file name"
@@ -8889,7 +8889,7 @@ void vjustify()
 
 #endif /* COLUMN */
 
-static void transparent_file()
+static void transparent_throughput_file_request()
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "transparent file throughput request expects"
@@ -9566,13 +9566,13 @@ void init_input_requests()
   init_request("ami1", append_indirect_nocomp_macro);
   init_request("as", append_string);
   init_request("as1", append_nocomp_string);
-  init_request("asciify", asciify_macro);
+  init_request("asciify", asciify_request);
   init_request("backtrace", backtrace_request);
   init_request("blm", blank_line_macro);
   init_request("break", while_break_request);
   init_request("cc", assign_control_character);
   init_request("c2", assign_no_break_control_character);
-  init_request("cf", copy_file);
+  init_request("cf", unsafe_transparent_throughput_file_request);
   init_request("cflags", set_character_flags_request);
   init_request("char", define_character_request);
   init_request("chop", chop_macro);
@@ -9648,7 +9648,7 @@ void init_input_requests()
   init_request("tm1", terminal1);
   init_request("tmc", terminal_continue);
   init_request("tr", translate);
-  init_request("trf", transparent_file);
+  init_request("trf", transparent_throughput_file_request);
   init_request("trin", translate_input);
   init_request("trnt", translate_no_transparent);
   init_request("troff", troff_request);
