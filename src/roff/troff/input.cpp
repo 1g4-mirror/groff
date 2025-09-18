@@ -5541,8 +5541,11 @@ void asciify_macro()
 	  break;
 	if (c != 0)
 	  am.append(c);
-	else
-	  nd->asciify(&am);
+	else {
+	  node *newnd = nd->copy();
+	  newnd->asciify(&am);
+	  delete nd;
+	}
       }
       *m = am;
     }
