@@ -306,6 +306,7 @@ public:
   diverted_copy_file_node(symbol, node * /* p */ = 0 /* nullptr */);
   diverted_copy_file_node(symbol, statem *, int,
 			  node * /* p */ = 0 /* nullptr */);
+  void asciify(macro *);
   node *copy();
   bool need_reread(bool *);
   bool is_same_as(node *);

@@ -4052,6 +4052,10 @@ void bracket_node::asciify(macro *)
 {
 }
 
+void diverted_copy_file_node::asciify(macro *)
+{
+}
+
 void diverted_space_node::asciify(macro *)
 {
 }
