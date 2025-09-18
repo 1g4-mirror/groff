@@ -3930,6 +3930,7 @@ void dbreak_node::asciify(macro *m)
   assert(m != 0 /* nullptr */);
   if (m != 0 /* nullptr */)
     asciify_reverse_node_list(m, none);
+  none = 0 /* nullptr */;
 }
 
 void ligature_node::asciify(macro *m)
@@ -3948,6 +3949,7 @@ void break_char_node::asciify(macro *m)
   assert(nodes != 0 /* nullptr */);
   if (nodes != 0 /* nullptr */)
     nodes->asciify(m);
+  nodes = 0 /* nullptr */;
 }
 
 void italic_corrected_node::asciify(macro *m)
@@ -3955,6 +3957,7 @@ void italic_corrected_node::asciify(macro *m)
   assert(nodes != 0 /* nullptr */);
   if (nodes != 0 /* nullptr */)
     nodes->asciify(m);
+  nodes = 0 /* nullptr */;
 }
 
 void left_italic_corrected_node::asciify(macro *m)
@@ -3962,6 +3965,7 @@ void left_italic_corrected_node::asciify(macro *m)
   assert(nodes != 0 /* nullptr */);
   if (nodes != 0 /* nullptr */)
     nodes->asciify(m);
+  nodes = 0 /* nullptr */;
 }
 
 void hmotion_node::asciify(macro *)

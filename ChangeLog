@@ -40,6 +40,14 @@
 	original.  This should be less wasteful of memory, as there's no
 	need to carry around node data that is unrepresentable as text
 	in an irreversibly transformed macro/string/diversion.
+	* src/roff/troff/node.cpp (dbreak_node::asciify)
+	(break_char_node::asciify, italic_corrected_node::asciify)
+	(left_italic_corrected_node::asciify): Revert (from commit
+	d445aee94e, 10 September) formerly dead stores nulling out
+	pointers to contained nodes.  Since the parent object is no
+	longer deleted, these stores are no longer dead, and I expect
+	the nullification to matter when asciifying node lists that
+	contain `suppress_node`s.
 
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
