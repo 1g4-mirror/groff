@@ -1,5 +1,10 @@
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/asciify-request-works.sh: Add test case
+	for transformation of nodes produced by diverted `trf` requests.
+
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(asciify_macro, copy_file, transparent_file): Rename these...
 	(asciify_request, unsafe_transparent_throughput_file_request)

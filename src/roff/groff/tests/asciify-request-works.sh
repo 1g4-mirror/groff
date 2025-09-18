@@ -26,6 +26,26 @@ wail () {
   fail=YES
 }
 
+# Locate directory containing our test artifacts.
+artifact_dir=
+base=src/roff/groff/tests
+dir=artifacts
+
+for buildroot in . .. ../..
+do
+    d=$buildroot/$base/$dir
+    if [ -d "$d" ]
+    then
+        artifact_dir=$d
+        break
+    fi
+done
+
+# If we can't find it, we can't test.
+test -z "$artifact_dir" && exit 77 # skip
+
+comment='# this is a trout/grout comment'
+
 input='.
 .ec #
 !#?qux#?!
@@ -56,7 +76,9 @@ $%antimatter15@$b"hup"16@$c
 !sp
 .c2
 17@$D"l 1i 1i"18@$x".5v"19@$l"1i"20@$L"1i"21@$o"o+"22@$
-$O[0]fnord$O[1]23@$Z"visible"24@
+$O[0]fnord$O[1]23@$Z"visible"24@$c
+'"'trf $artifact_dir/throughput-file"'
+25@
 .br
 .box
 .asciify DIV2
@@ -163,6 +185,10 @@ echo "$output" | grep -q '21@22' || wail
 
 echo "checking textification of drawing position reset escape sequence" >&2
 echo "$output" | grep -q '23@visible24' || wail
+
+echo "checking textification of diverted 'trf' request" >&2
+echo "$output" | grep -q "$comment" && wail
+echo "$output" | grep -q '24@25' || wail
 
 test -z "$fail"
 
