@@ -1,3 +1,11 @@
+2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Regression-test Savannah #66653.
+
+	* src/roff/groff/tests/asciify-composite-nodes-correctly.sh: Do
+	it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Refactor `node` class hierarchy.  Make `node` an

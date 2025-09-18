@@ -1,4 +1,4 @@
-# Copyright (C) 1993-2020 Free Software Foundation, Inc.
+# Copyright 1993-2020 Free Software Foundation, Inc.
 #
 #   Original Makefile.sub rewritten by
 #   Bernd Warken <groff-bernd.warken-72@web.de>
@@ -39,6 +39,7 @@ groff_TESTS = \
   src/roff/groff/tests/ab-request-works.sh \
   src/roff/groff/tests/adjustment-works.sh \
   src/roff/groff/tests/arithmetic-works.sh \
+  src/roff/groff/tests/asciify-composite-nodes-correctly.sh \
   src/roff/groff/tests/asciify-request-works.sh \
   src/roff/groff/tests/backslash-X-works.sh \
   src/roff/groff/tests/backslash-Y-works.sh \
