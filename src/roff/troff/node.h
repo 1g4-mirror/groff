@@ -498,6 +498,7 @@ class zero_width_node : public container_node {
 public:
   zero_width_node(node *);
   zero_width_node(node *, statem *, int);
+  void asciify(macro *);
   node *copy();
   void tprint(troff_output_file *);
   void ascii_print(ascii_output_file *);

@@ -4085,6 +4085,22 @@ void vline_node::asciify(macro *)
 {
 }
 
+// We probably would asciify zero-width nodes as nothing, but they're
+// used internally to represent some forms of combining character, as
+// with \[u015E] -> S<ac>.
+void zero_width_node::asciify(macro *m)
+{
+  assert(nodes != 0 /* nullptr */);
+  if (!is_output_supressed) {
+    node *n = nodes;
+    while (n != 0 /* nullptr */) {
+      n->asciify(m);
+      n = n->next;
+    }
+    nodes = 0 /* nullptr */;
+  }
+}
+
 breakpoint *node::get_breakpoints(hunits /* width */, int /* nspaces */,
 				  breakpoint *rest, bool /* is_inner */)
 {

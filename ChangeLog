@@ -1,3 +1,10 @@
+2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.h (class zero_width_node): Declare
+	`asciify` member function, thus overriding base class.
+	* src/roff/troff/node.cpp (zero_width_node::asciify): New member
+	"asciifies" each contained node unless output is suppressed.
+
 2025-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/asciify-request-works.sh: Add test case

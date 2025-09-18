@@ -56,7 +56,7 @@ $%antimatter15@$b"hup"16@$c
 !sp
 .c2
 17@$D"l 1i 1i"18@$x".5v"19@$l"1i"20@$L"1i"21@$o"o+"22@$
-$O[0]fnord$O[1]23@$Z"unseen"24@
+$O[0]fnord$O[1]23@$Z"visible"24@
 .br
 .box
 .asciify DIV2
@@ -162,7 +162,7 @@ echo "checking textification of overstriking escape sequence" >&2
 echo "$output" | grep -q '21@22' || wail
 
 echo "checking textification of drawing position reset escape sequence" >&2
-echo "$output" | grep -q '23@24' || wail
+echo "$output" | grep -q '23@visible24' || wail
 
 test -z "$fail"
 
