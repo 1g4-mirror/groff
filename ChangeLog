@@ -1,5 +1,25 @@
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/fallbacks.tmac: Define different fallbacks for accented
+	non-Latin-1 Latin characters, using one ordering for nroff-mode
+	devices and another for troff-mode devices.  We assume that the
+	former can't constructively overstrike and the latter can.
+
+	On troff-mode devices, it can make sense to use the `asciify`
+	request to serialize special characters in device extension
+	commands, and in that case we want to write the base glyph
+	before any combining ones.
+
+	On non-constructively overstriking devices, the last character
+	written at the drawing position "wins"; we want that to be the
+	base glyph.
+
+	Fixes <https://savannah.gnu.org/bugs/?66653>.  Thanks to Deri
+	James for pushing device extension commands to the limit,
+	exposing this defect.
+
+2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Regression-test Savannah #66653.
 
 	* src/roff/groff/tests/asciify-composite-nodes-correctly.sh: Do
