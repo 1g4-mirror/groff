@@ -1,3 +1,10 @@
+2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/groff.am (EXTRA_DIST): Ship "throughput-file"
+	test artifact in distribution archive.
+
+	Continues commit 09060903cf, 3 March.
+
 2025-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: "Asciify" bracket nodes as nothing.  (Bracket nodes are
