@@ -1,5 +1,17 @@
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac:
+	* tmac/doc.tmac: Man pages more often use the neutral double
+	quote `"` as a "code literal" than as a quotation character.
+	Give it the same (empty) set of character flags as its special
+	character equivalent, \[dq].  This means that it is no longer
+	transparent to sentence endings.
+
+	Fixes <https://savannah.gnu.org/bugs/?67474>.  Thanks to Alex
+	Colomar and Russ Allbery for the discussion.
+
+2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/fallbacks.tmac: Define different fallbacks for accented
 	non-Latin-1 Latin characters, using one ordering for nroff-mode
 	devices and another for troff-mode devices.  We assume that the

@@ -7205,6 +7205,11 @@ should this have been '.Em ...'?
 .if '\*[.T]'html' \
 .  char \- \N'45'
 .
+.\" Man pages more often use the neutral double quote `"` as a "code
+.\" literal" than as a quotation character.  Give it the same (empty)
+.\" set of character flags as its special character equivalent, \[dq].
+.cflags 0 "
+.
 .
 .\" Load site-local configuration.
 .ie d msoquiet .msoquiet mdoc.local
