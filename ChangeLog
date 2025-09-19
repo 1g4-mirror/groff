@@ -6498,11 +6498,11 @@
 
 	* src/roff/troff/env.cpp (environment::choose_breakpoint):
 	Reparenthensize (very) complex expression, restoring documented
-	behavior of hyphenation space feature.  Problem introduced by me
-	in commit d2dceabb83, 30 August.
+	behavior of hyphenation space feature.
 
 	Fixes <https://savannah.gnu.org/bugs/?66723>.  Thanks to Dave
-	Kemper for the report.
+	Kemper for the report.  Problem introduced by me in commit
+	d2dceabb83, 30 August.
 
 2025-01-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
