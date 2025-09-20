@@ -1829,7 +1829,7 @@ and
 respectively,
 and interpolate string
 .B Qrf
-as a cross reference to it.
+as an internal reference to it.
 .
 See
 .BR INITR .
@@ -2343,9 +2343,9 @@ with the arguments given to
 .
 .TP
 .BI INITR\~ file-name-prefix
-Initialize the cross reference macros.
+Initialize the internal reference macros.
 .
-Cross references are written to the standard error stream,
+Internal references are written to the standard error stream,
 which should be redirected into a file named
 .RI file-name-prefix .qrf .
 .
@@ -2357,7 +2357,7 @@ handles this and the two formatting passes it requires.
 .\"by default deactivates the unsafe operations that are required by
 .\".BR INITR .
 .
-The first pass identifies cross references;
+The first pass identifies internal references;
 the second includes them.
 .\"
 .\".B INITR
