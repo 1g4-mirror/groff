@@ -3605,6 +3605,12 @@ and
 SunOS\~4.0 (1988) added
 .BR SB .
 .
+Unix System\~V (1988) incorporated BSD's
+.B lq
+and
+.B rq
+strings.
+.
 .
 .P
 Except for
