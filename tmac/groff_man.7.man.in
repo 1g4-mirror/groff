@@ -61,7 +61,8 @@ _endif()dnl
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright (C) 1999-2025 Free Software Foundation, Inc.
+.\" Copyright 1999-2017 Free Software Foundation, Inc.
+.\"           2017-2025 G. Branden Robinson
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
