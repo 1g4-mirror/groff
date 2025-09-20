@@ -685,11 +685,11 @@ Specify a memorandum's organizational affiliation.
 .
 At most one can be declared;
 .I org-name
-is used by memorandum types and available to cover sheets.
+is used by
+.B MT
+memoranda and available to cover sheets.
 .
 See
-.B MT
-and
 .BR COVER .
 .
 .
