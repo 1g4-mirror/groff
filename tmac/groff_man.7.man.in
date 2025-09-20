@@ -977,6 +977,7 @@ Plan\~9,
 or
 Solaris\~10
 .IR troff s. \" DWB, Plan 9, Solaris 10
+_ifstyle()dnl
 .
 .
 .IP
