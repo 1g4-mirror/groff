@@ -1,3 +1,10 @@
+2025-09-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/hvunits.h (hunits operator -): Fix misleading
+	warning diagnostic arising from copy-and-paste error; the
+	saturating operation is multiplication, not subtraction (when
+	not decrementing, "-256" <=> "-1*256").
+
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp: Refactor.

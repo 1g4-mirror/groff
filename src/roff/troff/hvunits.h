@@ -239,7 +239,7 @@ inline hunits operator -(const hunits & x)
   r = x;
   // Why?  Consider -(INT_MIN) in two's complement.
   if (ckd_mul(&r.n, x.n, -1))
-    warning(WARN_RANGE, "integer subtraction saturated");
+    warning(WARN_RANGE, "integer multiplication saturated");
   return r;
 }
 
