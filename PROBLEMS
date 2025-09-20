@@ -55,6 +55,31 @@ following line at each place where you expect the break to occur.
 
 ----------------------------------------------------------------------
 
+* I sometimes get errors from PNM utilties when using grohtml.
+    pnmcrop: The image is entirely background; there is nothing to crop.
+
+This appears to be a spurious warning, and given the same input to the
+same version of groff, it appears with some versions of the PNM tools
+but not others (and the generated image is, in fact, not blank.)
+
+For example, for groff's developers, Netpbm 10.0 (Debian 2:10.0-15.4 on
+amd64) does not produce the warning spuriously, but Netpbm 10.73.43
+(Debian 1:10.73.43-5 on aarch64) does.
+
+A test exhibit follows if someone would like to help the Netpbm
+developers chase down this defect.
+
+--- start ---
+.TS
+L.
+foobar
+.TE
+--- end ---
+
+Use "groff -t -Thtml" with the foregoing input.
+
+----------------------------------------------------------------------
+
 [groff 1.19.2]
 
 * When viewing man pages, some characters on my UTF-8 terminal emulator
