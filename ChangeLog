@@ -1282,7 +1282,7 @@
 	* contrib/mom/mom.am:
 	* doc/doc.am: -W flag no longer required
 
-	Continues fixing Savannah #67268.
+	Continues fixing Savannah #67207 and #67268.
 
 2025-07-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
