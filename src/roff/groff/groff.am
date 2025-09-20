@@ -129,6 +129,7 @@ EXTRA_DIST += \
 
 groff_XFAIL_TESTS = \
   src/roff/groff/tests/current-language-and-environment-in-sync.sh \
+  src/roff/groff/tests/html-device-works-with-grn-and-eqn.sh \
   src/roff/groff/tests/stringup-request-transforms-non-basic-latin.sh
 XFAIL_TESTS += $(groff_XFAIL_TESTS)
 

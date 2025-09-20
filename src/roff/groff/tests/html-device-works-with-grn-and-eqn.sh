@@ -34,15 +34,20 @@ done
 # Commit c71b4ef4aa provoked an infinite loop in post-grohtml with these
 # preprocessors.
 
-input='.EQ
+input='.
+.pp
+Hello, world!
+.EQ
 gsize 12
 delim $$
 .EN
 .pp
 .pp
-The faster clocks are $ PN $'
+The faster clocks are $ PN $
+.'
 
-output=$("$groff" -b -ww -Thtml -eg -me "$input")
-test -n "$output"
+output=$(printf "%s\n" | "$groff" -b -ww -Thtml -eg -me)
+echo "$output"
+echo "$output" | grep -q 'faster clocks'
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:

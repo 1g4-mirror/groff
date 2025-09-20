@@ -1,5 +1,17 @@
 2025-09-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/html-device-works-with-grn-and-eqn.sh:
+	Make test more sensitive.  While the infinite loop introduced in
+	commit c71b4ef4aa and later fixed has not regressed, the input
+	document does not produce usable output.  Look for that usable
+	output.  That makes the test fail.  Unfortunately this is not
+	evidence of a recent defect; groff 1.23.0, 1.22.4, and 1.22.3
+	fail the same way with this input.  Therefore...
+	* src/roff/groff/groff.am (XFAIL_TESTS): Mark it as an expected
+	failure.
+
+2025-09-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/hvunits.h (hunits operator -): Fix misleading
 	warning diagnostic arising from copy-and-paste error; the
 	saturating operation is multiplication, not subtraction (when
