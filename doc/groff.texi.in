@@ -2025,10 +2025,11 @@ line.  Block paragraphs like the following example omit this
 indentation, and must be separated with vertical space for readability.
 Separation can be configured for other paragraph types as well.
 
+@c Wrap example at 54 columns.
 @Example
-  @result{} Some  men  look  at constitutions with sanctimonious
-  @result{} reverence,  and  deem  them  like  the  ark  of  the
-  @result{} covenant, too sacred to be touched.
+  @result{} Some men look at constitutions with sanctimonious rev-
+  @result{} erence,  and  deem  them like the ark of the covenant,
+  @result{} too sacred to be touched.
 @c Jefferson
 @endExample
 
@@ -2039,29 +2040,32 @@ We also frequently encounter @slanted{tagged} paragraphs, which begin
 with a label, or @slanted{tag}, at the left margin, and indent the
 remaining text.
 
+@c Wrap example at 54 columns.
 @Example
-  @result{} one  This  is the first paragraph.  Notice how the
-  @result{}      first line of the resulting  paragraph  lines
-  @result{}      up with the other lines in the paragraph.
+  @result{} one  This is a tagged paragraph.  Notice how the first
+  @result{}      line of the resulting paragraph lines up with the
+  @result{}      other lines in the paragraph.
 @endExample
 
 @noindent
 If the tag is too wide for the indentation amount, the line is broken.
 
+@c Wrap example at 54 columns.
 @Example
   @result{} longlabel
-  @result{}      The  label does not align with the subsequent
-  @result{}      lines, but they align with each other.
+  @result{}      The  long  tag  does  not  align  with subsequent
+  @result{}      lines, but those lines align with each other.
 @endExample
 
 A variation of the tagged paragraph is the itemized or enumerated
 paragraph, which might use punctuation or a digit for a tag,
 respectively.  These are frequently used to construct lists.
 
+@c Wrap example at 54 columns.
 @Example
-  @result{} *    This  list  item  starts with a bullet.  When
-  @result{}      producing output for a device using the ASCII
-  @result{}      character set, an asterisk is formatted instead.
+  @result{} *    This list item starts with a bullet.  If a bullet
+  @result{}      glyph  is unavailable, groff produces an asterisk
+  @result{}      instead.
 @endExample
 
 @noindent
