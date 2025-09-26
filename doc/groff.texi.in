@@ -4385,9 +4385,8 @@ user-determined operations to be performed when the @code{FS} macro is
 called.  It is passed the same arguments as @code{FS} itself.  An
 application of @code{FS-MARK} is anchor placement for a hyperlink
 reference, so that a footnote can link back to its referential
-context.@footnote{``Portable Document Format Publishing with GNU
-Troff'', @file{pdfmark.ms} in the @code{groff} distribution, uses this
-technique.}  By default, this macro has an empty definition.
+context.
+By default, this macro has an empty definition.
 @code{FS-MARK} is a GNU extension.
 
 @cindex footnotes, and keeps [@file{ms}]
