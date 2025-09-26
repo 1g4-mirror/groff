@@ -1224,7 +1224,7 @@ dummy character
 .
 An ordinary table entry's contents can make a column,
 and therefore the table,
-excessively wide;
+too wide;
 the table then exceeds the line length of the page,
 and becomes ugly or is exposed to truncation by the output device.
 .
