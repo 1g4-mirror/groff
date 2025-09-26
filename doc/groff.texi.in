@@ -1195,7 +1195,7 @@ does not prefix an option dash to @var{arg} before passing it to the
 postprocessor.
 
 @item -r @var{c}@var{numeric-expression}
-@itemx -r @var{register}=@var{expr}
+@itemx -r @var{register}=@var{numeric-expression}
 Define @code{roff} register@tie{}@var{c} or @var{register} as
 @var{numeric-expression} (@pxref{Numeric Expressions}).
 @var{c}@tie{}must be one character; @var{register} can be of arbitrary
