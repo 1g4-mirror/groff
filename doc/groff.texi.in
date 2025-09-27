@@ -1806,7 +1806,8 @@ consists of text, or words to be printed, and embedded commands
 @cindex adjustment (introduction)
 The primary function of GNU @command{troff} is to collect words from
 its input, @slanted{fill} output lines with those words, @slanted{break}
-the line at the right-hand margin (possibly by hyphenating a word),
+the line at or near the right-hand margin
+(possibly by hyphenating a word),
 @slanted{adjust} the line to reach that margin (if necessary) by
 widening spaces between words, and output the result.
 
