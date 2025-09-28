@@ -2580,7 +2580,7 @@ A request appears on a control line.
 .
 An escape sequence starts with a backslash
 .RB ( \[rs] )
-and can appear anywhere.
+and can appear almost anywhere.
 .
 However,
 use of
