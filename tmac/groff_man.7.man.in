@@ -3600,7 +3600,7 @@ and
 .BR EE .
 .\" DWB added EX/EE support, albeit slightly incompatibly.*  It
 .\" was in 3.3 (1992) but could have appeared as early as 2.0 (1986)
-.\" given its origin in Research Unix.
+.\" given its relationship to Research Unix.
 .\"
 .\" * See <https://lists.gnu.org/archive/html/bug-ncurses/2024-03/\
 .\" msg00173.html>.
@@ -3613,6 +3613,11 @@ Unix System\~V (1988) incorporated BSD's
 and
 .B rq
 strings.
+.\" ...whereas DWB 2.0 (1984) apparently did not.
+.\" https://lists.gnu.org/archive/html/groff/2025-09/msg00079.html
+.\" Going by the SCCS header, DWB had incorporated them by 3.2 (1991?).
+.\" https://github.com/n-t-roff/DWB3.3/blob/\
+.\"   562bb8615116f46077ca03e8561323cc7a89673e/macros/man/an.sr#L20
 .
 .
 .P
