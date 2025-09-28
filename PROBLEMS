@@ -60,7 +60,7 @@ following line at each place where you expect the break to occur.
 
 This appears to be a spurious warning, and given the same input to the
 same version of groff, it appears with some versions of the PNM tools
-but not others (and the generated image is, in fact, not blank.)
+but not others (and the generated image is, in fact, not blank).
 
 For example, for groff's developers, Netpbm 10.0 (Debian 2:10.0-15.4 on
 amd64) does not produce the warning spuriously, but Netpbm 10.73.43
