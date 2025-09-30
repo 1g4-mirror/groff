@@ -712,10 +712,10 @@ and
 .B \[ti]
 (see subsection \[lq]Portability\[rq] below).
 .
-Sentence endings are still detected and additional inter-sentence space
-applied.
+Sentence endings are still detected
+and supplemental inter-sentence space applied.
 .
-If the amount of additional inter-sentence spacing is altered,
+If the amount of supplemental inter-sentence spacing is altered,
 the rendering of,
 for instance,
 regular expressions using
@@ -1368,7 +1368,7 @@ because it is followed by characters that are transparent to
 end-of-sentence detection,
 and/or a newline,
 which would in turn normally cause the formatter
-to place additional inter-sentence space after it.
+to place supplemental inter-sentence space after it.
 .
 See subsection \[lq]Portability\[rq] below.
 .
