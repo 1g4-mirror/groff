@@ -77,7 +77,8 @@
 	"asciification" of a node is to do nothing, discarding it.
 	Rather than making the member function empty in the base class,
 	I prefer to make the base class abstract to force conscious
-	consideration of how each derived class should be "asciified".
+	consideration of how objects of each derived class should be
+	"asciified".
 
 	* src/roff/troff/node.h: Mark `add_char()`, `asciify()`, and
 	`add_italic_correction()` member functions as `virtual`.
