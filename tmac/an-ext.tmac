@@ -16,12 +16,12 @@
 .\"
 .\" With groff, this file is sourced by the 'man' macro package itself.
 .\" Man page authors who are concerned about portability might add the
-.\" used macros directly to the prologue of the man page(s).
-.
-.
-.\" Convention: Auxiliary macros and registers start with 'm' followed
-.\"             by an uppercase letter or digit.
-.
+.\" used macros directly to the prologue of their man page(s), after
+.\" calling `TH`.
+.\"
+.\" Convention: Auxiliary string, macros, and registers start with 'm'
+.\"             followed by an uppercase letter or digit.
+.\"
 .\" Setting the `mG` register to a positive value (e.g., on the command
 .\" line) enables usage of macros defined here that have alternative
 .\" definitions in the main groff man macro file.  This is for testing.
@@ -195,6 +195,9 @@
 .  TP \\$1\"
 ..
 .
+.
+.\" `EX` and `EE` are Ninth Edition Unix extensions that survived into
+.\" Plan 9 troff but other AT&T troff descendants did not adopt.
 .
 .\" Start example.
 .if \n(.g-\n(mG \{\
