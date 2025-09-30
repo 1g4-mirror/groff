@@ -34,11 +34,12 @@
 .if \n(mZ>1 \
 .  nx
 .
-.\" Set `mC` to your implementation's constant-width typeface.  There is
-.\" no globally portable choice; `CW`, `C`, and `CR` are all seen.  AT&T
-.\" troff offers no mechanism to query font availability.
+.\" Set `mC` to your implementation's constant-width typeface for
+.\" typesetter (nor terminal) output.  (You can do so either here or in
+.\" "man.local"; see groff_man(7).)  There is no globally portable
+.\" choice; `CW`, `C`, and `CR` are all seen.  AT&T troff offers no
+.\" mechanism to query font availability.
 .ds mC CW
-.if n .ds mC R
 .
 .\" Save the automatic hyphenation mode.
 .\"
@@ -208,7 +209,8 @@
 .    nr mP \\n(PD
 .    nr PD 1v
 .    nf
-.    ft \\*(mC
+.    ie n .ft \\*(mC
+.    el   .ft R
 .    nr mE 1
 .  \}
 ..

@@ -1,3 +1,18 @@
+2025-09-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an-ext.tmac: Tweak `EX`/`EE` behavior for more flexible
+	customization of typeface when using typesetters.  Stop
+	assigning value "R" to string `mC` in nroff mode.  This way it's
+	straightforwardly overridable in a "man.local" file, and the
+	user doesn't have to override it differently for nroff mode.
+	(EX): Select font "R" explicitly in nroff mode; a typesetter's
+	constant-width font name won't be meaningful to a terminal
+	output driver, except in the (unlikely?) case that an
+	installation configures a style name as `mC`'s value.  (Unless
+	man(7) pages are then formatted with "troff -fC -man" or
+	similar to force a monospaced font for the entire document,
+	doing this would largely trash the utility of example displays.)
+
 2025-09-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/html-device-works-with-grn-and-eqn.sh:
