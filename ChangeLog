@@ -256,7 +256,7 @@
 	conditionally depending on the node contents.  Why stop deleting
 	them?  Because the node list is actually a list of (potential)
 	trees; some nodes can contain further nodes, and so on
-	recursively.  It's difficult, and there is no need to, mark the
+	recursively.  It's difficult, and there is no need, to mark the
 	root of each tree in the list so that we can return to it later
 	to delete it; instead what we can do is have the `asciify`
 	request walk the list again and perform a delete operation,
