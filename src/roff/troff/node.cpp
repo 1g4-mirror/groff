@@ -4360,6 +4360,11 @@ bool device_extension_node::causes_tprint()
   return false;
 }
 
+hyphenation_type device_extension_node::get_hyphenation_type()
+{
+  return HYPHENATE_MIDDLE;
+}
+
 bool device_extension_node::is_tag()
 {
   return false;

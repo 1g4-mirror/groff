@@ -604,6 +604,7 @@ public:
   const char *type();
   bool causes_tprint();
   bool is_tag();
+  hyphenation_type get_hyphenation_type();
   int ends_sentence();
   tfont *get_tfont();
   void dump_properties();
