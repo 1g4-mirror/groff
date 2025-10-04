@@ -1,5 +1,17 @@
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Regression-test Savannah #67577.
+
+	* src/roff/troff/node.h (class device_extension_node): Declare
+	new `get_hyphenation_type()` member function to specialize the
+	base class's version.
+	* src/roff/troff/node.cpp
+	(device_extension_node::get_hyphenation_type): Return an
+	enumeration symbol reflecting the permissibility of hyphenation
+	where a device extension node occurs.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #67577.
 
 	* src/roff/groff/tests/\
