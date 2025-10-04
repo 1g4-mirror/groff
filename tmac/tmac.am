@@ -171,6 +171,7 @@ tmac_TESTS = \
   tmac/tests/an_do-not-abbreviate-escape-using-TH-arguments.sh \
   tmac/tests/an_do-not-hyphenate-hyperlink-with-no-link-text.sh \
   tmac/tests/an_font-remapping-does-not-affect-titles.sh \
+  tmac/tests/an_format-degenerate-input-sanely.sh \
   tmac/tests/an_handle-degenerate-input-quietly.sh \
   tmac/tests/an_hyphenation-mode-restoration-works.sh \
   tmac/tests/an_inner-footer-abbreviation-works.sh \

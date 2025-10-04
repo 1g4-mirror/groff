@@ -12,6 +12,14 @@
 
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Regression-test continuously rendered degenerate output;
+	a sane quantity of output lines should be produced.
+
+	* tmac/tests/an_format-degenerate-input-sanely.sh: Add test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Regression-test non-hyphenation of lengthy URIs that
 	format as their own link text due to the document specifying
 	none between `MT` and `ME` or `UR` and `UE` macro calls.
