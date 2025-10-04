@@ -12,6 +12,13 @@
 
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/ja.tmac:
+	* tmac/ru.tmac:
+	* tmac/zh.tmac: Fix misleading diagnostic messages.  Report the
+	actual name of the macro file issuing the message.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Regression-test continuously rendered degenerate output;
 	a sane quantity of output lines should be produced.
 
