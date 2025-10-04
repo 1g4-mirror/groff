@@ -5712,7 +5712,7 @@ node *node::add_char(charinfo *ci, environment *env,
     break_code |= PROHIBITS_BREAK_AFTER;
   if (ci->is_interword_space())
     break_code |= IS_INTERWORD_SPACE;
-  if (break_code) {
+  if (break_code != 0) {
     node *next1 = res->next;
     res->next = 0 /* nullptr */;
     res = new break_char_node(res, break_code, get_break_code(),

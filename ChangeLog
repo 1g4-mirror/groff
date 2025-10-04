@@ -1,5 +1,11 @@
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (node::add_char): Compare integer-
+	valued variable to integer literal instead of letting it pun
+	down to a Boolean.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	Tidy up the name space a bit.  We had two `enum`s declaring
