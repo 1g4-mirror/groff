@@ -2,6 +2,35 @@
 
 	[troff]: Trivially refactor.
 
+	Tidy up the name space a bit.  We had two `enum`s declaring
+	symbols starting with `HYPHEN_` (and another variable of
+	`symbol` type that does as well).  Reduce those two to one,
+	renaming the elements of the `enum` that manage the hyphenation
+	state of the node list in the pending output line (cf. the
+	hyphenation properties of characters themselves) to start with
+	`HYPHENATE_` instead.
+
+	* src/roff/troff/node.h (enum hyphenation_type): Do it.
+	* src/roff/troff/env.cpp (environment::possibly_hyphenate_line)
+	* src/roff/troff/node.cpp (glyph_node::get_hyphenation_type)
+	(hyphen_inhibitor_node::get_hyphenation_type)
+	(break_char_node::get_hyphen_list)
+	(node::get_hyphenation_type)
+	(dbreak_node::get_hyphenation_type)
+	(kern_pair_node::get_hyphenation_type)
+	(dummy_node::get_hyphenation_type)
+	(transparent_dummy_node::get_hyphenation_type)
+	(hmotion_node::get_hyphenation_type)
+	(space_char_hmotion_node::get_hyphenation_type)
+	(space_node::get_hyphenation_type)
+	(unbreakable_space_node::get_hyphenation_type)
+	(composite_node::get_hyphenation_type)
+	(left_italic_corrected_node::get_hyphenation_type): Update.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor.
+
 	The `environment` class's member function `hyphenate_line`
 	doesn't necessarily hyphenate the line; it can break the line
 	without hyphenation.

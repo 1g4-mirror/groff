@@ -2293,7 +2293,7 @@ hunits glyph_node::left_italic_correction()
 
 hyphenation_type glyph_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 void glyph_node::ascii_print(ascii_output_file *ascii)
@@ -2633,7 +2633,7 @@ const char *hyphen_inhibitor_node::type()
 
 hyphenation_type hyphen_inhibitor_node::get_hyphenation_type()
 {
-  return HYPHEN_INHIBIT;
+  return HYPHENATE_INHIBIT;
 }
 
 /* add_discretionary_hyphen methods */
@@ -3162,7 +3162,7 @@ hyphen_list *break_char_node::get_hyphen_list(hyphen_list *tail, int *)
 
 hyphenation_type break_char_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 void break_char_node::ascii_print(ascii_output_file *ascii)
@@ -4239,55 +4239,55 @@ void dbreak_node::split(int where, node **prep, node **postp)
 
 hyphenation_type node::get_hyphenation_type()
 {
-  return HYPHEN_BOUNDARY;
+  return HYPHENATE_BOUNDARY;
 }
 
 hyphenation_type dbreak_node::get_hyphenation_type()
 {
-  return HYPHEN_INHIBIT;
+  return HYPHENATE_INHIBIT;
 }
 
 hyphenation_type kern_pair_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 hyphenation_type dummy_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 hyphenation_type transparent_dummy_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 hyphenation_type hmotion_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 hyphenation_type space_char_hmotion_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 hyphenation_type overstrike_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 hyphenation_type space_node::get_hyphenation_type()
 {
   // XXX: This conditional seems to have no practical consequence. --GBR
   if (was_escape_colon)
-    return HYPHEN_MIDDLE;
-  return HYPHEN_BOUNDARY;
+    return HYPHENATE_MIDDLE;
+  return HYPHENATE_BOUNDARY;
 }
 
 hyphenation_type unbreakable_space_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 bool node::interpret(macro *)
@@ -4813,7 +4813,7 @@ units composite_node::size()
 
 hyphenation_type composite_node::get_hyphenation_type()
 {
-  return HYPHEN_MIDDLE;
+  return HYPHENATE_MIDDLE;
 }
 
 void composite_node::asciify(macro *m)
@@ -6167,7 +6167,7 @@ hyphenation_type left_italic_corrected_node::get_hyphenation_type()
   if (nodes != 0 /* nullptr */)
     return nodes->get_hyphenation_type();
   else
-    return HYPHEN_MIDDLE;
+    return HYPHENATE_MIDDLE;
 }
 
 hyphen_list *left_italic_corrected_node::get_hyphen_list(

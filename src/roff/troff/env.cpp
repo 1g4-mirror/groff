@@ -2151,7 +2151,8 @@ void environment::possibly_hyphenate_line(bool must_break_here)
     for (startp = &line->next; *startp != 0 /* nullptr */;
 	 startp = &(*startp)->next) {
       hyphenation_type this_type = (*startp)->get_hyphenation_type();
-      if (prev_type == HYPHEN_BOUNDARY && this_type == HYPHEN_MIDDLE)
+      if (prev_type == HYPHENATE_BOUNDARY
+	  && this_type == HYPHENATE_MIDDLE)
 	break;
       prev_type = this_type;
     }
@@ -2162,10 +2163,10 @@ void environment::possibly_hyphenate_line(bool must_break_here)
   do {
     tem = tem->next;
   } while (tem != 0 /* nullptr */
-	   && tem->get_hyphenation_type() == HYPHEN_MIDDLE);
+	   && tem->get_hyphenation_type() == HYPHENATE_MIDDLE);
   // This is for characters like hyphen and em dash.
   bool inhibit = (tem != 0 /* nullptr */
-		 && tem->get_hyphenation_type() == HYPHEN_INHIBIT);
+		 && tem->get_hyphenation_type() == HYPHENATE_INHIBIT);
   node *end = tem;
   hyphen_list *sl = 0 /* nullptr */;
   tem = *startp;
