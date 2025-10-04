@@ -210,6 +210,7 @@ tmac_TESTS = \
   tmac/tests/doc_degenerate-input-uses-sane-page-length.sh \
   tmac/tests/doc_do-not-hyphenate-hyperlink-with-no-link-text.sh \
   tmac/tests/doc_do-not-loop-infinitely-when-shortening-headers.sh \
+  tmac/tests/doc_format-degenerate-input-sanely.sh \
   tmac/tests/doc_heading-font-remapping-works.sh \
   tmac/tests/doc_hyphenation-mode-restoration-works.sh \
   tmac/tests/doc_indents-correctly.sh \

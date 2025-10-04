@@ -12,6 +12,14 @@
 
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mdoc]: Regression-test continuously rendered degenerate output;
+	a sane quantity of output lines should be produced.
+
+	* tmac/tests/doc_format-degenerate-input-sanely.sh: Add test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Handle degenerate documents more robustly; if given
 	formattable input text with no macro calls, and continuously
 	rendering, don't put 1.3 million blank lines (`\n[.R]/1v`) on
