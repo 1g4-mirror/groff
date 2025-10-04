@@ -1,5 +1,13 @@
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #67577.
+
+	* src/roff/groff/tests/\
+	backslash-X-is-transparent-to-hyphenation.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (node::add_char): Compare integer-
 	valued variable to integer literal instead of letting it pun
 	down to a Boolean.
