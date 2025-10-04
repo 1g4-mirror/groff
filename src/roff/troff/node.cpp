@@ -4237,6 +4237,8 @@ void dbreak_node::split(int where, node **prep, node **postp)
   }
 }
 
+// TODO: Make this member function pure virtual to force consideration
+// of this question for each node type.
 hyphenation_type node::get_hyphenation_type()
 {
   return HYPHENATION_UNNECESSARY;
