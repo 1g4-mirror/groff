@@ -26,9 +26,9 @@ struct hyphen_list {
 };
 
 enum hyphenation_type {
-  HYPHENATE_MIDDLE,
-  HYPHENATE_BOUNDARY,
-  HYPHENATE_INHIBIT
+  HYPHENATION_PERMITTED,
+  HYPHENATION_UNNECESSARY,
+  HYPHENATION_INHIBITED
 };
 
 class ascii_output_file;

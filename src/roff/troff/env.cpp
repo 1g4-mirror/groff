@@ -2140,6 +2140,12 @@ breakpoint *environment::choose_breakpoint()
   return 0 /* nullptr */;
 }
 
+// Iterate over the nodes of the output line, looking for break points.
+// The node list is in reverse order, so the first node we see is the
+// last (or rightmost) on the line.  Whether a break requires
+// hyphenation depends on the properties of the node and the context;
+// if we're at a word boundary, we can break without a hyphen regardless
+// of the node's own hyphenation properties.
 void environment::possibly_hyphenate_line(bool must_break_here)
 {
   assert(line != 0 /* nullptr */);
@@ -2151,8 +2157,8 @@ void environment::possibly_hyphenate_line(bool must_break_here)
     for (startp = &line->next; *startp != 0 /* nullptr */;
 	 startp = &(*startp)->next) {
       hyphenation_type this_type = (*startp)->get_hyphenation_type();
-      if (prev_type == HYPHENATE_BOUNDARY
-	  && this_type == HYPHENATE_MIDDLE)
+      if (prev_type == HYPHENATION_UNNECESSARY
+	  && this_type == HYPHENATION_PERMITTED)
 	break;
       prev_type = this_type;
     }
@@ -2163,10 +2169,11 @@ void environment::possibly_hyphenate_line(bool must_break_here)
   do {
     tem = tem->next;
   } while (tem != 0 /* nullptr */
-	   && tem->get_hyphenation_type() == HYPHENATE_MIDDLE);
+	   && tem->get_hyphenation_type() == HYPHENATION_PERMITTED);
   // This is for characters like hyphen and em dash.
-  bool inhibit = (tem != 0 /* nullptr */
-		 && tem->get_hyphenation_type() == HYPHENATE_INHIBIT);
+  bool inhibit = ((tem != 0 /* nullptr */)
+		  && (tem->get_hyphenation_type()
+		      == HYPHENATION_INHIBITED));
   node *end = tem;
   hyphen_list *sl = 0 /* nullptr */;
   tem = *startp;

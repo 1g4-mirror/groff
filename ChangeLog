@@ -1,5 +1,29 @@
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor for clarity.
+
+	* src/roff/troff/node.h (enum hyphenation_type): Rename symbols.
+	    `HYPHENATE_MIDDLE`   -> `HYPHENATION_PERMITTED`
+	    `HYPHENATE_BOUNDARY` -> `HYPHENATION_UNNECESSARY`
+	    `HYPHENATE_INHIBIT`  -> `HYPHENATION_INHIBITED`
+	* src/roff/troff/env.cpp (environment::possibly_hyphenate_line):
+	* src/roff/troff/node.cpp (glyph_node::get_hyphenation_type)
+	(hyphen_inhibitor_node::get_hyphenation_type)
+	(break_char_node::get_hyphen_list)
+	(node::get_hyphenation_type)
+	(dbreak_node::get_hyphenation_type)
+	(kern_pair_node::get_hyphenation_type)
+	(dummy_node::get_hyphenation_type)
+	(transparent_dummy_node::get_hyphenation_type)
+	(hmotion_node::get_hyphenation_type)
+	(space_char_hmotion_node::get_hyphenation_type)
+	(space_node::get_hyphenation_type)
+	(unbreakable_space_node::get_hyphenation_type)
+	(composite_node::get_hyphenation_type)
+	(left_italic_corrected_node::get_hyphenation_type): Update.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Regression-test Savannah #67577.
 
 	* src/roff/troff/node.h (class device_extension_node): Declare
