@@ -96,7 +96,6 @@
 .\" called by andoc when switching to an mdoc(7) page, irrespective of
 .\" continuous rendering mode.
 .de1 an*end-document
-.  if !r an-TH-was-called .return
 .  an*input-trap
 .  if '\\n[.z]'an*paragraph-tag' .an*TP-trap
 .  if \\n[cR] \{\
@@ -112,8 +111,9 @@
 .      rr an*rule-length
 .      fi
 .    \}
+.    \" suppress empty lines after the footer
+.    pl \n[nl]u
 .  \}
-.  rr an-TH-was-called
 .  ds an*previous-page-ref-string \" empty
 .  ch an-header
 .  \" At the end of the last document, the file name becomes empty;
@@ -337,8 +337,6 @@
 .  \}
 .  if \\n[C] .rr P
 .
-.  nr an-TH-was-called 1 \" an*end-document can make certain assumptions.
-.
 .  \" The previous document rendered in a batch may have been in a
 .  \" different language.
 .  if '\\*[locale]'english' .an*localize-strings
@@ -437,7 +435,6 @@
 .    \}
 .  \}
 .
-.  em an*end-document
 .  nr an*need-titles-reset 1
 ..
 .
@@ -1481,6 +1478,14 @@ contains unsupported escape sequence
 .\" page.
 .nr an*need-titles-reset 0
 .
+.\" Initialize registers and strings that trap-called macros access, to
+.\" avoid warnings when formatting degenerate man(7) documents.
+.nr an-need-no-space-mode 0
+.nr an-need-break 0
+.ds an-pageref \" empty
+.ds an*ifoot \" empty
+.ds an-extra1 \" empty
+.
 .\" We don't have to worry about "xhtml" (it's mapped to "html"), but we
 .\" do need to account for pre-grohtml(1)'s use of "groff -Tps".
 .nr an*is-output-html 0
@@ -1786,6 +1791,8 @@ contains unsupported escape sequence
 .\" If rendering HTML, suppress headers and footers.
 .nr an-suppress-header-and-footer 0
 .if \n[an*is-output-html] .nr an-suppress-header-and-footer 1
+.
+.em an*end-document
 .
 .cp \n[*groff_an_tmac_C]
 .do rr *groff_an_tmac_C
