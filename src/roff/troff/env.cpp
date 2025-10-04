@@ -2152,6 +2152,7 @@ void environment::hyphenate_line(bool must_break_here)
 	break;
       prev_type = this_type;
     }
+  assert(*startp != 0 /* nullptr */);
   if (*startp == 0 /* nullptr */)
     return;
   node *tem = *startp;

@@ -1,3 +1,10 @@
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (environment::hyphenate_line): Add
+	assertion for an apparently impossible scenario.  The formatter
+	should not attempt to hyphenate an output line with no nodes in
+	it.  An output line containing no nodes is nonsense.
+
 2025-09-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an-ext.tmac: Tweak `EX`/`EE` behavior for more flexible
