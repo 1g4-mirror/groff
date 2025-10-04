@@ -2140,7 +2140,7 @@ breakpoint *environment::choose_breakpoint()
   return 0 /* nullptr */;
 }
 
-void environment::hyphenate_line(bool must_break_here)
+void environment::possibly_hyphenate_line(bool must_break_here)
 {
   assert(line != 0 /* nullptr */);
   hyphenation_type prev_type = line->get_hyphenation_type();
@@ -2163,6 +2163,7 @@ void environment::hyphenate_line(bool must_break_here)
     tem = tem->next;
   } while (tem != 0 /* nullptr */
 	   && tem->get_hyphenation_type() == HYPHEN_MIDDLE);
+  // This is for characters like hyphen and em dash.
   bool inhibit = (tem != 0 /* nullptr */
 		 && tem->get_hyphenation_type() == HYPHEN_INHIBIT);
   node *end = tem;
@@ -2178,7 +2179,6 @@ void environment::hyphenate_line(bool must_break_here)
     forward = tem1;
   }
   if (!inhibit) {
-    // this is for characters like hyphen and emdash
     unsigned char prev_code = 0U;
     for (hyphen_list *h = sl; h; h = h->next) {
       h->is_breakable = (prev_code != 0U
@@ -2187,7 +2187,7 @@ void environment::hyphenate_line(bool must_break_here)
       prev_code = h->hyphenation_code;
     }
   }
-  if (hyphenation_mode != 0
+  if ((hyphenation_mode != 0)
       && !inhibit
       // this may not be right if we have extra space on this line
       && !((hyphenation_mode & HYPHEN_NOT_LAST_LINE)
@@ -2273,7 +2273,7 @@ void environment::possibly_break_line(bool must_break_here,
 	     // When a macro follows a paragraph in fill mode, the
 	     // current line should not be empty.
 	     || (width_total - line->width()) > target_text_length)) {
-    hyphenate_line(must_break_here);
+    possibly_hyphenate_line(must_break_here);
     breakpoint *bp = choose_breakpoint();
     if (bp == 0 /* nullptr */)
       // we'll find one eventually

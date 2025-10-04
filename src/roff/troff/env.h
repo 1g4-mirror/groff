@@ -243,7 +243,7 @@ class environment {
   void mark_last_line();
 #endif /* WIDOW_CONTROL */
   breakpoint *choose_breakpoint();
-  void hyphenate_line(bool /* must_break_here */ = false);
+  void possibly_hyphenate_line(bool /* must_break_here */ = false);
   void start_field();
   void wrap_up_field();
   void add_padding();

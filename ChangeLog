@@ -1,5 +1,20 @@
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.
+
+	The `environment` class's member function `hyphenate_line`
+	doesn't necessarily hyphenate the line; it can break the line
+	without hyphenation.
+
+	* src/roff/troff/env.cpp (environment::hyphenate_line): Rename
+	this...
+	(environment::possibly_hyphenate_line): ...to this.  Also
+	parenthesize formally complex expression.
+	(environment::possibly_break_line): Update call site.
+	* src/roff/troff/env.h: Rename in declaration.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Slightly refactor.
 
 	Nothing outside of "env.cpp" calls the global function
