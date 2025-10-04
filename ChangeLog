@@ -1,3 +1,13 @@
+2025-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Regression-test non-hyphenation of lengthy URIs that
+	format as their own link text due to the document specifying
+	none between `MT` and `ME` or `UR` and `UE` macro calls.
+
+	* tmac/tests/an_do-not-hyphenate-hyperlink-with-no-link-text.sh:
+	Add test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor for clarity.
