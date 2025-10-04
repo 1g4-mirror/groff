@@ -1242,13 +1242,13 @@ contains unsupported escape sequence
 .    \" uses some means of indicating the hyperlinked text.
 .    el \{\
 .      if '\*[.T]'html' \
-.        nop \X'html:<a href="\\*[an*hyperlink]">\
+.        nop \%\X'html:<a href="\\*[an*hyperlink]">\
 \\*[an*visible-hyperlink]</a>'\c
 .      if '\*[.T]'pdf' \
 .        pdfhref W -D \\*[an*hyperlink] -A "\\*[an*trailing-text]" \
 -- \\*[an*visible-hyperlink]\c
 .      if \\n[an*is-output-terminal] \
-.        nop \X'tty: link \\*[an*hyperlink]'\
+.        nop \%\X'tty: link \\*[an*hyperlink]'\
 \\*[an*visible-hyperlink]\X'tty: link'\c
 .      if !'\*[.T]'pdf' \
 .        nop \&\\*[an*trailing-text]\"

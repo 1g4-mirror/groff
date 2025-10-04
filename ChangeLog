@@ -1,3 +1,11 @@
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac (an*end-hyperlink): Suppress automatic
+	hyphenation when rendering a hyperlink as its own link text.
+
+	Fixes a post-groff-1.23.0 regression (meaning the bug has only
+	been observable in Git, not a groff release).
+
 2025-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man]: Regression-test non-hyphenation of lengthy URIs that
