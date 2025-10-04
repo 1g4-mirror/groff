@@ -25,8 +25,6 @@ struct hyphen_list {
 	      hyphen_list * /* p */ = 0 /* nullptr */);
 };
 
-void hyphenate(hyphen_list *, unsigned);
-
 enum hyphenation_type {
   HYPHEN_MIDDLE,
   HYPHEN_BOUNDARY,

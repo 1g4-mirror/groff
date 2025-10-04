@@ -86,6 +86,9 @@ charinfo *padding_indicator_char;
 
 bool translate_space_to_dummy = false;
 
+// forward declaration
+static void hyphenate(hyphen_list *h, unsigned int flags);
+
 class pending_output_line {
   node *nd;
   bool suppress_filling;
@@ -4444,7 +4447,7 @@ void init_env_requests()
 
 // Appendix H of _The TeXbook_ is useful background for the following.
 
-void hyphenate(hyphen_list *h, unsigned int flags)
+static void hyphenate(hyphen_list *h, unsigned int flags)
 {
   if (0 /* nullptr */ == current_language)
     return;

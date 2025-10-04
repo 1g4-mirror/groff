@@ -1,5 +1,16 @@
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.
+
+	Nothing outside of "env.cpp" calls the global function
+	`hyphenate()`.  In fact, it has only one call site.
+
+	* src/roff/troff/env.cpp: Add forward declaration.
+	  (hyphenation): Mark function as `static`.
+	* src/roff/troff/node.h: Drop declaration.
+
+2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::hyphenate_line): Add
 	assertion for an apparently impossible scenario.  The formatter
 	should not attempt to hyphenate an output line with no nodes in
