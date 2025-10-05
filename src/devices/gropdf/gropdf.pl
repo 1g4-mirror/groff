@@ -436,7 +436,7 @@ begincmap
 <0000> <FFFF>
 endcodespacerange
 1 beginbfrange
-<001f> <001f> <002d>
+<1f> <1f> <002d>
 endbfrange
 endcmap
 CMapName currentdict /CMap defineresource pop
@@ -1371,7 +1371,7 @@ sub do_x
 	    {
 		my $pdfmark=$1;
 		$pdfmark=~s((\d{4,6}) u)(sprintf("%.1f",$1/$desc{sizescale}))eg;
-		$pdfmark=~s(\\\[u00(..)\])(chr(hex($1)))eg;
+#		$pdfmark=~s(\\\[u00(..)\])(chr(hex($1)))eg;
 		$pdfmark=~s/\\n/\n/g;
 
 		if ($pdfmark=~m/\/(\w+) \((.+)\) \/DOCINFO\s*$/s)

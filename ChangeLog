@@ -1,3 +1,15 @@
+2025-10-05  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf]: Update default cmap so that it works correctly
+	with acrobat on windows.
+
+	* src/devices/gropdf/gropdf.pl (begincmap): fix for windows
+	acrobat.
+	(sub do_x): Comment redundant code.
+
+	Thanks to Grisha Levit for report of problem with some pdf
+	viewers.
+
 2025-10-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[mdoc]: Regression-test non-hyphenation of lengthy URIs that
