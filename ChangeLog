@@ -1,3 +1,15 @@
+2025-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Test and document `TP` interaction with `MT`/`ME` and
+	`UR`/`UE`.
+
+	* tmac/tests/an_MT-works.sh:
+	* tmac/tests/an_UR-works.sh: Add test cases for use of
+	hyperlinks as paragraph tags without link text.
+
+	* tmac/groff_man.7.man.in (Hyperlink macros): Document this
+	detail of behavior.
+
 2025-10-05  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Update default cmap so that it works correctly

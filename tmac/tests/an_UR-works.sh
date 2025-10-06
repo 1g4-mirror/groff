@@ -46,6 +46,12 @@ figure 1
 Or
 .UR http://\:bar\:.example\:.com
 .UE .
+.
+.
+.TP
+.UR http://\:baz\:.example\:.com
+.UE
+Frumious!
 .'
 
 output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -rU0)
@@ -60,6 +66,10 @@ echo "checking formatting of web URI with no link text" \
     "(ascii device; hyperlinks disabled)" >&2
 echo "$output" | grep -Fq 'Or <http://bar.example.com>.' || wail
 
+echo "checking formatting of web URI with no link text as paragraph" \
+     "tag (ascii device; hyperlinks disabled)" >&2
+echo "$output" | grep -Fq ' <http://baz.example.com>' || wail
+
 output=$(printf "%s\n" "$input" | "$groff" -Tascii -P-cbou -man -rU1)
 echo "$output"
 
@@ -70,6 +80,10 @@ echo "$output" | grep -Fq 'See figure 1.' || wail
 echo "checking formatting of web URI with no link text" \
     "(ascii device; hyperlinks enabled)" >&2
 echo "$output" | grep -Fq 'Or http://bar.example.com.' || wail
+
+echo "checking formatting of web URI with no link text as paragraph" \
+     "tag (ascii device; hyperlinks enabled)" >&2
+echo "$output" | grep -Fq ' http://baz.example.com' || wail
 
 html_input='.
 .TH foo 1 2022-12-04 "groff test suite"

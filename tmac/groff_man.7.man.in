@@ -1618,7 +1618,12 @@ If hyperlinking is enabled but there is no link text,
 .I address
 is formatted and hyperlinked
 .I without
-angle brackets.
+angle brackets,
+except when
+.I address
+appears as a
+.B TP
+paragraph tag.
 _ifstyle()dnl
 .
 .
@@ -1671,7 +1676,12 @@ If hyperlinking is enabled but there is no link text,
 .I uri
 is formatted and hyperlinked
 .I without
-angle brackets.
+angle brackets,
+except when
+.I uri
+appears as a
+.B TP
+paragraph tag.
 _ifstyle()dnl
 .
 .
