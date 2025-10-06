@@ -2324,6 +2324,10 @@ Several macros insert vertical space:
 and
 .BR HP .
 .
+These then configure the formatter's \[lq]no-space mode\[rq];
+see
+.MR groff @MAN7EXT@ .
+.
 The default inter-section and inter-paragraph spacing
 is 1v for terminals and 0.4v for typesetters.
 _ifstyle()dnl
