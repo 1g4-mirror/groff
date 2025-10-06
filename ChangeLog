@@ -1,5 +1,22 @@
 2025-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Reform terminology ("hyphenation flags" -> "hyphenation mode").
+	The latter usage is already strongly preponderant.
+
+	* src/roff/troff/TODO:
+	* tmac/cs.tmac:
+	* tmac/de.tmac:
+	* tmac/es.tmac:
+	* tmac/fr.tmac:
+	* tmac/it.tmac:
+	* tmac/ru.tmac:
+	* tmac/sv.tmac: Do it.
+
+	* src/roff/troff/env.cpp (hyphenate_request): Update diagnostic
+	messages, and recast where necessary.
+
+2025-10-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Test and document `TP` interaction with `MT`/`ME` and
 	`UR`/`UE`.
 

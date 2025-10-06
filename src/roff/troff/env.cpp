@@ -1777,15 +1777,15 @@ void hyphenate_request()
   int n;
   if (has_arg() && get_integer(&n)) {
     if (n < HYPHEN_NONE) {
-      warning(WARN_RANGE, "ignoring negative hyphenation flags: %1", n);
+      warning(WARN_RANGE, "ignoring negative hyphenation mode: %1", n);
     } else if (n > HYPHEN_MAX) {
-      warning(WARN_RANGE, "hyphenation flags must be in range 0..%1,"
-	      " got %2", HYPHEN_MAX, n);
+      warning(WARN_RANGE, "hyphenation mode must be in range 0..%1, got"
+	      " %2", HYPHEN_MAX, n);
     } else if (((n & HYPHEN_DEFAULT) && (n & ~HYPHEN_DEFAULT))
 	|| ((n & HYPHEN_FIRST_CHAR) && (n & HYPHEN_NOT_FIRST_CHARS))
 	|| ((n & HYPHEN_LAST_CHAR) && (n & HYPHEN_NOT_LAST_CHARS)))
-      warning(WARN_SYNTAX, "ignoring contradictory hyphenation flags: "
-	      "%1", n);
+      warning(WARN_SYNTAX, "ignoring self-contradictory hyphenation"
+	      " mode: %1", n);
     else
       curenv->hyphenation_mode = n;
   }
