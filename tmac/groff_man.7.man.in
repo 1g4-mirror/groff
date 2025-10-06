@@ -793,9 +793,10 @@ call is\~1.
 .BR .RE " ["\c
 .IR inset-level ]
 End a relative inset,
-restoring the inset amount of
-.I inset-level,
-or\~1 if none is specified.
+reducing it to that of
+.I inset-level
+(or by\~1 if not specified)
+and restoring the corresponding inset amount.
 .
 .
 .\" ====================================================================
