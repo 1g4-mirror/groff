@@ -26,7 +26,8 @@
 	hyphenation when rendering a hyperlink as its own link text.
 
 	Fixes a post-groff-1.23.0 regression (meaning the bug has only
-	been observable in Git, not a groff release).
+	been observable in Git, not a groff release).  Problem exposed
+	by commit 5d2e49f818, 9 August 2023, but may be a little older.
 
 2025-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
