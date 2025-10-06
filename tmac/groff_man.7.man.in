@@ -1715,7 +1715,8 @@ and hyperlinking is unavailable,
 .I "groff man"
 sets the link target at the beginning
 of the indented paragraph,
-not as part of the tag.
+not as part of the tag,
+unless there is no link text.
 .
 .
 .\" ====================================================================
