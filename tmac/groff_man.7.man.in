@@ -2548,16 +2548,24 @@ just as you would test code.
 .SS Portability
 .\" ====================================================================
 .
-An installed man page should contain Unicode basic Latin code points
+GNU
+.I troff \" GNU
+expects its input to contain Unicode basic Latin code points
 exclusively.
 .
 One can
 .I maintain
 it in a more convenient encoding,
 using
-.MR preconv 1
-to produce a basic Latin version that employs special character escape
-sequences to access code points necessary in non-English text.
+.MR preconv @MAN1EXT@ ,
+as with
+.MR groff @MAN1EXT@ 's
+.B \-k
+option,
+to generate a basic Latin version
+that employs special character escape sequences
+to access other glyphs.
+.
 .
 .
 .P
