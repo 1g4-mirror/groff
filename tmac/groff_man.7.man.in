@@ -3431,7 +3431,7 @@ in bold and
 one point smaller than the default type size.
 .
 Given no argument,
-.B SB
+.RB \[lq] .SB \[rq]
 plants a one-line input trap;
 text on the next line,
 which can be further formatted with a macro,
@@ -3443,10 +3443,10 @@ an extension originating in SunOS\~4.0
 .\" ...and which Clark included in groff man(7) from 1.01 or earlier...
 is deprecated.
 .
-.B SM
+.RB \[lq] .SM \[rq]
 without an argument,
 followed immediately by
-.RB \[lq] B
+.RB \[lq] .B
 .IR text \[rq],
 produces the same output more portably.
 .
