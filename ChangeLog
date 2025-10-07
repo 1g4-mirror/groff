@@ -1,5 +1,18 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Enable "locking" safer mode (2/3).
+
+	* src/preproc/pic/main.cpp (main): New Boolean
+	`is_safer_mode_locked` indicates whether the `-S` command-line
+	option has been seen.  Accept new `-S` option.  If encountered,
+	unset `want_unsafe_mode` Boolean and set `is_safer_mode_locked`.
+	When encountering `-U` option, throw diagnostic and ignore it if
+	`is_safer_mode_locked` is set.
+
+	* src/prepic/pic/pic.1.man (Options): Document it.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Enable "locking" safer mode.
 
 	* src/roff/troff/input.cpp (main): New Boolean

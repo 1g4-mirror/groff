@@ -281,14 +281,20 @@ mode.
 .
 .TP
 .B \-S
-Operate in
-.I safer mode;
-.B sh
-commands are ignored.
+Enable safer mode and ignore any subsequent
+.B \-U
+option.
 .
-This mode,
-enabled by default,
-can be useful when operating on untrustworthy input.
+In
+.I "safer mode,"
+.I @g@pic
+ignores
+.B sh
+commands,
+which can be useful when operating on untrustworthy input.
+.
+.I @g@pic
+operates in safer mode by default.
 .
 .
 .TP

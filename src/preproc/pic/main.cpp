@@ -546,6 +546,7 @@ int main(int argc, char **argv)
   static char stderr_buf[BUFSIZ];
   setbuf(stderr, stderr_buf);
   int opt;
+  bool is_safer_mode_locked = false;
 #ifdef TEX_SUPPORT
   int tex_flag = 0;
   int tpic_flag = 0;
@@ -570,9 +571,13 @@ int main(int argc, char **argv)
       break;
     case 'S':
       want_unsafe_mode = false;
+      is_safer_mode_locked = true;
       break;
     case 'U':
-      want_unsafe_mode = true;
+      if (is_safer_mode_locked)
+	error("ignoring '-U' option; '-S' already specified");
+      else
+	want_unsafe_mode = true;
       break;
     case 'f':
 #ifdef FIG_SUPPORT
