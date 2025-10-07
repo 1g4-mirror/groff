@@ -9285,7 +9285,7 @@ int main(int argc, char **argv)
 #define DEBUG_OPTION ""
 #endif
   while ((c = getopt_long(argc, argv,
-			  ":abciI:vw:W:zCEf:m:n:o:r:d:F:M:T:tqs:RU"
+			  ":abcCd:Ef:F:iI:m:M:n:o:qr:Rs:tT:Uvw:W:z"
 			  DEBUG_OPTION, long_options, 0))
 	 != EOF)
     switch (c) {
