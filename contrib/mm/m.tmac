@@ -52,6 +52,12 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .mso devtag.tmac
 .
+.\" for warnings thrown due to invalid command-line options
+.de @usage
+.tm \\*[@mm]: warning: \\$*
+..
+.
+.\" for all other kinds of warning
 .de @warning
 .tm \\*[@mm]:\\n[.F]:\\n[.c]: warning: \\$*
 .if r D .if \\n[D] .backtrace
@@ -82,7 +88,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .if r D \{\
 .	if \n[D]<0 \{\
-.		@warning ignoring out-of-range D register value: \n[D]
+.		@usage ignoring out-of-range D register value: \n[D]
 .		rr D
 .	\}
 .\}
@@ -90,7 +96,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .if r E \{\
 .	if (\n[E]<0):(\n[E]>1) \{\
-.		@warning ignoring out-of-range E register value: \n[E]
+.		@usage ignoring out-of-range E register value: \n[E]
 .		rr E
 .	\}
 .\}
@@ -100,7 +106,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .if r L \{\
 .	if \n[L]<=0 \{\
-.		@warning ignoring out-of-range L register value: \n[L]u
+.		@usage ignoring out-of-range L register value: \n[L]u
 .		rr L
 .	\}
 .\}
@@ -108,7 +114,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .if r O \{\
 .	if \n[O]<0 \{\
-.		@warning ignoring out-of-range O register value: \n[O]u
+.		@usage ignoring out-of-range O register value: \n[O]u
 .		rr O
 .	\}
 .\}
@@ -120,7 +126,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .if r W \{\
 .	if \n[W]<=0 \{\
-.		@warning ignoring out-of-range W register value: \n[W]u
+.		@usage ignoring out-of-range W register value: \n[W]u
 .		rr W
 .	\}
 .\}
@@ -131,7 +137,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .\"	command line, these have already been converted to basic units.
 .if r S \{\
 .	if \n[S]<=0 \{\
-.		@warning ignoring out-of-range S register value: \n[S]z
+.		@usage ignoring out-of-range S register value: \n[S]z
 .		rr S
 .	\}
 .\}
@@ -142,7 +148,7 @@ http://savannah.gnu.org/bugs/?group=groff.
 .
 .if r V \{\
 .	if \n[V]<=0 \{\
-.		@warning ignoring out-of-range V register value: \n[V]u
+.		@usage ignoring out-of-range V register value: \n[V]u
 .		rr V
 .	\}
 .\}
