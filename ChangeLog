@@ -1,5 +1,9 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* gnulib: Update to stable/2025-07.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Enable "locking" safer mode (3/3).
 
 	* src/roff/groff/groff.cpp (main): Add new Boolean variables
