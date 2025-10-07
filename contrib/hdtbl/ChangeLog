@@ -1,3 +1,10 @@
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* examples/fonts_n.in:
+	* examples/fonts_x.in: Invoke `ab`ort request when failing to
+	find the required "library" macro file, since this is a fatal
+	problem.
+
 2025-08-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* hdtbl.tmac (TBL, TR, TD, t*cl): Replace Control+G character
