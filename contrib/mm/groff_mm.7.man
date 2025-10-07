@@ -5463,9 +5463,12 @@ is used internally to control
 .MR mmroff 1 's
 two-pass approach to index and reference management;
 see
-.B INITI
+.BR IND ,
+.BR INDP ,
+.BR INITI ,
+.BR INITR ,
 and
-.B RS
+.B PIC
 (Boolean-valued;
 .BR 0 ).
 .
