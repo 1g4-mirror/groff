@@ -1,5 +1,11 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (main): Demote variable `safer_flag`
+	from `int` to `bool` and rename it to `want_safer_mode`.  Assign
+	to it using Boolean, not integer, literals.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic]: Invert sense of global Boolean.
 
 	Rename global Boolean from `want_safer_mode` to

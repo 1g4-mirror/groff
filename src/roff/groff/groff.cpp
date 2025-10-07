@@ -167,7 +167,7 @@ int main(int argc, char **argv)
   int iflag = 0;
   int Xflag = 0;
   int oflag = 0;
-  int safer_flag = 1;
+  bool want_safer_mode = true;
   int is_xhtml = 0;
   int eflag = 0;
   int need_pic = 0;
@@ -308,10 +308,10 @@ int main(int argc, char **argv)
       commands[TROFF_INDEX].append_arg(buf);
       break;
     case 'S':
-      safer_flag = 1;
+      want_safer_mode = true;
       break;
     case 'U':
-      safer_flag = 0;
+      want_safer_mode = false;
       break;
     case 'T':
       if (strcmp(optarg, "xhtml") == 0) {
@@ -397,7 +397,7 @@ int main(int argc, char **argv)
     if (!Kflag && *encoding)
       commands[PRECONV_INDEX].append_arg("-e", encoding);
   }
-  if (!safer_flag) {
+  if (!want_safer_mode) {
     commands[TROFF_INDEX].insert_arg("-U");
     commands[PIC_INDEX].append_arg("-U");
   }
