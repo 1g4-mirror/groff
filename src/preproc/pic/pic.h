@@ -89,7 +89,7 @@ extern int command_char;
 extern int zero_length_line_flag;
 extern int driver_extension_flag;
 extern int compatible_flag;
-extern bool want_safer_mode;
+extern bool want_unsafe_mode;
 extern char *graphname;
 
 // Local Variables:

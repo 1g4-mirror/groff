@@ -1,5 +1,16 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Invert sense of global Boolean.
+
+	Rename global Boolean from `want_safer_mode` to
+	`want_unsafe_mode`.  Invert assignments and tests.
+
+	* src/preproc/pic/pic.h:
+	* src/preproc/pic/main.cpp:
+	* src/preproc/pic/pic.ypp: Do it.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic]: Boolify global variable.
 
 	* src/preproc/pic/pic.h: Demote global variable `safer_flag`
