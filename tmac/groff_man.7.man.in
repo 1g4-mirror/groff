@@ -2324,7 +2324,8 @@ Several macros insert vertical space:
 and
 .BR HP .
 .
-These then configure the formatter's \[lq]no-space mode\[rq];
+They then enable
+.I "no-space mode;"
 see
 .MR groff @MAN7EXT@ .
 .
@@ -2594,7 +2595,7 @@ to ensure that their output lines don't overrun.
 In
 .I roff
 systems,
-elemental typesetting functions called
+elemental functions called
 .I requests
 and
 .I "escape sequences"
