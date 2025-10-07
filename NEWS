@@ -72,6 +72,10 @@ Noteworthy incompatible changes
 troff
 -----
 
+*  troff now recognizes an -S option, which "locks" safer mode,
+   rejecting any subsequent specification of -U on the command line with
+   an error diagnostic.
+
 *  The `cf` request is now disabled in safer mode; as with `pi` and
    `sy`, you must specify the "unsafe mode" option `-U` to use it.
    Alternatively, use the `trf` request, available since groff 0.6
@@ -286,6 +290,8 @@ groff
    which now produces an exit status of 2).  See the section "Exit
    status" of groff(1) for details.
 
+*  groff now passes the -S option to pic and troff if it is specified.
+
 nroff
 -----
 
@@ -304,6 +310,9 @@ pic
    with the new `.v[er[tex]]` and `.mid[point]` syntax suffixed to an
    object identifer, analogously to the existing compass point and
    `.c[enter]` feature.  Thanks to Duncan Losin.
+
+*  The -S option now "locks" safer mode, rejecting any subsequent
+   specification of -U on the command line with an error diagnostic.
 
 soelim
 ------
