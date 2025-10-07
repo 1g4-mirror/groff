@@ -1,5 +1,19 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Enable "locking" safer mode.
+
+	* src/roff/troff/input.cpp (main): New Boolean
+	`is_safer_mode_locked` indicates whether the `-S` command-line
+	option has been seen.  Accept new `-S` option.  If encountered,
+	unset `want_unsafe_requests` Boolean and set
+	`is_safer_mode_locked`.  When encountering `-U` option, throw
+	diagnostic and ignore it if `is_safer_mode_locked` is set.
+
+	* src/roff/troff/input.cpp (usage):
+	* src/roff/troff/troff.1.man (Synopsis, Options): Document it.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp (main): Demote variable `safer_flag`
 	from `int` to `bool` and rename it to `want_safer_mode`.  Assign
 	to it using Boolean, not integer, literals.

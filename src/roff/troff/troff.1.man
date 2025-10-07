@@ -49,7 +49,7 @@ typesetter and document formatter
 .\" ====================================================================
 .
 .SY @g@troff
-.RB [ \-abcCEiRUz ]
+.RB [ \-abcCEiRSUz ]
 .RB [ \-d\~\c
 .IR ctext ]
 .RB [ \-d\~\c
@@ -461,6 +461,13 @@ Don't load
 .I troffrc
 and
 .IR troffrc\-end .
+.
+.
+.TP
+.B \-S
+Enable safer mode and ignore any subsequent
+.B \-U
+option.
 .
 .
 .TP

@@ -9223,7 +9223,7 @@ static void add_string(const char *s, string_list **p)
 void usage(FILE *stream, const char *prog)
 {
   fprintf(stream,
-"usage: %s [-abcCEiRUz] [-d ct] [-d string=text] [-f font-family]"
+"usage: %s [-abcCEiRSUz] [-d ct] [-d string=text] [-f font-family]"
 " [-F font-directory] [-I inclusion-directory] [-m macro-package]"
 " [-M macro-directory] [-n page-number] [-o page-list]"
 " [-r cnumeric-expression] [-r register=numeric-expression]"
@@ -9258,6 +9258,7 @@ int main(int argc, char **argv)
   bool have_explicit_default_family = false;
   bool have_explicit_first_page_number = false;
   bool want_startup_macro_files_skipped = false;
+  bool is_safer_mode_locked = false; // made true if `-S` explicit
   int next_page_number = 0;	// pacify compiler
   hresolution = vresolution = 1;
   if (getenv("GROFF_DUMP_NODES") != 0 /* nullptr */)
@@ -9285,7 +9286,7 @@ int main(int argc, char **argv)
 #define DEBUG_OPTION ""
 #endif
   while ((c = getopt_long(argc, argv,
-			  ":abcCd:Ef:F:iI:m:M:n:o:qr:Rs:tT:Uvw:W:z"
+			  ":abcCd:Ef:F:iI:m:M:n:o:qr:Rs:StT:Uvw:W:z"
 			  DEBUG_OPTION, long_options, 0))
 	 != EOF)
     switch (c) {
@@ -9382,8 +9383,15 @@ int main(int argc, char **argv)
     case 't':
       // silently ignore these
       break;
+    case 'S':
+      want_unsafe_requests = false;
+      is_safer_mode_locked = true;
+      break;
     case 'U':
-      want_unsafe_requests = true;
+      if (is_safer_mode_locked)
+	error("ignoring '-U' option; '-S' already specified");
+      else
+	want_unsafe_requests = true;
       break;
 #if defined(DEBUGGING)
     case 'D':
