@@ -1,5 +1,11 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (debug@big-dump): Report value of `debug*m` since we go
+	to the trouble of defining it.  Delete temporary registers
+	`debug*n` and `debug*m` after reporting them.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Improve usage diagnostics by not uselessly repeating
 	the file name and line number of the package itself when
 	diagnosing an invalid command-line setting, and not emitting a
