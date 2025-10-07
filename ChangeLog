@@ -1,5 +1,18 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Boolify global variable.
+
+	* src/preproc/pic/pic.h: Demote global variable `safer_flag`
+	from `int` to `bool` and rename it to `want_safer_mode`.
+
+	* src/preproc/pic/main.cpp: Update its definition to match
+	declaration.  Assign to it using Boolean, not integer, literals.
+
+	* src/preproc/pic/main.cpp (main):
+	* src/preproc/pic/pic.ypp (placeless_element): Update.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/main.cpp (main): Sort _optstring_ argument to
 	`getopt_long()` in U.S. English collation order for better
 	intelligibility to maintainers.

@@ -46,7 +46,7 @@ int zero_length_line_flag = 0;
 // Non-zero means we're using a groff driver.
 int driver_extension_flag = 1;
 int compatible_flag = 0;
-int safer_flag = 1;
+bool want_safer_mode = true;
 int command_char = '.';		// the character that introduces lines
 				// that should be passed through transparently
 static int lf_flag = 1;		// non-zero if we should attempt to understand
@@ -569,10 +569,10 @@ int main(int argc, char **argv)
     case 'T':
       break;
     case 'S':
-      safer_flag = 1;
+      want_safer_mode = true;
       break;
     case 'U':
-      safer_flag = 0;
+      want_safer_mode = false;
       break;
     case 'f':
 #ifdef FIG_SUPPORT

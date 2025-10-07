@@ -399,7 +399,7 @@ placeless_element:
 	  DELIMITED
 		{
 		  delim_flag = 0;
-		  if (safer_flag)
+		  if (want_safer_mode)
 		    lex_error("unsafe to run command '%1'; ignoring",
 			      $3);
 		  else {
