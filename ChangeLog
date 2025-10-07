@@ -85,7 +85,7 @@
 
 	[mdoc]: Regression-test non-hyphenation of lengthy URIs that
 	format as their own link text due to the document specifying
-	none between `MT` and `ME` or `UR` and `UE` macro calls.
+	none after the first argument to an `Lk` macro call.
 
 	* tmac/tests/\
 	doc_do-not-hyphenate-hyperlink-with-no-link-text.sh: Add test.
