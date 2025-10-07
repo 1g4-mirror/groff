@@ -167,7 +167,8 @@ int main(int argc, char **argv)
   int iflag = 0;
   int Xflag = 0;
   int oflag = 0;
-  bool want_safer_mode = true;
+  bool is_safer_mode_locked = false; // made true if `-S` explicit
+  bool want_unsafe_mode = true;
   int is_xhtml = 0;
   int eflag = 0;
   int need_pic = 0;
@@ -308,10 +309,14 @@ int main(int argc, char **argv)
       commands[TROFF_INDEX].append_arg(buf);
       break;
     case 'S':
-      want_safer_mode = true;
+      is_safer_mode_locked = true;
+      want_unsafe_mode = false;
       break;
     case 'U':
-      want_safer_mode = false;
+      if (is_safer_mode_locked)
+	warning("ignoring '-U' option; '-S' already specified");
+      else
+	want_unsafe_mode = true;
       break;
     case 'T':
       if (strcmp(optarg, "xhtml") == 0) {
@@ -397,7 +402,11 @@ int main(int argc, char **argv)
     if (!Kflag && *encoding)
       commands[PRECONV_INDEX].append_arg("-e", encoding);
   }
-  if (!want_safer_mode) {
+  if (is_safer_mode_locked) {
+    commands[TROFF_INDEX].insert_arg("-S");
+    commands[PIC_INDEX].append_arg("-S");
+  }
+  else if (want_unsafe_mode) {
     commands[TROFF_INDEX].insert_arg("-U");
     commands[PIC_INDEX].append_arg("-U");
   }

@@ -435,12 +435,17 @@ preprocessor.
 .
 .TP
 .B \-S
-Operate in \[lq]safer\[rq] mode;
-see
+Enable safer mode and ignore any subsequent
 .B \-U
-below for its opposite.
+option.
 .
-Safer mode is enabled by default.
+.I groff
+passes the
+.B \-S
+option to
+.MR @g@pic @MAN1EXT@
+and
+.MR @g@troff @MAN1EXT@ .
 .
 .
 .TP
@@ -664,6 +669,18 @@ Output only pages in
 .TQ
 .BI \-r\~ register = numeric-expression
 Define register.
+.
+.
+.TP
+.B \-S
+Enable safer mode and ignore any subsequent
+.B \-U
+option.
+.
+.
+.TP
+.B \-U
+Operate in unsafe mode.
 .
 .
 .TP

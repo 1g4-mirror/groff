@@ -1,5 +1,21 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Enable "locking" safer mode (3/3).
+
+	* src/roff/groff/groff.cpp (main): Add new Boolean variables
+	`is_safer_mode_locked` and `want_unsafe_mode`.  Drop unused
+	variable `want_safer_mode`.  If the `-S` flag is encountered,
+	"lock" safer mode and unset `want_unsafe_mode`.  If the `-U`
+	flag is encountered and safer mode is locked, throw an error
+	diagnostic.  Otherwise, continue as before.  If safer mode has
+	been explicitly requested, supply pic(1) and troff(1) with the
+	`-S` option.
+
+	* src/roff/groff/groff.1.man (groff-specific options)
+	(Transparent options): Document it.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic]: Enable "locking" safer mode (2/3).
 
 	* src/preproc/pic/main.cpp (main): New Boolean
