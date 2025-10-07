@@ -1,5 +1,11 @@
 2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/main.cpp (main): Sort _optstring_ argument to
+	`getopt_long()` in U.S. English collation order for better
+	intelligibility to maintainers.
+
+2025-10-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (main): Sort _optstring_ argument to
 	`getopt_long()` in U.S. English collation order for better
 	intelligibility to maintainers.

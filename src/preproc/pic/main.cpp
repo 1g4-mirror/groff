@@ -559,7 +559,7 @@ int main(int argc, char **argv)
     { "version", no_argument, 0, 'v' },
     { NULL, 0, 0, 0 }
   };
-  while ((opt = getopt_long(argc, argv, ":T:CDSUtcvnxzpf", long_options,
+  while ((opt = getopt_long(argc, argv, ":cCDfnpStT:Uvxz", long_options,
 	  NULL)) != EOF)
     switch (opt) {
     case 'C':
