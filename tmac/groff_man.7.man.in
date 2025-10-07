@@ -1268,6 +1268,8 @@ produces the following output.
 .YS
 .
 .
+.br
+.ne 2v
 .P
 .SY groff
 .B \-h
