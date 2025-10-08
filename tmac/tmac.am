@@ -215,6 +215,7 @@ tmac_TESTS = \
   tmac/tests/doc_hyphenation-mode-restoration-works.sh \
   tmac/tests/doc_indents-correctly.sh \
   tmac/tests/doc_output-footer-when-continuously-rendering.sh \
+  tmac/tests/doc_report-useful-line-numbers-in-diagnostics.sh \
   tmac/tests/doc_reset-data-between-documents.sh \
   tmac/tests/doc_smoke-test.sh \
   tmac/tests/doc_synopsis-is-not-adjusted.sh \
