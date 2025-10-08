@@ -1,5 +1,15 @@
 2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[mandoc]: Regression-test useful output file line numbers
+	reported in diagnostics when continuously rendering and
+	switching macro packages.
+
+	* tmac/tests/andoc_report-useful-line-numbers-in-diagnostics.sh:
+	Add test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Regression-test useful output file line numbers reported
 	in diagnostics when continuously rendering.
 

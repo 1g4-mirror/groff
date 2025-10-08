@@ -193,6 +193,7 @@ tmac_TESTS = \
   tmac/tests/andoc_check-an-to-doc-transition.sh \
   tmac/tests/andoc_clear-doc-traps.sh \
   tmac/tests/andoc_flush-between-packages.sh \
+  tmac/tests/andoc_report-useful-line-numbers-in-diagnostics.sh \
   tmac/tests/doc-old_vertical-margins-are-correct.sh \
   tmac/tests/doc_CS-register-works.sh \
   tmac/tests/doc_CT-register-works.sh \
