@@ -1,5 +1,14 @@
 2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man]: Regression-test useful output file line numbers reported
+	in diagnostics when continuously rendering.
+
+	* tmac/tests/an_report-useful-line-numbers-in-diagnostics.sh:
+	Add test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/mdoc/doc-common (doc-end-document): Fix syntax/logic
 	error arising from forgetting that groff's mdoc macros are
 	mostly defined with the escape character switched off, meaning
