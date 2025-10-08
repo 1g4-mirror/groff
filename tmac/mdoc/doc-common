@@ -1239,15 +1239,13 @@
 \D'l \n[doc-line-length]u 0'
 .      fi
 .    \}
-.    \" suppress empty lines after the footer
-.    pl \n[nl]u
 .  \}
 .  ch doc-header
 .  \" At the end of the last document, the file name becomes empty;
 .  \" force the page length to match the vertical drawing position in
 .  \" continuous rendering mode.
-.  ie \\n[cR] .if '\\n[.F]'' .pl \\n[nl]u
-.  el         .doc-break-page-with-new-number
+.  ie \n[cR] .if '\n[.F]'' .pl \n[nl]u
+.  el        .doc-break-page-with-new-number
 ..
 .ec
 .

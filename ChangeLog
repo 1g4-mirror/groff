@@ -1,5 +1,19 @@
 2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common (doc-end-document): Fix syntax/logic
+	error arising from forgetting that groff's mdoc macros are
+	mostly defined with the escape character switched off, meaning
+	one has to pay extra attention when copying and pasting between
+	groff man and groff mdoc.  When continuously rendering, truncate
+	page length to vertical drawing position only after formatting
+	the last document on the input stream.  This way, when troff
+	emits diagnostic messages regarding the output, it reports a
+	position of the form "page 1, line N", where "N" is a number you
+	can usefully give to `sed -n Np` in a pipeline after
+	nroff/troff/groff/grotty.
+
+2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Regression-test useful output file line numbers reported
 	in diagnostics when continuously rendering.
 
