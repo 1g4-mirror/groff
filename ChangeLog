@@ -1,5 +1,11 @@
 2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/mdoc/doc-common (doc-end-document): Fix code style nit.
+	Favor `nop` over text line inside a conditional within a macro
+	definition.
+
+2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mandoc]: Regression-test useful output file line numbers
 	reported in diagnostics when continuously rendering and
 	switching macro packages.
