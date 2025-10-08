@@ -465,7 +465,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle September 2025
+@subtitle October 2025
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -5562,7 +5562,7 @@ employ the @option{-z} option to suppress normal output.
 
 @Example
 $ perl -e 'print "#" x 80, "\n";' | gnroff -z
-    @error{} warning: cannot break line
+    @error{} cannot adjust line; overset by 15n
 @endExample
 
 The remedy for these cases is to tell GNU @code{troff} where the line
@@ -10020,14 +10020,14 @@ an output line is placed according to the configured alignment and
 indentation; see @ref{Manipulating Filling and Adjustment} and @ref{Line
 Layout}.
 
-A tab stop is converted into a non-breakable horizontal movement that
-cannot be adjusted.
+A tab stop becomes a non-breakable horizontal movement that cannot be
+adjusted.
 
 @Example
 .ll 2i
 .ta T 1i
 a@arrow{}b@arrow{}c
-    @error{} warning: cannot break line
+    @error{} warning: cannot adjust line; overset by 1n
     @result{} a         b         c
 @endExample
 
@@ -10039,7 +10039,7 @@ inches.  Now consider the following.
 .ll 2i
 .ta T 1i
 a@arrow{}b c@arrow{}d
-    @error{} warning: cannot adjust line
+    @error{} warning: cannot adjust line; underset by 9n
     @result{} a         b
     @result{} c       d
 @endExample
