@@ -1,5 +1,12 @@
 2025-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[ms]: Regression-test Savannah #64529.
+
+	* tmac/tests/s_start-document-with-keep-quietly.sh: Add test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
+2025-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Update with respect to Unicode 17, per procedure in
 	"FOR-RELEASE" file.
 

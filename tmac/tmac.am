@@ -251,6 +251,7 @@ tmac_TESTS = \
   tmac/tests/s_mark-column-start-correctly.sh \
   tmac/tests/s_no-excess-space-around-displays.sh \
   tmac/tests/s_rejects-too-short-page-lengths.sh \
+  tmac/tests/s_start-document-with-keep-quietly.sh \
   tmac/tests/s_vertical-margins-are-correct.sh
 TESTS += $(tmac_TESTS)
 EXTRA_DIST += $(tmac_TESTS)
