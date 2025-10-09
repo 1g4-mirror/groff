@@ -2007,6 +2007,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\" Tbl support.
 .nr tbl@within-table 0
 .nr tbl*has-heading 0
+.nr tbl*was-tbl-failure-reported 0
+.de tbl*check-for-tbl
+.if !r TW .if !\\n[tbl*was-tbl-failure-reported] \{\
+.	ds tbl*err tbl preprocessor failed, or it or soelim was not
+.	as tbl*err " run; table(s) likely not rendered\"
+.	as tbl*err " (TE macro called with TW register undefined)\"
+.	@error \\*[tbl*err]
+.	rm tbl*err
+.	nr tbl*was-tbl-failure-reported 1
+.\}
+..
 .\" This gets called if TS occurs before the first paragraph.
 .de TS
 .cov*ab-init
@@ -2072,6 +2083,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .TE
 ..
 .de TE
+.tbl*check-for-tbl
+.if \\n[tbl*was-tbl-failure-reported] .return
 .ie '\\n(.z'tbl*heading-diversion' \
 .	@error-recover .TS H but no .TH before .TE
 .el \{\

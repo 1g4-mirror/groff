@@ -1,5 +1,14 @@
 2025-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/s.tmac: Issue helpful diagnostic if it looks like the
+	user failed to preprocess a document calling `TE`.  Add new
+	register `tbl*was-tbl-failure-reported` and new macro
+	`tbl*check-for-tbl`, which sets the register.
+	(TE): Call the new macro.  If the failure has been reported,
+	tbl has not run, so we can skip the rest of this macro.
+
+2025-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Fix Savannah #64529.
 
 	* tmac/s.tmac: Manage keeps and initialize package more
