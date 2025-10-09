@@ -934,11 +934,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .par@reset
 ..
 .de KE
-.ie '\\n(.z'kp@div' .kp*end
-.el \{\
-.	ie '\\n(.z'kp@fdiv' .kp*fend
-.	el .@error .KE without .KS or .KF
-.\}
+.nr kp*did-closure-succeed 0
+.if '\\n(.z'kp@div'  .kp*end
+.if '\\n(.z'kp@fdiv' .kp*fend
+.if !\\n[kp*did-closure-succeed] .@error .KE without .KS or .KF
+.rr kp*did-closure-succeed
 ..
 .de @div-end!kp@div
 .kp*end
@@ -959,6 +959,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .kp@div
 .ev
 .rm kp@div
+.nr kp*did-closure-succeed 1
 ..
 .\" Floating keeps.
 .nr kp@head 0
@@ -980,6 +981,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .	nr kp*ht!\\n[kp@tail] 0\\n[dn]
 .	nr kp@tail +1
 .\}
+.nr kp*did-closure-succeed 1
 ..
 .\" top of page processing for KF
 .nr kp*doing-top 0
@@ -2007,7 +2009,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .nr tbl*has-heading 0
 .\" This gets called if TS occurs before the first paragraph.
 .de TS
-.LP
+.cov*ab-init
 .\" cov*ab-init, called by LP, aliases TS to @TS.
 \\*[TS]\\
 ..

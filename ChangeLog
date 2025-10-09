@@ -1,5 +1,25 @@
 2025-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Fix Savannah #64529.
+
+	* tmac/s.tmac: Manage keeps and initialize package more
+	robustly.
+	(TS): If the first macro call seen in a document is `TS`, call
+	`cov*ab-init` directly instead of going through `LP`, which
+	automatically closes an open diversion.
+	(KE): Track whether we closed in a diversion in new module
+	register `kp*did-closure-succed*, initializing its Boolean value
+	to zero.  After existing logic calling appropriate closure
+	macros, test the register again, and issue a diagnostic only if
+	it is not true.
+	(kp*end, kp*fend): Set `kp*did-closure-succed`.
+
+	Fixes <https://savannah.gnu.org/bugs/?64529>.  Thanks to Doug
+	McIlroy for the report (way back in 2011!).  Problem is at least
+	that old.
+
+2025-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[ms]: Regression-test Savannah #64529.
 
 	* tmac/tests/s_start-document-with-keep-quietly.sh: Add test.
