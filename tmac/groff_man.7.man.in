@@ -4650,14 +4650,30 @@ Solaris\~10
 .IR troff s \" DWB, Plan 9, Solaris 10
 do not.
 .
+Interpolating strings,
+.B \e*(lq
+and
+.BR \e*(rq ,
+portably yields directional double quotation marks
+in all these formatters
+.\" including plan9port/Plan 9 from User Space as of commit e5b5757e64,
+.\" 10 October 2025
+(though
+.I neatroff
+does not supply a
+.I man
+macro package).
+.
 .
 .IP
+Obtaining directional single quotation marks is more of a challenge.
+.
 Historically,
 man pages used
 .B \[ga]
 and
 .B \[aq]
-exclusively for directional single quotation marks.
+exclusively for them.
 .
 However,
 in recent years,
