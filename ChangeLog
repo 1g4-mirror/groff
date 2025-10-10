@@ -42,6 +42,8 @@
 	* src/libs/libgroff/uniuni.cpp:
 	* src/utils/afmtodit/afmtodit.tables: Do it.
 
+	Fixes <https://savannah.gnu.org/bugs/?67505>.
+
 2025-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/mdoc/doc-common (doc-end-document): Fix code style nit.
