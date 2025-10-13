@@ -895,8 +895,8 @@ Miscellaneous
    July 2002), incremented from 5.6.1.
 
 *  groff now looks for the Netpbm program pamcut(1) rather than
-   pnmcut(1).  Per its developers, the former was introduced 23 years
-   ago and the latter withdrawn 15 years ago.
+   pnmcut(1).  Per its developers, the former was introduced in 2001
+   ago and the latter withdrawn in 2009.
 
 *  The Makefile macro `DEVICE` has been renamed to `DEFAULT_DEVICE`; be
    aware if your builds don't use "ps" as the default output device.
