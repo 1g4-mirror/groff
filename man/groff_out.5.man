@@ -168,7 +168,7 @@ users seldom encounter this format under normal circumstances.
 .
 .I groff
 offers the option
-.B \-z
+.B \-Z
 to inhibit postprocessing such that GNU
 .IR troff 's \" GNU
 output is sent to the standard output stream just as it is when running
