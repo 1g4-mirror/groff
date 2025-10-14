@@ -683,7 +683,7 @@ and calls the
 .B PSPIC
 macro with which it shares an interface.
 .
-If output is to a PDF,
+If output is to a PDF document,
 .B \%PDFPIC
 uses the
 .RB \[lq] "pdf: \%pdfpic" \[rq]
