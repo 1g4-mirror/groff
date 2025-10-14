@@ -582,7 +582,7 @@
 	(left_italic_corrected_node::asciify)
 	(space_char_hmotion_node::asciify, word_space_node::asciify)
 	(unbreakable_space_node::asciify, composite_node::asciify):
-	Texify node contents only if output is not suppressed.
+	Textify node contents only if output is not suppressed.
 
 2025-09-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
