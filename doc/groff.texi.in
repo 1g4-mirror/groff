@@ -20396,15 +20396,14 @@ glyph output;
 font,
 color,
 and text size selection;
-motion of the printing position;
+motion of the drawing position;
 page advancement;
 drawing of geometric objects;
 and device control commands,
-a catch-all for operations not easily classified
-as any of the foregoing,
-such as directives to start and stop output,
+a catch-all for other operations.
+The last includes directives to start and stop output,
 identify the intended output device,
-or place URL hyperlinks in supported output formats.
+and embed URL hyperlinks in supported output formats.
 @c END Keep parallel with introductory paragraph of groff_out(5).
 
 @menu

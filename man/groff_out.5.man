@@ -140,7 +140,7 @@ glyph output;
 font,
 color,
 and text size selection;
-motion of the printing position;
+motion of the drawing position;
 page advancement;
 drawing of geometric primitives;
 and device extension commands,
