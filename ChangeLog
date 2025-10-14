@@ -1,3 +1,14 @@
+2025-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* font/devpdf/Foundry.in:
+	* m4/groff.m4 (GROFF_URW_FONTS_CHECK): Add
+	"/usr/share/ghostscript/Resource/Font" directory to search path
+	for URW font files.  That is apparently the location Arch Linux
+	keeps them in.
+
+	Fixes <https://savannah.gnu.org/bugs/?65974>.  Thanks to Morten
+	Bo Johansen for the report.
+
 2025-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac: Issue helpful diagnostic if it looks like the
