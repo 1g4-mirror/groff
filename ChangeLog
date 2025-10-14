@@ -453,6 +453,9 @@
 	(asciify_reverse_node_list): Drop function with no remaining
 	call sites.
 
+	Fixes <https://savannah.gnu.org/bugs/?67509> (considered in
+	combination with many other recent asciification changes).
+
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac:
