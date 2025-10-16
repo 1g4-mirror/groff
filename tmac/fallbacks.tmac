@@ -238,10 +238,13 @@
 .el                          .fchar \[u2008] " \" punctuation space
 .fchar \[u2009] \|\" thin space
 .fchar \[u200A] \^\" hair space
-.\" Mapping U+200B awaits resolution of Savannah #58958.
-.\"fchar \[u200B] \h'0'\" zero-width space
+.\" U+200B and its historical C1 control synonym, U+0082, have the semantics
+.\" of groff's \: escape.
+.\" Mapping these awaits resolution of Savannah #58958.
+.\"fchar \[u200B] \:\" zero-width space
+.\"fchar \[u0082] \:\" break permitted here
 .\" \[u2010] is always defined thanks to uniglyph.cpp.
-.\" Mapping U+2011 awaits resolution of Savannah #63354.
+.\" Mapping U+2011 awaits resolution of Savannah #63360.
 .\"fchar \[u2011] -\" non-breaking hyphen (won't break w/o .hcode or \:)
 .fchar \[u2012] \o'-\0'\" figure dash
 .fchar \[u2013] \[en]\" en dash
@@ -277,6 +280,8 @@
 .if \n[fallbacks*troff-mode] \
 .  fchar \[u203E] \[rn]\" overline \" Savannah #63332 again
 .fchar \[u2044] \[f/]\" fraction slash
+.\" Using `\[u0025]` instead of `%` below would better guard against the
+.\" use of `.tr` to redefine `%`, but Savannah #63334 prevents this.
 .fchar \[u2052] %\" commercial minus sign
 .fchar \[u2053] \[ti]\" swung dash
 .

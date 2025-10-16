@@ -1,3 +1,18 @@
+2025-10-16  Dave Kemper <saint.snit@gmail.com>
+
+	* tmac/fallbacks.tmac: Update annotations.  Clean up a handful
+	of small issues left over from bug #63354.  Details are in
+	comment #55 there.
+	- Explain meaning of U+200B, whose name (ZERO WIDTH SPACE) does
+	  not make its purpose obvious.
+	- Change commented-out definition of \[u200B] to one that will
+	  work once the offending bug is fixed.
+	- Document why \[u0082] should be treated the same as \[u200B].
+	- Correct a bug number.
+	- Document a possible future refinement of \[u2052].
+
+	Fixes <https://savannah.gnu.org/bugs/?67611>.
+
 2025-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc.tmac (doc-get-arg-type*): Handle the *roff internal
