@@ -10485,7 +10485,6 @@ void charinfo::dump()
   else
     errprint("  Unicode mapping: none (%1)\n", mapping);
   errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
-  errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
   errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
   errprint("  is%1 found\n", is_not_found ? " not" : "");
   errprint("  is%1 transparently translatable\n",

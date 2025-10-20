@@ -1,5 +1,11 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::dump): Drop duplicate line
+	of output to the standard error stream introduced in commit
+	148b65b1ed, 12 September.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Fix code style nits.
 	(environment::add_hyphen_indicator): Wrap long input line and
 	break lengthy conditional for better legibility.  Parenthesize
