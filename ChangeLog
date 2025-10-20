@@ -1,5 +1,13 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/s_start-document-with-keep-quietly.sh: Test more
+	scenarios involving documents using keeps on a cover page.
+
+	Prompted by feedback from Doug McIlroy; see
+	<http://lists.gnu.org/archive/html/groff/2025-10/msg00045.html>.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/an_degenerate-input-uses-sane-page-length.sh: Make
 	test more adaptable to degenerate documents or `PT` and `BT`
 	redefinitions.  This test's concern is with man(7) not putting

@@ -32,23 +32,52 @@ wail () {
 
 input1='.
 .KS
-This is my keep.
-.TS
-L.
-table
-.TE
 .KE
-.LP
-Hello!
 .'
 
+echo "checking document starting with empty static keep" >&2
 error1=$(printf '%s\n' "$input1" | "$groff" -t -m s -z -T ascii 2>&1)
-echo "$error1"
+test -n "$error1" && echo "$error1"
 echo "$error1" | grep -q . && wail
+
+input2='.
+.KS
+foobar
+.KE
+.'
+
+echo "checking document starting with simply populated static keep" >&2
+error2=$(printf '%s\n' "$input2" | "$groff" -t -m s -z -T ascii 2>&1)
+test -n "$error2" && echo "$error2"
+echo "$error2" | grep -q . && wail
+
+# Starting a document with a floating keep should also work fine.
+
+input3='.
+.KF
+.KE
+.'
+
+echo "checking document starting with empty floating keep" >&2
+error3=$(printf '%s\n' "$input3" | "$groff" -t -m s -z -T ascii 2>&1)
+test -n "$error3" && echo "$error3"
+echo "$error3" | grep -q . && wail
+
+input4='.
+.KF
+bazqux
+.KE
+.'
+
+echo "checking document starting with simply populated floating keep" \
+    >&2
+error4=$(printf '%s\n' "$input4" | "$groff" -t -m s -z -T ascii 2>&1)
+test -n "$error4" && echo "$error4"
+echo "$error4" | grep -q . && wail
 
 # Starting with a table should also behave well.
 
-input2='.
+input5='.
 .KS
 .TS
 L.
@@ -59,9 +88,10 @@ table
 Hello!
 .'
 
-error2=$(printf '%s\n' "$input2" | "$groff" -t -m s -z -T ascii 2>&1)
-echo "$error2"
-echo "$error2" | grep -q . && wail
+echo "checking document starting with tbl-populated static keep" >&2
+error5=$(printf '%s\n' "$input5" | "$groff" -t -m s -z -T ascii 2>&1)
+test -n "$error5" && echo "$error5"
+echo "$error5" | grep -q . && wail
 
 test -z "$fail"
 
