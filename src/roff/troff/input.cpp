@@ -3217,7 +3217,7 @@ void process_input_stack()
       {
 	if (reading_beginning_of_input_line
 	    && !have_formattable_input_on_interrupted_line
-	    && !curenv->get_prev_line_interrupted())
+	    && !curenv->get_was_previous_line_interrupted())
 	  trapping_blank_line();
 	else {
 	  curenv->newline();
@@ -3256,7 +3256,7 @@ void process_input_stack()
 	if (possibly_handle_first_page_transition())
 	  ;
 	else if (reading_beginning_of_input_line
-		 && !curenv->get_prev_line_interrupted()) {
+		 && !curenv->get_was_previous_line_interrupted()) {
 	  int nspaces = 0;
 	  // save space_width now so that it isn't changed by \f or \s
 	  // which we wouldn't notice here

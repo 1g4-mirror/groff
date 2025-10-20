@@ -157,8 +157,8 @@ class environment {
   int sentence_space_size;	// same but for spaces at the end of sentences
   int adjust_mode;
   bool is_filling;
-  bool line_interrupted;
-  int prev_line_interrupted;	// three-valued Boolean :-|
+  bool was_line_interrupted;
+  int was_previous_line_interrupted;	// three-valued Boolean :-|
   int centered_line_count;
   int right_aligned_line_count;
   vunits prev_vertical_spacing;
@@ -329,7 +329,7 @@ public:
   const char *get_input_trap_macro();
   int get_right_aligned_line_count();
   int get_no_number_count();
-  int get_prev_line_interrupted() { return prev_line_interrupted; }
+  int get_was_previous_line_interrupted() { return was_previous_line_interrupted; }
   color *get_fill_color();
   color *get_stroke_color();
   color *get_prev_stroke_color();

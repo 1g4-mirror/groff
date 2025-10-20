@@ -29,7 +29,7 @@ class diversion {
   int saved_space_total;
   hunits saved_saved_indent;
   hunits saved_target_text_length;
-  int saved_prev_line_interrupted; // three-valued Boolean :-|
+  int saved_was_previous_line_interrupted; // three-valued Boolean :-|
 protected:
   symbol nm;
   vunits vertical_position;

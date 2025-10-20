@@ -120,8 +120,8 @@ void do_divert(bool appending, bool boxing)
 	curenv->space_total = curdiv->saved_space_total;
 	curenv->saved_indent = curdiv->saved_saved_indent;
 	curenv->target_text_length = curdiv->saved_target_text_length;
-	curenv->prev_line_interrupted
-	  = curdiv->saved_prev_line_interrupted;
+	curenv->was_previous_line_interrupted
+	  = curdiv->saved_was_previous_line_interrupted;
       }
       diversion *temp = curdiv;
       curdiv = curdiv->prev;
@@ -147,8 +147,8 @@ void do_divert(bool appending, bool boxing)
       curdiv->saved_space_total = curenv->space_total;
       curdiv->saved_saved_indent = curenv->saved_indent;
       curdiv->saved_target_text_length = curenv->target_text_length;
-      curdiv->saved_prev_line_interrupted
-	= curenv->prev_line_interrupted;
+      curdiv->saved_was_previous_line_interrupted
+	= curenv->was_previous_line_interrupted;
       curenv->line = 0 /* nullptr */;
       curenv->start_line();
     }

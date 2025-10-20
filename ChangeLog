@@ -1,5 +1,36 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename `line_interrupted` member
+	variable of class `environment` to `was_line_interrupted`; since
+	it stores a Boolean value, its name should clearly imply a
+	logical predicate.  Rename `environment`'s member variable
+	`was_previous_line_interrupted` analogously--even though it is
+	an `int` because it is a kludgy three-valued Boolean.  (The
+	extra value encodes whether a formatter exit is underway, I
+	think.) Rename member function `get_prev_line_interrupted()` to
+	`get_was_previous_line_interrupted()` analogously.  Rename (and
+	unabbreviate) `saved_prev_line_interrupted` member variable of
+	class `diversion` to `saved_was_previous_line_interrupted`
+	analogously.
+
+	* src/roff/troff/div.h (class diversion):
+	* src/roff/troff/env.h (class environment): Do it.
+	* src/roff/troff/div.cpp (do_divert):
+	* src/roff/troff/env.cpp (environment::add_char)
+	(environment::add_node, environment::add_hyphen_indicator)
+	(environment::space_newline, environment::space)
+	(environment::set_font, environment::set_family)
+	(environment::set_size, environment::set_char_height)
+	(environment::set_char_slant, environment::set_stroke_color)
+	(environment::set_fill_color, environment::environment)
+	(environment::copy, environment::interrupt)
+	(environment::newline, environment::final_break)
+	(environment::do_break, environment::dump, init_env_requests):
+	* src/roff/troff/input.cpp (process_input_stack): Update call
+	and dereference sites.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[ms]: Support floating keeps on cover page.  (Traditionally, a
 	cover page is exactly that--a page, singular, and therefore
 	support for floating keeps should be unnecessary.  But letting a
