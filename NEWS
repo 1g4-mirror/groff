@@ -414,7 +414,7 @@ Macro packages
    .
    .SY mv
    .I source
-   \&.\|.\|.
+   \&.\|.\|.\&
    .I destination-directory
    .YS
 
@@ -428,7 +428,7 @@ Macro packages
    .P
    .SY mv
    .I source
-   \&.\|.\|.
+   \&.\|.\|.\&
    .I destination-directory
    .YS
 
