@@ -343,8 +343,18 @@ void leader_character_request()
 void environment::add_char(charinfo *ci)
 {
   node *gc_np = 0 /* nullptr */;
-  if (was_line_interrupted)
-    ;
+  if (was_line_interrupted) {
+    unsigned char cc = ci->get_ascii_code();
+    if (0 == cc)
+      warning(WARN_SYNTAX, "ignoring special character on input line"
+	      " after output line continuation escape sequence");
+    else if (cc != '\'' )
+      warning(WARN_SYNTAX, "ignoring character '%1' on input line after"
+	      " output line continuation escape sequence", cc);
+    else
+      warning(WARN_SYNTAX, "ignoring character \"%1\" on input line"
+	      " after output line continuation escape sequence", cc);
+  }
   // don't allow fields in dummy environments
   else if (ci == field_delimiter_char && !is_dummy_env) {
     if (has_current_field)

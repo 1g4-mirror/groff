@@ -1,5 +1,12 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::add_char): Throw syntax
+	warning upon encountering formattable ordinary or special
+	characters after `\c` escape sequence on an input line.
+	* src/roff/troff/troff.1.man (Warnings): Document it.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (an*end-hyperlink): Work around apparently
 	overpowered--or buggy--`chop` request.  Annotate landmine.
 
