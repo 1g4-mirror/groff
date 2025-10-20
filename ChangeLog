@@ -1,5 +1,10 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Initialize more state to prevent warnings when
+	formatting degenerate documents.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (usage): Resync usage message with
 	man page synopsis.
 

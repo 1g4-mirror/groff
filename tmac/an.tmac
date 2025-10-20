@@ -1480,6 +1480,8 @@ contains unsupported escape sequence
 .
 .\" Initialize registers and strings that trap-called macros access, to
 .\" avoid warnings when formatting degenerate man(7) documents.
+.an*reset-paragraph-spacing
+.nr an-margin 0
 .nr an-need-no-space-mode 0
 .nr an-need-break 0
 .ds an-pageref \" empty
