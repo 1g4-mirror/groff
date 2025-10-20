@@ -1577,7 +1577,7 @@ supplies them automatically.
 .
 .TP
 .BR .EQ \~[\c
-.IR align \~[\c]
+.IR align \~[\c
 .IR label ]]
 .TQ
 .B .EN
