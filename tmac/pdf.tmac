@@ -187,24 +187,17 @@ am solely responsible for any bugs I may have introduced into this file.
 .\"
 .nr PDFOUTLINE.FOLDLEVEL 10000
 .\"
-.\" Search defined bookmarks for a tag matching $1.  This gets around
-.\" problems with *roff escape sequences embedded in identifiers (which
-.\" is not allowed by the language syntax), and the need to tediously
-.\" scrub the strings of them (and throw diagnostics in the user's face
-.\" if we don't do a good enough job) at the expense of an O(n) search
-.\" every time we reference a bookmark instead of an O(1) one.
+.\" Search defined bookmarks for a tag matching $1.  This approach gets
+.\" around problems with *roff escape sequences embedded in identifiers
+.\" (which is not allowed by the language syntax), and the need to
+.\" tediously scrub the strings of them (and throw diagnostics in the
+.\" user's face if we don't do a good enough job).
 .\"
 .de pdf:lookup
-.nr pdf:index 0 1
-.ds pdf:lookup-result \" empty
-.ds pdf:lookup-value  \" empty
-.while d pdf:bm\\n+[pdf:index].tag \{\
-.   if '\\$1'\\*[pdf:bm\\n[pdf:index].tag]' \{\
-.      ds pdf:lookup-result \\*[pdf:bm\\n[pdf:index].tag]\"
-.      ds pdf:lookup-value \\*[pdf:bm\\n[pdf:index].val]\"
-.      break
-.      \}
-.   \}
+.rm pdf:lookup-result
+.ds pdf:lookup-target \\$1
+.als pdf:lookup-result pdf:lookup-target
+.rm pdf:lookup-target
 ..
 .
 .\" The actual job of creating an outline reference
@@ -719,7 +712,7 @@ with '-A' option
 .   el \{\
 .      ds PDFHREF.DESC Unknown
 .      pdf:lookup \\*[pdf:href-D]
-.      if !'\\*[pdf:lookup-result]'' .ds PDFHREF.DESC \\*[pdf:lookup-value]
+.      if !'\\*[pdf:lookup-result]'' .ds PDFHREF.DESC \\*[pdf:lookup-result]
 .      \}
 .   \" Apply border and colour specifications to the PDFMARK string
 .   \" definition, as required.
