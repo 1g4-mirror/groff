@@ -9223,7 +9223,7 @@ static void add_string(const char *s, string_list **p)
 void usage(FILE *stream, const char *prog)
 {
   fprintf(stream,
-"usage: %s [-abcCEiRSUz] [-d ct] [-d string=text] [-f font-family]"
+"usage: %s [-abcCEiRSUz] [-d ctext] [-d string=text] [-f font-family]"
 " [-F font-directory] [-I inclusion-directory] [-m macro-package]"
 " [-M macro-directory] [-n page-number] [-o page-list]"
 " [-r cnumeric-expression] [-r register=numeric-expression]"

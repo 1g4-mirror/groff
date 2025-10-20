@@ -1,5 +1,10 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (usage): Resync usage message with
+	man page synopsis.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/pdf.tmac (pdfnote, pdfbookmark, pdfhref)
 	(pdf:href.options,clear, pdf*href-M, pdf*href, pdf*href-I): Fix
 	code style nit; put a space after each `d` conditional
