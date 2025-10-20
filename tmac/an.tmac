@@ -1226,7 +1226,15 @@ contains unsupported escape sequence
 .      chop an*link-text
 .      as an*link-text \&\c
 .      an*link-text
-.      nop \"
+\" This is deliberately a blank line with a comment.
+.\" XXX: We would use the `nop` request here to put a break on the
+.\" output (with nice indentation to boot), but interpolating a chopped
+.\" diversion, even with a string appendment manipulates the input
+.\" parser a little too powerfully, and the formatter thinks ".nop"
+.\" appears on the input line literally after the `\c` at the end of
+.\" `an*link-text`.  (We need that `\c`, else multiple tests fail.)
+.\" String/macro/diversion manipulation needs closer attention in the
+.\" formatter.
 .      if '\*[.T]'html' \
 .        nop \X'html:</a>'\c
 .      if \\n[an*is-output-terminal] \

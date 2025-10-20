@@ -1,5 +1,10 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*end-hyperlink): Work around apparently
+	overpowered--or buggy--`chop` request.  Annotate landmine.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::dump): Drop duplicate line
 	of output to the standard error stream introduced in commit
 	148b65b1ed, 12 September.
