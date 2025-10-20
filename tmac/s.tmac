@@ -41,6 +41,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\" Define a string for use in diagnostic messages.
 .ds @s s.tmac\"
 .
+.nr @is-initialized 0
+.
 .de @diag
 .	ds *file \" empty
 .	ds *line \" empty
@@ -114,15 +116,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .	rr @saved-no-space-mode
 ..
 .
+.\" Initialize environments `k` and `nf` immediately so that keeps can
+.\" be used on a cover page.
+.ev k
+.evc 0
+.ev
+.
+.ev nf
+.evc 0
+'nf
+.ev
+.
 .de @init
 .if !rPO .nr PO \\n(.o
 .\" a non-empty environment
 .ev ne
 \c
 .ev
-.ev nf
-'nf
-.ev
+.nr @is-initialized 1
 ..
 .ds REFERENCES References
 .ds ABSTRACT ABSTRACT
@@ -930,8 +941,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .if !'\\n(.z'' .@error-recover .KF while diversion open
 .di kp@fdiv
 .ev k
-.par@reset-env
-.par@reset
+.if \\n[@is-initialized] \{\
+.	par@reset-env
+.	par@reset
+.\}
 ..
 .de KE
 .nr kp*did-closure-succeed 0

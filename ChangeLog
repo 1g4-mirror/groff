@@ -1,5 +1,23 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[ms]: Support floating keeps on cover page.  (Traditionally, a
+	cover page is exactly that--a page, singular, and therefore
+	support for floating keeps should be unnecessary.  But letting a
+	content reviewer scold a document author for letting a keep
+	float to a second "cover" page seems less bad than the macro
+	package throwing difficult-to-comprehend diagnostic messages.)
+
+	* tmac/s.tmac: Initialize new Boolean-valued global register
+	`@is-initialized` as false on startup.  Initialize the `k` and
+	`nf` environments at startup, and copy their properties from
+	environment `0`.
+	(@init): Stop initializing `nf` environment here.  Make
+	`@is-initialized` true.
+	(KF): Call `par@reset-env` and `par@reset` only if the package
+	is initialized.  If it isn't, these macros are not yet defined.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tests/s_start-document-with-keep-quietly.sh: Test more
 	scenarios involving documents using keeps on a cover page.
 
