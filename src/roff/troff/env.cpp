@@ -441,8 +441,10 @@ void environment::add_node(node *nd)
 
 void environment::add_hyphen_indicator()
 {
-  if ((current_tab != TAB_NONE) || was_line_interrupted || has_current_field
-      || hyphen_indicator_char != 0 /* nullptr */)
+  if ((current_tab != TAB_NONE)
+      || was_line_interrupted
+      || has_current_field
+      || (hyphen_indicator_char != 0 /* nullptr */))
     return;
   if (line == 0 /* nullptr */)
     start_line();
@@ -1920,7 +1922,7 @@ void environment::newline()
     hyphen_line_count = 0;
   }
   if (input_trap_count > 0) {
-    if (!(continued_input_trap && was_previous_line_interrupted))
+    if (!(continued_input_trap && (was_previous_line_interrupted > 0)))
       if (--input_trap_count == 0)
 	spring_trap(input_trap);
   }

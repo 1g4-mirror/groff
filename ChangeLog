@@ -1,5 +1,14 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Fix code style nits.
+	(environment::add_hyphen_indicator): Wrap long input line and
+	break lengthy conditional for better legibility.  Parenthesize
+	formally complex expression.
+	(environment::newline): Compare integer variable explicitly to
+	integer literal value instead of punning down to a Boolean.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename `line_interrupted` member
 	variable of class `environment` to `was_line_interrupted`; since
 	it stores a Boolean value, its name should clearly imply a
