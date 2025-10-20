@@ -27,6 +27,8 @@ This is my paragraph.
 output=$(echo "$input" | "$groff" -rcR=1 -man -T ascii -P -cbou)
 echo "$output"
 
-test $(echo "$output" | wc -l) -eq 1
+# We might have 2 blank lines for the header and footer, and up to one
+# for inter-paragraph spacing.
+test $(echo "$output" | wc -l) -lt 5
 
 # vim:set ai et sw=4 ts=4 tw=72:

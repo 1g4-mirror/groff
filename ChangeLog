@@ -1,5 +1,12 @@
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tests/an_degenerate-input-uses-sane-page-length.sh: Make
+	test more adaptable to degenerate documents or `PT` and `BT`
+	redefinitions.  This test's concern is with man(7) not putting
+	an insane number of blank lines on the output.
+
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Initialize more state to prevent warnings when
 	formatting degenerate documents.
 
