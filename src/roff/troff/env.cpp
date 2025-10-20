@@ -542,7 +542,7 @@ void environment::space_newline()
     return;
   }
   add_node(new word_space_node(x, get_fill_color(), w));
-  possibly_break_line(false, is_spreading);
+  possibly_break_line(false /* must break here */, is_spreading);
   is_spreading = false;
 }
 
@@ -578,7 +578,7 @@ void environment::space(hunits space_width, hunits sentence_space_width)
 			       get_fill_color(),
 			       new width_list(space_width,
 					      sentence_space_width)));
-  possibly_break_line(false, is_spreading);
+  possibly_break_line(false /* must break here */, is_spreading);
   is_spreading = false;
 }
 
@@ -2602,7 +2602,7 @@ void environment::do_break(bool want_adjustment)
       line = new space_node(H0, get_fill_color(), line);
       space_total++;
     }
-    possibly_break_line(false, want_adjustment);
+    possibly_break_line(false /* must break here */, want_adjustment);
   }
   while (line != 0 /* nullptr */ && line->discardable()) {
     width_total -= line->width();
