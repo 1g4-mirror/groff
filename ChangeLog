@@ -1,3 +1,10 @@
+2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/pdf.tmac (pdfnote, pdfbookmark, pdfhref)
+	(pdf:href.options,clear, pdf*href-M, pdf*href, pdf*href-I): Fix
+	code style nit; put a space after each `d` conditional
+	expression operator, for better code legibility.
+
 2025-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/pdf.tmac: Fix performance regression in PDF bookmark

@@ -148,7 +148,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" Parse any specified (recognisable) PDFNOTE options
 .\"
 .   while \A'\\$1' \{\
-.      if !dpdf:note\\$1 .break
+.      if !d pdf:note\\$1 .break
 .      pdf:note\\$1 \\$@
 .      shift \\n[pdf:note.argc]
 .      \}
@@ -224,7 +224,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .      nr pdf:bm.nr +1
 .      ds pdf:href-T
 .      while \A'\\$1' \{\
-.         if !dpdf:href.opt\\$1 .break
+.         if !d pdf:href.opt\\$1 .break
 .         pdf:href.opt\\$1 \\$@
 .         shift \\n[pdf:href.argc]
 .         \}
@@ -415,22 +415,22 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \" Handle the case where subcommand is specified as "-class",
 .   \" setting up appropriate macro aliases for subcommand handlers.
 .   \"
-.      if dpdf*href\\$1       .als pdf*href      pdf*href\\$1
-.      if dpdf*href\\$1.link  .als pdf*href.link pdf*href\\$1.link
-.      if dpdf*href\\$1.file  .als pdf*href.file pdf*href\\$1.file
+.      if d pdf*href\\$1       .als pdf*href      pdf*href\\$1
+.      if d pdf*href\\$1.link  .als pdf*href.link pdf*href\\$1.link
+.      if d pdf*href\\$1.file  .als pdf*href.file pdf*href\\$1.file
 .   \"
 .   \" Repeat macro alias setup
 .   \" for the case where the subcommand is specified as "class",
 .   \" (without a leading hyphen)
 .   \"
-.      if dpdf*href-\\$1      .als pdf*href      pdf*href-\\$1
-.      if dpdf*href-\\$1.link .als pdf*href.link pdf*href-\\$1.link
-.      if dpdf*href-\\$1.file .als pdf*href.file pdf*href-\\$1.file
+.      if d pdf*href-\\$1      .als pdf*href      pdf*href-\\$1
+.      if d pdf*href-\\$1.link .als pdf*href.link pdf*href-\\$1.link
+.      if d pdf*href-\\$1.file .als pdf*href.file pdf*href-\\$1.file
 .   \"
 .   \" Process one subcommand ...
 .   \"
 .      ds pdf*href.class \\$1
-.      ie dpdf*href \{\
+.      ie d pdf*href \{\
 .      \"
 .      \" Subcommand "class" is recognised ...
 .      \" discard the "class" code from the argument list,
@@ -524,7 +524,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .   \" deleting each specified option argument string in turn
 .   \"
 .   while \\n(.$ \{\
-.      if dpdf:href-\\$1 .rm pdf:href-\\$1
+.      if d pdf:href-\\$1 .rm pdf:href-\\$1
 .      shift
 .      \}
 .   \}
@@ -560,7 +560,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" the "descriptive text" component of the argument list).
 .\"
 .while \A'\\$1' \{\
-.   if !dpdf:href.opt\\$1 .break
+.   if !d pdf:href.opt\\$1 .break
 .   pdf:href.opt\\$1 \\$@
 .   shift \\n[pdf:href.argc]
 .   \}
@@ -651,7 +651,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" the "link text" component of the argument list).
 .\"
 .while \A'\\$1' \{\
-.   if !dpdf:href.opt\\$1 .break
+.   if !d pdf:href.opt\\$1 .break
 .   pdf:href.opt\\$1 \\$@
 .   shift \\n[pdf:href.argc]
 .   \}
@@ -667,7 +667,7 @@ am solely responsible for any bugs I may have introduced into this file.
 .\" can't identify the destination, then set "pdf:href.ok" to zero,
 .\" so this link will not be created.
 .\"
-.if !dpdf:href-D .pdf:href.option -D \\$1
+.if !d pdf:href-D .pdf:href.option -D \\$1
 .if '\\*[pdf:href-D]'' \{\
 .   pdf:error pdfhref has no destination
 .   nr pdf:href.ok 0
@@ -695,7 +695,7 @@ with '-A' option
 .\" If the user specified any "link prefix" text, (using the "-P text"
 .\" option), then emit it BEFORE processing the "link text" itself.
 .\"
-.if dpdf:href-P \&\\*[pdf:href-P]\c
+.if d pdf:href-P \&\\*[pdf:href-P]\c
 .ie \\n[pdf:href.ok] \{\
 .   \"
 .   \" This link is VALID (so far as we can determine) ...
@@ -717,14 +717,14 @@ with '-A' option
 .   \" Apply border and colour specifications to the PDFMARK string
 .   \" definition, as required.
 .   \"
-.   if dPDFHREF.BORDER .as pdf:href.link " /Border [\\*[PDFHREF.BORDER]]
-.   if dPDFHREF.COLOUR .as pdf:href.link " /Color  [\\*[PDFHREF.COLOUR]]
+.   if d PDFHREF.BORDER .as pdf:href.link " /Border [\\*[PDFHREF.BORDER]]
+.   if d PDFHREF.COLOUR .as pdf:href.link " /Color  [\\*[PDFHREF.COLOUR]]
 .   \"
 .   \" Emit the "link text", in its appropriate colour, marking the
 .   \" limits of its bounding box(es), as the before and after output
 .   \" text positions.
 .   \"
-\#.   if dPDFHREF.COLOUR .defcolor pdf:href.colour rgb \\*[PDFHREF.COLOUR]
+\#.   if d PDFHREF.COLOUR .defcolor pdf:href.colour rgb \\*[PDFHREF.COLOUR]
 .   ds pdf:curcol \\n[.m]
 .   nr pdf:bm.width \\w'\\*[PDFHREF.DESC]'
 .   nop \&\m[\\*[PDFHREF.TEXT.COLOUR]]\c
@@ -770,7 +770,7 @@ with '-A' option
 .   \" handing them off to their respective initialisers,
 .   \" when suitable initialisers exist, or complaining otherwise.
 .   \"
-.   ie dpdf*href\\$1.init .pdf*href\\$1.init \\$2
+.   ie d pdf*href\\$1.init .pdf*href\\$1.init \\$2
 .   el .pdf:error pdfhref:init: unknown feature '\\$1'
 .   shift 2
 .   \}
