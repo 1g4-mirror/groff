@@ -144,6 +144,7 @@ tmac_TESTS = \
   tmac/tests/an_HY-register-works.sh \
   tmac/tests/an_LL-register-initializes-sanely.sh \
   tmac/tests/an_ME-second-argument-hyphenates.sh \
+  tmac/tests/an_MR-internal-hyperlinks-work-with-pdfmom.sh \
   tmac/tests/an_MR-works.sh \
   tmac/tests/an_MT-body-hyphenates.sh \
   tmac/tests/an_MT-works.sh \
@@ -193,6 +194,7 @@ tmac_TESTS = \
   tmac/tests/andoc_check-an-to-doc-transition.sh \
   tmac/tests/andoc_clear-doc-traps.sh \
   tmac/tests/andoc_flush-between-packages.sh \
+  tmac/tests/andoc_internal-hyperlinks-work-with-pdfmom.sh \
   tmac/tests/andoc_report-useful-line-numbers-in-diagnostics.sh \
   tmac/tests/doc-old_vertical-margins-are-correct.sh \
   tmac/tests/doc_CS-register-works.sh \
@@ -206,6 +208,7 @@ tmac_TESTS = \
   tmac/tests/doc_Rs-works.sh \
   tmac/tests/doc_TS-do-not-keep-tables-when-cR-set.sh \
   tmac/tests/doc_X-register-works.sh \
+  tmac/tests/doc_Xr-internal-hyperlinks-work-with-pdfmom.sh \
   tmac/tests/doc_Xr-works.sh \
   tmac/tests/doc_accept-mixed-case-section-headings.sh \
   tmac/tests/doc_adjustment-mode-restoration-works.sh \

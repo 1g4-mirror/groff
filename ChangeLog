@@ -1,5 +1,17 @@
 2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gropdf]: Add unit tests for pdfmom(1)'s replacement of external
+	man page reference hyperlinks with internal links to document
+	bookmarks.
+
+	* tmac/tests/an_MR-internal-hyperlinks-work-with-pdfmom.sh:
+	* tmac/tests/andoc_internal-hyperlinks-work-with-pdfmom.sh:
+	* tmac/tests/doc_Xr-internal-hyperlinks-work-with-pdfmom.sh: Do
+	it.
+	* tmac/tmac.am (tmac_TESTS): Run tests.
+
+2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[gropdf]: Make pdfmom able to run the build tree's groff.
 
 	* src/devices/gropdf/pdfmom.pl: Add new global scalar `groff` to
