@@ -138,33 +138,6 @@
 
 2025-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* tmac/pdf.tmac: Fix performance regression in PDF bookmark
-	lookups, using O(1) lookup method instead of one that is
-	formally O(n) but probably O(n^2) in practice as the number of
-	bookmarks in a document increases.
-	(pdf:lookup): Finagle a constant-time lookup for PDF bookmarks,
-	which are stored as string names.  Drop linear lookup by
-	bookmark number, comparing value of each numbered bookmark's
-	"tag" to the given macro argument.  Instead, assign value of
-	first argument to new string `pdf:lookup-target`.  Use GNU
-	troff's `als` aliasing facility to make new string
-	`pdf:lookup-result` an alias of `pdf:lookup-target`.  Remove
-	`pdf:lookup-target` before returning, leaving
-	`pdf:lookup-result` defined for benefit of callers.
-	(pdf*href): Assign value of `pdf:lookup-result` string instead
-	of vanished `pdf:lookup-value` to string `PDFHREF.DESC`.
-
-	Fixes <https://savannah.gnu.org/bugs/?67602>.  Thanks to Deri
-	James for the report; he noted a major regression in PDF
-	production time with the non-constant lookup time when
-	generating Alex Colomar's collected Linux man-pages document.
-	For me, this takes generation time down from about 40 minutes to
-	about 30 seconds.  Problem introduced by me in commit
-	aa43ffcfb8, 16 March 2024, but not immediately exposed--that
-	took some more work on PDF bookmark hyperlinking.
-
-2025-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
-
 	* font/devpdf/Foundry.in:
 	* m4/groff.m4 (GROFF_URW_FONTS_CHECK): Add
 	"/usr/share/ghostscript/Resource/Font" directory to search path
