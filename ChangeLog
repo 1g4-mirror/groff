@@ -1,5 +1,17 @@
 2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gropdf]: Make pdfmom able to run the build tree's groff.
+
+	* src/devices/gropdf/pdfmom.pl: Add new global scalar `groff` to
+	store the name/locate of the groff command to run.  Default its
+	value to "groff", but override it with the contents of the
+	environment variable `GROFF_COMMAND` if that exists.  Update
+	hard-coded "groff" literals with interpolations of this scalar.
+	This interface is deliberately not documented in the man page,
+	since it's intended for the use of groff's build system.
+
+2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[gropdf]: Make pdfmom disclose version of groff it runs.
 
 	* src/devices/gropdf/pdfmom.pl: When handling `-v`/`--version`
