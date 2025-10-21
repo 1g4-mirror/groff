@@ -140,6 +140,8 @@ while (my $c=shift)
     elsif ($c eq '-v' or $c eq '--version')
     {
 	print "GNU pdfmom (groff) version @VERSION@\n";
+	my $waitstatus = system("groff -T$dev --version");
+	abort(autopsy($?)) unless $waitstatus == 0;
 	exit;
     }
     elsif (substr($c,0,1) eq '-')

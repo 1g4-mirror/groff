@@ -1,5 +1,19 @@
 2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gropdf]: Make pdfmom disclose version of groff it runs.
+
+	* src/devices/gropdf/pdfmom.pl: When handling `-v`/`--version`
+	option, run "groff" with the `--version` option as well, as our
+	other wrapper programs nroff(1) and groff(1) do.  This makes it
+	easy to see if the versions of the various programs in the
+	pipeline are askew.
+
+	Fixes <https://savannah.gnu.org/bugs/?67618>.  Problem appears
+	to date back to pdfmom's birth in commit f2a501fff5, 31 August
+	2012.
+
+2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor recent change (to diagnose ignored characters
 	on input lines after `\c` escape sequence) to catch the problem
 	earlier in processing and report more information (before it is
