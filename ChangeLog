@@ -15,8 +15,8 @@
 	[gropdf]: Make pdfmom able to run the build tree's groff.
 
 	* src/devices/gropdf/pdfmom.pl: Add new global scalar `groff` to
-	store the name/locate of the groff command to run.  Default its
-	value to "groff", but override it with the contents of the
+	store the name/location of the groff command to run.  Default
+	its value to "groff", but override it with the contents of the
 	environment variable `GROFF_COMMAND` if that exists.  Update
 	hard-coded "groff" literals with interpolations of this scalar.
 	This interface is deliberately not documented in the man page,
