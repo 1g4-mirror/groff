@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2021 Free Software Foundation, Inc.
+# Copyright 2021 G. Branden Robinson
 #
 # This file is part of groff.
 #
@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 groff="${abs_top_builddir:-.}/test-groff"
 
@@ -67,3 +66,5 @@ echo "$OUTPUT" | grep -qx swedish
 echo "testing Chinese localization" >&2
 OUTPUT=$(echo "$DOC" | "$groff" -Tascii -m zh)
 echo "$OUTPUT" | grep -qx chinese
+
+# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
