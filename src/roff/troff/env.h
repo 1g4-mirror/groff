@@ -329,6 +329,7 @@ public:
   const char *get_input_trap_macro();
   int get_right_aligned_line_count();
   int get_no_number_count();
+  bool get_was_line_interrupted() { return was_line_interrupted; }
   int get_was_previous_line_interrupted() { return was_previous_line_interrupted; }
   color *get_fill_color();
   color *get_stroke_color();

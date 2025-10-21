@@ -1,5 +1,28 @@
 2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor recent change (to diagnose ignored characters
+	on input lines after `\c` escape sequence) to catch the problem
+	earlier in processing and report more information (before it is
+	lost by calling into member functions of the `environment`
+	class).
+
+	* src/roff/troff/env.cpp (environment::add_char): Drop
+	just-added logic to handle case when `was_line_interrupted` is
+	true.  Add initial `assert()` to check desired invariant: we
+	shouldn't reach this member function when a line has been
+	interrupted.
+	* src/roff/troff/env.h (class environment): Add accessor member
+	function `get_was_line_interrupted()` for private Boolean member
+	variable `was_line_interrupted`.
+	* src/roff/troff/input.cpp (process_input_stack): Check line
+	interruption status of current environment when processing
+	tokens of type `TOKEN_CHAR`, `TOKEN_INDEXED_CHAR`, and
+	`TOKEN_SPECIAL_CHAR`; skip the usual actions taken if that
+	status is true, and throw a warning in category "syntax"
+	instead.
+
+2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (process_input_stack): Rename
 	`suppress_next` local variable to `ignore_next_token`, and
 	demote it from `int` to `bool`.  Assign to it with Boolean

@@ -3178,7 +3178,12 @@ void process_input_stack()
 		fprintf(stderr, "found [%c]\n", ch); fflush(stderr);
 	      }
 #endif
-	      curenv->add_char(charset_table[ch]);
+	      if (curenv->get_was_line_interrupted())
+		warning(WARN_SYNTAX, "ignoring %1 on input line after"
+			" output line continuation escape sequence",
+			tok.description());
+	      else
+		curenv->add_char(charset_table[ch]);
 	      tok.next();
 	      if (tok.type != token::TOKEN_CHAR)
 		break;
@@ -3354,6 +3359,17 @@ void process_input_stack()
 	  curenv->output_pending_lines();
 	break;
       }
+    case token::TOKEN_INDEXED_CHAR:
+    case token::TOKEN_SPECIAL_CHAR:
+      if (curenv->get_was_line_interrupted())
+	warning(WARN_SYNTAX, "ignoring %1 on input line after output"
+		" line continuation escape sequence",
+		tok.description());
+      else {
+	reading_beginning_of_input_line = false;
+	tok.process();
+      }
+      break;
     default:
       {
 	reading_beginning_of_input_line = false;
