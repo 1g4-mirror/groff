@@ -3125,7 +3125,7 @@ void process_input_stack()
   std::stack<int> trap_bol_stack;
   bool reading_beginning_of_input_line = true;
   for (;;) {
-    int suppress_next = 0;
+    bool ignore_next_token = false;
     switch (tok.type) {
     case token::TOKEN_CHAR:
       {
@@ -3166,7 +3166,7 @@ void process_input_stack()
 	    }
 #endif
 	  }
-	  suppress_next = 1;
+	  ignore_next_token = true;
 	}
 	else {
 	  if (possibly_handle_first_page_transition())
@@ -3184,7 +3184,7 @@ void process_input_stack()
 		break;
 	      ch = tok.c;
 	    }
-	    suppress_next = 1;
+	    ignore_next_token = true;
 	    reading_beginning_of_input_line = false;
 	  }
 	}
@@ -3248,7 +3248,7 @@ void process_input_stack()
 	  assert(0 == "unhandled case of `request_code` (int)");
 	  break;
 	}
-	suppress_next = 1;
+	ignore_next_token = true;
 	break;
       }
     case token::TOKEN_SPACE:
@@ -3361,7 +3361,7 @@ void process_input_stack()
 	break;
       }
     }
-    if (!suppress_next)
+    if (!ignore_next_token)
       tok.next();
     was_trap_sprung = false;
   }

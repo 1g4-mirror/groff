@@ -1,3 +1,10 @@
+2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (process_input_stack): Rename
+	`suppress_next` local variable to `ignore_next_token`, and
+	demote it from `int` to `bool`.  Assign to it with Boolean
+	rather than integer literals.
+
 2025-10-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::add_char): Throw syntax
