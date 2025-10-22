@@ -1,5 +1,17 @@
 2025-10-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (process_input_stack
+	<token::TOKEN_SPACE>): Diagnose ignored spaces after an output
+	line continuation escape sequence (`\c`) on an input line.
+	* src/roff/troff/env.cpp (environment::space_newline): Add
+	assertion on falsity of `was_line_interrupted` since this member
+	function should now be unreachable when that condition obtains.
+
+	* doc/groff.texi (Warnings) <syntax>:
+	* src/roff/troff/troff.1.man (Warnings) <syntax>: Document it.
+
+2025-10-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[gropdf]: Add negative testing to new unit tests; check that
 	`man:` URIs are not incorrectly rewritten as internal links when
 	no corresponding bookmark exists.

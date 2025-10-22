@@ -19303,7 +19303,7 @@ A numeric expression was out of range for its context.
 A self-contradictory hyphenation mode or character flags were requested;
 an empty or incomplete numeric expression was encountered;
 an operand to a numeric operator was missing;
-an attempt was made to format characters on an input line
+an attempt was made to format characters or spaces on an input line
 after an output line continuation escape sequence;
 a recognized but inapposite escape sequence
 or unprintable character code

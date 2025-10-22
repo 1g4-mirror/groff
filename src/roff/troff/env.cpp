@@ -514,6 +514,7 @@ void environment::add_italic_correction()
 
 void environment::space_newline()
 {
+  assert(!was_line_interrupted);
   assert((current_tab == TAB_NONE) && !has_current_field);
   if (was_line_interrupted)
     return;

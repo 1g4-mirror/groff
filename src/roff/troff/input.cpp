@@ -3258,7 +3258,11 @@ void process_input_stack()
       }
     case token::TOKEN_SPACE:
       {
-	if (possibly_handle_first_page_transition())
+	if (curenv->get_was_line_interrupted())
+	  warning(WARN_SYNTAX, "ignoring %1 on input line after"
+		  " output line continuation escape sequence",
+		  tok.description());
+	else if (possibly_handle_first_page_transition())
 	  ;
 	else if (reading_beginning_of_input_line
 		 && !curenv->get_was_previous_line_interrupted()) {
