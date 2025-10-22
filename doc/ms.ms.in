@@ -2600,7 +2600,7 @@ _
 T{
 \&.EQ
 .R
-.I align \~[\c
+.I align \~[\c [
 .I label ]]
 .CW
 .br
