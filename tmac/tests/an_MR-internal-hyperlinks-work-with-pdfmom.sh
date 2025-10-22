@@ -43,6 +43,8 @@ bar \\- a command that is difficult to use
 .SH Description
 Novice users should avoid this command in favor of its wrapper,
 .MR foo 1 .
+An even more esoteric interface is
+.MR baz 1 .
 .'
 
 output=$(echo "$input" \
@@ -52,6 +54,7 @@ echo "$output"
 # Expected (lines truncated):
 #  109	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /bar(1)
 #  265	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /foo(1)
+#  301	x X pdf: markstart 6830 -140 2000 /Subtype /Link /Action << /Subtype /URI /URI (man:baz(1))
 
 echo "checking that backward internal links work" >&2
 echo "$output" \
@@ -61,6 +64,11 @@ echo "$output" \
 echo "checking that forward internal links work" >&2
 echo "$output" \
   | grep -Eq '^ *109[[:space:]]+x X pdf: markstart .*/Dest /bar\(1\)' \
+  || wail
+
+echo "checking that external links are not rewritten" >&2
+echo "$output" \
+  | grep -Eq '^ *301[[:space:]]+x X pdf: markstart .*/URI \(man:baz\(1\))' \
   || wail
 
 test -z "$fail"

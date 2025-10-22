@@ -50,6 +50,8 @@ The real work is done by
 .Sh Description
 Novice users should avoid this command in favor of its wrapper,
 .Xr foo 1 .
+An even more esoteric interface is
+.Xr baz 1 .
 .'
 
 output1=$(echo "$input1" \
@@ -59,6 +61,7 @@ echo "$output1"
 # Expected (lines truncated):
 #  109	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /bar(1)
 #  244	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /foo(1)
+#  278	x X pdf: markstart 6830 -140 2000 /Subtype /Link /Action << /Subtype /URI /URI (man:baz(1))
 
 echo "checking that backward internal link from mdoc(7) document" \
   "to man(7) document works" >&2
@@ -70,6 +73,11 @@ echo "checking that forward internal link from man(7) document" \
   "to mdoc(7) document works" >&2
 echo "$output1" \
   | grep -Eq '^ *109[[:space:]]+x X pdf: markstart .*/Dest /bar\(1\)' \
+  || wail
+
+echo "checking that external links are not rewritten" >&2
+echo "$output1" \
+  | grep -Eq '^ *278[[:space:]]+x X pdf: markstart .*/URI \(man:baz\(1\)\)' \
   || wail
 
 # Second, arrange an mdoc(7) document before a man(7) one.
@@ -90,6 +98,8 @@ bar \\- a command that is difficult to use
 .SH Description
 Novice users should avoid this command in favor of its wrapper,
 .MR foo 1 .
+An even more esoteric interface is
+.MR baz 1 .
 .'
 
 output2=$(echo "$input1" \
@@ -99,6 +109,7 @@ echo "$output2"
 # Expected (lines truncated):
 #  109	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /bar(1)
 #  244	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /foo(1)
+#  278	x X pdf: markstart 6830 -140 2000 /Subtype /Link /Action << /Subtype /URI /URI (man:baz(1))
 
 echo "checking that backward internal link from man(7) document" \
   "to mdoc(7) document works" >&2
@@ -110,6 +121,11 @@ echo "checking that forward internal link from mdoc(7) document" \
   "to man(7) document works" >&2
 echo "$output2" \
   | grep -Eq '^ *109[[:space:]]+x X pdf: markstart .*/Dest /bar\(1\)' \
+  || wail
+
+echo "checking that external links are not rewritten" >&2
+echo "$output2" \
+  | grep -Eq '^ *278[[:space:]]+x X pdf: markstart .*/URI \(man:baz\(1\))' \
   || wail
 
 test -z "$fail"

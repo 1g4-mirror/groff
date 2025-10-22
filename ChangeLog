@@ -1,3 +1,14 @@
+2025-10-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[gropdf]: Add negative testing to new unit tests; check that
+	`man:` URIs are not incorrectly rewritten as internal links when
+	no corresponding bookmark exists.
+
+	* tmac/tests/an_MR-internal-hyperlinks-work-with-pdfmom.sh:
+	* tmac/tests/andoc_internal-hyperlinks-work-with-pdfmom.sh:
+	* tmac/tests/doc_Xr-internal-hyperlinks-work-with-pdfmom.sh: Do
+	it.
+
 2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[gropdf]: Add unit tests for pdfmom(1)'s replacement of external

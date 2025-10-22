@@ -49,15 +49,19 @@ The real work is done by
 .Sh Description
 Novice users should avoid this command in favor of its wrapper,
 .Xr foo 1 .
+An even more esoteric interface is
+.Xr baz 1 .
 .'
 
 output=$(echo "$input" \
   | GROFF_COMMAND="$groff" "$pdfmom" --roff -rU1 -mdoc -Z | nl -ba)
 echo "$output"
 
+exit
 # Expected (lines truncated):
 #   90	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /bar(1)
 #  222	x X pdf: markstart 6830 -1770 2000 /Subtype /Link /Dest /foo(1)
+#  256	x X pdf: markstart 6830 -140 2000 /Subtype /Link /Action << /Subtype /URI /URI (man:baz(1))
 
 echo "checking that backward internal links work" >&2
 echo "$output" \
@@ -67,6 +71,11 @@ echo "$output" \
 echo "checking that forward internal links work" >&2
 echo "$output" \
   | grep -Eq '^ *90[[:space:]]+x X pdf: markstart .*/Dest /bar\(1\)' \
+  || wail
+
+echo "checking that external links are not rewritten" >&2
+echo "$output" \
+  | grep -Eq '^ *256[[:space:]]+x X pdf: markstart .*/URI \(man:baz\(1\))' \
   || wail
 
 test -z "$fail"
