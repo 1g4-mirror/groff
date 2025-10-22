@@ -102,7 +102,7 @@
 	`was_previous_line_interrupted` analogously--even though it is
 	an `int` because it is a kludgy three-valued Boolean.  (The
 	extra value encodes whether a formatter exit is underway, I
-	think.) Rename member function `get_prev_line_interrupted()` to
+	think.)  Rename member function `get_prev_line_interrupted()` to
 	`get_was_previous_line_interrupted()` analogously.  Rename (and
 	unabbreviate) `saved_prev_line_interrupted` member variable of
 	class `diversion` to `saved_was_previous_line_interrupted`
