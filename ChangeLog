@@ -22,6 +22,10 @@
 	This interface is deliberately not documented in the man page,
 	since it's intended for the use of groff's build system.
 
+	Fixes <https://savannah.gnu.org/bugs/?67618>.  Problem appears
+	to date back to pdfmom's birth in commit f2a501fff5, 31 August
+	2012.
+
 2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[gropdf]: Make pdfmom disclose version of groff it runs.
@@ -31,10 +35,6 @@
 	other wrapper programs nroff(1) and groff(1) do.  This makes it
 	easy to see if the versions of the various programs in the
 	pipeline are askew.
-
-	Fixes <https://savannah.gnu.org/bugs/?67618>.  Problem appears
-	to date back to pdfmom's birth in commit f2a501fff5, 31 August
-	2012.
 
 2025-10-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
