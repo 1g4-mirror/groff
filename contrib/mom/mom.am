@@ -24,6 +24,7 @@ mom_srcdir = $(top_srcdir)/contrib/mom
 #
 # Use '-K utf8', not '-k', in case 'configure' didn't find uchardet.
 MOMPDFMOM = \
+  GROFF_COMMAND=test-groff \
   GROFF_COMMAND_PREFIX= \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
   $(PDFMOMBIN) $(FFLAG) $(MFLAG) -M$(mom_srcdir) -K utf8 -p -e -t \
@@ -147,8 +148,8 @@ SUFFIXES += .mom .pdf
 	&& LC_ALL=C $(MOMPDFMOM) $< >$@
 
 $(MOMPROCESSEDEXAMPLEFILES): $(MOMNORMALFILES) \
-  groff troff gropdf pdfmom penguin.ps penguin.pdf font/devpdf/stamp \
-  tmac/pdf.tmac
+  test-groff groff troff gropdf pdfmom penguin.ps penguin.pdf \
+  font/devpdf/stamp tmac/pdf.tmac
 
 penguin.ps:
 	$(AM_V_at)cp $(mom_srcdir)/examples/penguin.ps $@
