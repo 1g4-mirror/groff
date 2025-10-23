@@ -40,6 +40,7 @@ DOC_GROFF = \
   $(GROFFBIN) $(MFLAG) $(FFLAG) -ww -b
 
 DOC_PDFMOM = \
+  GROFF_COMMAND=test-groff \
   GROFF_COMMAND_PREFIX= \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
   $(PDFMOMBIN) $(MFLAG) $(FFLAG) -ww -b --roff
@@ -100,7 +101,7 @@ PROCESSEDFILES_DEPS_HTML = pre-grohtml groff troff post-grohtml \
   tmac/html.tmac tmac/html-end.tmac font/devhtml/stamp font/devps/stamp
 PROCESSEDFILES_DEPS_PS = groff troff grops tmac/ps.tmac \
   font/devps/stamp
-PROCESSEDFILES_DEPS_PDF = groff troff gropdf tmac/pdf.tmac \
+PROCESSEDFILES_DEPS_PDF = test-groff groff troff gropdf tmac/pdf.tmac \
   font/devpdf/stamp
 PROCESSEDFILES_DEPS_TXT = groff troff grotty tmac/tty.tmac \
   font/devutf8/stamp

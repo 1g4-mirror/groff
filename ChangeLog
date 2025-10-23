@@ -1,3 +1,12 @@
+2025-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am: Build PDF documents more carefully.
+	(DOC_PDFMOM): Add environment variable `GROFF_COMMAND`, newly
+	recognized by pdfmom(1), to make it run the build tree's groff
+	via "test-groff", rather than (potentially) a "groff" in the
+	build environment's $PATH.
+	(PROCESSEDFILES_DEPS_PDF): Add "test-groff" script.
+
 2025-10-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (process_input_stack
