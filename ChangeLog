@@ -913,9 +913,9 @@
 	complete, recursive operation.  There is no reason _not_ to do
 	this because the whole point of `asciify` is to convert nodes
 	back into some form of text; the idiomatic application (and only
-	one, as seen in "om.tmac" and "e.tmac") is to convert strings or
-	diversions into PDF bookmarks or HTML URLs that are embedded in
-	a document as metadata or markup, not as formatted text.
+	one, as seen in "om.tmac" and "e.tmac") is to convert diversions
+	into PDF bookmarks or HTML URLs that are embedded in a document
+	as metadata or markup, not as formatted text.
 	* src/roff/troff/input.cpp (asciify_macro): When asciifying a
 	node in a macro/string/diversion, copy the node first, asciify
 	the copy (which in many cases produces nothing), and delete the
