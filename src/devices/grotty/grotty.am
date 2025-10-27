@@ -30,8 +30,7 @@ dist_grottytmac_DATA = $(GROTTYTMACFILES)
 
 man1_MANS += src/devices/grotty/grotty.1
 EXTRA_DIST += \
-  src/devices/grotty/grotty.1.man \
-  src/devices/grotty/TODO
+  src/devices/grotty/grotty.1.man
 
 grotty_TESTS = \
   src/devices/grotty/tests/basic_latin_glyphs_map_correctly.sh \

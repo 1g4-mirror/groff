@@ -863,7 +863,10 @@ void tty_printer::end_page(int page_length)
 		putstring(SGR_NO_UNDERLINE);
 	      is_underlining = false;
 	    }
-	    putchar('\t');
+	    if ((next_tab_pos - hpos) > 1)
+	      putchar('\t');
+	    else
+	      putchar(' ');
 	    hpos = next_tab_pos;
 	  }
 	}

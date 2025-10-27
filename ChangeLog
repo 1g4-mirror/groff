@@ -1,5 +1,19 @@
 2025-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grotty/tty.cpp (tty_printer::end_page): When using
+	hard tabs (per the `-h` option), use a space instead of a tab to
+	advance the output position when the distance to the next tab
+	stop is only one character cell.  This behavior more closely
+	resembles that of AT&T nroff.
+	* src/devices/grotty/TODO: Delete.  Its only item is resolved.
+	* src/devices/grotty/grotty.am (EXTRA_DIST): Drop "TODO".
+
+	Fixes <https://savannah.gnu.org/bugs/?67633>.  Problem
+	originally recorded by James Clark in groff 1.06, September
+	1992.
+
+2025-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grotty/tty.cpp (tty_printer::special_link): Fix
 	code style nits.  Parenthesize formally complex expressions.
 	Reorder equality comparisons to avoid inadvertent lvalue
