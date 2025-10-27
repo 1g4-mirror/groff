@@ -93,7 +93,7 @@ and
 .B \-rRef=1
 to populate cross-reference and index files with their corresponding
 entries,
-and then again to produce the document.
+and then without to produce the document.
 .
 It also handles the inclusion of PostScript images with the
 .B PIC
