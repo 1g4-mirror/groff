@@ -493,7 +493,7 @@ void tty_printer::special_link(const char *arg, const environment *env)
   }
   else {
     // Our caller ensures that we see whitespace after 'link'.
-    assert(c == ' ' || c == '\t');
+    assert((' ' == c) || ('\t' == c));
     if (is_link_active) {
       warning("new hyperlink started without ending previous one;"
 	      " recovering");
@@ -505,13 +505,13 @@ void tty_printer::special_link(const char *arg, const environment *env)
     is_link_active = true;
     do
       c = *arg++;
-    while (c == ' ' || c == '\t');
+    while ((' ' == c) || ('\t' == c));
     arg--;
     // The first argument is the URI.
     const char *uri = arg;
     do
       c = *arg++;
-    while (c != '\0' && c != ' ' && c != '\t');
+    while ((c != '\0') && (c != ' ') && (c != '\t'));
     arg--;
     ptrdiff_t uri_len = arg - uri;
     // Any remaining arguments are "key=value" pairs.
@@ -526,7 +526,7 @@ void tty_printer::special_link(const char *arg, const environment *env)
 	c = *arg++;
 	if ('\0' == c)
 	  done = true;
-	else if (' ' == c || '\t' == c)
+	else if ((' ' == c) || ('\t' == c))
 	  in_pair = false;
 	else
 	  simple_add_char(c, env);

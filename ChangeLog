@@ -1,3 +1,10 @@
+2025-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grotty/tty.cpp (tty_printer::special_link): Fix
+	code style nits.  Parenthesize formally complex expressions.
+	Reorder equality comparisons to avoid inadvertent lvalue
+	assignment.
+
 2025-10-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am: Build PDF documents more carefully.
