@@ -981,10 +981,11 @@ After computing the column widths,
 distribute any remaining line length evenly over all columns bearing
 this modifier.
 .
+This is a Documenter's Workbench (DWB) 3.3 extension.
+.
 Applying the
 .BR x \~modifier
 to more than one column is a GNU extension.
-.\" 'x' wasn't documented at all in Lesk 1979.
 .
 This modifier sets the default line length used in a text block.
 .
