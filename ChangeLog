@@ -1,3 +1,13 @@
+2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp: Rename macro storing name of *roff
+	register containing remainder when using the "expand" region
+	option and dividing the amount of unused line length by the
+	number of inter-column gaps, from `LEFTOVER_FACTOR_REG` to
+	`EXPANSION_REMAINDER_REG`.
+	(table::compute_separation_factor)
+	(table::compute_column_positions): Update interpolation sites.
+
 2025-10-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grotty/tty.cpp (tty_printer::end_page): When using

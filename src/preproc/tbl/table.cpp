@@ -35,7 +35,7 @@ const int DEFAULT_COLUMN_SEPARATION = 3;
 
 #define DELIMITER_CHAR "\\[tbl]"
 #define SEPARATION_FACTOR_REG PREFIX "sep"
-#define LEFTOVER_FACTOR_REG PREFIX "leftover"
+#define EXPANSION_REMAINDER_REG PREFIX "leftover"
 #define BOTTOM_REG PREFIX "bot"
 #define RESET_MACRO_NAME PREFIX "init"
 #define LINESIZE_REG PREFIX "lps"
@@ -2372,7 +2372,7 @@ void table::compute_separation_factor()
   // Store the remainder for use in compute_column_positions().
   if (flags & GAP_EXPAND) {
     prints(".if n \\\n");
-    prints(".  nr " LEFTOVER_FACTOR_REG " \\n[.l]-\\n[.i]");
+    prints(".  nr " EXPANSION_REMAINDER_REG " \\n[.l]-\\n[.i]");
     for (int i = 0; i < ncolumns; i++)
       printfs("-\\n[%1]", span_width_reg(i, i));
     printfs("%%%1\n", as_string(total_separation));
@@ -2432,8 +2432,8 @@ void table::compute_column_positions()
     // region option, put it prior to the last column so that the table
     // looks as if expanded to the available line length.
     if ((ncolumns > 2) && (flags & GAP_EXPAND) && (i == (ncolumns - 1)))
-      printfs(".if n .if \\n[" LEFTOVER_FACTOR_REG "] .nr %1 +(1n>?\\n["
-	      LEFTOVER_FACTOR_REG "])\n",
+      printfs(".if n .if \\n[" EXPANSION_REMAINDER_REG "]"
+	      " .nr %1 +(1n>?\\n[" EXPANSION_REMAINDER_REG "])\n",
 	      column_start_reg(i));
     printfs(".nr %1 \\n[%2]+\\n[%3]/2\n",
 	    column_divide_reg(i),
