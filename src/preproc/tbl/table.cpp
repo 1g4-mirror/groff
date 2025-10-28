@@ -3186,11 +3186,11 @@ void table::do_bottom()
   // a half-row if we ever support [emulators of] devices like the
   // Teletype Model 37 with half-line motions).
   if (flags & (BOX | DOUBLEBOX | ALLBOX))
-    prints(".if n .sp\n");
+    prints(".if n .sp \\\" avoid overprinting box bottom\n");
   // Space again for the doublebox option, until we can draw that more
   // attractively; see Savannah #43637.
   if (flags & DOUBLEBOX)
-    prints(".if n .sp\n");
+    prints(".if n .sp \\\" avoid overprinting doublebox bottom\n");
   prints("." RESET_MACRO_NAME "\n"
 	 ".nn \\n[" SAVED_NUMBERING_SUPPRESSION_COUNT "]\n"
 	 ".ie \\n[" SAVED_NUMBERING_ENABLED "] "

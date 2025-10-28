@@ -1,5 +1,12 @@
 2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::do_bottom): Annotate
+	generated *roff requests that avoid overprinting the bottom of a
+	boxed table on nroff devices, to help anyone having to debug
+	tbl's output maintain their sanity.
+
+2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Revise diagnostics.
 
 	* src/preproc/tbl/main.cpp (process_format): Demote error
