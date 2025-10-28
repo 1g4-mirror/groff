@@ -2097,7 +2097,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
 .de TE
 .tbl*check-for-tbl
-.if \\n[tbl*was-tbl-failure-reported] .return
+.if !r TW .return
 .ie '\\n(.z'tbl*heading-diversion' \
 .	@error-recover .TS H but no .TH before .TE
 .el \{\

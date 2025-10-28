@@ -1,5 +1,14 @@
 2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/s.tmac (TE): Clarify logic.  Predicate early return on
+	undefinedness of `TW` register, not whether we've issued a
+	warning diagnostic regarding tbl failure.  While these two
+	conditions are logically coupled (one complementing the other),
+	we avoid performing post-tbl cleanup actions because tbl didn't
+	run, not because we diagnosed that fact.
+
+2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::do_bottom): Annotate
 	generated *roff requests that avoid overprinting the bottom of a
 	boxed table on nroff devices, to help anyone having to debug
