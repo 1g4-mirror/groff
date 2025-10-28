@@ -433,13 +433,11 @@ tabs,
 newlines,
 and commas separate descriptors.
 .
-Newlines and commas are special;
-they apply the descriptors following them to a subsequent row of the
-table.
-.
-(This enables column headings to be centered or emboldened while the
-table entries for the data are not,
-for instance.)
+Newlines and commas apply the descriptors following them
+to a subsequent row of the table
+(enabling column headings to be centered or emboldened
+while the table entries for the data are not,
+for instance).
 .
 We term the resulting group of column descriptors a
 .I row definition.
@@ -491,7 +489,7 @@ but must conclude with a dot
 .RB \[lq] .\& \[rq]
 followed by a newline.
 .
-Each row definition is applied in turn to one row of the table.
+Each row definition applies in turn to one row of the table.
 .
 .I tbl \" generic
 applies the last row definition to rows of table data
