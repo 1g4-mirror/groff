@@ -1598,7 +1598,7 @@ if it encounters an error during operation.
 .SH Limitations
 .\" ====================================================================
 .
-Outside of text blocks,
+In entries other than text blocks,
 avoid use of
 .I roff
 escape sequences that read to the end of the line,
