@@ -883,7 +883,8 @@ format *process_format(table_input &in, options *opt,
     list = new input_entry_format(t, list);
     if (vrule_count > 2) {
       vrule_count = 2;
-      error("more than 2 vertical lines at beginning of row description");
+      warning("ignoring excess vertical lines at beginning of row"
+	      " description");
     }
     list->vrule_count = vrule_count;
     // Now handle modifiers.
@@ -1173,7 +1174,7 @@ format *process_format(table_input &in, options *opt,
     } while (is_valid_modifier_sequence);
     if (vrule_count > 2) {
       vrule_count = 2;
-      error("more than 2 vertical lines after column descriptor");
+      warning("ignoring excess vertical lines after column descriptor");
     }
     list->vrule += vrule_count;
     if (c == '\n' || c == ',') {

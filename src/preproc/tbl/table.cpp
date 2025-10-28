@@ -1769,12 +1769,12 @@ void table::add_vrules(int r, const char *v)
     assert(v[i] < 3);
     if (v[i] && (flags & (BOX | ALLBOX | DOUBLEBOX)) && (i == 0)
 	&& (!lwarned)) {
-      error("ignoring vertical line at leading edge of boxed table");
+      warning("ignoring vertical line at leading edge of boxed table");
       lwarned = true;
     }
     else if (v[i] && (flags & (BOX | ALLBOX | DOUBLEBOX))
 	     && (i == ncolumns) && (!twarned)) {
-      error("ignoring vertical line at trailing edge of boxed table");
+      warning("ignoring vertical line at trailing edge of boxed table");
       twarned = true;
     }
     else

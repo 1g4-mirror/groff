@@ -1,5 +1,16 @@
 2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Revise diagnostics.
+
+	* src/preproc/tbl/main.cpp (process_format): Demote error
+	diagnostics when ignoring excess vertical lines in row
+	descriptions to warnings, and recast them.
+	* src/preproc/tbl/table.cpp (process_format): Demote error
+	diagnostics when ignoring vertical lines at boxed table edges to
+	warnings.
+
+2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp: Rename macro storing name of *roff
 	register containing remainder when using the "expand" region
 	option and dividing the amount of unused line length by the
