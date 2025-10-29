@@ -2644,10 +2644,17 @@
 .      if r doc-punct\*[doc-arg\$1] \
 .        nr doc-arg-type \n[doc-punct\*[doc-arg\$1]]
 .    \}
-.    el \
-.      if r \*[doc-arg\$1] \
-.        if d \*[doc-arg\$1] \
-.          nr doc-arg-type 1
+.    el \{\
+.      \" Handle the *roff internal string '.T' specially; it is defined
+.      \" in the formatter, which _also_ defines a '.T' _register_,
+.      \" colliding perfectly with mdoc's argument type system.
+.      ie !'\?\*[doc-arg\$1]\?'\?.T\?' \
+.        if r \*[doc-arg\$1] \
+.          if d \*[doc-arg\$1] \
+.            nr doc-arg-type 1
+.      el \
+.        nr doc-arg-type 2
+.    \}
 .  \}
 ..
 .ec

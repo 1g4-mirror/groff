@@ -1,5 +1,25 @@
 2025-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/doc.tmac (doc-get-arg-type*): Handle the *roff internal
+	string '.T' specially in an mdoc macro argument sequence; it is
+	defined in the formatter, which _also_ defines a '.T'
+	_register_, colliding perfectly with mdoc's argument type
+	system.  This change prevents `.T` from being called as a macro
+	and interpolating its value, a surprising outcome to mdoc users.
+
+	Fixes <https://savannah.gnu.org/bugs/?67646>.  Thanks to onf for
+	the report.  Problem dates back "all the way"; not only does
+	groff 1.22.3 (November 2014) have it, but the 4.4BSD-Lite2
+	implementation of mdoc does as well.  mdoc as a *roff macro
+	package implements its own bespoke type system to accompany its
+	bespoke macro processor; the type of a macro argument (a string
+	or macro) is determined by looking up its name as a _register_.
+	mandoc(1) does not exhibit this problem, likely because it lacks
+	a *roff formatter that defines both a `.T` register and a `.T`
+	string; rather it simulates both of these.
+
+2025-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[mdoc]: Regression-test Savannah #67646.
 
 	* tmac/tests/doc_infer-correct-type-of-dot-T-string.sh: Add
