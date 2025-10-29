@@ -250,18 +250,16 @@
 .\" and whose state is shared with man (and andoc.tmac, if necessary).
 .\"
 .\" Also, we can't use the `P` register with grohtml at all.
-.ie \n[doc-is-output-html] \{\
+.ie \n[doc-is-output-html] \
 .  if r P \{\
 .     tm \*[doc]: ignoring starting page number in HTML output
 .     rr P
 .  \}
-.\}
-.el \{\
+.el \
 .  if r P \{\
 .    ie (\n[nl] = -1) .pn 0\n[P]
 .    el               .nr % 0\n[P]
 .  \}
-.\}
 .
 .\" subsection indentation
 .if !r SN \
@@ -438,9 +436,8 @@
 .
 .  ie        "\*[doc-arg\n[doc-arg-count]]"|" \
 .    ds doc-arg\n[doc-arg-count] \f[R]|\f[]
-.  el \{ .if "\*[doc-arg\n[doc-arg-count]]"..." \
+.  el    .if "\*[doc-arg\n[doc-arg-count]]"..." \
 .    ds doc-arg\n[doc-arg-count] \|.\|.\|.
-.  \}
 .
 .  doc-get-arg-type* \n[doc-arg-count]
 .  nr doc-type\n[doc-arg-count] \n[doc-arg-type]
@@ -2640,10 +2637,9 @@
 .  length doc-width "\*[doc-arg\$1]
 .
 .  if ((\n[doc-width] < 4) & \A'\*[doc-arg\$1]') \{\
-.    ie (\n[doc-width] == 1) \{\
+.    ie (\n[doc-width] == 1) \
 .      if r doc-punct\*[doc-arg\$1] \
 .        nr doc-arg-type \n[doc-punct\*[doc-arg\$1]]
-.    \}
 .    el \{\
 .      \" Handle the *roff internal string '.T' specially; it is defined
 .      \" in the formatter, which _also_ defines a '.T' _register_,
