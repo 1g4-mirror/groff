@@ -2627,6 +2627,10 @@
 .\" NS   this macro sets the 'doc-width' register using the 'length'
 .\" NS   request to get the number of characters in a string literally
 .\" NS
+.\" NS   Ignore the *roff internal string '.T'; the formatter also
+.\" NS   defines a '.T' _register_, colliding perfectly with mdoc's
+.\" NS   argument type system.
+.\" NS
 .\" NS modifies:
 .\" NS   doc-arg-type
 .\" NS   doc-width
@@ -2640,17 +2644,11 @@
 .    ie (\n[doc-width] == 1) \
 .      if r doc-punct\*[doc-arg\$1] \
 .        nr doc-arg-type \n[doc-punct\*[doc-arg\$1]]
-.    el \{\
-.      \" Handle the *roff internal string '.T' specially; it is defined
-.      \" in the formatter, which _also_ defines a '.T' _register_,
-.      \" colliding perfectly with mdoc's argument type system.
-.      ie !'\?\*[doc-arg\$1]\?'\?.T\?' \
+.    el \
+.      if !'\?\*[doc-arg\$1]\?'\?.T\?' \
 .        if r \*[doc-arg\$1] \
 .          if d \*[doc-arg\$1] \
 .            nr doc-arg-type 1
-.      el \
-.        nr doc-arg-type 2
-.    \}
 .  \}
 ..
 .ec

@@ -1,3 +1,15 @@
+2025-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/doc.tmac (doc-get-arg-type*): Slightly refactor.  Drop
+	unnecessary `el` branch (the argument type is already
+	presumptively made '2' at the top of the macro definition);
+	thanks to Ingo Schwarze for the suggestion.  Convert its
+	counterpart `ie` request to `if` accordingly.  Migrate comment
+	outside of macro definition, which seems more idiomatic when the
+	escape character is disabled.  Consequently no empty requests
+	remain and we can drop the brace escape sequences around the
+	single chain of `if` requests remaining.
+
 2025-10-16  Dave Kemper <saint.snit@gmail.com>
 
 	* tmac/fallbacks.tmac: Update annotations.  Clean up a handful
