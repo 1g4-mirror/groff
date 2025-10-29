@@ -1,3 +1,11 @@
+2025-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[mdoc]: Regression-test Savannah #67646.
+
+	* tmac/tests/doc_infer-correct-type-of-dot-T-string.sh: Add
+	test.
+	* tmac/tmac.am (tmac_TESTS): Run test.
+
 2025-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (TE): Clarify logic.  Predicate early return on
