@@ -16,15 +16,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 grotty="${abs_top_builddir:-.}/grotty"
 
 fail=
 
 wail () {
-  echo "...FAILED" >&2
-  fail=yes
+    echo "...FAILED" >&2
+    fail=yes
 }
 
 input="x T utf8
@@ -128,4 +127,4 @@ echo "$output" | grep -Eq '0000220 +; +; +033 +\\' || wail
 
 test -z "$fail"
 
-# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
