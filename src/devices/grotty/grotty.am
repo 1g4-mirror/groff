@@ -33,8 +33,8 @@ EXTRA_DIST += \
   src/devices/grotty/grotty.1.man
 
 grotty_TESTS = \
-  src/devices/grotty/tests/basic_latin_glyphs_map_correctly.sh \
-  src/devices/grotty/tests/osc8_works.sh
+  src/devices/grotty/tests/basic-latin-glyphs-map-correctly.sh \
+  src/devices/grotty/tests/osc8-works.sh
 TESTS += $(grotty_TESTS)
 EXTRA_DIST += $(grotty_TESTS)
 

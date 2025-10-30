@@ -1,3 +1,17 @@
+2025-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grotty]: Rename test scripts to match modern naming convention.
+
+	* src/devices/grotty/tests/basic_latin_glyphs_map_correctly.sh:
+	Rename this...
+	* src/devices/grotty/tests/basic-latin-glyphs-map-correctly.sh:
+	...to this.
+
+	* src/devices/grotty/tests/osc8_works.sh: Rename this...
+	* src/devices/grotty/tests/osc8-works.sh: ...to this.
+
+	* src/devices/grotty/grotty.am (grotty_TESTS): Update macro.
+
 2025-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/doc.tmac (doc-get-arg-type*): Slightly refactor.  Drop
