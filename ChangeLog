@@ -1,5 +1,11 @@
 2025-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grotty/tests/h-option-works.sh: Add unit test for
+	function of grotty's '-h' option.
+	* src/devices/grotty/grotty.am (grotty_TESTS): Run test.
+
+2025-10-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grotty]: Rename test scripts to match modern naming convention.
 
 	* src/devices/grotty/tests/basic_latin_glyphs_map_correctly.sh:
