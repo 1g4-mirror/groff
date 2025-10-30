@@ -454,9 +454,11 @@
 	package implements its own bespoke type system to accompany its
 	bespoke macro processor; the type of a macro argument (a string
 	or macro) is determined by looking up its name as a _register_.
-	mandoc(1) does not exhibit this problem, likely because it lacks
-	a *roff formatter that defines both a `.T` register and a `.T`
-	string; rather it simulates both of these.
+	mandoc(1) does not exhibit this problem because it does not use
+	roff(7) registers to distinguish mdoc(7) child macros from
+	plain-text macro arguments, so the .T register does not clash
+	with the .T predefined string in the way it did in
+	groff mdoc(7).
 
 2025-10-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
