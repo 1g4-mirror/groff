@@ -933,13 +933,16 @@ The abbreviations will be familiar to
 veterans.
 .
 .
+.br
+.if t .ne 10v
+.if n .ne 11v
 .P
-.ne 10v
 .TS
 center;
-r l
-rB l.
+R  L
+Rb L.
 Abbreviation	Control word
+_
 \&.ad	.adjust
 \&.bp	.begin page
 \&.br	.break
