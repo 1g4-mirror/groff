@@ -375,8 +375,7 @@ and
 .BR EE .
 .
 _ifstyle()dnl
-Optional macro arguments are indicated by surrounding them with square
-brackets.
+Square brackets surround optional macro arguments.
 .
 If a macro accepts multiple arguments,
 those containing space \" or tab (in Plan 9 troff [only?])
