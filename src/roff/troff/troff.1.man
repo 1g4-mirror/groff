@@ -494,9 +494,12 @@ enabling the
 and
 .B sy
 requests,
-which are disabled by default because they allow an untrusted input
-document to run arbitrary commands
-and write to arbitrary file names.
+which are disabled by default because they
+allow an untrusted input document to run arbitrary commands,
+put arbitrary content into
+.I @g@troff \" GNU
+output,
+or write to arbitrary file names.
 .
 (GNU
 .I troff \" GNU

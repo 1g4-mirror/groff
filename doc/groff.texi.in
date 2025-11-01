@@ -1334,9 +1334,11 @@ enabling the
 and
 @code{sy}
 requests,
-which are disabled by default because they allow an untrusted input
-document to run arbitrary commands
-and write to arbitrary file names.@footnote{GNU
+which are disabled by default because they
+allow an untrusted input document to run arbitrary commands,
+put arbitrary content into
+@command{troff} @c GNU
+or write to arbitrary file names.@footnote{GNU
 @command{troff} @c GNU
 does not,
 however,
