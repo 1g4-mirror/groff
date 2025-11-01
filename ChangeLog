@@ -1,3 +1,11 @@
+2025-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/check-delimiter-validity.sh: Expand test
+	coverage of delimiter usage in compatibility mode to account for
+	the three different contexts in which delimiters can occur (and
+	consequently the three different subsets of Unicode Basic Latin
+	that are valid as delimiters in AT&T troff).
+
 2025-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Unit-test logical predicates.
