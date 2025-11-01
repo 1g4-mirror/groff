@@ -4649,11 +4649,12 @@ Solaris\~10
 .IR troff s \" DWB, Plan 9, Solaris 10
 do not.
 .
-Interpolating strings,
+Interpolating the strings
 .B \e*(lq
 and
-.BR \e*(rq ,
-portably yields directional double quotation marks
+.B \e*(rq
+portably yields directional double quotation marks,
+if available,
 in all these formatters
 .\" including plan9port/Plan 9 from User Space as of commit e5b5757e64,
 .\" 10 October 2025
@@ -4661,7 +4662,8 @@ in all these formatters
 .I neatroff
 does not supply a
 .I man
-macro package).
+macro package),
+but they cannot reliably be used in macro arguments.
 .
 .
 .IP
