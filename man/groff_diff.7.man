@@ -6169,18 +6169,6 @@ turns compatibility mode
 while it interprets its argument list.
 .
 .
-.P
-In compatibility mode,
-GNU
-.I troff \" GNU
-accepts several characters as delimiters that it ordinarily rejects,
-because they can begin numeric expressions and therefore
-may be ambiguous to the document maintainer.
-.
-The set of additional delimiters comprises
-.RB \[lq] 0123456789+\-(.| \[rq].
-.
-.
 .\" ====================================================================
 .SH "Other differences"
 .\" ====================================================================

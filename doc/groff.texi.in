@@ -7817,14 +7817,10 @@ the numerals @code{0}-@code{9} and the decimal point @code{.}
 @ifinfo
 @cindex <colon>, as delimiter
 @end ifinfo
-@c @cindex @code{|}, as delimiter
+@cindex @code{|}, as delimiter
 @cindex @code{(}, as delimiter
 @cindex @code{)}, as delimiter
-the (single-character) operators @samp{+-/*%<>=&:()}@footnote{GNU
-@command{troff} accepts @samp{|} as a delimiter in spite of its
-meaningfulness in numeric expressions because it occasionally sees use
-in man pages.  Future @code{groff} releases may deprecate and
-subsequently withdraw such support.}
+the (single-character) operators @samp{+-/*%<>=&:()|}
 
 @item
 @cindex space character, as delimiter
@@ -19679,17 +19675,6 @@ to those defined by libraries,
 @code{roff} documents share a name space with macro packages;
 choose a register name that is unlikely to collide with other uses.
 @endDefreq
-
-@cindex additional delimiters accepted by @acronym{AT&T} @code{troff}
-@cindex delimiters, additional, accepted by @acronym{AT&T} @code{troff}
-In compatibility mode,
-GNU
-@command{troff} @c GNU
-accepts several characters as delimiters that it ordinarily rejects
-because they can begin numeric expressions and therefore
-may be ambiguous to the document maintainer.
-This set of additional delimiters comprises
-@samp{0123456789+-(.|}.
 
 @cindex input level
 @cindex level, input
