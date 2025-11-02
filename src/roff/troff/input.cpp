@@ -6732,14 +6732,14 @@ static bool is_conditional_expression_true()
     result = !(topdiv->get_page_number() & 1);
     tok.next();
   }
-  else if (c == 'd' || c == 'r') {
+  else if ((c == 'd') || (c == 'r')) {
     tok.next();
     symbol nm = get_name(true /* required */);
     if (nm.is_null()) {
       skip_branch();
       return false;
     }
-    result = (c == 'd'
+    result = ((c == 'd')
 	      ? request_dictionary.lookup(nm) != 0 /* nullptr */
 	      : register_dictionary.lookup(nm) != 0 /* nullptr */);
   }
@@ -6750,7 +6750,7 @@ static bool is_conditional_expression_true()
       skip_branch();
       return false;
     }
-    result = (nm == default_symbol
+    result = ((nm == default_symbol)
 	      || color_dictionary.lookup(nm) != 0 /* nullptr */);
   }
   else if (c == 'c') {

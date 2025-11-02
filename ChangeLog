@@ -1,5 +1,11 @@
 2025-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.
+	(is_conditional_expression_true): Parenthesize formally complex
+	expressions.
+
+2025-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Refactor.
 	(are_comparands_equal): Pull performance of
 	output comparison operation into its own function...
