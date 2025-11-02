@@ -6636,6 +6636,54 @@ static void nop_request()
     tok.next();
 }
 
+// Perform a (formatted) output comparison operation, as found in
+//   .if 'foo'bar'
+// ...for example.
+static bool are_comparands_equal()
+{
+ token delim = tok;
+ int delim_level = input_stack::get_level();
+ environment env1(curenv);
+ environment env2(curenv);
+ environment *oldenv = curenv;
+ curenv = &env1;
+ suppress_push = true;
+ for (int i = 0; i < 2; i++) {
+   for (;;) {
+     tok.next();
+     if (tok.is_newline() || tok.is_eof()) {
+       // token::description() writes to static, class-wide storage,
+       // so we must allocate a copy of it before issuing the next
+       // diagnostic.
+       char *delimdesc = strdup(delim.description());
+       warning(WARN_DELIM, "missing closing delimiter in output"
+	       " comparison operator; expected %1, got %2",
+	       delimdesc, tok.description());
+       free(delimdesc);
+       tok.next();
+       curenv = oldenv;
+       return false;
+     }
+     if (tok == delim
+         && (want_att_compat
+             || input_stack::get_level() == delim_level))
+       break;
+     tok.process();
+   }
+   curenv = &env2;
+ }
+ node *n1 = env1.extract_output_line();
+ node *n2 = env2.extract_output_line();
+ bool result = same_node_list(n1, n2);
+ delete_node_list(n1);
+ delete_node_list(n2);
+ curenv = oldenv;
+ have_formattable_input = false;
+ suppress_push = false;
+ tok.next();
+ return result;
+}
+
 static std::stack<bool> if_else_stack;
 
 static bool is_conditional_expression_true()
@@ -6736,49 +6784,8 @@ static bool is_conditional_expression_true()
   }
   else if (tok.is_space())
     result = false;
-  else if (tok.is_usable_as_delimiter()) {
-    // Perform (formatted) output comparison.
-    token delim = tok;
-    int delim_level = input_stack::get_level();
-    environment env1(curenv);
-    environment env2(curenv);
-    environment *oldenv = curenv;
-    curenv = &env1;
-    suppress_push = true;
-    for (int i = 0; i < 2; i++) {
-      for (;;) {
-	tok.next();
-	if (tok.is_newline() || tok.is_eof()) {
-	  // token::description() writes to static, class-wide storage,
-	  // so we must allocate a copy of it before issuing the next
-	  // diagnostic.
-	  char *delimdesc = strdup(delim.description());
-	  warning(WARN_DELIM, "missing closing delimiter in output"
-		  " comparison operator; expected %1, got %2",
-		  delimdesc, tok.description());
-	  free(delimdesc);
-	  tok.next();
-	  curenv = oldenv;
-	  return false;
-	}
-	if (tok == delim
-	    && (want_att_compat
-	        || input_stack::get_level() == delim_level))
-	  break;
-	tok.process();
-      }
-      curenv = &env2;
-    }
-    node *n1 = env1.extract_output_line();
-    node *n2 = env2.extract_output_line();
-    result = same_node_list(n1, n2);
-    delete_node_list(n1);
-    delete_node_list(n2);
-    curenv = oldenv;
-    have_formattable_input = false;
-    suppress_push = false;
-    tok.next();
-  }
+  else if (tok.is_usable_as_delimiter())
+    result = are_comparands_equal();
   else {
     units n;
     if (!read_measurement(&n, 'u')) {
