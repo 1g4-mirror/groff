@@ -2237,23 +2237,29 @@ void token::next()
       case '^':
 	goto ESCAPE_CIRCUMFLEX;
       case '/':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	type = TOKEN_ITALIC_CORRECTION;
 	return;
       case ',':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	type = TOKEN_NODE;
 	nd = new left_italic_corrected_node;
 	return;
       case '&':
 	goto ESCAPE_AMPERSAND;
       case ')':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	goto ESCAPE_RIGHT_PARENTHESIS;
       case '!':
 	goto ESCAPE_BANG;
       case '?':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	goto ESCAPE_QUESTION;
       case '~':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	goto ESCAPE_TILDE;
       case ':':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	goto ESCAPE_COLON;
       case '"':
 	while ((cc = input_stack::get(0 /* nullptr */)) != '\n'
@@ -2265,6 +2271,7 @@ void token::next()
 	  type = TOKEN_EOF;
 	return;
       case '#':			// Like \" but newline is ignored.
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	while ((cc = input_stack::get(0 /* nullptr */)) != '\n')
 	  if (cc == EOF) {
 	    type = TOKEN_EOF;
@@ -2296,6 +2303,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'A':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	{
 	  const char *res = do_name_test();
 	  if (0 /* nullptr */ == res)
@@ -2311,6 +2319,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'B':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	{
 	  const char *res = do_expr_test();
 	  if (0 /* nullptr */ == res)
@@ -2341,6 +2350,7 @@ void token::next()
       case 'e':
 	goto ESCAPE_e;
       case 'E':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	goto handle_escape_char;
       case 'f':
 	{
@@ -2350,6 +2360,7 @@ void token::next()
 	  break;
 	}
       case 'F':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	{
 	  curenv->set_family(read_escape_parameter(ALLOW_EMPTY));
 	  have_formattable_input = true;
@@ -2406,11 +2417,13 @@ void token::next()
 	  return;
 	}
       case 'm':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	do_stroke_color(read_escape_parameter(ALLOW_EMPTY));
 	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 'M':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	do_fill_color(read_escape_parameter(ALLOW_EMPTY));
 	if (!want_att_compat)
 	  have_formattable_input = true;
@@ -2435,6 +2448,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'O':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	nd = do_suppress(read_escape_parameter());
 	if (0 /* nullptr */ == nd)
 	  break;
@@ -2448,6 +2462,7 @@ void token::next()
 	nd = new vmotion_node(-curenv->get_size(), curenv->get_fill_color());
 	return;
       case 'R':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	do_register();
 	if (!want_att_compat)
 	  have_formattable_input = true;
@@ -2480,6 +2495,7 @@ void token::next()
 	nd = new vmotion_node(x, curenv->get_fill_color());
 	return;
       case 'V':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	{
 	  symbol s = read_escape_parameter();
 	  if (!(s.is_null() || s.is_empty()))
@@ -2502,6 +2518,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'Y':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	{
 	  symbol s = read_escape_parameter();
 	  if (s.is_null() || s.is_empty())
@@ -2536,6 +2553,7 @@ void token::next()
 	  return;
 	}
       case 'Z':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	nd = do_zero_width_output();
 	if (0 /* nullptr */ == nd)
 	  break;
@@ -2548,6 +2566,7 @@ void token::next()
       case '\n':
 	break;
       case '[':
+	// TODO: Reject this GNU troff extension in compatibility mode?
 	if (!want_att_compat) {
 	  symbol s = read_long_escape_parameters(WITH_ARGS);
 	  if (s.is_null() || s.is_empty())
@@ -5680,6 +5699,7 @@ static bool read_delimited_number(units *n, unsigned char si)
   return false;
 }
 
+// \l, \L
 static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
 {
   token start_token;
@@ -5711,7 +5731,7 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
   return false;
 }
 
-static bool read_size(int *x)
+static bool read_size(int *x) // \s
 {
   tok.next();
   int c = tok.ch();
@@ -9796,7 +9816,7 @@ node *charinfo_to_node_list(charinfo *ci, const environment *envp)
   return n;
 }
 
-static node *read_drawing_command()
+static node *read_drawing_command() // \D
 {
   token start_token;
   start_token.next();
