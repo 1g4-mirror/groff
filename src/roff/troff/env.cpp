@@ -1717,7 +1717,7 @@ void number_lines()
     curenv->numbering_nodes = nd;
     curenv->line_number_digit_width = env_digit_width(curenv);
     int n;
-    if (!tok.is_usable_as_delimiter()) {
+    if (!tok.is_usable_as_delimiter()) { // XXX abuse of function
       if (get_integer(&n, next_line_number)) {
 	next_line_number = n;
 	if (next_line_number < 0) {
@@ -1730,7 +1730,7 @@ void number_lines()
       while (!tok.is_space() && !tok.is_newline() && !tok.is_eof())
 	tok.next();
     if (has_arg()) {
-      if (!tok.is_usable_as_delimiter()) {
+      if (!tok.is_usable_as_delimiter()) { // XXX abuse of function
 	if (get_integer(&n)) {
 	  if (n <= 0) {
 	    warning(WARN_RANGE, "output line number multiple cannot"
@@ -1744,14 +1744,14 @@ void number_lines()
 	while (!tok.is_space() && !tok.is_newline() && !tok.is_eof())
 	  tok.next();
       if (has_arg()) {
-	if (!tok.is_usable_as_delimiter()) {
+	if (!tok.is_usable_as_delimiter()) { // XXX abuse of function
 	  if (get_integer(&n))
 	    curenv->number_text_separation = n;
 	}
 	else
 	  while (!tok.is_space() && !tok.is_newline() && !tok.is_eof())
 	    tok.next();
-	if (has_arg() && !tok.is_usable_as_delimiter()
+	if (has_arg() && !tok.is_usable_as_delimiter() // XXX abuse of function
 	    && get_integer(&n))
 	  curenv->line_number_indent = n;
       }
