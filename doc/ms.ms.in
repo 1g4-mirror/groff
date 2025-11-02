@@ -2133,7 +2133,7 @@ A glossary-style list:
 .
 .IP lawyers \*[gwidth]
 Two or more attorneys.
-.IP guns\h\[aq]\*[gwidth]\[aq] \*[gwidth]
+.IP guns\h'\*[gwidth]' \*[gwidth]
 Firearms,
 preferably large-caliber.
 .IP money
