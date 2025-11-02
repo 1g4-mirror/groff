@@ -1625,10 +1625,19 @@ node *do_overstrike() // \o
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "overstriking escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    delete osnode;
+    return 0 /* nullptr */;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
@@ -1677,10 +1686,19 @@ static node *do_bracket() // \b
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "bracket-building escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    delete bracketnode;
+    return 0 /* nullptr */;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
@@ -1719,10 +1737,18 @@ static const char *do_name_test() // \A
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "name test escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return 0 /* nullptr */;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
@@ -1758,8 +1784,17 @@ static const char *do_expr_test() // \B
   token start_token;
   start_token.next();
   int start_level = input_stack::get_level();
-  if (!start_token.is_usable_as_delimiter(true /* report error */))
+  if (!want_att_compat
+      && !start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_NUMERIC_EXPRESSION)) {
+    warning(WARN_DELIM, "numeric expression test escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return 0 /* nullptr */;
+  }
   tok.next();
   // disable all warning and error messages temporarily
   unsigned int saved_warning_mask = warning_mask;
@@ -1836,10 +1871,18 @@ static node *do_zero_width_output() // \Z
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "zero-width sequence escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return 0 /* nullptr */;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
@@ -2676,12 +2719,39 @@ static bool is_char_usable_as_delimiter(int c)
 }
 
 // Is the token a valid delimiter (like `'`)?
-bool token::is_usable_as_delimiter(bool report_error)
+bool token::is_usable_as_delimiter(bool report_error,
+				   enum delimiter_context context)
 {
   bool is_valid = false;
   switch (type) {
   case TOKEN_CHAR:
-    is_valid = is_char_usable_as_delimiter(c);
+    if (!want_att_compat)
+      is_valid = is_char_usable_as_delimiter(c);
+    else {
+      assert(context != DELIMITER_GROFF_EXPRESSION);
+      switch (context) {
+      case DELIMITER_ATT_STRING_EXPRESSION:
+	if (csgraph(c))
+	  is_valid = true;
+	break;
+      case DELIMITER_ATT_NUMERIC_EXPRESSION:
+	if (csalnum(c) || ('.' == c) || ('|' == c))
+	  is_valid = true;
+	break;
+      case DELIMITER_ATT_OUTPUT_COMPARISON_EXPRESSION:
+	if (csupper(c)
+	    || (cslower(c)
+		&& (c != 'e')
+		&& (c != 'n')
+		&& (c != 'o')
+		&& (c != 't')))
+	  is_valid = true;
+	break;
+      default:
+	assert(0 == "unhandled case of `context` (enum dcontext)");
+	break;
+      }
+    }
     if (!is_valid && report_error)
       error("character '%1' is not allowed as a delimiter",
 	    static_cast<char>(c));
@@ -5663,20 +5733,30 @@ static bool read_delimited_number(units *n,
 {
   token start_token;
   start_token.next();
-  if (start_token.is_usable_as_delimiter(true /* report error */)) {
-    tok.next();
-    if (read_measurement(n, si, prev_value)) {
-      if (start_token != tok) {
-	// token::description() writes to static, class-wide storage, so
-	// we must allocate a copy of it before issuing the next
-	// diagnostic.
-	char *delimdesc = strdup(start_token.description());
-	warning(WARN_DELIM, "closing delimiter does not match;"
-		" expected %1, got %2", delimdesc, tok.description());
-	free(delimdesc);
-      }
-      return true;
+  bool is_valid = false;
+  if (!want_att_compat && start_token.is_usable_as_delimiter())
+    is_valid = true;
+  else if (want_att_compat
+           && start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_NUMERIC_EXPRESSION))
+    is_valid = true;
+  if (!is_valid) {
+    warning(WARN_DELIM, "cannot use %1 to delimit a numeric expression",
+	    start_token.description());
+    return false;
+  }
+  tok.next();
+  if (read_measurement(n, si, prev_value)) {
+    if (start_token != tok) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
+      warning(WARN_DELIM, "closing delimiter does not match;"
+	      " expected %1, got %2", delimdesc, tok.description());
+      free(delimdesc);
     }
+    return true;
   }
   return false;
 }
@@ -5685,20 +5765,30 @@ static bool read_delimited_number(units *n, unsigned char si)
 {
   token start_token;
   start_token.next();
-  if (start_token.is_usable_as_delimiter(true /* report error */)) {
-    tok.next();
-    if (read_measurement(n, si)) {
-      if (start_token != tok) {
-	// token::description() writes to static, class-wide storage, so
-	// we must allocate a copy of it before issuing the next
-	// diagnostic.
-	char *delimdesc = strdup(start_token.description());
-	warning(WARN_DELIM, "closing delimiter does not match;"
-		" expected %1, got %2", delimdesc, tok.description());
-	free(delimdesc);
-      }
-      return true;
+  bool is_valid = false;
+  if (!want_att_compat && start_token.is_usable_as_delimiter())
+    is_valid = true;
+  else if (want_att_compat
+           && start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_NUMERIC_EXPRESSION))
+    is_valid = true;
+  if (!is_valid) {
+    warning(WARN_DELIM, "cannot use %1 to delimit a numeric expression",
+	    start_token.description());
+    return false;
+  }
+  tok.next();
+  if (read_measurement(n, si)) {
+    if (start_token != tok) {
+      // token::description() writes to static, class-wide storage, so
+      // we must allocate a copy of it before issuing the next
+      // diagnostic.
+      char *delimdesc = strdup(start_token.description());
+      warning(WARN_DELIM, "closing delimiter does not match;"
+	      " expected %1, got %2", delimdesc, tok.description());
+      free(delimdesc);
     }
+    return true;
   }
   return false;
 }
@@ -5709,8 +5799,17 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
   token start_token;
   start_token.next();
   int start_level = input_stack::get_level();
-  if (!start_token.is_usable_as_delimiter(true /* report error */))
+  if (!want_att_compat
+      && !start_token.is_usable_as_delimiter(true /* report error */))
     return false;
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(true,
+		  DELIMITER_ATT_NUMERIC_EXPRESSION)) {
+    warning(WARN_DELIM, "line-drawing escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return false;
+  }
   tok.next();
   if (read_measurement(n, si)) {
     if (tok.is_dummy() || tok.is_transparent_dummy())
@@ -5799,10 +5898,18 @@ static bool read_size(int *x) // \s
     }
     val *= sizescale;
   }
-  else if (!tok.is_usable_as_delimiter())
+  else if (!want_att_compat && !tok.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", tok.description());
+  else if (want_att_compat
+           && !tok.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "type size escape sequence"
+	    " does not accept %1 as a delimiter",
+	    tok.description());
+    return false;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   else if (!tok.is_usable_as_delimiter(true /* report error */))
@@ -5936,10 +6043,18 @@ static void do_register() // \R
 {
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "register assignment escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
@@ -5976,10 +6091,18 @@ static void do_width() // \w
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it is also meaningful"
 	    " in a numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "width computation escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
@@ -6278,10 +6401,18 @@ static node *do_device_extension() // \X
   int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "device extension command escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return 0 /* nullptr */;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))
@@ -6692,6 +6823,7 @@ static std::stack<bool> if_else_stack;
 
 static bool is_conditional_expression_true()
 {
+  bool perform_output_comparison = false;
   bool want_test_sense_inverted = false;
   while (tok.is_space())
     tok.next();
@@ -6709,9 +6841,11 @@ static bool is_conditional_expression_true()
     case 'd':
     case 'm':
     case 'r':
+    case 'v':
       warning(WARN_SYNTAX,
 	      "conditional operator '%1' used in compatibility mode",
 	      c);
+	      // TODO: "; treating as output comparison delimiter", c);
       break;
     default:
       break;
@@ -6724,10 +6858,6 @@ static bool is_conditional_expression_true()
     tok.next();
     result = in_nroff_mode;
   }
-  else if (c == 'v') {
-    tok.next();
-    result = false;
-  }
   else if (c == 'o') {
     result = (topdiv->get_page_number() & 1);
     tok.next();
@@ -6736,6 +6866,8 @@ static bool is_conditional_expression_true()
     result = !(topdiv->get_page_number() & 1);
     tok.next();
   }
+  // TODO: else if (!want_att_compat) {
+  // Check for GNU troff extension conditional operators.
   else if ((c == 'd') || (c == 'r')) {
     tok.next();
     symbol nm = get_name(true /* required */);
@@ -6786,11 +6918,22 @@ static bool is_conditional_expression_true()
     }
     result = is_abstract_style(nm);
   }
+  // vtroff extension
+  else if (c == 'v') {
+    tok.next();
+    result = false;
+  }
   else if (tok.is_space())
     result = false;
-  else if (tok.is_usable_as_delimiter())
-    result = are_comparands_equal();
+  else if (!want_att_compat
+	   && tok.is_usable_as_delimiter())
+    perform_output_comparison = true;
+  else if (want_att_compat
+	   && tok.is_usable_as_delimiter(false /* report error */,
+		  DELIMITER_ATT_OUTPUT_COMPARISON_EXPRESSION))
+    perform_output_comparison = true;
   else {
+    // Evaluate numeric expression.
     units n;
     if (!read_measurement(&n, 'u')) {
       skip_branch();
@@ -6799,6 +6942,8 @@ static bool is_conditional_expression_true()
     else
       result = n > 0;
   }
+  if (perform_output_comparison)
+    result = are_comparands_equal();
   if (want_test_sense_inverted)
     result = !result;
   if (result)
@@ -9831,10 +9976,18 @@ static node *read_drawing_command() // \D
 {
   token start_token;
   start_token.next();
-  if (!start_token.is_usable_as_delimiter())
+  if (!want_att_compat && !start_token.is_usable_as_delimiter())
     warning(WARN_DELIM, "interpreting %1 as an escape sequence"
 	    " delimiter; it is ambiguous because it can also begin a"
 	    " numeric expression", start_token.description());
+  else if (want_att_compat
+           && !start_token.is_usable_as_delimiter(false,
+		  DELIMITER_ATT_STRING_EXPRESSION)) {
+    warning(WARN_DELIM, "drawing command escape sequence"
+	    " does not accept %1 as a delimiter",
+	    start_token.description());
+    return 0 /* nullptr */;
+  }
   // TODO: groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */))

@@ -1,3 +1,54 @@
+2025-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Fix Savannah #67408.  As I've observed before in the
+	groff 1.24 development cycle, the delimiter situation is a mess.
+	AT&T troff actually has three different, context-dependent sets
+	of delimiters; getting too adventurous, though, leads to core
+	dumps, as with `\D0l 1 20' or `.if %0%0% .tm true`.  Last
+	November, I attempted to streamline groff's delimiter handling,
+	but inadvertently broke compatibility mode.  I still think it's
+	valuable for GNU troff users to be able to rely upon a single
+	set of delimiters when not exercising AT&T compatibility mode,
+	so change the formatter to handle four cases of delimiter
+	context: "groff" (not in compatibility mode), AT&T string
+	expressions (as used in `\o` or `\b` or the `tl` request), AT&T
+	numeric expressions (`\s`, the first argument to `\l` or `\L`),
+	and output comparison operators.
+
+	* src/roff/troff/token.h: Introduce new `delimiter_context`
+	enumerated type.
+	(class token): Add parameter to `is_usable_as_delimiter()`
+	member function, defaulting its value to
+	`DELIMITER_GROFF_EXPRESSION` since we expect that to be the most
+	common case.
+
+	* src/roff/troff/input.cpp (is_usable_as_delimiter): Implement
+	the three special cases for AT&T troff compatibility.
+	(do_overstrike)
+	(do_bracket)
+	(do_name_test)
+	(do_expr_test)
+	(do_zero_width_output)
+	(get_line_arg)
+	(read_size)
+	(do_register)
+	(do_width)
+	(do_device_extension)
+	(read_drawing_command)
+	(read_delimited_number): Distinguish compatibility mode.  If in
+	it and given invalid delimiter, throw warning in category
+	"delim" and unwind the operation, behaving more like AT&T troff.
+	{Outside of compatibility mode, GNU troff uses the delimiter
+	anyway, but warns of its ambiguity.}
+	(is_conditional_expression_true): Refactor, introducing new
+	Boolean local variable `perform_output_comparison`.  Throw
+	syntax warning if `v` conditional operator used in compatibility
+	mode, as no variant of AT&T troff available to me recognizes it.
+	Distinguish compatibility mode once the letteral conditional
+	expression operators are ruled out.
+
+	Fixes <https://savannah.gnu.org/bugs/?67408>.
+
 2025-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/check-delimiter-validity.sh: Expand test

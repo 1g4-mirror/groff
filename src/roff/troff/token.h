@@ -26,6 +26,13 @@ class charinfo;
 struct node;
 class vunits;
 
+enum delimiter_context {
+  DELIMITER_GROFF_EXPRESSION,
+  DELIMITER_ATT_STRING_EXPRESSION,
+  DELIMITER_ATT_NUMERIC_EXPRESSION,
+  DELIMITER_ATT_OUTPUT_COMPARISON_EXPRESSION
+};
+
 class token {
   symbol nm;
   node *nd;
@@ -86,7 +93,8 @@ public:
   bool is_tab();
   bool is_leader();
   bool is_backspace();
-  bool is_usable_as_delimiter(bool /* report_error */ = false);
+  bool is_usable_as_delimiter(bool /* report_error */ = false,
+    enum delimiter_context /* context */ = DELIMITER_GROFF_EXPRESSION);
   bool is_dummy();
   bool is_transparent_dummy();
   bool is_transparent();
