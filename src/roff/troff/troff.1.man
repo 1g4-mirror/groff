@@ -809,8 +809,9 @@ empty,
 or nonsensical character class;
 or a
 .I groff
-extension conditional expression operator was used
-while in compatibility mode.
+extension escape sequence
+or conditional expression operator
+was used while in compatibility mode.
 .
 .
 .TP

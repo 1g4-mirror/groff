@@ -1,5 +1,13 @@
 2025-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::next): Throw warnings in
+	category "syntax" when a document uses GNU troff extension
+	escape sequences while in compatibility mode.
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document this.
+
+2025-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #67408.  As I've observed before in the
 	groff 1.24 development cycle, the delimiter situation is a mess.
 	AT&T troff actually has three different, context-dependent sets
