@@ -1,3 +1,12 @@
+2025-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Unit-test logical predicates.
+
+	* src/roff/groff/tests/logical-predicates-work.sh: Test behavior
+	of logical predicates (the first argument to `if`, `ie`, and
+	`while` requests).
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2025-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Slightly refactor.

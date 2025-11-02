@@ -92,6 +92,7 @@ groff_TESTS = \
   src/roff/groff/tests/initialization-is-quiet.sh \
   src/roff/groff/tests/latin1-device-maps-oq-to-0x27.sh \
   src/roff/groff/tests/lf-request-works.sh \
+  src/roff/groff/tests/logical-predicates-work.sh \
   src/roff/groff/tests/localization-works.sh \
   src/roff/groff/tests/msoquiet-request-works.sh \
   src/roff/groff/tests/output-request-works.sh \
