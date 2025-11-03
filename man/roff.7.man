@@ -625,30 +625,30 @@ Vertical spacing has an impact on page-breaking decisions.
 .
 Generally,
 when a break occurs,
-the formatter moves the drawing position to the next text baseline
-automatically.
+the formatter automatically moves the drawing position
+to the next text baseline.
 .
-If the formatter were already writing to the last line that would fit on
-the page,
+If the formatter were already writing
+to the last line that fits on the page,
 advancing by one vee would place the next text baseline off the page.
 .
 Rather than let that happen,
 .I roff
 formatters instruct the output driver to eject the page,
 start a new one,
-and again set the drawing position to one vee below the page top;
+and again place the drawing position one vee below the page top;
 this is a
-.I page break.
+.I "page break."
 .
 .
 .P
-When the last line of input text corresponds to the last output line
-that fits on the page,
-the break caused by the end of input will also break the page,
+When the last line of input text
+corresponds to the last output line that fits on the page,
+the break caused by the end of input also breaks the page,
 producing a useless blank one.
 .
-Macro packages keep users from having
-to confront this difficulty by setting \[lq]traps\[rq];
+Macro packages keep users from having to confront this difficulty
+by setting \[lq]traps\[rq];
 .\" (@pxref{Traps});
 moreover,
 all but the simplest page layouts tend to have headers and footers,

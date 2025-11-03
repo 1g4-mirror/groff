@@ -6351,22 +6351,32 @@ see @ref{Line Layout} and
 @cindex break, page
 @cindex page ejection
 @cindex ejection, page
-Vertical spacing has an impact on page-breaking decisions.  Generally,
-when a break occurs, the formatter moves the drawing position to the
-next text baseline automatically.  If the formatter were already writing
-to the last line that would fit on the page, advancing by one vee would
-place the next text baseline off the page.  Rather than let that happen,
-@code{roff} formatters instruct the output driver to eject the page,
-start a new one, and again set the drawing position to one vee below the
-page top; this is a @dfn{page break}.
+Vertical spacing has an impact on page-breaking decisions.
+Generally,
+when a break occurs,
+the formatter automatically moves the drawing position
+to the next text baseline.
+If the formatter were already writing
+to the last line that fits on the page,
+advancing by one vee would place the next text baseline off the page.
+Rather than let that happen,
+@code{roff}
+formatters instruct the output driver to eject the page,
+start a new one,
+and again place the drawing position one vee below the page top;
+this is a
+@dfn{page break}.
 
-When the last line of input text corresponds to the last output line
-that fits on the page, the break caused by the end of input will also
-break the page, producing a useless blank one.  Macro packages keep
-users from having to confront this difficulty by setting ``traps''
-(@pxref{Traps}); moreover, all but the simplest page layouts tend to
-have headers and footers, or at least bear vertical margins of at least
-one vee.
+When the last line of input text
+corresponds to the last output line that fits on the page,
+the break caused by the end of input also breaks the page,
+producing a useless blank one.
+Macro packages keep users from having to confront this difficulty
+by setting ``traps''
+(@pxref{Traps});
+moreover,
+all but the simplest page layouts tend to have headers and footers,
+or at least bear vertical margins of at least one vee.
 @c END Keep parallel with subsection "Page geometry" of roff(7).
 
 
