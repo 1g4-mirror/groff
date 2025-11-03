@@ -6564,7 +6564,8 @@ An output device's basic unit @code{u} is not necessarily its smallest
 addressable length; @code{u} can be smaller to avoid problems with
 integer roundoff.  The minimum distances that a device can work with in
 the horizontal and vertical directions are termed its @dfn{motion
-quanta}.  Measurements are rounded to applicable motion quanta.
+quanta}.
+The formatter rounds measurements to applicable motion quanta.
 Half-quantum fractions round toward zero.
 
 @cindex horizontal motion quantum register (@code{.H})

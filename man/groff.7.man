@@ -990,7 +990,7 @@ and
 registers,
 respectively.
 .
-Measurements are rounded to applicable motion quanta.
+The formatter rounds measurements to applicable motion quanta.
 .
 Half-quantum fractions round toward zero.
 .\" END Keep (roughly) parallel with groff.texi node "Motion Quanta".
