@@ -1333,7 +1333,7 @@ leading plus and minus signs serve as incrementation and decrementation
 operators,
 respectively.
 .
-To negate an expression,
+To negate an expression in these contexts,
 subtract it from zero
 or include the unary minus in parentheses with its argument.
 .\" @xref{Setting Registers}, for examples.
@@ -1382,10 +1382,11 @@ this is the default.\" @xref{Assigning Register Formats}.
 .
 .
 .P
-Due to the way arguments are parsed,
-spaces are not allowed in numeric expressions unless the (sub)expression
-containing them is surrounded by parentheses.
-.\"@xref{Request and Macro Arguments}, and @ref{Conditionals and Loops}.
+Because spaces separate arguments to requests,
+spaces are not allowed in numeric expressions
+unless parentheses surround the (sub)expression containing them.
+.\"@xref{Invoking Requests}, and
+.\"@ref{Conditionals and Loops}.
 .\" END Keep (roughly) parallel with groff.texi node "Numeric
 .\" expressions".
 .

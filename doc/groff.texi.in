@@ -6920,9 +6920,11 @@ requests and escape sequences:@: @code{bp}, @code{in}, @code{ll},
 @code{lt}, @code{nm}, @code{nr}, @code{pl}, @code{pn}, @code{po},
 @code{ps}, @code{pvs}, @code{rt}, @code{ti}, @code{\H}, @code{\R}, and
 @code{\s}.  Here, leading plus and minus signs serve as incrementation
-and decrementation operators, respectively.  To negate an expression,
-subtract it from zero or include the unary minus in parentheses with its
-argument.  @xref{Setting Registers}, for examples.
+and decrementation operators, respectively.
+To negate an expression in these contexts,
+subtract it from zero
+or include the unary minus in parentheses with its argument.
+@xref{Setting Registers}, for examples.
 
 @opindex |
 @cindex @code{|}, and page motion
@@ -7019,9 +7021,10 @@ Register Formats}.
 
 @cindex space characters, in expressions
 @cindex expressions, and space characters
-Because spaces separate arguments to requests, spaces are not allowed in
-numeric expressions unless the (sub)expression containing them is
-surrounded by parentheses.  @xref{Invoking Requests}, and
+Because spaces separate arguments to requests,
+spaces are not allowed in numeric expressions
+unless parentheses surround the (sub)expression containing them.
+@xref{Invoking Requests}, and
 @ref{Conditionals and Loops}.
 
 @Example
