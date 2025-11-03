@@ -1,5 +1,15 @@
 2025-11-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (main): Update copyright notice
+	reported in `--version` output.  Increment most recent year to
+	2025, acknowledge fact of additional copyright holders (already
+	the case for decades; see our "LICENSES" file), and direct
+	reader attention to availability of that file and others in the
+	source distribution that clarify the permissions attaching to
+	various parts of groff as built and distributed.
+
+2025-11-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp (main): Drop ersatz '(C)' symbol from
 	copyright notice.
 

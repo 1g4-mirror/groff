@@ -269,12 +269,17 @@ int main(int argc, char **argv)
       want_version_info = true;
       printf("GNU groff version %s\n", Version_string);
       puts(
-"Copyright 1989-2023 Free Software Foundation, Inc.\n"
+"Copyright 1989-2025 Free Software Foundation, Inc. and others\n"
+"\n"
 "This is free software, distributed under the terms of the GNU General"
 " Public\n"
 "License, version 3, or any later version, at your option.  There is NO"
 " warranty;\n"
-"not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+"not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+"\n"
+"See the \"COPYING\", \"FDL\", and \"LICENSES\" files in the groff"
+" source distribution\n"
+"for additional notices and permissions."
       );
       puts("\nprograms in constructed pipeline:\n");
       fflush(stdout);
