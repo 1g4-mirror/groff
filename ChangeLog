@@ -1,3 +1,26 @@
+2025-11-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/groff.cpp (main): Drop ersatz '(C)' symbol from
+	copyright notice.
+
+	Software developers have long labored under the no-longer-
+	correct misconception that omitting a copyright symbol from
+	one's notice was a fatal defect that effectively placed the work
+	in the public domain.  That stopped being true as of 1 March
+	1989.[1]  Further, prior to guidance issued by the U.S.
+	Copyright Office in the decades since, the use of "(C)" as a
+	substitute for a copyright sign _may not have sufficed_ to
+	prevent the copyright notice from being regarded as defective.
+	The Copyright Office, then and now, prefers the abbreviation
+	"copr." when © is typographically unavailable.[ibid.]  Nowadays,
+	its advice is that "c" (note lowercase) is an "acceptable
+	variant", that _may_ retain the efficacy of the copyright
+	notice.  The word "copyright", spelled out in full, also
+	suffices per that resource, and is already present in this
+	notice.
+
+	[1] https://www.copyright.gov/circs/circ03.pdf
+
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/gropdf/gropdf.pl (usage): Tweak synopsis syntax.

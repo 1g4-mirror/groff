@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+/* Copyright 1989-2024 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
@@ -269,7 +269,7 @@ int main(int argc, char **argv)
       want_version_info = true;
       printf("GNU groff version %s\n", Version_string);
       puts(
-"Copyright (C) 1989-2023 Free Software Foundation, Inc.\n"
+"Copyright 1989-2023 Free Software Foundation, Inc.\n"
 "This is free software, distributed under the terms of the GNU General"
 " Public\n"
 "License, version 3, or any later version, at your option.  There is NO"
