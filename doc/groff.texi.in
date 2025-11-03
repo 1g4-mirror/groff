@@ -7141,9 +7141,9 @@ construct another escape sequence or identifier.
 .  \@}
 ..
 .init-coordinate-pair center 5 10
-The center is at (\n[center!x], \n[center!y]).
 .init-coordinate-pair "poi@arrow{}nt" trash garbage \" ignored
-.init-coordinate-pair point trash garbage \" ignored
+.init-coordinate-pair point waste rubbish \" ignored
+The center is at (\n[center!x], \n[center!y]).
     @result{} The center is at (5, 10).
 @endExample
 
