@@ -1,5 +1,6 @@
-[[ maintainer: Send to platform-testers for betas/RCs,
+[[ maintainer: Send to platform-testers for release candidates,
                info-gnu for releases,
+               info-groff for both,
                and CC groff and linux-man@vger.kernel.org for both. ]]
 
 [[ groff x.y.Y release candidate Z, x.y.Y.rcZ, is now available from
