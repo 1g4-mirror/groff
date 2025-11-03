@@ -1,6 +1,6 @@
 .ig
 
-Copyright (C) 1991-2020 Free Software Foundation, Inc.
+Copyright 1991-2020 Free Software Foundation, Inc.
 mm is written by Jörgen Hägg <jh@axis.com>
 
 Modified by G. Branden Robinson <g.branden.robinson@gmail.com> to more

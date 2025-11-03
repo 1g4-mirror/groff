@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2024-2025 G. Branden Robinson
+# Copyright 2024-2025 G. Branden Robinson
 #
 # This file is part of groff.
 #
