@@ -1,5 +1,11 @@
 2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/pfbtops/pfbtops.c (main):
+	* src/utils/xtotroff/xtotroff.c (main): Trivially refactor; use
+	idiomatic ISO C99 null pointer constant literal.
+
+2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grolbp/lbp.cpp (main): Eliminate dead store.
 
 2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>

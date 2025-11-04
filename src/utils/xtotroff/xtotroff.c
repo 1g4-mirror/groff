@@ -286,9 +286,9 @@ int main(int argc, char **argv)
   FILE *map;
   int opt;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { "help", no_argument, NULL, CHAR_MAX + 1 },
+    { "version", no_argument, NULL, 'v' },
+    { NULL, 0, NULL, 0 }
   };
 
   program_name = argv[0];
