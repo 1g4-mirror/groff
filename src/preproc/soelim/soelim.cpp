@@ -45,8 +45,8 @@ bool want_tex_output = false;
 
 extern "C" const char *Version_string;
 
-int do_file(const char *);
-
+// forward declaration
+static bool do_file(const char *);
 
 void usage(FILE *stream)
 {
@@ -186,7 +186,7 @@ void do_so(const char *line)
   fputs(line, stdout);
 }
 
-int do_file(const char *filename)
+static bool do_file(const char *filename)
 {
   char *file_name_in_path = 0;
   FILE *fp = include_search_path.open_file_cautiously(filename,
@@ -197,10 +197,10 @@ int do_file(const char *filename)
     whole_filename = file_name_in_path;
   whole_filename += '\0';
   free(file_name_in_path);
-  if (fp == 0) {
+  if (0 == fp) {
     error("cannot open '%1': %2", whole_filename.contents(),
 	  strerror(err));
-    return 0;
+    return false;
   }
   normalize_file_name_for_lf_request(whole_filename);
   current_filename = whole_filename.contents();
@@ -344,7 +344,7 @@ int do_file(const char *filename)
       fatal("cannot close '%1': %2", whole_filename.contents(),
 	    strerror(errno));
   current_filename = 0 /* nullptr */;
-  return 1;
+  return true;
 }
 
 // Local Variables:

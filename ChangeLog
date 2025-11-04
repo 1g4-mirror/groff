@@ -1,5 +1,13 @@
 2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/soelim/soelim.cpp (do_file): Slightly refactor.
+	Mark function as `static` since it does not require external
+	linkage.  Demote return type from `int` to `bool`; return
+	Boolean rather than integer literals.  Reorder equality
+	comparison to avoid inadvertent lvalue assignment.
+
+2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (psbb_locator::psbb_locator): Clarify
 	error diagnostic.
 
