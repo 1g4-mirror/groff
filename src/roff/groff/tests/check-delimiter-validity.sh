@@ -33,7 +33,7 @@ do
   echo "checking validity of '$c' as delimiter in normal mode" \
     >&2
   output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
-    | "$groff" -T ascii | sed '/^$/d')
+    | "$groff" -w delim -T ascii | sed '/^$/d')
   echo "$output"
   echo "$output" | grep -Fqx ___ || wail
 done
@@ -43,7 +43,7 @@ do
   echo "checking invalidity of '$c' as delimiter in normal mode" \
     >&2
   output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
-    | "$groff" -T ascii | sed '/^$/d')
+    | "$groff" -w delim -T ascii | sed '/^$/d')
   echo "$output"
   echo "$output" | grep -qx 1n+2n_. || wail
 done
@@ -57,7 +57,7 @@ do
   echo "checking validity of '$c' as string expression delimiter" \
     "in compatibility mode" >&2
   output=$(printf '\\o%c__%c__\n' "$c" "$c" \
-    | "$groff" -C -T ascii -P -cbou | sed '/^$/d')
+    | "$groff" -C -w delim -T ascii -P -cbou | sed '/^$/d')
   echo "$output"
   echo "$output" | grep -Fqx ___ || wail
 done
@@ -69,7 +69,7 @@ do
   echo "checking validity of '$c' as numeric expression delimiter" \
     "in compatibility mode" >&2
   output=$(printf '_\\h%c1n+2n%c_\n' "$c" "$c" \
-    | "$groff" -C -T ascii | sed '/^$/d')
+    | "$groff" -C -w delim -T ascii | sed '/^$/d')
   echo "$output"
   echo "$output" | grep -Fqx '_   _' || wail
 done
@@ -94,7 +94,7 @@ do
   echo "checking validity of '$c' as output comparison delimiter" \
     "in compatibility mode" >&2
   output=$(printf '.if %c@@@%c@@@%c ___\n' "$c" "$c" "$c" \
-    | "$groff" -C -T ascii | sed '/^$/d')
+    | "$groff" -C -w delim -T ascii | sed '/^$/d')
   echo "$output"
   echo "$output" | grep -Fqx ___ || wail
 done
