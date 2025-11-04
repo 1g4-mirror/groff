@@ -2803,7 +2803,6 @@ bool token::is_usable_as_delimiter(bool report_error,
   case TOKEN_STRETCHABLE_SPACE:
   case TOKEN_UNSTRETCHABLE_SPACE:
   case TOKEN_HORIZONTAL_SPACE:
-  case TOKEN_TAB:
   case TOKEN_NEWLINE:
   case TOKEN_EOF:
     if (report_error)

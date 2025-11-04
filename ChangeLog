@@ -1,5 +1,15 @@
 2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::is_usable_as_delimter): Fix
+	spurious warning in category "delim" when using a tab character
+	as an escape sequence as a delimiter.  AT&T troff allows that,
+	and so has GNU troff historically.
+
+	Continues commit 39c1176bfa, 25 January.  See Savannah #66686
+	and Savannah #66526.
+
+2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/pfbtops/pfbtops.c (main):
 	* src/utils/xtotroff/xtotroff.c (main): Trivially refactor; use
 	idiomatic ISO C99 null pointer constant literal.
