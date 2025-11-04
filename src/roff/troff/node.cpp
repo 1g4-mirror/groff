@@ -1628,7 +1628,7 @@ void troff_output_file::really_copy_file(hunits x, vunits y,
   flush_tbuf();
   do_motion();
   errno = 0;
-  FILE *ifp = include_search_path.open_file_cautious(filename);
+  FILE *ifp = include_search_path.open_file_cautiously(filename);
   if (0 /* nullptr */ == ifp)
     error("cannot open '%1': %2", filename, strerror(errno));
   else {

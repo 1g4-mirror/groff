@@ -347,7 +347,7 @@ void resource_manager::supply_resource(resource *r, int rank,
       }
     }
     else {
-      fp = include_search_path.open_file_cautious(r->filename);
+      fp = include_search_path.open_file_cautiously(r->filename);
       if (0 /* nullptr */ == fp) {
 	error("cannot open PostScript resource file '%1': %2",
 	      r->filename, strerror(errno));

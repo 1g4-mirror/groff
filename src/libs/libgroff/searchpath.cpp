@@ -172,8 +172,8 @@ FILE *search_path::open_file(const char *name, char **pathp)
   return 0 /* nullptr */;
 }
 
-FILE *search_path::open_file_cautious(const char *name, char **pathp,
-				      const char *mode)
+FILE *search_path::open_file_cautiously(const char *name, char **pathp,
+					const char *mode)
 {
   if (0 /* nullptr */ == mode)
     mode = "r";

@@ -1,3 +1,23 @@
+2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Trivially refactor.  Rename `open_file_cautious()`
+	function to `open_file_cautiously()`.
+
+	* src/include/searchpath.h (class search_path): Do it.
+	* src/libs/libgroff/searchpath.cpp
+	(search_path::open_file_cautious): Rename this...
+	(search_path::open_file_cautiously): ...to this.
+	* src/devices/grops/psrm.cpp
+	(resource_manager::supply_resource):
+	* src/preproc/soelim/soelim.cpp (do_file):
+	* src/roff/troff/input.cpp (next_file)
+	(do_source)
+	(psbb_locator::psbb_locator)
+	(transparent_throughput_file_request)
+	(process_input_file):
+	* src/roff/troff/node.cpp (troff_output_file::really_copy_file):
+	Update call sites.
+
 2025-11-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.cpp (main): Update copyright notice

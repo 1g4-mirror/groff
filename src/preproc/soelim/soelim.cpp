@@ -189,7 +189,7 @@ void do_so(const char *line)
 int do_file(const char *filename)
 {
   char *file_name_in_path = 0;
-  FILE *fp = include_search_path.open_file_cautious(filename,
+  FILE *fp = include_search_path.open_file_cautiously(filename,
 						    &file_name_in_path);
   int err = errno;
   string whole_filename(filename);

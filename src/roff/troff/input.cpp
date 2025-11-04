@@ -931,7 +931,7 @@ void next_file()
     input_stack::end_file();
   else {
     errno = 0;
-    FILE *fp = include_search_path.open_file_cautious(filename);
+    FILE *fp = include_search_path.open_file_cautiously(filename);
     if (0 /* nullptr */ == fp)
       error("cannot open '%1': %2", filename, strerror(errno));
     else
@@ -7124,7 +7124,7 @@ void do_source(bool quietly)
 {
   char *filename = read_rest_of_line_as_argument();
   errno = 0;
-  FILE *fp = include_search_path.open_file_cautious(filename);
+  FILE *fp = include_search_path.open_file_cautiously(filename);
   if (fp != 0 /* nullptr */)
     input_stack::push(new file_iterator(fp, filename));
   else
@@ -7274,7 +7274,7 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
   // PS files might contain non-printable characters, such as ^Z
   // and CRs not followed by an LF, so open them in binary mode.
   //
-  fp = include_search_path.open_file_cautious(filename, 0, FOPEN_RB);
+  fp = include_search_path.open_file_cautiously(filename, 0, FOPEN_RB);
   if (fp != 0 /* nullptr */) {
     // After successfully opening the file, acquire the first
     // line, whence we may determine the file format...
@@ -9140,7 +9140,7 @@ static void transparent_throughput_file_request()
     curenv->do_break();
   if (filename != 0 /* nullptr */) {
     errno = 0;
-    FILE *fp = include_search_path.open_file_cautious(filename);
+    FILE *fp = include_search_path.open_file_cautiously(filename);
     if (0 /* nullptr */ == fp)
       error("cannot open '%1': %2", filename, strerror(errno));
     else {
@@ -9358,7 +9358,7 @@ static void process_input_file(const char *name)
   }
   else {
     errno = 0;
-    fp = include_search_path.open_file_cautious(name);
+    fp = include_search_path.open_file_cautiously(name);
     if (0 /* nullptr */ == fp)
       fatal("cannot open '%1': %2", name, strerror(errno));
   }
