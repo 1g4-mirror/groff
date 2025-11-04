@@ -7284,7 +7284,7 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
       // ...except in the case of an empty file, which we are
       // unable to process further.
       //
-      error("'%1' is empty", filename);
+      error("file '%1' is empty", filename);
 
 # if 0
     else if (context_args("%PDF-")) {
