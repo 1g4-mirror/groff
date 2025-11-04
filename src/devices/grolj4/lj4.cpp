@@ -640,8 +640,9 @@ int main(int argc, char **argv)
     { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((c = getopt_long(argc, argv, ":c:d:F:I:lp:vw:", long_options,
-	  0 /* nullptr */)) != EOF)
-    switch(c) {
+			  0 /* nullptr */))
+	 != EOF)
+    switch (c) {
     case 'l':
       landscape_flag = 1;
       break;

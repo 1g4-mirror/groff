@@ -336,12 +336,13 @@ int main(int argc, char **argv)
   int opt;
   bool want_startup_file = true;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((opt = getopt_long(argc, argv, ":CNrRd:f:m:M:p:s:T:v",
-			    long_options, 0)) != EOF)
+			    long_options, 0 /* nullptr */))
+	 != EOF)
     switch (opt) {
     case 'C':
       compatible_flag = 1;

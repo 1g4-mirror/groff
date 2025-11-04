@@ -984,13 +984,14 @@ int main(int argc, char **argv)
   setlocale(LC_CTYPE, "");
   int c;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
-  while ((c = getopt_long(argc, argv, ":bBcdfF:hiI:ortuUv", long_options,
-	  0)) != EOF)
-    switch(c) {
+  while ((c = getopt_long(argc, argv, ":bBcdfF:hiI:ortuUv",
+			  long_options, 0 /* nullptr */))
+	 != EOF)
+    switch (c) {
     case 'v':
       printf("GNU grotty (groff) version %s\n", Version_string);
       exit(EXIT_SUCCESS);

@@ -290,19 +290,20 @@ main(int argc, char **argv)
   program_name = argv[0];
 
   int opt;
-  int res = 1200;		// PCL unit of measure for cursor moves
-  int scalesize = 4;		// LaserJet 4 only allows 1/4 point increments
+  int res = 1200;	// PCL unit of measure for cursor moves
+  int scalesize = 4;	// LaserJet 4 only allows 1/4 point increments
   int unitwidth = 6350;
-  double ppi;			// points per inch
-  double upem;			// design units per em
+  double ppi;		// points per inch
+  double upem;		// design units per em
 
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
-  while ((opt = getopt_long(argc, argv, ":adsqvi:", long_options, 0))
-	 != EOF) {
+  while ((opt = getopt_long(argc, argv, ":adsqvi:", long_options,
+			    0 /* nullptr */))
+	  != EOF)
     switch (opt) {
     case 'a':
       all_flag = YES;
@@ -341,7 +342,6 @@ main(int argc, char **argv)
     default:
       assert(0);
     }
-  }
 
   if (debug_flag && argc - optind < 1)
     usage();

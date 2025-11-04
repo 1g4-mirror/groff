@@ -556,12 +556,13 @@ int main(int argc, char **argv)
   int fig_flag = 0;
 #endif
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((opt = getopt_long(argc, argv, ":cCDfnpStT:Uvxz", long_options,
-	  0)) != EOF)
+			    0 /* nullptr */))
+	 != EOF)
     switch (opt) {
     case 'C':
       compatible_flag = 1;

@@ -179,15 +179,14 @@ int main(int argc, char **argv)
     command_prefix = PROG_PREFIX;
   commands[TROFF_INDEX].set_name(command_prefix, "troff");
   static const struct option long_options[] = {
-    { "help", no_argument, 0, 'h' },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, 'h' },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
-  while ((opt = getopt_long(
-		  argc, argv,
-		  ":abcCd:D:eEf:F:gGhiI:jJkK:lL:m:M:"
-		  "n:No:pP:r:RsStT:UvVw:W:XzZ",
-		  long_options, 0))
+  while ((opt = getopt_long(argc, argv,
+			    ":abcCd:D:eEf:F:gGhiI:jJkK:lL:m:M:"
+			    "n:No:pP:r:RsStT:UvVw:W:XzZ",
+			    long_options, 0 /* nullptr */))
 	 != EOF) {
     char buf[3];
     buf[0] = '-';

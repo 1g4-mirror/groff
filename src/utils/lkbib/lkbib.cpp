@@ -64,12 +64,13 @@ int main(int argc, char **argv)
   search_list list;
   int opt;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((opt = getopt_long(argc, argv, ":nvVi:t:p:", long_options,
-	  0)) != EOF)
+			    0 /* nullptr */))
+	 != EOF)
     switch (opt) {
     case 'V':
       do_verify = true;

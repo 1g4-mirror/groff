@@ -25,7 +25,8 @@ public:
   ~search_path();
   void command_line_dir(const char *);
   FILE *open_file(const char *, char **);
-  FILE *open_file_cautiously(const char *, char ** = 0, const char * = 0);
+  FILE *open_file_cautiously(const char *, char ** = 0 /* nullptr */,
+			     const char * = 0 /* nullptr */);
 };
 
 // Local Variables:

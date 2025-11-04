@@ -1275,9 +1275,9 @@ main(int argc, char **argv)
     { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   // Parse the command-line options.
-  while ((opt = getopt_long(argc, argv,
-			    ":dD:e:hrv", long_options,
-			    0 /* nullptr */)) != EOF)
+  while ((opt = getopt_long(argc, argv, ":dD:e:hrv", long_options,
+			    0 /* nullptr */))
+	 != EOF)
     switch (opt) {
     case 'v':
       printf("GNU preconv (groff) version %s %s iconv support and %s"

@@ -642,7 +642,7 @@ static struct option long_options[] = {
   { "linewidth", required_argument, 0 /* nullptr */, 'w' },
   { "fontdir", required_argument, 0 /* nullptr */, 'F' },
   { "help", no_argument, 0 /* nullptr */, 'h' },
-  { 0 /* nullptr */, 0, 0, 0 }
+  { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
 };
 
 static void usage(FILE *stream)
@@ -670,7 +670,7 @@ int main(int argc, char **argv)
   int c;
   while ((c = getopt_long(argc, argv, ":c:F:hI:lo:p:vw:", long_options,
 			  0 /* nullptr */))
-	 != EOF) {
+	 != EOF)
     switch (c) {
     case 'F':
       font::command_line_font_dir(optarg);
@@ -748,7 +748,6 @@ int main(int argc, char **argv)
     default:
       assert(0 == "unhandled getopt_long return value");
     }
-  }
   if (optind >= argc)
     do_file("-");
   while (optind < argc)

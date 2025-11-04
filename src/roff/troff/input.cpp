@@ -156,8 +156,8 @@ bool want_html_debugging = true;	// enable more diagnostics
 
 search_path *mac_path = &safer_macro_path;
 
-// Defaults to the current directory.
-search_path include_search_path(0, 0, 0, 1);
+// Initialize inclusion search path with only the current directory.
+search_path include_search_path(0 /* nullptr */, 0 /* nullptr */, 0, 1);
 
 static int get_copy(node**, bool = false, bool = false);
 static void copy_mode_error(const char *,
@@ -9510,8 +9510,8 @@ int main(int argc, char **argv)
   }
   setlocale(LC_CTYPE, "");
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
     { 0, 0, 0, 0 }
   };
 #if defined(DEBUGGING)
@@ -9521,7 +9521,8 @@ int main(int argc, char **argv)
 #endif
   while ((c = getopt_long(argc, argv,
 			  ":abcCd:Ef:F:iI:m:M:n:o:qr:Rs:StT:Uvw:W:z"
-			  DEBUG_OPTION, long_options, 0))
+			  DEBUG_OPTION,
+			  long_options, 0 /* nullptr */))
 	 != EOF)
     switch (c) {
     case 'v':

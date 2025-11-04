@@ -62,8 +62,8 @@ extern "C" {
 
 extern "C" const char *Version_string;
 
-// search path defaults to the current directory
-search_path include_search_path(0, 0, 0, 1);
+// Initialize inclusion search path with only the current directory.
+search_path include_search_path(0 /* nullptr */, 0 /* nullptr */, 0, 1);
 
 static int landscape_flag = 0;
 static int manual_feed_flag = 0;
@@ -1878,8 +1878,9 @@ int main(int argc, char **argv)
     { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((c = getopt_long(argc, argv, ":b:c:F:gI:lmp:P:vw:",
-	  long_options, 0 /* nullptr */)) != EOF)
-    switch(c) {
+			  long_options, 0 /* nullptr */))
+	 != EOF)
+    switch (c) {
     case 'b':
       // XXX check this
       broken_flags = atoi(optarg);

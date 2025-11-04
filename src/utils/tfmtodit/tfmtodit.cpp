@@ -701,11 +701,12 @@ int main(int argc, char **argv)
   int opt;
   const char *gf_file = 0;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
-  while ((opt = getopt_long(argc, argv, ":svg:k:", long_options, 0))
+  while ((opt = getopt_long(argc, argv, ":svg:k:", long_options,
+			    0 /* nullptr */))
 	 != EOF)
     switch (opt) {
     case 'g':

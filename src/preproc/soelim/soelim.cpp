@@ -36,8 +36,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "searchpath.h"
 #include "lf.h"
 
-// The include search path initially contains only the current directory.
-static search_path include_search_path(0, 0, 0, 1);
+// Initialize inclusion search path with only the current directory.
+static search_path include_search_path(0 /* nullptr */, 0 /* nullptr */,
+				       0, 1);
 
 bool want_att_compat = false;
 bool want_raw_output = false;
@@ -72,12 +73,12 @@ int main(int argc, char **argv)
   program_name = argv[0];
   int opt;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
-    { 0, 0, 0, 0 }
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
+    { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
   while ((opt = getopt_long(argc, argv, ":CI:rtv", long_options,
-			    0))
+			    0 /* nullptr */))
 	 != EOF)
     switch (opt) {
     case 'v':
@@ -189,16 +190,16 @@ void do_so(const char *line)
 
 static bool do_file(const char *filename)
 {
-  char *file_name_in_path = 0;
+  char *file_name_in_path = 0 /* nullptr */;
   FILE *fp = include_search_path.open_file_cautiously(filename,
-						    &file_name_in_path);
+      &file_name_in_path);
   int err = errno;
   string whole_filename(filename);
   if (strcmp(filename, "-") && file_name_in_path != 0 /* nullptr */)
     whole_filename = file_name_in_path;
   whole_filename += '\0';
   free(file_name_in_path);
-  if (0 == fp) {
+  if (0 /* nullptr */ == fp) {
     error("cannot open '%1': %2", whole_filename.contents(),
 	  strerror(err));
     return false;
@@ -207,7 +208,8 @@ static bool do_file(const char *filename)
   current_filename = whole_filename.contents();
   current_lineno = 1;
   set_location();
-  enum { START, MIDDLE, HAD_DOT, HAD_s, HAD_so, HAD_l, HAD_lf } state = START;
+  enum { START, MIDDLE, HAD_DOT, HAD_s, HAD_so, HAD_l, HAD_lf } state
+      = START;
   for (;;) {
     int c = getc(fp);
     if (c == EOF)

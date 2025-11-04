@@ -5858,15 +5858,15 @@ int main(int argc, char **argv)
   setbuf(stderr, stderr_buf);
   int c;
   static const struct option long_options[] = {
-    { "help", no_argument, 0, CHAR_MAX + 1 },
-    { "version", no_argument, 0, 'v' },
+    { "help", no_argument, 0 /* nullptr */, CHAR_MAX + 1 },
+    { "version", no_argument, 0 /* nullptr */, 'v' },
     { 0 /* nullptr */, 0, 0, 0 }
   };
-  while ((c = getopt_long(argc, argv,
-	  ":a:bCdD:eF:g:Ghi:I:j:k:lno:prs:S:vVx:y", long_options,
-	  0 /* nullptr */))
+  while ((c = getopt_long(argc, argv, ":a:bCdD:eF:g:Ghi:I:j:k:l"
+				      "no:prs:S:vVx:y",
+			  long_options, 0 /* nullptr */))
 	 != EOF)
-    switch(c) {
+    switch (c) {
     case 'a':
       /* text antialiasing bits - handled by pre-html */
       break;
