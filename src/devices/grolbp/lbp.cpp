@@ -668,9 +668,8 @@ int main(int argc, char **argv)
   font::set_unknown_desc_command_handler(handle_unknown_desc_command);
   // command line parsing
   int c;
-  int option_index = 0;
   while ((c = getopt_long(argc, argv, ":c:F:hI:lo:p:vw:", long_options,
-			  &option_index))
+			  0 /* nullptr */))
 	 != EOF) {
     switch (c) {
     case 'F':
