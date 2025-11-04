@@ -225,6 +225,7 @@ my $gotzlib=0;
 my $gotinline=0;
 my $gotexif=0;
 my $xitcd=0;
+my $warnexit=0;
 
 my $rc = eval
 {
@@ -450,8 +451,8 @@ sub usage
     my $had_error = shift;
     $stream = *STDERR if $had_error;
     print $stream
-"usage: $prog [-dels] [-F font-directory] [-I inclusion-directory]" .
-" [-p paper-format] [-u [cmap-file]] [-y foundry] [file ...]\n" .
+"usage: $prog [-delsW] [-F font-directory] [-I inclusion-directory]" .
+" [--opt advanced-opts] [-p paper-format] [--pdfver 1.4|1.7] [-u [cmap-file]] [-y foundry] [file ...]\n" .
 "usage: $prog {-v | --version}\n" .
 "usage: $prog --help\n";
     if (!$had_error)
@@ -494,7 +495,7 @@ my $parclntyp=qr/(?:[\d\w]|\([+-]?[\S]{2}|$parcln)/;
 if (!GetOptions('F=s' => \@fdlist, 'I=s' => \@idirs, 'l' => \$frot,
     'p=s' => \$fpsz, 'd!' => \$debug, 'help' => \$want_help, 'pdfver=f' => \$PDFver,
     'v' => \$version, 'version' => \$version, 'opt=s' => \$options,
-    'e' => \$embedall, 'y=s' => \$Foundry, 's' => \$stats,
+    'e' => \$embedall, 'y=s' => \$Foundry, 's' => \$stats, 'W' => \$warnexit,
     'u:s' => \$unicodemap))
 {
     &usage(1);
@@ -532,7 +533,7 @@ if (defined($unicodemap))
 
 if ($PDFver != 1.4 and $PDFver != 1.7)
 {
-    Warn("Only pdf versions 1.4 or 1.7 are supported, not '$PDFver'");
+    Notice("Only pdf versions 1.4 or 1.7 are supported, not '$PDFver'");
     $PDFver=1.7;
 }
 
@@ -3190,7 +3191,7 @@ sub Warn
     unshift(@_, "warning: ");
     my $msg=join('',@_);
     Msg(0,$msg);
-    $xitcd=2;
+    $xitcd=2 if $warnexit;
 }
 
 sub Die
@@ -3508,7 +3509,7 @@ sub LoadFont
     $fnt{t1flags}=$t1flags;
     my $fontkey="$foundry $fnt{internalname}";
 
-    Warn("\nFont '$fnt{internalname} ($ofontnm)' has $lastchr glyphs\n"
+    Notice("\nFont '$fnt{internalname} ($ofontnm)' has $lastchr glyphs\n"
 	."You would see a noticeable speedup if you install the perl module Inline::C\n") if !$gotinline and $lastchr > 1000;
 
     if (exists($download{$fontkey}))

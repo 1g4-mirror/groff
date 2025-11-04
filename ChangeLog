@@ -1,5 +1,16 @@
 2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf]: Reinstate -W to set exit code 2 on warning, and
+	downgrade two Warnings to Notices.
+
+	* src/devices/gropdf/gropdf.pl: Do it.
+
+	Fixes https://savannah.gnu.org/bugs/?67612
+
+	Thanks to Dave and Branden.
+
+2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	Reinstate using -W flag when building pdfs. Baby was thrown
 	out with the bathwater by me.
 
