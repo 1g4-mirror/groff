@@ -1,3 +1,26 @@
+2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Reinstate using -W flag when building pdfs. Baby was thrown
+	out with the bathwater by me.
+
+	* doc/doc_am:
+	* contrib/mom/mom.am: Reinstate -W flag to provide exit code
+	if a warning is produced during build.
+
+	Thanks to Dave for report in:-
+
+	https://savannah.gnu.org/bugs/?67612
+
+	and apologies to Branden for exfiltrating the baby.
+
+2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[sboxes]: Handle situation where a box is ended at the
+	bottom of a page, but the indent gap triggers a new page.
+
+	* contrib/sboxes/sboxes.tmac (BOXSTOP): Turn off vertical
+	position traps before advancing for bottom indent.
+
 2025-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::next): Throw warnings in

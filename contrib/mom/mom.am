@@ -28,7 +28,7 @@ MOMPDFMOM = \
   GROFF_COMMAND_PREFIX= \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
   $(PDFMOMBIN) $(FFLAG) $(MFLAG) -M$(mom_srcdir) -K utf8 -p -e -t \
-  -wall -b
+  -wall -b -P-W
 
 man7_MANS += contrib/mom/groff_mom.7
 
