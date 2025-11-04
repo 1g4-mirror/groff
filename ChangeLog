@@ -1,5 +1,15 @@
 2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf]: Document --opt and --pdfver
+
+	* src/devices/gropdf/gropdf.1.man: Add option entries.
+
+	Fixes https://savannah.gnu.org/bugs/?67616
+
+	Thanks to Dave for the report.
+
+2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	[gropdf]: Reinstate -W to set exit code 2 on warning, and
 	downgrade two Warnings to Notices.
 
