@@ -1683,7 +1683,6 @@ node *do_overstrike() // \o
 static node *do_bracket() // \b
 {
   bracket_node *bracketnode = new bracket_node;
-  int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
   if (!want_att_compat && !start_token.is_usable_as_delimiter())
@@ -1706,6 +1705,7 @@ static node *do_bracket() // \b
     return 0 /* nullptr */;
   }
 #endif
+  int start_level = input_stack::get_level();
   for (;;) {
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
@@ -1734,7 +1734,6 @@ static node *do_bracket() // \b
 
 static const char *do_name_test() // \A
 {
-  int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
   if (!want_att_compat && !start_token.is_usable_as_delimiter())
@@ -1754,6 +1753,7 @@ static const char *do_name_test() // \A
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
 #endif
+  int start_level = input_stack::get_level();
   bool got_bad_char = false;
   bool got_some_char = false;
   for (;;) {
@@ -1783,7 +1783,6 @@ static const char *do_expr_test() // \B
 {
   token start_token;
   start_token.next();
-  int start_level = input_stack::get_level();
   if (!want_att_compat
       && !start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
@@ -1795,6 +1794,7 @@ static const char *do_expr_test() // \B
 	    start_token.description());
     return 0 /* nullptr */;
   }
+  int start_level = input_stack::get_level();
   tok.next();
   // disable all warning and error messages temporarily
   unsigned int saved_warning_mask = warning_mask;
@@ -1868,7 +1868,6 @@ static node *do_zero_width_output() // \Z
 {
   node *rev = new dummy_node;
   node *n = 0 /* nullptr */;
-  int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
   if (!want_att_compat && !start_token.is_usable_as_delimiter())
@@ -1890,6 +1889,7 @@ static node *do_zero_width_output() // \Z
     return 0 /* nullptr */;
   }
 #endif
+  int start_level = input_stack::get_level();
   for (;;) {
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
@@ -5835,7 +5835,6 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
 {
   token start_token;
   start_token.next();
-  int start_level = input_stack::get_level();
   if (!want_att_compat
       && !start_token.is_usable_as_delimiter(true /* report error */))
     return false;
@@ -5847,6 +5846,7 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
 	    start_token.description());
     return false;
   }
+  int start_level = input_stack::get_level();
   tok.next();
   if (read_measurement(n, si)) {
     if (tok.is_dummy() || tok.is_transparent_dummy())
@@ -6125,7 +6125,6 @@ static void do_register() // \R
 
 static void do_width() // \w
 {
-  int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
   if (!want_att_compat && !start_token.is_usable_as_delimiter())
@@ -6145,6 +6144,7 @@ static void do_width() // \w
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return;
 #endif
+  int start_level = input_stack::get_level();
   environment env(curenv);
   environment *oldenv = curenv;
   curenv = &env;
@@ -6435,7 +6435,6 @@ static void encode_character_for_device_output(macro *mac, const char c)
 
 static node *do_device_extension() // \X
 {
-  int start_level = input_stack::get_level();
   token start_token;
   start_token.next();
   if (!want_att_compat && !start_token.is_usable_as_delimiter())
@@ -6455,6 +6454,7 @@ static node *do_device_extension() // \X
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return 0 /* nullptr */;
 #endif
+  int start_level = input_stack::get_level();
   macro mac;
   if ((curdiv == topdiv) && (topdiv->before_first_page_status > 0))
     topdiv->begin_page();

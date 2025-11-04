@@ -1,3 +1,16 @@
+2025-11-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (do_overstrike)
+	(do_bracket)
+	(do_name_test)
+	(do_expr_test)
+	(do_zero_width_output)
+	(get_line_arg)
+	(do_width)
+	(do_device_extension): Slightly refactor.  Delay collecting the
+	input level (interpolation depth) until we're sure the escape
+	sequence we're interpreting is validly delimited.
+
 2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::is_usable_as_delimter): Fix
