@@ -1,5 +1,23 @@
 2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn, groff, grotty, hpftodit, indxbib, lkbib, lookbib, pic,
+	soelim, tbl, tfmtodit]: Trivially refactor; use idiomatic C++98
+	null pointer constant literal.
+
+	* src/devices/grotty/tty.cpp (main):
+	* src/preproc/eqn/main.cpp (main):
+	* src/preproc/pic/main.cpp (main):
+	* src/preproc/soelim/soelim.cpp (main):
+	* src/preproc/tbl/main.cpp (main):
+	* src/roff/groff/groff.cpp (main):
+	* src/utils/hpftodit/hpftodit.cpp (main):
+	* src/utils/indxbib/indxbib.cpp (main):
+	* src/utils/lkbib/lkbib.cpp (main):
+	* src/utils/lookbib/lookbib.cpp (main):
+	* src/utils/tfmtodit/tfmtodit.cpp (main): Do it.
+
+2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.cpp (do_file): Slightly refactor.
 	Mark function as `static` since it does not require external
 	linkage.  Demote return type from `int` to `bool`; return

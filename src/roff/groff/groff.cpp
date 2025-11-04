@@ -181,13 +181,13 @@ int main(int argc, char **argv)
   static const struct option long_options[] = {
     { "help", no_argument, 0, 'h' },
     { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { 0, 0, 0, 0 }
   };
   while ((opt = getopt_long(
 		  argc, argv,
 		  ":abcCd:D:eEf:F:gGhiI:jJkK:lL:m:M:"
 		  "n:No:pP:r:RsStT:UvVw:W:XzZ",
-		  long_options, NULL))
+		  long_options, 0))
 	 != EOF) {
     char buf[3];
     buf[0] = '-';

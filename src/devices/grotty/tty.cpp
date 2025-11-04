@@ -986,10 +986,10 @@ int main(int argc, char **argv)
   static const struct option long_options[] = {
     { "help", no_argument, 0, CHAR_MAX + 1 },
     { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { 0, 0, 0, 0 }
   };
   while ((c = getopt_long(argc, argv, ":bBcdfF:hiI:ortuUv", long_options,
-	  NULL)) != EOF)
+	  0)) != EOF)
     switch(c) {
     case 'v':
       printf("GNU grotty (groff) version %s\n", Version_string);

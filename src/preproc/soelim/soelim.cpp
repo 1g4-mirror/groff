@@ -74,9 +74,10 @@ int main(int argc, char **argv)
   static const struct option long_options[] = {
     { "help", no_argument, 0, CHAR_MAX + 1 },
     { "version", no_argument, 0, 'v' },
-    { NULL, 0, 0, 0 }
+    { 0, 0, 0, 0 }
   };
-  while ((opt = getopt_long(argc, argv, ":CI:rtv", long_options, NULL))
+  while ((opt = getopt_long(argc, argv, ":CI:rtv", long_options,
+			    0))
 	 != EOF)
     switch (opt) {
     case 'v':
