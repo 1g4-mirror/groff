@@ -19694,8 +19694,8 @@
 	1.22.4, the man(7) `TP` macro uses GNU troff's `itc` request,
 	which _does_ respect `\c`.  (mandoc(1) 1.14.2 and later behave
 	compatibly with groff man >= 1.22.4.)  Solaris 11 switched to
-	groff as its troff implementation, so there is no reason for
-	newly written or currently maintained man pages to employ `SB`.
+	groff as its man page formatter, so there is no reason for newly
+	written or currently maintained man pages to employ `SB`.
 
 	* tmac/an.tmac (SB): Throw deprecation warning.
 
