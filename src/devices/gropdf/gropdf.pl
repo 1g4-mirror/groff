@@ -3054,7 +3054,7 @@ sub ParsePDFValue
     my $rtn;
     my $wd=nextwd($pdfwds);
 
-    if ($wd=~m/^\d+$/ and $pdfwds->[0]=~m/^\d+$/ and $pdfwds->[1]=~m/^R(\]|\>|\/)?/)
+    if ($wd=~m/^\d+$/ and $#{$pdfwds}>0 and $pdfwds->[0]=~m/^\d+$/ and $pdfwds->[1]=~m/^R(\]|\>|\/)?/)
     {
 	shift(@{$pdfwds});
 	if (defined($1) and length($1))
@@ -3111,6 +3111,12 @@ sub ParsePDFValue
 	    unshift(@{$pdfwds},$2);
 	    $wd=$1;
 	}
+    }
+
+    if ($wd=~m/(\/.+?)(\/.*)$/)
+    {
+	unshift(@{$pdfwds},$2);
+	$wd=$1;
     }
 
     return($wd);

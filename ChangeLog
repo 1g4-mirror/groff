@@ -1,5 +1,12 @@
 2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
+	[gropdf]: Problem including pdfs produced by ghostscript 10
+
+	* src/devices/gropdf/gropdf.pl (ParsePDFValue): Improve parser
+	to handle multiple "/key/value" on one line.
+
+2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
 	[gropdf]: Document --opt and --pdfver
 
 	* src/devices/gropdf/gropdf.1.man: Add option entries.
