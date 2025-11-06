@@ -1,5 +1,13 @@
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (main): Tweak wording of notice about
+	notices.  Many groff users encounter it via a package, and it
+	seems churlish to expect distributors to rewrite this notice--
+	though they still might want to do so to name the _specific_
+	package in which they provide the files it mentions.
+
+2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/gropdf/TODO: Drop stale item.
 
 	Fixes <https://savannah.gnu.org/bugs/?67661>.  Thanks to Deri

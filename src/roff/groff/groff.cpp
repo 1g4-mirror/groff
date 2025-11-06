@@ -277,8 +277,8 @@ int main(int argc, char **argv)
 "not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
 "\n"
 "See the \"COPYING\", \"FDL\", and \"LICENSES\" files in the groff"
-" source distribution\n"
-"for additional notices and permissions."
+" distribution or\n"
+"package for additional notices and permissions."
       );
       puts("\nprograms in constructed pipeline:\n");
       fflush(stdout);
