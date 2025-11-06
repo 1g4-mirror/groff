@@ -1,6 +1,12 @@
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/check-delimiter-validity.sh: Test many
+	more string expression delimiters in compatibility mode,
+	including numerals and punctuation characters.
+
+2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/check-delimiter-validity.sh: Test many
 	more delimiters in normal mode (that is, not compatibility
 	mode), including punctuation characters and control characters
 	that are valid as input.
