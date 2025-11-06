@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2020-2025 Free Software Foundation, Inc.
+# Copyright 2020-2025 G. Branden Robinson
 #
 # This file is part of groff.
 #
