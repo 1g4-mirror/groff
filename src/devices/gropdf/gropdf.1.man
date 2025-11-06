@@ -213,36 +213,52 @@ Orient the document in landscape format.
 .
 .TP
 .BI \-\-opt\~ option-bits
-Specify advanced options for gropdf.
+Specify advanced options for
+.I gropdf.
 .I option-bits
-controls which features are active:-
-.RS
+is a bit vector that selects active features.
+.
+Add the following values to combine them.
+.
+.
 .LP
-.RS
+.RS \" One inset to align with the indentation of `TP`...
+.RS \" ...and one more to get "inboard" of it.
 .TS
-l l, lB lx.
-Bit	Meaning
+L  L
+Lb Lx.
+Value	Meaning
 _
-1	included type 1 fonts are subsetted
+1	Subset included Type 1 fonts.
 2	T{
-use more compact format for text by including space as a character
-(fonts which do not include space as a glyph may require this unset).
+Use more compact format for text by including space as a character.
+Fonts that do not include space as a glyph
+may conflict with this feature.
 T}
 4	T{
-compress all streams, if this bit is unset streams are uncompressed.
+Compress all streams.
 T}
 8	T{
-don't include font file. (The font is specified in the pdf but no font
-data is embedded - usually not useful).
+.\" Why don't we flip the sense of this bit and the default can be
+.\" 15--all bits on? --GBR
+Don't embed font files.
+.
+(A font required by the document is not embedded;
+usually not useful.)
 T}
 .TE
 .RE
 .LP
-Each number can be added together to form a bit-mask. The default value
-is 7. To mimic what
+The default feature combination is 7.
+.
+To mimic what
 .I gropdf
-1.23 produced use value 6 (turn off subsetting).
+from
+.I groff
+1.23 produced,
+specify \[lq]6\[rq] to turn off subsetting.
 .RE
+.
 .
 .TP
 .BI \-p " paper-format"
