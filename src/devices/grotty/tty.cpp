@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
+/* Copyright 1989-2025 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
      OSC 8 support by G. Branden Robinson
 
