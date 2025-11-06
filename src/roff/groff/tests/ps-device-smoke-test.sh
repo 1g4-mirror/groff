@@ -1,6 +1,8 @@
 #!/bin/sh
 #
-# Copyright 2022-2024 Free Software Foundation, Inc.
+# Copyright 2022 Free Software Foundation, Inc.
+#
+# contributed by TANAKA Takuji
 #
 # This file is part of groff.
 #
