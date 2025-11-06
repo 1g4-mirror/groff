@@ -95,6 +95,15 @@ do
     echo "$output" | grep -Fqx '_   _' || wail
 done
 
+for c in + - / '*' % '<' '>' = '&' : '(' ')'
+do
+    echo "checking invalidity of '$c' as numeric expression delimiter" \
+         "in compatibility mode" >&2
+    output=$(printf '_\\h%c1n+2n%c_\n' "$c" "$c" \
+      | "$groff" -C -w delim -T ascii -P -cbou | sed '/^$/d')
+    echo "$output" | grep -Fqx '_   _' && wail
+done
+
 for octal in 002 003 005 006 007 177
 do
     echo "checking validity of control character $octal (octal)" \
