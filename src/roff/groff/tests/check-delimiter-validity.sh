@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 groff="${abs_top_builddir:-.}/test-groff"
 
@@ -30,22 +29,22 @@ wail () {
 for c in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z \
          a b c d e f g h i j k l m n o p q r s t u v w x y z
 do
-  echo "checking validity of '$c' as delimiter in normal mode" \
-    >&2
-  output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
-    | "$groff" -w delim -T ascii | sed '/^$/d')
-  echo "$output"
-  echo "$output" | grep -Fqx ___ || wail
+    echo "checking validity of '$c' as delimiter in normal mode" \
+         >&2
+    output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
+      | "$groff" -w delim -T ascii | sed '/^$/d')
+    echo "$output"
+    echo "$output" | grep -Fqx ___ || wail
 done
 
 for c in 0 1 2 3 4 5 6 7 8 9 + - '(' . '|'
 do
-  echo "checking invalidity of '$c' as delimiter in normal mode" \
-    >&2
-  output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
-    | "$groff" -w delim -T ascii | sed '/^$/d')
-  echo "$output"
-  echo "$output" | grep -qx 1n+2n_. || wail
+    echo "checking invalidity of '$c' as delimiter in normal mode" \
+         >&2
+    output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
+      | "$groff" -w delim -T ascii | sed '/^$/d')
+    echo "$output"
+    echo "$output" | grep -qx 1n+2n_. || wail
 done
 
 # Now test the context-dependent sets of delimiters of AT&T troff.
@@ -54,24 +53,24 @@ for c in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z \
          a b c d e f g h i j k l m n o p q r s t u v w x y z \
          0 1 2 3 4 5 6 7 8 9 + - / '*' % '<' '>' = '&' : '(' ')' . '|'
 do
-  echo "checking validity of '$c' as string expression delimiter" \
-    "in compatibility mode" >&2
-  output=$(printf '\\o%c__%c__\n' "$c" "$c" \
-    | "$groff" -C -w delim -T ascii -P -cbou | sed '/^$/d')
-  echo "$output"
-  echo "$output" | grep -Fqx ___ || wail
+    echo "checking validity of '$c' as string expression delimiter" \
+         "in compatibility mode" >&2
+    output=$(printf '\\o%c__%c__\n' "$c" "$c" \
+      | "$groff" -C -w delim -T ascii -P -cbou | sed '/^$/d')
+    echo "$output"
+    echo "$output" | grep -Fqx ___ || wail
 done
 
 for c in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z \
          a b c d e f g h i j k l m n o p q r s t u v w x y z \
          0 1 2 3 4 5 6 7 8 9 . '|'
 do
-  echo "checking validity of '$c' as numeric expression delimiter" \
-    "in compatibility mode" >&2
-  output=$(printf '_\\h%c1n+2n%c_\n' "$c" "$c" \
-    | "$groff" -C -w delim -T ascii | sed '/^$/d')
-  echo "$output"
-  echo "$output" | grep -Fqx '_   _' || wail
+    echo "checking validity of '$c' as numeric expression delimiter" \
+         "in compatibility mode" >&2
+    output=$(printf '_\\h%c1n+2n%c_\n' "$c" "$c" \
+      | "$groff" -C -w delim -T ascii | sed '/^$/d')
+    echo "$output"
+    echo "$output" | grep -Fqx '_   _' || wail
 done
 
 # 'v' as a conditional expression operator is a vtroff extension, not a
@@ -91,14 +90,14 @@ done
 for c in A B C D E   G H I J K L M N O P Q R   T U V W X Y Z \
          a b       f g h i j k l       p q   s   u   w x y z
 do
-  echo "checking validity of '$c' as output comparison delimiter" \
-    "in compatibility mode" >&2
-  output=$(printf '.if %c@@@%c@@@%c ___\n' "$c" "$c" "$c" \
-    | "$groff" -C -w delim -T ascii | sed '/^$/d')
-  echo "$output"
-  echo "$output" | grep -Fqx ___ || wail
+    echo "checking validity of '$c' as output comparison delimiter" \
+         "in compatibility mode" >&2
+    output=$(printf '.if %c@@@%c@@@%c ___\n' "$c" "$c" "$c" \
+      | "$groff" -C -w delim -T ascii | sed '/^$/d')
+    echo "$output"
+    echo "$output" | grep -Fqx ___ || wail
 done
 
 test -z "$fail"
 
-# vim:set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=72:
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
