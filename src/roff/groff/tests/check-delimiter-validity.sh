@@ -33,7 +33,6 @@ do
          >&2
     output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
       | "$groff" -w delim -T ascii | sed '/^$/d')
-    echo "$output"
     echo "$output" | grep -Fqx ___ || wail
 done
 
@@ -43,7 +42,6 @@ do
          >&2
     output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
       | "$groff" -w delim -T ascii | sed '/^$/d')
-    echo "$output"
     echo "$output" | grep -qx 1n+2n_. || wail
 done
 
@@ -57,7 +55,6 @@ do
          "in compatibility mode" >&2
     output=$(printf '\\o%c__%c__\n' "$c" "$c" \
       | "$groff" -C -w delim -T ascii -P -cbou | sed '/^$/d')
-    echo "$output"
     echo "$output" | grep -Fqx ___ || wail
 done
 
@@ -69,7 +66,6 @@ do
          "in compatibility mode" >&2
     output=$(printf '_\\h%c1n+2n%c_\n' "$c" "$c" \
       | "$groff" -C -w delim -T ascii | sed '/^$/d')
-    echo "$output"
     echo "$output" | grep -Fqx '_   _' || wail
 done
 
@@ -94,7 +90,6 @@ do
          "in compatibility mode" >&2
     output=$(printf '.if %c@@@%c@@@%c ___\n' "$c" "$c" "$c" \
       | "$groff" -C -w delim -T ascii | sed '/^$/d')
-    echo "$output"
     echo "$output" | grep -Fqx ___ || wail
 done
 
