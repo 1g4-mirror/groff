@@ -1,4 +1,4 @@
-/* Copyright (C) 2003-2025 Free Software Foundation, Inc.
+/* Copyright 2003-2025 Free Software Foundation, Inc.
  *
  *  mtsm.h
  *
