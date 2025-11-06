@@ -2773,8 +2773,24 @@ bool token::is_usable_as_delimiter(bool report_error,
 	  is_valid = true;
 	break;
       case DELIMITER_ATT_NUMERIC_EXPRESSION:
-	if (csalnum(c) || ('.' == c) || ('|' == c))
+	if (csgraph(c))
 	  is_valid = true;
+	// AT&T troff doesn't accept as numeric expression delimiters
+	// characters that validly appear in a numeric expression,
+	// _except_ for numerals, `|`, and `.`.
+	if (('+' == c)
+	    || ('-' == c)
+	    || ('/' == c)
+	    || ('*' == c)
+	    || ('%' == c)
+	    || ('<' == c)
+	    || ('>' == c)
+	    || ('=' == c)
+	    || ('&' == c)
+	    || (':' == c)
+	    || ('(' == c)
+	    || (')' == c))
+	  is_valid = false;
 	break;
       case DELIMITER_ATT_OUTPUT_COMPARISON_EXPRESSION:
 	if (csupper(c)
