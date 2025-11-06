@@ -1,5 +1,17 @@
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::is_usable_as_delimter): In
+	compatibility mode, permit control characters as delimiters that
+	DWB 3.3 troff accepts.  (Actually, this is slightly overbroad--
+	AT&T troff does _not_ permit ^A, ^D, ^H, ^I, or ^L.  But this
+	stuff is tedious to test (and the old "use-a-control-character-
+	as-a-delimiter trick" is commonplace in historical documents, so
+	we really should support it in at least approximate form).
+
+	* src/roff/groff/tests/check-delimiter-validity.sh: Test them.
+
+2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::is_usable_as_delimter):
 	Accept many more conditional expression delimiters in
 	compatibility mode, namely punctuation characters that AT&T

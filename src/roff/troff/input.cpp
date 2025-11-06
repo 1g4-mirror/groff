@@ -2769,11 +2769,13 @@ bool token::is_usable_as_delimiter(bool report_error,
       assert(context != DELIMITER_GROFF_EXPRESSION);
       switch (context) {
       case DELIMITER_ATT_STRING_EXPRESSION:
-	if (csgraph(c))
+	if (csgraph(c)
+	    || (((c > 0) && (c < 012)) || (014 == c) || (0177 == c)))
 	  is_valid = true;
 	break;
       case DELIMITER_ATT_NUMERIC_EXPRESSION:
-	if (csgraph(c))
+	if (csgraph(c)
+	    || (((c > 0) && (c < 012)) || (014 == c) || (0177 == c)))
 	  is_valid = true;
 	// AT&T troff doesn't accept as numeric expression delimiters
 	// characters that validly appear in a numeric expression,
@@ -2799,7 +2801,8 @@ bool token::is_usable_as_delimiter(bool report_error,
 		&& (c != 'n')
 		&& (c != 'o')
 		&& (c != 't'))
-	    || cspunct(c))
+	    || cspunct(c)
+	    || (((c > 0) && (c < 012)) || (014 == c) || (0177 == c)))
 	  is_valid = true;
 	// AT&T troff doesn't accept as conditional expression
 	// delimiters characters that can validly appear in a numeric

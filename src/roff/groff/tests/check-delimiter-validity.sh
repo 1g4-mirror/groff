@@ -73,6 +73,15 @@ do
     echo "$output" | grep -Fqx ___ || wail
 done
 
+for octal in 002 003 005 006 007 177
+do
+    echo "checking validity of control character $octal (octal)" \
+         "as string expression delimiter in compatibility mode" >&2
+    output=$(printf '\\o\'$octal'__\'$octal'__\n' \
+      | "$groff" -C -w delim -T ascii | sed '/^$/d')
+    echo "$output" | grep -qx _.___ || wail
+done
+
 for c in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z \
          a b c d e f g h i j k l m n o p q r s t u v w x y z \
          0 1 2 3 4 5 6 7 8 9 . '|' \
@@ -84,6 +93,15 @@ do
     output=$(printf '_\\h%c1n+2n%c_\n' "$c" "$c" \
       | "$groff" -C -w delim -T ascii | sed '/^$/d')
     echo "$output" | grep -Fqx '_   _' || wail
+done
+
+for octal in 002 003 005 006 007 177
+do
+    echo "checking validity of control character $octal (octal)" \
+         "as numeric expression delimiter in compatibility mode" >&2
+    output=$(printf '\\o\'$octal'__\'$octal'__\n' \
+      | "$groff" -C -w delim -T ascii | sed '/^$/d')
+    echo "$output" | grep -qx _.___ || wail
 done
 
 # 'v' as a conditional expression operator is a vtroff extension, not a
@@ -111,6 +129,15 @@ do
          "in compatibility mode" >&2
     output=$(printf '.if %c@@@%c@@@%c ___\n' "$c" "$c" "$c" \
       | "$groff" -C -w delim -T ascii | sed '/^$/d')
+    echo "$output" | grep -Fqx ___ || wail
+done
+
+for octal in 002 003 005 006 007 177
+do
+    echo "checking validity of control character $octal (octal)" \
+         "as output comparison delimiter in compatibility mode" >&2
+    output=$(printf '.if \'$octal'@@@\'$octal'@@@\'$octal' ___\n' \
+      | "$groff" -C -w delim -T ascii -P -cbou | sed '/^$/d')
     echo "$output" | grep -Fqx ___ || wail
 done
 
