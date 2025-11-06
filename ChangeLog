@@ -13,7 +13,7 @@
 
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/input.cpp (token::is_usable_as_delimter): In
+	* src/roff/troff/input.cpp (token::is_usable_as_delimiter): In
 	compatibility mode, permit control characters as delimiters that
 	DWB 3.3 troff accepts.  (Actually, this is slightly overbroad--
 	AT&T troff does _not_ permit ^A, ^D, ^H, ^I, or ^L.  But this
@@ -25,7 +25,7 @@
 
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/input.cpp (token::is_usable_as_delimter):
+	* src/roff/troff/input.cpp (token::is_usable_as_delimiter):
 	Accept many more conditional expression delimiters in
 	compatibility mode, namely punctuation characters that AT&T
 	troff doesn't reject in that context.
@@ -66,7 +66,7 @@
 
 2025-11-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/input.cpp (token::is_usable_as_delimter): Fix
+	* src/roff/troff/input.cpp (token::is_usable_as_delimiter): Fix
 	spurious warning in category "delim" when using a tab character
 	as an escape sequence as a delimiter.  AT&T troff allows that,
 	and so has GNU troff historically.
@@ -13091,7 +13091,7 @@
 	* src/roff/troff/input.cpp (do_overstrike, do_bracket)
 	(do_name_test, do_zero_width_output, do_width)
 	(do_device_control): Do it.  As a bonus, check starting
-	delimters for these escape sequences (`\[obAZwX]`) for validity
+	delimiters for these escape sequences (`\[obAZwX]`) for validity
 	in general.
 	(do_overstrike, do_bracket, do_zero_width_output): Avoid leaking
 	memory when returning early; delete the `new` node we just
