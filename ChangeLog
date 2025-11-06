@@ -1,5 +1,12 @@
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/gropdf/TODO: Drop stale item.
+
+	Fixes <https://savannah.gnu.org/bugs/?67661>.  Thanks to Deri
+	James for the discussion.
+
+2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/check-delimiter-validity.sh: Add negative
 	testing.  Verify that conditional expression operators and
 	characters constitutive of numeric expressions are invalid as
