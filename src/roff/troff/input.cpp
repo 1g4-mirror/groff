@@ -2798,8 +2798,28 @@ bool token::is_usable_as_delimiter(bool report_error,
 		&& (c != 'e')
 		&& (c != 'n')
 		&& (c != 'o')
-		&& (c != 't')))
+		&& (c != 't'))
+	    || cspunct(c))
 	  is_valid = true;
+	// AT&T troff doesn't accept as conditional expression
+	// delimiters characters that can validly appear in a numeric
+	// expression, nor `!`.  We already excluded numerals above.
+	if (('+' == c)
+	    || ('-' == c)
+	    || ('/' == c)
+	    || ('*' == c)
+	    || ('%' == c)
+	    || ('<' == c)
+	    || ('>' == c)
+	    || ('=' == c)
+	    || ('&' == c)
+	    || (':' == c)
+	    || ('(' == c)
+	    || (')' == c)
+	    || ('|' == c)
+	    || ('.' == c)
+	    || ('!' == c))
+	  is_valid = false;
 	break;
       default:
 	assert(0 == "unhandled case of `context` (enum dcontext)");

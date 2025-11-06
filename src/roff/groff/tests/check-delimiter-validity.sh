@@ -100,8 +100,12 @@ done
 # to treat 'v' as an AT&Tism or a GNUism.
 #for c in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z \
 #         a b c d   f g h i j k l m     p q r s   u v w x y z
+# not tested: '!' (because it's a conditional expression operator)
+# not tested: '@' (because it's part of our delimited expression)
 for c in A B C D E   G H I J K L M N O P Q R   T U V W X Y Z \
-         a b       f g h i j k l       p q   s   u   w x y z
+         a b       f g h i j k l       p q   s   u   w x y z \
+             '"' '#' '$' "'" ',' ';' '?' \
+             '[' ']' '^' '`' '{' '}' '~'
 do
     echo "checking validity of '$c' as output comparison delimiter" \
          "in compatibility mode" >&2

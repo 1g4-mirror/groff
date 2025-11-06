@@ -1,5 +1,13 @@
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::is_usable_as_delimter):
+	Accept many more conditional expression delimiters in
+	compatibility mode, namely punctuation characters that AT&T
+	troff doesn't reject in that context.
+	* src/roff/groff/tests/check-delimiter-validity.sh: Test it.
+
+2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/check-delimiter-validity.sh: Test many
 	more numeric expression delimiters in compatibility mode,
 	namely punctuation characters that AT&T troff doesn't reject in
