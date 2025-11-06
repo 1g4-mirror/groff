@@ -1,3 +1,19 @@
+2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/gropdf/gropdf.pl (usage): Tweak synopsis syntax.
+	Rename option argument from "advanced-opts" to "option-bits" to
+	align with man page change below.
+
+	* src/devices/gropdf/gropdf.1.man (Synopsis, Options): Respell
+	"optbits" as "option-bits".
+
+	* src/devices/gropdf/gropdf.pl (usage):
+	* src/devices/gropdf/gropdf.1.man (Synopsis): Put braces around
+	multi-character expressions used in alternation (that is, with
+	`|` notation), for clarity; few people seem to keep in their
+	heads a rigorous grammar for synopsis notation that includes
+	operator precedence.
+
 2025-11-04  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Problem including pdfs produced by ghostscript 10

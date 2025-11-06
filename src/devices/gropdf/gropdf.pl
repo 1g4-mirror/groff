@@ -452,7 +452,7 @@ sub usage
     $stream = *STDERR if $had_error;
     print $stream
 "usage: $prog [-delsW] [-F font-directory] [-I inclusion-directory]" .
-" [--opt advanced-opts] [-p paper-format] [--pdfver 1.4|1.7] [-u [cmap-file]] [-y foundry] [file ...]\n" .
+" [--opt option-bits] [-p paper-format] [--pdfver {1.4|1.7}] [-u [cmap-file]] [-y foundry] [file ...]\n" .
 "usage: $prog {-v | --version}\n" .
 "usage: $prog --help\n";
     if (!$had_error)
