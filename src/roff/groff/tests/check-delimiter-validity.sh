@@ -150,6 +150,17 @@ do
     echo "$output" | grep -Fqx ___ || wail
 done
 
+for c in e n o t \
+         0 1 2 3 4 5 6 7 8 9 + - / '*' % '<' '>' = '&' : '(' ')' . '|' \
+         '!'
+do
+  echo "checking invalidity of '$c' as output comparison delimiter" \
+    "in compatibility mode" >&2
+  output=$(printf '.if %c@@@%c@@@%c ___\n' "$c" "$c" "$c" \
+    | "$groff" -C -w delim -T ascii -P -cbou | sed '/^$/d')
+  echo "$output" | grep -Fqx ___ && wail
+done
+
 test -z "$fail"
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:

@@ -1,6 +1,13 @@
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/check-delimiter-validity.sh: Add negative
+	testing.  Verify that conditional expression operators and
+	characters constitutive of numeric expressions are invalid as
+	output comparison expression delimiters in compatibility mode.
+
+2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/check-delimiter-validity.sh: Add negative
 	testing.  Verify that *roff arithmetic operators are invalid as
 	numeric expression delimiters in compatibility mode.
 
