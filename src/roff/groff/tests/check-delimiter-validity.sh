@@ -26,12 +26,24 @@ wail () {
   fail=YES
 }
 
+# not tested: '_' (because it's part of our delimited expression)
 for c in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z \
-         a b c d e f g h i j k l m n o p q r s t u v w x y z
+         a b c d e f g h i j k l m n o p q r s t u v w x y z \
+         '!' '"' '#' '$' "'" ',' ';' '?' \
+         '@' '[' ']' '^' '`' '{' '}' '~'
 do
     echo "checking validity of '$c' as delimiter in normal mode" \
          >&2
     output=$(printf '\\l%c1n+2n\\&_%c\n' "$c" "$c" \
+      | "$groff" -w delim -T ascii | sed '/^$/d')
+    echo "$output" | grep -Fqx ___ || wail
+done
+
+for octal in 001 002 003 004 005 006 007 010 011 014 177
+do
+    echo "checking validity of control character $octal (octal)" \
+         "as delimiter in normal mode" >&2
+    output=$(printf '\\l\'$octal'1n+2n\&_\'$octal'\n' \
       | "$groff" -w delim -T ascii | sed '/^$/d')
     echo "$output" | grep -Fqx ___ || wail
 done
