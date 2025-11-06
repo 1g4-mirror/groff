@@ -228,7 +228,9 @@ _
 use more compact format for text by including space as a character
 (fonts which do not include space as a glyph may require this unset).
 T}
-4	compress all streams, if this bit is unset streams are uncompressed.
+4	T{
+compress all streams, if this bit is unset streams are uncompressed.
+T}
 8	T{
 don't include font file. (The font is specified in the pdf but no font
 data is embedded - usually not useful).
