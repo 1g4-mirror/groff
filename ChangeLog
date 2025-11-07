@@ -1,5 +1,12 @@
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::dump): Report glyph
+	properties in the same order that `glyph_node::asciify()` uses
+	to attempt conversion of a glyph node back to a GNU troff input
+	character sequence.
+
+2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (transparent_translate): Fix code
 	style nit.  Align type of local variable with that returned by
 	the function we call to populate it; demote `int` to `unsigned

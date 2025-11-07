@@ -10757,6 +10757,9 @@ void charinfo::dump()
     }
     errprint(")\n");
   }
+  errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
+  errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
+  // Also see node.cpp::glyph_node::asciify().
   int mapping = get_unicode_mapping();
   if (mapping >= 0) {
     const size_t buflen = 6; // enough for five hex digits + '\0'
@@ -10767,8 +10770,6 @@ void charinfo::dump()
   }
   else
     errprint("  Unicode mapping: none (%1)\n", mapping);
-  errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
-  errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
   errprint("  is%1 found\n", is_not_found ? " not" : "");
   errprint("  is%1 transparently translatable\n",
 	   is_transparently_translatable ? "" : " not");
