@@ -582,15 +582,14 @@ _
 9@512@mac@19@524288@color
 @@@20@1048576@file
 .TE
+.\" Give the table bottom extra breathing room on typesetters.
+.if t .sp \n[PD]u
 .
 .
 .P
-.nr x \w'\fBright\-brace'+1n+\w'00000'u
-.ta \nxuR
-.
-.
-.TP \nxu+3n
-.BR break "\t4"
+.TS
+Lb N Lx.
+break	4	T{
 A filled output line could not be
 broken such that its length was less than or equal to,
 or
@@ -614,44 +613,48 @@ in
 mode.
 .
 This category is enabled by default.
+T}
 .
 .
-.TP
-.BR char "\t1"
+.sp \n[PD]u
+char	1	T{
 No user-defined character of the requested name or index exists
 and no mounted font defines a glyph for it,
 or input could not be encoded for device-independent output.
 .
 This category is enabled by default.
+T}
 .
 .
-.TP
-.BR color "\t524288"
+.sp \n[PD]u
+color	524288	T{
 An undefined color name was selected,
 an attempt was made to define a color using an unrecognized color space,
 an invalid component in a color definition was encountered,
 or an attempt was made to redefine a default color.
+T}
 .
 .
-.TP
-.BR delim "\t8"
+.sp \n[PD]u
+delim	8	T{
 The selected delimiter character was ambiguous
 because it is also meaningful when beginning a numeric expression,
 or
 the closing delimiter in an escape sequence was missing or mismatched.
 .
 .
-.IP
+.sp \n[PD]u
 A future
 .I groff
 release may reject ambiguous delimiters.
 .
 In compatibility mode,
 ambiguous delimiters are accepted without warning.
+T}
 .
 .
-.TP
-.BR di "\t256"
+.sp \n[PD]u
+di	256	T{
 A
 .BR di ,
 .BR da ,
@@ -660,6 +663,7 @@ or
 .B boxa
 request was invoked without an argument when there was no current
 diversion.
+T}
 .
 .
 .\" .TP
@@ -671,46 +675,51 @@ diversion.
 .\" request.
 .
 .
-.TP
-.BR escape "\t32768"
+.sp \n[PD]u
+escape	32768	T{
 An unsupported escape sequence was encountered.
+T}
 .
 .
-.TP
-.BR file "\t1048576"
+.sp \n[PD]u
+file	1048576	T{
 An attempt was made to load a file that does not exist,
 or a stream remained open at formatter exit.
 .
 This category is enabled by default.
+T}
 .
 .
-.TP
-.BR font "\t131072"
+.sp \n[PD]u
+font	131072	T{
 A non-existent font was selected,
 or the selection was ignored because a font selection escape sequence
 was used after the output line continuation escape sequence on an input
 line.
 .
 This category is enabled by default.
+T}
 .
 .
-.TP
-.BR ig "\t262144"
+.sp \n[PD]u
+ig	262144	T{
 An invalid escape sequence occurred in input ignored using the
 .B ig
 request.
 .
 This warning category diagnoses a condition that is an error when it
 occurs in non-ignored input.
+T}
 .
 .
-.TP
-.BR input "\t16384"
+.sp \n[PD]u
+input	16384	T{
 An invalid character occurred on the input stream.
+T}
 .
 .
-.TP
-.BR mac "\t512"
+.sp \n[PD]u
+mac	512	T{
 An undefined string,
 macro,
 or diversion was used.
@@ -724,7 +733,7 @@ unless it is later deleted,
 issues at most one warning for each.
 .
 .
-.IP
+.sp \n[PD]u
 .I @g@troff
 also uses this category to warn of an attempt to move an unplanted trap
 macro.
@@ -734,27 +743,31 @@ the unplanted macro is
 .I not
 dereferenced,
 so it is not created if it does not exist.
+T}
 .
 .
-.TP
-.BR missing "\t8192"
+.sp \n[PD]u
+missing	8192	T{
 A request was invoked with a mandatory argument absent.
+T}
 .
 .
-.TP
-.BR number "\t2"
+.sp \n[PD]u
+number	2	T{
 An invalid numeric expression was encountered.
 .
 This category is enabled by default.
+T}
 .
 .
-.TP
-.BR range "\t64"
+.sp \n[PD]u
+range	64	T{
 A numeric expression was out of range for its context.
+T}
 .
 .
-.TP
-.BR reg "\t1024"
+.sp \n[PD]u
+reg	1024	T{
 An undefined register was used.
 .
 When an undefined register is dereferenced,
@@ -764,23 +777,26 @@ So,
 unless it is later deleted,
 .I @g@troff
 issues at most one warning for each.
+T}
 .
 .
-.TP
-.BR right\-brace "\t4096"
+.sp \n[PD]u
+right\-brace	4096	T{
 A right brace escape sequence
 .B \[rs]}
 was encountered where a number was expected.
+T}
 .
 .
-.TP
-.BR scale "\t32"
+.sp \n[PD]u
+scale	32	T{
 A scaling unit inappropriate to its context was used in a numeric
 expression.
+T}
 .
 .
-.TP
-.BR space "\t65536"
+.sp \n[PD]u
+space	65536	T{
 A space was missing between a request or macro and its argument.
 .
 This warning is produced when an undefined name longer than two
@@ -794,10 +810,11 @@ and an empty macro is not defined.
 This category is enabled by default.
 .
 It never occurs in compatibility mode.
+T}
 .
 .
-.TP
-.BR syntax "\t128"
+.sp \n[PD]u
+syntax	128	T{
 A self-contradictory hyphenation mode or character flags were requested;
 an empty or incomplete numeric expression was encountered;
 an operand to a numeric operator was missing;
@@ -814,12 +831,15 @@ or a
 extension escape sequence
 or conditional expression operator
 was used while in compatibility mode.
+T}
 .
 .
-.TP
-.BR tab "\t2048"
+.sp \n[PD]u
+tab	2048	T{
 A tab character was encountered where a number was expected,
 or appeared in an unquoted macro argument.
+T}
+.TE
 .
 .
 .P
