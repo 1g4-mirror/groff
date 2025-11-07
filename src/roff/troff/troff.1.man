@@ -566,8 +566,8 @@ circumstances.
 .P
 .TS
 tab(@), center, box;
-c c c | c c c
-r rI lB | r rI lB.
+C C  C  | C C  C
+R Ri Lb | R Ri Lb.
 Bit@Code@Category@Bit@Code@Category
 _
 0@1@char@10@1024@reg
