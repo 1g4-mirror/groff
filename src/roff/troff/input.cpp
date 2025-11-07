@@ -64,12 +64,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "posix.h"
 #include "nonposix.h"
 
-#ifdef NEED_DECLARATION_PUTENV
-extern "C" {
-  int putenv(const char *);
-}
-#endif /* NEED_DECLARATION_PUTENV */
-
 #define MACRO_PREFIX "tmac."
 #define MACRO_POSTFIX ".tmac"
 #define INITIAL_STARTUP_FILE "troffrc"

@@ -58,12 +58,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // specified
 #define XREG ".X"
 
-#ifdef NEED_DECLARATION_PUTENV
-extern "C" {
-  int putenv(const char *);
-}
-#endif /* NEED_DECLARATION_PUTENV */
-
 // The number of commands must be in sync with MAX_COMMANDS in
 // pipeline.h.
 

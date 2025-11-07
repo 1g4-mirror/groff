@@ -32,12 +32,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "ps.h"
 
-#ifdef NEED_DECLARATION_PUTENV
-extern "C" {
-  int putenv(const char *);
-}
-#endif /* NEED_DECLARATION_PUTENV */
-
 #define GROPS_PROLOGUE "prologue"
 
 static void print_ps_string(const string &s, FILE *outfp);

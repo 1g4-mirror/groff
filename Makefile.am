@@ -303,7 +303,6 @@ man7dir=$(manroot)/man$(man7ext)
 # HAVE_LANGINFO_CODESET	if you have nl_langinfo()
 # HAVE_MKSTEMP		if you have mkstemp()
 # HAVE_MMAP			if you have mmap()
-# HAVE_PUTENV			if you have putenv()
 # HAVE_RENAME			if you have rename()
 # HAVE_SETLOCALE		if you have setlocale()
 # HAVE_STRCASECMP		if you have strcasecmp()
@@ -318,8 +317,6 @@ man7dir=$(manroot)/man$(man7ext)
 # NEED_DECLARATION_HYPOT	if your C++ <math.h> doesn't declare hypot()
 # NEED_DECLARATION_PCLOSE	if your C++ <stdio.h> doesn't declare pclose()
 # NEED_DECLARATION_POPEN	if your C++ <stdio.h> doesn't declare popen()
-# NEED_DECLARATION_PUTENV	if your C++ <stdlib.h> doesn't declare
-#				putenv()
 # NEED_DECLARATION_RAND	if your C++ <stdlib.h> doesn't declare rand()
 # NEED_DECLARATION_SRAND	if your C++ <stdlib.h> doesn't declare srand()
 # NEED_DECLARATION_STRCASECMP	if your C++ <string.h> doesn't declare
@@ -355,7 +352,7 @@ man7dir=$(manroot)/man$(man7ext)
 
 # Include
 #
-#   {fmod,getcwd,mkstemp,putenv,
+#   {fmod,getcwd,mkstemp,
 #    strerror,strtol}.$(OBJEXT)
 #
 # in 'LIBOBJS' if your C library is missing the corresponding function.

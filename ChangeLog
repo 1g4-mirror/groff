@@ -1,5 +1,24 @@
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Retire our putenv(3) replacement in favor of gnulib's.  groff's
+	was copied from glibc in 1991 and changed very little since.
+
+	* Makefile.am: Drop putenv-referencing annotations.
+	* bootstrap.conf (gnulib_modules): Add "putenv".
+	* configure.ac: Drop `GROFF_NEED_DECLARATION([putenv])` call.
+	Drop `putenv` from `AC_REPLACE_FUNCS()` call.
+	* src/devices/grops/ps.cpp:
+	* src/devices/grops/psrm.cpp:
+	* src/roff/groff/groff.cpp:
+	* src/roff/troff/input.cpp: Drop conditional declaration of
+	`putenv()` symbol.
+	* src/libs/libgroff/putenv.c: Delete.
+	* src/libs/libgroff/libgroff.am (EXTRA_DIST): Drop "putenv.c".
+
+	Continues fixing Savannah #66518.
+
+2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grops,groff,troff]: Parallelize diagnostic messages relating to
 	putenv(3).
 

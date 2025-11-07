@@ -54,12 +54,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "ps.h"
 
-#ifdef NEED_DECLARATION_PUTENV
-extern "C" {
-  int putenv(const char *);
-}
-#endif /* NEED_DECLARATION_PUTENV */
-
 extern "C" const char *Version_string;
 
 // Initialize inclusion search path with only the current directory.
