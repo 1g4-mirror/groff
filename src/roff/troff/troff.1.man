@@ -720,7 +720,8 @@ an empty one of that name is automatically created.
 .
 So,
 unless it is later deleted,
-at most one warning is given for each.
+.I @g@troff
+issues at most one warning for each.
 .
 .
 .IP
@@ -761,7 +762,8 @@ it is automatically defined with a value of\~0.
 .
 So,
 unless it is later deleted,
-at most one warning is given for each.
+.I @g@troff
+issues at most one warning for each.
 .
 .
 .TP

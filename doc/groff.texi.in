@@ -19352,7 +19352,10 @@ without an argument when there was no current diversion.
 @cindex @code{\*}, and warnings
 An undefined string, macro, or diversion was used.  When such an object
 is dereferenced, an empty one of that name is automatically created.
-So, unless it is later deleted, at most one warning is given for each.
+So,
+unless it is later deleted,
+GNU @command{troff}
+issues at most one warning for each.
 
 GNU @command{troff} also uses this category to warn of an attempt to
 move an unplanted trap macro (@pxref{Page Location Traps}).  In such
@@ -19365,8 +19368,11 @@ created if it does not exist.
 @cindex @code{\R}, and warnings
 @cindex @code{\n}, and warnings
 An undefined register was used.  When an undefined register is
-dereferenced, it is automatically defined with a value of@tie{}0.  So,
-unless it is later deleted, at most one warning is given for each.
+dereferenced, it is automatically defined with a value of@tie{}0.
+So,
+unless it is later deleted,
+GNU @command{troff}
+issues at most one warning for each.
 
 @item tab
 @itemx 2048
