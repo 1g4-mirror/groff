@@ -1,5 +1,13 @@
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Regression-test Savannah #67680.
+
+	* src/roff/groff/tests/asciify-special-characters-correctly.sh:
+	Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::dump): Report glyph
 	properties in the same order that `glyph_node::asciify()` uses
 	to attempt conversion of a glyph node back to a GNU troff input
