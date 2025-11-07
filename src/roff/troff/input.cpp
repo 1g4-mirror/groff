@@ -3225,8 +3225,8 @@ static int transparent_translate(int cc)
     // This is really ugly.
     ci = ci->get_translation(1);
     if (ci != 0 /* nullptr */) {
-      int c = ci->get_ascii_code();
-      if (c != '\0')
+      unsigned char c = ci->get_ascii_code();
+      if (c != 0U)
 	return c;
       error("cannot translate %1 to special character '%2' in"
 	    " device-independent output", input_char_description(cc),

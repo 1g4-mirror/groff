@@ -1,3 +1,11 @@
+2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (transparent_translate): Fix code
+	style nit.  Align type of local variable with that returned by
+	the function we call to populate it; demote `int` to `unsigned
+	char`.  Compare this value to an unsigned literal, not a
+	character literal of implementation-defined signedness.
+
 2025-11-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.cpp (main): Tweak wording of notice about
