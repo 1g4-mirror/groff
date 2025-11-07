@@ -3896,15 +3896,65 @@ void glyph_node::asciify(macro *m)
 {
   if (!is_output_supressed) {
     unsigned char c = ci->get_asciify_code();
-    if (0U == c) {
+    if (c != 0U)
+      m->append(c);
+    else {
       c = ci->get_ascii_code();
       if (c != 0U)
 	m->append(c);
-      else
-	m->append(this);
+      else {
+	// Also see input.cpp::charinfo::dump().
+	int unicode_mapping = ci->get_unicode_mapping();
+	if (unicode_mapping >= 0) {
+	  // We must write out an escape sequence.  Use the default
+	  // escape character.  TODO: Make `escape_char` global?
+	  //
+	  // First, handle the Basic Latin characters that don't map to
+	  // themselves.
+	  switch (unicode_mapping) {
+	  case 34:
+	    m->append_str("\\[dq]");
+	    break;
+	  case 39:
+	    m->append_str("\\[aq]");
+	    break;
+	  case 45:
+	    m->append_str("\\[-]");
+	    break;
+	  case 92:
+	    m->append_str("\\[rs]");
+	    break;
+	  case 94:
+	    m->append_str("\\[ha]");
+	    break;
+	  case 96:
+	    m->append_str("\\[ga]");
+	    break;
+	  case 126:
+	    m->append_str("\\[ti]");
+	    break;
+	  default:
+	    m->append_str("\\[u");
+	    const size_t buflen = 6; // five hex digits + '\0'
+	    char hexbuf[buflen];
+	    (void) memset(hexbuf, '\0', buflen);
+	    (void) snprintf(hexbuf, buflen, "%.4X", unicode_mapping);
+	    m->append_str(hexbuf);
+	    m->append(']');
+	    break;
+	  }
+	}
+	else {
+	  error("unable to asciify glyph; charinfo data follows");
+	  // This is garrulous as hell, but by the time we have hold of
+	  // a glyph's charinfo, it no longer has a "name"--it's already
+	  // been looked up in the dictionary.  (Also, multiple names
+	  // can refer to the same charinfo datum.)  And this racket
+	  // beats telling the user nothing at all about the glyph.
+	  ci->dump();
+	}
+      }
     }
-    else
-      m->append(this);
   }
 }
 

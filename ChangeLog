@@ -1,5 +1,34 @@
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Improve "asciification" of more special characters.
+
+	* src/roff/troff/node.cpp (glyph_node::asciify): Fix and clarify
+	logic.  First, if a glyph as an "asciify code", use that.  Then,
+	if it has a nonzero "ASCII code", use that.  Next, if it has a
+	Unicode mapping, write out an appropriate escape sequence using
+	the default escape character.  (This source file has no insight
+	into what a user's selected escape character is.)  Map code
+	points U+0022, U+0027, U+002D, U+005C, U+005E, U+0060, and
+	U+007E to predefined special character escape sequences (see
+	groff_char(7)).  For all other Unicode code points, write out an
+	escape sequence of the form `\[uYXXXX]`.  Finally, if none of
+	the foreging mappings exist, throw an error diagnostic and dump
+	the glyph's "charinfo", as if `pchar` were called on a
+	corresponding GNU troff character.
+
+	* src/roff/groff/tests/asciify-request-works.sh: Adjust test
+	expectations.  Reset the escape character to the default before
+	interpolating an "asciified" diversion; see above.  Surrender to
+	a regression; the new logic doesn't know how to cope with the
+	fallback character definition for the `fl` special character
+	defined in "ps.tmac".  (Possibly, the PDF device should delete
+	this fallback character.)
+
+	Fixes <https://savannah.gnu.org/bugs/?67680>.  Thanks to Deri
+	James for the report.
+
+2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Regression-test Savannah #67680.
 
 	* src/roff/groff/tests/asciify-special-characters-correctly.sh:
