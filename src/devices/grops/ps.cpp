@@ -1918,9 +1918,8 @@ int main(int argc, char **argv)
       env += '=';
       env += optarg;
       env += '\0';
-      if (putenv(strsave(env.contents())))
-	fatal("unable to update process environment: %1",
-	      strerror(errno));
+      if (putenv(strsave(env.contents())) != 0)
+	fatal("cannot update process environment: %1", strerror(errno));
       break;
     case 'v':
       printf("GNU grops (groff) version %s\n", Version_string);

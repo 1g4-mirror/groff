@@ -297,8 +297,8 @@ void resource_manager::output_prolog(ps_output &out)
     e += '=';
     e += GROPS_PROLOGUE;
     e += '\0';
-    if (putenv(strsave(e.contents())))
-      fatal("cannot update environment: %1", strerror(errno));
+    if (putenv(strsave(e.contents())) != 0)
+      fatal("cannot update process environment: %1", strerror(errno));
   }
   char *prologue = getenv("GROPS_PROLOGUE");
   FILE *fp = font::open_resource_file(prologue, &path);

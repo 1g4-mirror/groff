@@ -9545,8 +9545,8 @@ int main(int argc, char **argv)
     if (*groff_path)
       e += groff_path;
     e += '\0';
-    if (putenv(strsave(e.contents())))
-      fatal("putenv failed");
+    if (putenv(strsave(e.contents())) != 0)
+      fatal("cannot update process environment: %1", strerror(errno));
   }
   setlocale(LC_CTYPE, "");
   static const struct option long_options[] = {

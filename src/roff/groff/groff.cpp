@@ -139,7 +139,7 @@ static char *xstrdup(const char *s) {
 
 static void xputenv(const char *s) {
   if (putenv(const_cast<char *>(s)) != 0)
-    fatal("unable to write to environment: %1", strerror(errno));
+    fatal("cannot update process environment: %1", strerror(errno));
   return;
 }
 

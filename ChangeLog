@@ -1,5 +1,18 @@
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grops,groff,troff]: Parallelize diagnostic messages relating to
+	putenv(3).
+
+	* src/devices/grops/ps.cpp (main):
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
+	* src/roff/groff/groff.cpp (xputenv):
+	* src/roff/troff/input.cpp (main): Consistently compare
+	`putenv()`'s return value to an integer literal, rather than
+	letting it pun down to a Boolean.  Phrase diagnostic message
+	consistently.  Consistently report `strerror(errno)` on failure.
+
+2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Improve "asciification" of more special characters.
 
 	* src/roff/troff/node.cpp (glyph_node::asciify): Fix and clarify
