@@ -2106,6 +2106,14 @@ request.
 .
 .
 .IP
+When transforming a glyph node back into an input sequence
+that demands expression as a special character escape sequence,
+GNU
+.I troff
+uses the default escape character.
+.
+.
+.IP
 .B \%asciify
 cannot return all nodes in a diversion to their source equivalents:
 those produced by indexed characters

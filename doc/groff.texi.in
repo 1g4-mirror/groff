@@ -17193,6 +17193,12 @@ were formatted and diverted into @var{div} are treated like ordinary
 input characters when @var{div} is interpolated.  Doing so can be useful
 in conjunction with the @code{writem} request.
 
+When transforming a glyph node back into an input sequence
+that demands expression as a special character escape sequence,
+GNU
+@command{troff}
+uses the default escape character.
+
 @code{asciify} can be also used for gross hacks; for example, the
 following sets register@tie{}@code{n} to@tie{}1.
 

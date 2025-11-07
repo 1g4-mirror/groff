@@ -2804,6 +2804,12 @@ and some escape sequences \" XXX: vague
 in diversion
 .IR div .
 .
+When transforming a glyph node back into an input sequence
+that demands expression as a special character escape sequence,
+GNU
+.I troff
+uses the default escape character.
+.
 .TPx
 .REQ .backtrace
 Write the state of the input stack to the standard error stream.
