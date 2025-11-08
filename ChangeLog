@@ -314,7 +314,7 @@
 
 	[troff]: Fix Savannah #67408.  As I've observed before in the
 	groff 1.24 development cycle, the delimiter situation is a mess.
-	AT&T troff actually has three different, context-dependent sets
+	AT&T troff actually has three different, context-dependent, sets
 	of delimiters; getting too adventurous, though, leads to core
 	dumps, as with `\D0l 1 20' or `.if %0%0% .tm true`.  Last
 	November, I attempted to streamline groff's delimiter handling,
