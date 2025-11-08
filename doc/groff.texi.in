@@ -6421,6 +6421,7 @@ Digits after the decimal point are optional.
 Examples of measurements include
 @samp{10.5p},
 @samp{11i},
+@samp{.5f},
 and @samp{3.c}.
 
 @cindex basic units, conversion to
