@@ -6915,7 +6915,8 @@ static bool is_conditional_expression_true()
     case 'r':
     case 'v':
       warning(WARN_SYNTAX,
-	      "conditional operator '%1' used in compatibility mode",
+	      "conditional expression operator '%1' used in"
+	      " compatibility mode",
 	      c);
 	      // TODO: "; treating as output comparison delimiter", c);
       break;
@@ -6939,7 +6940,7 @@ static bool is_conditional_expression_true()
     tok.next();
   }
   // TODO: else if (!want_att_compat) {
-  // Check for GNU troff extension conditional operators.
+  // Check for GNU troff extended conditional expression operators.
   else if ((c == 'd') || (c == 'r')) {
     tok.next();
     symbol nm = get_name(true /* required */);

@@ -1,3 +1,14 @@
+2025-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Reform terminology: "conditional operator" -> "conditional
+	expression operator".
+
+	* src/roff/troff/input.cpp (is_conditional_expression_true):
+	Update wording in diagnostic message.
+
+	* doc/groff.texi.in (Selecting Fonts, Diversions):
+	* man/groff.7.man (Diversions): Update documentation.
+
 2025-11-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/pic/pic.ypp (ordinal): Replace C-style type cast
@@ -406,10 +417,10 @@
 	anyway, but warns of its ambiguity.}
 	(is_conditional_expression_true): Refactor, introducing new
 	Boolean local variable `perform_output_comparison`.  Throw
-	syntax warning if `v` conditional operator used in compatibility
-	mode, as no variant of AT&T troff available to me recognizes it.
-	Distinguish compatibility mode once the letteral conditional
-	expression operators are ruled out.
+	syntax warning if `v` expression conditional operator used in
+	compatibility mode, as no variant of AT&T troff available to me
+	recognizes it.  Distinguish compatibility mode once the letteral
+	conditional expression operators are ruled out.
 
 	Fixes <https://savannah.gnu.org/bugs/?67408>.
 
@@ -19206,10 +19217,10 @@
 	condition was consistently misspelled, testing for the existence
 	of, for example, a register named "ef*spec!J:\\$1" (where `\\$1`
 	_would_ be interpolated, but not improve chances of success).
-	Fix by using the `d` conditional operator as obviously intended.
-	This enables some refer(1) formatting customization that was
-	unfortunately inoperative.  Problem appears to date back to
-	commit 3bab8e6fe5, 2011-01-28.
+	Fix by using the `d` conditional expression operator as
+	obviously intended.  This enables some refer(1) formatting
+	customization that was unfortunately inoperative.  Problem
+	appears to date back to commit 3bab8e6fe5, 2011-01-28.
 
 	Fixes <https://savannah.gnu.org/bugs/?64779>.  Thanks to an
 	anonymous bug submitter for the report and the patch.

@@ -11345,7 +11345,9 @@ We can assign a font to a margin character as follows
 @cindex @code{ie} request, and font translations
 @cindex @code{while} request, and font translations
 Translate font name@tie{}@var{f} to@tie{}@var{g}.  Where the @code{\f}
-escape sequence, the @code{F} and @code{S} conditional operators, and
+escape sequence,
+the @code{F} and @code{S} conditional expression operators,
+and
 the @code{ft}, @code{ul}, @code{bd}, @code{cs}, @code{tkf},
 @code{special}, @code{fspecial}, @code{fp}, or @code{sty} requests refer
 to@tie{}@var{f}, GNU @command{troff} uses @var{g} instead.  Omit @var{g}
@@ -16879,10 +16881,12 @@ top-level diversion has no name.
 Dereferencing an undefined diversion creates an empty one of that
 name and emits a warning in category @samp{mac}.
 @xref{Warnings}, regarding the enablement and suppression of warnings.
-A diversion does not exist for the purpose of testing with the @code{d}
-conditional operator until its initial definition ends (@pxref{Operators
-in Conditionals}).  The following requests are used to create and alter
-diversions.
+A diversion does not exist for the purpose of testing with the
+@code{d}
+conditional expression operator
+until its initial definition ends
+(@pxref{Operators in Conditionals}).
+The following requests are used to create and alter diversions.
 
 @DefreqList {di, [@Var{name}]}
 @DefreqListEndx {da, [@Var{name}]}
