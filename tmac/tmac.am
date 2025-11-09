@@ -128,7 +128,7 @@ EXTRA_DIST += \
   tmac/man.ultrix \
   tmac/ptx.tmac \
   tmac/TESTING-HINTS \
-  tmac/TODO \
+  tmac/TODO-ms \
   tmac/www.tmac.in
 
 tmac_TESTS = \
