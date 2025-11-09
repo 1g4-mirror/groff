@@ -1,5 +1,14 @@
 2025-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Slightly refactor (boolify).
+
+	* src/preproc/refer/token.h: Declare `get_token` as returning a
+	`bool` rather than an `int`.
+	* src/preproc/refer/token.cpp (get_token): Demote return type
+	from `int` to `bool`.  Return Boolean, not integer, literals.
+
+2025-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/TODO: Rename this file...
 	* tmac/TODO-ms: ...to this, since it discusses only contemplated
 	changes to the ms(7) package.
