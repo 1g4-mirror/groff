@@ -1,4 +1,6 @@
 /* Copyright 1989-2025 Free Software Foundation, Inc.
+             2020-2025 G. Branden Robinson
+
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff.
