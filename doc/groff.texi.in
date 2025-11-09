@@ -6314,9 +6314,9 @@ which the next glyph will be written, from which the next motion will be
 measured, or where a geometric object will commence rendering.
 Notionally, glyphs are drawn from the text baseline upward and to the
 right.@footnote{@code{groff} does not yet support right-to-left
-scripts.}  A glyph therefore ``starts'' at its bottom-left corner.  The
-formatter's origin is thus one vee below the page top, preventing a
-glyph from lying partially or wholly off the page.
+scripts.}  A glyph therefore ``starts'' at its bottom-left corner.
+The formatter's origin is one vee below the page top
+to prevent a glyph from lying partially or wholly off the page.
 
 @cindex page offset
 @cindex offset, page
