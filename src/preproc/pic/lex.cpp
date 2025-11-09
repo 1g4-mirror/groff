@@ -1392,7 +1392,7 @@ int get_delimited()
 	state = IN_STRING_QUOTED;
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled case of lexical analyzer state");
     }
     if (state == DELIM_END)
       break;

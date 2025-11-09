@@ -1,5 +1,27 @@
 2025-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/color.cpp (color::get_rgb, color::get_cmy)
+	(color::get_cmyk, color::get_gray):
+	* src/preproc/eqn/pile.cpp (pile_box::output)
+	(matrix_box::output, column::debug_print)
+	* src/preproc/eqn/common.cpp (common_output::rounded_box):
+	* src/preproc/pic/lex.cpp (get_delimited):
+	* src/preproc/pic/object.cpp (object_spec::position_rectangle)
+	(object_spec::make_move, object_spec::make_line)
+	(object_spec::make_object):
+	* src/preproc/pic/tex.cpp (tex_output::spline)
+	(tex_output::circle, tex_output::ellipse):
+	* src/preproc/pic/troff.cpp (simple_output::line)
+	(simple_output::ellipse, simple_output::circle):
+	* src/preproc/refer/command.cpp (check_args):
+	* src/preproc/refer/label.ypp (format_serial)
+	(extractor_expr::evaluate):
+	* src/utils/hpftodit/hpftodit.cpp (main):
+	* src/utils/lkbib/lkbib.cpp (main): Replace `assert(0)` calls
+	with communicative predicates.
+
+2025-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/lex.cpp (get_delimited): Drop `switch` case
 	that is present only "to shut cfront 2.0 up".  Cfront is long
 	dead.

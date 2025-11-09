@@ -135,7 +135,7 @@ void simple_output::line(const position &start, const position *v,
     case line_type::invisible:
       break;
     default:
-      assert(0);
+      assert(0 == "unhandled case of line type");
     }
     pos = v[i];
   }
@@ -190,7 +190,7 @@ void simple_output::circle(const position &cent, double rad,
     simple_circle(0, cent, rad);
     break;
   default:
-    assert(0);
+    assert(0 == "unhandled case of line type");
   }
 }
 
@@ -218,7 +218,7 @@ void simple_output::ellipse(const position &cent, const distance &dim,
     simple_ellipse(0, cent, dim);
     break;
   default:
-    assert(0);
+    assert(0 == "unhandled case of line type");
   }
 }
 

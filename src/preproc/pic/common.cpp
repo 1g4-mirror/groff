@@ -342,7 +342,7 @@ void common_output::rounded_box(const position &cent, const distance &dim,
     solid_rounded_box(cent, dim, rad, lt);
     break;
   default:
-    assert(0);
+    assert(0 == "unhandled case of line type");
   }
 }
 
