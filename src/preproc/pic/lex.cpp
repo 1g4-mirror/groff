@@ -1391,8 +1391,6 @@ int get_delimited()
       else if (c == '\\')
 	state = IN_STRING_QUOTED;
       break;
-    case DELIM_END:
-      // This case it just to shut cfront 2.0 up.
     default:
       assert(0);
     }
