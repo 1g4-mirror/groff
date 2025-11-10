@@ -3,12 +3,12 @@
 	[troff]: Improve "asciification" of more special characters.
 
 	* src/roff/troff/node.cpp (glyph_node::asciify): Fix and clarify
-	logic.  First, if a glyph as an "asciify code", use that.  Then,
-	if it has a nonzero "ASCII code", use that.  Next, if it has a
-	Unicode mapping, write out an appropriate escape sequence using
-	the default escape character.  (This source file has no insight
-	into what a user's selected escape character is.)  Map code
-	points U+0022, U+0027, U+002D, U+005C, U+005E, U+0060, and
+	logic.  First, if a glyph has an "asciify code", use that.
+	Then, if it has a nonzero "ASCII code", use that.  Next, if it
+	has a Unicode mapping, write out an appropriate escape sequence
+	using the default escape character.  (This source file has no
+	insight into what a user's selected escape character is.)  Map
+	code points U+0022, U+0027, U+002D, U+005C, U+005E, U+0060, and
 	U+007E to predefined special character escape sequences (see
 	groff_char(7)).  For all other Unicode code points, write out an
 	escape sequence of the form `\[uYXXXX]`.  Finally, if none of
