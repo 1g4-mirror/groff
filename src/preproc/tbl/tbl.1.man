@@ -92,14 +92,18 @@ preprocessor that translates descriptions of tables embedded in
 input into the language understood by
 .IR @g@troff .
 .
-It copies the contents of each
-.I file
-to the standard output stream,
-except that lines between
+It copies each
+.IR file 's
+contents to the standard output stream,
+transforming each
+.I "table region"
+between lines sarting with
 .B .TS
 and
 .B .TE
-are interpreted as table descriptions.
+into instructions to the GNU
+.I troff \" GNU
+formatter.
 .
 While GNU
 .IR tbl 's \" GNU
@@ -147,9 +151,7 @@ and
 .B .TE
 (table end).
 .
-Each such
-.I table region
-encloses one or more table descriptions.
+Each such table region encloses one or more table descriptions.
 .
 Within a table region,
 table descriptions beyond the first must each be preceded
