@@ -47,12 +47,6 @@ extern "C" {
 }
 #endif /* NEED_DECLARATION_SRAND */
 
-#ifndef HAVE_FMOD
-extern "C" {
-  double fmod(double, double);
-}
-#endif
-
 #include "pic.h"
 #include "ptable.h"
 #include "object.h"

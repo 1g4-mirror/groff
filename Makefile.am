@@ -294,7 +294,6 @@ man7dir=$(manroot)/man$(man7ext)
 # HAVE_SYS_TYPES_H		if you have <sys/types.h>
 # HAVE_UNISTD_H		if you have <unistd.h>
 #
-# HAVE_FMOD			if you have fmod()
 # HAVE_GETCWD			if you have getcwd()
 # HAVE_GETTIMEOFDAY		if you have gettimeofday()
 # HAVE_ICONV			if you have iconv()
@@ -352,7 +351,7 @@ man7dir=$(manroot)/man$(man7ext)
 
 # Include
 #
-#   {fmod,getcwd,mkstemp,
+#   {getcwd,mkstemp,
 #    strerror,strtol}.$(OBJEXT)
 #
 # in 'LIBOBJS' if your C library is missing the corresponding function.

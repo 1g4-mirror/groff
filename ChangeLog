@@ -1,3 +1,18 @@
+2025-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Retire our fmod(3) replacement in favor of gnulib's.  James
+	Clark wrote groff's in 1989; it's changed very little since.
+
+	* Makefile.am: Drop fmod-referencing annotations.
+	* bootstrap.conf (gnulib_modules): Add "fmod".
+	* configure.ac: Drop `fmod` from `AC_REPLACE_FUNCS()` call.
+	* src/libs/libgroff/fmod.c: Delete.
+	* src/libs/libgroff/libgroff.am (EXTRA_DIST): Drop "fmod.c".
+	* src/preproc/pic/pic.ypp: Drop conditional declaration of
+	`fmod()` symbol.
+
+	Continues fixing Savannah #66518.
+
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	Retire our putenv(3) replacement in favor of gnulib's.  groff's

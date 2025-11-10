@@ -125,7 +125,7 @@ AC_SUBST([LIBEXT],[$acl_libext])
 AC_FUNC_MMAP
 saved_libs="$LIBS"
 LIBS="$LIBS $LIBC $LIBM"
-AC_REPLACE_FUNCS([fmod getcwd strtol])
+AC_REPLACE_FUNCS([getcwd strtol])
 LIBS="$saved_libs"
 AC_CHECK_FUNCS([gettimeofday isatty kill rename setlocale strdup \
                 strsep])
