@@ -196,7 +196,8 @@ macros to handle issues of table placement on the page.
 .I @g@tbl
 produces
 .I groff
-code to define these macros as empty if their definitions do not exist
+requests to define these macros as empty
+if their definitions do not exist
 when the formatter encounters a table region.)
 .
 .
@@ -225,7 +226,7 @@ token may specify region options,
 keywords that influence the interpretation or rendering of the region as
 a whole or all table entries within it indiscriminately.
 .
-They must be separated by commas,
+Separate multiple region options with commas,
 spaces,
 or tabs.
 .
@@ -340,7 +341,8 @@ its entries and its column separations
 When
 .B \%expand
 applies to a table that exceeds the available horizontal space,
-column separation is reduced as far as necessary
+.I tbl \" generic
+reduces column separation as far as necessary
 (even to zero).
 .
 .I @g@tbl
@@ -365,7 +367,7 @@ with a thickness of
 .
 The default is the current type size when the region begins.
 .
-This option is ignored on terminal devices.
+This option has no effect on terminal devices.
 .
 .
 .TP
