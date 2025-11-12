@@ -5748,10 +5748,15 @@ Macros}.}
 @endExample
 
 @noindent
-The foregoing input produces no output by itself; all we have done is
-store some information.  Observe the pair of dots that ends the macro
-definition.  This is a default; you can specify your own terminator for
-the macro definition as the second argument to the @code{de} request.
+The foregoing input produces no output by itself;
+all we have done is store information in a macro named
+@samp{DATE}.
+Observe the pair of dots that ends the macro definition.
+This is a default;
+you can specify your own terminator for the macro definition
+as the second argument to the
+@code{de}
+request.
 
 @Example
 .de NAME ENDNAME
