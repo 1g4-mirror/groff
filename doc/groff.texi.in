@@ -5985,11 +5985,13 @@ or other encodings that use characters from these ranges.
 @node Input Encodings, Input Conventions, Input Format, Text
 @subsection Input Encodings
 
-The
+Recall from
+@ref{Groff Options},
+that the
 @command{groff}
 command's
 @option{-k}
-option calls the
+option runs the
 @command{preconv}
 preprocessor
 to perform input character encoding conversions to satisfy
