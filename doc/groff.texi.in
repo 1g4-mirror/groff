@@ -5844,13 +5844,26 @@ macros for such simple interpolations; what is important here is to
 glimpse the potential of macros and the power of recursive
 interpolation.
 
-We could have defined @code{DATE} and @code{BOSS} in the opposite order;
-perhaps less obviously, we could also have defined them @emph{after}
-@code{NOTICE}.  ``Forward references'' like this are acceptable because
-the body of a macro definition is not (completely) interpreted, but
-stored instead (@pxref{Copy Mode}).  While a macro is being defined (or
-appended to), requests are not interpreted and macros not interpolated,
-whereas some commonly used escape sequences @emph{are} interpreted.
+We could have defined our
+@code{DATE}
+and
+@code{BOSS}
+macros in the opposite order;
+perhaps less obviously,
+we could also have defined them
+@emph{after}
+@code{NOTICE}.
+Such ``forward references'' are well-defined
+because the body of a macro definition is,
+for the most part,
+stored rather than interpreted
+(@pxref{Copy Mode}).
+While a macro is being defined
+(or appended to),
+requests are not interpreted and macros not interpolated;
+some commonly used escape sequences
+@emph{are}
+however interpreted.
 @code{roff} systems also support recursive macro calls, as long as you
 have a way to break the recursion (@pxref{Conditionals and Loops}).
 Maintainable @code{roff} documents tend to arrange macro definitions to
