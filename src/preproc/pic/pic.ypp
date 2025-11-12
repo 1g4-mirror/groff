@@ -1353,7 +1353,7 @@ ordinal:
 	| '`' any_expr TH
 		{
 		  // XXX Check for overflow (and non-integers?).
-		  $$ = (int)$2;
+		  $$ = int($2);
 		}
 	;
 
