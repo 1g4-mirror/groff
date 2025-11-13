@@ -19845,6 +19845,47 @@ Thus they work as expected
 even if the interpolation context disables compatibility mode.
 @c END Keep in sync with groff_diff(7), subsection "Altered requests".
 
+@c BEGIN Keep in sync with groff_diff(7), subsection "Delimiters".
+@acronym{AT&T}
+@code{troff} @c AT&T
+recognized slightly varying sets of delimiters when expecting
+numerical expressions
+(as with the
+@code{\h}
+escape sequence),
+string expressions
+(as with the
+@code{\w}
+escape sequence),
+and output comparisons
+(as in
+@samp{.if #foo#bar# .tm match}).
+GNU
+@command{troff}, @c GNU
+when not in compatibility mode,
+recognizes a single consistent set of delimiters.
+Compatibility mode
+emulates
+@acronym{AT&T}
+@code{troff} @c AT&T
+only up to a point.
+GNU
+@command{troff} @c GNU
+accepts leaders and tabs as delimiters,
+as well as
+@key{Control+D}
+(EOT or EOF),
+@key{Control+H}
+(BS or backspace),
+and
+@key{Control+L}
+(FF or form feed),
+all of which cause
+@acronym{AT&T}
+@code{troff} @c AT&T
+to behave in ways difficult to predict.
+@c END Keep in sync with groff_diff(7), subsection "Delimiters".
+
 @c ---------------------------------------------------------------------
 
 @node Other Differences, , Compatibility Mode, Implementation Differences
