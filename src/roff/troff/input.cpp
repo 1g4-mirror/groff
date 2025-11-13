@@ -6915,8 +6915,8 @@ static bool is_conditional_expression_true()
     case 'r':
     case 'v':
       warning(WARN_SYNTAX,
-	      "conditional expression operator '%1' used in"
-	      " compatibility mode",
+	      "conditional expression operator '%1' is not portable to"
+	      " AT&T troff",
 	      c);
 	      // TODO: "; treating as output comparison delimiter", c);
       break;

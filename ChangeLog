@@ -1,3 +1,15 @@
+2025-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (is_conditional_expression_true):
+	Tweak wording of syntax warning thrown only in compatibility
+	mode.  Say that the conditional expression operator is "not
+	portable to AT&T troff", for parallel phrasing with the escape
+	sequence warning added in commit 589a724eca, 2 November, and
+	because a person authoring or formatting a document presumably
+	knows whether they're using compatibility mode.  (If they don't
+	know, they can find out with `.tm compatibility mode is \n(.C`.)
+	Prompted by discussion with James Youngman.
+
 2025-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/color.cpp (color::get_rgb, color::get_cmy)
