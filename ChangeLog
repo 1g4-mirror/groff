@@ -1,5 +1,14 @@
 2025-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (unbreakable_space_node::need_reread)
+	(token::process): Stop explicitly specifying argument of same
+	value as `environment::handle_tab()`'s default.
+	(token::process): Call environment object's `handle_tab()`
+	member function with Boolean, not integer, literal.  Continues
+	commit 023083d16d, 27 April 2024.
+
+2025-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (is_conditional_expression_true):
 	Tweak wording of syntax warning thrown only in compatibility
 	mode.  Say that the conditional expression operator is "not
