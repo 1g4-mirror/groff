@@ -3275,7 +3275,7 @@ bool unbreakable_space_node::need_reread(bool *)
 bool hmotion_node::need_reread(bool *)
 {
   if (unformat && was_tab) {
-    curenv->handle_tab();
+    curenv->advance_to_tab_stop();
     unformat = 0;
     return true;
   }
@@ -8775,7 +8775,7 @@ void token::process()
     curenv->add_italic_correction();
     break;
   case TOKEN_LEADER:
-    curenv->handle_tab(true /* is_leader */);
+    curenv->advance_to_tab_stop(true /* use_leader */);
     break;
   case TOKEN_LEFT_BRACE:
     break;
@@ -8816,7 +8816,7 @@ void token::process()
 						 curenv->get_fill_color()));
     break;
   case TOKEN_TAB:
-    curenv->handle_tab();
+    curenv->advance_to_tab_stop();
     break;
   case TOKEN_TRANSPARENT:
     break;

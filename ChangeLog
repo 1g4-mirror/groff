@@ -1,5 +1,16 @@
 2025-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename `environment` class's
+	member function `handle_tab()` to `advance_to_tab_stop()`.
+	Rename its argument from `is_leader` to `use_leader`.
+
+	* src/roff/troff/env.h (class environment):
+	* src/roff/troff/env.cpp: Do it.
+	* src/roff/troff/input.cpp (unbreakable_space_node::need_reread)
+	(token::process): Update call sites.
+
+2025-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (unbreakable_space_node::need_reread)
 	(token::process): Stop explicitly specifying argument of same
 	value as `environment::handle_tab()`'s default.
