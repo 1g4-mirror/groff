@@ -6228,19 +6228,17 @@ while it interprets its argument list.
 .SH "Other differences"
 .\" ====================================================================
 .
-GNU
-.IR troff 's \" GNU
-features sometimes cause incompatibilities with documents written
-assuming old implementations of
-.IR troff . \" generic
-GNU
-.I troff \" GNU
-request names unrecognized by other
+Other
 .I troff \" generic
-implementations will likely be ignored by them,
-and escape sequences that are GNU
+formatters that don't implement request names that are
+GNU
 .I troff \" GNU
-extensions are liable to format their function selector character.
+extensions tend to ignore them,
+and if they don't support a
+GNU
+.I troff \" GNU
+extension escape sequence,
+they are liable to format the function selector character as text.
 .
 For example,
 the adjustable,

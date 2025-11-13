@@ -19891,15 +19891,17 @@ to behave in ways difficult to predict.
 @node Other Differences, , Compatibility Mode, Implementation Differences
 @subsection Other Differences
 
-GNU
-@command{troff} @c GNU
-request names unrecognized by other
+Other
 @command{troff} @c generic
-implementations will likely be ignored by them,
-and escape sequences that are
+formatters that don't implement request names that are
 GNU
 @command{troff} @c GNU
-extensions are liable to format their function selector character.
+extensions tend to ignore them,
+and if they don't support a
+GNU
+@command{troff} @c GNU
+extension escape sequence,
+they are liable to format the function selector character as text.
 @cindex @code{\~}, incompatibilities with @acronym{AT&T} @code{troff}
 For example,
 the adjustable,
