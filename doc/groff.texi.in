@@ -6518,7 +6518,8 @@ like
 @code{p},
 but used only with type sizes,
 to overcome a limitation of AT&T
-@command{troff}. @c AT&T
+@command{troff}; @c AT&T
+see @ref{Using Fractional Type Sizes}.
 
 @item f
 GNU @code{troff} defines this unit to scale decimal fractions in the
@@ -13065,9 +13066,14 @@ see @ref{Environments})
 @cindex changing type sizes (@code{ps}, @code{\s})
 @cindex type sizes, changing (@code{ps}, @code{\s})
 @cindex point sizes, changing (@code{ps}, @code{\s})
-Set (increase, decrease) the type size to (by) @var{size} scaled points.
-@code{ps} with no argument restores the previous size.  The @code{ps}
-request's default scaling unit is @samp{z}.
+Set (increase, decrease) the type size to (by) @var{size} points.
+@code{ps} with no argument restores the previous size.
+The
+@code{ps}
+request's default scaling unit is
+@samp{z};
+recall @ref{Measurements}
+and see @ref{Using Fractional Type Sizes}).
 The formatter rounds the requested size to the nearest valid size
 (with ties rounding down)
 within the limits supported by the device,
