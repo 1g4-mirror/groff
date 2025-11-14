@@ -6527,6 +6527,7 @@ interval [0, 1] to 16-bit unsigned integers.  It multiplies a quantity
 by 65,536.  @xref{Colors}, for usage.
 @end table
 
+@need 1000
 The magnitudes of other scaling units depend on the text formatting
 parameters in effect.  These are useful when specifying measurements
 that need to scale with the typeface or vertical spacing.
@@ -6735,6 +6736,7 @@ completeness; it does nothing).  The unary minus must often be used
 with parentheses to avoid confusion with the decrementation operator,
 discussed below.
 
+@need 1000
 Observe the rounding behavior and effect of negative operands on the
 modulus and truncating division operators.
 
