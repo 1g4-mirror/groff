@@ -1,5 +1,23 @@
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Withdraw "number" warning category.  The previous
+	change left it without any instances.
+
+	* src/roff/troff/troff.h (enum warning_type): Drop `WARN_NUMBER`
+	enumeration constant.
+	* src/roff/troff/input.cpp: Drop "number" element from
+	`warning_table` static array.  Update default warning mask to
+	exclude it.
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): De-document it.
+
+	* NEWS: Report change.
+
+	Fixes <https://savannah.gnu.org/bugs/?67698> (1/2).
+
+2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp: Refactor numeric expression parser
 	to simplify and heighten severity of diagnostics.  This isn't
 	a behavior change; character sequences that were invalid as

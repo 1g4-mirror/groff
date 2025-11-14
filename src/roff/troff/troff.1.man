@@ -572,7 +572,7 @@ R Ri Lb | R Ri Lb.
 Bit@Code@Category@Bit@Code@Category
 _
 0@1@char@10@1024@reg
-1@2@number@11@2048@tab
+1@2@\fIunused\fP@11@2048@tab
 2@4@break@12@4096@right\-brace
 3@8@delim@13@8192@missing
 4@16@\fIunused\fP@14@16384@input
@@ -753,12 +753,12 @@ A request was invoked with a mandatory argument absent.
 T}
 .
 .
-.sp \n[PD]u
-number	2	T{
-An invalid numeric expression was encountered.
-.
-This category is enabled by default.
-T}
+.\" .sp \n[PD]u
+.\" number	2	T{
+.\" An invalid numeric expression was encountered.
+.\" .
+.\" This category is enabled by default.
+.\" T}
 .
 .
 .sp \n[PD]u

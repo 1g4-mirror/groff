@@ -139,6 +139,9 @@ troff
    `trf` requests, and the second argument to the `open` and `opena`
    requests.  See "soelim" below.
 
+*  The "number" warning category has been withdrawn.  The diagnostic
+   that formerly used it has been promoted to an error.
+
 *  The "el" warning category has been withdrawn.  If enabled (which it
    was not by default), the formatter would emit a diagnostic if it
    inferred an imbalance between `ie` and `el` requests.  Unfortunately

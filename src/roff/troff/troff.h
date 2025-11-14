@@ -48,7 +48,7 @@ extern search_path *mac_path;
 
 enum warning_type {
   WARN_CHAR = 01,
-  WARN_NUMBER = 02,
+  //WARN_NUMBER = 02, // withdrawn in groff 1.24
   WARN_BREAK = 04,
   WARN_DELIM = 010,
   //WARN_EL = 020, // withdrawn in groff 1.24

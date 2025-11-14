@@ -73,7 +73,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #ifndef DEFAULT_WARNING_MASK
 // warnings that are enabled by default
 #define DEFAULT_WARNING_MASK \
-     (WARN_CHAR|WARN_NUMBER|WARN_BREAK|WARN_SPACE|WARN_FONT|WARN_FILE)
+     (WARN_CHAR|WARN_BREAK|WARN_SPACE|WARN_FONT|WARN_FILE)
 #endif
 
 extern "C" const char *program_name;
@@ -10253,7 +10253,6 @@ static struct warning_category {
   { "break", WARN_BREAK },
   { "delim", WARN_DELIM },
   { "scale", WARN_SCALE },
-  { "number", WARN_NUMBER },
   { "syntax", WARN_SYNTAX },
   { "tab", WARN_TAB },
   { "right-brace", WARN_RIGHT_BRACE },

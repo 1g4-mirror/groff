@@ -19290,11 +19290,11 @@ and no mounted font defines a glyph for it,
 or input could not be encoded for device-independent output.
 This category is enabled by default.
 
-@item number
-@itemx 2
-An invalid numeric expression was encountered.  This category is enabled
-by default.
-@xref{Numeric Expressions}.
+@c @item number
+@c @itemx 2
+@c An invalid numeric expression was encountered.  This category is
+@c enabled by default.
+@c @xref{Numeric Expressions}.
 
 @item break
 @itemx 4
