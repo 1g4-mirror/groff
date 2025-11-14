@@ -150,6 +150,13 @@ troff
    We recommend using brace escape sequences `\{` and `\}` to ensure
    that your control flow structures remain maintainable.
 
+*  The "right-brace" warning category has been withdrawn.  If enabled
+   (which it was not by default), the formatter would emit a diagnostic
+   in exactly one circumstance: when a numeric expression was expected
+   (as, for instance, the second argument to an `nr` request) but a
+   right brace escape sequence `\}` was encountered instead.  This
+   diagnostic still issues, but it is now an error.
+
 *  GNU troff now performs some limited processing/transformation of the
    argument to the `\X` escape sequence and its counterpart `device`
    request, to address the requirement that some documents have to pass

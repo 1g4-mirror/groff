@@ -573,7 +573,7 @@ Bit@Code@Category@Bit@Code@Category
 _
 0@1@char@10@1024@reg
 1@2@\fIunused\fP@11@2048@tab
-2@4@break@12@4096@right\-brace
+2@4@break@12@4096@\fIunused\fP
 3@8@delim@13@8192@missing
 4@16@\fIunused\fP@14@16384@input
 5@32@scale@15@32768@escape
@@ -781,12 +781,12 @@ issues at most one warning for each.
 T}
 .
 .
-.sp \n[PD]u
-right\-brace	4096	T{
-A right brace escape sequence
-.B \[rs]}
-was encountered where a number was expected.
-T}
+.\" .sp \n[PD]u
+.\" right\-brace	4096	T{
+.\" A right brace escape sequence
+.\" .B \[rs]}
+.\" was encountered where a number was expected.
+.\" T}
 .
 .
 .sp \n[PD]u

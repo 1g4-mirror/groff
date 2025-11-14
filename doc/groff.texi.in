@@ -19420,11 +19420,11 @@ issues at most one warning for each.
 A tab character was encountered where a number was expected, or appeared
 in an unquoted macro argument.
 
-@item right-brace
-@itemx 4096
-@cindex @code{\@}}, and warnings
-A right brace escape sequence @code{\@}} was encountered where a number
-was expected.
+@c @item right-brace
+@c @itemx 4096
+@c @cindex @code{\@}}, and warnings
+@c A right brace escape sequence @code{\@}} was encountered where a
+@c number was expected.
 
 @item missing
 @itemx 8192

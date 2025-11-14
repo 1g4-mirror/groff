@@ -10255,7 +10255,6 @@ static struct warning_category {
   { "scale", WARN_SCALE },
   { "syntax", WARN_SYNTAX },
   { "tab", WARN_TAB },
-  { "right-brace", WARN_RIGHT_BRACE },
   { "missing", WARN_MISSING },
   { "input", WARN_INPUT },
   { "escape", WARN_ESCAPE },
