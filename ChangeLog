@@ -1,5 +1,22 @@
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp: Refactor numeric expression parser
+	to simplify and heighten severity of diagnostics.  This isn't
+	a behavior change; character sequences that were invalid as
+	numeric expressions were ignored before and remain so.  But
+	since we're aborting interpretation of an argument to a request
+	or escape sequence, where in at least one case AT&T troff did
+	not--it would read through spurious tab characters to reach a
+	valid numeric expression afterward--an error seems more
+	appropriate.
+	(is_valid_expression_start): Drop special handling of tab and
+	right-brace escape sequences.  These get handled anyway when the
+	term at the start of the expression gets interpreted...
+	(is_valid_term): ...thus.  Raise diagnostic severity from
+	warning (in "number" category) to error.
+
+2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::description): Improve
 	quotation of special character names.
 
