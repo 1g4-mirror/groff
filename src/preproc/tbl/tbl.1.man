@@ -1082,7 +1082,7 @@ updating the width required by its corresponding column.
 .
 If the
 .B z
-modifier applies to the column,
+modifier applies to the entry,
 this measurement is ignored;
 if
 .B w
