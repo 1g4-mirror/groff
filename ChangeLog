@@ -11,6 +11,19 @@
 
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/request.h (class macro): Declare new member
+	function `dump()`, for specialized use with macros that always
+	have zero-length contents.  What are these?  They correspond to
+	the character class `charinfo` objects created by the `class`
+	request.
+	* src/roff/troff/input.cpp (define_class): Create a macro object
+	with no contents and associate it with the character class being
+	created.
+	(macro::dump): New member function dumps file name and line
+	number information.
+
+2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* Makefile.am: Include "contrib/install-font/install-font.am".
 
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>

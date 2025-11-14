@@ -3922,6 +3922,14 @@ void macro::print_size()
   errprint("%1", len);
 }
 
+// Use this only for zero-length macros associated with charinfo objects
+// that are character classes.
+void macro::dump()
+{
+  if (filename != 0 /* nullptr */)
+    errprint("file name: \"%1\", line number: %2\n", filename, lineno);
+}
+
 void macro::json_dump()
 {
   bool need_comma = false;
@@ -8522,6 +8530,10 @@ void define_class()
     return;
   }
   charinfo *ci = get_charinfo(nm);
+  // Assign the charinfo an empty macro as a hack to record the
+  // file:line location of its definition.
+  macro *m = new macro;
+  (void) ci->set_macro(m);
   charinfo *child1 = 0 /* nullptr */, *child2 = 0 /* nullptr */;
   while (!tok.is_newline() && !tok.is_eof()) {
     tok.skip();
