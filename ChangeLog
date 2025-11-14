@@ -242,8 +242,8 @@
 
 	* src/roff/troff/input.cpp (token::is_usable_as_delimiter): Fix
 	spurious warning in category "delim" when using a tab character
-	as an escape sequence as a delimiter.  AT&T troff allows that,
-	and so has GNU troff historically.
+	as an escape sequence as a delimiter.  AT&T troff doesn't allow
+	that, but GNU troff has, historically.
 
 	Continues commit 39c1176bfa, 25 January.  See Savannah #66686
 	and Savannah #66526.
