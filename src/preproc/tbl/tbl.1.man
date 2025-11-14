@@ -884,13 +884,11 @@ with an optional leading sign must follow.
 .
 If unsigned,
 the type size is set to
-.IR n \~scaled
-points.
+.IR n \~points.
 .
 Otherwise,
 the type size is incremented or decremented per the sign by
-.IR n \~scaled
-points.
+.IR n \~points.
 .
 The use of a signed multi-digit number is a GNU extension.
 .
