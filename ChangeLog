@@ -1,5 +1,9 @@
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* Makefile.am: Include "contrib/install-font/install-font.am".
+
+2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Withdraw "right-brace" warning category.
 
 	* src/roff/troff/troff.h (enum warning_type): Drop

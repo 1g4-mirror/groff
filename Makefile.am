@@ -563,6 +563,7 @@ include $(top_srcdir)/contrib/gperl/gperl.am
 include $(top_srcdir)/contrib/gpinyin/gpinyin.am
 include $(top_srcdir)/contrib/grap2graph/grap2graph.am
 include $(top_srcdir)/contrib/hdtbl/hdtbl.am
+include $(top_srcdir)/contrib/install-font/install-font.am
 include $(top_srcdir)/contrib/mm/mm.am
 include $(top_srcdir)/contrib/mom/mom.am
 include $(top_srcdir)/contrib/pic2graph/pic2graph.am
