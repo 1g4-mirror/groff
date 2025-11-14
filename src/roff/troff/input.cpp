@@ -10763,92 +10763,92 @@ void charinfo::dump()
     errprint("\n");
   }
   else {
-  if (translation != 0 /* nullptr */)
-    errprint("  is translated\n");
-  else
-    errprint("  is not translated\n");
-  if (mac != 0 /* nullptr */) {
-    errprint("  has a macro: ");
-    mac->json_dump();
-    errprint("\n");
-  }
-  else
-    errprint("  does not have a macro\n");
-  errprint("  special translation: %1\n",
-	   static_cast<int>(special_translation));
-  errprint("  hyphenation code: %1\n",
-	   static_cast<int>(hyphenation_code));
-  errprint("  flags: %1 (", flags);
-  if (0U == flags)
-    errprint("none)\n");
-  else {
-    char none[] = { '\0' };
-    char comma[] = { ',', ' ', '\0' };
-    char *separator = none;
-    if (flags & ENDS_SENTENCE) {
-      errprint("%1ends sentence", separator);
-      separator = comma;
+    if (translation != 0 /* nullptr */)
+      errprint("  is translated\n");
+    else
+      errprint("  is not translated\n");
+    if (mac != 0 /* nullptr */) {
+      errprint("  has a macro: ");
+      mac->json_dump();
+      errprint("\n");
     }
-    if (flags & ALLOWS_BREAK_BEFORE) {
-      errprint("%1allows break before", separator);
-      separator = comma;
+    else
+      errprint("  does not have a macro\n");
+    errprint("  special translation: %1\n",
+	     static_cast<int>(special_translation));
+    errprint("  hyphenation code: %1\n",
+	     static_cast<int>(hyphenation_code));
+    errprint("  flags: %1 (", flags);
+    if (0U == flags)
+      errprint("none)\n");
+    else {
+      char none[] = { '\0' };
+      char comma[] = { ',', ' ', '\0' };
+      char *separator = none;
+      if (flags & ENDS_SENTENCE) {
+	errprint("%1ends sentence", separator);
+	separator = comma;
+      }
+      if (flags & ALLOWS_BREAK_BEFORE) {
+	errprint("%1allows break before", separator);
+	separator = comma;
+      }
+      if (flags & ALLOWS_BREAK_AFTER) {
+	errprint("%1allows break after", separator);
+	separator = comma;
+      }
+      if (flags & OVERLAPS_HORIZONTALLY) {
+	errprint("%1overlaps horizontally", separator);
+	separator = comma;
+      }
+      if (flags & OVERLAPS_VERTICALLY) {
+	errprint("%1overlaps vertically", separator);
+	separator = comma;
+      }
+      if (flags & IS_TRANSPARENT_TO_END_OF_SENTENCE) {
+	errprint("%1is transparent to end of sentence", separator);
+	separator = comma;
+      }
+      if (flags & IGNORES_SURROUNDING_HYPHENATION_CODES) {
+	errprint("%1ignores surrounding hyphenation codes", separator);
+	separator = comma;
+      }
+      if (flags & PROHIBITS_BREAK_BEFORE) {
+	errprint("%1prohibits break before", separator);
+	separator = comma;
+      }
+      if (flags & PROHIBITS_BREAK_AFTER) {
+	errprint("%1prohibits break after", separator);
+	separator = comma;
+      }
+      if (flags & IS_INTERWORD_SPACE) {
+	errprint("%1is interword space", separator);
+	separator = comma;
+      }
+      errprint(")\n");
     }
-    if (flags & ALLOWS_BREAK_AFTER) {
-      errprint("%1allows break after", separator);
-      separator = comma;
+    errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
+    errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
+    // Also see node.cpp::glyph_node::asciify().
+    int mapping = get_unicode_mapping();
+    if (mapping >= 0) {
+      const size_t buflen = 6; // enough for five hex digits + '\0'
+      char hexbuf[buflen];
+      (void) memset(hexbuf, '\0', buflen);
+      (void) snprintf(hexbuf, buflen, "%.4X", mapping);
+      errprint("  Unicode mapping: U+%1\n", hexbuf);
     }
-    if (flags & OVERLAPS_HORIZONTALLY) {
-      errprint("%1overlaps horizontally", separator);
-      separator = comma;
-    }
-    if (flags & OVERLAPS_VERTICALLY) {
-      errprint("%1overlaps vertically", separator);
-      separator = comma;
-    }
-    if (flags & IS_TRANSPARENT_TO_END_OF_SENTENCE) {
-      errprint("%1is transparent to end of sentence", separator);
-      separator = comma;
-    }
-    if (flags & IGNORES_SURROUNDING_HYPHENATION_CODES) {
-      errprint("%1ignores surrounding hyphenation codes", separator);
-      separator = comma;
-    }
-    if (flags & PROHIBITS_BREAK_BEFORE) {
-      errprint("%1prohibits break before", separator);
-      separator = comma;
-    }
-    if (flags & PROHIBITS_BREAK_AFTER) {
-      errprint("%1prohibits break after", separator);
-      separator = comma;
-    }
-    if (flags & IS_INTERWORD_SPACE) {
-      errprint("%1is interword space", separator);
-      separator = comma;
-    }
-    errprint(")\n");
-  }
-  errprint("  asciify code: %1\n", static_cast<int>(asciify_code));
-  errprint("  ASCII code: %1\n", static_cast<int>(ascii_code));
-  // Also see node.cpp::glyph_node::asciify().
-  int mapping = get_unicode_mapping();
-  if (mapping >= 0) {
-    const size_t buflen = sizeof "10FFFF";
-    char hexbuf[buflen];
-    (void) memset(hexbuf, '\0', buflen);
-    (void) snprintf(hexbuf, buflen, "%.4X", mapping);
-    errprint("  Unicode mapping: U+%1\n", hexbuf);
-  }
-  else
-    errprint("  Unicode mapping: none (%1)\n", mapping);
-  errprint("  is%1 found\n", is_not_found ? " not" : "");
-  errprint("  is%1 transparently translatable\n",
-	   is_transparently_translatable ? "" : " not");
-  errprint("  is%1 translatable as input\n",
-	   translatable_as_input ? "" : " not");
-  const char *modestr = character_mode_description(mode);
-  if (strcmp(modestr, "") == 0)
-    modestr =" normal";
-  errprint("  mode:%1\n", modestr);
+    else
+      errprint("  Unicode mapping: none (%1)\n", mapping);
+    errprint("  is%1 found\n", is_not_found ? " not" : "");
+    errprint("  is%1 transparently translatable\n",
+	     is_transparently_translatable ? "" : " not");
+    errprint("  is%1 translatable as input\n",
+	     translatable_as_input ? "" : " not");
+    const char *modestr = character_mode_description(mode);
+    if (strcmp(modestr, "") == 0)
+      modestr =" normal";
+    errprint("  mode:%1\n", modestr);
   }
   fflush(stderr);
 }
