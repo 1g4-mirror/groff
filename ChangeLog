@@ -18,6 +18,24 @@
 
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::description): Describe
+	character class objects distinctly from special characters.
+	(print_character_request): Update error diagnostic to recognize
+	that a character class is also worthy argument fodder to the
+	`pchar` request.
+	(charinfo::dump): Report totally different information for a
+	character class.  Call the `dump()` member function of the its
+	associated (empty) macro from the previous change.  This way the
+	user troubleshooting character classes (or character
+	class/special character collisions) can simply _ask_ the
+	formatter where a character class is defined.  Report the only
+	properties a character class has: a list of (potentially
+	singleton) code point ranges and a list of nested classes.
+
+	Fixes <https://savannah.gnu.org/bugs/?67617>.
+
+2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/request.h (class macro): Declare new member
 	function `dump()`, for specialized use with macros that always
 	have zero-length contents.  What are these?  They correspond to

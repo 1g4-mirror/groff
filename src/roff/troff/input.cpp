@@ -2918,10 +2918,15 @@ const char *token::description()
       if (strchr(sc, '\'') != 0 /* nullptr */)
 	qc = '"';
       // TODO: This truncates the names of impractically long special
-      // character names.  Do something about that.  (The truncation is
-      // visually indicated by the absence of a closing quotation mark.)
-      (void) snprintf(buf, maxstr, "special character %c%s%c", qc, sc,
-		      qc);
+      // character or character class names.  Do something about that.
+      // (The truncation is visually indicated by the absence of a
+      // closing quotation mark.)
+      if (tok.get_char()->is_class())
+	(void) snprintf(buf, maxstr, "character class %c%s%c", qc, sc,
+			qc);
+      else
+	(void) snprintf(buf, maxstr, "special character %c%s%c", qc, sc,
+			qc);
       return buf;
     }
   case TOKEN_SPREAD:
@@ -4995,8 +5000,8 @@ static void print_character_request()
     ci = tok.get_char(false /* required */,
 		      true /* suppress creation */);
     if (!tok.is_character()) {
-      error("character report request expects characters as arguments;"
-	    " got %1", tok.description());
+      error("character report request expects characters or character"
+	    " classes as arguments; got %1", tok.description());
       break;
     }
     if (0 /* nullptr */ == ci) {
@@ -10712,6 +10717,52 @@ bool charinfo::contains(charinfo *, bool)
 
 void charinfo::dump()
 {
+  if (is_class()) {
+    std::vector<std::pair<int, int> >::const_iterator ranges_iter;
+    ranges_iter = ranges.begin();
+    assert(mac != 0 /* nullptr */);
+    errprint("  defined at: ");
+    mac->dump();
+    fflush(stderr);
+    errprint("  contains ranges: ");
+    const size_t buflen = sizeof "U+10FFFF";
+    int range_begin = 0;
+    int range_end = 0;
+    char beg_hexbuf[buflen];
+    char end_hexbuf[buflen];
+    (void) memset(beg_hexbuf, '\0', buflen);
+    (void) memset(end_hexbuf, '\0', buflen);
+    bool has_ranges = false;
+    while (ranges_iter != ranges.end()) {
+      has_ranges = true;
+      range_begin = ranges_iter->first;
+      range_end = ranges_iter->second;
+      (void) snprintf(beg_hexbuf, buflen, "U+%.4X", range_begin);
+      (void) snprintf(end_hexbuf, buflen, "U+%.4X", range_end);
+      // TODO: comma-separate?  JSON list?
+      if (range_begin == range_end)
+	errprint("%1 ", beg_hexbuf);
+      else
+	errprint("%1-%2 ", beg_hexbuf, end_hexbuf);
+      ++ranges_iter;
+    }
+    if (!has_ranges)
+      errprint("(none)");
+    errprint("\n");
+    errprint("  contains nested classes: ");
+    std::vector<charinfo *>::const_iterator nested_iter;
+    nested_iter = nested_classes.begin();
+    bool has_nested_classes = false;
+    while (nested_iter != nested_classes.end()) {
+      has_nested_classes = true;
+      // TODO: Here's where JSON would really pay off.
+      (*nested_iter)->dump();
+    }
+    if (!has_nested_classes)
+      errprint("(none)");
+    errprint("\n");
+  }
+  else {
   if (translation != 0 /* nullptr */)
     errprint("  is translated\n");
   else
@@ -10798,6 +10849,7 @@ void charinfo::dump()
   if (strcmp(modestr, "") == 0)
     modestr =" normal";
   errprint("  mode:%1\n", modestr);
+  }
   fflush(stderr);
 }
 
