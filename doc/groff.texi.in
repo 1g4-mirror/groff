@@ -6550,7 +6550,8 @@ because it is approximately the width of the letter@tie{}@samp{M}.
 En;
 on typesetters,
 an en is one-half em,
-but on terminals an en equals an em.
+but on terminals an en equals an em,
+because they align all text to a grid of character cells.
 
 @item v
 @cindex vertical space unit (@code{v})
