@@ -7005,8 +7005,7 @@ underlines the period.
 
 For vertical motions, the @code{|} operator specifies a distance from
 the first text baseline on the page or in the current
-diversion,@footnote{@xref{Diversions}.} using the current vertical
-spacing.
+diversion.@footnote{@xref{Diversions}.}
 
 @Example
 A
