@@ -2907,12 +2907,23 @@ const char *token::description()
   case TOKEN_SPACE:
     return "a space";
   case TOKEN_SPECIAL_CHAR:
-    // TODO: This truncates the names of impractically long special
-    // character names.  Do something about that.  (The truncation is
-    // visually indicated by the absence of a closing quotation mark.)
-    (void) snprintf(buf, maxstr, "special character \"%s\"",
-		    nm.contents());
-    return buf;
+    // We normally using apostrophes for quotation in diagnostic
+    // messages, but many special character names contain them.  Fall
+    // back to double quotes if this one does.  A user-defined special
+    // character name could contain both characters; we expect such
+    // users to lie comfortably in the bed they made for themselves.
+    {
+      const char *sc = nm.contents();
+      char qc = '\'';
+      if (strchr(sc, '\'') != 0 /* nullptr */)
+	qc = '"';
+      // TODO: This truncates the names of impractically long special
+      // character names.  Do something about that.  (The truncation is
+      // visually indicated by the absence of a closing quotation mark.)
+      (void) snprintf(buf, maxstr, "special character %c%s%c", qc, sc,
+		      qc);
+      return buf;
+    }
   case TOKEN_SPREAD:
     return "an escaped 'p'";
   case TOKEN_STRETCHABLE_SPACE:

@@ -1,6 +1,11 @@
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::description): Improve
+	quotation of special character names.
+
+2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::description): Improve
 	diagnostics when encountering an indexed character.
 
 2025-11-13  G. Branden Robinson <g.branden.robinson@gmail.com>
