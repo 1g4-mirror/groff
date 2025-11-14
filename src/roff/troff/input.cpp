@@ -2850,9 +2850,10 @@ bool token::is_usable_as_delimiter(bool report_error,
 
 const char *token::description()
 {
-  // Reserve a buffer large enough to handle the two lengthiest cases.
+  // Reserve a buffer large enough to handle the lengthiest cases.
   //   "character code XXX"
   //   "special character 'bracketrighttp'"
+  //   "indexed character -2147483648"
   // Future:
   //   "character code XXX (U+XXXX)" or similar
   const size_t maxstr = sizeof "special character 'bracketrighttp'";
@@ -2898,7 +2899,9 @@ const char *token::description()
   case TOKEN_NODE:
     return "a node";
   case TOKEN_INDEXED_CHAR:
-    return "an escaped 'N'";
+    (void) snprintf(buf, maxstr, "indexed character %d",
+		    character_index());
+    return buf;
   case TOKEN_RIGHT_BRACE:
     return "an escaped '}'";
   case TOKEN_SPACE:
