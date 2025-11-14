@@ -1,5 +1,5 @@
 # Autoconf configuration file for groff.
-# Copyright (C) 1989-2024 Free Software Foundation, Inc.
+# Copyright 1989-2024 Free Software Foundation, Inc.
 #
 # This file is part of groff.
 #
