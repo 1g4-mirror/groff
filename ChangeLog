@@ -120,7 +120,7 @@
 	groff_char(7)).  For all other Unicode code points, write out an
 	escape sequence of the form `\[uYXXXX]`.  Finally, if none of
 	the foreging mappings exist, throw an error diagnostic and dump
-	the glyph's "charinfo", as if `pchar` were called on a
+	the glyph's "charinfo", as if `pchar` were invoked on a
 	corresponding GNU troff character.
 
 	* src/roff/groff/tests/asciify-request-works.sh: Adjust test
