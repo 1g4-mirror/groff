@@ -2907,11 +2907,11 @@ const char *token::description()
   case TOKEN_SPACE:
     return "a space";
   case TOKEN_SPECIAL_CHAR:
-    // We normally using apostrophes for quotation in diagnostic
-    // messages, but many special character names contain them.  Fall
-    // back to double quotes if this one does.  A user-defined special
-    // character name could contain both characters; we expect such
-    // users to lie comfortably in the bed they made for themselves.
+    // We normally use apostrophes for quotation in diagnostic messages,
+    // but many special character names contain them.  Fall back to
+    // double quotes if this one does.  A user-defined special character
+    // name could contain both characters; we expect such users to lie
+    // comfortably in the bed they made for themselves.
     {
       const char *sc = nm.contents();
       char qc = '\'';
