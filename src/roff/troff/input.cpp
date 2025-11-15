@@ -3225,7 +3225,7 @@ static int transparent_translate(int cc)
 {
   if (!is_invalid_input_char(cc)) {
     charinfo *ci = charset_table[cc];
-    switch (ci->get_special_translation(1)) {
+    switch (ci->get_special_translation(true /* transparently */)) {
     case charinfo::TRANSLATE_SPACE:
       return ' ';
     case charinfo::TRANSLATE_STRETCHABLE_SPACE:
@@ -8293,7 +8293,7 @@ static void init_hpf_code_table()
     hpf_code_table[i] = cmlower(i);
 }
 
-static void do_translate(int translate_transparent, int translate_input)
+static void do_translate(bool transparently, bool as_input)
 {
   tok.skip();
   while (!tok.is_newline() && !tok.is_eof()) {
@@ -8313,31 +8313,29 @@ static void do_translate(int translate_transparent, int translate_input)
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
       ci1->set_special_translation(charinfo::TRANSLATE_SPACE,
-				   translate_transparent);
+				   transparently);
       break;
     }
     if (tok.is_space())
       ci1->set_special_translation(charinfo::TRANSLATE_SPACE,
-				   translate_transparent);
+				   transparently);
     else if (tok.is_stretchable_space())
       ci1->set_special_translation(charinfo::TRANSLATE_STRETCHABLE_SPACE,
-				   translate_transparent);
+				   transparently);
     else if (tok.is_dummy())
       ci1->set_special_translation(charinfo::TRANSLATE_DUMMY,
-				   translate_transparent);
+				   transparently);
     else if (tok.is_hyphen_indicator())
       ci1->set_special_translation(charinfo::TRANSLATE_HYPHEN_INDICATOR,
-				   translate_transparent);
+				   transparently);
     else {
       charinfo *ci2 = tok.get_char(true /* required */);
       if (0 /* nullptr */ == ci2)
 	break;
       if (ci1 == ci2)
-	ci1->set_translation(0 /* nullptr */, translate_transparent,
-			     translate_input);
+	ci1->set_translation(0 /* nullptr */, transparently, as_input);
       else
-	ci1->set_translation(ci2, translate_transparent,
-			     translate_input);
+	ci1->set_translation(ci2, transparently, as_input);
     }
     tok.next();
   }
@@ -8352,7 +8350,7 @@ void translate()
     skip_line();
     return;
   }
-  do_translate(1 /* transparent */, 0 /* input */);
+  do_translate(true /* transparently */, false /* as_input */);
 }
 
 void translate_no_transparent()
@@ -8363,7 +8361,7 @@ void translate_no_transparent()
     skip_line();
     return;
   }
-  do_translate(0 /* transparent */, 0 /* input */);
+  do_translate(false /* transparently */, false /* as_input */);
 }
 
 void translate_input()
@@ -8374,7 +8372,7 @@ void translate_input()
     skip_line();
     return;
   }
-  do_translate(1 /* transparent */, 1 /* input */);
+  do_translate(true /* transparently */, true /* as_input */);
 }
 
 static void set_character_flags_request()
@@ -10554,10 +10552,11 @@ void charinfo::set_hyphenation_code(unsigned char c)
   hyphenation_code = c;
 }
 
-void charinfo::set_translation(charinfo *ci, int tt, int ti)
+void charinfo::set_translation(charinfo *ci, bool transparently,
+			       bool as_input)
 {
   translation = ci;
-  if ((ci != 0 /* nullptr */) && ti) {
+  if ((ci != 0 /* nullptr */) && as_input) {
     if (hyphenation_code != 0U)
       ci->set_hyphenation_code(hyphenation_code);
     if (asciify_code != 0U)
@@ -10567,7 +10566,7 @@ void charinfo::set_translation(charinfo *ci, int tt, int ti)
     ci->make_translatable_as_input();
   }
   special_translation = TRANSLATE_NONE;
-  is_transparently_translatable = tt;
+  is_transparently_translatable = transparently;
 }
 
 // Recompute flags for all entries in the charinfo dictionary.
@@ -10607,11 +10606,11 @@ void charinfo::get_flags()
   }
 }
 
-void charinfo::set_special_translation(int c, int tt)
+void charinfo::set_special_translation(int cc, bool transparently)
 {
-  special_translation = c;
+  special_translation = cc;
   translation = 0 /* nullptr */;
-  is_transparently_translatable = tt;
+  is_transparently_translatable = transparently;
 }
 
 void charinfo::set_ascii_code(unsigned char c)

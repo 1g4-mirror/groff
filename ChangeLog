@@ -1,5 +1,29 @@
 2025-11-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor; boolify `charinfo` member functions.
+
+	* src/roff/troff/charinfo.h (class charinfo): Demote integer
+	arguments to `set_translation()` and `set_special_translation()`
+	from `int` to `bool`.
+	(charinfo::get_special_translation): Rename argument from
+	`for_transparent_throughput` to `transparently`.
+	* src/roff/troff/input.cpp (charinfo::set_translation): Demote
+	argument types as above, and rename from the cryptic `tt` and
+	`ti` to `transparently` and `as_input`, respectively.
+	(charinfo::set_special_translation): Demote argument types as
+	above.  Rename `c` to `cc` ("character code", as abbreivated
+	elsewhere in this file), and `tt` to `transparently`.
+	(do_translate): Demote integer arguments `translate_transparent`
+	and `translate_input` from `int` to `bool`, and rename them to
+	`transparently` and `as_input`, respectively, to obviously
+	correspond with `charinfo` class member functions to which they
+	are passed.
+	(transparent_translate, translate, translate_no_transparent)
+	(transparent_input): Update call sites to use Boolean literals
+	and annotate argument correspondence.
+
+2025-11-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::set_hyphenation_code): Fix
 	code style nit; explicitly compare value of pointer type to null
 	pointer literal instead of letting it pun down to a Boolean.  In
