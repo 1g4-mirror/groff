@@ -8402,7 +8402,6 @@ static void set_character_flags_request()
       skip_line();
       return;
     }
-    // TODO: Check for contradictory character flags.
     if (!has_arg()) {
       warning(WARN_MISSING, "character flags configuration request"
 	      " expects one or more characters to configure");
