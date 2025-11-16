@@ -1810,8 +1810,7 @@ void set_hyphenation_mode_default()
     return;
   }
   int n;
-  if (!read_integer(&n)) {
-    // read_integer() will throw a diagnostic if necessary.
+  if (!read_integer(&n)) { // throws a diagnostic if necessary
     skip_line();
     return;
   }
