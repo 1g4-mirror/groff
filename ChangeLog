@@ -1,5 +1,10 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (line_spacing): Clarify diagnostic
+	message.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename `get_integer()` to
 	`read_integer()` because it does more than retrieve a property;
 	it advances the input stream pointer.

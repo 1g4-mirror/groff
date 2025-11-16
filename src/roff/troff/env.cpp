@@ -1566,7 +1566,8 @@ void line_spacing()
   int temp;
   if (has_arg() && read_integer(&temp)) {
     if (temp < 1) {
-      warning(WARN_RANGE, "value %1 out of range: interpreted as 1", temp);
+      warning(WARN_RANGE, "line spacing value '%1' is out of range;"
+	      " assuming '1'", temp);
       temp = 1;
     }
   }
