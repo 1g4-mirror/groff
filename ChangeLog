@@ -1,5 +1,10 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (hyphenation_patterns_file_code): Fix
+	code style nit; parenthesize formally complex expressions.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (line_spacing): Clarify diagnostic
 	message.
 

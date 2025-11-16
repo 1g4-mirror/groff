@@ -8497,12 +8497,12 @@ void hyphenation_patterns_file_code()
   }
   while (!tok.is_newline() && !tok.is_eof()) {
     int n1, n2;
-    if (read_integer(&n1) && (0 <= n1 && n1 <= 255)) {
+    if (read_integer(&n1) && ((0 <= n1) && (n1 <= 255))) {
       if (!has_arg()) {
 	error("missing output hyphenation code");
 	break;
       }
-      if (read_integer(&n2) && (0 <= n2 && n2 <= 255)) {
+      if (read_integer(&n2) && ((0 <= n2) && (n2 <= 255))) {
 	hpf_code_table[n1] = n2;
 	tok.skip();
       }
