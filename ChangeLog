@@ -1,5 +1,13 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp: Trivially refactor.  Update
+	preprocessor macro `TEXT_BLOCK_STAGGER_MACRO` definition to
+	indicate its purpose rather details of its implementation.  This
+	is to help anyone having to debug tbl's output maintain their
+	sanity.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp: Trivially refactor.  Rename
 	preprocessor macro `TEXT_BLOCK_STAGGERING_MACRO` to
 	`TEXT_BLOCK_STAGGER_MACRO`.
