@@ -1676,7 +1676,7 @@ void margin_character()
   while (tok.is_space())
     tok.next();
   charinfo *ci = tok.get_char();
-  if (ci) {
+  if (ci != 0 /* nullptr */) {
     // Call tok.next() only after making the node so that
     // .mc \s+9\(br\s0 works.
     node *nd = curenv->make_char_node(ci);
