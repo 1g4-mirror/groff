@@ -940,7 +940,7 @@ void next_file()
 void shift()
 {
   int n;
-  if (!has_arg() || !get_integer(&n))
+  if (!has_arg() || !read_integer(&n))
     n = 1;
   input_stack::shift(n);
   skip_line();
@@ -1530,7 +1530,7 @@ static void activate_color()
 {
   int n;
   bool is_color_desired = false;
-  if (has_arg() && get_integer(&n))
+  if (has_arg() && read_integer(&n))
     is_color_desired = (n > 0);
   else
     is_color_desired = true;
@@ -2966,7 +2966,7 @@ void skip_line()
 void compatible()
 {
   int n;
-  if (has_arg() && get_integer(&n))
+  if (has_arg() && read_integer(&n))
     want_att_compat = (n > 0);
   else
     want_att_compat = true;
@@ -5598,14 +5598,14 @@ void substring_request()
   int start;			// 0, 1, ..., n-1  or  -1, -2, ...
   symbol s = read_identifier();
   assert(s != 0 /* nullptr */);
-  if (!s.is_null() && get_integer(&start)) {
+  if (!s.is_null() && read_integer(&start)) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
     if (!m)
       error("cannot extract substring of request '%1'", s.contents());
     else {
       int end = -1;
-      if (!has_arg() || get_integer(&end)) {
+      if (!has_arg() || read_integer(&end)) {
 	int real_length = 0;			// 1, 2, ..., n
 	string_iterator iter1(*m);
 	for (int l = 0; l < m->len; l++) {
@@ -6783,7 +6783,7 @@ int get_file_line(const char **filename, int *lineno)
 void line_file()
 {
   int n;
-  if (get_integer(&n)) {
+  if (read_integer(&n)) {
     if (has_arg(true /* peek */)) {
       const char *reported_file_name = read_rest_of_line_as_argument();
       (void) input_stack::set_location(reported_file_name, (n - 1));
@@ -8384,7 +8384,7 @@ static void set_character_flags_request()
     return;
   }
   int flags;
-  if (get_integer(&flags)) {
+  if (read_integer(&flags)) {
     if ((flags < 0) || (flags > charinfo::CFLAGS_MAX)) {
       warning(WARN_RANGE, "character flags must be in range 0..%1,"
 	      " got %2", charinfo::CFLAGS_MAX, flags);
@@ -8497,12 +8497,12 @@ void hyphenation_patterns_file_code()
   }
   while (!tok.is_newline() && !tok.is_eof()) {
     int n1, n2;
-    if (get_integer(&n1) && (0 <= n1 && n1 <= 255)) {
+    if (read_integer(&n1) && (0 <= n1 && n1 <= 255)) {
       if (!has_arg()) {
 	error("missing output hyphenation code");
 	break;
       }
-      if (get_integer(&n2) && (0 <= n2 && n2 <= 255)) {
+      if (read_integer(&n2) && (0 <= n2 && n2 <= 255)) {
 	hpf_code_table[n1] = n2;
 	tok.skip();
       }
@@ -9802,7 +9802,7 @@ int main(int argc, char **argv)
 void set_warning_mask_request()
 {
   int n;
-  if (has_arg() && get_integer(&n)) {
+  if (has_arg() && read_integer(&n)) {
     if (n & ~WARN_MAX) {
       warning(WARN_RANGE, "warning mask must be in range 0..%1, got %2",
 	      WARN_MAX, n);

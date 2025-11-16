@@ -1,5 +1,34 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename `get_integer()` to
+	`read_integer()` because it does more than retrieve a property;
+	it advances the input stream pointer.
+
+	* src/roff/troff/token.h (get_integer): Rename this
+	declaration...
+	(read_integer): ...to this.
+	* src/roff/troff/number.cpp (get_integer): Rename this
+	definition...
+	(read_integer): ...to this.  Also update assertion text.
+
+	* src/roff/troff/div.cpp (begin_page, page_number)
+	(return_request):
+	* src/roff/troff/env.cpp (window_control_request) [0]
+	(space_size, no_fill, center, right_justify)
+	(post_vertical_spacing, temporary_indent, number_lines)
+	(hyphenate_request, set_hyphenation_mode_default)
+	(hyphenation_line_max_request, adjust, do_input_trap)
+	(field_characters_request):
+	* src/roff/troff/input.cpp (shift, activate_color, compatible)
+	(substring_request, line_file, set_character_flags_request)
+	(hyphenation_patterns_file_code, set_warning_mask_request):
+	* src/roff/troff/node.cpp (mount_font_at_position)
+	(associate_style_with_font_position, read_font_identifier)
+	(zoom_font, constantly_space_font, set_ligature_mode)
+	(set_kerning_mode): Update call sites.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp: Trivially refactor.  Update
 	preprocessor macro `TEXT_BLOCK_STAGGER_MACRO` definition to
 	indicate its purpose rather details of its implementation.  This

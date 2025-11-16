@@ -146,11 +146,11 @@ extern void read_title_parts(node **part, hunits *part_width);
 extern bool get_number_rigidly(units *result, unsigned char si);
 
 extern bool read_measurement(units *result, unsigned char si);
-extern bool get_integer(int *result);
+extern bool read_integer(int *result);
 
 extern bool read_measurement(units *result, unsigned char si,
 			     units prev_value);
-extern bool get_integer(int *result, int prev_value);
+extern bool read_integer(int *result, int prev_value);
 
 extern void interpolate_register(symbol, int);
 

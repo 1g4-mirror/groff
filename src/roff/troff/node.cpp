@@ -6802,7 +6802,7 @@ static void mount_font_at_position()
     return;
   }
   int n;
-  if (get_integer(&n)) {
+  if (read_integer(&n)) {
     if (n < 0)
       error("font mounting position %1 is negative", n);
     else {
@@ -6923,7 +6923,7 @@ static void associate_style_with_font_position()
     return;
   }
   int n;
-  if (get_integer(&n)) {
+  if (read_integer(&n)) {
     if (n < 0)
       error("font mounting position %1 is negative", n);
     else {
@@ -6979,7 +6979,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
       finfo->position = curenv->get_family()->resolve(n);
     }
   }
-  else if (get_integer(&n)) {
+  else if (read_integer(&n)) {
     finfo->requested_position = n;
     if (is_valid_font_mounting_position(n))
       finfo->position = curenv->get_family()->resolve(n);
@@ -7163,7 +7163,7 @@ static void zoom_font()
   }
 #endif
   int zoom = 0;
-  get_integer(&zoom);
+  read_integer(&zoom);
   if (zoom < 0) {
     warning(WARN_RANGE, "ignoring negative font zoom factor '%1'",
 	    zoom);
@@ -7445,7 +7445,7 @@ static void constantly_space_font()
     font_lookup_error(finfo, "for constant spacing");
   else {
     int n = finfo.position, x, y;
-    if (!has_arg() || !get_integer(&x))
+    if (!has_arg() || !read_integer(&x))
       font_table[n]->set_constant_space(CONSTANT_SPACE_NONE);
     else {
       if (!has_arg() || !read_measurement(&y, 'z'))
@@ -7463,7 +7463,7 @@ static void constantly_space_font()
 static void set_ligature_mode()
 {
   int lig;
-  if (has_arg() && get_integer(&lig) && lig >= 0 && lig <= 2)
+  if (has_arg() && read_integer(&lig) && lig >= 0 && lig <= 2)
     global_ligature_mode = lig;
   else
     global_ligature_mode = 1;
@@ -7473,7 +7473,7 @@ static void set_ligature_mode()
 static void set_kerning_mode()
 {
   int k;
-  if (has_arg() && get_integer(&k))
+  if (has_arg() && read_integer(&k))
     global_kern_mode = (k > 0);
   else
     global_kern_mode = true;
