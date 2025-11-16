@@ -1,5 +1,11 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp: Trivially refactor.  Rename
+	preprocessor macro `TEXT_BLOCK_STAGGERING_MACRO` to
+	`TEXT_BLOCK_STAGGER_MACRO`.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::init_output): Fix
 	inappropriately hard-coded string literal.  Invoke the text
 	block staggering macro via its existing preprocessor macro, not
