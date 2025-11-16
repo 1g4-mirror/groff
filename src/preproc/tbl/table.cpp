@@ -1926,7 +1926,7 @@ void table::init_output()
 	 ".nr " SUPPRESS_BOTTOM_REG " 0\n"
 	 ".eo\n"
 	 ".de " TEXT_BLOCK_STAGGERING_MACRO "\n"
-	 ".  ie !'\\n(.z'' \\!.3sp \"\\$1\"\n"
+	 ".  ie !'\\n(.z'' \\!." TEXT_BLOCK_STAGGERING_MACRO "\"\\$1\"\n"
 	 ".  el .sp \\$1\n"
 	 "..\n"
 	 ".de " REPEATED_MARK_MACRO "\n"

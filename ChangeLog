@@ -1,3 +1,12 @@
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::init_output): Fix
+	inappropriately hard-coded string literal.  Invoke the text
+	block staggering macro via its existing preprocessor macro, not
+	by its literal name.  Things will go wrong if we ever change
+	that preprocessor macro's definition.  Continues commit
+	2c8e354f22, 4 August 2023.  See Savannah #64454.
+
 2025-11-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Slightly refactor; boolify `charinfo` member functions.
