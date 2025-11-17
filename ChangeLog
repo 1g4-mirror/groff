@@ -233,7 +233,7 @@
 
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Regression-test Savannah #67680.
+	[groff]: Regression-test Savannah #67680.
 
 	* src/roff/groff/tests/asciify-special-characters-correctly.sh:
 	Do it.
@@ -1441,7 +1441,7 @@
 
 2025-09-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Regression-test Savannah #66653.
+	[groff]: Regression-test Savannah #66653.
 
 	* src/roff/groff/tests/asciify-composite-nodes-correctly.sh: Do
 	it.
@@ -1498,7 +1498,7 @@
 
 2025-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Regression-test Savannah #67532.
+	[groff]: Regression-test Savannah #67532.
 
 	* src/roff/groff/tests/trf-request-works.sh: Add unit tests of
 	`trf` request functionality in undiverted and diverted cases.
@@ -16207,7 +16207,7 @@
 
 2024-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Regression-test Savannah #45502.
+	[groff]: Regression-test Savannah #45502.
 
 	* src/roff/groff/tests/degenerate-control-flow-works.sh: Do it.
 	* src/roff/groff/groff.am (groff_TESTS): Run test.
@@ -19666,7 +19666,7 @@
 
 2023-09-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Regression-test Savannah #64421.
+	[groff]: Regression-test Savannah #64421.
 
 	* src/roff/groff/tests/detect-evil-link-time-optimizer.sh: Do
 	it.
