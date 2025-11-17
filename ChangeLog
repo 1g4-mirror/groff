@@ -1,5 +1,13 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.
+	(assign_escape_character, interpolate_arg): Mark variables
+	pointing to character array literals as `static` and `const`.
+	(assign_escape_character): Mark variable that selects between
+	one of the aforementioned static literals a pointer to `const`.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (get_line_arg): Trivially refactor.
 	Rename function argument whose type is a pointer to a `charinfo`
 	object from `cp` to `cip` for (slightly more) clarity.  `ci` is

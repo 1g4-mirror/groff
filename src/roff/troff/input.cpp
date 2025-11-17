@@ -203,9 +203,10 @@ static void assign_escape_character()
   else
     ec = '\\';
   bool do_nothing = false;
-  char already_cc[] = "the control character is already";
-  char already_nbcc[] = "the no-break control character is already";
-  char *already_message = 0 /* nullptr */;
+  static const char already_cc[] = "the control character is already";
+  static const char already_nbcc[] = "the no-break control character is"
+				     " already";
+  const char *already_message = 0 /* nullptr */;
   if (curenv->get_control_character() == ec) {
       already_message = already_cc;
       do_nothing = true;
@@ -5172,8 +5173,8 @@ static void interpolate_arg(symbol nm)
 	is_printable = false;
     }
     if (!is_valid) {
-      const char msg[] = "invalid positional argument number in copy"
-			 " mode";
+      static const char msg[] = "invalid positional argument number in"
+				" copy mode";
       if (is_printable)
 	copy_mode_error("%1 '%2'", msg, s);
       else
