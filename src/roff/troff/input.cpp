@@ -6876,47 +6876,47 @@ static void nop_request()
 // ...for example.
 static bool are_comparands_equal()
 {
- token delim = tok;
- int delim_level = input_stack::get_level();
- environment env1(curenv);
- environment env2(curenv);
- environment *oldenv = curenv;
- curenv = &env1;
- suppress_push = true;
- for (int i = 0; i < 2; i++) {
-   for (;;) {
-     tok.next();
-     if (tok.is_newline() || tok.is_eof()) {
-       // token::description() writes to static, class-wide storage,
-       // so we must allocate a copy of it before issuing the next
-       // diagnostic.
-       char *delimdesc = strdup(delim.description());
-       warning(WARN_DELIM, "missing closing delimiter in output"
-	       " comparison operator; expected %1, got %2",
-	       delimdesc, tok.description());
-       free(delimdesc);
-       tok.next();
-       curenv = oldenv;
-       return false;
-     }
-     if (tok == delim
-         && (want_att_compat
-             || input_stack::get_level() == delim_level))
-       break;
-     tok.process();
-   }
-   curenv = &env2;
- }
- node *n1 = env1.extract_output_line();
- node *n2 = env2.extract_output_line();
- bool result = same_node_list(n1, n2);
- delete_node_list(n1);
- delete_node_list(n2);
- curenv = oldenv;
- have_formattable_input = false;
- suppress_push = false;
- tok.next();
- return result;
+  token delim = tok;
+  int delim_level = input_stack::get_level();
+  environment env1(curenv);
+  environment env2(curenv);
+  environment *oldenv = curenv;
+  curenv = &env1;
+  suppress_push = true;
+  for (int i = 0; i < 2; i++) {
+    for (;;) {
+      tok.next();
+      if (tok.is_newline() || tok.is_eof()) {
+	// token::description() writes to static, class-wide storage,
+	// so we must allocate a copy of it before issuing the next
+	// diagnostic.
+	char *delimdesc = strdup(delim.description());
+	warning(WARN_DELIM, "missing closing delimiter in output"
+		" comparison operator; expected %1, got %2",
+		delimdesc, tok.description());
+	free(delimdesc);
+	tok.next();
+	curenv = oldenv;
+	return false;
+      }
+      if (tok == delim
+	  && (want_att_compat
+	      || input_stack::get_level() == delim_level))
+        break;
+      tok.process();
+    }
+    curenv = &env2;
+  }
+  node *n1 = env1.extract_output_line();
+  node *n2 = env2.extract_output_line();
+  bool result = same_node_list(n1, n2);
+  delete_node_list(n1);
+  delete_node_list(n2);
+  curenv = oldenv;
+  have_formattable_input = false;
+  suppress_push = false;
+  tok.next();
+  return result;
 }
 
 static std::stack<bool> if_else_stack;
