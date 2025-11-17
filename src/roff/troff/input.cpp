@@ -6753,8 +6753,11 @@ static node *do_suppress(symbol nm) // \O
     }
     break;
   default:
-    error("invalid argument '%1' to output suppression escape sequence",
-	  *s);
+    char qc = '\'';
+    if (strchr(s, '\'') != 0 /* nullptr */)
+      qc = '"';
+    error("invalid argument %1%2%3 to output suppression escape"
+	  " sequence", qc, *s, qc);
   }
   return 0 /* nullptr */;
 }
