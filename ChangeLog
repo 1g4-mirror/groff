@@ -1,5 +1,10 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (add_hyphenation_exceptions):
+	Instrument seemingly impossible scenario.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (margin_character): Fix code style
 	nit; explicitly compare value of pointer type to null pointer
 	literal instead of letting it pun down to a Boolean.
