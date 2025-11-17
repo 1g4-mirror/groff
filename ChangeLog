@@ -1,5 +1,12 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (get_line_arg): Trivially refactor.
+	Rename function argument whose type is a pointer to a `charinfo`
+	object from `cp` to `cip` for (slightly more) clarity.  `ci` is
+	almost universally used in the code base for `charinfo` objects.
+
+2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_suppress): Improve diagnostic
 	message when input malformatted; the one we had wasn't clear in
 	the easily anticipated scenario where the user assumes that `\O`

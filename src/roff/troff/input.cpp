@@ -5890,7 +5890,7 @@ static bool read_delimited_number(units *n, unsigned char si)
 }
 
 // \l, \L
-static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
+static bool get_line_arg(units *n, unsigned char si, charinfo **cip)
 {
   token start_token;
   start_token.next();
@@ -5912,7 +5912,7 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cp)
       tok.next();
     if (!(start_token == tok
 	  && input_stack::get_level() == start_level)) {
-      *cp = tok.get_char(true /* required */);
+      *cip = tok.get_char(true /* required */);
       tok.next();
     }
     if (!(start_token == tok
