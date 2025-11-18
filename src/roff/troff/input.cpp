@@ -8537,10 +8537,10 @@ void define_class()
   charinfo *child1 = 0 /* nullptr */, *child2 = 0 /* nullptr */;
   while (!tok.is_newline() && !tok.is_eof()) {
     tok.skip();
-    if (child1 != 0 && tok.ch() == '-') {
+    if ((child1 != 0 /* nullptr */) && (tok.ch() == '-')) {
       tok.next();
       child2 = tok.get_char(true /* required */);
-      if (!child2) {
+      if (0 /* nullptr */ == child2) {
 	warning(WARN_MISSING,
 		"missing end of character range in class '%1'",
 		nm.contents());
@@ -8569,9 +8569,9 @@ void define_class()
 	return;
       }
       ci->add_to_class(u1, u2);
-      child1 = child2 = 0;
+      child1 = child2 = 0 /* nullptr */;
     }
-    else if (child1 != 0) {
+    else if (child1 != 0 /* nullptr */) {
       if (child1->is_class()) {
 	if (ci == child1) {
 	  warning(WARN_SYNTAX, "invalid cyclic class nesting");
@@ -8591,17 +8591,17 @@ void define_class()
 	}
 	ci->add_to_class(u1);
       }
-      child1 = 0;
+      child1 = 0 /* nullptr */;
     }
     child1 = tok.get_char(true /* required */);
     tok.next();
-    if (!child1) {
+    if (0 /* nullptr */ == child1) {
       if (!tok.is_newline())
 	skip_line();
       break;
     }
   }
-  if (child1 != 0) {
+  if (child1 != 0 /* nullptr */) {
     if (child1->is_class()) {
       if (ci == child1) {
 	warning(WARN_SYNTAX, "invalid cyclic class nesting");
@@ -8621,7 +8621,7 @@ void define_class()
       }
       ci->add_to_class(u1);
     }
-    child1 = 0;
+    child1 = 0 /* nullptr */;
   }
   if (!ci->is_class()) {
     warning(WARN_SYNTAX,

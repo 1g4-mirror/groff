@@ -1,5 +1,12 @@
 2025-11-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_class): Fix code style nits.
+	Explicitly compare values of pointer type to null pointer
+	literals instead of letting them pun down to Booleans.  Arrange
+	equality comparison to avoid inadvertent lvalue assignment.
+
+2025-11-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[hpftodit,troff]: Fix code style nit.
 
 	* src/roff/troff/input.cpp (charinfo::dump):
