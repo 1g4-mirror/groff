@@ -1,3 +1,8 @@
+2025-11-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::get_char): Recognize
+	existence of indexed characters in diagnostic messages.
+
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/groff.texi.in (Manipulating Hyphenation):

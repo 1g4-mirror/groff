@@ -8663,9 +8663,10 @@ charinfo *token::get_char(bool required, bool suppress_creation)
   }
   if (required) {
     if (type == TOKEN_EOF || type == TOKEN_NEWLINE)
-      warning(WARN_MISSING, "missing ordinary or special character");
+      warning(WARN_MISSING, "missing ordinary, special, or indexed"
+			    " character");
     else
-      error("expected ordinary or special character, got %1",
+      error("expected ordinary, special, or indexed character, got %1",
 	    description());
   }
   return 0 /* nullptr */;
