@@ -1595,7 +1595,7 @@ static void print_color_request()
   color *value;
   if (has_arg()) {
     do {
-      key = get_name();
+      key = read_identifier();
       value = static_cast<color *>(color_dictionary.lookup(key));
       if (value != 0 /* nullptr */)
 	errprint("%1\t%2\n", key.contents(), value->print_color());
@@ -3009,7 +3009,7 @@ static void diagnose_invalid_identifier()
     error("%1 is not allowed in an identifier", tok.description());
 }
 
-symbol get_name(bool required)
+symbol read_identifier(bool required)
 {
   if (want_att_compat) {
     char buf[3];
@@ -3160,19 +3160,19 @@ void return_macro_request()
 
 void eoi_macro()
 {
-  end_of_input_macro_name = get_name();
+  end_of_input_macro_name = read_identifier();
   skip_line();
 }
 
 void blank_line_macro()
 {
-  blank_line_macro_name = get_name();
+  blank_line_macro_name = read_identifier();
   skip_line();
 }
 
 void leading_spaces_macro()
 {
-  leading_spaces_macro_name = get_name();
+  leading_spaces_macro_name = read_identifier();
   skip_line();
 }
 
@@ -3196,7 +3196,7 @@ void do_request()
   }
   want_att_compat_stack.push(want_att_compat);
   want_att_compat = false;
-  symbol nm = get_name();
+  symbol nm = read_identifier();
   if (nm.is_null())
     skip_line();
   else
@@ -3322,7 +3322,7 @@ void process_input_stack()
 	  do {
 	    tok.next();
 	  } while (tok.is_white_space());
-	  symbol nm = get_name();
+	  symbol nm = read_identifier();
 #if defined(DEBUGGING)
 	  if (want_html_debugging) {
 	    if (!nm.is_null()) {
@@ -4015,9 +4015,8 @@ void print_macro_request()
   symbol s;
   if (has_arg()) {
     do {
-      s = get_name();
+      s = read_identifier();
       if (s.is_null())
-	// get_name() already threw an error.
 	break;
       rm = static_cast<request_or_macro *>(request_dictionary.lookup(s));
       if (rm != 0 /* nullptr */)
@@ -4584,7 +4583,7 @@ dictionary composite_dictionary(17);
 
 static void map_composite_character()
 {
-  symbol from = get_name();
+  symbol from = read_identifier();
   if (from.is_null()) {
     warning(WARN_MISSING, "composite character mapping request expects"
 	    " arguments");
@@ -4605,7 +4604,7 @@ static void map_composite_character()
   const char *from_decomposed = decompose_unicode(from_gn);
   if (from_decomposed != 0 /* nullptr */)
     from_gn = &from_decomposed[1];
-  symbol to = get_name();
+  symbol to = read_identifier();
   if (to.is_null()) {
     composite_dictionary.remove(symbol(from_gn));
     skip_line();
@@ -4806,7 +4805,7 @@ void do_define_string(define_mode mode, comp_mode comp)
   symbol nm;
   node *n = 0 /* nullptr */;
   int c;
-  nm = get_name(true /* required */);
+  nm = read_identifier(true /* required */);
   if (nm.is_null()) {
     skip_line();
     return;
@@ -4816,7 +4815,6 @@ void do_define_string(define_mode mode, comp_mode comp)
   else if (tok.is_tab())
     c = '\t';
   else if (!tok.is_space()) {
-    // get_name() should have thrown a particularized diagnostic
     skip_line();
     return;
   }
@@ -5230,12 +5228,12 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
 {
   symbol nm, term, dot_symbol(".");
   if (calling == CALLING_INDIRECT) {
-    symbol temp1 = get_name(true /* required */);
+    symbol temp1 = read_identifier(true /* required */);
     if (temp1.is_null()) {
       skip_line();
       return;
     }
-    symbol temp2 = get_name();
+    symbol temp2 = read_identifier();
     input_stack::push(make_temp_iterator("\n"));
     if (!temp2.is_null()) {
       interpolate_string(temp2);
@@ -5246,13 +5244,13 @@ void do_define_macro(define_mode mode, calling_mode calling, comp_mode comp)
     tok.next();
   }
   if (mode == DEFINE_NORMAL || mode == DEFINE_APPEND) {
-    nm = get_name(true /* required */);
+    nm = read_identifier(true /* required */);
     if (nm.is_null()) {
       skip_line();
       return;
     }
   }
-  term = get_name();	// the request that terminates the definition
+  term = read_identifier(); // terminating name
   if (term.is_null())
     term = dot_symbol;
   while (!tok.is_newline() && !tok.is_eof())
@@ -5426,7 +5424,7 @@ void remove_macro()
     return;
   }
   for (;;) {
-    symbol s = get_name();
+    symbol s = read_identifier();
     if (s.is_null())
       break;
     request_dictionary.remove(s);
@@ -5441,10 +5439,10 @@ void rename_macro()
     skip_line();
     return;
   }
-  symbol s1 = get_name();
+  symbol s1 = read_identifier();
   assert(s1 != 0 /* nullptr */);
   if (!s1.is_null()) {
-    symbol s2 = get_name();
+    symbol s2 = read_identifier();
     if (s2.is_null())
       warning(WARN_MISSING, "renaming request expects identifier of"
 	      " existing request, macro, string, or diversion as"
@@ -5462,10 +5460,10 @@ void alias_macro()
     skip_line();
     return;
   }
-  symbol s1 = get_name();
+  symbol s1 = read_identifier();
   assert(s1 != 0 /* nullptr */);
   if (!s1.is_null()) {
-    symbol s2 = get_name();
+    symbol s2 = read_identifier();
     if (s2.is_null())
       warning(WARN_MISSING, "name aliasing request expects identifier"
 	      " of existing request, macro, string, or diversion as"
@@ -5485,7 +5483,7 @@ void chop_macro()
     skip_line();
     return;
   }
-  symbol s = get_name();
+  symbol s = read_identifier();
   assert(s != 0 /* nullptr */);
   if (!s.is_null()) {
     request_or_macro *p = lookup_request(s);
@@ -5532,7 +5530,7 @@ enum case_xform_mode { STRING_UPCASE, STRING_DOWNCASE };
 void do_string_case_transform(case_xform_mode mode)
 {
   assert((mode == STRING_DOWNCASE) || (mode == STRING_UPCASE));
-  symbol s = get_name();
+  symbol s = read_identifier();
   assert(s != 0 /* nullptr */);
   if (s.is_null()) {
     skip_line();
@@ -5598,7 +5596,7 @@ void substring_request()
     return;
   }
   int start;			// 0, 1, ..., n-1  or  -1, -2, ...
-  symbol s = get_name();
+  symbol s = read_identifier();
   assert(s != 0 /* nullptr */);
   if (!s.is_null() && get_integer(&start)) {
     request_or_macro *p = lookup_request(s);
@@ -5694,7 +5692,7 @@ void length_request()
     return;
   }
   symbol ret;
-  ret = get_name();
+  ret = read_identifier();
   if (ret.is_null()) {
     // The identifier was garbage, like `a\&b`.
     skip_line();
@@ -5707,7 +5705,6 @@ void length_request()
   else if (tok.is_tab())
     c = '\t';
   else if (!tok.is_space()) {
-    // get_name() should have thrown a particularized diagnostic
     skip_line();
     return;
   }
@@ -5738,7 +5735,7 @@ static void asciify_request()
     skip_line();
     return;
   }
-  symbol s = get_name();
+  symbol s = read_identifier();
   if (!s.is_null()) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
@@ -5774,7 +5771,7 @@ void unformat_macro()
     skip_line();
     return;
   }
-  symbol s = get_name();
+  symbol s = read_identifier();
   if (!s.is_null()) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
@@ -6657,7 +6654,7 @@ static void device_request()
 
 static void device_macro_request()
 {
-  symbol s = get_name(true /* required */);
+  symbol s = read_identifier(true /* required */);
   if (!(s.is_null() || s.is_empty())) {
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
@@ -6970,7 +6967,7 @@ static bool is_conditional_expression_true()
   // Check for GNU troff extended conditional expression operators.
   else if ((c == 'd') || (c == 'r')) {
     tok.next();
-    symbol nm = get_name(true /* required */);
+    symbol nm = read_identifier(true /* required */);
     if (nm.is_null()) {
       skip_branch();
       return false;
@@ -7989,7 +7986,7 @@ static void print_stream_request()
 
 static void open_file(bool appending)
 {
-  symbol stream = get_name(true /* required */);
+  symbol stream = read_identifier(true /* required */);
   if (!stream.is_null()) {
     char *filename = read_rest_of_line_as_argument();
     if (filename != 0 /* nullptr */) {
@@ -8108,7 +8105,7 @@ static void close_request() // .close
     skip_line();
     return;
   }
-  symbol stream = get_name();
+  symbol stream = read_identifier();
   // Testing has_arg() should have ensured this.
   assert(stream != 0 /* nullptr */);
   if (!stream.is_null())
@@ -8120,7 +8117,7 @@ static void close_request() // .close
 
 void do_write_request(int newline)
 {
-  symbol stream = get_name(true /* required */);
+  symbol stream = read_identifier(true /* required */);
   if (stream.is_null()) {
     skip_line();
     return;
@@ -8169,7 +8166,7 @@ void write_request_continue()
 
 void write_macro_request()
 {
-  symbol stream = get_name(true /* required */);
+  symbol stream = read_identifier(true /* required */);
   if (stream.is_null()) {
     skip_line();
     return;
@@ -8182,7 +8179,7 @@ void write_macro_request()
     skip_line();
     return;
   }
-  symbol s = get_name(true /* required */);
+  symbol s = read_identifier(true /* required */);
   if (s.is_null()) {
     skip_line();
     return;
@@ -8529,7 +8526,7 @@ dictionary char_class_dictionary(501);
 static void define_class_request()
 {
   tok.skip();
-  symbol nm = get_name(true /* required */);
+  symbol nm = read_identifier(true /* required */);
   if (nm.is_null()) {
     skip_line();
     return;

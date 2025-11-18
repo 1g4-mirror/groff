@@ -6759,14 +6759,15 @@ static void translate_font()
     skip_line();
     return;
   }
-  symbol from = get_name(true /* required */);
-  assert(!from.is_null()); // has_arg()+get_name() should ensure this
+  symbol from = read_identifier(true /* required */);
+  // has_arg()+read_identifier() should ensure the assertion succeeds.
+  assert(!from.is_null());
   if (is_nonnegative_integer(from.contents())) {
     error("cannot translate a font mounting position");
     skip_line();
     return;
   }
-  symbol to = get_name();
+  symbol to = read_identifier();
   if ((!to.is_null()) && is_nonnegative_integer(to.contents())) {
     error("cannot translate to a font mounting position");
     skip_line();
@@ -6805,7 +6806,7 @@ static void mount_font_at_position()
     if (n < 0)
       error("font mounting position %1 is negative", n);
     else {
-      symbol internal_name = get_name(true /* required */);
+      symbol internal_name = read_identifier(true /* required */);
       if (!internal_name.is_null()) {
 	symbol filename = get_long_name();
 	if (!mount_font(n, internal_name, filename)) {
@@ -6930,7 +6931,7 @@ static void associate_style_with_font_position()
 	warning(WARN_MISSING, "abstract style configuration request"
 		" expects a style name as second argument");
       else {
-	symbol internal_name = get_name(true /* required */);
+	symbol internal_name = read_identifier(true /* required */);
 	if (!internal_name.is_null())
 	  (void) mount_style(n, internal_name);
       }
@@ -6966,7 +6967,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
   int n;
   tok.skip();
   if (tok.is_usable_as_delimiter()) {
-    symbol s = get_name(true /* required */);
+    symbol s = read_identifier(true /* required */);
     finfo->requested_name = const_cast<char *>(s.contents());
     if (!s.is_null()) {
       n = symbol_fontno(s);
@@ -7120,8 +7121,8 @@ static void zoom_font()
     skip_line();
     return;
   }
-  symbol font_name = get_name();
-  // has_arg()+get_name() should ensure the following
+  symbol font_name = read_identifier();
+  // has_arg()+read_identifier() should ensure the assertion succeeds.
   assert(font_name != 0 /* nullptr */);
   if (is_nonnegative_integer(font_name.contents())) {
     warning(WARN_FONT, "cannot set zoom factor of a font mounting"

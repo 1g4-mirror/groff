@@ -1,3 +1,42 @@
+2025-11-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Trivially refactor.  Rename `get_name()` to
+	`read_identifier()`.  Part of the idea here is to use the verb
+	"read" to suggest that the function advances the token pointer
+	through the input stream (and it does).  Another part is to
+	reduce confusion, since the `font_info` and `tfont` classes have
+	an unrelated accessor member function `get_name()`.
+
+	* src/roff/troff/token.h (get_name): Rename declaration from
+	this...
+	(read_identifier): ...to this.
+	* src/roff/troff/input.cpp  (get_name): Rename definition from
+	this...
+	(read_identifier): ...to this.
+	* src/roff/troff/div.cpp (do_divert, when_request)
+	(diversion_trap, change_trap, mark):
+	* src/roff/troff/env.cpp (select_fill_color_request)
+	(select_stroke_color_request, select_font_request)
+	(family_change, do_input_trap, select_hyphenation_language):
+	* src/roff/troff/input.cpp (print_color_request)
+	(diagnose_invalid_identifier, eoi_macro, blank_line_macro)
+	(leading_spaces_macro, do_request, process_input_stack)
+	(print_macro_request, map_composite_character)
+	(do_define_string, do_define_macro, remove_macro, rename_macro)
+	(alias_macro, chop_macro, do_string_case_transform)
+	(substring_request, length_request, asciify_request)
+	(unformat_macro, device_macro_request)
+	(is_conditional_expression_true, open_file, close_request)
+	(write_macro_request, define_class_request):
+	* src/roff/troff/node.cpp (translate_font)
+	(mount_font_at_position, associate_style_with_font_position)
+	(read_font_identifier, zoom_font):
+	* src/roff/troff/reg.cpp (define_register_request)
+	(inline_define_register [0], assign_register_format_request)
+	(remove_register_request, alias_register_request)
+	(rename_register_request, print_register_request): Update call
+	sites.
+
 2025-11-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (length_request): Drop erroneous

@@ -101,7 +101,7 @@ diversion *curdiv;
 void do_divert(bool appending, bool boxing)
 {
   tok.skip();
-  symbol nm = get_name();
+  symbol nm = read_identifier();
   if (nm.is_null()) {
     // Why the asymmetric diagnostic severity?  See Savannah #67139.
     if (!(curdiv->is_box) && boxing)
@@ -768,7 +768,7 @@ void when_request()
 {
   vunits n;
   if (get_vunits(&n, 'v')) {
-    symbol s = get_name();
+    symbol s = read_identifier();
     if (s.is_null())
       topdiv->remove_trap_at(n);
     else
@@ -976,7 +976,7 @@ void diversion_trap()
 {
   vunits n;
   if (has_arg() && get_vunits(&n, 'v')) {
-    symbol s = get_name();
+    symbol s = read_identifier();
     if (!s.is_null())
       curdiv->set_diversion_trap(s, n);
     else
@@ -989,7 +989,7 @@ void diversion_trap()
 
 void change_trap()
 {
-  symbol s = get_name(true /* required */);
+  symbol s = read_identifier(true /* required */);
   if (!s.is_null()) {
     vunits x;
     if (has_arg() && get_vunits(&x, 'v'))
@@ -1008,7 +1008,7 @@ void print_traps()
 
 void mark()
 {
-  symbol s = get_name();
+  symbol s = read_identifier();
   if (s.is_null())
     curdiv->marked_place = curdiv->get_vertical_position();
   else if (curdiv == topdiv)

@@ -1262,7 +1262,7 @@ node *environment::extract_output_line()
 
 static void select_fill_color_request()
 {
-  symbol s = get_name();
+  symbol s = read_identifier();
   if (s.is_null())
     curenv->set_fill_color(curenv->get_prev_fill_color());
   else
@@ -1272,7 +1272,7 @@ static void select_fill_color_request()
 
 static void select_stroke_color_request()
 {
-  symbol s = get_name();
+  symbol s = read_identifier();
   if (s.is_null())
     curenv->set_stroke_color(curenv->get_prev_stroke_color());
   else
@@ -1322,7 +1322,7 @@ void select_font(symbol s)
 
 static void select_font_request()
 {
-  select_font(get_name());
+  select_font(read_identifier());
   skip_line();
 }
 
@@ -1332,7 +1332,7 @@ void family_change()
     skip_line();
     return;
   }
-  symbol s = get_name();
+  symbol s = read_identifier();
   curenv->set_family(s);
   skip_line();
 }
@@ -2783,7 +2783,7 @@ void do_input_trap(bool respect_continuation)
       warning(WARN_RANGE,
 	      "input trap line count must be greater than zero");
     else {
-      symbol s = get_name(true /* required */);
+      symbol s = read_identifier(true /* required */);
       if (!s.is_null()) {
 	curenv->input_trap_count = n;
 	curenv->input_trap = s;
@@ -3751,7 +3751,7 @@ static void select_hyphenation_language()
     skip_line();
     return;
   }
-  symbol nm = get_name();
+  symbol nm = read_identifier();
   if (!nm.is_null()) {
     current_language = static_cast<hyphenation_language *>
       (language_dictionary.lookup(nm));
