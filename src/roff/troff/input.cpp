@@ -8542,7 +8542,7 @@ static void define_class_request()
     tok.skip();
     if ((child1 != 0 /* nullptr */) && (tok.ch() == '-')) {
       tok.next();
-      child2 = tok.get_char(true /* required */);
+      child2 = tok.get_char();
       if (0 /* nullptr */ == child2) {
 	warning(WARN_MISSING,
 		"missing end of character range in class '%1'",

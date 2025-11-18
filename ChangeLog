@@ -1,5 +1,11 @@
 2025-11-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_class_request): Eliminate
+	extraneous diagnostic message.  We already throw a more
+	contextually specific one subsequently.
+
+2025-11-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::get_char): Recognize
 	existence of indexed characters in diagnostic messages.
 
