@@ -5695,8 +5695,8 @@ void length_request()
   }
   symbol ret;
   ret = get_name();
-  assert(ret != 0 /* nullptr */);
   if (ret.is_null()) {
+    // The identifier was garbage, like `a\&b`.
     skip_line();
     return;
   }
