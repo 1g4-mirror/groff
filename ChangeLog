@@ -1,3 +1,10 @@
+2025-11-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (charinfo::set_hyphenation_code): Fix
+	code style nit; explicitly compare value of pointer type to null
+	pointer literal instead of letting it pun down to a Boolean.  In
+	so doing, parenthesize formally complex expression.
+
 2025-11-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Trivially refactor.  Rename `get_name()` to

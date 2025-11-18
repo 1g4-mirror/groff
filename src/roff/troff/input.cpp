@@ -10557,7 +10557,7 @@ void charinfo::set_hyphenation_code(unsigned char c)
 void charinfo::set_translation(charinfo *ci, int tt, int ti)
 {
   translation = ci;
-  if (ci && ti) {
+  if ((ci != 0 /* nullptr */) && ti) {
     if (hyphenation_code != 0U)
       ci->set_hyphenation_code(hyphenation_code);
     if (asciify_code != 0U)
@@ -10610,7 +10610,7 @@ void charinfo::get_flags()
 void charinfo::set_special_translation(int c, int tt)
 {
   special_translation = c;
-  translation = 0;
+  translation = 0 /* nullptr */;
   is_transparently_translatable = tt;
 }
 
