@@ -3935,7 +3935,7 @@ void glyph_node::asciify(macro *m)
 	    break;
 	  default:
 	    m->append_str("\\[u");
-	    const size_t buflen = 6; // five hex digits + '\0'
+	    const size_t buflen = sizeof "10FFFF";
 	    char hexbuf[buflen];
 	    (void) memset(hexbuf, '\0', buflen);
 	    (void) snprintf(hexbuf, buflen, "%.4X", unicode_mapping);
