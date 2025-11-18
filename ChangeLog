@@ -1,3 +1,15 @@
+2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/gropdf/gropdf.pl (Warn): Set exit status to 1, not
+	2, if the scalar `warnexit` (set by the `-W` command-line
+	option) is truthy.
+	(usage): Exit with status 2, not 1, on usage errors.
+	* src/devices/gropdf/gropdf.1.man (Options, Exit status): Update
+	documentation accordingly.
+
+	Fixes <https://savannah.gnu.org/bugs/?67612>.  Thanks to Dave
+	Kemper for the report and to him and Deri for the code review.
+
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Slightly refactor.
