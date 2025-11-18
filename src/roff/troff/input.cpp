@@ -8526,7 +8526,7 @@ void hyphenation_patterns_file_code()
 
 dictionary char_class_dictionary(501);
 
-void define_class()
+static void define_class_request()
 {
   tok.skip();
   symbol nm = get_name(true /* required */);
@@ -9885,7 +9885,7 @@ void init_input_requests()
   init_request("cflags", set_character_flags_request);
   init_request("char", define_character_request);
   init_request("chop", chop_macro);
-  init_request("class", define_class);
+  init_request("class", define_class_request);
   init_request("close", close_request);
   init_request("color", activate_color);
   init_request("composite", map_composite_character);
