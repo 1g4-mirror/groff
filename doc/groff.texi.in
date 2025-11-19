@@ -19465,7 +19465,9 @@ issues at most one warning for each.
 @item tab
 @itemx 2048
 @cindex @code{\t}, and warnings
-A tab character was encountered where a number was expected, or appeared
+A tab character appeared
+in a parameterized escape sequence
+or
 in an unquoted macro argument.
 
 @c @item right-brace
