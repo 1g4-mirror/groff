@@ -179,7 +179,7 @@
 2025-11-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (length_request): Drop erroneous
-	assertion, while failed and cored on `.length \&`.
+	assertion that failed and cored on `.length \&`.
 
 2025-11-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
