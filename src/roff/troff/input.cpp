@@ -8538,8 +8538,12 @@ static void define_class_request()
   macro *m = new macro;
   (void) ci->set_macro(m);
   charinfo *child1 = 0 /* nullptr */, *child2 = 0 /* nullptr */;
+  bool just_chained_a_range_expression = false;
   while (!tok.is_newline() && !tok.is_eof()) {
     tok.skip();
+    // Chained range expressions like
+    //   \[u3041]-\[u3096]-\[u30FF]
+    // are not valid.
     if ((child1 != 0 /* nullptr */) && (tok.ch() == '-')) {
       tok.next();
       child2 = tok.get_char();
@@ -8573,6 +8577,7 @@ static void define_class_request()
       }
       ci->add_to_class(u1, u2);
       child1 = child2 = 0 /* nullptr */;
+      just_chained_a_range_expression = true;
     }
     else if (child1 != 0 /* nullptr */) {
       if (child1->is_class()) {
@@ -8602,6 +8607,12 @@ static void define_class_request()
       if (!tok.is_newline())
 	skip_line();
       break;
+    }
+    if (just_chained_a_range_expression) {
+      // Throw away `child1` so we don't duplicatively add the second
+      // end point of a range as a singleton.  See Savannah #67718.
+      child1 = 0 /* nullptr */;
+      just_chained_a_range_expression = false;
     }
   }
   if (child1 != 0 /* nullptr */) {

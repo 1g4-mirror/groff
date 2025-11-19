@@ -1,3 +1,12 @@
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (define_class_request): Stop adding
+	the second end point of a character code range (to a character
+	class) duplicatively as a singleton, preventing redundant
+	population of the range.
+
+	Fixes <https://savannah.gnu.org/bugs/?67718>.
+
 2025-11-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (define_class_request): Eliminate
