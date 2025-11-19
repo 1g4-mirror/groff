@@ -205,8 +205,8 @@
 	* src/roff/troff/node.cpp (glyph_node::asciify):
 	* src/utils/hpftodit/hpftodit.cpp (unicode_to_ucode_name): Make
 	the compiler do the work of computing sufficiently large static
-	buffer sizes (for C strings), and so doing express the maximal
-	expected output to that buffer.
+	buffer sizes (for C strings), and in so doing express the
+	maximal expected output to that buffer.
 
 2025-11-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
