@@ -28,10 +28,10 @@
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_suppress): Improve diagnostic
-	message when input malformatted; the one we had wasn't clear in
-	the easily anticipated scenario where the user assumes that `\O`
-	is a delimited escape sequence (it isn't) and selects "'" as
-	the "delimiter".
+	message when input malfored; the one we had wasn't clear in the
+	easily anticipated scenario where the user assumes that `\O` is
+	a delimited escape sequence (it isn't) and selects "'" as the
+	"delimiter".
 
 2025-11-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
