@@ -1,3 +1,9 @@
+2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (print_character_request)
+	(remove_character): Simplify logic.  `token::description()`
+	describes indexed characters adequately.
+
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (add_hyphenation_exceptions): Fix code

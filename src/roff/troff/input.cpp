@@ -5025,19 +5025,10 @@ static void print_character_request()
 	    " classes as arguments; got %1", tok.description());
       break;
     }
-    if (0 /* nullptr */ == ci) {
-      if (!tok.is_indexed_character())
-	warning(WARN_CHAR, "%1 is not defined", tok.description());
-      else
-	warning(WARN_CHAR, "character with index %1 in the current font"
-		" is not defined", tok.character_index());
-    }
+    if (0 /* nullptr */ == ci)
+      warning(WARN_CHAR, "%1 is not defined", tok.description());
     else {
-      if (tok.is_indexed_character())
-	errprint("character indexed %1 in current font\n",
-		 tok.character_index());
-      else
-	errprint("%1\n", tok.description());
+      errprint("%1\n", tok.description());
       fflush(stderr);
       ci->dump();
     }
@@ -5059,13 +5050,8 @@ static void remove_character()
       if (tok.is_character()) {
 	charinfo *ci = tok.get_charinfo(true /* required */,
 					true /* suppress creation */);
-	if (0 /* nullptr */ == ci) {
-	  if (!tok.is_indexed_character())
-	    warning(WARN_CHAR, "%1 is not defined", tok.description());
-	  else
-	    warning(WARN_CHAR, "character with index %1 in the current"
-		    " font is not defined", tok.character_index());
-	}
+	if (0 /* nullptr */ == ci)
+	   warning(WARN_CHAR, "%1 is not defined", tok.description());
 	else {
 	  macro *m = ci->set_macro(0 /* nullptr */);
 	  if (m != 0 /* nullptr */)
