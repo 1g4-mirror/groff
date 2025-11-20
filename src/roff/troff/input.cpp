@@ -6455,7 +6455,8 @@ static void encode_special_character_for_device_output(macro *mac)
   const char *sc;
   if (font::use_charnames_in_special) {
     charinfo *ci = tok.get_charinfo(true /* required */);
-    sc = ci->get_symbol()->contents();
+    if (ci != 0 /* nullptr */)
+	sc = ci->get_symbol()->contents();
   }
   else
     sc = tok.get_charinfo(true /* required */)->get_symbol()

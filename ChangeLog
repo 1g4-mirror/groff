@@ -1,5 +1,10 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (encode_character_for_device_output):
+	Avoid null pointer dereference.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (get_line_arg): Add assertion.
 
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
