@@ -8788,6 +8788,7 @@ void token::process()
 				      curenv->get_fill_color()));
     break;
   case TOKEN_CHAR:
+    // Optimize `curenv->add_char(get_charinfo())` for token type.
     curenv->add_char(charset_table[c]);
     break;
   case TOKEN_DUMMY:
@@ -8834,6 +8835,7 @@ void token::process()
     nd = 0;
     break;
   case TOKEN_INDEXED_CHAR:
+    // Optimize `curenv->add_char(get_charinfo())` for token type.
     curenv->add_char(get_charinfo_by_index(val));
     break;
   case TOKEN_REQUEST:
@@ -8845,6 +8847,7 @@ void token::process()
     curenv->space();
     break;
   case TOKEN_SPECIAL_CHAR:
+    // Optimize `curenv->add_char(get_charinfo())` for token type.
     curenv->add_char(lookup_charinfo(nm));
     break;
   case TOKEN_SPREAD:
