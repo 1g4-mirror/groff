@@ -2650,11 +2650,17 @@ void token::next()
 	    nd = new zero_width_node(nd);
 	  else {
 	    charinfo *ci = get_charinfo(true /* required */);
-	    if (0 /* nullptr */ == ci)
+	    if (0 /* nullptr */ == ci) {
+	      assert(0 == "attempted to use token without charinfo in"
+		     " zero-width escape sequence");
 	      break;
+	    }
 	    node *gn = curenv->make_char_node(ci);
-	    if (0 /* nullptr */ == gn)
+	    if (0 /* nullptr */ == gn) {
+	      assert("make_char_node failed to create a character"
+		     " node");
 	      break;
+	    }
 	    nd = new zero_width_node(gn);
 	    type = TOKEN_NODE;
 	  }
