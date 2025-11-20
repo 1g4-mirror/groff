@@ -4909,6 +4909,7 @@ void define_character(char_mode mode, const char *font_name)
     skip_line();
     return;
   }
+  // TODO: If `ci` is already a character class, clobber it.
   if (font_name != 0 /* nullptr */) {
     string s(font_name);
     s += ' ';
