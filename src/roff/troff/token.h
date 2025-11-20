@@ -81,6 +81,7 @@ public:
   void next();
   void process();
   void skip_spaces();
+  void diagnose_non_character();
   int nspaces();		// is_space() as integer
   bool is_eof();
   bool is_space();
@@ -126,7 +127,6 @@ extern symbol read_identifier(bool /* required */ = false);
 extern symbol get_long_name(bool /* required */ = false);
 extern charinfo *read_character(); // TODO?: bool /* required */ = false
 extern char *read_rest_of_line_as_argument();
-extern void check_missing_character();
 extern void skip_line();
 extern void handle_initial_title();
 

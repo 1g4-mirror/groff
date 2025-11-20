@@ -2015,6 +2015,29 @@ void token::skip_spaces()
     next();
 }
 
+void token::diagnose_non_character()
+{
+  // TODO: What about
+  //   is_space()
+  //   is_stretchable_space()
+  //   is_unstrechable_space()
+  //   is_horizontal_space()
+  //   is_white_space()
+  //   is_leader()
+  //   is_backspace()
+  //   is_dummy()
+  //   is_transparent()
+  //   is_transparent_dummy()
+  //   is_left_brace()
+  //   is_page_ejector()
+  //   is_hyphen_indicator()
+  //   is_zero_width_break()
+  // ?
+  if (!is_newline() && !is_eof() && !is_right_brace() && !is_tab())
+    error("expected ordinary, special, or indexed character, got %1;"
+	  " ignoring", description());
+}
+
 // Indicate whether an argument lies ahead on the current line in the
 // input stream, skipping over spaces.  This function is therefore not
 // appropriate for use when handling requests or escape sequences that
@@ -8688,18 +8711,10 @@ charinfo *read_character(/* TODO?: bool required */)
   charinfo *ci = tok.get_charinfo();
   // TODO?: if (required && (0 /* nullptr */ == ci))
   if (0 /* nullptr */ == ci)
-    check_missing_character();
+    tok.diagnose_non_character();
   else
     tok.next();
   return ci;
-}
-
-void check_missing_character()
-{
-  if (!tok.is_newline() && !tok.is_eof() && !tok.is_right_brace()
-      && !tok.is_tab())
-    error("expected ordinary, special, or indexed character, got %1;"
-	  " ignoring", tok.description());
 }
 
 // this is for \Z

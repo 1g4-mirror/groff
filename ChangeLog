@@ -1,5 +1,21 @@
 2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Slightly refactor.  Make the global function
+	`check_missing_character()` a member function of the `token`
+	class since it operates only on token objects and can be more
+	economically expressed that way.  Rename it.
+
+	* src/roff/troff/token.h: Drop `extern` declaration of global
+	`check_missing_character()`.
+	(class token): Declare new member function.
+	* src/roff/troff/input.cpp (check_missing_character): Relocate
+	from here...
+	(token::diagnose_non_character): ...to here, renaming.
+	* src/roff/troff/env.cpp (margin_character):
+	* src/roff/troff/input.cpp (read_character): Update call sites.
+
+2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (define_character)
 	(check_missing_character): Revise wording of error diagnostics
 	to mention indexed characters alongside ordinary and special

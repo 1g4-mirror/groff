@@ -1676,7 +1676,7 @@ void margin_character()
   tok.skip_spaces();
   charinfo *ci = tok.get_charinfo();
   if (0 /* nullptr */ == ci) { // no argument
-    check_missing_character();
+    tok.diagnose_non_character();
     curenv->margin_character_flags &= ~environment::MC_ON;
     if (curenv->margin_character_flags == 0U) {
       delete curenv->margin_character_node;
