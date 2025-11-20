@@ -1673,7 +1673,7 @@ void underline()
 
 void margin_character()
 {
-  tok.skip();
+  tok.skip_spaces();
   charinfo *ci = tok.get_charinfo();
   if (ci != 0 /* nullptr */) {
     // Call tok.next() only after making the node so that
@@ -3772,7 +3772,7 @@ void environment_copy()
     return;
   }
   environment *e = 0 /* nullptr */;
-  tok.skip();
+  tok.skip_spaces();
   symbol nm = get_long_name();
   assert(nm != 0 /* nullptr */);
   e = static_cast<environment *>(env_dictionary.lookup(nm));

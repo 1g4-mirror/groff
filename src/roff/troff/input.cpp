@@ -2009,7 +2009,7 @@ void token::operator=(const token &t)
   type = t.type;
 }
 
-void token::skip()
+void token::skip_spaces()
 {
   while (is_space())
     next();
@@ -2041,7 +2041,7 @@ bool has_arg(bool want_peek)
     return !(('\n' == c) || (EOF == c));
   }
   else {
-    tok.skip();
+    tok.skip_spaces();
     return !(tok.is_newline() || tok.is_eof());
   }
 }
@@ -3014,7 +3014,7 @@ symbol read_identifier(bool required)
 {
   if (want_att_compat) {
     char buf[3];
-    tok.skip();
+    tok.skip_spaces();
     if ((buf[0] = tok.ch()) != 0) {
       tok.next();
       if ((buf[1] = tok.ch()) != 0) {
@@ -3041,7 +3041,7 @@ symbol get_long_name(bool required)
 
 static symbol do_get_long_name(bool required, char end_char)
 {
-  tok.skip();
+  tok.skip_spaces();
   int buf_size = default_buffer_size;
   char *buf = 0 /* nullptr */;
   try {
@@ -4901,7 +4901,7 @@ static const char *character_mode_description(char_mode mode)
 void define_character(char_mode mode, const char *font_name)
 {
   const char *modestr = character_mode_description(mode);
-  tok.skip();
+  tok.skip_spaces();
   charinfo *ci = tok.get_charinfo(true /* required */);
   if (0 /* nullptr */ == ci) {
     skip_line();
@@ -4994,7 +4994,7 @@ static void print_character_request()
   }
   charinfo *ci;
   do {
-    tok.skip();
+    tok.skip_spaces();
     ci = tok.get_charinfo(false /* required */,
 			  true /* suppress creation */);
     if (!tok.is_character()) {
@@ -6159,7 +6159,7 @@ static void do_register() // \R
   symbol nm = get_long_name(true /* required */);
   if (nm.is_null())
     return;
-  tok.skip();
+  tok.skip_spaces();
   reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
   int prev_value;
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
@@ -6865,7 +6865,7 @@ static void take_branch()
 
 static void nop_request()
 {
-  tok.skip();
+  tok.skip_spaces();
 }
 
 // Perform a (formatted) output comparison operation, as found in
@@ -6922,7 +6922,7 @@ static bool is_conditional_expression_true()
 {
   bool perform_output_comparison = false;
   bool want_test_sense_inverted = false;
-  tok.skip();
+  tok.skip_spaces();
   while (tok.ch() == '!') {
     tok.next();
     want_test_sense_inverted = !want_test_sense_inverted;
@@ -6988,7 +6988,7 @@ static bool is_conditional_expression_true()
   }
   else if (c == 'c') {
     tok.next();
-    tok.skip();
+    tok.skip_spaces();
     charinfo *ci = tok.get_charinfo(true /* required */);
     if (ci == 0 /* nullptr */) {
       skip_branch();
@@ -8295,7 +8295,7 @@ static void init_hpf_code_table()
 
 static void do_translate(bool transparently, bool as_input)
 {
-  tok.skip();
+  tok.skip_spaces();
   while (!tok.is_newline() && !tok.is_eof()) {
     if (tok.is_space()) {
       // This is a really bizarre troff feature.
@@ -8479,7 +8479,7 @@ static void set_hyphenation_codes()
 	&& cidst->get_translation()->is_translatable_as_input())
       cidst->get_translation()->set_hyphenation_code(new_code);
     tok.next();
-    tok.skip();
+    tok.skip_spaces();
   }
   skip_line();
 }
@@ -8503,7 +8503,7 @@ void hyphenation_patterns_file_code()
       }
       if (read_integer(&n2) && ((0 <= n2) && (n2 <= 255))) {
 	hpf_code_table[n1] = n2;
-	tok.skip();
+	tok.skip_spaces();
       }
       else {
 	error("output hyphenation code must be integer in the range 0..255");
@@ -8522,7 +8522,7 @@ dictionary char_class_dictionary(501);
 
 static void define_class_request()
 {
-  tok.skip();
+  tok.skip_spaces();
   symbol nm = read_identifier(true /* required */);
   if (nm.is_null()) {
     skip_line();
@@ -8536,7 +8536,7 @@ static void define_class_request()
   charinfo *child1 = 0 /* nullptr */, *child2 = 0 /* nullptr */;
   bool just_chained_a_range_expression = false;
   while (!tok.is_newline() && !tok.is_eof()) {
-    tok.skip();
+    tok.skip_spaces();
     // Chained range expressions like
     //   \[u3041]-\[u3096]-\[u30FF]
     // are not valid.
@@ -8681,7 +8681,7 @@ charinfo *token::get_charinfo(bool required, bool suppress_creation)
 
 charinfo *read_character(/* TODO?: bool required */)
 {
-  tok.skip();
+  tok.skip_spaces();
   charinfo *ci = tok.get_charinfo();
   // TODO?: if (required && (0 /* nullptr */ == ci))
   if (0 /* nullptr */ == ci)
@@ -10151,7 +10151,7 @@ static node *read_drawing_command() // \D
 	  break;
 	}
 	++npoints;
-	tok.skip();
+	tok.skip_spaces();
 	point[i].v = V0;
 	if (tok == start_token) {
 	  no_last_v = true;
@@ -10161,7 +10161,7 @@ static node *read_drawing_command() // \D
 	  had_error = false;
 	  break;
 	}
-	tok.skip();
+	tok.skip_spaces();
       }
       while (tok != start_token && !tok.is_newline() && !tok.is_eof())
 	tok.next();

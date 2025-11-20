@@ -6965,7 +6965,7 @@ bool is_valid_font_mounting_position(int n)
 static bool read_font_identifier(font_lookup_info *finfo)
 {
   int n;
-  tok.skip();
+  tok.skip_spaces();
   if (tok.is_usable_as_delimiter()) {
     symbol s = read_identifier(true /* required */);
     finfo->requested_name = const_cast<char *>(s.contents());

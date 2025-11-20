@@ -80,7 +80,7 @@ public:
   void operator=(const token &);
   void next();
   void process();
-  void skip();
+  void skip_spaces();
   int nspaces();		// is_space() as integer
   bool is_eof();
   bool is_space();

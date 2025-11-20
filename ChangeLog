@@ -1,5 +1,30 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename `skip()` member function of
+	`token` class to `skip_spaces()` so that it is obvious at all of
+	its (many) call sites what, exactly, it's doing with the input
+	stream.
+
+	* src/roff/troff/token.h (class token): Rename declaration.
+	* src/roff/troff/input.cpp (token::skip): Rename definition from
+	this...
+	(token::skip_spaces): ...to this.
+	* src/roff/troff/div.cpp (do_divert):
+	* src/roff/troff/env.cpp (margin_character, environment_copy):
+	* src/roff/troff/input.cpp (has_arg, read_identifier)
+	(do_get_long_name, define_character, print_character_request)
+	(do_register, nop_request, is_conditional_expression_true)
+	(do_translate, set_hyphenation_codes)
+	(hyphenation_patterns_file_code, define_class_request)
+	(read_character, read_drawing_command):
+	* src/roff/troff/node.cpp (read_font_identifier):
+	* src/roff/troff/number.cpp (is_valid_expression)
+	(is_valid_term):
+	* src/roff/troff/reg.cpp (assign_register_format_request):
+	Update call sites.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (margin_character):
 	* src/roff/troff/input.cpp (has_arg, get_long_name)
 	(print_character_request, do_register, nop_request)
