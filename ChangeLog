@@ -1,5 +1,19 @@
 2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (remove_font_specific_character): Add
+	null pointer check on `charinfo` object returned by
+	`get_charinfo()` on token (a character to be removed as a
+	font-specific fallback, which need not already exist).  If null,
+	break from the loop just as is already done when the lookup on
+	the same character as a font-specific character takes place.
+	{Font-specific fallback characters are implemented sneakily by
+	injecting spaces into their identifiers, making them otherwise
+	invalid.  Where `A`, `\[em]` or `\N'45'` are non-font-specific
+	characters (be they fallbacks or not), `TR \[em]` is a fallback
+	for `\[em]` specific to the font named `TR`.}
+
+2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (print_character_request): Slightly
 	refactor; delay gathering of the current token's `charinfo`
 	until we absolutely need it.

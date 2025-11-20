@@ -7050,12 +7050,14 @@ static void remove_font_specific_character()
     while (!tok.is_newline() && !tok.is_eof()) {
       if (!tok.is_space() && !tok.is_tab()) {
 	charinfo *s = tok.get_charinfo(true /* required */);
+	if (0 /* nullptr */ == s)
+	  break;
 	string gl(f.contents());
 	gl += ' ';
 	gl += s->nm.contents();
 	gl += '\0';
 	charinfo *ci = lookup_charinfo(symbol(gl.contents()));
-	if (!ci)
+	if (0 /* nullptr */ == ci)
 	  break;
 	macro *m = ci->set_macro(0 /* nullptr */);
 	if (m != 0 /* nullptr */)

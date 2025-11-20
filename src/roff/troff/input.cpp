@@ -6999,7 +6999,7 @@ static bool is_conditional_expression_true()
     tok.next();
     tok.skip_spaces();
     charinfo *ci = tok.get_charinfo(true /* required */);
-    if (ci == 0 /* nullptr */) {
+    if (0 == ci /* nullptr */) {
       skip_branch();
       return false;
     }
