@@ -6265,6 +6265,7 @@ void read_title_parts(node **part, hunits *part_width)
 	break;
       }
       if ((page_character != 0 /* nullptr */)
+	  && (tok.get_charinfo() != 0 /* nullptr */)
 	  && (tok.get_charinfo() == page_character))
 	interpolate_register(percent_symbol, 0);
       else
