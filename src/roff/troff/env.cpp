@@ -1675,7 +1675,15 @@ void margin_character()
 {
   tok.skip_spaces();
   charinfo *ci = tok.get_charinfo();
-  if (ci != 0 /* nullptr */) {
+  if (0 /* nullptr */ == ci) { // no argument
+    check_missing_character();
+    curenv->margin_character_flags &= ~environment::MC_ON;
+    if (curenv->margin_character_flags == 0U) {
+      delete curenv->margin_character_node;
+      curenv->margin_character_node = 0 /* nullptr */;
+    }
+  }
+  else {
     // Call tok.next() only after making the node so that
     // .mc \s+9\(br\s0 works.
     node *nd = curenv->make_char_node(ci);
@@ -1688,14 +1696,6 @@ void margin_character()
       hunits d;
       if (has_arg() && get_hunits(&d, 'm'))
 	curenv->margin_character_distance = d;
-    }
-  }
-  else {
-    check_missing_character();
-    curenv->margin_character_flags &= ~environment::MC_ON;
-    if (curenv->margin_character_flags == 0U) {
-      delete curenv->margin_character_node;
-      curenv->margin_character_node = 0 /* nullptr */;
     }
   }
   skip_line();
