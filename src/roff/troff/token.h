@@ -188,7 +188,7 @@ inline bool token::is_special_character()
 
 inline int token::nspaces()
 {
-  return (int)(type == TOKEN_SPACE);
+  return int(type == TOKEN_SPACE);
 }
 
 inline bool token::is_white_space()

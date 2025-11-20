@@ -1,5 +1,10 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/token.h (token::nspaces): Fix code style nit.
+	Replace C-style type cast with value construction.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename `skip()` member function of
 	`token` class to `skip_spaces()` so that it is obvious at all of
 	its (many) call sites what, exactly, it's doing with the input
