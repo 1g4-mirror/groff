@@ -1667,7 +1667,13 @@ node *do_overstrike() // \o
     }
     else {
       charinfo *ci = tok.get_charinfo(true /* required */);
-      if (ci != 0 /* nullptr */) {
+      if (0 /* nullptr */ == ci) {
+	assert(0 == "attempted to use token without charinfo in"
+	       " overstrike escape sequence");
+	delete osnode;
+	return 0 /* nullptr */;
+      }
+      else {
 	node *n = curenv->make_char_node(ci);
 	if (n != 0 /* nullptr */)
 	  osnode->overstrike(n);
