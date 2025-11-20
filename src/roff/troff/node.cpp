@@ -7049,7 +7049,7 @@ static void remove_font_specific_character()
     symbol f = font_table[finfo.position]->get_name();
     while (!tok.is_newline() && !tok.is_eof()) {
       if (!tok.is_space() && !tok.is_tab()) {
-	charinfo *s = tok.get_char(true /* required */);
+	charinfo *s = tok.get_charinfo(true /* required */);
 	string gl(f.contents());
 	gl += ' ';
 	gl += s->nm.contents();

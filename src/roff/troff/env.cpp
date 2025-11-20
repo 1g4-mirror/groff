@@ -1675,7 +1675,7 @@ void margin_character()
 {
   while (tok.is_space())
     tok.next();
-  charinfo *ci = tok.get_char();
+  charinfo *ci = tok.get_charinfo();
   if (ci != 0 /* nullptr */) {
     // Call tok.next() only after making the node so that
     // .mc \s+9\(br\s0 works.
@@ -3848,7 +3848,7 @@ static void add_hyphenation_exceptions()
     int npos = 0;
     while (i < WORD_MAX && !tok.is_space() && !tok.is_newline()
 	   && !tok.is_eof()) {
-      charinfo *ci = tok.get_char(true /* required */);
+      charinfo *ci = tok.get_charinfo(true /* required */);
       if (0 /* nullptr */ == ci) {
 	error("%1 has no associated character information(!)",
 	      tok.description());

@@ -1666,7 +1666,7 @@ node *do_overstrike() // \o
       osnode->overstrike(n);
     }
     else {
-      charinfo *ci = tok.get_char(true /* required */);
+      charinfo *ci = tok.get_charinfo(true /* required */);
       if (ci != 0 /* nullptr */) {
 	node *n = curenv->make_char_node(ci);
 	if (n != 0 /* nullptr */)
@@ -1719,7 +1719,7 @@ static node *do_bracket() // \b
     if (tok == start_token
 	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
-    charinfo *ci = tok.get_char(true /* required */);
+    charinfo *ci = tok.get_charinfo(true /* required */);
     if (ci != 0 /* nullptr */) {
       node *n = curenv->make_char_node(ci);
       if (n != 0 /* nullptr */)
@@ -2615,7 +2615,7 @@ void token::next()
 	  if (type == TOKEN_NODE || type == TOKEN_HORIZONTAL_SPACE)
 	    nd = new zero_width_node(nd);
 	  else {
-	    charinfo *ci = get_char(true /* required */);
+	    charinfo *ci = get_charinfo(true /* required */);
 	    if (0 /* nullptr */ == ci)
 	      break;
 	    node *gn = curenv->make_char_node(ci);
@@ -2922,7 +2922,7 @@ const char *token::description()
       // character or character class names.  Do something about that.
       // (The truncation is visually indicated by the absence of a
       // closing quotation mark.)
-      if (tok.get_char()->is_class())
+      if (tok.get_charinfo()->is_class())
 	(void) snprintf(buf, maxstr, "character class %c%s%c", qc, sc,
 			qc);
       else
@@ -4903,7 +4903,7 @@ void define_character(char_mode mode, const char *font_name)
 {
   const char *modestr = character_mode_description(mode);
   tok.skip();
-  charinfo *ci = tok.get_char(true /* required */);
+  charinfo *ci = tok.get_charinfo(true /* required */);
   if (0 /* nullptr */ == ci) {
     skip_line();
     return;
@@ -4996,8 +4996,8 @@ static void print_character_request()
   do {
     while (tok.is_space())
       tok.next();
-    ci = tok.get_char(false /* required */,
-		      true /* suppress creation */);
+    ci = tok.get_charinfo(false /* required */,
+			  true /* suppress creation */);
     if (!tok.is_character()) {
       error("character report request expects characters or character"
 	    " classes as arguments; got %1", tok.description());
@@ -5036,8 +5036,8 @@ static void remove_character()
   while (!tok.is_newline() && !tok.is_eof()) {
     if (!tok.is_space() && !tok.is_tab()) {
       if (tok.is_character()) {
-	charinfo *ci = tok.get_char(true /* required */,
-				    true /* suppress creation */);
+	charinfo *ci = tok.get_charinfo(true /* required */,
+					true /* suppress creation */);
 	if (0 /* nullptr */ == ci) {
 	  if (!tok.is_indexed_character())
 	    warning(WARN_CHAR, "%1 is not defined", tok.description());
@@ -5913,7 +5913,7 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cip)
       tok.next();
     if (!(start_token == tok
 	  && input_stack::get_level() == start_level)) {
-      *cip = tok.get_char(true /* required */);
+      *cip = tok.get_charinfo(true /* required */);
       tok.next();
     }
     if (!(start_token == tok
@@ -6267,7 +6267,7 @@ void read_title_parts(node **part, hunits *part_width)
 	break;
       }
       if ((page_character != 0 /* nullptr */)
-	  && (tok.get_char() == page_character))
+	  && (tok.get_charinfo() == page_character))
 	interpolate_register(percent_symbol, 0);
       else
 	tok.process();
@@ -6456,11 +6456,12 @@ static void encode_special_character_for_device_output(macro *mac)
 {
   const char *sc;
   if (font::use_charnames_in_special) {
-    charinfo *ci = tok.get_char(true /* required */);
+    charinfo *ci = tok.get_charinfo(true /* required */);
     sc = ci->get_symbol()->contents();
   }
   else
-    sc = tok.get_char(true /* required */)->get_symbol()->contents();
+    sc = tok.get_charinfo(true /* required */)->get_symbol()
+      ->contents();
   map_special_character_for_device_output(mac, sc);
 }
 
@@ -6993,7 +6994,7 @@ static bool is_conditional_expression_true()
   else if (c == 'c') {
     tok.next();
     tok.skip();
-    charinfo *ci = tok.get_char(true /* required */);
+    charinfo *ci = tok.get_charinfo(true /* required */);
     if (ci == 0 /* nullptr */) {
       skip_branch();
       return false;
@@ -8311,7 +8312,7 @@ static void do_translate(bool transparently, bool as_input)
       tok.next();
       continue;
     }
-    charinfo *ci1 = tok.get_char(true /* required */);
+    charinfo *ci1 = tok.get_charinfo(true /* required */);
     if (0 /* nullptr */ == ci1)
       break;
     tok.next();
@@ -8333,7 +8334,7 @@ static void do_translate(bool transparently, bool as_input)
       ci1->set_special_translation(charinfo::TRANSLATE_HYPHEN_INDICATOR,
 				   transparently);
     else {
-      charinfo *ci2 = tok.get_char(true /* required */);
+      charinfo *ci2 = tok.get_charinfo(true /* required */);
       if (0 /* nullptr */ == ci2)
 	break;
       if (ci1 == ci2)
@@ -8413,7 +8414,7 @@ static void set_character_flags_request()
       return;
     }
     while (has_arg()) {
-      charinfo *ci = tok.get_char(true /* required */);
+      charinfo *ci = tok.get_charinfo(true /* required */);
       if (ci != 0 /* nullptr */) {
 	charinfo *tem = ci->get_translation();
 	if (tem != 0 /* nullptr */)
@@ -8440,7 +8441,7 @@ static void set_hyphenation_codes()
       error("cannot apply a hyphenation code to a numeral");
       break;
     }
-    charinfo *cidst = tok.get_char();
+    charinfo *cidst = tok.get_charinfo();
     if ('\0' == cdst) {
       if (0 /* nullptr */ == cidst) {
 	error("expected ordinary, special, or indexed character,"
@@ -8459,7 +8460,7 @@ static void set_hyphenation_codes()
       break;
     }
     unsigned char new_code = 0U;
-    charinfo *cisrc = tok.get_char();
+    charinfo *cisrc = tok.get_charinfo();
     if (cisrc != 0 /* nullptr */)
       // Common case: assign destination character the hyphenation code
       // of the source character.
@@ -8546,7 +8547,7 @@ static void define_class_request()
     // are not valid.
     if ((child1 != 0 /* nullptr */) && (tok.ch() == '-')) {
       tok.next();
-      child2 = tok.get_char();
+      child2 = tok.get_charinfo();
       if (0 /* nullptr */ == child2) {
 	warning(WARN_MISSING,
 		"missing end of character range in class '%1'",
@@ -8601,7 +8602,7 @@ static void define_class_request()
       }
       child1 = 0 /* nullptr */;
     }
-    child1 = tok.get_char(true /* required */);
+    child1 = tok.get_charinfo(true /* required */);
     tok.next();
     if (0 /* nullptr */ == child1) {
       if (!tok.is_newline())
@@ -8652,7 +8653,7 @@ static void define_class_request()
 static charinfo *get_charinfo_by_index(int n,
 				       bool suppress_creation = false);
 
-charinfo *token::get_char(bool required, bool suppress_creation)
+charinfo *token::get_charinfo(bool required, bool suppress_creation)
 {
   if (type == TOKEN_CHAR)
     return charset_table[c];
@@ -8687,7 +8688,7 @@ charinfo *read_character(/* TODO?: bool required */)
 {
   while (tok.is_space())
     tok.next();
-  charinfo *ci = tok.get_char();
+  charinfo *ci = tok.get_charinfo();
   // TODO?: if (required && (0 /* nullptr */ == ci))
   if (0 /* nullptr */ == ci)
     check_missing_character();

@@ -1,5 +1,27 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename `get_char()` member
+	function of `token` class to `get_charinfo()` to clearly
+	communicate the data type to which it returns a pointer.
+
+	* src/roff/troff/token.h (class token): Rename declaration.
+	* src/roff/troff/input.cpp (token::get_char): Rename definition
+	from this...
+	(token::get_charinfo): ...to this.
+	* src/roff/troff/env.cpp (margin_character)
+	(add_hyphenation_exceptions):
+	* src/roff/troff/input.cpp (do_overstrike, do_bracket)
+	(token::next, token::description, define_character)
+	(print_character_request, remove_character, get_line_arg)
+	(read_title_parts, encode_special_character_for_device_output)
+	(is_conditional_expression_true, do_translate)
+	(set_character_flags_request, set_hyphenation_codes)
+	(define_class_request, read_character):
+	* src/roff/troff/node.cpp (remove_font_specific_character):
+	Update call sites.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename `get_charinfo()` global
 	function to `lookup_charinfo()` because (a) this parallels the
 	naming of other functions that look up (and potentially create)
