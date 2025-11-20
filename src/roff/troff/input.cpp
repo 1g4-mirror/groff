@@ -5891,6 +5891,7 @@ static bool read_delimited_number(units *n, unsigned char si)
 // \l, \L
 static bool get_line_arg(units *n, unsigned char si, charinfo **cip)
 {
+  assert(cip != 0 /* nullptr */);
   token start_token;
   start_token.next();
   if (!want_att_compat

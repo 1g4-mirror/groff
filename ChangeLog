@@ -1,5 +1,9 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (get_line_arg): Add assertion.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/token.h (token::nspaces): Fix code style nit.
 	Replace C-style type cast with value construction.
 
