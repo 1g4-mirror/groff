@@ -4961,6 +4961,8 @@ void define_character(char_mode mode, const char *font_name)
   tok.skip_spaces();
   charinfo *ci = tok.get_charinfo(true /* required */);
   if (0 /* nullptr */ == ci) {
+    assert(0 == "attempted to use token without charinfo in character"
+	   " definition request");
     skip_line();
     return;
   }
