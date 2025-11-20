@@ -5018,13 +5018,13 @@ static void print_character_request()
   charinfo *ci;
   do {
     tok.skip_spaces();
-    ci = tok.get_charinfo(false /* required */,
-			  true /* suppress creation */);
     if (!tok.is_character()) {
       error("character report request expects characters or character"
 	    " classes as arguments; got %1", tok.description());
       break;
     }
+    ci = tok.get_charinfo(false /* required */,
+			  true /* suppress creation */);
     if (0 /* nullptr */ == ci)
       warning(WARN_CHAR, "%1 is not defined", tok.description());
     else {

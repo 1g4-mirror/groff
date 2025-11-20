@@ -1,5 +1,11 @@
 2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (print_character_request): Slightly
+	refactor; delay gathering of the current token's `charinfo`
+	until we absolutely need it.
+
+2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp
 	(encode_special_character_for_device_output): Simplify logic.
 	Both branches in this function were doing the same thing, except
