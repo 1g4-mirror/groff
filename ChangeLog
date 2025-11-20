@@ -1,3 +1,15 @@
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/groff.texi.in (Manipulating Hyphenation):
+	* man/groff.7.man (Request short reference): Fix error that
+	crept into groff 1.23.0 documentation; hypenation exception
+	words have no association with formatter environments (though
+	that is a contemplated change; see Savannah #66387).
+
+	Fixes <https://savannah.gnu.org/bugs/?66803>.  Thanks to Dave
+	Kemper for the report.  Problem introduced by me in commit
+	493a01c02d4, 28 June 2020.
+
 2025-11-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/gropdf/gropdf.pl (Warn): Set exit status to 1, not
