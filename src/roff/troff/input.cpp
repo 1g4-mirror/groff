@@ -4923,9 +4923,9 @@ void define_character(char_mode mode, const char *font_name)
   else if (tok.is_tab())
     c = '\t';
   else if (!tok.is_space()) {
-    error("ignoring invalid%1 character definition; expected one"
-	  " ordinary or special character to define, got %2", modestr,
-	  tok.description());
+    error("ignoring invalid%1 character definition; expected an"
+	  " ordinary, indexed, or special character to define, got %2",
+	  modestr, tok.description());
     skip_line();
     return;
   }
@@ -8698,8 +8698,8 @@ void check_missing_character()
 {
   if (!tok.is_newline() && !tok.is_eof() && !tok.is_right_brace()
       && !tok.is_tab())
-    error("expected ordinary or special character, got %1; treated as"
-	  " missing", tok.description());
+    error("expected ordinary, special, or indexed character, got %1;"
+	  " ignoring", tok.description());
 }
 
 // this is for \Z

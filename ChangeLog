@@ -1,5 +1,12 @@
 2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_character)
+	(check_missing_character): Revise wording of error diagnostics
+	to mention indexed characters alongside ordinary and special
+	ones.
+
+2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_title_parts): Avoid null
 	pointer dereference.
 
