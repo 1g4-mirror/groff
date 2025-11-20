@@ -5,6 +5,12 @@
 
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (add_hyphenation_exceptions): Revise
+	wording of diagnostic messages, better paralleling language in
+	our documentation.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (add_hyphenation_exceptions): Drop
 	`error()` call prior to `assert()`.  It's okay if, when built
 	with the preprocessor `NDEBUG` symbol defined, we silently

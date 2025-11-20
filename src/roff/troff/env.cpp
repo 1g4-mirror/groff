@@ -3827,14 +3827,14 @@ const int WORD_MAX = 256;	// we use unsigned char for offsets in
 static void add_hyphenation_exceptions()
 {
   if (!has_arg()) {
-    warning(WARN_MISSING, "hyphenation exception request expects one or"
-	    " more arguments");
+    warning(WARN_MISSING, "hyphenation exception word request expects"
+	    " one or more arguments");
     skip_line();
     return;
   }
   if (0 /* nullptr */ == current_language) {
-    error("cannot add hyphenation exceptions when no hyphenation"
-	  " language is set");
+    error("cannot add hyphenation exception words when no hyphenation"
+	  " language is selected");
     skip_line();
     return;
   }
