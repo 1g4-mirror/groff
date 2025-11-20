@@ -5013,7 +5013,6 @@ static void print_character_request()
 		" is not defined", tok.character_index());
     }
     else {
-      // A charinfo doesn't know the name by which it is accessed.
       if (tok.is_indexed_character())
 	errprint("character indexed %1 in current font\n",
 		 tok.character_index());
