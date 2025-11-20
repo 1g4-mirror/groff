@@ -5,6 +5,15 @@
 
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (add_hyphenation_exceptions): Drop
+	`error()` call prior to `assert()`.  It's okay if, when built
+	with the preprocessor `NDEBUG` symbol defined, we silently
+	discard the remainder of the input line and resume reading the
+	next.  Should feel familiar to users of AT&T troff.  (Also, this
+	makes a forthcoming change easier.)
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (margin_character): Trivially refactor.
 	Invert test and resequence logic to handle the argumentless form
 	of the `mc` request first.  This is to facilitate a forthcoming

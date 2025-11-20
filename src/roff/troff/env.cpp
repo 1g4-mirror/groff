@@ -3849,9 +3849,8 @@ static void add_hyphenation_exceptions()
 	   && !tok.is_eof()) {
       charinfo *ci = tok.get_charinfo(true /* required */);
       if (0 /* nullptr */ == ci) {
-	error("%1 has no associated character information(!)",
-	      tok.description());
-	assert(0 == "unexpected null pointer to charinfo of token");
+	assert(0 == "attempted to use token without charinfo in"
+	       " hyphenation exception word");
 	skip_line();
 	return;
       }
