@@ -2469,7 +2469,7 @@ void token::next()
 	  if (!get_line_arg(&x, (cc == 'l' ? 'm': 'v'), &s))
 	    break;
 	  if (s == 0)
-	    s = get_charinfo(cc == 'l' ? "ru" : "br");
+	    s = lookup_charinfo(cc == 'l' ? "ru" : "br");
 	  type = TOKEN_NODE;
 	  node *char_node = curenv->make_char_node(s);
 	  if (cc == 'l')
@@ -4913,7 +4913,7 @@ void define_character(char_mode mode, const char *font_name)
     s += ' ';
     s += ci->nm.contents();
     s += '\0';
-    ci = get_charinfo(symbol(s.contents()));
+    ci = lookup_charinfo(symbol(s.contents()));
   }
   tok.next();
   int c;
@@ -8262,7 +8262,7 @@ static void init_charset_table()
   (void) strncpy(buf, char_prefix, char_prefix_len);
   for (int i = 0; i < 256; i++) {
     (void) strcpy((buf + char_prefix_len), i_to_a(i));
-    charset_table[i] = get_charinfo(symbol(buf));
+    charset_table[i] = lookup_charinfo(symbol(buf));
     charset_table[i]->set_ascii_code(i);
     if (csalpha(i))
       charset_table[i]->set_hyphenation_code(cmlower(i));
@@ -8276,18 +8276,18 @@ static void init_charset_table()
   charset_table[')']->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
   charset_table[']']->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
   charset_table['*']->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
-  get_charinfo(symbol("dg"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
-  get_charinfo(symbol("dd"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
-  get_charinfo(symbol("rq"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
-  get_charinfo(symbol("cq"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
-  get_charinfo(symbol("em"))->set_flags(charinfo::ALLOWS_BREAK_AFTER);
-  get_charinfo(symbol("hy"))->set_flags(charinfo::ALLOWS_BREAK_AFTER);
-  get_charinfo(symbol("ul"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
-  get_charinfo(symbol("rn"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
-  get_charinfo(symbol("radicalex"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
-  get_charinfo(symbol("sqrtex"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
-  get_charinfo(symbol("ru"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
-  get_charinfo(symbol("br"))->set_flags(charinfo::OVERLAPS_VERTICALLY);
+  lookup_charinfo(symbol("dg"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
+  lookup_charinfo(symbol("dd"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
+  lookup_charinfo(symbol("rq"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
+  lookup_charinfo(symbol("cq"))->set_flags(charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE);
+  lookup_charinfo(symbol("em"))->set_flags(charinfo::ALLOWS_BREAK_AFTER);
+  lookup_charinfo(symbol("hy"))->set_flags(charinfo::ALLOWS_BREAK_AFTER);
+  lookup_charinfo(symbol("ul"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
+  lookup_charinfo(symbol("rn"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
+  lookup_charinfo(symbol("radicalex"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
+  lookup_charinfo(symbol("sqrtex"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
+  lookup_charinfo(symbol("ru"))->set_flags(charinfo::OVERLAPS_HORIZONTALLY);
+  lookup_charinfo(symbol("br"))->set_flags(charinfo::OVERLAPS_VERTICALLY);
   page_character = charset_table['%'];
 }
 
@@ -8532,7 +8532,7 @@ static void define_class_request()
     skip_line();
     return;
   }
-  charinfo *ci = get_charinfo(nm);
+  charinfo *ci = lookup_charinfo(nm);
   // Assign the charinfo an empty macro as a hack to record the
   // file:line location of its definition.
   macro *m = new macro;
@@ -8657,7 +8657,7 @@ charinfo *token::get_char(bool required, bool suppress_creation)
   if (type == TOKEN_CHAR)
     return charset_table[c];
   if (type == TOKEN_SPECIAL_CHAR)
-    return get_charinfo(nm, suppress_creation);
+    return lookup_charinfo(nm, suppress_creation);
   if (type == TOKEN_INDEXED_CHAR)
     return get_charinfo_by_index(val, suppress_creation);
   if (type == TOKEN_ESCAPE) {
@@ -8748,7 +8748,7 @@ bool token::add_to_zero_width_node_list(node **pp)
 			 curenv->get_fill_color());
     break;
   case TOKEN_SPECIAL_CHAR:
-    *pp = (*pp)->add_char(get_charinfo(nm), curenv, &w, &s);
+    *pp = (*pp)->add_char(lookup_charinfo(nm), curenv, &w, &s);
     break;
   case TOKEN_STRETCHABLE_SPACE:
     n = new unbreakable_space_node(curenv->get_space_width(),
@@ -8843,7 +8843,7 @@ void token::process()
     curenv->space();
     break;
   case TOKEN_SPECIAL_CHAR:
-    curenv->add_char(get_charinfo(nm));
+    curenv->add_char(lookup_charinfo(nm));
     break;
   case TOKEN_SPREAD:
     curenv->spread();
@@ -10527,7 +10527,7 @@ void debug_with_file_and_line(const char *filename,
 
 dictionary charinfo_dictionary(501);
 
-charinfo *get_charinfo(symbol nm, bool suppress_creation)
+charinfo *lookup_charinfo(symbol nm, bool suppress_creation)
 {
   void *p = charinfo_dictionary.lookup(nm);
   if (p != 0 /* nullptr */)
@@ -10909,9 +10909,9 @@ glyph *name_to_glyph(const char *nm)
   if (nm[1] == 0)
     ci = charset_table[nm[0] & 0xff];
   else if (nm[0] == '\\' && nm[2] == 0)
-    ci = get_charinfo(symbol(nm + 1));
+    ci = lookup_charinfo(symbol(nm + 1));
   else
-    ci = get_charinfo(symbol(nm));
+    ci = lookup_charinfo(symbol(nm));
   return ci->as_glyph();
 }
 

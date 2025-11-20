@@ -1,5 +1,30 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename `get_charinfo()` global
+	function to `lookup_charinfo()` because (a) this parallels the
+	naming of other functions that look up (and potentially create)
+	entries in dictionaries (cf. `lookup_{color,family,request,
+	warning}()`), and (b) this function is not an accessor
+	{"getter"} for a property of a class object.
+
+	* src/roff/troff/charinfo.h (get_charinfo): Rename declaration
+	from this...
+	(lookup_charinfo): ...to this.
+	* src/roff/troff/input.cpp (get_charinfo): Rename definition
+	from this...
+	(lookup_charinfo): ...to this.
+	* src/roff/troff/input.cpp (token::next, define_character)
+	(init_charset_table, define_class_request, token::get_char)
+	(token::add_to_zero_width_node_list, token::process)
+	(name_to_glyph):
+	* src/roff/troff/node.cpp (font_info::get_narrow_space_width)
+	(font_info::get_half_narrow_space_width)
+	(tfont::get_lig, make_glyph_node)
+	(remove_font_specific_character, soft_hyphen_character_request)
+	(init_node_requests): Update call sites.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (define_class_request): Stop adding
 	the second end point of a character code range (to a character
 	class) duplicatively as a singleton, preventing redundant

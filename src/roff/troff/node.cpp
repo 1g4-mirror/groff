@@ -490,7 +490,7 @@ hunits font_info::get_space_width(font_size fs, int space_sz)
 
 hunits font_info::get_narrow_space_width(font_size fs)
 {
-  charinfo *ci = get_charinfo(symbol("|"));
+  charinfo *ci = lookup_charinfo(symbol("|"));
   if (fm->contains(ci->as_glyph()))
     return hunits(fm->get_width(ci->as_glyph(), fs.to_scaled_points()));
   else
@@ -499,7 +499,7 @@ hunits font_info::get_narrow_space_width(font_size fs)
 
 hunits font_info::get_half_narrow_space_width(font_size fs)
 {
-  charinfo *ci = get_charinfo(symbol("^"));
+  charinfo *ci = lookup_charinfo(symbol("^"));
   if (fm->contains(ci->as_glyph()))
     return hunits(fm->get_width(ci->as_glyph(), fs.to_scaled_points()));
   else
@@ -687,15 +687,15 @@ charinfo *tfont::get_lig(charinfo *c1, charinfo *c2)
     switch (c2->get_ascii_code()) {
     case 'f':
       if (fm->has_ligature(font::LIG_ff))
-	ci = get_charinfo(SYMBOL_ff);
+	ci = lookup_charinfo(SYMBOL_ff);
       break;
     case 'i':
       if (fm->has_ligature(font::LIG_fi))
-	ci = get_charinfo(SYMBOL_fi);
+	ci = lookup_charinfo(SYMBOL_fi);
       break;
     case 'l':
       if (fm->has_ligature(font::LIG_fl))
-	ci = get_charinfo(SYMBOL_fl);
+	ci = lookup_charinfo(SYMBOL_fl);
       break;
     }
   }
@@ -703,11 +703,11 @@ charinfo *tfont::get_lig(charinfo *c1, charinfo *c2)
     switch (c2->get_ascii_code()) {
     case 'i':
       if (fm->has_ligature(font::LIG_ffi))
-	ci = get_charinfo(SYMBOL_Fi);
+	ci = lookup_charinfo(SYMBOL_Fi);
       break;
     case 'l':
       if (fm->has_ligature(font::LIG_ffl))
-	ci = get_charinfo(SYMBOL_Fl);
+	ci = lookup_charinfo(SYMBOL_Fl);
       break;
     }
   }
@@ -5594,7 +5594,7 @@ static node *make_glyph_node(charinfo *s, environment *env,
       gl += ' ';
       gl += s->nm.contents();
       gl += '\0';
-      charinfo *ci = get_charinfo(symbol(gl.contents()));
+      charinfo *ci = lookup_charinfo(symbol(gl.contents()));
       if (ci && ci->get_macro())
 	return make_composite_node(ci, env);
     }
@@ -7054,7 +7054,7 @@ static void remove_font_specific_character()
 	gl += ' ';
 	gl += s->nm.contents();
 	gl += '\0';
-	charinfo *ci = get_charinfo(symbol(gl.contents()));
+	charinfo *ci = lookup_charinfo(symbol(gl.contents()));
 	if (!ci)
 	  break;
 	macro *m = ci->set_macro(0 /* nullptr */);
@@ -7490,7 +7490,7 @@ static void soft_hyphen_character_request()
 {
   soft_hyphen_char = read_character();
   if (0 /* nullptr */ == soft_hyphen_char)
-    soft_hyphen_char = get_charinfo(HYPHEN_SYMBOL);
+    soft_hyphen_char = lookup_charinfo(HYPHEN_SYMBOL);
   skip_line();
 }
 
@@ -7553,7 +7553,7 @@ void init_node_requests()
   register_dictionary.define(".lg",
       new readonly_register(&global_ligature_mode));
   register_dictionary.define(".P", new printing_reg);
-  soft_hyphen_char = get_charinfo(HYPHEN_SYMBOL);
+  soft_hyphen_char = lookup_charinfo(HYPHEN_SYMBOL);
 }
 
 // Local Variables:
