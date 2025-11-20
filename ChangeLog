@@ -1,5 +1,13 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::description): Slightly
+	refactor.  Use different technique (with `static` `const`
+	character literals) to construct computed string describing a
+	special character or character class token.  See
+	`assign_escape_character()` for a similar pattern.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename `get_char()` member
 	function of `token` class to `get_charinfo()` to clearly
 	communicate the data type to which it returns a pointer.

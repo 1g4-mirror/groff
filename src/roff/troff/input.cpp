@@ -2922,12 +2922,13 @@ const char *token::description()
       // character or character class names.  Do something about that.
       // (The truncation is visually indicated by the absence of a
       // closing quotation mark.)
-      if (tok.get_charinfo()->is_class())
-	(void) snprintf(buf, maxstr, "character class %c%s%c", qc, sc,
-			qc);
-      else
-	(void) snprintf(buf, maxstr, "special character %c%s%c", qc, sc,
-			qc);
+      static const char special_character[] = "special character";
+      static const char character_class[] = "character class";
+      const char *ctype = special_character;
+      charinfo *ci = get_charinfo();
+      if ((ci != 0 /* nullptr */) && ci->is_class())
+	ctype = character_class;
+      (void) snprintf(buf, maxstr, "%s %c%s%c", ctype, qc, sc, qc);
       return buf;
     }
   case TOKEN_SPREAD:
