@@ -2041,8 +2041,7 @@ bool has_arg(bool want_peek)
     return !(('\n' == c) || (EOF == c));
   }
   else {
-    while (tok.is_space())
-      tok.next();
+    tok.skip();
     return !(tok.is_newline() || tok.is_eof());
   }
 }
@@ -3042,8 +3041,7 @@ symbol get_long_name(bool required)
 
 static symbol do_get_long_name(bool required, char end_char)
 {
-  while (tok.is_space())
-    tok.next();
+  tok.skip();
   int buf_size = default_buffer_size;
   char *buf = 0 /* nullptr */;
   try {
@@ -4996,8 +4994,7 @@ static void print_character_request()
   }
   charinfo *ci;
   do {
-    while (tok.is_space())
-      tok.next();
+    tok.skip();
     ci = tok.get_charinfo(false /* required */,
 			  true /* suppress creation */);
     if (!tok.is_character()) {
@@ -6162,8 +6159,7 @@ static void do_register() // \R
   symbol nm = get_long_name(true /* required */);
   if (nm.is_null())
     return;
-  while (tok.is_space())
-    tok.next();
+  tok.skip();
   reg *r = static_cast<reg *>(register_dictionary.lookup(nm));
   int prev_value;
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
@@ -6869,8 +6865,7 @@ static void take_branch()
 
 static void nop_request()
 {
-  while (tok.is_space())
-    tok.next();
+  tok.skip();
 }
 
 // Perform a (formatted) output comparison operation, as found in
@@ -6927,8 +6922,7 @@ static bool is_conditional_expression_true()
 {
   bool perform_output_comparison = false;
   bool want_test_sense_inverted = false;
-  while (tok.is_space())
-    tok.next();
+  tok.skip();
   while (tok.ch() == '!') {
     tok.next();
     want_test_sense_inverted = !want_test_sense_inverted;
@@ -8687,8 +8681,7 @@ charinfo *token::get_charinfo(bool required, bool suppress_creation)
 
 charinfo *read_character(/* TODO?: bool required */)
 {
-  while (tok.is_space())
-    tok.next();
+  tok.skip();
   charinfo *ci = tok.get_charinfo();
   // TODO?: if (required && (0 /* nullptr */ == ci))
   if (0 /* nullptr */ == ci)

@@ -1673,8 +1673,7 @@ void underline()
 
 void margin_character()
 {
-  while (tok.is_space())
-    tok.next();
+  tok.skip();
   charinfo *ci = tok.get_charinfo();
   if (ci != 0 /* nullptr */) {
     // Call tok.next() only after making the node so that

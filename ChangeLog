@@ -1,5 +1,14 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (margin_character):
+	* src/roff/troff/input.cpp (has_arg, get_long_name)
+	(print_character_request, do_register, nop_request)
+	(is_conditional_expression_true, read_character): Slightly
+	refactor.  Call `tok.space()` instead of open-coding exactly
+	what it does.
+
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::description): Slightly
 	refactor.  Use different technique (with `static` `const`
 	character literals) to construct computed string describing a
