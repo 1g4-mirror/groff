@@ -1,7 +1,7 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* src/roff/troff/input.cpp (do_overstrike): Invert sense of test
-	and add assertion.
+	* src/roff/troff/input.cpp (do_overstrike, do_bracket): Invert
+	sense of test and add assertion.
 
 2025-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 

@@ -1726,9 +1726,15 @@ static node *do_bracket() // \b
 	&& (want_att_compat || input_stack::get_level() == start_level))
       break;
     charinfo *ci = tok.get_charinfo(true /* required */);
-    if (ci != 0 /* nullptr */) {
-      node *n = curenv->make_char_node(ci);
-      if (n != 0 /* nullptr */)
+    if (0 /* nullptr */ == ci) {
+      assert(0 == "attempted to use token without charinfo in"
+	     " bracket-building escape sequence");
+      delete bracketnode;
+      return 0 /* nullptr */;
+    }
+    else {
+       node *n = curenv->make_char_node(ci);
+       if (n != 0 /* nullptr */)
 	bracketnode->bracket(n);
     }
   }
