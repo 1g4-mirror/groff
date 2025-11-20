@@ -1,5 +1,14 @@
 2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(encode_special_character_for_device_output): Simplify logic.
+	Both branches in this function were doing the same thing, except
+	for a null pointer check.  Add anothing null pointer check
+	since, in theory, `charinfo::get_symbol()` can return one.
+	Continues commit c4259eb20a, 14 September 2024.
+
+2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (print_character_request)
 	(remove_character): Simplify logic.  `token::description()`
 	describes indexed characters adequately.

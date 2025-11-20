@@ -6463,15 +6463,12 @@ static void map_special_character_for_device_output(macro *mac,
 static void encode_special_character_for_device_output(macro *mac)
 {
   const char *sc;
-  if (font::use_charnames_in_special) {
-    charinfo *ci = tok.get_charinfo(true /* required */);
-    if (ci != 0 /* nullptr */)
-	sc = ci->get_symbol()->contents();
+  charinfo *ci = tok.get_charinfo(true /* required */);
+  if (ci != 0 /* nullptr */) {
+    sc = ci->get_symbol()->contents();
+    if (sc != 0 /* nullptr */)
+      map_special_character_for_device_output(mac, sc);
   }
-  else
-    sc = tok.get_charinfo(true /* required */)->get_symbol()
-      ->contents();
-  map_special_character_for_device_output(mac, sc);
 }
 
 // In troff output, we translate the escape character to '\', but it is
