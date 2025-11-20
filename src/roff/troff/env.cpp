@@ -3845,7 +3845,9 @@ static void add_hyphenation_exceptions()
       break;
     int i = 0;
     int npos = 0;
-    while (i < WORD_MAX && !tok.is_space() && !tok.is_newline()
+    while ((i < WORD_MAX)
+	   && !tok.is_space()
+	   && !tok.is_newline()
 	   && !tok.is_eof()) {
       charinfo *ci = tok.get_charinfo(true /* required */);
       if (0 /* nullptr */ == ci) {

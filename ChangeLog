@@ -1,3 +1,10 @@
+2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (add_hyphenation_exceptions): Fix code
+	style nit; parenthesize formally complex expressions.  Also
+	break lengthy chain of short-circuit operators across multiple
+	lines, using indentation to illuminate (lack of) nesting.
+
 2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Slightly refactor.  Make the global function
