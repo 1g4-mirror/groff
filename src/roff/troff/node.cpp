@@ -7050,8 +7050,11 @@ static void remove_font_specific_character()
     while (!tok.is_newline() && !tok.is_eof()) {
       if (!tok.is_space() && !tok.is_tab()) {
 	charinfo *s = tok.get_charinfo(true /* required */);
-	if (0 /* nullptr */ == s)
+	if (0 /* nullptr */ == s) {
+	  assert(0 == "attempted to use token without charinfo in"
+		 " font-specific character removal request");
 	  break;
+	}
 	string gl(f.contents());
 	gl += ' ';
 	gl += s->nm.contents();

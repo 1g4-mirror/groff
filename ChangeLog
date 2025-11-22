@@ -1,12 +1,15 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (define_character, get_line_arg)
+	(do_translate):
+	* src/roff/troff/node.cpp (remove_font_specific_character): Add
+	assertions.
 	* src/roff/troff/input.cpp (do_overstrike, do_bracket)
 	(token::description)
 	(encode_special_character_for_device_output)
 	(set_character_flags_request): Invert sense of test and add
 	assertion.
 	(token::next): Add assertions to `\z` escape sequence handler.
-	(define_character, get_line_arg, do_translate): Add assertions.
 	(token:description): Split conditional to accommodate assertion.
 	(encode_special_character_for_device_output): Lift assignment
 	out of conditional branch since a null pointer check now guards
