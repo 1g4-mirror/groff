@@ -1,3 +1,13 @@
+2025-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (remove_font_specific_character):
+	Recover from invalid input more robustly.  If we encounter an
+	invalid character token in the `rfschar` argument list (one that
+	has a null pointer to its `charinfo`), and the build used
+	`NDEBUG` to suppress assertions, skip the character and process
+	the next token (if any) instead of ignoring the rest of the
+	input line, as the `cflags` and `rchar` requests do.
+
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (define_character, get_line_arg)
