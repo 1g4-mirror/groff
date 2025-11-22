@@ -5,7 +5,7 @@
 	(encode_special_character_for_device_output): Invert sense of
 	test and add assertion.
 	(token::next): Add assertions to `\z` escape sequence handler.
-	(define_character, get_line_arg): Add assertion.
+	(define_character, get_line_arg, do_translate): Add assertions.
 	(token:description): Split conditional to accommodate assertion.
 	(encode_special_character_for_device_output): Lift assignment
 	out of conditional branch since a null pointer check now guards

@@ -8375,8 +8375,11 @@ static void do_translate(bool transparently, bool as_input)
       continue;
     }
     charinfo *ci1 = tok.get_charinfo(true /* required */);
-    if (0 /* nullptr */ == ci1)
+    if (0 /* nullptr */ == ci1) {
+      assert(0 == "attempted to use token without charinfo in title"
+	     " formatting request");
       break;
+    }
     tok.next();
     if (tok.is_newline() || tok.is_eof()) {
       ci1->set_special_translation(charinfo::TRANSLATE_SPACE,
@@ -8397,8 +8400,11 @@ static void do_translate(bool transparently, bool as_input)
 				   transparently);
     else {
       charinfo *ci2 = tok.get_charinfo(true /* required */);
-      if (0 /* nullptr */ == ci2)
+      if (0 /* nullptr */ == ci2) {
+	assert(0 == "attempted to use token without charinfo in"
+	       " character translation request");
 	break;
+      }
       if (ci1 == ci2)
 	ci1->set_translation(0 /* nullptr */, transparently, as_input);
       else
