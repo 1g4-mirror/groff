@@ -1,3 +1,24 @@
+2025-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Give node types self-reported type information
+	human-readable names.  That is, use English noun phrases for
+	them instead of C++ identifiers.
+
+	* src/roff/troff/column.cpp (vjustify_node::type) [0]:
+	* src/roff/troff/input.cpp (non_interpreted_char_node)
+	(token_node, non_interpreted_node):
+	* src/roff/troff/node.cpp (hyphen_inhibitor_node)
+	(device_extension_node, suppress_node, tag_node, draw_node)
+	(extra_size_node, vertical_size_node, hmotion_node)
+	(space_char_hmotion_node, vmotion_node, hline_node, vline_node)
+	(dummy_node, transparent_dummy_node, zero_width_node)
+	(italic_corrected_node, left_italic_corrected_node)
+	(overstrike_node, bracket_node, composite_node, glyph_node)
+	(ligature_node, kern_pair_node, dbreak_node, break_char_node)
+	(line_start_node, space_node, word_space_node)
+	(unbreakable_space_node, diverted_space_node)
+	(diverted_copy_file_node): Do it.
+
 2025-11-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (remove_font_specific_character): Add

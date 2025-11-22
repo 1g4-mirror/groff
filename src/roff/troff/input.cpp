@@ -1304,7 +1304,7 @@ bool non_interpreted_char_node::is_same_as(node *nd)
 
 const char *non_interpreted_char_node::type()
 {
-  return "non_interpreted_char_node";
+  return "non-interpreted character node";
 }
 
 bool non_interpreted_char_node::causes_tprint()
@@ -1964,7 +1964,7 @@ bool token_node::is_same_as(node *nd)
 
 const char *token_node::type()
 {
-  return "token_node";
+  return "token node";
 }
 
 bool token_node::causes_tprint()
@@ -6320,7 +6320,7 @@ bool non_interpreted_node::is_same_as(node *nd)
 
 const char *non_interpreted_node::type()
 {
-  return "non_interpreted_node";
+  return "non-interpreted node";
 }
 
 bool non_interpreted_node::causes_tprint()
