@@ -2982,7 +2982,11 @@ const char *token::description()
       static const char character_class[] = "character class";
       const char *ctype = special_character;
       charinfo *ci = get_charinfo();
-      if ((ci != 0 /* nullptr */) && ci->is_class())
+      if (0 /* nullptr */ == ci) {
+	assert(0 == "attempted to process token without charinfo");
+	return "impossible character";
+      }
+      else if (ci->is_class())
 	ctype = character_class;
       (void) snprintf(buf, maxstr, "%s %c%s%c", ctype, qc, sc, qc);
       return buf;
