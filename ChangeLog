@@ -1,5 +1,11 @@
 2025-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_title_parts): Slightly
+	refactor.  Lift return value of repeated `tok.get_charinfo()`
+	function call into a local variable, `ci`.
+
+2025-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::description): Report the node
 	type of node tokens when describing them.
 

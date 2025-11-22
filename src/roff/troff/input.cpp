@@ -6289,9 +6289,13 @@ void read_title_parts(node **part, hunits *part_width)
 	tok.next();
 	break;
       }
-      if ((page_character != 0 /* nullptr */)
-	  && (tok.get_charinfo() != 0 /* nullptr */)
-	  && (tok.get_charinfo() == page_character))
+      charinfo *ci = tok.get_charinfo();
+      // It's okay for `ci` to be a null pointer; that will be the case
+      // if the token is a node: italic corrections, horizontal motions,
+      // and so forth.  TODO: Is it worth warning about some node types?
+      if ((ci != 0 /* nullptr */)
+	  && (page_character != 0 /* nullptr */)
+	  && (page_character == ci))
 	interpolate_register(percent_symbol, 0);
       else
 	tok.process();
