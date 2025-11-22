@@ -2920,7 +2920,23 @@ const char *token::description()
   case TOKEN_NEWLINE:
     return "a newline";
   case TOKEN_NODE:
-    return "a node";
+    // Ah, the joys of computational natural language grammar.
+    {
+      const char *ndtype = nd->type();
+      const char initial_letter = ndtype[0];
+      bool is_vowelly = false;
+      // I wonder if Kernighan thought that the absence of set types and
+      // an "in" operator was one of Pascal's great blunders.
+      if (('a' == initial_letter)
+	  || ('e' == initial_letter)
+	  || ('i' == initial_letter)
+	  || ('o' == initial_letter)
+	  || ('u' == initial_letter))
+	is_vowelly = true;
+      (void) snprintf(buf, bufsz, "a%s %s token", is_vowelly ? "n" : "",
+		      ndtype);
+      return buf;
+    }
   case TOKEN_INDEXED_CHAR:
     (void) snprintf(buf, maxstr, "indexed character %d",
 		    character_index());
