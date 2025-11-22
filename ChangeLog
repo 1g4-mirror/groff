@@ -1,10 +1,20 @@
 2025-11-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_overstrike, do_bracket)
-	(token::description): Invert sense of test and add assertion.
+	(token::description)
+	(encode_special_character_for_device_output): Invert sense of
+	test and add assertion.
 	(token::next): Add assertions to `\z` escape sequence handler.
 	(define_character, get_line_arg): Add assertion.
 	(token:description): Split conditional to accommodate assertion.
+	(encode_special_character_for_device_output): Lift assignment
+	out of conditional branch since a null pointer check now guards
+	it from execution with an early `return`.  Add assertion for
+	impossible situation of a special character already being
+	defined with a null groff `symbol` as its identifier.  For
+	`NDEBUG` builds, return early should that eventuate, as we can't
+	usefully call `map_special_character_for_device_output()` with a
+	null pointer argument.
 
 2025-11-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 

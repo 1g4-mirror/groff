@@ -6511,11 +6511,18 @@ static void encode_special_character_for_device_output(macro *mac)
 {
   const char *sc;
   charinfo *ci = tok.get_charinfo(true /* required */);
-  if (ci != 0 /* nullptr */) {
-    sc = ci->get_symbol()->contents();
-    if (sc != 0 /* nullptr */)
-      map_special_character_for_device_output(mac, sc);
+  if (0 /* nullptr */ == ci) {
+    assert(0 == "attempted to encode token without charinfo for"
+	   " device extension command output");
+    return;
   }
+  sc = ci->get_symbol()->contents();
+  if (0 /* nullptr */ == sc) {
+    assert(0 == "attempted to encode token containing charinfo with"
+	   " null symbol for device extension command output");
+    return;
+  }
+  map_special_character_for_device_output(mac, sc);
 }
 
 // In troff output, we translate the escape character to '\', but it is
