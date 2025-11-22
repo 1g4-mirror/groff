@@ -6998,6 +6998,10 @@ static bool is_conditional_expression_true()
   else if (c == 'c') {
     tok.next();
     tok.skip_spaces();
+    // XXX: Mystery: the presence of a character (fortunately) doesn't
+    // create it if nonexistent even though the default second argument
+    // to `token::get_charinfo()` (`suppress_creation`) is `false` (see
+    // "token.h").  Why?
     charinfo *ci = tok.get_charinfo(true /* required */);
     if (0 == ci /* nullptr */) {
       skip_branch();
