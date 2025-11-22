@@ -8483,7 +8483,10 @@ static void set_character_flags_request()
     }
     while (has_arg()) {
       charinfo *ci = tok.get_charinfo(true /* required */);
-      if (ci != 0 /* nullptr */) {
+      if (0 /* nullptr */ == ci)
+	assert(0 == "attempted to use token without charinfo in"
+	       " character flags assignment request");
+      else {
 	charinfo *tem = ci->get_translation();
 	if (tem != 0 /* nullptr */)
 	  ci = tem;
