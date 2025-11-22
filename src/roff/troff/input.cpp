@@ -5962,6 +5962,9 @@ static bool get_line_arg(units *n, unsigned char si, charinfo **cip)
     if (!(start_token == tok
 	  && input_stack::get_level() == start_level)) {
       *cip = tok.get_charinfo(true /* required */);
+      if (0 /* nullptr */ == *cip)
+	assert(0 == "attempted to use token without charinfo in"
+	       " line-drawing escape sequence");
       tok.next();
     }
     if (!(start_token == tok
