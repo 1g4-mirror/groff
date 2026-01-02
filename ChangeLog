@@ -1,3 +1,35 @@
+2026-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Fix Savannah #64300.
+
+	* src/roff/troff/div.cpp (space_request): If the `sp` request is
+	invoked with the no-break control character (that is, "'sp")
+	when the drawing position is off the page (as when the formatter
+	starts up), ignore the request and throw an error diagnostic.
+	This is inconsistent with AT&T troffs (including Heirloom
+	Doctools) and neatroff, but precisely consistent with all other
+	requests that have different semantics when invoked with the
+	no-break control character.  When invoked thus, none of `br`,
+	`brp`, `ce`, `cf`, `fi`, `fl`, `in`, `nf`, or `rj` move the
+	drawing position onto the page.
+
+	* tmac/doc-old.tmac (Sh): If the formatter claims groff
+	compatibility, simply emit a `br` request to start the (next)
+	document instead of invoking `sp` with the no-break control
+	character.
+
+	* doc/groff.texi (Manipulating Spacing): Document that invoking
+	`'sp` in the top-level diversion when the vertical drawing
+	position is negative is an error.
+
+	* doc/groff.texi (Other Differences):
+	* man/groff_diff.7.man: (Other differences): Document difference
+	between AT&T and GNU troffs.  (AT&T troff's behavior looks buggy
+	to me...)
+
+	Fixes <https://savannah.gnu.org/bugs/?64300>.  Thanks to Dave
+	Kemper for the discussion.
+
 2026-03-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Add `WARN_ESCAPE` to default warning
