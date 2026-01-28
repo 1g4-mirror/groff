@@ -3013,7 +3013,7 @@ const char *token::description()
       (void) snprintf(buf, bufsz, "character \"%c\"", c);
       return buf;
     }
-    else if (c < 128) {
+    else if ((c > 31) && (c < 127)) {
       (void) snprintf(buf, bufsz, "character '%c'", c);
       return buf;
     }

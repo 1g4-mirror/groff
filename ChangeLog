@@ -1,3 +1,12 @@
+2026-01-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::description): Refer to C0
+	control characters (that are valid as GNU troff input) and Basic
+	Latin DEL (all unprintable) by their decimal code points, not by
+	writing them out literally.
+
+	Noted while working on Savannah #67978.
+
 2026-01-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #64300.
