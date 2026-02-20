@@ -1,3 +1,17 @@
+2026-02-20  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Support a build scenario where Ghostscript is unavailable but
+	the URW fonts are.  In that case, gropdf can operate at its full
+	feature service level; configure it to do so.
+
+	* configure.ac: Define new Automake conditional variable,
+	`HAVE_URW_FONTS_OR_HAVE_GHOSTSCRIPT`, that records the fact
+	written on the tin.
+	* font/devpdf/devpdf.am: Revise Automake control flow to use
+	this new variable instead of simply `HAVE_GHOSTSCRIPT`.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?68060>.
+
 2026-02-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* gnulib: Refresh stable/2026-01 branch to obtain commits
