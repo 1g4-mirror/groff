@@ -1,3 +1,10 @@
+2026-02-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* gnulib: Refresh stable/2026-01 branch to obtain commits
+	b527e616ee, 87979f8c12, d731598147, f1f8e13ce8, and 61561de9e2,
+	which should fix a build error in C++ code on FreeBSD 14.
+	Thanks to Bruno Haible.
+
 2026-02-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* font/devpdf/util/BuildFoundries.pl (LoadFoundry): Clarify
