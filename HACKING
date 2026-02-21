@@ -303,6 +303,15 @@ Here is some advice on writing portable automated test scripts.
   might need to be weakened to the following to work on macOS/[NO]*BSD.
     grep -q '81  *30  *55  *81  *30  *56  *81  *6c  *e2'
 
+* The "od" command on FreeBSD 14.0 and 15.0, NetBSD 10.0, and OpenBSD
+  7.8 (at least) pad out the line length with spaces to 73 columns; GNU
+  od does not.
+
+  So a regex like this that works with GNU od:
+    grep -q '0000040 .*  *e2  *94  *a4  *0.$'
+  likely must be weakened to the following.
+    grep -q '0000040 .*  *e2  *94  *a4  *0. *$'
+
 * The "od" command on macOS does not respect the environment variable
   assignment "LC_ALL=C" when processing byte values 127<x<256 decimal
   and using the "character" output format (option "-t c").  An
@@ -401,7 +410,7 @@ Here is some advice on writing portable automated test scripts.
   if ! unset VARIABLE_OF_INTEREST
   then
       echo "unable to clear environment; skipping" >&2
-      exit 77
+      exit 77 # skip
   fi
 
 
