@@ -1,5 +1,12 @@
 2026-02-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[gropdf]: Regression-test Savannah #68077.
+
+	* src/devices/gropdf/tests/interpret-grout-correctly.sh: Do it.
+	* src/devices/gropdf/gropdf.am (gropdf_TESTS): Run test.
+
+2026-02-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/tests/boxed-TH-tables-work-on-utf8-device.sh:
 	Resolve spurious test failures on FreeBSD 14.0 and 15.0, NetBSD
 	10.0, and OpenBSD 7.8: tolerate output from od(1) that is padded
