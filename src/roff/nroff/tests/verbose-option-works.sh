@@ -59,7 +59,7 @@ echo groff: $groff_ver >&2
 if [ "$nroff_ver" != "$groff_ver" ]
 then
     echo "nroff and groff version numbers mismatch; skipping test" >&2
-    exit 77
+    exit 77 # skip
 fi
 
 echo "checking 'nroff -V'" >&2
