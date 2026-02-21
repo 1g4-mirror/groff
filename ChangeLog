@@ -1,3 +1,11 @@
+2026-02-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/tests/boxed-TH-tables-work-on-utf8-device.sh:
+	Resolve spurious test failures on FreeBSD 14.0 and 15.0, NetBSD
+	10.0, and OpenBSD 7.8: tolerate output from od(1) that is padded
+	out with spaces to the 73rd column.  Thanks to Bruno Haible for
+	the report.
+
 2026-02-20  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	* src/devices/gropdf/gropdf.pl: Test for null string rather
