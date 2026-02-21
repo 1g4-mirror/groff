@@ -31,7 +31,7 @@ gdiffmk=${abs_top_out_dir:-.}/gdiffmk
 
 if ! diff -Dx /dev/null /dev/null >/dev/null 2>&1
 then
-    echo "$0: diff command does not support -D option" >&2
+    echo "$0: diff command does not support -D option; skipping" >&2
     exit 77 # skip
 fi
 
@@ -57,7 +57,7 @@ done
 # If we can't find it, we can't test.
 if [ -z "$in_dir" ]
 then
-    echo "$0: cannot locate test artifact input directory" >&2
+    echo "$0: cannot locate test artifact input directory; skipping" >&2
     exit 77 # skip
 fi
 
@@ -77,7 +77,7 @@ done
 # If we can't find it, we can't test.
 if [ -z "$out_dir" ]
 then
-    echo "$0: cannot locate test artifact output directory" >&2
+    echo "$0: cannot locate test artifact output directory; skipping" >&2
     exit 77 # skip
 fi
 

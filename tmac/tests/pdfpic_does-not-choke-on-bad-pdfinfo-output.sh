@@ -24,11 +24,14 @@ gnu_pdf="${abs_top_builddir:-.}/doc/gnu-no-choke-on-pdfinfo.pdf"
 # Regression-test Savannah #58206.
 
 # We need gs(1) and pdfpic.tmac needs pdfinfo(1).
+# TODO: Generate this test script from an '.in' file and search for the
+# `GHOSTSCRIPT` command name detected by our "configure" script.
+# See "contrib/hdtbl/examples/test-hdtbl.sh.in".
 for cmd in gs pdfinfo
 do
     if ! command -v $cmd >/dev/null
     then
-        echo "cannot locate '$cmd' command; skipping test" >&2
+        echo "$0: cannot locate '$cmd' command; skipping" >&2
         exit 77 # skip
     fi
 done
@@ -48,12 +51,16 @@ do
 done
 
 # If we can't find it, we can't test.
-test -z "$artifact_dir" && exit 77 # skip
+if [ -z "$artifact_dir" ]
+then
+    echo "$0: cannot locate test artifact directory; skipping" >&2
+    exit 77 # skip
+fi
 
 if [ -e "$gnu_pdf" ]
 then
-    echo "temporary output file '$gnu_pdf' already exists; skipping" \
-        "test" >&2
+    echo "$0: temporary output file '$gnu_pdf' already exists;" \
+        "skipping" >&2
     exit 77 # skip
 fi
 

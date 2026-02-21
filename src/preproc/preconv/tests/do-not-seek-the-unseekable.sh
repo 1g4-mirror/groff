@@ -47,13 +47,13 @@ test -z "$fail" || exit
 # Similarly, we must have a controlling terminal.
 if ! [ -c /dev/stdin ]
 then
-    echo "/dev/stdin is not a character device; skipping test" >&2
+    echo "$0: /dev/stdin is not a character device; skipping" >&2
     exit 77 # skip
 fi
 
 if [ "$(tty)" = "not a tty" ]
 then
-    echo "there is no controlling terminal; skipping test" >&2
+    echo "$0: there is no controlling terminal; skipping" >&2
     exit 77 # skip
 fi
 
