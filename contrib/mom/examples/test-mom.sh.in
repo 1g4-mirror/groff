@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2018-2025 Free Software Foundation, Inc.
+# Copyright 2018-2025 Free Software Foundation, Inc.
 #
 # This file is part of groff, the GNU roff typesetting system.
 #
@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 builddir="@abs_top_builddir@"
 have_urw_fonts="@groff_have_urw_fonts@"

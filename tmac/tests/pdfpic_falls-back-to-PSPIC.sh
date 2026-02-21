@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 groff="${abs_top_builddir:-.}/test-groff"
 # Give the output a name that won't collide with another test.
@@ -75,4 +74,4 @@ test -z "$fail" \
 rm -f "$gnu_fallback_eps" "$gnu_pdf"
 test -z "$fail"
 
-# vim:set ai et sw=4 ts=4 tw=72:
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
