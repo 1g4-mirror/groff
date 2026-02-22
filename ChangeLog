@@ -1,3 +1,16 @@
+2026-02-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (doc/webpage.html): Also pass `$(doc_builddir)` as
+	an `-I` option argument to groff, just as we do in the
+	"doc/webpage.ps" target.
+
+	Thanks to Bjarni Ingi Gislason for the report in <https://\
+	lists.gnu.org/archive/html/groff/2026-02/msg00081.html> and Deri
+	James for the analysis in <https://lists.gnu.org/archive/html/\
+	groff/2026-02/msg00087.html>.  My commit c81db845da, 2022-04-06
+	introduced a latent bug that my commit e9da162af8, 2026-02-07
+	exposed.
+
 2026-02-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[gropdf]: Regression-test Savannah #68077.
