@@ -779,7 +779,10 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-Use
+.B AL
+calls
+.BR LB ;
+use
 .B LI
 to declare list items,
 and
@@ -1119,7 +1122,10 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-Use
+.B BL
+calls
+.BR LB ;
+use
 .B LI
 to declare list items,
 and
@@ -1183,7 +1189,10 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-Use
+.B BVL
+calls
+.BR LB ;
+use
 .B LI
 to declare list items,
 and
@@ -1306,7 +1315,10 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-Use
+.B DL
+calls
+.BR LB ;
+use
 .B LI
 to declare list items,
 and
@@ -2863,7 +2875,10 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-Use
+.B ML
+calls
+.BR LB ;
+use
 .B LI
 to declare list items,
 and
@@ -3438,7 +3453,10 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-Use
+.B RL
+calls
+.BR LB ;
+use
 .B LI
 to declare list items,
 and
@@ -4121,7 +4139,10 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-Use
+.B RL
+calls
+.BR LB ;
+use
 .B LI
 to declare list items,
 and
