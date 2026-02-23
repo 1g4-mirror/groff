@@ -151,6 +151,10 @@ troff
    `trf` requests, and the second argument to the `open` and `opena`
    requests.  See "soelim" below.
 
+*  The foregoing two changes make the syntax of the listed requests
+   consistent with that of `ds`, `as`, and others that take arguments
+   that the formatter reads to the next newline.
+
 *  The "number" warning category has been withdrawn.  The diagnostic
    that formerly used it has been promoted to an error.
 
