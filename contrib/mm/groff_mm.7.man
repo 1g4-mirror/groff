@@ -1832,6 +1832,10 @@ if
 is specified,
 store it there.
 .
+In neither case does
+.B GETHN
+suffix the interpolation with space.
+.
 See
 .BR INITR .
 .
@@ -1847,6 +1851,10 @@ if
 .I string
 is specified,
 store it there.
+.
+In neither case does
+.B GETPN
+suffix the interpolation with space.
 .
 See
 .BR INITR .
@@ -1884,6 +1892,10 @@ if
 .I string
 is specified,
 store it there.
+.
+In neither case does
+.B GETST
+suffix the interpolation with space.
 .
 See
 .BR INITR .
