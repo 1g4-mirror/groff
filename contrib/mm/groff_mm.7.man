@@ -1785,7 +1785,7 @@ captions this list.
 Start footnote.
 .
 .I mm
-collects input into a footnote until the document calls,
+collects input into a footnote until the document calls
 .BR FE ,
 outputting it when the vertical drawing position nears the page bottom.
 .
