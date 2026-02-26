@@ -466,7 +466,8 @@ Updating gnulib
 ---------------
 
 Here's how to update the submodule, using that project's "stable-202501"
-branch as an example.  From the root of your checkout:
+branch as an example.  Run the commands below from the root directory
+of your working copy.
 
   $ cd gnulib
   $ git pull
