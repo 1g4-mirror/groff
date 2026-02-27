@@ -85,7 +85,7 @@ test -z "$fail" || exit
 
 if [ "$ghostscript" = no ] || [ "$ghostscript" = missing ]
 then
-    echo "$0: Ghostscript not available; skipping check for any"
+    echo "$0: Ghostscript not available; skipping check for any" \
         "further fonts in the default foundry" >&2
     exit 77 # skip
 fi
