@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2020-2025 Free Software Foundation, Inc.
+# Copyright 2020-2024 G. Branden Robinson
 #
 # This file is part of groff, the GNU roff typesetting system.
 #
@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 preconv="${abs_top_builddir:-.}/preconv"
 
@@ -79,6 +78,7 @@ fi
 # cleaning them up even if we're interrupted, which in turn means
 # setting up signal handlers, we use files in the build tree.
 
+# TODO: groff_mmse(7) is no longer UTF-8-encoded; find another.
 #doc=contrib/mm/groff_mmse.7
 #echo "testing uchardet detection on UTF-8 document $doc" >&2
 #"$preconv" -d -D us-ascii 2>&1 >/dev/null $doc \
