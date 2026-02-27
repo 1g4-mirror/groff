@@ -1,5 +1,13 @@
 2026-02-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/webpage.ms: Add disclaimer noting that file is an example,
+	so it may contain outdated facts, stale URLs, and similar.
+
+	Fixes <https://savannah.gnu.org/bugs/?68092>.  Thanks to Bjarni
+	Ingi Gislason for the report.
+
+2026-02-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/preconv/tests/smoke-test.sh: Refactor and
 	extensively annotate assumptions about the character encoding
 	used by the "C" locale on the host system, which influences but

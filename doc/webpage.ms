@@ -55,6 +55,15 @@ Home of Groff (GNU Troff).
 .
 .HR
 .
+.LP
+This document is an
+.B example
+of HTML document composition using
+.I groff ;
+some information and URL hyperlinks may be out of date.
+.
+.HR
+.
 .LNS
 .
 .DC T HIS mydarkred
