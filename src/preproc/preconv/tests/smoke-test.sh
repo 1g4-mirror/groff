@@ -92,26 +92,44 @@ printf 'Eat at the caf\351.\n' \
 
 test -z "$fail" || exit
 
-has_glibc=
+# Fall back to the locale.
+#
+# It's hard to determine the character encoding of the 'C' locale
+# because the only POSIX-standard way to do so is to build a C program
+# to call `nl_langinfo(CODESET)`.  There's also no POSIX-standard way
+# to ask a system to report the byte sequence it uses to encode, say,
+# "lowercase e with acute accent".
+#
+# (I think Perl can do that, though.)
+#
+# We're just a shell script, so on non-glibc systems, we guess at it.
+#
+# On glibc systems, the 'C' locale uses "ANSI_X3.4-1968" for the
+# character set, and `locale charmap` tells us as much, but preconv
+# assumes Latin-1 instead of US-ASCII, so we override that.
+#
+# On Darwin (macOS) systems, we do the same.  See
+# <https://lists.gnu.org/archive/html/groff/2026-02/msg00129.html>.
+#
+# For everything else, we assume UTF-8.
+
+libc_vendor=
 
 if command -v locale > /dev/null
 then
-    has_glibc=yes
-fi
-
-# Fall back to the locale.
-#
-# On glibc systems, the 'C' locale uses "ANSI_X3.4-1968" for the
-# character set, but preconv assumes Latin-1 instead of US-ASCII.
-#
-# On non-glibc systems, who knows?  But at least some use UTF-8.
-
-if [ -n "$has_glibc" ]
+    libc_vendor=gnu
+    charset=ISO-8859-1
+elif [ "$(uname -s)" = "Darwin" ]
 then
+    libc_vendor=apple
     charset=ISO-8859-1
 else
+    libc_vendor=unknown
     charset=UTF-8
 fi
+
+printf "standard C library vendor: %s;" $libc_vendor >&2
+printf " expecting preconv character encoding %s\n" $charset >&2
 
 echo "testing fallback to locale setting in environment" >&2
 printf 'Eat at the caf\351.\n' \

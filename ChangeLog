@@ -1,3 +1,26 @@
+2026-02-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/preconv/tests/smoke-test.sh: Refactor and
+	extensively annotate assumptions about the character encoding
+	used by the "C" locale on the host system, which influences but
+	does not _determine_ that which preconv uses.  preconv doesn't
+	fall all the way back to "ANSI_X3.4-1968", a.k.a. US-ASCII,
+	because GNU troff is designed to assume that its input uses an
+	encoding where every 8-bit value has a code point assignment,
+	which is not true of the 7-bit US-ASCII.  The upshot is that
+	preconv assumes an encoding of ISO 8859-1 in such cases.
+	Practically speaking, this test now assumes that preconv falls
+	back to ISO 8859-1 on macOS/Darwin systems just as it does on
+	GNU libc-based systems.
+
+	It's a pity that the equivalent of the shell command "locale
+	charmap" (supported by glibc) is not standardized by POSIX.
+
+	Thanks to Alexis Hildebrant for the report in
+	<https://lists.gnu.org/archive/html/groff/2026-02/msg00089.html>
+	and for field-testing revisions to the script, and to him and
+	John Gardner for discussion.
+
 2026-02-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/\
