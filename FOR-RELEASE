@@ -1,4 +1,4 @@
-    Copyright 2013-2025 Free Software Foundation, Inc.
+    Copyright 2013-2026 Free Software Foundation, Inc.
 
     Copying and distribution of this file, with or without modification,
     are permitted in any medium without royalty provided the copyright
@@ -7,7 +7,15 @@
 This file describes how to prepare 'groff' for a new release.
 
 
-########################################################################
+Before Release
+==============
+
+* If you're the maintainer and haven't already, start the "Automated
+  Upload Registration" process described in the GNU Maintainers' Guide
+  so that you can upload distribution archives to appropriate GNU hosts
+  and actually make releases.
+
+  https://www.gnu.org/prep/maintain/maintain.html#Automated-Upload-Registration
 
 * Update 'grog' to include the names of new GNU troff requests and macro
   names unique to packages (and sufficiently heavily used in typical
@@ -48,16 +56,12 @@ This file describes how to prepare 'groff' for a new release.
   represented as "next".
   + NEWS (append "release candidate" as applicable)
   + arch/mingw/grap2graph.cmd
-  + doc/webpage.ms (only for final release)
 
-* If the major or minor version number is being incremented, split off
-  a historical ChangeLog file and add it to `EXTRA_DIST` in Makefile.am.
-
-* Update in 'src/roff/groff/groff.cpp' the 'printf' that displays the
+* Update in "src/roff/groff/groff.cpp" the 'printf' that displays the
   copyright to include the current year if it is not present.  (If no
   copyrightable changes to the project's code have been made in the
   current calendar year, use the most recent year in which they have;
-  see the 'HACKING' file.)
+  see the "HACKING" file.)
 
 * Run the "set-man-page-time-stamps" Makefile target from your build
   directory to fix up the stamps on the man pages.
@@ -65,6 +69,10 @@ This file describes how to prepare 'groff' for a new release.
 * Build (and test!) a distribution archive with "make distcheck".  It's
   not a good idea for any tests to be failing, but if they are, note the
   fact prominently in the release notes.
+
+* For final releases only (not release candidates), update
+  "doc/webpage.ms" to record the new version number and month of its
+  issue.
 
 * Increment the version number by tagging the release, beta, or release
   candidate.  Sign the tag.  groff requires an explicit three-part
@@ -81,9 +89,22 @@ This file describes how to prepare 'groff' for a new release.
   version number visible in installed file names (such as
   "/usr/share/groff/1.24.0").
 
+* Upload the distribution archive and auxiliary files as described in
+  the "Automated Upload Procedure" section of the GNU Maintainers'
+  Guide.
+
+  https://www.gnu.org/prep/maintain/maintain.html#Automated-Upload-Procedure
+
+
+After Release
+=============
+
 * For final releases, update the groff home page.
 
 * Make an announcement per the "ANNOUNCE" file.
 
 * groff 1.24.0: Revise the sentence "Most commands installed by groff
   recognize this option." to say "All".
+
+* If the major or minor version number has been incremented, split off
+  a historical ChangeLog file and add it to `EXTRA_DIST` in Makefile.am.
