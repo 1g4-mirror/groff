@@ -9,8 +9,8 @@
 This file describes recent user-visible changes in groff.  Bug fixes are
 not described.  There are more details in the man and info pages.
 
-VERSION 1.24.0 release candidate
-================================
+VERSION 1.24.0
+==============
 
 Noteworthy incompatible changes
 -------------------------------
