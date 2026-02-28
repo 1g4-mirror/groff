@@ -24,7 +24,7 @@
 	It's a pity that the equivalent of the shell command "locale
 	charmap" (supported by glibc) is not standardized by POSIX.
 
-	Thanks to Alexis Hildebrant for the report in
+	Thanks to Alexis Hildebrandt for the report in
 	<https://lists.gnu.org/archive/html/groff/2026-02/msg00089.html>
 	and for field-testing revisions to the script, and to him and
 	John Gardner for discussion.
@@ -364,7 +364,7 @@
 	`urwfontsdir` shell variable unconditionally.
 
 	Fixes problem with groff 1.24.0.rc2 reported by Alexis
-	Hildebrant in <https://lists.gnu.org/archive/html/groff/\
+	Hildebrandt in <https://lists.gnu.org/archive/html/groff/\
 	2026-02/msg00000.html>.
 
 2026-02-03  G. Branden Robinson <g.branden.robinson@gmail.com>
