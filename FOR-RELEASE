@@ -80,7 +80,6 @@ Before Release
   signed tag to the repository.
 
     $ git tag -s -m 'release candidate 1.24.0.rc2' 1.24.0.rc2
-    $ git push origin tag 1.24.0.rc2
 
 * Build and test a distribution archive again with "make distcheck".
   It's important to do this so that the archive unpacks to an
@@ -88,6 +87,15 @@ Before Release
   tagging a first release candidate, because doing so increments the
   version number visible in installed file names (such as
   "/usr/share/groff/1.24.0").
+
+* If the distribution archive from the previous step is unacceptable,
+  delete the tag you created and resume development.
+
+    $ git tag -d 1.24.0.rc2
+
+  Otherwise, push the signed tag.
+
+    $ git push origin tag 1.24.0.rc2
 
 * Upload the distribution archive and auxiliary files as described in
   the "Automated Upload Procedure" section of the GNU Maintainers'
