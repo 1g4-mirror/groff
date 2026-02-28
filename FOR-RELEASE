@@ -18,8 +18,8 @@ Before Release
   https://www.gnu.org/prep/maintain/maintain.html#Automated-Upload-Registration
 
 * Update "grog.pl" to include the names of new GNU troff requests and
-  macro names unique to packages (and sufficiently heavily used in
-  typical documents).
+  macro names unique to specific packages (and sufficiently heavily used
+  in typical documents).
 
 * Update font description files that we generate from external data and
   provide with our source distribution.
@@ -54,7 +54,7 @@ Before Release
 
 * Update the release version number where it is hard-coded or
   represented as "next".
-  + NEWS (append "release candidate" as applicable)
+  + NEWS (append or remove "release candidate" as applicable)
   + arch/mingw/grap2graph.cmd
 
 * Update in "src/roff/groff/groff.cpp" the 'printf' that displays the
@@ -70,14 +70,16 @@ Before Release
   not a good idea for any tests to be failing, but if they are, note the
   fact prominently in the release notes.
 
-* For final releases only (not release candidates), update
+* For official releases only (not release candidates), update
   "doc/webpage.ms" to record the new version number and month of its
   issue.
 
-* Increment the version number by tagging the release, beta, or release
-  candidate.  Sign the tag.  groff requires an explicit three-part
-  version, major.minor.revision, due to the .Y register.  Push this
-  signed tag to the repository.
+* For official releases only, log the fact (and date!) of the release in
+  the "ChangeLog" file.
+
+* Increment the version number by tagging the release or release
+  candidate.  Sign the tag.  groff requires a three-part version,
+  major.minor.revision, so it can populate `.Y` extension register.
 
     $ git tag -s -m 'release candidate 1.24.0.rc2' 1.24.0.rc2
 
@@ -107,12 +109,17 @@ Before Release
 After Release
 =============
 
-* For final releases, update the groff home page.
+* For official releases, update the groff home page.
 
-* Make an announcement per the "ANNOUNCE" file.
+* For official releases, wait several hours for the distribution archive
+  and its detached signature file to percolate through GNU's mirror
+  network.
 
-* groff 1.24.0: Revise the sentence "Most commands installed by groff
-  recognize this option." to say "All".
+* Make an email announcement per the "ANNOUNCE" (release notes) file.
 
-* If the major or minor version number has been incremented, split off
-  a historical ChangeLog file and add it to `EXTRA_DIST` in Makefile.am.
+* If warranted, update the "ANNOUNCE" file to make it a template for the
+  next release.
+
+* If the major or minor version number has incremented, split off
+  a historical "ChangeLog" file and add it to `EXTRA_DIST` in
+  "Makefile.am".
