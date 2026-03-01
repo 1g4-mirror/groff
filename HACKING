@@ -176,9 +176,9 @@ Background
   purposes (in the United States) for around 50 years as of 2026.
   Removing a party's name from a copyright notice (as might happen
   consequent to code deletion or wholesale rewriting of documentation)
-  is not a challenge or insult to that person or organization, and does
-  not deprive them of legitimate legal rights, when and where doing so
-  _makes the copyright notice more accurate_.
+  is not a challenge or insult to an affected person or organization,
+  and does not deprive them of legitimate legal rights, when and where
+  doing so _makes the copyright notice more accurate_.
 
   Software developers relying upon copyright protection are responsible
   for maintaining accurate copyright notices.  In the U.S., making a
@@ -236,6 +236,12 @@ What To Do
   "Copyright-paperwork-exempt: yes" to the Git commit log message, and
   (2) recording, in the corresponding commit log message, the robotic
   procedure that produced the change.
+
+  If a change contains what would otherwise be legally significant
+  original expression that gets "swamped" by removal of other material--
+  falsely appearing to fall below the significance threshold using the
+  simple computation above--consider splitting the commit into two: one
+  that removes material and another that adds the new material.
 
   Regarding "original expression", see section 308 of
   <https://www.copyright.gov/comp3/chap300/
