@@ -308,6 +308,28 @@ What To Do
   See <https://www.copyright.gov/circs/circ03.pdf>.
 
 
+Adding or removing components
+-----------------------------
+
+Changing the set of discrete modules that comprises groff requires
+updates in multiple places.
+
+* Update "Makefile.am" to add or remove the inclusion of the
+  component's "*.am" Automake file.
+
+* Update the "MANIFEST" file.
+
+* Update the "NEWS" file.
+
+Adding a component in the "contrib" directory demands a further change.
+
+* Add a "COPYRIGHT" file in its directory.  If that file makes reference
+  to a separate license text that is _not_ the GPLv3 under which all
+  files in groff are distributed (sometimes in conjuction with other
+  licenses), such as GPLv2, also include a copy of that license in the
+  same directory.
+
+
 Writing tests
 -------------
 
