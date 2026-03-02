@@ -123,8 +123,8 @@ character escape sequences '\(mi' or '\[mi]'.
 
 ----------------------------------------------------------------------
 
-* Displaying an nroff document, including man page, on a terminal with/
-  without my favorite pager shows garbage.
+* Displaying an nroff document, including a man page, on a terminal
+  with/without my favorite pager shows garbage.
 
 groff's terminal output driver, grotty, by default uses ISO 6429/ECMA-48
 escape sequences understood by video terminals and their emulators,
