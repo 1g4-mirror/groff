@@ -79,7 +79,7 @@ Before Release
 
 * Increment the version number by tagging the release or release
   candidate.  Sign the tag.  groff requires a three-part version,
-  major.minor.revision, so it can populate `.Y` extension register.
+  major.minor.revision, so it can populate the `.Y` extension register.
 
     $ git tag -s -m 'release candidate 1.24.0.rc2' 1.24.0.rc2
 
@@ -109,11 +109,11 @@ Before Release
 After Release
 =============
 
-* For official releases, update the groff home page.
-
 * For official releases, wait several hours for the distribution archive
   and its detached signature file to percolate through GNU's mirror
   network.
+
+* For official releases, update the groff home page.
 
 * Make an email announcement per the "ANNOUNCE" (release notes) file.
 
