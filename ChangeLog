@@ -6362,7 +6362,7 @@ Version 1.24.0 released 2026-02-28
 
 2025-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[pic]: Stop validating non-intepreted input for character codes
+	[pic]: Stop validating non-interpreted input for character codes
 	acceptable to GNU troff.
 
 	* src/preproc/eqn/main.cpp (top_input::get, top_input::peek)

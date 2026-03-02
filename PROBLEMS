@@ -55,7 +55,7 @@ following line at each place where you expect the break to occur.
 
 ----------------------------------------------------------------------
 
-* I sometimes get errors from PNM utilties when using grohtml.
+* I sometimes get errors from PNM utilities when using grohtml.
     pnmcrop: The image is entirely background; there is nothing to crop.
 
 This appears to be a spurious warning, and given the same input to the
