@@ -1541,12 +1541,14 @@ see section \[lq]Control structures\[rq] below.
 .
 .P
 A few requests cause a break implicitly;
-use the no-break control character to prevent the break.
+invoke them with the no-break control character
+to prevent the break.
 .
 Break suppression is its sole behavioral distinction.
 .
-Employing the no-break control character to invoke requests that don't
-cause breaks is harmless but poor style.
+Employing the no-break control character
+to invoke requests that don't cause breaks
+is harmless but poor style.
 .
 .
 .P
