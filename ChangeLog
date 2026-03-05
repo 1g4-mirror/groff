@@ -1,5 +1,25 @@
 2026-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add internal mechanism for distinguishing validity of
+	font mounting positions as _values_ from their usability to
+	format output.  A font mounting position is an integer with a
+	limited range.  The font information associated with that
+	{otherwise valid} position can nevertheless not be usable for
+	formatting output.  While the formatter attempts to prevent
+	input documents from contorting themselves into this situation,
+	it also affords a means of egress from valid state.  See the
+	`sty` (counter-)example in groff's Texinfo manual <https://\
+	www.gnu.org/software/groff/manual/groff.html.node/
+	Font-Families.html>.
+
+	Add new function taking an integer mounting position and
+	returning a Boolean.
+
+	* src/roff/troff/node.h: Declare it.
+	* src/roff/troff/node.cpp (is_valid_font): Define it.
+
+2026-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor resolution of currently selected font (which
 	can be an abstract style, or even invalid) to a font mounting
 	position.

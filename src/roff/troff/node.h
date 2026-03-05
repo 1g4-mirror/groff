@@ -708,6 +708,7 @@ extern bool is_font_name(symbol, symbol);
 extern bool is_abstract_style(symbol);
 extern bool mount_style(int, symbol);
 extern bool is_valid_font_mounting_position(int);
+extern bool is_valid_font(int);
 extern int symbol_fontno(symbol);
 extern int next_available_font_position();
 extern void init_size_list(int *);

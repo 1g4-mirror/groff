@@ -6970,6 +6970,12 @@ bool is_valid_font_mounting_position(int n)
 	  && (font_table[n] != 0 /* nullptr */));
 }
 
+bool is_valid_font(int n)
+{
+  return (is_valid_font_mounting_position(n)
+	  && !(font_table[n]->is_style()));
+}
+
 // Read the next token and look it up as a font name or position number.
 // Return lookup success.  Store, in the supplied struct argument, the
 // requested name or position, and the position actually resolved.
