@@ -1,3 +1,17 @@
+2026-03-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (do_device_extension): Emit error
+	diagnostic instead of accessing invalid memory if an attempt is
+	made to output a device extension command while the currently
+	selected font is invalid.  In the future we might not need the
+	current font to be valid to format a device extension node, but
+	for now we do because it "dirties", and therefore has to
+	subsequently restore, several bits of font-related state.  We
+	might be able to make this unnecessary with a parameterized
+	extension to the `fl` request.  See Savannah #66187.
+
+	Fixes <https://savannah.gnu.org/bugs/?67978>.
+
 2026-03-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/\

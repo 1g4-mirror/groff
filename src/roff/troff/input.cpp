@@ -6799,6 +6799,17 @@ static node *do_device_extension() // \X
       c = tok.ch();
     encode_character_for_device_output(&mac, c);
   }
+  // TODO: In the future we might not need the current font to be valid
+  // to format a device extension node, but for now we do because it
+  // "dirties", and therefore has to subsequently restore, several bits
+  // of font-related state.  We might be able to make this unnecessary
+  // with a parameterized extension to the `fl` request.  See Savannah
+  // #66187.
+  if (!is_valid_font(resolve_current_font_to_mounting_position(curenv)))
+  {
+    error("cannot write device extension command: no current font");
+    return 0 /* nullptr */;
+  }
   return new device_extension_node(mac);
 }
 
