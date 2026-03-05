@@ -1,3 +1,27 @@
+2026-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Refactor resolution of currently selected font (which
+	can be an abstract style, or even invalid) to a font mounting
+	position.
+	* src/roff/troff/node.h: Declare function
+	`resolve_current_font_to_mounting_position()`; we'll need access
+	to it from "input.cpp" in a forthcoming change.
+	* src/roff/troff/node.cpp (env_resolve_font): Drop `static`
+	storage class and `inline`.  "[T]he ... otherwise perfectly
+	logical combination of external linkage and inlining is banned
+	to make life simpler for compiler writers[.]" (_The C++
+	Programming Language, Special Edition_, Stroustrup, 1997, p.
+	199)  And rename this...
+	(resolve_current_font_to_mounting_position): ...to this.
+	Annotate purpose.
+	(device_extension_node::device_extension_node)
+	(make_composite_node)
+	(make_glyph_node)
+	(env_space_width)
+	(env_sentence_space_width)
+	(env_half_narrow_space_width)
+	(env_narrow_space_width): Update call sites.
+
 2026-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Boolify

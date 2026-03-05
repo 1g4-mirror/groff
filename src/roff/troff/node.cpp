@@ -237,7 +237,10 @@ public:
   friend tfont *make_tfont(tfont_spec &);
 };
 
-static inline int env_resolve_font(environment *env)
+// This operation isn't a member function of `class environment`; we
+// need it only when translating nodes into troff output, so that we
+// know if we must emit an `f` trout/grout command.
+int resolve_current_font_to_mounting_position(environment *env)
 {
   return env->get_family()->resolve(env->get_font());
 }
@@ -4365,7 +4368,7 @@ device_extension_node::device_extension_node(const macro &m, bool b)
   font_size fs = curenv->get_font_size();
   int char_height = curenv->get_char_height();
   int char_slant = curenv->get_char_slant();
-  int fontno = env_resolve_font(curenv);
+  int fontno = resolve_current_font_to_mounting_position(curenv);
   tf = font_table[fontno]->get_tfont(fs, char_height, char_slant,
 				     fontno);
   if (curenv->is_composite())
@@ -5549,7 +5552,7 @@ void composite_node::dump_node()
 
 static node *make_composite_node(charinfo *s, environment *env)
 {
-  int fontno = env_resolve_font(env);
+  int fontno = resolve_current_font_to_mounting_position(env);
   if (fontno < 0) {
     error("cannot format composite glyph: no current font");
     return 0 /* nullptr */;
@@ -5570,7 +5573,7 @@ static node *make_composite_node(charinfo *s, environment *env)
 static node *make_glyph_node(charinfo *s, environment *env,
 			     bool want_warnings = true)
 {
-  int fontno = env_resolve_font(env);
+  int fontno = resolve_current_font_to_mounting_position(env);
   if (fontno < 0) {
     error("cannot format glyph: no current font");
     return 0 /* nullptr */;
@@ -7237,7 +7240,7 @@ hunits env_digit_width(environment *env)
 
 hunits env_space_width(environment *env)
 {
-  int fn = env_resolve_font(env);
+  int fn = resolve_current_font_to_mounting_position(env);
   font_size fs = env->get_font_size();
   if (!is_valid_font_mounting_position(fn))
     return scale(fs.to_units() / 3, env->get_space_size(), 12);
@@ -7247,7 +7250,7 @@ hunits env_space_width(environment *env)
 
 hunits env_sentence_space_width(environment *env)
 {
-  int fn = env_resolve_font(env);
+  int fn = resolve_current_font_to_mounting_position(env);
   font_size fs = env->get_font_size();
   units sss = env->get_sentence_space_size();
   if (!is_valid_font_mounting_position(fn))
@@ -7258,7 +7261,7 @@ hunits env_sentence_space_width(environment *env)
 
 hunits env_half_narrow_space_width(environment *env)
 {
-  int fn = env_resolve_font(env);
+  int fn = resolve_current_font_to_mounting_position(env);
   font_size fs = env->get_font_size();
   if (!is_valid_font_mounting_position(fn))
     return H0;
@@ -7268,7 +7271,7 @@ hunits env_half_narrow_space_width(environment *env)
 
 hunits env_narrow_space_width(environment *env)
 {
-  int fn = env_resolve_font(env);
+  int fn = resolve_current_font_to_mounting_position(env);
   font_size fs = env->get_font_size();
   if (!is_valid_font_mounting_position(fn))
     return H0;
