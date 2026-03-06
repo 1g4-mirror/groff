@@ -140,7 +140,7 @@ creates a
 .I groff
 font description file in the current working directory
 (or that specified by the
-.B -d
+.B \-d
 option)
 named for each
 .I groff
