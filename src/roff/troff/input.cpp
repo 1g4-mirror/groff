@@ -358,7 +358,7 @@ protected:
   const unsigned char *endptr;
   input_iterator *next;
 private:
-  virtual int fill(node **);
+  virtual int fill(node **); // returns an unsigned char or `EOF`
   virtual int peek();
   virtual bool has_args() { return false; }
   virtual int nargs() { return 0; }
@@ -429,7 +429,7 @@ class file_iterator : public input_iterator {
 public:
   file_iterator(FILE *, const char *, bool = false);
   ~file_iterator();
-  int fill(node **);
+  int fill(node **); // returns an unsigned char or `EOF`
   int peek();
   bool get_location(bool /* allow_macro */, const char ** /* filep */,
 		    int * /* linep */);
@@ -479,6 +479,7 @@ bool file_iterator::next_file(FILE *f, const char *s)
   return true;
 }
 
+// Returns an unsigned char or `EOF`.
 int file_iterator::fill(node **)
 {
   if (seen_newline)
@@ -1849,7 +1850,7 @@ static const char *do_expr_test() // \B
   // disable all warning and error messages temporarily
   unsigned int saved_warning_mask = warning_mask;
   bool saved_want_errors_inhibited = want_errors_inhibited;
-  warning_mask = 0;
+  warning_mask = 0U;
   want_errors_inhibited = true;
   int dummy;
   // TODO: grochar
@@ -4273,7 +4274,7 @@ protected:
 public:
   string_iterator(const macro &, const char * = 0 /* nullptr */,
 		  symbol = NULL_SYMBOL);
-  int fill(node **);
+  int fill(node **); // returns an unsigned char or `EOF`
   int peek();
   bool get_location(bool /* allow_macro */, const char ** /* filep */,
 		    int * /* linep */);
@@ -4320,6 +4321,7 @@ bool string_iterator::is_diversion()
   return mac.is_diversion();
 }
 
+// Returns an unsigned char or `EOF`.
 int string_iterator::fill(node **np)
 {
   if (seen_newline)
@@ -4343,7 +4345,7 @@ int string_iterator::fill(node **np)
     nd = nd->next;
     endptr = ptr = p + 1;
     count--;
-    return 0;
+    return 0U;
   }
   const unsigned char *e = bp->s + char_block::SIZE;
   if (e - p > count)

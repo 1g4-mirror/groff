@@ -1,5 +1,12 @@
 2026-03-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_expr_test)
+	(string_iterator::fill): Fix code style nit: assign to variable
+	of unsigned integral type with explicitly unsigned integer
+	literal.
+
+2026-03-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Fix typoed variable name; rename
 	`is_output_supressed` to `is_output_suppressed`.
 	(glyph_node::asciify):
