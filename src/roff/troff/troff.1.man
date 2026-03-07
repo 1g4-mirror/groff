@@ -833,6 +833,8 @@ or a
 extension escape sequence
 or conditional expression operator
 was used while in compatibility mode.
+.
+This category is enabled by default.
 T}
 .
 .
