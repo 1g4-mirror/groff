@@ -21630,6 +21630,7 @@ An invalid character occurred on the input stream.
 @item escape
 @itemx 32768
 An unsupported escape sequence was encountered.
+This category is enabled by default.
 
 @item space
 @itemx 65536

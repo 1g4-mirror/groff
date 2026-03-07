@@ -682,6 +682,8 @@ T}
 .sp \n[PD]u
 escape	32768	T{
 An unsupported escape sequence was encountered.
+.
+This category is enabled by default.
 T}
 .
 .
