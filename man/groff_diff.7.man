@@ -4575,9 +4575,7 @@ Vertical position trap enablement is global.
 .TP
 .BR .warn\~ [\c
 .IR n ]
-Select the categories,
-or \[lq]types\[rq],
-of reported warnings.
+Select categories of warnings to be reported.
 .
 .IR n \~is
 the sum of the numeric codes associated with each warning category that
