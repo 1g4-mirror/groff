@@ -7581,7 +7581,7 @@ class psbb_locator
     inline const char *bounding_box_args(void);
     int parse_bounding_box(const char *);
     inline void assign_registers(void);
-    inline int skip_to_trailer(void);
+    inline bool skip_to_trailer(void);
 };
 
 // psbb_locator class constructor.
@@ -7631,7 +7631,7 @@ filename(fname), llx(0), lly(0), urx(0), ury(0), lastc(EOF)
 	    // ...in which case we must locate the trailer, and search
 	    // for the appropriate specification within it.
 	    //
-	    if (skip_to_trailer() > 0) {
+	    if (skip_to_trailer()) {
 	      while ((context = bounding_box_args()) == 0 /* nullptr */
 		     && get_line(DSC_LINE_MAX_ENFORCE) > 0)
 		;
@@ -7902,11 +7902,11 @@ inline bool psbb_locator::get_header_comment(void)
 // psbb_locator::skip_to_trailer()
 //
 // Reposition the PostScript input stream, such that the next get_line()
-// will retrieve the first line, if any, following a "%%Trailer" comment;
-// returns a positive integer value if the "%%Trailer" comment is found,
-// or zero if it is not.
+// will retrieve the first line, if any, following a "%%Trailer"
+// comment; returns `true` the "%%Trailer" comment is found and `false`
+// otherwise.
 //
-inline int psbb_locator::skip_to_trailer(void)
+inline bool psbb_locator::skip_to_trailer(void)
 {
   // Begin by considering a chunk of the input file starting 512 bytes
   // before its end, and search it for a "%%Trailer" comment; if none is
@@ -7942,12 +7942,12 @@ inline int psbb_locator::skip_to_trailer(void)
 	// We found the "%%Trailer" comment, so we may immediately
 	// return, with the stream positioned appropriately...
 	//
-	return status;
+	return true;
     }
   }
   // ...otherwise, we report that no "%%Trailer" comment was found.
   //
-  return 0;
+  return false;
 }
 
 void ps_bbox_request() // .psbb

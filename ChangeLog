@@ -1,5 +1,17 @@
 2026-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Boolify
+	`psbb_locator::skip_to_trailer()`.  Its lone call site tests
+	only for a positive return value and discards it.
+	(class psbb_locator): Demote return type from `int` to `bool` in
+	declaration.
+	(psbb_locator::psbb_locator): Simplify test of return value.
+	(psbb_locator::skip_to_trailer): Demote return type from `int`
+	to `bool` in definition.  Return Boolean rather than integer
+	literals or the otherwise unused `status` local value.
+
+2026-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Make warning diagnostic functions return `void`.
 	Change return type of `warning()` and `output_warning()`
 	functions from `int` to `void`.  I would have boolified them,
