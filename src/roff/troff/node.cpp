@@ -65,7 +65,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stack>
 
-static bool is_output_supressed = false;
+static bool is_output_suppressed = false;
 
 // declarations to avoid friend name injections
 class tfont;
@@ -3902,7 +3902,7 @@ void zero_width_node::ascii_print(ascii_output_file *out)
 
 void glyph_node::asciify(macro *m)
 {
-  if (!is_output_supressed) {
+  if (!is_output_suppressed) {
     unsigned char c = ci->get_asciify_code();
     if (c != 0U)
       m->append(c);
@@ -3970,7 +3970,7 @@ void glyph_node::asciify(macro *m)
 
 void kern_pair_node::asciify(macro *m)
 {
-  if (!is_output_supressed) {
+  if (!is_output_suppressed) {
     if (n1 != 0 /* nullptr */)
       n1->asciify(m);
     if (n2 != 0 /* nullptr */)
@@ -3981,7 +3981,7 @@ void kern_pair_node::asciify(macro *m)
 void dbreak_node::asciify(macro *m)
 {
   assert(m != 0 /* nullptr */);
-  if (!is_output_supressed) {
+  if (!is_output_suppressed) {
     if (m != 0 /* nullptr */)
       none->asciify(m);
     none = 0 /* nullptr */;
@@ -3992,7 +3992,7 @@ void ligature_node::asciify(macro *m)
 {
   assert(n1 != 0 /* nullptr */);
   assert(n2 != 0 /* nullptr */);
-  if (!is_output_supressed) {
+  if (!is_output_suppressed) {
     if (n1 != 0 /* nullptr */)
       n1->asciify(m);
     if (n2 != 0 /* nullptr */)
@@ -4003,7 +4003,7 @@ void ligature_node::asciify(macro *m)
 void break_char_node::asciify(macro *m)
 {
   assert(nodes != 0 /* nullptr */);
-  if (!is_output_supressed && (nodes != 0 /* nullptr */))
+  if (!is_output_suppressed && (nodes != 0 /* nullptr */))
     nodes->asciify(m);
   nodes = 0 /* nullptr */;
 }
@@ -4011,7 +4011,7 @@ void break_char_node::asciify(macro *m)
 void italic_corrected_node::asciify(macro *m)
 {
   assert(nodes != 0 /* nullptr */);
-  if (!is_output_supressed && (nodes != 0 /* nullptr */))
+  if (!is_output_suppressed && (nodes != 0 /* nullptr */))
     nodes->asciify(m);
   nodes = 0 /* nullptr */;
 }
@@ -4019,7 +4019,7 @@ void italic_corrected_node::asciify(macro *m)
 void left_italic_corrected_node::asciify(macro *m)
 {
   assert(nodes != 0 /* nullptr */);
-  if (!is_output_supressed && (nodes != 0 /* nullptr */))
+  if (!is_output_suppressed && (nodes != 0 /* nullptr */))
     nodes->asciify(m);
   nodes = 0 /* nullptr */;
 }
@@ -4044,7 +4044,7 @@ space_char_hmotion_node::space_char_hmotion_node(hunits i, color *c,
 
 void space_char_hmotion_node::asciify(macro *m)
 {
-  if (!is_output_supressed)
+  if (!is_output_suppressed)
     m->append(' ');
 }
 
@@ -4054,7 +4054,7 @@ void space_node::asciify(macro *)
 
 void word_space_node::asciify(macro *m)
 {
-  if (!is_output_supressed) {
+  if (!is_output_suppressed) {
     for (width_list *w = orig_width; w != 0 /* nullptr */; w = w->next)
       m->append(' ');
   }
@@ -4062,7 +4062,7 @@ void word_space_node::asciify(macro *m)
 
 void unbreakable_space_node::asciify(macro *m)
 {
-  if (!is_output_supressed)
+  if (!is_output_suppressed)
     m->append(' ');
 }
 
@@ -4128,7 +4128,7 @@ void overstrike_node::asciify(macro *)
 
 void suppress_node::asciify(macro *)
 {
-  is_output_supressed = (is_on == 0); // it's a three-valued Boolean :-/
+  is_output_suppressed = (is_on == 0); // it's a three-valued Boolean :-/
 }
 
 void vline_node::asciify(macro *)
@@ -4141,7 +4141,7 @@ void vline_node::asciify(macro *)
 void zero_width_node::asciify(macro *m)
 {
   assert(nodes != 0 /* nullptr */);
-  if (!is_output_supressed) {
+  if (!is_output_suppressed) {
     node *n = nodes;
     while (n != 0 /* nullptr */) {
       n->asciify(m);
@@ -4886,7 +4886,7 @@ hyphenation_type composite_node::get_hyphenation_type()
 
 void composite_node::asciify(macro *m)
 {
-  if (!is_output_supressed) {
+  if (!is_output_suppressed) {
     unsigned char c = ci->get_asciify_code();
     if (0U == c)
       c = ci->get_ascii_code();
