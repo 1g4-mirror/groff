@@ -1,5 +1,30 @@
 2026-03-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Rename several warning-relatd data
+	for clarity.  Rename preprocessor macro `DEFAULT_WARNING_MASK`
+	to `DEFAULT_WARNING_CATEGORY_SET`.  Rename file-scoped variable
+	`warning_mask` to `desired_warnings` (it's a _set_ type, not a
+	"mask", which is more specific).
+	(enable_warning):
+	(disable_warning):
+	(warning):
+	(output_warning): Update site of dereference.
+	(init_input_requests) <.warn>: Update wire-uppery.
+
+	(do_expr_test): Rename local variable `saved_warning_mask` to
+	`saved_desired_warnings`.
+	(enable_warning, disable_warning): Rename local variable `mask`
+	to `category`.
+
+	(set_warning_mask_request): Rename this...
+	(configure_desired_warnings_request): ...to this.
+	(init_input_requests) <warn>: Update wire-uppery.
+
+	(struct warning_category): Rename `mask` member to `set`.
+	(lookup_warning): Track rename of structure member.
+
+2026-03-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_expr_test)
 	(string_iterator::fill): Fix code style nit: assign to variable
 	of unsigned integral type with explicitly unsigned integer
