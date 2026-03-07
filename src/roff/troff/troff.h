@@ -74,14 +74,14 @@ enum warning_type {
 
 const int WARN_MAX = 07777777;
 
-int warning(warning_type, const char *,
-	    const errarg & = empty_errarg,
-	    const errarg & = empty_errarg,
-	    const errarg & = empty_errarg);
-int output_warning(warning_type, const char *,
-		   const errarg & = empty_errarg,
-		   const errarg & = empty_errarg,
-		   const errarg & = empty_errarg);
+void warning(warning_type, const char *,
+	     const errarg & = empty_errarg,
+	     const errarg & = empty_errarg,
+	     const errarg & = empty_errarg);
+void output_warning(warning_type, const char *,
+		    const errarg & = empty_errarg,
+		    const errarg & = empty_errarg,
+		    const errarg & = empty_errarg);
 
 // Local Variables:
 // fill-column: 72

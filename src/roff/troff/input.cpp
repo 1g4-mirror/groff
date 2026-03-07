@@ -10747,32 +10747,24 @@ void debug(const char *format,
   do_error(DEBUG, format, arg1, arg2, arg3);
 }
 
-int warning(warning_type t,
-	    const char *format,
-	    const errarg &arg1,
-	    const errarg &arg2,
-	    const errarg &arg3)
+void warning(warning_type t,
+	     const char *format,
+	     const errarg &arg1,
+	     const errarg &arg2,
+	     const errarg &arg3)
 {
-  if ((t & desired_warnings) != 0U) {
+  if ((t & desired_warnings) != 0U)
     do_error(WARNING, format, arg1, arg2, arg3);
-    return 1;
-  }
-  else
-    return 0;
 }
 
-int output_warning(warning_type t,
-		   const char *format,
-		   const errarg &arg1,
-		   const errarg &arg2,
-		   const errarg &arg3)
+void output_warning(warning_type t,
+		    const char *format,
+		    const errarg &arg1,
+		    const errarg &arg2,
+		    const errarg &arg3)
 {
-  if ((t & desired_warnings) != 0U) {
+  if ((t & desired_warnings) != 0U)
     do_error(OUTPUT_WARNING, format, arg1, arg2, arg3);
-    return 1;
-  }
-  else
-    return 0;
 }
 
 void error(const char *format,
