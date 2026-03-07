@@ -9,6 +9,16 @@
 This file describes recent user-visible changes in groff.  Bug fixes are
 not described.  There are more details in the man and info pages.
 
+VERSION next
+============
+
+troff
+-----
+
+*  GNU troff, the formatter, now issues warnings in the "delim" category
+   by default.
+
+
 VERSION 1.24.1
 ==============
 

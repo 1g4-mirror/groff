@@ -21506,6 +21506,7 @@ The selected delimiter character was ambiguous
 because it is also meaningful when beginning a numeric expression,
 or
 the closing delimiter in an escape sequence was missing or mismatched.
+This category is enabled by default.
 
 A future
 @code{groff}

@@ -1,3 +1,14 @@
+2026-03-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Add `WARN_DELIM` to default warning
+	"mask".  (It's not a mask, just a vector--or a set.)
+
+	* doc/groff.texi (Warnings):
+	* src/roff/troff/troff.1.man (Warnings):
+	* NEWS: Document it.
+
+	Continues the long process of fixing Savannah #66009.
+
 2026-03-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_device_extension): Emit error

@@ -644,6 +644,8 @@ because it is also meaningful when beginning a numeric expression,
 or
 the closing delimiter in an escape sequence was missing or mismatched.
 .
+This category is enabled by default.
+.
 .
 .sp \n[PD]u
 A future

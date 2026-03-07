@@ -73,7 +73,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #ifndef DEFAULT_WARNING_CATEGORY_SET
 // warnings that are enabled by default
 #define DEFAULT_WARNING_CATEGORY_SET \
-     (WARN_CHAR|WARN_BREAK|WARN_SPACE|WARN_FONT|WARN_FILE)
+     (WARN_CHAR|WARN_BREAK|WARN_DELIM|WARN_SPACE|WARN_FONT|WARN_FILE)
 #endif
 
 extern "C" const char *program_name;
