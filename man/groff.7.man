@@ -7433,6 +7433,17 @@ and
 .esc s .
 .
 .TP
+.REG .S
+Reserved.
+.
+Plan\~9
+.I troff \" Plan 9
+uses this name for roughly the same purpose as
+GNU
+.IR troff 's \" GNU
+.REG .tabs .
+.
+.TP
 .REG .slant
 Slant in degrees of the environment's selected font;
 see
