@@ -7,8 +7,8 @@ ndex.html>.  Historically, the source files of the AWK version of chem
 are available at <http://cm.bell-labs.com/netlib/typesetting/chem.gz>.
 
 This project is a rewrite in Perl of the AWK version of chem for groff,
-the GNU roff project.  It was written using Perl v5.8.8, but at least
-Perl v5.6 is needed to run this Perl version of chem.
+the GNU roff project.  At least Perl v5.6 is needed to run this version
+of chem.
 
 In comparison to the original AWK version of chem, this Perl version
 makes the following changes.
@@ -19,7 +19,7 @@ makes the following changes.
   variables that are used only once.
 
 The subdirectory "examples/" contains example files for chem.  They are
-written in the chem language.  The file names end with .chem.
+written in the chem language.  The file names end with ".chem".
 
 
 ##### Editor settings
