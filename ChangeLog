@@ -1,3 +1,9 @@
+2026-03-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* Makefile.am (.version, dist-hook): Use `AM_V_GEN` macro in
+	production of targets, to make them less garish in builds
+	without `V=1` specified as a make(1) argument.
+
 2026-03-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/troffrc (ptr): Disclose correct groff version number when
