@@ -1380,9 +1380,9 @@ using the current vertical spacing.
 .
 .
 .P
-The
+The delimited escape sequence
 .B \[rs]B
-escape sequence tests its argument for validity as a numeric expression.
+tests its argument for validity as a numeric expression.
 .
 .
 .br
@@ -1464,7 +1464,7 @@ as bibliographic reference delimiters.
 .
 .
 .P
-The escape sequence
+The delimited escape sequence
 .B \[rs]A
 tests its argument for validity as an identifier.
 .
