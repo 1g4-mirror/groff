@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright 2025 G. Branden Robinson
+# Copyright 2025-2026 G. Branden Robinson
 #
 # This file is part of groff, the GNU roff typesetting system.
 #
@@ -16,26 +16,45 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 groff="${abs_top_builddir:-.}/test-groff"
+
+fail=
+
+wail () {
+  echo "...FAILED" >&2
+  fail=yes
+}
 
 # troff should not perform invalid memory access when using `box` to
 # close a regular diversion.  Savannah #67139.
 
-if [ -e core ]
-then
-  echo "$0: 'core' file already exists; skipping" >&2
-  exit 77 # skip
-fi
-
-input='.
-.di d
+input1='.
+.box d1
+.di
 .box
-all is well
+HAPAX
 .'
 
-output=$(printf '%s\n' "$input" | "$groff" -a)
-! test -e core
+output1=$(printf '%s\n' "$input1" | "$groff" -a)
+echo "$output1"
+
+echo "checking that closing box diversion with 'di' is not fatal" >&2
+echo "$output1" | grep -q 'HAPAX' || wail
+
+input2='.
+.br
+.di d2
+.box
+LEGOMENON
+.'
+
+output=$(printf '%s\n' "$input2" | "$groff" -a)
+echo "$output2"
+
+echo "checking that closing non-box diversion with 'box' is fatal" >&2
+! echo "$output2" | grep -q 'LEGOMENON' || wail
+
+test -z "$fail"
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:

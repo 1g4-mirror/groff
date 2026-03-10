@@ -1,3 +1,17 @@
+2026-03-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/tests/\
+	do-not-crash-on-mismatched-diversion-request.sh: Revise and
+	expand test.  Stop checking for core dump file, as this is not
+	necessarily reliable.  Instead seed test input with formattable
+	words that we expect to be present or not, depending on whether
+	and where the formatter exits abnormally.  Check that closing a
+	`box` diversion with `di` is not a fatal error, and that closing
+	a `di` diversion with `box` _is_ fatal.
+
+	Thanks to Bob Friesenhahn and Zack Weinberg for the suggestion
+	to not rely on core dump files as failure oracles.
+
 2026-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add internal mechanism for distinguishing validity of
