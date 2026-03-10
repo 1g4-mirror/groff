@@ -1,5 +1,18 @@
 2026-03-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68137.
+
+	* src/roff/troff/number.cpp (is_valid_expression): When
+	interpreting a parenthesized sub-expression within a numeric
+	expression while in AT&T compatibility mode, throw a warning in
+	category "syntax" if encountering a space in the input, advising
+	of non-portability to that family of formatters.  GNU troff
+	continues to interpret the expression as it always has.
+
+	Fixes <https://savannah.gnu.org/bugs/?68137>.
+
+2026-03-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Make `want_att_compat` global.  This is a prerequisite
 	to fixing Savannah #68137.
 	
