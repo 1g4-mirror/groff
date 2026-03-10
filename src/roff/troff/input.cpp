@@ -117,7 +117,7 @@ static void disable_warning(const char *);
 static symbol end_of_input_macro_name;
 static symbol blank_line_macro_name;
 static symbol leading_spaces_macro_name;
-static bool want_att_compat = false;
+bool want_att_compat = false;
 bool want_abstract_output = false;
 bool want_nodes_dumped = false;
 bool want_output_suppressed = false;
