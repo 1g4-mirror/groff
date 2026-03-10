@@ -14,6 +14,14 @@
 
 2026-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #67978.
+
+	* src/roff/groff/tests/\
+	do-not-crash-on-backslash-X-if-font-invalid.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-03-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add internal mechanism for distinguishing validity of
 	font mounting positions as _values_ from their usability to
 	format output.  A font mounting position is an integer with a
