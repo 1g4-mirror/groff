@@ -495,7 +495,7 @@ static bool is_valid_term(units *u, int scaling_unit,
     *u = 0;
     return !is_mandatory;
   default:
-    error("ignoring invalid numeric expression starting with %1",
+    error("ignoring invalid numeric expression containing %1",
 	  tok.description());
     return false;
   }
