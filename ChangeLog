@@ -26,13 +26,13 @@
 	compatibility mode.
 
 	Fixes <https://savannah.gnu.org/bugs/?68132>.  Thanks to Clem
-	Cole for the report.  Problem introduced by me in 52025b06f5, 21
-	November, in the course of adding many assertions to GNU troff
-	to try to smoke out transitions into invalid formatter state and
-	code that should be unreachable but isn't.  This instance fooled
-	me because we did nothing useful (nor consistent with AT&T troff
-	behavior) with the non-character translation participant; see
-	above regarding future plans.
+	Cole for the report.  Problem introduced by me in commit
+	52025b06f5, 21 November, in the course of adding many assertions
+	to GNU troff to try to smoke out transitions into invalid
+	formatter state and code that should be unreachable but isn't.
+	This instance fooled me because we did nothing useful (nor
+	consistent with AT&T troff behavior) with the non-character
+	translation participant; see above regarding future plans.
 
 2026-03-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
