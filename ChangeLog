@@ -1,5 +1,10 @@
 2026-03-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/troffrc (ptr): Disclose correct groff version number when
+	reporting rename of `ptr` request.
+
+2026-03-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_term): Improve error
 	diagnostic when encountering an invalid character in a numeric
 	expression; say "containing", not "starting with".
