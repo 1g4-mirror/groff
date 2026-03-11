@@ -282,9 +282,9 @@ What To Do
   is "legally significant" per the 15-line threshold.  But even a new
   file of legally significant size does not merit a copyright notice if
   it does not constitute original, non-robotic expression as discussed
-  above.  Include "Copyright-paperwork-exempt: yes" in the Git commit
-  log message.  To summarize, the same rules apply to new files as to
-  changes to existing ones.
+  above.  In that case, include "Copyright-paperwork-exempt: yes" in the
+  Git commit log message.  To summarize, the same rules apply to new
+  files as to changes to existing ones.
 
 * In UTF-8-encoded files, it is fine to use a true copyright sign
   (Unicode U+00A9).  Place it in the notice between the word "Copyright"
@@ -303,7 +303,7 @@ What To Do
   unavailable.  Nowadays, its advice is that "c" (note lowercase) is an
   "acceptable variant", that _may_ retain the efficacy of the copyright
   notice.  The word "copyright", spelled out in full, also suffices per
-  that resource, and is already present in this notice.
+  that resource.
 
   See <https://www.copyright.gov/circs/circ03.pdf>.
 
