@@ -1,3 +1,14 @@
+2026-03-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Use sequential tag names to avoid possible random duplicates.
+
+	* src/devices/gropdf/gropdf.pl: Revert commit cdb97b959,
+	switch to using serial tag names.
+
+	Fixes <https://savannah.gnu.org/bugs/?68136>.
+
+	Thanks to Dave Kemper for the code suggestion.
+
 2026-03-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (do_translate): Stop throwing
