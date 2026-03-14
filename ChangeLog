@@ -1,5 +1,12 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (word_space_node::need_reread)
+	(hmotion_node::need_reread): Assign to `bool`-typed `unformat`
+	member variable with Boolean, not integer, literals.  Continues
+	commit 8ab4aa8bec, 2024-08-14.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Boolify and rename `global_diverted_space`.
 
 	* src/roff/troff/input.cpp: Demote global variable

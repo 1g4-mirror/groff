@@ -3480,7 +3480,7 @@ bool word_space_node::need_reread(bool *)
   if (unformat) {
     for (width_list *w = orig_width; w != 0 /* nullptr */; w = w->next)
       curenv->space(w->width, w->sentence_width);
-    unformat = 0;
+    unformat = false;
     return true;
   }
   return false;
@@ -3495,7 +3495,7 @@ bool hmotion_node::need_reread(bool *)
 {
   if (unformat && was_tab) {
     curenv->advance_to_tab_stop();
-    unformat = 0;
+    unformat = false;
     return true;
   }
   return false;
