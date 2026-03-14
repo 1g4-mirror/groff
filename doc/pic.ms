@@ -1281,7 +1281,6 @@ move right 1 from last [] .e;
 critical(spline right 1 then up right then left then left 1);
 .PE
 .CE "2: Special points on open objects"
-.PP
 .
 .NH 4
 Locations Relative to Polygons
@@ -2375,7 +2374,6 @@ spacing to\~0 (using \fB.vs\fP) before starting the picture.
 .NH 1
 Interface to TeX
 .PP
-.PP
 \*[tx] mode is enabled by the
 .B \-t
 option.
@@ -2824,8 +2822,8 @@ options.
 An end-of-line backslash is interpreted as a request to continue the
 line; the backslash and following newline are ignored.
 .PP
-.RS
 Here are the grammar terminals:
+.RS
 .IP \s[-1]INT\s[0]
 A positive integer.
 .IP \s[-1]NUMBER\s[0]
