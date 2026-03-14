@@ -3027,7 +3027,7 @@ empty string is considered as `false' for `&&' and `|\||'.
   arrow                 \fR# open object \[em] line with arrowhead\fP
   spline                \fR# open object \[em] spline curve\fP
   move
-  TEXT TEXT ...         \fR# text within invisible box\fP
+  TEXT TEXT ...\&         \fR# text within invisible box\fP
   plot <expr> TEXT      \fR# formatted text\fP
   '[' <command> ... ']'
 .R
@@ -3078,7 +3078,7 @@ direction on the block's bounding box.
   ljust | rjust         \fR# adjust text horizontally\fP
   above | below         \fR# adjust text vertically\fP
   aligned               \fR# align parallel to object\fP
-  TEXT TEXT ...         \fR# text within object\fP
+  TEXT TEXT ...\&         \fR# text within object\fP
   <expr>                \fR# motion in the current direction\fR
 .R
 .DE
