@@ -1,5 +1,18 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/pfbtops/pfbtops.am (nodist_EXTRA_pfbtops_SOURCES):
+	Drop "trick" macro definition 'to force the use of C++
+	compiler[.]  See the Automake manual, "Libtool Convenience
+	Libraries"'.  However, groff doesn't use Libtool.  The
+	nonexistent dummy file declared here impedes the use of
+	Automake's "tags" target.  After this change, "pfbtops"'s
+	linkage is unchanged per ldd(1), the smoke test still passes,
+	and the program appears to still operate fine on the file
+	"build/font/devpdf/symbolsl.pfb"...on amd64 GNU/Linux with a GNU
+	toolchain.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Implement `.ul` register for orthogonal completeness
 	with respect to the `.ce`, `.rj`, and `.itc` registers.
 
