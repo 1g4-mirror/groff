@@ -7191,9 +7191,18 @@ static bool is_conditional_expression_true()
   bool perform_output_comparison = false;
   bool want_test_sense_inverted = false;
   tok.skip_spaces();
+  int nbangs = 0;
+  bool warned_about_bangs = false;
   while (tok.ch() == int('!')) { // TODO: grochar
+    nbangs++;
     tok.next();
     want_test_sense_inverted = !want_test_sense_inverted;
+    if (want_att_compat && (nbangs > 1) && !warned_about_bangs) {
+      warning(WARN_SYNTAX, "use of multiple complementation operators"
+	      " '!' in a conditional expression is not portable to AT&T"
+	      " troff");
+      warned_about_bangs = true;
+    }
   }
   bool result;
   int c = tok.ch(); // safely compares to char literals; TODO: grochar

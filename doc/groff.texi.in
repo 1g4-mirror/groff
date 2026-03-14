@@ -22430,6 +22430,31 @@ and doubling of an initial neutral double quote
 @samp{"}
 if the file name has one.
 
+@cindex multiple logical complementation operators @code{!} in conditional expressions, incompatibility with @acronym{AT&T} @code{troff}
+@cindex complementation operators @code{!}, multiple logical, in conditional expressions, incompatibility with @acronym{AT&T} @code{troff}
+@cindex @code{!} complementation operator, multiple logical, in conditional expressions, incompatibility with @acronym{AT&T} @code{troff}
+@cindex operator, complementation (@code{!}), multiple logical, in conditional expressions, incompatibility with @acronym{AT&T} @code{troff}
+GNU
+@command{troff} @c GNU
+accepts multiple leading complementation operators
+@code{!}@:
+in a conditional expression,
+inverting its truth value with each occurrence.
+
+@Example
+.ie !!0 .tm true
+.el     .tm false
+    @error{} false
+@endExample
+
+AT&T
+@command{troff} @c AT&T
+regards the foregoing conditional expression as malformed
+(but issues no diagnostic message)
+and takes
+@emph{neither}
+branch.
+
 @cindex output device name string (@code{.T}), in other implementations
 The existence of the
 @code{.T}

@@ -6760,6 +6760,26 @@ if the file name has one.
 .
 .
 .P
+GNU
+.I troff \" GNU
+accepts multiple leading complementation operators
+.RB \[lq] ! \[rq]\&
+in a conditional expression,
+inverting its truth value with each occurrence.
+.
+AT&T
+.I troff \" AT&T
+regards the conditional expression in
+.RB \[lq] ".ie !!0 .tm true" \[rq]
+as malformed
+(but issues no diagnostic message)
+and takes neither the true branch
+nor any alternative one subsequently established by an
+.B el
+request.
+.
+.
+.P
 The existence of the
 .B .T
 string is a common feature of device-independent

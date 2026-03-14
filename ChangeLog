@@ -1,5 +1,17 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (is_conditional_expression_true):
+	Keep track of how many leading `!` complementation operators
+	appear in a conditional expression.  If multiple occur and the
+	formatter is in AT&T compatibility mode, warn in category
+	"syntax" that the construction is not portable to AT&T troffs.
+
+	* doc/groff.texi.in (Other Differences):
+	* man/groff_diff.7.man (Other differences): Document this
+	syntactical difference.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pushback.cpp (pushBackBuffer::readInt):
 	Eliminate initialized-and-written-to-but-never-read local
 	variable `c`.
