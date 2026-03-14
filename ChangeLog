@@ -10,7 +10,8 @@
 	might be able to make this unnecessary with a parameterized
 	extension to the `fl` request.  See Savannah #66187.
 
-	Fixes <https://savannah.gnu.org/bugs/?67978>.
+	Fixes <https://savannah.gnu.org/bugs/?67978>.  Thanks to Bruno
+	Haible for the report.
 
 2026-03-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
