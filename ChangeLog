@@ -11,14 +11,12 @@
 
 2026-03-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	Use sequential tag names to avoid possible random duplicates.
+	* src/devices/gropdf/gropdf.pl: Use sequential tag names to
+	avoid possible random duplicates.
 
-	* src/devices/gropdf/gropdf.pl: Revert commit cdb97b959,
-	switch to using serial tag names.
-
-	Fixes <https://savannah.gnu.org/bugs/?68136>.
-
-	Thanks to Dave Kemper for the code suggestion.
+	Fixes <https://savannah.gnu.org/bugs/?68136>.  Reverts commit
+	cdb97b9590, 9 March.  Thanks to Dave Kemper for the code
+	suggestion.
 
 2026-03-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
