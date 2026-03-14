@@ -22,6 +22,10 @@ troff
    lines remaining to be be underlined in the environment (as configured
    by either the `cu` or `ul` requests).
 
+*  A new warning category, "style" is supported.  It is used to diagnose
+   input that is non-idiomatic or likely to produce an unexpected result
+   (or none at all), but is not invalid.
+
 
 VERSION 1.24.1
 ==============

@@ -21599,12 +21599,11 @@ release may reject ambiguous delimiters.
 In compatibility mode,
 ambiguous delimiters are accepted without warning.
 
-@c @item el
-@c @itemx 16
-@c @cindex @code{ie} request, and warnings
-@c @cindex @code{el} request, and warnings
-@c The @code{el} request was encountered with no prior corresponding
-@c @code{ie} request.  @xref{if-else}.
+@item style
+@itemx 16
+Input was non-idiomatic or likely to produce an unexpected result
+(or none at all),
+but is not invalid.
 
 @item scale
 @itemx 32

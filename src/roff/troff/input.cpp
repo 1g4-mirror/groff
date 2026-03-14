@@ -10612,6 +10612,7 @@ static struct warning_category {
   { "range", WARN_RANGE },
   { "break", WARN_BREAK },
   { "delim", WARN_DELIM },
+  { "style", WARN_STYLE },
   { "scale", WARN_SCALE },
   { "syntax", WARN_SYNTAX },
   { "tab", WARN_TAB },
@@ -10626,7 +10627,7 @@ static struct warning_category {
   { "ig", WARN_IG },
   { "color", WARN_COLOR },
   { "file", WARN_FILE },
-  { "all", WARN_MAX & ~(WARN_DI | WARN_MAC | WARN_REG) },
+  { "all", WARN_MAX & ~(WARN_STYLE | WARN_DI | WARN_MAC | WARN_REG) },
   { "w", WARN_MAX },
   { "default", DEFAULT_WARNING_CATEGORY_SET },
 };
