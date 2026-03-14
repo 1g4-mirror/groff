@@ -1,5 +1,14 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pushback.cpp (pushBackBuffer::readInt):
+	Eliminate initialized-and-written-to-but-never-read local
+	variable `c`.
+
+	Thanks to Bjarni Ingi Gislason for the report in <https://\
+	lists.gnu.org/archive/html/groff/2026-03/msg00072.html>.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Throw warning in category "style" if
 	{a} centering or right-alignment is configured while a temporary
 	indentation is in effect; or {b} a temporary indentation request
