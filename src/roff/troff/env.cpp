@@ -566,6 +566,8 @@ void environment::space(hunits space_width, hunits sentence_space_width)
       && node_list_ends_sentence(p->next) == 1) {
     hunits xx = translate_space_to_dummy ? H0 : sentence_space_width;
     if (p->did_space_merge(xx, space_width, sentence_space_width)) {
+      warning(WARN_STYLE, "end of sentence detected before end of text"
+	      " line");
       *tp += xx;
       return;
     }

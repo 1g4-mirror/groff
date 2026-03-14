@@ -21603,7 +21603,8 @@ ambiguous delimiters are accepted without warning.
 @itemx 16
 Input was non-idiomatic or likely to produce an unexpected result
 (or none at all),
-but is not invalid.
+but is not invalid:
+the end of a sentence was detected prior to the end of a text line.
 
 @item scale
 @itemx 32

@@ -1,5 +1,17 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::space): Throw warning in
+	category "style" if the end of a sentence is detected before the
+	end of a text line.
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68151>.  Thanks to Alex
+	Colomar for the original feature request.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (struct warning_category): Add new
 	warning category, "style" (with symbol `WARN_STYLE`).  Suppress
 	its enablement from the `-wall` command-line option shorthand,
