@@ -1,5 +1,19 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Boolify and rename `global_diverted_space`.
+
+	* src/roff/troff/input.cpp: Demote global variable
+	`global_diverted_space` from `int` to `bool` and rename it to
+	`have_global_diverted_space`.  Annotate it as used only by the
+	MTSM feature, which I hope some day to either better understand,
+	or to remove.
+	* src/roff/troff/env.cpp: Update an `extern` declaration.
+	* src/roff/troff/input.cpp (diverted_space_node::need_reread):
+	* src/roff/troff/env.cpp (environment::do_break): Update sites
+	of use.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/pfbtops/pfbtops.am (nodist_EXTRA_pfbtops_SOURCES):
 	Drop "trick" macro definition 'to force the use of C++
 	compiler[.]  See the Automake manual, "Libtool Convenience

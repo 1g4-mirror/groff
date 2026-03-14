@@ -3453,16 +3453,17 @@ bool node::need_reread(bool *)
   return false;
 }
 
-int global_diverted_space = 0;
+// XXX: used only by MTSM code
+bool have_global_diverted_space = false;
 
 bool diverted_space_node::need_reread(bool *bolp)
 {
-  global_diverted_space = 1;
+  have_global_diverted_space = true;
   if (curenv->get_fill())
     trapping_blank_line();
   else
     curdiv->space(n);
-  global_diverted_space = 0;
+  have_global_diverted_space = false;
   *bolp = true;
   return true;
 }

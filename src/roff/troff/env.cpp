@@ -2581,7 +2581,8 @@ void environment::construct_new_line_state(node *nd)
   }
 }
 
-extern int global_diverted_space;
+// XXX: used only by MTSM code
+extern bool have_global_diverted_space;
 
 // "Forced adjustment" refers to spreading of adjustable spaces (and
 // perhaps only that, even if in the future we implement "squeezing"),
@@ -2638,7 +2639,7 @@ void environment::do_break(bool want_forced_adjustment)
   mark_last_line();
   output_pending_lines();
 #endif /* WIDOW_CONTROL */
-  if (!global_diverted_space) {
+  if (!have_global_diverted_space) {
     curdiv->modified_tag.incl(MTSM_BR);
     seen_break = true;
   }
