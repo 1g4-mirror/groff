@@ -1417,9 +1417,9 @@ request makes use of text lines unnecessary.
 .IP
 .EX
 \&.de Text
-\&.  if (\[rs]\[rs]n[.$] == 0) \[rs]
-\&.    return
-\&.  nop \[rs]&\[rs]\[rs]$*\[rs]&
+\&.\&  if (\[rs]\[rs]n[.$] == 0) \[rs]
+\&.\&    return
+\&.\&  nop \[rs]&\[rs]\[rs]$*\[rs]&
 \&..
 .EE
 .RE
