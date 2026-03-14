@@ -4961,17 +4961,17 @@ bool unpostpone_traps()
 void read_request()
 {
   macro_iterator *mi = new macro_iterator;
-  int reading_from_terminal = isatty(fileno(stdin));
-  int had_prompt = 0;
+  bool is_reading_from_terminal = bool(isatty(fileno(stdin)));
+  bool had_prompt = false;
   if (has_arg(true /* peek */)) {
     int c = read_char_in_copy_mode(0 /* nullptr */);
     while (c == ' ')
       c = read_char_in_copy_mode(0 /* nullptr */);
     while (c != EOF && c != '\n' && c != ' ') {
       if (!is_invalid_input_char(c)) {
-	if (reading_from_terminal)
+	if (is_reading_from_terminal)
 	  fputc(c, stderr);
-	had_prompt = 1;
+	had_prompt = true;
       }
       c = read_char_in_copy_mode(0 /* nullptr */);
     }
@@ -4980,30 +4980,30 @@ void read_request()
       decode_macro_call_arguments(mi);
     }
   }
-  if (reading_from_terminal) {
+  if (is_reading_from_terminal) {
     fputc(had_prompt ? ':' : '\a', stderr);
     fflush(stderr);
   }
   input_stack::push(mi);
   macro mac;
-  int nl = 0;
+  bool saw_newline = false;
   int c;
   while ((c = getchar()) != EOF) {
     if (is_invalid_input_char(c))
       warning(WARN_INPUT, "invalid input character code %1", int(c));
     else {
       if (c == '\n') {
-	if (nl != 0 /* nullptr */)
+	if (!saw_newline)
 	  break;
 	else
-	  nl = 1;
+	  saw_newline = true;
       }
       else
-	nl = 0;
+	saw_newline = false;
       mac.append(c);
     }
   }
-  if (reading_from_terminal)
+  if (is_reading_from_terminal)
     clearerr(stdin);
   input_stack::push(new string_iterator(mac));
   tok.next();

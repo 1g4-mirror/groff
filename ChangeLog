@@ -1,5 +1,14 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_request): Boolify and rename
+	some local variables.  `reading_from_terminal` becomes
+	`is_reading_from_terminal`.  `nl` becomes `saw_newline`.  Assign
+	to `is_reading_from_terminal`, `had_prompt`, and `saw_newline`
+	with Boolean, not integer, literals.  Use idiomatic test
+	expressions.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (word_space_node::need_reread)
 	(hmotion_node::need_reread): Assign to `bool`-typed `unformat`
 	member variable with Boolean, not integer, literals.  Continues
