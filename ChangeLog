@@ -1,3 +1,6 @@
+Version 1.24.1 released 2026-03-14
+==================================
+
 2026-03-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/troffrc (ptr): Disclose correct groff version number when
