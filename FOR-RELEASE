@@ -17,6 +17,10 @@ Before Release
 
   https://www.gnu.org/prep/maintain/maintain.html#Automated-Upload-Registration
 
+* When deciding to increment the major or minor version number, split
+  off a historical "ChangeLog" file and add it to `EXTRA_DIST` in
+  "Makefile.am".
+
 * Update "grog.pl" to include the names of new GNU troff requests and
   macro names unique to specific packages (and sufficiently heavily used
   in typical documents).
@@ -119,7 +123,3 @@ After Release
 
 * If warranted, update the "ANNOUNCE" file to make it a template for the
   next release.
-
-* If the major or minor version number has incremented, split off
-  a historical "ChangeLog" file and add it to `EXTRA_DIST` in
-  "Makefile.am".
