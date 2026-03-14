@@ -21604,7 +21604,10 @@ ambiguous delimiters are accepted without warning.
 Input was non-idiomatic or likely to produce an unexpected result
 (or none at all),
 but is not invalid:
-the end of a sentence was detected prior to the end of a text line.
+the end of a sentence was detected prior to the end of a text line;
+or
+an attempt was made to combine temporary indentation
+with centering or right-adjustment.
 
 @item scale
 @itemx 32

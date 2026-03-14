@@ -1463,6 +1463,13 @@ void no_fill()
   tok.next();
 }
 
+void cancel_temporary_indentation()
+{
+  curenv->temporary_indent = 0;
+  curenv->have_temporary_indent = false;
+  curdiv->modified_tag.excl(MTSM_TI);
+}
+
 void center()
 {
   int n;
@@ -1474,6 +1481,10 @@ void center()
     tok.next();
   if (was_invoked_with_regular_control_character)
     curenv->do_break();
+  if (curenv->have_temporary_indent)
+    warning(WARN_STYLE, "ignoring temporary indentation while"
+	    " centering request in effect");
+  cancel_temporary_indentation();
   curenv->right_aligned_line_count = 0;
   curenv->centered_line_count = n;
   curdiv->modified_tag.incl(MTSM_CE);
@@ -1491,6 +1502,10 @@ void right_justify()
     tok.next();
   if (was_invoked_with_regular_control_character)
     curenv->do_break();
+  if (curenv->have_temporary_indent)
+    warning(WARN_STYLE, "ignoring temporary indentation while"
+	    " right-alignment request in effect");
+  cancel_temporary_indentation();
   curenv->centered_line_count = 0;
   curenv->right_aligned_line_count = n;
   curdiv->modified_tag.incl(MTSM_RJ);
@@ -1619,8 +1634,19 @@ void temporary_indent()
     // character this request still breaks the line.
   }
   else {
+    if (curenv->centered_line_count > 0) {
+      is_valid = false;
+      warning(WARN_STYLE, "ignoring temporary indentation request while"
+	    " centering text");
+    }
+    if (curenv->right_aligned_line_count > 0) {
+      is_valid = false;
+      warning(WARN_STYLE, "ignoring temporary indentation request while"
+	      " right-aligning text");
+    }
     if (!read_hunits(&temp, 'm', curenv->get_indent()))
       is_valid = false;
+    // XXX: Why not `skip_line()`?
     while (!tok.is_newline() && !tok.is_eof())
       tok.next();
   }
@@ -1636,7 +1662,7 @@ void temporary_indent()
     curenv->have_temporary_indent = true;
     curdiv->modified_tag.incl(MTSM_TI);
   }
-  tok.next();
+  tok.next(); // XXX: Why not `skip_line()`?
 }
 
 void configure_underlining(bool want_spaces_underlined)

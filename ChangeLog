@@ -1,5 +1,37 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Throw warning in category "style" if
+	{a} centering or right-alignment is configured while a temporary
+	indentation is in effect; or {b} a temporary indentation request
+	is issued while centering or right-alignment are in effect.
+	(cancel_temporary_indentation): New function--which I suspect
+	should be a member function of class `environment`, but which
+	would be confusingly inconsistent with existing practice--sets
+	the temporary indentation amount to zero and sets the property
+	of having a temporary indent off.  (Those are not the same
+	thing.  Temporary indentation _overrides_ ordinary indentation,
+	so a temporary indent of zero is often sensible.)  Also tell the
+	mysterious MTSM machine that temporary indentation is off.
+	(center): Throw the aforementioned warning from this `ce`
+	request handler.
+	(right_justify): Throw the aforementioned warning from this `rj`
+	request handler.
+	(temporary_indent): Throw the aforementioned warning from this
+	`ti` request handler.
+	* src/roff/troff/env.h (class environment): Declare new non-OO
+	`cancel_temporary_indentation()` function as a friend.
+	{Eighties-style.  <finger guns>}
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?64275>.  See
+	<https://lists.gnu.org/archive/html/groff/2023-05/msg00079.html>
+	for illustration of the ill-defined composition of these
+	features and (brief) discussion.
+
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::space): Throw warning in
 	category "style" if the end of a sentence is detected before the
 	end of a text line.
