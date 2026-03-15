@@ -1,5 +1,21 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp: Refactor: migrate from putenv(3) to
+	setenv(3) (1/4).  Drop global pointer variable
+	`groff_font_path`.
+	(xsetenv): New function wraps setenv(3) as `xputenv()` does
+	putenv(3).
+	(main): Replace local string `e` containing shell-like
+	environment variable assignment with string `value` containing
+	only the value to be assigned.  Call `xsetenv()` with
+	`GROFF_FONT_PATH` string literal and `value` as arguments.
+	Because, unlike putenv(3), setenv(3) makes its own copies of its
+	C string operands, we no longer need to reserve statically
+	allocated storage for them to keep them from going out of scope.
+	(xexit): Stop free(3)ing abandoned variable `groff_font_path`.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Refactor: migrate from putenv(3) to setenv(3).
 
 	* src/devices/grops/ps.cpp (main):

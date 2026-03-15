@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h> // EOF, FILE, fflush(), setbuf(), stderr, stdout
-#include <stdlib.h> // exit(), EXIT_SUCCESS, free(), getenv(), putenv()
+#include <stdlib.h> // exit(), EXIT_SUCCESS, free(), getenv(), putenv(), setenv()
 #include <string.h> // strerror(), strsignal()
 
 #include <getopt.h> // getopt_long()
@@ -110,7 +110,6 @@ char *predriver = 0 /* nullptr */;
 bool need_postdriver = true;
 char *saved_path = 0 /* nullptr */;
 char *groff_bin_path = 0 /* nullptr */;
-char *groff_font_path = 0 /* nullptr */;
 
 possible_command commands[NCOMMANDS];
 
@@ -138,13 +137,19 @@ static void xputenv(const char *s) {
   return;
 }
 
+static void xsetenv(const char *name, const char *value, int overwrite)
+{
+  if (setenv(name, value, overwrite) != 0)
+    fatal("cannot update process environment: %1", strerror(errno));
+  return;
+}
+
 static void xexit(int status) {
   free(spooler);
   free(predriver);
   free(postdriver);
   free(saved_path);
   free(groff_bin_path);
-  free(groff_font_path);
   exit(status);
 }
 
@@ -521,17 +526,14 @@ int main(int argc, char **argv)
       commands[first_index].append_arg("-");
   }
   if (Fargs.length() > 0) {
-    string e = "GROFF_FONT_PATH";
-    e += '=';
-    e += Fargs;
+    string value = Fargs;
     char *fontpath = getenv("GROFF_FONT_PATH");
     if ((fontpath != 0 /* nullptr */) && (*fontpath != '\0')) {
-      e += PATH_SEP_CHAR;
-      e += fontpath;
+      value += PATH_SEP_CHAR;
+      value += fontpath;
     }
-    e += '\0';
-    groff_font_path = xstrdup(e.contents());
-    xputenv(groff_font_path);
+    value += '\0';
+    xsetenv("GROFF_FONT_PATH", value.contents(), 1 /* overwrite */);
   }
   {
     // we save the original path in GROFF_PATH__ and put it into the
