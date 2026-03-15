@@ -1,6 +1,12 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.cpp: Refactor: migrate from putenv(3) to
+	setenv(3) (4/4).
+	(xputenv): Drop no-longer-used function.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/groff.cpp: Refactor: migrate from putenv(3) to
 	setenv(3) (3/4).  Drop global pointer variable `groff_bin_path`.
 	(main): Stop initially populating `newpath` local variable with
 	"PATH=" in favor of straightforward call to `xsetenv()` with

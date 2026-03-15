@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h> // EOF, FILE, fflush(), setbuf(), stderr, stdout
-#include <stdlib.h> // exit(), EXIT_SUCCESS, free(), getenv(), putenv(), setenv()
+#include <stdlib.h> // exit(), EXIT_SUCCESS, free(), getenv(), setenv()
 #include <string.h> // strerror(), strsignal()
 
 #include <getopt.h> // getopt_long()
@@ -127,12 +127,6 @@ static char *xstrdup(const char *s) {
   if (0 /* nullptr */ == str)
     fatal("unable to copy string: %1", strerror(errno));
   return str;
-}
-
-static void xputenv(const char *s) {
-  if (putenv(const_cast<char *>(s)) != 0)
-    fatal("cannot update process environment: %1", strerror(errno));
-  return;
 }
 
 static void xsetenv(const char *name, const char *value, int overwrite)
