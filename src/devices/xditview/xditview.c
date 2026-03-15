@@ -1,6 +1,6 @@
 /*
  * Copyright 1991 Massachusetts Institute of Technology
- * Copyright (C) 1990-2024 Free Software Foundation, Inc.
+ * Copyright 1990-2024 Free Software Foundation, Inc.
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided that
