@@ -108,7 +108,6 @@ char *spooler = 0 /* nullptr */;
 char *postdriver = 0 /* nullptr */;
 char *predriver = 0 /* nullptr */;
 bool need_postdriver = true;
-char *groff_bin_path = 0 /* nullptr */;
 
 possible_command commands[NCOMMANDS];
 
@@ -147,7 +146,6 @@ static void xexit(int status) {
   free(spooler);
   free(predriver);
   free(postdriver);
-  free(groff_bin_path);
   exit(status);
 }
 
@@ -539,7 +537,7 @@ int main(int argc, char **argv)
     char *path = getenv("PATH");
     xsetenv("GROFF_PATH__", path, 1 /* overwrite */);
     char *binpath = getenv("GROFF_BIN_PATH");
-    string newpath = "PATH=";
+    string newpath;
     if ((binpath != 0 /* nullptr */ && (*binpath != '\0')))
       newpath += binpath;
     else {
@@ -550,8 +548,7 @@ int main(int argc, char **argv)
       newpath += path;
     }
     newpath += '\0';
-    groff_bin_path = xstrdup(newpath.contents());
-    xputenv(groff_bin_path);
+    xsetenv("PATH", newpath.contents(), 1 /* overwrite */);
   }
   if (Vflag)
     print_commands(Vflag == 1 ? stdout : stderr);

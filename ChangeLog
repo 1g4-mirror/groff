@@ -1,6 +1,19 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.cpp: Refactor: migrate from putenv(3) to
+	setenv(3) (3/4).  Drop global pointer variable `groff_bin_path`.
+	(main): Stop initially populating `newpath` local variable with
+	"PATH=" in favor of straightforward call to `xsetenv()` with
+	`PATH` string literal and contents of `newpath` groff string as
+	arguments.  Because, unlike putenv(3), setenv(3) makes its own
+	copies of its C string operands, we no longer need to reserve
+	statically allocated storage for them to keep them from going
+	out of scope.
+	(xexit): Stop free(3)ing abandoned variable `groff_bin_path`.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/groff/groff.cpp: Refactor: migrate from putenv(3) to
 	setenv(3) (2/4).  Drop global pointer variable `saved_path`.
 	(main): Drop local string `g` containing shell-like
 	environment variable assignment in favor of straightforward call
