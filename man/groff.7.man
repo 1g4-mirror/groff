@@ -7623,6 +7623,16 @@ see
 option.
 .
 .TP
+.REG .ul
+Count of input lines remaining to be underlined
+in the environment.
+.
+See
+.request cu
+and
+.request ul .
+.
+.TP
 .REG .v
 The environment's vertical line spacing;
 see

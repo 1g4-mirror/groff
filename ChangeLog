@@ -1,3 +1,25 @@
+2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Implement `.ul` register for orthogonal completeness
+	with respect to the `.ce`, `.rj`, and `.itc` registers.
+
+	* src/roff/troff/env.h (class environment): Declare new accessor
+	member function `get_underlined_line_count()`.
+	* src/roff/troff/env.cpp
+	(environment::get_underlined_line_count): Define it.
+	(init_env_requests): Wire up `.ul` register name to
+	`get_underlined_line_count()`.
+
+	* src/roff/groff/tests/dot-ul-register-works.sh: Test it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	* doc/groff.texi.in (Artificial Fonts):
+	* man/groff.7.man (Read-only registers):
+	* man/groff_diff.7.man (New registers):
+	* NEWS: Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68130>.
+
 2026-03-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #68137.

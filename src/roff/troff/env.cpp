@@ -475,6 +475,11 @@ int environment::get_hyphen_line_count()
   return hyphen_line_count;
 }
 
+int environment::get_underlined_line_count()
+{
+  return underlined_line_count;
+}
+
 int environment::get_centered_line_count()
 {
   return centered_line_count;
@@ -4434,6 +4439,7 @@ void init_env_requests()
   init_string_env_reg(".sty", get_style_name_string);
   init_string_env_reg(".tabs", get_tabs);
   init_int_env_reg(".u", get_fill);
+  init_int_env_reg(".ul", get_underlined_line_count);
   init_vunits_env_reg(".v", get_vertical_spacing);
   init_hunits_env_reg(".w", get_prev_char_width);
   init_int_env_reg(".zoom", get_zoom);

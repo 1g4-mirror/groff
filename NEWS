@@ -18,6 +18,10 @@ troff
 *  GNU troff, the formatter, now issues warnings in the "delim",
    "syntax", and "escape" categories by default.
 
+*  A new read-only register `.ul` reports the count of productive input
+   lines remaining to be be underlined in the environment (as configured
+   by either the `cu` or `ul` requests).
+
 
 VERSION 1.24.1
 ==============

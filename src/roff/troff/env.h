@@ -328,6 +328,7 @@ public:
   int get_hyphen_line_count();
   hunits get_hyphenation_space();
   hunits get_hyphenation_margin();
+  int get_underlined_line_count();
   int get_centered_line_count();
   int get_input_trap_line_count();
   int get_input_trap_respects_continuation();

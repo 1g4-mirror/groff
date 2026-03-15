@@ -13948,7 +13948,8 @@ the slant is only assigned,
 never incremented or decremented.
 @endDefesc
 
-@Defreq {ul, [@Var{n}]}
+@DefreqList {ul, [@Var{n}]}
+@DefregListEndx {.ul}
 @cindex underlining (@code{ul})
 Underline
 (in
@@ -13967,6 +13968,12 @@ Omitting the argument implies an
 @var{n}
 of
 @samp{1}.
+The read-only register
+@code{.ul}
+stores the count of productive input lines
+remaining to be underlined,
+which is associated with the environment
+(@pxref{Environments}).
 
 When
 @code{ul}
