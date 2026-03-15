@@ -1,5 +1,12 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* configure.ac: Stop reporting use of libgroff's custom memory
+	allocator in configuration summary.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?67936>.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/xditview/xditview.c (main): Avoid invalid memory
 	access by checking that `argc` is greater than 1 before trying
 	to access `argv[1]`.
