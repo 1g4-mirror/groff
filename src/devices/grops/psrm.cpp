@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h>
 #include <stdcountof.h>
 #include <stdio.h> // EOF, FILE, fclose(), fgets(), getc(), ungetc()
-#include <stdlib.h> // getenv(), putenv(), strtoul()
+#include <stdlib.h> // getenv(), setenv(), strtoul()
 #include <string.h> // strerror(), strtok()
 
 #include "cset.h"
@@ -291,11 +291,8 @@ void resource_manager::output_prolog(ps_output &out)
   out.end_line();
   char *path;
   if (getenv("GROPS_PROLOGUE") == 0 /* nullptr */) {
-    string e = "GROPS_PROLOGUE";
-    e += '=';
-    e += GROPS_PROLOGUE;
-    e += '\0';
-    if (putenv(strsave(e.contents())) != 0)
+    if (setenv("GROPS_PROLOGUE", GROPS_PROLOGUE, 1 /* overwrite */)
+	!= 0)
       fatal("cannot update process environment: %1", strerror(errno));
   }
   char *prologue = getenv("GROPS_PROLOGUE");

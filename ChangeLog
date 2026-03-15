@@ -1,5 +1,15 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Refactor: migrate from putenv(3) to setenv(3).
+
+	* src/devices/grops/ps.cpp (main):
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
+	* src/roff/troff/input.cpp (main): Do it.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?68024>.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp (main): Slightly refactor.  Rename
 	local variable `f` to `newpath` to make its purpose clearer.
 	Reduce number of string operations.
