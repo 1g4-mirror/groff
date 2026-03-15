@@ -1,5 +1,7 @@
-/* Copyright 1989-2023 Free Software Foundation, Inc.
-     Written by James Clark (jjc@jclark.com)
+/* Copyright 1989-2003 Free Software Foundation, Inc.
+                  2023 TANAKA Takuji
+
+Written by James Clark (jjc@jclark.com)
 
 This file is part of groff, the GNU roff typesetting system.
 
