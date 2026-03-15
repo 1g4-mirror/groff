@@ -1,5 +1,13 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/xditview/xditview.c (main): Avoid invalid memory
+	access by checking that `argc` is greater than 1 before trying
+	to access `argv[1]`.
+
+	Fixes <https://savannah.gnu.org/bugs/?68152>.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (rename_register_request): Fix typo in
 	warning diagnostic message.
 
