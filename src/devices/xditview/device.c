@@ -472,9 +472,9 @@ FILE *find_file(const char *file, char **result)
   char *buf = NULL;
   int bufsiz = 0;
   int flen;
-  FILE *fp;
-  char *path;
-  char *env;
+  FILE *fp = NULL;
+  char *path = NULL;
+  char *env = NULL;
 
   env = getenv(FONT_ENV_VAR);
   path = XtMalloc((((env != NULL) && (*env != '\0'))

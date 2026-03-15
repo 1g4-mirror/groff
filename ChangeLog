@@ -1,5 +1,10 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/xditview/device.c (find_file): Initialize local
+	pointer variables with explicit null pointer constant.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Trivially refactor.  Compare C/C++ objects of `char` type to
 	character literals instead of punning them down to Booleans.
 
