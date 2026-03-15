@@ -169,7 +169,7 @@ int main(int argc, char **argv)
   int opt;
   const char *command_prefix = getenv("GROFF_COMMAND_PREFIX");
   const char *encoding = getenv("GROFF_ENCODING");
-  if (!command_prefix)
+  if (0 /* nullptr */ == command_prefix)
     command_prefix = PROG_PREFIX;
   commands[TROFF_INDEX].set_name(command_prefix, "troff");
   static const struct option long_options[] = {
@@ -399,7 +399,7 @@ int main(int argc, char **argv)
   }
   if (need_pic)
     commands[PIC_INDEX].set_name(command_prefix, "pic");
-  if (encoding) {
+  if (encoding != 0 /* nullptr */) {
     commands[PRECONV_INDEX].set_name("preconv");
     if (!Kflag && *encoding)
       commands[PRECONV_INDEX].append_arg("-e", encoding);
@@ -524,7 +524,7 @@ int main(int argc, char **argv)
     e += '=';
     e += Fargs;
     char *fontpath = getenv("GROFF_FONT_PATH");
-    if (fontpath && *fontpath) {
+    if ((fontpath != 0 /* nullptr */) && *fontpath) {
       e += PATH_SEP_CHAR;
       e += fontpath;
     }
@@ -538,7 +538,7 @@ int main(int argc, char **argv)
     char *path = getenv("PATH");
     string g = "GROFF_PATH__";
     g += '=';
-    if (path && *path)
+    if ((path != 0 /* nullptr */ && *path))
       g += path;
     g += '\0';
     saved_path = xstrdup(g.contents());
@@ -546,13 +546,13 @@ int main(int argc, char **argv)
     char *binpath = getenv("GROFF_BIN_PATH");
     string f = "PATH";
     f += '=';
-    if (binpath && *binpath)
+    if ((binpath != 0 /* nullptr */ && *binpath))
       f += binpath;
     else {
       binpath = relocatep(BINPATH);
       f += binpath;
     }
-    if (path && *path) {
+    if ((path != 0 /* nullptr */ && *path)) {
       f += PATH_SEP_CHAR;
       f += path;
     }

@@ -290,7 +290,7 @@ void resource_manager::output_prolog(ps_output &out)
   FILE *outfp = out.get_file();
   out.end_line();
   char *path;
-  if (!getenv("GROPS_PROLOGUE")) {
+  if (getenv("GROPS_PROLOGUE") == 0 /* nullptr */) {
     string e = "GROPS_PROLOGUE";
     e += '=';
     e += GROPS_PROLOGUE;

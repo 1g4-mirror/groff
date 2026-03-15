@@ -980,7 +980,7 @@ int main(int argc, char **argv)
 {
   program_name = argv[0];
   static char stderr_buf[BUFSIZ];
-  if (getenv("GROFF_NO_SGR"))
+  if (getenv("GROFF_NO_SGR") != 0 /* nullptr */)
     use_overstriking_drawing_scheme = true;
   setbuf(stderr, stderr_buf);
   setlocale(LC_CTYPE, "");

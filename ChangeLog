@@ -1,5 +1,23 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Trivially refactor.  Compare return value of getenv(3) to
+	explicit null pointer constants appropriate for C or C++ instead
+	punning that return value down to a Boolean.
+
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
+	* src/devices/grotty/tty.cpp (main):
+	* src/devices/xditview/device.c (find_file):
+	* src/libs/libgroff/curtime.cpp (current_time):
+	* src/libs/libgroff/device.cpp (device_init):
+	* src/libs/libgroff/relocate.cpp (set_current_prefix):
+	* src/libs/libgroff/searchpath.cpp (search_path::search_path):
+	* src/preproc/html/pre-html.cpp (scanArguments):
+	* src/preproc/refer/refer.cpp (possibly_load_default_database):
+	* src/roff/groff/groff.cpp (main):
+	* src/utils/lkbib/lkbib.cpp (main): Do it.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
 	Handle getenv(3) failure.  Having just written successfully to
 	the process environment (else we `fatal()`ed out), assert(3)
