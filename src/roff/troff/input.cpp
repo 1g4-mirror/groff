@@ -3320,7 +3320,7 @@ void exit_troff()
     topdiv->space(topdiv->get_page_length(), true /* forcing */);
     tok.next();
     process_input_stack();
-    // TODO: Resolve the follwing case and enable the assertion.
+    // TODO: Resolve the following case and enable the assertion.
     // $ printf '.DS\n.DE\n' | ./build/test-groff -ms
     // troff: ../src/roff/troff/input.cpp:2937: void exit_troff():
     //   Assertion `seen_last_page_ejector' failed.
@@ -6105,7 +6105,7 @@ static bool read_delimited_measurement(units *n, unsigned char si)
 // \l, \L
 //
 // Here's some syntax unique to these escape sequences: a horizontal
-// measurment followed immediately by a character.
+// measurement followed immediately by a character.
 static bool read_line_rule_expression(units *n, unsigned char si,
 				      charinfo **cip)
 {
