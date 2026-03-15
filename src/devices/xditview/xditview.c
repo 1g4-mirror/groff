@@ -694,4 +694,5 @@ c-argdecl-indent: 4
 c-label-offset: -4
 c-tab-always-indent: nil
 End:
+vim:set cindent noexpandtab shiftwidth=4 softtabstop=4 textwidth=72:
 */
