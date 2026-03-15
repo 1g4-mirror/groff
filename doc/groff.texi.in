@@ -9810,15 +9810,26 @@ Went the day well?
 @cindex centered text (unfilled)
 @cindex centering lines (@code{ce})
 @cindex lines, centering (@code{ce})
-Break (unless the no-break control character is used), center the output
-of the next @var{n} productive input lines with respect to the line
-length and indentation without filling, then break again regardless of
-the invoking control character.
+Break
+(unless the no-break control character is used),
+center the output of the next
+@var{n}
+productive input lines
+with respect to the line length and indentation,
+without filling,
+then break again regardless of the invoking control character.
 @c Temporary indentation is ignored.
-If the argument is not positive, centering is disabled.  Omitting the
-argument implies an @var{n} of @samp{1}.  The count of input lines
-remaining to be centered is stored in the read-only register @code{.ce}
-and is associated with the environment (@pxref{Environments}).
+A nonpositive argument cancels any pending centering.
+Omitting the argument implies an
+@var{n}
+of
+@samp{1}.
+The read-only register
+@code{.ce}
+stores the count of productive input lines
+remaining to be centered,
+which is associated with the environment
+(@pxref{Environments}).
 
 @cindex @code{ce} request, difference from @w{@samp{.ad c}}
 While the @w{@samp{.ad c}} request also centers text, it fills the text
@@ -9868,14 +9879,24 @@ for requests that take a count of input lines as an argument.
 @DefregListEndx {.rj}
 @cindex right-aligning text (@code{rj})
 @cindex text, right-aligning (@code{rj})
-Break (unless the no-break control character is used), align the output
-of the next @var{n} productive input lines to the right margin without
-filling, then break again regardless of the control character.
+Break
+(unless the no-break control character is used),
+align the output of the next
+@var{n}
+productive input lines to the right margin,
+without filling,
+then break again regardless of the control character.
 @c Temporary indentation is ignored.
-If the argument is not positive, right-alignment is disabled.  Omitting
-the argument implies an @var{n} of @samp{1}.  The count of input lines
-remaining to be right-aligned is stored in the read-only registeinput r
-@code{.rj} and is associated with the environment
+A nonpositive argument cancels any pending right-alignment.
+Omitting the argument implies an
+@var{n}
+of
+@samp{1}.
+The read-only register
+@code{.rj}
+stores the count of productive input lines
+remaining to be right-aligned,
+which is associated with the environment
 (@pxref{Environments}).
 
 @Example
@@ -18482,11 +18503,21 @@ the trap is sprung.
 ..
 @endExample
 
-The @code{.it}, @code{.itc}, and @code{.itm} registers report the number
-of input lines remaining in a pending input trap, a Boolean indication
-of whether that pending input trap honors output line continuation, and
-the name of the macro associated with the pending input trap,
-respectively.  All are read-only; @code{.itm} is string-valued as well.
+The
+@code{.it},
+@code{.itc},
+and
+@code{.itm}
+registers respectively report
+the number of remaining productive input lines
+to be formatted before a pending input trap springs,
+a Boolean indication of whether
+that pending input trap honors output line continuation,
+and
+the name of the macro associated with the pending input trap.
+All are read-only;
+@code{.itm}
+is string-valued as well.
 
 @need 500
 Let us consider in more detail the sorts of input lines that are or are

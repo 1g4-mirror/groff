@@ -7181,8 +7181,8 @@ positive if glyph extends below the baseline.
 .
 .TP
 .REG .ce
-Count of input lines remaining to be centered
-in the environment.
+Count of productive input lines
+remaining to be centered in the environment.
 .
 .TP
 .REG .cht
@@ -7317,8 +7317,8 @@ was \[lq]interrupted\[rq] or continued with
 .
 .TP
 .REG .it
-Count of input lines remaining
-in the environment's pending input trap.
+Count of productive input lines remaining
+before the environment's pending input trap springs.
 .
 .TP
 .REG .itc
@@ -7483,8 +7483,8 @@ Maximum representable integer in GNU
 .
 .TP
 .REG .rj
-Count of input lines remaining to be right-aligned
-in the environment.
+Count of productive input lines
+remaining to be right-aligned in the environment.
 .
 .TP
 .REG .s
