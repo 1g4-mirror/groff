@@ -1,5 +1,13 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/xditview/device.c: Slightly refactor.  Convert
+	C/C++ preprocessor macro `FONTPATH_ENV_VAR` to global `const`
+	object named `FONT_ENV_VAR`, for consistency with identical
+	usage in "src/libs/libgroff/fontfile.cpp".
+	(find_file): Update getenv(3) call to use the new symbol name.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_USE_GROFF_ALLOCATOR): Update help string to
 	mark `--enable-groff-allocator` configuration option as
 	deprecated.

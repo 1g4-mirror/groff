@@ -19,9 +19,8 @@
 #define isascii(c) (1)
 #endif
 
-/* Name of environment variable containing path to be used for
-searching for device and font description files. */
-#define FONTPATH_ENV_VAR  "GROFF_FONT_PATH"
+// See "src/libs/libgroff/fontfile.cpp".
+const char *const FONT_ENV_VAR = "GROFF_FONT_PATH";
 
 #define WS " \t\r\n"
 
@@ -460,7 +459,7 @@ FILE *find_file(const char *file, char **result)
   char *path;
   char *env;
 
-  env = getenv(FONTPATH_ENV_VAR);
+  env = getenv(FONT_ENV_VAR);
   path = XtMalloc(((env && *env) ? strlen(env) + 1 : 0)
 		  + strlen(FONTPATH) + 1);
   *path = '\0';
