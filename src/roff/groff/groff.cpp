@@ -108,7 +108,6 @@ char *spooler = 0 /* nullptr */;
 char *postdriver = 0 /* nullptr */;
 char *predriver = 0 /* nullptr */;
 bool need_postdriver = true;
-char *saved_path = 0 /* nullptr */;
 char *groff_bin_path = 0 /* nullptr */;
 
 possible_command commands[NCOMMANDS];
@@ -148,7 +147,6 @@ static void xexit(int status) {
   free(spooler);
   free(predriver);
   free(postdriver);
-  free(saved_path);
   free(groff_bin_path);
   exit(status);
 }
@@ -539,13 +537,7 @@ int main(int argc, char **argv)
     // we save the original path in GROFF_PATH__ and put it into the
     // environment -- troff will pick it up later.
     char *path = getenv("PATH");
-    string g = "GROFF_PATH__";
-    g += '=';
-    if ((path != 0 /* nullptr */ && (*path != '\0')))
-      g += path;
-    g += '\0';
-    saved_path = xstrdup(g.contents());
-    xputenv(saved_path);
+    xsetenv("GROFF_PATH__", path, 1 /* overwrite */);
     char *binpath = getenv("GROFF_BIN_PATH");
     string newpath = "PATH=";
     if ((binpath != 0 /* nullptr */ && (*binpath != '\0')))
