@@ -123,3 +123,7 @@ After Release
 
 * If warranted, update the "ANNOUNCE" file to make it a template for the
   next release.
+
+* Update groff's entry at the FSF's Free Software Directory.
+
+  https://directory.fsf.org/wiki/Groff
