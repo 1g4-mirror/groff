@@ -1,5 +1,11 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (main): Slightly refactor.  Rename
+	local variable `f` to `newpath` to make its purpose clearer.
+	Reduce number of string operations.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/xditview/device.c (find_file): Initialize local
 	pointer variables with explicit null pointer constant.
 

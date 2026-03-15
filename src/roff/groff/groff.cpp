@@ -545,20 +545,18 @@ int main(int argc, char **argv)
     saved_path = xstrdup(g.contents());
     xputenv(saved_path);
     char *binpath = getenv("GROFF_BIN_PATH");
-    string f = "PATH";
-    f += '=';
+    string newpath = "PATH=";
     if ((binpath != 0 /* nullptr */ && (*binpath != '\0')))
-      f += binpath;
+      newpath += binpath;
     else {
-      binpath = relocatep(BINPATH);
-      f += binpath;
+      newpath += relocatep(BINPATH);
     }
     if ((path != 0 /* nullptr */ && (*path != '\0'))) {
-      f += PATH_SEP_CHAR;
-      f += path;
+      newpath += PATH_SEP_CHAR;
+      newpath += path;
     }
-    f += '\0';
-    groff_bin_path = xstrdup(f.contents());
+    newpath += '\0';
+    groff_bin_path = xstrdup(newpath.contents());
     xputenv(groff_bin_path);
   }
   if (Vflag)
