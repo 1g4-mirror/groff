@@ -299,6 +299,9 @@ void resource_manager::output_prolog(ps_output &out)
       fatal("cannot update process environment: %1", strerror(errno));
   }
   char *prologue = getenv("GROPS_PROLOGUE");
+  assert(prologue != 0 /* nullptr */);
+  if (0 /* nullptr */ == prologue)
+    fatal("cannot access process environment: %1", strerror(errno));
   FILE *fp = font::open_resource_file(prologue, &path);
   if (0 /* nullptr */ == fp)
     fatal("cannot open PostScript prologue file '%1': %2", prologue,

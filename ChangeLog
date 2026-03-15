@@ -1,5 +1,14 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/psrm.cpp (resource_manager::output_prolog):
+	Handle getenv(3) failure.  Having just written successfully to
+	the process environment (else we `fatal()`ed out), assert(3)
+	that reading back the same environment variable with getenv(3)
+	returned a non-null pointer.  If it didn't and `NDEBUG` is
+	defined, `fatal()` out in this case too.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/xditview/device.c: Slightly refactor.  Convert
 	C/C++ preprocessor macro `FONTPATH_ENV_VAR` to global `const`
 	object named `FONT_ENV_VAR`, for consistency with identical
