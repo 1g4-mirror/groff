@@ -234,18 +234,20 @@ int main(int argc, char **argv)
      * XXX: This is not as flexible as GNU getopt, but good enough to
      * work when called by groff.
      */
-    if ((strcmp(argv[1], "-help") == 0)
-	|| (strcmp(argv[1], "--help") == 0))
-	    Syntax(argv[0], false /* did not have error */);
-    else if ((strcmp(argv[1], "-v") == 0)
-	|| (strcmp(argv[1], "-version") == 0)
-	|| (strcmp(argv[1], "--version") == 0)) {
-	    (void) printf("GNU gxditview (groff) version %s\n",
-			  Version_string);
-	    exit(EXIT_SUCCESS);
-    if (argc > 2)
-	Syntax(argv[0], true /* had error */);
+    if (argc > 1) {
+	if ((strcmp (argv[1], "-help") == 0)
+	     || (strcmp (argv[1], "--help") == 0))
+		Syntax (argv[0], false /* did not have error */);
+	else if ((strcmp (argv[1], "-v") == 0)
+		 || (strcmp (argv[1], "-version") == 0)
+		 || (strcmp (argv[1], "--version") == 0)) {
+	    (void) printf ("GNU gxditview (groff) version %s\n",
+			   Version_string);
+	    exit (EXIT_SUCCESS);
+	}
     }
+    if (argc > 2)
+	Syntax (argv[0], true /* had error */);
 
     XtGetApplicationResources(toplevel, (XtPointer)&app_resources,
 			      resources, XtNumber(resources),
