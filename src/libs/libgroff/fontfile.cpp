@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "device.h"
 #include "defs.h"
 
+// See groff(1), section "Environment".
 const char *const FONT_ENV_VAR = "GROFF_FONT_PATH";
 
 static search_path font_path(FONT_ENV_VAR, FONTPATH, 0, 0);
