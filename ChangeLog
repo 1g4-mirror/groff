@@ -1,5 +1,18 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m4/groff.m4 (GROFF_USE_GROFF_ALLOCATOR): Update help string to
+	mark `--enable-groff-allocator` configuration option as
+	deprecated.
+	(GROFF_ALLOCATOR_NOTICE): New macro warns user of option's
+	planned withdrawal if they have selected it.
+	* configure.ac: Interpolate `GROFF_ALLOCATOR_NOTICE` macro.
+
+	* NEWS: Document this.
+
+	Fixes <https://savannah.gnu.org/bugs/?67936>.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* configure.ac: Stop reporting use of libgroff's custom memory
 	allocator in configuration summary.
 
