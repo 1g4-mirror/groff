@@ -13892,7 +13892,7 @@ as follows.
 @endExample
 
 @cindex CSTR@tie{}#54 errata
-@cindex CSTR@tie{}#54 erratum, @code{\S} escape
+@cindex CSTR@tie{}#54 erratum, @code{\S} escape sequence
 This escape sequence is incorrectly documented in the
 @acronym{AT&T}
 @code{troff} @c AT&T
