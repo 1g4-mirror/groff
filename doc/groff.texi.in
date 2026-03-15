@@ -9739,28 +9739,54 @@ This is an uninteresting sentence.
 @cindex productive input line
 @cindex input line, productive
 @cindex line, productive input
-To clearly present the next couple of requests, we must introduce the
-concept of ``productive'' input lines.  A @dfn{productive input line} is
-one that directly produces formatted output.
+To clearly present the next couple of requests,
+we must introduce the concept of ``productive'' input lines.
+A
+@dfn{productive input line}
+directly produces formatted output.
 Text lines produce output,@footnote{though not necessarily to the output
 device;
 see
 @ref{Diversions}}
 as do control lines containing requests like
 @samp{.tl //Page %//}
-or escape sequences like
-@samp{\l'1i'}.
+or an escape sequence like
+@samp{\l'1i'}
+(when not itself nested inside a
+@code{\w}
+escape sequence).
+Register,
+string,
+and macro definitions are not productive;
+neither are
+empty requests,
+nor requests and escape sequences that alter the formatting environment
+(as with changes to the size,
+face,
+height,
+slant,
+or color of the type).
 Macro calls are not themselves productive,
 but their interpolations can be.
-Empty requests, and requests and escape sequences that define
-registers or strings or alter the formatting environment (as with
-changes to the size, face, height, slant, or color of the type) are not
-productive.@footnote{If you're not sure whether an input line has been
-productive, you can use the @code{pline} request before and after it to
-see whether it produced any output nodes.  @xref{Debugging}.}  We will
-also preview the output line continuation escape sequence, @code{\c},
-which ``connects'' two input lines that would otherwise be counted
-separately.  @footnote{@xref{Line Continuation}.}
+In
+GNU
+@command{troff}, @c GNU
+if an input line by itself formats an output document,
+it is productive;
+otherwise not.@footnote{This test does not work with AT&T
+@command{troff}, @c AT&T
+which generates device-independent output
+even when it does not need to.}
+You can also use the
+@code{pline}
+request before and after an input line
+to see whether it produced any (additional) output
+nodes.@footnote{@xref{Debugging}.}
+
+We also preview the output line continuation escape sequence,
+@code{\c},
+which ``connects'' two input lines
+that would otherwise be counted separately.@footnote{@xref{Line Continuation}.}
 
 @Example
 @c .ll 56n
