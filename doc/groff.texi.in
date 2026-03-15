@@ -13948,26 +13948,36 @@ the slant is only assigned,
 never incremented or decremented.
 @endDefesc
 
-@Defreq {ul, [@Var{lines}]}
+@Defreq {ul, [@Var{n}]}
 @cindex underlining (@code{ul})
-The @code{ul} request normally underlines subsequent lines if a TTY
-output device is used.  Otherwise, the lines are printed in italics
-(only the term `underlined' is used in the following).  The single
-argument is the quantity of input lines to be underlined; with no
-argument, the next line is underlined.  If @var{lines} is zero or
-negative, stop the effects of @code{ul} (if it was active).  Requests
-and empty lines do not count for computing the number of underlined
-input lines, even if they produce some output like @code{tl}.  Lines
-inserted by macros (e.g., invoked by a trap) do count.
+Underline
+(in
+@code{nroff}
+mode)
+or italicize
+(in
+@code{troff}
+mode)@footnote{Recall
+@ref{@code{troff} and @code{nroff} Modes}.}
+the next
+@var{n}
+productive input lines.
+A nonpositive argument cancels any pending underlining.
+Omitting the argument implies an
+@var{n}
+of
+@samp{1}.
 
-At the beginning of @code{ul}, the current font is stored and the
-underline font is activated.  Within the span of a @code{ul} request, it
-is possible to change fonts, but after the last line affected by
-@code{ul} the saved font is restored.
-
-This number of lines still to be underlined is associated with the
-environment (@pxref{Environments}).  The underline font can be changed
-with the @code{uf} request.
+When
+@code{ul}
+commences underlining,
+the formatter stores the currently selected font
+(strictly,
+its mounting position),
+and restores that font when underlining ceases.
+Use the
+@code{uf}
+request to select an alternative underline font.
 
 @c XXX @xref should be changed to grotty
 
@@ -13975,7 +13985,7 @@ with the @code{uf} request.
 @c underlining is implemented for terminal output devices, and what
 @c problems can arise.
 
-The @code{ul} request does not underline spaces.
+The @code{ul} request does not cause spaces to be underlined.
 @endDefreq
 
 @Defreq {cu, [@Var{lines}]}

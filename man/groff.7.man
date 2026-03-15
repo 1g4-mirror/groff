@@ -5422,7 +5422,11 @@ to
 .TPx
 .REQ .ul
 Underline
-(italicize in
+(in
+.I nroff
+mode)
+or italicize
+(in
 .I troff
 mode)
 the output of the next productive input line.
@@ -5430,7 +5434,11 @@ the output of the next productive input line.
 .TPx
 .REQ .ul npl
 Underline
-(italicize in
+(in
+.I nroff
+mode)
+or italicize
+(in
 .I troff
 mode)
 the output of the next
