@@ -524,7 +524,7 @@ int main(int argc, char **argv)
     e += '=';
     e += Fargs;
     char *fontpath = getenv("GROFF_FONT_PATH");
-    if ((fontpath != 0 /* nullptr */) && *fontpath) {
+    if ((fontpath != 0 /* nullptr */) && (*fontpath != '\0')) {
       e += PATH_SEP_CHAR;
       e += fontpath;
     }
@@ -538,7 +538,7 @@ int main(int argc, char **argv)
     char *path = getenv("PATH");
     string g = "GROFF_PATH__";
     g += '=';
-    if ((path != 0 /* nullptr */ && *path))
+    if ((path != 0 /* nullptr */ && (*path != '\0')))
       g += path;
     g += '\0';
     saved_path = xstrdup(g.contents());
@@ -546,13 +546,13 @@ int main(int argc, char **argv)
     char *binpath = getenv("GROFF_BIN_PATH");
     string f = "PATH";
     f += '=';
-    if ((binpath != 0 /* nullptr */ && *binpath))
+    if ((binpath != 0 /* nullptr */ && (*binpath != '\0')))
       f += binpath;
     else {
       binpath = relocatep(BINPATH);
       f += binpath;
     }
-    if ((path != 0 /* nullptr */ && *path)) {
+    if ((path != 0 /* nullptr */ && (*path != '\0'))) {
       f += PATH_SEP_CHAR;
       f += path;
     }

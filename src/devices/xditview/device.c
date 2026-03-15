@@ -477,7 +477,8 @@ FILE *find_file(const char *file, char **result)
   char *env;
 
   env = getenv(FONT_ENV_VAR);
-  path = XtMalloc((((env != NULL) && *env) ? strlen(env) + 1 : 0)
+  path = XtMalloc((((env != NULL) && (*env != '\0'))
+		   ? strlen(env) + 1 : 0)
 		  + strlen(FONTPATH) + 1);
   *path = '\0';
   if (env && *env) {

@@ -1,5 +1,17 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Trivially refactor.  Compare C/C++ objects of `char` type to
+	character literals instead of punning them down to Booleans.
+
+	* src/devices/xditview/device.c (find_file):
+	* src/libs/libgroff/device.cpp (device_init):
+	* src/libs/libgroff/searchpath.cpp (search_path::search_path):
+	* src/roff/groff/groff.cpp (main):
+	* src/roff/troff/input.cpp (interpolate_environment_variable):
+	Do it.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Trivially refactor.  Compare return value of getenv(3) to
 	explicit null pointer constants appropriate for C or C++ instead
 	punning that return value down to a Boolean.
