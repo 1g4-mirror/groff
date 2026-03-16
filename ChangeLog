@@ -1,5 +1,11 @@
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* bootstrap.conf (gnulib_modules): Drop `putenv`.
+
+	Fixes <https://savannah.gnu.org/bugs/?68024>.
+
+2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp: Refactor: migrate from putenv(3) to
 	setenv(3) (4/4).
 	(xputenv): Drop no-longer-used function.
