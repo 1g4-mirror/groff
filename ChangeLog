@@ -107,7 +107,7 @@
 	* src/roff/troff/input.cpp: Demote global variable
 	`global_diverted_space` from `int` to `bool` and rename it to
 	`have_global_diverted_space`.  Annotate it as used only by the
-	MTSM feature, which I hope some day to either better understand,
+	MTSM feature, which I hope some day either to better understand,
 	or to remove.
 	* src/roff/troff/env.cpp: Update an `extern` declaration.
 	* src/roff/troff/input.cpp (diverted_space_node::need_reread):
@@ -130,7 +130,7 @@
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Implement `.ul` register for orthogonal completeness
-	with respect to the `.ce`, `.rj`, and `.itc` registers.
+	with respect to the `.ce`, `.rj`, and `.it` registers.
 
 	* src/roff/troff/env.h (class environment): Declare new accessor
 	member function `get_underlined_line_count()`.
