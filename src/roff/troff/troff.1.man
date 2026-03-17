@@ -193,7 +193,7 @@ Adjacent horizontal motions are not combined.
 .
 Supplemental inter-sentence space
 (configured by the second argument to the
-.B .ss
+.B ss
 request)
 is not represented.
 .
