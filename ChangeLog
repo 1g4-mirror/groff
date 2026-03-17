@@ -1,3 +1,9 @@
+2026-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (struct warning_category): Add
+	{further} `const` qualification to type and its members.  This
+	structure is immutable for the lifetime of the program.
+
 2026-03-15  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* bootstrap.conf (gnulib_modules): Drop `putenv`.

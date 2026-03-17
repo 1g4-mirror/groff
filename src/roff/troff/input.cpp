@@ -10608,9 +10608,9 @@ static void read_drawing_command_color_arguments(token &start)
   have_formattable_input = true;
 }
 
-static struct warning_category {
-  const char *name;
-  unsigned int set;
+static const struct warning_category {
+  const char * const name;
+  const unsigned int set;
 } warning_table[] = {
   { "char", WARN_CHAR },
   { "range", WARN_RANGE },
