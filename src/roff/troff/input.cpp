@@ -10610,8 +10610,8 @@ static void read_drawing_command_color_arguments(token &start)
 
 static const struct warning_category {
   const char * const name;
-  const unsigned int set;
-} warning_table[] = {
+  const unsigned int bitset;
+} warning_map[] = {
   { "char", WARN_CHAR },
   { "range", WARN_RANGE },
   { "break", WARN_BREAK },
@@ -10636,17 +10636,17 @@ static const struct warning_category {
   { "default", DEFAULT_WARNING_CATEGORY_SET },
 };
 
-static unsigned int lookup_warning(const char *name)
+static unsigned int lookup_warning_by_name(const char *name)
 {
-  for (unsigned int i = 0U; i < countof(warning_table); i++)
-    if (strcmp(name, warning_table[i].name) == 0)
-      return warning_table[i].set;
+  for (unsigned int i = 0U; i < countof(warning_map); i++)
+    if (strcmp(name, warning_map[i].name) == 0)
+      return warning_map[i].bitset;
   return 0U;
 }
 
 static void enable_warning(const char *name)
 {
-  unsigned int category = lookup_warning(name);
+  unsigned int category = lookup_warning_by_name(name);
   if (category != 0U)
     desired_warnings |= category;
   else
@@ -10655,7 +10655,7 @@ static void enable_warning(const char *name)
 
 static void disable_warning(const char *name)
 {
-  unsigned int category = lookup_warning(name);
+  unsigned int category = lookup_warning_by_name(name);
   if (category != 0U)
     desired_warnings &= ~category;
   else

@@ -1,3 +1,14 @@
+2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Trivially refactor.  Rename global
+	array `warning_table` to `warning_map`, for greater precision.
+	(lookup_warning): Update dereference site.  Also rename this...
+	(lookup_warning_by_name): ...to this.
+	(enable_warning, disable_warning): Update call sites of
+	foregoing.
+	(struct warning_category): Rename member variable `set` to
+	`bitset`, for clarity.
+
 2026-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[grotty]: Revise dynamic memory allocation strategy.  The
