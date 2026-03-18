@@ -10765,23 +10765,23 @@ void debug(const char *format,
   do_error(DEBUG, format, arg1, arg2, arg3);
 }
 
-void warning(warning_type t,
+void warning(warning_category wc,
 	     const char *format,
 	     const errarg &arg1,
 	     const errarg &arg2,
 	     const errarg &arg3)
 {
-  if ((t & desired_warnings) != 0U)
+  if ((wc & desired_warnings) != 0U)
     do_error(WARNING, format, arg1, arg2, arg3);
 }
 
-void output_warning(warning_type t,
+void output_warning(warning_category wc,
 		    const char *format,
 		    const errarg &arg1,
 		    const errarg &arg2,
 		    const errarg &arg3)
 {
-  if ((t & desired_warnings) != 0U)
+  if ((wc & desired_warnings) != 0U)
     do_error(OUTPUT_WARNING, format, arg1, arg2, arg3);
 }
 

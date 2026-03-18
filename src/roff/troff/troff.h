@@ -48,7 +48,7 @@ extern search_path *mac_path;
 #include "errarg.h"
 #include "error.h"
 
-enum warning_type {
+enum warning_category {
   WARN_CHAR = 01,
   //WARN_NUMBER = 02, // withdrawn in groff 1.24
   WARN_BREAK = 04,
@@ -76,11 +76,11 @@ enum warning_type {
 
 const int WARN_MAX = 07777777;
 
-void warning(warning_type, const char *,
+void warning(warning_category, const char *,
 	     const errarg & = empty_errarg,
 	     const errarg & = empty_errarg,
 	     const errarg & = empty_errarg);
-void output_warning(warning_type, const char *,
+void output_warning(warning_category, const char *,
 		    const errarg & = empty_errarg,
 		    const errarg & = empty_errarg,
 		    const errarg & = empty_errarg);

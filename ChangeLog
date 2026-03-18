@@ -1,5 +1,17 @@
 2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/troff.h (enum warning_type): Rename this...
+	(enum warning_category): ...to this, for consistency with groff
+	documentation and because the enumeration constants aren't
+	distinct "types" in the C++ sense.
+	* src/roff/troff/input.cpp (warning, output_warning): Update
+	users of the enumeration type.  Any given diagnostic warning
+	corresponds to only one warning category.
+
+2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(struct warning_category): Rename this...
 	(struct warning_selection): ...to this.  This data structure
