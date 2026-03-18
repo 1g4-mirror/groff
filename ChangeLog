@@ -1,5 +1,14 @@
 2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(struct warning_category): Rename this...
+	(struct warning_selection): ...to this.  This data structure
+	creates a mapping between C strings and a bit vector.  The
+	strings "all" and "w" aren't warning categories, but convenient
+	shorthands for selection of multiple warning categories.
+
+2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.  Rename global
 	array `warning_table` to `warning_map`, for greater precision.
 	(lookup_warning): Update dereference site.  Also rename this...
