@@ -49,6 +49,9 @@ extern search_path *mac_path;
 #include "error.h"
 
 enum warning_category {
+  // This first item is so that diagnostic functions in "input.cpp" can
+  // have a consistent parameter list.  It feels a little clunky...
+  WARN_INVALID = 0,
   WARN_CHAR = 01,
   //WARN_NUMBER = 02, // withdrawn in groff 1.24
   WARN_BREAK = 04,

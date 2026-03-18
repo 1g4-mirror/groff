@@ -10636,6 +10636,14 @@ static const struct warning_selection {
   { "default", DEFAULT_WARNING_CATEGORY_SET },
 };
 
+static const char *lookup_warning_by_bitset(unsigned int bitset)
+{
+  for (unsigned int i = 0U; i < countof(warning_map); i++)
+    if (warning_map[i].bitset == bitset)
+      return warning_map[i].name;
+  return 0 /* nullptr */;
+}
+
 static unsigned int lookup_warning_by_name(const char *name)
 {
   for (unsigned int i = 0U; i < countof(warning_map); i++)
@@ -10686,6 +10694,7 @@ static void copy_mode_error(const char *format,
 enum error_type { DEBUG, WARNING, OUTPUT_WARNING, ERROR, FATAL };
 
 static void do_error(error_type type,
+		     warning_category wc,
 		     const char *format,
 		     const errarg &arg1,
 		     const errarg &arg2,
@@ -10750,6 +10759,12 @@ static void do_error(error_type type,
     break;
   }
   errprint(format, arg1, arg2, arg3);
+  if (type == WARNING) {
+      const char *category_name = lookup_warning_by_bitset(wc);
+      assert(category_name != 0 /* nullptr */);
+      if (category_name != 0 /* nullptr */)
+	fprintf(stderr, " [-w %s]", category_name);
+  }
   fputc('\n', stderr);
   fflush(stderr);
   if (type == FATAL)
@@ -10762,7 +10777,7 @@ void debug(const char *format,
 	   const errarg &arg2,
 	   const errarg &arg3)
 {
-  do_error(DEBUG, format, arg1, arg2, arg3);
+  do_error(DEBUG, WARN_INVALID, format, arg1, arg2, arg3);
 }
 
 void warning(warning_category wc,
@@ -10772,7 +10787,7 @@ void warning(warning_category wc,
 	     const errarg &arg3)
 {
   if ((wc & desired_warnings) != 0U)
-    do_error(WARNING, format, arg1, arg2, arg3);
+    do_error(WARNING, wc, format, arg1, arg2, arg3);
 }
 
 void output_warning(warning_category wc,
@@ -10782,7 +10797,7 @@ void output_warning(warning_category wc,
 		    const errarg &arg3)
 {
   if ((wc & desired_warnings) != 0U)
-    do_error(OUTPUT_WARNING, format, arg1, arg2, arg3);
+    do_error(OUTPUT_WARNING, wc, format, arg1, arg2, arg3);
 }
 
 void error(const char *format,
@@ -10790,7 +10805,7 @@ void error(const char *format,
 	   const errarg &arg2,
 	   const errarg &arg3)
 {
-  do_error(ERROR, format, arg1, arg2, arg3);
+  do_error(ERROR, WARN_INVALID, format, arg1, arg2, arg3);
 }
 
 void fatal(const char *format,
@@ -10798,7 +10813,7 @@ void fatal(const char *format,
 	   const errarg &arg2,
 	   const errarg &arg3)
 {
-  do_error(FATAL, format, arg1, arg2, arg3);
+  do_error(FATAL, WARN_INVALID, format, arg1, arg2, arg3);
 }
 
 void fatal_with_file_and_line(const char *filename, int lineno,

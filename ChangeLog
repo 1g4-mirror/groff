@@ -1,5 +1,33 @@
 2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: When issuing warning diagnostic messages, report the
+	warning category governing its emission.  Idea ripped off from
+	GCC, which has been doing similarly for many years.
+
+	* src/roff/troff/troff.h (enum warning_category): Add a
+	`WARN_INVALID` enumeration constant with value zero, since we're
+	extending the signatures of diagnostic functions to pass the
+	warning category as a parameter.  Doing so has no meaning for
+	non-warning diagnostics, but `do_error()` handles _all_
+	diagnostic messages, and so it must be prepared for this extra
+	data.  This being C++98, we also don't have option types.
+
+	* src/roff/troff/input.cpp (lookup_warning_by_bitset): New
+	function looks up a bitset in the `warning_map` array and
+	returns a pointer to a constant string naming the corresponding
+	warning category.
+	(do_error): Expect new parameter of type `warning_category`.
+	If the diagnostic is of type `WARNING`, look up the new
+	parameter with `lookup_warning_by_bitset` and report it in the
+	message to the user.
+	(debug, warning, output_warning, error, fatal): Update to pass
+	`do_error()` either the given warning category, or
+	`WARN_INVALID` if the diagnostic is not a warning.
+
+	* NEWS: Document this.
+
+2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/troff.h (enum warning_type): Rename this...
