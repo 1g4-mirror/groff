@@ -55,10 +55,10 @@
 	[1] https://sourceware.org/git/?p=glibc.git;a=commit;\
 	h=46b5e98ef6f1
 
-	Fixes <https://savannah.gnu.org/bugs/?68145>.  Thanks to dimich
-	for the report, to Morten Bo Johansen for help reproducing the
-	problem, and to Deri James for a shrewd pointer in the right
-	direction.
+	Fixes <https://savannah.gnu.org/bugs/?68145>.  Thanks to Dmytro
+	Bagrii for the report, to Morten Bo Johansen for help
+	reproducing the problem, and to Deri James for a shrewd pointer
+	in the right direction.
 
 2026-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
