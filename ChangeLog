@@ -1,5 +1,11 @@
 2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/tests/neqn-smoke-test.sh: Configure
+	`GROFF_BIN_PATH` so that the build tree's "neqn" is more likely
+	to locate the "eqn" that is also in the build tree.
+
+2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn]: Add test of neqn's wrapping of eqn; their versions should
 	match.
 

@@ -21,6 +21,9 @@ neqn="${abs_top_builddir:-.}/neqn"
 
 # Unit-test basic neqn execution.  Regression-test Savannah #68115.
 
+GROFF_BIN_PATH="$abs_top_builddir"
+export GROFF_BIN_PATH
+
 input='.
 .EQ
 P V mark = n R T
