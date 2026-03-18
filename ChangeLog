@@ -1,5 +1,67 @@
 2026-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grotty]: Revise dynamic memory allocation strategy.  The
+	`tty_printer` class maintains a member variables `lines` which
+	is a pointer to a pointer to type `tty_glyph`, implementing a
+	{de facto} rectangular array of character cells.  The strategy
+	that grotty has used to date proved to perform badly with the
+	new approach to continuous rendering used by groff's man(7) and
+	mdoc(7) packages in version 1.24.0.  If the initial allocation
+	of 66 lines (rows) of character cells was insufficient because
+	the input extended the page length, it grew the allocation (and
+	performed a memcpy(3)) only as much as required to house the
+	vertical drawing position, plus one line).  For a famously
+	lengthy man page like bash(1), this meant many repeated trips
+	through new/memcpy()/delete operations, giving the language
+	runtime allocator a lot of work to do.  In an extreme case
+	{formatting 64 copies of bash(1) in sequence}, this led to long
+	runtimes with two-thirds of program time spent in the kernel.
+
+	The new approach is to double the allocation every time it is
+	exceeded, but also to free that allocation at the end of every
+	page.  When continuously rendering, there will only ever be one
+	page anyway, but this tactic is more considerate for the
+	{admittedly niche} case of paginated documents that vary the
+	page length frequently--which is the approach that groff 1.23.0
+	and earlier took to continuous rendering, and that other macro
+	packages or documents might still (but beware of the sort of
+	problem observed in Savannah #65189).
+
+	* src/devices/grotty/tty.cpp: Define new global constant
+	integer, `default_lines_per_page`, obviating a local literal in
+	the `tty_printer` constructor.
+	(class tty_printer): Drop empty body from `begin_page()`
+	declaration.
+	(tty_printer::tty_printer): Replace open-coded initial
+	allocation storage backing `lines` member variable with call to
+	`begin_page()`.
+	(tty_printer::~tty_printer): Stop freeing the storage backing
+	`lines` here.  Instead...
+	(tty_printer::end_page): ...do it here, if its size grew past
+	beyond default initial allocation.
+	(tty_printer::add_char): Apply the new reallocation strategy.
+	Use memset(3) to zero out the new storage before memcpy(3)-ing
+	the previous contents into (part of) it, eliminating a `for`
+	loop that manually zeroed out the pointers after the copied
+	storage.  While arguably wasteful to write some memory twice,
+	the runtime can easily optimize `memset()`, as, for instance,
+	glibc does.[1]  Measurement shows that any reduced efficiency
+	here is lost in the noise of the vast improvement arising from
+	the allocation size-doubling approach.
+	(tty_printer::begin_page): Implement.  Initially allocate
+	`default_lines_per_page` rows of `tty_glyph` pointers.  Use
+	`memset(3)` here, too, to zero them out.
+
+	[1] https://sourceware.org/git/?p=glibc.git;a=commit;\
+	h=46b5e98ef6f1
+
+	Fixes <https://savannah.gnu.org/bugs/?68145>.  Thanks to dimich
+	for the report, to Morten Bo Johansen for help reproducing the
+	problem, and to Deri James for a shrewd pointer in the right
+	direction.
+
+2026-03-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (struct warning_category): Add
 	{further} `const` qualification to type and its members.  This
 	structure is immutable for the lifetime of the program.
