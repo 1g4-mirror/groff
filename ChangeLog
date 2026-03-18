@@ -1,5 +1,13 @@
 2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn]: Add test of neqn's wrapping of eqn; their versions should
+	match.
+
+	* src/preproc/eqn/tests/neqn-finds-matching-eqn.sh: Add test.
+	* src/preproc/eqn/eqn.am (eqn_TESTS): Run test.
+
+2026-03-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: When issuing warning diagnostic messages, report the
 	warning category governing its emission.  Idea ripped off from
 	GCC, which has been doing similarly for many years.
