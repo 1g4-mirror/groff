@@ -20036,7 +20036,8 @@ in
 @cindex mode, copy, and @code{trf} request
 Break and copy the contents of
 @var{file}
-as ``throughput'' to GNU
+as ``throughput'' to
+GNU
 @command{troff}'s
 output.
 Each line of
@@ -20057,20 +20058,29 @@ GNU
 @command{troff} @c GNU
 performs the copy only when the diversion is emitted.
 
-@cindex @code{trf} request, and invalid characters
-@cindex characters, invalid for @code{trf} request
-@cindex invalid characters for @code{trf} request
 @code{cf} copies the contents of @var{file} completely unprocessed;
 it is therefore an error to use this request in safer mode,
 which is the default.
-Invoke GNU
+Invoke
+GNU
 @command{troff} @c GNU
 or a front end with the
 @option{-U}
 option to enable unsafe mode.
 
-@code{trf} discards invalid input characters;
-recall @ref{Input Format}.
+@cindex @code{trf} request, and invalid characters
+@cindex characters, invalid for @code{trf} request
+@cindex invalid characters for @code{trf} request
+@code{trf}
+discards input characters that are invalid in
+GNU
+@command{troff}'s @c GNU
+output format,
+meaning all 8-bit character codes less than decimal 32
+(except 10,
+the line feed)
+and greater than decimal 127.@footnote{@xref{GNU
+@command{troff} Output}.}
 
 For @code{cf}, within a diversion, ``completely unprocessed'' means that
 each line of a file to be inserted is handled as if it were preceded by
@@ -21713,7 +21723,9 @@ A request was invoked with a mandatory argument absent.
 
 @item input
 @itemx 16384
-An invalid character occurred on the input stream.
+An invalid character occurred on the input stream,
+or was present in the contents of a file processed
+as transparent throughput.
 
 @item escape
 @itemx 32768

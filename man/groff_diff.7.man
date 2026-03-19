@@ -12,7 +12,7 @@ and AT&T
 .\" ====================================================================
 .\"
 .\" Copyright 1989-2024 Free Software Foundation, Inc.
-.\"           2019-2025 G. Branden Robinson
+.\"           2019-2026 G. Branden Robinson
 .\"
 .\" This file is part of groff, the GNU roff typesetting system.
 .\"
@@ -4526,12 +4526,10 @@ but does not append a newline.
 .BI .trf\~ file
 Break and copy
 .I file
-as \[lq]throughput\[rq] to GNU
+as \[lq]throughput\[rq] to
+GNU
 .I troff \" GNU
-output,
-discarding characters that are invalid as input;
-contrast with
-.BR cf .
+output.
 .
 Each line of
 .I file
@@ -4548,6 +4546,26 @@ appends one.
 Invoking the request
 with the no-break control character
 suppresses the break.
+.
+If a diversion is in use,
+GNU
+.I troff \" GNU
+performs the copy only when the diversion is emitted.
+.
+.
+.IP
+.B trf
+discards input characters that are invalid in
+GNU
+.IR troff 's \" GNU
+output format,
+meaning all 8-bit character codes less than decimal 32
+(except 10,
+the line feed)
+and greater than decimal 127.
+.
+See
+.MR groff_out @MAN5EXT@ .
 .
 .
 .TP

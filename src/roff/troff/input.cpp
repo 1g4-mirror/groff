@@ -9563,9 +9563,9 @@ static void transparent_throughput_file_request()
 	  int c = getc(fp);
 	  if (c == EOF)
 	    break;
-	  if (is_invalid_input_char(c))
-	    warning(WARN_INPUT, "invalid input character code %1",
-		    int(c));
+	  if ((c != '\n') && ((c < 32) || (c > 127)))
+	    warning(WARN_INPUT, "character code %1 is invalid in"
+		    " transparent file throughput; ignoring", int(c));
 	  else {
 	    curdiv->transparent_output(c);
 	    reading_beginning_of_input_line = c == '\n';

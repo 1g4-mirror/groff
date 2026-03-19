@@ -1,5 +1,23 @@
 2026-03-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(transparent_throughput_file_request): Disallow all
+	grout-invalid characters in "safer" transparent file throughput
+	{implemented by the `trf` request}, including all C0 control
+	code points except the line feed (Unix newline), and all C1
+	controls and Latin-1 extension code points.  Revise warning
+	diagnostic message.
+
+	* doc/groff.texi.in (Host System Service Access, Warnings):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* src/roff/troff/troff.1.man (Warnings):
+	* NEWS: Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?66547>.
+
+2026-03-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grotty/tty.cpp (tty_printer::end_page): Further
 	simplify new dynamic memory management strategy to avoid memory
 	leaks.  Always `delete[]` (free) the `lines` array at the end of
