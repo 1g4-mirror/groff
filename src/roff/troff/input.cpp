@@ -5702,18 +5702,18 @@ void chop_macro()
 	    (m->is_diversion() ? "diversion" : "macro or string"),
 	    s.contents());
     else {
-      int have_restore = 0;
       // We have to check for additional save/restore pairs which could
       // be there due to empty am1 requests.
+      bool contains_mode_tokens = false;
       for (;;) {
 	if (m->get(m->len - 1) != POP_GROFFCOMP_MODE)
 	  break;
-	have_restore = 1;
+	contains_mode_tokens = true;
 	m->len -= 1;
 	if (m->get(m->len - 1) != PUSH_GROFF_MODE
 	    && m->get(m->len - 1) != PUSH_COMP_MODE)
 	  break;
-	have_restore = 0;
+	contains_mode_tokens = false;
 	m->len -= 1;
 	if (m->len == 0)
 	  break;
@@ -5721,7 +5721,7 @@ void chop_macro()
       if (m->len == 0)
 	error("cannot chop empty object '%1'", s.contents());
       else {
-	if (have_restore)
+	if (contains_mode_tokens)
 	  m->set(POP_GROFFCOMP_MODE, m->len - 1);
 	else
 	  m->len -= 1;
