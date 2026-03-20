@@ -1,5 +1,28 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor.  Make the "guts" of the `chop_macro()`
+	function a member function of class `macro`.
+
+	* src/roff/troff/request.h (class macro): Declare member
+	function `chop()`, taking and returning `void`.  Drop
+	declaration of `friend` function `chop_macro()`.
+	* src/roff/troff/input.cpp: Drop forward declaration of
+	`chop_macro()`.
+	(macro::chop): Member function takes responsibility for updating
+	a `macro` object, reducing internally stored length of its
+	contents if possible.  (Exception: token values used internally
+	to manage the state of compatibility mode do not contribute to
+	the length count.)
+	(chop_macro): Rename this...
+	(chop_request): ...to this, following a developing convention of
+	naming request handlers to end with "_request".  Declare it
+	`static`.  Replace lengthy `else` branch with a call of the
+	resolved macro's `chop()` member function.
+	(init_input_requests): Update wire-uppery of "chop" request
+	name.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (chop_macro): Arrange equality
 	comparisons to avoid inadvertent lvalue assignment.
 

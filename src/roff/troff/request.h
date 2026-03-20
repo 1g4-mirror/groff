@@ -62,6 +62,7 @@ public:
   void append_int(int);
   void append_str(const char *);
   void set(unsigned char, int);
+  void chop();
   unsigned char get(int);
   int length();
   void invoke(symbol, bool);
@@ -74,7 +75,6 @@ public:
   void dump();
   void json_dump();
   friend class string_iterator;
-  friend void chop_macro();
   friend void substring_request();
   friend bool operator==(const macro &, const macro &);
 };

@@ -192,7 +192,6 @@ input_iterator *make_temp_iterator(const char *);
 const char *input_char_description(int);
 
 void process_input_stack();
-void chop_macro();	// declare to avoid friend name injection
 
 static const unsigned char default_escape_char = (unsigned char)('\\');
 static unsigned char escape_char = default_escape_char;
@@ -4133,6 +4132,32 @@ void macro::append_int(int i)
   append_unsigned((unsigned int) i);
 }
 
+void macro::chop()
+{
+  bool contains_mode_tokens = false;
+  // We have to check for save/restore pairs which could be present due
+  // to as1, ds1, de1, am1 requests.
+  for (;;) {
+    if (get(len - 1) != POP_GROFFCOMP_MODE)
+      break;
+    contains_mode_tokens = true;
+    len -= 1;
+    if (get(len - 1) != PUSH_GROFF_MODE
+	&& get(len - 1) != PUSH_COMP_MODE)
+      break;
+    contains_mode_tokens = false;
+    len -= 1;
+    if (0 == len)
+      break;
+  }
+  assert(len != 0);
+  // TODO: If it's empty, do nothing, quietly?
+  if (contains_mode_tokens)
+    set(POP_GROFFCOMP_MODE, len - 1);
+  else
+    len -= 1;
+}
+
 void macro::print_size()
 {
   errprint("%1", len);
@@ -5683,7 +5708,7 @@ void alias_macro()
   skip_line();
 }
 
-void chop_macro()
+static void chop_request()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "chop request expects an argument");
@@ -5702,30 +5727,8 @@ void chop_macro()
       error("cannot chop empty %1 '%2'",
 	    (m->is_diversion() ? "diversion" : "macro or string"),
 	    s.contents());
-    else {
-      bool contains_mode_tokens = false;
-      // We have to check for save/restore pairs which could
-      // be present due to as1, ds1, de1, am1 requests.
-      for (;;) {
-	if (m->get(m->len - 1) != POP_GROFFCOMP_MODE)
-	  break;
-	contains_mode_tokens = true;
-	m->len -= 1;
-	if (m->get(m->len - 1) != PUSH_GROFF_MODE
-	    && m->get(m->len - 1) != PUSH_COMP_MODE)
-	  break;
-	contains_mode_tokens = false;
-	m->len -= 1;
-	if (0 == m->len)
-	  break;
-      }
-      assert(m->len != 0);
-      // TODO: If it's empty, do nothing, quietly?
-      if (contains_mode_tokens)
-	m->set(POP_GROFFCOMP_MODE, m->len - 1);
-      else
-	m->len -= 1;
-    }
+    else
+      m->chop();
   }
   skip_line();
 }
@@ -10228,7 +10231,7 @@ void init_input_requests()
   init_request("cf", unsafe_transparent_throughput_file_request);
   init_request("cflags", set_character_flags_request);
   init_request("char", define_character_request);
-  init_request("chop", chop_macro);
+  init_request("chop", chop_request);
   init_request("class", define_class_request);
   init_request("close", close_request);
   init_request("color", activate_color);
