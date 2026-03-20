@@ -1,5 +1,10 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (chop_macro): Arrange equality
+	comparisons to avoid inadvertent lvalue assignment.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (chop_macro): Drop error diagnostic
 	that was thrown only in the event of an internal logic error.
 	An assert(3)ion now handles that, and in an `NDEBUG` build the

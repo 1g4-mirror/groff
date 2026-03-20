@@ -5716,7 +5716,7 @@ void chop_macro()
 	  break;
 	contains_mode_tokens = false;
 	m->len -= 1;
-	if (m->len == 0)
+	if (0 == m->len)
 	  break;
       }
       assert(m->len != 0);
