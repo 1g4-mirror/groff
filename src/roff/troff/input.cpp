@@ -5721,14 +5721,10 @@ void chop_macro()
       }
       assert(m->len != 0);
       // TODO: If it's empty, do nothing, quietly?
-      if (m->len == 0)
-	error("cannot chop empty object '%1'", s.contents());
-      else {
-	if (contains_mode_tokens)
-	  m->set(POP_GROFFCOMP_MODE, m->len - 1);
-	else
-	  m->len -= 1;
-      }
+      if (contains_mode_tokens)
+	m->set(POP_GROFFCOMP_MODE, m->len - 1);
+      else
+	m->len -= 1;
     }
   }
   skip_line();
