@@ -144,7 +144,7 @@
 	the allocation size-doubling approach.
 	(tty_printer::begin_page): Implement.  Initially allocate
 	`default_lines_per_page` rows of `tty_glyph` pointers.  Use
-	`memset(3)` here, too, to zero them out.
+	memset(3) here, too, to zero them out.
 
 	[1] https://sourceware.org/git/?p=glibc.git;a=commit;\
 	h=46b5e98ef6f1
@@ -343,7 +343,7 @@
 	indentation is in effect; or {b} a temporary indentation request
 	is issued while centering or right-alignment are in effect.
 	(cancel_temporary_indentation): New function--which I suspect
-	should be a member function of class `environment`, but which
+	should be a member function of class `environment`, but that
 	would be confusingly inconsistent with existing practice--sets
 	the temporary indentation amount to zero and sets the property
 	of having a temporary indent off.  (Those are not the same
