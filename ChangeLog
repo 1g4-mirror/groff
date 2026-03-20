@@ -1,5 +1,11 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (chop_macro): Add assert(3)ion to
+	verify an invariant in the logic.  Instrumenting this test
+	during a full groff build reveals that it's reached 670 times.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (chop_macro): Boolify and rename
 	local variable.  `have_restore` becomes `contains_mode_tokens`.
 	Assign to it with Boolean, not integer, literals.

@@ -5697,14 +5697,15 @@ void chop_macro()
     macro *m = p->to_macro();
     if (0 /* nullptr */ == m)
       error("cannot chop request '%1'", s.contents());
+    // TODO: If it's empty, do nothing, quietly?
     else if (m->is_empty())
       error("cannot chop empty %1 '%2'",
 	    (m->is_diversion() ? "diversion" : "macro or string"),
 	    s.contents());
     else {
-      // We have to check for additional save/restore pairs which could
-      // be there due to empty am1 requests.
       bool contains_mode_tokens = false;
+      // We have to check for save/restore pairs which could
+      // be present due to as1, ds1, de1, am1 requests.
       for (;;) {
 	if (m->get(m->len - 1) != POP_GROFFCOMP_MODE)
 	  break;
@@ -5718,6 +5719,8 @@ void chop_macro()
 	if (m->len == 0)
 	  break;
       }
+      assert(m->len != 0);
+      // TODO: If it's empty, do nothing, quietly?
       if (m->len == 0)
 	error("cannot chop empty object '%1'", s.contents());
       else {
