@@ -17,6 +17,18 @@
 
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (abort_request): Slightly refactor.
+	Avail ourselves of the `has_arg()` function; don't mess with any
+	of the input character processing rigmarole if there is no such
+	input to process.  Also flush the standard error stream only if
+	we have written to it.  If someone feels that this should
+	happen anyway "just in case" some other part of GNU troff
+	neglects to do so, then an even better place for that insurance
+	policy is `write_any_trailer_and_exit()`--it lies on _all_
+	controlled paths out of the program.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/tests/ab-request-works.sh: Conform better to
 	modern groff test conventions.
 
