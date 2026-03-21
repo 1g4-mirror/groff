@@ -1,5 +1,10 @@
 2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (substring_request): Recast warning
+	diagnostics when request argument(s) out of range.
+
+2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (substring_request): Trivially
 	refactor.  Rename local variable `real_length` to
 	`operable_length`.  Annotate its meaning.

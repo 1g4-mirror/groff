@@ -5847,13 +5847,13 @@ void substring_request()
 	}
 	if (start < 0) {
 	  warning(WARN_RANGE,
-		  "start index of substring out of range, set to 0");
+		  "start index of substring out of range, using 0");
 	  start = 0;
 	}
 	if (end >= operable_length) {
 	  warning(WARN_RANGE,
 		  "end index of substring out of range,"
-		  " set to string length");
+		  " using string length");
 	  end = operable_length - 1;
 	}
 	// now extract the substring
