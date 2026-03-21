@@ -5810,17 +5810,18 @@ void substring_request()
     else {
       int end = -1;
       if (!has_arg() || read_integer(&end)) {
+	int len = m->len;
 	string_iterator iter1(*m);
 	// We don't apply substring operations to internally generated
 	// tokens that manage compatibility mode.
 	int operable_length = 0;
-	for (int l = 0; l < m->len; l++) {
+	for (int l = 0; l < len; l++) {
 	  int c = iter1.get(0 /* nullptr */);
 	  if ((PUSH_GROFF_MODE == c)
 	      || (PUSH_COMP_MODE == c)
 	      || (POP_GROFFCOMP_MODE == c))
 	    continue;
-	  if (l == m->len)
+	  if (l == len)
 	    break;
 	  operable_length++;
 	}
@@ -5836,7 +5837,7 @@ void substring_request()
 	if ((start >= operable_length) || (end < 0)) {
 	  warning(WARN_RANGE,
 		  "start and end index of substring out of range");
-	  m->len = 0;
+	  len = m->len = 0;
 	  if (m->p != 0 /* nullptr */) {
 	    if (--(m->p->count) <= 0)
 	      delete m->p;
@@ -5865,7 +5866,7 @@ void substring_request()
 		 || (PUSH_COMP_MODE == c)
 		 || (POP_GROFFCOMP_MODE == c))
 	    c = iter.get(0 /* nullptr */);
-	  if (i == m->len)
+	  if (i == len)
 	    break;
 	}
 	macro mac;
@@ -5876,7 +5877,7 @@ void substring_request()
 		 || (PUSH_COMP_MODE == c)
 		 || (POP_GROFFCOMP_MODE == c))
 	    c = iter.get(0 /* nullptr */);
-	  if (i == m->len)
+	  if (i == len)
 	    break;
 	  if (0U == c)
 	    mac.append(nd);

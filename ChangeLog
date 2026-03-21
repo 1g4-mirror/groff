@@ -1,6 +1,14 @@
 2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (substring_request): Slightly
+	refactor.  Introduce new local variable `len` to store value of
+	`len` `macro` object being operated on, it case the compiler
+	isn't smart enough to cache a repeated member variable access
+	itself.
+
+2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (substring_request): Slightly
 	refactor.  When iterating through a `macro` object's contents,
 	use its stored length to decide when to stop instead of relying
 	on the `string_iterator` accessing each element to return an
