@@ -1,5 +1,10 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/ab-request-works.sh: Conform better to
+	modern groff test conventions.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Skip more tests on buggy Solaris.
 
 	* src/roff/groff/tests/ab-request-works.sh:
