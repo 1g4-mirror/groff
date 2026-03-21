@@ -25,7 +25,13 @@ groff="${abs_top_builddir:-.}/test-groff"
 # which has to be killed.  Using "-z" to avoid this masks the bug.
 
 # Keep preconv from being run.
-unset GROFF_ENCODING
+#
+# The "unset" in Solaris /usr/xpg4/bin/sh can actually fail.
+if ! unset GROFF_ENCODING
+then
+    echo "unable to clear environment; skipping" >&2
+    exit 77 # skip
+fi
 
 for d in ascii dvi html latin1 lbp lj4 pdf ps utf8
 do

@@ -1,5 +1,17 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Skip more tests on buggy Solaris.
+
+	* src/roff/groff/tests/ab-request-works.sh:
+	* src/roff/groff/tests/handle-special-input-code-points.sh:
+	* tmac/tests/an-ext_MR-works.sh:
+	* tmac/tests/an_MR-works.sh:
+	* tmac/tests/an_font-remapping-does-not-affect-titles.sh: Skip
+	test if the shell in "/usr/xpg4/bin" mis-implements the `unset`
+	shell built-in command.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (abort_request): Trivially refactor;
 	for clarity, apply DeMorgan's Law so that the `if` statement
 	guarding entry to a `for` loop matches the expression tested
