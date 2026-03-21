@@ -5810,8 +5810,10 @@ void substring_request()
     else {
       int end = -1;
       if (!has_arg() || read_integer(&end)) {
-	int real_length = 0;			// 1, 2, ..., n
 	string_iterator iter1(*m);
+	// We don't apply substring operations to internally generated
+	// tokens that manage compatibility mode.
+	int operable_length = 0;
 	for (int l = 0; l < m->len; l++) {
 	  int c = iter1.get(0 /* nullptr */);
 	  if ((PUSH_GROFF_MODE == c)
@@ -5820,18 +5822,18 @@ void substring_request()
 	    continue;
 	  if (EOF == c)
 	    break;
-	  real_length++;
+	  operable_length++;
 	}
 	if (start < 0)
-	  start += real_length;
+	  start += operable_length;
 	if (end < 0)
-	  end += real_length;
+	  end += operable_length;
 	if (start > end) {
 	  int tem = start;
 	  start = end;
 	  end = tem;
 	}
-	if ((start >= real_length) || (end < 0)) {
+	if ((start >= operable_length) || (end < 0)) {
 	  warning(WARN_RANGE,
 		  "start and end index of substring out of range");
 	  m->len = 0;
@@ -5848,10 +5850,11 @@ void substring_request()
 		  "start index of substring out of range, set to 0");
 	  start = 0;
 	}
-	if (end >= real_length) {
+	if (end >= operable_length) {
 	  warning(WARN_RANGE,
-		  "end index of substring out of range, set to string length");
-	  end = real_length - 1;
+		  "end index of substring out of range,"
+		  " set to string length");
+	  end = operable_length - 1;
 	}
 	// now extract the substring
 	string_iterator iter(*m);

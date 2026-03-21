@@ -1,5 +1,11 @@
 2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (substring_request): Trivially
+	refactor.  Rename local variable `real_length` to
+	`operable_length`.  Annotate its meaning.
+
+2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Drop dead code.
 	(class node_list): Undeclare `extract()` member function.
 	(node_list::extract): Drop unused  member function definition.
