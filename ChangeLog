@@ -1,5 +1,12 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (abort_request): Trivially refactor;
+	for clarity, apply DeMorgan's Law so that the `if` statement
+	guarding entry to a `for` loop matches the expression tested
+	within it.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Improve type discipline with respect
 	to groff's internal character representation.
 	(macro::append): Append to macro contents using explicitly

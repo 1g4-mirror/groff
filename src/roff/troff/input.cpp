@@ -9367,7 +9367,7 @@ void abort_request()
     while ((c = read_char_in_copy_mode(0 /* nullptr */)) == ' ')
       ;
   }
-  if (!((EOF == c) || ('\n' == c))) {
+  if ((c != '\n') && (c != EOF)) {
     for (;
 	 (c != '\n') && (c != EOF);
 	 (c = read_char_in_copy_mode(0 /* nullptr */)))
