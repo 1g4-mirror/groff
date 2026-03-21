@@ -3924,7 +3924,6 @@ public:
   ~node_list();
   void append(node *);
   int length();
-  node *extract();
 
   friend class macro_header;
   friend class string_iterator;
@@ -3953,13 +3952,6 @@ int node_list::length()
 node_list::node_list()
 {
   head = tail = 0 /* nullptr */;
-}
-
-node *node_list::extract()
-{
-  node *temp = head;
-  head = tail = 0 /* nullptr */;
-  return temp;
 }
 
 node_list::~node_list()
