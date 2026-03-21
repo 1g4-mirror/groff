@@ -3819,7 +3819,7 @@ struct char_block {
 };
 
 char_block::char_block()
-: next(0)
+: next(0 /* nullptr */)
 {
 }
 
@@ -3841,7 +3841,8 @@ private:
 };
 
 char_list::char_list()
-: ptr(0), len(0), head(0), tail(0)
+: ptr(0 /* nullptr */), len(0), head(0 /* nullptr */),
+  tail(0 /* nullptr */)
 {
 }
 
@@ -4892,7 +4893,7 @@ static symbol composite_glyph_name(symbol nm)
     input_iterator *p = input_stack::get_arg(i);
     gl.clear();
     int c;
-    while ((c = p->get(0)) != EOF)
+    while ((c = p->get(0 /* nullptr */)) != EOF)
       if (c != DOUBLE_QUOTE)
 	gl += c;
     gl += '\0';
@@ -5066,7 +5067,7 @@ static void do_define_string(define_mode mode, comp_mode comp)
   request_or_macro *rm
     = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
   macro *mm = rm ? rm->to_macro() : 0 /* nullptr */;
-  if ((DEFINE_APPEND == mode) && mm)
+  if ((DEFINE_APPEND == mode) && (mm != 0 /* nullptr */))
     mac = *mm;
   if (COMP_DISABLE == comp)
     mac.append(PUSH_GROFF_MODE);
@@ -5332,7 +5333,7 @@ static void interpolate_positional_parameter(symbol nm)
     for (int i = 1; i <= limit; i++) {
       input_iterator *p = input_stack::get_arg(i);
       int c;
-      while ((c = p->get(0)) != EOF)
+      while ((c = p->get(0 /* nullptr */)) != EOF)
 	if (c != DOUBLE_QUOTE)
 	  args += c;
       if (i != limit)
@@ -5352,7 +5353,7 @@ static void interpolate_positional_parameter(symbol nm)
       args += char(BEGIN_QUOTE);
       input_iterator *p = input_stack::get_arg(i);
       int c;
-      while ((c = p->get(0)) != EOF)
+      while ((c = p->get(0 /* nullptr */)) != EOF)
 	if (c != DOUBLE_QUOTE)
 	  args += c;
       args += char(END_QUOTE);
@@ -5372,7 +5373,7 @@ static void interpolate_positional_parameter(symbol nm)
     int c = input_stack::peek();
     for (int i = 1; i <= limit; i++) {
       input_iterator *p = input_stack::get_arg(i);
-      while ((c = p->get(0)) != EOF) {
+      while ((c = p->get(0 /* nullptr */)) != EOF) {
 	if (DOUBLE_QUOTE == c)
 	  c = '"';
 	args += c;
@@ -5757,7 +5758,7 @@ void do_string_case_transform(case_xform_mode mode)
   macro *mac = new macro;
   int len = m->macro::length();
   for (int l = 0; l < len; l++) {
-    int nc, c = iter1.get(0);
+    int nc, c = iter1.get(0 /* nullptr */);
     if ((PUSH_GROFF_MODE == c)
 	|| (PUSH_COMP_MODE == c)
 	|| (POP_GROFFCOMP_MODE == c))
@@ -5818,7 +5819,7 @@ void substring_request()
 	int real_length = 0;			// 1, 2, ..., n
 	string_iterator iter1(*m);
 	for (int l = 0; l < m->len; l++) {
-	  int c = iter1.get(0);
+	  int c = iter1.get(0 /* nullptr */);
 	  if ((PUSH_GROFF_MODE == c)
 	      || (PUSH_COMP_MODE == c)
 	      || (POP_GROFFCOMP_MODE == c))
@@ -5840,10 +5841,10 @@ void substring_request()
 	  warning(WARN_RANGE,
 		  "start and end index of substring out of range");
 	  m->len = 0;
-	  if (m->p) {
+	  if (m->p != 0 /* nullptr */) {
 	    if (--(m->p->count) <= 0)
 	      delete m->p;
-	    m->p = 0;
+	    m->p = 0 /* nullptr */;
 	  }
 	  skip_line();
 	  return;
@@ -9849,7 +9850,7 @@ static void do_string_assignment(const char *s)
 struct string_list {
   const char *s;
   string_list *next;
-  string_list(const char *ss) : s(ss), next(0) {}
+  string_list(const char *ss) : s(ss), next(0 /* nullptr */) {}
 };
 
 #if 0
