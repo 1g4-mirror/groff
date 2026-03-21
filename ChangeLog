@@ -1,5 +1,19 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_char_in_copy_mode)
+	(token::next, process_input_stack, macro_header::copy)
+	(string_iterator::fill, decode_macro_call_arguments)
+	(decode_escape_sequence_arguments, do_define_string)
+	(interpolate_positional_parameter, do_define_macro)
+	(do_string_case_transform, substring_request, asciify_request)
+	(unformat_macro, non_interpreted_node::interpret)
+	(do_non_interpreted, skip_branch, while_request)
+	(stream_write_macro_request, abort_request,
+	transparent_throughput_file_request, do_error): Arrange equality
+	comparisons to avoid inadvertent lvalue assignment.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor.  Make the "guts" of the `chop_macro()`
 	function a member function of class `macro`.
 
