@@ -4380,7 +4380,7 @@ int string_iterator::fill(node **np)
   ptr = p;
   while (p < e) {
     unsigned char c = *p;
-    if ('\n' == c || ESCAPE_NEWLINE == c) {
+    if (('\n' == c) || (ESCAPE_NEWLINE == c)) {
       seen_newline = true;
       p++;
       break;
@@ -4668,7 +4668,7 @@ static void decode_macro_call_arguments(macro_iterator *mi)
     for (;;) {
       while (c == ' ')
 	c = read_char_in_copy_mode(&n);
-      if ('\n' == c || EOF == c)
+      if (('\n' == c) || (EOF == c))
 	break;
       macro arg;
       int quote_input_level = 0;
@@ -4680,7 +4680,7 @@ static void decode_macro_call_arguments(macro_iterator *mi)
 	quote_input_level = input_stack::get_level();
 	c = read_char_in_copy_mode(&n);
       }
-      while (c != EOF && c != '\n'
+      while ((c != EOF) && (c != '\n')
 	     && !(c == ' ' && quote_input_level == 0)) {
 	if (quote_input_level > 0 && c == '"'
 	    && (want_att_compat
@@ -4721,7 +4721,7 @@ static void decode_escape_sequence_arguments(macro_iterator *mi)
   for (;;) {
     while (c == ' ')
       c = read_char_in_copy_mode(&n);
-    if ('\n' == c || EOF == c) {
+    if (('\n' == c) || (EOF == c)) {
       error("missing ']' in parameterized escape sequence");
       break;
     }
@@ -5066,7 +5066,7 @@ static void do_define_string(define_mode mode, comp_mode comp)
   request_or_macro *rm
     = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
   macro *mm = rm ? rm->to_macro() : 0 /* nullptr */;
-  if (DEFINE_APPEND == mode && mm)
+  if ((DEFINE_APPEND == mode) && mm)
     mac = *mm;
   if (COMP_DISABLE == comp)
     mac.append(PUSH_GROFF_MODE);
@@ -5079,7 +5079,7 @@ static void do_define_string(define_mode mode, comp_mode comp)
       mac.append((unsigned char) c);
     c = read_char_in_copy_mode(&n);
   }
-  if (COMP_DISABLE == comp || COMP_ENABLE == comp)
+  if ((COMP_DISABLE == comp) || (COMP_ENABLE == comp))
     mac.append(POP_GROFFCOMP_MODE);
   if (!mm) {
     mm = new macro;
@@ -5469,7 +5469,7 @@ static void do_define_macro(define_mode mode, calling_mode calling,
     input_stack::push(make_temp_iterator(" "));
     tok.next();
   }
-  if (DEFINE_NORMAL == mode || DEFINE_APPEND == mode) {
+  if ((DEFINE_NORMAL == mode) || (DEFINE_APPEND == mode)) {
     nm = read_identifier(true /* required */);
     if (nm.is_null()) {
       skip_line();
@@ -5492,12 +5492,12 @@ static void do_define_macro(define_mode mode, calling_mode calling,
   int c = read_char_in_copy_mode(&n, true /* is_defining */);
   macro mac;
   macro *mm = 0 /* nullptr */;
-  if (DEFINE_NORMAL == mode || DEFINE_APPEND == mode) {
+  if ((DEFINE_NORMAL == mode) || (DEFINE_APPEND == mode)) {
     request_or_macro *rm =
       static_cast<request_or_macro *>(request_dictionary.lookup(nm));
     if (rm != 0 /* nullptr */)
       mm = rm->to_macro();
-    if (mm != 0 /* nullptr */ && DEFINE_APPEND == mode)
+    if (mm != 0 /* nullptr */ && (DEFINE_APPEND == mode))
       mac = *mm;
   }
   bool reading_beginning_of_input_line = true;
@@ -5509,7 +5509,7 @@ static void do_define_macro(define_mode mode, calling_mode calling,
     if (c == '\n')
       mac.clear_string_flag();
     while (ESCAPE_NEWLINE == c) {
-      if (DEFINE_NORMAL == mode || DEFINE_APPEND == mode)
+      if ((DEFINE_NORMAL == mode) || (DEFINE_APPEND == mode))
 	// TODO: grochar; may need NFD decomposition and UTF-8 encoding
 	mac.append(static_cast<unsigned char>(c));
       c = read_char_in_copy_mode(&n, true /* is_defining */);
@@ -5538,12 +5538,12 @@ static void do_define_macro(define_mode mode, calling_mode calling,
 	  tok.make_newline();
 	else
 	  tok.make_space();
-	if (DEFINE_NORMAL == mode || DEFINE_APPEND == mode) {
+	if ((DEFINE_NORMAL == mode) || (DEFINE_APPEND == mode)) {
 	  if (!mm) {
 	    mm = new macro;
 	    request_dictionary.define(nm, mm);
 	  }
-	  if (COMP_DISABLE == comp || COMP_ENABLE == comp)
+	  if ((COMP_DISABLE == comp) || (COMP_ENABLE == comp))
 	    mac.append(POP_GROFFCOMP_MODE);
 	  *mm = mac;
 	}
@@ -5758,9 +5758,9 @@ void do_string_case_transform(case_xform_mode mode)
   int len = m->macro::length();
   for (int l = 0; l < len; l++) {
     int nc, c = iter1.get(0);
-    if (PUSH_GROFF_MODE == c
-	|| PUSH_COMP_MODE == c
-	|| POP_GROFFCOMP_MODE == c)
+    if ((PUSH_GROFF_MODE == c)
+	|| (PUSH_COMP_MODE == c)
+	|| (POP_GROFFCOMP_MODE == c))
       nc = c;
     else if (EOF == c)
       break;
@@ -5819,9 +5819,9 @@ void substring_request()
 	string_iterator iter1(*m);
 	for (int l = 0; l < m->len; l++) {
 	  int c = iter1.get(0);
-	  if (PUSH_GROFF_MODE == c
-	      || PUSH_COMP_MODE == c
-	      || POP_GROFFCOMP_MODE == c)
+	  if ((PUSH_GROFF_MODE == c)
+	      || (PUSH_COMP_MODE == c)
+	      || (POP_GROFFCOMP_MODE == c))
 	    continue;
 	  if (EOF == c)
 	    break;
@@ -5836,7 +5836,7 @@ void substring_request()
 	  start = end;
 	  end = tem;
 	}
-	if (start >= real_length || end < 0) {
+	if ((start >= real_length) || (end < 0)) {
 	  warning(WARN_RANGE,
 		  "start and end index of substring out of range");
 	  m->len = 0;
@@ -5863,9 +5863,9 @@ void substring_request()
 	int i;
 	for (i = 0; i < start; i++) {
 	  int c = iter.get(0 /* nullptr */);
-	  while (PUSH_GROFF_MODE == c
-		 || PUSH_COMP_MODE == c
-		 || POP_GROFFCOMP_MODE == c)
+	  while ((PUSH_GROFF_MODE == c)
+		 || (PUSH_COMP_MODE == c)
+		 || (POP_GROFFCOMP_MODE == c))
 	    c = iter.get(0 /* nullptr */);
 	  if (EOF == c)
 	    break;
@@ -5874,9 +5874,9 @@ void substring_request()
 	for (; i <= end; i++) {
 	  node *nd = 0 /* nullptr */;
 	  int c = iter.get(&nd);
-	  while (PUSH_GROFF_MODE == c
-		 || PUSH_COMP_MODE == c
-		 || POP_GROFFCOMP_MODE == c)
+	  while ((PUSH_GROFF_MODE == c)
+		 || (PUSH_COMP_MODE == c)
+		 || (POP_GROFFCOMP_MODE == c))
 	    c = iter.get(0 /* nullptr */);
 	  if (EOF == c)
 	    break;
@@ -6609,7 +6609,7 @@ static node *do_non_interpreted() // \?
       mac.append(n);
     else
       mac.append(c);
-  if (EOF == c || '\n' == c) {
+  if ((EOF == c) || ('\n' == c)) {
     error("unterminated transparent embedding escape sequence");
     return 0 /* nullptr */;
   }
@@ -9365,7 +9365,7 @@ void abort_request()
     while ((c = read_char_in_copy_mode(0 /* nullptr */)) == ' ')
       ;
   }
-  if (!(EOF == c || '\n' == c)) {
+  if (!((EOF == c) || ('\n' == c))) {
     for (;
 	 (c != '\n') && (c != EOF);
 	 (c = read_char_in_copy_mode(0 /* nullptr */)))

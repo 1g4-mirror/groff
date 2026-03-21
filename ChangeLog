@@ -1,5 +1,13 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (string_iterator::fill)
+	(decode_macro_call_arguments, decode_escape_sequence_arguments)
+	(do_define_string, do_define_macro, do_string_case_transform)
+	(substring_request, do_non_interpreted, abort_request):
+	Parenthesize formally complex expressions.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (read_char_in_copy_mode)
 	(token::next, process_input_stack, macro_header::copy)
 	(string_iterator::fill, decode_macro_call_arguments)
