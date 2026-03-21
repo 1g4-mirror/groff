@@ -5820,7 +5820,7 @@ void substring_request()
 	      || (PUSH_COMP_MODE == c)
 	      || (POP_GROFFCOMP_MODE == c))
 	    continue;
-	  if (EOF == c)
+	  if (l == m->len)
 	    break;
 	  operable_length++;
 	}
@@ -5865,7 +5865,7 @@ void substring_request()
 		 || (PUSH_COMP_MODE == c)
 		 || (POP_GROFFCOMP_MODE == c))
 	    c = iter.get(0 /* nullptr */);
-	  if (EOF == c)
+	  if (i == m->len)
 	    break;
 	}
 	macro mac;
@@ -5876,7 +5876,7 @@ void substring_request()
 		 || (PUSH_COMP_MODE == c)
 		 || (POP_GROFFCOMP_MODE == c))
 	    c = iter.get(0 /* nullptr */);
-	  if (EOF == c)
+	  if (i == m->len)
 	    break;
 	  if (0U == c)
 	    mac.append(nd);
