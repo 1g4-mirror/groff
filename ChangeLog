@@ -1,5 +1,19 @@
 2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Improve type discipline with respect
+	to groff's internal character representation.
+	(macro::append): Append to macro contents using explicitly
+	unsigned character (integer) literal rather than a signed one,
+	for conceptual clarity.  "groff characters" are, for now,
+	unsigned bytes.
+	(macro_header::copy, string_iterator::fill, substring_request):
+	Compare character read from an groff string iterator to unsigned
+	character {integer} literal.
+
+	Continues the long process of fixing Savannah #67735.
+
+2026-03-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (composite_glyph_name)
 	(do_define_string): Explicitly compare values of pointer type to
 	null pointer literals instead of letting them pun down to

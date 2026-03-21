@@ -3823,6 +3823,7 @@ char_block::char_block()
 {
 }
 
+// TODO: grochar
 class char_list {
 public:
   char_list();
@@ -4110,7 +4111,7 @@ void macro::append(node *n)
       delete p;
     p = tem;
   }
-  p->cl.append(0);
+  p->cl.append(0U); // TODO: grochar
   p->nl.append(n);
   ++len;
   is_empty_macro = false;
@@ -4213,7 +4214,7 @@ macro_header *macro_header::copy(int n)
     }
     unsigned char c = *ptr++;
     p->cl.append(c);
-    if (0 == c) {
+    if (0U == c) {
       p->nl.append(nd->copy());
       nd = nd->next;
     }
@@ -4386,7 +4387,7 @@ int string_iterator::fill(node **np)
       p++;
       break;
     }
-    if ('\0' == c)
+    if (0U == c)
       break;
     p++;
   }
@@ -5881,7 +5882,7 @@ void substring_request()
 	    c = iter.get(0 /* nullptr */);
 	  if (EOF == c)
 	    break;
-	  if (0 == c)
+	  if (0U == c)
 	    mac.append(nd);
 	  else
 	    mac.append((unsigned char) c);
@@ -6588,9 +6589,9 @@ bool non_interpreted_node::interpret(macro *m)
   node *n = 0 /* nullptr */;
   for (;;) {
     int c = si.get(&n);
-    if (EOF == c)
+    if (EOF == c) // TODO: grochar
       break;
-    if (0 == c)
+    if (0U == c) // TODO: grochar
       m->append(n);
     else
       m->append(c);
