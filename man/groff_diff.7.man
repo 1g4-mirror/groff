@@ -4462,18 +4462,34 @@ and
 .IR end ,
 inclusively.
 .
-The first character in the string has index\~0.
+The first element of the string has index\~0.
+.
+An absent
+.I end
+argument implies the largest valid value
+(the string length minus one).
 .
 Negative indices count backward from the end of the string:
-the last character has index\~\-1,
-the character before the last has index\~\-2,
+the last element has index\~\-1,
+the element before the last has index\~\-2,
 and so on.
 .
-If
-.I end
-is omitted,
-.B \-1
-is implied.
+.
+.
+.IP
+Compatibility save and restore tokens do
+.I not
+count for the purpose of index computation,
+even though they appear in string contents reported by the
+.B pm
+request and figure in the value computed by the
+.RB \[lq] length \[rq]
+request.
+.\" XXX: You can actually do the following, inadvisedly.
+.\" Consequently,
+.\" .B \%substring
+.\" cannot be used to alter the compatibility mode associations
+.\" of its elements.
 .
 .
 .TP

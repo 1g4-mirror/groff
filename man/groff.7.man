@@ -5192,6 +5192,8 @@ and
 .IR end ,
 inclusive.
 .
+The first element of the string has index\~0.
+.
 Negative indices count backward from the end of the string.
 .
 .TPx

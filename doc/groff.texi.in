@@ -15378,13 +15378,22 @@ for details on nodes inserted additionally by GNU @code{troff}.
 
 @Defreq {substring, str start [@Var{end}]}
 @cindex substring (@code{substring})
-Replace the string named @var{str} with its substring bounded by the
-indices @var{start} and @var{end}, inclusively.  The first character in
-the string has index@tie{}0.  If @var{end} is omitted, it is implicitly
-set to the largest valid value (the string length minus one).  Negative
-indices count backward from the end of the string:@: the last character
-has index@tie{}@minus{}1, the character before the last has
-index@tie{}@minus{}2, and so on.
+Replace the string named
+@var{str}
+with its substring bounded by the indices
+@var{start}
+and
+@var{end},
+inclusively.
+The first element of the string has index@tie{}0.
+An absent
+@var{end}
+argument implies the largest valid value
+(the string length minus one).
+Negative indices count backward from the end of the string:@:
+the last element has index@tie{}@minus{}1,
+the element before the last has index@tie{}@minus{}2,
+and so on.
 
 @Example
 .ds xxx abcdefgh
@@ -15396,6 +15405,20 @@ index@tie{}@minus{}2, and so on.
     @result{} de
 @endExample
 @endDefreq
+
+Compatibility save and restore tokens do
+@emph{not}
+count for the purpose of index computation,
+even though they appear in string contents reported by the
+@code{pm}
+request and figure in the value computed by the
+@code{length}
+request.
+@c XXX: You can actually do the following, inadvisedly.
+@c Consequently,
+@c @code{substring}
+@c cannot be used to alter the compatibility mode associations
+@c of its elements.
 
 @DefreqList {stringdown, str}
 @DefreqListEndx {stringup, str}
