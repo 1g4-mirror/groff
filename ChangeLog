@@ -1,3 +1,23 @@
+2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Rename some member functions.
+
+	* src/roff/troff/request.h (class macro):
+	* src/roff/troff/input.cpp (class char_list, class node_list):
+	Rename `length()` member function to `get_length()`, like other
+	accessors in GNU troff.
+	(char_list::length)
+	(node_list::length)
+	(macro::length): Rename these...
+	(char_list::get_length)
+	(node_list::get_length)
+	(macro::get_length): ...to these.
+	(macro:append, macro_header::json_dump_macro)
+	(do_string_case_transform, substring_request): Update call
+	sites.
+	(do_string_case_transform): Drop unnecessary name space
+	qualification.
+
 2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (substring_request): Ignore request

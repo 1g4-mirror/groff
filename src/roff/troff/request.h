@@ -64,7 +64,7 @@ public:
   void set(unsigned char, int);
   void chop();
   unsigned char get(int);
-  int length();
+  int get_length();
   void invoke(symbol, bool);
   macro *to_macro();
   void print_size();

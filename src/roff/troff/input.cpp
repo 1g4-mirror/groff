@@ -3831,7 +3831,7 @@ public:
   void append(unsigned char);
   void set(unsigned char, int);
   unsigned char get(int);
-  int length();
+  int get_length();
 private:
   unsigned char *ptr;
   int len;
@@ -3856,7 +3856,7 @@ char_list::~char_list()
   }
 }
 
-int char_list::length()
+int char_list::get_length()
 {
   return len;
 }
@@ -3923,7 +3923,7 @@ public:
   node_list();
   ~node_list();
   void append(node *);
-  int length();
+  int get_length();
 
   friend class macro_header;
   friend class string_iterator;
@@ -3941,7 +3941,7 @@ void node_list::append(node *n)
   }
 }
 
-int node_list::length()
+int node_list::get_length()
 {
   int total = 0 /* nullptr */;
   for (node *n = head; n != 0 /* nullptr */; n = n->next)
@@ -4050,7 +4050,7 @@ void macro::append(unsigned char c)
   assert(c != 0);
   if (p == 0 /* nullptr */)
     p = new macro_header;
-  if (p->cl.length() != len) {
+  if (p->cl.get_length() != len) {
     macro_header *tem = p->copy(len);
     if (--(p->count) <= 0)
       delete p;
@@ -4075,7 +4075,7 @@ unsigned char macro::get(int offset)
   return p->cl.get(offset);
 }
 
-int macro::length()
+int macro::get_length()
 {
   return len;
 }
@@ -4097,7 +4097,7 @@ void macro::append(node *n)
   assert(n != 0 /* nullptr */);
   if (p == 0 /* nullptr */)
     p = new macro_header;
-  if (p->cl.length() != len) {
+  if (p->cl.get_length() != len) {
     macro_header *tem = p->copy(len);
     if (--(p->count) <= 0)
       delete p;
@@ -4226,7 +4226,7 @@ void macro_header::json_dump_diversion()
 void macro_header::json_dump_macro()
 {
   errprint("\"contents\": \"");
-  int macro_len = cl.length();
+  int macro_len = cl.get_length();
   for (int i = 0; i < macro_len; i++) {
     json_char jc = json_encode_char(cl.get(i));
     // Write out its JSON representation by character by character to
@@ -5749,7 +5749,7 @@ void do_string_case_transform(case_xform_mode mode)
   }
   string_iterator iter1(*m);
   macro *mac = new macro;
-  int len = m->macro::length();
+  int len = m->get_length();
   for (int l = 0; l < len; l++) {
     int nc, c = iter1.get(0 /* nullptr */);
     if ((PUSH_GROFF_MODE == c)
@@ -5810,7 +5810,7 @@ void substring_request()
     else {
       int end = -1;
       if (!has_arg() || read_integer(&end)) {
-	int len = m->length();
+	int len = m->get_length();
 	string_iterator iter1(*m);
 	// We don't apply substring operations to internally generated
 	// tokens that manage compatibility mode.
