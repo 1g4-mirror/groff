@@ -5813,7 +5813,8 @@ void substring_request()
     request_or_macro *p = lookup_request(s);
     macro *m = p->to_macro();
     if (0 /* nullptr */ == m)
-      error("cannot extract substring of request '%1'", s.contents());
+      error("cannot perform substring operation on request '%1'",
+	    s.contents());
     else {
       int end = -1;
       if (!has_arg() || read_integer(&end)) {
