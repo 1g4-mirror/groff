@@ -3834,7 +3834,7 @@ public:
   int get_length();
 private:
   unsigned char *ptr;
-  int len;
+  int length;
   char_block *head;
   char_block *tail;
   friend class macro_header;
@@ -3842,7 +3842,7 @@ private:
 };
 
 char_list::char_list()
-: ptr(0 /* nullptr */), len(0), head(0 /* nullptr */),
+: ptr(0 /* nullptr */), length(0), head(0 /* nullptr */),
   tail(0 /* nullptr */)
 {
 }
@@ -3858,7 +3858,7 @@ char_list::~char_list()
 
 int char_list::get_length()
 {
-  return len;
+  return length;
 }
 
 void char_list::append(unsigned char c)
@@ -3875,14 +3875,14 @@ void char_list::append(unsigned char c)
     }
   }
   *ptr++ = c;
-  len++;
+  length++;
 }
 
 void char_list::set(unsigned char c, int offset)
 {
-  assert(len > offset);
+  assert(length > offset);
   // optimization for access at the end
-  int boundary = len - len % char_block::SIZE;
+  int boundary = length - length % char_block::SIZE;
   if (offset >= boundary) {
     *(tail->s + offset - boundary) = c;
     return;
@@ -3901,9 +3901,9 @@ void char_list::set(unsigned char c, int offset)
 
 unsigned char char_list::get(int offset)
 {
-  assert(len > offset);
+  assert(length > offset);
   // optimization for access at the end
-  int boundary = len - len % char_block::SIZE;
+  int boundary = length - length % char_block::SIZE;
   if (offset >= boundary)
     return *(tail->s + offset - boundary);
   char_block *tem = head;
