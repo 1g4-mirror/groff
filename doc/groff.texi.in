@@ -1076,7 +1076,7 @@ shares much of this interface;
 @command{groff}
 passes relevant options and operands to it.
 
-@c We don't know the width of what @g@ interpolates, so indentation
+@c We don't know the width of what at-g-at interpolates, so indentation
 @c might be hinky.  Format for the common case of a null prefix.
 @Example
 troff [-abcCEiRSUz] [-f @var{font-family}] [-F @var{font-directory}]
