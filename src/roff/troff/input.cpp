@@ -5810,7 +5810,7 @@ void substring_request()
     else {
       int end = -1;
       if (!has_arg() || read_integer(&end)) {
-	int len = m->len;
+	int len = m->length();
 	string_iterator iter1(*m);
 	// We don't apply substring operations to internally generated
 	// tokens that manage compatibility mode.
