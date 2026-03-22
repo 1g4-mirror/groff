@@ -3882,7 +3882,7 @@ void char_list::set(unsigned char c, int offset)
 {
   assert(length > offset);
   // optimization for access at the end
-  int boundary = length - length % char_block::SIZE;
+  int boundary = length - (length % char_block::SIZE);
   if (offset >= boundary) {
     *(tail->s + offset - boundary) = c;
     return;
@@ -3903,7 +3903,7 @@ unsigned char char_list::get(int offset)
 {
   assert(length > offset);
   // optimization for access at the end
-  int boundary = length - length % char_block::SIZE;
+  int boundary = length - (length % char_block::SIZE);
   if (offset >= boundary)
     return *(tail->s + offset - boundary);
   char_block *tem = head;

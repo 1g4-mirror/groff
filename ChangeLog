@@ -1,5 +1,10 @@
 2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (char_list::set, char_list::get):
+	Fix code style nit.  Parenthesize formally complex expressions.
+
+2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (class char_list): Rename member
 	variable `len` to `length`.
 	(char_list::char_list, char_list::get_length, char_list::append)
