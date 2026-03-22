@@ -1,5 +1,11 @@
 2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* examples/fonts_n.in:
+	* examples/fonts_x.in: Revise messages written to terminal to
+	better describe operation in progress.
+
+2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Revise approach to generating fonts*.roff files, employing a
 	technique that is not endorsed by the POSIX Issue 8 (2024)
 	standard for make(1), but which GNU and *BSD make programs

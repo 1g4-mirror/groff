@@ -110,7 +110,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .    if \\n[t*cptn] \
 .      bp
 .
-.    tm \\*[fonts_n]: listing font '\\*[*$1]'...
+.    tm \\*[fonts_n]: listing glyphs in font '\\*[*$1]' with hdtbl...
 .
 .    TBL border=.1n bc=red cpd=0 csp=.1n bgc=
 .      CPTN groff font name \\*[*$1]; \
