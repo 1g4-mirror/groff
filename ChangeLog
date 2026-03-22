@@ -1,5 +1,19 @@
 2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (substring_request): Ignore request
+	if both the "start" and "end" indices are out of range.
+	* src/roff/troff/request.h (class macro): Drop declaration of
+	`friend` function `substring_request()`.
+
+	* doc/groff.texi.in (Strings) <substring>:
+	* man/groff_diff.7.man (New requests) <substring>: Document it.
+
+	* src/roff/groff/tests/\
+	substring-request-on-invalid-range-is-no-op.sh: Test new
+	behavior.
+
+2026-03-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (substring_request): Slightly
 	refactor.  Use `macro` object's public member function
 	`length()` to obtain its length rather than its private member

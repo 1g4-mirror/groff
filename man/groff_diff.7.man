@@ -4474,6 +4474,14 @@ the last element has index\~\-1,
 the element before the last has index\~\-2,
 and so on.
 .
+If both
+.I start
+and
+.I end
+lie outside the string,
+GNU
+.I troff \" GNU
+ignores the request.
 .
 .
 .IP

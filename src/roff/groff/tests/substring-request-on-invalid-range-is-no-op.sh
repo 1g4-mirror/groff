@@ -57,13 +57,13 @@ echo "verifying that 'substring' request with out-of-range index" \
     "arguments (ending index negative) performs no operation" >&2
 echo "$output" | grep -qx "def" || wail
 
-#echo "verifying that 'substring' request with out-of-range index" \
-#    "arguments (both indices positive) performs no operation" >&2
-#echo "$output" | grep -qx "ghi" || wail
-#
-#echo "verifying that 'substring' request with out-of-range index" \
-#    "arguments (both indices negative) performs no operation" >&2
-#echo "$output" | grep -qx "jkl" || wail
+echo "verifying that 'substring' request with out-of-range index" \
+    "arguments (both indices positive) performs no operation" >&2
+echo "$output" | grep -qx "ghi" || wail
+
+echo "verifying that 'substring' request with out-of-range index" \
+    "arguments (both indices negative) performs no operation" >&2
+echo "$output" | grep -qx "jkl" || wail
 
 test -z "$fail"
 

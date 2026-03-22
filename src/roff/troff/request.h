@@ -75,7 +75,6 @@ public:
   void dump();
   void json_dump();
   friend class string_iterator;
-  friend void substring_request();
   friend bool operator==(const macro &, const macro &);
 };
 

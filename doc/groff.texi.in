@@ -15394,6 +15394,17 @@ Negative indices count backward from the end of the string:@:
 the last element has index@tie{}@minus{}1,
 the element before the last has index@tie{}@minus{}2,
 and so on.
+If both
+@var{start}
+and
+@var{end}
+lie outside the string,
+GNU
+@command{troff} @c GNU
+ignores the request.@footnote{It also
+emits a warning in category
+@samp{range}.
+@xref{Warnings}.}
 
 @Example
 .ds xxx abcdefgh

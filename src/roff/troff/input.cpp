@@ -5836,13 +5836,18 @@ void substring_request()
 	}
 	if ((start >= operable_length) || (end < 0)) {
 	  warning(WARN_RANGE,
-		  "start and end index of substring out of range");
+		  "ignoring substring request; start and end index"
+		  " out of range");
+	  // XXX: If we restore this functionality, it might be better
+	  // done with a `macro` class member function called from here.
+#if 0
 	  len = m->len = 0;
 	  if (m->p != 0 /* nullptr */) {
 	    if (--(m->p->count) <= 0)
 	      delete m->p;
 	    m->p = 0 /* nullptr */;
 	  }
+#endif
 	  skip_line();
 	  return;
 	}
