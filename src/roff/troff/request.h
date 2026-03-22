@@ -45,7 +45,7 @@ struct node;
 class macro : public request_or_macro {
   const char *filename;		// where was it defined?
   int lineno;
-  int len;
+  int length;
   bool is_empty_macro;
   bool is_a_diversion;
   bool is_a_string;		// if it contains no newline

@@ -3984,13 +3984,13 @@ macro::macro()
     filename = 0 /* nullptr */;
     lineno = 0 /* nullptr */;
   }
-  len = 0;
+  length = 0;
   is_empty_macro = true;
   p = 0; /* nullptr */
 }
 
 macro::macro(const macro &m)
-: filename(m.filename), lineno(m.lineno), len(m.len),
+: filename(m.filename), lineno(m.lineno), length(m.length),
   is_empty_macro(m.is_empty_macro), is_a_diversion(m.is_a_diversion),
   is_a_string(m.is_a_string), p(m.p)
 {
@@ -4006,7 +4006,7 @@ macro::macro(bool is_div)
     filename = 0 /* nullptr */;
     lineno = 0 /* nullptr */;
   }
-  len = 0;
+  length = 0;
   is_empty_macro = true;
   // A macro is a string until it contains a newline.
   is_a_string = true;
@@ -4038,7 +4038,7 @@ macro &macro::operator=(const macro &m)
   p = m.p;
   filename = m.filename;
   lineno = m.lineno;
-  len = m.len;
+  length = m.length;
   is_empty_macro = m.is_empty_macro;
   is_a_diversion = m.is_a_diversion;
   is_a_string = m.is_a_string;
@@ -4050,14 +4050,14 @@ void macro::append(unsigned char c)
   assert(c != 0);
   if (p == 0 /* nullptr */)
     p = new macro_header;
-  if (p->cl.get_length() != len) {
-    macro_header *tem = p->copy(len);
+  if (p->cl.get_length() != length) {
+    macro_header *tem = p->copy(length);
     if (--(p->count) <= 0)
       delete p;
     p = tem;
   }
   p->cl.append(c);
-  ++len;
+  ++length;
   if (c != PUSH_GROFF_MODE && c != PUSH_COMP_MODE && c != POP_GROFFCOMP_MODE)
     is_empty_macro = false;
 }
@@ -4077,7 +4077,7 @@ unsigned char macro::get(int offset)
 
 int macro::get_length()
 {
-  return len;
+  return length;
 }
 
 void macro::append_str(const char *s)
@@ -4097,15 +4097,15 @@ void macro::append(node *n)
   assert(n != 0 /* nullptr */);
   if (p == 0 /* nullptr */)
     p = new macro_header;
-  if (p->cl.get_length() != len) {
-    macro_header *tem = p->copy(len);
+  if (p->cl.get_length() != length) {
+    macro_header *tem = p->copy(length);
     if (--(p->count) <= 0)
       delete p;
     p = tem;
   }
   p->cl.append(0U); // TODO: grochar
   p->nl.append(n);
-  ++len;
+  ++length;
   is_empty_macro = false;
 }
 
@@ -4132,29 +4132,29 @@ void macro::chop()
   // We have to check for save/restore pairs which could be present due
   // to as1, ds1, de1, am1 requests.
   for (;;) {
-    if (get(len - 1) != POP_GROFFCOMP_MODE)
+    if (get(length - 1) != POP_GROFFCOMP_MODE)
       break;
     contains_mode_tokens = true;
-    len -= 1;
-    if (get(len - 1) != PUSH_GROFF_MODE
-	&& get(len - 1) != PUSH_COMP_MODE)
+    length -= 1;
+    if (get(length - 1) != PUSH_GROFF_MODE
+	&& get(length - 1) != PUSH_COMP_MODE)
       break;
     contains_mode_tokens = false;
-    len -= 1;
-    if (0 == len)
+    length -= 1;
+    if (0 == length)
       break;
   }
-  assert(len != 0);
+  assert(length != 0);
   // TODO: If it's empty, do nothing, quietly?
   if (contains_mode_tokens)
-    set(POP_GROFFCOMP_MODE, len - 1);
+    set(POP_GROFFCOMP_MODE, length - 1);
   else
-    len -= 1;
+    length -= 1;
 }
 
 void macro::print_size()
 {
-  errprint("%1", len);
+  errprint("%1", length);
 }
 
 // Use this only for zero-length macros associated with charinfo objects
@@ -4182,7 +4182,7 @@ void macro::json_dump()
   }
   if (need_comma)
     errprint(", ");
-  errprint("\"length\": %1", len);
+  errprint("\"length\": %1", length);
   if (p != 0 /* nullptr */) {
     errprint(", ");
     p->json_dump_macro();
@@ -4311,7 +4311,7 @@ string_iterator::string_iterator(const macro &m, const char *p,
 : input_iterator(m.is_a_diversion), mac(m), how_invoked(p),
   seen_newline(false), lineno(1), nm(s)
 {
-  count = mac.len;
+  count = mac.length;
   if (count != 0) {
     bp = mac.p->cl.head;
     nd = mac.p->nl.head;
@@ -4585,11 +4585,11 @@ void macro_iterator::shift(int n)
 
 bool operator==(const macro &m1, const macro &m2)
 {
-  if (m1.len != m2.len)
+  if (m1.length != m2.length)
     return false;
   string_iterator iter1(m1);
   string_iterator iter2(m2);
-  int n = m1.len;
+  int n = m1.length;
   while (--n >= 0) {
     node *nd1 = 0;
     int c1 = iter1.get(&nd1);

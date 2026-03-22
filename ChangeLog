@@ -1,5 +1,15 @@
 2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/request.h (class macro): Rename member variable
+	`len` to `length`.
+	* src/roff/troff/input.cpp (macro::macro, macro::operator=)
+	(macro::append, macro::get_length, macro::chop)
+	(macro::print_size, macro::json_dump)
+	(string_iterator::string_iterator)
+	(operator==): Update dereference sites.
+
+2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Rename some member functions.
 
 	* src/roff/troff/request.h (class macro):
