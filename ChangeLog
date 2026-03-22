@@ -1,5 +1,14 @@
 2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Unit-test no-op behavior of `substring` request when
+	one of its index arguments is both negative and out-of-range.
+
+	* src/roff/groff/tests/\
+	substring-request-on-invalid-range-is-no-op.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (substring_request): Revise wording
 	of error diagnostic.  The use of the term "extract" could be
 	taken to mean that the original string was left intact, which is
