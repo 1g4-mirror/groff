@@ -1,3 +1,15 @@
+2026-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* configure.ac: Stop interpolating `GROFF_CXX_CHECK` macro.
+	* m4/groff.m4 (GROFF_CXX_CHECK): Delete macro definition. It
+	dates back at least to groff 1.10 (1995).  ISO standardized C++
+	in 1998; it no longer seems necessary in 2026 to check that a
+	purported C++ compiler validly compiles a `main()` that simply
+	returns `0`, nor that it correctly arranges for constructors and
+	destructors of statically allocated objects to run.  A C++
+	compiler failing to meet these criteria is not fit for purpose;
+	working alternatives are universally available.
+
 2026-03-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (char_list::set, char_list::get):
