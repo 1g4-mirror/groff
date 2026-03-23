@@ -35,6 +35,11 @@ troff
    warning category governing its emission.  This change is to make it
    easier for users to select warnings of interest.
 
+*  When the `substring` request is given two index arguments that both
+   lie outside the string, macro, or diversion's length, it now ignores
+   the request (and issues a warning in category "range"), leaving the
+   operand (first request argument) unchanged instead of emptying it.
+
 Miscellaneous
 -------------
 
