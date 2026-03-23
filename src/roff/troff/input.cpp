@@ -11223,7 +11223,10 @@ void charinfo::dump()
     // Also see node.cpp::glyph_node::asciify().
     int mapping = get_unicode_mapping();
     if (mapping >= 0) {
-      const size_t buflen = 6; // enough for five hex digits + '\0'
+      // All we need is `sizeof "10FFFF"` but GCC's
+      // "-Wformat-truncation" warning doesn't know that Unicode code
+      // points are limited in range.
+      const size_t buflen = sizeof "FFFFFFFF";
       char hexbuf[buflen];
       (void) memset(hexbuf, '\0', buflen);
       (void) snprintf(hexbuf, buflen, "%.4X", mapping);

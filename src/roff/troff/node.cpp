@@ -3946,7 +3946,10 @@ void glyph_node::asciify(macro *m)
 	    break;
 	  default:
 	    m->append_str("\\[u");
-	    const size_t buflen = sizeof "10FFFF";
+	    // All we need is `sizeof "10FFFF"` but GCC's
+	    // "-Wformat-truncation" warning doesn't know that Unicode
+	    // code points are limited in range.
+	    const size_t buflen = sizeof "FFFFFFFF";
 	    char hexbuf[buflen];
 	    (void) memset(hexbuf, '\0', buflen);
 	    (void) snprintf(hexbuf, buflen, "%.4X", unicode_mapping);

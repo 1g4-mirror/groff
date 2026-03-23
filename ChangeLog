@@ -1,5 +1,24 @@
 2026-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix `-Wformat-truncation` warnings.
+
+	* src/roff/troff/input.cpp (charinfo::dump):
+	* src/roff/troff/node.cpp (glyph_node::asciify): When preparing
+	to format the hexadecimal representation of a Unicode code
+	point with `get_unicode_code()`, prepare a buffer of sufficient
+	size to store a 32-bit unsigned integer, as that's what
+	snprintf(3)'s `%X` conversion produces.  It doesn't know that
+	Unicode is only a 20.1-bit code.  Even if it did, our use of
+	`int` to store the value fails to communicate that constraint to
+	snprintf(3).
+
+	Even the use of `int` a bit slippery of us, since it's a signed
+	type with a 31-bit significand.  But libgroff's
+	`glyph_to_unicode()`, which `get_unicode_code()` calls, uses
+	"-1" to signal an error in-band.
+
+2026-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* configure.ac: Stop interpolating `GROFF_CXX_CHECK` macro.
 	* m4/groff.m4 (GROFF_CXX_CHECK): Delete macro definition. It
 	dates back at least to groff 1.10 (1995).  ISO standardized C++
