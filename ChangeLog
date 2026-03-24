@@ -65,7 +65,7 @@
 
 	* src/roff/troff/input.cpp (substring_request): Slightly
 	refactor.  Introduce new local variable `len` to store value of
-	`len` `macro` object being operated on, it case the compiler
+	`len` `macro` object being operated on, in case the compiler
 	isn't smart enough to cache a repeated member variable access
 	itself.
 
@@ -203,8 +203,8 @@
 	function a member function of class `macro`.
 
 	* src/roff/troff/request.h (class macro): Declare member
-	function `chop()`, taking and returning `void`.  Drop
-	declaration of `friend` function `chop_macro()`.
+	function `chop()`, taking no argument and returning `void`.
+	Drop declaration of `friend` function `chop_macro()`.
 	* src/roff/troff/input.cpp: Drop forward declaration of
 	`chop_macro()`.
 	(macro::chop): Member function takes responsibility for updating
@@ -361,19 +361,20 @@
 	reference to a dynamically allocated rectangular array of
 	character cells.  The size of this array is not fixed; `pl`
 	requests in an input document can grow or shrink the page
-	length.  The resizing strategy that grotty has used to date
-	proved to perform badly with the new approach to continuous
-	rendering used by groff's man(7) and mdoc(7) packages in version
-	1.24.0.  If the initial allocation of 66 lines (rows) of
-	character cells was insufficient because the input extended the
-	page length, it grew the allocation (and performed a memcpy(3)
-	of its existing contents) by only as much as required to house
-	the vertical drawing position, plus one line.  For a famously
-	lengthy man page like bash(1), this meant many repeated trips
-	through new/memcpy()/delete sequences, giving the language
-	runtime allocator a lot of work to do.  In an extreme case
-	{formatting 64 copies of bash(1) in sequence}, this led to long
-	runtimes with two-thirds of program time spent in the kernel.
+	length.  The strategy it has used to date to handle a
+	non-default page length proved to perform badly with the new
+	approach to continuous rendering used by groff's man(7) and
+	mdoc(7) packages in version 1.24.0.  If the initial allocation
+	of 66 lines (rows) of character cells was insufficient because
+	the input extended the page length, it grew the allocation (and
+	performed a memcpy(3) of its existing contents) by only as much
+	as required to accommodate the current vertical drawing
+	position, plus one line.  For a famously lengthy man page like
+	bash(1), this meant many repeated trips through
+	new/memcpy()/delete sequences, giving the language runtime
+	allocator a lot of work to do.  In an extreme case {formatting
+	64 copies of bash(1) in sequence}, this led to long runtimes
+	with two-thirds of program time spent in the kernel.
 
 	The new strategy is to double the allocation size every time it
 	is exceeded, but also to free any resized allocation at the end
@@ -391,8 +392,8 @@
 	(class tty_printer): Drop empty body from `begin_page()`
 	declaration.
 	(tty_printer::tty_printer): Replace open-coded initial
-	storage allocation backing `lines` member variable with call to
-	`begin_page()`.
+	allocation of storage backing `lines` member variable with call
+	to `begin_page()`.
 	(tty_printer::~tty_printer): Stop freeing the storage backing
 	`lines` here.  Instead...
 	(tty_printer::end_page): ...do it here, if its size grew beyond
