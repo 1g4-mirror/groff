@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "font.h"
 #include "charinfo.h"
 #include "input.h"
-#include "geometry.h"
+#include "geometry.h" // adjust_arc_center()
 #include "json-encode.h" // json_encode_char()
 
 #include "posix.h"

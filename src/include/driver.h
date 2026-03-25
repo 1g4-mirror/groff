@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "error.h"
 #include "font.h"
 #include "printer.h"
-#include "geometry.h"
 
 void do_file(const char *);
 

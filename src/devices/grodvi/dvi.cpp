@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <getopt.h> // getopt_long()
 
 #include "driver.h"
+#include "geometry.h" // adjust_arc_center()
 #include "nonposix.h"
 
 extern "C" const char *Version_string;

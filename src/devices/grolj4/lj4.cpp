@@ -52,6 +52,7 @@ X command to include bitmap graphics
 
 #include "cset.h" // csdigit()
 #include "driver.h"
+#include "geometry.h" // adjust_arc_center()
 #include "lib.h" // array_size(), PI
 
 extern "C" const char *Version_string;

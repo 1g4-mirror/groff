@@ -21,6 +21,15 @@
 
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/driver.h: Drop preprocessor inclusion of
+	"geometry.h" from here, and add it where it's needed...
+	* src/devices/grodvi/dvi.cpp:
+	* src/devices/grolj4/lj4.cpp:
+	* src/devices/grops/ps.cpp:
+	* src/libs/libgroff/geometry.cpp: ...here.
+
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/error.cpp: Drop `extern` declaration of
 	`fatal_error_exit()`, now delcared properly in "lib.h".
 	* src/libs/libgroff/fatal.cpp: Use preprocessor to include

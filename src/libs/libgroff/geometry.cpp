@@ -25,6 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdio.h>
 #include <math.h>
 
+#include "geometry.h"
+
 #undef	MAX
 #define MAX(a, b)  (((a) > (b)) ? (a) : (b))
 
