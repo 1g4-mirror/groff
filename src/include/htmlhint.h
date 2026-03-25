@@ -26,12 +26,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
  *                        Only called for inline images (such as eqn).
  *
  */
-extern void html_begin_suppress();
+void html_begin_suppress();
 
 /*
  *  html_end_suppress - end the suppression of output.
  */
-extern void html_end_suppress();
+void html_end_suppress();
 
 #endif
 

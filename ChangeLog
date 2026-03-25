@@ -21,6 +21,16 @@
 
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/htmlhint.h: Drop redundant keyword `extern` from
+	`html_begin_suppress()` and `html_end_suppress()` function
+	declarations.
+	* src/libs/libgroff/htmlhint.cpp: Use preprocessor to include
+	"htmlhint.h" header file.
+
+	Fixes `-Wmissing-declarations` warning.
+
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/lf.h: Declare `change_filename()` and
 	`change_lineno()` properly here...
 	* src/libs/libgroff/lf.cpp: ...instead of here, with `extern`.
