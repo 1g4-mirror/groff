@@ -21,6 +21,11 @@
 
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/change_lf.cpp (change_filename):
+	Parenthesize formally complex expressions.
+
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/htmlhint.h: Drop redundant keyword `extern` from
 	`html_begin_suppress()` and `html_end_suppress()` function
 	declarations.
