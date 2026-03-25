@@ -1,6 +1,7 @@
 /* Copyright 1989-2020 Free Software Foundation, Inc.
-     Written by Gaius Mulley <gaius@glam.ac.uk>
-     using adjust_arc_center() from printer.cpp, written by James Clark.
+
+Written by Gaius Mulley <gaius@glam.ac.uk>
+using adjust_arc_center() from printer.cpp, written by James Clark.
 
 This file is part of groff, the GNU roff typesetting system.
 
