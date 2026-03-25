@@ -23,6 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stdlib.h>
 
+#include "errarg.h"
+#include "error.h"
+
 #define FATAL_ERROR_EXIT_CODE 3
 
 void fatal_error_exit()
