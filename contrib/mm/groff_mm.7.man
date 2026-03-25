@@ -4139,7 +4139,7 @@ precedes the list itself,
 but does not accumulate with pre-item space
 when this list is nested in another.
 .
-.B RL
+.B VL
 calls
 .BR LB ;
 use
