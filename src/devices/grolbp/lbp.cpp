@@ -1,6 +1,7 @@
 /* Copyright (C) 1994-2025 Free Software Foundation, Inc.
-     Written by Francisco Andrés Verdú <pandres@dragonet.es> with many
-     ideas taken from the other groff drivers.
+
+Written by Francisco Andrés Verdú <pandres@dragonet.es> with many ideas
+taken from the other groff drivers.
 
 This file is part of groff, the GNU roff typesetting system.
 
