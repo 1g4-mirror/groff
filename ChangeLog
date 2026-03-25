@@ -21,6 +21,15 @@
 
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Boolify and rename static class member variable.
+
+	* src/include/cmap.h (class cmap_init): `initialised` of type
+	`int` becomes `is_initialised` of type `bool`.
+	* src/libs/libgroff/cmap.cpp: Assign to it with Boolean, not
+	integer, literals.
+
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/error.h: Declare `fatal_error_exit()` here...
 	* src/libs/libgroff/error.cpp: ...instead of here.
 
