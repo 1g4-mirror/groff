@@ -22,7 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <string.h>
 
-extern char *strsave(const char *);
+#include "lf.h"
+#include "lib.h" // strsave()
 
 extern const char *current_filename;
 extern int current_lineno;

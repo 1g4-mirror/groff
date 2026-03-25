@@ -29,9 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "stringclass.h"
 #include "lf.h"
 
-extern void change_filename(const char *);
-extern void change_lineno(int);
-
 bool interpret_lf_request_arguments(const char *p)
 {
   while (*p == ' ')

@@ -21,6 +21,17 @@
 
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/lf.h: Declare `change_filename()` and
+	`change_lineno()` properly here...
+	* src/libs/libgroff/lf.cpp: ...instead of here, with `extern`.
+	* src/libs/libgroff/change_lf.cpp: Use preprocessor to include
+	"lib.h" header file, also obviating the need for an `extern`
+	declaration of `strsave()`, declared by the same header file.
+
+	Fixes `-Wmissing-declarations` warning.
+
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Boolify and rename static class member variable.
 
 	* src/include/cmap.h (class cmap_init): `initialised` of type
