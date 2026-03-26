@@ -1,4 +1,5 @@
-/* Copyright 1994-2025 Free Software Foundation, Inc.
+/* Copyright 1994-2000 Free Software Foundation, Inc.
+                  2024 G. Branden Robinson
 
 Written by James Clark (jjc@jclark.com)
 
