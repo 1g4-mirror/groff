@@ -101,7 +101,7 @@ static double radians(double d)
 // PostScript file using \nnn, so we really want the character to be
 // less than 0200.
 
-static inline int is_ascii(char c)
+static inline bool is_ascii(char c)
 {
   return (unsigned char)c < 0200;
 }
