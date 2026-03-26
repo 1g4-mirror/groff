@@ -1,5 +1,10 @@
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp (radians): Fix code style nit.
+	Parenthesize formally complex expression.
+
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grodvi,post-grohtml,grops]: Improve declarations.
 
 	* src/devices/grodvi/dvi.cpp (scale):
