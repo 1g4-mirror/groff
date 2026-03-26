@@ -1,4 +1,3 @@
-// -*- C -*-
 /* Copyright 1994-2020 Free Software Foundation, Inc.
 
 Written by Francisco Andrés Verdú <pandres@dragonet.es>
@@ -543,3 +542,9 @@ vdmspline(int numpoints, int o_x, int o_y, int *numbers)
 	
 
 #endif
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

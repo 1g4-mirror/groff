@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /* Copyright 2000-2020 Free Software Foundation, Inc.
 
 Written by Francisco Andrés Verdú <pandres@dragonet.es> with many ideas
@@ -88,3 +87,9 @@ unsigned char symset[] = {
 0x00,0xEC,0x00,0xF2,0x00,0xF3,0x00,0x15,0x00,0x16,0x00,
 0x86
 };
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:
