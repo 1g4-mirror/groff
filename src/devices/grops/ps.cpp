@@ -89,7 +89,7 @@ const int DEFS_DICT_SPARE = 50;
 
 static double degrees(double r)
 {
-  return r*180.0/PI;
+  return (r * 180.0) / PI;
 }
 
 static double radians(double d)
