@@ -1,5 +1,5 @@
 // -*- C++ -*-
-/* Copyright (C) 2002-2020 Free Software Foundation, Inc.
+/* Copyright 2002-2020 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote html-table.h
  *
