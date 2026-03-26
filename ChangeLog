@@ -1,5 +1,10 @@
 2026-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/html-table.cpp: Arrange inclusions of
+	libgroff header files before application-specific ones.
+
+2026-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/html-table.cpp: Improve header file
 	inclusion discipline.  Drop unnecessary preprocessor
 	inclusions of standard <stdio.h> and local (but nonexistent)
