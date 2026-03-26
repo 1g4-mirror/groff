@@ -1,5 +1,11 @@
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp (is_ascii): Fix code style nit.
+	Produce return value with value construction syntax instead of a
+	C-style type cast.
+
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/ps.cpp (is_ascii): Boolify.
 
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>

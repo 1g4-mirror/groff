@@ -103,7 +103,7 @@ static double radians(double d)
 
 static inline bool is_ascii(char c)
 {
-  return (unsigned char)c < 0200;
+  return (unsigned char)(c) < 0200;
 }
 
 ps_output::ps_output(FILE *f, int n)
