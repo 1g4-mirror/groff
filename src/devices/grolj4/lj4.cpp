@@ -1,4 +1,4 @@
-/* Copyright (C) 1994-2025 Free Software Foundation, Inc.
+/* Copyright 1994-2025 Free Software Foundation, Inc.
 
 Written by James Clark (jjc@jclark.com)
 
