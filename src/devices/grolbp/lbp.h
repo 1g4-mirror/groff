@@ -1,4 +1,4 @@
-/* Copyright 1994-2020 Free Software Foundation, Inc.
+/* Copyright 1994-2005 Free Software Foundation, Inc.
 
 Written by Francisco Andrés Verdú <pandres@dragonet.es>
 
