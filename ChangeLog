@@ -1,5 +1,12 @@
 2026-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/html-table.cpp: Improve header file
+	inclusion discipline.  Drop unnecessary preprocessor
+	inclusions of standard <stdio.h> and local (but nonexistent)
+	"ctype.h" header files.
+
+2026-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grodvi,grolbp,grops]: Improve header file inclusion discipline.
 
 	* src/devices/grodvi/dvi.cpp:
