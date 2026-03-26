@@ -308,7 +308,7 @@ void dvi_printer::possibly_begin_line()
   }
 }
 
-int scale(int x, int z)
+static int scale(int x, int z)
 {
   int sw;
   int a, b, c, d;

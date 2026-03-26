@@ -1,3 +1,15 @@
+2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grodvi,post-grohtml,grops]: Improve declarations.
+
+	* src/devices/grodvi/dvi.cpp (scale):
+	* src/devices/grohtml/post-html.cpp (stop, replace_negate_str)
+	(replace_str):
+	* src/devices/grops/ps.cpp (degrees, radians, is_ascii):
+	* src/devices/grops/psrm.cpp (read_one_of)
+	(skip_possible_newline): Declare functions as `static` since
+	they do not require external linkage.
+
 2026-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grolbp/lbp.cpp: Rearrange and annotate header file

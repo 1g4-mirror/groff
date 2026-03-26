@@ -87,12 +87,12 @@ const char *const dict_name = "grops";
 const char *const defs_dict_name = "DEFS";
 const int DEFS_DICT_SPARE = 50;
 
-double degrees(double r)
+static double degrees(double r)
 {
   return r*180.0/PI;
 }
 
-double radians(double d)
+static double radians(double d)
 {
   return (d * PI) / 180.0;
 }
@@ -101,7 +101,7 @@ double radians(double d)
 // PostScript file using \nnn, so we really want the character to be
 // less than 0200.
 
-inline int is_ascii(char c)
+static inline int is_ascii(char c)
 {
   return (unsigned char)c < 0200;
 }

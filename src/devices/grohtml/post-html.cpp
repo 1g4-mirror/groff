@@ -122,7 +122,7 @@ static int charset_encoding = CHARSET_MIXED;/* The character set may be plain AS
  *  start with a few favorites
  */
 
-void stop () {}
+static void stop () {}
 
 static int min (int a, int b)
 {
@@ -1997,7 +1997,7 @@ void assert_state::close (const char *c)
 	    program_name, c);
 }
 
-const char *replace_negate_str (const char *before, char *after)
+static const char *replace_negate_str (const char *before, char *after)
 {
   if (before != 0 /* nullptr */)
     delete[] before;
@@ -2020,7 +2020,7 @@ const char *replace_negate_str (const char *before, char *after)
   return after;
 }
 
-const char *replace_str (const char *before, const char *after)
+static const char *replace_str (const char *before, const char *after)
 {
   if (before != 0 /* nullptr */)
     delete[] before;
@@ -5605,7 +5605,7 @@ static char *get_str (const char *s, char **n)
  *  make_val - creates a string from `v` if `s` is a null pointer.
  */
 
-char *make_val (char *s, int v, char *id, char *f, char *l)
+static char *make_val (char *s, int v, char *id, char *f, char *l)
 {
   assert(id != 0 /* nullptr */);
   assert(f != 0 /* nullptr */);
