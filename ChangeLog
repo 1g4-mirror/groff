@@ -1,3 +1,9 @@
+2026-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grolbp/lbp.cpp: Rearrange and annotate header file
+	inclusions, placing module-specific header files last, after
+	those of libraries.
+
 2026-03-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix `-Wformat-truncation` warnings.

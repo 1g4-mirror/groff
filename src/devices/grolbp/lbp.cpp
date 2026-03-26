@@ -41,11 +41,13 @@ TODO
 
 #include "nonposix.h"
 
-#include "charset.h"
 #include "driver.h"
-#include "lbp.h"
 #include "lib.h" // strsave()
 #include "paper.h"
+
+// grolbp
+#include "charset.h"
+#include "lbp.h"
 
 extern "C" const char *Version_string;
 
