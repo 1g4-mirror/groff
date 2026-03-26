@@ -1,4 +1,5 @@
-/* Copyright 1994-2025 Free Software Foundation, Inc.
+/* Copyright 1994-2002 Free Software Foundation, Inc.
+                  2022 G. Branden Robinson
 
 Written by Francisco Andrés Verdú <pandres@dragonet.es> with many ideas
 taken from the other groff drivers.
