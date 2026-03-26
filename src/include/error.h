@@ -17,6 +17,7 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+// libgroff/error.cpp
 void fatal_with_file_and_line(const char *, int, const char *,
 			      const errarg & = empty_errarg,
 			      const errarg & = empty_errarg,
@@ -57,6 +58,8 @@ void debug(const char *,
 	   const errarg & = empty_errarg,
 	   const errarg & = empty_errarg);
 
+// libgroff/fatal.cpp
+void fatal_error_exit();
 
 extern "C" const char *program_name;
 extern int current_lineno;
