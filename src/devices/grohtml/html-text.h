@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /* Copyright 2000-2020 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote html-text.h
@@ -136,3 +135,9 @@ private:
   void   dump_stack_element  (tag_definition *p);
   void   dump_stack          (void);
 };
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:
