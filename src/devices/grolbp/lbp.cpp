@@ -44,7 +44,6 @@ TODO
 
 #include "driver.h"
 #include "lib.h" // strsave()
-#include "paper.h"
 
 // grolbp
 #include "charset.h"

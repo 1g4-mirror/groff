@@ -52,7 +52,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "cset.h"
 #include "curtime.h"
 #include "driver.h"
-#include "paper.h"
 #include "stringclass.h"
 
 #include "ps.h"

@@ -34,7 +34,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "driver.h"
 #include "nonposix.h"
-#include "paper.h"
 
 extern "C" const char *Version_string;
 
