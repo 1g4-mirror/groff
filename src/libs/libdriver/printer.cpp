@@ -1,7 +1,6 @@
 /* Copyright 1989-2025 Free Software Foundation, Inc.
-   Written by James Clark (jjc@jclark.com)
 
-   This file is part of groff, the GNU roff typesetting system.
+Written by James Clark (jjc@jclark.com)
 
    groff is free software; you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by

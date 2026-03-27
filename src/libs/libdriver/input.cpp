@@ -1,7 +1,7 @@
 /* Copyright 1989-2025 Free Software Foundation, Inc.
 
-   Written by James Clark (jjc@jclark.com)
-   Major rewrite 2001 by Bernd Warken <groff-bernd.warken-72@web.de>
+Written by James Clark (jjc@jclark.com)
+Major rewrite 2001 by Bernd Warken <groff-bernd.warken-72@web.de>
 
    This file is part of groff, the GNU roff text processing system.
 
