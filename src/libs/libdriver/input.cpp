@@ -1,4 +1,4 @@
-/* Copyright (C) 1989-2025 Free Software Foundation, Inc.
+/* Copyright 1989-2025 Free Software Foundation, Inc.
 
    Written by James Clark (jjc@jclark.com)
    Major rewrite 2001 by Bernd Warken <groff-bernd.warken-72@web.de>
