@@ -36,16 +36,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <getopt.h> // getopt_long()
 
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h"
 #include "cset.h" // csspace()
 #include "curtime.h"
-#include "driver.h"
 #include "lib.h" // strsave(), xtmpfile()
 #include "stringclass.h"
 #include "unicode.h"
 
+// libdriver
+#include "driver.h" // do_file()
+#include "printer.h" // environment, printer
+
+// grohtml
 #include "html.h"
-#include "html-text.h"
 #include "html-table.h"
+#include "html-text.h"
 
 extern "C" const char *Version_string;
 

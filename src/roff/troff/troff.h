@@ -17,12 +17,6 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "lib.h"
-
-#include "color.h"
-#include "device.h"
-#include "searchpath.h"
-
 typedef int units;
 
 extern units scale(units n, units x, units y); // scale n by x/y
@@ -42,11 +36,6 @@ extern units units_per_inch;
 extern int sizescale;
 
 extern search_path *mac_path;
-
-#include "cset.h"
-#include "cmap.h"
-#include "errarg.h"
-#include "error.h"
 
 enum warning_category {
   // This first item is so that diagnostic functions in "input.cpp" can

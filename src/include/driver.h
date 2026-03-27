@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "errarg.h"
 #include "error.h"
 #include "font.h"
-#include "printer.h"
 
 void do_file(const char *);
 

@@ -243,8 +243,14 @@
 #include <stdlib.h> // strtol()
 #include <string.h> // strcmp(), strlen(), strncmp(), strncpy()
 
-#include "driver.h"
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h"
 #include "device.h"
+
+// libdriver
+#include "driver.h" // do_file()
+#include "printer.h" // environment, printer
 
 
 /**********************************************************************

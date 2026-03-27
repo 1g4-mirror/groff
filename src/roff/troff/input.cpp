@@ -26,7 +26,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h> // ENOENT, errno
 #include <locale.h> // setlocale()
 #include <stdcountof.h>
-#include <stdio.h> // EOF, FILE, clearerr(), fclose(), fflush(),
+#include <stdio.h> // prerequisite of searchpath.h
+		   // EOF, FILE, clearerr(), fclose(), fflush(),
 		   // fileno(), fopen(), fprintf(), fseek(), getc(),
 		   // pclose(), popen(), printf(), SEEK_SET, snprintf(),
 		   // sprintf(), setbuf(), stderr, stdin, stdout,
@@ -35,34 +36,52 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		    // free(), getenv(), setenv(), strtol(), system()
 #include <string.h> // strcpy(), strdup(), strerror()
 
+// GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
 #include <stack>
 
-#include "json-encode.h" // json_encode_char()
-
-#include "troff.h"
-#include "dictionary.h"
-#include "hvunits.h"
-#include "stringclass.h"
-#include "mtsm.h"
-#include "env.h"
-#include "request.h"
-#include "node.h"
-#include "token.h"
-#include "div.h"
-#include "reg.h"
-#include "font.h"
-#include "charinfo.h"
-#include "macropath.h"
-#include "input.h"
-#include "defs.h"
-#include "unicode.h"
-#include "curtime.h"
-
+// operating system services
 // needed for getpid() and isatty()
 #include "posix.h"
 #include "nonposix.h"
+
+// build configuration
+#include "defs.h"
+
+// libgroff
+#include "errarg.h" // prerequisite of troff.h
+#include "error.h" // prerequisite of troff.h
+#include "searchpath.h" // prerequisite of troff.h
+#include "symbol.h" // prerequisite of dictionary.h and color.h
+#include "color.h" // prerequisite of env.h
+#include "cmap.h" // cmlower(), cmupper()
+#include "cset.h" // cset, csalpha(), csdigit(), csgraph(), cslower(),
+		  // csprint(), cspunct(), csupper()
+#include "device.h"
+#include "font.h" // prerequisite of charinfo.h
+#include "json-encode.h" // json_encode_char()
+#include "lib.h" // i_to_a(), is_invalid_input_char(), ui_to_a()
+#include "stringclass.h" // prerequisite of mtsm.h
+#include "unicode.h"
+
+// troff
+#include "troff.h" // prerequisite of hvunits.h, token.h; units
+#include "token.h" // prerequisite of charinfo.h; tok
+#include "charinfo.h"
+#include "curtime.h" // current_time()
+#include "dictionary.h" // object
+#include "hvunits.h" // prerequisite of div.h; hunits, vunits
+#include "mtsm.h" // prerequisite of div.h; statem
+#include "div.h" // curdiv
+#include "env.h" // environment, font_size
+#include "input.h" // do_fill_color(), do_stroke_color(), suppress_push,
+		   // was_invoked_with_regular_control_character
+#include "macropath.h" // config_macro_path, macro_path,
+		       // safer_macro_path
+#include "request.h" // prerequisite of node.h; macro
+#include "node.h"
+#include "reg.h"
 
 #define MACRO_PREFIX "tmac."
 #define MACRO_POSTFIX ".tmac"

@@ -23,13 +23,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <assert.h>
+#include <stdio.h> // prerequisite of searchpath.h
 
-#include "troff.h"
-#include "dictionary.h"
+// libgroff
+#include "errarg.h" // prerequisite of troff.h
+#include "error.h" // prerequisite of troff.h
+#include "searchpath.h" // prerequisite of troff.h
+#include "symbol.h" // prerequisite of color.h
+#include "color.h" // prerequisite of env.h
+#include "cset.h" // csdigit()
 #include "lib.h" // INT_DIGITS
-#include "token.h"
+
+// troff
+#include "dictionary.h"
 #include "request.h"
+#include "troff.h" // prerequisite of reg.h, token.h; units
 #include "reg.h"
+#include "token.h"
 
 object_dictionary register_dictionary(101);
 

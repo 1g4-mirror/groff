@@ -30,11 +30,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
 #include <string.h> // strcmp(), strlen()
 
+// GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
-#include "driver.h"
-#include "geometry.h" // adjust_arc_center()
+// operating system services
 #include "nonposix.h"
+
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h" // prerequisite of printer.h
+#include "geometry.h" // adjust_arc_center()
+
+// libdriver
+#include "driver.h" // do_file()
+#include "printer.h" // environment, printer
 
 extern "C" const char *Version_string;
 

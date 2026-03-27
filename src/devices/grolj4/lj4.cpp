@@ -46,14 +46,22 @@ X command to include bitmap graphics
 #include <string.h> // strcmp()
 #include <strings.h> // strcasecmp()
 
+// GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+// operating system services
 #include "nonposix.h"
 
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h" // prerequisite of printer.h
 #include "cset.h" // csdigit()
-#include "driver.h"
 #include "geometry.h" // adjust_arc_center()
-#include "lib.h" // array_size(), PI
+#include "lib.h" // PI
+
+// libdriver
+#include "driver.h" // do_file()
+#include "printer.h" // environment, printer
 
 extern "C" const char *Version_string;
 

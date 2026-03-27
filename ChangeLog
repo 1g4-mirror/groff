@@ -1,3 +1,38 @@
+2026-03-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Rationalize header file inclusions.  To illuminate inter-module
+	dependencies, get header files out of the business of
+	`#include`-ing other header files, in favor of putting
+	preprocessor inclusions only in translation units (C/C++ source
+	files).  Annotate dependencies.
+
+	* src/devices/grodvi/dvi.cpp:
+	* src/devices/grodvi/dvi.cpp:
+	* src/devices/grohtml/html-table.cpp:
+	* src/devices/grohtml/html-text.cpp:
+	* src/devices/grohtml/html-text.h:
+	* src/devices/grohtml/post-html.cpp:
+	* src/devices/grolbp/lbp.cpp:
+	* src/devices/grolj4/lj4.cpp:
+	* src/devices/grops/ps.cpp:
+	* src/devices/grotty/tty.cpp:
+	* src/include/color.h:
+	* src/include/driver.h:
+	* src/include/printer.h:
+	* src/libs/libdriver/input.cpp:
+	* src/libs/libdriver/printer.cpp:
+	* src/libs/libgroff/color.cpp:
+	* src/roff/troff/dictionary.cpp:
+	* src/roff/troff/div.cpp:
+	* src/roff/troff/env.cpp:
+	* src/roff/troff/input.cpp:
+	* src/roff/troff/mtsm.cpp:
+	* src/roff/troff/mtsm.h:
+	* src/roff/troff/node.cpp:
+	* src/roff/troff/number.cpp:
+	* src/roff/troff/reg.cpp:
+	* src/roff/troff/troff.h: Do it.
+
 2026-03-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/html-table.cpp: Arrange inclusions of

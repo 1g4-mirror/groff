@@ -26,7 +26,13 @@
 #include <stdio.h> // clearerr(), ferror(), fflush(), stdout
 #include <string.h> // strcmp()
 
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h" // prerequisite of printer.h
+
+// libdriver
 #include "driver.h"
+#include "printer.h" // environment, font_pointer_list, printer
 
 /* If we are sending output to an onscreen pager (as is the normal case
    when reading man pages), then we may get an error state on the output

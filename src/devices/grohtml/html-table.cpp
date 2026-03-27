@@ -30,10 +30,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stdlib.h> // atoi()
 
-#include "driver.h"
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h"
 #include "cset.h" // csspace()
 #include "stringclass.h"
 
+// grohtml
 #include "html.h"
 #include "html-table.h"
 #include "html-text.h"

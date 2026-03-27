@@ -41,20 +41,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		    // strlen(), strncmp(), strstr(), strtok()
 #include <time.h> // asctime()
 
+// GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+// operating system services
 // needed for SET_BINARY()
 #include "posix.h"
 #include "nonposix.h"
 
-#include "lib.h" // PI
-
-#include "cset.h"
-#include "curtime.h"
-#include "driver.h"
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h"
+#include "cset.h" // csalpha(), csprint(), csspace()
+#include "curtime.h" // current_time()
 #include "geometry.h" // adjust_arc_center()
+#include "lib.h" // PI
 #include "stringclass.h"
 
+// libdriver
+#include "driver.h" // do_file()
+#include "printer.h" // environment, printer
+
+// grops
 #include "ps.h"
 
 extern "C" const char *Version_string;

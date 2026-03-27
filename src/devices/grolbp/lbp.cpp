@@ -38,12 +38,20 @@ TODO
 #include <string.h> // strcmp(), strcpy(), strlen(), strncpy()
 #include <strings.h> // strcasecmp()
 
+// GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+// operating system services
 #include "nonposix.h"
 
-#include "driver.h"
+// libgroff
+#include "symbol.h" // prerequisite of color.h
+#include "color.h" // prerequisite of printer.h
 #include "lib.h" // strsave()
+
+// libdriver
+#include "driver.h" // do_file()
+#include "printer.h" // environment, printer
 
 // grolbp
 #include "charset.h"
