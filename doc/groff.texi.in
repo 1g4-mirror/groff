@@ -20110,7 +20110,7 @@ discards input characters that are invalid in
 GNU
 @command{troff}'s @c GNU
 output format,
-meaning all 8-bit character codes less than decimal 32
+meaning all character codes less than decimal 32
 (except 10,
 the line feed)
 and greater than decimal 127.@footnote{@xref{GNU

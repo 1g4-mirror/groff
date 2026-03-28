@@ -20,8 +20,8 @@ troff
 
 *  The `trf` (transparent file throughput) request now discards input
    characters that are invalid in GNU troff's output format, meaning all
-   8-bit character codes less than decimal 32 (except 10, the line feed)
-   and greater than decimal 127.
+   character codes less than decimal 32 (except 10, the line feed) and
+   greater than decimal 127.
 
 *  A new read-only register `.ul` reports the count of productive input
    lines remaining to be be underlined in the environment (as configured
