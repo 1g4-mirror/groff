@@ -7149,9 +7149,10 @@ always flushes this buffer when processing a break;
 AT&T
 .I troff \" AT&T
 does so according to no obvious schedule
-(perhaps,
+.
+Perhaps,
 if the buffer is of fixed size,
-the formatter performs the flush when the buffer runs out of room).
+the formatter performs the flush when the buffer runs out of room.
 .
 .
 .P

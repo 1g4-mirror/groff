@@ -22867,9 +22867,9 @@ always flushes this buffer when processing a break;
 @acronym{AT&T}
 @command{troff} @c AT&T
 does so according to no obvious schedule.
-(Perhaps,
+Perhaps,
 if the buffer is of fixed size,
-the formatter performs the flush when the buffer runs out of room.)
+the formatter performs the flush when the buffer runs out of room.
 
 In the somewhat pathological case where a diversion exists
 containing a partially collected line
