@@ -10809,7 +10809,7 @@ void debug(const char *format,
 	   const errarg &arg2,
 	   const errarg &arg3)
 {
-  do_error(DEBUG, WARN_INVALID, format, arg1, arg2, arg3);
+  do_error(DEBUG, WARN_DUMMY, format, arg1, arg2, arg3);
 }
 
 void warning(warning_category wc,
@@ -10837,7 +10837,7 @@ void error(const char *format,
 	   const errarg &arg2,
 	   const errarg &arg3)
 {
-  do_error(ERROR, WARN_INVALID, format, arg1, arg2, arg3);
+  do_error(ERROR, WARN_DUMMY, format, arg1, arg2, arg3);
 }
 
 void fatal(const char *format,
@@ -10845,7 +10845,7 @@ void fatal(const char *format,
 	   const errarg &arg2,
 	   const errarg &arg3)
 {
-  do_error(FATAL, WARN_INVALID, format, arg1, arg2, arg3);
+  do_error(FATAL, WARN_DUMMY, format, arg1, arg2, arg3);
 }
 
 void fatal_with_file_and_line(const char *filename, int lineno,

@@ -1,3 +1,11 @@
+2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Rename `WARN_INVALID` enumeration constant to
+	`WARN_DUMMY`.  The latter is more descriptive of its purpose.
+
+	* src/roff/troff/troff.h (enum warning_category):
+	* src/roff/troff/input.cpp (debug, error, fatal): Do it.
+
 2026-03-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libdriver]: Rename `do_file()` to
