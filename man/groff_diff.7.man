@@ -2579,7 +2579,7 @@ in a node
 .IR "Groff: The GNU Implementation of troff" ,
 the
 .I groff
-Texinfo manual);
+Texinfo manual),
 disabling compatibility mode
 and setting the escape character to
 .RB to\~ \[rs]
