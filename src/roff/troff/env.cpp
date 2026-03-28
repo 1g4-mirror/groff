@@ -624,7 +624,7 @@ static void warn_if_font_name_deprecated(symbol nm)
 bool environment::set_font(symbol nm)
 {
   if (was_line_interrupted)
-    return true; // "no operation" is successful
+    return false;
   // TODO: Kill this off in groff 1.24.0 release + 2 years.
   if (is_device_ps_or_pdf)
     warn_if_font_name_deprecated(nm);

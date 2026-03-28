@@ -1,5 +1,17 @@
 2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::set_font): Invert
+	returned Boolean value when this function is activated on a
+	font-change operation that lies on the unformatted portion of an
+	input line interrupted/continued with `\c`.  Returning "true"
+	was inconsistent with other environment mutator functions in
+	this file, including the signature of this member function
+	taking an integer (rather than a `symbol`) argument.
+	Eventually, we should make these functions unreachable in such
+	circumstances.  See Savannah #67812.
+
+2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Rename `WARN_INVALID` enumeration constant to
 	`WARN_DUMMY`.  The latter is more descriptive of its purpose.
 
