@@ -60,7 +60,7 @@ X command to include bitmap graphics
 #include "lib.h" // PI
 
 // libdriver
-#include "driver.h" // do_file()
+#include "driver.h" // interpret_troff_output_file()
 #include "printer.h" // environment, printer
 
 extern "C" const char *Version_string;
@@ -746,10 +746,10 @@ int main(int argc, char **argv)
     }
   SET_BINARY(fileno(stdout));
   if (optind >= argc)
-    do_file("-");
+    interpret_troff_output_file("-");
   else {
     for (int i = optind; i < argc; i++)
-      do_file(argv[i]);
+      interpret_troff_output_file(argv[i]);
   }
   return 0;
 }

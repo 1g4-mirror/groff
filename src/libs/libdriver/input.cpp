@@ -21,17 +21,14 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Description
 
-   This file implements the parser for the intermediate groff output,
-   see groff_out(5), and does the printout for the given device.
+   This file implements a parser for the output of a device-independent
+   troff (see groff_out(5)), and produces device-specific output.
 
-   All parsed information is processed within the function do_file().
-   A device postprocessor just needs to fill in the methods for the class
-   'printer' (or rather a derived class) without having to worry about
-   the syntax of the intermediate output format.  Consequently, the
-   programming of groff postprocessors is similar to the development of
-   device drivers.
+   A postprocessor calls `interpret_troff_output_file()` and specializes
+   the class `printer`.  It need not concern itself with the syntax of
+   device-independent troff output.
 
-   The prototyping for this file is done in driver.h (and error.h).
+   See driver.h and error.h for an overview of the interface.
 */
 
 /* Changes of the 2001 rewrite of this file.
@@ -151,6 +148,8 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
     'README' file in this directory.
 */
 
+// do_file() is now known as `interpret_troff_output_file()` --GBR, 2026
+
 /*
   Discussion of the positioning by drawing commands
 
@@ -249,7 +248,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "device.h"
 
 // libdriver
-#include "driver.h" // do_file()
+#include "driver.h" // interpret_troff_output_file()
 #include "printer.h" // environment, printer
 
 
@@ -372,7 +371,8 @@ COLORARG_MAX = (ColorArg) 65536U; // == 0xFFFF + 1 == 0x10000
 const IntArg
 INTARG_MAX = (IntArg) 0x7FFFFFFF; // maximal signed 32 bits number
 
-// parser environment, created and deleted by each run of do_file()
+// parser environment, created and deleted by each activation of
+// `interpret_troff_output_file()`
 environment *current_env = 0;
 
 #ifdef USE_ENV_STACK
@@ -1313,8 +1313,7 @@ parse_color_command(color *col)
 /*
    Parse the subcommands of graphical command D.
 
-   This is the part of the do_file() parser that scans the graphical
-   subcommands.
+   This is the part of the parser that scans the graphical subcommands.
    - Error on lacking or wrong arguments.
    - Warning on too many arguments.
    - Line is always skipped.
@@ -1437,8 +1436,8 @@ parse_D_command()
 /*
    Parse subcommands of the device control command x.
 
-   This is the part of the do_file() parser that scans the device
-   controlling commands.
+   This is the part of the parser that scans the device controlling
+   commands.
    - Error on duplicate prologue commands.
    - Error on wrong or lacking arguments.
    - Warning on too many arguments.
@@ -1547,12 +1546,12 @@ parse_x_command(void)
 
 ////////////////////////////////////////////////////////////////////////
 /*
-   Parse and postprocess groff intermediate output.
+   Interpret the output of a device-independent troff.
 
    filename: "-" for standard input, normal file name otherwise
 */
 void
-do_file(const char *filename)
+interpret_troff_output_file(const char *filename)
 {
   Char command;
   bool stopped = false;		// terminating condition

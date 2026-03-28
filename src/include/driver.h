@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "error.h"
 #include "font.h"
 
-void do_file(const char *);
+void interpret_troff_output_file(const char *);
 
 // Local Variables:
 // fill-column: 72

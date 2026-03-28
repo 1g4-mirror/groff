@@ -1,5 +1,21 @@
 2026-03-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libdriver]: Rename `do_file()` to
+	`interpret_troff_output_file()`.  There are several `do_file()`
+	functions in the groff code base; each does something different.
+
+	* src/include/driver.h: Update declaration.
+	* src/libs/libdriver/input.cpp (do_file): Rename this...
+	(interpret_troff_output_file): ...to this.
+	* src/devices/grodvi/dvi.cpp (main):
+	* src/devices/grohtml/post-html.cpp (main):
+	* src/devices/grolbp/lbp.cpp (main):
+	* src/devices/grolj4/lj4.cpp (main):
+	* src/devices/grops/ps.cpp (main):
+	* src/devices/grotty/tty.cpp (main): Update call sites.
+
+2026-03-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Rationalize header file inclusions.  To illuminate inter-module
 	dependencies, get header files out of the business of
 	`#include`-ing other header files, in favor of putting

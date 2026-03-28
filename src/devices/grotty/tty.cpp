@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "ptable.h"
 
 // libdriver
-#include "driver.h"
+#include "driver.h" // interpret_troff_output_file()
 #include "printer.h" // environment, printer
 
 typedef signed char schar;
@@ -1090,10 +1090,10 @@ int main(int argc, char **argv)
     }
   update_options();
   if (optind >= argc)
-    do_file("-");
+    interpret_troff_output_file("-");
   else {
     for (int i = optind; i < argc; i++)
-      do_file(argv[i]);
+      interpret_troff_output_file(argv[i]);
   }
   return 0;
 }

@@ -50,7 +50,7 @@ TODO
 #include "lib.h" // strsave()
 
 // libdriver
-#include "driver.h" // do_file()
+#include "driver.h" // interpret_troff_output_file()
 #include "printer.h" // environment, printer
 
 // grolbp
@@ -765,9 +765,9 @@ int main(int argc, char **argv)
       assert(0 == "unhandled getopt_long return value");
     }
   if (optind >= argc)
-    do_file("-");
+    interpret_troff_output_file("-");
   while (optind < argc)
-    do_file(argv[optind++]);
+    interpret_troff_output_file(argv[optind++]);
   if (lbpoutput)
     lbpputs("\033c\033<");
   return 0;
