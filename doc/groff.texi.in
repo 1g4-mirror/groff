@@ -12466,12 +12466,22 @@ line.
 @DefescListEnd {\\F, [, family, ]}
 @cindex changing font family (@code{fam}, @code{\F})
 @cindex font family, changing (@code{fam}, @code{\F})
-Set the default font family, used in combination with abstract styles to
-construct a resolved font name, to @var{family} (one-character
-name@tie{}@var{f}, two-character name @var{fm}).  If no argument is
-given, GNU @code{troff} selects the previous font family; if there are
-none, it falls back to the device's default@footnote{@xref{DESC File
-Format}.} or its own (@samp{T}).
+Set the default font family,
+used in combination with abstract styles
+to construct a resolved font name,
+to
+@var{family}
+(one-character name@tie{}@var{f},
+two-character name @var{fm}).
+Without an argument,
+GNU
+@command{troff}
+selects the previous font family;
+if there is none,
+it falls back to the device's default@footnote{@xref{DESC File
+Format}.}
+or its own
+(@samp{T}).
 
 The @code{\F} escape sequence works similarly.  In disanalogy to
 @code{\f}, @samp{\FP} makes @samp{P} the default family.  Use
@@ -14833,14 +14843,19 @@ and
 @code{.ps}
 registers represent the type size selected by the formatter
 as it understands a device's capability.
-The last
-@emph{requested}
-type size is interpolated in scaled points
-by the read-only register
+The read-only registers
 @code{.psr}
-and in points as a decimal fraction
-by the read-only string-valued register
-@code{.sr}.
+and
+(string-valued)
+@code{.sr}
+interpolate the last
+@emph{requested}
+type size
+in scaled points
+and in points as a decimal fraction,
+respectively.
+Like the selected current and previous type size,
+the requested ones are properties of an environment.
 
 For example,
 if a document requests a type size of 10.95@tie{}points,
@@ -17367,12 +17382,11 @@ their left edges, in contrast to @code{\o}'s centering.
 Save the drawing position,
 format
 @var{input},
-then restore it.
+then restore the saved position.
 GNU
 @command{troff} @c GNU
-ignores tabs and leaders in
-@var{input}
-with an error diagnostic.
+disallows tabs and leaders in
+@var{input}.
 
 We might implement a strike-through macro thus.
 
@@ -18667,11 +18681,19 @@ of qualifying lines enumerated in that environment.
 
 @Defreq {blm, [@Var{name}]}
 @cindex blank line macro (@code{blm})
-Set a blank line trap, calling the macro @var{name} when GNU
-@code{troff} encounters a blank line in input, instead of the usual
-behavior (@pxref{Breaking}).  A line consisting only of spaces is also
-treated as blank and subject to this trap.  If no argument is supplied,
-the default blank line behavior is (re-)established.
+Set a blank line trap,
+calling the macro
+@var{name}
+when
+GNU
+@command{troff}
+encounters a blank line in input,
+instead of the usual behavior
+(@pxref{Breaking}).
+A line consisting only of spaces
+is also treated as blank and subject to this trap.
+Omitting the argument
+reëstablishes the default blank line behavior.
 @endDefreq
 
 @c ---------------------------------------------------------------------
@@ -18704,10 +18726,12 @@ irrespective of whether a leading space trap is set.
 When it is, GNU @command{troff} removes the leading spaces from
 the input line and produces no motion before calling @var{name}.
 
-If no argument is supplied, GNU @command{troff} reëstablishes the
-default handling of leading spaces on text lines (breaking the line when
-filling, and formatting a horizontal motion of @samp{\n[lsn]} word
-spaces).
+Omitting the argument reëstablishes the default handling
+of leading spaces on text lines
+(breaking the line when filling,
+and formatting a horizontal motion of
+@samp{\n[lsn]}
+word spaces).
 
 @c XXX The following discussion does not seem to be correct; leading
 @c space traps don't "see" _any_ tokens.  Nothing on the line is
@@ -18740,9 +18764,13 @@ spaces).
 @cindex trap, end-of-input, setting (@code{em})
 @cindex end-of-input macro (@code{em})
 @cindex macro, end-of-input (@code{em})
-Set a trap at the end of input, calling macro @var{name} after the last
-line of the last input file has been processed.  If no argument is
-given, any existing end-of-input trap is removed.
+Set a trap at the end of input;
+the formatter
+calls macro
+@var{name}
+after processing the last line of the last input file.
+Without an argument,
+the formatter removes any existing end-of-input trap.
 
 For example, if the document had to have a section at the bottom of the
 last page for someone to approve it, the @code{em} request could be
@@ -21102,7 +21130,7 @@ environments,
 occupied font mounting positions,
 font translations,
 automatic hyphenation codes
-and exceptions,
+and exception words,
 registers,
 open streams,
 and page location traps.
@@ -21574,7 +21602,7 @@ warning category that is to be enabled; all other categories are
 disabled.  The categories and their associated codes are listed in
 @ref{Warnings}.  For example, @samp{.warn 0} disables all warnings, and
 @samp{.warn 1} disables all warnings except those about missing glyphs.
-If no argument is given, all warning categories are enabled.
+Omitting the argument enables all warning categories.
 
 The read-only register @code{.warn} contains the sum of the numeric
 codes of enabled warning categories.
@@ -22589,18 +22617,6 @@ GNU
 honors such requests.
 Recall @ref{Built-in Registers}.
 
-@cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
-The
-@code{lf}
-request sets the number of the
-@emph{current}
-input line in AT&T
-@command{troff} @c AT&T
-and the
-@emph{next}
-in GNU
-@command{troff}. @c GNU
-
 @cindex environment availability and naming, incompatibilities with
 @acronym{AT&T}
 @command{troff} @c AT&T
@@ -22664,6 +22680,18 @@ does not accept a scaling unit on the argument,
 a page number;
 the former does (uselessly).
 
+@cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
+The
+@code{lf}
+request sets the number of the
+@emph{current}
+input line in AT&T
+@command{troff} @c AT&T
+and the
+@emph{next}
+in GNU
+@command{troff}. @c GNU
+
 @cindex @code{pm} request, incompatibilities with @acronym{AT&T} @code{troff}
 In @acronym{AT&T}
 @command{troff}, @c AT&T
@@ -22702,8 +22730,8 @@ and does not move the drawing position.
 @acronym{AT&T}
 @command{troff} @c AT&T
 sets the vertical drawing position
-to two basic units fewer than the specified argument
-(or one vee minus one basic unit if no argument is present).
+to two basic units fewer than the specified argument,
+and to one vee minus one basic unit if no argument is present.
 @c Yes, really.  Try:
 @c printf '.tm \\n(nl\n.c2 $\n$sp\n.tm \\n(nl\n'
 @c printf '.tm \\n(nl\n.c2 $\n.nr nl -1\n$sp\n.tm \\n(nl\n'
@@ -22744,6 +22772,9 @@ Glyphs represent graphemes
 (supplied by the output device)
 and populate diversions
 (recall @ref{Diversions}).
+There is no such thing as a space character in
+GNU
+@command{troff}. @c GNU
 Formatting converts characters into
 (sequences of)
 glyphs.

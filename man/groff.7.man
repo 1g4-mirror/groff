@@ -5923,9 +5923,9 @@ Interpolate glyph of special character with identifier
 .
 .
 .TP
-.ESC[] "" "base-char comp \fR\&.\|.\|."
+.ESC[] "" "base-character comp \fR\&.\|.\|."
 Interpolate composite glyph constructed from
-.I base-char
+.I base-character
 and each component
 .IR comp .
 .
@@ -5946,10 +5946,10 @@ in uppercase hexadecimal.
 .
 .
 .TP
-.ESC[] "" "\f[B]u\f[]base-char\f[R][\f[]\f[B]_\f[]\
+.ESC[] "" "\f[B]u\f[]base-character\f[R][\f[]\f[B]_\f[]\
 combining-component\f[R]].\|.\|."
 Interpolate composite glyph from Unicode character
-.I base-char
+.I base-character
 and
 .IR combining-components .
 .
@@ -6626,13 +6626,12 @@ with zero width\[em]without advancing the drawing position.
 Save the drawing position,
 format
 .IR input ,
-then restore it.
+then restore the saved position.
 .
 GNU
 .I troff \" GNU
-ignores tabs and leaders in
-.I input
-with an error diagnostic.
+disallows tabs and leaders in
+.IR input .
 .LE
 .
 .
@@ -7515,7 +7514,7 @@ The environment's post-vertical line spacing.
 .
 .TP
 .REG .R
-Maximum representable integer in GNU
+Maximum integer representable in GNU
 .IR troff . \" GNU
 .
 .TP
@@ -7538,10 +7537,10 @@ Reserved.
 .
 Plan\~9
 .I troff \" Plan 9
-uses this name for roughly the same purpose as
+uses this name for a purpose similar to
 GNU
 .IR troff 's \" GNU
-.REG .tabs .
+.register .tabs .
 .
 .TP
 .REG .slant
@@ -7568,6 +7567,9 @@ in twelfths of the space width of the selected font.
 .REG .sss
 Size of the environment's supplemental inter-sentence space
 in twelfths of the space width of the selected font.
+.
+See
+.request ss .
 .
 .TP
 .REG .sty
@@ -8166,7 +8168,7 @@ can be written in an upright or slanted typeface,
 producing distinct glyphs.
 .
 Sometimes,
-a sequence of characters map to a single glyph:@:
+a sequence of characters map to a single glyph:
 this is a
 .IR ligature \[em]\c
 the most common is `fi'.
@@ -8190,7 +8192,7 @@ is the most commonly used,
 has no special syntax,
 and typically represents itself.
 .
-(Depending on the breadth
+Depending on the breadth
 of the output device's glyph repertoire,
 the characters
 .BR \[aq] ,
@@ -8231,16 +8233,17 @@ An
 .I "indexed character"
 bypasses most character-to-glyph resolution logic,
 uses the
-.RB \[lq] \[rs]N\[aq]\c
+.RB \[lq]\| \[rs]N\[aq]\c
 .IB i \[aq]\c
+\|\[rq]
 syntax,
 and selects a glyph from the currently selected font
 by its integer-valued position
 .I i
 in the output device's representation of that font.
 .
-(A device's fonts
-do not necessarily arrange their glyphs
+(A device's font
+might not arrange its glyphs
 according to a standard character encoding.)
 .
 .
