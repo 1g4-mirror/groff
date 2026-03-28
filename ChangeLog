@@ -1,5 +1,11 @@
 2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/reg.cpp (number_value_to_ascii): Trivially
+	refactor.  Rename cryptic local `s` to `roman_numerals`.  Also
+	parenthesize formally complex expression.
+
+2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::set_font): Invert
 	returned Boolean value when this function is activated on a
 	font-change operation that lies on the unformatted portion of an

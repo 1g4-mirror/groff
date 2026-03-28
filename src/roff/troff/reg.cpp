@@ -125,7 +125,8 @@ static const char *number_value_to_ascii(int value, char format,
       char *p = buf;
       // troff uses z and w to represent 10000 and 5000 in Roman
       // numerals; I can find no historical basis for this usage
-      const char *s = format == 'i' ? "zwmdclxvi" : "ZWMDCLXVI";
+      const char *roman_numerals
+        = (format == 'i') ? "zwmdclxvi" : "ZWMDCLXVI";
       int n = int(value);
       if (n >= 40000 || n <= -40000) {
 	error("magnitude of '%1' too big for i or I format", n);
@@ -141,47 +142,47 @@ static const char *number_value_to_ascii(int value, char format,
 	n = -n;
       }
       while (n >= 10000) {
-	*p++ = s[0];
+	*p++ = roman_numerals[0];
 	n -= 10000;
       }
-      for (int i = 1000; i > 0; i /= 10, s += 2) {
+      for (int i = 1000; i > 0; i /= 10, roman_numerals += 2) {
 	int m = n/i;
 	n -= m*i;
 	switch (m) {
 	case 3:
-	  *p++ = s[2];
+	  *p++ = roman_numerals[2];
 	  /* falls through */
 	case 2:
-	  *p++ = s[2];
+	  *p++ = roman_numerals[2];
 	  /* falls through */
 	case 1:
-	  *p++ = s[2];
+	  *p++ = roman_numerals[2];
 	  break;
 	case 4:
-	  *p++ = s[2];
-	  *p++ = s[1];
+	  *p++ = roman_numerals[2];
+	  *p++ = roman_numerals[1];
 	  break;
 	case 8:
-	  *p++ = s[1];
-	  *p++ = s[2];
-	  *p++ = s[2];
-	  *p++ = s[2];
+	  *p++ = roman_numerals[1];
+	  *p++ = roman_numerals[2];
+	  *p++ = roman_numerals[2];
+	  *p++ = roman_numerals[2];
 	  break;
 	case 7:
-	  *p++ = s[1];
-	  *p++ = s[2];
-	  *p++ = s[2];
+	  *p++ = roman_numerals[1];
+	  *p++ = roman_numerals[2];
+	  *p++ = roman_numerals[2];
 	  break;
 	case 6:
-	  *p++ = s[1];
-	  *p++ = s[2];
+	  *p++ = roman_numerals[1];
+	  *p++ = roman_numerals[2];
 	  break;
 	case 5:
-	  *p++ = s[1];
+	  *p++ = roman_numerals[1];
 	  break;
 	case 9:
-	  *p++ = s[2];
-	  *p++ = s[0];
+	  *p++ = roman_numerals[2];
+	  *p++ = roman_numerals[0];
 	}
       }
       *p = '\0';
