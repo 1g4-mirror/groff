@@ -1,5 +1,24 @@
 2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Withdraw support for AT&T's exotic Roman numerals
+	except in compatibility mode.
+
+	* src/roff/troff/reg.cpp (number_value_to_ascii): When not in
+	compatibility mode, reduce acceptable range of register values
+	when attempting to format them with Roman numerals to that
+	expressible only with the numerals "MDCLXVI".  (In compatibility
+	mode, retain support for AT&T troff's novelty of Roman numerals
+	"W" for 5,000 and "Z" for 10,000.)  Recast error diagnostic when
+	register value is outside of the representable range.
+
+	* doc/groff.texi.in (Assigning Register Formats):
+	* NEWS: Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?61999>.  Thanks to Dave
+	Kemper for the report.
+
+2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (number_value_to_ascii): Trivially
 	refactor.  Rename cryptic local `s` to `roman_numerals`.  Also
 	parenthesize formally complex expression.

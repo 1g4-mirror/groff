@@ -15,8 +15,11 @@ VERSION next
 troff
 -----
 
-*  GNU troff, the formatter, now issues warnings in the "delim",
-   "syntax", and "escape" categories by default.
+*  GNU troff, the formatter, now employs the unusual Roman numerals "W"
+   and "Z" of AT&T troff only in compatibility mode.
+
+*  The "delim", "syntax", and "escape" categories are enabled by
+   default.
 
 *  The `trf` (transparent file throughput) request now discards input
    characters that are invalid in GNU troff's output format, meaning all

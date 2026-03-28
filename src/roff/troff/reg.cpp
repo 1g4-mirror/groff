@@ -123,15 +123,25 @@ static const char *number_value_to_ascii(int value, char format,
   case 'I':
     {
       char *p = buf;
-      // troff uses z and w to represent 10000 and 5000 in Roman
-      // numerals; I can find no historical basis for this usage
+      bool is_value_out_of_roman_numeral_range = false;
+      int n = int(value);
+      // AT&T troff uses z and w to represent 10000 and 5000 in Roman
+      // numerals; jjc could find no historical basis for this usage.
+      if (want_att_compat) {
+	if ((n >= 40000) || (n <= -40000))
+	  is_value_out_of_roman_numeral_range = true;
+      }
+      else {
+	if ((n >= 4000) || (n <= -4000))
+	  is_value_out_of_roman_numeral_range = true;
+      }
+      if (is_value_out_of_roman_numeral_range) {
+	  error("register value %1 is outside of range representable in"
+		" 'i' or 'I' formats", n);
+	  return i_to_a(n);
+      }
       const char *roman_numerals
         = (format == 'i') ? "zwmdclxvi" : "ZWMDCLXVI";
-      int n = int(value);
-      if (n >= 40000 || n <= -40000) {
-	error("magnitude of '%1' too big for i or I format", n);
-	return i_to_a(n);
-      }
       if (n == 0) {
 	*p++ = '0';
 	*p = '\0';
@@ -141,9 +151,11 @@ static const char *number_value_to_ascii(int value, char format,
 	*p++ = '-';
 	n = -n;
       }
-      while (n >= 10000) {
-	*p++ = roman_numerals[0];
-	n -= 10000;
+      if (want_att_compat) {
+	while (n >= 10000) {
+	  *p++ = roman_numerals[0];
+	  n -= 10000;
+	}
       }
       for (int i = 1000; i > 0; i /= 10, roman_numerals += 2) {
 	int m = n/i;

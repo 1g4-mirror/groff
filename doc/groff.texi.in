@@ -9285,12 +9285,29 @@ doesn't exist, it is created with a zero value.
 @cindex extreme values representable with Roman numerals
 @cindex maximum value representable with Roman numerals
 @cindex minimum value representable with Roman numerals
-The representable extrema in the @samp{i} and @samp{I} formats
-correspond to Arabic ±39,999.  GNU @code{troff} uses @samp{w} and
-@samp{z} to represent 5,000 and 10,000 in Roman numerals, respectively,
-following the convention of @acronym{AT&T} @code{troff}---currently, the
-correct glyphs for Roman numerals five thousand (@code{U+2181}) and ten
-thousand (@code{U+2182}) are not used.
+The representable extrema in the
+@samp{i}
+and
+@samp{I}
+formats correspond to Arabic ±3,999.@footnote{In compatibility mode,
+GNU
+@command{troff}
+uses
+@samp{w}
+and
+@samp{z}
+to represent 5,000 and 10,000 in Roman numerals,
+respectively,
+following the convention of
+@acronym{AT&T}
+@command{troff},
+and increasing the representable range of register values
+to Arabic ±39,999.
+The correct glyphs for Roman numerals five thousand
+(@code{U+2181})
+and ten thousand
+(@code{U+2182})
+are not used.}
 
 @cindex read-only register, changing format
 @cindex changing format, and read-only registers
