@@ -6473,14 +6473,17 @@ A document encoded in
 (US-@acronym{ASCII}),
 or,
 equivalently,
-uses only code points from the
-``C0 Controls'' and ``Basic Latin'' parts of the Unicode character set
+that uses only code points from the
+``C0 Controls'' and ``Basic Latin'' parts
+of the Unicode character set
 is also a valid ISO @w{Latin-1} document;
 the standards are interchangeable
 in their first 128 code points.@footnote{The
-@emph{semantics} of certain punctuation code points have gotten stricter
-with the successive standards, a cause of some frustration among man
-page writers; see @cite{groff_char@r{(7)}}.}
+@emph{semantics}
+of certain punctuation code points have gotten stricter
+with the successive standards,
+a cause of some frustration among man page writers;
+see @cite{groff_char@r{(7)}}.}
 
 @cindex invalid input characters
 @cindex input characters, invalid
@@ -7132,7 +7135,7 @@ En;
 on typesetters,
 an en is one-half em,
 but on terminals an en equals an em,
-because they align all text to a grid of character cells.
+because such devices align all text to a grid of character cells.
 
 @item v
 @cindex vertical space unit (@code{v})

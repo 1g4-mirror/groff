@@ -361,9 +361,22 @@ into lines separated by the Unix newline character
 using the character encoding it recognizes:
 ISO\~Latin-1 (8859-1).
 .
-We recommend use of ISO\~646:1991\~IRV (US-ASCII)
-or (equivalently) the Basic Latin subset
-of ISO\~10646 (Unicode);
+A document encoded in
+ISO\~646:1991\~IRV
+(US-ASCII)
+or,
+equivalently,
+that uses only code points from the
+\[lq]C0 Controls\[rq] and \[lq]Basic Latin\[rq] parts
+of the Unicode character set
+is also a valid ISO \%Latin-1 document;
+the standards are interchangeable
+in their first 128 code points.
+(The
+.I semantics
+of certain punctuation code points have gotten stricter
+with the successive standards,
+a cause of some frustration among man page writers;
 see
 .MR groff_char @MAN7EXT@ .
 .
@@ -968,7 +981,8 @@ an em is equal to the current type size in points.
 En;
 on typesetters,
 an en is one-half em,
-but on terminals an en equals an em.
+but on terminals an en equals an em,
+because such devices align all text to a grid of character cells.
 .
 .TP
 .B v
