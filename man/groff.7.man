@@ -1620,16 +1620,20 @@ There is no inherent limit on argument length or quantity.
 Most requests take one or more arguments,
 and ignore any they do not expect.
 .
-A request may be separated from its arguments by tabs or spaces,
+A request that is not supplied a mandatory argument does
+nothing.
+.
+Spaces or tabs separate a request's name from its first argument,
 but only spaces can separate an argument from its successor.
 .
-Only one between arguments is necessary;
-any excess is ignored.
+.\" begin slack text for widow/orphan management
+(In compatibility mode,
+a space is not necessary
+after a request or macro name of two characters' length.)
+.\" end slack text
 .
-.\" slack text for widow/orphan management
-.\" (In compatibility mode,
-.\" a space is not necessary
-.\" after a request or macro name of two characters' length.)
+Only one space between arguments is necessary;
+the formatter ignores any excess.
 .
 GNU
 .I troff \" GNU

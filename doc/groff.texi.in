@@ -8061,12 +8061,19 @@ non-destructively replaced.  @xref{Strings}.
 There is no inherent limit on argument length or quantity.
 Most requests take one or more arguments,
 and ignore any they do not expect.
-A request may be separated from its arguments by tabs or spaces,
-but only spaces can separate an argument from its successor.
-Only one between arguments is necessary;
-any excess is ignored.@footnote{In compatibility mode,
+A request that is not supplied a mandatory argument does
+nothing.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{missing}.
+@xref{Warnings}.}
+Spaces or tabs separate a request's name from its first argument,
+but only spaces can separate an argument
+from its successor.@footnote{In compatibility mode,
 a space is not necessary
 after a request or macro name of two characters' length.}
+Only one space between arguments is necessary;
+the formatter ignores any excess.
 GNU
 @command{troff} @c GNU
 does not interpret tabs as argument separators.@footnote{Plan@tie{}9
