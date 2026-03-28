@@ -2760,7 +2760,9 @@ Close the named
 .IR stream ,
 invalidating it as an argument to the
 .RB \[lq] write \[rq]
-request.
+and
+.B writem
+requests.
 .
 See
 .RB \[lq] open \[rq].
