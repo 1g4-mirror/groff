@@ -12671,14 +12671,34 @@ use.
 @endExample
 
 @cindex next free font position register (@code{.fp})
-The index of the next (non-zero) free font position is available in the
-read-only register @samp{.fp}.
+The index of the next (non-zero) free font position
+is available in the read-only register
+@samp{.fp}.
 @cindex @file{DESC} file, and font mounting
-Fonts not listed in the @file{DESC} file are automatically mounted at
-position @samp{\n[.fp]} when selected with the @code{ft} request or
-@code{\f} escape sequence.  When mounting a font at a position
-explicitly with the @code{fp} request, this same practice should be
-followed, although GNU @code{troff} does not enforce this strictly.
+When using the
+@code{ft}
+request or
+@code{\f}
+escape sequence
+to select a font by name that is not listed in the device's
+@file{DESC}
+file,
+GNU
+@command{troff} @c GNU
+automatically mounts it
+at position
+@samp{\n[.fp]}.
+If you mount a font at a position explicitly
+with the
+@code{fp}
+request,
+you should follow the same practice,
+though the program
+does not strictly enforce adherence.@footnote{GNU
+@command{troff} @c GNU
+looks up fonts by name with a search that is
+O(@var{n})
+in the length of the dynamically sized mounting position list.}
 @endDefreq
 
 @c ---------------------------------------------------------------------

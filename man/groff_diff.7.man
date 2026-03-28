@@ -5608,20 +5608,37 @@ to behave in ways difficult to predict.
 .SS Miscellaneous
 .\" ====================================================================
 .
-A font not listed in the output device's
-.I DESC
-file's
-.B fonts
-directive is automatically mounted at the next available font position
-when it is selected.
+The index of the next (non-zero) free font position
+is available in the read-only register
+.BR .fp .
 .
-If you mount a font explicitly with the
+When using the
+.B ft
+request or
+.B \[rs]f
+escape sequence
+to select a font by name that is not listed in the device's
+.I DESC
+file,
+GNU
+.I troff \" GNU
+automatically mounts it
+at position
+.RB \[lq] \[rs]n[.fp] \[rq].
+.
+If you mount a font at a position explicitly
+with the
 .B fp
 request,
-you should do so on the first unused position,
-which can be found in the
-.B .fp
-register.
+you should follow the same practice,
+though the program
+does not strictly enforce adherence.
+.
+(GNU
+.I troff \" GNU
+looks up fonts by name with a search that is
+.RI O( n )
+in the length of the dynamically sized mounting position list.)
 .
 .
 .P
