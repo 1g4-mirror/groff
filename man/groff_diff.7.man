@@ -6567,6 +6567,15 @@ McIlroy referred to it as a \[lq]living fossil\[rq].]
 .\" ====================================================================
 .
 .\" BEGIN Keep in sync with groff.texi node "Other Differences".
+In
+GNU
+.IR troff , \" GNU
+read-only registers are subject to removal like others;
+once removed,
+they can be recreated only as normal writable registers
+and will not otherwise reflect the configuration of the formatter.
+.
+.P
 GNU
 .I troff \" GNU
 does not emit output if it has nothing to format.

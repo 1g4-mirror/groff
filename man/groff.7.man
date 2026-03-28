@@ -7138,12 +7138,16 @@ Predefined registers whose identifiers start with a dot are read-only.
 Many are Boolean-valued.
 .
 .
+.\" BEGIN Keep (roughly) parallel with beginning of section
+.\" "Other differences" in groff_diff(7).
 .P
 .I Caution:
-Built-in registers are subject to removal like others;
+Read-only registers are subject to removal like others;
 once removed,
 they can be recreated only as normal writable registers
 and will not otherwise reflect the configuration of the formatter.
+.\" END Keep (roughly) parallel with beginning of section
+.\" "Other differences" in groff_diff(7).
 .
 .
 .P

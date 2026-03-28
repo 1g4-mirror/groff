@@ -9348,11 +9348,11 @@ Predefined registers whose identifiers start with a dot are read-only.
 Many are Boolean-valued, interpolating a true or false value testable
 with the @code{if}, @code{ie}, or @code{while} requests.
 
-@cindex removing a built-in register
-@cindex register, built-in, removing
-@cindex built-in register, removing
+@cindex removing a read-only register
+@cindex register, read-only, removing
+@cindex read-only register, removing
 @strong{Caution:@:}
-Built-in registers are subject to removal like others;
+Read-only registers are subject to removal like others;
 once removed,
 they can be recreated only as normal writable registers
 and will not otherwise reflect the configuration of the formatter.
@@ -22291,7 +22291,15 @@ to behave in ways difficult to predict.
 @node Other Differences
 @subsection Other Differences
 
-@c BEGIN Keep in sync with groff_diff(7).
+@c BEGIN Keep in sync with "Other differences" section of groff_diff(7).
+In
+GNU
+@command{troff}, @c GNU
+read-only registers are subject to removal like others;
+once removed,
+they can be recreated only as normal writable registers
+and will not otherwise reflect the configuration of the formatter.
+
 GNU
 @command{troff} @c GNU
 does not emit output if it has nothing to format.
@@ -22885,7 +22893,7 @@ at the end of input;
 GNU
 @command{troff} @c GNU
 does not.
-@c END Keep in sync with groff_diff(7).
+@c END Keep in sync with "Other differences" section of groff_diff(7).
 
 
 
