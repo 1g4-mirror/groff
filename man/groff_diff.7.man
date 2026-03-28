@@ -5473,11 +5473,11 @@ to place the center of an accent from a roman font over that glyph.
 .
 .
 .P
-Other writable registers are as follows.
+Other writeable registers are as follows.
 .
-Those relating to date and time are initialized using
-.MR localtime 3
-at formatter startup.
+When the formatter starts up,
+it initializes those relating to date and time using
+.MR localtime 3 .
 .
 .
 .\" The `c.` register was documented in the January 1981 "Addendum to
