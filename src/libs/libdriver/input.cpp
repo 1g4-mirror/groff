@@ -583,7 +583,7 @@ StringBuf::reset(void)
  **********************************************************************/
 
 //////////////////////////////////////////////////////////////////////
-/* color_from_Df_command:
+/*
    Process the gray shade setting command Df.
 
    Transform Df style color into DF style color.
@@ -600,7 +600,7 @@ color_from_Df_command(IntArg Df_gray)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* delete_current_env():
+/*
    Delete global variable current_env and its pointer members.
 
    This should be a class method of environment.
@@ -614,7 +614,7 @@ void delete_current_env(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* fatal_command():
+/*
    Emit error message about invalid command and abort.
 */
 void
@@ -624,7 +624,7 @@ fatal_command(char command)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_char():
+/*
    Retrieve the next character from the input queue.
 
    Return: The retrieved character (incl. EOF), converted to Char.
@@ -636,7 +636,7 @@ get_char(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_color_arg():
+/*
    Retrieve an argument suitable for the color commands m and DF.
 
    Return: The retrieved color argument.
@@ -653,7 +653,7 @@ get_color_arg(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_D_fixed_args():
+/*
    Get a fixed number of integer arguments for D commands.
 
    Fatal if wrong number of arguments.
@@ -680,7 +680,7 @@ get_D_fixed_args(const size_t number)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_D_fixed_args_odd_dummy():
+/*
    Get a fixed number of integer arguments for D commands and optionally
    ignore a dummy integer argument if the requested number is odd.
 
@@ -712,7 +712,7 @@ get_D_fixed_args_odd_dummy(const size_t number)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_D_variable_args():
+/*
    Get a variable even number of integer arguments for D commands.
 
    Get as many integer arguments as possible from the rest of the
@@ -739,7 +739,7 @@ get_D_variable_args()
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_extended_arg():
+/*
    Retrieve extended arg for 'x X' command.
 
    - Skip leading spaces and tabs, error on EOL or newline.
@@ -774,7 +774,7 @@ get_extended_arg(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_integer_arg(): Retrieve integer argument.
+/*
 
    Skip leading spaces and tabs, collect an optional '-' and all
    following decimal digits (at least one) up to the next non-digit,
@@ -814,7 +814,7 @@ get_integer_arg(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_possibly_integer_args():
+/*
    Parse the rest of the input line as a list of integer arguments.
 
    Get as many integer arguments as possible from the rest of the
@@ -891,7 +891,7 @@ get_possibly_integer_args()
 }
 
 //////////////////////////////////////////////////////////////////////
-/* get_string_arg():
+/*
    Retrieve string arg.
 
    - Skip leading spaces and tabs; error on EOL or newline.
@@ -917,7 +917,7 @@ get_string_arg(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* is_space_or_tab():
+/*
    Test a character if it is a space or tab.
 
    c: In-parameter, character to be tested.
@@ -931,7 +931,7 @@ is_space_or_tab(const Char c)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* next_arg_begin():
+/*
    Return first character of next argument.
 
    Skip space and tab characters; error on newline or EOF.
@@ -959,7 +959,7 @@ next_arg_begin(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* next_command():
+/*
    Find the first character of the next command.
 
    Skip spaces, tabs, comments (introduced by #), and newlines.
@@ -989,7 +989,7 @@ next_command(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* odd():
+/*
    Test whether argument is an odd number.
 
    n: In-parameter, the integer to be tested.
@@ -1003,7 +1003,7 @@ odd(const int n)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* position_to_end_of_args():
+/*
    Move graphical pointer to end of drawn figure.
 
    This is used by the D commands that draw open geometrical figures.
@@ -1025,7 +1025,7 @@ position_to_end_of_args(const IntArray * const args)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* remember_filename():
+/*
    Set global variable current_filename.
 
    The actual filename is stored in current_filename.  This is used by
@@ -1051,7 +1051,7 @@ remember_filename(const char *filename)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* remember_source_filename():
+/*
    Set global variable current_source_filename.
 
    The actual filename is stored in current_filename.  This is used by
@@ -1077,7 +1077,7 @@ remember_source_filename(const char *filename)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* send_draw():
+/*
    Call draw method of printer class.
 
    subcmd: Letter of actual D subcommand.
@@ -1091,7 +1091,7 @@ send_draw(const Char subcmd, const IntArray * const args)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* skip_line():
+/*
    Go to next line within the input queue.
 
    Skip the rest of the current line, including the newline character.
@@ -1114,7 +1114,7 @@ skip_line(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* skip_line_checked ():
+/*
    Check that there aren't any arguments left on the rest of the line,
    then skip line.
 
@@ -1146,7 +1146,7 @@ skip_line_checked(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* skip_line_fatal ():
+/*
    Fatal error if arguments left, otherwise skip line.
 
    Spaces, tabs, and a comment are allowed before newline or EOF.
@@ -1164,7 +1164,7 @@ skip_line_fatal(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* skip_line_warn ():
+/*
    Skip line, but warn if arguments are left on actual line.
 
    Spaces, tabs, and a comment are allowed before newline or EOF.
@@ -1182,7 +1182,7 @@ skip_line_warn(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* skip_line_D ():
+/*
    Skip line in 'D' commands.
 
    Decide whether in case of an additional argument a fatal error is
@@ -1199,7 +1199,7 @@ skip_line_D(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* skip_line_x ():
+/*
    Skip line in 'x' commands.
 
    Decide whether in case of an additional argument a fatal error is
@@ -1216,7 +1216,7 @@ skip_line_x(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* skip_to_end_of_line():
+/*
    Go to the end of the current line.
 
    Skip the rest of the current line, excluding the newline character.
@@ -1239,7 +1239,7 @@ skip_to_end_of_line(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* unget_char(c):
+/*
    Restore character c onto input queue.
 
    Write a character back onto the input stream.
@@ -1263,7 +1263,7 @@ unget_char(const Char c)
  **********************************************************************/
 
 //////////////////////////////////////////////////////////////////////
-/* parse_color_command:
+/*
    Process the commands m and DF, but not Df.
 
    col: In-out-parameter; the color object to be set, must have
@@ -1310,7 +1310,7 @@ parse_color_command(color *col)
 }
 
 //////////////////////////////////////////////////////////////////////
-/* parse_D_command():
+/*
    Parse the subcommands of graphical command D.
 
    This is the part of the do_file() parser that scans the graphical
@@ -1434,7 +1434,7 @@ parse_D_command()
 }
 
 //////////////////////////////////////////////////////////////////////
-/* parse_x_command():
+/*
    Parse subcommands of the device control command x.
 
    This is the part of the do_file() parser that scans the device
@@ -1546,7 +1546,7 @@ parse_x_command(void)
  **********************************************************************/
 
 ////////////////////////////////////////////////////////////////////////
-/* do_file():
+/*
    Parse and postprocess groff intermediate output.
 
    filename: "-" for standard input, normal file name otherwise
