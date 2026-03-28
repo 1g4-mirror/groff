@@ -5641,7 +5641,9 @@ are interpreted even in copy mode.
 .
 .
 .P
-The escape sequences
+GNU
+.I troff \" GNU
+does not tokenize any of the escape sequences
 .esc f ,
 .esc F ,
 .esc H ,
@@ -5651,10 +5653,7 @@ The escape sequences
 .esc s ,
 and
 .esc S
-are not tokenized when
-GNU
-.I troff \" GNU
-reads its input.
+when reading its input.
 .
 .esc R
 updates only the formatter's register dictionary,
