@@ -6226,13 +6226,22 @@ see
 @cindex no-break control character (@code{'})
 @cindex character, no-break control (@code{'})
 @cindex control character, no-break (@code{'})
-A @dfn{request} is an instruction to the formatter that occurs after a
-@dfn{control character}, which is recognized at the beginning of an
-input line.  The regular control character is a dot (@code{.}).  Its
-counterpart, the @dfn{no-break control character}, a neutral apostrophe
-(@code{'}), suppresses the break that is implied by some requests.
-These characters were chosen because it is uncommon for lines of text in
-natural languages to begin with them.
+A
+@dfn{request}
+is an instruction to the formatter that occurs after a
+@dfn{control character},
+which is recognized at the beginning of an input line.
+The regular control character is a dot
+(@code{.}).
+Its counterpart,
+the
+@dfn{no-break control character},
+a neutral apostrophe
+(@code{'}),
+suppresses the break that some requests imply.
+These characters were chosen
+because it is uncommon for lines of text in natural languages
+to begin with them.
 @cindex dummy character (@code{\&}), as control character suppressor
 @cindex character, dummy (@code{\&}), as control character suppressor
 If you require a formatted period or apostrophe
