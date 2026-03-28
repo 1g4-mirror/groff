@@ -6385,16 +6385,34 @@ Insert tedious liability disclaimer paragraph here.
     @result{} Approved: 2020-10-05 by D. Kruger, J. Peterman
 @endExample
 
+@cindex body, of a macro
+@cindex macro body
 @noindent
-The above document started with a series of control lines.  Three macros
-were defined, with a @code{de} request declaring each macro's name, and
-the ``body'' of the macro starting on the next line and continuing until
-a line with two dots @samp{@code{..}} marked its end.  The text proper
-began only after the macros were defined; this is a common pattern.
-Only the @code{NOTICE} macro was called ``directly'' by the document;
-@code{DATE} and @code{BOSS} were called only by @code{NOTICE} itself.
-Escape sequences were used in @code{BOSS}, two levels of macro
-interpolation deep.
+The above document started with a series of control lines.
+Three macros were defined,
+with a
+@code{de}
+request declaring each macro's name,
+and the
+@dfn{body}
+of the macro starting on the next line
+and continuing until a line with two dots
+@samp{@code{..}}
+marked its end.
+The text proper began only after the macros were defined;
+this is a common pattern.
+Only the
+@code{NOTICE}
+macro was called ``directly'' by the document;
+@code{DATE}
+and
+@code{BOSS}
+were called only by
+@code{NOTICE}
+itself.
+Escape sequences were used in
+@code{BOSS},
+two levels of macro interpolation deep.
 
 The advantage in typing and maintenance economy may not be obvious from
 such a short example, but imagine a much longer document with dozens of
