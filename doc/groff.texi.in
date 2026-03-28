@@ -6260,15 +6260,13 @@ Requests often take
 words
 (separated from the request name and each other by spaces)
 that specify details of the action you expect the formatter to perform.
-If a request is meaningless without arguments,
-it is typically ignored.
 
 Requests and escape sequences comprise the control language
 of the formatter.
 Of key importance are the requests that define macros.
 Macros are invoked like requests,
-enabling the request repertoire
-to be extended or overridden.@footnote{Argument handling in macros
+permitting extension or override
+of the request repertoire.@footnote{Argument handling in macros
 is more flexible but also more complex.
 @xref{Calling Macros}.}
 
@@ -6276,9 +6274,9 @@ is more flexible but also more complex.
 @cindex macro
 @cindex calling macros (introduction)
 @cindex interpolation
-A
+Think of a
 @dfn{macro}
-can be thought of as an abbreviation you can define
+as an abbreviation you can define
 for a collection of control and text lines.
 When a document
 @dfn{calls}
@@ -6288,9 +6286,9 @@ the formatter replaces the control line with the macro's definition.
 The process of textual replacement is known as
 @dfn{interpolation}.@footnote{Some escape sequences undergo
 interpolation as well.}
-Interpolations are handled as soon as they are recognized,
+The formatter performs an interpolation upon recognition,
 and once performed,
-the formatter scans the replacement for further requests,
+it scans the replacement for further requests,
 macro calls,
 and escape sequences.
 
