@@ -9682,8 +9682,8 @@ static void parse_output_page_list(const char *p)
     ++p;
   }
   if (*p != '\0') {
-    error("malformed argument to '-o'; page list '%1' is invalid",
-	  pstart);
+    error("malformed argument to command-line option '-o';"
+	  " page list '%1' is invalid", pstart);
     output_page_list = 0 /* nullptr */;
   }
 }
@@ -10026,27 +10026,28 @@ int main(int argc, char **argv)
       if (sscanf(optarg, "%d", &next_page_number) == 1)
 	have_explicit_first_page_number = true;
       else
-	error("malformed argument to '-n'; page number '%1' is invalid",
-	      optarg);
+	error("malformed argument to command-line option '-n';"
+	      "page number '%1' is invalid", optarg);
       break;
     case 'o':
       parse_output_page_list(optarg);
       break;
     case 'd':
       if (*optarg == '\0')
-	error("'-d' requires non-empty argument");
+	error("command-line option '-d' requires non-empty argument");
       else if (*optarg == '=')
-	error("malformed argument to '-d'; string name cannot be empty"
-	      " or contain an equals sign");
+	error("malformed argument to command-line option '-d';"
+	      "string name cannot be empty or contain an equals sign");
       else
 	add_string(optarg, &string_assignments);
       break;
     case 'r':
       if (*optarg == '\0')
-	error("'-r' requires non-empty argument");
+	error("command-line option '-r' requires non-empty argument");
       else if (*optarg == '=')
-	error("malformed argument to '-r'; register name cannot be"
-	      " empty or contain an equals sign");
+	error("malformed argument to command-line option '-r';"
+	      "register name cannot be empty or contain an equals"
+	      "sign");
       else
 	add_string(optarg, &register_assignments);
       break;
