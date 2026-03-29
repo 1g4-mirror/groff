@@ -6095,6 +6095,11 @@ static bool read_delimited_measurement(units *n,
 
 // TODO: Merge into other `read_delimited_measurement()`, using default
 // argument of 0 for `prev_value`.
+// XXX: Careful, though.  Doing this in the most obvious way fails no
+// test cases but results in drawing position miscomputations affecting
+// the configuration parameter tables in the text rendering of
+// doc/ms.ms.  Root-cause that and write an `assert()` and/or regression
+// test for it.
 static bool read_delimited_measurement(units *n, unsigned char si)
 {
   token start_token;
