@@ -151,7 +151,7 @@
 2026-03-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/error.cpp: Drop `extern` declaration of
-	`fatal_error_exit()`, now delcared properly in "lib.h".
+	`fatal_error_exit()`, now declared properly in "lib.h".
 	* src/libs/libgroff/fatal.cpp: Use preprocessor to include
 	"errarg.h" and "error.h" header files.
 
@@ -1183,7 +1183,7 @@
 	functions from `int` to `void`.  I would have boolified them,
 	but nothing ever checks their return values.
 
-	* src/roff/troff/troff.h: Update delcarations.
+	* src/roff/troff/troff.h: Update declarations.
 	* src/roff/troff/input.cpp (warning, output_warning): Update
 	definitions.  Simplify function bodies.
 
