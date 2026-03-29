@@ -131,9 +131,11 @@ reads the standard input stream.
 .P
 GNU
 .I troff \" GNU
-is functionally compatible with the AT&T
+is largely compatible with the AT&T
 .I troff \" AT&T
-typesetter and features numerous extensions.
+typesetter and features numerous extensions;
+see
+.MR groff_diff @MAN7EXT@ .
 .
 Many people prefer to use the
 .MR groff @MAN1EXT@
