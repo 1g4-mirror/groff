@@ -1,3 +1,9 @@
+2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (in_output_page_list, main):
+	Explicitly compare values of pointer type to null pointer
+	literals instead of letting them pun down to Booleans.
+
 2022-02-05  Dave Kemper <saint.snit@gmail.com>
 
 	* doc/groff.texi.in (Assigning Register Formats): Clarify

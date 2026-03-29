@@ -9635,7 +9635,7 @@ page_range *output_page_list = 0 /* nullptr */;
 
 bool in_output_page_list(int n)
 {
-  if (!output_page_list)
+  if (0 /* nullptr */ == output_page_list)
     return true;
   for (page_range *p = output_page_list;
        p != 0 /* nullptr */;
@@ -10118,7 +10118,7 @@ int main(int argc, char **argv)
   font_size::init_size_list(font::sizes);
   int i;
   int j = 1;
-  if (font::style_table)
+  if (font::style_table != 0 /* nullptr */)
     for (i = 0; font::style_table[i] != 0 /* nullptr */; i++)
       // Mounting a style can't actually fail due to a bad style name;
       // that's not determined until the full font name is resolved.
