@@ -130,8 +130,10 @@ char *searchpath(const char *name, const char *pathp)
   return 0;
 }
 
+#ifdef _WIN32
 // Search NAME along PATHP with the elements of PATHEXT in turn added.
-char *searchpathext(const char *name, const char *pathext, const char *pathp)
+static char *searchpathext(const char *name, const char *pathext,
+			   const char *pathp)
 {
   char *found = 0;
   char *tmpathext = strsave(pathext);	// strtok modifies this string,
@@ -150,6 +152,7 @@ char *searchpathext(const char *name, const char *pathext, const char *pathp)
   delete[] tmpathext;
   return found;
 }
+#endif
 
 // Convert an MS path to a POSIX path.
 char *msw2posixpath(char *path)

@@ -1,5 +1,13 @@
 2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/relocate.cpp (searchpathext): Declare as
+	`static` since it does not require external linkage.  Doing so
+	reveals that the function is not used at all except on Windows
+	systems, so bracket with preprocessor `#ifdef`/`#endif`,
+	avoiding `-Wunused-function` warning from GCC on GNU/Linux.
+
+2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/pipeline.c: Check for memory allocation
 	failure, and emit a fatal error diagnostic if it occurs.
 	Unfortunately I was unable to test this code, as it's only
