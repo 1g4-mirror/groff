@@ -9682,7 +9682,8 @@ static void parse_output_page_list(const char *p)
     ++p;
   }
   if (*p != '\0') {
-    error("ignoring invalid output page list argument '%1'", pstart);
+    error("malformed argument to '-o'; page list '%1' is invalid",
+	  pstart);
     output_page_list = 0 /* nullptr */;
   }
 }
@@ -10025,7 +10026,8 @@ int main(int argc, char **argv)
       if (sscanf(optarg, "%d", &next_page_number) == 1)
 	have_explicit_first_page_number = true;
       else
-	error("bad page number");
+	error("malformed argument to '-n'; page number '%1' is invalid",
+	      optarg);
       break;
     case 'o':
       parse_output_page_list(optarg);

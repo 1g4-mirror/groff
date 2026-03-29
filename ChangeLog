@@ -1,5 +1,11 @@
 2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (parse_output_page_list, main):
+	Revise and parallelize wording of error diagnostics relating to
+	invalid command-line option arguments.
+
+2026-03-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (in_output_page_list, main):
 	Explicitly compare values of pointer type to null pointer
 	literals instead of letting them pun down to Booleans.
