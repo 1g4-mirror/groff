@@ -31,11 +31,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 char *strsave(const char *s)
 {
-  if (s == 0)
-    return 0;
-  char *p = (char*)malloc(strlen(s) + 1);
-  if (p != 0)
-    strcpy(p, s);
+  if (0 == s /* nullptr */)
+    return 0 /* nullptr */;
+  char *p = static_cast<char *>(malloc(strlen(s) + 1 /* '\0' */));
+  if (p != 0 /* nullptr */)
+    (void) strcpy(p, s);
   return p;
 }
 
