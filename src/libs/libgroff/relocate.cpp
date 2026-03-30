@@ -154,6 +154,9 @@ static char *searchpathext(const char *name, const char *pathext,
 }
 #endif
 
+// XXX: This function is nearly identical to
+// `normalize_file_name_for_lf_request()` in "libgroff/lf.cpp".
+//
 // Convert an MS path to a POSIX path.
 static char *msw2posixpath(char *path)
 {

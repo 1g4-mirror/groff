@@ -62,6 +62,8 @@ bool interpret_lf_request_arguments(const char *p)
   return true;
 }
 
+// XXX: This function is nearly identical to `msw2posixpath()` in
+// "libgroff/relocate.cpp".
 #if defined(__MSDOS__) || (defined(_WIN32) && !defined(__CYGWIN__))
 void normalize_file_name_for_lf_request(string &fn)
 {
