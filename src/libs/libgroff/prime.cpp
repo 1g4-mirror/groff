@@ -1,4 +1,5 @@
-/* Copyright 2014-2020 Free Software Foundation, Inc.
+/* Copyright 1991 Free Software Foundation, Inc.
+             2024 Alejandro Colomar
 
 This file is part of groff, the GNU roff typesetting system.
 
