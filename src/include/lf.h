@@ -17,8 +17,6 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "stringclass.h"
-
 // libgroff/change_lf.cpp
 void change_filename(const char *);
 void change_lineno(int);

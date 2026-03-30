@@ -23,7 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <string.h>
 
-#include "lf.h"
+#include "stringclass.h" // prerequisite of lf.h; string
+#include "lf.h" // change_filename(), change_lineno()
 #include "lib.h" // strsave()
 
 extern const char *current_filename;

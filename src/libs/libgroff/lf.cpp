@@ -23,11 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <ctype.h>
 
-#include "lib.h"
-
-#include "cset.h"
-#include "stringclass.h"
-#include "lf.h"
+#include "cset.h" // csdigit()
+#include "stringclass.h" // prerequisite for lf.h; string
+#include "lf.h" // change_filename(), change_lineno()
 
 bool interpret_lf_request_arguments(const char *p)
 {

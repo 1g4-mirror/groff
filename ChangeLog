@@ -2,6 +2,21 @@
 
 	[libgroff]: Improve #include discipline.
 
+	To illuminate inter-module dependencies, get header files out of
+	the business of `#include`-ing other header files, in favor of
+	putting preprocessor inclusions only in translation units (C/C++
+	source files).  Annotate dependencies.
+
+	* src/include/lf.h: Move preprocessor inclusion of
+	"stringclass.h" from here...
+	* src/libs/libgroff/change_lf.cpp: ...to here.
+	* src/libs/libgroff/lf.cpp: Drop unnecessary inclusion of
+	"lib.h".
+
+2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Improve #include discipline.
+
 	* src/include/lib.h: Declare `gen_tempname()` here...
 	* src/libs/libgroff/mksdir.cpp: ...instead of here (as an
 	`extern`).
