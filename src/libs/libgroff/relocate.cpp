@@ -155,7 +155,7 @@ static char *searchpathext(const char *name, const char *pathext,
 #endif
 
 // Convert an MS path to a POSIX path.
-char *msw2posixpath(char *path)
+static char *msw2posixpath(char *path)
 {
   char *s = path;
   while (*s) {
@@ -188,11 +188,19 @@ void set_current_prefix()
     curr_prefix = searchpathext(program_name, pathextstr, getenv("PATH"));
     delete[] pathextstr;
   }
+  // XXX: Should the `msw2posixpath(curr_prefix)` below move here?
 #else /* !_WIN32 */
   curr_prefix = searchpath(program_name, getenv("PATH"));
   if (!curr_prefix)
     return;
 #endif /* !_WIN32 */
+ // XXX: Move this?  See above.  It seems that by calling it here we
+ // prevent groff from correctly handling file names with literal
+ // backslashes in them on POSIX systems.  That's not a salutary naming
+ // practice, and evidently not a popular one either, as it's drawn no
+ // complaints, but it still seems a needless restriction.  (At the same
+ // time I'm a fan of banning all C0 controls from file names without
+ // exception.) --GBR
   msw2posixpath(curr_prefix);
 #if DEBUG
   fprintf(stderr, "curr_prefix: %s\n", curr_prefix);
