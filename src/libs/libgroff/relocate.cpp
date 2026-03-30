@@ -1,6 +1,8 @@
 /* Provide relocation for macro and font files.
 
-Copyright 2005-2024 Free Software Foundation, Inc.
+Copyright 2005 Free Software Foundation, Inc.
+
+Made by Werner Lemberg after relocation code in kpathsea and gettext.
 
 This file is part of groff, the GNU roff typesetting system.
 
@@ -16,8 +18,6 @@ License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
-
-// Made after relocation code in kpathsea and gettext.
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
