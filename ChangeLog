@@ -1,5 +1,11 @@
 2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/mksdir.cpp: Improve header file
+	inclusion discipline.  Use preprocessor to include "lib.h"
+	header, which declares the `mkdsir()` function defined here.
+
+2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/relocate.cpp (msw2posixpath): Declare as
 	`static` since it does not require external linkage.
 

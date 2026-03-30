@@ -72,6 +72,7 @@ extern "C" {
 int mkstemp(char *tmpl);
 #endif /* HAVE_MKSTEMP */
 
+// libgroff/mksdir.cpp
 int mksdir(char *tmpl);
 
 #ifdef __cplusplus
