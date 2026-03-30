@@ -22,8 +22,8 @@ void change_filename(const char *);
 void change_lineno(int);
 
 // libgroff/lf.cpp
-bool interpret_lf_request_arguments(const char *p);
-void normalize_file_name_for_lf_request(string &fn);
+bool interpret_lf_request_arguments(const char *);
+void normalize_file_name_for_lf_request(string &);
 
 // Local Variables:
 // fill-column: 72

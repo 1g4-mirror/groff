@@ -1,5 +1,11 @@
 2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/lf.h: Drop argument names from function
+	declarations, better aligning code style with groff's
+	Stroustrup-ish conventions.
+
+2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Improve #include discipline.
 
 	To illuminate inter-module dependencies, get header files out of
