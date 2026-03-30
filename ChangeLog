@@ -1,5 +1,25 @@
 2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/prime.cpp: Improve header file inclusion
+	discipline.  Use preprocessor to include "lib.h" header, which
+	declares the `ceil_prime()` function defined here.  Also
+	unabbreviate data type of argument and return value; I prefer
+	`unsigned int` to `unsigned`.  (It's surprising that Thompson
+	and Ritchie overcame their inclination to extreme abbreviation
+	here; not only are "signed" and "unsigned" intelligible English
+	words, but it proved to be a bad idea to make their syntax
+	closely resemble what eventually became ANSI C89's type
+	qualifiers `const`--notably an abbreviation again--and
+	`volatile`.  It took ISO C99 to bring us `uintN_t` and `intN_t`
+	types, at which point Ritchie, at least, appears to have given
+	up on staying current with the language, never preparing with
+	Kernighan a third edition of their _The C Programming Language_
+	before his death in 2011.  I find it a fun diversion to consider
+	how many problems of the C language can be sufficiently
+	explained by a tacit but intense resentment of strong typing.)
+
+2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/mksdir.cpp: Improve header file
 	inclusion discipline.  Use preprocessor to include "lib.h"
 	header, which declares the `mkdsir()` function defined here.

@@ -47,7 +47,8 @@ extern "C" {
 #include <stdbool.h>
 
 char *strsave(const char *s);
-unsigned ceil_prime(unsigned);
+// libgroff/prime.cpp
+unsigned int ceil_prime(unsigned int);
 
 #include <stdio.h>
 #include <string.h>
