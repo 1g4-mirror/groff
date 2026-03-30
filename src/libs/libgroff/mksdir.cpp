@@ -26,8 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "lib.h" // mksdir()
 
-extern int gen_tempname(char *, int = 0);
-
 /* Generate a unique temporary directory name from TEMPLATE.
    The last six characters of TEMPLATE must be "XXXXXX";
    they are replaced with a string that makes the filename unique.

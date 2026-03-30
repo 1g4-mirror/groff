@@ -79,6 +79,9 @@ int mkstemp(char *tmpl);
 // libgroff/mksdir.cpp
 int mksdir(char *tmpl);
 
+// libgroff/tmpname.cpp
+int gen_tempname(char *, int);
+
 #ifdef __cplusplus
   FILE *xtmpfile(const char **namep = 0 /* nullptr */,
 		 const char *postfix_long = 0 /* nullptr */,
