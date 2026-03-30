@@ -1,5 +1,11 @@
 2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/strsave.cpp: Improve header file
+	inclusion discipline.  Use preprocessor to include "lib.h"
+	header, which declares the `strsave()` function defined here.
+
+2026-03-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/prime.cpp: Improve header file inclusion
 	discipline.  Use preprocessor to include "lib.h" header, which
 	declares the `ceil_prime()` function defined here.  Also

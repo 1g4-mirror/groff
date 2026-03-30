@@ -46,7 +46,10 @@ extern "C" {
 
 #include <stdbool.h>
 
+// libgroff/strsave.cpp
+// TODO: Migrate all callers to `strdup()`.  See Savannah #66518.
 char *strsave(const char *s);
+
 // libgroff/prime.cpp
 unsigned int ceil_prime(unsigned int);
 

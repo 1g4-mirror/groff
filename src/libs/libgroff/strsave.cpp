@@ -17,12 +17,17 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+// TODO: Migrate all callers to `strdup()`.  See Savannah #66518.
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <string.h>
-#include <stdlib.h>
+#include <string.h> // strlen()
+#include <stdlib.h> // malloc()
+
+// libgroff
+#include "lib.h" // strsave()
 
 char *strsave(const char *s)
 {
