@@ -9234,14 +9234,30 @@ Valid number formats are as follows.
 
 @table @code
 @item 0@r{@dots{}}
-Arabic numerals 0, 1, 2, and so on.
-Any decimal digit is equivalent to @samp{0}; the formatter merely counts
-the digits specified.  Multiple Arabic numerals in @var{fmt} cause
-interpolations to be zero-padded on the left if necessary to at least as
-many digits as specified (interpolations never truncate a register
-value).  A register with format @samp{00} interpolates values 1, 2, 3 as
-@samp{01}, @samp{02}, @samp{03}.  The default format for all writable
-registers is @samp{0}.
+Arabic numerals 0,
+1,
+2,
+and so on.
+Any decimal digit is equivalent to
+@samp{0};
+the formatter merely counts the digits specified.
+Multiple Arabic numerals in
+@var{fmt}
+cause interpolations to be zero-padded on the left
+if necessary
+to at least as many digits as specified
+(interpolations never truncate a register value).
+A register with format
+@samp{00}
+interpolates values 1,
+2,
+3 as
+@samp{01},
+@samp{02},
+@samp{03}.
+The default format for all writable registers is
+@samp{0}.
+Specifying an unrecognized format is an error.
 
 @item I
 @cindex Roman numerals
@@ -9257,8 +9273,6 @@ Uppercase letters: 0, A, B, C, @dots{},@tie{}Z, AA, AB,@tie{}@enddots{}
 @item a
 Lowercase letters: 0, a, b, c, @dots{},@tie{}z, aa, ab,@tie{}@enddots{}
 @end table
-
-Specifying an unrecognized format is an error.
 
 Zero values are interpolated as @samp{0} in non-Arabic formats.
 Negative quantities are prefixed with @samp{-} irrespective of format.
