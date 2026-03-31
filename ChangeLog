@@ -1,3 +1,11 @@
+2026-03-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Ensure that the register
+	`an-remap-I-style-in-headings` is always defined.  Fixes `reg`
+	warning when user employs `HF` string to configure an unusual
+	heading font (one that isn't bold, or isn't a member of a
+	family).
+
 2026-03-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/relocate.cpp (set_current_prefix): Move call
