@@ -8078,11 +8078,6 @@ non-destructively replaced.  @xref{Strings}.
 @cindex request arguments
 @cindex arguments to requests
 @cindex tabs, and macro arguments
-@cindex macro arguments, and tabs
-@cindex arguments to macros, and tabs
-@cindex tabs, and request arguments
-@cindex request arguments, and tabs
-@cindex arguments to requests, and tabs
 There is no inherent limit on argument length or quantity.
 Most requests take one or more arguments,
 and ignore any they do not expect.
@@ -8092,6 +8087,11 @@ nothing.@footnote{GNU
 emits a warning in category
 @samp{missing}.
 @xref{Warnings}.}
+@cindex macro arguments, and tabs
+@cindex arguments to macros, and tabs
+@cindex tabs, and request arguments
+@cindex request arguments, and tabs
+@cindex arguments to requests, and tabs
 Spaces or tabs separate a request's name from its first argument,
 but only spaces can separate an argument
 from its successor.@footnote{In compatibility mode,
