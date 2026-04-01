@@ -17,7 +17,6 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-
 // There is no distinction between a name with no value and a name with
 // a 0 (nullptr) value.  Null names are not permitted; they are ignored.
 
@@ -82,10 +81,11 @@ public:
   friend class object_dictionary_iterator;
 };
 
-
 inline bool object_dictionary_iterator::get(symbol *sp, object **op)
 {
-  return di.get(sp, (void **)op);
+  // We must use the nuclear `reinterpret_cast` operator because GNU
+  // troff's dictionary class uses a pre-STL approach to containers.
+  return di.get(sp, reinterpret_cast<void **>(op));
 }
 
 // Local Variables:

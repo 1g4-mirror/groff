@@ -7,6 +7,12 @@
 
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/dictionary.h (object_dictionary_iterator::get):
+	Use explicit `reinterpret_cast` C++ operator instead of C-style
+	cast.  Annotate why we use this footgun.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (print_hyphenation_exceptions): Skip
 	the remainder of the input line if no hyphenation language is
 	configured.
