@@ -3953,8 +3953,10 @@ static void add_hyphenation_exception_words_request()
 
 static void print_hyphenation_exceptions()
 {
-  if (0 /* nullptr */ == current_language)
+  if (0 /* nullptr */ == current_language) {
+    skip_line();
     return;
+  }
   dictionary_iterator iter(current_language->exceptions);
   symbol entry;
   unsigned char *hypoint;
