@@ -1279,7 +1279,7 @@ node *environment::extract_output_line()
   return nd;
 }
 
-static void select_fill_color_request()
+static void select_fill_color_request() // .fcolor
 {
   symbol s = read_identifier();
   if (s.is_null())
@@ -1289,7 +1289,7 @@ static void select_fill_color_request()
   skip_line();
 }
 
-static void select_stroke_color_request()
+static void select_stroke_color_request() // .gcolor
 {
   symbol s = read_identifier();
   if (s.is_null())
@@ -1339,7 +1339,7 @@ void select_font(symbol s)
   }
 }
 
-static void select_font_request()
+static void select_font_request() // .ft
 {
   select_font(read_identifier());
   skip_line();
@@ -1375,7 +1375,7 @@ void point_size()
   skip_line();
 }
 
-static void override_available_type_sizes_request()
+static void override_available_type_sizes_request() // .sizes
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "available font sizes override request"
@@ -2701,12 +2701,12 @@ void do_break_request(bool want_adjustment)
   tok.next();
 }
 
-static void break_without_forced_adjustment_request()
+static void break_without_forced_adjustment_request() // .br
 {
   do_break_request(false);
 }
 
-static void break_with_forced_adjustment_request()
+static void break_with_forced_adjustment_request() //. brp
 {
   do_break_request(true);
 }
@@ -3052,7 +3052,7 @@ void tab_stops::operator=(const tab_stops &ts)
   }
 }
 
-static void configure_tab_stops_request()
+static void configure_tab_stops_request() // .ta
 {
   hunits pos;
   hunits prev_pos = 0;
@@ -3114,7 +3114,7 @@ tab_type environment::distance_to_next_tab(hunits *distance, hunits *leftpos)
 }
 
 // XXX: Field characters are global; shouldn't they be environmental?
-static void field_characters_request()
+static void field_characters_request() // .fc
 {
   field_delimiter_char = read_character();
   if (field_delimiter_char)
@@ -3731,7 +3731,7 @@ void environment::dump()
 // TODO: Revise to report, without arguments, only the environment stack
 // contents from top to bottom; report details of only environments
 // named in arguments.
-static void print_environment_request()
+static void print_environment_request() // .pev
 {
   errprint("Current Environment:\n");
   curenv->dump();
@@ -3750,7 +3750,7 @@ static void print_environment_request()
   skip_line();
 }
 
-static void print_pending_output_line_request()
+static void print_pending_output_line_request() // .pline
 {
   curenv->dump_pending_nodes();
   skip_line();
@@ -3881,7 +3881,7 @@ void environment_switch()
 const int WORD_MAX = 256;	// we use unsigned char for offsets in
 				// hyphenation exceptions
 
-static void add_hyphenation_exception_words_request()
+static void add_hyphenation_exception_words_request() // .hw
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "hyphenation exception word request expects"
@@ -3955,7 +3955,7 @@ static void add_hyphenation_exception_words_request()
   skip_line();
 }
 
-static void print_hyphenation_exceptions_request()
+static void print_hyphenation_exceptions_request() // .phw
 {
   if (0 /* nullptr */ == current_language) {
     skip_line();
@@ -4666,7 +4666,7 @@ static void read_hyphenation_patterns_from_file(bool append)
   tok.next();
 }
 
-static void load_hyphenation_patterns_from_file_request()
+static void load_hyphenation_patterns_from_file_request() // .hpf
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "hyphenation pattern load request expects"
@@ -4679,7 +4679,7 @@ static void load_hyphenation_patterns_from_file_request()
   // `read_rest_of_line_as_argument()` and `tok.next()`.
 }
 
-static void append_hyphenation_patterns_from_file_request()
+static void append_hyphenation_patterns_from_file_request() // .hpfa
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "hyphenation pattern appendment request"
