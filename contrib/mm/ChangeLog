@@ -1,3 +1,14 @@
+2026-03-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Add regression test for Savannah #68201.  The `IA` and `WA`
+	macros disable the escape character (and `IE` and `WE` reënable
+	it).  This however is not compatible with DWB 3.3 mm, and makes
+	support of these macros in non-English locales needlessly
+	difficult.
+
+	* tests/IA-IE-WA-WE-allow-escape-sequences.sh: Do it.
+	* mm.am (mm_TESTS): Run test.
+
 2026-02-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tests/LB-mark-format-works.sh: Rename this...
