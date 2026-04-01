@@ -66,26 +66,26 @@
 .  tm \*[an]:\\n[.F]:\\n[.c]: warning: \\$*
 ..
 .
-.de an-style-warn
+.de an*style-warn
 .  if \\n[CHECKSTYLE] \
 .    tm \*[an]:\\n[.F]:\\n[.c]: style: \\$*
 ..
 .
 .de an-deprecation-warn
 .  if (\\n[CHECKSTYLE] > 1) \
-.    an-style-warn use of deprecated macro: .\\$0
+.    an*style-warn use of deprecated macro: .\\$0
 ..
 .
 .de1 an-blank-line-trap
 .  if (\\n[CHECKSTYLE] > 2) \
-.    an-style-warn blank line in input
+.    an*style-warn blank line in input
 .  sp
 ..
 .
 .de1 an-leading-space-trap
 .  if (\\n[CHECKSTYLE] > 2) \
 .    if \\n[.u] \
-.      an-style-warn \\n[lsn] leading space(s) on input line
+.      an*style-warn \\n[lsn] leading space(s) on input line
 .  br
 .  nop \h'\\n[lss]u'\c
 ..
@@ -323,7 +323,7 @@
 .\" .TH identifier section[ extra1[ extra2[ extra3]]]
 .de1 TH
 .  if ((\\n[.$] < 2) : (\\n[.$] > 5)) \
-.    an-style-warn .\\$0 expects 2 to 5 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects 2 to 5 arguments, got \\n[.$]
 .
 .  blm an-blank-line-trap
 .  lsm an-leading-space-trap
@@ -392,7 +392,7 @@
 .  if '\\*[an-extra1]'' \{\
 .    ds an*msg .\\$0 missing third argument; consider document\"
 .    as an*msg " modification date in ISO 8601 format (YYYY-MM-DD)\"
-.    an-style-warn \\*[an*msg]
+.    an*style-warn \\*[an*msg]
 .    rm an*msg
 .  \}
 .
@@ -400,14 +400,14 @@
 .    ds an*msg .\\$0 missing fourth argument; consider package/project\"
 .    \" Yes, that's one double quote, then three, then two.
 .    as an*msg " name and version (e.g., """groff 1.23.0"")\"
-.    an-style-warn \\*[an*msg]
+.    an*style-warn \\*[an*msg]
 .    rm an*msg
 .  \}
 .
 .  if '\\$5\\*[an-extra3]'' \{\
 .    ds an*msg .\\$0 missing fifth argument and second argument '\\$2'\"
 .    as an*msg " not a recognized manual section; specify its title\"
-.    an-style-warn \\*[an*msg]
+.    an*style-warn \\*[an*msg]
 .    rm an*msg
 .  \}
 .
@@ -958,7 +958,7 @@ contains unsupported escape sequence
 .\" Set each argument in bold and italics, alternately.
 .de1 BI
 .  if (\\n[.$] < 2) \
-.    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -975,7 +975,7 @@ contains unsupported escape sequence
 .\" Set each argument in bold and roman, alternately.
 .de1 BR
 .  if (\\n[.$] < 2) \
-.    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -992,7 +992,7 @@ contains unsupported escape sequence
 .\" Set each argument in italics and bold, alternately.
 .de1 IB
 .  if (\\n[.$] < 2) \
-.    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1009,7 +1009,7 @@ contains unsupported escape sequence
 .\" Set each argument in italics and roman, alternately.
 .de1 IR
 .  if (\\n[.$] < 2) \
-.    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1026,7 +1026,7 @@ contains unsupported escape sequence
 .\" Set each argument in roman and bold, alternately.
 .de1 RB
 .  if (\\n[.$] < 2) \
-.    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1043,7 +1043,7 @@ contains unsupported escape sequence
 .\" Set each argument in roman and italics, alternately.
 .de1 RI
 .  if (\\n[.$] < 2) \
-.    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1084,10 +1084,10 @@ contains unsupported escape sequence
 .    if (\\n[an-RE-requested-level] < 1) \
 .      ds an-RE-problem too small\"
 .    if d an-RE-problem \
-.      an-style-warn argument """\\$1""" to .\\$0 \\*[an-RE-problem]
+.      an*style-warn argument """\\$1""" to .\\$0 \\*[an-RE-problem]
 .    rm an-RE-problem
 .  \}
-.  el .if !(\\n[an-RE-requested-level]) .an-style-warn unbalanced .\\$0
+.  el .if !(\\n[an-RE-requested-level]) .an*style-warn unbalanced .\\$0
 .  rr an-RE-requested-level
 .  ie \\n[.$] .nr an-inset-level ((;\\$1) <? \\n[an-inset-level])
 .  el         .nr an-inset-level -1
@@ -1110,7 +1110,7 @@ contains unsupported escape sequence
 .de1 OP
 .  nop \\*[an-deprecation-warn]\\
 .  if ((\\n[.$] < 1) : (\\n[.$] > 2)) \
-.    an-style-warn .\\$0 expects 1 or 2 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects 1 or 2 arguments, got \\n[.$]
 .  ie (\\n[.$] > 1) \
 .    RI [\\f[B]\\$1\f[] \~\\$2 ]
 .  el \
@@ -1121,7 +1121,7 @@ contains unsupported escape sequence
 .de1 EX
 .  br
 .  if \\n[an*is-in-example] \{\
-.    an-style-warn ignoring .\\$0 while already in example
+.    an*style-warn ignoring .\\$0 while already in example
 .    return
 .  \}
 .  ds an*saved-family \\n[.fam]
@@ -1160,7 +1160,7 @@ contains unsupported escape sequence
 .de1 EE
 .  br
 .  if !\\n[an*is-in-example] \{\
-.    an-style-warn ignoring .\\$0 while not in example
+.    an*style-warn ignoring .\\$0 while not in example
 .    return
 .  \}
 .  \" Undo the remappings from `EX`.
@@ -1347,7 +1347,7 @@ contains unsupported escape sequence
 .\" .MR page-topic page-section [trailing-text]
 .de1 MR
 .  if ((\\n[.$] < 1) : (\\n[.$] > 3)) \
-.    an-style-warn .\\$0 expects 1 to 3 arguments, got \\n[.$]
+.    an*style-warn .\\$0 expects 1 to 3 arguments, got \\n[.$]
 .  ds an*url man:\\$1(\\$2)\"
 .  if (\\n[an*MR-URL-format] = 2) \
 .    ds an*url x-man-page://\\$2/\\$1\"
