@@ -1,3 +1,9 @@
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac: Trivially refactor; rename `an-msg` (a temporary
+	string into which a diagnostic message is constructed) to
+	`an*msg`.
+
 2026-03-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac: Ensure that the register

@@ -50,9 +50,9 @@
 .\" it is undefined; the output is unchanged in appearance from earlier
 .\" releases.
 .if (\n[.x]\n[.y] < 118) \{\
-.  ds an-msg \*[an]: groff man macros require groff 1.18 or later,\"
-.  as an-msg " but found groff \n[.x].\n[.y]; aborting\"
-.  ab \*[an-msg]
+.  ds an*msg \*[an]: groff man macros require groff 1.18 or later,\"
+.  as an*msg " but found groff \n[.x].\n[.y]; aborting\"
+.  ab \*[an*msg]
 .\}
 .
 .\" === Define macros. ===
@@ -390,25 +390,25 @@
 .  el                  .ds an-extra2 \" empty; but .AT/.UC can override
 .
 .  if '\\*[an-extra1]'' \{\
-.    ds an-msg .\\$0 missing third argument; consider document\"
-.    as an-msg " modification date in ISO 8601 format (YYYY-MM-DD)\"
-.    an-style-warn \\*[an-msg]
-.    rm an-msg
+.    ds an*msg .\\$0 missing third argument; consider document\"
+.    as an*msg " modification date in ISO 8601 format (YYYY-MM-DD)\"
+.    an-style-warn \\*[an*msg]
+.    rm an*msg
 .  \}
 .
 .  if '\\*[an-extra2]'' \{\
-.    ds an-msg .\\$0 missing fourth argument; consider package/project\"
+.    ds an*msg .\\$0 missing fourth argument; consider package/project\"
 .    \" Yes, that's one double quote, then three, then two.
-.    as an-msg " name and version (e.g., """groff 1.23.0"")\"
-.    an-style-warn \\*[an-msg]
-.    rm an-msg
+.    as an*msg " name and version (e.g., """groff 1.23.0"")\"
+.    an-style-warn \\*[an*msg]
+.    rm an*msg
 .  \}
 .
 .  if '\\$5\\*[an-extra3]'' \{\
-.    ds an-msg .\\$0 missing fifth argument and second argument '\\$2'\"
-.    as an-msg " not a recognized manual section; specify its title\"
-.    an-style-warn \\*[an-msg]
-.    rm an-msg
+.    ds an*msg .\\$0 missing fifth argument and second argument '\\$2'\"
+.    as an*msg " not a recognized manual section; specify its title\"
+.    an-style-warn \\*[an*msg]
+.    rm an*msg
 .  \}
 .
 .  \" Initialize environment for headers and footers.
@@ -1413,11 +1413,11 @@ contains unsupported escape sequence
 .  HTML-IMAGE-END
 .  if \\n[an*is-output-html] .ll \\n[an-TS-ll]u
 .  if !r TW .if !\\n[an-was-tbl-failure-reported] \{\
-.    ds an-msg tbl preprocessor failed, or it or soelim was not run;\"
-.    as an-msg " table(s) likely not rendered\"
-.    as an-msg " (TE macro called with TW register undefined)\"
-.    an-warn \\*[an-msg]
-.    rm an-msg
+.    ds an*msg tbl preprocessor failed, or it or soelim was not run;\"
+.    as an*msg " table(s) likely not rendered\"
+.    as an*msg " (TE macro called with TW register undefined)\"
+.    an-warn \\*[an*msg]
+.    rm an*msg
 .    nr an-was-tbl-failure-reported 1
 .  \}
 ..
@@ -1619,30 +1619,30 @@ contains unsupported escape sequence
 .  \" half the page length is unlikely.  A footer distance of less than
 .  \" one line height is too.
 .  ie \n[cR] \
-.    ds an-msg footer distance when continuously rendering\"
+.    ds an*msg footer distance when continuously rendering\"
 .  el \{\
 .    nr an*tmp 1v
 .    ds an*help " (1v=\n[an*tmp]u)\"
 .    ie (\n[FT] : (\n[FT] = 0)) \
-.      ds an-msg non-negative footer distance: \n[FT]u\*[an*help]\"
+.      ds an*msg non-negative footer distance: \n[FT]u\*[an*help]\"
 .    el \{\
 .      ie (-(\n[FT]) > (\n[.p] / 2)) \{\
-.        ds an-msg implausibly large footer distance:\"
-.        as an-msg " \n[FT]u\*[an*help]\"
+.        ds an*msg implausibly large footer distance:\"
+.        as an*msg " \n[FT]u\*[an*help]\"
 .      \}
 .      el \
 .        if (-(\n[FT]) < 1v) \{\
-.          ds an-msg implausibly small footer distance:\"
-.          as an-msg " \n[FT]u\*[an*help]\"
+.          ds an*msg implausibly small footer distance:\"
+.          as an*msg " \n[FT]u\*[an*help]\"
 .        \}
 .    rm an*help
 .    rr an*tmp
 .    \}
 .  \}
-.  if d an-msg \{\
-.    tm \*[an]: ignoring \*[an-msg]
+.  if d an*msg \{\
+.    tm \*[an]: ignoring \*[an*msg]
 .    rr FT
-.    rm an-msg
+.    rm an*msg
 .  \}
 .\}
 .
@@ -1677,14 +1677,14 @@ contains unsupported escape sequence
 .if r P \{\
 .  if \n[an*is-output-html] \
 .    if !(\n[P] = 1) \
-.      ds an-msg in HTML output\"
+.      ds an*msg in HTML output\"
 .  if \n[cR] \
-.    ds an-msg when continuously rendering
+.    ds an*msg when continuously rendering
 .\}
-.if d an-msg \{\
-.  tm \*[an]: ignoring starting page number \*[an-msg]
+.if d an*msg \{\
+.  tm \*[an]: ignoring starting page number \*[an*msg]
 .  rr P
-.  rm an-msg
+.  rm an*msg
 .\}
 .
 .\" Setting the page number turns out to be tricky when batch rendering
@@ -1748,14 +1748,14 @@ contains unsupported escape sequence
 .if r X \{\
 .  af an-page-letter a
 .  if \n[an*is-output-html] \
-.    ds an-msg in HTML output\"
+.    ds an*msg in HTML output\"
 .  if \n[cR] \
-.    ds an-msg when continuously rendering
+.    ds an*msg when continuously rendering
 .\}
-.if d an-msg \{\
-.  tm \*[an]: ignoring page number suffix \*[an-msg]
+.if d an*msg \{\
+.  tm \*[an]: ignoring page number suffix \*[an*msg]
 .  rr X
-.  rm an-msg
+.  rm an*msg
 .\}
 .
 .\" (sub)section heading font
