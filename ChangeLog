@@ -7,6 +7,12 @@
 
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Rationalize header inclusions.  Use
+	preprocessor to include <assert.h> header, which declares the
+	`assert()` macro used in this file.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/dictionary.h (object_dictionary_iterator::get):
 	Use explicit `reinterpret_cast` C++ operator instead of C-style
 	cast.  Annotate why we use this footgun.
