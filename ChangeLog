@@ -1,5 +1,12 @@
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (BI, BR, IB, IR, RB, RI): Trivially refactor;
+	rename `an-result` (a temporary string into these macros'
+	arguments are catenated with font style changes and italic
+	corrections as appropriate) to `an*result`.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Trivially refactor; rename `an-msg` (a temporary
 	string into which a diagnostic message is constructed) to
 	`an*msg`.

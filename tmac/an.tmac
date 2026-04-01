@@ -960,14 +960,14 @@ contains unsupported escape sequence
 .  if (\\n[.$] < 2) \
 .    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
-.    ds an-result \&\"
+.    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
-.      as an-result \f[B]\\$1\,\f[I]\\$2\/\"
+.      as an*result \f[B]\\$1\,\f[I]\\$2\/\"
 .      shift 2
 .    \}
-.    if \\n[.$] .as an-result \f[B]\\$1\"
-.    nop \\*[an-result]
-.    rm an-result
+.    if \\n[.$] .as an*result \f[B]\\$1\"
+.    nop \\*[an*result]
+.    rm an*result
 .    ft R
 .  \}
 ..
@@ -977,14 +977,14 @@ contains unsupported escape sequence
 .  if (\\n[.$] < 2) \
 .    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
-.    ds an-result \&\"
+.    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
-.      as an-result \f[B]\\$1\f[R]\\$2\"
+.      as an*result \f[B]\\$1\f[R]\\$2\"
 .      shift 2
 .    \}
-.    if \\n[.$] .as an-result \f[B]\\$1\"
-.    nop \\*[an-result]
-.    rm an-result
+.    if \\n[.$] .as an*result \f[B]\\$1\"
+.    nop \\*[an*result]
+.    rm an*result
 .    ft R
 .  \}
 ..
@@ -994,14 +994,14 @@ contains unsupported escape sequence
 .  if (\\n[.$] < 2) \
 .    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
-.    ds an-result \&\"
+.    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
-.      as an-result \,\f[I]\\$1\/\f[B]\\$2\"
+.      as an*result \,\f[I]\\$1\/\f[B]\\$2\"
 .      shift 2
 .    \}
-.    if \\n[.$] .as an-result \,\f[I]\\$1\/\"
-.    nop \\*[an-result]
-.    rm an-result
+.    if \\n[.$] .as an*result \,\f[I]\\$1\/\"
+.    nop \\*[an*result]
+.    rm an*result
 .    ft R
 .  \}
 ..
@@ -1011,14 +1011,14 @@ contains unsupported escape sequence
 .  if (\\n[.$] < 2) \
 .    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
-.    ds an-result \&\"
+.    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
-.      as an-result \,\f[I]\\$1\/\f[R]\\$2\"
+.      as an*result \,\f[I]\\$1\/\f[R]\\$2\"
 .      shift 2
 .    \}
-.    if \\n[.$] .as an-result \,\f[I]\\$1\/\"
-.    nop \\*[an-result]
-.    rm an-result
+.    if \\n[.$] .as an*result \,\f[I]\\$1\/\"
+.    nop \\*[an*result]
+.    rm an*result
 .    ft R
 .  \}
 ..
@@ -1028,14 +1028,14 @@ contains unsupported escape sequence
 .  if (\\n[.$] < 2) \
 .    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
-.    ds an-result \&\"
+.    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
-.      as an-result \f[R]\\$1\f[B]\\$2\"
+.      as an*result \f[R]\\$1\f[B]\\$2\"
 .      shift 2
 .    \}
-.    if \\n[.$] .as an-result \f[R]\\$1\"
-.    nop \\*[an-result]
-.    rm an-result
+.    if \\n[.$] .as an*result \f[R]\\$1\"
+.    nop \\*[an*result]
+.    rm an*result
 .    ft R
 .  \}
 ..
@@ -1045,14 +1045,14 @@ contains unsupported escape sequence
 .  if (\\n[.$] < 2) \
 .    an-style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
 .  if \\n[.$] \{\
-.    ds an-result \&\"
+.    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
-.      as an-result \f[R]\\$1\,\f[I]\\$2\/\"
+.      as an*result \f[R]\\$1\,\f[I]\\$2\/\"
 .      shift 2
 .    \}
-.    if \\n[.$] .as an-result \f[R]\\$1\"
-.    nop \\*[an-result]
-.    rm an-result
+.    if \\n[.$] .as an*result \f[R]\\$1\"
+.    nop \\*[an*result]
+.    rm an*result
 .    ft R
 .  \}
 ..
