@@ -1,5 +1,13 @@
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68202.
+
+	* src/roff/groff/tests/\
+	hw-request-skips-only-invalid-arguments.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Stop throwing
 	assert(3)ion if an argument contains a non-character.  The
