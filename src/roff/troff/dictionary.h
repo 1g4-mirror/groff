@@ -45,7 +45,7 @@ class dictionary {
   void rehash(int);
 public:
   dictionary(int);
-  void *lookup(symbol s, void *v = 0 /* nullptr */);
+  void *lookup(symbol, void * = 0 /* nullptr */);
   void *lookup(const char *);
   void *remove(symbol);
   friend class dictionary_iterator;
