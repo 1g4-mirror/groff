@@ -4663,7 +4663,6 @@ static void read_hyphenation_patterns_from_file(bool append)
       current_language->patterns.read_patterns_file(filename, append,
 	&current_language->exceptions);
   }
-  tok.next();
 }
 
 static void load_hyphenation_patterns_from_file_request() // .hpf
@@ -4675,8 +4674,7 @@ static void load_hyphenation_patterns_from_file_request() // .hpf
     return;
   }
   read_hyphenation_patterns_from_file(false /* append */);
-  // No `skip_line()` here; the above function calls
-  // `read_rest_of_line_as_argument()` and `tok.next()`.
+  skip_line();
 }
 
 static void append_hyphenation_patterns_from_file_request() // .hpfa
@@ -4688,8 +4686,7 @@ static void append_hyphenation_patterns_from_file_request() // .hpfa
     return;
   }
   read_hyphenation_patterns_from_file(true /* append */);
-  // No `skip_line()` here; the above function calls
-  // `read_rest_of_line_as_argument()` and `tok.next()`.
+  skip_line();
 }
 
 // Most hyphenation functionality is environment-specific; see

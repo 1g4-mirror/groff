@@ -7,6 +7,23 @@
 
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Slightly refactor.  Make request
+	handler functions more consistent such that calling
+	`skip_line()` is the last thing they do before returning.  The
+	goal is to build confidence that request handlers reliably leave
+	the input stream in a well-defined state.  Doing so would
+	prevent several bugs I introduced (and resolved, with help from
+	fellow developers) in the groff 1.23.0 development cycle, but
+	also cases like Savannah #68064, which lurked insidiously for
+	about 35 years.
+	(read_hyphenation_patterns_from_file): Stop calling `tok.next()`
+	before returning.
+	(load_hyphenation_patterns_from_file_request)
+	(append_hyphenation_patterns_from_file_request): Call
+	`skip_line()` before returning.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (print_environment_request): Declare as
 	`static` since it does not require external linkage.
 
