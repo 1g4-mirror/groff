@@ -1,5 +1,17 @@
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Stop throwing
+	assert(3)ion if an argument contains a non-character.  The
+	assertion is invalidated by plausible user input like:
+	  `.hw baz\%qux`
+	and similar.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?68202>.  Problem
+	introduced by me in commit effd6835dc, 19 November.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man]: Trivially refactor.
 
 	* tmac/an.tmac (TH, AT, UC, PT, BT)

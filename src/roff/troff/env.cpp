@@ -3904,8 +3904,6 @@ static void add_hyphenation_exception_words_request()
 	   && !tok.is_eof()) {
       charinfo *ci = tok.get_charinfo(true /* required */);
       if (0 /* nullptr */ == ci) {
-	assert(0 == "attempted to use token without charinfo in"
-	       " hyphenation exception word");
 	skip_line();
 	return;
       }
