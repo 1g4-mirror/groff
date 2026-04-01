@@ -2,6 +2,14 @@
 
 	[man]: Trivially refactor.
 
+	* tmac/an.tmac (TH, AT, UC, PT, BT)
+	(an*abbreviate-page-identifier, an*abbreviate-inner-footer):
+	Rename `an-extra[123]` strings to `an*extra[123]`.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[man]: Trivially refactor.
+
 	* tmac/an.tmac (an-style-warn): Rename this...
 	(an*style-warn): ...to this.
 	(an-deprecation-warn, an-blank-line-trap, an-leading-space-trap)
