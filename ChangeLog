@@ -7,6 +7,18 @@
 
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Trivially refactor.
+	(print_hyphenation_exceptions)
+	(load_hyphenation_patterns_from_file)
+	(append_hyphenation_patterns_from_file): Rename these...
+	(print_hyphenation_exceptions_request)
+	(load_hyphenation_patterns_from_file_request)
+	(append_hyphenation_patterns_from_file_request): ...to these,
+	following a developing convention of naming request handlers to
+	end with "_request".
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Rationalize header inclusions.  Use
 	preprocessor to include <assert.h> header, which declares the
 	`assert()` macro used in this file.

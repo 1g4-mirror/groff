@@ -3952,7 +3952,7 @@ static void add_hyphenation_exception_words_request()
   skip_line();
 }
 
-static void print_hyphenation_exceptions()
+static void print_hyphenation_exceptions_request()
 {
   if (0 /* nullptr */ == current_language) {
     skip_line();
@@ -4663,7 +4663,7 @@ static void read_hyphenation_patterns_from_file(bool append)
   tok.next();
 }
 
-static void load_hyphenation_patterns_from_file()
+static void load_hyphenation_patterns_from_file_request()
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "hyphenation pattern load request expects"
@@ -4676,7 +4676,7 @@ static void load_hyphenation_patterns_from_file()
   // `read_rest_of_line_as_argument()` and `tok.next()`.
 }
 
-static void append_hyphenation_patterns_from_file()
+static void append_hyphenation_patterns_from_file_request()
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "hyphenation pattern appendment request"
@@ -4693,10 +4693,10 @@ static void append_hyphenation_patterns_from_file()
 // init_env_requests() above.
 void init_hyphenation_pattern_requests()
 {
-  init_request("hpf", load_hyphenation_patterns_from_file);
-  init_request("hpfa", append_hyphenation_patterns_from_file);
+  init_request("hpf", load_hyphenation_patterns_from_file_request);
+  init_request("hpfa", append_hyphenation_patterns_from_file_request);
   init_request("hw", add_hyphenation_exception_words_request);
-  init_request("phw", print_hyphenation_exceptions);
+  init_request("phw", print_hyphenation_exceptions_request);
 }
 
 // Local Variables:
