@@ -108,6 +108,7 @@ groff_TESTS = \
   src/roff/groff/tests/output-request-works.sh \
   src/roff/groff/tests/pchar-request-works.sh \
   src/roff/groff/tests/pdf-device-smoke-test.sh \
+  src/roff/groff/tests/phw-request-skips-line-if-no-hyph-lang.sh \
   src/roff/groff/tests/pi-request-works.sh \
   src/roff/groff/tests/po-request-works.sh \
   src/roff/groff/tests/ps-device-smoke-test.sh \

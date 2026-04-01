@@ -1,5 +1,13 @@
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68203.
+
+	* src/roff/groff/tests/\
+	phw-request-skips-line-if-no-hyph-lang.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Continue interpreting
 	any arguments subsequent to an invalid one.  Doing so is more
