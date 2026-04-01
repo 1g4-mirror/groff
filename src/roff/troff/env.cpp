@@ -3728,7 +3728,10 @@ void environment::dump()
   fflush(stderr);
 }
 
-void print_environment_request()
+// TODO: Revise to report, without arguments, only the environment stack
+// contents from top to bottom; report details of only environments
+// named in arguments.
+static void print_environment_request()
 {
   errprint("Current Environment:\n");
   curenv->dump();

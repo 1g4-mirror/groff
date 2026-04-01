@@ -7,6 +7,11 @@
 
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (print_environment_request): Declare as
+	`static` since it does not require external linkage.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Trivially refactor.
 	(print_hyphenation_exceptions)
 	(load_hyphenation_patterns_from_file)
