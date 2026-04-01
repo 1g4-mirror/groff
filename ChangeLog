@@ -1,5 +1,18 @@
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Continue interpreting
+	any arguments subsequent to an invalid one.  Doing so is more
+	consistent with AT&T troff (tested: DWB 3.3, Plan 9 from User
+	Space, Heirloom Doctools, Solaris).  Convert diagnostic emitted
+	in this circumstance from an error to a warning in category
+	"char".
+
+	Fixes <https://savannah.gnu.org/bugs/?68202>.  Problem appears
+	to date back to groff's birth.
+
+2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68202.
 
 	* src/roff/groff/tests/\

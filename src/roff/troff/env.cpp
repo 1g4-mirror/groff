@@ -3898,28 +3898,44 @@ static void add_hyphenation_exception_words_request()
       break;
     int i = 0;
     int npos = 0;
+    // Warn at most once per invalid word, not per request invocation.
+    bool is_word_valid = true;
+    bool was_warned = false;
     while ((i < WORD_MAX)
 	   && !tok.is_space()
 	   && !tok.is_newline()
 	   && !tok.is_eof()) {
-      charinfo *ci = tok.get_charinfo(true /* required */);
+      charinfo *ci = tok.get_charinfo(false /* required */);
       if (0 /* nullptr */ == ci) {
-	skip_line();
-	return;
+	is_word_valid = false;
+	if (!was_warned) {
+	  warning(WARN_CHAR, "skipping hyphenation exception word"
+		  " containing %1", tok.description());
+	  was_warned = true;
+	}
       }
-      tok.next();
-      if (ci->get_ascii_code() == '-') {
-	if (i > 0 && (npos == 0 || pos[npos - 1] != i))
-	  pos[npos++] = i;
+      if (is_word_valid) {
+	tok.next();
+	if (ci->get_ascii_code() == '-') {
+	  if (i > 0 && (npos == 0 || pos[npos - 1] != i))
+	    pos[npos++] = i;
+	}
+	else {
+	  unsigned char c = ci->get_hyphenation_code();
+	  if (0U == c)
+	    break;
+	  buf[i++] = c;
+	}
       }
       else {
-	unsigned char c = ci->get_hyphenation_code();
-	if (0U == c)
-	  break;
-	buf[i++] = c;
+	do
+	  tok.next();
+	while (!tok.is_space()
+	       && !tok.is_newline()
+	       && !tok.is_eof());
       }
     }
-    if (i > 0) {
+    if (is_word_valid && (i > 0)) {
       pos[npos] = 0;
       buf[i] = '\0';
       // C++03: new unsigned char[npos + 1]();
