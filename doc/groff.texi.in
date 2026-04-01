@@ -467,7 +467,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle March 2026
+@subtitle April 2026
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -9344,10 +9344,14 @@ and nothing is interpolated.
 
 @cindex register format, in expressions
 @cindex expressions, and register format
-GNU @code{troff} interprets only Arabic numerals.  The Roman numeral or
-alphabetic formats cannot be used as operands to arithmetic operators in
-expressions (@pxref{Numeric Expressions}).  For instance, it may be
-desirable to test the page number independently of its format.
+GNU
+@command{troff} @c GNU
+interprets only Arabic numerals.
+The Roman numeral or alphabetic formats
+cannot be used as operands to arithmetic operators in expressions;
+recall @ref{Numeric Expressions}.
+For instance,
+it may be desirable to test the page number independently of its format.
 
 @Example
 .af % i \" front matter
