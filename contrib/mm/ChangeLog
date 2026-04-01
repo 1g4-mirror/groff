@@ -1,5 +1,14 @@
 2026-03-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m.tmac (IA, WA): Stop disabling the escape character.
+	* m.tmac (IE, WE): Stop reënabling the escape character.
+
+	Fixes <https://savannah.gnu.org/bugs/?68201>.  Problem appears
+	to date back to groff 1.10 (November 1995).  Thanks to Alexis
+	Hildebrandt for the report.
+
+2026-03-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Add regression test for Savannah #68201.  The `IA` and `WA`
 	macros disable the escape character (and `IE` and `WE` reënable
 	it).  This however is not compatible with DWB 3.3 mm, and makes
