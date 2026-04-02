@@ -7903,7 +7903,6 @@ or
 stream
 generally provokes an error diagnostic.
 
-@need 1000
 @cindex name space, common, of macros, diversions, and strings
 @cindex common name space of macros, diversions, and strings
 @cindex macro name space, shared with strings and diversions
@@ -7913,29 +7912,36 @@ generally provokes an error diagnostic.
 @cindex common name space of special characters and character classes
 @cindex character class name space, shared with special characters
 @cindex special character name space, shared with character classes
-Identifiers for requests, macros, strings, and diversions share one name
-space; special characters and character classes another.  No other
-object types do.
+Identifiers for requests,
+macros,
+strings,
+and diversions share one name space;
+special characters and character classes another.
+No other object types do.
+@c END Keep (roughly) parallel with section "Identifiers" of groff(7).
 
 @Example
-.de xxx
-.  nop foo
+.de xx
+foo
 ..
-@c . slack line for pagination management
-.di xxx
+.
+.di xx
 bar
 .br
 .di
 .
-.xxx
+.xx
     @result{} bar
 @endExample
 
 @noindent
-The foregoing example shows that GNU @code{troff} reuses the identifier
-@samp{xxx}, changing it from a macro to a diversion.  No warning is
-emitted, and the previous contents of @samp{xxx} are lost.
-@c END Keep (roughly) parallel with section "Identifiers" of groff(7).
+The foregoing example shows that the formatter reuses the identifier
+@samp{xx},
+changing it from a macro to a diversion.
+No warning is emitted,
+and the previous contents of
+@samp{xx}
+are lost.
 
 
 @c =====================================================================
