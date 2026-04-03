@@ -186,7 +186,7 @@ static symbol read_escape_parameter(read_mode = NO_ARGS);
 static symbol read_long_escape_parameters(read_mode = NO_ARGS);
 static void interpolate_string(symbol);
 static void interpolate_string_with_args(symbol);
-static void interpolate_macro(symbol, bool = false);
+static void interpolate_macro_or_invoke_request(symbol, bool = false);
 static void interpolate_number_format(symbol);
 static void interpolate_environment_variable(symbol);
 
@@ -3417,7 +3417,7 @@ void do_request()
   if (nm.is_null())
     skip_line();
   else
-    interpolate_macro(nm, true /* don't want next token */);
+    interpolate_macro_or_invoke_request(nm, true /* don't want next token */);
   assert(!want_att_compat_stack.empty());
   want_att_compat = want_att_compat_stack.top();
   want_att_compat_stack.pop();
@@ -3561,7 +3561,7 @@ void process_input_stack()
 	  if (nm.is_null())
 	    skip_line();
 	  else {
-	    interpolate_macro(nm);
+	    interpolate_macro_or_invoke_request(nm);
 #if defined(DEBUGGING)
 	    if (want_html_debugging) {
 	      fprintf(stderr, "finished interpreting [%s] and environment state is\n", nm.contents());
@@ -4635,7 +4635,8 @@ bool operator==(const macro &m1, const macro &m2)
   return true;
 }
 
-static void interpolate_macro(symbol nm, bool do_not_want_next_token)
+static void interpolate_macro_or_invoke_request(symbol nm,
+	      bool do_not_want_next_token)
 {
   request_or_macro *p
     = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
@@ -5562,7 +5563,7 @@ static void do_define_macro(define_mode mode, calling_mode calling,
 	}
 	if (term != dot_symbol) {
 	  want_input_ignored = false;
-	  interpolate_macro(term);
+	  interpolate_macro_or_invoke_request(term);
 	}
 	else
 	  skip_line();

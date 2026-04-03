@@ -1,5 +1,13 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(interpolate_macro): Rename this...
+	(interpolate_macro_or_invoke_request): ...to this.
+	(do_request, process_input_stack, do_define_macro): Update call
+	sites.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (decode_escape_sequence_arguments):
 	Revise wording of warning diagnostic.
 
