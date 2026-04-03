@@ -1,3 +1,16 @@
+2026-04-03  Johannes Altmanninger <aclopte@gmail.com>
+
+	* src/preproc/eqn/neqn.sh:
+	* src/roff/nroff/nroff.sh: Use a subshell instead of the user's
+	login shell `$SHELL` to evaluate features of the running shell.
+	The login shell need not be a POSIX shell script interpreter; it
+	could be tcsh(1), rc(1), fish(1), or something exotic.
+	* src/roff/nroff/nroff.sh: Update fatal error diagnostic
+	accordingly.
+
+	Fixes <https://savannah.gnu.org/bugs/?68212>.  [Problem
+	introduced by me in commit c34c6cc58c, 2024-12-07. --GBR]
+
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.cpp (xstrdup):
