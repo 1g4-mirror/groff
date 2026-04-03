@@ -119,6 +119,7 @@ static void enable_warning(const char *);
 static void disable_warning(const char *);
 
 token tok;
+static bool can_accept_control_character = true;
 bool was_invoked_with_regular_control_character = false;
 bool using_character_classes = false;
 static bool permit_color_output = true;
@@ -3525,7 +3526,6 @@ static int leading_spaces_space = 0;
 void process_input_stack()
 {
   std::stack<bool> trap_accepting_control_character_stack;
-  bool can_accept_control_character = true;
   for (;;) {
     bool ignore_next_token = false;
     switch (tok.type) {

@@ -1,5 +1,10 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Promote `process_input_stack()`'s
+	local `can_accept_control_character` from local to global.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(do_define_macro): Rename `reading_beginning_of_input_line`
 	local to `can_terminate_definition_with_dot`.
