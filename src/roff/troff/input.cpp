@@ -7395,7 +7395,7 @@ static void else_request()
   }
 }
 
-static int while_depth = 0;
+static int while_loop_depth = 0;
 static bool want_loop_break = false;
 
 static void while_request()
@@ -7441,7 +7441,7 @@ static void while_request()
   if (level != 0)
     error("unbalanced brace escape sequences");
   else {
-    while_depth++;
+    while_loop_depth++;
     input_stack::add_boundary();
     for (;;) {
       input_stack::push(new string_iterator(mac, "while loop"));
@@ -7458,14 +7458,14 @@ static void while_request()
       }
     }
     input_stack::remove_boundary();
-    while_depth--;
+    while_loop_depth--;
   }
   tok.next();
 }
 
 static void while_break_request()
 {
-  if (!while_depth) {
+  if (!while_loop_depth) {
     error("cannot 'break' when not in a 'while' loop");
     skip_line();
   }
@@ -7479,7 +7479,7 @@ static void while_break_request()
 
 static void while_continue_request()
 {
-  if (!while_depth) {
+  if (!while_loop_depth) {
     error("cannot 'continue' when not in a 'while' loop");
     skip_line();
   }

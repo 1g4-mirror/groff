@@ -1,5 +1,12 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.  Rename global
+	`while_depth` to `while_loop_depth`.
+	(while_request, while_break_flag, while_continue_request):
+	Update dereference sites.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (make_glyph_node): Revise wording of
 	warning diagnostic.
 
