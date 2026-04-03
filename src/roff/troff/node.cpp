@@ -7377,7 +7377,10 @@ static void embolden_font_request() // .bd
 	font_table[f]->conditional_unbold(n);
     }
     else {
-      // The second argument must be an emboldening amount.
+      warning(WARN_STYLE, "interpreting second argument to font"
+	      " emboldening request as emboldening amount; use a font"
+	      " name instead of a mounting position as the first"
+	      " argument if conditional emboldening desired");
       units offset;
       if (read_measurement(&offset, 'u') && (offset >= 1))
 	font_table[n]->set_bold(hunits(offset - 1));

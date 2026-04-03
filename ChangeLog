@@ -1,5 +1,13 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (embolden_font_request): Throw warning
+	in category "style" if request arguments are ambiguous.  This
+	could arguably be made an error since the ambiguity is inherent;
+	it shows up in Kernighan troff (see CSTR #54, 1992 revision).
+	But let's try a style warning first.  See Savannah #62776.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (translate_font)
 	(mount_font_at_position)
 	(associate_style_with_font_position)
