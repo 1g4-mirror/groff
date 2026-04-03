@@ -1,5 +1,11 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp
+	(print_font_mounting_position_request): Declare as `static`
+	since it does not require external linkage.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/reg.cpp (number_value_to_ascii): When
 	diagnosing a value beyond representatable Roman numeral range,
 	disclose the specific format demanded.  Also tighten message

@@ -6708,7 +6708,7 @@ static bool mount_font_no_translate(int n, symbol name, symbol filename,
   return true;
 }
 
-void print_font_mounting_position_request()
+static void print_font_mounting_position_request()
 {
   for (int i = 0; i < font_table_size; i++) {
     font_info *fi = font_table[i];
