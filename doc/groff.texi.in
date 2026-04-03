@@ -9278,14 +9278,22 @@ disable auto-incrementation of the register.
 @cindex number format, assigning to register (@code{af})
 @cindex register, assigning number format to (@code{af})
 
-A writable register's value can be interpolated in several number
-formats.  By default, conventional Arabic numerals are used.
-Other formats see use in sectioning and outlining schemes and
-alternative page numbering arrangements.
+A writable register's value
+can be interpolated in several number formats.
+Conventional Arabic numerals are the default format;
+others see use in sectioning and outlining schemes
+and alternative page numbering arrangements.
 
+@need 1000
 @Defreq {af, reg fmt}
-Use number format @var{fmt} when interpolating register @var{reg}.
-Valid number formats are as follows.
+Apply number format
+@var{fmt}
+when interpolating register
+@var{reg}.
+The default format for all writable registers is
+@samp{0}.
+Specifying an unrecognized format is an error.
+Valid formats are as follows.
 
 @table @code
 @item 0@r{@dots{}}
@@ -9310,29 +9318,55 @@ interpolates values 1,
 @samp{01},
 @samp{02},
 @samp{03}.
-The default format for all writable registers is
-@samp{0}.
-Specifying an unrecognized format is an error.
 
 @item I
 @cindex Roman numerals
 @cindex numerals, Roman
-Uppercase Roman numerals: 0, I, II, III, IV,@tie{}@enddots{}
+Uppercase Roman numerals:@:
+0,
+I,
+II,
+III,
+IV,@tie{}@enddots{}
 
 @item i
-Lowercase Roman numerals: 0, i, ii, iii, iv,@tie{}@enddots{}
+Lowercase Roman numerals:@:
+0,
+i,
+ii,
+iii,
+iv,@tie{}@enddots{}
 
 @item A
-Uppercase letters: 0, A, B, C, @dots{},@tie{}Z, AA, AB,@tie{}@enddots{}
+Uppercase letters:@:
+0,
+A,
+B,
+C,
+@dots{},@tie{}Z,
+AA,
+AB,@tie{}@enddots{}
 
 @item a
-Lowercase letters: 0, a, b, c, @dots{},@tie{}z, aa, ab,@tie{}@enddots{}
+Lowercase letters:@:
+0,
+a,
+b,
+c,
+@dots{},@tie{}z,
+aa,
+ab,@tie{}@enddots{}
 @end table
 
-Zero values are interpolated as @samp{0} in non-Arabic formats.
-Negative quantities are prefixed with @samp{-} irrespective of format.
-In Arabic formats, the sign supplements the field width.  If @var{reg}
-doesn't exist, it is created with a zero value.
+The formatter interpolates zero values as
+@samp{0}
+and prefixes negative quantities with
+@samp{-}
+irrespective of format.
+In Arabic formats,
+the sign supplements the field width.
+Assigning a format to a nonexistent register
+creates it with a zero value.
 
 @Example
 .nr a 10
@@ -9379,11 +9413,14 @@ not Roman numeral characters from Unicode's Number Forms block.}
 
 @cindex read-only register, changing format
 @cindex changing format, and read-only registers
-Assigning the format of a read-only register is an error.  Instead, copy
-the read-only register's value to, and assign the format of, a writable
-register.
+Assigning the format of a read-only register is an error.
+Instead,
+copy the read-only register's value to,
+and assign the format of,
+a writable register.
 @endDefreq
 
+@need 1000
 @DefescList {\\g, , r, }
 @DefescItem {\\g, (, rg, }
 @DefescListEnd {\\g, [, reg, ]}
