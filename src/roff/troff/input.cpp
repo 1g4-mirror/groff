@@ -4672,10 +4672,11 @@ static void interpolate_macro_or_invoke_request(symbol nm,
   }
   if (p != 0 /* nullptr */)
     p->invoke(nm, do_not_want_next_token);
-  else {
+  else
     skip_line();
-    return;
-  }
+  assert(can_accept_control_character || tok.is_eof());
+  if (tok.is_newline())
+    can_accept_control_character = true;
 }
 
 static void decode_macro_call_arguments(macro_iterator *mi)

@@ -2,6 +2,12 @@
 
 	* src/roff/troff/input.cpp: Promote `process_input_stack()`'s
 	local `can_accept_control_character` from local to global.
+	(interpolate_macro_or_invoke_request): Drop early `return` when
+	no invokable request or callable macro exists on control line.
+	Add assert(3)ion at end of function to enforce invariant: once
+	we've processed a control line, either
+	`can_accept_control_character` must be true or the token pending
+	on the input stream must represent the end of input.
 
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
