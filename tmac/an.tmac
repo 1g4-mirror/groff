@@ -358,6 +358,9 @@
 .  rr HY
 .  rm AD
 .
+.  \" ...and clear any hyphenation exception words (groff 1.25).
+.  if d rhw .rhw
+.
 .  an*reset-hyphenation-mode \\n[andoc*HY]
 .  an*reset-adjustment-mode \\*[andoc*AD]
 .  an*reset-section-parameters

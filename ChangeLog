@@ -1,5 +1,15 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[man,mdoc]: Apply new `rhw` request, clearing the user-defined
+	hyphenation exception word list with every new man(7) or mdoc(7)
+	document.
+
+	* tmac/an.tmac (TH):
+	* tmac/doc-old.tmac (Dd):
+	* tmac/mdoc/doc-common (Dd): Do it.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Implement `rhw` request removing
 	user-defined hyphenation exception words.
 	(remove_hyphenation_exception_words_request): New function
