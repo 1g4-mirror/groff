@@ -10086,8 +10086,7 @@ even possible is an unsolved problem in computer science:@:
 unusual words found in technical literature.  We can instruct GNU
 @code{troff} how to hyphenate specific words if the need arises.
 
-@c TODO: Add request `rhw`; see Savannah #64478.
-@cindex hyphenation exception words
+@cindex hyphenation exception words, adding
 @Defreq {hw, word @dots{}}
 Define each argument @var{word}
 (comprising ordinary,
@@ -10146,6 +10145,15 @@ these exceptions override any rules
 that would normally apply to a word
 matching a hyphenation exception word defined with
 @code{hw}.
+
+@cindex hyphenation exception words, removing
+@Defreq {rhw}
+Empty the current hyphenation language's exception word list
+of all entries populated by the input.@footnote{GNU
+@command{troff} @c GNU
+retains those supplied by hyphenation pattern exception files;
+see below.}
+@endDefreq
 
 Situations also arise when only a specific occurrence of a word needs
 its hyphenation altered or suppressed, or when a URL or similar
@@ -10346,8 +10354,10 @@ non-zero even mode.
 @pindex hyphenex.cs
 @pindex hyphenex.en
 @pindex hyphenex.pl
-@cindex hyphenation pattern files
-@cindex pattern files, for hyphenation
+@cindex hyphenation pattern and exception files
+@cindex pattern and exception files, hyphenation
+@cindex exception file, hyphenation pattern
+@cindex file, hyphenation pattern or exception
 The automatic placement of hyphens in words is determined by
 @dfn{pattern files}, which are derived from @TeX{} and available for
 several languages.  These files are named @file{hyphen.@var{xx}} (for

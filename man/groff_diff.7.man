@@ -4193,6 +4193,12 @@ See
 .
 .
 .TP
+.B .rhw
+Empty the current hyphenation language's exception word list
+of all entries populated by the input.
+.
+.
+.TP
 .BR .rj\~ [\c
 .IR n ]
 Break,

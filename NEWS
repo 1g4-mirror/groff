@@ -43,6 +43,10 @@ troff
    the request (and issues a warning in category "range"), leaving the
    operand (first request argument) unchanged instead of emptying it.
 
+*  A new request, `rhw`, clears the current hyphenation language's list
+   of user-defined hyphenation exception words.  Those supplied by files
+   like "tmac/hyphenex.{cs,en,pl}" are retained.
+
 Macro packages
 --------------
 

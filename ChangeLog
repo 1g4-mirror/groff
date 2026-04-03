@@ -1,5 +1,26 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Implement `rhw` request removing
+	user-defined hyphenation exception words.
+	(remove_hyphenation_exception_words_request): New function
+	empties the current language's hyphenation exception word
+	dictionary of all entries populated by the input.  (We retain
+	those supplied by files like "tmac/hyphenex.{cs,en,pl}".)
+	(init_hyphenation_pattern_requests): Wire up `rhw` request name
+	to `remove_hyphenation_exception_words_request()`.
+
+	* src/roff/groff/tests/rhw-request-works.sh: Test it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	* doc/groff.texi.in (Manipulating Hyphenation):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Document it.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?64478>.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/dictionary.cpp (dictionary_iterator::get):
 	Accept a null pointer as second argument, to handle situation
 	where the caller is interested only in the dictionary's keys.

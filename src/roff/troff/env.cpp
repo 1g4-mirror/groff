@@ -3955,6 +3955,33 @@ static void add_hyphenation_exception_words_request() // .hw
   skip_line();
 }
 
+static void remove_hyphenation_exception_words_request() // .rhw
+{
+  if (0 /* nullptr */ == current_language) {
+    error("cannot remove hyphenation exception words when no"
+	  " hyphenation language is selected");
+    skip_line();
+    return;
+  }
+  dictionary_iterator iter(current_language->exceptions);
+  symbol entry;
+  if (!has_arg()) {
+    while (iter.get(&entry, 0 /* nullptr */)) {
+      assert(!entry.is_null());
+      // The exception word symbol's contents contains a space if it's
+      // _not_ user-defined.  Kind of kludgy, but possibly not worth
+      // fixing without also migrating to an STL unordered_map or
+      // similar, and using a `struct` with a string and a `bool` in it
+      // as the values.
+      if (strchr(entry.contents(), ' ') == 0 /* nullptr */)
+	current_language->exceptions.remove(entry.contents());
+    }
+  }
+  // TODO: Else read each argument as a word, normalize any hyphens
+  // (dashes) out of it, and remove it from the exceptions dictionary.
+  skip_line();
+}
+
 static void print_hyphenation_exceptions_request() // .phw
 {
   if (0 /* nullptr */ == current_language) {
@@ -3983,6 +4010,9 @@ static void print_hyphenation_exceptions_request() // .phw
 	wordbuf[j++] = '-';
 	hypoint++;
       }
+      // The exception word symbol's contents contains a space if it's
+      // _not_ user-defined.  See
+      // `remove_hyphenation_exception_words_request()` above.
       if (word[i] == ' ') {
 	assert(i == (len - 1));
 	is_mode_dependent = true;
@@ -4697,6 +4727,7 @@ void init_hyphenation_pattern_requests()
   init_request("hpfa", append_hyphenation_patterns_from_file_request);
   init_request("hw", add_hyphenation_exception_words_request);
   init_request("phw", print_hyphenation_exceptions_request);
+  init_request("rhw", remove_hyphenation_exception_words_request);
 }
 
 // Local Variables:
