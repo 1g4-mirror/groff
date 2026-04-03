@@ -1,5 +1,15 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (process_input_stack): Slightly
+	refactor.  Align element type of templated STL `stack` container
+	with the local variable representing its top: demote from `int`
+	to `bool`.  Rename the stack object from `trap_bol_stack` to
+	`trap_accepting_control_character_stack` and the (effective) top
+	from `reading_beginning_of_input_line` to
+	`can_accept_control_character`.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Slightly refactor.  Resequence
 	prototypes and forward declarations.
 

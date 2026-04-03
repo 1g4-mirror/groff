@@ -3524,15 +3524,15 @@ static int leading_spaces_space = 0;
 
 void process_input_stack()
 {
-  std::stack<int> trap_bol_stack;
-  bool reading_beginning_of_input_line = true;
+  std::stack<bool> trap_accepting_control_character_stack;
+  bool can_accept_control_character = true;
   for (;;) {
     bool ignore_next_token = false;
     switch (tok.type) {
     case token::TOKEN_CHAR:
       {
 	unsigned char ch = tok.c;
-	if (reading_beginning_of_input_line && !have_formattable_input
+	if (can_accept_control_character && !have_formattable_input
 	    && (curenv->get_control_character() == ch
 		|| curenv->get_no_break_control_character() == ch)) {
 	  was_invoked_with_regular_control_character
@@ -3593,14 +3593,14 @@ void process_input_stack()
 	      ch = tok.c;
 	    }
 	    ignore_next_token = true;
-	    reading_beginning_of_input_line = false;
+	    can_accept_control_character = false;
 	  }
 	}
 	break;
       }
     case token::TOKEN_TRANSPARENT:
       {
-	if (reading_beginning_of_input_line) {
+	if (can_accept_control_character) {
 	  if (possibly_handle_first_page_transition())
 	    ;
 	  else {
@@ -3623,13 +3623,13 @@ void process_input_stack()
       }
     case token::TOKEN_NEWLINE:
       {
-	if (reading_beginning_of_input_line
+	if (can_accept_control_character
 	    && !have_formattable_input_on_interrupted_line
 	    && !curenv->get_was_previous_line_interrupted())
 	  trapping_blank_line();
 	else {
 	  curenv->newline();
-	  reading_beginning_of_input_line = true;
+	  can_accept_control_character = true;
 	}
 	break;
       }
@@ -3667,7 +3667,7 @@ void process_input_stack()
 		  tok.description());
 	else if (possibly_handle_first_page_transition())
 	  ;
-	else if (reading_beginning_of_input_line
+	else if (can_accept_control_character
 		 && !curenv->get_was_previous_line_interrupted()) {
 	  int nspaces = 0;
 	  // save space_width now so that it isn't changed by \f or \s
@@ -3690,12 +3690,12 @@ void process_input_stack()
 	      curenv->add_node(new hmotion_node(space_width * nspaces,
 						curenv->get_fill_color()));
 	    }
-	    reading_beginning_of_input_line = false;
+	    can_accept_control_character = false;
 	  }
 	}
 	else {
 	  curenv->space();
-	  reading_beginning_of_input_line = false;
+	  can_accept_control_character = false;
 	}
 	break;
       }
@@ -3716,44 +3716,48 @@ void process_input_stack()
       }
       else if (possibly_handle_first_page_transition())
 	;
-      else if (tok.nd->need_reread(&reading_beginning_of_input_line)) {
+      else if (tok.nd->need_reread(&can_accept_control_character)) {
 	delete tok.nd;
 	tok.nd = 0;
       }
       else {
 	curenv->add_node(tok.nd);
 	tok.nd = 0;
-	reading_beginning_of_input_line = false;
+	can_accept_control_character = false;
 	curenv->possibly_break_line(true /* must break here */);
       }
       break;
     case token::TOKEN_PAGE_EJECTOR:
       {
 	continue_page_eject();
-	// I think we just want to preserve bol.
-	// reading_beginning_of_input_line = true;
+	// JJC noted circa 1990 that we probably want to leave control
+	// character acceptance state (`can_accept_control_character`)
+	// as-is for this case.  It might be worth experimenting to
+	// verify that.  --GBR
 	break;
       }
     case token::TOKEN_BEGIN_TRAP:
       {
-	trap_bol_stack.push(reading_beginning_of_input_line);
-	reading_beginning_of_input_line = true;
+	trap_accepting_control_character_stack
+	  .push(can_accept_control_character);
+	can_accept_control_character = true;
 	have_formattable_input = false;
 	break;
       }
     case token::TOKEN_END_TRAP:
       {
-	if (trap_bol_stack.empty())
+	if (trap_accepting_control_character_stack.empty())
 	  error("spurious end trap token detected!");
 	else {
-	  reading_beginning_of_input_line = trap_bol_stack.top();
-	  trap_bol_stack.pop();
+	  can_accept_control_character
+	    = trap_accepting_control_character_stack.top();
+	  trap_accepting_control_character_stack.pop();
 	}
 	have_formattable_input = false;
 
-	/* I'm not totally happy about this.  But I can't think of any other
-	  way to do it.  Doing an output_pending_lines() whenever a
-	  TOKEN_END_TRAP is detected doesn't work: for example,
+	/* I'm not totally happy about this.  But I can't think of any
+	   other way to do it.  Doing an output_pending_lines() whenever
+	   a TOKEN_END_TRAP is detected doesn't work: for example,
 
 	  .wh -1i x
 	  .de x
@@ -3769,9 +3773,9 @@ void process_input_stack()
 	  a\%very\%very\%long\%word
 
 	  will print all but the first lines from the word immediately
-	  after the footer, rather than on the next page. */
+	  after the footer, rather than on the next page.  --JJC */
 
-	if (trap_bol_stack.empty())
+	if (trap_accepting_control_character_stack.empty())
 	  curenv->output_pending_lines();
 	break;
       }
@@ -3783,13 +3787,13 @@ void process_input_stack()
 		" line continuation escape sequence",
 		tok.description());
       else {
-	reading_beginning_of_input_line = false;
+	can_accept_control_character = false;
 	tok.process();
       }
       break;
     default:
       {
-	reading_beginning_of_input_line = false;
+	can_accept_control_character = false;
 	tok.process();
 	break;
       }
