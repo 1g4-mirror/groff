@@ -1,5 +1,10 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.  Retype
+	`default_buffer_size` from `int` to more idiomatic `size_t`.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(interpolate_macro): Rename this...
 	(interpolate_macro_or_invoke_request): ...to this.

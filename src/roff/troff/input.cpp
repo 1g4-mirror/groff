@@ -100,7 +100,7 @@ extern "C" const char *program_name;
 extern "C" const char *Version_string;
 
 // initial size for input buffers that need to grow arbitrarily
-static const int default_buffer_size = 16;
+static const size_t default_buffer_size = 16;
 
 #ifdef COLUMN
 void init_column_requests();
