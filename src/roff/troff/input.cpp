@@ -9520,6 +9520,7 @@ void system_request()
   else
     system_status = system(command);
   delete[] command;
+  // XXX: Why not `skip_line()`?
   tok.next();
 }
 
@@ -9546,6 +9547,7 @@ static void unsafe_transparent_throughput_file_request()
   if (filename != 0 /* nullptr */)
     curdiv->copy_file(filename);
   // TODO: Add `filename` to file name set.
+  // XXX: Why not `skip_line()`?
   tok.next();
 }
 
