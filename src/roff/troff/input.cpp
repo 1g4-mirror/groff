@@ -5524,7 +5524,7 @@ static void do_define_macro(define_mode mode, calling_mode calling,
   else if (COMP_ENABLE == comp)
     mac.append(PUSH_COMP_MODE);
   for (;;) {
-    if (c == '\n')
+    if ('\n' == c)
       mac.clear_string_flag();
     while (ESCAPE_NEWLINE == c) {
       if ((DEFINE_NORMAL == mode) || (DEFINE_APPEND == mode))
@@ -5532,7 +5532,7 @@ static void do_define_macro(define_mode mode, calling_mode calling,
 	mac.append(static_cast<unsigned char>(c));
       c = read_char_in_copy_mode(&n, true /* is_defining */);
     }
-    if (reading_beginning_of_input_line && (c == '.')) {
+    if (reading_beginning_of_input_line && ('.' == c)) {
       const char *s = term.contents();
       int d = '\0';
       // see if it matches term
@@ -5610,7 +5610,7 @@ static void do_define_macro(define_mode mode, calling_mode calling,
 	// TODO: grochar; may need NFD decomposition and UTF-8 encoding
 	mac.append(static_cast<unsigned char>(c));
     }
-    reading_beginning_of_input_line = (c == '\n');
+    reading_beginning_of_input_line = ('\n' == c);
     c = read_char_in_copy_mode(&n, true /* is_defining */);
   }
 }
@@ -9605,7 +9605,7 @@ static void transparent_throughput_file_request()
 		    " transparent file throughput; ignoring", int(c));
 	  else {
 	    curdiv->transparent_output(c);
-	    reading_beginning_of_input_line = c == '\n';
+	    reading_beginning_of_input_line = ('\n' == c);
 	  }
 	}
 	if (!reading_beginning_of_input_line)

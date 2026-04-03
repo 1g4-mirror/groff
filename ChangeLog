@@ -1,5 +1,12 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (do_define_macro)
+	(transparent_throughput_file_request): Fix code style nits.
+	Arrange equality comparisons to avoid inadvertent lvalue
+	assignment.  Parenthesize formally complex expressions.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (process_input_stack): Slightly
 	refactor.  Align element type of templated STL `stack` container
 	with the local variable representing its top: demote from `int`
