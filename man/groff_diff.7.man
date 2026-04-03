@@ -81,22 +81,24 @@ by the
 .I troff \" generic
 formatter.
 .
-We also note here differences arising from
+We also note differences arising from
 .IR groff 's
 implementation of AT&T
 .I troff \" AT&T
-features.
-.
-The following discussion assumes familiarity with those features;
+features,
+and assume
+familiarity with them;
 see
 .MR roff @MAN7EXT@
 for background.
 .
 GNU
 .I troff \" GNU
-can operate in a manner that increases support
-for documents written for AT&T
-.IR troff ; \" AT&T
+can operate in a manner that better supports
+documents expecting only
+AT&T
+.I troff \" AT&T
+as the formatter;
 see section \[lq]Compatibility mode\[rq] below.
 .
 .
