@@ -6776,7 +6776,7 @@ static bool is_nonnegative_integer(const char *str)
   return strspn(str, "0123456789") == strlen(str);
 }
 
-static void translate_font() // .ftr
+static void translate_font_request() // .ftr
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font translation request expects one or two"
@@ -6819,7 +6819,7 @@ static void print_font_translation_request() // .pftr
   return;
 }
 
-static void mount_font_at_position() // .fp
+static void mount_font_at_position_request() // .fp
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font mounting request expects arguments");
@@ -6939,7 +6939,7 @@ void font_family::invalidate_fontno(int n)
   }
 }
 
-static void associate_style_with_font_position() // .sty
+static void associate_style_with_font_position_request() // .sty
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "abstract style configuration request expects"
@@ -7020,7 +7020,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
 
 static int underline_fontno = 2;
 
-static void select_underline_font() // .uf
+static void select_underline_font_request() // .uf
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "underline font selection request expects an"
@@ -7041,7 +7041,7 @@ int get_underline_fontno()
   return underline_fontno;
 }
 
-static void define_font_specific_character() // .fschar
+static void define_font_specific_character_request() // .fschar
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font-specific fallback character definition"
@@ -7064,7 +7064,7 @@ static void define_font_specific_character() // .fschar
   }
 }
 
-static void remove_font_specific_character() // .rfschar
+static void remove_font_specific_character_request() // .rfschar
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font-specific fallback character removal"
@@ -7129,7 +7129,7 @@ static void read_special_fonts(special_font_list **sp)
   }
 }
 
-static void set_font_specific_special_fonts() // .fspecial
+static void set_font_specific_special_fonts_request() // .fspecial
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font-specific special font selection request"
@@ -7146,13 +7146,13 @@ static void set_font_specific_special_fonts() // .fspecial
   skip_line();
 }
 
-static void set_special_fonts() // .special
+static void set_special_fonts_request() // .special
 {
   read_special_fonts(&global_special_fonts);
   skip_line();
 }
 
-static void zoom_font() // .fzoom
+static void zoom_font_request() // .fzoom
 {
   if (!(has_arg())) {
     warning(WARN_MISSING, "font zoom factor request expects arguments");
@@ -7303,7 +7303,7 @@ hunits env_narrow_space_width(environment *env)
 // not position.  Does ".bd 1 2" mean "embolden font position 1 by 2
 // units" (really one unit), or "stop conditionally emboldening font 2
 // when font 1 is selected"?
-static void embolden_font() // .bd
+static void embolden_font_request() // .bd
 {
   if (!(has_arg())) {
     warning(WARN_MISSING, "emboldening request expects arguments");
@@ -7446,7 +7446,7 @@ hunits track_kerning_function::compute(int size)
     return H0;
 }
 
-static void configure_track_kerning() // .tkf
+static void configure_track_kerning_request() // .tkf
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "track kerning request expects arguments");
@@ -7475,7 +7475,7 @@ static void configure_track_kerning() // .tkf
   skip_line();
 }
 
-static void constantly_space_font() // .cs
+static void constantly_space_font_request() // .cs
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "constant spacing request expects arguments");
@@ -7502,7 +7502,7 @@ static void constantly_space_font() // .cs
   skip_line();
 }
 
-static void set_ligature_mode() // .lg
+static void set_ligature_mode_request() // .lg
 {
   int lig;
   if (has_arg() && read_integer(&lig) && lig >= 0 && lig <= 2)
@@ -7512,7 +7512,7 @@ static void set_ligature_mode() // .lg
   skip_line();
 }
 
-static void set_kerning_mode() // .kern
+static void set_kerning_mode_request() // .kern
 {
   int k;
   if (has_arg() && read_integer(&k))
@@ -7571,23 +7571,23 @@ const char *printing_reg::get_string()
 
 void init_node_requests()
 {
-  init_request("bd", embolden_font);
-  init_request("cs", constantly_space_font);
-  init_request("fp", mount_font_at_position);
-  init_request("fschar", define_font_specific_character);
-  init_request("fspecial", set_font_specific_special_fonts);
-  init_request("fzoom", zoom_font);
-  init_request("ftr", translate_font);
-  init_request("kern", set_kerning_mode);
-  init_request("lg", set_ligature_mode);
+  init_request("bd", embolden_font_request);
+  init_request("cs", constantly_space_font_request);
+  init_request("fp", mount_font_at_position_request);
+  init_request("fschar", define_font_specific_character_request);
+  init_request("fspecial", set_font_specific_special_fonts_request);
+  init_request("fzoom", zoom_font_request);
+  init_request("ftr", translate_font_request);
+  init_request("kern", set_kerning_mode_request);
+  init_request("lg", set_ligature_mode_request);
   init_request("pfp", print_font_mounting_position_request);
   init_request("pftr", print_font_translation_request);
-  init_request("rfschar", remove_font_specific_character);
+  init_request("rfschar", remove_font_specific_character_request);
   init_request("shc", soft_hyphen_character_request);
-  init_request("special", set_special_fonts);
-  init_request("sty", associate_style_with_font_position);
-  init_request("tkf", configure_track_kerning);
-  init_request("uf", select_underline_font);
+  init_request("special", set_special_fonts_request);
+  init_request("sty", associate_style_with_font_position_request);
+  init_request("tkf", configure_track_kerning_request);
+  init_request("uf", select_underline_font_request);
   register_dictionary.define(".fp",
 			     new next_available_font_position_reg);
   register_dictionary.define(".kern",

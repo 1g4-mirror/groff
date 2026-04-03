@@ -1,5 +1,37 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (translate_font)
+	(mount_font_at_position)
+	(associate_style_with_font_position)
+	(select_underline_font)
+	(define_font_specific_character)
+	(remove_font_specific_character)
+	(set_font_specific_special_fonts)
+	(set_special_fonts)
+	(zoom_font)
+	(embolden_font)
+	(configure_track_kerning)
+	(constantly_space_font)
+	(set_ligature_mode)
+	(set_kerning_mode): Rename these...
+	(translate_font_request)
+	(mount_font_at_position_request)
+	(associate_style_with_font_position_request)
+	(select_underline_font_request)
+	(define_font_specific_character_request)
+	(remove_font_specific_character_request)
+	(set_font_specific_special_fonts_request)
+	(set_special_fonts_request)
+	(zoom_font_request)
+	(embolden_font_request)
+	(configure_track_kerning_request)
+	(constantly_space_font_request)
+	(set_ligature_mode_request)
+	(set_kerning_mode_request): ...to these, following a developing
+	convention of naming request handlers to end with "_request".
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp
 	(print_font_mounting_position_request): Declare as `static`
 	since it does not require external linkage.
