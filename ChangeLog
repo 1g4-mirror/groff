@@ -1,5 +1,14 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/dictionary.cpp (dictionary_iterator::get):
+	Accept a null pointer as second argument, to handle situation
+	where the caller is interested only in the dictionary's keys.
+	Dereference the pointer only if that argument is not null.
+	{There was no check for this previously; were I not making this
+	change, I'd be assert(3)ing that instead.}
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Promote `process_input_stack()`'s
 	local `can_accept_control_character` from local to global.
 	(interpolate_macro_or_invoke_request): Drop early `return` when
