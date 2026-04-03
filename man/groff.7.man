@@ -1563,25 +1563,27 @@ Break suppression is its sole behavioral distinction.
 Employing the no-break control character
 to invoke requests that don't cause breaks
 is harmless but poor style.
+.\" @xref{Manipulating Filling and Adjustment}.
 .
 .
 .P
-The control character
-.RB \[lq] .\& \[rq]
-and the no-break control character
-.RB \[lq] \|\[aq]\| \[rq]
-can be changed with the
+The
 .B cc
 and
 .B c2
-requests,
-respectively.
+requests respectively change
+the control
+.RB \[lq] .\& \[rq]
+and no-break control
+.RB \[lq] \|\[aq]\| \[rq]
+characters to any desired ordinary character
+(see section \[lq]Identifiers\[rq] above),
+but must be distinct.
 .
-Within a macro definition,
-.\" you might wish to know
-register
+While a macro definition is interpreted,
+the
 .B .br
-indicates the control character used to call it.
+register permits discovery of the control character used in the call.
 .\" END Keep (roughly) parallel with groff.texi node "Control
 .\" Characters".
 .

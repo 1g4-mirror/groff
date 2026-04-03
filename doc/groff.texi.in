@@ -7992,12 +7992,14 @@ available via both requests and escape sequences.
 @cindex configuring control characters
 @cindex changing control characters
 
+@c BEGIN Keep (roughly) parallel with section "Control characters" of
+@c groff(7).
 The mechanism of using @code{roff}'s control characters to invoke
 requests and call macros was introduced in @ref{Requests and Macros}.
 The formatter recognizes a control character
 only at the beginning of an input line,
-or at the beginning of a branch of a control structure request;
-see @ref{Conditionals and Loops}.
+or at the beginning of a branch
+of a control structure request.@footnote{@xref{Conditionals and Loops}.}
 
 A few requests cause a break implicitly;
 invoke them with the no-break control character
@@ -8005,25 +8007,35 @@ to prevent the break.
 Break suppression is its sole behavioral distinction.
 Employing the no-break control character
 to invoke requests that don't cause breaks
-is harmless but poor style.
-@xref{Manipulating Filling and Adjustment}.
+is harmless
+but poor style.@footnote{@xref{Manipulating Filling and Adjustment}.}
 
 @cindex control character, changing (@code{cc})
 @cindex character, control, changing (@code{cc})
 @cindex no-break control character, changing (@code{c2})
 @cindex character, no-break control, changing (@code{c2})
 @cindex control character, no-break, changing (@code{c2})
-The control @samp{.} and no-break control @samp{'} characters can each
-be changed to any ordinary character@footnote{Recall @ref{Identifiers}.}
-with the @code{cc} and @code{c2} requests, respectively.
+The
+@code{cc}
+and
+@code{c2}
+requests respectively change
+the control
+@samp{.}
+and no-break control
+@samp{'}
+characters to any desired ordinary character
+(recall @ref{Identifiers}),
+but must be distinct.
 
 @Defreq {cc, [@Var{o}]}
 Recognize the ordinary character@tie{}@var{o} as the control character.
 If@tie{}@var{o} is absent or invalid, the default control character
 @samp{.} is selected.  If @var{o} (or @samp{.} if @var{o} is invalid) is
 already the escape or no-break control character, an error is diagnosed
-and the request ignored.  The identity of the control character is
-associated with the environment (@pxref{Environments}).
+and the request ignored.
+The identity of the control character
+is associated with the environment.@footnote{@xref{Environments}.}
 @endDefreq
 
 @Defreq {c2, [@Var{o}]}
@@ -8031,13 +8043,15 @@ Recognize the ordinary character@tie{}@var{o} as the no-break control
 character.  If@tie{}@var{o} is absent or invalid, the default no-break
 control character @samp{'} is selected.  If @var{o} (or @samp{'} if
 @var{o} is invalid) is already the escape or control character, an error
-is diagnosed and the request ignored.  The identity of the no-break
-control character is associated with the environment
-(@pxref{Environments}).
+is diagnosed and the request ignored.
+The identity of the no-break control character
+is associated with the environment.@footnote{@xref{Environments}.}
 @endDefreq
 
-When writing a macro, you might wish to know which control character was
-used to call it.
+While a macro definition is interpreted,
+the
+@code{.br}
+register permits discovery of the control character used in the call.
 
 @Defreg {.br}
 This read-only register interpolates@tie{}1
@@ -8049,6 +8063,8 @@ the
 @code{.br}
 register inherits its value
 from the context of the string interpolation.@footnote{@xref{Strings}.}
+@c END Keep (roughly) parallel with section "Control characters" of
+@c groff(7).
 
 @cindex intercepting requests
 @cindex requests, intercepting
@@ -8118,11 +8134,21 @@ does not interpret tabs as argument separators.@footnote{Plan@tie{}9
 @command{troff} @c Plan 9
 does.}
 
-Generally, a space @emph{within} a request argument is not relevant, not
-meaningful, or is supported by bespoke provisions, as with the @code{tl}
-request's delimiters (@pxref{Page Layout}).  Some requests, like
-@code{ds}, interpret the remainder of the control line as a single
-argument.  @xref{Strings}.
+Generally,
+a space
+@emph{within}
+a request argument is not relevant,
+not meaningful,
+or is supported by bespoke provisions,
+as with the
+@code{tl}
+request's delimiters
+(@pxref{Page Layout}).
+Some requests,
+like
+@code{ds},
+interpret the remainder of the control line
+as a single argument.@footnote{@xref{Strings}.}
 
 @need 1000
 @cindex structuring source code of documents or macro packages
@@ -8130,9 +8156,13 @@ argument.  @xref{Strings}.
 @cindex macro package, structuring the source of
 @cindex package, package, structuring the source of
 @cindex indentation, of @code{roff} source code
-Spaces and tabs immediately after a control character are ignored.
-Commonly, authors use them to indent the source of documents or macro
-files.
+Commonly,
+authors use spaces and/or tabs after a control character
+to indent the source of documents or macro files.
+The formatter ignores spaces and tabs
+immediately after a control character,
+except that the presence of a tab
+prevents recognition of the end of a macro definition.
 
 @Example
 .de center
@@ -22430,6 +22460,14 @@ does not.
 GNU
 @command{troff} @c GNU
 rejects C0 controls in identifiers with an error diagnostic.
+
+In
+DWB and Plan@tie{}9 from User Space
+@code{troff}, @c DWB, Plan 9
+spaces or tabs between the ordinary control character and a
+@samp{.}@:
+or macro name that would normally end a macro definition
+prevent it from doing so.
 
 Formatters that don't implement
 GNU

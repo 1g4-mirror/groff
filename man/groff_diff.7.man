@@ -6636,6 +6636,16 @@ rejects C0 controls in identifiers with an error diagnostic.
 .
 .
 .P
+In
+DWB and Plan\~9 from User Space
+.I troff, \" DWB, Plan 9
+spaces or tabs between the ordinary control character and a
+.RB \[lq] .\& \[rq]
+or macro name that would normally end a macro definition
+prevent it from doing so.
+.
+.
+.P
 Formatters that don't implement
 GNU
 .I troff \" GNU
