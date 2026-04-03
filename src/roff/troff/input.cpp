@@ -4766,8 +4766,8 @@ static void decode_escape_sequence_arguments(macro_iterator *mi)
 	else {
 	  if (c == '\t' && quote_input_level == 0 && !was_warned)
 	  {
-	    warning(WARN_TAB, "tab character in parameterized escape"
-		    " sequence");
+	    warning(WARN_TAB, "a tab character is invalid in a"
+		    " parameterized escape sequence");
 	    was_warned = true;
 	  }
 	  arg.append(c);
