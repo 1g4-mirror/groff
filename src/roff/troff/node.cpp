@@ -6708,7 +6708,7 @@ static bool mount_font_no_translate(int n, symbol name, symbol filename,
   return true;
 }
 
-static void print_font_mounting_position_request()
+static void print_font_mounting_position_request() // .pfp
 {
   for (int i = 0; i < font_table_size; i++) {
     font_info *fi = font_table[i];
@@ -6776,7 +6776,7 @@ static bool is_nonnegative_integer(const char *str)
   return strspn(str, "0123456789") == strlen(str);
 }
 
-static void translate_font()
+static void translate_font() // .ftr
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font translation request expects one or two"
@@ -6806,7 +6806,7 @@ static void translate_font()
   skip_line();
 }
 
-static void print_font_translation_request()
+static void print_font_translation_request() // .pftr
 {
   dictionary_iterator iter(font_translation_dictionary);
   symbol from, to;
@@ -6819,7 +6819,7 @@ static void print_font_translation_request()
   return;
 }
 
-static void mount_font_at_position()
+static void mount_font_at_position() // .fp
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font mounting request expects arguments");
@@ -6939,7 +6939,7 @@ void font_family::invalidate_fontno(int n)
   }
 }
 
-static void associate_style_with_font_position()
+static void associate_style_with_font_position() // .sty
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "abstract style configuration request expects"
@@ -7020,7 +7020,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
 
 static int underline_fontno = 2;
 
-static void select_underline_font()
+static void select_underline_font() // .uf
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "underline font selection request expects an"
@@ -7041,7 +7041,7 @@ int get_underline_fontno()
   return underline_fontno;
 }
 
-static void define_font_specific_character()
+static void define_font_specific_character() // .fschar
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font-specific fallback character definition"
@@ -7064,7 +7064,7 @@ static void define_font_specific_character()
   }
 }
 
-static void remove_font_specific_character()
+static void remove_font_specific_character() // .rfschar
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font-specific fallback character removal"
@@ -7129,7 +7129,7 @@ static void read_special_fonts(special_font_list **sp)
   }
 }
 
-static void set_font_specific_special_fonts()
+static void set_font_specific_special_fonts() // .fspecial
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "font-specific special font selection request"
@@ -7146,13 +7146,13 @@ static void set_font_specific_special_fonts()
   skip_line();
 }
 
-static void set_special_fonts()
+static void set_special_fonts() // .special
 {
   read_special_fonts(&global_special_fonts);
   skip_line();
 }
 
-static void zoom_font()
+static void zoom_font() // .fzoom
 {
   if (!(has_arg())) {
     warning(WARN_MISSING, "font zoom factor request expects arguments");
@@ -7303,7 +7303,7 @@ hunits env_narrow_space_width(environment *env)
 // not position.  Does ".bd 1 2" mean "embolden font position 1 by 2
 // units" (really one unit), or "stop conditionally emboldening font 2
 // when font 1 is selected"?
-static void embolden_font()
+static void embolden_font() // .bd
 {
   if (!(has_arg())) {
     warning(WARN_MISSING, "emboldening request expects arguments");
@@ -7446,7 +7446,7 @@ hunits track_kerning_function::compute(int size)
     return H0;
 }
 
-static void configure_track_kerning()
+static void configure_track_kerning() // .tkf
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "track kerning request expects arguments");
@@ -7475,7 +7475,7 @@ static void configure_track_kerning()
   skip_line();
 }
 
-static void constantly_space_font()
+static void constantly_space_font() // .cs
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "constant spacing request expects arguments");
@@ -7502,7 +7502,7 @@ static void constantly_space_font()
   skip_line();
 }
 
-static void set_ligature_mode()
+static void set_ligature_mode() // .lg
 {
   int lig;
   if (has_arg() && read_integer(&lig) && lig >= 0 && lig <= 2)
@@ -7512,7 +7512,7 @@ static void set_ligature_mode()
   skip_line();
 }
 
-static void set_kerning_mode()
+static void set_kerning_mode() // .kern
 {
   int k;
   if (has_arg() && read_integer(&k))
@@ -7528,7 +7528,7 @@ static void set_kerning_mode()
 //
 // XXX: The soft hyphen character is global; shouldn't it be
 // environmental?
-static void soft_hyphen_character_request()
+static void soft_hyphen_character_request() // .shc
 {
   soft_hyphen_char = read_character();
   if (0 /* nullptr */ == soft_hyphen_char)
