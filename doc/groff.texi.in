@@ -8102,7 +8102,7 @@ unrecognized request is interpreted as a macro call.  Defining a macro
 with the same name as a request replaces the request.  Deleting a
 request name with the @code{rm} request makes it unavailable.  The
 @code{als} request can alias requests, permitting them to be wrapped or
-non-destructively replaced.  @xref{Strings}.
+non-destructively replaced.@footnote{@xref{Strings}.}
 
 @cindex request arguments
 @cindex arguments to requests
@@ -8142,15 +8142,13 @@ not meaningful,
 or is supported by bespoke provisions,
 as with the
 @code{tl}
-request's delimiters
-(@pxref{Page Layout}).
+request's delimiters.@footnote{@xref{Page Layout}.}
 Some requests,
 like
 @code{ds},
 interpret the remainder of the control line
 as a single argument.@footnote{@xref{Strings}.}
 
-@need 1000
 @cindex structuring source code of documents or macro packages
 @cindex documents, structuring the source of
 @cindex macro package, structuring the source of
@@ -8181,8 +8179,10 @@ prevents recognition of the end of a macro definition.
 
 @cindex blank line trap (@code{blm})
 @cindex blank line macro (@code{blm})
-If you assign an empty blank line trap, you can separate macro
-definitions (or any input lines) with blank lines.
+If you assign an empty blank line trap,
+you can separate macro definitions
+(or any input lines)
+with blank lines.@footnote{@xref{Blank Line Traps}.}
 
 @Example
 .de do-nothing
@@ -8204,8 +8204,6 @@ definitions (or any input lines) with blank lines.
 
 .blm             \" deactivate blank line trap
 @endExample
-
-@xref{Blank Line Traps}.
 @c END Keep (roughly) parallel with section "Invoking requests" of
 @c groff(7).
 
@@ -8228,14 +8226,19 @@ emits a warning in category
 @xref{Warnings}.}
 Calling an undefined macro
 @emph{does}
-end a macro definition naming it as its end macro
-(@pxref{Writing Macros}).
+end a macro definition naming it
+as its end macro.@footnote{@xref{Writing Macros}.}
 
 @cindex spaces, in a macro argument
-To embed spaces @emph{within} a macro argument, enclose the argument in
-neutral double quotes @code{"}.  Horizontal motion escape sequences are
-sometimes a better choice for arguments to be formatted as text.
+To embed spaces
+@emph{within}
+a macro argument,
+enclose the argument in neutral double quotes
+@code{"}.
+Horizontal motion escape sequences
+are sometimes a better choice for arguments to be formatted as text.
 
+@need 1000
 Consider calls to a hypothetical section heading macro @samp{uh}.
 
 @Example
