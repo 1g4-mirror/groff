@@ -7069,6 +7069,11 @@ You can also define your own.
 See section \[lq]Identifiers\[rq] above
 regarding the construction of valid names for registers.
 .
+The register name space is separate from that used for requests,
+macros,
+strings,
+and diversions.
+.
 .
 .P
 Each register
@@ -7110,29 +7115,27 @@ these features are called
 .
 (A negative auto-increment can be
 considered an \[lq]auto-decrement\[rq].)
+.\" END Keep (roughly) parallel with groff.texi node "Registers".
 .
 .
 .P
 Many predefined registers are available.
 .
-The following presentation uses
-register interpolation syntax
-.BI \[rs]n[ name ]
+A register synopsis in this document uses interpolation syntax
+.BI \[rs]n[ ident ]
 to refer to a register
-.I name
-to clearly distinguish it from a string or request
-.IR name ;
+.I ident
+to distinguish it from a
+macro,
+string,
+diversion,
+or request
+.IR ident ;
 the symbols
-.B \[rs]n[]
+.RB \[lq] \[rs]n[] \[rq]
 are
 .I not
-part of the register name.
-.
-The register name space is separate from that used for requests,
-macros,
-strings,
-and diversions.
-.\" END Keep (roughly) parallel with groff.texi node "Registers".
+part of the register's identifier.
 .
 .
 .\" ====================================================================
