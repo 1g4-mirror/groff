@@ -4938,15 +4938,23 @@ Their names often correspond to the requests that affect them.
 .
 .TP 14n \" "\n[.hydefault]" + 2n
 .B \[rs]n[.br]
-Within a macro definition,
-interpolate\~1
-if the macro is called with the \[lq]normal\[rq] control character
-(\[lq].\[rq] by default),
+Interpolate\~1
+if the currently executing macro was called
+using the normal control character
 and\~0 otherwise.
 .
-This facility allows requests to be reliably wrapped by a macro.
+If a macro is interpolated as a string,
+the
+.B .br
+register inherits its value
+from the context of the string interpolation.
+.\" @footnote{@xref{Strings}.}
 .
-Interpolating the
+Use the
+.B .br
+register to reliably wrap or intercept requests that imply breaks.
+.
+Testing the
 .B .br
 register outside of a macro definition makes no sense.
 .

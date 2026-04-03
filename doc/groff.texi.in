@@ -8040,17 +8040,23 @@ When writing a macro, you might wish to know which control character was
 used to call it.
 
 @Defreg {.br}
-This read-only register interpolates@tie{}1 if the currently executing
-macro was called using the normal control character and@tie{}0
-otherwise.  If a macro is interpolated as a string, the @code{.br}
-register's value is inherited from the context of the string
-interpolation.  @xref{Strings}.
+This read-only register interpolates@tie{}1
+if the currently executing macro was called
+using the normal control character
+and@tie{}0 otherwise.
+If a macro is interpolated as a string,
+the
+@code{.br}
+register inherits its value
+from the context of the string interpolation.@footnote{@xref{Strings}.}
 
 @cindex intercepting requests
 @cindex requests, intercepting
 @cindex modifying requests
 @cindex requests, modifying
-Use this register to reliably intercept requests that imply breaks.
+Use the
+@code{.br}
+register to reliably wrap or intercept requests that imply breaks.
 
 @Example
 .als bp*orig bp
@@ -8060,8 +8066,9 @@ Use this register to reliably intercept requests that imply breaks.
 ..
 @endExample
 
-Testing the @code{.br} register outside of a macro definition makes no
-sense.
+Testing the
+@code{.br}
+register outside of a macro definition makes no sense.
 @endDefreg
 
 @c ---------------------------------------------------------------------
