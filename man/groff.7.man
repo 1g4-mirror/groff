@@ -580,6 +580,10 @@ request;
 .request eo
 disables escape sequence recognition.
 .
+For clarity,
+in this document we depict escape sequences
+with the default escape character.
+.
 Use the
 .esc [rs]
 special character escape sequence to format a backslash glyph,
