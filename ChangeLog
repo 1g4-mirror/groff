@@ -1,5 +1,10 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (make_glyph_node): Revise wording of
+	warning diagnostic.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (embolden_font_request): Throw warning
 	in category "style" if request arguments are ambiguous.  This
 	could arguably be made an error since the ambiguity is inherent;

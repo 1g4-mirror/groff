@@ -5652,8 +5652,8 @@ static node *make_glyph_node(charinfo *s, environment *env,
 	    warning(WARN_CHAR, "character '%1' not defined",
 		    input_code);
 	  else
-	    warning(WARN_CHAR, "character with input code %1 not"
-		    " defined", int(input_code));
+	    warning(WARN_CHAR, "cannot format input character code %1",
+		    int(input_code));
 	}
 	else if (s->nm.contents()) {
 	  const char *nm = s->nm.contents();
