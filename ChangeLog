@@ -1,5 +1,14 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(do_define_macro): Rename `reading_beginning_of_input_line`
+	local to `can_terminate_definition_with_dot`.
+	(transparent_throughput_file_request): Rename
+	`reading_beginning_of_input_line` local to
+	`is_at_beginning_of_input_line`.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (do_define_macro)
 	(transparent_throughput_file_request): Fix code style nits.
 	Arrange equality comparisons to avoid inadvertent lvalue
