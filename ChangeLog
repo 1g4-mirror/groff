@@ -1,5 +1,10 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Slightly refactor.  Resequence
+	prototypes and forward declarations.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Slightly refactor.  Retype
 	`default_buffer_size` from `int` to more idiomatic `size_t`.
 

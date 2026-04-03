@@ -102,8 +102,11 @@ extern "C" const char *Version_string;
 // initial size for input buffers that need to grow arbitrarily
 static const size_t default_buffer_size = 16;
 
+// If we ever support this feature, these declarations should move into
+// a new "column.h" file.
 #ifdef COLUMN
 void init_column_requests();
+void vjustify();
 #endif /* COLUMN */
 
 // forward declarations
@@ -111,10 +114,9 @@ static node *read_drawing_command();
 static void read_drawing_command_color_arguments(token &);
 static void push_token(const token &);
 static void unsafe_transparent_throughput_file_request();
-#ifdef COLUMN
-void vjustify();
-#endif /* COLUMN */
 static void transparent_throughput_file_request();
+static void enable_warning(const char *);
+static void disable_warning(const char *);
 
 token tok;
 bool was_invoked_with_regular_control_character = false;
@@ -130,9 +132,6 @@ static unsigned int desired_warnings = DEFAULT_WARNING_CATEGORY_SET;
 static bool want_errors_inhibited = false;
 static bool want_input_ignored = false;
 
-static void enable_warning(const char *);
-static void disable_warning(const char *);
-
 static symbol end_of_input_macro_name;
 static symbol blank_line_macro_name;
 static symbol leading_spaces_macro_name;
@@ -144,6 +143,7 @@ bool is_writing_html = false;
 static int suppression_level = 0;	// depth of nested \O escapes
 
 bool in_nroff_mode = false;
+// TODO: Kill this off in groff 1.24.0 release + 2 years.  See env.cpp.
 bool is_device_ps_or_pdf = false;
 
 // Keep track of whether \f, \F, \D'F...', \H, \m, \M, \O[345], \R, \s,
