@@ -231,7 +231,7 @@ export GROFF_BIN_PATH
 # Let our test harness redirect us.  See LC_ALL comment above.
 groff=${GROFF_TEST_GROFF-groff}
 
-# Note 1: It would be nice to apply the DRY ("Don't Repeat Yourself")
+# Note: It would be nice to apply the DRY ("Don't Repeat Yourself")
 # principle here and store the entire command string to be executed into
 # a variable, and then either display it or execute it.  For example:
 #
