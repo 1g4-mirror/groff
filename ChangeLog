@@ -1,3 +1,10 @@
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/reg.cpp (number_value_to_ascii): When
+	diagnosing a value beyond representatable Roman numeral range,
+	disclose the specific format demanded.  Also tighten message
+	wording.
+
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (print_hyphenation_exceptions): Skip
