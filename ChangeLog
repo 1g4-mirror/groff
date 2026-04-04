@@ -1,3 +1,11 @@
+2026-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/eqn/box.cpp (get_param): Add strictly unnecessary
+	`return 0` statement with lint-style `NOTREACHED` comment to
+	quieten `-Wreturn-type` warning on GCC 9.5.0, which apparently
+	doesn't do deep enough control-flow analysis to figure that out
+	for itself.
+
 2026-04-03  Johannes Altmanninger <aclopte@gmail.com>
 
 	* src/preproc/eqn/neqn.sh:
