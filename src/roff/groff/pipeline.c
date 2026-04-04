@@ -129,7 +129,7 @@ char *sbasename(const char *path)
   strncpy(base, p1, p2 - p1);
   *(base + (p2 - p1)) = '\0';
 
-  return(base);
+  return base;
 }
 
 /* Get the name of the system shell */
