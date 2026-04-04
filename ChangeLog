@@ -1,5 +1,13 @@
 2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (xstrdup):
+	* src/roff/groff/pipeline.c (sbasename): Tweak wording of error
+	diagnostics; favor "cannot" over "unable to".
+
+	Continues the long process of fixing Savannah #66519.
+
+2026-04-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[man,mdoc]: Apply new `rhw` request, clearing the user-defined
 	hyphenation exception word list with every new man(7) or mdoc(7)
 	document.
