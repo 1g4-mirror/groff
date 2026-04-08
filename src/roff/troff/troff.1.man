@@ -149,7 +149,7 @@ Device-independent
 .I roff
 systems such as
 GNU
-.I troff \" GNU
+.I roff \" GNU
 require descriptions of output devices
 and the font selections available to them;
 .MR groff_font @MAN5EXT@
