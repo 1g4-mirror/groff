@@ -1480,7 +1480,7 @@ static void space_size() // .ss
   skip_line();
 }
 
-void fill()
+static void fill() // .fi
 {
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();
@@ -1490,7 +1490,7 @@ void fill()
   tok.next();
 }
 
-void no_fill()
+static void no_fill() // .nf
 {
   while (!tok.is_newline() && !tok.is_eof())
     tok.next();

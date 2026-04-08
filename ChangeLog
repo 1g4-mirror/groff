@@ -1,5 +1,10 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (fill, no_fill): Declare as `static`;
+	external linkage is not required.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor.  Separate engine logic from parsing logic
 	with respect to an environment's filling enablement.
 
