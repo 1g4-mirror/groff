@@ -8432,7 +8432,9 @@ change it.
 @Defesc {\\e, , , }
 Interpolate the escape character.
 @cindex @code{\e}, interpretation in copy mode
-@code{\e} is interpreted even in copy mode (@pxref{Copy Mode}).
+The formatter interprets
+@code{\e}
+even in copy mode.@footnote{@xref{Copy Mode}.}
 @endDefesc
 
 @cindex formatting a backslash glyph (@code{\[rs]})
@@ -8776,7 +8778,9 @@ comment.@footnote{This claim may be more aspirational than descriptive.}
 Start a comment; read everything up to the next newline in copy mode
 (@pxref{Copy Mode}) and discard it.
 @cindex @code{\"}, interpretation in copy mode
-@code{\"} is interpreted even in copy mode.
+The formatter interprets
+@code{\"}
+even in copy mode.@footnote{@xref{Copy Mode}.}
 
 It can be tricky to keep the comments from interfering with the
 appearance of the output.
@@ -8846,7 +8850,9 @@ introduced this extension to avoid the problems described above.
 is still widely seen,
 and remains useful for partial-line comments on control lines.)
 @cindex @code{\#}, interpretation in copy mode
-@code{\#} is interpreted even in copy mode.
+The formatter interprets
+@code{\#}
+even in copy mode.@footnote{@xref{Copy Mode}.}
 
 @Example
 .nr in-indonesia 1
@@ -9179,7 +9185,9 @@ emits a warning in category
 @samp{reg}.
 @xref{Warnings}.}
 @cindex @code{\n}, interpretation in copy mode
-@code{\n} is interpreted even in copy mode (@pxref{Copy Mode}).
+The formatter interprets
+@code{\n}
+even in copy mode.@footnote{@xref{Copy Mode}.}
 
 @Example
 .nr a 5
@@ -9431,7 +9439,9 @@ name@tie{}@var{r}, two-character name @var{rg}).  Zeroes represent
 Arabic formats.  If @var{reg} is not defined, @var{reg} is not created
 and nothing is interpolated.
 @cindex @code{\g}, interpretation in copy mode
-@code{\g} is interpreted even in copy mode (@pxref{Copy Mode}).
+The formatter interprets
+@code{\g}
+even in copy mode.@footnote{@xref{Copy Mode}.}
 @endDefesc
 
 @cindex register format, in expressions
@@ -11813,8 +11823,9 @@ two exceptions: the @code{|} operator recognizes the new input line
 (@pxref{Numeric Expressions}), and the input line counter register
 @code{.c} increments.
 @cindex @code{\@key{RET}}, interpretation in copy mode
-@code{\RET} is interpreted even in copy mode.@footnote{@xref{Copy
-Mode}.}
+The formatter interprets
+@code{\RET}
+even in copy mode.@footnote{@xref{Copy Mode}.}
 
 @c Wrap example at 56 columns (on the _output_).  We use 50n in the
 @c groff input to avoid line adjustment.
@@ -16687,7 +16698,9 @@ second two digits (01@leq{}@var{nn}@leq{}99)), and the third any
 positive integer @var{nnn}.  Macros and strings accept an unlimited
 number of parameters.
 @cindex @code{\$}, interpretation in copy mode
-@code{\$} is interpreted even in copy mode.@footnote{@xref{Copy Mode}.}
+The formatter interprets
+@code{\$}
+even in copy mode.@footnote{@xref{Copy Mode}.}
 @endDefesc
 
 @Defreq {shift, [@Var{n}]}
@@ -20713,7 +20726,11 @@ two-character
 name @var{ev})
 as returned by @cite{getenv@r{(3)}}.
 @cindex @code{\V}, interpretation in copy mode
-@code{\V} is interpreted even in copy mode;
+GNU
+@command{troff} @c GNU
+interprets
+@code{\V}
+even in copy mode;
 recall @ref{Copy Mode}.
 @endDefesc
 
@@ -20754,7 +20771,7 @@ Embed
 @var{character-sequence}
 into
 GNU
-@command{troff}
+@command{troff} @c GNU
 output as parameters to an
 @w{@samp{x X}}
 device extension command.@footnote{@xref{GNU @command{troff} Output}.}
