@@ -1389,7 +1389,8 @@ static void point_size() // .ps
   }
   int n;
   if (has_arg()
-      && read_measurement(&n, 'z', curenv->get_requested_point_size()))
+      && read_measurement(&n, (unsigned char)('z'), // TODO: grochar
+			  curenv->get_requested_point_size()))
   {
     if (n <= 0)
       n = 1;

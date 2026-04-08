@@ -538,7 +538,7 @@ static bool is_valid_term(units *u, int scaling_unit,
       tok.next();
     }
   }
-  int si = scaling_unit;
+  unsigned char si = scaling_unit; // TODO: grochar
   bool do_next = false;
   if (((c = tok.ch()) != 0)
       && (strchr(valid_scaling_units, c) != 0 /* nullptr */)) {

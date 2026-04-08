@@ -1,5 +1,19 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Improve type discipline with respect to internal
+	character representation.
+
+	* src/roff/troff/env.cpp (point_size): Call `read_measurement()`
+	with explicitly constructed literal argument of type `unsigned
+	char` for conceptual clarity.  "groff characters" are, for now,
+	unsigned bytes.
+	* src/roff/troff/number.cpp (is_valid_term): Demote local
+	variable `si` from `int` to `unsigned char`.
+
+	Continues the long process of fixing Savannah #67735.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment_copy, environment_switch):
 	Declare as `static`; external linkage is not required.
 
