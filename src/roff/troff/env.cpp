@@ -1157,7 +1157,7 @@ unsigned int environment::get_adjust_mode()
   return adjust_mode;
 }
 
-int environment::get_fill()
+int environment::get_filling()
 {
   return is_filling;
 }
@@ -4549,7 +4549,7 @@ void init_env_requests()
   init_string_env_reg(".sr", get_requested_point_size_string);
   init_string_env_reg(".sty", get_style_name_string);
   init_string_env_reg(".tabs", get_tabs);
-  init_int_env_reg(".u", get_fill);
+  init_int_env_reg(".u", get_filling);
   init_int_env_reg(".ul", get_underlined_line_count);
   init_vunits_env_reg(".v", get_vertical_spacing);
   init_hunits_env_reg(".w", get_prev_char_width);

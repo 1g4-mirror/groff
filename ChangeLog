@@ -1,5 +1,18 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.
+
+	* src/roff/troff/env.h (get_fill): Rename this declaration...
+	(get_filling): ...to this.
+	* src/roff/troff/env.cpp (environment::get_fill): Rename this
+	definition...
+	(environment::get_filling): ...to this.
+	(init_env_requests): Update wire-uppery to `.u` register.
+	* src/roff/troff/input.cpp (diverted_space_node::need_reread):
+	Update call site.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Unit-test `fi` and `nf` requests.
 
 	* src/roff/groff/tests/fi-and-nf-requests-work.sh: Do it.

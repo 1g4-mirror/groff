@@ -3478,7 +3478,7 @@ bool have_global_diverted_space = false;
 bool diverted_space_node::need_reread(bool *bolp)
 {
   have_global_diverted_space = true;
-  if (curenv->get_fill())
+  if (curenv->get_filling())
     trapping_blank_line();
   else
     curdiv->space(n);

@@ -303,7 +303,7 @@ public:
   font_family *get_family() { return family; }
   hunits get_emboldening_offset();	// .b
   unsigned get_adjust_mode();		// .j
-  int get_fill();			// .u
+  int get_filling();			// .u
   hunits get_indent();			// .i
   hunits get_temporary_indent();
   hunits get_line_length();		// .l
