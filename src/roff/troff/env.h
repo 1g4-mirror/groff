@@ -110,8 +110,6 @@ class pending_output_line;
 // arguments and then, if everything is kosher, call curenv->[one of the
 // below]?  --GBR, 2026
 void title_length();
-void fill();
-void no_fill();
 void adjust();
 void no_adjust();
 void center();
@@ -304,6 +302,7 @@ public:
   hunits get_emboldening_offset();	// .b
   unsigned get_adjust_mode();		// .j
   int get_filling();			// .u
+  void configure_filling(bool);
   hunits get_indent();			// .i
   hunits get_temporary_indent();
   hunits get_line_length();		// .l
@@ -395,8 +394,6 @@ public:
   void dump_pending_nodes();
 
   friend void title_length();
-  friend void fill();
-  friend void no_fill();
   friend void adjust();
   friend void no_adjust();
   friend void center();

@@ -1,5 +1,21 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor.  Separate engine logic from parsing logic
+	with respect to an environment's filling enablement.
+
+	* src/roff/troff/env.h: Stop globally declaring `fill()` and
+	`no_fill()`.
+	(class environment): Declare new member function returning
+	`void`: `configure_filling()`.  Drop declaration of `friend`
+	functions `fill()` and `no_fill()`.
+	* src/roff/troff/env.cpp (environment::configure_filling): New
+	function mutates object of `environment` class.
+	(fill, no_fill): Replace manipulation of `environment` object's
+	private member variable with calls of the foregoing new public
+	member function.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.
 
 	* src/roff/troff/env.h (get_fill): Rename this declaration...

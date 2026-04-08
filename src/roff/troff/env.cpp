@@ -1162,6 +1162,11 @@ int environment::get_filling()
   return is_filling;
 }
 
+void environment::configure_filling(bool b)
+{
+  is_filling = b;
+}
+
 hunits environment::get_indent()
 {
   return indent;
@@ -1481,7 +1486,7 @@ void fill()
     tok.next();
   if (was_invoked_with_regular_control_character)
     curenv->do_break();
-  curenv->is_filling = true;
+  curenv->configure_filling(true);
   tok.next();
 }
 
@@ -1491,7 +1496,7 @@ void no_fill()
     tok.next();
   if (was_invoked_with_regular_control_character)
     curenv->do_break();
-  curenv->is_filling = false;
+  curenv->configure_filling(false);
   curenv->suppress_next_eol = true;
   tok.next();
 }
