@@ -310,7 +310,7 @@
 2026-04-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (BI, BR, IB, IR, RB, RI): Trivially refactor;
-	rename `an-result` (a temporary string into these macros'
+	rename `an-result` (a temporary string into which these macros'
 	arguments are catenated with font style changes and italic
 	corrections as appropriate) to `an*result`.
 
@@ -333,7 +333,7 @@
 	* src/libs/libgroff/relocate.cpp (set_current_prefix): Move call
 	of `msw2posixpath()` from an all-configurations path through the
 	function to an `#ifdef _WIN32`-only one.
-	(msw2posixpath) [_WIN32]: Since this function is now only called
+	(msw2posixpath) [_WIN32]: Since this function is now called only
 	if `_WIN32` is defined, shift an `#endif` to also define it only
 	under that circumstance.
 
