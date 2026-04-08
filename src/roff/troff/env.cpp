@@ -1466,13 +1466,14 @@ static void space_size() // .ss
   int n;
   if (read_integer(&n)) {
     if (n < 0)
-      warning(WARN_RANGE, "ignoring negative word space size: '%1'", n);
+      warning(WARN_RANGE, "ignoring negative interword space size:"
+			  " '%1'", n);
     else
       curenv->set_interword_space_size(n);
     if (has_arg() && read_integer(&n))
       if (n < 0)
-	warning(WARN_RANGE, "ignoring negative sentence space size: "
-		"'%1'", n);
+	warning(WARN_RANGE, "ignoring negative supplemental"
+		" inter-sentence space size: '%1'", n);
       else
 	curenv->set_supplemental_intersentence_space_size(n);
     else
