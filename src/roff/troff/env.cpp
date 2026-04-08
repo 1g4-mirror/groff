@@ -3845,7 +3845,7 @@ static void select_hyphenation_language()
   skip_line();
 }
 
-void environment_copy()
+static void environment_copy()
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "environment copy request expects an"
@@ -3866,7 +3866,7 @@ void environment_copy()
   skip_line();
 }
 
-void environment_switch()
+static void environment_switch()
 {
   if (curenv->is_dummy()) {
     error("cannot switch out of dummy environment");
