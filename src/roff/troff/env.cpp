@@ -237,7 +237,7 @@ void environment::mark_last_line()
     p->is_last_line = true;
 }
 
-void widow_control_request()
+void widow_control_request() // .wdc
 {
   int n;
   if (has_arg() && read_integer(&n))
@@ -338,7 +338,7 @@ void init_environments()
 // Set tab character, used to fill out the remainder of a tab stop where
 // a tab (TAB, U+0009) occurs in the input.  If a null pointer,
 // horizontal motion "fills" the tab stop.
-void tab_character_request()
+void tab_character_request() // .tc
 {
   curenv->tab_char = read_character();
   skip_line();
@@ -349,7 +349,7 @@ void tab_character_request()
 // horizontal motion "fills" the tab stop.  Used when the behavior of a
 // null pointer tab character is also desired on the same output line
 // (or more generally).
-void leader_character_request()
+void leader_character_request() // .lc
 {
   curenv->leader_char = read_character();
   skip_line();
@@ -1508,7 +1508,7 @@ void cancel_temporary_indentation()
   curdiv->modified_tag.excl(MTSM_TI);
 }
 
-void center()
+void center() // .ce
 {
   int n;
   if (!has_arg() || !read_integer(&n))
@@ -1529,7 +1529,7 @@ void center()
   tok.next();
 }
 
-void right_justify()
+void right_justify() // .rj
 {
   int n;
   if (!has_arg() || !read_integer(&n))
@@ -1550,7 +1550,7 @@ void right_justify()
   tok.next();
 }
 
-void line_length()
+void line_length() // .ll
 {
   hunits temp;
   if (has_arg() && read_hunits(&temp, 'm', curenv->line_length)) {
@@ -1569,7 +1569,7 @@ void line_length()
   skip_line();
 }
 
-void title_length()
+void title_length() // .lt
 {
   hunits temp;
   if (has_arg() && read_hunits(&temp, 'm', curenv->title_length)) {
@@ -1587,7 +1587,7 @@ void title_length()
   skip_line();
 }
 
-void vertical_spacing()
+void vertical_spacing() // .vs
 {
   vunits temp;
   if (has_arg() && read_vunits(&temp, 'p', curenv->vertical_spacing)) {
@@ -1603,7 +1603,7 @@ void vertical_spacing()
   skip_line();
 }
 
-void post_vertical_spacing()
+void post_vertical_spacing() // .pvs
 {
   vunits temp;
   if (has_arg() && read_vunits(&temp, 'p',
@@ -1620,7 +1620,7 @@ void post_vertical_spacing()
   skip_line();
 }
 
-void line_spacing()
+void line_spacing() // .ls
 {
   int temp;
   if (has_arg() && read_integer(&temp)) {
@@ -1637,7 +1637,7 @@ void line_spacing()
   skip_line();
 }
 
-void indent()
+void indent() // .in
 {
   hunits temp;
   if (has_arg() && read_hunits(&temp, 'm', curenv->indent)) {
@@ -1660,7 +1660,7 @@ void indent()
   tok.next();
 }
 
-void temporary_indent()
+void temporary_indent() // .ti
 {
   bool is_valid = true;
   hunits temp = H0;
@@ -1731,17 +1731,17 @@ void configure_underlining(bool want_spaces_underlined)
   skip_line();
 }
 
-void continuous_underline()
+static void continuous_underline() // .cu
 {
   configure_underlining(true /* underline spaces */);
 }
 
-void underline()
+static void underline() // .ul
 {
   configure_underlining(false /* underline spaces */);
 }
 
-void margin_character()
+void margin_character() // .mc
 {
   tok.skip_spaces();
   charinfo *ci = tok.get_charinfo();
@@ -1771,7 +1771,7 @@ void margin_character()
   skip_line();
 }
 
-void number_lines()
+void number_lines() // .nm
 {
   delete_node_list(curenv->numbering_nodes);
   curenv->numbering_nodes = 0 /* nullptr */;
@@ -1832,7 +1832,7 @@ void number_lines()
   skip_line();
 }
 
-void no_number()
+void no_number() // .nn
 {
   int n;
   if (has_arg() && read_integer(&n))
@@ -1842,13 +1842,13 @@ void no_number()
   skip_line();
 }
 
-void no_hyphenate()
+void no_hyphenate() // .nh
 {
   curenv->hyphenation_mode = 0;
   skip_line();
 }
 
-void hyphenate_request()
+void hyphenate_request() // .hy
 {
   int n;
   if (has_arg() && read_integer(&n)) {
@@ -1870,7 +1870,7 @@ void hyphenate_request()
   skip_line();
 }
 
-void set_hyphenation_mode_default()
+void set_hyphenation_mode_default() // .hydefault
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "hyphenation mode default setting request"
@@ -1894,7 +1894,7 @@ void set_hyphenation_mode_default()
 
 // Set hyphenation character, which the input uses to mark the position
 // of a discretionary break ("dbreak") in a word.
-void hyphenation_character_request()
+void hyphenation_character_request() // .hc
 {
   curenv->hyphen_indicator_char = read_character();
   // TODO?: If null pointer, set to ESCAPE_PERCENT, eliminating test(s)
@@ -1902,7 +1902,7 @@ void hyphenation_character_request()
   skip_line();
 }
 
-void hyphen_line_max_request()
+void hyphen_line_max_request() // .hlm
 {
   int n;
   if (has_arg() && read_integer(&n))
@@ -2088,7 +2088,7 @@ hunits environment::get_hyphenation_space()
   return hyphenation_space;
 }
 
-void hyphenation_space_request()
+void hyphenation_space_request() // .hys
 {
   hunits n;
   if (read_hunits(&n, 'm')) {
@@ -2106,7 +2106,7 @@ hunits environment::get_hyphenation_margin()
   return hyphenation_margin;
 }
 
-void hyphenation_margin_request()
+void hyphenation_margin_request() // .hym
 {
   hunits n;
   if (read_hunits(&n, 'm')) {
@@ -2736,7 +2736,7 @@ static void break_with_forced_adjustment_request() //. brp
   do_break_request(true);
 }
 
-void title()
+void title() // .tl
 {
   if (!has_arg(true /* peek */)) {
     warning(WARN_MISSING, "title line request expects a delimited"
@@ -2805,7 +2805,7 @@ void title()
   tok.next();
 }
 
-void adjust()
+void adjust() // .ad
 {
   curenv->adjust_mode |= 1;
   if (has_arg()) {
@@ -2841,7 +2841,7 @@ void adjust()
   skip_line();
 }
 
-void no_adjust()
+void no_adjust() // .na
 {
   curenv->adjust_mode &= ~1;
   skip_line();
@@ -2868,12 +2868,12 @@ void do_input_trap(bool respect_continuation)
   skip_line();
 }
 
-void input_trap()
+void input_trap() // .it
 {
   do_input_trap(false);
 }
 
-void input_trap_continued()
+void input_trap_continued() // .itc
 {
   do_input_trap(true);
 }
@@ -3845,7 +3845,7 @@ static void select_hyphenation_language()
   skip_line();
 }
 
-static void environment_copy()
+static void environment_copy() // .evc
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "environment copy request expects an"
@@ -3866,7 +3866,7 @@ static void environment_copy()
   skip_line();
 }
 
-static void environment_switch()
+static void environment_switch() // .ev
 {
   if (curenv->is_dummy()) {
     error("cannot switch out of dummy environment");
