@@ -1067,6 +1067,21 @@ bool environment::set_no_break_control_character(unsigned char c)
   return true;
 }
 
+void environment::set_interword_space_size(int n)
+{
+  space_size = n;
+}
+
+void environment::reset_supplemental_intersentence_space_size()
+{
+  sentence_space_size = space_size;
+}
+
+void environment::set_supplemental_intersentence_space_size(int n)
+{
+  sentence_space_size = n;
+}
+
 hunits environment::get_input_line_position()
 {
   hunits n;
@@ -1442,15 +1457,15 @@ void space_size()
     if (n < 0)
       warning(WARN_RANGE, "ignoring negative word space size: '%1'", n);
     else
-      curenv->space_size = n;
+      curenv->set_interword_space_size(n);
     if (has_arg() && read_integer(&n))
       if (n < 0)
 	warning(WARN_RANGE, "ignoring negative sentence space size: "
 		"'%1'", n);
       else
-	curenv->sentence_space_size = n;
+	curenv->set_supplemental_intersentence_space_size(n);
     else
-      curenv->sentence_space_size = curenv->space_size;
+      curenv->reset_supplemental_intersentence_space_size();
   }
   skip_line();
 }
