@@ -253,7 +253,7 @@ static bool is_valid_expression_start()
 
 enum { OP_LEQ = 'L', OP_GEQ = 'G', OP_MAX = 'X', OP_MIN = 'N' };
 
-static const char valid_scaling_units[] = "icfPmnpuvMsz";
+static const string valid_scaling_units("icfPmnpuvMsz");
 
 static bool is_valid_term(units *u, int scaling_unit,
 			  bool is_parenthesized, bool is_mandatory);
@@ -440,7 +440,7 @@ static bool is_valid_term(units *u, int scaling_unit,
       *u = 0;
       return true;
     }
-    else if ((c != 0) && (strchr(valid_scaling_units, char(c)) != 0)) {
+    else if ((c != 0) && valid_scaling_units.contains(c)) {
       tok.next();
       if (tok.ch() == int(';')) { // TODO: grochar
 	tok.next();
@@ -540,8 +540,7 @@ static bool is_valid_term(units *u, int scaling_unit,
   }
   unsigned char si = scaling_unit; // TODO: grochar
   bool do_next = false;
-  if (((c = tok.ch()) != 0)
-      && (strchr(valid_scaling_units, c) != 0 /* nullptr */)) {
+  if (((c = tok.ch()) != 0) && valid_scaling_units.contains(c)) {
     switch (scaling_unit) {
     case int(0): // TODO: grochar; null character, not digit zero
       // We know it's a recognized scaling unit because it matched the

@@ -1,5 +1,16 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp: Refactor.  Migrate
+	`valid_scaling_units` global constant from type array-of-`char`
+	to a groff `string`.
+	(is_valid_term): Employ `contains()` function of
+	`valid_scaling_units`'s new type instead of the standard C
+	library's strchr(3).
+
+	Continues the long process of fixing Savannah #67735.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Add `contains()` member function to `string` class.
 
 	* src/include/stringclass.h (class string): Declare it,
