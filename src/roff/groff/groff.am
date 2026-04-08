@@ -124,6 +124,7 @@ groff_TESTS = \
   src/roff/groff/tests/sizes-request-works.sh \
   src/roff/groff/tests/so-request-accepts-embedded-space-in-arg.sh \
   src/roff/groff/tests/soquiet-request-works.sh \
+  src/roff/groff/tests/ss-request-works.sh \
   src/roff/groff/tests/stringdown-and-stringup-requests-work.sh \
   src/roff/groff/tests/stringdown-request-rejects-request-names.sh \
   src/roff/groff/tests/stringup-request-transforms-non-basic-latin.sh \

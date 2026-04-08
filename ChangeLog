@@ -1,3 +1,10 @@
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Unit-test `ss` request.
+
+	* src/roff/groff/tests/ss-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2026-04-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/eqn/box.cpp (get_param): Add strictly unnecessary
