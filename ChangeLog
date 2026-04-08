@@ -1,5 +1,11 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (family_change, point_size)
+	(space_size): Declare as `static`; external linkage is not
+	required.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor.  Separate engine logic from input parsing
 	logic with respect to an environment's "line tabs" enablement (a
 	GNU troff feature altering how tab stop positions are computed).

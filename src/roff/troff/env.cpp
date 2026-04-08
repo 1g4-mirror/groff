@@ -1365,7 +1365,7 @@ static void select_font_request() // .ft
   skip_line();
 }
 
-void family_change()
+static void family_change() // .fam
 {
   if (in_nroff_mode) {
     skip_line();
@@ -1376,7 +1376,7 @@ void family_change()
   skip_line();
 }
 
-void point_size()
+static void point_size() // .ps
 {
   if (in_nroff_mode) {
     skip_line();
@@ -1449,7 +1449,7 @@ static void override_available_type_sizes_request() // .sizes
   tok.next();
 }
 
-void space_size()
+static void space_size() // .ss
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "space size configuration request expects"
