@@ -1,5 +1,12 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Unit-test `linetabs` request.
+
+	* src/roff/groff/tests/linetabs-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Refactor.  Separate engine logic from input parsing
 	logic with respect to configuration of an environment's
 	inter-word and supplemental inter-sentence space sizes.
