@@ -1,5 +1,12 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Unit-test `fi` and `nf` requests.
+
+	* src/roff/groff/tests/fi-and-nf-requests-work.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (family_change, point_size)
 	(space_size): Declare as `static`; external linkage is not
 	required.
