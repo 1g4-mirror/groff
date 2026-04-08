@@ -1082,6 +1082,11 @@ void environment::set_supplemental_intersentence_space_size(int n)
   sentence_space_size = n;
 }
 
+void environment::configure_line_tabs(bool b)
+{
+  using_line_tabs = b;
+}
+
 hunits environment::get_input_line_position()
 {
   hunits n;
@@ -3139,13 +3144,13 @@ static void field_characters_request() // .fc
   skip_line();
 }
 
-void line_tabs_request()
+void line_tabs_request() // .linetabs
 {
   int n;
   if (has_arg() && read_integer(&n))
-    curenv->using_line_tabs = (n > 0);
+    curenv->configure_line_tabs(n > 0);
   else
-    curenv->using_line_tabs = true;
+    curenv->configure_line_tabs(true);
   skip_line();
 }
 

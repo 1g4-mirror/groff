@@ -140,7 +140,6 @@ void line_width();
 void tabs_save();
 void tabs_restore();
 #endif
-void line_tabs_request();
 void title();
 #ifdef WIDOW_CONTROL
 void widow_control_request();
@@ -329,6 +328,7 @@ public:
   hunits get_input_line_position();
   const char *get_tabs();
   int is_using_line_tabs();
+  void configure_line_tabs(bool);
   unsigned get_hyphenation_mode();
   unsigned get_hyphenation_mode_default();
   int get_hyphen_line_max();
@@ -427,7 +427,6 @@ public:
   friend void tabs_save();
   friend void tabs_restore();
 #endif
-  friend void line_tabs_request();
   friend void title();
 #ifdef WIDOW_CONTROL
   friend void widow_control_request();

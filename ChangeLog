@@ -1,5 +1,22 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Refactor.  Separate engine logic from input parsing
+	logic with respect to an environment's "line tabs" enablement (a
+	GNU troff feature altering how tab stop positions are computed).
+
+	* src/roff/troff/env.h: Stop globally declaring
+	`line_tabs_request()`.
+	(class environment): Declare new member function returning
+	`void`: `configure_line_tabs()`.  Drop declaration of `friend`
+	function `line_tabs_request()`.
+	* src/roff/troff/env.cpp (environment::configure_line_tabs): New
+	function mutates object of `environment` class.
+	(line_tabs_request): Replace manipulation of `environment`
+	object's private member variable with call of the foregoing new
+	public member function.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Unit-test `linetabs` request.
 
 	* src/roff/groff/tests/linetabs-request-works.sh: Do it.
