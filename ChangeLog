@@ -1,5 +1,13 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Add `contains()` member function to `string` class.
+
+	* src/include/stringclass.h (class string): Declare it,
+	returning `bool`.
+	* src/libs/libgroff/string.cpp (string::contains): Define it.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Improve type discipline with respect to internal
 	character representation.
 
