@@ -1,5 +1,15 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[build]: Drop no longer needed check for `struct exception`.  It
+	was used only by the now-deleted "src/libs/libgroff/matherr.c".
+
+	* m4/groff.m4 (GROFF_STRUCT_EXCEPTION): Delete.
+	* configure.ac: Drop interpolation of `GROFF_STRUCT_EXCEPTION`.
+	* Makefile.am: Stop advertising availability of
+	`HAVE_STRUCT_EXCEPTION` preprocessor symbol.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Drop "matherr.c" file, declaring (under the
 	preprocessor conditions `HAVE_STRUCT_EXCEPTION` and `TLOSS`)
 	`matherr()` and `struct exception`.  The former is K&R-style,
