@@ -1,3 +1,27 @@
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Drop "matherr.c" file, declaring (under the
+	preprocessor conditions `HAVE_STRUCT_EXCEPTION` and `TLOSS`)
+	`matherr()` and `struct exception`.  The former is K&R-style,
+	thus prohibited in ISO C23, and can (should) cause build
+	failures with compilers configured for that version of the C
+	language.  Autoconf 2.73, released last month, tries harder to
+	arrange builds to use C23 by default.  Also we straight up don't
+	_need_ this declaration (anymore); nothing in groff calls
+	`matherr()`.  It dates back to the Clark days, when there was no
+	gnulib for groff to use (or maybe it didn't support C++ projects
+	at the time).  Whatever gnulib needs, it transitively closures
+	for us, so we no longer need to and can throw this 30-year old
+	stuff of ours away.
+
+	* src/libs/libgroff/matherr.c: Delete.
+	* src/libs/libgroff/libgroff.am (libgroff_a_SOURCES): Drop
+	aforementioned file from macro definition.
+
+	Fixes <https://savannah.gnu.org/bugs/?68220>.  Thanks to Alexis
+	Hildebrandt for the report.  Also continues the long process of
+	fixing Savannah #66518.
+
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (space_size): Clarify warning
