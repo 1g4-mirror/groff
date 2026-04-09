@@ -1,5 +1,15 @@
 2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_term): Compare local
+	`scaling_unit` and return value of `token::char()` to literals
+	of type `unsigned char` instead of signed literals for
+	conceptual clarity.  "groff characters" are, for now, unsigned
+	bytes.
+
+	Continues the long process of fixing Savannah #67735.
+
+2026-04-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp: Refactor.  Migrate
 	`valid_scaling_units` global constant from type array-of-`char`
 	to a groff `string`.
