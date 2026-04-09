@@ -2860,7 +2860,7 @@ void do_input_trap(bool respect_continuation)
       warning(WARN_RANGE,
 	      "input trap line count must be greater than zero");
     else {
-      symbol s = read_identifier(true /* required */);
+      symbol s = read_identifier(true /* want_diagnostic */);
       if (!s.is_null()) {
 	curenv->input_trap_count = n;
 	curenv->input_trap = s;
@@ -3936,7 +3936,7 @@ static void add_hyphenation_exception_words_request() // .hw
 	   && !tok.is_space()
 	   && !tok.is_newline()
 	   && !tok.is_eof()) {
-      charinfo *ci = tok.get_charinfo(false /* required */);
+      charinfo *ci = tok.get_charinfo(false /* is_mandatory */);
       if (0 /* nullptr */ == ci) {
 	is_word_valid = false;
 	if (!was_warned) {

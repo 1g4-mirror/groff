@@ -1,5 +1,52 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor for semantic clarity.  The parameter
+	named `required` used by many functions was employed for two
+	slightly different purposes.  In some instances, it indicated
+	whether emission of a diagnostic message was desired in the
+	event a token expected on the input stream (or similar) was
+	absent.  In others, it encoded whether the presence of such a
+	token was _optional_, in which case both its presence and
+	absence were valid.  The latter tends to be the case when a
+	token is present but might or might not have associated
+	`charinfo` data.  Detangle these issues by renaming `required`
+	arguments to `want_diagnostic` and `is_mandatory` as
+	appropriate.
+
+	* src/roff/troff/token.h: Rename `required` argument in
+	declarations.
+
+	* src/roff/troff/input.cpp (diagnose_missing_identifier):
+	(token::get_charinfo): Rename `required` argument to
+	`is_mandatory` in definitions.
+	(read_identifier, read_long_identifier)
+	(read_input_until_terminator): Rename `required` argument to
+	`want_diagnostic` in definitions.
+
+	* src/roff/troff/column.cpp (column_justify) [COLUMN]:
+	* src/roff/troff/div.cpp (change_trap):
+	* src/roff/troff/env.cpp (do_input_trap)
+	(add_hyphenation_exception_words_request):
+	* src/roff/troff/input.cpp (read_rgb, read_cmy, read_cmyk)
+	(read_gray, do_overstrike, do_bracket, token::next)
+	(token::description, read_input_until_terminator)
+	(do_define_string, define_character, print_character_request)
+	(remove_character, do_define_macro, read_line_rule_expression)
+	(do_register, encode_special_character_for_device_output)
+	(device_request, device_macro_request)
+	(is_conditional_expression_true, ps_bbox_request, open_file)
+	(do_write_request, stream_write_macro_request, do_translate)
+	(set_character_flags_request, define_class_request)
+	(vjustify) [COLUMN]:
+	* src/roff/troff/node.cpp (translate_font_request)
+	(mount_font_at_position_request)
+	(associate_style_with_font_position_request)
+	(read_font_identifier, remove_font_specific_character_request)
+	* src/roff/troff/reg.cpp (inline_define_register): Update
+	annotations at call sites and in declarations.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[build]: Drop no longer needed check for `struct exception`.  It
 	was used only by the now-deleted "src/libs/libgroff/matherr.c".
 

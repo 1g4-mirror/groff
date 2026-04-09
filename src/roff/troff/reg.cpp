@@ -402,7 +402,7 @@ void inline_define_register()
   if (!start_token.is_usable_as_delimiter(true /* report error */))
     return;
   tok.next();
-  symbol nm = read_identifier(true /* required */);
+  symbol nm = read_identifier(true /* want_diagnostic */);
   if (nm.is_null())
     return;
   reg *r = static_cast<reg *>(register_dictionary.lookup(nm));

@@ -6784,7 +6784,7 @@ static void translate_font_request() // .ftr
     skip_line();
     return;
   }
-  symbol from = read_identifier(true /* required */);
+  symbol from = read_identifier(true /* want_diagnostic */);
   // has_arg()+read_identifier() should ensure the assertion succeeds.
   assert(!from.is_null());
   if (is_nonnegative_integer(from.contents())) {
@@ -6831,7 +6831,8 @@ static void mount_font_at_position_request() // .fp
     if (n < 0)
       error("font mounting position %1 is negative", n);
     else {
-      symbol internal_name = read_identifier(true /* required */);
+      symbol internal_name
+	= read_identifier(true /* want_diagnostic */);
       if (!internal_name.is_null()) {
 	symbol filename = read_long_identifier();
 	if (!mount_font(n, internal_name, filename)) {
@@ -6956,7 +6957,8 @@ static void associate_style_with_font_position_request() // .sty
 	warning(WARN_MISSING, "abstract style configuration request"
 		" expects a style name as second argument");
       else {
-	symbol internal_name = read_identifier(true /* required */);
+	symbol internal_name
+	  = read_identifier(true /* want_diagnostic */);
 	if (!internal_name.is_null())
 	  (void) mount_style(n, internal_name);
       }
@@ -6998,7 +7000,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
   int n;
   tok.skip_spaces();
   if (tok.is_usable_as_delimiter()) {
-    symbol s = read_identifier(true /* required */);
+    symbol s = read_identifier(true /* want_diagnostic */);
     finfo->requested_name = const_cast<char *>(s.contents());
     if (!s.is_null()) {
       n = symbol_fontno(s);
@@ -7080,7 +7082,7 @@ static void remove_font_specific_character_request() // .rfschar
     symbol f = font_table[finfo.position]->get_name();
     while (!tok.is_newline() && !tok.is_eof()) {
       if (!tok.is_space() && !tok.is_tab()) {
-	charinfo *s = tok.get_charinfo(true /* required */);
+	charinfo *s = tok.get_charinfo(true /* is_mandatory */);
 	if (0 /* nullptr */ == s)
 	  assert(0 == "attempted to use token without charinfo in"
 		 " font-specific character removal request");

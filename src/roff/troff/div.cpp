@@ -1011,7 +1011,7 @@ static void diversion_trap() // .dt
 
 static void change_trap() // .ch
 {
-  symbol s = read_identifier(true /* required */);
+  symbol s = read_identifier(true /* want_diagnostic */);
   if (!s.is_null()) {
     vunits x;
     if (has_arg() && read_vunits(&x, 'v'))
