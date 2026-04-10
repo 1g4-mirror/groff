@@ -3911,7 +3911,12 @@ static void environment_switch() // .ev
 }
 
 // We use `unsigned char` for offsets in hyphenation exception words.
+// C++11: constexpr
 static const int WORD_MAX = UCHAR_MAX;
+// C++11: constexpr
+static const size_t wordbuflen = WORD_MAX + 1 /* '\0' */;
+// C++11: constexpr
+static const size_t bpbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
 
 static void add_hyphenation_exception_words_request() // .hw
 {
@@ -3927,13 +3932,9 @@ static void add_hyphenation_exception_words_request() // .hw
     skip_line();
     return;
   }
-  // C++11: constexpr
-  static const size_t wordbuflen = WORD_MAX + 1 /* '\0' */;
   // C++11: char wordbuf[wordbuflen]{};
   char wordbuf[wordbuflen];
   (void) memset(wordbuf, 0, wordbuflen);
-  // C++11: constexpr
-  static const size_t bpbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
   // C++11: unsigned char bpbuf[bpbuflen]{};
   unsigned char bpbuf[bpbuflen];
   (void) memset(bpbuf, 0, bpbuflen);

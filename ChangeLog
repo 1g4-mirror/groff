@@ -49,6 +49,13 @@
 
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Slightly refactor.  Lift `wordbuflen`
+	and `bpbuflen` into file-global scope...
+	(add_hyphenation_exception_words_request): ...from here, because
+	we're going to need them in another function.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp
 	(remove_hyphenation_exception_words_request): Free the heap
 	storage backing a hyphenation exception word when removing
