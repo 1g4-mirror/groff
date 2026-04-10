@@ -7372,7 +7372,8 @@ static void embolden_font_request() // .bd
       int f = finfo2.position;
       units offset;
       if (has_arg()
-	  && read_measurement(&offset, 'u')
+	  && read_measurement(&offset,
+			      (unsigned char)('u')) // TODO: grochar
 	  && (offset >= 1))
 	font_table[f]->set_conditional_bold(n, hunits(offset - 1));
       else
@@ -7384,7 +7385,9 @@ static void embolden_font_request() // .bd
 	      " name instead of a mounting position as the first"
 	      " argument if conditional emboldening desired");
       units offset;
-      if (read_measurement(&offset, 'u') && (offset >= 1))
+      if (read_measurement(&offset,
+			   (unsigned char)('u')) // TODO: grochar
+	  && (offset >= 1))
 	font_table[n]->set_bold(hunits(offset - 1));
       else
 	font_table[n]->unbold();
@@ -7465,10 +7468,14 @@ static void configure_track_kerning_request() // .tkf
     int n = finfo.position, min_s, max_s;
     hunits min_a, max_a;
     if (has_arg()
-	&& read_measurement(&min_s, 'z')
-	&& read_hunits(&min_a, 'p')
-	&& read_measurement(&max_s, 'z')
-	&& read_hunits(&max_a, 'p')) {
+	&& read_measurement(&min_s,
+			    (unsigned char)('z')) // TODO: grochar
+	&& read_hunits(&min_a,
+		       (unsigned char)('p')) // TODO: grochar
+	&& read_measurement(&max_s,
+			    (unsigned char)('z')) // TODO: grochar
+	&& read_hunits(&max_a,
+		       (unsigned char)('p'))) { // TODO: grochar
       track_kerning_function tk(min_s, min_a, max_s, max_a);
       font_table[n]->set_track_kern(tk);
     }
@@ -7495,7 +7502,9 @@ static void constantly_space_font_request() // .cs
     if (!has_arg() || !read_integer(&x))
       font_table[n]->set_constant_space(CONSTANT_SPACE_NONE);
     else {
-      if (!has_arg() || !read_measurement(&y, 'z'))
+      if (!has_arg()
+	  || !read_measurement(&y,
+			       (unsigned char)('z'))) // TODO: grochar
 	font_table[n]->set_constant_space(CONSTANT_SPACE_RELATIVE, x);
       else
 	font_table[n]->set_constant_space(CONSTANT_SPACE_ABSOLUTE,

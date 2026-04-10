@@ -416,10 +416,13 @@ void inline_define_register()
   units prev_value;
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
-  if (read_measurement(&v, 'u', prev_value)) {
+  if (read_measurement(&v,
+		     (unsigned char)('u'), // TODO: grochar
+		     prev_value)) {
     r->set_value(v);
     if (start_token != tok) {
-      if (read_measurement(&v, 'u')) {
+      if (read_measurement(&v,
+			   (unsigned char)('u'))) { // TODO: grochar
 	r->set_increment(v);
 	if (start_token != tok) {
 	  // token::description() writes to static, class-wide storage,

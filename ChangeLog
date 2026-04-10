@@ -1,5 +1,24 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Work on Savannah #67735.
+
+	Improve type discipline with respect to internal character
+	representation.
+
+	* src/roff/troff/env.cpp (embolden_font_request)
+	(configure_track_kerning_request)
+	(constantly_space_font_request):
+	* src/roff/troff/reg.cpp (inline_define_register): Improve type
+	discipline with respect to groff's internal character
+	representation.  Call `read_measurement()` with explicitly
+	constructed literal argument of type `unsigned char` for
+	conceptual clarity.  "groff characters" are, for now, unsigned
+	bytes.
+
+	Continues the long process of fixing Savannah #67735.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor for semantic clarity.  The parameter
 	named `required` used by many functions was employed for two
 	slightly different purposes.  In some instances, it indicated
