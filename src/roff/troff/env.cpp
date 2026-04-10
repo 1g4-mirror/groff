@@ -3950,7 +3950,7 @@ static void add_hyphenation_exception_words_request() // .hw
       if (is_word_valid) {
 	tok.next();
 	if (ci->get_ascii_code() == '-') {
-	  if (i > 0 && (npos == 0 || pos[npos - 1] != i))
+	  if ((i > 0) && ((npos == 0) || (pos[npos - 1] != i)))
 	    pos[npos++] = i;
 	}
 	else {
@@ -3969,7 +3969,7 @@ static void add_hyphenation_exception_words_request() // .hw
       }
     }
     if (is_word_valid && (i > 0)) {
-      pos[npos] = 0;
+      pos[npos] = 0U;
       buf[i] = '\0';
       // C++03: new unsigned char[npos + 1]();
       unsigned char *tem = new unsigned char[npos + 1];
@@ -3977,7 +3977,7 @@ static void add_hyphenation_exception_words_request() // .hw
       memcpy(tem, pos, npos + 1);
       tem = static_cast<unsigned char *>
 	    (current_language->exceptions.lookup(symbol(buf), tem));
-      if (tem)
+      if (tem != 0 /* nullptr */)
 	delete[] tem;
     }
   }
