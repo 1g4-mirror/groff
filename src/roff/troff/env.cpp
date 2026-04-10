@@ -3990,10 +3990,18 @@ static void add_hyphenation_exception_words_request() // .hw
       // internal "ordinary" character type.  Might be simpler just to
       // use vector<int>.  --GBR
       pos[npos] = 0U;
-      // C++03: new unsigned char[npos + 1]();
-      unsigned char *tem = new unsigned char[npos + 1];
-      (void) memset(tem, 0, ((npos + 1) * sizeof(unsigned char)));
-      memcpy(tem, pos, npos + 1);
+      const size_t newposbuflen = npos + 1 /* 0U terminator */;
+      unsigned char *tem = 0 /* nullptr */;
+      try {
+	// C++03: new unsigned char[newposbuflen]();
+	tem = new unsigned char[newposbuflen];
+      }
+      catch (const std::bad_alloc &e) {
+	fatal("cannot allocate %1 bytes to add hyphenation exception"
+	      " word", int(newposbuflen));
+      }
+      (void) memset(tem, 0, ((newposbuflen) * sizeof(unsigned char)));
+      memcpy(tem, pos, newposbuflen);
       tem = static_cast<unsigned char *>
 	    (current_language->exceptions.lookup(symbol(buf), tem));
       if (tem != 0 /* nullptr */)

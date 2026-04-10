@@ -1,6 +1,15 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Catch
+	`std::bad_alloc` exceptions from `new` operator.  Throw a fatal
+	error indicating how much memory we couldn't allocate.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Refactor and add
 	warning diagnostic.  Elevate scope of `c` local variable and
 	rename it to `hc` since it stores the hyphenation code of the
