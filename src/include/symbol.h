@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 class symbol {
   static const char **table;
-  static int table_used;
+  static int table_occupancy; // # of entries in use
   static int table_size;
   static char *block;
   static size_t block_size;

@@ -1,5 +1,14 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Trivially refactor.
+
+	* src/include/symbol.h (class symbol): Rename `table_used`
+	member variable, which could suggest a Boolean value, to
+	`table_occupancy`.
+	* src/libs/libgroff/symbol.cpp: Update dereference sites.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.h (class diversion, class macro_diversion):
 	Use Boolean, not numeric, literals as default values for
 	function arguments of type `bool`.

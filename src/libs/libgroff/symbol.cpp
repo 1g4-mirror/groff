@@ -33,8 +33,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "error.h"
 #include "symbol.h"
 
+// Create an anonymous global symbol table to house two constants.
+
 const char **symbol::table = 0 /* nullptr */;
-int symbol::table_used = 0; // # of entries in use
+int symbol::table_occupancy = 0;
 int symbol::table_size = 0;
 char *symbol::block = 0 /* nullptr */;
 size_t symbol::block_size = 0;
@@ -99,7 +101,7 @@ symbol::symbol(const char *p, int how)
     table = (const char **)new char*[table_size];
     for (int i = 0; i < table_size; i++)
       table[i] = 0 /* nullptr */;
-    table_used = 0;
+    table_occupancy = 0;
   }
   unsigned int hc = hash_string(p);
   const char **pp;
@@ -114,8 +116,8 @@ symbol::symbol(const char *p, int how)
     s = 0 /* nullptr */;
     return;
   }
-  if ((table_used >= (table_size - 1))
-      || (table_used >= (table_size * FULL_MAX))) {
+  if ((table_occupancy >= (table_size - 1))
+      || (table_occupancy >= (table_size * FULL_MAX))) {
     const char **old_table = table;
     unsigned int old_table_size = table_size;
     int i;
@@ -123,7 +125,7 @@ symbol::symbol(const char *p, int how)
       if (table_sizes[i] == 0)
 	fatal("too many symbols");
     table_size = table_sizes[i];
-    table_used = 0;
+    table_occupancy = 0;
     table = (const char **)new char*[table_size];
     for (i = 0; i < table_size; i++)
       table[i] = 0 /* nullptr */;
@@ -139,7 +141,7 @@ symbol::symbol(const char *p, int how)
 	 (pp == table ? pp = table + table_size - 1 : --pp))
       ;
   }
-  ++table_used;
+  ++table_occupancy;
   if (how == DONT_STORE)
     s = *pp = p;
   else {
