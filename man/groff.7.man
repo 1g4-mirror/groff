@@ -10002,17 +10002,19 @@ request to preserve the identities of line numbers and names of input
 files.
 .
 .I groff
-emits a variety of error diagnostics and supports several categories of
-warning;
-the output of these can be selectively suppressed with
+emits a variety of error diagnostics
+and supports several categories of warning;
+each can be independently issued or suppressed
+with the
 .RB \[lq] warn \[rq]
-(and see the
+request.
+Also see the
 .BR \-E ,
 .BR \-w ,
 and
 .B \-W
 options of
-.MR @g@troff @MAN1EXT@ ).
+.MR @g@troff @MAN1EXT@ .
 .
 A trace of the formatter's input processing stack can be emitted when
 errors or warnings occur by means of

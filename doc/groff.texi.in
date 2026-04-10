@@ -21271,7 +21271,7 @@ GNU
 @command{troff} @c GNU
 emits a variety of error diagnostics
 and supports several categories of warning;
-the output of each category can be selectively enabled or suppressed.
+each can be independently issued or suppressed.
 A trace of the formatter's input processing stack
 can be emitted when errors or warnings occur
 by means of
