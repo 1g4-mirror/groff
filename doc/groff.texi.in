@@ -10503,6 +10503,7 @@ mandatory.  Value@tie{}8 is possible as an additional restriction, but
 values@tie{}16 and@tie{}32 should be avoided, as should mode@tie{}1.
 Modes@tie{}4 and@tie{}6 are typical.
 
+@need 1000
 A table of left and right minimum character counts for hyphenation as
 needed by the patterns distributed with
 GNU
