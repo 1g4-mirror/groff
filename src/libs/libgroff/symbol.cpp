@@ -123,7 +123,8 @@ symbol::symbol(const char *p, int how)
     int i;
     for (i = 1; table_sizes[i] <= old_table_size; i++)
       if (table_sizes[i] == 0)
-	fatal("too many symbols");
+	fatal("cannot construct symbol table larger than %1 entries",
+	      table_sizes[(i - 1)]);
     table_size = table_sizes[i];
     table_occupancy = 0;
     table = (const char **)new char*[table_size];

@@ -1,3 +1,10 @@
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/symbol.cpp (symbol::symbol): Improve fatal
+	diagnostic message; when construction of a larger symbol table
+	is impossible, describe the failure better and report the
+	exceeded table capacity.
+
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Trivially refactor.
