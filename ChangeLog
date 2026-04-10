@@ -1,5 +1,13 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Use `UCHAR_MAX` from ISO C99's
+	standard library instead of the literal `256` to configure the
+	`WORD_MAX` constant.  Preprocessor-include "<limits.h>" header
+	file to access `UCHAR_MAX`.  Declare `WORD_MAX` as `static`;
+	external linkage is not required.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (read_measurement_crement)
 	(read_integer_crement): Trivially refactor for semantic clarity.
 	Rename the last argument from `prev_value` to `operand`.
