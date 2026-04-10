@@ -18,9 +18,9 @@
 
 	* src/include/symbol.h: Preprocessor-include "<string.h>" header
 	file to access strchr(3).
-	(class symbol): Declare new member function
-	`contains()` indicating whether the `char` argument appears the
-	symbol.
+	(class symbol): Declare new member function `contains()`
+	indicating whether the `char` argument appears in the symbol's
+	name.
 	(symbol::contains): Implement it `inline`, wrapping strchr(3).
 
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
@@ -47,15 +47,15 @@
 	character under examination in the hyphenation exception word
 	argument.  Gather that hyphenation code earlier, and mark the
 	word as invalid if the hyphenation code is zero--exception: the
-	character '-' is also valid, since it marks the hyphenation
-	break point.  Consequently, we now throw a warning in category
-	`char` on attempted hyphenation exception words like "non*sense"
-	and "0123456789".  Drop later conditional loop break if the
+	character '-' is also valid, since it marks a hyphenation point.
+	Consequently, we now throw a warning in category `char` on
+	attempted hyphenation exception words like "non*sense" and
+	"0123456789".  Drop later conditional loop break if the
 	hyphenation code is zero since that now cannot be the case--we
-	didn't enter the containing branch in the first place.  Replace
-	a test of the index into the hyphenation exception word being
-	greater than zero with an assert(3)ion of the same inside the
-	branch, as it's now an invariant that a valid hyphenation
+	now don't enter the containing branch in the first place.
+	Replace a test of the index into the hyphenation exception word
+	being greater than zero with an assert(3)ion of the same inside
+	the branch, as it's now an invariant that a valid hyphenation
 	exception word contains a nonzero count of characters bearing
 	hyphenation codes.
 
@@ -392,7 +392,7 @@
 	(class environment): Declare new member functions returning
 	`void`: `set_interword_space_size()`,
 	`reset_supplemental_intersentence_space_size()`, and
-	`set_supplemental_intersentence_space_size()`.  (The last two
+	`set_supplemental_intersentence_space_size()`.  (The latter two
 	differ because callers of the former require no knowledge of the
 	default supplemental inter-sentence space size.)  Drop
 	declaration of `friend` function `space_size()`.
@@ -674,7 +674,7 @@
 	(add_hyphenation_exception_words_request): Continue interpreting
 	any arguments subsequent to an invalid one.  Doing so is more
 	consistent with AT&T troff (tested: DWB 3.3, Plan 9 from User
-	Space, Heirloom Doctools, Solaris).  Convert diagnostic emitted
+	Space, Heirloom Doctools, Solaris).  Demote diagnostic emitted
 	in this circumstance from an error to a warning in category
 	"char".
 
