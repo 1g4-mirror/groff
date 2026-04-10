@@ -3928,12 +3928,12 @@ static void add_hyphenation_exception_words_request() // .hw
     return;
   }
   // C++11: constexpr
-  const size_t wordbuflen = WORD_MAX + 1 /* '\0' */;
+  static const size_t wordbuflen = WORD_MAX + 1 /* '\0' */;
   // C++11: char wordbuf[wordbuflen]{};
   char wordbuf[wordbuflen];
   (void) memset(wordbuf, 0, wordbuflen);
   // C++11: constexpr
-  const size_t bpbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
+  static const size_t bpbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
   // C++11: unsigned char bpbuf[bpbuflen]{};
   unsigned char bpbuf[bpbuflen];
   (void) memset(bpbuf, 0, bpbuflen);

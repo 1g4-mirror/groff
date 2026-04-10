@@ -1,6 +1,12 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Slightly refactor.
+	Declare `const` symbols computed at compile time as `static`.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Trivially refactor.
 	Rename local variables.
 	- buflen       -> wordbuflen
