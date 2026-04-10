@@ -3937,7 +3937,8 @@ static void add_hyphenation_exception_words_request() // .hw
   for (;;) {
     if (!has_arg())
       break;
-    int i = 0;
+    int i = 0; // index into hyphenation exception word excluding '-'s
+    unsigned char hc = 0U; // hyphenation code of current character
     int npos = 0;
     // Warn at most once per invalid word, not per request invocation.
     bool is_word_valid = true;
@@ -3947,8 +3948,14 @@ static void add_hyphenation_exception_words_request() // .hw
 	   && !tok.is_newline()
 	   && !tok.is_eof()) {
       charinfo *ci = tok.get_charinfo(false /* is_mandatory */);
-      if (0 /* nullptr */ == ci) {
+      if (ci != 0 /* nullptr */) {
+	hc = ci->get_hyphenation_code();
+	if ((0U == hc) && (ci->get_ascii_code() != '-'))
+	  is_word_valid = false;
+      }
+      else
 	is_word_valid = false;
+      if (!is_word_valid) {
 	if (!was_warned) {
 	  warning(WARN_CHAR, "skipping hyphenation exception word"
 		  " containing %1", tok.description());
@@ -3961,12 +3968,8 @@ static void add_hyphenation_exception_words_request() // .hw
 	  if ((i > 0) && ((npos == 0) || (pos[npos - 1] != i)))
 	    pos[npos++] = i;
 	}
-	else {
-	  unsigned char c = ci->get_hyphenation_code();
-	  if (0U == c)
-	    break;
-	  buf[i++] = c;
-	}
+	else
+	  buf[i++] = hc;
       }
       else {
 	do
@@ -3976,7 +3979,16 @@ static void add_hyphenation_exception_words_request() // .hw
 	       && !tok.is_eof());
       }
     }
-    if (is_word_valid && (i > 0)) {
+    if (is_word_valid) {
+      // A valid hyphenation exception word contains a nonzero count of
+      // characters bearing hyphenation codes.
+      assert(i > 0);
+      // Clark uses `unsigned char` here for a small nonnegative
+      // quantity indicating the positions of hyphenation break points
+      // within a word of maximum size `WORD_MAX` (`UCHAR_MAX`).  That's
+      // kind of confusing because `unsigned char` is also GNU troff's
+      // internal "ordinary" character type.  Might be simpler just to
+      // use vector<int>.  --GBR
       pos[npos] = 0U;
       // C++03: new unsigned char[npos + 1]();
       unsigned char *tem = new unsigned char[npos + 1];

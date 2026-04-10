@@ -658,7 +658,9 @@ T}
 char	1	T{
 No user-defined character of the requested name or index exists
 and no mounted font defines a glyph for it,
-or input could not be encoded for device-independent output.
+input could not be encoded for device-independent output,
+or a character without a hyphenation code appeared
+in a hyphenation exception word.
 .
 This category is enabled by default.
 T}

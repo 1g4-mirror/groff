@@ -1,6 +1,31 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Refactor and add
+	warning diagnostic.  Elevate scope of `c` local variable and
+	rename it to `hc` since it stores the hyphenation code of the
+	character under examination in the hyphenation exception word
+	argument.  Gather that hyphenation code earlier, and mark the
+	word as invalid if the hyphenation code is zero--exception: the
+	character '-' is also valid, since it marks the hyphenation
+	break point.  Consequently, we now throw a warning in category
+	`char` on attempted hyphenation exception words like "non*sense"
+	and "0123456789".  Drop later conditional loop break if the
+	hyphenation code is zero since that now cannot be the case--we
+	didn't enter the containing branch in the first place.  Replace
+	a test of the index into the hyphenation exception word being
+	greater than zero with an assert(3)ion of the same inside the
+	branch, as it's now an invariant that a valid hyphenation
+	exception word contains a nonzero count of characters bearing
+	hyphenation codes.
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document new warning
+	circumstance.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Slightly refactor.
 	memset(3) stack-allocated character arrays `buf` and `pos` with
 	null terminators/zeroes as a paranoid hedge.  Drop later
