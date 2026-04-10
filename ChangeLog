@@ -1,5 +1,12 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp:
+	* src/roff/troff/token.h: Comment formal argument names in
+	function declarations as a compromise with the Stroustrup-style
+	C++ used in most of groff.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Work on Savannah #67735.
 
 	Improve type discipline with respect to internal character

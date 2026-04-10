@@ -55,12 +55,13 @@ units vresolution = 1;
 units units_per_inch;
 int sizescale; // subdivisions per point
 
-static bool is_valid_expression(units *u, int scaling_unit,
-				bool is_parenthesized,
-				bool is_mandatory = false);
+static bool is_valid_expression(units * /* u */,
+				unsigned char /* scaling_unit */, // TODO: grochar
+				bool /* is_parenthesized */,
+				bool /* is_mandatory */ = false);
 static bool is_valid_expression_start();
 
-bool read_vunits(vunits *res, unsigned char si)
+bool read_vunits(vunits *res, unsigned char si) // TODO: grochar
 {
   if (!is_valid_expression_start())
     return false;
@@ -73,7 +74,7 @@ bool read_vunits(vunits *res, unsigned char si)
     return false;
 }
 
-bool read_hunits(hunits *res, unsigned char si)
+bool read_hunits(hunits *res, unsigned char si) // TODO: grochar
 {
   if (!is_valid_expression_start())
     return false;
@@ -86,7 +87,9 @@ bool read_hunits(hunits *res, unsigned char si)
     return false;
 }
 
-bool read_measurement(units *res, unsigned char si, bool is_mandatory)
+bool read_measurement(units *res,
+		      unsigned char si, // TODO: grochar
+		      bool is_mandatory)
 {
   if (!is_valid_expression_start())
     return false;
@@ -116,9 +119,12 @@ bool read_integer(int *res)
 
 enum incr_number_result { INVALID, ASSIGN, INCREMENT, DECREMENT };
 
-static incr_number_result get_incr_number(units *res, unsigned char);
+static incr_number_result get_incr_number(units * /* res */,
+					  unsigned char /* si */); // TODO: grochar
 
-bool read_vunits(vunits *res, unsigned char si, vunits prev_value)
+bool read_vunits(vunits *res,
+		 unsigned char si, // TODO: grochar
+		 vunits prev_value)
 {
   units v;
   // Use a primitive temporary because having the ckd macros store to
@@ -146,7 +152,9 @@ bool read_vunits(vunits *res, unsigned char si, vunits prev_value)
   return true;
 }
 
-bool read_hunits(hunits *res, unsigned char si, hunits prev_value)
+bool read_hunits(hunits *res,
+		 unsigned char si, // TODO: grochar
+		 hunits prev_value)
 {
   units h;
   // Use a primitive temporary because having the ckd macros store to
@@ -222,7 +230,8 @@ bool read_integer(int *res, int prev_value)
 }
 
 
-static incr_number_result get_incr_number(units *res, unsigned char si)
+static incr_number_result get_incr_number(units *res,
+					  unsigned char si) // TODO: grochar
 {
   if (!is_valid_expression_start())
     return INVALID;
@@ -255,10 +264,13 @@ enum { OP_LEQ = 'L', OP_GEQ = 'G', OP_MAX = 'X', OP_MIN = 'N' };
 
 static const string valid_scaling_units("icfPmnpuvMsz");
 
-static bool is_valid_term(units *u, int scaling_unit,
-			  bool is_parenthesized, bool is_mandatory);
+static bool is_valid_term(units * /* u */,
+			  unsigned char  /* scaling_unit */, // TODO: grochar
+			  bool  /* is_parenthesized */,
+			  bool  /* is_mandatory */);
 
-static bool is_valid_expression(units *u, int scaling_unit,
+static bool is_valid_expression(units *u,
+				unsigned char scaling_unit, // TODO: grochar
 				bool is_parenthesized,
 				bool is_mandatory)
 {
@@ -387,8 +399,10 @@ static bool is_valid_expression(units *u, int scaling_unit,
   return result;
 }
 
-static bool is_valid_term(units *u, int scaling_unit,
-			  bool is_parenthesized, bool is_mandatory)
+static bool is_valid_term(units *u,
+			  unsigned char scaling_unit, // TODO: grochar
+			  bool is_parenthesized,
+			  bool is_mandatory)
 {
   bool is_negative = false;
   bool is_overflowing = false;

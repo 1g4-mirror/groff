@@ -149,13 +149,14 @@ class hunits;
 extern void read_title_parts(node **part, hunits *part_width);
 
 extern bool read_measurement(units * /* result */,
-			     unsigned char /* scale indicator */,
+			     unsigned char /* si */, // TODO: grochar
 			     bool /* is_mandatory */ = false);
 extern bool read_integer(int *result);
 
-extern bool read_measurement(units *result, unsigned char si,
-			     units prev_value);
-extern bool read_integer(int *result, int prev_value);
+extern bool read_measurement(units * /* result */,
+			   unsigned char /* si */, // TODO: grochar
+			   units /* prev_value */);
+extern bool read_integer(int * /* result */, int /* prev_value */);
 
 extern void interpolate_register(symbol, int);
 
