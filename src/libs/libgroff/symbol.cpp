@@ -98,7 +98,7 @@ symbol::symbol(const char *p, int how)
   }
   if (table == 0 /* nullptr */) {
     table_size = table_sizes[0];
-    table = (const char **)new char*[table_size];
+    table = const_cast<const char **>(new char *[table_size]);
     for (int i = 0; i < table_size; i++)
       table[i] = 0 /* nullptr */;
     table_occupancy = 0;
@@ -107,7 +107,7 @@ symbol::symbol(const char *p, int how)
   const char **pp;
   for (pp = table + hc % table_size;
        *pp != 0 /* nullptr */;
-       (pp == table ? pp = table + table_size - 1 : --pp))
+       (pp == table ? (pp = (table + table_size - 1)) : --pp))
     if (strcmp(p, *pp) == 0) {
       s = *pp;
       return;
@@ -127,7 +127,7 @@ symbol::symbol(const char *p, int how)
 	      table_sizes[(i - 1)]);
     table_size = table_sizes[i];
     table_occupancy = 0;
-    table = (const char **)new char*[table_size];
+    table = const_cast<const char **>(new char *[table_size]);
     for (i = 0; i < table_size; i++)
       table[i] = 0 /* nullptr */;
     for (pp = old_table + old_table_size - 1;

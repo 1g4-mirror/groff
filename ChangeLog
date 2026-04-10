@@ -1,5 +1,11 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/symbol.cpp (symbol::symbol): Fix code style
+	nits.  Use explicit `const_cast` C++ operator instead of C-style
+	cast.  Parenthesize formally complex expressions.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/symbol.cpp (symbol::symbol): Improve fatal
 	diagnostic message; when construction of a larger symbol table
 	is impossible, describe the failure better and report the
