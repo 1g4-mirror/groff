@@ -6898,15 +6898,6 @@ was the formatter and was run with
 .BR \-T .
 .
 .
-.P
-AT&T
-.I troff \" AT&T
-ignored attempts to remove read-only registers;
-GNU
-.I troff \" GNU
-honors such requests.
-.
-.
 .br
 .ne 2v
 .P

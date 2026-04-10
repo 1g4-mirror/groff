@@ -22781,17 +22781,6 @@ interpolated@tie{}1 only if
 was the formatter and was run with
 @option{-T}.
 
-@cindex removal of read-only registers, incompatibility with @acronym{AT&T} @code{troff}
-@cindex register, read-only, removal, incompatibility with @acronym{AT&T} @code{troff}
-@cindex read-only register removal, incompatibility with @acronym{AT&T} @code{troff}
-@acronym{AT&T}
-@command{troff} @c AT&T
-ignored attempts to remove read-only registers;
-GNU
-@command{troff} @c GNU
-honors such requests.
-Recall @ref{Built-in Registers}.
-
 @cindex environment availability and naming, incompatibilities with
 @acronym{AT&T}
 @command{troff} @c AT&T
