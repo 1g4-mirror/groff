@@ -153,10 +153,11 @@ extern bool read_measurement(units * /* result */,
 			     bool /* is_mandatory */ = false);
 extern bool read_integer(int *result);
 
-extern bool read_measurement(units * /* result */,
-			   unsigned char /* si */, // TODO: grochar
-			   units /* prev_value */);
-extern bool read_integer(int * /* result */, int /* prev_value */);
+extern bool read_measurement_crement(units * /* result */,
+				     unsigned char /* si */, // TODO: grochar
+				     units /* prev_value */);
+extern bool read_integer_crement(int * /* result */,
+				 int /* prev_value */);
 
 extern void interpolate_register(symbol, int);
 

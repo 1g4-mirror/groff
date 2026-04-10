@@ -6084,7 +6084,7 @@ static bool read_delimited_measurement(units *n,
     return false;
   }
   tok.next();
-  if (read_measurement(n, si, prev_value)) {
+  if (read_measurement_crement(n, si, prev_value)) {
     if (start_token != tok) {
       // token::description() writes to static, class-wide storage, so
       // we must allocate a copy of it before issuing the next
@@ -6440,9 +6440,9 @@ static void do_register() // \R
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
   int val;
-  if (!read_measurement(&val,
-		      (unsigned char)('u'), // TODO: grochar
-		      prev_value))
+  if (!read_measurement_crement(&val,
+				(unsigned char)('u'), // TODO: grochar
+				prev_value))
     return;
   // token::description() writes to static, class-wide storage, so we
   // must allocate a copy of it before issuing the next diagnostic.

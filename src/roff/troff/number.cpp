@@ -183,7 +183,9 @@ bool read_hunits(hunits *res,
 }
 
 // TODO: Default `prev_value` to 0.
-bool read_measurement(units *res, unsigned char si, units prev_value)
+bool read_measurement_crement(units *res,
+			      unsigned char si, // TODO: grochar
+			      units prev_value)
 {
   units u;
   switch (get_incr_number(&u, si)) {
@@ -206,7 +208,7 @@ bool read_measurement(units *res, unsigned char si, units prev_value)
   return true;
 }
 
-bool read_integer(int *res, int prev_value)
+bool read_integer_crement(int *res, int prev_value)
 {
   units i;
   switch (get_incr_number(&i, 0)) {

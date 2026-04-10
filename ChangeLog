@@ -1,5 +1,31 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor for semantic clarity.  We had two
+	pairs of functions where the pair members differed by signature
+	but not by name, and which moreover did somewhat different
+	things, interpreting different expression types.  Rename them to
+	more obviously distinguish their purposes.  ("crement" is a
+	nonce usage I devised to generalize "{in,de}crement".)
+
+	* src/roff/troff/token.h: Rename functions in declarations.
+	- read_measurement() -> read_measurement_crement()
+	- read_integer()     -> read_integer_crement()
+	* src/roff/troff/number.cpp (read_measurement): Rename this...
+	(read_measurement_crement): ...to this.
+	(read_integer): Rename this...
+	(read_integer_crement): ...to this.
+	* src/roff/troff/div.cpp (begin_page, page_number):
+	* src/roff/troff/env.cpp (number_lines): Migrate callers of
+	two-argument `read_integer()` to `read_integer_crement()`.
+	* src/roff/troff/env.cpp (point_size):
+	* src/roff/troff/input.cpp (read_delimited_measurement)
+	(do_register):
+	* src/roff/troff/reg.cpp (define_register_request)
+	(inline_define_register): Migrate callers of three-argument
+	`read_measurement()` to `read_measurement_crement()`.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp:
 	* src/roff/troff/token.h: Comment formal argument names in
 	function declarations as a compromise with the Stroustrup-style

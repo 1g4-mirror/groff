@@ -374,9 +374,9 @@ static void define_register_request()
     skip_line();
     return;
   }
-  if (read_measurement(&v,
-		     (unsigned char)('u'), // TODO: grochar
-		     prev_value)) {
+  if (read_measurement_crement(&v,
+			       (unsigned char)('u'), // TODO: grochar
+			       prev_value)) {
     if (0 /* nullptr */ == r) {
       r = new number_reg;
       register_dictionary.define(nm, r);
@@ -416,9 +416,9 @@ void inline_define_register()
   units prev_value;
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
-  if (read_measurement(&v,
-		     (unsigned char)('u'), // TODO: grochar
-		     prev_value)) {
+  if (read_measurement_crement(&v,
+			       (unsigned char)('u'), // TODO: grochar
+			       prev_value)) {
     r->set_value(v);
     if (start_token != tok) {
       if (read_measurement(&v,

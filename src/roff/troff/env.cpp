@@ -1389,8 +1389,9 @@ static void point_size() // .ps
   }
   int n;
   if (has_arg()
-      && read_measurement(&n, (unsigned char)('z'), // TODO: grochar
-			  curenv->get_requested_point_size()))
+      && read_measurement_crement(&n,
+				  (unsigned char)('z'), // TODO: grochar
+				  curenv->get_requested_point_size()))
   {
     if (n <= 0)
       n = 1;
@@ -1792,7 +1793,7 @@ void number_lines() // .nm
     curenv->line_number_digit_width = env_digit_width(curenv);
     int n;
     if (!tok.is_usable_as_delimiter()) { // XXX abuse of function
-      if (read_integer(&n, next_line_number)) {
+      if (read_integer_crement(&n, next_line_number)) {
 	next_line_number = n;
 	if (next_line_number < 0) {
 	  warning(WARN_RANGE, "output line number cannot be negative");
