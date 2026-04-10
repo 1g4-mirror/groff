@@ -3928,19 +3928,19 @@ static void add_hyphenation_exception_words_request() // .hw
     return;
   }
   // C++11: constexpr
-  const size_t buflen = WORD_MAX + 1 /* '\0' */;
-  // C++11: char buf[buflen]{};
-  char buf[buflen];
-  (void) memset(buf, 0, buflen);
+  const size_t wordbuflen = WORD_MAX + 1 /* '\0' */;
+  // C++11: char wordbuf[wordbuflen]{};
+  char wordbuf[wordbuflen];
+  (void) memset(wordbuf, 0, wordbuflen);
   // C++11: constexpr
-  const size_t posbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
-  // C++11: unsigned char pos[posbuflen]{};
-  unsigned char pos[posbuflen];
-  (void) memset(pos, 0, posbuflen);
+  const size_t bpbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
+  // C++11: unsigned char bpbuf[bpbuflen]{};
+  unsigned char bpbuf[bpbuflen];
+  (void) memset(bpbuf, 0, bpbuflen);
   while (has_arg()) {
     int i = 0; // index into hyphenation exception word excluding '-'s
     unsigned char hc = 0U; // hyphenation code of current character
-    int npos = 0;
+    int bp_count = 0;
     // Warn at most once per invalid word, not per request invocation.
     bool is_word_valid = true;
     bool was_warned = false;
@@ -3966,11 +3966,12 @@ static void add_hyphenation_exception_words_request() // .hw
       if (is_word_valid) {
 	tok.next();
 	if (ci->get_ascii_code() == '-') {
-	  if ((i > 0) && ((npos == 0) || (pos[npos - 1] != i)))
-	    pos[npos++] = i;
+	  if ((i > 0)
+	      && ((bp_count == 0) || (bpbuf[bp_count - 1] != i)))
+	    bpbuf[bp_count++] = i;
 	}
 	else
-	  buf[i++] = hc;
+	  wordbuf[i++] = hc;
       }
       else {
 	do
@@ -3990,21 +3991,21 @@ static void add_hyphenation_exception_words_request() // .hw
       // kind of confusing because `unsigned char` is also GNU troff's
       // internal "ordinary" character type.  Might be simpler just to
       // use vector<int>.  --GBR
-      pos[npos] = 0U;
-      const size_t newposbuflen = npos + 1 /* 0U terminator */;
+      bpbuf[bp_count] = 0U;
+      const size_t newbpbuflen = bp_count + 1 /* 0U terminator */;
       unsigned char *tem = 0 /* nullptr */;
       try {
-	// C++03: new unsigned char[newposbuflen]();
-	tem = new unsigned char[newposbuflen];
+	// C++03: new unsigned char[newbpbuflen]();
+	tem = new unsigned char[newbpbuflen];
       }
       catch (const std::bad_alloc &e) {
 	fatal("cannot allocate %1 bytes to add hyphenation exception"
-	      " word", int(newposbuflen));
+	      " word", int(newbpbuflen));
       }
-      (void) memset(tem, 0, ((newposbuflen) * sizeof(unsigned char)));
-      memcpy(tem, pos, newposbuflen);
+      (void) memset(tem, 0, ((newbpbuflen) * sizeof(unsigned char)));
+      memcpy(tem, bpbuf, newbpbuflen);
       tem = static_cast<unsigned char *>
-	    (current_language->exceptions.lookup(symbol(buf), tem));
+	    (current_language->exceptions.lookup(symbol(wordbuf), tem));
       if (tem != 0 /* nullptr */)
 	delete[] tem;
     }

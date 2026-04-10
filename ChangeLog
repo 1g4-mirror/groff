@@ -1,6 +1,18 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Trivially refactor.
+	Rename local variables.
+	- buflen       -> wordbuflen
+	- buf          -> wordbuf
+	- posbuflen    -> bpbuflen
+	- pos          -> bpbuf
+	- npos         -> bp_count
+	- newposbuflen -> newbpbuflen
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Slightly refactor.
 	Revise loop style.
 
