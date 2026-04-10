@@ -27,6 +27,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <limits.h> // UCHAR_MAX
 #include <math.h> // ceil(), fabs()
 #include <stdio.h> // prerequisite of mtsm.h, searchpath.h
+#include <stdlib.h> // strtol()
+#include <string.h> // strchr(), strcpy(), strerror(), strncmp(),
+		    // strstr()
 
 #include <stack> // prerequisite of mtsm.h
 #include <vector>

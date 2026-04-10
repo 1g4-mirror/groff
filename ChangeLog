@@ -1,5 +1,10 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Rationalize header file inclusions,
+	adding "<stdlib.h>" and "<string.h>".
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/symbol.h: Preprocessor-include "<string.h>" header
 	file to access strchr(3).
 	(class symbol): Declare new member function
