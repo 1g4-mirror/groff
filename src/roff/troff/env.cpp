@@ -3937,9 +3937,7 @@ static void add_hyphenation_exception_words_request() // .hw
   // C++11: unsigned char pos[posbuflen]{};
   unsigned char pos[posbuflen];
   (void) memset(pos, 0, posbuflen);
-  for (;;) {
-    if (!has_arg())
-      break;
+  while (has_arg()) {
     int i = 0; // index into hyphenation exception word excluding '-'s
     unsigned char hc = 0U; // hyphenation code of current character
     int npos = 0;
