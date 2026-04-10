@@ -4024,6 +4024,7 @@ static void remove_hyphenation_exception_words_request() // .rhw
   }
   dictionary_iterator iter(current_language->exceptions);
   symbol entry;
+  unsigned char *word = 0 /* nullptr */;
   if (!has_arg()) {
     while (iter.get(&entry, 0 /* nullptr */)) {
       assert(!entry.is_null());
@@ -4032,8 +4033,13 @@ static void remove_hyphenation_exception_words_request() // .rhw
       // fixing without also migrating to an STL unordered_map or
       // similar, and using a `struct` with a string and a `bool` in it
       // as the values.
-      if (strchr(entry.contents(), ' ') == 0 /* nullptr */)
-	current_language->exceptions.remove(entry.contents());
+      if (!entry.contains(' ')) {
+        word = static_cast<unsigned char *>(
+	    current_language->exceptions.remove(entry.contents()));
+	assert(word != 0 /* nullptr */);
+	delete[] word;
+	word = 0 /* nullptr */;
+      }
     }
   }
   // TODO: Else read each argument as a word, normalize any hyphens

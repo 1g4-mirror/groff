@@ -1,5 +1,16 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp
+	(remove_hyphenation_exception_words_request): Free the heap
+	storage backing a hyphenation exception word when removing
+	one--specifically, this is its list of hyphenation break points
+	expressed as integers representing character positions in the
+	word, allocated by `add_hyphenation_exception_words_request()`.
+	Fastidiously assign null pointer literal to `word` local
+	addressing that memory afterwards.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Rationalize header file inclusions,
 	adding "<stdlib.h>" and "<string.h>".
 
