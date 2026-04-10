@@ -1,6 +1,14 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Slightly refactor.
+	memset(3) stack-allocated character arrays `buf` and `pos` with
+	null terminators/zeroes as a paranoid hedge.  Drop later
+	null-termination of `buf` as redundant.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Fix code style nits.
 	Assign unsigned literal to array element of type `unsigned
 	char`.  Explicitly compare value of pointer type to null pointer

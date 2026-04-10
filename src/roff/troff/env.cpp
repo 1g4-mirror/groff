@@ -3924,8 +3924,16 @@ static void add_hyphenation_exception_words_request() // .hw
     skip_line();
     return;
   }
-  char buf[WORD_MAX + 1];
-  unsigned char pos[WORD_MAX + 2];
+  // C++11: constexpr
+  const size_t buflen = WORD_MAX + 1 /* '\0' */;
+  // C++11: char buf[buflen]{};
+  char buf[buflen];
+  (void) memset(buf, 0, buflen);
+  // C++11: constexpr
+  const size_t posbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
+  // C++11: unsigned char pos[posbuflen]{};
+  unsigned char pos[posbuflen];
+  (void) memset(pos, 0, posbuflen);
   for (;;) {
     if (!has_arg())
       break;
@@ -3970,7 +3978,6 @@ static void add_hyphenation_exception_words_request() // .hw
     }
     if (is_word_valid && (i > 0)) {
       pos[npos] = 0U;
-      buf[i] = '\0';
       // C++03: new unsigned char[npos + 1]();
       unsigned char *tem = new unsigned char[npos + 1];
       (void) memset(tem, 0, ((npos + 1) * sizeof(unsigned char)));
