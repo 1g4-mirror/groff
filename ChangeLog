@@ -1,5 +1,14 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Refactor.  Lift logic for parsing a
+	hyphenation exception word request argument into its own
+	function, so that other requests can use it.
+	(read_hyphenation_exception_word): Implement it.
+	(add_hyphenation_exception_words_request): Call new function
+	from here.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Slightly refactor.
 	Declare `const` symbols computed at compile time as `static`.

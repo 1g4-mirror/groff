@@ -3918,6 +3918,83 @@ static const size_t wordbuflen = WORD_MAX + 1 /* '\0' */;
 // C++11: constexpr
 static const size_t bpbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
 
+// Gather a hyphenation exception word from the input, storing it
+// without hyphens as a C string in `word`, advancing the input stream
+// pointer to the end of the word.
+//
+// If further arguments are supplied, store the quantity of hyphenation
+// break points within it in `breakpoint_count`, and the break point
+// positions as an unsigned zero-terminated vector of 1-based character
+// indices in `breakpoints`.  The caller must allocate storage for
+// `word` and `breakpoints`.
+//
+// Return `true` if no invalid characters are read from the input
+// stream.  An invalid character lacks a hyphenation code (`-`
+// excepted).  Otherwise, return `false`; the contents of `word`,
+// `breakpoint_count`, and `breakpoints` are then not meaningful and
+// should not be used.
+static bool read_hyphenation_exception_word(unsigned char *word,
+					    int *breakpoint_count,
+					    unsigned char *breakpoints)
+{
+  int i = 0; // index into hyphenation exception word excluding '-'s
+  unsigned char hc = 0U; // hyphenation code of current character
+  *breakpoint_count = 0;
+  // Warn at most once per invalid word, not per request invocation.
+  bool is_word_valid = true;
+  bool was_warned = false;
+  while ((i < WORD_MAX)
+	 && !tok.is_space()
+	 && !tok.is_newline()
+	 && !tok.is_eof()) {
+    charinfo *ci = tok.get_charinfo(false /* is_mandatory */);
+    if (ci != 0 /* nullptr */) {
+      hc = ci->get_hyphenation_code();
+      if ((0U == hc) && (ci->get_ascii_code() != '-'))
+	is_word_valid = false;
+    }
+    else
+      is_word_valid = false;
+    if (!is_word_valid) {
+      if (!was_warned) {
+	warning(WARN_CHAR, "skipping hyphenation exception word"
+		" containing %1", tok.description());
+	was_warned = true;
+      }
+    }
+    if (is_word_valid) {
+      tok.next();
+      if (ci->get_ascii_code() == '-') {
+	if ((i > 0)
+	    && ((*breakpoint_count == 0)
+	        || (breakpoints[((*breakpoint_count) - 1)] != i)))
+	  breakpoints[(*breakpoint_count)++] = i;
+      }
+      else
+	word[i++] = hc;
+    }
+    else {
+      do
+	tok.next();
+      while (!tok.is_space()
+	     && !tok.is_newline()
+	     && !tok.is_eof());
+    }
+  }
+  // A valid hyphenation exception word contains a nonzero count of
+  // characters bearing hyphenation codes.
+  if (is_word_valid)
+    assert(i > 0);
+  word[i] = '\0';
+  // Clark uses `unsigned char` here for a small nonnegative quantity
+  // indicating the positions of hyphenation break points within a word
+  // of maximum size `WORD_MAX` (`UCHAR_MAX`).  That's kind of confusing
+  // because `unsigned char` is also GNU troff's internal "ordinary"
+  // character type.  Might be simpler just to use vector<int>.  --GBR
+  breakpoints[*breakpoint_count] = 0U;
+  return is_word_valid;
+}
+
 static void add_hyphenation_exception_words_request() // .hw
 {
   if (!has_arg()) {
@@ -3933,66 +4010,14 @@ static void add_hyphenation_exception_words_request() // .hw
     return;
   }
   // C++11: char wordbuf[wordbuflen]{};
-  char wordbuf[wordbuflen];
+  unsigned char wordbuf[wordbuflen];
   (void) memset(wordbuf, 0, wordbuflen);
   // C++11: unsigned char bpbuf[bpbuflen]{};
   unsigned char bpbuf[bpbuflen];
   (void) memset(bpbuf, 0, bpbuflen);
+  int bp_count = 0;
   while (has_arg()) {
-    int i = 0; // index into hyphenation exception word excluding '-'s
-    unsigned char hc = 0U; // hyphenation code of current character
-    int bp_count = 0;
-    // Warn at most once per invalid word, not per request invocation.
-    bool is_word_valid = true;
-    bool was_warned = false;
-    while ((i < WORD_MAX)
-	   && !tok.is_space()
-	   && !tok.is_newline()
-	   && !tok.is_eof()) {
-      charinfo *ci = tok.get_charinfo(false /* is_mandatory */);
-      if (ci != 0 /* nullptr */) {
-	hc = ci->get_hyphenation_code();
-	if ((0U == hc) && (ci->get_ascii_code() != '-'))
-	  is_word_valid = false;
-      }
-      else
-	is_word_valid = false;
-      if (!is_word_valid) {
-	if (!was_warned) {
-	  warning(WARN_CHAR, "skipping hyphenation exception word"
-		  " containing %1", tok.description());
-	  was_warned = true;
-	}
-      }
-      if (is_word_valid) {
-	tok.next();
-	if (ci->get_ascii_code() == '-') {
-	  if ((i > 0)
-	      && ((bp_count == 0) || (bpbuf[bp_count - 1] != i)))
-	    bpbuf[bp_count++] = i;
-	}
-	else
-	  wordbuf[i++] = hc;
-      }
-      else {
-	do
-	  tok.next();
-	while (!tok.is_space()
-	       && !tok.is_newline()
-	       && !tok.is_eof());
-      }
-    }
-    if (is_word_valid) {
-      // A valid hyphenation exception word contains a nonzero count of
-      // characters bearing hyphenation codes.
-      assert(i > 0);
-      // Clark uses `unsigned char` here for a small nonnegative
-      // quantity indicating the positions of hyphenation break points
-      // within a word of maximum size `WORD_MAX` (`UCHAR_MAX`).  That's
-      // kind of confusing because `unsigned char` is also GNU troff's
-      // internal "ordinary" character type.  Might be simpler just to
-      // use vector<int>.  --GBR
-      bpbuf[bp_count] = 0U;
+    if (read_hyphenation_exception_word(wordbuf, &bp_count, bpbuf)) {
       const size_t newbpbuflen = bp_count + 1 /* 0U terminator */;
       unsigned char *tem = 0 /* nullptr */;
       try {
@@ -4005,8 +4030,19 @@ static void add_hyphenation_exception_words_request() // .hw
       }
       (void) memset(tem, 0, ((newbpbuflen) * sizeof(unsigned char)));
       memcpy(tem, bpbuf, newbpbuflen);
+      // XXX: GNU troff's slovenly practice of punning `char` with
+      // `unsigned char` (because the deep wisdom of 1990 says that ISO
+      // 8859 has enough code points for anybody) bites us here.  We
+      // read the input stream as a sequence of unsigned chars but the
+      // keys of a `symbol` dictionary are sequences of _plain_ `char`s,
+      // which are of _undefined signedness_, I'd guess so that they can
+      // be dealt with using C standard library <string.h> functions.
+      // But as Gus Fring would say, these types are not the same.  See
+      // Savannah #68230.
+      // --GBR, 2026
+      char *wbuf = reinterpret_cast<char *>(wordbuf);
       tem = static_cast<unsigned char *>
-	    (current_language->exceptions.lookup(symbol(wordbuf), tem));
+	    (current_language->exceptions.lookup(symbol(wbuf), tem));
       if (tem != 0 /* nullptr */)
 	delete[] tem;
     }
