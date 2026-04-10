@@ -9927,10 +9927,7 @@ we must introduce the concept of ``productive'' input lines.
 A
 @dfn{productive input line}
 directly produces formatted output.
-Text lines produce output,@footnote{though not necessarily to the output
-device;
-see
-@ref{Diversions}}
+Text lines that populate the top-level diversion produce output,
 as do control lines containing requests like
 @samp{.tl //Page %//}
 or an escape sequence like

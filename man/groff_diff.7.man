@@ -821,7 +821,7 @@ A
 .I "productive input line"
 directly produces formatted output.
 .
-Text lines produce output,
+Text lines that populate the top-level diversion produce output,
 as do control lines containing requests such as
 .B tl
 or an escape sequence like
