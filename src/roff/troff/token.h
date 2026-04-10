@@ -155,9 +155,9 @@ extern bool read_integer(int *result);
 
 extern bool read_measurement_crement(units * /* result */,
 				     unsigned char /* si */, // TODO: grochar
-				     units /* prev_value */);
+				     units /* operand */);
 extern bool read_integer_crement(int * /* result */,
-				 int /* prev_value */);
+				 int /* operand */);
 
 extern void interpolate_register(symbol, int);
 

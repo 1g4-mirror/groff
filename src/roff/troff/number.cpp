@@ -182,10 +182,9 @@ bool read_hunits(hunits *res,
   return true;
 }
 
-// TODO: Default `prev_value` to 0.
 bool read_measurement_crement(units *res,
 			      unsigned char si, // TODO: grochar
-			      units prev_value)
+			      units operand)
 {
   units u;
   switch (get_incr_number(&u, si)) {
@@ -195,11 +194,11 @@ bool read_measurement_crement(units *res,
     *res = u;
     break;
   case INCREMENT:
-    if (ckd_add(res, prev_value, u))
+    if (ckd_add(res, operand, u))
       warning(WARN_RANGE, "integer incrementation saturated");
     break;
   case DECREMENT:
-    if (ckd_sub(res, prev_value, u))
+    if (ckd_sub(res, operand, u))
       warning(WARN_RANGE, "integer decrementation saturated");
     break;
   default:
@@ -208,7 +207,7 @@ bool read_measurement_crement(units *res,
   return true;
 }
 
-bool read_integer_crement(int *res, int prev_value)
+bool read_integer_crement(int *res, int operand)
 {
   units i;
   switch (get_incr_number(&i, 0)) {
@@ -218,11 +217,11 @@ bool read_integer_crement(int *res, int prev_value)
     *res = i;
     break;
   case INCREMENT:
-    if (ckd_add(res, prev_value, i))
+    if (ckd_add(res, operand, i))
       warning(WARN_RANGE, "integer incrementation saturated");
     break;
   case DECREMENT:
-    if (ckd_sub(res, prev_value, i))
+    if (ckd_sub(res, operand, i))
       warning(WARN_RANGE, "integer decrementation saturated");
     break;
   default:
@@ -230,7 +229,6 @@ bool read_integer_crement(int *res, int prev_value)
   }
   return true;
 }
-
 
 static incr_number_result get_incr_number(units *res,
 					  unsigned char si) // TODO: grochar

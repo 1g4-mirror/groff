@@ -1,5 +1,14 @@
 2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (read_measurement_crement)
+	(read_integer_crement): Trivially refactor for semantic clarity.
+	Rename the last argument from `prev_value` to `operand`.
+	Nothing in the implementation of these functions imparts a
+	"previous value" meaning to that argument; that matter is
+	context-dependent.
+
+2026-04-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor for semantic clarity.  We had two
 	pairs of functions where the pair members differed by signature
 	but not by name, and which moreover did somewhat different
