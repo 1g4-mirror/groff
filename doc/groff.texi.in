@@ -8981,7 +8981,7 @@ In the
 @code{\R}
 escape sequence,
 the delimiter need not be a neutral apostrophe;
-see @ref{Delimiters}.
+recall @ref{Delimiters}.
 
 @Example
 .nr a (((17 + (3 * 4))) % 4)
@@ -8991,9 +8991,14 @@ see @ref{Delimiters}.
     @result{} 1 1
 @endExample
 
-(Later, we will discuss additional forms of @code{nr} and @code{\R} that
-can change a register's value after it is dereferenced but before it is
-interpolated.  @xref{Auto-increment}.)
+Later,
+we will discuss additional forms of
+@code{nr}
+and
+@code{\R}
+that can change a register's value
+after it is dereferenced
+but before it is interpolated.@footnote{@xref{Auto-increment}.}
 
 @cindex @code{\R} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\R}
@@ -9003,8 +9008,8 @@ does not tokenize
 @code{\R}
 when reading it;
 the escape sequence updates only the formatter's register dictionary
-and does not contribute (directly) to output.
-@xref{GNU @command{troff} Internals}.
+and does not contribute (directly)
+to output.@footnote{@xref{GNU @command{troff} Internals}.}
 
 Further surprise can occur if you use registers like
 @code{.k},@footnote{@xref{Page Motions}.} whose values are not
@@ -9050,9 +9055,16 @@ increment or decrement a register.
 @DefreqItem {nr, ident @t{-}@Var{value}}
 @DefescItemx {\\R, @code{'}, ident @t{+}value, @code{'}}
 @DefescListEnd {\\R, @code{'}, ident @t{-}value, @code{'}}
-Increment (decrement) register @var{ident} by @var{value}.  In the
-@code{\R} escape sequence, the delimiter need not be a neutral
-apostrophe; see @ref{Delimiters}.
+Increment (decrement) register
+@var{ident}
+by
+@var{value}.
+In the
+@code{\R}
+escape sequence,
+the delimiter need not be a neutral apostrophe;
+recall
+@ref{Delimiters}.
 
 @Example
 .nr a 1
