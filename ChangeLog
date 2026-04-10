@@ -1067,8 +1067,8 @@
 	bash(1), this meant many repeated trips through
 	new/memcpy()/delete sequences, giving the language runtime
 	allocator a lot of work to do.  In an extreme case {formatting
-	64 copies of bash(1) in sequence}, this led to long runtimes
-	with two-thirds of program time spent in the kernel.
+	64 catenated copies of bash(1)}, this led to long runtimes with
+	two-thirds of program time spent in the kernel.
 
 	The new strategy is to double the allocation size every time it
 	is exceeded, but also to free any resized allocation at the end
@@ -1078,7 +1078,11 @@
 	page length frequently--which is the approach that groff 1.23.0
 	and earlier took to continuous rendering, and that other macro
 	packages or documents might still.  (tbl(1) users should beware
-	of the sort of problem observed in Savannah #65189.)
+	of the sort of problem observed in Savannah #65189.)  This
+	change reduces grotty(1)'s wall-clock time for the
+	aforementioned 64 copies of bash(1) from 92.1 seconds to 3.5,
+	and the proportion of process time spent in the system from
+	63.3% to 6.38%.
 
 	* src/devices/grotty/tty.cpp: Define new global constant
 	integer, `default_lines_per_page`, obviating a local literal in
