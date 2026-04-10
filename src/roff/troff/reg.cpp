@@ -374,16 +374,18 @@ static void define_register_request()
     skip_line();
     return;
   }
-  // TODO: grochar
-  if (read_measurement(&v, (unsigned char)('u'), prev_value)) {
+  if (read_measurement(&v,
+		     (unsigned char)('u'), // TODO: grochar
+		     prev_value)) {
     if (0 /* nullptr */ == r) {
       r = new number_reg;
       register_dictionary.define(nm, r);
     }
     r->set_value(v);
     if (tok.is_space()) {
-      // TODO: grochar
-      if (has_arg() && read_measurement(&v, (unsigned char)('u')))
+      if (has_arg()
+	  && read_measurement(&v,
+			      (unsigned char)('u'))) // TODO: grochar
 	r->set_increment(v);
     }
     else if (has_arg() && !tok.is_tab())

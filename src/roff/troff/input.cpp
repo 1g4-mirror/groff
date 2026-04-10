@@ -1873,8 +1873,8 @@ static const char *do_expr_test() // \B
   desired_warnings = 0U;
   want_errors_inhibited = true;
   int dummy;
-  // TODO: grochar
-  bool result = read_measurement(&dummy, (unsigned char)('u'),
+  bool result = read_measurement(&dummy,
+				(unsigned char)('u'), // TODO: grochar
 				 true /* is_mandatory */);
   desired_warnings = saved_desired_warnings;
   want_errors_inhibited = saved_want_errors_inhibited;
@@ -6440,8 +6440,9 @@ static void do_register() // \R
   if ((0 /* nullptr */ == r) || !r->get_value(&prev_value))
     prev_value = 0;
   int val;
-  // TODO: grochar
-  if (!read_measurement(&val, (unsigned char)('u'), prev_value))
+  if (!read_measurement(&val,
+		      (unsigned char)('u'), // TODO: grochar
+		      prev_value))
     return;
   // token::description() writes to static, class-wide storage, so we
   // must allocate a copy of it before issuing the next diagnostic.
@@ -9826,8 +9827,8 @@ static int evaluate_expression(const char *expr, units *res)
 {
   input_stack::push(make_temp_iterator(expr));
   tok.next();
-  // TODO: grochar
-  int success = read_measurement(res, (unsigned char)('u'));
+  int success = read_measurement(res,
+				 (unsigned char)('u')); // TODO: grochar
   while (input_stack::get(0 /* nullptr */) != EOF)
     ;
   return success;
