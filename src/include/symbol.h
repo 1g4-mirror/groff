@@ -31,7 +31,7 @@ class symbol {
   static size_t block_size;
   const char *s;
 public:
-  symbol(const char *p, int /* how */ = 0);
+  symbol(const char * /* p */, int /* how */ = 0);
   symbol();
   uintptr_t hash() const;
   int operator ==(symbol) const;

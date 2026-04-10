@@ -1,5 +1,11 @@
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/symbol.h (class symbol): Comment formal argument
+	names in function declarations as a compromise with the
+	Stroustrup-style C++ used in most of groff.
+
+2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp
 	(add_hyphenation_exception_words_request): Catch
 	`std::bad_alloc` exceptions from `new` operator.  Throw a fatal
