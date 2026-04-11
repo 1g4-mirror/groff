@@ -1,5 +1,14 @@
 2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/symbol.cpp (symbol::json_length): Strengthen
+	assertion, since we don't permit use of C0 controls in
+	identifiers; see Savannah #67734.  Use preprocessor to disable
+	unused code.
+	(symbol::json_extract): Add assertion, since we don't permit
+	empty identifiers.  Use preprocessor to disable unused code.
+
+2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Test unusual characters in identifiers, improving
 	coverage of src/libs/libgroff/symbol.cpp:symbol::json_extract().
 
