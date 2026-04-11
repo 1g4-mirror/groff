@@ -1,5 +1,13 @@
 2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Test unusual characters in identifiers, improving
+	coverage of src/libs/libgroff/symbol.cpp:symbol::json_extract().
+
+	* src/roff/groff/tests/coverage-symbol-cpp.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Validate error path in
 	src/libs/libgroff/symbol.cpp:symbol::symbol.
 

@@ -56,6 +56,7 @@ groff_TESTS = \
   src/roff/groff/tests/check-delimiter-validity.sh \
   src/roff/groff/tests/class-request-works.sh \
   src/roff/groff/tests/composite-nodes-produce-approximate-output.sh \
+  src/roff/groff/tests/coverage-symbol-cpp.sh \
   src/roff/groff/tests/current-language-and-environment-in-sync.sh \
   src/roff/groff/tests/degenerate-control-flow-works.sh \
   src/roff/groff/tests/detect-evil-link-time-optimizer.sh \
