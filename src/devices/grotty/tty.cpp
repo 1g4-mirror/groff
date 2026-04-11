@@ -577,7 +577,7 @@ void tty_printer::draw_polygon(int *p, int np, const environment *env)
     error("even number of arguments required for polygon");
     return;
   }
-  if (np == 0) {
+  if (0 == np) {
     error("no arguments for polygon");
     return;
   }
@@ -586,12 +586,12 @@ void tty_printer::draw_polygon(int *p, int np, const environment *env)
   int hpos = 0;
   int vpos = 0;
   for (int i = 0; i < np; i += 2) {
-    if (!((p[i] == 0) || (p[i + 1] == 0)))
+    if (!((0 == p[i]) || (0 == p[i + 1])))
       return;
     hpos += p[i];
     vpos += p[i + 1];
   }
-  if (!((hpos == 0) || (vpos == 0)))
+  if (!((0 == hpos) || (0 == vpos)))
     return;
   int start_hpos = env->hpos;
   int start_vpos = env->vpos;
@@ -635,7 +635,7 @@ void tty_printer::line(int hpos, int vpos, int dx, int dy,
   if ((dy % font::vert) != 0)
     fatal("length of vertical line %1 is not a multiple of vertical"
 	" motion quantum %2", dy, font::vert);
-  if (dx == 0) {
+  if (0 == dx) {
     // vertical line
     int v = vpos;
     int len = dy;
@@ -643,7 +643,7 @@ void tty_printer::line(int hpos, int vpos, int dx, int dy,
       v += len;
       len = -len;
     }
-    if (len == 0)
+    if (0 == len)
       add_char(vline_char, font::hor, hpos, v, col, fill,
 	       VDRAW_MODE|START_LINE|END_LINE);
     else {
@@ -661,7 +661,7 @@ void tty_printer::line(int hpos, int vpos, int dx, int dy,
 	       VDRAW_MODE|END_LINE);
     }
   }
-  if (dy == 0) {
+  if (0 == dy) {
     // horizontal line
     int h = hpos;
     int len = dx;
@@ -669,7 +669,7 @@ void tty_printer::line(int hpos, int vpos, int dx, int dy,
       h += len;
       len = -len;
     }
-    if (len == 0)
+    if (0 == len)
       add_char(hline_char, font::hor, h, vpos, col, fill,
 	       HDRAW_MODE|START_LINE|END_LINE);
     else {
