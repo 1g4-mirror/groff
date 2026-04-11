@@ -135,11 +135,12 @@ tty_font *tty_font::load_tty_font(const char *s)
   tty_font *f = new tty_font(s);
   if (!f->load()) {
     delete f;
-    return 0;
+    return 0 /* nullptr */;
   }
   const char *num = f->get_internal_name();
   long n;
-  if (num != 0 && (n = strtol(num, 0, 0)) != 0)
+  if ((num != 0 /* nullptr */)
+      && (n = strtol(num, 0 /* nullptr */, 0)) != 0)
     f->mode = (unsigned char)(n & (BOLD_MODE|UNDERLINE_MODE));
   if (!do_underline)
     f->mode &= ~UNDERLINE_MODE;
@@ -361,7 +362,7 @@ long tty_printer::color_to_idx(color *col)
 void tty_printer::set_char(glyph *g, font *f, const environment *env,
 			   int w, const char *)
 {
-  if (w % font::hor != 0)
+  if ((w % font::hor) != 0)
     fatal("glyph width is not a multiple of horizontal motion quantum");
   add_char(f->get_code(g), w,
 	   env->hpos, env->vpos,
@@ -385,10 +386,10 @@ void tty_printer::add_char(output_character c, int w,
     return;
   }
   int vpos;
-  if (v == cached_v && cached_v != 0)
+  if ((v == cached_v) && (cached_v != 0))
     vpos = cached_vpos;
   else {
-    if (v % font::vert != 0)
+    if ((v % font::vert) != 0)
       fatal("vertical position not a multiple of vertical motion"
 	    " quantum");
     vpos = v / font::vert;
@@ -450,21 +451,23 @@ void tty_printer::special(char *arg, const environment *env, char type)
   if (type != 'p')
     return;
   char *p;
-  for (p = arg; *p == ' ' || *p == '\n'; p++)
+  for (p = arg; (*p == ' ') || (*p == '\n'); p++)
     ;
   char *tag = p;
-  for (; *p != '\0' && *p != ':' && *p != ' ' && *p != '\n'; p++)
+  for (;
+      (*p != '\0') && (*p != ':') && (*p != ' ') && (*p != '\n');
+      p++)
     ;
-  if (*p == '\0' || strncmp(tag, "tty", p - tag) != 0) {
+  if ((*p == '\0') || (strncmp(tag, "tty", p - tag) != 0)) {
     *p = '\0'; // terminate string at colon
     error("X command with '%1' tag ignored; expected 'tty'", tag);
     return;
   }
   p++;
-  for (; *p == ' ' || *p == '\n'; p++)
+  for (; (*p == ' ') || (*p == '\n'); p++)
     ;
   char *command = p;
-  for (; *p != '\0' && *p != ' ' && *p != '\n'; p++)
+  for (; (*p != '\0') && (*p != ' ') && (*p != '\n'); p++)
     ;
   if (*command == '\0') {
     error("empty X command ignored");
@@ -583,12 +586,12 @@ void tty_printer::draw_polygon(int *p, int np, const environment *env)
   int hpos = 0;
   int vpos = 0;
   for (int i = 0; i < np; i += 2) {
-    if (!(p[i] == 0 || p[i + 1] == 0))
+    if (!((p[i] == 0) || (p[i + 1] == 0)))
       return;
     hpos += p[i];
     vpos += p[i + 1];
   }
-  if (!(hpos == 0 || vpos == 0))
+  if (!((hpos == 0) || (vpos == 0)))
     return;
   int start_hpos = env->hpos;
   int start_vpos = env->vpos;
@@ -626,10 +629,10 @@ void tty_printer::line(int hpos, int vpos, int dx, int dy,
 #endif
   if ((dx != 0) && (dy != 0))
     warning("cannot draw diagonal line");
-  if (dx % font::hor != 0)
+  if ((dx % font::hor) != 0)
     fatal("length of horizontal line %1 is not a multiple of horizontal"
 	" motion quantum %2", dx, font::hor);
-  if (dy % font::vert != 0)
+  if ((dy % font::vert) != 0)
     fatal("length of vertical line %1 is not a multiple of vertical"
 	" motion quantum %2", dy, font::vert);
   if (dx == 0) {
@@ -790,7 +793,7 @@ static output_character crossings[4*4] = {
 
 void tty_printer::end_page(int page_length)
 {
-  if (page_length % font::vert != 0)
+  if ((page_length % font::vert) != 0)
     error("vertical position at end of page not multiple of vertical"
 	  " motion quantum");
   int lines_per_page = page_length / font::vert;
@@ -847,7 +850,8 @@ void tty_printer::end_page(int page_length)
 	    nextp->code = '+';
 	  continue;
 	}
-	if (p->draw_mode() != 0 && p->draw_mode() == nextp->draw_mode())
+	if ((p->draw_mode() != 0)
+	    && (p->draw_mode() == nextp->draw_mode()))
 	{
 	  nextp->code = p->code;
 	  continue;

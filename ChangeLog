@@ -97,6 +97,11 @@
 
 2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grotty/tty.cpp: Fix code style nit.  Parenthesize
+	formally complex expressions.
+
+2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/symbol.cpp (symbol::json_length): Strengthen
 	assertion, since we don't permit use of C0 controls in
 	identifiers; see Savannah #67734.  Use preprocessor to disable
