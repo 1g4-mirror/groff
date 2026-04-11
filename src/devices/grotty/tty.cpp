@@ -141,14 +141,17 @@ tty_font *tty_font::load_tty_font(const char *s)
   long n;
   if ((num != 0 /* nullptr */)
       && (n = strtol(num, 0 /* nullptr */, 0)) != 0L)
-    f->mode = (unsigned char)(n & (BOLD_MODE|UNDERLINE_MODE));
+    f->mode = static_cast<unsigned char>(n
+					 & (BOLD_MODE|UNDERLINE_MODE));
   if (!do_underline)
     f->mode &= ~UNDERLINE_MODE;
   if (!do_bold)
     f->mode &= ~BOLD_MODE;
-  if ((f->mode & (BOLD_MODE|UNDERLINE_MODE)) == (BOLD_MODE|UNDERLINE_MODE))
-    f->mode = (unsigned char)((f->mode & ~(BOLD_MODE|UNDERLINE_MODE))
-			      | bold_underline_mode);
+  if ((f->mode & (BOLD_MODE|UNDERLINE_MODE))
+      == (BOLD_MODE|UNDERLINE_MODE))
+    f->mode = static_cast<unsigned char>((f->mode
+					  & ~(BOLD_MODE|UNDERLINE_MODE))
+					  | bold_underline_mode);
   return f;
 }
 
@@ -367,7 +370,7 @@ void tty_printer::set_char(glyph *g, font *f, const environment *env,
   add_char(f->get_code(g), w,
 	   env->hpos, env->vpos,
 	   env->col, env->fill,
-	   ((tty_font *)f)->get_mode());
+	   (static_cast<tty_font *>(f))->get_mode());
 }
 
 void tty_printer::add_char(output_character c, int w,
@@ -696,18 +699,20 @@ void tty_printer::put_char(output_character wc)
     int count;
     char *p = buf;
     if (wc < 0x800)
-      count = 1, *p = (unsigned char)((wc >> 6) | 0xc0);
+      count = 1, *p = static_cast<unsigned char>((wc >> 6) | 0xc0);
     else if (wc < 0x10000)
-      count = 2, *p = (unsigned char)((wc >> 12) | 0xe0);
+      count = 2, *p = static_cast<unsigned char>((wc >> 12) | 0xe0);
     else if (wc < 0x200000)
-      count = 3, *p = (unsigned char)((wc >> 18) | 0xf0);
+      count = 3, *p = static_cast<unsigned char>((wc >> 18) | 0xf0);
     else if (wc < 0x4000000)
-      count = 4, *p = (unsigned char)((wc >> 24) | 0xf8);
+      count = 4, *p = static_cast<unsigned char>((wc >> 24) | 0xf8);
     else if (wc <= 0x7fffffff)
-      count = 5, *p = (unsigned char)((wc >> 30) | 0xfC);
+      count = 5, *p = static_cast<unsigned char>((wc >> 30) | 0xfC);
     else
       return;
-    do *++p = (unsigned char)(((wc >> (6 * --count)) & 0x3f) | 0x80);
+    do
+      *++p = static_cast<unsigned char>(((wc >> (6 * --count)) & 0x3f)
+					| 0x80);
       while (count > 0);
     *++p = '\0';
     putstring(buf);
