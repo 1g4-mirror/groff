@@ -97,6 +97,11 @@
 
 2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grotty/tty.cpp: Fix code style nit.  Correctly
+	type-annotate zero literals in comparisons.
+
+2026-04-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grotty/tty.cpp: Fix code style nit.  Parenthesize
 	formally complex expressions.
 

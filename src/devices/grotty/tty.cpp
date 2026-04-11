@@ -140,7 +140,7 @@ tty_font *tty_font::load_tty_font(const char *s)
   const char *num = f->get_internal_name();
   long n;
   if ((num != 0 /* nullptr */)
-      && (n = strtol(num, 0 /* nullptr */, 0)) != 0)
+      && (n = strtol(num, 0 /* nullptr */, 0)) != 0L)
     f->mode = (unsigned char)(n & (BOLD_MODE|UNDERLINE_MODE));
   if (!do_underline)
     f->mode &= ~UNDERLINE_MODE;
@@ -153,7 +153,7 @@ tty_font *tty_font::load_tty_font(const char *s)
 }
 
 tty_font::tty_font(const char *nm)
-: font(nm), mode(0)
+: font(nm), mode(0U)
 {
 }
 
@@ -438,7 +438,7 @@ void tty_printer::add_char(output_character c, int w,
 void tty_printer::simple_add_char(const output_character c,
 				  const environment *env)
 {
-  add_char(c, 0, env->hpos, env->vpos, env->col, env->fill, 0);
+  add_char(c, 0, env->hpos, env->vpos, env->col, env->fill, 0U);
 }
 
 void tty_printer::special(char *arg, const environment *env, char type)
@@ -524,10 +524,10 @@ void tty_printer::special_link(const char *arg, const environment *env)
     arg--;
     ptrdiff_t uri_len = arg - uri;
     // Any remaining arguments are "key=value" pairs.
-    const char *pair = 0;
+    const char *pair = 0 /* nullptr */;
     bool done = false;
     do {
-      if (pair != 0)
+      if (pair != 0 /* nullptr */)
 	simple_add_char(':', env);
       pair = arg;
       bool in_pair = true;
