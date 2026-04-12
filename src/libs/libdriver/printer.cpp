@@ -55,8 +55,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
      diagnostics.
   */
 
-  static int
-  check_for_output_error (FILE* stream)
+  static int check_for_output_error(FILE* stream)
   {
     /* First, clean up any prior error context on the output stream */
     if (ferror (stream))
@@ -83,7 +82,6 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 # define check_for_output_error(stream) ferror(stream) || fflush(stream) < 0
 
 #endif
-
 
 font_pointer_list::font_pointer_list(font *f, font_pointer_list *fp)
 : p(f), next(fp)
@@ -243,8 +241,8 @@ glyph *printer::set_char_and_width(const char *nm,
   return g;
 }
 
-void printer::set_numbered_char(int num, const environment *env, int
-				*widthp)
+void printer::set_numbered_char(int num, const environment *env,
+				int *widthp)
 {
   glyph *g = number_to_glyph(num);
   int fn = env->fontno;
