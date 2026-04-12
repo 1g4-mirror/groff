@@ -899,8 +899,12 @@ bool font::load(bool load_header_only)
 {
   char *path;
   FILE *fp = open_file(filename, &path);
-  if (0 /* nullptr */ == fp)
+  if (0 /* nullptr */ == fp) {
+    if (!load_header_only)
+      error("cannot open font description file '%1': %2", filename,
+	    strerror(errno));
     return false;
+  }
   text_file t(fp, path);
   t.silent = load_header_only;
   char *p = 0 /* nullptr */;

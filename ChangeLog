@@ -1,5 +1,13 @@
 2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/font.cpp (font::load): If we're not "loading
+	header only" (that is, not attempting to actually mount a font,
+	but merely checking its availability or validity, as with `.if F
+	ZCMI`), issue an error diagnostic disclosing the problem and the
+	system's reason the file couldn't be opened.
+
+2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libdriver/printer.cpp (printer::load_font): Validate
 	function arguments.  Add assert(3)ion that the string
 	representing of the font description to load isn't a null
