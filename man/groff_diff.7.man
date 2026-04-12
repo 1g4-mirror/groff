@@ -6365,8 +6365,12 @@ and the list of output nodes corresponding to the pending input line
 .SH "Compatibility mode"
 .\" ====================================================================
 .
-Some syntactical and behavioral differences between AT&T and GNU
-.IR troff s \" generic
+GNU
+.IR troff 's \" GNU
+features sometimes cause incompatibilities with documents written
+assuming old implementations of
+.IR troff . \" generic
+Some syntactical and behavioral differences between them
 are thought too important to neglect;
 GNU
 .I troff \" GNU
@@ -6657,6 +6661,7 @@ GNU
 .I troff \" GNU
 extension request names
 tend to ignore them,
+.\" "Tend" because a macro of a matching name is possible.
 and if they don't support a
 GNU
 .I troff \" GNU

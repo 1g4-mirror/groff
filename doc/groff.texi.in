@@ -22130,9 +22130,12 @@ Recall @ref{Host System Service Access}.
 @cindex compatibility mode
 @cindex mode, compatibility
 
-Some syntactical and behavioral differences between GNU and
-@acronym{AT&T}
-@command{troff}s
+GNU
+@command{troff}'s @c GNU
+features sometimes cause incompatibilities with documents written
+assuming old implementations of
+@code{troff}. @c generic
+Some syntactical and behavioral differences between them
 are thought too important to neglect;
 GNU
 @command{troff} @c GNU
@@ -22563,6 +22566,7 @@ GNU
 @command{troff} @c GNU
 extension request names
 tend to ignore them,
+@c "Tend" because a macro of a matching name is possible.
 and if they don't support a
 GNU
 @command{troff} @c GNU
@@ -22593,11 +22597,6 @@ which both render it as
 @c as of this writing, 2022-08-13
 @c NESTED END Keep in sync with groff_man_style(7).
 Recall @ref{Manipulating Filling and Adjustment}.
-GNU
-@command{troff}'s @c GNU
-features sometimes cause incompatibilities with documents written
-assuming old implementations of
-@code{troff}. @c generic
 
 @cindex trailing space, on input lines, difference from @acronym{AT&T} @code{troff}
 @cindex space, trailing, on input lines, difference from @acronym{AT&T} @code{troff}
