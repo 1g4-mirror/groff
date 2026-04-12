@@ -6516,7 +6516,7 @@ documented in
 .
 Further,
 escape sequences that produce horizontal or vertical motions,
-hyphenation breaks,
+hyphenation points,
 or that are dummy characters may appear in strings
 or be converted to nodes,
 particularly in diversions. \" (@pxref{GNU troff Internals})

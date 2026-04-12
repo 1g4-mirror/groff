@@ -658,7 +658,7 @@ adjustment of inter-word space size to justify text, and of
 inter-sentence space size to suit local style conventions
 
 @item
-automatic and manual determination of hyphenation break points
+automatic and manual determination of hyphenation points
 
 @item
 pagination
@@ -20834,7 +20834,7 @@ of the names documented in the
 @cite{groff_char@r{(7)}} man page.
 Further,
 escape sequences that produce horizontal or vertical motions,
-hyphenation breaks,
+hyphenation points,
 or that are dummy characters
 may appear in strings or be converted to nodes,
 particularly in diversions.@footnote{@xref{GNU @command{troff}
@@ -21048,7 +21048,7 @@ a special character token for
 (representing
 @samp{u}
 with an umlaut),
-a token encoding a hyphenation break point,@footnote{GNU
+a token encoding a hyphenation point,@footnote{GNU
 @command{troff}
 encodes tokens that aren't Unicode Basic Latin characters
 as code points in the C0 and C1 control ranges;
