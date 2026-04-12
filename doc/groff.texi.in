@@ -23325,8 +23325,12 @@ extend over more than one line.
 
 @item sizescale @var{n}
 @kindex sizescale
-A typographical point is subdivided into @var{n}@tie{}scaled points.
-The default is@tie{}@code{1}.  @xref{Using Fractional Type Sizes}.
+A typographical point is subdivided into
+@var{n}@tie{}scaled
+points.
+The default
+is@tie{}@code{1}.
+Recall @ref{Using Fractional Type Sizes}.
 
 @item styles @var{S1} @r{@dots{}} @var{Sm}
 @kindex styles
@@ -23335,8 +23339,14 @@ The first@tie{}@var{m} mounting positions are associated with styles
 
 @item tcommand
 @kindex tcommand
-The postprocessor can handle the @samp{t} and @samp{u} intermediate
-output commands.
+The postprocessor interprets the
+@code{t}
+and
+@code{u}
+output commands that
+GNU
+@command{troff} @c GNU
+produces.
 
 @item unicode
 @kindex unicode
@@ -23367,9 +23377,13 @@ The @code{grohtml} driver uses this directive.
 @c XXX: Savannah #63074 is trying to make this obsolescent.
 @item use_charnames_in_special
 @kindex use_charnames_in_special
-GNU @code{troff} should encode special characters in arguments to device
-extension commands; see @ref{Postprocessor Access}.  The @code{grohtml}
-driver uses this directive.
+GNU
+@command{troff} @c GNU
+should encode special characters
+in arguments to device extension commands;
+recall @ref{Postprocessor Access}.
+@cite{grohtml@r{(1)}}
+uses this directive.
 
 @item vert @var{n}
 @kindex vert
