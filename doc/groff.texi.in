@@ -7256,7 +7256,7 @@ follows.  @xref{Drawing Geometric Objects}.
 A general-purpose register
 (one created or updated with the
 @code{nr}
-request@footnote{@xref{Registers}.})
+request)@footnote{@xref{Registers}.}
 is implicitly dimensionless,
 or reckoned in basic units if interpreted in a measurement context.
 But it is convenient for many requests and escape sequences
