@@ -1,5 +1,12 @@
 2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (print_hyphenation_exceptions):
+	Slightly refactor.  Declare `const` symbol `bufsz` computed at
+	compile time as `static`.  Explicitly clear the stack memory
+	allocated to `wordbuf` array.
+
+2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (read_hyphenation_exception_word):
 	Generalize.  Support being called with null pointers to store
 	the breakpoint count and positions, so that a request that isn't

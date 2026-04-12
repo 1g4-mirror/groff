@@ -4104,8 +4104,11 @@ static void print_hyphenation_exceptions_request() // .phw
   // Pathologically, we could have a hyphenation point after every
   // character in a word except the last.  The word may have a trailing
   // space; see `hyphen_trie::read_patterns_file()`.
-  const size_t bufsz = WORD_MAX * 2;
-  char wordbuf[bufsz]; // need to `errprint()` it, so not `unsigned`
+  // C++11: constexp
+  static const size_t bufsz = WORD_MAX * 2;
+  // C++03: char wordbuf[bufsz]();
+  char wordbuf[bufsz]; // We need to `errprint()` it, so not `unsigned`.
+  (void) memset(wordbuf, '\0', bufsz);
   // We must use the nuclear `reinterpret_cast` operator because GNU
   // troff's dictionary types use a pre-STL approach to containers.
   while (iter.get(&entry, reinterpret_cast<void **>(&hypoint))) {
