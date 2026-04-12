@@ -4763,7 +4763,8 @@ it parses and stores the
 .RB \[lq] while \[rq]
 body again.
 .
-An often better solution\[em]and one that is more portable,
+Often,
+a better solution\[em]and a more portable one,
 since AT&T
 .I troff \" AT&T
 lacked the

@@ -16389,7 +16389,8 @@ body again.
 @cindex recursive macros
 @cindex macros, recursive
 @noindent
-An often better solution---and one that is more portable,
+Often,
+a better solution---and a more portable one,
 since @acronym{AT&T}
 @command{troff} @c AT&T
 lacked the
