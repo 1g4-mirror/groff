@@ -111,6 +111,9 @@ printer::~printer()
 void printer::load_font(int n, const char *nm)
 {
   assert(n >= 0);
+  assert(nm != 0 /* nullptr */);
+  if ((n < 0) || (0 /* nullptr */ == nm))
+      return;
   if (n >= nfonts) {
     if (0 == nfonts) {
       nfonts = 10;

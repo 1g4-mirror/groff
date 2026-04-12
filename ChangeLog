@@ -1,5 +1,13 @@
 2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libdriver/printer.cpp (printer::load_font): Validate
+	function arguments.  Add assert(3)ion that the string
+	representing of the font description to load isn't a null
+	pointer.  If a function argument is invalid, return early in
+	`NDEBUG` builds.
+
+2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libdriver/printer.cpp: Favor idiomatic C++ over C
 	preprocessor hacks.
 	(check_for_output_error)
