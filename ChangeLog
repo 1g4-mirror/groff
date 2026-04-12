@@ -1,3 +1,14 @@
+2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (read_hyphenation_exception_word):
+	Generalize.  Support being called with null pointers to store
+	the breakpoint count and positions, so that a request that isn't
+	interested in them need not reserve storage for them.
+	Consequently, default these function parameters to null
+	pointers.  Dereference and populate the breakpoint count and
+	positions only if these data are wanted.  Add assert(3)ion that
+	either both pointers are null or neither one is.
+
 2026-04-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp: Refactor.  Lift logic for parsing a

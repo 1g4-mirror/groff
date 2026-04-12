@@ -3934,12 +3934,19 @@ static const size_t bpbuflen = WORD_MAX + 2 /* leading '-' + '\0' */;
 // `breakpoint_count`, and `breakpoints` are then not meaningful and
 // should not be used.
 static bool read_hyphenation_exception_word(unsigned char *word,
-					    int *breakpoint_count,
-					    unsigned char *breakpoints)
+  int *breakpoint_count = 0 /* nullptr */,
+  unsigned char *breakpoints = 0 /* nullptr */)
 {
+  // Either both pointers must be null, or both non-null.
+  assert(!!(breakpoint_count) == !!(breakpoints));
+  bool want_breakpoints = false;
+  if ((breakpoint_count != 0 /* nullptr */)
+      && (breakpoints != 0 /* nullptr */))
+    want_breakpoints = true;
   int i = 0; // index into hyphenation exception word excluding '-'s
   unsigned char hc = 0U; // hyphenation code of current character
-  *breakpoint_count = 0;
+  if (want_breakpoints)
+    *breakpoint_count = 0;
   // Warn at most once per invalid word, not per request invocation.
   bool is_word_valid = true;
   bool was_warned = false;
@@ -3965,7 +3972,8 @@ static bool read_hyphenation_exception_word(unsigned char *word,
     if (is_word_valid) {
       tok.next();
       if (ci->get_ascii_code() == '-') {
-	if ((i > 0)
+	if (want_breakpoints
+	    && (i > 0)
 	    && ((*breakpoint_count == 0)
 	        || (breakpoints[((*breakpoint_count) - 1)] != i)))
 	  breakpoints[(*breakpoint_count)++] = i;
@@ -3991,7 +3999,8 @@ static bool read_hyphenation_exception_word(unsigned char *word,
   // of maximum size `WORD_MAX` (`UCHAR_MAX`).  That's kind of confusing
   // because `unsigned char` is also GNU troff's internal "ordinary"
   // character type.  Might be simpler just to use vector<int>.  --GBR
-  breakpoints[*breakpoint_count] = 0U;
+  if (want_breakpoints)
+    breakpoints[*breakpoint_count] = 0U;
   return is_word_valid;
 }
 
