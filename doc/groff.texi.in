@@ -6213,13 +6213,13 @@ preprocessor to lay out tables.
 @anchor{Requests} @c 1.22.4
 @subsection Requests and Macros
 
-We have now encountered almost all of the syntax there is in the
+The foregoing describes almost all of the syntax of the
 @code{roff}
 language,
-with an exception already noted in passing.@footnote{The backspace
-character is also meaningful;
-see
-@ref{Page Motions}.}
+with an exception already noted
+in passing.@footnote{The backspace character
+is also meaningful.
+@xref{Page Motions}.}
 @cindex request
 @cindex control character (@code{.})
 @cindex character, control (@code{.})
