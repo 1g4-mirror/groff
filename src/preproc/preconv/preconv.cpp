@@ -1,4 +1,5 @@
-/* Copyright 2005-2025 Free Software Foundation, Inc.
+/* Copyright 2005-2017 Free Software Foundation, Inc.
+                  2022 G. Branden Robinson
 
 Written by Werner Lemberg (wl@gnu.org)
 
