@@ -3970,14 +3970,27 @@ followed by its \[lq]to\[rq] translation.
 .
 .
 .TP
-.B .phw
+.BR .phw \~[\c
+.IR word \~\&.\|.\|.]
 Report,
 to the standard error stream,
+the hyphenation points of each
+hyphenation exception word
+.I word
+defined by the
+.B hw
+request,
+or,
+without arguments,
 the list of hyphenation exception words
 associated with the hyphenation language
 selected by the
 .B hla
 request.
+.
+Hyphens in
+.I word
+are ignored.
 .
 A
 .RB \[lq] \- \[rq]

@@ -1,5 +1,27 @@
 2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: The `phw` request now accepts arguments.  Each is
+	interpreted as a possible hyphenation word, ignoring hyphens in
+	the input, looked up in the hyphenation exception list for the
+	hyphenation language, and if found, is reported with its
+	hyphenation points.  Only hyphenation exceptions defined by the
+	`hw` request are reported.
+
+	* src/roff/troff/env.cpp (print_hyphenation_exceptions_request):
+	Implement it.
+
+	* src/roff/groff/tests/phw-request-works.sh: Test it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	* doc/groff.texi.in (Debugging):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests):
+	* NEWS: Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68205>.
+
+2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (print_hyphenation_exceptions):
 	Slightly refactor.  Declare `const` symbol `bufsz` computed at
 	compile time as `static`.  Explicitly clear the stack memory

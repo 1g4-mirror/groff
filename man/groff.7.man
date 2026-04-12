@@ -4636,6 +4636,22 @@ with a tab and asterisk
 .
 .
 .TPx
+.REQ .phw "word \fR\&.\|.\|.\&\fP"
+Report,
+to the standard error stream,
+the hyphenation points of each
+hyphenation exception word
+.I word
+defined by the
+.B hw
+request.
+.
+Hyphens in
+.I word
+are ignored.
+.
+.
+.TPx
 .REQ .pi command
 Pipe GNU
 .I troff \" GNU

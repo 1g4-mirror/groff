@@ -21537,18 +21537,29 @@ The ``from'' font identifier is listed first,
 followed by its ``to'' translation.
 @endDefreq
 
-@Defreq {phw, }
+@Defreq {phw, [@Var{word} @r{@dots{}}]}
 @cindex dumping hyphenation exception words (@code{phw})
 @cindex hyphenation exception words, dumping (@code{phw})
 @cindex exception words, hyphenation, dumping (@code{phw})
 Report,
 to the standard error stream,
+the hyphenation points of each
+hyphenation exception word
+@var{word}
+defined by the
+@code{hw}
+request,
+or,
+without arguments,
 the list of hyphenation exception words
 associated with the hyphenation language
 selected by the
 @code{hla}
 request;
 recall @ref{Manipulating Hyphenation}.
+Hyphens in
+@var{word}
+are ignored.
 A
 @samp{-}
 marks each hyphenation point.

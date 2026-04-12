@@ -4104,11 +4104,51 @@ static void print_hyphenation_exceptions_request() // .phw
   // Pathologically, we could have a hyphenation point after every
   // character in a word except the last.  The word may have a trailing
   // space; see `hyphen_trie::read_patterns_file()`.
-  // C++11: constexp
+  // C++11: constexpr
   static const size_t bufsz = WORD_MAX * 2;
   // C++03: char wordbuf[bufsz]();
   char wordbuf[bufsz]; // We need to `errprint()` it, so not `unsigned`.
   (void) memset(wordbuf, '\0', bufsz);
+  while (has_arg()) {
+    // C++11: constexp
+    static const size_t readbufsz = WORD_MAX;
+    // C++03: char readbuf[readbufsz]();
+    unsigned char readbuf[readbufsz];
+    if (read_hyphenation_exception_word(readbuf)) {
+      // See above regarding "slovenly typing" and Savannah #68230.
+      char *rbuf = reinterpret_cast<char *>(readbuf);
+      unsigned char *bp
+	= static_cast<unsigned char *>(
+	  current_language->exceptions.lookup(rbuf));
+      if (bp != 0 /* nullptr */) {
+	size_t r = 0;
+	// Array indices are 0-based; breakpoints are 1-based, occurring
+	// after the nth letter of a word.
+	size_t w = 1;
+	unsigned char ch = readbuf[r++];
+	wordbuf[0] = '#'; // Make a screw-up more obvious.
+	while (ch != 0U) {
+	  if (ch != '-') {
+	    wordbuf[w] = ch;
+	    if (r == *bp) {
+	      wordbuf[++w] = '-';
+	      bp++;
+	    }
+	    w++;
+	  }
+	  ch = readbuf[r++];
+	}
+	wordbuf[w] = '\0';
+	errprint("%1\n", &wordbuf[1]); // Don't print the initial '#'.
+	fflush(stderr);
+	assert(0U == *bp);
+      }
+    }
+    if (!has_arg()) {
+      skip_line();
+      return;
+    }
+  }
   // We must use the nuclear `reinterpret_cast` operator because GNU
   // troff's dictionary types use a pre-STL approach to containers.
   while (iter.get(&entry, reinterpret_cast<void **>(&hypoint))) {
