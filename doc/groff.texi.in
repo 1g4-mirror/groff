@@ -6894,12 +6894,16 @@ later.
 @cindex page, geometry of
 @cindex geometry, page
 
-@code{roff} systems format text under certain assumptions about the size
-of the output medium, or page.  For the formatter to correctly break a
-line it is filling, it must know the line length, which it derives from
-the page width (@pxref{Line Layout}).  For it to decide whether to write
-an output line to the current page or wait until the next one, it must
-know the page length (@pxref{Page Layout}).
+@code{roff}
+systems format text
+under certain assumptions about the size of the output medium,
+or page.
+For the formatter to correctly break a line it is filling,
+it must know the line length,
+which it derives from the page width.@footnote{@xref{Line Layout}.}
+For it to decide whether to write an output line
+to the current page or wait until the next one,
+it must know the page length.@footnote{@xref{Page Layout}.}
 
 @cindex device resolution
 @cindex resolution, device
@@ -6907,11 +6911,16 @@ know the page length (@pxref{Page Layout}).
 @cindex units, basic
 @cindex machine units
 @cindex units, machine
-A device's @dfn{resolution} converts practical units like inches or
-centimeters to @dfn{basic units}, a convenient length measure for the
-output device or file format.  The formatter and output driver use basic
-units to reckon page measurements.  The device description file defines
-its resolution and page dimensions (@pxref{DESC File Format}).
+A device's
+@dfn{resolution}
+converts practical units like inches or centimeters to
+@dfn{basic units},
+a length measure convenient for the output device or file format.
+The formatter and output driver
+use basic units to reckon page measurements.
+The device description file
+defines its resolution
+and page dimensions.@footnote{@xref{DESC File Format}.}
 
 @cindex page
 A @dfn{page} is a two-dimensional structure upon which a @code{roff}
@@ -6964,11 +6973,14 @@ terminal output devices have page offsets of zero.}
 @cindex drawing position, initial
 Combining the foregoing facts results in an origin that lies
 at the page offset in the horizontal dimension
-and at the text baseline (using the default vertical spacing)
+and at the text baseline
+(using the default vertical spacing)
 in the vertical dimension.
-A document can change these prior to its first written or drawn output;
-see @ref{Line Layout} and
-@ref{Manipulating Type Size and Vertical Spacing}.
+A document can change these
+prior to its first written or drawn output.@footnote{See
+@ref{Line Layout}
+and
+@ref{Manipulating Type Size and Vertical Spacing}.}
 @c This origin isn't necessarily--and generally is not--the one used by
 @c the device-independent output, but that coordinate system is not
 @c exposed in the *roff language, though it can be expressed in
@@ -7001,8 +7013,7 @@ corresponds to the last output line that fits on the page,
 the break caused by the end of input also breaks the page,
 producing a useless blank one.
 Macro packages keep users from having to confront this difficulty
-by setting ``traps''
-(@pxref{Traps});
+by setting ``traps'';@footnote{@xref{Traps}.}
 moreover,
 all but the simplest page layouts tend to have headers and footers,
 or at least bear vertical margins of at least one vee.
