@@ -79,7 +79,10 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
   /* For other systems, we simply assume that *any* output error context
      is to be reported.
   */
-# define check_for_output_error(stream) ferror(stream) || fflush(stream) < 0
+  static inline int check_for_output_error(FILE* stream)
+  {
+    return (ferror(stream) || (fflush(stream) < 0));
+  }
 
 #endif
 

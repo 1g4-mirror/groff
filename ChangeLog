@@ -1,5 +1,13 @@
 2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libdriver/printer.cpp: Favor idiomatic C++ over C
+	preprocessor hacks.
+	(check_for_output_error)
+	[!(_MSC_VER || _WIN32 && !__CYGWIN && !__UWIN)]: Define as a
+	`static inline` function, not a preprocessor macro.
+
+2026-04-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: The `phw` request now accepts arguments.  Each is
 	interpreted as a possible hyphenation word, ignoring hyphens in
 	the input, looked up in the hyphenation exception list for the
