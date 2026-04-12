@@ -50,10 +50,10 @@ output=$(printf '%s\n' "$input" | "$groff" -T ascii)
 echo "$output"
 
 echo "checking output when line tabs disabled" >&2
-echo "$output" | grep -qx "A         B         C" || wail
+echo "$output" | grep -Eqx "A {9}B {9}C" || wail
 
 echo "checking output when line tabs enabled" >&2
-echo "$output" | grep -qx "D         E                   F" || wail
+echo "$output" | grep -Eqx "D {9}E {19}F" || wail
 
 test -z "$fail"
 
