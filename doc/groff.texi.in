@@ -23856,7 +23856,11 @@ while
 @dfn{page description}
 denotes the language accepted
 by the parser that interprets this output for the output drivers.
-This parser handles whitespace more flexibly than @acronym{AT&T}
+This parser handles whitespace
+(spaces,
+tabs,
+and newlines)
+more flexibly than @acronym{AT&T}
 @command{troff}'s
 implementation,
 recognizes a GNU extension to the language,
@@ -23978,23 +23982,27 @@ but GNU
 follows each with a newline.
 
 Some commands have a more complex syntax;
-the GNU
+GNU
 @command{troff} @c GNU
-extension command for writing glyph sequences
-(@code{t})
-accepts a variable number of arguments.
+extension commands for writing glyph sequences,
+@code{t}
+and
+@code{u},
+accept a variable number of arguments;
+whitespace must follow them.
 Those that draw geometric objects
 (@code{D})
 or control the device
 (@code{x})
-furthermore recognize subcommand arguments.
-Such commands thus must end with a newline.
+furthermore recognize a variable number of space-
+or tab-separated words as arguments;
+such commands thus must end with a newline.
 In GNU
 @command{troff}, @c GNU
 the device extension (sub)command
 @samp{@w{x X}}
 uniquely supports a line continuation syntax;
-a single input line contains any other.
+a single input line bounds any other.
 
 @node Argument Units
 @subsubsection Argument Units
@@ -24011,12 +24019,18 @@ fonts and special characters.  The names of characters and fonts can be
 of arbitrary length.  A character that is to be printed is always in
 the current font.
 
-A string argument is always terminated by the next whitespace character
-(space, tab, or newline); an embedded @samp{#} character is regarded as
-part of the argument, not as the beginning of a comment command.  An
-integer argument is already terminated by the next non-digit character,
-which then is regarded as the first character of the next argument or
-command.
+A whitespace character
+(space, tab, or newline)
+always terminates a string argument.
+A
+@samp{#}
+character embedded in a string argument is part of that argument,
+not the beginning of a comment command.
+Any character other than a decimal numeral
+terminates a command that mtakes a numeric argument,
+and,
+if not whitespace,
+is interpreted as the start of a new command.
 
 @anchor{Document Parts} @c 1.23.0
 @node Output Structure
