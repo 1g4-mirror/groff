@@ -1,5 +1,16 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename `is_font_name()` to
+	`is_font_available()`.
+
+	* src/roff/troff/node.h: Update declaration.
+	* src/roff/troff/node.cpp (is_font_name): Rename this...
+	(is_font_available): ...to this.
+	* src/roff/troff/input.cpp (is_conditional_expression_true):
+	Update call site.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor.  Rename
 	`mount_font_no_translate()` to
 	`assign_font_and_file_name_to_mounting_position()` and update

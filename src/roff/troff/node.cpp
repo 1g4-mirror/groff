@@ -6743,8 +6743,8 @@ bool mount_font(int n, symbol name, symbol external_name)
 							n);
 }
 
-// True for abstract styles and resolved font names.
-bool is_font_name(symbol fam, symbol name)
+// Is `name` in family `fam` mounted or available for mounting?
+bool is_font_available(symbol fam, symbol name)
 {
   if (is_abstract_style(name))
     name = concat(fam, name);

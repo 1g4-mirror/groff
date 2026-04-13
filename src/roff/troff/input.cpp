@@ -7322,7 +7322,7 @@ static bool is_conditional_expression_true()
       skip_branch();
       return false;
     }
-    result = is_font_name(curenv->get_family()->nm, nm);
+    result = is_font_available(curenv->get_family()->nm, nm);
   }
   else if (c == 'S') {
     tok.next();
