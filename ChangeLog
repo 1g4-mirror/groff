@@ -1,5 +1,11 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/font.cpp (font::load_font, font::load):
+	Trivially refactor.  Rename `load_header_only` parameter to
+	`validate_only` for clarity.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor.  Relocate
 	`is_abstract_style()` function definition to precede its call
 	site.

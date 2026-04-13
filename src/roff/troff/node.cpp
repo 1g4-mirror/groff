@@ -6755,7 +6755,7 @@ bool is_font_available(symbol fam, symbol name)
   if (is_abstract_style(name))
     name = concat(fam, name);
   return assign_font_and_file_name_to_mounting_position(name,
-      name /* ignored */, 0 /* ignored */, true /* check_only */);
+      name /* ignored */, 0 /* ignored */, true /* validate_only */);
 }
 
 bool mount_style(int n, symbol name)
