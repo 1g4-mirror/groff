@@ -848,8 +848,8 @@ class troff_output_file : public real_output_file {
   color *current_fill_color;
   color *current_stroke_color;
   int current_font_number;
-  symbol *font_position;
-  int nfont_positions;
+  symbol *font_mounting_position;
+  int mounting_position_count;
   enum { TBUF_SIZE = 256 };
   char tbuf[TBUF_SIZE];
   int tbuf_len;
@@ -1260,25 +1260,26 @@ void troff_output_file::set_font(tfont *tf)
   flush_tbuf();
   int n = tf->get_input_position();
   symbol nm = tf->get_name();
-  if (n >= nfont_positions || font_position[n] != nm) {
+  if (n >= mounting_position_count || font_mounting_position[n] != nm)
+  {
     put("x font ");
     put(n);
     put(' ');
     put(nm.contents());
     put('\n');
-    if (n >= nfont_positions) {
-      int old_nfont_positions = nfont_positions;
-      symbol *old_font_position = font_position;
-      nfont_positions *= 3;
-      nfont_positions /= 2;
-      if (nfont_positions <= n)
-	nfont_positions = n + 10;
-      font_position = new symbol[nfont_positions];
-      memcpy(font_position, old_font_position,
-	     old_nfont_positions*sizeof(symbol));
-      delete[] old_font_position;
+    if (n >= mounting_position_count) {
+      int old_mounting_position_count = mounting_position_count;
+      symbol *old_font_mounting_position = font_mounting_position;
+      mounting_position_count *= 3;
+      mounting_position_count /= 2;
+      if (mounting_position_count <= n)
+	mounting_position_count = n + 10;
+      font_mounting_position = new symbol[mounting_position_count];
+      memcpy(font_mounting_position, old_font_mounting_position,
+	     old_mounting_position_count*sizeof(symbol));
+      delete[] old_font_mounting_position;
     }
-    font_position[n] = nm;
+    font_mounting_position[n] = nm;
   }
   if (current_font_number != n) {
     put('f');
@@ -1630,8 +1631,8 @@ void troff_output_file::really_begin_page(int pageno,
   output_hpos = 0;
   output_vpos = 0;
   must_update_drawing_position = true;
-  for (int i = 0; i < nfont_positions; i++)
-    font_position[i] = NULL_SYMBOL;
+  for (int i = 0; i < mounting_position_count; i++)
+    font_mounting_position[i] = NULL_SYMBOL;
   put('p');
   put(pageno);
   put('\n');
@@ -1657,8 +1658,8 @@ void troff_output_file::really_copy_file(hunits x, vunits y,
   current_size = 0;
   current_tfont = 0;
   current_font_number = FONT_NOT_MOUNTED;
-  for (int i = 0; i < nfont_positions; i++)
-    font_position[i] = NULL_SYMBOL;
+  for (int i = 0; i < mounting_position_count; i++)
+    font_mounting_position[i] = NULL_SYMBOL;
 }
 
 void troff_output_file::really_transparent_char(unsigned char c)
@@ -1668,7 +1669,7 @@ void troff_output_file::really_transparent_char(unsigned char c)
 
 troff_output_file::~troff_output_file()
 {
-  delete[] font_position;
+  delete[] font_mounting_position;
 }
 
 void troff_output_file::trailer(vunits page_length)
@@ -1689,10 +1690,10 @@ void troff_output_file::trailer(vunits page_length)
 
 troff_output_file::troff_output_file()
 : current_slant(0), current_height(0), current_fill_color(0),
-  current_stroke_color(0), nfont_positions(10), tbuf_len(0),
+  current_stroke_color(0), mounting_position_count(10), tbuf_len(0),
   has_page_begun(false), cur_div_level(0)
 {
-  font_position = new symbol[nfont_positions];
+  font_mounting_position = new symbol[mounting_position_count];
   put("x T ");
   put(device);
   put('\n');

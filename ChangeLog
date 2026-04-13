@@ -1,5 +1,19 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Trivially refactor.  Rename objects
+	to better align with terminology used in our documentation.
+	(class troff_output_file): Rename:
+	- font_position -> font_mounting_position
+	- nfont_positions -> mounting_position_count
+	(troff_output_file::set_font)
+	(troff_output_file::really_begin_page)
+	(troff_output_file::really_copy_file)
+	(troff_output_file::~troff_output_file)
+	(troff_output_file::troff_output_file): Update dereference
+	sites.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename functions to better align
 	with terminology used in our documentation.
 
