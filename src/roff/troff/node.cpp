@@ -6841,14 +6841,14 @@ static void mount_font_at_position_request() // .fp
       error("font mounting position %1 is negative", n);
     else {
       symbol internal_name
-	= read_identifier(true /* want_diagnostic */);
+	  = read_identifier(true /* want_diagnostic */);
       if (!internal_name.is_null()) {
 	symbol filename = read_long_identifier();
 	if (!mount_font_at_position(internal_name, n, filename)) {
 	  string msg;
 	  if (filename != 0 /* nullptr */)
-	    msg += string(" from file '") + filename.contents()
-	      + string("'");
+	    msg += (string(" from file '") + filename.contents()
+		    + string("'"));
 	  msg += '\0';
 	  error("cannot load font description '%1'%2 for mounting",
 		internal_name.contents(), msg.contents());
