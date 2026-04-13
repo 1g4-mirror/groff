@@ -13543,8 +13543,11 @@ Initially, no characters have this property.
 
 In contrast to values 2 and@tie{}4, the values 128, 256, and 512 work
 pairwise.  If, for example, the left character has value 512, and the
-right character 128, no break will be automatically inserted between
-them.  If we use value@tie{}6 instead for the left character, a break
+right character 128,
+GNU
+@command{troff} @c GNU
+does not insert a break between them.
+If we use value@tie{}6 instead for the left character, a break
 after the character can't be suppressed since the neighboring character
 on the right doesn't get examined.
 @endDefreq
@@ -15666,11 +15669,23 @@ request.
 @cindex uppercasing a string (@code{stringup})
 @cindex lowercasing a string (@code{stringdown})
 @cindex down-casing a string (@code{stringdown})
-Alter the string named @var{str} by replacing each of its bytes with its
-lowercase (@code{stringdown}) or uppercase (@code{stringup}) version (if
-one exists).  Special characters in the string will often transform in
-the expected way due to the regular naming convention for accented
-characters.  When they do not, use substrings and/or catenation.
+Alter the string named
+@var{str}
+by replacing each of its bytes with its
+lowercase
+(@code{stringdown})
+or uppercase
+(@code{stringup})
+version
+(if one exists).
+GNU
+@command{troff}'s @c GNU
+built-in special characters often transform in the expected way
+due to the regular naming convention
+for accented characters.@footnote{See
+@cite{groff_char@r{(7)}.}}
+When they do not,
+use substrings and/or catenation.
 
 @Example
 .ds resume R\['e]sum\['e]\"
@@ -17122,10 +17137,13 @@ use @code{\E} to keep @samp{..} from ending a macro definition
 prematurely.  If the multiplicity of backslashes complicates
 maintenance, use end macros.
 
-@code{\E} is also convenient to define strings containing escape
-sequences that need to work when used in copy mode (for example, as
-macro arguments), or which will be interpolated at varying macro nesting
-depths.  We might define strings to begin and end superscripting
+@code{\E}
+is also convenient to define strings containing escape sequences that
+need to work when used in copy mode
+(for example,
+as macro arguments),
+or that are interpolated at varying macro nesting depths.
+We might define strings to begin and end superscripting
 as follows.@footnote{These are lightly adapted from the @code{groff}
 implementation of the @file{ms} macros.}
 

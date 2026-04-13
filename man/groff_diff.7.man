@@ -549,7 +549,9 @@ If,
 for example,
 the left character has value 512,
 and the right character 128,
-no break will be automatically inserted between them.
+GNU
+.I troff \" GNU
+does not insert a break between them.
 .
 If we use value\~6 instead for the left character,
 a break after the character can't be suppressed since the neighboring
@@ -1224,7 +1226,7 @@ It is also convenient to define strings containing escape sequences that
 need to work when used in copy mode
 (for example,
 as macro arguments),
-or that will be interpolated at varying macro nesting depths.
+or that are interpolated at varying macro nesting depths.
 .
 .
 .TP
@@ -4493,11 +4495,13 @@ or uppercase
 version
 (if one exists).
 .
-Special characters
-(see
-.MR groff_char @MAN7EXT@ )
-will often transform in the expected way due to the regular naming
-convention for accented characters.
+GNU
+.IR troff 's \" GNU
+built-in special characters often transform in the expected way
+due to the regular naming convention for accented characters.
+.
+See
+.MR groff_char @MAN7EXT@ .
 .
 When they do not,
 use substrings and/or catenation.
