@@ -6666,12 +6666,15 @@ dictionary font_dictionary(50);
 // that we've previously tried to mount the font and failed.
 font nonexistent_font = font("\0");
 
-// Mount font at position `n` with troff identifier `name` and
-// description file name `filename` (these are often identical).  If
-// `check_only`, just look up `name` in the existing list of mounted
-// fonts.
-static bool mount_font_no_translate(int n, symbol name, symbol filename,
-				    bool check_only = false)
+// Assign troff font identifier `name`, with font description file
+// `filename`, to mounting position `n`.  (The former two are often
+// identical.)  Return Boolean reporting success of this "mounting".
+//
+// If `check_only`, look up font identifier `name` in the existing
+// list of mounted fonts, and return Boolean indicating its presence.
+// TODO: We could use a separate function for "checking only".
+static bool assign_font_and_file_name_to_mounting_position(
+    symbol name, symbol filename, int n, bool check_only = false)
 {
   assert(n >= 0);
   font *fm = 0 /* nullptr */;
@@ -6735,7 +6738,9 @@ bool mount_font(int n, symbol name, symbol external_name)
     external_name = name;
   else
     external_name = get_font_translation(external_name);
-  return mount_font_no_translate(n, name, external_name);
+  return assign_font_and_file_name_to_mounting_position(name,
+							external_name,
+							n);
 }
 
 // True for abstract styles and resolved font names.
@@ -6743,7 +6748,8 @@ bool is_font_name(symbol fam, symbol name)
 {
   if (is_abstract_style(name))
     name = concat(fam, name);
-  return mount_font_no_translate(0, name, name, true /* check only */);
+  return assign_font_and_file_name_to_mounting_position(name,
+      name /* ignored */, 0 /* ignored */, true /* check_only */);
 }
 
 bool is_abstract_style(symbol s)
@@ -6905,7 +6911,7 @@ int font_family::resolve(int mounting_position)
       break;
   if (n >= font_table_size) {
     n = next_available_font_position();
-    if (!mount_font_no_translate(n, f, f))
+    if (!assign_font_and_file_name_to_mounting_position(f, f, n))
       return FONT_NOT_MOUNTED;
   }
   return map[pos] = n;
