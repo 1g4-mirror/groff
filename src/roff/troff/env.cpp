@@ -645,7 +645,7 @@ bool environment::set_font(symbol nm)
     int n = mounting_position_of_font(nm);
     if (n < 0) {
       n = next_available_font_mounting_position();
-      if (!mount_font(n, nm))
+      if (!mount_font_at_position(nm, n))
 	return false;
     }
     if (family->resolve(n) == FONT_NOT_MOUNTED)

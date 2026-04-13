@@ -702,8 +702,8 @@ inline hyphen_list::hyphen_list(unsigned char code, hyphen_list *p)
 }
 
 extern void read_desc();
-extern bool mount_font(int, symbol,
-		       symbol /* external_name */ = NULL_SYMBOL);
+extern bool mount_font_at_position(symbol, int,
+    symbol /* external_name */ = NULL_SYMBOL);
 extern bool is_font_available(symbol /* family */, symbol /* name */);
 extern bool is_abstract_style(symbol);
 extern bool mount_style(int, symbol);

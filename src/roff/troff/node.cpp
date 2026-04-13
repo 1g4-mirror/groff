@@ -6722,7 +6722,7 @@ static void print_font_mounting_position_request() // .pfp
   skip_line();
 }
 
-bool mount_font(int n, symbol name, symbol external_name)
+bool mount_font_at_position(symbol name, int n, symbol external_name)
 {
   assert(n >= 0);
   name = get_font_translation(name);
@@ -6841,7 +6841,7 @@ static void mount_font_at_position_request() // .fp
 	= read_identifier(true /* want_diagnostic */);
       if (!internal_name.is_null()) {
 	symbol filename = read_long_identifier();
-	if (!mount_font(n, internal_name, filename)) {
+	if (!mount_font_at_position(internal_name, n, filename)) {
 	  string msg;
 	  if (filename != 0 /* nullptr */)
 	    msg += string(" from file '") + filename.contents()
@@ -7012,7 +7012,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
       n = mounting_position_of_font(s);
       if (n < 0) {
 	n = next_available_font_mounting_position();
-	if (mount_font(n, s))
+	if (mount_font_at_position(s, n))
 	  finfo->position = n;
       }
       finfo->position = curenv->get_family()->resolve(n);
@@ -7183,24 +7183,24 @@ static void zoom_font_request() // .fzoom
     return;
   }
   int fpos = next_available_font_mounting_position();
-  if (!(mount_font(fpos, font_name))) {
+  if (!(mount_font_at_position(font_name, fpos))) {
     error("cannot mount font '%1' to set a zoom factor for it",
 	  font_name.contents());
     skip_line();
     return;
   }
 #if 0
-  // This would be a good diagnostic to have, but mount_font() is too
-  // formally complex to make it easy.  Instead it will fail in the
-  // above test on a font named "R", for instance, when that is
-  // literally true but might not help users who don't understand that
-  // "R", "I", "B", and "BI" are (by default) abstract styles, not fonts
-  // in the GNU troff sense.  It is a shame that a lot of our validation
-  // functions are willing only to handle arguments that they eat from
-  // the input stream (i.e., you can't pass them information you
-  // obtained elsewhere).  That design also forces us to validate
-  // request arguments in the order they appear in the input, and seems
-  // unnecessarily inflexible to me.  --GBR
+  // This would be a good diagnostic to have, but
+  // mount_font_at_position() is too formally complex to make it easy.
+  // Instead it will fail in the above test on a font named "R", for
+  // instance, when that is literally true but might not help users who
+  // don't understand that "R", "I", "B", and "BI" are (by default)
+  // abstract styles, not fonts in the GNU troff sense.  It is a shame
+  // that a lot of our validation functions are willing only to handle
+  // arguments that they eat from the input stream (i.e., you can't pass
+  // them information you obtained elsewhere).  That design also forces
+  // us to validate request arguments in the order they appear in the
+  // input, and seems unnecessarily inflexible to me.  --GBR
   if (font_table[fpos]->is_style()) {
     warning(WARN_FONT, "ignoring request to set font zoom factor on an"
 	    " abstract style");

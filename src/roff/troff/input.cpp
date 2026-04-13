@@ -10144,7 +10144,7 @@ int main(int argc, char **argv)
     // In the DESC file, a font name of 0 (zero) means "leave this
     // position empty".
     if (strcmp(font::font_name_table[i], "0") != 0)
-      if (!mount_font(j, symbol(font::font_name_table[i])))
+      if (!mount_font_at_position(symbol(font::font_name_table[i]), j))
 	warning(WARN_FONT, "cannot mount font '%1' directed by 'DESC'"
 		" file for device '%2'", font::font_name_table[i],
 		device);

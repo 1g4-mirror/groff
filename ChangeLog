@@ -27,6 +27,17 @@
 	(font_family::resolve, read_font_identifier, zoom_font_request)
 	(next_available_font_position_reg): Update call sites.
 
+	* src/roff/troff/node.h: Rename declaration of
+	`mount_font()` to `mount_font_at_position()`.  Also resequence
+	arguments to follow the order implies by the English words in
+	the function name.  (Compare fprintf(3) and contrast fputs(3).)
+	* src/roff/troff/node.cpp (mount_font): Rename this...
+	(mount_font_at_position): ...to this.  Resequence arguments.
+	* src/roff/troff/env.cpp (environment::set_font):
+	* src/roff/troff/input.cpp (main):
+	* src/roff/troff/node.cpp (mount_font_at_position_request)
+	(read_font_identifier, zoom_font_request): Update call sites.
+
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp: Refactor.  Take one of
