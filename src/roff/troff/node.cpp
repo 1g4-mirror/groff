@@ -6755,7 +6755,7 @@ bool is_font_available(symbol fam, symbol name)
 bool is_abstract_style(symbol s)
 {
   int i = symbol_fontno(s);
-  return i < 0 ? 0 : font_table[i]->is_style();
+  return (i < 0) ? false : font_table[i]->is_style();
 }
 
 bool mount_style(int n, symbol name)

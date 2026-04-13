@@ -1,5 +1,12 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (is_abstract_style): Fix code style
+	nits.  Return Boolean instead of integer literal from this
+	function returning `bool`.  Parenthesize formally complex
+	expression.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Trivially refactor.  Rename `is_font_name()` to
 	`is_font_available()`.
 
