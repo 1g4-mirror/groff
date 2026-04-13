@@ -1408,7 +1408,7 @@ static void point_size() // .ps
 
 static void override_available_type_sizes_request() // .sizes
 {
-  if (!has_arg(true /* peek */)) {
+  if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "available font sizes override request"
 	    " expects at least one argument");
     skip_line();
@@ -2745,7 +2745,7 @@ static void break_with_forced_adjustment_request() //. brp
 
 void title() // .tl
 {
-  if (!has_arg(true /* peek */)) {
+  if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "title line request expects a delimited"
 	    " argument");
     skip_line();
@@ -4850,7 +4850,7 @@ static void read_hyphenation_patterns_from_file(bool append)
 
 static void load_hyphenation_patterns_from_file_request() // .hpf
 {
-  if (!has_arg(true /* peek */)) {
+  if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "hyphenation pattern load request expects"
 	    " argument");
     skip_line();
@@ -4862,7 +4862,7 @@ static void load_hyphenation_patterns_from_file_request() // .hpf
 
 static void append_hyphenation_patterns_from_file_request() // .hpfa
 {
-  if (!has_arg(true /* peek */)) {
+  if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "hyphenation pattern appendment request"
 	    " expects argument");
     skip_line();

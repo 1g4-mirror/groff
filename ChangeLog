@@ -1,5 +1,10 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (has_arg): Trivially refactor.
+	Rename argument from `want_peek` to `peeking`.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (make_composite_node)
 	(make_glyph_node): Fix code style nit.  Parenthesize formally
 	complex expressions.
