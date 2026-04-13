@@ -7569,12 +7569,12 @@ void init_output()
     the_output = new troff_output_file;
 }
 
-class next_available_font_position_reg : public reg {
+class next_available_font_mounting_position_reg : public reg {
 public:
   const char *get_string();
 };
 
-const char *next_available_font_position_reg::get_string()
+const char *next_available_font_mounting_position_reg::get_string()
 {
   return i_to_a(next_available_font_mounting_position());
 }
@@ -7612,7 +7612,7 @@ void init_node_requests()
   init_request("tkf", configure_track_kerning_request);
   init_request("uf", select_underline_font_request);
   register_dictionary.define(".fp",
-			     new next_available_font_position_reg);
+      new next_available_font_mounting_position_reg);
   register_dictionary.define(".kern",
       new readonly_boolean_register(&global_kern_mode));
   register_dictionary.define(".lg",

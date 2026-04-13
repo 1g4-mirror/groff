@@ -1,5 +1,14 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Trivially refactor.  Rename class
+	to better align with terminology used in our documentation.
+	(class next_available_font_position_reg): Rename this...
+	(class next_available_font_mounting_position_reg): ...to this.
+	(init_node_requests): Update wire-uppery of built-in register
+	interpolator to its name in the formatter.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor.  Rename objects
 	to better align with terminology used in our documentation.
 	(class troff_output_file): Rename:
