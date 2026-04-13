@@ -642,7 +642,7 @@ bool environment::set_font(symbol nm)
   }
   else {
     prev_fontno = fontno;
-    int n = symbol_fontno(nm);
+    int n = mounting_position_of_font(nm);
     if (n < 0) {
       n = next_available_font_position();
       if (!mount_font(n, nm))

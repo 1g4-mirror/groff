@@ -6737,7 +6737,7 @@ bool mount_font(int n, symbol name, symbol external_name)
 
 bool is_abstract_style(symbol s)
 {
-  int i = symbol_fontno(s);
+  int i = mounting_position_of_font(s);
   return (i < 0) ? false : font_table[i]->is_style();
 }
 
@@ -6903,8 +6903,8 @@ int font_family::resolve(int mounting_position)
   symbol sty = font_table[pos]->get_name();
   symbol f = catenate(nm, sty);
   int n;
-  // Don't use symbol_fontno, because that might return a style and
-  // because we don't want to translate the name.
+  // Don't use mounting_position_of_font(), because that might return a
+  // style and because we don't want to translate the name.
   for (n = 0; n < font_table_size; n++)
     if ((font_table[n] != 0 /* nullptr */) && font_table[n]->is_named(f)
 	&& !font_table[n]->is_style())
@@ -7009,7 +7009,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
     symbol s = read_identifier(true /* want_diagnostic */);
     finfo->requested_name = const_cast<char *>(s.contents());
     if (!s.is_null()) {
-      n = symbol_fontno(s);
+      n = mounting_position_of_font(s);
       if (n < 0) {
 	n = next_available_font_position();
 	if (mount_font(n, s))
@@ -7230,7 +7230,7 @@ int next_available_font_position()
   return i;
 }
 
-int symbol_fontno(symbol s)
+int mounting_position_of_font(symbol s)
 {
   s = get_font_translation(s);
   for (int i = 0; i < font_table_size; i++)

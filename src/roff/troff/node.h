@@ -709,7 +709,7 @@ extern bool is_abstract_style(symbol);
 extern bool mount_style(int, symbol);
 extern bool is_valid_font_mounting_position(int);
 extern bool is_valid_font(int);
-extern int symbol_fontno(symbol);
+extern int mounting_position_of_font(symbol);
 extern int next_available_font_position();
 extern void init_size_list(int *);
 extern int get_underline_fontno();

@@ -1,5 +1,20 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Trivially refactor.  Rename function to better align
+	with terminology used in our documentation.
+
+	* src/roff/troff/node.h: Rename declaration of `symbol_fontno()`
+	to `mounting_position_of_font()`, since it has nothing to do
+	with a "symbol font" (like "S") as discussed by user-facing
+	documentation.
+	* src/roff/troff/node.cpp (symbol_fontno): Rename this...
+	(mounting_position_of_font): ...to this.
+	* src/roff/troff/env.cpp (environment::set_font):
+	* src/roff/troff/node.cpp (is_abstract_style)
+	(font_family::resolve, read_font_identifier): Update call sites.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Refactor.  Take one of
 	`assign_font_and_file_name_to_mounting_position()`'s jobs away
 	from it, awarding it instead to the only call site that wanted
