@@ -38,6 +38,12 @@
 	* src/roff/troff/node.cpp (mount_font_at_position_request)
 	(read_font_identifier, zoom_font_request): Update call sites.
 
+	* src/roff/troff/node.cpp
+	(associate_style_with_font_position_request): Rename this...
+	(assign_style_to_font_mounting_position_request): ...to this.
+	(init_node_requests): Update wire-uppery of request handler to
+	its name in the formatter.
+
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp: Refactor.  Take one of

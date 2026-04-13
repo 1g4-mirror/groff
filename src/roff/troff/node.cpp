@@ -6946,7 +6946,7 @@ void font_family::invalidate_fontno(int n)
   }
 }
 
-static void associate_style_with_font_position_request() // .sty
+static void assign_style_to_font_mounting_position_request() // .sty
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "abstract style configuration request expects"
@@ -7605,7 +7605,7 @@ void init_node_requests()
   init_request("rfschar", remove_font_specific_character_request);
   init_request("shc", soft_hyphen_character_request);
   init_request("special", set_special_fonts_request);
-  init_request("sty", associate_style_with_font_position_request);
+  init_request("sty", assign_style_to_font_mounting_position_request);
   init_request("tkf", configure_track_kerning_request);
   init_request("uf", select_underline_font_request);
   register_dictionary.define(".fp",
