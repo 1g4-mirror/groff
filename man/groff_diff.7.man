@@ -276,6 +276,14 @@ AT&T
 .IR troff 's \" AT&T
 hyphenation system (\[lq]suftab\[rq]) was specific to English.
 .
+GNU
+.I troff \" GNU
+support additional hyphenation modes to support other languages.
+.
+New values 16 and\~32 are available;
+the former enables hyphenation before the last character in a word,
+and the latter enables hyphenation after the first character in a word.
+.
 .
 .P
 New requests permit finer control over hyphenation breaking;
@@ -1873,14 +1881,14 @@ even if the interpolation context disables compatibility mode.
 .
 .TP
 .BI .hy\~ n
-New values 16 and\~32 are available;
-the former enables hyphenation before the last character in a word,
-and the latter enables hyphenation after the first character in a word.
-.
-If invoked without an argument,
-the mode configured by the
+If the argument
+.I n
+is omitted,
+the environment's default hyphenation mode,
+configured by the
 .B hydefault
-request is selected.
+request,
+is selected.
 .
 .
 .TP
