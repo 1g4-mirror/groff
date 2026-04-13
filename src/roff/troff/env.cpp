@@ -626,7 +626,7 @@ static void warn_if_font_name_deprecated(symbol nm)
   }
 }
 
-bool environment::set_font(symbol nm)
+bool environment::select_font(symbol nm)
 {
   if (was_line_interrupted)
     return false;
@@ -661,7 +661,7 @@ bool environment::set_font(symbol nm)
   return true;
 }
 
-bool environment::set_font(int n)
+bool environment::select_font(int n)
 {
   if (was_line_interrupted)
     return false;
@@ -1349,8 +1349,8 @@ void select_font(symbol s)
 	break;
       }
   }
-  // environment::set_font warns if an unused mounting position is
-  // requested.  We must warn here if a bogus font name is selected.
+  // `environment::select_font()` warns if an unused mounting position
+  // is requested.  We must warn here if a bogus font name is selected.
   if (is_number) {
     errno = 0;
     long val = strtol(s.contents(), NULL, 10);
@@ -1358,12 +1358,12 @@ void select_font(symbol s)
       warning(WARN_RANGE, "font mounting position must be in range"
 	      " 0..%1, got %2", INT_MAX, s.contents());
     else
-      (void) curenv->set_font(int(val));
+      (void) curenv->select_font(int(val));
   }
   else {
     if (s == "DESC")
       error("'%1' is not a valid font name", s.contents());
-    else if (!curenv->set_font(s))
+    else if (!curenv->select_font(s))
       warning(WARN_FONT, "cannot select font '%1'", s.contents());
   }
 }

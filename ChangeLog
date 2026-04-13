@@ -92,6 +92,13 @@
 	(assign_font_and_file_name_to_mounting_position)
 	(mount_style): Update call sites.
 
+	* src/roff/troff/env.h (class environment): Rename declaration
+	of `set_font()` to `select_font()`.
+	* src/roff/troff/env.cpp (environment::set_font): Rename
+	these overloaded names...
+	(environment::select_font): ...to these.
+	(select_font): Update call site.
+
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp: Refactor.  Take one of
