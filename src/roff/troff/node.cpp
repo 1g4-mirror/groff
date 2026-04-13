@@ -6691,7 +6691,7 @@ static bool assign_font_and_file_name_to_mounting_position(
     if ((n - font_table_size) > 1000) {
       error("requested font mounting position %1 too much larger than"
 	    " first unused position %2", n,
-	    next_available_font_position());
+	    next_available_font_mounting_position());
       return false;
     }
     grow_font_table(n);
@@ -6910,7 +6910,7 @@ int font_family::resolve(int mounting_position)
 	&& !font_table[n]->is_style())
       break;
   if (n >= font_table_size) {
-    n = next_available_font_position();
+    n = next_available_font_mounting_position();
     if (!assign_font_and_file_name_to_mounting_position(f, f, n))
       return FONT_NOT_MOUNTED;
   }
@@ -7011,7 +7011,7 @@ static bool read_font_identifier(font_lookup_info *finfo)
     if (!s.is_null()) {
       n = mounting_position_of_font(s);
       if (n < 0) {
-	n = next_available_font_position();
+	n = next_available_font_mounting_position();
 	if (mount_font(n, s))
 	  finfo->position = n;
       }
@@ -7182,7 +7182,7 @@ static void zoom_font_request() // .fzoom
     skip_line();
     return;
   }
-  int fpos = next_available_font_position();
+  int fpos = next_available_font_mounting_position();
   if (!(mount_font(fpos, font_name))) {
     error("cannot mount font '%1' to set a zoom factor for it",
 	  font_name.contents());
@@ -7220,7 +7220,7 @@ static void zoom_font_request() // .fzoom
   skip_line();
 }
 
-int next_available_font_position()
+int next_available_font_mounting_position()
 {
   int i;
   for (i = 1;
@@ -7573,7 +7573,7 @@ public:
 
 const char *next_available_font_position_reg::get_string()
 {
-  return i_to_a(next_available_font_position());
+  return i_to_a(next_available_font_mounting_position());
 }
 
 class printing_reg : public reg {

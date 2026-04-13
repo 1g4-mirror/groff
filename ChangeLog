@@ -1,6 +1,6 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Trivially refactor.  Rename function to better align
+	[troff]: Trivially refactor.  Rename functions to better align
 	with terminology used in our documentation.
 
 	* src/roff/troff/node.h: Rename declaration of `symbol_fontno()`
@@ -12,6 +12,20 @@
 	* src/roff/troff/env.cpp (environment::set_font):
 	* src/roff/troff/node.cpp (is_abstract_style)
 	(font_family::resolve, read_font_identifier): Update call sites.
+
+	* src/roff/troff/node.h: Rename declaration of
+	`next_available_font_position()` to
+	`next_available_font_mounting_position()`.  Yes, it's a
+	mouthful, but the term "position" can apply to many things: the
+	drawing position, an index into an array, and so forth.
+	* src/roff/troff/node.cpp (next_available_font_position): Rename
+	this...
+	(next_available_font_mounting_position): ...to this.
+	* src/roff/troff/env.cpp (environment::set_font):
+	* src/roff/troff/node.cpp
+	(assign_font_and_file_name_to_mounting_position)
+	(font_family::resolve, read_font_identifier, zoom_font_request)
+	(next_available_font_position_reg): Update call sites.
 
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
