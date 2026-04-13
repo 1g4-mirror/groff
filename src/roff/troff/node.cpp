@@ -864,7 +864,7 @@ class troff_output_file : public real_output_file {
   void put(int i);
   void put(unsigned int i);
   void put(const char *s);
-  void set_font(tfont *tf);
+  void select_font(tfont *tf);
   void flush_tbuf();
 public:
   troff_output_file();
@@ -945,7 +945,7 @@ void troff_output_file::start_device_extension(tfont *tf, color *gcol,
 					       bool omit_command_prefix)
 {
   flush_tbuf();
-  set_font(tf);
+  select_font(tf);
   stroke_color(gcol);
   fill_color(fcol);
   do_motion();
@@ -1129,7 +1129,7 @@ void troff_output_file::put_char_width(charinfo *ci, tfont *tf,
     hpos += w.to_units() + kk;
     return;
   }
-  set_font(tf);
+  select_font(tf);
   unsigned char c = ci->get_ascii_code();
   if (0U == c) {
     stroke_color(gcol);
@@ -1207,7 +1207,7 @@ void troff_output_file::put_char(charinfo *ci, tfont *tf,
   flush_tbuf();
   if (!is_on())
     return;
-  set_font(tf);
+  select_font(tf);
   unsigned char c = ci->get_ascii_code();
   if (0U == c) {
     stroke_color(gcol);
@@ -1252,9 +1252,9 @@ void troff_output_file::put_char(charinfo *ci, tfont *tf,
   }
 }
 
-// set_font calls 'flush_tbuf' if necessary.
+// `select_font()` calls `flush_tbuf()` if necessary.
 
-void troff_output_file::set_font(tfont *tf)
+void troff_output_file::select_font(tfont *tf)
 {
   if (current_tfont == tf)
     return;

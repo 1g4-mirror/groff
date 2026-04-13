@@ -99,6 +99,13 @@
 	(environment::select_font): ...to these.
 	(select_font): Update call site.
 
+	* src/roff/troff/node.cpp (class troff_output_file): Rename
+	declaration of `set_font()` to `select_font()`.
+	(troff_output_file::set_font): Rename this...
+	(troff_output_file::select_font): ...to this.
+	(troff_output_file::start_device_extension)
+	(troff_output_file::put_char_width): Update call sites.
+
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp: Refactor.  Take one of
