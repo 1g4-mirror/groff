@@ -1,5 +1,13 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Trivially refactor.
+	(class hyphen_trie): Demote type of `read_patterns_file()`
+	member function's second argument from `int` to `bool`.
+	(hyphen_trie::read_patterns_file): Likewise, and rename it from
+	`append` to `appending`.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (has_arg): Trivially refactor.
 	Rename argument from `want_peek` to `peeking`.
 

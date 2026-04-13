@@ -3818,7 +3818,7 @@ public:
   hyphen_trie() {}
   ~hyphen_trie() {}
   void hyphenate(const char *, int, int *);
-  void read_patterns_file(const char *, int, dictionary *);
+  void read_patterns_file(const char *, bool, dictionary *);
 };
 
 struct hyphenation_language {
@@ -4404,10 +4404,10 @@ fail:
   return c;
 }
 
-void hyphen_trie::read_patterns_file(const char *name, int append,
+void hyphen_trie::read_patterns_file(const char *name, bool appending,
 				     dictionary *ex)
 {
-  if (!append)
+  if (!appending)
     clear();
   char buf[WORD_MAX + 1];
   for (int i = 0; i < WORD_MAX + 1; i++)
