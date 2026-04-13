@@ -1,5 +1,11 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Trivially refactor.  Relocate
+	`is_abstract_style()` function definition to precede its call
+	site.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (is_abstract_style): Fix code style
 	nits.  Return Boolean instead of integer literal from this
 	function returning `bool`.  Parenthesize formally complex

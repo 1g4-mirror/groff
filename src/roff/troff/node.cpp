@@ -6743,6 +6743,12 @@ bool mount_font(int n, symbol name, symbol external_name)
 							n);
 }
 
+bool is_abstract_style(symbol s)
+{
+  int i = symbol_fontno(s);
+  return (i < 0) ? false : font_table[i]->is_style();
+}
+
 // Is `name` in family `fam` mounted or available for mounting?
 bool is_font_available(symbol fam, symbol name)
 {
@@ -6750,12 +6756,6 @@ bool is_font_available(symbol fam, symbol name)
     name = concat(fam, name);
   return assign_font_and_file_name_to_mounting_position(name,
       name /* ignored */, 0 /* ignored */, true /* check_only */);
-}
-
-bool is_abstract_style(symbol s)
-{
-  int i = symbol_fontno(s);
-  return (i < 0) ? false : font_table[i]->is_style();
 }
 
 bool mount_style(int n, symbol name)
