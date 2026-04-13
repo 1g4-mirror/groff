@@ -6702,7 +6702,7 @@ static bool assign_font_and_file_name_to_mounting_position(
   else if (font_table[n] != 0 /* nullptr */)
     delete font_table[n];
   font_table[n] = new font_info(name, n, filename, fm);
-  font_family::invalidate_fontno(n);
+  font_family::invalidate_selected_font_mounting_position(n);
   return true;
 }
 
@@ -6775,7 +6775,7 @@ bool mount_style(int n, symbol name)
     delete font_table[n];
   font_table[n] = new font_info(get_font_translation(name), n,
 				NULL_SYMBOL, 0);
-  font_family::invalidate_fontno(n);
+  font_family::invalidate_selected_font_mounting_position(n);
   return true;
 }
 
@@ -6933,7 +6933,7 @@ font_family *lookup_family(symbol nm)
   return f;
 }
 
-void font_family::invalidate_fontno(int n)
+void font_family::invalidate_selected_font_mounting_position(int n)
 {
   assert(n >= 0 && n < font_table_size);
   dictionary_iterator iter(family_dictionary);

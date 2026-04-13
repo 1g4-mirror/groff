@@ -752,7 +752,7 @@ public:
   font_family(symbol);
   ~font_family();
   int resolve(int);
-  static void invalidate_fontno(int);
+  static void invalidate_selected_font_mounting_position(int);
 };
 
 extern int resolve_current_font_to_mounting_position(environment *);

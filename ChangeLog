@@ -81,6 +81,17 @@
 	* src/roff/troff/env.cpp (environment::set_font)
 	(configure_underlining): Update call sites.
 
+	* src/roff/troff/node.h (class font_family): Rename declaration
+	of `invalidate_fontno()` to
+	`invalidate_selected_font_mounting_position()`.
+	* src/roff/troff/node.cpp (font_family::invalidate_fontno):
+	Rename this...
+	(font_family::invalidate_selected_font_mounting_position): ...to
+	this.
+	* src/roff/troff/node.cpp
+	(assign_font_and_file_name_to_mounting_position)
+	(mount_style): Update call sites.
+
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp: Refactor.  Take one of
