@@ -379,6 +379,184 @@ but produces no hyphen if the word breaks at that location.
 .
 .
 .\" ====================================================================
+.SS "Character flags"
+.\" ====================================================================
+.
+Character properties that were immutable in
+AT&T
+.I troff \" AT&T
+are configurable in
+GNU
+.IR troff . \" GNU
+.
+The
+.B cflags
+request manipulates them.
+.
+Any character can be assigned properties
+.I n,
+where
+.I n
+is the sum of any of the following.
+.
+Some combinations are nonsensical,
+such as
+.RB \[lq] 33 \[rq]
+(1 + 32).
+.
+.
+.TP
+.B 1
+Recognize the character as ending a sentence if followed by a newline
+or two spaces.
+.
+Initially,
+characters
+.RB \[lq] .?!\& \[rq]
+have this property.
+.
+.
+.TP
+.B 2
+Enable breaks before the character.
+.
+A line is not broken at a character with this property unless the
+characters on each side both have non-zero hyphenation codes.
+.
+This exception can be overridden by adding 64.
+.
+Initially,
+no characters have this property.
+.
+.
+.TP
+.B 4
+Enable breaks after the character.
+.
+A line is not broken at a character with this property unless the
+characters on each side both have non-zero hyphenation codes.
+.
+This exception can be overridden by adding 64.
+.
+Initially,
+characters
+.RB \[lq] \-\[rs][hy]\[rs][em] \^\[rq]
+have this property.
+.
+.
+.TP
+.B 8
+Mark the glyph associated with this character as overlapping other
+instances of itself horizontally.
+.
+Initially,
+characters
+.RB \[lq]\^ \[rs][ul]\[rs][rn]\[rs][ru]\[rs][radicalex]\[rs][sqrtex]\
+\& \^\[rq]
+have this property.
+.
+.
+.TP
+.B 16
+Mark the glyph associated with this character as overlapping other
+instances of itself vertically.
+.
+Initially,
+the character
+.RB \[lq]\^ \[rs][br] \^\[rq]
+has this property.
+.
+.
+.TP
+.B 32
+Mark the character as transparent for the purpose of end-of-sentence
+recognition.
+.
+In other words,
+an end-of-sentence character followed by any number of characters with
+this property is treated as the end of a sentence if followed by a
+newline or two spaces.
+.
+This is the same as having a zero space factor in \*[tx].
+.
+Initially,
+characters
+.\" The following is ordered with the apostrophe and (single) closing
+.\" quote on the ends so they are more easily visually distinguished
+.\" from the double quotation marks in roman.
+.RB \[lq]\| \[aq]\|"\|)]*\[rs][dg]\[rs][dd]\[rs][rq]\[rs]\^[cq] \|\[rq]
+have this property.
+.
+.
+.TP
+.B 64
+Ignore hyphenation codes of the surrounding characters.
+.
+Use this value in combination with values 2 and\~4.
+.
+Initially,
+no characters have this property.
+.
+.
+.P
+The remaining values were implemented for East Asian language support;
+those who use alphabetic scripts exclusively can disregard them.
+.
+.
+.TP
+.B 128
+Prohibit a break before the character,
+but allow a break after the character.
+.
+This works only in combination with values 256 and 512 and has no effect
+otherwise.
+.
+Initially,
+no characters have this property.
+.
+.
+.TP
+.B 256
+Prohibit a break after the character,
+but allow a break before the character.
+.
+This works only in combination with values 128 and 512 and has no effect
+otherwise.
+.
+Initially,
+no characters have this property.
+.
+.
+.TP
+.B 512
+Allow a break before or after the character.
+.
+This works only in combination with values 128 and 256 and has no effect
+otherwise.
+.
+Initially,
+no characters have this property.
+.
+.
+.P
+In contrast to values 2 and\~4,
+the values 128,
+256,
+and 512 work
+pairwise.
+.
+If,
+for example,
+the left character has value 512,
+and the right character 128,
+no break will be automatically inserted between them.
+.
+If we use value\~6 instead for the left character,
+a break after the character can't be suppressed since the neighboring
+character on the right doesn't get examined.
+.
+.
+.\" ====================================================================
 .SS "Fractional type sizes and new scaling units"
 .\" ====================================================================
 .
@@ -2383,158 +2561,7 @@ Spaces need not separate
 arguments.
 .
 .
-.\" TODO: Bust discussion of character flags into its own subsection?
-.IP
-.I n
-is the sum of any of the following.
-.
-Some combinations are nonsensical,
-such as
-.RB \[lq] 33 \[rq]
-(1 + 32).
-.
-.
-.RS
-.IP 1
-Recognize the character as ending a sentence if followed by a newline
-or two spaces.
-.
-Initially,
-characters
-.RB \[lq] .?!\& \[rq]
-have this property.
-.
-.
-.IP 2
-Enable breaks before the character.
-.
-A line is not broken at a character with this property unless the
-characters on each side both have non-zero hyphenation codes.
-.
-This exception can be overridden by adding 64.
-.
-Initially,
-no characters have this property.
-.
-.
-.IP 4
-Enable breaks after the character.
-.
-A line is not broken at a character with this property unless the
-characters on each side both have non-zero hyphenation codes.
-.
-This exception can be overridden by adding 64.
-.
-Initially,
-characters
-.RB \[lq] \-\[rs][hy]\[rs][em] \^\[rq]
-have this property.
-.
-.
-.IP 8
-Mark the glyph associated with this character as overlapping other
-instances of itself horizontally.
-.
-Initially,
-characters
-.RB \[lq]\^ \[rs][ul]\[rs][rn]\[rs][ru]\[rs][radicalex]\[rs][sqrtex]\
-\& \^\[rq]
-have this property.
-.
-.
-.IP 16
-Mark the glyph associated with this character as overlapping other
-instances of itself vertically.
-.
-Initially,
-the character
-.RB \[lq]\^ \[rs][br] \^\[rq]
-has this property.
-.
-.
-.IP 32
-Mark the character as transparent for the purpose of end-of-sentence
-recognition.
-.
-In other words,
-an end-of-sentence character followed by any number of characters with
-this property is treated as the end of a sentence if followed by a
-newline or two spaces.
-.
-This is the same as having a zero space factor in \*[tx].
-.
-Initially,
-characters
-.\" The following is ordered with the apostrophe and (single) closing
-.\" quote on the ends so they are more easily visually distinguished
-.\" from the double quotation marks in roman.
-.RB \[lq]\| \[aq]\|"\|)]*\[rs][dg]\[rs][dd]\[rs][rq]\[rs]\^[cq] \|\[rq]
-have this property.
-.
-.
-.IP 64
-Ignore hyphenation codes of the surrounding characters.
-.
-Use this value in combination with values 2 and\~4.
-.
-Initially,
-no characters have this property.
-.
-.
-.P
-The remaining values were implemented for East Asian language support;
-those who use alphabetic scripts exclusively can disregard them.
-.
-.
-.IP 128
-Prohibit a break before the character,
-but allow a break after the character.
-.
-This works only in combination with values 256 and 512 and has no effect
-otherwise.
-.
-Initially,
-no characters have this property.
-.
-.
-.IP 256
-Prohibit a break after the character,
-but allow a break before the character.
-.
-This works only in combination with values 128 and 512 and has no effect
-otherwise.
-.
-Initially,
-no characters have this property.
-.
-.
-.IP 512
-Allow a break before or after the character.
-.
-This works only in combination with values 128 and 256 and has no effect
-otherwise.
-.
-Initially,
-no characters have this property.
-.RE
-.
-.
-.IP
-In contrast to values 2 and\~4,
-the values 128,
-256,
-and 512 work
-pairwise.
-.
-If,
-for example,
-the left character has value 512,
-and the right character 128,
-no break will be automatically inserted between them.
-.
-If we use value\~6 instead for the left character,
-a break after the character can't be suppressed since the neighboring
-character on the right doesn't get examined.
+See subsection \[lq]Character flags\[rq] above.
 .
 .
 .TP
