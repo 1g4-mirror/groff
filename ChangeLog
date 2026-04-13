@@ -1,5 +1,16 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Trivially refactor.  Rename library's `concat()`
+	function to `catenate()`.
+
+	* src/include/symbol.h: Rename in declaration.
+	* src/libs/libgroff/symbol.cpp (concat): Rename this...
+	(catenate): ...to this.
+	* src/roff/troff/node.cpp (get_font_name, is_abstract_style)
+	(font_family::resolve): Update call sites.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/font.cpp (font::load_font, font::load):
 	Trivially refactor.  Rename `load_header_only` parameter to
 	`validate_only` for clarity.

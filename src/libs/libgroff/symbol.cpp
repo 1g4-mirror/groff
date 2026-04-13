@@ -159,7 +159,7 @@ symbol::symbol(const char *p, int how)
   }
 }
 
-symbol concat(symbol s1, symbol s2)
+symbol catenate(symbol s1, symbol s2)
 {
   char *buf = new char [strlen(s1.contents())
 			+ strlen(s2.contents())

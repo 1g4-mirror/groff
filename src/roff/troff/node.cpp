@@ -477,7 +477,7 @@ symbol get_font_name(int fontno, environment *env)
 {
   symbol f = font_table[fontno]->get_name();
   if (font_table[fontno]->is_style()) {
-    return concat(env->get_family()->nm, f);
+    return catenate(env->get_family()->nm, f);
   }
   return f;
 }
@@ -6753,7 +6753,7 @@ bool is_abstract_style(symbol s)
 bool is_font_available(symbol fam, symbol name)
 {
   if (is_abstract_style(name))
-    name = concat(fam, name);
+    name = catenate(fam, name); // Resolve the font name.
   return assign_font_and_file_name_to_mounting_position(name,
       name /* ignored */, 0 /* ignored */, true /* validate_only */);
 }
@@ -6901,7 +6901,7 @@ int font_family::resolve(int mounting_position)
   if (!(font_table[pos]->is_style()))
     return map[pos] = pos;
   symbol sty = font_table[pos]->get_name();
-  symbol f = concat(nm, sty);
+  symbol f = catenate(nm, sty);
   int n;
   // Don't use symbol_fontno, because that might return a style and
   // because we don't want to translate the name.
