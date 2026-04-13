@@ -653,9 +653,9 @@ bool environment::set_font(symbol nm)
     fontno = n;
   }
   if (underline_spaces && fontno != prev_fontno) {
-    if (fontno == get_underline_fontno())
+    if (fontno == get_selected_underline_font_mounting_position())
       add_node(configure_space_underlining(true));
-    if (prev_fontno == get_underline_fontno())
+    if (prev_fontno == get_selected_underline_font_mounting_position())
       add_node(configure_space_underlining(false));
   }
   return true;
@@ -1729,7 +1729,7 @@ void configure_underlining(bool want_spaces_underlined)
   else {
     curenv->underlined_line_count = n;
     curenv->pre_underline_fontno = curenv->fontno;
-    curenv->fontno = get_underline_fontno();
+    curenv->fontno = get_selected_underline_font_mounting_position();
     if (want_spaces_underlined) {
       curenv->underline_spaces = true;
       curenv->add_node(configure_space_underlining(true));

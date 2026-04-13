@@ -7047,7 +7047,7 @@ static void select_underline_font_request() // .uf
   skip_line();
 }
 
-int get_underline_fontno()
+int get_selected_underline_font_mounting_position()
 {
   return underline_fontno;
 }

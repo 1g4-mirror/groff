@@ -73,6 +73,14 @@
 	(init_node_requests): Update wire-uppery of request handler to
 	its name in the formatter.
 
+	* src/roff/troff/node.h: Rename declaration of
+	`get_underline_fontno()` to
+	`get_selected_underline_font_mounting_position()`.
+	* src/roff/troff/env.cpp (get_underline_fontno): Rename this...
+	(get_selected_underline_font_mounting_position): ...to this.
+	* src/roff/troff/env.cpp (environment::set_font)
+	(configure_underlining): Update call sites.
+
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp: Refactor.  Take one of
