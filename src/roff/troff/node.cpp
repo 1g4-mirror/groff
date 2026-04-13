@@ -258,8 +258,9 @@ int resolve_current_font_to_mounting_position(environment *env)
 
 /* font_info functions */
 
+// TODO?: -> std::vector<font info *>
 static font_info **font_table = 0 /* nullptr */;
-static int font_table_size = 0;
+static int font_table_size = 0; // TODO?: font_table.size()
 
 font_info::font_info(symbol nm, int n, symbol enm, font *f)
 : last_tfont(0 /* nullptr */), number(n), last_size(0),
@@ -848,8 +849,8 @@ class troff_output_file : public real_output_file {
   color *current_fill_color;
   color *current_stroke_color;
   int current_font_number;
-  symbol *font_mounting_position;
-  int mounting_position_count;
+  symbol *font_mounting_position; // TODO?: -> std::vector<symbol>
+  int mounting_position_count; // TODO?: font_mounting_position.size()
   enum { TBUF_SIZE = 256 };
   char tbuf[TBUF_SIZE];
   int tbuf_len;
@@ -1267,6 +1268,7 @@ void troff_output_file::set_font(tfont *tf)
     put(' ');
     put(nm.contents());
     put('\n');
+    // TODO?: font_mounting_position.push_back(nm);
     if (n >= mounting_position_count) {
       int old_mounting_position_count = mounting_position_count;
       symbol *old_font_mounting_position = font_mounting_position;
