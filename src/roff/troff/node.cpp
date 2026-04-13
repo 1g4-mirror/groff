@@ -6669,20 +6669,14 @@ font nonexistent_font = font("\0");
 // Assign troff font identifier `name`, with font description file
 // `filename`, to mounting position `n`.  (The former two are often
 // identical.)  Return Boolean reporting success of this "mounting".
-//
-// If `check_only`, look up font identifier `name` in the existing
-// list of mounted fonts, and return Boolean indicating its presence.
-// TODO: We could use a separate function for "checking only".
 static bool assign_font_and_file_name_to_mounting_position(
-    symbol name, symbol filename, int n, bool check_only = false)
+    symbol name, symbol filename, int n)
 {
   assert(n >= 0);
   font *fm = 0 /* nullptr */;
   void *p = font_dictionary.lookup(filename);
   if (0 /* nullptr */ == p) {
-    fm = font::load_font(filename.contents(), check_only);
-    if (check_only)
-      return fm != 0 /* nullptr */;
+    fm = font::load_font(filename.contents());
     if (0 /* nullptr */ == fm) {
       (void) font_dictionary.lookup(filename, &nonexistent_font);
       return false;
@@ -6693,8 +6687,6 @@ static bool assign_font_and_file_name_to_mounting_position(
     return false;
   else
     fm = static_cast<font *>(p);
-  if (check_only)
-    return true;
   if (n >= font_table_size) {
     if ((n - font_table_size) > 1000) {
       error("requested font mounting position %1 too much larger than"
@@ -6754,8 +6746,16 @@ bool is_font_available(symbol fam, symbol name)
 {
   if (is_abstract_style(name))
     name = catenate(fam, name); // Resolve the font name.
-  return assign_font_and_file_name_to_mounting_position(name,
-      name /* ignored */, 0 /* ignored */, true /* validate_only */);
+  font *fm = 0 /* nullptr */;
+  void *p = font_dictionary.lookup(name);
+  if (0 /* nullptr */ == p) {
+    // The font is not already mounted; could it be?
+    fm = font::load_font(name.contents(), true /* validate_only */);
+    return (fm != 0 /* nullptr */);
+  }
+  else if (&nonexistent_font == p)
+    return false;
+  return true;
 }
 
 bool mount_style(int n, symbol name)

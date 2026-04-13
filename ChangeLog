@@ -1,5 +1,15 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp: Refactor.  Take one of
+	`assign_font_and_file_name_to_mounting_position()`'s jobs away
+	from it, awarding it instead to the only call site that wanted
+	that job done.
+	(assign_font_and_file_name_to_mounting_position): Drop
+	`check_only` parameter and dependent logic, and...
+	(is_font_available): ...open-code that logic here instead.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Trivially refactor.  Rename library's `concat()`
 	function to `catenate()`.
 
