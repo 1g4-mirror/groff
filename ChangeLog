@@ -1,5 +1,11 @@
 2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (make_composite_node)
+	(make_glyph_node): Fix code style nit.  Parenthesize formally
+	complex expressions.
+
+2026-04-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp: Trivially refactor.  Rename class
 	to better align with terminology used in our documentation.
 	(class next_available_font_position_reg): Rename this...

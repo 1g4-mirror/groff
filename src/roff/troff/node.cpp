@@ -5575,7 +5575,7 @@ static node *make_composite_node(charinfo *s, environment *env)
     return 0 /* nullptr */;
   }
   assert((fontno < font_table_size)
-	 && font_table[fontno] != 0 /* nullptr*/);
+	 && (font_table[fontno] != 0 /* nullptr*/));
   node *n = charinfo_to_node_list(s, env);
   font_size fs = env->get_font_size();
   int char_height = env->get_char_height();
@@ -5596,7 +5596,7 @@ static node *make_glyph_node(charinfo *s, environment *env,
     return 0 /* nullptr */;
   }
   assert((fontno < font_table_size)
-	 && font_table[fontno] != 0 /* nullptr*/);
+	 && (font_table[fontno] != 0 /* nullptr*/));
   int fn = fontno;
   bool found = font_table[fontno]->contains(s);
   if (!found) {
