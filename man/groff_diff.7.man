@@ -2905,7 +2905,7 @@ and a
 token at its end.
 .
 See
-.B .am1
+.B am1
 above.
 .
 .
