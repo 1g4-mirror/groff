@@ -3140,7 +3140,7 @@ per the current adjustment mode.
 .TPx
 .REQ .break
 Break out of a
-.RB \[rq] while \[rq]
+.RB \[lq] while \[rq]
 loop.
 .
 .TPx
