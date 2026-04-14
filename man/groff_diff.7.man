@@ -1411,6 +1411,7 @@ transforms to
 .
 .
 .sp \n[PD]u
+.ne 3v
 .\"IP
 Contrariwise,
 GNU
