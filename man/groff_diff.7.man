@@ -992,7 +992,7 @@ GNU
 .I troff \" GNU
 closes the polygon by drawing a line from
 .RI ( hn ,\~ vn )
-back to the initial drawing position;
+back to the initial drawing position
 and leaves the drawing position there.
 .\" XXX: That would be the "STUPID_DRAWING_POSITIONING" complained of in
 .\" src/libs/libdriver/input.cpp.
