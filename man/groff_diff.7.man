@@ -1977,14 +1977,14 @@ emits a warning in category
 .
 .
 .TP
-.BI .ss\~ word-space-size\~\c
-.RI [ additional-sentence-space-size ]
+.BI .ss\~ minimum-inter-word-space-size\~\c
+.RI [ supplemental-inter-sentence-space-size ]
 A second argument sets the amount of additional space separating
 sentences on the same output line.
 .
 If omitted,
 this amount is set to
-.IR word-space-size .
+.IR minimum-inter-word-space-size .
 .
 Both arguments are in twelfths of current font's space width
 (typically one-fourth to one-third em for Western scripts;
