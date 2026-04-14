@@ -5042,6 +5042,9 @@ it reads
 each
 .IR s i
 in copy mode.
+.\" XXX: ...hinting at an implementation wart.  The request handler uses
+.\" `read_rest_of_line_as_argument()` rather than calling a dedicated
+.\" read-integer-range function, which we don't have.
 .
 .TPx
 .REQ .so file

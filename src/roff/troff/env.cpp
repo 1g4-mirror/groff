@@ -1418,6 +1418,10 @@ static void override_available_type_sizes_request() // .sizes
     skip_line();
     return;
   }
+  // TODO: Move these fiddly details into a function that reads a
+  // decimal integer or range thereof.
+  // TODO: Migrate this heap array to std::vector<int>.
+  // XXX: But what to do about the ranges?
   int n = 16;
   int *sizes = new int[n]; // C++03: new int[n]();
   (void) memset(sizes, 0, (n * sizeof(int)));
