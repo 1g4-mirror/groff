@@ -15615,9 +15615,9 @@ and
 @var{end},
 inclusively.
 The first element of the string has index@tie{}0.
-An absent
+Omitting
 @var{end}
-argument implies the largest valid value
+implies the largest valid value
 (the string length minus one).
 Negative indices count backward from the end of the string:@:
 the last element has index@tie{}@minus{}1,
@@ -16124,7 +16124,7 @@ resembles
 @samp{.if 1};
 it puts a break on the output if
 @var{input}
-is empty.
+is omitted.
 Unlike
 @code{if},
 it cannot govern conditional blocks.
@@ -21766,12 +21766,23 @@ and the horizontal page location in ens.
 @endDefreq
 
 @Defreq {spreadwarn, [@Var{limit}]}
-Emit a @code{break} warning if the additional space inserted for each
-space between words in an output line adjusted to both margins with
-@w{@samp{.ad b}} is larger than or equal to @var{limit}.  A negative
-value is treated as zero; an absent argument toggles the warning on and
-off without changing @var{limit}.  The default scaling unit is @samp{m}.
-At startup, @code{spreadwarn} is inactive and @var{limit} is 3@dmn{m}.
+Emit a
+@code{break}
+warning if the additional space inserted for each space between words in
+an output line adjusted to both margins with
+@w{@samp{.ad b}}
+is larger than or equal to
+@var{limit}.
+A negative value is treated as zero;
+an absent argument toggles the warning on and off without changing
+@var{limit}.
+The default scaling unit is
+@samp{m}.
+At startup,
+@code{spreadwarn}
+is inactive and
+@var{limit}
+is 3@dmn{m}.
 
 For example,
 

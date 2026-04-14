@@ -636,7 +636,7 @@ ignoring scaling units in
 .I e
 if
 .I c
-is empty.
+is omitted.
 .
 .
 .P
@@ -3237,7 +3237,7 @@ requests,
 is used.
 If
 .I g
-is missing or identical
+is omitted or identical
 .RI to\~ f ,
 then
 .RI font\~ f
@@ -3823,7 +3823,7 @@ resembles
 .RB \[lq] ".if 1" \[rq];
 it puts a break on the output if
 .I input
-is empty.
+is omitted.
 .
 Unlike
 .RB \[lq]\| if \|\[rq],
@@ -4432,7 +4432,7 @@ is larger than or equal to
 .IR limit .
 .
 A negative value is treated as zero;
-an absent argument toggles the warning on and off without changing
+omitting the argument toggles the warning on and off without changing
 .IR limit .
 .
 The default scaling unit is
@@ -4498,7 +4498,7 @@ inclusively.
 .
 The first element of the string has index\~0.
 .
-An absent
+Omitting
 .I end
 argument implies the largest valid value
 (the string length minus one).
