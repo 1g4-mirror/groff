@@ -362,6 +362,16 @@ see
 .P
 GNU
 .IR troff 's \" GNU
+.B rhw
+request removes hyphenation exception words defined
+with the
+.B hw
+request.
+.
+.
+.P
+GNU
+.IR troff 's \" GNU
 .B \[rs]:
 escape sequence works like
 .B \[rs]%
