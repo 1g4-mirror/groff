@@ -2541,9 +2541,11 @@ See
 .TP
 .B .brp
 Break and force adjustment of the output line
-per the current adjustment mode.
+per the current adjustment mode,
+like
+.BR \[rs]p .
 .
-Like
+As with
 .BR br ,
 it does nothing if invoked with the no-break control character.
 .
@@ -2977,13 +2979,12 @@ GNU
 .I troff \" GNU
 output as parameters to an
 .RB \[lq] "x X" \[rq]
-device extension command;
-see
-.MR groff_out @MAN5EXT@ .
+device extension command,
+like
+.BR \[rs]X .
 .
-The output driver or other postprocessor interprets
-.I character-sequence
-as it sees fit.
+See
+.MR groff_out @MAN5EXT@ .
 .
 .
 .TP
@@ -2993,6 +2994,9 @@ Write contents of macro or string
 to
 .I @g@troff
 output as the argument to a device extension command.
+.
+See
+.BR \[rs]Y .
 .
 .
 .TP
@@ -4000,7 +4004,7 @@ to the standard error stream,
 the list of font translations.
 .
 See
-.B pftr
+.B ftr
 above.
 .
 The \[lq]from\[rq] font identifier is listed first,
@@ -4215,7 +4219,7 @@ Stop interpreting an interpolated macro,
 skipping to the end of its definition.
 .
 Do not confuse
-.RB \[lq] return \[rq]
+.RB \%\[lq] return \[rq]
 with
 .BR rt .
 .
