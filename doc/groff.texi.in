@@ -20632,13 +20632,37 @@ data about the most recently output glyph and line (registers
 @code{.cdp}, @code{.cht}, @code{.csk}, @code{.n}, @code{.w})
 
 @item
-typeface parameters (size, family, style, height and slant, inter-word
-and inter-sentence space sizes)
+typeface parameters
+(type size---selected and requested,
+default family,
+resolved font selection,
+height and slant,
+inter-word and inter-sentence space sizes;
+and previous values of
+type size---selected and requested,
+default family,
+resolved font selection)
 
 @item
-page parameters (line length, title length, vertical spacing, line
-spacing, indentation, line numbering, centering, right-alignment,
-underlining, hyphenation parameters)
+page parameters
+(line length,
+title length,
+vertical spacing,
+post-vertical spacing
+line spacing,
+indentation---normal and temporary,
+line numbering,
+centering,
+right-alignment,
+underlining,
+hyphenation parameters;
+and previous values of
+line length,
+title length,
+vertical spacing,
+post-vertical spacing,
+line spacing,
+indentation---normal and temporary)
 
 @item
 filling enablement; adjustment enablement and mode
@@ -20651,7 +20675,8 @@ and margin characters
 input line traps
 
 @item
-stroke and fill colors
+stroke and fill colors,
+selected and previous
 @end itemize
 @c END Keep parallel with section "Environments" of groff(7).
 

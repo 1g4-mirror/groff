@@ -9848,11 +9848,15 @@ data about the most recently output glyph and line
 .
 .IP \[bu]
 typeface parameters
-(size,
-family,
-style,
+(type size\[em]selected and requested,
+default family,
+resolved font selection,
 height and slant,
-inter-word and inter-sentence space sizes)
+inter-word and inter-sentence space sizes;
+and previous values of
+type size\[em]selected and requested,
+default family,
+resolved font selection)
 .
 .
 .IP \[bu]
@@ -9860,13 +9864,21 @@ page parameters
 (line length,
 title length,
 vertical spacing,
+post-vertical spacing
 line spacing,
-indentation,
+indentation\[em]normal and temporary,
 line numbering,
 centering,
 right-alignment,
 underlining,
-hyphenation parameters)
+hyphenation parameters;
+and previous values of
+line length,
+title length,
+vertical spacing,
+post-vertical spacing,
+line spacing,
+indentation\[em]normal and temporary)
 .
 .
 .IP \[bu]
@@ -9891,7 +9903,8 @@ input line traps
 .
 .
 .IP \[bu]
-stroke and fill colors
+stroke and fill colors,
+selected and previous
 .
 .
 .P
