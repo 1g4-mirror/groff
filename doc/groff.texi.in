@@ -1325,7 +1325,6 @@ and
 
 The following ``full-service'' macro packages
 are available.
-.
 @cite{groff_tmac@r{(5)}}
 documents these and many other,
 ``auxiliary'', packages.@footnote{@xref{Macro Packages}.}
