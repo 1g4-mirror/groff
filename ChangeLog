@@ -1,3 +1,20 @@
+2026-05-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Trivially refactor and fix code
+	style nit.
+	(eoi_macro)
+	(blank_line_macro)
+	(leading_spaces_macro): Rename these...
+	(configure_end_of_input_macro_request)
+	(configure_blank_line_macro_request)
+	(configure_leading_spaces_macro_request): ...to these.
+	(configure_end_of_input_macro_request)
+	(configure_blank_line_macro_request)
+	(configure_leading_spaces_macro_request): Declare as `static`;
+	external linkage is not required.
+	(init_input_requests): Update wire-uppery of request names to
+	handler functions.
+
 2026-05-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[man]: Implement `LS`/`LE` indentation management.

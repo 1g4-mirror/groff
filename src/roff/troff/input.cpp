@@ -3449,19 +3449,19 @@ void return_macro_request()
   tok.next();
 }
 
-void eoi_macro()
+static void configure_end_of_input_macro_request()
 {
   end_of_input_macro_name = read_identifier();
   skip_line();
 }
 
-void blank_line_macro()
+static void configure_blank_line_macro_request()
 {
   blank_line_macro_name = read_identifier();
   skip_line();
 }
 
-void leading_spaces_macro()
+static void configure_leading_spaces_macro_request()
 {
   leading_spaces_macro_name = read_identifier();
   skip_line();
@@ -10345,7 +10345,7 @@ void init_input_requests()
   init_request("as1", append_nocomp_string);
   init_request("asciify", asciify_request);
   init_request("backtrace", backtrace_request);
-  init_request("blm", blank_line_macro);
+  init_request("blm", configure_blank_line_macro_request);
   init_request("break", while_break_request);
   init_request("cc", assign_control_character_request);
   init_request("c2", assign_no_break_control_character_request);
@@ -10373,7 +10373,7 @@ void init_input_requests()
   init_request("ecr", restore_escape_char_request);
   init_request("ecs", save_escape_char_request);
   init_request("el", else_request);
-  init_request("em", eoi_macro);
+  init_request("em", configure_end_of_input_macro_request);
   init_request("eo", escape_off_request);
   init_request("ex", exit_request);
   init_request("fchar", define_fallback_character_request);
@@ -10387,7 +10387,7 @@ void init_input_requests()
   init_request("ig", ignore);
   init_request("length", length_request);
   init_request("lf", line_file);
-  init_request("lsm", leading_spaces_macro);
+  init_request("lsm", configure_leading_spaces_macro_request);
   init_request("mso", macro_source_request);
   init_request("msoquiet", macro_source_quietly_request);
   init_request("nop", nop_request);
