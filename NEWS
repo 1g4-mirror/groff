@@ -67,7 +67,7 @@ troff
 
 *  The built-in, read-only register `.zoom` is now named `.fzoom` for
    consistency with other GNU troff extensions, which largely pair
-   names of request with those of read-only registers they affect.  The
+   names of requests with those of read-only registers they affect.  The
    old name remains as an alias configured by the default "troffrc"
    file.
 
@@ -139,9 +139,9 @@ Macro packages
 
       https://savannah.nongnu.org/projects/groff-pdfmark/
 
-   ...though groff ms(7) differs in some respects.  Our objective to
-   enable and support PDF features in any ms document without having to
-   make any changes at all to its content.
+   ...though groff ms(7) differs in some respects.  Our objective is to
+   enable and support PDF features in any ms document without requiring
+   its author to update its content.
 
 *  groff's ms(7) manual, "Using groff with the ms macros", is now built
    and installed as a PDF rather than a PostScript document.
