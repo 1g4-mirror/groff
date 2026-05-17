@@ -6673,7 +6673,9 @@ See section \[lq]Miscellaneous\[rq] above.
 .
 .
 .P
-The escape sequences
+In AT&T
+.I troff, \" AT&T
+the escape sequences
 .BR \[rs]f ,
 .BR \[rs]H ,
 .BR \[rs]m ,
@@ -6688,18 +6690,14 @@ or after the conditional expression of an
 .RB \[lq] if \^\[rq]
 or
 .B ie
-request,
-only in compatibility mode.
+request.
 .
-That is,
-upon interpreting them,
+After reading an escape sequence that starts an input line,
 GNU
 .I troff \" GNU
 normally no longer recognizes a control character on the input line;
 but in compatibility mode,
-it does,
-just like AT&T
-.I troff. \" AT&T
+it does.
 .
 .
 .P
@@ -6826,7 +6824,7 @@ is to save the value of the
 register prior to attempting the change,
 make the attempt,
 then compare the saved value to the current one;
-if it changed,
+if they differ,
 the font selection presumably succeeded.
 .
 Since doing so requires
@@ -6989,8 +6987,8 @@ after a word-initial one.
 .P
 GNU
 .I troff \" GNU
-interprets request arguments representing file names
-and system commands
+interprets a request argument representing a file name
+or system command
 in the same way it does the
 .I contents
 argument to the
@@ -7148,7 +7146,8 @@ behaves as if it were given no arguments at all,
 removing any existing diversion trap;
 GNU
 .I troff \" GNU
-does nothing,
+does nothing
+(besides issue diagnostics),
 more consistently with other requests given unintelligible arguments.
 .
 .

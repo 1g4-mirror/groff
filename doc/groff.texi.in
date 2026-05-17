@@ -23315,7 +23315,9 @@ it does not.
 @cindex @code{\H}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\s}, incompatibilities with @acronym{AT&T} @code{troff}
 @cindex @code{\S}, incompatibilities with @acronym{AT&T} @code{troff}
-The escape sequences
+In @acronym{AT&T}
+@command{troff}, @c AT&T
+the escape sequences
 @code{\f},
 @code{\H},
 @code{\m},
@@ -23330,17 +23332,13 @@ or after the conditional expression of an
 @code{if}
 or
 @code{ie}
-request,
-only in compatibility mode.
-That is,
-upon interpreting them,
+request.
+After reading an escape sequence that starts an input line,
 GNU
 @command{troff} @c GNU
 normally no longer recognizes a control character on the input line;
 but in compatibility mode,
-it does,
-just like AT&T
-@command{troff}. @c AT&T
+it does.
 Thus the next example produces bold output in both modes,
 but the text differs.
 
@@ -23540,6 +23538,7 @@ given the input
 \fBfoo\fZbar\fPbaz
 @endExample
 
+@noindent
 and,
 assuming that the output device lacks a font named
 @samp{Z},
@@ -23561,7 +23560,7 @@ is to save the value of the
 register prior to attempting the change,
 make the attempt,
 then compare the saved value to the current one;
-if it changed,
+if they differ,
 the font selection presumably succeeded.
 Since doing so requires
 @code{nr}
@@ -23713,8 +23712,8 @@ produces different results with each of the three formatters.}
 @cindex @code{sy} request, incompatibilities with @acronym{AT&T} @code{troff}
 GNU
 @command{troff} @c GNU
-interprets request arguments representing file names
-and system commands
+interprets a request argument representing a file name
+or system command
 in the same way it does the
 @var{contents}
 argument to the
@@ -23874,7 +23873,8 @@ behaves as if it were given no arguments at all,
 removing any existing diversion trap;
 GNU
 @command{troff} @c GNU
-does nothing,
+does nothing
+(besides issue diagnostics),
 more consistently with other requests given unintelligible arguments.
 
 @cindex @code{lf} request, incompatibilities with @acronym{AT&T} @code{troff}
