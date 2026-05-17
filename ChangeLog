@@ -1,5 +1,16 @@
 2026-05-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (char_list::get): De-optimize read
+	access at the end of a `char_list`, because the pointer
+	arithmetic used can access heap storage beyond the end of the
+	underlying `char_block` used to house the list.
+
+	Fixes <https://savannah.gnu.org/bugs/?68340>.  Resolves ASAN
+	runtime error when formatting the groff_mdoc(7) man page in
+	troff mode.  Thanks to Bjarni Ingi Gislason for the report.
+
+2026-05-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor and fix code
 	style nit.
 	(eoi_macro)
