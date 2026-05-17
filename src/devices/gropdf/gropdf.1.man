@@ -890,7 +890,7 @@ Fonts from the URW foundry
 (\[lq]U\[rq])
 are compatible extensions of the Adobe fonts
 with extended glyph coverage,
-including support for Cyrillic and East Asian scripts.
+including support for Cyrillic scripts.
 .
 .IR groff 's
 build process uses
