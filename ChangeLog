@@ -1,3 +1,14 @@
+2026-05-18  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	* tmac/s.tmac: Fix Savannah #68537, making automatically
+	numbered footnotes (`\*[*]` or `\**`) usable in tbl(1) table
+	entries.
+	(pg@end-text): Remove autoincrement from `fn*text-num` register.
+	(@FS): Increment `fn*text-num` only if given no arguments.
+
+	Fixes <https://savannah.gnu.org/bugs/?68527>.  (Problem appears
+	to date back to groff's birth.  --GBR)
+
 2026-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[ms]: Regression-test Savannah #68537.

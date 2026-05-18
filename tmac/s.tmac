@@ -864,7 +864,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .vs \n[fn@sep-dist]u
 .nr fn@sep-dist \n[.v]
 .ev
-.nr fn*text-num 0 1
+.nr fn*text-num 1
 .nr fn*note-num 0 1
 .nr fn*open 0
 .\" Handle initialition tasks deferred until par module is set up.
@@ -884,6 +884,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .FS-MARK \\$@
 .ie \\n[.$] .fn*do-FS "\\$1" no
 .el \{\
+.	nr fn*text-num +1
 .	ie \\n[fn*text-num]>\\n[fn*note-num] .fn*do-FS \\n+[fn*note-num]
 .	el .fn*do-FS
 .\}
