@@ -1084,7 +1084,7 @@ Enclose paragraphing macros between
 .B LS
 and
 .B LE
-to mark them as list items.
+to identify them as list items.
 .
 Doing so can mark them as \[lq]compact\[rq]\" ,
 .\" ease management of their indentation,
@@ -1102,7 +1102,7 @@ These macros are GNU extensions.
 .
 .TP
 .BI .LS\~ type\~\c
-.RI [ compactness \~[ indentation ]
+.RI [ compactness \~[ indentation ]]
 .IR (since\~ groff \~1.25) \" TODO: remove note once novelty dies down
 Start
 (or open)
