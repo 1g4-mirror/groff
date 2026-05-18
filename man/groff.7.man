@@ -3087,7 +3087,7 @@ can be a request.
 .TPx
 .REQ .am1 mac
 As
-.RB \[rq] am \[rq],
+.RB \[lq] am \[rq],
 with compatibility mode disabled when the appendment to macro
 .I mac
 is interpreted.
@@ -3113,7 +3113,7 @@ encountering
 Append to a macro indirectly.
 .
 As
-.RB \[rq] am \[rq],
+.RB \[lq] am \[rq],
 but
 .I str
 and
@@ -3161,7 +3161,7 @@ As
 .TPx
 .REQ .as1 "str contents"
 As
-.RB \[rq] as \[rq],
+.RB \[lq] as \[rq],
 with compatibility mode disabled when the appendment to string
 .I str
 is interpreted.
@@ -3438,7 +3438,7 @@ request in lieu of listing all the characters within it.
 Close
 .IR stream ,
 making it unavailable for
-.RB \[rq] write \[rq]
+.RB \[lq] write \[rq]
 requests.
 .
 .TPx
@@ -4307,7 +4307,7 @@ Cancel any pending input line trap.
 .TPx
 .REQ .itc "npl mac"
 As
-.RB \[rq] it \[rq],
+.RB \[lq] it \[rq],
 but lines interrupted with the
 .B \[rs]c
 escape sequence do not apply to the line count.
@@ -4477,7 +4477,7 @@ Mark vertical drawing position in register
 .TPx
 .REQ .mso file
 As
-.RB \[rq] so \[rq],
+.RB \[lq] so \[rq],
 except that GNU
 .I troff \" GNU
 searches for the specified
@@ -4642,7 +4642,7 @@ for writing and associate a stream named
 .I ident
 with it,
 making it available for
-.RB \[rq] write \[rq]
+.RB \[lq] write \[rq]
 requests.
 .
 Unsafe request;
@@ -5247,7 +5247,7 @@ emits a warning in category
 .TPx
 .REQ .soquiet file
 As
-.RB \[rq] so \[rq],
+.RB \[lq] so \[rq],
 but no warning is emitted if
 .I file
 does not exist.
@@ -5808,7 +5808,7 @@ flushes the stream after writing to it.
 .TPx
 .REQ .writec "stream character-sequence"
 As
-.RB \[rq] write \[rq],
+.RB \[lq] write \[rq],
 but does not write a newline to the output.
 .
 .TPx
@@ -7534,7 +7534,7 @@ see
 .request cp .
 .
 Always false when processing
-.RB \[rq] do \[rq];
+.RB \[lq] do \[rq];
 see
 .register .cp .
 .
@@ -7562,7 +7562,7 @@ Color output is enabled (Boolean-valued).
 .TP
 .REG .cp
 Within
-.RB \[rq] do \[rq],
+.RB \[lq] do \[rq],
 the saved value of compatibility mode;
 see
 .register .C .
@@ -7670,7 +7670,7 @@ Hyphenation space adjustment threshold in environment.
 .REG .i
 Environment's indentation amount;
 see
-.RB \[rq] in \[rq].
+.RB \[lq] in \[rq].
 .
 .TP
 .REG .in
