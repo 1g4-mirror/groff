@@ -34,6 +34,7 @@ fold.
 .'
 
 output=$(printf "%s\n" "$input" | "$groff" -T ascii)
+echo "$output"
 echo "$output" | grep -Fqx 'I--  fold.'
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
