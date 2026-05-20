@@ -1,3 +1,13 @@
+2026-05-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.cpp: Refactor to rationalize and
+	parallelize vertical position trap request handlers.
+	(when_request): Check for presence of arguments; if none, throw
+	warning in category "missing".
+	(diversion_trap_request): Clear any existing diversion trap if
+	given a valid vertical position argument but no second argument,
+	analogously to `ch` request.
+
 2026-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/div.h (class diversion): Declare new pure

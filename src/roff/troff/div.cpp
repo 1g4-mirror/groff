@@ -780,13 +780,18 @@ static void configure_page_length_request() // .pl
 static void when_request() // .wh
 {
   vunits n;
-  if (read_vunits(&n, 'v')) {
-    symbol s = read_identifier();
-    if (s.is_null())
-      topdiv->remove_trap_at(n);
-    else
-      topdiv->add_trap(s, n);
+  if (has_arg()) {
+    if (read_vunits(&n, 'v')) {
+      symbol s = read_identifier();
+      if (s.is_null())
+	topdiv->remove_trap_at(n);
+      else
+	topdiv->add_trap(s, n);
+    }
   }
+  else
+    warning(WARN_MISSING, "page trap location configuration request"
+	    " expects arguments");
   skip_line();
 }
 
@@ -1007,20 +1012,17 @@ static void diversion_trap_request() // .dt
   if (!has_arg())
     curdiv->clear_diversion_trap();
   else if (read_vunits(&n, 'v')) {
-    if (has_arg()) {
       symbol s = read_identifier();
-      if (!s.is_null())
+      if (s.is_null())
+	curdiv->clear_diversion_trap();
+      else
 	curdiv->set_diversion_trap(s, n);
-    }
-    else
-      warning(WARN_MISSING, "diversion trap request expects macro"
-	      " identifier argument after vertical position argument");
   }
-  // We have no `else` branch here; `read_vunits()` already threw an
-  // error diagnostic.  Historically, GNU troff, like other troffs,
-  // treated botched `dt` arguments the same as no arguments at all,
-  // removing the trap.  That behavior was inconsistent with other
-  // request handling.
+  // We have no `else` branch here; `read_vunits()` may have already
+  // thrown an error diagnostic.  ("May have"?  See Savannah #68375.)
+  // Historically, GNU troff, like other troffs, treated botched `dt`
+  // arguments the same as no arguments at all, removing the trap.  That
+  // behavior was inconsistent with other request handling.
   skip_line();
 }
 
@@ -1034,6 +1036,8 @@ static void change_trap_request() // .ch
     else
       topdiv->remove_trap(s);
   }
+  // We have no `else` branch here; `read_vunits()` may have already
+  // thrown an error diagnostic.  ("May have"?  See Savannah #68375.)
   skip_line();
 }
 
