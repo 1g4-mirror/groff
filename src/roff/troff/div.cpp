@@ -1,5 +1,5 @@
 /* Copyright 1989-2020 Free Software Foundation, Inc.
-             2020-2025 G. Branden Robinson
+             2020-2026 G. Branden Robinson
 
 Written by James Clark (jjc@jclark.com)
 
@@ -977,6 +977,14 @@ void macro_diversion::clear_diversion_trap()
   diversion_trap = NULL_SYMBOL;
 }
 
+void macro_diversion::print_diversion_trap()
+{
+  if (diversion_trap != NULL_SYMBOL)
+    errprint("%1\t%2\n", diversion_trap.contents(),
+	     diversion_trap_pos.to_units());
+  fflush(stderr);
+}
+
 void top_level_diversion::set_diversion_trap(symbol, vunits)
 {
   error("cannot set diversion trap when not diverting output");
@@ -985,6 +993,12 @@ void top_level_diversion::set_diversion_trap(symbol, vunits)
 void top_level_diversion::clear_diversion_trap()
 {
   error("cannot clear diversion trap when not diverting output");
+}
+
+void top_level_diversion::print_diversion_trap()
+{
+  assert(0 == "attempting to report diversion trap"
+	      " of top-level diversion");
 }
 
 static void diversion_trap_request() // .dt
@@ -1025,7 +1039,10 @@ static void change_trap_request() // .ch
 
 static void print_traps_request() // .pwh
 {
-  topdiv->print_traps();
+  if (topdiv == curdiv)
+    topdiv->print_traps();
+  else
+    curdiv->print_diversion_trap();
   skip_line();
 }
 

@@ -19542,6 +19542,10 @@ request.
 A diversion is not formatted in the context of a page, so it lacks page
 location traps; instead it can have a @dfn{diversion trap}.  There can
 exist at most one such vertical position trap per diversion.
+Use the
+@code{pwh}
+request to dump the properties of a diversion trap
+to the standard error stream.@footnote{@xref{Debugging}.}
 
 @Defreq {dt, [@Var{dist} @Var{name}]}
 @cindex @code{.t} register, and diversions
@@ -22593,16 +22597,23 @@ represents an empty list.
 @cindex listing page location traps (@code{pwh})
 @cindex traps, page location, dumping (@code{pwh})
 @cindex traps, page location, listing (@code{pwh})
-Report the names and positions of all page location traps to the
-standard error stream.  GNU @command{troff} reports empty slots in the
-list, where a trap had been planted but subsequently (re)moved, because
-they can affect the visibility of subsequently planted traps.
+If the top-level diversion is the current diversion,
+report the names and positions of all page location traps
+to the standard error stream.
+GNU
+@command{troff} @c GNU
+reports empty slots in the list,
+where a trap had been planted but subsequently (re)moved,
+because they can affect the visibility of subsequently planted traps.
 @c "because they can affect the priority of subsequently planted traps."
 @c XXX Is that right?  It's useful to print the empty slots, I think,
 @c but a trap planted in an "empty" slot with .wh will become active.
 @c The slot seems to act as an immobile dummy list head, but does not
 @c change the basic list semantics.  .wh plants a trap at the head of
 @c the trap list at a location, and .ch plants a trap at the tail.
+Otherwise,
+similarly report the name and position of the diversion trap,
+if any.
 @endDefreq
 
 @Defreq {fl, }

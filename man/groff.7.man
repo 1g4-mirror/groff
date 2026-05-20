@@ -4968,8 +4968,13 @@ and its mode
 .
 .TPx
 .REQ .pwh
-Report names and positions of all page location traps to the standard
-error stream.
+If the top-level diversion is the current diversion,
+report the names and positions of all page location traps
+to the standard error stream.
+.
+Otherwise,
+similarly report the name and position of the diversion trap,
+if any.
 .
 .TPx
 .REQ .pvs

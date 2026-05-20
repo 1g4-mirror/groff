@@ -130,6 +130,7 @@ groff_TESTS = \
   src/roff/groff/tests/pnr-request-works.sh \
   src/roff/groff/tests/po-request-works.sh \
   src/roff/groff/tests/ps-device-smoke-test.sh \
+  src/roff/groff/tests/pwh-request-works.sh \
   src/roff/groff/tests/recognize-end-of-sentence.sh \
   src/roff/groff/tests/regression_savannah_56555.sh \
   src/roff/groff/tests/regression_savannah_58153.sh \

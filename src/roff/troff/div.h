@@ -62,6 +62,7 @@ public:
   const char *get_diversion_name() { return nm.contents(); }
   virtual void set_diversion_trap(symbol, vunits) = 0;
   virtual void clear_diversion_trap() = 0;
+  virtual void print_diversion_trap() = 0;
   virtual void copy_file(const char *filename) = 0;
 };
 
@@ -87,6 +88,7 @@ public:
   const char *get_next_trap_name();
   void set_diversion_trap(symbol, vunits);
   void clear_diversion_trap();
+  void print_diversion_trap();
   void copy_file(const char *filename);
 };
 
@@ -146,6 +148,7 @@ public:
   friend void page_offset();
   void set_diversion_trap(symbol, vunits);
   void clear_diversion_trap();
+  void print_diversion_trap();
   void set_last_page() { last_page_count = page_count; }
 };
 

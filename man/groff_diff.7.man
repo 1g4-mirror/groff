@@ -4181,17 +4181,19 @@ and its mode
 .
 .TP
 .B .pwh
-Report the names and vertical positions,
-in basic units,
-of all page location traps
+If the top-level diversion is the current diversion,
+report the names and positions of all page location traps
 to the standard error stream.
 .
 GNU
 .I troff \" GNU
 reports empty slots in the list,
-where a trap had been planted
-but subsequently (re)moved,
+where a trap had been planted but subsequently (re)moved,
 because they can affect the visibility of subsequently planted traps.
+.
+Otherwise,
+similarly report the name and position of the diversion trap,
+if any.
 .
 .
 .TP

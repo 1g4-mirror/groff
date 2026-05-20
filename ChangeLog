@@ -1,3 +1,31 @@
+2026-05-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.h (class diversion): Declare new pure
+	virtual member function `print_diversion_trap()` returning
+	`void`.
+	(class macro_diversion)
+	(class top_level_diversion): Declare member function
+	`print_diversion_trap()`.
+	* src/roff/troff/div.cpp
+	(macro_diversion::print_diversion_trap): New member function
+	reports properties of a diversion trap if one exists.
+	(top_level_diversion::print_diversion_trap): New member function
+	throws assert(3)ion if called.  Internal logic should ensure
+	that such a call is impossible.
+	(print_traps_request): Call the `print_traps()` member function
+	of `topdiv` (as before) only if it is the current diversion.
+	Otherwise, the current diversion is a macro diversion, so call
+	its `print_diversion_trap()` member function.
+
+	* doc/groff.texi.in (Diversion Traps, Debugging):
+	* man/groff.7.man (Request short reference):
+	* man/groff_diff.7.man (New requests): Document it.
+
+	* src/roff/groff/tests/pwh-request-works.sh: Unit-test request.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+	Fixes <https://savannah.gnu.org/bugs/?68358>.
+
 2026-05-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (char_list::get): De-optimize read
