@@ -9911,7 +9911,7 @@ static int evaluate_expression(const char *expr, units *res)
 static void do_register_assignment(const char *s)
 {
   const char *p = strchr(s, '=');
-  if (!p) {
+  if (0 /* nullptr */ == p) {
     char buf[2];
     buf[0] = s[0];
     buf[1] = 0;
@@ -9944,7 +9944,7 @@ static void set_string(const char *name, const char *value)
 static void do_string_assignment(const char *s)
 {
   const char *p = strchr(s, '=');
-  if (!p) {
+  if (0 /* nullptr */ == p) {
     char buf[2];
     buf[0] = s[0];
     buf[1] = 0;
