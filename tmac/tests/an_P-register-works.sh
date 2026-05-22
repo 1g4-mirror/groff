@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 groff="${abs_top_builddir:-.}/test-groff"
 
@@ -35,17 +34,17 @@ foo \- frobinicate a bar
 It took a while to get here.'
 
 output=$(printf "%s\n" "$input" | "$groff" -rcR=0 -rP13 -man -Tascii \
-    -P-cbou)
+    -P-cbou | nl -ba | tr '\t' ' ')
 echo "$output"
 
 echo "checking first page footer" >&2
-echo "$output" | grep -En "^groff test suite +2022-12-11 +13$" \
-    | grep '^63:' || wail
+echo "$output" \
+    | grep -E "^ +63 +groff test suite +2022-12-11 +13$" || wail
 
 echo "checking second page footer" >&2
-echo "$output" | grep -En "^groff test suite +2022-12-11 +14$" \
-    | grep '^129:' || wail
+echo "$output" \
+    | grep -E "^ +129 +groff test suite +2022-12-11 +14$" || wail
 
 test -z "$fail"
 
-# vim:set ai et sw=4 ts=4 tw=72:
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
