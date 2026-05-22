@@ -1,5 +1,12 @@
 2026-05-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(stringdown_request)
+	(stringup_request): Fix code style nits; declare as `static`;
+	external linkage is not required.
+
+2026-05-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor and fix code
 	style nits.
 	(next_file)

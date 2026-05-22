@@ -5868,8 +5868,9 @@ void do_string_case_transform(case_xform_mode mode)
   tok.next();
 }
 
-// Uppercase-transform each byte of the string argument's contents.
-void stringdown_request() {
+// Transform each byte of the string argument's contents to lowercase.
+static void stringdown_request() // .stringdown
+{
   if (!has_arg()) {
     warning(WARN_MISSING, "string downcasing request expects an"
 	    " argument");
@@ -5879,8 +5880,9 @@ void stringdown_request() {
   do_string_case_transform(STRING_DOWNCASE);
 }
 
-// Lowercase-transform each byte of the string argument's contents.
-void stringup_request() {
+// Transform each byte of the string argument's contents to uppercase.
+static void stringup_request() // .stringup
+{
   if (!has_arg()) {
     warning(WARN_MISSING, "string upcasing request expects an"
 	    " argument");
