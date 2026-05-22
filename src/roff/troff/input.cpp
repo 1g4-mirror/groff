@@ -983,7 +983,7 @@ void backtrace_request()
   skip_line();
 }
 
-void next_file()
+static void next_file_request() // .nx
 {
   char *filename = 0 /* nullptr */;
   if (has_arg(true /* peeking */)) {
@@ -1004,7 +1004,7 @@ void next_file()
   tok.next();
 }
 
-void shift()
+static void shift_request() // .shift
 {
   int n;
   if (!has_arg() || !read_integer(&n))
@@ -3226,7 +3226,7 @@ void skip_line()
   tok.next();
 }
 
-void compatible()
+static void configure_att_compatibility_mode_request() // .cp
 {
   int n;
   if (has_arg() && read_integer(&n))
@@ -10354,7 +10354,7 @@ void init_input_requests()
   init_request("color", activate_color);
   init_request("composite", map_composite_character);
   init_request("continue", while_continue_request);
-  init_request("cp", compatible);
+  init_request("cp", configure_att_compatibility_mode_request);
   init_request("de", define_macro);
   init_request("de1", define_nocomp_macro);
   init_request("defcolor", define_color);
@@ -10388,7 +10388,7 @@ void init_input_requests()
   init_request("msoquiet", macro_source_quietly_request);
   init_request("nop", nop_request);
   init_request("nroff", nroff_request);
-  init_request("nx", next_file);
+  init_request("nx", next_file_request);
   init_request("open", open_request);
   init_request("opena", opena_request);
   init_request("output", output_request);
@@ -10407,7 +10407,7 @@ void init_input_requests()
   init_request("rm", remove_macro);
   init_request("rn", rename_macro);
   init_request("schar", define_special_character_request);
-  init_request("shift", shift);
+  init_request("shift", shift_request);
   init_request("so", source_request);
   init_request("soquiet", source_quietly_request);
   init_request("spreadwarn", spreadwarn_request);

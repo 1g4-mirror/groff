@@ -1,3 +1,17 @@
+2026-05-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Trivially refactor and fix code
+	style nits.
+	(next_file)
+	(shift)
+	(compatible): Rename these...
+	(next_file_request)
+	(shift_request)
+	(configure_att_compatibility_mode_request): ...to these, and
+	declare them as `static`; external linkage is not required.
+	(init_input_requests): Update wire-uppery of request names to
+	handler functions.
+
 2026-05-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Fix code style nits.
