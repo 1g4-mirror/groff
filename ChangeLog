@@ -1,6 +1,50 @@
 2026-05-22  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp
+	(escape_off_request)
+	(save_escape_char_request)
+	(restore_escape_char_request)
+	(assign_control_character_request)
+	(assign_no_break_control_character_request)
+	(backtrace_request)
+	(exit_request)
+	(return_macro_request)
+	(do_request)
+	(flush_pending_lines) [WIDOW_CONTROL]
+	(print_macro_request)
+	(read_from_terminal_request)
+	(ignore)
+	(remove_macro)
+	(rename_macro)
+	(alias_macro)
+	(substring_request)
+	(length_request)
+	(unformat_macro)
+	(line_file)
+	(source_request)
+	(source_quietly_request)
+	(pipe_source_request)
+	(ps_bbox_request)
+	(tag)
+	(taga)
+	(warnscale_request)
+	(spreadwarn_request)
+	(translate)
+	(translate_no_transparent)
+	(translate_input)
+	(hyphenation_patterns_file_code)
+	(abort_request)
+	(pipe_output)
+	(system_request)
+	(vjustify) [COLUMN]
+	(macro_source_request)
+	(macro_source_quietly_request)
+	(configure_desired_warnings_request): Fix code style nits;
+	declare as `static`; external linkage is not required.
+
+2026-05-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp
 	(stringdown_request)
 	(stringup_request): Fix code style nits; declare as `static`;
 	external linkage is not required.

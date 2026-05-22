@@ -225,7 +225,7 @@ static const unsigned char default_control_char = (unsigned char)('.');
 static const unsigned char default_no_break_control_char
   = (unsigned char)('\'');
 
-static void assign_escape_character_request()
+static void assign_escape_character_request() // .ec
 {
   unsigned char ec = 0U;
   bool is_invalid = false;
@@ -264,7 +264,7 @@ static void assign_escape_character_request()
   skip_line();
 }
 
-void escape_off_request()
+static void escape_off_request() // .eo
 {
   escape_char = 0U;
   skip_line();
@@ -272,19 +272,19 @@ void escape_off_request()
 
 static unsigned char saved_escape_char = '\\';
 
-void save_escape_char_request()
+static void save_escape_char_request() // .ecs
 {
   saved_escape_char = escape_char;
   skip_line();
 }
 
-void restore_escape_char_request()
+static void restore_escape_char_request() // .ecr
 {
   escape_char = saved_escape_char;
   skip_line();
 }
 
-void assign_control_character_request()
+static void assign_control_character_request() // .cc
 {
   unsigned char cc = 0U;
   bool is_invalid = false;
@@ -325,7 +325,7 @@ void assign_control_character_request()
   skip_line();
 }
 
-void assign_no_break_control_character_request()
+static void assign_no_break_control_character_request() // .c2
 {
   unsigned char nbcc = 0U;
   bool is_invalid = false;
@@ -976,7 +976,7 @@ inline bool input_stack::get_att_compat()
   return top->get_att_compat();
 }
 
-void backtrace_request()
+static void backtrace_request() // .backtrace
 {
   input_stack::backtrace();
   fflush(stderr);
@@ -1659,7 +1659,7 @@ static color *read_gray(unsigned char end = 0U)
   return col;
 }
 
-static void activate_color()
+static void activate_color() // .color
 {
   int n;
   bool is_color_desired = false;
@@ -1675,7 +1675,7 @@ static void activate_color()
   skip_line();
 }
 
-static void define_color()
+static void define_color() // .defcolor
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "color definition request expects arguments");
@@ -1722,7 +1722,7 @@ static void define_color()
   skip_line();
 }
 
-static void print_color_request()
+static void print_color_request() // .pcolor
 {
   symbol key;
   color *value;
@@ -3429,10 +3429,8 @@ void exit_troff()
   write_any_trailer_and_exit(EXIT_SUCCESS);
 }
 
-// This implements .ex.  The input stack must be cleared before calling
-// exit_troff().
-
-void exit_request()
+// The input stack must be cleared before calling exit_troff().
+static void exit_request() // .ex
 {
   input_stack::clear();
   if (is_exit_underway)
@@ -3441,7 +3439,7 @@ void exit_request()
     exit_troff();
 }
 
-void return_macro_request()
+static void return_macro_request() // .return
 {
   if (has_arg() && (tok.ch() != 0U))
     input_stack::pop_macro();
@@ -3449,19 +3447,19 @@ void return_macro_request()
   tok.next();
 }
 
-static void configure_end_of_input_macro_request()
+static void configure_end_of_input_macro_request() // .em
 {
   end_of_input_macro_name = read_identifier();
   skip_line();
 }
 
-static void configure_blank_line_macro_request()
+static void configure_blank_line_macro_request() // .blm
 {
   blank_line_macro_name = read_identifier();
   skip_line();
 }
 
-static void configure_leading_spaces_macro_request()
+static void configure_leading_spaces_macro_request() // .lsm
 {
   leading_spaces_macro_name = read_identifier();
   skip_line();
@@ -3477,7 +3475,7 @@ static void trapping_blank_line()
 
 std::stack<bool> want_att_compat_stack;
 
-void do_request()
+static void do_request() // .do
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "groff syntax interpretation request expects"
@@ -3881,7 +3879,7 @@ void process_input_stack()
 
 #ifdef WIDOW_CONTROL
 
-void flush_pending_lines()
+static void flush_pending_lines() // .fpl
 {
   while (!tok.is_terminator())
     tok.next();
@@ -4332,7 +4330,7 @@ void macro_header::json_dump_macro()
   fflush(stderr);
 }
 
-void print_macro_request()
+static void print_macro_request() // .pm
 {
   request_or_macro *rm;
   macro *m = 0 /* nullptr */;
@@ -4911,7 +4909,7 @@ macro_iterator::~macro_iterator()
 
 dictionary composite_dictionary(17);
 
-static void map_composite_character()
+static void map_composite_character() // .composite
 {
   symbol from = read_identifier();
   if (from.is_null()) {
@@ -5015,7 +5013,7 @@ static symbol composite_glyph_name(symbol nm)
   return symbol(gl.contents());
 }
 
-static void print_composite_character_request()
+static void print_composite_character_request() // .pcomposite
 {
   dictionary_iterator iter(composite_dictionary);
   symbol key;
@@ -5075,7 +5073,7 @@ bool unpostpone_traps()
     return false;
 }
 
-void read_from_terminal_request() // .rd
+static void read_from_terminal_request() // .rd
 {
   macro_iterator *mi = new macro_iterator;
   bool is_reading_from_terminal = bool(isatty(fileno(stdin)));
@@ -5181,24 +5179,24 @@ static void do_define_string(define_mode mode, comp_mode comp)
   tok.next();
 }
 
-static void define_string()
+static void define_string() // .ds
 {
   do_define_string(DEFINE_NORMAL,
 		   want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
-static void define_nocomp_string()
+static void define_nocomp_string() // .ds1
 {
   do_define_string(DEFINE_NORMAL, COMP_DISABLE);
 }
 
-static void append_string()
+static void append_string() // .as
 {
   do_define_string(DEFINE_APPEND,
 		   want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
-static void append_nocomp_string()
+static void append_nocomp_string() // .as1
 {
   do_define_string(DEFINE_APPEND, COMP_DISABLE);
 }
@@ -5284,7 +5282,7 @@ void define_character(char_mode mode, const char *font_name)
   tok.next();
 }
 
-static void define_character_request()
+static void define_character_request() // .char
 {
   if (!has_arg(true /* peek; we want to read in copy mode */)) {
     warning(WARN_MISSING, "character definition request expects"
@@ -5295,7 +5293,7 @@ static void define_character_request()
   define_character(CHAR_NORMAL);
 }
 
-static void define_fallback_character_request()
+static void define_fallback_character_request() // .fchar
 {
   if (!has_arg(true /* peek; we want to read in copy mode */)) {
     warning(WARN_MISSING, "fallback character definition request"
@@ -5306,7 +5304,7 @@ static void define_fallback_character_request()
   define_character(CHAR_FALLBACK);
 }
 
-static void define_special_character_request()
+static void define_special_character_request() // .schar
 {
   if (!has_arg(true /* peek; we want to read in copy mode */)) {
     warning(WARN_MISSING, "special character definition request expects"
@@ -5317,7 +5315,7 @@ static void define_special_character_request()
   define_character(CHAR_SPECIAL_FALLBACK);
 }
 
-static void print_character_request()
+static void print_character_request() // .pchar
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character report request expects arguments");
@@ -5346,7 +5344,8 @@ static void print_character_request()
   skip_line();
 }
 
-static void remove_character()
+
+static void remove_character() // .rchar
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character definition removal request expects"
@@ -5690,58 +5689,58 @@ static void do_define_macro(define_mode mode, calling_mode calling,
   }
 }
 
-static void define_macro()
+static void define_macro() // .de
 {
   do_define_macro(DEFINE_NORMAL, CALLING_NORMAL,
 		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
-static void define_nocomp_macro()
+static void define_nocomp_macro() // .de1
 {
   do_define_macro(DEFINE_NORMAL, CALLING_NORMAL, COMP_DISABLE);
 }
 
-static void define_indirect_macro()
+static void define_indirect_macro() // .dei
 {
   do_define_macro(DEFINE_NORMAL, CALLING_INDIRECT,
 		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
-static void define_indirect_nocomp_macro()
+static void define_indirect_nocomp_macro() // .dei1
 {
   do_define_macro(DEFINE_NORMAL, CALLING_INDIRECT, COMP_DISABLE);
 }
 
-static void append_macro()
+static void append_macro() // .am
 {
   do_define_macro(DEFINE_APPEND, CALLING_NORMAL,
 		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
-static void append_nocomp_macro()
+static void append_nocomp_macro() // .am1
 {
   do_define_macro(DEFINE_APPEND, CALLING_NORMAL, COMP_DISABLE);
 }
 
-static void append_indirect_macro()
+static void append_indirect_macro() // .ami
 {
   do_define_macro(DEFINE_APPEND, CALLING_INDIRECT,
 		  want_att_compat ? COMP_ENABLE : COMP_IGNORE);
 }
 
-static void append_indirect_nocomp_macro()
+static void append_indirect_nocomp_macro() // .ami1
 {
   do_define_macro(DEFINE_APPEND, CALLING_INDIRECT, COMP_DISABLE);
 }
 
-void ignore()
+static void ignore() // .ig
 {
   want_input_ignored = true;
   do_define_macro(DEFINE_IGNORE, CALLING_NORMAL, COMP_IGNORE);
   want_input_ignored = false;
 }
 
-void remove_macro()
+static void remove_macro() // .rm
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "name removal request expects arguments");
@@ -5757,7 +5756,7 @@ void remove_macro()
   skip_line();
 }
 
-void rename_macro()
+static void rename_macro() // .rn
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "renaming request expects arguments");
@@ -5778,7 +5777,7 @@ void rename_macro()
   skip_line();
 }
 
-void alias_macro()
+static void alias_macro() // .als
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "name aliasing request expects arguments");
@@ -5801,7 +5800,7 @@ void alias_macro()
   skip_line();
 }
 
-static void chop_request()
+static void chop_request() // .chop
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "chop request expects an argument");
@@ -5892,7 +5891,7 @@ static void stringup_request() // .stringup
   do_string_case_transform(STRING_UPCASE);
 }
 
-void substring_request()
+static void substring_request() // .substring
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "substring request expects arguments");
@@ -5997,7 +5996,7 @@ void substring_request()
   skip_line();
 }
 
-void length_request()
+static void length_request() // .length
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "length computation request expects"
@@ -6041,7 +6040,7 @@ void length_request()
   tok.next();
 }
 
-static void asciify_request()
+static void asciify_request() // .asciify
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "diversion asciification request expects a"
@@ -6077,7 +6076,7 @@ static void asciify_request()
   skip_line();
 }
 
-void unformat_macro()
+static void unformat_macro() // .unformat
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "diversion unformatting request expects a"
@@ -6591,7 +6590,7 @@ charinfo *page_character;
 // or footers), which full-service macro packages typically put in their
 // own environment anyway to ensure that a consistent typeface is used
 // there regardless of how body text is styled.
-static void page_character_request()
+static void page_character_request() // .pc
 {
   page_character = read_character();
   // TODO?: If null pointer, set to `percent_symbol` (see below),
@@ -6929,7 +6928,7 @@ static node *do_device_extension() // \X
   return new device_extension_node(mac);
 }
 
-static void device_request()
+static void device_request() // .device
 {
   if (!has_arg(true /* peek; we want to read in copy mode */)) {
     warning(WARN_MISSING, "device extension request expects an"
@@ -7030,7 +7029,7 @@ static void device_request()
   tok.next();
 }
 
-static void device_macro_request()
+static void device_macro_request() // .devicem
 {
   symbol s = read_identifier(true /* want_diagnostic */);
   if (!(s.is_null() || s.is_empty())) {
@@ -7045,7 +7044,7 @@ static void device_macro_request()
   skip_line();
 }
 
-static void output_request()
+static void output_request() // .output
 {
   if (!has_arg(true /* peek; we want to read in copy mode */)) {
     warning(WARN_MISSING, "output request expects arguments");
@@ -7165,7 +7164,7 @@ int get_file_line(const char **filename, int *lineno)
 				   lineno);
 }
 
-void line_file()
+static void line_file() // .lf
 {
   int n;
   if (read_integer(&n)) {
@@ -7181,13 +7180,13 @@ void line_file()
   skip_line();
 }
 
-static void nroff_request()
+static void nroff_request() // .nroff
 {
   in_nroff_mode = true;
   skip_line();
 }
 
-static void troff_request()
+static void troff_request() // .troff
 {
   in_nroff_mode = false;
   skip_line();
@@ -7246,7 +7245,7 @@ static void take_branch()
     tok.next();
 }
 
-static void nop_request()
+static void nop_request() // .nop
 {
   tok.skip_spaces();
 }
@@ -7446,7 +7445,7 @@ static bool is_conditional_expression_true()
   return result;
 }
 
-static void if_else_request()
+static void if_else_request() // .ie
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "if-else request expects arguments");
@@ -7456,7 +7455,7 @@ static void if_else_request()
   if_else_stack.push(is_conditional_expression_true());
 }
 
-static void if_request()
+static void if_request() // .if
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "if-then request expects arguments");
@@ -7466,7 +7465,7 @@ static void if_request()
   (void) is_conditional_expression_true();
 }
 
-static void else_request()
+static void else_request() // .el
 {
   if (if_else_stack.empty())
     skip_branch();
@@ -7548,7 +7547,7 @@ static void while_request()
   tok.next();
 }
 
-static void while_break_request()
+static void while_break_request() // .break
 {
   if (!while_loop_depth) {
     error("cannot 'break' when not in a 'while' loop");
@@ -7562,7 +7561,7 @@ static void while_break_request()
   }
 }
 
-static void while_continue_request()
+static void while_continue_request() // .continue
 {
   if (!while_loop_depth) {
     error("cannot 'continue' when not in a 'while' loop");
@@ -7591,7 +7590,7 @@ void do_source(bool quietly)
   tok.next();
 }
 
-void source_request() // .so
+static void source_request() // .so
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "file sourcing request expects an argument");
@@ -7603,7 +7602,7 @@ void source_request() // .so
 
 // like .so, but silently ignore files that can't be opened due to their
 // nonexistence
-void source_quietly_request() // .soquiet
+static void source_quietly_request() // .soquiet
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "quiet file sourcing request expects an"
@@ -7614,7 +7613,7 @@ void source_quietly_request() // .soquiet
   do_source(true /* quietly */ );
 }
 
-void pipe_source_request() // .pso
+static void pipe_source_request() // .pso
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "piped command source request expects"
@@ -8087,7 +8086,7 @@ inline bool psbb_locator::skip_to_trailer(void)
   return false;
 }
 
-void ps_bbox_request() // .psbb
+static void ps_bbox_request() // .psbb
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "PostScript file bounding box extraction"
@@ -8250,7 +8249,7 @@ const char *input_char_description(int c)
   return buf;
 }
 
-void tag()
+static void tag() // .tag
 {
   if (has_arg(true /* peeking */)) {
     string s;
@@ -8275,7 +8274,7 @@ void tag()
   tok.next();
 }
 
-void taga()
+static void taga() // .taga
 {
   if (has_arg(true /* peeking */)) {
     string s;
@@ -8625,7 +8624,7 @@ static void stream_write_macro_request() // .writem
   skip_line();
 }
 
-void warnscale_request() // .warnscale
+static void warnscale_request() // .warnscale
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "warning scaling unit configuration request"
@@ -8655,7 +8654,7 @@ void warnscale_request() // .warnscale
   skip_line();
 }
 
-void spreadwarn_request() // .spreadwarn
+static void spreadwarn_request() // .spreadwarn
 {
   hunits n;
   if (has_arg() && read_hunits(&n, 'm')) {
@@ -8784,7 +8783,7 @@ static void do_translate(bool transparently, bool as_input)
   skip_line();
 }
 
-void translate() // .tr
+static void translate() // .tr
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character translation request expects"
@@ -8795,7 +8794,7 @@ void translate() // .tr
   do_translate(true /* transparently */, false /* as_input */);
 }
 
-void translate_no_transparent() // .trnt
+static void translate_no_transparent() // .trnt
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character non-diversion translation request"
@@ -8806,7 +8805,7 @@ void translate_no_transparent() // .trnt
   do_translate(false /* transparently */, false /* as_input */);
 }
 
-void translate_input() // .trin
+static void translate_input() // .trin
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character non-asciification translation"
@@ -8929,7 +8928,7 @@ static void set_hyphenation_codes() // .hcode
   skip_line();
 }
 
-void hyphenation_patterns_file_code() // .hpfcode
+static void hyphenation_patterns_file_code() // .hpfcode
 {
   error("hyphenation pattern file code assignment request will be"
 	" withdrawn in a future groff release; migrate to 'hcode'");
@@ -9461,7 +9460,7 @@ const char *readonly_mask_register::get_string()
   return ui_to_a(*mask);
 }
 
-void abort_request()
+static void abort_request() // .ab
 {
   if (has_arg(true /* peeking */)) {
     int c;
@@ -9527,7 +9526,7 @@ char *read_rest_of_line_as_argument()
   return s;
 }
 
-void pipe_output()
+static void pipe_output() // .pi
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "output piping request expects a system"
@@ -9572,7 +9571,7 @@ void pipe_output()
 
 static int system_status;
 
-void system_request()
+static void system_request() // .sy
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "system command execution request expects a"
@@ -9598,7 +9597,7 @@ void system_request()
   tok.next();
 }
 
-static void unsafe_transparent_throughput_file_request()
+static void unsafe_transparent_throughput_file_request() // .cf
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "file throughput request expects a file name"
@@ -9627,7 +9626,7 @@ static void unsafe_transparent_throughput_file_request()
 
 #ifdef COLUMN
 
-void vjustify()
+static void vjustify() // .vj
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "vertical adjustment request expects an"
@@ -9647,7 +9646,7 @@ void vjustify()
 
 #endif /* COLUMN */
 
-static void transparent_throughput_file_request()
+static void transparent_throughput_file_request() // .trf
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "transparent file throughput request expects"
@@ -9855,7 +9854,7 @@ void do_macro_source(bool quietly)
   tok.next();
 }
 
-void macro_source_request() // .mso
+static void macro_source_request() // .mso
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "macro file sourcing request expects an"
@@ -9868,7 +9867,7 @@ void macro_source_request() // .mso
 
 // like .mso, but silently ignore files that can't be opened due to
 // their nonexistence
-void macro_source_quietly_request() // .msoquiet
+static void macro_source_quietly_request() // .msoquiet
 {
   if (!has_arg(true /* peeking */)) {
     warning(WARN_MISSING, "quiet macro file sourcing request expects an"
@@ -10270,7 +10269,7 @@ int main(int argc, char **argv)
   return 0;			// not reached
 }
 
-void configure_desired_warnings_request()
+static void configure_desired_warnings_request() // .warn
 {
   int n;
   if (has_arg() && read_integer(&n)) {
