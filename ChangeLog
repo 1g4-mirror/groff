@@ -1,3 +1,12 @@
+2026-05-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
+	(add_hyphenation_exception_words_request): Refactor.  Convert
+	`while` loop to `do-while` loop.  (1) We already know at first
+	loop entry that the condition is true and (2) structuring it
+	this way makes more sense given a planned revision to
+	`has_arg()` to tighten up its semantics.
+
 2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (set_hyphenation_codes):

@@ -4043,7 +4043,7 @@ static void add_hyphenation_exception_words_request() // .hw
   unsigned char bpbuf[bpbuflen];
   (void) memset(bpbuf, 0, bpbuflen);
   int bp_count = 0;
-  while (has_arg()) {
+  do {
     if (read_hyphenation_exception_word(wordbuf, &bp_count, bpbuf)) {
       const size_t newbpbuflen = bp_count + 1 /* 0U terminator */;
       unsigned char *tem = 0 /* nullptr */;
@@ -4073,7 +4073,7 @@ static void add_hyphenation_exception_words_request() // .hw
       if (tem != 0 /* nullptr */)
 	delete[] tem;
     }
-  }
+  } while (has_arg());
   skip_line();
 }
 
