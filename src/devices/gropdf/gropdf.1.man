@@ -1,3 +1,4 @@
+'\" t
 .TH gropdf @MAN1EXT@ "@MDATE@" "groff @VERSION@"
 .SH Name
 gropdf \-

@@ -1,3 +1,4 @@
+'\" t
 .TH @g@chem @MAN1EXT@ "@MDATE@" "groff @VERSION@"
 .SH Name
 @g@chem \- embed chemical structure diagrams in
