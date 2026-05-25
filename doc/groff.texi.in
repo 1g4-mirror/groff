@@ -11797,19 +11797,40 @@ environment (@pxref{Environments}).
 @cindex character translations
 @cindex translations of characters
 
-A @dfn{translation} is a mapping of an input character to an output
-glyph.  The mapping occurs at output time, i.e., the input character
-gets assigned the metric information of the mapped output character
-right before tokens are converted to nodes
-(@pxref{GNU @command{troff} Internals},
-for more on this process).
+A
+@dfn{character translation}
+remaps input characters,
+usually to make input more convenient.
+GNU
+@command{troff} @c GNU
+performs the translation just before formatting the glyph;
+that is,
+right before it converts the character's token
+to a node.@footnote{@xref{GNU @command{troff} Internals},
+for more on this process.}
 
 @DefreqList {tr, @Var{a}@Var{b}@Var{c}@Var{d}@dots{}}
 @DefreqListEndx {trin, @Var{a}@Var{b}@Var{c}@Var{d}@dots{}}
-Translate character @var{a} to glyph@tie{}@var{b}, character @var{c} to
-glyph@tie{}@var{d}, and so on.  If there is an odd number of characters
-in the argument, the last one is translated to a fixed-width space (the
-same one obtained by the @code{\@key{SPC}} escape sequence).
+Translate character
+@var{a}
+to
+@var{b},
+@var{c}
+to
+@var{d},
+and so on prior to output.
+Unusually,
+spaces are not permitted between the arguments.
+@c TODO: Change that after we tighten up this request's semantics; see
+@c Savannah #68133.
+If number of arguments is odd,
+the formatter translates the last
+to a fixed-width space
+(the same one obtained by the
+@code{\@key{SPC}}
+escape sequence).
+@c TODO: Change that too.
+@c "Explicit is better than implicit." -- The Tao of Python
 
 The
 @code{trin}

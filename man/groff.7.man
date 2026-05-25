@@ -5595,7 +5595,7 @@ but does not append a newline.
 .
 .TPx
 .REQ .tr abcd\fR\&.\|.\|.\&\fP
-Translate ordinary or special characters
+Translate characters
 .I a
 to
 .IR b ,
@@ -5603,6 +5603,20 @@ to
 to
 .IR d ,
 and so on prior to output.
+.
+Unusually,
+spaces are not permitted between the arguments.
+.\" TODO: Change that after we tighten up this request's semantics; see
+.\" Savannah #68133.
+.
+If number of arguments is odd,
+the formatter translates the last
+to a fixed-width space
+(the same one obtained by the
+.BI \[rs] space
+escape sequence).
+.\" TODO: Change that too.
+.\" "Explicit is better than implicit." -- The Tao of Python
 .
 .TPx
 .REQ .trf file
