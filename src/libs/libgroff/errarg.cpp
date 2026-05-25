@@ -45,6 +45,11 @@ errarg::errarg(unsigned int uu) : type(UNSIGNED_INTEGER)
   u = uu;
 }
 
+errarg::errarg(unsigned long int ll) : type(UNSIGNED_LONG_INTEGER)
+{
+  l = ll;
+}
+
 errarg::errarg(char cc) : type(CHAR)
 {
   c = cc;
@@ -78,6 +83,9 @@ void errarg::print() const
     break;
   case UNSIGNED_INTEGER:
     fputs(ui_to_a(u), stderr);
+    break;
+  case UNSIGNED_LONG_INTEGER:
+    fprintf(stderr, "%lu", l);
     break;
   case CHAR:
     putc(c, stderr);

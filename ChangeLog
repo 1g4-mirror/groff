@@ -1,3 +1,18 @@
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Extend argument printer for diagnostic messages to
+	handle object of type `unsigned long int`, so that we can report
+	`sizeof` values messages, perhaps among other purposes.
+
+	* src/include/errarg.h (class errarg): Extend `type` enumeration
+	type to support `UNSIGNED_LONG_INTEGER` constant.  Add member
+	`l` of type `unsigned long int` to anonymous union.  Declare
+	constructor taking argument of `unsigned long int` type.
+	* src/libs/libgroff/errarg.cpp (errarg:errargs): Define new
+	constructor taking argument of `unsigned long int` type.
+	(errarg::print): Handle case of `UNSIGNED_LONG_INTEGER`,
+	delegating printing to fprintf(3).
+
 2026-05-25  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Handle URI encoded characters (%nn) correctly.

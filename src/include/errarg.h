@@ -18,11 +18,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 class errarg {
-  enum { EMPTY, STRING, CHAR, INTEGER, UNSIGNED_INTEGER, DOUBLE } type;
+  enum { EMPTY, STRING, CHAR, INTEGER, UNSIGNED_INTEGER,
+	 UNSIGNED_LONG_INTEGER, DOUBLE } type;
   union {
     const char *s;
     int n;
     unsigned int u;
+    unsigned long int l;
     char c;
     double d;
   };
@@ -33,6 +35,7 @@ class errarg {
   errarg(unsigned char);
   errarg(int);
   errarg(unsigned int);
+  errarg(unsigned long int);
   errarg(double);
   int empty() const;
   void print() const;
