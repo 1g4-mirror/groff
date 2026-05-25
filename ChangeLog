@@ -1,5 +1,12 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/tfmtodit/tfmtodit.cpp (char_list::char_list, main):
+	Migrate from libgroff's `strsave()` to POSIX's strdup(3).
+
+	Continues the long process of fixing Savannah #66672.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp (main): Use ISO C standard
 	constant `M_PI` instead of our own `PI`.
 

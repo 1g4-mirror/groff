@@ -56,6 +56,8 @@ both be zero. */
 #include <math.h> // atan2(), M_PI
 #include <stdcountof.h>
 #include <stdlib.h> // exit(), EXIT_FAILURE, EXIT_SUCCESS, strtol()
+#include <string.h> // memcmp(), strcmp(), strdup(), strerror(),
+		    // strlen(), strrchr(), strtok()
 
 #include <getopt.h> // getopt_long()
 
@@ -606,7 +608,7 @@ struct char_list {
   char_list(const char *, char_list * = 0);
 };
 
-char_list::char_list(const char *s, char_list *p) : ch(strsave(s)),
+char_list::char_list(const char *s, char_list *p) : ch(strdup(s)),
 		     next(p)
 {
 }
@@ -797,7 +799,7 @@ int main(int argc, char **argv)
   printf("name %s\n", font_file);
   if (is_font_special)
     fputs("special\n", stdout);
-  char *internal_name = strsave(argv[optind]);
+  char *internal_name = strdup(argv[optind]);
   size_t len = strlen(internal_name);
   if ((len > 4) && (strcmp(internal_name + len - 4, ".tfm") == 0))
     internal_name[len - 4] = '\0';
