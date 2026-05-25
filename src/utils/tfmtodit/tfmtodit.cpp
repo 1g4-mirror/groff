@@ -350,10 +350,10 @@ bool tfm::load(const char *file)
   lig_kern = new lig_kern_command[nl];
   kern = new int[nk];
   param = new int[np];
-  int i;
   cs = read4(ptr);
   ds = read4(ptr);
   ptr += (lh - 2) * 4;
+  int i;
   for (i = 0; (i < (ec - bc + 1)); i++) {
     char_info[i].width_index = *ptr++;
     unsigned char tem = *ptr++;

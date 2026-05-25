@@ -61,6 +61,7 @@
 	(gf::skip): Update definitions.  Return Boolean, not integer,
 	literals.
 	(read_map): Demote return type from `int` to `bool`.
+	(tfm::load): Declare local variable closer to point of use.
 	(main): Demote local variable `special_flag` from `int` to
 	`bool` and rename it to `is_font_special`.  Assign to it using
 	Boolean, not integer, literals.
