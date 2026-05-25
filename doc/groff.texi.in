@@ -14079,11 +14079,19 @@ has this property.
 @cindex @code{rq} glyph, at end of sentence
 @cindex @code{cq} glyph, at end of sentence
 Mark the character as transparent for the purpose of end-of-sentence
-recognition.  In other words, an end-of-sentence character followed by
-any number of characters with this property is treated as the end of a
-sentence if followed by a newline or two spaces.  This is the same as
-having a zero space factor in @TeX{}.  Initially, characters
-@samp{"')]*\[dg]\[dd]\[rq]\[cq]} have this property.
+recognition.
+In other words,
+GNU
+@command{troff} @c GNU
+treats an end-of-sentence character
+followed by any number of characters with this property
+as the end of a sentence if followed by a newline
+or two spaces.@footnote{This is the same as
+having a zero space factor in @TeX{}.}
+At startup,
+characters
+@samp{"')]*\[dg]\[dd]\[rq]\[cq]}
+have this property.
 
 @item 64
 Ignore hyphenation codes of the surrounding characters.  Use this in

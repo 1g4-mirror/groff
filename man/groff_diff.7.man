@@ -479,13 +479,16 @@ Mark the character as transparent for the purpose of end-of-sentence
 recognition.
 .
 In other words,
-an end-of-sentence character followed by any number of characters with
-this property is treated as the end of a sentence if followed by a
-newline or two spaces.
+GNU
+.I troff \" GNU
+treats an end-of-sentence character
+followed by any number of characters with this property
+as the end of a sentence if followed by a newline
+or two spaces.
 .
-This is the same as having a zero space factor in \*[tx].
+(This is the same as having a zero space factor in \*[tx].)
 .
-Initially,
+At startup,
 characters
 .\" The following is ordered with the apostrophe and (single) closing
 .\" quote on the ends so they are more easily visually distinguished
