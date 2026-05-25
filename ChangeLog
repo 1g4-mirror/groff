@@ -1,5 +1,13 @@
 2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (set_character_flags_request):
+	Refactor; use `token::is_any_character()` instead of `has_arg()`
+	as loop control, in preparation for firming-up of the semantics
+	and logic of request arguments to constitute space-separated
+	lexical tokens, as our documentation defines "argument".
+
+2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (set_hyphenation_codes): Throw error
 	if either the "source" or "destination" operand of a hyphenation
 	code assignment pair it not a character token.

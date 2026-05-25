@@ -8858,7 +8858,7 @@ static void set_character_flags_request() // .cflags
       skip_line();
       return;
     }
-    while (has_arg()) {
+    while (tok.is_any_character()) {
       charinfo *ci = tok.get_charinfo(true /* is_mandatory */);
       if (0 /* nullptr */ == ci)
 	assert(0 == "attempted to use token without charinfo in"
