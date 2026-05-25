@@ -1,3 +1,12 @@
+2026-05-25  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	Handle URI encoded characters (%nn) correctly.
+
+	* src/devices/gropdf/gropdf.pl (LoadPDF): A '%' is used
+	to introduce a comment in a PDF, but it may also be used
+	to hex encode a character in a URI of an external link. Page
+	620 of the PDF 1.7 standard has a NOTE about this. Fix it.
+
 2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	When building outside of the source tree and with the configure

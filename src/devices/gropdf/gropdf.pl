@@ -2540,6 +2540,7 @@ sub LoadPDF
 	    }
 	}
 
+	s/%([A-Fa-f0-9]{2})/chr(hex($1))/ge;
 	s/%.*?$//;
 	$pdftxt.=$_.' ';
     }
@@ -2581,7 +2582,6 @@ sub LoadPDF
         LoadStream($pdf->[$ObjStm],$pdf);
         my $pos=$pdf->[$ObjStm]->{OBJ}->{First};
         my $s=$pdf->[$ObjStm]->{STREAM};
-        $s=~s/\%.*?$//m;
         my @o=split(' ',substr($s,0,$pos));
         substr($s,0,$pos)='';
         push(@o,-1,length($s));
