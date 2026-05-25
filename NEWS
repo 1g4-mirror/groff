@@ -61,6 +61,10 @@ troff
    and if found, is reported with its hyphenation points.  Only
    hyphenation exceptions defined by the `hw` request are reported.
 
+*  The `pwh` request, when invoked while the diversion is not the
+   top-level diversion, now reports the name and location of any
+   configured diversion trap instead of reporting nothing.
+
 *  A new request, `rhw`, removes user-defined hyphenation exception
    words from the current hyphenation language's list thereof.  Those
    supplied by files like "tmac/hyphenex.{cs,en,pl}" are retained.
