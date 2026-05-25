@@ -1,3 +1,17 @@
+2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	When building outside of the source tree and with the configure
+	script's dependency tracking disabled, work harder to ensure
+	that the parent directories of build artifacts exist before
+	attempting to populate them.
+
+	* font/devpdf/devpdf.am (font/devpdf/SS):
+	* src/libs/libgroff/libgroff.am (src/libs/libgroff/version.cpp):
+	Do it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68372>.  Thanks to Ross
+	Burton for the report.
+
 2026-05-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp

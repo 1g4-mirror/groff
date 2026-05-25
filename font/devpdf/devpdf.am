@@ -160,6 +160,7 @@ $(devpdffontencdata):
 # XXX: Maybe a Make or Automake guru can advise how to improve this.
 
 font/devpdf/SS: $(devpdf_srcdir)/SS.in
+	$(AM_V_at)$(MKDIR_P) $(devpdf_builddir)
 	$(AM_V_GEN)cp -fp $(devpdf_srcdir)/SS.in $@
 
 $(devpdf_builddir)/symbolsl.afm: \
