@@ -287,7 +287,7 @@ int tfm::load(const char *file)
   errno = 0;
   FILE *fp = fopen(file, FOPEN_RB);
   if (0 /* nullptr */ == fp) {
-    error("can't open '%1': %2", file, strerror(errno));
+    error("cannot open '%1': %2", file, strerror(errno));
     return 0;
   }
   int c1 = getc(fp);
@@ -428,7 +428,7 @@ int gf::load(const char *file)
   errno = 0;
   FILE *fp = fopen(file, FOPEN_RB);
   if (0 /* nullptr */ == fp) {
-    error("can't open '%1': %2", file, strerror(errno));
+    error("cannot open '%1': %2", file, strerror(errno));
     return 0;
   }
   if (getc(fp) != pre || getc(fp) != gf_id_byte) {
@@ -615,7 +615,7 @@ int read_map(const char *file, char_list **table)
   errno = 0;
   FILE *fp = fopen(file, "r");
   if (0 /* nullptr */ == fp) {
-    error("can't open '%1': %2", file, strerror(errno));
+    error("cannot open '%1': %2", file, strerror(errno));
     return 0;
   }
   for (int i = 0; i < 256; i++)
@@ -778,7 +778,7 @@ int main(int argc, char **argv)
     return 1;
   errno = 0;
   if (!freopen(font_file, "w", stdout)) {
-    error("can't open '%1' for writing: %2", font_file,
+    error("cannot open '%1' for writing: %2", font_file,
 	  strerror(errno));
     return 1;
   }

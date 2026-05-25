@@ -1,5 +1,14 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/tfmtodit/tfmtodit.cpp (tfm::load, gf::load)
+	(read_map, main): Revise diagnostic messages to more closely
+	match terminology from our documentation and model language from
+	elsewhere in the source tree.
+
+	Continues the long process of fixing Savannah #66519.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp (tfm:load): Fix code style
 	nits.  Parenthesize formally complex expressions.  Explicitly
 	compare variables of pointer type to null pointer literal
