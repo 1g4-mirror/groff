@@ -2,6 +2,18 @@
 
 	[tfmtodit]: Be more fastidious with heap-allocated memory.
 
+	* src/utils/tfmtodit/tfmtodit.cpp: Use ISO C++98 exceptions to
+	handle heap storage allocation failures.  Preprocessor-include
+	C++ "<new>" header file.
+	(tfm::load): Catch `std:bad_alloc` exception and `fatal()` out
+	with an attempt to describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[tfmtodit]: Be more fastidious with heap-allocated memory.
+
 	* src/utils/tfmtodit/tfmtodit.cpp (struct char_list): Declare
 	destructor.
 	(char_list::~char_list): Define destructor free(3)ing memory

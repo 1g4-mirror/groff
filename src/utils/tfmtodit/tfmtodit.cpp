@@ -61,6 +61,8 @@ both be zero. */
 
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
+
 // needed for DIR_SEPS, FOPEN_RB
 #include "posix.h"
 #include "nonposix.h"
@@ -303,7 +305,14 @@ bool tfm::load(const char *file)
   }
   int lf = (c1 << 8) + c2;
   int toread = (lf * 4) - 2;
-  unsigned char *buf = new unsigned char[toread];
+  unsigned char *buf = 0 /* nullptr */;
+  try {
+    buf = new unsigned char[toread];
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of contents of TFM file"
+	  " '%2'", toread, file);
+  }
   if (fread(buf, 1, toread, fp) != (size_t)toread) {
     if (feof(fp))
       error("unexpected end of file on '%1'", file);
@@ -342,14 +351,29 @@ bool tfm::load(const char *file)
     delete[] buf;
     return false;
   }
-  char_info = new char_info_word[ec - bc + 1];
-  width = new int[nw];
-  height = new int[nh];
-  depth = new int[nd];
-  italic = new int[ni];
-  lig_kern = new lig_kern_command[nl];
-  kern = new int[nk];
-  param = new int[np];
+  // These are pretty meager allocations, so try/catch them all at once.
+  size_t amount = ((ec - bc + 1) * sizeof(char_info_word)
+		  + (nw * sizeof(int))
+		  + (nh * sizeof(int))
+		  + (nd * sizeof(int))
+		  + (ni * sizeof(int))
+		  + (nl * sizeof(lig_kern_command))
+		  + (nk * sizeof(int))
+		  + (np * sizeof(int)));
+  try {
+    char_info = new char_info_word[ec - bc + 1];
+    width = new int[nw];
+    height = new int[nh];
+    depth = new int[nd];
+    italic = new int[ni];
+    lig_kern = new lig_kern_command[nl];
+    kern = new int[nk];
+    param = new int[np];
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of font metrics in file"
+	  " '%2'", amount, file);
+  }
   cs = read4(ptr);
   ds = read4(ptr);
   ptr += (lh - 2) * 4;
