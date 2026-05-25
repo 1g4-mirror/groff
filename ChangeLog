@@ -1,5 +1,28 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/tfmtodit/tfmtodit.cpp: Boolify.
+	(class tfm): Demote member function declaration return types
+	for `load()`, `contains()`, `get_param()`, and `get_lig()` from
+	`int` to `bool`.
+	(class kern_iterator): Demote member function declaration return
+	type for `next()` from `int` to `bool`.
+	(class gf): Demote member function declaration return types
+	for `skip()` and `load()` from `int` to `bool`.
+	(kern_iterator::next)
+	(tfm::get_lig)
+	(tfm::contains)
+	(tfm::get_param)
+	(tfm::load)
+	(gf::load)
+	(gf::skip): Update definitions.  Return Boolean, not integer,
+	literals.
+	(read_map): Demote return type from `int` to `bool`.
+	(main): Demote local variable `special_flag` from `int` to
+	`bool` and rename it to `is_font_special`.  Assign to it using
+	Boolean, not integer, literals.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp (tfm::load, gf::load)
 	(read_map, main): Revise diagnostic messages to more closely
 	match terminology from our documentation and model language from

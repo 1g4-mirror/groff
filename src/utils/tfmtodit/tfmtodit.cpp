@@ -114,16 +114,16 @@ class tfm {
 public:
   tfm();
   ~tfm();
-  int load(const char *);
-  int contains(int);
+  bool load(const char *);
+  bool contains(int);
   int get_width(int);
   int get_height(int);
   int get_depth(int);
   int get_italic(int);
-  int get_param(int, int *);
+  bool get_param(int, int *);
   int get_checksum();
   int get_design_size();
-  int get_lig(unsigned char, unsigned char, unsigned char *);
+  bool get_lig(unsigned char, unsigned char, unsigned char *);
   friend class kern_iterator;
 };
 
@@ -133,7 +133,7 @@ class kern_iterator {
   int i;
 public:
   kern_iterator(tfm *);
-  int next(unsigned char *c1, unsigned char *c2, int *k);
+  bool next(unsigned char *c1, unsigned char *c2, int *k);
 };
 
 
@@ -142,7 +142,7 @@ kern_iterator::kern_iterator(tfm *p)
 {
 }
 
-int kern_iterator::next(unsigned char *c1, unsigned char *c2, int *k)
+bool kern_iterator::next(unsigned char *c1, unsigned char *c2, int *k)
 {
   for (; c <= t->ec; c++)
     if (t->char_info[c - t->bc].tag == 1) {
@@ -165,7 +165,7 @@ int kern_iterator::next(unsigned char *c1, unsigned char *c2, int *k)
 	  }
 	  else
 	    i += skip + 1;
-	  return 1;
+	  return true;
 	}
 	if (skip >= 128)
 	  break;
@@ -173,7 +173,7 @@ int kern_iterator::next(unsigned char *c1, unsigned char *c2, int *k)
       }
       i = -1;
     }
-  return 0;
+  return false;
 }
 
 tfm::tfm()
@@ -184,7 +184,7 @@ tfm::tfm()
 {
 }
 
-int tfm::get_lig(unsigned char c1, unsigned char c2, unsigned char *cp)
+bool tfm::get_lig(unsigned char c1, unsigned char c2, unsigned char *cp)
 {
   if (contains(c1) && char_info[c1 - bc].tag == 1) {
     int i = char_info[c1 - bc].remainder;
@@ -199,17 +199,17 @@ int tfm::get_lig(unsigned char c1, unsigned char c2, unsigned char *cp)
       if (lig_kern[i].op_byte == 0
 	  && lig_kern[i].next_char == c2) {
 	*cp = lig_kern[i].remainder;
-	return 1;
+	return true;
       }
       if (skip == 128)
 	break;
       i += skip + 1;
     }
   }
-  return 0;
+  return false;
 }
 
-int tfm::contains(int i)
+bool tfm::contains(int i)
 {
   return (i >= bc) && (i <= ec) && (char_info[i - bc].width_index != 0);
 }
@@ -234,13 +234,13 @@ int tfm::get_italic(int i)
   return italic[char_info[i - bc].italic_index];
 }
 
-int tfm::get_param(int i, int *p)
+bool tfm::get_param(int i, int *p)
 {
   if ((i <= 0) || (i > np))
-    return 0;
+    return false;
   else {
     *p = param[i - 1];
-    return 1;
+    return true;
   }
 }
 
@@ -284,20 +284,20 @@ int read4(unsigned char *&s)
   return n;
 }
 
-int tfm::load(const char *file)
+bool tfm::load(const char *file)
 {
   errno = 0;
   FILE *fp = fopen(file, FOPEN_RB);
   if (0 /* nullptr */ == fp) {
     error("cannot open '%1': %2", file, strerror(errno));
-    return 0;
+    return false;
   }
   int c1 = getc(fp);
   int c2 = getc(fp);
   if ((c1 == EOF) || (c2 == EOF)) {
     fclose(fp);
     error("unexpected end of file on '%1'", file);
-    return 0;
+    return false;
   }
   int lf = (c1 << 8) + c2;
   int toread = (lf * 4) - 2;
@@ -309,13 +309,13 @@ int tfm::load(const char *file)
       error("error on file '%1'", file);
     delete[] buf;
     fclose(fp);
-    return 0;
+    return false;
   }
   fclose(fp);
   if (lf < 6) {
     error("bad TFM file '%1': impossibly short", file);
     delete[] buf;
-    return 0;
+    return false;
   }
   unsigned char *ptr = buf;
   int lh = read2(ptr);
@@ -333,12 +333,12 @@ int tfm::load(const char *file)
       != lf) {
     error("bad TFM file '%1': lengths do not sum", file);
     delete[] buf;
-    return 0;
+    return false;
   }
   if (lh < 2) {
     error("bad TFM file '%1': header too short", file);
     delete[] buf;
-    return 0;
+    return false;
   }
   char_info = new char_info_word[ec - bc + 1];
   width = new int[nw];
@@ -383,7 +383,7 @@ int tfm::load(const char *file)
     param[i] = read4(ptr);
   assert(ptr == (buf + (lf * 4) - 2));
   delete[] buf;
-  return 1;
+  return true;
 }
 
 class gf {
@@ -392,10 +392,10 @@ class gf {
   static int sread4(int *p, FILE *fp);
   static int uread3(int *p, FILE *fp);
   static int uread2(int *p, FILE *fp);
-  static int skip(int n, FILE *fp);
+  static bool skip(int n, FILE *fp);
 public:
   gf();
-  int load(const char *file);
+  bool load(const char *file);
   int get_left_adjustment(int i) { return left[i]; }
   int get_right_adjustment(int i) { return right[i]; }
 };
@@ -406,7 +406,7 @@ gf::gf()
     left[i] = right[i] = 0;
 }
 
-int gf::load(const char *file)
+bool gf::load(const char *file)
 {
   enum {
     paint_0 = 0,
@@ -423,19 +423,19 @@ int gf::load(const char *file)
     pre = 247,
     post = 248
   };
-  int got_an_adjustment = 0;
-  int pending_adjustment = 0;
+  bool got_an_adjustment = false;
+  bool is_adjustment_pending = false;
   int left_adj = 0, right_adj = 0;	// pacify compiler
   const int gf_id_byte = 131;
   errno = 0;
   FILE *fp = fopen(file, FOPEN_RB);
   if (0 /* nullptr */ == fp) {
     error("cannot open '%1': %2", file, strerror(errno));
-    return 0;
+    return false;
   }
   if (getc(fp) != pre || getc(fp) != gf_id_byte) {
     error("bad gf file");
-    return 0;
+    return false;
   }
   int n = getc(fp);
   if (n == EOF)
@@ -476,8 +476,8 @@ int gf::load(const char *file)
 	int code;
 	if (!sread4(&code, fp))
 	  goto eof;
-	if (pending_adjustment) {
-	  pending_adjustment = 0;
+	if (is_adjustment_pending) {
+	  is_adjustment_pending = false;
 	  left[code & 0377] = left_adj;
 	  right[code & 0377] = right_adj;
 	}
@@ -490,8 +490,8 @@ int gf::load(const char *file)
 	int code = getc(fp);
 	if (code == EOF)
 	  goto eof;
-	if (pending_adjustment) {
-	  pending_adjustment = 0;
+	if (is_adjustment_pending) {
+	  is_adjustment_pending = false;
 	  left[code] = left_adj;
 	  right[code] = right_adj;
 	}
@@ -525,8 +525,8 @@ int gf::load(const char *file)
 	  }
 	  if (!sread4(&right_adj, fp))
 	    goto eof;
-	  got_an_adjustment = 1;
-	  pending_adjustment = 1;
+	  got_an_adjustment = true;
+	  is_adjustment_pending = true;
 	}
 	break;
       }
@@ -553,10 +553,10 @@ int gf::load(const char *file)
   }
   if (!got_an_adjustment)
     warning("no adjustment specials found in gf file");
-  return 1;
+  return true;
  eof:
   error("unexpected end of file");
-  return 0;
+  return false;
 }
 
 int gf::sread4(int *p, FILE *fp)
@@ -591,12 +591,12 @@ int gf::uread2(int *p, FILE *fp)
   return !ferror(fp) && !feof(fp);
 }
 
-int gf::skip(int n, FILE *fp)
+bool gf::skip(int n, FILE *fp)
 {
   while (--n >= 0)
     if (getc(fp) == EOF)
-      return 0;
-  return 1;
+      return false;
+  return true;
 }
 
 
@@ -612,13 +612,13 @@ char_list::char_list(const char *s, char_list *p) : ch(strsave(s)),
 }
 
 
-int read_map(const char *file, char_list **table)
+bool read_map(const char *file, char_list **table)
 {
   errno = 0;
   FILE *fp = fopen(file, "r");
   if (0 /* nullptr */ == fp) {
     error("cannot open '%1': %2", file, strerror(errno));
-    return 0;
+    return false;
   }
   for (int i = 0; i < 256; i++)
     table[i] = 0;
@@ -638,18 +638,18 @@ int read_map(const char *file, char_list **table)
     if (sscanf(ptr, "%d", &n) != 1) {
       error("%1:%2: bad map file", file, lineno);
       fclose(fp);
-      return 0;
+      return false;
     }
     if (n < 0 || n > 255) {
       error("%1:%2: code %3 out of range", file, lineno, n);
       fclose(fp);
-      return 0;
+      return false;
     }
     ptr = strtok(0 /* nullptr */, " \n\t");
     if (0 /* nullptr */ == ptr) {
       error("%1:%2: missing names", file, lineno);
       fclose(fp);
-      return 0;
+      return false;
     }
     for (;
 	 ptr != 0 /* nullptr */;
@@ -657,7 +657,7 @@ int read_map(const char *file, char_list **table)
       table[n] = new char_list(ptr, table[n]);
   }
   fclose(fp);
-  return 1;
+  return true;
 }
 
 
@@ -702,7 +702,7 @@ static void usage(FILE *stream);
 int main(int argc, char **argv)
 {
   program_name = argv[0];
-  int special_flag = 0;
+  bool is_font_special = false;
   int skewchar = -1;
   int opt;
   const char *gf_file = 0;
@@ -719,7 +719,7 @@ int main(int argc, char **argv)
       gf_file = optarg;
       break;
     case 's':
-      special_flag = 1;
+      is_font_special = true;
       break;
     case 'k':
       {
@@ -783,7 +783,7 @@ int main(int argc, char **argv)
     fatal("cannot open '%1' for writing: %2", font_file,
 	  strerror(errno));
   printf("name %s\n", font_file);
-  if (special_flag)
+  if (is_font_special)
     fputs("special\n", stdout);
   char *internal_name = strsave(argv[optind]);
   size_t len = strlen(internal_name);
