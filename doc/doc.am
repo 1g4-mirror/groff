@@ -780,7 +780,7 @@ uninstall-html:
 uninstall-txt:
 	$(RM) $(DESTDIR)$(docdir)/groff.txt
 
-# An image of a gnu in enscapsulated PostScript is generated during the
+# An image of a gnu in encapsulated PostScript is generated during the
 # build process if necessary.  Our configure script assumes pnmdepth is
 # available if xpmtoppm is (see macro "GROFF_PROG_XPMTOPPM").
 EXTRA_DIST += $(DOC_GNU_EPS) doc/gnu.xpm
