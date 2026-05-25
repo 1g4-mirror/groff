@@ -53,7 +53,7 @@ both be zero. */
 
 #include <assert.h>
 #include <errno.h>
-#include <math.h> // atan2()
+#include <math.h> // atan2(), M_PI
 #include <stdcountof.h>
 #include <stdlib.h> // exit(), EXIT_FAILURE, EXIT_SUCCESS, strtol()
 
@@ -820,7 +820,8 @@ int main(int argc, char **argv)
       printf("spacewidth %d\n", n * MULTIPLIER);
   }
   if (t.get_param(1, &n) && (n != 0))
-    printf("slant %f\n", atan2(n / double(1 << 20), 1.0) * 180.0 / PI);
+    printf("slant %f\n",
+	   atan2(n / double(1 << 20), 1.0) * 180.0 / M_PI);
   int xheight;
   if (!t.get_param(5, &xheight))
     xheight = 0;

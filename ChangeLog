@@ -1,5 +1,12 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/tfmtodit/tfmtodit.cpp (main): Use ISO C standard
+	constant `M_PI` instead of our own `PI`.
+
+	Continues the long process of fixing Savannah #66672.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp (read2, read4, read_map):
 	Fix code style nit.  Define functions as `static`; external
 	linkage is not required.
