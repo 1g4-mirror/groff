@@ -1,5 +1,11 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/tfmtodit/tfmtodit.cpp (tfm::load, gf::load)
+	(read_map): Characterize files being read as "invalid", not
+	"bad".
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp: Boolify.
 	(class tfm): Demote member function declaration return types
 	for `load()`, `contains()`, `get_param()`, and `get_lig()` from

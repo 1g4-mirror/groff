@@ -313,7 +313,7 @@ bool tfm::load(const char *file)
   }
   fclose(fp);
   if (lf < 6) {
-    error("bad TFM file '%1': impossibly short", file);
+    error("invalid TFM file '%1': impossibly short", file);
     delete[] buf;
     return false;
   }
@@ -331,12 +331,12 @@ bool tfm::load(const char *file)
   np = read2(ptr);
   if ((6 + lh + (ec - bc + 1) + nw + nh + nd + ni + nl + nk + ne + np)
       != lf) {
-    error("bad TFM file '%1': lengths do not sum", file);
+    error("invalid TFM file '%1': lengths do not sum", file);
     delete[] buf;
     return false;
   }
   if (lh < 2) {
-    error("bad TFM file '%1': header too short", file);
+    error("invalid TFM file '%1': header too short", file);
     delete[] buf;
     return false;
   }
@@ -434,7 +434,7 @@ bool gf::load(const char *file)
     return false;
   }
   if (getc(fp) != pre || getc(fp) != gf_id_byte) {
-    error("bad gf file");
+    error("invalid gf file");
     return false;
   }
   int n = getc(fp);
@@ -636,7 +636,7 @@ bool read_map(const char *file, char_list **table)
       continue;
     int n;
     if (sscanf(ptr, "%d", &n) != 1) {
-      error("%1:%2: bad map file", file, lineno);
+      error("%1:%2: invalid map file", file, lineno);
       fclose(fp);
       return false;
     }
