@@ -1759,7 +1759,7 @@ If not,
 .IR groff 's
 exit status encodes a summary of problems encountered,
 setting bit\~2 if a command exited with a failure status,
-bit\~3 if a command was terminated with a signal,
+bit\~3 if a command was terminated by a signal,
 and bit\~4 if a command could not be executed.
 .
 (Thus,
