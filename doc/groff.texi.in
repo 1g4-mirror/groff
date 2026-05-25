@@ -12877,7 +12877,7 @@ or by altering @w{ISO 6429}/ECMA-48
 * Characters and Glyphs::
 * Character Classes::
 * Special Fonts::
-* Artificial Fonts::
+* Font Effects and Text Underlining::
 * Ligatures and Kerning::
 * Italic Corrections::
 * Dummy Characters::
@@ -14638,8 +14638,13 @@ empties the corresponding list.
 
 @c ---------------------------------------------------------------------
 
-@node Artificial Fonts
-@subsection Artificial Fonts
+@anchor{Artificial Fonts} @c 1.24.1
+@node Font Effects and Text Underlining
+@subsection Font Effects and Text Underlining
+@cindex font effects
+@cindex effects, font
+@cindex text underlining
+@cindex underlining, text
 @cindex artificial fonts
 @cindex fonts, artificial
 
