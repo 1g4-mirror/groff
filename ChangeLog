@@ -3,7 +3,8 @@
 	* src/utils/tfmtodit/tfmtodit.cpp (tfm:load): Fix code style
 	nits.  Parenthesize formally complex expressions.  Explicitly
 	compare variables of pointer type to null pointer literal
-	instead of letting them pun down to Booleans.
+	instead of letting them pun down to Booleans.  Arrange equality
+	comparisons to avoid inadvertent lvalue assignment.
 
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 

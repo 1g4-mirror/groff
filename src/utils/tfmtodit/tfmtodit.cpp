@@ -286,7 +286,7 @@ int tfm::load(const char *file)
 {
   errno = 0;
   FILE *fp = fopen(file, FOPEN_RB);
-  if (!fp) {
+  if (0 /* nullptr */ == fp) {
     error("can't open '%1': %2", file, strerror(errno));
     return 0;
   }
@@ -427,7 +427,7 @@ int gf::load(const char *file)
   const int gf_id_byte = 131;
   errno = 0;
   FILE *fp = fopen(file, FOPEN_RB);
-  if (!fp) {
+  if (0 /* nullptr */ == fp) {
     error("can't open '%1': %2", file, strerror(errno));
     return 0;
   }
@@ -614,7 +614,7 @@ int read_map(const char *file, char_list **table)
 {
   errno = 0;
   FILE *fp = fopen(file, "r");
-  if (!fp) {
+  if (0 /* nullptr */ == fp) {
     error("can't open '%1': %2", file, strerror(errno));
     return 0;
   }
@@ -630,7 +630,7 @@ int read_map(const char *file, char_list **table)
     if (*ptr == '\0' || *ptr == '#')
       continue;
     ptr = strtok(ptr, " \n\t");
-    if (!ptr)
+    if (0 /* nullptr */ == ptr)
       continue;
     int n;
     if (sscanf(ptr, "%d", &n) != 1) {
@@ -643,8 +643,8 @@ int read_map(const char *file, char_list **table)
       fclose(fp);
       return 0;
     }
-    ptr = strtok(0, " \n\t");
-    if (!ptr) {
+    ptr = strtok(0 /* nullptr */, " \n\t");
+    if (0 /* nullptr */ == ptr) {
       error("%1:%2: missing names", file, lineno);
       fclose(fp);
       return 0;
