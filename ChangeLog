@@ -1,5 +1,10 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/tfmtodit/tfmtodit.cpp (usage): Relocate function
+	definition to obviate need for forward declaration.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp (tfm::load, gf::load)
 	(read_map): Characterize files being read as "invalid", not
 	"bad".

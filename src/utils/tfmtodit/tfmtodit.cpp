@@ -697,7 +697,19 @@ struct S2 {
   { CH_ff, CH_l, CH_ffl, "ffl" },
   };
 
-static void usage(FILE *stream);
+static void usage(FILE *stream)
+{
+  fprintf(stream,
+"usage: %s [-s] [-g gf-file] [-k skew-char] tfm-file map-file font\n"
+"usage: %s {-v | --version}\n"
+"usage: %s --help\n",
+	  program_name, program_name, program_name);
+  if (stdout == stream)
+    fputs("\n"
+"Create a font description file for use with groff(1)'s 'dvi' output\n"
+"device.  See the tfmtodit(1) manual page.\n",
+	  stream);
+}
 
 int main(int argc, char **argv)
 {
@@ -895,20 +907,6 @@ int main(int argc, char **argv)
 	printf("%s\t\"\n", p->ch);
     }
   exit(EXIT_SUCCESS);
-}
-
-static void usage(FILE *stream)
-{
-  fprintf(stream,
-"usage: %s [-s] [-g gf-file] [-k skew-char] tfm-file map-file font\n"
-"usage: %s {-v | --version}\n"
-"usage: %s --help\n",
-	  program_name, program_name, program_name);
-  if (stdout == stream)
-    fputs("\n"
-"Create a font description file for use with groff(1)'s 'dvi' output\n"
-"device.  See the tfmtodit(1) manual page.\n",
-	  stream);
 }
 
 // Local Variables:
