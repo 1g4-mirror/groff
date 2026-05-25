@@ -149,15 +149,15 @@ int kern_iterator::next(unsigned char *c1, unsigned char *c2, int *k)
       if (i < 0) {
 	i = t->char_info[c - t->bc].remainder;
 	if (t->lig_kern[i].skip_byte > 128)
-	  i = (256*t->lig_kern[i].op_byte
-		   + t->lig_kern[i].remainder);
+	  i = ((256 * t->lig_kern[i].op_byte)
+	       + t->lig_kern[i].remainder);
       }
       for (;;) {
 	int skip = t->lig_kern[i].skip_byte;
 	if (skip <= 128 && t->lig_kern[i].op_byte >= 128) {
 	  *c1 = c;
 	  *c2 = t->lig_kern[i].next_char;
-	  *k = t->kern[256*(t->lig_kern[i].op_byte - 128)
+	  *k = t->kern[(256 * (t->lig_kern[i].op_byte - 128))
 		       + t->lig_kern[i].remainder];
 	  if (skip == 128) {
 	    c++;
@@ -187,7 +187,7 @@ int tfm::get_lig(unsigned char c1, unsigned char c2, unsigned char *cp)
   if (contains(c1) && char_info[c1 - bc].tag == 1) {
     int i = char_info[c1 - bc].remainder;
     if (lig_kern[i].skip_byte > 128)
-      i = 256*lig_kern[i].op_byte + lig_kern[i].remainder;
+      i = (256 * lig_kern[i].op_byte) + lig_kern[i].remainder;
     for (;;) {
       int skip = lig_kern[i].skip_byte;
       if (skip > 128)
@@ -209,7 +209,7 @@ int tfm::get_lig(unsigned char c1, unsigned char c2, unsigned char *cp)
 
 int tfm::contains(int i)
 {
-  return i >= bc && i <= ec && char_info[i - bc].width_index != 0;
+  return (i >= bc) && (i <= ec) && (char_info[i - bc].width_index != 0);
 }
 
 int tfm::get_width(int i)
@@ -234,7 +234,7 @@ int tfm::get_italic(int i)
 
 int tfm::get_param(int i, int *p)
 {
-  if (i <= 0 || i > np)
+  if ((i <= 0) || (i > np))
     return 0;
   else {
     *p = param[i - 1];
@@ -292,13 +292,13 @@ int tfm::load(const char *file)
   }
   int c1 = getc(fp);
   int c2 = getc(fp);
-  if (c1 == EOF || c2 == EOF) {
+  if ((c1 == EOF) || (c2 == EOF)) {
     fclose(fp);
     error("unexpected end of file on '%1'", file);
     return 0;
   }
   int lf = (c1 << 8) + c2;
-  int toread = lf*4 - 2;
+  int toread = (lf * 4) - 2;
   unsigned char *buf = new unsigned char[toread];
   if (fread(buf, 1, toread, fp) != (size_t)toread) {
     if (feof(fp))
@@ -349,8 +349,8 @@ int tfm::load(const char *file)
   int i;
   cs = read4(ptr);
   ds = read4(ptr);
-  ptr += (lh-2)*4;
-  for (i = 0; i < ec - bc + 1; i++) {
+  ptr += (lh - 2) * 4;
+  for (i = 0; (i < (ec - bc + 1)); i++) {
     char_info[i].width_index = *ptr++;
     unsigned char tem = *ptr++;
     char_info[i].depth_index = tem & 0xf;
@@ -376,10 +376,10 @@ int tfm::load(const char *file)
   }
   for (i = 0; i < nk; i++)
     kern[i] = read4(ptr);
-  ptr += ne*4;
+  ptr += (ne * 4);
   for (i = 0; i < np; i++)
     param[i] = read4(ptr);
-  assert(ptr == buf + lf*4 - 2);
+  assert(ptr == (buf + (lf * 4) - 2));
   delete[] buf;
   return 1;
 }
@@ -446,8 +446,8 @@ int gf::load(const char *file)
       goto eof;
     if (op == post)
       break;
-    if ((op >= paint_0 && op <= paint_0 + 63)
-	|| (op >= new_row_0 && op <= new_row_0 + 164))
+    if (((op >= paint_0) && (op <= (paint_0 + 63)))
+	|| ((op >= new_row_0) && (op <= (new_row_0 + 164))))
       continue;
     switch (op) {
     case no_op:
@@ -785,7 +785,7 @@ int main(int argc, char **argv)
     fputs("special\n", stdout);
   char *internal_name = strsave(argv[optind]);
   size_t len = strlen(internal_name);
-  if (len > 4 && strcmp(internal_name + len - 4, ".tfm") == 0)
+  if ((len > 4) && (strcmp(internal_name + len - 4, ".tfm") == 0))
     internal_name[len - 4] = '\0';
   // DIR_SEPS[] are possible directory separator characters, see
   // nonposix.h.  We want the rightmost separator of all possible ones.
@@ -799,14 +799,14 @@ int main(int argc, char **argv)
 	s = s1;
       sep++;
     }
-  printf("internalname %s\n", s ? s + 1 : internal_name);
+  printf("internalname %s\n", s ? (s + 1) : internal_name);
   int n;
   if (t.get_param(2, &n)) {
     if (n > 0)
-      printf("spacewidth %d\n", n*MULTIPLIER);
+      printf("spacewidth %d\n", n * MULTIPLIER);
   }
-  if (t.get_param(1, &n) && n != 0)
-    printf("slant %f\n", atan2(n/double(1<<20), 1.0)*180.0/PI);
+  if (t.get_param(1, &n) && (n != 0))
+    printf("slant %f\n", atan2(n / double(1 << 20), 1.0) * 180.0 / PI);
   int xheight;
   if (!t.get_param(5, &xheight))
     xheight = 0;
