@@ -115,7 +115,7 @@
 	[ms]: Add PDF support.
 
 	* tmac/s.tmac: Depend on register `PDFFEAT` set to 1 to add
-	features.  Only allowed with `-T pdf`.  Alias new `XR`/`XM`
+	features.  Allowed only with `-T pdf`.  Alias new `XR`/`XM`
 	macros to LP (to prevent use before ms initialises).
 	(XR/@XR): New macro implements internal hyperlinks.
 	(XM/@XM): New macro 'marks' destination for internal links.
@@ -332,9 +332,9 @@
 
 	With grn(1) now accepting `-I`, groff(1) no longer needs to
 	synthesize `-g` and `-s` to cover these bases.  If the user
-	demands these the grn(1) and soelim(1) preprocessors, they can
-	specify their options, consistently with other groff
-	preprocessors supported by a command-line option.
+	demands the grn(1) and soelim(1) preprocessors, they can specify
+	their options, consistently with other groff preprocessors
+	supported by a command-line option.
 
 	* src/roff/groff/groff.cpp (main) <I>: Do it.
 
