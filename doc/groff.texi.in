@@ -14106,10 +14106,14 @@ numeric ranges like ``3000--5000'', insert
 @endExample
 
 @noindent
-into your document.  However, this practice can lead to bad layout if
-done thoughtlessly; in most situations, a better solution instead of
-changing the @code{cflags} value is to insert @code{\:} right after the
-hyphen at the places that really need a break point.
+into your document.
+However,
+this practice can lead to bad layout if done thoughtlessly;
+in most situations,
+a solution superior to altering a character's flags
+is inserting
+@code{\:}
+at the places that need a break point.
 @end table
 
 The remaining values were implemented for East Asian language support;
