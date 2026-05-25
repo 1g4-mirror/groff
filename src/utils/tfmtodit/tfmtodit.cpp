@@ -266,7 +266,7 @@ tfm::~tfm()
   delete[] param;
 }
 
-int read2(unsigned char *&s)
+static int read2(unsigned char *&s)
 {
   int n;
   n = *s++ << 8;
@@ -274,7 +274,7 @@ int read2(unsigned char *&s)
   return n;
 }
 
-int read4(unsigned char *&s)
+static int read4(unsigned char *&s)
 {
   int n;
   n = *s++ << 24;
@@ -612,7 +612,7 @@ char_list::char_list(const char *s, char_list *p) : ch(strsave(s)),
 }
 
 
-bool read_map(const char *file, char_list **table)
+static bool read_map(const char *file, char_list **table)
 {
   errno = 0;
   FILE *fp = fopen(file, "r");

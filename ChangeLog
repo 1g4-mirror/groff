@@ -1,5 +1,11 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/tfmtodit/tfmtodit.cpp (read2, read4, read_map):
+	Fix code style nit.  Define functions as `static`; external
+	linkage is not required.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp (usage): Relocate function
 	definition to obviate need for forward declaration.
 
