@@ -7117,15 +7117,20 @@ static void define_font_specific_character_request() // .fschar
   if (!read_font_identifier(&finfo)) {
     font_lookup_error(finfo, "to define font-specific fallback"
 		      " character");
-    // Normally we skip the remainder of the line unconditionally at the
-    // end of a request-implementing function, but define_character()
-    // will eat the rest of it for us.
     skip_line();
+    return;
   }
-  else {
-    symbol f = font_table[finfo.position]->get_name();
-    define_character(CHAR_FONT_SPECIFIC_FALLBACK, f.contents());
+  if (!has_arg()) {
+    warning(WARN_MISSING, "font-specific fallback character definition"
+	    " request expects character definition argument");
+    skip_line();
+    return;
   }
+  symbol f = font_table[finfo.position]->get_name();
+  define_character(CHAR_FONT_SPECIFIC_FALLBACK, f.contents());
+  // Normally we skip the remainder of the line unconditionally at the
+  // end of a request-implementing function, but `define_character()`
+  // eats the rest of it for us.
 }
 
 static void remove_font_specific_character_request() // .rfschar

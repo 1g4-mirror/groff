@@ -1,5 +1,15 @@
 2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp
+	(define_font_specific_character_request): Check for presence of
+	arguments after the first before handing off processing of the
+	remainder of the input line to `define_character()`.  Resolves
+	assertion failure thrown by the latter function.
+
+	Fixes <https://savannah.gnu.org/bugs/?68395>.
+
+2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68395.
 
 	* src/roff/groff/tests/\
