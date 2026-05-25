@@ -14226,8 +14226,8 @@ GNU
 @command{troff} @c GNU
 processes
 @var{contents}
-in a temporary environment and enscapsulates the result
-in a node;@footnote{@xref{GNU @command{troff} Internals}.}
+in a temporary environment and encapsulates the result
+in a node,@footnote{@xref{GNU @command{troff} Internals}.}
 disabling compatibility mode
 and treating
 @code{\}
@@ -14305,16 +14305,19 @@ X
 The
 @code{fchar}
 request defines a fallback glyph:@:
-@command{@g@troff}
+GNU
+@command{troff} @c GNU
 checks for glyphs defined with
 @code{fchar}
 only if it cannot find the glyph in the current font.
-@command{@g@troff}
+GNU
+@command{troff} @c GNU
 performs this test before checking special fonts.
 
 @code{fschar}
 defines a fallback glyph for font@tie{}@var{f}:@:
-@command{@g@troff}
+GNU
+@command{troff} @c GNU
 checks for glyphs defined with
 @code{fschar}
 after the list of fonts declared as font-specific special fonts
@@ -14330,7 +14333,8 @@ Finally,
 the
 @code{schar}
 request defines a global fallback glyph:@:
-@command{@g@troff}
+GNU
+@command{troff} @c GNU
 checks for glyphs defined with
 @code{schar}
 after the list of fonts declared as global special fonts
