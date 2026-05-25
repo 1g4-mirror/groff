@@ -6493,9 +6493,21 @@ Interpolate value of register with arbitrarily long
 .
 .TP
 .ESCq N n
-Format indexed character numbered
+Format the glyph indexed
 .I n
 in the current font.
+.
+.IR n \~can
+be any non-negative decimal integer.
+.
+If the current font lacks a glyph with that index,
+the formatter does
+.I not
+search special fonts.
+.
+The formatter does not apply kerning to glyphs accessed with
+.BR \[rs]N .
+.
 .
 .TP
 .ESCq o abc\f[R].\|.\|.\f[]

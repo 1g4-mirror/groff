@@ -13927,23 +13927,31 @@ request.@footnote{@xref{Debugging}.}
 @cindex numbered glyph, accessing (@code{\N})
 @cindex glyph, numbered, accessing (@code{\N})
 @cindex @code{char} request, used with @code{\N}
-@cindex Unicode
-Format indexed character numbered
+The
+@code{\N}
+@dfn{indexed character}
+escape sequence formats the glyph indexed
 @var{n}
-in the current font
-(@code{n}@tie{}is
-@emph{not}
-the input character code).
+in the current font.
 @var{n}@tie{}can
 be any non-negative decimal integer.
-Most devices number glyphs with codes between 0 and@tie{}255 only;
+If the current font lacks a glyph with that index,
+the formatter does
+@emph{not}
+search special fonts.
+The formatter does not apply kerning to glyphs accessed with
+@code{\N}.
+The delimiter need not be a neutral apostrophe;
+recall @ref{Delimiters}.
+@var{n}@tie{}is
+not necessarily the input character code;
+use the Unicode form of special character escape sequence shown above
+to access glyphs by their character encoding.
+Most devices number glyphs with indices between 0 and@tie{}255 only;
 the
 @code{utf8}
-output device uses codes in the range 0--65535.
-If the current font does not contain a glyph with that code,
-special fonts are
-@emph{not}
-searched.
+output device uses indices in the range 0--65535.
+
 The
 @code{\N}
 escape sequence can be conveniently used in conjunction with the
@@ -13962,9 +13970,6 @@ The code of each glyph is given in the fourth column in the font
 description file after the @code{charset} command.  It is possible to
 include unnamed glyphs in the font description file by using a name of
 @samp{---}; the @code{\N} escape sequence is the only way to use these.
-
-No kerning is applied to glyphs accessed with @code{\N}.  The delimiter
-need not be a neutral apostrophe; see @ref{Delimiters}.
 @endDefesc
 
 A few escape sequences are also special characters.
