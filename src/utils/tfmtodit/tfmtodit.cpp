@@ -177,8 +177,10 @@ int kern_iterator::next(unsigned char *c1, unsigned char *c2, int *k)
 }
 
 tfm::tfm()
-: char_info(0), width(0), height(0), depth(0), italic(0), lig_kern(0),
-  kern(0), param(0)
+: char_info(0 /* nullptr */), width(0 /* nullptr */),
+  height(0 /* nullptr */), depth(0 /* nullptr */),
+  italic(0 /* nullptr */), lig_kern(0 /* nullptr */),
+  kern(0 /* nullptr */), param(0 /* nullptr */)
 {
 }
 
