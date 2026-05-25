@@ -8886,7 +8886,8 @@ static void set_hyphenation_codes() // .hcode
     skip_line();
     return;
   }
-  while (has_arg()) {
+  tok.skip_spaces();
+  do {
     unsigned char cdst = tok.ch();
     if (!tok.is_any_character()) {
       error("cannot apply a hyphenation code to %1", tok.description());
@@ -8904,8 +8905,8 @@ static void set_hyphenation_codes() // .hcode
 	break;
       }
     }
-    tok.next();
-    if (!has_arg()) {
+    tok.skip_spaces();
+    if (tok.is_newline() || tok.is_eof()) {
       error("hyphenation codes must be specified in pairs");
       break;
     }
@@ -8945,7 +8946,7 @@ static void set_hyphenation_codes() // .hcode
       cidst->get_translation()->set_hyphenation_code(new_code);
     tok.next();
     tok.skip_spaces();
-  }
+  } while ((!tok.is_newline()) && (!tok.is_eof()));
   skip_line();
 }
 
