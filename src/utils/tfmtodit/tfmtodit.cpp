@@ -55,7 +55,7 @@ both be zero. */
 #include <errno.h>
 #include <math.h> // atan2()
 #include <stdcountof.h>
-#include <stdlib.h> // exit(), EXIT_SUCCESS, strtol()
+#include <stdlib.h> // exit(), EXIT_FAILURE, EXIT_SUCCESS, strtol()
 
 #include <getopt.h> // getopt_long()
 
@@ -765,23 +765,21 @@ int main(int argc, char **argv)
   gf g;
   if (gf_file) {
     if (!g.load(gf_file))
-      return 1;
+      exit(EXIT_FAILURE);
   }
   const char *tfm_file = argv[optind];
   const char *map_file = argv[optind + 1];
   const char *font_file = argv[optind + 2];
   tfm t;
   if (!t.load(tfm_file))
-    return 1;
+    exit(EXIT_FAILURE);
   char_list *table[256];
   if (!read_map(map_file, table))
-    return 1;
+    exit(EXIT_FAILURE);
   errno = 0;
-  if (!freopen(font_file, "w", stdout)) {
-    error("cannot open '%1' for writing: %2", font_file,
+  if (!freopen(font_file, "w", stdout))
+    fatal("cannot open '%1' for writing: %2", font_file,
 	  strerror(errno));
-    return 1;
-  }
   printf("name %s\n", font_file);
   if (special_flag)
     fputs("special\n", stdout);
@@ -894,7 +892,7 @@ int main(int argc, char **argv)
       for (p = p->next; p != 0 /* nullptr */; p = p->next)
 	printf("%s\t\"\n", p->ch);
     }
-  return 0;
+  exit(EXIT_SUCCESS);
 }
 
 static void usage(FILE *stream)

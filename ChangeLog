@@ -14,6 +14,9 @@
 	compare variables of pointer type to null pointer literal
 	instead of letting them pun down to Booleans.  Arrange equality
 	comparisons to avoid inadvertent lvalue assignment.
+	(main): Consistently use exit(3) to return from `main()` instead
+	of `return`.  Simplify an `error()`+`return` combination to a
+	`fatal()` call.
 
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
