@@ -49,7 +49,7 @@ Since the groff 1.yy.Y.rcZ-1 release candidate was made available on DD
 MONTH, NN people have authored a total of MM commits.
 
 maintainer: Insert output of
-   "git shortlog --summary 1.yy.Y.rcZ-1.."1.yy.Y.rcZ ]]
+   "git shortlog --summary 1.yy.Y.rcZ-1..1.yy.Y.rcZ" ]]
 
 Thanks to AAA, BBB, and CCC for reporting defects in rcZ-1.
 
