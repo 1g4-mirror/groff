@@ -4091,6 +4091,8 @@ to that of
 .IR src1 ,
 and so on.
 .
+Spaces need not separate the arguments.
+.
 .TPx
 .REQ .hla
 Clear the environment's hyphenation language

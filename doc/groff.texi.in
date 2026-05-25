@@ -11084,15 +11084,28 @@ see
 @Defreq {hcode, dst1 src1 [dst2 src2] @dots{}}
 @cindex hyphenation code (@code{hcode})
 @cindex code, hyphenation (@code{hcode})
-Set the hyphenation code of ordinary or special character @var{dst1} to
-that of @var{src1}, and so on.  @var{dst1} must be an ordinary character
-(other than a numeral) or a special character, and @var{src1} must be an
-ordinary character (other than a numeral) or a special character to
-which a hyphenation code has already been applied.  Assigning the code
-of an ordinary character to itself effectively creates a unique
-hyphenation code (which can then be copied to others).  @code{hcode}
-ignores spaces between arguments.  If any argument is invalid,
-@code{hcode} reports an error and stops reading them.
+Set the hyphenation code of character
+@var{dst1}
+to that of
+@var{src1},
+and so on.
+@var{dst1}
+must be an ordinary character
+(other than a numeral)
+or a special character,
+and
+@var{src1}
+must be an ordinary character
+(other than a numeral)
+or a special character
+to which a hyphenation code has already been applied.
+Assigning the code of an ordinary character to itself
+effectively creates a unique hyphenation code
+(which can then be copied to others).
+Spaces need not separate the arguments.
+If any argument is invalid,
+@code{hcode}
+reports an error and stops reading them.
 
 For example, the following @code{hcode} requests are necessary to assign
 hyphenation codes to the letters @samp{ƒд÷ц№ья}, needed for German.

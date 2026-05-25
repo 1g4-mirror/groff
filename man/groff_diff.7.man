@@ -3366,8 +3366,7 @@ Assigning the code of an ordinary character to itself
 effectively creates a unique hyphenation code
 (which can then be copied to others).
 .
-.B hcode
-ignores spaces between arguments.
+Spaces need not separate the arguments.
 .
 If any argument is invalid,
 .B hcode
