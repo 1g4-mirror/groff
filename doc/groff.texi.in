@@ -13635,7 +13635,7 @@ after the formatter initializes.
 For example,
 consider the following
 @file{DESC}
-contents:
+contents.
 
 @Example
 fonts 3 0 0 ZD
@@ -13700,12 +13700,15 @@ more details.
 @cindex characters, special, list of (@cite{groff_char@r{(7)}} man page)
 @cindex available glyphs, list of (@cite{groff_char@r{(7)}} man page)
 @cindex glyphs, available, list of (@cite{groff_char@r{(7)}} man page)
-The @cite{groff_char@r{(7)}} man page houses a complete list of
-predefined special character names, but the availability of any as a
-glyph is device- and font-dependent.  For example, say
+The
+@cite{groff_char@r{(7)}}
+man page houses a complete list of predefined special character names,
+but the availability of any as a glyph is device- and font-dependent.
+For example,
+use the shell command
 
 @Example
-man -T dvi groff_char > groff_char.dvi
+$ man -T dvi groff_char > groff_char.dvi
 @endExample
 
 @noindent
@@ -13724,7 +13727,7 @@ you must run
 directly.
 
 @Example
-groff -t -m ec -m an -T dvi groff_char.7 > groff_char.dvi
+$ groff -t -m ec -m an -T dvi groff_char.7 > groff_char.dvi
 @endExample
 
 @cindex composite glyph names
