@@ -8888,6 +8888,10 @@ static void set_hyphenation_codes() // .hcode
   }
   while (has_arg()) {
     unsigned char cdst = tok.ch();
+    if (!tok.is_any_character()) {
+      error("cannot apply a hyphenation code to %1", tok.description());
+      break;
+    }
     if (csdigit(cdst)) {
       error("cannot apply a hyphenation code to a numeral");
       break;
@@ -8903,6 +8907,11 @@ static void set_hyphenation_codes() // .hcode
     tok.next();
     if (!has_arg()) {
       error("hyphenation codes must be specified in pairs");
+      break;
+    }
+    if (!tok.is_any_character()) {
+      error("cannot copy the hyphenation code of a non-character (%1)",
+	    tok.description());
       break;
     }
     unsigned char csrc = tok.ch();

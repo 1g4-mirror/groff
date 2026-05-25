@@ -1,5 +1,11 @@
 2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (set_hyphenation_codes): Throw error
+	if either the "source" or "destination" operand of a hyphenation
+	code assignment pair it not a character token.
+
+2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp
 	(define_font_specific_character_request): Check for presence of
 	arguments after the first before handing off processing of the
