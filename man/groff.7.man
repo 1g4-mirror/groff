@@ -7933,15 +7933,14 @@ see
 and
 .request ch .
 .
-If no such traps exist between the drawing position
-and the bottom of the page,
-.I @g@troff
-interpolates the distance to the page bottom.
+If no such traps exist
+between the drawing position and the bottom of the page,
+it contains the distance to the page bottom.
 .
 Within a diversion,
-in the absence of a diversion trap,
-this distance is
-the maximum possible vertical position supported by the output device.
+in the absence of a pending diversion trap,
+this distance is the maximum possible vertical position
+supported by the output device.
 .
 .
 .TP
