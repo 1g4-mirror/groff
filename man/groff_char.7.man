@@ -848,7 +848,7 @@ Adobe Glyph List (AGL) algorithm
 .
 The (frozen) set of names that can't be derived algorithmically
 is called the
-@dfn{@code{groff} glyph list (GGL)}.
+.IR "groff glyph list (GGL)" .
 .
 .TP
 .BI \[rs][u base-character\c

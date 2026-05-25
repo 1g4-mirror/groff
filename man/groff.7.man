@@ -6667,7 +6667,7 @@ request.
 .TP
 .ESCq S N
 Slant the glyphs of the currently selected font by
-@var{N}
+.I N
 degrees.
 .
 Positive values slant in the direction of text flow.
