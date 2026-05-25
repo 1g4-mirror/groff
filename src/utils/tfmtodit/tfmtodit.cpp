@@ -649,7 +649,9 @@ int read_map(const char *file, char_list **table)
       fclose(fp);
       return 0;
     }
-    for (; ptr; ptr = strtok(0, " \n\t"))
+    for (;
+	 ptr != 0 /* nullptr */;
+	 ptr = strtok(0 /* nullptr */, " \n\t"))
       table[n] = new char_list(ptr, table[n]);
   }
   fclose(fp);
@@ -853,8 +855,10 @@ int main(int argc, char **argv)
     if (c2 != skewchar) {
       k *= MULTIPLIER;
       char_list *q = table[c2];
-      for (char_list *p1 = table[c1]; p1; p1 = p1->next)
-	for (char_list *p2 = q; p2; p2 = p2->next) {
+      for (char_list *p1 = table[c1];
+	   p1 != 0 /* nullptr */;
+	   p1 = p1->next)
+	for (char_list *p2 = q; p2 != 0 /* nullptr */; p2 = p2->next) {
 	  if (!had_kern) {
 	    printf("kernpairs\n");
 	    had_kern = 1;
@@ -887,7 +891,7 @@ int main(int argc, char **argv)
       if (m[1] > xheight)
 	type += 2;
       printf("\t%d\t%04o\n", type, i);
-      for (p = p->next; p; p = p->next)
+      for (p = p->next; p != 0 /* nullptr */; p = p->next)
 	printf("%s\t\"\n", p->ch);
     }
   return 0;
