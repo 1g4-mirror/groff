@@ -33,6 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
+
 // operating system services
 #include "nonposix.h"
 
@@ -86,7 +88,14 @@ public:
 
 dvi_font *dvi_font::load_dvi_font(const char *s)
 {
-  dvi_font *f = new dvi_font(s);
+  dvi_font *f = 0 /* nullptr */;
+  try {
+    f = new dvi_font(s);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of font description"
+	  " for DVI font '%2'", sizeof(dvi_font), s);
+  }
   if (!f->load()) {
     delete f;
     return 0 /* nullptr */;

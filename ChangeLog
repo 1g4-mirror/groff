@@ -1,5 +1,17 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grodvi]: Slightly refactor.
+
+	* src/devices/grodvi/dvi.cpp: Use ISO C++98 exceptions to handle
+	heap storage allocation failures.  Preprocessor-include C++
+	"<new>" header file.
+	(dvi_font::load_dvi_font): Catch `std:bad_alloc` exception and
+	`fatal()` out with an attempt to describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Extend argument printer for diagnostic messages to
 	handle object of type `unsigned long int`, so that we can report
 	`sizeof` values messages, perhaps among other purposes.
