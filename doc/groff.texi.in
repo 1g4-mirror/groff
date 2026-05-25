@@ -14780,8 +14780,8 @@ mode)
 or italicize
 (in
 @code{troff}
-mode)@footnote{Recall
-@ref{@code{troff} and @code{nroff} Modes}.}
+mode; recall
+@ref{@code{troff} and @code{nroff} Modes})
 the next
 @var{n}
 productive input lines.
@@ -14920,7 +14920,7 @@ are sequences of glyphs that are visually connected or ``tied'',
 overlapping them and slightly altering their shapes.
 @dfn{Kerning}
 is the adjustment of horizontal spacing between glyphs.
-Neither is employed on terminals.@footnote{
+Neither is employed on terminals.@footnote{A
 monospaced font may possess ligature glyphs,
 but they nevertheless seldom see use to set text.}
 
