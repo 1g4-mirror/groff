@@ -1,5 +1,18 @@
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tfmtodit]: Be more fastidious with heap-allocated memory.
+
+	* src/utils/tfmtodit/tfmtodit.cpp (struct char_list): Declare
+	destructor.
+	(char_list::~char_list): Define destructor free(3)ing memory
+	allocated by strdup(3) in constructor.
+	(main): Handle failure of strdup(3) as a fatal error.  free(3)
+	the storage it allocates when done with it.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/tfmtodit/tfmtodit.cpp (char_list::char_list, main):
 	Migrate from libgroff's `strsave()` to POSIX's strdup(3).
 

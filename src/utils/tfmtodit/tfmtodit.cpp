@@ -602,15 +602,22 @@ bool gf::skip(int n, FILE *fp)
 }
 
 
+// TODO: Migrate to an STL container.
 struct char_list {
   char *ch;
   char_list *next;
   char_list(const char *, char_list * = 0);
+  ~char_list();
 };
 
 char_list::char_list(const char *s, char_list *p) : ch(strdup(s)),
 		     next(p)
 {
+}
+
+char_list::~char_list()
+{
+  free(ch);
 }
 
 
@@ -799,7 +806,10 @@ int main(int argc, char **argv)
   printf("name %s\n", font_file);
   if (is_font_special)
     fputs("special\n", stdout);
+  size_t amount = strlen(argv[optind]);
   char *internal_name = strdup(argv[optind]);
+  if (0 /* nullptr */ == internal_name)
+    fatal("cannot allocate %1 bytes to copy tfm-file operand", amount);
   size_t len = strlen(internal_name);
   if ((len > 4) && (strcmp(internal_name + len - 4, ".tfm") == 0))
     internal_name[len - 4] = '\0';
@@ -816,6 +826,7 @@ int main(int argc, char **argv)
       sep++;
     }
   printf("internalname %s\n", s ? (s + 1) : internal_name);
+  free(internal_name);
   int n;
   if (t.get_param(2, &n)) {
     if (n > 0)
