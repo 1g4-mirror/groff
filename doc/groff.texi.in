@@ -14260,6 +14260,8 @@ sequences of it can be drawn with the
 and
 @code{\L}
 escape sequences;
+it can be grouped
+into character classes;@footnote{@xref{Character Classes}.}
 and,
 if the
 @code{hcode}
@@ -14342,9 +14344,6 @@ with the
 @code{special}
 request,
 but before the already mounted special fonts.
-
-User-defined characters can be grouped
-into character classes.@footnote{@xref{Character Classes}.}
 @endDefreq
 
 @DefreqList {rchar, c @dots{}}
