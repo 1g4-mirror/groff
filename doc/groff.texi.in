@@ -22436,6 +22436,7 @@ ordinary,
 special,
 or indexed)
 or character class @tie{}@var{c}.
+Spaces need not separate the arguments.
 A character defined by a request
 (@code{char},
 @code{fchar},

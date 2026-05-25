@@ -4698,6 +4698,8 @@ special,
 or indexed)
 .RI "or character class\~" c .
 .
+Spaces need not separate the arguments.
+.
 A character defined by a request
 .RB ( char ,
 .BR \%fchar ,
