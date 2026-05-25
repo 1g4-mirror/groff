@@ -7133,6 +7133,9 @@ static void define_font_specific_character_request() // .fschar
   // eats the rest of it for us.
 }
 
+// Because `rfschar` doesn't require spaces separating its "arguments"
+// (after the first), we don't use `has_arg()` except to determine
+// whether we have a first argument, and any beyond the first.
 static void remove_font_specific_character_request() // .rfschar
 {
   if (!has_arg()) {

@@ -5315,6 +5315,9 @@ static void define_special_character_request() // .schar
   define_character(CHAR_SPECIAL_FALLBACK);
 }
 
+// Because `pchar` doesn't require spaces separating its "arguments",
+// we don't use `has_arg()` except initially to determine whether we
+// have any arguments at all.
 static void print_character_request() // .pchar
 {
   if (!has_arg()) {
@@ -5345,6 +5348,9 @@ static void print_character_request() // .pchar
 }
 
 
+// Because `rchar` doesn't require spaces separating its "arguments",
+// we don't use `has_arg()` except initially to determine whether we
+// have any arguments at all.
 static void remove_character() // .rchar
 {
   if (!has_arg()) {
@@ -8816,6 +8822,9 @@ static void translate_input() // .trin
   do_translate(true /* transparently */, true /* as_input */);
 }
 
+// Because `cflags` doesn't require spaces separating its "arguments"
+// (after the first), we don't use `has_arg()` except to determine
+// whether we have a first argument, and any beyond the first.
 static void set_character_flags_request() // .cflags
 {
   if (!has_arg()) {
@@ -8866,6 +8875,9 @@ static void set_character_flags_request() // .cflags
   skip_line();
 }
 
+// Because `hcode` doesn't require spaces separating its "arguments",
+// we don't use `has_arg()` except initially to determine whether we
+// have any arguments at all.
 static void set_hyphenation_codes() // .hcode
 {
   if (!has_arg()) {
