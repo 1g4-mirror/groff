@@ -15608,6 +15608,7 @@ escape sequence and the
 @code{ls}
 request.
 
+@need 500
 @DefreqList {pvs, [@Var{space}]}
 @DefreqItem {pvs, @t{+}@Var{space}}
 @DefreqItem {pvs, @t{-}@Var{space}}
@@ -15802,8 +15803,9 @@ type size
 in scaled points
 and in points as a decimal fraction,
 respectively.
-Like the selected current and previous type size,
-the requested ones are properties of an environment.
+Like the current and previous selected type size,
+the requested ones are properties
+of an environment.@footnote{@xref{Environments}.}
 
 For example,
 if a document requests a type size of 10.95@tie{}points,
@@ -15875,13 +15877,23 @@ restore the previous size.
 @cindex color, stroke
 @cindex fill color
 @cindex color, fill
-GNU @code{troff} supports color output with a variety of color spaces
-and up to 16 bits per channel.  Some devices, particularly terminals,
-may be more limited.  When color support is enabled, two colors are
-current at any given time: the @dfn{stroke color}, with which glyphs,
-rules (lines), and geometric objects like circles and polygons are
-drawn, and the @dfn{fill color}, which can be used to paint the interior
-of a closed geometric figure.
+GNU
+@command{troff} @c GNU
+supports color output with a variety of color spaces
+and up to 16 bits per channel.
+Some devices,
+particularly terminals,
+may be more limited.
+When color support is enabled,
+two colors are current at any given time:@:
+the
+@dfn{stroke color},
+with which glyphs,
+rules (lines),
+and geometric figures are drawn,
+and the
+@dfn{fill color},
+which paints the interior of filled geometric figure.
 
 @DefreqList {color, [@Var{b}]}
 @DefregListEndx {.color}
@@ -15974,10 +15986,10 @@ and these words are in the previous color.
 @cindex stroke color name register (@code{.m})
 @cindex name, stroke color, register (@code{.m})
 @cindex color name, stroke, register (@code{.m})
-The current environment's stroke color selection
-is available in the read-only string-valued register @samp{.m}
-(@pxref{Environments}).
-The default strike color is named @samp{default}.
+The stroke color selection
+is available in the read-only string-valued register
+@samp{.m}.
+The default stroke color is named @samp{default}.
 
 @cindex @code{\m} escape sequence, untokenized on input
 @cindex untokenized escape sequence, @code{\m}

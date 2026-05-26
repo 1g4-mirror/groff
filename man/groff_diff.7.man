@@ -230,7 +230,8 @@ request updates this association.
 .SS Colors
 .\" ====================================================================
 .
-.I groff
+GNU
+.I troff \" GNU
 supports color output with a variety of color spaces and up to 16 bits
 per channel.
 .
@@ -241,12 +242,12 @@ may be more limited.
 When color support is enabled,
 two colors are current at any given time:
 the
-.I stroke color,
+.I "stroke color,"
 with which glyphs,
 rules (lines),
 and geometric figures are drawn,
 and the
-.I fill color,
+.I "fill color,"
 which paints the interior of filled geometric figures.
 .
 The
@@ -718,8 +719,9 @@ in scaled points
 and in points as a decimal fraction,
 respectively.
 .
-Like the selected current and previous type size,
-the requested ones are properties of an environment.
+Like the current and previous selected type size,
+the requested ones are properties
+of an environment.
 .
 .
 .P
