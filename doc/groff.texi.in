@@ -16074,25 +16074,43 @@ interprets the fill color as a character cell background color.
 @section Strings
 @cindex strings
 
-GNU @code{troff} supports strings primarily for user convenience.
-Conventionally, if one would define a macro only to interpolate a small
-amount of text, without invoking requests or calling any other macros,
-one defines a string instead.  Only one string is predefined by the
-language.
+GNU
+@command{troff} @c GNU
+supports strings primarily for user convenience.
+Conventionally,
+if one would define a macro only to interpolate a small amount of text,
+without invoking requests or calling any other macros,
+one defines a string instead.
+The language prefedines only one string.
 
 @Defstr {.T}
 @stindex .T
 @cindex output device name string (@code{.T})
-Contains the name of the output device (for example, @samp{utf8} or
+Contains the name of the output device
+(for example,
+@samp{utf8}
+or
 @samp{pdf}).
 @endDefmpstr
 
-The @code{ds} request creates a string with a specified name and
-contents and the @code{\*} escape sequence dereferences its name,
-interpolating its contents.  If the string named by the @code{\*} escape
-sequence does not exist, it is defined as empty, nothing is
-interpolated, and a warning in category @samp{mac} is emitted.
-@xref{Warnings}, regarding the enablement and suppression of warnings.
+The
+@code{ds}
+request creates a string with a specified name and contents,
+@code{as}
+appends to a string,
+and the
+@code{\*}
+escape sequence dereferences a string,
+interpolating its contents.
+If the string named by the
+@code{\*}
+escape sequence does not exist,
+the formatter defines it as empty
+and interpolates nothing.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{mac}.
+@xref{Warnings}.}
 
 @DefreqList {ds, name [[@code{"}]@Var{contents}]}
 @DefreqItemx {ds1, name [[@code{"}]@Var{contents}]}
@@ -16108,25 +16126,55 @@ interpolated, and a warning in category @samp{mac} is emitted.
 @cindex expansion of strings (@code{\*})
 @cindex string arguments
 @cindex arguments, to strings
-Define a string called @var{name} with contents @var{contents}.  If
-@var{name} already exists as an alias, the target of the alias is
-redefined; see @code{als} and @code{rm} below.  If @code{ds} is invoked
-with only one argument, @var{name} is defined as an empty string.
-Otherwise, GNU @code{troff} stores @var{contents} in copy
-mode.
+Define a string called
+@var{name}
+with contents
+@var{contents}.
+In
+GNU
+@command{troff}, @c GNU
+if
+@var{name}
+already exists as an alias,
+the request replaces the contents of the alias's target;
+see
+@code{als}
+and
+@code{rm}
+below.
+Omitting
+@var{contents}
+defines
+@var{name}
+as an empty string.
+Otherwise,
+the formatter reads
+@var{contents}
+in copy mode.
 @cindex @code{\*}, interpretation in copy mode
-@code{\*} is itself interpreted even in copy mode.@footnote{@xref{Copy
-Mode}.}
+@code{\*}
+is itself interpreted even in copy mode.@footnote{@xref{Copy Mode}.}
 
-The @code{\*} escape sequence interpolates a previously defined string
-@var{name} (one-character name@tie{}@var{n}, two-character name
-@var{nm}).  The bracketed interpolation form accepts arguments that are
-handled as macro arguments are; recall @ref{Calling Macros}.  In
-contrast to macro calls, however, if a closing bracket @samp{]} occurs
-in a string argument, that argument must be enclosed in double quotes.
-When defining strings, argument interpolations must be escaped if they
-are to reference parameters from the calling context; see
-@ref{Parameters}.
+The
+@code{\*}
+escape sequence interpolates a previously defined string
+@var{name}
+(one-character name@tie{}@var{n},
+two-character name
+@var{nm}).
+Its bracketed interpolation form accepts arguments
+that are handled as macro arguments are;
+recall @ref{Calling Macros}.
+In contrast to macro calls,
+however,
+if a closing bracket
+@samp{]}
+occurs in a string argument,
+that argument must be enclosed in double quotes.
+When defining strings,
+argument interpolations must be escaped
+if they are to reference parameters
+from the calling context.@footnote{@xref{Parameters}.}
 
 @Example
 .ds cite (\\$1, \\$2)
@@ -16166,8 +16214,8 @@ maintenance.
 
 @Example
 .ds Si silicon \" use chemical symbol
-We observed a \*[Si]-based life form.
-    @result{} We observed a silicon -based life form.
+My tricorder indicates a \*[Si]-based life form.
+    @result{} My tricorder indicates a silicon -based life form.
 @endExample
 
 @noindent
@@ -16178,8 +16226,8 @@ to the last character of the string.
 
 @Example
 .ds Si silicon\" use chemical symbol
-We observed a \*[Si]-based life form.
-    @result{} We observed a silicon-based life form.
+My tricorder indicates a \*[Si]-based life form.
+    @result{} My tricorder indicates a silicon-based life form.
 @endExample
 
 Because the first space after the string name separates the arguments,
@@ -16223,10 +16271,14 @@ recall @ref{Calling Macros}.
 @cindex newline character, in strings, escaping
 @cindex escaping newline characters, in strings
 Strings are not limited to a single input line of text.
-@code{\@key{RET}} works just as it does elsewhere.  The resulting string
-is stored @emph{without} the newlines.  When filling is disabled, care
-is required to avoid overrunning the line length when interpolating
-strings.
+@code{\@key{RET}}
+works just as it does elsewhere.
+The resulting string is stored
+@emph{without}
+the newlines.
+When filling is disabled,
+care is required to avoid oversetting the line
+when interpolating strings.
 
 @Example
 .ds foo This string contains \
@@ -16234,32 +16286,46 @@ text on multiple lines \
 of input.
 @endExample
 
-Conversely, when filling is enabled, it is not necessary to append
-@code{\c} to a string interpolation to prevent a break afterward, as
-might be required in a macro argument.  Nor does a string require use of
-the GNU @command{troff} @code{chop} request to excise a trailing newline
-as is often done with diversions.
+Conversely,
+when filling is enabled,
+it is not necessary to append
+@code{\c}
+to a string interpolation to prevent a break afterward,
+as might be required in a macro argument.
+Nor does a string require use of
+GNU
+@command{troff}'s @c GNU
+@code{chop}
+request to excise a trailing newline
+as is often done with diversions.@footnote{@xref{Diversions}.}
 
-It is not possible to embed a newline in a string that will be
-interpreted as such when the string is interpolated.  To achieve that
-effect, use @code{\*} to interpolate a macro instead; see @ref{Punning
-Names}.
+It is not possible to embed a newline in a string
+that the formatter interprets as such when interpolating it.
+To achieve that effect,
+use
+@code{\*}
+to interpolate a macro instead.@footnote{@xref{Punning Names}.}
 
-Because strings are similar to macros, they too can be defined so as to
-suppress AT&T @code{troff} compatibility mode when used; see
-@ref{Writing Macros} and @ref{Compatibility Mode}.  The @code{ds1}
+@c The next two paragraphs are deliberately swapped in order from
+@c groff(7), because in our Texinfo manual we present synopses to
+@c establish context.
+Because strings are similar to macros,
+they too can be defined so as to suppress AT&T
+@command{troff} @c AT&T
+compatibility mode when used.@footnote{@xref{Writing Macros}.}
+The @code{ds1}
 request defines a string such that compatibility mode is off when the
 string is later interpolated.
 To be more precise,
 GNU
 @command{troff} @c GNU
 inserts a
-a
 @dfn{compatibility save}
-token at the beginning of @var{contents},
+token at the beginning of
+@var{contents},
 and a
 @dfn{compatibility restore}
-token at the end.
+token at the end.@footnote{@xref{Compatibility Mode}.}
 
 @Example
 .nr xxx 12345
@@ -16280,11 +16346,25 @@ token at the end.
 @DefreqListEndx {as1, name [[@code{"}]@Var{contents}]}
 @cindex appending to a string (@code{as})
 @cindex string, appending (@code{as})
-The @code{as} request is similar to @code{ds} but appends @var{contents}
-to the string stored as @var{name} instead of redefining it.  If
-@var{name} doesn't exist yet, it is created.  If @code{as} is invoked
-with only one argument, no operation is performed (beyond dereferencing
-the string).
+The
+@code{as}
+request is similar to
+@code{ds},
+but appends
+@var{contents}
+to the string stored as
+@var{name}
+instead of repopulating it.
+If
+@var{name}
+does not already exist,
+the formatter creates it.
+Omitting
+@var{contents}
+performs no operation,
+beyond dereferencing
+(and thus possibly creating)
+the string.
 
 @Example
 .as salutation " with shallots, onions and garlic,\"
@@ -16339,8 +16419,8 @@ removes a leading neutral double quote
 from
 @var{contents},
 permitting initial embedded spaces in it,
-and reads it to the end of the input line in copy mode.
-@xref{Copy Mode}.
+and reads it to the end of the input line
+in copy mode.@footnote{@xref{Copy Mode}.}
 
 @Example
 .ds xxx abcd\h'3i'efgh
@@ -16362,8 +16442,7 @@ request above.
 
 @strong{Caution:@:}
 If you interpolate a macro or diversion in
-@var{contents}
-(@pxref{Punning Names}),
+@var{contents},@footnote{@xref{Punning Names}.}
 the
 @code{length}
 request counts characters
@@ -16379,17 +16458,23 @@ macro,
 or diversion,
 use the
 @code{pm}
-request.
-@xref{Debugging}.
+request.@footnote{@xref{Debugging}.}
 @endDefreq
 
 @Defreq {chop, object}
-Remove the last character from the macro, string, or diversion named
-@var{object}.  This is useful for removing the newline from the end of a
-diversion that is to be interpolated as a string.  This request can be
-used repeatedly on the same @var{object}; see
-@ref{GNU @command{troff} Internals},
-for details on nodes inserted additionally by GNU @code{troff}.
+Remove the last character from the macro,
+string,
+or diversion named
+@var{object}.
+This is useful for removing the newline from the end of a diversion
+that is to be interpolated as a string.
+You can apply
+@code{chop}
+repeatedly to the same
+@var{object}.@footnote{@xref{GNU @command{troff} Internals},
+for details of nodes inserted automatically by
+GNU
+@command{troff}.} @c GNU
 @endDefreq
 
 @Defreq {substring, str start [@Var{end}]}

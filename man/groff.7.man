@@ -214,19 +214,6 @@ language reference
 .  Text \f[B]\e\\$1\[lB]\f[]\,\f[I]\\$2\/\f[]\f[B]\[rB]\f[]\\$3
 ..
 .
-.\" ========= strings =========
-.
-.\" synopsis for string, with \*[]
-.de STRING
-.  Text \[rs]*[\f[B]\\$1\f[]] \\$2
-..
-.\" synopsis for a long string
-.de string
-.  if \n[.$]=0 \
-.    return
-.  Text \f[B]\[rs]*\[lB]\\$1\[rB]\f[]\\$2
-..
-.
 .\" ========= registers =========
 .
 .\" synopsis for registers, with \n[]
@@ -7054,7 +7041,8 @@ this is the default.
 .\" ====================================================================
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Strings".
-.I groff
+GNU
+.I troff \" GNU
 supports strings primarily for user convenience.
 .
 Conventionally,
@@ -7062,54 +7050,25 @@ if one would define a macro only to interpolate a small amount of text,
 without invoking requests or calling any other macros,
 one defines a string instead.
 .
-Only one string is predefined by the language.
-.
-.
-.TPx
-.STRING .T
-Contains the name of the output device
-(for example,
-.RB \[lq] utf8 \[rq]
-or
-.RB \[lq] pdf \[rq] ).
+The language prefedines only one string,
+.BR .T ,
+which contains the name of the selected output device.
 .
 .
 .P
 The
 .request ds
-request creates a string with a specified name and contents.
-.
-If the identifier named by
-.request ds
-already exists as an alias,
-the target of the alias is redefined.
-.
-If
-.request ds
-is invoked with only one argument,
-the named string becomes empty.
-.
-The formatter removes a leading neutral double quote from
-.I contents
-to permit the embedding of leading spaces.
-.
-It interprets any other
-.RB \[oq] \[dq] \[cq] \" single quotes around double quote
-literally,
-but the wise author uses the special character escape sequence
-.B \[rs][dq]
-instead if the string
-might be interpolated as part of a macro argument;
-see section \[lq]Calling macros\[rq] above.
-.
-.
-.P
-The
+request creates a string with a specified name and contents,
+.RB \[lq] as \[rq]
+appends to a string,
+and the
 .esc *
-escape sequence dereferences a string's name,
+escape sequence dereferences its name,
 interpolating its contents.
 .
-If the name does not exist,
+If the string named by the
+.esc *
+escape sequence does not exist,
 the formatter defines it as empty,
 interpolates nothing,
 and emits a warning in category
@@ -7118,28 +7077,71 @@ and emits a warning in category
 See section \[lq]Warnings\[rq] in
 .MR @g@troff 1 .
 .
-The bracketed interpolation form accepts arguments that are handled as
-macro arguments are;
-see section \[lq]Calling macros\[rq] above.
+.
+.P
+In
+GNU
+.IR troff ,\" GNU
+if the identifier named by
+.request ds
+already exists as an alias,
+the request replaces the contents of the alias's target;
+see
+.request als
+and
+.request rm .
+.
+Omitting
+arguments after the first to
+.request ds
+defines
+a string as empty.
+.
+Otherwise,
+the formatter reads
+arguments after the first
+in copy mode.
+.
+.esc *
+is itself interpreted even in copy mode.
+.
+.
+.P
+.esc *
+escape sequence interpolates a previously defined string
+(its first or only argument).
+.
+Its bracketed interpolation form accepts arguments
+that are handled as macro arguments are.
 .
 In contrast to macro calls,
-an argument containing a closing bracket
+however,
+if a closing bracket
 .B ]
-must be enclosed in double quotes.
+occurs in a string argument,
+that argument must be enclosed in double quotes.
 .
 When defining strings,
-argument interpolations must be escaped if they are to reference
-parameters from the calling context;
-see section \[lq]Parameters\[rq] below.
+argument interpolations must be escaped
+if they are to reference parameters
+from the calling context.
 .
-Any non-initial neutral double quote
-.B \[dq]
-is interpreted literally,
-but it is wise to use the special character escape sequence
+.
+.P
+The formatter removes a leading neutral double quote from
+the argument after the first,
+permitting initial embedded spaces in it.
+.
+It interprets any other
+.RB \[oq] \[dq] \[cq] \" single quotes around double quote
+literally,
+but the wise author uses the special character escape sequence
 .B \[rs][dq]
-instead if the string might be interpolated as part of a macro argument;
-see section \[lq]Calling macros\[rq] above.
+instead if the string
+might be interpolated as part of a macro argument.
 .
+.
+.P
 Strings are not limited to a single input line of text.
 .BI \[rs] newline
 works just as it does elsewhere.
@@ -7149,8 +7151,8 @@ The resulting string is stored
 the newlines.
 .
 When filling is disabled,
-care is required to avoid overrunning the line length when interpolating
-strings.
+care is required to avoid oversetting the line
+when interpolating strings.
 .
 Conversely,
 when filling is enabled,
@@ -7160,13 +7162,16 @@ to a string interpolation to prevent a break afterward,
 as might be required in a macro argument.
 .
 Nor does a string require use of
-the GNU
-.I troff \" GNU
+GNU
+.IR troff 's\" GNU
 .B chop
-request to excise a trailing newline as is often done with diversions.
+request to excise a trailing newline
+as is often done with diversions.
 .
-It is not possible to embed a newline in a string that will be
-interpreted as such when the string is interpolated.
+.
+.P
+It is not possible to embed a newline in a string
+that the formatter interprets as such when interpolating it.
 .
 To achieve that effect,
 use
@@ -7175,18 +7180,23 @@ to interpolate a macro instead;
 see section \[lq]Punning names\[rq] below.
 .
 .
+.\" The next two paragraphs are deliberately swapped in order from our
+.\" Texinfo manual, because in the man page we don't present synopses to
+.\" establish context.
 .P
 The
 .RB \[lq] as \[rq]
 request is similar to
-.request ds
-but appends to a string instead of redefining it.
+.request ds ,
+but appends to an existing string
+instead of repopulating it.
 .
-If
-.RB \[lq] as \[rq]
-is invoked with only one argument,
-no operation is performed
-(beyond dereferencing the string).
+Omitting
+arguments after the first
+performs no operation,
+beyond dereferencing
+(and thus possibly creating)
+the string.
 .
 .
 .P
@@ -7208,10 +7218,15 @@ with compatibility mode suspended when the appended portion of the
 string is later interpolated.
 .
 .
+.br
+.ne 2v
 .P
 .I Caution:
-These requests treat the remainder of the input line
-as their second argument,
+The
+.B ds
+and
+.RB \[lq] as \[rq]
+requests treat the remainder of the input line as their second argument,
 including any spaces,
 up to a newline or comment escape sequence.
 .
@@ -7269,21 +7284,20 @@ and aliasing
 (\c
 .request rn ,
 .request rm ,
-.request als).
+.request als ).
 .
 .
 .br
 .ne 2v
 .P
-Redefinitions and appendments \[lq]write through\[rq] request,
+When a request,
 macro,
 string,
-and diversion names.
+or diversion is aliased,
+redefinitions and appendments \[lq]write through\[rq] alias names.
 .
-To replace an aliased object with a separately defined one,
-you must use the
-.B rm
-request on its name first.
+To replace an alias with a separately defined object,
+remove its name first.
 .\" END Keep (roughly) parallel with groff.texi node "Strings".
 .
 .
