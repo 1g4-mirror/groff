@@ -779,19 +779,19 @@ static void configure_page_length_request() // .pl
 
 static void when_request() // .wh
 {
-  vunits n;
-  if (has_arg()) {
-    if (read_vunits(&n, 'v')) {
-      symbol s = read_identifier();
-      if (s.is_null())
-	topdiv->remove_trap_at(n);
-      else
-	topdiv->add_trap(s, n);
-    }
-  }
-  else
+  if (!has_arg()) {
     warning(WARN_MISSING, "page trap location configuration request"
 	    " expects arguments");
+    skip_line();
+    return;
+  }
+  vunits n;
+  if (read_vunits(&n, 'v')) {
+    if (!has_arg())
+      topdiv->remove_trap_at(n);
+    else
+      topdiv->add_trap(read_identifier(), n);
+  }
   skip_line();
 }
 
@@ -1012,11 +1012,10 @@ static void diversion_trap_request() // .dt
   if (!has_arg())
     curdiv->clear_diversion_trap();
   else if (read_vunits(&n, 'v')) {
-      symbol s = read_identifier();
-      if (s.is_null())
-	curdiv->clear_diversion_trap();
-      else
-	curdiv->set_diversion_trap(s, n);
+    if (!has_arg())
+      curdiv->clear_diversion_trap();
+    else
+      curdiv->set_diversion_trap(read_identifier(), n);
   }
   // We have no `else` branch here; `read_vunits()` may have already
   // thrown an error diagnostic.  ("May have"?  See Savannah #68375.)

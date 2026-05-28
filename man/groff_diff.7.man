@@ -7125,6 +7125,28 @@ are portable.
 .
 .
 .P
+AT&T
+.IR troff s \" AT&T
+did not require a space between the arguments of the
+.B dt
+and
+.B wh
+requests.
+.
+We know of no legacy documents that require such syntactical
+flexibility;
+GNU
+.I troff \" GNU
+therefore does not support it.
+.
+It may have been unknown because the numeric expression accepted
+by the requests could be of arbitrary length.
+.\" Example: .wh9i+.5+\n(xxuPT
+.\" See Savannah #68375 for historical exhibits of actual usage, all of
+.\" which separate the arguments with a space.
+.
+.
+.P
 The
 .B ab
 request differs from that of AT&T

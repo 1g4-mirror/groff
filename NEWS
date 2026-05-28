@@ -25,6 +25,14 @@ troff
    process a list of similar objects, as `rm` and `rr` do) perform no
    operation.
 
+*  The `dt` and `wh` requests now enforce their requirement of space
+   between their arguments.  While consistent with GNU troff input
+   syntax, it is not consistent with AT&T troff.  We did not add support
+   in groff's AT&T troff compatibility mode because we're aware of no
+   legacy documents that require it.  Example: `.wh9i+.5+\n(xxuPT` is,
+   while validly planting a trap for the `PT` macro in AT&T troff,
+   an input considerably more cryptic than any specimens known to us.
+
 *  The formatter now enables the "delim", "syntax", and "escape" warning
    categories by default.
 

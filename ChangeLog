@@ -1,5 +1,18 @@
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (when_request, diversion_trap_request):
+	Enforce space requirement between first and second arguments to
+	`wh` and `dt` requests.
+
+	* doc/groff.texi.in (Other Differences):
+	* man/groff_diff.7.man (Other differences):
+	* NEWS: Document this behavioral difference from AT&T troffs.
+
+	Fixes <https://savannah.gnu.org/bugs/?68357>.  Problem appers to
+	date back to groff's birth.
+
+2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68357.
 
 	* src/roff/groff/tests/\
