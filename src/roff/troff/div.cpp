@@ -576,6 +576,9 @@ trap::trap(symbol s, vunits n, trap *p)
 
 void top_level_diversion::add_trap(symbol nam, vunits pos)
 {
+  assert(!nam.is_null());
+  if (nam.is_null())
+    return;
   trap *first_free_slot = 0 /* nullptr*/;
   trap **p;
   for (p = &page_trap_list; *p; p = &(*p)->next) {
@@ -598,6 +601,9 @@ void top_level_diversion::add_trap(symbol nam, vunits pos)
 
 void top_level_diversion::remove_trap(symbol nam)
 {
+  assert(!nam.is_null());
+  if (nam.is_null())
+    return;
   for (trap *p = page_trap_list; p; p = p->next)
     if (p->nm == nam) {
       p->nm = NULL_SYMBOL;
@@ -973,6 +979,9 @@ static void flush_request() // .fl
 
 void macro_diversion::set_diversion_trap(symbol s, vunits n)
 {
+  assert(!s.is_null());
+  if (s.is_null())
+    return;
   diversion_trap = s;
   diversion_trap_pos = n;
 }

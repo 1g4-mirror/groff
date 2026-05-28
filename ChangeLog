@@ -1,5 +1,13 @@
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (top_level_diversion::add_trap)
+	(top_level_diversion::remove_trap)
+	(macro_diversion::set_diversion_trap): Add assert(3)ions and
+	{if `#define NDEBUG`} early returns if the `symbol` argument
+	`is_null()`.
+
+2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (when_request, diversion_trap_request):
 	Enforce space requirement between first and second arguments to
 	`wh` and `dt` requests.
