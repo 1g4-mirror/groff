@@ -16746,39 +16746,70 @@ indexed
 character,
 whether defined by a font description file or a request.
 
-@item d @var{name}
-True if a string, macro, diversion, or request called @var{name} exists.
+@item d @var{nam}
+True if a string,
+macro,
+diversion,
+or request named
+@var{nam}
+is defined.
 
 @item e
 True if the current page is even-numbered.
 
-@item F @var{font}
-True if @var{font} exists.  @var{font} is handled as if it were an
-argument to the @code{ft} request (that is, the default family is
-combined with an abstract style and font translation is applied), but
-@var{font} cannot be a mounting position, and no font is mounted.
+@item F @var{fnt}
+True if a font
+@var{fnt}
+is available;
+@var{fnt}
+can be an abstract style
+or a font name.
+GNU
+@command{troff} @c troff
+handles
+@var{fnt}
+as if it were an argument to the
+@code{ft}
+request
+(that is,
+it combines the default family with an abstract style
+and applies any applicable font translation),
+but
+@var{fnt}
+cannot be a mounting position,
+and it does not become mounted.
 
-@item m @var{color}
-True if @var{color} is defined.
+@item m @var{col}
+True if a color
+@var{col}
+is defined.
 
 @item n
 @cindex conditional output for terminal (TTY)
 @cindex TTY, conditional output for
 @cindex terminal, conditional output for
-True if the document is being processed in @code{nroff} mode.
+True if the document is being processed in
+@code{nroff}
+mode.
 
 @item o
 True if the current page is odd-numbered.
 
-@item r @var{register}
-True if @var{register} exists.
+@item r @var{reg}
+True if a register
+@var{reg}
+is defined.
 
-@item S @var{style}
-True if @var{style} is available for the current font family.  Font
-translation is applied.
+@item S @var{sty}
+True if an abstract style
+@var{sty}
+is registered.
+Font translation applies.
 
 @item t
-True if the document is being processed in @code{troff} mode.
+True if the document is being processed in
+@code{troff}
+mode.
 
 @pindex vtroff
 @item v
@@ -16834,7 +16865,7 @@ produces the same output commands.
 The delimiter need not be a neutral apostrophe:
 the output comparison operator accepts the same delimiters as most
 escape sequences;
-see @ref{Delimiters}.
+recall @ref{Delimiters}.
 @command{troff} @c generic
 formats
 @var{xxx}

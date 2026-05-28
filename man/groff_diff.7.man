@@ -884,17 +884,20 @@ is available;
 can be an abstract style
 or a font name.
 .
+GNU
+.I troff \" troff
+handles
 .I fnt
-is handled as if it were an argument to the
+as if it were an argument to the
 .B ft
 request
 (that is,
-the default family is combined with an abstract style and font
-translation is applied),
+it combines the default family with an abstract style
+and applies any applicable font translation),
 but
 .I fnt
 cannot be a mounting position,
-and no font is mounted.
+and it does not become mounted.
 .
 .
 .TP
@@ -917,7 +920,7 @@ True if an abstract style
 .I sty
 is registered.
 .
-Font translations apply.
+Font translation applies.
 .
 .
 .TP
