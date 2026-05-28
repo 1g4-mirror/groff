@@ -1,3 +1,21 @@
+2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.cpp (set_page_number_request): Refactor--
+	trivially now but not so in the near future.  Stop calling
+	`has_arg()` redundantly.  A forthcoming change will alter the
+	semantics of `has_arg()` to return true only if an _argument_
+	lies ahead in the input stream, and a space must occur before
+	any _argument_.  `has_arg()`, when not "peeking", advances the
+	input stream cursor, and this function has already called it (to
+	throw a diagnostic if the argument is omitted), so the cursor is
+	already at the argument's first character.  The argument is at
+	the formatter's feet, and does not "lie ahead".  Manual
+	inspection suggests that other request handlers are already
+	careful not to call `has_arg()` except (1) upon receiving
+	control from the request-handler dispatcher (via a function
+	pointer); or (2) after calling a function that itself advances
+	the input stream cursor, like `read_identifier()`.
+
 2026-05-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[tfmtodit]: Be more fastidious with heap-allocated memory.
