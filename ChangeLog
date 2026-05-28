@@ -1,5 +1,13 @@
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68357.
+
+	* src/roff/groff/tests/\
+	error-no-space-between-dt-or-wh-arguments.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Unit-test `wh` and `ch` requests.
 
 	* src/roff/groff/tests/wh-and-ch-requests-work.sh: Do it.
