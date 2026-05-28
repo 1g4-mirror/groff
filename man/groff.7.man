@@ -3647,7 +3647,7 @@ into
 GNU
 .I troff \" GNU
 output as parameters to an
-.RB \[lq]x X\[rq]
+.RB \[lq] "x X" \[rq]
 device extension command;
 see
 .MR groff_out @MAN5EXT@ .
@@ -9135,7 +9135,8 @@ The
 .B \[rs]$0
 escape sequence interpolates the name by which a macro was called.
 .
-Applying string interpolation to a macro does not change this name.
+Applying string interpolation to a macro
+does not change this name.\" @footnote{@xref{Punning Names}.}
 .\" END Keep (roughly) parallel with groff.texi node "Parameters".
 .
 .

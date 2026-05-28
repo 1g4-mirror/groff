@@ -16657,12 +16657,26 @@ Now consider this example.
 @endExample
 
 @noindent
-In the above, @code{bar} remains an @emph{alias}---another name
-for---the object referred to by @code{foo}, which the second @code{de}
-request replaces.  Alternatively, imagine that the @code{de} request
-@emph{dereferences} its argument before replacing it.  Either way, the
-result of calling @code{bar} is a recursive loop that finally leads to
-an error.  @xref{Writing Macros}.
+In the above,
+@code{bar}
+remains an
+@emph{alias}---another
+name for---the object referred to by
+@code{foo},
+which the second
+@code{de}
+request replaces.
+Alternatively,
+imagine that the
+@code{de}
+request
+@emph{dereferences}
+its argument before replacing it.
+Either way,
+the result of calling
+@code{bar}
+is a recursive loop
+that finally leads to an error.@footnote{@xref{Writing Macros}.}
 
 @cindex alias, string, removing (@code{rm})
 @cindex alias, macro, removing (@code{rm})
@@ -16682,7 +16696,7 @@ The object itself is not destroyed until it has no more names.
 When a request,
 macro,
 string,
-or diversion is aliased
+or diversion is aliased,
 redefinitions and appendments ``write through'' alias names.
 To replace an alias with a separately defined object,
 remove its name first.
@@ -17440,26 +17454,58 @@ its conditional expression.
 @cindex writing macros
 @cindex macros, writing
 
-A @dfn{macro} is a stored collection of text and control lines that can
-be interpolated multiple times.  Use macros to define common operations.
-Macros are called in the same way that requests are invoked.  While
-requests exist for the purpose of creating macros, simply calling an
-undefined macro, or interpolating it as a string, will cause it to be
-defined as empty.  @xref{Identifiers}.
+A
+@dfn{macro}
+is a stored collection of text and control lines
+that can be interpolated multiple times.
+Use macros to define common operations.
+Macros are called in the same way that requests are invoked.
+While requests exist for the purpose of creating macros,
+simply calling an undefined macro,
+or interpolating it as a string,
+causes it to be defined as empty.
+A macro's name is an identifier;
+recall @ref{Identifiers}.
 
 @Defreq {de, name [@Var{end}]}
-Define a macro @var{name}, replacing the definition of any existing
-request, macro, string, or diversion called @var{name}.  If
-@var{name} already exists as an alias, the target of the alias is
-redefined; recall @ref{Strings}.  GNU @code{troff} enters copy
-mode,@footnote{@xref{Copy Mode}.} storing subsequent input lines as the
-macro definition.  If the optional second argument is not specified, the
-definition ends with the control line @samp{..} (two dots).
-Alternatively, @var{end} identifies a macro whose call syntax at the
-start of a control line ends the definition of @var{name}; @var{end} is
-then called normally.  A macro definition must end in the same
-conditional block (if any) in which it began (recall @pxref{Conditional
-Blocks}).  Spaces or tabs are permitted after the control character in
+Define a macro
+@var{name},
+replacing the definition of any existing request,
+macro,
+string,
+or
+diversion called
+@var{name}.
+In
+GNU
+@command{troff}, @c GNU
+if
+@var{name}
+already exists as an alias,
+@code{de}
+redefines the target of the alias;
+recall
+@ref{Strings}.
+The formatter enters copy mode,@footnote{@xref{Copy Mode}.}
+storing subsequent input lines as the macro definition.
+@var{end}
+identifies a macro whose call syntax at the start of a control line
+ends the definition of
+@var{name};
+the formatter then calls
+@var{end}
+normally.
+Omitting the
+@var{end}
+argument causes a subsequent control line
+@samp{..}@:
+(two dots)
+to end the definition.
+A macro definition must end in the same conditional block
+(if any)
+in which it began;
+recall @ref{Conditional Blocks}.
+Spaces or tabs are permitted after the control character in
 the line containing this ending token (either @samp{.} or
 @samp{@var{end}}), but a tab immediately after the token prevents its
 recognition as the end of a macro definition.  The macro @var{end} can
@@ -17723,12 +17769,12 @@ becomes argument
 arguments 1
 to@tie{}@var{n}
 become unavailable.
-Shifting by a non-positive amount,
-or outside of a macro or string definition,
-performs no operation.
 The register
 @code{.$}
 adjusts its value accordingly.
+Shifting by a non-positive amount,
+or outside of a macro or string definition,
+performs no operation.
 @endDefreq
 @c END Keep (roughly) parallel with subsection "Parameters" of
 @c groff(7).
@@ -17789,8 +17835,11 @@ which redefines some requests and macros for debugging purposes.
 @cindex macro name register (@code{\$0})
 @cindex @code{als} request, and @code{\$0}
 Interpolate the name by which the macro being interpreted was called.
-The @code{als} request can cause a macro to have more than one name.
-Applying string interpolation to a macro does not change this name.
+The
+@code{als}
+request can cause a macro to have more than one name.
+Applying string interpolation to a macro
+does not change this name.@footnote{@xref{Punning Names}.}
 
 @Example
 .de foo
@@ -19353,8 +19402,7 @@ removes any existing
 trap
 (see below)
 at
-@var{dist}
-is removed;
+@var{dist};
 this is its sole function if
 @var{name}
 is missing.
@@ -23617,8 +23665,8 @@ or appendment thereto as applicable
 and a
 @slanted{compatibility restore}
 token at its end,
-enabling compatibility mode during its interpolation.@footnote{Recall
-@ref{Strings}.}
+enabling compatibility mode during its interpolation;
+recall @ref{Strings}.
 Thus they work as expected
 even if the interpolation context disables compatibility mode.
 @c END Keep in sync with groff_diff(7), subsection "Altered requests".
@@ -24031,7 +24079,8 @@ request ignores scaling units
 and thus
 @samp{.ps 10u}
 sets the type size to 10@tie{}points,
-whereas in GNU
+whereas in
+GNU
 @command{troff} @c GNU
 it sets the type size to
 10@tie{}@emph{scaled}

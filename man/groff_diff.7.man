@@ -2090,6 +2090,7 @@ and a
 .I "compatibility restore"
 token at its end,
 enabling compatibility mode during its interpolation.
+.\" recall @ref{Strings}.
 .
 Thus they work as expected
 even if the interpolation context disables compatibility mode.
@@ -4427,13 +4428,13 @@ arguments 1
 .RI to\~ n
 become unavailable.
 .
-Shifting by a non-positive amount,
-or outside of a macro or string definition,
-performs no operation.
-.
 The register
 .B .$
 adjusts its value accordingly.
+.
+Shifting by a non-positive amount,
+or outside of a macro or string definition,
+performs no operation.
 .
 .
 .TP
