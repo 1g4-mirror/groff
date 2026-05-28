@@ -1,5 +1,14 @@
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (top_level_diversion::remove_trap)
+	(top_level_diversion::remove_trap_at)
+	(top_level_diversion::change_trap)
+	(top_level_diversion::print_traps): Fix code style nit.
+	Explicitly compare variables of pointer type to null pointer
+	literal instead of letting them pun down to Booleans.
+
+2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (top_level_diversion::add_trap)
 	(top_level_diversion::remove_trap)
 	(macro_diversion::set_diversion_trap): Add assert(3)ions and

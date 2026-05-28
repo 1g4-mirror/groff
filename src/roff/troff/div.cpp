@@ -604,7 +604,7 @@ void top_level_diversion::remove_trap(symbol nam)
   assert(!nam.is_null());
   if (nam.is_null())
     return;
-  for (trap *p = page_trap_list; p; p = p->next)
+  for (trap *p = page_trap_list; p != 0 /* nullptr */; p = p->next)
     if (p->nm == nam) {
       p->nm = NULL_SYMBOL;
       return;
@@ -613,7 +613,7 @@ void top_level_diversion::remove_trap(symbol nam)
 
 void top_level_diversion::remove_trap_at(vunits pos)
 {
-  for (trap *p = page_trap_list; p; p = p->next)
+  for (trap *p = page_trap_list; p != 0 /* nullptr */; p = p->next)
     if (p->position == pos) {
       p->nm = NULL_SYMBOL;
       return;
@@ -622,7 +622,7 @@ void top_level_diversion::remove_trap_at(vunits pos)
 
 void top_level_diversion::change_trap(symbol nam, vunits pos)
 {
-  for (trap *p = page_trap_list; p; p = p->next)
+  for (trap *p = page_trap_list; p != 0 /* nullptr */; p = p->next)
     if (p->nm == nam) {
       p->position = pos;
       return;
@@ -633,7 +633,7 @@ void top_level_diversion::change_trap(symbol nam, vunits pos)
 
 void top_level_diversion::print_traps()
 {
-  for (trap *p = page_trap_list; p; p = p->next)
+  for (trap *p = page_trap_list; p != 0 /* nullptr */; p = p->next)
     if (p->nm.is_null())
       fprintf(stderr, "  empty\n");
     else
