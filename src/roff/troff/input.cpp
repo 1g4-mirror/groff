@@ -2182,19 +2182,24 @@ void token::diagnose_non_character()
 	  " ignoring", description());
 }
 
-// Indicate whether an argument lies ahead on the current line in the
-// input stream, skipping over spaces.  This function is therefore not
-// appropriate for use when handling requests or escape sequences that
-// don't use space to separate their arguments, as with `.tr aAbB` or
-// `\o'^e'`.
+// Indicate whether an argument lies ahead, _after at least one space_,
+// on the current line in the input stream, skipping over spaces.  This
+// function is therefore not appropriate for use when handling requests
+// or escape sequences that don't use space to separate their arguments,
+// as with `.rchar a\[foobar]b` or `\o'^e'`.
 //
 // Specify `peeking` if request reads the next argument in copy mode,
 // or otherwise must interpret it specially, as when reading a
 // conditional expression (`if`, `ie`, `while`), or expecting a
 // delimited argument (`tl`).
+//
+// Note: Do not call this function repeatedly without doing something to
+// advance the input stream cursor (such as calling `read_identifier()`)
+// beforehand.  If the current token is not a space, an argument does
+// not "lie ahead", and the request handler's logic may fail.
 bool has_arg(bool peeking)
 {
-  if (tok.is_newline() || tok.is_eof())
+  if (!tok.is_space())
     return false;
   if (peeking) {
     int c;

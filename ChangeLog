@@ -1,5 +1,11 @@
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (has_arg): Revise semantics.
+	Function now returns `false` if the current token is anything
+	but a space.
+
+2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (set_page_number_request): Refactor--
 	trivially now but not so in the near future.  Stop calling
 	`has_arg()` redundantly.  A forthcoming change will alter the
