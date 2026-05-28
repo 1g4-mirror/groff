@@ -160,6 +160,7 @@ groff_TESTS = \
   src/roff/groff/tests/warn-on-overset-adjusted-line.sh \
   src/roff/groff/tests/warn-on-overset-unadjusted-line.sh \
   src/roff/groff/tests/warn-on-underset-adjusted-line.sh \
+  src/roff/groff/tests/wh-and-ch-requests-work.sh \
   src/roff/groff/tests/write-request-handles-empty-second-arg.sh
 TESTS += $(groff_TESTS)
 EXTRA_DIST += $(groff_TESTS)

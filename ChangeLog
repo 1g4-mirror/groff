@@ -1,5 +1,12 @@
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Unit-test `wh` and `ch` requests.
+
+	* src/roff/groff/tests/wh-and-ch-requests-work.sh: Do it.
+	* src/roff/groff/groff.am: Run test.
+
+2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (has_arg): Revise semantics.
 	Function now returns `false` if the current token is anything
 	but a space.
