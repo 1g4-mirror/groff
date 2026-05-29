@@ -128,7 +128,7 @@ After Release
   network.
 
 * For official releases, update the groff home page, which is kept under
-* CVS revision control.
+  CVS revision control.
 
   $ cvs -z3 -d:ext:$USER@cvs.savannah.gnu.org:/web/groff co groff
 
