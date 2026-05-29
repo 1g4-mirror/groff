@@ -25,8 +25,8 @@
 	* man/groff_diff.7.man (Other differences):
 	* NEWS: Document this behavioral difference from AT&T troffs.
 
-	Fixes <https://savannah.gnu.org/bugs/?68357>.  Problem appers to
-	date back to groff's birth.
+	Fixes <https://savannah.gnu.org/bugs/?68357>.  Problem appears
+	to date back to groff's birth.
 
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
