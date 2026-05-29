@@ -3,7 +3,13 @@
 .\" Put local modifications to groff_man(7)'s behavior here.
 .\"
 .\" Some nroff devices or pager programs may not gracefully handle OSC 8
-.\" hyperlink escape sequences that they don't understand.
+.\" hyperlink escape sequences that they don't understand.  You might
+.\" also un-comment the control line below if the terminal emulators
+.\" most used on the system lack OSC 8 support altogether; that way URLs
+.\" and email addresses specified as arguments to the `UR` and `MT`
+.\" macros will be formatted as text in the document.  However, the
+.\" less(1) pager, as of version 703, compensates for terminals lacking
+.\" OSC 8 support.  Consult its help screen or man page.
 .\" .if n .if !r U .nr U 0
 .\"
 .\" "CW" is not a portable font name, but some man pages use it anyway.
