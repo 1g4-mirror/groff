@@ -4657,7 +4657,7 @@ void suppress_node::tprint(troff_output_file *out)
   if (is_on == 2) {
     // Save them for future bounding box limits.
     last_position = position;
-    image_filename = strsave(filename.contents());
+    image_filename = strdup(filename.contents());
     image_filename_len = strlen(image_filename);
   }
   else { // is_on = 0 or 1

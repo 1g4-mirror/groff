@@ -1,3 +1,10 @@
+2026-05-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (suppress_node::tprint): Migrate from
+	libgroff's `strsave()` to POSIX's strdup(3).
+
+	Continues the long process of fixing Savannah #66672.
+
 2026-05-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/div.cpp (top_level_diversion::remove_trap)
