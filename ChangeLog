@@ -702,10 +702,10 @@
 	* tmac/doc.tmac: Recognize that using the "X100-12" or "X75-12"
 	output devices necessarily implies an `S` register default of
 	"12", not "10", just as groff man(7) has done for a long time.
-	Problem dates back to introduction of mdoc(7) support for `S`
-	register in commit b57a732836, 2001-03-24.
 
-	Fixes <https://savannah.gnu.org/bugs/?68334>.
+	Fixes <https://savannah.gnu.org/bugs/?68334>.  Problem dates
+	back to introduction of mdoc(7) support for `S` register in
+	commit b57a732836, 2001-03-24.
 
 2026-05-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
