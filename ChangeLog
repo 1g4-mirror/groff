@@ -1,5 +1,12 @@
 2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Trivially refactor.  Rename string `an-pageref`
+	to `an*pageref`.
+	(PT, an*abbreviate-page-identifier, an-footer)
+	([initialization]): Update definition and interpolation sites.
+
+2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (LE): Throw warning when macro called with no
 	lists open.
 
