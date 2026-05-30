@@ -64,7 +64,7 @@
 .\" because they might be called from a context where compatibility mode
 .\" is enabled.  For other macros, `de` suffices.
 .
-.de an-warn
+.de an*warn
 .  tm \*[an]:\\n[.F]:\\n[.c]: warning: \\$*
 ..
 .
@@ -628,7 +628,7 @@
 .  \}
 .  an*scan-string-for-backslash \\*[an*ifoot]
 .  if \\n[an*string-contains-backslash] \{\
-.    an-warn not abbreviating fourth argument to 'TH' '\\*[an*ifoot]': \
+.    an*warn not abbreviating fourth argument to 'TH' '\\*[an*ifoot]': \
 contains unsupported escape sequence
 .    rr an*string-contains-backslash
 .    rr an*half-footer-width
@@ -787,7 +787,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) as a section heading.
 .de1 SH
-.  if \\n[.it] .an-warn cannot call .\\$0 while an input trap is pending
+.  if \\n[.it] .an*warn cannot call .\\$0 while an input trap is pending
 .  if \\n[DEBUG] .tm GBR: mark VALID05: \\$0
 .  an*list-close-all
 .  an*reset-section-parameters
@@ -818,7 +818,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) as a subsection heading.
 .de1 SS
-.  if \\n[.it] .an-warn cannot call .\\$0 while an input trap is pending
+.  if \\n[.it] .an*warn cannot call .\\$0 while an input trap is pending
 .  if \\n[DEBUG] .tm GBR: mark VALID06: \\$0
 .  an*list-close-all
 .  an*reset-section-parameters
@@ -908,7 +908,7 @@ contains unsupported escape sequence
 .\" producing written or drawn output.
 .\" .TP [indent]
 .de1 TP
-.  if \\n[.it] .an-warn cannot call .\\$0 while an input trap is pending
+.  if \\n[.it] .an*warn cannot call .\\$0 while an input trap is pending
 .  if \\n[DEBUG] .tm GBR: mark VALID07: \\$0
 .  an*break-paragraph 1
 .  if (\\n[an*list-depth] > 0) \{\
@@ -920,7 +920,7 @@ contains unsupported escape sequence
 .  \}
 .  if \\n[.$] .nr an*prevailing-indent (n;\\$1)
 .  if '\\n[.z]'an*paragraph-tag' \{\
-.    an-warn cannot nest .\\$0 or .TQ inside .\\$0; supply a tag
+.    an*warn cannot nest .\\$0 or .TQ inside .\\$0; supply a tag
 .    return
 .  \}
 .  nr an*have-paragraph-tag 1
@@ -1336,11 +1336,11 @@ contains unsupported escape sequence
 .\" .MT nobody@example.com
 .de1 MT
 .  if d an*prefix \{\
-.    an-warn cannot nest .\\$0 inside .MT or .UR
+.    an*warn cannot nest .\\$0 inside .MT or .UR
 .    return
 .  \}
 .  if !(\\n[.$] = 1) \
-.    an-warn .\\$0 expects 1 argument, got \\n[.$]
+.    an*warn .\\$0 expects 1 argument, got \\n[.$]
 .  ds an*prefix mailto:
 .  an*begin-hyperlink \\$1
 ..
@@ -1350,7 +1350,7 @@ contains unsupported escape sequence
 .\" .ME [trailing-text]
 .de1 ME
 .  if !d an*prefix \{\
-.    an-warn .\\$0 requires a preceding .MT
+.    an*warn .\\$0 requires a preceding .MT
 .    return
 .  \}
 .  an*end-hyperlink \\$1
@@ -1362,11 +1362,11 @@ contains unsupported escape sequence
 .\" .UR http://example.com/
 .de1 UR
 .  if d an*prefix \{\
-.    an-warn cannot nest .\\$0 inside .MT or .UR
+.    an*warn cannot nest .\\$0 inside .MT or .UR
 .    return
 .  \}
 .  if !(\\n[.$] = 1) \
-.    an-warn .\\$0 expects 1 argument, got \\n[.$]
+.    an*warn .\\$0 expects 1 argument, got \\n[.$]
 .  ds an*prefix \" empty
 .  an*begin-hyperlink \\$1
 ..
@@ -1376,7 +1376,7 @@ contains unsupported escape sequence
 .\" .UE [trailing-text]
 .de1 UE
 .  if !d an*prefix \{\
-.    an-warn .\\$0 requires a preceding .UR
+.    an*warn .\\$0 requires a preceding .UR
 .    return
 .  \}
 .  an*end-hyperlink \\$1
@@ -1484,7 +1484,7 @@ contains unsupported escape sequence
 .    if \\n[DEBUG] .tm GBR: mark INVALID01: \\$0 branch 1
 .    ds an*msg invalid .\\$0 list type '\\*[an*list-type]':
 .    as an*msg " assuming 'definition'
-.    an-warn \\*[an*msg]
+.    an*warn \\*[an*msg]
 .    ds an*list-type definition\"
 .  \}
 .  nr an*list-is-compact 0
@@ -1492,7 +1492,7 @@ contains unsupported escape sequence
 .    if \\n[DEBUG] .tm GBR: mark VALID10: \\$0 branch 2 (more than one macro argument)
 .    ie !\B'\\$2' \{\
 .      if \\n[DEBUG] .tm GBR: mark INVALID02: \\$0 branch 3
-.      an-warn invalid .\\$0 compactness Boolean value '\\$2'; using 0
+.      an*warn invalid .\\$0 compactness Boolean value '\\$2'; using 0
 .    \}
 .    el .if \\$2 \{\
 .      if \\n[DEBUG] .tm GBR: mark VALID11: \\$0 branch 4 (list is compact)
@@ -1504,7 +1504,7 @@ contains unsupported escape sequence
 .    if \\n[DEBUG] .tm GBR: mark VALID12: \\$0 branch 4 (more than two macro arguments)
 .    ie !\B'\\$3' \{\
 .      if \\n[DEBUG] .tm GBR: mark INVALID03: \\$0 branch 5
-.      an-warn invalid .\\$0 indent '\\$3'; ignoring
+.      an*warn invalid .\\$0 indent '\\$3'; ignoring
 .    \}
 .    el \{\
 .      if \\n[DEBUG] .tm GBR: mark VALID13: \\$0 branch 6 (assigning list indentation)
@@ -1560,7 +1560,7 @@ contains unsupported escape sequence
 .    ds an*msg tbl preprocessor failed, or it or soelim was not run;\"
 .    as an*msg " table(s) likely not rendered\"
 .    as an*msg " (TE macro called with TW register undefined)\"
-.    an-warn \\*[an*msg]
+.    an*warn \\*[an*msg]
 .    rm an*msg
 .    nr an-was-tbl-failure-reported 1
 .  \}
