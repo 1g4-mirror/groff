@@ -1523,6 +1523,8 @@ contains unsupported escape sequence
 .
 .\" End (or "close") the most recently unclosed list.
 .de1 LE
+.  if !\\n[an*list-depth] \
+.    an*warn ignoring .\\$0 call when no list open
 .  if \\n[DEBUG] .tm GBR: mark VALID14: \\$0
 .  rm an*list-indent!\\n[an*list-depth]
 .  rr an*list-is-compact!\\n[an*list-depth]

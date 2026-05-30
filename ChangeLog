@@ -1,5 +1,10 @@
 2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (LE): Throw warning when macro called with no
+	lists open.
+
+2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Trivially refactor.
 	(an-warn): Rename this...
 	(an*warn): ...to this.
