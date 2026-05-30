@@ -1,5 +1,12 @@
 2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libbib/common.cpp: Preprocessor-include "index.h" to
+	make visible prototype of `hash()`.
+
+	Fixes `-Wmissing-declarations` GCC warning.
+
+2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Trivially refactor.  Rename string `an-pageref`
 	to `an*pageref`.
 	(PT, an*abbreviate-page-identifier, an-footer)

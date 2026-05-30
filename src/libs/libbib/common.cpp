@@ -17,6 +17,8 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
+#include "index.h" // hash()
+
 unsigned hash(const char *s, int len)
 {
 #if 0

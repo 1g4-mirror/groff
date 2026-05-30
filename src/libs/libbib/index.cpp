@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "refid.h"
 #include "search.h"
-#include "index.h"
+#include "index.h" // hash()
 #include "defs.h"
 
 #include "nonposix.h"
