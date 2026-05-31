@@ -1,5 +1,17 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grn]: Rearrange code.
+
+	* src/preproc/grn/main.cpp (operand): Relocate definition to
+	precede function housing its only call site (`main()`).  Define
+	functions as `static`; external linkage is not required.
+	(main): Drop now unnecessary function-local declaration of
+	`operand()`.
+
+	Fixes `-Wmissing-declarations` GCC warning.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn]: Fix code style nit.
 
 	* src/preproc/eqn/main.cpp (do_file, usage):

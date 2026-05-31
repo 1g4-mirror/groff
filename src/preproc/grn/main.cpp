@@ -303,6 +303,31 @@ add_file(char **file,
 
 
 /*--------------------------------------------------------------------*
+ | Routine:	char  * operand (& argc, & argv)
+ |
+ | Results:	Returns address of the operand given with a command-line
+ |		option.  It uses either '-Xoperand' or '-X operand',
+ |		whichever is present.  The program is terminated if no
+ |		option is present.
+ |
+ | Side Efct:	argc and argv are updated as necessary.
+ *--------------------------------------------------------------------*/
+
+static char *
+operand(int *argcp,
+	char ***argvp)
+{
+  if ((**argvp)[2])
+    return (**argvp + 2);	/* operand immediately follows */
+  if ((--*argcp) <= 0) {	/* no operand */
+    error("command-line option operand missing.");
+    exit(8);
+  }
+  return (*(++(*argvp)));	/* operand is next word */
+}
+
+
+/*--------------------------------------------------------------------*
  | Routine:	main (argument_count, argument_pointer)
  |
  | Results:	Parses the command line, accumulating input file names,
@@ -323,7 +348,6 @@ main(int argc,
   int gfil = 0;
   char **file = NULL;
   int file_cur_size = INIT_FILE_SIZE;
-  char *operand(int *argcp, char ***argvp);
 
   file = (char **) grnmalloc(file_cur_size * sizeof(char *),
 			     "file array");
@@ -407,31 +431,6 @@ main(int argc,
   }
 
   return 0;
-}
-
-
-/*--------------------------------------------------------------------*
- | Routine:	char  * operand (& argc, & argv)
- |
- | Results:	Returns address of the operand given with a command-line
- |		option.  It uses either '-Xoperand' or '-X operand',
- |		whichever is present.  The program is terminated if no
- |		option is present.
- |
- | Side Efct:	argc and argv are updated as necessary.
- *--------------------------------------------------------------------*/
-
-char *
-operand(int *argcp,
-	char ***argvp)
-{
-  if ((**argvp)[2])
-    return (**argvp + 2);	/* operand immediately follows */
-  if ((--*argcp) <= 0) {	/* no operand */
-    error("command-line option operand missing.");
-    exit(8);
-  }
-  return (*(++(*argvp)));	/* operand is next word */
 }
 
 
