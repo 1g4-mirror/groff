@@ -16,16 +16,15 @@ for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "lib.h"
+#include "errarg.h" // prerequisite of "error.h"
+#include "error.h" // error(), error_with_file_and_line(), warning(),
+		   // warning_with_file_and_line()
+#include "ptable.h"
+#include "stringclass.h" // string
 
-#include "cset.h"
-#include "stringclass.h"
-#include "lf.h"
-#include "errarg.h"
-#include "error.h"
-#include "position.h"
-#include "text.h"
-#include "output.h"
+#include "position.h" // prerequisite of "object.h" and "output.h"
+#include "output.h" // prerequisite of "output.h"
+#include "object.h"
 
 #ifndef M_SQRT2
 #define M_SQRT2	1.41421356237309504880
@@ -34,6 +33,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+
+// lex.cpp
+extern int delim_flag;
+extern void copy_rest_thru(const char * /* body */,
+			   const char * /* until */);
+extern void copy_file_thru(const char * /* filename*/,
+			   const char * /* body */,
+			   const char * /* until */);
+extern void push_body(const char *);
+extern void do_for(char * /* var */, double /* from */, double /* to */,
+		   int /* by_is_multiplicative */, double /* by */,
+		   char * /* body*/);
+extern void do_lookahead();
 
 class input {
   input *next;

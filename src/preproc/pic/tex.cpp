@@ -25,6 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdlib.h> // strtol()
 #include <stdio.h> // fputs(), printf(), stdout
 
+#include "cset.h" // csalpha(), csspace()
+
 #include "pic.h"
 
 #ifdef TEX_SUPPORT

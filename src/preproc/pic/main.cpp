@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <assert.h>
 #include <errno.h>
+#include <limits.h> // CHAR_MAX
 #include <locale.h> // setlocale()
 #include <stdio.h> // EOF, FILE, fclose(), ferror(), fflush(), fopen(),
 		   // fprintf(), fputs(), getc(), printf(), setbuf(),
@@ -30,6 +31,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <string.h> // strerror()
 
 #include <getopt.h> // getopt_long()
+
+#include "lib.h" // strsave()
+#include "stringclass.h" // prerequisite of "lf.h"
+#include "lf.h" // normalize_file_name_for_lf_request()
 
 #include "pic.h"
 

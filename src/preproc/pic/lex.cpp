@@ -27,10 +27,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdio.h> // EOF, FILE, fclose(), fopen(), getc(), ungetc()
 #include <string.h> // strerror()
 
-#include "pic.h" // must precede object.h
+#include "cset.h" // csdigit(), csupper()
+#include "lib.h" // is_invalid_input_char(), strsave()
 
-#include "ptable.h" // must precede object.h
-#include "object.h"
+#include "pic.h"
 #include "pic.hpp"
 
 declare_ptable(char)

@@ -24,6 +24,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdlib.h> // free()
 #include <stdio.h> // fputs(), printf(), putchar(), puts(), stdout
 
+#include "lib.h" // strsave()
+
 #include "pic.h"
 #include "common.h"
 

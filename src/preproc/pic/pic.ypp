@@ -48,17 +48,9 @@ extern "C" {
 }
 #endif /* NEED_DECLARATION_SRAND */
 
-#include "pic.h"
-#include "ptable.h"
-#include "object.h"
+#include "lib.h" // strsave()
 
-extern int delim_flag;
-extern void copy_rest_thru(const char *, const char *);
-extern void copy_file_thru(const char *, const char *, const char *);
-extern void push_body(const char *);
-extern void do_for(char *var, double from, double to,
-		   int by_is_multiplicative, double by, char *body);
-extern void do_lookahead();
+#include "pic.h"
 
 /* Maximum number of characters produced by printf("%g") */
 #define GDIGITS 14

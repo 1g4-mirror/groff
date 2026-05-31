@@ -1,5 +1,27 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Rationalize header file inclusions.  Move some into
+	"object.h" or "pic.h" where not doing so introduces cycles.
+
+	* src/preproc/pic/output.h: Preprocessor-include "text.h".
+	* src/preproc/pic/lex.cpp:
+	* src/preproc/pic/main.cpp:
+	* src/preproc/pic/object.cpp:
+	* src/preproc/pic/output.cpp:
+	* src/preproc/pic/pic.h:
+	* src/preproc/pic/pic.ypp:
+	* src/preproc/pic/tex.cpp:
+	* src/preproc/pic/troff.cpp: Arrange inclusions of "libgroff"
+	header files before pic-specific ones.  Within such inclusions,
+	sort header file names in alphabetical order, where the header
+	file dependency graph permits.  Annotate exceptions.
+	* src/preproc/pic/main.cpp: Preprocessor-include "<limits.h>" to
+	ensure visiblity of `CHAR_MAX` symbol.
+	* src/preproc/pic/pic.h: Declare `extern` symbols from "lex.cpp"
+	here, not in "pic.ypp".
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic]: Fix code style nit.
 
 	* src/preproc/pic/lex.cpp (process_body)

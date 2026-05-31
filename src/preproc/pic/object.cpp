@@ -24,9 +24,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <math.h> // M_PI, acos(), atan2(), cos(), sin()
 #include <stdlib.h> // free()
 
-#include "pic.h" // includes cset.h, which declares csupper()
-#include "ptable.h"
-#include "object.h"
+#include "cset.h" // csupper()
+#include "lib.h" // strsave()
+
+#include "pic.h"
 
 void print_object_list(object *);
 
