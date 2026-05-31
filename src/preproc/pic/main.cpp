@@ -224,7 +224,7 @@ int top_input::get_location(const char **filenamep, int *linenop)
   return 1;
 }
 
-void do_picture(FILE *fp)
+static void do_picture(FILE *fp)
 {
   want_flyback = false;
   int c;
@@ -482,7 +482,7 @@ void do_whole_file(const char *filename)
 }
 #endif
 
-void usage(FILE *stream)
+static void usage(FILE *stream)
 {
   fprintf(stream, "usage: %s [-CnSU] [file ...]\n", program_name);
 #ifdef TEX_SUPPORT

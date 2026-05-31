@@ -1,5 +1,20 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[pic]: Fix code style nit.
+
+	* src/preproc/pic/lex.cpp (process_body)
+	(interpolate_macro_with_args, lookup_keyword)
+	(get_token_after_dot, get_token, get_delimited, do_define)
+	(do_undef, get_thru_arg):
+	* src/preproc/pic/main.cpp (do_picture, usage):
+	* src/preproc/pic/object.cpp (draw_arrow):
+	* src/preproc/pic/troff.cpp (strsame): Define functions as
+	`static`; external linkage is not required.
+
+	Fixes `-Wmissing-declarations` GCC warning.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/lex.cpp: Fix code style nit.  Add `extern`
 	declarations of `yylex()` and `yyerror()` since--as I understand
 	it--there is still no standard header file that prototypes them.

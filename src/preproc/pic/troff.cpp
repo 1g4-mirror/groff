@@ -589,7 +589,8 @@ void troff_output::dot(const position &cent, const line_type &lt)
 
 // We might consider putting this in libgroff.  We treat null pointers
 // like NaNs: they are incommensurable even with themselves.
-bool strsame(const char *s, const char *t)
+// TODO: Migrate to C2y's streq().
+static bool strsame(const char *s, const char *t)
 {
   if ((s == 0 /* nullptr */) || (t == 0 /* nullptr */))
     return false;

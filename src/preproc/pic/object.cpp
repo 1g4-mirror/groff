@@ -216,9 +216,9 @@ struct arrow_head_type {
   int solid;
 };
 
-void draw_arrow(const position &pos, const distance &dir,
-		const arrow_head_type &aht, const line_type &lt,
-		char *outline_color_for_fill)
+static void draw_arrow(const position &pos, const distance &dir,
+		       const arrow_head_type &aht, const line_type &lt,
+		       char *outline_color_for_fill)
 {
   double hyp = hypot(dir);
   if (hyp == 0.0) {

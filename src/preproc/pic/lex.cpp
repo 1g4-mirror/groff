@@ -173,7 +173,7 @@ int macro_input::peek()
     return (unsigned char)*p;
 }
 
-char *process_body(const char *body)
+static char *process_body(const char *body)
 {
   char *s = strsave(body);
   int j = 0;
@@ -388,7 +388,7 @@ string token_buffer;
 double token_double;
 int token_int;
 
-void interpolate_macro_with_args(const char *body)
+static void interpolate_macro_with_args(const char *body)
 {
   char *argv[MAX_ARG];
   int argc = 0;
@@ -464,7 +464,7 @@ static int docmp(const char *s1, int n1, const char *s2, int n2)
     return memcmp(s1, s2, n1);
 }
 
-int lookup_keyword(const char *str, int len)
+static int lookup_keyword(const char *str, int len)
 {
   static struct keyword {
     const char *name;
@@ -588,7 +588,7 @@ int lookup_keyword(const char *str, int len)
   return 0;
 }
 
-int get_token_after_dot(int c)
+static int get_token_after_dot(int c)
 {
   // get_token deals with the case where c is a digit
   switch (c) {
@@ -934,7 +934,7 @@ int get_token_after_dot(int c)
   }
 }
 
-int get_token(int lookup_flag)
+static int get_token(int lookup_flag)
 {
   context_buffer.clear();
   for (;;) {
@@ -1333,7 +1333,7 @@ int get_token(int lookup_flag)
   }
 }
 
-int get_delimited()
+static int get_delimited()
 {
   token_buffer.clear();
   int c = input_stack::get_char();
@@ -1402,7 +1402,7 @@ int get_delimited()
   return 1;
 }
 
-void do_define()
+static void do_define()
 {
   int t = get_token(0);		// do not expand what we are defining
   if (t != VARIABLE && t != LABEL) {
@@ -1418,7 +1418,7 @@ void do_define()
   macro_table.define(name, strsave(token_buffer.contents()));
 }
 
-void do_undef()
+static void do_undef()
 {
   int t = get_token(0);		// do not expand what we are undefining
   if (t != VARIABLE && t != LABEL) {
@@ -1800,7 +1800,7 @@ void push_body(const char *s)
 
 int delim_flag = 0;
 
-char *get_thru_arg()
+static char *get_thru_arg()
 {
   int c = input_stack::peek_char();
   while (c == ' ') {
