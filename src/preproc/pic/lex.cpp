@@ -1847,6 +1847,8 @@ void do_lookahead()
   }
 }
 
+extern int yylex();
+
 int yylex()
 {
   if (delim_flag) {
@@ -2064,6 +2066,8 @@ void lex_warning(const char *message,
   else
     warning_with_file_and_line(filename, lineno, message, arg1, arg2, arg3);
 }
+
+extern void yyerror(const char *);
 
 void yyerror(const char *s)
 {

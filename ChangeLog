@@ -1,5 +1,13 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/lex.cpp: Fix code style nit.  Add `extern`
+	declarations of `yylex()` and `yyerror()` since--as I understand
+	it--there is still no standard header file that prototypes them.
+
+	Fixes `-Wmissing-declarations` GCC warning.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grn]: Give command a proper header file for external symbols.
 
 	* src/preproc/grn/hdb.cpp:
