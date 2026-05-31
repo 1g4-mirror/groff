@@ -17,6 +17,7 @@
 #include "lib.h"
 
 #include "gprint.h"
+#include "grn.h"
 
 #define MAXVECT	40
 #define MAXPOINTS	200

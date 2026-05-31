@@ -98,16 +98,11 @@
 #include "macropath.h"
 
 #include "gprint.h"
+#include "grn.h"
 
 extern "C" const char *Version_string;
 
 /* database imports */
-
-extern void HGPrintElt(ELT *element, int baseline);
-extern ELT *DBInit();
-extern ELT *DBRead(FILE *file);
-extern POINT *PTInit();
-extern POINT *PTMakePoint(double x, double y, POINT **pplist);
 
 #define INIT_FILE_SIZE 50  /* Initial sz of file array from cmd line. */
 #define FILE_SIZE_INCR 50  /* Amount to increase array of files by. */

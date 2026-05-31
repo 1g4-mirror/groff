@@ -15,9 +15,7 @@
 #endif
 
 #include "gprint.h"
-
-/* imports from main.cpp */
-extern void *grnmalloc(size_t size, const char *what);
+#include "grn.h"
 
 /*
  * Return pointer to empty point list.

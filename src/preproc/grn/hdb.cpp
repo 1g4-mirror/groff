@@ -21,7 +21,9 @@
 
 #include "errarg.h"
 #include "error.h"
+
 #include "gprint.h"
+#include "grn.h"
 
 #define MAXSTRING 128
 #define MAXSTRING_S "127"
@@ -31,14 +33,6 @@
 extern char gremlinfile[];	/* name of file currently reading */
 extern int SUNFILE;		/* TRUE if SUN gremlin file */
 extern int compatibility_flag;	/* TRUE if in compatibility mode */
-extern void *grnmalloc(size_t size, const char *what);
-extern void savebounds(double x, double y);
-
-/* imports from hpoint.cpp */
-
-extern POINT *PTInit();
-extern POINT *PTMakePoint(double x, double y, POINT ** pplist);
-
 
 int DBGetType(char *s);
 

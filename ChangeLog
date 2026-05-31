@@ -1,5 +1,21 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grn]: Give command a proper header file for external symbols.
+
+	* src/preproc/grn/hdb.cpp:
+	* src/preproc/grn/hpoint.cpp:
+	* src/preproc/grn/main.cpp: Move `extern` declarations of
+	symbols from here...
+	* src/preproc/grn/grn.h: ...to this new file.
+	* src/preproc/grn/hdb.cpp:
+	* src/preproc/grn/hgraph.cpp:
+	* src/preproc/grn/hpoint.cpp:
+	* src/preproc/grn/main.cpp: Preprocessor-include new file.
+	* src/preproc/grn/grn.am: Add new file to `grn_SOURCES` macro
+	definition.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/grn/main.cpp: Rationalize header file inclusions.
 	Arrange inclusions of "libgroff" header files before grn-
 	specific one.  Within such inclusions, sort header file names in
