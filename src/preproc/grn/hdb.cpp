@@ -59,7 +59,7 @@ DBInit()
  * This routine creates a new element with the specified attributes and
  * links it into database.
  */
-ELT *
+static ELT *
 DBCreateElt(int type,
 	    POINT * pointlist,
 	    int brush,

@@ -537,7 +537,7 @@ cr()
  | Results:	Draws a single solid line to (x,y).
  *--------------------------------------------------------------------*/
 
-void
+static void
 line(int px,
      int py)
 {
@@ -953,7 +953,7 @@ NaturalEndSpline(double h[],	/* parameterization */
  |		is set (which means we're leaving a visible area).
  *--------------------------------------------------------------------*/
 
-void
+static void
 change(int x,
        int y,
        int vis)

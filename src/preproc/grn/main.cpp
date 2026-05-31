@@ -265,7 +265,7 @@ grnmalloc(size_t size,
   return ptr;
 }
 
-void
+static void
 usage(FILE *stream)
 {
   fprintf(stream,
@@ -282,7 +282,7 @@ usage(FILE *stream)
 
 /* Add a new file entry in the array, expanding array if needs be. */
 
-char **
+static char **
 add_file(char **file,
 	 char *new_file,
 	 int *count,
@@ -498,7 +498,7 @@ doinput(FILE *fp)
  |		troff to begin the picture.
  *--------------------------------------------------------------------*/
 
-void
+static void
 initpic()
 {
   int i;

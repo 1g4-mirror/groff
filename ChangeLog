@@ -15,6 +15,10 @@
 	functions as `static`; external linkage is not required.
 	(main): Drop now unnecessary function-local declaration of
 	`operand()`.
+	* src/preproc/grn/hdb.cpp (DBCreateElt):
+	* src/preproc/grn/hgraph.cpp (line, change):
+	* src/preproc/grn/main.cpp (usage, add_file, initpic): Define
+	functions as `static`; external linkage is not required.
 
 	Fixes `-Wmissing-declarations` GCC warning.
 
