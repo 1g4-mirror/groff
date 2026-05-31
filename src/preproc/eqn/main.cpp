@@ -94,7 +94,7 @@ static bool read_line(FILE *fp, string *p)
   return (p->length() > 0);
 }
 
-void do_file(FILE *fp, const char *filename)
+static void do_file(FILE *fp, const char *filename)
 {
   string linebuf;
   string str;
@@ -311,7 +311,7 @@ static char *delim_search(char *ptr, int delim)
   return 0;
 }
 
-void usage(FILE *stream)
+static void usage(FILE *stream)
 {
   fprintf(stream,
     "usage: %s [-CNrR] [-d xy] [-f global-italic-font]"

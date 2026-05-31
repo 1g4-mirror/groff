@@ -396,7 +396,7 @@ struct map entity_table[] = {
   {"DI", "&diams;"},	// ISOpub: diamond suit
 };
 
-const char *special_to_entity(const char *sp)
+static const char *special_to_entity(const char *sp)
 {
   struct map *mp;
   for (mp = entity_table; mp < entity_table + countof(entity_table); mp++) {

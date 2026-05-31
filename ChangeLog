@@ -1,3 +1,18 @@
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[eqn]: Fix code style nit.
+
+	* src/preproc/eqn/main.cpp (do_file, usage):
+	* src/preproc/eqn/lex.cpp (flush_context, show_context)
+	(add_context, add_quoted_context, get_delimited_text)
+	(interpolate_macro_with_args, get_token, do_include)
+	(ignore_definition, do_definition, do_undef, do_gsize, do_gfont)
+	(do_gifont, do_grfont, do_gbfont, do_space, do_ifdef, do_delim)
+	(do_chartype, do_set, do_reset):
+	* src/preproc/eqn/text.cpp (special_to_entity): Define functions
+	as `static`; external linkage is not required.  Also fixes
+	`-Wmissing-declarations` GCC warning.
+
 2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libbib/common.cpp: Preprocessor-include "index.h" to

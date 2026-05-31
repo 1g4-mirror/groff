@@ -645,14 +645,14 @@ const int NCONTEXT = 4;
 string context_ring[NCONTEXT];
 int context_index = 0;
 
-void flush_context()
+static void flush_context()
 {
   for (int i = 0; i < NCONTEXT; i++)
     context_ring[i] = "";
   context_index = 0;
 }
 
-void show_context()
+static void show_context()
 {
   int i = context_index;
   fputs(" context is\n\t", stderr);
@@ -673,19 +673,19 @@ void show_context()
   putc('\n', stderr);
 }
 
-void add_context(const string &s)
+static void add_context(const string &s)
 {
   context_ring[context_index] = s;
   context_index = (context_index + 1) % NCONTEXT;
 }
 
-void add_context(char c)
+static void add_context(char c)
 {
   context_ring[context_index] = c;
   context_index = (context_index + 1) % NCONTEXT;
 }
 
-void add_quoted_context(const string &s)
+static void add_quoted_context(const string &s)
 {
   string &r = context_ring[context_index];
   r = '"';
@@ -710,7 +710,7 @@ void init_lex(const char *str, const char *filename, int lineno)
 }
 
 
-void get_delimited_text()
+static void get_delimited_text()
 {
   char *filename, *last_seen_filename;
   int lineno;
@@ -752,7 +752,7 @@ void get_delimited_text()
   free(last_seen_filename);
 }
 
-void interpolate_macro_with_args(const char *body)
+static void interpolate_macro_with_args(const char *body)
 {
   char *argv[9];
   int argc = 0;
@@ -794,7 +794,7 @@ void interpolate_macro_with_args(const char *body)
 if it is macro. If it's 1, it will looked up to see if it's a token.
 */
 
-int get_token(int lookup_flag = 0)
+static int get_token(int lookup_flag = 0)
 {
   for (;;) {
     int c = get_char();
@@ -938,7 +938,7 @@ int get_token(int lookup_flag = 0)
   }
 }
 
-void do_include()
+static void do_include()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -956,7 +956,7 @@ void do_include()
   current_input = new file_input(fp, filename, current_input);
 }
 
-void ignore_definition()
+static void ignore_definition()
 {
   int t = get_token();
   if (t != TEXT) {
@@ -966,7 +966,7 @@ void ignore_definition()
   get_delimited_text();
 }
 
-void do_definition(int is_simple)
+static void do_definition(int is_simple)
 {
   int t = get_token();
   if (t != TEXT) {
@@ -990,7 +990,7 @@ void do_definition(int is_simple)
   def->is_simple = is_simple;
 }
 
-void do_undef()
+static void do_undef()
 {
   int t = get_token();
   if (t != TEXT) {
@@ -1001,7 +1001,7 @@ void do_undef()
   macro_table.define(token_buffer.contents(), 0);
 }
 
-void do_gsize()
+static void do_gsize()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1013,7 +1013,7 @@ void do_gsize()
     lex_error("invalid size '%1'", token_buffer.contents());
 }
 
-void do_gfont()
+static void do_gfont()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1024,7 +1024,7 @@ void do_gfont()
   set_gifont(token_buffer.contents());
 }
 
-void do_gifont()
+static void do_gifont()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1035,7 +1035,7 @@ void do_gifont()
   set_gifont(token_buffer.contents());
 }
 
-void do_grfont()
+static void do_grfont()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1046,7 +1046,7 @@ void do_grfont()
   set_grfont(token_buffer.contents());
 }
 
-void do_gbfont()
+static void do_gbfont()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1057,7 +1057,7 @@ void do_gbfont()
   set_gbfont(token_buffer.contents());
 }
 
-void do_space()
+static void do_space()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1074,7 +1074,7 @@ void do_space()
     set_space(int(n));
 }
 
-void do_ifdef()
+static void do_ifdef()
 {
   int t = get_token();
   if (t != TEXT) {
@@ -1095,7 +1095,7 @@ void do_ifdef()
 char start_delim_saved = '\0';
 char end_delim_saved = '\0';
 
-void do_delim()
+static void do_delim()
 {
   int c = get_char();
   while (c == ' ' || c == '\n')
@@ -1121,7 +1121,7 @@ void do_delim()
   }
 }
 
-void do_chartype()
+static void do_chartype()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1140,7 +1140,7 @@ void do_chartype()
   set_char_type(type.contents(), strsave(token_buffer.contents()));
 }
 
-void do_set()
+static void do_set()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
@@ -1163,7 +1163,7 @@ void do_set()
   set_param(param.contents(), n);
 }
 
-void do_reset()
+static void do_reset()
 {
   int t = get_token(2);
   if (t != TEXT && t != QUOTED_TEXT) {
