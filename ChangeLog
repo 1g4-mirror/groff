@@ -10,8 +10,12 @@
 	(do_gifont, do_grfont, do_gbfont, do_space, do_ifdef, do_delim)
 	(do_chartype, do_set, do_reset):
 	* src/preproc/eqn/text.cpp (special_to_entity): Define functions
-	as `static`; external linkage is not required.  Also fixes
-	`-Wmissing-declarations` GCC warning.
+	as `static`; external linkage is not required.
+	* src/preproc/eqn/lex.cpp: Add `extern` declarations of
+	`yylex()` and `yyerror()` since--as I understand it--there is
+	still no standard header file that prototypes them.
+
+	Fixes `-Wmissing-declarations` GCC warning.
 
 2026-05-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 

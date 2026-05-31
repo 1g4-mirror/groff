@@ -1175,6 +1175,8 @@ static void do_reset()
   reset_param(param.contents());
 }
 
+extern int yylex(void);
+
 int yylex()
 {
   for (;;) {
@@ -1261,6 +1263,8 @@ void lex_error(const char *message,
     error_with_file_and_line(filename, lineno, message, arg1, arg2,
 			     arg3);
 }
+
+extern void yyerror(const char *);
 
 void yyerror(const char *s)
 {
