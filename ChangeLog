@@ -1,5 +1,13 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/grn/main.cpp: Rationalize header file inclusions.
+	Arrange inclusions of "libgroff" header files before grn-
+	specific one.  Within such inclusions, sort header file names in
+	alphabetical order (where the header file dependency graph
+	permits).
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grn]: Rearrange code.
 
 	* src/preproc/grn/main.cpp (operand): Relocate definition to

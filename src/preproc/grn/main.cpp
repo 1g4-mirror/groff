@@ -89,15 +89,15 @@
 #include <string.h> // strchr(), strcmp(), strcpy(), strerror(),
 		    // strlen()
 
+#include "defs.h"
 #include "device.h"
-#include "font.h"
-#include "gprint.h"
-#include "searchpath.h"
-#include "macropath.h"
-
 #include "errarg.h"
 #include "error.h"
-#include "defs.h"
+#include "font.h"
+#include "searchpath.h" // prerequisite of "macropath.h"
+#include "macropath.h"
+
+#include "gprint.h"
 
 extern "C" const char *Version_string;
 
