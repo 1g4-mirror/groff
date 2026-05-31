@@ -1865,7 +1865,7 @@ Specify the assumed character encoding of the input.
 .
 .I groff
 passes its value as an argument to
-.IR preconv (@MAN1EXT@)
+.MR preconv @MAN1EXT@
 preprocessor's
 .B \-e
 option.
