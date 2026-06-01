@@ -60,11 +60,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 
 /*
- *  word - initialise a word and set next to NULL
+ *  word - initialise a word and set next to a null pointer
  */
 
 word::word (const char *w, int n)
-  : next(0)
+  : next(0 /* nullptr */)
 {
   s = new char[n+1];
   strncpy(s, w, n);
@@ -85,7 +85,7 @@ word::~word ()
  */
 
 word_list::word_list ()
-  : length(0), head(0), tail(0)
+  : length(0), head(0 /* nullptr */), tail(0 /* nullptr */)
 {
 }
 
@@ -99,14 +99,14 @@ int word_list::flush (FILE *f)
   word *t;
   int   len=length;
 
-  while (head != 0) {
+  while (head != 0 /* nullptr */) {
     t = head;
     head = head->next;
     FPUTS(t->s, f);
     delete t;
   }
-  head   = 0;
-  tail   = 0;
+  head   = 0 /* nullptr */;
+  tail   = 0 /* nullptr */;
   length = 0;
 #if defined(DEBUGGING)
   fflush(f);   // just for testing
@@ -120,7 +120,7 @@ int word_list::flush (FILE *f)
 
 void word_list::add_word (const char *s, int n)
 {
-  if (head == 0) {
+  if (head == 0 /* nullptr */) {
     head = new word(s, n);
     tail = head;
   } else {

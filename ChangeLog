@@ -1,5 +1,14 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grohtml]: Fix code style nit.
+
+	* src/devices/grohtml/output.cpp (word::word)
+	(word_list::word_list)
+	(word_list::add_list): Do it.  Use idiomatic C++98 null pointer
+	literal instead of C's `NULL`.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml]: Be more fastidious with heap-allocated memory.
 
 	* src/devices/grohtml/html-table.cpp: Use ISO C++98 exceptions
