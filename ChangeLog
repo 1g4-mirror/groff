@@ -1,5 +1,31 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grohtml]: Fix code style nit.
+
+	* src/devices/grohtml/post-html.cpp
+	(char_block::~char_block)
+	(text_glob::~text_glob)
+	(text_glob::remember_table)
+	(element_list::~element_list)
+	(list::sub_move_right)
+	(replace_negate_str)
+	(replace_str)
+	(html_printer::lookahead_for_tables)
+	(html_printer::draw): Simplify.  Don't wrap `delete` operations
+	with null pointer checks.
+
+	It is not necessary to make conditional the deletion (or array
+	deletion) of a null pointer.  "If the _delete-expression_ calls
+	the implementation deallocation function (3.7.3.2), and if the
+	operand of the delete expression is not the null pointer
+	constant, the deallocation function will deallocate the storage
+	referenced by the pointer thus rendering the pointer invalid"
+	{ISO/IEC 14882-1998, §5.3.5, paragraph 4}.  Or as Stroustrup
+	puts it, "Applying _delete_ to zero has no effect." (_The C++
+	Programming Language, Special Edition_, p. 128).
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp: Handle `NDEBUG` builds
 	better.
 	(text_glob::get_arg)

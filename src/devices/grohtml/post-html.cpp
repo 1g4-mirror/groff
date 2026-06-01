@@ -421,8 +421,7 @@ char_block::char_block(int length)
 
 char_block::~char_block()
 {
-  if (buffer != 0 /* nullptr */)
-    delete[] buffer;
+  delete[] buffer;
 }
 
 class char_buffer {
@@ -618,8 +617,7 @@ text_glob::text_glob ()
 
 text_glob::~text_glob ()
 {
-  if (tab != 0 /* nullptr */)
-    delete tab;
+  delete tab;
 }
 
 /*
@@ -1025,8 +1023,7 @@ int text_glob::get_tab_args (char *align)
 
 void text_glob::remember_table (html_table *t)
 {
-  if (tab != 0 /* nullptr */)
-    delete tab;
+  delete tab;
   tab = t;
 }
 
@@ -1090,8 +1087,7 @@ element_list::element_list (text_glob *in,
 
 element_list::~element_list ()
 {
-  if (datum != 0 /* nullptr */)
-    delete datum;
+  delete datum;
 }
 
 class list {
@@ -1243,8 +1239,7 @@ void list::sub_move_right (void)
 
   if (head == tail) {
     head = 0;
-    if (tail != 0 /* nullptr */)
-      delete tail;
+    delete tail;
 
     tail = 0 /* nullptr */;
     ptr  = 0 /* nullptr */;
@@ -2020,8 +2015,7 @@ void assert_state::close (const char *c)
 
 static const char *replace_negate_str (const char *before, char *after)
 {
-  if (before != 0 /* nullptr */)
-    delete[] before;
+  delete[] before;
 
   assert(after != 0 /* nullptr */);
   if (0 /* nullptr */ == after)
@@ -2045,8 +2039,7 @@ static const char *replace_negate_str (const char *before, char *after)
 
 static const char *replace_str (const char *before, const char *after)
 {
-  if (before != 0 /* nullptr */)
-    delete[] before;
+  delete[] before;
   return after;
 }
 
@@ -4042,10 +4035,8 @@ void html_printer::lookahead_for_tables (void)
       g = page_contents->glyphs.move_right_get_data();
       handle_state_assertion(g);
       if (page_contents->glyphs.is_equal_to_head()) {
-	if (tbl != 0 /* nullptr */) {
-	  delete tbl;
-	  tbl = 0 /* nullptr */;
-	}
+	delete tbl;
+	tbl = 0 /* nullptr */;
 	return;
       }
 
@@ -4204,10 +4195,8 @@ void html_printer::lookahead_for_tables (void)
       page_contents->insert_tag(string("*** LAST ***"));
     }
   }
-  if (tbl != 0 /* nullptr */) {
-    delete tbl;
-    tbl = 0 /* nullptr */;
-  }
+  delete tbl;
+  tbl = 0 /* nullptr */;
 
   // and reset the registers
   pageoffset = old_pageoffset;
@@ -4690,8 +4679,7 @@ void html_printer::draw(int code, int *p, int np,
     break;
   case 'F':
     // fill with color env->fill
-    if (background != 0 /* nullptr */)
-      delete background;
+    delete background;
     background = new color;
     *background = *env->fill;
     break;
