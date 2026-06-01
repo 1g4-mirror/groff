@@ -30,10 +30,14 @@ with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stdlib.h> // atoi()
 
+#include <new> // std::bad_alloc
+
 // libgroff
 #include "symbol.h" // prerequisite of color.h
 #include "color.h"
 #include "cset.h" // csspace()
+#include "errarg.h" // prerequisite of error.h
+#include "error.h" // fatal()
 #include "stringclass.h"
 
 // grohtml
@@ -159,11 +163,18 @@ void tabs::init (const char *s)
     // move over tab position
     while ((*s != '\0') && !csspace(*s))
       s++;
-    if (last == NULL) {
-      tab = new tab_position;
+    tab_position *newtab = 0 /* nullptr */;
+    try {
+      newtab = new tab_position;
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate storage for tab_position object");
+    }
+    if (last == 0 /* nullptr */) {
+      tab = newtab;
       last = tab;
     } else {
-      last->next = new tab_position;
+      last->next = newtab;
       last = last->next;
     }
     last->alignment = align;
@@ -252,7 +263,12 @@ html_table::html_table (simple_output *op, int linelen)
   : out(op), columns(0 /* nullptr */), linelength(linelen),
     last_col(0 /* nullptr */), start_space(FALSE)
 {
-  tab_stops = new tabs();
+  try {
+    tab_stops = new tabs();
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for tab_stops object");
+  }
 }
 
 html_table::~html_table ()
@@ -645,7 +661,12 @@ int html_table::insert_column (int coln, int hstart, int hend, char align)
       (l->next->left < hend))
     return FALSE;  // new column bumps into next one
 
-  n = new cols;
+  try {
+    n = new cols;
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for cols object");
+  }
   if (l == 0 /* nullptr */) {
     n->next = columns;
     columns = n;
@@ -801,7 +822,12 @@ void html_table::dump_table (void)
 
 html_indent::html_indent (simple_output *op, int ind, int pageoffset, int linelength)
 {
-  table = new html_table(op, linelength);
+  try {
+    table = new html_table(op, linelength);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for html_table object");
+  }
 
   table->add_column(1, ind+pageoffset, linelength, 'L');
   table->add_indent(pageoffset);

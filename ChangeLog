@@ -1,3 +1,22 @@
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grohtml]: Be more fastidious with heap-allocated memory.
+
+	* src/devices/grohtml/html-table.cpp: Use ISO C++98 exceptions
+	to handle heap storage allocation failures.  Preprocessor-
+	include C++ "<new>" header file and project-local "errarg.h" and
+	"error.h" header files.
+	(tabs::init): Slightly refactor.  Introduce new local variable
+	`newtab` (a pointer to `tab_position`, lifting 2 identical
+	attempted memory allocations out of both branches of an if/else.
+	(tabs::init):
+	(html_table::html_table):
+	(html_table::insert_column):
+	(html_indent::html_indent): Catch `std::bad_alloc` exception and
+	`fatal()` out with an attempt to describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
 2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp
