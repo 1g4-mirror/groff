@@ -39,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
 #include <stack>
 #include <vector>
 
@@ -267,11 +268,20 @@ void files::move_next (void)
 void files::add_new_file (FILE *f)
 {
   assert(f != 0 /* nullptr */);
+  if (0 /* nullptr */ == f)
+    return;
+  file *new_file = 0 /* nullptr */;
+  try {
+    new_file = new file(f);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for file object");
+  }
   if (0 /* nullptr */ == head) {
-    head = new file(f);
+    head = new_file;
     tail = head;
   } else {
-    tail->next = new file(f);
+    tail->next = new_file;
     tail       = tail->next;
   }
   ptr = tail;
@@ -589,11 +599,17 @@ void text_glob::text_glob_html (style *s, char *str, int length,
 				int min_vertical , int min_horizontal,
 				int max_vertical , int max_horizontal)
 {
-  text_glob *g = new text_glob(s, str, length,
-			       min_vertical, min_horizontal,
-			       max_vertical, max_horizontal,
-			       FALSE, FALSE, FALSE, FALSE, 0 /* nullptr */);
-  // TODO: penultimate argument above is not really a Boolean
+  text_glob *g = 0 /* nullptr */;
+  try {
+    g = new text_glob(s, str, length,
+		      min_vertical, min_horizontal,
+		      max_vertical, max_horizontal,
+		      FALSE, FALSE, FALSE, FALSE, 0);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for text_glob object"
+	  " of length %1", length);
+  }
   *this = *g;
   delete g;
 }
@@ -610,11 +626,17 @@ void text_glob::text_glob_special (style *s, char *str, int length,
 				   int min_vertical, int min_horizontal,
 				   int max_vertical, int max_horizontal)
 {
-  text_glob *g = new text_glob(s, str, length,
-			       min_vertical, min_horizontal,
-			       max_vertical, max_horizontal,
-			       FALSE, FALSE, TRUE, FALSE, 0 /* nullptr */);
-  // TODO: penultimate argument above is not really a Boolean
+  text_glob *g = 0 /* nullptr */;
+  try {
+    g = new text_glob(s, str, length,
+		      min_vertical, min_horizontal,
+		      max_vertical, max_horizontal,
+		      FALSE, FALSE, TRUE, FALSE, 0);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for special text_glob object"
+	  " of length %1", length);
+  }
   *this = *g;
   delete g;
 }
@@ -628,11 +650,16 @@ void text_glob::text_glob_line (style *s,
 				int max_vertical, int max_horizontal,
 				int thickness_value)
 {
-  text_glob *g = new text_glob(s, "", 0,
-			       min_vertical, min_horizontal,
-			       max_vertical, max_horizontal,
-			       FALSE, FALSE, FALSE, TRUE,
-			       thickness_value);
+  text_glob *g = 0 /* nullptr */;
+  try {
+    g = new text_glob(s, "", 0,
+		      min_vertical, min_horizontal,
+		      max_vertical, max_horizontal,
+		      FALSE, FALSE, FALSE, TRUE, thickness_value);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for line text_glob object");
+  }
   *this = *g;
   delete g;
 }
@@ -667,10 +694,17 @@ void text_glob::text_glob_auto_image(style *s, char *str, int length,
 				     int max_vertical,
 				     int max_horizontal)
 {
-  text_glob *g = new text_glob(s, str, length,
-			       min_vertical, min_horizontal,
-			       max_vertical, max_horizontal,
-			       TRUE, TRUE, FALSE, FALSE, 0 /* nullptr */);
+  text_glob *g = 0 /* nullptr */;
+  try {
+    g = new text_glob(s, str, length,
+				 min_vertical, min_horizontal,
+				 max_vertical, max_horizontal,
+				 TRUE, TRUE, FALSE, FALSE, 0);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for auto_image text_glob object"
+	  " of length %1", length);
+  }
   *this = *g;
   delete g;
 }
@@ -683,10 +717,17 @@ void text_glob::text_glob_tag (style *s, char *str, int length,
 			       int min_vertical, int min_horizontal,
 			       int max_vertical, int max_horizontal)
 {
-  text_glob *g = new text_glob(s, str, length,
-			       min_vertical, min_horizontal,
-			       max_vertical, max_horizontal,
-			       TRUE, FALSE, FALSE, FALSE, 0 /* nullptr */);
+  text_glob *g = 0 /* nullptr */;
+  try {
+    g = new text_glob(s, str, length,
+		      min_vertical, min_horizontal,
+		      max_vertical, max_horizontal,
+		      TRUE, FALSE, FALSE, FALSE, 0);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for tag text_glob object"
+	  " of length %1", length);
+  }
   *this = *g;
   delete g;
 }
@@ -1144,9 +1185,15 @@ void list::add (text_glob *in, int line_number,
 {
   // create a new list element with datum and position fields
   // initialized
-  element_list *t    = new element_list(in, line_number,
-					min_vertical, min_horizontal,
-					max_vertical, max_horizontal);
+  element_list *t = 0 /* nullptr */;
+  try {
+    t = new element_list(in, line_number,
+			 min_vertical, min_horizontal,
+			 max_vertical, max_horizontal);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for element_list object");
+  }
   element_list *last;
 
 #if 0
@@ -1330,9 +1377,15 @@ void list::insert (text_glob *in)
     if (0 /* nullptr */ == ptr)
       ptr = head;
 
-    element_list *t = new element_list(in, ptr->lineno,
-				       ptr->minv, ptr->minh,
-				       ptr->maxv, ptr->maxh);
+    element_list *t = 0 /* nullptr */;
+    try {
+      t = new element_list(in, ptr->lineno,
+			   ptr->minv, ptr->minh,
+			   ptr->maxv, ptr->maxh);
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate storage for element_list object");
+    }
     if (ptr == tail)
       tail = t;
     ptr->right->left = t;
@@ -1411,7 +1464,13 @@ page::page()
 void page::insert_tag (const string &str)
 {
   if (str.length() > 0) {
-    text_glob *g=new text_glob();
+    text_glob *g = 0 /* nullptr */;
+    try {
+      g = new text_glob();
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate storage for text_glob object");
+    }
     text_glob *f=glyphs.get_data();
     g->text_glob_tag(&f->text_style, buffer.add_string(str),
 		     str.length(), f->minv, f->minh, f->maxv, f->maxh);
@@ -1429,7 +1488,13 @@ void page::add (style *s, const string &str,
 		int max_vertical, int max_horizontal)
 {
   if (str.length() > 0) {
-    text_glob *g=new text_glob();
+    text_glob *g = 0 /* nullptr */;
+    try {
+      g = new text_glob();
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate storage for text_glob object");
+    }
     g->text_glob_html(s, buffer.add_string(str), str.length(),
 		      min_vertical, min_horizontal,
 		      max_vertical, max_horizontal);
@@ -1448,20 +1513,23 @@ void page::add_tag (style *s, const string &str,
 		    int max_vertical, int max_horizontal)
 {
   if (str.length() > 0) {
-    text_glob *g;
-
-    if (strncmp((str+'\0').contents(), "devtag:.auto-image",
-		strlen("devtag:.auto-image")) == 0) {
+    text_glob *g = 0 /* nullptr */;
+    try {
       g = new text_glob();
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate storage for text_glob object");
+    }
+    if (strncmp((str+'\0').contents(), "devtag:.auto-image",
+		strlen("devtag:.auto-image")) == 0)
       g->text_glob_auto_image(s, buffer.add_string(str), str.length(),
 			      min_vertical, min_horizontal,
 			      max_vertical, max_horizontal);
-    } else {
-      g = new text_glob();
+    else
       g->text_glob_tag(s, buffer.add_string(str), str.length(),
 		       min_vertical, min_horizontal,
 		       max_vertical, max_horizontal);
-    }
+
     glyphs.add(g, line_number, min_vertical, min_horizontal,
 			       max_vertical, max_horizontal);
   }
@@ -1477,7 +1545,13 @@ void page::add_line (style *s,
 		     int thickness)
 {
   if (y_1 == y_2) {
-    text_glob *g = new text_glob();
+    text_glob *g = 0 /* nullptr */;
+    try {
+      g = new text_glob();
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate storage for text_glob object");
+    }
     g->text_glob_line(s,
 		      min(y_1, y_2), min(x_1, x_2),
 		      max(y_1, y_2), max(x_1, x_2),
@@ -1620,7 +1694,13 @@ public:
 
 html_font *html_font::load_html_font(const char *s)
 {
-  html_font *f = new html_font(s);
+  html_font *f = 0 /* nullptr */;
+  try {
+    f = new html_font(s);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for html_font object");
+  }
   if (!f->load()) {
     delete f;
     return 0 /* nullptr */;
@@ -1894,7 +1974,12 @@ void assert_state::add (assert_pos **h,
     compare(t, v, f, l);
   else {
     if (0 /* nullptr */ == t) {
-      t = new assert_pos;
+      try {
+	t = new assert_pos;
+      }
+      catch (const std::bad_alloc &exc) {
+	fatal("cannot allocate storage for assert_pos object");
+      }
       t->next = *h;
       (*h) = t;
     }
@@ -2596,7 +2681,13 @@ static int exists (const char *filename)
 static string &generate_img_src (const char *filename)
 {
   assert(filename != 0 /* nullptr */);
-  string *s = new string("");
+  string *s = 0 /* nullptr */;
+  try {
+    s = new string("");
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for string object");
+  }
 
   while ((filename != 0 /* nullptr */) && (' ' == filename[0]))
     filename++;
@@ -2760,7 +2851,7 @@ void html_printer::write_xhtml_anchor (text_glob *h)
 void html_printer::write_header (void)
 {
   if (! header.header_buffer.empty()) {
-    text_glob *a = 0;
+    text_glob *a = 0 /* nullptr */;
     // TODO: boolify
     int space = current_paragraph->retrieve_para_space() || seen_space;
 
@@ -2775,8 +2866,12 @@ void html_printer::write_header (void)
       // now we save the header so we can issue a list of links
       header.no_of_headings++;
       style st;
-
-      a = new text_glob();
+      try {
+	a = new text_glob();
+      }
+      catch (const std::bad_alloc &exc) {
+	fatal("cannot allocate storage for text_glob object");
+      }
       a->text_glob_html(&st,
 			header.headings
 			  .add_string(header.header_buffer.contents()),
@@ -3978,12 +4073,18 @@ void html_printer::lookahead_for_tables (void)
   int         ncol           = 0;
   int         colmin         = 0;		// pacify compiler
   int         colmax         = 0;		// pacify compiler
-  html_table *tbl            = new html_table(&html, -1);
+  html_table *tbl            = 0 /* nullptr */;
   const char *tab_defs       = 0 /* nullptr */;
   char        align          = 'L';
   int         nf             = FALSE;
   int         old_pageoffset = pageoffset;
 
+  try {
+    tbl = new html_table(&html, -1);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for html_table object");
+  }
   remove_courier_tabs();
   page_contents->dump_page();
   insert_tab0_foreach_tab();
@@ -4026,7 +4127,12 @@ void html_printer::lookahead_for_tables (void)
 	  page_contents->glyphs.move_left();
 	  insert_tab_te();
 	  start_of_table->remember_table(tbl);
-	  tbl = new html_table(&html, -1);
+	  try {
+	    tbl = new html_table(&html, -1);
+	  }
+	  catch (const std::bad_alloc &exc) {
+	    fatal("cannot allocate storage for html_table object");
+	  }
 	  page_contents->insert_tag(string("*** TAB -> COL ***"));
 	  if (tab_defs != 0 /* nullptr */)
 	    tbl->tab_stops->init(tab_defs);
@@ -4054,7 +4160,12 @@ void html_printer::lookahead_for_tables (void)
 	  page_contents->glyphs.move_left();
 	  insert_tab_te();
 	  start_of_table->remember_table(tbl);
-	  tbl = new html_table(&html, -1);
+	  try {
+	    tbl = new html_table(&html, -1);
+	  }
+	  catch (const std::bad_alloc &exc) {
+	    fatal("cannot allocate storage for html_table object");
+	  }
 	  page_contents->insert_tag(string("*** COL -> TAB ***"));
 	  start_of_table = 0 /* nullptr */;
 	  last = 0 /* nullptr */;
@@ -4076,7 +4187,12 @@ void html_printer::lookahead_for_tables (void)
 	  && (start_of_table != 0 /* nullptr */)) {
 	add_table_end("*** CE ***");
 	start_of_table->remember_table(tbl);
-	tbl = new html_table(&html, -1);
+	try {
+	  tbl = new html_table(&html, -1);
+	}
+	catch (const std::bad_alloc &exc) {
+	  fatal("cannot allocate storage for html_table object");
+	}
 	start_of_table = 0 /* nullptr */;
 	last = 0 /* nullptr */;
       } else if (g->is_ta()) {
@@ -4087,7 +4203,12 @@ void html_printer::lookahead_for_tables (void)
 	  if (start_of_table != 0 /* nullptr */) {
 	    add_table_end("*** TABS ***");
 	    start_of_table->remember_table(tbl);
-	    tbl = new html_table(&html, -1);
+	    try {
+	      tbl = new html_table(&html, -1);
+	    }
+	    catch (const std::bad_alloc &exc) {
+	      fatal("cannot allocate storage for html_table object");
+	    }
 	    start_of_table = 0 /* nullptr */;
 	    type_of_col = none_tag;
 	    last = 0 /* nullptr */;
@@ -4106,7 +4227,12 @@ void html_printer::lookahead_for_tables (void)
 	    add_table_end("*** CROSSED COLS ***");
 
 	  start_of_table->remember_table(tbl);
-	  tbl = new html_table(&html, -1);
+	  try {
+	    tbl = new html_table(&html, -1);
+	  }
+	  catch (const std::bad_alloc &exc) {
+	    fatal("cannot allocate storage for html_table object");
+	  }
 	  start_of_table = 0 /* nullptr */;
 	  type_of_col = none_tag;
 	  last = 0 /* nullptr */;
@@ -4182,7 +4308,12 @@ void html_printer::flush_page (void)
   fprintf(stderr, "\n\n*** flushed page ***\n\n");
   html.simple_comment("new page called");
 #endif
-  page_contents = new page;
+  try {
+    page_contents = new page;
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for page object");
+  }
 }
 
 /*
@@ -4641,7 +4772,12 @@ void html_printer::draw(int code, int *p, int np,
   case 'F':
     // fill with color env->fill
     delete background;
-    background = new color;
+    try {
+      background = new color;
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate storage for color object");
+    }
     *background = *env->fill;
     break;
 
@@ -4718,8 +4854,12 @@ html_printer::html_printer()
   linelength        = font::res*13/2;
   if (0 == paper_length)
     paper_length    = 11*font::res;
-
-  page_contents = new page();
+  try {
+    page_contents = new page;
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for page object");
+  }
 }
 
 /*
@@ -5297,7 +5437,12 @@ void html_printer::begin_page(int n)
   output_hpos            = -1;
   output_vpos            = -1;
   output_vpos_max        = -1;
-  current_paragraph      = new html_text(&html, dialect);
+  try {
+    current_paragraph = new html_text(&html, dialect);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate storage for text object");
+  }
   do_indent(get_troff_indent(), pageoffset, linelength);
   current_paragraph->do_para("", FALSE);
 }
@@ -5651,12 +5796,18 @@ static char *get_str (const char *s, char **n)
   if ((0 /* nullptr */ == s) || (0 /* nullptr */ == n))
     return 0 /* nullptr */;
   int i = 0;
-  char *v;
+  char *v = 0 /* nullptr */;
 
   while ((s[i] != '\0') && (s[i] != ',') && (s[i] != ']'))
     i++;
   if (i>0) {
-    v = new char[i+1];
+    size_t amount = i + 1;
+    try {
+      v = new char[amount];
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate %1 bytes for char array", amount);
+    }
     memcpy(v, s, i+1);
     v[i] = '\0';
     if (',' == s[i])
@@ -5952,7 +6103,12 @@ int main(int argc, char **argv)
       break;
     case 'b':
       // set background color to white
-      default_background = new color;
+      try {
+	default_background = new color;
+      }
+      catch (const std::bad_alloc &exc) {
+	fatal("cannot allocate storage for color object");
+      }
       default_background->set_gray(color::MAX_COLOR_VAL);
       break;
     case 'C':

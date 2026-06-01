@@ -1,3 +1,38 @@
+2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grohtml]: Be more fastidious with heap-allocated memory.
+
+	* src/devices/grohtml/post-html.cpp: Use ISO C++98 exceptions to
+	handle heap storage allocation failures.  Preprocessor-include
+	C++ "<new>" header file.  Declare and initialize variables
+	outside of `try`/`catch` blocks.  Initialize such variables with
+	null pointers where appropriate.
+	(files::add_new_file)
+	(text_glob::text_glob_html)
+	(text_glob::text_glob_special)
+	(text_glob::text_glob_line)
+	(text_glob::text_glob_auto_image)
+	(text_glob::text_glob_tag)
+	(list:add)
+	(list:insert)
+	(page::page)
+	(page::add)
+	(page::add_tag)
+	(page::add_line)
+	(html_font::load_html_font)
+	(assert_state::add)
+	(generate_img_src)
+	(html_printer::write_header)
+	(html_printer::lookahead_for_tables)
+	(html_printer::flush_page)
+	(html_printer::draw)
+	(html_printer::html_printer)
+	(html_printer::begin_page)
+	(get_str)
+	(main): Do it.
+
+	Continues the long process of fixing Savannah #68192.
+
 2026-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp: Fix memory leak.
