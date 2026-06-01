@@ -1,5 +1,11 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp (html_printer::do_job_name):
+	Add paranoia.  Add assert(3)ion that our (C string) argument is
+	not a null pointer.  For `NDEBUG` builds, return early if it is.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp (generate_img_src): Add
 	paranoia.  Ensure we don't dereference a null `filename`
 	pointer.  (Strictly, the `static` function `exists()` handles

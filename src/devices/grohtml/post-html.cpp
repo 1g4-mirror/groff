@@ -3306,6 +3306,9 @@ void html_printer::insert_split_file (void)
 
 void html_printer::do_job_name (char *name)
 {
+  assert(name != 0 /* nullptr */);
+  if (0 /* nullptr */ == name)
+    return;
   if (! multiple_files) {
     multiple_files = TRUE;
     while (name != 0 /* nullptr */ && (*name != '\0') && (' ' == *name))
