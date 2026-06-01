@@ -52,7 +52,7 @@ extern html_dialect dialect;
 
 
 tabs::tabs ()
-  : tab(NULL)
+  : tab(0 /* nullptr */)
 {
 }
 
@@ -62,7 +62,7 @@ tabs::~tabs ()
 }
 
 /*
- *  delete_list - frees the tab list and sets tab to NULL.
+ *  delete_list - frees the tab list and sets tab to a null pointer.
  */
 
 void tabs::delete_list (void)
@@ -70,12 +70,12 @@ void tabs::delete_list (void)
   tab_position *p = tab;
   tab_position *q;
 
-  while (p != NULL) {
+  while (p != 0 /* nullptr */) {
     q = p;
     p = p->next;
     delete q;
   }
-  tab = NULL;
+  tab = 0 /* nullptr */;
 }
 
 void tabs::clear (void)
@@ -96,14 +96,14 @@ int tabs::compatible (const char *s)
   int  total=0;
   tab_position *last = tab;
 
-  if (last == NULL)
+  if (last == 0 /* nullptr */)
     return FALSE;  // no tab stops defined
 
   // move over tag name
   while ((*s != '\0') && !csspace(*s))
     s++;
 
-  while (*s != '\0' && last != NULL) {
+  while (*s != '\0' && last != 0 /* nullptr */) {
     // move over whitespace
     while ((*s != '\0') && csspace(*s))
       s++;
@@ -135,7 +135,7 @@ void tabs::init (const char *s)
 {
   char align;
   int  total=0;
-  tab_position *last = NULL;
+  tab_position *last = 0 /* nullptr */;
 
   clear(); // remove any tab stops
 
@@ -168,7 +168,7 @@ void tabs::init (const char *s)
     }
     last->alignment = align;
     last->position = total;
-    last->next = NULL;
+    last->next = 0 /* nullptr */;
   }
 }
 
@@ -178,7 +178,7 @@ void tabs::init (const char *s)
 
 void tabs::check_init (const char *s)
 {
-  if (tab == NULL)
+  if (tab == 0 /* nullptr */)
     init(s);
 }
 
@@ -191,7 +191,7 @@ int tabs::find_tab (int pos)
   tab_position *p;
   int i=0;
 
-  for (p = tab; p != NULL; p = p->next) {
+  for (p = tab; p != 0 /* nullptr */; p = p->next) {
     i++;
     if (p->position == pos)
       return i;
@@ -208,7 +208,7 @@ int tabs::get_tab_pos (int n)
   tab_position *p;
 
   n--;
-  for (p = tab; (p != NULL) && (n>0); p = p->next) {
+  for (p = tab; (p != 0 /* nullptr */) && (n>0); p = p->next) {
     n--;
     if (n == 0)
       return p->position;
@@ -221,7 +221,7 @@ char tabs::get_tab_align (int n)
   tab_position *p;
 
   n--;
-  for (p = tab; (p != NULL) && (n>0); p = p->next) {
+  for (p = tab; (p != 0 /* nullptr */) && (n>0); p = p->next) {
     n--;
     if (n == 0)
       return p->alignment;
@@ -238,7 +238,7 @@ void tabs::dump_tabs (void)
   int i=1;
   tab_position *p;
 
-  for (p = tab; p != NULL; p = p->next) {
+  for (p = tab; p != 0 /* nullptr */; p = p->next) {
     printf("tab %d is %d\n", i, p->position);
     i++;
   }
@@ -249,7 +249,8 @@ void tabs::dump_tabs (void)
  */
 
 html_table::html_table (simple_output *op, int linelen)
-  : out(op), columns(NULL), linelength(linelen), last_col(NULL), start_space(FALSE)
+  : out(op), columns(0 /* nullptr */), linelength(linelen),
+    last_col(0 /* nullptr */), start_space(FALSE)
 {
   tab_stops = new tabs();
 }
@@ -257,11 +258,11 @@ html_table::html_table (simple_output *op, int linelen)
 html_table::~html_table ()
 {
   cols *c;
-  if (tab_stops != NULL)
+  if (tab_stops != 0 /* nullptr */)
     delete tab_stops;
 
   c = columns;
-  while (columns != NULL) {
+  while (columns != 0 /* nullptr */) {
     columns = columns->next;
     delete c;
     c = columns;
@@ -276,7 +277,7 @@ void html_table::remove_cols (cols *c)
 {
   cols *p;
 
-  while (c != NULL) {
+  while (c != 0 /* nullptr */) {
     p = c;
     c = c->next;
     delete p;
@@ -291,20 +292,20 @@ void html_table::remove_cols (cols *c)
 
 void html_table::set_linelength (int linelen)
 {
-  cols *p = NULL;
+  cols *p = 0 /* nullptr */;
   cols *c;
   linelength = linelen;
 
-  for (c = columns; c != NULL; c = c->next) {
+  for (c = columns; c != 0 /* nullptr */; c = c->next) {
     if (c->right > linelength) {
       c->right = linelength;
       remove_cols(c->next);
-      c->next = NULL;
+      c->next = 0 /* nullptr */;
       return;
     }
     p = c;
   }
-  if (p != NULL && p->right > 0 && linelength > p->right)
+  if (p != 0 /* nullptr */ && p->right > 0 && linelength > p->right)
     add_column(p->no+1, p->right, linelength, 'L');
 }
 
@@ -314,7 +315,7 @@ void html_table::set_linelength (int linelen)
 
 int html_table::get_effective_linelength (void)
 {
-  if (columns != NULL)
+  if (columns != 0 /* nullptr */)
     return linelength - columns->left;
   else
     return linelength;
@@ -326,7 +327,7 @@ int html_table::get_effective_linelength (void)
 
 void html_table::add_indent (int indent)
 {
-  if (columns != NULL && columns->left > indent)
+  if (columns != 0 /* nullptr */ && columns->left > indent)
     add_column(0, indent, columns->left, 'L');
 }
 
@@ -336,12 +337,12 @@ void html_table::add_indent (int indent)
 
 void html_table::emit_table_header (int space)
 {
-  if (columns == NULL)
+  if (columns == 0 /* nullptr */)
     return;
 
   // dump_table();
 
-  last_col = NULL;
+  last_col = 0 /* nullptr */;
   if (linelength > 0) {
     out->nl();
     out->nl();
@@ -369,9 +370,9 @@ void html_table::emit_table_header (int space)
 
 int html_table::get_right (cols *c)
 {
-  if (c != NULL && c->right > 0)
+  if (c != 0 /* nullptr */ && c->right > 0)
     return c->right;
-  if (c->next != NULL)
+  if (c->next != 0 /* nullptr */)
     return c->left;
   return linelength;
 }
@@ -398,8 +399,8 @@ void html_table::emit_colspan (void)
   int   width = 0;
 
   out->put_string("<colgroup>");
-  while (c != NULL) {
-    if (b != NULL && b != c && is_gap(b))
+  while (c != 0 /* nullptr */) {
+    if (b != 0 /* nullptr */ && b != c && is_gap(b))
       /*
        *   blank column for gap
        */
@@ -449,13 +450,13 @@ void html_table::emit_td (int percentage, const char *s)
       out->put_string("<td width=\"")
 	.put_number(percentage)
 	.put_string("%\"");
-      if (s != NULL)
+      if (s != 0 /* nullptr */)
 	out->put_string(s);
       out->nl();
     }
     else {
       out->put_string("<td");
-      if (s != NULL)
+      if (s != 0 /* nullptr */)
 	out->put_string(s);
       out->nl();
     }
@@ -473,26 +474,26 @@ void html_table::emit_col (int n)
   int   width = 0;
 
   // must be a different row
-  if (last_col != NULL && n <= last_col->no)
+  if (last_col != 0 /* nullptr */ && n <= last_col->no)
     emit_new_row();
 
-  while (c != NULL && c->no < n)
+  while (c != 0 /* nullptr */ && c->no < n)
     c = c->next;
 
   // can we find column, n?
-  if (c != NULL && c->no == n) {
+  if (c != 0 /* nullptr */ && c->no == n) {
     // shutdown previous column
-    if (last_col != NULL)
+    if (last_col != 0 /* nullptr */)
       out->put_string("</td>").nl();
 
     // find previous column
-    if (last_col == NULL)
+    if (last_col == 0 /* nullptr */)
       b = columns;
     else
       b = last_col;
 
     // have we a gap?
-    if (last_col != NULL) {
+    if (last_col != 0 /* nullptr */) {
       emit_td(is_gap(b), "></td>");
       b = b->next;
     }
@@ -538,16 +539,16 @@ void html_table::finish_row (void)
   int n = 0;
   cols *c;
 
-  if (last_col != NULL) {
-    for (c = last_col->next; c != NULL; c = c->next)
+  if (last_col != 0 /* nullptr */) {
+    for (c = last_col->next; c != 0 /* nullptr */; c = c->next)
       n = c->no;
 
     if (n > 0)
       emit_col(n);
 #if 1
-    if (last_col != NULL) {
+    if (last_col != 0 /* nullptr */) {
       out->put_string("</td>");
-      last_col = NULL;
+      last_col = 0 /* nullptr */;
     }
 #endif
     out->put_string("</tr>").nl();
@@ -570,7 +571,7 @@ void html_table::emit_new_row (void)
   }
   out->put_string(">").nl();
   start_space = FALSE;
-  last_col = NULL;
+  last_col = 0 /* nullptr */;
 }
 
 void html_table::emit_finish_table (void)
@@ -588,7 +589,7 @@ int html_table::add_column (int coln, int hstart, int hend, char align)
 {
   cols *c = get_column(coln);
 
-  if (c == NULL)
+  if (c == 0 /* nullptr */)
     return insert_column(coln, hstart, hend, align);
   else
     return modify_column(c, hstart, hend, align);
@@ -602,13 +603,13 @@ cols *html_table::get_column (int coln)
 {
   cols *c = columns;
 
-  while (c != NULL && coln != c->no)
+  while (c != 0 /* nullptr */ && coln != c->no)
     c = c->next;
 
-  if (c != NULL && coln == c->no)
+  if (c != 0 /* nullptr */ && coln == c->no)
     return c;
   else
-    return NULL;
+    return 0 /* nullptr */;
 }
 
 /*
@@ -621,31 +622,31 @@ int html_table::insert_column (int coln, int hstart, int hend, char align)
 {
   cols *c = columns;
   cols *l = columns;
-  cols *n = NULL;
+  cols *n = 0 /* nullptr */;
 
-  while (c != NULL && c->no < coln) {
+  while (c != 0 /* nullptr */ && c->no < coln) {
     l = c;
     c = c->next;
   }
-  if (l != NULL && l->no>coln && hend > l->left)
+  if (l != 0 /* nullptr */ && l->no>coln && hend > l->left)
     return FALSE;	// new column bumps into previous one
 
-  l = NULL;
+  l = 0 /* nullptr */;
   c = columns;
-  while (c != NULL && c->no < coln) {
+  while (c != 0 /* nullptr */ && c->no < coln) {
     l = c;
     c = c->next;
   }
 
-  if ((l != NULL) && (hstart < l->right))
+  if ((l != 0 /* nullptr */) && (hstart < l->right))
     return FALSE;	// new column bumps into previous one
 
-  if ((l != NULL) && (l->next != NULL) &&
+  if ((l != 0 /* nullptr */) && (l->next != 0 /* nullptr */) &&
       (l->next->left < hend))
     return FALSE;  // new column bumps into next one
 
   n = new cols;
-  if (l == NULL) {
+  if (l == 0 /* nullptr */) {
     n->next = columns;
     columns = n;
   } else {
@@ -670,13 +671,13 @@ int html_table::modify_column (cols *c, int hstart, int hend, char align)
 {
   cols *l = columns;
 
-  while (l != NULL && l->next != c)
+  while (l != 0 /* nullptr */ && l->next != c)
     l = l->next;
 
-  if ((l != NULL) && (hstart < l->right))
+  if ((l != 0 /* nullptr */) && (hstart < l->right))
     return FALSE;	// new column bumps into previous one
 
-  if ((c->next != NULL) && (c->next->left < hend))
+  if ((c->next != 0 /* nullptr */) && (c->next->left < hend))
     return FALSE;  // new column bumps into next one
 
   if (c->left > hstart)
@@ -711,7 +712,7 @@ int html_table::find_column (int pos)
   int   p=0;
   cols *c;
 
-  for (c = columns; c != NULL; c = c->next) {
+  for (c = columns; c != 0 /* nullptr */; c = c->next) {
     if (c->left > pos)
       return p;
     p = c->no;
@@ -728,7 +729,7 @@ int html_table::no_columns (void)
   int n=0;
   cols *c;
 
-  for (c = columns; c != NULL; c = c->next)
+  for (c = columns; c != 0 /* nullptr */; c = c->next)
     n++;
   return n;
 }
@@ -739,7 +740,9 @@ int html_table::no_columns (void)
 
 int html_table::is_gap (cols *c)
 {
-  if (c == NULL || c->right <= 0 || c->next == NULL)
+  if (c == 0 /* nullptr */
+      || c->right <= 0
+      || c->next == 0 /* nullptr */)
     return 0;
   else
     // we compute the difference after converting positions
@@ -759,7 +762,7 @@ int html_table::no_gaps (void)
   int n=0;
   cols *c;
 
-  for (c = columns; c != NULL; c = c->next)
+  for (c = columns; c != 0 /* nullptr */; c = c->next)
     if (is_gap(c))
       n++;
   return n;
@@ -782,9 +785,9 @@ char html_table::get_tab_align (int n)
 
 void html_table::dump_table (void)
 {
-  if (columns != NULL) {
+  if (columns != 0 /* nullptr */) {
     cols *c;
-    for (c = columns; c != NULL; c = c->next) {
+    for (c = columns; c != 0 /* nullptr */; c = c->next) {
       printf("column %d  %d..%d  %c\n", c->no, c->left, c->right, c->alignment);
     }
   } else

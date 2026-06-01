@@ -97,6 +97,38 @@
 
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/html-table.cpp (tabs::tabs)
+	(tabs::delete_list)
+	(tabs::compatible)
+	(tabs::init)
+	(tabs::find_tab)
+	(tabs::get_tab_pos)
+	(tabs::get_tab_align)
+	(tabs::dump_tabs)
+	(html_table::html_table)
+	(html_table::remove_cols)
+	(html_table::set_linelength)
+	(html_table::get_effective_linelength)
+	(html_table::emit_table_header)
+	(html_table::get_right)
+	(html_table::emit_colspan)
+	(html_table::emit_td)
+	(html_table::emit_col)
+	(html_table::finish_row)
+	(html_table::emit_new_row)
+	(html_table::add_column)
+	(html_table::get_column)
+	(html_table::insert_column)
+	(html_table::modify_column)
+	(html_table::find_column)
+	(html_table::no_columns)
+	(html_table::is_gap)
+	(html_table::no_gaps)
+	(html_table::dump_table): Fix code style nit.  Use idiomatic
+	C++98 null pointer literal instead of C's `NULL`.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic]: Rationalize header file inclusions.  Move some into
 	"object.h" or "pic.h" where not doing so introduces cycles.
 
