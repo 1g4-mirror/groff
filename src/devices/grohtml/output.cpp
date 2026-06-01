@@ -33,6 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // getc(), putc(), sprintf()
 #include <string.h> // strlen(), strncpy()
 
+#include <new> // std::bad_alloc
+
 #include "cset.h"
 #include "driver.h"
 #include "lib.h" // INT_DIGITS
@@ -66,7 +68,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 word::word (const char *w, int n)
   : next(0 /* nullptr */)
 {
-  s = new char[n+1];
+  size_t amount = n + 1;
+  try {
+    s = new char[amount];
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate %1 bytes to copy word", amount);
+  }
   strncpy(s, w, n);
   s[n] = '\0';
 }
@@ -120,11 +128,18 @@ int word_list::flush (FILE *f)
 
 void word_list::add_word (const char *s, int n)
 {
+  word *new_word = 0 /* nullptr */;
+  try {
+    new_word = new word(s, n);
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate %1 bytes to add word to word list", n);
+  }
   if (head == 0 /* nullptr */) {
-    head = new word(s, n);
+    head = new_word;
     tail = head;
   } else {
-    tail->next = new word(s, n);
+    tail->next = new_word;
     tail       = tail->next;
   }
   length += n;

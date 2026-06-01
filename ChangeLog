@@ -1,5 +1,22 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grohtml]: Be more fastidious with heap-allocated memory.
+
+	* src/devices/grohtml/output.cpp: Use ISO C++98 exceptions to
+	handle heap storage allocation failures.  Preprocessor-include
+	C++ "<new>" header file.
+	(word::word): Slightly refactor.  Introduce new local variable
+	`amount` to track the count of `char`s we wish to allocate, so
+	that we can use it both in a `new` allocation and in the fatal
+	diagnostic thrown if that allocation fails.
+	(word::word):
+	(word_list::add_word): Catch `std::bad_alloc` exception and
+	`fatal()` out with an attempt to describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml]: Fix code style nit.
 
 	* src/devices/grohtml/output.cpp (word::word)
