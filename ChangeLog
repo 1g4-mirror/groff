@@ -1,5 +1,10 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp: Fix code style nit.
+	(main): Return using exit(3), not `return`.
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml]: Be more fastidious with heap-allocated memory.
 
 	* src/devices/grohtml/output.cpp: Use ISO C++98 exceptions to

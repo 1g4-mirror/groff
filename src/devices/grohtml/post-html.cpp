@@ -6001,7 +6001,7 @@ int main(int argc, char **argv)
     for (int i = optind; i < argc; i++)
       interpret_troff_output_file(argv[i]);
   }
-  return 0;
+  exit(EXIT_SUCCESS);
 }
 
 static void usage(FILE *stream)
