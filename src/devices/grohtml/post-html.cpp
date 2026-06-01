@@ -2614,7 +2614,7 @@ static string &generate_img_src (const char *filename)
 
   while ((filename != 0 /* nullptr */) && (' ' == filename[0]))
     filename++;
-  if (exists(filename)) {
+  if ((0 /* nullptr */ == filename) || exists(filename)) {
     *s += string("<img src=\"") + filename + "\" "
 	  + "alt=\"Image " + filename + "\">";
     if (xhtml == dialect)

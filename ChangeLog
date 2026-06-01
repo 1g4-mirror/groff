@@ -1,5 +1,15 @@
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp (generate_img_src): Add
+	paranoia.  Ensure we don't dereference a null `filename`
+	pointer.  (Strictly, the `static` function `exists()` handles
+	that case for us, but my idea of design-by-contract permits
+	sanity checks on both ends of a call.  This choice also gives us
+	flexibility to replace or change `exists()`, possibly with a
+	standard library function call.)
+
+2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp: Fix code style nit.
 	(main): Return using exit(3), not `return`.
 
