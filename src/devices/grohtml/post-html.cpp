@@ -32,11 +32,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdio.h> // EOF, FILE, fclose(), fflush(), fopen(), freopen(),
 		   // fseek(), SEEK_SET, setbuf(), stderr, stdout
 #include <stdlib.h> // abs(), atoi(), EXIT_SUCCESS, exit()
-#include <string.h> // strcmp(), strerror(), strlen(), strncmp()
+#include <string.h> // strcmp(), strdup(), strerror(), strlen(),
+		    // strncmp()
 #include <strings.h> // strcasecmp()
 #include <time.h> // asctime(), tm
 
 #include <getopt.h> // getopt_long()
+
+#include <vector>
 
 // libgroff
 #include "symbol.h" // prerequisite of color.h
@@ -391,39 +394,6 @@ int style::operator!=(const style &s) const
   return !(*this == s);
 }
 
-/*
- *  the class and methods for retaining ascii text
- */
-
-struct char_block {
-  enum { SIZE = 256 };
-  char         *buffer;
-  int           used;
-  char_block   *next;
-
-  char_block();
-  char_block(int /* length */);
-  ~char_block();
-};
-
-char_block::char_block()
-: buffer(0 /* nullptr */), used(0), next(0 /* nullptr */)
-{
-}
-
-char_block::char_block(int length)
-: used(0), next(0 /* nullptr */)
-{
-  buffer = new char[max(length, char_block::SIZE)];
-  if (0 /* nullptr */ == buffer)
-    fatal("out of memory error");
-}
-
-char_block::~char_block()
-{
-  delete[] buffer;
-}
-
 class char_buffer {
 public:
   char_buffer();
@@ -432,58 +402,36 @@ public:
 		    unsigned int /* length */);
   char  *add_string(const string & /* s */);
 private:
-  char_block *head;
-  char_block *tail;
+  std::vector<char> vec;
 };
 
+// A block size of 4096 seems to run faster and with less variance than
+// the default, or 128, 256, 512, 1024, 2048, or 8192.
+// TODO: Use sysconf(PAGE_SIZE)?
+static const size_t char_buffer_block_size = 4096;
+
 char_buffer::char_buffer()
-: head(0 /* nullptr */), tail(0 /* nullptr */)
 {
+  vec = std::vector<char>(char_buffer_block_size, '\0');
 }
 
 char_buffer::~char_buffer()
 {
-  while (head != 0 /* nullptr */) {
-    char_block *temp = head;
-    head = head->next;
-    delete temp;
-  }
 }
 
 char *char_buffer::add_string (const char *s, unsigned int length)
 {
-  int i = 0;
-  unsigned int old_used;
-
-  if ((0 /* nullptr */ == s) || (0 == length))
+  if (length <= 0)
     return 0 /* nullptr */;
-
-  if (0 /* nullptr */ == tail) {
-    tail = new char_block(length+1);
-    head = tail;
-  } else {
-    if (tail->used + length+1 > char_block::SIZE) {
-      tail->next  = new char_block(length+1);
-      tail        = tail->next;
-    }
-  }
-
-  old_used = tail->used;
-  do {
-    tail->buffer[tail->used] = s[i];
-    tail->used++;
-    i++;
-    length--;
-  } while (length>0);
-
-  // add terminating nul character
-
-  tail->buffer[tail->used] = '\0';
-  tail->used++;
-
-  // and return start of new string
-
-  return &tail->buffer[old_used];
+  if ((vec.capacity() - vec.size()) < length)
+    vec.resize(vec.capacity() + char_buffer_block_size);
+  for (size_t i = 0; i < length; i++)
+    vec.push_back(s[i]);
+  vec.push_back('\0');
+  // XXX: This strdup() likely leaks memory.
+  // TODO: Have `char_buffer` maintain a list of `char` pointers and
+  // free them in destructor?
+  return strdup(s);
 }
 
 char *char_buffer::add_string (const string &s)

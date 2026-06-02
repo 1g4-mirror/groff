@@ -1,3 +1,29 @@
+2026-06-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp: Refactor.  New `static`
+	`const` variable of type `size_t`, `char_buffer_block_size`,
+	does what's written on the tin.
+	(struct char_block): Drop; it has been used exclusively by the
+	file-local `char_buffer` class.
+	(class char_buffer): Replace `head` and `tail` private member
+	variables--pointers to `char_block`s, with an STL vector of
+	`char` called `vec`.
+	(char_buffer::char_buffer): Drop initializers of `head` and
+	`tail`.  Populate body with call of `std::vector<char>`
+	constructor.
+	(char_buffer::~char_buffer): Empty destructor body; being an STL
+	container, we expect `vec` to dispose of its own backing storage
+	when it goes out of scope (when its parent object, a
+	`char_buffer`, is destroyed).
+	(char_buffer::add_string): Rewrite to idiomatically populate
+	`vec`, resizing it by `char_buffer_block_size` as needed.  Stop
+	returning a pointer into the data backing the STL vector, as
+	its `resize()` operation might alter its memory addresses, as
+	realloc(3) can.  Return a strdup(3)-ed copy of the string
+	instead.
+
+	Continues the long process of fixing Savannah #66672.
+
 2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp: Improve type-correctness.
