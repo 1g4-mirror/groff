@@ -26,7 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <string.h> // memchr(), memcmp(), memcpy(), memmem(), memset(),
 		    // strlen(), size_t
 
+#include <new> // std::bad_alloc
+
 #include "cset.h" // csprint()
+#include "errarg.h" // prerequisite of "error.h"
+#include "error.h" // fatal()
 #include "lib.h"
 #include "json-encode.h" // json_char, json_encode_char()
 
@@ -38,6 +42,9 @@ static char *sfree_alloc(char *ptr, int size, int len, int *sizep);
 static char *srealloc(char *ptr, int size, int oldlen, int newlen,
 		      int *sizep);
 
+// TODO 1: Replace all this memory management stuff with vector<char>.
+// TODO 2: Replace this entire class.  See Savannah #67735.
+
 static char *salloc(int len, int *sizep)
 {
   if (0 == len) {
@@ -48,6 +55,12 @@ static char *salloc(int len, int *sizep)
   size_t amount = len * 2;
   p = new char[*sizep = amount];
   assert(amount > 0);
+  try {
+    p = new char[*sizep = amount];
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate %1 bytes for string allocation", amount);
+  }
   memset(p, 0, amount);
   return p;
 }
@@ -70,8 +83,14 @@ static char *sfree_alloc(char *ptr, int oldsz, int len, int *sizep)
   }
   char *p = 0 /* nullptr */;
   size_t amount = len * 2;
-  p = new char[*sizep = amount];
   assert(amount > 0);
+  try {
+    p = new char[*sizep = amount];
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate %1 bytes for string replacement allocation",
+	  amount);
+  }
   memset(p, 0, amount);
   return p;
 }
@@ -91,7 +110,12 @@ static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen,
   else {
     size_t amount = newlen * 2;
     char *p = 0 /* nullptr */;
-    p = new char[*sizep = amount];
+    try {
+      p = new char[*sizep = amount];
+    }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate %1 bytes for string reallocation", amount);
+    }
     if ((oldlen < newlen) && (oldlen != 0)) {
       assert(amount > 0);
       memset(p, 0, amount);
@@ -433,8 +457,14 @@ void string::remove_spaces()
     if (l >= 0) {
       len = l + 1;
       char *tmp = 0 /* nullptr */;
-      tmp = new char[sz];
       assert(sz > 0);
+      try {
+	tmp = new char[sz];
+      }
+      catch (const std::bad_alloc &exc) {
+	fatal("cannot allocate %1 bytes for removal of spaces",
+	      " from string", sz);
+      }
       memset(tmp, 0, sz);
       memcpy(tmp, p, len);
       delete[] ptr;

@@ -1,5 +1,17 @@
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp: Use ISO C++98 exceptions to
+	handle heap storage allocation failures.  Preprocessor-include
+	C++ "<new>" header file.  Preprocessor-include "error.h" and its
+	prerequisite "errarg.h" to make visible the `fatal()` symbol.
+	(salloc, sfree_alloc, srealloc, string::remove_spaces): Catch
+	`std:bad_alloc` exception and `fatal()` out with an attempt to
+	describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (salloc, sfree_alloc, srealloc)
 	(string::string, string::clear, string::remove_spaces): Zero out
 	memory allocations from the heap, and when user requests erasure
