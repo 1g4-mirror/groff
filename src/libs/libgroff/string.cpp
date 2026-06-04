@@ -40,9 +40,9 @@ static char *srealloc(char *ptr, int size, int oldlen, int newlen,
 
 static char *salloc(int len, int *sizep)
 {
-  if (len == 0) {
+  if (0 == len) {
     *sizep = 0;
-    return 0;
+    return 0 /* nullptr */;
   }
   else
     return new char[*sizep = (len * 2)];
@@ -60,9 +60,9 @@ static char *sfree_alloc(char *ptr, int oldsz, int len, int *sizep)
     return ptr;
   }
   delete[] ptr;
-  if (len == 0) {
+  if (0 == len) {
     *sizep = 0;
-    return 0;
+    return 0 /* nullptr */;
   }
   else
     return new char[*sizep = (len * 2)];
@@ -75,14 +75,14 @@ static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen,
     *sizep = oldsz;
     return ptr;
   }
-  if (newlen == 0) {
+  if (0 == newlen) {
     delete[] ptr;
     *sizep = 0;
-    return 0;
+    return 0 /* nullptr */;
   }
   else {
     char *p = new char[*sizep = (newlen * 2)];
-    if (oldlen < newlen && oldlen != 0)
+    if ((oldlen < newlen) && (oldlen != 0))
       memcpy(p, ptr, oldlen);
     delete[] ptr;
     return p;
@@ -103,7 +103,7 @@ string::string(const char *p, int n) : len(n)
 
 string::string(const char *p)
 {
-  if (p == 0 /* nullptr */) {
+  if (0 /* nullptr */ == p) {
     len = 0;
     ptr = 0 /* nullptr */;
     sz = 0;
@@ -147,10 +147,10 @@ string &string::operator=(const string &s)
 
 string &string::operator=(const char *p)
 {
-  if (p == 0) {
+  if (0 /* nullptr */ == p) {
     sfree(ptr, len);
     len = 0;
-    ptr = 0;
+    ptr = 0 /* nullptr */;
     sz = 0;
   }
   else {
@@ -177,7 +177,7 @@ void string::move(string &s)
   ptr = s.ptr;
   len = s.len;
   sz = s.sz;
-  s.ptr = 0;
+  s.ptr = 0 /* nullptr */;
   s.len = 0;
   s.sz = 0;
 }
@@ -189,7 +189,7 @@ void string::grow1()
 
 string &string::operator+=(const char *p)
 {
-  if (p != 0) {
+  if (p != 0 /* nullptr */) {
     size_t n = strlen(p);
     int newlen = len + n;
     if (newlen > sz)
@@ -225,15 +225,15 @@ void string::append(const char *p, int n)
 
 string::string(const char *s1, int n1, const char *s2, int n2)
 {
-  assert(n1 >= 0 && n2 >= 0);
+  assert((n1 >= 0) && (n2 >= 0));
   len = n1 + n2;
-  if (len == 0) {
+  if (0 == len) {
     sz = 0;
-    ptr = 0;
+    ptr = 0 /* nullptr */;
   }
   else {
     ptr = salloc(len, &sz);
-    if (n1 == 0)
+    if (0 == n1)
       memcpy(ptr, s2, n2);
     else {
       memcpy(ptr, s1, n1);
@@ -245,30 +245,30 @@ string::string(const char *s1, int n1, const char *s2, int n2)
 
 int operator<=(const string &s1, const string &s2)
 {
-  return (s1.len <= s2.len
-	  ? s1.len == 0 || memcmp(s1.ptr, s2.ptr, s1.len) <= 0
-	  : s2.len != 0 && memcmp(s1.ptr, s2.ptr, s2.len) < 0);
+  return ((s1.len <= s2.len)
+	  ? ((s1.len == 0) || (memcmp(s1.ptr, s2.ptr, s1.len) <= 0))
+	  : ((s2.len != 0) && (memcmp(s1.ptr, s2.ptr, s2.len) < 0)));
 }
 
 int operator<(const string &s1, const string &s2)
 {
-  return (s1.len < s2.len
-	  ? s1.len == 0 || memcmp(s1.ptr, s2.ptr, s1.len) <= 0
-	  : s2.len != 0 && memcmp(s1.ptr, s2.ptr, s2.len) < 0);
+  return ((s1.len < s2.len)
+	  ? ((s1.len == 0) || (memcmp(s1.ptr, s2.ptr, s1.len) <= 0))
+	  : ((s2.len != 0) && (memcmp(s1.ptr, s2.ptr, s2.len) < 0)));
 }
 
 int operator>=(const string &s1, const string &s2)
 {
-  return (s1.len >= s2.len
-	  ? s2.len == 0 || memcmp(s1.ptr, s2.ptr, s2.len) >= 0
-	  : s1.len != 0 && memcmp(s1.ptr, s2.ptr, s1.len) > 0);
+  return ((s1.len >= s2.len)
+	  ? ((s2.len == 0) || (memcmp(s1.ptr, s2.ptr, s2.len) >= 0))
+	  : ((s1.len != 0) && (memcmp(s1.ptr, s2.ptr, s1.len) > 0)));
 }
 
 int operator>(const string &s1, const string &s2)
 {
-  return (s1.len > s2.len
-	  ? s2.len == 0 || memcmp(s1.ptr, s2.ptr, s2.len) >= 0
-	  : s1.len != 0 && memcmp(s1.ptr, s2.ptr, s1.len) > 0);
+  return ((s1.len > s2.len)
+	  ? ((s2.len == 0) || (memcmp(s1.ptr, s2.ptr, s2.len) >= 0))
+	  : ((s1.len != 0) && (memcmp(s1.ptr, s2.ptr, s1.len) > 0)));
 }
 
 void string::set_length(int i)
@@ -423,7 +423,7 @@ void string::remove_spaces()
       len = 0;
       if (ptr) {
 	delete[] ptr;
-	ptr = 0;
+	ptr = 0 /* nullptr */;
 	sz = 0;
       }
     }
