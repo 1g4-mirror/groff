@@ -1,5 +1,14 @@
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68420.
+
+	* src/roff/groff/tests/c2-request-does-not-fail-assertion.sh:
+	* src/roff/groff/tests/cc-request-does-not-fail-assertion.sh:
+	Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
+2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grohtml]: Migrate to ISO C++98 Boolean literals.
 
 	* src/devices/grohtml/html-table.cpp:
