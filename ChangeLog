@@ -1,5 +1,12 @@
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp (salloc, sfree_alloc, srealloc)
+	(string::string, string::clear, string::remove_spaces): Zero out
+	memory allocations from the heap, and when user requests erasure
+	of `string` contents.
+
+2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp: Fix code style nits.
 	Parenthesize formally complex expressions.  Arrange equality
 	comparisons to avoid inadvertent lvalue assignment (exception:

@@ -44,8 +44,12 @@ static char *salloc(int len, int *sizep)
     *sizep = 0;
     return 0 /* nullptr */;
   }
-  else
-    return new char[*sizep = (len * 2)];
+  char *p = 0 /* nullptr */;
+  size_t amount = len * 2;
+  p = new char[*sizep = amount];
+  assert(amount > 0);
+  memset(p, 0, amount);
+  return p;
 }
 
 static void sfree(char *ptr, int)
@@ -64,8 +68,12 @@ static char *sfree_alloc(char *ptr, int oldsz, int len, int *sizep)
     *sizep = 0;
     return 0 /* nullptr */;
   }
-  else
-    return new char[*sizep = (len * 2)];
+  char *p = 0 /* nullptr */;
+  size_t amount = len * 2;
+  p = new char[*sizep = amount];
+  assert(amount > 0);
+  memset(p, 0, amount);
+  return p;
 }
 
 static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen,
@@ -81,9 +89,14 @@ static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen,
     return 0 /* nullptr */;
   }
   else {
-    char *p = new char[*sizep = (newlen * 2)];
-    if ((oldlen < newlen) && (oldlen != 0))
+    size_t amount = newlen * 2;
+    char *p = 0 /* nullptr */;
+    p = new char[*sizep = amount];
+    if ((oldlen < newlen) && (oldlen != 0)) {
+      assert(amount > 0);
+      memset(p, 0, amount);
       memcpy(p, ptr, oldlen);
+    }
     delete[] ptr;
     return p;
   }
@@ -97,6 +110,8 @@ string::string(const char *p, int n) : len(n)
 {
   assert(n >= 0);
   ptr = salloc(n, &sz);
+  if (sz > 0)
+    memset(ptr, 0, sz);
   if (n != 0)
     memcpy(ptr, p, n);
 }
@@ -107,15 +122,14 @@ string::string(const char *p)
     len = 0;
     ptr = 0 /* nullptr */;
     sz = 0;
+    return;
   }
-  else {
-    len = strlen(p);
-    ptr = salloc(len, &sz);
-    if (len < sz)
-      memset(ptr, 0, sz);
-    if (len != 0)
-      memcpy(ptr, p, len);
-  }
+  len = strlen(p);
+  ptr = salloc(len, &sz);
+  if ((sz > 0) && (len < sz))
+    memset(ptr, 0, sz);
+  if (len != 0)
+    memcpy(ptr, p, len);
 }
 
 string::string(char c) : len(1)
@@ -127,6 +141,8 @@ string::string(char c) : len(1)
 string::string(const string &s) : len(s.len)
 {
   ptr = salloc(len, &sz);
+  if (sz > 0)
+    memset(ptr, 0, sz);
   if (len != 0)
     memcpy(ptr, s.ptr, len);
 }
@@ -281,6 +297,8 @@ void string::set_length(int i)
 
 void string::clear()
 {
+  if (ptr != 0 /* nullptr */)
+    memset(ptr, 0, sz);
   len = 0;
 }
 
@@ -414,7 +432,10 @@ void string::remove_spaces()
   if (len - 1 != l) {
     if (l >= 0) {
       len = l + 1;
-      char *tmp = new char[sz];
+      char *tmp = 0 /* nullptr */;
+      tmp = new char[sz];
+      assert(sz > 0);
+      memset(tmp, 0, sz);
       memcpy(tmp, p, len);
       delete[] ptr;
       ptr = tmp;
