@@ -45,13 +45,6 @@ with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "html-table.h"
 #include "html-text.h"
 
-#if !defined(TRUE)
-#   define TRUE  (1==1)
-#endif
-#if !defined(FALSE)
-#   define FALSE (1==0)
-#endif
-
 extern html_dialect dialect;
 
 
@@ -88,7 +81,7 @@ void tabs::clear (void)
 }
 
 /*
- *  compatible - returns TRUE if the tab stops in, s, do
+ *  compatible - returns true if the tab stops in, s, do
  *               not conflict with the current tab stops.
  *               The new tab stops are _not_ placed into
  *               this class.
@@ -101,7 +94,7 @@ int tabs::compatible (const char *s)
   tab_position *last = tab;
 
   if (last == 0 /* nullptr */)
-    return FALSE;  // no tab stops defined
+    return false;  // no tab stops defined
 
   // move over tag name
   while ((*s != '\0') && !csspace(*s))
@@ -124,11 +117,11 @@ int tabs::compatible (const char *s)
     while ((*s != '\0') && !csspace(*s))
       s++;
     if (last->alignment != align || last->position != total)
-      return FALSE;
+      return false;
 
     last = last->next;
   }
-  return TRUE;
+  return true;
 }
 
 /*
@@ -261,7 +254,7 @@ void tabs::dump_tabs (void)
 
 html_table::html_table (simple_output *op, int linelen)
   : out(op), columns(0 /* nullptr */), linelength(linelen),
-    last_col(0 /* nullptr */), start_space(FALSE)
+    last_col(0 /* nullptr */), start_space(false)
 {
   try {
     tab_stops = new tabs();
@@ -586,7 +579,7 @@ void html_table::emit_new_row (void)
     out->put_string("\"");
   }
   out->put_string(">").nl();
-  start_space = FALSE;
+  start_space = false;
   last_col = 0 /* nullptr */;
 }
 
@@ -597,7 +590,7 @@ void html_table::emit_finish_table (void)
 }
 
 /*
- *  add_column - adds a column. It returns FALSE if hstart..hend
+ *  add_column - adds a column. It returns false if hstart..hend
  *               crosses into a different columns.
  */
 
@@ -630,7 +623,7 @@ cols *html_table::get_column (int coln)
 
 /*
  *  insert_column - inserts a column, coln.
- *                  It returns TRUE if it does not bump into
+ *                  It returns true if it does not bump into
  *                  another column.
  */
 
@@ -645,7 +638,7 @@ int html_table::insert_column (int coln, int hstart, int hend, char align)
     c = c->next;
   }
   if (l != 0 /* nullptr */ && l->no>coln && hend > l->left)
-    return FALSE;	// new column bumps into previous one
+    return false;	// new column bumps into previous one
 
   l = 0 /* nullptr */;
   c = columns;
@@ -655,11 +648,11 @@ int html_table::insert_column (int coln, int hstart, int hend, char align)
   }
 
   if ((l != 0 /* nullptr */) && (hstart < l->right))
-    return FALSE;	// new column bumps into previous one
+    return false;	// new column bumps into previous one
 
   if ((l != 0 /* nullptr */) && (l->next != 0 /* nullptr */) &&
       (l->next->left < hend))
-    return FALSE;  // new column bumps into next one
+    return false;  // new column bumps into next one
 
   try {
     n = new cols;
@@ -678,13 +671,13 @@ int html_table::insert_column (int coln, int hstart, int hend, char align)
   n->right = hend;
   n->no = coln;
   n->alignment = align;
-  return TRUE;
+  return true;
 }
 
 /*
  *  modify_column - given a column, c, modify the width to
  *                  contain hstart..hend.
- *                  It returns TRUE if it does not clash with
+ *                  It returns true if it does not clash with
  *                  the next or previous column.
  */
 
@@ -696,10 +689,10 @@ int html_table::modify_column (cols *c, int hstart, int hend, char align)
     l = l->next;
 
   if ((l != 0 /* nullptr */) && (hstart < l->right))
-    return FALSE;	// new column bumps into previous one
+    return false;	// new column bumps into previous one
 
   if ((c->next != 0 /* nullptr */) && (c->next->left < hend))
-    return FALSE;  // new column bumps into next one
+    return false;  // new column bumps into next one
 
   if (c->left > hstart)
     c->left = hstart;
@@ -709,7 +702,7 @@ int html_table::modify_column (cols *c, int hstart, int hend, char align)
 
   c->alignment = align;
 
-  return TRUE;
+  return true;
 }
 
 /*

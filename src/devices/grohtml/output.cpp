@@ -42,14 +42,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "html.h"
 
-#if !defined(TRUE)
-#   define TRUE  (1==1)
-#endif
-#if !defined(FALSE)
-#   define FALSE (1==0)
-#endif
-
-
 #if defined(DEBUGGING)
 #  define FPUTC(X,Y)   do { fputc((X),(Y)); fputc((X), stderr); fflush(stderr); } while (0)
 #  define FPUTS(X,Y)   do { fputs((X),(Y)); fputs((X), stderr); fflush(stderr); } while (0)
