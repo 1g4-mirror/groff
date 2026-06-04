@@ -1,4 +1,5 @@
-/* Copyright 2000-2024 Free Software Foundation, Inc.
+/* Copyright 2000-2005 Free Software Foundation, Inc.
+ *                2026 G. Branden Robinson
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote html-text.cpp
  *
