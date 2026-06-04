@@ -1,4 +1,6 @@
-/* Copyright 2000-2025 Free Software Foundation, Inc.
+/* Copyright 2000-2007 Free Software Foundation, Inc.
+ *           2021-2025 G. Branden Robinson
+ *                2023 TANAKA Takuji
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote post-html.cpp
  *  but it owes a huge amount of ideas and raw code from
