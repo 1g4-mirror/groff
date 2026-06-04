@@ -1,4 +1,4 @@
-/* Copyright 2000-2020 Free Software Foundation, Inc.
+/* Copyright 2000-2001 Free Software Foundation, Inc.
  *
  *  Gaius Mulley (gaius@glam.ac.uk) wrote html-text.h
  *
