@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <errno.h>
 #include <stdio.h> // EOF, FILE, fclose(), fflush(), fopen(), freopen(),
 		   // fseek(), SEEK_SET, setbuf(), stderr, stdout
-#include <stdlib.h> // abs(), atoi(), EXIT_SUCCESS, exit()
+#include <stdlib.h> // abs(), atoi(), EXIT_SUCCESS, exit(), free()
 #include <string.h> // strcmp(), strdup(), strerror(), strlen(),
 		    // strncmp()
 #include <strings.h> // strcasecmp()
@@ -39,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <getopt.h> // getopt_long()
 
+#include <stack>
 #include <vector>
 
 // libgroff
@@ -402,7 +403,15 @@ public:
 		    unsigned int /* length */);
   char  *add_string(const string & /* s */);
 private:
+  // Simulate two views into the `char` buffer; one for the whole
+  // buffer, and one for the list of individual C strings populating it.
+  // It's a simulation because we support the latter by making _copies_
+  // of the string, which is inefficient.  A better approach would be to
+  // store indices from the start of `vec`, but doing that requires
+  // retyping in this class's users.
+  // TODO: Do the retyping and store the indices, not copies of strings.
   std::vector<char> vec;
+  std::stack<char *> strings;
 };
 
 // A block size of 4096 seems to run faster and with less variance than
@@ -413,10 +422,15 @@ static const size_t char_buffer_block_size = 4096;
 char_buffer::char_buffer()
 {
   vec = std::vector<char>(char_buffer_block_size, '\0');
+  strings = std::stack<char *>();
 }
 
 char_buffer::~char_buffer()
 {
+  while (!strings.empty()) {
+    free(strings.top());
+    strings.pop();
+  }
 }
 
 char *char_buffer::add_string (const char *s, unsigned int length)
@@ -428,10 +442,9 @@ char *char_buffer::add_string (const char *s, unsigned int length)
   for (size_t i = 0; i < length; i++)
     vec.push_back(s[i]);
   vec.push_back('\0');
-  // XXX: This strdup() likely leaks memory.
-  // TODO: Have `char_buffer` maintain a list of `char` pointers and
-  // free them in destructor?
-  return strdup(s);
+  char *p = strdup(s);
+  strings.push(p);
+  return p;
 }
 
 char *char_buffer::add_string (const string &s)

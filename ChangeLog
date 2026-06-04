@@ -1,3 +1,16 @@
+2026-06-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp: Fix memory leak.
+	Preprocessor-include C++ "<stack>" header file.
+	(class char_buffer): Add new private member variable `strings`
+	of type `std::stack<char *>`, to keep track of the strdup(3)ped
+	pointers that our `add_string()` member functions return.
+	(char_buffer::char_buffer): Initialize `strings`.
+	(char_buffer::~char_buffer): Pop `strings` stack, free(3)ing
+	strdup(3)ped pointers until empty.
+	(char_buffer::add_string): strdup(3) the `char *` argument and
+	push it onto the `strings` stack before returning.
+
 2026-06-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp: Refactor.  New `static`
