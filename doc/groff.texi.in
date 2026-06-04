@@ -6068,8 +6068,8 @@ them with inter-sentence space.
 
 @Example
 Hello, world!
-Welcome to groff.
-    @result{} Hello, world!  Welcome to groff.
+Welcome to the wide world of groff.
+    @result{} Hello, world!  Welcome to the wide world of groff.
 @endExample
 
 @cindex end-of-sentence characters
