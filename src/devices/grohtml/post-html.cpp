@@ -1593,7 +1593,8 @@ void page::add_and_encode (style *s,
       html_string += str[i];
     i++;
   }
-  if (html_string.length() > 0) {
+  html_string += '\0';
+  if (html_string.length() > 1 /* '\0' */) {
     text_glob *g=new text_glob();
     if (is_tag)
       g->text_glob_tag(s, buffer.add_string(html_string),

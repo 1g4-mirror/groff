@@ -1,3 +1,10 @@
+2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp (page::add_encode): Add null
+	terminator to `html_string` groff `string`.  Its contents are
+	shortly to become a C string.  Null-terminating it prevents
+	trailing garbage from populating a `char_buffer`.
+
 2026-05-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[grohtml]: Fix code style nit.
