@@ -1,4 +1,4 @@
-/* Copyright 2000-2020 Free Software Foundation, Inc.
+/* Copyright 2000-2001 Free Software Foundation, Inc.
 
 Written by James Clark (jjc@jclark.com)
 
