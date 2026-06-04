@@ -321,7 +321,7 @@ static void assign_control_character_request() // .cc
   }
   else
     assignment_worked = curenv->set_control_character(cc);
-  assert(assignment_worked);
+  assert(do_nothing || assignment_worked);
   skip_line();
 }
 
@@ -364,7 +364,7 @@ static void assign_no_break_control_character_request() // .c2
   }
   else
     assignment_worked = curenv->set_no_break_control_character(nbcc);
-  assert(assignment_worked);
+  assert(do_nothing || assignment_worked);
   skip_line();
 }
 

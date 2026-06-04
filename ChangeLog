@@ -1,5 +1,18 @@
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (assign_control_character_request)
+	(assign_no_break_control_character_request): Fix (further)
+	blunders in assert(3) usage.  Spurious assertion failures
+	occurred when user attempted to set a control character to one
+	that is already in use as the other control character, or the
+	escape character.
+
+	Fixes <https://savannah.gnu.org/bugs/?68420>.  Problem
+	introduced by me in commit 20feac542d, 2025-11-23.  Thanks to
+	Martin Simmons for the report.
+
+2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68420.
 
 	* src/roff/groff/tests/c2-request-does-not-fail-assertion.sh:
