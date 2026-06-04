@@ -18296,11 +18296,17 @@ Several escape sequences enable fine control of movement about the page.
 @Defesc {\\v, @code{'}, expr, @code{'}}
 @cindex vertical motion (@code{\v})
 @cindex motion, vertical (@code{\v})
-Vertically move the drawing position.  @var{expr} indicates the
-magnitude of motion: positive is downward and and negative upward.  The
-default scaling unit is @samp{v}.  The motion is relative to the current
-drawing position unless @var{expr} begins with the boundary-relative
-measurement operator @samp{|}.  @xref{Numeric Expressions}.
+Vertically move the drawing position.
+@var{expr}
+indicates the magnitude of motion:@:
+positive is downward and and negative upward.
+The default scaling unit is
+@samp{v}.
+The motion is relative to the current drawing position unless
+@var{expr}
+begins with the boundary-relative measurement operator
+@samp{|};
+recall @ref{Numeric Expressions}.
 
 Text processing continues at the new drawing position; usually, vertical
 motions should be in balanced pairs to avoid a confusing page layout.
@@ -18311,8 +18317,7 @@ This can be useful;
 for example,
 consider a page bottom trap macro
 that prints a mark in the margin
-to indicate continuation of a footnote.
-@xref{Traps}.
+to indicate continuation of a footnote.@footnote{@xref{Traps}.}
 @endDefesc
 
 A few escape sequences that produce vertical motion are unusual.
@@ -18412,9 +18417,14 @@ Several escape sequences support special cases of horizontal motion.
 @c We use the following notation in our man pages; Texinfo is bound to
 @c the GNU Emacs dialect.
 @esindex \@slanted{space}
-Move right one word space.  (The input is a backslash followed by a
-space.)  This escape sequence can be thought of as a non-adjustable,
-unbreakable space.  Usually you want @code{\~} instead; see
+Move right one word space.
+(The input is a backslash followed by a space.)
+This escape sequence can be thought of as a non-adjustable,
+unbreakable space.
+Usually you want
+@code{\~}
+instead;
+recall
 @ref{Manipulating Filling and Adjustment}.
 @endDefesc
 
@@ -18658,7 +18668,7 @@ Only line numbers divisible by
 @var{increment}
 (default:
 @samp{1})
-bear marks.
+bear numeric marks.
 The formatter reckons the third and fourth arguments in numeral widths
 (@code{\0}):@:
 @var{space}
@@ -18673,6 +18683,8 @@ applies to the numbers
 must be non-negative and
 @var{increment}
 positive.
+Line numbering parameters are associated
+with the environment.@footnote{@xref{Environments}.}
 
 The formatter aligns the number to the right
 in a space of three numeral widths plus
@@ -18694,9 +18706,6 @@ After numbering is disabled,
 @samp{.nm +0}
 resumes it using the previously active parameters.
 
-The parameters of @code{nm} are associated with the environment
-(@pxref{Environments}).
-
 @cindex output line number register (@code{ln})
 @cindex line number, output, register (@code{ln})
 While numbering is enabled, the output line number register @code{ln} is
@@ -18712,6 +18721,26 @@ Temporary suspension of numbering with the
 request does
 @emph{not}
 alter its value.
+
+A simple example follows.
+
+@c adapted from patent US3568156A (1967)
+@Example
+.ll 45n
+.nm 1
+Searches for matching strings of elemental units are
+conducted in a parallel fashion such that the search may
+be conducted concurrently on different substrings.
+    @result{}   1 Searches  for  matching  strings of elemental
+    @result{}   2 units are conducted  in  a  parallel  fashion
+    @result{}   3 such that the search may be conducted concur-
+    @result{}   4 rently on different substrings.
+@endExample
+
+@need 5167 @c 31v
+The following example illustrates all of the
+@code{nm}
+request's features.
 
 @Example
 .po 5n
@@ -18765,6 +18794,8 @@ suppression of numbering takes effect for
 lines once
 @code{nm}
 enables it.
+This count is associated
+with the environment.@footnote{@xref{Environments}.}
 
 The
 @code{.nn}
@@ -18772,8 +18803,6 @@ read-only register
 stores the count of lines remaining in the environment
 for which numbering is suppressed
 while output line numbering is enabled.
-
-This count is associated with the environment (@pxref{Environments}).
 @endDefreq
 
 @need 1000
@@ -18813,15 +18842,15 @@ exceeds the line length, the margin character is appended to it.
 @cindex @code{tl} request, and @code{mc}
 No margin character is written on lines produced by the @code{tl}
 request.
+The margin character is associated
+with the environment.@footnote{@xref{Environments}.}
 
 The margin character is a property of the output line.  Only one margin
 character is in effect at one time; the most recent @code{mc} call
 determines its value.  If the margin character is disabled before an
 output line breaks, none is output (but see below).
 
-The margin character is associated with the environment
-(@pxref{Environments}).
-
+@need 2167 @c ~13v
 @Example
 .ll 5i
 .nf
