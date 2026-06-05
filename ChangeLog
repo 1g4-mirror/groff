@@ -1,3 +1,17 @@
+2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp: Improve type-correctness.
+	`html` is an object of type `simple_output` which contains a
+	`word_list`, which contains a list of `word`s, each of which
+	store its contents in a `char *`, _not_ objects of groff's
+	`string` class.
+	(html_printer::write_html_anchor)
+	(html_printer::write_xhtml_anchor)
+	(html_printer::write_header): Populate `html` object with
+	`contents()` of `header.header_buffer` object.
+	(html_printer::do_heading): Catenate `header.header_buffer` with
+	`g->text_string`, not a groff `string` constructed therefrom.
+
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp (page::add_encode): Add null

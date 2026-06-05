@@ -2768,7 +2768,7 @@ void html_printer::write_html_anchor (text_glob *h)
 	buffer += '\0';
 	html.put_string(buffer.contents());
       } else
-	html.put_string(header.header_buffer);
+	html.put_string(header.header_buffer.contents());
       html.put_string("\"></a>").nl();
     }
   }
@@ -2791,7 +2791,7 @@ void html_printer::write_xhtml_anchor (text_glob *h)
 	buffer += '\0';
 	html.put_string(buffer.contents());
       } else
-	html.put_string(header.header_buffer);
+	html.put_string(header.header_buffer.contents());
       html.put_string("\"");
     }
   }
@@ -2819,7 +2819,7 @@ void html_printer::write_header (void)
       a = new text_glob();
       a->text_glob_html(&st,
 			header.headings
-			  .add_string(header.header_buffer),
+			  .add_string(header.header_buffer.contents()),
 			header.header_buffer.length(),
 			header.no_of_headings, header.header_level,
 			header.no_of_headings, header.header_level);
@@ -2841,14 +2841,14 @@ void html_printer::write_header (void)
       // <Hn></Hn>
       if (header.header_level<4) {
 	html.put_string("<b><font size=\"+1\">");
-	html.put_string(header.header_buffer);
+	html.put_string(header.header_buffer.contents());
 	html.put_string("</font>").nl();
 	write_html_anchor(a);
         html.put_string("</b>").nl();
       }
       else {
 	html.put_string("<b>");
-	html.put_string(header.header_buffer).nl();
+	html.put_string(header.header_buffer.contents()).nl();
 	write_html_anchor(a);
 	html.put_string("</b>").nl();
       }
@@ -2859,7 +2859,7 @@ void html_printer::write_header (void)
       html.put_number(header.header_level);
       write_xhtml_anchor(a);
       html.put_string(">");
-      html.put_string(header.header_buffer).nl();
+      html.put_string(header.header_buffer.contents()).nl();
       write_html_anchor(a);
       html.put_string("</h");
       html.put_number(header.header_level);
@@ -2957,7 +2957,7 @@ void html_printer::do_heading (char *arg)
 	  header.header_buffer += " ";
 
 	horiz = g->maxh;
-	header.header_buffer += string(g->text_string, g->text_length);
+	header.header_buffer += g->text_string;
       }
       page_contents->glyphs.move_right();
       g = page_contents->glyphs.get_data();
