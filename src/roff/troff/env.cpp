@@ -3779,7 +3779,7 @@ void environment::dump()
 }
 
 // TODO: Revise to report, without arguments, only the environment stack
-// contents from top to bottom; report details of only environments
+// contents from top to bottom; report details only of environments
 // named in arguments.
 static void print_environment_request() // .pev
 {
