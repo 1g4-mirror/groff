@@ -1760,7 +1760,6 @@ void header_desc::write_headings (FILE *f, int force)
 	fputs("#", f);
 	if (simple_anchors) {
 	  string buffer(ANCHOR_TEMPLATE);
-
 	  buffer += as_string(h);
 	  buffer += '\0';
 	  fprintf(f, "%s", buffer.contents());
@@ -5671,7 +5670,8 @@ html_printer::~html_printer()
     fputs("</body>\n", stdout);
     fputs("</html>\n", stdout);
     do_file_components();
-  } else {
+  }
+  else {
     do_file_components();
     fputs("</body>\n", stdout);
     fputs("</html>\n", stdout);
