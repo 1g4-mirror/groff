@@ -1,3 +1,13 @@
+2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Boolify groff's `string` class.
+
+	* src/include/stringclass.h:
+	* src/libs/libgroff/string.cpp: Demote return values of
+	`operator==()`, `operator!=()`, `empty()`, `operator<=()`,
+	`operator<()`, `operator>=()`, and `operator>()` from `int` to
+	`bool`.
+
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp: Use ISO C++98 exceptions to

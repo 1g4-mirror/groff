@@ -34,8 +34,8 @@ inline string operator+(const string &, const char *);
 inline string operator+(const char *, const string &);
 inline string operator+(const string &, char);
 inline string operator+(char, const string &);
-inline int operator==(const string &, const string &);
-inline int operator!=(const string &, const string &);
+inline bool operator==(const string &, const string &);
+inline bool operator!=(const string &, const string &);
 
 class string {
 public:
@@ -57,7 +57,7 @@ public:
   void append(const char *, int);
 
   int length() const;
-  int empty() const;
+  bool empty() const;
   int operator*() const;
 
   string substring(int i, int n) const;
@@ -84,12 +84,12 @@ public:
   friend string operator+(const string &, char);
   friend string operator+(char, const string &);
 
-  friend int operator==(const string &, const string &);
-  friend int operator!=(const string &, const string &);
-  friend int operator<=(const string &, const string &);
-  friend int operator<(const string &, const string &);
-  friend int operator>=(const string &, const string &);
-  friend int operator>(const string &, const string &);
+  friend bool operator==(const string &, const string &);
+  friend bool operator!=(const string &, const string &);
+  friend bool operator<=(const string &, const string &);
+  friend bool operator<(const string &, const string &);
+  friend bool operator>=(const string &, const string &);
+  friend bool operator>(const string &, const string &);
 
 private:
   char *ptr;
@@ -118,7 +118,7 @@ inline int string::length() const
   return len;
 }
 
-inline int string::empty() const
+inline bool string::empty() const
 {
   return (len == 0);
 }
@@ -160,13 +160,13 @@ inline string operator+(char c, const string &s)
   return string(&c, 1, s.ptr, s.len);
 }
 
-inline int operator==(const string &s1, const string &s2)
+inline bool operator==(const string &s1, const string &s2)
 {
   return (s1.len == s2.len
 	  && (s1.len == 0 || memcmp(s1.ptr, s2.ptr, s1.len) == 0));
 }
 
-inline int operator!=(const string &s1, const string &s2)
+inline bool operator!=(const string &s1, const string &s2)
 {
   return (s1.len != s2.len
 	  || (s1.len != 0 && memcmp(s1.ptr, s2.ptr, s1.len) != 0));

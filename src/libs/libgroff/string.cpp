@@ -283,28 +283,28 @@ string::string(const char *s1, int n1, const char *s2, int n2)
   }
 }
 
-int operator<=(const string &s1, const string &s2)
+bool operator<=(const string &s1, const string &s2)
 {
   return ((s1.len <= s2.len)
 	  ? ((s1.len == 0) || (memcmp(s1.ptr, s2.ptr, s1.len) <= 0))
 	  : ((s2.len != 0) && (memcmp(s1.ptr, s2.ptr, s2.len) < 0)));
 }
 
-int operator<(const string &s1, const string &s2)
+bool operator<(const string &s1, const string &s2)
 {
   return ((s1.len < s2.len)
 	  ? ((s1.len == 0) || (memcmp(s1.ptr, s2.ptr, s1.len) <= 0))
 	  : ((s2.len != 0) && (memcmp(s1.ptr, s2.ptr, s2.len) < 0)));
 }
 
-int operator>=(const string &s1, const string &s2)
+bool operator>=(const string &s1, const string &s2)
 {
   return ((s1.len >= s2.len)
 	  ? ((s2.len == 0) || (memcmp(s1.ptr, s2.ptr, s2.len) >= 0))
 	  : ((s1.len != 0) && (memcmp(s1.ptr, s2.ptr, s1.len) > 0)));
 }
 
-int operator>(const string &s1, const string &s2)
+bool operator>(const string &s1, const string &s2)
 {
   return ((s1.len > s2.len)
 	  ? ((s2.len == 0) || (memcmp(s1.ptr, s2.ptr, s2.len) >= 0))
