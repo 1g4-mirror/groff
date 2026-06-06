@@ -2864,11 +2864,9 @@ void html_printer::write_header (void)
 void html_printer::determine_header_level (int level)
 {
   if (0 == level) {
-    size_t i;
-
-    for (i = 0; ((i<header.header_buffer.length())
-		 && (('.' == header.header_buffer[i])
-		     || is_digit(header.header_buffer[i]))) ; i++) {
+    for (size_t i = 0; ((i < header.header_buffer.length())
+			&& (('.' == header.header_buffer[i])
+			|| is_digit(header.header_buffer[i]))); i++) {
       if ('.' == header.header_buffer[i])
 	level++;
     }

@@ -1,5 +1,11 @@
 2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp
+	(html_printer::determine_header_level): Fix code style nit.
+	Isolate loop variable within `for` loop scope.
+
+2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (string::remove_spaces): Fix code
 	style nit.  Parenthesize formally complex expression.
 
