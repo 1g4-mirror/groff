@@ -1,5 +1,21 @@
 2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp: Back all strings with clean
+	storage.  And ensure that all `string`s are backed by storage
+	such that the capacity `sz` is always nonzero, and the
+	`contents()` member function never returns a null pointer.  Add
+	assert(3)ions to enforce these invariants.  New `static` `const`
+	variable `initial_string_buffer_size` does what it says,
+	reserving a minimum backing allocation even for empty strings.
+	(salloc): Discard zero-length code, except insofar as a
+	zero-length allocation request gets `initial_string_buffer_size`
+	`char` array elements.
+	(string::string): Discard now tautologously true `if` tests.
+	Drop early return from constructor taking only a `char *`
+	argument, so that we can assert(3) a postcondition invariant.
+
+2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Refactor groff's bespoke `string` class to use `size_t` instead
 	of `int` to track array sizes and indices.
 

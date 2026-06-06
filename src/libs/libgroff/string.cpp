@@ -39,23 +39,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // TODO 1: Replace all this memory management stuff with vector<char>.
 // TODO 2: Replace this entire class.  See Savannah #67735.
 
+static const size_t initial_string_buffer_size = 8;
+
 static char *salloc(size_t len, size_t *sizep)
 {
-  if (0 == len) {
-    *sizep = 0;
-    return 0 /* nullptr */;
-  }
   char *p = 0 /* nullptr */;
   size_t amount = len * 2;
-  p = new char[*sizep = amount];
-  assert(amount > 0);
+  if (0 == amount)
+    amount = initial_string_buffer_size;
   try {
     p = new char[*sizep = amount];
   }
   catch (const std::bad_alloc &exc) {
     fatal("cannot allocate %1 bytes for string allocation", amount);
   }
-  memset(p, 0, amount);
+  assert(*sizep > 0);
+  memset(p, 0, *sizep);
   return p;
 }
 
@@ -121,39 +120,43 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
   }
 }
 
-string::string() : ptr(0 /* nullptr */), len(0), sz(0)
+string::string() : len(0), sz(initial_string_buffer_size)
 {
+  ptr = salloc(initial_string_buffer_size, &sz);
+  assert(ptr != 0 /* nullptr */);
 }
 
 string::string(const char *p, size_t n) : len(n)
 {
   ptr = salloc(n, &sz);
-  if (sz > 0)
-    memset(ptr, 0, sz);
+  memset(ptr, 0, sz);
   if (n != 0)
     memcpy(ptr, p, n);
+  assert(ptr != 0 /* nullptr */);
 }
 
 string::string(const char *p)
 {
   if (0 /* nullptr */ == p) {
     len = 0;
-    ptr = 0 /* nullptr */;
-    sz = 0;
-    return;
+    ptr = salloc(initial_string_buffer_size, &sz);
   }
-  len = strlen(p);
-  ptr = salloc(len, &sz);
-  if ((sz > 0) && (len < sz))
-    memset(ptr, 0, sz);
-  if (len != 0)
-    memcpy(ptr, p, len);
+  else {
+    len = strlen(p);
+    ptr = salloc(len, &sz);
+    if (len < sz)
+      memset(ptr, 0, sz);
+    if (len != 0)
+      memcpy(ptr, p, len);
+  }
+  assert(ptr != 0 /* nullptr */);
 }
 
 string::string(char c) : len(1)
 {
   ptr = salloc(1, &sz);
   *ptr = c;
+  assert(ptr != 0 /* nullptr */);
 }
 
 string::string(const string &s) : len(s.len)
@@ -163,6 +166,7 @@ string::string(const string &s) : len(s.len)
     memset(ptr, 0, sz);
   if (len != 0)
     memcpy(ptr, s.ptr, len);
+  assert(ptr != 0 /* nullptr */);
 }
 
 string::~string()
@@ -231,6 +235,7 @@ string &string::operator+=(const char *p)
     memcpy(ptr + len, p, n);
     len = newlen;
   }
+  assert(ptr != 0 /* nullptr */);
   return *this;
 }
 
@@ -243,6 +248,7 @@ string &string::operator+=(const string &s)
     memcpy(ptr + len, s.ptr, s.len);
     len = newlen;
   }
+  assert(ptr != 0 /* nullptr */);
   return *this;
 }
 
@@ -260,10 +266,8 @@ void string::append(const char *p, size_t n)
 string::string(const char *s1, size_t n1, const char *s2, size_t n2)
 {
   len = n1 + n2;
-  if (0 == len) {
-    sz = 0;
-    ptr = 0 /* nullptr */;
-  }
+  if (0 == len)
+    ptr = salloc(initial_string_buffer_size, &sz);
   else {
     ptr = salloc(len, &sz);
     if (0 == n1)
@@ -274,6 +278,7 @@ string::string(const char *s1, size_t n1, const char *s2, size_t n2)
 	memcpy(ptr + n1, s2, n2);
     }
   }
+  assert(ptr != 0 /* nullptr */);
 }
 
 bool operator<=(const string &s1, const string &s2)
@@ -461,6 +466,7 @@ void string::remove_spaces()
     delete[] ptr;
     ptr = tmp;
   }
+  assert(ptr != 0 /* nullptr */);
 }
 
 void put_string(const string &s, FILE *fp)
