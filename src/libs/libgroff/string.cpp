@@ -450,7 +450,7 @@ void string::remove_spaces()
       p++;
       l--;
     }
-  if (len - 1 != l) {
+  if ((len - 1) != l) {
     len = l + 1;
     char *tmp = 0 /* nullptr */;
     assert(sz > 0);

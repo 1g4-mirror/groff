@@ -1,5 +1,10 @@
 2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp (string::remove_spaces): Fix code
+	style nit.  Parenthesize formally complex expression.
+
+2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp: Back all strings with clean
 	storage.  And ensure that all `string`s are backed by storage
 	such that the capacity `sz` is always nonzero, and the
