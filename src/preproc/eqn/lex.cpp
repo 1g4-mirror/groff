@@ -689,7 +689,7 @@ static void add_quoted_context(const string &s)
 {
   string &r = context_ring[context_index];
   r = '"';
-  for (int i = 0; i < s.length(); i++)
+  for (size_t i = 0; i < s.length(); i++)
     if (s[i] == '"')
       r += "\\\"";
     else

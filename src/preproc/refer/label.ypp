@@ -34,7 +34,7 @@ static const char *format_serial(char c, int n);
 
 struct label_info {
   int start;
-  int length;
+  size_t length;
   int count;
   int total;
   label_info(const string &);
@@ -785,7 +785,7 @@ void truncate_expr::evaluate(int tentative, const reference &ref,
 void alternative_expr::evaluate(int tentative, const reference &ref,
 				string &result, substring_position &pos)
 {
-  int start_length = result.length();
+  size_t start_length = result.length();
   if (expr1)
     expr1->evaluate(tentative, ref, result, pos);
   if (result.length() == start_length && expr2)
@@ -804,7 +804,7 @@ void list_expr::evaluate(int tentative, const reference &ref,
 void substitute_expr::evaluate(int tentative, const reference &ref,
 			       string &result, substring_position &pos)
 {
-  int start_length = result.length();
+  size_t start_length = result.length();
   if (expr1)
     expr1->evaluate(tentative, ref, result, pos);
   if (result.length() > start_length && result[result.length() - 1] == '-') {
@@ -1111,11 +1111,11 @@ int same_author_name(const reference &r1, const reference &r2, int n)
 void int_set::set(int i)
 {
   assert(i >= 0);
-  int bytei = i >> 3;
+  size_t bytei = i >> 3;
   if (bytei >= v.length()) {
     int old_length = v.length();
     v.set_length(bytei + 1);
-    for (int j = old_length; j <= bytei; j++)
+    for (size_t j = old_length; j <= bytei; j++)
       v[j] = 0;
   }
   v[bytei] |= 1 << (i & 7);
@@ -1124,7 +1124,7 @@ void int_set::set(int i)
 int int_set::get(int i) const
 {
   assert(i >= 0);
-  int bytei = i >> 3;
+  size_t bytei = i >> 3;
   return bytei >= v.length() ? 0 : (v[bytei] & (1 << (i & 7))) != 0;
 }
 

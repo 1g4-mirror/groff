@@ -42,7 +42,7 @@ public:
   string();
   string(const string &);
   string(const char *);
-  string(const char *, int);
+  string(const char *, size_t);
   string(char);
 
   ~string();
@@ -54,22 +54,22 @@ public:
   string &operator+=(const string &);
   string &operator+=(const char *);
   string &operator+=(char);
-  void append(const char *, int);
+  void append(const char *, size_t);
 
-  int length() const;
+  size_t length() const;
   bool empty() const;
-  int operator*() const;
+  size_t operator*() const;
 
-  string substring(int i, int n) const;
+  string substring(size_t i, size_t n) const;
 
-  char &operator[](int);
-  char operator[](int) const;
+  char &operator[](size_t);
+  char operator[](size_t) const;
 
-  void set_length(int i);
+  void set_length(size_t i);
   const char *contents() const;
   int search(const char) const;
   bool contains(const char) const;
-  int find(const char *) const;
+  size_t find(const char *) const;
   char *extract() const;
   size_t json_length() const;
   const char *json_extract() const;
@@ -93,27 +93,28 @@ public:
 
 private:
   char *ptr;
-  int len;
-  int sz;
+  size_t len;
+  size_t sz;
 
-  string(const char *, int, const char *, int);	// for use by operator+
+  // for use by operator+
+  string(const char *, size_t, const char *, size_t);
   void grow1();
 };
 
 
-inline char &string::operator[](int i)
+inline char &string::operator[](size_t i)
 {
-  assert((i >= 0) && (i < len));
+  assert(i < len);
   return ptr[i];
 }
 
-inline char string::operator[](int i) const
+inline char string::operator[](size_t i) const
 {
-  assert((i >= 0) && (i < len));
+  assert(i < len);
   return ptr[i];
 }
 
-inline int string::length() const
+inline size_t string::length() const
 {
   return len;
 }
@@ -123,7 +124,7 @@ inline bool string::empty() const
   return (len == 0);
 }
 
-inline int string::operator*() const
+inline size_t string::operator*() const
 {
   return len;
 }
@@ -172,9 +173,9 @@ inline bool operator!=(const string &s1, const string &s2)
 	  || (s1.len != 0 && memcmp(s1.ptr, s2.ptr, s1.len) != 0));
 }
 
-inline string string::substring(int i, int n) const
+inline string string::substring(size_t i, size_t n) const
 {
-  assert((i >= 0) && ((i + n) <= len));
+  assert((i + n) <= len);
   return string(ptr + i, n);
 }
 
@@ -188,7 +189,7 @@ inline string &string::operator+=(char c)
 
 void put_string(const string &, FILE *);
 
-string as_string(int);
+string as_string(size_t);
 
 #endif // GROFF_STRINGCLASS_H
 

@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // TODO 1: Replace all this memory management stuff with vector<char>.
 // TODO 2: Replace this entire class.  See Savannah #67735.
 
-static char *salloc(int len, int *sizep)
+static char *salloc(size_t len, size_t *sizep)
 {
   if (0 == len) {
     *sizep = 0;
@@ -59,12 +59,13 @@ static char *salloc(int len, int *sizep)
   return p;
 }
 
-static void sfree(char *ptr, int)
+static void sfree(char *ptr, size_t)
 {
   delete[] ptr;
 }
 
-static char *sfree_alloc(char *ptr, int oldsz, int len, int *sizep)
+static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
+			 size_t *sizep)
 {
   if (oldsz >= len) {
     *sizep = oldsz;
@@ -89,8 +90,8 @@ static char *sfree_alloc(char *ptr, int oldsz, int len, int *sizep)
   return p;
 }
 
-static char *srealloc(char *ptr, int oldsz, int oldlen, int newlen,
-		      int *sizep)
+static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
+		      size_t newlen, size_t *sizep)
 {
   if (oldsz >= newlen) {
     *sizep = oldsz;
@@ -124,9 +125,8 @@ string::string() : ptr(0 /* nullptr */), len(0), sz(0)
 {
 }
 
-string::string(const char *p, int n) : len(n)
+string::string(const char *p, size_t n) : len(n)
 {
-  assert(n >= 0);
   ptr = salloc(n, &sz);
   if (sz > 0)
     memset(ptr, 0, sz);
@@ -225,7 +225,7 @@ string &string::operator+=(const char *p)
 {
   if (p != 0 /* nullptr */) {
     size_t n = strlen(p);
-    int newlen = len + n;
+    size_t newlen = len + n;
     if (newlen > sz)
       ptr = srealloc(ptr, sz, len, newlen, &sz);
     memcpy(ptr + len, p, n);
@@ -237,7 +237,7 @@ string &string::operator+=(const char *p)
 string &string::operator+=(const string &s)
 {
   if (s.len != 0) {
-    int newlen = len + s.len;
+    size_t newlen = len + s.len;
     if (newlen > sz)
       ptr = srealloc(ptr, sz, len, newlen, &sz);
     memcpy(ptr + len, s.ptr, s.len);
@@ -246,10 +246,10 @@ string &string::operator+=(const string &s)
   return *this;
 }
 
-void string::append(const char *p, int n)
+void string::append(const char *p, size_t n)
 {
   if (n > 0) {
-    int newlen = len + n;
+    size_t newlen = len + n;
     if (newlen > sz)
       ptr = srealloc(ptr, sz, len, newlen, &sz);
     memcpy(ptr + len, p, n);
@@ -257,9 +257,8 @@ void string::append(const char *p, int n)
   }
 }
 
-string::string(const char *s1, int n1, const char *s2, int n2)
+string::string(const char *s1, size_t n1, const char *s2, size_t n2)
 {
-  assert((n1 >= 0) && (n2 >= 0));
   len = n1 + n2;
   if (0 == len) {
     sz = 0;
@@ -305,9 +304,8 @@ bool operator>(const string &s1, const string &s2)
 	  : ((s1.len != 0) && (memcmp(s1.ptr, s2.ptr, s1.len) > 0)));
 }
 
-void string::set_length(int i)
+void string::set_length(size_t i)
 {
-  assert(i >= 0);
   if (i > sz)
     ptr = srealloc(ptr, sz, len, i, &sz);
   len = i;
@@ -334,7 +332,7 @@ bool string::contains(const char c) const
 }
 
 // Return index of substring `c` in string, -1 if not found.
-int string::find(const char *c) const
+size_t string::find(const char *c) const
 {
   const char *p = ptr
 		  ? static_cast<const char *>(memmem(ptr, len, c,
@@ -349,9 +347,9 @@ int string::find(const char *c) const
 char *string::extract() const
 {
   char *p = ptr;
-  int n = len;
+  size_t n = len;
   int nnuls = 0;
-  int i;
+  size_t i;
   for (i = 0; i < n; i++)
     if (p[i] == '\0')
       nnuls++;
@@ -438,8 +436,8 @@ void string::json_dump() const
 
 void string::remove_spaces()
 {
-  int l = len - 1;
-  while ((l >= 0) && (ptr[l] == ' '))
+  size_t l = len - 1;
+  while ((l < len) && (ptr[l] == ' '))
     l--;
   char *p = ptr;
   if (l > 0)
@@ -448,45 +446,35 @@ void string::remove_spaces()
       l--;
     }
   if (len - 1 != l) {
-    if (l >= 0) {
-      len = l + 1;
-      char *tmp = 0 /* nullptr */;
-      assert(sz > 0);
-      try {
-	tmp = new char[sz];
-      }
-      catch (const std::bad_alloc &exc) {
-	fatal("cannot allocate %1 bytes for removal of spaces",
-	      " from string", sz);
-      }
-      memset(tmp, 0, sz);
-      memcpy(tmp, p, len);
-      delete[] ptr;
-      ptr = tmp;
+    len = l + 1;
+    char *tmp = 0 /* nullptr */;
+    assert(sz > 0);
+    try {
+      tmp = new char[sz];
     }
-    else {
-      len = 0;
-      if (ptr) {
-	delete[] ptr;
-	ptr = 0 /* nullptr */;
-	sz = 0;
-      }
+    catch (const std::bad_alloc &exc) {
+      fatal("cannot allocate %1 bytes for removal of spaces",
+	    " from string", sz);
     }
+    memset(tmp, 0, sz);
+    memcpy(tmp, p, len);
+    delete[] ptr;
+    ptr = tmp;
   }
 }
 
 void put_string(const string &s, FILE *fp)
 {
-  int len = s.length();
+  size_t len = s.length();
   const char *ptr = s.contents();
-  for (int i = 0; i < len; i++)
+  for (size_t i = 0; i < len; i++)
     putc(ptr[i], fp);
 }
 
-string as_string(int i)
+string as_string(size_t i)
 {
   static char buf[INT_DIGITS + 2];
-  sprintf(buf, "%d", i);
+  sprintf(buf, "%lu", i);
   return string(buf);
 }
 

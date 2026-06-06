@@ -854,7 +854,7 @@ get_tag_lines(FILE *fp, string &data)
   int newline_count = 0;
   int c, prev = -1;
   // Handle CR, LF, and CRLF as line separators.
-  for (int i = 0; i < data.length(); i++) {
+  for (size_t i = 0; i < data.length(); i++) {
     c = data[i];
     if (c == '\n' || c == '\r')
       newline_count++;

@@ -2862,7 +2862,7 @@ void html_printer::write_header (void)
 void html_printer::determine_header_level (int level)
 {
   if (0 == level) {
-    int i;
+    size_t i;
 
     for (i = 0; ((i<header.header_buffer.length())
 		 && (('.' == header.header_buffer[i])

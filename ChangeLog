@@ -1,5 +1,32 @@
 2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Refactor groff's bespoke `string` class to use `size_t` instead
+	of `int` to track array sizes and indices.
+
+	* src/include/stringclass.h: Update declarations and `inline`
+	function definitions.
+	* src/libs/libgroff/string.cpp: Update definitions and local
+	variables.  Drop now tautologically true assert(3)ions.
+	(string::remove_spaces): This function searches for spaces
+	backward from the end of the string contents.  Alter loop
+	invariant from a non-negative array index (now impossible) to
+	one that is less than the array length.  Discard now-unreachable
+	logic branch.
+
+	* src/preproc/eqn/lex.cpp (add_quoted_context):
+	* src/preproc/preconv/preconv.cpp (get_tag_lines):
+	* src/preproc/refer/label.ypp (format_serial)
+	(alternative_expr::evaluate)
+	(substitute_expr::evaluate)
+	(int_set::set)
+	(int_set::get):
+	* src/preproc/refer/ref.cpp (reference::canonicalize_authors):
+	* src/preproc/tbl/table.cpp (table::add_entry): Retype variables
+	populated by or compared to applicable `string` member functions
+	from `int` to `size_t`.
+
+2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp: Drop unnecessary prototypes of
 	functions that lack external linkage (they're `static`) and do
 	not require forward declarations.

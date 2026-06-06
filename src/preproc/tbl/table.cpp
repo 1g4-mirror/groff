@@ -1538,7 +1538,7 @@ void table::add_entry(int r, int c, const string &str,
 {
   allocate(r);
   table_entry *e = 0 /* nullptr */;
-  int len = str.length();
+  size_t len = str.length();
   char *s = str.extract();
   // Diagnose escape sequences that can wreak havoc in generated output.
   if (len > 1) {

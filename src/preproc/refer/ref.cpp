@@ -471,7 +471,7 @@ void reference::sortify_authors(int n, string &result) const
 
 void reference::canonicalize_authors(string &result) const
 {
-  int len = result.length();
+  size_t len = result.length();
   sortify_authors(INT_MAX, result);
   if (result.length() > len)
     result += SORT_SUB_SEP;
