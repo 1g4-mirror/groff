@@ -36,12 +36,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "stringclass.h"
 
-static char *salloc(int len, int *sizep);
-static void sfree(char *ptr, int size);
-static char *sfree_alloc(char *ptr, int size, int len, int *sizep);
-static char *srealloc(char *ptr, int size, int oldlen, int newlen,
-		      int *sizep);
-
 // TODO 1: Replace all this memory management stuff with vector<char>.
 // TODO 2: Replace this entire class.  See Savannah #67735.
 

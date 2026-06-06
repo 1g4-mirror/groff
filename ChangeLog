@@ -1,5 +1,11 @@
 2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp: Drop unnecessary prototypes of
+	functions that lack external linkage (they're `static`) and do
+	not require forward declarations.
+
+2026-06-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Boolify groff's `string` class.
 
 	* src/include/stringclass.h:
