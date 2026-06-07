@@ -1,5 +1,12 @@
 2026-06-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/tests/count-macro-arguments-correctly.sh: Add
+	test verifying that macro arguments are counted correctly even
+	in the presence of right-brace escape sequences.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-06-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (decode_macro_call_arguments): Handle
 	right-brace escape sequences in macro arguments consistently
 	with past groffs, and Solaris 10, DWB 3.3, and Heirloom Doctools
