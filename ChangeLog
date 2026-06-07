@@ -1,5 +1,18 @@
 2026-06-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (decode_macro_call_arguments): Handle
+	right-brace escape sequences in macro arguments consistently
+	with past groffs, and Solaris 10, DWB 3.3, and Heirloom Doctools
+	troffs (but not _quite_ like Plan 9 troff, whose macro argument
+	handling differs from all the others).
+
+	Fixes <https://savannah.gnu.org/bugs/?68430>.  Problem
+	introduced by me in commit ebf943aa66, 2026-04-20.
+
+	Also completes fixing <https://savannah.gnu.org/bugs/?42675>.
+
+2026-06-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68430.
 
 	* src/roff/groff/tests/\

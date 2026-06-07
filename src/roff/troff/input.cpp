@@ -4755,6 +4755,36 @@ static void interpolate_macro_or_invoke_request(symbol nm,
 
 static void decode_macro_call_arguments(macro_iterator *mi)
 {
+  // Discard right-brace escape sequences until hitting something else.
+  // Doing so enables us to ignore a newline that occurs right after a
+  // right-brace escape sequence.  Nobody documents this, but it's what
+  // all AT&T-descended troffs do.
+  //
+  // Scenario:
+  // .de aa
+  // A
+  // ..
+  // .if 1 \{.aa\}
+  // B
+  //
+  // If we read the newline at the end of the macro definition and the
+  // newline at the end of the `if` control line adjacently, that's a
+  // blank line.  No AT&T-descended troff acts that way, so we shouldn't
+  // either, and must discard one of the newlines.
+  //
+  // Further, Seventh Edition Unix (Ossanna) troff and early versions of
+  // Kernighan troff have a related bug.  When making an argumentless
+  // macro call within a branch of a control flow request and following
+  // the call with a right brace escape sequence, these older troffs
+  // would miscount the arguments, making the value of the `.$` register
+  // incorrect.  GBR infers that the bug survived into DWB 2.0 and thus
+  // propagated into System V troff, and thence Solaris troff.  DWB 3.3
+  // and Heirloom Doctools fixed it.  Carsten Kunze also fixed the bug
+  // in the "Solaris10-ditroff" GitHub project.  Plan 9 troff, however,
+  // still manifests the bug.  So did GNU troff, through version 1.24.1.
+  // See Savannah #42675.
+  while (tok.is_right_brace())
+    tok.next();
   if (!tok.is_terminator()) {
     node *n;
     int c = read_character_in_copy_mode(&n);
