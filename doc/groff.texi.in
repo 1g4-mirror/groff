@@ -2698,7 +2698,7 @@ due to the breadth of features they provide and because more than one
 cannot be used by the same document; for example
 
 @Example
-groff -m man foo.man -m ms bar.doc
+$ groff -m man foo.man -m ms bar.doc
 @endExample
 
 @noindent
@@ -2706,7 +2706,7 @@ doesn't work.  Option arguments are processed before non-option
 arguments; the above (failing) sample is thus reordered to
 
 @Example
-groff -m man -m ms foo.man bar.doc
+$ groff -m man -m ms foo.man bar.doc
 @endExample
 
 @cindex minor macro package
@@ -22665,7 +22665,7 @@ To activate such statements, use the @option{-r} option to set the
 register.
 
 @Example
-groff -rDB=1 @slanted{file}
+$ groff -rDB=1 @slanted{file}
 @endExample
 
 If you know in advance that there are many errors and no useful output,
