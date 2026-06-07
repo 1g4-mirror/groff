@@ -13787,13 +13787,27 @@ accent}).  @code{u0045_0302_0301} is thus the glyph name for U+1EBE,
 @sc{latin capital letter e with circumflex and acute}.
 
 @item
-groff maintains a table to decompose all algorithmically derived glyph
-names that are composites itself.  For example, @code{u0100} (@sc{latin
-letter a with macron}) is automatically decomposed into
-@code{u0041_0304}.  Additionally, a glyph name of the GGL is preferred
-to an algorithmically derived glyph name; @code{groff} also
-automatically does the mapping.  Example: The glyph @code{u0045_0302} is
-mapped to @code{^E}.
+GNU
+@command{troff}
+maintains a table
+to decompose all algorithmically derived glyph names
+that are composites.
+For example,
+@code{u0100}
+(@sc{latin letter a with macron})
+is automatically decomposed into
+@code{u0041_0304}.
+Additionally,
+a glyph name of the GGL is preferred
+to an algorithmically derived glyph name;
+GNU
+@command{troff}
+also automatically does the mapping.
+Example:@:
+The glyph
+@code{u0045_0302}
+is mapped to
+@code{^E}.
 
 @item
 glyph names of the GGL can't be used in composite glyph names; for
