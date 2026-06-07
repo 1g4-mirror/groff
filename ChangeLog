@@ -1,3 +1,11 @@
+2026-06-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Regression-test Savannah #68430.
+
+	* src/roff/groff/tests/\
+	handle-right-brace-escape-as-macro-argument.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (assign_control_character_request)
