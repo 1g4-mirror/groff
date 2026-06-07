@@ -113,7 +113,7 @@
 	* src/devices/grohtml/post-html.cpp: Improve type-correctness.
 	`html` is an object of type `simple_output` which contains a
 	`word_list`, which contains a list of `word`s, each of which
-	store its contents in a `char *`, _not_ objects of groff's
+	stores its contents in a `char *`, _not_ objects of groff's
 	`string` class.
 	(html_printer::write_html_anchor)
 	(html_printer::write_xhtml_anchor)
