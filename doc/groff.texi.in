@@ -12946,6 +12946,8 @@ the formatter selects the previously used typeface
 and makes the current selection the previous one;
 if there is no previous font selection,
 the formatter ignores the request.
+These data are associated
+with the environment.@footnote{@xref{Environments}.}
 
 @cindex automatic font mounting
 @cindex font mounting, automatic
@@ -13317,9 +13319,9 @@ to the selected output device.  GNU @code{troff} does not traverse
 directories to locate the font description file.
 
 @c The third argument was a late revision to device-independent troff.
-@c It wasn't in the "Unix 4.0" version of CSTR #54 (January 1981), which
-@c featured Kernighan's device-independent rewrite, but appeared by the
-@c time of its 1992 revision.
+@c It wasn't shown in the "Unix 4.0" version of CSTR #54 (January 1981),
+@c which featured Kernighan's device-independent rewrite, but appeared
+@c by the time of its 1992 revision.
 @cindex font aliasing with third argument to @code{fp} request
 @cindex aliasing fonts with third argument to @code{fp} request
 The optional third argument enables font names to be aliased, which can
@@ -13357,12 +13359,14 @@ on the standard error stream with the
 request.@footnote{@xref{Debugging}.}
 
 @cindex font mounting position register (@code{.f})
-The position of the currently selected font (or abstract style) is
-available in the read-only register @samp{.f}.  It is associated with
-the environment (@pxref{Environments}).
+The position of the currently selected font
+(or abstract style)
+is available in the read-only register
+@samp{.f}.
 
-Copy the value of @code{.f} to another register to save it for later
-use.
+Copy the value of
+@code{.f}
+to another register to save it for later use.
 
 @Example
 .nr sF \n(.f
@@ -13472,7 +13476,7 @@ output devices support the two special fonts
 (slanted symbol)
 and
 @samp{S} (symbol);
-and these devices'
+these devices'
 @file{DESC}
 files arrange them such that the formatter searches
 the former before the latter.
@@ -14648,11 +14652,19 @@ empties the corresponding list.
 @cindex artificial fonts
 @cindex fonts, artificial
 
-There are a number of requests and escape sequences for artificially
-creating fonts.  These are largely vestiges of the days when output
-devices did not have a wide variety of fonts, and when @code{nroff} and
-@code{troff} were separate programs.  Most of them are no longer
-necessary in GNU @code{troff}.  Nevertheless, they are supported.
+Some requests and escape sequences apply simple transformations
+to glyph shapes,
+or draw rules beneath the text baseline (underlining).
+These features are largely vestiges of the days
+when output devices lacked a wide variety of fonts,
+and when
+@command{nroff}
+and
+@command{troff}
+were separate formatters.
+GNU
+@command{troff}
+retains support for them even though they are seldom needed nowadays.
 
 @DefescList {\\H, @code{'}, height, @code{'}}
 @DefescItem {\\H, @code{'}, @t{+}height, @code{'}}
@@ -15435,8 +15447,8 @@ typographical points.
 must be exactly two digits.
 @end table
 
-@xref{Using Fractional Type Sizes},
-for further syntactical forms of the
+@ref{Using Fractional Type Sizes}
+presents further syntactical forms of the
 @code{\s}
 escape sequence that additionally accept decimal fractions.
 
