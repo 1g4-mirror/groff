@@ -1086,8 +1086,8 @@ and
 .B LE
 to identify them as list items.
 .
-Doing so can mark them as \[lq]compact\[rq]\" ,
-.\" ease management of their indentation,
+Doing so can mark them as \[lq]compact\[rq],
+ease management of their indentation,
 and supply hints to the output driver to improve their rendering
 (as with HTML).
 .
