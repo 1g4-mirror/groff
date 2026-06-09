@@ -63,9 +63,18 @@ static char *salloc(size_t len, size_t *sizep)
   return p;
 }
 
-static void sfree(char *ptr, size_t)
+static void sfree(char *ptr)
 {
   delete[] ptr;
+  size_t amount = initial_string_buffer_size;
+  try {
+    ptr = new char[amount];
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate %1 bytes for string reallocation after"
+	  " freeing", amount);
+  }
+  memset(ptr, 0, amount);
 }
 
 static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
@@ -78,7 +87,7 @@ static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
   delete[] ptr;
   if (0 == len) {
     *sizep = 0;
-    return 0 /* nullptr */;
+    return 0 /* nullptr */; // XXX: GBR: breaks invariant
   }
   char *p = 0 /* nullptr */;
   size_t amount = len * 2;
@@ -104,7 +113,7 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
   if (0 == newlen) {
     delete[] ptr;
     *sizep = 0;
-    return 0 /* nullptr */;
+    return 0 /* nullptr */; // XXX: GBR: breaks invariant
   }
   else {
     size_t amount = newlen * 2;
@@ -176,7 +185,7 @@ string::string(const string &s) : len(s.len)
 
 string::~string()
 {
-  sfree(ptr, sz);
+  delete[] ptr;
 }
 
 string &string::operator=(const string &s)
@@ -191,7 +200,7 @@ string &string::operator=(const string &s)
 string &string::operator=(const char *p)
 {
   if (0 /* nullptr */ == p) {
-    sfree(ptr, len);
+    sfree(ptr);
     len = 0;
     ptr = 0 /* nullptr */;
     sz = 0;
@@ -216,7 +225,7 @@ string &string::operator=(char c)
 
 void string::move(string &s)
 {
-  sfree(ptr, sz);
+  sfree(ptr);
   ptr = s.ptr;
   len = s.len;
   sz = s.sz;

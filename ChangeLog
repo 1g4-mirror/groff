@@ -1,3 +1,19 @@
+2026-06-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp: Continue refactoring to
+	implement new invariant: any existing `string` object is backed
+	by "clean" storage.
+	(sfree): After deleting old storage, allocate "clean"
+	replacement new storage of `initial_string_buffer_size`, just as
+	`salloc()` does when given a zero second argument.  Also delete
+	unused second function parameter.
+	(string::~string): Stop calling `sfree()` (since it reallocates
+	the backing storage) in favor of direct deletion, thus
+	maintaining the invariant--it occurs only when the entire object
+	is being destroyed.
+	(string::operator=, string::move): Update to call `sfree()`with
+	its new, simpler signature.
+
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Use a more appropriate return type for
