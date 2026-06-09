@@ -32,7 +32,7 @@
 	and `FALSE` with language literals `true` and `false`,
 	respectively.
 
-	Continues the long process of fixing Savannah #68192.
+	Continues the long process of fixing Savannah #66672.
 
 2026-06-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
