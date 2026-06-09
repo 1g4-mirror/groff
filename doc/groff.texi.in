@@ -23145,7 +23145,7 @@ character cells)
 in
 @code{nroff}
 mode.
-@xref{@code{troff} and @code{nroff} Modes}.
+Recall @ref{@code{troff} and @code{nroff} Modes}.
 This category is enabled by default.
 
 @item delim
