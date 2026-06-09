@@ -111,6 +111,21 @@ pic
 Macro packages
 --------------
 
+*  The an (man) package offers new macros to ease the formatting of
+   lists.  Enclose paragraphing macros between `LS` and `LE` to identify
+   them as list items.  Doing so can mark them as "compact", ease
+   management of their indentation, and supply hints to the output
+   driver to improve their rendering (as with HTML).  Lists can be
+   nested.  (Sub)sectioning macro calls, and the end of the document,
+   close all open lists.  See groff_man(7) for details, and
+   groff_man_style(7) for an example.
+
+   Because these macros format no text, documents employing them risk no
+   damage to their content if the formatter does not support them.  A
+   man(7) document author can choose either to transition to these
+   macros, to to manage list "compactness" and item indentation with
+   existing man(7) package facilities, or to employ both approaches.
+
 *  The m (mm) macro package's `IA` and `WA` macros--used only with the
    "letter" document type configured by calling the `LT` macro--no
    longer disable the escape character, and their counterparts `IE` and
