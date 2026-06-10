@@ -1,5 +1,16 @@
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/tests/\
+	do-not-segv-on-invalid-vertical-span-entry.sh: Revise test to
+	stop using the presence of a "core" file as a failure oracle.
+	Instead, pattern-match tbl(1)'s output for the `TE` macro call
+	that gets issed only after the formerly buggy table processing
+	completes successfully.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?68204>.
+
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/tests/\
 	do-not-crash-when-reading-macro-arguments.sh: Revise test to
 	stop using the presence of a "core" file as a failure oracle.

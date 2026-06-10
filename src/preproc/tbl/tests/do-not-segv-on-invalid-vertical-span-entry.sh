@@ -25,21 +25,16 @@ tbl="${abs_top_builddir:-.}/tbl"
 # Don't segfault because we tried to span down from an invalid span that
 # tbl neglected to replace with an empty table entry.
 
-if [ -e core ]
-then
-    echo "$0: 'core' file already exists; skipping" >&2
-    exit 77 # skip
-fi
-
-input=$(cat <<EOF
+input='.
 .TS
 l.
 \^
 \^
 .TE
-EOF
-)
-output=$(printf "%s" "$input" | "$tbl")
-! test -f core
+.'
+
+output=$(printf '%s\n' "$input" | "$tbl")
+printf '%s\n' "$output"
+printf '%s\n' "$output" | grep -Fqx ".TE"
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
