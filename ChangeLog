@@ -1,5 +1,16 @@
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp: Continue refactoring to
+	implement new invariant: any existing `string` object is backed
+	by "clean" storage.
+	(string::move): Rewrite.  Use `sfree_alloc()`, which also backs
+	`operator=()`, on destination string to perform replacement
+	allocation.  Use memcpy(3) to copy contents from source string
+	to destination.  Use member function `clear()` on source string.
+	Add assert(3)ion enforcing new invariant.
+
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (string::operator=)
 	(string::grow1, string::clear): Add assert(3)ion enforcing new
 	invariant.

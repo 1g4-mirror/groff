@@ -231,13 +231,11 @@ string &string::operator=(char c)
 
 void string::move(string &s)
 {
-  sfree(ptr);
-  ptr = s.ptr;
+  sfree_alloc(ptr, sz, s.len, &sz);
+  memcpy(ptr, s.ptr, s.len);
   len = s.len;
-  sz = s.sz;
-  s.ptr = 0 /* nullptr */;
-  s.len = 0;
-  s.sz = 0;
+  s.clear();
+  assert(ptr != 0 /* nullptr */);
 }
 
 void string::grow1()
