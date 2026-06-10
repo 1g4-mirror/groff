@@ -1,3 +1,9 @@
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp (string::operator=)
+	(string::grow1, string::clear): Add assert(3)ion enforcing new
+	invariant.
+
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp (sfree_alloc, srealloc): Be more

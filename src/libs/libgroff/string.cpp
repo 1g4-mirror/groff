@@ -195,6 +195,7 @@ string::~string()
 string &string::operator=(const string &s)
 {
   ptr = sfree_alloc(ptr, sz, s.len, &sz);
+  assert(ptr != 0 /* nullptr */);
   len = s.len;
   if (len != 0)
     memcpy(ptr, s.ptr, len);
@@ -222,6 +223,7 @@ string &string::operator=(const char *p)
 string &string::operator=(char c)
 {
   ptr = sfree_alloc(ptr, sz, 1, &sz);
+  assert(ptr != 0 /* nullptr */);
   len = 1;
   *ptr = c;
   return *this;
@@ -241,6 +243,7 @@ void string::move(string &s)
 void string::grow1()
 {
   ptr = srealloc(ptr, sz, len, len + 1, &sz);
+  assert(ptr != 0 /* nullptr */);
 }
 
 string &string::operator+=(const char *p)
@@ -336,6 +339,7 @@ void string::set_length(size_t i)
 
 void string::clear()
 {
+  //assert(ptr != 0 /* nullptr */); // XXX: TODO: held up by refer(1)
   if (ptr != 0 /* nullptr */)
     memset(ptr, 0, sz);
   len = 0;
