@@ -19,6 +19,7 @@
 #
 
 groff="${abs_top_builddir:-.}/test-groff"
+tbl="${abs_top_builddir:-.}/tbl"
 
 fail=
 
@@ -32,13 +33,8 @@ wail () {
 # Do not SEGV when a text block begins with a repeating glyph token, and
 # do not malformat the output if it ends with one.
 
-if [ -e core ]
-then
-    echo "$0: 'core' file already exists; skipping" >&2
-    exit 77 # skip
-fi
-
-input='.TS
+input='.
+.TS
 L.
 T{
 \Ra
@@ -58,21 +54,26 @@ foo
 \Ra
 bar
 T}
-.TE'
+.TE
+.'
 
-output=$(printf "%s\n" "$input" | "$groff" -t -Tascii -P-cbou)
+tbl_output=$(printf '%s\n' "$input" | "$tbl")
+printf '%s\n' "$tbl_output"
+
+groff_output=$(printf '%s\n' "$input" | "$groff" -t -Tascii -P-cbou)
+printf '%s\n' "$groff_output"
 
 echo "checking that tbl doesn't segfault" >&2
-test -f core && wail
+printf '%s\n' "$tbl_output" | grep -Fqx ".TE" || wail
 
 echo "checking text block starting with repeating glyph" >&2
-echo "$output" | sed -n 1p | grep -qx 'a' || wail
+printf '%s\n' "$groff_output" | sed -n 1p | grep -qx 'a' || wail
 
 echo "checking text block ending with repeating glyph" >&2
-echo "$output" | sed -n 2p | grep -qx 'foo a' || wail
+printf '%s\n' "$groff_output" | sed -n 2p | grep -qx 'foo a' || wail
 
 echo "checking text block containing repeating glyph" >&2
-echo "$output" | sed -n 3p | grep -qx 'foo a bar' || wail
+printf '%s\n' "$groff_output" | sed -n 3p | grep -qx 'foo a bar' || wail
 
 test -z "$fail"
 
