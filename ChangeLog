@@ -1,3 +1,13 @@
+2026-06-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp: Continue refactoring to
+	implement new invariant: any existing `string` object is backed
+	by "clean" storage.
+	(sfree_alloc, srealloc): Simplify special-case handling of
+	replacement string having zero length.  Deal with it as
+	`salloc()` now does, using `initial_string_buffer_size` as the
+	`amount` in that case.
+
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp: Increase initial buffer size

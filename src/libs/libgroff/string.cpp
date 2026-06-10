@@ -91,10 +91,6 @@ static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
     return ptr;
   }
   delete[] ptr;
-  if (0 == len) {
-    *sizep = 0;
-    return 0 /* nullptr */; // XXX: GBR: breaks invariant
-  }
   char *p = 0 /* nullptr */;
   size_t amount = len;
   if (0 == amount)
@@ -117,30 +113,27 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
     *sizep = oldsz;
     return ptr;
   }
-  if (0 == newlen) {
-    delete[] ptr;
-    *sizep = 0;
-    return 0 /* nullptr */; // XXX: GBR: breaks invariant
+  size_t amount = newlen;
+  if (0 == amount)
+    amount = initial_string_buffer_size;
+  else
+    // If the string changes size once, assume it will change again, in
+    // an effort to avoid excessive reallocations.
+    amount = newlen * 2;
+  char *p = 0 /* nullptr */;
+  try {
+    p = new char[*sizep = amount];
   }
-  else {
-    // If the string changes size once, assume it will change again; try
-    // to prevent excessive reallocations.
-    size_t amount = newlen * 2;
-    char *p = 0 /* nullptr */;
-    try {
-      p = new char[*sizep = amount];
-    }
-    catch (const std::bad_alloc &exc) {
-      fatal("cannot allocate %1 bytes for string reallocation", amount);
-    }
-    if ((oldlen < newlen) && (oldlen != 0)) {
-      assert(amount > 0);
-      memset(p, 0, amount);
-      memcpy(p, ptr, oldlen);
-    }
-    delete[] ptr;
-    return p;
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate %1 bytes for string reallocation", amount);
   }
+  if ((oldlen < newlen) && (oldlen != 0)) {
+    assert(amount > 0);
+    memset(p, 0, amount);
+    memcpy(p, ptr, oldlen);
+  }
+  delete[] ptr;
+  return p;
 }
 
 string::string() : len(0), sz(initial_string_buffer_size)
