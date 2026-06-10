@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #endif
 
 #include <stdcountof.h>
+#include <stdlib.h> // free()
 
 #include "refer.h"
 #include "refid.h"
@@ -57,7 +58,7 @@ input_item::input_item(string &s, const char *fn, int ln)
 
 input_item::~input_item()
 {
-  delete[] filename;
+  free(filename);
 }
 
 inline int input_item::peek_char()

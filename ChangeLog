@@ -1,5 +1,12 @@
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/refer/command.cpp (input_item::~input_item): The
+	storage backing the `filename` pointer is allocated (via
+	`strsave()`) by malloc(3), not `new`, so free it with free(3),
+	not `delete[]`.
+
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/tests/\
 	do-not-segv-when-backslash-R-in-text-block.sh: Revise test to
 	stop using the presence of a "core" file as a failure oracle.
