@@ -1,5 +1,18 @@
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Trivially refactor.  Rename `string` class's private
+	member function `grow1()` to `embiggen()`.  The former name is
+	now potentially misleading because the internal function
+	`srealloc()` now doubles a `string` object's capacity (`sz`)
+	when exceeded.
+
+	* src/include/stringclass.h (class string): Rename declaration.
+	(string::operator+=): Update call site.
+	* src/libs/libgroff/string.cpp (string::grow1): Rename this...
+	(string:embiggen): ...to this.
+
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp: Continue refactoring to
 	implement new invariant: any existing `string` object is backed
 	by "clean" storage.

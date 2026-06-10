@@ -238,7 +238,7 @@ void string::move(string &s)
   assert(ptr != 0 /* nullptr */);
 }
 
-void string::grow1()
+void string::embiggen()
 {
   ptr = srealloc(ptr, sz, len, len + 1, &sz);
   assert(ptr != 0 /* nullptr */);

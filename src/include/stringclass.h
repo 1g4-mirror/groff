@@ -102,7 +102,7 @@ private:
 
   // for use by operator+
   string(const char *, size_t, const char *, size_t);
-  void grow1();
+  void embiggen();
 };
 
 
@@ -186,7 +186,7 @@ inline string string::substring(size_t i, size_t n) const
 inline string &string::operator+=(char c)
 {
   if (len >= sz)
-    grow1();
+    embiggen();
   ptr[len++] = c;
   return *this;
 }
