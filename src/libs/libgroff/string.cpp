@@ -44,14 +44,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // TODO 1: Replace all this memory management stuff with vector<char>.
 // TODO 2: Replace this entire class.  See Savannah #67735.
 
-static const size_t initial_string_buffer_size = 8;
+// An initial buffer size of 64 appears to balance build time against
+// minimization of reallocations.
+static const size_t initial_string_buffer_size = 64;
 
 static char *salloc(size_t len, size_t *sizep)
 {
   char *p = 0 /* nullptr */;
-  size_t amount = len * 2;
+  size_t amount = len;
   if (0 == amount)
     amount = initial_string_buffer_size;
+  // XXX: Add 1 as a hack to work around a problem created in
+  // src/devices/html/post-html.cpp:page::add_and_encode_char() when it
+  // is omitted.  If/when we resolve that, we can assign simply `len`.
+  amount += 1;
   try {
     p = new char[*sizep = amount];
   }
@@ -90,8 +96,9 @@ static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
     return 0 /* nullptr */; // XXX: GBR: breaks invariant
   }
   char *p = 0 /* nullptr */;
-  size_t amount = len * 2;
-  assert(amount > 0);
+  size_t amount = len;
+  if (0 == amount)
+    amount = initial_string_buffer_size;
   try {
     p = new char[*sizep = amount];
   }
@@ -116,6 +123,8 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
     return 0 /* nullptr */; // XXX: GBR: breaks invariant
   }
   else {
+    // If the string changes size once, assume it will change again; try
+    // to prevent excessive reallocations.
     size_t amount = newlen * 2;
     char *p = 0 /* nullptr */;
     try {

@@ -1,3 +1,14 @@
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp: Increase initial buffer size
+	backing `string` objects from 8 to 64, and stop allocating
+	double the requested length on initial or replacement
+	allocations.  An initial buffer size of 64 appears to balance
+	build time against minimization of reallocations.
+	(salloc, sfree_alloc): Allocate only `len` `char` elements, not
+	`len * 2`, unless `len` equals zero.
+	(sfree_alloc): Drop now-taulogous assert(3)ion.
+
 2026-06-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp: Continue refactoring to
