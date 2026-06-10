@@ -1,3 +1,14 @@
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/pic/tests/\
+	do-not-crash-when-reading-macro-arguments.sh: Revise test to
+	stop using the presence of a "core" file as a failure oracle.
+	Instead, pattern-match pic(1)'s output for the `PE` *roff macro
+	call that gets issed only after the formerly buggy macro
+	processing completes successfully.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?68204>.
+
 2026-06-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/tests/count-macro-arguments-correctly.sh: Add

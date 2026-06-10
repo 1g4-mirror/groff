@@ -22,13 +22,6 @@ pic="${abs_top_builddir:-.}/pic"
 # Regression-test Savannah #67899.  Thanks to John de Armas for the
 # reproducer (based on an example from "doc/pic.ms").
 
-if [ -e core ]
-then
-    echo "$0: 'core' file already exists; skipping" >&2
-    exit 77 # skip
-fi
-
-
 input='
 .PS
 # Plot a single jumper in a $1 by $2 box, $3 is the on-off state
@@ -72,7 +65,8 @@ jumperblock(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,\
 .PE
 '
 
-echo "$input" | "$pic"
-! test -f core
+output=$(printf '%s\n' "$input" | "$pic")
+printf '%s\n' "$output"
+printf '%s\n' "$output" | grep -Fqx '.PE'
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
