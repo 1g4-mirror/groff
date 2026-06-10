@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,12 +53,7 @@ extern char *program_name;	/* main program must define this */
 char *quote_arg(char *);
 void purge_quoted_args(char **);
 
-#undef FALSE
-#undef TRUE
-#define FALSE 0
-#define TRUE  1
-
-static int
+static bool
 needs_quoting(const char *string)
 {
   /* Scan 'string' to see whether it needs quoting for MSVC 'spawn'/'exec'
@@ -65,18 +61,18 @@ needs_quoting(const char *string)
    */
 
   if (string == NULL)		/* ignore NULL strings */
-    return FALSE;
+    return false;
 
   if (*string == '\0')		/* explicit arguments of zero length	  */
-    return TRUE;		/* need quoting, so they aren't discarded */
-        
+    return true;		/* need quoting, so they aren't discarded */
+
   while (*string) {
     /* Scan non-NULL strings, up to '\0' terminator,
-     * returning 'TRUE' if quote or whitespace found.
+     * returning 'true' if quote or whitespace found.
      */
 
     if (*string == '"' || isspace(*string))
-      return TRUE;
+      return true;
 
     /* otherwise, continue scanning to end of string */
 
@@ -84,10 +80,10 @@ needs_quoting(const char *string)
   }
 
   /* Fall through, if no quotes or whitespace found,
-   * in which case, return 'FALSE'.
+   * in which case, return 'false'.
    */
 
-  return FALSE;
+  return false;
 }
       
 char *

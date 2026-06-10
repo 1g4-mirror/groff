@@ -1,3 +1,17 @@
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Boolify "quotearg.c".
+
+	* src/libs/libgroff/quotearg.c: Preprocessor-include
+	"<stdbool.h>" header file to ensure visibility of `true` and
+	`false` symbols.  Drop preprocessor manipulations of `TRUE` and
+	`FALSE` macros.
+	(needs_quoting): Migrate Boolean literals from preprocessor
+	macros to language objects.  Demote return type from `int` to
+	`bool`.
+
+	Continues the long process of fixing Savannah #66672.
+
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Trivially refactor.  Rename `string` class's private
