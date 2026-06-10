@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stdcountof.h>
 #include <stdlib.h> // free()
+#include <string.h> // strdup()
 
 #include "refer.h"
 #include "refid.h"
@@ -49,7 +50,7 @@ public:
 };
 
 input_item::input_item(string &s, const char *fn, int ln)
-: filename(strsave(fn)), first_lineno(ln), buffer(s)
+: filename(strdup(fn)), first_lineno(ln), buffer(s)
 {
   ptr = buffer.contents();
   end = ptr + buffer.length();

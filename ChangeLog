@@ -8,6 +8,20 @@
 
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Migrate to strdup(3).
+
+	* src/preproc/refer/command.cpp:
+	* src/preproc/refer/token.cpp: Preprocessor-include C
+	"<string.h>" header file.
+	* src/preproc/refer/command.cpp (input_item::input_item):
+	* src/preproc/refer/token.cpp (init_ascii, init_letter)
+	(init_two_char_letter, init_strings): Migrate from libgroff's
+	`strsave()` to POSIX's strdup(3).
+
+	Continues the long process of fixing Savannah #66672.
+
+2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/refer/command.cpp (input_item::~input_item): The
 	storage backing the `filename` pointer is allocated (via
 	`strsave()`) by malloc(3), not `new`, so free it with free(3),
