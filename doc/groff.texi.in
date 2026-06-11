@@ -13068,7 +13068,7 @@ Set magnification of
 @var{font}
 to factor
 @var{zoom},
-a multiplier applied to the type size in thousandths.
+a multiplier in thousandths applied to the type size.
 @var{zoom}
 must be non-negative.
 @code{fzoom}
