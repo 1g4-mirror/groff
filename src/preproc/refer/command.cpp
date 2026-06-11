@@ -49,9 +49,8 @@ public:
 };
 
 input_item::input_item(string &s, const char *fn, int ln)
-: filename(strsave(fn)), first_lineno(ln)
+: filename(strsave(fn)), first_lineno(ln), buffer(s)
 {
-  buffer.move(s);
   ptr = buffer.contents();
   end = ptr + buffer.length();
 }

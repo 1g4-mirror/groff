@@ -1,3 +1,11 @@
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/refer/command.cpp (input_item::input_item):
+	Populate member variable `buffer` with copy initialization.  We
+	shouldn't use `string::move()` because the string contents might
+	not be heap-allocated in the first place.  Problem found the
+	hard way with refactoring of groff's `string` class.
+
 2026-06-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/refer/command.cpp (input_item::~input_item): The
