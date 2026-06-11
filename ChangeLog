@@ -1,5 +1,10 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (RE): Trivially refactor.  Rename register
+	`an-RE-requested-level` to `an*RE-requested-level`.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac: Trivially refactor.  Rename macro.
 	(an-deprecation-warn): Rename this...
 	(an*deprecation-warn): ...to this.
