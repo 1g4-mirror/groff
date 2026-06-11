@@ -27,6 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdlib.h> // getenv(), setenv(), strtoul()
 #include <string.h> // strerror(), strtok()
 
+#include <new> // std::bad_alloc
+
 #include "cset.h"
 #include "driver.h"
 #include "lib.h" // strsave()
@@ -186,7 +188,15 @@ resource *resource_manager::lookup_resource(resource_type type,
 	&& r->version == version
 	&& r->revision == revision)
       return r;
-  r = new resource(type, name, version, revision);
+  r = 0 /* nullptr */;
+  try {
+    r = new resource(type, name, version, revision);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of PostScript resource"
+	  " '%2', version '%3'", sizeof(resource), name.contents(),
+	  version.contents());
+  }
   r->next = resource_list;
   resource_list = r;
   return r;
@@ -203,7 +213,14 @@ resource *resource_manager::lookup_font(const char *name)
 	&& memcmp(name, r->name.contents(), r->name.length()) == 0)
       return r;
   string s(name);
-  r = new resource(RESOURCE_FONT, s);
+  r = 0 /* nullptr */;
+  try {
+    r = new resource(RESOURCE_FONT, s);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of PostScript font"
+	  " resource '%2'", sizeof(resource), s.contents());
+  }
   r->next = resource_list;
   resource_list = r;
   return r;
@@ -214,6 +231,7 @@ void resource_manager::need_font(const char *name)
   lookup_font(name)->flags |= resource::FONT_NEEDED;
 }
 
+// XXX: This comment dates to 1991.  Discard the workaround.
 typedef resource *Presource;	// Work around g++ bug.
 
 void resource_manager::document_setup(ps_output &out)
@@ -225,10 +243,25 @@ void resource_manager::document_setup(ps_output &out)
       nranks = r->rank + 1;
   if (nranks > 0) {
     // Sort resource_list in reverse order of rank.
-    Presource *head = new Presource[nranks + 1];
-    Presource **tail = new Presource *[nranks + 1];
-    int i;
-    for (i = 0; i < nranks + 1; i++) {
+    Presource *head = 0 /* nullptr */;
+    size_t count = nranks + 1;
+    try {
+      head = new Presource[count];
+    }
+    catch (const std::bad_alloc &e) {
+      fatal("cannot allocate %1 bytes for storage of %2 pointers",
+	    (count * sizeof(Presource)), count);
+    }
+    Presource **tail = 0 /* nullptr */;
+    try {
+      tail = new Presource *[count];
+    }
+    catch (const std::bad_alloc &e) {
+      fatal("cannot allocate %1 bytes for storage of %2 pointers",
+	    (count * sizeof(Presource)), count);
+    }
+    size_t i;
+    for (i = 0; i < count; i++) {
       head[i] = 0;
       tail[i] = &head[i];
     }
@@ -238,7 +271,7 @@ void resource_manager::document_setup(ps_output &out)
       tail[i] = &(*tail[i])->next;
     }
     resource_list = 0;
-    for (i = 0; i < nranks + 1; i++)
+    for (i = 0; i < count; i++)
       if (head[i]) {
 	*tail[i] = resource_list;
 	resource_list = head[i];

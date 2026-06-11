@@ -2,14 +2,24 @@
 
 	[grops]: Slightly refactor.
 
-	* src/devices/grops/ps.cpp: Use ISO C++98 exceptions to handle
+	* src/devices/grops/ps.cpp:
+	* src/devices/grops/psrm.cpp: Use ISO C++98 exceptions to handle
 	heap storage allocation failures.  Preprocessor-include C++
 	"<new>" header file.
+	* src/devices/grops/ps.cpp:
 	(ps_font::load_ps_font, ps_printer::set_subencoding)
 	(ps_printer::get_subfont, ps_printer::define_encoding)
-	(ps_printer::encode_fonts, ps_printer::set_style): Catch
-	`std:bad_alloc` exception and `fatal()` out with an attempt to
-	describe what we were doing.
+	(ps_printer::encode_fonts, ps_printer::set_style):
+	* src/devices/grops/psrm.cpp:
+	(resource_manager::lookup_resource)
+	(resource_manager::lookup_font)
+	(resource_manager::document_setup):
+	Catch `std:bad_alloc` exception and `fatal()` out with an
+	attempt to describe what we were doing.
+
+	* src/devices/grops/psrm.cpp (resource_manager::document_setup):
+	Trivially refactor to lift a repeated expression into a local
+	variable, `count`.
 
 	Continues the long process of fixing Savannah #68192.
 
