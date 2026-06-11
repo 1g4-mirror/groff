@@ -28,6 +28,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <string.h> // memchr(), memcmp(), memcpy(), memmem(), memset(),
 		    // strlen(), size_t
 
+// POSX/operating system services
+#include <sys/types.h> // ssize_t
+
 #include <new> // std::bad_alloc
 
 #include "cset.h" // csprint()
@@ -339,7 +342,7 @@ bool string::contains(const char c) const
 }
 
 // Return index of substring `c` in string, -1 if not found.
-size_t string::find(const char *c) const
+ssize_t string::find(const char *c) const
 {
   const char *p = ptr
 		  ? static_cast<const char *>(memmem(ptr, len, c,

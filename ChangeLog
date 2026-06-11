@@ -1,5 +1,24 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Use a more appropriate return type for
+	`string::find()`: `ssize_t` instead of `size_t`, since the
+	function can return `-1`.
+
+	* src/include/stringclass.h:
+	* src/libs/libgroff/string.cpp: Preprocessor-include C
+	"<sys/types.h>" header file to ensure visibility of POSIX.1-2001
+	type `ssize_t`.
+	* src/include/stringclass.h: Update function declaration.
+	* src/libs/libgroff/string.cpp (string::find): Update function
+	definition.
+
+	* src/preproc/tbl/table.cpp: Preprocessor-include C
+	"<sys/types.h>" header file.
+	(table::add_entry): Retype `len` local variable from `size_t` to
+	`ssize_t` to pacify `-Wsign-compare` GCC warning.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/include/stringclass.h:
 	* src/libs/libgroff/string.cpp: Preprocessor-include C
 	"<stddef.h>" header file to ensure visibility of ISO C99 type

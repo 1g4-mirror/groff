@@ -23,6 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <stdio.h> // fputs(), fwrite(), putchar(), stdout
 #include <stdlib.h> // free()
 
+// POSX/operating system services
+#include <sys/types.h> // ssize_t
+
 #include "table.h"
 
 #define BAR_HEIGHT ".25m"
@@ -1538,7 +1541,7 @@ void table::add_entry(int r, int c, const string &str,
 {
   allocate(r);
   table_entry *e = 0 /* nullptr */;
-  size_t len = str.length();
+  ssize_t len = str.length();
   char *s = str.extract();
   // Diagnose escape sequences that can wreak havoc in generated output.
   if (len > 1) {

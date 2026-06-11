@@ -25,6 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <string.h> // memcmp(), strlen()
 #include <stdio.h> // FILE
 
+// POSX/operating system services
+#include <sys/types.h> // ssize_t
+
 // Ensure that the first declaration of functions that are later
 // declared as inline declares them as inline.
 
@@ -70,7 +73,7 @@ public:
   const char *contents() const;
   int search(const char) const;
   bool contains(const char) const;
-  size_t find(const char *) const;
+  ssize_t find(const char *) const;
   char *extract() const;
   size_t json_length() const;
   const char *json_extract() const;
