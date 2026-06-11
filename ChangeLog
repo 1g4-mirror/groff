@@ -1,5 +1,20 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grops]: Slightly refactor.
+
+	* src/devices/grops/ps.cpp: Use ISO C++98 exceptions to handle
+	heap storage allocation failures.  Preprocessor-include C++
+	"<new>" header file.
+	(ps_font::load_ps_font, ps_printer::set_subencoding)
+	(ps_printer::get_subfont, ps_printer::define_encoding)
+	(ps_printer::encode_fonts, ps_printer::set_style): Catch
+	`std:bad_alloc` exception and `fatal()` out with an attempt to
+	describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grolj4]: Slightly refactor.
 
 	* src/devices/grolj4/lj4.cpp: Use ISO C++98 exceptions to handle

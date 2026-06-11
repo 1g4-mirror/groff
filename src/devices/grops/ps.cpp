@@ -1,5 +1,6 @@
 /* Copyright 1989-2003 Free Software Foundation, Inc.
                   2023 TANAKA Takuji
+                  2026 G. Branden Robinson
 
 Written by James Clark (jjc@jclark.com)
 
@@ -43,6 +44,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 // GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
+
+#include <new> // std::bad_alloc
 
 // operating system services
 // needed for SET_BINARY()
@@ -460,7 +463,14 @@ public:
 
 ps_font *ps_font::load_ps_font(const char *s)
 {
-  ps_font *f = new ps_font(s);
+  ps_font *f = 0 /* nullptr */;
+  try {
+    f = new ps_font(s);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of font description"
+	  " for PostScript font '%2'", sizeof(ps_font), s);
+  }
   if (!f->load()) {
     delete f;
     return 0 /* nullptr */;
@@ -747,9 +757,18 @@ subencoding *ps_printer::set_subencoding(font *f, glyph *g,
   for (p = subencodings; p; p = p->next)
     if ((p->p == f) && (p->num == num))
       break;
-  if (0 /* nullptr */ == p)
-    p = subencodings = new subencoding(f, num, next_subencoding_index++,
-				       subencodings);
+  if (0 /* nullptr */ == p) {
+    try {
+      subencodings = new subencoding(f, num, next_subencoding_index++,
+				     subencodings);
+    }
+    catch (const std::bad_alloc &e) {
+      fatal("cannot allocate %1 bytes for storage of subencoding %2 for"
+	    " font '%3'", sizeof(subencoding), next_subencoding_index,
+	    psname);
+    }
+    p = subencodings;
+  }
   p->glyphs[*code] = f->get_special_device_encoding(g);
   return p;
 }
@@ -757,8 +776,16 @@ subencoding *ps_printer::set_subencoding(font *f, glyph *g,
 char *ps_printer::get_subfont(subencoding *sub, const char *stem)
 {
   assert(sub != 0 /* nullptr */);
+  size_t amt = strlen(stem) + 2 /* "@@" */ + INT_DIGITS + 1 /* '\0' */;
   if (!sub->subfont) {
-    char *tem = new char[strlen(stem) + 2 + INT_DIGITS + 1];
+    char *tem = 0 /* nullptr */;
+    try {
+      tem = new char[amt];
+    }
+    catch (const std::bad_alloc &e) {
+      fatal("cannot allocate %1 bytes for storage of subfont '%2@@%3",
+	    amt, stem, sub->idx);
+    }
     sprintf(tem, "%s@@%d", stem, sub->idx);
     sub->subfont = tem;
   }
@@ -902,7 +929,15 @@ void ps_printer::define_encoding(const char *encoding,
 	fatal_with_file_and_line(path, lineno, "invalid encoding file:"
 	    " expected integer in range 0-255 as second word on line,"
 	    " got '%1'", q);
-      vec[n] = new char[strlen(p) + 1];
+      size_t amount = strlen(p) + 1 /* '\0' */;
+      vec[n] = 0 /* nullptr */;
+      try {
+	vec[n] = new char[amount];
+      }
+      catch (const std::bad_alloc &e) {
+	fatal("cannot allocate %1 bytes for storage of encoding vector"
+	      " '%2'", amount, p);
+      }
       strcpy(vec[n], p);
     }
     lineno++;
@@ -935,7 +970,14 @@ void ps_printer::encode_fonts()
 {
   if (0 == next_encoding_index)
     return;
-  char *done_encoding = new char[next_encoding_index];
+  char *done_encoding = 0 /* nullptr */;
+  try {
+    done_encoding = new char[next_encoding_index];
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of encoding index",
+	  next_encoding_index);
+  }
   for (int i = 0; i < next_encoding_index; i++)
     done_encoding[i] = 0;
   for (font_pointer_list *f = font_list; f; f = f->next) {
@@ -991,7 +1033,16 @@ void ps_printer::set_style(const style &sty)
       char *s = ((ps_font *)sty.f)->reencoded_name;
       if (0 /* nullptr */ == s) {
 	int ei = set_encoding_index((ps_font *)sty.f);
-	char *tem = new char[strlen(psname) + 1 + INT_DIGITS + 1];
+	size_t amount = strlen(psname) + 1 /* '@' */ + INT_DIGITS
+			+ 1 /* '\0' */;
+	char *tem = 0 /* nullptr */;
+	try {
+	  tem = new char[amount];
+	}
+	catch (const std::bad_alloc &e) {
+	  fatal("cannot allocate %1 bytes for storage of PostScript"
+		" internal font name '%2@%3'", amount, psname, ei);
+	}
 	sprintf(tem, "%s@%d", psname, ei);
 	psname = tem;
 	((ps_font *)sty.f)->reencoded_name = tem;
