@@ -88,6 +88,7 @@ static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
 {
   if (oldsz >= len) {
     *sizep = oldsz;
+    memset((ptr + len), 0, (oldsz - len));
     return ptr;
   }
   delete[] ptr;
@@ -111,6 +112,7 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
 {
   if (oldsz >= newlen) {
     *sizep = oldsz;
+    memset((ptr + oldlen), 0, (newlen - oldsz));
     return ptr;
   }
   size_t amount = newlen;

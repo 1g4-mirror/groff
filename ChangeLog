@@ -1,3 +1,10 @@
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp (sfree_alloc, srealloc): Be more
+	fasitidious with heap memory; when "shortening" the length of an
+	existing `string`, zero out the memory from the new length to
+	the capacity (which is not reduced).
+
 2026-06-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp: Continue refactoring to
