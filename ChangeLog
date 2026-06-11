@@ -1,5 +1,12 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/quotearg.c: Slightly refactor.  Favor C
+	standard library symbol `EXIT_FAILURE` over integer literal "1".
+
+	Continues the long process of fixing Savannah #66672.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/quotearg.c: Undefine file-local preprocessor
 	macros after we're done with them.
 

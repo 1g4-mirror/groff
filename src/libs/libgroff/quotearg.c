@@ -82,7 +82,7 @@ needs_quoting(const char *string)
 
   return false;
 }
-      
+
 char *
 quote_arg(char *string)
 {
@@ -106,7 +106,7 @@ quote_arg(char *string)
        */
 
       REPORT_ERROR(QUOTE_ARG_MALLOC_ERROR);
-      exit(1);
+      exit(EXIT_FAILURE);
     }
 
     /* Ok to proceed:
@@ -121,7 +121,7 @@ quote_arg(char *string)
 	 * We will copy them out later, when we know if the count
 	 * needs to be adjusted, to escape an embedded quote.
 	 */
-	
+
 	++backslashes;
       }
       else if (*p == '"') {
@@ -175,7 +175,7 @@ quote_arg(char *string)
       /* but bail out gracefully, on error */
 
       REPORT_ERROR(QUOTE_ARG_REALLOC_ERROR);
-      exit(1);
+      exit(EXIT_FAILURE);
     }
   }
 
