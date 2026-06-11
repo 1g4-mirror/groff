@@ -41,6 +41,8 @@ TODO
 // GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
+
 // operating system services
 #include "nonposix.h"
 
@@ -136,12 +138,19 @@ lbp_font::~lbp_font()
 
 lbp_font *lbp_font::load_lbp_font(const char *s)
 {
-  lbp_font *f = new lbp_font(s);
+  lbp_font *f = 0 /* nullptr */;
+  try {
+    f = new lbp_font(s);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of font description"
+	  " for LBP font '%2'", sizeof(lbp_font), s);
+  }
   f->lbpname = 0 /* nullptr */;
   f->is_scalable = 1; // Default is that fonts are scalable
   if (!f->load()) {
     delete f;
-    return 0;
+    return 0 /* nullptr */;
   }
   return f;
 }
