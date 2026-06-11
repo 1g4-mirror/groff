@@ -1,5 +1,12 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac: Trivially refactor.  Rename macro.
+	(an-deprecation-warn): Rename this...
+	(an*deprecation-warn): ...to this.
+	(AT, UC, DT, PD, SB, OP): Update interpolation sites.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grotty]: Slightly refactor.
 
 	* src/devices/grotty/tty.cpp: Use ISO C++98 exceptions to handle
