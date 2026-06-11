@@ -13158,11 +13158,23 @@ Format}.}
 or its own
 (@samp{T}).
 
-The @code{\F} escape sequence works similarly.  In disanalogy to
-@code{\f}, @samp{\FP} makes @samp{P} the default family.  Use
-@samp{\F[]} to select the previous default family.  The default font
-family is available in the read-only string-valued register @code{.fam};
-it is associated with the environment (@pxref{Environments}).
+The
+@code{\F}
+escape sequence works similarly.
+In disanalogy to
+@code{\f},
+@samp{\FP}
+makes
+@samp{P}
+the default family.
+Use
+@samp{\F[]}
+to select the previous default family.
+The default font family is available
+in the read-only string-valued register
+@code{.fam};
+this datum is associated
+with the environment.@footnote{@xref{Environments}.}
 
 @Example
 spam,     \" startup defaults are T (Times) R (roman)
@@ -13269,9 +13281,14 @@ A
     @error{} error: cannot format glyph: no current font
 @endExample
 
-When an abstract style has been selected, the read-only string-valued
-register @samp{.sty} interpolates its name; this datum is associated
-with the environment (@pxref{Environments}).  Otherwise, @samp{.sty}
+When an abstract style has been selected,
+the read-only string-valued register
+@samp{.sty}
+interpolates its name;
+this datum is associated
+with the environment.@footnote{@xref{Environments}.}
+Otherwise,
+@samp{.sty}
 interpolates nothing.
 @endDefreq
 @c END Keep parallel with subsection "Font families, abstract styles,
@@ -13286,14 +13303,23 @@ interpolates nothing.
 @cindex mounting positions, font
 @cindex positions, font mounting
 
-To support typeface indirection through abstract styles, and for
-compatibility with @acronym{AT&T} @code{troff}, the formatter maintains
-a list of @dfn{positions} at which fonts required by a document are
-@dfn{mounted}.  An output device's description file @file{DESC}
-typically configures a set of pre-mounted fonts; see @ref{Device and
-Font Description Files}.  A font need not be explicitly mounted before
-it is selected; GNU @code{troff} will search @env{GROFF_FONT_PATH} for
-a file name matching the identifier and mount it on demand.
+To support typeface indirection through abstract styles,
+and for compatibility with @acronym{AT&T}
+@command{troff},
+the formatter maintains a list of
+@dfn{positions}
+at which fonts required by a document are
+@dfn{mounted}.
+An output device's description file
+@file{DESC}
+typically configures a set of pre-mounted
+fonts.@footnote{@xref{Device and Font Description Files}.}
+A font need not be explicitly mounted before it is selected;
+GNU
+@command{troff}
+searches
+@env{GROFF_FONT_PATH}
+for a file name matching the identifier and mount it on demand.
 
 @need 500
 @c TODO: Add request `rfp` to unmount a font?
@@ -13317,13 +13343,22 @@ directories to locate the font description file.
 @c by the time of its 1992 revision.
 @cindex font aliasing with third argument to @code{fp} request
 @cindex aliasing fonts with third argument to @code{fp} request
-The optional third argument enables font names to be aliased, which can
-be necessary in compatibility mode since AT&T @code{troff} syntax
-affords no means of identifying fonts with names longer than two
-characters, like @samp{TBI} or @samp{ZCMI}, in a font selection escape
-sequence.  @xref{Compatibility Mode}.  You can also alias fonts on
-mounting for convenience or abstraction.  (See below regarding the
-@code{.fp} register.)
+The optional third argument enables font names to be aliased,
+which can be necessary
+in compatibility mode@footnote{@xref{Compatibility Mode}.}
+since AT&T
+@command{troff}
+syntax affords no means of identifying fonts
+with names longer than two characters,
+like
+@samp{TBI}
+or
+@samp{ZCMI},
+in a font selection escape sequence.
+You can also alias fonts on mounting for convenience or abstraction.
+(See below regarding the
+@code{.fp}
+register.)
 
 @Example
 .fp \n[.fp] SC ZCMI
@@ -13468,7 +13503,7 @@ output devices support the two special fonts
 @samp{SS}
 (slanted symbol)
 and
-@samp{S} (symbol);
+@samp{S} (symbol),
 these devices'
 @file{DESC}
 files arrange them such that the formatter searches
@@ -13604,7 +13639,7 @@ request for a glyph corresponding to the character.
 @item
 Interpolate the definition of any character
 defined by the
-@code{sschar}
+@code{schar}
 request
 and apply this procedure to each character in its definition.
 
@@ -13660,11 +13695,22 @@ makes font
 special while font
 @code{BAR}
 is selected.
-We further assume that @code{BAZ} is really a special font, i.e., the font
-description file contains the @code{special} keyword, and that it also
-contains glyph @code{foo} with a special shape fitting to font
-@code{BAR}.  After executing @code{fspecial}, font @code{BAR} is loaded
-at mounting position@tie{}1, and @code{BAZ} at position@tie{}2.
+We further assume that
+@code{BAZ}
+is really a special font---that is,
+the font description file contains the
+@code{special}
+keyword,
+and that it also contains glyph
+@code{foo}
+with a special shape fitting to font
+@code{BAR}.
+After executing
+@code{fspecial},
+font
+@code{BAR}
+is loaded at mounting position@tie{}1,
+and @code{BAZ} at position@tie{}2.
 
 We now switch to a new font
 @code{XXX},
