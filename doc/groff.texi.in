@@ -15540,12 +15540,25 @@ as follows.@footnote{@xref{Output Line Annotation}.}
 @endExample
 
 @Defreq {sizes, s1 s2 @dots{} sn [@t{0}]}
-The @file{DESC} file specifies which type sizes are allowed by the
-output device; see @ref{DESC File Format}.  Use the @code{sizes} request
-to change this set of permissible sizes.  Arguments are in scaled
-points; see @ref{Using Fractional Type Sizes}.  Each can be a single
-type size (such as @samp{12000}), or a range of sizes (such as
-@samp{4000-72000}).  You can optionally end the list with a @samp{0}.
+The
+@file{DESC}
+file specifies which type sizes are allowed
+by the output device;@footnote{@xref{DESC File Format}.}
+Use the
+@code{sizes}
+request to change the set of sizes GNU
+@command{troff} @c GNU
+permits.
+Arguments are
+in scaled points.@footnote{@xref{Using Fractional Type Sizes}.}
+Each can be a single type size
+(such as
+@samp{12000}),
+or a range of sizes
+(such as
+@samp{4000-72000}).
+You can optionally end the list with a
+@samp{0}.
 @endDefreq
 
 @node Changing the Vertical Spacing
