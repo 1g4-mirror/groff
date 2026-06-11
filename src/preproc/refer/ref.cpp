@@ -267,8 +267,8 @@ const char SORT_SUB_SUB_SEP = '\003';
 
 // sep specifies additional word separators
 
-void sortify_words(const char *s, const char *end, const char *sep,
-		   string &result)
+static void sortify_words(const char *s, const char *end,
+			  const char *sep, string &result)
 {
   int non_empty = 0;
   int need_separator = 0;
@@ -300,7 +300,7 @@ void sortify_words(const char *s, const char *end, const char *sep,
   }
 }
 
-void sortify_word(const char *s, const char *end, string &result)
+static void sortify_word(const char *s, const char *end, string &result)
 {
   for (;;) {
     const char *token_start = s;
@@ -311,12 +311,12 @@ void sortify_word(const char *s, const char *end, string &result)
   }
 }
 
-void sortify_other(const char *s, int len, string &key)
+static void sortify_other(const char *s, int len, string &key)
 {
   sortify_words(s, s + len, 0, key);
 }
 
-void sortify_title(const char *s, int len, string &key)
+static void sortify_title(const char *s, int len, string &key)
 {
   const char *end = s + len;
   for (; s < end && (*s == ' ' || *s == '\n'); s++)
@@ -352,7 +352,7 @@ void sortify_title(const char *s, int len, string &key)
   sortify_words(s, end, 0, key);
 }
 
-void sortify_name(const char *s, int len, string &key)
+static void sortify_name(const char *s, int len, string &key)
 {
   const char *last_name_end;
   const char *last_name = find_last_name(s, s + len, &last_name_end);
@@ -365,7 +365,7 @@ void sortify_name(const char *s, int len, string &key)
     sortify_words(last_name_end, s + len, ".,", key);
 }
 
-void sortify_date(const char *s, int len, string &key)
+static void sortify_date(const char *s, int len, string &key)
 {
   const char *year_end;
   const char *year_start = find_year(s, s + len, &year_end);
@@ -399,7 +399,7 @@ void sortify_date(const char *s, int len, string &key)
 
 // SORT_{SUB,SUB_SUB}_SEP can creep in from use of @ in label specification.
 
-void sortify_label(const char *s, int len, string &key)
+static void sortify_label(const char *s, int len, string &key)
 {
   const char *end = s + len;
   for (;;) {
@@ -672,7 +672,7 @@ void reverse_name(const char *ptr, const char *name_end, string &result)
     result.append(last_name_end, name_end - last_name_end);
 }
 
-void reverse_names(string &result, int n)
+static void reverse_names(string &result, int n)
 {
   if (n <= 0)
     return;
@@ -698,7 +698,7 @@ void reverse_names(string &result, int n)
 
 // Return number of field separators.
 
-int join_fields(string &f)
+static int join_fields(string &f)
 {
   const char *ptr = f.contents();
   int len = f.length();
@@ -784,14 +784,15 @@ void capitalize(const char *ptr, const char *end, string &result)
     result += "\\s+2";
 }
 
-void capitalize_field(string &str)
+static void capitalize_field(string &str)
 {
   string temp;
   capitalize(str.contents(), str.contents() + str.length(), temp);
   str.move(temp);
 }
 
-int is_terminated(const char *ptr, const char *end)
+// TODO: boolify
+static int is_terminated(const char *ptr, const char *end)
 {
   const char *last_token = end;
   for (;;) {

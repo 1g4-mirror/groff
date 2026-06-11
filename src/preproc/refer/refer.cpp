@@ -979,7 +979,7 @@ void label_processing_state::process(int c)
 
 extern "C" {
 
-int rcompare(const void *p1, const void *p2)
+static int rcompare(const void *p1, const void *p2)
 {
   // XXX: Would it make more sense to make non-const copies of p1, p2?
   return compare_reference(

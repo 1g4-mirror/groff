@@ -1,5 +1,24 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/refer/command.cpp (get_word):
+	* src/preproc/refer/ref.cpp (sortify_words)
+	(sortify_word)
+	(sortify_other)
+	(sortify_title)
+	(sortify_name)
+	(sortify_date)
+	(sortify_label)
+	(reverse_names)
+	(join_fields)
+	(capitalize_field)
+	(is_terminated):
+	* src/preproc/refer/refer.cpp (rcompare): Define function as
+	`static`; external linkage is not required.
+
+	Fixes `-Wmissing-declarations` GCC warning.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/refer/command.cpp (input_item::input_item):
 	Populate member variable `buffer` with copy initialization.  We
 	shouldn't use `string::move()` because the string contents might

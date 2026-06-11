@@ -258,7 +258,7 @@ void command_error(const char *format, const errarg &arg1,
 // don't clear word_buffer; just append on
 // return -1 for EOF, 0 for newline, 1 for word
 
-int get_word(string &word_buffer)
+static int get_word(string &word_buffer)
 {
   int c = input_stack::get_char();
   for (;;) {
