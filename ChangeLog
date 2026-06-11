@@ -1,5 +1,10 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/quotearg.c: Undefine file-local preprocessor
+	macros after we're done with them.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/quotearg.c: Rationalize header file
 	inclusions.  Arrange C standard library header file names in
 	alphabetical order.  Annotate why they're included.  Drop

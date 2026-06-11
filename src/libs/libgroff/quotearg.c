@@ -206,6 +206,10 @@ purge_quoted_args(char **argv)
     }
 }
 
+#undef REPORT_ERROR
+#undef QUOTE_ARG_MALLOC_ERROR
+#undef QUOTE_ARG_REALLOC_ERROR
+
 // Local Variables:
 // fill-column: 72
 // mode: C++
