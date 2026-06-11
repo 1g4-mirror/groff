@@ -39,7 +39,7 @@ static char rcsid[] = "$XConsortium: xditview.c,v 1.17 89/12/10 17:05:08 rws Exp
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #include <X11/Xos.h>
-#include <X11/Intrinsic.h>
+#include <X11/Intrinsic.h> // TRUE
 #include <X11/StringDefs.h>
 #include <X11/Shell.h>
 #include <X11/Xaw/Paned.h>

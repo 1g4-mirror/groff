@@ -14,7 +14,7 @@
 #include <string.h> // strcmp(), strcpy(), strlen(), strncpy()
 
 #include <X11/Xos.h>
-#include <X11/IntrinsicP.h>
+#include <X11/IntrinsicP.h> // TRUE, FALSE via <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 
 #include "DviP.h"

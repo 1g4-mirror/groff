@@ -23,7 +23,7 @@ static char Xrcsid[] = "$XConsortium: Dvi.c,v 1.9 89/12/10 16:12:25 rws Exp $";
      Xt..Field macro in this code just refers to some field in
      one of the substructures of the WidgetRec.  */
 
-#include <X11/IntrinsicP.h>
+#include <X11/IntrinsicP.h> // TRUE, FALSE via <X11/Intrinsic.h>
 #include <X11/StringDefs.h>
 #include <X11/Xmu/Converters.h>
 
