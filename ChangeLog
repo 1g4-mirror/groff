@@ -1,5 +1,12 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/soelim/soelim.cpp (usage, set_location, do_so):
+	Define function as `static`; external linkage is not required.
+
+	Fixes `-Wmissing-declarations` GCC warning.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/refer/command.cpp (get_word):
 	* src/preproc/refer/ref.cpp (sortify_words)
 	(sortify_word)

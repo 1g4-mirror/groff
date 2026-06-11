@@ -49,7 +49,7 @@ extern "C" const char *Version_string;
 // forward declaration
 static bool do_file(const char *);
 
-void usage(FILE *stream)
+static void usage(FILE *stream)
 {
   fprintf(stream, "usage: %s [-Crt] [-I dir] [input-file ...]\n"
 	  "usage: %s {-v | --version}\n"
@@ -132,7 +132,7 @@ int main(int argc, char **argv)
   return (nbad != 0);
 }
 
-void set_location()
+static void set_location()
 {
   if (!want_raw_output) {
     if (!want_tex_output)
@@ -144,7 +144,7 @@ void set_location()
   }
 }
 
-void do_so(const char *line)
+static void do_so(const char *line)
 {
   const char *p = line;
   while (*p == ' ')
