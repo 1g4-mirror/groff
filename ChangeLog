@@ -1,5 +1,13 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/quotearg.c: Rationalize header file
+	inclusions.  Arrange C standard library header file names in
+	alphabetical order.  Annotate why they're included.  Drop
+	inclusions that seem unnecessary ("<limits.h>" and
+	"nonposix.h").
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Boolify "quotearg.c".
 
 	* src/libs/libgroff/quotearg.c: Preprocessor-include

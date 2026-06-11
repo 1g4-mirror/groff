@@ -22,20 +22,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <ctype.h> // isspace()
 #include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <limits.h>
+#include <stdio.h> // fprintf()
+#include <stdlib.h> // EXIT_FAILURE, exit(), free(), malloc(), realloc()
+#include <string.h> // strlen()
 
 /* Define the default mechanism, and messages, for error reporting
  * (user may substitute a preferred alternative, by defining his own
  *  implementation of the macros REPORT_ERROR, QUOTE_ARG_MALLOC_FAILED
  *  and QUOTE_ARG_REALLOC_FAILED, in the header file 'nonposix.h').
  */
-
-#include "nonposix.h"
 
 #ifndef  REPORT_ERROR
 # define REPORT_ERROR(WHY)  fprintf(stderr, "%s:%s\n", program_name, WHY)
