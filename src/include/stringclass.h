@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #define GROFF_STRINGCLASS_H
 
 #include <assert.h>
+#include <stddef.h> // size_t
 #include <string.h> // memcmp(), strlen()
 #include <stdio.h> // FILE
 

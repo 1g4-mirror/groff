@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <stddef.h> // size_t
 #include <stdio.h> // FILE, putc(), sprintf()
 #include <stdlib.h> // calloc()
 #include <string.h> // memchr(), memcmp(), memcpy(), memmem(), memset(),

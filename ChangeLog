@@ -1,5 +1,12 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/include/stringclass.h:
+	* src/libs/libgroff/string.cpp: Preprocessor-include C
+	"<stddef.h>" header file to ensure visibility of ISO C99 type
+	`size_t`.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/soelim/soelim.cpp (usage, set_location, do_so):
 	Define function as `static`; external linkage is not required.
 
