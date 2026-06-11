@@ -1,5 +1,17 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grolj4]: Slightly refactor.
+
+	* src/devices/grolj4/lj4.cpp: Use ISO C++98 exceptions to handle
+	heap storage allocation failures.  Preprocessor-include C++
+	"<new>" header file.
+	(lj4_font::load_lj4_font): Catch `std:bad_alloc` exception and
+	`fatal()` out with an attempt to describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grolbp]: Slightly refactor.
 
 	* src/devices/grolbp/lbp.cpp: Use ISO C++98 exceptions to handle

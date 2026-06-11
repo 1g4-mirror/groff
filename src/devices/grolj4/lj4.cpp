@@ -49,6 +49,8 @@ X command to include bitmap graphics
 // GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
+
 // operating system services
 #include "nonposix.h"
 
@@ -131,7 +133,14 @@ lj4_font::~lj4_font()
 
 lj4_font *lj4_font::load_lj4_font(const char *s)
 {
-  lj4_font *f = new lj4_font(s);
+  lj4_font *f = 0 /* nullptr */;
+  try {
+    f = new lj4_font(s);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of font description"
+	  " for LJ4 font '%2'", sizeof(lj4_font), s);
+  }
   if (!f->load()) {
     delete f;
     return 0 /* nullptr */;
