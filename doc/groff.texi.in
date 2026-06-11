@@ -14726,6 +14726,7 @@ GNU
 @command{troff}
 retains support for them even though they are seldom needed nowadays.
 
+@need 1000
 @DefescList {\\H, @code{'}, height, @code{'}}
 @DefescItem {\\H, @code{'}, @t{+}height, @code{'}}
 @DefescItem {\\H, @code{'}, @t{-}height, @code{'}}
@@ -14776,13 +14777,14 @@ as follows.@footnote{@xref{Output Line Annotation}.}
 .mc \H'+5z'x\H'0'
 @endExample
 
-In compatibility mode,
+In compatibility mode,@footnote{@xref{Compatibility Mode}.}
 GNU
 @command{troff}
-behaves differently:
+behaves differently:@:
 it applies an increment or decrement to the current type size
 and not to the previously selected font height.
 
+@need 500
 @Example
 .cp 1
 \H'+5'test \H'+5'test
