@@ -12998,9 +12998,6 @@ eggs, bacon, \fIspam,\fP and sausage.
     @result{} eggs, bacon, @slanted{spam,} and sausage.
 @endExample
 
-The currently and previously selected fonts are properties of the
-environment (@pxref{Environments}).
-
 The read-only string-valued register @code{.fn} contains the resolved
 font name of the selected font.  Copy its value to a string to save it
 for later use.
@@ -13016,9 +13013,7 @@ for later use.
 The formatter does not tokenize
 @code{\f}
 when reading it;
-the escape sequence
-updates the environment.@footnote{@xref{Environments}.}
-It thus can be used in requests that expect a single-character argument.
+it thus can be used in requests that expect a single-character argument.
 We can assign a font to a margin character
 as follows.@footnote{@xref{Output Line Annotation}.}
 
@@ -13194,9 +13189,7 @@ GNU
 does not tokenize
 @code{\F}
 when reading it;
-the escape sequence
-updates the environment.@footnote{@xref{Environments}.}
-It thus can be used in requests that expect a single-character argument.
+it thus can be used in requests that expect a single-character argument.
 We can assign a font family to a margin character
 as follows.@footnote{@xref{Output Line Annotation}.}
 
@@ -13830,19 +13823,6 @@ would collide with other escape sequences.
 A few escape sequences that are not
 special characters also produce glyphs;
 these exist for syntactical or historical reasons.
-The formatter translates the four escape sequences
-@code{\'},
-@code{\-},
-@code{\_},
-and
-@code{\`},
-on input to the special character escape sequences
-@code{\[aa]},
-@code{\[-]},
-@code{\[ul]},
-and
-@code{\[ga]},
-respectively.
 
 A special character name of length one is not the same thing as an
 ordinary character: that is, the character @code{a} is not the same as
@@ -14640,18 +14620,6 @@ list of associated special fonts is empty for all
 @var{f}.
 
 @c TODO: Add requests `pspecial`, `pfspecial`?
-Invoking
-@code{special}
-(or
-@code{fspecial},
-for a given font
-@var{f})
-again overwrites the previous list;
-if you invoke them
-without arguments,
-GNU
-@command{troff} @c GNU
-empties the corresponding list.
 @endDefreq
 
 @c ---------------------------------------------------------------------
