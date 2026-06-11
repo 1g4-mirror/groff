@@ -33,6 +33,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
+
 // libgroff
 #include "symbol.h" // prerequisite of color.h
 #include "color.h" // prerequisite of printer.h
@@ -133,7 +135,14 @@ public:
 
 tty_font *tty_font::load_tty_font(const char *s)
 {
-  tty_font *f = new tty_font(s);
+  tty_font *f = 0 /* nullptr */;
+  try {
+    f = new tty_font(s);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes for storage of font description"
+	  " for terminal font '%2'", sizeof(tty_font), s);
+  }
   if (!f->load()) {
     delete f;
     return 0 /* nullptr */;
@@ -233,7 +242,15 @@ char *tty_printer::make_rgb_string(unsigned int r,
 				   unsigned int g,
 				   unsigned int b)
 {
-  char *s = new char[8];
+  size_t amount = 8;
+  char *s = 0 /* nullptr */;
+  try {
+    s = new char[amount];
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes to populate RGB string",
+	  (amount * sizeof(char)));
+  }
   s[0] = char(r >> 8);
   s[1] = char(r & 0xff);
   s[2] = char(g >> 8);
@@ -261,7 +278,14 @@ bool tty_printer::has_color(unsigned int r,
     schar *i = tty_colors.lookup(s);
     if (0 /* nullptr */ == i) {
       is_known_color = false;
-      i = new schar[1];
+      i = 0 /* nullptr */;
+      try {
+	i = new schar[1];
+      }
+      catch (const std::bad_alloc &e) {
+	fatal("cannot allocate %1 bytes to define RGB color '%1'",
+	      sizeof(schar*));
+      }
       *i = value;
       tty_colors.define(s, i);
     }
@@ -402,7 +426,15 @@ void tty_printer::add_char(output_character c, int w,
       // If we exceed the previous page length, double the size so that
       // we don't thrash the allocator.  See Savannah #68145.
       int new_nlines = nlines * 2;
-      lines = new tty_glyph *[new_nlines];
+      lines = 0 /* nullptr */;
+      try {
+	lines = new tty_glyph *[new_nlines];
+      }
+      catch (const std::bad_alloc &e) {
+	fatal("cannot allocate %1 bytes to render %2 lines"
+	      " of terminal output", (new_nlines * sizeof(tty_glyph)),
+	      new_nlines);
+      }
       memset(lines, 0, new_nlines * sizeof(tty_glyph *));
       memcpy(lines, old_lines, nlines * sizeof(tty_glyph *));
       delete[] old_lines;
@@ -417,7 +449,14 @@ void tty_printer::add_char(output_character c, int w,
     cached_v = v;
     cached_vpos = vpos;
   }
-  tty_glyph *g = new tty_glyph;
+  tty_glyph *g = 0 /* nullptr */;
+  try {
+    g = new tty_glyph;
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes to store terminal glyph",
+	  sizeof(tty_glyph));
+  }
   g->w = w;
   g->hpos = hpos;
   g->code = c;
@@ -779,7 +818,14 @@ const int default_lines_per_page = 66;
 void tty_printer::begin_page(int)
 {
   nlines = default_lines_per_page;
-  lines = new tty_glyph *[nlines];
+  lines = 0 /* nullptr */;
+  try {
+    lines = new tty_glyph *[nlines];
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes to render %2 lines"
+	  " of terminal output", (nlines * sizeof(tty_glyph)), nlines);
+  }
   memset(lines, 0, nlines * sizeof(tty_glyph *));
 }
 

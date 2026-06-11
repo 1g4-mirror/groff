@@ -1,5 +1,22 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grotty]: Slightly refactor.
+
+	* src/devices/grotty/tty.cpp: Use ISO C++98 exceptions to handle
+	heap storage allocation failures.  Preprocessor-include C++
+	"<new>" header file.
+	(tty_font::load_tty_font)
+	(tty_printer::make_rgb_string)
+	(tty_printer::has_color)
+	(tty_printer::add_char)
+	(tty_printer::begin_page):
+	Catch `std:bad_alloc` exception and `fatal()` out with an
+	attempt to describe what we were doing.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grops]: Slightly refactor.
 
 	* src/devices/grops/ps.cpp:
