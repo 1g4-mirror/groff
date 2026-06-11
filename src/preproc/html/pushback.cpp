@@ -37,14 +37,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "pushback.h"
 #include "pre-html.h"
 
-#if !defined(TRUE)
-#   define TRUE  (1==1)
-#endif
-
-#if !defined(FALSE)
-#   define FALSE (1==0)
-#endif
-
 #   define ERROR(X)   (void)(fprintf(stderr, "%s:%d error %s\n", __FILE__, __LINE__, X) && \
                             (fflush(stderr)) && localexit(1))
 
@@ -64,7 +56,7 @@ pushBackBuffer::pushBackBuffer (const char *filename)
   }
   stackPtr = 0;   /* index to push back stack        */
   verbose  = 0;
-  eofFound = FALSE;
+  eofFound = false;
   lineNo   = 1;
   if (strcmp(filename, "") != 0) {
     stdIn = dup(0);
@@ -124,7 +116,7 @@ char pushBackBuffer::getPB (void)
       }
       return( ch );
     } else {
-      eofFound = TRUE;
+      eofFound = true;
       return( eof );
     }
   }
@@ -147,10 +139,10 @@ char pushBackBuffer::putPB (char ch)
 }
 
 /*
- *  isWhite - returns TRUE if a white character is found. This character is NOT consumed.
+ *  isWhite - returns true if a white character is found. This character is NOT consumed.
  */
 
-static int isWhite (char ch)
+static bool isWhite (char ch)
 {
   return( (ch==' ') || (ch == '\t') || (ch == '\n') );
 }
@@ -183,12 +175,12 @@ void pushBackBuffer::skipUntilToken (void)
 }
 
 /*
- *  isString - returns TRUE if the string, s, matches the pushed back string.
- *             if TRUE is returned then this string is consumed, otherwise it is
+ *  isString - returns true if the string, s, matches the pushed back string.
+ *             if true is returned then this string is consumed, otherwise it is
  *             left alone.
  */
 
-int pushBackBuffer::isString (const char *s)
+bool pushBackBuffer::isString (const char *s)
 {
   ptrdiff_t length=ptrdiff_t(strlen(s));
   ptrdiff_t i=0;
@@ -200,7 +192,7 @@ int pushBackBuffer::isString (const char *s)
     i++;
   }
   if (i==length) {
-    return( TRUE );
+    return( true );
   } else {
     i--;
     while (i>=0) {
@@ -210,24 +202,24 @@ int pushBackBuffer::isString (const char *s)
       i--;
     }
   }
-  return( FALSE );
+  return( false );
 }
 
 /*
- *  isDigit - returns TRUE if the character, ch, is a digit.
+ *  isDigit - returns true if the character, ch, is a digit.
  */
 
-static int isDigit (char ch)
+static bool isDigit (char ch)
 {
   return( ((ch>='0') && (ch<='9')) );
 }
 
 /*
- *  isHexDigit - returns TRUE if the character, ch, is a hex digit.
+ *  isHexDigit - returns true if the character, ch, is a hex digit.
  */
 
 #if 0
-static int isHexDigit (char ch)
+static bool isHexDigit (char ch)
 {
   return( (isDigit(ch)) || ((ch>='a') && (ch<='f')) );
 }

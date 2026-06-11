@@ -1,5 +1,22 @@
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/html/pushback.cpp: Migrate to ISO C++98 Boolean
+	literals.  Drop preprocessor manipulations of `TRUE` and `FALSE`
+	macros.
+	(pushBackBuffer::pushBackBuffer, pushBackBuffer::getPB)
+	(pushBackBuffer::isString): Use ISO C++98 Boolean literals.
+	* src/preproc/html/pushback.h (class pushBackBuffer): Demote
+	declared return type of `isString()` member function  from `int`
+	to `bool`.
+	* src/preproc/html/pushback.cpp
+	(pushBackBuffer::getPB, pushBackBuffer::isString)
+	(isDigit, isWhite, isHexDigit): Demote return type from `int` to
+	`bool`.
+
+	Continues the long process of fixing Savannah #66672.
+
+2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/quotearg.c: Slightly refactor.  Favor C
 	standard library symbol `EXIT_FAILURE` over integer literal "1".
 

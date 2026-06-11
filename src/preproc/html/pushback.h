@@ -45,7 +45,7 @@ class pushBackBuffer
   double readNumber     (void);
   int    readInt        (void);
   char  *readString     (void);
-  int    isString       (const char *string);
+  bool   isString       (const char *string);
 };
 
 // Local Variables:
