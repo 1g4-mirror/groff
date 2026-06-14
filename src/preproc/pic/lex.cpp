@@ -1,4 +1,5 @@
-/* Copyright 1989-2024 Free Software Foundation, Inc.
+/* Copyright 1989-2006 Free Software Foundation, Inc.
+                  2024 Duncan Losin
 
 Written by James Clark (jjc@jclark.com)
 
