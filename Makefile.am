@@ -891,8 +891,13 @@ build-coverage:
 	lcov --directory . --output-file \
 	  $(COVERAGE_OUT)/$(PACKAGE).info --capture
 
+# Use `--prefix` and `--ignore-errors` to kludge around the problem of
+# Bison/YACC-generated source files being present in the _build_ tree
+# rather than the source tree when doing out-of-tree (`VPATH`) builds.
 gen-coverage:
 	genhtml --output-directory $(COVERAGE_OUT) \
+	  --prefix "$(abs_builddir)" \
+	  --ignore-errors source \
 	  $(COVERAGE_OUT)/$(PACKAGE).info \
 	  --frames --legend \
 	  --title "$(PACKAGE_NAME)"

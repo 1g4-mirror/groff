@@ -24,6 +24,16 @@
 
 2026-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* Makefile.am: Fix coverage generation.
+	(gen-coverage): Pass `--prefix` and `--ignore-errors` to
+	genhtml(1) to kludge around the problem of Bison/YACC-generated
+	source files being present in the _build_ tree rather than the
+	source tree when doing out-of-tree (`VPATH`) builds.
+
+	Fixes <https://savannah.gnu.org/bugs/?68304>.
+
+2026-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* configure.ac: Make build robust against combination of
 	maintainer mode, use of GNU Bison, Make's ordering of targets,
 	and out-of-tree builds.  Use `AC_CONFIG_COMMANDS` macro to
