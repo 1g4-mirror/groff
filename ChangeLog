@@ -183,7 +183,7 @@
 	build time against minimization of reallocations.
 	(salloc, sfree_alloc): Allocate only `len` `char` elements, not
 	`len * 2`, unless `len` equals zero.
-	(sfree_alloc): Drop now-taulogous assert(3)ion.
+	(sfree_alloc): Drop now-tautologous assert(3)ion.
 
 2026-06-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
