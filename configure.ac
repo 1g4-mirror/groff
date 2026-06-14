@@ -196,6 +196,15 @@ AM_CONDITIONAL([USE_TEX], [test "$groff_use_tex" = yes ])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([test-groff], [chmod +x test-groff])
+
+# Work around major headaches caused by the conjunction of Automake,
+# Bison, and out-of-tree builds.
+AC_CONFIG_COMMANDS([mkdir-bison-paths], [
+  AS_MKDIR_P(["$ac_pwd/src/preproc/pic"])
+  AS_MKDIR_P(["$ac_pwd/src/preproc/eqn"])
+  AS_MKDIR_P(["$ac_pwd/src/preproc/refer"])
+])
+
 AC_OUTPUT
 
 echo "

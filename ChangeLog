@@ -1,3 +1,14 @@
+2026-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* configure.ac: Make build robust against combination of
+	maintainer mode, use of GNU Bison, Make's ordering of targets,
+	and out-of-tree builds.  Use `AC_CONFIG_COMMANDS` macro to
+	ensure that the eqn, pic, and refer directories in the build
+	tree that will be populated by Bison (or YACC) exist in the
+	event no C++ files from these subdirectories get compiled first.
+
+	Fixes <https://savannah.gnu.org/bugs/?67808>.
+
 2026-06-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (RE): Trivially refactor.  Rename register
