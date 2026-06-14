@@ -9,7 +9,10 @@ or TeX
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright 1989-2025 Free Software Foundation, Inc.
+.\" Copyright 1989-2004 Free Software Foundation, Inc.
+.\"                2021 Doug McIlroy
+.\"           2021-2025 G. Branden Robinson
+.\"                2024 Duncan Losin
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
