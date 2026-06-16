@@ -1,3 +1,17 @@
+2026-06-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp: Manipulate assert(3)ions
+	verifying the invariant of `ptr`'s non-nullity to sit closer to
+	assignments thereto.  This way the assertions can/should
+	reliably fail prior to null pointer dereference.  Also check
+	this invariant in more places.
+	(string::string, string::operator+=, string::remove_spaces):
+	Relocate assertions.
+	(string::append, string::set_length, put_string): Add
+	assertions.
+	(string::clear): Uncomment assertion.  Its comment was
+	inaccurate.
+
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp: Document invariant.

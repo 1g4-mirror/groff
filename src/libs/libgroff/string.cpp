@@ -146,10 +146,10 @@ string::string() : len(0), sz(initial_string_buffer_size)
 string::string(const char *p, size_t n) : len(n)
 {
   ptr = salloc(n, &sz);
+  assert(ptr != 0 /* nullptr */);
   memset(ptr, 0, sz);
   if (n != 0)
     memcpy(ptr, p, n);
-  assert(ptr != 0 /* nullptr */);
 }
 
 string::string(const char *p)
@@ -157,33 +157,34 @@ string::string(const char *p)
   if (0 /* nullptr */ == p) {
     len = 0;
     ptr = salloc(initial_string_buffer_size, &sz);
+    assert(ptr != 0 /* nullptr */);
   }
   else {
     len = strlen(p);
     ptr = salloc(len, &sz);
+    assert(ptr != 0 /* nullptr */);
     if (len < sz)
       memset(ptr, 0, sz);
     if (len != 0)
       memcpy(ptr, p, len);
   }
-  assert(ptr != 0 /* nullptr */);
 }
 
 string::string(char c) : len(1)
 {
   ptr = salloc(1, &sz);
-  *ptr = c;
   assert(ptr != 0 /* nullptr */);
+  *ptr = c;
 }
 
 string::string(const string &s) : len(s.len)
 {
   ptr = salloc(len, &sz);
+  assert(ptr != 0 /* nullptr */);
   if (sz > 0)
     memset(ptr, 0, sz);
   if (len != 0)
     memcpy(ptr, s.ptr, len);
-  assert(ptr != 0 /* nullptr */);
 }
 
 string::~string()
@@ -248,12 +249,13 @@ string &string::operator+=(const char *p)
   if (p != 0 /* nullptr */) {
     size_t n = strlen(p);
     size_t newlen = len + n;
-    if (newlen > sz)
+    if (newlen > sz) {
       ptr = srealloc(ptr, sz, len, newlen, &sz);
+      assert(ptr != 0 /* nullptr */);
+    }
     memcpy(ptr + len, p, n);
     len = newlen;
   }
-  assert(ptr != 0 /* nullptr */);
   return *this;
 }
 
@@ -261,12 +263,13 @@ string &string::operator+=(const string &s)
 {
   if (s.len != 0) {
     size_t newlen = len + s.len;
-    if (newlen > sz)
+    if (newlen > sz) {
       ptr = srealloc(ptr, sz, len, newlen, &sz);
+      assert(ptr != 0 /* nullptr */);
+    }
     memcpy(ptr + len, s.ptr, s.len);
     len = newlen;
   }
-  assert(ptr != 0 /* nullptr */);
   return *this;
 }
 
@@ -274,8 +277,10 @@ void string::append(const char *p, size_t n)
 {
   if (n > 0) {
     size_t newlen = len + n;
-    if (newlen > sz)
+    if (newlen > sz) {
       ptr = srealloc(ptr, sz, len, newlen, &sz);
+      assert(ptr != 0 /* nullptr */);
+    }
     memcpy(ptr + len, p, n);
     len = newlen;
   }
@@ -284,10 +289,13 @@ void string::append(const char *p, size_t n)
 string::string(const char *s1, size_t n1, const char *s2, size_t n2)
 {
   len = n1 + n2;
-  if (0 == len)
+  if (0 == len) {
     ptr = salloc(initial_string_buffer_size, &sz);
+    assert(ptr != 0 /* nullptr */);
+  }
   else {
     ptr = salloc(len, &sz);
+    assert(ptr != 0 /* nullptr */);
     if (0 == n1)
       memcpy(ptr, s2, n2);
     else {
@@ -296,7 +304,6 @@ string::string(const char *s1, size_t n1, const char *s2, size_t n2)
 	memcpy(ptr + n1, s2, n2);
     }
   }
-  assert(ptr != 0 /* nullptr */);
 }
 
 bool operator<=(const string &s1, const string &s2)
@@ -329,14 +336,16 @@ bool operator>(const string &s1, const string &s2)
 
 void string::set_length(size_t i)
 {
-  if (i > sz)
+  if (i > sz) {
     ptr = srealloc(ptr, sz, len, i, &sz);
+    assert(ptr != 0 /* nullptr */);
+  }
   len = i;
 }
 
 void string::clear()
 {
-  //assert(ptr != 0 /* nullptr */); // XXX: TODO: held up by refer(1)
+  assert(ptr != 0 /* nullptr */);
   if (ptr != 0 /* nullptr */)
     memset(ptr, 0, sz);
   len = 0;
@@ -484,14 +493,15 @@ void string::remove_spaces()
     memcpy(tmp, p, len);
     delete[] ptr;
     ptr = tmp;
+    assert(ptr != 0 /* nullptr */);
   }
-  assert(ptr != 0 /* nullptr */);
 }
 
 void put_string(const string &s, FILE *fp)
 {
   size_t len = s.length();
   const char *ptr = s.contents();
+  assert(ptr != 0 /* nullptr */);
   for (size_t i = 0; i < len; i++)
     putc(ptr[i], fp);
 }
