@@ -469,8 +469,13 @@ void string::json_dump() const
   free(const_cast<char *>(repr));
 }
 
+// TODO: This function has 1 call site, in tbl/main.cpp:process_data().
+// Consider either open-coding this logic there, or generalizing this
+// function to a `filter()` that takes a character parameter.
 void string::remove_spaces()
 {
+  // This method is arguably inefficient, but see above regarding the
+  // one call site.
   size_t l = len - 1;
   while ((l < len) && (ptr[l] == ' '))
     l--;
