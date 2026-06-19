@@ -8,7 +8,8 @@
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright 1989-2024 Free Software Foundation, Inc.
+.\" Copyright 1989-2005 Free Software Foundation, Inc.
+.\"           2020-2024 G. Branden Robinson
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
