@@ -25,6 +25,15 @@
 
 2026-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Add smoke test.
+
+	* src/preproc/refer/tests/artifacts/little-schemer.bib: Add.
+	* src/preproc/refer/tests/smoke-test.sh: Add.
+	* src/preproc/refer/refer.am (refer_TESTS): Run test.
+	(EXTRA_DIST): Ship new artifact.
+
+2026-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (string::string): Drop redundant
 	memset(3) calls; `salloc()` already ensures that the memory to
 	which it returns a pointer is cleared.

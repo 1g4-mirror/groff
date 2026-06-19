@@ -59,11 +59,13 @@ maintainer-clean-refer:
 	fi
 
 refer_TESTS = \
-  src/preproc/refer/tests/report-correct-line-numbers.sh
+  src/preproc/refer/tests/report-correct-line-numbers.sh \
+  src/preproc/refer/tests/smoke-test.sh
 TESTS += $(refer_TESTS)
 EXTRA_DIST += \
   $(refer_TESTS) \
-  src/preproc/refer/tests/artifacts/62124.bib
+  src/preproc/refer/tests/artifacts/62124.bib \
+  src/preproc/refer/tests/artifacts/little-schemer.bib
 
 uninstall_groffdirs: uninstall_refer_hook
 uninstall_refer_hook:
