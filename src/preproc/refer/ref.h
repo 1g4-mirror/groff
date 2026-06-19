@@ -1,5 +1,5 @@
 // -*- C++ -*-
-/* Copyright (C) 1989-2020 Free Software Foundation, Inc.
+/* Copyright 1989-2020 Free Software Foundation, Inc.
      Written by James Clark (jjc@jclark.com)
 
 This file is part of groff, the GNU roff typesetting system.
