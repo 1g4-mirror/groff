@@ -1,3 +1,14 @@
+2026-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp: Refactor.
+	(string::operator=): assert(3) that the `p` parameter (a C
+	string) is not a null pointer.  For `NDEBUG` builds, assign it
+	an empty string literal in this situation.  Measure `p` with
+	strlen(3) and call `sfree_alloc()` instead of `sfree()` on
+	member variable `ptr` to size a buffer for it.  assert(3) that
+	`sfree_alloc()` returns a non-null pointer.
+	(sfree): Delete now-unused function.
+
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp (string::clear): Maintain

@@ -68,20 +68,6 @@ static char *salloc(size_t len, size_t *sizep)
   return p;
 }
 
-static void sfree(char *ptr)
-{
-  delete[] ptr;
-  size_t amount = initial_string_buffer_size;
-  try {
-    ptr = new char[amount];
-  }
-  catch (const std::bad_alloc &exc) {
-    fatal("cannot allocate %1 bytes for string reallocation after"
-	  " freeing", amount);
-  }
-  memset(ptr, 0, amount);
-}
-
 static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
 			 size_t *sizep)
 {
@@ -204,19 +190,15 @@ string &string::operator=(const string &s)
 
 string &string::operator=(const char *p)
 {
-  if (0 /* nullptr */ == p) {
-    sfree(ptr);
-    len = 0;
-    ptr = 0 /* nullptr */;
-    sz = 0;
-  }
-  else {
-    size_t slen = strlen(p);
-    ptr = sfree_alloc(ptr, sz, slen, &sz);
-    len = slen;
-    if (len != 0)
-      memcpy(ptr, p, len);
-  }
+  assert(p != 0 /* nullptr */);
+  if (0 /* nullptr */ == p)
+    p = "";
+  size_t slen = strlen(p);
+  ptr = sfree_alloc(ptr, sz, slen, &sz);
+  assert(ptr != 0 /* nullptr */);
+  len = slen;
+  if (len != 0)
+    memcpy(ptr, p, len);
   return *this;
 }
 
