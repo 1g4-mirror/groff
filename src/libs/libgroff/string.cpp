@@ -133,7 +133,6 @@ string::string(const char *p, size_t n) : len(n)
 {
   ptr = salloc(n, &sz);
   assert(ptr != 0 /* nullptr */);
-  memset(ptr, 0, sz);
   if (n != 0)
     memcpy(ptr, p, n);
 }
@@ -149,8 +148,6 @@ string::string(const char *p)
     len = strlen(p);
     ptr = salloc(len, &sz);
     assert(ptr != 0 /* nullptr */);
-    if (len < sz)
-      memset(ptr, 0, sz);
     if (len != 0)
       memcpy(ptr, p, len);
   }
@@ -169,8 +166,6 @@ string::string(const string &s) : len(s.len)
 {
   ptr = salloc(len, &sz);
   assert(ptr != 0 /* nullptr */);
-  if (sz > 0)
-    memset(ptr, 0, sz);
   if (len != 0)
     memcpy(ptr, s.ptr, len);
 }
