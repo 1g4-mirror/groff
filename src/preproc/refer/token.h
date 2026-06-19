@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /* Copyright 1989-2020 Free Software Foundation, Inc.
 
 Written by James Clark (jjc@jclark.com)
@@ -86,3 +85,9 @@ inline int token_info::is_range_sep() const
 
 bool get_token(const char **ptr, const char *end);
 const token_info *lookup_token(const char *start, const char *end);
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

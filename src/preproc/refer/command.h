@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /* Copyright 1989-2020 Free Software Foundation, Inc.
 
 Written by James Clark (jjc@jclark.com)
@@ -34,3 +33,9 @@ extern string sep_label;
 
 extern void do_bib(const char *);
 extern void output_references();
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:

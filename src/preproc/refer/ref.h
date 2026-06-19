@@ -1,4 +1,3 @@
-// -*- C++ -*-
 /* Copyright 1989-2020 Free Software Foundation, Inc.
 
 Written by James Clark (jjc@jclark.com)
@@ -126,3 +125,9 @@ void reverse_name(const char *ptr, const char *end, string &result);
 void uppercase(const char *ptr, const char *end, string &result);
 void lowercase(const char *ptr, const char *end, string &result);
 void abbreviate_name(const char *ptr, const char *end, string &result);
+
+// Local Variables:
+// fill-column: 72
+// mode: C++
+// End:
+// vim: set cindent noexpandtab shiftwidth=2 textwidth=72:
