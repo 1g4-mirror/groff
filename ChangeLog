@@ -1,5 +1,15 @@
 2026-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff]: Disable unused `string` functions.
+	* src/include/stringclass.h: "`#if 0`"-out `string` constructor
+	taking a `char` parameter and collation operator `friend`
+	function declarations.
+	* src/libs/libgroff/string.cpp (string::string)
+	(operator<, operator<=, operator>, operator>=): "`#if 0`"-out
+	corresponding function definitions.
+
+2026-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp: Refactor.
 	(string::operator=): assert(3) that the `p` parameter (a C
 	string) is not a null pointer.  For `NDEBUG` builds, assign it

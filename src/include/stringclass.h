@@ -47,7 +47,9 @@ public:
   string(const string &);
   string(const char *);
   string(const char *, size_t);
+#if 0
   string(char);
+#endif
 
   ~string();
 
@@ -90,10 +92,12 @@ public:
 
   friend bool operator==(const string &, const string &);
   friend bool operator!=(const string &, const string &);
+#if 0
   friend bool operator<=(const string &, const string &);
   friend bool operator<(const string &, const string &);
   friend bool operator>=(const string &, const string &);
   friend bool operator>(const string &, const string &);
+#endif
 
 private:
   char *ptr;

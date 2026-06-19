@@ -156,12 +156,14 @@ string::string(const char *p)
   }
 }
 
+#if 0
 string::string(char c) : len(1)
 {
   ptr = salloc(1, &sz);
   assert(ptr != 0 /* nullptr */);
   *ptr = c;
 }
+#endif
 
 string::string(const string &s) : len(s.len)
 {
@@ -288,6 +290,7 @@ string::string(const char *s1, size_t n1, const char *s2, size_t n2)
   }
 }
 
+#if 0
 bool operator<=(const string &s1, const string &s2)
 {
   return ((s1.len <= s2.len)
@@ -315,6 +318,7 @@ bool operator>(const string &s1, const string &s2)
 	  ? ((s2.len == 0) || (memcmp(s1.ptr, s2.ptr, s2.len) >= 0))
 	  : ((s1.len != 0) && (memcmp(s1.ptr, s2.ptr, s1.len) > 0)));
 }
+#endif
 
 void string::set_length(size_t i)
 {
