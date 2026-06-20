@@ -1,3 +1,9 @@
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp (string::clear): Maintain
+	invariant that `ptr` is never a null pointer even in `NDEBUG`
+	builds.
+
 2026-06-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp: Manipulate assert(3)ions

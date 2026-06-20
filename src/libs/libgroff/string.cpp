@@ -348,6 +348,8 @@ void string::clear()
   assert(ptr != 0 /* nullptr */);
   if (ptr != 0 /* nullptr */)
     memset(ptr, 0, sz);
+  else
+    ptr = salloc(0, &sz); // unreachable unless `NDEBUG`
   len = 0;
 }
 
