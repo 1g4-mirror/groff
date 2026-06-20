@@ -57,11 +57,6 @@ EXTRA_DIST += \
 # Since eqn_CPPFLAGS was set, all .o files have an 'eqn-' prefix.
 src/preproc/eqn/eqn-lex.$(OBJEXT): src/preproc/eqn/eqn.hpp
 
-MAINTAINERCLEANFILES += \
-  src/preproc/eqn/eqn.hpp \
-  src/preproc/eqn/eqn.cpp \
-  src/preproc/eqn/eqn.output
-
 neqn: $(top_srcdir)/src/preproc/eqn/neqn.sh $(SH_DEPS_SED_SCRIPT)
 	$(AM_V_GEN)sed -f $(SH_DEPS_SED_SCRIPT) \
 	       -e 's/[@]g[@]/$(g)/g' \
@@ -70,6 +65,11 @@ neqn: $(top_srcdir)/src/preproc/eqn/neqn.sh $(SH_DEPS_SED_SCRIPT)
 	       >$@.tmp \
 	&& chmod +x $@.tmp \
 	&& mv $@.tmp $@
+
+MAINTAINERCLEANFILES += \
+  src/preproc/eqn/eqn.hpp \
+  src/preproc/eqn/eqn.cpp \
+  src/preproc/eqn/eqn.output
 
 eqn_TESTS = \
   src/preproc/eqn/tests/diagnostics-report-correct-line-numbers.sh \

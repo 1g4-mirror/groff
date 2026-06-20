@@ -1,5 +1,12 @@
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn]: Rearrange Automake material.
+
+	* src/preproc/eqn/eqn.am: Organize build target generation
+	before "clean"-stage stuff.
+
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[pic,refer]: Rearrange Automake material.
 
 	* src/preproc/pic/pic.am:
