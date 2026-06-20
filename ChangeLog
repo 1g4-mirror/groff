@@ -1,3 +1,10 @@
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[pic,refer]: Rearrange Automake material.
+
+	* src/preproc/pic/pic.am:
+	* src/preproc/pic/refer.am: Organize consistently with "eqn.am".
+
 2026-06-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* configure.ac: Make build robust against combination of

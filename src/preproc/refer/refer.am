@@ -45,10 +45,6 @@ src/preproc/refer/refer-refer.$(OBJEXT): defs.h
 src/preproc/refer/refer-token.$(OBJEXT): defs.h
 src/preproc/refer/refer-label.$(OBJEXT): defs.h
 
-uninstall_groffdirs: uninstall_refer_hook
-uninstall_refer_hook:
-	-rmdir $(DESTDIR)$(tmacdir)
-
 MAINTAINERCLEANFILES += \
   src/preproc/refer/label.cpp \
   src/preproc/refer/label.hpp \
@@ -60,6 +56,10 @@ TESTS += $(refer_TESTS)
 EXTRA_DIST += \
   $(refer_TESTS) \
   src/preproc/refer/tests/artifacts/62124.bib
+
+uninstall_groffdirs: uninstall_refer_hook
+uninstall_refer_hook:
+	-rmdir $(DESTDIR)$(tmacdir)
 
 # Local Variables:
 # fill-column: 72

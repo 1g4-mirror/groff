@@ -47,6 +47,11 @@ EXTRA_DIST += \
 # Since pic_CPPFLAGS was set, all .o files have a 'pic-' prefix.
 src/preproc/pic/pic-lex.$(OBJEXT): src/preproc/pic/pic.hpp
 
+MAINTAINERCLEANFILES += \
+  src/preproc/pic/pic.cpp \
+  src/preproc/pic/pic.hpp \
+  src/preproc/pic/pic.output
+
 pic_TESTS = \
   src/preproc/pic/tests/do-not-crash-when-reading-macro-arguments.sh \
   src/preproc/pic/tests/passes-through-input-with-eighth-bit-set.sh \
@@ -57,11 +62,6 @@ EXTRA_DIST += $(pic_TESTS)
 uninstall_groffdirs: uninstall_pic_hook
 uninstall_pic_hook:
 	-rmdir $(DESTDIR)$(tmacdir)
-
-MAINTAINERCLEANFILES += \
-  src/preproc/pic/pic.cpp \
-  src/preproc/pic/pic.hpp \
-  src/preproc/pic/pic.output
 
 # Local Variables:
 # fill-column: 72
