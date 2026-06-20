@@ -69,8 +69,8 @@ static char *salloc(size_t len, size_t *sizep)
   return p;
 }
 
-static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
-			 size_t *sizep)
+static char *sfree_and_alloc(char *ptr, size_t oldsz, size_t len,
+			     size_t *sizep)
 {
   if (oldsz >= len) {
     *sizep = oldsz;
@@ -180,7 +180,7 @@ string::~string()
 
 string &string::operator=(const string &s)
 {
-  ptr = sfree_alloc(ptr, sz, s.len, &sz);
+  ptr = sfree_and_alloc(ptr, sz, s.len, &sz);
   assert(ptr != 0 /* nullptr */);
   len = s.len;
   if (len != 0)
@@ -194,7 +194,7 @@ string &string::operator=(const char *p)
   if (0 /* nullptr */ == p)
     p = "";
   size_t slen = strlen(p);
-  ptr = sfree_alloc(ptr, sz, slen, &sz);
+  ptr = sfree_and_alloc(ptr, sz, slen, &sz);
   assert(ptr != 0 /* nullptr */);
   len = slen;
   if (len != 0)
@@ -204,7 +204,7 @@ string &string::operator=(const char *p)
 
 string &string::operator=(char c)
 {
-  ptr = sfree_alloc(ptr, sz, 1, &sz);
+  ptr = sfree_and_alloc(ptr, sz, 1, &sz);
   assert(ptr != 0 /* nullptr */);
   len = 1;
   *ptr = c;
@@ -213,7 +213,7 @@ string &string::operator=(char c)
 
 void string::move(string &s)
 {
-  sfree_alloc(ptr, sz, s.len, &sz);
+  sfree_and_alloc(ptr, sz, s.len, &sz);
   memcpy(ptr, s.ptr, s.len);
   len = s.len;
   s.clear();

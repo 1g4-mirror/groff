@@ -1,5 +1,13 @@
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp: Trivially refactor.
+	(sfree_alloc): Rename this...
+	(sfree_and_alloc): ...to this.
+	(string::operator=(const char*), string::operator=(char) [0])
+	(string::move): Update call sites.
+
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (sfree_alloc): Avoid unnecessary
 	memset(3) if the new string's `len` (length) is equal to the
 	existing string's capacity (`oldsz`), because it is already
