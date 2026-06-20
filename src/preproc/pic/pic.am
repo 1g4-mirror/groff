@@ -52,6 +52,14 @@ MAINTAINERCLEANFILES += \
   src/preproc/pic/pic.hpp \
   src/preproc/pic/pic.output
 
+maintainer-clean-local: maintainer-clean-pic
+
+.PHONY: maintainer-clean-pic
+maintainer-clean-pic:
+	$(AM_V_at)if test "$(srcdir)" != .; then \
+	  rmdir src/preproc/pic || :; \
+	fi
+
 pic_TESTS = \
   src/preproc/pic/tests/do-not-crash-when-reading-macro-arguments.sh \
   src/preproc/pic/tests/passes-through-input-with-eighth-bit-set.sh \

@@ -50,6 +50,14 @@ MAINTAINERCLEANFILES += \
   src/preproc/refer/label.hpp \
   src/preproc/refer/label.output
 
+maintainer-clean-local: maintainer-clean-refer
+
+.PHONY: maintainer-clean-refer
+maintainer-clean-refer:
+	$(AM_V_at)if test "$(srcdir)" != .; then \
+	  rmdir src/preproc/refer || :; \
+	fi
+
 refer_TESTS = \
   src/preproc/refer/tests/report-correct-line-numbers.sh
 TESTS += $(refer_TESTS)

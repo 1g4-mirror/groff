@@ -71,6 +71,14 @@ MAINTAINERCLEANFILES += \
   src/preproc/eqn/eqn.cpp \
   src/preproc/eqn/eqn.output
 
+maintainer-clean-local: maintainer-clean-eqn
+
+.PHONY: maintainer-clean-eqn
+maintainer-clean-eqn:
+	$(AM_V_at)if test "$(srcdir)" != .; then \
+	  rmdir src/preproc/eqn || :; \
+	fi
+
 eqn_TESTS = \
   src/preproc/eqn/tests/diagnostics-report-correct-line-numbers.sh \
   src/preproc/eqn/tests/neqn-finds-matching-eqn.sh \
