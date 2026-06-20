@@ -1,5 +1,12 @@
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp (sfree_alloc): Avoid unnecessary
+	memset(3) if the new string's `len` (length) is equal to the
+	existing string's capacity (`oldsz`), because it is already
+	{invariantly} null-terminated.
+
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (srealloc): Avoid unnecessary
 	memset(3) if the new string's `length` is equal to the old
 	string's `sz` (capacity), because it is already (invariantly)

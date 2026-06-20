@@ -74,7 +74,8 @@ static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
 {
   if (oldsz >= len) {
     *sizep = oldsz;
-    memset((ptr + len), 0, (oldsz - len));
+    if (oldsz > len)
+      memset((ptr + len), 0, (oldsz - len));
     return ptr;
   }
   delete[] ptr;
