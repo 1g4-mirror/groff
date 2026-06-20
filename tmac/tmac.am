@@ -405,8 +405,7 @@ TMAC_PACKAGE_MAN = tmac/an.tmac tmac/an-ext.tmac
 TMAC_PACKAGE_MDOC = tmac/doc.tmac tmac/mdoc/doc-common \
   tmac/mdoc/doc-ditroff tmac/mdoc/doc-nroff tmac/mdoc/doc-syms
 TMAC_PACKAGE_ME = tmac/e.tmac
-TMAC_PACKAGE_MS = tmac/s.tmac
-
+TMAC_PACKAGE_MS = tmac/s.tmac tmac/devtag.tmac
 
 # Local Variables:
 # mode: makefile-automake

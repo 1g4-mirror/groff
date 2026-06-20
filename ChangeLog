@@ -1,5 +1,12 @@
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tmac.am: Add "tmac/devtag.tmac" to `TMAC_PACKAGE_MS`
+	macro definition, since the package internally uses that
+	auxiliary macro file, and any update to it should render an
+	ms(7) document out-of-date.
+
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn,pic,refer]: Improve maintainer-clean target.
 
 	* src/preproc/eqn/eqn.am (maintainer-clean-eqn):
