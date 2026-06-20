@@ -1,5 +1,14 @@
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/gpl.texi: Add copy of the GNU GPL in Texinfo format.
+	* doc/doc.am: Add it to `EXTRA_DIST` so that it ships in our
+	distribution archive.
+	* doc/groff.texi.in: Document fact of dual-licensing on
+	copyright page, inspired by GNU nano's approach.  `@include` the
+	new "gpl.texi" file in the "Copying This Manual" appendix.
+
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp: Trivially refactor.
 	(sfree_alloc): Rename this...
 	(sfree_and_alloc): ...to this.

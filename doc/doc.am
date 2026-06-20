@@ -563,7 +563,7 @@ endif
 #
 # Were the foregoing not true, we would simply say this:
 #info_TEXINFOS = doc/groff.texi
-#doc_groff_TEXINFOS = doc/fdl.texi
+#doc_groff_TEXINFOS = doc/gpl.texi doc/fdl.texi
 
 if HAVE_MAKEINFO
 GROFF_INFO = doc/groff.info
@@ -579,7 +579,7 @@ endif # USE_TEX
 all: $(GROFF_INFO) $(GROFF_TXT) $(GROFF_HTML) $(GROFF_DVI) $(GROFF_PDF)
 
 # Distribute the manual in source form as well.
-EXTRA_DIST += doc/groff.texi.in doc/groff.texi doc/fdl.texi
+EXTRA_DIST += doc/groff.texi.in doc/groff.texi doc/gpl.texi doc/fdl.texi
 MAINTAINERCLEANFILES += doc/groff.texi
 
 doc/groff.texi: $(top_srcdir)/doc/groff.texi.in
