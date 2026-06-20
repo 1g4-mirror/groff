@@ -44,6 +44,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // TODO 1: Replace all this memory management stuff with vector<char>.
 // TODO 2: Replace this entire class.  See Savannah #67735.
 
+// Invariant: a groff string must always be null-terminated, because its
+// `contents()` member function returns a `const char *`.
+
 // An initial buffer size of 64 appears to balance build time against
 // minimization of reallocations.
 static const size_t initial_string_buffer_size = 64;
@@ -51,13 +54,9 @@ static const size_t initial_string_buffer_size = 64;
 static char *salloc(size_t len, size_t *sizep)
 {
   char *p = 0 /* nullptr */;
-  size_t amount = len;
-  if (0 == amount)
-    amount = initial_string_buffer_size;
-  // XXX: Add 1 as a hack to work around a problem created in
-  // src/devices/html/post-html.cpp:page::add_and_encode_char() when it
-  // is omitted.  If/when we resolve that, we can assign simply `len`.
-  amount += 1;
+  size_t amount = initial_string_buffer_size;
+  if (len >= amount)
+    amount = len + 1 /* '\0' */;
   try {
     p = new char[*sizep = amount];
   }
@@ -93,9 +92,9 @@ static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
   }
   delete[] ptr;
   char *p = 0 /* nullptr */;
-  size_t amount = len;
-  if (0 == amount)
-    amount = initial_string_buffer_size;
+  size_t amount = initial_string_buffer_size;
+  if (len >= amount)
+    amount = len + 1 /* '\0' */;
   try {
     p = new char[*sizep = amount];
   }

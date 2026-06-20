@@ -1,5 +1,18 @@
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp: Document invariant.
+	(salloc, sfree_alloc): Always allocate room for a null
+	terminator since the groff `string` class's `contents()` member
+	function returns a C string.  That interface does not combine
+	well with a class design that uses neither memset(3) nor ISO
+	C++03 value initialization to fastidiously clean the allocated
+	buffers (which, as of recently, we do).  This way we wear
+	suspenders _and_ a belt.  As a side effect, we more often
+	{re}allocate in chunks of 64 bytes a time, reducing the total
+	number of allocations and improving build time by about 5%.
+
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tmac.am: Add "tmac/devtag.tmac" to `TMAC_PACKAGE_MS`
 	macro definition, since the package internally uses that
 	auxiliary macro file, and any update to it should render an
