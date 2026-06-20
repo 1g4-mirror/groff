@@ -58,13 +58,14 @@ static char *salloc(size_t len, size_t *sizep)
   if (len >= amount)
     amount = len + 1 /* '\0' */;
   try {
+    // C++03: p = new char[*sizep = amount]();
     p = new char[*sizep = amount];
   }
   catch (const std::bad_alloc &exc) {
     fatal("cannot allocate %1 bytes for string allocation", amount);
   }
   assert(*sizep > 0);
-  memset(p, 0, *sizep);
+  memset(p, 0, *sizep); // see C++03 comment above
   return p;
 }
 
@@ -82,13 +83,14 @@ static char *sfree_alloc(char *ptr, size_t oldsz, size_t len,
   if (len >= amount)
     amount = len + 1 /* '\0' */;
   try {
+    // C++03: p = new char[*sizep = amount]();
     p = new char[*sizep = amount];
   }
   catch (const std::bad_alloc &exc) {
     fatal("cannot allocate %1 bytes for string replacement allocation",
 	  amount);
   }
-  memset(p, 0, amount);
+  memset(p, 0, amount); // see C++03 comment above
   return p;
 }
 
@@ -109,6 +111,7 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
     amount = newlen * 2;
   char *p = 0 /* nullptr */;
   try {
+    // C++03: p = new char[*sizep = amount]();
     p = new char[*sizep = amount];
   }
   catch (const std::bad_alloc &exc) {
