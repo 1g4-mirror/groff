@@ -1,3 +1,13 @@
+2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp (srealloc): Avoid unnecessary
+	memset(3) if the new string's `length` is equal to the old
+	string's `sz` (capacity), because it is already (invariantly)
+	null-terminated.  Simplify condition for performing memcpy(3) of
+	old contents to new: do it only if the old length is not zero.
+	Unconditionally memset(3) the memory from the end of the new
+	string to the end of string's capacity.
+
 2026-06-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp (string::string): Drop redundant

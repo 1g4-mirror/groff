@@ -99,7 +99,8 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
 {
   if (oldsz >= newlen) {
     *sizep = oldsz;
-    memset((ptr + oldlen), 0, (newlen - oldsz));
+    if (oldsz > newlen)
+      memset((ptr + newlen), 0, (oldsz - newlen));
     return ptr;
   }
   size_t amount = newlen;
@@ -117,11 +118,9 @@ static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
   catch (const std::bad_alloc &exc) {
     fatal("cannot allocate %1 bytes for string reallocation", amount);
   }
-  if ((oldlen < newlen) && (oldlen != 0)) {
-    assert(amount > 0);
-    memset(p, 0, amount);
+  if (oldlen != 0)
     memcpy(p, ptr, oldlen);
-  }
+  memset((p + oldlen), 0, (amount - oldlen));
   delete[] ptr;
   return p;
 }
