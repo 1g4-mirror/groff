@@ -492,15 +492,7 @@ Documentation License''.
 * GNU @command{troff} Reference::
 * File Formats::
 * Copying This Manual::
-* Request Index::
-* Escape Sequence Index::
-* Operator Index::
-* Register Index::
-* Macro Index::
-* String Index::
-* File Keyword Index::
-* Program and File Index::
-* Concept Index::
+* Indices::
 @end menu
 
 @ifnottex
@@ -2575,7 +2567,6 @@ pages at the time the document is rendered; see @cite{gropdf@r{(1)}}.
 @c ---------------------------------------------------------------------
 
 @node Indexing
-@anchor{Indices} @c 1.22.4
 @subsection Indexing
 @cindex index, in macro package
 
@@ -26440,6 +26431,8 @@ follow quite naturally.
 @node Copying This Manual
 @appendix Copying This Manual
 
+@node GNU Free Documentation License
+@appendixsec GNU Free Documentation License
 @include fdl.texi
 
 
@@ -26451,8 +26444,24 @@ follow quite naturally.
 @codequotebacktick on
 @codequoteundirected on
 
+@page
+@node Indices
+@appendix Indices
+
+@menu
+* Request Index::               Index of GNU troff requests
+* Escape Sequence Index::       Index of GNU troff escape sequences
+* Operator Index::              Index of GNU troff operators
+* Register Index::              Index of GNU troff registers
+* Macro Index::                 Index of groff macros
+* String Index::                Index of GNU troff strings
+* File Keyword Index::          Index of keywords used in device files
+* Program and File Index::      Index of groff programs and files
+* Concept Index::               Index of groff concepts and topics
+@end menu
+
 @node Request Index
-@appendix Request Index
+@appendixsec Request Index
 
 Request names appear without a leading control character; the defaults
 are @code{.} for the regular control character and @code{'} for the
@@ -26465,9 +26474,10 @@ no-break control character.  @xref{Invoking Requests}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node Escape Sequence Index
 @anchor{Escape Index} @c 1.22.4
-@appendix Escape Sequence Index
+@appendixsec Escape Sequence Index
 
 The escape character, @code{\} by default, is always followed by at
 least one more input character, making an escape @emph{sequence}.  Any
@@ -26484,8 +26494,9 @@ alphabetically, not by code point order.  @xref{Using Escape Sequences}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node Operator Index
-@appendix Operator Index
+@appendixsec Operator Index
 
 @xref{Numeric Expressions}.
 
@@ -26496,8 +26507,9 @@ alphabetically, not by code point order.  @xref{Using Escape Sequences}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node Register Index
-@appendix Register Index
+@appendixsec Register Index
 
 Where not used by the formatter itself, a register's associated macro
 package or program appears in brackets after the register's name.
@@ -26513,8 +26525,9 @@ any length @code{xxx} with @samp{\n[xxx]}.  @xref{Registers}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node Macro Index
-@appendix Macro Index
+@appendixsec Macro Index
 
 The package or program with which a macro is associated appears in
 brackets after the macro's name.  They appear without a leading control
@@ -26527,8 +26540,9 @@ character (normally @samp{.}).  @xref{Calling Macros}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node String Index
-@appendix String Index
+@appendixsec String Index
 
 The macro package or program with which a string is associated appears
 in brackets after the string's name.  The formatter itself defines only
@@ -26546,9 +26560,10 @@ any length @code{xxx} with @samp{\*[xxx]}.  @xref{Strings}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node File Keyword Index
 @anchor{Font File Keyword Index} @c 1.22.4
-@appendix File Keyword Index
+@appendixsec File Keyword Index
 
 @xref{Device and Font Description Files}.
 
@@ -26559,8 +26574,9 @@ any length @code{xxx} with @samp{\*[xxx]}.  @xref{Strings}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node Program and File Index
-@appendix Program and File Index
+@appendixsec Program and File Index
 
 @printindex pg
 
@@ -26569,8 +26585,9 @@ any length @code{xxx} with @samp{\*[xxx]}.  @xref{Strings}.
 @c =====================================================================
 @c =====================================================================
 
+@page
 @node Concept Index
-@appendix Concept Index
+@appendixsec Concept Index
 
 @printindex cp
 
