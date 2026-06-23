@@ -10,6 +10,7 @@ device and font description files
 .\" ====================================================================
 .\"
 .\" Copyright 1989-2025 Free Software Foundation, Inc.
+.\"                2026 G. Branden Robinson
 .\"
 .\" This file is part of groff, the GNU roff typesetting system.
 .\"
@@ -1111,6 +1112,60 @@ describes the font known
 .RI as\~ F
 on device
 .IR name .
+.
+.
+.\" ====================================================================
+.SH Notes
+.\" ====================================================================
+.
+Do not install an unfamiliar
+.I DESC
+device description file without reviewing it for sanity and correctness.
+.
+.I groff
+programs that interpret the
+.I DESC
+file pass the
+.I program
+argument to the directives
+.BR \%prepro ,
+.BR \%postpro ,
+.BR \%print ,
+and
+.B \%image_generator
+to
+.MR system 3 .
+.
+Automated tools or superficial analyses can produce spurious reports
+of a security vulnerability arising therefrom.
+.
+These directives do not create a command-injection vulnerability;
+any attacker who can get you to install
+a
+.I DESC
+file including a malicious shell command as
+.I program
+on the host,
+and then induce you to run
+.IR groff ,
+could just as easily have given you a malicious shell script
+and invited you to run that,
+directly or as a
+.I program
+argument.
+.
+In that situation,
+rewriting
+.I groff
+programs
+to use
+.MR fork 2
+and
+.MR execvp 3
+(or similar)
+affords no advantage,
+because a malicious shell script that requires no arguments
+compromises the host just as effectively.
 .
 .
 .\" ====================================================================
