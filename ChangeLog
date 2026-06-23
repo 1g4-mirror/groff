@@ -1,5 +1,20 @@
 2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/lex.cpp (interpolate_macro_with_args): Declare
+	new `bool`, `is_ignoring_arguments`.  Use it within the macro
+	argument reading loop to ignore any arguments past the ninth,
+	so that they do not populate the `argv` array beyond its bounds.
+	Neither AT&T nor GNU eqn has a syntax for interpolating tenth or
+	subsequent arguments, nor any `shift` command that would made
+	such arguments addressable.  Issue one warning per macro
+	expansion with excess arguments.
+
+	Fixes <https://savannah.gnu.org/bugs/?68468>.  Problem reported
+	apparently by an LLM robot in <https://lists.gnu.org/archive/\
+	html/bug-groff/2026-06/msg00053.html>.
+
+2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn]: Regression-test Savannah #68468.
 
 	* src/preproc/eqn/tests/\

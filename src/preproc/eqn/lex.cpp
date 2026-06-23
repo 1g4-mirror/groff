@@ -761,6 +761,7 @@ static void interpolate_macro_with_args(const char *body)
     argv[i] = 0;
   int level = 0;
   int c;
+  bool is_ignoring_arguments = false;
   do {
     token_buffer.clear();
     for (;;) {
@@ -770,6 +771,13 @@ static void interpolate_macro_with_args(const char *body)
 	break;
       }
       if (level == 0 && (c == ',' || c == ')')) {
+	if (argc >= 9) {
+	  if (!is_ignoring_arguments) { // if we didn't already warn
+	    lex_warning("excess macro argument(s); ignoring");
+	    is_ignoring_arguments = true;
+	  }
+	  break;
+	}
 	if (token_buffer.length() > 0) {
 	  token_buffer +=  '\0';
 	  argv[argc] = strsave(token_buffer.contents());
