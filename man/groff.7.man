@@ -415,7 +415,7 @@ it is unnecessary
 because the program parses delimited arguments
 at a different input level than their surrounding context.
 .
-See section \[lq]Miscellaneous\[rq] of
+See section \[lq]Miscellaneous\[rq] in
 .MR groff_diff @MAN7EXT@ .)
 .
 GNU
@@ -1115,7 +1115,7 @@ GNU
 .I troff \" GNU
 emits a warning in category
 .RB \%\[lq] range \[rq].
-See section \[lq]Warnings\[rq] of
+See section \[lq]Warnings\[rq] in
 .MR @g@troff 1 .)
 .
 .
@@ -1278,7 +1278,7 @@ to evaluate false.
 .I troff \" GNU
 emits a warning in category
 .RB \%\[lq] number \[rq].
-See section \[lq]Warnings\[rq] of
+See section \[lq]Warnings\[rq] in
 .MR @g@troff @MAN1EXT@ .)
 .
 This unfortunate limitation maintains compatibility with AT&T
@@ -1478,7 +1478,7 @@ the formatter defines it as empty and interpolates nothing.
 .I troff \" GNU
 emits a warning in category
 .RB \[lq] mac \[rq].
-See section \[lq]Warnings\[rq] of
+See section \[lq]Warnings\[rq] in
 .MR @g@troff @MAN1EXT@ .)
 .
 Similarly,
@@ -1873,7 +1873,7 @@ is also commonly seen.
 .
 Punctuation characters are the best choice
 (and most portable to other
-.IR troff s, \" generic
+.IR troff s), \" generic
 except for those meaningful in numeric expressions;
 see below.
 .\" GNU troff happily accepts tabs and leaders; AT&T troff doesn't.
