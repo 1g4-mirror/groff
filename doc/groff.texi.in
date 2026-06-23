@@ -12616,8 +12616,8 @@ not when it is output.
 @cindex conditional page break (@code{ne})
 @cindex page break, conditional (@code{ne})
 @cindex need vertical space request (@code{ne})
-Force a page break if insufficient vertical space is available
-(it asserts ``needed'' space).
+Force a page break if insufficient vertical space is available;
+it asserts ``needed'' space.
 @code{ne} tests the distance to the next page
 location trap; see @ref{Page Location Traps}, and breaks the page if
 that amount is less than @var{space}.  The default scaling unit is

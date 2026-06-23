@@ -2096,8 +2096,8 @@ incrementing the page number by one
 .
 The
 .B ne
-request forces a page break if insufficient vertical space is available
-(it asserts \[lq]needed\[rq] space).
+request forces a page break if insufficient vertical space is available;
+it asserts \[lq]needed\[rq] space.
 .
 .B sv
 requires vertical space as
