@@ -1,5 +1,13 @@
 2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[eqn]: Regression-test Savannah #68468.
+
+	* src/preproc/eqn/tests/\
+	do-not-segv-on-excess-macro-arguments.sh: Do it.
+	* src/preproc/eqn/eqn.am (eqn_TESTS): Run test.
+
+2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[eqn]: Add `lex_warning()` function.
 
 	* src/preproc/eqn/eqn.h: Declare it.
