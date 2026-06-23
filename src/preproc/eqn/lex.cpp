@@ -758,7 +758,7 @@ static void interpolate_macro_with_args(const char *body)
   int argc = 0;
   int i;
   for (i = 0; i < 9; i++)
-    argv[i] = 0;
+    argv[i] = 0 /* nullptr */;
   int level = 0;
   int c;
   bool is_ignoring_arguments = false;
@@ -766,11 +766,11 @@ static void interpolate_macro_with_args(const char *body)
     token_buffer.clear();
     for (;;) {
       c = get_char();
-      if (c == EOF) {
+      if (EOF == c) {
 	lex_error("end of input while scanning macro arguments");
 	break;
       }
-      if (level == 0 && (c == ',' || c == ')')) {
+      if ((0 == level) && ((',' == c) || (')' == c))) {
 	if (argc >= 9) {
 	  if (!is_ignoring_arguments) { // if we didn't already warn
 	    lex_warning("excess macro argument(s); ignoring");
@@ -783,17 +783,17 @@ static void interpolate_macro_with_args(const char *body)
 	  argv[argc] = strsave(token_buffer.contents());
 	}
 	// for 'foo()', argc = 0
-	if (argc > 0 || c != ')' || i > 0)
+	if ((argc > 0) || (c != ')') || (i > 0))
 	  argc++;
 	break;
       }
       token_buffer += char(c);
-      if (c == '(')
+      if ('(' == c)
 	level++;
-      else if (c == ')')
+      else if (')' == c)
 	level--;
     }
-  } while (c != ')' && c != EOF);
+  } while ((c != ')') && (c != EOF));
   current_input = new argument_macro_input(body, argc, argv,
 					   current_input);
 }

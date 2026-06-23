@@ -1,5 +1,12 @@
 2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/lex.cpp (interpolate_macro_with_args): Fix
+	code style nits.  Parenthesize formally complex expressions.
+	Arrange equality comparisons to avoid inadvertent assignment to
+	lvalue.
+
+2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/lex.cpp (interpolate_macro_with_args): Declare
 	new `bool`, `is_ignoring_arguments`.  Use it within the macro
 	argument reading loop to ignore any arguments past the ninth,
