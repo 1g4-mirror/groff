@@ -1264,6 +1264,20 @@ void lex_error(const char *message,
 			     arg3);
 }
 
+void lex_warning(const char *message,
+		 const errarg &arg1,
+		 const errarg &arg2,
+		 const errarg &arg3)
+{
+  char *filename;
+  int lineno;
+  if (!get_location(&filename, &lineno))
+    warning(message, arg1, arg2, arg3);
+  else
+    warning_with_file_and_line(filename, lineno, message, arg1, arg2,
+			       arg3);
+}
+
 extern void yyerror(const char *);
 
 void yyerror(const char *s)

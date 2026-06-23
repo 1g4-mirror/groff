@@ -44,6 +44,10 @@ void lex_error(const char *message,
 	       const errarg &arg1 = empty_errarg,
 	       const errarg &arg2 = empty_errarg,
 	       const errarg &arg3 = empty_errarg);
+void lex_warning(const char *,
+		 const errarg & /* arg1 */ = empty_errarg,
+		 const errarg & /* arg2 */ = empty_errarg,
+		 const errarg & /* arg3 */ = empty_errarg);
 
 void init_table(const char *device);
 

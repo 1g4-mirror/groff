@@ -1,3 +1,10 @@
+2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[eqn]: Add `lex_warning()` function.
+
+	* src/preproc/eqn/eqn.h: Declare it.
+	* src/preproc/eqn/lex.cpp (lex_warning): Define it.
+
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp: Fix `-Wstringop-truncation`
