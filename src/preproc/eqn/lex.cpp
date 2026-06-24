@@ -778,7 +778,9 @@ static void interpolate_macro_with_args(const char *body)
       if ((0 == level) && ((',' == c) || (')' == c))) {
 	if (argc >= eqn_macro_maximum_arg_count) {
 	  if (!is_ignoring_arguments) { // if we didn't already warn
-	    lex_warning("excess macro argument(s); ignoring");
+	    lex_warning("eqn supports at most %1 macro arguments;"
+			" ignoring excess",
+			eqn_macro_maximum_arg_count);
 	    is_ignoring_arguments = true;
 	  }
 	  break;

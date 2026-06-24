@@ -1,3 +1,9 @@
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/eqn/lex.cpp (interpolate_macro_with_args): When
+	warning of ignored excess macro arguments, report how many are
+	supported.
+
 2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/eqn/lex.cpp: Slightly refactor.  Replace magic
