@@ -1,5 +1,11 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/lex.cpp (interpolate_macro_with_args): When
+	warning of ignored excess macro arguments, explicit state that
+	they're ignored.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/lex.cpp (interpolate_macro_with_args):
 	Boolify.  Demote local variable `ignore` from `int` to `bool`
 	and rename it to `is_ignoring_arguments`.  Assign to it using

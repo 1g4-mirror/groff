@@ -418,8 +418,9 @@ static void interpolate_macro_with_args(const char *body)
       if (state == NORMAL && level == 0 && (c == ',' || c == ')')) {
 	if (!is_ignoring_arguments) {
 	  if (argc == pic_macro_maximum_arg_count) {
-	    lex_warning("pic supports at most %1 macro arguments",
-		pic_macro_maximum_arg_count);
+	    lex_warning("pic supports at most %1 macro arguments;"
+			" ignoring excess",
+			pic_macro_maximum_arg_count);
 	    is_ignoring_arguments = true;
 	  }
 	  else if (token_buffer.length() > 0) {
