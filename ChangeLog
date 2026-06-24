@@ -1,5 +1,42 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/lex.cpp: Slightly refactor.  Replace
+	preprocessor macro `MAX_ARG` with new `static const size_t`
+	`pic_macro_maximum_arg_count`.
+	(class argument_macro_input)
+	(process_body)
+	(argument_macro_input::get)
+	(argument_macro_input::peek)
+	(interpolate_macro_with_args)
+	(class copy_thru_input)
+	(copy_thru_input::get)
+	(copy_thru_input::peek)
+	(copy_thru_input::get_line): Lexically replace `MAX_ARG` with
+	`pic_macro_maximum_arg_count`.
+	(class argument_macro_input, class copy_thru_input): Convert
+	type of `argc` member variable from `int` to `size_t`, since
+	it's used as an array index.  Update constructor declaration
+	accordingly.
+	(process_body): Convert type of local variables `j`, `i`, `n`,
+	and `k` from `int` to `size_t`, since they're used or compared
+	to array indices.
+	(argument_macro_input::argument_macro_input)
+	(argument_macro_input::~argument_macro_input)
+	(argument_macro_input::get)
+	(argument_macro_input::peek)
+	(copy_thru_input::get)
+	(copy_thru_input::peek)
+	(get_thru_arg): Convert type of local variable `i` from `int` to
+	`size_t`, since it's used as an array index.
+	(get_thru_arg): Avoid modular arithmetic wraparound by adjusting
+	loop test condition and consequent indices used to index into
+	token buffer containing argument that isn't the name of a macro.
+	(interpolate_macro_with_args): Convert type of local variable
+	`argc` from `int` to `size_t`, since it's compared to an array
+	index.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/lex.cpp (interpolate_macro_with_args): When
 	warning of ignored excess macro arguments, report how many are
 	supported.

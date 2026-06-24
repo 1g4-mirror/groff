@@ -40,10 +40,10 @@ implement_ptable(char)
 
 PTABLE(char) macro_table;
 
-// First character of the range representing $1-$<MAX_ARG>.
-// All of them must be invalid input characters.
+// First character of the range representing
+// $1-$<pic_macro_maximum_arg_count>.  All of them must be invalid input
+// characters.
 #define ARG1 0x80
-#define MAX_ARG 32
 
 class macro_input : public input {
   char *s;
@@ -55,14 +55,17 @@ public:
   int peek();
 };
 
+// C++11: constexpr
+static const size_t pic_macro_maximum_arg_count = 32;
+
 class argument_macro_input : public input {
   char *s;
   char *p;
   char *ap;
-  int argc;
-  char *argv[MAX_ARG];
+  size_t argc;
+  char *argv[pic_macro_maximum_arg_count];
 public:
-  argument_macro_input(const char *, int, char **);
+  argument_macro_input(const char *, size_t, char **);
   ~argument_macro_input();
   int get();
   int peek();
@@ -178,20 +181,20 @@ int macro_input::peek()
 static char *process_body(const char *body)
 {
   char *s = strsave(body);
-  int j = 0;
-  for (int i = 0; s[i] != '\0'; i++)
+  size_t j = 0;
+  for (size_t i = 0; s[i] != '\0'; i++)
     if (s[i] == '$' && csdigit(s[i + 1])) {
-      int n = 0;
+      size_t n = 0;
       int start = i;
       i++;
       while (csdigit(s[i]))
-	if (n > MAX_ARG)
+	if (n > pic_macro_maximum_arg_count)
 	  i++;
 	else
 	  n = 10 * n + s[i++] - '0';
-      if (n > MAX_ARG) {
+      if (n > pic_macro_maximum_arg_count) {
 	string arg;
-	for (int k = start; k < i; k++)
+	for (size_t k = start; k < i; k++)
 	  arg += s[k];
 	lex_error("invalid macro argument number %1", arg.contents());
       }
@@ -205,17 +208,18 @@ static char *process_body(const char *body)
   return s;
 }
 
-argument_macro_input::argument_macro_input(const char *body, int ac, char **av)
+argument_macro_input::argument_macro_input(const char *body, size_t ac,
+    char **av)
 : ap(0), argc(ac)
 {
-  for (int i = 0; i < argc; i++)
+  for (size_t i = 0; i < argc; i++)
     argv[i] = av[i];
   p = s = process_body(body);
 }
 
 argument_macro_input::~argument_macro_input()
 {
-  for (int i = 0; i < argc; i++)
+  for (size_t i = 0; i < argc; i++)
     free(argv[i]);
   free(s);
 }
@@ -229,9 +233,10 @@ int argument_macro_input::get()
   }
   if (p == 0)
     return EOF;
-  while ((unsigned char)*p >= ARG1 
-	 && (unsigned char)*p <= ARG1 + MAX_ARG - 1) {
-    int i = (unsigned char)*p++ - ARG1;
+  while ((unsigned char)*p >= ARG1
+	 && (unsigned char)*p <= ARG1 + pic_macro_maximum_arg_count - 1)
+  {
+    size_t i = (unsigned char)*p++ - ARG1;
     if (i < argc && argv[i] != 0 && argv[i][0] != '\0') {
       ap = argv[i];
       return (unsigned char)*ap++;
@@ -252,8 +257,9 @@ int argument_macro_input::peek()
   if (p == 0)
     return EOF;
   while ((unsigned char)*p >= ARG1
-	 && (unsigned char)*p <= ARG1 + MAX_ARG - 1) {
-    int i = (unsigned char)*p++ - ARG1;
+	 && (unsigned char)*p <= ARG1 + pic_macro_maximum_arg_count - 1)
+  {
+    size_t i = (unsigned char)*p++ - ARG1;
     if (i < argc && argv[i] != 0 && argv[i][0] != '\0') {
       ap = argv[i];
       return (unsigned char)*ap;
@@ -392,11 +398,11 @@ int token_int;
 
 static void interpolate_macro_with_args(const char *body)
 {
-  char *argv[MAX_ARG];
-  int argc = 0;
+  char *argv[pic_macro_maximum_arg_count];
+  size_t argc = 0;
   int ignore = 0;
-  int i;
-  for (i = 0; i < MAX_ARG; i++)
+  size_t i;
+  for (i = 0; i < pic_macro_maximum_arg_count; i++)
     argv[i] = 0;
   int level = 0;
   int c;
@@ -411,9 +417,9 @@ static void interpolate_macro_with_args(const char *body)
       }
       if (state == NORMAL && level == 0 && (c == ',' || c == ')')) {
 	if (!ignore) {
-	  if (argc == MAX_ARG) {
+	  if (argc == pic_macro_maximum_arg_count) {
 	    lex_warning("pic supports at most %1 macro arguments",
-		MAX_ARG);
+		pic_macro_maximum_arg_count);
 	    ignore = 1;
 	  }
 	  else if (token_buffer.length() > 0) {
@@ -1547,8 +1553,8 @@ class copy_thru_input : public input {
   char *until;
   const char *p;
   const char *ap;
-  int argv[MAX_ARG];
-  int argc;
+  int argv[pic_macro_maximum_arg_count];
+  size_t argc;
   string line;
   int get_line();
   virtual int inget() = 0;
@@ -1647,8 +1653,9 @@ int copy_thru_input::get()
       return '\n';
     }
     while ((unsigned char)*p >= ARG1
-	   && (unsigned char)*p <= ARG1 + MAX_ARG - 1) {
-      int i = (unsigned char)*p++ - ARG1;
+	   && (unsigned char)*p <= ARG1
+				   + pic_macro_maximum_arg_count - 1) {
+      size_t i = (unsigned char)*p++ - ARG1;
       if (i < argc && line[argv[i]] != '\0') {
 	ap = line.contents() + argv[i];
 	return (unsigned char)*ap++;
@@ -1676,8 +1683,9 @@ int copy_thru_input::peek()
     if (*p == '\0')
       return '\n';
     while ((unsigned char)*p >= ARG1
-	   && (unsigned char)*p <= ARG1 + MAX_ARG - 1) {
-      int i = (unsigned char)*p++ - ARG1;
+	   && (unsigned char)*p <= ARG1
+				   + pic_macro_maximum_arg_count - 1) {
+      size_t i = (unsigned char)*p++ - ARG1;
       if (i < argc && line[argv[i]] != '\0') {
 	ap = line.contents() + argv[i];
 	return (unsigned char)*ap;
@@ -1701,7 +1709,7 @@ int copy_thru_input::get_line()
       c = inget();
     if (c == EOF || c == '\n')
       break;
-    if (argc == MAX_ARG) {
+    if (argc == pic_macro_maximum_arg_count) {
       do {
 	c = inget();
       } while (c != '\n' && c != EOF);
@@ -1827,16 +1835,15 @@ static char *get_thru_arg()
     if (def)
       return strsave(def);
     // I guess it wasn't a macro after all; so push the macro name back.
-    // -2 because we added a '\0'
-    for (int i = token_buffer.length() - 2; i >= 0; i--)
-      input_stack::push_back(token_buffer[i]);
+    for (size_t i = (token_buffer.length() - 1); i > 0; i--)
+      input_stack::push_back(token_buffer[(i - 1)]);
   }
   if (get_delimited()) {
     token_buffer += '\0';
     return strsave(token_buffer.contents());
   }
   else
-    return 0;
+    return 0 /* nullptr */;
 }
 
 int lookahead_token = -1;
