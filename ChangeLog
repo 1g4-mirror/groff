@@ -1,5 +1,12 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/lex.cpp (interpolate_macro_with_args):
+	Boolify.  Demote local variable `ignore` from `int` to `bool`
+	and rename it to `is_ignoring_arguments`.  Assign to it using
+	Boolean, not integer, literals.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/lex.cpp: Slightly refactor.  Replace
 	preprocessor macro `MAX_ARG` with new `static const size_t`
 	`pic_macro_maximum_arg_count`.

@@ -400,7 +400,7 @@ static void interpolate_macro_with_args(const char *body)
 {
   char *argv[pic_macro_maximum_arg_count];
   size_t argc = 0;
-  int ignore = 0;
+  bool is_ignoring_arguments = false;
   size_t i;
   for (i = 0; i < pic_macro_maximum_arg_count; i++)
     argv[i] = 0;
@@ -416,11 +416,11 @@ static void interpolate_macro_with_args(const char *body)
 	break;
       }
       if (state == NORMAL && level == 0 && (c == ',' || c == ')')) {
-	if (!ignore) {
+	if (!is_ignoring_arguments) {
 	  if (argc == pic_macro_maximum_arg_count) {
 	    lex_warning("pic supports at most %1 macro arguments",
 		pic_macro_maximum_arg_count);
-	    ignore = 1;
+	    is_ignoring_arguments = true;
 	  }
 	  else if (token_buffer.length() > 0) {
 	    token_buffer += '\0';
@@ -429,7 +429,7 @@ static void interpolate_macro_with_args(const char *body)
 	}
 	// for 'foo()', argc = 0
 	if (argc > 0 || c != ')' || i > 0)
-	  if (!ignore)
+	  if (!is_ignoring_arguments)
 	    argc++;
 	break;
       }
