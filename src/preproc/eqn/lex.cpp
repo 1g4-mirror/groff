@@ -286,7 +286,7 @@ static struct builtin_def mathml_defs[] = {
 
 void init_table(const char *device)
 {
-  unsigned int i;
+  size_t i;
   for (i = 0; i < countof(token_table); i++) {
     definition *def = new definition[1];
     def->is_macro = 0;
@@ -376,14 +376,17 @@ class top_input : public macro_input {
   int get_location(char **, int *);
 };
 
-class argument_macro_input: public input {
+// C++11: constexpr
+static const size_t eqn_macro_maximum_arg_count = 9;
+
+class argument_macro_input : public input {
   char *s;
   char *p;
   char *ap;
-  int argc;
-  char *argv[9];
+  size_t argc;
+  char *argv[eqn_macro_maximum_arg_count];
 public:
-  argument_macro_input(const char *, int, char **, input *);
+  argument_macro_input(const char *, size_t, char **, input *);
   ~argument_macro_input();
   int get();
   int peek();
@@ -529,15 +532,15 @@ int top_input::get_location(char **fnp, int *lnp)
 // Character representing $1.  Must be invalid input character.
 #define ARG1 14
 
-argument_macro_input::argument_macro_input(const char *body, int ac, 
+argument_macro_input::argument_macro_input(const char *body, size_t ac,
 					   char **av, input *x)
 : input(x), ap(0), argc(ac)
 {
-  int i;
+  size_t i;
   for (i = 0; i < argc; i++)
     argv[i] = av[i];
   p = s = strsave(body);
-  int j = 0;
+  size_t j = 0;
   for (i = 0; s[i] != '\0'; i++)
     if (s[i] == '$' && s[i+1] >= '0' && s[i+1] <= '9') {
       if (s[i+1] != '0')
@@ -551,7 +554,7 @@ argument_macro_input::argument_macro_input(const char *body, int ac,
 
 argument_macro_input::~argument_macro_input()
 {
-  for (int i = 0; i < argc; i++)
+  for (size_t i = 0; i < argc; i++)
     delete[] argv[i];
   delete[] s;
 }
@@ -566,7 +569,7 @@ int argument_macro_input::get()
   if (p == 0)
     return EOF;
   while (*p >= ARG1 && *p <= ARG1 + 8) {
-    int i = *p++ - ARG1;
+    size_t i = *p++ - ARG1;
     if (i < argc && argv[i] != 0 && argv[i][0] != '\0') {
       ap = argv[i];
       return *ap++ & 0377;
@@ -587,7 +590,7 @@ int argument_macro_input::peek()
   if (p == 0)
     return EOF;
   while (*p >= ARG1 && *p <= ARG1 + 8) {
-    int i = *p++ - ARG1;
+    size_t i = *p++ - ARG1;
     if (i < argc && argv[i] != 0 && argv[i][0] != '\0') {
       ap = argv[i];
       return *ap & 0377;
@@ -632,6 +635,7 @@ int peek_char()
   }
 }
 
+// TODO: boolify
 int get_location(char **fnp, int *lnp)
 {
   for (input *p = current_input; p; p = p->next)
@@ -641,23 +645,24 @@ int get_location(char **fnp, int *lnp)
 }
 
 string token_buffer;
-const int NCONTEXT = 4;
+// C++11: constexpr
+static const size_t NCONTEXT = 4;
 string context_ring[NCONTEXT];
-int context_index = 0;
+static size_t context_index = 0;
 
 static void flush_context()
 {
-  for (int i = 0; i < NCONTEXT; i++)
+  for (size_t i = 0; i < NCONTEXT; i++)
     context_ring[i] = "";
   context_index = 0;
 }
 
 static void show_context()
 {
-  int i = context_index;
+  size_t i = context_index;
   fputs(" context is\n\t", stderr);
   for (;;) {
-    int j = (i + 1) % NCONTEXT;
+    size_t j = (i + 1) % NCONTEXT;
     if (j == context_index) {
       fputs(">>> ", stderr);
       put_string(context_ring[i], stderr);
@@ -754,10 +759,10 @@ static void get_delimited_text()
 
 static void interpolate_macro_with_args(const char *body)
 {
-  char *argv[9];
-  int argc = 0;
-  int i;
-  for (i = 0; i < 9; i++)
+  char *argv[eqn_macro_maximum_arg_count];
+  size_t argc = 0;
+  size_t i;
+  for (i = 0; i < eqn_macro_maximum_arg_count; i++)
     argv[i] = 0 /* nullptr */;
   int level = 0;
   int c;
@@ -771,7 +776,7 @@ static void interpolate_macro_with_args(const char *body)
 	break;
       }
       if ((0 == level) && ((',' == c) || (')' == c))) {
-	if (argc >= 9) {
+	if (argc >= eqn_macro_maximum_arg_count) {
 	  if (!is_ignoring_arguments) { // if we didn't already warn
 	    lex_warning("excess macro argument(s); ignoring");
 	    is_ignoring_arguments = true;
@@ -974,7 +979,7 @@ static void ignore_definition()
   get_delimited_text();
 }
 
-static void do_definition(int is_simple)
+static void do_definition(int is_simple /* TODO: boolify */)
 {
   int t = get_token();
   if (t != TEXT) {

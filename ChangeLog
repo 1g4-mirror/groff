@@ -1,5 +1,30 @@
 2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/lex.cpp: Slightly refactor.  Replace magic
+	constant `9` with new `static const size_t`
+	`eqn_macro_maximum_arg_count`.  Retype variables used as array
+	indices appropriately.  Retype `const` global `NCONTEXT` from
+	`int` to `size_t` and make it `static`.  Retype global
+	`context_index` from `int` to `size_t` and make it `static`.
+	(class argument_macro_input): Convert type of `argc` member
+	variable from `int` to `size_t`, since it's used as an array
+	index.  Update constructor declaration accordingly.
+	(argument_macro_input::argument_macro_input): Update constructor
+	definition accordingly.
+	(interpolate_macro_with_args): Use new `size_t` object instead
+	of magic constant.  Convert type of `argc` member variable from
+	`int` to `size_t`, since it's used as an array index.
+	(init_table): Retype local variable `i` from `unsigned int` to
+	`size_t`.
+	(argument_macro_input::argument_macro_input)
+	(show_context): Retype local variables `i` and `j` to `size_t`.
+	(argument_macro_input::~argument_macro_input)
+	(argument_macro_input::get)
+	(argument_macro_input::peek)
+	(flush_context): Retype local variable `i` to `size_t`.
+
+2026-06-23  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/lex.cpp (interpolate_macro_with_args): Fix
 	code style nits.  Parenthesize formally complex expressions.
 	Arrange equality comparisons to avoid inadvertent assignment to
