@@ -936,7 +936,7 @@ static int get_token_after_dot(int c)
   }
 }
 
-static int get_token(int lookup_flag)
+static int get_token(int lookup_flag /* TODO: boolify */)
 {
   context_buffer.clear();
   for (;;) {
@@ -1800,6 +1800,7 @@ void push_body(const char *s)
   input_stack::push(new macro_input(s));
 }
 
+// TODO: boolify
 int delim_flag = 0;
 
 static char *get_thru_arg()
