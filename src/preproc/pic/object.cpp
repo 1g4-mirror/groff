@@ -652,20 +652,21 @@ void graphic_object::set_invisible()
 void graphic_object::add_text(text_item *t, int a)
 {
   aligned = a;
-  int len = 0;
+  size_t len = 0;
   text_item *p;
   for (p = t; p; p = p->next)
     len++;
   if (len == 0)
-    text = 0;
+    text = 0 /* nullptr */;
   else {
     text = new text_piece[len];
-    for (p = t, len = 0; p; p = p->next, len++) {
-      text[len].text = p->text;
+    size_t i = 0;
+    for (p = t; p != 0 /* nullptr */; p = p->next, i++) {
+      text[i].text = p->text;
       p->text = 0;
-      text[len].adj = p->adj;
-      text[len].filename = p->filename;
-      text[len].lineno = p->lineno;
+      text[i].adj = p->adj;
+      text[i].filename = p->filename;
+      text[i].lineno = p->lineno;
     }
   }
   ntext = len;
