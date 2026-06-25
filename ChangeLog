@@ -1,3 +1,9 @@
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/json_encode.cpp (json_encode_char):
+	Explicitly initialize stack-allocated structure.  Fixes
+	`-Wmaybe-uninitialized` warning.
+
 2026-06-20  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/gpl.texi: Add copy of the GNU GPL in Texinfo format.

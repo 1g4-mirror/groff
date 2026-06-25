@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // Return JSON representation of character `c` without bracketing `"`s.
 json_char json_encode_char(unsigned char c)
 {
-  json_char jc;
+  json_char jc = { 0, "" }; // C++11: jc{};
   // These printable characters require escaping.
   if (('"' == c) || ('\\' == c) || ('/' == c)) {
     jc.len = 2;
