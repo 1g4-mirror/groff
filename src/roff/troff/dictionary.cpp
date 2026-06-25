@@ -30,6 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // libgroff
 #include "symbol.h" // prerequisite of dictionary.h
 #include "dictionary.h"
+#include "errarg.h" // prerequisite of error.h
+#include "error.h" // prerequisite of error.h
 
 // is 'p' a good size for a hash table
 
@@ -81,6 +83,11 @@ void *dictionary::lookup(symbol s, void *v)
     capacity = ssize_t(capacity * factor);
     while (!is_good_size(capacity))
       ++capacity;
+    if (capacity < 0)
+      // If `capacity` wrapped, the old size must have fit in a signed
+      // integer.
+      fatal("cannot grow dictionary beyond %1 entries",
+	    static_cast<int>(old_capacity));
     association *old_table = table;
     table = new association[capacity];
     occupancy = 0;

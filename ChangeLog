@@ -1,5 +1,15 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/dictionary.cpp: Preprocessor-include "errarg.h"
+	and "error.h" to make visible `fatal()` function.
+	(dictionary::lookup): Add overflow check of dictionary capacity.
+	GCC's static analyzer was suspicious that it could overflow.
+	`capacity` is a `ssize_t`, but C++'s allocator (behind `new`)
+	uses `size_t`.  If `capacity` wraps (overflows), emit fatal
+	error.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff,troff]: Reallocate fatal error exit responsibilities,
 	and communicate them to the compiler.
 
