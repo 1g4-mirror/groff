@@ -8,17 +8,17 @@
 
 	* src/preproc/pic/object.cpp (graphic_object::add_text): Convert
 	type of local variables `len` and `i` from `int` to `size_t`,
-	since they're used or compared to an array index.  Refactor loop
-	to lift `i` out of it, since it requires a type declaration, and
-	you can't do that after a comma in a C++98 for loop
-	initialization expression.  Use `i` instead of `len` as the
+	since they're used as or compared to array indices.  Refactor
+	loop to lift `i` out of it, since it requires a type
+	declaration, and you can't do that after a comma in a C++98 for
+	loop initialization expression.  Use `i` instead of `len` as the
 	index into the `text` array since the value of `len` is now a
 	loop invariant--`i` is the index.
 
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/pic/lex.cpp (interpolate_macro_with_args): When
-	warning of ignored excess macro arguments, explicit state that
+	warning of ignored excess macro arguments, explicitly state that
 	they're ignored.
 
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
