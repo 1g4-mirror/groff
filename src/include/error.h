@@ -21,7 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 void fatal_with_file_and_line(const char *, int, const char *,
 			      const errarg & = empty_errarg,
 			      const errarg & = empty_errarg,
-			      const errarg & = empty_errarg);
+			      const errarg & = empty_errarg)
+     __attribute__((__noreturn__));
 
 void error_with_file_and_line(const char *, int, const char *,
 			      const errarg & = empty_errarg,
@@ -41,7 +42,8 @@ void debug_with_file_and_line(const char *, int, const char *,
 void fatal(const char *,
 	   const errarg & = empty_errarg,
 	   const errarg & = empty_errarg,
-	   const errarg & = empty_errarg);
+	   const errarg & = empty_errarg)
+     __attribute__((__noreturn__));
 
 void error(const char *,
 	   const errarg & = empty_errarg,
@@ -59,7 +61,7 @@ void debug(const char *,
 	   const errarg & = empty_errarg);
 
 // libgroff/fatal.cpp
-void fatal_error_exit();
+void fatal_error_exit() __attribute__((__noreturn__));
 
 extern "C" const char *program_name;
 extern int current_lineno;

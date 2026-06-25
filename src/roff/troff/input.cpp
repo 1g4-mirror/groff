@@ -10944,8 +10944,6 @@ static void do_error(error_type type,
   }
   fputc('\n', stderr);
   fflush(stderr);
-  if (FATAL == type)
-    write_any_trailer_and_exit(EXIT_FAILURE);
 }
 
 // This function should have no callers in production builds.
@@ -10991,6 +10989,7 @@ void fatal(const char *format,
 	   const errarg &arg3)
 {
   do_error(FATAL, WARN_DUMMY, format, arg1, arg2, arg3);
+  write_any_trailer_and_exit(EXIT_FAILURE);
 }
 
 void fatal_with_file_and_line(const char *filename, int lineno,

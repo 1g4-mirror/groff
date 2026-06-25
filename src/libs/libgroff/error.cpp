@@ -81,8 +81,6 @@ static void do_error_with_file_and_line(const char *filename,
   errprint(format, arg1, arg2, arg3);
   fputc('\n', stderr);
   fflush(stderr);
-  if (type == FATAL)
-    fatal_error_exit();
 }
 
 static void do_error(error_type type,
@@ -127,6 +125,7 @@ void fatal(const char *format,
 	   const errarg &arg3)
 {
   do_error(FATAL, format, arg1, arg2, arg3);
+  fatal_error_exit();
 }
 
 // Use the functions below when it's more costly to save and restore the
@@ -178,6 +177,7 @@ void fatal_with_file_and_line(const char *filename,
 {
   do_error_with_file_and_line(filename, 0 /* nullptr */, lineno,
 			      FATAL, format, arg1, arg2, arg3);
+  fatal_error_exit();
 }
 
 // Local Variables:

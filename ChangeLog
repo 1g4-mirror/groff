@@ -1,5 +1,26 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[libgroff,troff]: Reallocate fatal error exit responsibilities,
+	and communicate them to the compiler.
+
+	* src/include/error.h: Annotate non-returning
+	`fatal_with_file_and_line()`, `fatal()`, and
+	`fatal_error_exit()` functions with `__noreturn__` attribute to
+	ease static analysis.
+	* src/libs/libgroff/error.cpp (do_error_with_file_and_line):
+	Stop checking `type` and calling `fatal_error_exit()` if it's
+	`FATAL`.
+	(fatal, fatal_with_file_and_line): Call `fatal_error_exit()`
+	from here instead.
+	* src/roff/troff/div.h: Annotate non-returning
+	`write_any_trailer_and_exit()` function declaration with
+	`__noreturn__` attribute to ease static analysis.
+	* src/roff/troff/input.cpp (do_error): Stop checking `type` and
+	calling `write_any_trailer_and_exit()` if it's `FATAL`.
+	(fatal): Call `write_any_trailer_and_exit()` from here instead.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/json_encode.cpp (json_encode_char):
 	Explicitly initialize stack-allocated structure.  Fixes
 	`-Wmaybe-uninitialized` warning.
