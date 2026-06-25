@@ -6819,9 +6819,9 @@ static void map_special_character_for_device_output(macro *mac,
     else {
       char errbuf[ERRBUFSZ]; // C++03: char errbuf[ERRBUFSZ]()
       (void) memset(errbuf, '\0', ERRBUFSZ);
-      const size_t unibufsz = UNIBUFSZ + 1 /* '\0' */;
-      char character[unibufsz]; // C++03: char errbuf[ERRBUFSZ]()
-      (void) memset(character, '\0', UNIBUFSZ);
+      // C++03: char character[UNIBUFSZ + 1]()
+      char character[UNIBUFSZ + 1];
+      (void) memset(character, '\0', sizeof character);
       // If it looks like something other than an attempt at a Unicode
       // special character escape sequence already, try to convert it
       // into one.  Output drivers don't (and shouldn't) know anything
@@ -6829,7 +6829,7 @@ static void map_special_character_for_device_output(macro *mac,
       if ((strlen(sc) < 3) || (sc[0] != 'u')) {
 	const char *un = glyph_name_to_unicode(sc);
 	if (un != 0 /* nullptr */)
-	  strncpy(character, un, unibufsz);
+	  strncpy(character, un, sizeof character);
 	else {
 	  warning(WARN_CHAR, "special character '%1' is not encodable"
 	       " in device-independent output", sc);
@@ -6843,7 +6843,7 @@ static void map_special_character_for_device_output(macro *mac,
 	       " in device-independent output: %2", sc, errbuf);
 	  return;
 	}
-	strncpy(character, un, unibufsz);
+	strncpy(character, un, sizeof character);
       }
       mac->append_str("\\[u");
       mac->append_str(character);

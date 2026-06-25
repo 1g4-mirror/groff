@@ -1,5 +1,14 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp
+	(map_special_character_for_device_output): Slightly refactor.
+	Drop confusing local variable `unibufsz` (which differs from a
+	libgroff symbol only in lettercase) in favor of `UNIBUFSZ + 1`
+	expression and (subsequently) `sizeof character`, which can both
+	be computed at compile time.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/dictionary.cpp: Preprocessor-include "errarg.h"
 	and "error.h" to make visible `fatal()` function.
 	(dictionary::lookup): Add overflow check of dictionary capacity.
