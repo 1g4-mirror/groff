@@ -213,9 +213,15 @@ string &string::operator=(char c)
 
 void string::move(string &s)
 {
-  sfree_and_alloc(ptr, sz, s.len, &sz);
-  memcpy(ptr, s.ptr, s.len);
+  char *ptr_tmp = ptr;
+  size_t len_tmp = len;
+  size_t sz_tmp = sz;
+  ptr = s.ptr;
   len = s.len;
+  sz = s.sz;
+  s.ptr = ptr_tmp;
+  s.len = len_tmp;
+  s.sz = sz_tmp;
   s.clear();
   assert(ptr != 0 /* nullptr */);
 }

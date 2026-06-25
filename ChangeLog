@@ -1,5 +1,10 @@
 2026-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libgroff/string.cpp (string::move): Refactor to
+	reduce heap manipulation and memory copying.
+
+2026-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (salloc, sfree_and_alloc)
 	(string::operator+=(const char *))
 	(string::operator+=(const string &)): Fix off-by-one errors,
