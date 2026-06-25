@@ -653,12 +653,18 @@ void graphic_object::add_text(text_item *t, int a)
 {
   aligned = a;
   size_t len = 0;
+  const size_t max_text_pieces = 10000; // XXX: arbitrary limit
   text_item *p;
   for (p = t; p; p = p->next)
     len++;
   if (len == 0)
     text = 0 /* nullptr */;
   else {
+    // GCC's static analyzer is highly suspicious of our array
+    // allocation when building with `-O2` and `-flto=auto`.
+    if ((len == static_cast<size_t>(-1)) || (len > max_text_pieces))
+      fatal("too many text pieces (%1) in graphic object; limit %2",
+	    len, max_text_pieces);
     text = new text_piece[len];
     size_t i = 0;
     for (p = t; p != 0 /* nullptr */; p = p->next, i++) {

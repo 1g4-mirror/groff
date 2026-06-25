@@ -1,5 +1,11 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/pic/object.cpp (graphic_object::add_text): Add new
+	local constant `max_text_pieces` to impose limit on size of
+	heap-allocated `text_piece` array.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/pic/object.cpp (graphic_object::add_text): Convert
 	type of local variables `len` and `i` from `int` to `size_t`,
 	since they're used or compared to an array index.  Refactor loop
