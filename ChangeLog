@@ -4,6 +4,9 @@
 	warnings.
 	(map_special_character_for_device_output): Don't overwrite the
 	null terminator in the `character` buffer.
+	(init_charset_table): Use memcpy(3) instead of strncpy(3)
+	because we're deliberately doing a partial write of a non-string
+	`char` (byte) array into a buffer.
 
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 

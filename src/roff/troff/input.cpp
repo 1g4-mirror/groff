@@ -8720,8 +8720,8 @@ static const size_t char_prefix_len = sizeof char_prefix;
 
 static void init_charset_table()
 {
-  char buf[16];
-  (void) strncpy(buf, char_prefix, char_prefix_len);
+  char buf[16]; // XXX magic number
+  (void) memcpy(buf, char_prefix, char_prefix_len);
   for (int i = 0; i < 256; i++) {
     (void) strcpy((buf + char_prefix_len), i_to_a(i));
     charset_table[i] = lookup_charinfo(symbol(buf));
