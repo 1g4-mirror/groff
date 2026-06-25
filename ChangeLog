@@ -1,3 +1,8 @@
+2026-06-25  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libgroff/string.cpp (string::clear): Refactor to
+	reduce unnecessary memory writes.
+
 2026-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libgroff/string.cpp (string::move): Refactor to

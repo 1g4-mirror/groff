@@ -337,7 +337,10 @@ void string::clear()
 {
   assert(ptr != 0 /* nullptr */);
   if (ptr != 0 /* nullptr */)
-    memset(ptr, 0, sz);
+    // Zero out only the existing `len`gth of the string plus a null
+    // terminator.  Any remaining storage (`sz - len`) should be zero
+    // zero already from prior allocations.
+    memset(ptr, 0, ((len < sz) ? (len + 1) : sz));
   else
     ptr = salloc(0, &sz); // unreachable unless `NDEBUG`
   len = 0;
