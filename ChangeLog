@@ -1,5 +1,12 @@
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Fix `-Wstringop-truncation`
+	warnings.
+	(map_special_character_for_device_output): Don't overwrite the
+	null terminator in the `character` buffer.
+
+2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp
 	(map_special_character_for_device_output): Slightly refactor.
 	Drop confusing local variable `unibufsz` (which differs from a
