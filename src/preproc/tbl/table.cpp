@@ -2150,7 +2150,7 @@ string row_top_reg(int row)
   return string(name);
 }
 
-void init_span_reg(int start_col, int end_col)
+static void init_span_reg(int start_col, int end_col)
 {
   printfs(".nr %1 \\n(.H\n.nr %2 0\n.nr %3 0\n.nr %4 0\n",
 	  span_width_reg(start_col, end_col),
@@ -2159,7 +2159,7 @@ void init_span_reg(int start_col, int end_col)
 	  span_right_numeric_width_reg(start_col, end_col));
 }
 
-void compute_span_width(int start_col, int end_col)
+static void compute_span_width(int start_col, int end_col)
 {
   printfs(".nr %1 \\n[%1]>?(\\n[%2]+\\n[%3])\n"
 	  ".if \\n[%4] .nr %1 \\n[%1]>?(\\n[%4]+2n)\n",

@@ -373,8 +373,8 @@ options::options()
 }
 
 // Return non-zero if p and q are the same ignoring case.
-
-int strieq(const char *p, const char *q)
+// TODO: boolify
+static int strieq(const char *p, const char *q)
 {
   for (; cmlower(*p) == cmlower(*q); p++, q++)
     if (*p == '\0')
@@ -384,7 +384,7 @@ int strieq(const char *p, const char *q)
 
 // Handle region options.  Return a null pointer if we should give up on
 // this table.
-options *process_options(table_input &in)
+static options *process_options(table_input &in)
 {
   options *opt = new options;
   string line;
@@ -748,7 +748,7 @@ input_entry_format::~input_entry_format()
 {
 }
 
-void free_input_entry_format_list(input_entry_format *list)
+static void free_input_entry_format_list(input_entry_format *list)
 {
   while (list) {
     input_entry_format *tem = list;
@@ -785,8 +785,8 @@ void input_entry_format::debug_print()
 // pointer if we should give up on this table.  If this is a
 // continuation format line, `current_format` will be the current format
 // line.
-format *process_format(table_input &in, options *opt,
-		       format *current_format = 0)
+static format *process_format(table_input &in, options *opt,
+			      format *current_format = 0 /* nullptr */)
 {
   input_entry_format *list = 0 /* nullptr */;
   bool have_expand = false;
@@ -1315,7 +1315,7 @@ format *process_format(table_input &in, options *opt,
   return f;
 }
 
-table *process_data(table_input &in, format *f, options *opt)
+static table *process_data(table_input &in, format *f, options *opt)
 {
   char tab_char = opt->tab_char;
   int ncolumns = f->ncolumns;

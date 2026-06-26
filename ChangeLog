@@ -1,5 +1,12 @@
 2026-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp (strieq, process_options)
+	(free_input_entry_format_list, process_format, process_data):
+	Define functions as `static`; they do not require external
+	linkage.
+
+2026-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libgroff/string.cpp (put_string): Make `NDEBUG`-safe.
 
 2026-06-25  G. Branden Robinson <g.branden.robinson@gmail.com>
