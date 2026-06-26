@@ -502,6 +502,8 @@ void put_string(const string &s, FILE *fp)
   size_t len = s.length();
   const char *ptr = s.contents();
   assert(ptr != 0 /* nullptr */);
+  if (0 /* nullptr */ == ptr)
+    return;
   for (size_t i = 0; i < len; i++)
     putc(ptr[i], fp);
 }
