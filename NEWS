@@ -86,11 +86,10 @@ troff
 grn
 ---
 
-*  The `-M` command-line option is renamed to to `-I`, better
-   paralleling troff(1).  Inclusions are not the same things as macro
-   file resources.  The program accepts `-L` (the original Berkeley name
-   for this option), and `-M` (groff grn prior to this point)
-   synonymously.
+*  The `-M` command-line option is renamed to `-I`, better paralleling
+   troff(1).  Inclusions are not the same things as macro file
+   resources.  The program accepts `-L` (the original Berkeley name for
+   this option), and `-M` (groff grn prior to this point) synonymously.
 
 groff
 -----
@@ -123,7 +122,7 @@ Macro packages
    Because these macros format no text, documents employing them risk no
    damage to their content if the formatter does not support them.  A
    man(7) document author can choose either to transition to these
-   macros, to to manage list "compactness" and item indentation with
+   macros, to manage list "compactness" and item indentation with
    existing man(7) package facilities, or to employ both approaches.
 
 *  The m (mm) macro package's `IA` and `WA` macros--used only with the
