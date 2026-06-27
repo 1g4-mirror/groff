@@ -72,7 +72,7 @@ static char *salloc(size_t len, size_t *sizep)
 static char *sfree_and_alloc(char *ptr, size_t oldsz, size_t len,
 			     size_t *sizep)
 {
-  if (oldsz >= len) {
+  if (oldsz >= (len + 1 /* `\0` */)) {
     *sizep = oldsz;
     if (oldsz > len)
       memset((ptr + len), 0, (oldsz - len));
@@ -98,7 +98,7 @@ static char *sfree_and_alloc(char *ptr, size_t oldsz, size_t len,
 static char *srealloc(char *ptr, size_t oldsz, size_t oldlen,
 		      size_t newlen, size_t *sizep)
 {
-  if (oldsz >= newlen) {
+  if (oldsz >= (newlen + 1 /* `\0` */)) {
     *sizep = oldsz;
     if (oldsz > newlen)
       memset((ptr + newlen), 0, (oldsz - newlen));
@@ -231,7 +231,7 @@ string &string::operator+=(const char *p)
   if (p != 0 /* nullptr */) {
     size_t n = strlen(p);
     size_t newlen = len + n;
-    if (newlen > sz) {
+    if (sz < (newlen + 1 /* `\0` */)) {
       ptr = srealloc(ptr, sz, len, newlen, &sz);
       assert(ptr != 0 /* nullptr */);
     }
@@ -245,7 +245,7 @@ string &string::operator+=(const string &s)
 {
   if (s.len != 0) {
     size_t newlen = len + s.len;
-    if (newlen > sz) {
+    if (sz < (newlen + 1 /* `\0` */)) {
       ptr = srealloc(ptr, sz, len, newlen, &sz);
       assert(ptr != 0 /* nullptr */);
     }
