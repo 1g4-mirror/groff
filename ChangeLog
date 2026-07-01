@@ -1,3 +1,25 @@
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.cpp (configure_page_offset_request)
+	* src/roff/troff/env.cpp (compare_ranges)
+	(hyphenation_character_request)
+	(do_break_request)
+	(input_trap)
+	(input_trap_continued)
+	(line_tabs_request)
+	(sptoa):
+	* src/roff/troff/input.cpp (exit_troff)
+	(handle_initial_request)
+	(do_string_case_transform)
+	(get_file_line)
+	(do_macro_source)
+	(usage):
+	* src/roff/troff/node.cpp (node_list_character_type)
+	(node_list_vertical_extent): Define functions as `static`; they
+	do not require external linkage.
+
+	Fixes `-Wmissing-declarations` GCC warnings.
+
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Refactor to kill off `ESCAPE_NEWLINE`.  There appears

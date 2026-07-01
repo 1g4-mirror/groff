@@ -260,7 +260,7 @@ int font_size::nranges = 0;
 
 extern "C" {
 
-int compare_ranges(const void *p1, const void *p2)
+static int compare_ranges(const void *p1, const void *p2)
 {
   return (  static_cast<size_range *>(const_cast<void *>(p1))->min
 	  - static_cast<size_range *>(const_cast<void *>(p2))->min);
@@ -1917,7 +1917,7 @@ void set_hyphenation_mode_default() // .hydefault
 
 // Set hyphenation character, which the input uses to mark the position
 // of a discretionary break ("dbreak") in a word.
-void hyphenation_character_request() // .hc
+static void hyphenation_character_request() // .hc
 {
   curenv->hyphen_indicator_char = read_character();
   // TODO?: If null pointer, set to ESCAPE_PERCENT, eliminating test(s)
@@ -2742,7 +2742,7 @@ bool environment::is_empty()
 	  && pending_lines == 0 /* nullptr */;
 }
 
-void do_break_request(bool want_adjustment)
+static void do_break_request(bool want_adjustment)
 {
   while (!tok.is_terminator())
     tok.next();
@@ -2893,12 +2893,12 @@ void do_input_trap(bool respect_continuation)
   skip_line();
 }
 
-void input_trap() // .it
+static void input_trap() // .it
 {
   do_input_trap(false);
 }
 
-void input_trap_continued() // .itc
+static void input_trap_continued() // .itc
 {
   do_input_trap(true);
 }
@@ -3174,7 +3174,7 @@ static void field_characters_request() // .fc
   skip_line();
 }
 
-void line_tabs_request() // .linetabs
+static void line_tabs_request() // .linetabs
 {
   int n;
   if (has_arg() && read_integer(&n))
@@ -3561,7 +3561,7 @@ const char *environment::get_name_string()
 
 // Convert a quantity in scaled points to ascii decimal fraction.
 
-const char *sptoa(int sp)
+static const char *sptoa(int sp)
 {
   assert(sp > 0);
   assert(sizescale > 0);

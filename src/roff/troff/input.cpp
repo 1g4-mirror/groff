@@ -3374,7 +3374,7 @@ static symbol read_input_until_terminator(bool want_diagnostic,
 
 static void close_all_streams();
 
-void exit_troff()
+static void exit_troff()
 {
   is_exit_underway = true;
   close_all_streams();
@@ -5551,7 +5551,7 @@ void push_page_ejector()
   input_stack::push(make_temp_iterator(buf));
 }
 
-void handle_initial_request(unsigned char code)
+static void handle_initial_request(unsigned char code)
 {
   char buf[2];
   buf[0] = code;
@@ -5851,7 +5851,7 @@ static void chop_request() // .chop
 enum case_xform_mode { STRING_UPCASE, STRING_DOWNCASE };
 
 // Case-transform each byte of the string argument's contents.
-void do_string_case_transform(case_xform_mode mode)
+static void do_string_case_transform(case_xform_mode mode)
 {
   assert((STRING_DOWNCASE == mode) || (STRING_UPCASE == mode));
   symbol s = read_identifier();
@@ -7181,7 +7181,7 @@ void device_extension_node::tprint(troff_output_file *out)
   tprint_end(out);
 }
 
-int get_file_line(const char **filename, int *lineno)
+static int get_file_line(const char **filename, int *lineno)
 {
   return input_stack::get_location(false /* allow macro */, filename,
 				   lineno);
@@ -7597,7 +7597,7 @@ static void while_continue_request() // .continue
   }
 }
 
-void do_source(bool quietly)
+static void do_source(bool quietly)
 {
   char *filename = read_rest_of_line_as_argument();
   errno = 0;
@@ -9874,7 +9874,7 @@ static void process_startup_file(const char *filename)
   mac_path = orig_mac_path;
 }
 
-void do_macro_source(bool quietly)
+static void do_macro_source(bool quietly)
 {
   char *macro_filename = read_rest_of_line_as_argument();
   char *path;
@@ -10023,7 +10023,7 @@ static void add_string(const char *s, string_list **p)
   *p = new string_list(s);
 }
 
-void usage(FILE *stream, const char *prog)
+static void usage(FILE *stream, const char *prog)
 {
   fprintf(stream,
 "usage: %s [-abcCEiRSUz] [-d ctext] [-d string=text] [-f font-family]"

@@ -753,7 +753,7 @@ diversion::~diversion()
 {
 }
 
-void configure_page_offset_request()
+static void configure_page_offset_request()
 {
   hunits n;
   // The troff manual says that the default scaling indicator is v,

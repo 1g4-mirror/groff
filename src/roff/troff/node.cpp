@@ -3395,7 +3395,7 @@ node *zero_width_node::copy()
 			     div_nest_level);
 }
 
-int node_list_character_type(node *p)
+static int node_list_character_type(node *p)
 {
   int t = 0;
   for (; p != 0 /* nullptr */; p = p->next)
@@ -3408,7 +3408,7 @@ int zero_width_node::character_type()
   return node_list_character_type(nodes);
 }
 
-void node_list_vertical_extent(node *p, vunits *min, vunits *max)
+static void node_list_vertical_extent(node *p, vunits *min, vunits *max)
 {
   *min = V0;
   *max = V0;
