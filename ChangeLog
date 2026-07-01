@@ -36,6 +36,19 @@
 
 2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp (strieq)
+	(process_options)
+	(free_input_entry_format_list)
+	(process_format)
+	(process_data):
+	* src/preproc/tbl/table.cpp (init_span_reg)
+	(compute_span_width): Define functions as `static`; they
+	do not require external linkage.
+
+	Fixes `-Wmissing-declarations` GCC warnings.
+
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Move declarations of
 	`dump_node_list_in_reverse()`...
 	* src/roff/troff/int.cpp: ...and `dump_node_list()` from here...
