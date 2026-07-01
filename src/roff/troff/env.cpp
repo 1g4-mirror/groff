@@ -98,7 +98,6 @@ env_list_node *env_stack;
 dictionary env_dictionary(10);
 environment *curenv;
 static int next_line_number = 0;
-extern statem *get_diversion_state();
 
 charinfo *field_delimiter_char;
 charinfo *padding_indicator_char;

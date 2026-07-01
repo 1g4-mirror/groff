@@ -1,5 +1,11 @@
 2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Move declaration of
+	`get_diversion_state()` from here...
+	* src/roff/troff/input.h: ...to here.
+
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/div.cpp (configure_page_offset_request)
 	* src/roff/troff/env.cpp (compare_ranges)
 	(hyphenation_character_request)
