@@ -4299,8 +4299,6 @@ macro_header *macro_header::copy(int n)
   return p;
 }
 
-extern void dump_node_list(node *);
-
 void macro_header::json_dump_diversion()
 {
   errprint("\"node list\": ");

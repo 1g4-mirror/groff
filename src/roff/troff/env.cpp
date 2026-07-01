@@ -2586,8 +2586,6 @@ void environment::dump_troff_state()
 #undef SPACES
 }
 
-extern void dump_node_list_in_reverse(node *);
-
 void environment::dump_pending_nodes()
 {
   dump_node_list_in_reverse(line);

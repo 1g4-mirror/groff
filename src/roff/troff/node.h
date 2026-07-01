@@ -757,6 +757,9 @@ extern int resolve_current_font_to_mounting_position(environment *);
 font_family *lookup_family(symbol);
 symbol get_font_name(int, environment *);
 symbol get_style_name(int);
+extern void dump_node_list(node *);
+extern void dump_node_list_in_reverse(node *);
+
 extern search_path include_search_path;
 extern const int FONT_NOT_MOUNTED;
 

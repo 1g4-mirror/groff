@@ -1,5 +1,12 @@
 2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp: Move declarations of
+	`dump_node_list_in_reverse()`...
+	* src/roff/troff/int.cpp: ...and `dump_node_list()` from here...
+	* src/roff/troff/node.h: ...to here.
+
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp: Move declaration of
 	`get_diversion_state()` from here...
 	* src/roff/troff/input.h: ...to here.
