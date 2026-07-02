@@ -429,9 +429,25 @@ doc/webpage.html: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	  $(doc_srcdir)/webpage.ms > webpage.html.tmp
 	$(AM_V_at)mv $@.tmp $@
 
-# We remove groff.css only from an out-of-source build tree.
+# We remove groff.css, groff.{html,html.node,info,pdf,texi,txt}, and
+# gnu.png only from an out-of-source build tree.
 mostlyclean-local: mostlyclean_doc
 mostlyclean_doc:
+	$(RM) $(GROFF_DVI) $(PROCESSEDDOCFILES_PDF)
+	$(RM) doc/groff.info-*
+	if test $(top_builddir) != $(top_srcdir); then \
+	  $(RM) $(top_builddir)/doc/groff.css \
+	    $(GROFF_HTML) $(GROFF_INFO) $(GROFF_PDF) $(GROFF_TXT) \
+	    doc/groff.texi \
+	    $(top_builddir)/$(DOC_GNU_EPS) \
+	    $(top_builddir)/$(DOC_GNU_PNG); \
+	  $(RM) -r $(GROFF_HTML).node; \
+	fi
+if HAVE_TEXI2DVI
+if USE_TEX
+	$(RM) -r doc/groff.dvi.t2d doc/groff.pdf.t2p
+endif # USE_TEX
+endif # HAVE_TEXI2DVI
 if USE_GROHTML
 	if test -d $(doc_builddir); then \
 	  cd $(doc_builddir) \
@@ -465,7 +481,6 @@ if USE_GROHTML
 	  rmdir  $(doc_builddir)/img || :; \
 	fi
 endif # USE_GROHTML
-	$(RM) $(PROCESSEDDOCFILES_PDF)
 
 install-data-hook: install_doc_htmldoc
 install_doc_htmldoc:
@@ -718,12 +733,11 @@ install-doc: install-dvi install-html install-pdf
 maintainer-clean-local:
 	$(RM) $(doc_builddir)/gnu.eps
 	$(RM) $(doc_builddir)/gnu.png
-	$(RM) $(doc_builddir)/groff.info*
+	$(RM) $(doc_builddir)/groff.info
+	$(RM) $(doc_builddir)/groff.html
 	$(RM) $(doc_builddir)/groff.pdf
 	$(RM) $(doc_builddir)/groff.dvi
 	$(RM) $(doc_builddir)/groff.txt
-	$(RM) -r $(doc_builddir)/groff.html.*
-	$(RM) -r $(doc_builddir)/*.t2d $(doc_builddir)/*.t2p
 	$(RM) $(doc_builddir)/groff.texi
 
 # Generated forms of the groff Texinfo manual might be in the source

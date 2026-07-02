@@ -1,5 +1,14 @@
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am: Improve "clean" target.
+	(mostlyclean_doc): Clean the "doc/gnu.{eps,png}" files and
+	generated forms of our Texinfo manual from an out-of-source-tree
+	build directory.  Reorganize logic.
+	(maintainer-clean-local): Stop cleaning files auxiliary to the
+	generated forms of our Texinfo manual.
+
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/groff.texi.in (Output Language Compatibility): On
 	supported output formats, inline the "gnu with printing press"
 	image as an end mark for this manual's main matter.  Doing so
