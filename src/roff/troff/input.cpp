@@ -8292,6 +8292,7 @@ static void tag() // .tag
     s += '\n';
     curenv->add_node(new tag_node(s, 0));
   }
+  // XXX: Discover and document why we don't use skip_line() here.
   tok.next();
 }
 
@@ -8317,6 +8318,7 @@ static void taga() // .taga
     s += '\n';
     curenv->add_node(new tag_node(s, 1));
   }
+  // XXX: Discover and document why we don't use skip_line() here.
   tok.next();
 }
 
