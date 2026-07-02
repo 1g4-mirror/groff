@@ -462,41 +462,6 @@ void string::json_dump() const
   free(const_cast<char *>(repr));
 }
 
-// TODO: This function has 1 call site, in tbl/main.cpp:process_data().
-// Consider either open-coding this logic there, or generalizing this
-// function to a `filter()` that takes a character parameter.
-void string::remove_spaces()
-{
-  // This method is arguably inefficient, but see above regarding the
-  // one call site.
-  size_t l = len - 1;
-  while ((l < len) && (ptr[l] == ' '))
-    l--;
-  char *p = ptr;
-  if (l > 0)
-    while (*p == ' ') {
-      p++;
-      l--;
-    }
-  if ((len - 1) != l) {
-    len = l + 1;
-    char *tmp = 0 /* nullptr */;
-    assert(sz > 0);
-    try {
-      tmp = new char[sz];
-    }
-    catch (const std::bad_alloc &exc) {
-      fatal("cannot allocate %1 bytes for removal of spaces",
-	    " from string", sz);
-    }
-    memset(tmp, 0, sz);
-    memcpy(tmp, p, len);
-    delete[] ptr;
-    ptr = tmp;
-    assert(ptr != 0 /* nullptr */);
-  }
-}
-
 void put_string(const string &s, FILE *fp)
 {
   size_t len = s.length();

@@ -1,3 +1,11 @@
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libgroff]: Remove `string::remove_spaces()`.  It no longer has
+	any call sites.
+
+	* src/include/stringclass.h (class string): Delete declaration.
+	* src/libs/libgroff/string.cpp (string::remove_spaces): Delete.
+
 2026-06-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/main.cpp (strieq, process_options)

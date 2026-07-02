@@ -80,7 +80,6 @@ public:
   size_t json_length() const;
   const char *json_extract() const;
   void json_dump() const;
-  void remove_spaces();
   void clear();
   void move(string &);
 
