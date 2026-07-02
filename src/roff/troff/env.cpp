@@ -424,14 +424,13 @@ node *environment::make_char_node(charinfo *ci)
 void environment::add_node(node *nd)
 {
   assert(nd != 0 /* nullptr */);
-  if (nd == 0 /* nullptr */)
+  if (0 /* nullptr */ == nd)
     return;
   if (!suppress_push) {
-    if (nd->is_special && nd->state == 0 /* nullptr */)
+    if (nd->is_special && (0 /* nullptr */ == nd->state))
       nd->state = construct_state(false);
     nd->push_state = get_diversion_state();
   }
-
   if ((current_tab != TAB_NONE) || has_current_field)
     nd->freeze_space();
   if (was_line_interrupted) {
@@ -443,7 +442,7 @@ void environment::add_node(node *nd)
     tab_width += nd->width();
   }
   else {
-    if (line == 0 /* nullptr */) {
+    if (0 /* nullptr */ == line) {
       if (is_discarding && nd->discardable()) {
 	// XXX possibly: input_line_start -= nd->width();
 	delete nd;
