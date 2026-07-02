@@ -1,3 +1,17 @@
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/eqn/eqn.am:
+	* src/preproc/pic/pic.am:
+	* src/preproc/refer/refer.am: Improve clean behavior, deleting
+	YACC/Bison-generated files _only_ from an out-of-source build
+	tree.  Because they are shipped in the distribution archive,
+	only the "maintainer-clean" target should remove them from the
+	source tree.  Add new macros `GROFF_{EQN,PIC,REFER}_YACC_FILES`
+	to track these artifacts.  Redefine `MAINTAINERCLEANFILES` in
+	terms of these new macros.  Add `mostlyclean-{eqn,pic,refer}`
+	targets to perform the cleaning.  Add these new targets as
+	dependencies of `mostlyclean-local`.
+
 2026-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am: Improve "maintainer-clean" target.

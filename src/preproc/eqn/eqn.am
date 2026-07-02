@@ -66,10 +66,20 @@ neqn: $(top_srcdir)/src/preproc/eqn/neqn.sh $(SH_DEPS_SED_SCRIPT)
 	&& chmod +x $@.tmp \
 	&& mv $@.tmp $@
 
-MAINTAINERCLEANFILES += \
+GROFF_EQN_YACC_FILES = \
   src/preproc/eqn/eqn.hpp \
   src/preproc/eqn/eqn.cpp \
   src/preproc/eqn/eqn.output
+
+# When doing a "plain" clean, remove YACC/Bison-generated files _only_
+# from an out-of-source build tree.
+mostlyclean-local: mostlyclean-eqn
+mostlyclean-eqn:
+	if test "$(top_builddir)" != "$(top_srcdir)"; then \
+	  $(RM) $(GROFF_EQN_YACC_FILES); \
+	fi
+
+MAINTAINERCLEANFILES += $(GROFF_EQN_YACC_FILES)
 
 maintainer-clean-local: maintainer-clean-eqn
 
