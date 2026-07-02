@@ -1,5 +1,34 @@
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/groff.texi.in (Output Language Compatibility): On
+	supported output formats, inline the "gnu with printing press"
+	image as an end mark for this manual's main matter.  Doing so
+	demands much build system foolery, in part because different
+	output formats demand different image formats.
+	* doc/doc.am: Define new macro `DOC_GNU_PNG` storing path to
+	relevant image in PNG format.  Override definition of
+	`TEXINPUTS` macro so that etex can locate the EPS file when
+	generating DVI.  Ship `DOC_GNU_PNG` in our distribution archive.
+	(install_doc_gnu_png): New target rule installs `DOC_GNU_PNG`
+	file so that installed example files can access it.
+	(install_doc_examples): Depend on `DOC_GNU_PNG`.
+	(uninstall_doc_examples): Remove "gnu.png" file from example
+	directory.
+	($(GROFF_DVI)): Add dependency on `DOC_GNU_EPS`, since we're now
+	embedding it in our Texinfo manual.
+	($(GROFF_PDF)): Add dependency on `DOC_GNU_PNG`, since we're now
+	embedding it in our Texinfo manual.
+	($(GROFF_HTML)): Override Automake's definition of target with
+	one that copies the "gnu.png" file where the HTML versions of
+	our Texinfo manual can find it.
+	(maintainer-clean-local): Remove "gnu.png" from the build
+	directory.
+	(install-html-local): Install the "gnu.png" file.
+	($(DOC_GNU_PNG)): New target rule generates "gnu.png" from
+	"gnu.xpm".
+
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am: Use `GROFF_HTML` macro more aggressively.
 
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>

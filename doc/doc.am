@@ -61,6 +61,7 @@ DOC_PDFMOM = \
 
 # This image file is used by several documents in the groff source tree.
 DOC_GNU_EPS = doc/gnu.eps
+DOC_GNU_PNG = doc/gnu.png
 DOC_GMP_COVER_PAGE = doc/groff-man-pages-cover.groff
 
 # Other doc, installed in $(docdir)
@@ -481,7 +482,8 @@ if USE_GROHTML
 	  $(DESTDIR)$(htmldocdir)/$(imagedir)
 endif # USE_GROHTML
 
-install-data-hook: install_doc_gnu_eps install_doc_examples
+install-data-hook: \
+  install_doc_gnu_eps install_doc_gnu_png install_doc_examples
 
 install_doc_gnu_eps: $(DOC_GNU_EPS)
 	for d in $(doc_builddir) $(doc_srcdir); do \
@@ -493,7 +495,17 @@ install_doc_gnu_eps: $(DOC_GNU_EPS)
 	  fi; \
 	done
 
-install_doc_examples: $(DOC_GNU_EPS)
+install_doc_gnu_png: $(DOC_GNU_PNG)
+	for d in $(doc_builddir) $(doc_srcdir); do \
+	  if test -f "$$d/gnu.png"; then \
+	    $(RM) $(DESTDIR)$(exampledir)/gnu.png; \
+	    $(INSTALL_DATA) \
+	      $$d/gnu.png $(DESTDIR)$(exampledir)/gnu.png; \
+	    break; \
+	  fi; \
+	done
+
+install_doc_examples: $(DOC_GNU_EPS) $(DOC_GNU_PNG)
 if USE_GROHTML
 	cd $(doc_builddir) \
 	&& for f in `ls $(HTMLEXAMPLEFILESALL)`; do \
@@ -512,6 +524,7 @@ uninstall-hook: \
   uninstall_doc_examples uninstall_doc_htmldoc
 uninstall_doc_examples:
 	$(RM) $(DESTDIR)$(exampledir)/gnu.eps
+	$(RM) $(DESTDIR)$(exampledir)/gnu.png
 if USE_GROHTML
 	-test -d $(DESTDIR)$(docexamplesdir) \
 	&& cd $(DESTDIR)$(docexamplesdir) \
@@ -575,6 +588,27 @@ endif # USE_TEX
 
 $(GROFF_DVI): $(DOC_GNU_EPS)
 $(GROFF_PDF): $(DOC_GNU_PNG)
+
+# pdfTeX can find resources in a VPATH build when generating PDF (with
+# pdfetex), but not when generating DVI (with etex).  Steer the latter's
+# nose to the correct place.
+TEXINPUTS="$(doc_srcdir)$(PATH_SEPARATOR)$$TEXINPUTS"
+
+# We also have to override Automake's built-in rule for generation of
+# HTML from Texinfo to include our embedded images.
+$(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG)
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
+	  -I $(doc_builddir) -I $(doc_srcdir) \
+	  -o $(GROFF_HTML).node $< \
+	&& if test -f "$(srcdir)/$(DOC_GNU_PNG)"; then \
+	  cp -f "$(srcdir)/$(DOC_GNU_PNG)" $(GROFF_HTML).node; \
+	else \
+	  cp "$(builddir)/$(DOC_GNU_PNG)" $(GROFF_HTML).node; \
+	fi \
+	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
+	  -I $(doc_builddir) -I $(doc_srcdir) \
+	  --no-split -o $@ $<
 
 all: $(GROFF_INFO) $(GROFF_TXT) $(GROFF_HTML) $(GROFF_DVI) $(GROFF_PDF)
 
@@ -683,6 +717,7 @@ install-doc: install-dvi install-html install-pdf
 
 maintainer-clean-local:
 	$(RM) $(doc_builddir)/gnu.eps
+	$(RM) $(doc_builddir)/gnu.png
 	$(RM) $(doc_builddir)/groff.info*
 	$(RM) $(doc_builddir)/groff.pdf
 	$(RM) $(doc_builddir)/groff.dvi
@@ -750,7 +785,7 @@ install-html-local: $(GROFF_HTML)
 	  || $(mkinstalldirs) $(DESTDIR)$(htmldocdir)/groff.html.mono
 	for d in $(doc_builddir) $(doc_srcdir); do \
 	  if [ -f "$$d"/groff.html ]; then \
-	    cp -r "$$d"/groff.html \
+	    cp -r "$$d"/groff.html "$$d"/gnu.png \
 	      $(DESTDIR)$(htmldocdir)/groff.html.mono; \
 	    cp -r "$$d"/groff.html.node \
 	      $(DESTDIR)$(htmldocdir); \
@@ -783,7 +818,7 @@ uninstall-txt:
 # An image of a gnu in encapsulated PostScript is generated during the
 # build process if necessary.  Our configure script assumes pnmdepth is
 # available if xpmtoppm is (see macro "GROFF_PROG_XPMTOPPM").
-EXTRA_DIST += $(DOC_GNU_EPS) doc/gnu.xpm
+EXTRA_DIST += $(DOC_GNU_EPS) $(DOC_GNU_PNG) doc/gnu.xpm
 $(DOC_GNU_EPS): doc/gnu.xpm
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& if test "$(XPMTOPPM)" != found; then \
@@ -801,6 +836,23 @@ $(DOC_GNU_EPS): doc/gnu.xpm
 	fi; \
 	xpmtoppm $(top_srcdir)/doc/gnu.xpm | pnmdepth 15 \
 	  | $(pnmtops_nosetpage) -noturn -rle >$@
+
+$(DOC_GNU_PNG): doc/gnu.xpm
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& if test "$(XPMTOPPM)" != found; then \
+	  echo "program 'xpmtoppm' is missing; can't generate $@" >&2; \
+	  exit 1; \
+	fi; \
+	if test "$(pnmtops)" != found; then \
+	  echo "program 'pnmtops' is missing; can't generate $@" >&2; \
+	  exit 1; \
+	fi; \
+	if ! echo "$(pnmtops_nosetpage)" | grep -q nosetpage; then \
+	  echo "program 'pnmtops' can't handle -nosetpage option;" \
+	    "can't generate $@" >&2; \
+	  exit 1; \
+	fi; \
+	xpmtoppm $(top_srcdir)/doc/gnu.xpm | pnmtopng >$@
 
 # Provide a copy of the image in the distribution archive to accommodate
 # systems without a tool to generate it from an X pixmap.

@@ -26462,6 +26462,12 @@ follow quite naturally.
 @codequotebacktick off
 @codequoteundirected off
 
+@c Mark the end of the main matter with an image.
+@iftex
+@page
+@sp 6 @c vees
+@end iftex
+@center @image{gnu,1in,,A wildebeest happily regards a Gutenberg press.,.png}
 
 
 @c =====================================================================
