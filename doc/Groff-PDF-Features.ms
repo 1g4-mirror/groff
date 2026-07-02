@@ -108,7 +108,7 @@ Cb Cb Cb Cb Cb Cb
 Cf(CB) C C C C C.
 Macro^Meta Data^Bookmarks^Internal Link^External Link^Named Destination
 mom^\[OK]^\[OK]^\[OK]^\[OK]^\[OK]
-man^^\[OK]^\[OK]\m[red]\**\m[]^\[OK]^^
+man^^\[OK]^\[OK]\m[red]\**\m[]^\[OK]^
 ms^\[OK]^\[OK]^\[OK]^^\[OK]
 me^^^^^
 mm^^^^^
