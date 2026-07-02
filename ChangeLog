@@ -1,3 +1,21 @@
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Refactor to kill off `ESCAPE_NEWLINE`.  There appears
+	to be no advantage to encoding escaped newlines in macro
+	definitions.  Its purpose cannot be to restore or pretty-print a
+	macro definition exactly as it was input, as no mechanism for
+	doing so exists, and comments are already discarded upon
+	reading.
+
+	* src/roff/troff/input.h: Delete definition of `ESCAPE_NEWLINE`
+	constant.
+	* src/roff/troff/input.cpp (read_character_in_copy_mode)
+	(token::next)
+	(string_iterator::fill)
+	(do_define_macro): Stop handling constant.
+
+	Fixes <https://savannah.gnu.org/bugs/?66987>.
+
 2026-06-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/pic/object.cpp (graphic_object::add_text): Add new

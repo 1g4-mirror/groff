@@ -1237,13 +1237,6 @@ static int read_character_in_copy_mode(node **nd,
       continue;
     if ((ESCAPE_E == c) && handle_escaped_E)
       c = escape_char;
-    if (ESCAPE_NEWLINE == c) {
-      if (is_defining_macro)
-	return c;
-      do {
-	c = input_stack::get(nd);
-      } while (ESCAPE_NEWLINE == c);
-    }
     if ((c != escape_char) || (0U == escape_char))
       return c;
   again:
@@ -1326,8 +1319,6 @@ static int read_character_in_copy_mode(node **nd,
       }
     case '\n':
       (void) input_stack::get(0 /* nullptr */);
-      if (is_defining_macro)
-	return ESCAPE_NEWLINE;
       break;
     case ' ':
       (void) input_stack::get(0 /* nullptr */);
@@ -2324,9 +2315,6 @@ void token::next()
 	nd = new hmotion_node(curenv->get_half_narrow_space_width(),
 			      curenv->get_fill_color());
 	return;
-      case ESCAPE_NEWLINE:
-	have_formattable_input = false;
-	break;
       case ESCAPE_LEFT_BRACE:
       ESCAPE_LEFT_BRACE:
 	type = TOKEN_LEFT_BRACE;
@@ -4471,7 +4459,7 @@ int string_iterator::fill(node **np)
   ptr = p;
   while (p < e) {
     unsigned char c = *p;
-    if (('\n' == c) || (ESCAPE_NEWLINE == c)) {
+    if ('\n' == c) {
       seen_newline = true;
       p++;
       break;
@@ -5640,12 +5628,6 @@ static void do_define_macro(define_mode mode, calling_mode calling,
   for (;;) {
     if ('\n' == c)
       mac.clear_string_flag();
-    while (ESCAPE_NEWLINE == c) {
-      if ((DEFINE_NORMAL == mode) || (DEFINE_APPEND == mode))
-	// TODO: grochar; may need NFD decomposition and UTF-8 encoding
-	mac.append(static_cast<unsigned char>(c));
-      c = read_character_in_copy_mode(&n, true /* is_defining_macro */);
-    }
     if (can_terminate_definition_with_dot && ('.' == c)) {
       const char *s = term.contents();
       int d = '\0';

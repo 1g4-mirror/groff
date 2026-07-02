@@ -26,7 +26,7 @@ const int ESCAPE_QUESTION = 015;	// \u000d
 const int BEGIN_TRAP = 016;		// \u000e
 const int END_TRAP = 017;		// \u000f
 const int PAGE_EJECTOR = 020;		// \u0010
-const int ESCAPE_NEWLINE = 021;		// \u0011
+// 021, \u0011 unused
 const int ESCAPE_AMPERSAND = 022;	// \u0012
 const int ESCAPE_UNDERSCORE = 023;	// \u0013
 const int ESCAPE_BAR = 024;		// \u0014
