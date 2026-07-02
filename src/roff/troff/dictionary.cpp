@@ -84,7 +84,7 @@ void *dictionary::lookup(symbol s, void *v)
     while (!is_good_size(capacity))
       ++capacity;
     if (capacity < 0)
-      // If `capacity` wrapped, the old size must have fit in a signed
+      // If `capacity` wrapped, its old value must have fit in a signed
       // integer.
       fatal("cannot grow dictionary beyond %1 entries",
 	    static_cast<int>(old_capacity));
