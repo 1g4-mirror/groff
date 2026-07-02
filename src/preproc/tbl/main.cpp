@@ -1400,6 +1400,19 @@ static table *process_data(table_input &in, format *f, options *opt)
 	      --ln;
 	    if ((opt->flags & table::NOSPACES))
 	      input_entry.remove_spaces();
+	    if (col >= ncolumns) {
+	      // 1-based indices are more familiar to non-programmers.
+	      // Those wishing to hack or debug register names used by
+	      // GNU tbl will have to adapt.  Someday, we might refactor
+	      // those register names...
+	      if (input_entry.length() == 0)
+		warning("ignoring excess empty table entry at row %1,"
+			" column %2", (current_row + 1), (col + 1));
+	      else
+		warning("ignoring excess table entry at row %1,"
+			" column %2: \"%3\"", (current_row + 1),
+			(col + 1), input_entry.contents());
+	    }
 	    while (col < ncolumns
 		   && line_format[col].type == FORMAT_SPAN) {
 	      tbl->add_entry(current_row, col, "", &line_format[col],

@@ -36,6 +36,11 @@
 
 2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp (process_data): Emit warning when
+	ignoring excess table entries instead of doing so silently.
+
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/main.cpp (strieq)
 	(process_options)
 	(free_input_entry_format_list)
