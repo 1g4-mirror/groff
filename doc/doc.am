@@ -386,8 +386,8 @@ doc/pic.pdf: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS) eqn pic tbl
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_GROFF) -pet -Tpdf -ms -rPDFFEAT=1 $(doc_srcdir)/pic.ms >$@
 
-doc/Groff-PDF-Features.pdf: $(doc_srcdir)/Groff-PDF-Features.ms tbl doc/gnu.eps \
-	$(TMAC_PACKAGE_MS) eqn pic tbl pdfmom
+doc/Groff-PDF-Features.pdf: $(doc_srcdir)/Groff-PDF-Features.ms \
+  $(TMAC_PACKAGE_MS) eqn pic tbl pdfmom $(DOC_GNU_PNG) font/devpdf/stamp
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_PDFMOM) --roff -tU -P-pa4 -rPDFFEAT=1 -ms -msboxes \
 	-I $(doc_builddir) -I $(doc_srcdir) $(doc_srcdir)/Groff-PDF-Features.ms >$@
@@ -418,7 +418,7 @@ doc/pic.html: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS)
 	$(AM_V_at)mv $@.tmp $@
 
 # XXX: See XXX comment before "pic.html" target above.
-doc/webpage.html: $(DOC_GNU_EPS) tmac/www.tmac tbl
+doc/webpage.html: $(DOC_GNU_PNG) tmac/www.tmac tbl
 doc/webpage.html: $(doc_srcdir)/groff.css
 doc/webpage.html: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	$(GROFF_V)$(MKDIR_P) $(doc_builddir) \
@@ -572,6 +572,9 @@ if USE_TEX
 GROFF_DVI = doc/groff.dvi
 GROFF_PDF = doc/groff.pdf
 endif # USE_TEX
+
+$(GROFF_DVI): $(DOC_GNU_EPS)
+$(GROFF_PDF): $(DOC_GNU_PNG)
 
 all: $(GROFF_INFO) $(GROFF_TXT) $(GROFF_HTML) $(GROFF_DVI) $(GROFF_PDF)
 

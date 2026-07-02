@@ -1,5 +1,15 @@
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am (doc/Groff-PDF-Features.pdf): Add `$(DOC_GNU_PNG)`
+	and `font/devpdf/stamp` as prerequisites for this target.  Drop
+	duplicate `tbl` prerequisite.
+	(doc/webpage.html): `$(DOC_GNU_PNG)` should be our prerequisite,
+	not `$(DOC_GNU_EPS)`.
+	($(GROFF_DVI)): Declare `$(DOC_GNU_EPS)` as prerequisite.
+	($(GROFF_PDF)): Declare `$(DOC_GNU_PNG)` as prerequisite.
+
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/txi-en.tex: Delete.
 	* doc/doc.am (EXTRA_DIST): Stop shipping that file in our
 	distribution archive.
