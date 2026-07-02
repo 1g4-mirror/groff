@@ -36,6 +36,14 @@
 
 2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Test "nospaces" region option behavior.
+
+	* src/preproc/tbl/tests/nospaces-region-option-works.sh: Add
+	test.
+	* src/preproc/tbl/tbl.am (tbl_TESTS): Run test.
+
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/main.cpp (process_data): Emit warning when
 	ignoring excess table entries instead of doing so silently.
 
