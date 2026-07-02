@@ -193,9 +193,6 @@ endif
 # use for locating files within the source or build trees.
 imagedir = img
 
-EXTRA_DIST += \
-  doc/txi-en.tex
-
 # Introduce variables to house the groff man pages.  We break the list
 # of page sources into multiple chunks because we have to load Swedish
 # localization before formatting groff_mmse.7 and then reload English

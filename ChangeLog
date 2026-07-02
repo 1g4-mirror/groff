@@ -1,3 +1,18 @@
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/txi-en.tex: Delete.
+	* doc/doc.am (EXTRA_DIST): Stop shipping that file in our
+	distribution archive.
+
+	The macros defined in "doc/texinfo.tex" already handle English
+	localization, making this vendored English template file
+	redundant.  However, retaining it creates problems when
+	overriding the `TEXINPUTS` macro, which a forthcoming change
+	requires.  Specifically, the override seems to have altered the
+	search path, causing this 13-year-old file to be discovered
+	prior to TeX Live's own much more up-to-date version, and
+	ultimately causing the Texinfo `@entry` command to fail.
+
 2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libgroff]: Remove `string::remove_spaces()`.  It no longer has
