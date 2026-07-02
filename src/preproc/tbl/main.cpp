@@ -1315,6 +1315,27 @@ static format *process_format(table_input &in, options *opt,
   return f;
 }
 
+// Update string `s` to remove leading and trailing spaces.
+static void trim_spaces(string &s)
+{
+  // Hand an empty string back as-is.
+  if (s.length() == 0)
+    return;
+  size_t len = s.length();
+  size_t beg = 0; // index of substring start
+  while ((beg < len) && (' ' == s[beg]))
+    beg++;
+  if (beg == len) {
+    // `s` contained only spaces.
+    s.clear();
+    return;
+  }
+  size_t end = len - 1;
+  while ((end > 0) && (' ' == s[end]))
+    end--;
+  s = s.substring(beg, (end - beg + 1));
+}
+
 static table *process_data(table_input &in, format *f, options *opt)
 {
   char tab_char = opt->tab_char;
@@ -1399,7 +1420,7 @@ static table *process_data(table_input &in, format *f, options *opt)
 	    if (c == '\n')
 	      --ln;
 	    if ((opt->flags & table::NOSPACES))
-	      input_entry.remove_spaces();
+	      trim_spaces(input_entry);
 	    if (col >= ncolumns) {
 	      // 1-based indices are more familiar to non-programmers.
 	      // Those wishing to hack or debug register names used by

@@ -36,6 +36,15 @@
 
 2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp: Refactor to use our own
+	string-trimming function instead of the `remove_spaces()` member
+	function of groff's bespoke `string` class.
+	(trim_spaces): New function updates string parameter to remove
+	leading and trailing spaces.
+	(process_data): Call new function instead of member function.
+
+2026-07-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Test "nospaces" region option behavior.
 
 	* src/preproc/tbl/tests/nospaces-region-option-works.sh: Add
