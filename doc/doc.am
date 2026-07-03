@@ -51,7 +51,7 @@ DOC_GROFF = \
 if HAVE_URW_FONTS
 pdfmomoption = -P-W
 groffmanpagesoption = -P-e
-endif
+endif # HAVE_URW_FONTS
 
 DOC_PDFMOM = \
   GROFF_COMMAND=test-groff \
@@ -85,7 +85,7 @@ GENERATEDDOCFILES = \
 if USE_GROHTML
 PROCESSEDDOCFILES_HTML = \
   doc/pic.html
-endif
+endif # USE_GROHTML
 PROCESSEDDOCFILES_PDF = \
   doc/automake.pdf \
   doc/groff-man-pages.pdf \
@@ -122,7 +122,7 @@ PROCESSEDFILES_DEPS_TXT = groff troff grotty tmac/tty.tmac \
 
 if USE_GROHTML
 $(PROCESSEDDOCFILES_HTML): $(PROCESSEDFILES_DEPS_HTML)
-endif
+endif # USE_GROHTML
 $(PROCESSEDDOCFILES_PS): $(PROCESSEDFILES_DEPS_PS)
 $(PROCESSEDDOCFILES_PDF): $(PROCESSEDFILES_DEPS_PDF)
 $(PROCESSEDDOCFILES_TXT): $(PROCESSEDFILES_DEPS_TXT)
@@ -148,7 +148,7 @@ htmlpicdir = $(htmldocdir)
 htmlpic_DATA = $(PROCESSEDDOCFILES_HTML)
 HTMLDOCFILESALL = pic*.html
 HTMLDOCIMAGEFILES = pic*
-endif
+endif # USE_GROHTML
 
 # Examples files, installed in $(exampledir)
 
@@ -164,7 +164,7 @@ if USE_GROHTML
 PROCESSEDEXAMPLEFILES_HTML = doc/webpage.html
 else
 PROCESSEDEXAMPLEFILES_HTML =
-endif
+endif # USE_GROHTML
 PROCESSEDEXAMPLEFILES_PS = \
   doc/webpage.ps \
   doc/grnexmpl.ps
@@ -186,7 +186,7 @@ if USE_GROHTML
 HTMLEXAMPLEFILESALL = webpage*.html
 HTMLEXAMPLEIMAGEFILES = webpage*
 htmlexamplesdir = $(exampledir)
-endif
+endif # USE_GROHTML
 
 # Locate image subdirectory for HTML documents relative to an
 # installation directory such as `htmldocdir` or `exampledir`.  Do _not_
@@ -445,7 +445,7 @@ if USE_GROHTML
 	  done; \
 	  rmdir  $(doc_builddir)/img || :; \
 	fi
-endif
+endif # USE_GROHTML
 	if test $(top_builddir) != $(top_srcdir); then \
 	  $(RM) $(top_builddir)/doc/groff.css; \
 	fi
@@ -463,7 +463,7 @@ if USE_GROHTML
 	  done; \
 	  rmdir  $(doc_builddir)/img || :; \
 	fi
-endif
+endif # USE_GROHTML
 	$(RM) $(PROCESSEDDOCFILES_PDF)
 
 install-data-hook: install_doc_htmldoc
@@ -479,7 +479,7 @@ if USE_GROHTML
 	$(RM) $(DESTDIR)$(htmldocdir)/$(imagedir)/$(HTMLDOCIMAGEFILES)
 	$(INSTALL_DATA) $(doc_builddir)/img/$(HTMLDOCIMAGEFILES) \
 	  $(DESTDIR)$(htmldocdir)/$(imagedir)
-endif
+endif # USE_GROHTML
 
 install-data-hook: install_doc_gnu_eps install_doc_examples
 
@@ -506,7 +506,7 @@ if USE_GROHTML
 	  $(DESTDIR)$(exampledir)/$(imagedir)/$(HTMLEXAMPLEIMAGEFILES)
 	$(INSTALL_DATA) $(doc_builddir)/img/$(HTMLEXAMPLEIMAGEFILES) \
 	  $(DESTDIR)$(exampledir)/$(imagedir)
-endif
+endif # USE_GROHTML
 
 uninstall-hook: \
   uninstall_doc_examples uninstall_doc_htmldoc
@@ -525,7 +525,7 @@ if USE_GROHTML
 	done
 	-rmdir $(DESTDIR)$(docexamplesdir)/$(imagedir)
 	-rmdir $(DESTDIR)$(docexamplesdir)
-endif
+endif # USE_GROHTML
 
 uninstall_doc_htmldoc:
 if USE_GROHTML
@@ -541,7 +541,7 @@ if USE_GROHTML
 	done
 	-rmdir $(DESTDIR)$(htmldocdir)/$(imagedir)
 	-rmdir $(DESTDIR)$(htmldocdir)
-endif
+endif # USE_GROHTML
 
 # groff Texinfo manual
 #
@@ -566,7 +566,7 @@ if HAVE_MAKEINFO
 GROFF_INFO = doc/groff.info
 GROFF_TXT = doc/groff.txt
 GROFF_HTML = doc/groff.html
-endif
+endif # HAVE_MAKEINFO
 
 if USE_TEX
 GROFF_DVI = doc/groff.dvi
@@ -595,7 +595,7 @@ $(GROFF_INFO): doc/groff.texi
 	LC_ALL=C \
 	$(MAKEINFO) -o doc/groff.info --enable-encoding \
 	  -I $(doc_srcdir) $(doc_builddir)/groff.texi
-endif
+endif # HAVE_MAKEINFO
 
 # Distribute the Info files.
 dist-hook: dist-info-bits
