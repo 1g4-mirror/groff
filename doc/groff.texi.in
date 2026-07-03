@@ -12084,9 +12084,10 @@ file @file{tty.tmac}, which is loaded by the startup file
 
 @cindex dimensions, line
 @cindex line dimensions
-The following drawing shows the dimensions that GNU @command{troff} uses
-to arrange a line of output on the page.  Each dimension is labeled with
-the name of the request that configures it.
+The following diagram shows the dimensions
+that the formatter uses to arrange a line of output on the page.
+Each dimension is labelled
+with the name of the request that configures it.
 
 @Example
      -->| in |<--

@@ -679,6 +679,7 @@ request
 to change\[em]or eliminate\[em]supplemental inter-sentence space.
 .\" (@pxref{Manipulating Filling and Adjustment}).
 .
+.
 .\" ====================================================================
 .SH "Tabs and leaders"
 .\" ====================================================================
@@ -710,6 +711,115 @@ and
 requests,
 respectively.
 .\" END Keep (roughly) parallel with groff.texi node "Tabs and Leaders".
+.
+.
+.br
+.ne 10v
+.\" ====================================================================
+.SH "Line layout"
+.\" ====================================================================
+.
+.\" BEGIN Keep (roughly) parallel with groff.texi node "Line Layout".
+The following diagram shows the dimensions
+that the formatter uses to arrange a line of output on the page.
+Each dimension is labelled
+with the name of the request that configures it.
+.
+.
+.P
+.RS
+.EX
+     -->| in |<--
+        |<-----------ll------------>|
+   +----+----+----------------------+----+
+   |    :    :                      :    |
+   +----+----+----------------------+----+
+-->| po |<--
+   |<--------paper width---------------->|
+.EE
+.RE
+.
+.
+.P
+The
+.I "page offset"
+is the leftmost position of running text.
+.
+.I Indentation
+is the distance from the page offset at which text is set.
+.
+.I "Line length"
+is the maximum extent of unindented running text.
+.
+.
+.P
+The page offset can be thought of as the \[lq]left margin\[rq].
+The right margin is not explicitly configured;
+the combination of page offset and line length
+provides the information necessary to derive it.
+.
+The
+.BR nm ,
+.BR nn ,
+and
+.B mc
+requests exist
+to place line numbers and margin characters
+beyond the page margins.
+.\" @footnote{@xref{Output Line Annotation}.}
+.
+.
+.P
+The
+.B ti
+request configures a
+.I "temporary indentation."
+.
+Its idiomatic application
+is invocation by a paragraphing macro
+to set up a first-line indentation,
+of positive sign in the conventional case,
+and negative for a \[lq]hanging\[rq] paragraph.
+.
+The temporary indentation is associated
+with the environment.
+.
+See section \[lq]Environments\[rq] below.
+.
+.
+.P
+The page offset can be found in the read-only register
+.BR .o .
+.
+The read-only register
+.B .i
+interpolates the indentation amount,
+ignoring temporary indentation.
+.
+The read-only register
+.B .in
+reports the indentation that applies to the pending output line.
+.
+The line length as set by
+.B ll
+can be found in the read-only register
+.BR .l .
+.
+The read-only register
+.B .ll
+is the line length that applies to the pending output line.
+.
+Similarly to
+.B .i
+and
+.BR .in ,
+the difference between
+.B .l
+and
+.B .ll
+is that the latter takes into account
+whether a partially collected line still uses the previous length.
+.\" END Keep (roughly) parallel with groff.texi node "Line Layout".
 .
 .
 .\" ====================================================================
