@@ -620,8 +620,8 @@ MAINTAINERCLEANFILES += doc/groff.txt
 # Generate HTML, both split into several files, and as a single file.
 # 'html' and its installation counterpart 'install-html' are standard
 # Automake targets.
-EXTRA_DIST += doc/groff.html doc/groff.html.node
-MAINTAINERCLEANFILES += doc/groff.html doc/groff.html.node
+EXTRA_DIST += $(GROFF_HTML) $(GROFF_HTML).node
+MAINTAINERCLEANFILES += $(GROFF_HTML) $(GROFF_HTML).node
 .texi.html:
 	$(AM_V_at)$(MKDIR_P) $(doc_builddir)/
 	$(AM_V_GEN)LANG=C \

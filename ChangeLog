@@ -1,5 +1,9 @@
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am: Use `GROFF_HTML` macro more aggressively.
+
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (doc/Groff-PDF-Features.pdf): Add `$(DOC_GNU_PNG)`
 	and `font/devpdf/stamp` as prerequisites for this target.  Drop
 	duplicate `tbl` prerequisite.
