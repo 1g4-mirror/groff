@@ -731,14 +731,15 @@ endif # HAVE_TEXI2DVI
 install-doc: install-dvi install-html install-pdf
 
 maintainer-clean-local:
-	$(RM) $(doc_builddir)/gnu.eps
-	$(RM) $(doc_builddir)/gnu.png
-	$(RM) $(doc_builddir)/groff.info
-	$(RM) $(doc_builddir)/groff.html
-	$(RM) $(doc_builddir)/groff.pdf
-	$(RM) $(doc_builddir)/groff.dvi
-	$(RM) $(doc_builddir)/groff.txt
-	$(RM) $(doc_builddir)/groff.texi
+	$(RM) $(builddir)/$(DOC_GNU_EPS)
+	$(RM) $(builddir)/$(DOC_GNU_PNG)
+	$(RM) $(builddir)/$(GROFF_INFO)
+	$(RM) $(builddir)/$(GROFF_TXT)
+	$(RM) $(builddir)/$(GROFF_HTML)
+	$(RM) -r $(builddir)/$(GROFF_HTML).node
+	$(RM) $(builddir)/$(GROFF_INFO)
+	$(RM) $(builddir)/$(GROFF_DVI)
+	$(RM) $(builddir)/$(GROFF_PDF)
 
 # Generated forms of the groff Texinfo manual might be in the source
 # directory (distribution archive build) or in the build directory (Git
