@@ -1,5 +1,51 @@
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[doc,man]: Add line layout diagram.
+
+	* doc/line-layout.roff: New file uses pic(1) to replace ASCII
+	art diagram of *roff output line geometry.
+	* doc/doc.am: Define new macros `DOC_LINE_LAYOUT_EPS` and
+	`DOC_LINE_LAYOUT_PNG` to track names of rendered forms of the
+	foregoing pic(1) image.  Clean these files from the build
+	directory.  Add them as prerequisites to the `$(GROFF_DVI)` and
+	`$(GROFF_PDF)` targets, respectively.  Add the new file and its
+	rendered forms to the `EXTRA_DIST` macro to ship them in our
+	distribution archive.
+	($(GROFF_HTML)): Add `DOC_LINE_LAYOUT_PNG` as prerequisite.
+	Copy that file into the directory used by the split-by-node
+	version of our Texinfo manual in HTML form, as required for
+	makeinfo(1) to generate a non-broken "<img src>" element.
+	(maintainer-clean-local): Clean the rendered image files from
+	the build directory.
+	(install-html-local): Install the rendered image file where the
+	monolithic version of our Texinfo manual in HTML form can find
+	it.
+	(dist-gnueps): XXX Drop apparently unneeded target, and
+	`dist-hook`'s use of it as a prerequisite.
+	($(DOC_LINE_LAYOUT_EPS)): New target rule renders the new file
+	as Encapsulated PostScript file using groff(1), gs(1)
+	{Ghostscript}, and sed(1), as documented in grops(1).
+	($(DOC_LINE_LAYOUT_PNG)): New target rule renders the new file
+	as a Portable Network Graphics file using convert(1)
+	{ImageMagick}.
+	* doc/groff.texi.in (Line Layout): Inline image.  Retain the
+	ASCII art version, but output it only `ifinfo`--rendering to a
+	format that doesn't support inline images.
+	* man/groff.7.man (Line layout): Inline aforementioned pic(1)
+	document with a `so` request, only if in troff mode.  Otherwise,
+	use the existing ASCII art version.  So that installed systems
+	don't have to manage the installation location of the file...
+	* Makefile.am: ...update `.man` suffix rule to depend on
+	soelim(1), and unconditionally run all man pages (which are
+	generated files already anyway) through soelim(1), literally
+	inlining the pic(1) region.  Pass soelim(1) `-I` options so that
+	the "line-layout.roff" file should be found whether the build
+	takes place inside or outside of the build tree.
+
+	Thanks to Stefan Möding for the new diagram!
+
+2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/eqn.am:
 	* src/preproc/pic/pic.am:
 	* src/preproc/refer/refer.am: Improve clean behavior, deleting

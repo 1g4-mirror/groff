@@ -59,9 +59,12 @@ DOC_PDFMOM = \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
   $(PDFMOMBIN) $(MFLAG) $(FFLAG) -ww -b $(pdfmomoption) --roff
 
-# This image file is used by several documents in the groff source tree.
+# These images are used by several documents in the groff source tree.
 DOC_GNU_EPS = doc/gnu.eps
 DOC_GNU_PNG = doc/gnu.png
+DOC_LINE_LAYOUT_EPS = doc/line-layout.eps
+DOC_LINE_LAYOUT_PNG = doc/line-layout.png
+
 DOC_GMP_COVER_PAGE = doc/groff-man-pages-cover.groff
 
 # Other doc, installed in $(docdir)
@@ -430,7 +433,7 @@ doc/webpage.html: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	$(AM_V_at)mv $@.tmp $@
 
 # We remove groff.css, groff.{html,html.node,info,pdf,texi,txt}, and
-# gnu.png only from an out-of-source build tree.
+# {gnu,line-layout}.{eps,png} only from an out-of-source build tree.
 mostlyclean-local: mostlyclean_doc
 mostlyclean_doc:
 	$(RM) $(GROFF_DVI) $(PROCESSEDDOCFILES_PDF)
@@ -440,7 +443,9 @@ mostlyclean_doc:
 	    $(GROFF_HTML) $(GROFF_INFO) $(GROFF_PDF) $(GROFF_TXT) \
 	    doc/groff.texi \
 	    $(top_builddir)/$(DOC_GNU_EPS) \
-	    $(top_builddir)/$(DOC_GNU_PNG); \
+	    $(top_builddir)/$(DOC_GNU_PNG) \
+	    $(top_builddir)/$(DOC_LINE_LAYOUT_EPS) \
+	    $(top_builddir)/$(DOC_LINE_LAYOUT_PNG); \
 	  $(RM) -r $(GROFF_HTML).node; \
 	fi
 if HAVE_TEXI2DVI
@@ -601,8 +606,8 @@ GROFF_DVI = doc/groff.dvi
 GROFF_PDF = doc/groff.pdf
 endif # USE_TEX
 
-$(GROFF_DVI): $(DOC_GNU_EPS)
-$(GROFF_PDF): $(DOC_GNU_PNG)
+$(GROFF_DVI): $(DOC_GNU_EPS) $(DOC_LINE_LAYOUT_EPS)
+$(GROFF_PDF): $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 
 # pdfTeX can find resources in a VPATH build when generating PDF (with
 # pdfetex), but not when generating DVI (with etex).  Steer the latter's
@@ -611,15 +616,17 @@ TEXINPUTS="$(doc_srcdir)$(PATH_SEPARATOR)$$TEXINPUTS"
 
 # We also have to override Automake's built-in rule for generation of
 # HTML from Texinfo to include our embedded images.
-$(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG)
+$(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
 	  -I $(doc_builddir) -I $(doc_srcdir) \
 	  -o $(GROFF_HTML).node $< \
 	&& if test -f "$(srcdir)/$(DOC_GNU_PNG)"; then \
-	  cp -f "$(srcdir)/$(DOC_GNU_PNG)" $(GROFF_HTML).node; \
+	  cp -f "$(srcdir)/$(DOC_GNU_PNG)" \
+	    "$(srcdir)/$(DOC_LINE_LAYOUT_PNG)" $(GROFF_HTML).node; \
 	else \
-	  cp "$(builddir)/$(DOC_GNU_PNG)" $(GROFF_HTML).node; \
+	  cp -f "$(builddir)/$(DOC_GNU_PNG)" \
+	    "$(builddir)/$(DOC_LINE_LAYOUT_PNG)" $(GROFF_HTML).node; \
 	fi \
 	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
 	  -I $(doc_builddir) -I $(doc_srcdir) \
@@ -733,6 +740,8 @@ install-doc: install-dvi install-html install-pdf
 maintainer-clean-local:
 	$(RM) $(builddir)/$(DOC_GNU_EPS)
 	$(RM) $(builddir)/$(DOC_GNU_PNG)
+	$(RM) $(builddir)/$(DOC_LINE_LAYOUT_EPS)
+	$(RM) $(builddir)/$(DOC_LINE_LAYOUT_PNG)
 	$(RM) $(builddir)/$(GROFF_INFO)
 	$(RM) $(builddir)/$(GROFF_TXT)
 	$(RM) $(builddir)/$(GROFF_HTML)
@@ -800,7 +809,7 @@ install-html-local: $(GROFF_HTML)
 	  || $(mkinstalldirs) $(DESTDIR)$(htmldocdir)/groff.html.mono
 	for d in $(doc_builddir) $(doc_srcdir); do \
 	  if [ -f "$$d"/groff.html ]; then \
-	    cp -r "$$d"/groff.html "$$d"/gnu.png \
+	    cp -r "$$d"/groff.html "$$d"/gnu.png "$$d"/line-layout.png \
 	      $(DESTDIR)$(htmldocdir)/groff.html.mono; \
 	    cp -r "$$d"/groff.html.node \
 	      $(DESTDIR)$(htmldocdir); \
@@ -830,10 +839,25 @@ uninstall-html:
 uninstall-txt:
 	$(RM) $(DESTDIR)$(docdir)/groff.txt
 
-# An image of a gnu in encapsulated PostScript is generated during the
-# build process if necessary.  Our configure script assumes pnmdepth is
-# available if xpmtoppm is (see macro "GROFF_PROG_XPMTOPPM").
-EXTRA_DIST += $(DOC_GNU_EPS) $(DOC_GNU_PNG) doc/gnu.xpm
+# Ship sources of images used variously by documentation and examples.
+#
+# We distribute image sources because groff is a copylefted project.
+#
+# We distribute image "binaries" to reduce build-time dependencies for
+# users of our distribution archive.
+#
+# Our "configure" script assumes pnmdepth is available if xpmtoppm is;
+# see macro "GROFF_PROG_XPMTOPPM" in "groff.m4".
+EXTRA_DIST += \
+  doc/gnu.xpm \
+  $(DOC_GNU_EPS) \
+  $(DOC_GNU_PNG) \
+  doc/line-layout.roff \
+  $(DOC_LINE_LAYOUT_EPS) \
+  $(DOC_LINE_LAYOUT_PNG)
+
+# maintainer mode targets
+
 $(DOC_GNU_EPS): doc/gnu.xpm
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& if test "$(XPMTOPPM)" != found; then \
@@ -869,18 +893,23 @@ $(DOC_GNU_PNG): doc/gnu.xpm
 	fi; \
 	xpmtoppm $(top_srcdir)/doc/gnu.xpm | pnmtopng >$@
 
-# Provide a copy of the image in the distribution archive to accommodate
-# systems without a tool to generate it from an X pixmap.
-dist-hook: dist-gnueps
-dist-gnueps:
-	chmod u+w $(distdir)/doc
-	for d in $(doc_builddir) $(doc_srcdir); do \
-	  if [ -f "$$d"/$(DOC_GNU_EPS) ]; then \
-	    cp -f "$$d"/$(DOC_GNU_EPS) $(distdir)/doc; \
-	    break; \
-	  fi; \
-	done
+# XXX: ugly, but DRY
+DOC_LL=line-layout
 
+$(DOC_LINE_LAYOUT_EPS): doc/line-layout.roff pic groff troff grops \
+  font/devps/stamp
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& $(DOC_GROFF) -p -T ps -P -b16 $< >$(DOC_LL).ps \
+	&& gs -q -dNOPAUSE -sDEVICE=bbox -- $(DOC_LL).ps \
+	  2> $(DOC_LL).bbox \
+	&& sed -e '/^%%Orientation/r $(DOC_LL).bbox' \
+	  -e '/^%!PS-Adobe-3.0/s/$$/ EPSF-3.0/' $(DOC_LL).ps >$@.tmp \
+	&& $(RM) $(DOC_LL).ps $(DOC_LL).bbox \
+	&& mv $@.tmp $@
+
+$(DOC_LINE_LAYOUT_PNG): $(DOC_LINE_LAYOUT_EPS)
+	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
+	&& convert -density 300 $< PNG24:$@
 
 # Local Variables:
 # fill-column: 72

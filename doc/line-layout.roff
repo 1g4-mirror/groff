@@ -1,0 +1,21 @@
+.\" diagram Copyright 2026 Stefan Moeding
+.PS
+pw = 5;
+ll = pw - 1;
+po = 0.5;
+in = 0.5;
+#
+line down 2;
+move down 0.1; line <-> right pw "paper width" above; move up 0.1;
+line up 2;
+line left pw;
+#
+move right po down 0.5;
+line dashed right ll then down 1.25;
+move up 0.1; line <-> left ll "ll" above; move down 0.1;
+line dashed up 1.25;
+#
+move right in; line dotted down 0.5;
+move up 0.25; line <-> left in "in" above;
+move down 0.25; line <-> left po "po" below;
+.PE

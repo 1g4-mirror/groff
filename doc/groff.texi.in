@@ -12089,6 +12089,8 @@ that the formatter uses to arrange a line of output on the page.
 Each dimension is labelled
 with the name of the request that configures it.
 
+@center @image{line-layout,4in,,line layout diagram,.png}
+@ifinfo
 @Example
      -->| in |<--
         |<-----------ll------------>|
@@ -12098,6 +12100,7 @@ with the name of the request that configures it.
 -->| po |<--
    |<--------paper width---------------->|
 @endExample
+@end ifinfo
 
 @noindent
 The dimensions are defined as follows.

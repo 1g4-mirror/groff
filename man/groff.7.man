@@ -727,6 +727,11 @@ with the name of the request that configures it.
 .
 .
 .P
+.ie t \{\
+.\" Do not indent the next line!  soelim(1) needs to see it.
+.so doc/line-layout.roff
+.\}
+.el \{\
 .RS
 .EX
      -->| in |<--
@@ -738,6 +743,7 @@ with the name of the request that configures it.
    |<--------paper width---------------->|
 .EE
 .RE
+.\}
 .
 .
 .P

@@ -829,7 +829,7 @@ set-man-page-time-stamps:
 makevarescape=$(top_srcdir)/makevarescape.sed
 
 SUFFIXES += .man
-.man:
+.man: soelim
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& LC_ALL=C \
 	 sed -e "s|[@]APPDEFDIR[@]|`echo $(appdefdir) | sed -f $(makevarescape)`|g" \
@@ -864,7 +864,7 @@ SUFFIXES += .man
 	     -e "s|[@]TMAC_MDIR[@]|`echo $(tmacdir) | sed -f $(makevarescape)`/mm|g" \
 	     -e "s|[@]TMAC_S_PREFIX[@]|\\\\%$(tmac_s_prefix)|g" \
 	     -e "s|[@]VERSION[@]|$(VERSION)|g" \
-	     $< \
+	     $< | soelim -I $(srcdir) -I $(builddir) \
 	     >$@
 
 # Version files - see script "build-aux/git-version-gen".
