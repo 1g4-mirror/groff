@@ -506,7 +506,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle June 2026
+@subtitle July 2026
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -12159,7 +12159,7 @@ the previous values.
     @result{} ous values.
 @endExample
 
-Requests exist to place line numbers and margin characters beyond the
+Requests exist to place line numbers and margin characters within the
 page margins.@footnote{@xref{Output Line Annotation}.}
 
 @DefreqList {po, [@Var{offset}]}
@@ -12167,18 +12167,33 @@ page margins.@footnote{@xref{Output Line Annotation}.}
 @DefreqItem {po, @t{-}@Var{offset}}
 @DefregListEndx {.o}
 @pindex tty.tmac
-Set page offset to @var{offset}; if @var{offset} is signed, adjust the
-page offset by its value.  The default scaling unit is @samp{m}.
-The default offset is 1@dmn{i} on typesetters and zero on terminals.
-
-If @var{offset} is omitted, the page offset is reset to that before the
-previous invocation of @code{po}.
-
-The page offset can be found in the read-only register @samp{.o}.
+Set page offset to
+@var{offset};
+if
+@var{offset}
+is signed,
+adjust the page offset by its value.
+The default scaling unit is
+@samp{m}.
+The default offset is
+1@dmn{i}
+on typesetters and zero on terminals.
+If
+@var{offset}
+is omitted,
+the formatter resets the page offset
+to that before the previous invocation of
+@code{po},
+and zero if there is none.
+Read-only register
+@samp{.o}
+interpolates the page offset.
 @cindex CSTR@tie{}#54 errata
 @cindex CSTR@tie{}#54 erratum, @code{po} request
 This request is incorrectly documented in the @acronym{AT&T}
-@code{troff} manual as using a default scaling unit of @samp{v}.
+@command{troff} @c AT&T
+manual as using a default scaling unit of
+@samp{v}.
 
 @Example
 .po 3i
@@ -12197,15 +12212,38 @@ This request is incorrectly documented in the @acronym{AT&T}
 @DefreqItem {in, @t{+}@Var{indent}}
 @DefreqItem {in, @t{-}@Var{indent}}
 @DefregListEndx {.i}
-Set indentation to @var{indent}; if @var{indent} is signed, adjust the
-indentation by its value.  The default scaling unit is @samp{m}.
-Initially, there is no indentation.  This request causes a break.
+Set indentation to
+@var{indent};
+if
+@var{indent}
+is signed,
+adjust the indentation by its value.
+The default scaling unit is
+@samp{m}.
+Initially,
+there is no indentation.
+This request causes a break.
+The indentation amount is associated
+with the environment.@footnote{@xref{Environments}.}
 
-If @var{indent} is omitted, the indentation is reset to that before the
-previous invocation of @code{in}, and zero if there is none.  If
-@var{indent} is negative, GNU @command{troff} emits a warning in
-category @samp{range} and sets the indentation to zero; a temporary
-indentation (see below) is reset to zero as well.
+If
+@var{indent}
+is omitted,
+the formatter resets the indentation
+to that before the previous invocation of
+@code{in},
+and zero if there is none.
+If
+@var{indent}
+is negative,
+the formatter sets the indentation
+(and temporary indentation;
+see below)
+to zero.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{range}.
+@xref{Warnings}.}
 
 The formatter delays the effect of
 @code{in}
@@ -12219,15 +12257,13 @@ The read-only register
 interpolates the indentation amount,
 ignoring temporary indentation
 (see below).
-The indentation amount is associated with the environment
-(@pxref{Environments}).
 @endDefreq
 
 @cindex temporary indentation
 @cindex indentation, temporary
 @DefreqList {ti, [@Var{amount}]}
-@DefreqItem {ti, [@t{+}@Var{amount}]}
-@DefreqItem {ti, [@t{-}@Var{amount}]}
+@DefreqItem {ti, @t{+}@Var{amount}}
+@DefreqItem {ti, @t{-}@Var{amount}}
 @DefregListEndx {.in}
 Temporarily indent the next output line by
 @var{amount};
@@ -12277,30 +12313,64 @@ and negative for a ``hanging'' paragraph.
 @DefreqItem {ll, @t{-}@Var{length}}
 @DefregItemx {.l}
 @DefregListEndx {.ll}
-Change (increase or decrease) the line length per the numeric expression
-@var{length}.  The default scaling unit is @samp{m}.  If not otherwise
-configured (see @pxref{Paper Format}), the default line length is
-6.5@dmn{i}.  If @var{length} is invalid, GNU @code{troff} emits a
-warning in category @samp{number} and ignores the request.  If
-@var{length} is nonpositive, GNU @command{troff} emits a warning in
-category @samp{range} and sets the line length to the device's
-horizontal motion quantum; recall @ref{Motion Quanta}.  The line length
-is associated with the environment (@pxref{Environments}).  If
-@var{length} is omitted, GNU @command{troff} restores the environment's
-previous line length.
+Change
+(increase or decrease)
+the line length per the numeric expression
+@var{length}.
+The default scaling unit is
+@samp{m}.
+If not otherwise configured
+(recall
+@ref{Paper Format}),
+the default line length is
+6.5@dmn{i}.
+If
+@var{length}
+is invalid,
+the formatter ignores the request.
+If
+@var{length}
+is nonpositive,
+the formatter
+sets the line length to the device's horizontal motion quantum;
+recall @ref{Motion Quanta}.@footnote{GNU
+@command{troff} @c GNU
+emits a warning in category
+@samp{range}.
+@xref{Warnings}.}
+The line length is associated
+with the environment.@footnote{@xref{Environments}.}
+If
+@var{length}
+is omitted,
+the formatter restores the environment's previous line length.
 
-The effect of @code{ll} is delayed until a partially collected line (if
-it exists) is output.  In other words, it does not change a pending
-output line's length.
+The effect of
+@code{ll}
+is delayed until a partially collected line
+(if it exists)
+is output.
+In other words,
+it does not change a pending output line's length.
 
 @cindex line length register (@code{.l})
-The line length as set by @code{ll} can be found in the
-read-only register @samp{.l}.  The read-only register @code{.ll} is the
-line length that applies to the pending output line.
-
-Similarly to @code{.i} and @code{.in}, the difference between @code{.l}
-and @code{.ll} is that the latter takes into account whether a partially
-collected line still uses the previous length.
+The line length as set by
+@code{ll}
+can be found in the read-only register
+@samp{.l}.
+The read-only register
+@code{.ll}
+reports the line length that applies to the pending output line.
+Similarly to
+@code{.i}
+and
+@code{.in},
+the difference between
+@code{.l}
+and
+@code{.ll}
+is that the latter takes into account
+whether a partially collected line still uses the previous length.
 @endDefreq
 
 

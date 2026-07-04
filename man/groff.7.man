@@ -771,7 +771,7 @@ and
 .B mc
 requests exist
 to place line numbers and margin characters
-beyond the page margins.
+within the page margins.
 .\" @footnote{@xref{Output Line Annotation}.}
 .
 .
