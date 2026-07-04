@@ -774,7 +774,7 @@ install-data-local: install-info-local
 install-info-local: $(GROFF_INFO)
 	-test -d $(DESTDIR)$(infodir) \
 	  || $(mkinstalldirs) $(DESTDIR)$(infodir)
-	$(RM) $(DESTDIR)/doc/groff.info*
+	$(RM) $(DESTDIR)$(infodir)/groff.info*
 	for d in $(doc_builddir) $(doc_srcdir); do \
 	  if [ -f "$$d"/groff.info ]; then \
 	    cp "$$d"/groff.info* $(DESTDIR)$(infodir); \
