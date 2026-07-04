@@ -1318,7 +1318,7 @@ static format *process_format(table_input &in, options *opt,
 // Update string `s` to remove leading and trailing spaces.
 static void trim_spaces(string &s)
 {
-  // Hand an empty string back as-is.
+  // Perform no operation on an empty string.
   if (s.length() == 0)
     return;
   size_t len = s.length();
