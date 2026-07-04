@@ -1,3 +1,26 @@
+2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grn]: Boolify.
+
+	* src/preproc/grn/gprint.h: Delete `TRUE` and `FALSE`
+	preprocessor macros.
+	* src/preproc/grn/hdb.cpp:
+	* src/preproc/grn/main.cpp: Preprocessor-include "<stdbool.h>",
+	admittedly redundantly, to mark this file as reviewed for
+	use of a standard Boolean type.
+	* src/preproc/grn/hdb.cpp: Demote external symbols `SUNFILE` and
+	`compatibility_flag` from `int` to `bool`.
+	(DBRead): Demote local variables `done` and `last` from `int` to
+	`bool`.  Assign to `bool` objects using Boolean literals.
+	* src/preproc/grn/main.cpp: Demote global symbols `defpoint`,
+	`pointscale`, `setdefault`, and `sflag` from `int` to `bool`.
+	Initialize `bool` objects using Boolean literals.
+	Declare `has_polygon()` as returning `bool`, not `int`.
+	(main): Assign to `bool` objects using Boolean literals.
+	(has_polygon): Demote return type from `int` to `bool`.
+
+	Continues the long process of fixing Savannah #66672.
+
 2026-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am (texinfo-all): New convenience target builds all

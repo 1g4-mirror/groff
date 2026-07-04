@@ -24,9 +24,6 @@
 #define DEFTHICK	-1	/* default thickness */
 #define DEFSTYLE	SOLID	/* default line style */
 
-#define TRUE	1
-#define FALSE	0
-
 #define nullelt	-1
 #define nullpt	-1
 #define nullun	NULL

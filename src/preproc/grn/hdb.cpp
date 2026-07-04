@@ -31,8 +31,8 @@
 /* imports from main.cpp */
 
 extern char gremlinfile[];	/* name of file currently reading */
-extern int SUNFILE;		/* TRUE if SUN gremlin file */
-extern int compatibility_flag;	/* TRUE if in compatibility mode */
+extern bool SUNFILE;		/* true if SUN gremlin file */
+extern bool compatibility_flag;	/* true if in compatibility mode */
 
 int DBGetType(char *s);
 
@@ -83,7 +83,7 @@ ELT *
 DBRead(FILE *file)
 {
   int i;
-  int done;		/* flag for input exhausted */
+  bool done;		/* flag for input exhausted */
   double nx;		/* x holder so x is not set before orienting */
   int type;			/* element type */
   ELT *elist;			/* pointer to the file's elements */
@@ -91,9 +91,9 @@ DBRead(FILE *file)
   char string[MAXSTRING], *txt;
   double x, y;			/* x and y are read in point coords */
   int len, brush, size;
-  int lastpoint;
+  bool lastpoint;
 
-  SUNFILE = FALSE;
+  SUNFILE = false;
   elist = DBInit();
   int nitems = fscanf(file, "%" MAXSTRING_S "s%*[^\n]\n", string);
   if (nitems != 1) {
@@ -110,7 +110,7 @@ DBRead(FILE *file)
 			       " picture");
       return (elist);
     }
-    SUNFILE = TRUE;
+    SUNFILE = true;
   }
 
   nitems = fscanf(file, "%d%lf%lf\n", &size, &x, &y);
@@ -123,7 +123,7 @@ DBRead(FILE *file)
   lineno++;
   /* ignore orientation and file positioning point */
 
-  done = FALSE;
+  done = false;
   while (!done) {
     /* if (fscanf(file,"%" MAXSTRING_S "s\n", string) == EOF) */
     /* I changed the scanf format because the element */
@@ -140,7 +140,7 @@ DBRead(FILE *file)
 
     type = DBGetType(string);	/* interpret element type */
     if (type < 0) {		/* no more data */
-      done = TRUE;
+      done = true;
     } else {
       /* always one point */
 #ifdef UW_FASTSCAN
@@ -172,7 +172,7 @@ DBRead(FILE *file)
 #ifdef UW_FASTSCAN
 	while (xscanf(file, &x, &y));
 #else
-	lastpoint = FALSE;
+	lastpoint = false;
 	do {
 	  char *cp = fgets(string, MAXSTRING, file);
 	  if (0 /* nullptr */ == cp) {
@@ -184,7 +184,7 @@ DBRead(FILE *file)
 	  }
 	  lineno++;
 	  if (string[0] == '*') {	/* SUN gremlin file */
-	    lastpoint = TRUE;
+	    lastpoint = true;
 	  } else {
 	    if (!sscanf(string, "%lf%lf", &x, &y)) {
 	      error_with_file_and_line(gremlinfile, lineno,
@@ -194,7 +194,7 @@ DBRead(FILE *file)
 	      return(elist);
 	    }
 	    if ((x == -1.00 && y == -1.00) && (!SUNFILE))
-	      lastpoint = TRUE;
+	      lastpoint = true;
 	    else {
 	      if (compatibility_flag)
 		savebounds(xorn(x, y), yorn(x, y));
@@ -211,7 +211,7 @@ DBRead(FILE *file)
 	  savebounds(nx, y);
 	} while (xscanf(file, &x, &y));
 #else
-	lastpoint = FALSE;
+	lastpoint = false;
 	while (!lastpoint) {
 	  nx = xorn(x, y);
 	  y = yorn(x, y);
@@ -228,11 +228,11 @@ DBRead(FILE *file)
 	  }
 	  lineno++;
 	  if (string[0] == '*') {	/* SUN gremlin file */
-	    lastpoint = TRUE;
+	    lastpoint = true;
 	  } else {
 	    (void) sscanf(string, "%lf%lf", &x, &y);
 	    if ((x == -1.00 && y == -1.00) && (!SUNFILE))
-	      lastpoint = TRUE;
+	      lastpoint = true;
 	  }
 	}
 #endif	/* UW_FASTSCAN */

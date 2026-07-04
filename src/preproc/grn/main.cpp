@@ -187,7 +187,7 @@ int *defstipple_index = cf_stipple_index;
 int style[STYLES] =
 {DOTTED, DOTDASHED, SOLID, DASHED, SOLID, SOLID};
 double scale = 1.0;		/* no scaling, default */
-int defpoint = 0;		/* flag for point size scaling */
+bool defpoint = false;		/* flag for point size scaling */
 char *defstipple = (char *) 0;
 enum E {
   OUTLINE, FILL, BOTH
@@ -214,10 +214,10 @@ double troffscale;	/* scaling factor at output time */
 double width;		/* user-request maximum width for picture */
 			/* (in inches)                            */
 double height;		/* user-request height */
-int pointscale;		/* flag for point size scaling */
-int setdefault;		/* flag for a .GS/.GE to remember all */
+bool pointscale;	/* flag for point size scaling */
+bool setdefault;	/* flag for a .GS/.GE to remember all */
 			/* settings                           */
-int sflag;		/* -s flag: sort order (do polyfill first) */
+bool sflag;		/* -s flag: sort order (do polyfill first) */
 
 double toppoint;	/* remember the picture */
 double bottompoint;	/* bounds in these variables */
@@ -237,15 +237,15 @@ char *c3 = inputline + 2;	/* '.GS' by looking individually */
 char *c4 = inputline + 3;	/* needed for compatibility mode */
 char GScommand[MAXINLINE];	/* put user's '.GS' command line here */
 char gremlinfile[MAXINLINE];	/* filename to use for a picture */
-int SUNFILE = FALSE;		/* TRUE if SUN gremlin file */
-int compatibility_flag = FALSE;	/* TRUE if in compatibility mode */
+bool SUNFILE = false;		/* true if SUN gremlin file */
+bool compatibility_flag = false;/* true if in compatibility mode */
 
 
 void getres();
 int doinput(FILE *fp);
 void conv(FILE *fp, int baseline);
 void savestate();
-int has_polygon(ELT *elist);
+bool has_polygon(ELT *elist);
 void interpret(char *line);
 
 void *
@@ -357,7 +357,7 @@ main(int argc,
 	break;
 
       case 'C':		/* compatibility mode */
-	compatibility_flag = TRUE;
+	compatibility_flag = true;
 	break;
 
       case 'F':		/* font path to find DESC */
@@ -375,7 +375,7 @@ main(int argc,
 	break;
 
       case 's':		/* preserve order of elements */
-	sflag = 1;
+	sflag = true;
 	break;
 
       case '-':
@@ -514,7 +514,7 @@ initpic()
   stipple = defstipple;
 
   gremlinfile[0] = 0;		/* filename is 'null' */
-  setdefault = 0;		/* not the default settings (yet) */
+  setdefault = false;		/* not the default settings (yet) */
 
   toppoint = BIG;		/* set the picture bounds out */
   bottompoint = -BIG;		/* of range so they'll be set */
@@ -946,14 +946,14 @@ interpret(char *line)
     break;
 
   case 'd':			/* defaults */
-    setdefault = 1;
+    setdefault = true;
     break;
 
   case 'p':			/* pointscale */
     if (strcmp("off", str2))
-      pointscale = 1;
+      pointscale = true;
     else
-      pointscale = 0;
+      pointscale = false;
     break;
 
   default:
@@ -965,11 +965,11 @@ interpret(char *line)
 
 
 /*
- * return TRUE if picture contains a polygon
- * otherwise FALSE
+ * return true if picture contains a polygon
+ * otherwise false
  */
 
-int
+bool
 has_polygon(ELT *elist)
 {
   while (!DBNullelt(elist)) {
