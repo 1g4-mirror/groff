@@ -1,7 +1,7 @@
 2026-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am (install-info-local): Clean out any existing Info
-	files in `$(DESTDIR)/$(infodir)`, not `$(DESTDIR)/doc`.
+	files in `$(DESTDIR)$(infodir)`, not `$(DESTDIR)/doc`.
 
 	Fixes <https://savannah.gnu.org/bugs/?68498>.  Problem
 	introduced by me in commit d79c3f3a4a, 2021-11-11.
@@ -28,7 +28,7 @@
 	(install-html-local): Install the rendered image file where the
 	monolithic version of our Texinfo manual in HTML form can find
 	it.
-	(dist-gnueps): XXX Drop apparently unneeded target, and
+	(dist-gnueps): Drop apparently unneeded target, and
 	`dist-hook`'s use of it as a prerequisite.
 	($(DOC_LINE_LAYOUT_EPS)): New target rule renders the new file
 	as Encapsulated PostScript file using groff(1), gs(1)
@@ -50,7 +50,8 @@
 	the "line-layout.roff" file should be found whether the build
 	takes place inside or outside of the build tree.
 
-	Thanks to Stefan Möding for the new diagram!
+	Fixes <https://savannah.gnu.org/bugs/?68407>.  Thanks to Stefan
+	Möding for the new diagram!
 
 2026-07-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -1798,7 +1799,8 @@
 	remainder of the input line to `define_character()`.  Resolves
 	assertion failure thrown by the latter function.
 
-	Fixes <https://savannah.gnu.org/bugs/?68395>.
+	Fixes <https://savannah.gnu.org/bugs/?68395>.  Problem
+	introduced by me in commit f87b107497, 20 November.
 
 2026-05-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
