@@ -620,6 +620,8 @@ TEXINPUTS="$(doc_srcdir)$(PATH_SEPARATOR)$$TEXINPUTS"
 
 # We also have to override Automake's built-in rule for generation of
 # HTML from Texinfo to include our embedded images.
+#
+# TODO: Maybe split this into `GROFF_HTML_MONO` and `GROFF_HTML_NODE`?
 $(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
@@ -843,7 +845,7 @@ uninstall-html:
 uninstall-txt:
 	$(RM) $(DESTDIR)$(docdir)/groff.txt
 
-# Ship sources of images used variously by documentation and examples.
+# Ship images used variously by documentation and examples.
 #
 # We distribute image sources because groff is a copylefted project.
 #
