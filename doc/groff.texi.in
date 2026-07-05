@@ -23699,15 +23699,26 @@ compatibility
     @result{} FOO groff FOO compatibility c1 ~
 @endExample
 
-The read-only register @code{.cp}, meaningful only when dereferenced
-from a @code{do} request, is@tie{}1 if compatibility mode was on when
-the @code{do} request was encountered, and 0@tie{}if it was not.  This
-register is specialized and may require a statement of rationale.
+The read-only register
+@code{.cp},
+meaningful only when dereferenced from a
+@code{do}
+request,
+interpolates@tie{}1 if compatibility mode was on when the
+@code{do}
+request was encountered,
+and 0@tie{}if it was not.
+This register is specialized and may require a statement of rationale.
 
-When writing macro packages or documents that use GNU @code{troff}
-features and which may be mixed with other packages or documents that do
-not---common scenarios include serial processing of man pages or use of
-the @code{so} or @code{mso} requests---you may desire correct operation
+When writing macro packages or documents that use
+GNU
+@command{troff} @c GNU
+features and which may be mixed with other packages or documents
+that do not---common scenarios include serial processing of man pages
+or use of the
+@code{so}
+or
+@code{mso} requests---you may desire correct operation
 regardless of compatibility mode enablement in the surrounding context.
 It may occur to you to save the existing value of @samp{\n(.C} into a
 register, say, @samp{_C}, at the beginning of your file, turn
