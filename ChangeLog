@@ -1,3 +1,10 @@
+2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am: Move definition of `DOC_LL` macro earlier...
+	(mostlyclean_doc): ...and use it here to scrub temporary files
+	produced by the later maintainer-mode `$(DOC_LINE_LAYOUT_EPS)`
+	target.
+
 2026-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am (install-info-local): Clean out any existing groff

@@ -432,6 +432,9 @@ doc/webpage.html: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	  $(doc_srcdir)/webpage.ms > webpage.html.tmp
 	$(AM_V_at)mv $@.tmp $@
 
+# XXX: ugly, but DRY
+DOC_LL=line-layout
+
 # We remove groff.css, groff.{html,html.node,info,pdf,texi,txt}, and
 # {gnu,line-layout}.{eps,png} only from an out-of-source build tree.
 mostlyclean-local: mostlyclean_doc
@@ -448,6 +451,7 @@ mostlyclean_doc:
 	    $(top_builddir)/$(DOC_LINE_LAYOUT_PNG); \
 	  $(RM) -r $(GROFF_HTML).node; \
 	fi
+	$(RM) doc/$(DOC_LL).ps doc/$(DOC_LL).bbox
 if HAVE_TEXI2DVI
 if USE_TEX
 	$(RM) -r doc/groff.dvi.t2d doc/groff.pdf.t2p
@@ -892,9 +896,6 @@ $(DOC_GNU_PNG): doc/gnu.xpm
 	  exit 1; \
 	fi; \
 	xpmtoppm $(top_srcdir)/doc/gnu.xpm | pnmtopng >$@
-
-# XXX: ugly, but DRY
-DOC_LL=line-layout
 
 $(DOC_LINE_LAYOUT_EPS): doc/line-layout.roff pic groff troff grops \
   font/devps/stamp
