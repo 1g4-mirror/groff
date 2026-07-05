@@ -804,7 +804,7 @@ ignoring temporary indentation.
 .
 The read-only register
 .B .in
-reports the indentation that applies to the pending output line.
+reports the total indentation that applies to the pending output line.
 .
 The line length as set by
 .B ll

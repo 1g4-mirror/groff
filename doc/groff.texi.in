@@ -12285,7 +12285,7 @@ In other words,
 it does not change a pending output line's indentation.
 The read-only register
 @code{.in}
-reports the indentation that applies to the pending output line.
+reports the total indentation that applies to the pending output line.
 The temporary indentation is associated
 with the environment.@footnote{@xref{Environments}.}
 
