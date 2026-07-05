@@ -12300,12 +12300,15 @@ cancels any pending temporary indentation.
 @cindex indentation, first line, of paragraph
 @cindex hanging paragraph
 @cindex paragraph, hanging
-The idiomatic application of the
+Idiomatic applications of the
 @code{ti}
-request is invocation by a paragraphing macro
-to set up a first-line indentation,
-of positive sign in the conventional case,
-and negative for a ``hanging'' paragraph.
+request are invocations by paragraphing macros;
+(1) to set up a first-line indentation of positive sign;
+and
+(2) to set up a ``normal'' temporary indentation of negative sign
+offsetting a posiitive indentation
+that applies to the whole parargraph,
+known as a ``hanging indent''.
 @endDefreq
 
 @DefreqList {ll, [@Var{length}]}
