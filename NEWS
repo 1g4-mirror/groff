@@ -185,6 +185,10 @@ Miscellaneous
    allocator.  We expect to withdraw these configuration options
    completely in groff 1.26.
 
+*  You need the "convert" program from ImageMagick or GraphicsMagick to
+   build groff from its Git repository.  The program is not required for
+   builds from distribution archives.
+
 
 VERSION 1.24.1
 ==============

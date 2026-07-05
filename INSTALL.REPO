@@ -44,6 +44,8 @@ some optional ones.
 * You need the "xpmtoppm", "pnmdepth", and "pnmtops" programs from the
   Netpbm distribution.
 
+* You need the "convert" program from ImageMagick or GraphicsMagick.
+
 
 Bootstrapping from a Git checkout
 ---------------------------------
