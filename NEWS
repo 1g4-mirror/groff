@@ -178,6 +178,11 @@ Miscellaneous
 *  The new document "Groff-PDF-Features.pdf" surveys the PDF features
    that groff enables and exposes in its full-service macro packages.
 
+*  The grn command now exits with status 2 instead of 8 on usage errors
+   arising from missing arguments to command-line options.  It now exits
+   with the POSIX standard `EXIT_FAILURE` status (1) instead of 8 when
+   reading an unrecognized command keyword.
+
 *  The 'configure' options '--{en,dis}able-groff-allocator' introduced
    in groff 1.23.0 are now deprecated.  `--disable-groff-allocator` has
    been implicit since that release, and we've received no reports of a

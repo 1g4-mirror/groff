@@ -316,7 +316,7 @@ operand(int *argcp,
     return (**argvp + 2);	/* operand immediately follows */
   if ((--*argcp) <= 0) {	/* no operand */
     error("command-line option operand missing.");
-    exit(8);
+    exit(2);
   }
   return (*(++(*argvp)));	/* operand is next word */
 }
@@ -958,7 +958,7 @@ interpret(char *line)
 
   default:
     error("unknown command '%1' on line %2", str1, linenum);
-    exit(8);
+    exit(EXIT_FAILURE);
     break;
   };
 }

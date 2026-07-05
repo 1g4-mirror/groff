@@ -1,5 +1,14 @@
 2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/grn/main.cpp (operand): Exit with status 2, not 8,
+	when command-line option argument is missing.
+	(interpret): Exit with POSIX `EXIT_FAILURE` status, not 8, when
+	reading an unrecognized command keyword.
+
+	* NEWS: Document these changes in behavior.
+
+2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grn]: Boolify.
 
 	* src/preproc/grn/gprint.h: Delete `TRUE` and `FALSE`
