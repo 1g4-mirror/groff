@@ -16932,8 +16932,8 @@ The
 and
 @code{while}
 requests test the truth values of numeric expressions.
-They also support several additional Boolean operators;
-the members of this expanded class are termed
+They also support several additional Boolean operators.
+The members of this expanded class are termed
 @dfn{conditional expressions};
 their truth values are as shown below.
 
@@ -22517,7 +22517,7 @@ GNU
 @command{troff} @c GNU
 doesn't know where the output line will break.
 Later,
-when processesing a pending output line,
+when processing a pending output line,
 GNU
 @command{troff} @c GNU
 has that knowledge,

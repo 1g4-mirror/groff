@@ -2567,9 +2567,10 @@ and
 .RB \[lq] while \[rq]
 requests test the truth values of numeric expressions.
 .
-They also support several additional Boolean operators;
-the members of this expanded class are termed
-.IR "conditional expressions" ;
+They also support several additional Boolean operators.
+.
+The members of this expanded class are termed
+.I "conditional expressions;"
 their truth values are as shown below.
 .
 .
