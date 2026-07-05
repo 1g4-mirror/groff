@@ -1,5 +1,13 @@
 2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (possible_command::build_argv): Use
+	ISO C++98 exceptions to handle heap storage allocation failure.
+	Preprocessor-include C++ "<new>" header file.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/groff/groff.cpp (possible_command::build_argv): Fix
 	code style nits.  Explicitly compare variable of pointer type to
 	ISO C++98 null pointer literal, instead of punning it down to a

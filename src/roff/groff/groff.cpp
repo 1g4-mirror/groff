@@ -38,6 +38,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <sys/types.h> // pid_t
 #include <signal.h> // kill()
 
+#include <new> // std::bad_alloc
+
+// operating system services
 // needed for close(), dup(), execvp(), _exit(), fork(), pipe(), wait()
 #include "posix.h"
 #include "nonposix.h"
@@ -738,7 +741,13 @@ void possible_command::build_argv()
   }
   // Build an argument vector.
   const size_t argv_len = argc + 1;
-  argv = new char *[argv_len];
+  try {
+    argv = new char *[argv_len];
+  }
+  catch (const std::bad_alloc &exc) {
+    fatal("cannot allocate %1 bytes for argument storage",
+	  (argv_len * sizeof(char *)));
+  }
   argv[0] = name;
   for (size_t i = 1; i < argc; i++) {
     argv[i] = p;
