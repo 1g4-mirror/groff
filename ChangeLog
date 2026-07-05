@@ -1,5 +1,16 @@
 2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/groff/groff.cpp (possible_command::build_argv): Fix
+	code style nits.  Explicitly compare variable of pointer type to
+	ISO C++98 null pointer literal, instead of punning it down to a
+	Boolean.  Convert type of local variables `len`, `argc` and
+	{loop locals} `i` from `int` to `size_t`, since they're used as
+	or compared to array indices.  Lift computation of `argc + 1`
+	into a new `const` `size_t` variable `argv_len`, for the same
+	reason and to prepare for a forthcoming change.
+
+2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/grn/main.cpp (operand): Exit with status 2, not 8,
 	when command-line option argument is missing.
 	(interpret): Exit with POSIX `EXIT_FAILURE` status, not 8, when

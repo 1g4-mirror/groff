@@ -724,22 +724,23 @@ void possible_command::insert_args(string s)
 
 void possible_command::build_argv()
 {
-  if (argv)
+  if (argv != 0 /* nullptr */)
     return;
   // Count the number of arguments.
-  int len = args.length();
-  int argc = 1;
+  size_t len = args.length();
+  size_t argc = 1;
   char *p = 0 /* nullptr */;
   if (len > 0) {
     p = &args[0];
-    for (int i = 0; i < len; i++)
+    for (size_t i = 0; i < len; i++)
       if (p[i] == '\0')
 	argc++;
   }
   // Build an argument vector.
-  argv = new char *[argc + 1];
+  const size_t argv_len = argc + 1;
+  argv = new char *[argv_len];
   argv[0] = name;
-  for (int i = 1; i < argc; i++) {
+  for (size_t i = 1; i < argc; i++) {
     argv[i] = p;
     p = strchr(p, '\0') + 1;
   }
