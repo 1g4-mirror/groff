@@ -15647,15 +15647,14 @@ as follows.@footnote{@xref{Output Line Annotation}.}
 @endExample
 
 @Defreq {sizes, s1 s2 @dots{} sn [@t{0}]}
-The
-@file{DESC}
-file specifies which type sizes are allowed
-by the output device;@footnote{@xref{DESC File Format}.}
-Use the
-@code{sizes}
-request to change the set of sizes GNU
+Set the available type sizes
+GNU
 @command{troff} @c GNU
-permits.
+permits.@footnote{The
+output device's
+@file{DESC}
+file specifies which type sizes are normally allowed;
+@ref{DESC File Format}.}
 Arguments are
 in scaled points.@footnote{@xref{Using Fractional Type Sizes}.}
 Each can be a single type size
