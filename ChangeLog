@@ -1,5 +1,13 @@
 2026-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (suppress_node::suppress_node):
+	Initialize `position` with a valid value; while typed `char`, it
+	is actually an enumerated type in disguise, and zero (or `\0`)
+	is not a valid value.  See
+	`src/roff/troff/input.cpp:do_suppress()`.
+
+2026-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Add unit test for `fzoom` request.
 
 	* src/roff/groff/tests/fzoom-request-works.sh: Do it.

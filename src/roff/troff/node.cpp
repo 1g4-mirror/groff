@@ -4489,7 +4489,7 @@ tfont *device_extension_node::get_tfont()
 
 suppress_node::suppress_node(int on_or_off, int issue_limits)
 : is_on(on_or_off), emit_limits(issue_limits),
-  filename(0 /* nullptr */), position(0), image_id(0)
+  filename(0 /* nullptr */), position('l'), image_id(0)
 {
 }
 
