@@ -1,3 +1,10 @@
+2026-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am (texinfo-all): New convenience target builds all
+	rendered forms of our Texinfo manual.  Thanks to the new line
+	layout diagram, much of groff is now a prerequisite for
+	generating it.
+
 2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am: Move definition of `DOC_LL` macro earlier...

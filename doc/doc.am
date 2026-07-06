@@ -640,6 +640,11 @@ $(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 
 all: $(GROFF_INFO) $(GROFF_TXT) $(GROFF_HTML) $(GROFF_DVI) $(GROFF_PDF)
 
+# This is a convenience target for (re-)generating all the rendered
+# forms of our Texinfo manual.
+texinfo-all: $(GROFF_INFO) $(GROFF_TXT) $(GROFF_HTML) $(GROFF_DVI) \
+  $(GROFF_PDF)
+
 # Distribute the manual in source form as well.
 EXTRA_DIST += doc/groff.texi.in doc/groff.texi doc/gpl.texi doc/fdl.texi
 MAINTAINERCLEANFILES += doc/groff.texi
