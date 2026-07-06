@@ -1130,14 +1130,14 @@ contains unsupported escape sequence
 .  el         .nr an*RE-requested-level (\\n[an*inset-level] - 1)
 .  ie \\n[.$] \{\
 .    if (\\n[an*RE-requested-level] = \\n[an*inset-level]) \
-.      ds an-RE-problem already at level \\n[an*inset-level]\"
+.      ds an*msg already at level \\n[an*inset-level]\"
 .    if (\\n[an*RE-requested-level] > \\n[an*inset-level]) \
-.      ds an-RE-problem too large\"
+.      ds an*msg too large\"
 .    if (\\n[an*RE-requested-level] < 1) \
-.      ds an-RE-problem too small\"
-.    if d an-RE-problem \
-.      an*style-warn argument """\\$1""" to .\\$0 \\*[an-RE-problem]
-.    rm an-RE-problem
+.      ds an*msg too small\"
+.    if d an*msg \
+.      an*style-warn argument """\\$1""" to .\\$0 \\*[an*msg]
+.    rm an*msg
 .  \}
 .  el .if !(\\n[an*RE-requested-level]) .an*style-warn unbalanced .\\$0
 .  rr an*RE-requested-level

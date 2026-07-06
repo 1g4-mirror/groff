@@ -1,3 +1,8 @@
+2026-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac (RE): Rename "local" macro `an-RE-problem` to
+	`an*msg`.
+
 2026-07-04  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/groff/groff.cpp (possible_command::build_argv): Use
