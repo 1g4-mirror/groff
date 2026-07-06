@@ -140,7 +140,7 @@ struct font_lookup_info {
 };
 
 font_lookup_info::font_lookup_info() : position(FONT_NOT_MOUNTED),
-  requested_position(FONT_NOT_MOUNTED), requested_name(0)
+  requested_position(FONT_NOT_MOUNTED), requested_name(0 /* nullptr */)
 {
 }
 
@@ -1692,8 +1692,10 @@ void troff_output_file::trailer(vunits page_length)
 }
 
 troff_output_file::troff_output_file()
-: current_slant(0), current_height(0), current_fill_color(0),
-  current_stroke_color(0), mounting_position_count(10), tbuf_len(0),
+: current_slant(0), current_height(0),
+  current_fill_color(0 /* nullptr */),
+  current_stroke_color(0 /* nullptr */),
+  mounting_position_count(10), tbuf_len(0),
   has_page_begun(false), cur_div_level(0)
 {
   font_mounting_position = new symbol[mounting_position_count];
@@ -4486,8 +4488,8 @@ tfont *device_extension_node::get_tfont()
 /* suppress_node */
 
 suppress_node::suppress_node(int on_or_off, int issue_limits)
-: is_on(on_or_off), emit_limits(issue_limits), filename(0), position(0),
-  image_id(0)
+: is_on(on_or_off), emit_limits(issue_limits),
+  filename(0 /* nullptr */), position(0), image_id(0)
 {
 }
 
@@ -4971,7 +4973,8 @@ width_list::width_list(hunits w, hunits s)
 }
 
 width_list::width_list(width_list *w)
-: width(w->width), sentence_width(w->sentence_width), next(0)
+: width(w->width), sentence_width(w->sentence_width),
+  next(0 /* nullptr */)
 {
 }
 
