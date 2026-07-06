@@ -6787,7 +6787,7 @@ have been observed in
 @code{roff}
 documents,
 particularly in macro packages employing them as delimiters
-with the output comparison operator
+with an output comparison expression
 to try to avoid collisions
 with the content of arbitrary user-supplied parameters
 (@pxref{Operators in Conditionals}).
@@ -17056,20 +17056,20 @@ and GNU
 @command{troff} @c GNU
 may provide additional operators in the future.}
 
-@cindex output comparison operator
+@cindex output comparison expression
+@cindex comparison expression, output
+@cindex expression, output comparison
 @table @code
 @item @code{'}@var{xxx}@code{'}@var{yyy}@code{'}
 This
-@dfn{output comparison operator}
+@dfn{output comparison expression}
 interpolates a true value
 if formatting the comparands
 @var{xxx}
 and
 @var{yyy}
 produces the same output commands.
-The delimiter need not be a neutral apostrophe:
-the output comparison operator accepts the same delimiters as most
-escape sequences;
+Other delimiters can be used in place of the neutral apostrophes;
 recall @ref{Delimiters}.
 @command{troff} @c generic
 formats

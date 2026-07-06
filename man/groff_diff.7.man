@@ -1875,7 +1875,7 @@ This feature has two applications.
 .
 .
 .IP
-Surround operands to the output comparison operator
+Surround operands to an output comparison expression
 with
 .B \[rs]?\&
 to compare them
@@ -5878,7 +5878,7 @@ keeps track of the nesting depth of escape sequence
 interpolations and other uses of delimiters,
 as in the
 .B tl
-request and the output comparison operator
+request and output comparison expressions
 (that is,
 input like
 .B \[aq]foo\[aq]bar\[aq]

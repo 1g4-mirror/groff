@@ -401,7 +401,7 @@ have been observed in
 .I roff
 documents,
 particularly in macro packages employing them as delimiters
-with the output comparison operator
+with an output comparison expression
 to try to avoid collisions with the content
 of arbitrary user-supplied parameters
 (see subsection \[lq]Conditional expressions\[rq] below).
@@ -2675,7 +2675,7 @@ the formatter performs an
 .
 Shown first in the table above,
 the
-.I output comparison operator
+.I "output comparison expression"
 interpolates a true value if formatting its comparands
 .I s1
 and
