@@ -1,3 +1,12 @@
+2026-07-07  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/node.cpp (zoom_font_request): Refactor.  Call
+	`read_font_identifier()` instead of `read_identifier()` to
+	gather first argument.  Emit error diagnostic on an attempt to
+	apply a zoom factor to a mounting position.  This was already
+	prohibited in 1.24.0, but now, thanks to other refactoring, we
+	can diagnose it more easily.
+
 2026-07-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (suppress_node::suppress_node):

@@ -7239,12 +7239,28 @@ static void zoom_font_request() // .fzoom
     skip_line();
     return;
   }
-  symbol font_name = read_identifier();
-  // has_arg()+read_identifier() should ensure the assertion succeeds.
-  assert(font_name != 0 /* nullptr */);
-  if (is_nonnegative_integer(font_name.contents())) {
-    warning(WARN_FONT, "cannot set zoom factor of a font mounting"
-	    " position");
+  font_lookup_info finfo;
+  if (!read_font_identifier(&finfo)) {
+    font_lookup_error(finfo, "to set its zoom factor");
+    skip_line();
+    return;
+  }
+  if (0 /* nullptr */ == finfo.requested_name) {
+    error("applying a zoom factor to a font mounting position"
+	  " is not yet supported");
+    skip_line();
+    return;
+  }
+  int fpos = next_available_font_mounting_position();
+  if (!(mount_font_at_position(finfo.requested_name, fpos))) {
+    error("cannot mount font '%1' to set a zoom factor for it",
+	  finfo.requested_name);
+    skip_line();
+    return;
+  }
+  if (font_table[fpos]->is_style()) {
+    warning(WARN_FONT, "ignoring request to set font zoom factor on an"
+	    " abstract style");
     skip_line();
     return;
   }
@@ -7254,32 +7270,6 @@ static void zoom_font_request() // .fzoom
     skip_line();
     return;
   }
-  int fpos = next_available_font_mounting_position();
-  if (!(mount_font_at_position(font_name, fpos))) {
-    error("cannot mount font '%1' to set a zoom factor for it",
-	  font_name.contents());
-    skip_line();
-    return;
-  }
-#if 0
-  // This would be a good diagnostic to have, but
-  // mount_font_at_position() is too formally complex to make it easy.
-  // Instead it will fail in the above test on a font named "R", for
-  // instance, when that is literally true but might not help users who
-  // don't understand that "R", "I", "B", and "BI" are (by default)
-  // abstract styles, not fonts in the GNU troff sense.  It is a shame
-  // that a lot of our validation functions are willing only to handle
-  // arguments that they eat from the input stream (i.e., you can't pass
-  // them information you obtained elsewhere).  That design also forces
-  // us to validate request arguments in the order they appear in the
-  // input, and seems unnecessarily inflexible to me.  --GBR
-  if (font_table[fpos]->is_style()) {
-    warning(WARN_FONT, "ignoring request to set font zoom factor on an"
-	    " abstract style");
-    skip_line();
-    return;
-  }
-#endif
   int zoom = 0;
   read_integer(&zoom);
   if (zoom < 0) {
