@@ -1,5 +1,18 @@
 2026-07-08  Nguyễn Gia Phong <cnx@loang.net>
 
+	* src/preproc/eqn/text.cpp: Stop mapping special characters to
+	named entities when outputting MathML.  Preprocessor-include
+	"unicode.h".
+	(special_char_box::output): Use libgroff's
+	`valid_unicode_code_sequence()` to obtain its Unicode sequence
+	representation if it is in groff Unicode special character
+	escape sequence syntax.  If not, use `glyph_name_to_unicode()`
+	to look up its Unicode representation.
+
+	Continues fixing <https://savannah.gnu.org/bugs/?68499>.
+
+2026-07-08  Nguyễn Gia Phong <cnx@loang.net>
+
 	* src/preproc/eqn/box.cpp
 	(half_space_box::output)
 	(full_space_box::output)

@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "eqn.h"
 #include "pbox.h"
 #include "ptable.h"
+#include "unicode.h" // valid_unicode_code_sequence()
 
 struct map {
   const char *from;
@@ -666,9 +667,11 @@ void special_char_box::output()
       printf("\\fP");
   }
   else if (output_format == mathml) {
-    const char *entity = special_to_entity(s);
-    if (entity != NULL)
-      printf("<mo>%s</mo>", entity);
+    const char *unicode_code_point = valid_unicode_code_sequence(s);
+    if (unicode_code_point == NULL)
+      unicode_code_point = glyph_name_to_unicode(s);
+    if (unicode_code_point != NULL)
+      printf("<mo>&#x%s;</mo>", unicode_code_point);
     else
       printf("<merror>unknown eqn/troff special char %s</merror>", s);
   }
