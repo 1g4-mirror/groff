@@ -1,3 +1,20 @@
+2026-07-08  Nguyễn Gia Phong <cnx@loang.net>
+
+	* src/preproc/eqn/box.cpp
+	(half_space_box::output)
+	(full_space_box::output)
+	(thick_space_box::output)
+	(thin_space_box::output):
+	* src/preproc/eqn/other.cpp
+	(overline_char_box::output)
+	(overline_box::output)
+	(underline_char_box::output)
+	(underline_box::output): Emit numeric character references, not
+	named entities, when generating MathML, because GNU eqn supports
+	MathML only when producing XHTML.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?68499>.
+
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp (get_html_entity): Emit

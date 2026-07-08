@@ -184,7 +184,7 @@ void overline_char_box::output()
 	   get_param("x_height"));
   }
   else if (output_format == mathml)
-    printf("<mo>&macr;</mo>");
+    printf("<mo>&#x00AF;</mo>");
 }
 
 void overline_char_box::debug_print()
@@ -240,7 +240,7 @@ void overline_box::output()
   else if (output_format == mathml) {
     printf("<mover accent='false'>");
     p->output();
-    printf("<mo>&macr;</mo></mover>");
+    printf("<mo>&#x00AF;</mo></mover>");
   }
 }
 
@@ -364,7 +364,7 @@ void underline_char_box::output()
     printf("\\v'-%dM/2u'", 7 * get_param("default_rule_thickness"));
   }
   else if (output_format == mathml)
-    printf("<mo>&lowbar;</mo>");
+    printf("<mo>_</mo>");
 }
 
 void underline_char_box::debug_print()
@@ -422,7 +422,7 @@ void underline_box::output()
   else if (output_format == mathml) {
     printf("<munder accent='true'>");
     p->output();
-    printf("<mo>&macr;</mo></munder>");
+    printf("<mo>&#x00AF;</mo></munder>");
   }
 }
 

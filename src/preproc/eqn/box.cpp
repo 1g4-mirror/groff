@@ -654,7 +654,7 @@ void half_space_box::output()
   if (output_format == troff)
     printf("\\h'%dM'", half_space);
   else if (output_format == mathml)
-    printf("<mtext>&ThinSpace;</mtext>");
+    printf("<mtext>&#x2009;</mtext>");
   else
     assert("unimplemented output format");
 }
@@ -669,7 +669,7 @@ void full_space_box::output()
   if (output_format == troff)
     printf("\\h'%dM'", full_space);
   else if (output_format == mathml)
-    printf("<mtext>&ThickSpace;</mtext>");
+    printf("<mtext>&#x205F;&#x200A;</mtext>");
   else
     assert("unimplemented output format");
 }
@@ -684,7 +684,7 @@ void thick_space_box::output()
   if (output_format == troff)
     printf("\\h'%dM'", thick_space);
   else if (output_format == mathml)
-    printf("<mtext>&ThickSpace;</mtext>");
+    printf("<mtext>&#x205F;&#x200A;</mtext>");
   else
     assert("unimplemented output format");
 }
@@ -699,7 +699,7 @@ void thin_space_box::output()
   if (output_format == troff)
     printf("\\h'%dM'", thin_space);
   else if (output_format == mathml)
-    printf("<mtext>&ThinSpace;</mtext>");
+    printf("<mtext>&#x2009;</mtext>");
   else
     assert("unimplemented output format");
 }
