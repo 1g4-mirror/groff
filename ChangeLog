@@ -1,5 +1,14 @@
 2026-07-08  Nguyễn Gia Phong <cnx@loang.net>
 
+	* src/preproc/eqn/text.cpp: Drop dead static data
+	{`entity_table`} , its now unused data type declaration {`struct
+	map`}.
+	(special_to_entity): Drop now unused function.
+
+	Fixes <https://savannah.gnu.org/bugs/?68499>.
+
+2026-07-08  Nguyễn Gia Phong <cnx@loang.net>
+
 	* src/preproc/eqn/text.cpp: Stop mapping special characters to
 	named entities when outputting MathML.  Preprocessor-include
 	"unicode.h".
