@@ -1,7 +1,7 @@
 2026-07-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	* doc/doc.am (install-info-local): Clean out any existing Info
-	files in `$(DESTDIR)$(infodir)`, not `$(DESTDIR)/doc`.
+	* doc/doc.am (install-info-local): Clean out any existing groff
+	Info files in `$(DESTDIR)$(infodir)`, not `$(DESTDIR)/doc`.
 
 	Fixes <https://savannah.gnu.org/bugs/?68498>.  Problem
 	introduced by me in commit d79c3f3a4a, 2021-11-11.
