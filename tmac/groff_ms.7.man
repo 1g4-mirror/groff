@@ -490,7 +490,8 @@ is called.
 .TP
 .BR .RP\~ [ no\-repeat\-info ]\~[ no\-renumber ]
 Use the \[lq]report\[rq]
-(AT&T: \[lq]released paper\[rq])
+(AT&T:
+\[lq]released paper\[rq])
 format for your document,
 creating a separate cover page.
 .
@@ -501,12 +502,12 @@ and abstract,
 but not the date)
 at the top of the first page.
 .
-If the optional
+A
 .B no\-\:\%repeat\-\:\%info
-argument is given,
+argument causes
 .I ms
-produces a cover page but does not repeat any of its information
-subsequently
+to produce a cover page
+without repeating any of its information subsequently
 (but see the
 .B DA
 macro below regarding the date).
@@ -515,21 +516,21 @@ Normally,
 .B RP
 sets the page number following the cover page to\~1.
 .
-Specifying the optional
+Specifying the
 .B no\-\:\%renumber
 argument suppresses this alteration.
 .
-Optional arguments can occur in any order.
+Arguments can occur in any order.
 .
 .I ms
 recognizes
-.B no
+.RB \[lq] no \[rq]
 as a synonym of
 .B no\-\:\%repeat\-\:\%info
 to maintain AT&T compatibility.
 .
 Options other than
-.B no
+.RB \[lq] no \[rq]
 are GNU extensions.
 .
 .
@@ -628,7 +629,6 @@ By default,
 places the word \[lq]ABSTRACT\[rq] centered and in italics above the
 text of the abstract.
 .
-The optional argument
 .RB \[lq] no \[rq]
 suppresses this heading.
 .
@@ -782,9 +782,9 @@ register.
 .IR mark \~[ width ]]
 Set a paragraph with a left indentation.
 .
-The optional
 .I mark
 is not indented,
+.\" the following line is unique to groff_ms(7)
 is useful in the construction of lists,
 and is empty by default.
 .
@@ -984,10 +984,8 @@ table of contents entries.
 .IR depth "] [" name
 Set an unnumbered heading.
 .
-The optional
 .I depth
-argument is a GNU extension indicating the heading depth corresponding
-to the
+is a GNU extension indicating the heading depth corresponding to the
 .I depth
 argument of
 .BR NH .
@@ -1573,8 +1571,10 @@ Demarcate a table to be processed by the
 .I tbl
 preprocessor.
 .
-The optional
-.BR H "\~argument"
+An
+.B H
+arugment to
+.B TS
 instructs
 .I ms
 to repeat table rows

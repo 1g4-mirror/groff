@@ -3064,7 +3064,7 @@ and consistently formatted bibliographic citations.
 @code{groff} @file{ms}
 is mostly compatible with the documented interface
 and behavior of AT&T Unix Version@tie{}7
-@code{ms}.
+@file{ms}.
 It recreates most extensions from 4.2BSD (Berkeley)
 @c Few changes were made in 4.3, Tahoe, Reno, or 4.4.
 and Research Tenth Edition Unix.
@@ -3111,6 +3111,7 @@ identifiers use only capital letters,
 numerals,
 and
 @samp{-}.
+Macro arguments surrounded by [brackets] are optional.
 
 @menu
 * ms basic information::
@@ -3761,31 +3762,79 @@ Default: @code{\w'000'}
 @cindex document description macros, [@file{ms}]
 
 Only the simplest document lacks a title.@footnote{Distinguish a
-document title from ``titles'', which are what @code{roff} systems call
-headers and footers collectively.}  As its level of sophistication (or
-complexity) increases, it tends to acquire a date of revision,
-explicitly identified authors, sponsoring institutions for authors, and,
-at the rarefied heights, an abstract of its content.  Define these
-data by calling the macros below in the order shown; @code{DA} or
-@code{ND} can be called to set the document date (or other identifier)
-at any time before (a) the abstract, if present, or (b) its information
-is required in a header or footer.  Use of these macros is optional,
-except that @code{TL} is mandatory if any of @code{RP}, @code{AU},
-@code{AI}, or @code{AB} is called, and @code{AE} is mandatory if
-@code{AB} is called.
+document title from ``titles'',
+which are what
+@code{roff}
+systems call headers and footers collectively.}
+As its level of sophistication
+(or complexity)
+increases,
+it tends to acquire a date of revision,
+explicitly identified authors,
+sponsoring institutions for authors,
+and,
+at the rarefied heights,
+an abstract of its content.
+By default,
+@file{ms}
+.I ms
+arranges most of the document description
+(the title,
+author names and institutions,
+and abstract,
+but not the date)
+at the top of the first page.
+
+Define these
+data by calling the macros below in the order shown;
+@code{DA}
+or
+@code{ND}
+can be called to set the document date
+(or other identifier)
+at any time before
+(a) the abstract,
+if present,
+or
+(b) its information is required in a header or footer.
+Use of these macros is optional,
+except that
+@code{TL}
+is mandatory if any of
+@code{RP},
+@code{AU},
+@code{AI},
+or
+@code{AB}
+is called, and
+@code{AE}
+is mandatory if
+@code{AB}
+is called.
 
 @Defmac {RP, [@code{no-repeat-info}] [@code{no-renumber}], ms}
-Use the ``report'' (@acronym{AT&T}: ``released paper'') format for your
-document, creating a separate cover page.  The default arrangement is to
-place most of the document description (title, author names and
-institutions, and abstract, but not the date) at the top of the first
-page.  If the optional @code{no-repeat-info} argument is given,
-@file{ms} produces a cover page but does not repeat any of its
-information subsequently (but see the @code{DA} macro below regarding
-the date).  Normally, @code{RP} sets the page number following the cover
-page to@tie{}1.  Specifying the optional @code{no-renumber} argument
-suppresses this alteration.
-Optional arguments can occur in any order.
+Use the ``report''
+(@acronym{AT&T}:@:
+``released paper'')
+format for your document,
+creating a separate cover page.
+A
+@code{no-repeat-info}
+argument causes
+@file{ms}
+to produce a cover page
+without repeating any of its information subsequently
+(but see the
+@code{DA}
+macro below regarding
+the date).
+Normally,
+@code{RP}
+sets the page number following the cover page to@tie{}1.
+Specifying the
+@code{no-renumber}
+argument suppresses this alteration.
+Arguments can occur in any order.
 @file{ms}
 recognizes
 @code{no}
@@ -3834,7 +3883,8 @@ page.  This is @code{groff} @file{ms}'s default.
 Begin the abstract.  @file{ms} collects text on input lines following
 this call into the abstract until reaching an @code{AE} call.  By
 default, @file{ms} places the word ``ABSTRACT'' centered and in italics
-above the text of the abstract.  The optional argument @code{no}
+above the text of the abstract.
+@code{no}
 suppresses this heading.
 @endDefmac
 
@@ -3978,7 +4028,6 @@ in the @code{PI} register.
 
 @Defmac {IP, [@Var{mark} [@Var{width}]], ms}
 Set a paragraph with a left indentation.
-The optional
 @var{mark}
 is not indented and is empty by default.
 It has several applications;
@@ -4148,8 +4197,11 @@ labels, and @code{XS}/@code{XA}/@code{XE} table of contents entries.
 @Defmac {SH, [@Var{depth}] [@Var{name}], ms}
 Set an unnumbered heading.
 
-The optional @var{depth} argument is a GNU extension indicating the
-heading depth corresponding to the @var{depth} argument of @code{NH}.
+@var{depth}
+is a GNU extension indicating the heading depth corresponding to the
+@var{depth}
+argument of
+@code{NH}.
 It matches the type size at which the heading is set to that of a
 numbered heading at the same depth when the @code{GROWPS} and
 @code{PSINCR} heading size adjustment mechanism is in effect.
@@ -4759,13 +4811,26 @@ The formatter interprets them as macro calls.
 
 @DefmacList {TS, [@code{H}], ms}
 @DefmacListEndx {TE, , ms}
-Demarcate a table to be processed by the @code{tbl} preprocessor.  The
-optional argument@tie{}@code{H} to @code{TS} instructs @file{ms} to
-repeat table rows (often column headings) at the top of each new page
-the table spans, if applicable; calling the @code{TH} macro marks the
-end of such rows.  The GNU @cite{tbl@r{(1)}} man page provides a
-comprehensive reference to the preprocessor and offers examples of its
-use.
+Demarcate a table to be processed by the
+@code{tbl}
+preprocessor.
+An
+@code{H}
+argument to
+@code{TS}
+instructs
+@file{ms}
+to repeat table rows
+(often column headings)
+at the top of each new page the table spans,
+if applicable;
+calling the
+@code{TH}
+macro marks the end of such rows.
+The GNU
+@cite{tbl@r{(1)}}
+man page provides a comprehensive reference
+to the preprocessor and offers examples of its use.
 @endDefmac
 
 @DefmacList {PS, @var{h} @var{v}, ms}

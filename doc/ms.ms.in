@@ -170,6 +170,9 @@ numerals,
 and
 .CW \- \[rq]. \[lq]
 .
+Macro arguments surrounded by [brackets] are optional.
+.
+.
 .PP
 To turn on PDF features please use
 .CW -rPDFFEAT=1
@@ -792,16 +795,17 @@ _
 .TH
 \&.RP \f[R][\f[I]option\f[] .\|.\|.]	T{
 Use the \[lq]report\[rq]
-(AT&T: \[lq]released paper\[rq])
+(AT&T:
+\[lq]released paper\[rq])
 format for your document,
 creating a separate cover page.
 .
-If the optional
+A
 .CW no\-\:\%repeat\-\:\%info
-argument is given,
+argument causes
 .I ms
-produces a cover page but does not repeat any of its information
-subsequently
+to produce a cover page
+without repeating any of its information subsequently
 (but see the
 .CW DA
 macro below regarding the date).
@@ -810,21 +814,21 @@ Normally,
 .CW RP
 sets the page number following the cover page to\~1.
 .
-Specifying the optional
+Specifying the
 .CW no\-\:\%renumber
 argument suppresses this alteration.
 .
-Optional arguments can occur in any order.
+Arguments can occur in any order.
 .
 .I ms
 recognizes
-.CW no
+.CW no \*[U] \*[Q]
 as a synonym of
 .CW no\-\:\%repeat\-\:\%info
 to maintain AT&T compatibility.
 .
 Options other than
-.CW no
+.CW no \*[U] \*[Q]
 are GNU extensions.
 T}
 _
@@ -915,8 +919,7 @@ By default,
 places the word \[lq]ABSTRACT\[rq] centered and in italics above the
 text of the abstract.
 .
-The optional argument
-.CW no
+.CW no \*[U] \*[Q]
 suppresses this heading.
 T}
 _
@@ -1179,7 +1182,6 @@ _
 \&.IP \f[R][\f[I]mark\f[] [\f[I]width\f[]]]	T{
 Set a paragraph with a left indentation.
 .
-The optional
 .I mark
 is not indented and is empty by default.
 .
@@ -1496,10 +1498,8 @@ _
 \&.SH [\f[I]depth\f[]] \fI\m[red][name]\m[]\fP	T{
 Set an unnumbered heading.
 .
-The optional
 .I depth
-argument is a GNU extension indicating the heading depth corresponding
-to the
+is a GNU extension indicating the heading depth corresponding to the
 .I depth
 argument of
 .CW NH .
@@ -2590,7 +2590,7 @@ Demarcate a table to be processed by the
 .I tbl
 preprocessor.
 .
-The optional
+An
 .CW H
 argument to
 .CW TS
@@ -3726,7 +3726,7 @@ Each entry is associated with
 a
 .I page-number
 of
-.CW no
+.CW no \*[U] \*[Q]
 prevents a leader and page number from being emitted for that entry.
 .
 Use of
@@ -3757,7 +3757,7 @@ _
 Switch to single-column layout.
 .
 Unless
-.CW no
+.CW no \*[U] \*[Q]
 is specified,
 center and interpolate
 .CW \[rs]*[TOC]
@@ -3772,7 +3772,7 @@ the page number format to lowercase Roman numerals,
 and call
 .CW PX
 (with a
-.CW no
+.CW no \*[U] \*[Q]
 argument,
 if present).
 T}
