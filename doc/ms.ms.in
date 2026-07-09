@@ -59,6 +59,14 @@
 .  ds RH \\n[%]\"
 .\}
 .ds CF groff @VERSION@\"
+.de pdf-feature-begin
+.ds saved-color \\n[.m]
+.gcolor red
+..
+.de pdf-feature-end
+.gcolor \\*[saved-color]
+.rm saved-color
+..
 .RP
 .TL
 Using
@@ -545,9 +553,11 @@ the table of contents between the cover page and the body text.
 .
 Today,
 page resequencing is more often done in the digital domain,
-\m[red]and if you use a separate title page with
+.pdf-feature-begin
+and if you use a separate title page with
 .XR RP "" "" RP
-the TOC will be positioned immediately after the title.\m[black]
+the TOC will be positioned immediately after the title.
+.pdf-feature-end
 .
 An index works similarly,
 but because it typically needs to be sorted after collection,
@@ -1359,11 +1369,13 @@ and then
 .CW ".NH\~3" \[rq]\c \[lq]
 .I "groff ms" "" \[em]
 emits a warning on the standard error stream.
-\m[red]The
+.pdf-feature-begin
+The
 .I name
 is used to assign a named destination for use with the
 .XR XR "" "" \f[CR].XR\f[]
-command.\m[black]
+command.
+.pdf-feature-end
 T}
 \&.NH S \f[I]heading-depth-index\f[]\f[R] .\|.\|.\f[]	T{
 Alternatively,
@@ -1510,11 +1522,13 @@ numbered heading at the same depth when the
 and
 .CW \[rs]n[PSINCR]
 heading size adjustment mechanism is in effect.
-\m[red]The
+.pdf-feature-begin
+The
 .I name
 is used to assign a named destination for use with the
 .XR XR "" "" \f[CR].XR\f[]
-command.\m[black]
+command.
+.pdf-feature-end
 T}
 .TE
 .
