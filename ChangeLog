@@ -1,3 +1,12 @@
+2026-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/s.tmac (cov*tl-au-print, ID, par@reset, par@TL, par@AU)
+	(par@AI): Cancel temporary indentation before issuing centering
+	request, preventing issue of warning in category "style" from
+	formatter.
+
+	See <https://savannah.gnu.org/bugs/?68285>.
+
 2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (token::description):
