@@ -44,7 +44,7 @@
 .ds FR 1
 .nr TC-MARGIN \w'00' \" expect 2-digit page numbers at most
 .ds header-title Using \f[I]groff\f[] with the \f[I]ms\f[] macros\"
-.ds date April 2026\"
+.ds date July 2026\"
 .ND \*[date]
 .ds CH \" empty
 .ie t \{\
@@ -4137,6 +4137,20 @@ cb cb
 lf(CR) lx .
 Macro	Description
 _
+\m[red].XM \f[I]name\f[] [\f[I]text\f[]]\m[]	T{
+Mark a particular position in the document with a
+.I name .
+Any
+.I text
+given will be used to replace a trailing expansion character in an
+.CW .XR
+command which references the
+.I name .
+It is useful if you wish to name an arbitrary location in the
+document, so you can setup a link to a picture, diagram or even
+a single paragraph.
+T}
+_
 \m[red].XR \f[I]name\f[] \f[R][\f[I]after\f[] [\f[I]before\f[] \
 [\f[I]hotlink-text\f[]]]]\m[]	T{
 The
@@ -4170,20 +4184,6 @@ Which is initially set to
 \*[Q]see: +\*[U].
 (Note the expansion character).
 But you can change it.
-T}
-_
-\m[red].XM \f[I]name\f[] [\f[I]text\f[]]\m[]	T{
-Mark a particular position in the document with a
-.I name .
-Any
-.I text
-given will be used to replace a trailing expansion character in an
-.CW .XR
-command which references the
-.I name .
-It is useful if you wish to name an arbitrary location in the
-document, so you can setup a link to a picture, diagram or even
-a single paragraph.
 T}
 .TE
 .LP
