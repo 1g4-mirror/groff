@@ -1100,6 +1100,8 @@ and neutral double quotes otherwise.
 is the left quote and
 .CW \[rs]*[U]
 the right.
+.
+These are Berkeley extensions.
 T}
 \[rs]*[U]	\^
 .TE

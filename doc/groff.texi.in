@@ -3943,9 +3943,13 @@ Interpolate an em dash.
 
 @DefmpstrList {Q, ms}
 @DefmpstrListEndx {U, ms}
-Interpolate typographer's quotation marks where available, and neutral
-double quotes otherwise.  @code{\*Q} is the left quote and @code{\*U}
+Interpolate typographer's quotation marks where available,
+and neutral double quotes otherwise.
+@code{\*Q}
+is the left quote and
+@code{\*U}
 the right.
+These are Berkeley extensions.
 @endDefmpstr
 
 @c ---------------------------------------------------------------------

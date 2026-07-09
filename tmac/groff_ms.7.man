@@ -718,6 +718,8 @@ is the left quote and
 .B \[rs]*[U]
 the right.
 .
+These are Berkeley extensions.
+.
 .
 .\" ====================================================================
 .SS Paragraphs
