@@ -1331,7 +1331,7 @@ cb cb
 lf(CR) lx .
 Macro	Description
 _
-\&.NH [\f[I]depth\f[]] \fI\m[red][name]\m[]\fP	T{
+\&.NH \f[R][\f[I]depth\f[] \m[red][\f[I]name\f[]]\m[]]	T{
 Set an automatically numbered heading.
 .
 .I ms
@@ -1507,7 +1507,7 @@ cb cb
 lf(CR) lx .
 Macro	Description
 _
-\&.SH [\f[I]depth\f[]] \fI\m[red][name]\m[]\fP	T{
+\&.SH \f[R][\f[I]depth\f[] \m[red][\f[I]name\f[]]\m[]]	T{
 Set an unnumbered heading.
 .
 .I depth
@@ -4137,7 +4137,8 @@ cb cb
 lf(CR) lx .
 Macro	Description
 _
-\m[red].XR \fIname\fP [\fIafter\fP [\fIbefore\fP [\fIhotlink-text\fP]]]\m[]	T{
+\m[red].XR \f[I]name\f[] \f[R][\f[I]after\f[] [\f[I]before\f[] \
+[\f[I]hotlink-text\f[]]]]\m[]	T{
 The
 .I name
 parameter should match a
@@ -4171,7 +4172,7 @@ Which is initially set to
 But you can change it.
 T}
 _
-\m[red].XM \fIname\fP [\fItext\fP]\m[]	T{
+\m[red].XM \f[I]name\f[] [\f[I]text\f[]]\m[]	T{
 Mark a particular position in the document with a
 .I name .
 Any
