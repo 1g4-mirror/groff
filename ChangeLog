@@ -1,3 +1,13 @@
+2026-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/s.tmac (RP): When formatting with PDF features, assign
+	the cover page a page number starting with "T-" to avoid
+	collision with page 1 of the main matter.  This is a
+	quality-of-life improvement when using PDF viewer applications,
+	and the sequence "T-1", "T-2", ..., appears to be the convention
+	in the PDF world for numbering pages prior to front matter
+	numbered with lowercase Roman numerals.
+
 2026-07-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (cov*tl-au-print, ID, par@reset, par@TL, par@AU)
