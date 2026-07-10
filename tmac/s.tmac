@@ -107,7 +107,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .ds spdf:txt_default see: +
 .if \n[PDFFEAT]=1 \{\
 .nr PDFHREF.VIEW.LEADING  10.0p
-.nr gottitle*pdf 0
+.nr cov*got-title 0
 .ds pdf:curcol default
 .\}
 .
@@ -331,7 +331,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  if \\n[cov*rp-no-repeat-info]=1 .nr cov*pdf 1
 .  pdfpagename title
 .  pdfpagenumbering Decimal T-
-.  nr gottitle*pdf 1
+.  nr cov*got-title 1
 .
 .\}
 ..
@@ -2061,7 +2061,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
 .\" print the table of contents on page i
 .de TC
-.  if \\n[PDFFEAT]=1 .if \\n[gottitle*pdf] .pdfswitchtopage after title
+.  if \\n[PDFFEAT]=1 .if \\n[cov*got-title] .pdfswitchtopage after title
 .P1
 .pg@begin 1 i
 .PX \\$1

@@ -1,5 +1,11 @@
 2026-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/s.tmac: Trivially refactor.  Rename `gottitle*pdf`
+	register to `cov*got-title` to situate it within a documented
+	groff ms name space.
+
+2026-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/s.tmac (RP): When formatting with PDF features, assign
 	the cover page a page number starting with "T-" to avoid
 	collision with page 1 of the main matter.  This is a
