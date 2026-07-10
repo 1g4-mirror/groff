@@ -3069,7 +3069,7 @@ it may be compressed and/or available in additional formats.
 .TP
 .I @DOCDIR@/\:ms\:.ms
 .TQ
-.I @DOCDIR@/\:ms\:.ps
+.I @DOCDIR@/\:ms\:.pdf
 \[lq]Using
 .I groff
 with the
