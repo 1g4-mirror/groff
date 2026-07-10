@@ -68,6 +68,15 @@
 .gcolor \\*[saved-color]
 .rm saved-color
 ..
+.de man-ref
+.ie \\n[PDFFEAT] \{\
+.  ie (\\n[.$] > 2) \
+.    pdfhref W -D "man:\\$1(\\$2)" -A \\$3 -- \f[I]\\$1\f[](\\$2)
+.  el \
+.    pdfhref W -D "man:\\$1(\\$2)" -- \f[I]\\$1\f[](\\$2)
+.\}
+.el \f[I]\\$1\f[](\\$2)\\$3\"
+..
 .RP
 .TL
 Using
@@ -239,10 +248,10 @@ return to this manual.
 .
 .PP
 Format the document with the
-.I groff (1)
+.man-ref groff 1
 command.
 .
-.I nroff (1)
+.man-ref nroff 1
 can be useful for previewing.
 .
 .
@@ -366,7 +375,7 @@ documents like this one tend to use only a few of
 .I groff 's
 many requests and escape sequences;
 see the
-.I groff (7)
+.man-ref groff 7
 man page for complete lists.
 .
 .
@@ -710,7 +719,7 @@ the values shown are for typesetters using U.S.\& letter paper,
 and then terminals.
 .
 See section \[lq]Paper format\[rq] of the
-.I groff (1)
+.man-ref groff 1
 man page.
 .
 .
@@ -1057,7 +1066,7 @@ a monospaced family (\[lq]Courier\[rq]).
 The man page for the output driver documents its font repertoire.
 .
 Consult the
-.I groff (1)
+.man-ref groff 1
 man page for lists of available output devices and their drivers.
 .
 .
@@ -1093,8 +1102,7 @@ entered with the keyboard.
 These and many others are available as special character escape
 sequences\*[-]see
 the
-.ie \n[PDFFEAT]>0 .pdfhref W -D "man:/7/groff_char" -- \f[I]groff_char\f[](7)
-.el .I groff_char (7)
+.man-ref groff_char 7
 man page.
 .
 .TS
@@ -2619,7 +2627,7 @@ calling the
 macro marks the end of such rows.
 .
 The GNU
-.I tbl (1)
+.man-ref tbl 1
 man page provides a comprehensive reference to the preprocessor and
 offers examples of its use.
 T}
@@ -2634,7 +2642,7 @@ T{
 T}	T{
 .CW PS
 marks the start of a
-.I pic (1)
+.man-ref pic 1
 preprocessor
 diagram;
 either of
@@ -2647,7 +2655,7 @@ the latter with \[lq]flyback\[rq] to the vertical position at its top.
 Create
 .I pic
 input manually or with a program such as
-.I xfig (1).
+.man-ref xfig 1 .
 .
 .I h
 and
@@ -2689,7 +2697,7 @@ right-aligns any
 .I label .
 .
 See
-.I eqn (1).
+.man-ref eqn 1 .
 T}
 _
 T{
@@ -2702,7 +2710,7 @@ Demarcate a bibliographic citation to be processed by the
 preprocessor.
 .
 The GNU
-.I refer (1)
+.man-ref refer 1
 man page provides a comprehensive reference to the preprocessor and the
 format of its bibliographic database.
 T}
@@ -3226,8 +3234,7 @@ Swedish.
 Load the desired localization macro package after
 .I ms ;
 see the
-.ie \n[PDFFEAT]>0 .pdfhref W -D "man:/5/groff_tmac" -- \fIgroff_tmac\fP(5)
-.el .I groff_tmac (5)
+.man-ref groff_tmac 5
 man page.
 .
 .
@@ -3288,8 +3295,7 @@ The minus sign glyph can also be accessed by the shorthand
 .CW \[rs]\[mi] .
 .
 These and many others are documented in the
-.ie \n[PDFFEAT]>0 .pdfhref W -D "man:/7/groff_char" -- \fIgroff_char\fP(7)
-.el .I groff_char (7)
+.man-ref groff_char 7
 man page.
 .
 .
@@ -3652,16 +3658,14 @@ document.
 The table of contents can then be resequenced to its desired location
 by physically rearranging the pages of a printed document,
 or as part of post-processing\[em]with a
-.I sed (1)
+.man-ref sed 1
 script to reorder the pages in
 .I troff 's
 output,
 with
-.ie \n[PDFFEAT]>0 .pdfhref W -D "man:/1/pdfjam" -- \fIpdfjam\fP(1)
-.el .I pdfjam (1)
+.man-ref pdfjam 1
 or with
-.ie \n[PDFFEAT]>0 .pdfhref W -D "man:/1/gropdf" -A 's -- \fIgropdf\fP(1)
-.el .I gropdf (1)'s
+.I gropdf 1 's
 .CW pdfswitchtopage
 macro,
 for example.
@@ -4394,7 +4398,7 @@ Register values are converted to and stored as basic units.
 See \[lq]Measurements\[rq] in the
 .I groff
 Texinfo manual or in
-.I groff (7).
+.man-ref groff 7 .
 .FE
 .
 This threshold makes use of a scaling unit with these parameters
@@ -4649,8 +4653,7 @@ documents;
 contemporary ones should not use them because they can render poorly.
 .
 See
-.ie \n[PDFFEAT]>0 .pdfhref W -D "man:/7/groff_char" -- \fIgroff_char\fP(7)
-.el .I groff_char (7)
+.man-ref groff_char 7
 instead.
 .
 .
