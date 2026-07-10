@@ -1,4 +1,5 @@
 .\" groff -ept -ms
+.\" groff -ept -r PDFFEAT=1 -ms -T pdf
 .\" nroff -t -rLL=$(stty size | cut -f2 -d' ')n -ms
 .\"
 .\" Copyright 2001-2026 Free Software Foundation, Inc.
@@ -99,7 +100,8 @@ several paragraph styles,
 a variety of text styling options,
 footnotes,
 multi-column page layouts,
-and support for PDF features when using -Tpdf.
+and support for PDF features when using
+.CW -Tpdf . \" omitting the space after "T" fits better
 .
 .I ms
 supports the
@@ -125,6 +127,8 @@ and Research Tenth Edition Unix.
 .
 .
 .\" ------------------------- End of cover page ------------------------
+.\" I feel so dirty, but this fits both example boxes on the page.
+.if t .sp -0.5625v
 .NH 1
 Introduction
 .XS
@@ -180,14 +184,10 @@ and
 .
 Macro arguments surrounded by [brackets] are optional.
 .
-.
-.PP
-To turn on PDF features please use
-.CW -rPDFFEAT=1
-in the groff command.
-Changes to the operation of
-.I ms
-when PDFFEAT is on are shown in \m[red]red\m[] below.
+Setting the register
+.CW PDFFEAT
+to 1 on the command line enables PDF features,
+shown in \m[red]red\m[] below.
 .
 .
 .KS

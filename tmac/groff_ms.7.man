@@ -91,7 +91,9 @@ automatically numbered headings,
 several paragraph styles,
 a variety of text styling options,
 footnotes,
-and multi-column page layouts.
+multi-column page layouts,
+and support for PDF features when using
+.RB \[lq] "\-T pdf" \|\[rq].
 .
 .I ms
 supports the
@@ -104,14 +106,6 @@ preprocessors for inclusion of tables,
 mathematical equations,
 diagrams,
 and consistently formatted bibliographic citations.
-If the document is intended to be a pdf (by
-using
-.BR -Tpdf ),
-extra pdf features can be enabled by using
-.B -rPDFFEAT=1
-on the command line.
-This will turn on a bookmark panel, clickable
-TOC entries, and other pdf features described below.
 .
 .P
 .I "groff ms"

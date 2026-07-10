@@ -3049,7 +3049,9 @@ automatically numbered headings,
 several paragraph styles,
 a variety of text styling options,
 footnotes,
-and multi-column page layouts.
+multi-column page layouts,
+and support for PDF features when using
+@samp{-T pdf}.
 @file{ms}
 supports the
 @command{tbl},
@@ -3112,6 +3114,10 @@ numerals,
 and
 @samp{-}.
 Macro arguments surrounded by [brackets] are optional.
+Setting the register
+@code{PDFFEAT}
+to 1 on the command line enables PDF features.
+@c We don't mess with red text in the Texinfo version of this material.
 
 @menu
 * ms basic information::
