@@ -1,5 +1,17 @@
 2026-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/s.tmac (TC): Fix code style nit.  De-pessimize by
+	handling multiple numerical expression evaluations together with
+	the `&` logical "and" operator to connect them.  `.if ... .if`
+	is a legitimate pattern, but only necessary when different kinds
+	of expressions need to be evaluated; in *roff the three kinds
+	are numeric expressions, output comparison expressions, and the
+	somewhat vaguely named "conditional expressions" (`.if d mac`,
+	`.if t`, and so forth).  This way we avoid a trip through the
+	parser's main loop.
+
+2026-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/s.tmac: Trivially refactor.  Rename `gottitle*pdf`
 	register to `cov*got-title` to situate it within a documented
 	groff ms name space.
