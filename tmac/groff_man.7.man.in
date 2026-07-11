@@ -796,12 +796,10 @@ register.
 .
 .B RS
 calls can nest;
-each increments by\~1 the
-.I level
-used by
+each increments by\~1 the inset level used by
 .BR RE .
 .
-The level prior to any
+The inset level prior to any
 .B RS
 call is\~1.
 .
@@ -3905,6 +3903,10 @@ strings in 2025.
 .\" https://github.com/9fans/plan9port/commit/\
 .\"  e5b5757e640371974d2e70144c8e59c6a5b613f6
 .
+.I groff
+1.25 (2006) introduced
+.BR LS / LE .
+.
 .
 .br
 .ne 4v
@@ -4144,7 +4146,7 @@ see
 If the
 .B MF
 string ends in \[lq]I\[rq],
-the package assumes it to be an slanted typeface,
+the package assumes it to be a slanted typeface,
 and applies italic corrections before and after man page topics and
 identifiers.
 .
