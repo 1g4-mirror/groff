@@ -8866,43 +8866,45 @@ static void set_character_flags_request() // .cflags
     return;
   }
   int flags;
-  if (read_integer(&flags)) {
-    if ((flags < 0) || (flags > charinfo::CFLAGS_MAX)) {
-      warning(WARN_RANGE, "character flags must be in range 0..%1,"
-	      " got %2", charinfo::CFLAGS_MAX, flags);
-      skip_line();
-      return;
+  if (!read_integer(&flags)) {
+    skip_line();
+    return;
+  }
+  if ((flags < 0) || (flags > charinfo::CFLAGS_MAX)) {
+    warning(WARN_RANGE, "character flags must be in range 0..%1,"
+	    " got %2", charinfo::CFLAGS_MAX, flags);
+    skip_line();
+    return;
+  }
+  if (((flags & charinfo::ENDS_SENTENCE)
+	&& (flags & charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE))
+      || ((flags & charinfo::ALLOWS_BREAK_BEFORE)
+	&& (flags & charinfo::PROHIBITS_BREAK_BEFORE))
+      || ((flags & charinfo::ALLOWS_BREAK_AFTER)
+	&& (flags & charinfo::PROHIBITS_BREAK_AFTER))) {
+    warning(WARN_SYNTAX, "ignoring contradictory character flags: "
+	    "%1", flags);
+    skip_line();
+    return;
+  }
+  if (!has_arg()) {
+    warning(WARN_MISSING, "character flags configuration request"
+	    " expects one or more characters to configure");
+    skip_line();
+    return;
+  }
+  while (tok.is_any_character()) {
+    charinfo *ci = tok.get_charinfo(true /* is_mandatory */);
+    if (0 /* nullptr */ == ci)
+      assert(0 == "attempted to use token without charinfo in"
+	     " character flags assignment request");
+    else {
+      charinfo *tem = ci->get_translation();
+      if (tem != 0 /* nullptr */)
+	ci = tem;
+      ci->set_flags(flags);
     }
-    if (((flags & charinfo::ENDS_SENTENCE)
-	  && (flags & charinfo::IS_TRANSPARENT_TO_END_OF_SENTENCE))
-	|| ((flags & charinfo::ALLOWS_BREAK_BEFORE)
-	  && (flags & charinfo::PROHIBITS_BREAK_BEFORE))
-	|| ((flags & charinfo::ALLOWS_BREAK_AFTER)
-	  && (flags & charinfo::PROHIBITS_BREAK_AFTER))) {
-      warning(WARN_SYNTAX, "ignoring contradictory character flags: "
-	      "%1", flags);
-      skip_line();
-      return;
-    }
-    if (!has_arg()) {
-      warning(WARN_MISSING, "character flags configuration request"
-	      " expects one or more characters to configure");
-      skip_line();
-      return;
-    }
-    while (tok.is_any_character()) {
-      charinfo *ci = tok.get_charinfo(true /* is_mandatory */);
-      if (0 /* nullptr */ == ci)
-	assert(0 == "attempted to use token without charinfo in"
-	       " character flags assignment request");
-      else {
-	charinfo *tem = ci->get_translation();
-	if (tem != 0 /* nullptr */)
-	  ci = tem;
-	ci->set_flags(flags);
-      }
-      tok.next();
-    }
+    tok.next();
   }
   skip_line();
 }

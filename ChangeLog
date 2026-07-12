@@ -1,5 +1,12 @@
 2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (set_character_flags_request):
+	Slightly refactor to handle an error case (first argument is not
+	an integer) differently so as to return early, dropping
+	indentation level of the most complex part of the function.
+
+2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/number.cpp (is_valid_term): Recast error
 	diagnostic message for clarity in cases like "echo .cflags X |
 	groff".
