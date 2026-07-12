@@ -1,5 +1,15 @@
 2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (set_character_flags_request): Change
+	condition of `while` loop from `tok.is_any_character()` to new
+	side-effectful `read_any_character()` function.
+
+	Fixes <https://savannah.gnu.org/bugs/?68510>.  Problem
+	introduced by me in commit 3f0c81a0a7, 24 May.  Thanks to Dave
+	Kemper for the report.
+
+2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Add unit test for `cflags` request.
 
 	* src/roff/groff/tests/cflags-request-works.sh: Do it.
