@@ -1,5 +1,12 @@
 2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Add unit test for `cflags` request.
+
+	* src/roff/groff/tests/cflags-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (set_character_flags_request):
 	Slightly refactor to handle an error case (first argument is not
 	an integer) differently so as to return early, dropping
