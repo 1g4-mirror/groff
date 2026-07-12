@@ -1,3 +1,10 @@
+2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Add unit test for `hcode` request.
+
+	* src/roff/groff/tests/hcode-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
 2026-07-07  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (zoom_font_request): Refactor.  Call
