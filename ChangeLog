@@ -1,5 +1,25 @@
 2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68511, recovering from a botched
+	refactor.
+
+	* src/roff/troff/input.cpp (read_any_character): New function
+	reads any groff character--ordinary, special, or indexed--from
+	the input stream, skipping any spaces.  While a fairly simple
+	task, it can be done incorrectly nevertheless.  Multiple request
+	handlers can use this.  Start...
+	(set_hyphenation_codes): ...here.  Rearrange "do/while" loop to
+	"while" loop.  Advance the input stream after reading the
+	destination character in a pair.  Failing to do so was the
+	defect.  Simplify an error diagnostic message.  Simplify a
+	conditional code path.
+
+	Fixes <https://savannah.gnu.org/bugs/?68511>.  Problem
+	introduced by me in commit 994fcce775, 24 May.  Thanks to Dave
+	Kemper for the report.
+
+2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Add unit test for `hcode` request.
 
 	* src/roff/groff/tests/hcode-request-works.sh: Do it.

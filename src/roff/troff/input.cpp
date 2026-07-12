@@ -1169,6 +1169,21 @@ static symbol read_crement_and_escape_sequence_parameter(int *incp)
   return symbol(buf);
 }
 
+// Read any groff character--ordinary, special, or indexed, from the
+// input stream, skipping any spaces, returning true if a character is
+// present and false otherwise.
+//
+// Request handlers that don't need their character "arguments"
+// separated by space use this.
+static bool read_any_character() {
+  tok.skip_spaces();
+  bool is_character = tok.is_any_character();
+  if (!is_character && !tok.is_terminator())
+    error("expected ordinary, special, or indexed character, got %1",
+	  tok.description());
+  return is_character;
+}
+
 // In copy mode, we don't tokenize normally; characters on the input
 // stream are typically read into the contents of an existing node (like
 // a string or macro definition), or discarded.  A handful of escape
@@ -8903,8 +8918,7 @@ static void set_hyphenation_codes() // .hcode
     skip_line();
     return;
   }
-  tok.skip_spaces();
-  do {
+  while (read_any_character()) {
     unsigned char cdst = tok.ch();
     if (!tok.is_any_character()) {
       error("cannot apply a hyphenation code to %1", tok.description());
@@ -8922,14 +8936,13 @@ static void set_hyphenation_codes() // .hcode
 	break;
       }
     }
-    tok.skip_spaces();
-    if (tok.is_newline() || tok.is_eof()) {
-      error("hyphenation codes must be specified in pairs");
-      break;
-    }
-    if (!tok.is_any_character()) {
-      error("cannot copy the hyphenation code of a non-character (%1)",
-	    tok.description());
+    tok.next();
+    if (!read_any_character()) {
+      if (tok.is_newline())
+	error("hyphenation codes must be specified in pairs");
+      else
+	error("cannot copy the hyphenation code of %1",
+	      tok.description());
       break;
     }
     unsigned char csrc = tok.ch();
@@ -8951,19 +8964,16 @@ static void set_hyphenation_codes() // .hcode
       }
       new_code = cisrc->get_hyphenation_code();
     }
-    else {
+    else if (csrc == cdst)
       // If assigning a ordinary character's hyphenation code to itself,
       // use its character code point as the value.
-      if (csrc == cdst)
-	new_code = tok.ch();
-    }
+      new_code = tok.ch();
     cidst->set_hyphenation_code(new_code);
     if (cidst->get_translation()
 	&& cidst->get_translation()->is_translatable_as_input())
       cidst->get_translation()->set_hyphenation_code(new_code);
     tok.next();
-    tok.skip_spaces();
-  } while ((!tok.is_newline()) && (!tok.is_eof()));
+  }
   skip_line();
 }
 
