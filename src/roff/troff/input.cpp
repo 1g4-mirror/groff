@@ -3092,7 +3092,7 @@ const char *token::description()
   //   "special character 'bracketrighttp'"
   //   "indexed character -2147483648"
   //   "space character horizontal motion node token"
-  //   "nonexistent special character or class"
+  //   "special character or class"
   // Future:
   //   "character code XXX (U+XXXX)" or similar
   const size_t bufsz
@@ -3171,15 +3171,18 @@ const char *token::description()
       // character or character class names.  Do something about that.
       // (The truncation is visually indicated by the absence of a
       // closing quotation mark.)
+      // constexpr // C++11
       static const char special_character[] = "special character";
+      // constexpr // C++11
       static const char character_class[] = "character class";
-      static const char nonexistent[] = "nonexistent special character"
-					" or class";
+      // constexpr // C++11
+      static const char special_character_or_class[]
+	  = "special character or class";
       const char *ctype = special_character;
       charinfo *ci = get_charinfo(false /* is_mandatory */,
 				  true /* suppress creation */);
       if (0 /* nullptr */ == ci)
-	ctype = nonexistent;
+	ctype = special_character_or_class;
       else if (ci->is_class())
 	ctype = character_class;
       (void) snprintf(buf, bufsz, "%s %c%s%c", ctype, qc, sc, qc);

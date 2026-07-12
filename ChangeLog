@@ -1,5 +1,17 @@
 2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::description): Revise
+	message construction.  When special character syntax `\[foo]` is
+	not backed by an existing object, we don't know if a special
+	character or character class is meant.  Since the constructed
+	description is followed by "is not defined", it's redundant to
+	characterize the token as "nonexistent".  Rename `static`
+	`const` local object `nonexistent` to
+	`special_character_or_class`, and repopulate its contents
+	accordingly.
+
+2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Trivially refactor.
 	(remove_character): Rename this...
 	(remove_character_request): ...to this.
