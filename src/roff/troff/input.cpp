@@ -3157,17 +3157,7 @@ const char *token::description()
     return "a space";
   case TOKEN_SPECIAL_CHAR:
   case TOKEN_DELIMITED_SPECIAL_CHAR:
-    // We normally use apostrophes for quotation in diagnostic messages,
-    // but many special character names contain them.  Fall back to
-    // double quotes if this one does.  A user-defined special character
-    // name could contain both characters; we expect such users to lie
-    // comfortably in the bed they made for themselves.
-    // XXX: duplicates logic in node.cpp:make_glyph_node()
     {
-      const char *sc = nm.contents();
-      char qc = '\'';
-      if (strchr(sc, '\'') != 0 /* nullptr */)
-	qc = '"';
       // TODO: This truncates the names of impractically long special
       // character or character class names.  Do something about that.
       // (The truncation is visually indicated by the absence of a
@@ -3186,7 +3176,11 @@ const char *token::description()
 	ctype = special_character_or_class;
       else if (ci->is_class())
 	ctype = character_class;
-      (void) snprintf(buf, bufsz, "%s %c%s%c", ctype, qc, sc, qc);
+      char quote = '\'';
+      if (nm.contains(quote))
+	quote = '"';
+      (void) snprintf(buf, bufsz, "%s %c%s%c", ctype, quote,
+		      nm.contents(), quote);
       return buf;
     }
   case TOKEN_SPREAD:

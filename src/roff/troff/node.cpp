@@ -5661,23 +5661,17 @@ static node *make_glyph_node(charinfo *s, environment *env,
 		    int(input_code));
 	}
 	else if (s->nm.contents()) {
-	  // We normally use apostrophes for quotation in diagnostic
-	  // messages, but many special character names contain them.
-	  // Fall back to double quotes if this one does.  A user-
-	  // defined special character name could contain both
-	  // characters; we expect such users to lie comfortably in the
-	  // bed they made for themselves.
-	  // XXX: duplicates logic in input.cpp:token::description()
-	  const char *nm = s->nm.contents();
-	  char qc = '\'';
-	  if (strchr(nm, '\'') != 0 /* nullptr */)
-	    qc = '"';
 	  // If the contents are empty, get_char_for_escape_parameter()
 	  // should already have thrown an error.
-	  if (nm[0] != '\0') {
-	    const char *backslash = (nm[1] == '\0') ? "\\" : "";
+	  symbol nm = s->nm;
+	  const char *str = nm.contents();
+	  if (str[0] != '\0') {
+	    char quote = '\'';
+	    if (nm.contains(quote))
+	      quote = '"';
+	    const char *backslash = (str[1] == '\0') ? "\\" : "";
 	    warning(WARN_CHAR, "special character %1%2%3%1 not defined",
-		    qc, backslash, nm);
+		    quote, backslash, str);
 	  }
 	}
       }
