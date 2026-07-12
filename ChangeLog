@@ -1,5 +1,13 @@
 2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Trivially refactor.
+	(remove_character): Rename this...
+	(remove_character_request): ...to this.
+	(init_input_requests): Update wire-uppery of request names to
+	handler functions.
+
+2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (remove_character): Refactor to use
 	new `read_any_character()` function.  Drop now unreachable
 	diagnostic; `read_any_character()` complains if the token on the

@@ -5387,7 +5387,7 @@ static void print_character_request() // .pchar
 // Because `rchar` doesn't require spaces separating its "arguments",
 // we don't use `has_arg()` except initially to determine whether we
 // have any arguments at all.
-static void remove_character() // .rchar
+static void remove_character_request() // .rchar
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "character definition removal request expects"
@@ -10444,7 +10444,7 @@ void init_input_requests()
   init_request("psbb", ps_bbox_request);
   init_request("pso", pipe_source_request);
   init_request("pstream", print_stream_request);
-  init_request("rchar", remove_character);
+  init_request("rchar", remove_character_request);
   init_request("rd", read_from_terminal_request);
   init_request("return", return_macro_request);
   init_request("rm", remove_macro);
