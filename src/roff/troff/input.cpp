@@ -5402,9 +5402,7 @@ static void remove_character_request() // .rchar
   while (read_any_character()) {
     charinfo *ci = tok.get_charinfo(true /* is_mandatory */,
 				    true /* suppress creation */);
-    if (0 /* nullptr */ == ci)
-       warning(WARN_CHAR, "%1 is not defined", tok.description());
-    else {
+    if (ci != 0 /* nullptr */) {
       macro *m = ci->set_macro(0 /* nullptr */);
       if (m != 0 /* nullptr */)
 	delete m;
