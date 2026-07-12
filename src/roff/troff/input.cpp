@@ -3162,6 +3162,7 @@ const char *token::description()
     // double quotes if this one does.  A user-defined special character
     // name could contain both characters; we expect such users to lie
     // comfortably in the bed they made for themselves.
+    // XXX: duplicates logic in node.cpp:make_glyph_node()
     {
       const char *sc = nm.contents();
       char qc = '\'';

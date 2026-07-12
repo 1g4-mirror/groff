@@ -1,5 +1,11 @@
 2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (make_glyph_node): Improve diagnostic
+	message when griping about nonexistent special character with a
+	neutral apostrophe in its identifier.
+
+2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::description): Revise
 	message construction.  When special character syntax `\[foo]` is
 	not backed by an existing object, we don't know if a special
