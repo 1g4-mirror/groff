@@ -1,5 +1,11 @@
 2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/number.cpp (is_valid_term): Recast error
+	diagnostic message for clarity in cases like "echo .cflags X |
+	groff".
+
+2026-07-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #68511, recovering from a botched
 	refactor.
 

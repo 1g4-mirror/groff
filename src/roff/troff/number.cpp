@@ -532,7 +532,7 @@ static bool is_valid_term(units *u,
     *u = 0;
     return !is_mandatory;
   default:
-    error("ignoring invalid numeric expression containing %1",
+    error("numeric expression containing %1 is invalid",
 	  tok.description());
     return false;
   }
