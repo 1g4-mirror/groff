@@ -1,5 +1,12 @@
 2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add accessor for `token` class's `nm` member variable.
+
+	* src/roff/troff/token.h (class token): Declare `get_name()`.
+	(token::get_name): Define `get_name()`.
+
+2026-07-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/node.cpp (make_glyph_node): Improve diagnostic
 	message when griping about nonexistent special character with a
 	neutral apostrophe in its identifier.

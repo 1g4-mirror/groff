@@ -114,6 +114,7 @@ public:
   bool operator!=(const token &); // ditto
   unsigned char ch();
   int character_index();
+  symbol get_name() const;
   charinfo *get_charinfo(bool /* is_mandatory */ = false,
 			 bool /* suppress_creation */ = false);
   bool add_to_zero_width_node_list(node **);
@@ -236,6 +237,11 @@ inline int token::character_index()
 {
   assert(TOKEN_INDEXED_CHAR == type);
   return val;
+}
+
+inline symbol token::get_name() const
+{
+  return nm;
 }
 
 inline bool token::is_node()
