@@ -1,5 +1,9 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* gnulib: Update to stable/2026-07.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am ($(GROFF_HTML)): Use the official GNU stylesheet
 	for our Texinfo manual.
 
