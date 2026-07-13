@@ -11166,13 +11166,13 @@ macro *charinfo::set_macro(macro *m, char_mode cm)
 void charinfo::set_number(int idx)
 {
   assert(idx >= 0);
-  number = idx;
+  number = (idx < 0 ? 0 : idx);
 }
 
 int charinfo::get_number()
 {
   assert(number >= 0);
-  return number;
+  return (number < 0) ? 0 : number;
 }
 
 bool charinfo::contains(int c, bool already_called)

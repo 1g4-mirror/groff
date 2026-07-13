@@ -1,5 +1,12 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::set_number)
+	(charinfo::get_number): Make `NDEBUG` execution traces safer:
+	clamp negative character indices to zero, avoiding undefined
+	formatter behavior.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::set_number): Trivially
 	refactor.  Rename function parameter from `n` to `idx`, to be
 	more expressive and suggest the truth--that it relates to
