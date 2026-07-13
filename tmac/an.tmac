@@ -1205,6 +1205,8 @@ contains unsupported escape sequence
 .  el                    .fam \\*[an*example-family]
 .  \}
 .  ft R
+.  if '\*[.T]'html' \
+.    nop \X'html:<span class="code-display">'
 .  nr an*is-in-example 1
 ..
 .
@@ -1215,6 +1217,8 @@ contains unsupported escape sequence
 .    an*style-warn ignoring .\\$0 while not in example
 .    return
 .  \}
+.  if '\*[.T]'html' \
+.    nop \X'html:</span>'
 .  \" Undo the remappings from `EX`.
 .  if \\n[an*unmap-fonts] \{\
 .    ftr R

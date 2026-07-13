@@ -1,5 +1,16 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (EX, EE): When formatting for HTML, begin and
+	end, respectively, a `span` element employing the new
+	`code-display` class set up in the document header by
+	grohtml(1).
+
+	Fixes <https://savannah.gnu.org/bugs/?68309>.  Thanks to Colin
+	Watson and Stephen Gildea for the reports and to them and Ingo
+	Schwarze for discussion on the groff list.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp
 	(html_printer::writeHeadMetaStyle): Define new class selector
 	`.code-display`.  Use monospaced font family and inherit display
