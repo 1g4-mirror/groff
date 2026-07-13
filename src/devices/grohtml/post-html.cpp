@@ -4957,6 +4957,7 @@ static const char *get_html_entity (unsigned int code)
     switch (code) {
       case 0x0022: return "&quot;";
       case 0x0026: return "&amp;";
+      case 0x0027: return "&apos;";
       case 0x003C: return "&lt;";
       case 0x003E: return "&gt;";
       default: return 0;
