@@ -21,10 +21,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
-#include <stdcountof.h>
-
 #include <ctype.h>
+#include <stdcountof.h>
 #include <stdlib.h>
+
 #include "eqn.h"
 #include "pbox.h"
 #include "ptable.h"
@@ -241,18 +241,21 @@ void char_box::output()
   }
 }
 
+// TODO: boolify
 int char_box::left_is_italic()
 {
   int font_type = char_table[c].font_type;
   return font_type == LETTER_TYPE;
 }
 
+// TODO: boolify
 int char_box::right_is_italic()
 {
   int font_type = char_table[c].font_type;
   return font_type == LETTER_TYPE;
 }
 
+// TODO: boolify
 int char_box::is_char()
 {
   return 1;
@@ -291,15 +294,16 @@ void special_char_box::output()
   }
   else if (output_format == mathml) {
     const char *unicode_code_point = valid_unicode_code_sequence(s);
-    if (unicode_code_point == NULL)
+    if (0 /* nullptr */ == unicode_code_point)
       unicode_code_point = glyph_name_to_unicode(s);
-    if (unicode_code_point != NULL)
+    if (unicode_code_point != 0 /* nullptr */)
       printf("<mo>&#x%s;</mo>", unicode_code_point);
     else
       printf("<merror>unknown eqn/troff special char %s</merror>", s);
   }
 }
 
+// TODO: boolify
 int special_char_box::is_char()
 {
   return 1;

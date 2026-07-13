@@ -1,3 +1,11 @@
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/eqn/text.cpp: Fix code style nits.  Rationalize
+	header file inclusions.  Arrange C standard library header file
+	names in alphabetical order.
+	(special_char_box::output): Spell null pointer constant the
+	idiomatic C++98 way (`0`) instead of as `NULL`.
+
 2026-07-08  Nguyễn Gia Phong <cnx@loang.net>
 
 	* src/preproc/eqn/text.cpp: Drop dead static data
