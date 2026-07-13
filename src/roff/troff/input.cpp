@@ -2687,6 +2687,11 @@ void token::next()
 	// The argument is a glyph index, which is dimensionless.
 	if (!read_delimited_measurement(&val, 0 /* dimensionless */))
 	  break;
+	if (val < 0) {
+	  error("expected nonnegative indexed character value; got %1",
+		val);
+	  break;
+	}
 	type = TOKEN_INDEXED_CHAR;
 	return;
       case 'o':

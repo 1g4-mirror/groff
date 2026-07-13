@@ -1,5 +1,17 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::next): Perform range check on
+	parameter to `\N` escape sequence; throw error diagnostic if it
+	fails.
+
+	Fixes <https://savannah.gnu.org/bugs/?68521>.  Problem
+	introduced by me in commit b039f8c3d1, 2025-03-29, an attempt to
+	improve compatibility with DWB troff.  (But as noted in that
+	commit, DWB troff appears not to _exercise_ its freedom to
+	employ negative character indices.)
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (charinfo::set_number)
 	(charinfo::get_number): Make `NDEBUG` execution traces safer:
 	clamp negative character indices to zero, avoiding undefined
