@@ -1,5 +1,12 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (charinfo::set_number): Trivially
+	refactor.  Rename function parameter from `n` to `idx`, to be
+	more expressive and suggest the truth--that it relates to
+	indexed characters.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/eqn/text.cpp: Fix code style nits.  Rationalize
 	header file inclusions.  Arrange C standard library header file
 	names in alphabetical order.

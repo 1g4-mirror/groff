@@ -11163,10 +11163,10 @@ macro *charinfo::set_macro(macro *m, char_mode cm)
   return tem;
 }
 
-void charinfo::set_number(int n)
+void charinfo::set_number(int idx)
 {
-  assert(n >= 0);
-  number = n;
+  assert(idx >= 0);
+  number = idx;
 }
 
 int charinfo::get_number()
