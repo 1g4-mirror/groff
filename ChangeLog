@@ -1,5 +1,10 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am ($(GROFF_HTML)): Use the official GNU stylesheet
+	for our Texinfo manual.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/Groff-PDF-Features.ms: Rename this...
 	* doc/groff-pdf-features.ms: ...to this.
 

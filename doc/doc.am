@@ -625,6 +625,7 @@ TEXINPUTS="$(doc_srcdir)$(PATH_SEPARATOR)$$TEXINPUTS"
 $(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
+	  --css-ref="https://www.gnu.org/software/gnulib/manual.css" \
 	  -I $(doc_builddir) -I $(doc_srcdir) \
 	  -o $(GROFF_HTML).node $< \
 	&& if test -f "$(srcdir)/$(DOC_GNU_PNG)"; then \
@@ -635,6 +636,7 @@ $(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 	    "$(builddir)/$(DOC_LINE_LAYOUT_PNG)" $(GROFF_HTML).node; \
 	fi \
 	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
+	  --css-ref="https://www.gnu.org/software/gnulib/manual.css" \
 	  -I $(doc_builddir) -I $(doc_srcdir) \
 	  --no-split -o $@ $<
 
