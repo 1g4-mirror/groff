@@ -4965,6 +4965,7 @@ static const char *get_html_entity (unsigned int code)
   } else if (CHARSET_UTF8 == charset_encoding) {
       return to_utf8_string(code);
   } else {
+    if (html4 == dialect) {
     switch (code) {
       case 0x00A0: return "&nbsp;";
       case 0x00A1: return "&iexcl;";
@@ -5206,6 +5207,10 @@ static const char *get_html_entity (unsigned int code)
       default: return (static_cast<bool>(charset_encoding)
 			 ? to_utf8_string(code)
 			 : to_numerical_char_ref(code));
+    }
+    } else {
+      return (static_cast<bool>(charset_encoding)
+	        ? to_utf8_string(code) : to_numerical_char_ref(code));
     }
   }
 }

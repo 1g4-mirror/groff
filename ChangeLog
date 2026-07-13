@@ -1,6 +1,13 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp (get_html_entity): Emit
+	named character entities only for HTML 4, not XHTML, with the
+	exception of the handful recognized by XML, already handled
+	earlier in this function.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp (get_html_entity): Emit
 	`&apos;` for character code 0x27 regardless of `doctype`.  Its
 	omission appears to have been a casualty of the IE4 era (Y2K).
 
