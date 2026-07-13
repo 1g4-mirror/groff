@@ -1,6 +1,16 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/devices/grohtml/post-html.cpp
+	(html_printer::writeHeadMetaStyle): Don't truncate images to the
+	newly limited maximum rendering width.  The browser might
+	downscale it, making it less legible, but should also keep it
+	right-clickable or long-pressable or similar so that our less
+	fuzzy pre-rasterized tbl(1) tables (courtesy of pre-grohtml(1))
+	can be accessed and read at full size.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/devices/grohtml/post-html.cpp
 	(html_printer::writeHeadMetaStyle): Ameliorate horrible UX.
 	grohtml(1) has ignored the media width configured by the
 	full-service macro package or document forever, but employing a
