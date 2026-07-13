@@ -1,5 +1,17 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp
+	(html_printer::writeHeadMetaStyle): Define new class selector
+	`.code-display`.  Use monospaced font family and inherit display
+	properties from parent block.  Define new descendant selector
+	thereof for `p` elements, eliminating vertical margins.
+	Initially this is for use by man(7)'s `EX`/`EE` macros, but
+	might have applications in other packages.
+
+	Begins fixing <https://savannah.gnu.org/bugs/?68309>.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next): Perform range check on
 	parameter to `\N` escape sequence; throw error diagnostic if it
 	fails.
