@@ -1,5 +1,16 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/Groff-PDF-Features.ms: Rename this...
+	* doc/groff-pdf-features.ms: ...to this.
+
+	* doc/doc.am: Update `DOCFILES_INST` and `PROCESSEDDOCFILES_PDF`
+	macro definitions.
+	(doc/Groff-PDF-Features.pdf): Rename this target...
+	(doc/groff-pdf-features.pdf): ...to this.  Update prerequisite
+	per foregoing rename.  Update recipe likewise.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tmac,troff]: Warn about a deprecated font name only if it isn't
 	translated to a non-deprecated name.
 

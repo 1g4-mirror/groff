@@ -72,7 +72,7 @@ DOC_GMP_COVER_PAGE = doc/groff-man-pages-cover.groff
 DOCFILES_INST = \
   doc/me-revisions \
   doc/pic.ms \
-  doc/Groff-PDF-Features.ms
+  doc/groff-pdf-features.ms
 DOCFILES_NOINST = \
   doc/groff-man-pages-cover.groff.in \
   doc/meintro.me.in \
@@ -95,7 +95,7 @@ PROCESSEDDOCFILES_PDF = \
   doc/groff-man-pages.pdf \
   doc/ms.pdf \
   doc/pic.pdf \
-  doc/Groff-PDF-Features.pdf
+  doc/groff-pdf-features.pdf
 PROCESSEDDOCFILES_PS = \
   doc/meref.ps \
   doc/meintro.ps \
@@ -390,11 +390,11 @@ doc/pic.pdf: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS) eqn pic tbl
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_GROFF) -pet -Tpdf -ms -rPDFFEAT=1 $(doc_srcdir)/pic.ms >$@
 
-doc/Groff-PDF-Features.pdf: $(doc_srcdir)/Groff-PDF-Features.ms \
+doc/groff-pdf-features.pdf: $(doc_srcdir)/groff-pdf-features.ms \
   $(TMAC_PACKAGE_MS) eqn pic tbl pdfmom $(DOC_GNU_PNG) font/devpdf/stamp
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_PDFMOM) --roff -tU -P-pa4 -rPDFFEAT=1 -ms -msboxes \
-	-I $(doc_builddir) -I $(doc_srcdir) $(doc_srcdir)/Groff-PDF-Features.ms >$@
+	-I $(doc_builddir) -I $(doc_srcdir) $(doc_srcdir)/groff-pdf-features.ms >$@
 
 doc/webpage.ps: $(DOC_GNU_EPS) tmac/pspic.tmac tmac/www.tmac tbl
 doc/webpage.ps: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
