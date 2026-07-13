@@ -1,5 +1,22 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grohtml/post-html.cpp
+	(html_printer::writeHeadMetaStyle): Ameliorate horrible UX.
+	grohtml(1) has ignored the media width configured by the
+	full-service macro package or document forever, but employing a
+	CSS 'max-width' of--effectively--infinity, makes for painful
+	reading.  Configure the `body` element with a `max-width` of
+	`80ch`, which is a little wide but congrues well with the
+	default width used by groff man(7) and mdoc(7).  Moreover, these
+	packages render nearly all of their content indented, which
+	brings the effective line length down to the 65n-75n range
+	advised by typography experts.  Employ automatic margins on the
+	left and right to center the text on wide browser windows, and a
+	`padding` of 1em for ergonomics on "swipey" devices like
+	tablets.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an.tmac (EX, EE): When formatting for HTML, begin and
 	end, respectively, a `span` element employing the new
 	`code-display` class set up in the document header by

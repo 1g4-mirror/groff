@@ -5711,6 +5711,8 @@ void html_printer::writeHeadMetaStyle (void)
   fputs("       table   { margin-top: 0; margin-bottom: 0; "
 	"vertical-align: top }\n", stdout);
   fputs("       h1      { text-align: center }\n", stdout);
+  fputs("       body    { max-width: 80ch; margin-left: auto; "
+	"margin-right: auto; padding: 1em; }\n", stdout);
   fputs("         .code-display { display: block; "
 	"font-family: monospace; }\n", stdout);
   fputs("         .code-display p { margin-top: 0; margin-bottom: 0;"
