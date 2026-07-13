@@ -5682,27 +5682,18 @@ void html_printer::writeHeadMetaStyle (void)
   else {
     fputs("<?xml version=\"1.0\" encoding=\"", stdout);
     fputs(static_cast<bool>(charset_encoding)
-	    ? "UTF-8" : "us-ascii", stdout);
+	    ? "UTF-8" : "US-ASCII", stdout);
     fputs("\"?>\n", stdout);
-    fputs("<!DOCTYPE html PUBLIC \"-//W3C//"
-	  "DTD XHTML 1.1 plus MathML 2.0//EN\"\n", stdout);
-    fputs(" \"http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd\"\n",
-	  stdout);
-    fputs(" [<!ENTITY mathml \"http://www.w3.org/1998/Math/"
-	  "MathML\">]>\n", stdout);
-
     fputs("<html xmlns=\"http://www.w3.org/1999/xhtml\" "
 	  "xml:lang=\"en\">\n", stdout);
     fputs("<head>\n", stdout);
     fputs("<meta name=\"generator\" "
 	  "content=\"groff -Txhtml, see www.gnu.org\"/>\n", stdout);
     fputs("<meta http-equiv=\"Content-Type\" "
-	  "content=\"text/html; charset=", stdout);
+	  "content=\"application/xhtml+xml; charset=", stdout);
     fputs(static_cast<bool>(charset_encoding)
 	    ? "UTF-8" : "US-ASCII", stdout);
     fputs("\"/>\n", stdout);
-    fputs("<meta name=\"Content-Style\" content=\"text/css\"/>\n",
-	  stdout);
     fputs("<style type=\"text/css\">\n", stdout);
     fputs("       .center { text-align: center }\n", stdout);
     fputs("       .right  { text-align: right }\n", stdout);
