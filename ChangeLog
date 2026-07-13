@@ -1,5 +1,27 @@
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tmac,troff]: Warn about a deprecated font name only if it isn't
+	translated to a non-deprecated name.
+
+	* tmac/ps.tmac: Drop font translations of deprecated names;
+	leave it up to the user to do this.
+
+	* src/roff/troff/env.cpp (environment::select_font): Look up the
+	font's translated name using "node.cpp"'s
+	`get_font_translation()`.  Move check for deprecated font name
+	to follow font translation.
+	* src/roff/troff/node.cpp (get_font_translation): Drop `static`
+	linkage; as noted above, the function needs external visibility
+	now.  Annotate planned future reversal of this change.
+	* src/roff/troff/node.h: Declare `get_font_translation`.
+	Annotate planned future reversal of this change.
+
+	Fixes <https://savannah.gnu.org/bugs/?68345>.  Thanks to Deri
+	James for prompting this (IMO) superior direction for font name
+	deprecation to take.
+
+2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grohtml/post-html.cpp
 	(html_printer::writeHeadMetaStyle): Don't truncate images to the
 	newly limited maximum rendering width.  The browser might

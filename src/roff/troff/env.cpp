@@ -628,9 +628,6 @@ bool environment::select_font(symbol nm)
 {
   if (was_line_interrupted)
     return false;
-  // TODO: Kill this off in groff 1.24.0 release + 2 years.
-  if (is_device_ps_or_pdf)
-    warn_if_font_name_deprecated(nm);
   if (nm == symbol("P") || nm.is_empty()) {
     if (family->resolve(prev_fontno) == FONT_NOT_MOUNTED)
       return false;
@@ -641,6 +638,9 @@ bool environment::select_font(symbol nm)
   else {
     prev_fontno = fontno;
     int n = mounting_position_of_font(nm);
+    symbol translated_font_name = get_font_translation(nm);
+    if (is_device_ps_or_pdf)
+      warn_if_font_name_deprecated(translated_font_name);
     if (n < 0) {
       n = next_available_font_mounting_position();
       if (!mount_font_at_position(nm, n))

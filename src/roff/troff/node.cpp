@@ -6664,7 +6664,9 @@ static void grow_font_table(int n)
 
 dictionary font_translation_dictionary(17);
 
-static symbol get_font_translation(symbol nm)
+// TODO: Make this static (again) in groff 1.24.0 release + 2 years.
+// See input.cpp.
+symbol get_font_translation(symbol nm)
 {
   void *p = font_translation_dictionary.lookup(nm);
   return p ? symbol(static_cast<char *>(p)) : nm;

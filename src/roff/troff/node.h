@@ -762,6 +762,9 @@ extern void dump_node_list_in_reverse(node *);
 
 extern search_path include_search_path;
 extern const int FONT_NOT_MOUNTED;
+// TODO: Kill off the following in groff 1.24.0 release + 2 years.  See
+// input.cpp.
+symbol get_font_translation(symbol nm);
 
 // Local Variables:
 // fill-column: 72
