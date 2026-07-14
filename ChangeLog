@@ -1,3 +1,16 @@
+2026-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp
+	(load_hyphenation_patterns_from_file_request)
+	(append_hyphenation_patterns_from_file_request): Before
+	returning, call `tok.next()` instead of `skip_line()`.  Annotate
+	why: doing so prevents the formatter from ignoring the input
+	line after the request.
+
+	Fixes <https://savannah.gnu.org/bugs/?68524>.  Problem
+	introduced by me in commit 85c8daa27d, 1 April.  Thanks to Dave
+	Kemper for the report.
+
 2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[groff]: Add unit tests for `hpf` and `hpfa` requests.

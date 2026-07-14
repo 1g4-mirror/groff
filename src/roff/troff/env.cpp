@@ -4889,7 +4889,9 @@ static void load_hyphenation_patterns_from_file_request() // .hpf
     return;
   }
   update_hyphenation_patterns_from_file(false /* appending */);
-  skip_line();
+  // No skip_line() here; update_hyphenation_patterns_from_file() calls
+  // read_rest_of_line_as_argument().
+  tok.next();
 }
 
 static void append_hyphenation_patterns_from_file_request() // .hpfa
@@ -4901,7 +4903,9 @@ static void append_hyphenation_patterns_from_file_request() // .hpfa
     return;
   }
   update_hyphenation_patterns_from_file(true /* appending */);
-  skip_line();
+  // No skip_line() here; update_hyphenation_patterns_from_file() calls
+  // read_rest_of_line_as_argument().
+  tok.next();
 }
 
 // Most hyphenation functionality is environment-specific; see
