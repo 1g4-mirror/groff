@@ -16,6 +16,17 @@
 .\"
 .\" You should have received a copy of the GNU General Public License
 .\" along with this program. If not, see <http://www.gnu.org/licenses/>.
+.
+.\" Handle font requests with families, for instance in tbl(1) tables.
+.if n \{\
+.  ftr CR B \" for a visible distinction from roman
+.  ftr CB B
+.  ftr CI I
+.  ftr CBI BI
+.  \" Redefine CW to use bold instead for a visible font change.
+.  als CW B
+.\}
+.
 .nr PS 11
 .nr VS 13
 .nr PO 2c
