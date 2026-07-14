@@ -57,10 +57,13 @@
 .  nop \[lq]\\$1\[rq]\\$2
 ..
 .\" Define a macro for code literals; use bold and disable hyphenation.
+.              ds code-color grey33
+.if !m grey33 .ds code-color cyan
+.if !m cyan   .ds code-color default
 .de Lt
 .  ft CB
 .  nh
-.  nop \m[grey33]\s'-1p'\\$1\s'+1p'\m[]\c
+.  nop \m[\\*[code-color]]\s'-1p'\\$1\s'+1p'\m[]\c
 .  hy \\n[HY]
 .  ft
 .  nop \&\\$2
