@@ -78,6 +78,38 @@
 .  ev 0
 ..
 .ds = \f(CB\\$1\f(CR\\$4\f[CBI]\\$2\f(CR\\$3
+.\" TODO: We need `UR`/`UE` macros for ms(7).  See "tmac/an.tmac".
+.de url-ref
+.  rm link-text
+.  rm suffix
+.  if \\n[.$]=0 .tm error: \\$0 requires arguments
+.  if \\n[.$]>0 .ds url \\$1\"
+.  if \\n[.$]>1 .ds link-text \\$2\"
+.  if \\n[.$]>2 .ds suffix \\$3\"
+.  nr fallback 1
+.  if '\*[.T]'pdf' \{\
+.    if \\n[PDFFEAT] \{\
+.      ie d suffix \
+.        pdfhref W -D \\*[url] -A \\*[suffix] -- \\*[link-text]
+.      el .ie d link-text \
+.        pdfhref W -D \\*[url] -- \\*[link-text]
+.      el \
+.        pdfhref W -D \\*[url] -- \\*[url]
+.      nr fallback 0
+.    \}
+.  \}
+.  if \\n[fallback] \{\
+.    \" Yes, the following could be done more efficiently.
+.    ie d suffix \
+.      nop \\*[link-text] \[la]\\*[url]\[ra]\\*[suffix]
+.    el .ie d link-text \
+.      nop \\*[link-text] \[la]\\*[url]\[ra]
+.    el \
+.      nop \[la]\\*[url]\[ra]
+.  \}
+.  rr fallback
+.  rm url link-text suffix
+..
 .RP no
 .TL
 .BI Groff
@@ -106,7 +138,8 @@ and
 .Lt ms
 macros). Since these have now been dropped from groff and are now supported by
 Keith Marshall at
-.pdfhref W -D https://savannah.nongnu.org/projects/groff-pdfmark -A . this site
+.url-ref \%https://\:savannah\:.nongnu\:.org/\:projects/\:groff\-pdfmark \
+"his \%\f[I]groff\-pdfmark\f[] site" .
 .LP
 PDF features can either be controlled at a low level,
 using the macros defined in
@@ -1004,7 +1037,8 @@ The macro
 will position the TOC appropriately in the document.
 .LP
 Pease see the
-.pdfhref W -D http://schaffter.ca/mom/momdoc/tables-of-contents.html#top -- mom documentation
+.url-ref \%http://\:schaffter\:.ca/\:mom/\:momdoc/\:tables\-of\-contents\:.html#top \
+"\f[I]mom\f[] documentation"
 for details of TOC generation, by default the TOC entries are clickable.
 .BOXSTOP
 .LP
@@ -1040,10 +1074,13 @@ Title Page.
 .LP
 The groff pdf driver understands how to create pdfs to be used for slideshow
 presentations. An alternative is to use the postscript driver and gpresent
-which is downloadable
-.pdfhref W -D https://ftp.openbsd.org/pub/OpenBSD/distfiles/gpresent-2.5.tar.gz here
+which is
+.url-ref https://\:ftp\:.openbsd\:.org/\:pub/\:OpenBSD/\:distfiles/\
+\:gpresent\-2.5\:.tar\:.gz \
+downloadable
 because the original
-.pdfhref W -D https://www.bob.diertens.org/corner/useful/gpresent/ website
+.url-ref https://\:www\:.bob\:.diertens\:.org/\:corner/\:useful/\:gpresent/ \
+website
 is having difficulty downloading files larger than 32kb.
 .LP
 groff documents written to work with
@@ -1114,7 +1151,8 @@ and the new element will appear using the current transition set for
 .LP
 mom has full integration with pdf presentation mode, the documentation
 is
-.pdfhref W -D http://schaffter.ca/mom/momdoc/docprocessing.html#slides -A . here
+.url-ref \%http://\:schaffter\:.ca/\:mom/\:momdoc/\:docprocessing\:.html#slides \
+here .
 .LP
 In addition the mom example documents include
 .Lt slide-demo.mom
@@ -1133,7 +1171,7 @@ in the groff documentation.
 An example of using
 .Lt ms
 to create a slideshow is
-.pdfhref W -D http://chuzzlewit.co.uk/ms-slides.tgz -A . here
+.url-ref \%http://\:chuzzlewit\:.co\:.uk/\:ms\-slides\:.tgz here .
 .BOXSTOP
 .bp
 .NH 1 boxes
@@ -1244,8 +1282,8 @@ spacing.
 .BOXSTOP
 .LP
 mom has comprehensive control of boxes see the
-.pdfhref W -D http://schaffter.ca/mom/momdoc/images.html#box-intro \
-   -A . mom documentation
+.url-ref \%http://\:schaffter\:.ca/\:mom/\:momdoc/\:images\:.html\:#box-intro \
+"mom documentation" .
 .BOXSTOP
 .bp
 .NH 1 developer
