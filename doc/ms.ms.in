@@ -4134,7 +4134,6 @@ the TOC will be relocated to after the cover.
 There are also two new macro calls available.
 .
 .
-.pdfhref M -D XR XR
 .TS
 box;
 cb cb
@@ -4155,6 +4154,7 @@ document, so you can setup a link to a picture, diagram or even
 a single paragraph.
 T}
 _
+.XM XR
 \m[red].XR \f[I]name\f[] \f[R][\f[I]after\f[] [\f[I]before\f[] \
 [\f[I]hotlink-text\f[]]]]\m[]	T{
 The
