@@ -440,7 +440,7 @@ Although there could be several lines of input text, it is the
 accumulated output line which is used as
 .Qq "descriptive text" .
 .LP
-.pdfhref M -N hdexample ms Heading Example
+.XM hdexample "\f[I]ms\f[] Heading Example"
 So this input:
 .ID
 .ft CB
@@ -469,7 +469,7 @@ entry.
 Note if the input text results in multiple output lines it is
 only the first output line which is used as the bookmark text.
 .LP
-.pdfhref M -N XN Using .XN
+.XM NM "Using .XN"
 The second method, which combined the
 .Qq heading
 with populating a
@@ -573,7 +573,7 @@ figure to which you may want to refer. See information below.
 .Lt pdf.tmac
 .BOXSTOP
 .LP
-.pdfhref M -N pdfhrefM
+.XM pdfhrefM
 This macro will plant a named destination without inserting a bookmark.
 .QS
 .Lt ".pdfhref M"
