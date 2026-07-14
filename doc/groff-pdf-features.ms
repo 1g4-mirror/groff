@@ -69,13 +69,15 @@
 .  nop \&\\$2
 ..
 .de PN
-.  ev Pn
-.  evc 0
-.  po .5c
-.  pdfnote \\$@
-.  fl
-.  po
-.  ev 0
+.  if '\*[.T]'pdf' \{\
+.    ev Pn
+.    evc 0
+.    po .5c
+.    pdfnote \\$@
+.    fl
+.    po
+.    ev 0
+.  \}
 ..
 .ds = \f(CB\\$1\f(CR\\$4\f[CBI]\\$2\f(CR\\$3
 .\" TODO: We need `UR`/`UE` macros for ms(7).  See "tmac/an.tmac".
