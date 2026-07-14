@@ -8472,7 +8472,6 @@ static void open_file(bool appending)
 				 new grostream(filename, mode, &*fp));
       }
     }
-    tok.next();
   }
 }
 
@@ -8490,7 +8489,8 @@ static void open_request() // .open
   else
     open_file(false /* appending */);
   // No skip_line() here; open_file() calls
-  // read_rest_of_line_as_argument(), tok.next().
+  // read_rest_of_line_as_argument().
+  tok.next();
 }
 
 static void opena_request() // .opena
@@ -8507,7 +8507,8 @@ static void opena_request() // .opena
   else
     open_file(true /* appending */);
   // No skip_line() here; open_file() calls
-  // read_rest_of_line_as_argument(), tok.next().
+  // read_rest_of_line_as_argument().
+  tok.next();
 }
 
 static void close_stream(symbol &stream)
@@ -9535,8 +9536,12 @@ static void abort_request() // .ab
 // letting any immediately subsequent spaces populate the returned
 // string.
 //
-// The caller must subsequently call `tok.next()` to advance the input
-// stream pointer.
+// The caller must subsequently call `tok.next()`, _not_ `skip_line()`,
+// to advance the input stream pointer.
+//
+// TODO: Synthesize a newline token and push it onto the input stream so
+// that the foregoing becomes unnecessary, and request handlers can
+// uniformly use `skip_line()`.
 //
 // The caller has responsibility for `delete`ing the returned buffer.
 char *read_rest_of_line_as_argument()
@@ -9612,6 +9617,7 @@ static void pipe_output() // .pi
   else
     pipe_command = pc;
   delete[] pc;
+  // No skip_line() here; we called read_rest_of_line_as_argument().
   tok.next();
 }
 
@@ -9639,7 +9645,7 @@ static void system_request() // .sy
   else
     system_status = system(command);
   delete[] command;
-  // XXX: Why not `skip_line()`?
+  // No skip_line() here; we called read_rest_of_line_as_argument().
   tok.next();
 }
 
@@ -9666,7 +9672,7 @@ static void unsafe_transparent_throughput_file_request() // .cf
   if (filename != 0 /* nullptr */)
     curdiv->copy_file(filename);
   // TODO: Add `filename` to file name set.
-  // XXX: Why not `skip_line()`?
+  // No skip_line() here; we called read_rest_of_line_as_argument().
   tok.next();
 }
 

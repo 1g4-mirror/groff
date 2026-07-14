@@ -5,6 +5,19 @@
 
 2026-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Refactor; shift responsibility for
+	positioning the input stream pointer prior to reading the next
+	input line to request handlers more consistently.
+	(open_file): Stop calling `tok.next()` before returning.
+	(open_request, opena_request): Call `tok.next()` before
+	returning.
+	(read_rest_of_line_as_argument): Annotate future direction.
+	(pipe_output, system_request)
+	(unsafe_transparent_throughput_file_request): Update
+	annotations.
+
+2026-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/s.tmac: Relocate initialization of new `cov*got-title`
 	register from early occurrence within a `\n[PDFFEAT]` guard to
 	an unconditional one within the `cov` "module".  Fixes spurious
