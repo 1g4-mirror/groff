@@ -1,3 +1,11 @@
+2026-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/s.tmac: Relocate initialization of new `cov*got-title`
+	register from early occurrence within a `\n[PDFFEAT]` guard to
+	an unconditional one within the `cov` "module".  Fixes spurious
+	`reg` warning when rendering without `PDFFEAT` in commit
+	b6a369d79e, 10 July.
+
 2026-07-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* gnulib: Update to stable/2026-07.

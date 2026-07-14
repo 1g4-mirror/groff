@@ -107,7 +107,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .ds spdf:txt_default see: +
 .if \n[PDFFEAT]=1 \{\
 .nr PDFHREF.VIEW.LEADING  10.0p
-.nr cov*got-title 0
 .ds pdf:curcol default
 .\}
 .
@@ -263,6 +262,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .\" ******** module cov ********
 .\" ****************************
 .\" Cover sheet and first page.
+.nr cov*got-title 0
 .de cov*err-not-after-first-page
 .@error .\\$0 is not allowed after the first page has started
 ..
