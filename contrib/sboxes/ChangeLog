@@ -1,3 +1,12 @@
+2026-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* sboxes.tmac (BOXSTART, BOXSTOP): Supply empty definitions of
+	these interface macros if the output device is not "pdf".
+	Silences warnings in `mac` category (and, depending on user
+	input and output device selection, some in `color` as well).
+	(fn@print-sep): Guard appendments to this groff ms(7) internal
+	macro with a test that the output device is "pdf".
+
 2026-03-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* notquine.sed: Suppress end-of-sentence detection in GPL notice

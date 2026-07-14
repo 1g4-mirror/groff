@@ -68,15 +68,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .
 .\" Link into ms macros to trap footnote growth
 .am fn@print-sep
-.  nr bx*pb \\n[nl]u-2p
-.  nop \!x X pdf: background footnote \\n[bx*pb]z
-.  rr bx*pb
+.  if '\*[.T]'pdf' \{\
+.    nr bx*pb \\n[nl]u-2p
+.    nop \!x X pdf: background footnote \\n[bx*pb]z
+.    rr bx*pb
+.  \}
 ..
 .\" Has PD been actioned?
 .am par*start
 .  nr bx*PD \\n[PD]
 ..
 .
+.ie !'\*[.T]'pdf' .ds BOXSTART \" empty
+.el \{\
 .de BOXSTART
 .  fl
 .  nr bx*stack \\n[bx*stack]+1u
@@ -138,6 +142,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  sp -(\\n[bx*gap]u)
 .  nr bx*PD 0
 ..
+.\}
+.
+.ie !'\*[.T]'pdf' .ds BOXSTOP \" empty
+.el \{\
 .de BOXSTOP
 .  vpt 0
 .  sp \\*[bx*ind\\n[bx*stack]]u-\\n[.psr]u
@@ -146,6 +154,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .  nr bx*stack \\n[bx*stack]-1u
 .  fl
 ..
+.\}
 .\" Local Variables:
 .\" mode: nroff
 .\" fill-column: 72
