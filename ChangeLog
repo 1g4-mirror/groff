@@ -182,12 +182,6 @@
 	(html_printer::writeHeadMetaStyle): Revise XHTML output header
 	to modernize it and work with contemporary Firefox and Epiphany.
 
-2026-05-02  Luis Rivera <jlrn@up.edu.mx>
-
-	* tmac/es.tmac: Revise Spanish localization for correctness.
-
-	Fixes <https://savannah.gnu.org/bugs/?68216>.
-
 2026-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (TC): Fix code style nit.  De-pessimize by
