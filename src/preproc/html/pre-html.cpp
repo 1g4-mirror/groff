@@ -1863,8 +1863,9 @@ int main(int argc, char **argv)
   else
     if (WEXITSTATUS(wstatus) != 0)
       // XXX: This is a crappy suggestion.  See Savannah #62673.
-      fatal("'%1' exited with status %2; re-run with a different output"
-	    " driver to see diagnostic messages", argv[0],
+      fatal("'%1' exited with status %2; re-run groff with "
+	    IMAGE_DEVICE " (and omit any '-P' postprocessor options)"
+	    " to see diagnostic messages", argv[0],
 	    WEXITSTATUS(wstatus));
   exit(EXIT_SUCCESS);
 }

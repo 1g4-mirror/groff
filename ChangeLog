@@ -1,3 +1,9 @@
+2026-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/html/pre-html.cpp (main): Make crappy suggestion
+	in diagnostic reporting pre-grohtml(1) failure a little less
+	crappy.  Prompted by Savannah #68525.
+
 2026-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp
