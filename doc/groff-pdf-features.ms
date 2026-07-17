@@ -124,7 +124,7 @@
 .\}
 .el \f[I]\\$1\f[](\\$2)\\$3\"
 ..
-.RP no
+.RP no-repeat-info
 .TL
 .BI Groff
 PDF features
