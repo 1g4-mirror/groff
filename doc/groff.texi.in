@@ -15729,7 +15729,7 @@ permits.@footnote{The
 output device's
 @file{DESC}
 file specifies which type sizes are normally allowed;
-@ref{DESC File Format}.}
+see @ref{DESC File Format}.}
 Arguments are
 in scaled points.@footnote{@xref{Using Fractional Type Sizes}.}
 Each can be a single type size
