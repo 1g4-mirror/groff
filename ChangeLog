@@ -403,10 +403,6 @@
 
 	* src/preproc/grn/gprint.h: Delete `TRUE` and `FALSE`
 	preprocessor macros.
-	* src/preproc/grn/hdb.cpp:
-	* src/preproc/grn/main.cpp: Preprocessor-include "<stdbool.h>",
-	admittedly redundantly, to mark this file as reviewed for
-	use of a standard Boolean type.
 	* src/preproc/grn/hdb.cpp: Demote external symbols `SUNFILE` and
 	`compatibility_flag` from `int` to `bool`.
 	(DBRead): Demote local variables `done` and `last` from `int` to
