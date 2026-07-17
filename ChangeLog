@@ -33,7 +33,7 @@
 	* src/roff/troff/node.cpp (get_font_translation): Drop `static`
 	linkage; as noted above, the function needs external visibility
 	now.  Annotate planned future reversal of this change.
-	* src/roff/troff/node.h: Declare `get_font_translation`.
+	* src/roff/troff/node.h: Declare `get_font_translation()`.
 	Annotate planned future reversal of this change.
 
 	Fixes <https://savannah.gnu.org/bugs/?68345>.  Thanks to Deri
@@ -194,11 +194,11 @@
 	handling multiple numerical expression evaluations together with
 	the `&` logical "and" operator to connect them.  `.if ... .if`
 	is a legitimate pattern, but only necessary when different kinds
-	of expressions need to be evaluated; in *roff the three kinds
-	are numeric expressions, output comparison expressions, and the
-	somewhat vaguely named "conditional expressions" (`.if d mac`,
-	`.if t`, and so forth).  This way we avoid a trip through the
-	parser's main loop.
+	of expressions need to be evaluated, or need to be evaluated
+	serially; in *roff the three kinds are numeric expressions,
+	output comparison expressions, and the somewhat vaguely named
+	"conditional expressions" (`.if d mac`, `.if t`, and so forth).
+	This way we avoid a trip through the parser's main loop.
 
 2026-07-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
