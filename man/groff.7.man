@@ -1420,6 +1420,7 @@ See section \[lq]Warnings\[rq] in
 This unfortunate limitation maintains compatibility with AT&T
 .IR troff .\" AT&T
 .
+.ne 2v
 Test a numeric expression for falsity
 within a complex expression
 by comparing it to a false value.
