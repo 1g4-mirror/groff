@@ -1,3 +1,25 @@
+2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/grog/grog.pl: Add undocumented debugging mode.  New
+	global scalar `debugging` of Boolean sense tracks debugging
+	state.  Initialize false.
+	(debug): New subroutine emits diagnostic message only if
+	debugging is enabled.
+	(process_arguments): Check for `--debug` command-line option.
+	(interpret_line, infer_man_or_ms_package, [main]): Report
+	debugging information of interest.
+
+	Feature prompted by surprising diagnosis of Lesk's "Notes on the
+	IBM C Compiler." memo as a _me_(7) document instead of the more
+	correct _ms_(7).  The misdiagnosis appears to be due to the
+	inadvertent downcasing of some _ms_(7) macro calls, `IP` and
+	`TP` in the source document.  (There are other problems with the
+	document, including a fascinating crime against the CSTR #49
+	specification of _tbl_ input that no contemporary implementation
+	supports, and perhaps only Lesk himself knew about, being that
+	program's author.)  See
+	<https://www.tuhs.org/pipermail/tuhs/2026-July/034010.html> ff.
+
 2026-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am (doc/webpage.html): Restore `$(DOC_GNU_EPS)` as
