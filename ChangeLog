@@ -1,5 +1,13 @@
 2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Add unit tests for `hpf` and `hpfa` requests.
+
+	* src/roff/groff/tests/hpf-request-works.sh:
+	* src/roff/groff/tests/hpfa-request-works.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run tests.
+
+2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (doc/groff-pdf-features.pdf): Add
 	"contrib/sboxes/sboxes.tmac" as prerequisite.
 
