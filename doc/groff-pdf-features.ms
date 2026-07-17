@@ -1327,7 +1327,9 @@ it cannot plant a link if it has not
 the
 .XR naming "" "" *
 to which it links, and the link will appear as
-\m[\*[PDFHREF.TEXT.COLOUR]]Unknown\m[]
+.if '\*[.T]'pdf' .gcolor \*[PDFHREF.TEXT.COLOUR]
+Unknown
+.if '\*[.T]'pdf' .gcolor
 resisting all mouse clicks - the same happens if the
 .I destination
 of the link is mis-typed and does not exist. The forward link problem can be
