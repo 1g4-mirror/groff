@@ -1,3 +1,11 @@
+2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* sboxes.tmac (fn@print-sep): Use `output` request instead of
+	`nop \!` sequence, which probably _should_ be equivalent, but
+	for some reason is not.
+
+	Fixes <https://savannah.gnu.org/bugs/?68538>.
+
 2026-07-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* sboxes.tmac (BOXSTART, BOXSTOP): Supply empty definitions of
