@@ -1,4 +1,7 @@
-.\" Run: pdfmom --roff -ms -msboxes -dpapersz=a4 -tU -P-pa4  Groff-PDF-Features.ms > Groff-PDF-Features.pdf
+.\" Run: pdfmom --roff -ms -msboxes -dpapersz=a4 -tU -P-pa4 \
+.\"        groff-pdf-features.ms > groff-pdf-features.pdf
+.\"
+.\"  or: nroff -t -ms -msboxes groff-pdf-features.ms | less -R
 .\"
 .\" Copyright 2026 Free Software Foundation, Inc.
 .\"
