@@ -112,6 +112,15 @@
 .  rr fallback
 .  rm url link-text suffix
 ..
+.de man-ref
+.ie \\n[PDFFEAT] \{\
+.  ie (\\n[.$] > 2) \
+.    pdfhref W -D "man:\\$1(\\$2)" -A \\$3 -- \f[I]\\$1\f[](\\$2)
+.  el \
+.    pdfhref W -D "man:\\$1(\\$2)" -- \f[I]\\$1\f[](\\$2)
+.\}
+.el \f[I]\\$1\f[](\\$2)\\$3\"
+..
 .RP no
 .TL
 .BI Groff
@@ -1114,7 +1123,7 @@ There are just two macros which control the slide presentation:-
 .I bool
 .QE
 These parameters are explained in the
-.pdfhref W -D man:/gropdf(1)#transition gropdf(1)
+.man-ref gropdf 1
 man page, many of them are not required!
 .LP
 There are two
@@ -1212,7 +1221,7 @@ The relevent macros are:-
 .QE
 which produce a background rectangle on the page. The meanings of the
 parameters are explained in the
-.pdfhref W -D man:/gropdf(1)#boxes gropdf(1)
+.man-ref gropdf 1
 man page.
 .BOXSTOP
 .LP
