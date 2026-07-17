@@ -257,7 +257,7 @@ does not parse
 .I roff
 input line continuation or control structures
 (brace escape sequences and the
-.RB \[lq] if \[rq],
+.RB \[lq] if\^ \[rq],
 .RB \[lq] ie \[rq],
 and
 .RB \[lq] el \[rq]

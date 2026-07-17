@@ -451,7 +451,7 @@ and
 .request nop
 requests,
 and the condition in
-.RB \[lq] if \[rq],
+.RB \[lq] if\^ \[rq],
 .request ie ,
 and
 .RB \[lq] while \[rq]
@@ -1388,7 +1388,7 @@ See section \[lq]Control structures\[rq] below.
 A logical complementation (\[lq]not\[rq]) operator,
 .B !\&,
 works only within
-.RB \[lq] if \[rq],
+.RB \[lq] if\^ \[rq],
 .RB \[lq] ie \[rq],
 and
 .RB \[lq] while \[rq]
@@ -2099,7 +2099,7 @@ prohibits the same delimiters in the argument to the
 request.
 .
 The
-.RB \[lq] if \[rq],
+.RB \[lq] if\^ \[rq],
 .BR ie ,
 and
 .RB \[lq] while \[rq]
@@ -2473,7 +2473,7 @@ begins a conditional block;
 it must appear
 (after optional spaces and tabs)
 immediately subsequent to the conditional expression of an
-.RB \[lq] if \[rq],
+.RB \[lq] if\^ \[rq],
 .BR ie ,
 or
 .RB \[lq] while \[rq]
