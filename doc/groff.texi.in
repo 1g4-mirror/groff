@@ -1626,15 +1626,26 @@ This driver consists of two parts, a preprocessor
 
 @cindex output device name string (@code{.T})
 @cindex output device usage register (@code{.T})
-The predefined GNU @command{troff} string @code{.T} contains the name of
-the output device; the read-only register @code{.T} is set to@tie{}1 if
-this option is used (which is always true if @command{groff} is used to
-run GNU @command{troff}).  @xref{Built-in Registers}.
+The predefined formatter string
+@code{.T}
+contains the name of the selected output device;
+the read-only register
+@code{.T}
+is set to@tie{}1 if this option is used
+(which is always true if
+@command{groff}
+is used to run
+GNU
+@command{troff}). @c GNU
+@xref{Built-in Registers}.
 
-The postprocessor to be used for a device is specified by the
-@code{postpro} command in the device description file.  (@xref{Device
-and Font Description Files}.)  This selection can be overridden with the
-@option{-X} option.
+The device description file's
+@code{postpro}
+command specifies the default postprocessor to be used by a device.
+@xref{Device and Font Description Files}.
+The
+@option{-X}
+option overriddes this selection.
 
 @item -U
 @cindex mode, unsafe
