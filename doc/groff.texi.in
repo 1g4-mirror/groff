@@ -7798,9 +7798,26 @@ others false.
 @ifinfo
 @opindex @r{<colon>}
 @end ifinfo
-We can operate on truth values with the logical operators @code{&}
-(logical conjunction or ``and'') and @code{:} (logical disjunction or
-``or'').  They evaluate as comparison operators do.
+We can operate on truth values with the logical operators
+@code{&}
+(logical conjunction or ``and'')
+and
+@code{:}
+(logical disjunction or ``or'').
+They evaluate as comparison operators do.
+
+@strong{Caution:@:}
+Logical operators do not ``short-circuit'' in
+@code{roff}
+as they do in languages like C.
+If you want,
+for instance,
+to test the value of one register
+@emph{only}
+if another has a true value,
+you can use serial
+@code{if}
+requests.@footnote{@xref{Conditionals and Loops}.}
 
 @opindex !
 @cindex complementation, logical

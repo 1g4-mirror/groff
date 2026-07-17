@@ -1365,6 +1365,26 @@ and
 .
 They evaluate as comparison operators do.
 .
+.
+.P
+.I Caution:
+Logical operators do not \[lq]short-circuit\[rq] in
+.I roff
+as they do in languages like C.
+.
+If you want,
+for instance,
+to test the value of one register
+.I only
+if another has a true value,
+you can use serial
+.RB \[lq] if\^ \[rq]
+requests.
+.
+See section \[lq]Control structures\[rq] below.
+.
+.
+.P
 A logical complementation (\[lq]not\[rq]) operator,
 .B !\&,
 works only within
