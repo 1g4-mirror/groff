@@ -423,7 +423,12 @@ doc/pic.html: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS)
 	$(AM_V_at)mv $@.tmp $@
 
 # XXX: See XXX comment before "pic.html" target above.
-doc/webpage.html: $(DOC_GNU_PNG) tmac/www.tmac tbl
+#
+# Note: we depend on `$(DOC_GNU_EPS)` because the document uses the
+# `PSPIC` macro to inline the image, and `PSPIC` insists on getting an
+# EPS version of the image to compute its bounding box even if that
+# image format does not itself end up in the document.
+doc/webpage.html: $(DOC_GNU_EPS) $(DOC_GNU_PNG) tmac/www.tmac tbl
 doc/webpage.html: $(doc_srcdir)/groff.css
 doc/webpage.html: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	$(GROFF_V)$(MKDIR_P) $(doc_builddir) \

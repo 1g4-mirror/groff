@@ -1,5 +1,14 @@
 2026-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am (doc/webpage.html): Restore `$(DOC_GNU_EPS)` as
+	prerequisite and explain why.
+
+	Fixes <https://savannah.gnu.org/bugs/?68525>.  Problem
+	introduced by me in commit 4a4ef28a4e, 2 July.  Thanks to Dave
+	Kemper for the report.
+
+2026-07-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/html/pre-html.cpp (main): Make crappy suggestion
 	in diagnostic reporting pre-grohtml(1) failure a little less
 	crappy.  Prompted by Savannah #68525.
