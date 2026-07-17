@@ -82,7 +82,7 @@
 .    ev 0
 .  \}
 ..
-.ds = \f(CB\\$1\f(CR\\$4\f[CBI]\\$2\f(CR\\$3
+.ds = \f[CB]\\$1\f[CR]\\$4\f[CBI]\\$2\f[CR]\\$3
 .\" TODO: We need `UR`/`UE` macros for ms(7).  See "tmac/an.tmac".
 .de url-ref
 .  rm link-text
