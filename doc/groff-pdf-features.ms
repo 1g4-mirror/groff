@@ -116,17 +116,25 @@ macros being integrated into a full-service macro
 package. Currently this is the state of play with regard
 to full-service:-
 .LP
+.na
+.nh
 .TS
 allbox tab(^);
-Cb Cb Cb Cb Cb Cb
-Cf(CB) C C C C C.
-Macro^Meta Data^Bookmarks^Internal Link^External Link^Named Destination
+Cb     Cb Cb Cb S  Cb
+Cb     Cb Cb Cb Cb Cb
+Cf(CB)  C  C  C  C  C .
+\&^\&^\&^Link^\&
+Macro^Metadata^Bookmark^Internal^External^T{
+Named Destination
+T}
 mom^\[OK]^\[OK]^\[OK]^\[OK]^\[OK]
 man^^\[OK]^\[OK]\m[red]\**\m[]^\[OK]^
 ms^\[OK]^\[OK]^\[OK]^^\[OK]
 me^^^^^
 mm^^^^^
 .TE
+.hy
+.ad
 .LP
 .FS
 In a man page collection the MR macro can be used to link to other entries
