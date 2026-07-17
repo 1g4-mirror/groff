@@ -391,6 +391,7 @@ doc/pic.pdf: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS) eqn pic tbl
 	&& $(DOC_GROFF) -pet -Tpdf -ms -rPDFFEAT=1 $(doc_srcdir)/pic.ms >$@
 
 doc/groff-pdf-features.pdf: $(doc_srcdir)/groff-pdf-features.ms \
+  contrib/sboxes/sboxes.tmac \
   $(TMAC_PACKAGE_MS) eqn pic tbl pdfmom $(DOC_GNU_PNG) font/devpdf/stamp
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_PDFMOM) --roff -tU -P-pa4 -rPDFFEAT=1 -ms -msboxes \
