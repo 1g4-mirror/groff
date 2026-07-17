@@ -325,7 +325,7 @@ sub interpret_line {
 
   # XXX: Handle .rm as well?
 
-  # These are all requests supported by groff 1.24.0.
+  # These are all requests supported by groff 1.25.0.
   my @request = ('ab', 'ad', 'af', 'aln', 'als', 'am', 'am1', 'ami',
 		 'ami1', 'as', 'as1', 'asciify', 'backtrace', 'bd',
 		 'blm', 'box', 'boxa', 'bp', 'br', 'brp', 'break', 'c2',
@@ -345,15 +345,15 @@ sub interpret_line {
 		 'opena', 'os', 'output', 'pc', 'pchar', 'pcolor',
 		 'pcomposite', 'pev', 'pfp', 'pftr', 'phw', 'pi', 'pl',
 		 'pline', 'pm', 'pn', 'pnr', 'po', 'ps', 'psbb', 'pso',
-		 'pvs', 'pwh', 'rchar', 'rd', 'return', 'rfschar', 'rj',
-		 'rm', 'rn', 'rnn', 'rr', 'rs', 'rt', 'schar', 'shc',
-		 'shift', 'sizes', 'so', 'soquiet', 'sp', 'special',
-		 'spreadwarn', 'ss', 'stringdown', 'stringup', 'sty',
-		 'substring', 'sv', 'sy', 'ta', 'tc', 'ti', 'tkf', 'tl',
-		 'tm', 'tm1', 'tmc', 'tr', 'trf', 'trin', 'trnt',
-		 'troff', 'uf', 'ul', 'unformat', 'vpt', 'vs', 'warn',
-		 'warnscale', 'wh', 'while', 'write', 'writec',
-		 'writem');
+		 'pvs', 'pwh', 'rchar', 'rd', 'return', 'rfschar',
+		 'rhw', 'rj', 'rm', 'rn', 'rnn', 'rr', 'rs', 'rt',
+		 'schar', 'shc', 'shift', 'sizes', 'so', 'soquiet',
+		 'sp', 'special', 'spreadwarn', 'ss', 'stringdown',
+		 'stringup', 'sty', 'substring', 'sv', 'sy', 'ta', 'tc',
+		 'ti', 'tkf', 'tl', 'tm', 'tm1', 'tmc', 'tr', 'trf',
+		 'trin', 'trnt', 'troff', 'uf', 'ul', 'unformat', 'vpt',
+		 'vs', 'warn', 'warnscale', 'wh', 'while', 'write',
+		 'writec', 'writem');
 
   # Ignore all other requests.  Again, macro names can contain Perl
   # regex metacharacters, so be careful.

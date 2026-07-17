@@ -1,3 +1,8 @@
+2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/grog/grog.pl: Update `request` list to include groff
+	1.25's new `rhw` request.
+
 2026-07-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (fn@init): Trivially refactor.  Drop now nilpotent
