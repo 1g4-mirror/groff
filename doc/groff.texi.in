@@ -1805,12 +1805,26 @@ and
 @item GROFF_TMPDIR
 @tindex GROFF_TMPDIR@r{, environment variable}
 @tindex TMPDIR@r{, environment variable}
-Create temporary files in this directory.  If not set, but @env{TMPDIR}
-is, the latter is used instead.  On Windows systems, if neither of the
-foregoing are set, the environment variables @env{TMP} and @env{TEMP}
-(in that order) are checked also.  Otherwise, temporary files are
-created in a system-dependent default directory (on Unix and GNU/Linux
-systems, usually @file{/tmp}).
+Create temporary files in this directory.
+If not set,
+but
+@env{TMPDIR}
+is,
+the latter is used instead.
+On Windows systems,
+if neither of the foregoing is set,
+the environment variables
+@env{TMP}
+and
+@env{TEMP}
+(in that order)
+are checked also.
+Otherwise,
+temporary files are created in a system-dependent default directory
+(on Unix and GNU/Linux
+systems,
+usually
+@file{/tmp}).
 The
 @command{@g@refer},
 @command{grohtml},

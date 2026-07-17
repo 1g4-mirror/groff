@@ -1922,7 +1922,7 @@ is,
 the latter is used instead.
 .
 On Windows systems,
-if neither of the foregoing are set,
+if neither of the foregoing is set,
 the environment variables
 .I TMP
 and
@@ -1931,8 +1931,11 @@ and
 are checked also.
 .
 Otherwise,
-temporary files are created in
-.IR /tmp .
+temporary files are created in a system-dependent default directory
+(on Unix and GNU/Linux
+systems,
+usually
+.IR /tmp ).
 .
 The
 .MR @g@refer @MAN1EXT@ ,
