@@ -40,6 +40,7 @@
 .nr QI 5n
 .nr DI \n[QI]
 .nr PDFOUTLINE.FOLDLEVEL 1
+.nr HORPHANS 10
 .ds FR 1
 .nr TC-MARGIN \w'00' \" expect 2-digit page numbers at most
 .ie t .nr PI 3.5n
@@ -531,7 +532,6 @@ to jump to the section named
 to enter this hotlink
 .Qq "(see: Using \fIgroff\fP with the \fIms\fP Macro Package)" .
 .BOXSTOP
-.bp
 .NH 2
 .XN man
 .LP
@@ -663,7 +663,6 @@ Marks a position in the document to which
 can place a hotspot link
 .XR hotspot ). (
 .BOXSTOP
-.bp
 .NH 1 hotspot
 .XN Internal Hotspot Links
 .LP
@@ -1187,7 +1186,6 @@ An example of using
 to create a slideshow is
 .url-ref \%http://\:chuzzlewit\:.co\:.uk/\:ms\-slides\:.tgz here .
 .BOXSTOP
-.bp
 .NH 1 boxes
 .XN Boxes and PDF paper colour
 .LP
@@ -1299,7 +1297,6 @@ mom has comprehensive control of boxes see the
 .url-ref \%http://\:schaffter\:.ca/\:mom/\:momdoc/\:images\:.html\:#box-intro \
 "mom documentation" .
 .BOXSTOP
-.bp
 .NH 1 developer
 .XN For macro developers
 .LP
