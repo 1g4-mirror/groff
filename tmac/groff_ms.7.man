@@ -2685,6 +2685,21 @@ it does.
 .
 .
 .IP \[bu]
+AT&T
+.I ms
+doesn't support use of automatically numbered footnote marks
+.RB (\[lq] \[rs]** \[rq]
+or
+.RB \[lq] \[rs]*[*] \[rq])
+in
+.I tbl
+table entries.
+.
+.I "groff ms"
+does.
+.
+.
+.IP \[bu]
 To make
 .I groff ms
 use the default page offset

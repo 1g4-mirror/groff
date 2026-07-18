@@ -5676,6 +5676,19 @@ In
 it does.
 
 @item
+@acronym{AT&T}
+@file{ms}
+doesn't support use of automatically numbered footnote marks
+(@samp{\**}
+or
+@samp{\*[*]})
+in
+@command{@g@tbl}
+table entries.
+@code{groff} @file{ms}
+does.
+
+@item
 To make @code{groff} @file{ms} use the default page offset (which also
 specifies the left margin), the @code{PO} register must stay undefined
 until the first @file{ms} macro is called.
