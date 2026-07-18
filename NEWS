@@ -106,7 +106,8 @@ pic
 ---
 
 *  groff's pic(1) manual, "Making Pictures With GNU PIC", is now built
-   and installed as a PDF rather than a PostScript document.
+   and installed as a PDF rather than a PostScript document.  Thanks to
+   Deri James.
 
 Macro packages
 --------------
@@ -170,19 +171,25 @@ Macro packages
    enable and support PDF features in any ms document without requiring
    its author to update its content.
 
+   We welcome feedback on these extensions to the package's macro
+   interface.  We expect to finalize these changes in a future release,
+   and effectively default `PDFFEAT` "on".  Thanks to Deri James.
+
 *  The s (ms) macro package now supports the use of automatically
    numbered footnote marks (interpolated via `\**` or `\*[*]`) in tbl(1)
    table entries.  Other implementation of ms do not.  Thanks to Deri
    James.
 
 *  groff's ms(7) manual, "Using groff with the ms macros", is now built
-   and installed as a PDF rather than a PostScript document.
+   and installed as a PDF rather than a PostScript document.  Thanks to
+   Deri James.
 
 Miscellaneous
 -------------
 
-*  The new document "Groff-PDF-Features.pdf" surveys the PDF features
+*  The new document "groff-pdf-features.pdf" surveys the PDF features
    that groff enables and exposes in its full-service macro packages.
+   Thanks to Deri James.
 
 *  The grn command now exits with status 2 instead of 8 on usage errors
    arising from missing arguments to command-line options.  It now exits
