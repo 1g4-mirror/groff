@@ -5664,9 +5664,15 @@ values were used with some non-@code{RP} document types; that of
 @code{groff} @file{ms} does not.
 
 @item
-Right-aligned displays are available.  The @acronym{AT&T} @file{ms}
-manual observes that ``it is tempting to assume that @samp{.DS R} will
-right adjust lines, but it doesn't work''.  In @code{groff} @file{ms},
+Right-aligned displays are available.
+The @acronym{AT&T}
+@file{ms}
+manual observes that ``it is tempting to assume that
+@samp{.DS R}
+will right adjust lines,
+but it doesn't work''.
+In
+@code{groff} @file{ms},
 it does.
 
 @item
