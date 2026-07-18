@@ -26,7 +26,7 @@ Before Release
   in typical documents).
 
 * Update font description files that we generate from external data and
-  provide with our source distribution.
+  provide with our source distribution, as necessary.
 
     Directory  Format                  Tool
     ---------  ------                  ----
