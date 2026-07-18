@@ -1426,5 +1426,5 @@ started is:-
 .ft
 .DE
 .BOXSTOP
-.bp
+.if n .bp
 .TC
