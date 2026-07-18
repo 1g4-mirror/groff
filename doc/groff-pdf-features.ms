@@ -1,4 +1,4 @@
-.\" Run: pdfmom --roff -ms -msboxes -dpapersz=a4 -tU -P-pa4 \
+.\" Run: pdfmom --roff -ms -msboxes -dpaper=a4 -tU -P-pa4 \
 .\"        groff-pdf-features.ms > groff-pdf-features.pdf
 .\"
 .\"  or: nroff -t -ms -msboxes groff-pdf-features.ms | less -R
