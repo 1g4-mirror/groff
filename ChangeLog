@@ -12,8 +12,8 @@
 	Feature prompted by surprising diagnosis of Lesk's "Notes on the
 	IBM C Compiler." memo as a _me_(7) document instead of the more
 	correct _ms_(7).  The misdiagnosis appears to be due to the
-	inadvertent downcasing of some _ms_(7) macro calls, `IP` and
-	`TP` in the source document.  (There are other problems with the
+	presence of lowercase macro calls, `ip` and `tp`, which happen
+	to be defined by _me_(7).  (There are other problems with the
 	document, including a fascinating crime against the CSTR #49
 	specification of _tbl_ input that no contemporary implementation
 	supports, and perhaps only Lesk himself knew about, being that
