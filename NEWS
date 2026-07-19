@@ -157,7 +157,7 @@ Macro packages
    document calls the package's `TC` macro, its entries will be
    clickable to navigate the document (even if it does not use the `XN`
    macro introduced in groff 1.23.0); and if the document calls `RP` to
-   configure a cover page, the TOC relocates to follow it.
+   configure a cover page, the table of contents relocates to follow it.
 
    The new macros `XM` and `XR` respectively set and navigate to
    clickable internal links within the document.
@@ -177,7 +177,7 @@ Macro packages
 
 *  The s (ms) macro package now supports the use of automatically
    numbered footnote marks (interpolated via `\**` or `\*[*]`) in tbl(1)
-   table entries.  Other implementation of ms do not.  Thanks to Deri
+   table entries.  Other implementations of ms do not.  Thanks to Deri
    James.
 
 *  groff's ms(7) manual, "Using groff with the ms macros", is now built
