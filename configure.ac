@@ -38,7 +38,7 @@ AC_CONFIG_SRCDIR([src/roff/groff/groff.cpp])
 AC_USE_SYSTEM_EXTENSIONS
 
 AM_INIT_AUTOMAKE([subdir-objects])
-
+AM_MAINTAINER_MODE([disable])
 AM_SILENT_RULES([yes])
 
 # checks for programs

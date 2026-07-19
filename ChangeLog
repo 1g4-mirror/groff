@@ -1,3 +1,27 @@
+2026-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Use GNU Automake's "maintainer mode" to manage maintainer-mode
+	targets.
+
+	* configure.ac: Interpolate `AM_MAINTAINER_MODE` macro with
+	"disable" argument.
+	* bootstrap: Note necessity of running the "configure" script
+	with `--enable-maintainer-mode` (when building from groff's Git
+	repository).
+	* doc/doc.am: Add targets produced only in maintainer mode to
+	the `MAINTAINERCLEANFILES` macro.
+	($(DOC_GNU_EPS)):
+	($(DOC_GNU_PNG)):
+	($(DOC_LINE_LAYOUT_EPS)):
+	($(DOC_LINE_LAYOUT_PNG)): Bracket existing target rules in
+	`MAINTAINER_MODE` Automake conditional.  Add `else` branch
+	defining them with empty recipes for non-maintainer mode.
+
+	Fixes excessive build dependencies imposed on distribution
+	archives.  Thanks to Alexis Hildebrandt for the report in
+	<https://lists.gnu.org/archive/html/groff/2026-07/\
+	msg00010.html>.
+
 2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* ChangeLog.124: New file.

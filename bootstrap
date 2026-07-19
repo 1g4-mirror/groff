@@ -1406,7 +1406,7 @@ autogen()
 
   bootstrap_epilogue
 
-  echo "$0: done.  Now you can run './configure'."
+  echo "$0: done.  Now you can run './configure --enable-maintainer-mode'."
 }
 
 # ----------------------------------------------------------------------------
