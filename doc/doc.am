@@ -197,8 +197,8 @@ endif # USE_GROHTML
 # use for locating files within the source or build trees.
 imagedir = img
 
-# Introduce variables to house the groff man pages.  We break the list
-# of page sources into multiple chunks because we have to load Swedish
+# Introduce macros to house the groff man pages.  We break the list of
+# page sources into multiple chunks because we have to load Swedish
 # localization before formatting groff_mmse.7 and then reload English
 # localization afterward.  This also serves as a test of groff locale
 # switching; being lazy and shunting groff_mmse.7 off to the end of the
@@ -282,8 +282,8 @@ $(DOC_GMP_COVER_PAGE): $(doc_srcdir)/groff-man-pages-cover.groff.in
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_SED) $(doc_srcdir)/groff-man-pages-cover.groff.in >$@
 
-# Many pages use tbl, a few use eqn, and soelim(1) uses pic.  We also
-# need groff's FreeEuro font so we can embed it.
+# Many pages use tbl, a few use eqn, and a couple use pic.  We also need
+# groff's FreeEuro font so we can embed it.
 
 doc/groff-man-pages.pdf: $(GROFF_MAN_PAGES_ALL) \
   $(DOC_GMP_COVER_PAGE) \
@@ -344,7 +344,7 @@ doc/grnexmpl.ps: $(doc_srcdir)/grnexmpl.me $(doc_srcdir)/grnexmpl.g \
 # A double-suffix rule won't work in an obvious way because its
 # semantics are that the suffix is replaced, not removed.  You have to
 # add both suffixes to the .SUFFIXES special target, in order with the
-# preprequisite first.
+# prerequisite first.
 #   .SUFFIXES: .me.in .me
 #   .me.in.me:
 #	$(DOC_SED) $< >$@
