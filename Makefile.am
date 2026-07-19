@@ -496,6 +496,7 @@ endif
 GROFFBIN = $(abs_top_builddir)/groff
 GROFF_BIN_PATH = $(abs_top_builddir)
 PDFMOMBIN = $(abs_top_builddir)/pdfmom
+SOELIMBIN = $(abs_top_builddir)/soelim
 # Search for macro files and device/font description directories in
 # source _and_ build trees; some of each are generated.
 FFLAG=-F$(abs_top_builddir)/font -F$(abs_top_srcdir)/font
@@ -830,7 +831,7 @@ set-man-page-time-stamps:
 makevarescape=$(top_srcdir)/makevarescape.sed
 
 SUFFIXES += .man
-.man: soelim
+.man:
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& LC_ALL=C \
 	 sed -e "s|[@]APPDEFDIR[@]|`echo $(appdefdir) | sed -f $(makevarescape)`|g" \
@@ -865,7 +866,7 @@ SUFFIXES += .man
 	     -e "s|[@]TMAC_MDIR[@]|`echo $(tmacdir) | sed -f $(makevarescape)`/mm|g" \
 	     -e "s|[@]TMAC_S_PREFIX[@]|\\\\%$(tmac_s_prefix)|g" \
 	     -e "s|[@]VERSION[@]|$(VERSION)|g" \
-	     $< | soelim -I $(srcdir) -I $(builddir) \
+	     $< | $(SOELIMBIN) -I $(srcdir) -I $(builddir) \
 	     >$@
 
 # Version files - see script "build-aux/git-version-gen".

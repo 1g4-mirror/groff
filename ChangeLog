@@ -1,5 +1,21 @@
 2026-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* Makefile.am: Stop using (and relying on) a soelim(1) program
+	in the host environment; we build what we need.  Define macro
+	`SOELIMBIN`.
+	(.man): Drop prerequisite, which can't portably be used with a
+	suffix rule.  Use the new macro's interpolation, instead of a
+	literal, in the recipe.
+	* doc/doc.am ($(GROFF_MAN_PAGES_ALL)): Add dependency-only
+	target declaring "soelim" as prerequisite.
+
+	Fixes build failure in environment lacking an existing *roff
+	installation.  Thanks to Alexis Hildebrandt for the report in
+	<https://lists.gnu.org/archive/html/groff/2026-07/\
+	msg00010.html>.
+
+2026-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Use GNU Automake's "maintainer mode" to manage maintainer-mode
 	targets.
 
@@ -10,6 +26,7 @@
 	repository).
 	* doc/doc.am: Add targets produced only in maintainer mode to
 	the `MAINTAINERCLEANFILES` macro.
+
 	($(DOC_GNU_EPS)):
 	($(DOC_GNU_PNG)):
 	($(DOC_LINE_LAYOUT_EPS)):
