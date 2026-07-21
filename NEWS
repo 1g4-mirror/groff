@@ -10,6 +10,17 @@ This file describes recent user-visible changes in groff.  Bug fixes are
 not described.  groff's man pages and Texinfo manual offer more details.
 See the ChangeLog* files for release dates.
 
+VERSION next
+============
+
+troff
+-----
+
+*  The formatter now emits a warning in category "style" if -crementing
+   interpolation (such as `\n+[myreg]` or `\n-[count]`) is (uselessly)
+   applied to a non-auto-crementing register.
+
+
 VERSION 1.25.0
 ==============
 

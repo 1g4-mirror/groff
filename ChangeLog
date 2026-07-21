@@ -1,3 +1,15 @@
+2026-07-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp
+	(read_crement_and_escape_sequence_parameter): Emit warning in
+	category "style" if -crementing interpolation is applied to
+	non-auto-crementing register.
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68542>.
+
 2026-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (file_iterator::close): Raise a

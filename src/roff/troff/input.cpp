@@ -1162,11 +1162,29 @@ static symbol read_crement_and_escape_sequence_parameter(int *incp)
     *incp = 0;
     return read_two_character_escape_sequence_parameter();
   case '+':
-    *incp = 1;
-    return read_escape_sequence_parameter();
+    {
+      *incp = 1;
+      symbol identifier = read_escape_sequence_parameter();
+      reg *r = look_up_register(identifier,
+				true /* suppress creation */);
+      if (r->get_increment() == 0)
+	warning(WARN_STYLE, "applying incrementing interpolation"
+		" to register '%1' lacking an auto-{in,de}crement",
+		identifier.contents());
+      return identifier;
+    }
   case '-':
-    *incp = -1;
-    return read_escape_sequence_parameter();
+    {
+      *incp = -1;
+      symbol identifier = read_escape_sequence_parameter();
+      reg *r = look_up_register(identifier,
+				true /* suppress creation */);
+      if (r->get_increment() == 0)
+	warning(WARN_STYLE, "applying decrementing interpolation"
+		" to register '%1' lacking an auto-{in,de}crement",
+		identifier.contents());
+      return identifier;
+    }
   case '[':
     if (!want_att_compat) {
       *incp = 0;
