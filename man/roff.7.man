@@ -909,21 +909,22 @@ A simple implementation might work as follows.
 The author writes a pair of macros:
 one starts a footnote and the other ends it.
 .
-They further set a trap a small distance above the page bottom,
+The author also sets a trap a small distance above the page bottom,
 reserving a footnote area.
 .
-The author calls the first macro where a footnote mark is desired.
+The document calls the first macro where a footnote mark is desired.
 .
-The macro establishes a diversion so that the footnote text is collected
+This macro establishes a diversion
+so that the footnote text is collected
 at the place in the body text where its corresponding mark appears.
 .
-It further creates an environment for the footnote so that it sets
-at a smaller typeface.
+It further creates and selects an environment for the footnote
+so that it sets using a smaller type size and vertical spacing.
 .
-The footnote text is formatted in the diversion using that environment,
+Diverting the text formats it,
 but it does not yet appear in the output.
 .
-The document author calls the footnote end macro,
+The document calls the footnote end macro,
 which returns to the previous environment and ends the diversion.
 .
 Later,
@@ -934,7 +935,7 @@ The macro called by the trap draws a line across the page
 and emits the stored diversion by calling it like a macro.
 .
 Thus,
-the footnote is rendered.
+the footnote renders.
 .\" END Keep roughly parallel with first paragraphs of groff.texi node
 .\" "Deferring Output".
 .
