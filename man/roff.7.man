@@ -871,8 +871,11 @@ see
 .I groff
 offers
 .IR streams ,
-identifiers for writable files,
-but for security reasons this feature is disabled by default.
+identifiers for writable files;
+.MR @g@troff @MAN1EXT@ 's
+default \[lq]safer mode\[rq]
+disables this feature
+to prevent untrusted documents from altering the file system.
 .
 .
 .\" BEGIN Keep roughly parallel with first paragraphs of groff.texi node
