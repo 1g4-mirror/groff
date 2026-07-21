@@ -1430,7 +1430,7 @@ such as the
 Autologic APS-5
 and the
 Mergenthaler Linotron 202,
-Kernighan undertook a revision and rewrite of
+Kernighan undertook a revision and refactoring of
 .I troff
 to generalize its design.
 .
