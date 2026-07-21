@@ -229,10 +229,14 @@ the traditional procedure was to manually relocate the pages containing
 the table of contents between the cover page and the body text.
 .
 Today,
-page resequencing is more often done in the digital domain,
-such as when
-.B PDFFEAT
-is turned on.
+page resequencing is more often done in the digital domain;
+if you mandate a separate cover page by calling
+.B RP
+and use the
+.RB \[lq] pdf \^\[rq]
+output device,
+.I "groff ms"
+positions the table of contents immediately after this cover page.
 .
 An index works similarly,
 but because it typically needs to be sorted after collection,

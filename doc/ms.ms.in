@@ -561,11 +561,15 @@ the traditional procedure was to manually relocate the pages containing
 the table of contents between the cover page and the body text.
 .
 Today,
-page resequencing is more often done in the digital domain,
+page resequencing is more often done in the digital domain;
 .pdf-feature-begin
-and if you use a separate title page with
+if you mandate a separate cover page by calling
 .XR RP "" "" RP
-the TOC will be positioned immediately after the title.
+and use the
+.B pdf \^\[rq] \[lq]
+output device,
+.I "groff ms"
+positions the table of contents immediately after this cover page.
 .pdf-feature-end
 .
 An index works similarly,

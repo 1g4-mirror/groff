@@ -3373,10 +3373,14 @@ output was designed for the production of hard copy,
 the traditional procedure was to manually relocate the pages containing
 the table of contents between the cover page and the body text.
 Today,
-page resequencing is more often done in the digital domain,
-and if you use a separate cover page with @code{RP}
-(and use @option{-T pdf}) the TOC will
-be positioned immediately after this cover page.
+page resequencing is more often done in the digital domain;
+if you mandate a separate cover page by calling
+@code{RP}
+and use the
+@code{pdf}
+output device,
+@code{groff} @file{ms}
+positions the table of contents immediately after this cover page.
 An index works similarly,
 but because it typically needs to be sorted after collection,
 its preparation requires separate processing.
