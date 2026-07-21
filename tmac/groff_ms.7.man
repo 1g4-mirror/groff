@@ -745,8 +745,8 @@ or adjacent to displays.
 The
 .B PORPHANS
 register defines the minimum number of initial lines of any paragraph
-that must be kept together to avoid isolated lines at the bottom of a
-page.
+that must be kept together
+to avoid isolated lines at the bottom of a page.
 .
 If a new paragraph starts close to the bottom of a page,
 and there is insufficient space to accommodate
@@ -1072,10 +1072,10 @@ macros consult the
 register to prevent the output of isolated headings at the bottom of a
 page;
 it specifies the minimum number of lines of the subsequent paragraph
-that must be kept on the same page as the heading.
+that must be kept on the same page as a section heading.
 .
-If insufficient space remains on the current page to accommodate the
-heading and this number of lines of paragraph text,
+If insufficient space remains on the current page
+to accommodate the heading and this number of lines of paragraph text,
 .I "groff ms"
 forces a page break before setting the heading.
 .

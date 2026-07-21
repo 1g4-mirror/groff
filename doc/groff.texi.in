@@ -3582,11 +3582,13 @@ Default: 5@dmn{n}.
 @endDefmpreg
 
 @Defmpreg {PORPHANS, ms}
-Defines the minimum number of initial lines of any paragraph that must
-be kept together to avoid isolated lines at the bottom of a page.  If a
-new paragraph is started close to the bottom of a page,
+Defines the minimum number of initial lines of any paragraph
+that must be kept together
+to avoid isolated lines at the bottom of a page.
+If a new paragraph starts close to the bottom of a page,
 and there is insufficient space to accommodate
 @code{PORPHANS}
+lines before an automatic page break,
 @code{groff} @file{ms}
 forces a page break before formatting the paragraph.
 This is a GNU extension.
@@ -3624,13 +3626,12 @@ Default: 0.
 @endDefmpreg
 
 @Defmpreg {HORPHANS, ms}
-Defines the minimum number of lines of an immediately succeeding
-paragraph that should be kept together with any heading introduced by
-the @code{NH} or @code{SH} macros.  If a heading is placed close to the
-bottom of a page, and there is insufficient space to accommodate both
-the heading and at least @code{HORPHANS} lines of the following
-paragraph, before an automatic page break, then the page break is forced
-before the heading.  This is a GNU extension.
+Defines the minimum number of lines of the subsequent paragraph
+that must be kept on the same page as a section heading.
+If insufficient space remains on the current page
+to accommodate the heading and this number of lines of paragraph text,
+@code{groff} @file{ms}
+forces a page break before setting the heading.
 
 Effective: next paragraph.
 
