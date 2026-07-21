@@ -24,7 +24,7 @@ module=File::HomeDir
 
 if ! perl -e "use $module;" 2> /dev/null
 then
-    echo "Perl module $module not available; skipping" >&2
+    echo "$0: Perl module $module not available; skipping" >&2
     exit 77 # skip
 fi
 
