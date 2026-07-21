@@ -83,7 +83,7 @@ You can now run the "configure" script.  It produces the "config.status"
 script, which generates the Makefile.  Then run "make" to build the
 groff project.  You can perform these actions from the source tree.
 
-    $ ./configure
+    $ ./configure --enable-maintainer-mode
     $ make # run with -j option if desired
 
 You can alternatively build groff outside of its source tree, which is
@@ -92,7 +92,7 @@ undertake development.
 
     $ mkdir build
     $ cd build
-    $ ../configure
+    $ ../configure --enable-maintainer-mode
     $ make # run with -j option if desired
 
 A separate build tree need not be a subdirectory of the source.
