@@ -40,11 +40,12 @@ consuming minimal system resources.
 
   https://www.gnu.org/software/groff/
 
+[[ maintainer: Omit this "Changes" section for a first release
+   candidate.
 
 Changes
 =======
 
-[[
 Since the groff 1.yy.Y.rcZ-1 release candidate was made available on DD
 MONTH, NN people have authored a total of MM commits.
 
@@ -60,11 +61,15 @@ Thanks to AAA, BBB, and CCC for reporting defects in rcZ-1.
 * item
 ]]
 
-See "Details" below for changes since the groff 1.23.0 release.
+See "Details" below for changes since the groff 1.yy.Y release.
+
+[[ maintainer: Omit the following subsection if the amount of "NEWS" is
+   manageable.
 
 Highlights of groff 1.yy.Y
 --------------------------
-[[ Headline features nominated by our development community include: ]]
+
+Headline features nominated by our development community include:
 
 * item
 
@@ -73,7 +78,7 @@ Highlights of groff 1.yy.Y
 * item
 ]]
 
-For a more comprehensive list of feature changes, see "News" below.
+For a comprehensive list of feature changes, see "News" below.
 
 Much attention has been given to fixing bugs, validating input,
 improving diagnostic messages, and correcting and expanding
@@ -83,11 +88,15 @@ this one ships with over NNN.
 Details
 -------
 
+[[ maintainer: Omit the following if section "Changes" above was
+   retained.
+
 Since groff 1.24.0 was released on 28 February 2026, MM people have
 authored a total of over NNN commits.
 
-[[ maintainer: Insert output of
-   "git shortlog --summary 1.24.0..1.yy.Y.rcZ" ]]
+maintainer: Insert output of
+   "git shortlog --summary 1.24.0..1.yy.Y.rcZ"
+]]
 
 As of this writing, per the GNU Savannah bug tracker, the groff
 project has resolved NNN issues as fixed for the 1.yy.0 release.
@@ -182,12 +191,12 @@ so the file name will not appear in the output.)
 Caveats
 =======
 
-o GNU tools, or otherwise POSIX-conforming ones, are generally required
-  to build on Solaris 10 or 11.  See the "PROBLEMS" file in the
-  distribution archive.
+*  GNU tools, or otherwise POSIX-conforming ones, are generally required
+   to build on Solaris 10 or 11.  See the "PROBLEMS" file in the
+   distribution archive.
 
-o Solaris 10 has known problems with automated tests; see the "PROBLEMS"
-  file in the distribution archive.
+*  Solaris 10 has known problems with automated tests; see the
+   "PROBLEMS" file in the distribution archive.
 
 
 News
