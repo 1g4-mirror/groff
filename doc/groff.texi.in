@@ -23406,7 +23406,7 @@ when a warning or an error occurs.
 @c ---------------------------------------------------------------------
 
 @c BEGIN Keep parallel with section "Warnings" of troff(1).
-@c Caveat: the man page sorts them by name, not number.
+@c Caveat: the man page sorts the categories by name, not number.
 @node Warnings
 @subsection Warnings
 @cindex warnings

@@ -579,7 +579,7 @@ Suppress formatted output.
 .\" ====================================================================
 .
 .\" BEGIN Keep parallel with groff.texi node "Warnings".
-.\" Caveat: the Texinfo manual sorts them by number, not name.
+.\" Caveat: the Texinfo manual sorts the categories by number, not name.
 GNU
 .I troff \" GNU
 divides its warning diagnostics into named,
