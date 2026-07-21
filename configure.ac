@@ -42,7 +42,11 @@ AM_MAINTAINER_MODE([disable])
 AM_SILENT_RULES([yes])
 
 # checks for programs
+# Autoconf [2.70,2.72] tries to cram C11 and C++11 down our throats.  We
+# don't (yet) want them.
+ac_cv_prog_cc_c11=no
 AC_PROG_CC
+ac_cv_prog_cxx_cxx11=no
 AC_PROG_CXX
 gl_EARLY
 gl_INIT

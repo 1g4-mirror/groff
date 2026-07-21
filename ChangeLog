@@ -1,3 +1,10 @@
+2026-07-21  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* configure.ac: Override GNU Autoconf [2.70,2.72]'s cramdowns of
+	ISO C11 and C++11 language version defaults.  See:
+	<https://cgit.git.savannah.gnu.org/cgit/autoconf.git/commit/\
+	?id=056518b94ecd487bcbefdb69046b3f52c4168222>.
+
 2026-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* Makefile.am: Stop using (and relying on) a soelim(1) program
