@@ -3665,7 +3665,7 @@ output,
 with
 .man-ref pdfjam 1
 or with
-.I gropdf 1 's
+.man-ref gropdf 1 's
 .CW pdfswitchtopage
 macro,
 for example.
@@ -4237,7 +4237,7 @@ All of the PDF features mentioned in this document can be
 disabled if the
 .I groff
 command includes
-.CW -rPDFFEAT=0 .
+.CW \-rPDFFEAT=0 .
 .
 .
 .\" ------------------------
