@@ -4244,6 +4244,10 @@ command includes
 .if t \{\
 .  br
 .  bp
+.  \" BEGIN hideous cheat to avoid a lone stranded line at the end of
+.  \" this section on U.S. letter paper
+.  nr saved-PD \n[PD]
+.  nr PD 0.225v
 .\}
 .NH 1
 Differences from historical
@@ -4563,6 +4567,11 @@ Berkeley and
 do.
 .
 .
+.if t \{\
+.  \" END hideous cheat to avoid a lone stranded line at the end of
+.  \" this section on U.S. letter paper
+.  nr PD \n[saved-PD]
+.\}
 .\" XXX: We can't use a keep here because the wrong page number will be
 .\" recorded in the table of contents; see Savannah #63159.
 .\"KS
