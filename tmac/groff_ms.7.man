@@ -755,6 +755,15 @@ lines before an automatic page break,
 .I "groff ms"
 forces a page break before formatting the paragraph.
 .
+(Strictly,
+.I "groff ms"
+requires the equivalent vertical distance that would be required
+by
+.B \[rs]n[PORPHANS]
+lines of text set at the type size and vertical spacing
+configured at the time the document calls the paragraphing macro,
+plus one vertical motion quantum.)
+.
 This is a GNU extension.
 .
 .
@@ -1078,6 +1087,18 @@ If insufficient space remains on the current page
 to accommodate the heading and this number of lines of paragraph text,
 .I "groff ms"
 forces a page break before setting the heading.
+.
+(Strictly,
+.I "groff ms"
+requires the equivalent vertical distance that would be required
+by the heading itself
+plus the inter-paragraph distance
+.B \[rs]n[PD]
+and
+.B \[rs]n[HORPHANS]
+lines of text set at the type size and vertical spacing
+configured at the time the document calls the heading macro,
+plus one vertical motion quantum.)
 .
 Any display macro call or
 .IR tbl ,

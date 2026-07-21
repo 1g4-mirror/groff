@@ -3590,7 +3590,14 @@ and there is insufficient space to accommodate
 @code{PORPHANS}
 lines before an automatic page break,
 @code{groff} @file{ms}
-forces a page break before formatting the paragraph.
+forces a page break before formatting the paragraph.@footnote{Strictly,
+@code{groff} @file{ms}
+requires the equivalent vertical distance that would be required
+by
+@code{\n[PORPHANS]}
+lines of text set at the type size and vertical spacing
+configured at the time the document calls the paragraphing macro,
+plus one vertical motion quantum.}
 This is a GNU extension.
 
 Effective: next paragraph.
@@ -3631,7 +3638,17 @@ that must be kept on the same page as a section heading.
 If insufficient space remains on the current page
 to accommodate the heading and this number of lines of paragraph text,
 @code{groff} @file{ms}
-forces a page break before setting the heading.
+forces a page break before setting the heading.@footnote{Strictly,
+@code{groff} @file{ms}
+requires the equivalent vertical distance that would be required
+by the heading itself
+plus the inter-paragraph distance
+@code{\n[PD]}
+and
+@code{\n[HORPHANS}
+lines of text set at the type size and vertical spacing
+configured at the time the document calls the heading macro,
+plus one vertical motion quantum.}
 
 Effective: next paragraph.
 

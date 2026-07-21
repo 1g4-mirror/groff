@@ -1176,7 +1176,17 @@ and there is insufficient space to accommodate
 .CW \[rs]n[PORPHANS]
 lines before an automatic page break,
 .I "groff ms"
-forces a page break before formatting the paragraph.
+forces a page break before formatting the paragraph.\**
+.FS
+Strictly,
+.I "groff ms"
+requires the equivalent vertical distance that would be required
+by
+.CW \[rs]n[PORPHANS]
+lines of text set at the type size and vertical spacing
+configured at the time the document calls the paragraphing macro,
+plus one vertical motion quantum.
+.FE
 .
 This is a GNU extension.
 .
@@ -1659,7 +1669,20 @@ that must be kept on the same page as a section heading.
 If insufficient space remains on the current page
 to accommodate the heading and this number of lines of paragraph text,
 .I "groff ms"
-forces a page break before setting the heading.
+forces a page break before setting the heading.\**
+.FS
+Strictly,
+.I "groff ms"
+requires the equivalent vertical distance that would be required
+by the heading itself
+plus the inter-paragraph distance
+.CW \[rs]n[PD]
+and
+.CW \[rs]n[HORPHANS]
+lines of text set at the type size and vertical spacing
+configured at the time the document calls the heading macro,
+plus one vertical motion quantum.
+.FE
 .
 Any display macro call or
 .I tbl ,
