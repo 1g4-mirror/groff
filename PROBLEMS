@@ -474,9 +474,9 @@ can do it like this.
 * I don't like the page headers and footers produced by groff -man.
 
 There seem to be many different styles of page header and footer
-produced by different versions of the -man macros.  You need to put
-modified macros from tmac/an.tmac into man.local.  More information is
-available in groff_man(7).
+produced by different versions of the -man macros.  You can redefine the
+GNU extension macros `PT` and `BT` in your "man.local" file to arrange
+the headers and footers how you please; see groff_man(7).
 
 ----------------------------------------------------------------------
 
