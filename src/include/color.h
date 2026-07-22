@@ -23,7 +23,6 @@ class color {
 private:
   color_scheme scheme;
   unsigned int components[4];
-  color *next;
 
   int read_encoding(const color_scheme, const char * const,
 		    const size_t);

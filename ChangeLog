@@ -1,3 +1,8 @@
+2026-07-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/include/color.h: Drop unused private member variable
+	`next`.
+
 2026-07-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp
