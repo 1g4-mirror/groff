@@ -9636,15 +9636,15 @@ under aliases created with
 if any.
 The formatter performs no operation on a nonexistent
 @var{reg}.
-
 If
 @var{reg}
-is undefined,
-the formatter ignores the request.@footnote{GNU
+is an invalid identifier,
+GNU
 @command{troff} @c GNU
-emits a warning in category
-@samp{reg}.
-@xref{Warnings}.}
+diagnoses an error,
+but processes any subsequent valid
+@var{reg}
+arguments.
 
 This request is incorrectly documented in the @acronym{AT&T}
 @code{troff} manual as accepting only one argument.
@@ -16956,6 +16956,15 @@ treats subsequent interpolations or calls of
 as if it had never been defined.
 The formatter performs no operation on a nonexistent
 @var{name}.
+If
+@var{name}
+is an invalid identifier,
+GNU
+@command{troff} @c GNU
+diagnoses an error,
+but processes any subsequent valid
+@var{name}
+arguments.
 
 This request is incorrectly documented in the @acronym{AT&T}
 @command{troff} @c AT&T
@@ -24177,6 +24186,21 @@ spaces or tabs between the ordinary control character and a
 @samp{.}@:
 or macro name that would normally end a macro definition
 prevent it from doing so.
+
+Solaris and Heirloom Doctools
+@code{troff}s' @c Solaris, Heirloom
+@code{rm}
+and
+@code{rr}
+requests halt argument processing
+upon encountering an invalid identifier.
+Those of
+GNU,
+DWB,
+and Plan@tie{}9 from User Space
+@code{troff}s @c GNU, DWB, Plan 9
+do not;
+they remove any subsequent valid arguments.
 
 GNU
 @command{troff} @c GNU
