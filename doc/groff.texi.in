@@ -16951,7 +16951,9 @@ or string
 @var{name}.
 GNU
 @command{troff} @c GNU
-treats subsequent invocations as if the name had never been defined.
+treats subsequent interpolations or calls of
+@var{name}
+as if it had never been defined.
 The formatter performs no operation on a nonexistent
 @var{name}.
 
