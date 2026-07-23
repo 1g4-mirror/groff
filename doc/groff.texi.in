@@ -9634,6 +9634,9 @@ the register's contents are still accessible
 under aliases created with
 @code{aln},
 if any.
+The formatter performs no operation on a nonexistent
+@var{reg}.
+
 If
 @var{reg}
 is undefined,
@@ -16949,6 +16952,8 @@ or string
 GNU
 @command{troff} @c GNU
 treats subsequent invocations as if the name had never been defined.
+The formatter performs no operation on a nonexistent
+@var{name}.
 
 This request is incorrectly documented in the @acronym{AT&T}
 @command{troff} @c AT&T
