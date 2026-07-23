@@ -16941,12 +16941,18 @@ Rename the request, macro, diversion, or string @var{old} to @var{new}.
 @cindex string, removing (@code{rm})
 @cindex removing diversion (@code{rm})
 @cindex diversion, removing (@code{rm})
-Remove each request, macro, diversion, or string @var{name}.  GNU
-@code{troff} treats subsequent invocations as if the name had never
-been defined.
+Remove each request,
+macro,
+diversion,
+or string
+@var{name}.
+GNU
+@command{troff} @c GNU
+treats subsequent invocations as if the name had never been defined.
 
 This request is incorrectly documented in the @acronym{AT&T}
-@code{troff} manual as accepting only one argument.
+@command{troff} @c AT&T
+manual as accepting only one argument.
 @endDefreq
 
 @anchor{als}
