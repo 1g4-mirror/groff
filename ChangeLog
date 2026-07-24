@@ -1,5 +1,14 @@
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp (ps_printer::do_import): Fix
+	assertion failure caused by missing argument to parameterized
+	`error()` diagnostic call.
+
+	Fixes <https://savannah.gnu.org/bugs/?68559>.  Problem
+	introduced by me in commit 9f050b7ed7, 7 May.
+
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grops]: Regression-test Savannah #68559.
 
 	* src/devices/grops/tests/\

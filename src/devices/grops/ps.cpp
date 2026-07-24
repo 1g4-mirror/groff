@@ -1870,7 +1870,7 @@ void ps_printer::do_import(char *arg, const environment *env)
       || (p[1] == ' ')
       || (p[1] == '\n')) {
     error("scaling unit '%1' not allowed in argument to"
-	  "device extension command 'import'");
+	  "device extension command 'import'", p[1]);
     return;
   }
   while ((' ' == *p) || ('\n' == *p))
