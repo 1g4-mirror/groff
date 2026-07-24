@@ -1852,6 +1852,8 @@ void ps_printer::do_import(char *arg, const environment *env)
   while ((' ' == *arg) || ('\n' == *arg))
     arg++;
   char *p;
+  // Skip validation of first argument, a file name.
+  // XXX: This means we can't import file names with spaces in them.
   for (p = arg; (*p != '\0') && (*p != ' ') && (*p != '\n'); p++)
     ;
   if (*p != '\0')
@@ -1866,26 +1868,30 @@ void ps_printer::do_import(char *arg, const environment *env)
     parms[nparms++] = int(n);
     p = end;
   }
-  if ((csalpha(*p) && (p[1] == '\0'))
-      || (p[1] == ' ')
-      || (p[1] == '\n')) {
-    error("scaling unit '%1' not allowed in argument to"
-	  "device extension command 'import'", p[1]);
+  size_t idx = 0;
+  if (strlen(p) > 1)
+    idx = 1;
+  if (!csdigit(p[idx])
+      && (p[idx] != ' ')
+      && (p[idx] != '\n')
+      && (p[idx] != '\0')) {
+    error("invalid numeric parameters '%1'"
+	  " in device extension command 'import' argument", p);
     return;
   }
   while ((' ' == *p) || ('\n' == *p))
     p++;
   if (nparms < 5) {
     if (*p == '\0')
-      error("too few arguments to device extension command 'import'");
+      error("too few parameters in device extension command 'import'");
     else
-      error("invalid argument '%1'"
-	    " to device extension command 'import'", p);
+      error("invalid parameter '%1'"
+	    " in device extension command 'import' argument", p);
     return;
   }
   if (*p != '\0') {
-    error("superfluous argument '%1'"
-	  " to device extension command 'import'", p);
+    error("superfluous parameter '%1'"
+	  " in device extension command 'import' argument", p);
     return;
   }
   int llx = parms[0];

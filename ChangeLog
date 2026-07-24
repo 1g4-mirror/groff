@@ -1,5 +1,21 @@
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/devices/grops/ps.cpp (ps_printer::do_import): Revise to
+	avoid overreading heap by one byte with certain ill-formed
+	arguments to the `import` device extension command.  Recast
+	error diagnostic to report the full contents of the invalid
+	argument and characterize it simply as "invalid" due to
+	non-numeric contents.  Also clarify the language of these
+	diagnostics.  The grammar of "trout"/"grout" is such that the
+	device control command reads, to the end of the line, one big
+	"argument" containing space-delimited parameters.
+
+	Fixes <https://savannah.gnu.org/bugs/?68560>.  Thanks to Bruno
+	Haible for the concurrent discovery.  Problem introduced by me
+	in commit 9f050b7ed7, 7 May.
+
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/ps.cpp (ps_printer::do_import): Fix
 	assertion failure caused by missing argument to parameterized
 	`error()` diagnostic call.
