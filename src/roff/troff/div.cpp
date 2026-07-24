@@ -656,9 +656,11 @@ void end_diversions()
 // input.cpp:exit_troff() cleans up most formatter state.
 void write_any_trailer_and_exit(int exit_code)
 {
+  assert(topdiv != 0 /* nullptr */);
   // If output was never initialized, there is no trailer to write.
   if (the_output != 0 /* nullptr */) {
-    the_output->trailer(topdiv->get_page_length());
+    if (topdiv != 0 /* nullptr */) // NDEBUG
+      the_output->trailer(topdiv->get_page_length());
     // If we're already dying, don't call the_output's destructor.  See
     // node.cpp:real_output_file::~real_output_file().
     if (!the_output->is_dying)
