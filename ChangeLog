@@ -1,5 +1,28 @@
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68552.
+
+	* src/roff/troff/input.cpp (token::description): Simplify
+	population of buffer describing a node token and avoid
+	potentially overwriting a heap-allocated buffer if that node's
+	description is lengthy (as "non-interpreted character nodes",
+	input in *roff as `\a` and `\t`, are).  Discard stale code that
+	uselessly performed a dead store of a dummy node description;
+	`describe_node()` zeroes out its destination buffer so that
+	became pointless a while back.  Then, simply measure the buffer
+	as populated by `describe_node()` with strlen(3) and append to
+	it carefully with strncat(3), respecting `bufsz`.
+
+	Fixes <https://savannah.gnu.org/bugs/?68552>.  Thanks to Bruno
+	Haible for the investigation and advice.  I believe I introduced
+	this problem during the groff 1.24.0 development cycle in the
+	course of my "node tree dumping death march", but have not
+	tracked it down to a specific commit.  See generally
+	<https://lists.gnu.org/archive/html/groff-commit/2025-03/\
+	index.html>.
+
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68552.
 
 	* src/roff/groff/tests/error-grief-token-descriptions.sh: Do it.

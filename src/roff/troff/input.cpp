@@ -3146,10 +3146,9 @@ const char *token::description()
     return "a newline";
   case TOKEN_NODE:
     {
-      static char nodebuf[bufsz - (sizeof " token")];
-      (void) strcpy(nodebuf, "an undescribed node");
-      describe_node(nodebuf, bufsz);
-      (void) snprintf(buf, bufsz, "%s token", nodebuf);
+      describe_node(buf, bufsz);
+      size_t len = strlen(buf);
+      (void) strncat(buf, " token", bufsz - len - 1 /* '\0' */);
       return buf;
     }
   case TOKEN_INDEXED_CHAR:
