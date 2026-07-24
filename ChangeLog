@@ -1,5 +1,13 @@
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68558.
+
+	* src/roff/groff/tests/do-request-does-not-fail-assertion.sh: Do
+	it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/devices/grops/ps.cpp (ps_printer::do_import): Revise to
 	avoid overreading heap by one byte with certain ill-formed
 	arguments to the `import` device extension command.  Recast
