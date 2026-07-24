@@ -1,3 +1,15 @@
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (print_hyphenation_exceptions_request):
+	When the "phw-request-works.sh" test script ran under
+	sufficiently aggressive memory debugging, it failed.  Fix 1-byte
+	heap overread when a hyphenation word supplied by a hyphenation
+	exceptions word list (contrast those defined by the `hw`
+	request) has no hyphenation points at all.
+
+	Fixes <https://savannah.gnu.org/bugs/?68555>.  Problem
+	introduced by me in commit 0b40885e71, 2023-11-03.
+
 2026-07-21  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* configure.ac: Override GNU Autoconf [2.70,2.72]'s cramdowns of

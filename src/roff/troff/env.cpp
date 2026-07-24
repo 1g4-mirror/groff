@@ -4187,24 +4187,32 @@ static void print_hyphenation_exceptions_request() // .phw
     assert(hypoint != 0 /* nullptr */);
     string word = entry.contents();
     (void) memset(wordbuf, '\0', bufsz);
-    size_t i = 0, j = 0, len = word.length();
-    bool is_mode_dependent = false;
-    while (i < len) {
-      if ((hypoint != 0 /* nullptr */) && (*hypoint == i)) {
-	wordbuf[j++] = '-';
-	hypoint++;
+    size_t len = word.length();
+    // It should be impossible by any means to populate the hyphenation
+    // exception word dictionary with an empty entry.
+    assert(len > 0);
+    if (0 == len) // NDEBUG
+      continue;
+    if (0 == *hypoint) {
+      // `word` has no hyphenation points.
+      (void) strncpy(wordbuf, word.contents(), len);
+      wordbuf[len] = '\0'; // `wordbuf` is _guaranteed_ to be > len long
+    }
+    else {
+      size_t i = 0, j = 0;
+      while (i < len) {
+	if ((hypoint != 0 /* nullptr */) && (*hypoint == i)) {
+	  wordbuf[j++] = '-';
+	  hypoint++;
+	}
+	wordbuf[j++] = word[i++];
       }
-      // The exception word symbol's contents contains a space if it's
-      // _not_ user-defined.  See
-      // `remove_hyphenation_exception_words_request()` above.
-      if (word[i] == ' ') {
-	assert(i == (len - 1));
-	is_mode_dependent = true;
-      }
-      wordbuf[j++] = word[i++];
     }
     errprint("%1", wordbuf);
-    if (is_mode_dependent)
+    // The exception word symbol's `contents` ends with a space if it's
+    // _not_ user-defined.  See
+    // `remove_hyphenation_exception_words_request()` above.
+    if (word[len - 1] == ' ')
       errprint("\t*");
     errprint("\n");
   }
