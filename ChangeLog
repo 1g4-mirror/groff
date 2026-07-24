@@ -1,5 +1,15 @@
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grops]: Regression-test Savannah #68559.
+
+	* src/devices/grops/tests/\
+	device-extension-command-import-works.sh: Do it.
+	* src/devices/grops/grops.am (grops_TESTS): Run test.
+	(TESTS, EXTRA_DIST): Wire `grops_TESTS` into Automake test
+	harness and ship this and any future grops test scripts.
+
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (print_hyphenation_exceptions_request):
 	When the "phw-request-works.sh" test script ran under
 	sufficiently aggressive memory debugging, it failed.  Fix 1-byte

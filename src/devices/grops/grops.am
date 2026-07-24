@@ -45,6 +45,11 @@ uninstall_groffdirs: uninstall_grops_hook
 uninstall_grops_hook:
 	-rmdir $(DESTDIR)$(tmacdir)
 
+grops_TESTS = \
+  src/devices/grops/tests/device-extension-command-import-works.sh
+TESTS += $(grops_TESTS)
+EXTRA_DIST += $(grops_TESTS)
+
 # Local Variables:
 # fill-column: 72
 # mode: makefile-automake
