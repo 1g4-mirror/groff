@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include <config.h>
 #endif
 
+#include <limits.h> // SSIZE_MAX
 #include <stdio.h> // prerequisite of searchpath.h
 #include <sys/types.h> // ssize_t
 
@@ -31,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "symbol.h" // prerequisite of dictionary.h
 #include "dictionary.h"
 #include "errarg.h" // prerequisite of error.h
-#include "error.h" // prerequisite of error.h
+#include "error.h"
 
 // is 'p' a good size for a hash table
 
@@ -42,9 +43,12 @@ static bool is_good_size(ssize_t p)
   for (i = 2; i <= (p / 2); i++)
     if ((p % i) == 0)
       return false;
-  for (i = 0x100; i != 0; i <<= 8)
-    if ((i % p) <= SMALL || (i % p) > (p - SMALL))
+  for (i = 0x100; ; i <<= 8) {
+    if (((i % p) <= SMALL) || ((i % p) > (p - SMALL)))
       return false;
+    if (i > (SSIZE_MAX >> 8))
+      break;
+  }
   return true;
 }
 

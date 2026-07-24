@@ -1,3 +1,15 @@
+2026-07-25  Bruno Haible <bruno@clisp.org>
+
+	[troff]: Fix Savannah #68583.
+
+	* src/roff/troff/dictionary.cpp: Preprocessor-include C
+	"<limits.h>" header file for `SSIZE_MAX` symbol.
+	(is_good_size): Avoid signed integer overflow when computing
+	dictionary capacity.
+
+	Fixes <https://savannah.gnu.org/bugs/?68583>.  [Problem
+	introduced by me in commit 3c1fa16104, 14 April.  --GBR]
+
 2026-07-27  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[devpdf]: Revise search for URW fonts to exclude
