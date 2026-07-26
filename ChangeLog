@@ -9,10 +9,9 @@
 	* doc/doc.am ($(GROFF_MAN_PAGES_ALL)): Add dependency-only
 	target declaring "soelim" as prerequisite.
 
-	Fixes build failure in environment lacking an existing *roff
-	installation.  Thanks to Alexis Hildebrandt for the report in
-	<https://lists.gnu.org/archive/html/groff/2026-07/\
-	msg00010.html>.
+	Fixes <https://savannah.gnu.org/bugs/?68561>, build failure in
+	environment lacking an existing *roff installation.  Thanks to
+	Alexis Hildebrandt for the report.
 
 2026-07-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
@@ -34,10 +33,9 @@
 	`MAINTAINER_MODE` Automake conditional.  Add `else` branch
 	defining them with empty recipes for non-maintainer mode.
 
-	Fixes excessive build dependencies imposed on distribution
-	archives.  Thanks to Alexis Hildebrandt for the report in
-	<https://lists.gnu.org/archive/html/groff/2026-07/\
-	msg00010.html>.
+	Fixes <https://savannah.gnu.org/bugs/?68562>, excessive build
+	dependencies imposed on distribution archives.  Thanks to Alexis
+	Hildebrandt for the report.
 
 2026-07-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
