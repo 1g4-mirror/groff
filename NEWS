@@ -23,7 +23,9 @@ troff
    inconsistent with AT&T troff but more consistent with general *roff
    syntax; as a rule, requests given invalid arguments (and that don't
    process a list of similar objects, as `rm` and `rr` do) perform no
-   operation.
+   operation.  (However, see "Other differences" in groff_diff(7) or
+   groff's Texinfo manual regarding `rm` and `rr` request behavior that
+   is discrepant among various troffs.)
 
 *  The `dt` and `wh` requests now enforce their requirement of space
    between their arguments.  While consistent with GNU troff input
@@ -54,10 +56,11 @@ troff
    warning category governing its emission.  This change is to make it
    easier for users to select warnings of interest.
 
-*  When the `substring` request is given two index arguments that both
-   lie outside the string, macro, or diversion's length, it now ignores
-   the request (and issues a warning in category "range"), leaving the
-   operand (first request argument) unchanged instead of emptying it.
+*  When the `substring` request is given two index arguments whose
+   magnitudes both exceed the operand string, macro, or diversion's
+   length, it now ignores the request (and issues a warning in category
+   "range"), leaving the operand (first request argument) unchanged
+   instead of emptying it.
 
 *  When the `ti` request is given no arguments, the formatter now
    cancels any pending temporary indentation.  (Formerly, it did nothing
@@ -154,13 +157,14 @@ Macro packages
    The PDF thus produced shows an overview bookmark panel or navigation
    pane (viewer application support allowing); the viewer's interface to
    document properties includes the document title and author(s); if the
-   document calls the package's `TC` macro, its entries will be
-   clickable to navigate the document (even if it does not use the `XN`
-   macro introduced in groff 1.23.0); and if the document calls `RP` to
-   configure a cover page, the table of contents relocates to follow it.
+   document calls the package's `TC` macro, the table of contents
+   entries it produces are hyperlinked to navigate the document (even if
+   it does not use the `XN` macro introduced in groff 1.23.0); and if
+   the document calls `RP` to configure a cover page, the table of
+   contents relocates to follow it.
 
-   The new macros `XM` and `XR` respectively set and navigate to
-   clickable internal links within the document.
+   The new macros `XM` and `XR` respectively anchor a location within
+   the document and format text that hyperlinks to it, respectively.
 
    These changes were inspired by Keith Marshall's "spdf.tmac" which was
    withdrawn from groff in 1.24.0, but continues to be developed at:
@@ -187,9 +191,9 @@ Macro packages
 Miscellaneous
 -------------
 
-*  The new document "groff-pdf-features.pdf" surveys the PDF features
-   that groff enables and exposes in its full-service macro packages.
-   Thanks to Deri James.
+*  The new document "Groff PDF Features" is built and installed as a
+   PDF.  It surveys the PDF features that groff enables and exposes in
+   its full-service macro packages.  Thanks to Deri James.
 
 *  The grn command now exits with status 2 instead of 8 on usage errors
    arising from missing arguments to command-line options.  It now exits
