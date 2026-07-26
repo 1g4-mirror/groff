@@ -3095,7 +3095,7 @@ const char *token::description()
   // long identifier.
   //   "character code XXX"
   //   "special character 'bracketrighttp'"
-  //   "indexed character -2147483648"
+  //   "indexed character 2147483648"
   //   "space character horizontal motion node token"
   //   "special character or class"
   // Future:
