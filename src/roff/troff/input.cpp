@@ -3494,11 +3494,18 @@ static void do_request() // .do
     skip_line();
     return;
   }
+  // We must attempt to read the first request argument--a request or
+  // macro identifier--with compatibility mode _off_, but if the user
+  // doesn't supply a valid one, we must unwind.
   want_att_compat_stack.push(want_att_compat);
   want_att_compat = false;
   symbol nm = read_identifier();
-  if (nm.is_null())
+  if (nm.is_null()) {
+    want_att_compat = want_att_compat_stack.top();
+    want_att_compat_stack.pop();
     skip_line();
+    return;
+  }
   else
     interpolate_macro_or_invoke_request(nm, true /* don't want next token */);
   assert(!want_att_compat_stack.empty());

@@ -1,5 +1,19 @@
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68558.
+
+	* src/roff/troff/input.cpp (do_request): If given a first
+	argument that is an invalid request or macro name, we cannot
+	sensibly proceed: unwind the "compatibility stack" manipulation
+	we just did and return early, maintaining the integrity of
+	aforesaid stack.
+
+	Fixes <https://savannah.gnu.org/bugs/?68558>.  Problem appears
+	to date back at least to groff 1.22.3 (2014), and possibly much
+	earlier.
+
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68558.
 
 	* src/roff/groff/tests/do-request-does-not-fail-assertion.sh: Do
