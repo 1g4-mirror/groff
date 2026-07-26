@@ -1,5 +1,12 @@
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68552.
+
+	* src/roff/groff/tests/error-grief-token-descriptions.sh: Do it.
+	* src/roff/groff/groff.am (groff_TESTS): Run test.
+
+2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #68558.
 
 	* src/roff/troff/input.cpp (do_request): If given a first
