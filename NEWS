@@ -122,7 +122,9 @@ Macro packages
    driver to improve their rendering (as with HTML).  Lists can be
    nested.  (Sub)sectioning macro calls, and the end of the document,
    close all open lists.  See groff_man(7) for details, and
-   groff_man_style(7) for an example.
+   groff_man_style(7) for an example.  Thanks to Alex Colomar, Chet
+   Ramey, Pádraig Brady, and Stephen Gildea for consultation and
+   encouragement, and to Alex for selecting these macros' names.
 
    Because these macros format no text, documents employing them risk no
    damage to their content if the formatter does not support them.  A
