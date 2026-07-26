@@ -81,9 +81,9 @@ Headline features nominated by our development community include:
 For a comprehensive list of feature changes, see "News" below.
 
 Much attention has been given to fixing bugs, validating input,
-improving diagnostic messages, and correcting and expanding
-documentation.  The previous release shipped with 314 automated tests;
-this one ships with over NNN.
+clarifying diagnostic messages, improving memory management, and
+correcting and expanding documentation.  The previous release shipped
+with 314 automated tests; this one ships with over NNN.
 
 Details
 -------
