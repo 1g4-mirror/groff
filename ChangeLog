@@ -1,5 +1,26 @@
 2026-07-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Fix Savannah #68570.
+
+	* src/preproc/tbl/main.cpp (process_format): Fix invalid memory
+	access (SEGV) when a table description consists of multiple rows
+	of horizontal span column classifiers (only).  When processing
+	each row descriptor, keep track--with new local Boolean
+	`is_first_column` of whether we're processing the first column
+	descriptor in that row.  If we encounter a horizontal span
+	column classifier in the first column, throw an error diagnostic
+	instead of setting `got_format` true and assigning the "type"
+	`t` to `FORMAT_SPAN`.  Set the new Boolean false after
+	successfully interpreting one column descriptor in the row
+	descriptor.  Reset the new Boolean to true when advancing to a
+	new row description.
+
+	Fixes <https://savannah.gnu.org/bugs/?68570>.  Problem appears
+	to date back to groff's birth.  Thanks to Elias Hasas for the
+	report and an economical reproducer.
+
+2026-07-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Regression-test Savannah #68570.
 
 	* src/preproc/tbl/tests/\

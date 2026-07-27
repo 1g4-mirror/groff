@@ -791,6 +791,7 @@ static format *process_format(table_input &in, options *opt,
   input_entry_format *list = 0 /* nullptr */;
   bool have_expand = false;
   bool is_first_row = true;
+  bool is_first_column = true;
   int c = in.get();
   for (;;) {
     int vrule_count = 0;
@@ -833,8 +834,14 @@ static format *process_format(table_input &in, options *opt,
 	break;
       case 's':
       case 'S':
-	got_format = true;
-	t = FORMAT_SPAN;
+	if (is_first_column)
+	  error("cannot horizontally span in first column;"
+		" ignoring column classifier '%1'",
+		static_cast<char>(c));
+	else {
+	  got_format = true;
+	  t = FORMAT_SPAN;
+	}
 	break;
       case '^':
 	got_format = true;
@@ -875,8 +882,10 @@ static format *process_format(table_input &in, options *opt,
       if (got_period)
 	break;
       c = in.get();
-      if (got_format)
+      if (got_format) {
+	is_first_column = false;
 	break;
+      }
     }
     if (got_period)
       break;
@@ -1180,6 +1189,7 @@ static format *process_format(table_input &in, options *opt,
     if (c == '\n' || c == ',') {
       vrule_count = 0;
       is_first_row = false;
+      is_first_column = true;
       c = in.get();
       list->is_last_column = true;
     }
