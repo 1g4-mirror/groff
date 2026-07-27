@@ -1,3 +1,11 @@
+2026-07-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[tbl]: Regression-test Savannah #68570.
+
+	* src/preproc/tbl/tests/\
+	do-not-segv-on-span-only-table-description.sh: Do it.
+	* src/preproc/tbl/tbl.am (tbl_TESTS): Run test.
+
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #68552.
