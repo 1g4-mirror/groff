@@ -1,3 +1,42 @@
+2026-07-27  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[devpdf]: Revise search for URW fonts to exclude
+	"/usr/share/ghostscript/Resource/Font".
+
+	* font/devpdf/Foundry.in:
+	* m4/groff.m4 (GROFF_URW_FONTS_CHECK): Drop it.
+
+	Systems like Arch and Manjaro Linux don't use Debian's approach
+	to Ghostscript and URW font packaging.  Our "configure" script
+	should be looking only for the full URW fonts package, not
+	not Ghostscript's "Resource/Font" directory.  If Ghostscript is
+	installed, we can configure gropdf's "intermediate" service
+	level at least, and the directory will be found by
+	"BuildFoundries" when it parses the output of the "gs -h"
+	command.  What "configure" should be doing is finding the full
+	URW fonts directory, and if found, setting "$urwfontsdir."  It
+	should not be looking for Ghostscript-provided fonts at all.
+
+	We know that if the only URW fonts found are the ones supplied
+	in Ghostscript's "Resource" font directory, there are not going
+	to be any AFMs.  `groff_have_urw_fonts` should be set only if
+	the PFB files are found elsewhere.  It suffices to have
+	`$GHOSTSCRIPT != "missing"` to know that "intermediate" service
+	is available.
+
+	Tested by adding my Ghostscript "Resource/Font" to "groff.m4",
+	hiding real URW fonts where "configure" won't find them, and
+	reproducing the "check-urw-foundry.sh" test script failure
+	observed on Manjaro.  If I then remove that directory from
+	"groff.m4" it then reports "intermediate" and the test passes.
+
+	"configure" could look for AFM files as well, but it is
+	unnecessary so long as we don't search paths matching
+	"Resource/Font".
+
+	Fixes <https://savannah.gnu.org/bugs/?68567>.  Thanks to Bruno
+	Haible for the report.
+
 2026-07-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am: Cut down "automake.pdf"'s excessive make(1)

@@ -342,8 +342,7 @@ dnl Keep this list in sync with font/devpdf/Foundry.in.
       /usr/share/fonts/type1/gsfonts/ \
       /usr/share/fonts/type1/ \
       /usr/share/fonts/default/Type1/adobestd35/ \
-      /usr/share/fonts/default/Type1/ \
-      /usr/share/ghostscript/Resource/Font"
+      /usr/share/fonts/default/Type1/"
 
     if test -n "$urwfontsdir"
     then
