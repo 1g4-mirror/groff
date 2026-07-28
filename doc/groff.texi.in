@@ -23519,7 +23519,7 @@ a brace escape sequence was employed uselessly;
 the end of a sentence was detected prior to the end of a text line;
 or
 an attempt was made to combine temporary indentation
-with centering or right-adjustment.
+with centering or right-alignment.
 
 @item scale
 @itemx 32
@@ -23532,14 +23532,14 @@ A numeric expression was out of range for its context.
 
 @item syntax
 @itemx 128
-A self-contradictory hyphenation mode or character flags were requested;
+A self-contradictory hyphenation mode or character flags were specified;
 an empty or incomplete numeric expression was encountered;
 an operand to a numeric operator was missing;
 an attempt was made to format characters or spaces on an input line
 after an output line continuation escape sequence;
 a recognized but inapposite escape sequence
-or unprintable character code
-was used in a device extension command;
+or unprintable character
+was employed in a device extension command;
 an attempt was made to define a recursive,
 empty,
 or nonsensical character class;
