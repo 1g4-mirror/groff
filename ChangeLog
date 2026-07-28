@@ -88,7 +88,7 @@
 	* src/devices/grops/ps.cpp (ps_printer::do_import): Revise to
 	avoid overreading heap by one byte with certain ill-formed
 	arguments to the `import` device extension command.  Recast
-	error diagnostic to report the full contents of the invalid
+	error diagnostic to report the remaining contents of the invalid
 	argument and characterize it simply as "invalid" due to
 	non-numeric contents.  Also clarify the language of these
 	diagnostics.  The grammar of "trout"/"grout" is such that the
