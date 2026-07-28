@@ -1478,18 +1478,18 @@ contains unsupported escape sequence
 .\" .LS {definition|enumerated|itemized} [compactness] [indent]
 .de1 LS
 .  if \\n[DEBUG] .tm GBR: mark VALID09: \\$0
-.  if ((\\n[.$] < 1) : (\\n[.$] > 3)) \
-.    an*style-warn .\\$0 expects 1 to 3 arguments, got \\n[.$]
+.  if ((\\n[.$] < 1) : (\\n[.$] > 3)) \{\
+.    an*style-warn .\\$0 expects 1 to 3 arguments, got \\n[.$]; ignoring
+.    return
+.  \}
 .  ds an*list-type invalid\"
 .  if '\?\\$1\?'\?definition\?' .ds an*list-type \\$1\"
 .  if '\?\\$1\?'\?enumerated\?' .ds an*list-type \\$1\"
 .  if '\?\\$1\?'\?itemized\?'   .ds an*list-type \\$1\"
 .  if '\?\\*[an*list-type]\?'\?invalid\?' \{\
 .    if \\n[DEBUG] .tm GBR: mark INVALID01: \\$0 branch 1
-.    ds an*msg invalid .\\$0 list type '\\*[an*list-type]':
-.    as an*msg " assuming 'definition'
-.    an*warn \\*[an*msg]
-.    ds an*list-type definition\"
+.    an*warn invalid .\\$0 list type '\\$1'; ignoring
+.    return
 .  \}
 .  nr an*list-is-compact 0
 .  if (\\n[.$] > 1) \{\
@@ -1522,7 +1522,6 @@ contains unsupported escape sequence
 .  rm an*list-indent
 .  rr an*list-is-compact
 .  rm an*list-type
-.  rm an*msg
 ..
 .
 .\" End (or "close") the most recently unclosed list.
