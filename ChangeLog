@@ -67,9 +67,13 @@
 	we just did and return early, maintaining the integrity of
 	aforesaid stack.
 
-	Fixes <https://savannah.gnu.org/bugs/?68558>.  Problem appears
-	to date back at least to groff 1.22.3 (2014), and possibly much
-	earlier.
+	Fixes <https://savannah.gnu.org/bugs/?68558>.  Problem dates
+	back to commit b04d345ed2 (groff 1.06), 1992-09-01, which
+	originally implemented the `do` request.  The request handler
+	disabled compatibility mode, then if it failed to read a valid
+	identifier for any reason (invalid syntax, or no argument
+	present), called `skip_line()`--meaning that the next input
+	line would be interpreted with compatibility mode disabled.
 
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
