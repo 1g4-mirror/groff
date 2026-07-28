@@ -518,6 +518,7 @@ chartype \[dq]letter\[dq]@\[rs][*n]\[rs][*c]\[rs][*o]\[rs][*p]\[rs][*r]\
 \[rs][*s]
 chartype \[dq]letter\[dq]@\[rs][*t]\[rs][*u]\[rs][*f]\[rs][*x]\[rs][*q]\
 \[rs][*w]
+.\" `/` is NOT configured as a binary operator or anything else.
 chartype \[dq]binary\[dq]@*\[rs][pl]\[rs][mi]
 chartype \[dq]relation\[dq]@<>\[rs][eq]\[rs][<=]\[rs][>=]
 chartype \[dq]opening\[dq]@{([
@@ -645,15 +646,15 @@ height.
 .
 For example,
 .I @g@eqn
-defines
+defines the built-in
 .B hat
-as follows.
+macro as if by the following.
 .
 .
 .RS
 .IP
 .EX
-accent { roman "\[ha]" }
+define hat ! accent { roman "\[ha]" } !
 .EE
 .RE
 .
@@ -1008,9 +1009,10 @@ so
 .I @g@eqn
 ignores this primitive when producing that output format.
 .
-The built-in
+.I @g@eqn
+defines the built-in
 .B sum
-macro is defined as if by the following.
+macro as if by the following.
 .
 .RS
 .IP
