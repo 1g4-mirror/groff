@@ -756,7 +756,7 @@ else
 	exit 1
 endif # HAVE_TEXI2DVI
 
-install-doc: install-dvi install-html install-pdf
+install-doc: install-dvi install-html install-info install-pdf
 
 maintainer-clean-local:
 	$(RM) $(builddir)/$(DOC_GNU_EPS)
