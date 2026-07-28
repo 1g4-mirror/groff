@@ -1,3 +1,17 @@
+2026-07-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am: Cut down "automake.pdf"'s excessive make(1)
+	prerequisites.  The document doesn't require pdfmom(1) and its
+	many transitive dependencies; it doesn't use pic(1), eqn(1), or
+	tbl(1) and does not use internal hyperlinks, so it does not
+	require multi-pass formatting.  Define new `DOC_GROFF_MOM` macro
+	for performing a "basic mom(7) document build".
+	(doc/automake.pdf): Drop "pdfmom" as prerequisite.  Add recipe
+	for this target rule, using new macro.
+
+	Fixes <https://savannah.gnu.org/bugs/?68576>.  Thanks to Nguyễn
+	Gia Phong and Richard Purdie for the report.
+
 2026-07-28  Richard Purdie <richard.purdie@linuxfoundation.org>
 
 	* doc/doc.am (doc/groff-man-pages.pdf)

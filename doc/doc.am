@@ -41,6 +41,15 @@ DOC_GROFF = \
   GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
   $(GROFFBIN) $(MFLAG) $(FFLAG) -ww -b
 
+# We need a separate macro for running groff with `-mom`, because (a)
+# mom(7)'s macro package is in "contrib/", not "tmac/", and (b) that
+# package is not "`-ww`-clean".
+DOC_GROFF_MOM = \
+  GROFF_COMMAND_PREFIX= \
+  GROFF_BIN_PATH="$(GROFF_BIN_PATH)" \
+  $(GROFFBIN) -M$(abs_top_srcdir)/contrib/mom $(MFLAG) $(FFLAG) \
+  -mom -wall -b
+
 # There's no point crashing the build due to fonts being unavailable for
 # embedding (or selection, even, when their metrics are missing) if we
 # knew at configuration time that the venture wouldn't come off.
@@ -143,7 +152,8 @@ EXTRA_DIST += $(DOCFILES_NOINST)
 EXTRA_DIST += doc/automake.mom
 docpdfdocdir = $(pdfdocdir)
 nodist_docpdfdoc_DATA = $(PROCESSEDDOCFILES_PDF)
-doc/automake.pdf: doc/automake.mom pdfmom $(TMAC_PACKAGE_MOM)
+doc/automake.pdf: doc/automake.mom $(TMAC_PACKAGE_MOM)
+	$(GROFF_V)$(DOC_GROFF_MOM) -Tpdf $(doc_srcdir)/automake.mom >$@
 
 # GNU PIC html documentation, installed in $(htmldocdir)
 # Other pic*.html files are installed by the local rule
