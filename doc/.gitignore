@@ -1,7 +1,9 @@
 # build artifacts
 /automake.pdf
 /gnu.eps
+/gnu.png
 /grnexmpl.ps
+/groff-pdf-features.pdf
 /groff-man-pages-cover.groff
 /groff-man-pages.pdf
 /groff-man-pages.utf8.txt
@@ -17,6 +19,8 @@
 /groff.txt
 /img/pic-*.png
 /img/webpage-*.png
+/line-layout.eps
+/line-layout.png
 /meintro.me
 /meintro.ps
 /meintro_fr.me
@@ -24,10 +28,10 @@
 /meref.me
 /meref.ps
 /ms.ms
-/ms.ps
+/ms.pdf
 /pic-*.html
 /pic.html
-/pic.ps
+/pic.pdf
 /webpage-*.html
 /webpage.html
 /webpage.ps
