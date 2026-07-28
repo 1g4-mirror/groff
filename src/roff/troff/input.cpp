@@ -1018,10 +1018,15 @@ static void next_file_request() // .nx
 
 static void shift_request() // .shift
 {
-  int n;
-  if (!has_arg() || !read_integer(&n))
+  int n = 0;
+  if (!has_arg())
     n = 1;
-  input_stack::shift(n);
+  else
+    (void) read_integer(&n);
+  if (n < 0)
+    warning(WARN_RANGE, "ignoring negative macro argument shift %1", n);
+  else if (n > 0)
+    input_stack::shift(n);
   skip_line();
 }
 

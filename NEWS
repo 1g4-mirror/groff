@@ -16,6 +16,9 @@ VERSION next
 troff
 -----
 
+*  The `shift` request no longer performs an operation if it is given an
+   invalid argument.
+
 *  The formatter now emits a warning in category "style" if -crementing
    interpolation (such as `\n+[myreg]` or `\n-[count]`) is (uselessly)
    applied to a non-auto-crementing register.

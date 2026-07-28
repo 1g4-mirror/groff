@@ -1,3 +1,10 @@
+2026-07-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp: Revise `shift` request behavior;
+	perform no operation if the argument is invalid.
+
+	Fixes <https://savannah.gnu.org/bugs/?68571>.
+
 2026-07-23  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/div.cpp (write_any_trailer_and_exit): Add
