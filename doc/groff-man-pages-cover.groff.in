@@ -34,5 +34,21 @@ documenting version @VERSION@
 .ps \n[GMP*saved-type-size]u
 .sp .1i
 .Hl
+.sp 4i
+The manual was intended to be typeset;
+some detail is sacrificed on terminals.
+.br
+\[em]
+.ft I
+man\c
+.ft
+(1),
+.ft I
+Unix Time-Sharing System Programmer's Manual,
+.ft
+.br
+Eighth Edition,
+Volume 1,
+February 1985
 .bp 1
 .pdfpagenumbering D . 1
