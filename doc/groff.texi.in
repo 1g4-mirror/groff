@@ -22693,8 +22693,8 @@ corresponding to the newline at the end of input.@footnote{You may
 wonder why a glyph node for
 @samp{hy}
 exists when this example
-doesn't produce one on the output.
-That's because the break is @emph{discretionary};
+doesn't produce a hyphen in the output.
+That's because the hyphenation break is @emph{discretionary};
 at the time a word is formatted into nodes,
 GNU
 @command{troff} @c GNU
