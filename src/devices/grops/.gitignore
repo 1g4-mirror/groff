@@ -4,3 +4,6 @@
 /grops.1
 /ps.o
 /psrm.o
+# test ("make check") artifacts
+/tests/*.log
+/tests/*.trs
