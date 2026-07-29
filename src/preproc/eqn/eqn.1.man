@@ -2248,6 +2248,8 @@ x = { - b ~ \[+-] ~ sqrt { b sup 2 - 4 a c } } over { 2 a }
 .RE
 .
 .
+.br
+.ne 2v
 .P
 Alternatively,
 we could define the plus-minus sign as a binary operator.
