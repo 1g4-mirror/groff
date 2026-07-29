@@ -129,7 +129,7 @@ void set_modifier(const entry_modifier *);
 int find_decimal_point(const char *, char, const char *);
 
 string an_empty_string;
-int location_force_filename = 0;
+int location_force_filename = 0; // TODO: boolify
 
 void printfs(const char *,
 	     const string &arg1 = an_empty_string,
@@ -1076,16 +1076,17 @@ void restore_inline_modifier(const entry_modifier *m)
 struct stuff {
   stuff *next;
   int row;			// occurs before row 'row'
-  char printed;			// has it been printed?
+  char printed;			// has it been printed?  TODO: boolify
 
   stuff(int);
   virtual void print(table *) = 0;
   virtual ~stuff();
-  virtual int is_single_line() { return 0; };
-  virtual int is_double_line() { return 0; };
+  virtual int is_single_line() { return 0; }; // TODO: boolify
+  virtual int is_double_line() { return 0; }; // TODO: boolify
 };
 
-stuff::stuff(int r) : next(0), row(r), printed(0)
+stuff::stuff(int r)
+: next(0 /* nullptr */), row(r), printed(0 /* false */)
 {
 }
 
