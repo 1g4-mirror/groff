@@ -158,12 +158,13 @@ Macro packages
 
    The PDF thus produced shows an overview bookmark panel or navigation
    pane (viewer application support allowing); the viewer's interface to
-   document properties includes the document title and author(s); if the
-   document calls the package's `TC` macro, the table of contents
-   entries it produces are hyperlinked to navigate the document (even if
-   it does not use the `XN` macro introduced in groff 1.23.0); and if
-   the document calls `RP` to configure a cover page, the table of
-   contents relocates to follow it.
+   document properties includes the document title and author(s), if
+   specified by the `TL` and `AU` macros, respectively; if the document
+   calls the package's `TC` macro, the table of contents entries it
+   produces are hyperlinked to navigate the document (even if it does
+   not use the `XN` macro introduced in groff 1.23.0); and if the
+   document calls `RP` to configure a cover page, the table of contents
+   relocates to follow it.
 
    The new macros `XM` and `XR` respectively anchor a location within
    the document and format text that hyperlinks to it, respectively.
