@@ -1,3 +1,9 @@
+2024-07-31  Bjarni Ingi Gislason <bjarniig@simnet.is>
+
+	* ChangeLog.12[34]: Fix doubled word typos.
+
+	Fixes <https://savannah.gnu.org/bugs/?68584>.
+
 2026-08-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/main.cpp (process_format): Clarify diagnostic

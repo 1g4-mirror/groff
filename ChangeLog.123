@@ -6571,8 +6571,8 @@ Version 1.23.0 released 2023-07-05
 
 	* src/preproc/refer/label.ypp: Drop redundant declaration of
 	`yyparse`.  Both byacc 20140715 and GNU Bison 3.3.2 supply the
-	the function prototype themselves.  Addresses
-	"-Wredundant-decls" warning from GCC.
+	function prototype themselves.  Addresses "-Wredundant-decls"
+	warning from GCC.
 
 	Fixes <https://savannah.gnu.org/bugs/?43569>.
 

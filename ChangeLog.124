@@ -14252,8 +14252,8 @@ Version 1.24.0 released 2026-02-28
 2024-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (DS): Break line unconditionally, ensuring that
-	that the top-of-page trap springs even if the document starts
-	with a call of this macro.
+	the top-of-page trap springs even if the document starts with a
+	call of this macro.
 
 	Fixes <https://savannah.gnu.org/bugs/?66339>.  Thanks to Joerg
 	van den Hoff for the report.  Problem introduced by me in commit
@@ -17038,8 +17038,8 @@ Version 1.24.0 released 2026-02-28
 2024-08-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: When throwing a warning diagnostic about a mismatched
-	escape sequence delimiter, say what what we were expecting and
-	what we got instead.
+	escape sequence delimiter, say what we were expecting and what
+	we got instead.
 
 	* src/roff/troff/input.cpp (do_overstrike, do_bracket)
 	(do_name_test, do_zero_width, do_width, do_device_control)
