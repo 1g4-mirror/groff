@@ -34,7 +34,7 @@ void yyerror(const char *);
 %}
 
 %union {
-	char *str;
+	char *str;      // to be freed with free()
 	box *b;
 	pile_box *pb;
 	matrix_box *mb;

@@ -202,8 +202,8 @@ delim_box::delim_box(char *l, box *pp, char *r)
 
 delim_box::~delim_box()
 {
-  delete[] left;
-  delete[] right;
+  free(left);
+  free(right);
   delete p;
 }
 
