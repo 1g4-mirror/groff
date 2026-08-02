@@ -2691,7 +2691,7 @@ Version 1.24.0 released 2026-02-28
 	optimizer would do the equivalent on its own, but this change
 	also makes a lengthy compound conditional expression shorter.)
 
-	Begins a long long process of fixing Savannah #67735.
+	Begins a long, long process of fixing Savannah #67735.
 
 2025-11-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
