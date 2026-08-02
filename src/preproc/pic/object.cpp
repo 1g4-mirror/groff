@@ -468,7 +468,7 @@ object_spec::~object_spec()
 }
 
 class command_object : public object {
-  char *s;
+  char *s;              // to be freed with free()
   const char *filename;
   int lineno;
 public:
@@ -485,7 +485,7 @@ command_object::command_object(char *p, const char *fn, int ln)
 
 command_object::~command_object()
 {
-  delete[] s;
+  free(s);
 }
 
 void command_object::print()
