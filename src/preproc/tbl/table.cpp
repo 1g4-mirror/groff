@@ -214,7 +214,7 @@ public:
 
 class text_entry : public simple_entry {
 protected:
-  char *contents;
+  char *contents;             // to be freed with free()
   void print_contents();
 public:
   text_entry(const table *, const entry_modifier *, char *);
@@ -319,7 +319,7 @@ public:
 };
 
 class block_entry : public table_entry {
-  char *contents;
+  char *contents;             // to be freed with free()
 protected:
   void do_divert(int, int, const string *, int *, int);
 public:
@@ -664,7 +664,7 @@ block_entry::block_entry(const table *p, const entry_modifier *m,
 
 block_entry::~block_entry()
 {
-  delete[] contents;
+  free(contents);
 }
 
 void block_entry::position_vertically()
