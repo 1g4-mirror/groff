@@ -380,11 +380,11 @@ class top_input : public macro_input {
 static const size_t eqn_macro_maximum_arg_count = 9;
 
 class argument_macro_input : public input {
-  char *s;
+  char *s;                                 // to be freed with free()
   char *p;
   char *ap;
   size_t argc;
-  char *argv[eqn_macro_maximum_arg_count];
+  char *argv[eqn_macro_maximum_arg_count]; // elements to be freed with free()
 public:
   argument_macro_input(const char *, size_t, char **, input *);
   ~argument_macro_input();
@@ -555,8 +555,8 @@ argument_macro_input::argument_macro_input(const char *body, size_t ac,
 argument_macro_input::~argument_macro_input()
 {
   for (size_t i = 0; i < argc; i++)
-    delete[] argv[i];
-  delete[] s;
+    free(argv[i]);
+  free(s);
 }
 
 int argument_macro_input::get()
