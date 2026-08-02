@@ -44,7 +44,7 @@ output::output() : args(0), desired_height(0.0), desired_width(0.0)
 
 output::~output()
 {
-  delete[] args;
+  free(args);
 }
 
 void output::set_desired_width_height(double wid, double ht)
@@ -55,7 +55,7 @@ void output::set_desired_width_height(double wid, double ht)
 
 void output::set_args(const char *s)
 {
-  delete[] args;
+  free(args);
   if (s == 0 || *s == '\0')
     args = 0;
   else

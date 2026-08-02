@@ -30,7 +30,7 @@ struct line_type {
 
 class output {
 protected:
-  char *args;
+  char *args;			// to be freed with free()
   double desired_height;	// zero if no height specified
   double desired_width;		// zero if no depth specified
   double compute_scale(double, const position &, const position &);
