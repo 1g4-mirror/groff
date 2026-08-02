@@ -1,3 +1,8 @@
+2026-08-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/main.cpp (process_format): Clarify diagnostic
+	messages.  Align terminology with our tbl(1) man page.
+
 2026-07-25  Bruno Haible <bruno@clisp.org>
 
 	[troff]: Fix Savannah #68583.

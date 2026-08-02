@@ -874,7 +874,7 @@ static format *process_format(table_input &in, options *opt,
       default:
 	if (c == opt->tab_char)
 	  break;
-	error("invalid column classifier '%1'", char(c));
+	error("expected column classifier, got '%1'", char(c));
 	free_input_entry_format_list(list);
 	list = 0 /* nullptr */;
 	return 0 /* nullptr */;
@@ -893,7 +893,7 @@ static format *process_format(table_input &in, options *opt,
     if (vrule_count > 2) {
       vrule_count = 2;
       warning("ignoring excess vertical lines at beginning of row"
-	      " description");
+	      " definition");
     }
     list->vrule_count = vrule_count;
     // Now handle modifiers.
