@@ -4,7 +4,7 @@
     modification, are permitted in any medium without royalty provided
     the copyright notice and this notice are preserved.
 
-This file contains advice on developing and contributing to groff.  It
+This file offers advice on developing and contributing to groff.  It
 assumes that developers will install the 'git' revision control
 system and build groff using the instructions in 'INSTALL.REPO'.
 Familiarize yourself with the structure of the source tree by studying
@@ -139,7 +139,7 @@ Updating copyright notices
 Background
 ..........
 
-* A lay person's views and opinion follow; they are not legal advice.
+* A lay person's views and opinions follow; they are not legal advice.
   If you require legal advice, consult a licensed attorney competent in
   copyright law in your jurisdiction.  The following discussion attempts
   to establish a coherent basis from which to make consistent decisions
@@ -164,11 +164,12 @@ Background
   In files not encoded in UTF-8, we avoid use of the copyright sign
   (Unicode U+00A9).  See below regarding "ersatz" copyright symbols.
 
-* The purpose of a copyright notice is to record facts, relevant to a
-  court of law with applicable subject-matter jurisdiction, about a
-  work.  It is not to express acknowledgement of, gratitude regarding,
-  or appreciation for the efforts of contributors, past or present,
-  which is better done in documentation by explicit statement.
+* The purpose of a copyright notice is to record facts about a
+  work that are relevant to a court of law with applicable subject-
+  matter jurisdiction.  It is not to express acknowledgement of,
+  gratitude regarding, or appreciation for the efforts of contributors,
+  past or present, which is better done in documentation by explicit
+  statement.
 
 * Copyright protection is a legal monopoly of limited duration and an
   economic policy scheme for the purpose of promoting, as the U.S.
@@ -250,11 +251,15 @@ What To Do
   line length and interpret "15 lines" as requiring a _net increase_ in
   a file's line count of at least that magnitude, as calculated by
   taking the output of "git diff --stat" on the file (or "git log
-  --stat" on a relevant commit to it) and subtracting lines removed from
+  --stat" on a commit relevant to it) and subtracting lines removed from
   lines added, a procedure that can result in a nonpositive number.
   This rule has the advantage that it tends to exclude voluminous but
   robotic changes, as one might make with "sed -i", which seldom
   constitute "original expression".
+
+  Do not count copyright, license, and warranty disclaimer notices
+  toward the "legally significant" line count.  They do not constitute
+  original expression.
 
   Where a change produces a net increase of 15 lines or more but _still_
   seems robotic or unoriginal, consider (1) applying the annotation
@@ -290,11 +295,13 @@ What To Do
 
 * It's okay to simply report a range of years in the copyright notice
   instead of a comma-separated list.  As far as the current maintainer
-  knows, there is no hard rule that such ranges are interpreted
-  exhaustively, and unless someone has a chronological record of changes
-  to the file--which is present in groff's Git commit repository going
-  back to about 2014, but absent from distribution archives--a broken
-  sequence of copyright coverage years makes little difference.
+  knows, there is no rule mandating exhaustive interpretation of such
+  ranges, and unless someone has a chronological record of changes to
+  the file--which is present in groff's Git commit repository going back
+  to about 2014, but absent from distribution archives--a broken
+  sequence of copyright coverage years makes little difference.  If the
+  work's copyright ends up being litigated, one can expect a legal
+  demand for production of its revision history.
 
   Prior to 2014, groff's Git history is coarser, being reconstructed
   from CVS, and prior to February 2000, each commit is a snapshot of a
