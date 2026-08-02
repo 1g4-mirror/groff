@@ -21,7 +21,7 @@
 	Systems like Arch and Manjaro Linux don't use Debian's approach
 	to Ghostscript and URW font packaging.  Our "configure" script
 	should be looking only for the full URW fonts package, not
-	not Ghostscript's "Resource/Font" directory.  If Ghostscript is
+	Ghostscript's "Resource/Font" directory.  If Ghostscript is
 	installed, we can configure gropdf's "intermediate" service
 	level at least, and the directory will be found by
 	"BuildFoundries" when it parses the output of the "gs -h"
