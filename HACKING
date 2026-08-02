@@ -129,7 +129,7 @@ appropriately.
     example, "[I added a parallel change to foobar().  -- JRH]".
 
 4.  In a separate (and likely immediately subsequent) commit,
-    acknowledge the contributor in the "ANNOUNCE" file if they're not
+    acknowledge the contributor in the 'ANNOUNCE' file if they're not
     already listed there.
 
 
@@ -339,24 +339,24 @@ Adding or removing components
 Changing the set of discrete modules that comprises groff requires
 updates in multiple places.
 
-* Update "Makefile.am" to add or remove the inclusion of the
-  component's "*.am" Automake file.
+* Update 'Makefile.am' to add or remove the inclusion of the
+  component's '*.am' Automake file.
 
-* Update the "MANIFEST" file.
+* Update the 'MANIFEST' file.
 
-* Update the "NEWS" file.
+* Update the 'NEWS' file.
 
-Adding a component in the "contrib" directory demands further change.
+Adding a component in the 'contrib' directory demands further change.
 
-* Add a "COPYRIGHT" file in its directory.  If that file makes reference
+* Add a 'COPYRIGHT' file in its directory.  If that file makes reference
   to a separate license text that is _not_ the GPLv3 under which all
   files in groff are distributed (sometimes in conjunction with other
   licenses), such as GPLv2, also include a copy of that license in the
   same directory.
 
-* Add the aforementioned "COPYRIGHT" file and any separate license
+* Add the aforementioned 'COPYRIGHT' file and any separate license
   text files it mentions to the `EXTRA_DIST` macro in the component's
-  "*.am" file.
+  '*.am' file.
 
 
 Writing tests
@@ -388,7 +388,7 @@ Here is some advice on writing portable automated test scripts.
   If for some reason we get unacceptable non-integer garbage from "wc",
   we exit the test script with the code reserved for "hard errors".
   Shell arithmetic is unfortunately one of the many POSIX shell features
-  that Solaris 10's /bin/sh does not implement; see the "PROBLEMS" file.
+  that Solaris 10's /bin/sh does not implement; see the 'PROBLEMS' file.
 
 * The "od" command on macOS can put extra space characters (i.e., spaces
   that don't correspond to the input) at the ends of lines when using
@@ -551,10 +551,10 @@ Theory of operation
 groff language parser
 .....................
 
-The "troff" program in "src/roff/troff" parses the groff input language.
-There, "input.cpp" implements the main loop and tokenizes input.  Input
+The troff program in 'src/roff/troff' parses the groff input language.
+There, 'input.cpp' implements the main loop and tokenizes input.  Input
 tokens are transformed into nodes (a GNU troff internal data structure)
-by "env.cpp" and "node.cpp".  Routines in the latter file generate the
+by 'env.cpp' and 'node.cpp'.  Routines in the latter file generate the
 page description language from lists of nodes.
 
 
@@ -562,8 +562,8 @@ page description language parser
 ................................
 
 The parser for the page description language produced by troff is
-implemented in "src/libs/libdriver/input.cpp".  This is used by all
-groff output drivers written in C++.  ("gropdf", written in Perl,
+implemented in 'src/libs/libdriver/input.cpp'.  This is used by all
+groff output drivers written in C++.  (gropdf, written in Perl,
 performs its own parsing.)
 
 
