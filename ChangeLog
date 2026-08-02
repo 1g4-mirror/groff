@@ -120,8 +120,8 @@
 	potentially overwriting a heap-allocated buffer if that node's
 	description is lengthy (as "non-interpreted character nodes",
 	input in *roff as `\a` and `\t`, are).  Discard stale code that
-	uselessly performed a dead store of a dummy node description;
-	`describe_node()` zeroes out its destination buffer so that
+	performed a dead store of a dummy node description;
+	`describe_node()` zeroes out its destination buffer, so that
 	became pointless a while back.  Then, simply measure the buffer
 	as populated by `describe_node()` with strlen(3) and append to
 	it carefully with strncat(3), respecting `bufsz`.
