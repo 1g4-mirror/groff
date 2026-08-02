@@ -8581,7 +8581,7 @@ Generally,
 a space
 @emph{within}
 a request argument is not relevant,
-not meaningful,
+is not meaningful,
 or is supported by bespoke provisions,
 as with the
 @code{tl}
@@ -12467,7 +12467,7 @@ request are invocations by paragraphing macros;
 (1) to set up a first-line indentation of positive sign;
 and
 (2) to set up a ``normal'' temporary indentation of negative sign
-offsetting a posiitive indentation
+offsetting a positive indentation
 that applies to the whole parargraph,
 known as a ``hanging indent''.
 @endDefreq
@@ -14345,7 +14345,7 @@ indexed,
 have certain associated properties.
 The argument
 @var{n}
-is the sum of the desired flags
+is the sum of the desired flags,
 and the remaining arguments are the characters
 to be assigned those properties.
 Some property combinations are nonsensical,
@@ -22895,7 +22895,7 @@ or for instrumentation while troubleshooting.  The @code{ex} and
 exit codes respectively, to halt further processing when continuing
 would be fruitless.
 Examine the state of the formatter with requests that write lists of
-defined names---macros, strings, and diversions---colors,
+defined names (macros, strings, and diversions), colors,
 composite character mappings,
 environments,
 occupied font mounting positions,
@@ -24827,7 +24827,7 @@ if the buffer is of fixed size,
 the formatter performs the flush when the buffer runs out of room.
 
 In the somewhat pathological case where a diversion exists
-containing a partially collected line
+containing a partially collected line,
 and a partially collected line at the top-level diversion
 has never existed,
 @acronym{AT&T}
