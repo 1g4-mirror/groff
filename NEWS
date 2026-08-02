@@ -214,6 +214,9 @@ Miscellaneous
    build groff from its Git repository.  The program is not required for
    builds from distribution archives.
 
+*  Building groff from its Git repository now requires the
+   `--enable-maintainer-mode` option to its 'configure' script.
+
 
 VERSION 1.24.1
 ==============
