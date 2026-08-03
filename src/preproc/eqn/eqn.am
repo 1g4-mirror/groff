@@ -59,9 +59,9 @@ src/preproc/eqn/eqn-lex.$(OBJEXT): src/preproc/eqn/eqn.hpp
 
 neqn: $(top_srcdir)/src/preproc/eqn/neqn.sh $(SH_DEPS_SED_SCRIPT)
 	$(AM_V_GEN)sed -f $(SH_DEPS_SED_SCRIPT) \
-	       -e 's/[@]g[@]/$(g)/g' \
-	       -e $(SH_SCRIPT_SED_CMD) \
 	       $(top_srcdir)/src/preproc/eqn/neqn.sh \
+	 | sed -e 's/[@]g[@]/$(g)/g' \
+	       -e $(SH_SCRIPT_SED_CMD) \
 	       >$@.tmp \
 	&& chmod +x $@.tmp \
 	&& mv $@.tmp $@
