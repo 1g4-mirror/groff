@@ -1,3 +1,26 @@
+2026-08-02  Bruno Haible <bruno@clisp.org>
+
+	[eqn,pic,tbl]: Fix Savannah #68585.
+
+	Fix AddressSanitizer (ASAN) `alloc-dealloc-mismatch` errors.
+
+	* src/preproc/tbl/table.cpp (block_entry::~block_entry): Free
+	the `contents` member variable using free(3), not `delete[]`.
+	* src/preproc/eqn/delim.cpp (delim_box::~delim_box): Free
+	`left` and `right` member variable using free(3), not
+	`delete[]`.
+	* src/preproc/eqn/special.cpp (special_box::~special_box): Free
+	`macro_name` member variable using free(3), not `delete[]`.
+	* src/preproc/eqn/lex.cpp
+	(argument_macro_input::~argument_macro_input): Free
+	`s` member variable and elements of the `argv` member variable
+	using free(3), not `delete[]`.
+	* src/preproc/pic/object.cpp (output::~output)
+	(output::set_args): Free `args` member variable using free(3),
+	not `delete[]`.
+	* src/preproc/pic/object.cpp (command_object::~command_object):
+	Free `s` member variable using free(3), not `delete[]`.
+
 2024-07-31  Bjarni Ingi Gislason <bjarniig@simnet.is>
 
 	* ChangeLog.12[34]: Fix doubled word typos.
