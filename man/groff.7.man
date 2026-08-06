@@ -1772,7 +1772,7 @@ Generally,
 a space
 .I within
 a request argument is not relevant,
-not meaningful,
+is not meaningful,
 or is supported by bespoke provisions,
 as with the
 .B tl

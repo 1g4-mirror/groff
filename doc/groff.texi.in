@@ -22895,7 +22895,11 @@ or for instrumentation while troubleshooting.  The @code{ex} and
 exit codes respectively, to halt further processing when continuing
 would be fruitless.
 Examine the state of the formatter with requests that write lists of
-defined names (macros, strings, and diversions), colors,
+defined names
+(macros,
+strings,
+and diversions),
+colors,
 composite character mappings,
 environments,
 occupied font mounting positions,
@@ -24826,6 +24830,11 @@ Perhaps,
 if the buffer is of fixed size,
 the formatter performs the flush when the buffer runs out of room.
 
+@c TODO: The following item might have the same origin as:
+@c   GNU
+@c   @command{troff} @c GNU
+@c   does not emit output if it has nothing to format.
+@c ...above.  Find out.
 In the somewhat pathological case where a diversion exists
 containing a partially collected line,
 and a partially collected line at the top-level diversion

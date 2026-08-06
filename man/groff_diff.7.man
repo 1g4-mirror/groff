@@ -7451,8 +7451,13 @@ the formatter performs the flush when the buffer runs out of room.
 .
 .
 .P
+.\" TODO: The following item might have the same origin as:
+.\"   GNU
+.\"  .I troff \" GNU
+.\"  does not emit output if it has nothing to format.
+.\" ...above.  Find out.
 In the somewhat pathological case where a diversion exists
-containing a partially collected line
+containing a partially collected line,
 and a partially collected line at the top-level diversion
 has never existed,
 AT&T
