@@ -1,3 +1,8 @@
+2026-08-06  Bruno Haible <bruno@clisp.org>
+
+	* doc/doc.am ($(DOC_LINE_LAYOUT_EPS)): Remove the %%CreationDate
+	line from the generated PostScript.
+
 2026-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/an.tmac (an*check-legacy-argument-count): New macro

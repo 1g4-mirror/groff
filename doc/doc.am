@@ -942,7 +942,8 @@ $(DOC_LINE_LAYOUT_EPS): $(DOC_LINE_LAYOUT_ROFF) pic groff troff grops \
 	  >$(DOC_LL).ps \
 	&& gs -q -dNOPAUSE -sDEVICE=bbox -- $(DOC_LL).ps \
 	  2> $(DOC_LL).bbox \
-	&& sed -e '/^%%Orientation/r $(DOC_LL).bbox' \
+	&& sed -e '/^%%CreationDate/d' \
+	  -e '/^%%Orientation/r $(DOC_LL).bbox' \
 	  -e '/^%!PS-Adobe-3.0/s/$$/ EPSF-3.0/' $(DOC_LL).ps >$@.tmp \
 	&& $(RM) $(DOC_LL).ps $(DOC_LL).bbox \
 	&& mv $@.tmp $@
