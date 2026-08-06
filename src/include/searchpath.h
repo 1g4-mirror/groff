@@ -19,8 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 class search_path {
   char *dirs;
-  unsigned init_len;
+  unsigned init_len; // TODO: size_t
 public:
+  // TODO: Boolify 3rd and 4th arguments.
   search_path(const char *envvar, const char *standard,
 	      int add_home, int add_current);
   ~search_path();
