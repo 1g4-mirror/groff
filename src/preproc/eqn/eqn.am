@@ -57,6 +57,8 @@ EXTRA_DIST += \
 # Since eqn_CPPFLAGS was set, all .o files have an 'eqn-' prefix.
 src/preproc/eqn/eqn-lex.$(OBJEXT): src/preproc/eqn/eqn.hpp
 
+# Note: Use two "sed"s because Busybox sed does not support combining
+# `-e` and `-f` options in the same command.
 neqn: $(top_srcdir)/src/preproc/eqn/neqn.sh $(SH_DEPS_SED_SCRIPT)
 	$(AM_V_GEN)sed -f $(SH_DEPS_SED_SCRIPT) \
 	       $(top_srcdir)/src/preproc/eqn/neqn.sh \
