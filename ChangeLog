@@ -1,3 +1,18 @@
+2026-08-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grn]: Revise and parallelize usage message and command
+	synopsis.
+
+	* src/preproc/grn/grn.1.man (Synopsis):
+	* src/preproc/grn/main.cpp (usage): Use hyphenated noun phrases
+	to document option arguments.  Contrast with "Options" sections
+	of man pages, which contextualize metasyntactic nonce terms like
+	"dir" and "dev" adjacently.
+
+	* src/preproc/grn/grn.1.man (Synopsis): Bring up to date with
+	recent rename of `-M` option to `-I`.  Continues commit
+	9e60503c01, 6 May.
+
 2026-08-02  Bruno Haible <bruno@clisp.org>
 
 	[eqn,pic,tbl]: Fix Savannah #68585.

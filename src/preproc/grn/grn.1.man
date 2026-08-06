@@ -57,11 +57,11 @@ documents
 .SY @g@grn
 .RB [ \-C ]
 .RB [ \-F\~\c
-.IR dir ]
+.IR font-directory ]
 .RB [ \-I\~\c
-.IR dir ]
+.IR inclusion-directory ]
 .RB [ \-T\~\c
-.IR dev ]
+.IR device ]
 .RI [ file\~ .\|.\|.]
 .YS
 .

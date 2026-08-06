@@ -264,7 +264,8 @@ static void
 usage(FILE *stream)
 {
   fprintf(stream,
-	  "usage: %s [-Cs] [-M dir] [-F dir] [-T dev] [file ...]\n"
+	  "usage: %s [-Cs] [-F font-directory] [-I inclusion-directory]"
+	  " [-T device] [file ...]\n"
 	  "usage: %s {-v | --version}\n"
 	  "usage: %s --help\n",
 	  program_name, program_name, program_name);
