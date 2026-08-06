@@ -1,3 +1,14 @@
+2026-08-06  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* bootstrap.conf: Add "build-aux/epsf.tex" to
+	`gnulib_extra_files`.  We need it to support Encapsulated
+	PostScript (EPS) files as inline images when rendering some
+	formats of groff's Texinfo manual, and the build environment
+	won't necessarily have it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68566>.  Thanks to Bruno
+	Haible for the report and proposed remedy.
+
 2026-08-03  Bruno Haible <bruno@clisp.org>
 
 	[eqn]: Fix generation of 'neqn' script on Alpine Linux.
