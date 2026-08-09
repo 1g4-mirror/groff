@@ -345,7 +345,7 @@ font.
 .
 .
 .TP
-.BI \-d\~ device-description-file
+.BI \-d\~ desc-file
 The device description file is
 .I desc-file
 rather than the default
@@ -361,7 +361,7 @@ given with option
 .
 .
 .TP
-.BI \-e\~ encoding-file
+.BI \-e\~ enc-file
 The PostScript font should be reencoded to use the encoding described
 in
 .IR enc-file .
@@ -378,18 +378,18 @@ subdirectory of the default font directory is searched.
 .
 .
 .TP
-.BI \-f\~ internal-name
+.BI \-f\~ int-name
 The internal name of the
 .I groff
 font is set to
-.IR name .
+.IR int-name .
 .
 .
 .TP
-.BI \-i\~ italic-correction-factor
+.BI \-i\~ factor
 Generate an italic correction for each glyph so that its width plus its
 italic correction is equal to
-.I italic-correction-factor
+.I factor
 thousandths of an em
 plus the amount by which the right edge of the glyph's bounding box is
 to the right of its origin.
@@ -410,7 +410,7 @@ use a subscript correction equal to the italic correction instead.
 .
 .IP
 Also generate a left italic correction for each glyph equal to
-.I italic-correction-factor
+.I factor
 thousandths of an em
 plus the amount by which the left edge of the glyph's bounding box is to
 the left of its origin.
@@ -482,9 +482,9 @@ directive to the font description file.
 .
 .
 .TP
-.BI \-w\~ space-width
+.BI \-w\~ dist
 Use
-.I space-width
+.I dist
 as the width of inter-word spaces.
 .
 .
