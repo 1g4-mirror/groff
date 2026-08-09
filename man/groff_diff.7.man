@@ -2269,7 +2269,8 @@ and so on.
 .
 .
 .TP
-.B .ti
+.BR .ti \~[\c
+.IR temporary-indentation-amount ]
 In
 GNU
 .IR troff , \" GNU
