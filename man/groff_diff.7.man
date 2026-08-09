@@ -1272,7 +1272,7 @@ See subsection
 and
 .B \[rs]f\^P
 are synonyms;
-we recommend the first.
+we recommend only the first.
 .
 .
 .br
