@@ -4424,7 +4424,7 @@ program may lack permission to open such files.
 Some tips on composing and troubleshooting your man pages follow.
 .
 .
-.IP \[bu] 2n
+.IP \[bu] 3n
 What's the difference between a man page topic and identifier?
 .
 .
@@ -4465,7 +4465,7 @@ or even \[lq]c_printf\|\[rq]
 as its identifier.
 .
 .
-.IP \[bu] 2n
+.IP \[bu]
 Some ASCII characters look funny or copy and paste wrong.
 .
 .
