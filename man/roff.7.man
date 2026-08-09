@@ -1262,7 +1262,9 @@ source file inclusion in its modern form
 .RB ( .so ;
 though
 .I RUNOFF
-had an \[lq].append\[rq] control word for a similar purpose)
+had an \[lq].append\[rq]
+control word for a similar purpose)
+.ne 2v
 and early advance to the next file argument
 .RB ( .nx );
 .
@@ -1576,7 +1578,7 @@ a permissively licensed new implementation.
 .
 .
 .P
-Another descendant of DWB
+Another close relative of DWB
 .I troff \" DWB
 is part of
 .UR https://\:9fans\:.github\:.io/\:plan9port/
@@ -1755,6 +1757,8 @@ the formatter,
 or incorrect rendering is almost guaranteed.
 .
 .
+.br
+.ne 2v
 .P
 GNU
 .I roff
@@ -2023,6 +2027,8 @@ and related requests alter the flow of control,
 and macro definition permits unbounded recursion.
 .
 .
+.br
+.ne 2v
 .P
 .I Requests
 and
@@ -2045,7 +2051,7 @@ requests or macros;
 both are found on control lines.
 .
 However,
-there is a distinction;
+there is a distinction:
 requests take either a fixed number of arguments
 (sometimes zero),
 silently ignoring any excess,
@@ -2053,7 +2059,7 @@ or consume the rest of the input line,
 whereas macros can take a variable number of arguments.
 .
 Since arguments are separated by spaces,
-macros require a means of embedding a space in an argument;
+macros require a means of embedding a space in an argument\[em]\c
 in other words,
 of quoting it.
 .
@@ -2214,8 +2220,8 @@ on text lines by themselves.
 .
 .IP \[bu]
 Set your text editor's line length to 72 characters or fewer;
-see the subsections below.
 .\" Texinfo:
+.\" see the subsections below.
 .\" @footnote{Emacs: @code{fill-column: 72}; Vim: @code{textwidth=72}}
 .
 This limit,
@@ -2265,7 +2271,7 @@ GNU
 specifying the
 .B \%nospaces
 region option
-causes the program to ignore spaces at the boundaries of table cells.)
+causes the program to ignore spaces at the boundaries of table entries.)
 .
 .
 .IP \[bu]
@@ -2536,7 +2542,7 @@ G.\& Branden Robinson
 .
 Much
 .I roff
-documentation is available.
+documentation exists.
 .
 The Bell Labs papers describing AT&T
 .I troff
@@ -2607,11 +2613,13 @@ it is especially useful for its glossary and the many links to
 historical documents.
 .
 .
+.br
+.ne 2v
 .P
 .UR http://\:www\:.tuhs\:.org/\:Archive/
 The Unix Archive
 .UE ,
-curated by the Unix Heritage Society,
+curated by The Unix Heritage Society (TUHS),
 provides the source code and some binaries of historical Unices
 (including the source code of some versions of
 .I troff
