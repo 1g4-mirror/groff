@@ -437,7 +437,7 @@
 	(html_printer::writeHeadMetaStyle): Ameliorate horrible UX.
 	grohtml(1) has ignored the media width configured by the
 	full-service macro package or document forever, but employing a
-	CSS 'max-width' of--effectively--infinity, makes for painful
+	CSS 'max-width' of--effectively--infinity makes for painful
 	reading.  Configure the `body` element with a `max-width` of
 	`80ch`, which is a little wide but congrues well with the
 	default width used by groff man(7) and mdoc(7).  Moreover, these
