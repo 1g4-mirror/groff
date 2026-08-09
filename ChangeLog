@@ -132,12 +132,12 @@
 	it carefully with strncat(3), respecting `bufsz`.
 
 	Fixes <https://savannah.gnu.org/bugs/?68552>.  Thanks to Bruno
-	Haible for the investigation and advice.  I believe I introduced
-	this problem during the groff 1.24.0 development cycle in the
-	course of my "node tree dumping death march", but have not
-	tracked it down to a specific commit.  See generally
-	<https://lists.gnu.org/archive/html/groff-commit/2025-03/\
-	index.html>.
+	Haible for the investigation and advice.  Problem apparently
+	introduced by me in commit dd7bf97938, 23 November, but in the
+	instance for which we have a reproducer, this heap overwrite
+	not reached because it was masked by a prior null pointer
+	dereference (in `lookup_request()`, which was set up to fail by
+	`do_request()`; see Savannah #68558).
 
 2026-07-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
