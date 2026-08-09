@@ -321,6 +321,8 @@ does not perform automatic hyphenation.
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Manipulating
 .\" Hyphenation".
+.br
+.ne 2v
 .P
 For automatic hyphenation to work,
 the formatter must know which letters are equivalent.
