@@ -1,3 +1,11 @@
+2026-08-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/groff_man.7.man.in (Notes) [style]: Tell document authors
+	why it's better to use the package's font selection macros than
+	"raw" *roff font selection escape sequences.
+
+	Fixes <https://savannah.gnu.org/bugs/?68261>.
+
 2026-08-06  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* bootstrap.conf: Add "build-aux/epsf.tex" to

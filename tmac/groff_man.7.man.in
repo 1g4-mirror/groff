@@ -4425,6 +4425,63 @@ Some tips on composing and troubleshooting your man pages follow.
 .
 .
 .IP \[bu] 3n
+Why should I favor font macros over font selection escape sequences?
+.
+.
+.LS itemized
+.RS 3n
+.IP + 3n
+The formatter can't distinguish typos like
+.RB \[lq] \^\[rs]f\^i\^ \[rq]
+(where
+.RB \[lq] \^\[rs]f\^I\^ \[rq]
+is meant)
+from demands that may be intentional
+but impossible to fulfill on a given output device,
+like
+.RB \[lq] \^\[rs]f[CR]\^ \[rq];
+.
+.
+.IP +
+because font escape sequences \[lq]punch through the floor\[rq]
+and directly command the formatter,
+the macro package can't help you
+by checking font availability for itself
+and then falling back to something \[lq]reasonable\[rq] in context
+(and which takes output device capabilities into account);
+.
+.
+.IP +
+the identity of the \[lq]previous font\[rq],
+as selected by
+.RB \[lq] \^\[rs]f\^P\^ \[rq],
+is inconsistent among implementations
+if the preceding font selection was unfulfillable;
+.
+.
+.IP +
+input like
+.RB \[lq] \^\[rs]fIthis\[rs]f\^P\^ \[rq]
+can frustrate spell checkers;
+and
+.
+.
+.IP +
+.I "groff man"
+knows to apply italic corrections
+when the document sets upright and slanted glyphs adjacently.
+.LE
+.RE
+.
+.
+.IP
+The first three of these problems mean that you cannot be sure
+that a change of typeface has occurred at all;
+if your document relies on that change to communicate information,
+meaning can be lost.
+.
+.
+.IP \[bu]
 What's the difference between a man page topic and identifier?
 .
 .
