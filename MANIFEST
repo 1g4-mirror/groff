@@ -122,7 +122,7 @@ This file summarizes the structure of the groff source distribution.
   indxbib       Make inverted index for bibliographic databases.
   lkbib         Search bibliographic databases.
   lookbib       Interactively search bibliographic databases.
-  pdfmom        groff wrapper to perform multi-pass processing as neeed.
+  pdfmom        groff wrapper to perform multi-pass processing.
   pfbtops       Translate a PostScript Type 1 font in PFB format to PFA.
   tfmtodit      Create font description files for TeX DVI device.
   xtotroff      Create font description files for gxditview.
