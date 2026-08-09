@@ -198,8 +198,8 @@ or, if you want to be portable to older troff versions, as follows:
 
 (This defect may have arisen because nroff and troff were originally
 written in PDP-11 assembly language and subsequently translated by hand
-to an early dialect of the C language.  The PDP-11 instruction set had
-no integer modulus instruction.)
+to an early dialect of the C language.  The base PDP-11 instruction set
+had no integer modulus instruction.)
 
 ----------------------------------------------------------------------
 
