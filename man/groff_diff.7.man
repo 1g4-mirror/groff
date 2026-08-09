@@ -7459,7 +7459,7 @@ GNU
 always flushes this buffer when processing a break;
 AT&T
 .I troff \" AT&T
-does so according to no obvious schedule
+does so according to no obvious schedule.
 .
 Perhaps,
 if the buffer is of fixed size,
