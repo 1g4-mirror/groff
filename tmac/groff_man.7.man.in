@@ -3474,8 +3474,7 @@ To remove a page header or footer entirely,
 .SS "Deprecated features"
 .\" ====================================================================
 .
-Use of the following in man pages for public distribution is
-discouraged.
+We discourage use of the following in man pages for public distribution.
 .
 .
 .TP
