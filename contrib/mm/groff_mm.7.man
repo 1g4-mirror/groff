@@ -1961,7 +1961,7 @@ otherwise.
 .
 The
 .B Hb
-register sets a threshold at which a break occurs after the heading,
+register sets a threshold within which a break occurs after the heading,
 and register
 .B Hs
 sets a threshold within which vertical space follows it.
