@@ -6845,8 +6845,14 @@ GNU
 regards a failed attempt to select a different font
 as a meaningful action
 and updates the the identity of the previous font selection.
-Most AT&T-descended
-.IR troff s \" AT&T
+.
+So does Heirloom Doctools
+.IR troff . \" Heirloom
+.
+Other AT&T-descended
+.IR troff s, \" AT&T
+and
+.IR mandoc ,
 do not.
 .
 The only way to determine if a font selection operation succeeded

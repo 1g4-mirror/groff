@@ -24211,8 +24211,12 @@ GNU
 regards a failed attempt to select a different font
 as a meaningful action
 and updates the the identity of the previous font selection.
-Most @acronym{AT&T}-descended
-@command{troff}s @c AT&T
+So does Heirloom Doctools
+@command{troff}. @c Heirloom
+Other @acronym{AT&T}-descended
+@command{troff}s, @c AT&T
+and
+@command{mandoc},
 do not.
 Consequently,
 given the input
