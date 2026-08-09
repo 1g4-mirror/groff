@@ -242,9 +242,9 @@ option is used,
 .I \%afmtodit
 automatically generates an italic correction,
 a left italic correction,
-and a subscript correction for each glyph
-(the significance of these is explained in
-.MR groff_font @MAN5EXT@ );
+and a subscript correction for each glyph\[em]\c
+.MR groff_font @MAN5EXT@
+explains the significance of these\[em]\c
 they can be specified for individual glyphs by
 adding to the
 .I afm-file
@@ -272,16 +272,17 @@ fonts.
 .
 .
 .P
-The
+Specify the
 .B \-s
-option should be given if the font is \[lq]special\[rq],
+option if the font is \[lq]special\[rq],
 meaning that
 .I groff
 should search it whenever a glyph is not found in the current font.
 .
 To enable this search,
+list
 .I font-description-file
-can be listed as an argument to the
+as an argument to the
 .B fonts
 directive in the output device's
 .I DESC
@@ -295,7 +296,7 @@ If the font is not special,
 there is no need to do either,
 since
 .MR @g@troff @MAN1EXT@
-will automatically mount it when it is first used.
+automatically mounts it when it is first used.
 .
 .
 .br
@@ -346,9 +347,9 @@ font.
 .
 .TP
 .BI \-d\~ desc-file
-The device description file is
+Use
 .I desc-file
-rather than the default
+as the device description file rather than the default
 .IR DESC .
 .
 If not found in the current directory,
@@ -362,26 +363,26 @@ given with option
 .
 .TP
 .BI \-e\~ enc-file
-The PostScript font should be reencoded to use the encoding described
+Re\[e ad]code the PostScript font to use the encoding described
 in
 .IR enc-file .
 .
-The format of
-.I enc-file
-is described in
-.MR grops @MAN1EXT@ .
+.MR grops @MAN1EXT@
+describes the format of
+.I enc-file .
 .
 If not found in the current directory,
-the
+.I \%afmtodit
+searches the
 .I devps
-subdirectory of the default font directory is searched.
+subdirectory of the default font directory.
 .
 .
 .TP
 .BI \-f\~ int-name
-The internal name of the
+Set the internal name of the
 .I groff
-font is set to
+font to
 .IR int-name .
 .
 .
@@ -587,7 +588,7 @@ is constructing a mapping from
 .I groff
 special character names to AGL names;
 this can be a one-to-one or many-to-one mapping,
-but one-to-many will not work,
+but one-to-many does not work,
 so
 .I \%afmtodit
 discards the excess mappings.
