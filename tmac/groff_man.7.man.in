@@ -521,8 +521,16 @@ Use of the double-sided layout option
 .B \-rD1
 places
 .I footer-inside
-at the bottom left on recto (odd-numbered) pages,
-and the bottom right on verso (even-numbered) pages.
+at the bottom left on recto
+_ifstyle()dnl
+(odd-numbered)
+_endif()dnl
+pages,
+and the bottom right on verso
+_ifstyle()dnl
+(even-numbered)
+_endif()dnl
+pages.
 .
 By default,
 the outside footer is the page number.
@@ -849,6 +857,8 @@ The indented paragraph
 macro
 can continue the indented content of a narrative started
 with
+.B HP
+or
 .BR TP ,
 or present an itemized or ordered list.
 .
@@ -1131,7 +1141,9 @@ for a definition list item.
 .
 Use
 .B IP
-without arguments to associate successive paragraphs
+without arguments to associate\p successive
+.ne 2v
+paragraphs
 with an existing list item;
 to these,
 inter-paragraph spacing applies even in compact lists.
@@ -1263,7 +1275,7 @@ End synopsis,
 breaking the line and restoring
 indentation,
 adjustment,
-and hyphenation
+and automatic hyphenation
 to their previous states.
 .
 If an argument is given,
@@ -2690,7 +2702,7 @@ exclusively.
 .
 One can
 .I maintain
-it in a more convenient encoding,
+that input in a more convenient encoding,
 using
 .MR preconv @MAN1EXT@ ,
 as with
@@ -2721,7 +2733,7 @@ Readers with low vision may also benefit from the narrower line length.
 .
 Inspect your documents with
 .RB \[lq] "nroff \-t \-r LL=65n \-man" \[rq]
-to ensure that their output lines don't overset the line.
+to ensure that their output lines don't overset.
 .
 .
 .P
@@ -3654,8 +3666,8 @@ is deprecated.
 .
 .B SM
 without an argument,
-followed immediately by
-.RB \[lq] B
+followed on the next input line by
+.RB \[lq] .B
 .IR text \[rq],
 produces the same output more portably.
 .
@@ -3903,7 +3915,7 @@ strings in 2025.
 .\"  e5b5757e640371974d2e70144c8e59c6a5b613f6
 .
 .I groff
-1.25 (2006) introduced
+1.25 (2026) introduced
 .BR LS / LE .
 .
 .
@@ -4034,7 +4046,7 @@ distinctions.
 .TP
 .B \-rD1
 Enable double-sided layout,
-formatting footers for even and odd pages differently;
+formatting footers for recto and verso pages differently;
 see the description of
 .B TH
 in subsection \[lq]Document structure macros\[rq] above.
@@ -4417,6 +4429,8 @@ program may lack permission to open such files.
 .RE
 .
 .
+.br
+.ne 5v
 .\" ====================================================================
 .SH Notes
 .\" ====================================================================
@@ -5019,6 +5033,8 @@ call as follows.
 .RE
 .
 .
+.br
+.ne 5v
 .P
 You must then use the
 .B \[rs]*
@@ -5186,7 +5202,7 @@ and the
 .BR LS / LE
 macros for
 .I groff
-1.25 (July? 2026). \" XXX: TODO: FIXME: for groff 1.25 release
+1.25 (August 2026).
 .
 .
 .P
