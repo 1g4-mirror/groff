@@ -6883,13 +6883,26 @@ Formatters that don't implement
 GNU
 .I troff \" GNU
 extension request names
-tend to ignore them,
+tend to ignore them.
 .\" "Tend" because a macro of a matching name is possible.
-and if they don't support a
+.
+The
+.B \[rs]A
+escape sequence
+(see subsection \[lq]Escape sequences\[rq] above)
+or
+.B d
+conditional expression operator
+(see subsection \[lq]Conditional expressions\[rq] above)
+may be helpful in avoiding their use.
+.
+.
+.P
+If a formatter doesn't support a
 GNU
 .I troff \" GNU
 extension escape sequence,
-they are liable to format its function selector character as text.
+it is liable to format its function selector character as text.
 .
 For example,
 .\" NESTED BEGIN Keep in sync with groff_man_style(7).
@@ -6915,12 +6928,6 @@ which both render it as
 .RB \[lq] \[ti] \[rq].
 .\" as of this writing, 2022-08-13
 .\" NESTED END Keep in sync with groff_man_style(7).
-.
-The
-.B \[rs]A
-escape sequence
-(see subsection \[lq]Escape sequences\[rq] above)
-may be helpful in avoiding their use.
 .
 .
 .P

@@ -24264,13 +24264,14 @@ Formatters that don't implement
 GNU
 @command{troff} @c GNU
 extension request names
-tend to ignore them,
+tend to ignore them.
 @c "Tend" because a macro of a matching name is possible.
-and if they don't support a
+
+If a formatter doesn't support a
 GNU
 @command{troff} @c GNU
 extension escape sequence,
-they are liable to format its function selector character as text.
+it is liable to format its function selector character as text.
 @cindex @code{\~}, incompatibilities with @acronym{AT&T} @code{troff}
 For example,
 @c NESTED BEGIN Keep in sync with groff_man_style(7).
