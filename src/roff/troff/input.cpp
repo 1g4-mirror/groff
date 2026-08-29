@@ -2226,10 +2226,10 @@ void token::diagnose_non_character()
 }
 
 // Indicate whether an argument lies ahead, _after at least one space_,
-// on the current line in the input stream, skipping over spaces.  This
-// function is therefore not appropriate for use when handling requests
-// or escape sequences that don't use space to separate their arguments,
-// as with `.rchar a\[foobar]b` or `\o'^e'`.
+// on the current line in the input stream.  This function is therefore
+// not appropriate for use when handling requests or escape sequences
+// that don't use space to separate their arguments, as with `.rchar
+// a\[foobar]b` or `\o'^e'`.
 //
 // Specify `peeking` if request reads the next argument in copy mode,
 // or otherwise must interpret it specially, as when reading a
