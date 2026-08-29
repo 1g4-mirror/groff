@@ -3970,10 +3970,7 @@ static bool read_hyphenation_exception_word(unsigned char *word,
   // Warn at most once per invalid word, not per request invocation.
   bool is_word_valid = true;
   bool was_warned = false;
-  while ((i < WORD_MAX)
-	 && !tok.is_space()
-	 && !tok.is_newline()
-	 && !tok.is_eof()) {
+  while ((i < WORD_MAX) && !tok.is_space() && !tok.is_terminator()) {
     charinfo *ci = tok.get_charinfo(false /* is_mandatory */);
     if (ci != 0 /* nullptr */) {
       hc = ci->get_hyphenation_code();
