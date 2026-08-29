@@ -3979,12 +3979,10 @@ static bool read_hyphenation_exception_word(unsigned char *word,
     }
     else
       is_word_valid = false;
-    if (!is_word_valid) {
-      if (!was_warned) {
-	warning(WARN_CHAR, "skipping hyphenation exception word"
-		" containing %1", tok.description());
-	was_warned = true;
-      }
+    if (!is_word_valid && !was_warned) {
+      warning(WARN_CHAR, "skipping hyphenation exception word"
+	      " containing %1", tok.description());
+      was_warned = true;
     }
     if (is_word_valid) {
       tok.next();

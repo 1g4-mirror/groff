@@ -1,6 +1,11 @@
 2026-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (read_hyphenation_exception_word):
+	Slightly refactor.  Tighten logic.
+
+2026-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/env.cpp (read_hyphenation_exception_word):
 	Slightly refactor.  Revise code idiom to apply new member
 	function `is_terminator()` on `token` objects.  Continues commit
 	9896f5d7c4, 19 April.
