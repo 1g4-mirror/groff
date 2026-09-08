@@ -45,7 +45,7 @@
 .nr TC-MARGIN \w'00' \" expect 2-digit page numbers at most
 .ie t .nr PI 3.5n
 .el   .nr PI 4n
-.ds date \*[MONTH\n[mo]] \n[year]\"
+.ds date July 2026\"
 .ND \*[date]
 .EH '%''\*[date]'
 .EF ''''
