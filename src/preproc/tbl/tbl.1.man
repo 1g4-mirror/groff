@@ -205,10 +205,8 @@ when the formatter encounters a table region.)
 .
 .P
 Each table region may begin with
-.I region options,
-and must contain one or more
-.I table definitions;
-each table definition contains a
+.I region options.
+Each table description contains a
 .I format specification
 followed by one or more input lines (rows) of
 .I entries.
