@@ -734,7 +734,7 @@ relative to the previous format;
 in that case,
 you must end the table region and start another.
 .
-If that will not serve because the region uses box options or the
+If that does not serve because the region uses box options or the
 columns align in an undesirable manner,
 you must design the initial table format specification to include the
 maximum quantity of columns required,
@@ -1444,7 +1444,7 @@ input and use the
 .B \%delim
 region option so that
 .I @g@tbl
-will recognize them.
+can recognize them.
 .
 .
 .br
@@ -1649,8 +1649,7 @@ follow the
 .B .TS
 token with a space and then
 .RB \[lq] H \[rq];
-this will be interpreted by the formatter
-as a
+the formatter interprets this as a
 .B TS
 macro call with an
 .B H
@@ -1676,7 +1675,7 @@ or divert it in any other way.
 Further,
 the
 .B bp
-request will not cause a page break in a
+request does not cause a page break in a
 .RB \[lq] "TS H" \[rq]
 table.
 .
@@ -1688,7 +1687,7 @@ Otherwise,
 pass the macro call to the enclosing diversion using the transparent
 line escape sequence
 .BR \[rs]!\& ;
-this will \[lq]bubble up\[rq] the page break to the output device.
+this \[lq]bubbles up\[rq] the page break to the output device.
 .
 See section \[lq]Examples\[rq] below for a demonstration.
 .
