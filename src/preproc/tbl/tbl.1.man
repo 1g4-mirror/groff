@@ -675,10 +675,11 @@ it issues a diagnostic message.
 .
 If the entire row definition consists of these classifiers
 (only one is necessary),
-it is treated as a
+.I tbl
+treats it as a
 .RB \[lq] _ \[rq]
 occupying a row of table entries,
-and no corresponding data are expected.
+and expects no corresponding data.
 .
 .
 .TP
@@ -692,10 +693,11 @@ it issues a diagnostic message.
 .
 If the entire row definition consists of these classifiers
 (only one is necessary),
-it is treated as a
+.I tbl
+treats it as a
 .RB \[lq] = \[rq]
 occupying a row of table entries,
-and no corresponding data are expected.
+and expects no corresponding data.
 .
 .
 .TP
