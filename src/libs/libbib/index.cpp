@@ -152,8 +152,8 @@ public:
 inline void unused(void *) { }
 
 // Validate the data reported in the header so that we don't overread on
-// the heap in the load() member function.  Return null pointer if no
-// problems are detected.
+// the heap in the load() member function.  Return string literal
+// characterizing problem, or null pointer if no problems are detected.
 const char *index_search_item::check_header(index_header *file_header,
 					    unsigned file_size)
 {
