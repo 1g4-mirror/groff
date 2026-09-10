@@ -69,6 +69,7 @@ maintainer-clean-refer:
 	fi
 
 refer_TESTS = \
+  src/preproc/refer/tests/check-index-file-validity.sh \
   src/preproc/refer/tests/report-correct-line-numbers.sh \
   src/preproc/refer/tests/smoke-test.sh
 TESTS += $(refer_TESTS)

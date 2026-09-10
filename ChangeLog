@@ -1,5 +1,12 @@
 2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Regression-test Savannah #68679.
+
+	* src/preproc/refer/tests/check-index-file-validity.sh: Do it.
+	* src/preproc/refer/refer.am (refer_TESTS): Run test.
+
+2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libbib/index.cpp (index_search_item::load): Improve
 	error diagnostic to communicate the consequences of a corrupt
 	index file: it gets ignored, meaning that its bibliographic
