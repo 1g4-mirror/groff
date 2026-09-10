@@ -1,5 +1,18 @@
 2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libbib/index.cpp (index_search_item::check_header):
+	Check more header data for nonsense, as they can influence the
+	size of memory allocations.  Invalidate index file if its
+	maximum or minimum key lengths, or common word list length
+	threshold is nonpositive.
+
+	Fixes <https://savannah.gnu.org/bugs/?68679>.  Thanks to Pavol
+	Sloboda for the report.  Problem dates back to groff's birth.
+	{And I didn't catch it when doing the work for commit
+	1b97881fc0, 2021-09-12.}
+
+2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[refer]: Regression-test Savannah #68679.
 
 	* src/preproc/refer/tests/check-index-file-validity.sh: Do it.

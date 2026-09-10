@@ -167,6 +167,12 @@ const char *index_search_item::check_header(index_header *file_header,
     return "table size nonpositive";
   if (file_header->strings_size < 1)
     return "string pool size nonpositive";
+  if (file_header->truncate < 1)
+    return "maximum key length nonpositive";
+  if (file_header->shortest < 1)
+    return "minimum key length nonpositive";
+  if (file_header->common < 1)
+    return "common word list length threshold nonpositive";
   size_t sz = (file_header->tags_size * sizeof(tag)
 	       + file_header->lists_size * sizeof(int)
 	       + file_header->table_size * sizeof(int)
