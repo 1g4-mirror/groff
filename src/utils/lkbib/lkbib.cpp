@@ -86,7 +86,7 @@ int main(int argc, char **argv)
 	char *ptr;
 	long n = strtol(optarg, &ptr, 10);
 	if (ptr == optarg) {
-	  error("bad integer '%1' in 't' option", optarg);
+	  error("invalid integer argument '%1' to 't' option", optarg);
 	  break;
 	}
 	if (n < 1)

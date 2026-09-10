@@ -1,5 +1,10 @@
 2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/lkbib/lkbib.cpp (main): Recast error diagnostic.
+	Favor "invalid" over "bad".
+
+2026-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libbib/index.cpp (index_search_item::load): Check
 	index file contents for nonsense: a string pool that begins with
 	a null byte.  If it does, throw error diagnostic and return
