@@ -83,6 +83,7 @@ int search_list::nfiles() const
   return n;
 }
 
+// TODO: migrate strsave() -> strdup()
 search_list_iterator::search_list_iterator(search_list *p, const char *q)
 : list(p), ptr(p->list), iter(0), query(strsave(q)),
   searcher(q, strlen(q), linear_ignore_fields, linear_truncate_len)
@@ -111,6 +112,7 @@ int search_list_iterator::next(const char **pp, int *lenp, reference_id *ridp)
   return 0;
 }
 
+// TODO: migrate strsave() -> strdup()
 search_item::search_item(const char *nm, int fid)
 : name(strsave(nm)), filename_id(fid), next(0)
 {

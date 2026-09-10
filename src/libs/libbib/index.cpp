@@ -358,6 +358,7 @@ search_item *make_index_search_item(const char *filename, int fid)
 }
 
 
+// TODO: migrate strsave() -> strdup()
 index_search_item_iterator::index_search_item_iterator(index_search_item *ind,
 						       const char *q)
 : indx(ind), out_of_date_files_iter(0 /* nullptr */),
