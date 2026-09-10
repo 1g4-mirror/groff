@@ -111,9 +111,11 @@ public:
 
 
 index_search_item::index_search_item(const char *filename, int fid)
-: search_item(filename, fid), out_of_date_files(0), buffer(0), map_addr(0),
-  map_len(0), key_buffer(0), filename_buffer(0), filename_buflen(0),
-  common_words_table(0)
+: search_item(filename, fid), out_of_date_files(0 /* nullptr */),
+  buffer(0 /* nullptr */), map_addr(0 /* nullptr */),
+  map_len(0), key_buffer(0 /* nullptr */),
+  filename_buffer(0 /* nullptr */), filename_buflen(0),
+  common_words_table(0 /* nullptr */)
 {
 }
 
@@ -188,7 +190,7 @@ const char *index_search_item::check_header(index_header *file_header,
   chunk_size = file_header->strings_size;
   if (chunk_size > size_remaining)
     return "claimed string pool size exceeds file size";
-  return 0;
+  return 0 /* nullptr */;
 }
 
 bool index_search_item::load(int fd)
@@ -218,7 +220,7 @@ bool index_search_item::load(int fd)
   }
   else {
     addr = buffer = (char *)malloc(size);
-    if (buffer == 0) {
+    if (buffer == 0 /* nullptr */) {
       error("can't allocate memory to process index '%1'", name);
       return false;
     }
@@ -249,7 +251,7 @@ bool index_search_item::load(int fd)
     return false;
   }
   const char *problem = check_header(&header, size);
-  if (problem != 0) {
+  if (problem != 0 /* nullptr */) {
     if (do_verify)
       error("corrupt header in index file '%1': %2", name, problem);
     else
@@ -296,7 +298,7 @@ const char *index_search_item::get_invalidity_reason()
   }
   if (pool[header.strings_size - 1] != '\0')
     return "last character in string pool is not null";
-  return 0;
+  return 0 /* nullptr */;
 }
 
 bool index_search_item::is_valid()
@@ -326,17 +328,17 @@ search_item *make_index_search_item(const char *filename, int fid)
   strcat(index_filename, INDEX_SUFFIX);
   int fd = open(index_filename, O_RDONLY | O_BINARY);
   if (fd < 0)
-    return 0;
+    return 0 /* nullptr */;
   index_search_item *item = new index_search_item(index_filename, fid);
   delete[] index_filename;
   if (!item->load(fd)) {
     close(fd);
     delete item;
-    return 0;
+    return 0 /* nullptr */;
   }
   else if (do_verify && !item->is_valid()) {
     delete item;
-    return 0;
+    return 0 /* nullptr */;
   }
   else {
     item->check_files();
@@ -347,8 +349,9 @@ search_item *make_index_search_item(const char *filename, int fid)
 
 index_search_item_iterator::index_search_item_iterator(index_search_item *ind,
 						       const char *q)
-: indx(ind), out_of_date_files_iter(0), next_out_of_date_file(0), temp_list(0),
-  buf(0), buflen(0),
+: indx(ind), out_of_date_files_iter(0 /* nullptr */),
+  next_out_of_date_file(0 /* nullptr */), temp_list(0 /* nullptr */),
+  buf(0 /* nullptr */), buflen(0),
   searcher(q, strlen(q), ind->ignore_fields, ind->header.truncate),
   query(strsave(q))
 {
@@ -368,6 +371,7 @@ index_search_item_iterator::~index_search_item_iterator()
   delete out_of_date_files_iter;
 }
 
+// TODO: boolify
 int index_search_item_iterator::next(const linear_searcher &,
 				     const char **pp, int *lenp,
 				     reference_id *ridp)
@@ -397,6 +401,7 @@ int index_search_item_iterator::next(const linear_searcher &,
   return 0;
 }
 
+// TODO: boolify
 int index_search_item_iterator::get_tag(int tagno,
 					const linear_searcher &searchr,
 					const char **pp, int *lenp,
@@ -510,13 +515,13 @@ const int *index_search_item::search1(const char **pp, const char *end)
   while (*pp < end && !csalnum(**pp))
     *pp += 1;
   if (*pp >= end)
-    return 0;
+    return 0 /* nullptr */;
   const char *start = *pp;
   while (*pp < end && csalnum(**pp))
     *pp += 1;
   int len = *pp - start;
   if (len < header.shortest)
-    return 0;
+    return 0 /* nullptr */;
   if (len > header.truncate)
     len = header.truncate;
   int is_number = 1;
@@ -528,7 +533,7 @@ const int *index_search_item::search1(const char **pp, const char *end)
       is_number = 0;
     }
   if (is_number && !(len == 4 && start[0] == '1' && start[1] == '9'))
-    return 0;
+    return 0 /* nullptr */;
   unsigned hc = hash(key_buffer, len);
   if (common_words_table) {
     for (int h = hc % common_words_table_size;
@@ -536,13 +541,13 @@ const int *index_search_item::search1(const char **pp, const char *end)
 	 --h) {
       if (strlen(common_words_table[h]) == (size_t)len
 	  && memcmp(common_words_table[h], key_buffer, len) == 0)
-	return 0;
+	return 0 /* nullptr */;
       if (h == 0)
 	h = common_words_table_size;
     }
   }
   int li = table[int(hc % header.table_size)];
-  return li < 0 ? &minus_one : lists + li;
+  return li < 0 /* nullptr */ ? &minus_one : lists + li;
 }
 
 static void merge(int *result, const int *s1, const int *s2)
@@ -564,11 +569,11 @@ const int *index_search_item::search(const char *ptr, int length,
     delete[] *temp_listp;
     *temp_listp = 0;
   }
-  const int *first_list = 0;
+  const int *first_list = 0 /* nullptr */;
   while (ptr < end && (first_list = search1(&ptr, end)) == 0)
     ;
   if (!first_list)
-    return 0;
+    return 0 /* nullptr */;
   if (*first_list < 0)
     return first_list;
   const int *second_list = 0;
