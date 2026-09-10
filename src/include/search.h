@@ -68,7 +68,7 @@ public:
 
 class search_item {
 protected:
-  char *name;
+  char *name; // to be freed with free()
   int filename_id;
 public:
   search_item *next;

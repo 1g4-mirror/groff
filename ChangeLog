@@ -7,6 +7,8 @@
 	"<stdlib.h>" header file for `free()` symbol.
 	(search_list_iterator::~search_list_iterator): Deallocate
 	`query` with free(3) rather than `delete[]`.
+	(search_item::~search_item): Deallocate `name` with free(3)
+	rather than `delete[]`.
 
 2026-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 

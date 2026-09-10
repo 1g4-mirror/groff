@@ -118,7 +118,7 @@ search_item::search_item(const char *nm, int fid)
 
 search_item::~search_item()
 {
-  delete[] name;
+  free(name);
 }
 
 int search_item::is_named(const char *nm) const
