@@ -1,3 +1,19 @@
+2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libbib/index.cpp (index_search_item::load): Check
+	index file contents for nonsense: a string pool that begins with
+	a null byte.  If it does, throw error diagnostic and return
+	`false`, ignoring the index file and falling back to the plain
+	text bibliographic database.  This prevents us from overreading
+	the memory-mapped index file by one byte in the event it was
+	truncated right after that null byte (due to nested use of
+	strchr(3) and pointer arithmetic).
+
+	Fixes <https://savannah.gnu.org/bugs/?68681>.  Thanks to Pavol
+	Sloboda for the report and analysis.  Problem dates back to
+	groff's birth.  {And I didn't catch it when doing the work for
+	commit 1b97881fc0, 2021-09-12.}
+
 2026-09-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[refer]: Regression-test Savannah #68681.

@@ -269,6 +269,10 @@ bool index_search_item::load(int fd)
   lists = (int *)(tags + header.tags_size);
   table = (int *)(lists + header.lists_size);
   pool = (char *)(table + header.table_size);
+  if ('\0' == *pool) {
+    error("ignoring index file '%1' due to corrupt string pool", name);
+    return false;
+  }
   ignore_fields = strchr(strchr(pool, '\0') + 1, '\0') + 1;
   key_buffer = new char[header.truncate];
   read_common_words_file();
