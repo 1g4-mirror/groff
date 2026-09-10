@@ -1,3 +1,10 @@
+2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libbib/index.cpp (index_search_item::load): Improve
+	error diagnostic to communicate the consequences of a corrupt
+	index file: it gets ignored, meaning that its bibliographic
+	{plain text} file counterpart is processed instead.
+
 2026-09-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tmac/s.tmac (KF): Break the line just as `KS` does.

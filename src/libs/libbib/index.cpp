@@ -253,9 +253,10 @@ bool index_search_item::load(int fd)
   const char *problem = check_header(&header, size);
   if (problem != 0 /* nullptr */) {
     if (do_verify)
-      error("corrupt header in index file '%1': %2", name, problem);
+      error("ignoring index file '%1' due to corrupt header: %2", name,
+	    problem);
     else
-      error("corrupt header in index file '%1'", name);
+      error("ignoring index file '%1' due to corrupt header", name);
     return false;
   }
   tags = (tag *)(addr + sizeof(header));
