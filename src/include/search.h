@@ -58,7 +58,7 @@ class search_list_iterator {
   search_list *list;
   search_item *ptr;
   search_item_iterator *iter;
-  char *query;
+  char *query; // to be freed with free()
   linear_searcher searcher;
 public:
   search_list_iterator(search_list *, const char *query);

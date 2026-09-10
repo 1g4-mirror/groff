@@ -1,3 +1,13 @@
+2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[libbib]: Fix mismatched memory allocation/deallocation
+	techniques, which risks undefined behavior (UB) in C++.
+
+	* src/libs/libbib/search.cpp: Preprocessor-include C
+	"<stdlib.h>" header file for `free()` symbol.
+	(search_list_iterator::~search_list_iterator): Deallocate
+	`query` with free(3) rather than `delete[]`.
+
 2026-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[lookbib]: Update and resync usage message and man page

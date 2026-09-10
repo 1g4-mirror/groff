@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <assert.h>
 #include <errno.h>
+#include <stdlib.h> // free()
 #include <string.h> // strchr(), strcmp(), strerror(), strlen()
 
 #include "lib.h"
@@ -92,7 +93,7 @@ search_list_iterator::search_list_iterator(search_list *p, const char *q)
 search_list_iterator::~search_list_iterator()
 {
   list->niterators -= 1;
-  delete[] query;
+  free(query);
   delete iter;
 }
 
