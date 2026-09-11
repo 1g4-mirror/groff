@@ -20,7 +20,12 @@
 indxbib="${abs_top_builddir:-.}/indxbib"
 lkbib="${abs_top_builddir:-.}/lkbib"
 
-# Regression-test Savannah #68679.
+fail=
+
+wail () {
+    echo ...FAILED >&2
+    fail=YES
+}
 
 # Index files are in host-dependent data format.  Skip this test if
 # we're not on the most common (and worst) host environment.
@@ -65,6 +70,8 @@ then
     exit 77 # skip
 fi
 
+# Regression-test Savannah #68679.
+
 REFER="$sandbox_dir"/little-schemer.bib
 export REFER
 
@@ -80,12 +87,12 @@ fi
 # other shells don't either, and expecting one that does to be in the
 # $PATH seems optimistic.
 printf '\377\377\377\377' | dd of="$REFER".i bs=1 seek=24 conv=notrunc
-status=1
-"$lkbib" Schemer 2>&1 > /dev/null | grep -q 'error.*corrupt' && status=0
+echo "checking behavior when index file parameters corrupt" >&2
+"$lkbib" Schemer 2>&1 > /dev/null | grep -q 'error.*corrupt' || wail
 
 # We need `-f` because "little-schemer.bib" gets mode 444 in a "make
 # distcheck" build.
 rm -rf "$sandbox_dir"
-exit $status
+test -z "$fail" || exit 1
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
