@@ -57,7 +57,7 @@ lkbib \- search bibliographic databases
 .IR file ]
 \&.\|.\|.\&
 .RB [ \-t\~\c
-.IR n ]
+.IR maximum-key-length ]
 .I key
 \&.\|.\|.
 .YS

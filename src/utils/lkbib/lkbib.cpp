@@ -41,7 +41,8 @@ extern "C" const char *Version_string;
 static void usage(FILE *stream)
 {
   fprintf(stream,
-          "usage: %s [-n] [-i XYZ] [-p database] ... [-t N] key ...\n"
+          "usage: %s [-n] [-i fields] [-p database] ... "
+          "[-t maximum-key-length] key ...\n"
           "usage: %s {-v | --version}\n"
           "usage: %s --help\n",
 	  program_name, program_name, program_name);

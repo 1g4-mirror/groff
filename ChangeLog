@@ -1,3 +1,13 @@
+2026-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[lkbib]: Update and resync usage message and man page synopsis.
+
+	* src/utils/lkbib/lkbib.1.man (Synopsis):
+	* src/utils/lkbib/lkbib.cpp (usage): Rename inscrutable `-t`
+	parameter from "n" to "maximum-key-length".
+	* src/utils/lkbib/lkbib.cpp (usage): Rename semi-scrutable `-i`
+	parameter from "XYZ" to "fields".
+
 2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/lkbib/lkbib.cpp (main): Recast error diagnostic.
