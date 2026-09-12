@@ -51,9 +51,9 @@
 .
 .SY @g@lookbib
 .RB [ \-i\~\c
-.IR string ]
+.IR fields ]
 .RB [ \-t\~\c
-.IR n ]
+.IR maximum-key-length ]
 .I file
 \&.\|.\|.\&
 .YS

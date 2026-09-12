@@ -1,5 +1,15 @@
 2026-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[lookbib]: Update and resync usage message and man page
+	synopsis.
+
+	* src/utils/lookbib/lookbib.1.man (Synopsis):
+	* src/utils/lookbib/lookbib.cpp (usage): Rename inscrutable `-t`
+	parameter from "n" to "maximum-key-length".  Rename inscrutable
+	`-i` parameter from (variously) "XYZ" or "string" to "fields".
+
+2026-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[lkbib]: Update and resync usage message and man page synopsis.
 
 	* src/utils/lkbib/lkbib.1.man (Synopsis):
