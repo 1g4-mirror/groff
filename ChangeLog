@@ -1,5 +1,16 @@
 2026-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/table.cpp (table::init_output): Emit
+	argumentless `ti` request to cancel any temporary indentation,
+	just as we do with right-alignment and centering.  Placing an
+	`ti` request with no argument (a syntax newly meaningful in
+	groff 1.25) was causing a spurious warning in category "style".)
+
+	Fixes <https://savannah.gnu.org/bugs/?68697>.  Thanks to Ingo
+	Schwarze for bringing the issue to attention in Savannah #68696.
+
+2026-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/table.cpp (table::init_output): Emit `rj 0`
 	request to cancel any pending right alignment, just as we do
 	with centering.  Placing an `rj` request with no argument, or a

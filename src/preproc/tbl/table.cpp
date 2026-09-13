@@ -2043,6 +2043,7 @@ void table::init_output()
 	   "..\n");
   }
   prints(".ec\n"
+	 ".ti\n"
 	 ".rj 0\n"
 	 ".ce 0\n");
   prints(".nr " SAVED_NUMBERING_LINENO " \\n[ln]\n"
