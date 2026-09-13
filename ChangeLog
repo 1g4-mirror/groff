@@ -1,3 +1,12 @@
+2026-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/table.cpp (table::init_output): Emit `rj 0`
+	request to cancel any pending right alignment, just as we do
+	with centering.  Placing an `rj` request with no argument, or a
+	nonzero argument, before a table region seems to do no damage,
+	but we should be normalizing alignment prior to laying out a
+	table anyway, as `ce 0` does (in part).
+
 2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libbib/index.cpp
