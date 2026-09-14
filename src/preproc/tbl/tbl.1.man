@@ -160,47 +160,13 @@ table descriptions beyond the first must each be preceded
 by an input line beginning with
 .BR .T& .
 .
-This mechanism does not start a new table region;
-all table descriptions are treated as part of their
+.I tbl \" generic
+treats all table descriptions as part of their
 .BR .TS / .TE
 enclosure,
 even if they are boxed or have column headings that repeat on subsequent
 pages
 (see below).
-.
-.
-.\" XXX: The following is a general caveat about preprocessors (or would
-.\" be, once recast); move it.
-.P
-(Experienced
-.I roff
-users should observe that
-.I @g@tbl
-is not a
-.I roff
-language interpreter:
-the default control character must be used,
-and no spaces or tabs are permitted between the control character and
-the macro name.
-.
-These
-.I @g@tbl
-input tokens remain as-is in the output,
-where they become ordinary macro calls.
-.
-Macro packages often define
-.BR TS ,
-.BR T& ,
-and
-.B TE
-macros to handle issues of table placement on the page.
-.
-.I @g@tbl
-produces
-.I troff \" generic
-requests to define these macros as empty
-if their definitions do not exist
-when the formatter encounters a table region.)
 .
 .
 .P
@@ -213,6 +179,18 @@ followed by one or more input lines (rows) of
 .
 These entries comprise the
 .I table data.
+.
+.
+.P
+By default,
+.I tbl \" generic
+sets its output at the existing indentation,
+with 3n separation between columns,
+and uses as much of the output line length
+as is necessary to accommodate the widths
+of its entries and its column separations.
+.
+Region options and format specifications can alter these defaults.
 .
 .
 .
@@ -334,11 +312,6 @@ as a synonym.
 Spread the table horizontally to fill the available space
 (line length minus indentation)
 by increasing column separation.
-.
-Ordinarily,
-a table is made only as wide as necessary to accommodate the widths of
-its entries and its column separations
-(whether specified or default).
 .
 When
 .B \%expand
