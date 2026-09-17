@@ -1,3 +1,15 @@
+2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an.tmac (TS): Unconditionally break the line.
+	* tmac/doc.tmac (TS): New macro unconditionally breaks the line.
+
+	Handle erroneous input better: even if a tbl(1) table region is
+	malformed and renders nothing, the user (likely) still expects a
+	line break where the table _would_ have been.
+
+	See <https://savannah.gnu.org/bugs/?68696>.  Thanks to Ingo
+	Schwarze for the discussion.
+
 2026-09-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/table.cpp (table::init_output): Emit
