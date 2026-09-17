@@ -244,7 +244,7 @@ int main(int argc, char **argv)
     char *dir = strsave(base_name);
     dir[p - base_name] = '\0';
     name_max = file_name_max(dir);
-    delete[] dir;
+    free(dir);
   }
   else
     name_max = file_name_max(".");
