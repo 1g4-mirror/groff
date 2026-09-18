@@ -364,16 +364,18 @@ search_item *make_index_search_item(const char *filename, int fid)
 index_search_item_iterator::index_search_item_iterator(index_search_item *ind,
 						       const char *q)
 : indx(ind), out_of_date_files_iter(0 /* nullptr */),
-  next_out_of_date_file(0 /* nullptr */), temp_list(0 /* nullptr */),
-  buf(0 /* nullptr */), buflen(0),
+  next_out_of_date_file(0 /* nullptr */), found_list(0 /* nullptr */),
+  temp_list(0 /* nullptr */), buf(0 /* nullptr */), buflen(0),
   searcher(q, strlen(q), ind->ignore_fields, ind->header.truncate),
   query(strsave(q))
 {
-  found_list = indx->search(q, strlen(q), &temp_list);
-  if (!found_list) {
-    found_list = &minus_one;
-    warning("all keys would have been discarded in constructing index '%1'",
-	    indx->name);
+  if (ind->is_valid()) {
+    found_list = indx->search(q, strlen(q), &temp_list);
+    if (!found_list) {
+      found_list = &minus_one;
+      warning("all keys would have been discarded in constructing index '%1'",
+	      indx->name);
+    }
   }
 }
 

@@ -1,6 +1,16 @@
 2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/libs/libbib/index.cpp
+	(index_search_item_iterator::index_search_item_iterator): Add
+	`found_list` to initializer list, making it a null pointer,
+	because the file name index might not be valid.  Thus, bracket
+	the entire function body on the condition `ind->is_valid()`.
+
+	Fixes <https://savannah.gnu.org/bugs/?68682> (2/2).
+
+2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/libs/libbib/index.cpp
 	(index_search_item::get_invalidity_reason): Check index of file
 	name for nonsense (nonpositive) value, and reject it if has one.
 	This prevents us from an out-of-bounds read of the
