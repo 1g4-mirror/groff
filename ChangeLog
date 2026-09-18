@@ -1,5 +1,20 @@
 2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libbib/index.cpp
+	(index_search_item_iterator::index_search_item_iterator): Avoid
+	excessive memory allocation arising from corrupt index file,
+	rousing the wrath of the Linux OOM process killer or similar.
+	Check index file's claimed length of common word list for an
+	implausibly large value.  Pick 10,000, which I'm sure is still a
+	pretty implausible size of a list of _common_ words to any
+	linguist.
+
+	Fixes <https://savannah.gnu.org/bugs/?68685>.  Thanks to
+	Pavol Sloboda for the report and analysis.  Problem dates back
+	to groff's birth.
+
+2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[refer]: Regression-test Savannah #68685.
 
 	* src/preproc/refer/tests/check-index-file-validity.sh: Do it.

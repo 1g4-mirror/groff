@@ -629,9 +629,13 @@ const int *index_search_item::search(const char *ptr, int length,
 
 void index_search_item::read_common_words_file()
 {
-  if (header.common <= 0)
-    return;
   const char *common_words_file = munge_filename(strchr(pool, '\0') + 1);
+  if ((header.common <= 0) || (header.common >= 10000)) {
+    error("implausible count of common words %1 reported in index file"
+	  " '%2'; treating no words as common", header.common,
+	  common_words_file);
+    return;
+  }
   errno = 0;
   FILE *fp = fopen(common_words_file, "r");
   if (!fp) {
