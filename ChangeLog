@@ -29,7 +29,7 @@
 
 	* src/preproc/tbl/table.cpp (table::init_output): Emit
 	argumentless `ti` request to cancel any temporary indentation,
-	just as we do with right-alignment and centering.  Placing an
+	just as we do with right-alignment and centering.  Placing a
 	`ti` request with no argument (a syntax newly meaningful in
 	groff 1.25) was causing a spurious warning in category "style".)
 
@@ -52,9 +52,14 @@
 	excessive memory allocation arising from corrupt index file,
 	rousing the wrath of the Linux OOM process killer or similar.
 	Check index file's claimed length of common word list for an
-	implausibly large value.  Pick 10,000, which I'm sure is still a
+	implausibly large value.  Pick 10,000, which I'm sure is a
 	pretty implausible size of a list of _common_ words to any
-	linguist.
+	linguist.  (The average English speaker is said to have a
+	_total_ vocabulary of about 20,000 words, and almost all common
+	words--in English, anyway--arise from a tiny closed class of
+	words used for simple quantification or grammatical structure,
+	such as articles, indefinite adjectives, pronouns, and
+	prepositions.)
 
 	Fixes <https://savannah.gnu.org/bugs/?68685>.  Thanks to
 	Pavol Sloboda for the report and analysis.  Problem dates back
@@ -81,8 +86,8 @@
 	* src/libs/libbib/index.cpp
 	(index_search_item::get_invalidity_reason): Check index of file
 	name for nonsense (nonpositive) value, and reject it if has one.
-	This prevents us from an out-of-bounds read of the
-	{memory-mapped} index file.
+	This prevents an out-of-bounds read of the {memory-mapped} index
+	file.
 
 	Fixes <https://savannah.gnu.org/bugs/?68682> (1/2).  Thanks to
 	Pavol Sloboda for the report and analysis.  Problem dates back
@@ -164,8 +169,8 @@
 	* src/libs/libbib/index.cpp (index_search_item::check_header):
 	Check more header data for nonsense, as they can influence the
 	size of memory allocations.  Invalidate index file if its
-	maximum or minimum key lengths, or common word list length
-	threshold is nonpositive.
+	maximum or minimum key lengths, or the common word list length
+	threshold, is nonpositive.
 
 	Fixes <https://savannah.gnu.org/bugs/?68679>.  Thanks to Pavol
 	Sloboda for the report.  Problem dates back to groff's birth.
