@@ -106,6 +106,28 @@ printf '\0' | dd of="$REFER".i bs=1 seek=4044 conv=notrunc
 echo "checking behavior when index file string pool corrupt" >&2
 "$lkbib" Test 2>&1 > /dev/null | grep -q 'error.*corrupt string' || wail
 
+# Regression-test Savannah #68682.
+
+REFER="$sandbox_dir"/file-name-index.bib
+echo '%A Test' > "$REFER"
+
+if ! "$indxbib" -c "$common_words_file" "$REFER"
+then
+    echo "cannot generate index for bibliography file; skipping" >&2
+    exit 77 # skip
+fi
+
+# Corrupt the bibliography file's index number.  Thanks to Pavol
+# Sloboda.
+#
+# dash's built-in printf doesn't support \x or \u escapes, so likely
+# other shells don't either, and expecting one that does to be in the
+# $PATH seems optimistic.
+printf '\377\377\377\377' | dd of="$REFER".i bs=1 seek=36 conv=notrunc
+echo "checking behavior when index file name index number corrupt" >&2
+"$lkbib" Test 2>&1 > /dev/null | grep -q 'invalid.*file name index' \
+    || wail
+
 # We need `-f` because "little-schemer.bib" gets mode 444 in a "make
 # distcheck" build.
 rm -rf "$sandbox_dir"

@@ -1,3 +1,9 @@
+2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[refer]: Regression-test Savannah #68682.
+
+	* src/preproc/refer/tests/check-index-file-validity.sh: Do it.
+
 2026-09-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[libbib]: Fix mismatched memory allocation/deallocation
