@@ -1,5 +1,18 @@
 2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libbib/index.cpp
+	(index_search_item::get_invalidity_reason): Check index of file
+	name for nonsense (nonpositive) value, and reject it if has one.
+	This prevents us from an out-of-bounds read of the
+	{memory-mapped} index file.
+
+	Fixes <https://savannah.gnu.org/bugs/?68682> (1/2).  Thanks to
+	Pavol Sloboda for the report and analysis.  Problem dates back
+	to groff's birth.  {And I didn't catch it when doing the work
+	for commit 1b97881fc0, 2021-09-12.}
+
+2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[refer]: Regression-test Savannah #68682.
 
 	* src/preproc/refer/tests/check-index-file-validity.sh: Do it.

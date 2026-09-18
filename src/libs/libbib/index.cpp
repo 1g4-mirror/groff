@@ -300,6 +300,8 @@ const char *index_search_item::get_invalidity_reason()
     }
   }
   for (i = 0; i < header.tags_size; i++) {
+    if (tags[i].filename_index <= 0)
+      return "invalid (nonpositive) file name index in tags";
     if (tags[i].filename_index >= header.strings_size)
       return "bad index in tags";
     if (tags[i].length < 0)
