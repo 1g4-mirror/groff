@@ -1,5 +1,11 @@
 2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[refer]: Regression-test Savannah #68685.
+
+	* src/preproc/refer/tests/check-index-file-validity.sh: Do it.
+
+2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libbib/index.cpp
 	(index_search_item_iterator::index_search_item_iterator): Add
 	`found_list` to initializer list, making it a null pointer,
