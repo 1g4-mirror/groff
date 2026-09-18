@@ -100,7 +100,7 @@ class index_search_item_iterator : public search_item_iterator {
   char *buf;
   int buflen;
   linear_searcher searcher;
-  char *query;
+  char *query; // to be freed with free()
   int get_tag(int tagno, const linear_searcher &, const char **, int *,
 	      reference_id *);
 public:
@@ -378,7 +378,7 @@ index_search_item_iterator::~index_search_item_iterator()
 {
   delete[] temp_list;
   delete[] buf;
-  delete[] query;
+  free(query);
   delete out_of_date_files_iter;
 }
 

@@ -9,6 +9,9 @@
 	`query` with free(3) rather than `delete[]`.
 	(search_item::~search_item): Deallocate `name` with free(3)
 	rather than `delete[]`.
+	* src/libs/libbib/index.cpp
+	(index_search_item_iterator::~index_search_item_iterator):
+	Deallocate `query` with free(3) rather than `delete[]`.
 
 2026-09-12  G. Branden Robinson <g.branden.robinson@gmail.com>
 
