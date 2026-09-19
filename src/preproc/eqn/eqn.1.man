@@ -61,7 +61,7 @@ or MathML
 .
 .SY @g@eqn
 .RB [ \-CNrR ]
-.RB [ \- d\~\c
+.RB [ \-d\~\c
 .IR xy ]
 .RB [ \-f\~\c
 .IR global-italic-font ]
