@@ -1861,7 +1861,7 @@ need not be distinct.
 Any
 .RB \%\[lq] delim
 .IR xy \[rq]
-statements in the source file override this option.
+statements in the input override this option.
 .
 .
 .TP
