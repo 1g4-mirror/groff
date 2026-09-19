@@ -168,8 +168,7 @@ and
 .B \[rs]M
 escape sequences is black.
 .
-Currently,
-the stroke color for
+The stroke color for
 .B \[rs]D
 drawing escape sequences is black;
 fill color values are translated to gray.
