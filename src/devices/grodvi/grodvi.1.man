@@ -525,8 +525,9 @@ Use landscape orientation rather than portrait.
 .
 .
 .TP
-.BI \-p\~ paper-format
-Set physical dimensions of output medium,
+.BI \-p\~ fmt
+Set paper format to
+.IR fmt ,
 overriding the
 .BR \%papersize ,
 .BR \%paperlength ,
@@ -536,7 +537,7 @@ directives in the
 .I DESC
 file.
 .
-.I paper-format
+.I fmt
 can be any argument accepted by the
 .B \%papersize
 directive;
