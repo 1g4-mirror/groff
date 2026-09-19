@@ -5303,7 +5303,7 @@ uses.
 Multiple man pages,
 in either format,
 can be handled;
-.Pa \%andoc\:.tmac
+.Pa andoc\:.tmac
 reloads each macro package as necessary.
 .
 .
