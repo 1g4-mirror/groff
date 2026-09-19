@@ -142,7 +142,7 @@ struct param *param_table = 0 /* nullptr */;
 
 void set_param(const char *name, int value)
 {
-  for (size_t i = 0; i <= countof(default_param_table); i++)
+  for (size_t i = 0; i < countof(default_param_table); i++)
     if (strcmp(param_table[i].name, name) == 0) {
       *(param_table[i].ptr) = value;
       return;
