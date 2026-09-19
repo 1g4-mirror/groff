@@ -4108,7 +4108,7 @@ it is enabled\~(1).
 The hyphenation mode is determined by the
 .I groff
 locale;
-see section \[lq]Localization\[lq] of
+see section \[lq]Localization\[rq] of
 .MR groff @MAN7EXT@ .
 .
 .

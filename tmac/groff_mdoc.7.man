@@ -5147,7 +5147,7 @@ Normally,
 automatic hyphenation is enabled using a mode appropriate to the
 .Xr groff
 locale;
-see section \[lq]Localization\[lq] of
+see section \[lq]Localization\[rq] of
 .Xr groff @MAN7EXT@ .
 .
 It can be disabled by setting the
