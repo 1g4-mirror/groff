@@ -1573,8 +1573,8 @@ or
 .B \%tdefine
 primitives followed immediately by a left parenthesis is treated as a
 .I "parameterized macro call:"
-subsequent tokens up to a matching right parenthesis are treated as
-comma-separated arguments.
+the preprocessor treats subsequent tokens as comma-separated arguments,
+up to a matching right parenthesis.
 .
 In this context only,
 commas and parentheses also serve as token separators.
