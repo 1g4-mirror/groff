@@ -153,9 +153,10 @@ use the
 .B PSPIC
 macro.
 .
+.I dvi.tmac
+loads
 .I pspic.tmac
-is loaded automatically by
-.IR dvi.tmac .
+automatically.
 .
 See
 .MR groff_tmac @MAN5EXT@ .
@@ -171,7 +172,9 @@ escape sequences is black.
 The stroke color for
 .B \[rs]D
 drawing escape sequences is black;
-fill color values are translated to gray.
+.
+.I grodvi
+translates all fill color values to gray.
 .
 .
 .P
@@ -326,7 +329,8 @@ special fonts
 .B SB
 (msbm10).
 .
-They are not mounted by default.
+.I grodvi
+does not mount them by default.
 .
 .
 .P
@@ -502,9 +506,9 @@ Do not use
 .I tpic
 specials to implement drawing commands.
 .
-Horizontal and vertical lines are implemented by rules.
-.
-Other drawing commands are ignored.
+.I grodvi
+renders horizontal and vertical lines with rules,
+and ignores other drawing commands.
 .
 .
 .TP
