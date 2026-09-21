@@ -644,7 +644,7 @@ use a different resolution
 (57,816 units per inch)
 from those produced by \*[tx].
 .
-Incorrectly written drivers which assume the resolution used by \*[tx],
+Incorrectly written drivers that assume the resolution used by \*[tx],
 rather than using the resolution specified in the DVI file,
 do not work with
 .IR grodvi .
