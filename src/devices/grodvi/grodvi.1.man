@@ -144,7 +144,7 @@ version\~2 specials.
 .
 If the driver does not support these,
 .B \[rs]D
-escape sequences will not produce any output.
+escape sequences produce no output.
 .
 .
 .P
@@ -646,7 +646,7 @@ from those produced by \*[tx].
 .
 Incorrectly written drivers which assume the resolution used by \*[tx],
 rather than using the resolution specified in the DVI file,
-will not work with
+do not work with
 .IR grodvi .
 .
 .
