@@ -1061,6 +1061,23 @@ void imageList::createImage(imageItem *i)
 		" of page %d\n", program_name, i->pageNo);
 	fflush(stderr);
       }
+      for (const char *p = i->imageName; *p != '\0'; p++) {
+	if (strchr(";&|*?~<>^()[]{}'$`\"\\#", *p) != 0 /* nullptr */) {
+	  // XXX: This branch should not normally be reachable; troff
+	  // should have already discarded any "O5" escape sequence
+	  // containing these injection-suggestive characters.  The only
+	  // way to get here should be to somehow intercept and alter
+	  // the data stream in the pipeline constructed by
+	  // `char_buffer::run_output_filter()`.  Since that's a
+	  // relatively tall order, we should be able to get by here
+	  // with assert(3), retaining `fatal()` for `NDEBUG` builds.
+	  char q = '\'';
+	  if ('\'' == *p)
+	    q = '\"';
+	  fatal("unsafe shell character %1%2%3"
+		" in raster image file name", q, *p, q);
+	}
+      }
       const char *s = make_string("pamcut%s %d %d %d %d < %s "
 				  "| pnmcrop%s " PNMTOOLS_QUIET
 				  "| pnmtopng%s " PNMTOOLS_QUIET " %s"
