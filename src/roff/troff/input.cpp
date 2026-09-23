@@ -6995,6 +6995,20 @@ static node *do_suppress(symbol nm) // \O
 	      " sequence");
 	return 0 /* nullptr */;
       }
+      // pre-grohtml runs troff (using the "ps" output device).  It also
+      // has a function called `html_system()` that calls the dreaded
+      // system(3).
+      for (const char *p = s; *p != '\0'; p++) {
+	if (strchr(";&|*?~<>^()[]{}'$`\"\\#", *p) != 0 /* nullptr */) {
+	  char q = '\'';
+	  if ('\'' == *p)
+	    q = '\"';
+	  error("rejecting image file name argument"
+		" containing unsafe shell character %1%2%3"
+		" in output suppression escape sequence", q, *p, q);
+	  return 0 /* nullptr */;
+	}
+      }
       image_no++;
       if (0 == suppression_level)
 	return new suppress_node(symbol(s), position, image_no);
