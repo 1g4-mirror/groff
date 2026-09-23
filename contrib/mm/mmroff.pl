@@ -127,7 +127,7 @@ while(<MACRO>) {
 		next;
 	}
 	if (m#^\.\\" PIC (\w+)\s+(\S+)#) {
-		eval "\$cur{'$1'} = '$2'";
+		$cur{"$1"} = '$2';
 		next;
 	}
 	s#\\ \\ $##;

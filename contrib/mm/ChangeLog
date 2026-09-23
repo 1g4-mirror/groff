@@ -1,3 +1,18 @@
+2026-09-22  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Fix Savannah #68689.
+
+	* mmroff.pl: In main loop, drop use of `eval` in favor of a
+	simpler hash assignment, preventing a shell command injection
+	vulnerability in mmroff(1) when a malicious input file inserts a
+	specially crafted comment line into the standard output or error
+	streams of the first groff(1) pass this command performs.
+
+	Problem appears to date back to commit e092fba451, 2000-02-06,
+	the initial check-in of the "mmroff.pl" script, which first
+	shipped in groff 1.16.  Thanks to Pavol Sloboda for the report
+	and a reproducer, and to Ingo Schwarze for help preparing a fix.
+
 2026-02-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* tests/LB-mark-format-works.sh: Rename this...
