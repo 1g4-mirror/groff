@@ -1076,8 +1076,8 @@ void imageList::createImage(imageItem *i)
       free(const_cast<char *>(s));
     }
     else {
-      fprintf(stderr, "%s: failed to generate image of page %d\n",
-	      program_name, i->pageNo);
+      fprintf(stderr, "%s: error: unable to generate raster image"
+	      " of page %d\n", program_name, i->pageNo);
       fflush(stderr);
     }
 #if defined(DEBUGGING)
