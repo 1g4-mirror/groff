@@ -1035,6 +1035,12 @@ int imageList::getMaxX(int pageno)
 
 void imageList::createImage(imageItem *i)
 {
+  assert(i != 0 /* nullptr */);
+  if (0 /* nullptr */ == i->imageName) { // NDEBUG
+    fprintf(stderr, "%s: error: unable to generate raster image",
+	    program_name);
+    fflush(stderr);
+  }
   if (i->X1 != -1) {
     int x1 = max(min(i->X1, i->X2) * image_res / postscriptRes
 		   - IMAGE_BORDER_PIXELS,
@@ -1049,6 +1055,12 @@ void imageList::createImage(imageItem *i)
 	     + max(i->Y1, i->Y2) * image_res / postscriptRes
 	     + 1 + IMAGE_BORDER_PIXELS;
     if (createPage(i->pageNo) == 0) {
+      assert(i->imageName != 0 /* nullptr */);
+      if (0 /* nullptr */ == i->imageName) { // NDEBUG
+	fprintf(stderr, "%s: error: unable to generate raster image"
+		" of page %d\n", program_name, i->pageNo);
+	fflush(stderr);
+      }
       const char *s = make_string("pamcut%s %d %d %d %d < %s "
 				  "| pnmcrop%s " PNMTOOLS_QUIET
 				  "| pnmtopng%s " PNMTOOLS_QUIET " %s"
