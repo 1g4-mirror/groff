@@ -1049,6 +1049,17 @@ void imageList::createImage(imageItem *i)
 	     + max(i->Y1, i->Y2) * image_res / postscriptRes
 	     + 1 + IMAGE_BORDER_PIXELS;
     if (createPage(i->pageNo) == 0) {
+      for (const char *p = i->imageName; *p != '\0'; p++) {
+	if (strchr(";&|*?~<>^()[]{}'$`\"\\#", *p != 0 /* nullptr */)) {
+	  char q = '\'';
+	  if ('\'' == *p)
+	    q = '\"';
+	  fprintf(stderr, "%s: fatal error: unsafe shell character"
+		  " %c%c%c in raster image file name", q, *p, q);
+	  fflush(stderr);
+	  exit(EXIT_FAILURE);
+	}
+      }
       const char *s = make_string("pamcut%s %d %d %d %d < %s "
 				  "| pnmcrop%s " PNMTOOLS_QUIET
 				  "| pnmtopng%s " PNMTOOLS_QUIET " %s"
