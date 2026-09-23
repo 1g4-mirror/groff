@@ -1,6 +1,6 @@
-2026-09-23 Deri James  <deri@chuzzlewit.myzen.co.uk>
+2026-09-23  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	Inkscape exported pdfs fail to load.
+	[gropdf]: Fix loading of PDF files exported from Inkscape.
 
 	PDF files may introduce commments into objects with '%' which
 	should be stripped on loading. Since PDF 1.5 objects may be
@@ -9,7 +9,9 @@
 	* src/devices/gropdf/gropdf.pl (LoadPDF): Remove comments from
 	objects contained in compressed stream pf ObjStm objects.
 
-	Fixes <https://savannah.gnu.org/bugs/?68705>
+	Fixes <https://savannah.gnu.org/bugs/?68705>.  Problem
+	introduced in commit 7c03588162, 2024-01-07, when the ability to
+	load PDF 1.5 files was added.
 
 2026-09-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
