@@ -7141,22 +7141,23 @@ static node *do_suppress(symbol nm) // \O
       s++;			// move over '5'
       char position = *s;
       if ('\0' == *s) {
-	error("missing position and file name in output suppression"
-	      " escape sequence");
+	error("missing position and image file name"
+	      " in output suppression escape sequence");
 	return 0 /* nullptr */;
       }
       if ((position != 'l')
 	  && (position != 'r')
 	  && (position != 'c')
 	  && (position != 'i')) {
-	error("expected position 'l', 'r', 'c', or 'i' in output"
-	      " suppression escape sequence, got '%1'", position);
+	error("expected position 'l', 'r', 'c', or 'i'"
+	      " in output suppression escape sequence,"
+	      " got '%1'", position);
 	return 0 /* nullptr */;
       }
       s++;			// onto image name
       if (0 == s /* nullptr */) {
-	error("missing image name in output suppression escape"
-	      " sequence");
+	error("missing image file name"
+	      " in output suppression escape sequence");
 	return 0 /* nullptr */;
       }
       image_no++;
