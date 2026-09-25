@@ -428,7 +428,8 @@ Prefixing
 .I n
 with
 a plus or minus sign increments or decrements (respectively) its
-existing value.
+existing value
+.RI by\~ n.
 .
 If assignment of a (possibly) negative
 .IR n \~is
