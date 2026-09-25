@@ -306,6 +306,10 @@
 .  \}
 .  if \n[C] .rr P
 .
+.  \" We've seen no tbl(1) tables yet in this document.
+.  rr TW
+.  nr doc-was-tbl-failure-reported 0
+.
 .  \" When rendering multiple documents, we want to clear any page-local
 .  \" manipulation of hyphenation and adjustment modes from the previous
 .  \" document.

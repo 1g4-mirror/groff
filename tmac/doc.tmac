@@ -7150,6 +7150,20 @@ arguments
 ..
 .
 .
+.eo
+.de TE
+.  if !r TW .if !\n[doc-was-tbl-failure-reported] \{\
+.    ds doc-msg tbl preprocessor failed, or it or soelim was not run;\"
+.    as doc-msg " table(s) likely not rendered\"
+.    as doc-msg " (TE macro called with TW register undefined)\"
+.    doc-warn \*[doc-msg]
+.    rm doc-msg
+.    nr doc-was-tbl-failure-reported 1
+.  \}
+..
+.ec
+.
+.
 .\" NS doc-defunct-macro macro
 .\" NS   this is the skeleton for defunct macros
 .\" NS
