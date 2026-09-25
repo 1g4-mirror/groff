@@ -11378,8 +11378,10 @@ void charinfo::dump()
     errprint("  is%1 found\n", is_not_found ? " not" : "");
     errprint("  is%1 transparently translatable\n",
 	     is_transparently_translatable ? "" : " not");
-    errprint("  is%1 translatable as input\n",
+    // TODO: Explain WTH that means.
+    errprint("  is%1 translated when read from input\n",
 	     translatable_as_input ? "" : " not");
+    // TODO: translated to what?
     const char *modestr = character_mode_description(mode);
     if (strcmp(modestr, "") == 0)
       modestr =" normal";
