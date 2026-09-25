@@ -62,6 +62,8 @@ pdfmomoption = -P-W
 groffmanpagesoption = -P-e
 endif # HAVE_URW_FONTS
 
+# Use this macro to render a document if it has forward internal
+# references.
 DOC_PDFMOM = \
   GROFF_COMMAND=test-groff \
   GROFF_COMMAND_PREFIX= \
