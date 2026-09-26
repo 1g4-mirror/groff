@@ -1,3 +1,19 @@
+2026-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am: Avoid use of GNU Make extension: special variable
+	`$<` expansion in target (cf. suffix) rules.  Define new macros
+	`DOC_MEINTRO_FR`, `GROFF_TEXI`, and `DOC_LINE_LAYOUT_ROFF`
+	to avoid repeating ourselves in prerequisites and recipes.
+	(doc/meintro_fr.ps):
+	($(GROFF_HTML)):
+	($(DOC_LINE_LAYOUT_EPS)):
+	($(DOC_LINE_LAYOUT_PNG)): Expand macros as necessary.
+	$(DOC_LINE_LAYOUT_EPS)): Kludge in a workaround for the damnably
+	discrepant GNU vs. BSD Make handling of `VPATH`.
+
+	Thanks to Ingo Schwarze for the report in <https://\
+	lists.gnu.org/archive/html/groff/2026-09/msg00079.html>.
+
 2026-09-19  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/eqn/box.cpp (set_param): Fix off-by-one error in

@@ -384,11 +384,14 @@ doc/meintro.ps doc/meintro_fr.ps doc/meref.ps: $(TMAC_PACKAGE_ME)
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_GROFF) -Tps -me $< >$@
 
+# We avoid GNUish use of `$<` in target rule, so define macro to DRY.
+DOC_MEINTRO_FR = doc/meintro_fr.me
+
 # Use '-K utf8', not '-k', in case 'configure' didn't find uchardet.
 # The French translation uses tbl; its English counterpart does not.
-doc/meintro_fr.ps: doc/meintro_fr.me preconv tbl
+doc/meintro_fr.ps: $(DOC_MEINTRO_FR) preconv tbl
 	$(GROFF_V)$(MKDIR_P) `dirname $@` \
-	&& $(DOC_GROFF) -K utf8 -t -Tps -me -mfr $< >$@
+	&& $(DOC_GROFF) -K utf8 -t -Tps -me -mfr $(DOC_MEINTRO_FR) >$@
 
 SUFFIXES += .ms.in .ms
 .ms.in.ms:
@@ -637,16 +640,19 @@ $(GROFF_PDF): $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 # nose to the correct place.
 TEXINPUTS="$(doc_srcdir)$(PATH_SEPARATOR)$$TEXINPUTS"
 
+# We avoid GNUish use of `$<` in target rule, so define macro to DRY.
+GROFF_TEXI = doc/groff.texi
+
 # We also have to override Automake's built-in rule for generation of
 # HTML from Texinfo to include our embedded images.
 #
 # TODO: Maybe split this into `GROFF_HTML_MONO` and `GROFF_HTML_NODE`?
-$(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
+$(GROFF_HTML): $(GROFF_TEXI) $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
 	  --css-ref="https://www.gnu.org/software/gnulib/manual.css" \
 	  -I $(doc_builddir) -I $(doc_srcdir) \
-	  -o $(GROFF_HTML).node $< \
+	  -o $(GROFF_HTML).node $(GROFF_TEXI) \
 	&& if test -f "$(srcdir)/$(DOC_GNU_PNG)"; then \
 	  cp -f "$(srcdir)/$(DOC_GNU_PNG)" \
 	    "$(srcdir)/$(DOC_LINE_LAYOUT_PNG)" $(GROFF_HTML).node; \
@@ -657,7 +663,7 @@ $(GROFF_HTML): doc/groff.texi $(DOC_GNU_PNG) $(DOC_LINE_LAYOUT_PNG)
 	&& LANG=C LC_ALL=C $(MAKEINFO) --html \
 	  --css-ref="https://www.gnu.org/software/gnulib/manual.css" \
 	  -I $(doc_builddir) -I $(doc_srcdir) \
-	  --no-split -o $@ $<
+	  --no-split -o $@ $(GROFF_TEXI)
 
 all: $(GROFF_INFO) $(GROFF_TXT) $(GROFF_HTML) $(GROFF_DVI) $(GROFF_PDF)
 
@@ -924,10 +930,24 @@ $(DOC_GNU_PNG): doc/gnu.xpm
 	fi; \
 	xpmtoppm $(top_srcdir)/doc/gnu.xpm | pnmtopng >$@
 
-$(DOC_LINE_LAYOUT_EPS): doc/line-layout.roff pic groff troff grops \
+# We avoid GNUish use of `$<` in target rule, so define macro to DRY.
+DOC_LINE_LAYOUT_ROFF = doc/line-layout.roff
+
+# We kludge in a copy of `DOC_LINE_LAYOUT_ROFF` because we GNU and BSD
+# Makes differ in `VPATH` handling such that we can't define that macro
+# to interpolate `doc_srcdir`.  In GNU Make, prerequisites satisfaction
+# is determined by file identity; in BSD Make, by string equality
+# comparison.
+$(DOC_LINE_LAYOUT_EPS): $(DOC_LINE_LAYOUT_ROFF) pic groff troff grops \
   font/devps/stamp
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
-	&& $(DOC_GROFF) -p -T ps -P -b16 $< >$(DOC_LL).ps \
+	&& if ! test -f "$(DOC_LINE_LAYOUT_ROFF)"; then \
+	  if test -f "$(srcdir)/$(DOC_LINE_LAYOUT_ROFF)"; then \
+	    cp -f "$(srcdir)/$(DOC_LINE_LAYOUT_ROFF)" doc; \
+	  fi; \
+	fi \
+	&& $(DOC_GROFF) -p -T ps -P -b16 $(DOC_LINE_LAYOUT_ROFF) \
+	  >$(DOC_LL).ps \
 	&& gs -q -dNOPAUSE -sDEVICE=bbox -- $(DOC_LL).ps \
 	  2> $(DOC_LL).bbox \
 	&& sed -e '/^%%Orientation/r $(DOC_LL).bbox' \
@@ -937,7 +957,7 @@ $(DOC_LINE_LAYOUT_EPS): doc/line-layout.roff pic groff troff grops \
 
 $(DOC_LINE_LAYOUT_PNG): $(DOC_LINE_LAYOUT_EPS)
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
-	&& convert -density 300 $< PNG24:$@
+	&& convert -density 300 $(DOC_LINE_LAYOUT_EPS) PNG24:$@
 else
 $(DOC_GNU_EPS) \
   $(DOC_GNU_PNG) \
