@@ -79,9 +79,20 @@ sub autopsy
     return $finding;
 }
 
-while (my $c=shift)
+sub Clean
 {
-    $c=~s/(?<!\\)"/\\"/g;
+    my $c=shift;
+
+    if (defined($c))
+    {
+        $c=~s/'/'\\''/g;
+    }
+
+    return $c;
+}
+
+while (my $c=Clean(shift))
+{
 
     if (substr($c,0,2) eq '-T')
     {
@@ -91,7 +102,7 @@ while (my $c=shift)
 	}
 	else
 	{
-	    $dev=shift;
+	    $dev=Clean(shift);
 	}
 	next;
     }
@@ -99,12 +110,12 @@ while (my $c=shift)
     {
 	if (length($c) > 2)
 	{
-	    $preconv.=" $c";
+	    $preconv.=" '$c'";
 	}
 	else
 	{
-	    $preconv.=" $c";
-	    $preconv.=shift;
+	    $preconv.=" '$c";
+	    $preconv.=Clean(shift)."'";
 	}
 	next;
     }
@@ -149,8 +160,8 @@ while (my $c=shift)
     {
 	if (length($c) > 1)
 	{
-	    push(@cmd,"\"$c\"");
-	    push(@cmd,"'".(shift)."'") if length($c)==2 and index('dDfFIKLmMnoPrwW',substr($c,-1)) >= 0;
+	    push(@cmd,"'$c'");
+	    push(@cmd,"'".Clean(shift)."'") if length($c)==2 and index('dDfFIKLmMnoPrwW',substr($c,-1)) >= 0;
 	}
 	else
 	{
@@ -164,7 +175,7 @@ while (my $c=shift)
     {
 	# Got a filename?
 
-	push(@cmd,"\"$c\"");
+	push(@cmd,"'$c'");
 	$readstdin=0 if $readstdin == 1;
 
     }
