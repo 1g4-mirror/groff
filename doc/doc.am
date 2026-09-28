@@ -680,8 +680,8 @@ doc/groff.texi: $(top_srcdir)/doc/groff.texi.in
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_SED) $(top_srcdir)/doc/groff.texi.in >$@
 
-EXTRA_DIST += doc/groff.info
-MAINTAINERCLEANFILES += doc/groff.info
+EXTRA_DIST += $(GROFF_INFO)
+MAINTAINERCLEANFILES += $(GROFF_INFO)
 if HAVE_MAKEINFO
 $(GROFF_INFO): doc/groff.texi
 	$(AM_V_at)$(MKDIR_P) $(doc_builddir)

@@ -1,3 +1,8 @@
+2026-09-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* doc/doc.am: Fix code style nit.  Favor interpolation of
+	`GROFF_INFO` macro over "doc/groff.info" literal.
+
 2026-09-26  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* doc/doc.am: Avoid use of GNU Make extension: special variable
