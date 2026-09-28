@@ -164,9 +164,9 @@
 
 	* src/libs/libbib/index.cpp
 	(index_search_item::get_invalidity_reason): Check index of file
-	name for nonsense (nonpositive) value, and reject it if has one.
-	This prevents an out-of-bounds read of the {memory-mapped} index
-	file.
+	name for nonsense (nonpositive) value, and reject it if it has
+	one.  This prevents an out-of-bounds read of the {memory-mapped}
+	index file.
 
 	Fixes <https://savannah.gnu.org/bugs/?68682> (1/2).  Thanks to
 	Pavol Sloboda for the report and analysis.  Problem dates back
