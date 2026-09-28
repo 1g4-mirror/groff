@@ -462,7 +462,6 @@ DOC_LL=line-layout
 mostlyclean-local: mostlyclean_doc
 mostlyclean_doc:
 	$(RM) $(GROFF_DVI) $(PROCESSEDDOCFILES_PDF)
-	$(RM) doc/groff.info-*
 	if test $(top_builddir) != $(top_srcdir); then \
 	  $(RM) $(top_builddir)/doc/groff.css \
 	    $(GROFF_HTML) $(GROFF_INFO) $(GROFF_PDF) $(GROFF_TXT) \
@@ -680,6 +679,9 @@ doc/groff.texi: $(top_srcdir)/doc/groff.texi.in
 	$(AM_V_GEN)$(MKDIR_P) `dirname $@` \
 	&& $(DOC_SED) $(top_srcdir)/doc/groff.texi.in >$@
 
+# Do not feed `$(MAKEINFO)` `$(GROFF_INFO)` as the output file, or you
+# will produce a useless stump "groff.info" file when building in-tree.
+# Construct the `-o` argument from `$(doc_builddir)` instead.
 EXTRA_DIST += $(GROFF_INFO)
 MAINTAINERCLEANFILES += $(GROFF_INFO)
 if HAVE_MAKEINFO
@@ -687,20 +689,10 @@ $(GROFF_INFO): doc/groff.texi
 	$(AM_V_at)$(MKDIR_P) $(doc_builddir)
 	$(AM_V_GEN)LANG=C \
 	LC_ALL=C \
-	$(MAKEINFO) -o doc/groff.info --enable-encoding \
+	$(MAKEINFO) -o $(doc_builddir)/groff.info \
+	  --no-split --enable-encoding \
 	  -I $(doc_srcdir) $(doc_builddir)/groff.texi
 endif # HAVE_MAKEINFO
-
-# Distribute the Info files.
-dist-hook: dist-info-bits
-dist-info-bits:
-	chmod u+w $(distdir)/doc
-	for d in $(doc_builddir) $(doc_srcdir); do \
-	  if [ -f "$$d"/groff.info ]; then \
-	    cp -f "$$d"/groff.info-* $(distdir)/doc; \
-	    break; \
-	  fi; \
-	done
 
 EXTRA_DIST += doc/groff.txt
 MAINTAINERCLEANFILES += doc/groff.txt

@@ -1,5 +1,19 @@
 2026-09-27  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Unsplit groff's Info manual.
+
+	* doc/doc.am ($(GROFF_INFO)): Run `$(MAKEINFO)` with
+	`--no-split` option.  Also name the output file explicitly based
+	on expansion of the `doc_builddir` macro since that appears to
+	be necessary to support in-tree builds from a Git working copy.
+	(dist-hook, dist-info-bits): Drop prerequisite declaration and
+	target; we no longer need to override what Automake does for us
+	to ship our Info manual.
+	(mostlyclean_doc): Stop manually deleting "doc/groff.info-*"
+	files; they are no longer created.
+
+2026-09-27  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am: Fix code style nit.  Favor interpolation of
 	`GROFF_INFO` macro over "doc/groff.info" literal.
 
