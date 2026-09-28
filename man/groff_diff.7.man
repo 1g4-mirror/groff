@@ -5469,6 +5469,8 @@ in typographical points.
 This is a string-valued register.
 .
 .
+.br
+.ne 4v
 .TP
 .B \[rs]n[.ss]
 .TQ
