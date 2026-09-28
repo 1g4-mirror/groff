@@ -99,7 +99,7 @@ maintainer: Insert output of
 ]]
 
 As of this writing, per the GNU Savannah bug tracker, the groff
-project has resolved NNN issues as fixed for the 1.yy.0 release.
+project has resolved NNN issues as fixed for the 1.yy.Y release.
 
 Classifying these issues by type and the component of the project to
 which they apply, we find the following.
@@ -155,19 +155,19 @@ Here are the compressed sources and a GPG detached signature[*].
   https://ftp.gnu.org/gnu/groff/groff-1.yy.Y.tar.gz.sig
 
 Use a mirror for higher download bandwidth.
-  https://ftpmirror.gnu.org/groff/groff-1.yy.0.tar.gz
-  https://ftpmirror.gnu.org/groff/groff-1.yy.0.tar.gz.sig
+  https://ftpmirror.gnu.org/groff/groff-1.yy.Y.tar.gz
+  https://ftpmirror.gnu.org/groff/groff-1.yy.Y.tar.gz.sig
 ]]
 
 Here are the SHA-1 and SHA-256 checksums.
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  groff-1.yy.0.tar.gz
-yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy  groff-1.yy.0.tar.gz
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  groff-1.yy.Y.tar.gz
+yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy  groff-1.yy.Y.tar.gz
 
 The SHA-256 checksum is encoded in Base64 instead of the hexadecimal
 form that most checksum tools default to.  The mechanism follows.
 
-sha256sum < groff-1.yy.0.tar.gz | cut -f1 -d\  | xxd -r -p | base64
+sha256sum < groff-1.yy.Y.tar.gz | cut -f1 -d\  | xxd -r -p | base64
 
 (Because "base64" reads from a pipe, it doesn't know the file name, and
 so the file name will not appear in the output.)
