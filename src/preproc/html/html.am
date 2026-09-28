@@ -22,6 +22,11 @@ pre_grohtml_SOURCES = \
   src/preproc/html/pushback.h
 src/preproc/html/pre-html.$(OBJEXT): defs.h
 
+pre_grohtml_TESTS = \
+  src/preproc/html/tests/does-not-defeat-safer-mode.sh
+TESTS += $(pre_grohtml_TESTS)
+EXTRA_DIST += $(pre_grohtml_TESTS)
+
 # Local Variables:
 # fill-column: 72
 # mode: makefile-automake
