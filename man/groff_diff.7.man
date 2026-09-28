@@ -717,8 +717,7 @@ and
 interpolate the last
 .I requested
 type size
-in scaled points
-and in points as a decimal fraction,
+in scaled and typographical points,
 respectively.
 .
 Like the current and previous selected type size,

@@ -16211,8 +16211,7 @@ and
 interpolate the last
 @emph{requested}
 type size
-in scaled points
-and in points as a decimal fraction,
+in scaled and typographical points,
 respectively.
 Like the current and previous selected type size,
 the requested ones are properties
