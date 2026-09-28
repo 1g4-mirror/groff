@@ -1,0 +1,6 @@
+# Map multiple author identities to one canonical form per contributor.
+#
+# Format: Canonical Name <canonical@email> [Old Name] <old@email>
+
+Deri James <deri@chuzzlewit.myzen.co.uk> Deri <deri@chuzzlewit.myzen.co.uk>
+Werner Lemberg <wl@gnu.org> Werner LEMBERG <wl@gnu.org>
