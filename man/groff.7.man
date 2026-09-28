@@ -2891,7 +2891,7 @@ A neutral double quote
 .RB \[oq] \[dq] \[cq] \" single quotes around double quote
 can optionally prefix a
 .I character-sequence;
-the formatter discards one if present,
+the formatter discards it if present,
 permitting initial embedded spaces in the argument.
 .
 .I input
