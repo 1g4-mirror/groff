@@ -4492,7 +4492,8 @@ to find the glyph demanded.
 GNU
 .I troff \" GNU
 mounts each font
-.I s.
+.I s,
+if it exists.
 .
 Invoking
 .B \%special

@@ -14998,7 +14998,8 @@ to find the glyph demanded.
 GNU
 @command{troff} @c GNU
 mounts each font
-@var{s}.
+@var{s},
+if it exists.
 Invoking
 @code{special}
 without arguments empties the list.
