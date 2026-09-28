@@ -285,11 +285,12 @@ hyphenation system (\[lq]suftab\[rq]) was specific to English.
 .
 GNU
 .I troff \" GNU
-support additional hyphenation modes to support other languages.
+supports additional hyphenation modes
+to meet the needs of other languages.
 .
-New values 16 and\~32 are available;
-the former enables hyphenation before the last character in a word,
-and the latter enables hyphenation after the first character in a word.
+The new value 16
+enables hyphenation before the last character in a word,
+and 32 does so after the first.
 .
 .
 .P
