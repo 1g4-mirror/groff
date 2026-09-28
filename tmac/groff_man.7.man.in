@@ -3879,8 +3879,8 @@ Unix System\~V Release\~4 (1989) incorporated the
 .\" _announced_ in October 1988 jointly by AT&T and Sun, but its source
 .\" code tape, a "reference implementation", didn't ship to the public
 .\" for over a year (in a preview of the game Microsoft would later play
-.\" with "Chicago", later known as Windows 95).  GBR uses the 1989 date
-.\" for consistency with his work on the ncurses man pages.
+.\" with "Chicago", subsequently branded "Windows 95").  GBR uses the
+.\" 1989 date for consistency with his work on the ncurses man pages.
 .B lq
 and
 .B rq
