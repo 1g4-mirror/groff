@@ -1,3 +1,12 @@
+2026-09-28  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[pdfmom]: Regression-test Savannah #68687.
+
+	* src/utils/pdfmom/tests/sanitizes-arguments.sh: Do it.
+	* src/utils/pdfmom/pdfmom.am (pdfmom_TESTS): Run test.
+	(TESTS, EXTRA_DIST): Wire `pdfmom_TESTS` into Automake test
+	harness and ship this and any future pdfmom test scripts.
+
 2026-08-06  Bruno Haible <bruno@clisp.org>
 
 	* doc/doc.am ($(DOC_LINE_LAYOUT_EPS)): Remove the %%CreationDate

@@ -37,6 +37,11 @@ pdfmom: $(pdfmom_dir)/pdfmom.pl $(SH_DEPS_SED_SCRIPT)
 	       >$@ \
 	&& chmod +x $@
 
+pdfmom_TESTS = \
+  src/utils/pdfmom/tests/sanitizes-arguments.sh
+TESTS += $(pdfmom_TESTS)
+EXTRA_DIST += $(pdfmom_TESTS)
+
 # Local Variables:
 # fill-column: 72
 # mode: makefile-automake
