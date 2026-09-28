@@ -9,6 +9,27 @@
 This file describes recent user-visible changes in groff.  Bug fixes are
 not described.  There are more details in the man and info pages.
 
+VERSION 1.24.2
+==============
+
+This release corrects command injection security vulnerabilities
+(CWE-78) in the mmroff, pdfmom, and pre-grohtml programs.  The last of
+these is a preprocessor that is run when groff or troff is run with the
+`-T html` or `-T xhtml` options.  The vulnerabilities are variously
+14-26 years old.  Malicious input can escape groff's default "safer"
+mode, running commands embedded in that input at the user's privilege
+level.  The groff development team recommends this release to any users
+who employ the named tools or GNU troff output formats with untrusted
+inputs.
+
+Man page rendering is not vulnerable unless rendering (X)HTML.
+
+This release also resolves a command-line argument processing defect in
+the gxditview program.  It is not known to have any security impact.
+
+There are no new features.
+
+
 VERSION 1.24.1
 ==============
 
