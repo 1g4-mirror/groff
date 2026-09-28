@@ -929,7 +929,7 @@ DOC_LINE_LAYOUT_ROFF = doc/line-layout.roff
 
 # We kludge in a copy of `DOC_LINE_LAYOUT_ROFF` because we GNU and BSD
 # Makes differ in `VPATH` handling such that we can't define that macro
-# to interpolate `doc_srcdir`.  In GNU Make, prerequisites satisfaction
+# to interpolate `doc_srcdir`.  In GNU Make, prerequisite satisfaction
 # is determined by file identity; in BSD Make, by string equality
 # comparison.
 $(DOC_LINE_LAYOUT_EPS): $(DOC_LINE_LAYOUT_ROFF) pic groff troff grops \
