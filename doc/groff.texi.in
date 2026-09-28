@@ -10126,7 +10126,7 @@ Unsafe mode enablement status (Boolean-valued); see @command{groff}'s
 @cindex major version number register (@code{.x})
 @cindex version number, major, register (@code{.x})
 Major version number of the running GNU @code{troff} formatter.  For
-example, if the version number is 1.23.0, then @code{.x}
+example, if the version number is 1.24.2, then @code{.x}
 contains@tie{}@samp{1}.
 
 @item \n[.y]
@@ -10134,14 +10134,14 @@ contains@tie{}@samp{1}.
 @cindex minor version number register (@code{.y})
 @cindex version number, minor, register (@code{.y})
 Minor version number of the running GNU @code{troff} formatter.  For
-example, if the version number is 1.23.0, then @code{.y}
-contains@tie{}@samp{23}.
+example, if the version number is 1.24.2, then @code{.y}
+contains@tie{}@samp{24}.
 
 @item \n[.Y]
 @vindex .Y
 @cindex revision number register (@code{.Y})
 Revision number of the running GNU @code{troff} formatter.  For example,
-if the version number is 1.23.0, then @code{.Y} contains@tie{}@samp{0}.
+if the version number is 1.24.2, then @code{.Y} contains@tie{}@samp{2}.
 @end table
 
 @c =====================================================================
