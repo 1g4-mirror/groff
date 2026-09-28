@@ -3326,7 +3326,6 @@ Set zoom factor
 .I zoom
 for
 .RI font\~ f .
-.IR f .
 .I zoom
 must be a non-negative integer;
 it scales the magnification by thousandths with 1000 as a default.
