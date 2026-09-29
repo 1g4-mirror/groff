@@ -1,6 +1,15 @@
 2026-09-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/hpftodit/hpftodit.cpp (hp_msl_to_ucode_name)
+	(unicode_to_ucode_name): Use ISO C++98 exceptions to handle heap
+	storage allocation failure, catching `std::bad_alloc`.
+	Preprocessor-include C++ "<new>" header file.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-09-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/hpftodit/hpftodit.cpp (hp_msl_to_ucode_name)
 	(unicode_to_ucode_name): Prevent heap buffer overwrite by
 	adequately sizing buffer for the `u` character we prefix to a
 	Unicode code point identifier if the character is not unnamed.

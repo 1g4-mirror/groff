@@ -41,6 +41,8 @@ put filename in error messages (or fix lib)
 
 #include <getopt.h> // getopt_long()
 
+#include <new> // std::bad_alloc
+
 #include "lib.h"
 
 #include "posix.h"
@@ -1319,8 +1321,17 @@ hp_msl_to_ucode_name(int msl)
       ustr = uname_decomposed + 1;
   }
   size_t valuelen = strlen(ustr) + 1 /* possible 'u' */ + 1 /* '\0' */;
+  char *value = 0 /* nullptr */;
   // C++03: new char[valuelen]();
-  char *value = new char[valuelen];
+  try {
+    value = new char[valuelen];
+  }
+  catch (const std::bad_alloc &e) {
+    // If we're already dying of memory starvation, there's no point
+    // trying to get more for a buffer to do pretty U+10FFFF formatting.
+    fatal("cannot allocate %1 bytes to store Unicode character name"
+	  " for HP MSL character code %2", valuelen, msl);
+  }
   (void) memset(value, 0, valuelen);
   (void) snprintf(value, valuelen,
 		  equal(ustr, UNNAMED) ? UNNAMED : "u%s", ustr);
@@ -1350,7 +1361,16 @@ unicode_to_ucode_name(int ucode)
   }
   size_t valuelen = strlen(ustr) + 1 /* possible 'u' */ + 1 /* '\0' */;
   // C++03: new char[valuelen]();
-  char *value = new char[valuelen];
+  char *value = 0 /* nullptr */;
+  try {
+    value = new char[valuelen];
+  }
+  catch (const std::bad_alloc &e) {
+    // If we're already dying of memory starvation, there's no point
+    // trying to get more for a buffer to do pretty U+10FFFF formatting.
+    fatal("cannot allocate %1 bytes to store Unicode character name"
+	  " for Unicode character code %2 decimal", valuelen, ucode);
+  }
   (void) memset(value, 0, valuelen);
   (void) snprintf(value, valuelen,
 		  equal(ustr, UNNAMED) ? UNNAMED : "u%s", ustr);
