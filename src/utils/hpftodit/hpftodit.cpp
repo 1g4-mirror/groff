@@ -54,6 +54,7 @@ put filename in error messages (or fix lib)
 
 extern "C" const char *Version_string;
 
+// TODO: Migrate to C2y's streq().
 #define equal(a, b) (strcmp(a, b) == 0)
 // only valid if is_uname(c) has returned true
 #define is_decomposed(c) strchr(c, '_')
@@ -1317,8 +1318,12 @@ hp_msl_to_ucode_name(int msl)
       // 1st char is the number of components
       ustr = uname_decomposed + 1;
   }
-  char *value = new char[strlen(ustr) + 1];
-  sprintf(value, equal(ustr, UNNAMED) ? UNNAMED : "u%s", ustr);
+  size_t valuelen = strlen(ustr) + 1 /* possible 'u' */ + 1 /* '\0' */;
+  // C++03: new char[valuelen]();
+  char *value = new char[valuelen];
+  (void) memset(value, 0, valuelen);
+  (void) snprintf(value, valuelen,
+		  equal(ustr, UNNAMED) ? UNNAMED : "u%s", ustr);
   return value;
 }
 
@@ -1343,8 +1348,12 @@ unicode_to_ucode_name(int ucode)
       // 1st char is the number of components
       ustr = uname_decomposed + 1;
   }
-  char *value = new char[strlen(ustr) + 1];
-  sprintf(value, equal(ustr, UNNAMED) ? UNNAMED : "u%s", ustr);
+  size_t valuelen = strlen(ustr) + 1 /* possible 'u' */ + 1 /* '\0' */;
+  // C++03: new char[valuelen]();
+  char *value = new char[valuelen];
+  (void) memset(value, 0, valuelen);
+  (void) snprintf(value, valuelen,
+		  equal(ustr, UNNAMED) ? UNNAMED : "u%s", ustr);
   return value;
 }
 

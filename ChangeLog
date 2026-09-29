@@ -1,5 +1,16 @@
 2026-09-29  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/hpftodit/hpftodit.cpp (hp_msl_to_ucode_name)
+	(unicode_to_ucode_name): Prevent heap buffer overwrite by
+	adequately sizing buffer for the `u` character we prefix to a
+	Unicode code point identifier if the character is not unnamed.
+
+	Fixes <https://savannah.gnu.org/bugs/?68680>.  Thanks to Pavol
+	Sloboda for the report and a reproducer.  Problem appears to
+	date back to commit 65a386ebce, 2003-12-27.
+
+2026-09-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[hpftodit]: Regression-test Savannah #68680.
 
 	* src/utils/hpftodit/tests/avoids-heap-buffer-overflow.sh: Do
