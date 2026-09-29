@@ -1,3 +1,13 @@
+2026-09-29  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[hpftodit]: Regression-test Savannah #68680.
+
+	* src/utils/hpftodit/tests/avoids-heap-buffer-overflow.sh: Do
+	it.
+	* src/utils/hpftodit/hpftodit.am (hpftodit_TESTS): Run test.
+	(TESTS, EXTRA_DIST): Wire `hpftodit_TESTS` into Automake test
+	harness and ship this and any future hpftodit test scripts.
+
 2026-09-24  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (charinfo::dump): Clarify `pchar`

@@ -20,6 +20,11 @@ hpftodit_SOURCES = \
   src/utils/hpftodit/hpftodit.h \
   src/utils/hpftodit/hpuni.cpp
 
+hpftodit_TESTS = \
+  src/utils/hpftodit/tests/avoids-heap-buffer-overflow.sh
+TESTS += $(hpftodit_TESTS)
+EXTRA_DIST += $(hpftodit_TESTS)
+
 # Local Variables:
 # mode: makefile-automake
 # fill-column: 72
