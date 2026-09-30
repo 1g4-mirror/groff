@@ -1,5 +1,21 @@
 2026-09-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/utils/hpftodit/hpftodit.cpp (output_font_name): Heavily
+	revise to more carefully validate TFM input file and manage
+	memory.  Fatally error out upon reading a font name length
+	claimed by the file that is absurd, avoiding unpredictable,
+	input-driven heap memory allocation.  Zero out the
+	heap-allocated buffer immediately.  Fatally error out upon
+	reading a font name that starts with whitespace character.
+	Rewrite trailing whitespace-stripping loop to avoid overwriting
+	and backwards-overreading the buffer.
+
+	Fixes <https://savannah.gnu.org/bugs/?68684>.  Thanks to Pavol
+	Sloboda for the report and a reproducer.  Problem appears to
+	date back to commit 65a386ebce, 2003-12-27.
+
+2026-09-30  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[hpftodit]: Regression-test Savannah #68684.
 
 	* src/utils/hpftodit/tests/handles-font-names-carefully.sh: Do

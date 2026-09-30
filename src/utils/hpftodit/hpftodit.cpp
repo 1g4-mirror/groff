@@ -1,4 +1,5 @@
 /* Copyright 1994-2004 Free Software Foundation, Inc.
+                  2026 G. Branden Robinson
 
 Written by James Clark (jjc@jclark.com)
 
@@ -581,6 +582,20 @@ require_tag(tag_type t)
 }
 
 // put a human-readable font name in the file
+//
+// This algorithm seems to conform to a "Format 16" "typeface string
+// segment".  The font "name" is packed into 4 bytes, such that it is
+// either 4 8-bit characters or a 32-bit offset to a 17-byte
+// fixed-width field later in the file that is padded with spaces on the
+// right-hand side and ends with a null terminator.
+//
+// Possibly the short 4-byte names can be RHS space-padded as well, but
+// I have no specimens that do so.  We assume they can be.
+//
+// See:
+// https://developers.hp.com/system/files/attachments/
+//   PCL%20Implementors%20Guide-10-downloading%20fonts.pdf
+// --GBR
 static void
 output_font_name(File &f)
 {
@@ -589,7 +604,15 @@ output_font_name(File &f)
   if (!tag_info(font_name_tag).present)
     return;
   int count = tag_info(font_name_tag).count;
-  char *font_name = new char[count];
+  if (count < 1)
+    fatal("TFM file claims bogus font name length of %1", count);
+  if (count > 17)
+    fatal("TFM file claims oversized font name length of %1", count);
+  // The font name may be fixed-width, but our string isn't.
+  size_t font_name_size = count + 1 /* '\0' */;
+  // C++03: new char[count]();
+  char *font_name = new char[font_name_size];
+  (void) memset(font_name, 0, font_name_size * sizeof(char));
 
   if (count > 4) {	// value is a file offset to the string
     f.seek(tag_info(font_name_tag).value);
@@ -598,15 +621,26 @@ output_font_name(File &f)
     while (--n)
       *p++ = f.get_byte();
   }
-  else			// orig_value contains the string
-    sprintf(font_name, "%.*s",
-	    count, tag_info(font_name_tag).orig_value);
+  // otherwise orig_value contains the string
+  else {
+    if (csspace(*(tag_info(font_name_tag).orig_value)))
+      fatal("font name cannot start with a whitespace character");
+    snprintf(font_name, font_name_size, "%s",
+	     tag_info(font_name_tag).orig_value);
+  }
 
-  // remove any trailing space
-  p = font_name + count - 1;
-  while (csspace(*--p))
-    ;
-  *(p + 1) = '\0';
+  // Remove any trailing whitespace characters.
+  p = font_name + count;
+  // First, skip over any trailing nulls.
+  while ((p > font_name) && ('\0' == *p))
+    p--;
+  while (p > font_name) {
+    if (csspace(*p))
+      *p = '\0';
+    else
+      break;
+    p--;
+  }
   printf("# %s\n", font_name);
   delete[] font_name;
 }
