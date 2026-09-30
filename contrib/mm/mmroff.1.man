@@ -100,7 +100,7 @@ and
 to populate reference and index files with their corresponding entries,
 and then without to produce the document.
 .
-It also handles the inclusion of PostScript images with the
+It also handles the inclusion of PostScript pictures by the
 .B PIC
 macro.
 .
