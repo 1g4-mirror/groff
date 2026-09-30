@@ -33,8 +33,8 @@ troff
    syntax, said enforcement is not consistent with AT&T troff.  We did
    not add support in groff's AT&T troff compatibility mode because
    we're aware of no legacy documents that require it.  Example:
-   `.wh9i+.5+\n(xxuPT` is, while validly planting a trap for the `PT`
-   macro in AT&T troff, an input considerably more cryptic than any
+   `.wh9i+.5+\n(xxuPT`, while it validly plants a trap calling the `PT`
+   macro in AT&T troff, is an input considerably more cryptic than any
    specimens known to us.
 
 *  The formatter now enables the "delim", "syntax", and "escape" warning
