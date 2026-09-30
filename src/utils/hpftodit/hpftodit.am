@@ -21,7 +21,8 @@ hpftodit_SOURCES = \
   src/utils/hpftodit/hpuni.cpp
 
 hpftodit_TESTS = \
-  src/utils/hpftodit/tests/avoids-heap-buffer-overflow.sh
+  src/utils/hpftodit/tests/avoids-heap-buffer-overflow.sh \
+  src/utils/hpftodit/tests/handles-font-names-carefully.sh
 TESTS += $(hpftodit_TESTS)
 EXTRA_DIST += $(hpftodit_TESTS)
 
