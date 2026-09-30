@@ -3280,7 +3280,8 @@ The optional
 .BR \-C ,
 .BR \-R ,
 and
-.BI \-I\~ n
+.RB \[lq] \-I\~\c
+.IR n \[rq]
 arguments align the picture or indent it by
 .IR n .
 .
