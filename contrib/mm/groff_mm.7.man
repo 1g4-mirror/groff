@@ -2367,9 +2367,12 @@ with the arguments given to
 .
 .TP
 .BI INITR\~ file-name-prefix
-Initialize the internal reference macros.
+Initialize the internal reference and picture handling system.
 .
-Internal references are written to the standard error stream,
+Calling this macro directs
+.I "groff mm"
+to write internal reference and picture data
+to the standard error stream,
 which should be redirected into a file named
 .RI file-name-prefix .qrf .
 .
@@ -2381,8 +2384,9 @@ handles this and the two formatting passes it requires.
 .\"by default deactivates the unsafe operations that are required by
 .\".BR INITR .
 .
-The first pass identifies internal references;
-the second includes them.
+The first pass identifies internal references
+and records picture properties;
+the second uses them to populate the document.
 .\"
 .\".B INITR
 .\"can be used several times,
@@ -2391,11 +2395,15 @@ the second includes them.
 .\"that is active.
 .
 See
+.BR PIC ,
 .BR SETR ,
 .BR GETHN ,
 .BR GETPN ,
 and
-.BR GETST .
+.BR GETST ;
+you must call
+.B INITR
+to use these macros.
 .
 .
 .TP
@@ -3269,7 +3277,8 @@ and
 .RB \||\| \-R ]\~\c
 .IR file \~[ width \~[ height ]]
 Include PostScript document
-.IR file .
+.IR file ,
+here termed a \[lq]picture\[rq] for convenient discussion.
 .
 The optional
 .B \-B
