@@ -194,7 +194,12 @@ documents.
 .
 Two full-service macro packages are specialized for formatting Unix
 reference manuals;
-they do not support features like footnotes or multiple columnation.
+they lack support for footnotes and multiple columnation,
+typical of other full-service packages,
+and discourage use of \[lq]raw\[rq]
+.I roff
+requests in document sources.
+.
 .
 .TP 9n \" "mandoc" + 2n + hand-tuned for PDF
 .I man
