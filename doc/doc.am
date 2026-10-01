@@ -433,9 +433,9 @@ doc/pic.html: eqn pic tbl
 doc/pic.html: tmac/www.tmac
 doc/pic.html: $(doc_srcdir)/pic.ms $(TMAC_PACKAGE_MS)
 	$(GROFF_V)$(MKDIR_P) $(doc_builddir) \
-	&& cd $(doc_builddir) \
+	&& (cd $(doc_builddir) \
 	&& $(DOC_GROFF) -pet -P-Ipic -P-Dimg -P-jpic -Thtml -ms \
-	  $(doc_srcdir)/pic.ms > pic.html.tmp
+	  $(doc_srcdir)/pic.ms > pic.html.tmp)
 	$(AM_V_at)mv $@.tmp $@
 
 # XXX: See XXX comment before "pic.html" target above.
@@ -448,10 +448,10 @@ doc/webpage.html: $(DOC_GNU_EPS) $(DOC_GNU_PNG) tmac/www.tmac tbl
 doc/webpage.html: $(doc_srcdir)/groff.css
 doc/webpage.html: $(doc_srcdir)/webpage.ms $(TMAC_PACKAGE_MS)
 	$(GROFF_V)$(MKDIR_P) $(doc_builddir) \
-	&& cd $(doc_builddir) \
+	&& (cd $(doc_builddir) \
 	&& $(DOC_GROFF) -t -I $(doc_srcdir) -I $(doc_builddir) \
 	  -P-jwebpage -P-nrb -P-Iwebpage -P-Dimg -Thtml -ms \
-	  $(doc_srcdir)/webpage.ms > webpage.html.tmp
+	  $(doc_srcdir)/webpage.ms > webpage.html.tmp)
 	$(AM_V_at)mv $@.tmp $@
 
 # XXX: ugly, but DRY

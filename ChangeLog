@@ -1,5 +1,12 @@
 2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* doc/doc.am (doc/pic.html, doc/webpage.html): Tweak recipes to
+	work with BSD Make by using a subshell to run the part of it
+	that requires a change of directory (which is in turn due to a
+	limitation in grohtml(1)'s `img` element population).
+
+2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Revise build of man pages to avoid POSIX-unportable make(1)
 	trick, which worked with GNU but not BSD Make.
 
