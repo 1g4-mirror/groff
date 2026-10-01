@@ -1,5 +1,10 @@
 2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* HACKING: Rename "Automake" section to "Managing Makefiles",
+	and greatly expand.
+
+2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* doc/doc.am (doc/pic.html, doc/webpage.html): Tweak recipes to
 	work with BSD Make by using a subshell to run the part of it
 	that requires a change of directory (which is in turn due to a

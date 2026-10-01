@@ -37,8 +37,8 @@ Portability notes:
   determines the contents of every array element.
 
 
-Automake
---------
+Managing Makefiles
+------------------
 
 A document explaining the basics of GNU Automake and its usage in groff
 is available in 'doc/automake.mom'; peruse a PDF rendering in
@@ -53,7 +53,61 @@ Tips:
 * If you need to define a `_builddir` macro, give it a plain literal
   value; do _not_ lead it with an interpolation of `top_builddir` or
   anything else.  Failure to heed this advice leads to out-of-tree build
-  failures with BSD Make.
+  failures with BSD Make.  See item D below for details.
+
+groff's *.am files are written in a particular idiom arising from the
+intersection of multiple constraints.
+
+1.  We use GNU Automake.
+2.  We don't run Make recursively.  (Quod vide Peter Miller.)
+3.  We try to support both in-tree and out-of-tree ("VPATH") builds.
+4.  We try to support both GNU Make and BSD Make.  (This is an unusual
+    and unpopular choice, and makes partisans of both tools angry.)
+
+If you're having problems with Makefile rules, double check that you
+haven't fallen into one of several traps.
+
+A.  You can't use pattern rules ("%.foo: %.bar").  BSD Make doesn't
+    support them.
+
+B.  You can use the special variable `$<` _only_ in suffix rules.  POSIX
+    Issue 8 (2024) doesn't specify it as having meaning anywhere else.
+
+C.  Because a separate build tree usually starts out empty, and highly
+    parallel builds in particular can generate targets in an
+    unpredictable order, you generally should start a recipe with a
+    silent command to create the target's destination directory.  See
+    the example below.
+
+D.  Prerequisites in the source tree must be written relative to the
+    source tree's location.  We typically define macros to abbreviate
+    their names.  Here's an example of a definition and its usage.
+
+      man_srcdir = $(top_srcdir)/man
+    ...
+      man/groff.7.man: man/groff.7.man.in soelim
+	$(AM_V_at)$(MKDIR_P) $(top_builddir)/man
+	$(AM_V_GEN)$(SOELIMBIN) $(man_srcdir)/groff.7.man.in > $@
+
+    Bear in mind that, roughly speaking, BSD Make populates the nodes in
+    its dependency graph with _strings_, and GNU Make populates the
+    nodes with _references to files_.  For example, GNU Make knows that
+    '././foo' and './foo' are the same.  BSD Make does not.
+
+E.  Notice how we used `soelim` as the name of the target's
+    _prerequisite_, but the macro `SOELIMBIN` in the _recipe_.  That's
+    because the prerequisite is interpreted by Make. Interpretatons can
+    differ--note point D above--whereas the recipe is interpreted (after
+    Make macro and special variable expansion) by the shell.
+
+F.  Machine-language programs that the groff build creates and then uses
+    to generate other build targets via shell commands should be
+    abstracted through a macro name, such as `SOELIMBIN` above, for
+    another reason: so that a developer cross-compiling groff can
+    override each such macro definition to point to a program that runs
+    on the build host.  If you are such a developer, please build the
+    version of groff you're working on natively first and use the
+    executables it creates for your cross build.
 
 
 Testing
