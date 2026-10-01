@@ -1,5 +1,18 @@
 2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Fix Savannah #68727.
+
+	* contrib/mm/m.tmac (qrf*validate-identifier): Fix botched test
+	of internal state for consistency.  Abort due to internal error
+	if the `qrf*file` string is undefined (or empty), not if
+	`qrf*caller` is.
+
+	Fixes <https://savannah.gnu.org/bugs/?68727>.  Thanks to Hans
+	Bezemer for the report and a reproducer, and to Ingo Schwarze
+	for a code review.
+
+2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Regression-test Savannah #68727.
 
 	* tests/artifacts/use-reference.mm: New file aids test.

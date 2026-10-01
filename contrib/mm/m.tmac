@@ -3750,7 +3750,7 @@ argument: '\\$2'
 .\" qrf*validate-identifier candidate
 .de qrf*validate-identifier
 .if !\\n[.$]=1 .@abort expected an argument, got \\n[.$]
-.if '\\*[qrf*caller]'' .@abort qrf*caller string not initialized
+.if '\\*[qrf*file]'' .@abort qrf*file string not initialized
 .if !\A'\\$1' \{
 .	ds qref*msg \\*[qrf*caller]: '\\$1' is not a valid string\"
 .	as qref*msg " identifier\"
