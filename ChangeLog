@@ -1,5 +1,25 @@
 2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	Revise build of man pages to avoid POSIX-unportable make(1)
+	trick, which worked with GNU but not BSD Make.
+
+	* Makefile.am (.man): Stop running all man pages through the
+	built soelim(1).
+	* doc/doc.am: Drop prerequisite-only rule of
+	`GROFF_MAN_PAGES_ALL` expansion on the built soelim.
+	* man/groff.7.man: Rename this file...
+	* man/groff.7.man.in: ...to this.
+	* man/man.am: Define new macro `man_srcdir`.  Migrate
+	`EXTRA_DIST` to ship maintained form of groff(7) under its new
+	name.  Add the constructed version to `MOSTLYCLEANFILES`.
+	(man/groff.7.man): New target rule uses the built soelim(1) to
+	construct this file from its "*.in" counterpart.
+
+	Fixes <https://savannah.gnu.org/bugs/?68716>.  Thanks to Ingo
+	Schwarze for the report and explanation.
+
+2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* Makefile.am: Trivially resequence macro definitions.
 
 2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>

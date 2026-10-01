@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+man_srcdir = $(top_srcdir)/man
+
 man5_MANS += \
   man/groff_font.5 \
   man/groff_out.5 \
@@ -25,19 +27,25 @@ man7_MANS += \
   man/groff.7 \
   man/roff.7
 EXTRA_DIST += \
+  man/groff.7.man.in \
+  man/groff_char.7.man \
+  man/groff_diff.7.man \
   man/groff_font.5.man \
   man/groff_out.5.man \
   man/groff_tmac.5.man \
-  man/groff_char.7.man \
-  man/groff_diff.7.man \
-  man/groff.7.man \
   man/roff.7.man
+
+man/groff.7.man: man/groff.7.man.in soelim
+	$(AM_V_at)$(MKDIR_P) $(top_builddir)/man
+	$(AM_V_GEN)$(SOELIMBIN) $(man_srcdir)/groff.7.man.in > $@
 
 # Case of out-of-source build: we must create the 'man' directory.
 BUILT_SOURCES += man
 man:
 	$(MKDIR_P) $(top_builddir)/man
 
+MOSTLYCLEANFILES += \
+   man/groff.7.man
 
 # Local Variables:
 # mode: makefile-automake

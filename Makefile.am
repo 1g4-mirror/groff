@@ -866,7 +866,7 @@ SUFFIXES += .man
 	     -e "s|[@]TMAC_MDIR[@]|`echo $(tmacdir) | sed -f $(makevarescape)`/mm|g" \
 	     -e "s|[@]TMAC_S_PREFIX[@]|\\\\%$(tmac_s_prefix)|g" \
 	     -e "s|[@]VERSION[@]|$(VERSION)|g" \
-	     $< | $(SOELIMBIN) -I $(srcdir) -I $(builddir) \
+	     $< \
 	     >$@
 
 # Version files - see script "build-aux/git-version-gen".
