@@ -1,5 +1,9 @@
 2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* Makefile.am: Trivially resequence macro definitions.
+
+2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/utils/hpftodit/hpftodit.cpp (output_font_name): Use ISO
 	C++98 exceptions to handle heap storage allocation failure,
 	catching `std::bad_alloc`.

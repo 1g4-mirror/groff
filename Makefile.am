@@ -493,8 +493,8 @@ endif
 
 # Path to binaries and flags used by contribs and doc to generated doc.
 # These may be overridden if cross-compiling.
-GROFFBIN = $(abs_top_builddir)/groff
 GROFF_BIN_PATH = $(abs_top_builddir)
+GROFFBIN = $(abs_top_builddir)/groff
 PDFMOMBIN = $(abs_top_builddir)/pdfmom
 SOELIMBIN = $(abs_top_builddir)/soelim
 # Search for macro files and device/font description directories in
