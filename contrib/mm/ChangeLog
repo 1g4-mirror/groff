@@ -1,3 +1,12 @@
+2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Regression-test Savannah #68727.
+
+	* tests/artifacts/use-reference.mm: New file aids test.
+	* tests/lists-indent-correctly-with-scaling-unit.sh: Do it.
+	* mm.am: Add new artifact to `EXTRA_DIST` macro.
+	  (mm_TESTS): Run test.
+
 2026-10-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* mmroff.pl: Throw fatal error if `close()` returns abnormally,

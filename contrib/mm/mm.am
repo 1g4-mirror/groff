@@ -67,6 +67,7 @@ EXTRA_DIST += \
 
 mm_TESTS = \
   contrib/mm/tests/Captc-string-translates.sh \
+  contrib/mm/tests/GETST-works.sh \
   contrib/mm/tests/IA-IE-WA-WE-allow-escape-sequences.sh \
   contrib/mm/tests/LB-mark-or-format-argument-works.sh \
   contrib/mm/tests/LT-BL-spaces-before-date.sh \
@@ -115,7 +116,8 @@ EXTRA_DIST += \
   contrib/mm/tests/artifacts/memorandum.3 \
   contrib/mm/tests/artifacts/memorandum.4 \
   contrib/mm/tests/artifacts/memorandum.5 \
-  contrib/mm/tests/artifacts/memorandum.custom
+  contrib/mm/tests/artifacts/memorandum.custom \
+  contrib/mm/tests/artifacts/use-reference.mm
 
 mmroff: $(mm_srcdir)/mmroff.pl
 	$(AM_V_GEN)$(SED) \
