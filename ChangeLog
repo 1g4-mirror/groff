@@ -1763,7 +1763,7 @@
 	argument reading loop to ignore any arguments past the ninth,
 	so that they do not populate the `argv` array beyond its bounds.
 	Neither AT&T nor GNU eqn has a syntax for interpolating tenth or
-	subsequent arguments, nor any `shift` command that would made
+	subsequent arguments, nor any `shift` command that would make
 	such arguments addressable.  Issue one warning per macro
 	expansion with excess arguments.
 
