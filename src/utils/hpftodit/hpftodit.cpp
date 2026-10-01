@@ -610,8 +610,15 @@ output_font_name(File &f)
     fatal("TFM file claims oversized font name length of %1", count);
   // The font name may be fixed-width, but our string isn't.
   size_t font_name_size = count + 1 /* '\0' */;
+  char *font_name = 0 /* nullptr */;
   // C++03: new char[count]();
-  char *font_name = new char[font_name_size];
+  try {
+    font_name = new char[font_name_size];
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes to store font name",
+	  font_name_size);
+  }
   (void) memset(font_name, 0, font_name_size * sizeof(char));
 
   if (count > 4) {	// value is a file offset to the string

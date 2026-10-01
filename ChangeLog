@@ -1,3 +1,11 @@
+2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/hpftodit/hpftodit.cpp (output_font_name): Use ISO
+	C++98 exceptions to handle heap storage allocation failure,
+	catching `std::bad_alloc`.
+
+	Continues the long process of fixing Savannah #68192.
+
 2026-09-30  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/hpftodit/hpftodit.cpp (output_font_name): Heavily
