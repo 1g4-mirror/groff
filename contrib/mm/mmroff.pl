@@ -138,8 +138,9 @@ while(<MACRO>) {
 	s#\\ \\ $##;
 	push(@out, $_);
 }
-close(MACRO);
-
+close(MACRO)
+	or Die($! ? "error closing pipeline \"$first_pass\": $!"
+		  : "\"$first_pass\" exited with status $?");
 
 # TODO: We should write out references only if there are any; a document
 # that uses only `PIC` might lack them.

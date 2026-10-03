@@ -1,5 +1,13 @@
 2026-10-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mmroff.pl: Throw fatal error if `close()` returns abnormally,
+	so that we can inform the user whether and how groff(1) exited.
+
+	Fixes <https://savannah.gnu.org/bugs/?68733>.  Thanks to Ingo
+	Schwarze for the Perl advice.
+
+2026-10-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mmroff.pl: Relocate `Die` subroutine to define it earlier, to
 	prepare for using it earlier.  Stop using `&` sigil in
 	subroutine calls; that's nonidiomatic Perl, an exception to the
