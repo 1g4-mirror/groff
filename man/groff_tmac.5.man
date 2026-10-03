@@ -195,7 +195,8 @@ documents.
 Two full-service macro packages are specialized for formatting Unix
 reference manuals;
 they lack support for footnotes and multiple columnation,
-typical of other full-service packages,
+.\" slack wording for managing runt line
+.\"typical of other full-service packages,
 and discourage use of \[lq]raw\[rq]
 .I roff
 requests in document sources.
