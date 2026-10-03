@@ -1,3 +1,11 @@
+2026-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[grn]: Regression-test Savannah #68686.
+
+	* src/preproc/grn/tests/\
+	avoids-stack-overflow-on-curve-commands.sh: Do it.
+	* src/preproc/grn/grn.am (grn_TESTS): Run test.
+
 2026-10-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* HACKING: Rename "Automake" section to "Managing Makefiles",

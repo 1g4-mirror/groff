@@ -29,6 +29,7 @@ PREFIXMAN1 += src/preproc/grn/grn.1
 EXTRA_DIST += src/preproc/grn/README src/preproc/grn/grn.1.man
 
 grn_TESTS = \
+  src/preproc/grn/tests/avoids-stack-overflow-on-curve-commands.sh \
   src/preproc/grn/tests/passes-through-input-with-eighth-bit-set.sh
 TESTS += $(grn_TESTS)
 EXTRA_DIST += $(grn_TESTS)
