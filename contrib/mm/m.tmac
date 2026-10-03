@@ -1162,7 +1162,8 @@ numeric; got '\\$1'
 ..
 .\" ######## module hd #################
 .\" support for usermacro
-.nr hd*h1-page 1	\" last page-number for level 1 header.
+.ds hd@mark-trimmed \" empty
+.nr hd*h1-page 1\" last page-number for level 1 header.
 .nr hd*htype 0
 .ds hd*sect-pg
 .ds hd*mark

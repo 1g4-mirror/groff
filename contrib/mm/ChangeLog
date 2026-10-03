@@ -1,3 +1,11 @@
+2026-10-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m.tmac: Define `hd@mark-trimmed` unconditionally (as empty),
+	still permitting later redefinition, silencing a harmless
+	warning in category `mac` that gets scrawled into the generated
+	reference file (typically via mmroff(1)) if a document uses the
+	groff mm reference system (`INITR`) but not `H` headings.
+
 2026-09-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m.tmac (VL, BVL): Alter internal logic to avoid interpolating
