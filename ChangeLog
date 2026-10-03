@@ -7084,9 +7084,10 @@
 	would be confusingly inconsistent with existing practice--sets
 	the temporary indentation amount to zero and sets the property
 	of having a temporary indent off.  (Those are not the same
-	thing.  Temporary indentation _overrides_ ordinary indentation,
-	so a temporary indent of zero is often sensible.)  Also tell the
-	mysterious MTSM machine that temporary indentation is off.
+	thing.  Temporary indentation _overrides_--or replaces--ordinary
+	indentation, so a temporary indent of zero is often sensible.)
+	Also tell the mysterious MTSM machine that temporary indentation
+	is off.
 	(center): Throw the aforementioned warning from this `ce`
 	request handler.
 	(right_justify): Throw the aforementioned warning from this `rj`
