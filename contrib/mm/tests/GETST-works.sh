@@ -22,13 +22,6 @@ mmroff="${abs_top_builddir:-.}/mmroff"
 fontdir="${abs_top_builddir:-.}/font"
 src="${abs_top_srcdir:-..}"
 
-fail=
-
-wail () {
-    echo ...FAILED >&2
-    fail=YES
-}
-
 # Locate directory containing our test artifacts.
 artifacts_dir=
 
@@ -63,12 +56,14 @@ mmdir=$src/contrib/mm/
 GROFF_BIN_PATH=. GROFF_FONT_PATH="$fontdir":"$src"/font \
     GROFF_TMAC_PATH="$src"/contrib/mm:"$src"/tmac \
     "$mmroff" -t -T utf8 -P -cbou "$artifacts_dir"/use-reference.mm \
-    | grep -q 'Use Table 1 to' || wail
+    | grep -q 'Use Table 1 to'
+status=$?
 
 # Nuke the reference file to keep `make distclean` happy.  Honoring a
 # file name argument to `INITR` with slashes in it in a way that we can
 # test looks like a bit of a lift.  :-\
 rm -f reference.qrf
-test -z "$fail" || exit 1
+test $status -eq 0 && rm -rf "$sandbox_dir"
+exit $status
 
 # vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
