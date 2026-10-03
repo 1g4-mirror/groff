@@ -140,6 +140,9 @@ sub Die {
 	exit 1;
 }
 
+# TODO: We should write out references only if there are any; a document
+# that uses only `PIC` might lack them.
+
 if ($rfilename) {
 	push(@out, ".nr pict*max-height $max_height\n") if defined $max_height;
 	push(@out, ".nr pict*max-width $max_width\n") if defined $max_width;
