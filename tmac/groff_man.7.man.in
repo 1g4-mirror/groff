@@ -355,7 +355,7 @@ unless escaped
 (see subsection \[lq]Portability\[rq] below),
 marks the end of the macro call.
 .
-A control line with no macro name on it is called an
+A control line with no macro name on it is an
 .I "empty request;"
 it does nothing.
 .
@@ -1150,7 +1150,7 @@ for a definition list item.
 .
 Use
 .B IP
-without arguments to associate\p successive
+without arguments to associate successive
 .ne 2v
 paragraphs
 with an existing list item;
@@ -1204,7 +1204,7 @@ Use
 .B SY
 and
 .B YS
-to summarize syntax using familiar Unix conventions.
+to summarize syntax using Unix conventions.
 .
 .\" TODO: Determine whether this (is still? was ever?) true.
 .\" Furthermore,
