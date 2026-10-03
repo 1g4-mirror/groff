@@ -975,7 +975,9 @@ on successful operation,
 .RB status\~ 2
 if the program cannot interpret its command-line arguments,
 and
-.RB status\~ 1
+.RB status\~ 1 \" produced by "legacy" error handling
+or
+.B 3 \" produced by `fatal()`
 if it encounters an error during operation.
 .
 .

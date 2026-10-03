@@ -1,5 +1,28 @@
 2026-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[grn]: Fix Savannah #68686.
+
+	* src/preproc/grn/hgraph.cpp: Preprocessor-include "errarg.h"
+	and "error.h" headers so that libgroff's `fatal()` function is
+	visible.
+	(drawwig): Add check of static value `MAXPOINTS` limiting the
+	quantity of a curve's control points.  Exceeding the limit is a
+	fatal error.
+	* src/preproc/grn/grn.1.man (Exit status): Document that command
+	may exit with status 3--that's what `fatal()` does.
+
+	Fixes <https://savannah.gnu.org/bugs/?68686>.  Thanks to Pavol
+	Sloboda for the report and a reproducer.  Problem appears to
+	date back "forever"; groff imported a C++-ported version of grn
+	in commit a75cf74b60, 2000-02-20.  While the original C code
+	from "Berkeley ditroff" is hard to track down, it appears likely
+	that the defect was present there, too.  Taking the SCCS what(1)
+	information in the "last non-groff version" comment at face
+	value would push the date of the defect back to 1984-11-27, and
+	it might be older still.
+
+2026-10-03  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[grn]: Regression-test Savannah #68686.
 
 	* src/preproc/grn/tests/\

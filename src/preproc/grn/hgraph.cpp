@@ -14,6 +14,8 @@
 #include <config.h>
 #endif
 
+#include "errarg.h" // prerequisite of "error.h"
+#include "error.h" // fatal()
 #include "lib.h"
 
 #include "gprint.h"
@@ -566,7 +568,11 @@ drawwig(POINT * ptr,
   int npts;			/* point list index */
   int x[MAXPOINTS], y[MAXPOINTS];	/* point list */
 
+  // Note the non-idiomatic 1-based array indexing.
   for (npts = 1; !Nullpoint(ptr); ptr = PTNextPoint(ptr), npts++) {
+    if (npts >= MAXPOINTS) // `>=` due to 1-based array
+      fatal("cannot draw curve with %1 or more control points",
+	    MAXPOINTS);
     x[npts] = (int) (ptr->x * troffscale);
     y[npts] = (int) (ptr->y * troffscale);
   }
