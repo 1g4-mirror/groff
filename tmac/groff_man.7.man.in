@@ -3434,8 +3434,13 @@ as U+02DC
 .
 .P
 For maximum portability,
-avoid escape sequences
-(including special characters) not listed above.
+avoid use of
+registers,
+strings not documented in subsection \[lq]Strings\[rq] above,
+and
+escape sequences
+(including special characters)
+not listed above.
 _endif()dnl
 .
 .
@@ -3789,7 +3794,7 @@ and the deprecated
 and
 .BR UC .
 .
-It documented no registers and defined only
+It defined only
 .B R
 and
 .B S
