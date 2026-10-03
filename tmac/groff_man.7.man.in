@@ -3836,17 +3836,6 @@ and
 .B rq
 strings.
 .
-.\" The SunOS inferences here and below are based on inspection of SunOS
-.\" 2.0 (May 1985), 3.2 (September 1986), 3.5 (January 1988), and 4.0
-.\" (December 1988) tape archives (only).
-SunOS\~2.0 (1985) recognized
-.BR C ,
-.BR D ,
-.BR P ,
-and
-.B X
-registers.
-.
 4.3BSD (1986) incorporated
 .B P
 and added
@@ -3960,6 +3949,9 @@ reader preferences,
 man pages should never manipulate them.
 .
 .
+.\" The SunOS inferences below are based on inspection of SunOS 2.0 (May
+.\" 1985), 3.2 (September 1986), 3.5 (January 1988), and 4.0 (December
+.\" 1988) tape archives (only).
 .TP 9.25n \" "-rHY=0" + 2n + hand-tuned for PDF
 .BI \-dAD= adjustment-mode
 Set line adjustment to
@@ -4019,6 +4011,10 @@ with each new
 .I man
 document.
 .
+(origin:
+SunOS\~2.0,
+1985)
+.
 .
 .TP
 .BI \-rCHECKSTYLE= n
@@ -4068,6 +4064,10 @@ formatting footers for recto and verso pages differently;
 see the description of
 .B TH
 in subsection \[lq]Document structure macros\[rq] above.
+.
+(origin:
+SunOS\~2.0,
+1985)
 .
 .
 .TP
@@ -4187,6 +4187,10 @@ Start enumeration of pages at
 .
 The default is\~1.
 .
+(origin:
+SunOS\~2.0,
+1985)
+.
 .
 .TP
 .BI \-rPO= page-offset
@@ -4273,6 +4277,10 @@ numbers: 1,
 2ab,
 and so on.
 _endif()dnl
+.
+(origin:
+SunOS\~2.0,
+1985)
 .
 .
 .br
