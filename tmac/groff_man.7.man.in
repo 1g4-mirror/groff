@@ -5144,7 +5144,8 @@ _endif()dnl
 .
 James Clark wrote the initial GNU implementation of the
 .I man
-macro package. \" by 1.01
+macro package,
+recreating the features of its features in SunOS\~4.0. \" by 1.01
 .
 Later,
 .MT ru@\:FreeBSD\:.org
