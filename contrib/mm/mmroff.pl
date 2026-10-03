@@ -29,6 +29,11 @@ use Config;
 
 (my $progname = $0) =~s @.*/@@;
 
+sub Die {
+	print STDERR "$progname: fatal error: @_\n";
+	exit 1;
+}
+
 # runs groff in safe mode, that seems to be the default
 # installation now. That means that I have to fix all nice
 # features outside groff. Sigh.
@@ -88,7 +93,7 @@ my $second_pass = "$groff -mm @ARGV";
 my (%cur, $rfilename, $imacro, @out, @indi);
 my $max_height = 0;
 my $max_width = 0;
-open(MACRO, "$first_pass 2>&1 |") || die "run $first_pass:$!";
+open(MACRO, "$first_pass 2>&1 |") || Die("run $first_pass: $!");
 while(<MACRO>) {
 	if (m#^\.\\" Rfilename: (\S+)#) {
 		# remove all directories just to be more secure
@@ -135,10 +140,6 @@ while(<MACRO>) {
 }
 close(MACRO);
 
-sub Die {
-	print STDERR "$progname: fatal error: @_\n";
-	exit 1;
-}
 
 # TODO: We should write out references only if there are any; a document
 # that uses only `PIC` might lack them.
@@ -148,7 +149,7 @@ if ($rfilename) {
 	push(@out, ".nr pict*max-width $max_width\n") if defined $max_width;
 
 	open(OUT, ">$rfilename")
-		or &Die("unable to create $rfilename:$!");
+		or Die("unable to create $rfilename:$!");
 	print OUT '.\" references', "\n";
 	my $i;
 	for $i (@out) {
@@ -163,7 +164,7 @@ exit system($second_pass);
 sub print_index {
 	my ($f, $ind, $macro) = @_;
 
-	open(OUT, ">$f") or &Die("unable to create $f:$!");
+	open(OUT, ">$f") or Die("unable to create $f:$!");
 	my $i;
 	for $i (sort @$ind) {
 		if ($macro) {

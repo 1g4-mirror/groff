@@ -1,5 +1,12 @@
 2026-10-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mmroff.pl: Relocate `Die` subroutine to define it earlier, to
+	prepare for using it earlier.  Stop using `&` sigil in
+	subroutine calls; that's nonidiomatic Perl, an exception to the
+	language's otherwise relentless dedication to sigil prefixes.
+
+2026-10-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m.tmac: Define `hd@mark-trimmed` unconditionally (as empty),
 	still permitting later redefinition, silencing a harmless
 	warning in category `mac` that gets scrawled into the generated
