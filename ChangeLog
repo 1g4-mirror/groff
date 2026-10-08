@@ -1,3 +1,12 @@
+2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	Defuse land mine planted by our support code coverage report
+	generation, and set off by pre-POSIX Issue 8 (2024) make(1)s.
+
+	* Makefile.am: Comment out `?=` conditional macro definitions.
+	* configure.ac: Use POSIX shell conditional parameter expansion
+	and `AC_SUBST()` instead.
+
 2026-10-05  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* man/man.am (man/groff.7.man): Fix man/groff.7.man generation.

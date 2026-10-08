@@ -881,8 +881,11 @@ init-coverage:
 	$(MAKE) $(AM_MAKEFLAGS) clean
 	lcov --directory . --zerocounters
 
-COVERAGE_CCOPTS ?= "-g --coverage"
-COVERAGE_OUT ?= doc/coverage
+# TODO: Uncomment these and update "configure.ac" when all "make"s we
+# support themselves support the now-standard `?=` macro expansion
+# operator.
+#COVERAGE_CCOPTS ?= "-g --coverage"
+#COVERAGE_OUT ?= doc/coverage
 
 build-coverage:
 	$(MAKE) $(AM_MAKEFLAGS) CFLAGS=$(COVERAGE_CCOPTS) \

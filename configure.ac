@@ -41,6 +41,18 @@ AM_INIT_AUTOMAKE([subdir-objects])
 AM_MAINTAINER_MODE([disable])
 AM_SILENT_RULES([yes])
 
+# Support maintainer-mode coverage targets even on systems using a
+# make(1) non-conforming with POSIX Issue 8 (2024), like that on
+# Solaris.
+#
+# TODO: Drop this block when all "make"s we support themselves support
+# the now-standard `?=` macro expansion operator.
+
+: ${COVERAGE_CCOPTS:=\"-g --coverage\"}
+: ${COVERAGE_OUT:=doc/coverage}
+AC_SUBST([COVERAGE_CCOPTS])
+AC_SUBST([COVERAGE_OUT])
+
 # checks for programs
 # Autoconf [2.70,2.72] tries to cram C11 and C++11 down our throats.  We
 # don't (yet) want them.
