@@ -53,7 +53,7 @@ EOF
   esac
 done
 
-exec @g@eqn -T ascii "$@"
+exec ${GROFF_COMMAND_PREFIX}eqn -T ascii "$@"
 
 # Local Variables:
 # fill-column: 72

@@ -1,5 +1,20 @@
 2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/eqn/neqn.sh: Use the documented run-time
+	environment variable `GROFF_COMMAND_PREFIX` to name the
+	corresponding GNU eqn executable, not the build-time `g` prefix.
+	Resolves failure of "neqn-finds-matching-eqn.sh" on Solaris 11.
+	{The host to which I have access has groff 1.23.0's troff as its
+	"/usr/bin/troff"; presumably it's running SRU66.  So I simulated
+	the situation by installing an "echo 0" shell script in
+	"$HOME/bin", adding that directory to the $PATH, and running a
+	build.}
+
+	Fixes <https://savannah.gnu.org/bugs/?68764>.  Thanks to Bruno
+	Haible for the report.
+
+2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/libs/libdriver/printer.cpp (printer::load_font)
 	(printer::find_font): Use ISO C++98 exceptions to handle heap
 	storage allocation failure, catching `std::bad_alloc`.
