@@ -191,6 +191,10 @@ so the file name will not appear in the output.)
 Caveats
 =======
 
+*  To build groff on Solaris 11.4, you must pass the option
+   `--disable-dependency-tracking` to its "configure" script, or use GNU
+   Make, for example with `./configure MAKE=gmake`.
+
 *  GNU tools, or otherwise POSIX-conforming ones, are generally required
    to build on Solaris 10 or 11.  See the "PROBLEMS" file in the
    distribution archive.
