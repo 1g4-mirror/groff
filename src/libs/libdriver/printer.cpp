@@ -27,6 +27,8 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdio.h> // clearerr(), ferror(), fflush(), stdout
 #include <string.h> // strcmp()
 
+#include <new> // std::bad_alloc
+
 // libgroff
 #include "symbol.h" // prerequisite of color.h
 #include "color.h" // prerequisite of printer.h
@@ -119,7 +121,13 @@ void printer::load_font(int n, const char *nm)
       nfonts = 10;
       if (nfonts <= n)
 	nfonts = n + 1;
-      font_table = new font *[nfonts];
+      try {
+	font_table = new font *[nfonts];
+      }
+      catch (const std::bad_alloc &e) {
+	fatal("cannot allocate %1 bytes to store font description",
+	      sizeof(font));
+      }
       for (int i = 0; i < nfonts; i++)
 	font_table[i] = 0 /* nullptr */;
     }
@@ -129,7 +137,13 @@ void printer::load_font(int n, const char *nm)
       nfonts *= 2;
       if (n >= nfonts)
 	nfonts = n + 1;
-      font_table = new font *[nfonts];
+      try {
+	font_table = new font *[nfonts];
+      }
+      catch (const std::bad_alloc &e) {
+	fatal("cannot allocate %1 bytes to store font description",
+	      sizeof(font));
+      }
       int i;
       for (i = 0; i < old_nfonts; i++)
 	font_table[i] = old_font_table[i];
@@ -152,7 +166,13 @@ font *printer::find_font(const char *nm)
   font *f = make_font(nm);
   if (0 /* nullptr */ == f)
     fatal("cannot find font '%1'", nm);
-  font_list = new font_pointer_list(f, font_list);
+  try {
+    font_list = new font_pointer_list(f, font_list);
+  }
+  catch (const std::bad_alloc &e) {
+    fatal("cannot allocate %1 bytes to store font list",
+	  sizeof(font_list));
+  }
   return f;
 }
 

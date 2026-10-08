@@ -1,5 +1,13 @@
 2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/libs/libdriver/printer.cpp (printer::load_font)
+	(printer::find_font): Use ISO C++98 exceptions to handle heap
+	storage allocation failure, catching `std::bad_alloc`.
+
+	Continues the long process of fixing Savannah #68192.
+
+2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* m4/groff.m4 (GROFF_G): Revise test to rebalance its
 	sensitivity vs. validity.  The test _was_ deciding that a build
 	system's installed `troff` was not GNU troff if, when given some
