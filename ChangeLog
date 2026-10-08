@@ -1,5 +1,16 @@
 2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* man/man.am (man/groff.7.man): Try _again_ to fix
+	man/groff.7.man generation.  Update soelim(1)'s `-I` argument to
+	search in `$(abs_top_srcdir)` for `$(DOC_LINE_LAYOUT_ROFF)`.  I
+	missed the impotence of my previous "fix" because soelim(1)
+	thinks it's just fine if the files marked for inclusion don't
+	exist.
+
+	Continues fixing Savannah #68716.
+
+2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	Defuse land mine planted by our support code coverage report
 	generation, and set off by pre-POSIX Issue 8 (2024) make(1)s.
 
