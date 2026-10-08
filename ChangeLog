@@ -1,5 +1,18 @@
 2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* m4/groff.m4 (GROFF_G): Revise test to rebalance its
+	sensitivity vs. validity.  The test _was_ deciding that a build
+	system's installed `troff` was not GNU troff if, when given some
+	*roff syntax as input, it wrote `0` to its standard output.
+	This means that a `troff` that produced no output or
+	interpolated `2` as the value of the `.g` register would pass
+	the test and make our configuration process decide that a
+	non-groff troff was _not_ installed.  Flip the sense of the test
+	and check the `troff` command's output for an exact match of
+	`1`--that means the `troff` claims GNU troff compatibility.
+
+2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/tmac.am ($(M4CHECK)): Revise recipe to work with what
 	seems to be an older, more primitive Make.  This seems to be the
 	only hack required to build groff with the Solaris 11

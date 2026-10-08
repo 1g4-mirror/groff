@@ -1057,18 +1057,21 @@ AC_DEFUN([GROFF_TMAC],
 ])
 
 
-# Searching if a non-GNU Troff is installed.  The built-in register
-# \n[.g] is always 1 in GNU Troff.
+# Check the build environment for a `troff` executable that defines a
+# built-in register `.g`.  It always interpolates `1` in GNU troff.
+# If the build environment's troff does not thus advertise GNU troff
+# compatibility, assume that parallel installation of GNU troff
+# alongside the system's is desired.
 AC_DEFUN([GROFF_G], [
   g=
-  AC_MSG_CHECKING([for existing troff installation])
+  AC_MSG_CHECKING([for an installed groff-incompatible troff])
   if test "`(echo .tm '|n(.g' | tr '|' '\\\\' | troff -z -i 2>&1) \
-    2>/dev/null`" = 0
+    2>/dev/null`" = 1
   then
+    AC_MSG_RESULT([no])
+  else
     AC_MSG_RESULT([yes])
     g=g
-  else
-    AC_MSG_RESULT([no])
   fi
   AC_SUBST([g])
 ])
