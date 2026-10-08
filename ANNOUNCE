@@ -199,7 +199,7 @@ Caveats
    to build on Solaris 10 or 11.  See the "PROBLEMS" file in the
    distribution archive.
 
-*  Solaris 10 has known problems with automated tests; see the
+*  Solaris 10 and 11 have known problems with automated tests; see the
    "PROBLEMS" file in the distribution archive.
 
 

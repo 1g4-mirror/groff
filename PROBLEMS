@@ -922,8 +922,10 @@ The test suite expects a POSIX-conforming shell and utilities.  Solaris
 10 does not offer these in the default $PATH.  We try to use features
 standardized no later than POSIX Issue 4 (1994).  Unfortunately even
 that is too recent for some implementations.  Solaris 11 has a (mostly)
-conforming shell.  It may help to ensure that "/usr/xpg6/bin" and
-"/usr/xpg4/bin" precede "/usr/bin" in the $PATH when building groff.
+conforming shell.  It may help to ensure that "/usr/xpg4/bin" precedes
+"/usr/bin" in the $PATH when making this target.
+
+  $ PATH=/usr/xpg4/bin:$PATH make check
 
 For Solaris 10, it is necessary to modify the shell-based test scripts
 in place to use a conforming shell.  Here is an example.
