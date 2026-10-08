@@ -1,5 +1,13 @@
 2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/tmac.am ($(M4CHECK)): Revise recipe to work with what
+	seems to be an older, more primitive Make.  This seems to be the
+	only hack required to build groff with the Solaris 11
+	/usr/bin/make.  Therefore I feel okay supporting it on a
+	probationary basis of minimal tolerance for shenanigans.
+
+2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* man/man.am (man/groff.7.man): Try _again_ to fix
 	man/groff.7.man generation.  Update soelim(1)'s `-I` argument to
 	search in `$(abs_top_srcdir)` for `$(DOC_LINE_LAYOUT_ROFF)`.  I

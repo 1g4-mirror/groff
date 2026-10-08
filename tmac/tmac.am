@@ -284,11 +284,20 @@ tmac/www.tmac: tmac/www.tmac.in
 M4WORDS = define|divert|include|index|shift|undefine|undivert
 M4CHECK = tmac/groff_man-passed-check-for-m4-keywords-stamp
 
+# TODO: Restore the following recipe technique when we no longer support
+# Solaris make(1).
+#	&& !$(EGREP) \
+#	  '(^|[[:space:]])($(M4WORDS))($$|[[:space:]])' \
+#	  $(tmac_srcdir)/groff_man.7.man.in > $@
 $(M4CHECK): tmac/groff_man.7.man.in
-	$(AM_V_at)$(MKDIR_P) $(top_builddir)/tmac
-	$(AM_V_at)! $(EGREP) \
+	$(AM_V_at)$(MKDIR_P) $(top_builddir)/tmac \
+	&& if $(EGREP) \
 	  '(^|[[:space:]])($(M4WORDS))($$|[[:space:]])' \
-	  $(tmac_srcdir)/groff_man.7.man.in > $@
+	  $(tmac_srcdir)/groff_man.7.man.in > $@; then \
+	    false; \
+	  else \
+	    true; \
+	  fi
 
 tmac/groff_man.7.man: tmac/groff_man.7.man.in $(M4CHECK)
 	$(AM_V_GEN)$(M4) -D_groff_man_not_style \
