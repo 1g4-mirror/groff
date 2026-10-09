@@ -10,7 +10,8 @@ or other text files
 .\" Legal Terms
 .\" ====================================================================
 .\"
-.\" Copyright 1989-2024 Free Software Foundation, Inc.
+.\" Copyright 1989-2006 Free Software Foundation, Inc.
+.\"           2021-2024 G. Branden Robinson
 .\"
 .\" Permission is granted to make and distribute verbatim copies of this
 .\" manual provided the copyright notice and this permission notice are
