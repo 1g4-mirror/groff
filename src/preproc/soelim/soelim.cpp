@@ -1,7 +1,7 @@
 /* Copyright 1989-1999 Free Software Foundation, Inc.
                   2024 G. Branden Robinson
 
-     Written by James Clark (jjc@jclark.com)
+Written by James Clark (jjc@jclark.com)
 
 This file is part of groff, the GNU roff typesetting system.
 
