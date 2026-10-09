@@ -1,3 +1,19 @@
+2026-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[soelim]: Implement undocumented new `-x` option.
+
+	* src/preproc/soelim/soelim.cpp: Add new global of type `bool`,
+	`want_exit_on_inclusion_failure`, defaulting false.
+	(main): Instruct getopt_long(3) to accept `x` as an
+	unparameterized option.  If specified, make the new `bool`
+	`true`.
+
+	* src/preproc/soelim/tests/x-option-works.sh: New unit test
+	exercises functionality.
+	* src/preproc/soelim/soelim.am (soelim_TESTS): Run test.
+
+	See <https://savannah.gnu.org/bugs/?68761>.
+
 2026-10-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/eqn/neqn.sh: Use the documented run-time

@@ -23,7 +23,8 @@ EXTRA_DIST += \
 
 soelim_TESTS = \
   src/preproc/soelim/tests/passes-through-input-with-eighth-bit-set.sh \
-  src/preproc/soelim/tests/space-in-argument-works.sh
+  src/preproc/soelim/tests/space-in-argument-works.sh \
+  src/preproc/soelim/tests/x-option-works.sh
 TESTS += $(soelim_TESTS)
 EXTRA_DIST += $(soelim_TESTS)
 

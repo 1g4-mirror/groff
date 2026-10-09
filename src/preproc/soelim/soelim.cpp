@@ -45,6 +45,7 @@ static search_path include_search_path(0 /* nullptr */, 0 /* nullptr */,
 bool want_att_compat = false;
 bool want_raw_output = false;
 bool want_tex_output = false;
+bool want_exit_on_inclusion_failure = false;
 
 extern "C" const char *Version_string;
 
@@ -79,7 +80,7 @@ int main(int argc, char **argv)
     { "version", no_argument, 0 /* nullptr */, 'v' },
     { 0 /* nullptr */, 0, 0 /* nullptr */, 0 }
   };
-  while ((opt = getopt_long(argc, argv, ":CI:rtv", long_options,
+  while ((opt = getopt_long(argc, argv, ":CI:rtvx", long_options,
 			    0 /* nullptr */))
 	 != EOF)
     switch (opt) {
@@ -98,6 +99,9 @@ int main(int argc, char **argv)
       break;
     case 't':
       want_tex_output = true;
+      break;
+    case 'x':
+      want_exit_on_inclusion_failure = true;
       break;
     case CHAR_MAX + 1: // --help
       usage(stdout);
@@ -206,9 +210,14 @@ static bool do_file(const char *filename)
   whole_filename += '\0';
   free(file_name_in_path);
   if (0 /* nullptr */ == fp) {
-    error("cannot open '%1': %2", whole_filename.contents(),
-	  strerror(err));
-    return false;
+    if (want_exit_on_inclusion_failure)
+      fatal("cannot open '%1': %2", whole_filename.contents(),
+	    strerror(err));
+    else {
+      error("cannot open '%1': %2", whole_filename.contents(),
+	    strerror(err));
+      return false;
+    }
   }
   normalize_file_name_for_lf_request(whole_filename);
   current_filename = whole_filename.contents();
