@@ -2057,6 +2057,8 @@ n|n\f[B]\[tmu]\f[]n|difference
 .\".RE
 .\"
 .\"
+.br
+.ne 8v
 .P
 We can define a macro outside of a
 .I tbl \" generic
