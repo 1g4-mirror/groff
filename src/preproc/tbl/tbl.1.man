@@ -252,11 +252,20 @@ as a synonym.
 .
 .TP
 .B center
-Center the table region with respect to the line length,
-reducing the indentation if necessary
-(with a warning at formatting time)
-to make the table region fit;
+Center the table region with respect to the line length;
 the default is to left-align it.
+.
+When
+.B center
+applies to a table that exceeds the available horizontal space,
+.I tbl \" generic
+reduces indentation as far as necessary
+(even to zero).
+.
+.I @g@tbl
+produces
+.I @g@troff
+input that issues a diagnostic if such reduction occurs.
 .
 GNU
 .I tbl \" GNU
