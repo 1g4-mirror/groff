@@ -2020,13 +2020,6 @@ n|n\f[B]\[tmu]\f[]n|difference
 .RE
 .
 .
-.P
-Some
-.I @g@tbl
-features cannot be illustrated in the limited environment of a portable
-man page.
-.
-.
 .\" TODO: Find a better example than this.
 .\".P
 .\"As noted above,
@@ -2084,6 +2077,13 @@ be sure to change both occurrences of \[lq]BP\[rq].
 \&..
 .EE
 .RE
+.
+.
+.P
+Some
+.I @g@tbl
+features cannot be illustrated in the limited environment of a portable
+man page.
 .
 .
 .\" ====================================================================
