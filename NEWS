@@ -133,6 +133,11 @@ Macro packages
    macros, to manage list "compactness" and item indentation with
    existing man(7) package facilities, or to employ both approaches.
 
+*  The an (man) package now checks for certain portability problems to
+   AT&T troff's man(7) if the `CHECKSTYLE` register, introduced in groff
+   1.23.0 and documented in 1.24.0, is given a value of 100 or greater.
+   This feature is experimental and subject to change.
+
 *  The m (mm) macro package's `IA` and `WA` macros--used only with the
    "letter" document type configured by calling the `LT` macro--no
    longer disable the escape character, and their counterparts `IE` and

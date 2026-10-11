@@ -78,6 +78,16 @@
 .    an*style-warn use of deprecated macro: .\\$0
 ..
 .
+.de an*check-legacy-argument-count
+.  nr an*arg-count \\$1
+.  shift
+.  if (\\n[CHECKSTYLE] > 99) \
+.    if (\\n[an*arg-count] > 6) \
+.      an*style-warn .\\$1 called with \\n[an*arg-count] arguments; \
+use of more than 6 is not portable to AT&T troff's man package
+.  rr an*arg-count
+..
+.
 .de1 an-blank-line-trap
 .  if (\\n[CHECKSTYLE] > 2) \
 .    an*style-warn blank line in input
@@ -787,6 +797,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) as a section heading.
 .de1 SH
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.it] .an*warn cannot call .\\$0 while an input trap is pending
 .  if \\n[DEBUG] .tm GBR: mark VALID05: \\$0
 .  an*list-close-all
@@ -818,6 +829,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) as a subsection heading.
 .de1 SS
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.it] .an*warn cannot call .\\$0 while an input trap is pending
 .  if \\n[DEBUG] .tm GBR: mark VALID06: \\$0
 .  an*list-close-all
@@ -847,6 +859,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) in bold style.
 .de1 B
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  it 1 an*input-trap
 .  ft B
 .  if \\n[.$] \&\\$*
@@ -855,6 +868,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) in italic style.
 .de1 I
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  it 1 an*input-trap
 .  ft I
 .  if \\n[.$] \,\\$*\/
@@ -863,6 +877,7 @@ contains unsupported escape sequence
 .\" Set arguments (or next input line producing written or drawn output
 .\" if none) at smaller type size.
 .de1 SM
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  it 1 an*input-trap
 .  ps -1
 .  if \\n[.$] \&\\$*
@@ -886,6 +901,7 @@ contains unsupported escape sequence
 .\" .SB [text]
 .de1 SB
 .  nop \\*[an*deprecation-warn]\\
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  it 1 an*input-trap
 .  ps -1
 .  ft B
@@ -1015,6 +1031,7 @@ contains unsupported escape sequence
 .de1 BI
 .  if (\\n[.$] < 2) \
 .    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1032,6 +1049,7 @@ contains unsupported escape sequence
 .de1 BR
 .  if (\\n[.$] < 2) \
 .    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1049,6 +1067,7 @@ contains unsupported escape sequence
 .de1 IB
 .  if (\\n[.$] < 2) \
 .    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1066,6 +1085,7 @@ contains unsupported escape sequence
 .de1 IR
 .  if (\\n[.$] < 2) \
 .    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1083,6 +1103,7 @@ contains unsupported escape sequence
 .de1 RB
 .  if (\\n[.$] < 2) \
 .    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\
@@ -1100,6 +1121,7 @@ contains unsupported escape sequence
 .de1 RI
 .  if (\\n[.$] < 2) \
 .    an*style-warn .\\$0 expects at least 2 arguments, got \\n[.$]
+.  an*check-legacy-argument-count \\n[.$] \\$0
 .  if \\n[.$] \{\
 .    ds an*result \&\"
 .    while (\\n[.$] >= 2) \{\

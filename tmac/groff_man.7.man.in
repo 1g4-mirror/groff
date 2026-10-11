@@ -4027,10 +4027,19 @@ at verbosity level
 .IR n ,
 where
 .I n
-is an integer in the range 0\[en]3,
+is an integer,
+normally in the range 0\[en]3,
 inclusive;
 .B 0
 disables the messages and is the default.
+.
+If
+.I n
+is 100 or greater,
+the package furthermore checks the document
+for certain problems of portability to AT&T
+.IR troff 's
+.IR man .
 .
 This feature is a development and debugging aid
 for man page maintainers;

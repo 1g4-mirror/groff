@@ -1,5 +1,15 @@
 2026-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* tmac/an.tmac (an*check-legacy-argument-count): New macro
+	checks a passed-in macro argument count for a value too large to
+	work with AT&T troff man.
+	(SH, SS, B, I, SM, SB, BI, BR, IB, IR, RB, RI): Call it.
+
+	* tmac/groff_man.7.man.in (Options <CHECKSTYLE>):
+	* NEWS: Document it.
+
+2026-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* man/man.am (man/groff.7.man): Pass soelim(1) its new `-x`
 	option, so that the build halts on a befouled document.
 
