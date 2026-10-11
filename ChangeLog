@@ -1,3 +1,8 @@
+2026-10-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* man/man.am (man/groff.7.man): Pass soelim(1) its new `-x`
+	option, so that the build halts on a befouled document.
+
 2026-10-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[soelim]: Implement undocumented new `-x` option.
