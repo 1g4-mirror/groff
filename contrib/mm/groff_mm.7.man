@@ -968,6 +968,9 @@ See
 .BR LT .
 .
 .
+.br
+.if t .ne 3v
+.if n .ne 4v
 .\" XXX: AVL is misnamed; it should have been called SGL or similar.
 .TP
 .BR AVL \~[\c
@@ -1316,6 +1319,9 @@ RB@Right-align the whole display as a block.
 .TE
 .
 .
+.br
+.if t .ne 2v
+.if n .ne 3v
 .IP
 The values \[lq]L\[rq],
 \[lq]I\[rq],
@@ -2325,6 +2331,9 @@ and
 after formatting the index.
 .
 .
+.br
+.if t .ne 3v
+.if n .ne 4v
 .TP
 .BI INITI\~ "location-type file-name\~"\c
 .RI [ macro ]
@@ -3214,6 +3223,9 @@ Also see
 .RB register\~ N .
 .
 .
+.br
+.if t .ne 3v
+.if n .ne 4v
 .TP
 .BR PH\~ [ \[dq]\|\[aq]\c
 .IB left \[aq] center \[aq] right \[aq]\|\[dq]\c
@@ -3780,6 +3792,9 @@ centers table captions irrespective of the alignment of any enclosing
 display.
 .
 .
+.br
+.if t .ne 2v
+.if n .ne 3v
 .IP
 The package lists captioned tables in a table of contents
 (see
@@ -4139,6 +4154,9 @@ If absent,
 set the corresponding margin to zero.
 .
 .
+.br
+.if t .ne 2v
+.if n .ne 4v
 .IP
 With the
 .B \-T
@@ -5881,6 +5899,8 @@ to the string
 .\" ====================================================================
 .
 .
+.br
+.ne 4v
 .\" ====================================================================
 .SH Files
 .\" ====================================================================
