@@ -1,4 +1,12 @@
-2026-09-23  Deri James  <deri@chuzzlewit.myzen.co.uk>
+2026-10-12  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[pdfmom]: Fix typo.
+
+	* src/utils/pdfmom/pdfmom.pl: Remove hyphen after colon.
+
+	See <https://savannah.gnu.org/bugs/?68765>
+
+2026-10-12  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[pdfmom]: Fix Savannah #68765.
 
