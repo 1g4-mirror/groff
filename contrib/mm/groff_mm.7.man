@@ -4221,7 +4221,7 @@ Control width of footnotes and displays.
 .TS
 tab(@);
 Lf(BI) Lb
-Lb Lx.
+L      Lx.
 format@Effect
 N@T{
 equivalent to
