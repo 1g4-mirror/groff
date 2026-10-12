@@ -1,3 +1,13 @@
+2026-09-23  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[pdfmom]: Fix Savannah #68765.
+
+	* src/utils/pdfmom/pdfmom.pl: Remove new-line from end of
+	pdfroff command.
+
+	Fixes <https://savannah.gnu.org/bugs/?68765> Thanks to Jakub
+	Kulik for the report.
+
 2026-08-06  Bruno Haible <bruno@clisp.org>
 
 	* doc/doc.am ($(DOC_LINE_LAYOUT_EPS)): Remove the %%CreationDate
