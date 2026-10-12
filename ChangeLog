@@ -1,11 +1,11 @@
 2026-10-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
-	[gropdf] Correctly handle multi-line hexstring.
+	[gropdf]: Correctly handle multi-line hexstring.
 
-	* src/devices/gropdf/gropdf.pl (ParsePDFHexString):
-	Concatenate hex strings on multiple lines.
+	* src/devices/gropdf/gropdf.pl (ParsePDFHexString): Concatenate
+	hex strings on multiple lines.
 
-	Fixes <https://savannah.gnu.org/bugs/index.php?68771>.
+	Fixes <https://savannah.gnu.org/bugs/?68771>.
 
 2026-10-12  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
@@ -19,10 +19,10 @@
 
 	[pdfmom]: Fix Savannah #68765.
 
-	* src/utils/pdfmom/pdfmom.pl: Remove new-line from end of
-	pdfroff command.
+	* src/utils/pdfmom/pdfmom.pl: Remove newline from end of pdfroff
+	command output.
 
-	Fixes <https://savannah.gnu.org/bugs/?68765> Thanks to Jakub
+	Fixes <https://savannah.gnu.org/bugs/?68765>.  Thanks to Jakub
 	Kulik for the report.
 
 2026-08-06  Bruno Haible <bruno@clisp.org>
