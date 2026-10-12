@@ -411,8 +411,7 @@ request assigns a value to a register.
 .P
 .B .nr
 .I ident
-.RB [ \[+-] ]\c
-.I n
+.RI [\[+-]] n
 .RI [ i ]
 .RE
 .
@@ -448,8 +447,7 @@ sequence as follows.
 .RS
 .P
 .B \[rs]n\c
-.RB [ \[+-] ]\c
-.BI [ ident ]
+.RI [\[+-]][ ident ]
 .RE
 .
 .
