@@ -2393,9 +2393,9 @@ register.
 If you run an
 .I ms
 document with
-.B -Tpdf
+.B \-Tpdf
 and
-.B -rPDFFEAT=1
+.B \-rPDFFEAT=1
 the PDF features shown in this document
 will be incorporated.
 The PDF produced will show an overview
@@ -2475,10 +2475,10 @@ forward link, or use the multi-pass command
 .
 .
 .LP
-\f[CB]pdfmom --roff -ms -rPDFFEAT=1 file.ms > file.pdf\f[]
+\f[CB]pdfmom \-\-roff \-ms \-rPDFFEAT=1 file.ms > file.pdf\f[]
 .LP
 The command can be shortened to
-.B "pdfms -rPDFFEAT=1 ..."
+.B "pdfms \-rPDFFEAT=1 ..."
 if you have created a link to the
 .I pdfmom
 command called
@@ -2496,7 +2496,7 @@ All of the PDF features mentioned in this document can be
 disabled if the
 .I groff
 command includes
-.B \%-rPDFFEAT=0 .
+.B \%\-rPDFFEAT=0 .
 .
 .
 .\" ====================================================================
