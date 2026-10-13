@@ -694,7 +694,7 @@
 
 2026-08-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
-	[troff]: Fix Savannah #68616.
+	[troff]: Fix Savannah #68618.
 
 	* src/roff/troff/input.cpp: Fix incorrect lexical analysis of
 	`stringdown` and `stringup` request arguments.  Request
