@@ -590,7 +590,7 @@ and
 .B \-W
 options use the associated names.
 .
-A power of two characterizes each category;
+A power of two encodes each category;
 the
 .B warn
 request and the

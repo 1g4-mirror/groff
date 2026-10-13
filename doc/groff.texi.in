@@ -23563,7 +23563,7 @@ The
 and
 @option{-W}
 options use the associated names.
-A power of two characterizes each category;
+A power of two encodes each category;
 the
 @code{warn}
 request and the
