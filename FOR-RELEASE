@@ -61,9 +61,9 @@ prepared, as applicable.
 
 *** Begin loop
 
-* Announce a code freeze to the groff development mailing list.  The
-  maintainer must decide upon the scope, duration, and "hardness" of the
-  freeze.
+* If necessary, announce a code freeze to the groff development mailing
+  list.  The maintainer must decide upon the scope, duration, and
+  "hardness" of the freeze.
 
 * Update the release version number where it is hard-coded or
   represented as "next".
