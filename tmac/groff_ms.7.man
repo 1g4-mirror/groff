@@ -2410,7 +2410,7 @@ the TOC will be relocated to after the cover.
 There are also two new macro calls available.
 .TP
 .BI .XR " name \c"
-.RI " [" after " [" before " [" hotlink\-text "]]]"
+.RI " [" after " [" before " [" hotlink-text "]]]"
 The
 .I name
 parameter should match a
