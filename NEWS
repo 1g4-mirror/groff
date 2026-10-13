@@ -10,7 +10,7 @@ This file describes recent user-visible changes in groff.  Bug fixes are
 not described.  groff's man pages and Texinfo manual offer more details.
 See the ChangeLog* files for release dates.
 
-VERSION 1.25.0 release candidate 2
+VERSION 1.25.0 release candidate 3
 ==================================
 
 troff

@@ -75,7 +75,7 @@ rm -rf %tdir%
 goto end
 
 :version
-echo grap2graph (groff) version 1.25.0.rc2
+echo grap2graph (groff) version 1.25.0.rc3
 goto end
 
 :usage
