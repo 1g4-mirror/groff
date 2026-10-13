@@ -69,9 +69,9 @@
 	Resolves failure of "neqn-finds-matching-eqn.sh" on Solaris 11.
 	{The host to which I have access has groff 1.23.0's troff as its
 	"/usr/bin/troff"; presumably it's running SRU66.  So I simulated
-	the situation by installing an "echo 0" shell script in
-	"$HOME/bin", adding that directory to the $PATH, and running a
-	build.}
+	the situation by installing an "echo 0" shell script as "troff"
+	in "$HOME/bin", adding that directory to the $PATH, and running
+	a build.}
 
 	Fixes <https://savannah.gnu.org/bugs/?68764>.  Thanks to Bruno
 	Haible for the report.
