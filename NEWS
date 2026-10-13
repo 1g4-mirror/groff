@@ -32,9 +32,9 @@ troff
    between their arguments.  While consistent with GNU troff input
    syntax, said enforcement is not consistent with AT&T troff.  We did
    not add support in groff's AT&T troff compatibility mode because
-   we're aware of no legacy documents that require it.  Example:
-   `.wh9i+.5+\n(xxuPT`, while it validly plants a trap calling the `PT`
-   macro in AT&T troff, is an input considerably more cryptic than any
+   we're aware of no legacy documents that require it.  Example: the
+   input `.wh9i+.5+\n(xxuPT`, while it validly plants a trap calling the
+   `PT` macro in AT&T troff, is considerably more cryptic than any
    specimens known to us.
 
 *  The formatter now enables the "delim", "syntax", and "escape" warning
@@ -46,7 +46,7 @@ troff
    greater than decimal 127.
 
 *  A new read-only register `.ul` reports the count of productive input
-   lines remaining to be be underlined in the environment (as configured
+   lines remaining to be underlined in the environment (as configured
    by either the `cu` or `ul` requests).
 
 *  The formatter supports a new warning category, "style".  It is used
@@ -133,10 +133,11 @@ Macro packages
    macros, to manage list "compactness" and item indentation with
    existing man(7) package facilities, or to employ both approaches.
 
-*  The an (man) package now checks for certain portability problems to
-   AT&T troff's man(7) if the `CHECKSTYLE` register, introduced in groff
-   1.23.0 and documented in 1.24.0, is given a value of 100 or greater.
-   This feature is experimental and subject to change.
+*  The an (man) package now checks for some problems of document
+   portability to AT&T troff's man(7) if the `CHECKSTYLE` register,
+   introduced in groff 1.23.0 and documented in 1.24.0, is given a value
+   of 100 or greater.  This feature is experimental and subject to
+   change.
 
 *  The m (mm) macro package's `IA` and `WA` macros--used only with the
    "letter" document type configured by calling the `LT` macro--no
@@ -176,7 +177,7 @@ Macro packages
    the document and format text that hyperlinks to it, respectively.
 
    These changes were inspired by Keith Marshall's "spdf.tmac" which was
-   withdrawn from groff in 1.24.0, but continues to be developed at:
+   withdrawn from groff as of 1.24.0, but continues to be developed at:
 
       https://savannah.nongnu.org/projects/groff-pdfmark/
 
