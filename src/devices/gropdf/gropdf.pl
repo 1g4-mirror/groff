@@ -3215,7 +3215,6 @@ sub ParsePDFHexString
 	{
 	    Die("Failed to parse HexString");
 	}
-	$rtn.=$1;
     }
 
     return($rtn);
