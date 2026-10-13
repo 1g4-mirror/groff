@@ -1296,13 +1296,10 @@ compilers.
 passes
 @option{-I}
 options and their arguments to
+@command{@g@grn},
 @command{@g@soelim},
 @command{@g@troff},
-and output drivers;
-with the option letter changed to
-@option{-M},
-it passes the same arguments to
-@command{@g@grn}.
+and output drivers.
 
 @item -j
 Run @command{gchem} preprocessor.  Implies @option{-p}.
