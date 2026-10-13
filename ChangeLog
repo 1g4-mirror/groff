@@ -1,3 +1,8 @@
+2026-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/utils/afmtodit/afmtodit.tables: Regenerate using Unicode
+	18.0.0's "UnicodeData.txt".  No material changes.
+
 2026-10-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[gropdf]: Correctly handle multi-line hexstring.
