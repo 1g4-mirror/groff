@@ -3195,6 +3195,28 @@ sub ParsePDFHexString
 	unshift(@{$pdfwds},$2) if defined($2) and length($2);
 	$rtn=$1;
     }
+    else
+    {
+	$rtn=$wd;
+	$wd=nextwd($pdfwds,1);
+
+	while ($wd=~m/^((?:[0-9A-Fa-f]{2})*)$/)
+	{
+	    $rtn.=$1;
+	    $wd=nextwd($pdfwds,1)
+	}
+
+	if ($wd=~m/^((?:[0-9A-Fa-f]{2})*>)(.*)$/)
+	{
+	    unshift(@{$pdfwds},$2) if defined($2) and length($2);
+	    $rtn.=$1;
+	}
+	else
+	{
+	    Die("Failed to parse HexString");
+	}
+	$rtn.=$1;
+    }
 
     return($rtn);
 }

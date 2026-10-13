@@ -1,3 +1,12 @@
+2026-10-13  Deri James  <deri@chuzzlewit.myzen.co.uk>
+
+	[gropdf] Correctly handle multi-line hexstring.
+
+	* src/devices/gropdf/gropdf.pl (ParsePDFHexString):
+	Concatenate hex strings on multiple lines.
+
+	Fixes <https://savannah.gnu.org/bugs/index.php?68771>.
+
 2026-10-12  Deri James  <deri@chuzzlewit.myzen.co.uk>
 
 	[pdfmom]: Fix typo.
