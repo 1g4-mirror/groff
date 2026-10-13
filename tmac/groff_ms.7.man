@@ -2478,8 +2478,8 @@ forward link, or use the multi-pass command
 \f[CB]pdfmom \-\-roff \-ms \-rPDFFEAT=1 file.ms > file.pdf\f[]
 .LP
 The command can be shortened to
-.B "pdfms \-rPDFFEAT=1 ..."
-if you have created a link to the
+.RB \[lq] "pdfms \-rPDFFEAT=1"
+\&.\|.\|.\&\[rq] if you have created a link to the
 .I pdfmom
 command called
 .I pdfms .
