@@ -668,10 +668,10 @@ T}
 .
 .sp \n[PD]u
 color	524288	T{
-An undefined color name was selected,
-an attempt was made to define a color using an unrecognized color space,
-an invalid channel value in a color definition was encountered,
-or an attempt was made to redefine a default color.
+An attempt was made to select a nonexistent color name,
+to define a color using an unrecognized color space,
+or to redefine a default color;
+or an invalid channel value in a color definition was encountered.
 T}
 .
 .
