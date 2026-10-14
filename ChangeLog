@@ -798,6 +798,8 @@
 	* src/preproc/pic/object.cpp (command_object::~command_object):
 	Free `s` member variable using free(3), not `delete[]`.
 
+	Fixes <https://savannah.gnu.org/bugs/?64892>.
+
 2024-07-31  Bjarni Ingi Gislason <bjarniig@simnet.is>
 
 	* ChangeLog.12[34]: Fix doubled word typos.
