@@ -1,3 +1,15 @@
+2026-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* m4/groff.m4 (GROFF_G): Fix logic botch; we were treating the
+	total absence of an installed `troff` from the build
+	environment as equivalent to a groff-incompatible one being
+	present.  That was incorrect.  Do not apply a command prefix
+	when no troff is present.
+
+	Fixes <https://savannah.gnu.org/bugs/?68775>.  Thanks to Alexis
+	Hildebrandt for the report.  Problem introduced by me in commit
+	142b8d93fc, 8 October.
+
 2026-10-13  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/afmtodit/afmtodit.tables: Regenerate using Unicode

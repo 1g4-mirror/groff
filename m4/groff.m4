@@ -1064,14 +1064,18 @@ AC_DEFUN([GROFF_TMAC],
 # alongside the system's is desired.
 AC_DEFUN([GROFF_G], [
   g=
-  AC_MSG_CHECKING([for an installed groff-incompatible troff])
-  if test "`(echo .tm '|n(.g' | tr '|' '\\\\' | troff -z -i 2>&1) \
-    2>/dev/null`" = 1
+  AC_MSG_CHECKING([whether a groff-incompatible troff is installed])
+  if test -n "`command -v troff`" \
+    && test "`(echo .tm '|n(.g' | tr '|' '\\\\' | troff -z -i 2>&1) \
+      2>/dev/null`" != 1
   then
-    AC_MSG_RESULT([no])
-  else
-    AC_MSG_RESULT([yes])
     g=g
+  fi
+  if test "$g" = "g"
+  then
+    AC_MSG_RESULT([yes])
+  else
+    AC_MSG_RESULT([no])
   fi
   AC_SUBST([g])
 ])
