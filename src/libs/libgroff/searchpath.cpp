@@ -116,6 +116,8 @@ void search_path::command_line_dir(const char *s)
 FILE *search_path::open_file(const char *name, char **pathp)
 {
   assert(name != 0 /* nullptr */);
+  if (0 /* nullptr */ == name) // NDEBUG
+    return 0 /* nullptr */;
   if (IS_ABSOLUTE(name) || *dirs == '\0') {
     if (is_directory(name)) {
       errno = EISDIR;
