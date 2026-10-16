@@ -1,5 +1,16 @@
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mmroff.pl: Fix Savannah #68782.  Decode wait status on
+	pipeline failure, to better inform the user lacking intimate
+	knowledge of the Unix process spawning and reaping model.  Copy
+	the "abort/autopsy" technique from groff's "pdfmom.pl".
+
+	Fixes <https://savannah.gnu.org/bugs/?68782>.  Thanks to Bruno
+	Haible, John Gardner, Ingo Schwarze, and the mononymous Mike for
+	discussion on the groff mailing list.
+
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mmroff.pl: Use Perl more idiomatically.  Use `or` as
 	short-circuit operator rather than `||`; the former has lower
 	precedence and so is less likely to surprise the programmer.

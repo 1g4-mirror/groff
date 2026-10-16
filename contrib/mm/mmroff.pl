@@ -1,6 +1,6 @@
 #!@PERL@
-# Copyright 2000 Free Software Foundation, Inc.
-#           2023 G. Branden Robinson
+# Copyright      2000 Free Software Foundation, Inc.
+#           2023-2026 G. Branden Robinson
 #
 # This file is part of mm, a reimplementation of the Documenter's
 # Workbench (DWB) troff memorandum macro package for use with GNU troff.
@@ -30,9 +30,32 @@ use Config;
 
 (my $progname = $0) =~s @.*/@@;
 
-sub Die {
-	print STDERR "$progname: fatal error: @_\n";
-	exit 1;
+my $groff; # forward declaration for `autopsy`
+
+sub abort
+{
+    my $message=shift(@_);
+    print STDERR "$progname: fatal error: $message";
+    exit 1;
+}
+
+sub autopsy
+{
+    my $waitstatus=shift(@_);
+    my $finding;
+
+    if ($waitstatus == -1) {
+	$finding = "cannot run groff: $!\n";
+    }
+    elsif ($? & 127) {
+	$finding = sprintf("$groff died with signal %d, %s core dump\n",
+	    ($? & 127),  ($? & 128) ? 'with' : 'without');
+    }
+    else {
+	$finding = sprintf("$groff exited with status %d\n", $? >> 8);
+    }
+
+    return $finding;
 }
 
 # runs groff in safe mode, that seems to be the default
@@ -72,7 +95,6 @@ if (grep(/^-x$/, @ARGV)) {
 
 # Locate groff executable.
 my $path = $ENV{'GROFF_BIN_PATH'};
-my $groff;
 
 if ($path) {
 	for my $dir (split($Config{path_sep}, $path)) {
@@ -95,7 +117,7 @@ my (%cur, $rfilename, $imacro, @out, @indi);
 my $max_height = 0;
 my $max_width = 0;
 open(MACRO, "$first_pass 2>&1 |")
-	or Die("cannot run pipeline \"$first_pass\": $!");
+	or abort("cannot run pipeline \"$first_pass\": $!");
 while(<MACRO>) {
 	if (m#^\.\\" Rfilename: (\S+)#) {
 		# remove all directories just to be more secure
@@ -140,9 +162,8 @@ while(<MACRO>) {
 	s#\\ \\ $##;
 	push(@out, $_);
 }
-close(MACRO)
-	or Die($! ? "error closing pipeline \"$first_pass\": $!"
-		  : "\"$first_pass\" exited with status $?");
+my $waitstatus = close(MACRO);
+abort(autopsy($?)) unless $waitstatus == 1; # roughly `WIFEXITED()`
 
 # TODO: We should write out references only if there are any; a document
 # that uses only `PIC` might lack them.
@@ -152,7 +173,7 @@ if ($rfilename) {
 	push(@out, ".nr pict*max-width $max_width\n") if defined $max_width;
 
 	open(OUT, ">$rfilename")
-		or Die("cannot create file \"$rfilename\": $!");
+		or abort("cannot create file \"$rfilename\": $!");
 	print OUT '.\" references', "\n";
 	my $i;
 	for $i (@out) {
@@ -167,7 +188,7 @@ exit system($second_pass);
 sub print_index {
 	my ($f, $ind, $macro) = @_;
 
-	open(OUT, ">$f") or Die("cannot create file \"$f\": $!");
+	open(OUT, ">$f") or abort("cannot create file \"$f\": $!");
 	my $i;
 	for $i (sort @$ind) {
 		if ($macro) {
