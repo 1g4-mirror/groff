@@ -94,7 +94,8 @@ my $second_pass = "$groff -mm @ARGV";
 my (%cur, $rfilename, $imacro, @out, @indi);
 my $max_height = 0;
 my $max_width = 0;
-open(MACRO, "$first_pass 2>&1 |") || Die("run $first_pass: $!");
+open(MACRO, "$first_pass 2>&1 |")
+	|| Die("cannot run pipeline \"$first_pass\": $!");
 while(<MACRO>) {
 	if (m#^\.\\" Rfilename: (\S+)#) {
 		# remove all directories just to be more secure
@@ -151,7 +152,7 @@ if ($rfilename) {
 	push(@out, ".nr pict*max-width $max_width\n") if defined $max_width;
 
 	open(OUT, ">$rfilename")
-		or Die("unable to create $rfilename:$!");
+		or Die("cannot create file \"$rfilename\": $!");
 	print OUT '.\" references', "\n";
 	my $i;
 	for $i (@out) {
@@ -166,7 +167,7 @@ exit system($second_pass);
 sub print_index {
 	my ($f, $ind, $macro) = @_;
 
-	open(OUT, ">$f") or Die("unable to create $f:$!");
+	open(OUT, ">$f") or Die("cannot create file \"$f\": $!");
 	my $i;
 	for $i (sort @$ind) {
 		if ($macro) {
