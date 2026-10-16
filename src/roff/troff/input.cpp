@@ -9922,7 +9922,17 @@ static void process_startup_file(const char *filename)
 
 static void do_macro_source(bool quietly)
 {
+  const char *rd = 0 /* nullptr */; // request description
+  if (quietly)
+    rd = "quiet macro file sourcing request";
+  else
+    rd = "macro file sourcing request";
   char *macro_filename = read_rest_of_line_as_argument();
+  if (0 /* nullptr */ == macro_filename) {
+    warning(WARN_MISSING, "%1 expects argument", rd);
+    tok.next();
+    return;
+  }
   char *path;
   FILE *fp = mac_path->open_file(macro_filename, &path);
   if (fp != 0 /* nullptr */) {

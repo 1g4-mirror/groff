@@ -1,5 +1,19 @@
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68784.
+
+	* src/roff/troff/input.cpp (do_macro_source): Throw warning in
+	category "missing" if either the `mso` or `msoquiet` request is
+	not given an argument.  Deduce identity of calling request
+	handler from value of `quietly` argument, which while at present
+	perfectly logically coupled to that identity, leaves me uneasy.
+	{But in the long term I hope to turn `msoquiet` into a macro
+	anyway, which should be easy after Savannah #68242 is fixed.}
+
+	Fixes <https://savannah.gnu.org/bugs/?68784>.
+
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68784.
 
 	* src/roff/groff/tests/\
