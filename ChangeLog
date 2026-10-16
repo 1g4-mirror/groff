@@ -1,5 +1,13 @@
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68784.
+
+	* src/roff/groff/tests/\
+	error-mso-request-given-empty-argument.sh: New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[libgroff]: Add `NDEBUG` assert(3)ion fallback.
 
 	* src/libs/libgroff/searchpath.cpp (search_path::open_file)
