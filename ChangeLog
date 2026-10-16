@@ -1,3 +1,12 @@
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Unit-test `so` request.
+
+	* src/roff/groff/tests/so-request-works.sh: New file; do it.
+	* src/roff/groff/tests/artifacts/sourced-file: New file.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+	Update `EXTRA_DIST` to ship new artifact file.
+
 2026-10-14  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* m4/groff.m4 (GROFF_G): Fix logic botch; we were treating the
