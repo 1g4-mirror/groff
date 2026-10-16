@@ -1,3 +1,11 @@
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Unit-test `mso` request.
+
+	* src/roff/groff/tests/mso-request-works.sh: New file; do it.
+	* src/roff/groff/tests/artifacts/macro-file: New file.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Add error handling to `file_iterator` constructor.
