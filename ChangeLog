@@ -1,5 +1,13 @@
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68783.
+
+	* src/roff/groff/tests/error-so-request-given-empty-argument.sh:
+	New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Unit-test `so` request.
 
 	* src/roff/groff/tests/so-request-works.sh: New file; do it.
