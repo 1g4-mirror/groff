@@ -1,5 +1,6 @@
 #!@PERL@
-# Copyright 1989-2025 Free Software Foundation, Inc.
+# Copyright 2000 Free Software Foundation, Inc.
+#           2023 G. Branden Robinson
 #
 # This file is part of mm, a reimplementation of the Documenter's
 # Workbench (DWB) troff memorandum macro package for use with GNU troff.
