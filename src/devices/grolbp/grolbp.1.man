@@ -198,16 +198,16 @@ Elite | ER | EB | EI |
 .I grolbp
 supports paper formats
 .RB \[lq] A4 \[rq],
-.RB \[lq] letter \[rq],
-.RB \[lq] legal \[rq],
+.RB \%\[lq] letter \[rq],
+.RB \%\[lq] legal \[rq],
 and
-.RB \[lq] executive \[rq].
+.RB \%\[lq] executive \[rq].
 .
 These are matched case-insensitively.
 .
 The
 .BR \-p ,
-.B \-\-papersize
+.B \%\-\-papersize
 option overrides any setting in the device description file
 .IR DESC .
 .
@@ -221,11 +221,11 @@ In its
 file,
 .I grolbp
 (case-insensitively) recognizes an
-.B orientation
+.B \%orientation
 directive accepting one mandatory argument,
-.B portrait
+.B \%portrait
 or
-.BR landscape .
+.BR \%landscape .
 .
 The first valid orientation directive encountered controls.
 .\" XXX: This is inconsistent with other description file processing.
@@ -234,7 +234,7 @@ The
 .BR \-l ,
 .BR \-o ,
 and
-.B \-\-orientation
+.B \%\-\-orientation
 command-line options
 override any setting in
 .IR DESC .
@@ -251,7 +251,7 @@ In addition to the font description file directives documented in
 .MR groff_font @MAN5EXT@ ,
 .I grolbp
 recognizes
-.BR lbpname ,
+.BR \%lbpname ,
 which maps the
 .I groff
 font name to the font name used internally by the printer.
@@ -264,7 +264,7 @@ Its syntax is as follows.
 .RE
 .
 .
-.BR lbpname 's
+.BR \%lbpname 's
 argument is case-sensitive.
 .
 The printer's font names are encoded as follows.
@@ -324,7 +324,7 @@ For instance,
 to select the \[lq]Swiss\[rq] font in bold-italic style,
 which appears in the font listing
 as \%\[lq]Swiss\-BoldOblique\[rq],
-.RB \[lq] "lbpname Swiss\-BoldOblique" \[rq]
+.RB \%\[lq] "lbpname \%Swiss\-BoldOblique" \[rq]
 is the required directive,
 and this is what we find in the
 .I groff
