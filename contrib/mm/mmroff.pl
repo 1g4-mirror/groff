@@ -95,7 +95,7 @@ my (%cur, $rfilename, $imacro, @out, @indi);
 my $max_height = 0;
 my $max_width = 0;
 open(MACRO, "$first_pass 2>&1 |")
-	|| Die("cannot run pipeline \"$first_pass\": $!");
+	or Die("cannot run pipeline \"$first_pass\": $!");
 while(<MACRO>) {
 	if (m#^\.\\" Rfilename: (\S+)#) {
 		# remove all directories just to be more secure

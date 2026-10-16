@@ -1,5 +1,11 @@
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* mmroff.pl: Use Perl more idiomatically.  Use `or` as
+	short-circuit operator rather than `||`; the former has lower
+	precedence and so is less likely to surprise the programmer.
+
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* mmroff.pl: Clarify error diagnostics.  When dying on the
 	"first pass", inform the user that we were attempting to run a
 	pipeline.  Tweak wording; favor "cannot" over "unable to".
