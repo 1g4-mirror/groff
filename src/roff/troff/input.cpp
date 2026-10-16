@@ -7626,7 +7626,17 @@ static void while_continue_request() // .continue
 
 static void do_source(bool quietly)
 {
+  const char *rd = 0 /* nullptr */; // request description
+  if (quietly)
+    rd = "quiet file sourcing request";
+  else
+    rd = "file sourcing request";
   char *filename = read_rest_of_line_as_argument();
+  if (0 /* nullptr */ == filename) {
+    warning(WARN_MISSING, "%1 expects argument", rd);
+    tok.next();
+    return;
+  }
   errno = 0;
   FILE *fp = include_search_path.open_file_cautiously(filename);
   if (fp != 0 /* nullptr */)

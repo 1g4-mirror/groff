@@ -1,5 +1,19 @@
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68783.
+
+	* src/roff/troff/input.cpp (do_source): Throw warning in
+	category "missing" if either the `so` or `soquiet` request is
+	not given an argument.  Deduce identity of calling request
+	handler from value of `quietly` argument, which while at present
+	perfectly logically coupled to that identity, leaves me uneasy.
+	{But in the long term I hope to turn `soquiet` into a macro
+	anyway, which should be easy after Savannah #68242 is fixed.}
+
+	Fixes <https://savannah.gnu.org/bugs/?68783>.
+
+2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68783.
 
 	* src/roff/groff/tests/error-so-request-given-empty-argument.sh:
