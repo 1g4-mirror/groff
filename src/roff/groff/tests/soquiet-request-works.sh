@@ -16,11 +16,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
 
 groff="${abs_top_builddir:-.}/test-groff"
-
-set -e
 
 # Keep preconv from being run.
 #
@@ -31,10 +28,12 @@ then
     exit 77 # skip
 fi
 
-DOC='.soquiet nonexistent'
+input='.
+.soquiet nonexistent
+.'
 
-OUTPUT=$(echo "$DOC" | "$groff" -Tascii 2>&1)
-echo "$OUTPUT"
+output=$(echo "$doc" | "$groff" -Tascii 2>&1)
+echo "$output"
+test -z "$output"
 
-echo "testing that .soquiet of nonexistent file produces no error" >&2
-test -z "$OUTPUT"
+# vim:set autoindent expandtab shiftwidth=4 tabstop=4 textwidth=72:
