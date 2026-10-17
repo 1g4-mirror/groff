@@ -5826,6 +5826,8 @@ static void remove_macro() // .rm
     if (s.is_null())
       break;
     request_dictionary.remove(s);
+    if (!has_arg())
+      break;
   }
   skip_line();
 }

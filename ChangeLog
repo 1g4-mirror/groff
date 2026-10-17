@@ -1,5 +1,14 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Adjust `rm` request handler.
+
+	* src/roff/troff/input.cpp (remove_macro): Add early loop
+	termination condition; `break` when `has_arg()` returns false.
+	This changes no observable behavior right now, but prepares for
+	a bug fix.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Unit-test `rm` request.
 
 	* src/roff/groff/tests/rm-request-works.sh: New file; do it.
