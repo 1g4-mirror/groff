@@ -7701,20 +7701,20 @@ static void source_quietly_request() // .soquiet
 static void pipe_source_request() // .pso
 {
   if (!has_arg(true /* peeking */)) {
-    warning(WARN_MISSING, "piped command source request expects"
+    warning(WARN_MISSING, "piped command sourcing request expects"
 	    " arguments");
     skip_line();
     return;
   }
   if (!want_unsafe_requests) {
-    error("piped command source request is not allowed in safer mode");
+    error("piped command sourcing request is not allowed in safer mode");
     skip_line();
     return;
   }
   char *pcmd = read_rest_of_line_as_argument();
   if (0 /* nullptr */ == pcmd) {
-    error("cannot apply piped command source request to empty"
-	  " argument");
+    error("cannot apply piped command sourcing request"
+	  " to empty argument");
     tok.next();
     return;
   }
@@ -9652,7 +9652,7 @@ static void pipe_output() // .pi
   }
   char *pc = read_rest_of_line_as_argument();
   if (0 /* nullptr */ == pc)
-    error("cannot apply pipe request to empty command");
+    error("cannot apply pipe request to empty argument");
   // Are we adding to an existing pipeline?
   if (pipe_command != 0 /* nullptr */) {
     // ISO C++ does not permit VLAs on the stack.
@@ -9692,7 +9692,7 @@ static void system_request() // .sy
   }
   char *command = read_rest_of_line_as_argument();
   if (0 /* nullptr */ == command)
-    error("cannot apply system request to empty command");
+    error("cannot apply system request to empty argument");
   else
     system_status = system(command);
   delete[] command;

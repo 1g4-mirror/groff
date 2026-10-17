@@ -1,5 +1,13 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Improve diagnostic messages.
+
+	* src/roff/troff/input.cpp (pipe_source_request, pipe_output)
+	(system_request): Use more consistent wording when diagnosing
+	input validity problems.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #68786.
 
 	* src/roff/troff/input.cpp (pipe_source_request, pipe_output)
