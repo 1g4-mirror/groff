@@ -469,6 +469,10 @@ file_iterator::file_iterator(FILE *f, const char *fn, bool popened)
 : fp(f), lineno(1), was_popened(popened),
   seen_newline(false), seen_escape(false)
 {
+  assert(f != 0 /* nullptr */);
+  assert(fn != 0 /* nullptr */);
+  if ((0 /* nullptr */ == f) || (0 /* nullptr */ == fn)) // NDEBUG
+    return;
   filename = strdup(const_cast<char *>(fn));
   if ((font::use_charnames_in_special) && (fn != 0 /* nullptr */)) {
     if (!the_output)

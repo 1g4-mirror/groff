@@ -1,3 +1,12 @@
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Add error handling to `file_iterator` constructor.
+
+	* src/roff/troff/input.cpp (file_iterator::file_iterator):
+	Handle invalid constructor arguments.  Make assert(3)ion that
+	the pointers `f` (a `FILE`) or `fn` (a C string) are not null.
+	In `NDEBUG` builds, return early if either one is.
+
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #68783.
