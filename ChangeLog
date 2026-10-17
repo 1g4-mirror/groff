@@ -1,5 +1,13 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add `NDEBUG` fallback to `lookup_request()`.
+
+	* src/roff/troff/input.cpp (lookup_request) [NDEBUG]: Return
+	null pointer `request_or_macro` if the `nm` `symbol` passed in
+	`is_null()`.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix code style nits.
 
 	* src/roff/troff/input.cpp (read_color_channel_value): Return

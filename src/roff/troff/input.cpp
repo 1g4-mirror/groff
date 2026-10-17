@@ -10618,6 +10618,8 @@ void init_request(const char *s, REQUEST_FUNCP f)
 static request_or_macro *lookup_request(symbol nm)
 {
   assert(!nm.is_null());
+  if (nm.is_null()) // NDEBUG
+    return 0 /* nullptr*/;
   request_or_macro *p
     = static_cast<request_or_macro *>(request_dictionary.lookup(nm));
   if (0 /* nullptr */ == p) {
