@@ -1005,6 +1005,7 @@ static void next_file_request() // .nx
       input_stack::next_file(fp, filename);
   }
   // TODO: Add `filename` to file name set.
+  // No skip_line() here; we called read_rest_of_line_as_argument().
   tok.next();
 }
 
@@ -6097,6 +6098,7 @@ static void length_request() // .length
     r->set_value(len);
   else
     set_register(ret, len);
+  // No skip_line() here; we called read_character_in_copy_mode().
   tok.next();
 }
 
@@ -7086,6 +7088,7 @@ static void device_request() // .device
     }
   }
   curenv->add_node(new device_extension_node(mac));
+  // No skip_line() here; we called read_character_in_copy_mode().
   tok.next();
 }
 
@@ -7126,6 +7129,7 @@ static void output_request() // .output
        (c = read_character_in_copy_mode(0 /* nullptr */)))
     topdiv->transparent_output(c);
   topdiv->transparent_output('\n');
+  // No skip_line() here; we called read_character_in_copy_mode().
   tok.next();
 }
 
@@ -7684,6 +7688,7 @@ static void do_source(bool quietly)
     if (!(quietly && (ENOENT == errno)))
       error("cannot open '%1': %2", filename, strerror(errno));
   // TODO: Add `filename` to file name set.
+  // No skip_line() here; we called read_rest_of_line_as_argument().
   tok.next();
 }
 
@@ -7738,6 +7743,7 @@ static void pipe_source_request() // .pso
     error("cannot open pipe to process '%1': %2", pcmd,
 	  strerror(errno));
   delete[] pcmd;
+  // No skip_line() here; we called read_rest_of_line_as_argument().
   tok.next();
 }
 
@@ -9976,6 +9982,7 @@ static void do_macro_source(bool quietly)
       warning(WARN_FILE, "cannot open macro file '%1': %2",
 	      macro_filename, strerror(errno));
   // TODO: Add `macro_filename` to file name set.
+  // No skip_line() here; we called read_rest_of_line_as_argument().
   tok.next();
 }
 
