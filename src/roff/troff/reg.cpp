@@ -540,8 +540,9 @@ static void remove_register_request()
   for (;;) {
     symbol s = read_identifier();
     if (s.is_null())
-      break;
-    register_dictionary.remove(s);
+      skip_rest_of_argument();
+    else
+      register_dictionary.remove(s);
     if (!has_arg())
       break;
   }

@@ -1,5 +1,14 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68790.
+
+	* src/roff/troff/reg.cpp (remove_register_request): Skip invalid
+	arguments.
+
+	Fixes <https://savannah.gnu.org/bugs/?68790>.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68790.
 
 	* src/roff/groff/tests/error-rr-request-given-bogus-argument.sh:
