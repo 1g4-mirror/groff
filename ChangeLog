@@ -1,5 +1,13 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (read_line_rule_expression): Throw
+	error diagnostic if input attempts to draw a rule with `\l` or
+	`\L` with an argument that isn't a character.
+
+	Fixes <https://savannah.gnu.org/bugs/?68788>.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68788.
 
 	* src/roff/groff/tests/\

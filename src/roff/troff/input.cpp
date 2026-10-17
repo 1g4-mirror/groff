@@ -6303,6 +6303,11 @@ static bool read_line_rule_expression(units *n, unsigned char si,
       tok.next();
     if (!(start_token == tok
 	  && input_stack::get_level() == start_level)) {
+      if (!tok.is_any_character()) {
+	error("cannot use %1 to draw a line of glyphs",
+	      tok.description());
+	return false;
+      }
       *cip = tok.get_charinfo(true /* is_mandatory */);
       if (0 /* nullptr */ == *cip)
 	assert(0 == "attempted to use token without charinfo in"
