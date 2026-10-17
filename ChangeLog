@@ -1,3 +1,10 @@
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Unit-test `rr` request.
+
+	* src/roff/groff/tests/rr-request-works.sh: New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Improve error diagnostics.
