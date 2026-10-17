@@ -1,5 +1,19 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Improve `lf` request input validation.
+
+	* src/roff/troff/input.cpp (line_file): Throw warning in
+	category "missing" if request is given no arguments.  Throw
+	warning in category "syntax" if an empty interpolation is given
+	as the second (file name) argument.
+
+	* doc/groff.texi.in (Warnings):
+	* src/roff/troff/troff.1.man (Warnings): Document it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68787>.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Improve diagnostic messages.
 
 	* src/roff/troff/input.cpp (pipe_source_request, pipe_output)

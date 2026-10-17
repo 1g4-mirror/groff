@@ -23658,6 +23658,9 @@ an empty or incomplete numeric expression was encountered;
 an operand to a numeric operator was missing;
 an attempt was made to format characters or spaces on an input line
 after an output line continuation escape sequence;
+an empty interpolation was supplied as the file name argument to the
+@code{lf}
+request;
 a recognized but inapposite escape sequence
 or unprintable character
 was employed in a device extension command;

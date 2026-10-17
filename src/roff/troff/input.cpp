@@ -7241,12 +7241,23 @@ static int get_file_line(const char **filename, int *lineno)
 
 static void line_file() // .lf
 {
+  if (!has_arg()) {
+    warning(WARN_MISSING, "line and file name configuration request"
+	    " expects at least one argument");
+    skip_line();
+    return;
+  }
   int n;
   if (read_integer(&n)) {
     if (has_arg(true /* peeking */)) {
       const char *reported_file_name = read_rest_of_line_as_argument();
+      if (reported_file_name != 0 /* nullptr */)
+	; // TODO: Add `reported_file_name` to file name set.
+      else
+	warning(WARN_SYNTAX, "ignoring empty file name argument"
+		" to line and file name configuration request");
       (void) input_stack::set_location(reported_file_name, (n - 1));
-      // TODO: Add `reported_file_name` to file name set.
+      // No skip_line() here; we called read_rest_of_line_as_argument().
       tok.next();
       return;
     }
