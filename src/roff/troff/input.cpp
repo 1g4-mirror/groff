@@ -5824,8 +5824,9 @@ static void remove_macro() // .rm
   for (;;) {
     symbol s = read_identifier();
     if (s.is_null())
-      break;
-    request_dictionary.remove(s);
+      skip_rest_of_argument();
+    else
+      request_dictionary.remove(s);
     if (!has_arg())
       break;
   }
