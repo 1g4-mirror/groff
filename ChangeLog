@@ -1,3 +1,16 @@
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Regression-test Savannah #68786.
+
+	* src/roff/groff/tests/
+	error-close-request-given-empty-argument.sh:
+	* src/roff/groff/tests/error-pi-request-given-empty-argument.sh:
+	* src/roff/groff/tests/
+	error-pso-request-given-empty-argument.sh:
+	* src/roff/groff/tests/error-sy-request-given-empty-argument.sh:
+	New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run tests.
+
 2026-10-16  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	[troff]: Fix Savannah #68784.
