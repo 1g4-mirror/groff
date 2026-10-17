@@ -628,6 +628,10 @@ static void print_register_request() // .pnr
   if (has_arg()) {
     do {
       identifier = read_identifier();
+      if (identifier.is_null()) {
+	skip_rest_of_argument();
+	continue;
+      }
       r = look_up_register(identifier, true /* suppress creation */);
       if (r != 0 /* nullptr */)
 	dump_register(&identifier, r);

@@ -1,5 +1,20 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: `pnr` request advances past invalid args.
+
+	* src/roff/troff/reg.cpp (print_register_request): If a request
+	argument is an invalid identifier, skip over it instead of
+	giving up on the control line.  Apart from maintaining a
+	consistent symmetry with `rr` request behavior, if there's a
+	troublesome `rr` control line (perhaps involving constructed
+	register identifiers), this way you can duplicate the `rr` line,
+	change `rr` to `pnr`, and isolate the troublesome argument(s) by
+	its/their absence in the list.  (We don't report the names of
+	invalid identifiers because we have defined no convention for
+	encoding unprintable characters in this context.)
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #68791.
 
 	* src/roff/troff/input.cpp (remove_macro): Skip invalid
