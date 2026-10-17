@@ -4393,8 +4393,10 @@ static void print_macro_request() // .pm
   if (has_arg()) {
     do {
       s = read_identifier();
-      if (s.is_null())
-	break;
+      if (s.is_null()) {
+	skip_rest_of_argument();
+	continue;
+      }
       rm = static_cast<request_or_macro *>(request_dictionary.lookup(s));
       if (rm != 0 /* nullptr */)
 	m = rm->to_macro();
