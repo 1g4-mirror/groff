@@ -1,5 +1,14 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Add `skip_rest_of_argument()`.
+
+	* src/roff/troff/input.cpp (skip_rest_of_argument): New function
+	pumps input stream until a newline, space, or EOF token is
+	reached.
+	* src/roff/troff/token.h: Declare for external visibility.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Unit-test `rr` request.
 
 	* src/roff/groff/tests/rr-request-works.sh: New file; do it.

@@ -3252,6 +3252,17 @@ const char *token::description()
   }
 }
 
+// Requests like `rm` and `rr` need to scan past the rest of an invalid
+// identifier to get to the next one, which may be valid.
+void skip_rest_of_argument()
+{
+  while ((!tok.is_newline()) && (!tok.is_space()))
+    if (tok.is_eof())
+      return;
+    else
+      tok.next();
+}
+
 void skip_line()
 {
   while (!tok.is_newline())

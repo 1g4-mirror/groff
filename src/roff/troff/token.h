@@ -130,6 +130,7 @@ public:
 extern token tok;		// the current token
 
 extern bool has_arg(bool /* peeking */ = false);
+extern void skip_rest_of_argument();
 extern void skip_line();
 extern symbol read_identifier(bool /* want_diagnostic */ = false);
 extern symbol read_long_identifier(bool /* want_diagnostic */ = false);
