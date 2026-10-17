@@ -1522,18 +1522,18 @@ static unsigned int read_color_channel_value(const char *scheme,
   if (!read_measurement(&val, (unsigned char)('f'))) { // TODO: grochar
     warning(WARN_COLOR, "%1 in %2 definition set to 0", col, scheme);
     tok.next();
-    return 0;
+    return 0U;
   }
   if (val < 0) {
     warning(WARN_RANGE, "%1 cannot be negative: set to 0", col);
-    return 0;
+    return 0U;
   }
-  if (val > color::MAX_COLOR_VAL+1) {
+  if (val > (color::MAX_COLOR_VAL + 1)) {
     warning(WARN_RANGE, "%1 cannot be greater than 1", col);
     // we change 0x10000 to 0xffff
     return color::MAX_COLOR_VAL;
   }
-  return (unsigned int)(val);
+  return static_cast<unsigned int>(val);
 }
 
 static color *read_rgb(unsigned char end = 0U)

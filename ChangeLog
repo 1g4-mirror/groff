@@ -1,5 +1,14 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix code style nits.
+
+	* src/roff/troff/input.cpp (read_color_channel_value): Return
+	correctly typed zero literals.  Parenthesize formally complex
+	expressions.  Put space around dyadic operators.  Favor C++
+	`static_cast<>` operator over omnipotent C-style cast.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Improve `lf` request input validation.
 
 	* src/roff/troff/input.cpp (line_file): Throw warning in
