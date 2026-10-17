@@ -6278,7 +6278,7 @@ static bool read_delimited_measurement(units *n, unsigned char si)
 // \l, \L
 //
 // Here's some syntax unique to these escape sequences: a horizontal
-// measurement followed immediately by a character.
+// or vertical measurement followed immediately by a character.
 static bool read_line_rule_expression(units *n, unsigned char si,
 				      charinfo **cip)
 {
