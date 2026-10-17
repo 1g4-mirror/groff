@@ -1,5 +1,13 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68790.
+
+	* src/roff/groff/tests/error-rr-request-given-bogus-argument.sh:
+	New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Add `skip_rest_of_argument()`.
 
 	* src/roff/troff/input.cpp (skip_rest_of_argument): New function
