@@ -377,7 +377,7 @@ bool variable_reg::get_value(units *res)
   return true;
 }
 
-static void define_register_request()
+static void define_register_request() // .nr
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register definition request expects"
@@ -487,7 +487,7 @@ reg *look_up_register(symbol nm, bool suppress_creation)
   return r;
 }
 
-static void assign_register_format_request()
+static void assign_register_format_request() // .af
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register interpolation format assignment"
@@ -530,7 +530,7 @@ static void assign_register_format_request()
   skip_line();
 }
 
-static void remove_register_request()
+static void remove_register_request() // .rr
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register removal request expects arguments");
@@ -549,7 +549,7 @@ static void remove_register_request()
   skip_line();
 }
 
-static void alias_register_request()
+static void alias_register_request() // .aln
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register aliasing request expects"
@@ -573,7 +573,7 @@ static void alias_register_request()
   skip_line();
 }
 
-static void rename_register_request()
+static void rename_register_request() // .rnn
 {
   if (!has_arg()) {
     warning(WARN_MISSING, "register renaming request expects"
@@ -621,7 +621,7 @@ static void dump_register(symbol *id, reg *r)
   errprint("\n");
 }
 
-static void print_register_request()
+static void print_register_request() // .pnr
 {
   reg *r;
   symbol identifier;
