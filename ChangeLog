@@ -1,5 +1,12 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Unit-test `rm` request.
+
+	* src/roff/groff/tests/rm-request-works.sh: New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #68790.
 
 	* src/roff/troff/reg.cpp (remove_register_request): Skip invalid
