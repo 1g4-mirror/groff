@@ -1,5 +1,13 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68791.
+
+	* src/roff/groff/tests/error-rm-request-given-bogus-argument.sh:
+	New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Adjust `rm` request handler.
 
 	* src/roff/troff/input.cpp (remove_macro): Add early loop
