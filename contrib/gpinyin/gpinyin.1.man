@@ -273,7 +273,7 @@ fifth	neutral	(none)	ma0	ma
 \^	\^	\^	ma5	\^
 .TE
 .\}
-.lf (\n[gpinyin*.c] + 25) \" XXX part 2: Restore input line counter.
+.lf (\n[gpinyin*.c] + 25)\" XXX part 2: Restore input line counter.
 .el \{\
 [The tone mark table is omitted from this rendering of the man page
 because the selected output device \[lq]\*[.T]\[rq] lacks the character
