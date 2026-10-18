@@ -1,5 +1,13 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68794.
+
+	* src/roff/groff/tests/\
+	error-evc-request-given-bogus-argument.sh: New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	src/roff/troff/input.cpp: Improve `\D` error diagnostics.
 
 	* src/roff/troff/input.cpp (read_drawing_command)
