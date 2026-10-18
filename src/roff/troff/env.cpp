@@ -3881,13 +3881,14 @@ static void environment_copy() // .evc
   environment *e = 0 /* nullptr */;
   tok.skip_spaces();
   symbol nm = read_long_identifier();
-  assert(nm != 0 /* nullptr */);
-  e = static_cast<environment *>(env_dictionary.lookup(nm));
-  if (e != 0 /* nullptr */)
-    curenv->copy(e);
-  else
-    error("cannot copy from nonexistent environment '%1'",
-	  nm.contents());
+  if (!nm.is_null()) {
+    e = static_cast<environment *>(env_dictionary.lookup(nm));
+    if (e != 0 /* nullptr */)
+      curenv->copy(e);
+    else
+      error("cannot copy from nonexistent environment '%1'",
+	    nm.contents());
+  }
   skip_line();
 }
 

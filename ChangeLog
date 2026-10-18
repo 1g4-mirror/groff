@@ -1,5 +1,15 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68794.
+
+	* src/roff/troff/env.cpp (environment_copy): Instead of throwing
+	assert(3)ion when given invalid environment identifier, perform
+	no operation.
+
+	Fixes <https://savannah.gnu.org/bugs/?68794>.
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68794.
 
 	* src/roff/groff/tests/\
