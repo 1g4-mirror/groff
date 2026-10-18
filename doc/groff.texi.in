@@ -17649,7 +17649,7 @@ request must be the last such escape sequence on an input line.
 @strong{Caution:@:}
 Input lines using
 @code{\@{}
-often end with
+often should end with
 @code{\RET},
 especially in macros that consist primarily of control lines.
 Forgetting to use

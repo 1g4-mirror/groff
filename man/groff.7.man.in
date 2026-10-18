@@ -2513,7 +2513,7 @@ request must be the last such escape sequence on an input line.
 .I Caution:
 Input lines using
 .esc {
-often end with
+often should end with
 .escarg \& newline ,
 especially in macros that consist primarily of control lines.
 .
