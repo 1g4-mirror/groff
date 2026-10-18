@@ -39,7 +39,7 @@ public:
   int operator !=(symbol) const;
   const char *contents() const;
   bool contains(char) const;
-  bool is_null() const;
+  bool is_null() const; // empty _or_ invalid
   bool is_empty() const;
   size_t json_length() const;
   const char *json_extract() const;
