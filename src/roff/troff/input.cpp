@@ -10726,6 +10726,7 @@ static node *read_drawing_command() // \D
       int type = tok.ch(); // safely compares to char literals
       // TODO: grochar
       if (type == 'F') {
+	// XXX: undocumented
 	read_drawing_command_color_arguments(start_token);
 	return 0 /* nullptr */;
       }
@@ -10781,36 +10782,38 @@ static node *read_drawing_command() // \D
 	switch (type) {
 	case 'l':
 	  if (npoints != 1 || no_last_v) {
-	    error("two arguments needed for line");
+	    error("two arguments needed for line drawing command");
 	    npoints = 1;
 	  }
 	  break;
 	case 'c':
 	  if (npoints != 1 || !no_last_v) {
-	    error("one argument needed for circle");
+	    error("one argument needed for circle drawing command");
 	    npoints = 1;
 	    point[0].v = V0;
 	  }
 	  break;
 	case 'e':
 	  if (npoints != 1 || no_last_v) {
-	    error("two arguments needed for ellipse");
+	    error("two arguments needed for ellipse drawing command");
 	    npoints = 1;
 	  }
 	  break;
 	case 'a':
 	  if (npoints != 2 || no_last_v) {
-	    error("four arguments needed for arc");
+	    error("four arguments needed for arc drawing command");
 	    npoints = 2;
 	  }
 	  break;
 	case '~':
 	  if (no_last_v)
-	    error("even number of arguments needed for spline");
+	    error("even number of arguments needed for spline drawing"
+		  " command");
 	  break;
 	case 'f':
+	  // XXX: undocumented
 	  if (npoints != 1 || !no_last_v) {
-	    error("one argument needed for gray shade");
+	    error("one argument needed for gray shade drawing command");
 	    npoints = 1;
 	    point[0].v = V0;
 	  }
@@ -10837,7 +10840,7 @@ static void read_drawing_command_color_arguments(token &start)
 {
   tok.next();
   if (tok == start) {
-    error("missing color scheme");
+    error("missing color scheme in drawing command");
     return;
   }
   // safely compares to char literals; TODO: grochar
