@@ -1,3 +1,18 @@
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[troff]: Improve error diagnostics.
+
+	* src/roff/troff/input.cpp (diagnose_invalid_identifier)
+	(read_input_until_terminator): When squawking about an invalid
+	input token in an identifier, articulate the consequence: the
+	identifier is ignored, as if it were not present.  That is
+	uniformly how the formatter's request and escape sequence
+	handlers deal with them.  While `read_input_until_terminator()`
+	is a more general function used to collect language tokens other
+	than identifiers (like names of color spaces), the diagnostic
+	message changed here is only reachable if the function parameter
+	`want_identifier` is `true`.
+
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/input.cpp (read_line_rule_expression): Throw
