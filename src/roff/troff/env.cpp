@@ -607,9 +607,11 @@ static node *configure_space_underlining(bool b)
   return new device_extension_node(m, 1);
 }
 
-// TODO: Kill this off in groff 1.24.0 release + 2 years.  See input.cpp.
+// TODO: Kill this off in groff 1.24.0 release + 2 years.  See
+// input.cpp.
 std::vector<symbol> deprecated_font_identifiers;
 extern bool is_device_ps_or_pdf; // See input.cpp.
+// TODO: end kill
 
 static void warn_if_font_name_deprecated(symbol nm)
 {
@@ -639,8 +641,10 @@ bool environment::select_font(symbol nm)
     prev_fontno = fontno;
     int n = mounting_position_of_font(nm);
     symbol translated_font_name = get_font_translation(nm);
+    // TODO: Kill the following off in groff 1.24.0 release + 2 years.
     if (is_device_ps_or_pdf)
       warn_if_font_name_deprecated(translated_font_name);
+    // TODO: end kill
     if (n < 0) {
       n = next_available_font_mounting_position();
       if (!mount_font_at_position(nm, n))
@@ -4757,6 +4761,7 @@ void init_env_requests()
   deprecated_font_identifiers.push_back("PX");
   deprecated_font_identifiers.push_back("NX");
   deprecated_font_identifiers.push_back("ZI");
+  // TODO: end kill
 }
 
 // Appendix H of _The TeXbook_ is useful background for the following.

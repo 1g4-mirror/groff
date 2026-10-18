@@ -6584,7 +6584,7 @@ static void do_register() // \R
 	    start_token.description());
     return;
   }
-  // TODO: groff 1.24.0 release + 2 years?
+  // TODO: enable at groff 1.24.0 release + 2 years?
 #if 0
   if (!start_token.is_usable_as_delimiter(true /* report error */)) {
     return;
