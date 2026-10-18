@@ -7242,7 +7242,8 @@ static int get_file_line(const char **filename, int *lineno)
 static void line_file() // .lf
 {
   if (!has_arg()) {
-    warning(WARN_MISSING, "line and file name configuration request"
+    warning(WARN_MISSING,
+	    "line and file name report configuration request"
 	    " expects at least one argument");
     skip_line();
     return;
@@ -7255,7 +7256,7 @@ static void line_file() // .lf
 	; // TODO: Add `reported_file_name` to file name set.
       else
 	warning(WARN_SYNTAX, "ignoring empty file name argument"
-		" to line and file name configuration request");
+		" to line and file name report configuration request");
       (void) input_stack::set_location(reported_file_name, (n - 1));
       // No skip_line() here; we called read_rest_of_line_as_argument().
       tok.next();
