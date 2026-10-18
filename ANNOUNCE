@@ -106,7 +106,7 @@ which they apply, we find the following.
 
   Type                              Component
   ----                              ---------
-  Build/installation           NN   Core                           NN
+  Build/installation           NN   Formatter                      NN
   Crash/unresponsive           NN   Driver: grohtml                NN
   Documentation                NN   Driver: gropdf                 NN
   Feature change               NN   Driver: grops                  NN
@@ -138,6 +138,13 @@ Another way of capturing the amount of revision is as follows.
 
 $ git diff --stat 1.24.0 1.yy.Y | tail -n 1
  [[ maintainer: insert output ]]
+
+[[
+...and since the last stable release, we have the following.
+
+$ git diff --stat 1.24.2 1.25.0.rc3 | tail -n 1
+ 435 files changed, 55505 insertions(+), 34577 deletions(-)
+]]
 
 
 Obtaining groff
