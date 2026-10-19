@@ -1,5 +1,15 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68797.
+
+	* src/roff/troff/input.cpp (rename_macro): Replace assert(3)ion
+	that could be tripped by invalid characters in macro/string/
+	request/diversion identifier with skip of input line.
+
+	Fixes <https://savannah.gnu.org/bugs/?68797>.
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68797.
 
 	* src/roff/groff/tests/\

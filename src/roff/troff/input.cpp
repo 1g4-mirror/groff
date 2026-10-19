@@ -5859,7 +5859,11 @@ static void rename_macro() // .rn
     return;
   }
   symbol s1 = read_identifier();
-  assert(s1 != 0 /* nullptr */);
+  if (s1.is_null()) {
+    // The identifier was garbage, like `a\&b`.
+    skip_line();
+    return;
+  }
   if (!s1.is_null()) {
     symbol s2 = read_identifier();
     if (s2.is_null())
