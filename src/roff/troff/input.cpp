@@ -1748,6 +1748,11 @@ static void print_color_request() // .pcolor
   if (has_arg()) {
     do {
       key = read_identifier();
+      if (key.is_null()) {
+	// The identifier was garbage, like `a\&b`.
+	skip_rest_of_argument();
+	continue;
+      }
       value = static_cast<color *>(color_dictionary.lookup(key));
       if (value != 0 /* nullptr */)
 	errprint("%1\t%2\n", key.contents(), value->print_color());

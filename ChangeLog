@@ -1,5 +1,16 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: `pcolor` req advances past invalid args.
+
+	* src/roff/troff/input.cpp (print_color_request): If a request
+	argument is an invalid identifier, skip over it instead of
+	giving up on the control line.  This change improves symmetry
+	with `pm` and `pnr`.  (We don't report the names of invalid
+	identifiers because we have defined no convention for encoding
+	unprintable characters in this context.)
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Clarify "color" warning diagnostics.
 
 	* src/roff/troff/input.cpp (read_rgb, read_cmy, read_cmyk)
