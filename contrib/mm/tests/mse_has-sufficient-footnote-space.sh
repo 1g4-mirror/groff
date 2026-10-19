@@ -21,7 +21,7 @@
 
 groff="${abs_top_builddir:-.}/test-groff"
 
-# Regression-test Savnnah #63398.
+# Regression-test Savannah #63398.
 
 input='.de M
 .  nr N \\\\$1-1
