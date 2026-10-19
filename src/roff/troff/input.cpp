@@ -5864,15 +5864,18 @@ static void rename_macro() // .rn
     skip_line();
     return;
   }
-  if (!s1.is_null()) {
-    symbol s2 = read_identifier();
-    if (s2.is_null())
-      warning(WARN_MISSING, "renaming request expects identifier of"
-	      " existing request, macro, string, or diversion as"
-	      " second argument");
-    else
-      request_dictionary.rename(s1, s2);
+  if (!has_arg()) {
+    warning(WARN_MISSING, "renaming request expects two arguments");
+    skip_line();
+    return;
   }
+  symbol s2 = read_identifier();
+  if (s2.is_null()) {
+    // The identifier was garbage, like `a\&b`.
+    skip_line();
+    return;
+  }
+  request_dictionary.rename(s1, s2);
   skip_line();
 }
 

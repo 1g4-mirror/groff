@@ -1,5 +1,19 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Revise `rn` input validation.
+
+	* src/roff/troff/input.cpp (rename_macro): Use `has_arg()` to
+	check for arguments after the first, more reliably issuing
+	warning in category "missing".  Since per the previous change to
+	this function, we have returned early if the `s1` symbol
+	`is_null()`, we no longer need a `!s1.is_null()` condition
+	here--that is tautologically true.  Drop the conditional,
+	putting collection of second argument on main execution trace.
+	Check the second identifier for bogosity just as we checked the
+	first.
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #68797.
 
 	* src/roff/troff/input.cpp (rename_macro): Replace assert(3)ion
