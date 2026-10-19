@@ -1,5 +1,13 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Regression-test Savannah #68797.
+
+	* src/roff/groff/tests/\
+	error-rn-request-given-bogus-arguments.sh: New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: `pcolor` req advances past invalid args.
 
 	* src/roff/troff/input.cpp (print_color_request): If a request

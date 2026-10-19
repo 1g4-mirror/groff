@@ -116,6 +116,7 @@ groff_TESTS = \
   src/roff/groff/tests/error-pi-request-given-empty-argument.sh \
   src/roff/groff/tests/error-pso-request-given-empty-argument.sh \
   src/roff/groff/tests/error-rm-request-given-bogus-argument.sh \
+  src/roff/groff/tests/error-rn-request-given-bogus-arguments.sh \
   src/roff/groff/tests/error-rr-request-given-bogus-argument.sh \
   src/roff/groff/tests/error-so-request-given-empty-argument.sh \
   src/roff/groff/tests/error-sy-request-given-empty-argument.sh \
