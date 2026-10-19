@@ -1,5 +1,13 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[groff]: Test `pcolor` error path.
+
+	* src/roff/groff/tests/\
+	error-pcolor-request-given-bogus-argument.sh: New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run tests.
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Fix Savannah #68794.
 
 	* src/roff/troff/env.cpp (environment_copy): Instead of throwing
