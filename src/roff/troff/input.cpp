@@ -2743,6 +2743,9 @@ void token::next()
 	if (want_att_compat)
 	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
 		  " AT&T troff", char(cc));
+	// XXX: We read the escape sequence parameter as a single
+	// argument.  That has gross consequences for `\O5`, but see
+	// Savannah #68651 for a long-term plan to obviate them.
 	nd = do_suppress(read_escape_sequence_parameter());
 	if (0 /* nullptr */ == nd)
 	  break;
