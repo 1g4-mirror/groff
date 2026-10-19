@@ -1694,8 +1694,17 @@ static void define_color() // .defcolor
     return;
   }
   symbol color_name = read_long_identifier();
-  // Testing has_arg() should have ensured this.
-  assert(color_name != 0 /* nullptr */);
+  if (color_name.is_null()) {
+    // The identifier was garbage, like `a\&b`.
+    skip_line();
+    return;
+  }
+  if (!has_arg()) {
+    warning(WARN_MISSING, "color definition request"
+	    " expects color space and channel value arguments");
+    skip_line();
+    return;
+  }
   if (color_name == default_symbol) {
     warning(WARN_COLOR, "default color cannot be redefined");
     skip_line();
@@ -1703,8 +1712,13 @@ static void define_color() // .defcolor
   }
   symbol color_space = read_long_identifier();
   if (color_space.is_null()) {
-    warning(WARN_MISSING, "missing color space in color definition"
-	    " request");
+    // The identifier was garbage, like `a\&b`.
+    skip_line();
+    return;
+  }
+  if (!has_arg()) {
+    warning(WARN_MISSING, "color definition request"
+	    " expects color channel value argument(s)");
     skip_line();
     return;
   }

@@ -1,5 +1,17 @@
 2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68796.
+
+	* src/roff/troff/input.cpp (define_color): Improve `defcolor`
+	request argument validation.  Replace assert(3)ion that could be
+	tripped by invalid characters in color identifier with skip of
+	input line.  Throw warnings in category "missing" if second or
+	third arguments are absent.
+
+	Fixes <https://savannah.gnu.org/bugs/?68796>.
+
+2026-10-18  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68796.
 
 	* src/roff/groff/tests/\
