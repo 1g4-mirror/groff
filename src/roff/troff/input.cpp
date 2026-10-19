@@ -1521,16 +1521,19 @@ static unsigned int read_color_channel_value(const char *scheme,
 {
   units val;
   if (!read_measurement(&val, (unsigned char)('f'))) { // TODO: grochar
-    warning(WARN_COLOR, "%1 in %2 definition set to 0", col, scheme);
+    warning(WARN_COLOR, "invalid %1 channel value in %2 color space;"
+	    " using 0", col, scheme);
     tok.next();
     return 0U;
   }
   if (val < 0) {
-    warning(WARN_RANGE, "%1 cannot be negative: set to 0", col);
+    warning(WARN_RANGE, "%1 channel value cannot be negative;"
+	    " using 0", col);
     return 0U;
   }
   if (val > (color::MAX_COLOR_VAL + 1)) {
-    warning(WARN_RANGE, "%1 cannot be greater than 1", col);
+    warning(WARN_RANGE, "%1 channel value cannot be greater than 1;"
+	    " using maximum", col);
     // we change 0x10000 to 0xffff
     return color::MAX_COLOR_VAL;
   }
@@ -1542,7 +1545,7 @@ static color *read_rgb(unsigned char end = 0U)
   symbol component
     = read_input_until_terminator(false /* want_diagnostic */, end);
   if (component.is_null()) {
-    warning(WARN_COLOR, "missing rgb color values");
+    warning(WARN_COLOR, "missing rgb color channel values");
     return 0 /* nullptr */;
   }
   const char *s = component.contents();
@@ -1560,12 +1563,9 @@ static color *read_rgb(unsigned char end = 0U)
       input_stack::push(make_temp_iterator(" "));
     input_stack::push(make_temp_iterator(s));
     tok.next();
-    unsigned int r = read_color_channel_value("rgb color",
-					      "red component");
-    unsigned int g = read_color_channel_value("rgb color",
-					      "green component");
-    unsigned int b = read_color_channel_value("rgb color",
-					      "blue component");
+    unsigned int r = read_color_channel_value("rgb color", "red");
+    unsigned int g = read_color_channel_value("rgb color", "green");
+    unsigned int b = read_color_channel_value("rgb color", "blue");
     col->set_rgb(r, g, b);
   }
   return col;
@@ -1576,7 +1576,7 @@ static color *read_cmy(unsigned char end = 0U)
   symbol component
     = read_input_until_terminator(false /* want_diagnostic */, end);
   if (component.is_null()) {
-    warning(WARN_COLOR, "missing cmy color values");
+    warning(WARN_COLOR, "missing cmy color channel values");
     return 0 /* nullptr */;
   }
   const char *s = component.contents();
@@ -1594,12 +1594,9 @@ static color *read_cmy(unsigned char end = 0U)
       input_stack::push(make_temp_iterator(" "));
     input_stack::push(make_temp_iterator(s));
     tok.next();
-    unsigned int c = read_color_channel_value("cmy color",
-					      "cyan component");
-    unsigned int m = read_color_channel_value("cmy color",
-					      "magenta component");
-    unsigned int y = read_color_channel_value("cmy color",
-					      "yellow component");
+    unsigned int c = read_color_channel_value("cmy color", "cyan");
+    unsigned int m = read_color_channel_value("cmy color", "magenta");
+    unsigned int y = read_color_channel_value("cmy color", "yellow");
     col->set_cmy(c, m, y);
   }
   return col;
@@ -1628,14 +1625,10 @@ static color *read_cmyk(unsigned char end = 0U)
       input_stack::push(make_temp_iterator(" "));
     input_stack::push(make_temp_iterator(s));
     tok.next();
-    unsigned int c = read_color_channel_value("cmyk color",
-					      "cyan component");
-    unsigned int m = read_color_channel_value("cmyk color",
-					      "magenta component");
-    unsigned int y = read_color_channel_value("cmyk color",
-					      "yellow component");
-    unsigned int k = read_color_channel_value("cmyk color",
-					      "black component");
+    unsigned int c = read_color_channel_value("cmyk color", "cyan");
+    unsigned int m = read_color_channel_value("cmyk color", "magenta");
+    unsigned int y = read_color_channel_value("cmyk color", "yellow");
+    unsigned int k = read_color_channel_value("cmyk color", "black");
     col->set_cmyk(c, m, y, k);
   }
   return col;
@@ -1664,7 +1657,8 @@ static color *read_gray(unsigned char end = 0U)
       input_stack::push(make_temp_iterator("\n"));
     input_stack::push(make_temp_iterator(s));
     tok.next();
-    unsigned int g = read_color_channel_value("gray", "gray value");
+    // The diagnostic this produces is a bit redundant.
+    unsigned int g = read_color_channel_value("gray", "gray");
     col->set_gray(g);
   }
   return col;
