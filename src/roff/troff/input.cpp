@@ -7712,11 +7712,12 @@ static void pipe_source_request() // .pso
     return;
   }
   char *pcmd = read_rest_of_line_as_argument();
-  // `has_arg()` should have ensured that this pointer is non-null.
-  assert(pcmd != 0 /* nullptr */);
-  if (0 /* nullptr */ == pcmd)
+  if (0 /* nullptr */ == pcmd) {
     error("cannot apply piped command source request to empty"
 	  " argument");
+    tok.next();
+    return;
+  }
   errno = 0;
   FILE *fp = popen(pcmd, POPEN_RT);
   if (fp != 0 /* nullptr */)
@@ -8617,9 +8618,9 @@ static void close_request() // .close
     return;
   }
   symbol stream = read_identifier();
-  // Testing has_arg() should have ensured this.
-  assert(stream != 0 /* nullptr */);
-  if (!stream.is_null())
+  if (stream.is_null())
+    error("cannot apply close request to empty argument");
+  else
     close_stream(stream);
   skip_line();
 }
@@ -9650,8 +9651,6 @@ static void pipe_output() // .pi
     return;
   }
   char *pc = read_rest_of_line_as_argument();
-  // `has_arg()` should have ensured that this pointer is non-null.
-  assert(pc != 0 /* nullptr */);
   if (0 /* nullptr */ == pc)
     error("cannot apply pipe request to empty command");
   // Are we adding to an existing pipeline?
@@ -9692,8 +9691,6 @@ static void system_request() // .sy
     return;
   }
   char *command = read_rest_of_line_as_argument();
-  // `has_arg()` should have ensured that this pointer is non-null.
-  assert(command != 0 /* nullptr */);
   if (0 /* nullptr */ == command)
     error("cannot apply system request to empty command");
   else

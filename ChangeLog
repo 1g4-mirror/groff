@@ -1,5 +1,20 @@
 2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Fix Savannah #68786.
+
+	* src/roff/troff/input.cpp (pipe_source_request, pipe_output)
+	(system_request): Withdraw assert(3)ion in favor of
+	real input validation, already present.
+	(pipe_source_request): Pump the token stream if the argument
+	interpolated nothing or was otherwise invalid, to get past the
+	pending newline.
+	(close_request): Replace assert(3)ion with real input
+	validation.
+
+	Fixes <https://savannah.gnu.org/bugs/?68786>.
+
+2026-10-17  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68786.
 
 	* src/roff/groff/tests/
