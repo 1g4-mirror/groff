@@ -2207,6 +2207,27 @@ void token::diagnose_non_character()
 // advance the input stream cursor (such as calling `read_identifier()`)
 // beforehand.  If the current token is not a space, an argument does
 // not "lie ahead", and the request handler's logic may fail.
+//
+// Note 2: The caller _still_ must check for a null pointer after
+// calling `read_rest_of_line_as_argument()`, because the rest of the
+// line may consist of an empty string interpolation.  Consider:
+//   .ds fn \" empty
+//   .so \*[fn]
+// Why is this not true of other lexical consumption functions, like
+// `read_identifier()` or `read_long_identifier()`?  Because they bound
+// their reads by the input line's spaces, not (just) its terminating
+// newline.  Consider:
+//   .ds colorname \" empty
+//   .defcolor \*[colorname] gray 0.5f
+// After string interpolation, this reads like:
+//   .defcolor   gray 0.5f
+// ...so the color name is "gray" and the request handler rejects "0.5f"
+// as an invalid color space.  Another reason is that `read_identifer()`
+// and similar functions return a class object, like `symbol`, which has
+// state beyond string contents, and member functions like `is_null()`
+// and `is_empty()` which can be used to determine whether a valid
+// object was returned.  With C strings, all we have are null pointer
+// checks.
 bool has_arg(bool peeking)
 {
   if (!tok.is_space())
