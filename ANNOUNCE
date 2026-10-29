@@ -43,7 +43,8 @@ consuming minimal system resources.
 [[ maintainer: Omit this "Changes" section for a first release
    candidate.
 
-Changes
+
+Changes [[ since groff 1.yy.Y.rcZ ]]
 =======
 
 Since the groff 1.yy.Y.rcZ-1 release candidate was made available on DD
