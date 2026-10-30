@@ -12854,6 +12854,10 @@ Break the page and change
 (increase or decrease)
 the next page number per the numeric expression
 @var{page-number}.
+Omitting
+@var{page-number}
+implies
+@samp{+1}.
 If
 @var{page-number}
 is invalid,
