@@ -7370,10 +7370,10 @@ and
 @c formatter instructions that construct device-independent output
 @c commands (`\!`, `\X`, `.output`, `.device`).
 
-@cindex page break
-@cindex break, page
-@cindex page ejection
-@cindex ejection, page
+@cindex page break, impact of vertical spacing upon
+@cindex break, page, impact of vertical spacing upon
+@cindex page ejection, impact of vertical spacing upon
+@cindex ejection, page, impact of vertical spacing upon
 Vertical spacing has an impact on page-breaking decisions.
 Generally,
 when a break occurs,
