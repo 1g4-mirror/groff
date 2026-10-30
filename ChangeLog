@@ -95,8 +95,8 @@
 
 	Fixes <https://savannah.gnu.org/bugs/?68832>.  Problems
 	introduced by me in commits d7824cb7ba, 12032e1211, a38054a1d1,
-	201833b36d, 5d570e2210, ffcf52f605, and b459b2c6b0, (all
-	2025-11-23) and commit 4b09e1688c, 2025-12-29.
+	201833b36d, 5d570e2210, ffcf52f605, and b459b2c6b0 (all
+	2025-11-23), and commit 4b09e1688c, 2025-12-29.
 
 2026-10-25  G. Branden Robinson <g.branden.robinson@gmail.com>
 
