@@ -12837,8 +12837,10 @@ We most often see titles used in page header and footer traps.
 @cindex break, page
 @cindex page ejection
 @cindex ejection, page
-Discretionary page breaks
-can prevent the unwanted separation of content.
+The formatter permits manipulation of page breaks
+to prevent the unwanted separation of content,
+or to force separation where desired,
+as at a major division of a document.
 A new page number takes effect during page ejection;
 see @ref{The Implicit Page Trap}.
 

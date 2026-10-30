@@ -2221,8 +2221,10 @@ except that it does not cancel a pending end-of-sentence state.
 .\" ====================================================================
 .
 .\" BEGIN Keep (roughly) parallel with groff.texi node "Page Control".
-Discretionary page breaks
-can prevent the unwanted separation of content.
+The formatter permits manipulation of page breaks
+to prevent the unwanted separation of content,
+or to force separation where desired,
+as at a major division of a document.
 .
 A new page number takes effect during page ejection;
 see subsection \[lq]The implicit page trap\[rq] below.
