@@ -12850,12 +12850,22 @@ see @ref{The Implicit Page Trap}.
 @DefregListEndx {%}
 @cindex new page request (@code{bp})
 @cindex page, new request (@code{bp})
-Break the page and change (increase or decrease) the next page number
-per the numeric expression @var{page-number}.  If @var{page-number} is
-invalid, GNU @code{troff} emits a warning in category @samp{number} and
-ignores the argument.  This request causes a break.  A page break
-advances the vertical drawing position to the bottom of the page,
-springing traps.  @xref{Page Location Traps}.
+Break the page and change
+(increase or decrease)
+the next page number per the numeric expression
+@var{page-number}.
+If
+@var{page-number}
+is invalid,
+GNU @command{troff} @c GNU
+emits a warning in category
+@samp{number}
+and ignores the argument.
+This request causes a break.
+A page break advances the vertical drawing position
+to the bottom of the page,
+springing traps.
+@xref{Page Location Traps}.
 @cindex @code{bp} request, and top-level diversion
 @cindex top-level diversion, and @code{bp}
 @cindex diversion, top-level, and @code{bp}
