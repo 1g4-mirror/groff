@@ -1,3 +1,10 @@
+2026-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* tmac/an-ext.tmac (SY): Configure hyphenation mode via `mY`
+	macro call even if invalidly given no arguments.  This prevents
+	later emission of a potentially confusing warning in category
+	"reg".
+
 2026-10-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/utils/pdfmom/pdfmom.pl (autopsy): If the wait status of
