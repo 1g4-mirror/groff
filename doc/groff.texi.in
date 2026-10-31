@@ -19060,7 +19060,7 @@ the drawing position.  Use @code{\z} to overstrike glyphs aligned to
 their left edges, in contrast to @code{\o}'s centering.
 @endDefesc
 
-@Defesc {\\Z, @code{'}, input}}
+@Defesc {\\Z, @code{'}, input, @code{'}}
 @cindex zero-width printing (@code{\z}, @code{\Z})
 @cindex printing, zero-width (@code{\z}, @code{\Z})
 Save the drawing position,
