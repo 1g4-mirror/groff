@@ -222,6 +222,11 @@ AC_CONFIG_FILES([test-groff], [chmod +x test-groff])
 
 # Work around major headaches caused by the conjunction of Automake,
 # Bison, and out-of-tree builds.
+#
+# TODO: This might be removable once we're using Automake 1.20.
+#   "lex and yacc rules now create output directories before generating
+#   sources, fixing out-of-tree builds with subdir-objects and
+#   --disable-dependency-tracking.  (bug#27188, Debian bug#807050)"
 AC_CONFIG_COMMANDS([mkdir-bison-paths], [
   AS_MKDIR_P(["$ac_pwd/src/preproc/pic"])
   AS_MKDIR_P(["$ac_pwd/src/preproc/eqn"])
