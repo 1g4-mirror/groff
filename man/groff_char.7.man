@@ -731,7 +731,7 @@ is a composite glyph.
 Glyphs like a lowercase \[lq]e\[rq] with an acute accent,
 as in the word \[lq]caf\[e aa]\[rq],
 can be expressed as
-.BR "\[rs][e aa]" .
+.RB \[lq] \[rs][e\~aa] \[rq].
 .
 .
 .P
