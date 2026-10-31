@@ -7191,7 +7191,7 @@ if one would define a macro only to interpolate a small amount of text,
 without invoking requests or calling any other macros,
 one defines a string instead.
 .
-The language prefedines only one string,
+The formatter internally defines only one string,
 .BR .T ,
 which contains the name of the selected output device.
 .
