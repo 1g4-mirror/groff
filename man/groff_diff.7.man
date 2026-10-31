@@ -5203,7 +5203,10 @@ This is a string-valued register.
 .
 .TP
 .B \[rs]n[.fn]
-Interpolate resolved name of the font selected in the environment.
+Interpolate resolved
+(and translated,
+as applicable)
+name of the font selected in the environment.
 .
 This is a string-valued register.
 .

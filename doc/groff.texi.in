@@ -13331,9 +13331,14 @@ eggs, bacon, \fIspam,\fP and sausage.
     @result{} eggs, bacon, @slanted{spam,} and sausage.
 @endExample
 
-The read-only string-valued register @code{.fn} contains the resolved
-font name of the selected font.  Copy its value to a string to save it
-for later use.
+The read-only,
+string-valued register
+@code{.fn}
+reports the resolved
+(and translated,
+as applicable)
+name of the selected font.
+Copy its value to a string to save it for later use.
 
 @Example
 .ds saved-font \n[.fn]
