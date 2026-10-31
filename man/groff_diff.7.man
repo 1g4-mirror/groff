@@ -6797,6 +6797,23 @@ they remove objects named by any subsequent valid arguments.
 .
 .
 .P
+.\" XXX: The following is likely true of other requests as well.
+When
+GNU
+.IR troff 's \" GNU
+.B ne
+request is given an invalid argument,
+it emits an error diagnostic and ignores the
+.I request;
+AT&T
+.IR troff s \" AT&T
+ignore the
+.I argument,
+interpreting the invalid request as
+.RB \[lq] "ne 1v" \[rq].
+.
+.
+.P
 GNU
 .I troff \" GNU
 does not emit output if it has nothing to format.

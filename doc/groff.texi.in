@@ -12920,13 +12920,22 @@ not when it is output.
 @cindex page break, conditional (@code{ne})
 @cindex need vertical space request (@code{ne})
 Force a page break if insufficient vertical space is available;
-it asserts ``needed'' space.
-@code{ne} tests the distance to the next page
-location trap; see @ref{Page Location Traps}, and breaks the page if
-that amount is less than @var{space}.  The default scaling unit is
-@samp{v}.  If @var{space} is invalid, GNU @code{troff} emits a warning
-in category @samp{number} and ignores the argument.  If @var{space} is
-not specified, @samp{1v} is assumed.
+the request asserts that the document ``needs'' vertical space
+for forthcoming material on the page,
+like a table,
+figure,
+or the start of a paragraph.
+@code{ne}
+tests the distance to the next page location trap;
+see @ref{Page Location Traps},
+and breaks the page if that amount is less than
+@var{space}.
+The default scaling unit is
+@samp{v}.
+Omitting
+@var{space}
+implies
+@samp{1v}.
 
 We can require space for at least the first two output lines of a
 paragraph, preventing its first line from being isolated at the page
@@ -24301,6 +24310,22 @@ and Plan@tie{}9 from User Space
 @code{troff}s @c GNU, DWB, Plan 9
 do not;
 they remove objects named by any subsequent valid arguments.
+
+@c XXX: The following is likely true of other requests as well.
+@cindex @code{ne} request, incompatibilities with @acronym{AT&T} @code{troff}
+When
+GNU
+@command{troff}'s @c GNU
+@code{ne}
+request is given an invalid argument,
+it emits an error diagnostic and ignores the
+@emph{request};
+@acronym{AT&T}
+@code{troff}s @c AT&T
+ignore the
+@emph{argument},
+interpreting the invalid request as
+@samp{ne 1v}.
 
 GNU
 @command{troff} @c GNU
