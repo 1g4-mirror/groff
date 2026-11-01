@@ -1,5 +1,11 @@
 2026-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/node.cpp (translate_font_request): Distinguish
+	and improve error diagnostics thrown when user attempts to
+	employ a font mounting position as either request argument.
+
+2026-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* tmac/an-ext.tmac (SY): Configure hyphenation mode via `mY`
 	macro call even if invalidly given no arguments.  This prevents
 	later emission of a potentially confusing warning in category

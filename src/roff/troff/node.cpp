@@ -6831,7 +6831,9 @@ static void translate_font_request() // .ftr
     return;
   }
   if (is_nonnegative_integer(from.contents())) {
-    error("cannot translate a font mounting position");
+    error("font translation request"
+	  " cannot map a mounting position (%1);"
+	  " use font mounting request", from.contents());
     skip_line();
     return;
   }
@@ -6842,7 +6844,10 @@ static void translate_font_request() // .ftr
     return;
   }
   if (is_nonnegative_integer(to.contents())) {
-    error("cannot translate to a font mounting position");
+    error("font translation request"
+	  " cannot map a font name (\"%1\")"
+	  " to a mounting position (%2);"
+	  " use font mounting request", from.contents(), to.contents());
     skip_line();
     return;
   }
