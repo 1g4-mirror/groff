@@ -27,6 +27,9 @@ troff
    saved by the most recent `sv` request, if it has not yet been output
    with the `os` request.
 
+*  The `pev` request now reports the environment's selected control and
+   no-break control characters.
+
 *  The formatter now emits a warning in category "style" if -crementing
    interpolation (such as `\n+[myreg]` or `\n-[count]`) is (uselessly)
    applied to a non-auto-crementing register.

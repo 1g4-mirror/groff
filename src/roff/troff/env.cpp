@@ -3619,6 +3619,21 @@ const char *environment::get_requested_point_size_string()
   return sptoa(curenv->get_requested_point_size());
 }
 
+// TODO: Promote this static buffer and function to libgroff?
+//
+// C++11: constexpr size_t char_as_unicode_buf_size
+//   = sizeof("U+10FFFF" + 1);
+const size_t char_as_unicode_buf_size = 9; // "U+10FFFF" + 1 /* '\0' */
+static char char_as_unicode_buf[char_as_unicode_buf_size];
+
+static inline const char *char_as_unicode_code_point(unsigned char c)
+{
+  (void) memset(char_as_unicode_buf, 0, char_as_unicode_buf_size);
+  (void) snprintf(char_as_unicode_buf, char_as_unicode_buf_size,
+		  "U+%04X", c);
+  return char_as_unicode_buf;
+}
+
 void environment::dump()
 {
   // At the time this request is invoked, the following values are zero
@@ -3776,6 +3791,17 @@ void environment::dump()
   errprint("  previous fill color: %1\n",
 	   get_prev_fill_color_string());
   errprint("  fill color: %1\n", get_fill_color_string());
+  errprint("  control character: ", control_character);
+  if (csprint(control_character))
+    errprint("%1\n", control_character);
+  else
+    errprint("%1\n", char_as_unicode_code_point(control_character));
+  errprint("  no-break control character: ");
+  if (csprint(no_break_control_character))
+    errprint("%1\n", no_break_control_character);
+  else
+    errprint("%1\n",
+      char_as_unicode_code_point(no_break_control_character));
   fflush(stderr);
 }
 

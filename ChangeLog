@@ -1,5 +1,16 @@
 2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (char_as_unicode_buf): New `static`
+	`inline` function formats an `unsigned char` (a "groff
+	character") as a Unicode code point in idiomatic "U+FFFF"
+	notation.
+	(environment::dump): Report values of control and no-break
+	control characters.
+
+	Fixes <https://savannah.gnu.org/bugs/?68845>.
+
+2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[troff]: Implement new `.sv` read-only register.
 
 	* src/roff/troff/div.cpp (class saved_vertical_space_reg): New
