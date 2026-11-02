@@ -506,7 +506,7 @@ Documentation License''.
 @title groff
 @subtitle The GNU implementation of @code{troff}
 @subtitle version @VERSION@
-@subtitle October 2026
+@subtitle November 2026
 @author Trent@tie{}A.@: Fisher
 @author Werner Lemberg
 @author G.@tie{}Branden Robinson
@@ -12977,6 +12977,32 @@ implement keeps and displays; see @ref{Diversions}.  They may also offer
 parameters for widow and orphan management.
 @endDefreq
 
+@cindex saved vertical space
+@cindex vertical space, saved
+@cindex space, vertical, saved
+Occasionally,
+when vertically spacing with
+@code{sp},
+you may wish to exactly preserve the amount of space you requested,
+and not let the formatter discard any excess
+as it does when breaking a page.
+The
+@code{sv}
+request
+works like
+@code{sp}
+if it has room to vertically space,
+but instead
+@dfn{saves vertical space}
+if the requested amount would move the vertical drawing position
+beyond the next
+page location trap.@footnote{@xref{Page Location Traps}.}
+The
+@code{os}
+request outputs the saved vertical space as if with the
+@code{sp}
+request.
+
 @DefreqList {sv, [@Var{space}]}
 @DefreqListEndx {os, }
 @cindex @code{ne} request, comparison with @code{sv}
@@ -12984,7 +13010,7 @@ parameters for widow and orphan management.
 requires vertical space as
 @code{ne}
 does,
-but also
+but if that amount is not available,
 @slanted{saves}
 it for later output by the
 @code{os}
@@ -12992,15 +13018,31 @@ request.
 If
 @var{space}
 is available before the next page location trap,
-it is output immediately.
+the formatter outputs it immediately.
 Both requests ignore a partially collected line,
 taking effect at the next break.
 @cindex @code{sv} request, and no-space mode
 @cindex @code{os} request, and no-space mode
-@code{sv} and @code{os} ignore no-space mode (recall @ref{Manipulating
-Spacing}).  While the @code{sv} request allows negative values for
-@var{space}, @code{os} ignores them.  The default scaling unit is
-@samp{v}.  If @var{space} is not specified, @samp{1v} is assumed.
+@code{sv}
+and
+@code{os}
+ignore no-space mode
+(recall @ref{Manipulating Spacing}).
+While the
+@code{sv}
+request allows negative values for
+@var{space},
+@code{os}
+ignores them.
+The default scaling unit is
+@samp{v}.
+If
+@var{space}
+is not specified,
+the formatter assumes @samp{1v}.
+There is only one,
+global,
+saved space amount.
 @endDefreq
 
 @Defreg {nl}
