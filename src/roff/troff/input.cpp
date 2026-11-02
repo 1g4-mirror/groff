@@ -2324,10 +2324,8 @@ void token::make_newline()
 
 void token::next()
 {
-  if (nd != 0 /* nullptr */) {
-    delete nd;
-    nd = 0 /* nullptr */;
-  }
+  delete nd;
+  nd = 0 /* nullptr */;
   units x;
   for (;;) {
     node *n = 0 /* nullptr */;

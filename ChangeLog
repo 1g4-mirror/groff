@@ -1,3 +1,8 @@
+2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::next): Refactor to simplify.
+	Stop wrapping `delete` operation with null pointer check.
+
 2026-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/div.cpp (need_vertical_space_request): Revise
