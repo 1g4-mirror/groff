@@ -1031,11 +1031,11 @@ The following macros aren't new but haven't been documented previously:
 
 .in 2m
 .B Alpha ,
-\&\.\.\.,
+\&\|.\|.\|.,
 .B Omega
 (the same as
 .B ALPHA ,
-\&\.\.\.,
+\&\|.\|.\|.,
 .B OMEGA )
 .br
 \fBldots\fP (three dots on the baseline)
@@ -1051,49 +1051,49 @@ Again, this isn't new but hasn't been documented previously:
 .B col
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 .B lcol
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 .B rcol
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 .B ccol
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 .B pile
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 .B lpile
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 .B rpile
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 .B cpile
 .I n
 .B {
-\&\.\.\.\&
+\&\|.\|.\|.\&
 .B }
 .br
 The above all set the vertical spacing between rows to\~\c
