@@ -2322,6 +2322,13 @@ void token::make_newline()
   type = TOKEN_NEWLINE;
 }
 
+static inline void maybe_warn_about_portability(int cc)
+{
+  if (want_att_compat)
+    warning(WARN_SYNTAX, "an escaped '%1'"
+	    " is not portable to AT&T troff", char(cc));
+}
+
 void token::next()
 {
   delete nd;
@@ -2537,41 +2544,28 @@ void token::next()
       case '^':
 	goto ESCAPE_CIRCUMFLEX;
       case '/':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
 	type = TOKEN_ITALIC_CORRECTION;
 	return;
       case ',':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	type = TOKEN_NODE;
 	nd = new left_italic_corrected_node;
 	return;
       case '&':
 	goto ESCAPE_AMPERSAND;
       case ')':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	goto ESCAPE_RIGHT_PARENTHESIS;
       case '!':
 	goto ESCAPE_BANG;
       case '?':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	goto ESCAPE_QUESTION;
       case '~':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	goto ESCAPE_TILDE;
       case ':':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	goto ESCAPE_COLON;
       case '"':
 	while ((cc = input_stack::get(0 /* nullptr */)) != '\n'
@@ -2583,9 +2577,7 @@ void token::next()
 	  type = TOKEN_EOF;
 	return;
       case '#':			// Like \" but newline is ignored.
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	while ((cc = input_stack::get(0 /* nullptr */)) != '\n')
 	  if (EOF == cc) {
 	    type = TOKEN_EOF;
@@ -2617,9 +2609,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'A':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	{
 	  const char *res = do_name_test();
 	  if (0 /* nullptr */ == res)
@@ -2635,9 +2625,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'B':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	{
 	  const char *res = do_expr_test();
 	  if (0 /* nullptr */ == res)
@@ -2656,7 +2644,7 @@ void token::next()
 	return;
       case 'd':
 	type = TOKEN_NODE;
-	nd = new vmotion_node(curenv->get_size() / 2,
+	nd = new vmotion_node((curenv->get_size() / 2),
 			      curenv->get_fill_color());
 	return;
       case 'D':
@@ -2668,9 +2656,7 @@ void token::next()
       case 'e':
 	goto ESCAPE_e;
       case 'E':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	goto handle_escape_char;
       case 'f':
 	if (curenv->get_was_line_interrupted()) {
@@ -2684,9 +2670,7 @@ void token::next()
 	  have_formattable_input = true;
 	break;
       case 'F':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	curenv->set_family(
 	    read_escape_sequence_parameter(ARGUMENTS_OPTIONAL));
 	have_formattable_input = true;
@@ -2744,18 +2728,14 @@ void token::next()
 	  return;
 	}
       case 'm':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	do_stroke_color(
 	    read_escape_sequence_parameter(ARGUMENTS_OPTIONAL));
 	if (!want_att_compat)
 	  have_formattable_input = true;
 	break;
       case 'M':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	do_fill_color(
 	    read_escape_sequence_parameter(ARGUMENTS_OPTIONAL));
 	if (!want_att_compat)
@@ -2787,9 +2767,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'O':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	// XXX: We read the escape sequence parameter as a single
 	// argument.  That has gross consequences for `\O5`, but see
 	// Savannah #68651 for a long-term plan to obviate them.
@@ -2806,9 +2784,7 @@ void token::next()
 	nd = new vmotion_node(-curenv->get_size(), curenv->get_fill_color());
 	return;
       case 'R':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	do_register();
 	if (!want_att_compat)
 	  have_formattable_input = true;
@@ -2848,9 +2824,7 @@ void token::next()
 	nd = new vmotion_node(x, curenv->get_fill_color());
 	return;
       case 'V':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	{
 	  symbol s = read_escape_sequence_parameter();
 	  if (!(s.is_null() || s.is_empty()))
@@ -2873,9 +2847,7 @@ void token::next()
 	type = TOKEN_NODE;
 	return;
       case 'Y':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	{
 	  symbol s = read_escape_sequence_parameter();
 	  if (s.is_null() || s.is_empty())
@@ -2918,9 +2890,7 @@ void token::next()
 	}
 	return;
       case 'Z':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	nd = do_zero_width_output();
 	if (0 /* nullptr */ == nd)
 	  break;
@@ -2933,9 +2903,7 @@ void token::next()
       case '\n':
 	break;
       case '[':
-	if (want_att_compat)
-	  warning(WARN_SYNTAX, "an escaped '%1' is not portable to"
-		  " AT&T troff", char(cc));
+	maybe_warn_about_portability(cc);
 	if (!want_att_compat) {
 	  symbol s
 	    = read_long_escape_sequence_parameters(ARGUMENTS_MANDATORY);
