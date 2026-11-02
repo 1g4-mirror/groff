@@ -8119,6 +8119,14 @@ and
 .esc f .
 .
 .TP
+.REG .sv
+Amount of vertical space saved by the most recent
+.request sv
+request if it has not yet been output by the
+.request os
+request.
+.
+.TP
 .REG .t
 Distance to next vertical position trap;
 see

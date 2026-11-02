@@ -29,6 +29,7 @@ wail () {
 # Unit-test `sv` and `os` requests.
 
 input='.
+.ec @
 .nf
 1
 2
@@ -40,6 +41,7 @@ input='.
 8
 9
 .sv 1i/2u
+.tm T1=@n[.sv]
 13
 14
 15
@@ -89,6 +91,7 @@ input='.
 59
 60
 .sv 1i
+.tm T2=@n[.sv]
 A
 B
 C
@@ -96,6 +99,7 @@ D
 E
 F
 .os
+.tm T3=@n[.sv]
 G
 H
 I
@@ -117,6 +121,20 @@ echo "$output" \
 
 echo "checking that 'os' works" >&2
 echo "$output" | grep -q "72 73 G 74 H 75 I 76 DONE 77 78" || wail
+
+error=$(printf '%s\n' "$input" | "$groff" -z -T ascii 2>&1)
+echo "$error"
+
+echo "checking that 'sv' far from a trap" \
+    "does not populate .sv register" >&2
+echo "$error" | grep -qx 'T1=0'
+
+echo "checking that 'sv' close to a trap" \
+    "populates .sv register" >&2
+echo "$error" | grep -qx 'T2=240'
+
+echo "checking that 'os' zeroes the .sv register" >&2
+echo "$error" | grep -qx 'T3=0'
 
 test -z "$fail"
 

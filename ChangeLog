@@ -1,5 +1,26 @@
 2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[troff]: Implement new `.sv` read-only register.
+
+	* src/roff/troff/div.cpp (class saved_vertical_space_reg): New
+	file-local class handles dynamically computed `saved_space`
+	amount.  (The class `readonly_reg` is not appropriate because
+	its constructor requires a parameter of type `int`.
+	`saved_space` is of type `vunits`.)
+	(saved_vertical_space_reg::get_string): Retrieve the amount.
+	(init_div_requests): Wire up `.sv` register name to object of
+	this new class.
+
+	* doc/groff.texi.in (Page Control):
+	* man/groff.7.man.in (Read-only registers):
+	* man/groff_diff.7.man.in (New registers): Document it.
+
+	* src/roff/groff/tests/sv-and-os-requests-work.sh: Test it.
+
+	Fixes <https://savannah.gnu.org/bugs/?68865>.
+
+2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next): Throw warning in
 	category "style" if the input uses `\\` to try to format a
 	backslash, which is not reliable if the escape character is

@@ -23,6 +23,10 @@ troff
 *  The `shift` request no longer performs an operation if it is given an
    invalid argument.
 
+*  A new read-only register `.sv` reports the amount of vertical space
+   saved by the most recent `sv` request, if it has not yet been output
+   with the `os` request.
+
 *  The formatter now emits a warning in category "style" if -crementing
    interpolation (such as `\n+[myreg]` or `\n-[count]`) is (uselessly)
    applied to a non-auto-crementing register.

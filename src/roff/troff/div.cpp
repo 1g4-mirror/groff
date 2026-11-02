@@ -1297,6 +1297,16 @@ const char *no_space_mode_reg::get_string()
   return curdiv->is_in_no_space_mode ? "1" : "0";
 }
 
+class saved_vertical_space_reg : public reg {
+public:
+  const char *get_string();
+};
+
+const char *saved_vertical_space_reg::get_string()
+{
+  return i_to_a(saved_space.to_units());
+}
+
 void init_div_requests()
 {
   init_request("box", box);
@@ -1332,6 +1342,7 @@ void init_div_requests()
   register_dictionary.define(".p", new page_length_reg);
   register_dictionary.define(".pe", new page_ejecting_reg);
   register_dictionary.define(".pn", new next_page_number_reg);
+  register_dictionary.define(".sv", new saved_vertical_space_reg);
   register_dictionary.define(".t", new distance_to_next_trap_reg);
   register_dictionary.define(".trap", new next_trap_name_reg);
   register_dictionary.define(".trunc",

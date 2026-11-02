@@ -5494,6 +5494,15 @@ This is a string-valued register.
 .
 .
 .TP
+.B \[rs]n[.sv]
+Interpolate the amount of vertical space saved by the most recent
+.B sv
+request if it has not yet been output by the
+.B os
+request.
+.
+.
+.TP
 .B \[rs]n[.tabs]
 Interpolate the environment's tab stop settings
 (if any)

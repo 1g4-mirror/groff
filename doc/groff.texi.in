@@ -13006,7 +13006,8 @@ request outputs the saved vertical space as if with the
 request.
 
 @DefreqList {sv, [@Var{space}]}
-@DefreqListEndx {os, }
+@DefreqItem {os, }
+@DefregListEndx {.sv}
 @cindex @code{ne} request, comparison with @code{sv}
 @code{sv}
 requires vertical space as
@@ -13036,6 +13037,13 @@ If
 @var{space}
 is not specified,
 the formatter assumes @samp{1v}.
+
+The read-only register
+@code{.sv}
+contains the amount of vertical space demanded by the most recent
+@code{sv}
+request if it has not yet been output with
+@code{os}.
 There is only one,
 global,
 saved space amount.
