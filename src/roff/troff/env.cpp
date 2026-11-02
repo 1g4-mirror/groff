@@ -3648,9 +3648,10 @@ void environment::dump()
 	   prev_fontno, get_font_name(prev_fontno, this).contents());
   errprint("  resolved font selection: %1 ('%2')\n", fontno,
 	   get_font_name(fontno, this).contents());
-  errprint("  space size: %1/12 of font space width\n", space_size);
-  errprint("  sentence space size: %1/12 of font space width\n",
-	   sentence_space_size);
+  errprint("  minimum inter-word space size:"
+	   " %1/12 of font space width\n", space_size);
+  errprint("  supplemental inter-sentence space size:"
+	   " %1/12 of font space width\n", sentence_space_size);
   errprint("  previous line length: %1u\n",
 	   prev_line_length.to_units());
   errprint("  line length: %1u\n", line_length.to_units());
