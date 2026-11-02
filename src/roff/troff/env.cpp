@@ -3639,8 +3639,8 @@ void environment::dump()
   // At the time this request is invoked, the following values are zero
   // or meaningless.
   //
-  //   char_height, char_slant,
-  //   was_line_interrupted
+  //   was_line_interrupted (we report whether the _previous_ line was)
+  //
   //   current_tab, tab_width, tab_distance
   //   has_current_field, field_distance, pre_field_width, field_spaces,
   //     tab_field_spaces, tab_precedes_field
@@ -3663,6 +3663,14 @@ void environment::dump()
 	   prev_fontno, get_font_name(prev_fontno, this).contents());
   errprint("  resolved font selection: %1 ('%2')\n", fontno,
 	   get_font_name(fontno, this).contents());
+  errprint("  modified glyph height: %1s", char_height);
+  if (0 == char_height)
+    errprint(" (unmodified)");
+  errprint("\n");
+  errprint("  modified glyph slant: %1 degrees", char_slant);
+  if (0 == char_slant)
+    errprint(" (unmodified)");
+  errprint("\n");
   errprint("  minimum inter-word space size:"
 	   " %1/12 of font space width\n", space_size);
   errprint("  supplemental inter-sentence space size:"
