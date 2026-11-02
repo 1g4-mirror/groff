@@ -2945,7 +2945,12 @@ void token::next()
 	}
 	goto handle_ordinary_char;
       default:
-	if ((cc != escape_char) && (cc != '.'))
+	if (cc == escape_char)
+	  warning(WARN_STYLE, "use a special character escape sequence"
+		  " to format the escape character,"
+		  " or use requests"
+		  " to change or disable the escape character");
+	else
 	  warning(WARN_ESCAPE, "ignoring escape character before %1",
 		  input_char_description(cc));
 	goto handle_ordinary_char;
