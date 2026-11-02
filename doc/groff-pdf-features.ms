@@ -748,9 +748,9 @@ when naming a destination, you can retrieve the value with this code:-
 .ft CB
 \&.pdf:lookup \c
 .BI name
-\&.ie !'\[rs]*[pdf:lookup-result]'' \\
+\&.ie !'\[rs]*[pdf:lookup-result]'' \[rs]
 \&. ds desc-txt \&\[rs]*[pdf:lookup-value]
-\&.el \\
+\&.el \[rs]
 \&. ds desc-txt Unknown
 .ft
 .DE
