@@ -12932,6 +12932,8 @@ and breaks the page if that amount is less than
 @var{space}.
 The default scaling unit is
 @samp{v}.
+@var{space}
+must be nonnegative.
 Omitting
 @var{space}
 implies
@@ -13028,12 +13030,6 @@ and
 @code{os}
 ignore no-space mode
 (recall @ref{Manipulating Spacing}).
-While the
-@code{sv}
-request allows negative values for
-@var{space},
-@code{os}
-ignores them.
 The default scaling unit is
 @samp{v}.
 If
