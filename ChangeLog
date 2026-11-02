@@ -1,5 +1,10 @@
 2026-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/env.cpp (environment::dump): Aid the user to
+	distinguish the concepts of alignment and adjustment.
+
+2026-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/env.cpp (environment::dump): Align wording of
 	reported space sizes with the terminology in our documentation.
 

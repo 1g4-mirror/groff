@@ -3663,12 +3663,12 @@ void environment::dump()
   errprint("  filling: %1\n", is_filling ? "on" : "off");
   errprint("  alignment/adjustment: %1\n",
 	   adjust_mode == ADJUST_LEFT
-	     ? "left"
+	     ? "left/off"
 	     : adjust_mode == ADJUST_BOTH
-		 ? "both"
+		 ? "both/on"
 		 : adjust_mode == ADJUST_CENTER
-		     ? "center"
-		     : "right");
+		     ? "center/off"
+		     : "right/off");
   if (centered_line_count > 0)
     errprint("  lines remaining to center: %1\n", centered_line_count);
   if (right_aligned_line_count > 0)
