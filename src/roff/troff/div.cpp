@@ -922,6 +922,12 @@ static void need_vertical_space_request() // .ne
   vunits n;
   if (!has_arg() || !read_vunits(&n, 'v'))
     n = curenv->get_vertical_spacing();
+  if (n < V0) {
+    warning(WARN_RANGE, "ignoring request to require negative amount"
+			" of vertical space: %1u", n.to_units());
+    skip_line();
+    return;
+  }
   while (!tok.is_terminator())
     tok.next();
   curdiv->need(n);
@@ -949,6 +955,12 @@ static void save_vertical_space_request() // .sv
   vunits x;
   if (!has_arg() || !read_vunits(&x, 'v'))
     x = curenv->get_vertical_spacing();
+  if (x < V0) {
+    warning(WARN_RANGE, "ignoring request to save negative amount"
+			" of vertical space: %1u", x.to_units());
+    skip_line();
+    return;
+  }
   if (curdiv->distance_to_next_trap() > x)
     curdiv->space(x, true /* forcing */);
   else

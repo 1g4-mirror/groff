@@ -1,3 +1,11 @@
+2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/div.cpp (need_vertical_space_request)
+	(save_vertical_space_request): Throw warning in category "range"
+	and ignore request if a negative argument is specified.
+
+	Fixes <https://savannah.gnu.org/bugs/?68871>.
+
 2026-10-31  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/node.cpp (translate_font_request): Distinguish
