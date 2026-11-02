@@ -1009,7 +1009,7 @@ signs normally drawn from this range.
 .
 .
 .br
-.ne 5v
+.ne 6v
 .P
 .TS
 L L L Lx.
