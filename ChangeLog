@@ -1,3 +1,11 @@
+2026-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	[groff]: Regression-test Savannah #68868.
+
+	* src/roff/groff/tests/error-ne-request-given-bogus-argument.sh:
+	New file; do it.
+	* src/roff/groff/groff.am: Update `groff_TESTS` to run test.
+
 2026-08-28  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (read_hyphenation_exception_word):
