@@ -879,6 +879,13 @@ outputting of the line forced out by the break till after we have read
 the argument to the request.  If the break did cause a trap to be
 sprung, then we don't actually do the space. */
 
+// JJC made the foregoing observation in 1991 (or earlier).  The same
+// reasoning applies to `ne`, `sv`, and `os` because they can (but might
+// not) spring a trap.  If you screw this up, you can get a baffling
+// "spurious end trap token detected" error.  It's okay to `skip_line()`
+// when the request handler bails out without doing anything; otherwise
+// it must do the token dance.  --GBR
+
 static void space_request() // .sp
 {
   postpone_traps();
@@ -917,6 +924,8 @@ void blank_line()
 /* need_space might spring a trap and so we must be careful that the
 BEGIN_TRAP token is not skipped over. */
 
+// See the comments prior to the `sp` request handler above. --GBR
+
 static void need_vertical_space_request() // .ne
 {
   vunits n;
@@ -948,6 +957,8 @@ static void set_page_number_request() // .pn
   skip_line();
 }
 
+// See the comments prior to the `sp` request handler above. --GBR
+
 vunits saved_space;
 
 static void save_vertical_space_request() // .sv
@@ -965,8 +976,10 @@ static void save_vertical_space_request() // .sv
     curdiv->space(x, true /* forcing */);
   else
     saved_space = x;
-  skip_line();
+  skip_line(); // XXX: This might be erroneous. --GBR
 }
+
+// See the comments prior to the `sp` request handler above. --GBR
 
 static void output_saved_vertical_space_request() // .os
 {

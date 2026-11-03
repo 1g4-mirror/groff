@@ -3934,6 +3934,7 @@ void process_input_stack()
     case token::TOKEN_END_TRAP:
       {
 	if (trap_accepting_control_character_stack.empty())
+	  // See comment prior to `sp` request handler in div.cpp.
 	  error("spurious end trap token detected!");
 	else {
 	  can_accept_control_character
