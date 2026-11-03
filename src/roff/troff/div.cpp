@@ -930,9 +930,11 @@ BEGIN_TRAP token is not skipped over. */
 
 static void need_vertical_space_request() // .ne
 {
-  vunits n;
-  if (!has_arg() || !read_vunits(&n, 'v'))
-    n = curenv->get_vertical_spacing();
+  vunits n = curenv->get_vertical_spacing();
+  if (has_arg() && !read_vunits(&n, 'v')) {
+    skip_line();
+    return;
+  }
   if (n < V0) {
     warning(WARN_RANGE, "ignoring request to require negative amount"
 			" of vertical space: %1u", n.to_units());

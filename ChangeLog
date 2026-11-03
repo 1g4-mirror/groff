@@ -1,5 +1,15 @@
 2026-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/div.cpp (need_vertical_space_request): Revise
+	`ne` request behavior; perform no operation if the argument is
+	invalid.  Our documentation already said this was the case, but
+	while the request threw an error diagnostic, it proceeded as if
+	`.ne 1v` (or, equivalently, simply `.ne`) had been specified.
+
+	Fixes <https://savannah.gnu.org/bugs/?68868>.
+
+2026-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Regression-test Savannah #68868.
 
 	* src/roff/groff/tests/error-ne-request-given-bogus-argument.sh:

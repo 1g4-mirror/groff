@@ -16,6 +16,10 @@ VERSION next
 troff
 -----
 
+*  The `ne` request no longer performs an operation if it is given an
+   invalid argument.  This change is inconsistent with AT&T troff but
+   more consistent with general *roff syntax.
+
 *  The `shift` request no longer performs an operation if it is given an
    invalid argument.
 
