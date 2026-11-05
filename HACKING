@@ -454,7 +454,7 @@ Here is some advice on writing portable automated test scripts.
     n=1; while [ $n -le 53 ]; do echo $n; n=$(( n + 1 )); done; unset n
 
 * The "wc" command on macOS can prefix the numeric count in its output
-  with spaces, which can be undesirable when storing that output to
+  with spaces, which can be undesirable when storing that output to a
   variable that is later expanded within double quotes in the shell.
 
   Here is a workaround.
