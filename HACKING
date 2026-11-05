@@ -482,7 +482,7 @@ Here is some advice on writing portable automated test scripts.
 
   So a regex like this that works with GNU od:
     grep -q '81 30 55 81 30 56 81 6c e2'
-  might need to be weakened to the following to work on macOS/[NO]*BSD.
+  might need to be weakened to the following to work on macOS/[FNO]*BSD.
     grep -q '81  *30  *55  *81  *30  *56  *81  *6c  *e2'
 
 * The "od" command on FreeBSD 14.0 and 15.0, NetBSD 10.0, and OpenBSD
