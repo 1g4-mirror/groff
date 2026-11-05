@@ -339,7 +339,10 @@ What To Do
   original expression that gets "swamped" by removal of other material--
   falsely appearing to fall below the significance threshold using the
   simple computation above--consider splitting the commit into two: one
-  that removes material and another that adds the new material.
+  that removes material and another that adds the new material.  (If
+  removing material breaks the build, annotate that fact prominently in
+  the commit log message, and fix it in as immediate a subsequent commit
+  as possible.)
 
   Regarding "original expression", see section 308 of
   <https://www.copyright.gov/comp3/chap300/
