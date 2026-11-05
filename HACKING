@@ -333,7 +333,7 @@ What To Do
 
   Where a change produces a net increase of 15 lines or more but _still_
   seems robotic or unoriginal, consider recording, in the corresponding
-  commit log message, the robotic procedure that produced the change.
+  commit log message, a robotic procedure that reproduces the change.
 
   If a change contains what would otherwise be legally significant
   original expression that gets "swamped" by removal of other material--
