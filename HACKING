@@ -332,10 +332,8 @@ What To Do
   original expression.
 
   Where a change produces a net increase of 15 lines or more but _still_
-  seems robotic or unoriginal, consider (1) applying the annotation
-  "Copyright-paperwork-exempt: yes" to the Git commit log message, and
-  (2) recording, in the corresponding commit log message, the robotic
-  procedure that produced the change.
+  seems robotic or unoriginal, consider recording, in the corresponding
+  commit log message, the robotic procedure that produced the change.
 
   If a change contains what would otherwise be legally significant
   original expression that gets "swamped" by removal of other material--
@@ -384,9 +382,8 @@ What To Do
   is "legally significant" per the 15-line threshold.  But even a new
   file of legally significant size does not merit a copyright notice if
   it does not constitute original, non-robotic expression as discussed
-  above.  In that case, include "Copyright-paperwork-exempt: yes" in the
-  Git commit log message.  To summarize, the same rules apply to new
-  files as to changes to existing ones.
+  above.  To summarize, the same rules apply to new files as to changes
+  to existing ones.
 
 * In UTF-8-encoded files, it is fine to use a true copyright sign
   (Unicode U+00A9).  Place it in the notice between the word "Copyright"
