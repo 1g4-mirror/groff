@@ -51,3 +51,7 @@ Eighth Edition,
 February 1985
 .bp 1
 .pdfpagenumbering D . 1
+.\" Work around Savannah #68883.  gropdf moves the vertical drawing
+.\" position when processing the foregoing (wrapper macro for a) device
+.\" extension command; it should not.
+.sp |0
