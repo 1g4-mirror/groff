@@ -25988,7 +25988,7 @@ extension commands for writing glyph sequences,
 @code{t}
 and
 @code{u},
-accept a variable number of arguments;
+accept an argument of a variable length;
 whitespace must follow them.
 Those that draw geometric objects
 (@code{D})

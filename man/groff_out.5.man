@@ -312,7 +312,7 @@ extension commands for writing glyph sequences,
 .B t
 and
 .BR u ,
-accept a variable number of arguments;
+accept an argument of a variable length;
 whitespace must follow them.
 .
 Those that draw geometric objects
