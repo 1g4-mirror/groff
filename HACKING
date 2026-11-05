@@ -90,8 +90,8 @@ D.  Prerequisites in the source tree must be written relative to the
 	$(AM_V_GEN)$(SOELIMBIN) $(man_srcdir)/groff.7.man.in > $@
 
     Bear in mind that, roughly speaking, Make programs descended from
-    4.4BSD ("BSD Make") populate the nodes in its dependency graph with
-    _strings_, and GNU Make populates the nodes with _references to
+    4.4BSD ("BSD Make") populate the nodes in their dependency graphs
+    with _strings_, and GNU Make populates the nodes with _references to
     files_.  For example, GNU Make knows that '././foo' and './foo' are
     the same.  BSD Make does not.
 
