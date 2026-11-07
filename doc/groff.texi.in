@@ -19600,8 +19600,9 @@ As @samp{\D'e @r{@dots{}}'}, but the ellipse is filled.
 @cindex drawing a line (@samp{\D'l @dots{}'})
 Draw line from the drawing position to (@var{h}, @var{v}).
 
-The following is a macro for drawing a box around a text argument; for
-simplicity, the box margin is a fixed at 0.2@dmn{m}.
+A macro for drawing a box around a text argument follows;
+for simplicity,
+the box margin is fixed at 0.2@dmn{m}.
 
 @Example
 .de TEXTBOX
