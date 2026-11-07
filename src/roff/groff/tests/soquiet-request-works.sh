@@ -32,7 +32,7 @@ input='.
 .soquiet nonexistent
 .'
 
-output=$(echo "$doc" | "$groff" -Tascii 2>&1)
+output=$(echo "$input" | "$groff" -Tascii 2>&1)
 echo "$output"
 test -z "$output"
 
