@@ -19502,28 +19502,54 @@ When writing text, the drawing position is at the text baseline; recall
 
 @c BEGIN Keep (roughly) parallel with subsection "Drawing commands" of
 @c groff(7).
-The @code{\D} escape sequence provides @dfn{drawing commands} that
-direct the output device to render geometrical objects rather than
-glyphs.  Specific devices may support only a subset, or may feature
-additional ones; consult the man page for the output driver in use.
-Terminals in particular implement almost none.  @xref{Graphics
-Commands}.
+The
+@code{\D}
+escape sequence provides
+@dfn{drawing commands}
+that direct the output device to render geometrical objects
+rather than glyphs.
+Specific devices may support only a subset,
+or may feature additional ones;
+consult the man page for the output driver in use.
+Terminals in particular implement almost none.@footnote{@xref{Graphics
+Commands}.}
 
-Rendering starts at the drawing position; when finished, the drawing
-position is left at the rightmost point of the object, even for closed
-figures, except where noted.  GNU @code{troff} draws stroked (outlined)
-objects with the stroke color, and shades filled ones with the fill
-color.  @xref{Colors}.  Coordinates @var{h} and @var{v} are horizontal
-and vertical motions relative to the drawing position or previous point
-in the command.  The default scaling unit for horizontal measurements
-(and diameters of circles) is @samp{m}; for vertical ones, @samp{v}.
+Rendering starts at the drawing position;
+when finished,
+the formatter leaves
+the drawing position at the rightmost point of the object,
+even for closed figures,
+except where noted.
+GNU
+@command{troff}
+draws stroked (outlined) objects with the stroke color,
+and shades filled ones with the fill color.@footnote{@xref{Colors}.}
+Coordinates
+@var{h}
+and
+@var{v}
+are horizontal and vertical motions
+relative to the drawing position or previous vertex in the command.
+The default scaling unit for horizontal measurements
+(and diameters of circles)
+is
+@samp{m};
+for vertical ones,
+@samp{v}.
 
-Circles, ellipses, and polygons can be drawn filled or stroked.  These
-are independent properties; if you want a filled, stroked figure, you
-must draw the same figure twice using each drawing command.  A filled
-figure is always smaller than an outlined one because the former is
-drawn only within its defined area, whereas strokes have a line
-thickness (set with @samp{\D't'}).
+Circles,
+ellipses,
+and polygons can be drawn filled or stroked.
+These are independent properties;
+if you want a filled,
+stroked figure,
+you must draw the same figure twice using each drawing command.
+A filled figure is always smaller than an outlined one
+because the formatter draws the former only within its defined area,
+whereas strokes have a line
+thickness
+(set with
+@samp{\D't'}).
 
 @Example
 \h'1i'\v'1i'\

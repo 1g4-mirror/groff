@@ -7031,7 +7031,8 @@ Terminals in particular implement almost none.
 .P
 Rendering starts at the drawing position;
 when finished,
-the drawing position is left at the rightmost point of the object,
+the formatter leaves
+the drawing position at the rightmost point of the object,
 even for closed figures,
 except where noted.
 .
@@ -7040,14 +7041,12 @@ GNU
 draws stroked (outlined) objects with the stroke color,
 and shades filled ones with the fill color.
 .
-See section \[lq]Colors\[rq] above.
-.
 Coordinates
 .I h
 and
 .I v
-are horizontal and vertical motions relative to the drawing position
-or previous point in the command.
+are horizontal and vertical motions
+relative to the drawing position or previous vertex in the command.
 .
 The default scaling unit for horizontal measurements
 (and diameters of circles)
@@ -7066,8 +7065,8 @@ if you want a filled,
 stroked figure,
 you must draw the same figure twice using each drawing command.
 .
-A filled figure is always smaller than an outlined one because the
-former is drawn only within its defined area,
+A filled figure is always smaller than an outlined one
+because the formatter draws the former only within its defined area,
 whereas strokes have a line thickness
 (set with
 .BR \[rs]D\[aq]t\[aq] ).
