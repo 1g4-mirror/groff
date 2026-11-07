@@ -20059,8 +20059,8 @@ the formatter does not convert it to an absolute vertical position.
 @cindex debugging page location traps
 We can use the
 @code{pwh}
-request to dump page location traps to the standard error stream
-(@pxref{Debugging}).
+request to dump page location traps
+to the standard error stream.@footnote{@xref{Debugging}.}
 GNU
 @command{troff} @c GNU
 reports their positions in basic units,
