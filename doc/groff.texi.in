@@ -24767,7 +24767,7 @@ We know of no legacy documents that require such syntactical
 flexibility;
 GNU
 @command{troff} @c GNU
-therefore does not support it.
+therefore does not support it even in compatibility mode.
 It may have been unknown because the numeric expression accepted
 by the requests could be of arbitrary length.
 @c Example: .wh9i+.5+\n(xxuPT
