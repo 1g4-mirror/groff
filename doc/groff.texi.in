@@ -19445,10 +19445,16 @@ If the character is valid in a numerical expression, put @code{\&} after
 @cindex horizontal line, drawing (@code{\l})
 @cindex line, horizontal, drawing (@code{\l})
 @cindex baseline rule special character(@code{\[ru]})
-Draw a horizontal line of length @var{l} from the drawing position.
-Rightward motion is positive.  Afterward, the drawing position is at the
-right end of the line.  The default scaling unit is @samp{m}.  The
-default glyph is the baseline rule special character, @code{\[ru]}.
+Draw a horizontal line of length
+@var{l}
+from the drawing position.
+Rightward motion is positive.
+Afterward,
+the drawing position is at the right end of the line.
+The default scaling unit is
+@samp{m}.
+The default glyph is the baseline rule,
+@code{\[ru]}.
 
 @Example
 \l'4i\&-'
