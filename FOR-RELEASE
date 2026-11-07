@@ -71,6 +71,13 @@ prepared, as applicable.
   + NEWS (append or remove "release candidate" as applicable)
   + arch/mingw/grap2graph.cmd
 
+* For official releases only (not release candidates), update
+  "doc/webpage.ms" to record the new version number and month of its
+  issue.
+
+* For official releases only, log the fact (and date!) of the release in
+  the "ChangeLog" file.
+
 * Update in "src/roff/groff/groff.cpp" the 'printf' that displays the
   copyright notice to include the current year if it is not present.
   (If no copyrightable changes to the project's code have been made in
@@ -83,13 +90,6 @@ prepared, as applicable.
 * Build (and test!) a distribution archive with "make distclean" and
   "make distcheck".  It's not a good idea for any tests to be failing,
   but if they are, note the fact prominently in the release notes.
-
-* For official releases only (not release candidates), update
-  "doc/webpage.ms" to record the new version number and month of its
-  issue.
-
-* For official releases only, log the fact (and date!) of the release in
-  the "ChangeLog" file.
 
 * Increment the version number by tagging the release or release
   candidate.  Sign the tag.  groff requires a three-part version,
