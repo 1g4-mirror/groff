@@ -1645,7 +1645,7 @@ have the same precedence.
 .
 .
 .\" ====================================================================
-.SS "Macro interface"
+.SS "\f[I]roff\f[] interface"
 .\" ====================================================================
 .
 Each reference starts with a call to the macro
