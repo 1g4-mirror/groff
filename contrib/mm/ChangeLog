@@ -701,9 +701,9 @@
 	such that if the drawing position is not at the top of the page
 	when called, it fails to format the pre-body letter material
 	{writer's address, date, inside address, salutation, etc.}.
-	{Because the first page had already started and the drawing
-	position was non-negative, the `LT` macro was also too late to
-	turn off the default header on the first page.}
+	{Because the first page had already started and the vertical
+	drawing position was non-negative, the `LT` macro was also too
+	late to turn off the default header on the first page.}
 	(BE): Annotate explicit `br` retained here; we don't want to
 	silently discard a partially collected line when closing the box
 	diversion.  The document author should delete from a bottom
