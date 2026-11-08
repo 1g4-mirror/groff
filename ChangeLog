@@ -1,5 +1,18 @@
 2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (token::next): Throw warning in
+	category "style" if the input uses `\\` to try to format a
+	backslash, which is not reliable if the escape character is
+	changed (you then get _two_ backslashes instead).  Emit warning
+	in category "escape" if encountering an escaped dot.  This
+	member function operates only in interpretation mode, so no
+	false positives occur when using `\` to escape a dot in copy
+	mode, as is sometimes done when nesting macro definitions.
+
+	Fixes <https://savannah.gnu.org/bugs/?68361>.
+
+2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp: Refactor.  Apply DRY principle.
 	(maybe_warn_about_portability): New `static` `inline` function
 	replaces 18 instances of open-coded logic in...
