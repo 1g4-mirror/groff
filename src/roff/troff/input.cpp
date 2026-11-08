@@ -488,12 +488,17 @@ file_iterator::~file_iterator()
 
 void file_iterator::close()
 {
+  int ret = 0;
   if (fp == stdin)
     clearerr(stdin);
   else if (was_popened)
-    pclose(fp);
+    ret = pclose(fp);
   else
-    fclose(fp);
+    ret = fclose(fp);
+  if (ret != 0)
+    error("cannot close %1 \"%2\": %3", was_popened ? "pipe" : "file",
+	  filename, strerror(errno));
+
 }
 
 bool file_iterator::next_file(FILE *f, const char *s)

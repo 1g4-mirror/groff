@@ -1,5 +1,13 @@
 2026-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp (file_iterator::close): Raise a
+	ruckus on failed closure of a file stream or pipeline.  If basic
+	operating system services are failing us, we want the user to
+	know about it.  Throw error diagnostic if fclose(3) or pclose(3)
+	fail.
+
+2026-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (file_iterator::file_iterator): Drop
 	tautologically false conditional.  Since commit 83e83786d9, 17
 	October, we have already returned from the constructor under the
