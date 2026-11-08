@@ -3521,7 +3521,7 @@ This macro exists only to render man pages from historical systems.
 .
 .
 .IP
-The packge populates the inside footer per the value of
+The package populates the inside footer per the value of
 .I system.
 .
 .
@@ -3725,7 +3725,7 @@ This macro exists only to render man pages from historical systems.
 .
 .
 .IP
-The packge populates the inside footer per the value of
+The package populates the inside footer per the value of
 .I version.
 .
 .
