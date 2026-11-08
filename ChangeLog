@@ -1,0 +1,27 @@
+2026-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (file_iterator::file_iterator): Drop
+	tautologically false conditional.  Since commit 83e83786d9, 17
+	October, we have already returned from the constructor under the
+	circumstance it tests.
+
+
+
+________________________________________________________________________
+
+##### License
+
+Copyright 2026 G. Branden Robinson
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+
+##### Editor settings
+Local Variables:
+fill-column: 72
+mode: change-log
+version-control: never
+End:
+vim:set autoindent textwidth=72:
