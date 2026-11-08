@@ -186,7 +186,14 @@ After Release
 
   $ cvs add groff.html.node
   $ cvs add groff.html.node/*.html
+  $ cp groff.html.node/line-layout.png groff.html.node/gnu.png .
   $ cvs ci
+
+  (The two copies of the images used by the HTML format of our Texinfo
+  manual are because image inclusion in Texinfo is maddeningly tedious
+  and difficult, and two copies are an easy way to ensure that both the
+  "one big page" and split-by-node forms of the manual can resolve their
+  HTML 'img' elements.)
 
   Web-browse to <https://www.gnu.org/software/groff/manual/> and confirm
   that things look correct.  With each "cvs ci" in the foregoing
