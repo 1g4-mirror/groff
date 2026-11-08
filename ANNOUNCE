@@ -86,8 +86,9 @@ clarifying diagnostic messages, improving memory management, and
 correcting and expanding documentation.  The previous release shipped
 with 314 automated tests; this one ships with over NNN.
 
+
 Details
--------
+=======
 
 [[ maintainer: Omit the following if section "Changes" above was
    retained.
