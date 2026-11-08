@@ -1,5 +1,12 @@
 2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/roff/troff/input.cpp: Refactor.  Apply DRY principle.
+	(maybe_warn_about_portability): New `static` `inline` function
+	replaces 18 instances of open-coded logic in...
+	(token::next): ...this member function.
+
+2026-11-01  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/roff/troff/input.cpp (token::next): Refactor to simplify.
 	Stop wrapping `delete` operation with null pointer check.
 
