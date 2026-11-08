@@ -501,6 +501,8 @@ void file_iterator::close()
 
 }
 
+// A file iterator can't fail to advance to the next file, but its base
+// class can.
 bool file_iterator::next_file(FILE *f, const char *s)
 {
   close();
