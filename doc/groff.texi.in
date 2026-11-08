@@ -1642,7 +1642,7 @@ command specifies the default postprocessor to be used by a device.
 @xref{Device and Font Description Files}.
 The
 @option{-X}
-option overriddes this selection.
+option overrides this selection.
 
 @item -U
 @cindex mode, unsafe
