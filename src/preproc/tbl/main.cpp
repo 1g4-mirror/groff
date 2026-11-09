@@ -752,7 +752,7 @@ input_entry_format::~input_entry_format()
 
 static void free_input_entry_format_list(input_entry_format *list)
 {
-  while (list) {
+  while (list != 0 /* nullptr */) {
     input_entry_format *tem = list;
     list = list->next;
     delete tem;
@@ -1205,7 +1205,7 @@ static format *process_format(table_input &in, options *opt,
       return 0 /* nullptr */;
     }
   }
-  if (!list) {
+  if (0 /* nullptr */ == list) {
     error("table description is empty");
     free_input_entry_format_list(list);
     list = 0 /* nullptr */;
@@ -1214,7 +1214,7 @@ static format *process_format(table_input &in, options *opt,
   list->is_last_column = true;
   // now reverse the list so that the first row is at the beginning
   input_entry_format *rev = 0;
-  while (list != 0) {
+  while (list != 0 /* nullptr */) {
     input_entry_format *tem = list->next;
     list->next = rev;
     rev = list;

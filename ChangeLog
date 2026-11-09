@@ -1,5 +1,13 @@
 2026-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp (free_input_entry_format_list)
+	(process_format): Fix code style nits.  Explicitly compare
+	variable `list` of pointer type to ISO C++98 null pointer
+	literal, instead of punning it down to a Boolean.  Arrange
+	equality comparisons to avoid inadvertent assignment to lvalue.
+
+2026-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/main.cpp (process format): In error messages,
 	migrate "table format specification" to "table description", the
 	term we use in tbl(1).
