@@ -783,10 +783,9 @@ void input_entry_format::debug_print()
     putc(',', stderr);
 }
 
-// Interpret a table format specification, like "CC,LR.".  Return null
-// pointer if we should give up on this table.  If this is a
-// continuation format line, `current_format` will be the current format
-// line.
+// Interpret a table description, like "CC,LR.".  Return null pointer if
+// we should give up on this table.  If this is a continued description,
+// `current_format` will be the current description.
 static format *process_format(table_input &in, options *opt,
 			      format *current_format = 0 /* nullptr */)
 {
@@ -802,8 +801,7 @@ static format *process_format(table_input &in, options *opt,
     format_type t = FORMAT_LEFT;
     for (;;) {
       if (c == EOF) {
-	error("end of input while processing table format"
-	      " specification");
+	error("end of input while processing table description");
 	free_input_entry_format_list(list);
 	list = 0 /* nullptr */;
 	return 0 /* nullptr */;
@@ -1201,14 +1199,14 @@ static format *process_format(table_input &in, options *opt,
       c = in.get();
     } while (c == ' ' || c == '\t');
     if (c != '\n') {
-      error("'.' is not the last character of the table format");
+      error("'.' is not the last character of the table description");
       free_input_entry_format_list(list);
       list = 0 /* nullptr */;
       return 0 /* nullptr */;
     }
   }
   if (!list) {
-    error("table format specification is empty");
+    error("table description is empty");
     free_input_entry_format_list(list);
     list = 0 /* nullptr */;
     return 0 /* nullptr */;
