@@ -752,7 +752,7 @@ the widely used macro packages @file{man}, @file{mdoc}, @file{me},
 
 An alternative approach to complexity management, particularly when
 constructing tables, setting mathematics, or drawing diagrams, lies in
-preprocessing.  A @dfn{preprocessor} employs a domian-specific language
+preprocessing.  A @dfn{preprocessor} employs a domain-specific language
 to ease the generation of tables, equations, and so forth in terms that
 are convenient for human entry.  Each preprocessor reads a document and
 translates relevant portions of it into GNU @command{troff} input.
