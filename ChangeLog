@@ -1,3 +1,9 @@
+2026-11-08  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/roff/troff/input.cpp (token::next): Actually throw warning
+	in category "style", not "escape", when encountering escaped dot
+	{'.'} in interpretation mode.
+
 2026-11-02  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/roff/troff/env.cpp (environment::dump): Report values of

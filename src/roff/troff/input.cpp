@@ -2950,6 +2950,9 @@ void token::next()
 		  " to format the escape character,"
 		  " or use requests"
 		  " to change or disable the escape character");
+	else if ('.' == cc)
+	  warning(WARN_STYLE, "a dot does not require escaping when"
+	          " not in copy mode");
 	else
 	  warning(WARN_ESCAPE, "ignoring escape character before %1",
 		  input_char_description(cc));
