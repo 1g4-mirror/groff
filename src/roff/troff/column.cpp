@@ -725,6 +725,8 @@ void init_column_requests()
   register_dictionary.define(".colx", new column_extra_space_reg);
   register_dictionary.define(".cola", new column_active_reg);
   register_dictionary.define(".nvj",
+			     // should be a readonly_boolean_register
+			     // TODO: or readonly_register<bool>
 			     new readonly_register(&no_vjustify_mode));
 }
 

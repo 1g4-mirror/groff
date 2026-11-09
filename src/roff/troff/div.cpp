@@ -61,7 +61,9 @@ static bool began_page_in_eoi_macro = false;
 int last_page_number = 0;	// if > 0, the number of the last page
 				// specified with -o
 
+// XXX: type should be `vunits`, not `int`
 static int last_post_line_extra_space = 0; // needed for \n(.a
+
 static int nl_reg_contents = -1;
 static int dl_reg_contents = 0;
 static int dn_reg_contents = 0;
@@ -1332,6 +1334,7 @@ void init_div_requests()
   init_request("vpt", configure_vertical_position_traps_request);
   init_request("wh", when_request);
   register_dictionary.define(".a",
+      // TODO: should be readonly_register<vunits>
       new readonly_register(&last_post_line_extra_space));
   register_dictionary.define(".d", new vertical_position_reg);
   register_dictionary.define(".h", new high_water_mark_reg);
@@ -1348,6 +1351,7 @@ void init_div_requests()
   register_dictionary.define(".trunc",
       new constant_vunits_reg(&truncated_space));
   register_dictionary.define(".vpt",
+      // TODO: should be readonly_register<bool>
       new readonly_boolean_register(&honor_vertical_position_traps));
   register_dictionary.define(".z", new diversion_name_reg);
   register_dictionary.define("dl", new variable_reg(&dl_reg_contents));

@@ -50,8 +50,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 const vunits V0; // zero in vertical units
 const hunits H0; // zero in horizontal units
 
+// XXX: type should be `hunits`, not `units`
 units hresolution = 1;
+// XXX: type should be `vunits`, not `units`
 units vresolution = 1;
+
 units units_per_inch;
 int sizescale; // subdivisions per point
 

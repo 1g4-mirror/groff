@@ -10484,6 +10484,7 @@ int main(int argc, char **argv)
 #endif /* COLUMN */
   init_node_requests();
   register_dictionary.define(".T",
+      // TODO: should be readonly_register<bool>
       new readonly_boolean_register(&have_explicit_device_argument));
   init_registers();
   init_reg_requests();
@@ -10689,16 +10690,22 @@ void init_input_requests()
   register_dictionary.define(".$", new nargs_reg);
   register_dictionary.define(".br", new break_flag_reg);
   register_dictionary.define(".c", new lineno_reg);
+  // TODO: should be readonly_register<bool>
   register_dictionary.define(".C", new readonly_boolean_register(&want_att_compat));
+  // TODO: should be readonly_register<bool>
   register_dictionary.define(".color", new readonly_boolean_register(&want_color_output));
   register_dictionary.define(".cp", new enclosing_want_att_compat_reg);
   register_dictionary.define(".F", new filename_reg);
   register_dictionary.define(".g", new readonly_text_register(1));
+  // TODO: should be readonly_register<hunits>
   register_dictionary.define(".H", new readonly_register(&hresolution));
+  // TODO: should be readonly_register<int>
   register_dictionary.define(".O", new readonly_register(&suppression_level));
   register_dictionary.define(".pi", new pipe_command_reg);
   register_dictionary.define(".R", new readonly_text_register(INT_MAX));
+  // TODO: should be readonly_register<bool>
   register_dictionary.define(".U", new readonly_boolean_register(&want_unsafe_requests));
+  // TODO: should be readonly_register<vunits>
   register_dictionary.define(".V", new readonly_register(&vresolution));
   register_dictionary.define(".warn", new readonly_mask_register(&desired_warnings));
   extern const char *major_version;

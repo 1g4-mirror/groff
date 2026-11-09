@@ -7698,8 +7698,10 @@ void init_node_requests()
   register_dictionary.define(".fp",
       new next_available_font_mounting_position_reg);
   register_dictionary.define(".kern",
+      // TODO: should be readonly_register<bool>
       new readonly_boolean_register(&global_kern_mode));
   register_dictionary.define(".lg",
+      // TODO: should be readonly_register<int>
       new readonly_register(&global_ligature_mode));
   register_dictionary.define(".P", new printing_reg);
   soft_hyphen_char = lookup_charinfo(HYPHEN_SYMBOL);

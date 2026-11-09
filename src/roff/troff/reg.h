@@ -33,7 +33,6 @@ public:
 };
 
 // TODO: Use template to parameterize class in the pointed-to data type?
-
 class readonly_register : public reg {
   int *p;
 public:
