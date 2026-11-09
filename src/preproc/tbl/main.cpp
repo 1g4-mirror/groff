@@ -1317,7 +1317,8 @@ static format *process_format(table_input &in, options *opt,
       break;
   }
   if (col >= ncolumns) {
-    error("last row of format is all lines");
+    error("final row definition in table description"
+	  " cannot contain only horizontal rules ('-', '_', '=')");
     delete f;
     return 0 /* nullptr */;
   }
