@@ -1,7 +1,5 @@
 #!/bin/sh
 #
-# Copyright 2025 G. Branden Robinson
-#
 # This file is part of groff, the GNU roff typesetting system.
 #
 # groff is free software; you can redistribute it and/or modify it under
