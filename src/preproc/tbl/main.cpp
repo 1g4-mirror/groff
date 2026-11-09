@@ -1319,7 +1319,6 @@ static format *process_format(table_input &in, options *opt,
   if (col >= ncolumns) {
     error("final row definition in table description"
 	  " cannot contain only horizontal rules ('-', '_', '=')");
-    delete f;
     return 0 /* nullptr */;
   }
   if (have_expand && (opt->flags & table::EXPAND)) {

@@ -1,5 +1,31 @@
 2026-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp (process_format): Stop deleting the
+	`format` passed in as an argument if rejecting table description
+	because its final row definition contains only horizontal rules.
+	I can't improve on Dickson Wu's analysis (slightly recast).
+	  "In src/preproc/tbl/main.cpp (1.25.0), `process_table()` owns
+	  the first format ... [Upon] `.T&`, `process_data()` hands that
+	  same object back to `process_format()` as `current_format`
+	  {line 1617}, and `process_format()` keeps extending it in
+	  place (`f = current_format;`, line 1254).  The all-lines check
+	  then deletes it ... `process_data()` gives up and returns [a]
+	  null [pointer], and `process_table()` reaches `delete fmt`
+	  with a dangling pointer.  The other continued-format error
+	  path, "cannot increase the number of columns", already returns
+	  without deleting.  Only this one gets ownership wrong."
+	Remedy by deleting the deletion of `f` on the "all-lines" error
+	path.  For me, using a GCC 12 ASAN build, this resolves the
+	heap-use-after-free and does not introduce a memory leak.
+
+	Fixes <https://savannah.gnu.org/bugs/?68897>.  Problem appears
+	to date back to groff's birth.  Thanks to Dickson Wu for the
+	report; a cogent analysis; and a plausible, cautious recommended
+	fix.  I went with a different one, doing nothing with `f` on the
+	error path.
+
+2026-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[tbl]: Regression-test Savannah #68897.
 
 	* src/preproc/tbl/tests/\
