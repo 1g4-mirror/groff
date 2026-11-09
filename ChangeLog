@@ -1,5 +1,12 @@
 2026-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp (process_format): Fix code style nit.
+	Explicitly compare variable `current_format` of pointer type to
+	ISO C++98 null pointer literal, instead of punning it down to a
+	Boolean.
+
+2026-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	[groff]: Unit-test `shift` request.
 
 	* src/roff/groff/tests/\

@@ -1246,7 +1246,7 @@ static format *process_format(table_input &in, options *opt,
   }
   int row;
   format *f;
-  if (current_format) {
+  if (current_format != 0 /* nullptr */) {
     if (ncolumns > current_format->ncolumns) {
       error("cannot increase the number of columns in a continued format");
       free_input_entry_format_list(list);
@@ -1267,7 +1267,7 @@ static format *process_format(table_input &in, options *opt,
     if (col < ncolumns - 1) {
       // use the greatest separation
       if (tem->separation > f->separation[col]) {
-	if (current_format)
+	if (current_format != 0 /* nullptr */)
 	  error("cannot change column separation in continued format");
 	else
 	  f->separation[col] = tem->separation;
@@ -1276,13 +1276,13 @@ static format *process_format(table_input &in, options *opt,
     else if (tem->separation >= 0)
       error("column separation specified for last column");
     if (tem->is_equal_width && !f->equal[col]) {
-      if (current_format)
+      if (current_format != 0 /* nullptr */)
 	error("cannot change which columns are equal in continued format");
       else
 	f->equal[col] = 1;
     }
     if (tem->expand && !f->expand[col]) {
-      if (current_format)
+      if (current_format != 0 /* nullptr */)
 	error("cannot change which columns are expanded in continued format");
       else {
 	f->expand[col] = 1;
