@@ -209,6 +209,9 @@ After Release
 * If warranted, update the "ANNOUNCE" file to make it a template for the
   next release.
 
+* Migrate the list of acknowledged contributors from the "ANNOUNCE" file
+  to the "THANKS" file, and `sort -u` (or equivalent) the latter.
+
 * For official releases, update groff's entry at the FSF's Free Software
   Directory.
 
