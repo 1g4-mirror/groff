@@ -3009,7 +3009,7 @@ for complete lists thereof.
 .I "groff ms"
 organizes most of its internal names into modules.
 .
-The naming convenion is as follows.
+The naming convention is as follows.
 .
 .
 .IP \[bu] 3n

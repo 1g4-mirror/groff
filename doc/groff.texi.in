@@ -793,7 +793,7 @@ to handle documents in a variety of input encodings,
 including UTF-8.
 Unlike most preprocessors,
 @code{preconv}
-operates on its entire enput
+operates on its entire input
 rather than transforming specially marked regions of a document.
 
 Other preprocessors exist, but no free implementations
@@ -6015,7 +6015,7 @@ for complete lists thereof.
 
 @code{groff} @file{ms}
 organizes most of its internal names into modules.
-The naming convenion is as follows.
+The naming convention is as follows.
 
 @itemize @bullet
 @item
@@ -26887,7 +26887,7 @@ to display it in an X11 window.
 The legacy compressed encoding makes the content of formatted text
 in @acronym{AT&T}
 @command{troff} @c AT&T
-output almost incomprehenible.
+output almost incomprehensible.
 @end table
 
 @c ---------------------------------------------------------------------
