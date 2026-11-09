@@ -156,7 +156,10 @@ Each table region encloses one or more
 .I "table descriptions."
 .
 Within a table region,
-table descriptions beyond the first must each be preceded
+table descriptions beyond the first
+are called
+.I "continued descriptions"
+and must each be preceded
 by an input line beginning with
 .BR .T& .
 .
