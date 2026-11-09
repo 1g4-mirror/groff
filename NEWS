@@ -31,6 +31,10 @@ troff
    and slant, as applicable; and its selected control and no-break
    control characters.
 
+*  The formatter now emits a warning in category "style" if the escape
+   character precedes itself or a dot ('.') when the formatter is in
+   intepretation mode; in other words, when not in copy mode.
+
 *  The formatter now emits a warning in category "style" if -crementing
    interpolation (such as `\n+[myreg]` or `\n-[count]`) is (uselessly)
    applied to a non-auto-crementing register.
