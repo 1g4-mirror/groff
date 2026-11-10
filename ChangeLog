@@ -1,3 +1,9 @@
+2026-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/main.cpp (process_data): Fix code style nit.
+	Arrange equality comparison to avoid inadvertent assignment to
+	lvalue.
+
 2026-11-09  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/main.cpp (process_format): Stop deleting the

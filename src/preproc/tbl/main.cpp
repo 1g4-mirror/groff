@@ -1619,7 +1619,7 @@ static table *process_data(table_input &in, format *f, options *opt)
 	if (line.length() >= 4
 	    && line[0] == '.' && line[1] == 'T' && line[2] == '&') {
 	  format *newf = process_format(in, opt, f);
-	  if (newf == 0)
+	  if (0 /* nullptr */ == newf)
 	    give_up = true;
 	  else
 	    f = newf;
