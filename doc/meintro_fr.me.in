@@ -176,7 +176,7 @@ Le mot
 .i argument
 est utilisé dans ce manuel
 pour décrire un mot ou un nombre
-qui apparait sur la même ligne qu'une requête
+qui apparaît sur la même ligne qu'une requête
 en modifiant le sens de cette requête.
 Par exemple,
 la requête
@@ -390,7 +390,7 @@ fonctionne de manière analogue.
 .sh 2 "Double espacement"
 .pp
 .ls 2
-\*G insère un double espacement vertical dans le texe de sortie
+\*G insère un double espacement vertical dans le texte de sortie
 si vous utilisez la requête
 .b ".ls\~2" ,
 comme cela a été fait ici.
@@ -1279,7 +1279,7 @@ Si vous avez des espacements
 dans le label de la requête
 .b .ip ,
 vous devrez utiliser un
-.q "espacement inremplissable"
+.q "espacement irremplissable"
 au lieu d'un espacement normal.
 On crée celui-ci à l'aide d'un caractère antislash
 (\c
