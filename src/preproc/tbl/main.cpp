@@ -1643,7 +1643,7 @@ static table *process_data(table_input &in, format *f, options *opt)
     if (give_up)
       break;
   }
-  if (!give_up && current_row == 0) {
+  if (!give_up && (0 == current_row)) {
     error("no data in table");
     give_up = true;
   }

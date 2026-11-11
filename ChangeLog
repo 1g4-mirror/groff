@@ -1,3 +1,9 @@
+2026-11-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
+	* src/preproc/tbl/main.cpp (process_data): Fix code style nits.
+	Parenthesize formally complex expressions.  Arrange equality
+	comparison to avoid inadvertent assignment to lvalue.
+
 2026-11-10  G. Branden Robinson <g.branden.robinson@gmail.com>
 
 	* src/preproc/tbl/main.cpp (process_data): Fix code style nit.
