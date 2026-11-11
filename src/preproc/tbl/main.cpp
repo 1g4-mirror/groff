@@ -573,6 +573,7 @@ entry_format::entry_format(format_type t) : type(t)
 {
 }
 
+#ifdef DEBUG_TBL
 void entry_format::debug_print() const
 {
   switch (type) {
@@ -648,6 +649,7 @@ void entry_format::debug_print() const
   if (stagger)
     putc('u', stderr);
 }
+#endif
 
 struct format {
   int nrows;
@@ -736,7 +738,9 @@ struct input_entry_format : public entry_format {
   int expand;
   input_entry_format(format_type, input_entry_format * = 0);
   ~input_entry_format();
+#ifdef DEBUG_TBL
   void debug_print();
+#endif
 };
 
 input_entry_format::input_entry_format(format_type t, input_entry_format *p)
@@ -763,6 +767,7 @@ static void free_input_entry_format_list(input_entry_format *list)
   }
 }
 
+#ifdef DEBUG_TBL
 void input_entry_format::debug_print()
 {
   int i;
@@ -786,6 +791,7 @@ void input_entry_format::debug_print()
   if (is_last_column)
     putc(',', stderr);
 }
+#endif
 
 // Describe an input character.
 // TODO: Can we usefully pull this into libgroff?  If so, we might want
@@ -1252,8 +1258,7 @@ static format *process_format(table_input &in, options *opt,
   }
   list = rev;
   input_entry_format *tem;
-
-#if 0
+#ifdef DEBUG_TBL
   for (tem = list; tem; tem = tem->next)
     tem->debug_print();
   putc('\n', stderr);

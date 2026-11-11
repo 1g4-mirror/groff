@@ -1,5 +1,21 @@
 2026-11-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	[tbl]: Guard unreachable code with new preprocessor
+	conditionals testing symbol `DEBUG_TBL`.
+
+	* src/preproc/tbl/table.h (struct entry_format) [DEBUG_TBL]:
+	Guard declaration of `debug_print()` member function.
+	* src/preproc/tbl/main.cpp [DEBUG_TBL]: Guard definitions of
+	`entry_format::debug_print()` and
+	`input_entry_format::debug_print()`..
+	(struct input_entry_format) [DEBUG_TBL]: Guard declaration of
+	`debug_print()` member function.
+	(process_format) [DEBUG_TBL]: Guard logic calling
+	`debug_print()` iteratively on `tem` linked list object with
+	conditional testing new symbol instead of `0`.
+
+2026-11-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/main.cpp: Improve error diagnostics by clearly
 	detailing how the expected input differs from the actual input.
 	(describe_character): New function populates a static buffer

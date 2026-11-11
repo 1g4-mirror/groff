@@ -69,7 +69,9 @@ struct entry_format : public entry_modifier {
 
   entry_format(format_type);
   entry_format();
+#ifdef DEBUG_TBL
   void debug_print() const;
+#endif
 };
 
 class table_entry;
