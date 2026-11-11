@@ -1618,11 +1618,17 @@ static table *process_data(table_input &in, format *f, options *opt)
 	tbl->add_text_line(current_row, line, current_filename, ln);
 	if (line.length() >= 4
 	    && line[0] == '.' && line[1] == 'T' && line[2] == '&') {
-	  format *newf = process_format(in, opt, f);
-	  if (0 /* nullptr */ == newf)
+	  if (!give_up && (0 == current_row)) {
+	    error("no data in table");
 	    give_up = true;
-	  else
-	    f = newf;
+	  }
+	  else {
+	    format *newf = process_format(in, opt, f);
+	    if (0 /* nullptr */ == newf)
+	      give_up = true;
+	    else
+	      f = newf;
+	  }
 	}
 	if (line.length() >= 3
 	    && line[0] == '.' && line[1] == 'l' && line[2] == 'f') {
