@@ -1,5 +1,10 @@
 2026-11-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp (process_data): Clarify error
+	diagnostic when a table description lacks corresponding data.
+
+2026-11-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/main.cpp (process_data): Give up on a table
 	region earlier if a table continuation (`.T&`) occurs
 	immediately after a table description; that is, a description

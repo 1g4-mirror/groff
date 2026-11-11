@@ -1619,7 +1619,7 @@ static table *process_data(table_input &in, format *f, options *opt)
 	if (line.length() >= 4
 	    && line[0] == '.' && line[1] == 'T' && line[2] == '&') {
 	  if (!give_up && (0 == current_row)) {
-	    error("no data in table");
+	    error("no data found for preceding table description");
 	    give_up = true;
 	  }
 	  else {
@@ -1650,7 +1650,7 @@ static table *process_data(table_input &in, format *f, options *opt)
       break;
   }
   if (!give_up && (0 == current_row)) {
-    error("no data in table");
+    error("no data found for preceding table description");
     give_up = true;
   }
   if (give_up) {
