@@ -33,6 +33,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 // GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
+// libgroff
+#include "lib.h" // INT_DIGITS
+
 #include "table.h"
 
 #define MAX_POINT_SIZE 99
@@ -784,6 +787,30 @@ void input_entry_format::debug_print()
     putc(',', stderr);
 }
 
+// Describe an input character.
+// TODO: Can we usefully pull this into libgroff?  If so, we might want
+// to convert it to use dynamic storage, to make it flexible enough for
+// use in reëntrant or multithreaded code.
+// TODO: Describe an unprintable character in Unicode notation?
+static const char *describe_character(int c)
+{
+  // This buffer is larger than `'X'` for any X.
+  // constexpr // C++11
+  static const char cc[] = "character code";
+  const size_t descbufsize = strlen(cc) + 1 /* ' ' */ + INT_DIGITS
+			     + 1 /* '\0' */;
+  static char descbuf[descbufsize];
+  if (csprint(c)) {
+    char quote = '\'';
+    if ('\'' == c)
+      quote = '"';
+    (void) snprintf(descbuf, descbufsize, "%c%c%c", quote, c, quote);
+  }
+  else
+    (void) snprintf(descbuf, descbufsize, "%s %d", cc, c);
+  return descbuf;
+}
+
 // Interpret a table description, like "CC,LR.".  Return null pointer if
 // we should give up on this table.  If this is a continued description,
 // `current_format` will be the current description.
@@ -875,7 +902,8 @@ static format *process_format(table_input &in, options *opt,
       default:
 	if (c == opt->tab_char)
 	  break;
-	error("expected column classifier, got '%1'", char(c));
+	error("expected column classifier, got %1",
+	      describe_character(c));
 	free_input_entry_format_list(list);
 	list = 0 /* nullptr */;
 	return 0 /* nullptr */;
@@ -1200,7 +1228,8 @@ static format *process_format(table_input &in, options *opt,
       c = in.get();
     } while (c == ' ' || c == '\t');
     if (c != '\n') {
-      error("'.' is not the last character of the table description");
+      error("expected newline after '.' terminating table description;"
+	    " got %1", describe_character(c));
       free_input_entry_format_list(list);
       list = 0 /* nullptr */;
       return 0 /* nullptr */;

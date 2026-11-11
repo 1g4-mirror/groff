@@ -1,5 +1,16 @@
 2026-11-11  G. Branden Robinson <g.branden.robinson@gmail.com>
 
+	* src/preproc/tbl/main.cpp: Improve error diagnostics by clearly
+	detailing how the expected input differs from the actual input.
+	(describe_character): New function populates a static buffer
+	with a description of an input character, robustly handling
+	unprintable characters by reporting their character codes in
+	decimal.
+	(process_format): Recast diagnostics and call the new function
+	to detail input received.
+
+2026-11-11  G. Branden Robinson <g.branden.robinson@gmail.com>
+
 	* src/preproc/tbl/main.cpp (process_data): Clarify error
 	diagnostic when a table description lacks corresponding data.
 
