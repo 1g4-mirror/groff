@@ -30,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 		   // setbuf(), stderr, stdin, stdout, ungetc()
 #include <string.h> // strerror()
 
+// GNU extensions to C standard library
 #include <getopt.h> // getopt_long()
 
 #include "table.h"
